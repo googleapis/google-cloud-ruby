@@ -14,25 +14,25 @@
 
 require "helper"
 
-describe Google::Cloud::Pubsub::Subscriber, :error, :mock_pubsub do
+describe Google::Cloud::PubSub::Subscriber, :error, :mock_pubsub do
   let(:topic_name) { "topic-name-goes-here" }
   let(:sub_name) { "subscription-name-goes-here" }
   let(:sub_json) { subscription_json topic_name, sub_name }
   let(:sub_hash) { JSON.parse sub_json }
-  let(:sub_grpc) { Google::Pubsub::V1::Subscription.decode_json(sub_json) }
+  let(:sub_grpc) { Google::Cloud::PubSub::V1::Subscription.decode_json(sub_json) }
   let(:sub_path) { sub_grpc.name }
-  let(:subscription) { Google::Cloud::Pubsub::Subscription.from_grpc sub_grpc, pubsub.service }
-  let(:rec_msg1_grpc) { Google::Pubsub::V1::ReceivedMessage.decode_json \
+  let(:subscription) { Google::Cloud::PubSub::Subscription.from_grpc sub_grpc, pubsub.service }
+  let(:rec_msg1_grpc) { Google::Cloud::PubSub::V1::ReceivedMessage.decode_json \
                           rec_message_json("rec_message1-msg-goes-here", 1111) }
-  let(:rec_msg2_grpc) { Google::Pubsub::V1::ReceivedMessage.decode_json \
+  let(:rec_msg2_grpc) { Google::Cloud::PubSub::V1::ReceivedMessage.decode_json \
                           rec_message_json("rec_message2-msg-goes-here", 1112) }
-  let(:rec_msg3_grpc) { Google::Pubsub::V1::ReceivedMessage.decode_json \
+  let(:rec_msg3_grpc) { Google::Cloud::PubSub::V1::ReceivedMessage.decode_json \
                           rec_message_json("rec_message3-msg-goes-here", 1113) }
 
   it "relays errors to the user" do
-    pull_res1 = Google::Pubsub::V1::StreamingPullResponse.new received_messages: [rec_msg1_grpc]
-    pull_res2 = Google::Pubsub::V1::StreamingPullResponse.new received_messages: [rec_msg2_grpc]
-    pull_res3 = Google::Pubsub::V1::StreamingPullResponse.new received_messages: [rec_msg3_grpc]
+    pull_res1 = Google::Cloud::PubSub::V1::StreamingPullResponse.new received_messages: [rec_msg1_grpc]
+    pull_res2 = Google::Cloud::PubSub::V1::StreamingPullResponse.new received_messages: [rec_msg2_grpc]
+    pull_res3 = Google::Cloud::PubSub::V1::StreamingPullResponse.new received_messages: [rec_msg3_grpc]
     response_groups = [[pull_res1, ArgumentError.new], [pull_res2, ZeroDivisionError.new], [pull_res3]]
 
     stub = StreamingPullStub.new response_groups
@@ -41,7 +41,7 @@ describe Google::Cloud::Pubsub::Subscriber, :error, :mock_pubsub do
 
     subscription.service.mocked_subscriber = stub
     subscriber = subscription.listen streams: 1 do |msg|
-      assert_kind_of Google::Cloud::Pubsub::ReceivedMessage, msg
+      assert_kind_of Google::Cloud::PubSub::ReceivedMessage, msg
       msg.ack!
       called +=1
     end

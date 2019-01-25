@@ -32,7 +32,7 @@ module Google
     #
     # See {file:OVERVIEW.md Google Cloud Pub/Sub Overview}.
     #
-    module Pubsub
+    module PubSub
       # rubocop:disable Metrics/AbcSize
 
       ##
@@ -47,7 +47,7 @@ module Google
       #   credentials is used.
       # @param [String, Hash, Google::Auth::Credentials] credentials The path to
       #   the keyfile as a String, the contents of the keyfile as a Hash, or a
-      #   Google::Auth::Credentials object. (See {Pubsub::Credentials})
+      #   Google::Auth::Credentials object. (See {PubSub::Credentials})
       # @param [String, Array<String>] scope The OAuth 2.0 scopes controlling
       #   the set of resources and operations that the connection can access.
       #   See [Using OAuth 2.0 to Access Google
@@ -65,7 +65,7 @@ module Google
       # @param [String] keyfile Alias for the `credentials` argument.
       #   Deprecated.
       #
-      # @return [Google::Cloud::Pubsub::Project]
+      # @return [Google::Cloud::PubSub::Project]
       #
       # @example
       #   require "google/cloud/pubsub"
@@ -88,8 +88,8 @@ module Google
           project_id = project_id.to_s # Always cast to a string
           raise ArgumentError, "project_id is missing" if project_id.empty?
 
-          return Pubsub::Project.new(
-            Pubsub::Service.new(
+          return PubSub::Project.new(
+            PubSub::Service.new(
               project_id, :this_channel_is_insecure,
               host: emulator_host, timeout: timeout,
               client_config: client_config
@@ -99,7 +99,7 @@ module Google
 
         credentials ||= (keyfile || default_credentials(scope: scope))
         unless credentials.is_a? Google::Auth::Credentials
-          credentials = Pubsub::Credentials.new credentials, scope: scope
+          credentials = PubSub::Credentials.new credentials, scope: scope
         end
 
         if credentials.respond_to? :project_id
@@ -108,8 +108,8 @@ module Google
         project_id = project_id.to_s # Always cast to a string
         raise ArgumentError, "project_id is missing" if project_id.empty?
 
-        Pubsub::Project.new(
-          Pubsub::Service.new(
+        PubSub::Project.new(
+          PubSub::Service.new(
             project_id, credentials, timeout:       timeout,
                                      client_config: client_config
           )
@@ -119,15 +119,15 @@ module Google
       # rubocop:enable Metrics/AbcSize
 
       ##
-      # Configure the Google Cloud Pubsub library.
+      # Configure the Google Cloud PubSub library.
       #
-      # The following Pubsub configuration parameters are supported:
+      # The following PubSub configuration parameters are supported:
       #
-      # * `project_id` - (String) Identifier for a Pubsub project. (The
+      # * `project_id` - (String) Identifier for a PubSub project. (The
       #   parameter `project` is considered deprecated, but may also be used.)
       # * `credentials` - (String, Hash, Google::Auth::Credentials) The path to
       #   the keyfile as a String, the contents of the keyfile as a Hash, or a
-      #   Google::Auth::Credentials object. (See {Pubsub::Credentials}) (The
+      #   Google::Auth::Credentials object. (See {PubSub::Credentials}) (The
       #   parameter `keyfile` is considered deprecated, but may also be used.)
       # * `scope` - (String, Array<String>) The OAuth 2.0 scopes controlling
       #   the set of resources and operations that the connection can access.
@@ -143,7 +143,7 @@ module Google
       #   single argument. (See {Subscriber.on_error}.)
       #
       # @return [Google::Cloud::Config] The configuration object the
-      #   Google::Cloud::Pubsub library uses.
+      #   Google::Cloud::PubSub library uses.
       #
       def self.configure
         yield Google::Cloud.configure.pubsub if block_given?
@@ -164,8 +164,11 @@ module Google
       def self.default_credentials scope: nil
         Google::Cloud.configure.pubsub.credentials ||
           Google::Cloud.configure.credentials ||
-          Pubsub::Credentials.default(scope: scope)
+          PubSub::Credentials.default(scope: scope)
       end
     end
+
+    ## Legacy namespace
+    Pubsub = PubSub unless const_defined? :Pubsub
   end
 end

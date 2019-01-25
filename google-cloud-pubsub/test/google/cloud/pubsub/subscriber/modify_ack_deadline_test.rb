@@ -14,25 +14,25 @@
 
 require "helper"
 
-describe Google::Cloud::Pubsub::Subscriber, :modify_ack_deadline, :mock_pubsub do
+describe Google::Cloud::PubSub::Subscriber, :modify_ack_deadline, :mock_pubsub do
   let(:topic_name) { "topic-name-goes-here" }
   let(:sub_name) { "subscription-name-goes-here" }
   let(:sub_json) { subscription_json topic_name, sub_name }
   let(:sub_hash) { JSON.parse sub_json }
-  let(:sub_grpc) { Google::Pubsub::V1::Subscription.decode_json(sub_json) }
+  let(:sub_grpc) { Google::Cloud::PubSub::V1::Subscription.decode_json(sub_json) }
   let(:sub_path) { sub_grpc.name }
-  let(:subscription) { Google::Cloud::Pubsub::Subscription.from_grpc sub_grpc, pubsub.service }
-  let(:rec_msg1_grpc) { Google::Pubsub::V1::ReceivedMessage.decode_json \
+  let(:subscription) { Google::Cloud::PubSub::Subscription.from_grpc sub_grpc, pubsub.service }
+  let(:rec_msg1_grpc) { Google::Cloud::PubSub::V1::ReceivedMessage.decode_json \
                           rec_message_json("rec_message1-msg-goes-here", 1111) }
-  let(:rec_msg2_grpc) { Google::Pubsub::V1::ReceivedMessage.decode_json \
+  let(:rec_msg2_grpc) { Google::Cloud::PubSub::V1::ReceivedMessage.decode_json \
                           rec_message_json("rec_message2-msg-goes-here", 1112) }
-  let(:rec_msg3_grpc) { Google::Pubsub::V1::ReceivedMessage.decode_json \
+  let(:rec_msg3_grpc) { Google::Cloud::PubSub::V1::ReceivedMessage.decode_json \
                           rec_message_json("rec_message3-msg-goes-here", 1113) }
 
   it "can modify_ack_deadline a single message" do
     rec_message_msg = "pulled-message"
     rec_message_ack_id = 123456789
-    pull_res = Google::Pubsub::V1::StreamingPullResponse.decode_json rec_messages_json(rec_message_msg, rec_message_ack_id)
+    pull_res = Google::Cloud::PubSub::V1::StreamingPullResponse.decode_json rec_messages_json(rec_message_msg, rec_message_ack_id)
     response_groups = [[pull_res]]
 
     stub = StreamingPullStub.new response_groups
@@ -43,7 +43,7 @@ describe Google::Cloud::Pubsub::Subscriber, :modify_ack_deadline, :mock_pubsub d
       # flush the initial buffer before any callbacks are processed
       subscriber.buffer.flush! unless called
 
-      assert_kind_of Google::Cloud::Pubsub::ReceivedMessage, msg
+      assert_kind_of Google::Cloud::PubSub::ReceivedMessage, msg
       assert_equal rec_message_msg, msg.data
       assert_equal "ack-id-#{rec_message_ack_id}", msg.ack_id
 
@@ -63,7 +63,7 @@ describe Google::Cloud::Pubsub::Subscriber, :modify_ack_deadline, :mock_pubsub d
     subscriber.wait!
 
     stub.requests.map(&:to_a).must_equal [
-      [Google::Pubsub::V1::StreamingPullRequest.new(
+      [Google::Cloud::PubSub::V1::StreamingPullRequest.new(
         subscription: sub_path,
         stream_ack_deadline_seconds: 60
       )]
@@ -77,7 +77,7 @@ describe Google::Cloud::Pubsub::Subscriber, :modify_ack_deadline, :mock_pubsub d
   end
 
   it "can modify_ack_deadline multiple messages" do
-    pull_res = Google::Pubsub::V1::StreamingPullResponse.new received_messages: [rec_msg1_grpc, rec_msg2_grpc, rec_msg3_grpc]
+    pull_res = Google::Cloud::PubSub::V1::StreamingPullResponse.new received_messages: [rec_msg1_grpc, rec_msg2_grpc, rec_msg3_grpc]
     response_groups = [[pull_res]]
 
     stub = StreamingPullStub.new response_groups
@@ -88,7 +88,7 @@ describe Google::Cloud::Pubsub::Subscriber, :modify_ack_deadline, :mock_pubsub d
       # flush the initial buffer before any callbacks are processed
       subscriber.buffer.flush! if called.zero?
 
-      assert_kind_of Google::Cloud::Pubsub::ReceivedMessage, msg
+      assert_kind_of Google::Cloud::PubSub::ReceivedMessage, msg
       msg.modify_ack_deadline! 42
       called +=1
     end
@@ -105,7 +105,7 @@ describe Google::Cloud::Pubsub::Subscriber, :modify_ack_deadline, :mock_pubsub d
     subscriber.wait!
 
     stub.requests.map(&:to_a).must_equal [
-      [Google::Pubsub::V1::StreamingPullRequest.new(
+      [Google::Cloud::PubSub::V1::StreamingPullRequest.new(
         subscription: sub_path,
         stream_ack_deadline_seconds: 60
       )]

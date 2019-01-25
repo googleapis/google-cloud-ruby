@@ -1,4 +1,4 @@
-# Copyright 2018 Google LLC
+# Copyright 2019 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@ require "googleauth"
 
 module Google
   module Cloud
-    module Pubsub
+    module PubSub
       module V1
         class Credentials < Google::Auth::Credentials
           SCOPE = ["https://www.googleapis.com/auth/pubsub"].freeze
@@ -35,5 +35,7 @@ module Google
         end
       end
     end
+
+    Pubsub = PubSub unless const_defined? :Pubsub
   end
 end

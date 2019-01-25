@@ -18,7 +18,7 @@ require "google/cloud/errors"
 
 module Google
   module Cloud
-    module Pubsub
+    module PubSub
       ##
       # # Message
       #
@@ -32,7 +32,7 @@ module Google
       # @example
       #   require "google/cloud/pubsub"
       #
-      #   pubsub = Google::Cloud::Pubsub.new
+      #   pubsub = Google::Cloud::PubSub.new
       #
       #   # Publish a message
       #   topic = pubsub.topic "my-topic"
@@ -54,7 +54,7 @@ module Google
       #
       class Message
         ##
-        # @private The gRPC Google::Pubsub::V1::PubsubMessage object.
+        # @private The gRPC Google::Cloud::PubSub::V1::PubsubMessage object.
         attr_accessor :grpc
 
         ##
@@ -64,7 +64,7 @@ module Google
           # Convert attributes to strings to match the protobuf definition
           attributes = Hash[attributes.map { |k, v| [String(k), String(v)] }]
 
-          @grpc = Google::Pubsub::V1::PubsubMessage.new(
+          @grpc = Google::Cloud::PubSub::V1::PubsubMessage.new(
             data:       String(data).dup.force_encoding(Encoding::ASCII_8BIT),
             attributes: attributes
           )
@@ -101,7 +101,8 @@ module Google
         alias publish_time published_at
 
         ##
-        # @private New Message from a Google::Pubsub::V1::PubsubMessage object.
+        # @private New Message from a Google::Cloud::PubSub::V1::PubsubMessage
+        # object.
         def self.from_grpc grpc
           new.tap do |m|
             m.instance_variable_set :@grpc, grpc
@@ -109,5 +110,7 @@ module Google
         end
       end
     end
+
+    Pubsub = PubSub unless const_defined? :Pubsub
   end
 end

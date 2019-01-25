@@ -1,4 +1,4 @@
-# Copyright 2018 Google LLC
+# Copyright 2019 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,7 +14,8 @@
 
 
 module Google
-  module Pubsub
+  module Cloud
+  module PubSub
     module V1
       # @!attribute [rw] allowed_persistence_regions
       #   @return [Array<String>]
@@ -40,7 +41,7 @@ module Google
       #     See <a href="https://cloud.google.com/pubsub/docs/labels"> Creating and
       #     managing labels</a>.
       # @!attribute [rw] message_storage_policy
-      #   @return [Google::Pubsub::V1::MessageStoragePolicy]
+      #   @return [Google::Cloud::PubSub::V1::MessageStoragePolicy]
       #     Policy constraining how messages published to the topic may be stored. It
       #     is determined when the topic is created based on the policy configured at
       #     the project level. It must not be set by the caller in the request to
@@ -86,7 +87,7 @@ module Google
 
       # Request for the UpdateTopic method.
       # @!attribute [rw] topic
-      #   @return [Google::Pubsub::V1::Topic]
+      #   @return [Google::Cloud::PubSub::V1::Topic]
       #     The updated topic object.
       # @!attribute [rw] update_mask
       #   @return [Google::Protobuf::FieldMask]
@@ -103,7 +104,7 @@ module Google
       #     The messages in the request will be published on this topic.
       #     Format is `projects/{project}/topics/{topic}`.
       # @!attribute [rw] messages
-      #   @return [Array<Google::Pubsub::V1::PubsubMessage>]
+      #   @return [Array<Google::Cloud::PubSub::V1::PubsubMessage>]
       #     The messages to publish.
       class PublishRequest; end
 
@@ -132,7 +133,7 @@ module Google
 
       # Response for the `ListTopics` method.
       # @!attribute [rw] topics
-      #   @return [Array<Google::Pubsub::V1::Topic>]
+      #   @return [Array<Google::Cloud::PubSub::V1::Topic>]
       #     The resulting topics.
       # @!attribute [rw] next_page_token
       #   @return [String]
@@ -221,7 +222,7 @@ module Google
       #     The value of this field will be `_deleted-topic_` if the topic has been
       #     deleted.
       # @!attribute [rw] push_config
-      #   @return [Google::Pubsub::V1::PushConfig]
+      #   @return [Google::Cloud::PubSub::V1::PushConfig]
       #     If push delivery is used with this subscription, this field is
       #     used to configure it. An empty `pushConfig` signifies that the subscriber
       #     will pull and ack messages using API methods.
@@ -275,7 +276,7 @@ module Google
       #     See <a href="https://cloud.google.com/pubsub/docs/labels"> Creating and
       #     managing labels</a>.
       # @!attribute [rw] expiration_policy
-      #   @return [Google::Pubsub::V1::ExpirationPolicy]
+      #   @return [Google::Cloud::PubSub::V1::ExpirationPolicy]
       #     A policy that specifies the conditions for this subscription's expiration.
       #     A subscription is considered active as long as any connected subscriber is
       #     successfully consuming messages from the subscription or is issuing
@@ -334,7 +335,7 @@ module Google
       #   @return [String]
       #     This ID can be used to acknowledge the received message.
       # @!attribute [rw] message
-      #   @return [Google::Pubsub::V1::PubsubMessage]
+      #   @return [Google::Cloud::PubSub::V1::PubsubMessage]
       #     The message.
       class ReceivedMessage; end
 
@@ -347,7 +348,7 @@ module Google
 
       # Request for the UpdateSubscription method.
       # @!attribute [rw] subscription
-      #   @return [Google::Pubsub::V1::Subscription]
+      #   @return [Google::Cloud::PubSub::V1::Subscription]
       #     The updated subscription object.
       # @!attribute [rw] update_mask
       #   @return [Google::Protobuf::FieldMask]
@@ -372,7 +373,7 @@ module Google
 
       # Response for the `ListSubscriptions` method.
       # @!attribute [rw] subscriptions
-      #   @return [Array<Google::Pubsub::V1::Subscription>]
+      #   @return [Array<Google::Cloud::PubSub::V1::Subscription>]
       #     The subscriptions that match the request.
       # @!attribute [rw] next_page_token
       #   @return [String]
@@ -394,7 +395,7 @@ module Google
       #     The name of the subscription.
       #     Format is `projects/{project}/subscriptions/{sub}`.
       # @!attribute [rw] push_config
-      #   @return [Google::Pubsub::V1::PushConfig]
+      #   @return [Google::Cloud::PubSub::V1::PushConfig]
       #     The push configuration for future deliveries.
       #
       #     An empty `pushConfig` indicates that the Pub/Sub system should
@@ -422,7 +423,7 @@ module Google
 
       # Response for the `Pull` method.
       # @!attribute [rw] received_messages
-      #   @return [Array<Google::Pubsub::V1::ReceivedMessage>]
+      #   @return [Array<Google::Cloud::PubSub::V1::ReceivedMessage>]
       #     Received Pub/Sub messages. The list will be empty if there are no more
       #     messages available in the backlog. For JSON, the response can be entirely
       #     empty. The Pub/Sub system may return fewer than the `maxMessages` requested
@@ -507,7 +508,7 @@ module Google
       # Response for the `StreamingPull` method. This response is used to stream
       # messages from the server to the client.
       # @!attribute [rw] received_messages
-      #   @return [Array<Google::Pubsub::V1::ReceivedMessage>]
+      #   @return [Array<Google::Cloud::PubSub::V1::ReceivedMessage>]
       #     Received Pub/Sub messages. This will not be empty.
       class StreamingPullResponse; end
 
@@ -546,7 +547,7 @@ module Google
       # changed in backward-incompatible ways and is not recommended for production
       # use. It is not subject to any SLA or deprecation policy.
       # @!attribute [rw] snapshot
-      #   @return [Google::Pubsub::V1::Snapshot]
+      #   @return [Google::Cloud::PubSub::V1::Snapshot]
       #     The updated snapshot object.
       # @!attribute [rw] update_mask
       #   @return [Google::Protobuf::FieldMask]
@@ -620,7 +621,7 @@ module Google
       # changed in backward-incompatible ways and is not recommended for production
       # use. It is not subject to any SLA or deprecation policy.
       # @!attribute [rw] snapshots
-      #   @return [Array<Google::Pubsub::V1::Snapshot>]
+      #   @return [Array<Google::Cloud::PubSub::V1::Snapshot>]
       #     The resulting snapshots.
       # @!attribute [rw] next_page_token
       #   @return [String]
@@ -668,5 +669,6 @@ module Google
       # Response for the `Seek` method (this response is empty).
       class SeekResponse; end
     end
+  end
   end
 end

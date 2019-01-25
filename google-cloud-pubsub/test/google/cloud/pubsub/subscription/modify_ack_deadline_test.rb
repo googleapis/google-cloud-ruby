@@ -14,19 +14,19 @@
 
 require "helper"
 
-describe Google::Cloud::Pubsub::Subscription, :modify_ack_deadline, :mock_pubsub do
+describe Google::Cloud::PubSub::Subscription, :modify_ack_deadline, :mock_pubsub do
   let(:topic_name) { "topic-name-goes-here" }
   let(:sub_name) { "subscription-name-goes-here" }
   let(:sub_json) { subscription_json topic_name, sub_name }
   let(:sub_hash) { JSON.parse sub_json }
-  let(:sub_grpc) { Google::Pubsub::V1::Subscription.decode_json(sub_json) }
-  let(:subscription) { Google::Cloud::Pubsub::Subscription.from_grpc sub_grpc, pubsub.service }
-  let(:rec_msg1_grpc) { Google::Pubsub::V1::ReceivedMessage.decode_json rec_message_json("rec_message1-msg-goes-here") }
-  let(:rec_msg2_grpc) { Google::Pubsub::V1::ReceivedMessage.decode_json rec_message_json("rec_message2-msg-goes-here") }
-  let(:rec_msg3_grpc) { Google::Pubsub::V1::ReceivedMessage.decode_json rec_message_json("rec_message3-msg-goes-here") }
-  let(:rec_message1) { Google::Cloud::Pubsub::ReceivedMessage.from_grpc rec_msg1_grpc, subscription }
-  let(:rec_message2) { Google::Cloud::Pubsub::ReceivedMessage.from_grpc rec_msg2_grpc, subscription }
-  let(:rec_message3) { Google::Cloud::Pubsub::ReceivedMessage.from_grpc rec_msg3_grpc, subscription }
+  let(:sub_grpc) { Google::Cloud::PubSub::V1::Subscription.decode_json(sub_json) }
+  let(:subscription) { Google::Cloud::PubSub::Subscription.from_grpc sub_grpc, pubsub.service }
+  let(:rec_msg1_grpc) { Google::Cloud::PubSub::V1::ReceivedMessage.decode_json rec_message_json("rec_message1-msg-goes-here") }
+  let(:rec_msg2_grpc) { Google::Cloud::PubSub::V1::ReceivedMessage.decode_json rec_message_json("rec_message2-msg-goes-here") }
+  let(:rec_msg3_grpc) { Google::Cloud::PubSub::V1::ReceivedMessage.decode_json rec_message_json("rec_message3-msg-goes-here") }
+  let(:rec_message1) { Google::Cloud::PubSub::ReceivedMessage.from_grpc rec_msg1_grpc, subscription }
+  let(:rec_message2) { Google::Cloud::PubSub::ReceivedMessage.from_grpc rec_msg2_grpc, subscription }
+  let(:rec_message3) { Google::Cloud::PubSub::ReceivedMessage.from_grpc rec_msg3_grpc, subscription }
 
   it "can modify_ack_deadline an ack id" do
     ack_id = rec_message1.ack_id
@@ -107,7 +107,7 @@ describe Google::Cloud::Pubsub::Subscription, :modify_ack_deadline, :mock_pubsub
 
   describe "reference subscription object of a subscription that does exist" do
     let :subscription do
-      Google::Cloud::Pubsub::Subscription.from_name sub_name,
+      Google::Cloud::PubSub::Subscription.from_name sub_name,
                                             pubsub.service
     end
 
@@ -191,7 +191,7 @@ describe Google::Cloud::Pubsub::Subscription, :modify_ack_deadline, :mock_pubsub
 
   describe "reference subscription object of a subscription that does not exist" do
     let :subscription do
-      Google::Cloud::Pubsub::Subscription.from_name sub_name,
+      Google::Cloud::PubSub::Subscription.from_name sub_name,
                                             pubsub.service
     end
 

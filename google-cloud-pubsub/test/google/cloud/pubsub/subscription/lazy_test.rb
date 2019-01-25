@@ -14,13 +14,13 @@
 
 require "helper"
 
-describe Google::Cloud::Pubsub::Subscription, :name, :mock_pubsub do
+describe Google::Cloud::PubSub::Subscription, :name, :mock_pubsub do
   let(:topic_name) { "topic-name-goes-here" }
   let(:sub_name) { "subscription-name-goes-here" }
   let(:sub_path) { subscription_path sub_name }
   let(:sub_json) { subscription_json topic_name, sub_name }
-  let(:sub_grpc) { Google::Pubsub::V1::Subscription.decode_json(sub_json) }
-  let(:subscription) { Google::Cloud::Pubsub::Subscription.from_grpc sub_grpc, pubsub.service }
+  let(:sub_grpc) { Google::Cloud::PubSub::V1::Subscription.decode_json(sub_json) }
+  let(:subscription) { Google::Cloud::PubSub::Subscription.from_grpc sub_grpc, pubsub.service }
 
   it "is not reference when created with an HTTP method" do
     subscription.wont_be :reference?
@@ -29,7 +29,7 @@ describe Google::Cloud::Pubsub::Subscription, :name, :mock_pubsub do
 
   describe "reference subscription" do
     let :subscription do
-      Google::Cloud::Pubsub::Subscription.from_name sub_name, pubsub.service
+      Google::Cloud::PubSub::Subscription.from_name sub_name, pubsub.service
     end
 
     it "is reference" do

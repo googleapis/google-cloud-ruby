@@ -14,13 +14,13 @@
 
 require "helper"
 
-describe Google::Cloud::Pubsub::Subscription, :policy, :mock_pubsub do
+describe Google::Cloud::PubSub::Subscription, :policy, :mock_pubsub do
   let(:topic_name) { "topic-name-goes-here" }
   let(:sub_name) { "subscription-name-goes-here" }
   let(:sub_json) { subscription_json topic_name, sub_name }
   let(:sub_hash) { JSON.parse sub_json }
-  let(:sub_grpc) { Google::Pubsub::V1::Subscription.decode_json(sub_json) }
-  let(:subscription) { Google::Cloud::Pubsub::Subscription.from_grpc sub_grpc, pubsub.service }
+  let(:sub_grpc) { Google::Cloud::PubSub::V1::Subscription.decode_json(sub_json) }
+  let(:subscription) { Google::Cloud::PubSub::Subscription.from_grpc sub_grpc, pubsub.service }
 
   it "gets the IAM Policy" do
     policy_json = {
@@ -42,7 +42,7 @@ describe Google::Cloud::Pubsub::Subscription, :policy, :mock_pubsub do
 
     mock.verify
 
-    policy.must_be_kind_of Google::Cloud::Pubsub::Policy
+    policy.must_be_kind_of Google::Cloud::PubSub::Policy
     policy.etag.must_equal "\b\x01"
     policy.roles.must_be_kind_of Hash
     policy.roles.size.must_equal 1
@@ -102,7 +102,7 @@ describe Google::Cloud::Pubsub::Subscription, :policy, :mock_pubsub do
 
     mock.verify
 
-    policy_2.must_be_kind_of Google::Cloud::Pubsub::Policy
+    policy_2.must_be_kind_of Google::Cloud::PubSub::Policy
     policy_2.etag.must_equal "\b\x10"
     policy_2.roles.must_be_kind_of Hash
     policy_2.roles.size.must_equal 1
@@ -160,7 +160,7 @@ describe Google::Cloud::Pubsub::Subscription, :policy, :mock_pubsub do
 
     mock.verify
 
-    policy.must_be_kind_of Google::Cloud::Pubsub::Policy
+    policy.must_be_kind_of Google::Cloud::PubSub::Policy
     policy.etag.must_equal "\b\x10"
     policy.roles.must_be_kind_of Hash
     policy.roles.size.must_equal 1

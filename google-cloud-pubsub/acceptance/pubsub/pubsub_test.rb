@@ -16,7 +16,7 @@ require "pubsub_helper"
 
 # This test is a ruby version of gcloud-node's pubsub test.
 
-describe Google::Cloud::Pubsub, :pubsub do
+describe Google::Cloud::PubSub, :pubsub do
   def retrieve_topic topic_name
     pubsub.get_topic(topic_name) || pubsub.create_topic(topic_name)
   end
@@ -48,7 +48,7 @@ describe Google::Cloud::Pubsub, :pubsub do
     it "should be listed" do
       topics = pubsub.topics
       topics.each do |topic|
-        topic.must_be_kind_of Google::Cloud::Pubsub::Topic
+        topic.must_be_kind_of Google::Cloud::PubSub::Topic
       end
       topics.token.must_be :nil?
     end
@@ -58,20 +58,20 @@ describe Google::Cloud::Pubsub, :pubsub do
       topics = pubsub.topics max: (topic_count - 1)
       topics.count.must_equal (topic_count - 1)
       topics.each do |topic|
-        topic.must_be_kind_of Google::Cloud::Pubsub::Topic
+        topic.must_be_kind_of Google::Cloud::PubSub::Topic
       end
       topics.token.wont_be :nil?
 
       # retrieve the next list of topics
       next_topics = pubsub.topics token: topics.token
       next_topics.count.must_equal 1
-      next_topics.first.must_be_kind_of Google::Cloud::Pubsub::Topic
+      next_topics.first.must_be_kind_of Google::Cloud::PubSub::Topic
       next_topics.token.must_be :nil?
     end
 
     it "should be created, updated and deleted" do
       topic = pubsub.create_topic new_topic_name, labels: labels
-      topic.must_be_kind_of Google::Cloud::Pubsub::Topic
+      topic.must_be_kind_of Google::Cloud::PubSub::Topic
       topic = pubsub.topic(topic.name)
       topic.wont_be :nil?
       topic.labels.must_equal labels
@@ -87,7 +87,7 @@ describe Google::Cloud::Pubsub, :pubsub do
       msg = pubsub.topic(topic_names.first).publish data, foo: :bar
 
       msg.wont_be :nil?
-      msg.must_be_kind_of Google::Cloud::Pubsub::Message
+      msg.must_be_kind_of Google::Cloud::PubSub::Message
       msg.data.must_equal data
       msg.attributes["foo"].must_equal "bar"
     end
@@ -101,7 +101,7 @@ describe Google::Cloud::Pubsub, :pubsub do
 
       msgs.wont_be :nil?
       msgs.count.must_equal 3
-      msgs.each { |msg| msg.must_be_kind_of Google::Cloud::Pubsub::Message }
+      msgs.each { |msg| msg.must_be_kind_of Google::Cloud::PubSub::Message }
     end
   end
 
@@ -118,7 +118,7 @@ describe Google::Cloud::Pubsub, :pubsub do
       subscriptions = pubsub.subscriptions
       subscriptions.each do |subscription|
         # subscriptions on project are objects...
-        subscription.must_be_kind_of Google::Cloud::Pubsub::Subscription
+        subscription.must_be_kind_of Google::Cloud::PubSub::Subscription
       end
       subscriptions.token.must_be :nil?
     end
@@ -128,14 +128,14 @@ describe Google::Cloud::Pubsub, :pubsub do
       subscriptions = pubsub.subscriptions max: (sub_count - 1)
       subscriptions.count.must_equal (sub_count - 1)
       subscriptions.each do |subscription|
-        subscription.must_be_kind_of Google::Cloud::Pubsub::Subscription
+        subscription.must_be_kind_of Google::Cloud::PubSub::Subscription
       end
       subscriptions.token.wont_be :nil?
 
       # retrieve the next list of subscriptions
       next_subs = pubsub.subscriptions token: subscriptions.token
       next_subs.count.must_equal 1
-      next_subs.first.must_be_kind_of Google::Cloud::Pubsub::Subscription
+      next_subs.first.must_be_kind_of Google::Cloud::PubSub::Subscription
       next_subs.token.must_be :nil?
     end
   end
@@ -159,7 +159,7 @@ describe Google::Cloud::Pubsub, :pubsub do
       subscriptions.count.must_equal subs.count
       subscriptions.each do |subscription|
         # subscriptions on topic are strings...
-        subscription.must_be_kind_of Google::Cloud::Pubsub::Subscription
+        subscription.must_be_kind_of Google::Cloud::PubSub::Subscription
       end
       subscriptions.token.must_be :nil?
     end
@@ -168,21 +168,21 @@ describe Google::Cloud::Pubsub, :pubsub do
       subscriptions = topic.subscriptions max: (subs.count - 1)
       subscriptions.count.must_equal (subs.count - 1)
       subscriptions.each do |subscription|
-        subscription.must_be_kind_of Google::Cloud::Pubsub::Subscription
+        subscription.must_be_kind_of Google::Cloud::PubSub::Subscription
       end
       subscriptions.token.wont_be :nil?
 
       # retrieve the next list of subscriptions
       next_subs = topic.subscriptions token: subscriptions.token
       next_subs.count.must_equal 1
-      next_subs.first.must_be_kind_of Google::Cloud::Pubsub::Subscription
+      next_subs.first.must_be_kind_of Google::Cloud::PubSub::Subscription
       next_subs.token.must_be :nil?
     end
 
     it "should allow creation of a subscription with options" do
       subscription = topic.subscribe "#{$topic_prefix}-sub3", retain_acked: true, retention: 600, labels: labels
       subscription.wont_be :nil?
-      subscription.must_be_kind_of Google::Cloud::Pubsub::Subscription
+      subscription.must_be_kind_of Google::Cloud::PubSub::Subscription
       assert subscription.retain_acked
       subscription.retention.must_equal 600
       subscription.labels.must_equal labels
@@ -200,7 +200,7 @@ describe Google::Cloud::Pubsub, :pubsub do
     it "should be able to pull and ack" do
       subscription = topic.subscribe "#{$topic_prefix}-sub4"
       subscription.wont_be :nil?
-      subscription.must_be_kind_of Google::Cloud::Pubsub::Subscription
+      subscription.must_be_kind_of Google::Cloud::PubSub::Subscription
       # No messages, should be empty
       events = subscription.pull
       events.must_be :empty?
@@ -224,7 +224,7 @@ describe Google::Cloud::Pubsub, :pubsub do
     it "should be able to pull same message again after ack by seeking to snapshot" do
       subscription = topic.subscribe "#{$topic_prefix}-sub5"
       subscription.wont_be :nil?
-      subscription.must_be_kind_of Google::Cloud::Pubsub::Subscription
+      subscription.must_be_kind_of Google::Cloud::PubSub::Subscription
 
       # No messages, should be empty
       events = subscription.pull
@@ -304,7 +304,7 @@ describe Google::Cloud::Pubsub, :pubsub do
       permissions = topic.test_permissions roles
       skip "Don't have permissions to get/set topic's policy" unless permissions == roles
 
-      topic.policy.must_be_kind_of Google::Cloud::Pubsub::Policy
+      topic.policy.must_be_kind_of Google::Cloud::PubSub::Policy
 
       # We need a valid service account in order to update the policy
       service_account.wont_be :nil?
@@ -325,7 +325,7 @@ describe Google::Cloud::Pubsub, :pubsub do
       permissions = subscription.test_permissions roles
       skip "Don't have permissions to get/set subscription's policy" unless permissions == roles
 
-      subscription.policy.must_be_kind_of Google::Cloud::Pubsub::Policy
+      subscription.policy.must_be_kind_of Google::Cloud::PubSub::Policy
 
       # We need a valid service account in order to update the policy
       service_account.wont_be :nil?
@@ -365,7 +365,7 @@ describe Google::Cloud::Pubsub, :pubsub do
       snapshots = pubsub.snapshots
       snapshots.each do |snapshot|
         # snapshots on project are objects...
-        snapshot.must_be_kind_of Google::Cloud::Pubsub::Snapshot
+        snapshot.must_be_kind_of Google::Cloud::PubSub::Snapshot
       end
       snapshots.token.must_be :nil?
     end
@@ -375,14 +375,14 @@ describe Google::Cloud::Pubsub, :pubsub do
       snapshots = pubsub.snapshots max: (sub_count - 1)
       snapshots.count.must_equal (sub_count - 1)
       snapshots.each do |snapshot|
-        snapshot.must_be_kind_of Google::Cloud::Pubsub::Snapshot
+        snapshot.must_be_kind_of Google::Cloud::PubSub::Snapshot
       end
       snapshots.token.wont_be :nil?
 
       # retrieve the next list of snapshots
       next_subs = pubsub.snapshots token: snapshots.token
       next_subs.count.must_equal 1
-      next_subs.first.must_be_kind_of Google::Cloud::Pubsub::Snapshot
+      next_subs.first.must_be_kind_of Google::Cloud::PubSub::Snapshot
       next_subs.token.must_be :nil?
     end
   end

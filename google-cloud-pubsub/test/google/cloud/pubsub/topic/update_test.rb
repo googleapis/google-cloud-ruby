@@ -14,7 +14,7 @@
 
 require "helper"
 
-describe Google::Cloud::Pubsub::Topic, :update, :mock_pubsub do
+describe Google::Cloud::PubSub::Topic, :update, :mock_pubsub do
   let(:topic_name) { "topic-name-goes-here" }
   let(:labels) { { "foo" => "bar" } }
   let(:new_labels) { { "baz" => "qux" } }
@@ -23,8 +23,8 @@ describe Google::Cloud::Pubsub::Topic, :update, :mock_pubsub do
     new_labels.each { |k, v| labels_map[String(k)] = String(v) }
     labels_map
   end
-  let(:topic_grpc) { Google::Pubsub::V1::Topic.decode_json topic_json(topic_name, labels: labels) }
-  let(:topic) { Google::Cloud::Pubsub::Topic.from_grpc topic_grpc, pubsub.service }
+  let(:topic_grpc) { Google::Cloud::PubSub::V1::Topic.decode_json topic_json(topic_name, labels: labels) }
+  let(:topic) { Google::Cloud::PubSub::Topic.from_grpc topic_grpc, pubsub.service }
 
   it "updates labels" do
     topic.labels.must_equal labels
@@ -71,13 +71,13 @@ describe Google::Cloud::Pubsub::Topic, :update, :mock_pubsub do
   end
 
   describe :reference do
-    let(:topic) { Google::Cloud::Pubsub::Topic.from_name topic_name, pubsub.service }
+    let(:topic) { Google::Cloud::PubSub::Topic.from_name topic_name, pubsub.service }
 
     it "updates labels" do
       topic.must_be :reference?
       topic.wont_be :resource?
 
-      update_grpc = Google::Pubsub::V1::Topic.new \
+      update_grpc = Google::Cloud::PubSub::V1::Topic.new \
         name: topic_path(topic_name),
         labels: new_labels
       topic_grpc.labels = new_labels_map

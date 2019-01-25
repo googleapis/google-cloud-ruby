@@ -14,19 +14,19 @@
 
 require "helper"
 
-describe Google::Cloud::Pubsub::Subscription, :attributes, :mock_pubsub do
+describe Google::Cloud::PubSub::Subscription, :attributes, :mock_pubsub do
   let(:topic_name) { "topic-name-goes-here" }
   let(:sub_name) { "subscription-name-goes-here" }
   let(:sub_json) { subscription_json topic_name, sub_name }
   let(:sub_hash) { JSON.parse sub_json }
   let(:sub_deadline) { sub_hash["ack_deadline_seconds"] }
   let(:sub_endpoint) { sub_hash["push_config"]["push_endpoint"] }
-  let(:sub_grpc) { Google::Pubsub::V1::Subscription.decode_json(sub_json) }
-  let(:subscription) { Google::Cloud::Pubsub::Subscription.from_grpc sub_grpc, pubsub.service }
+  let(:sub_grpc) { Google::Cloud::PubSub::V1::Subscription.decode_json(sub_json) }
+  let(:subscription) { Google::Cloud::PubSub::Subscription.from_grpc sub_grpc, pubsub.service }
 
   it "gets topic from the Google API object" do
     # No mocked service means no API calls are happening.
-    subscription.topic.must_be_kind_of Google::Cloud::Pubsub::Topic
+    subscription.topic.must_be_kind_of Google::Cloud::PubSub::Topic
     subscription.topic.must_be :reference?
     subscription.topic.wont_be :resource?
     subscription.topic.name.must_equal topic_path(topic_name)
@@ -50,7 +50,7 @@ describe Google::Cloud::Pubsub::Subscription, :attributes, :mock_pubsub do
 
   it "can update the endpoint" do
     new_push_endpoint = "https://foo.bar/baz"
-    push_config = Google::Pubsub::V1::PushConfig.new(push_endpoint: new_push_endpoint)
+    push_config = Google::Cloud::PubSub::V1::PushConfig.new(push_endpoint: new_push_endpoint)
     mpc_res = nil
     mock = Minitest::Mock.new
     mock.expect :modify_push_config, mpc_res, [subscription_path(sub_name), push_config, options: default_options]
@@ -63,17 +63,17 @@ describe Google::Cloud::Pubsub::Subscription, :attributes, :mock_pubsub do
 
   describe "reference subscription object of a subscription that does exist" do
     let :subscription do
-      Google::Cloud::Pubsub::Subscription.from_name sub_name,
+      Google::Cloud::PubSub::Subscription.from_name sub_name,
                                             pubsub.service
     end
 
     it "makes an HTTP API call to retrieve topic" do
-      get_res = Google::Pubsub::V1::Subscription.decode_json subscription_json(topic_name, sub_name)
+      get_res = Google::Cloud::PubSub::V1::Subscription.decode_json subscription_json(topic_name, sub_name)
       mock = Minitest::Mock.new
       mock.expect :get_subscription, get_res, [subscription_path(sub_name), options: default_options]
       subscription.service.mocked_subscriber = mock
 
-      subscription.topic.must_be_kind_of Google::Cloud::Pubsub::Topic
+      subscription.topic.must_be_kind_of Google::Cloud::PubSub::Topic
 
       mock.verify
 
@@ -83,7 +83,7 @@ describe Google::Cloud::Pubsub::Subscription, :attributes, :mock_pubsub do
     end
 
     it "makes an HTTP API call to retrieve deadline" do
-      get_res = Google::Pubsub::V1::Subscription.decode_json subscription_json(topic_name, sub_name)
+      get_res = Google::Cloud::PubSub::V1::Subscription.decode_json subscription_json(topic_name, sub_name)
       mock = Minitest::Mock.new
       mock.expect :get_subscription, get_res, [subscription_path(sub_name), options: default_options]
       subscription.service.mocked_subscriber = mock
@@ -94,7 +94,7 @@ describe Google::Cloud::Pubsub::Subscription, :attributes, :mock_pubsub do
     end
 
     it "makes an HTTP API call to retrieve retain_acked" do
-      get_res = Google::Pubsub::V1::Subscription.decode_json subscription_json(topic_name, sub_name)
+      get_res = Google::Cloud::PubSub::V1::Subscription.decode_json subscription_json(topic_name, sub_name)
       mock = Minitest::Mock.new
       mock.expect :get_subscription, get_res, [subscription_path(sub_name), options: default_options]
       subscription.service.mocked_subscriber = mock
@@ -105,7 +105,7 @@ describe Google::Cloud::Pubsub::Subscription, :attributes, :mock_pubsub do
     end
 
     it "makes an HTTP API call to retrieve endpoint" do
-      get_res = Google::Pubsub::V1::Subscription.decode_json subscription_json(topic_name, sub_name)
+      get_res = Google::Cloud::PubSub::V1::Subscription.decode_json subscription_json(topic_name, sub_name)
       mock = Minitest::Mock.new
       mock.expect :get_subscription, get_res, [subscription_path(sub_name), options: default_options]
       subscription.service.mocked_subscriber = mock
@@ -117,7 +117,7 @@ describe Google::Cloud::Pubsub::Subscription, :attributes, :mock_pubsub do
 
     it "makes an HTTP API call to update endpoint" do
       new_push_endpoint = "https://foo.bar/baz"
-      push_config = Google::Pubsub::V1::PushConfig.new(push_endpoint: new_push_endpoint)
+      push_config = Google::Cloud::PubSub::V1::PushConfig.new(push_endpoint: new_push_endpoint)
       mpc_res = nil
       mock = Minitest::Mock.new
       mock.expect :modify_push_config, mpc_res, [subscription_path(sub_name), push_config, options: default_options]
@@ -131,7 +131,7 @@ describe Google::Cloud::Pubsub::Subscription, :attributes, :mock_pubsub do
 
   describe "reference subscription object of a subscription that does not exist" do
     let :subscription do
-      Google::Cloud::Pubsub::Subscription.from_name sub_name,
+      Google::Cloud::PubSub::Subscription.from_name sub_name,
                                             pubsub.service
     end
 

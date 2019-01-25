@@ -14,12 +14,12 @@
 
 require "helper"
 
-describe Google::Cloud::Pubsub::Subscription, :exists, :mock_pubsub do
+describe Google::Cloud::PubSub::Subscription, :exists, :mock_pubsub do
   let(:topic_name) { "topic-name-goes-here" }
   let(:sub_name) { "subscription-name-goes-here" }
   let(:sub_json) { subscription_json(topic_name, sub_name) }
-  let(:sub_grpc) { Google::Pubsub::V1::Subscription.decode_json(sub_json) }
-  let(:subscription) { Google::Cloud::Pubsub::Subscription.from_grpc sub_grpc, pubsub.service }
+  let(:sub_grpc) { Google::Cloud::PubSub::V1::Subscription.decode_json(sub_json) }
+  let(:subscription) { Google::Cloud::PubSub::Subscription.from_grpc sub_grpc, pubsub.service }
 
   it "knows if it exists when created with an HTTP method" do
     # The absense of a mock means this test will fail
@@ -31,12 +31,12 @@ describe Google::Cloud::Pubsub::Subscription, :exists, :mock_pubsub do
 
   describe "reference subscription object of a subscription that exists" do
     let :subscription do
-      Google::Cloud::Pubsub::Subscription.from_name sub_name,
+      Google::Cloud::PubSub::Subscription.from_name sub_name,
                                             pubsub.service
     end
 
     it "checks if the subscription exists by making an HTTP call" do
-      get_res = Google::Pubsub::V1::Subscription.decode_json subscription_json(topic_name, sub_name)
+      get_res = Google::Cloud::PubSub::V1::Subscription.decode_json subscription_json(topic_name, sub_name)
       mock = Minitest::Mock.new
       mock.expect :get_subscription, get_res, [subscription_path(sub_name), options: default_options]
       subscription.service.mocked_subscriber = mock
@@ -52,7 +52,7 @@ describe Google::Cloud::Pubsub::Subscription, :exists, :mock_pubsub do
 
   describe "reference subscription object of a subscription that does not exist" do
     let :subscription do
-      Google::Cloud::Pubsub::Subscription.from_name sub_name,
+      Google::Cloud::PubSub::Subscription.from_name sub_name,
                                             pubsub.service
     end
 

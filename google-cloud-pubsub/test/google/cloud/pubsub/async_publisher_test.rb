@@ -16,7 +16,7 @@ require "helper"
 
 Thread.abort_on_exception = true
 
-describe Google::Cloud::Pubsub::AsyncPublisher, :mock_pubsub do
+describe Google::Cloud::PubSub::AsyncPublisher, :mock_pubsub do
   let(:topic_name) { "topic-name-goes-here" }
   let(:topic_name2) { "differnt-topic-name" }
   let(:message1) { "new-message-here" }
@@ -28,14 +28,14 @@ describe Google::Cloud::Pubsub::AsyncPublisher, :mock_pubsub do
 
   it "publishes a message" do
     messages = [
-      Google::Pubsub::V1::PubsubMessage.new(data: msg_encoded1)
+      Google::Cloud::PubSub::V1::PubsubMessage.new(data: msg_encoded1)
     ]
-    publish_res = Google::Pubsub::V1::PublishResponse.decode_json({ message_ids: ["msg1"] }.to_json)
+    publish_res = Google::Cloud::PubSub::V1::PublishResponse.decode_json({ message_ids: ["msg1"] }.to_json)
     mock = Minitest::Mock.new
     mock.expect :publish, publish_res, [topic_path(topic_name), messages, options: default_options]
     pubsub.service.mocked_publisher = mock
 
-    publisher = Google::Cloud::Pubsub::AsyncPublisher.new topic_name, pubsub.service, interval: 10
+    publisher = Google::Cloud::PubSub::AsyncPublisher.new topic_name, pubsub.service, interval: 10
 
     publisher.publish message1
 
@@ -58,14 +58,14 @@ describe Google::Cloud::Pubsub::AsyncPublisher, :mock_pubsub do
 
   it "publishes a message with attributes" do
     messages = [
-      Google::Pubsub::V1::PubsubMessage.new(data: msg_encoded1, attributes: {"format" => "text"})
+      Google::Cloud::PubSub::V1::PubsubMessage.new(data: msg_encoded1, attributes: {"format" => "text"})
     ]
-    publish_res = Google::Pubsub::V1::PublishResponse.decode_json({ message_ids: ["msg1"] }.to_json)
+    publish_res = Google::Cloud::PubSub::V1::PublishResponse.decode_json({ message_ids: ["msg1"] }.to_json)
     mock = Minitest::Mock.new
     mock.expect :publish, publish_res, [topic_path(topic_name), messages, options: default_options]
     pubsub.service.mocked_publisher = mock
 
-    publisher = Google::Cloud::Pubsub::AsyncPublisher.new topic_name, pubsub.service, interval: 10
+    publisher = Google::Cloud::PubSub::AsyncPublisher.new topic_name, pubsub.service, interval: 10
 
     publisher.publish message1, format: :text
 
@@ -88,19 +88,19 @@ describe Google::Cloud::Pubsub::AsyncPublisher, :mock_pubsub do
 
   it "publishes a message with a callback" do
     messages = [
-      Google::Pubsub::V1::PubsubMessage.new(data: msg_encoded1)
+      Google::Cloud::PubSub::V1::PubsubMessage.new(data: msg_encoded1)
     ]
-    publish_res = Google::Pubsub::V1::PublishResponse.decode_json({ message_ids: ["msg1"] }.to_json)
+    publish_res = Google::Cloud::PubSub::V1::PublishResponse.decode_json({ message_ids: ["msg1"] }.to_json)
     mock = Minitest::Mock.new
     mock.expect :publish, publish_res, [topic_path(topic_name), messages, options: default_options]
     pubsub.service.mocked_publisher = mock
 
-    publisher = Google::Cloud::Pubsub::AsyncPublisher.new topic_name, pubsub.service, interval: 10
+    publisher = Google::Cloud::PubSub::AsyncPublisher.new topic_name, pubsub.service, interval: 10
 
     callback_called = false
 
     publisher.publish message1 do |result|
-      assert_kind_of Google::Cloud::Pubsub::PublishResult, result
+      assert_kind_of Google::Cloud::PubSub::PublishResult, result
       callback_called = true
     end
 
@@ -127,16 +127,16 @@ describe Google::Cloud::Pubsub::AsyncPublisher, :mock_pubsub do
 
   it "publishes multiple messages" do
     messages = [
-      Google::Pubsub::V1::PubsubMessage.new(data: msg_encoded1),
-      Google::Pubsub::V1::PubsubMessage.new(data: msg_encoded2),
-      Google::Pubsub::V1::PubsubMessage.new(data: msg_encoded3, attributes: {"format" => "none"})
+      Google::Cloud::PubSub::V1::PubsubMessage.new(data: msg_encoded1),
+      Google::Cloud::PubSub::V1::PubsubMessage.new(data: msg_encoded2),
+      Google::Cloud::PubSub::V1::PubsubMessage.new(data: msg_encoded3, attributes: {"format" => "none"})
     ]
-    publish_res = Google::Pubsub::V1::PublishResponse.decode_json({ message_ids: ["msg1", "msg2", "msg3"] }.to_json)
+    publish_res = Google::Cloud::PubSub::V1::PublishResponse.decode_json({ message_ids: ["msg1", "msg2", "msg3"] }.to_json)
     mock = Minitest::Mock.new
     mock.expect :publish, publish_res, [topic_path(topic_name), messages, options: default_options]
     pubsub.service.mocked_publisher = mock
 
-    publisher = Google::Cloud::Pubsub::AsyncPublisher.new topic_name, pubsub.service, interval: 10
+    publisher = Google::Cloud::PubSub::AsyncPublisher.new topic_name, pubsub.service, interval: 10
 
     publisher.publish message1
     publisher.publish message2
@@ -161,29 +161,29 @@ describe Google::Cloud::Pubsub::AsyncPublisher, :mock_pubsub do
 
   it "publishes multiple messages with callbacks" do
     messages = [
-      Google::Pubsub::V1::PubsubMessage.new(data: msg_encoded1),
-      Google::Pubsub::V1::PubsubMessage.new(data: msg_encoded2),
-      Google::Pubsub::V1::PubsubMessage.new(data: msg_encoded3, attributes: {"format" => "none"})
+      Google::Cloud::PubSub::V1::PubsubMessage.new(data: msg_encoded1),
+      Google::Cloud::PubSub::V1::PubsubMessage.new(data: msg_encoded2),
+      Google::Cloud::PubSub::V1::PubsubMessage.new(data: msg_encoded3, attributes: {"format" => "none"})
     ]
-    publish_res = Google::Pubsub::V1::PublishResponse.decode_json({ message_ids: ["msg1", "msg2", "msg3"] }.to_json)
+    publish_res = Google::Cloud::PubSub::V1::PublishResponse.decode_json({ message_ids: ["msg1", "msg2", "msg3"] }.to_json)
     mock = Minitest::Mock.new
     mock.expect :publish, publish_res, [topic_path(topic_name), messages, options: default_options]
     pubsub.service.mocked_publisher = mock
 
-    publisher = Google::Cloud::Pubsub::AsyncPublisher.new topic_name, pubsub.service, interval: 10
+    publisher = Google::Cloud::PubSub::AsyncPublisher.new topic_name, pubsub.service, interval: 10
 
     callback_count = 0
 
     publisher.publish message1 do |result|
-      assert_kind_of Google::Cloud::Pubsub::PublishResult, result
+      assert_kind_of Google::Cloud::PubSub::PublishResult, result
       callback_count += 1
     end
     publisher.publish message2 do |result|
-      assert_kind_of Google::Cloud::Pubsub::PublishResult, result
+      assert_kind_of Google::Cloud::PubSub::PublishResult, result
       callback_count += 1
     end
     publisher.publish message3, format: :none do |result|
-      assert_kind_of Google::Cloud::Pubsub::PublishResult, result
+      assert_kind_of Google::Cloud::PubSub::PublishResult, result
       callback_count += 1
     end
 
@@ -210,19 +210,19 @@ describe Google::Cloud::Pubsub::AsyncPublisher, :mock_pubsub do
 
   it "publishes multiple batches when message count limit is reached" do
     messages = 10.times.map do
-      Google::Pubsub::V1::PubsubMessage.new(data: msg_encoded1)
+      Google::Cloud::PubSub::V1::PubsubMessage.new(data: msg_encoded1)
     end
     message_ids = 10.times.map do |i|
       "msg#{i}"
     end
-    publish_res = Google::Pubsub::V1::PublishResponse.decode_json({ message_ids: message_ids }.to_json)
+    publish_res = Google::Cloud::PubSub::V1::PublishResponse.decode_json({ message_ids: message_ids }.to_json)
     mock = Minitest::Mock.new
     mock.expect :publish, publish_res, [topic_path(topic_name), messages, options: default_options]
     mock.expect :publish, publish_res, [topic_path(topic_name), messages, options: default_options]
     mock.expect :publish, publish_res, [topic_path(topic_name), messages, options: default_options]
     pubsub.service.mocked_publisher = mock
 
-    publisher = Google::Cloud::Pubsub::AsyncPublisher.new topic_name, pubsub.service, max_messages: 10, interval: 10
+    publisher = Google::Cloud::PubSub::AsyncPublisher.new topic_name, pubsub.service, max_messages: 10, interval: 10
 
     callbacks = 0
 
@@ -255,12 +255,12 @@ describe Google::Cloud::Pubsub::AsyncPublisher, :mock_pubsub do
 
   it "publishes multiple batches when message size limit is reached" do
     messages = 10.times.map do
-      Google::Pubsub::V1::PubsubMessage.new(data: msg_encoded1)
+      Google::Cloud::PubSub::V1::PubsubMessage.new(data: msg_encoded1)
     end
     message_ids = 10.times.map do |i|
       "msg#{i}"
     end
-    publish_res = Google::Pubsub::V1::PublishResponse.decode_json({ message_ids: message_ids }.to_json)
+    publish_res = Google::Cloud::PubSub::V1::PublishResponse.decode_json({ message_ids: message_ids }.to_json)
     mock = Minitest::Mock.new
     mock.expect :publish, publish_res, [topic_path(topic_name), messages, options: default_options]
     mock.expect :publish, publish_res, [topic_path(topic_name), messages, options: default_options]
@@ -268,7 +268,7 @@ describe Google::Cloud::Pubsub::AsyncPublisher, :mock_pubsub do
     pubsub.service.mocked_publisher = mock
 
     # 190 is bigger than 10 messages, but less than 11.
-    publisher = Google::Cloud::Pubsub::AsyncPublisher.new topic_name, pubsub.service, max_bytes: 250, interval: 10
+    publisher = Google::Cloud::PubSub::AsyncPublisher.new topic_name, pubsub.service, max_bytes: 250, interval: 10
 
     callbacks = 0
 
@@ -303,21 +303,21 @@ describe Google::Cloud::Pubsub::AsyncPublisher, :mock_pubsub do
 
   it "publishes when message size is greater than the limit" do
     skip "this test is problematic on CI"
-    message = Google::Pubsub::V1::PubsubMessage.new(data: msg_encoded1)
+    message = Google::Cloud::PubSub::V1::PubsubMessage.new(data: msg_encoded1)
     message_id = "msg1"
     big_msg_data = SecureRandom.random_bytes 120
-    big_message = Google::Pubsub::V1::PubsubMessage.new(data: big_msg_data)
+    big_message = Google::Cloud::PubSub::V1::PubsubMessage.new(data: big_msg_data)
     big_message_id = "msg999"
 
-    publish_res = Google::Pubsub::V1::PublishResponse.decode_json({ message_ids: [message_id] }.to_json)
-    big_publish_res = Google::Pubsub::V1::PublishResponse.decode_json({ message_ids: [big_message_id] }.to_json)
+    publish_res = Google::Cloud::PubSub::V1::PublishResponse.decode_json({ message_ids: [message_id] }.to_json)
+    big_publish_res = Google::Cloud::PubSub::V1::PublishResponse.decode_json({ message_ids: [big_message_id] }.to_json)
     mock = Minitest::Mock.new
     mock.expect :publish, publish_res, [topic_path(topic_name), [message], options: default_options]
     mock.expect :publish, big_publish_res, [topic_path(topic_name), [big_message], options: default_options]
     pubsub.service.mocked_publisher = mock
 
     # 190 is bigger than 10 messages, but less than 11.
-    publisher = Google::Cloud::Pubsub::AsyncPublisher.new topic_name, pubsub.service, max_bytes: 100
+    publisher = Google::Cloud::PubSub::AsyncPublisher.new topic_name, pubsub.service, max_bytes: 100
 
     callbacks = 0
 

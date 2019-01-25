@@ -104,7 +104,7 @@ class MockPubsub < Minitest::Spec
   let(:project) { "test" }
   let(:default_options) { Google::Gax::CallOptions.new(kwargs: { "google-cloud-resource-prefix" => "projects/#{project}" }) }
   let(:credentials) { OpenStruct.new(client: OpenStruct.new(updater_proc: Proc.new {})) }
-  let(:pubsub) { Google::Cloud::Pubsub::Project.new(Google::Cloud::Pubsub::Service.new(project, credentials)) }
+  let(:pubsub) { Google::Cloud::PubSub::Project.new(Google::Cloud::PubSub::Service.new(project, credentials)) }
 
   def token_options token
     Google::Gax::CallOptions.new(kwargs: { "google-cloud-resource-prefix" => "projects/#{project}" },

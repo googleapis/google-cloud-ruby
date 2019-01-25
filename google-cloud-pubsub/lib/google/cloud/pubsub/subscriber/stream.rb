@@ -22,7 +22,7 @@ require "concurrent"
 
 module Google
   module Cloud
-    module Pubsub
+    module PubSub
       class Subscriber
         ##
         # @private
@@ -56,7 +56,7 @@ module Google
             ) do
               # push empty request every 30 seconds to keep stream alive
               unless inventory.empty?
-                push Google::Pubsub::V1::StreamingPullRequest.new
+                push Google::Cloud::PubSub::V1::StreamingPullRequest.new
               end
             end.execute
 
@@ -317,7 +317,7 @@ module Google
           end
 
           def initial_input_request
-            Google::Pubsub::V1::StreamingPullRequest.new.tap do |req|
+            Google::Cloud::PubSub::V1::StreamingPullRequest.new.tap do |req|
               req.subscription = @subscriber.subscription_name
               req.stream_ack_deadline_seconds = @subscriber.deadline
               req.modify_deadline_ack_ids += @inventory.ack_ids
@@ -346,5 +346,7 @@ module Google
         end
       end
     end
+
+    Pubsub = PubSub unless const_defined? :Pubsub
   end
 end

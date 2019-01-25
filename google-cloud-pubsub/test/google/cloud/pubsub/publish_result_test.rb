@@ -14,11 +14,11 @@
 
 require "helper"
 
-describe Google::Cloud::Pubsub::PublishResult, :mock_pubsub do
+describe Google::Cloud::PubSub::PublishResult, :mock_pubsub do
   let(:data) { "msg-goes-here" }
   let(:attributes) { { "foo" => "FOO", "bar" => "BAR" } }
-  let(:msg) { Google::Cloud::Pubsub::Message.new data, attributes }
-  let(:result) { Google::Cloud::Pubsub::PublishResult.new msg }
+  let(:msg) { Google::Cloud::PubSub::Message.new data, attributes }
+  let(:result) { Google::Cloud::PubSub::PublishResult.new msg }
 
   it "knows attributes" do
     result.data.must_equal data
@@ -55,7 +55,7 @@ describe Google::Cloud::Pubsub::PublishResult, :mock_pubsub do
 
   describe "with error" do
     let(:error) { StandardError.new "something happened" }
-    let(:result) { Google::Cloud::Pubsub::PublishResult.new msg, error }
+    let(:result) { Google::Cloud::PubSub::PublishResult.new msg, error }
 
     it "knows attributes" do
       result.data.must_equal data

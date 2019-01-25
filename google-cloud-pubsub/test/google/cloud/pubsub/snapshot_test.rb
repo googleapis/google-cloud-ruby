@@ -14,12 +14,12 @@
 
 require "helper"
 
-describe Google::Cloud::Pubsub::Snapshot, :mock_pubsub do
+describe Google::Cloud::PubSub::Snapshot, :mock_pubsub do
   let(:topic_name) { "topic-name-goes-here" }
   let(:snapshot_name) { "snapshot-name-goes-here" }
   let(:labels) { { "foo" => "bar" } }
-  let(:snapshot_grpc) { Google::Pubsub::V1::Snapshot.decode_json(snapshot_json(topic_name, snapshot_name, labels: labels)) }
-  let(:snapshot) { Google::Cloud::Pubsub::Snapshot.from_grpc snapshot_grpc, pubsub.service }
+  let(:snapshot_grpc) { Google::Cloud::PubSub::V1::Snapshot.decode_json(snapshot_json(topic_name, snapshot_name, labels: labels)) }
+  let(:snapshot) { Google::Cloud::PubSub::Snapshot.from_grpc snapshot_grpc, pubsub.service }
   let(:new_labels) { { "baz" => "qux" } }
   let(:new_labels_map) do
     labels_map = Google::Protobuf::Map.new(:string, :string)
@@ -32,7 +32,7 @@ describe Google::Cloud::Pubsub::Snapshot, :mock_pubsub do
   end
 
   it "knows its topic" do
-    snapshot.topic.must_be_kind_of Google::Cloud::Pubsub::Topic
+    snapshot.topic.must_be_kind_of Google::Cloud::PubSub::Topic
     snapshot.topic.must_be :reference?
     snapshot.topic.wont_be :resource?
     snapshot.topic.name.must_equal topic_path(topic_name)

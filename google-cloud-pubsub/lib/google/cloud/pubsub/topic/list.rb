@@ -17,7 +17,7 @@ require "delegate"
 
 module Google
   module Cloud
-    module Pubsub
+    module PubSub
       class Topic
         ##
         # Topic::List is a special case Array with additional values.
@@ -25,7 +25,7 @@ module Google
           ##
           # If not empty, indicates that there are more topics
           # that match the request and this value should be passed to
-          # the next {Google::Cloud::Pubsub::Project#topics} to continue.
+          # the next {Google::Cloud::PubSub::Project#topics} to continue.
           attr_accessor :token
 
           ##
@@ -42,7 +42,7 @@ module Google
           # @example
           #   require "google/cloud/pubsub"
           #
-          #   pubsub = Google::Cloud::Pubsub.new
+          #   pubsub = Google::Cloud::PubSub.new
           #
           #   topics = pubsub.topics
           #   if topics.next?
@@ -61,7 +61,7 @@ module Google
           # @example
           #   require "google/cloud/pubsub"
           #
-          #   pubsub = Google::Cloud::Pubsub.new
+          #   pubsub = Google::Cloud::PubSub.new
           #
           #   topics = pubsub.topics
           #   if topics.next?
@@ -97,7 +97,7 @@ module Google
           # @example Iterating each topic by passing a block:
           #   require "google/cloud/pubsub"
           #
-          #   pubsub = Google::Cloud::Pubsub.new
+          #   pubsub = Google::Cloud::PubSub.new
           #
           #   topics = pubsub.topics
           #   topics.all do |topic|
@@ -107,7 +107,7 @@ module Google
           # @example Using the enumerator by not passing a block:
           #   require "google/cloud/pubsub"
           #
-          #   pubsub = Google::Cloud::Pubsub.new
+          #   pubsub = Google::Cloud::PubSub.new
           #
           #   topics = pubsub.topics
           #   all_names = topics.all.map do |topic|
@@ -117,7 +117,7 @@ module Google
           # @example Limit the number of API calls made:
           #   require "google/cloud/pubsub"
           #
-          #   pubsub = Google::Cloud::Pubsub.new
+          #   pubsub = Google::Cloud::PubSub.new
           #
           #   topics = pubsub.topics
           #   topics.all(request_limit: 10) do |topic|
@@ -143,7 +143,7 @@ module Google
 
           ##
           # @private New Topic::List from a
-          # Google::Pubsub::V1::ListTopicsResponse object.
+          # Google::Cloud::PubSub::V1::ListTopicsResponse object.
           def self.from_grpc grpc_list, service, max = nil
             topics = new(Array(grpc_list.topics).map do |grpc|
               Topic.from_grpc grpc, service
@@ -167,5 +167,7 @@ module Google
         end
       end
     end
+
+    Pubsub = PubSub unless const_defined? :Pubsub
   end
 end

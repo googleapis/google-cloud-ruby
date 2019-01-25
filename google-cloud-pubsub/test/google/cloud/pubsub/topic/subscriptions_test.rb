@@ -14,11 +14,11 @@
 
 require "helper"
 
-describe Google::Cloud::Pubsub::Topic, :subscriptions, :mock_pubsub do
+describe Google::Cloud::PubSub::Topic, :subscriptions, :mock_pubsub do
   let(:topic_name) { "topic-name-goes-here" }
-  let(:topic) { Google::Cloud::Pubsub::Topic.from_grpc Google::Pubsub::V1::Topic.decode_json(topic_json(topic_name)), pubsub.service }
+  let(:topic) { Google::Cloud::PubSub::Topic.from_grpc Google::Cloud::PubSub::V1::Topic.decode_json(topic_json(topic_name)), pubsub.service }
   let(:subscriptions_with_token) do
-    response = Google::Pubsub::V1::ListTopicSubscriptionsResponse.decode_json topic_subscriptions_json(3, "next_page_token")
+    response = Google::Cloud::PubSub::V1::ListTopicSubscriptionsResponse.decode_json topic_subscriptions_json(3, "next_page_token")
     paged_enum_struct response
   end
 
@@ -33,14 +33,14 @@ describe Google::Cloud::Pubsub::Topic, :subscriptions, :mock_pubsub do
 
     subs.count.must_equal 3
     subs.each do |sub|
-      sub.must_be_kind_of Google::Cloud::Pubsub::Subscription
+      sub.must_be_kind_of Google::Cloud::PubSub::Subscription
       sub.must_be :reference?
       sub.wont_be :resource?
     end
   end
 
   describe "reference topic that exists" do
-    let(:topic) { Google::Cloud::Pubsub::Topic.from_name topic_name, pubsub.service }
+    let(:topic) { Google::Cloud::PubSub::Topic.from_name topic_name, pubsub.service }
 
     it "lists subscriptions" do
       mock = Minitest::Mock.new
@@ -53,7 +53,7 @@ describe Google::Cloud::Pubsub::Topic, :subscriptions, :mock_pubsub do
 
       subs.count.must_equal 3
       subs.each do |sub|
-        sub.must_be_kind_of Google::Cloud::Pubsub::Subscription
+        sub.must_be_kind_of Google::Cloud::PubSub::Subscription
         sub.must_be :reference?
         sub.wont_be :resource?
       end
@@ -61,7 +61,7 @@ describe Google::Cloud::Pubsub::Topic, :subscriptions, :mock_pubsub do
   end
 
   describe "reference topic that does not exist" do
-    let(:topic) { Google::Cloud::Pubsub::Topic.from_name topic_name, pubsub.service }
+    let(:topic) { Google::Cloud::PubSub::Topic.from_name topic_name, pubsub.service }
 
     it "lists subscriptions" do
       stub = Object.new

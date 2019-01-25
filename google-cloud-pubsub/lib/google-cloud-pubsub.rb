@@ -45,7 +45,7 @@ module Google
     # @param [Hash] client_config A hash of values to override the default
     #   behavior of the API client. Optional.
     #
-    # @return [Google::Cloud::Pubsub::Project]
+    # @return [Google::Cloud::PubSub::Project]
     #
     # @example
     #   require "google/cloud"
@@ -81,7 +81,8 @@ module Google
     #   credentials is used.
     # @param [String, Hash, Google::Auth::Credentials] credentials The path to
     #   the keyfile as a String, the contents of the keyfile as a Hash, or a
-    #   Google::Auth::Credentials object. (See {Pubsub::Credentials})
+    #   Google::Auth::Credentials object.
+    #   (See {Google::Cloud::PubSub::Credentials})
     # @param [String, Array<String>] scope The OAuth 2.0 scopes controlling the
     #   set of resources and operations that the connection can access. See
     #   [Using OAuth 2.0 to Access Google
@@ -94,7 +95,7 @@ module Google
     # @param [Hash] client_config A hash of values to override the default
     #   behavior of the API client. Optional.
     #
-    # @return [Google::Cloud::Pubsub::Project]
+    # @return [Google::Cloud::PubSub::Project]
     #
     # @example
     #   require "google/cloud"
@@ -107,7 +108,7 @@ module Google
     def self.pubsub project_id = nil, credentials = nil, scope: nil,
                     timeout: nil, client_config: nil
       require "google/cloud/pubsub"
-      Google::Cloud::Pubsub.new project_id: project_id,
+      Google::Cloud::PubSub.new project_id: project_id,
                                 credentials: credentials,
                                 scope: scope, timeout: timeout,
                                 client_config: client_config

@@ -22,7 +22,7 @@ require "google/gax/errors"
 
 module Google
   module Cloud
-    module Pubsub
+    module PubSub
       ##
       # @private Represents the GAX Pub/Sub service, including all the API
       # methods.
@@ -66,7 +66,7 @@ module Google
               timeout:       timeout,
               client_config: client_config,
               lib_name:      "gccl",
-              lib_version:   Google::Cloud::Pubsub::VERSION
+              lib_version:   Google::Cloud::PubSub::VERSION
             )
           end
         end
@@ -80,7 +80,7 @@ module Google
               timeout:       timeout,
               client_config: client_config,
               lib_name:      "gccl",
-              lib_version:   Google::Cloud::Pubsub::VERSION
+              lib_version:   Google::Cloud::PubSub::VERSION
             )
           end
         end
@@ -221,7 +221,7 @@ module Google
           name = subscription_path(subscription_name, options)
           topic = topic_path(topic)
           push_config = if options[:endpoint]
-                          Google::Pubsub::V1::PushConfig.new \
+                          Google::Cloud::PubSub::V1::PushConfig.new \
                             push_endpoint: options[:endpoint],
                             attributes:    (options[:attributes] || {}).to_h
                         end
@@ -296,7 +296,7 @@ module Google
           subscription = subscription_path(subscription)
           # Convert attributes to strings to match the protobuf definition
           attributes = Hash[attributes.map { |k, v| [String(k), String(v)] }]
-          push_config = Google::Pubsub::V1::PushConfig.new(
+          push_config = Google::Cloud::PubSub::V1::PushConfig.new(
             push_endpoint: endpoint,
             attributes:    attributes
           )
@@ -489,5 +489,7 @@ module Google
         end
       end
     end
+
+    Pubsub = PubSub unless const_defined? :Pubsub
   end
 end

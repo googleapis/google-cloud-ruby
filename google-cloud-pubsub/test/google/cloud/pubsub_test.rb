@@ -81,9 +81,9 @@ describe Google::Cloud do
       ENV.stub :[], nil do
         # Get project_id from Google Compute Engine
         Google::Cloud.stub :env, OpenStruct.new(project_id: "project-id") do
-          Google::Cloud::Pubsub::Credentials.stub :default, default_credentials do
+          Google::Cloud::PubSub::Credentials.stub :default, default_credentials do
             pubsub = Google::Cloud.pubsub
-            pubsub.must_be_kind_of Google::Cloud::Pubsub::Project
+            pubsub.must_be_kind_of Google::Cloud::PubSub::Project
             pubsub.project.must_equal "project-id"
             pubsub.service.credentials.must_equal default_credentials
           end
@@ -109,10 +109,10 @@ describe Google::Cloud do
       ENV.stub :[], nil do
         File.stub :file?, true, ["path/to/keyfile.json"] do
           File.stub :read, found_credentials, ["path/to/keyfile.json"] do
-            Google::Cloud::Pubsub::Credentials.stub :new, stubbed_credentials do
-              Google::Cloud::Pubsub::Service.stub :new, stubbed_service do
+            Google::Cloud::PubSub::Credentials.stub :new, stubbed_credentials do
+              Google::Cloud::PubSub::Service.stub :new, stubbed_service do
                 pubsub = Google::Cloud.pubsub "project-id", "path/to/keyfile.json"
-                pubsub.must_be_kind_of Google::Cloud::Pubsub::Project
+                pubsub.must_be_kind_of Google::Cloud::PubSub::Project
                 pubsub.project.must_equal "project-id"
                 pubsub.service.must_be_kind_of OpenStruct
               end
@@ -123,7 +123,7 @@ describe Google::Cloud do
     end
   end
 
-  describe "Pubsub.new" do
+  describe "PubSub.new" do
     let(:default_credentials) do
       creds = OpenStruct.new empty: true
       def creds.is_a? target
@@ -142,9 +142,9 @@ describe Google::Cloud do
       ENV.stub :[], nil do
         # Get project_id from Google Compute Engine
         Google::Cloud.stub :env, OpenStruct.new(project_id: "project-id") do
-          Google::Cloud::Pubsub::Credentials.stub :default, default_credentials do
-            pubsub = Google::Cloud::Pubsub.new
-            pubsub.must_be_kind_of Google::Cloud::Pubsub::Project
+          Google::Cloud::PubSub::Credentials.stub :default, default_credentials do
+            pubsub = Google::Cloud::PubSub.new
+            pubsub.must_be_kind_of Google::Cloud::PubSub::Project
             pubsub.project.must_equal "project-id"
             pubsub.service.credentials.must_equal default_credentials
           end
@@ -170,10 +170,10 @@ describe Google::Cloud do
       ENV.stub :[], nil do
         File.stub :file?, true, ["path/to/keyfile.json"] do
           File.stub :read, found_credentials, ["path/to/keyfile.json"] do
-            Google::Cloud::Pubsub::Credentials.stub :new, stubbed_credentials do
-              Google::Cloud::Pubsub::Service.stub :new, stubbed_service do
-                pubsub = Google::Cloud::Pubsub.new project_id: "project-id", credentials: "path/to/keyfile.json"
-                pubsub.must_be_kind_of Google::Cloud::Pubsub::Project
+            Google::Cloud::PubSub::Credentials.stub :new, stubbed_credentials do
+              Google::Cloud::PubSub::Service.stub :new, stubbed_service do
+                pubsub = Google::Cloud::PubSub.new project_id: "project-id", credentials: "path/to/keyfile.json"
+                pubsub.must_be_kind_of Google::Cloud::PubSub::Project
                 pubsub.project.must_equal "project-id"
                 pubsub.service.must_be_kind_of OpenStruct
               end
@@ -201,10 +201,10 @@ describe Google::Cloud do
       ENV.stub :[], nil do
         File.stub :file?, true, ["path/to/keyfile.json"] do
           File.stub :read, found_credentials, ["path/to/keyfile.json"] do
-            Google::Cloud::Pubsub::Credentials.stub :new, stubbed_credentials do
-              Google::Cloud::Pubsub::Service.stub :new, stubbed_service do
-                pubsub = Google::Cloud::Pubsub.new project: "project-id", keyfile: "path/to/keyfile.json"
-                pubsub.must_be_kind_of Google::Cloud::Pubsub::Project
+            Google::Cloud::PubSub::Credentials.stub :new, stubbed_credentials do
+              Google::Cloud::PubSub::Service.stub :new, stubbed_service do
+                pubsub = Google::Cloud::PubSub.new project: "project-id", keyfile: "path/to/keyfile.json"
+                pubsub.must_be_kind_of Google::Cloud::PubSub::Project
                 pubsub.project.must_equal "project-id"
                 pubsub.service.must_be_kind_of OpenStruct
               end
@@ -221,9 +221,9 @@ describe Google::Cloud do
       ENV.stub :[], emulator_check do
         # Get project_id from Google Compute Engine
         Google::Cloud.stub :env, OpenStruct.new(project_id: "project-id") do
-          Google::Cloud::Pubsub::Credentials.stub :default, default_credentials do
-            pubsub = Google::Cloud::Pubsub.new
-            pubsub.must_be_kind_of Google::Cloud::Pubsub::Project
+          Google::Cloud::PubSub::Credentials.stub :default, default_credentials do
+            pubsub = Google::Cloud::PubSub.new
+            pubsub.must_be_kind_of Google::Cloud::PubSub::Project
             pubsub.project.must_equal "project-id"
             pubsub.service.credentials.must_equal :this_channel_is_insecure
             pubsub.service.host.must_equal emulator_host
@@ -238,9 +238,9 @@ describe Google::Cloud do
       ENV.stub :[], nil do
         # Get project_id from Google Compute Engine
         Google::Cloud.stub :env, OpenStruct.new(project_id: "project-id") do
-          Google::Cloud::Pubsub::Credentials.stub :default, default_credentials do
-            pubsub = Google::Cloud::Pubsub.new emulator_host: emulator_host
-            pubsub.must_be_kind_of Google::Cloud::Pubsub::Project
+          Google::Cloud::PubSub::Credentials.stub :default, default_credentials do
+            pubsub = Google::Cloud::PubSub.new emulator_host: emulator_host
+            pubsub.must_be_kind_of Google::Cloud::PubSub::Project
             pubsub.project.must_equal "project-id"
             pubsub.service.credentials.must_equal :this_channel_is_insecure
             pubsub.service.host.must_equal emulator_host
@@ -270,10 +270,10 @@ describe Google::Cloud do
         Google::Cloud.stub :env, empty_env do
           File.stub :file?, true, ["path/to/keyfile.json"] do
             File.stub :read, found_credentials, ["path/to/keyfile.json"] do
-              Google::Cloud::Pubsub::Credentials.stub :new, stubbed_credentials do
-                Google::Cloud::Pubsub::Service.stub :new, stubbed_service do
-                  pubsub = Google::Cloud::Pubsub.new credentials: "path/to/keyfile.json"
-                  pubsub.must_be_kind_of Google::Cloud::Pubsub::Project
+              Google::Cloud::PubSub::Credentials.stub :new, stubbed_credentials do
+                Google::Cloud::PubSub::Service.stub :new, stubbed_service do
+                  pubsub = Google::Cloud::PubSub.new credentials: "path/to/keyfile.json"
+                  pubsub.must_be_kind_of Google::Cloud::PubSub::Project
                   pubsub.project.must_equal "project-id"
                   pubsub.service.must_be_kind_of OpenStruct
                 end
@@ -285,7 +285,7 @@ describe Google::Cloud do
     end
   end
 
-  describe "Pubsub.configure" do
+  describe "PubSub.configure" do
     let(:found_credentials) { "{}" }
     let :pubsub_client_config do
       {"interfaces"=>
@@ -321,10 +321,10 @@ describe Google::Cloud do
 
         File.stub :file?, true, ["path/to/keyfile.json"] do
           File.stub :read, found_credentials, ["path/to/keyfile.json"] do
-            Google::Cloud::Pubsub::Credentials.stub :new, stubbed_credentials do
-              Google::Cloud::Pubsub::Service.stub :new, stubbed_service do
-                pubsub = Google::Cloud::Pubsub.new
-                pubsub.must_be_kind_of Google::Cloud::Pubsub::Project
+            Google::Cloud::PubSub::Credentials.stub :new, stubbed_credentials do
+              Google::Cloud::PubSub::Service.stub :new, stubbed_service do
+                pubsub = Google::Cloud::PubSub.new
+                pubsub.must_be_kind_of Google::Cloud::PubSub::Project
                 pubsub.project.must_equal "project-id"
                 pubsub.service.must_be_kind_of OpenStruct
               end
@@ -358,10 +358,10 @@ describe Google::Cloud do
 
         File.stub :file?, true, ["path/to/keyfile.json"] do
           File.stub :read, found_credentials, ["path/to/keyfile.json"] do
-            Google::Cloud::Pubsub::Credentials.stub :new, stubbed_credentials do
-              Google::Cloud::Pubsub::Service.stub :new, stubbed_service do
-                pubsub = Google::Cloud::Pubsub.new
-                pubsub.must_be_kind_of Google::Cloud::Pubsub::Project
+            Google::Cloud::PubSub::Credentials.stub :new, stubbed_credentials do
+              Google::Cloud::PubSub::Service.stub :new, stubbed_service do
+                pubsub = Google::Cloud::PubSub.new
+                pubsub.must_be_kind_of Google::Cloud::PubSub::Project
                 pubsub.project.must_equal "project-id"
                 pubsub.service.must_be_kind_of OpenStruct
               end
@@ -388,7 +388,7 @@ describe Google::Cloud do
       # Clear all environment variables
       ENV.stub :[], nil do
         # Set new configuration
-        Google::Cloud::Pubsub.configure do |config|
+        Google::Cloud::PubSub.configure do |config|
           config.project = "project-id"
           config.keyfile = "path/to/keyfile.json"
           config.timeout = 42
@@ -397,10 +397,10 @@ describe Google::Cloud do
 
         File.stub :file?, true, ["path/to/keyfile.json"] do
           File.stub :read, found_credentials, ["path/to/keyfile.json"] do
-            Google::Cloud::Pubsub::Credentials.stub :new, stubbed_credentials do
-              Google::Cloud::Pubsub::Service.stub :new, stubbed_service do
-                pubsub = Google::Cloud::Pubsub.new
-                pubsub.must_be_kind_of Google::Cloud::Pubsub::Project
+            Google::Cloud::PubSub::Credentials.stub :new, stubbed_credentials do
+              Google::Cloud::PubSub::Service.stub :new, stubbed_service do
+                pubsub = Google::Cloud::PubSub.new
+                pubsub.must_be_kind_of Google::Cloud::PubSub::Project
                 pubsub.project.must_equal "project-id"
                 pubsub.service.must_be_kind_of OpenStruct
               end
@@ -427,7 +427,7 @@ describe Google::Cloud do
       # Clear all environment variables
       ENV.stub :[], nil do
         # Set new configuration
-        Google::Cloud::Pubsub.configure do |config|
+        Google::Cloud::PubSub.configure do |config|
           config.project_id = "project-id"
           config.credentials = "path/to/keyfile.json"
           config.timeout = 42
@@ -436,10 +436,10 @@ describe Google::Cloud do
 
         File.stub :file?, true, ["path/to/keyfile.json"] do
           File.stub :read, found_credentials, ["path/to/keyfile.json"] do
-            Google::Cloud::Pubsub::Credentials.stub :new, stubbed_credentials do
-              Google::Cloud::Pubsub::Service.stub :new, stubbed_service do
-                pubsub = Google::Cloud::Pubsub.new
-                pubsub.must_be_kind_of Google::Cloud::Pubsub::Project
+            Google::Cloud::PubSub::Credentials.stub :new, stubbed_credentials do
+              Google::Cloud::PubSub::Service.stub :new, stubbed_service do
+                pubsub = Google::Cloud::PubSub.new
+                pubsub.must_be_kind_of Google::Cloud::PubSub::Project
                 pubsub.project.must_equal "project-id"
                 pubsub.service.must_be_kind_of OpenStruct
               end
@@ -453,13 +453,13 @@ describe Google::Cloud do
       # Clear all environment variables
       ENV.stub :[], nil do
         # Set new configuration
-        Google::Cloud::Pubsub.configure do |config|
+        Google::Cloud::PubSub.configure do |config|
           config.project_id = "project-id"
           config.emulator_host = "localhost:4567"
         end
 
-        pubsub = Google::Cloud::Pubsub.new
-        pubsub.must_be_kind_of Google::Cloud::Pubsub::Project
+        pubsub = Google::Cloud::PubSub.new
+        pubsub.must_be_kind_of Google::Cloud::PubSub::Project
         pubsub.project.must_equal "project-id"
         pubsub.service.credentials.must_equal :this_channel_is_insecure
         pubsub.service.host.must_equal "localhost:4567"

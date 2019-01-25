@@ -22,7 +22,7 @@ require "google/cloud/pubsub/snapshot"
 
 module Google
   module Cloud
-    module Pubsub
+    module PubSub
       ##
       # # Project
       #
@@ -39,7 +39,7 @@ module Google
       # @example
       #   require "google/cloud/pubsub"
       #
-      #   pubsub = Google::Cloud::Pubsub.new
+      #   pubsub = Google::Cloud::PubSub.new
       #
       #   topic = pubsub.topic "my-topic"
       #   topic.publish "task completed"
@@ -60,7 +60,7 @@ module Google
         # @example
         #   require "google/cloud/pubsub"
         #
-        #   pubsub = Google::Cloud::Pubsub.new(
+        #   pubsub = Google::Cloud::PubSub.new(
         #     project_id: "my-project",
         #     credentials: "/path/to/keyfile.json"
         #   )
@@ -103,37 +103,37 @@ module Google
         #     * `:callback` (Integer) The number of threads to handle the
         #       published messages' callbacks. Default is 8.
         #
-        # @return [Google::Cloud::Pubsub::Topic, nil] Returns `nil` if topic
+        # @return [Google::Cloud::PubSub::Topic, nil] Returns `nil` if topic
         #   does not exist.
         #
         # @example
         #   require "google/cloud/pubsub"
         #
-        #   pubsub = Google::Cloud::Pubsub.new
+        #   pubsub = Google::Cloud::PubSub.new
         #   topic = pubsub.topic "existing-topic"
         #
         # @example By default `nil` will be returned if topic does not exist.
         #   require "google/cloud/pubsub"
         #
-        #   pubsub = Google::Cloud::Pubsub.new
+        #   pubsub = Google::Cloud::PubSub.new
         #   topic = pubsub.topic "non-existing-topic" # nil
         #
         # @example Create topic in a different project with the `project` flag.
         #   require "google/cloud/pubsub"
         #
-        #   pubsub = Google::Cloud::Pubsub.new
+        #   pubsub = Google::Cloud::PubSub.new
         #   topic = pubsub.topic "another-topic", project: "another-project"
         #
         # @example Skip the lookup against the service with `skip_lookup`:
         #   require "google/cloud/pubsub"
         #
-        #   pubsub = Google::Cloud::Pubsub.new
+        #   pubsub = Google::Cloud::PubSub.new
         #   topic = pubsub.topic "another-topic", skip_lookup: true
         #
         # @example Configuring AsyncPublisher to increase concurrent callbacks:
         #   require "google/cloud/pubsub"
         #
-        #   pubsub = Google::Cloud::Pubsub.new
+        #   pubsub = Google::Cloud::PubSub.new
         #   topic = pubsub.topic "my-topic",
         #                        async: { threads: { callback: 16 } }
         #
@@ -191,12 +191,12 @@ module Google
         #     * `:callback` (Integer) The number of threads to handle the
         #       published messages' callbacks. Default is 8.
         #
-        # @return [Google::Cloud::Pubsub::Topic]
+        # @return [Google::Cloud::PubSub::Topic]
         #
         # @example
         #   require "google/cloud/pubsub"
         #
-        #   pubsub = Google::Cloud::Pubsub.new
+        #   pubsub = Google::Cloud::PubSub.new
         #   topic = pubsub.create_topic "my-topic"
         #
         def create_topic topic_name, labels: nil, async: nil
@@ -214,13 +214,13 @@ module Google
         #   the system should return the next page of data.
         # @param [Integer] max Maximum number of topics to return.
         #
-        # @return [Array<Google::Cloud::Pubsub::Topic>] (See
-        #   {Google::Cloud::Pubsub::Topic::List})
+        # @return [Array<Google::Cloud::PubSub::Topic>] (See
+        #   {Google::Cloud::PubSub::Topic::List})
         #
         # @example
         #   require "google/cloud/pubsub"
         #
-        #   pubsub = Google::Cloud::Pubsub.new
+        #   pubsub = Google::Cloud::PubSub.new
         #
         #   topics = pubsub.topics
         #   topics.each do |topic|
@@ -230,7 +230,7 @@ module Google
         # @example Retrieve all topics: (See {Topic::List#all})
         #   require "google/cloud/pubsub"
         #
-        #   pubsub = Google::Cloud::Pubsub.new
+        #   pubsub = Google::Cloud::PubSub.new
         #
         #   topics = pubsub.topics
         #   topics.all do |topic|
@@ -258,13 +258,13 @@ module Google
         #   service. Calls made on this object will raise errors if the service
         #   resource does not exist. Default is `false`.
         #
-        # @return [Google::Cloud::Pubsub::Subscription, nil] Returns `nil` if
+        # @return [Google::Cloud::PubSub::Subscription, nil] Returns `nil` if
         #   the subscription does not exist
         #
         # @example
         #   require "google/cloud/pubsub"
         #
-        #   pubsub = Google::Cloud::Pubsub.new
+        #   pubsub = Google::Cloud::PubSub.new
         #
         #   sub = pubsub.subscription "my-sub"
         #   sub.name #=> "projects/my-project/subscriptions/my-sub"
@@ -272,7 +272,7 @@ module Google
         # @example Skip the lookup against the service with `skip_lookup`:
         #   require "google/cloud/pubsub"
         #
-        #   pubsub = Google::Cloud::Pubsub.new
+        #   pubsub = Google::Cloud::PubSub.new
         #
         #   # No API call is made to retrieve the subscription information.
         #   sub = pubsub.subscription "my-sub", skip_lookup: true
@@ -299,13 +299,13 @@ module Google
         #   part of the larger set of results to view.
         # @param [Integer] max Maximum number of subscriptions to return.
         #
-        # @return [Array<Google::Cloud::Pubsub::Subscription>] (See
-        #   {Google::Cloud::Pubsub::Subscription::List})
+        # @return [Array<Google::Cloud::PubSub::Subscription>] (See
+        #   {Google::Cloud::PubSub::Subscription::List})
         #
         # @example
         #   require "google/cloud/pubsub"
         #
-        #   pubsub = Google::Cloud::Pubsub.new
+        #   pubsub = Google::Cloud::PubSub.new
         #
         #   subs = pubsub.subscriptions
         #   subs.each do |sub|
@@ -315,7 +315,7 @@ module Google
         # @example Retrieve all subscriptions: (See {Subscription::List#all})
         #   require "google/cloud/pubsub"
         #
-        #   pubsub = Google::Cloud::Pubsub.new
+        #   pubsub = Google::Cloud::PubSub.new
         #
         #   subs = pubsub.subscriptions
         #   subs.all do |sub|
@@ -339,13 +339,13 @@ module Google
         #   part of the larger set of results to view.
         # @param [Integer] max Maximum number of snapshots to return.
         #
-        # @return [Array<Google::Cloud::Pubsub::Snapshot>] (See
-        #   {Google::Cloud::Pubsub::Snapshot::List})
+        # @return [Array<Google::Cloud::PubSub::Snapshot>] (See
+        #   {Google::Cloud::PubSub::Snapshot::List})
         #
         # @example
         #   require "google/cloud/pubsub"
         #
-        #   pubsub = Google::Cloud::Pubsub.new
+        #   pubsub = Google::Cloud::PubSub.new
         #
         #   snapshots = pubsub.snapshots
         #   snapshots.each do |snapshot|
@@ -355,7 +355,7 @@ module Google
         # @example Retrieve all snapshots: (See {Snapshot::List#all})
         #   require "google/cloud/pubsub"
         #
-        #   pubsub = Google::Cloud::Pubsub.new
+        #   pubsub = Google::Cloud::PubSub.new
         #
         #   snapshots = pubsub.snapshots
         #   snapshots.all do |snapshot|
@@ -388,5 +388,7 @@ module Google
         end
       end
     end
+
+    Pubsub = PubSub unless const_defined? :Pubsub
   end
 end

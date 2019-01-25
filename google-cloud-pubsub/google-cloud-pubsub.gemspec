@@ -3,7 +3,7 @@ require File.expand_path("../lib/google/cloud/pubsub/version", __FILE__)
 
 Gem::Specification.new do |gem|
   gem.name          = "google-cloud-pubsub"
-  gem.version       = Google::Cloud::Pubsub::VERSION
+  gem.version       = Google::Cloud::PubSub::VERSION
 
   gem.authors       = ["Mike Moore", "Chris Smith"]
   gem.email         = ["mike@blowmage.com", "quartzmo@gmail.com"]

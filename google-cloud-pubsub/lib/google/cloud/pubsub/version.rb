@@ -15,8 +15,10 @@
 
 module Google
   module Cloud
-    module Pubsub
+    module PubSub
       VERSION = "0.33.2".freeze
     end
+
+    Pubsub = PubSub unless const_defined? :Pubsub
   end
 end

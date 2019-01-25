@@ -14,41 +14,41 @@
 
 require "helper"
 
-describe Google::Cloud::Pubsub::Project, :mock_pubsub do
+describe Google::Cloud::PubSub::Project, :mock_pubsub do
   let(:topics_with_token) do
-    response = Google::Pubsub::V1::ListTopicsResponse.decode_json topics_json(3, "next_page_token")
+    response = Google::Cloud::PubSub::V1::ListTopicsResponse.decode_json topics_json(3, "next_page_token")
     paged_enum_struct response
   end
   let(:topics_without_token) do
-    response = Google::Pubsub::V1::ListTopicsResponse.decode_json topics_json(2)
+    response = Google::Cloud::PubSub::V1::ListTopicsResponse.decode_json topics_json(2)
     paged_enum_struct response
   end
   let(:topics_with_token_2) do
-    response = Google::Pubsub::V1::ListTopicsResponse.decode_json topics_json(3, "second_page_token")
+    response = Google::Cloud::PubSub::V1::ListTopicsResponse.decode_json topics_json(3, "second_page_token")
     paged_enum_struct response
   end
   let(:subscriptions_with_token) do
-    response = Google::Pubsub::V1::ListSubscriptionsResponse.decode_json subscriptions_json("fake-topic", 3, "next_page_token")
+    response = Google::Cloud::PubSub::V1::ListSubscriptionsResponse.decode_json subscriptions_json("fake-topic", 3, "next_page_token")
     paged_enum_struct response
   end
   let(:subscriptions_without_token) do
-    response = Google::Pubsub::V1::ListSubscriptionsResponse.decode_json subscriptions_json("fake-topic", 2)
+    response = Google::Cloud::PubSub::V1::ListSubscriptionsResponse.decode_json subscriptions_json("fake-topic", 2)
     paged_enum_struct response
   end
   let(:subscriptions_with_token_2) do
-    response = Google::Pubsub::V1::ListSubscriptionsResponse.decode_json subscriptions_json("fake-topic", 3, "second_page_token")
+    response = Google::Cloud::PubSub::V1::ListSubscriptionsResponse.decode_json subscriptions_json("fake-topic", 3, "second_page_token")
     paged_enum_struct response
   end
   let(:snapshots_with_token) do
-    response = Google::Pubsub::V1::ListSnapshotsResponse.decode_json snapshots_json("fake-topic", 3, "next_page_token")
+    response = Google::Cloud::PubSub::V1::ListSnapshotsResponse.decode_json snapshots_json("fake-topic", 3, "next_page_token")
     paged_enum_struct response
   end
   let(:snapshots_without_token) do
-    response = Google::Pubsub::V1::ListSnapshotsResponse.decode_json snapshots_json("fake-topic", 2)
+    response = Google::Cloud::PubSub::V1::ListSnapshotsResponse.decode_json snapshots_json("fake-topic", 2)
     paged_enum_struct response
   end
   let(:snapshots_with_token_2) do
-    response = Google::Pubsub::V1::ListSnapshotsResponse.decode_json snapshots_json("fake-topic", 3, "second_page_token")
+    response = Google::Cloud::PubSub::V1::ListSnapshotsResponse.decode_json snapshots_json("fake-topic", 3, "second_page_token")
     paged_enum_struct response
   end
   let(:labels) { { "foo" => "bar" } }
@@ -60,7 +60,7 @@ describe Google::Cloud::Pubsub::Project, :mock_pubsub do
   it "creates a topic" do
     new_topic_name = "new-topic-#{Time.now.to_i}"
 
-    create_res = Google::Pubsub::V1::Topic.decode_json topic_json(new_topic_name)
+    create_res = Google::Cloud::PubSub::V1::Topic.decode_json topic_json(new_topic_name)
     mock = Minitest::Mock.new
     mock.expect :create_topic, create_res, [topic_path(new_topic_name), labels: nil, options: default_options]
     pubsub.service.mocked_publisher = mock
@@ -75,7 +75,7 @@ describe Google::Cloud::Pubsub::Project, :mock_pubsub do
   it "creates a topic with new_topic_alias" do
     new_topic_name = "new-topic-#{Time.now.to_i}"
 
-    create_res = Google::Pubsub::V1::Topic.decode_json topic_json(new_topic_name)
+    create_res = Google::Cloud::PubSub::V1::Topic.decode_json topic_json(new_topic_name)
     mock = Minitest::Mock.new
     mock.expect :create_topic, create_res, [topic_path(new_topic_name), labels: nil, options: default_options]
     pubsub.service.mocked_publisher = mock
@@ -90,7 +90,7 @@ describe Google::Cloud::Pubsub::Project, :mock_pubsub do
   it "creates a topic with labels" do
     new_topic_name = "new-topic-#{Time.now.to_i}"
 
-    create_res = Google::Pubsub::V1::Topic.decode_json topic_json(new_topic_name, labels: labels)
+    create_res = Google::Cloud::PubSub::V1::Topic.decode_json topic_json(new_topic_name, labels: labels)
     mock = Minitest::Mock.new
     mock.expect :create_topic, create_res, [topic_path(new_topic_name), labels: labels, options: default_options]
     pubsub.service.mocked_publisher = mock
@@ -107,7 +107,7 @@ describe Google::Cloud::Pubsub::Project, :mock_pubsub do
   it "gets a topic" do
     topic_name = "found-topic"
 
-    get_res = Google::Pubsub::V1::Topic.decode_json topic_json(topic_name)
+    get_res = Google::Cloud::PubSub::V1::Topic.decode_json topic_json(topic_name)
     mock = Minitest::Mock.new
     mock.expect :get_topic, get_res, [topic_path(topic_name), options: default_options]
     pubsub.service.mocked_publisher = mock
@@ -124,7 +124,7 @@ describe Google::Cloud::Pubsub::Project, :mock_pubsub do
   it "gets a topic with get_topic alias" do
     topic_name = "found-topic"
 
-    get_res = Google::Pubsub::V1::Topic.decode_json topic_json(topic_name)
+    get_res = Google::Cloud::PubSub::V1::Topic.decode_json topic_json(topic_name)
     mock = Minitest::Mock.new
     mock.expect :get_topic, get_res, [topic_path(topic_name), options: default_options]
     pubsub.service.mocked_publisher = mock
@@ -141,7 +141,7 @@ describe Google::Cloud::Pubsub::Project, :mock_pubsub do
   it "gets a topic with find_topic alias" do
     topic_name = "found-topic"
 
-    get_res = Google::Pubsub::V1::Topic.decode_json topic_json(topic_name)
+    get_res = Google::Cloud::PubSub::V1::Topic.decode_json topic_json(topic_name)
     mock = Minitest::Mock.new
     mock.expect :get_topic, get_res, [topic_path(topic_name), options: default_options]
     pubsub.service.mocked_publisher = mock
@@ -374,7 +374,7 @@ describe Google::Cloud::Pubsub::Project, :mock_pubsub do
   it "gets a subscription" do
     sub_name = "found-sub-#{Time.now.to_i}"
 
-    get_res = Google::Pubsub::V1::Subscription.decode_json subscription_json("random-topic", sub_name)
+    get_res = Google::Cloud::PubSub::V1::Subscription.decode_json subscription_json("random-topic", sub_name)
     mock = Minitest::Mock.new
     mock.expect :get_subscription, get_res, [subscription_path(sub_name), options: default_options]
     pubsub.service.mocked_subscriber = mock
@@ -384,7 +384,7 @@ describe Google::Cloud::Pubsub::Project, :mock_pubsub do
     mock.verify
 
     sub.wont_be :nil?
-    sub.must_be_kind_of Google::Cloud::Pubsub::Subscription
+    sub.must_be_kind_of Google::Cloud::PubSub::Subscription
     sub.name.must_equal subscription_path(sub_name)
     sub.wont_be :reference?
     sub.must_be :resource?
@@ -393,7 +393,7 @@ describe Google::Cloud::Pubsub::Project, :mock_pubsub do
   it "gets a subscription with get_subscription alias" do
     sub_name = "found-sub-#{Time.now.to_i}"
 
-    get_res = Google::Pubsub::V1::Subscription.decode_json subscription_json("random-topic", sub_name)
+    get_res = Google::Cloud::PubSub::V1::Subscription.decode_json subscription_json("random-topic", sub_name)
     mock = Minitest::Mock.new
     mock.expect :get_subscription, get_res, [subscription_path(sub_name), options: default_options]
     pubsub.service.mocked_subscriber = mock
@@ -403,7 +403,7 @@ describe Google::Cloud::Pubsub::Project, :mock_pubsub do
     mock.verify
 
     sub.wont_be :nil?
-    sub.must_be_kind_of Google::Cloud::Pubsub::Subscription
+    sub.must_be_kind_of Google::Cloud::PubSub::Subscription
     sub.name.must_equal subscription_path(sub_name)
     sub.wont_be :reference?
     sub.must_be :resource?
@@ -412,7 +412,7 @@ describe Google::Cloud::Pubsub::Project, :mock_pubsub do
   it "gets a subscription with find_subscription alias" do
     sub_name = "found-sub-#{Time.now.to_i}"
 
-    get_res = Google::Pubsub::V1::Subscription.decode_json subscription_json("random-topic", sub_name)
+    get_res = Google::Cloud::PubSub::V1::Subscription.decode_json subscription_json("random-topic", sub_name)
     mock = Minitest::Mock.new
     mock.expect :get_subscription, get_res, [subscription_path(sub_name), options: default_options]
     pubsub.service.mocked_subscriber = mock
@@ -422,7 +422,7 @@ describe Google::Cloud::Pubsub::Project, :mock_pubsub do
     mock.verify
 
     sub.wont_be :nil?
-    sub.must_be_kind_of Google::Cloud::Pubsub::Subscription
+    sub.must_be_kind_of Google::Cloud::PubSub::Subscription
     sub.name.must_equal subscription_path(sub_name)
     sub.wont_be :reference?
     sub.must_be :resource?
@@ -449,7 +449,7 @@ describe Google::Cloud::Pubsub::Project, :mock_pubsub do
 
     sub = pubsub.subscription sub_name, skip_lookup: true
     sub.wont_be :nil?
-    sub.must_be_kind_of Google::Cloud::Pubsub::Subscription
+    sub.must_be_kind_of Google::Cloud::PubSub::Subscription
     sub.name.must_equal subscription_path(sub_name)
     sub.must_be :reference?
     sub.wont_be :resource?
@@ -461,7 +461,7 @@ describe Google::Cloud::Pubsub::Project, :mock_pubsub do
 
     sub = pubsub.subscription sub_name, skip_lookup: true, project: "custom"
     sub.wont_be :nil?
-    sub.must_be_kind_of Google::Cloud::Pubsub::Subscription
+    sub.must_be_kind_of Google::Cloud::PubSub::Subscription
     sub.name.must_equal "projects/custom/subscriptions/#{sub_name}"
     sub.must_be :reference?
     sub.wont_be :resource?
@@ -478,7 +478,7 @@ describe Google::Cloud::Pubsub::Project, :mock_pubsub do
 
     subs.count.must_equal 3
     subs.each do |sub|
-      sub.must_be_kind_of Google::Cloud::Pubsub::Subscription
+      sub.must_be_kind_of Google::Cloud::PubSub::Subscription
     end
   end
 
@@ -493,7 +493,7 @@ describe Google::Cloud::Pubsub::Project, :mock_pubsub do
 
     subs.count.must_equal 3
     subs.each do |sub|
-      sub.must_be_kind_of Google::Cloud::Pubsub::Subscription
+      sub.must_be_kind_of Google::Cloud::PubSub::Subscription
     end
   end
 
@@ -508,7 +508,7 @@ describe Google::Cloud::Pubsub::Project, :mock_pubsub do
 
     subs.count.must_equal 3
     subs.each do |sub|
-      sub.must_be_kind_of Google::Cloud::Pubsub::Subscription
+      sub.must_be_kind_of Google::Cloud::PubSub::Subscription
     end
   end
 
@@ -563,7 +563,7 @@ describe Google::Cloud::Pubsub::Project, :mock_pubsub do
     first_subs.count.must_equal 3
     first_subs.next?.must_equal true
     first_subs.each do |sub|
-      sub.must_be_kind_of Google::Cloud::Pubsub::Subscription
+      sub.must_be_kind_of Google::Cloud::PubSub::Subscription
       sub.wont_be :reference?
       sub.must_be :resource?
     end
@@ -571,7 +571,7 @@ describe Google::Cloud::Pubsub::Project, :mock_pubsub do
     second_subs.count.must_equal 2
     second_subs.next?.must_equal false
     second_subs.each do |sub|
-      sub.must_be_kind_of Google::Cloud::Pubsub::Subscription
+      sub.must_be_kind_of Google::Cloud::PubSub::Subscription
       sub.wont_be :reference?
       sub.must_be :resource?
     end
@@ -592,7 +592,7 @@ describe Google::Cloud::Pubsub::Project, :mock_pubsub do
     first_subs.count.must_equal 3
     first_subs.next?.must_equal true
     first_subs.each do |sub|
-      sub.must_be_kind_of Google::Cloud::Pubsub::Subscription
+      sub.must_be_kind_of Google::Cloud::PubSub::Subscription
       sub.wont_be :reference?
       sub.must_be :resource?
     end
@@ -600,7 +600,7 @@ describe Google::Cloud::Pubsub::Project, :mock_pubsub do
     second_subs.count.must_equal 2
     second_subs.next?.must_equal false
     second_subs.each do |sub|
-      sub.must_be_kind_of Google::Cloud::Pubsub::Subscription
+      sub.must_be_kind_of Google::Cloud::PubSub::Subscription
       sub.wont_be :reference?
       sub.must_be :resource?
     end
@@ -619,7 +619,7 @@ describe Google::Cloud::Pubsub::Project, :mock_pubsub do
 
     subs.count.must_equal 5
     subs.each do |sub|
-      sub.must_be_kind_of Google::Cloud::Pubsub::Subscription
+      sub.must_be_kind_of Google::Cloud::PubSub::Subscription
       sub.wont_be :reference?
       sub.must_be :resource?
     end
@@ -638,7 +638,7 @@ describe Google::Cloud::Pubsub::Project, :mock_pubsub do
 
     subs.count.must_equal 5
     subs.each do |sub|
-      sub.must_be_kind_of Google::Cloud::Pubsub::Subscription
+      sub.must_be_kind_of Google::Cloud::PubSub::Subscription
       sub.wont_be :reference?
       sub.must_be :resource?
     end
@@ -657,7 +657,7 @@ describe Google::Cloud::Pubsub::Project, :mock_pubsub do
 
     subs.count.must_equal 5
     subs.each do |sub|
-      sub.must_be_kind_of Google::Cloud::Pubsub::Subscription
+      sub.must_be_kind_of Google::Cloud::PubSub::Subscription
       sub.wont_be :reference?
       sub.must_be :resource?
     end
@@ -676,7 +676,7 @@ describe Google::Cloud::Pubsub::Project, :mock_pubsub do
 
     subs.count.must_equal 6
     subs.each do |sub|
-      sub.must_be_kind_of Google::Cloud::Pubsub::Subscription
+      sub.must_be_kind_of Google::Cloud::PubSub::Subscription
       sub.wont_be :reference?
       sub.must_be :resource?
     end
@@ -696,7 +696,7 @@ describe Google::Cloud::Pubsub::Project, :mock_pubsub do
 
     snapshots.count.must_equal 3
     snapshots.each do |snapshot|
-      snapshot.must_be_kind_of Google::Cloud::Pubsub::Snapshot
+      snapshot.must_be_kind_of Google::Cloud::PubSub::Snapshot
     end
   end
 
@@ -711,7 +711,7 @@ describe Google::Cloud::Pubsub::Project, :mock_pubsub do
 
     snapshots.count.must_equal 3
     snapshots.each do |snapshot|
-      snapshot.must_be_kind_of Google::Cloud::Pubsub::Snapshot
+      snapshot.must_be_kind_of Google::Cloud::PubSub::Snapshot
     end
   end
 
@@ -726,7 +726,7 @@ describe Google::Cloud::Pubsub::Project, :mock_pubsub do
 
     snapshots.count.must_equal 3
     snapshots.each do |snapshot|
-      snapshot.must_be_kind_of Google::Cloud::Pubsub::Snapshot
+      snapshot.must_be_kind_of Google::Cloud::PubSub::Snapshot
     end
   end
 
@@ -781,13 +781,13 @@ describe Google::Cloud::Pubsub::Project, :mock_pubsub do
     first_subs.count.must_equal 3
     first_subs.next?.must_equal true
     first_subs.each do |snapshot|
-      snapshot.must_be_kind_of Google::Cloud::Pubsub::Snapshot
+      snapshot.must_be_kind_of Google::Cloud::PubSub::Snapshot
     end
 
     second_subs.count.must_equal 2
     second_subs.next?.must_equal false
     second_subs.each do |snapshot|
-      snapshot.must_be_kind_of Google::Cloud::Pubsub::Snapshot
+      snapshot.must_be_kind_of Google::Cloud::PubSub::Snapshot
     end
   end
 
@@ -806,13 +806,13 @@ describe Google::Cloud::Pubsub::Project, :mock_pubsub do
     first_subs.count.must_equal 3
     first_subs.next?.must_equal true
     first_subs.each do |snapshot|
-      snapshot.must_be_kind_of Google::Cloud::Pubsub::Snapshot
+      snapshot.must_be_kind_of Google::Cloud::PubSub::Snapshot
     end
 
     second_subs.count.must_equal 2
     second_subs.next?.must_equal false
     second_subs.each do |snapshot|
-      snapshot.must_be_kind_of Google::Cloud::Pubsub::Snapshot
+      snapshot.must_be_kind_of Google::Cloud::PubSub::Snapshot
     end
   end
 
@@ -829,7 +829,7 @@ describe Google::Cloud::Pubsub::Project, :mock_pubsub do
 
     snapshots.count.must_equal 5
     snapshots.each do |snapshot|
-      snapshot.must_be_kind_of Google::Cloud::Pubsub::Snapshot
+      snapshot.must_be_kind_of Google::Cloud::PubSub::Snapshot
     end
   end
 
@@ -846,7 +846,7 @@ describe Google::Cloud::Pubsub::Project, :mock_pubsub do
 
     snapshots.count.must_equal 5
     snapshots.each do |snapshot|
-      snapshot.must_be_kind_of Google::Cloud::Pubsub::Snapshot
+      snapshot.must_be_kind_of Google::Cloud::PubSub::Snapshot
     end
   end
 
@@ -863,7 +863,7 @@ describe Google::Cloud::Pubsub::Project, :mock_pubsub do
 
     snapshots.count.must_equal 5
     snapshots.each do |snapshot|
-      snapshot.must_be_kind_of Google::Cloud::Pubsub::Snapshot
+      snapshot.must_be_kind_of Google::Cloud::PubSub::Snapshot
     end
   end
 
@@ -880,7 +880,7 @@ describe Google::Cloud::Pubsub::Project, :mock_pubsub do
 
     snapshots.count.must_equal 6
     snapshots.each do |snapshot|
-      snapshot.must_be_kind_of Google::Cloud::Pubsub::Snapshot
+      snapshot.must_be_kind_of Google::Cloud::PubSub::Snapshot
     end
   end
 end

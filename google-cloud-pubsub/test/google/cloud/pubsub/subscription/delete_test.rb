@@ -14,13 +14,13 @@
 
 require "helper"
 
-describe Google::Cloud::Pubsub::Subscription, :delete, :mock_pubsub do
+describe Google::Cloud::PubSub::Subscription, :delete, :mock_pubsub do
   let(:topic_name) { "topic-name-goes-here" }
   let(:sub_name) { "subscription-name-goes-here" }
   let(:sub_json) { subscription_json topic_name, sub_name }
   let(:sub_hash) { JSON.parse sub_json }
-  let(:sub_grpc) { Google::Pubsub::V1::Subscription.decode_json(sub_json) }
-  let(:subscription) { Google::Cloud::Pubsub::Subscription.from_grpc sub_grpc, pubsub.service }
+  let(:sub_grpc) { Google::Cloud::PubSub::V1::Subscription.decode_json(sub_json) }
+  let(:subscription) { Google::Cloud::PubSub::Subscription.from_grpc sub_grpc, pubsub.service }
 
   it "can delete itself" do
     del_res = nil
@@ -35,7 +35,7 @@ describe Google::Cloud::Pubsub::Subscription, :delete, :mock_pubsub do
 
   describe "reference subscription object of a subscription that does exist" do
     let :subscription do
-      Google::Cloud::Pubsub::Subscription.from_name sub_name,
+      Google::Cloud::PubSub::Subscription.from_name sub_name,
                                             pubsub.service
     end
 
@@ -53,7 +53,7 @@ describe Google::Cloud::Pubsub::Subscription, :delete, :mock_pubsub do
 
   describe "reference subscription object of a subscription that does not exist" do
     let :subscription do
-      Google::Cloud::Pubsub::Subscription.from_name sub_name,
+      Google::Cloud::PubSub::Subscription.from_name sub_name,
                                             pubsub.service
     end
 

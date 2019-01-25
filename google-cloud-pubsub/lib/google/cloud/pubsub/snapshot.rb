@@ -18,7 +18,7 @@ require "google/cloud/pubsub/snapshot/list"
 
 module Google
   module Cloud
-    module Pubsub
+    module PubSub
       ##
       # # Snapshot
       #
@@ -35,7 +35,7 @@ module Google
       # @example
       #   require "google/cloud/pubsub"
       #
-      #   pubsub = Google::Cloud::Pubsub.new
+      #   pubsub = Google::Cloud::PubSub.new
       #   sub = pubsub.subscription "my-sub"
       #
       #   snapshot = sub.create_snapshot "my-snapshot"
@@ -47,14 +47,14 @@ module Google
         attr_accessor :service
 
         ##
-        # @private The gRPC Google::Pubsub::V1::Snapshot object.
+        # @private The gRPC Google::Cloud::PubSub::V1::Snapshot object.
         attr_accessor :grpc
 
         ##
         # @private Create an empty {Snapshot} object.
         def initialize
           @service = nil
-          @grpc = Google::Pubsub::V1::Snapshot.new
+          @grpc = Google::Cloud::PubSub::V1::Snapshot.new
         end
 
         ##
@@ -72,7 +72,7 @@ module Google
         # @example
         #   require "google/cloud/pubsub"
         #
-        #   pubsub = Google::Cloud::Pubsub.new
+        #   pubsub = Google::Cloud::PubSub.new
         #   sub = pubsub.subscription "my-sub"
         #
         #   snapshot = sub.create_snapshot "my-snapshot"
@@ -99,7 +99,7 @@ module Google
         # @example
         #   require "google/cloud/pubsub"
         #
-        #   pubsub = Google::Cloud::Pubsub.new
+        #   pubsub = Google::Cloud::PubSub.new
         #   sub = pubsub.subscription "my-sub"
         #
         #   snapshot = sub.create_snapshot "my-snapshot"
@@ -157,7 +157,7 @@ module Google
         # @example
         #   require "google/cloud/pubsub"
         #
-        #   pubsub = Google::Cloud::Pubsub.new
+        #   pubsub = Google::Cloud::PubSub.new
         #
         #   pubsub.snapshots.each do |snapshot|
         #     snapshot.delete
@@ -170,7 +170,7 @@ module Google
         end
 
         ##
-        # @private New Snapshot from a Google::Pubsub::V1::Snapshot
+        # @private New Snapshot from a Google::Cloud::PubSub::V1::Snapshot
         # object.
         def self.from_grpc grpc, service
           new.tap do |f|
@@ -196,5 +196,7 @@ module Google
         end
       end
     end
+
+    Pubsub = PubSub unless const_defined? :Pubsub
   end
 end

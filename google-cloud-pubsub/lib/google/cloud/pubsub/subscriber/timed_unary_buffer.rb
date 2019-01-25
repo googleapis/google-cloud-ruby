@@ -17,7 +17,7 @@ require "concurrent"
 
 module Google
   module Cloud
-    module Pubsub
+    module PubSub
       class Subscriber
         ##
         # @private
@@ -141,7 +141,7 @@ module Google
           end
 
           def create_acknowledge_requests ack_ids
-            req = Google::Pubsub::V1::AcknowledgeRequest.new(
+            req = Google::Cloud::PubSub::V1::AcknowledgeRequest.new(
               subscription: subscription_name,
               ack_ids:      ack_ids
             )
@@ -149,7 +149,7 @@ module Google
             return [req] if addl_to_create.zero?
 
             ack_ids.each_slice(addl_to_create + 1).map do |sliced_ack_ids|
-              Google::Pubsub::V1::AcknowledgeRequest.new(
+              Google::Cloud::PubSub::V1::AcknowledgeRequest.new(
                 subscription: subscription_name,
                 ack_ids:      sliced_ack_ids
               )
@@ -157,7 +157,7 @@ module Google
           end
 
           def create_modify_ack_deadline_requests deadline, ack_ids
-            req = Google::Pubsub::V1::ModifyAckDeadlineRequest.new(
+            req = Google::Cloud::PubSub::V1::ModifyAckDeadlineRequest.new(
               subscription:         subscription_name,
               ack_ids:              ack_ids,
               ack_deadline_seconds: deadline
@@ -166,7 +166,7 @@ module Google
             return [req] if addl_to_create.zero?
 
             ack_ids.each_slice(addl_to_create + 1).map do |sliced_ack_ids|
-              Google::Pubsub::V1::ModifyAckDeadlineRequest.new(
+              Google::Cloud::PubSub::V1::ModifyAckDeadlineRequest.new(
                 subscription:         subscription_name,
                 ack_ids:              sliced_ack_ids,
                 ack_deadline_seconds: deadline
@@ -215,5 +215,7 @@ module Google
         end
       end
     end
+
+    Pubsub = PubSub unless const_defined? :Pubsub
   end
 end

@@ -17,7 +17,7 @@ require "time"
 
 module Google
   module Cloud
-    module Pubsub
+    module PubSub
       ##
       # @private Helper module for converting Pub/Sub values.
       module Convert
@@ -59,5 +59,7 @@ module Google
         extend ClassMethods
       end
     end
+
+    Pubsub = PubSub unless const_defined? :Pubsub
   end
 end

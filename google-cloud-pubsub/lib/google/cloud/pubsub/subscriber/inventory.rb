@@ -17,7 +17,7 @@ require "monitor"
 
 module Google
   module Cloud
-    module Pubsub
+    module PubSub
       class Subscriber
         ##
         # @private
@@ -132,5 +132,7 @@ module Google
         end
       end
     end
+
+    Pubsub = PubSub unless const_defined? :Pubsub
   end
 end

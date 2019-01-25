@@ -78,7 +78,7 @@ The environment variables that Pub/Sub checks for project ID are:
 1. `PUBSUB_PROJECT`
 2. `GOOGLE_CLOUD_PROJECT`
 
-The environment variables that Pub/Sub checks for credentials are configured on {Google::Cloud::Pubsub::V1::Credentials}:
+The environment variables that Pub/Sub checks for credentials are configured on {Google::Cloud::PubSub::V1::Credentials}:
 
 1. `PUBSUB_CREDENTIALS` - Path to JSON file, or JSON contents
 2. `PUBSUB_KEYFILE` - Path to JSON file, or JSON contents
@@ -92,7 +92,7 @@ require "google/cloud/pubsub"
 ENV["PUBSUB_PROJECT"]     = "my-project-id"
 ENV["PUBSUB_CREDENTIALS"] = "path/to/keyfile.json"
 
-pubsub = Google::Cloud::Pubsub.new
+pubsub = Google::Cloud::PubSub.new
 ```
 
 ### Configuration
@@ -102,12 +102,12 @@ The **Project ID** and **Credentials JSON** can be configured instead of placing
 ```ruby
 require "google/cloud/pubsub"
 
-Google::Cloud::Pubsub.configure do |config|
+Google::Cloud::PubSub.configure do |config|
   config.project_id  = "my-project-id"
   config.credentials = "path/to/keyfile.json"
 end
 
-pubsub = Google::Cloud::Pubsub.new
+pubsub = Google::Cloud::PubSub.new
 ```
 
 ### Cloud SDK
