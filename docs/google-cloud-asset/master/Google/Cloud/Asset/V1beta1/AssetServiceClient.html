@@ -800,9 +800,12 @@ organization number (such as &quot;organizations/123&quot;), a project ID (such 
       
       
         &mdash;
-        <div class='inline'><p>Required. The time window for the asset history. The start time is
-required. The returned results contain all temporal assets whose time
-window overlap with read_time_window.
+        <div class='inline'><p>Optional. The time window for the asset history. Both start_time and
+end_time are optional and if set, it must be after 2018-10-02 UTC. If
+end_time is not set, it is default to current timestamp. If start_time is
+not set, the snapshot of the assets at end_time will be returned. The
+returned results contain all temporal assets whose time window overlap with
+read_time_window.
 A hash of the same form as <code>Google::Cloud::Asset::V1beta1::TimeWindow</code>
 can also be provided.</p>
 </div>
@@ -928,13 +931,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-350
-351
-352
-353
-354
-355
-356
 357
 358
 359
@@ -943,10 +939,17 @@ retries, etc.</p>
 362
 363
 364
-365</pre>
+365
+366
+367
+368
+369
+370
+371
+372</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/asset/v1beta1/asset_service_client.rb', line 350</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/asset/v1beta1/asset_service_client.rb', line 357</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_batch_get_assets_history'>batch_get_assets_history</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -1043,9 +1046,10 @@ to keep track of the export.</p>
       
       
         &mdash;
-        <div class='inline'><p>Required. The relative name of the root asset. This can only be an organization
-number (such as &quot;organizations/123&quot;), a project ID (such as
-&quot;projects/my-project-id&quot;), or a project number (such as &quot;projects/12345&quot;).</p>
+        <div class='inline'><p>Required. The relative name of the root asset. This can only be an
+organization number (such as &quot;organizations/123&quot;), a project ID (such as
+&quot;projects/my-project-id&quot;), a project number (such as &quot;projects/12345&quot;), or
+a folder number (such as &quot;folders/123&quot;).</p>
 </div>
       
     </li>
@@ -1078,11 +1082,11 @@ can also be provided.</p>
       
       
         &mdash;
-        <div class='inline'><p>Timestamp to take an asset snapshot. This can only be set to a timestamp in
-the past or of the current time. If not specified, the current time will be
-used. Due to delays in resource data collection and indexing, there is a
-volatile window during which running the same query may get different
-results.
+        <div class='inline'><p>Timestamp to take an asset snapshot. This can only be set to a timestamp
+between 2018-10-02 UTC (inclusive) and the current time. If not specified,
+the current time will be used. Due to delays in resource data collection
+and indexing, there is a volatile window during which running the same
+query may get different results.
 A hash of the same form as <code>Google::Protobuf::Timestamp</code>
 can also be provided.</p>
 </div>
@@ -1100,7 +1104,10 @@ can also be provided.</p>
       
         &mdash;
         <div class='inline'><p>A list of asset types of which to take a snapshot for. For example:
-&quot;google.compute.disk&quot;. If specified, only matching assets will be returned.</p>
+&quot;google.compute.Disk&quot;. If specified, only matching assets will be returned.
+See <a href="https://cloud.google.com/resource-manager/docs/cloud-asset-inventory/overview">Introduction to Cloud Asset
+Inventory</a>
+for all supported asset types.</p>
 </div>
       
     </li>
@@ -1176,10 +1183,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-277
-278
-279
-280
 281
 282
 283
@@ -1200,10 +1203,14 @@ retries, etc.</p>
 298
 299
 300
-301</pre>
+301
+302
+303
+304
+305</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/asset/v1beta1/asset_service_client.rb', line 277</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/asset/v1beta1/asset_service_client.rb', line 281</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_export_assets'>export_assets</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>

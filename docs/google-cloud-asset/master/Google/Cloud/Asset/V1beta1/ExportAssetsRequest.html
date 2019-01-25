@@ -257,7 +257,10 @@ js:
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns A list of asset types of which to take a snapshot for. For example:
-&quot;google.compute.disk&quot;. If specified, only matching assets will be returned.</p>
+&quot;google.compute.Disk&quot;. If specified, only matching assets will be returned.
+See <a href="https://cloud.google.com/resource-manager/docs/cloud-asset-inventory/overview">Introduction to Cloud Asset
+Inventory</a>
+for all supported asset types.</p>
 
 
   </div>
@@ -276,7 +279,10 @@ js:
       
         &mdash;
         <div class='inline'><p>A list of asset types of which to take a snapshot for. For example:
-&quot;google.compute.disk&quot;. If specified, only matching assets will be returned.</p>
+&quot;google.compute.Disk&quot;. If specified, only matching assets will be returned.
+See <a href="https://cloud.google.com/resource-manager/docs/cloud-asset-inventory/overview">Introduction to Cloud Asset
+Inventory</a>
+for all supported asset types.</p>
 </div>
       
     </li>
@@ -289,10 +295,10 @@ js:
       <pre class="lines">
 
 
-45</pre>
+49</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/asset/v1beta1/doc/google/cloud/asset/v1beta1/asset_service.rb', line 45</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/asset/v1beta1/doc/google/cloud/asset/v1beta1/asset_service.rb', line 49</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Asset::V1beta1::ExportAssetsRequest (class)">ExportAssetsRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -346,10 +352,10 @@ returned.</p>
       <pre class="lines">
 
 
-45</pre>
+49</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/asset/v1beta1/doc/google/cloud/asset/v1beta1/asset_service.rb', line 45</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/asset/v1beta1/doc/google/cloud/asset/v1beta1/asset_service.rb', line 49</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Asset::V1beta1::ExportAssetsRequest (class)">ExportAssetsRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -403,10 +409,10 @@ to. All results will be in newline delimited JSON format.</p>
       <pre class="lines">
 
 
-45</pre>
+49</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/asset/v1beta1/doc/google/cloud/asset/v1beta1/asset_service.rb', line 45</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/asset/v1beta1/doc/google/cloud/asset/v1beta1/asset_service.rb', line 49</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Asset::V1beta1::ExportAssetsRequest (class)">ExportAssetsRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -427,9 +433,10 @@ to. All results will be in newline delimited JSON format.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Required. The relative name of the root asset. This can only be an organization
-number (such as &quot;organizations/123&quot;), a project ID (such as
-&quot;projects/my-project-id&quot;), or a project number (such as &quot;projects/12345&quot;).</p>
+    <p>Returns Required. The relative name of the root asset. This can only be an
+organization number (such as &quot;organizations/123&quot;), a project ID (such as
+&quot;projects/my-project-id&quot;), a project number (such as &quot;projects/12345&quot;), or
+a folder number (such as &quot;folders/123&quot;).</p>
 
 
   </div>
@@ -447,9 +454,10 @@ number (such as &quot;organizations/123&quot;), a project ID (such as
       
       
         &mdash;
-        <div class='inline'><p>Required. The relative name of the root asset. This can only be an organization
-number (such as &quot;organizations/123&quot;), a project ID (such as
-&quot;projects/my-project-id&quot;), or a project number (such as &quot;projects/12345&quot;).</p>
+        <div class='inline'><p>Required. The relative name of the root asset. This can only be an
+organization number (such as &quot;organizations/123&quot;), a project ID (such as
+&quot;projects/my-project-id&quot;), a project number (such as &quot;projects/12345&quot;), or
+a folder number (such as &quot;folders/123&quot;).</p>
 </div>
       
     </li>
@@ -462,10 +470,10 @@ number (such as &quot;organizations/123&quot;), a project ID (such as
       <pre class="lines">
 
 
-45</pre>
+49</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/asset/v1beta1/doc/google/cloud/asset/v1beta1/asset_service.rb', line 45</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/asset/v1beta1/doc/google/cloud/asset/v1beta1/asset_service.rb', line 49</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Asset::V1beta1::ExportAssetsRequest (class)">ExportAssetsRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -486,11 +494,11 @@ number (such as &quot;organizations/123&quot;), a project ID (such as
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Timestamp to take an asset snapshot. This can only be set to a timestamp in
-the past or of the current time. If not specified, the current time will be
-used. Due to delays in resource data collection and indexing, there is a
-volatile window during which running the same query may get different
-results.</p>
+    <p>Returns Timestamp to take an asset snapshot. This can only be set to a timestamp
+between 2018-10-02 UTC (inclusive) and the current time. If not specified,
+the current time will be used. Due to delays in resource data collection
+and indexing, there is a volatile window during which running the same
+query may get different results.</p>
 
 
   </div>
@@ -508,11 +516,11 @@ results.</p>
       
       
         &mdash;
-        <div class='inline'><p>Timestamp to take an asset snapshot. This can only be set to a timestamp in
-the past or of the current time. If not specified, the current time will be
-used. Due to delays in resource data collection and indexing, there is a
-volatile window during which running the same query may get different
-results.</p>
+        <div class='inline'><p>Timestamp to take an asset snapshot. This can only be set to a timestamp
+between 2018-10-02 UTC (inclusive) and the current time. If not specified,
+the current time will be used. Due to delays in resource data collection
+and indexing, there is a volatile window during which running the same
+query may get different results.</p>
 </div>
       
     </li>
@@ -525,10 +533,10 @@ results.</p>
       <pre class="lines">
 
 
-45</pre>
+49</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/asset/v1beta1/doc/google/cloud/asset/v1beta1/asset_service.rb', line 45</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/asset/v1beta1/doc/google/cloud/asset/v1beta1/asset_service.rb', line 49</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Asset::V1beta1::ExportAssetsRequest (class)">ExportAssetsRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>

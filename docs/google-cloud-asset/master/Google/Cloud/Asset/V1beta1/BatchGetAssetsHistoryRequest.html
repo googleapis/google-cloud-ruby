@@ -202,7 +202,7 @@ js:
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Required.</p>
+    <span class="summary_desc"><div class='inline'><p>Optional.</p>
 </div></span>
   
 </li>
@@ -273,10 +273,10 @@ size of the asset name list is 100 in one request.</p>
       <pre class="lines">
 
 
-82</pre>
+89</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/asset/v1beta1/doc/google/cloud/asset/v1beta1/asset_service.rb', line 82</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/asset/v1beta1/doc/google/cloud/asset/v1beta1/asset_service.rb', line 89</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Asset::V1beta1::BatchGetAssetsHistoryRequest (class)">BatchGetAssetsHistoryRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -328,10 +328,10 @@ size of the asset name list is 100 in one request.</p>
       <pre class="lines">
 
 
-82</pre>
+89</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/asset/v1beta1/doc/google/cloud/asset/v1beta1/asset_service.rb', line 82</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/asset/v1beta1/doc/google/cloud/asset/v1beta1/asset_service.rb', line 89</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Asset::V1beta1::BatchGetAssetsHistoryRequest (class)">BatchGetAssetsHistoryRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -387,10 +387,10 @@ organization number (such as &quot;organizations/123&quot;), a project ID (such 
       <pre class="lines">
 
 
-82</pre>
+89</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/asset/v1beta1/doc/google/cloud/asset/v1beta1/asset_service.rb', line 82</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/asset/v1beta1/doc/google/cloud/asset/v1beta1/asset_service.rb', line 89</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Asset::V1beta1::BatchGetAssetsHistoryRequest (class)">BatchGetAssetsHistoryRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -411,9 +411,12 @@ organization number (such as &quot;organizations/123&quot;), a project ID (such 
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Required. The time window for the asset history. The start time is
-required. The returned results contain all temporal assets whose time
-window overlap with read_time_window.</p>
+    <p>Optional. The time window for the asset history. Both start_time and
+end_time are optional and if set, it must be after 2018-10-02 UTC. If
+end_time is not set, it is default to current timestamp. If start_time is
+not set, the snapshot of the assets at end_time will be returned. The
+returned results contain all temporal assets whose time window overlap with
+read_time_window.</p>
 
 
   </div>
@@ -431,9 +434,12 @@ window overlap with read_time_window.</p>
       
       
         &mdash;
-        <div class='inline'><p>Required. The time window for the asset history. The start time is
-required. The returned results contain all temporal assets whose time
-window overlap with read_time_window.</p>
+        <div class='inline'><p>Optional. The time window for the asset history. Both start_time and
+end_time are optional and if set, it must be after 2018-10-02 UTC. If
+end_time is not set, it is default to current timestamp. If start_time is
+not set, the snapshot of the assets at end_time will be returned. The
+returned results contain all temporal assets whose time window overlap with
+read_time_window.</p>
 </div>
       
     </li>
@@ -446,10 +452,10 @@ window overlap with read_time_window.</p>
       <pre class="lines">
 
 
-82</pre>
+89</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/asset/v1beta1/doc/google/cloud/asset/v1beta1/asset_service.rb', line 82</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/asset/v1beta1/doc/google/cloud/asset/v1beta1/asset_service.rb', line 89</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Asset::V1beta1::BatchGetAssetsHistoryRequest (class)">BatchGetAssetsHistoryRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
