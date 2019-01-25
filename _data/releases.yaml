@@ -383,6 +383,7 @@ google-cloud-spanner:
 - v0.22.0
 - v0.21.0
 google-cloud-speech:
+- v0.33.0
 - v0.32.0
 - v0.31.1
 - v0.31.0
