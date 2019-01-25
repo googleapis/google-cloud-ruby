@@ -35,9 +35,9 @@ module Google
         ##
         # @private Creates a field value object representing changes made to
         # fields in document data.
-        def initialize type, values = nil
+        def initialize type, value = nil
           @type = type
-          @values = values
+          @value = value
         end
 
         ##
@@ -65,10 +65,10 @@ module Google
 
         ##
         # @private
-        # The values to change to an individual field in document data,
-        # depending on the type of change.
+        # The value to change to an individual field in document data, depending
+        # on the type of change.
         #
-        # @return [Array<Object>] The values.
+        # @return [Object] The value.
         #
         # @example
         #   require "google/cloud/firestore"
@@ -82,13 +82,13 @@ module Google
         #     1, 2, 3
         #   )
         #   array_union.type #=> :array_union
-        #   array_union.values #=> [1, 2, 3]
+        #   array_union.value #=> [1, 2, 3]
         #
         #   nyc_ref.update({ name: "New York City",
         #                    lucky_numbers: array_union })
         #
-        def values
-          @values
+        def value
+          @value
         end
 
         ##
@@ -138,7 +138,7 @@ module Google
         end
 
         ##
-        # Creates a sentinel value to indicate the union of the given values
+        # Creates a sentinel value to indicate the union of the given value
         # with an array.
         #
         # @param [Object] values The values to add to the array. Required.
