@@ -67,7 +67,7 @@ js:
   <dl>
     <dt>Defined in:</dt>
     <dd>lib/google-cloud-pubsub.rb<span class="defines">,<br />
-  lib/google/cloud/pubsub.rb,<br /> lib/google/cloud/pubsub/topic.rb,<br /> lib/google/cloud/pubsub/policy.rb,<br /> lib/google/cloud/pubsub/convert.rb,<br /> lib/google/cloud/pubsub/message.rb,<br /> lib/google/cloud/pubsub/project.rb,<br /> lib/google/cloud/pubsub/service.rb,<br /> lib/google/cloud/pubsub/version.rb,<br /> lib/google/cloud/pubsub/snapshot.rb,<br /> lib/google/cloud/pubsub/subscriber.rb,<br /> lib/google/cloud/pubsub/topic/list.rb,<br /> lib/google/cloud/pubsub/credentials.rb,<br /> lib/google/cloud/pubsub/subscription.rb,<br /> lib/google/cloud/pubsub/snapshot/list.rb,<br /> lib/google/cloud/pubsub/publish_result.rb,<br /> lib/google/cloud/pubsub/v1/credentials.rb,<br /> lib/google/cloud/pubsub/async_publisher.rb,<br /> lib/google/cloud/pubsub/batch_publisher.rb,<br /> lib/google/cloud/pubsub/received_message.rb,<br /> lib/google/cloud/pubsub/subscriber/stream.rb,<br /> lib/google/cloud/pubsub/subscription/list.rb,<br /> lib/google/cloud/pubsub/v1/publisher_client.rb,<br /> lib/google/cloud/pubsub/subscriber/inventory.rb,<br /> lib/google/cloud/pubsub/v1/subscriber_client.rb,<br /> lib/google/cloud/pubsub/subscriber/enumerator_queue.rb,<br /> lib/google/cloud/pubsub/subscriber/timed_unary_buffer.rb</span>
+  lib/google/cloud/pubsub.rb,<br /> lib/google/cloud/pubsub/topic.rb,<br /> lib/google/cloud/pubsub/policy.rb,<br /> lib/google/cloud/pubsub/convert.rb,<br /> lib/google/cloud/pubsub/message.rb,<br /> lib/google/cloud/pubsub/project.rb,<br /> lib/google/cloud/pubsub/service.rb,<br /> lib/google/cloud/pubsub/version.rb,<br /> lib/google/cloud/pubsub/snapshot.rb,<br /> lib/google/cloud/pubsub/subscriber.rb,<br /> lib/google/cloud/pubsub/topic/list.rb,<br /> lib/google/cloud/pubsub/credentials.rb,<br /> lib/google/cloud/pubsub/subscription.rb,<br /> lib/google/cloud/pubsub/snapshot/list.rb,<br /> lib/google/cloud/pubsub/publish_result.rb,<br /> lib/google/cloud/pubsub/v1/credentials.rb,<br /> lib/google/cloud/pubsub/async_publisher.rb,<br /> lib/google/cloud/pubsub/batch_publisher.rb,<br /> lib/google/cloud/pubsub/received_message.rb,<br /> lib/google/cloud/pubsub/subscriber/stream.rb,<br /> lib/google/cloud/pubsub/subscription/list.rb,<br /> lib/google/cloud/pubsub/v1/publisher_client.rb,<br /> lib/google/cloud/pubsub/subscriber/inventory.rb,<br /> lib/google/cloud/pubsub/v1/subscriber_client.rb,<br /> lib/google/cloud/pubsub/subscriber/enumerator_queue.rb,<br /> lib/google/cloud/pubsub/subscriber/timed_unary_buffer.rb,<br /> lib/google/cloud/pubsub/v1/doc/google/pubsub/v1/pubsub.rb</span>
 </dd>
   </dl>
   
@@ -77,12 +77,38 @@ js:
 <p class="children">
   
     
-      <strong class="modules">Modules:</strong> <span class='object_link'><a href="Cloud/Pubsub.html" title="Google::Cloud::Pubsub (module)">Pubsub</a></span>
+      <strong class="modules">Modules:</strong> <span class='object_link'><a href="Cloud/PubSub.html" title="Google::Cloud::PubSub (module)">PubSub</a></span>
     
   
     
   
 </p>
+
+  
+    <h2>
+      Constant Summary
+      <small><a href="#" class="constants_summary_toggle">collapse</a></small>
+    </h2>
+
+    <dl class="constants">
+      
+        <dt id="Pubsub-constant" class="">Pubsub =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Legacy namespace</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='const'><span class='object_link'><a href="Cloud/PubSub.html" title="Google::Cloud::PubSub (module)">PubSub</a></span></span></pre></dd>
+      
+    </dl>
+  
 
 
 
@@ -101,7 +127,7 @@ js:
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#pubsub-class_method" title="pubsub (class method)">.<strong>pubsub</strong>(project_id = nil, credentials = nil, scope: nil, timeout: nil, client_config: nil)  &#x21d2; Google::Cloud::Pubsub::Project </a>
+      <a href="#pubsub-class_method" title="pubsub (class method)">.<strong>pubsub</strong>(project_id = nil, credentials = nil, scope: nil, timeout: nil, client_config: nil)  &#x21d2; Google::Cloud::PubSub::Project </a>
     
 
     
@@ -133,7 +159,7 @@ js:
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#pubsub-instance_method" title="#pubsub (instance method)">#<strong>pubsub</strong>(scope: nil, timeout: nil, client_config: nil)  &#x21d2; Google::Cloud::Pubsub::Project </a>
+      <a href="#pubsub-instance_method" title="#pubsub (instance method)">#<strong>pubsub</strong>(scope: nil, timeout: nil, client_config: nil)  &#x21d2; Google::Cloud::PubSub::Project </a>
     
 
     
@@ -165,7 +191,7 @@ js:
       <div class="method_details first">
   <h3 class="signature first" id="pubsub-class_method">
   
-    .<strong>pubsub</strong>(project_id = nil, credentials = nil, scope: nil, timeout: nil, client_config: nil)  &#x21d2; <tt><span class='object_link'><a href="Cloud/Pubsub/Project.html" title="Google::Cloud::Pubsub::Project (class)">Google::Cloud::Pubsub::Project</a></span></tt> 
+    .<strong>pubsub</strong>(project_id = nil, credentials = nil, scope: nil, timeout: nil, client_config: nil)  &#x21d2; <tt><span class='object_link'><a href="Cloud/PubSub/Project.html" title="Google::Cloud::PubSub::Project (class)">Google::Cloud::PubSub::Project</a></span></tt> 
   
 
   
@@ -232,7 +258,8 @@ credentials is used.</p>
         &mdash;
         <div class='inline'><p>The path to
 the keyfile as a String, the contents of the keyfile as a Hash, or a
-Google::Auth::Credentials object. (See <span class='object_link'><a href="Cloud/Pubsub/Credentials.html" title="Google::Cloud::Pubsub::Credentials (class)">Google::Cloud::Pubsub::Credentials</a></span>)</p>
+Google::Auth::Credentials object.
+(See <span class='object_link'><a href="Cloud/PubSub/Credentials.html" title="Google::Cloud::PubSub::Credentials (class)">Google::Cloud::PubSub::Credentials</a></span>)</p>
 </div>
       
     </li>
@@ -300,7 +327,7 @@ behavior of the API client. Optional.</p>
     <li>
       
       
-        <span class='type'>(<tt><span class='object_link'><a href="Cloud/Pubsub/Project.html" title="Google::Cloud::Pubsub::Project (class)">Google::Cloud::Pubsub::Project</a></span></tt>)</span>
+        <span class='type'>(<tt><span class='object_link'><a href="Cloud/PubSub/Project.html" title="Google::Cloud::PubSub::Project (class)">Google::Cloud::PubSub::Project</a></span></tt>)</span>
       
       
       
@@ -314,22 +341,22 @@ behavior of the API client. Optional.</p>
       <pre class="lines">
 
 
-107
 108
 109
 110
 111
 112
 113
-114</pre>
+114
+115</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google-cloud-pubsub.rb', line 107</span>
+      <pre class="code"><span class="info file"># File 'lib/google-cloud-pubsub.rb', line 108</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_pubsub'>pubsub</span> <span class='id identifier rubyid_project_id'>project_id</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='id identifier rubyid_credentials'>credentials</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>scope:</span> <span class='kw'>nil</span><span class='comma'>,</span>
                 <span class='label'>timeout:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>client_config:</span> <span class='kw'>nil</span>
   <span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/pubsub</span><span class='tstring_end'>&quot;</span></span>
-  <span class='const'><span class='object_link'><a href="../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Cloud/Pubsub.html" title="Google::Cloud::Pubsub (module)">Pubsub</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Cloud/Pubsub.html#new-class_method" title="Google::Cloud::Pubsub.new (method)">new</a></span></span> <span class='label'>project_id:</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span>
+  <span class='const'><span class='object_link'><a href="../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Cloud/PubSub.html" title="Google::Cloud::PubSub (module)">PubSub</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Cloud/PubSub.html#new-class_method" title="Google::Cloud::PubSub.new (method)">new</a></span></span> <span class='label'>project_id:</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span>
                             <span class='label'>credentials:</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='comma'>,</span>
                             <span class='label'>scope:</span> <span class='id identifier rubyid_scope'>scope</span><span class='comma'>,</span> <span class='label'>timeout:</span> <span class='id identifier rubyid_timeout'>timeout</span><span class='comma'>,</span>
                             <span class='label'>client_config:</span> <span class='id identifier rubyid_client_config'>client_config</span>
@@ -348,7 +375,7 @@ behavior of the API client. Optional.</p>
       <div class="method_details first">
   <h3 class="signature first" id="pubsub-instance_method">
   
-    #<strong>pubsub</strong>(scope: nil, timeout: nil, client_config: nil)  &#x21d2; <tt><span class='object_link'><a href="Cloud/Pubsub/Project.html" title="Google::Cloud::Pubsub::Project (class)">Google::Cloud::Pubsub::Project</a></span></tt> 
+    #<strong>pubsub</strong>(scope: nil, timeout: nil, client_config: nil)  &#x21d2; <tt><span class='object_link'><a href="Cloud/PubSub/Project.html" title="Google::Cloud::PubSub::Project (class)">Google::Cloud::PubSub::Project</a></span></tt> 
   
 
   
@@ -455,7 +482,7 @@ behavior of the API client. Optional.</p>
     <li>
       
       
-        <span class='type'>(<tt><span class='object_link'><a href="Cloud/Pubsub/Project.html" title="Google::Cloud::Pubsub::Project (class)">Google::Cloud::Pubsub::Project</a></span></tt>)</span>
+        <span class='type'>(<tt><span class='object_link'><a href="Cloud/PubSub/Project.html" title="Google::Cloud::PubSub::Project (class)">Google::Cloud::PubSub::Project</a></span></tt>)</span>
       
       
       
