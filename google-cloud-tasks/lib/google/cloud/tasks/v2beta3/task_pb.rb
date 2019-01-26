@@ -6,6 +6,7 @@ require 'google/protobuf'
 
 require 'google/api/annotations_pb'
 require 'google/cloud/tasks/v2beta3/target_pb'
+require 'google/protobuf/duration_pb'
 require 'google/protobuf/timestamp_pb'
 require 'google/rpc/status_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
@@ -13,6 +14,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :name, :string, 1
     optional :schedule_time, :message, 4, "google.protobuf.Timestamp"
     optional :create_time, :message, 5, "google.protobuf.Timestamp"
+    optional :dispatch_deadline, :message, 12, "google.protobuf.Duration"
     optional :dispatch_count, :int32, 6
     optional :response_count, :int32, 7
     optional :first_attempt, :message, 8, "google.cloud.tasks.v2beta3.Attempt"

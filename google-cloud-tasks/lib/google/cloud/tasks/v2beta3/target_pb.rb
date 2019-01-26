@@ -29,6 +29,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     value :HEAD, 3
     value :PUT, 4
     value :DELETE, 5
+    value :PATCH, 6
+    value :OPTIONS, 7
   end
 end
 
