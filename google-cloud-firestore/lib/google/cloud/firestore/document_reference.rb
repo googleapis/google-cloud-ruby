@@ -97,6 +97,7 @@ module Google
           collection_ids.each { |collection_id| yield col(collection_id) }
         end
         alias collections cols
+        alias list_collections cols
 
         ##
         # Retrieves a collection nested under the document snapshot.
