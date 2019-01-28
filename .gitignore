@@ -15,3 +15,6 @@ jsondoc/*
 # directories left by gh-pages
 _site/*
 .DS_STORE
+
+# Ignore stuff left by synth
+__pycache__
