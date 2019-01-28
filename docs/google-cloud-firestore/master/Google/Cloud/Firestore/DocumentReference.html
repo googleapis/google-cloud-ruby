@@ -161,7 +161,7 @@ resource at the referenced location may or may not exist.</p>
     
 
     
-      (also: #collections)
+      (also: #collections, #list_collections)
     
   </span>
   
@@ -497,16 +497,16 @@ the collection, relative to the document.</p>
       <pre class="lines">
 
 
-120
 121
 122
 123
 124
 125
-126</pre>
+126
+127</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/document_reference.rb', line 120</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/document_reference.rb', line 121</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_col'>col</span> <span class='id identifier rubyid_collection_path'>collection_path</span>
   <span class='kw'>if</span> <span class='id identifier rubyid_collection_path'>collection_path</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='period'>.</span><span class='id identifier rubyid_split'>split</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_count'>count</span><span class='period'>.</span><span class='id identifier rubyid_even?'>even?</span>
@@ -528,7 +528,7 @@ the collection, relative to the document.</p>
 
   
     <span class="aliases">Also known as:
-    <span class="names"><span id='collections-instance_method'>collections</span></span>
+    <span class="names"><span id='collections-instance_method'>collections</span>, <span id='list_collections-instance_method'>list_collections</span></span>
     </span>
   
 
@@ -736,15 +736,15 @@ the collection, relative to the document.</p>
       <pre class="lines">
 
 
-238
 239
 240
 241
 242
-243</pre>
+243
+244</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/document_reference.rb', line 238</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/document_reference.rb', line 239</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create'>create</span> <span class='id identifier rubyid_data'>data</span>
   <span class='id identifier rubyid_ensure_client!'>ensure_client!</span>
@@ -878,17 +878,17 @@ updated at that time. Optional.</p>
       <pre class="lines">
 
 
-450
 451
 452
 453
 454
 455
 456
-457</pre>
+457
+458</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/document_reference.rb', line 450</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/document_reference.rb', line 451</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete'>delete</span> <span class='label'>exists:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>update_time:</span> <span class='kw'>nil</span>
   <span class='id identifier rubyid_ensure_client!'>ensure_client!</span>
@@ -1076,14 +1076,14 @@ document root of the database.</p>
       <pre class="lines">
 
 
-145
 146
 147
 148
-149</pre>
+149
+150</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/document_reference.rb', line 145</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/document_reference.rb', line 146</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get'>get</span>
   <span class='id identifier rubyid_ensure_client!'>ensure_client!</span>
@@ -1212,16 +1212,16 @@ document reference.</p>
       <pre class="lines">
 
 
-176
 177
 178
 179
 180
 181
-182</pre>
+182
+183</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/document_reference.rb', line 176</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/document_reference.rb', line 177</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_listen'>listen</span> <span class='op'>&amp;</span><span class='id identifier rubyid_callback'>callback</span>
   <span class='id identifier rubyid_raise'>raise</span> <span class='const'>ArgumentError</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>callback required</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>if</span> <span class='id identifier rubyid_callback'>callback</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
@@ -1292,12 +1292,12 @@ document reference.</p>
       <pre class="lines">
 
 
-200
 201
-202</pre>
+202
+203</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/document_reference.rb', line 200</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/document_reference.rb', line 201</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_parent'>parent</span>
   <span class='const'><span class='object_link'><a href="CollectionReference.html" title="Google::Cloud::Firestore::CollectionReference (class)">CollectionReference</a></span></span><span class='period'>.</span><span class='id identifier rubyid_from_path'>from_path</span> <span class='id identifier rubyid_parent_path'>parent_path</span><span class='comma'>,</span> <span class='id identifier rubyid_client'>client</span>
@@ -1464,15 +1464,15 @@ document data.</p>
       <pre class="lines">
 
 
-317
 318
 319
 320
 321
-322</pre>
+322
+323</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/document_reference.rb', line 317</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/document_reference.rb', line 318</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_set'>set</span> <span class='id identifier rubyid_data'>data</span><span class='comma'>,</span> <span class='label'>merge:</span> <span class='kw'>nil</span>
   <span class='id identifier rubyid_ensure_client!'>ensure_client!</span>
@@ -1645,17 +1645,17 @@ updated at that time. Optional.</p>
       <pre class="lines">
 
 
-399
 400
 401
 402
 403
 404
 405
-406</pre>
+406
+407</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/document_reference.rb', line 399</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/document_reference.rb', line 400</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update'>update</span> <span class='id identifier rubyid_data'>data</span><span class='comma'>,</span> <span class='label'>update_time:</span> <span class='kw'>nil</span>
   <span class='id identifier rubyid_ensure_client!'>ensure_client!</span>
