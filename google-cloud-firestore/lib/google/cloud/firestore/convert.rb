@@ -601,12 +601,27 @@ module Google
             elsif field_value.type == :array_union
               Google::Firestore::V1beta1::DocumentTransform::FieldTransform.new(
                 field_path: field_path.formatted_string,
-                append_missing_elements: raw_to_value(Array(field_value.values)).array_value
+                append_missing_elements: raw_to_value(Array(field_value.value)).array_value
               )
             elsif field_value.type == :array_delete
               Google::Firestore::V1beta1::DocumentTransform::FieldTransform.new(
                 field_path: field_path.formatted_string,
-                remove_all_from_array: raw_to_value(Array(field_value.values)).array_value
+                remove_all_from_array: raw_to_value(Array(field_value.value)).array_value
+              )
+            elsif field_value.type == :increment
+              Google::Firestore::V1beta1::DocumentTransform::FieldTransform.new(
+                field_path: field_path.formatted_string,
+                increment: raw_to_value(field_value.value)
+              )
+            elsif field_value.type == :maximum
+              Google::Firestore::V1beta1::DocumentTransform::FieldTransform.new(
+                field_path: field_path.formatted_string,
+                maximum: raw_to_value(field_value.value)
+              )
+            elsif field_value.type == :minimum
+              Google::Firestore::V1beta1::DocumentTransform::FieldTransform.new(
+                field_path: field_path.formatted_string,
+                minimum: raw_to_value(field_value.value)
               )
             else
               raise ArgumentError, "unknown field transform #{field_value.type}"

@@ -35,9 +35,9 @@ module Google
         ##
         # @private Creates a field value object representing changes made to
         # fields in document data.
-        def initialize type, values = nil
+        def initialize type, value = nil
           @type = type
-          @values = values
+          @value = value
         end
 
         ##
@@ -65,10 +65,10 @@ module Google
 
         ##
         # @private
-        # The values to change to an individual field in document data,
-        # depending on the type of change.
+        # The value to change to an individual field in document data, depending
+        # on the type of change.
         #
-        # @return [Array<Object>] The values.
+        # @return [Object] The value.
         #
         # @example
         #   require "google/cloud/firestore"
@@ -82,13 +82,13 @@ module Google
         #     1, 2, 3
         #   )
         #   array_union.type #=> :array_union
-        #   array_union.values #=> [1, 2, 3]
+        #   array_union.value #=> [1, 2, 3]
         #
         #   nyc_ref.update({ name: "New York City",
         #                    lucky_numbers: array_union })
         #
-        def values
-          @values
+        def value
+          @value
         end
 
         ##
@@ -138,7 +138,7 @@ module Google
         end
 
         ##
-        # Creates a sentinel value to indicate the union of the given values
+        # Creates a sentinel value to indicate the union of the given value
         # with an array.
         #
         # @param [Object] values The values to add to the array. Required.
@@ -201,6 +201,136 @@ module Google
           Convert.raw_to_value values
 
           new :array_delete, values
+        end
+
+        ##
+        # Creates a sentinel value to indicate the addition the given value to
+        # the field's current value.
+        #
+        # If the field's current value is not an integer or a double value
+        # (Numeric), or if the field does not yet exist, the transformation will
+        # set the field to the given value. If either of the given value or the
+        # current field value are doubles, both values will be interpreted as
+        # doubles. Double arithmetic and representation of double values follow
+        # IEEE 754 semantics. If there is positive/negative integer overflow,
+        # the field is resolved to the largest magnitude positive/negative
+        # integer.
+        #
+        # @param [Numeric] value The value to add to the given value. Required.
+        #
+        # @return [FieldValue] The increment field value object.
+        #
+        # @raise [ArgumentError] if the value is not an Integer or Numeric.
+        #
+        # @example
+        #   require "google/cloud/firestore"
+        #
+        #   firestore = Google::Cloud::Firestore.new
+        #
+        #   # Get a document reference
+        #   nyc_ref = firestore.doc "cities/NYC"
+        #
+        #   # Set the population to increment by 1.
+        #   increment_value = Google::Cloud::Firestore::FieldValue.increment 1
+        #
+        #   nyc_ref.update({ name: "New York City",
+        #                    population: increment_value })
+        #
+        def self.increment value
+          # verify the values are the correct types
+          unless value.is_a? Numeric
+            raise ArgumentError, "value must be a Numeric"
+          end
+
+          new :increment, value
+        end
+
+        ##
+        # Creates a sentinel value to indicate the setting the field to the
+        # maximum of its current value and the given value.
+        #
+        # If the field is not an integer or double (Numeric), or if the field
+        # does not yet exist, the transformation will set the field to the given
+        # value. If a maximum operation is applied where the field and the input
+        # value are of mixed types (that is - one is an integer and one is a
+        # double) the field takes on the type of the larger operand. If the
+        # operands are equivalent (e.g. 3 and 3.0), the field does not change.
+        # 0, 0.0, and -0.0 are all zero. The maximum of a zero stored value and
+        # zero input value is always the stored value. The maximum of any
+        # numeric value x and NaN is NaN.
+        #
+        # @param [Numeric] value The value to compare against the given value to
+        #   calculate the maximum value to set. Required.
+        #
+        # @return [FieldValue] The maximum field value object.
+        #
+        # @raise [ArgumentError] if the value is not an Integer or Numeric.
+        #
+        # @example
+        #   require "google/cloud/firestore"
+        #
+        #   firestore = Google::Cloud::Firestore.new
+        #
+        #   # Get a document reference
+        #   nyc_ref = firestore.doc "cities/NYC"
+        #
+        #   # Set the population to be at maximum 4,000,000.
+        #   maximum_value = Google::Cloud::Firestore::FieldValue.maximum 4000000
+        #
+        #   nyc_ref.update({ name: "New York City",
+        #                    population: maximum_value })
+        #
+        def self.maximum value
+          # verify the values are the correct types
+          unless value.is_a? Numeric
+            raise ArgumentError, "value must be a Numeric"
+          end
+
+          new :maximum, value
+        end
+
+        ##
+        # Creates a sentinel value to indicate the setting the field to the
+        # minimum of its current value and the given value.
+        #
+        # If the field is not an integer or double (Numeric), or if the field
+        # does not yet exist, the transformation will set the field to the input
+        # value. If a minimum operation is applied where the field and the input
+        # value are of mixed types (that is - one is an integer and one is a
+        # double) the field takes on the type of the smaller operand. If the
+        # operands are equivalent (e.g. 3 and 3.0), the field does not change.
+        # 0, 0.0, and -0.0 are all zero. The minimum of a zero stored value and
+        # zero input value is always the stored value. The minimum of any
+        # numeric value x and NaN is NaN.
+        #
+        # @param [Numeric] value The value to compare against the given value to
+        #   calculate the minimum value to set. Required.
+        #
+        # @return [FieldValue] The minimum field value object.
+        #
+        # @raise [ArgumentError] if the value is not an Integer or Numeric.
+        #
+        # @example
+        #   require "google/cloud/firestore"
+        #
+        #   firestore = Google::Cloud::Firestore.new
+        #
+        #   # Get a document reference
+        #   nyc_ref = firestore.doc "cities/NYC"
+        #
+        #   # Set the population to be at minimum 1,000,000.
+        #   minimum_value = Google::Cloud::Firestore::FieldValue.minimum 1000000
+        #
+        #   nyc_ref.update({ name: "New York City",
+        #                    population: minimum_value })
+        #
+        def self.minimum value
+          # verify the values are the correct types
+          unless value.is_a? Numeric
+            raise ArgumentError, "value must be a Numeric"
+          end
+
+          new :minimum, value
         end
       end
     end

@@ -635,4 +635,436 @@ describe Google::Cloud::Firestore::Convert, :writes_for_create do
       error.message.must_equal "cannot nest array_delete under arrays"
     end
   end
+
+  describe :field_increment do
+    let(:field_increment) { Google::Cloud::Firestore::FieldValue.increment 1 }
+
+    it "INCREMENT alone" do
+      data = { a: field_increment }
+
+      expected_writes = [
+        Google::Firestore::V1beta1::Write.new(
+          transform: Google::Firestore::V1beta1::DocumentTransform.new(
+            document: "projects/projectID/databases/(default)/documents/C/d",
+            field_transforms: [
+              Google::Firestore::V1beta1::DocumentTransform::FieldTransform.new(
+                field_path: "a",
+                increment: Google::Firestore::V1beta1::Value.new(integer_value: 1)
+              )
+            ]
+          ),
+          current_document: Google::Firestore::V1beta1::Precondition.new(exists: false)
+        )
+      ]
+
+      actual_writes = Google::Cloud::Firestore::Convert.writes_for_create document_path, data
+
+      actual_writes.must_equal expected_writes
+    end
+
+    it "INCREMENT with data" do
+      data = { a: 1, b: field_increment }
+
+      expected_writes = [
+        Google::Firestore::V1beta1::Write.new(
+          update: Google::Firestore::V1beta1::Document.new(
+            name: document_path,
+            fields: {
+              "a" => Google::Firestore::V1beta1::Value.new(integer_value: 1)
+            }
+          ),
+          current_document: Google::Firestore::V1beta1::Precondition.new(
+            exists: false)
+        ),
+        Google::Firestore::V1beta1::Write.new(
+          transform: Google::Firestore::V1beta1::DocumentTransform.new(
+            document: "projects/projectID/databases/(default)/documents/C/d",
+            field_transforms: [
+              Google::Firestore::V1beta1::DocumentTransform::FieldTransform.new(
+                field_path: "b",
+                increment: Google::Firestore::V1beta1::Value.new(integer_value: 1)
+              )
+            ]
+          )
+        )
+      ]
+
+      actual_writes = Google::Cloud::Firestore::Convert.writes_for_create document_path, data
+
+      actual_writes.must_equal expected_writes
+    end
+
+    it "multiple INCREMENT fields" do
+      data = { a: 1, b: field_increment, c: { d: field_increment } }
+
+      expected_writes = [
+        Google::Firestore::V1beta1::Write.new(
+          update: Google::Firestore::V1beta1::Document.new(
+            name: document_path,
+            fields: {
+              "a" => Google::Firestore::V1beta1::Value.new(integer_value: 1)
+            }
+          ),
+          current_document: Google::Firestore::V1beta1::Precondition.new(exists: false)
+        ),
+        Google::Firestore::V1beta1::Write.new(
+          transform: Google::Firestore::V1beta1::DocumentTransform.new(
+            document: "projects/projectID/databases/(default)/documents/C/d",
+            field_transforms: [
+              Google::Firestore::V1beta1::DocumentTransform::FieldTransform.new(
+                field_path: "b",
+                increment: Google::Firestore::V1beta1::Value.new(integer_value: 1)
+              ),
+              Google::Firestore::V1beta1::DocumentTransform::FieldTransform.new(
+                field_path: "c.d",
+                increment: Google::Firestore::V1beta1::Value.new(integer_value: 1)
+              )
+            ]
+          )
+        )
+      ]
+
+      actual_writes = Google::Cloud::Firestore::Convert.writes_for_create document_path, data
+
+      actual_writes.must_equal expected_writes
+    end
+
+    it "nested INCREMENT field" do
+      data = { a: 1, b: { c: field_increment } }
+
+      expected_writes = [
+        Google::Firestore::V1beta1::Write.new(
+          update: Google::Firestore::V1beta1::Document.new(
+            name: document_path,
+            fields: {
+              "a" => Google::Firestore::V1beta1::Value.new(integer_value: 1)
+            }
+          ),
+          current_document: Google::Firestore::V1beta1::Precondition.new(
+            exists: false)
+        ),
+        Google::Firestore::V1beta1::Write.new(
+          transform: Google::Firestore::V1beta1::DocumentTransform.new(
+            document: "projects/projectID/databases/(default)/documents/C/d",
+            field_transforms: [
+              Google::Firestore::V1beta1::DocumentTransform::FieldTransform.new(
+                field_path: "b.c",
+                increment: Google::Firestore::V1beta1::Value.new(integer_value: 1)
+              )
+            ]
+          )
+        )
+      ]
+
+      actual_writes = Google::Cloud::Firestore::Convert.writes_for_create document_path, data
+
+      actual_writes.must_equal expected_writes
+    end
+
+    it "INCREMENT cannot be anywhere inside an array value" do
+      data = { a: [1, { b: field_increment }] }
+
+      error = expect do
+        Google::Cloud::Firestore::Convert.writes_for_create document_path, data
+      end.must_raise ArgumentError
+      error.message.must_equal "cannot nest increment under arrays"
+    end
+
+    it "INCREMENT cannot be in an array value" do
+      data = { a: [1, 2, field_increment] }
+
+      error = expect do
+        Google::Cloud::Firestore::Convert.writes_for_create document_path, data
+      end.must_raise ArgumentError
+      error.message.must_equal "cannot nest increment under arrays"
+    end
+  end
+
+  describe :field_maximum do
+    let(:field_maximum) { Google::Cloud::Firestore::FieldValue.maximum 1 }
+
+    it "MAXIMUM alone" do
+      data = { a: field_maximum }
+
+      expected_writes = [
+        Google::Firestore::V1beta1::Write.new(
+          transform: Google::Firestore::V1beta1::DocumentTransform.new(
+            document: "projects/projectID/databases/(default)/documents/C/d",
+            field_transforms: [
+              Google::Firestore::V1beta1::DocumentTransform::FieldTransform.new(
+                field_path: "a",
+                maximum: Google::Firestore::V1beta1::Value.new(integer_value: 1)
+              )
+            ]
+          ),
+          current_document: Google::Firestore::V1beta1::Precondition.new(exists: false)
+        )
+      ]
+
+      actual_writes = Google::Cloud::Firestore::Convert.writes_for_create document_path, data
+
+      actual_writes.must_equal expected_writes
+    end
+
+    it "MAXIMUM with data" do
+      data = { a: 1, b: field_maximum }
+
+      expected_writes = [
+        Google::Firestore::V1beta1::Write.new(
+          update: Google::Firestore::V1beta1::Document.new(
+            name: document_path,
+            fields: {
+              "a" => Google::Firestore::V1beta1::Value.new(integer_value: 1)
+            }
+          ),
+          current_document: Google::Firestore::V1beta1::Precondition.new(
+            exists: false)
+        ),
+        Google::Firestore::V1beta1::Write.new(
+          transform: Google::Firestore::V1beta1::DocumentTransform.new(
+            document: "projects/projectID/databases/(default)/documents/C/d",
+            field_transforms: [
+              Google::Firestore::V1beta1::DocumentTransform::FieldTransform.new(
+                field_path: "b",
+                maximum: Google::Firestore::V1beta1::Value.new(integer_value: 1)
+              )
+            ]
+          )
+        )
+      ]
+
+      actual_writes = Google::Cloud::Firestore::Convert.writes_for_create document_path, data
+
+      actual_writes.must_equal expected_writes
+    end
+
+    it "multiple MAXIMUM fields" do
+      data = { a: 1, b: field_maximum, c: { d: field_maximum } }
+
+      expected_writes = [
+        Google::Firestore::V1beta1::Write.new(
+          update: Google::Firestore::V1beta1::Document.new(
+            name: document_path,
+            fields: {
+              "a" => Google::Firestore::V1beta1::Value.new(integer_value: 1)
+            }
+          ),
+          current_document: Google::Firestore::V1beta1::Precondition.new(exists: false)
+        ),
+        Google::Firestore::V1beta1::Write.new(
+          transform: Google::Firestore::V1beta1::DocumentTransform.new(
+            document: "projects/projectID/databases/(default)/documents/C/d",
+            field_transforms: [
+              Google::Firestore::V1beta1::DocumentTransform::FieldTransform.new(
+                field_path: "b",
+                maximum: Google::Firestore::V1beta1::Value.new(integer_value: 1)
+              ),
+              Google::Firestore::V1beta1::DocumentTransform::FieldTransform.new(
+                field_path: "c.d",
+                maximum: Google::Firestore::V1beta1::Value.new(integer_value: 1)
+              )
+            ]
+          )
+        )
+      ]
+
+      actual_writes = Google::Cloud::Firestore::Convert.writes_for_create document_path, data
+
+      actual_writes.must_equal expected_writes
+    end
+
+    it "nested MAXIMUM field" do
+      data = { a: 1, b: { c: field_maximum } }
+
+      expected_writes = [
+        Google::Firestore::V1beta1::Write.new(
+          update: Google::Firestore::V1beta1::Document.new(
+            name: document_path,
+            fields: {
+              "a" => Google::Firestore::V1beta1::Value.new(integer_value: 1)
+            }
+          ),
+          current_document: Google::Firestore::V1beta1::Precondition.new(
+            exists: false)
+        ),
+        Google::Firestore::V1beta1::Write.new(
+          transform: Google::Firestore::V1beta1::DocumentTransform.new(
+            document: "projects/projectID/databases/(default)/documents/C/d",
+            field_transforms: [
+              Google::Firestore::V1beta1::DocumentTransform::FieldTransform.new(
+                field_path: "b.c",
+                maximum: Google::Firestore::V1beta1::Value.new(integer_value: 1)
+              )
+            ]
+          )
+        )
+      ]
+
+      actual_writes = Google::Cloud::Firestore::Convert.writes_for_create document_path, data
+
+      actual_writes.must_equal expected_writes
+    end
+
+    it "MAXIMUM cannot be anywhere inside an array value" do
+      data = { a: [1, { b: field_maximum }] }
+
+      error = expect do
+        Google::Cloud::Firestore::Convert.writes_for_create document_path, data
+      end.must_raise ArgumentError
+      error.message.must_equal "cannot nest maximum under arrays"
+    end
+
+    it "MAXIMUM cannot be in an array value" do
+      data = { a: [1, 2, field_maximum] }
+
+      error = expect do
+        Google::Cloud::Firestore::Convert.writes_for_create document_path, data
+      end.must_raise ArgumentError
+      error.message.must_equal "cannot nest maximum under arrays"
+    end
+  end
+
+  describe :field_minimum do
+    let(:field_minimum) { Google::Cloud::Firestore::FieldValue.minimum 1 }
+
+    it "MINIMUM alone" do
+      data = { a: field_minimum }
+
+      expected_writes = [
+        Google::Firestore::V1beta1::Write.new(
+          transform: Google::Firestore::V1beta1::DocumentTransform.new(
+            document: "projects/projectID/databases/(default)/documents/C/d",
+            field_transforms: [
+              Google::Firestore::V1beta1::DocumentTransform::FieldTransform.new(
+                field_path: "a",
+                minimum: Google::Firestore::V1beta1::Value.new(integer_value: 1)
+              )
+            ]
+          ),
+          current_document: Google::Firestore::V1beta1::Precondition.new(exists: false)
+        )
+      ]
+
+      actual_writes = Google::Cloud::Firestore::Convert.writes_for_create document_path, data
+
+      actual_writes.must_equal expected_writes
+    end
+
+    it "MINIMUM with data" do
+      data = { a: 1, b: field_minimum }
+
+      expected_writes = [
+        Google::Firestore::V1beta1::Write.new(
+          update: Google::Firestore::V1beta1::Document.new(
+            name: document_path,
+            fields: {
+              "a" => Google::Firestore::V1beta1::Value.new(integer_value: 1)
+            }
+          ),
+          current_document: Google::Firestore::V1beta1::Precondition.new(
+            exists: false)
+        ),
+        Google::Firestore::V1beta1::Write.new(
+          transform: Google::Firestore::V1beta1::DocumentTransform.new(
+            document: "projects/projectID/databases/(default)/documents/C/d",
+            field_transforms: [
+              Google::Firestore::V1beta1::DocumentTransform::FieldTransform.new(
+                field_path: "b",
+                minimum: Google::Firestore::V1beta1::Value.new(integer_value: 1)
+              )
+            ]
+          )
+        )
+      ]
+
+      actual_writes = Google::Cloud::Firestore::Convert.writes_for_create document_path, data
+
+      actual_writes.must_equal expected_writes
+    end
+
+    it "multiple MINIMUM fields" do
+      data = { a: 1, b: field_minimum, c: { d: field_minimum } }
+
+      expected_writes = [
+        Google::Firestore::V1beta1::Write.new(
+          update: Google::Firestore::V1beta1::Document.new(
+            name: document_path,
+            fields: {
+              "a" => Google::Firestore::V1beta1::Value.new(integer_value: 1)
+            }
+          ),
+          current_document: Google::Firestore::V1beta1::Precondition.new(exists: false)
+        ),
+        Google::Firestore::V1beta1::Write.new(
+          transform: Google::Firestore::V1beta1::DocumentTransform.new(
+            document: "projects/projectID/databases/(default)/documents/C/d",
+            field_transforms: [
+              Google::Firestore::V1beta1::DocumentTransform::FieldTransform.new(
+                field_path: "b",
+                minimum: Google::Firestore::V1beta1::Value.new(integer_value: 1)
+              ),
+              Google::Firestore::V1beta1::DocumentTransform::FieldTransform.new(
+                field_path: "c.d",
+                minimum: Google::Firestore::V1beta1::Value.new(integer_value: 1)
+              )
+            ]
+          )
+        )
+      ]
+
+      actual_writes = Google::Cloud::Firestore::Convert.writes_for_create document_path, data
+
+      actual_writes.must_equal expected_writes
+    end
+
+    it "nested MINIMUM field" do
+      data = { a: 1, b: { c: field_minimum } }
+
+      expected_writes = [
+        Google::Firestore::V1beta1::Write.new(
+          update: Google::Firestore::V1beta1::Document.new(
+            name: document_path,
+            fields: {
+              "a" => Google::Firestore::V1beta1::Value.new(integer_value: 1)
+            }
+          ),
+          current_document: Google::Firestore::V1beta1::Precondition.new(
+            exists: false)
+        ),
+        Google::Firestore::V1beta1::Write.new(
+          transform: Google::Firestore::V1beta1::DocumentTransform.new(
+            document: "projects/projectID/databases/(default)/documents/C/d",
+            field_transforms: [
+              Google::Firestore::V1beta1::DocumentTransform::FieldTransform.new(
+                field_path: "b.c",
+                minimum: Google::Firestore::V1beta1::Value.new(integer_value: 1)
+              )
+            ]
+          )
+        )
+      ]
+
+      actual_writes = Google::Cloud::Firestore::Convert.writes_for_create document_path, data
+
+      actual_writes.must_equal expected_writes
+    end
+
+    it "MINIMUM cannot be anywhere inside an array value" do
+      data = { a: [1, { b: field_minimum }] }
+
+      error = expect do
+        Google::Cloud::Firestore::Convert.writes_for_create document_path, data
+      end.must_raise ArgumentError
+      error.message.must_equal "cannot nest minimum under arrays"
+    end
+
+    it "MINIMUM cannot be in an array value" do
+      data = { a: [1, 2, field_minimum] }
+
+      error = expect do
+        Google::Cloud::Firestore::Convert.writes_for_create document_path, data
+      end.must_raise ArgumentError
+      error.message.must_equal "cannot nest minimum under arrays"
+    end
+  end
 end

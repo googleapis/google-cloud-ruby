@@ -20,7 +20,7 @@ describe Google::Cloud::Firestore::FieldValue do
       field_union = Google::Cloud::Firestore::FieldValue.array_union 1, 2, 3
       field_union.must_be_kind_of Google::Cloud::Firestore::FieldValue
       field_union.type.must_equal :array_union
-      field_union.values.must_equal [1, 2, 3]
+      field_union.value.must_equal [1, 2, 3]
     end
 
     it "does not allow nested FieldValues" do
@@ -37,7 +37,7 @@ describe Google::Cloud::Firestore::FieldValue do
       field_delete = Google::Cloud::Firestore::FieldValue.array_delete 7, 8, 9
       field_delete.must_be_kind_of Google::Cloud::Firestore::FieldValue
       field_delete.type.must_equal :array_delete
-      field_delete.values.must_equal [7, 8, 9]
+      field_delete.value.must_equal [7, 8, 9]
     end
 
     it "does not allow nested FieldValues" do

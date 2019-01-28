@@ -394,6 +394,63 @@ describe "Document", :firestore_acceptance do
     doc_snp[:g][:j][:k].must_equal times[6]
   end
 
+  it "can update numeric fields with transforms" do
+    doc_ref = root_col.doc
+
+    doc_ref.create({ num: 1, a: { b: 1 } })
+    doc_snp = doc_ref.get
+    doc_snp[:a][:b].must_equal 1
+    doc_snp.get(:num).must_equal 1
+    doc_snp.get("a.b".to_sym).must_equal 1
+    doc_snp.get("num").must_equal 1
+    doc_snp.get("a.b").must_equal 1
+
+    doc_ref.set({ num: firestore.field_increment(50), a: { c: firestore.field_maximum(100) } })
+    doc_snp = doc_ref.get
+    doc_snp[:num].must_equal 50
+    doc_snp[:a][:b].must_be :nil?
+    doc_snp[:a][:c].must_equal 100
+
+    doc_ref.set({ num: firestore.field_increment(1), a: { d: firestore.field_minimum(-100) } }, merge: true)
+    doc_snp = doc_ref.get
+    doc_snp[:num].must_equal 51
+    doc_snp[:a][:b].must_be :nil?
+    doc_snp[:a][:c].must_equal 100
+    doc_snp[:a][:d].must_equal -100
+
+    doc_ref.set({ num: firestore.field_minimum(100), e: firestore.field_minimum(100) }, merge: true)
+    doc_snp = doc_ref.get
+    doc_snp[:num].must_equal 51
+    doc_snp[:a][:b].must_be :nil?
+    doc_snp[:a][:c].must_equal 100
+    doc_snp[:a][:d].must_equal -100
+    doc_snp[:e].must_equal 100
+
+    doc_ref.set({ num: firestore.field_maximum(-100), e: { f: firestore.field_maximum(100) } }, merge: true)
+    doc_snp = doc_ref.get
+    doc_snp[:num].must_equal 51
+    doc_snp[:a][:b].must_be :nil?
+    doc_snp[:a][:c].must_equal 100
+    doc_snp[:a][:d].must_equal -100
+    doc_snp[:e][:f].must_equal 100
+
+    doc_ref.update({ num: firestore.field_minimum(-100), e: { f: firestore.field_maximum(1000) } })
+    doc_snp = doc_ref.get
+    doc_snp[:num].must_equal -100
+    doc_snp[:a][:b].must_be :nil?
+    doc_snp[:a][:c].must_equal 100
+    doc_snp[:a][:d].must_equal -100
+    doc_snp[:e][:f].must_equal 1000
+
+    doc_ref.update({ num: firestore.field_maximum(100), e: { f: firestore.field_minimum(10) } })
+    doc_snp = doc_ref.get
+    doc_snp[:num].must_equal 100
+    doc_snp[:a][:b].must_be :nil?
+    doc_snp[:a][:c].must_equal 100
+    doc_snp[:a][:d].must_equal -100
+    doc_snp[:e][:f].must_equal 10
+  end
+
   def assert_equal_unordered a, b, msg = nil
     msg = message(msg) {
       "Expected #{mu_pp a} to be equivalent to #{mu_pp b}"
