@@ -208,16 +208,15 @@ module Google
         # the field's current value.
         #
         # If the field's current value is not an integer or a double value
-        # (Integer or Numeric), or if the field does not yet exist, the
-        # transformation will set the field to the given value. If either of the
-        # given value or the current field value are doubles, both values will
-        # be interpreted as doubles. Double arithmetic and representation of
-        # double values follow IEEE 754 semantics. If there is positive/negative
-        # integer overflow, the field is resolved to the largest magnitude
-        # positive/negative integer.
+        # (Numeric), or if the field does not yet exist, the transformation will
+        # set the field to the given value. If either of the given value or the
+        # current field value are doubles, both values will be interpreted as
+        # doubles. Double arithmetic and representation of double values follow
+        # IEEE 754 semantics. If there is positive/negative integer overflow,
+        # the field is resolved to the largest magnitude positive/negative
+        # integer.
         #
-        # @param [Integer, Numeric] value The value to add to the given value.
-        #   Required.
+        # @param [Numeric] value The value to add to the given value. Required.
         #
         # @return [FieldValue] The increment field value object.
         #
@@ -239,8 +238,8 @@ module Google
         #
         def self.increment value
           # verify the values are the correct types
-          unless [Integer, Numeric].include? value.class
-            raise ArgumentError, "value must be an Integer or Numeric"
+          unless value.is_a? Numeric
+            raise ArgumentError, "value must be a Numeric"
           end
 
           new :increment, value
@@ -250,18 +249,18 @@ module Google
         # Creates a sentinel value to indicate the setting the field to the
         # maximum of its current value and the given value.
         #
-        # If the field is not an integer or double (Integer or Numeric), or if
-        # the field does not yet exist, the transformation will set the field to
-        # the given value. If a maximum operation is applied where the field and
-        # the input value are of mixed types (that is - one is an integer and
-        # one is a double) the field takes on the type of the larger operand. If
-        # the operands are equivalent (e.g. 3 and 3.0), the field does not
-        # change. 0, 0.0, and -0.0 are all zero. The maximum of a zero stored
-        # value and zero input value is always the stored value. The maximum of
-        # any numeric value x and NaN is NaN.
+        # If the field is not an integer or double (Numeric), or if the field
+        # does not yet exist, the transformation will set the field to the given
+        # value. If a maximum operation is applied where the field and the input
+        # value are of mixed types (that is - one is an integer and one is a
+        # double) the field takes on the type of the larger operand. If the
+        # operands are equivalent (e.g. 3 and 3.0), the field does not change.
+        # 0, 0.0, and -0.0 are all zero. The maximum of a zero stored value and
+        # zero input value is always the stored value. The maximum of any
+        # numeric value x and NaN is NaN.
         #
-        # @param [Integer, Numeric] value The value to compare against the given
-        #   value to calculate the maximum value to set. Required.
+        # @param [Numeric] value The value to compare against the given value to
+        #   calculate the maximum value to set. Required.
         #
         # @return [FieldValue] The maximum field value object.
         #
@@ -283,8 +282,8 @@ module Google
         #
         def self.maximum value
           # verify the values are the correct types
-          unless [Integer, Numeric].include? value.class
-            raise ArgumentError, "value must be an Integer or Numeric"
+          unless value.is_a? Numeric
+            raise ArgumentError, "value must be a Numeric"
           end
 
           new :maximum, value
@@ -294,18 +293,18 @@ module Google
         # Creates a sentinel value to indicate the setting the field to the
         # minimum of its current value and the given value.
         #
-        # If the field is not an integer or double (Integer or Numeric), or if
-        # the field does not yet exist, the transformation will set the field to
-        # the input value. If a minimum operation is applied where the field and
-        # the input value are of mixed types (that is - one is an integer and
-        # one is a double) the field takes on the type of the smaller operand.
-        # If the operands are equivalent (e.g. 3 and 3.0), the field does not
-        # change. 0, 0.0, and -0.0 are all zero. The minimum of a zero stored
-        # value and zero input value is always the stored value. The minimum of
-        # any numeric value x and NaN is NaN.
+        # If the field is not an integer or double (Numeric), or if the field
+        # does not yet exist, the transformation will set the field to the input
+        # value. If a minimum operation is applied where the field and the input
+        # value are of mixed types (that is - one is an integer and one is a
+        # double) the field takes on the type of the smaller operand. If the
+        # operands are equivalent (e.g. 3 and 3.0), the field does not change.
+        # 0, 0.0, and -0.0 are all zero. The minimum of a zero stored value and
+        # zero input value is always the stored value. The minimum of any
+        # numeric value x and NaN is NaN.
         #
-        # @param [Integer, Numeric] value The value to compare against the given
-        #   value to calculate the minimum value to set. Required.
+        # @param [Numeric] value The value to compare against the given value to
+        #   calculate the minimum value to set. Required.
         #
         # @return [FieldValue] The minimum field value object.
         #
@@ -327,8 +326,8 @@ module Google
         #
         def self.minimum value
           # verify the values are the correct types
-          unless [Integer, Numeric].include? value.class
-            raise ArgumentError, "value must be an Integer or Numeric"
+          unless value.is_a? Numeric
+            raise ArgumentError, "value must be a Numeric"
           end
 
           new :minimum, value
