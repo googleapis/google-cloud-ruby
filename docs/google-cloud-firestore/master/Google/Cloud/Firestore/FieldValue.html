@@ -169,7 +169,7 @@ Firestore API.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Creates a sentinel value to indicate the union of the given values with an array.</p>
+    <span class="summary_desc"><div class='inline'><p>Creates a sentinel value to indicate the union of the given value with an array.</p>
 </div></span>
   
 </li>
@@ -193,6 +193,75 @@ Firestore API.</p>
 
   
     <span class="summary_desc"><div class='inline'><p>Creates a field value object representing the deletion of a field in document data.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#increment-class_method" title="increment (class method)">.<strong>increment</strong>(value)  &#x21d2; FieldValue </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Creates a sentinel value to indicate the addition the given value to the field&#39;s current value.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#maximum-class_method" title="maximum (class method)">.<strong>maximum</strong>(value)  &#x21d2; FieldValue </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Creates a sentinel value to indicate the setting the field to the maximum of its current value and the given value.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#minimum-class_method" title="minimum (class method)">.<strong>minimum</strong>(value)  &#x21d2; FieldValue </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Creates a sentinel value to indicate the setting the field to the minimum of its current value and the given value.</p>
 </div></span>
   
 </li>
@@ -395,7 +464,7 @@ with an array.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a sentinel value to indicate the union of the given values
+    <p>Creates a sentinel value to indicate the union of the given value
 with an array.</p>
 
 
@@ -576,6 +645,406 @@ document data.</p>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_delete'>delete</span>
   <span class='id identifier rubyid_new'>new</span> <span class='symbol'>:delete</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="increment-class_method">
+  
+    .<strong>increment</strong>(value)  &#x21d2; <tt><span class='object_link'><a href="" title="Google::Cloud::Firestore::FieldValue (class)">FieldValue</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Creates a sentinel value to indicate the addition the given value to
+the field&#39;s current value.</p>
+
+<p>If the field&#39;s current value is not an integer or a double value
+(Numeric), or if the field does not yet exist, the transformation will
+set the field to the given value. If either of the given value or the
+current field value are doubles, both values will be interpreted as
+doubles. Double arithmetic and representation of double values follow
+IEEE 754 semantics. If there is positive/negative integer overflow,
+the field is resolved to the largest magnitude positive/negative
+integer.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/firestore</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_firestore'>firestore</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Firestore.html" title="Google::Cloud::Firestore (module)">Firestore</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Firestore.html#new-class_method" title="Google::Cloud::Firestore.new (method)">new</a></span></span>
+
+<span class='comment'># Get a document reference
+</span><span class='id identifier rubyid_nyc_ref'>nyc_ref</span> <span class='op'>=</span> <span class='id identifier rubyid_firestore'>firestore</span><span class='period'>.</span><span class='id identifier rubyid_doc'>doc</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>cities/NYC</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='comment'># Set the population to increment by 1.
+</span><span class='id identifier rubyid_increment_value'>increment_value</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Firestore.html" title="Google::Cloud::Firestore (module)">Firestore</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Firestore::FieldValue (class)">FieldValue</a></span></span><span class='period'>.</span><span class='id identifier rubyid_increment'>increment</span> <span class='int'>1</span>
+
+<span class='id identifier rubyid_nyc_ref'>nyc_ref</span><span class='period'>.</span><span class='id identifier rubyid_update'>update</span><span class='lparen'>(</span><span class='lbrace'>{</span> <span class='label'>name:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>New York City</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+                 <span class='label'>population:</span> <span class='id identifier rubyid_increment_value'>increment_value</span> <span class='rbrace'>}</span><span class='rparen'>)</span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>value</span>
+      
+      
+        <span class='type'>(<tt>Numeric</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The value to add to the given value. Required.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Google::Cloud::Firestore::FieldValue (class)">FieldValue</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The increment field value object.</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Raises:</p>
+<ul class="raise">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>ArgumentError</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>if the value is not an Integer or Numeric.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+239
+240
+241
+242
+243
+244
+245
+246</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/field_value.rb', line 239</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_increment'>increment</span> <span class='id identifier rubyid_value'>value</span>
+  <span class='comment'># verify the values are the correct types
+</span>  <span class='kw'>unless</span> <span class='id identifier rubyid_value'>value</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span> <span class='const'>Numeric</span>
+    <span class='id identifier rubyid_raise'>raise</span> <span class='const'>ArgumentError</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>value must be a Numeric</span><span class='tstring_end'>&quot;</span></span>
+  <span class='kw'>end</span>
+
+  <span class='id identifier rubyid_new'>new</span> <span class='symbol'>:increment</span><span class='comma'>,</span> <span class='id identifier rubyid_value'>value</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="maximum-class_method">
+  
+    .<strong>maximum</strong>(value)  &#x21d2; <tt><span class='object_link'><a href="" title="Google::Cloud::Firestore::FieldValue (class)">FieldValue</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Creates a sentinel value to indicate the setting the field to the
+maximum of its current value and the given value.</p>
+
+<p>If the field is not an integer or double (Numeric), or if the field
+does not yet exist, the transformation will set the field to the given
+value. If a maximum operation is applied where the field and the input
+value are of mixed types (that is - one is an integer and one is a
+double) the field takes on the type of the larger operand. If the
+operands are equivalent (e.g. 3 and 3.0), the field does not change.
+0, 0.0, and -0.0 are all zero. The maximum of a zero stored value and
+zero input value is always the stored value. The maximum of any
+numeric value x and NaN is NaN.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/firestore</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_firestore'>firestore</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Firestore.html" title="Google::Cloud::Firestore (module)">Firestore</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Firestore.html#new-class_method" title="Google::Cloud::Firestore.new (method)">new</a></span></span>
+
+<span class='comment'># Get a document reference
+</span><span class='id identifier rubyid_nyc_ref'>nyc_ref</span> <span class='op'>=</span> <span class='id identifier rubyid_firestore'>firestore</span><span class='period'>.</span><span class='id identifier rubyid_doc'>doc</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>cities/NYC</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='comment'># Set the population to be at maximum 4,000,000.
+</span><span class='id identifier rubyid_maximum_value'>maximum_value</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Firestore.html" title="Google::Cloud::Firestore (module)">Firestore</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Firestore::FieldValue (class)">FieldValue</a></span></span><span class='period'>.</span><span class='id identifier rubyid_maximum'>maximum</span> <span class='int'>4000000</span>
+
+<span class='id identifier rubyid_nyc_ref'>nyc_ref</span><span class='period'>.</span><span class='id identifier rubyid_update'>update</span><span class='lparen'>(</span><span class='lbrace'>{</span> <span class='label'>name:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>New York City</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+                 <span class='label'>population:</span> <span class='id identifier rubyid_maximum_value'>maximum_value</span> <span class='rbrace'>}</span><span class='rparen'>)</span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>value</span>
+      
+      
+        <span class='type'>(<tt>Numeric</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The value to compare against the given value to
+calculate the maximum value to set. Required.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Google::Cloud::Firestore::FieldValue (class)">FieldValue</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The maximum field value object.</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Raises:</p>
+<ul class="raise">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>ArgumentError</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>if the value is not an Integer or Numeric.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+283
+284
+285
+286
+287
+288
+289
+290</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/field_value.rb', line 283</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_maximum'>maximum</span> <span class='id identifier rubyid_value'>value</span>
+  <span class='comment'># verify the values are the correct types
+</span>  <span class='kw'>unless</span> <span class='id identifier rubyid_value'>value</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span> <span class='const'>Numeric</span>
+    <span class='id identifier rubyid_raise'>raise</span> <span class='const'>ArgumentError</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>value must be a Numeric</span><span class='tstring_end'>&quot;</span></span>
+  <span class='kw'>end</span>
+
+  <span class='id identifier rubyid_new'>new</span> <span class='symbol'>:maximum</span><span class='comma'>,</span> <span class='id identifier rubyid_value'>value</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="minimum-class_method">
+  
+    .<strong>minimum</strong>(value)  &#x21d2; <tt><span class='object_link'><a href="" title="Google::Cloud::Firestore::FieldValue (class)">FieldValue</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Creates a sentinel value to indicate the setting the field to the
+minimum of its current value and the given value.</p>
+
+<p>If the field is not an integer or double (Numeric), or if the field
+does not yet exist, the transformation will set the field to the input
+value. If a minimum operation is applied where the field and the input
+value are of mixed types (that is - one is an integer and one is a
+double) the field takes on the type of the smaller operand. If the
+operands are equivalent (e.g. 3 and 3.0), the field does not change.
+0, 0.0, and -0.0 are all zero. The minimum of a zero stored value and
+zero input value is always the stored value. The minimum of any
+numeric value x and NaN is NaN.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/firestore</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_firestore'>firestore</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Firestore.html" title="Google::Cloud::Firestore (module)">Firestore</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Firestore.html#new-class_method" title="Google::Cloud::Firestore.new (method)">new</a></span></span>
+
+<span class='comment'># Get a document reference
+</span><span class='id identifier rubyid_nyc_ref'>nyc_ref</span> <span class='op'>=</span> <span class='id identifier rubyid_firestore'>firestore</span><span class='period'>.</span><span class='id identifier rubyid_doc'>doc</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>cities/NYC</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='comment'># Set the population to be at minimum 1,000,000.
+</span><span class='id identifier rubyid_minimum_value'>minimum_value</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Firestore.html" title="Google::Cloud::Firestore (module)">Firestore</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Firestore::FieldValue (class)">FieldValue</a></span></span><span class='period'>.</span><span class='id identifier rubyid_minimum'>minimum</span> <span class='int'>1000000</span>
+
+<span class='id identifier rubyid_nyc_ref'>nyc_ref</span><span class='period'>.</span><span class='id identifier rubyid_update'>update</span><span class='lparen'>(</span><span class='lbrace'>{</span> <span class='label'>name:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>New York City</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+                 <span class='label'>population:</span> <span class='id identifier rubyid_minimum_value'>minimum_value</span> <span class='rbrace'>}</span><span class='rparen'>)</span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>value</span>
+      
+      
+        <span class='type'>(<tt>Numeric</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The value to compare against the given value to
+calculate the minimum value to set. Required.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Google::Cloud::Firestore::FieldValue (class)">FieldValue</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The minimum field value object.</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Raises:</p>
+<ul class="raise">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>ArgumentError</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>if the value is not an Integer or Numeric.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+327
+328
+329
+330
+331
+332
+333
+334</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/field_value.rb', line 327</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_minimum'>minimum</span> <span class='id identifier rubyid_value'>value</span>
+  <span class='comment'># verify the values are the correct types
+</span>  <span class='kw'>unless</span> <span class='id identifier rubyid_value'>value</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span> <span class='const'>Numeric</span>
+    <span class='id identifier rubyid_raise'>raise</span> <span class='const'>ArgumentError</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>value must be a Numeric</span><span class='tstring_end'>&quot;</span></span>
+  <span class='kw'>end</span>
+
+  <span class='id identifier rubyid_new'>new</span> <span class='symbol'>:minimum</span><span class='comma'>,</span> <span class='id identifier rubyid_value'>value</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>

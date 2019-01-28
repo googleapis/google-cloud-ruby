@@ -170,7 +170,7 @@ retried when documents change before the transaction is committed. See
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#get_all-instance_method" title="#get_all (instance method)">#<strong>get_all</strong>(*docs) {|documents| ... } &#x21d2; Enumerator&lt;DocumentSnapshot&gt; </a>
+      <a href="#get_all-instance_method" title="#get_all (instance method)">#<strong>get_all</strong>(*docs, field_mask: nil) {|documents| ... } &#x21d2; Enumerator&lt;DocumentSnapshot&gt; </a>
     
 
     
@@ -469,18 +469,18 @@ path of the document, or a document reference object.</p>
       <pre class="lines">
 
 
-285
-286
-287
-288
-289
-290
-291
-292
-293</pre>
+319
+320
+321
+322
+323
+324
+325
+326
+327</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/transaction.rb', line 285</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/transaction.rb', line 319</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create'>create</span> <span class='id identifier rubyid_doc'>doc</span><span class='comma'>,</span> <span class='id identifier rubyid_data'>data</span>
   <span class='id identifier rubyid_ensure_not_closed!'>ensure_not_closed!</span>
@@ -636,20 +636,20 @@ updated at that time. Optional.</p>
       <pre class="lines">
 
 
-557
-558
-559
-560
-561
-562
-563
-564
-565
-566
-567</pre>
+591
+592
+593
+594
+595
+596
+597
+598
+599
+600
+601</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/transaction.rb', line 557</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/transaction.rb', line 591</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete'>delete</span> <span class='id identifier rubyid_doc'>doc</span><span class='comma'>,</span> <span class='label'>exists:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>update_time:</span> <span class='kw'>nil</span>
   <span class='id identifier rubyid_ensure_not_closed!'>ensure_not_closed!</span>
@@ -925,31 +925,31 @@ valid values.</p>
       <pre class="lines">
 
 
-214
-215
-216
-217
-218
-219
-220
-221
-222
-223
-224
-225
-226
-227
-228
-229
-230
-231
-232
-233
-234
-235</pre>
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/transaction.rb', line 214</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/transaction.rb', line 248</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get'>get</span> <span class='id identifier rubyid_obj'>obj</span>
   <span class='id identifier rubyid_ensure_not_closed!'>ensure_not_closed!</span>
@@ -981,7 +981,7 @@ valid values.</p>
       <div class="method_details ">
   <h3 class="signature " id="get_all-instance_method">
   
-    #<strong>get_all</strong>(*docs) {|documents| ... } &#x21d2; <tt>Enumerator&lt;<span class='object_link'><a href="DocumentSnapshot.html" title="Google::Cloud::Firestore::DocumentSnapshot (class)">DocumentSnapshot</a></span>&gt;</tt> 
+    #<strong>get_all</strong>(*docs, field_mask: nil) {|documents| ... } &#x21d2; <tt>Enumerator&lt;<span class='object_link'><a href="DocumentSnapshot.html" title="Google::Cloud::Firestore::DocumentSnapshot (class)">DocumentSnapshot</a></span>&gt;</tt> 
   
 
   
@@ -1015,6 +1015,22 @@ valid values.</p>
   <span class='kw'>end</span>
 <span class='kw'>end</span></code></pre>
     
+      
+        <p class="example_title"><div class='inline'><p>Get docs using a field mask:</p>
+</div></p>
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/firestore</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_firestore'>firestore</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Firestore.html" title="Google::Cloud::Firestore (module)">Firestore</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Firestore.html#new-class_method" title="Google::Cloud::Firestore.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_firestore'>firestore</span><span class='period'>.</span><span class='id identifier rubyid_transaction'>transaction</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_tx'>tx</span><span class='op'>|</span>
+  <span class='comment'># Get and print city documents
+</span>  <span class='id identifier rubyid_cities'>cities</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>cities/NYC</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>cities/SF</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>cities/LA</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span>
+  <span class='id identifier rubyid_tx'>tx</span><span class='period'>.</span><span class='id identifier rubyid_get_all'>get_all</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_cities'>cities</span><span class='comma'>,</span> <span class='label'>field_mask:</span> <span class='symbol'>:population</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_city'>city</span><span class='op'>|</span>
+    <span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_city'>city</span><span class='period'>.</span><span class='id identifier rubyid_document_id'>document_id</span><span class='embexpr_end'>}</span><span class='tstring_content'> has </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_city'>city</span><span class='lbracket'>[</span><span class='symbol'>:population</span><span class='rbracket'>]</span><span class='embexpr_end'>}</span><span class='tstring_content'> residents.</span><span class='tstring_end'>&quot;</span></span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></code></pre>
+    
   </div>
 <p class="tag_title">Parameters:</p>
 <ul class="param">
@@ -1031,6 +1047,31 @@ valid values.</p>
         &mdash;
         <div class='inline'><p>One or more strings representing the path of the document, or
 document reference objects.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>field_mask</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;String|<span class='object_link'><a href="FieldPath.html" title="Google::Cloud::Firestore::FieldPath (class)">FieldPath</a></span>&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>One or more field path
+values, representing the fields of the document to be returned. If a
+document has a field that is not present in this mask, that field
+will not be returned in the response. All fields are returned when
+the mask is not set.</p>
+
+<p>A field path can either be a <span class='object_link'><a href="FieldPath.html" title="Google::Cloud::Firestore::FieldPath (class)">FieldPath</a></span> object, or a dotted string
+representing the nested fields. In other words the string represents
+individual fields joined by &quot;.&quot;. Fields containing <code>~</code>, <code>*</code>, <code>/</code>,
+<code>[</code>, <code>]</code>, and <code>.</code> cannot be in a dotted string, and should provided
+using a <span class='object_link'><a href="FieldPath.html" title="Google::Cloud::Firestore::FieldPath (class)">FieldPath</a></span> object instead. See <span class='object_link'><a href="Client.html#field_path-instance_method" title="Google::Cloud::Firestore::Client#field_path (method)">Client#field_path</a></span>.)</p>
 </div>
       
     </li>
@@ -1097,40 +1138,60 @@ document reference objects.</p>
       <pre class="lines">
 
 
-105
-106
-107
-108
-109
-110
-111
-112
-113
-114
-115
-116
-117
-118
-119
-120
-121
-122</pre>
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/transaction.rb', line 105</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/transaction.rb', line 129</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_get_all'>get_all</span> <span class='op'>*</span><span class='id identifier rubyid_docs'>docs</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_get_all'>get_all</span> <span class='op'>*</span><span class='id identifier rubyid_docs'>docs</span><span class='comma'>,</span> <span class='label'>field_mask:</span> <span class='kw'>nil</span>
   <span class='id identifier rubyid_ensure_not_closed!'>ensure_not_closed!</span>
   <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
 
-  <span class='kw'>return</span> <span class='id identifier rubyid_enum_for'>enum_for</span><span class='lparen'>(</span><span class='symbol'>:get_all</span><span class='comma'>,</span> <span class='id identifier rubyid_docs'>docs</span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='id identifier rubyid_block_given?'>block_given?</span>
+  <span class='kw'>unless</span> <span class='id identifier rubyid_block_given?'>block_given?</span>
+    <span class='kw'>return</span> <span class='id identifier rubyid_enum_for'>enum_for</span><span class='lparen'>(</span><span class='symbol'>:get_all</span><span class='comma'>,</span> <span class='id identifier rubyid_docs'>docs</span><span class='comma'>,</span> <span class='label'>field_mask:</span> <span class='id identifier rubyid_field_mask'>field_mask</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
 
   <span class='id identifier rubyid_doc_paths'>doc_paths</span> <span class='op'>=</span> <span class='const'>Array</span><span class='lparen'>(</span><span class='id identifier rubyid_docs'>docs</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_flatten'>flatten</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_doc_path'>doc_path</span><span class='op'>|</span>
     <span class='id identifier rubyid_coalesce_doc_path_argument'>coalesce_doc_path_argument</span> <span class='id identifier rubyid_doc_path'>doc_path</span>
   <span class='kw'>end</span>
+  <span class='id identifier rubyid_mask'>mask</span> <span class='op'>=</span> <span class='const'>Array</span><span class='lparen'>(</span><span class='id identifier rubyid_field_mask'>field_mask</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_field_path'>field_path</span><span class='op'>|</span>
+    <span class='kw'>if</span> <span class='id identifier rubyid_field_path'>field_path</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span> <span class='const'><span class='object_link'><a href="FieldPath.html" title="Google::Cloud::Firestore::FieldPath (class)">FieldPath</a></span></span>
+      <span class='id identifier rubyid_field_path'>field_path</span><span class='period'>.</span><span class='id identifier rubyid_formatted_string'>formatted_string</span>
+    <span class='kw'>else</span>
+      <span class='const'><span class='object_link'><a href="FieldPath.html" title="Google::Cloud::Firestore::FieldPath (class)">FieldPath</a></span></span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span><span class='lparen'>(</span><span class='id identifier rubyid_field_path'>field_path</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_formatted_string'>formatted_string</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+  <span class='id identifier rubyid_mask'>mask</span> <span class='op'>=</span> <span class='kw'>nil</span> <span class='kw'>if</span> <span class='id identifier rubyid_mask'>mask</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
 
   <span class='id identifier rubyid_results'>results</span> <span class='op'>=</span> <span class='id identifier rubyid_service'>service</span><span class='period'>.</span><span class='id identifier rubyid_get_documents'>get_documents</span> \
-    <span class='id identifier rubyid_doc_paths'>doc_paths</span><span class='comma'>,</span> <span class='label'>transaction:</span> <span class='id identifier rubyid_transaction_or_create'>transaction_or_create</span>
+    <span class='id identifier rubyid_doc_paths'>doc_paths</span><span class='comma'>,</span> <span class='label'>mask:</span> <span class='id identifier rubyid_mask'>mask</span><span class='comma'>,</span> <span class='label'>transaction:</span> <span class='id identifier rubyid_transaction_or_create'>transaction_or_create</span>
   <span class='id identifier rubyid_results'>results</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_result'>result</span><span class='op'>|</span>
     <span class='id identifier rubyid_extract_transaction_from_result!'>extract_transaction_from_result!</span> <span class='id identifier rubyid_result'>result</span>
     <span class='kw'>next</span> <span class='kw'>if</span> <span class='id identifier rubyid_result'>result</span><span class='period'>.</span><span class='id identifier rubyid_result'>result</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
@@ -1323,18 +1384,18 @@ document data.</p>
       <pre class="lines">
 
 
-386
-387
-388
-389
-390
-391
-392
-393
-394</pre>
+420
+421
+422
+423
+424
+425
+426
+427
+428</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/transaction.rb', line 386</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/transaction.rb', line 420</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_set'>set</span> <span class='id identifier rubyid_doc'>doc</span><span class='comma'>,</span> <span class='id identifier rubyid_data'>data</span><span class='comma'>,</span> <span class='label'>merge:</span> <span class='kw'>nil</span>
   <span class='id identifier rubyid_ensure_not_closed!'>ensure_not_closed!</span>
@@ -1591,19 +1652,19 @@ updated at that time. Optional.</p>
       <pre class="lines">
 
 
-490
-491
-492
-493
-494
-495
-496
-497
-498
-499</pre>
+524
+525
+526
+527
+528
+529
+530
+531
+532
+533</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/transaction.rb', line 490</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/transaction.rb', line 524</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update'>update</span> <span class='id identifier rubyid_doc'>doc</span><span class='comma'>,</span> <span class='id identifier rubyid_data'>data</span><span class='comma'>,</span> <span class='label'>update_time:</span> <span class='kw'>nil</span>
   <span class='id identifier rubyid_ensure_not_closed!'>ensure_not_closed!</span>
