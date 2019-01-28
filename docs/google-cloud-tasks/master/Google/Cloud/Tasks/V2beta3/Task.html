@@ -134,7 +134,7 @@ js:
   
 
   
-    <span class="summary_desc"><div class='inline'><p>App Engine HTTP request that is sent to the task&#39;s target.</p>
+    <span class="summary_desc"><div class='inline'><p>HTTP request that is sent to the App Engine app handler.</p>
 </div></span>
   
 </li>
@@ -187,6 +187,32 @@ js:
 
   
     <span class="summary_desc"><div class='inline'><p>Output only.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#dispatch_deadline-instance_method" title="#dispatch_deadline (instance method)">#<strong>dispatch_deadline</strong>  &#x21d2; Google::Protobuf::Duration </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The deadline for requests sent to the worker.</p>
 </div></span>
   
 </li>
@@ -370,10 +396,7 @@ js:
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns App Engine HTTP request that is sent to the task&#39;s target. Can
-be set only if
-<span class='object_link'><a href="Queue.html#app_engine_http_queue-instance_method" title="Google::Cloud::Tasks::V2beta3::Queue#app_engine_http_queue (method)">app_engine_http_queue</a></span> is set
-on the queue.</p>
+    <p>Returns HTTP request that is sent to the App Engine app handler.</p>
 
 <p>An App Engine task is a task that has <span class='object_link'><a href="AppEngineHttpRequest.html" title="Google::Cloud::Tasks::V2beta3::AppEngineHttpRequest (class)">AppEngineHttpRequest</a></span> set.</p>
 
@@ -393,10 +416,7 @@ on the queue.</p>
       
       
         &mdash;
-        <div class='inline'><p>App Engine HTTP request that is sent to the task&#39;s target. Can
-be set only if
-<span class='object_link'><a href="Queue.html#app_engine_http_queue-instance_method" title="Google::Cloud::Tasks::V2beta3::Queue#app_engine_http_queue (method)">app_engine_http_queue</a></span> is set
-on the queue.</p>
+        <div class='inline'><p>HTTP request that is sent to the App Engine app handler.</p>
 
 <p>An App Engine task is a task that has <span class='object_link'><a href="AppEngineHttpRequest.html" title="Google::Cloud::Tasks::V2beta3::AppEngineHttpRequest (class)">AppEngineHttpRequest</a></span> set.</p>
 </div>
@@ -411,39 +431,39 @@ on the queue.</p>
       <pre class="lines">
 
 
-84
-85
-86
-87
-88
-89
-90
-91
-92
-93
-94
-95
-96
-97
-98
-99
-100
-101
-102
-103
-104
-105
-106
-107
-108
-109
-110
 111
 112
-113</pre>
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/doc/google/cloud/tasks/v2beta3/task.rb', line 84</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/doc/google/cloud/tasks/v2beta3/task.rb', line 111</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Tasks::V2beta3::Task (class)">Task</a></span></span>
   <span class='comment'># The view specifies a subset of {Google::Cloud::Tasks::V2beta3::Task Task} data.
@@ -528,39 +548,39 @@ on the queue.</p>
       <pre class="lines">
 
 
-84
-85
-86
-87
-88
-89
-90
-91
-92
-93
-94
-95
-96
-97
-98
-99
-100
-101
-102
-103
-104
-105
-106
-107
-108
-109
-110
 111
 112
-113</pre>
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/doc/google/cloud/tasks/v2beta3/task.rb', line 84</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/doc/google/cloud/tasks/v2beta3/task.rb', line 111</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Tasks::V2beta3::Task (class)">Task</a></span></span>
   <span class='comment'># The view specifies a subset of {Google::Cloud::Tasks::V2beta3::Task Task} data.
@@ -647,39 +667,208 @@ received a response.</p>
       <pre class="lines">
 
 
-84
-85
-86
-87
-88
-89
-90
-91
-92
-93
-94
-95
-96
-97
-98
-99
-100
-101
-102
-103
-104
-105
-106
-107
-108
-109
-110
 111
 112
-113</pre>
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/doc/google/cloud/tasks/v2beta3/task.rb', line 84</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/doc/google/cloud/tasks/v2beta3/task.rb', line 111</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Tasks::V2beta3::Task (class)">Task</a></span></span>
+  <span class='comment'># The view specifies a subset of {Google::Cloud::Tasks::V2beta3::Task Task} data.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># When a task is returned in a response, not all
+</span>  <span class='comment'># information is retrieved by default because some data, such as
+</span>  <span class='comment'># payloads, might be desirable to return only when needed because
+</span>  <span class='comment'># of its large size or because of the sensitivity of data that it
+</span>  <span class='comment'># contains.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Task/View.html" title="Google::Cloud::Tasks::V2beta3::Task::View (module)">View</a></span></span>
+    <span class='comment'># Unspecified. Defaults to BASIC.
+</span>    <span class='const'>VIEW_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># The basic view omits fields which can be large or can contain
+</span>    <span class='comment'># sensitive data.
+</span>    <span class='comment'>#
+</span>    <span class='comment'># This view does not include the
+</span>    <span class='comment'># {Google::Cloud::Tasks::V2beta3::AppEngineHttpRequest#body body in AppEngineHttpRequest}.
+</span>    <span class='comment'># Bodies are desirable to return only when needed, because they
+</span>    <span class='comment'># can be large and because of the sensitivity of the data that you
+</span>    <span class='comment'># choose to store in it.
+</span>    <span class='const'>BASIC</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># All information is returned.
+</span>    <span class='comment'>#
+</span>    <span class='comment'># Authorization for {Google::Cloud::Tasks::V2beta3::Task::View::FULL FULL} requires
+</span>    <span class='comment'># `cloudtasks.tasks.fullView` [Google IAM](https://cloud.google.com/iam/)
+</span>    <span class='comment'># permission on the {Google::Cloud::Tasks::V2beta3::Queue Queue} resource.
+</span>    <span class='const'>FULL</span> <span class='op'>=</span> <span class='int'>2</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="dispatch_deadline=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="dispatch_deadline-instance_method">
+  
+    #<strong>dispatch_deadline</strong>  &#x21d2; <tt><span class='object_link'><a href="../../../Protobuf/Duration.html" title="Google::Protobuf::Duration (class)">Google::Protobuf::Duration</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns The deadline for requests sent to the worker. If the worker does not
+respond by this deadline then the request is cancelled and the attempt
+is marked as a <code>DEADLINE_EXCEEDED</code> failure. Cloud Tasks will retry the
+task according to the <span class='object_link'><a href="RetryConfig.html" title="Google::Cloud::Tasks::V2beta3::RetryConfig (class)">RetryConfig</a></span>.</p>
+
+<p>Note that when the request is cancelled, Cloud Tasks will stop listing for
+the response, but whether the worker stops processing depends on the
+worker. For example, if the worker is stuck, it may not react to cancelled
+requests.</p>
+
+<p>The default and maximum values depend on the type of request:</p>
+
+<ul>
+<li>For <span class='object_link'><a href="AppEngineHttpRequest.html" title="Google::Cloud::Tasks::V2beta3::AppEngineHttpRequest (class)">App Engine tasks</a></span>, 0 indicates that the
+request has the default deadline. The default deadline depends on the
+<a href="https://cloud.google.com/appengine/docs/standard/go/how-instances-are-managed#instance_scaling">scaling type</a>
+of the service: 10 minutes for standard apps with automatic scaling, 24
+hours for standard apps with manual and basic scaling, and 60 minutes for
+flex apps. If the request deadline is set, it must be in the interval [15
+seconds, 24 hours 15 seconds]. Regardless of the task&#39;s
+<code>dispatch_deadline</code>, the app handler will not run for longer than than
+the service&#39;s timeout. We recommend setting the <code>dispatch_deadline</code> to
+at most a few seconds more than the app handler&#39;s timeout. For more
+information see
+<a href="https://cloud.google.com/tasks/docs/creating-appengine-handlers#timeouts">Timeouts</a>.</li>
+</ul>
+
+<p><code>dispatch_deadline</code> will be truncated to the nearest millisecond. The
+deadline is an approximate deadline.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../../Protobuf/Duration.html" title="Google::Protobuf::Duration (class)">Google::Protobuf::Duration</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The deadline for requests sent to the worker. If the worker does not
+respond by this deadline then the request is cancelled and the attempt
+is marked as a <code>DEADLINE_EXCEEDED</code> failure. Cloud Tasks will retry the
+task according to the <span class='object_link'><a href="RetryConfig.html" title="Google::Cloud::Tasks::V2beta3::RetryConfig (class)">RetryConfig</a></span>.</p>
+
+<p>Note that when the request is cancelled, Cloud Tasks will stop listing for
+the response, but whether the worker stops processing depends on the
+worker. For example, if the worker is stuck, it may not react to cancelled
+requests.</p>
+
+<p>The default and maximum values depend on the type of request:</p>
+
+<ul>
+<li>For <span class='object_link'><a href="AppEngineHttpRequest.html" title="Google::Cloud::Tasks::V2beta3::AppEngineHttpRequest (class)">App Engine tasks</a></span>, 0 indicates that the
+request has the default deadline. The default deadline depends on the
+<a href="https://cloud.google.com/appengine/docs/standard/go/how-instances-are-managed#instance_scaling">scaling type</a>
+of the service: 10 minutes for standard apps with automatic scaling, 24
+hours for standard apps with manual and basic scaling, and 60 minutes for
+flex apps. If the request deadline is set, it must be in the interval [15
+seconds, 24 hours 15 seconds]. Regardless of the task&#39;s
+<code>dispatch_deadline</code>, the app handler will not run for longer than than
+the service&#39;s timeout. We recommend setting the <code>dispatch_deadline</code> to
+at most a few seconds more than the app handler&#39;s timeout. For more
+information see
+<a href="https://cloud.google.com/tasks/docs/creating-appengine-handlers#timeouts">Timeouts</a>.</li>
+</ul>
+
+<p><code>dispatch_deadline</code> will be truncated to the nearest millisecond. The
+deadline is an approximate deadline.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/doc/google/cloud/tasks/v2beta3/task.rb', line 111</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Tasks::V2beta3::Task (class)">Task</a></span></span>
   <span class='comment'># The view specifies a subset of {Google::Cloud::Tasks::V2beta3::Task Task} data.
@@ -766,39 +955,39 @@ The other <span class='object_link'><a href="Attempt.html" title="Google::Cloud:
       <pre class="lines">
 
 
-84
-85
-86
-87
-88
-89
-90
-91
-92
-93
-94
-95
-96
-97
-98
-99
-100
-101
-102
-103
-104
-105
-106
-107
-108
-109
-110
 111
 112
-113</pre>
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/doc/google/cloud/tasks/v2beta3/task.rb', line 84</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/doc/google/cloud/tasks/v2beta3/task.rb', line 111</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Tasks::V2beta3::Task (class)">Task</a></span></span>
   <span class='comment'># The view specifies a subset of {Google::Cloud::Tasks::V2beta3::Task Task} data.
@@ -879,39 +1068,39 @@ The other <span class='object_link'><a href="Attempt.html" title="Google::Cloud:
       <pre class="lines">
 
 
-84
-85
-86
-87
-88
-89
-90
-91
-92
-93
-94
-95
-96
-97
-98
-99
-100
-101
-102
-103
-104
-105
-106
-107
-108
-109
-110
 111
 112
-113</pre>
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/doc/google/cloud/tasks/v2beta3/task.rb', line 84</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/doc/google/cloud/tasks/v2beta3/task.rb', line 111</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Tasks::V2beta3::Task (class)">Task</a></span></span>
   <span class='comment'># The view specifies a subset of {Google::Cloud::Tasks::V2beta3::Task Task} data.
@@ -1032,39 +1221,39 @@ hyphens (-), or underscores (_). The maximum length is 500 characters.</li>
       <pre class="lines">
 
 
-84
-85
-86
-87
-88
-89
-90
-91
-92
-93
-94
-95
-96
-97
-98
-99
-100
-101
-102
-103
-104
-105
-106
-107
-108
-109
-110
 111
 112
-113</pre>
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/doc/google/cloud/tasks/v2beta3/task.rb', line 84</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/doc/google/cloud/tasks/v2beta3/task.rb', line 111</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Tasks::V2beta3::Task (class)">Task</a></span></span>
   <span class='comment'># The view specifies a subset of {Google::Cloud::Tasks::V2beta3::Task Task} data.
@@ -1145,39 +1334,39 @@ hyphens (-), or underscores (_). The maximum length is 500 characters.</li>
       <pre class="lines">
 
 
-84
-85
-86
-87
-88
-89
-90
-91
-92
-93
-94
-95
-96
-97
-98
-99
-100
-101
-102
-103
-104
-105
-106
-107
-108
-109
-110
 111
 112
-113</pre>
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/doc/google/cloud/tasks/v2beta3/task.rb', line 84</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/doc/google/cloud/tasks/v2beta3/task.rb', line 111</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Tasks::V2beta3::Task (class)">Task</a></span></span>
   <span class='comment'># The view specifies a subset of {Google::Cloud::Tasks::V2beta3::Task Task} data.
@@ -1266,39 +1455,39 @@ hyphens (-), or underscores (_). The maximum length is 500 characters.</li>
       <pre class="lines">
 
 
-84
-85
-86
-87
-88
-89
-90
-91
-92
-93
-94
-95
-96
-97
-98
-99
-100
-101
-102
-103
-104
-105
-106
-107
-108
-109
-110
 111
 112
-113</pre>
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/doc/google/cloud/tasks/v2beta3/task.rb', line 84</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/doc/google/cloud/tasks/v2beta3/task.rb', line 111</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Tasks::V2beta3::Task (class)">Task</a></span></span>
   <span class='comment'># The view specifies a subset of {Google::Cloud::Tasks::V2beta3::Task Task} data.
@@ -1381,39 +1570,39 @@ been returned.</p>
       <pre class="lines">
 
 
-84
-85
-86
-87
-88
-89
-90
-91
-92
-93
-94
-95
-96
-97
-98
-99
-100
-101
-102
-103
-104
-105
-106
-107
-108
-109
-110
 111
 112
-113</pre>
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/doc/google/cloud/tasks/v2beta3/task.rb', line 84</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/doc/google/cloud/tasks/v2beta3/task.rb', line 111</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Tasks::V2beta3::Task (class)">Task</a></span></span>
   <span class='comment'># The view specifies a subset of {Google::Cloud::Tasks::V2beta3::Task Task} data.

@@ -108,7 +108,12 @@ and the following scope:</p>
 project as the queue. For more information, see
 <a href="https://cloud.google.com/appengine/docs/standard/python/how-requests-are-routed">How Requests are Routed</a>
 and how routing is affected by
-<a href="https://cloud.google.com/appengine/docs/python/config/dispatchref">dispatch files</a>.</p>
+<a href="https://cloud.google.com/appengine/docs/python/config/dispatchref">dispatch files</a>.
+Traffic is encrypted during transport and never leaves Google datacenters.
+Because this traffic is carried over a communication mechanism internal to
+Google, you cannot explicitly set the protocol (for example, HTTP or HTTPS).
+The request to the handler, however, will appear to have used the HTTP
+protocol.</p>
 
 <p>The <span class='object_link'><a href="AppEngineRouting.html" title="Google::Cloud::Tasks::V2beta3::AppEngineRouting (class)">AppEngineRouting</a></span> used to construct the URL that the task is
 delivered to can be set at the queue-level or task-level:</p>
@@ -127,6 +132,14 @@ is for the
 <li><code>url =</code> <span class='object_link'><a href="AppEngineRouting.html#host-instance_method" title="Google::Cloud::Tasks::V2beta3::AppEngineRouting#host (method)">host</a></span> <code>+</code>
 <span class='object_link'><a href="#relative_uri-instance_method" title="Google::Cloud::Tasks::V2beta3::AppEngineHttpRequest#relative_uri (method)">relative_uri</a></span></li>
 </ul>
+
+<p>Tasks can be dispatched to secure app handlers, unsecure app handlers, and
+URIs restricted with
+<a href="https://cloud.google.com/appengine/docs/standard/python/config/appref"><code>login: admin</code></a>.
+Because tasks are not run as any user, they cannot be dispatched to URIs
+restricted with
+<a href="https://cloud.google.com/appengine/docs/standard/python/config/appref"><code>login: required</code></a>
+Task dispatches also do not follow redirects.</p>
 
 <p>The task attempt has succeeded if the app&#39;s request handler returns
 an HTTP response code in the range [<code>200</code> - <code>299</code>]. <code>503</code> is
@@ -342,10 +355,10 @@ is used for all tasks in the queue, no matter what the setting is for the
       <pre class="lines">
 
 
-162</pre>
+175</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/doc/google/cloud/tasks/v2beta3/target.rb', line 162</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/doc/google/cloud/tasks/v2beta3/target.rb', line 175</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Tasks::V2beta3::AppEngineHttpRequest (class)">AppEngineHttpRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -403,10 +416,10 @@ an error to set a body on a task with an incompatible <span class='object_link'>
       <pre class="lines">
 
 
-162</pre>
+175</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/doc/google/cloud/tasks/v2beta3/target.rb', line 162</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/doc/google/cloud/tasks/v2beta3/target.rb', line 175</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Tasks::V2beta3::AppEngineHttpRequest (class)">AppEngineHttpRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -550,10 +563,10 @@ information, see the CreateTask documentation.</p>
       <pre class="lines">
 
 
-162</pre>
+175</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/doc/google/cloud/tasks/v2beta3/target.rb', line 162</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/doc/google/cloud/tasks/v2beta3/target.rb', line 175</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Tasks::V2beta3::AppEngineHttpRequest (class)">AppEngineHttpRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -621,10 +634,10 @@ written in e.g.
       <pre class="lines">
 
 
-162</pre>
+175</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/doc/google/cloud/tasks/v2beta3/target.rb', line 162</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/doc/google/cloud/tasks/v2beta3/target.rb', line 175</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Tasks::V2beta3::AppEngineHttpRequest (class)">AppEngineHttpRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -686,10 +699,10 @@ No spaces are allowed, and the maximum length allowed is 2083 characters.</p>
       <pre class="lines">
 
 
-162</pre>
+175</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/doc/google/cloud/tasks/v2beta3/target.rb', line 162</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/doc/google/cloud/tasks/v2beta3/target.rb', line 175</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Tasks::V2beta3::AppEngineHttpRequest (class)">AppEngineHttpRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>

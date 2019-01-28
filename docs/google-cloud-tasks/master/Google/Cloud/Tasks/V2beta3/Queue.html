@@ -136,7 +136,7 @@ retry options, queue types, and others.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>App Engine HTTP queue.</p>
+    <span class="summary_desc"><div class='inline'><p><span class='object_link'><a href="AppEngineHttpQueue.html" title="Google::Cloud::Tasks::V2beta3::AppEngineHttpQueue (class)">AppEngineHttpQueue</a></span> settings apply only to <span class='object_link'><a href="AppEngineHttpRequest.html" title="Google::Cloud::Tasks::V2beta3::AppEngineHttpRequest (class)">App Engine tasks</a></span> in this queue.</p>
 </div></span>
   
 </li>
@@ -294,9 +294,8 @@ retry options, queue types, and others.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns App Engine HTTP queue.</p>
-
-<p>An App Engine queue is a queue that has an <span class='object_link'><a href="AppEngineHttpQueue.html" title="Google::Cloud::Tasks::V2beta3::AppEngineHttpQueue (class)">AppEngineHttpQueue</a></span> type.</p>
+    <p>Returns <span class='object_link'><a href="AppEngineHttpQueue.html" title="Google::Cloud::Tasks::V2beta3::AppEngineHttpQueue (class)">AppEngineHttpQueue</a></span> settings apply only to
+<span class='object_link'><a href="AppEngineHttpRequest.html" title="Google::Cloud::Tasks::V2beta3::AppEngineHttpRequest (class)">App Engine tasks</a></span> in this queue.</p>
 
 
   </div>
@@ -314,9 +313,8 @@ retry options, queue types, and others.</p>
       
       
         &mdash;
-        <div class='inline'><p>App Engine HTTP queue.</p>
-
-<p>An App Engine queue is a queue that has an <span class='object_link'><a href="AppEngineHttpQueue.html" title="Google::Cloud::Tasks::V2beta3::AppEngineHttpQueue (class)">AppEngineHttpQueue</a></span> type.</p>
+        <div class='inline'><p><span class='object_link'><a href="AppEngineHttpQueue.html" title="Google::Cloud::Tasks::V2beta3::AppEngineHttpQueue (class)">AppEngineHttpQueue</a></span> settings apply only to
+<span class='object_link'><a href="AppEngineHttpRequest.html" title="Google::Cloud::Tasks::V2beta3::AppEngineHttpRequest (class)">App Engine tasks</a></span> in this queue.</p>
 </div>
       
     </li>
@@ -329,14 +327,6 @@ retry options, queue types, and others.</p>
       <pre class="lines">
 
 
-97
-98
-99
-100
-101
-102
-103
-104
 105
 106
 107
@@ -364,10 +354,20 @@ retry options, queue types, and others.</p>
 129
 130
 131
-132</pre>
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/doc/google/cloud/tasks/v2beta3/queue.rb', line 97</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/doc/google/cloud/tasks/v2beta3/queue.rb', line 105</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Tasks::V2beta3::Queue (class)">Queue</a></span></span>
   <span class='comment'># State of the queue.
@@ -393,9 +393,11 @@ retry options, queue types, and others.</p>
     <span class='comment'># The queue is disabled.
 </span>    <span class='comment'>#
 </span>    <span class='comment'># A queue becomes `DISABLED` when
-</span>    <span class='comment'># [queue.yaml](https://cloud.google.com/appengine/docs/python/config/queueref) or
-</span>    <span class='comment'># [queue.xml](https://cloud.google.com/appengine/docs/standard/java/config/queueref) is uploaded
-</span>    <span class='comment'># which does not contain the queue. You cannot directly disable a queue.
+</span>    <span class='comment'># [queue.yaml](https://cloud.google.com/appengine/docs/python/config/queueref)
+</span>    <span class='comment'># or
+</span>    <span class='comment'># [queue.xml](https://cloud.google.com/appengine/docs/standard/java/config/queueref)
+</span>    <span class='comment'># is uploaded which does not contain the queue. You cannot directly disable
+</span>    <span class='comment'># a queue.
 </span>    <span class='comment'>#
 </span>    <span class='comment'># When a queue is disabled, tasks can still be added to a queue
 </span>    <span class='comment'># but the tasks are not dispatched.
@@ -492,14 +494,6 @@ hyphens (-). The maximum length is 100 characters.</li>
       <pre class="lines">
 
 
-97
-98
-99
-100
-101
-102
-103
-104
 105
 106
 107
@@ -527,10 +521,20 @@ hyphens (-). The maximum length is 100 characters.</li>
 129
 130
 131
-132</pre>
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/doc/google/cloud/tasks/v2beta3/queue.rb', line 97</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/doc/google/cloud/tasks/v2beta3/queue.rb', line 105</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Tasks::V2beta3::Queue (class)">Queue</a></span></span>
   <span class='comment'># State of the queue.
@@ -556,9 +560,11 @@ hyphens (-). The maximum length is 100 characters.</li>
     <span class='comment'># The queue is disabled.
 </span>    <span class='comment'>#
 </span>    <span class='comment'># A queue becomes `DISABLED` when
-</span>    <span class='comment'># [queue.yaml](https://cloud.google.com/appengine/docs/python/config/queueref) or
-</span>    <span class='comment'># [queue.xml](https://cloud.google.com/appengine/docs/standard/java/config/queueref) is uploaded
-</span>    <span class='comment'># which does not contain the queue. You cannot directly disable a queue.
+</span>    <span class='comment'># [queue.yaml](https://cloud.google.com/appengine/docs/python/config/queueref)
+</span>    <span class='comment'># or
+</span>    <span class='comment'># [queue.xml](https://cloud.google.com/appengine/docs/standard/java/config/queueref)
+</span>    <span class='comment'># is uploaded which does not contain the queue. You cannot directly disable
+</span>    <span class='comment'># a queue.
 </span>    <span class='comment'>#
 </span>    <span class='comment'># When a queue is disabled, tasks can still be added to a queue
 </span>    <span class='comment'># but the tasks are not dispatched.
@@ -635,14 +641,6 @@ time will be unset if the queue has never been purged.</p>
       <pre class="lines">
 
 
-97
-98
-99
-100
-101
-102
-103
-104
 105
 106
 107
@@ -670,10 +668,20 @@ time will be unset if the queue has never been purged.</p>
 129
 130
 131
-132</pre>
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/doc/google/cloud/tasks/v2beta3/queue.rb', line 97</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/doc/google/cloud/tasks/v2beta3/queue.rb', line 105</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Tasks::V2beta3::Queue (class)">Queue</a></span></span>
   <span class='comment'># State of the queue.
@@ -699,9 +707,11 @@ time will be unset if the queue has never been purged.</p>
     <span class='comment'># The queue is disabled.
 </span>    <span class='comment'>#
 </span>    <span class='comment'># A queue becomes `DISABLED` when
-</span>    <span class='comment'># [queue.yaml](https://cloud.google.com/appengine/docs/python/config/queueref) or
-</span>    <span class='comment'># [queue.xml](https://cloud.google.com/appengine/docs/standard/java/config/queueref) is uploaded
-</span>    <span class='comment'># which does not contain the queue. You cannot directly disable a queue.
+</span>    <span class='comment'># [queue.yaml](https://cloud.google.com/appengine/docs/python/config/queueref)
+</span>    <span class='comment'># or
+</span>    <span class='comment'># [queue.xml](https://cloud.google.com/appengine/docs/standard/java/config/queueref)
+</span>    <span class='comment'># is uploaded which does not contain the queue. You cannot directly disable
+</span>    <span class='comment'># a queue.
 </span>    <span class='comment'>#
 </span>    <span class='comment'># When a queue is disabled, tasks can still be added to a queue
 </span>    <span class='comment'># but the tasks are not dispatched.
@@ -731,10 +741,9 @@ time will be unset if the queue has never been purged.</p>
   <div class="discussion">
     <p>Returns Rate limits for task dispatches.</p>
 
-<p><span class='object_link'><a href="#rate_limits-instance_method" title="Google::Cloud::Tasks::V2beta3::Queue#rate_limits (method)">rate_limits</a></span> and
-<span class='object_link'><a href="#retry_config-instance_method" title="Google::Cloud::Tasks::V2beta3::Queue#retry_config (method)">retry_config</a></span> are related because they both
-control task attempts however they control how tasks are
-attempted in different ways:</p>
+<p><span class='object_link'><a href="#rate_limits-instance_method" title="Google::Cloud::Tasks::V2beta3::Queue#rate_limits (method)">rate_limits</a></span> and <span class='object_link'><a href="#retry_config-instance_method" title="Google::Cloud::Tasks::V2beta3::Queue#retry_config (method)">retry_config</a></span> are
+related because they both control task attempts. However they control task
+attempts in different ways:</p>
 
 <ul>
 <li><span class='object_link'><a href="#rate_limits-instance_method" title="Google::Cloud::Tasks::V2beta3::Queue#rate_limits (method)">rate_limits</a></span> controls the total rate of
@@ -745,6 +754,18 @@ attempt or a retry).</li>
 particular a task after its first attempt fails. That is,
 <span class='object_link'><a href="#retry_config-instance_method" title="Google::Cloud::Tasks::V2beta3::Queue#retry_config (method)">retry_config</a></span> controls task retries (the
 second attempt, third attempt, etc).</li>
+</ul>
+
+<p>The queue&#39;s actual dispatch rate is the result of:</p>
+
+<ul>
+<li>Number of tasks in the queue</li>
+<li>User-specified throttling: rate limits
+retry configuration, and the
+<span class='object_link'><a href="#state-instance_method" title="Google::Cloud::Tasks::V2beta3::Queue#state (method)">queue&#39;s state</a></span>.</li>
+<li>System throttling due to <code>429</code> (Too Many Requests) or <code>503</code> (Service
+Unavailable) responses from the worker, high error rates, or to smooth
+sudden large traffic spikes.</li>
 </ul>
 
 
@@ -765,10 +786,9 @@ second attempt, third attempt, etc).</li>
         &mdash;
         <div class='inline'><p>Rate limits for task dispatches.</p>
 
-<p><span class='object_link'><a href="#rate_limits-instance_method" title="Google::Cloud::Tasks::V2beta3::Queue#rate_limits (method)">rate_limits</a></span> and
-<span class='object_link'><a href="#retry_config-instance_method" title="Google::Cloud::Tasks::V2beta3::Queue#retry_config (method)">retry_config</a></span> are related because they both
-control task attempts however they control how tasks are
-attempted in different ways:</p>
+<p><span class='object_link'><a href="#rate_limits-instance_method" title="Google::Cloud::Tasks::V2beta3::Queue#rate_limits (method)">rate_limits</a></span> and <span class='object_link'><a href="#retry_config-instance_method" title="Google::Cloud::Tasks::V2beta3::Queue#retry_config (method)">retry_config</a></span> are
+related because they both control task attempts. However they control task
+attempts in different ways:</p>
 
 <ul>
 <li><span class='object_link'><a href="#rate_limits-instance_method" title="Google::Cloud::Tasks::V2beta3::Queue#rate_limits (method)">rate_limits</a></span> controls the total rate of
@@ -779,6 +799,18 @@ attempt or a retry).</li>
 particular a task after its first attempt fails. That is,
 <span class='object_link'><a href="#retry_config-instance_method" title="Google::Cloud::Tasks::V2beta3::Queue#retry_config (method)">retry_config</a></span> controls task retries (the
 second attempt, third attempt, etc).</li>
+</ul>
+
+<p>The queue&#39;s actual dispatch rate is the result of:</p>
+
+<ul>
+<li>Number of tasks in the queue</li>
+<li>User-specified throttling: rate limits
+retry configuration, and the
+<span class='object_link'><a href="#state-instance_method" title="Google::Cloud::Tasks::V2beta3::Queue#state (method)">queue&#39;s state</a></span>.</li>
+<li>System throttling due to <code>429</code> (Too Many Requests) or <code>503</code> (Service
+Unavailable) responses from the worker, high error rates, or to smooth
+sudden large traffic spikes.</li>
 </ul>
 </div>
       
@@ -792,14 +824,6 @@ second attempt, third attempt, etc).</li>
       <pre class="lines">
 
 
-97
-98
-99
-100
-101
-102
-103
-104
 105
 106
 107
@@ -827,10 +851,20 @@ second attempt, third attempt, etc).</li>
 129
 130
 131
-132</pre>
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/doc/google/cloud/tasks/v2beta3/queue.rb', line 97</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/doc/google/cloud/tasks/v2beta3/queue.rb', line 105</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Tasks::V2beta3::Queue (class)">Queue</a></span></span>
   <span class='comment'># State of the queue.
@@ -856,9 +890,11 @@ second attempt, third attempt, etc).</li>
     <span class='comment'># The queue is disabled.
 </span>    <span class='comment'>#
 </span>    <span class='comment'># A queue becomes `DISABLED` when
-</span>    <span class='comment'># [queue.yaml](https://cloud.google.com/appengine/docs/python/config/queueref) or
-</span>    <span class='comment'># [queue.xml](https://cloud.google.com/appengine/docs/standard/java/config/queueref) is uploaded
-</span>    <span class='comment'># which does not contain the queue. You cannot directly disable a queue.
+</span>    <span class='comment'># [queue.yaml](https://cloud.google.com/appengine/docs/python/config/queueref)
+</span>    <span class='comment'># or
+</span>    <span class='comment'># [queue.xml](https://cloud.google.com/appengine/docs/standard/java/config/queueref)
+</span>    <span class='comment'># is uploaded which does not contain the queue. You cannot directly disable
+</span>    <span class='comment'># a queue.
 </span>    <span class='comment'>#
 </span>    <span class='comment'># When a queue is disabled, tasks can still be added to a queue
 </span>    <span class='comment'># but the tasks are not dispatched.
@@ -937,14 +973,6 @@ explicitly set on the task and were created by the App Engine SDK. See
       <pre class="lines">
 
 
-97
-98
-99
-100
-101
-102
-103
-104
 105
 106
 107
@@ -972,10 +1000,20 @@ explicitly set on the task and were created by the App Engine SDK. See
 129
 130
 131
-132</pre>
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/doc/google/cloud/tasks/v2beta3/queue.rb', line 97</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/doc/google/cloud/tasks/v2beta3/queue.rb', line 105</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Tasks::V2beta3::Queue (class)">Queue</a></span></span>
   <span class='comment'># State of the queue.
@@ -1001,9 +1039,11 @@ explicitly set on the task and were created by the App Engine SDK. See
     <span class='comment'># The queue is disabled.
 </span>    <span class='comment'>#
 </span>    <span class='comment'># A queue becomes `DISABLED` when
-</span>    <span class='comment'># [queue.yaml](https://cloud.google.com/appengine/docs/python/config/queueref) or
-</span>    <span class='comment'># [queue.xml](https://cloud.google.com/appengine/docs/standard/java/config/queueref) is uploaded
-</span>    <span class='comment'># which does not contain the queue. You cannot directly disable a queue.
+</span>    <span class='comment'># [queue.yaml](https://cloud.google.com/appengine/docs/python/config/queueref)
+</span>    <span class='comment'># or
+</span>    <span class='comment'># [queue.xml](https://cloud.google.com/appengine/docs/standard/java/config/queueref)
+</span>    <span class='comment'># is uploaded which does not contain the queue. You cannot directly disable
+</span>    <span class='comment'># a queue.
 </span>    <span class='comment'>#
 </span>    <span class='comment'># When a queue is disabled, tasks can still be added to a queue
 </span>    <span class='comment'># but the tasks are not dispatched.
@@ -1074,14 +1114,6 @@ UpdateQueue cannot be used to change <code>state</code>.</p>
       <pre class="lines">
 
 
-97
-98
-99
-100
-101
-102
-103
-104
 105
 106
 107
@@ -1109,10 +1141,20 @@ UpdateQueue cannot be used to change <code>state</code>.</p>
 129
 130
 131
-132</pre>
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/doc/google/cloud/tasks/v2beta3/queue.rb', line 97</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/doc/google/cloud/tasks/v2beta3/queue.rb', line 105</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Tasks::V2beta3::Queue (class)">Queue</a></span></span>
   <span class='comment'># State of the queue.
@@ -1138,9 +1180,11 @@ UpdateQueue cannot be used to change <code>state</code>.</p>
     <span class='comment'># The queue is disabled.
 </span>    <span class='comment'>#
 </span>    <span class='comment'># A queue becomes `DISABLED` when
-</span>    <span class='comment'># [queue.yaml](https://cloud.google.com/appengine/docs/python/config/queueref) or
-</span>    <span class='comment'># [queue.xml](https://cloud.google.com/appengine/docs/standard/java/config/queueref) is uploaded
-</span>    <span class='comment'># which does not contain the queue. You cannot directly disable a queue.
+</span>    <span class='comment'># [queue.yaml](https://cloud.google.com/appengine/docs/python/config/queueref)
+</span>    <span class='comment'># or
+</span>    <span class='comment'># [queue.xml](https://cloud.google.com/appengine/docs/standard/java/config/queueref)
+</span>    <span class='comment'># is uploaded which does not contain the queue. You cannot directly disable
+</span>    <span class='comment'># a queue.
 </span>    <span class='comment'>#
 </span>    <span class='comment'># When a queue is disabled, tasks can still be added to a queue
 </span>    <span class='comment'># but the tasks are not dispatched.
