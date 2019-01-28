@@ -22,13 +22,13 @@ describe Google::Cloud::Firestore::Batch, :delete, :mock_firestore do
   let(:documents_path) { "#{database_path}/documents" }
   let(:commit_time) { Time.now }
   let :delete_writes do
-    [Google::Firestore::V1beta1::Write.new(
+    [Google::Firestore::V1::Write.new(
       delete: "#{documents_path}/#{document_path}")]
   end
   let :commit_resp do
-    Google::Firestore::V1beta1::CommitResponse.new(
+    Google::Firestore::V1::CommitResponse.new(
       commit_time: Google::Cloud::Firestore::Convert.time_to_timestamp(commit_time),
-      write_results: [Google::Firestore::V1beta1::WriteResult.new(
+      write_results: [Google::Firestore::V1::WriteResult.new(
         update_time: Google::Cloud::Firestore::Convert.time_to_timestamp(commit_time))]
       )
   end
@@ -57,7 +57,7 @@ describe Google::Cloud::Firestore::Batch, :delete, :mock_firestore do
   end
 
   it "deletes a document with exists precondition" do
-    delete_writes.first.current_document = Google::Firestore::V1beta1::Precondition.new(exists: true)
+    delete_writes.first.current_document = Google::Firestore::V1::Precondition.new(exists: true)
 
     firestore_mock.expect :commit, commit_resp, [database_path, delete_writes, options: default_options]
 
@@ -69,7 +69,7 @@ describe Google::Cloud::Firestore::Batch, :delete, :mock_firestore do
   end
 
   it "deletes a document with update_time precondition" do
-    delete_writes.first.current_document = Google::Firestore::V1beta1::Precondition.new(
+    delete_writes.first.current_document = Google::Firestore::V1::Precondition.new(
       update_time: Google::Cloud::Firestore::Convert.time_to_timestamp(commit_time))
 
     firestore_mock.expect :commit, commit_resp, [database_path, delete_writes, options: default_options]

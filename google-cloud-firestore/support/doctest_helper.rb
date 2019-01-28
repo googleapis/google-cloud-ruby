@@ -101,6 +101,7 @@ end
 
 YARD::Doctest.configure do |doctest|
   # Current mocking does not support testing GAPIC layer. (Auth failures occur.)
+  doctest.skip "Google::Cloud::Firestore::V1::FirestoreClient"
   doctest.skip "Google::Cloud::Firestore::V1beta1::FirestoreClient"
 
   doctest.before "Google::Cloud#firestore" do
@@ -391,9 +392,9 @@ def commit_args
 end
 
 def commit_resp
-  Google::Firestore::V1beta1::CommitResponse.new(
+  Google::Firestore::V1::CommitResponse.new(
     commit_time: Google::Cloud::Firestore::Convert.time_to_timestamp(Time.now),
-    write_results: [Google::Firestore::V1beta1::WriteResult.new(
+    write_results: [Google::Firestore::V1::WriteResult.new(
       update_time: Google::Cloud::Firestore::Convert.time_to_timestamp(Time.now))]
     )
 end
@@ -415,10 +416,10 @@ def run_query_resp
 end
 
 def run_query_resp_obj doc, data
-  Google::Firestore::V1beta1::RunQueryResponse.new(
+  Google::Firestore::V1::RunQueryResponse.new(
     transaction: "tx123",
     read_time: Google::Cloud::Firestore::Convert.time_to_timestamp(Time.now),
-    document: Google::Firestore::V1beta1::Document.new(
+    document: Google::Firestore::V1::Document.new(
       name: "projects/my-project-id/databases/(default)/documents/#{doc}",
       fields: Google::Cloud::Firestore::Convert.hash_to_fields(data),
       create_time: Google::Cloud::Firestore::Convert.time_to_timestamp(Time.now),
@@ -455,7 +456,7 @@ end
 
 def missing_batch_get_resp
   [
-    Google::Firestore::V1beta1::BatchGetDocumentsResponse.new(
+    Google::Firestore::V1::BatchGetDocumentsResponse.new(
       read_time: Google::Cloud::Firestore::Convert.time_to_timestamp(Time.now),
       missing: "projects/my-project-id/databases/(default)/documents/cities/Atlantis"
     )
@@ -463,9 +464,9 @@ def missing_batch_get_resp
 end
 
 def batch_get_resp_obj doc, data
-  Google::Firestore::V1beta1::BatchGetDocumentsResponse.new(
+  Google::Firestore::V1::BatchGetDocumentsResponse.new(
     read_time: Google::Cloud::Firestore::Convert.time_to_timestamp(Time.now),
-    found: Google::Firestore::V1beta1::Document.new(
+    found: Google::Firestore::V1::Document.new(
       name: "projects/my-project-id/databases/(default)/documents/#{doc}",
       fields: Google::Cloud::Firestore::Convert.hash_to_fields(data),
       create_time: Google::Cloud::Firestore::Convert.time_to_timestamp(Time.now),

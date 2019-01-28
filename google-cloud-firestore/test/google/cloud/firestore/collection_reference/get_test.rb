@@ -22,19 +22,19 @@ describe Google::Cloud::Firestore::CollectionReference, :get, :mock_firestore do
   let(:read_time) { Time.now }
   let :query_docs_enum do
     [
-      Google::Firestore::V1beta1::RunQueryResponse.new(
+      Google::Firestore::V1::RunQueryResponse.new(
         read_time: Google::Cloud::Firestore::Convert.time_to_timestamp(read_time),
-        document: Google::Firestore::V1beta1::Document.new(
+        document: Google::Firestore::V1::Document.new(
           name: "projects/#{project}/databases/(default)/documents/users/mike/messages/abc123",
-          fields: { "body" => Google::Firestore::V1beta1::Value.new(string_value: "LGTM") },
+          fields: { "body" => Google::Firestore::V1::Value.new(string_value: "LGTM") },
           create_time: Google::Cloud::Firestore::Convert.time_to_timestamp(read_time),
           update_time: Google::Cloud::Firestore::Convert.time_to_timestamp(read_time)
         )),
-      Google::Firestore::V1beta1::RunQueryResponse.new(
+      Google::Firestore::V1::RunQueryResponse.new(
         read_time: Google::Cloud::Firestore::Convert.time_to_timestamp(read_time),
-        document: Google::Firestore::V1beta1::Document.new(
+        document: Google::Firestore::V1::Document.new(
           name: "projects/#{project}/databases/(default)/documents/users/mike/messages/xyz789",
-          fields: { "body" => Google::Firestore::V1beta1::Value.new(string_value: "PTAL") },
+          fields: { "body" => Google::Firestore::V1::Value.new(string_value: "PTAL") },
           create_time: Google::Cloud::Firestore::Convert.time_to_timestamp(read_time),
           update_time: Google::Cloud::Firestore::Convert.time_to_timestamp(read_time)
         ))
@@ -42,8 +42,8 @@ describe Google::Cloud::Firestore::CollectionReference, :get, :mock_firestore do
   end
 
   it "gets docs" do
-    expected_query = Google::Firestore::V1beta1::StructuredQuery.new(
-      from: [Google::Firestore::V1beta1::StructuredQuery::CollectionSelector.new(collection_id: "messages", all_descendants: false)]
+    expected_query = Google::Firestore::V1::StructuredQuery.new(
+      from: [Google::Firestore::V1::StructuredQuery::CollectionSelector.new(collection_id: "messages", all_descendants: false)]
     )
     firestore_mock.expect :run_query, query_docs_enum, ["projects/#{project}/databases/(default)/documents/users/mike", structured_query: expected_query, options: default_options]
 
@@ -53,8 +53,8 @@ describe Google::Cloud::Firestore::CollectionReference, :get, :mock_firestore do
   end
 
   it "gets docs using run alias" do
-    expected_query = Google::Firestore::V1beta1::StructuredQuery.new(
-      from: [Google::Firestore::V1beta1::StructuredQuery::CollectionSelector.new(collection_id: "messages", all_descendants: false)]
+    expected_query = Google::Firestore::V1::StructuredQuery.new(
+      from: [Google::Firestore::V1::StructuredQuery::CollectionSelector.new(collection_id: "messages", all_descendants: false)]
     )
     firestore_mock.expect :run_query, query_docs_enum, ["projects/#{project}/databases/(default)/documents/users/mike", structured_query: expected_query, options: default_options]
 

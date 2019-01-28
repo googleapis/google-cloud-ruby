@@ -29,9 +29,9 @@ require_relative "../../../../conformance/test-definition_pb"
 class ConformanceTest < MockFirestore
   let(:commit_time) { Time.now }
   let :commit_resp do
-    Google::Firestore::V1beta1::CommitResponse.new(
+    Google::Firestore::V1::CommitResponse.new(
       commit_time: Google::Cloud::Firestore::Convert.time_to_timestamp(commit_time),
-      write_results: [Google::Firestore::V1beta1::WriteResult.new(
+      write_results: [Google::Firestore::V1::WriteResult.new(
         update_time: Google::Cloud::Firestore::Convert.time_to_timestamp(commit_time))]
       )
   end
@@ -42,7 +42,7 @@ class ConformanceTest < MockFirestore
 
   def doc_snap_from_path_and_json_data doc_path, json_data
     Google::Cloud::Firestore::DocumentSnapshot.new.tap do |s|
-      s.grpc = Google::Firestore::V1beta1::Document.new(
+      s.grpc = Google::Firestore::V1::Document.new(
         name: doc_path,
         fields: Google::Cloud::Firestore::Convert.hash_to_fields(data_from_json(json_data))
       )
@@ -339,7 +339,7 @@ test_suite = Tests::TestSuite.decode proto_contents
 test_suite.tests.each_with_index do |wrapper, index|
   case wrapper.test
     when :get
-      next # Google::Firestore::V1beta1::GetDocumentRequest is not used.
+      next # Google::Firestore::V1::GetDocumentRequest is not used.
     when :create
       ConformanceCreate.build_test_for wrapper.description, wrapper.create, index
     when :set

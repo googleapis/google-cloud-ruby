@@ -22,21 +22,21 @@ describe Google::Cloud::Firestore::DocumentReference, :update, :mock_firestore d
   let(:documents_path) { "#{database_path}/documents" }
   let(:commit_time) { Time.now }
   let :update_writes do
-    [Google::Firestore::V1beta1::Write.new(
-      update: Google::Firestore::V1beta1::Document.new(
+    [Google::Firestore::V1::Write.new(
+      update: Google::Firestore::V1::Document.new(
         name: "#{documents_path}/#{document_path}",
         fields: Google::Cloud::Firestore::Convert.hash_to_fields({ name: "Mike" })),
-      update_mask: Google::Firestore::V1beta1::DocumentMask.new(
+      update_mask: Google::Firestore::V1::DocumentMask.new(
         field_paths: ["name"]
       ),
-      current_document: Google::Firestore::V1beta1::Precondition.new(
+      current_document: Google::Firestore::V1::Precondition.new(
         exists: true)
     )]
   end
   let :commit_resp do
-    Google::Firestore::V1beta1::CommitResponse.new(
+    Google::Firestore::V1::CommitResponse.new(
       commit_time: Google::Cloud::Firestore::Convert.time_to_timestamp(commit_time),
-      write_results: [Google::Firestore::V1beta1::WriteResult.new(
+      write_results: [Google::Firestore::V1::WriteResult.new(
         update_time: Google::Cloud::Firestore::Convert.time_to_timestamp(commit_time))]
       )
   end

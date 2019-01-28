@@ -23,22 +23,22 @@ describe Google::Cloud::Firestore::Client, :get_all, :mock_firestore do
   }
   let :batch_docs_enum do
     [
-      Google::Firestore::V1beta1::BatchGetDocumentsResponse.new(
+      Google::Firestore::V1::BatchGetDocumentsResponse.new(
         read_time: Google::Cloud::Firestore::Convert.time_to_timestamp(read_time),
-        found: Google::Firestore::V1beta1::Document.new(
+        found: Google::Firestore::V1::Document.new(
           name: "projects/#{project}/databases/(default)/documents/users/mike",
-          fields: { "name" => Google::Firestore::V1beta1::Value.new(string_value: "Mike") },
+          fields: { "name" => Google::Firestore::V1::Value.new(string_value: "Mike") },
           create_time: Google::Cloud::Firestore::Convert.time_to_timestamp(read_time),
           update_time: Google::Cloud::Firestore::Convert.time_to_timestamp(read_time)
         )),
-      Google::Firestore::V1beta1::BatchGetDocumentsResponse.new(
+      Google::Firestore::V1::BatchGetDocumentsResponse.new(
         read_time: Google::Cloud::Firestore::Convert.time_to_timestamp(read_time),
         missing: "projects/#{project}/databases/(default)/documents/users/tad"),
-      Google::Firestore::V1beta1::BatchGetDocumentsResponse.new(
+      Google::Firestore::V1::BatchGetDocumentsResponse.new(
         read_time: Google::Cloud::Firestore::Convert.time_to_timestamp(read_time),
-        found: Google::Firestore::V1beta1::Document.new(
+        found: Google::Firestore::V1::Document.new(
           name: "projects/#{project}/databases/(default)/documents/users/chris",
-          fields: { "name" => Google::Firestore::V1beta1::Value.new(string_value: "Chris") },
+          fields: { "name" => Google::Firestore::V1::Value.new(string_value: "Chris") },
           create_time: Google::Cloud::Firestore::Convert.time_to_timestamp(read_time),
           update_time: Google::Cloud::Firestore::Convert.time_to_timestamp(read_time)
         ))
@@ -126,7 +126,7 @@ describe Google::Cloud::Firestore::Client, :get_all, :mock_firestore do
   end
 
   describe :field_mask do
-    let(:field_mask) { Google::Firestore::V1beta1::DocumentMask.new(field_paths: ["name"]) }
+    let(:field_mask) { Google::Firestore::V1::DocumentMask.new(field_paths: ["name"]) }
 
     it "gets multiple docs using splat (string)" do
       firestore_mock.expect :batch_get_documents, batch_docs_enum, [database_path, full_doc_paths, mask: field_mask, options: default_options]

@@ -3,10 +3,10 @@
 
 require 'google/protobuf'
 
-require 'google/firestore/v1beta1/common_pb'
-require 'google/firestore/v1beta1/document_pb'
-require 'google/firestore/v1beta1/firestore_pb'
-require 'google/firestore/v1beta1/query_pb'
+require 'google/firestore/v1/common_pb'
+require 'google/firestore/v1/document_pb'
+require 'google/firestore/v1/firestore_pb'
+require 'google/firestore/v1/query_pb'
 require 'google/protobuf/timestamp_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "tests.TestSuite" do
@@ -27,40 +27,40 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   end
   add_message "tests.GetTest" do
     optional :doc_ref_path, :string, 1
-    optional :request, :message, 2, "google.firestore.v1beta1.GetDocumentRequest"
+    optional :request, :message, 2, "google.firestore.v1.GetDocumentRequest"
   end
   add_message "tests.CreateTest" do
     optional :doc_ref_path, :string, 1
     optional :json_data, :string, 2
-    optional :request, :message, 3, "google.firestore.v1beta1.CommitRequest"
+    optional :request, :message, 3, "google.firestore.v1.CommitRequest"
     optional :is_error, :bool, 4
   end
   add_message "tests.SetTest" do
     optional :doc_ref_path, :string, 1
     optional :option, :message, 2, "tests.SetOption"
     optional :json_data, :string, 3
-    optional :request, :message, 4, "google.firestore.v1beta1.CommitRequest"
+    optional :request, :message, 4, "google.firestore.v1.CommitRequest"
     optional :is_error, :bool, 5
   end
   add_message "tests.UpdateTest" do
     optional :doc_ref_path, :string, 1
-    optional :precondition, :message, 2, "google.firestore.v1beta1.Precondition"
+    optional :precondition, :message, 2, "google.firestore.v1.Precondition"
     optional :json_data, :string, 3
-    optional :request, :message, 4, "google.firestore.v1beta1.CommitRequest"
+    optional :request, :message, 4, "google.firestore.v1.CommitRequest"
     optional :is_error, :bool, 5
   end
   add_message "tests.UpdatePathsTest" do
     optional :doc_ref_path, :string, 1
-    optional :precondition, :message, 2, "google.firestore.v1beta1.Precondition"
+    optional :precondition, :message, 2, "google.firestore.v1.Precondition"
     repeated :field_paths, :message, 3, "tests.FieldPath"
     repeated :json_values, :string, 4
-    optional :request, :message, 5, "google.firestore.v1beta1.CommitRequest"
+    optional :request, :message, 5, "google.firestore.v1.CommitRequest"
     optional :is_error, :bool, 6
   end
   add_message "tests.DeleteTest" do
     optional :doc_ref_path, :string, 1
-    optional :precondition, :message, 2, "google.firestore.v1beta1.Precondition"
-    optional :request, :message, 3, "google.firestore.v1beta1.CommitRequest"
+    optional :precondition, :message, 2, "google.firestore.v1.Precondition"
+    optional :request, :message, 3, "google.firestore.v1.CommitRequest"
     optional :is_error, :bool, 4
   end
   add_message "tests.SetOption" do
@@ -70,7 +70,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "tests.QueryTest" do
     optional :coll_path, :string, 1
     repeated :clauses, :message, 2, "tests.Clause"
-    optional :query, :message, 3, "google.firestore.v1beta1.StructuredQuery"
+    optional :query, :message, 3, "google.firestore.v1.StructuredQuery"
     optional :is_error, :bool, 4
   end
   add_message "tests.Clause" do
@@ -110,18 +110,18 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     repeated :field, :string, 1
   end
   add_message "tests.ListenTest" do
-    repeated :responses, :message, 1, "google.firestore.v1beta1.ListenResponse"
+    repeated :responses, :message, 1, "google.firestore.v1.ListenResponse"
     repeated :snapshots, :message, 2, "tests.Snapshot"
     optional :is_error, :bool, 3
   end
   add_message "tests.Snapshot" do
-    repeated :docs, :message, 1, "google.firestore.v1beta1.Document"
+    repeated :docs, :message, 1, "google.firestore.v1.Document"
     repeated :changes, :message, 2, "tests.DocChange"
     optional :read_time, :message, 3, "google.protobuf.Timestamp"
   end
   add_message "tests.DocChange" do
     optional :kind, :enum, 1, "tests.DocChange.Kind"
-    optional :doc, :message, 2, "google.firestore.v1beta1.Document"
+    optional :doc, :message, 2, "google.firestore.v1.Document"
     optional :old_index, :int32, 3
     optional :new_index, :int32, 4
   end

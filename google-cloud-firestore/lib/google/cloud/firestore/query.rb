@@ -13,7 +13,7 @@
 # limitations under the License.
 
 
-require "google/cloud/firestore/v1beta1"
+require "google/cloud/firestore/v1"
 require "google/cloud/firestore/document_snapshot"
 require "google/cloud/firestore/query_listener"
 require "google/cloud/firestore/convert"
@@ -63,7 +63,7 @@ module Google
         attr_accessor :parent_path
 
         ##
-        # @private The Google::Firestore::V1beta1::Query object.
+        # @private The Google::Firestore::V1::Query object.
         attr_accessor :query
 
         ##
@@ -883,7 +883,7 @@ module Google
 
         ##
         # @private
-        StructuredQuery = Google::Firestore::V1beta1::StructuredQuery
+        StructuredQuery = Google::Firestore::V1::StructuredQuery
 
         ##
         # @private
@@ -1011,7 +1011,7 @@ module Google
             Convert.raw_to_value value
           end
 
-          Google::Firestore::V1beta1::Cursor.new values: values
+          Google::Firestore::V1::Cursor.new values: values
         end
 
         def snapshot_to_cursor snapshot, query

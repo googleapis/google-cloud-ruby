@@ -13,7 +13,7 @@
 # limitations under the License.
 
 
-require "google/cloud/firestore/v1beta1"
+require "google/cloud/firestore/v1"
 require "google/cloud/firestore/service"
 require "google/cloud/firestore/field_path"
 require "google/cloud/firestore/field_value"

@@ -21,41 +21,41 @@ describe Google::Cloud::Firestore::Client, :batch, :mock_firestore do
   let(:documents_path) { "#{database_path}/documents" }
   let(:commit_time) { Time.now }
   let :create_writes do
-    [Google::Firestore::V1beta1::Write.new(
-      update: Google::Firestore::V1beta1::Document.new(
+    [Google::Firestore::V1::Write.new(
+      update: Google::Firestore::V1::Document.new(
         name: "#{documents_path}/#{document_path}",
         fields: Google::Cloud::Firestore::Convert.hash_to_fields({ name: "Mike" })),
-      current_document: Google::Firestore::V1beta1::Precondition.new(
+      current_document: Google::Firestore::V1::Precondition.new(
         exists: false)
     )]
   end
   let :set_writes do
-    [Google::Firestore::V1beta1::Write.new(
-      update: Google::Firestore::V1beta1::Document.new(
+    [Google::Firestore::V1::Write.new(
+      update: Google::Firestore::V1::Document.new(
         name: "#{documents_path}/#{document_path}",
         fields: Google::Cloud::Firestore::Convert.hash_to_fields({ name: "Mike" }))
     )]
   end
   let :update_writes do
-    [Google::Firestore::V1beta1::Write.new(
-      update: Google::Firestore::V1beta1::Document.new(
+    [Google::Firestore::V1::Write.new(
+      update: Google::Firestore::V1::Document.new(
         name: "#{documents_path}/#{document_path}",
         fields: Google::Cloud::Firestore::Convert.hash_to_fields({ name: "Mike" })),
-      update_mask: Google::Firestore::V1beta1::DocumentMask.new(
+      update_mask: Google::Firestore::V1::DocumentMask.new(
         field_paths: ["name"]
       ),
-      current_document: Google::Firestore::V1beta1::Precondition.new(
+      current_document: Google::Firestore::V1::Precondition.new(
         exists: true)
     )]
   end
   let :delete_writes do
-    [Google::Firestore::V1beta1::Write.new(
+    [Google::Firestore::V1::Write.new(
       delete: "#{documents_path}/#{document_path}")]
   end
   let :commit_resp do
-    Google::Firestore::V1beta1::CommitResponse.new(
+    Google::Firestore::V1::CommitResponse.new(
       commit_time: Google::Cloud::Firestore::Convert.time_to_timestamp(commit_time),
-      write_results: [Google::Firestore::V1beta1::WriteResult.new(
+      write_results: [Google::Firestore::V1::WriteResult.new(
         update_time: Google::Cloud::Firestore::Convert.time_to_timestamp(commit_time))]
       )
   end
@@ -180,7 +180,7 @@ describe Google::Cloud::Firestore::Client, :batch, :mock_firestore do
   end
 
   it "deletes a document with exists precondition" do
-    delete_writes.first.current_document = Google::Firestore::V1beta1::Precondition.new(exists: true)
+    delete_writes.first.current_document = Google::Firestore::V1::Precondition.new(exists: true)
 
     firestore_mock.expect :commit, commit_resp, [database_path, delete_writes, options: default_options]
 
@@ -194,7 +194,7 @@ describe Google::Cloud::Firestore::Client, :batch, :mock_firestore do
   end
 
   it "deletes a document with update_time precondition" do
-    delete_writes.first.current_document = Google::Firestore::V1beta1::Precondition.new(
+    delete_writes.first.current_document = Google::Firestore::V1::Precondition.new(
       update_time: Google::Cloud::Firestore::Convert.time_to_timestamp(commit_time))
 
     firestore_mock.expect :commit, commit_resp, [database_path, delete_writes, options: default_options]

@@ -87,8 +87,8 @@ end
 
 class MockFirestore < Minitest::Spec
   let(:project) { "projectID" }
-  let(:default_project_options) { Google::Gax::CallOptions.new(kwargs: { "google-cloud-resource-prefix" => "projects/#{project}" }) }
-  let(:default_options) { Google::Gax::CallOptions.new(kwargs: { "google-cloud-resource-prefix" => "projects/#{project}/databases/(default)" }) }
+  let(:default_project_options) { Google::Gax::CallOptions.new(metadata: { "google-cloud-resource-prefix" => "projects/#{project}" }) }
+  let(:default_options) { Google::Gax::CallOptions.new(metadata: { "google-cloud-resource-prefix" => "projects/#{project}/databases/(default)" }) }
   let(:credentials) { OpenStruct.new(client: OpenStruct.new(updater_proc: Proc.new {})) }
   let(:firestore) { Google::Cloud::Firestore::Client.new(Google::Cloud::Firestore::Service.new(project, credentials)) }
   let(:firestore_mock) { Minitest::Mock.new }
@@ -120,24 +120,24 @@ class WatchFirestore < MockFirestore
   let(:read_time) { Time.now }
 
   def add_resp
-    Google::Firestore::V1beta1::ListenResponse.new(
-      target_change: Google::Firestore::V1beta1::TargetChange.new(
+    Google::Firestore::V1::ListenResponse.new(
+      target_change: Google::Firestore::V1::TargetChange.new(
         target_change_type: :ADD
       )
     )
   end
 
   def reset_resp
-    Google::Firestore::V1beta1::ListenResponse.new(
-      target_change: Google::Firestore::V1beta1::TargetChange.new(
+    Google::Firestore::V1::ListenResponse.new(
+      target_change: Google::Firestore::V1::TargetChange.new(
         target_change_type: :RESET
       )
     )
   end
 
   def current_resp token, offset
-    Google::Firestore::V1beta1::ListenResponse.new(
-      target_change: Google::Firestore::V1beta1::TargetChange.new(
+    Google::Firestore::V1::ListenResponse.new(
+      target_change: Google::Firestore::V1::TargetChange.new(
         target_change_type: :CURRENT,
         resume_token: token,
         read_time: build_timestamp(offset)
@@ -146,8 +146,8 @@ class WatchFirestore < MockFirestore
   end
 
   def no_change_resp token, offset
-    Google::Firestore::V1beta1::ListenResponse.new(
-      target_change: Google::Firestore::V1beta1::TargetChange.new(
+    Google::Firestore::V1::ListenResponse.new(
+      target_change: Google::Firestore::V1::TargetChange.new(
         target_change_type: :NO_CHANGE,
         resume_token: token,
         read_time: build_timestamp(offset)
@@ -156,9 +156,9 @@ class WatchFirestore < MockFirestore
   end
 
   def doc_change_resp doc_id, offset, data
-    Google::Firestore::V1beta1::ListenResponse.new(
-      document_change: Google::Firestore::V1beta1::DocumentChange.new(
-        document: Google::Firestore::V1beta1::Document.new(
+    Google::Firestore::V1::ListenResponse.new(
+      document_change: Google::Firestore::V1::DocumentChange.new(
+        document: Google::Firestore::V1::Document.new(
           name: "projects/#{project}/databases/(default)/documents/watch/#{doc_id}",
           fields: Google::Cloud::Firestore::Convert.hash_to_fields(data),
           create_time: build_timestamp(offset),
@@ -169,8 +169,8 @@ class WatchFirestore < MockFirestore
   end
 
   def doc_delete_resp doc_id, offset
-    Google::Firestore::V1beta1::ListenResponse.new(
-      document_delete: Google::Firestore::V1beta1::DocumentDelete.new(
+    Google::Firestore::V1::ListenResponse.new(
+      document_delete: Google::Firestore::V1::DocumentDelete.new(
         document: "projects/#{project}/databases/(default)/documents/watch/#{doc_id}",
         read_time: build_timestamp(offset)
       )
@@ -178,8 +178,8 @@ class WatchFirestore < MockFirestore
   end
 
   def doc_remove_resp doc_id, offset
-    Google::Firestore::V1beta1::ListenResponse.new(
-      document_remove: Google::Firestore::V1beta1::DocumentRemove.new(
+    Google::Firestore::V1::ListenResponse.new(
+      document_remove: Google::Firestore::V1::DocumentRemove.new(
         document: "projects/#{project}/databases/(default)/documents/watch/#{doc_id}",
         read_time: build_timestamp(offset)
       )
@@ -187,8 +187,8 @@ class WatchFirestore < MockFirestore
   end
 
   def filter_resp count
-    Google::Firestore::V1beta1::ListenResponse.new(
-      filter: Google::Firestore::V1beta1::ExistenceFilter.new(
+    Google::Firestore::V1::ListenResponse.new(
+      filter: Google::Firestore::V1::ExistenceFilter.new(
         count: count
       )
     )

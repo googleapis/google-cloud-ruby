@@ -26,11 +26,11 @@ describe Google::Cloud::Firestore::Transaction, :get_all, :closed, :mock_firesto
   let(:documents_path) { "#{database_path}/documents" }
   let :transaction_doc_enum do
     [
-      Google::Firestore::V1beta1::BatchGetDocumentsResponse.new(
+      Google::Firestore::V1::BatchGetDocumentsResponse.new(
         read_time: Google::Cloud::Firestore::Convert.time_to_timestamp(read_time),
-        found: Google::Firestore::V1beta1::Document.new(
+        found: Google::Firestore::V1::Document.new(
           name: "projects/#{project}/databases/(default)/documents/users/mike",
-          fields: { "name" => Google::Firestore::V1beta1::Value.new(string_value: "Mike") },
+          fields: { "name" => Google::Firestore::V1::Value.new(string_value: "Mike") },
           create_time: Google::Cloud::Firestore::Convert.time_to_timestamp(read_time),
           update_time: Google::Cloud::Firestore::Convert.time_to_timestamp(read_time)
         ))

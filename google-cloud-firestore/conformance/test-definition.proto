@@ -8,10 +8,10 @@ option php_namespace = "Google\\Cloud\\Firestore\\Tests\\Conformance";
 option csharp_namespace = "Google.Cloud.Firestore.Tests.Proto";
 option java_package = "com.google.cloud.firestore.conformance";
 
-import "google/firestore/v1beta1/common.proto";
-import "google/firestore/v1beta1/document.proto";
-import "google/firestore/v1beta1/firestore.proto";
-import "google/firestore/v1beta1/query.proto";
+import "google/firestore/v1/common.proto";
+import "google/firestore/v1/document.proto";
+import "google/firestore/v1/firestore.proto";
+import "google/firestore/v1/query.proto";
 import "google/protobuf/timestamp.proto";
 
 // A collection of tests.
@@ -41,7 +41,7 @@ message GetTest {
   string doc_ref_path = 1;
 
   // The request that the call should send to the Firestore service.
-  google.firestore.v1beta1.GetDocumentRequest request = 2;
+  google.firestore.v1.GetDocumentRequest request = 2;
 }
 
 // Call to DocumentRef.Create.
@@ -55,7 +55,7 @@ message CreateTest {
   string json_data = 2;
 
   // The request that the call should generate.
-  google.firestore.v1beta1.CommitRequest request = 3;
+  google.firestore.v1.CommitRequest request = 3;
 
   // If true, the call should result in an error without generating a request.
   // If this is true, request should not be set.
@@ -67,7 +67,7 @@ message SetTest {
   string doc_ref_path = 1;         // path of doc
   SetOption option = 2;            // option to the Set call, if any
   string json_data = 3;            // data (see CreateTest.json_data)
-  google.firestore.v1beta1.CommitRequest request = 4; // expected request
+  google.firestore.v1.CommitRequest request = 4; // expected request
   bool is_error = 5;               // call signals an error
 }
 
@@ -75,9 +75,9 @@ message SetTest {
 // or dictionary.
 message UpdateTest {
   string doc_ref_path = 1; // path of doc
-  google.firestore.v1beta1.Precondition precondition = 2; // precondition in call, if any
+  google.firestore.v1.Precondition precondition = 2; // precondition in call, if any
   string json_data  = 3;   // data (see CreateTest.json_data)
-  google.firestore.v1beta1.CommitRequest request = 4; // expected request
+  google.firestore.v1.CommitRequest request = 4; // expected request
   bool is_error = 5;       // call signals an error
 }
 
@@ -85,19 +85,19 @@ message UpdateTest {
 // of field paths and their values.
 message UpdatePathsTest {
   string doc_ref_path = 1; // path of doc
-  google.firestore.v1beta1.Precondition precondition = 2; // precondition in call, if any
+  google.firestore.v1.Precondition precondition = 2; // precondition in call, if any
   // parallel sequences: field_paths[i] corresponds to json_values[i]
   repeated FieldPath field_paths = 3; // the argument field paths
   repeated string json_values = 4;    // the argument values, as JSON
-  google.firestore.v1beta1.CommitRequest request = 5; // expected rquest
+  google.firestore.v1.CommitRequest request = 5; // expected rquest
   bool is_error = 6; // call signals an error
 }
 
 // A call to DocmentRef.Delete
 message DeleteTest {
   string doc_ref_path = 1; // path of doc
-  google.firestore.v1beta1.Precondition precondition = 2;
-  google.firestore.v1beta1.CommitRequest request = 3; // expected rquest
+  google.firestore.v1.Precondition precondition = 2;
+  google.firestore.v1.CommitRequest request = 3; // expected rquest
   bool is_error = 4;       // call signals an error
 }
 
@@ -110,7 +110,7 @@ message SetOption {
 message QueryTest {
   string coll_path = 1; // path of collection, e.g. "projects/projectID/databases/(default)/documents/C"
   repeated Clause clauses = 2;
-  google.firestore.v1beta1.StructuredQuery query = 3;
+  google.firestore.v1.StructuredQuery query = 3;
   bool is_error = 4;
 }
 
@@ -170,13 +170,13 @@ message FieldPath {
 // should either change their client's ID for testing,
 // or change the ID in the tests before running them.
 message ListenTest {
-  repeated google.firestore.v1beta1.ListenResponse responses = 1;
+  repeated google.firestore.v1.ListenResponse responses = 1;
   repeated Snapshot snapshots = 2;
   bool is_error = 3;
 }
 
 message Snapshot {
-  repeated google.firestore.v1beta1.Document docs = 1;
+  repeated google.firestore.v1.Document docs = 1;
   repeated DocChange changes = 2;
   google.protobuf.Timestamp read_time = 3;
 }
@@ -190,7 +190,7 @@ message DocChange {
   }
 
   Kind kind = 1;
-  google.firestore.v1beta1.Document doc = 2;
+  google.firestore.v1.Document doc = 2;
   int32 old_index = 3;
   int32 new_index = 4;
 }
