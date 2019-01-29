@@ -18,8 +18,8 @@ describe Google::Cloud::Firestore::Transaction, :get_all, :empty, :mock_firestor
   let(:transaction_id) { "transaction123" }
   let(:transaction) { Google::Cloud::Firestore::Transaction.from_client firestore }
   let(:transaction_opt) do
-    Google::Firestore::V1beta1::TransactionOptions.new(
-      read_write: Google::Firestore::V1beta1::TransactionOptions::ReadWrite.new
+    Google::Firestore::V1::TransactionOptions.new(
+      read_write: Google::Firestore::V1::TransactionOptions::ReadWrite.new
     )
   end
   let(:read_time) { Time.now }
@@ -30,23 +30,23 @@ describe Google::Cloud::Firestore::Transaction, :get_all, :empty, :mock_firestor
   }
   let :transaction_docs_enum do
     [
-      Google::Firestore::V1beta1::BatchGetDocumentsResponse.new(
+      Google::Firestore::V1::BatchGetDocumentsResponse.new(
         transaction: transaction_id,
         read_time: Google::Cloud::Firestore::Convert.time_to_timestamp(read_time),
-        found: Google::Firestore::V1beta1::Document.new(
+        found: Google::Firestore::V1::Document.new(
           name: "projects/#{project}/databases/(default)/documents/users/mike",
-          fields: { "name" => Google::Firestore::V1beta1::Value.new(string_value: "Mike") },
+          fields: { "name" => Google::Firestore::V1::Value.new(string_value: "Mike") },
           create_time: Google::Cloud::Firestore::Convert.time_to_timestamp(read_time),
           update_time: Google::Cloud::Firestore::Convert.time_to_timestamp(read_time)
         )),
-      Google::Firestore::V1beta1::BatchGetDocumentsResponse.new(
+      Google::Firestore::V1::BatchGetDocumentsResponse.new(
         read_time: Google::Cloud::Firestore::Convert.time_to_timestamp(read_time),
         missing: "projects/#{project}/databases/(default)/documents/users/tad"),
-      Google::Firestore::V1beta1::BatchGetDocumentsResponse.new(
+      Google::Firestore::V1::BatchGetDocumentsResponse.new(
         read_time: Google::Cloud::Firestore::Convert.time_to_timestamp(read_time),
-        found: Google::Firestore::V1beta1::Document.new(
+        found: Google::Firestore::V1::Document.new(
           name: "projects/#{project}/databases/(default)/documents/users/chris",
-          fields: { "name" => Google::Firestore::V1beta1::Value.new(string_value: "Chris") },
+          fields: { "name" => Google::Firestore::V1::Value.new(string_value: "Chris") },
           create_time: Google::Cloud::Firestore::Convert.time_to_timestamp(read_time),
           update_time: Google::Cloud::Firestore::Convert.time_to_timestamp(read_time)
         ))

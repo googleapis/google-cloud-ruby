@@ -19,9 +19,9 @@ describe Google::Cloud::Firestore::DocumentSnapshot, :attrs, :mock_firestore do
   let(:document_ref) { Google::Cloud::Firestore::DocumentReference.from_path "projects/#{project}/databases/(default)/documents/#{document_path}", firestore }
   let(:document_time) { Time.now }
   let :document_grpc do
-    Google::Firestore::V1beta1::Document.new(
+    Google::Firestore::V1::Document.new(
       name: document_ref.path,
-      fields: { "name" => Google::Firestore::V1beta1::Value.new(string_value: "Mike") },
+      fields: { "name" => Google::Firestore::V1::Value.new(string_value: "Mike") },
       create_time: Google::Cloud::Firestore::Convert.time_to_timestamp(document_time),
       update_time: Google::Cloud::Firestore::Convert.time_to_timestamp(document_time)
     )

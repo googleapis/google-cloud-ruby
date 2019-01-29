@@ -22,13 +22,13 @@ describe Google::Cloud::Firestore::DocumentReference, :delete, :mock_firestore d
   let(:documents_path) { "#{database_path}/documents" }
   let(:commit_time) { Time.now }
   let :delete_writes do
-    [Google::Firestore::V1beta1::Write.new(
+    [Google::Firestore::V1::Write.new(
       delete: "#{documents_path}/#{document_path}")]
   end
   let :commit_resp do
-    Google::Firestore::V1beta1::CommitResponse.new(
+    Google::Firestore::V1::CommitResponse.new(
       commit_time: Google::Cloud::Firestore::Convert.time_to_timestamp(commit_time),
-      write_results: [Google::Firestore::V1beta1::WriteResult.new(
+      write_results: [Google::Firestore::V1::WriteResult.new(
         update_time: Google::Cloud::Firestore::Convert.time_to_timestamp(commit_time))]
       )
   end

@@ -19,19 +19,19 @@ describe Google::Cloud::Firestore::Query, :get, :mock_firestore do
   let(:read_time) { Time.now }
   let :query_results_enum do
     [
-      Google::Firestore::V1beta1::RunQueryResponse.new(
+      Google::Firestore::V1::RunQueryResponse.new(
         read_time: Google::Cloud::Firestore::Convert.time_to_timestamp(read_time),
-        document: Google::Firestore::V1beta1::Document.new(
+        document: Google::Firestore::V1::Document.new(
           name: "projects/#{project}/databases/(default)/documents/users/mike",
-          fields: { "name" => Google::Firestore::V1beta1::Value.new(string_value: "Mike") },
+          fields: { "name" => Google::Firestore::V1::Value.new(string_value: "Mike") },
           create_time: Google::Cloud::Firestore::Convert.time_to_timestamp(read_time),
           update_time: Google::Cloud::Firestore::Convert.time_to_timestamp(read_time)
         )),
-      Google::Firestore::V1beta1::RunQueryResponse.new(
+      Google::Firestore::V1::RunQueryResponse.new(
         read_time: Google::Cloud::Firestore::Convert.time_to_timestamp(read_time),
-        document: Google::Firestore::V1beta1::Document.new(
+        document: Google::Firestore::V1::Document.new(
           name: "projects/#{project}/databases/(default)/documents/users/chris",
-          fields: { "name" => Google::Firestore::V1beta1::Value.new(string_value: "Chris") },
+          fields: { "name" => Google::Firestore::V1::Value.new(string_value: "Chris") },
           create_time: Google::Cloud::Firestore::Convert.time_to_timestamp(read_time),
           update_time: Google::Cloud::Firestore::Convert.time_to_timestamp(read_time)
         ))
@@ -39,9 +39,9 @@ describe Google::Cloud::Firestore::Query, :get, :mock_firestore do
   end
 
   it "gets a query with a single select" do
-    expected_query = Google::Firestore::V1beta1::StructuredQuery.new(
-      select: Google::Firestore::V1beta1::StructuredQuery::Projection.new(
-        fields: [Google::Firestore::V1beta1::StructuredQuery::FieldReference.new(field_path: "name")])
+    expected_query = Google::Firestore::V1::StructuredQuery.new(
+      select: Google::Firestore::V1::StructuredQuery::Projection.new(
+        fields: [Google::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "name")])
     )
     firestore_mock.expect :run_query, query_results_enum, ["projects/#{project}/databases/(default)/documents", structured_query: expected_query, options: default_options]
 
@@ -51,12 +51,12 @@ describe Google::Cloud::Firestore::Query, :get, :mock_firestore do
   end
 
   it "gets a query with multiple select values" do
-    expected_query = Google::Firestore::V1beta1::StructuredQuery.new(
-      select: Google::Firestore::V1beta1::StructuredQuery::Projection.new(
+    expected_query = Google::Firestore::V1::StructuredQuery.new(
+      select: Google::Firestore::V1::StructuredQuery::Projection.new(
         fields: [
-          Google::Firestore::V1beta1::StructuredQuery::FieldReference.new(field_path: "name"),
-          Google::Firestore::V1beta1::StructuredQuery::FieldReference.new(field_path: "status"),
-          Google::Firestore::V1beta1::StructuredQuery::FieldReference.new(field_path: "activity")
+          Google::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "name"),
+          Google::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "status"),
+          Google::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "activity")
         ])
     )
     firestore_mock.expect :run_query, query_results_enum, ["projects/#{project}/databases/(default)/documents", structured_query: expected_query, options: default_options]
@@ -67,12 +67,12 @@ describe Google::Cloud::Firestore::Query, :get, :mock_firestore do
   end
 
   it "gets a query with multiple select calls" do
-    expected_query = Google::Firestore::V1beta1::StructuredQuery.new(
-      select: Google::Firestore::V1beta1::StructuredQuery::Projection.new(
+    expected_query = Google::Firestore::V1::StructuredQuery.new(
+      select: Google::Firestore::V1::StructuredQuery::Projection.new(
         fields: [
-          Google::Firestore::V1beta1::StructuredQuery::FieldReference.new(field_path: "name"),
-          Google::Firestore::V1beta1::StructuredQuery::FieldReference.new(field_path: "status"),
-          Google::Firestore::V1beta1::StructuredQuery::FieldReference.new(field_path: "activity")
+          Google::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "name"),
+          Google::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "status"),
+          Google::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "activity")
         ])
     )
     firestore_mock.expect :run_query, query_results_enum, ["projects/#{project}/databases/(default)/documents", structured_query: expected_query, options: default_options]
@@ -83,8 +83,8 @@ describe Google::Cloud::Firestore::Query, :get, :mock_firestore do
   end
 
   it "gets a collection as a query" do
-    expected_query = Google::Firestore::V1beta1::StructuredQuery.new(
-      from: [Google::Firestore::V1beta1::StructuredQuery::CollectionSelector.new(collection_id: "users", all_descendants: false)]
+    expected_query = Google::Firestore::V1::StructuredQuery.new(
+      from: [Google::Firestore::V1::StructuredQuery::CollectionSelector.new(collection_id: "users", all_descendants: false)]
     )
     firestore_mock.expect :run_query, query_results_enum, ["projects/#{project}/databases/(default)/documents", structured_query: expected_query, options: default_options]
 
@@ -94,8 +94,8 @@ describe Google::Cloud::Firestore::Query, :get, :mock_firestore do
   end
 
   it "gets a query with from with all_descendants" do
-    expected_query = Google::Firestore::V1beta1::StructuredQuery.new(
-      from: [Google::Firestore::V1beta1::StructuredQuery::CollectionSelector.new(collection_id: "users", all_descendants: true)]
+    expected_query = Google::Firestore::V1::StructuredQuery.new(
+      from: [Google::Firestore::V1::StructuredQuery::CollectionSelector.new(collection_id: "users", all_descendants: true)]
     )
     firestore_mock.expect :run_query, query_results_enum, ["projects/#{project}/databases/(default)/documents", structured_query: expected_query, options: default_options]
 
@@ -105,8 +105,8 @@ describe Google::Cloud::Firestore::Query, :get, :mock_firestore do
   end
 
   it "gets a query with from with direct_descendants" do
-    expected_query = Google::Firestore::V1beta1::StructuredQuery.new(
-      from: [Google::Firestore::V1beta1::StructuredQuery::CollectionSelector.new(collection_id: "users", all_descendants: false)]
+    expected_query = Google::Firestore::V1::StructuredQuery.new(
+      from: [Google::Firestore::V1::StructuredQuery::CollectionSelector.new(collection_id: "users", all_descendants: false)]
     )
     firestore_mock.expect :run_query, query_results_enum, ["projects/#{project}/databases/(default)/documents", structured_query: expected_query, options: default_options]
 
@@ -116,7 +116,7 @@ describe Google::Cloud::Firestore::Query, :get, :mock_firestore do
   end
 
   it "gets a query with offset and limit" do
-    expected_query = Google::Firestore::V1beta1::StructuredQuery.new(
+    expected_query = Google::Firestore::V1::StructuredQuery.new(
       offset: 3,
       limit: Google::Protobuf::Int32Value.new(value: 42)
     )
@@ -128,10 +128,10 @@ describe Google::Cloud::Firestore::Query, :get, :mock_firestore do
   end
 
   it "gets a query with a single order" do
-    expected_query = Google::Firestore::V1beta1::StructuredQuery.new(
+    expected_query = Google::Firestore::V1::StructuredQuery.new(
       order_by: [
-        Google::Firestore::V1beta1::StructuredQuery::Order.new(
-          field: Google::Firestore::V1beta1::StructuredQuery::FieldReference.new(field_path: "name"),
+        Google::Firestore::V1::StructuredQuery::Order.new(
+          field: Google::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "name"),
           direction: :ASCENDING)]
     )
     firestore_mock.expect :run_query, query_results_enum, ["projects/#{project}/databases/(default)/documents", structured_query: expected_query, options: default_options]
@@ -142,13 +142,13 @@ describe Google::Cloud::Firestore::Query, :get, :mock_firestore do
   end
 
   it "gets a query with a multiple order calls" do
-    expected_query = Google::Firestore::V1beta1::StructuredQuery.new(
+    expected_query = Google::Firestore::V1::StructuredQuery.new(
       order_by: [
-        Google::Firestore::V1beta1::StructuredQuery::Order.new(
-          field: Google::Firestore::V1beta1::StructuredQuery::FieldReference.new(field_path: "name"),
+        Google::Firestore::V1::StructuredQuery::Order.new(
+          field: Google::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "name"),
           direction: :ASCENDING),
-        Google::Firestore::V1beta1::StructuredQuery::Order.new(
-          field: Google::Firestore::V1beta1::StructuredQuery::FieldReference.new(field_path: "__name__"),
+        Google::Firestore::V1::StructuredQuery::Order.new(
+          field: Google::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "__name__"),
           direction: :DESCENDING)]
     )
     firestore_mock.expect :run_query, query_results_enum, ["projects/#{project}/databases/(default)/documents", structured_query: expected_query, options: default_options]
@@ -159,10 +159,10 @@ describe Google::Cloud::Firestore::Query, :get, :mock_firestore do
   end
 
   it "gets a query with start_after and end_before" do
-    expected_query = Google::Firestore::V1beta1::StructuredQuery.new(
-      order_by: [Google::Firestore::V1beta1::StructuredQuery::Order.new(field: Google::Firestore::V1beta1::StructuredQuery::FieldReference.new(field_path: "a"), direction: :ASCENDING)],
-      start_at: Google::Firestore::V1beta1::Cursor.new(values: [Google::Cloud::Firestore::Convert.raw_to_value("foo")], before: false),
-      end_at: Google::Firestore::V1beta1::Cursor.new(values: [Google::Cloud::Firestore::Convert.raw_to_value("bar")], before: true)
+    expected_query = Google::Firestore::V1::StructuredQuery.new(
+      order_by: [Google::Firestore::V1::StructuredQuery::Order.new(field: Google::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "a"), direction: :ASCENDING)],
+      start_at: Google::Firestore::V1::Cursor.new(values: [Google::Cloud::Firestore::Convert.raw_to_value("foo")], before: false),
+      end_at: Google::Firestore::V1::Cursor.new(values: [Google::Cloud::Firestore::Convert.raw_to_value("bar")], before: true)
     )
     firestore_mock.expect :run_query, query_results_enum, ["projects/#{project}/databases/(default)/documents", structured_query: expected_query, options: default_options]
 
@@ -172,13 +172,13 @@ describe Google::Cloud::Firestore::Query, :get, :mock_firestore do
   end
 
   it "gets a query with multiple start_after and end_before" do
-    expected_query = Google::Firestore::V1beta1::StructuredQuery.new(
+    expected_query = Google::Firestore::V1::StructuredQuery.new(
       order_by: [
-        Google::Firestore::V1beta1::StructuredQuery::Order.new(field: Google::Firestore::V1beta1::StructuredQuery::FieldReference.new(field_path: "a"), direction: :ASCENDING),
-        Google::Firestore::V1beta1::StructuredQuery::Order.new(field: Google::Firestore::V1beta1::StructuredQuery::FieldReference.new(field_path: "b"), direction: :ASCENDING)
+        Google::Firestore::V1::StructuredQuery::Order.new(field: Google::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "a"), direction: :ASCENDING),
+        Google::Firestore::V1::StructuredQuery::Order.new(field: Google::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "b"), direction: :ASCENDING)
       ],
-      start_at: Google::Firestore::V1beta1::Cursor.new(values: [Google::Cloud::Firestore::Convert.raw_to_value("foo"), Google::Cloud::Firestore::Convert.raw_to_value("bar")], before: false),
-      end_at: Google::Firestore::V1beta1::Cursor.new(values: [Google::Cloud::Firestore::Convert.raw_to_value("baz"), Google::Cloud::Firestore::Convert.raw_to_value("bif")], before: true)
+      start_at: Google::Firestore::V1::Cursor.new(values: [Google::Cloud::Firestore::Convert.raw_to_value("foo"), Google::Cloud::Firestore::Convert.raw_to_value("bar")], before: false),
+      end_at: Google::Firestore::V1::Cursor.new(values: [Google::Cloud::Firestore::Convert.raw_to_value("baz"), Google::Cloud::Firestore::Convert.raw_to_value("bif")], before: true)
     )
     firestore_mock.expect :run_query, query_results_enum, ["projects/#{project}/databases/(default)/documents", structured_query: expected_query, options: default_options]
 
@@ -188,10 +188,10 @@ describe Google::Cloud::Firestore::Query, :get, :mock_firestore do
   end
 
   it "gets a query with start_at and end_at" do
-    expected_query = Google::Firestore::V1beta1::StructuredQuery.new(
-      order_by: [Google::Firestore::V1beta1::StructuredQuery::Order.new(field: Google::Firestore::V1beta1::StructuredQuery::FieldReference.new(field_path: "a"), direction: :ASCENDING)],
-      start_at: Google::Firestore::V1beta1::Cursor.new(values: [Google::Cloud::Firestore::Convert.raw_to_value("foo")], before: true),
-      end_at: Google::Firestore::V1beta1::Cursor.new(values: [Google::Cloud::Firestore::Convert.raw_to_value("bar")], before: false)
+    expected_query = Google::Firestore::V1::StructuredQuery.new(
+      order_by: [Google::Firestore::V1::StructuredQuery::Order.new(field: Google::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "a"), direction: :ASCENDING)],
+      start_at: Google::Firestore::V1::Cursor.new(values: [Google::Cloud::Firestore::Convert.raw_to_value("foo")], before: true),
+      end_at: Google::Firestore::V1::Cursor.new(values: [Google::Cloud::Firestore::Convert.raw_to_value("bar")], before: false)
     )
     firestore_mock.expect :run_query, query_results_enum, ["projects/#{project}/databases/(default)/documents", structured_query: expected_query, options: default_options]
 
@@ -201,13 +201,13 @@ describe Google::Cloud::Firestore::Query, :get, :mock_firestore do
   end
 
   it "gets a query with multiple start_at and end_at" do
-    expected_query = Google::Firestore::V1beta1::StructuredQuery.new(
+    expected_query = Google::Firestore::V1::StructuredQuery.new(
       order_by: [
-        Google::Firestore::V1beta1::StructuredQuery::Order.new(field: Google::Firestore::V1beta1::StructuredQuery::FieldReference.new(field_path: "a"), direction: :ASCENDING),
-        Google::Firestore::V1beta1::StructuredQuery::Order.new(field: Google::Firestore::V1beta1::StructuredQuery::FieldReference.new(field_path: "b"), direction: :ASCENDING)
+        Google::Firestore::V1::StructuredQuery::Order.new(field: Google::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "a"), direction: :ASCENDING),
+        Google::Firestore::V1::StructuredQuery::Order.new(field: Google::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "b"), direction: :ASCENDING)
       ],
-      start_at: Google::Firestore::V1beta1::Cursor.new(values: [Google::Cloud::Firestore::Convert.raw_to_value("foo"), Google::Cloud::Firestore::Convert.raw_to_value("bar")], before: true),
-      end_at: Google::Firestore::V1beta1::Cursor.new(values: [Google::Cloud::Firestore::Convert.raw_to_value("baz"), Google::Cloud::Firestore::Convert.raw_to_value("bif")], before: false)
+      start_at: Google::Firestore::V1::Cursor.new(values: [Google::Cloud::Firestore::Convert.raw_to_value("foo"), Google::Cloud::Firestore::Convert.raw_to_value("bar")], before: true),
+      end_at: Google::Firestore::V1::Cursor.new(values: [Google::Cloud::Firestore::Convert.raw_to_value("baz"), Google::Cloud::Firestore::Convert.raw_to_value("bif")], before: false)
     )
     firestore_mock.expect :run_query, query_results_enum, ["projects/#{project}/databases/(default)/documents", structured_query: expected_query, options: default_options]
 
@@ -217,10 +217,10 @@ describe Google::Cloud::Firestore::Query, :get, :mock_firestore do
   end
 
   it "gets a simple query" do
-    expected_query = Google::Firestore::V1beta1::StructuredQuery.new(
-      select: Google::Firestore::V1beta1::StructuredQuery::Projection.new(
-        fields: [Google::Firestore::V1beta1::StructuredQuery::FieldReference.new(field_path: "name")]),
-      from: [Google::Firestore::V1beta1::StructuredQuery::CollectionSelector.new(collection_id: "users", all_descendants: false)]
+    expected_query = Google::Firestore::V1::StructuredQuery.new(
+      select: Google::Firestore::V1::StructuredQuery::Projection.new(
+        fields: [Google::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "name")]),
+      from: [Google::Firestore::V1::StructuredQuery::CollectionSelector.new(collection_id: "users", all_descendants: false)]
     )
     firestore_mock.expect :run_query, query_results_enum, ["projects/#{project}/databases/(default)/documents", structured_query: expected_query, options: default_options]
 
@@ -230,21 +230,21 @@ describe Google::Cloud::Firestore::Query, :get, :mock_firestore do
   end
 
   it "gets a complex query" do
-    expected_query = Google::Firestore::V1beta1::StructuredQuery.new(
-      select: Google::Firestore::V1beta1::StructuredQuery::Projection.new(
-        fields: [Google::Firestore::V1beta1::StructuredQuery::FieldReference.new(field_path: "name")]),
-      from: [Google::Firestore::V1beta1::StructuredQuery::CollectionSelector.new(collection_id: "users", all_descendants: false)],
+    expected_query = Google::Firestore::V1::StructuredQuery.new(
+      select: Google::Firestore::V1::StructuredQuery::Projection.new(
+        fields: [Google::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "name")]),
+      from: [Google::Firestore::V1::StructuredQuery::CollectionSelector.new(collection_id: "users", all_descendants: false)],
       offset: 3,
       limit: Google::Protobuf::Int32Value.new(value: 42),
       order_by: [
-        Google::Firestore::V1beta1::StructuredQuery::Order.new(
-          field: Google::Firestore::V1beta1::StructuredQuery::FieldReference.new(field_path: "name"),
+        Google::Firestore::V1::StructuredQuery::Order.new(
+          field: Google::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "name"),
           direction: :ASCENDING),
-        Google::Firestore::V1beta1::StructuredQuery::Order.new(
-          field: Google::Firestore::V1beta1::StructuredQuery::FieldReference.new(field_path: "__name__"),
+        Google::Firestore::V1::StructuredQuery::Order.new(
+          field: Google::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "__name__"),
           direction: :DESCENDING)],
-      start_at: Google::Firestore::V1beta1::Cursor.new(values: [Google::Cloud::Firestore::Convert.raw_to_value("foo")], before: false),
-      end_at: Google::Firestore::V1beta1::Cursor.new(values: [Google::Cloud::Firestore::Convert.raw_to_value("bar")], before: true)
+      start_at: Google::Firestore::V1::Cursor.new(values: [Google::Cloud::Firestore::Convert.raw_to_value("foo")], before: false),
+      end_at: Google::Firestore::V1::Cursor.new(values: [Google::Cloud::Firestore::Convert.raw_to_value("bar")], before: true)
     )
     firestore_mock.expect :run_query, query_results_enum, ["projects/#{project}/databases/(default)/documents", structured_query: expected_query, options: default_options]
 

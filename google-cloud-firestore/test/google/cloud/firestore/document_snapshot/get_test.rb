@@ -19,12 +19,12 @@ describe Google::Cloud::Firestore::DocumentSnapshot, :get, :mock_firestore do
   let(:document_ref) { Google::Cloud::Firestore::DocumentReference.from_path "projects/#{project}/databases/(default)/documents/#{document_path}", firestore }
   let(:document_time) { Time.now }
   let :document_grpc do
-    Google::Firestore::V1beta1::Document.new(
+    Google::Firestore::V1::Document.new(
       name: document_ref.path,
-      fields: { "name" => Google::Firestore::V1beta1::Value.new(string_value: "Mike"),
-                "foo" => Google::Firestore::V1beta1::Value.new(map_value: Google::Firestore::V1beta1::MapValue.new(fields: {
-                  "bar" => Google::Firestore::V1beta1::Value.new(map_value: Google::Firestore::V1beta1::MapValue.new(fields: {
-                    "baz" => Google::Firestore::V1beta1::Value.new(string_value: "bif") })) })) },
+      fields: { "name" => Google::Firestore::V1::Value.new(string_value: "Mike"),
+                "foo" => Google::Firestore::V1::Value.new(map_value: Google::Firestore::V1::MapValue.new(fields: {
+                  "bar" => Google::Firestore::V1::Value.new(map_value: Google::Firestore::V1::MapValue.new(fields: {
+                    "baz" => Google::Firestore::V1::Value.new(string_value: "bif") })) })) },
       create_time: Google::Cloud::Firestore::Convert.time_to_timestamp(document_time),
       update_time: Google::Cloud::Firestore::Convert.time_to_timestamp(document_time)
     )
@@ -121,12 +121,12 @@ describe Google::Cloud::Firestore::DocumentSnapshot, :get, :mock_firestore do
 
   describe "strange data" do
     let :document_grpc do
-      Google::Firestore::V1beta1::Document.new(
+      Google::Firestore::V1::Document.new(
         name: document_ref.path,
-        fields: { "name" => Google::Firestore::V1beta1::Value.new(string_value: "Mike"),
-                  "foo" => Google::Firestore::V1beta1::Value.new(map_value: Google::Firestore::V1beta1::MapValue.new(fields: {
-                    "bar.baz" => Google::Firestore::V1beta1::Value.new(map_value: Google::Firestore::V1beta1::MapValue.new(fields: {
-                      "bif" => Google::Firestore::V1beta1::Value.new(integer_value: 42) })) })) },
+        fields: { "name" => Google::Firestore::V1::Value.new(string_value: "Mike"),
+                  "foo" => Google::Firestore::V1::Value.new(map_value: Google::Firestore::V1::MapValue.new(fields: {
+                    "bar.baz" => Google::Firestore::V1::Value.new(map_value: Google::Firestore::V1::MapValue.new(fields: {
+                      "bif" => Google::Firestore::V1::Value.new(integer_value: 42) })) })) },
         create_time: Google::Cloud::Firestore::Convert.time_to_timestamp(document_time),
         update_time: Google::Cloud::Firestore::Convert.time_to_timestamp(document_time)
       )
@@ -223,12 +223,12 @@ describe Google::Cloud::Firestore::DocumentSnapshot, :get, :mock_firestore do
 
     describe "strange data" do
       let :document_grpc do
-        Google::Firestore::V1beta1::Document.new(
+        Google::Firestore::V1::Document.new(
           name: document_ref.path,
-          fields: { "name" => Google::Firestore::V1beta1::Value.new(string_value: "Mike"),
-                    "foo" => Google::Firestore::V1beta1::Value.new(map_value: Google::Firestore::V1beta1::MapValue.new(fields: {
-                      "bar.baz" => Google::Firestore::V1beta1::Value.new(map_value: Google::Firestore::V1beta1::MapValue.new(fields: {
-                        "bif" => Google::Firestore::V1beta1::Value.new(integer_value: 42) })) })) },
+          fields: { "name" => Google::Firestore::V1::Value.new(string_value: "Mike"),
+                    "foo" => Google::Firestore::V1::Value.new(map_value: Google::Firestore::V1::MapValue.new(fields: {
+                      "bar.baz" => Google::Firestore::V1::Value.new(map_value: Google::Firestore::V1::MapValue.new(fields: {
+                        "bif" => Google::Firestore::V1::Value.new(integer_value: 42) })) })) },
           create_time: Google::Cloud::Firestore::Convert.time_to_timestamp(document_time),
           update_time: Google::Cloud::Firestore::Convert.time_to_timestamp(document_time)
         )

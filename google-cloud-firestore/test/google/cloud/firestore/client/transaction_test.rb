@@ -17,32 +17,32 @@ require "helper"
 describe Google::Cloud::Firestore::Client, :transaction, :mock_firestore do
   let(:transaction_id) { "transaction123" }
   let(:transaction_opt) do
-    Google::Firestore::V1beta1::TransactionOptions.new(
-      read_write: Google::Firestore::V1beta1::TransactionOptions::ReadWrite.new
+    Google::Firestore::V1::TransactionOptions.new(
+      read_write: Google::Firestore::V1::TransactionOptions::ReadWrite.new
     )
   end
   let(:transaction_opt) do
-    Google::Firestore::V1beta1::TransactionOptions.new(
-      read_write: Google::Firestore::V1beta1::TransactionOptions::ReadWrite.new
+    Google::Firestore::V1::TransactionOptions.new(
+      read_write: Google::Firestore::V1::TransactionOptions::ReadWrite.new
     )
   end
   let(:read_time) { Time.now }
   let :query_results_enum do
     [
-      Google::Firestore::V1beta1::RunQueryResponse.new(
+      Google::Firestore::V1::RunQueryResponse.new(
         transaction: transaction_id,
         read_time: Google::Cloud::Firestore::Convert.time_to_timestamp(read_time),
-        document: Google::Firestore::V1beta1::Document.new(
+        document: Google::Firestore::V1::Document.new(
           name: "projects/#{project}/databases/(default)/documents/users/mike",
-          fields: { "name" => Google::Firestore::V1beta1::Value.new(string_value: "Mike") },
+          fields: { "name" => Google::Firestore::V1::Value.new(string_value: "Mike") },
           create_time: Google::Cloud::Firestore::Convert.time_to_timestamp(read_time),
           update_time: Google::Cloud::Firestore::Convert.time_to_timestamp(read_time)
         )),
-      Google::Firestore::V1beta1::RunQueryResponse.new(
+      Google::Firestore::V1::RunQueryResponse.new(
         read_time: Google::Cloud::Firestore::Convert.time_to_timestamp(read_time),
-        document: Google::Firestore::V1beta1::Document.new(
+        document: Google::Firestore::V1::Document.new(
           name: "projects/#{project}/databases/(default)/documents/users/chris",
-          fields: { "name" => Google::Firestore::V1beta1::Value.new(string_value: "Chris") },
+          fields: { "name" => Google::Firestore::V1::Value.new(string_value: "Chris") },
           create_time: Google::Cloud::Firestore::Convert.time_to_timestamp(read_time),
           update_time: Google::Cloud::Firestore::Convert.time_to_timestamp(read_time)
         ))
@@ -55,60 +55,60 @@ describe Google::Cloud::Firestore::Client, :transaction, :mock_firestore do
   let(:documents_path) { "#{database_path}/documents" }
   let(:commit_time) { Time.now }
   let :create_writes do
-    [Google::Firestore::V1beta1::Write.new(
-      update: Google::Firestore::V1beta1::Document.new(
+    [Google::Firestore::V1::Write.new(
+      update: Google::Firestore::V1::Document.new(
         name: "#{documents_path}/#{document_path}",
         fields: Google::Cloud::Firestore::Convert.hash_to_fields({ name: "Mike" })),
-      current_document: Google::Firestore::V1beta1::Precondition.new(
+      current_document: Google::Firestore::V1::Precondition.new(
         exists: false)
     )]
   end
   let :set_writes do
-    [Google::Firestore::V1beta1::Write.new(
-      update: Google::Firestore::V1beta1::Document.new(
+    [Google::Firestore::V1::Write.new(
+      update: Google::Firestore::V1::Document.new(
         name: "#{documents_path}/#{document_path}",
         fields: Google::Cloud::Firestore::Convert.hash_to_fields({ name: "Mike" }))
     )]
   end
   let :update_writes do
-    [Google::Firestore::V1beta1::Write.new(
-      update: Google::Firestore::V1beta1::Document.new(
+    [Google::Firestore::V1::Write.new(
+      update: Google::Firestore::V1::Document.new(
         name: "#{documents_path}/#{document_path}",
         fields: Google::Cloud::Firestore::Convert.hash_to_fields({ name: "Mike" })),
-      update_mask: Google::Firestore::V1beta1::DocumentMask.new(
+      update_mask: Google::Firestore::V1::DocumentMask.new(
         field_paths: ["name"]
       ),
-      current_document: Google::Firestore::V1beta1::Precondition.new(
+      current_document: Google::Firestore::V1::Precondition.new(
         exists: true)
     )]
   end
   let :delete_writes do
-    [Google::Firestore::V1beta1::Write.new(
+    [Google::Firestore::V1::Write.new(
       delete: "#{documents_path}/#{document_path}")]
   end
   let :begin_tx_resp do
-    Google::Firestore::V1beta1::BeginTransactionResponse.new(
+    Google::Firestore::V1::BeginTransactionResponse.new(
       transaction: transaction_id
     )
   end
   let :empty_commit_resp do
-    Google::Firestore::V1beta1::CommitResponse.new(
+    Google::Firestore::V1::CommitResponse.new(
       commit_time: Google::Cloud::Firestore::Convert.time_to_timestamp(commit_time),
     )
   end
   let :write_commit_resp do
-    Google::Firestore::V1beta1::CommitResponse.new(
+    Google::Firestore::V1::CommitResponse.new(
       commit_time: Google::Cloud::Firestore::Convert.time_to_timestamp(commit_time),
-      write_results: [Google::Firestore::V1beta1::WriteResult.new(
+      write_results: [Google::Firestore::V1::WriteResult.new(
         update_time: Google::Cloud::Firestore::Convert.time_to_timestamp(commit_time))]
     )
   end
 
   it "runs a simple query" do
-    expected_query = Google::Firestore::V1beta1::StructuredQuery.new(
-      select: Google::Firestore::V1beta1::StructuredQuery::Projection.new(
-        fields: [Google::Firestore::V1beta1::StructuredQuery::FieldReference.new(field_path: "name")]),
-      from: [Google::Firestore::V1beta1::StructuredQuery::CollectionSelector.new(collection_id: "users", all_descendants: false)]
+    expected_query = Google::Firestore::V1::StructuredQuery.new(
+      select: Google::Firestore::V1::StructuredQuery::Projection.new(
+        fields: [Google::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "name")]),
+      from: [Google::Firestore::V1::StructuredQuery::CollectionSelector.new(collection_id: "users", all_descendants: false)]
     )
     firestore_mock.expect :run_query, query_results_enum, ["projects/#{project}/databases/(default)/documents", structured_query: expected_query, new_transaction: transaction_opt, options: default_options]
     firestore_mock.expect :commit, empty_commit_resp, [database_path, [], transaction: transaction_id, options: default_options]
@@ -120,21 +120,21 @@ describe Google::Cloud::Firestore::Client, :transaction, :mock_firestore do
   end
 
   it "runs a complex query" do
-    expected_query = Google::Firestore::V1beta1::StructuredQuery.new(
-      select: Google::Firestore::V1beta1::StructuredQuery::Projection.new(
-        fields: [Google::Firestore::V1beta1::StructuredQuery::FieldReference.new(field_path: "name")]),
-      from: [Google::Firestore::V1beta1::StructuredQuery::CollectionSelector.new(collection_id: "users", all_descendants: false)],
+    expected_query = Google::Firestore::V1::StructuredQuery.new(
+      select: Google::Firestore::V1::StructuredQuery::Projection.new(
+        fields: [Google::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "name")]),
+      from: [Google::Firestore::V1::StructuredQuery::CollectionSelector.new(collection_id: "users", all_descendants: false)],
       offset: 3,
       limit: Google::Protobuf::Int32Value.new(value: 42),
       order_by: [
-        Google::Firestore::V1beta1::StructuredQuery::Order.new(
-          field: Google::Firestore::V1beta1::StructuredQuery::FieldReference.new(field_path: "name"),
+        Google::Firestore::V1::StructuredQuery::Order.new(
+          field: Google::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "name"),
           direction: :ASCENDING),
-        Google::Firestore::V1beta1::StructuredQuery::Order.new(
-          field: Google::Firestore::V1beta1::StructuredQuery::FieldReference.new(field_path: "__name__"),
+        Google::Firestore::V1::StructuredQuery::Order.new(
+          field: Google::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "__name__"),
           direction: :DESCENDING)],
-      start_at: Google::Firestore::V1beta1::Cursor.new(values: [Google::Cloud::Firestore::Convert.raw_to_value("foo")], before: false),
-      end_at: Google::Firestore::V1beta1::Cursor.new(values: [Google::Cloud::Firestore::Convert.raw_to_value("bar")], before: true)
+      start_at: Google::Firestore::V1::Cursor.new(values: [Google::Cloud::Firestore::Convert.raw_to_value("foo")], before: false),
+      end_at: Google::Firestore::V1::Cursor.new(values: [Google::Cloud::Firestore::Convert.raw_to_value("bar")], before: true)
     )
     firestore_mock.expect :run_query, query_results_enum, ["projects/#{project}/databases/(default)/documents", structured_query: expected_query, new_transaction: transaction_opt, options: default_options]
     firestore_mock.expect :commit, empty_commit_resp, [database_path, [], transaction: transaction_id, options: default_options]
@@ -146,26 +146,26 @@ describe Google::Cloud::Firestore::Client, :transaction, :mock_firestore do
   end
 
   it "runs multiple queries" do
-    first_query = Google::Firestore::V1beta1::StructuredQuery.new(
-      select: Google::Firestore::V1beta1::StructuredQuery::Projection.new(
-        fields: [Google::Firestore::V1beta1::StructuredQuery::FieldReference.new(field_path: "name")]),
-      from: [Google::Firestore::V1beta1::StructuredQuery::CollectionSelector.new(collection_id: "users", all_descendants: false)]
+    first_query = Google::Firestore::V1::StructuredQuery.new(
+      select: Google::Firestore::V1::StructuredQuery::Projection.new(
+        fields: [Google::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "name")]),
+      from: [Google::Firestore::V1::StructuredQuery::CollectionSelector.new(collection_id: "users", all_descendants: false)]
     )
-    second_query = Google::Firestore::V1beta1::StructuredQuery.new(
-      select: Google::Firestore::V1beta1::StructuredQuery::Projection.new(
-        fields: [Google::Firestore::V1beta1::StructuredQuery::FieldReference.new(field_path: "name")]),
-      from: [Google::Firestore::V1beta1::StructuredQuery::CollectionSelector.new(collection_id: "users", all_descendants: false)],
+    second_query = Google::Firestore::V1::StructuredQuery.new(
+      select: Google::Firestore::V1::StructuredQuery::Projection.new(
+        fields: [Google::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "name")]),
+      from: [Google::Firestore::V1::StructuredQuery::CollectionSelector.new(collection_id: "users", all_descendants: false)],
       offset: 3,
       limit: Google::Protobuf::Int32Value.new(value: 42),
       order_by: [
-        Google::Firestore::V1beta1::StructuredQuery::Order.new(
-          field: Google::Firestore::V1beta1::StructuredQuery::FieldReference.new(field_path: "name"),
+        Google::Firestore::V1::StructuredQuery::Order.new(
+          field: Google::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "name"),
           direction: :ASCENDING),
-        Google::Firestore::V1beta1::StructuredQuery::Order.new(
-          field: Google::Firestore::V1beta1::StructuredQuery::FieldReference.new(field_path: "__name__"),
+        Google::Firestore::V1::StructuredQuery::Order.new(
+          field: Google::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "__name__"),
           direction: :DESCENDING)],
-      start_at: Google::Firestore::V1beta1::Cursor.new(values: [Google::Cloud::Firestore::Convert.raw_to_value("foo")], before: false),
-      end_at: Google::Firestore::V1beta1::Cursor.new(values: [Google::Cloud::Firestore::Convert.raw_to_value("bar")], before: true)
+      start_at: Google::Firestore::V1::Cursor.new(values: [Google::Cloud::Firestore::Convert.raw_to_value("foo")], before: false),
+      end_at: Google::Firestore::V1::Cursor.new(values: [Google::Cloud::Firestore::Convert.raw_to_value("bar")], before: true)
     )
     firestore_mock.expect :run_query, query_results_enum, ["projects/#{project}/databases/(default)/documents", structured_query: first_query, new_transaction: transaction_opt, options: default_options]
     firestore_mock.expect :run_query, query_results_enum, ["projects/#{project}/databases/(default)/documents", structured_query: second_query, transaction: transaction_id, options: default_options]
@@ -388,11 +388,11 @@ describe Google::Cloud::Firestore::Client, :transaction, :mock_firestore do
         if @first_begin_transaction.nil?
           @first_begin_transaction = true
           raise "bad first begin_transaction" unless options_.read_write.retry_transaction.empty?
-          return Google::Firestore::V1beta1::BeginTransactionResponse.new(transaction: "transaction123")
+          return Google::Firestore::V1::BeginTransactionResponse.new(transaction: "transaction123")
         end
 
         raise "bad second begin_transaction" unless options_.read_write.retry_transaction == "transaction123"
-        Google::Firestore::V1beta1::BeginTransactionResponse.new(transaction: "new_transaction_xyz")
+        Google::Firestore::V1::BeginTransactionResponse.new(transaction: "new_transaction_xyz")
       end
       def firestore_mock.commit database, writes, transaction: nil, options: nil
         if @first_commit.nil?
@@ -404,9 +404,9 @@ describe Google::Cloud::Firestore::Client, :transaction, :mock_firestore do
         end
 
         raise "bad second commit" unless transaction == "new_transaction_xyz"
-        Google::Firestore::V1beta1::CommitResponse.new(
+        Google::Firestore::V1::CommitResponse.new(
           commit_time: Google::Cloud::Firestore::Convert.time_to_timestamp(Time.now),
-          write_results: [Google::Firestore::V1beta1::WriteResult.new(
+          write_results: [Google::Firestore::V1::WriteResult.new(
             update_time: Google::Cloud::Firestore::Convert.time_to_timestamp(Time.now))]
           )
       end
@@ -438,11 +438,11 @@ describe Google::Cloud::Firestore::Client, :transaction, :mock_firestore do
         @begin_retries += 1
 
         if @begin_retries < 4
-          return Google::Firestore::V1beta1::BeginTransactionResponse.new(transaction: "transaction_#{@begin_retries}")
+          return Google::Firestore::V1::BeginTransactionResponse.new(transaction: "transaction_#{@begin_retries}")
         end
 
         raise "bad final begin_transaction" unless options_.read_write.retry_transaction == "transaction_3"
-        Google::Firestore::V1beta1::BeginTransactionResponse.new(transaction: "new_transaction_xyz")
+        Google::Firestore::V1::BeginTransactionResponse.new(transaction: "new_transaction_xyz")
       end
       def firestore_mock.commit database, writes, transaction: nil, options: nil
         @commit_retries ||= 0
@@ -456,9 +456,9 @@ describe Google::Cloud::Firestore::Client, :transaction, :mock_firestore do
         end
 
         raise "bad final commit" unless transaction == "new_transaction_xyz"
-        Google::Firestore::V1beta1::CommitResponse.new(
+        Google::Firestore::V1::CommitResponse.new(
           commit_time: Google::Cloud::Firestore::Convert.time_to_timestamp(Time.now),
-          write_results: [Google::Firestore::V1beta1::WriteResult.new(
+          write_results: [Google::Firestore::V1::WriteResult.new(
             update_time: Google::Cloud::Firestore::Convert.time_to_timestamp(Time.now))]
           )
       end
@@ -491,11 +491,11 @@ describe Google::Cloud::Firestore::Client, :transaction, :mock_firestore do
         if @first_begin_transaction.nil?
           @first_begin_transaction = true
           raise "bad first begin_transaction" unless options_.read_write.retry_transaction.empty?
-          return Google::Firestore::V1beta1::BeginTransactionResponse.new(transaction: "transaction123")
+          return Google::Firestore::V1::BeginTransactionResponse.new(transaction: "transaction123")
         end
 
         raise "bad second begin_transaction" unless options_.read_write.retry_transaction == "transaction123"
-        Google::Firestore::V1beta1::BeginTransactionResponse.new(transaction: "new_transaction_xyz")
+        Google::Firestore::V1::BeginTransactionResponse.new(transaction: "new_transaction_xyz")
       end
       def firestore_mock.commit database, writes, transaction: nil, options: nil
         if @first_commit.nil?

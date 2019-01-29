@@ -24,7 +24,7 @@ $col = $firestore.col("benchmark")
 $query = $col.order(:val, :desc).order($firestore.document_id)
 
 def new_doc_grpc doc_path, data = {}
-  Google::Firestore::V1beta1::Document.new(
+  Google::Firestore::V1::Document.new(
     name: "projects/#{$project_id}/databases/(default)/benchmark/#{doc_path}",
     fields: Google::Cloud::Firestore::Convert.hash_to_fields(data),
     create_time: Google::Cloud::Firestore::Convert.time_to_timestamp(Time.now),

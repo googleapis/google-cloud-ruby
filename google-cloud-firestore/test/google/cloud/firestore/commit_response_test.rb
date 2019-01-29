@@ -26,7 +26,7 @@ describe Google::Cloud::Firestore::CommitResponse, :mock_firestore do
   end
 
   it "can represent an empty result" do
-    grpc_response = Google::Firestore::V1beta1::CommitResponse.new
+    grpc_response = Google::Firestore::V1::CommitResponse.new
 
     commit_response = Google::Cloud::Firestore::CommitResponse.from_grpc grpc_response, []
 
@@ -36,7 +36,7 @@ describe Google::Cloud::Firestore::CommitResponse, :mock_firestore do
 
   it "can represent results with transforms" do
     json = "{\"writeResults\":[{\"updateTime\":{\"seconds\":1513748033,\"nanos\":441316000},\"transformResults\":[{\"timestampValue\":{\"seconds\":1513748033,\"nanos\":428000000}},{\"timestampValue\":{\"seconds\":1513748033,\"nanos\":428000000}},{\"timestampValue\":{\"seconds\":1513748033,\"nanos\":428000000}}]}],\"commitTime\":{\"seconds\":1513748033,\"nanos\":441316000}}"
-    grpc_response = Google::Firestore::V1beta1::CommitResponse.decode_json json
+    grpc_response = Google::Firestore::V1::CommitResponse.decode_json json
 
     commit_response = Google::Cloud::Firestore::CommitResponse.from_grpc grpc_response, [[:one, :two]]
 
@@ -49,7 +49,7 @@ describe Google::Cloud::Firestore::CommitResponse, :mock_firestore do
 
   it "can represent results with and without updateTime" do
     json = "{\"writeResults\":[{\"updateTime\":{\"seconds\":1513748093,\"nanos\":441316000}}, {}],\"commitTime\":{\"seconds\":1513748033,\"nanos\":441316000}}"
-    grpc_response = Google::Firestore::V1beta1::CommitResponse.decode_json json
+    grpc_response = Google::Firestore::V1::CommitResponse.decode_json json
 
     commit_response = Google::Cloud::Firestore::CommitResponse.from_grpc grpc_response, [[:one, :two]]
 
@@ -60,7 +60,7 @@ describe Google::Cloud::Firestore::CommitResponse, :mock_firestore do
 
   it "can represent results without and with updateTime" do
     json = "{\"writeResults\":[{}, {\"updateTime\":{\"seconds\":1513748093,\"nanos\":441316000}}],\"commitTime\":{\"seconds\":1513748033,\"nanos\":441316000}}"
-    grpc_response = Google::Firestore::V1beta1::CommitResponse.decode_json json
+    grpc_response = Google::Firestore::V1::CommitResponse.decode_json json
 
     commit_response = Google::Cloud::Firestore::CommitResponse.from_grpc grpc_response, [[:one, :two]]
 
@@ -71,7 +71,7 @@ describe Google::Cloud::Firestore::CommitResponse, :mock_firestore do
 
   it "can represent results without updateTime" do
     json = "{\"writeResults\":[{}, {}],\"commitTime\":{\"seconds\":1513748033,\"nanos\":441316000}}"
-    grpc_response = Google::Firestore::V1beta1::CommitResponse.decode_json json
+    grpc_response = Google::Firestore::V1::CommitResponse.decode_json json
 
     commit_response = Google::Cloud::Firestore::CommitResponse.from_grpc grpc_response, [[:one, :two]]
 
@@ -82,7 +82,7 @@ describe Google::Cloud::Firestore::CommitResponse, :mock_firestore do
 
   it "can represent results without mismatched writes" do
     json = "{\"writeResults\":[{}, {}],\"commitTime\":{\"seconds\":1513748033,\"nanos\":441316000}}"
-    grpc_response = Google::Firestore::V1beta1::CommitResponse.decode_json json
+    grpc_response = Google::Firestore::V1::CommitResponse.decode_json json
 
     commit_response = Google::Cloud::Firestore::CommitResponse.from_grpc grpc_response, [[:one, :two], :three]
 

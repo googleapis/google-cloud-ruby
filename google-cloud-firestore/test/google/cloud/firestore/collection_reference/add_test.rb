@@ -23,9 +23,9 @@ describe Google::Cloud::Firestore::CollectionReference, :add, :mock_firestore do
   let(:documents_path) { "#{database_path}/documents" }
   let(:commit_time) { Time.now }
   let :commit_resp do
-    Google::Firestore::V1beta1::CommitResponse.new(
+    Google::Firestore::V1::CommitResponse.new(
       commit_time: Google::Cloud::Firestore::Convert.time_to_timestamp(commit_time),
-      write_results: [Google::Firestore::V1beta1::WriteResult.new(
+      write_results: [Google::Firestore::V1::WriteResult.new(
         update_time: Google::Cloud::Firestore::Convert.time_to_timestamp(commit_time))]
       )
   end
@@ -33,11 +33,11 @@ describe Google::Cloud::Firestore::CollectionReference, :add, :mock_firestore do
   it "creates a Document reference with a random id" do
     random_document_id = "helloiamarandomdocid"
 
-    commit_writes = [Google::Firestore::V1beta1::Write.new(
-      update: Google::Firestore::V1beta1::Document.new(
+    commit_writes = [Google::Firestore::V1::Write.new(
+      update: Google::Firestore::V1::Document.new(
         name: "#{documents_path}/#{collection_path}/#{random_document_id}",
         fields: {}),
-      current_document: Google::Firestore::V1beta1::Precondition.new(
+      current_document: Google::Firestore::V1::Precondition.new(
         exists: false)
     )]
 
@@ -61,11 +61,11 @@ describe Google::Cloud::Firestore::CollectionReference, :add, :mock_firestore do
   it "creates a Document reference with a random id and provided data" do
     random_document_id = "helloiamarandomdocid"
 
-    commit_writes = [Google::Firestore::V1beta1::Write.new(
-      update: Google::Firestore::V1beta1::Document.new(
+    commit_writes = [Google::Firestore::V1::Write.new(
+      update: Google::Firestore::V1::Document.new(
         name: "#{documents_path}/#{collection_path}/#{random_document_id}",
         fields: Google::Cloud::Firestore::Convert.hash_to_fields({ hello: "world" })),
-      current_document: Google::Firestore::V1beta1::Precondition.new(
+      current_document: Google::Firestore::V1::Precondition.new(
         exists: false)
     )]
 

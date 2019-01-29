@@ -17,7 +17,7 @@ require "google/cloud/env"
 require "google/cloud/errors"
 require "google/cloud/firestore/credentials"
 require "google/cloud/firestore/version"
-require "google/cloud/firestore/v1beta1"
+require "google/cloud/firestore/v1"
 
 module Google
   module Cloud
@@ -34,7 +34,7 @@ module Google
                        client_config: nil
           @project = project
           @credentials = credentials
-          @host = host || V1beta1::FirestoreClient::SERVICE_ADDRESS
+          @host = host || V1::FirestoreClient::SERVICE_ADDRESS
           @timeout = timeout
           @client_config = client_config || {}
         end
@@ -53,7 +53,7 @@ module Google
 
         def firestore
           @firestore ||= \
-            V1beta1::FirestoreClient.new(
+            V1::FirestoreClient.new(
               credentials:   channel,
               timeout:       timeout,
               client_config: client_config,
@@ -146,11 +146,11 @@ module Google
         end
 
         def database_path project_id: project, database_id: "(default)"
-          V1beta1::FirestoreClient.database_root_path project_id, database_id
+          V1::FirestoreClient.database_root_path project_id, database_id
         end
 
         def documents_path project_id: project, database_id: "(default)"
-          V1beta1::FirestoreClient.document_root_path project_id, database_id
+          V1::FirestoreClient.document_root_path project_id, database_id
         end
 
         def inspect
@@ -166,7 +166,7 @@ module Google
 
         def call_options parent: nil, token: nil
           Google::Gax::CallOptions.new({
-            kwargs:     default_headers(parent),
+            metadata:   default_headers(parent),
             page_token: token
           }.delete_if { |_, v| v.nil? })
         end
@@ -177,7 +177,7 @@ module Google
           mask = Array(mask).map(&:to_s).reject(&:nil?).reject(&:empty?)
           return nil if mask.empty?
 
-          Google::Firestore::V1beta1::DocumentMask.new field_paths: mask
+          Google::Firestore::V1::DocumentMask.new field_paths: mask
         end
 
         def execute

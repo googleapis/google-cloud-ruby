@@ -13,7 +13,7 @@
 # limitations under the License.
 
 
-require "google/cloud/firestore/v1beta1"
+require "google/cloud/firestore/v1"
 require "google/cloud/firestore/convert"
 
 module Google

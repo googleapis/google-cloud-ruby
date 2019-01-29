@@ -23,6 +23,16 @@ logging.basicConfig(level=logging.DEBUG)
 
 gapic = gcp.GAPICGenerator()
 
+v1_library = gapic.ruby_library(
+    'firestore', 'v1',
+    config_path='/google/firestore/artman_firestore_v1.yaml',
+    artman_output_name='google-cloud-ruby/google-cloud-firestore'
+)
+s.copy(v1_library / 'lib/google/cloud/firestore/v1')
+s.copy(v1_library / 'lib/google/cloud/firestore/v1.rb')
+s.copy(v1_library / 'lib/google/firestore/v1')
+s.copy(v1_library / 'test/google/cloud/firestore/v1')
+
 v1beta1_library = gapic.ruby_library(
     'firestore', 'v1beta1',
     config_path='/google/firestore/artman_firestore.yaml',
@@ -50,6 +60,20 @@ s.replace(
     ],
     'Google::Cloud::Firestore\\.new\\(version: :v1beta1\\)',
     'Google::Cloud::Firestore::V1beta1.new')
+s.replace(
+    [
+      'lib/google/cloud/firestore/v1/firestore_client.rb',
+      'test/google/cloud/firestore/v1/firestore_client_test.rb'
+    ],
+    'require "google/cloud/firestore"',
+    'require "google/cloud/firestore/v1"')
+s.replace(
+    [
+      'lib/google/cloud/firestore/v1/firestore_client.rb',
+      'test/google/cloud/firestore/v1/firestore_client_test.rb'
+    ],
+    'Google::Cloud::Firestore\\.new\\(version: :v1\\)',
+    'Google::Cloud::Firestore::V1.new')
 
 # https://github.com/googleapis/gapic-generator/issues/2242
 def escape_braces(match):
@@ -60,13 +84,13 @@ def escape_braces(match):
         if count == 0:
             return content
 s.replace(
-    'lib/google/cloud/firestore/v1beta1/**/*.rb',
+    'lib/google/cloud/firestore/v1*/**/*.rb',
     '\n\\s+#[^\n]*[^\n#\\$\\\\]\\{[\\w,]+\\}',
     escape_braces)
 
 # https://github.com/googleapis/gapic-generator/issues/2243
 s.replace(
-    'lib/google/cloud/firestore/v1beta1/*_client.rb',
+    'lib/google/cloud/firestore/v1*/*_client.rb',
     '(\n\\s+class \\w+Client\n)(\\s+)(attr_reader :\\w+_stub)',
     '\\1\\2# @private\n\\2\\3')
 
