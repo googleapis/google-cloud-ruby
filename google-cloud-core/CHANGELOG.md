@@ -1,5 +1,13 @@
 # Release History
 
+### 1.3.0 / 2019-01-31
+
+* Add on_error configuration (#2735)
+* Upgrade Rubocop to 0.61 (#2743)
+* Update .rubocop.yml in all gems (#2721)
+* Upgrade Rubocop to 0.59.2 (#2525)
+* fix windows tests (#2598)
+
 ### 1.2.7 / 2018-09-20
 
 * Update documentation.
