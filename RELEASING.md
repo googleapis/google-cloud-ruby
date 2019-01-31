@@ -36,7 +36,7 @@ green, you may create a release as follows:
    [google-cloud](https://github.com/googleapis/google-cloud-ruby/blob/master/google-cloud)
    and
    [stackdriver](https://github.com/googleapis/google-cloud-ruby/blob/master/stackdriver)
-   last, in case of dependency changes. (See steps 15 and 16, below.)
+   last, in case of dependency changes. (See steps 13 and 14, below.)
 
 1. In root directory of the project, review the changes for the gem since its
    last release.
