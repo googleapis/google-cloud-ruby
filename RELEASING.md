@@ -5,16 +5,9 @@ Client](https://github.com/googleapis/google-cloud-ruby) project.
 
 ## Releasing individual gems and meta-packages
 
-The Google Cloud Ruby Client project uses [semantic
-versioning](http://semver.org). Replace the `<version>` placeholder in the
-examples below with the appropriate number, e.g. `0.1.0`. Replace the `<gem>`
-placeholder with the appropriate full name of the gem, e.g.
-`google-cloud-datastore`.
-
-After all [pull
+After all relevant [pull
 requests](https://github.com/googleapis/google-cloud-ruby/pulls) for a
-release have been merged and all Kokoro and [Circle CI
-builds](https://circleci.com/gh/googleapis/google-cloud-ruby) are
+release have been merged and all Kokoro builds are
 green, you may create a release as follows:
 
 1. In root directory of the project, switch to the master branch, ensure that
@@ -25,12 +18,6 @@ green, you may create a release as follows:
     $ git checkout master
     $ git status
     $ git pull <remote> master
-    ```
-
-1. Create and switch to a new branch with today's date in the name.
-
-    ```sh
-    $ git checkout -b releases-<yyyy-mm-dd>
     ```
 
 1. Review the report of changes for all gems.
@@ -62,17 +49,6 @@ green, you may create a release as follows:
    significant changes. (For examples of what a significant change is, browse
    the changes in the gem's `CHANGELOG.md`.)
 
-1. Edit the gem's `CHANGELOG.md`. Using your notes from the previous step, write
-   a bullet-point list of the major and minor changes. You can also call out
-   breaking changes, fixes, contributor credits, and anything else helpful or
-   relevant. See [google-cloud-bigquery
-   v1.2.0](https://github.com/googleapis/google-cloud-ruby/releases/tag/google-cloud-bigquery%2Fv1.2.0)
-   for an example.
-
-1. Edit the gem's `version.rb` file, if present, or the `version` setting in its
-   `.gemspec` file, changing the value to your new [semver](http://semver.org/)
-   version number.
-
 1. If your gem is new, ensure that it has been added to the [top-level
    `Gemfile`](https://github.com/googleapis/google-cloud-ruby/blob/master/Gemfile).
    Follow the steps in [Adding a new gem to
@@ -93,116 +69,42 @@ green, you may create a release as follows:
    code example have been added to the [top-level
    README](https://github.com/googleapis/google-cloud-ruby/blob/master/README.md).
 
-1. Commit your changes. Copy and paste the significant points from your
-   `CHANGELOG.md` edit as the description in your commit message.
+1. [Install releasetool](https://github.com/googleapis/releasetool#installation).
+
+1. While on the master branch, cd into the directory of the gem you would like to release, and run:
 
     ```sh
-    $ git commit -am "Release <gem> <version> ..."
+    $ python3 -m releasetool start
     ```
 
-1. Verify that your changes are complete, and that the version numbers all
-   match.
+    1. If it's your first time running this, it will likely ask you for a GitHub API token with write:repo_hook and public_repo permissions from https://github.com/settings/tokens.
 
-    ```sh
-    $ git show
-    ```
+    1. Next, the script will present you with an automatically generated changelog. Use the information from steps 4 and 5, as well as the provided PR numbers to edit and complete the changelog.
 
-1. Repeat steps 4 through 13 if you are releasing multiple gems.
+    1. The script will then ask you if your change is considered major, minor, or patch. This project uses [semantic versioning](http://semver.org).
+
+    1. The script will then create and switch to a branch called release-#{gem-name}-v#{version}, make all the necessary changes to the changelog and gem version, and open a [pull request](https://github.com/googleapis/google-cloud-ruby/pulls).
+
+1. Review the PR, apply the appropriate label(s), and request a review from googleapis/yoshi-ruby.
+
+1. Repeat steps 4 through 11 if you are releasing multiple gems.
 
 1. If you updated `google-cloud/google-cloud.gemspec` for a version change to
-   any gem, repeat steps 5 through 13 for the `google-cloud` gem.
+   any gem, repeat steps 5 through 11 for the `google-cloud` gem.
 
 1. If you updated `stackdriver/stackdriver.gemspec` for a version change to any
-   gem, repeat steps 5 through 13 for the `stackdriver` gem.
-
-1. If any dependencies have been updated in the previous steps, test that all
-   version dependencies are correct.
-
-    ```sh
-    $ bundle update
-    $ bundle exec rake ci[yes]
-    ```
-
-1. Rebase your commit(s) on the latest remote master.
-
-    ```sh
-    $ git checkout master
-    $ git pull <remote> master
-    $ git checkout releases-<yyyy-mm-dd>
-    $ git rebase master
-    ```
-
-1. Push the branch with your commit(s) to your personal fork of project repo.
-
-    ```sh
-    $ git push <user-repo> -u
-    ```
-
-1. [Create a pull request from your
-   fork](https://help.github.com/articles/creating-a-pull-request-from-a-fork/)
-   using the branch containing your commit(s). Assign the pull request to
-   yourself for merging. Request the appropriate reviewers.
+   gem, repeat steps 5 through 11 for the `stackdriver` gem.
 
 1. After your pull request has passed all checks and been approved by reviewers,
-   **Squash and merge** it. This will trigger a build job on [Circle
-   CI](https://circleci.com/gh/googleapis/google-cloud-ruby).
+   **Squash and merge** it. This will trigger a build job on Kokoro, which will create the [release](https://github.com/googleapis/google-cloud-ruby/releases) and build and push the gem to [rubygems](https://rubygems.org/).
 
-1. Wait until the [Circle CI
-   build](https://circleci.com/gh/googleapis/google-cloud-ruby) has
-   passed for the squashed pull request commit in master.
+1. If everything has gone successfully, [yoshi-automation](https://github.com/yoshi-automation) will post twice on the merged PR. Once to provide the status and link for the [release](https://github.com/googleapis/google-cloud-ruby/releases), and again to provide the status of the task to publish to [rubygems](https://rubygems.org/).
 
-1. On the [google-cloud-ruby releases
-   page](https://github.com/googleapis/google-cloud-ruby/releases),
-   click [Draft a new
-   release](https://github.com/googleapis/google-cloud-ruby/releases/new).
-   Complete the form as follows for each gem in your pull request. You should
-   refer to the GitHub view of your squashed commit for content.
+1. Verify the [release](https://github.com/googleapis/google-cloud-ruby/releases), making sure that it fits the format of other releases, mirrors the changelog, is tagged to the appropriate commit hash, and is for the correct version.
 
-   1. In the `Tag version` field, enter the tag name in the following format:
+1. Verify that the correct version of the gem was published on [rubygems](https://rubygems.org/).
 
-       ```
-       <gem>/v<version>
-       ```
-
-   1. In the `Target` dropdown, select the squashed commit from your pull
-      request.
-
-   1. In the `Release title` field, enter `<gem> <version>`, e.g.
-      `google-cloud-bigquery 1.2.0`.
-
-   1. In the description text area, paste in the bullet-point list from the
-      `CHANGELOG.md` for the gem and release.
-
-1. Click `Publish release`. This will trigger a build job on [Circle
-   CI](https://circleci.com/gh/googleapis/google-cloud-ruby) for the
-   tag.
-
-1. Wait until the [Circle CI
-   build](https://circleci.com/gh/googleapis/google-cloud-ruby) has
-   passed for the tag.
-
-1. Confirm that the new version is displayed on the [google-cloud-ruby gh-pages
-   doc
-   site](https://http://googleapis.github.io/google-cloud-ruby/docs/). Or, to
-   save time when releasing many gems at once, check out the gh-pages branch and
-   pull repeatedly to confirm that it has received the new docs.
-
-   If the gh-pages branch has not been updated, inspect the Kokoro build logs to
-   confirm that the rake `post` task succeeded.
-
-1. Confirm that the gem for the new version is available on
-   [RubyGems.org](https://rubygems.org/gems/google-cloud).
-
-   If RubyGems.org has not been updated, inspect the Circle CI build logs to
-   confirm that the rake `release` task succeeded.
-
-1. Repeat steps 23 through 27 for each gem in your squashed commit.
-
-1. After the Circle CI master branch build has successfully completed, confirm
-   that the [Kokoro master branch
-   builds](https://github.com/googleapis/google-cloud-ruby/commits/master) are
-   also green by looking for green checkmarks next to the timestamp for each
-   commit.
+1. Verify that the Kokoro Jobs have succeeded, by selecting the x or checkmark by your [commit](https://github.com/googleapis/google-cloud-ruby/commits/master). Pay special attention to the post task under the check "Kokoro - Linux".
 
 High fives all around!
 
