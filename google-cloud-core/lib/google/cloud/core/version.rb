@@ -16,7 +16,7 @@
 module Google
   module Cloud
     module Core
-      VERSION = "1.2.7".freeze
+      VERSION = "1.3.0".freeze
     end
   end
 end
