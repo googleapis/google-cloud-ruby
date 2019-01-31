@@ -83,7 +83,7 @@ green, you may create a release as follows:
 
     1. The script will then ask you if your change is considered major, minor, or patch. This project uses [semantic versioning](http://semver.org).
 
-    1. The script will then create and switch to a branch called release-#{gem-name}-v#{version}, make all the necessary changes to the changelog and gem version, and open a [pull request](https://github.com/googleapis/google-cloud-ruby/pulls).
+    1. The script will then create and switch to a branch called "release-#{gem-name}-v#{version}", make all the necessary changes to the changelog and gem version, and open a [pull request](https://github.com/googleapis/google-cloud-ruby/pulls).
 
 1. Review the PR, apply the appropriate label(s), and request a review from googleapis/yoshi-ruby.
 
