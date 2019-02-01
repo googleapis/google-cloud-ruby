@@ -104,7 +104,7 @@ green, you may create a release as follows:
 1. After your pull request has passed all checks and been approved by reviewers,
    **Squash and merge** it. This will trigger a build on [Kokoro](#Checking-the-status-of-Kokoro-builds), which will create the [release](https://github.com/googleapis/google-cloud-ruby/releases) and build and push the gem to [rubygems](https://rubygems.org/). If yoshi-automation reports a failure creating the [release](https://github.com/googleapis/google-cloud-ruby/releases), file a bug on [releasetool's issue tracker](https://github.com/googleapis/releasetool/issues), and [write the release manually](writing-a-release-manually). If yoshi-automation reports that the release build has failed, follow [these steps](#Checking-the-status-of-Kokoro-builds), selecting the Kokoro build titled "Kokoro - Release".
 
-1. If everything has gone successfully, [yoshi-automation](https://github.com/yoshi-automation) will post twice on the merged PR. Once to provide the status and link for the [release](https://github.com/googleapis/google-cloud-ruby/releases), and again to provide the status of the task to publish to [rubygems](https://rubygems.org/).
+1. If everything has gone successfully, [yoshi-automation](https://github.com/yoshi-automation) will post twice on the merged PR. Once to provide the status and link for the [release](https://github.com/googleapis/google-cloud-ruby/releases), and again to provide the status of the task to publish to [rubygems](https://rubygems.org/). At this point, please delete the branch created by releasetool in step 11(iv).
 
 1. Verify the [release](https://github.com/googleapis/google-cloud-ruby/releases), making sure that it fits the format of other releases, mirrors the changelog, is tagged to the appropriate commit hash, and is for the correct version.
 
@@ -154,3 +154,16 @@ gem.
     1. If the error is related to your release and you have access to the googleapis [rubygems](https://rubygems.org/) account, follow [these instructions](http://help.rubygems.org/kb/gemcutter/removing-a-published-rubygem) to yank the gem. Open an [issue](https://github.com/googleapis/google-cloud-ruby/issues) detailing what went wrong and begin working on a fix.
 
     1. If the error is related to your release and you do not have access to the googleapis [rubygems](https://rubygems.org/) account, please open an [issue](https://github.com/googleapis/google-cloud-ruby/issues) containing a link to the build logs, a brief summary, and "@googleapis/yoshi-ruby".
+
+## Writing a release manually
+1. [Draft a new release](https://github.com/googleapis/google-cloud-ruby/releases/new).
+
+1. Add a tag. The tag should be of the format "#{gem_name}/v#{version_number}".
+
+1. To the right of the tag and "@" symbol, there will be a dropdown with "Target: master. Click the dropdown, select the "Recent Commits" tab, and find and select the commit that was your merged PR.
+
+1. Add a title in the format "Release #{gem_name} #{version_number}".
+
+1. Copy the content of the most recent update in the gem's CHANGELOG into the textarea with placeholder text "Describe this release".
+
+1. Click "Publish release"
