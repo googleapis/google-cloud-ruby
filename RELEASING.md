@@ -38,10 +38,11 @@ green, you may create a release as follows:
    [stackdriver](https://github.com/googleapis/google-cloud-ruby/blob/master/stackdriver)
    last, in case of dependency changes. (See steps 13 and 14, below.)
 
-1. In root directory of the project, review the changes for the gem since its
+1. In the root directory of the project, from the master branch, review the changes for the gem since its
    last release.
 
     ```sh
+    $ git pull
     $ bundle exec rake changes[<gem>]
     ```
 
