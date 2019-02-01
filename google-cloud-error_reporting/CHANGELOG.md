@@ -1,5 +1,20 @@
 # Release History
 
+### 0.31.0 / 2019-02-01
+
+* Add ErrorReporting on_error configuration.
+* Update asynchronous error reporting implementation:
+  * Add dependency on concurrent-ruby.
+* Fix for submitting error objects without backtrace.
+* Make use of Credentials#project_id
+  * Use Credentials#project_id
+    If a project_id is not provided, use the value on the Credentials object.
+    This value was added in googleauth 0.7.0.
+  * Loosen googleauth dependency
+    Allow for new releases up to 0.10.
+    The googleauth devs have committed to maintanining the current API
+    and will not make backwards compatible changes before 0.10.
+
 ### 0.30.5 / 2018-09-20
 
 * Update documentation.
