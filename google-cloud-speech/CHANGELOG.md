@@ -1,5 +1,9 @@
 # Release History
 
+### 0.34.0 / 2019-02-01
+
+* Add RecognitionConfig#audio_channel_count attribute
+
 ### 0.33.0 / 2019-01-24
 
 * Add the following attributes to the Google::Cloud::Speech::V1 namespace:
