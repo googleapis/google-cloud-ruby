@@ -165,6 +165,6 @@ gem.
 
 1. Add a title in the format "Release #{gem_name} #{version_number}".
 
-1. Copy the content of the most recent update in the gem's CHANGELOG into the textarea with placeholder text "Describe this release".
+1. Copy the content of the most recent update in the gem's CHANGELOG.md into the textarea with placeholder text "Describe this release".
 
 1. Click "Publish release"
