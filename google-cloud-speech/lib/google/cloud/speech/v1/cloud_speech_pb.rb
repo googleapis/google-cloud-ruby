@@ -34,6 +34,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.cloud.speech.v1.RecognitionConfig" do
     optional :encoding, :enum, 1, "google.cloud.speech.v1.RecognitionConfig.AudioEncoding"
     optional :sample_rate_hertz, :int32, 2
+    optional :audio_channel_count, :int32, 7
     optional :enable_separate_recognition_per_channel, :bool, 12
     optional :language_code, :string, 3
     optional :max_alternatives, :int32, 4
