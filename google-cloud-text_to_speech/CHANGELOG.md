@@ -1,5 +1,10 @@
 # Release History
 
+### 0.2.0 / 2019-02-01
+
+* Add AudioConfig#effects_profile_id.
+* Updated code examples.
+
 ### 0.1.3 / 2018-09-20
 
 * Update documentation.
