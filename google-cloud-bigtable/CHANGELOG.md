@@ -1,5 +1,17 @@
 # Release History
 
+### 0.3.0 / 2019-02-01
+
+* Move library to Beta.
+* Make use of Credentials#project_id
+  * Use Credentials#project_id
+    If a project_id is not provided, use the value on the Credentials object.
+    This value was added in googleauth 0.7.0.
+  * Loosen googleauth dependency
+    Allow for new releases up to 0.10.
+    The googleauth devs have committed to maintanining the current API
+    and will not make backwards compatible changes before 0.10.
+
 ### 0.2.0 / 2018-11-15
 
 * Update network configuration.
