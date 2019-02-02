@@ -147,7 +147,7 @@ match_breakpoints(VALUE self, const char *c_trace_path, int c_trace_lineno)
 
 /**
  *  line_trace_callback
- *  Callback function for thread line event tracing. It checks tracer#breakpoint_cache
+ *  Callback function for thread line event tracing. It checks Tracer#breakpoints_cache
  *  for any breakpoints trigger on current line called. Then trigger evaluation
  *  procedure if found matching breakpoints. It also skip breakpoints that are
  *  already marked completed.
@@ -234,7 +234,7 @@ disable_line_trace_for_thread(VALUE thread)
 
 /**
  * enable_line_trace_for_thread
- * Turn on line even trace for current thread. Also set a flag
+ * Turn on line event trace for current thread. Also set a flag
  * "gcloud_line_trace_set" to Qtrue in current thread's thread variable.
  */
 static VALUE
@@ -265,14 +265,12 @@ enable_line_trace_for_thread(VALUE self)
 
 /**
  * return_trace_callback
- * Callback function for tracer#return_tracepoint. It gets called on
+ * Callback function for Tracer#return_tracepoint. It gets called on
  * RUBY_EVENT_END, RUBY_EVENT_RETURN, and
  * RUBY_EVENT_B_RETURN events. It keeps line tracing consistent when Ruby
  * program counter interleaves files. Everytime called, it checks caller stack
  * frame's file path, if it matches any of the breakpoints, it turns line
- * event tracing back on. It also decrements tracer#return_tracepoint_counter
- * everytime called. When the counter is at 0, it disables itself, which should
- * be the same stack frame that the return_tracepoint is turned on.
+ * event tracing back on.
  */
 static void
 return_trace_callback(void *data, rb_trace_arg_t *trace_arg)
@@ -391,14 +389,13 @@ enable_return_trace_for_thread(VALUE self)
 
 /**
  * file_tracepoint_callback
- * Callback function for tracer#file_tracepoint. It gets called on
+ * Callback function for Tracer#file_tracepoint. It gets called on
  * RUBY_EVENT_CLASS, RUBY_EVENT_CALL, and RUBY_EVENT_B_CALL
  * events. It check if any breakpoints matches current file the VM program counter
  * is in, and turn on line event tracing for that thread. Otherwise turn off
- * line tracing if in wrong file. The first time it turns on line even tracing,
- * it also turns on tracer#return_tracepoint to maintain line tracing
- * consistency when file execution interleaves. If return_tracepoint is already
- * on, it increments tracer#return_tracepoint_counter.
+ * line tracing if in wrong file. The first time it turns on line event tracing,
+ * it also turns on Tracer#return_tracepoint to maintain line tracing
+ * consistency when file execution interleaves.
  */
 static void
 file_tracepoint_callback(VALUE tracepoint, void *data)
@@ -472,7 +469,7 @@ register_tracepoint(VALUE self, int event, const char *instance_variable_name, v
 /**
  * rb_disable_traces
  * This is implmenetation of Tracer#disable_traces methods. It disables
- * tracer#file_tracepoint, tracer#fiber_tracepoint, return even tracing, and
+ * Tracer#file_tracepoint, Tracer#fiber_tracepoint, return event tracing, and
  * line event tracing for all threads.
  */
 static VALUE
@@ -520,7 +517,7 @@ rb_disable_traces(VALUE self)
 /**
  * rb_enable_traces
  * This is the implementation of Tracer#enable_traces methods. It creates
- * the tracer#file_tracepoints and tracer#fiber_tracepoints for the first time
+ * the Tracer#file_tracepoint and Tracer#fiber_tracepoint for the first time
  * called. Then it also enables them immediately upon creation.
  */
 static VALUE
