@@ -47,6 +47,71 @@ js:
 
   <div id="content"><div id='filecontents'><h1>Release History</h1>
 
+<h3>0.34.0 / 2019-02-01</h3>
+
+<ul>
+<li>Switch to use Google::Cloud::PubSub namespace.</li>
+<li>Add PubSub on_error configuration.</li>
+<li>Major updates to Subscriber
+
+<ul>
+<li>Add dependency on current-ruby.</li>
+<li>Updates are now made using unary API calls, not the gRPC stream.</li>
+<li>Update Subscriber inventory lease mechanics:</li>
+<li>This change will help avoid race conditions by ensuring that
+inventory lease renewal actions don&#39;t override ack/nack/delay
+actions made on a received message via the Subscriber callback.</li>
+<li>Changes to avoid potential race conditions in updates.</li>
+</ul></li>
+<li>Add reference?/resource? helper methods:
+
+<ul>
+<li>Topic#reference?</li>
+<li>Topic#resource?</li>
+<li>Subscription#reference?</li>
+<li>Subscription#resource?</li>
+</ul></li>
+<li>Add documentation for methods that will make an API call
+when called on a reference object.
+
+<ul>
+<li>Topic#labels</li>
+<li>Subscription#topic</li>
+<li>Subscription#deadline</li>
+<li>Subscription#retain_acked</li>
+<li>Subscription#retention</li>
+<li>Subscription#endpoint</li>
+<li>Subscription#labels</li>
+<li>Subscription#exists?</li>
+<li>Subscription#listen (without deadline optional argument)</li>
+</ul></li>
+<li>Add example code for avoiding API calls to Overview guide.</li>
+<li>Remove the #delay alias for modify_ack_deadline.
+
+<ul>
+<li>Users should use the modify_ack_deadline and modify_ack_deadline!
+methods directly instead.</li>
+</ul></li>
+<li>Make use of Credentials#project_id
+
+<ul>
+<li>Use Credentials#project_id
+If a project_id is not provided, use the value on the Credentials object.
+This value was added in googleauth 0.7.0.</li>
+<li>Loosen googleauth dependency
+Allow for new releases up to 0.10.
+The googleauth devs have committed to maintanining the current API
+and will not make backwards compatible changes before 0.10.</li>
+</ul></li>
+<li>Update low level API
+
+<ul>
+<li>Add expiration_policy field</li>
+<li>Numerous updates and fixes to the low-level documentation,
+including fixes for some broken links.i</li>
+</ul></li>
+</ul>
+
 <h3>0.33.2 / 2018-10-29</h3>
 
 <ul>
