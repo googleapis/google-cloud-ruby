@@ -47,6 +47,46 @@ js:
 
   <div id="content"><div id='filecontents'><h1>Release History</h1>
 
+<h3>0.25.0 / 2019-02-01</h3>
+
+<ul>
+<li>Switch Firestore to use the V1 API:
+
+<ul>
+<li>Add V1 service to the low level API.</li>
+</ul></li>
+<li>Add numeric transform methods
+
+<ul>
+<li>Add the following methods to Client:</li>
+<li>Client#field_increment</li>
+<li>Client#field_maximum</li>
+<li>Client#field_minimum</li>
+<li>Add the following methods to FieldValue:</li>
+<li>FieldValue.increment</li>
+<li>FieldValue.maximum</li>
+<li>FieldValue.minimum</li>
+</ul></li>
+<li>Add field_mask argument to get_all method:
+
+<ul>
+<li>Allows specific portions of the document data to be returned.</li>
+</ul></li>
+<li>Add list_collections alias.</li>
+<li>Make use of Credentials#project_id
+
+<ul>
+<li>Use Credentials#project_id
+If a project_id is not provided, use the value on the Credentials object.
+This value was added in googleauth 0.7.0.</li>
+<li>Loosen googleauth dependency
+Allow for new releases up to 0.10.
+The googleauth devs have committed to maintanining the current API
+and will not make backwards compatible changes before 0.10.</li>
+</ul></li>
+<li>Add Firestore emulator support.</li>
+</ul>
+
 <h3>0.24.2 / 2018-09-20</h3>
 
 <ul>
