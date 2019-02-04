@@ -47,6 +47,29 @@ js:
 
   <div id="content"><div id='filecontents'><h1>Release History</h1>
 
+<h3>0.31.0 / 2019-02-01</h3>
+
+<ul>
+<li>Add ErrorReporting on_error configuration.</li>
+<li>Update asynchronous error reporting implementation:
+
+<ul>
+<li>Add dependency on concurrent-ruby.</li>
+</ul></li>
+<li>Fix for submitting error objects without backtrace.</li>
+<li>Make use of Credentials#project_id
+
+<ul>
+<li>Use Credentials#project_id
+If a project_id is not provided, use the value on the Credentials object.
+This value was added in googleauth 0.7.0.</li>
+<li>Loosen googleauth dependency
+Allow for new releases up to 0.10.
+The googleauth devs have committed to maintanining the current API
+and will not make backwards compatible changes before 0.10.</li>
+</ul></li>
+</ul>
+
 <h3>0.30.5 / 2018-09-20</h3>
 
 <ul>
