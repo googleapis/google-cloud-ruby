@@ -594,8 +594,18 @@ module Google
           #   # TODO: Initialize `language_code`:
           #   language_code = ''
           #
+          #   intents_hash = {
+          #     intents: [
+          #       {
+          #         display_name: 'test intent',
+          #         # ...
+          #       }
+          #     ]
+          #   }
           #   # Register a callback during the method call.
-          #   operation = intents_client.batch_update_intents(formatted_parent, language_code) do |op|
+          #   operation = intents_client.batch_update_intents(formatted_parent,
+          #                                                   language_code,
+          #                                                   intent_batch_inline:  intents_hash) do |op|
           #     raise op.results.message if op.error?
           #     op_results = op.results
           #     # Process the results.
