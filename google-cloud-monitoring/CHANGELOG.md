@@ -1,5 +1,10 @@
 # Release History
 
+### 0.29.3 / 2019-02-01
+
+* Update network configuration.
+* Update documentation.
+
 ### 0.29.2 / 2018-09-20
 
 * Update Monitoring generated files.
