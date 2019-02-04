@@ -1,5 +1,50 @@
 # Release History
 
+### 0.34.0 / 2019-02-01
+
+* Switch to use Google::Cloud::PubSub namespace.
+* Add PubSub on_error configuration.
+* Major updates to Subscriber
+  * Add dependency on current-ruby.
+  * Updates are now made using unary API calls, not the gRPC stream.
+  * Update Subscriber inventory lease mechanics:
+    * This change will help avoid race conditions by ensuring that
+      inventory lease renewal actions don't override ack/nack/delay
+      actions made on a received message via the Subscriber callback.
+  * Changes to avoid potential race conditions in updates.
+* Add reference?/resource? helper methods:
+  * Topic#reference?
+  * Topic#resource?
+  * Subscription#reference?
+  * Subscription#resource?
+* Add documentation for methods that will make an API call
+  when called on a reference object.
+  * Topic#labels
+  * Subscription#topic
+  * Subscription#deadline
+  * Subscription#retain_acked
+  * Subscription#retention
+  * Subscription#endpoint
+  * Subscription#labels
+  * Subscription#exists?
+  * Subscription#listen (without deadline optional argument)
+* Add example code for avoiding API calls to Overview guide.
+* Remove the #delay alias for modify_ack_deadline.
+  * Users should use the modify_ack_deadline and modify_ack_deadline!
+    methods directly instead.
+* Make use of Credentials#project_id
+  * Use Credentials#project_id
+    If a project_id is not provided, use the value on the Credentials object.
+    This value was added in googleauth 0.7.0.
+  * Loosen googleauth dependency
+    Allow for new releases up to 0.10.
+    The googleauth devs have committed to maintanining the current API
+    and will not make backwards compatible changes before 0.10.
+* Update low level API
+  * Add expiration_policy field
+  * Numerous updates and fixes to the low-level documentation,
+    including fixes for some broken links.i
+
 ### 0.33.2 / 2018-10-29
 
 * Rename delay methods to modify_ack_deadline
