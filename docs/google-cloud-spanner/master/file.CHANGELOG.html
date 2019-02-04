@@ -47,6 +47,32 @@ js:
 
   <div id="content"><div id='filecontents'><h1>Release History</h1>
 
+<h3>1.8.0 / 2019-02-01</h3>
+
+<ul>
+<li>Make use of Credentials#project_id
+
+<ul>
+<li>Use Credentials#project_id
+If a project_id is not provided, use the value on the Credentials object.
+This value was added in googleauth 0.7.0.</li>
+<li>Loosen googleauth dependency
+Allow for new releases up to 0.10.
+The googleauth devs have committed to maintanining the current API
+and will not make backwards compatible changes before 0.10.</li>
+</ul></li>
+<li>Performance improvements for Data#to_h
+
+<ul>
+<li>Add Data skip_dup_check optional arg</li>
+<li>This enhancement allows users to skip the dupplicate name check
+when serializing Data to a Ruby Hash or Array.
+This speeds up the serialization, but data may be lost.</li>
+</ul></li>
+<li>Update network configuration</li>
+<li>Update Client#close to block on session release</li>
+</ul>
+
 <h3>1.7.2 / 2018-11-15</h3>
 
 <ul>
