@@ -1,5 +1,31 @@
 # Release History
 
+### 0.25.0 / 2019-02-01
+
+* Switch Firestore to use the V1 API:
+  * Add V1 service to the low level API.
+* Add numeric transform methods
+  * Add the following methods to Client:
+    * Client#field_increment
+    * Client#field_maximum
+    * Client#field_minimum
+  * Add the following methods to FieldValue:
+    * FieldValue.increment
+    * FieldValue.maximum
+    * FieldValue.minimum
+* Add field_mask argument to get_all method:
+  * Allows specific portions of the document data to be returned.
+* Add list_collections alias.
+* Make use of Credentials#project_id
+  * Use Credentials#project_id
+    If a project_id is not provided, use the value on the Credentials object.
+    This value was added in googleauth 0.7.0.
+  * Loosen googleauth dependency
+    Allow for new releases up to 0.10.
+    The googleauth devs have committed to maintanining the current API
+    and will not make backwards compatible changes before 0.10.
+* Add Firestore emulator support.
+
 ### 0.24.2 / 2018-09-20
 
 * Add fix for comparing NaN values
