@@ -1,5 +1,12 @@
 # Release History
 
+### 1.0.0 / 2019-02-04
+
+* sort methods prior to generating helper methods (#2776)
+* Re-generated google-cloud-vision (no significant changes)
+* Re-generate google-cloud-vision files (#2824)
+* Upgrade Rubocop to 0.61 (#2743)
+
 ### 0.32.2 / 2018-12-14
 
 * Add image_context as optional parameter to ImageAnnotatorClient.*_detection helpers
