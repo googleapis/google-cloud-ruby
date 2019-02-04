@@ -1,5 +1,11 @@
 # Release History
 
+### 0.3.0 / 2019-02-01
+
+* Add Task#dispatch_deadline attribute.
+* Add HttpMethod::PATCH and HttpMethod::OPTIONS enumerated values.
+* Update documentation.
+
 ### 0.2.6 / 2018-11-15
 
 * Update network configuration.
