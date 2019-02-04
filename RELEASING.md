@@ -103,11 +103,11 @@ green, you may create a release as follows:
    gem, repeat steps 4 through 12 for the `stackdriver` gem.
 
 1. After your pull request has passed all checks and been approved by reviewers,
-   **Squash and merge** it. This will trigger a build on [Kokoro](#Checking-the-status-of-Kokoro-builds), which will create the [release](https://github.com/googleapis/google-cloud-ruby/releases) and build and push the gem to [rubygems](https://rubygems.org/). If yoshi-automation reports a failure creating the [release](https://github.com/googleapis/google-cloud-ruby/releases), file a bug on [releasetool's issue tracker](https://github.com/googleapis/releasetool/issues), and [write the release manually](writing-a-release-manually). If yoshi-automation reports that the release build has failed, follow [these steps](#Checking-the-status-of-Kokoro-builds), selecting the Kokoro build titled "Kokoro - Release".
+   **Squash and merge** it. This will trigger a build on [Kokoro](#Checking-the-status-of-Kokoro-builds), which will create the [GitHub release summary](https://github.com/googleapis/google-cloud-ruby/releases) and build and push the gem to [rubygems](https://rubygems.org/). If yoshi-automation reports a failure creating the [GitHub release summary](https://github.com/googleapis/google-cloud-ruby/releases), file a bug on [releasetool's issue tracker](https://github.com/googleapis/releasetool/issues), and [write the release manually](writing-a-github-release-summary-manually). If yoshi-automation reports that the release build has failed, follow [these steps](#Checking-the-status-of-Kokoro-builds), selecting the Kokoro build titled "Kokoro - Release".
 
-1. If everything has gone successfully, [yoshi-automation](https://github.com/yoshi-automation) will post twice on the merged PR. Once to provide the status and link for the [release](https://github.com/googleapis/google-cloud-ruby/releases), and again to provide the status of the task to publish to [rubygems](https://rubygems.org/). At this point, please delete the branch created by releasetool in step 11(iv).
+1. If everything has gone successfully, [yoshi-automation](https://github.com/yoshi-automation) will post twice on the merged PR. Once to provide the status and link for the [GitHub release summary](https://github.com/googleapis/google-cloud-ruby/releases), and again to provide the status of the task to publish to [rubygems](https://rubygems.org/). At this point, please delete the branch created by releasetool in step 11(iv).
 
-1. Verify the [release](https://github.com/googleapis/google-cloud-ruby/releases), making sure that it fits the format of other releases, mirrors the changelog, is tagged to the appropriate commit hash, and is for the correct version.
+1. Verify the [GitHub release summary](https://github.com/googleapis/google-cloud-ruby/releases), making sure that it fits the format of other releases, mirrors the changelog, is tagged to the appropriate commit hash, and is for the correct version.
 
 1. Verify that the correct version of the gem was published on [rubygems](https://rubygems.org/).
 
@@ -132,7 +132,7 @@ gem.
 
 1. On the [commits](https://github.com/googleapis/google-cloud-ruby/commits/master) page, find the commit you expect to have launched a Kokoro build.
 
-1. To the right of your commit, there should be either a red x, or a green checkmark. If it's the green checkmark, your build was a success, and no furthur inspection is necessary. If it's the red x, click it to find out why the build failed.
+1. To the right of your commit, there should be either a red x, or a green checkmark. If it's the green checkmark, your build was a success, and no further inspection is necessary. If it's the red x, click it to find out why the build failed.
 
 1. A modal will appear with the list of Kokoro builds. The build titled "Kokoro CI" can be ignored. To learn more about why a build failed or what it was testing for click "details" next to the build.
 
@@ -156,8 +156,8 @@ gem.
 
     1. If the error is related to your release and you do not have access to the googleapis [rubygems](https://rubygems.org/) account, please open an [issue](https://github.com/googleapis/google-cloud-ruby/issues/new?template=bug_report.md) containing a link to the build logs, a brief summary, and "@googleapis/yoshi-ruby".
 
-## Writing a release manually
-1. [Draft a new release](https://github.com/googleapis/google-cloud-ruby/releases/new).
+## Writing a GitHub release summary manually
+1. [Draft a new GitHub release summary](https://github.com/googleapis/google-cloud-ruby/releases/new).
 
 1. Add a tag. The tag should be of the format "#{gem_name}/v#{version_number}".
 
