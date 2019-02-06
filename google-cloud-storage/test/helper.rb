@@ -178,4 +178,12 @@ class MockStorage < Minitest::Spec
       )
     )
   end
+
+  def iam_configuration_gapi policy_only: false, locked_time: false
+    bpo = Google::Apis::StorageV1::Bucket::IamConfiguration::BucketPolicyOnly.new(
+      enabled: policy_only
+    )
+    bpo.locked_time = (Date.today + 1).to_datetime if locked_time
+    Google::Apis::StorageV1::Bucket::IamConfiguration.new bucket_policy_only: bpo
+  end
 end
