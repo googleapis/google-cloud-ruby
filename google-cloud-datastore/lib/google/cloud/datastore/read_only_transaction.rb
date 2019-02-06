@@ -244,6 +244,31 @@ module Google
         def ensure_service!
           raise "Must have active connection to service" unless service
         end
+
+        ##
+        # Create a new Query instance. This is a convenience method to make the
+        # creation of Query objects easier.
+        #
+        # @param [String] kinds The kind of entities to query. This is optional.
+        #
+        # @return [Google::Cloud::Datastore::Query]
+        #
+        # @example
+        #   require "google/cloud/datastore"
+        #
+        #   datastore = Google::Cloud::Datastore.new
+        #
+        #   datastore.read_only_transaction do |tx|
+        #     query = tx.query("Task").
+        #       where("done", "=", false)
+        #     tasks = tx.run query
+        #   end
+        #
+        def query *kinds
+          query = Query.new
+          query.kind(*kinds) unless kinds.empty?
+          query
+        end
       end
     end
   end
