@@ -2,15 +2,12 @@
 
 ### 0.34.0 / 2019-02-07
 
-* Update `AsyncReporter` to buffer traces and batch API calls.
+* Add Trace `on_error` configuration.
+* Middleware improvements:
+  * Buffer traces and make batch API calls.
   * Back pressure is applied by limiting the number of queued API calls.
   * Errors will now be raised when there are not enough resources.
-  * Errors are reported using the `AsyncReporter#on_error` callback.
-  * Pending traces are sent before the process closes using `at_exit`.
-* Improve middleware error handling
-  * Add the `on_error` Proc to the Trace configuration that is called
-    when an error is encountered in the middleware. This allows users
-    to handle the errors proactively, instead of scanning logs.
+  * Errors are reported by calling the `on_error` callback.
 * Make use of `Credentials#project_id`
   * Use `Credentials#project_id`
     If a `project_id` is not provided, use the value on the Credentials object.
