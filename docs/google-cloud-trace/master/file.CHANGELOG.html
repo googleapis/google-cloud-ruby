@@ -47,6 +47,36 @@ js:
 
   <div id="content"><div id='filecontents'><h1>Release History</h1>
 
+<h3>0.34.0 / 2019-02-07</h3>
+
+<ul>
+<li>Add Trace <code>on_error</code> configuration.</li>
+<li>Middleware improvements:
+
+<ul>
+<li>Buffer traces and make batch API calls.</li>
+<li>Back pressure is applied by limiting the number of queued API calls.</li>
+<li>Errors will now be raised when there are not enough resources.</li>
+<li>Errors are reported by calling the <code>on_error</code> callback.</li>
+</ul></li>
+<li>Make use of <code>Credentials#project_id</code>
+
+<ul>
+<li>Use <code>Credentials#project_id</code>
+If a <code>project_id</code> is not provided, use the value on the Credentials object.
+This value was added in googleauth 0.7.0.</li>
+<li>Loosen googleauth dependency
+Allow for new releases up to 0.10.
+The googleauth devs have committed to maintaining the current API
+and will not make backwards compatible changes before 0.10.</li>
+</ul></li>
+<li>Update Trace documentation
+
+<ul>
+<li>Correct the C-code&#39;s comments.</li>
+</ul></li>
+</ul>
+
 <h3>0.33.6 / 2018-11-15</h3>
 
 <ul>
