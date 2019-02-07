@@ -16,6 +16,8 @@
     Allow for new releases up to 0.10.
     The googleauth devs have committed to maintaining the current API
     and will not make backwards compatible changes before 0.10.
+* Update Trace documentation
+  * Correct the C-code's comments.
 
 ### 0.33.6 / 2018-11-15
 
