@@ -31,6 +31,7 @@ This client supports the following Google Cloud Platform services at a
 * [Stackdriver Debugger](#stackdriver-debugger-beta) (Beta)
 * [Stackdriver Error Reporting](#stackdriver-error-reporting-beta) (Beta)
 * [Cloud Firestore](#cloud-firestore-beta) (Beta)
+* [Cloud Key Management Service](#cloud-key-management-service-beta) (Beta)
 * [Cloud Pub/Sub](#cloud-pubsub-beta) (Beta)
 * [Stackdriver Monitoring API](#stackdriver-monitoring-api-beta) (Beta)
 * [Stackdriver Trace](#stackdriver-trace-beta) (Beta)
@@ -43,7 +44,6 @@ This client supports the following Google Cloud Platform services at an
 * [Data Loss Prevention](#data-loss-prevention-alpha) (Alpha)
 * [Dialogflow API](#dialogflow-api-alpha) (Alpha)
 * [Cloud DNS](#cloud-dns-alpha) (Alpha)
-* [Cloud KMS](#cloud-kms-alpha) (Alpha)
 * [Cloud Natural Language API](#cloud-natural-language-api-alpha) (Alpha)
 * [Cloud OS Login](#cloud-os-login-alpha) (Alpha)
 * [Cloud Redis](#cloud-redis-api-alpha) (Alpha)
@@ -477,6 +477,19 @@ firestore.transaction do |tx|
   new_population = tx.get(city).data[:population] + 1
   tx.update(city, { population: new_population })
 end
+```
+
+### Cloud Key Management Service (Beta)
+
+- [google-cloud-kms README](google-cloud-kms/README.md)
+- [google-cloud-kms API documentation](https://googleapis.github.io/google-cloud-ruby/docs/google-cloud-kms/latest)
+- [google-cloud-kms on RubyGems](https://rubygems.org/gems/google-cloud-kms)
+- [Google Cloud KMS documentation](https://cloud.google.com/kms/docs/)
+
+#### Quick Start
+
+```sh
+$ gem install google-cloud-kms
 ```
 
 ### Stackdriver Logging (GA)
