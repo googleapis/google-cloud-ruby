@@ -1,5 +1,25 @@
 # Release History
 
+### 0.34.0 / 2019-02-07
+
+* Update AsyncReporter to buffer traces and batch API calls.
+  * Back pressure is applied by limiting the number of queued API calls.
+  * Errors will now be raised when there are not enough resources.
+  * Errors are reported using the AsyncReporter#on_error callback.
+  * Pending traces are sent before the process closes using at_exit.
+* Improve middleware error handling
+  * Add the `on_error` Proc to the Trace configuration that is called
+    when an error is encountered in the middleware. This allows users
+    to handle the errors proactively, instead of scanning logs.
+* Make use of Credentials#project_id
+  * Use Credentials#project_id
+    If a project_id is not provided, use the value on the Credentials object.
+    This value was added in googleauth 0.7.0.
+  * Loosen googleauth dependency
+    Allow for new releases up to 0.10.
+    The googleauth devs have committed to maintanining the current API
+    and will not make backwards compatible changes before 0.10.
+
 ### 0.33.6 / 2018-11-15
 
 * Update network configuration.
