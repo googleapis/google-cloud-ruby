@@ -16,7 +16,7 @@
 module Google
   module Cloud
     module Trace
-      VERSION = "0.33.6".freeze
+      VERSION = "0.34.0".freeze
     end
   end
 end

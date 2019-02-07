@@ -1,5 +1,24 @@
 # Release History
 
+### 0.34.0 / 2019-02-07
+
+* Add Trace `on_error` configuration.
+* Middleware improvements:
+  * Buffer traces and make batch API calls.
+  * Back pressure is applied by limiting the number of queued API calls.
+  * Errors will now be raised when there are not enough resources.
+  * Errors are reported by calling the `on_error` callback.
+* Make use of `Credentials#project_id`
+  * Use `Credentials#project_id`
+    If a `project_id` is not provided, use the value on the Credentials object.
+    This value was added in googleauth 0.7.0.
+  * Loosen googleauth dependency
+    Allow for new releases up to 0.10.
+    The googleauth devs have committed to maintaining the current API
+    and will not make backwards compatible changes before 0.10.
+* Update Trace documentation
+  * Correct the C-code's comments.
+
 ### 0.33.6 / 2018-11-15
 
 * Update network configuration.
