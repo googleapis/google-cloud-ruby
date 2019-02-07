@@ -1,5 +1,9 @@
 # Release History
 
+### 0.31.1 / 2019-02-07
+
+* Update concurrent-ruby dependency
+
 ### 0.31.0 / 2019-02-01
 
 * Add ErrorReporting on_error configuration.
