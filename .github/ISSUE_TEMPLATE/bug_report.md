@@ -31,6 +31,15 @@ If you are still having issues, please be sure to include as much information as
 # example
 ```
 
+#### Full backtrace
+
+```sh
+irb(main):001:0> a + 1
+NameError: undefined local variable or method `a' for main:Object
+    from (irb):1
+    from /Users/rubyist/.rbenv/versions/2.4.5/bin/irb:11:in `<main>'
+```
+
 Making sure to follow these steps will guarantee the quickest resolution possible.
 
 Thanks!
