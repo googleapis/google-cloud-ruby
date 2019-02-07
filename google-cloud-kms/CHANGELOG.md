@@ -1,5 +1,9 @@
 # Release History
 
+### 0.3.0 / 2019-02-07
+
+* Move library to Beta.
+
 ### 0.2.5 / 2018-12-13
 
 * Alias the following KeyManagementServiceClient class methods to instance methods.
