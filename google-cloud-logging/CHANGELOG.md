@@ -1,5 +1,9 @@
 # Release History
 
+### 1.6.1 / 2019-02-07
+
+* Update concurrent-ruby dependency
+
 ### 1.6.0 / 2019-01-22
 
 * AsyncWriter buffer entries and make batch API calls
