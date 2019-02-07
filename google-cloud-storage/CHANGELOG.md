@@ -1,5 +1,9 @@
 # Release History
 
+### 1.17.0 / 2019-02-07
+
+* Add Bucket#policy_only? and #policy_only=
+
 ### 1.16.0 / 2019-02-01
 
 * Make use of Credentials#project_id
