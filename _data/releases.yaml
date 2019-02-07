@@ -451,6 +451,7 @@ google-cloud-storage:
 - v0.20.1
 - v0.20.0
 google-cloud-tasks:
+- v0.3.0
 - v0.2.6
 - v0.2.5
 - v0.2.4
