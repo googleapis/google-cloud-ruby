@@ -1,0 +1,1023 @@
+---
+layout: yard_main
+title: "Class: Google::Cloud::Datastore::ReadOnlyTransaction - Google"
+css: 
+  - /docs/css/style.css
+  - /docs/css/common.css
+  - /css/yard-main.css
+js: 
+  - /docs/js/app.js
+  - /js/yard-main.js
+---
+<script type="text/javascript" charset="utf-8">
+  pathId = "Google::Cloud::Datastore::ReadOnlyTransaction";
+  relpath = '../../../';
+</script>
+
+
+<div class="nav_wrap">
+  <iframe id="nav" src="../../../class_list.html?1"></iframe>
+  <div id="resizer"></div>
+</div>
+
+<div id="main" tabindex="-1">
+  <div id="header">
+    <div id="menu">
+  
+    <a href="../../../_index.html">Index (R)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../Datastore.html" title="Google::Cloud::Datastore (module)">Datastore</a></span></span>
+     &raquo; 
+    <span class="title">ReadOnlyTransaction</span>
+  
+</div>
+
+    <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../../../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+    <div class="clear"></div>
+  </div>
+
+  <div id="content"><h1>Class: Google::Cloud::Datastore::ReadOnlyTransaction
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Google::Cloud::Datastore::ReadOnlyTransaction</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/google/cloud/datastore/read_only_transaction.rb</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <h1>ReadOnlyTransaction</h1>
+
+<p>Represents a read-only Datastore transaction that only allows reads.</p>
+
+<p>A read-only transaction cannot modify entities; in return they do not
+contend with other read-write or read-only transactions. Using a
+read-only transaction for transactions that only read data will
+potentially improve throughput.</p>
+
+<p>See <span class='object_link'><a href="Dataset.html#transaction-instance_method" title="Google::Cloud::Datastore::Dataset#transaction (method)">Dataset#transaction</a></span></p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/datastore</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_datastore'>datastore</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Datastore.html" title="Google::Cloud::Datastore (module)">Datastore</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Datastore.html#new-class_method" title="Google::Cloud::Datastore.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_task_list_key'>task_list_key</span> <span class='op'>=</span> <span class='id identifier rubyid_datastore'>datastore</span><span class='period'>.</span><span class='id identifier rubyid_key'>key</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>TaskList</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>default</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_query'>query</span> <span class='op'>=</span> <span class='id identifier rubyid_datastore'>datastore</span><span class='period'>.</span><span class='id identifier rubyid_query'>query</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Task</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='period'>.</span>
+  <span class='id identifier rubyid_ancestor'>ancestor</span><span class='lparen'>(</span><span class='id identifier rubyid_task_list_key'>task_list_key</span><span class='rparen'>)</span>
+
+<span class='id identifier rubyid_tasks'>tasks</span> <span class='op'>=</span> <span class='kw'>nil</span>
+
+<span class='id identifier rubyid_datastore'>datastore</span><span class='period'>.</span><span class='id identifier rubyid_read_only_transaction'>read_only_transaction</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_tx'>tx</span><span class='op'>|</span>
+  <span class='id identifier rubyid_task_list'>task_list</span> <span class='op'>=</span> <span class='id identifier rubyid_tx'>tx</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span> <span class='id identifier rubyid_task_list_key'>task_list_key</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_task_list'>task_list</span>
+    <span class='id identifier rubyid_tasks'>tasks</span> <span class='op'>=</span> <span class='id identifier rubyid_tx'>tx</span><span class='period'>.</span><span class='id identifier rubyid_run'>run</span> <span class='id identifier rubyid_query'>query</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></code></pre>
+    
+  </div>
+
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><a href="https://cloud.google.com/datastore/docs/concepts/transactions" target="_parent" title="Transactions">Transactions</a></li>
+    
+  </ul>
+
+</div>
+
+
+
+  <h2>Instance Attribute Summary <small><a href="#" class="summary_toggle">collapse</a></small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#id-instance_method" title="#id (instance method)">#<strong>id</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns the value of attribute id.</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#commit-instance_method" title="#commit (instance method)">#<strong>commit</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Commits the transaction.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#find-instance_method" title="#find (instance method)">#<strong>find</strong>(key_or_kind, id_or_name = nil)  &#x21d2; Google::Cloud::Datastore::Entity<sup>?</sup> </a>
+    
+
+    
+      (also: #get)
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieve an entity by providing key information.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#find_all-instance_method" title="#find_all (instance method)">#<strong>find_all</strong>(*keys)  &#x21d2; Google::Cloud::Datastore::Dataset::LookupResults </a>
+    
+
+    
+      (also: #lookup)
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieve the entities for the provided keys.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#reset!-instance_method" title="#reset! (instance method)">#<strong>reset!</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Reset the transaction.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#rollback-instance_method" title="#rollback (instance method)">#<strong>rollback</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Rolls back the transaction.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#run-instance_method" title="#run (instance method)">#<strong>run</strong>(query, namespace: nil)  &#x21d2; Google::Cloud::Datastore::Dataset::QueryResults </a>
+    
+
+    
+      (also: #run_query)
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieve entities specified by a Query.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#start-instance_method" title="#start (instance method)">#<strong>start</strong>  &#x21d2; Object </a>
+    
+
+    
+      (also: #begin_transaction)
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Begins a transaction.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id=""></span>
+      <div class="method_details first">
+  <h3 class="signature first" id="id-instance_method">
+  
+    #<strong>id</strong>  &#x21d2; <tt>Object</tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns the value of attribute id</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+56
+57
+58</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/datastore/read_only_transaction.rb', line 56</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_id'>id</span>
+  <span class='ivar'>@id</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="commit-instance_method">
+  
+    #<strong>commit</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Commits the transaction.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/datastore</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_datastore'>datastore</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Datastore.html" title="Google::Cloud::Datastore (module)">Datastore</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Datastore.html#new-class_method" title="Google::Cloud::Datastore.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_task_list_key'>task_list_key</span> <span class='op'>=</span> <span class='id identifier rubyid_datastore'>datastore</span><span class='period'>.</span><span class='id identifier rubyid_key'>key</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>TaskList</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>default</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_query'>query</span> <span class='op'>=</span> <span class='id identifier rubyid_datastore'>datastore</span><span class='period'>.</span><span class='id identifier rubyid_query'>query</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Task</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='period'>.</span>
+  <span class='id identifier rubyid_ancestor'>ancestor</span><span class='lparen'>(</span><span class='id identifier rubyid_task_list_key'>task_list_key</span><span class='rparen'>)</span>
+
+<span class='id identifier rubyid_tx'>tx</span> <span class='op'>=</span> <span class='id identifier rubyid_datastore'>datastore</span><span class='period'>.</span><span class='id identifier rubyid_transaction'>transaction</span>
+<span class='id identifier rubyid_task_list'>task_list</span> <span class='op'>=</span> <span class='id identifier rubyid_tx'>tx</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span> <span class='id identifier rubyid_task_list_key'>task_list_key</span>
+<span class='kw'>if</span> <span class='id identifier rubyid_task_list'>task_list</span>
+  <span class='id identifier rubyid_tasks'>tasks</span> <span class='op'>=</span> <span class='id identifier rubyid_tx'>tx</span><span class='period'>.</span><span class='id identifier rubyid_run'>run</span> <span class='id identifier rubyid_query'>query</span>
+<span class='kw'>end</span>
+<span class='id identifier rubyid_tx'>tx</span><span class='period'>.</span><span class='id identifier rubyid_commit'>commit</span></code></pre>
+    
+  </div>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/datastore/read_only_transaction.rb', line 192</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_commit'>commit</span>
+  <span class='kw'>if</span> <span class='ivar'>@id</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+    <span class='id identifier rubyid_raise'>raise</span> <span class='const'><span class='object_link'><a href="TransactionError.html" title="Google::Cloud::Datastore::TransactionError (class)">TransactionError</a></span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Cannot commit when not in a transaction.</span><span class='tstring_end'>&quot;</span></span>
+  <span class='kw'>end</span>
+
+  <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
+
+  <span class='id identifier rubyid_service'>service</span><span class='period'>.</span><span class='id identifier rubyid_commit'>commit</span> <span class='lbracket'>[</span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='label'>transaction:</span> <span class='ivar'>@id</span>
+  <span class='kw'>true</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="find-instance_method">
+  
+    #<strong>find</strong>(key_or_kind, id_or_name = nil)  &#x21d2; <tt><span class='object_link'><a href="Entity.html" title="Google::Cloud::Datastore::Entity (class)">Google::Cloud::Datastore::Entity</a></span></tt><sup>?</sup> 
+  
+
+  
+    <span class="aliases">Also known as:
+    <span class="names"><span id='get-instance_method'>get</span></span>
+    </span>
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieve an entity by providing key information. The lookup is run
+within the transaction.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/datastore</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_datastore'>datastore</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Datastore.html" title="Google::Cloud::Datastore (module)">Datastore</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Datastore.html#new-class_method" title="Google::Cloud::Datastore.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_task_list_key'>task_list_key</span> <span class='op'>=</span> <span class='id identifier rubyid_datastore'>datastore</span><span class='period'>.</span><span class='id identifier rubyid_key'>key</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>TaskList</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>default</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_datastore'>datastore</span><span class='period'>.</span><span class='id identifier rubyid_read_only_transaction'>read_only_transaction</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_tx'>tx</span><span class='op'>|</span>
+  <span class='id identifier rubyid_task_list'>task_list</span> <span class='op'>=</span> <span class='id identifier rubyid_tx'>tx</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span> <span class='id identifier rubyid_task_list_key'>task_list_key</span>
+<span class='kw'>end</span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>key_or_kind</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Key.html" title="Google::Cloud::Datastore::Key (class)">Key</a></span></tt>, <tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A Key object or <code>kind</code> string value.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Entity.html" title="Google::Cloud::Datastore::Entity (class)">Google::Cloud::Datastore::Entity</a></span></tt>, <tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+91
+92
+93
+94
+95
+96
+97</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/datastore/read_only_transaction.rb', line 91</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_find'>find</span> <span class='id identifier rubyid_key_or_kind'>key_or_kind</span><span class='comma'>,</span> <span class='id identifier rubyid_id_or_name'>id_or_name</span> <span class='op'>=</span> <span class='kw'>nil</span>
+  <span class='id identifier rubyid_key'>key</span> <span class='op'>=</span> <span class='id identifier rubyid_key_or_kind'>key_or_kind</span>
+  <span class='kw'>unless</span> <span class='id identifier rubyid_key'>key</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Datastore.html" title="Google::Cloud::Datastore (module)">Datastore</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Key.html" title="Google::Cloud::Datastore::Key (class)">Key</a></span></span>
+    <span class='id identifier rubyid_key'>key</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Key.html" title="Google::Cloud::Datastore::Key (class)">Key</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Datastore.html#new-class_method" title="Google::Cloud::Datastore.new (method)">new</a></span></span> <span class='id identifier rubyid_key_or_kind'>key_or_kind</span><span class='comma'>,</span> <span class='id identifier rubyid_id_or_name'>id_or_name</span>
+  <span class='kw'>end</span>
+  <span class='id identifier rubyid_find_all'>find_all</span><span class='lparen'>(</span><span class='id identifier rubyid_key'>key</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_first'>first</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="find_all-instance_method">
+  
+    #<strong>find_all</strong>(*keys)  &#x21d2; <tt><span class='object_link'><a href="Dataset/LookupResults.html" title="Google::Cloud::Datastore::Dataset::LookupResults (class)">Google::Cloud::Datastore::Dataset::LookupResults</a></span></tt> 
+  
+
+  
+    <span class="aliases">Also known as:
+    <span class="names"><span id='lookup-instance_method'>lookup</span></span>
+    </span>
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieve the entities for the provided keys. The lookup is run within
+the transaction.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/datastore</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_datastore'>datastore</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Datastore.html" title="Google::Cloud::Datastore (module)">Datastore</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Datastore.html#new-class_method" title="Google::Cloud::Datastore.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_task_key1'>task_key1</span> <span class='op'>=</span> <span class='id identifier rubyid_datastore'>datastore</span><span class='period'>.</span><span class='id identifier rubyid_key'>key</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Task</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='int'>123456</span>
+<span class='id identifier rubyid_task_key2'>task_key2</span> <span class='op'>=</span> <span class='id identifier rubyid_datastore'>datastore</span><span class='period'>.</span><span class='id identifier rubyid_key'>key</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Task</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='int'>987654</span>
+
+<span class='id identifier rubyid_datastore'>datastore</span><span class='period'>.</span><span class='id identifier rubyid_read_only_transaction'>read_only_transaction</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_tx'>tx</span><span class='op'>|</span>
+  <span class='id identifier rubyid_tasks'>tasks</span> <span class='op'>=</span> <span class='id identifier rubyid_tx'>tx</span><span class='period'>.</span><span class='id identifier rubyid_find_all'>find_all</span> <span class='id identifier rubyid_task_key1'>task_key1</span><span class='comma'>,</span> <span class='id identifier rubyid_task_key2'>task_key2</span>
+<span class='kw'>end</span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>keys</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Key.html" title="Google::Cloud::Datastore::Key (class)">Key</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>One or more Key objects to find records for.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Dataset/LookupResults.html" title="Google::Cloud::Datastore::Dataset::LookupResults (class)">Google::Cloud::Datastore::Dataset::LookupResults</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+120
+121
+122
+123
+124
+125</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/datastore/read_only_transaction.rb', line 120</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_find_all'>find_all</span> <span class='op'>*</span><span class='id identifier rubyid_keys'>keys</span>
+  <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
+  <span class='id identifier rubyid_lookup_res'>lookup_res</span> <span class='op'>=</span> <span class='id identifier rubyid_service'>service</span><span class='period'>.</span><span class='id identifier rubyid_lookup'>lookup</span><span class='lparen'>(</span><span class='op'>*</span><span class='const'>Array</span><span class='lparen'>(</span><span class='id identifier rubyid_keys'>keys</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_flatten'>flatten</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='symbol'>:to_grpc</span><span class='rparen'>)</span><span class='comma'>,</span>
+                              <span class='label'>transaction:</span> <span class='ivar'>@id</span><span class='rparen'>)</span>
+  <span class='const'><span class='object_link'><a href="Dataset.html" title="Google::Cloud::Datastore::Dataset (class)">Dataset</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Dataset/LookupResults.html" title="Google::Cloud::Datastore::Dataset::LookupResults (class)">LookupResults</a></span></span><span class='period'>.</span><span class='id identifier rubyid_from_grpc'>from_grpc</span> <span class='id identifier rubyid_lookup_res'>lookup_res</span><span class='comma'>,</span> <span class='id identifier rubyid_service'>service</span><span class='comma'>,</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='ivar'>@id</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="reset!-instance_method">
+  
+    #<strong>reset!</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Reset the transaction.
+<span class='object_link'><a href="#start-instance_method" title="Google::Cloud::Datastore::ReadOnlyTransaction#start (method)">#start</a></span> must be called afterwards.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+235
+236
+237</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/datastore/read_only_transaction.rb', line 235</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_reset!'>reset!</span>
+  <span class='ivar'>@id</span> <span class='op'>=</span> <span class='kw'>nil</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="rollback-instance_method">
+  
+    #<strong>rollback</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Rolls back the transaction.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/datastore</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_datastore'>datastore</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Datastore.html" title="Google::Cloud::Datastore (module)">Datastore</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Datastore.html#new-class_method" title="Google::Cloud::Datastore.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_task_list_key'>task_list_key</span> <span class='op'>=</span> <span class='id identifier rubyid_datastore'>datastore</span><span class='period'>.</span><span class='id identifier rubyid_key'>key</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>TaskList</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>default</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_query'>query</span> <span class='op'>=</span> <span class='id identifier rubyid_datastore'>datastore</span><span class='period'>.</span><span class='id identifier rubyid_query'>query</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Task</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='period'>.</span>
+  <span class='id identifier rubyid_ancestor'>ancestor</span><span class='lparen'>(</span><span class='id identifier rubyid_task_list_key'>task_list_key</span><span class='rparen'>)</span>
+
+<span class='id identifier rubyid_tx'>tx</span> <span class='op'>=</span> <span class='id identifier rubyid_datastore'>datastore</span><span class='period'>.</span><span class='id identifier rubyid_transaction'>transaction</span>
+<span class='id identifier rubyid_task_list'>task_list</span> <span class='op'>=</span> <span class='id identifier rubyid_tx'>tx</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span> <span class='id identifier rubyid_task_list_key'>task_list_key</span>
+<span class='kw'>if</span> <span class='id identifier rubyid_task_list'>task_list</span>
+  <span class='id identifier rubyid_tasks'>tasks</span> <span class='op'>=</span> <span class='id identifier rubyid_tx'>tx</span><span class='period'>.</span><span class='id identifier rubyid_run'>run</span> <span class='id identifier rubyid_query'>query</span>
+<span class='kw'>end</span>
+<span class='id identifier rubyid_tx'>tx</span><span class='period'>.</span><span class='id identifier rubyid_rollback'>rollback</span></code></pre>
+    
+  </div>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+222
+223
+224
+225
+226
+227
+228
+229
+230</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/datastore/read_only_transaction.rb', line 222</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_rollback'>rollback</span>
+  <span class='kw'>if</span> <span class='ivar'>@id</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+    <span class='id identifier rubyid_raise'>raise</span> <span class='const'><span class='object_link'><a href="TransactionError.html" title="Google::Cloud::Datastore::TransactionError (class)">TransactionError</a></span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Cannot rollback when not in a transaction.</span><span class='tstring_end'>&quot;</span></span>
+  <span class='kw'>end</span>
+
+  <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
+  <span class='id identifier rubyid_service'>service</span><span class='period'>.</span><span class='id identifier rubyid_rollback'>rollback</span> <span class='ivar'>@id</span>
+  <span class='kw'>true</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="run-instance_method">
+  
+    #<strong>run</strong>(query, namespace: nil)  &#x21d2; <tt><span class='object_link'><a href="Dataset/QueryResults.html" title="Google::Cloud::Datastore::Dataset::QueryResults (class)">Google::Cloud::Datastore::Dataset::QueryResults</a></span></tt> 
+  
+
+  
+    <span class="aliases">Also known as:
+    <span class="names"><span id='run_query-instance_method'>run_query</span></span>
+    </span>
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieve entities specified by a Query. The query is run within the
+transaction.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/datastore</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_datastore'>datastore</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Datastore.html" title="Google::Cloud::Datastore (module)">Datastore</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Datastore.html#new-class_method" title="Google::Cloud::Datastore.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_query'>query</span> <span class='op'>=</span> <span class='id identifier rubyid_datastore'>datastore</span><span class='period'>.</span><span class='id identifier rubyid_query'>query</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Task</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='period'>.</span>
+  <span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>done</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>=</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='kw'>false</span><span class='rparen'>)</span>
+<span class='id identifier rubyid_datastore'>datastore</span><span class='period'>.</span><span class='id identifier rubyid_read_only_transaction'>read_only_transaction</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_tx'>tx</span><span class='op'>|</span>
+  <span class='id identifier rubyid_tasks'>tasks</span> <span class='op'>=</span> <span class='id identifier rubyid_tx'>tx</span><span class='period'>.</span><span class='id identifier rubyid_run'>run</span> <span class='id identifier rubyid_query'>query</span>
+<span class='kw'>end</span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>query</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Query.html" title="Google::Cloud::Datastore::Query (class)">Query</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The Query object with the search criteria.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>namespace</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The namespace the query is to run within.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Dataset/QueryResults.html" title="Google::Cloud::Datastore::Dataset::QueryResults (class)">Google::Cloud::Datastore::Dataset::QueryResults</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/datastore/read_only_transaction.rb', line 148</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_run'>run</span> <span class='id identifier rubyid_query'>query</span><span class='comma'>,</span> <span class='label'>namespace:</span> <span class='kw'>nil</span>
+  <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
+  <span class='kw'>unless</span> <span class='id identifier rubyid_query'>query</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="Query.html" title="Google::Cloud::Datastore::Query (class)">Query</a></span></span><span class='rparen'>)</span> <span class='op'>||</span> <span class='id identifier rubyid_query'>query</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="GqlQuery.html" title="Google::Cloud::Datastore::GqlQuery (class)">GqlQuery</a></span></span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_raise'>raise</span> <span class='const'>ArgumentError</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Cannot run a </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_query'>query</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='embexpr_end'>}</span><span class='tstring_content'> object.</span><span class='tstring_end'>&quot;</span></span>
+  <span class='kw'>end</span>
+  <span class='id identifier rubyid_query_res'>query_res</span> <span class='op'>=</span> <span class='id identifier rubyid_service'>service</span><span class='period'>.</span><span class='id identifier rubyid_run_query'>run_query</span> <span class='id identifier rubyid_query'>query</span><span class='period'>.</span><span class='id identifier rubyid_to_grpc'>to_grpc</span><span class='comma'>,</span> <span class='id identifier rubyid_namespace'>namespace</span><span class='comma'>,</span>
+                                <span class='label'>transaction:</span> <span class='ivar'>@id</span>
+  <span class='const'><span class='object_link'><a href="Dataset.html" title="Google::Cloud::Datastore::Dataset (class)">Dataset</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Dataset/QueryResults.html" title="Google::Cloud::Datastore::Dataset::QueryResults (class)">QueryResults</a></span></span><span class='period'>.</span><span class='id identifier rubyid_from_grpc'>from_grpc</span> <span class='id identifier rubyid_query_res'>query_res</span><span class='comma'>,</span> <span class='id identifier rubyid_service'>service</span><span class='comma'>,</span> <span class='id identifier rubyid_namespace'>namespace</span><span class='comma'>,</span>
+                                  <span class='id identifier rubyid_query'>query</span><span class='period'>.</span><span class='id identifier rubyid_to_grpc'>to_grpc</span><span class='period'>.</span><span class='id identifier rubyid_dup'>dup</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="start-instance_method">
+  
+    #<strong>start</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+    <span class="aliases">Also known as:
+    <span class="names"><span id='begin_transaction-instance_method'>begin_transaction</span></span>
+    </span>
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Begins a transaction.
+This method is run when a new ReadOnlyTransaction is created.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Raises:</p>
+<ul class="raise">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TransactionError.html" title="Google::Cloud::Datastore::TransactionError (class)">TransactionError</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+164
+165
+166
+167
+168
+169
+170</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/datastore/read_only_transaction.rb', line 164</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_start'>start</span>
+  <span class='id identifier rubyid_raise'>raise</span> <span class='const'><span class='object_link'><a href="TransactionError.html" title="Google::Cloud::Datastore::TransactionError (class)">TransactionError</a></span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Transaction already opened.</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>unless</span> <span class='ivar'>@id</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+
+  <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
+  <span class='id identifier rubyid_tx_res'>tx_res</span> <span class='op'>=</span> <span class='id identifier rubyid_service'>service</span><span class='period'>.</span><span class='id identifier rubyid_begin_transaction'>begin_transaction</span> <span class='label'>read_only:</span> <span class='kw'>true</span>
+  <span class='ivar'>@id</span> <span class='op'>=</span> <span class='id identifier rubyid_tx_res'>tx_res</span><span class='period'>.</span><span class='id identifier rubyid_transaction'>transaction</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+  <div id="footer">
+  <ul class="footer-links">
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby" title="Google Cloud on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> GitHub
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues" title="Google Cloud issues on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> Issues
+      </a>
+    </li>
+    <li>
+      <a href="http://stackoverflow.com/questions/tagged/google-cloud-ruby" title="Google Cloud on StackOverflow">
+      <img src="/google-cloud-ruby/img/icon-link-stackoverflow.svg" alt="StackOverflow icon"> StackOverflow
+    </a>
+    </li>
+    <li>
+      <a href="http://rubygems.org/gems/google-cloud" title="Google Cloud on RubyGems">
+        <img src="/google-cloud-ruby/img/icon-link-package-manager.svg" alt="RubyGems icon"> RubyGems
+      </a>
+    </li>
+  </ul>
+
+  <p>
+    Documentation generated by <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool">yard</a>.
+  </p>
+</div>
+
+</div>
