@@ -1,5 +1,9 @@
 # Release History
 
+### 0.33.1 / 2019-02-07
+
+* Update concurrent-ruby dependency
+
 ### 0.33.0 / 2019-02-01
 
 * Add Debugger on_error configuration.
