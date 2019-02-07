@@ -2,7 +2,9 @@
 
 ### 1.17.0 / 2019-02-07
 
-* Add Bucket#policy_only? and #policy_only=
+* Add support for Bucket Policy Only with `Bucket#policy_only?`,
+  `Bucket#policy_only` and `Bucket#policy_only_locked_at`.
+  Read more at https://cloud.google.com/storage/docs/bucket-policy-only
 
 ### 1.16.0 / 2019-02-01
 
