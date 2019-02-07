@@ -113,35 +113,33 @@ module Google
         # Convert this debuggee into a gRPC
         # Google::Devtools::Clouddebugger::V2::Debuggee struct.
         def to_grpc
-          debuggee_args = build_request_arg
-
-          Google::Devtools::Clouddebugger::V2::Debuggee.decode_json \
-            debuggee_args.to_json
+          source_context = source_context_from_json_file "source-context.json"
+          Google::Devtools::Clouddebugger::V2::Debuggee.new(
+            id: id.to_s,
+            project: project_id_for_request_arg.to_s,
+            description: description.to_s,
+            labels: labels,
+            agent_version: agent_version.to_s
+          ).tap do |d|
+            if source_context
+              d.source_contexts << source_context
+              d.ext_source_contexts << ext_source_context_grpc(source_context)
+            end
+            d.uniquifier = compute_uniquifier d
+          end
         end
 
         private
 
-        ##
-        # @private Build the parameters for this debuggee
-        def build_request_arg
-          debuggee_args = {
-            project: project_id_for_request_arg,
-            description: description,
-            labels: labels,
-            agent_version: agent_version
-          }
+        def source_context_from_json_file file_path
+          json = File.read file_path
+          Devtools::Source::V1::SourceContext.decode_json json
+        rescue StandardError
+          nil
+        end
 
-          debuggee_args[:id] = id if id
-
-          source_context = read_app_json_file "source-context.json"
-          if source_context
-            debuggee_args[:source_contexts] = [source_context]
-            debuggee_args[:ext_source_contexts] = [{ context: source_context }]
-          end
-
-          debuggee_args[:uniquifier] = compute_uniquifier debuggee_args
-
-          debuggee_args
+        def ext_source_context_grpc source_context
+          Devtools::Source::V1::SourceContext.new context: source_context
         end
 
         ##
@@ -197,14 +195,14 @@ module Google
         ##
         # @private Generate a debuggee uniquifier from source context
         # information or application source code
-        def compute_uniquifier debuggee_args
+        def compute_uniquifier partial_debuggee
           return @computed_uniquifier if @computed_uniquifier
 
           sha = Digest::SHA1.new
-          sha << debuggee_args.to_s
+          sha << partial_debuggee.to_s
 
-          unless debuggee_args.key?(:source_contexts) ||
-                 debuggee_args.key?(:ext_source_contexts)
+          if partial_debuggee.source_contexts.empty? &&
+             partial_debuggee.ext_source_contexts.empty?
             AppUniquifierGenerator.generate_app_uniquifier sha
           end
 

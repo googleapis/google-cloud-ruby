@@ -97,14 +97,16 @@ describe Google::Cloud::Debugger::Debuggee, :mock_debugger do
   end
 
   describe "#compute_uniquifier" do
-    let(:debuggee_args) {{
-      id: debuggee_id,
-      project: project
-    }}
+    let(:partial_debuggee) {
+      Google::Devtools::Clouddebugger::V2::Debuggee.new(
+        id: debuggee_id,
+        project: project
+      )
+    }
 
     it "caches generated uniquifier" do
-      uniquifier1 = debuggee.send(:compute_uniquifier, debuggee_args)
-      uniquifier2 = debuggee.send(:compute_uniquifier, debuggee_args)
+      uniquifier1 = debuggee.send(:compute_uniquifier, partial_debuggee)
+      uniquifier2 = debuggee.send(:compute_uniquifier, partial_debuggee)
 
       uniquifier1.must_equal uniquifier2
       uniquifier1.must_equal debuggee.instance_variable_get(:@computed_uniquifier)
@@ -115,7 +117,7 @@ describe Google::Cloud::Debugger::Debuggee, :mock_debugger do
       mocked_generate_app_uniquifier.expect :call, nil, [Digest::SHA1]
 
       Google::Cloud::Debugger::Debuggee::AppUniquifierGenerator.stub :generate_app_uniquifier, mocked_generate_app_uniquifier do
-        debuggee.send(:compute_uniquifier, debuggee_args)
+        debuggee.send(:compute_uniquifier, partial_debuggee)
       end
       mocked_generate_app_uniquifier.verify
     end
@@ -125,10 +127,15 @@ describe Google::Cloud::Debugger::Debuggee, :mock_debugger do
         raise "Shouldn't be called"
       }
 
-      debuggee_args[:source_contexts] = ["source context"]
+      source_context = Google::Devtools::Source::V1::SourceContext.new(
+        git: Google::Devtools::Source::V1::GitSourceContext.new(
+          url: "url", revision_id: "revision"
+        )
+      )
+      partial_debuggee.source_contexts << source_context
 
       Google::Cloud::Debugger::Debuggee::AppUniquifierGenerator.stub :generate_app_uniquifier, stubbed_generate_app_uniquifier do
-        debuggee.send(:compute_uniquifier, debuggee_args)
+        debuggee.send(:compute_uniquifier, partial_debuggee)
       end
     end
   end
