@@ -62,7 +62,7 @@ module Acceptance
     end
 
     ##
-    # Create a test gRPC Snappoing
+    # Create a test gRPC snappoint
     def sample_snappoint
       file_path = "acceptance/debugger_helper.rb"
       line = method(:trigger_breakpoint).source_location.last + 2
@@ -72,10 +72,7 @@ module Acceptance
           "path" => file_path,
           "line" => line
         },
-        "create_time" => {
-          "seconds" => Time.now.to_i,
-          "nanos"   => Time.now.nsec
-        },
+        "create_time" => Time.now.utc.strftime("%FT%T.%NZ"),
         "expressions" => ["local_var"]
       }
 
@@ -95,10 +92,7 @@ module Acceptance
           "path" => file_path,
           "line" => line
         },
-        "create_time" => {
-          "seconds" => Time.now.to_i,
-          "nanos"   => Time.now.nsec
-        },
+        "create_time" => Time.now.utc.strftime("%FT%T.%NZ"),
         "log_message_format" => "local_var is $0. #{token}",
         "expressions" => ["local_var"]
       }

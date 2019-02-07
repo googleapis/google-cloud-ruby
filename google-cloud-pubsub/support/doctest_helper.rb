@@ -613,14 +613,9 @@ def snapshots_json topic_name, num_snapshots, token = nil
 end
 
 def snapshot_json topic_name, snapshot_name
-  time = Time.now
-  timestamp = {
-    "seconds" => time.to_i,
-    "nanos" => time.nsec
-  }
   { "name" => snapshot_path(snapshot_name),
     "topic" => topic_path(topic_name),
-    "expire_time" => timestamp
+    "expire_time" => Time.now.utc.strftime("%FT%T.%NZ")
   }.to_json
 end
 

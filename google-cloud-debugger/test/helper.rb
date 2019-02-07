@@ -107,19 +107,12 @@ class MockDebugger < Minitest::Spec
   end
 
   def random_breakpoint_hash
-    timestamp = Time.parse "2014-10-02T15:01:23.045123456Z"
     {
       "id" => "abc123",
       "action" => :CAPTURE,
       "location" => random_source_location_hash,
-      "create_time" => {
-        "seconds" => timestamp.to_i,
-        "nanos"   => timestamp.nsec
-      },
-      "final_time" => {
-        "seconds" => timestamp.to_i,
-        "nanos"   => timestamp.nsec
-      },
+      "create_time" => "2014-10-02T15:01:23.045123456Z",
+      "final_time" => "2014-10-02T15:01:23.045123456Z",
       "stack_frames" => [random_stack_frame_hash],
       "condition" => "i == 2",
       "expressions" => ["[3]"],
