@@ -238,74 +238,86 @@ module Google
         # @return [Devtools::Clouderrorreporting::V1beta1::ReportedErrorEvent]
         #   gRPC struct that represent an ErrorEvent.
         def to_grpc
-          error_event_hash = {
-            event_time: event_time_hash,
-            message: message,
-            service_context: service_context_hash,
-            context: error_context_hash
-          }.delete_if { |_, v| v.nil? }
-
-          grpc_class =
-            Devtools::Clouderrorreporting::V1beta1::ReportedErrorEvent
-          grpc_class.decode_json error_event_hash.to_json
+          Devtools::Clouderrorreporting::V1beta1::ReportedErrorEvent.new(
+            event_time: event_time_grpc,
+            message: message.to_s,
+            service_context: service_context_grpc,
+            context: error_context_grpc
+          )
         end
 
         private
 
         ##
-        # @private Formats the event_time as the hash representation of
-        # Google::Protobuf::Timestamp struct.
+        # @private Formats the event_time as a Google::Protobuf::Timestamp.
         #
-        def event_time_hash
+        def event_time_grpc
           return nil if event_time.nil?
-          {
+          Google::Protobuf::Timestamp.new(
             seconds: event_time.to_i,
             nanos: event_time.nsec
-          }
+          )
         end
 
         ##
-        # @private Formats the service_name and service_version as the hash
-        # representation of
-        # Google::Devtools::Clouderrorreporting::V1beta1::SourceContext struct.
+        # @private Formats the service_name and service_version as a
+        # Google::Devtools::Clouderrorreporting::V1beta1::ServiceContext.
         #
-        def service_context_hash
+        def service_context_grpc
           return nil if !service_name && !service_version
-          {
-            service: service_name,
-            version: service_version
-          }.delete_if { |_, v| v.nil? }
+          Devtools::Clouderrorreporting::V1beta1::ServiceContext.new(
+            service: service_name.to_s,
+            version: service_version.to_s
+          )
+        end
+
+        # rubocop:disable Metrics/AbcSize
+
+        ##
+        # @private Formats the http request context as a
+        # Google::Devtools::Clouderrorreporting::V1beta1::HttpRequestContext
+        #
+        def http_request_grpc
+          return nil if !http_method && !http_url && !http_user_agent &&
+                        !http_referrer && !http_status && !http_remote_ip
+          Devtools::Clouderrorreporting::V1beta1::HttpRequestContext.new(
+            method: http_method.to_s,
+            url: http_url.to_s,
+            user_agent: http_user_agent.to_s,
+            referrer: http_referrer.to_s,
+            response_status_code: http_status.to_i,
+            remote_ip: http_remote_ip.to_s
+          )
+        end
+
+        # rubocop:enable Metrics/AbcSize
+
+        ##
+        # @private Formats the source location as a
+        # Google::Devtools::Clouderrorreporting::V1beta1::SourceLocation
+        #
+        def source_location_grpc
+          return nil if !file_path && !line_number && !function_name
+          Devtools::Clouderrorreporting::V1beta1::SourceLocation.new(
+            file_path: file_path.to_s,
+            line_number: line_number.to_i,
+            function_name: function_name.to_s
+          )
         end
 
         ##
-        # @private Formats the error context info as the hash
-        # representation of
-        # Google::Devtools::Clouderrorreporting::V1beta1::ErrorContext struct.
+        # @private Formats the error context info as a
+        # Google::Devtools::Clouderrorreporting::V1beta1::ErrorContext
         #
-        def error_context_hash
-          http_request_hash = {
-            method: http_method,
-            url: http_url,
-            user_agent: http_user_agent,
-            referrer: http_referrer,
-            response_status_code: http_status,
-            remote_ip: http_remote_ip
-          }.delete_if { |_, v| v.nil? }
-
-          source_location_hash = {
-            file_path: file_path,
-            line_number: line_number,
-            function_name: function_name
-          }.delete_if { |_, v| v.nil? }
-
-          result = {
-            http_request: http_request_hash.empty? ? nil : http_request_hash,
-            user: user,
-            report_location:
-              source_location_hash.empty? ? nil : source_location_hash
-          }.delete_if { |_, v| v.nil? }
-
-          result.empty? ? nil : result
+        def error_context_grpc
+          http_request = http_request_grpc
+          source_location = source_location_grpc
+          return nil if !http_request && !source_location && !user
+          Devtools::Clouderrorreporting::V1beta1::ErrorContext.new(
+            http_request: http_request,
+            user: user.to_s,
+            report_location: source_location
+          )
         end
       end
     end
