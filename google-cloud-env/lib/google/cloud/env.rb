@@ -318,7 +318,7 @@ module Google
       # @return [Boolean]
       #
       def metadata?
-        unless metadata_cache.include?(METADATA_ROOT_PATH)
+        unless metadata_cache.include? METADATA_ROOT_PATH
           begin
             resp = connection.get METADATA_ROOT_PATH
             metadata_cache[METADATA_ROOT_PATH] = \

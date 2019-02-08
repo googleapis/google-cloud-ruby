@@ -3,3 +3,4 @@ source "https://rubygems.org"
 gemspec
 
 gem "rake", "~> 12.3"
+gem "rubocop", git: "git@github.com:rubocop-hq/rubocop.git", branch: "master"
