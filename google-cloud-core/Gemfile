@@ -7,3 +7,4 @@ gem "google-cloud-env", path: "../google-cloud-env"
 gem "google-gax", "~> 1.0"
 
 gem "rake", "~> 12.3"
+gem "rubocop", git: "git@github.com:rubocop-hq/rubocop.git", branch: "master"
