@@ -354,7 +354,7 @@ module Google
           # compound variables.
           def self.add_member_vars var, members, limit: nil
             members.each_with_index do |member, i|
-              member_var = yield(member, i, limit)
+              member_var = yield member, i, limit
 
               limit = deduct_limit limit, member_var.total_size
 
@@ -491,7 +491,7 @@ module Google
             unless @total_size
               vars = [self, *(unique_members || [])]
 
-              @total_size = vars.inject(payload_size) do |sum, var|
+              @total_size = vars.inject payload_size do |sum, var|
                 if var.var_table && var.var_table_index
                   sum + var.var_table[var.var_table_index].total_size
                 else
@@ -515,7 +515,7 @@ module Google
                               value.to_s.bytesize
 
               unless members.nil?
-                @payload_size = members.inject(@payload_size) do |sum, member|
+                @payload_size = members.inject @payload_size do |sum, member|
                   sum + member.payload_size
                 end
               end

@@ -8,3 +8,4 @@ gem "google-cloud-logging", path: "../google-cloud-logging"
 gem "stackdriver-core", path: "../stackdriver-core"
 
 gem "rake", "~> 12.3"
+gem "rubocop", git: "git@github.com:rubocop-hq/rubocop.git", branch: "master"

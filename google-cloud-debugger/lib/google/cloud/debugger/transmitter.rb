@@ -34,7 +34,7 @@ module Google
         attr_reader :breakpoint
 
         def initialize message, breakpoint = nil
-          super(message)
+          super message
           @breakpoint = breakpoint
         end
       end
@@ -93,7 +93,7 @@ module Google
         # @raise [TransmitterError] if there are no resources available to make
         #   queue the API call on the thread pool.
         def submit breakpoint
-          Concurrent::Promises.future_on(@thread_pool, breakpoint) do |bp|
+          Concurrent::Promises.future_on @thread_pool, breakpoint do |bp|
             submit_sync bp
           end
         rescue Concurrent::RejectedExecutionError => e
