@@ -17,6 +17,7 @@ require "time"
 require "google/cloud/resource_manager/project/list"
 require "google/cloud/resource_manager/project/updater"
 require "google/cloud/resource_manager/policy"
+require "google/cloud/resource_manager/resource"
 
 module Google
   module Cloud
@@ -165,6 +166,51 @@ module Google
         end
 
         ##
+        # An optional reference to a parent Resource.
+        #
+        # Supported parent types include "organization" and "folder". Once set,
+        # the parent can be updated but cannot be cleared.
+        #
+        # The resource object returned is read-only and cannot be changed. A new
+        # resource object can be set using the `#parent=` or `#update` methods.
+        # (See {Resource} and {Manager#resource}.)
+        #
+        # @return [nil, Resource] the reference to a parent Resource (read-only)
+        #
+        def parent
+          return nil if @gapi.parent.nil?
+          Resource.from_gapi(@gapi.parent).freeze
+        end
+
+        ##
+        # Updates the reference to a parent with a new Resource.
+        #
+        # Supported parent types include "organization" and "folder". Once set,
+        # the parent can be updated but cannot be cleared.
+        #
+        # The end user must have the `resourcemanager.projects.create`
+        # permission on the parent.
+        #
+        # (See {Resource} and {Manager#resource}.)
+        #
+        # @param [Resource] new_parent A new parent Resource.
+        #
+        # @example
+        #   require "google/cloud/resource_manager"
+        #
+        #   resource_manager = Google::Cloud::ResourceManager.new
+        #   project = resource_manager.project "tokyo-rain-123"
+        #   folder = resource_manager.resource "folder", "1234"
+        #   project.parent = folder
+        #
+        def parent= new_parent
+          raise ArgumentError, "new_parent is required" if new_parent.nil?
+          ensure_service!
+          @gapi.parent = new_parent.to_gapi
+          @gapi = service.update_project @gapi
+        end
+
+        ##
         # The time that this project was created.
         #
         def created_at
@@ -230,8 +276,10 @@ module Google
         #
         #   resource_manager = Google::Cloud::ResourceManager.new
         #   project = resource_manager.project "tokyo-rain-123"
+        #   folder = resource_manager.resource "folder", "1234"
         #   project.update do |p|
         #     p.name = "My Project"
+        #     p.parent = folder
         #     p.labels["env"] = "production"
         #   end
         #

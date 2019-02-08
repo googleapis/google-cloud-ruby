@@ -92,13 +92,19 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud::ResourceManager::Manager#create_project" do
     mock_translate do |mock|
-      mock.expect :create_project, project_gapi, ["tokyo-rain-123", nil, nil]
+      mock.expect :create_project, project_gapi, ["tokyo-rain-123", nil, nil, nil]
     end
   end
 
   doctest.before "Google::Cloud::ResourceManager::Manager#create_project@A project can also be created with a `name` and `labels`:" do
     mock_translate do |mock|
-      mock.expect :create_project, project_gapi, ["tokyo-rain-123", "Todos Development", {:env=>:development}]
+      mock.expect :create_project, project_gapi, ["tokyo-rain-123", "Todos Development", {:env=>:development}, nil]
+    end
+  end
+
+  doctest.before "Google::Cloud::ResourceManager::Manager#create_project@A project can also be created with a `name` and `parent`:" do
+    mock_translate do |mock|
+      mock.expect :create_project, project_gapi, ["tokyo-rain-123", "Todos Development", nil, Google::Cloud::ResourceManager::Resource]
     end
   end
 
@@ -111,6 +117,13 @@ YARD::Doctest.configure do |doctest|
   doctest.before "Google::Cloud::ResourceManager::Manager#undelete" do
     mock_translate do |mock|
       mock.expect :undelete_project, project_gapi, ["tokyo-rain-123"]
+    end
+  end
+
+  doctest.before "Google::Cloud::ResourceManager::Manager#resource" do
+    mock_translate do |mock|
+      mock.expect :get_project, project_gapi, ["tokyo-rain-123"]
+      mock.expect :update_project, project_gapi(labels: {"env"=>"production"}), [Google::Apis::CloudresourcemanagerV1::Project]
     end
   end
 
@@ -178,6 +191,13 @@ YARD::Doctest.configure do |doctest|
       mock.expect :get_project, project_gapi, ["tokyo-rain-123"]
       mock.expect :get_policy, policy_gapi, ["tokyo-rain-123"]
       mock.expect :set_policy, policy_gapi, ["tokyo-rain-123", Google::Apis::CloudresourcemanagerV1::Policy]
+    end
+  end
+
+  doctest.before "Google::Cloud::ResourceManager::Resource" do
+    mock_translate do |mock|
+      mock.expect :get_project, project_gapi, ["tokyo-rain-123"]
+      mock.expect :update_project, project_gapi(labels: {"env"=>"production"}), [Google::Apis::CloudresourcemanagerV1::Project]
     end
   end
 end

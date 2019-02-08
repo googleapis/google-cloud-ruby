@@ -25,6 +25,11 @@ describe Google::Cloud::ResourceManager::Project, :mock_res_man do
     project.project_number.must_equal "123456789123"
     project.name.must_equal "Example Project 123"
     project.labels["env"].must_equal "production"
+    project.parent.must_be_kind_of Google::Cloud::ResourceManager::Resource
+    project.parent.type.must_equal "folder"
+    project.parent.id.must_equal "123"
+    project.parent.must_be :folder?
+    project.parent.wont_be :organization?
     project.created_at.must_equal Time.new(2015, 9, 1, 12, 0, 0, 0)
   end
 
@@ -92,6 +97,28 @@ describe Google::Cloud::ResourceManager::Project, :mock_res_man do
     mock.verify
 
     project.labels["env"].must_equal "production"
+  end
+
+  it "updates the parent" do
+    mock = Minitest::Mock.new
+    updated_project = random_project_gapi seed, nil, nil, "798"
+    mock.expect :update_project, updated_project, [updated_project.project_id, updated_project]
+
+    project.parent.must_be_kind_of Google::Cloud::ResourceManager::Resource
+    project.parent.type.must_equal "folder"
+    project.parent.id.must_equal "123"
+    project.parent.must_be :folder?
+    project.parent.wont_be :organization?
+
+    resource_manager.service.mocked_service = mock
+    project.parent = resource_manager.resource "folder", "798"
+    mock.verify
+
+    project.parent.must_be_kind_of Google::Cloud::ResourceManager::Resource
+    project.parent.type.must_equal "folder"
+    project.parent.id.must_equal "798"
+    project.parent.must_be :folder?
+    project.parent.wont_be :organization?
   end
 
   it "can update name and labels in a single API call" do

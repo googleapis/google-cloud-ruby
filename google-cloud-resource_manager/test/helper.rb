@@ -44,15 +44,20 @@ class MockResourceManager < Minitest::Spec
     addl.include? :mock_res_man
   end
 
-  def random_project_gapi seed = nil, name = nil, labels = nil
+  def random_project_gapi seed = nil, name = nil, labels = nil, parent_id = nil
     seed ||= rand(9999)
     name ||= "Example Project #{seed}"
     labels = { "env" => "production" } if labels.nil?
+    parent = Google::Apis::CloudresourcemanagerV1::ResourceId.new(
+      type: "folder",
+      id: (parent_id || seed.to_s)
+    )
     Google::Apis::CloudresourcemanagerV1::Project.new(
       project_number: "123456789#{seed}",
       project_id:     "example-project-#{seed}",
       name:           name,
       labels:         labels,
+      parent:         parent,
       create_time:    "2015-09-01T12:00:00.00Z",
       lifecycle_state: "ACTIVE")
   end
