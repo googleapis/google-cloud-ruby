@@ -63,7 +63,7 @@ module Google
 
         # @private byte array as a string
         def to_grpc
-          Convert.decode_bytes(@cursor)
+          Convert.decode_bytes @cursor
         end
 
         # @private byte array as a string

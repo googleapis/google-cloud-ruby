@@ -211,7 +211,7 @@ module Google
           #   end
           #
           def each_with_cursor
-            return enum_for(:each_with_cursor) unless block_given?
+            return enum_for :each_with_cursor unless block_given?
             zip(cursors).each { |r, c| yield [r, c] }
           end
 
@@ -269,7 +269,7 @@ module Google
           def all request_limit: nil
             request_limit = request_limit.to_i if request_limit
             unless block_given?
-              return enum_for(:all, request_limit: request_limit)
+              return enum_for :all, request_limit: request_limit
             end
             results = self
             loop do
@@ -338,7 +338,7 @@ module Google
           def all_with_cursor request_limit: nil
             request_limit = request_limit.to_i if request_limit
             unless block_given?
-              return enum_for(:all_with_cursor, request_limit: request_limit)
+              return enum_for :all_with_cursor, request_limit: request_limit
             end
             results = self
 

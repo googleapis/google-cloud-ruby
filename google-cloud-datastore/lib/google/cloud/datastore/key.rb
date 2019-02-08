@@ -277,9 +277,9 @@ module Google
             elsif pe_id_or_name.is_a? String
               path_args[:name] = pe_id_or_name unless pe_id_or_name.empty?
             end
-            Google::Datastore::V1::Key::PathElement.new(path_args)
+            Google::Datastore::V1::Key::PathElement.new path_args
           end
-          grpc = Google::Datastore::V1::Key.new(path: grpc_path)
+          grpc = Google::Datastore::V1::Key.new path: grpc_path
           if project || namespace
             grpc.partition_id = Google::Datastore::V1::PartitionId.new(
               project_id: project.to_s, namespace_id: namespace.to_s
@@ -305,7 +305,7 @@ module Google
             key.project = key_grpc.partition_id.project_id
             key.namespace = key_grpc.partition_id.namespace_id
           end
-          key.parent = Key.from_grpc(key_grpc) if key_grpc.path.count > 0
+          key.parent = Key.from_grpc key_grpc if key_grpc.path.count > 0
           # Freeze the key to make it immutable.
           key.freeze
           key

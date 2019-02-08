@@ -296,7 +296,7 @@ module Google
           returned_keys = commit_res.mutation_results.map(&:key)
           returned_keys.each_with_index do |key, index|
             next if entities[index].nil?
-            entities[index].key = Key.from_grpc(key) unless key.nil?
+            entities[index].key = Key.from_grpc key unless key.nil?
           end
           entities.each { |e| e.key.freeze unless e.persisted? }
           entities
@@ -540,7 +540,7 @@ module Google
             raise err if Time.now - start_time > deadline
 
             # Sleep with incremental backoff
-            sleep(backoff *= 1.3)
+            sleep backoff *= 1.3
 
             # Create new transaction and retry the block
             tx = Transaction.new service, previous_transaction: tx.id
