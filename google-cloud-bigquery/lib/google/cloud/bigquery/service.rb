@@ -90,7 +90,9 @@ module Google
         # Returns the dataset specified by datasetID.
         def get_dataset dataset_id
           # The get operation is considered idempotent
-          execute(backoff: true) { service.get_dataset @project, dataset_id }
+          execute backoff: true do
+            service.get_dataset @project, dataset_id
+          end
         end
 
         ##
@@ -253,7 +255,7 @@ module Google
         # Cancel the job specified by jobId.
         def cancel_job job_id, location: nil
           # The BigQuery team has told us cancelling is considered idempotent
-          execute(backoff: true) do
+          execute backoff: true do
             service.cancel_job @project, job_id, location: location
           end
         end
@@ -262,7 +264,7 @@ module Google
         # Returns the job specified by jobID.
         def get_job job_id, location: nil
           # The get operation is considered idempotent
-          execute(backoff: true) do
+          execute backoff: true do
             service.get_job @project, job_id, location: location
           end
         end
@@ -273,7 +275,9 @@ module Google
             configuration: config
           )
           # Jobs have generated id, so this operation is considered idempotent
-          execute(backoff: true) { service.insert_job @project, job_object }
+          execute backoff: true do
+            service.insert_job @project, job_object
+          end
         end
 
         def query_job query_job_gapi
@@ -414,7 +418,7 @@ module Google
 
         # Generate a random string similar to the BigQuery service job IDs.
         def generate_id
-          SecureRandom.urlsafe_base64(21)
+          SecureRandom.urlsafe_base64 21
         end
 
         def mime_type_for file
@@ -432,7 +436,7 @@ module Google
             yield
           end
         rescue Google::Apis::Error => e
-          raise Google::Cloud::Error.from_error(e)
+          raise Google::Cloud::Error.from_error e
         end
 
         class Backoff

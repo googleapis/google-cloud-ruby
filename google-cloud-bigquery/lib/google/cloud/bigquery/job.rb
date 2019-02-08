@@ -172,7 +172,7 @@ module Google
         # @return [Time, nil] The creation time from the job statistics.
         #
         def created_at
-          ::Time.at(Integer(@gapi.statistics.creation_time) / 1000.0)
+          ::Time.at Integer(@gapi.statistics.creation_time) / 1000.0
         rescue StandardError
           nil
         end
@@ -185,7 +185,7 @@ module Google
         # @return [Time, nil] The start time from the job statistics.
         #
         def started_at
-          ::Time.at(Integer(@gapi.statistics.start_time) / 1000.0)
+          ::Time.at Integer(@gapi.statistics.start_time) / 1000.0
         rescue StandardError
           nil
         end
@@ -197,7 +197,7 @@ module Google
         # @return [Time, nil] The end time from the job statistics.
         #
         def ended_at
-          ::Time.at(Integer(@gapi.statistics.end_time) / 1000.0)
+          ::Time.at Integer(@gapi.statistics.end_time) / 1000.0
         rescue StandardError
           nil
         end

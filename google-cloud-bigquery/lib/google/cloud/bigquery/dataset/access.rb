@@ -935,10 +935,10 @@ module Google
 
           # @private
           def add_access_role_scope_value role, scope, value
-            role = validate_role(role)
+            role = validate_role role
             scope = validate_scope scope
             # If scope is special group, make sure value is in the list
-            value = validate_special_group(value) if scope == :special_group
+            value = validate_special_group value if scope == :special_group
             # Remove any rules of this scope and value
             @rules.reject!(&find_by_scope_and_value(scope, value))
             # Add new rule for this role, scope, and value
@@ -949,7 +949,7 @@ module Google
           # @private
           def add_access_view value
             # scope is view, make sure value is in the right format
-            value = validate_view(value)
+            value = validate_view value
             # Remove existing view rule, if any
             @rules.reject!(&find_view(value))
             # Add new rule for this role, scope, and value
@@ -959,10 +959,10 @@ module Google
 
           # @private
           def remove_access_role_scope_value role, scope, value
-            role = validate_role(role)
+            role = validate_role role
             scope = validate_scope scope
             # If scope is special group, make sure value is in the list
-            value = validate_special_group(value) if scope == :special_group
+            value = validate_special_group value if scope == :special_group
             # Remove any rules of this role, scope, and value
             @rules.reject!(
               &find_by_role_and_scope_and_value(role, scope, value)
@@ -972,17 +972,17 @@ module Google
           # @private
           def remove_access_view value
             # scope is view, make sure value is in the right format
-            value = validate_view(value)
+            value = validate_view value
             # Remove existing view rule, if any
             @rules.reject!(&find_view(value))
           end
 
           # @private
           def lookup_access_role_scope_value role, scope, value
-            role = validate_role(role)
+            role = validate_role role
             scope = validate_scope scope
             # If scope is special group, make sure value is in the list
-            value = validate_special_group(value) if scope == :special_group
+            value = validate_special_group value if scope == :special_group
             # Detect any rules of this role, scope, and value
             !(!@rules.detect(
               &find_by_role_and_scope_and_value(role, scope, value)
@@ -992,7 +992,7 @@ module Google
           # @private
           def lookup_access_view value
             # scope is view, make sure value is in the right format
-            value = validate_view(value)
+            value = validate_view value
             # Detect view rule, if any
             !(!@rules.detect(&find_view(value)))
           end

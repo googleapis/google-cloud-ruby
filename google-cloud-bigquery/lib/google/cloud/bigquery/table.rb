@@ -559,7 +559,7 @@ module Google
           return nil if reference?
           ensure_full_data!
           begin
-            ::Time.at(Integer(@gapi.creation_time) / 1000.0)
+            ::Time.at Integer(@gapi.creation_time) / 1000.0
           rescue StandardError
             nil
           end
@@ -579,7 +579,7 @@ module Google
           return nil if reference?
           ensure_full_data!
           begin
-            ::Time.at(Integer(@gapi.expiration_time) / 1000.0)
+            ::Time.at Integer(@gapi.expiration_time) / 1000.0
           rescue StandardError
             nil
           end
@@ -597,7 +597,7 @@ module Google
           return nil if reference?
           ensure_full_data!
           begin
-            ::Time.at(Integer(@gapi.last_modified_time) / 1000.0)
+            ::Time.at Integer(@gapi.last_modified_time) / 1000.0
           rescue StandardError
             nil
           end
@@ -988,7 +988,7 @@ module Google
           return nil unless @gapi.streaming_buffer
           oldest_entry_time = @gapi.streaming_buffer.oldest_entry_time
           begin
-            ::Time.at(Integer(oldest_entry_time) / 1000.0)
+            ::Time.at Integer(oldest_entry_time) / 1000.0
           rescue StandardError
             nil
           end
@@ -1747,7 +1747,7 @@ module Google
 
           job_gapi = updater.to_gapi
 
-          return load_local(files, job_gapi) if local_file? files
+          return load_local files, job_gapi if local_file? files
           load_storage files, job_gapi
         end
 
@@ -2490,7 +2490,7 @@ module Google
           return [] if array_or_str.nil?
           Array(array_or_str).map do |uri_or_code|
             resource = Google::Apis::BigqueryV2::UserDefinedFunctionResource.new
-            if uri_or_code.start_with?("gs://")
+            if uri_or_code.start_with? "gs://"
               resource.resource_uri = uri_or_code
             else
               resource.inline_code = uri_or_code
