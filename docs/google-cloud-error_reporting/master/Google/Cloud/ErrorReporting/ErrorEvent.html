@@ -1473,26 +1473,18 @@ object</p>
 244
 245
 246
-247
-248
-249
-250
-251</pre>
+247</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/google/cloud/error_reporting/error_event.rb', line 240</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_to_grpc'>to_grpc</span>
-  <span class='id identifier rubyid_error_event_hash'>error_event_hash</span> <span class='op'>=</span> <span class='lbrace'>{</span>
-    <span class='label'>event_time:</span> <span class='id identifier rubyid_event_time_hash'>event_time_hash</span><span class='comma'>,</span>
-    <span class='label'>message:</span> <span class='id identifier rubyid_message'>message</span><span class='comma'>,</span>
-    <span class='label'>service_context:</span> <span class='id identifier rubyid_service_context_hash'>service_context_hash</span><span class='comma'>,</span>
-    <span class='label'>context:</span> <span class='id identifier rubyid_error_context_hash'>error_context_hash</span>
-  <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span>
-
-  <span class='id identifier rubyid_grpc_class'>grpc_class</span> <span class='op'>=</span>
-    <span class='const'><span class='object_link'><a href="../../Devtools.html" title="Google::Devtools (module)">Devtools</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Devtools/Clouderrorreporting.html" title="Google::Devtools::Clouderrorreporting (module)">Clouderrorreporting</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Devtools/Clouderrorreporting/V1beta1.html" title="Google::Devtools::Clouderrorreporting::V1beta1 (module)">V1beta1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Devtools/Clouderrorreporting/V1beta1/ReportedErrorEvent.html" title="Google::Devtools::Clouderrorreporting::V1beta1::ReportedErrorEvent (class)">ReportedErrorEvent</a></span></span>
-  <span class='id identifier rubyid_grpc_class'>grpc_class</span><span class='period'>.</span><span class='id identifier rubyid_decode_json'>decode_json</span> <span class='id identifier rubyid_error_event_hash'>error_event_hash</span><span class='period'>.</span><span class='id identifier rubyid_to_json'>to_json</span>
+  <span class='const'><span class='object_link'><a href="../../Devtools.html" title="Google::Devtools (module)">Devtools</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Devtools/Clouderrorreporting.html" title="Google::Devtools::Clouderrorreporting (module)">Clouderrorreporting</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Devtools/Clouderrorreporting/V1beta1.html" title="Google::Devtools::Clouderrorreporting::V1beta1 (module)">V1beta1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Devtools/Clouderrorreporting/V1beta1/ReportedErrorEvent.html" title="Google::Devtools::Clouderrorreporting::V1beta1::ReportedErrorEvent (class)">ReportedErrorEvent</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span>
+    <span class='label'>event_time:</span> <span class='id identifier rubyid_event_time_grpc'>event_time_grpc</span><span class='comma'>,</span>
+    <span class='label'>message:</span> <span class='id identifier rubyid_message'>message</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='comma'>,</span>
+    <span class='label'>service_context:</span> <span class='id identifier rubyid_service_context_grpc'>service_context_grpc</span><span class='comma'>,</span>
+    <span class='label'>context:</span> <span class='id identifier rubyid_error_context_grpc'>error_context_grpc</span>
+  <span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
