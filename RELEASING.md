@@ -50,10 +50,9 @@ green, you may create a release as follows:
    significant changes. (For examples of what a significant change is, browse
    the changes in the gem's `CHANGELOG.md`.)
 
-1. If your gem is new, ensure that it has been added to the [top-level
-   `Gemfile`](https://github.com/googleapis/google-cloud-ruby/blob/master/Gemfile).
-   Follow the steps in [Adding a new gem to
-   meta-packages](#adding-a-new-gem-to-meta-packages), below.
+1. If your gem is new, follow the steps in [Adding a new gem to the top-level
+   package and the meta-packages](#adding-a-new-gem-to-the-top-level-package-and-the-meta-packages),
+   below.
 
 1. If the [semver](http://semver.org/) version change for your gem requires
    an increase in the requirement for your gem in
@@ -119,12 +118,14 @@ green, you may create a release as follows:
 
 High fives all around!
 
-## Adding a new gem to meta-packages
+## Adding a new gem to the top-level package and the meta-packages
 
-There are extra steps required to add a new gem to the `google-cloud` and/or
-`stackdriver` meta-package gems. These instructions are for the `google-cloud`
-gem.
+There are extra steps required to add a new gem to the top-level package and the
+`google-cloud` and/or `stackdriver` meta-package gems. These instructions are
+for the `google-cloud` gem.
 
+1. Add the gem to
+   [`Gemfile`](https://github.com/googleapis/google-cloud-ruby/blob/master/Gemfile).
 1. Add the gem to
    [`google-cloud/Gemfile`](https://github.com/googleapis/google-cloud-ruby/blob/master/google-cloud/Gemfile).
 1. Add the gem to
