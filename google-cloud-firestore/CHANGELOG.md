@@ -22,7 +22,7 @@
     This value was added in googleauth 0.7.0.
   * Loosen googleauth dependency
     Allow for new releases up to 0.10.
-    The googleauth devs have committed to maintanining the current API
+    The googleauth devs have committed to maintaining the current API
     and will not make backwards compatible changes before 0.10.
 * Add Firestore emulator support.
 
