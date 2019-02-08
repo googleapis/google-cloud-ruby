@@ -256,39 +256,6 @@ task :console, :bundleupdate do |t, args|
   end
 end
 
-namespace :circleci do
-  desc "Build for CircleCI"
-  task :build do
-    run_acceptance = false
-    if ENV["CIRCLE_BRANCH"] == "master" && ENV["CIRCLE_PR_NUMBER"].nil?
-      run_acceptance = true
-    end
-
-    valid_gems.each do |gem|
-      Dir.chdir gem do
-        Bundler.with_clean_env do
-          sh "bundle update"
-
-          if run_acceptance
-            sh "bundle exec rake ci:acceptance"
-          else
-            sh "bundle exec rake ci"
-          end
-        end
-      end
-    end
-  end
-
-  task :release do
-    tag = ENV["CIRCLE_TAG"]
-    if tag.nil?
-      fail "You must provide a tag to release."
-    end
-
-    Rake::Task["release"].invoke tag
-  end
-end
-
 desc "Run the CI build for all gems."
 task :ci, :bundleupdate do |t, args|
   bundleupdate = args[:bundleupdate]
@@ -588,8 +555,10 @@ namespace :kokoro do
         header "Using Ruby - #{RUBY_VERSION}"
         Rake::Task["kokoro:windows_acceptance_fix"].invoke
         sh "bundle update"
-        exit_status = run_command_with_timeout "bundle exec rake ci", 1800
-        exit exit_status
+        exit [
+          run_command_with_timeout("bundle exec rake ci", 1800),
+          verify_in_gemfile(ENV["PACKAGE"])
+        ].max
       end
     end
   end
@@ -611,7 +580,10 @@ namespace :kokoro do
         sh "bundle update"
         command = "bundle exec rake ci"
         command += ":acceptance" if updated
-        exit run_command_with_timeout(command, 3600)
+        exit [
+          run_command_with_timeout(command, 3600),
+          verify_in_gemfile(ENV["PACKAGE"])
+        ].max
       end
     end
   end
@@ -624,29 +596,28 @@ namespace :kokoro do
         header "Using Ruby - #{RUBY_VERSION}"
         Rake::Task["kokoro:windows_acceptance_fix"].invoke
         sh "bundle update"
-        exit run_command_with_timeout("bundle exec rake ci:acceptance", 3600)
+        exit [
+          run_command_with_timeout("bundle exec rake ci:acceptance", 3600),
+          verify_in_gemfile(ENV["PACKAGE"])
+        ].max
       end
     end
   end
 
   task :release do
+    version = "0.1.0"
     header_2 ENV["JOB_TYPE"]
     Dir.chdir ENV["PACKAGE"] do
       Bundler.with_clean_env do
-        Rake::Task["kokoro:load_env_vars"].invoke
         header "Using Ruby - #{RUBY_VERSION}"
         sh "bundle update"
-        sh "bundle exec rake build"
-        gem = Dir.entries("pkg").select { |entry| File.file? "pkg/#{entry}" }.first
-        path = FileUtils.mkdir_p(File.expand_path("~") + "/.gem")
-        File.open("#{path.first}/credentials", "w") do |f|
-          f.puts "---"
-          f.puts ":rubygems_api_key: #{ENV["RUBYGEMS_API_TOKEN"]}"
-        end
-        sh "chmod 0600 #{path.first}/credentials"
-        sh "gem push pkg/#{gem}"
+        version = `bundle exec gem list`
+          .split("\n").select { |line| line.include? ENV["PACKAGE"] }
+          .first.split("(").last.split(")").first
       end
     end
+    Rake::Task["kokoro:load_env_vars"].invoke
+    Rake::Task["release"].invoke "#{ENV["PACKAGE"]}/v#{version}"
   end
 
   desc "Runs post-build logic on kokoro."
@@ -673,6 +644,16 @@ namespace :kokoro do
       end
     end
   end
+
+  def verify_in_gemfile gem
+    if Bundler.environment.gems.map(&:name).include? gem
+      0
+    else
+      header_2 "#{gem} does not appear in the top-level Gemfile. Please add it."
+      1
+    end
+  end
+  
 end
 
 def run_command_with_timeout command, timeout
