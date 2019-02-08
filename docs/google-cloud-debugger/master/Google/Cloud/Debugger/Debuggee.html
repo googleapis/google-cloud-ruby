@@ -713,16 +713,36 @@ Google::Devtools::Clouddebugger::V2::Debuggee struct.</p>
 117
 118
 119
-120</pre>
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger/debuggee.rb', line 115</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_to_grpc'>to_grpc</span>
-  <span class='id identifier rubyid_debuggee_args'>debuggee_args</span> <span class='op'>=</span> <span class='id identifier rubyid_build_request_arg'>build_request_arg</span>
-
-  <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Devtools.html" title="Google::Devtools (module)">Devtools</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Devtools/Clouddebugger.html" title="Google::Devtools::Clouddebugger (module)">Clouddebugger</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Devtools/Clouddebugger/V2.html" title="Google::Devtools::Clouddebugger::V2 (module)">V2</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Devtools/Clouddebugger/V2/Debuggee.html" title="Google::Devtools::Clouddebugger::V2::Debuggee (class)">Debuggee</a></span></span><span class='period'>.</span><span class='id identifier rubyid_decode_json'>decode_json</span> \
-    <span class='id identifier rubyid_debuggee_args'>debuggee_args</span><span class='period'>.</span><span class='id identifier rubyid_to_json'>to_json</span>
+  <span class='id identifier rubyid_source_context'>source_context</span> <span class='op'>=</span> <span class='id identifier rubyid_source_context_from_json_file'>source_context_from_json_file</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>source-context.json</span><span class='tstring_end'>&quot;</span></span>
+  <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Devtools.html" title="Google::Devtools (module)">Devtools</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Devtools/Clouddebugger.html" title="Google::Devtools::Clouddebugger (module)">Clouddebugger</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Devtools/Clouddebugger/V2.html" title="Google::Devtools::Clouddebugger::V2 (module)">V2</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Devtools/Clouddebugger/V2/Debuggee.html" title="Google::Devtools::Clouddebugger::V2::Debuggee (class)">Debuggee</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span>
+    <span class='label'>id:</span> <span class='id identifier rubyid_id'>id</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='comma'>,</span>
+    <span class='label'>project:</span> <span class='id identifier rubyid_project_id_for_request_arg'>project_id_for_request_arg</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='comma'>,</span>
+    <span class='label'>description:</span> <span class='id identifier rubyid_description'>description</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='comma'>,</span>
+    <span class='label'>labels:</span> <span class='id identifier rubyid_labels'>labels</span><span class='comma'>,</span>
+    <span class='label'>agent_version:</span> <span class='id identifier rubyid_agent_version'>agent_version</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span>
+  <span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_tap'>tap</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_d'>d</span><span class='op'>|</span>
+    <span class='kw'>if</span> <span class='id identifier rubyid_source_context'>source_context</span>
+      <span class='id identifier rubyid_d'>d</span><span class='period'>.</span><span class='id identifier rubyid_source_contexts'>source_contexts</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_source_context'>source_context</span>
+      <span class='id identifier rubyid_d'>d</span><span class='period'>.</span><span class='id identifier rubyid_ext_source_contexts'>ext_source_contexts</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_ext_source_context_grpc'>ext_source_context_grpc</span><span class='lparen'>(</span><span class='id identifier rubyid_source_context'>source_context</span><span class='rparen'>)</span>
+    <span class='kw'>end</span>
+    <span class='id identifier rubyid_d'>d</span><span class='period'>.</span><span class='id identifier rubyid_uniquifier'>uniquifier</span> <span class='op'>=</span> <span class='id identifier rubyid_compute_uniquifier'>compute_uniquifier</span> <span class='id identifier rubyid_d'>d</span>
+  <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
