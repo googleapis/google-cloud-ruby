@@ -1,5 +1,11 @@
 # Release History
 
+### 0.31.2 / 2019-02-09
+
+* Fix conversion code for ErrorEvent and Debugee.
+  * Prepare for changes in JSON serialization coming in
+    google-protobuf 3.7.
+
 ### 0.31.1 / 2019-02-07
 
 * Update concurrent-ruby dependency
