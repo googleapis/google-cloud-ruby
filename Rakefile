@@ -540,7 +540,7 @@ task :compile do
 end
 
 namespace :kokoro do
-  ruby_versions = ['2.3', '2.4', '2.5']
+  exit_status = 0
 
   desc "Generate configs for kokoro"
   task :build do
@@ -555,12 +555,10 @@ namespace :kokoro do
         header "Using Ruby - #{RUBY_VERSION}"
         Rake::Task["kokoro:windows_acceptance_fix"].invoke
         sh "bundle update"
-        exit [
-          run_command_with_timeout("bundle exec rake ci", 1800),
-          verify_in_gemfile(ENV["PACKAGE"])
-        ].max
+        exit_status = run_command_with_timeout("bundle exec rake ci", 1800)
       end
     end
+    exit [exit_status, verify_in_gemfile(ENV["PACKAGE"])].max
   end
 
   task :continuous do
@@ -580,12 +578,10 @@ namespace :kokoro do
         sh "bundle update"
         command = "bundle exec rake ci"
         command += ":acceptance" if updated
-        exit [
-          run_command_with_timeout(command, 3600),
-          verify_in_gemfile(ENV["PACKAGE"])
-        ].max
+        exit_status = run_command_with_timeout(command, 3600)
       end
     end
+    exit [exit_status, verify_in_gemfile(ENV["PACKAGE"])].max
   end
 
   task :nightly do
@@ -596,12 +592,10 @@ namespace :kokoro do
         header "Using Ruby - #{RUBY_VERSION}"
         Rake::Task["kokoro:windows_acceptance_fix"].invoke
         sh "bundle update"
-        exit [
-          run_command_with_timeout("bundle exec rake ci:acceptance", 3600),
-          verify_in_gemfile(ENV["PACKAGE"])
-        ].max
+        exit_status = run_command_with_timeout("bundle exec rake ci:acceptance", 3600)
       end
     end
+    exit [exit_status, verify_in_gemfile(ENV["PACKAGE"])].max
   end
 
   task :release do
