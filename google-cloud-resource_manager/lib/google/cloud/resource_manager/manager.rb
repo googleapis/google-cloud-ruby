@@ -17,6 +17,7 @@ require "google/cloud/errors"
 require "google/cloud/resource_manager/credentials"
 require "google/cloud/resource_manager/service"
 require "google/cloud/resource_manager/project"
+require "google/cloud/resource_manager/resource"
 
 module Google
   module Cloud
@@ -166,6 +167,15 @@ module Google
         #   <code>([a-z]([-a-z0-9]*[a-z0-9])?)?</code>.
         #
         #   No more than 256 labels can be associated with a given resource.
+        # @param [Resource] parent A parent Resource. Optional.
+        #
+        #   Supported parent types include "organization" and "folder". Once
+        #   set, the parent can be updated but cannot be cleared.
+        #
+        #   The end user must have the `resourcemanager.projects.create`
+        #   permission on the parent.
+        #
+        #   (See {#resource} and {Resource}.)
         #
         # @return [Google::Cloud::ResourceManager::Project]
         #
@@ -182,8 +192,16 @@ module Google
         #   project = resource_manager.create_project "tokyo-rain-123",
         #     name: "Todos Development", labels: {env: :development}
         #
-        def create_project project_id, name: nil, labels: nil
-          gapi = service.create_project project_id, name, labels
+        # @example A project can also be created with a `name` and `parent`:
+        #   require "google/cloud/resource_manager"
+        #
+        #   resource_manager = Google::Cloud::ResourceManager.new
+        #   folder = resource_manager.resource "folder", "1234"
+        #   project = resource_manager.create_project "tokyo-rain-123",
+        #     name: "Todos Development", parent: folder
+        #
+        def create_project project_id, name: nil, labels: nil, parent: nil
+          gapi = service.create_project project_id, name, labels, parent
           Project.from_gapi gapi, service
         end
 
@@ -239,6 +257,27 @@ module Google
         def undelete project_id
           service.undelete_project project_id
           true
+        end
+
+        ##
+        # Create a Resource object. (See {Resource}.)
+        #
+        # @param [String] type The resource type this id is for. At present, the
+        #   valid types are: "organization" and "folder".
+        # @param [String] id The type-specific id. This should correspond to the
+        #   id used in the type-specific API's.
+        # @return [resource]
+        #
+        # @example
+        #   require "google/cloud/resource_manager"
+        #
+        #   resource_manager = Google::Cloud::ResourceManager.new
+        #   project = resource_manager.project "tokyo-rain-123"
+        #   folder = resource_manager.resource "folder", "1234"
+        #   project.parent = folder
+        #
+        def resource type, id
+          Resource.new type, id
         end
 
         protected

@@ -41,23 +41,31 @@ describe Google::Cloud::ResourceManager::Manager, :mock_res_man do
     project.project_id.must_equal "new-project-456"
     project.name.must_be :nil?
     project.labels.must_be :empty?
+    project.parent.must_be :nil?
   end
 
-  it "creates a project with a name and labels" do
+  it "creates a project with a name and labels and parent" do
     mock = Minitest::Mock.new
-    created_project = create_project_gapi("new-project-789", "My New Project", {"env" => "development"})
-    mock.expect :create_project, created_project, [Google::Apis::CloudresourcemanagerV1::Project.new(project_id: "new-project-789", name: "My New Project", labels: {:env => :development})]
+    created_project = create_project_gapi("new-project-789", "My New Project", {"env" => "development"}, Google::Apis::CloudresourcemanagerV1::ResourceId.new(type: "folder", id: "1234"))
+    mock.expect :create_project, created_project, [Google::Apis::CloudresourcemanagerV1::Project.new(project_id: "new-project-789", name: "My New Project", labels: {:env => :development}, parent: {type: "folder", id: "1234"})]
 
     resource_manager.service.mocked_service = mock
+    folder = resource_manager.resource "folder", "1234"
     project = resource_manager.create_project "new-project-789",
                                               name: "My New Project",
-                                              labels: {env: :development}
+                                              labels: {env: :development},
+                                              parent: folder
     mock.verify
 
     project.must_be_kind_of Google::Cloud::ResourceManager::Project
     project.project_id.must_equal "new-project-789"
     project.name.must_equal "My New Project"
     project.labels.must_equal("env" => "development")
+    project.parent.must_be_kind_of Google::Cloud::ResourceManager::Resource
+    project.parent.type.must_equal "folder"
+    project.parent.id.must_equal "1234"
+    project.parent.must_be :folder?
+    project.parent.wont_be :organization?
   end
 
   it "lists projects" do
@@ -262,11 +270,40 @@ describe Google::Cloud::ResourceManager::Manager, :mock_res_man do
     mock.verify
   end
 
-  def create_project_gapi project_id = nil, name = nil, labels = {}
+  it "creates a resource" do
+    folder = resource_manager.resource "folder", "1234"
+    folder.must_be_kind_of Google::Cloud::ResourceManager::Resource
+    folder.type.must_equal "folder"
+    folder.id.must_equal "1234"
+    folder.must_be :folder?
+    folder.wont_be :organization?
+
+    organization = resource_manager.resource "organization", "7890"
+    organization.must_be_kind_of Google::Cloud::ResourceManager::Resource
+    organization.type.must_equal "organization"
+    organization.id.must_equal "7890"
+    organization.wont_be :folder?
+    organization.must_be :organization?
+  end
+
+  it "creating a resource without type or id raises" do
+    error = expect do
+      resource_manager.resource "folder", nil
+    end.must_raise ArgumentError
+    error.message.must_equal "id is required"
+
+    error = expect do
+      resource_manager.resource nil, "1234"
+    end.must_raise ArgumentError
+    error.message.must_equal "type is required"
+  end
+
+  def create_project_gapi project_id = nil, name = nil, labels = {}, parent = nil
     gapi = random_project_gapi
     gapi.project_id = project_id if project_id
     gapi.name       = name
     gapi.labels     = labels
+    gapi.parent     = parent
     gapi
   end
 

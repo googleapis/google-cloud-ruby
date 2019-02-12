@@ -118,6 +118,32 @@ module Google
           end
 
           ##
+          # Updates the reference to a parent with a new Resource.
+          #
+          # Supported parent types include "organization" and "folder". Once
+          # set, the parent can be updated but cannot be cleared.
+          #
+          # The end user must have the `resourcemanager.projects.create`
+          # permission on the parent.
+          #
+          # (See {Resource} and {Manager#resource}.)
+          #
+          # @param [Resource] new_parent A new parent Resource.
+          #
+          # @example
+          #   require "google/cloud/resource_manager"
+          #
+          #   resource_manager = Google::Cloud::ResourceManager.new
+          #   project = resource_manager.project "tokyo-rain-123"
+          #   folder = resource_manager.resource "folder", "1234"
+          #   project.parent = folder
+          #
+          def parent= new_parent
+            raise ArgumentError, "new_parent is required" if new_parent.nil?
+            gapi.parent = new_parent.to_gapi
+          end
+
+          ##
           # @private Create an Updater object.
           def self.from_project project
             dupe_gapi = project.gapi.class.new project.gapi.to_h
