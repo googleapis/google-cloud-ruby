@@ -4,7 +4,7 @@
 
 * Add parent resoure to `Project`:
   * Add `Project#parent`.
-  * Add `project` optional named argument to `Manager#create_project`.
+  * Add `parent` optional named argument to `Manager#create_project`.
   * Add `Resource` class.
   * Add `Manager#resource` convenience method.
 
