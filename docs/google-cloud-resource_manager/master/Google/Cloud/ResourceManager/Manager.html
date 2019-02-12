@@ -132,7 +132,7 @@ js:
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#create_project-instance_method" title="#create_project (instance method)">#<strong>create_project</strong>(project_id, name: nil, labels: nil)  &#x21d2; Google::Cloud::ResourceManager::Project </a>
+      <a href="#create_project-instance_method" title="#create_project (instance method)">#<strong>create_project</strong>(project_id, name: nil, labels: nil, parent: nil)  &#x21d2; Google::Cloud::ResourceManager::Project </a>
     
 
     
@@ -224,6 +224,29 @@ js:
         <li class="public ">
   <span class="summary_signature">
     
+      <a href="#resource-instance_method" title="#resource (instance method)">#<strong>resource</strong>(type, id)  &#x21d2; resource </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Create a Resource object.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#undelete-instance_method" title="#undelete (instance method)">#<strong>undelete</strong>(project_id)  &#x21d2; Object </a>
     
 
@@ -256,7 +279,7 @@ js:
       <div class="method_details first">
   <h3 class="signature first" id="create_project-instance_method">
   
-    #<strong>create_project</strong>(project_id, name: nil, labels: nil)  &#x21d2; <tt><span class='object_link'><a href="Project.html" title="Google::Cloud::ResourceManager::Project (class)">Google::Cloud::ResourceManager::Project</a></span></tt> 
+    #<strong>create_project</strong>(project_id, name: nil, labels: nil, parent: nil)  &#x21d2; <tt><span class='object_link'><a href="Project.html" title="Google::Cloud::ResourceManager::Project (class)">Google::Cloud::ResourceManager::Project</a></span></tt> 
   
 
   
@@ -296,6 +319,17 @@ Google Cloud Storage.</p>
 <span class='id identifier rubyid_resource_manager'>resource_manager</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../ResourceManager.html" title="Google::Cloud::ResourceManager (module)">ResourceManager</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../ResourceManager.html#new-class_method" title="Google::Cloud::ResourceManager.new (method)">new</a></span></span>
 <span class='id identifier rubyid_project'>project</span> <span class='op'>=</span> <span class='id identifier rubyid_resource_manager'>resource_manager</span><span class='period'>.</span><span class='id identifier rubyid_create_project'>create_project</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>tokyo-rain-123</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
   <span class='label'>name:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Todos Development</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>labels:</span> <span class='lbrace'>{</span><span class='label'>env:</span> <span class='symbol'>:development</span><span class='rbrace'>}</span></code></pre>
+    
+      
+        <p class="example_title"><div class='inline'><p>A project can also be created with a <code>name</code> and <code>parent</code>:</p>
+</div></p>
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/resource_manager</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_resource_manager'>resource_manager</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../ResourceManager.html" title="Google::Cloud::ResourceManager (module)">ResourceManager</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../ResourceManager.html#new-class_method" title="Google::Cloud::ResourceManager.new (method)">new</a></span></span>
+<span class='id identifier rubyid_folder'>folder</span> <span class='op'>=</span> <span class='id identifier rubyid_resource_manager'>resource_manager</span><span class='period'>.</span><span class='id identifier rubyid_resource'>resource</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>folder</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>1234</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_project'>project</span> <span class='op'>=</span> <span class='id identifier rubyid_resource_manager'>resource_manager</span><span class='period'>.</span><span class='id identifier rubyid_create_project'>create_project</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>tokyo-rain-123</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+  <span class='label'>name:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Todos Development</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>parent:</span> <span class='id identifier rubyid_folder'>folder</span></code></pre>
     
   </div>
 <p class="tag_title">Parameters:</p>
@@ -362,6 +396,29 @@ conform to the regular expression
       
     </li>
   
+    <li>
+      
+        <span class='name'>parent</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Resource.html" title="Google::Cloud::ResourceManager::Resource (class)">Resource</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A parent Resource. Optional.</p>
+
+<p>Supported parent types include &quot;organization&quot; and &quot;folder&quot;. Once
+set, the parent can be updated but cannot be cleared.</p>
+
+<p>The end user must have the <code>resourcemanager.projects.create</code>
+permission on the parent.</p>
+
+<p>(See <span class='object_link'><a href="#resource-instance_method" title="Google::Cloud::ResourceManager::Manager#resource (method)">#resource</a></span> and <span class='object_link'><a href="Resource.html" title="Google::Cloud::ResourceManager::Resource (class)">Resource</a></span>.)</p>
+</div>
+      
+    </li>
+  
 </ul>
 
 <p class="tag_title">Returns:</p>
@@ -384,16 +441,16 @@ conform to the regular expression
       <pre class="lines">
 
 
-185
-186
-187
-188</pre>
+203
+204
+205
+206</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/resource_manager/manager.rb', line 185</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/resource_manager/manager.rb', line 203</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_create_project'>create_project</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='label'>name:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>labels:</span> <span class='kw'>nil</span>
-  <span class='id identifier rubyid_gapi'>gapi</span> <span class='op'>=</span> <span class='id identifier rubyid_service'>service</span><span class='period'>.</span><span class='id identifier rubyid_create_project'>create_project</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='id identifier rubyid_labels'>labels</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_create_project'>create_project</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='label'>name:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>labels:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>parent:</span> <span class='kw'>nil</span>
+  <span class='id identifier rubyid_gapi'>gapi</span> <span class='op'>=</span> <span class='id identifier rubyid_service'>service</span><span class='period'>.</span><span class='id identifier rubyid_create_project'>create_project</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='id identifier rubyid_labels'>labels</span><span class='comma'>,</span> <span class='id identifier rubyid_parent'>parent</span>
   <span class='const'><span class='object_link'><a href="Project.html" title="Google::Cloud::ResourceManager::Project (class)">Project</a></span></span><span class='period'>.</span><span class='id identifier rubyid_from_gapi'>from_gapi</span> <span class='id identifier rubyid_gapi'>gapi</span><span class='comma'>,</span> <span class='id identifier rubyid_service'>service</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -475,13 +532,13 @@ Manager#project and Manager#projects methods.</p>
       <pre class="lines">
 
 
-218
-219
-220
-221</pre>
+236
+237
+238
+239</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/resource_manager/manager.rb', line 218</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/resource_manager/manager.rb', line 236</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete'>delete</span> <span class='id identifier rubyid_project_id'>project_id</span>
   <span class='id identifier rubyid_service'>service</span><span class='period'>.</span><span class='id identifier rubyid_delete_project'>delete_project</span> <span class='id identifier rubyid_project_id'>project_id</span>
@@ -566,15 +623,15 @@ if the project does not exist</p>
       <pre class="lines">
 
 
-133
 134
 135
 136
 137
-138</pre>
+138
+139</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/resource_manager/manager.rb', line 133</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/resource_manager/manager.rb', line 134</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_project'>project</span> <span class='id identifier rubyid_project_id'>project_id</span>
   <span class='id identifier rubyid_gapi'>gapi</span> <span class='op'>=</span> <span class='id identifier rubyid_service'>service</span><span class='period'>.</span><span class='id identifier rubyid_get_project'>get_project</span> <span class='id identifier rubyid_project_id'>project_id</span>
@@ -746,17 +803,119 @@ part of the larger set of results to view.</p>
       <pre class="lines">
 
 
-113
 114
 115
-116</pre>
+116
+117</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/resource_manager/manager.rb', line 113</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/resource_manager/manager.rb', line 114</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_projects'>projects</span> <span class='label'>filter:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>token:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>max:</span> <span class='kw'>nil</span>
   <span class='id identifier rubyid_gapi'>gapi</span> <span class='op'>=</span> <span class='id identifier rubyid_service'>service</span><span class='period'>.</span><span class='id identifier rubyid_list_project'>list_project</span> <span class='label'>filter:</span> <span class='id identifier rubyid_filter'>filter</span><span class='comma'>,</span> <span class='label'>token:</span> <span class='id identifier rubyid_token'>token</span><span class='comma'>,</span> <span class='label'>max:</span> <span class='id identifier rubyid_max'>max</span>
   <span class='const'><span class='object_link'><a href="Project.html" title="Google::Cloud::ResourceManager::Project (class)">Project</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Project/List.html" title="Google::Cloud::ResourceManager::Project::List (class)">List</a></span></span><span class='period'>.</span><span class='id identifier rubyid_from_gapi'>from_gapi</span> <span class='id identifier rubyid_gapi'>gapi</span><span class='comma'>,</span> <span class='kw'>self</span><span class='comma'>,</span> <span class='id identifier rubyid_filter'>filter</span><span class='comma'>,</span> <span class='id identifier rubyid_max'>max</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="resource-instance_method">
+  
+    #<strong>resource</strong>(type, id)  &#x21d2; <tt><span class='object_link'><a href="#resource-instance_method" title="Google::Cloud::ResourceManager::Manager#resource (method)">resource</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Create a Resource object. (See <span class='object_link'><a href="Resource.html" title="Google::Cloud::ResourceManager::Resource (class)">Resource</a></span>.)</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/resource_manager</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_resource_manager'>resource_manager</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../ResourceManager.html" title="Google::Cloud::ResourceManager (module)">ResourceManager</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../ResourceManager.html#new-class_method" title="Google::Cloud::ResourceManager.new (method)">new</a></span></span>
+<span class='id identifier rubyid_project'>project</span> <span class='op'>=</span> <span class='id identifier rubyid_resource_manager'>resource_manager</span><span class='period'>.</span><span class='id identifier rubyid_project'>project</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>tokyo-rain-123</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_folder'>folder</span> <span class='op'>=</span> <span class='id identifier rubyid_resource_manager'>resource_manager</span><span class='period'>.</span><span class='id identifier rubyid_resource'>resource</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>folder</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>1234</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_project'>project</span><span class='period'>.</span><span class='id identifier rubyid_parent'>parent</span> <span class='op'>=</span> <span class='id identifier rubyid_folder'>folder</span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>type</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The resource type this id is for. At present, the
+valid types are: &quot;organization&quot; and &quot;folder&quot;.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>id</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The type-specific id. This should correspond to the
+id used in the type-specific API&#39;s.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="#resource-instance_method" title="Google::Cloud::ResourceManager::Manager#resource (method)">resource</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+279
+280
+281</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/resource_manager/manager.rb', line 279</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_resource'>resource</span> <span class='id identifier rubyid_type'>type</span><span class='comma'>,</span> <span class='id identifier rubyid_id'>id</span>
+  <span class='const'><span class='object_link'><a href="Resource.html" title="Google::Cloud::ResourceManager::Resource (class)">Resource</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../ResourceManager.html#new-class_method" title="Google::Cloud::ResourceManager.new (method)">new</a></span></span> <span class='id identifier rubyid_type'>type</span><span class='comma'>,</span> <span class='id identifier rubyid_id'>id</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -823,13 +982,13 @@ cannot be restored.</p>
       <pre class="lines">
 
 
-239
-240
-241
-242</pre>
+257
+258
+259
+260</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/resource_manager/manager.rb', line 239</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/resource_manager/manager.rb', line 257</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_undelete'>undelete</span> <span class='id identifier rubyid_project_id'>project_id</span>
   <span class='id identifier rubyid_service'>service</span><span class='period'>.</span><span class='id identifier rubyid_undelete_project'>undelete_project</span> <span class='id identifier rubyid_project_id'>project_id</span>
