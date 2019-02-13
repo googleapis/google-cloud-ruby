@@ -1,5 +1,9 @@
 # Release History
 
+### 1.6.2 / 2019-02-13
+
+* Fix bug (typo) in retrieving default on_error proc.
+
 ### 1.6.1 / 2019-02-07
 
 * Update concurrent-ruby dependency
