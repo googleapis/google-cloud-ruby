@@ -184,7 +184,7 @@ module Google
         def default_error_callbacks
           # This is memoized to reduce calls to the configuration.
           @default_error_callbacks ||= begin
-            error_cb = Google::Cloud::ErrorReporting.configuration.on_error
+            error_cb = Google::Cloud::ErrorReporting.configure.on_error
             error_cb ||= Google::Cloud.configure.on_error
             if error_cb
               [error_cb]
