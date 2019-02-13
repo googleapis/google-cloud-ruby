@@ -597,11 +597,11 @@ describe "Datastore", :datastore do
     end
 
     it "should find and run query in a read-only transaction" do
-      query = dataset.query("Character").
-        ancestor(book.key)
       entities = nil
 
       tx = dataset.read_only_transaction do |tx|
+        query = tx.query("Character").
+          ancestor(book.key)
         fresh = tx.find book.key
         entities = tx.run query
       end

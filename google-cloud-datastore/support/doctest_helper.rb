@@ -364,6 +364,23 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
+  doctest.before("Google::Cloud::Datastore::ReadOnlyTransaction#gql") do
+    mock_datastore do |mock|
+      mock.expect :begin_transaction, begin_tx_res, ["my-todo-project", Hash]
+      mock.expect :run_query, run_query_res, ["my-todo-project", nil, Hash]
+      mock.expect :run_query, run_query_res, ["my-todo-project", nil, Hash]
+      mock.expect :commit, OpenStruct.new(mutation_results: []), ["my-todo-project", :TRANSACTIONAL, Array, Hash]
+    end
+  end
+
+  doctest.before("Google::Cloud::Datastore::ReadOnlyTransaction#key") do
+    mock_datastore do |mock|
+      mock.expect :begin_transaction, begin_tx_res, ["my-todo-project", Hash]
+      mock.expect :lookup, lookup_res, ["my-todo-project", Array, Hash]
+      mock.expect :commit, OpenStruct.new(mutation_results: []), ["my-todo-project", :TRANSACTIONAL, Array, Hash]
+    end
+  end
+
   doctest.before("Google::Cloud::Datastore::Transaction") do
     mock_datastore do |mock|
       mock.expect :begin_transaction, begin_tx_res, ["my-todo-project", transaction_options: nil]

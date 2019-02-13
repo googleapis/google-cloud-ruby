@@ -40,12 +40,13 @@ describe Google::Cloud::Datastore::ReadOnlyTransaction, :mock_datastore do
     )
   end
   let(:run_query_res) do
-    run_query_res_entities = 2.times.map do
+    run_query_res_entities = 2.times.map do |i|
       Google::Datastore::V1::EntityResult.new(
         entity: Google::Cloud::Datastore::Entity.new.tap do |e|
           e.key = Google::Cloud::Datastore::Key.new "ds-test", "thingie"
           e["name"] = "thingamajig"
-        end.to_grpc
+        end.to_grpc,
+        cursor: "result-cursor-#{i}".force_encoding("ASCII-8BIT")
       )
     end
     Google::Datastore::V1::RunQueryResponse.new(
@@ -60,6 +61,8 @@ describe Google::Cloud::Datastore::ReadOnlyTransaction, :mock_datastore do
     Google::Datastore::V1::BeginTransactionResponse.new(transaction: tx_id)
   end
   let(:tx_id) { "giterdone".encode("ASCII-8BIT") }
+  let(:read_options) { Google::Datastore::V1::ReadOptions.new(transaction: tx_id) }
+  let(:gql_query_grpc) { Google::Datastore::V1::GqlQuery.new(query_string: "SELECT * FROM Task") }
 
   after do
     transaction.service.mocked_service.verify
@@ -94,7 +97,6 @@ describe Google::Cloud::Datastore::ReadOnlyTransaction, :mock_datastore do
 
   it "run will fulfill a query" do
     query_grpc = Google::Cloud::Datastore::Query.new.kind("User").to_grpc
-    read_options = Google::Datastore::V1::ReadOptions.new(transaction: tx_id)
     transaction.service.mocked_service.expect :run_query, run_query_res, [project, nil, read_options: read_options, query: query_grpc, gql_query: nil, options: default_options]
 
     query = Google::Cloud::Datastore::Query.new.kind("User")
@@ -102,6 +104,37 @@ describe Google::Cloud::Datastore::ReadOnlyTransaction, :mock_datastore do
     entities.count.must_equal 2
     entities.each do |entity|
       entity.must_be_kind_of Google::Cloud::Datastore::Entity
+    end
+    entities.cursor.must_equal query_cursor
+    entities.end_cursor.must_equal query_cursor
+    entities.more_results.must_equal :MORE_RESULTS_TYPE_UNSPECIFIED
+    refute entities.not_finished?
+    refute entities.more_after_limit?
+    refute entities.more_after_cursor?
+    refute entities.no_more?
+  end
+
+  it "run will fulfill a gql query" do
+    transaction.service.mocked_service.expect :run_query, run_query_res, [project, nil, read_options: read_options, query: nil, gql_query: gql_query_grpc, options: default_options]
+
+    gql = transaction.gql "SELECT * FROM Task"
+    entities = transaction.run gql
+    entities.count.must_equal 2
+    entities.each do |entity|
+      entity.must_be_kind_of Google::Cloud::Datastore::Entity
+    end
+    entities.cursor_for(entities.first).must_equal Google::Cloud::Datastore::Cursor.from_grpc("result-cursor-0")
+    entities.cursor_for(entities.last).must_equal Google::Cloud::Datastore::Cursor.from_grpc("result-cursor-1")
+    entities.each_with_cursor do |entity, cursor|
+      entity.must_be_kind_of Google::Cloud::Datastore::Entity
+      cursor.must_be_kind_of Google::Cloud::Datastore::Cursor
+    end
+    # can use the enumerator without passing a block...
+    entities.each_with_cursor.map do |entity, cursor|
+      [entity.key, cursor]
+    end.each do |result, cursor|
+      result.must_be_kind_of Google::Cloud::Datastore::Key
+      cursor.must_be_kind_of Google::Cloud::Datastore::Cursor
     end
     entities.cursor.must_equal query_cursor
     entities.end_cursor.must_equal query_cursor
@@ -159,5 +192,46 @@ describe Google::Cloud::Datastore::ReadOnlyTransaction, :mock_datastore do
     grpc = query.to_grpc
     grpc.kind.map(&:name).must_include "Task"
     grpc.kind.map(&:name).must_include "User"
+  end
+
+  it "key returns a Key instance" do
+    key = transaction.key "ThisThing", 1234
+    key.must_be_kind_of Google::Cloud::Datastore::Key
+    key.kind.must_equal "ThisThing"
+    key.id.must_equal 1234
+    key.name.must_be :nil?
+
+    key = transaction.key "ThisThing", "charlie"
+    key.must_be_kind_of Google::Cloud::Datastore::Key
+    key.kind.must_equal "ThisThing"
+    key.id.must_be :nil?
+    key.name.must_equal "charlie"
+  end
+
+  it "key sets a parent and grandparent in the constructor" do
+    path = [["OtherThing", "root"], ["ThatThing", 6789], ["ThisThing", 1234]]
+    key = transaction.key path, project: "custom-ds", namespace: "custom-ns"
+    key.kind.must_equal "ThisThing"
+    key.id.must_equal 1234
+    key.name.must_be :nil?
+    key.path.must_equal [["OtherThing", "root"], ["ThatThing", 6789], ["ThisThing", 1234]]
+    key.project.must_equal "custom-ds"
+    key.namespace.must_equal "custom-ns"
+
+    key.parent.wont_be :nil?
+    key.parent.kind.must_equal "ThatThing"
+    key.parent.id.must_equal 6789
+    key.parent.name.must_be :nil?
+    key.parent.path.must_equal [["OtherThing", "root"], ["ThatThing", 6789]]
+    key.parent.project.must_equal "custom-ds"
+    key.parent.namespace.must_equal "custom-ns"
+
+    key.parent.parent.wont_be :nil?
+    key.parent.parent.kind.must_equal "OtherThing"
+    key.parent.parent.id.must_be :nil?
+    key.parent.parent.name.must_equal "root"
+    key.parent.parent.path.must_equal [["OtherThing", "root"]]
+    key.parent.parent.project.must_equal "custom-ds"
+    key.parent.parent.namespace.must_equal "custom-ns"
   end
 end

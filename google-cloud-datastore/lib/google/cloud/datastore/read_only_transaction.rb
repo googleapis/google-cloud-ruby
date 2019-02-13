@@ -261,6 +261,127 @@ module Google
           query
         end
 
+        ##
+        # Create a new GqlQuery instance. This is a convenience method to make
+        # the creation of GqlQuery objects easier.
+        #
+        # @param [String] query The GQL query string.
+        # @param [Hash] bindings Named bindings for the GQL query string, each
+        #   key must match regex `[A-Za-z_$][A-Za-z_$0-9]*`, must not match
+        #   regex `__.*__`, and must not be `""`. The value must be an `Object`
+        #   that can be stored as an Entity property value, or a `Cursor`.
+        #
+        # @return [Google::Cloud::Datastore::GqlQuery]
+        #
+        # @example
+        #   require "google/cloud/datastore"
+        #
+        #   datastore = Google::Cloud::Datastore.new
+        #
+        #   datastore.read_only_transaction do |tx|
+        #     gql_query = tx.gql "SELECT * FROM Task WHERE done = @done",
+        #                        done: false
+        #     tasks = tx.run gql_query
+        #   end
+        #
+        # @example The previous example is equivalent to:
+        #   require "google/cloud/datastore"
+        #
+        #   datastore = Google::Cloud::Datastore.new
+        #
+        #   datastore.read_only_transaction do |tx|
+        #     gql_query = Google::Cloud::Datastore::GqlQuery.new
+        #     gql_query.query_string = "SELECT * FROM Task WHERE done = @done"
+        #     gql_query.named_bindings = {done: false}
+        #     tasks = tx.run gql_query
+        #   end
+        #
+        def gql query, bindings = {}
+          gql = GqlQuery.new
+          gql.query_string = query
+          gql.named_bindings = bindings unless bindings.empty?
+          gql
+        end
+
+        ##
+        # Create a new Key instance. This is a convenience method to make the
+        # creation of Key objects easier.
+        #
+        # @param [Array<Array(String,(String|Integer|nil))>] path An optional
+        #   list of pairs for the key's path. Each pair may include the key's
+        #   kind (String) and an id (Integer) or name (String). This is
+        #   optional.
+        # @param [String] project The project of the Key. This is optional.
+        # @param [String] namespace namespace kind of the Key. This is optional.
+        #
+        # @return [Google::Cloud::Datastore::Key]
+        #
+        # @example
+        #   require "google/cloud/datastore"
+        #
+        #   datastore = Google::Cloud::Datastore.new
+        #
+        #   datastore.read_only_transaction do |tx|
+        #     task_key = tx.key "Task", "sampleTask"
+        #   end
+        #
+        # @example The previous example is equivalent to:
+        #   require "google/cloud/datastore"
+        #
+        #   datastore = Google::Cloud::Datastore.new
+        #
+        #   datastore.read_only_transaction do |tx|
+        #     task_key = Google::Cloud::Datastore::Key.new "Task", "sampleTask"
+        #   end
+        #
+        # @example Create a key with a parent:
+        #   require "google/cloud/datastore"
+        #
+        #   datastore = Google::Cloud::Datastore.new
+        #
+        #   datastore.read_only_transaction do |tx|
+        #     key = tx.key [["TaskList", "default"], ["Task", "sampleTask"]]
+        #     results = tx.find_all key
+        #   end
+        #
+        # @example Create a key with multi-level ancestry:
+        #   require "google/cloud/datastore"
+        #
+        #   datastore = Google::Cloud::Datastore.new
+        #
+        #   datastore.read_only_transaction do |tx|
+        #     key = tx.key([
+        #       ["User", "alice"],
+        #       ["TaskList", "default"],
+        #       ["Task", "sampleTask"]
+        #     ])
+        #     results = tx.find_all key
+        #   end
+        #
+        # @example Create a key with a project and namespace:
+        #   require "google/cloud/datastore"
+        #
+        #   datastore = Google::Cloud::Datastore.new
+        #
+        #   datastore.read_only_transaction do |tx|
+        #     key = tx.key ["TaskList", "default"], ["Task", "sampleTask"],
+        #                  project: "my-todo-project",
+        #                  namespace: "example-ns"
+        #     results = tx.find_all key
+        #   end
+        #
+        def key *path, project: nil, namespace: nil
+          path = path.flatten.each_slice(2).to_a # group in pairs
+          kind, id_or_name = path.pop
+          Key.new(kind, id_or_name).tap do |k|
+            k.project = project
+            k.namespace = namespace
+            unless path.empty?
+              k.parent = key path, project: project, namespace: namespace
+            end
+          end
+        end
+
         protected
 
         ##
