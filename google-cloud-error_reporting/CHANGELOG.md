@@ -1,5 +1,9 @@
 # Release History
 
+### 0.31.3 / 2019-02-13
+
+* Fix bug (typo) in retrieving default on_error proc.
+
 ### 0.31.2 / 2019-02-09
 
 * Fix conversion code for ErrorEvent and Debugee.
