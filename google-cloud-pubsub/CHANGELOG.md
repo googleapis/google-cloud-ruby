@@ -1,5 +1,10 @@
 # Release History
 
+### 0.34.1 / 2019-02-13
+
+* Fix bug (typo) in retrieving default on_error proc.
+* Update network configuration.
+
 ### 0.34.0 / 2019-02-01
 
 * Switch to use Google::Cloud::PubSub namespace.
