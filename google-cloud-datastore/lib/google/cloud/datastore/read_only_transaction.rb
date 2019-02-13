@@ -139,9 +139,9 @@ module Google
         #
         #   datastore = Google::Cloud::Datastore.new
         #
-        #   query = datastore.query("Task").
-        #     where("done", "=", false)
         #   datastore.read_only_transaction do |tx|
+        #     query = tx.query("Task").
+        #       where("done", "=", false)
         #     tasks = tx.run query
         #   end
         #
@@ -179,12 +179,12 @@ module Google
         #   datastore = Google::Cloud::Datastore.new
         #
         #   task_list_key = datastore.key "TaskList", "default"
-        #   query = datastore.query("Task").
-        #     ancestor(task_list_key)
         #
         #   tx = datastore.transaction
         #   task_list = tx.find task_list_key
         #   if task_list
+        #     query = tx.query("Task").
+        #       ancestor(task_list_key)
         #     tasks = tx.run query
         #   end
         #   tx.commit
@@ -209,12 +209,12 @@ module Google
         #   datastore = Google::Cloud::Datastore.new
         #
         #   task_list_key = datastore.key "TaskList", "default"
-        #   query = datastore.query("Task").
-        #     ancestor(task_list_key)
         #
         #   tx = datastore.transaction
         #   task_list = tx.find task_list_key
         #   if task_list
+        #     query = tx.query("Task").
+        #       ancestor(task_list_key)
         #     tasks = tx.run query
         #   end
         #   tx.rollback
@@ -234,15 +234,6 @@ module Google
         # {ReadOnlyTransaction#start} must be called afterwards.
         def reset!
           @id = nil
-        end
-
-        protected
-
-        ##
-        # @private Raise an error unless an active connection to the service is
-        # available.
-        def ensure_service!
-          raise "Must have active connection to service" unless service
         end
 
         ##
@@ -268,6 +259,15 @@ module Google
           query = Query.new
           query.kind(*kinds) unless kinds.empty?
           query
+        end
+
+        protected
+
+        ##
+        # @private Raise an error unless an active connection to the service is
+        # available.
+        def ensure_service!
+          raise "Must have active connection to service" unless service
         end
       end
     end

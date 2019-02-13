@@ -144,4 +144,20 @@ describe Google::Cloud::Datastore::ReadOnlyTransaction, :mock_datastore do
       error.message.must_equal "Cannot rollback when not in a transaction."
     end
   end
+
+  it "query returns a Query instance" do
+    query = transaction.query "Task"
+    query.must_be_kind_of Google::Cloud::Datastore::Query
+
+    grpc = query.to_grpc
+    grpc.kind.map(&:name).must_include "Task"
+    grpc.kind.map(&:name).wont_include "User"
+
+    # Add a second kind to the query
+    query.kind "User"
+
+    grpc = query.to_grpc
+    grpc.kind.map(&:name).must_include "Task"
+    grpc.kind.map(&:name).must_include "User"
+  end
 end
