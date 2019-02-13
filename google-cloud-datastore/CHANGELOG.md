@@ -1,5 +1,12 @@
 # Release History
 
+### 1.5.1 / 2019-02-13
+
+* Add `ReadOnlyTransaction` convenience methods:
+  * Add `ReadOnlyTransaction#query`
+  * Add `ReadOnlyTransaction#gql`
+  * Add `ReadOnlyTransaction#key`
+
 ### 1.5.0 / 2019-02-01
 
 * Make use of Credentials#project_id
