@@ -1,5 +1,9 @@
 # Release History
 
+### 0.34.1 / 2019-02-13
+
+* Fix bug (typo) in retrieving default on_error proc.
+
 ### 0.34.0 / 2019-02-07
 
 * Add Trace `on_error` configuration.
