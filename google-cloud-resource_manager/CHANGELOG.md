@@ -1,5 +1,13 @@
 # Release History
 
+### 0.31.0 / 2019-02-12
+
+* Add parent resoure to `Project`:
+  * Add `Project#parent`.
+  * Add `parent` optional named argument to `Manager#create_project`.
+  * Add `Resource` class.
+  * Add `Manager#resource` convenience method.
+
 ### 0.30.3 / 2018-09-20
 
 * Update documentation.
