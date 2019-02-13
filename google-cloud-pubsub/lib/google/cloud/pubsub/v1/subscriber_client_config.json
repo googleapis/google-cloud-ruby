@@ -3,16 +3,14 @@
     "google.pubsub.v1.Subscriber": {
       "retry_codes": {
         "idempotent": [
-          "DEADLINE_EXCEEDED",
+          "ABORTED",
+          "UNAVAILABLE",
+          "UNKNOWN"
+        ],
+        "non_idempotent": [
           "UNAVAILABLE"
         ],
-        "pull": [
-          "DEADLINE_EXCEEDED",
-          "INTERNAL",
-          "RESOURCE_EXHAUSTED",
-          "UNAVAILABLE"
-        ],
-        "non_idempotent": []
+        "none": []
       },
       "retry_params": {
         "default": {
@@ -56,7 +54,7 @@
         },
         "UpdateSubscription": {
           "timeout_millis": 60000,
-          "retry_codes_name": "idempotent",
+          "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "ListSubscriptions": {
@@ -66,7 +64,7 @@
         },
         "DeleteSubscription": {
           "timeout_millis": 60000,
-          "retry_codes_name": "idempotent",
+          "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "ModifyAckDeadline": {
@@ -76,17 +74,17 @@
         },
         "Acknowledge": {
           "timeout_millis": 60000,
-          "retry_codes_name": "idempotent",
+          "retry_codes_name": "non_idempotent",
           "retry_params_name": "messaging"
         },
         "Pull": {
           "timeout_millis": 60000,
-          "retry_codes_name": "pull",
+          "retry_codes_name": "idempotent",
           "retry_params_name": "messaging"
         },
         "StreamingPull": {
           "timeout_millis": 900000,
-          "retry_codes_name": "pull",
+          "retry_codes_name": "none",
           "retry_params_name": "streaming_messaging"
         },
         "ModifyPushConfig": {
@@ -101,22 +99,22 @@
         },
         "CreateSnapshot": {
           "timeout_millis": 60000,
-          "retry_codes_name": "idempotent",
+          "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "UpdateSnapshot": {
           "timeout_millis": 60000,
-          "retry_codes_name": "idempotent",
+          "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "DeleteSnapshot": {
           "timeout_millis": 60000,
-          "retry_codes_name": "idempotent",
+          "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "Seek": {
           "timeout_millis": 60000,
-          "retry_codes_name": "non_idempotent",
+          "retry_codes_name": "idempotent",
           "retry_params_name": "default"
         },
         "SetIamPolicy": {
