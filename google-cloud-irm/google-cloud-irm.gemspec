@@ -24,7 +24,7 @@ Gem::Specification.new do |gem|
 
   gem.add_development_dependency "minitest", "~> 5.10"
   gem.add_development_dependency "redcarpet", "~> 3.0"
-  gem.add_development_dependency "rubocop", "~> 0.61.0"
+  gem.add_development_dependency "rubocop", "~> 0.64.0"
   gem.add_development_dependency "simplecov", "~> 0.9"
   gem.add_development_dependency "yard", "~> 0.9"
 end
