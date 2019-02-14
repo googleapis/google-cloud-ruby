@@ -100,5 +100,5 @@ s.replace(
 s.replace(
     'google-cloud-tasks.gemspec',
     'gem.add_development_dependency "rubocop".*$',
-    'gem.add_development_dependency "rubocop", "~> 0.61.0"'
+    'gem.add_development_dependency "rubocop", "~> 0.64.0"'
 )
