@@ -14,6 +14,11 @@ Documentation:
 
 Style/StringLiterals:
   EnforcedStyle: double_quotes
+Style/MethodCallWithArgsParentheses:
+  Enabled: true
+  EnforcedStyle: omit_parentheses
+  AllowParenthesesInMultilineCall: true
+  AllowParenthesesInCamelCaseMethod: true
 Style/MethodDefParentheses:
   EnforcedStyle: require_no_parentheses
 Metrics/CyclomaticComplexity:
