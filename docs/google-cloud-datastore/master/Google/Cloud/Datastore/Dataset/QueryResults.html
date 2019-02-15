@@ -743,7 +743,7 @@ make to load all query results. Default is no limit.</p>
 <span class='kw'>def</span> <span class='id identifier rubyid_all'>all</span> <span class='label'>request_limit:</span> <span class='kw'>nil</span>
   <span class='id identifier rubyid_request_limit'>request_limit</span> <span class='op'>=</span> <span class='id identifier rubyid_request_limit'>request_limit</span><span class='period'>.</span><span class='id identifier rubyid_to_i'>to_i</span> <span class='kw'>if</span> <span class='id identifier rubyid_request_limit'>request_limit</span>
   <span class='kw'>unless</span> <span class='id identifier rubyid_block_given?'>block_given?</span>
-    <span class='kw'>return</span> <span class='id identifier rubyid_enum_for'>enum_for</span><span class='lparen'>(</span><span class='symbol'>:all</span><span class='comma'>,</span> <span class='label'>request_limit:</span> <span class='id identifier rubyid_request_limit'>request_limit</span><span class='rparen'>)</span>
+    <span class='kw'>return</span> <span class='id identifier rubyid_enum_for'>enum_for</span> <span class='symbol'>:all</span><span class='comma'>,</span> <span class='label'>request_limit:</span> <span class='id identifier rubyid_request_limit'>request_limit</span>
   <span class='kw'>end</span>
   <span class='id identifier rubyid_results'>results</span> <span class='op'>=</span> <span class='kw'>self</span>
   <span class='id identifier rubyid_loop'>loop</span> <span class='kw'>do</span>
@@ -949,7 +949,7 @@ and cursor.</p>
 <span class='kw'>def</span> <span class='id identifier rubyid_all_with_cursor'>all_with_cursor</span> <span class='label'>request_limit:</span> <span class='kw'>nil</span>
   <span class='id identifier rubyid_request_limit'>request_limit</span> <span class='op'>=</span> <span class='id identifier rubyid_request_limit'>request_limit</span><span class='period'>.</span><span class='id identifier rubyid_to_i'>to_i</span> <span class='kw'>if</span> <span class='id identifier rubyid_request_limit'>request_limit</span>
   <span class='kw'>unless</span> <span class='id identifier rubyid_block_given?'>block_given?</span>
-    <span class='kw'>return</span> <span class='id identifier rubyid_enum_for'>enum_for</span><span class='lparen'>(</span><span class='symbol'>:all_with_cursor</span><span class='comma'>,</span> <span class='label'>request_limit:</span> <span class='id identifier rubyid_request_limit'>request_limit</span><span class='rparen'>)</span>
+    <span class='kw'>return</span> <span class='id identifier rubyid_enum_for'>enum_for</span> <span class='symbol'>:all_with_cursor</span><span class='comma'>,</span> <span class='label'>request_limit:</span> <span class='id identifier rubyid_request_limit'>request_limit</span>
   <span class='kw'>end</span>
   <span class='id identifier rubyid_results'>results</span> <span class='op'>=</span> <span class='kw'>self</span>
 
@@ -1178,7 +1178,7 @@ and cursor.</p>
       <pre class="code"><span class="info file"># File 'lib/google/cloud/datastore/dataset/query_results.rb', line 213</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_each_with_cursor'>each_with_cursor</span>
-  <span class='kw'>return</span> <span class='id identifier rubyid_enum_for'>enum_for</span><span class='lparen'>(</span><span class='symbol'>:each_with_cursor</span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='id identifier rubyid_block_given?'>block_given?</span>
+  <span class='kw'>return</span> <span class='id identifier rubyid_enum_for'>enum_for</span> <span class='symbol'>:each_with_cursor</span> <span class='kw'>unless</span> <span class='id identifier rubyid_block_given?'>block_given?</span>
   <span class='id identifier rubyid_zip'>zip</span><span class='lparen'>(</span><span class='id identifier rubyid_cursors'>cursors</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_r'>r</span><span class='comma'>,</span> <span class='id identifier rubyid_c'>c</span><span class='op'>|</span> <span class='kw'>yield</span> <span class='lbracket'>[</span><span class='id identifier rubyid_r'>r</span><span class='comma'>,</span> <span class='id identifier rubyid_c'>c</span><span class='rbracket'>]</span> <span class='rbrace'>}</span>
 <span class='kw'>end</span></pre>
     </td>
