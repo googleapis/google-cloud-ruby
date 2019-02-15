@@ -577,7 +577,7 @@ make to load all tables. Default is no limit.</p>
 <span class='kw'>def</span> <span class='id identifier rubyid_all'>all</span> <span class='label'>request_limit:</span> <span class='kw'>nil</span>
   <span class='id identifier rubyid_request_limit'>request_limit</span> <span class='op'>=</span> <span class='id identifier rubyid_request_limit'>request_limit</span><span class='period'>.</span><span class='id identifier rubyid_to_i'>to_i</span> <span class='kw'>if</span> <span class='id identifier rubyid_request_limit'>request_limit</span>
   <span class='kw'>unless</span> <span class='id identifier rubyid_block_given?'>block_given?</span>
-    <span class='kw'>return</span> <span class='id identifier rubyid_enum_for'>enum_for</span><span class='lparen'>(</span><span class='symbol'>:all</span><span class='comma'>,</span> <span class='label'>request_limit:</span> <span class='id identifier rubyid_request_limit'>request_limit</span><span class='rparen'>)</span>
+    <span class='kw'>return</span> <span class='id identifier rubyid_enum_for'>enum_for</span> <span class='symbol'>:all</span><span class='comma'>,</span> <span class='label'>request_limit:</span> <span class='id identifier rubyid_request_limit'>request_limit</span>
   <span class='kw'>end</span>
   <span class='id identifier rubyid_results'>results</span> <span class='op'>=</span> <span class='kw'>self</span>
   <span class='id identifier rubyid_loop'>loop</span> <span class='kw'>do</span>

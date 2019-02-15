@@ -739,15 +739,15 @@ js:
       <pre class="lines">
 
 
-307
-308
-309
-310
-311
-312</pre>
+302
+303
+304
+305
+306
+307</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/job.rb', line 307</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/job.rb', line 302</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_cancel'>cancel</span>
   <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
@@ -796,12 +796,12 @@ js:
       <pre class="lines">
 
 
-210
-211
-212</pre>
+205
+206
+207</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/job.rb', line 210</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/job.rb', line 205</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_configuration'>configuration</span>
   <span class='const'>JSON</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span> <span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_configuration'>configuration</span><span class='period'>.</span><span class='id identifier rubyid_to_json'>to_json</span>
@@ -853,19 +853,15 @@ js:
       <pre class="lines">
 
 
-174
 175
 176
-177
-178</pre>
+177</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/job.rb', line 174</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/job.rb', line 175</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_created_at'>created_at</span>
-  <span class='op'>::</span><span class='const'>Time</span><span class='period'>.</span><span class='id identifier rubyid_at'>at</span><span class='lparen'>(</span><span class='const'>Integer</span><span class='lparen'>(</span><span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_statistics'>statistics</span><span class='period'>.</span><span class='id identifier rubyid_creation_time'>creation_time</span><span class='rparen'>)</span> <span class='op'>/</span> <span class='float'>1000.0</span><span class='rparen'>)</span>
-<span class='kw'>rescue</span> <span class='const'>StandardError</span>
-  <span class='kw'>nil</span>
+  <span class='const'>Convert</span><span class='period'>.</span><span class='id identifier rubyid_millis_to_time'>millis_to_time</span> <span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_statistics'>statistics</span><span class='period'>.</span><span class='id identifier rubyid_creation_time'>creation_time</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -917,13 +913,13 @@ job was successful.</p>
       <pre class="lines">
 
 
-154
 155
 156
-157</pre>
+157
+158</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/job.rb', line 154</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/job.rb', line 155</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_done?'>done?</span>
   <span class='kw'>return</span> <span class='kw'>false</span> <span class='kw'>if</span> <span class='id identifier rubyid_state'>state</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
@@ -977,19 +973,15 @@ This field is present when the job&#39;s state is <code>DONE</code>.</p>
       <pre class="lines">
 
 
-199
-200
-201
-202
-203</pre>
+196
+197
+198</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/job.rb', line 199</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/job.rb', line 196</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_ended_at'>ended_at</span>
-  <span class='op'>::</span><span class='const'>Time</span><span class='period'>.</span><span class='id identifier rubyid_at'>at</span><span class='lparen'>(</span><span class='const'>Integer</span><span class='lparen'>(</span><span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_statistics'>statistics</span><span class='period'>.</span><span class='id identifier rubyid_end_time'>end_time</span><span class='rparen'>)</span> <span class='op'>/</span> <span class='float'>1000.0</span><span class='rparen'>)</span>
-<span class='kw'>rescue</span> <span class='const'>StandardError</span>
-  <span class='kw'>nil</span>
+  <span class='const'>Convert</span><span class='period'>.</span><span class='id identifier rubyid_millis_to_time'>millis_to_time</span> <span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_statistics'>statistics</span><span class='period'>.</span><span class='id identifier rubyid_end_time'>end_time</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -1052,12 +1044,12 @@ keys:</p>
       <pre class="lines">
 
 
-253
-254
-255</pre>
+248
+249
+250</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/job.rb', line 253</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/job.rb', line 248</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_error'>error</span>
   <span class='id identifier rubyid_status'>status</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>errorResult</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span>
@@ -1116,12 +1108,12 @@ of hash objects. See <span class='object_link'><a href="#error-instance_method" 
       <pre class="lines">
 
 
-269
-270
-271</pre>
+264
+265
+266</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/job.rb', line 269</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/job.rb', line 264</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_errors'>errors</span>
   <span class='const'>Array</span> <span class='id identifier rubyid_status'>status</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>errors</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span>
@@ -1174,12 +1166,12 @@ object.</p>
       <pre class="lines">
 
 
-165
 166
-167</pre>
+167
+168</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/job.rb', line 165</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/job.rb', line 166</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_failed?'>failed?</span>
   <span class='op'>!</span><span class='id identifier rubyid_error'>error</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
@@ -1233,12 +1225,12 @@ characters.</p>
       <pre class="lines">
 
 
-80
 81
-82</pre>
+82
+83</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/job.rb', line 80</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/job.rb', line 81</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_job_id'>job_id</span>
   <span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_job_reference'>job_reference</span><span class='period'>.</span><span class='id identifier rubyid_job_id'>job_id</span>
@@ -1296,14 +1288,14 @@ the entire hash.</p>
       <pre class="lines">
 
 
-286
-287
-288
-289
-290</pre>
+281
+282
+283
+284
+285</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/job.rb', line 286</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/job.rb', line 281</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_labels'>labels</span>
   <span class='id identifier rubyid_m'>m</span> <span class='op'>=</span> <span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_configuration'>configuration</span><span class='period'>.</span><span class='id identifier rubyid_labels'>labels</span>
@@ -1358,12 +1350,12 @@ the entire hash.</p>
       <pre class="lines">
 
 
-100
 101
-102</pre>
+102
+103</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/job.rb', line 100</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/job.rb', line 101</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_location'>location</span>
   <span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_job_reference'>job_reference</span><span class='period'>.</span><span class='id identifier rubyid_location'>location</span>
@@ -1415,13 +1407,13 @@ the entire hash.</p>
       <pre class="lines">
 
 
-141
 142
 143
-144</pre>
+144
+145</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/job.rb', line 141</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/job.rb', line 142</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_pending?'>pending?</span>
   <span class='kw'>return</span> <span class='kw'>false</span> <span class='kw'>if</span> <span class='id identifier rubyid_state'>state</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
@@ -1474,12 +1466,12 @@ the entire hash.</p>
       <pre class="lines">
 
 
-89
 90
-91</pre>
+91
+92</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/job.rb', line 89</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/job.rb', line 90</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_project_id'>project_id</span>
   <span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_job_reference'>job_reference</span><span class='period'>.</span><span class='id identifier rubyid_project_id'>project_id</span>
@@ -1537,14 +1529,14 @@ the entire hash.</p>
       <pre class="lines">
 
 
-353
-354
-355
-356
-357</pre>
+348
+349
+350
+351
+352</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/job.rb', line 353</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/job.rb', line 348</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_reload!'>reload!</span>
   <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
@@ -1599,14 +1591,14 @@ the entire hash.</p>
       <pre class="lines">
 
 
-330
-331
-332
-333
-334</pre>
+325
+326
+327
+328
+329</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/job.rb', line 330</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/job.rb', line 325</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_rerun!'>rerun!</span>
   <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
@@ -1660,13 +1652,13 @@ the entire hash.</p>
       <pre class="lines">
 
 
-131
 132
 133
-134</pre>
+134
+135</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/job.rb', line 131</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/job.rb', line 132</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_running?'>running?</span>
   <span class='kw'>return</span> <span class='kw'>false</span> <span class='kw'>if</span> <span class='id identifier rubyid_state'>state</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
@@ -1721,19 +1713,15 @@ to either <code>RUNNING</code> or <code>DONE</code>.</p>
       <pre class="lines">
 
 
+186
 187
-188
-189
-190
-191</pre>
+188</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/job.rb', line 187</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/job.rb', line 186</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_started_at'>started_at</span>
-  <span class='op'>::</span><span class='const'>Time</span><span class='period'>.</span><span class='id identifier rubyid_at'>at</span><span class='lparen'>(</span><span class='const'>Integer</span><span class='lparen'>(</span><span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_statistics'>statistics</span><span class='period'>.</span><span class='id identifier rubyid_start_time'>start_time</span><span class='rparen'>)</span> <span class='op'>/</span> <span class='float'>1000.0</span><span class='rparen'>)</span>
-<span class='kw'>rescue</span> <span class='const'>StandardError</span>
-  <span class='kw'>nil</span>
+  <span class='const'>Convert</span><span class='period'>.</span><span class='id identifier rubyid_millis_to_time'>millis_to_time</span> <span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_statistics'>statistics</span><span class='period'>.</span><span class='id identifier rubyid_start_time'>start_time</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -1785,13 +1773,13 @@ occurred or if the job was successful.</p>
       <pre class="lines">
 
 
-121
 122
 123
-124</pre>
+124
+125</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/job.rb', line 121</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/job.rb', line 122</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_state'>state</span>
   <span class='kw'>return</span> <span class='kw'>nil</span> <span class='kw'>if</span> <span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_status'>status</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
@@ -1855,12 +1843,12 @@ occurred or if the job was successful.</p>
       <pre class="lines">
 
 
-223
-224
-225</pre>
+218
+219
+220</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/job.rb', line 223</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/job.rb', line 218</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_statistics'>statistics</span>
   <span class='const'>JSON</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span> <span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_statistics'>statistics</span><span class='period'>.</span><span class='id identifier rubyid_to_json'>to_json</span>
@@ -1913,12 +1901,12 @@ also exposed by <span class='object_link'><a href="#state-instance_method" title
       <pre class="lines">
 
 
-234
-235
-236</pre>
+229
+230
+231</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/job.rb', line 234</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/job.rb', line 229</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_status'>status</span>
   <span class='const'>JSON</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span> <span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_status'>status</span><span class='period'>.</span><span class='id identifier rubyid_to_json'>to_json</span>
@@ -1970,12 +1958,12 @@ also exposed by <span class='object_link'><a href="#state-instance_method" title
       <pre class="lines">
 
 
-109
 110
-111</pre>
+111
+112</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/job.rb', line 109</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/job.rb', line 110</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_user_email'>user_email</span>
   <span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_user_email'>user_email</span>
@@ -2029,21 +2017,21 @@ seconds.</p>
       <pre class="lines">
 
 
+372
+373
+374
+375
+376
 377
 378
 379
 380
 381
 382
-383
-384
-385
-386
-387
-388</pre>
+383</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/job.rb', line 377</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/job.rb', line 372</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_wait_until_done!'>wait_until_done!</span>
   <span class='id identifier rubyid_backoff'>backoff</span> <span class='op'>=</span> <span class='id identifier rubyid_lambda'>lambda</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_retries'>retries</span><span class='op'>|</span>
