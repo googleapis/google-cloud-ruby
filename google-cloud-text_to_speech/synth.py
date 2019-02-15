@@ -37,6 +37,14 @@ s.copy(v1_library / '.gitignore')
 s.copy(v1_library / '.yardopts')
 s.copy(v1_library / 'google-cloud-text_to_speech.gemspec', merge=ruby.merge_gemspec)
 
+v1beta1_library = gapic.ruby_library(
+    'texttospeech', 'v1beta1', artman_output_name='google-cloud-ruby/google-cloud-texttospeech',
+)
+s.copy(v1beta1_library / 'lib/google/cloud/text_to_speech/v1beta1')
+s.copy(v1beta1_library / 'lib/google/cloud/text_to_speech/v1beta1.rb')
+s.copy(v1beta1_library / 'lib/google/cloud/texttospeech/v1beta1')
+s.copy(v1beta1_library / 'test/google/cloud/text_to_speech/v1beta1')
+
 # https://github.com/googleapis/gapic-generator/issues/2243
 s.replace(
     'lib/google/cloud/text_to_speech/*/*_client.rb',
