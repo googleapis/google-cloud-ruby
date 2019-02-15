@@ -21,6 +21,7 @@ module Google
       module V1alpha2
         class Credentials < Google::Auth::Credentials
           SCOPE = [
+            "https://www.googleapis.com/auth/cloud-platform"
           ].freeze
           PATH_ENV_VARS = %w(IRM_CREDENTIALS
                              IRM_KEYFILE

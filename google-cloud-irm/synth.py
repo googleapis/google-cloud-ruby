@@ -27,7 +27,6 @@ gapic = gcp.GAPICGenerator()
 v1alpha2 = gapic.ruby_library(
     'irm', 'v1alpha2',
     artman_output_name='google-cloud-ruby/google-cloud-irm',
-    private=True,
     config_path='artman_irm_v1alpha2.yaml'
 )
 s.copy(v1alpha2 / 'acceptance')
