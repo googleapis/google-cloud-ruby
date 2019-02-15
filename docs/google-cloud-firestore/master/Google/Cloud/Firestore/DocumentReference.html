@@ -634,10 +634,10 @@ the collection, relative to the document.</p>
 <span class='kw'>def</span> <span class='id identifier rubyid_cols'>cols</span>
   <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
 
-  <span class='kw'>return</span> <span class='id identifier rubyid_enum_for'>enum_for</span><span class='lparen'>(</span><span class='symbol'>:cols</span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='id identifier rubyid_block_given?'>block_given?</span>
+  <span class='kw'>return</span> <span class='id identifier rubyid_enum_for'>enum_for</span> <span class='symbol'>:cols</span> <span class='kw'>unless</span> <span class='id identifier rubyid_block_given?'>block_given?</span>
 
   <span class='id identifier rubyid_collection_ids'>collection_ids</span> <span class='op'>=</span> <span class='id identifier rubyid_service'>service</span><span class='period'>.</span><span class='id identifier rubyid_list_collections'>list_collections</span> <span class='id identifier rubyid_path'>path</span>
-  <span class='id identifier rubyid_collection_ids'>collection_ids</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_collection_id'>collection_id</span><span class='op'>|</span> <span class='kw'>yield</span> <span class='id identifier rubyid_col'>col</span><span class='lparen'>(</span><span class='id identifier rubyid_collection_id'>collection_id</span><span class='rparen'>)</span> <span class='rbrace'>}</span>
+  <span class='id identifier rubyid_collection_ids'>collection_ids</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_collection_id'>collection_id</span><span class='op'>|</span> <span class='kw'>yield</span> <span class='id identifier rubyid_col'>col</span> <span class='id identifier rubyid_collection_id'>collection_id</span> <span class='rbrace'>}</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
