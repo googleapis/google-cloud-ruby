@@ -597,7 +597,7 @@ module Google
         # Creates a new transaction object every time.
         def create_transaction
           tx_grpc = service.begin_transaction path
-          Transaction.from_grpc(tx_grpc, self)
+          Transaction.from_grpc tx_grpc, self
         end
 
         ##

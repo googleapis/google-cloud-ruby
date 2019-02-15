@@ -113,7 +113,7 @@ module Google
 
           verify_sorted_types! sorted_types, types.count
 
-          @grpc_fields = Array.new(types.count) do |index|
+          @grpc_fields = Array.new types.count do |index|
             sorted_type = sorted_types.assoc index
             if sorted_type
               to_grpc_field sorted_type.last

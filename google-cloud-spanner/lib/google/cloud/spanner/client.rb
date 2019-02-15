@@ -1098,7 +1098,7 @@ module Google
                               timestamp: (timestamp || read_timestamp),
                               staleness: (staleness || exact_staleness)
               Thread.current[:transaction_id] = snp_grpc.id
-              snp = Snapshot.from_grpc(snp_grpc, session)
+              snp = Snapshot.from_grpc snp_grpc, session
               yield snp if block_given?
             ensure
               Thread.current[:transaction_id] = nil
@@ -1284,7 +1284,7 @@ module Google
               project_id, instance_id, database_id
             ),
             labels: @session_labels
-          Session.from_grpc(grpc, @project.service)
+          Session.from_grpc grpc, @project.service
         end
 
         # @private
@@ -1393,7 +1393,7 @@ module Google
             return seconds + (nanos / 1000000000.0)
           end
           # No metadata? Try the inner error
-          delay_from_aborted(err.cause)
+          delay_from_aborted err.cause
         rescue StandardError
           # Any error indicates the backoff should be handled elsewhere
           nil

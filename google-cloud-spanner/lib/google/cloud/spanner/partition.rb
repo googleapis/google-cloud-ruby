@@ -88,8 +88,8 @@ module Google
         #
         def to_h
           {}.tap do |h|
-            h[:execute] = Base64.strict_encode64(@execute.to_proto) if @execute
-            h[:read]    = Base64.strict_encode64(@read.to_proto)    if @read
+            h[:execute] = Base64.strict_encode64 @execute.to_proto if @execute
+            h[:read]    = Base64.strict_encode64 @read.to_proto    if @read
           end
         end
 
