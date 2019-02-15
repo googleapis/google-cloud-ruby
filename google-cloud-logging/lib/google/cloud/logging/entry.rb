@@ -449,11 +449,11 @@ module Google
           return new if grpc.nil?
           new.tap do |e|
             e.log_name = grpc.log_name
-            e.timestamp = extract_timestamp(grpc)
+            e.timestamp = extract_timestamp grpc
             e.severity = grpc.severity
             e.insert_id = grpc.insert_id
-            e.labels = Convert.map_to_hash(grpc.labels)
-            e.payload = extract_payload(grpc)
+            e.labels = Convert.map_to_hash grpc.labels
+            e.payload = extract_payload grpc
             e.instance_variable_set :@resource,
                                     Resource.from_grpc(grpc.resource)
             e.instance_variable_set :@http_request,

@@ -102,10 +102,10 @@ module Google
         def cols
           ensure_service!
 
-          return enum_for(:cols) unless block_given?
+          return enum_for :cols unless block_given?
 
           collection_ids = service.list_collections "#{path}/documents"
-          collection_ids.each { |collection_id| yield col(collection_id) }
+          collection_ids.each { |collection_id| yield col collection_id }
         end
         alias collections cols
         alias list_collections cols
@@ -217,7 +217,7 @@ module Google
           ensure_service!
 
           unless block_given?
-            return enum_for(:get_all, docs, field_mask: field_mask)
+            return enum_for :get_all, docs, field_mask: field_mask
           end
 
           doc_paths = Array(docs).flatten.map do |doc_path|
@@ -235,7 +235,7 @@ module Google
           results = service.get_documents doc_paths, mask: mask
           results.each do |result|
             next if result.result.nil?
-            yield DocumentSnapshot.from_batch_result(result, self)
+            yield DocumentSnapshot.from_batch_result result, self
           end
         end
         alias get_docs get_all

@@ -333,7 +333,7 @@ module Google
           returned_keys = commit_res.mutation_results.map(&:key)
           returned_keys.each_with_index do |key, index|
             next if entities[index].nil?
-            entities[index].key = Key.from_grpc(key) unless key.nil?
+            entities[index].key = Key.from_grpc key unless key.nil?
           end
           # Make sure all entity keys are frozen so all show as persisted
           entities.each { |e| e.key.freeze unless e.persisted? }

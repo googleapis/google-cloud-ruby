@@ -51,7 +51,7 @@ module Google
 
           def self.md5_for local_file
             if local_file.respond_to? :path
-              ::File.open(Pathname(local_file).to_path, "rb") do |f|
+              ::File.open Pathname(local_file).to_path, "rb" do |f|
                 ::Digest::MD5.file(f).base64digest
               end
             else # StringIO
@@ -64,7 +64,7 @@ module Google
 
           def self.crc32c_for local_file
             if local_file.respond_to? :path
-              ::File.open(Pathname(local_file).to_path, "rb") do |f|
+              ::File.open Pathname(local_file).to_path, "rb" do |f|
                 ::Digest::CRC32c.file(f).base64digest
               end
             else # StringIO

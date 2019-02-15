@@ -138,7 +138,7 @@ module Google
         #
         def labels= new_labels
           raise ArgumentError, "Value must be a Hash" if new_labels.nil?
-          labels_map = Google::Protobuf::Map.new(:string, :string)
+          labels_map = Google::Protobuf::Map.new :string, :string
           Hash(new_labels).each { |k, v| labels_map[String(k)] = String(v) }
           update_grpc = @grpc.dup
           update_grpc.labels = labels_map

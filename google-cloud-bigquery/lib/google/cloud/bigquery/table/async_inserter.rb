@@ -231,7 +231,8 @@ module Google
                 time_since_first_publish = ::Time.now - @batch_created_at
                 if time_since_first_publish < @interval
                   # still waiting for the interval to insert the batch...
-                  @cond.wait(@interval - time_since_first_publish)
+                  timeout = @interval - time_since_first_publish
+                  @cond.wait timeout
                 else
                   # interval met, insert the batch...
                   push_batch_request!
@@ -247,7 +248,7 @@ module Google
             orig_rows = @batch.rows
             json_rows = @batch.json_rows
             insert_ids = @batch.insert_ids
-            Concurrent::Future.new(executor: @thread_pool) do
+            Concurrent::Future.new executor: @thread_pool do
               begin
                 raise ArgumentError, "No rows provided" if json_rows.empty?
                 options = { skip_invalid:   @skip_invalid,

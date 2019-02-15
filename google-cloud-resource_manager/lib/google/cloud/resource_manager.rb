@@ -69,7 +69,7 @@ module Google
         retries ||= configure.retries
         timeout ||= configure.timeout
         credentials ||= keyfile
-        credentials ||= default_credentials(scope: scope)
+        credentials ||= default_credentials scope: scope
         unless credentials.is_a? Google::Auth::Credentials
           credentials = ResourceManager::Credentials.new credentials,
                                                          scope: scope

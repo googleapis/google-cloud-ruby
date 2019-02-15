@@ -20,6 +20,7 @@ require "google/cloud/bigquery/table"
 require "google/cloud/bigquery/external"
 require "google/cloud/bigquery/dataset/list"
 require "google/cloud/bigquery/dataset/access"
+require "google/cloud/bigquery/convert"
 require "google/apis/bigquery_v2"
 
 module Google
@@ -237,11 +238,7 @@ module Google
         def created_at
           return nil if reference?
           ensure_full_data!
-          begin
-            ::Time.at(Integer(@gapi.creation_time) / 1000.0)
-          rescue StandardError
-            nil
-          end
+          Convert.millis_to_time @gapi.creation_time
         end
 
         ##
@@ -255,11 +252,7 @@ module Google
         def modified_at
           return nil if reference?
           ensure_full_data!
-          begin
-            ::Time.at(Integer(@gapi.last_modified_time) / 1000.0)
-          rescue StandardError
-            nil
-          end
+          Convert.millis_to_time @gapi.last_modified_time
         end
 
         ##
@@ -2261,7 +2254,7 @@ module Google
           return [] if array_or_str.nil?
           Array(array_or_str).map do |uri_or_code|
             resource = Google::Apis::BigqueryV2::UserDefinedFunctionResource.new
-            if uri_or_code.start_with?("gs://")
+            if uri_or_code.start_with? "gs://"
               resource.resource_uri = uri_or_code
             else
               resource.inline_code = uri_or_code

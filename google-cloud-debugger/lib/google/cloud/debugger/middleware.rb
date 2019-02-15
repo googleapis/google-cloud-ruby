@@ -123,7 +123,7 @@ module Google
               Google::Cloud::Debugger::RequestQuotaManager.new
           end
 
-          Middleware.deferred_start(@debugger)
+          Middleware.deferred_start @debugger
         end
 
         ##

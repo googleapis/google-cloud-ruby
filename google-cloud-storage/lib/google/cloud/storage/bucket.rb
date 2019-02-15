@@ -361,7 +361,7 @@ module Google
         # @param [Symbol, String] new_storage_class Storage class of the bucket.
         #
         def storage_class= new_storage_class
-          @gapi.storage_class = storage_class_for(new_storage_class)
+          @gapi.storage_class = storage_class_for new_storage_class
           patch_gapi! :storage_class
         end
 

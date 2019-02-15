@@ -298,7 +298,7 @@ module Google
         #   tasks = datastore.run query
         #
         def limit num
-          @grpc.limit = Google::Protobuf::Int32Value.new(value: num)
+          @grpc.limit = Google::Protobuf::Int32Value.new value: num
 
           self
         end

@@ -169,17 +169,17 @@ module Google
         # @private Compute the total size of all the evaluated variables in
         # this breakpoint.
         def calculate_total_size
-          result = evaluated_expressions.inject(0) do |sum, exp|
+          result = evaluated_expressions.inject 0 do |sum, exp|
             sum + exp.payload_size
           end
 
           stack_frames.each do |stack_frame|
-            result = stack_frame.locals.inject(result) do |sum, local|
+            result = stack_frame.locals.inject result do |sum, local|
               sum + local.payload_size
             end
           end
 
-          result = variable_table.variables.inject(result) do |sum, var|
+          result = variable_table.variables.inject result do |sum, var|
             sum + var.payload_size
           end
 

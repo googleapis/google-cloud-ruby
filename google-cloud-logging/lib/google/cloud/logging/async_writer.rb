@@ -382,7 +382,7 @@ module Google
                 @cond.wait
               else
                 # still waiting for the interval to publish the batch...
-                @cond.wait(@batch.publish_wait)
+                @cond.wait @batch.publish_wait
               end
             end
           end

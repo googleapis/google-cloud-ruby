@@ -110,7 +110,7 @@ module Google
         #
         def formatted_string
           escaped_fields = @fields.map { |field| escape_field_for_path field }
-          escaped_fields.join(".")
+          escaped_fields.join "."
         end
 
         ##
@@ -175,16 +175,17 @@ module Google
           end
 
           if dotted_string.is_a? Array
-            return @memoized_field_paths[dotted_string] = new(dotted_string)
+            @memoized_field_paths[dotted_string] = new dotted_string
+            return @memoized_field_paths[dotted_string]
           end
 
-          fields = String(dotted_string).split(".")
+          fields = String(dotted_string).split "."
 
           if fields.grep(INVALID_FIELD_PATH_CHARS).any?
             raise ArgumentError, "invalid character, use FieldPath instead"
           end
 
-          @memoized_field_paths[dotted_string] = new(fields)
+          @memoized_field_paths[dotted_string] = new fields
         end
 
         ##

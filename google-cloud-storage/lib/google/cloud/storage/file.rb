@@ -443,7 +443,7 @@ module Google
         # @param [Symbol, String] storage_class Storage class of the file.
         #
         def storage_class= storage_class
-          @gapi.storage_class = storage_class_for(storage_class)
+          @gapi.storage_class = storage_class_for storage_class
           update_gapi! :storage_class
         end
 
@@ -940,7 +940,7 @@ module Google
                                   key: encryption_key, range: range,
                                   user_project: user_project
           # FIX: downloading with encryption key will return nil
-          file ||= ::File.new(path)
+          file ||= ::File.new path
           verify = :none if range
           verify_file! file, verify
           if !skip_decompress &&
@@ -1737,11 +1737,11 @@ module Google
         #   system or a StringIO instance.
         def gzip_decompress local_file
           if local_file.respond_to? :path
-            gz = ::File.open(Pathname(local_file).to_path, "rb") do |f|
-              Zlib::GzipReader.new(StringIO.new(f.read))
+            gz = ::File.open Pathname(local_file).to_path, "rb" do |f|
+              Zlib::GzipReader.new StringIO.new(f.read)
             end
             uncompressed_string = gz.read
-            ::File.open(Pathname(local_file).to_path, "w") do |f|
+            ::File.open Pathname(local_file).to_path, "w" do |f|
               f.write uncompressed_string
               f
             end

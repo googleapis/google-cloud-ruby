@@ -34,7 +34,7 @@ module Google
         attr_reader :error_event
 
         def initialize message, error_event = nil
-          super(message)
+          super message
           @error_event = error_event
         end
       end
@@ -53,7 +53,7 @@ module Google
         attr_reader :error_event
 
         def initialize message, error_event = nil
-          super(message)
+          super message
           @error_event = error_event
         end
       end
@@ -91,7 +91,7 @@ module Google
         # Add the error event to the queue. This will raise if there are no
         # resources available to make the API call.
         def report error_event
-          Concurrent::Promises.future_on(@thread_pool, error_event) do |error|
+          Concurrent::Promises.future_on @thread_pool, error_event do |error|
             report_sync error
           end
         rescue Concurrent::RejectedExecutionError => e

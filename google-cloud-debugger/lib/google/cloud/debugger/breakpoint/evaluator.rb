@@ -823,7 +823,7 @@ module Google
           #
           def readonly_eval_expression binding, expression
             compilation_result = validate_compiled_expression expression
-            return compilation_result if compilation_result.is_a?(Exception)
+            return compilation_result if compilation_result.is_a? Exception
 
             readonly_eval_expression_exec binding, expression
           rescue StandardError => e
@@ -1080,7 +1080,7 @@ module Google
 
         def initialize msg = nil, mutation_cause = UNKNOWN_CAUSE
           @mutation_cause = mutation_cause
-          super(msg)
+          super msg
         end
 
         def inspect

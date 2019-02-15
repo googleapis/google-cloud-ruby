@@ -409,7 +409,7 @@ module Google
               project_id, instance_id, database_id
             ),
             labels: @session_labels
-          Session.from_grpc(grpc, @project.service)
+          Session.from_grpc grpc, @project.service
         end
 
         ##

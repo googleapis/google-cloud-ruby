@@ -93,7 +93,7 @@ module Google
             raise SignedUrlUnavailable unless i && s
 
             policy_str = p.to_json
-            policy = Base64.strict_encode64(policy_str).delete("\n")
+            policy = Base64.strict_encode64(policy_str).delete "\n"
 
             signature = generate_signature s, policy
 
@@ -121,7 +121,7 @@ module Google
               signing_key = OpenSSL::PKey::RSA.new signing_key
             end
             signature = signing_key.sign OpenSSL::Digest::SHA256.new, secret
-            Base64.strict_encode64(signature).delete("\n")
+            Base64.strict_encode64(signature).delete "\n"
           end
 
           def generate_signed_url issuer, signed_string, expires, query

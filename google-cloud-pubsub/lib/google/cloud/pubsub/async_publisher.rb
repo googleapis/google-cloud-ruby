@@ -217,7 +217,8 @@ module Google
                 @cond.wait
               else
                 # still waiting for the interval to publish the batch...
-                @cond.wait(@interval - time_since_first_publish)
+                timeout = @interval - time_since_first_publish
+                @cond.wait timeout
               end
             end
           end
@@ -234,21 +235,21 @@ module Google
         def publish_batch_async topic_name, batch
           return unless @publish_thread_pool.running?
 
-          Concurrent::Future.new(executor: @publish_thread_pool) do
+          Concurrent::Future.new executor: @publish_thread_pool do
             begin
               grpc = @service.publish topic_name, batch.messages
-              batch.items.zip(Array(grpc.message_ids)) do |item, id|
+              batch.items.zip Array(grpc.message_ids) do |item, id|
                 next unless item.callback
 
                 item.msg.message_id = id
-                publish_result = PublishResult.from_grpc(item.msg)
+                publish_result = PublishResult.from_grpc item.msg
                 execute_callback_async item.callback, publish_result
               end
             rescue StandardError => e
               batch.items.each do |item|
                 next unless item.callback
 
-                publish_result = PublishResult.from_error(item.msg, e)
+                publish_result = PublishResult.from_error item.msg, e
                 execute_callback_async item.callback, publish_result
               end
             end
@@ -258,7 +259,7 @@ module Google
         def execute_callback_async callback, publish_result
           return unless @callback_thread_pool.running?
 
-          Concurrent::Future.new(executor: @callback_thread_pool) do
+          Concurrent::Future.new executor: @callback_thread_pool do
             callback.call publish_result
           end.execute
         end

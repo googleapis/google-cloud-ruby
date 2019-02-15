@@ -131,7 +131,7 @@ module Google
           ensure_service!
 
           unless block_given?
-            return enum_for(:get_all, docs, field_mask: field_mask)
+            return enum_for :get_all, docs, field_mask: field_mask
           end
 
           doc_paths = Array(docs).flatten.map do |doc_path|
@@ -151,7 +151,7 @@ module Google
           results.each do |result|
             extract_transaction_from_result! result
             next if result.result.nil?
-            yield DocumentSnapshot.from_batch_result(result, client)
+            yield DocumentSnapshot.from_batch_result result, client
           end
         end
         alias get_docs get_all
@@ -251,20 +251,20 @@ module Google
 
           obj = coalesce_get_argument obj
 
-          if obj.is_a?(DocumentReference)
+          if obj.is_a? DocumentReference
             doc = get_all([obj]).first
             yield doc if block_given?
             return doc
           end
 
-          return enum_for(:get, obj) unless block_given?
+          return enum_for :get, obj unless block_given?
 
           results = service.run_query obj.parent_path, obj.query,
                                       transaction: transaction_or_create
           results.each do |result|
             extract_transaction_from_result! result
             next if result.document.nil?
-            yield DocumentSnapshot.from_query_result(result, client)
+            yield DocumentSnapshot.from_query_result result, client
           end
         end
         alias run get

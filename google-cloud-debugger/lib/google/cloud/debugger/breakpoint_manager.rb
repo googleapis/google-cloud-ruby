@@ -132,7 +132,7 @@ module Google
               !new_breakpoints.empty? ||
               (before_breakpoints_count != after_breakpoints_acount)
 
-            on_breakpoints_change.call(@active_breakpoints) if
+            on_breakpoints_change.call @active_breakpoints if
               on_breakpoints_change.respond_to?(:call) && breakpoints_updated
           end
         end

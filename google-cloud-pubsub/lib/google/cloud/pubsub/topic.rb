@@ -422,7 +422,7 @@ module Google
         def publish_async data = nil, attributes = {}, &block
           ensure_service!
 
-          @async_publisher ||= AsyncPublisher.new(name, service, @async_opts)
+          @async_publisher ||= AsyncPublisher.new name, service, @async_opts
           @async_publisher.publish data, attributes, &block
         end
 

@@ -113,7 +113,7 @@ module Google
           def all request_limit: nil
             request_limit = request_limit.to_i if request_limit
             unless block_given?
-              return enum_for(:all, request_limit: request_limit)
+              return enum_for :all, request_limit: request_limit
             end
             results = self
             loop do
@@ -131,7 +131,7 @@ module Google
           # @private New Log::List from a
           # Google::Logging::V2::ListLogsResponse object.
           def self.from_grpc grpc_list, service, resource: nil, max: nil
-            logs = new(Array(grpc_list.log_names))
+            logs = new Array(grpc_list.log_names)
             token = grpc_list.next_page_token
             token = nil if token == "".freeze
             logs.instance_variable_set :@token,    token

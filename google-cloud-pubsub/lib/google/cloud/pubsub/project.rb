@@ -150,7 +150,7 @@ module Google
         def topic topic_name, project: nil, skip_lookup: nil, async: nil
           ensure_service!
           options = { project: project }
-          return Topic.from_name(topic_name, service, options) if skip_lookup
+          return Topic.from_name topic_name, service, options if skip_lookup
           grpc = service.get_topic topic_name
           Topic.from_grpc grpc, service, async: async
         rescue Google::Cloud::NotFoundError

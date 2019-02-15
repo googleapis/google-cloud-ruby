@@ -1,4 +1,4 @@
-# Copyright 2017 Google LLC
+# Copyright 2019 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,24 +12,18 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+require "helper"
 
-require "securerandom"
+describe Google::Cloud::Bigquery::Convert do
+  it "converts nil to nil with no error" do
+    t = Google::Cloud::Bigquery::Convert.millis_to_time nil
+    t.must_be :nil?
+  end
 
-module Google
-  module Cloud
-    module Firestore
-      ##
-      # @private Helper module for generating random values
-      module Generate
-        CHARS = [*"a".."z", *"A".."Z", *"0".."9"].freeze
-
-        def self.unique_id length: 20, chars: CHARS
-          size = chars.size
-          Array.new length do
-            chars[SecureRandom.random_number(size)]
-          end.join
-        end
-      end
-    end
+  it "converts time in millis to a Time object with same value in seconds" do
+    t = Google::Cloud::Bigquery::Convert.millis_to_time 3333
+    t.must_be_kind_of ::Time
+    t.to_i.must_equal 3
+    t.to_f.must_equal 3.333
   end
 end

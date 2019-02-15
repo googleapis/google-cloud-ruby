@@ -378,7 +378,7 @@ module Google
           new_query = @query.dup
           new_query ||= StructuredQuery.new
 
-          new_query.limit = Google::Protobuf::Int32Value.new(value: num)
+          new_query.limit = Google::Protobuf::Int32Value.new value: num
 
           Query.start new_query, parent_path, client
         end
@@ -825,12 +825,12 @@ module Google
         def get
           ensure_service!
 
-          return enum_for(:get) unless block_given?
+          return enum_for :get unless block_given?
 
           results = service.run_query parent_path, @query
           results.each do |result|
             next if result.document.nil?
-            yield DocumentSnapshot.from_query_result(result, client)
+            yield DocumentSnapshot.from_query_result result, client
           end
         end
         alias run get
@@ -923,13 +923,13 @@ module Google
         ].freeze
 
         def value_nil? value
-          [nil, :null, :nil].include?(value)
+          [nil, :null, :nil].include? value
         end
 
         def value_nan? value
           # Comparing NaN values raises, so check for #nan? first.
           return true if value.respond_to?(:nan?) && value.nan?
-          [:nan].include?(value)
+          [:nan].include? value
         end
 
         def value_unary? value
@@ -994,7 +994,7 @@ module Google
 
         def values_to_cursor values, query
           if values.count == 1 && values.first.is_a?(DocumentSnapshot)
-            return snapshot_to_cursor(values.first, query)
+            return snapshot_to_cursor values.first, query
           end
 
           # pair values with their field_paths to ensure correct formatting

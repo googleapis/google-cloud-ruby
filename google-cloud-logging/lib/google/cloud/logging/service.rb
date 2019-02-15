@@ -101,7 +101,7 @@ module Google
                           partial_success: nil
           # Fix log names so they are the full path
           entries = Array(entries).each do |entry|
-            entry.log_name = log_path(entry.log_name)
+            entry.log_name = log_path entry.log_name
           end
           resource = resource.to_grpc if resource
           labels = Hash[labels.map { |k, v| [String(k), String(v)] }] if labels

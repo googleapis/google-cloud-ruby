@@ -37,7 +37,7 @@ module Google
           end
 
           def each
-            return enum_for(:each) unless block_given?
+            return enum_for :each unless block_given?
 
             loop do
               obj = @queue.pop

@@ -1178,7 +1178,7 @@ module Google
             Array(array_or_str).map do |uri_or_code|
               resource =
                 Google::Apis::BigqueryV2::UserDefinedFunctionResource.new
-              if uri_or_code.start_with?("gs://")
+              if uri_or_code.start_with? "gs://"
                 resource.resource_uri = uri_or_code
               else
                 resource.inline_code = uri_or_code

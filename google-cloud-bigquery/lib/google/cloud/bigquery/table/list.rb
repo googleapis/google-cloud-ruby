@@ -134,7 +134,7 @@ module Google
           def all request_limit: nil
             request_limit = request_limit.to_i if request_limit
             unless block_given?
-              return enum_for(:all, request_limit: request_limit)
+              return enum_for :all, request_limit: request_limit
             end
             results = self
             loop do

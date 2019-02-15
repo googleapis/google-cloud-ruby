@@ -271,7 +271,7 @@ module Google
         end
 
         def future
-          Concurrent::Future.new(executor: @thread_pool) do
+          Concurrent::Future.new executor: @thread_pool do
             yield
           end.execute
         end

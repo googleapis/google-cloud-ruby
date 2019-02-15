@@ -539,7 +539,7 @@ module Google
         def write_entry severity, message
           entry = Entry.new.tap do |e|
             e.timestamp = Time.now
-            e.severity = gcloud_severity(severity)
+            e.severity = gcloud_severity severity
             e.payload = message
           end
 
@@ -572,7 +572,7 @@ module Google
 
           request_env = info && info.env || {}
 
-          compute_labels(request_env).merge(merged_labels)
+          compute_labels(request_env).merge merged_labels
         end
 
         ##
@@ -621,8 +621,8 @@ module Google
         # @private Compute individual label value.
         # Value can be a Proc (function of the request env) or a static value.
         def compute_label_value request_env, value_or_proc
-          if value_or_proc.respond_to?(:call)
-            value_or_proc.call(request_env)
+          if value_or_proc.respond_to? :call
+            value_or_proc.call request_env
           else
             value_or_proc
           end
