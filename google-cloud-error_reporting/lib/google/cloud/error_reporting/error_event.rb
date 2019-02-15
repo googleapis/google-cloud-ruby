@@ -220,7 +220,7 @@ module Google
 
             message = "#{error_location}: #{message}\n\t" +
                       backtrace.drop(1).join("\n\t")
-            file_path, line_number, function_name = error_location.split(":")
+            file_path, line_number, function_name = error_location.split ":"
             function_name = function_name.to_s[/`(.*)'/, 1]
           end
 

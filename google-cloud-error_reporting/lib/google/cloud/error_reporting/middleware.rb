@@ -147,7 +147,7 @@ module Google
           error_event.http_url = rack_request.url
           error_event.http_user_agent = rack_request.user_agent
           error_event.http_referrer = rack_request.referrer
-          error_event.http_status = http_status(exception)
+          error_event.http_status = http_status exception
           error_event.http_remote_ip = rack_request.ip
 
           error_event
