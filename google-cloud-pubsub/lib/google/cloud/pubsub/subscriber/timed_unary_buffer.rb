@@ -34,7 +34,7 @@ module Google
             # entry.
             @register = {}
 
-            @task = Concurrent::TimerTask.new(execution_interval: interval) do
+            @task = Concurrent::TimerTask.new execution_interval: interval do
               flush!
             end
           end
@@ -204,7 +204,7 @@ module Google
           end
 
           def add_future pool
-            Concurrent::Future.new(executor: pool) do
+            Concurrent::Future.new executor: pool do
               begin
                 yield
               rescue StandardError => error

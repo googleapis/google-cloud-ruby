@@ -168,7 +168,7 @@ module Google
         ##
         # Gets the details of a subscription.
         def get_subscription subscription_name, options = {}
-          subscription = subscription_path(subscription_name, options)
+          subscription = subscription_path subscription_name, options
           execute do
             subscriber.get_subscription subscription, options: default_options
           end
@@ -218,8 +218,8 @@ module Google
         ##
         # Creates a subscription on a given topic for a given subscriber.
         def create_subscription topic, subscription_name, options = {}
-          name = subscription_path(subscription_name, options)
-          topic = topic_path(topic)
+          name = subscription_path subscription_name, options
+          topic = topic_path topic
           push_config = if options[:endpoint]
                           Google::Cloud::PubSub::V1::PushConfig.new \
                             push_endpoint: options[:endpoint],
@@ -263,7 +263,7 @@ module Google
         ##
         # Pulls a single message from the server.
         def pull subscription, options = {}
-          subscription = subscription_path(subscription, options)
+          subscription = subscription_path subscription, options
           max_messages = options.fetch(:max, 100).to_i
           return_immediately = !(!options.fetch(:immediate, true))
 
@@ -293,7 +293,7 @@ module Google
         ##
         # Modifies the PushConfig for a specified subscription.
         def modify_push_config subscription, endpoint, attributes
-          subscription = subscription_path(subscription)
+          subscription = subscription_path subscription
           # Convert attributes to strings to match the protobuf definition
           attributes = Hash[attributes.map { |k, v| [String(k), String(v)] }]
           push_config = Google::Cloud::PubSub::V1::PushConfig.new(
@@ -370,7 +370,7 @@ module Google
         ##
         # Adjusts the given subscription to a time or snapshot.
         def seek subscription, time_or_snapshot
-          subscription = subscription_path(subscription)
+          subscription = subscription_path subscription
           execute do
             if a_time? time_or_snapshot
               time = Convert.time_to_timestamp time_or_snapshot
@@ -394,7 +394,7 @@ module Google
         end
 
         def set_topic_policy topic_name, new_policy, options = {}
-          resource = topic_path(topic_name, options)
+          resource = topic_path topic_name, options
 
           execute do
             publisher.set_iam_policy resource, new_policy,
@@ -403,7 +403,7 @@ module Google
         end
 
         def test_topic_permissions topic_name, permissions, options = {}
-          resource = topic_path(topic_name, options)
+          resource = topic_path topic_name, options
 
           execute do
             publisher.test_iam_permissions resource, permissions,
@@ -412,7 +412,7 @@ module Google
         end
 
         def get_subscription_policy subscription_name, options = {}
-          resource = subscription_path(subscription_name, options)
+          resource = subscription_path subscription_name, options
 
           execute do
             subscriber.get_iam_policy resource, options: default_options
@@ -420,7 +420,7 @@ module Google
         end
 
         def set_subscription_policy subscription_name, new_policy, options = {}
-          resource = subscription_path(subscription_name, options)
+          resource = subscription_path subscription_name, options
 
           execute do
             subscriber.set_iam_policy resource, new_policy,
@@ -430,7 +430,7 @@ module Google
 
         def test_subscription_permissions subscription_name,
                                           permissions, options = {}
-          resource = subscription_path(subscription_name, options)
+          resource = subscription_path subscription_name, options
 
           execute do
             subscriber.test_iam_permissions resource, permissions,
@@ -445,19 +445,19 @@ module Google
 
         def topic_path topic_name, options = {}
           return topic_name if topic_name.to_s.include? "/"
-          "#{project_path(options)}/topics/#{topic_name}"
+          "#{project_path options}/topics/#{topic_name}"
         end
 
         def subscription_path subscription_name, options = {}
           return subscription_name if subscription_name.to_s.include? "/"
-          "#{project_path(options)}/subscriptions/#{subscription_name}"
+          "#{project_path options}/subscriptions/#{subscription_name}"
         end
 
         def snapshot_path snapshot_name, options = {}
           if snapshot_name.nil? || snapshot_name.to_s.include?("/")
             return snapshot_name
           end
-          "#{project_path(options)}/snapshots/#{snapshot_name}"
+          "#{project_path options}/snapshots/#{snapshot_name}"
         end
 
         def inspect
