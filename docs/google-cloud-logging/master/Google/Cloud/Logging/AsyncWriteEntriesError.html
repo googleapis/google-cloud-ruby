@@ -270,7 +270,7 @@ API. This can occur when the API returns an error.</p>
       <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/errors.rb', line 94</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span> <span class='id identifier rubyid_message'>message</span><span class='comma'>,</span> <span class='id identifier rubyid_entries'>entries</span> <span class='op'>=</span> <span class='kw'>nil</span>
-  <span class='kw'>super</span><span class='lparen'>(</span><span class='id identifier rubyid_message'>message</span><span class='rparen'>)</span>
+  <span class='kw'>super</span> <span class='id identifier rubyid_message'>message</span>
   <span class='ivar'>@entries</span> <span class='op'>=</span> <span class='id identifier rubyid_entries'>entries</span> <span class='kw'>if</span> <span class='id identifier rubyid_entries'>entries</span>
 <span class='kw'>end</span></pre>
     </td>
