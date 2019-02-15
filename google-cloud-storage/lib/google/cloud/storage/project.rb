@@ -358,7 +358,7 @@ module Google
             name: bucket_name,
             location: location
           }.delete_if { |_, v| v.nil? })
-          storage_class = storage_class_for(storage_class)
+          storage_class = storage_class_for storage_class
           updater = Bucket::Updater.new(new_bucket).tap do |b|
             b.logging_bucket = logging_bucket unless logging_bucket.nil?
             b.logging_prefix = logging_prefix unless logging_prefix.nil?
