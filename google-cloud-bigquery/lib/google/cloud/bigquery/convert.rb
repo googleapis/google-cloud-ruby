@@ -360,6 +360,20 @@ module Google
           return "DATASTORE_BACKUP"       if path.end_with? ".backup_info"
           nil
         end
+
+        ##
+        # @private
+        #
+        # Converts a primitive time value in milliseconds to a Ruby Time object.
+        #
+        # @return [Time, nil] The Ruby Time object, or nil if the given argument
+        #   is nil.
+        def self.millis_to_time time_millis
+          return nil unless time_millis
+          time_millis = Integer time_millis
+          time_secs = time_millis / 1000.0
+          ::Time.at time_secs
+        end
       end
 
       # rubocop:enable Metrics/ModuleLength

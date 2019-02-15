@@ -16,6 +16,7 @@
 require "google/cloud/errors"
 require "google/cloud/bigquery/service"
 require "google/cloud/bigquery/job/list"
+require "google/cloud/bigquery/convert"
 require "json"
 
 module Google
@@ -172,9 +173,7 @@ module Google
         # @return [Time, nil] The creation time from the job statistics.
         #
         def created_at
-          ::Time.at Integer(@gapi.statistics.creation_time) / 1000.0
-        rescue StandardError
-          nil
+          Convert.millis_to_time @gapi.statistics.creation_time
         end
 
         ##
@@ -185,9 +184,7 @@ module Google
         # @return [Time, nil] The start time from the job statistics.
         #
         def started_at
-          ::Time.at Integer(@gapi.statistics.start_time) / 1000.0
-        rescue StandardError
-          nil
+          Convert.millis_to_time @gapi.statistics.start_time
         end
 
         ##
@@ -197,9 +194,7 @@ module Google
         # @return [Time, nil] The end time from the job statistics.
         #
         def ended_at
-          ::Time.at Integer(@gapi.statistics.end_time) / 1000.0
-        rescue StandardError
-          nil
+          Convert.millis_to_time @gapi.statistics.end_time
         end
 
         ##

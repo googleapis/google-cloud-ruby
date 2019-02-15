@@ -231,7 +231,8 @@ module Google
                 time_since_first_publish = ::Time.now - @batch_created_at
                 if time_since_first_publish < @interval
                   # still waiting for the interval to insert the batch...
-                  @cond.wait @interval - time_since_first_publish
+                  timeout = @interval - time_since_first_publish
+                  @cond.wait timeout
                 else
                   # interval met, insert the batch...
                   push_batch_request!

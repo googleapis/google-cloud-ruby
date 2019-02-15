@@ -22,6 +22,7 @@ require "google/cloud/bigquery/encryption_configuration"
 require "google/cloud/bigquery/external"
 require "google/cloud/bigquery/insert_response"
 require "google/cloud/bigquery/table/async_inserter"
+require "google/cloud/bigquery/convert"
 require "google/apis/bigquery_v2"
 
 module Google
@@ -558,11 +559,7 @@ module Google
         def created_at
           return nil if reference?
           ensure_full_data!
-          begin
-            ::Time.at Integer(@gapi.creation_time) / 1000.0
-          rescue StandardError
-            nil
-          end
+          Convert.millis_to_time @gapi.creation_time
         end
 
         ##
@@ -578,11 +575,7 @@ module Google
         def expires_at
           return nil if reference?
           ensure_full_data!
-          begin
-            ::Time.at Integer(@gapi.expiration_time) / 1000.0
-          rescue StandardError
-            nil
-          end
+          Convert.millis_to_time @gapi.expiration_time
         end
 
         ##
@@ -596,11 +589,7 @@ module Google
         def modified_at
           return nil if reference?
           ensure_full_data!
-          begin
-            ::Time.at Integer(@gapi.last_modified_time) / 1000.0
-          rescue StandardError
-            nil
-          end
+          Convert.millis_to_time @gapi.last_modified_time
         end
 
         ##
@@ -987,11 +976,7 @@ module Google
           ensure_full_data!
           return nil unless @gapi.streaming_buffer
           oldest_entry_time = @gapi.streaming_buffer.oldest_entry_time
-          begin
-            ::Time.at Integer(oldest_entry_time) / 1000.0
-          rescue StandardError
-            nil
-          end
+          Convert.millis_to_time oldest_entry_time
         end
 
         ##
