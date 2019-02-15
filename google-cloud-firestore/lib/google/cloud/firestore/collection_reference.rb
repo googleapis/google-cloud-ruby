@@ -75,7 +75,7 @@ module Google
         ##
         # @private The parent path for the collection.
         def parent_path
-          path.split("/")[0...-1].join("/")
+          path.split("/")[0...-1].join "/"
         end
 
         # @!group Access

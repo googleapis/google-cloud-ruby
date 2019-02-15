@@ -25,7 +25,7 @@ module Google
 
         def self.unique_id length: 20, chars: CHARS
           size = chars.size
-          Array.new(length) do
+          Array.new length do
             chars[SecureRandom.random_number(size)]
           end.join
         end

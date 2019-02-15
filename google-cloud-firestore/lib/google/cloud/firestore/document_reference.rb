@@ -91,10 +91,10 @@ module Google
         def cols
           ensure_service!
 
-          return enum_for(:cols) unless block_given?
+          return enum_for :cols unless block_given?
 
           collection_ids = service.list_collections path
-          collection_ids.each { |collection_id| yield col(collection_id) }
+          collection_ids.each { |collection_id| yield col collection_id }
         end
         alias collections cols
         alias list_collections cols
@@ -473,7 +473,7 @@ module Google
         ##
         # @private
         def parent_path
-          path.split("/")[0...-1].join("/")
+          path.split("/")[0...-1].join "/"
         end
 
         ##
