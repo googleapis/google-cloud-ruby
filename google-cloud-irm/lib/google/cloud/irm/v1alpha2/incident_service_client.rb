@@ -91,6 +91,7 @@ module Google
           # The scopes needed to make gRPC calls to all of the methods defined in
           # this service.
           ALL_SCOPES = [
+            "https://www.googleapis.com/auth/cloud-platform"
           ].freeze
 
 
