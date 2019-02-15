@@ -1418,7 +1418,7 @@ breakpoints to the active list again.</p>
       <span class='op'>!</span><span class='id identifier rubyid_new_breakpoints'>new_breakpoints</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span> <span class='op'>||</span>
       <span class='lparen'>(</span><span class='id identifier rubyid_before_breakpoints_count'>before_breakpoints_count</span> <span class='op'>!=</span> <span class='id identifier rubyid_after_breakpoints_acount'>after_breakpoints_acount</span><span class='rparen'>)</span>
 
-    <span class='id identifier rubyid_on_breakpoints_change'>on_breakpoints_change</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='ivar'>@active_breakpoints</span><span class='rparen'>)</span> <span class='kw'>if</span>
+    <span class='id identifier rubyid_on_breakpoints_change'>on_breakpoints_change</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span> <span class='ivar'>@active_breakpoints</span> <span class='kw'>if</span>
       <span class='id identifier rubyid_on_breakpoints_change'>on_breakpoints_change</span><span class='period'>.</span><span class='id identifier rubyid_respond_to?'>respond_to?</span><span class='lparen'>(</span><span class='symbol'>:call</span><span class='rparen'>)</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_breakpoints_updated'>breakpoints_updated</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>

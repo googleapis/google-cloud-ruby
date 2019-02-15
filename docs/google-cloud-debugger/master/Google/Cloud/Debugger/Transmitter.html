@@ -879,7 +879,7 @@ queue the API call on the thread pool.</p>
       <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger/transmitter.rb', line 95</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_submit'>submit</span> <span class='id identifier rubyid_breakpoint'>breakpoint</span>
-  <span class='const'>Concurrent</span><span class='op'>::</span><span class='const'>Promises</span><span class='period'>.</span><span class='id identifier rubyid_future_on'>future_on</span><span class='lparen'>(</span><span class='ivar'>@thread_pool</span><span class='comma'>,</span> <span class='id identifier rubyid_breakpoint'>breakpoint</span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_bp'>bp</span><span class='op'>|</span>
+  <span class='const'>Concurrent</span><span class='op'>::</span><span class='const'>Promises</span><span class='period'>.</span><span class='id identifier rubyid_future_on'>future_on</span> <span class='ivar'>@thread_pool</span><span class='comma'>,</span> <span class='id identifier rubyid_breakpoint'>breakpoint</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_bp'>bp</span><span class='op'>|</span>
     <span class='id identifier rubyid_submit_sync'>submit_sync</span> <span class='id identifier rubyid_bp'>bp</span>
   <span class='kw'>end</span>
 <span class='kw'>rescue</span> <span class='const'>Concurrent</span><span class='op'>::</span><span class='const'>RejectedExecutionError</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_e'>e</span>
