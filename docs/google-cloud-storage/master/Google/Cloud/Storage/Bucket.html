@@ -6667,7 +6667,7 @@ Classes</a>.</p>
       <pre class="code"><span class="info file"># File 'lib/google/cloud/storage/bucket.rb', line 363</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_storage_class='>storage_class=</span> <span class='id identifier rubyid_new_storage_class'>new_storage_class</span>
-  <span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_storage_class'>storage_class</span> <span class='op'>=</span> <span class='id identifier rubyid_storage_class_for'>storage_class_for</span><span class='lparen'>(</span><span class='id identifier rubyid_new_storage_class'>new_storage_class</span><span class='rparen'>)</span>
+  <span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_storage_class'>storage_class</span> <span class='op'>=</span> <span class='id identifier rubyid_storage_class_for'>storage_class_for</span> <span class='id identifier rubyid_new_storage_class'>new_storage_class</span>
   <span class='id identifier rubyid_patch_gapi!'>patch_gapi!</span> <span class='symbol'>:storage_class</span>
 <span class='kw'>end</span></pre>
     </td>

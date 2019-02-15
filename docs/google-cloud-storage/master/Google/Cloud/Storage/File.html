@@ -3054,7 +3054,7 @@ File-like object, then that object will be returned.</p>
                           <span class='label'>key:</span> <span class='id identifier rubyid_encryption_key'>encryption_key</span><span class='comma'>,</span> <span class='label'>range:</span> <span class='id identifier rubyid_range'>range</span><span class='comma'>,</span>
                           <span class='label'>user_project:</span> <span class='id identifier rubyid_user_project'>user_project</span>
   <span class='comment'># FIX: downloading with encryption key will return nil
-</span>  <span class='id identifier rubyid_file'>file</span> <span class='op'>||=</span> <span class='op'>::</span><span class='const'>File</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_path'>path</span><span class='rparen'>)</span>
+</span>  <span class='id identifier rubyid_file'>file</span> <span class='op'>||=</span> <span class='op'>::</span><span class='const'>File</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span> <span class='id identifier rubyid_path'>path</span>
   <span class='id identifier rubyid_verify'>verify</span> <span class='op'>=</span> <span class='symbol'>:none</span> <span class='kw'>if</span> <span class='id identifier rubyid_range'>range</span>
   <span class='id identifier rubyid_verify_file!'>verify_file!</span> <span class='id identifier rubyid_file'>file</span><span class='comma'>,</span> <span class='id identifier rubyid_verify'>verify</span>
   <span class='kw'>if</span> <span class='op'>!</span><span class='id identifier rubyid_skip_decompress'>skip_decompress</span> <span class='op'>&amp;&amp;</span>
@@ -5711,7 +5711,7 @@ The  default value is the default storage class for the bucket. See
       <pre class="code"><span class="info file"># File 'lib/google/cloud/storage/file.rb', line 445</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_storage_class='>storage_class=</span> <span class='id identifier rubyid_storage_class'>storage_class</span>
-  <span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_storage_class'>storage_class</span> <span class='op'>=</span> <span class='id identifier rubyid_storage_class_for'>storage_class_for</span><span class='lparen'>(</span><span class='id identifier rubyid_storage_class'>storage_class</span><span class='rparen'>)</span>
+  <span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_storage_class'>storage_class</span> <span class='op'>=</span> <span class='id identifier rubyid_storage_class_for'>storage_class_for</span> <span class='id identifier rubyid_storage_class'>storage_class</span>
   <span class='id identifier rubyid_update_gapi!'>update_gapi!</span> <span class='symbol'>:storage_class</span>
 <span class='kw'>end</span></pre>
     </td>
