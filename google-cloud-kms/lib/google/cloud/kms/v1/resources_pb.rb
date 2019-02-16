@@ -41,6 +41,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   add_enum "google.cloud.kms.v1.KeyOperationAttestation.AttestationFormat" do
     value :ATTESTATION_FORMAT_UNSPECIFIED, 0
     value :CAVIUM_V1_COMPRESSED, 3
+    value :CAVIUM_V2_COMPRESSED, 4
   end
   add_message "google.cloud.kms.v1.CryptoKeyVersion" do
     optional :name, :string, 1
