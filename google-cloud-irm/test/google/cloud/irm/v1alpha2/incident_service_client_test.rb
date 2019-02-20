@@ -79,10 +79,12 @@ describe Google::Cloud::Irm::V1alpha2::IncidentServiceClient do
       name = "name3373707"
       title = "title110371416"
       etag = "etag3123477"
+      duplicate_incident = "duplicateIncident-316496506"
       expected_response = {
         name: name,
         title: title,
-        etag: etag
+        etag: etag,
+        duplicate_incident: duplicate_incident
       }
       expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Irm::V1alpha2::Incident)
 
@@ -162,10 +164,12 @@ describe Google::Cloud::Irm::V1alpha2::IncidentServiceClient do
       name_2 = "name2-1052831874"
       title = "title110371416"
       etag = "etag3123477"
+      duplicate_incident = "duplicateIncident-316496506"
       expected_response = {
         name: name_2,
         title: title,
-        etag: etag
+        etag: etag,
+        duplicate_incident: duplicate_incident
       }
       expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Irm::V1alpha2::Incident)
 
@@ -314,10 +318,12 @@ describe Google::Cloud::Irm::V1alpha2::IncidentServiceClient do
       name = "name3373707"
       title = "title110371416"
       etag = "etag3123477"
+      duplicate_incident = "duplicateIncident-316496506"
       expected_response = {
         name: name,
         title: title,
-        etag: etag
+        etag: etag,
+        duplicate_incident: duplicate_incident
       }
       expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Irm::V1alpha2::Incident)
 
@@ -606,81 +612,6 @@ describe Google::Cloud::Irm::V1alpha2::IncidentServiceClient do
     end
   end
 
-  describe 'update_annotation' do
-    custom_error = CustomTestError_v1alpha2.new "Custom test error for Google::Cloud::Irm::V1alpha2::IncidentServiceClient#update_annotation."
-
-    it 'invokes update_annotation without error' do
-      # Create request parameters
-      annotation = {}
-
-      # Create expected grpc response
-      name = "name3373707"
-      content = "content951530617"
-      expected_response = { name: name, content: content }
-      expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Irm::V1alpha2::Annotation)
-
-      # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::Irm::V1alpha2::UpdateAnnotationRequest, request)
-        assert_equal(Google::Gax::to_proto(annotation, Google::Cloud::Irm::V1alpha2::Annotation), request.annotation)
-        OpenStruct.new(execute: expected_response)
-      end
-      mock_stub = MockGrpcClientStub_v1alpha2.new(:update_annotation, mock_method)
-
-      # Mock auth layer
-      mock_credentials = MockIncidentServiceCredentials_v1alpha2.new("update_annotation")
-
-      Google::Cloud::Irm::V1alpha2::IncidentService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Irm::V1alpha2::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Irm.new(version: :v1alpha2)
-
-          # Call method
-          response = client.update_annotation(annotation)
-
-          # Verify the response
-          assert_equal(expected_response, response)
-
-          # Call method with block
-          client.update_annotation(annotation) do |response, operation|
-            # Verify the response
-            assert_equal(expected_response, response)
-            refute_nil(operation)
-          end
-        end
-      end
-    end
-
-    it 'invokes update_annotation with error' do
-      # Create request parameters
-      annotation = {}
-
-      # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::Irm::V1alpha2::UpdateAnnotationRequest, request)
-        assert_equal(Google::Gax::to_proto(annotation, Google::Cloud::Irm::V1alpha2::Annotation), request.annotation)
-        raise custom_error
-      end
-      mock_stub = MockGrpcClientStub_v1alpha2.new(:update_annotation, mock_method)
-
-      # Mock auth layer
-      mock_credentials = MockIncidentServiceCredentials_v1alpha2.new("update_annotation")
-
-      Google::Cloud::Irm::V1alpha2::IncidentService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Irm::V1alpha2::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Irm.new(version: :v1alpha2)
-
-          # Call method
-          err = assert_raises Google::Gax::GaxError do
-            client.update_annotation(annotation)
-          end
-
-          # Verify the GaxError wrapped the custom error that was raised.
-          assert_match(custom_error.message, err.message)
-        end
-      end
-    end
-  end
-
   describe 'create_tag' do
     custom_error = CustomTestError_v1alpha2.new "Custom test error for Google::Cloud::Irm::V1alpha2::IncidentServiceClient#create_tag."
 
@@ -692,12 +623,7 @@ describe Google::Cloud::Irm::V1alpha2::IncidentServiceClient do
       # Create expected grpc response
       name = "name3373707"
       display_name = "displayName1615086568"
-      url = "url116079"
-      expected_response = {
-        name: name,
-        display_name: display_name,
-        url: url
-      }
+      expected_response = { name: name, display_name: display_name }
       expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Irm::V1alpha2::Tag)
 
       # Mock Grpc layer
@@ -996,10 +922,10 @@ describe Google::Cloud::Irm::V1alpha2::IncidentServiceClient do
     end
   end
 
-  describe 'list_signals' do
-    custom_error = CustomTestError_v1alpha2.new "Custom test error for Google::Cloud::Irm::V1alpha2::IncidentServiceClient#list_signals."
+  describe 'search_signals' do
+    custom_error = CustomTestError_v1alpha2.new "Custom test error for Google::Cloud::Irm::V1alpha2::IncidentServiceClient#search_signals."
 
-    it 'invokes list_signals without error' do
+    it 'invokes search_signals without error' do
       # Create request parameters
       formatted_parent = Google::Cloud::Irm::V1alpha2::IncidentServiceClient.project_path("[PROJECT]")
 
@@ -1008,25 +934,25 @@ describe Google::Cloud::Irm::V1alpha2::IncidentServiceClient do
       signals_element = {}
       signals = [signals_element]
       expected_response = { next_page_token: next_page_token, signals: signals }
-      expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Irm::V1alpha2::ListSignalsResponse)
+      expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Irm::V1alpha2::SearchSignalsResponse)
 
       # Mock Grpc layer
       mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::Irm::V1alpha2::ListSignalsRequest, request)
+        assert_instance_of(Google::Cloud::Irm::V1alpha2::SearchSignalsRequest, request)
         assert_equal(formatted_parent, request.parent)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub_v1alpha2.new(:list_signals, mock_method)
+      mock_stub = MockGrpcClientStub_v1alpha2.new(:search_signals, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockIncidentServiceCredentials_v1alpha2.new("list_signals")
+      mock_credentials = MockIncidentServiceCredentials_v1alpha2.new("search_signals")
 
       Google::Cloud::Irm::V1alpha2::IncidentService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Irm::V1alpha2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Irm.new(version: :v1alpha2)
 
           # Call method
-          response = client.list_signals(formatted_parent)
+          response = client.search_signals(formatted_parent)
 
           # Verify the response
           assert(response.instance_of?(Google::Gax::PagedEnumerable))
@@ -1037,20 +963,20 @@ describe Google::Cloud::Irm::V1alpha2::IncidentServiceClient do
       end
     end
 
-    it 'invokes list_signals with error' do
+    it 'invokes search_signals with error' do
       # Create request parameters
       formatted_parent = Google::Cloud::Irm::V1alpha2::IncidentServiceClient.project_path("[PROJECT]")
 
       # Mock Grpc layer
       mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::Irm::V1alpha2::ListSignalsRequest, request)
+        assert_instance_of(Google::Cloud::Irm::V1alpha2::SearchSignalsRequest, request)
         assert_equal(formatted_parent, request.parent)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub_v1alpha2.new(:list_signals, mock_method)
+      mock_stub = MockGrpcClientStub_v1alpha2.new(:search_signals, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockIncidentServiceCredentials_v1alpha2.new("list_signals")
+      mock_credentials = MockIncidentServiceCredentials_v1alpha2.new("search_signals")
 
       Google::Cloud::Irm::V1alpha2::IncidentService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Irm::V1alpha2::Credentials.stub(:default, mock_credentials) do
@@ -1058,7 +984,7 @@ describe Google::Cloud::Irm::V1alpha2::IncidentServiceClient do
 
           # Call method
           err = assert_raises Google::Gax::GaxError do
-            client.list_signals(formatted_parent)
+            client.search_signals(formatted_parent)
           end
 
           # Verify the GaxError wrapped the custom error that was raised.
@@ -1231,79 +1157,6 @@ describe Google::Cloud::Irm::V1alpha2::IncidentServiceClient do
           # Call method
           err = assert_raises Google::Gax::GaxError do
             client.update_signal(signal)
-          end
-
-          # Verify the GaxError wrapped the custom error that was raised.
-          assert_match(custom_error.message, err.message)
-        end
-      end
-    end
-  end
-
-  describe 'acknowledge_signal' do
-    custom_error = CustomTestError_v1alpha2.new "Custom test error for Google::Cloud::Irm::V1alpha2::IncidentServiceClient#acknowledge_signal."
-
-    it 'invokes acknowledge_signal without error' do
-      # Create request parameters
-      formatted_name = Google::Cloud::Irm::V1alpha2::IncidentServiceClient.signal_path("[PROJECT]", "[SIGNAL]")
-
-      # Create expected grpc response
-      expected_response = {}
-      expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Irm::V1alpha2::AcknowledgeSignalResponse)
-
-      # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::Irm::V1alpha2::AcknowledgeSignalRequest, request)
-        assert_equal(formatted_name, request.name)
-        OpenStruct.new(execute: expected_response)
-      end
-      mock_stub = MockGrpcClientStub_v1alpha2.new(:acknowledge_signal, mock_method)
-
-      # Mock auth layer
-      mock_credentials = MockIncidentServiceCredentials_v1alpha2.new("acknowledge_signal")
-
-      Google::Cloud::Irm::V1alpha2::IncidentService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Irm::V1alpha2::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Irm.new(version: :v1alpha2)
-
-          # Call method
-          response = client.acknowledge_signal(formatted_name)
-
-          # Verify the response
-          assert_equal(expected_response, response)
-
-          # Call method with block
-          client.acknowledge_signal(formatted_name) do |response, operation|
-            # Verify the response
-            assert_equal(expected_response, response)
-            refute_nil(operation)
-          end
-        end
-      end
-    end
-
-    it 'invokes acknowledge_signal with error' do
-      # Create request parameters
-      formatted_name = Google::Cloud::Irm::V1alpha2::IncidentServiceClient.signal_path("[PROJECT]", "[SIGNAL]")
-
-      # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::Irm::V1alpha2::AcknowledgeSignalRequest, request)
-        assert_equal(formatted_name, request.name)
-        raise custom_error
-      end
-      mock_stub = MockGrpcClientStub_v1alpha2.new(:acknowledge_signal, mock_method)
-
-      # Mock auth layer
-      mock_credentials = MockIncidentServiceCredentials_v1alpha2.new("acknowledge_signal")
-
-      Google::Cloud::Irm::V1alpha2::IncidentService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Irm::V1alpha2::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Irm.new(version: :v1alpha2)
-
-          # Call method
-          err = assert_raises Google::Gax::GaxError do
-            client.acknowledge_signal(formatted_name)
           end
 
           # Verify the GaxError wrapped the custom error that was raised.
@@ -1695,80 +1548,6 @@ describe Google::Cloud::Irm::V1alpha2::IncidentServiceClient do
     end
   end
 
-  describe 'get_shift_handoff_presets' do
-    custom_error = CustomTestError_v1alpha2.new "Custom test error for Google::Cloud::Irm::V1alpha2::IncidentServiceClient#get_shift_handoff_presets."
-
-    it 'invokes get_shift_handoff_presets without error' do
-      # Create request parameters
-      formatted_parent = Google::Cloud::Irm::V1alpha2::IncidentServiceClient.project_path("[PROJECT]")
-
-      # Create expected grpc response
-      subject = "subject-1867885268"
-      expected_response = { subject: subject }
-      expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Irm::V1alpha2::ShiftHandoffPresets)
-
-      # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::Irm::V1alpha2::GetShiftHandoffPresetsRequest, request)
-        assert_equal(formatted_parent, request.parent)
-        OpenStruct.new(execute: expected_response)
-      end
-      mock_stub = MockGrpcClientStub_v1alpha2.new(:get_shift_handoff_presets, mock_method)
-
-      # Mock auth layer
-      mock_credentials = MockIncidentServiceCredentials_v1alpha2.new("get_shift_handoff_presets")
-
-      Google::Cloud::Irm::V1alpha2::IncidentService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Irm::V1alpha2::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Irm.new(version: :v1alpha2)
-
-          # Call method
-          response = client.get_shift_handoff_presets(formatted_parent)
-
-          # Verify the response
-          assert_equal(expected_response, response)
-
-          # Call method with block
-          client.get_shift_handoff_presets(formatted_parent) do |response, operation|
-            # Verify the response
-            assert_equal(expected_response, response)
-            refute_nil(operation)
-          end
-        end
-      end
-    end
-
-    it 'invokes get_shift_handoff_presets with error' do
-      # Create request parameters
-      formatted_parent = Google::Cloud::Irm::V1alpha2::IncidentServiceClient.project_path("[PROJECT]")
-
-      # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::Irm::V1alpha2::GetShiftHandoffPresetsRequest, request)
-        assert_equal(formatted_parent, request.parent)
-        raise custom_error
-      end
-      mock_stub = MockGrpcClientStub_v1alpha2.new(:get_shift_handoff_presets, mock_method)
-
-      # Mock auth layer
-      mock_credentials = MockIncidentServiceCredentials_v1alpha2.new("get_shift_handoff_presets")
-
-      Google::Cloud::Irm::V1alpha2::IncidentService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Irm::V1alpha2::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Irm.new(version: :v1alpha2)
-
-          # Call method
-          err = assert_raises Google::Gax::GaxError do
-            client.get_shift_handoff_presets(formatted_parent)
-          end
-
-          # Verify the GaxError wrapped the custom error that was raised.
-          assert_match(custom_error.message, err.message)
-        end
-      end
-    end
-  end
-
   describe 'send_shift_handoff' do
     custom_error = CustomTestError_v1alpha2.new "Custom test error for Google::Cloud::Irm::V1alpha2::IncidentServiceClient#send_shift_handoff."
 
@@ -1934,6 +1713,81 @@ describe Google::Cloud::Irm::V1alpha2::IncidentServiceClient do
           # Call method
           err = assert_raises Google::Gax::GaxError do
             client.create_subscription(formatted_parent, subscription)
+          end
+
+          # Verify the GaxError wrapped the custom error that was raised.
+          assert_match(custom_error.message, err.message)
+        end
+      end
+    end
+  end
+
+  describe 'update_subscription' do
+    custom_error = CustomTestError_v1alpha2.new "Custom test error for Google::Cloud::Irm::V1alpha2::IncidentServiceClient#update_subscription."
+
+    it 'invokes update_subscription without error' do
+      # Create request parameters
+      subscription = {}
+
+      # Create expected grpc response
+      name = "name3373707"
+      etag = "etag3123477"
+      expected_response = { name: name, etag: etag }
+      expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Irm::V1alpha2::Subscription)
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Cloud::Irm::V1alpha2::UpdateSubscriptionRequest, request)
+        assert_equal(Google::Gax::to_proto(subscription, Google::Cloud::Irm::V1alpha2::Subscription), request.subscription)
+        OpenStruct.new(execute: expected_response)
+      end
+      mock_stub = MockGrpcClientStub_v1alpha2.new(:update_subscription, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockIncidentServiceCredentials_v1alpha2.new("update_subscription")
+
+      Google::Cloud::Irm::V1alpha2::IncidentService::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Irm::V1alpha2::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Irm.new(version: :v1alpha2)
+
+          # Call method
+          response = client.update_subscription(subscription)
+
+          # Verify the response
+          assert_equal(expected_response, response)
+
+          # Call method with block
+          client.update_subscription(subscription) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
+        end
+      end
+    end
+
+    it 'invokes update_subscription with error' do
+      # Create request parameters
+      subscription = {}
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Cloud::Irm::V1alpha2::UpdateSubscriptionRequest, request)
+        assert_equal(Google::Gax::to_proto(subscription, Google::Cloud::Irm::V1alpha2::Subscription), request.subscription)
+        raise custom_error
+      end
+      mock_stub = MockGrpcClientStub_v1alpha2.new(:update_subscription, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockIncidentServiceCredentials_v1alpha2.new("update_subscription")
+
+      Google::Cloud::Irm::V1alpha2::IncidentService::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Irm::V1alpha2::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Irm.new(version: :v1alpha2)
+
+          # Call method
+          err = assert_raises Google::Gax::GaxError do
+            client.update_subscription(subscription)
           end
 
           # Verify the GaxError wrapped the custom error that was raised.

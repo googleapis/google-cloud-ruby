@@ -54,8 +54,6 @@ module Google
             # Lists annotations that are part of an incident. No assumptions should be
             # made on the content-type of the annotation returned.
             rpc :ListAnnotations, ListAnnotationsRequest, ListAnnotationsResponse
-            # Updates an annotation on an existing incident.
-            rpc :UpdateAnnotation, UpdateAnnotationRequest, Annotation
             # Creates a tag on an existing incident.
             rpc :CreateTag, CreateTagRequest, Tag
             # Deletes an existing tag.
@@ -66,15 +64,12 @@ module Google
             rpc :CreateSignal, CreateSignalRequest, Signal
             # Lists signals that are part of an incident.
             # Signals are returned in reverse chronological order.
-            rpc :ListSignals, ListSignalsRequest, ListSignalsResponse
+            rpc :SearchSignals, SearchSignalsRequest, SearchSignalsResponse
             # Returns a signal by name.
             rpc :GetSignal, GetSignalRequest, Signal
-            # Updates an existing signal (e.g. to assign/unassign it to an
+            # Updates an existing signal (for example, to assign/unassign it to an
             # incident).
             rpc :UpdateSignal, UpdateSignalRequest, Signal
-            # Acks a signal. This acknowledges the signal in the underlying system,
-            # indicating that the caller takes responsibility for looking into this.
-            rpc :AcknowledgeSignal, AcknowledgeSignalRequest, AcknowledgeSignalResponse
             # Escalates an incident.
             rpc :EscalateIncident, EscalateIncidentRequest, EscalateIncidentResponse
             # Creates a new artifact.
@@ -85,9 +80,6 @@ module Google
             rpc :UpdateArtifact, UpdateArtifactRequest, Artifact
             # Deletes an existing artifact.
             rpc :DeleteArtifact, DeleteArtifactRequest, Google::Protobuf::Empty
-            # Returns "presets" specific to shift handoff (see SendShiftHandoff), e.g.
-            # default values for handoff message fields.
-            rpc :GetShiftHandoffPresets, GetShiftHandoffPresetsRequest, ShiftHandoffPresets
             # Sends a summary of the shift for oncall handoff.
             rpc :SendShiftHandoff, SendShiftHandoffRequest, SendShiftHandoffResponse
             # Creates a new subscription.
@@ -95,6 +87,8 @@ module Google
             #    a. there are too many (50) subscriptions in the incident already
             #    b. a subscription using the given channel already exists
             rpc :CreateSubscription, CreateSubscriptionRequest, Subscription
+            # Updates a subscription.
+            rpc :UpdateSubscription, UpdateSubscriptionRequest, Subscription
             # Returns a list of subscriptions for an incident.
             rpc :ListSubscriptions, ListSubscriptionsRequest, ListSubscriptionsResponse
             # Deletes an existing subscription.

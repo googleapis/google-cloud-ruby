@@ -6,6 +6,7 @@ require 'google/protobuf'
 
 require 'google/api/annotations_pb'
 require 'google/monitoring/v3/metric_service_pb'
+require 'google/protobuf/duration_pb'
 require 'google/protobuf/timestamp_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.cloud.irm.v1alpha2.User" do
@@ -19,11 +20,20 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :etag, :string, 2
     optional :incident, :string, 3
     optional :create_time, :message, 4, "google.protobuf.Timestamp"
+    optional :close_time, :message, 10, "google.protobuf.Timestamp"
+    optional :detect_time, :message, 15, "google.protobuf.Timestamp"
     optional :creator, :message, 5, "google.cloud.irm.v1alpha2.User"
     optional :title, :string, 6
     optional :content_type, :string, 7
     optional :content, :string, 8
     optional :signal_state, :enum, 9, "google.cloud.irm.v1alpha2.Signal.State"
+    repeated :signal_artifacts, :message, 16, "google.cloud.irm.v1alpha2.Signal.SignalArtifact"
+  end
+  add_message "google.cloud.irm.v1alpha2.Signal.SignalArtifact" do
+    optional :uri, :string, 3
+    oneof :artifact_type do
+      optional :user_type, :string, 2
+    end
   end
   add_enum "google.cloud.irm.v1alpha2.Signal.State" do
     value :STATE_UNSPECIFIED, 0
@@ -39,7 +49,6 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.cloud.irm.v1alpha2.Tag" do
     optional :name, :string, 1
     optional :display_name, :string, 2
-    optional :url, :string, 3
   end
   add_message "google.cloud.irm.v1alpha2.Synopsis" do
     optional :content_type, :string, 1
@@ -54,8 +63,20 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :etag, :string, 4
     optional :severity, :enum, 5, "google.cloud.irm.v1alpha2.Incident.Severity"
     optional :stage, :enum, 6, "google.cloud.irm.v1alpha2.Incident.Stage"
+    optional :duplicate_incident, :string, 9
     optional :start_time, :message, 7, "google.protobuf.Timestamp"
     optional :synopsis, :message, 8, "google.cloud.irm.v1alpha2.Synopsis"
+    optional :communication_venue, :message, 10, "google.cloud.irm.v1alpha2.Incident.CommunicationVenue"
+  end
+  add_message "google.cloud.irm.v1alpha2.Incident.CommunicationVenue" do
+    optional :uri, :string, 1
+    optional :display_name, :string, 2
+    optional :channel_type, :enum, 3, "google.cloud.irm.v1alpha2.Incident.CommunicationVenue.ChannelType"
+  end
+  add_enum "google.cloud.irm.v1alpha2.Incident.CommunicationVenue.ChannelType" do
+    value :CHANNEL_TYPE_UNSPECIFIED, 0
+    value :CHANNEL_TYPE_URI, 1
+    value :CHANNEL_TYPE_SLACK, 5
   end
   add_enum "google.cloud.irm.v1alpha2.Incident.EscalationLevel" do
     value :ESCALATION_LEVEL_UNSPECIFIED, 0
@@ -76,6 +97,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     value :STAGE_MITIGATED, 2
     value :STAGE_RESOLVED, 3
     value :STAGE_DOCUMENTED, 5
+    value :STAGE_DUPLICATE, 6
   end
   add_message "google.cloud.irm.v1alpha2.IncidentRole" do
     optional :type, :enum, 1, "google.cloud.irm.v1alpha2.IncidentRole.Type"
@@ -109,8 +131,6 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   add_enum "google.cloud.irm.v1alpha2.Artifact.Type" do
     value :TYPE_UNSPECIFIED, 0
     value :TYPE_URL, 1
-    value :TYPE_ISSUE, 2
-    value :TYPE_SOURCE_CONTROL_CHANGE, 3
     value :TYPE_JIRA_ISSUE, 4
   end
   add_message "google.cloud.irm.v1alpha2.CommunicationChannel" do
@@ -148,11 +168,14 @@ module Google
       module V1alpha2
         User = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.irm.v1alpha2.User").msgclass
         Signal = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.irm.v1alpha2.Signal").msgclass
+        Signal::SignalArtifact = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.irm.v1alpha2.Signal.SignalArtifact").msgclass
         Signal::State = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.irm.v1alpha2.Signal.State").enummodule
         Annotation = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.irm.v1alpha2.Annotation").msgclass
         Tag = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.irm.v1alpha2.Tag").msgclass
         Synopsis = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.irm.v1alpha2.Synopsis").msgclass
         Incident = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.irm.v1alpha2.Incident").msgclass
+        Incident::CommunicationVenue = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.irm.v1alpha2.Incident.CommunicationVenue").msgclass
+        Incident::CommunicationVenue::ChannelType = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.irm.v1alpha2.Incident.CommunicationVenue.ChannelType").enummodule
         Incident::EscalationLevel = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.irm.v1alpha2.Incident.EscalationLevel").enummodule
         Incident::Severity = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.irm.v1alpha2.Incident.Severity").enummodule
         Incident::Stage = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.irm.v1alpha2.Incident.Stage").enummodule

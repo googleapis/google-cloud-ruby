@@ -32,7 +32,7 @@ module Google
         # Request for the GetIncident method.
         # @!attribute [rw] name
         #   @return [String]
-        #     Resource name of the incident, e.g.
+        #     Resource name of the incident, for example,
         #     "projects/{project_id}/incidents/{incident_id}".
         class GetIncidentRequest; end
 
@@ -48,7 +48,7 @@ module Google
         # Request for the SearchSimilarIncidents method.
         # @!attribute [rw] name
         #   @return [String]
-        #     Resource name of the incident or signal, e.g.
+        #     Resource name of the incident or signal, for example,
         #     "projects/{project_id}/incidents/{incident_id}".
         # @!attribute [rw] page_size
         #   @return [Integer]
@@ -78,7 +78,7 @@ module Google
         # Request for the CreateAnnotation method.
         # @!attribute [rw] parent
         #   @return [String]
-        #     Resource name of the incident, e.g.
+        #     Resource name of the incident, for example,
         #     "projects/{project_id}/incidents/{incident_id}".
         # @!attribute [rw] annotation
         #   @return [Google::Cloud::Irm::V1alpha2::Annotation]
@@ -88,7 +88,7 @@ module Google
         # Request for the ListAnnotations method.
         # @!attribute [rw] parent
         #   @return [String]
-        #     Resource name of the incident, e.g.
+        #     Resource name of the incident, for example,
         #     "projects/{project_id}/incidents/{incident_id}".
         # @!attribute [rw] page_size
         #   @return [Integer]
@@ -110,7 +110,7 @@ module Google
         # Request for the CreateTag method.
         # @!attribute [rw] parent
         #   @return [String]
-        #     Resource name of the incident, e.g.
+        #     Resource name of the incident, for example,
         #     "projects/{project_id}/incidents/{incident_id}".
         # @!attribute [rw] tag
         #   @return [Google::Cloud::Irm::V1alpha2::Tag]
@@ -126,7 +126,7 @@ module Google
         # Request for the ListTagsForIncident method.
         # @!attribute [rw] parent
         #   @return [String]
-        #     Resource name of the incident, e.g.
+        #     Resource name of the incident, for example,
         #     "projects/{project_id}/incidents/{incident_id}".
         # @!attribute [rw] page_size
         #   @return [Integer]
@@ -145,15 +145,6 @@ module Google
         #     Page token to fetch the next set of tags.
         class ListTagsResponse; end
 
-        # Request for the UpdateAnnotation method.
-        # @!attribute [rw] annotation
-        #   @return [Google::Cloud::Irm::V1alpha2::Annotation]
-        #     The annotation to update with the new values.
-        # @!attribute [rw] update_mask
-        #   @return [Google::Protobuf::FieldMask]
-        #     List of fields that should be updated.
-        class UpdateAnnotationRequest; end
-
         # Request for the CreateSignal method.
         # @!attribute [rw] parent
         #   @return [String]
@@ -164,14 +155,14 @@ module Google
         #     The signal to create.
         class CreateSignalRequest; end
 
-        # Request for the ListSignals method.
+        # Request for the SearchSignals method.
         # @!attribute [rw] parent
         #   @return [String]
         #     The resource name of the hosting Stackdriver project which requested
         #     incidents belong to.
-        # @!attribute [rw] filter
+        # @!attribute [rw] query
         #   @return [String]
-        #     Filter to specify which signals should be returned.
+        #     Query to specify which signals should be returned.
         # @!attribute [rw] page_size
         #   @return [Integer]
         #     Maximum number of `signals` to return in the response.
@@ -180,21 +171,21 @@ module Google
         #     Page token from an earlier query, as returned in `next_page_token`. All
         #     field values except for page_size and page_token should be the same as the
         #     original query (may return an error or unexpected data otherwise).
-        class ListSignalsRequest; end
+        class SearchSignalsRequest; end
 
-        # Response for the ListSignals method.
+        # Response for the SearchSignals method.
         # @!attribute [rw] signals
         #   @return [Array<Google::Cloud::Irm::V1alpha2::Signal>]
-        #     List of signals that have not been moved into an incident yet.
+        #     Signals that matched the query in the request.
         # @!attribute [rw] next_page_token
         #   @return [String]
         #     Page token to fetch the next set of signals.
-        class ListSignalsResponse; end
+        class SearchSignalsResponse; end
 
         # Request for the GetSignal method.
         # @!attribute [rw] name
         #   @return [String]
-        #     Resource name of the Signal resource, e.g.
+        #     Resource name of the Signal resource, for example,
         #     "projects/{project_id}/signals/{signal_id}".
         class GetSignalRequest; end
 
@@ -206,16 +197,6 @@ module Google
         #   @return [Google::Protobuf::FieldMask]
         #     List of fields that should be updated.
         class UpdateSignalRequest; end
-
-        # Request for the AcknowledgeSignal method.
-        # @!attribute [rw] name
-        #   @return [String]
-        #     Resource name of the Signal resource, e.g.
-        #     "projects/{project_id}/signals/{signal_id}".
-        class AcknowledgeSignalRequest; end
-
-        # Response of the AcknowledgeSignal method.
-        class AcknowledgeSignalResponse; end
 
         # Request for the SearchIncidents method.
         # @!attribute [rw] parent
@@ -236,20 +217,22 @@ module Google
         #       Incident.Stage enum). These are ordered, so `stage<resolved` is
         #       equivalent to `stage:detected OR stage:triaged OR stage:mitigated`.
         #     * `severity` - (Incident.Severity) The severity of the incident.
-        #       * Supports matching on a specific severity (e.g., `severity:major`) or
-        #         on a range (e.g., `severity>medium`, `severity<=minor`, etc.).
+        #       * Supports matching on a specific severity (for example,
+        #         `severity:major`) or on a range (for example, `severity>medium`,
+        #         `severity<=minor`, etc.).
         #
         #       Timestamp formats:
         #     * yyyy-MM-dd - an absolute date, treated as a calendar-day-wide window.
         #       In other words, the "<" operator will match dates before that date, the
         #       ">" operator will match dates after that date, and the ":" or "="
         #       operators will match the entire day.
-        #     * Nd (e.g. 7d) - a relative number of days ago, treated as a moment in time
-        #       (as opposed to a day-wide span) a multiple of 24 hours ago (as opposed to
-        #       calendar days).  In the case of daylight savings time, it will apply the
-        #       current timezone to both ends of the range.  Note that exact matching
-        #       (e.g. `start:7d`) is unlikely to be useful because that would only match
-        #       incidents created precisely at a particular instant in time.
+        #     * Nd (for example, 7d) - a relative number of days ago, treated as a moment
+        #       in time (as opposed to a day-wide span). A multiple of 24 hours ago (as
+        #       opposed to calendar days).  In the case of daylight savings time, it will
+        #       apply the current timezone to both ends of the range.  Note that exact
+        #       matching (for example, `start:7d`) is unlikely to be useful because that
+        #       would only match incidents created precisely at a particular instant in
+        #       time.
         #
         #     Examples:
         #
@@ -340,7 +323,7 @@ module Google
         # Request for the CreateArtifact method.
         # @!attribute [rw] parent
         #   @return [String]
-        #     Resource name of the incident, e.g.
+        #     Resource name of the incident, for example,
         #     "projects/{project_id}/incidents/{incident_id}".
         # @!attribute [rw] artifact
         #   @return [Google::Cloud::Irm::V1alpha2::Artifact]
@@ -350,7 +333,7 @@ module Google
         # Request for the ListArtifacts method.
         # @!attribute [rw] parent
         #   @return [String]
-        #     Resource name of the incident, e.g.
+        #     Resource name of the incident, for example,
         #     "projects/{project_id}/incidents/{incident_id}".
         # @!attribute [rw] page_size
         #   @return [Integer]
@@ -384,36 +367,15 @@ module Google
         #     Resource name of the artifact.
         class DeleteArtifactRequest; end
 
-        # GetShiftHandoffPresets RPC request.
-        # @!attribute [rw] parent
-        #   @return [String]
-        #     Resource name of the Stackdriver project that the presets belong to. e.g.
-        #     `projects/{project_id}`
-        class GetShiftHandoffPresetsRequest; end
-
-        # GetShiftHandoffPresets RPC response.
-        # @!attribute [rw] recipients
-        #   @return [Array<String>]
-        #     The recipients that the user might want to send the shift handoff to, in
-        #     the form of email addresses, e.g. "user@example.com". Can be empty.
-        # @!attribute [rw] cc
-        #   @return [Array<String>]
-        #     The recipients that the user might want to CC on the shift handoff, in the
-        #     form of email addresses, e.g. "user@example.com". Can be empty.
-        # @!attribute [rw] subject
-        #   @return [String]
-        #     A suggested subject for the shift handoff email. Can be empty.
-        class ShiftHandoffPresets; end
-
         # SendShiftHandoff and PreviewShiftHandoff RPC request.
         # @!attribute [rw] parent
         #   @return [String]
         #     The resource name of the Stackdriver project that the handoff is being sent
-        #     from. e.g. `projects/{project_id}`
+        #     from. for example, `projects/{project_id}`
         # @!attribute [rw] recipients
         #   @return [Array<String>]
-        #     Email addresses of the recipients of the handoff, e.g. "user@example.com".
-        #     Must contain at least one entry.
+        #     Email addresses of the recipients of the handoff, for example,
+        #     "user@example.com". Must contain at least one entry.
         # @!attribute [rw] cc
         #   @return [Array<String>]
         #     Email addresses that should be CC'd on the handoff. Optional.
@@ -422,7 +384,7 @@ module Google
         #     The subject of the email. Required.
         # @!attribute [rw] notes_content_type
         #   @return [String]
-        #     Content type string, e.g. 'text/plain' or 'text/html'.
+        #     Content type string, for example, 'text/plain' or 'text/html'.
         # @!attribute [rw] notes_content
         #   @return [String]
         #     Additional notes to be included in the handoff. Optional.
@@ -439,7 +401,7 @@ module Google
           # attaching additional data to each incident in the future.
           # @!attribute [rw] name
           #   @return [String]
-          #     Resource name of the incident, e.g.
+          #     Resource name of the incident, for example,
           #     "projects/{project_id}/incidents/{incident_id}".
           class Incident; end
         end
@@ -447,7 +409,7 @@ module Google
         # SendShiftHandoff and PreviewShiftHandoff RPC response.
         # @!attribute [rw] content_type
         #   @return [String]
-        #     Content type string, e.g. 'text/plain' or 'text/html'.
+        #     Content type string, for example, 'text/plain' or 'text/html'.
         # @!attribute [rw] content
         #   @return [String]
         #     The contents of the handoff that was sent or would have been sent (if the
@@ -458,17 +420,26 @@ module Google
         # Request for the CreateSubscription method.
         # @!attribute [rw] parent
         #   @return [String]
-        #     Resource name of the incident, e.g.
+        #     Resource name of the incident, for example,
         #     "projects/{project_id}/incidents/{incident_id}".
         # @!attribute [rw] subscription
         #   @return [Google::Cloud::Irm::V1alpha2::Subscription]
         #     The subscription to create.
         class CreateSubscriptionRequest; end
 
+        # Request for the UpdateSubscription method.
+        # @!attribute [rw] subscription
+        #   @return [Google::Cloud::Irm::V1alpha2::Subscription]
+        #     The subscription to update, with new values.
+        # @!attribute [rw] update_mask
+        #   @return [Google::Protobuf::FieldMask]
+        #     List of fields that should be updated.
+        class UpdateSubscriptionRequest; end
+
         # Request for the ListSubscriptions method.
         # @!attribute [rw] parent
         #   @return [String]
-        #     Resource name of the incident, e.g.
+        #     Resource name of the incident, for example,
         #     "projects/{project_id}/incidents/{incident_id}".
         # @!attribute [rw] page_size
         #   @return [Integer]
@@ -496,7 +467,7 @@ module Google
         # Request for creating a role assignment.
         # @!attribute [rw] parent
         #   @return [String]
-        #     Resource name of the incident, e.g.
+        #     Resource name of the incident, for example,
         #     "projects/{project_id}/incidents/{incident_id}".
         # @!attribute [rw] incident_role_assignment
         #   @return [Google::Cloud::Irm::V1alpha2::IncidentRoleAssignment]
@@ -512,7 +483,7 @@ module Google
         # Request to list role assignments of an incident.
         # @!attribute [rw] parent
         #   @return [String]
-        #     Resource name of the incident, e.g.
+        #     Resource name of the incident, for example,
         #     "projects/{project_id}/incidents/{incident_id}".
         # @!attribute [rw] page_size
         #   @return [Integer]
