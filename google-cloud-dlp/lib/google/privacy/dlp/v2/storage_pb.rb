@@ -37,6 +37,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   end
   add_message "google.privacy.dlp.v2.CustomInfoType.Regex" do
     optional :pattern, :string, 1
+    repeated :group_indexes, :int32, 2
   end
   add_message "google.privacy.dlp.v2.CustomInfoType.SurrogateType" do
   end
@@ -152,6 +153,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
   end
   add_message "google.privacy.dlp.v2.RecordKey" do
+    repeated :id_values, :string, 5
     oneof :type do
       optional :datastore_key, :message, 2, "google.privacy.dlp.v2.DatastoreKey"
       optional :big_query_key, :message, 3, "google.privacy.dlp.v2.BigQueryKey"
@@ -181,6 +183,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     value :FILE_TYPE_UNSPECIFIED, 0
     value :BINARY_FILE, 1
     value :TEXT_FILE, 2
+    value :IMAGE, 3
   end
 end
 

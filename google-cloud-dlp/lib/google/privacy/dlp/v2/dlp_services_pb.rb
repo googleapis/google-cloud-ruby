@@ -133,6 +133,9 @@ module Google
             # Deletes a job trigger.
             # See https://cloud.google.com/dlp/docs/creating-job-triggers to learn more.
             rpc :DeleteJobTrigger, DeleteJobTriggerRequest, Google::Protobuf::Empty
+            # Activate a job trigger. Causes the immediate execute of a trigger
+            # instead of waiting on the trigger event to occur.
+            rpc :ActivateJobTrigger, ActivateJobTriggerRequest, DlpJob
             # Creates a new job to inspect storage or calculate risk metrics.
             # See https://cloud.google.com/dlp/docs/inspecting-storage and
             # https://cloud.google.com/dlp/docs/compute-risk-analysis to learn more.

@@ -225,6 +225,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :name, :string, 1
     optional :display_name, :string, 2
     repeated :supported_by, :enum, 3, "google.privacy.dlp.v2.InfoTypeSupportedBy"
+    optional :description, :string, 4
   end
   add_message "google.privacy.dlp.v2.ListInfoTypesRequest" do
     optional :language_code, :string, 1
@@ -659,6 +660,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :save_findings, :message, 1, "google.privacy.dlp.v2.Action.SaveFindings"
       optional :pub_sub, :message, 2, "google.privacy.dlp.v2.Action.PublishToPubSub"
       optional :publish_summary_to_cscc, :message, 3, "google.privacy.dlp.v2.Action.PublishSummaryToCscc"
+      optional :job_notification_emails, :message, 8, "google.privacy.dlp.v2.Action.JobNotificationEmails"
     end
   end
   add_message "google.privacy.dlp.v2.Action.SaveFindings" do
@@ -668,6 +670,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :topic, :string, 1
   end
   add_message "google.privacy.dlp.v2.Action.PublishSummaryToCscc" do
+  end
+  add_message "google.privacy.dlp.v2.Action.JobNotificationEmails" do
   end
   add_message "google.privacy.dlp.v2.CreateInspectTemplateRequest" do
     optional :parent, :string, 1
@@ -700,6 +704,9 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :job_trigger, :message, 2, "google.privacy.dlp.v2.JobTrigger"
     optional :trigger_id, :string, 3
   end
+  add_message "google.privacy.dlp.v2.ActivateJobTriggerRequest" do
+    optional :name, :string, 1
+  end
   add_message "google.privacy.dlp.v2.UpdateJobTriggerRequest" do
     optional :name, :string, 1
     optional :job_trigger, :message, 2, "google.privacy.dlp.v2.JobTrigger"
@@ -721,6 +728,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :page_token, :string, 2
     optional :page_size, :int32, 3
     optional :order_by, :string, 4
+    optional :filter, :string, 5
   end
   add_message "google.privacy.dlp.v2.ListJobTriggersResponse" do
     repeated :job_triggers, :message, 1, "google.privacy.dlp.v2.JobTrigger"
@@ -1021,6 +1029,7 @@ module Google
         Action::SaveFindings = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.Action.SaveFindings").msgclass
         Action::PublishToPubSub = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.Action.PublishToPubSub").msgclass
         Action::PublishSummaryToCscc = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.Action.PublishSummaryToCscc").msgclass
+        Action::JobNotificationEmails = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.Action.JobNotificationEmails").msgclass
         CreateInspectTemplateRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.CreateInspectTemplateRequest").msgclass
         UpdateInspectTemplateRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.UpdateInspectTemplateRequest").msgclass
         GetInspectTemplateRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.GetInspectTemplateRequest").msgclass
@@ -1028,6 +1037,7 @@ module Google
         ListInspectTemplatesResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.ListInspectTemplatesResponse").msgclass
         DeleteInspectTemplateRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.DeleteInspectTemplateRequest").msgclass
         CreateJobTriggerRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.CreateJobTriggerRequest").msgclass
+        ActivateJobTriggerRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.ActivateJobTriggerRequest").msgclass
         UpdateJobTriggerRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.UpdateJobTriggerRequest").msgclass
         GetJobTriggerRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.GetJobTriggerRequest").msgclass
         CreateDlpJobRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.CreateDlpJobRequest").msgclass
