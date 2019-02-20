@@ -23,7 +23,7 @@ describe Google::Cloud::Vision::<%= version.capitalize %>::ImageAnnotatorClient 
   let(:image_annotator_client) { Google::Cloud::Vision::ImageAnnotator.new(version: <%= ":" + version %>) }
   let(:options) do
     {
-      images: [], 
+      images: [],
       image: "gs://gapic-toolkit/President_Barack_Obama.jpg",
       max_results: 10,
       async: false,
@@ -53,7 +53,7 @@ describe Google::Cloud::Vision::<%= version.capitalize %>::ImageAnnotatorClient 
     labels = response.responses.map do |response|
       response.label_annotations.map { |label| label.description }
     end.flatten
-    assert_includes(labels, "suit")
+    assert_includes(labels, "Suit")
   end
 
   it "can successfully make face_detection requests and verify response" do
