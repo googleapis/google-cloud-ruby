@@ -1,6 +1,6 @@
 ---
 layout: yard_main
-title: "Class: Google::Cloud::Irm::V1alpha2::UpdateAnnotationRequest - Stackdriver"
+title: "Class: Google::Cloud::Irm::V1alpha2::Signal::SignalArtifact - Stackdriver"
 css: 
   - /docs/css/style.css
   - /docs/css/common.css
@@ -10,13 +10,13 @@ js:
   - /js/yard-main.js
 ---
 <script type="text/javascript" charset="utf-8">
-  pathId = "Google::Cloud::Irm::V1alpha2::UpdateAnnotationRequest";
-  relpath = '../../../../';
+  pathId = "Google::Cloud::Irm::V1alpha2::Signal::SignalArtifact";
+  relpath = '../../../../../';
 </script>
 
 
 <div class="nav_wrap">
-  <iframe id="nav" src="../../../../class_list.html?1"></iframe>
+  <iframe id="nav" src="../../../../../class_list.html?1"></iframe>
   <div id="resizer"></div>
 </div>
 
@@ -24,17 +24,17 @@ js:
   <div id="header">
     <div id="menu">
   
-    <a href="../../../../_index.html">Index (U)</a> &raquo;
-    <span class='title'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../Irm.html" title="Google::Cloud::Irm (module)">Irm</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../V1alpha2.html" title="Google::Cloud::Irm::V1alpha2 (module)">V1alpha2</a></span></span>
+    <a href="../../../../../_index.html">Index (S)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../../../../Google.html" title="Google (module)">Google</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../../Irm.html" title="Google::Cloud::Irm (module)">Irm</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../V1alpha2.html" title="Google::Cloud::Irm::V1alpha2 (module)">V1alpha2</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../Signal.html" title="Google::Cloud::Irm::V1alpha2::Signal (class)">Signal</a></span></span>
      &raquo; 
-    <span class="title">UpdateAnnotationRequest</span>
+    <span class="title">SignalArtifact</span>
   
 </div>
 
     <div id="search">
   
     <a class="full_list_link" id="class_list_link"
-        href="../../../../class_list.html">
+        href="../../../../../class_list.html">
 
         <svg width="24" height="24">
           <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
@@ -47,7 +47,7 @@ js:
     <div class="clear"></div>
   </div>
 
-  <div id="content"><h1>Class: Google::Cloud::Irm::V1alpha2::UpdateAnnotationRequest
+  <div id="content"><h1>Class: Google::Cloud::Irm::V1alpha2::Signal::SignalArtifact
   
   
   
@@ -62,7 +62,7 @@ js:
         <ul class="fullTree">
           <li>Object</li>
           
-            <li class="next">Google::Cloud::Irm::V1alpha2::UpdateAnnotationRequest</li>
+            <li class="next">Google::Cloud::Irm::V1alpha2::Signal::SignalArtifact</li>
           
         </ul>
         <a href="#" class="inheritanceTree">show all</a>
@@ -82,14 +82,14 @@ js:
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/google/cloud/irm/v1alpha2/doc/google/cloud/irm/v1alpha2/incidents_service.rb</dd>
+    <dd>lib/google/cloud/irm/v1alpha2/doc/google/cloud/irm/v1alpha2/incidents.rb</dd>
   </dl>
   
 </div>
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>Request for the UpdateAnnotation method.</p>
+    <p>An artifact associated with the Signal.</p>
 
 
   </div>
@@ -107,7 +107,7 @@ js:
       <li class="public ">
   <span class="summary_signature">
     
-      <a href="#annotation-instance_method" title="#annotation (instance method)">#<strong>annotation</strong>  &#x21d2; Google::Cloud::Irm::V1alpha2::Annotation </a>
+      <a href="#uri-instance_method" title="#uri (instance method)">#<strong>uri</strong>  &#x21d2; String </a>
     
 
     
@@ -124,7 +124,7 @@ js:
   
 
   
-    <span class="summary_desc"><div class='inline'><p>The annotation to update with the new values.</p>
+    <span class="summary_desc"><div class='inline'><p>The URI for the artifact.</p>
 </div></span>
   
 </li>
@@ -133,7 +133,7 @@ js:
       <li class="public ">
   <span class="summary_signature">
     
-      <a href="#update_mask-instance_method" title="#update_mask (instance method)">#<strong>update_mask</strong>  &#x21d2; Google::Protobuf::FieldMask </a>
+      <a href="#user_type-instance_method" title="#user_type (instance method)">#<strong>user_type</strong>  &#x21d2; String </a>
     
 
     
@@ -150,7 +150,7 @@ js:
   
 
   
-    <span class="summary_desc"><div class='inline'><p>List of fields that should be updated.</p>
+    <span class="summary_desc"><div class='inline'><p>A custom user type.</p>
 </div></span>
   
 </li>
@@ -166,11 +166,11 @@ js:
     <h2>Instance Attribute Details</h2>
     
       
-      <span id="annotation=-instance_method"></span>
+      <span id="uri=-instance_method"></span>
       <div class="method_details first">
-  <h3 class="signature first" id="annotation-instance_method">
+  <h3 class="signature first" id="uri-instance_method">
   
-    #<strong>annotation</strong>  &#x21d2; <tt><span class='object_link'><a href="Annotation.html" title="Google::Cloud::Irm::V1alpha2::Annotation (class)">Google::Cloud::Irm::V1alpha2::Annotation</a></span></tt> 
+    #<strong>uri</strong>  &#x21d2; <tt>String</tt> 
   
 
   
@@ -178,7 +178,7 @@ js:
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns The annotation to update with the new values.</p>
+    <p>Returns The URI for the artifact.</p>
 
 
   </div>
@@ -191,12 +191,12 @@ js:
     <li>
       
       
-        <span class='type'>(<tt><span class='object_link'><a href="Annotation.html" title="Google::Cloud::Irm::V1alpha2::Annotation (class)">Google::Cloud::Irm::V1alpha2::Annotation</a></span></tt>)</span>
+        <span class='type'>(<tt>String</tt>)</span>
       
       
       
         &mdash;
-        <div class='inline'><p>The annotation to update with the new values.</p>
+        <div class='inline'><p>The URI for the artifact.</p>
 </div>
       
     </li>
@@ -209,23 +209,23 @@ js:
       <pre class="lines">
 
 
-155</pre>
+92</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/irm/v1alpha2/doc/google/cloud/irm/v1alpha2/incidents_service.rb', line 155</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/irm/v1alpha2/doc/google/cloud/irm/v1alpha2/incidents.rb', line 92</span>
 
-<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Irm::V1alpha2::UpdateAnnotationRequest (class)">UpdateAnnotationRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Irm::V1alpha2::Signal::SignalArtifact (class)">SignalArtifact</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
 </div>
     
       
-      <span id="update_mask=-instance_method"></span>
+      <span id="user_type=-instance_method"></span>
       <div class="method_details ">
-  <h3 class="signature " id="update_mask-instance_method">
+  <h3 class="signature " id="user_type-instance_method">
   
-    #<strong>update_mask</strong>  &#x21d2; <tt><span class='object_link'><a href="../../../Protobuf/FieldMask.html" title="Google::Protobuf::FieldMask (class)">Google::Protobuf::FieldMask</a></span></tt> 
+    #<strong>user_type</strong>  &#x21d2; <tt>String</tt> 
   
 
   
@@ -233,7 +233,7 @@ js:
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns List of fields that should be updated.</p>
+    <p>Returns A custom user type</p>
 
 
   </div>
@@ -246,12 +246,12 @@ js:
     <li>
       
       
-        <span class='type'>(<tt><span class='object_link'><a href="../../../Protobuf/FieldMask.html" title="Google::Protobuf::FieldMask (class)">Google::Protobuf::FieldMask</a></span></tt>)</span>
+        <span class='type'>(<tt>String</tt>)</span>
       
       
       
         &mdash;
-        <div class='inline'><p>List of fields that should be updated.</p>
+        <div class='inline'><p>A custom user type</p>
 </div>
       
     </li>
@@ -264,12 +264,12 @@ js:
       <pre class="lines">
 
 
-155</pre>
+92</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/irm/v1alpha2/doc/google/cloud/irm/v1alpha2/incidents_service.rb', line 155</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/irm/v1alpha2/doc/google/cloud/irm/v1alpha2/incidents.rb', line 92</span>
 
-<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Irm::V1alpha2::UpdateAnnotationRequest (class)">UpdateAnnotationRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Irm::V1alpha2::Signal::SignalArtifact (class)">SignalArtifact</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>

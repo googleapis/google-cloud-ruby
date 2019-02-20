@@ -90,8 +90,7 @@ js:
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
     <p>A signal is a message calling attention to a (potential) incident. An example
-is a page based on a Stackdriver Alerting policy.
-go/irm-glossary#signal</p>
+is a page based on a Stackdriver Alerting policy.</p>
 
 
   </div>
@@ -107,6 +106,8 @@ go/irm-glossary#signal</p>
     
   
     
+      <strong class="classes">Classes:</strong> <span class='object_link'><a href="Signal/SignalArtifact.html" title="Google::Cloud::Irm::V1alpha2::Signal::SignalArtifact (class)">SignalArtifact</a></span>
+    
   
 </p>
 
@@ -115,6 +116,32 @@ go/irm-glossary#signal</p>
 
   <h2>Instance Attribute Summary <small><a href="#" class="summary_toggle">collapse</a></small></h2>
   <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#close_time-instance_method" title="#close_time (instance method)">#<strong>close_time</strong>  &#x21d2; Google::Protobuf::Timestamp </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Output only.</p>
+</div></span>
+  
+</li>
+
     
       <li class="public ">
   <span class="summary_signature">
@@ -162,7 +189,7 @@ go/irm-glossary#signal</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Content type string, e.g.</p>
+    <span class="summary_desc"><div class='inline'><p>Content type string, for example, &#39;text/plain&#39; or&#39;text/html&#39;.</p>
 </div></span>
   
 </li>
@@ -215,6 +242,32 @@ go/irm-glossary#signal</p>
 
   
     <span class="summary_desc"><div class='inline'><p>Output only.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#detect_time-instance_method" title="#detect_time (instance method)">#<strong>detect_time</strong>  &#x21d2; Google::Protobuf::Timestamp </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The time this Signal was first detected.</p>
 </div></span>
   
 </li>
@@ -292,7 +345,33 @@ go/irm-glossary#signal</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Resource name of the signal, e.g.</p>
+    <span class="summary_desc"><div class='inline'><p>Resource name of the signal, for example, &quot;projects/project_id/signals/signal_id&quot;.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#signal_artifacts-instance_method" title="#signal_artifacts (instance method)">#<strong>signal_artifacts</strong>  &#x21d2; Array&lt;Google::Cloud::Irm::V1alpha2::Signal::SignalArtifact&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>A set of artifacts to additional resources for this Signal.</p>
 </div></span>
   
 </li>
@@ -318,7 +397,7 @@ go/irm-glossary#signal</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Output only.</p>
+    <span class="summary_desc"><div class='inline'><p>The state of this signal.</p>
 </div></span>
   
 </li>
@@ -360,9 +439,108 @@ go/irm-glossary#signal</p>
     <h2>Instance Attribute Details</h2>
     
       
-      <span id="content=-instance_method"></span>
+      <span id="close_time=-instance_method"></span>
       <div class="method_details first">
-  <h3 class="signature first" id="content-instance_method">
+  <h3 class="signature first" id="close_time-instance_method">
+  
+    #<strong>close_time</strong>  &#x21d2; <tt><span class='object_link'><a href="../../../Protobuf/Timestamp.html" title="Google::Protobuf::Timestamp (class)">Google::Protobuf::Timestamp</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Output only. Time this signal was closed. This field is not populated
+while the signal is still firing.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../../Protobuf/Timestamp.html" title="Google::Protobuf::Timestamp (class)">Google::Protobuf::Timestamp</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Output only. Time this signal was closed. This field is not populated
+while the signal is still firing.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/irm/v1alpha2/doc/google/cloud/irm/v1alpha2/incidents.rb', line 84</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Irm::V1alpha2::Signal (class)">Signal</a></span></span>
+  <span class='comment'># An artifact associated with the Signal.
+</span>  <span class='comment'># @!attribute [rw] user_type
+</span>  <span class='comment'>#   @return [String]
+</span>  <span class='comment'>#     A custom user type
+</span>  <span class='comment'># @!attribute [rw] uri
+</span>  <span class='comment'>#   @return [String]
+</span>  <span class='comment'>#     The URI for the artifact.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Signal/SignalArtifact.html" title="Google::Cloud::Irm::V1alpha2::Signal::SignalArtifact (class)">SignalArtifact</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+
+  <span class='comment'># Describes whether the alerting condition is still firing.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Signal/State.html" title="Google::Cloud::Irm::V1alpha2::Signal::State (module)">State</a></span></span>
+    <span class='comment'># Unspecified
+</span>    <span class='const'>STATE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Firing
+</span>    <span class='const'>STATE_OPEN</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># Non-firing
+</span>    <span class='const'>STATE_CLOSED</span> <span class='op'>=</span> <span class='int'>2</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="content=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="content-instance_method">
   
     #<strong>content</strong>  &#x21d2; <tt>String</tt> 
   
@@ -373,7 +551,7 @@ go/irm-glossary#signal</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns Full message of the signal.
-Immutable.</p>
+Immutable for Signals created by Stackdriver Alerting.</p>
 
 
   </div>
@@ -392,7 +570,7 @@ Immutable.</p>
       
         &mdash;
         <div class='inline'><p>Full message of the signal.
-Immutable.</p>
+Immutable for Signals created by Stackdriver Alerting.</p>
 </div>
       
     </li>
@@ -405,24 +583,42 @@ Immutable.</p>
       <pre class="lines">
 
 
-71
-72
-73
-74
-75
-76
-77
-78
-79
-80
-81
-82
-83</pre>
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/irm/v1alpha2/doc/google/cloud/irm/v1alpha2/incidents.rb', line 71</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/irm/v1alpha2/doc/google/cloud/irm/v1alpha2/incidents.rb', line 84</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Irm::V1alpha2::Signal (class)">Signal</a></span></span>
+  <span class='comment'># An artifact associated with the Signal.
+</span>  <span class='comment'># @!attribute [rw] user_type
+</span>  <span class='comment'>#   @return [String]
+</span>  <span class='comment'>#     A custom user type
+</span>  <span class='comment'># @!attribute [rw] uri
+</span>  <span class='comment'>#   @return [String]
+</span>  <span class='comment'>#     The URI for the artifact.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Signal/SignalArtifact.html" title="Google::Cloud::Irm::V1alpha2::Signal::SignalArtifact (class)">SignalArtifact</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+
   <span class='comment'># Describes whether the alerting condition is still firing.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Signal/State.html" title="Google::Cloud::Irm::V1alpha2::Signal::State (module)">State</a></span></span>
     <span class='comment'># Unspecified
@@ -453,7 +649,7 @@ Immutable.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Content type string, e.g. &#39;text/plain&#39; or&#39;text/html&#39;.</p>
+    <p>Returns Content type string, for example, &#39;text/plain&#39; or&#39;text/html&#39;.</p>
 
 
   </div>
@@ -471,7 +667,7 @@ Immutable.</p>
       
       
         &mdash;
-        <div class='inline'><p>Content type string, e.g. &#39;text/plain&#39; or&#39;text/html&#39;.</p>
+        <div class='inline'><p>Content type string, for example, &#39;text/plain&#39; or&#39;text/html&#39;.</p>
 </div>
       
     </li>
@@ -484,24 +680,42 @@ Immutable.</p>
       <pre class="lines">
 
 
-71
-72
-73
-74
-75
-76
-77
-78
-79
-80
-81
-82
-83</pre>
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/irm/v1alpha2/doc/google/cloud/irm/v1alpha2/incidents.rb', line 71</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/irm/v1alpha2/doc/google/cloud/irm/v1alpha2/incidents.rb', line 84</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Irm::V1alpha2::Signal (class)">Signal</a></span></span>
+  <span class='comment'># An artifact associated with the Signal.
+</span>  <span class='comment'># @!attribute [rw] user_type
+</span>  <span class='comment'>#   @return [String]
+</span>  <span class='comment'>#     A custom user type
+</span>  <span class='comment'># @!attribute [rw] uri
+</span>  <span class='comment'>#   @return [String]
+</span>  <span class='comment'>#     The URI for the artifact.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Signal/SignalArtifact.html" title="Google::Cloud::Irm::V1alpha2::Signal::SignalArtifact (class)">SignalArtifact</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+
   <span class='comment'># Describes whether the alerting condition is still firing.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Signal/State.html" title="Google::Cloud::Irm::V1alpha2::Signal::State (module)">State</a></span></span>
     <span class='comment'># Unspecified
@@ -563,24 +777,42 @@ Immutable.</p>
       <pre class="lines">
 
 
-71
-72
-73
-74
-75
-76
-77
-78
-79
-80
-81
-82
-83</pre>
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/irm/v1alpha2/doc/google/cloud/irm/v1alpha2/incidents.rb', line 71</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/irm/v1alpha2/doc/google/cloud/irm/v1alpha2/incidents.rb', line 84</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Irm::V1alpha2::Signal (class)">Signal</a></span></span>
+  <span class='comment'># An artifact associated with the Signal.
+</span>  <span class='comment'># @!attribute [rw] user_type
+</span>  <span class='comment'>#   @return [String]
+</span>  <span class='comment'>#     A custom user type
+</span>  <span class='comment'># @!attribute [rw] uri
+</span>  <span class='comment'>#   @return [String]
+</span>  <span class='comment'>#     The URI for the artifact.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Signal/SignalArtifact.html" title="Google::Cloud::Irm::V1alpha2::Signal::SignalArtifact (class)">SignalArtifact</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+
   <span class='comment'># Describes whether the alerting condition is still firing.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Signal/State.html" title="Google::Cloud::Irm::V1alpha2::Signal::State (module)">State</a></span></span>
     <span class='comment'># Unspecified
@@ -612,8 +844,8 @@ Immutable.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns Output only. The user that created this signal for manually created
-signals. Empty if this signal was generated by a system (e.g. an
-alerting system).</p>
+signals. Empty if this signal was generated by a system (for example,
+Stackdriver Alerting).</p>
 
 
   </div>
@@ -632,8 +864,8 @@ alerting system).</p>
       
         &mdash;
         <div class='inline'><p>Output only. The user that created this signal for manually created
-signals. Empty if this signal was generated by a system (e.g. an
-alerting system).</p>
+signals. Empty if this signal was generated by a system (for example,
+Stackdriver Alerting).</p>
 </div>
       
     </li>
@@ -646,24 +878,141 @@ alerting system).</p>
       <pre class="lines">
 
 
-71
-72
-73
-74
-75
-76
-77
-78
-79
-80
-81
-82
-83</pre>
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/irm/v1alpha2/doc/google/cloud/irm/v1alpha2/incidents.rb', line 71</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/irm/v1alpha2/doc/google/cloud/irm/v1alpha2/incidents.rb', line 84</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Irm::V1alpha2::Signal (class)">Signal</a></span></span>
+  <span class='comment'># An artifact associated with the Signal.
+</span>  <span class='comment'># @!attribute [rw] user_type
+</span>  <span class='comment'>#   @return [String]
+</span>  <span class='comment'>#     A custom user type
+</span>  <span class='comment'># @!attribute [rw] uri
+</span>  <span class='comment'>#   @return [String]
+</span>  <span class='comment'>#     The URI for the artifact.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Signal/SignalArtifact.html" title="Google::Cloud::Irm::V1alpha2::Signal::SignalArtifact (class)">SignalArtifact</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+
+  <span class='comment'># Describes whether the alerting condition is still firing.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Signal/State.html" title="Google::Cloud::Irm::V1alpha2::Signal::State (module)">State</a></span></span>
+    <span class='comment'># Unspecified
+</span>    <span class='const'>STATE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Firing
+</span>    <span class='const'>STATE_OPEN</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># Non-firing
+</span>    <span class='const'>STATE_CLOSED</span> <span class='op'>=</span> <span class='int'>2</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="detect_time=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="detect_time-instance_method">
+  
+    #<strong>detect_time</strong>  &#x21d2; <tt><span class='object_link'><a href="../../../Protobuf/Timestamp.html" title="Google::Protobuf::Timestamp (class)">Google::Protobuf::Timestamp</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns The time this Signal was first detected. This is identical to create_time
+for Signals created by Stackdriver Alerting.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../../Protobuf/Timestamp.html" title="Google::Protobuf::Timestamp (class)">Google::Protobuf::Timestamp</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The time this Signal was first detected. This is identical to create_time
+for Signals created by Stackdriver Alerting.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/irm/v1alpha2/doc/google/cloud/irm/v1alpha2/incidents.rb', line 84</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Irm::V1alpha2::Signal (class)">Signal</a></span></span>
+  <span class='comment'># An artifact associated with the Signal.
+</span>  <span class='comment'># @!attribute [rw] user_type
+</span>  <span class='comment'>#   @return [String]
+</span>  <span class='comment'>#     A custom user type
+</span>  <span class='comment'># @!attribute [rw] uri
+</span>  <span class='comment'>#   @return [String]
+</span>  <span class='comment'>#     The URI for the artifact.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Signal/SignalArtifact.html" title="Google::Cloud::Irm::V1alpha2::Signal::SignalArtifact (class)">SignalArtifact</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+
   <span class='comment'># Describes whether the alerting condition is still firing.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Signal/State.html" title="Google::Cloud::Irm::V1alpha2::Signal::State (module)">State</a></span></span>
     <span class='comment'># Unspecified
@@ -727,24 +1076,42 @@ An empty etag will overwrite other changes.</p>
       <pre class="lines">
 
 
-71
-72
-73
-74
-75
-76
-77
-78
-79
-80
-81
-82
-83</pre>
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/irm/v1alpha2/doc/google/cloud/irm/v1alpha2/incidents.rb', line 71</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/irm/v1alpha2/doc/google/cloud/irm/v1alpha2/incidents.rb', line 84</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Irm::V1alpha2::Signal (class)">Signal</a></span></span>
+  <span class='comment'># An artifact associated with the Signal.
+</span>  <span class='comment'># @!attribute [rw] user_type
+</span>  <span class='comment'>#   @return [String]
+</span>  <span class='comment'>#     A custom user type
+</span>  <span class='comment'># @!attribute [rw] uri
+</span>  <span class='comment'>#   @return [String]
+</span>  <span class='comment'>#     The URI for the artifact.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Signal/SignalArtifact.html" title="Google::Cloud::Irm::V1alpha2::Signal::SignalArtifact (class)">SignalArtifact</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+
   <span class='comment'># Describes whether the alerting condition is still firing.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Signal/State.html" title="Google::Cloud::Irm::V1alpha2::Signal::State (module)">State</a></span></span>
     <span class='comment'># Unspecified
@@ -808,24 +1175,42 @@ May be empty if signal is unassigned.</p>
       <pre class="lines">
 
 
-71
-72
-73
-74
-75
-76
-77
-78
-79
-80
-81
-82
-83</pre>
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/irm/v1alpha2/doc/google/cloud/irm/v1alpha2/incidents.rb', line 71</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/irm/v1alpha2/doc/google/cloud/irm/v1alpha2/incidents.rb', line 84</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Irm::V1alpha2::Signal (class)">Signal</a></span></span>
+  <span class='comment'># An artifact associated with the Signal.
+</span>  <span class='comment'># @!attribute [rw] user_type
+</span>  <span class='comment'>#   @return [String]
+</span>  <span class='comment'>#     A custom user type
+</span>  <span class='comment'># @!attribute [rw] uri
+</span>  <span class='comment'>#   @return [String]
+</span>  <span class='comment'>#     The URI for the artifact.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Signal/SignalArtifact.html" title="Google::Cloud::Irm::V1alpha2::Signal::SignalArtifact (class)">SignalArtifact</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+
   <span class='comment'># Describes whether the alerting condition is still firing.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Signal/State.html" title="Google::Cloud::Irm::V1alpha2::Signal::State (module)">State</a></span></span>
     <span class='comment'># Unspecified
@@ -856,7 +1241,7 @@ May be empty if signal is unassigned.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Resource name of the signal, e.g.
+    <p>Returns Resource name of the signal, for example,
 &quot;projects/project_id/signals/signal_id&quot;.</p>
 
 
@@ -875,7 +1260,7 @@ May be empty if signal is unassigned.</p>
       
       
         &mdash;
-        <div class='inline'><p>Resource name of the signal, e.g.
+        <div class='inline'><p>Resource name of the signal, for example,
 &quot;projects/project_id/signals/signal_id&quot;.</p>
 </div>
       
@@ -889,24 +1274,143 @@ May be empty if signal is unassigned.</p>
       <pre class="lines">
 
 
-71
-72
-73
-74
-75
-76
-77
-78
-79
-80
-81
-82
-83</pre>
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/irm/v1alpha2/doc/google/cloud/irm/v1alpha2/incidents.rb', line 71</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/irm/v1alpha2/doc/google/cloud/irm/v1alpha2/incidents.rb', line 84</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Irm::V1alpha2::Signal (class)">Signal</a></span></span>
+  <span class='comment'># An artifact associated with the Signal.
+</span>  <span class='comment'># @!attribute [rw] user_type
+</span>  <span class='comment'>#   @return [String]
+</span>  <span class='comment'>#     A custom user type
+</span>  <span class='comment'># @!attribute [rw] uri
+</span>  <span class='comment'>#   @return [String]
+</span>  <span class='comment'>#     The URI for the artifact.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Signal/SignalArtifact.html" title="Google::Cloud::Irm::V1alpha2::Signal::SignalArtifact (class)">SignalArtifact</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+
+  <span class='comment'># Describes whether the alerting condition is still firing.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Signal/State.html" title="Google::Cloud::Irm::V1alpha2::Signal::State (module)">State</a></span></span>
+    <span class='comment'># Unspecified
+</span>    <span class='const'>STATE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Firing
+</span>    <span class='const'>STATE_OPEN</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># Non-firing
+</span>    <span class='const'>STATE_CLOSED</span> <span class='op'>=</span> <span class='int'>2</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="signal_artifacts=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="signal_artifacts-instance_method">
+  
+    #<strong>signal_artifacts</strong>  &#x21d2; <tt>Array&lt;<span class='object_link'><a href="Signal/SignalArtifact.html" title="Google::Cloud::Irm::V1alpha2::Signal::SignalArtifact (class)">Google::Cloud::Irm::V1alpha2::Signal::SignalArtifact</a></span>&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns A set of artifacts to additional resources for this Signal. For example, a
+link to Stackdriver logging for the Signal.
+Immutable for Signals created by Stackdriver Alerting.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="Signal/SignalArtifact.html" title="Google::Cloud::Irm::V1alpha2::Signal::SignalArtifact (class)">Google::Cloud::Irm::V1alpha2::Signal::SignalArtifact</a></span>&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A set of artifacts to additional resources for this Signal. For example, a
+link to Stackdriver logging for the Signal.
+Immutable for Signals created by Stackdriver Alerting.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/irm/v1alpha2/doc/google/cloud/irm/v1alpha2/incidents.rb', line 84</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Irm::V1alpha2::Signal (class)">Signal</a></span></span>
+  <span class='comment'># An artifact associated with the Signal.
+</span>  <span class='comment'># @!attribute [rw] user_type
+</span>  <span class='comment'>#   @return [String]
+</span>  <span class='comment'>#     A custom user type
+</span>  <span class='comment'># @!attribute [rw] uri
+</span>  <span class='comment'>#   @return [String]
+</span>  <span class='comment'>#     The URI for the artifact.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Signal/SignalArtifact.html" title="Google::Cloud::Irm::V1alpha2::Signal::SignalArtifact (class)">SignalArtifact</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+
   <span class='comment'># Describes whether the alerting condition is still firing.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Signal/State.html" title="Google::Cloud::Irm::V1alpha2::Signal::State (module)">State</a></span></span>
     <span class='comment'># Unspecified
@@ -937,7 +1441,8 @@ May be empty if signal is unassigned.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Output only. The state of this signal.</p>
+    <p>Returns The state of this signal.
+For Signals created by Stackdriver Alerting this field is output only.</p>
 
 
   </div>
@@ -955,7 +1460,8 @@ May be empty if signal is unassigned.</p>
       
       
         &mdash;
-        <div class='inline'><p>Output only. The state of this signal.</p>
+        <div class='inline'><p>The state of this signal.
+For Signals created by Stackdriver Alerting this field is output only.</p>
 </div>
       
     </li>
@@ -968,24 +1474,42 @@ May be empty if signal is unassigned.</p>
       <pre class="lines">
 
 
-71
-72
-73
-74
-75
-76
-77
-78
-79
-80
-81
-82
-83</pre>
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/irm/v1alpha2/doc/google/cloud/irm/v1alpha2/incidents.rb', line 71</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/irm/v1alpha2/doc/google/cloud/irm/v1alpha2/incidents.rb', line 84</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Irm::V1alpha2::Signal (class)">Signal</a></span></span>
+  <span class='comment'># An artifact associated with the Signal.
+</span>  <span class='comment'># @!attribute [rw] user_type
+</span>  <span class='comment'>#   @return [String]
+</span>  <span class='comment'>#     A custom user type
+</span>  <span class='comment'># @!attribute [rw] uri
+</span>  <span class='comment'>#   @return [String]
+</span>  <span class='comment'>#     The URI for the artifact.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Signal/SignalArtifact.html" title="Google::Cloud::Irm::V1alpha2::Signal::SignalArtifact (class)">SignalArtifact</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+
   <span class='comment'># Describes whether the alerting condition is still firing.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Signal/State.html" title="Google::Cloud::Irm::V1alpha2::Signal::State (module)">State</a></span></span>
     <span class='comment'># Unspecified
@@ -1049,24 +1573,42 @@ Immutable.</p>
       <pre class="lines">
 
 
-71
-72
-73
-74
-75
-76
-77
-78
-79
-80
-81
-82
-83</pre>
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/irm/v1alpha2/doc/google/cloud/irm/v1alpha2/incidents.rb', line 71</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/irm/v1alpha2/doc/google/cloud/irm/v1alpha2/incidents.rb', line 84</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Irm::V1alpha2::Signal (class)">Signal</a></span></span>
+  <span class='comment'># An artifact associated with the Signal.
+</span>  <span class='comment'># @!attribute [rw] user_type
+</span>  <span class='comment'>#   @return [String]
+</span>  <span class='comment'>#     A custom user type
+</span>  <span class='comment'># @!attribute [rw] uri
+</span>  <span class='comment'>#   @return [String]
+</span>  <span class='comment'>#     The URI for the artifact.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Signal/SignalArtifact.html" title="Google::Cloud::Irm::V1alpha2::Signal::SignalArtifact (class)">SignalArtifact</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+
   <span class='comment'># Describes whether the alerting condition is still firing.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Signal/State.html" title="Google::Cloud::Irm::V1alpha2::Signal::State (module)">State</a></span></span>
     <span class='comment'># Unspecified

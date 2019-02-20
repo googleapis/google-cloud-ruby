@@ -105,6 +105,8 @@ js:
     
   
     
+      <strong class="classes">Classes:</strong> <span class='object_link'><a href="Incident/CommunicationVenue.html" title="Google::Cloud::Irm::V1alpha2::Incident::CommunicationVenue (class)">CommunicationVenue</a></span>
+    
   
 </p>
 
@@ -113,6 +115,58 @@ js:
 
   <h2>Instance Attribute Summary <small><a href="#" class="summary_toggle">collapse</a></small></h2>
   <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#communication_venue-instance_method" title="#communication_venue (instance method)">#<strong>communication_venue</strong>  &#x21d2; Google::Cloud::Irm::V1alpha2::Incident::CommunicationVenue </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Location of communications for this incident.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#duplicate_incident-instance_method" title="#duplicate_incident (instance method)">#<strong>duplicate_incident</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Resource name of the incident this incident is a duplicate of.</p>
+</div></span>
+  
+</li>
+
     
       <li class="public ">
   <span class="summary_signature">
@@ -332,11 +386,11 @@ js:
     <h2>Instance Attribute Details</h2>
     
       
-      <span id="escalation_level=-instance_method"></span>
+      <span id="communication_venue=-instance_method"></span>
       <div class="method_details first">
-  <h3 class="signature first" id="escalation_level-instance_method">
+  <h3 class="signature first" id="communication_venue-instance_method">
   
-    #<strong>escalation_level</strong>  &#x21d2; <tt><span class='object_link'><a href="Incident/EscalationLevel.html" title="Google::Cloud::Irm::V1alpha2::Incident::EscalationLevel (module)">Google::Cloud::Irm::V1alpha2::Incident::EscalationLevel</a></span></tt> 
+    #<strong>communication_venue</strong>  &#x21d2; <tt><span class='object_link'><a href="Incident/CommunicationVenue.html" title="Google::Cloud::Irm::V1alpha2::Incident::CommunicationVenue (class)">Google::Cloud::Irm::V1alpha2::Incident::CommunicationVenue</a></span></tt> 
   
 
   
@@ -344,7 +398,8 @@ js:
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Escalation level of the incident.</p>
+    <p>Returns Location of communications for this incident. This is informational
+only; IRM does not use this to send messages.</p>
 
 
   </div>
@@ -357,12 +412,13 @@ js:
     <li>
       
       
-        <span class='type'>(<tt><span class='object_link'><a href="Incident/EscalationLevel.html" title="Google::Cloud::Irm::V1alpha2::Incident::EscalationLevel (module)">Google::Cloud::Irm::V1alpha2::Incident::EscalationLevel</a></span></tt>)</span>
+        <span class='type'>(<tt><span class='object_link'><a href="Incident/CommunicationVenue.html" title="Google::Cloud::Irm::V1alpha2::Incident::CommunicationVenue (class)">Google::Cloud::Irm::V1alpha2::Incident::CommunicationVenue</a></span></tt>)</span>
       
       
       
         &mdash;
-        <div class='inline'><p>Escalation level of the incident.</p>
+        <div class='inline'><p>Location of communications for this incident. This is informational
+only; IRM does not use this to send messages.</p>
 </div>
       
     </li>
@@ -375,36 +431,6 @@ js:
       <pre class="lines">
 
 
-161
-162
-163
-164
-165
-166
-167
-168
-169
-170
-171
-172
-173
-174
-175
-176
-177
-178
-179
-180
-181
-182
-183
-184
-185
-186
-187
-188
-189
-190
 191
 192
 193
@@ -433,12 +459,97 @@ js:
 216
 217
 218
-219</pre>
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/irm/v1alpha2/doc/google/cloud/irm/v1alpha2/incidents.rb', line 161</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/irm/v1alpha2/doc/google/cloud/irm/v1alpha2/incidents.rb', line 191</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Irm::V1alpha2::Incident (class)">Incident</a></span></span>
+  <span class='comment'># CommunicationVenue is a record of where conversations about an incident
+</span>  <span class='comment'># are happening.
+</span>  <span class='comment'># @!attribute [rw] uri
+</span>  <span class='comment'>#   @return [String]
+</span>  <span class='comment'>#     A URI to the web interface of the channel.
+</span>  <span class='comment'># @!attribute [rw] display_name
+</span>  <span class='comment'>#   @return [String]
+</span>  <span class='comment'>#     A name representing the channel in IRM UI.
+</span>  <span class='comment'># @!attribute [rw] channel_type
+</span>  <span class='comment'>#   @return [Google::Cloud::Irm::V1alpha2::Incident::CommunicationVenue::ChannelType]
+</span>  <span class='comment'>#     The type of channel/venue for incident communications.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Incident/CommunicationVenue.html" title="Google::Cloud::Irm::V1alpha2::Incident::CommunicationVenue (class)">CommunicationVenue</a></span></span>
+    <span class='comment'># The type of channel/venue for incident communications.
+</span>    <span class='kw'>module</span> <span class='const'>ChannelType</span>
+      <span class='comment'># An unspecified communication channel.
+</span>      <span class='const'>CHANNEL_TYPE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+      <span class='comment'># A communication channel that is represented by a generic URI.
+</span>      <span class='const'>CHANNEL_TYPE_URI</span> <span class='op'>=</span> <span class='int'>1</span>
+
+      <span class='comment'># A communication channel that represents a Slack channel.
+</span>      <span class='const'>CHANNEL_TYPE_SLACK</span> <span class='op'>=</span> <span class='int'>5</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+
   <span class='comment'># Specifies the escalation level of this incident, within the IRM protocol
 </span>  <span class='comment'># for handling incidents.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Incident/EscalationLevel.html" title="Google::Cloud::Irm::V1alpha2::Incident::EscalationLevel (module)">EscalationLevel</a></span></span>
@@ -495,6 +606,483 @@ js:
 
     <span class='comment'># Postmortem for the incident was written.
 </span>    <span class='const'>STAGE_DOCUMENTED</span> <span class='op'>=</span> <span class='int'>5</span>
+
+    <span class='comment'># Stage for an incident with `duplicate_incident`. This incident is not
+</span>    <span class='comment'># authoritative anymore and the `duplicate_incident` should be used to
+</span>    <span class='comment'># determine the stage.
+</span>    <span class='const'>STAGE_DUPLICATE</span> <span class='op'>=</span> <span class='int'>6</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="duplicate_incident=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="duplicate_incident-instance_method">
+  
+    #<strong>duplicate_incident</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Resource name of the incident this incident is a duplicate of. Empty if
+this incident is not a duplicate.
+An incident can only be a duplicate of an incident that is not marked as a
+duplicate already. Setting this to a non-empty value must also set the
+stage to <code>STAGE_DUPLICATE</code>. Unsetting this value value must also update
+<code>stage</code> to a value other than <code>STAGE_DUPLICATE</code>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Resource name of the incident this incident is a duplicate of. Empty if
+this incident is not a duplicate.
+An incident can only be a duplicate of an incident that is not marked as a
+duplicate already. Setting this to a non-empty value must also set the
+stage to <code>STAGE_DUPLICATE</code>. Unsetting this value value must also update
+<code>stage</code> to a value other than <code>STAGE_DUPLICATE</code>.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/irm/v1alpha2/doc/google/cloud/irm/v1alpha2/incidents.rb', line 191</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Irm::V1alpha2::Incident (class)">Incident</a></span></span>
+  <span class='comment'># CommunicationVenue is a record of where conversations about an incident
+</span>  <span class='comment'># are happening.
+</span>  <span class='comment'># @!attribute [rw] uri
+</span>  <span class='comment'>#   @return [String]
+</span>  <span class='comment'>#     A URI to the web interface of the channel.
+</span>  <span class='comment'># @!attribute [rw] display_name
+</span>  <span class='comment'>#   @return [String]
+</span>  <span class='comment'>#     A name representing the channel in IRM UI.
+</span>  <span class='comment'># @!attribute [rw] channel_type
+</span>  <span class='comment'>#   @return [Google::Cloud::Irm::V1alpha2::Incident::CommunicationVenue::ChannelType]
+</span>  <span class='comment'>#     The type of channel/venue for incident communications.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Incident/CommunicationVenue.html" title="Google::Cloud::Irm::V1alpha2::Incident::CommunicationVenue (class)">CommunicationVenue</a></span></span>
+    <span class='comment'># The type of channel/venue for incident communications.
+</span>    <span class='kw'>module</span> <span class='const'>ChannelType</span>
+      <span class='comment'># An unspecified communication channel.
+</span>      <span class='const'>CHANNEL_TYPE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+      <span class='comment'># A communication channel that is represented by a generic URI.
+</span>      <span class='const'>CHANNEL_TYPE_URI</span> <span class='op'>=</span> <span class='int'>1</span>
+
+      <span class='comment'># A communication channel that represents a Slack channel.
+</span>      <span class='const'>CHANNEL_TYPE_SLACK</span> <span class='op'>=</span> <span class='int'>5</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># Specifies the escalation level of this incident, within the IRM protocol
+</span>  <span class='comment'># for handling incidents.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Incident/EscalationLevel.html" title="Google::Cloud::Irm::V1alpha2::Incident::EscalationLevel (module)">EscalationLevel</a></span></span>
+    <span class='comment'># The incident has not been escalated. This is the value used by all new
+</span>    <span class='comment'># and legacy incidents.
+</span>    <span class='const'>ESCALATION_LEVEL_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># The incident has been escalated to the organizational level.
+</span>    <span class='const'>ESCALATION_LEVEL_ORGANIZATION</span> <span class='op'>=</span> <span class='int'>1</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># Severity of an incident.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Incident/Severity.html" title="Google::Cloud::Irm::V1alpha2::Incident::Severity (module)">Severity</a></span></span>
+    <span class='comment'># Severity is not specified.
+</span>    <span class='const'>SEVERITY_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Huge incident.
+</span>    <span class='const'>SEVERITY_HUGE</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># Major incident.
+</span>    <span class='const'>SEVERITY_MAJOR</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># Medium incident.
+</span>    <span class='const'>SEVERITY_MEDIUM</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># Minor incident.
+</span>    <span class='const'>SEVERITY_MINOR</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># Negligible incident.
+</span>    <span class='const'>SEVERITY_NEGLIGIBLE</span> <span class='op'>=</span> <span class='int'>5</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># Stage of an incident.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Incident/Stage.html" title="Google::Cloud::Irm::V1alpha2::Incident::Stage (module)">Stage</a></span></span>
+    <span class='comment'># This is the default value if no stage has been specified.
+</span>    <span class='comment'># Note: The caller of the API should set the stage to DETECTED.
+</span>    <span class='const'>STAGE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># The incident has been detected. This is the initial stage of a new
+</span>    <span class='comment'># incident.
+</span>    <span class='comment'># Note: The caller still has to set the stage manually.
+</span>    <span class='const'>STAGE_DETECTED</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># This incident has been formally characterized.
+</span>    <span class='const'>STAGE_TRIAGED</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># This incident has been mitigated, i.e. does not affect the service level
+</span>    <span class='comment'># anymore.
+</span>    <span class='const'>STAGE_MITIGATED</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># This incident has been fully resolved, i.e. there are no immediate
+</span>    <span class='comment'># follow-up tasks.
+</span>    <span class='const'>STAGE_RESOLVED</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># Postmortem for the incident was written.
+</span>    <span class='const'>STAGE_DOCUMENTED</span> <span class='op'>=</span> <span class='int'>5</span>
+
+    <span class='comment'># Stage for an incident with `duplicate_incident`. This incident is not
+</span>    <span class='comment'># authoritative anymore and the `duplicate_incident` should be used to
+</span>    <span class='comment'># determine the stage.
+</span>    <span class='const'>STAGE_DUPLICATE</span> <span class='op'>=</span> <span class='int'>6</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="escalation_level=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="escalation_level-instance_method">
+  
+    #<strong>escalation_level</strong>  &#x21d2; <tt><span class='object_link'><a href="Incident/EscalationLevel.html" title="Google::Cloud::Irm::V1alpha2::Incident::EscalationLevel (module)">Google::Cloud::Irm::V1alpha2::Incident::EscalationLevel</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Escalation level of the incident.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Incident/EscalationLevel.html" title="Google::Cloud::Irm::V1alpha2::Incident::EscalationLevel (module)">Google::Cloud::Irm::V1alpha2::Incident::EscalationLevel</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Escalation level of the incident.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/irm/v1alpha2/doc/google/cloud/irm/v1alpha2/incidents.rb', line 191</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Irm::V1alpha2::Incident (class)">Incident</a></span></span>
+  <span class='comment'># CommunicationVenue is a record of where conversations about an incident
+</span>  <span class='comment'># are happening.
+</span>  <span class='comment'># @!attribute [rw] uri
+</span>  <span class='comment'>#   @return [String]
+</span>  <span class='comment'>#     A URI to the web interface of the channel.
+</span>  <span class='comment'># @!attribute [rw] display_name
+</span>  <span class='comment'>#   @return [String]
+</span>  <span class='comment'>#     A name representing the channel in IRM UI.
+</span>  <span class='comment'># @!attribute [rw] channel_type
+</span>  <span class='comment'>#   @return [Google::Cloud::Irm::V1alpha2::Incident::CommunicationVenue::ChannelType]
+</span>  <span class='comment'>#     The type of channel/venue for incident communications.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Incident/CommunicationVenue.html" title="Google::Cloud::Irm::V1alpha2::Incident::CommunicationVenue (class)">CommunicationVenue</a></span></span>
+    <span class='comment'># The type of channel/venue for incident communications.
+</span>    <span class='kw'>module</span> <span class='const'>ChannelType</span>
+      <span class='comment'># An unspecified communication channel.
+</span>      <span class='const'>CHANNEL_TYPE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+      <span class='comment'># A communication channel that is represented by a generic URI.
+</span>      <span class='const'>CHANNEL_TYPE_URI</span> <span class='op'>=</span> <span class='int'>1</span>
+
+      <span class='comment'># A communication channel that represents a Slack channel.
+</span>      <span class='const'>CHANNEL_TYPE_SLACK</span> <span class='op'>=</span> <span class='int'>5</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># Specifies the escalation level of this incident, within the IRM protocol
+</span>  <span class='comment'># for handling incidents.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Incident/EscalationLevel.html" title="Google::Cloud::Irm::V1alpha2::Incident::EscalationLevel (module)">EscalationLevel</a></span></span>
+    <span class='comment'># The incident has not been escalated. This is the value used by all new
+</span>    <span class='comment'># and legacy incidents.
+</span>    <span class='const'>ESCALATION_LEVEL_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># The incident has been escalated to the organizational level.
+</span>    <span class='const'>ESCALATION_LEVEL_ORGANIZATION</span> <span class='op'>=</span> <span class='int'>1</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># Severity of an incident.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Incident/Severity.html" title="Google::Cloud::Irm::V1alpha2::Incident::Severity (module)">Severity</a></span></span>
+    <span class='comment'># Severity is not specified.
+</span>    <span class='const'>SEVERITY_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Huge incident.
+</span>    <span class='const'>SEVERITY_HUGE</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># Major incident.
+</span>    <span class='const'>SEVERITY_MAJOR</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># Medium incident.
+</span>    <span class='const'>SEVERITY_MEDIUM</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># Minor incident.
+</span>    <span class='const'>SEVERITY_MINOR</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># Negligible incident.
+</span>    <span class='const'>SEVERITY_NEGLIGIBLE</span> <span class='op'>=</span> <span class='int'>5</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># Stage of an incident.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Incident/Stage.html" title="Google::Cloud::Irm::V1alpha2::Incident::Stage (module)">Stage</a></span></span>
+    <span class='comment'># This is the default value if no stage has been specified.
+</span>    <span class='comment'># Note: The caller of the API should set the stage to DETECTED.
+</span>    <span class='const'>STAGE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># The incident has been detected. This is the initial stage of a new
+</span>    <span class='comment'># incident.
+</span>    <span class='comment'># Note: The caller still has to set the stage manually.
+</span>    <span class='const'>STAGE_DETECTED</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># This incident has been formally characterized.
+</span>    <span class='const'>STAGE_TRIAGED</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># This incident has been mitigated, i.e. does not affect the service level
+</span>    <span class='comment'># anymore.
+</span>    <span class='const'>STAGE_MITIGATED</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># This incident has been fully resolved, i.e. there are no immediate
+</span>    <span class='comment'># follow-up tasks.
+</span>    <span class='const'>STAGE_RESOLVED</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># Postmortem for the incident was written.
+</span>    <span class='const'>STAGE_DOCUMENTED</span> <span class='op'>=</span> <span class='int'>5</span>
+
+    <span class='comment'># Stage for an incident with `duplicate_incident`. This incident is not
+</span>    <span class='comment'># authoritative anymore and the `duplicate_incident` should be used to
+</span>    <span class='comment'># determine the stage.
+</span>    <span class='const'>STAGE_DUPLICATE</span> <span class='op'>=</span> <span class='int'>6</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -548,36 +1136,6 @@ An empty etag will overwrite other changes.</p>
       <pre class="lines">
 
 
-161
-162
-163
-164
-165
-166
-167
-168
-169
-170
-171
-172
-173
-174
-175
-176
-177
-178
-179
-180
-181
-182
-183
-184
-185
-186
-187
-188
-189
-190
 191
 192
 193
@@ -606,12 +1164,97 @@ An empty etag will overwrite other changes.</p>
 216
 217
 218
-219</pre>
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/irm/v1alpha2/doc/google/cloud/irm/v1alpha2/incidents.rb', line 161</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/irm/v1alpha2/doc/google/cloud/irm/v1alpha2/incidents.rb', line 191</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Irm::V1alpha2::Incident (class)">Incident</a></span></span>
+  <span class='comment'># CommunicationVenue is a record of where conversations about an incident
+</span>  <span class='comment'># are happening.
+</span>  <span class='comment'># @!attribute [rw] uri
+</span>  <span class='comment'>#   @return [String]
+</span>  <span class='comment'>#     A URI to the web interface of the channel.
+</span>  <span class='comment'># @!attribute [rw] display_name
+</span>  <span class='comment'>#   @return [String]
+</span>  <span class='comment'>#     A name representing the channel in IRM UI.
+</span>  <span class='comment'># @!attribute [rw] channel_type
+</span>  <span class='comment'>#   @return [Google::Cloud::Irm::V1alpha2::Incident::CommunicationVenue::ChannelType]
+</span>  <span class='comment'>#     The type of channel/venue for incident communications.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Incident/CommunicationVenue.html" title="Google::Cloud::Irm::V1alpha2::Incident::CommunicationVenue (class)">CommunicationVenue</a></span></span>
+    <span class='comment'># The type of channel/venue for incident communications.
+</span>    <span class='kw'>module</span> <span class='const'>ChannelType</span>
+      <span class='comment'># An unspecified communication channel.
+</span>      <span class='const'>CHANNEL_TYPE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+      <span class='comment'># A communication channel that is represented by a generic URI.
+</span>      <span class='const'>CHANNEL_TYPE_URI</span> <span class='op'>=</span> <span class='int'>1</span>
+
+      <span class='comment'># A communication channel that represents a Slack channel.
+</span>      <span class='const'>CHANNEL_TYPE_SLACK</span> <span class='op'>=</span> <span class='int'>5</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+
   <span class='comment'># Specifies the escalation level of this incident, within the IRM protocol
 </span>  <span class='comment'># for handling incidents.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Incident/EscalationLevel.html" title="Google::Cloud::Irm::V1alpha2::Incident::EscalationLevel (module)">EscalationLevel</a></span></span>
@@ -668,6 +1311,11 @@ An empty etag will overwrite other changes.</p>
 
     <span class='comment'># Postmortem for the incident was written.
 </span>    <span class='const'>STAGE_DOCUMENTED</span> <span class='op'>=</span> <span class='int'>5</span>
+
+    <span class='comment'># Stage for an incident with `duplicate_incident`. This incident is not
+</span>    <span class='comment'># authoritative anymore and the `duplicate_incident` should be used to
+</span>    <span class='comment'># determine the stage.
+</span>    <span class='const'>STAGE_DUPLICATE</span> <span class='op'>=</span> <span class='int'>6</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -688,7 +1336,7 @@ An empty etag will overwrite other changes.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Output only. Resource name of the incident, e.g.
+    <p>Returns Output only. Resource name of the incident, for example,
 &quot;projects/project_id/incidents/incident_id&quot;.</p>
 
 
@@ -707,7 +1355,7 @@ An empty etag will overwrite other changes.</p>
       
       
         &mdash;
-        <div class='inline'><p>Output only. Resource name of the incident, e.g.
+        <div class='inline'><p>Output only. Resource name of the incident, for example,
 &quot;projects/project_id/incidents/incident_id&quot;.</p>
 </div>
       
@@ -721,36 +1369,6 @@ An empty etag will overwrite other changes.</p>
       <pre class="lines">
 
 
-161
-162
-163
-164
-165
-166
-167
-168
-169
-170
-171
-172
-173
-174
-175
-176
-177
-178
-179
-180
-181
-182
-183
-184
-185
-186
-187
-188
-189
-190
 191
 192
 193
@@ -779,12 +1397,97 @@ An empty etag will overwrite other changes.</p>
 216
 217
 218
-219</pre>
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/irm/v1alpha2/doc/google/cloud/irm/v1alpha2/incidents.rb', line 161</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/irm/v1alpha2/doc/google/cloud/irm/v1alpha2/incidents.rb', line 191</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Irm::V1alpha2::Incident (class)">Incident</a></span></span>
+  <span class='comment'># CommunicationVenue is a record of where conversations about an incident
+</span>  <span class='comment'># are happening.
+</span>  <span class='comment'># @!attribute [rw] uri
+</span>  <span class='comment'>#   @return [String]
+</span>  <span class='comment'>#     A URI to the web interface of the channel.
+</span>  <span class='comment'># @!attribute [rw] display_name
+</span>  <span class='comment'>#   @return [String]
+</span>  <span class='comment'>#     A name representing the channel in IRM UI.
+</span>  <span class='comment'># @!attribute [rw] channel_type
+</span>  <span class='comment'>#   @return [Google::Cloud::Irm::V1alpha2::Incident::CommunicationVenue::ChannelType]
+</span>  <span class='comment'>#     The type of channel/venue for incident communications.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Incident/CommunicationVenue.html" title="Google::Cloud::Irm::V1alpha2::Incident::CommunicationVenue (class)">CommunicationVenue</a></span></span>
+    <span class='comment'># The type of channel/venue for incident communications.
+</span>    <span class='kw'>module</span> <span class='const'>ChannelType</span>
+      <span class='comment'># An unspecified communication channel.
+</span>      <span class='const'>CHANNEL_TYPE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+      <span class='comment'># A communication channel that is represented by a generic URI.
+</span>      <span class='const'>CHANNEL_TYPE_URI</span> <span class='op'>=</span> <span class='int'>1</span>
+
+      <span class='comment'># A communication channel that represents a Slack channel.
+</span>      <span class='const'>CHANNEL_TYPE_SLACK</span> <span class='op'>=</span> <span class='int'>5</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+
   <span class='comment'># Specifies the escalation level of this incident, within the IRM protocol
 </span>  <span class='comment'># for handling incidents.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Incident/EscalationLevel.html" title="Google::Cloud::Irm::V1alpha2::Incident::EscalationLevel (module)">EscalationLevel</a></span></span>
@@ -841,6 +1544,11 @@ An empty etag will overwrite other changes.</p>
 
     <span class='comment'># Postmortem for the incident was written.
 </span>    <span class='const'>STAGE_DOCUMENTED</span> <span class='op'>=</span> <span class='int'>5</span>
+
+    <span class='comment'># Stage for an incident with `duplicate_incident`. This incident is not
+</span>    <span class='comment'># authoritative anymore and the `duplicate_incident` should be used to
+</span>    <span class='comment'># determine the stage.
+</span>    <span class='const'>STAGE_DUPLICATE</span> <span class='op'>=</span> <span class='int'>6</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -892,36 +1600,6 @@ An empty etag will overwrite other changes.</p>
       <pre class="lines">
 
 
-161
-162
-163
-164
-165
-166
-167
-168
-169
-170
-171
-172
-173
-174
-175
-176
-177
-178
-179
-180
-181
-182
-183
-184
-185
-186
-187
-188
-189
-190
 191
 192
 193
@@ -950,12 +1628,97 @@ An empty etag will overwrite other changes.</p>
 216
 217
 218
-219</pre>
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/irm/v1alpha2/doc/google/cloud/irm/v1alpha2/incidents.rb', line 161</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/irm/v1alpha2/doc/google/cloud/irm/v1alpha2/incidents.rb', line 191</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Irm::V1alpha2::Incident (class)">Incident</a></span></span>
+  <span class='comment'># CommunicationVenue is a record of where conversations about an incident
+</span>  <span class='comment'># are happening.
+</span>  <span class='comment'># @!attribute [rw] uri
+</span>  <span class='comment'>#   @return [String]
+</span>  <span class='comment'>#     A URI to the web interface of the channel.
+</span>  <span class='comment'># @!attribute [rw] display_name
+</span>  <span class='comment'>#   @return [String]
+</span>  <span class='comment'>#     A name representing the channel in IRM UI.
+</span>  <span class='comment'># @!attribute [rw] channel_type
+</span>  <span class='comment'>#   @return [Google::Cloud::Irm::V1alpha2::Incident::CommunicationVenue::ChannelType]
+</span>  <span class='comment'>#     The type of channel/venue for incident communications.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Incident/CommunicationVenue.html" title="Google::Cloud::Irm::V1alpha2::Incident::CommunicationVenue (class)">CommunicationVenue</a></span></span>
+    <span class='comment'># The type of channel/venue for incident communications.
+</span>    <span class='kw'>module</span> <span class='const'>ChannelType</span>
+      <span class='comment'># An unspecified communication channel.
+</span>      <span class='const'>CHANNEL_TYPE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+      <span class='comment'># A communication channel that is represented by a generic URI.
+</span>      <span class='const'>CHANNEL_TYPE_URI</span> <span class='op'>=</span> <span class='int'>1</span>
+
+      <span class='comment'># A communication channel that represents a Slack channel.
+</span>      <span class='const'>CHANNEL_TYPE_SLACK</span> <span class='op'>=</span> <span class='int'>5</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+
   <span class='comment'># Specifies the escalation level of this incident, within the IRM protocol
 </span>  <span class='comment'># for handling incidents.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Incident/EscalationLevel.html" title="Google::Cloud::Irm::V1alpha2::Incident::EscalationLevel (module)">EscalationLevel</a></span></span>
@@ -1012,6 +1775,11 @@ An empty etag will overwrite other changes.</p>
 
     <span class='comment'># Postmortem for the incident was written.
 </span>    <span class='const'>STAGE_DOCUMENTED</span> <span class='op'>=</span> <span class='int'>5</span>
+
+    <span class='comment'># Stage for an incident with `duplicate_incident`. This incident is not
+</span>    <span class='comment'># authoritative anymore and the `duplicate_incident` should be used to
+</span>    <span class='comment'># determine the stage.
+</span>    <span class='const'>STAGE_DUPLICATE</span> <span class='op'>=</span> <span class='int'>6</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -1063,36 +1831,6 @@ An empty etag will overwrite other changes.</p>
       <pre class="lines">
 
 
-161
-162
-163
-164
-165
-166
-167
-168
-169
-170
-171
-172
-173
-174
-175
-176
-177
-178
-179
-180
-181
-182
-183
-184
-185
-186
-187
-188
-189
-190
 191
 192
 193
@@ -1121,12 +1859,97 @@ An empty etag will overwrite other changes.</p>
 216
 217
 218
-219</pre>
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/irm/v1alpha2/doc/google/cloud/irm/v1alpha2/incidents.rb', line 161</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/irm/v1alpha2/doc/google/cloud/irm/v1alpha2/incidents.rb', line 191</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Irm::V1alpha2::Incident (class)">Incident</a></span></span>
+  <span class='comment'># CommunicationVenue is a record of where conversations about an incident
+</span>  <span class='comment'># are happening.
+</span>  <span class='comment'># @!attribute [rw] uri
+</span>  <span class='comment'>#   @return [String]
+</span>  <span class='comment'>#     A URI to the web interface of the channel.
+</span>  <span class='comment'># @!attribute [rw] display_name
+</span>  <span class='comment'>#   @return [String]
+</span>  <span class='comment'>#     A name representing the channel in IRM UI.
+</span>  <span class='comment'># @!attribute [rw] channel_type
+</span>  <span class='comment'>#   @return [Google::Cloud::Irm::V1alpha2::Incident::CommunicationVenue::ChannelType]
+</span>  <span class='comment'>#     The type of channel/venue for incident communications.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Incident/CommunicationVenue.html" title="Google::Cloud::Irm::V1alpha2::Incident::CommunicationVenue (class)">CommunicationVenue</a></span></span>
+    <span class='comment'># The type of channel/venue for incident communications.
+</span>    <span class='kw'>module</span> <span class='const'>ChannelType</span>
+      <span class='comment'># An unspecified communication channel.
+</span>      <span class='const'>CHANNEL_TYPE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+      <span class='comment'># A communication channel that is represented by a generic URI.
+</span>      <span class='const'>CHANNEL_TYPE_URI</span> <span class='op'>=</span> <span class='int'>1</span>
+
+      <span class='comment'># A communication channel that represents a Slack channel.
+</span>      <span class='const'>CHANNEL_TYPE_SLACK</span> <span class='op'>=</span> <span class='int'>5</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+
   <span class='comment'># Specifies the escalation level of this incident, within the IRM protocol
 </span>  <span class='comment'># for handling incidents.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Incident/EscalationLevel.html" title="Google::Cloud::Irm::V1alpha2::Incident::EscalationLevel (module)">EscalationLevel</a></span></span>
@@ -1183,6 +2006,11 @@ An empty etag will overwrite other changes.</p>
 
     <span class='comment'># Postmortem for the incident was written.
 </span>    <span class='const'>STAGE_DOCUMENTED</span> <span class='op'>=</span> <span class='int'>5</span>
+
+    <span class='comment'># Stage for an incident with `duplicate_incident`. This incident is not
+</span>    <span class='comment'># authoritative anymore and the `duplicate_incident` should be used to
+</span>    <span class='comment'># determine the stage.
+</span>    <span class='const'>STAGE_DUPLICATE</span> <span class='op'>=</span> <span class='int'>6</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -1238,36 +2066,6 @@ its Signals or the create time of the incident if no Signals are assigned.</p>
       <pre class="lines">
 
 
-161
-162
-163
-164
-165
-166
-167
-168
-169
-170
-171
-172
-173
-174
-175
-176
-177
-178
-179
-180
-181
-182
-183
-184
-185
-186
-187
-188
-189
-190
 191
 192
 193
@@ -1296,12 +2094,97 @@ its Signals or the create time of the incident if no Signals are assigned.</p>
 216
 217
 218
-219</pre>
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/irm/v1alpha2/doc/google/cloud/irm/v1alpha2/incidents.rb', line 161</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/irm/v1alpha2/doc/google/cloud/irm/v1alpha2/incidents.rb', line 191</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Irm::V1alpha2::Incident (class)">Incident</a></span></span>
+  <span class='comment'># CommunicationVenue is a record of where conversations about an incident
+</span>  <span class='comment'># are happening.
+</span>  <span class='comment'># @!attribute [rw] uri
+</span>  <span class='comment'>#   @return [String]
+</span>  <span class='comment'>#     A URI to the web interface of the channel.
+</span>  <span class='comment'># @!attribute [rw] display_name
+</span>  <span class='comment'>#   @return [String]
+</span>  <span class='comment'>#     A name representing the channel in IRM UI.
+</span>  <span class='comment'># @!attribute [rw] channel_type
+</span>  <span class='comment'>#   @return [Google::Cloud::Irm::V1alpha2::Incident::CommunicationVenue::ChannelType]
+</span>  <span class='comment'>#     The type of channel/venue for incident communications.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Incident/CommunicationVenue.html" title="Google::Cloud::Irm::V1alpha2::Incident::CommunicationVenue (class)">CommunicationVenue</a></span></span>
+    <span class='comment'># The type of channel/venue for incident communications.
+</span>    <span class='kw'>module</span> <span class='const'>ChannelType</span>
+      <span class='comment'># An unspecified communication channel.
+</span>      <span class='const'>CHANNEL_TYPE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+      <span class='comment'># A communication channel that is represented by a generic URI.
+</span>      <span class='const'>CHANNEL_TYPE_URI</span> <span class='op'>=</span> <span class='int'>1</span>
+
+      <span class='comment'># A communication channel that represents a Slack channel.
+</span>      <span class='const'>CHANNEL_TYPE_SLACK</span> <span class='op'>=</span> <span class='int'>5</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+
   <span class='comment'># Specifies the escalation level of this incident, within the IRM protocol
 </span>  <span class='comment'># for handling incidents.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Incident/EscalationLevel.html" title="Google::Cloud::Irm::V1alpha2::Incident::EscalationLevel (module)">EscalationLevel</a></span></span>
@@ -1358,6 +2241,11 @@ its Signals or the create time of the incident if no Signals are assigned.</p>
 
     <span class='comment'># Postmortem for the incident was written.
 </span>    <span class='const'>STAGE_DOCUMENTED</span> <span class='op'>=</span> <span class='int'>5</span>
+
+    <span class='comment'># Stage for an incident with `duplicate_incident`. This incident is not
+</span>    <span class='comment'># authoritative anymore and the `duplicate_incident` should be used to
+</span>    <span class='comment'># determine the stage.
+</span>    <span class='const'>STAGE_DUPLICATE</span> <span class='op'>=</span> <span class='int'>6</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -1409,36 +2297,6 @@ its Signals or the create time of the incident if no Signals are assigned.</p>
       <pre class="lines">
 
 
-161
-162
-163
-164
-165
-166
-167
-168
-169
-170
-171
-172
-173
-174
-175
-176
-177
-178
-179
-180
-181
-182
-183
-184
-185
-186
-187
-188
-189
-190
 191
 192
 193
@@ -1467,12 +2325,97 @@ its Signals or the create time of the incident if no Signals are assigned.</p>
 216
 217
 218
-219</pre>
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/irm/v1alpha2/doc/google/cloud/irm/v1alpha2/incidents.rb', line 161</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/irm/v1alpha2/doc/google/cloud/irm/v1alpha2/incidents.rb', line 191</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Irm::V1alpha2::Incident (class)">Incident</a></span></span>
+  <span class='comment'># CommunicationVenue is a record of where conversations about an incident
+</span>  <span class='comment'># are happening.
+</span>  <span class='comment'># @!attribute [rw] uri
+</span>  <span class='comment'>#   @return [String]
+</span>  <span class='comment'>#     A URI to the web interface of the channel.
+</span>  <span class='comment'># @!attribute [rw] display_name
+</span>  <span class='comment'>#   @return [String]
+</span>  <span class='comment'>#     A name representing the channel in IRM UI.
+</span>  <span class='comment'># @!attribute [rw] channel_type
+</span>  <span class='comment'>#   @return [Google::Cloud::Irm::V1alpha2::Incident::CommunicationVenue::ChannelType]
+</span>  <span class='comment'>#     The type of channel/venue for incident communications.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Incident/CommunicationVenue.html" title="Google::Cloud::Irm::V1alpha2::Incident::CommunicationVenue (class)">CommunicationVenue</a></span></span>
+    <span class='comment'># The type of channel/venue for incident communications.
+</span>    <span class='kw'>module</span> <span class='const'>ChannelType</span>
+      <span class='comment'># An unspecified communication channel.
+</span>      <span class='const'>CHANNEL_TYPE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+      <span class='comment'># A communication channel that is represented by a generic URI.
+</span>      <span class='const'>CHANNEL_TYPE_URI</span> <span class='op'>=</span> <span class='int'>1</span>
+
+      <span class='comment'># A communication channel that represents a Slack channel.
+</span>      <span class='const'>CHANNEL_TYPE_SLACK</span> <span class='op'>=</span> <span class='int'>5</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+
   <span class='comment'># Specifies the escalation level of this incident, within the IRM protocol
 </span>  <span class='comment'># for handling incidents.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Incident/EscalationLevel.html" title="Google::Cloud::Irm::V1alpha2::Incident::EscalationLevel (module)">EscalationLevel</a></span></span>
@@ -1529,6 +2472,11 @@ its Signals or the create time of the incident if no Signals are assigned.</p>
 
     <span class='comment'># Postmortem for the incident was written.
 </span>    <span class='const'>STAGE_DOCUMENTED</span> <span class='op'>=</span> <span class='int'>5</span>
+
+    <span class='comment'># Stage for an incident with `duplicate_incident`. This incident is not
+</span>    <span class='comment'># authoritative anymore and the `duplicate_incident` should be used to
+</span>    <span class='comment'># determine the stage.
+</span>    <span class='const'>STAGE_DUPLICATE</span> <span class='op'>=</span> <span class='int'>6</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -1580,36 +2528,6 @@ its Signals or the create time of the incident if no Signals are assigned.</p>
       <pre class="lines">
 
 
-161
-162
-163
-164
-165
-166
-167
-168
-169
-170
-171
-172
-173
-174
-175
-176
-177
-178
-179
-180
-181
-182
-183
-184
-185
-186
-187
-188
-189
-190
 191
 192
 193
@@ -1638,12 +2556,97 @@ its Signals or the create time of the incident if no Signals are assigned.</p>
 216
 217
 218
-219</pre>
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/irm/v1alpha2/doc/google/cloud/irm/v1alpha2/incidents.rb', line 161</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/irm/v1alpha2/doc/google/cloud/irm/v1alpha2/incidents.rb', line 191</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Irm::V1alpha2::Incident (class)">Incident</a></span></span>
+  <span class='comment'># CommunicationVenue is a record of where conversations about an incident
+</span>  <span class='comment'># are happening.
+</span>  <span class='comment'># @!attribute [rw] uri
+</span>  <span class='comment'>#   @return [String]
+</span>  <span class='comment'>#     A URI to the web interface of the channel.
+</span>  <span class='comment'># @!attribute [rw] display_name
+</span>  <span class='comment'>#   @return [String]
+</span>  <span class='comment'>#     A name representing the channel in IRM UI.
+</span>  <span class='comment'># @!attribute [rw] channel_type
+</span>  <span class='comment'>#   @return [Google::Cloud::Irm::V1alpha2::Incident::CommunicationVenue::ChannelType]
+</span>  <span class='comment'>#     The type of channel/venue for incident communications.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Incident/CommunicationVenue.html" title="Google::Cloud::Irm::V1alpha2::Incident::CommunicationVenue (class)">CommunicationVenue</a></span></span>
+    <span class='comment'># The type of channel/venue for incident communications.
+</span>    <span class='kw'>module</span> <span class='const'>ChannelType</span>
+      <span class='comment'># An unspecified communication channel.
+</span>      <span class='const'>CHANNEL_TYPE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+      <span class='comment'># A communication channel that is represented by a generic URI.
+</span>      <span class='const'>CHANNEL_TYPE_URI</span> <span class='op'>=</span> <span class='int'>1</span>
+
+      <span class='comment'># A communication channel that represents a Slack channel.
+</span>      <span class='const'>CHANNEL_TYPE_SLACK</span> <span class='op'>=</span> <span class='int'>5</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+
   <span class='comment'># Specifies the escalation level of this incident, within the IRM protocol
 </span>  <span class='comment'># for handling incidents.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Incident/EscalationLevel.html" title="Google::Cloud::Irm::V1alpha2::Incident::EscalationLevel (module)">EscalationLevel</a></span></span>
@@ -1700,6 +2703,11 @@ its Signals or the create time of the incident if no Signals are assigned.</p>
 
     <span class='comment'># Postmortem for the incident was written.
 </span>    <span class='const'>STAGE_DOCUMENTED</span> <span class='op'>=</span> <span class='int'>5</span>
+
+    <span class='comment'># Stage for an incident with `duplicate_incident`. This incident is not
+</span>    <span class='comment'># authoritative anymore and the `duplicate_incident` should be used to
+</span>    <span class='comment'># determine the stage.
+</span>    <span class='const'>STAGE_DUPLICATE</span> <span class='op'>=</span> <span class='int'>6</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
