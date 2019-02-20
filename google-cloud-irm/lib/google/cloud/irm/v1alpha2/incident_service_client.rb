@@ -68,7 +68,7 @@ module Google
               "page_token",
               "next_page_token",
               "tags"),
-            "list_signals" => Google::Gax::PageDescriptor.new(
+            "search_signals" => Google::Gax::PageDescriptor.new(
               "page_token",
               "next_page_token",
               "signals"),
@@ -377,11 +377,6 @@ module Google
               defaults["list_annotations"],
               exception_transformer: exception_transformer
             )
-            @update_annotation = Google::Gax.create_api_call(
-              @incident_service_stub.method(:update_annotation),
-              defaults["update_annotation"],
-              exception_transformer: exception_transformer
-            )
             @create_tag = Google::Gax.create_api_call(
               @incident_service_stub.method(:create_tag),
               defaults["create_tag"],
@@ -402,9 +397,9 @@ module Google
               defaults["create_signal"],
               exception_transformer: exception_transformer
             )
-            @list_signals = Google::Gax.create_api_call(
-              @incident_service_stub.method(:list_signals),
-              defaults["list_signals"],
+            @search_signals = Google::Gax.create_api_call(
+              @incident_service_stub.method(:search_signals),
+              defaults["search_signals"],
               exception_transformer: exception_transformer
             )
             @get_signal = Google::Gax.create_api_call(
@@ -415,11 +410,6 @@ module Google
             @update_signal = Google::Gax.create_api_call(
               @incident_service_stub.method(:update_signal),
               defaults["update_signal"],
-              exception_transformer: exception_transformer
-            )
-            @acknowledge_signal = Google::Gax.create_api_call(
-              @incident_service_stub.method(:acknowledge_signal),
-              defaults["acknowledge_signal"],
               exception_transformer: exception_transformer
             )
             @escalate_incident = Google::Gax.create_api_call(
@@ -447,11 +437,6 @@ module Google
               defaults["delete_artifact"],
               exception_transformer: exception_transformer
             )
-            @get_shift_handoff_presets = Google::Gax.create_api_call(
-              @incident_service_stub.method(:get_shift_handoff_presets),
-              defaults["get_shift_handoff_presets"],
-              exception_transformer: exception_transformer
-            )
             @send_shift_handoff = Google::Gax.create_api_call(
               @incident_service_stub.method(:send_shift_handoff),
               defaults["send_shift_handoff"],
@@ -460,6 +445,11 @@ module Google
             @create_subscription = Google::Gax.create_api_call(
               @incident_service_stub.method(:create_subscription),
               defaults["create_subscription"],
+              exception_transformer: exception_transformer
+            )
+            @update_subscription = Google::Gax.create_api_call(
+              @incident_service_stub.method(:update_subscription),
+              defaults["update_subscription"],
               exception_transformer: exception_transformer
             )
             @list_subscriptions = Google::Gax.create_api_call(
@@ -556,7 +546,7 @@ module Google
           # Returns an incident by name.
           #
           # @param name [String]
-          #   Resource name of the incident, e.g.
+          #   Resource name of the incident, for example,
           #   "projects/{project_id}/incidents/{incident_id}".
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
@@ -603,20 +593,22 @@ module Google
           #     Incident.Stage enum). These are ordered, so `stage<resolved` is
           #     equivalent to `stage:detected OR stage:triaged OR stage:mitigated`.
           #   * `severity` - (Incident.Severity) The severity of the incident.
-          #     * Supports matching on a specific severity (e.g., `severity:major`) or
-          #       on a range (e.g., `severity>medium`, `severity<=minor`, etc.).
+          #     * Supports matching on a specific severity (for example,
+          #       `severity:major`) or on a range (for example, `severity>medium`,
+          #       `severity<=minor`, etc.).
           #
           #     Timestamp formats:
           #   * yyyy-MM-dd - an absolute date, treated as a calendar-day-wide window.
           #     In other words, the "<" operator will match dates before that date, the
           #     ">" operator will match dates after that date, and the ":" or "="
           #     operators will match the entire day.
-          #   * Nd (e.g. 7d) - a relative number of days ago, treated as a moment in time
-          #     (as opposed to a day-wide span) a multiple of 24 hours ago (as opposed to
-          #     calendar days).  In the case of daylight savings time, it will apply the
-          #     current timezone to both ends of the range.  Note that exact matching
-          #     (e.g. `start:7d`) is unlikely to be useful because that would only match
-          #     incidents created precisely at a particular instant in time.
+          #   * Nd (for example, 7d) - a relative number of days ago, treated as a moment
+          #     in time (as opposed to a day-wide span). A multiple of 24 hours ago (as
+          #     opposed to calendar days).  In the case of daylight savings time, it will
+          #     apply the current timezone to both ends of the range.  Note that exact
+          #     matching (for example, `start:7d`) is unlikely to be useful because that
+          #     would only match incidents created precisely at a particular instant in
+          #     time.
           #
           #   Examples:
           #
@@ -744,7 +736,7 @@ module Google
           # definition of "similar" is subject to change.
           #
           # @param name [String]
-          #   Resource name of the incident or signal, e.g.
+          #   Resource name of the incident or signal, for example,
           #   "projects/{project_id}/incidents/{incident_id}".
           # @param page_size [Integer]
           #   The maximum number of resources contained in the underlying API
@@ -800,7 +792,7 @@ module Google
           # 'text/markdown' annotations can be created via this method.
           #
           # @param parent [String]
-          #   Resource name of the incident, e.g.
+          #   Resource name of the incident, for example,
           #   "projects/{project_id}/incidents/{incident_id}".
           # @param annotation [Google::Cloud::Irm::V1alpha2::Annotation | Hash]
           #   Only annotation.content is an input argument.
@@ -841,7 +833,7 @@ module Google
           # made on the content-type of the annotation returned.
           #
           # @param parent [String]
-          #   Resource name of the incident, e.g.
+          #   Resource name of the incident, for example,
           #   "projects/{project_id}/incidents/{incident_id}".
           # @param page_size [Integer]
           #   The maximum number of resources contained in the underlying API
@@ -893,50 +885,10 @@ module Google
             @list_annotations.call(req, options, &block)
           end
 
-          # Updates an annotation on an existing incident.
-          #
-          # @param annotation [Google::Cloud::Irm::V1alpha2::Annotation | Hash]
-          #   The annotation to update with the new values.
-          #   A hash of the same form as `Google::Cloud::Irm::V1alpha2::Annotation`
-          #   can also be provided.
-          # @param update_mask [Google::Protobuf::FieldMask | Hash]
-          #   List of fields that should be updated.
-          #   A hash of the same form as `Google::Protobuf::FieldMask`
-          #   can also be provided.
-          # @param options [Google::Gax::CallOptions]
-          #   Overrides the default settings for this call, e.g, timeout,
-          #   retries, etc.
-          # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result [Google::Cloud::Irm::V1alpha2::Annotation]
-          # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @return [Google::Cloud::Irm::V1alpha2::Annotation]
-          # @raise [Google::Gax::GaxError] if the RPC is aborted.
-          # @example
-          #   require "google/cloud/irm"
-          #
-          #   incident_service_client = Google::Cloud::Irm.new(version: :v1alpha2)
-          #
-          #   # TODO: Initialize `annotation`:
-          #   annotation = {}
-          #   response = incident_service_client.update_annotation(annotation)
-
-          def update_annotation \
-              annotation,
-              update_mask: nil,
-              options: nil,
-              &block
-            req = {
-              annotation: annotation,
-              update_mask: update_mask
-            }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Cloud::Irm::V1alpha2::UpdateAnnotationRequest)
-            @update_annotation.call(req, options, &block)
-          end
-
           # Creates a tag on an existing incident.
           #
           # @param parent [String]
-          #   Resource name of the incident, e.g.
+          #   Resource name of the incident, for example,
           #   "projects/{project_id}/incidents/{incident_id}".
           # @param tag [Google::Cloud::Irm::V1alpha2::Tag | Hash]
           #   Tag to create. Only tag.display_name is an input argument.
@@ -1006,7 +958,7 @@ module Google
           # Lists tags that are part of an incident.
           #
           # @param parent [String]
-          #   Resource name of the incident, e.g.
+          #   Resource name of the incident, for example,
           #   "projects/{project_id}/incidents/{incident_id}".
           # @param page_size [Integer]
           #   The maximum number of resources contained in the underlying API
@@ -1104,8 +1056,8 @@ module Google
           # @param parent [String]
           #   The resource name of the hosting Stackdriver project which requested
           #   incidents belong to.
-          # @param filter [String]
-          #   Filter to specify which signals should be returned.
+          # @param query [String]
+          #   Query to specify which signals should be returned.
           # @param page_size [Integer]
           #   The maximum number of resources contained in the underlying API
           #   response. If page streaming is performed per-resource, this
@@ -1131,37 +1083,37 @@ module Google
           #   formatted_parent = Google::Cloud::Irm::V1alpha2::IncidentServiceClient.project_path("[PROJECT]")
           #
           #   # Iterate over all results.
-          #   incident_service_client.list_signals(formatted_parent).each do |element|
+          #   incident_service_client.search_signals(formatted_parent).each do |element|
           #     # Process element.
           #   end
           #
           #   # Or iterate over results one page at a time.
-          #   incident_service_client.list_signals(formatted_parent).each_page do |page|
+          #   incident_service_client.search_signals(formatted_parent).each_page do |page|
           #     # Process each page at a time.
           #     page.each do |element|
           #       # Process element.
           #     end
           #   end
 
-          def list_signals \
+          def search_signals \
               parent,
-              filter: nil,
+              query: nil,
               page_size: nil,
               options: nil,
               &block
             req = {
               parent: parent,
-              filter: filter,
+              query: query,
               page_size: page_size
             }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Cloud::Irm::V1alpha2::ListSignalsRequest)
-            @list_signals.call(req, options, &block)
+            req = Google::Gax::to_proto(req, Google::Cloud::Irm::V1alpha2::SearchSignalsRequest)
+            @search_signals.call(req, options, &block)
           end
 
           # Returns a signal by name.
           #
           # @param name [String]
-          #   Resource name of the Signal resource, e.g.
+          #   Resource name of the Signal resource, for example,
           #   "projects/{project_id}/signals/{signal_id}".
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
@@ -1189,7 +1141,7 @@ module Google
             @get_signal.call(req, options, &block)
           end
 
-          # Updates an existing signal (e.g. to assign/unassign it to an
+          # Updates an existing signal (for example, to assign/unassign it to an
           # incident).
           #
           # @param signal [Google::Cloud::Irm::V1alpha2::Signal | Hash]
@@ -1228,38 +1180,6 @@ module Google
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Cloud::Irm::V1alpha2::UpdateSignalRequest)
             @update_signal.call(req, options, &block)
-          end
-
-          # Acks a signal. This acknowledges the signal in the underlying system,
-          # indicating that the caller takes responsibility for looking into this.
-          #
-          # @param name [String]
-          #   Resource name of the Signal resource, e.g.
-          #   "projects/{project_id}/signals/{signal_id}".
-          # @param options [Google::Gax::CallOptions]
-          #   Overrides the default settings for this call, e.g, timeout,
-          #   retries, etc.
-          # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result [Google::Cloud::Irm::V1alpha2::AcknowledgeSignalResponse]
-          # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @return [Google::Cloud::Irm::V1alpha2::AcknowledgeSignalResponse]
-          # @raise [Google::Gax::GaxError] if the RPC is aborted.
-          # @example
-          #   require "google/cloud/irm"
-          #
-          #   incident_service_client = Google::Cloud::Irm.new(version: :v1alpha2)
-          #   formatted_name = Google::Cloud::Irm::V1alpha2::IncidentServiceClient.signal_path("[PROJECT]", "[SIGNAL]")
-          #   response = incident_service_client.acknowledge_signal(formatted_name)
-
-          def acknowledge_signal \
-              name,
-              options: nil,
-              &block
-            req = {
-              name: name
-            }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Cloud::Irm::V1alpha2::AcknowledgeSignalRequest)
-            @acknowledge_signal.call(req, options, &block)
           end
 
           # Escalates an incident.
@@ -1331,7 +1251,7 @@ module Google
           # Creates a new artifact.
           #
           # @param parent [String]
-          #   Resource name of the incident, e.g.
+          #   Resource name of the incident, for example,
           #   "projects/{project_id}/incidents/{incident_id}".
           # @param artifact [Google::Cloud::Irm::V1alpha2::Artifact | Hash]
           #   The artifact to create.
@@ -1371,7 +1291,7 @@ module Google
           # Returns a list of artifacts for an incident.
           #
           # @param parent [String]
-          #   Resource name of the incident, e.g.
+          #   Resource name of the incident, for example,
           #   "projects/{project_id}/incidents/{incident_id}".
           # @param page_size [Integer]
           #   The maximum number of resources contained in the underlying API
@@ -1493,52 +1413,20 @@ module Google
             nil
           end
 
-          # Returns "presets" specific to shift handoff (see SendShiftHandoff), e.g.
-          # default values for handoff message fields.
-          #
-          # @param parent [String]
-          #   Resource name of the Stackdriver project that the presets belong to. e.g.
-          #   `projects/{project_id}`
-          # @param options [Google::Gax::CallOptions]
-          #   Overrides the default settings for this call, e.g, timeout,
-          #   retries, etc.
-          # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result [Google::Cloud::Irm::V1alpha2::ShiftHandoffPresets]
-          # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @return [Google::Cloud::Irm::V1alpha2::ShiftHandoffPresets]
-          # @raise [Google::Gax::GaxError] if the RPC is aborted.
-          # @example
-          #   require "google/cloud/irm"
-          #
-          #   incident_service_client = Google::Cloud::Irm.new(version: :v1alpha2)
-          #   formatted_parent = Google::Cloud::Irm::V1alpha2::IncidentServiceClient.project_path("[PROJECT]")
-          #   response = incident_service_client.get_shift_handoff_presets(formatted_parent)
-
-          def get_shift_handoff_presets \
-              parent,
-              options: nil,
-              &block
-            req = {
-              parent: parent
-            }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Cloud::Irm::V1alpha2::GetShiftHandoffPresetsRequest)
-            @get_shift_handoff_presets.call(req, options, &block)
-          end
-
           # Sends a summary of the shift for oncall handoff.
           #
           # @param parent [String]
           #   The resource name of the Stackdriver project that the handoff is being sent
-          #   from. e.g. `projects/{project_id}`
+          #   from. for example, `projects/{project_id}`
           # @param recipients [Array<String>]
-          #   Email addresses of the recipients of the handoff, e.g. "user@example.com".
-          #   Must contain at least one entry.
+          #   Email addresses of the recipients of the handoff, for example,
+          #   "user@example.com". Must contain at least one entry.
           # @param subject [String]
           #   The subject of the email. Required.
           # @param cc [Array<String>]
           #   Email addresses that should be CC'd on the handoff. Optional.
           # @param notes_content_type [String]
-          #   Content type string, e.g. 'text/plain' or 'text/html'.
+          #   Content type string, for example, 'text/plain' or 'text/html'.
           # @param notes_content [String]
           #   Additional notes to be included in the handoff. Optional.
           # @param incidents [Array<Google::Cloud::Irm::V1alpha2::SendShiftHandoffRequest::Incident | Hash>]
@@ -1600,7 +1488,7 @@ module Google
           #    b. a subscription using the given channel already exists
           #
           # @param parent [String]
-          #   Resource name of the incident, e.g.
+          #   Resource name of the incident, for example,
           #   "projects/{project_id}/incidents/{incident_id}".
           # @param subscription [Google::Cloud::Irm::V1alpha2::Subscription | Hash]
           #   The subscription to create.
@@ -1637,10 +1525,50 @@ module Google
             @create_subscription.call(req, options, &block)
           end
 
+          # Updates a subscription.
+          #
+          # @param subscription [Google::Cloud::Irm::V1alpha2::Subscription | Hash]
+          #   The subscription to update, with new values.
+          #   A hash of the same form as `Google::Cloud::Irm::V1alpha2::Subscription`
+          #   can also be provided.
+          # @param update_mask [Google::Protobuf::FieldMask | Hash]
+          #   List of fields that should be updated.
+          #   A hash of the same form as `Google::Protobuf::FieldMask`
+          #   can also be provided.
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Cloud::Irm::V1alpha2::Subscription]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
+          # @return [Google::Cloud::Irm::V1alpha2::Subscription]
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/irm"
+          #
+          #   incident_service_client = Google::Cloud::Irm.new(version: :v1alpha2)
+          #
+          #   # TODO: Initialize `subscription`:
+          #   subscription = {}
+          #   response = incident_service_client.update_subscription(subscription)
+
+          def update_subscription \
+              subscription,
+              update_mask: nil,
+              options: nil,
+              &block
+            req = {
+              subscription: subscription,
+              update_mask: update_mask
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Cloud::Irm::V1alpha2::UpdateSubscriptionRequest)
+            @update_subscription.call(req, options, &block)
+          end
+
           # Returns a list of subscriptions for an incident.
           #
           # @param parent [String]
-          #   Resource name of the incident, e.g.
+          #   Resource name of the incident, for example,
           #   "projects/{project_id}/incidents/{incident_id}".
           # @param page_size [Integer]
           #   The maximum number of resources contained in the underlying API
@@ -1729,7 +1657,7 @@ module Google
           # force-assigning the role to the user.
           #
           # @param parent [String]
-          #   Resource name of the incident, e.g.
+          #   Resource name of the incident, for example,
           #   "projects/{project_id}/incidents/{incident_id}".
           # @param incident_role_assignment [Google::Cloud::Irm::V1alpha2::IncidentRoleAssignment | Hash]
           #   Role assignment to create.
@@ -1799,7 +1727,7 @@ module Google
           # Lists role assignments that are part of an incident.
           #
           # @param parent [String]
-          #   Resource name of the incident, e.g.
+          #   Resource name of the incident, for example,
           #   "projects/{project_id}/incidents/{incident_id}".
           # @param page_size [Integer]
           #   The maximum number of resources contained in the underlying API

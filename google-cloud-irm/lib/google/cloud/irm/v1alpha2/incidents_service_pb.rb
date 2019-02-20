@@ -62,21 +62,17 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     repeated :tags, :message, 1, "google.cloud.irm.v1alpha2.Tag"
     optional :next_page_token, :string, 2
   end
-  add_message "google.cloud.irm.v1alpha2.UpdateAnnotationRequest" do
-    optional :annotation, :message, 1, "google.cloud.irm.v1alpha2.Annotation"
-    optional :update_mask, :message, 2, "google.protobuf.FieldMask"
-  end
   add_message "google.cloud.irm.v1alpha2.CreateSignalRequest" do
     optional :parent, :string, 1
     optional :signal, :message, 2, "google.cloud.irm.v1alpha2.Signal"
   end
-  add_message "google.cloud.irm.v1alpha2.ListSignalsRequest" do
+  add_message "google.cloud.irm.v1alpha2.SearchSignalsRequest" do
     optional :parent, :string, 1
-    optional :filter, :string, 2
+    optional :query, :string, 2
     optional :page_size, :int32, 3
     optional :page_token, :string, 4
   end
-  add_message "google.cloud.irm.v1alpha2.ListSignalsResponse" do
+  add_message "google.cloud.irm.v1alpha2.SearchSignalsResponse" do
     repeated :signals, :message, 1, "google.cloud.irm.v1alpha2.Signal"
     optional :next_page_token, :string, 2
   end
@@ -86,11 +82,6 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.cloud.irm.v1alpha2.UpdateSignalRequest" do
     optional :signal, :message, 1, "google.cloud.irm.v1alpha2.Signal"
     optional :update_mask, :message, 2, "google.protobuf.FieldMask"
-  end
-  add_message "google.cloud.irm.v1alpha2.AcknowledgeSignalRequest" do
-    optional :name, :string, 1
-  end
-  add_message "google.cloud.irm.v1alpha2.AcknowledgeSignalResponse" do
   end
   add_message "google.cloud.irm.v1alpha2.SearchIncidentsRequest" do
     optional :parent, :string, 1
@@ -138,14 +129,6 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.cloud.irm.v1alpha2.DeleteArtifactRequest" do
     optional :name, :string, 1
   end
-  add_message "google.cloud.irm.v1alpha2.GetShiftHandoffPresetsRequest" do
-    optional :parent, :string, 1
-  end
-  add_message "google.cloud.irm.v1alpha2.ShiftHandoffPresets" do
-    repeated :recipients, :string, 1
-    repeated :cc, :string, 2
-    optional :subject, :string, 3
-  end
   add_message "google.cloud.irm.v1alpha2.SendShiftHandoffRequest" do
     optional :parent, :string, 1
     repeated :recipients, :string, 2
@@ -166,6 +149,10 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.cloud.irm.v1alpha2.CreateSubscriptionRequest" do
     optional :parent, :string, 1
     optional :subscription, :message, 2, "google.cloud.irm.v1alpha2.Subscription"
+  end
+  add_message "google.cloud.irm.v1alpha2.UpdateSubscriptionRequest" do
+    optional :subscription, :message, 1, "google.cloud.irm.v1alpha2.Subscription"
+    optional :update_mask, :message, 2, "google.protobuf.FieldMask"
   end
   add_message "google.cloud.irm.v1alpha2.ListSubscriptionsRequest" do
     optional :parent, :string, 1
@@ -230,14 +217,11 @@ module Google
         DeleteTagRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.irm.v1alpha2.DeleteTagRequest").msgclass
         ListTagsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.irm.v1alpha2.ListTagsRequest").msgclass
         ListTagsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.irm.v1alpha2.ListTagsResponse").msgclass
-        UpdateAnnotationRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.irm.v1alpha2.UpdateAnnotationRequest").msgclass
         CreateSignalRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.irm.v1alpha2.CreateSignalRequest").msgclass
-        ListSignalsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.irm.v1alpha2.ListSignalsRequest").msgclass
-        ListSignalsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.irm.v1alpha2.ListSignalsResponse").msgclass
+        SearchSignalsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.irm.v1alpha2.SearchSignalsRequest").msgclass
+        SearchSignalsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.irm.v1alpha2.SearchSignalsResponse").msgclass
         GetSignalRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.irm.v1alpha2.GetSignalRequest").msgclass
         UpdateSignalRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.irm.v1alpha2.UpdateSignalRequest").msgclass
-        AcknowledgeSignalRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.irm.v1alpha2.AcknowledgeSignalRequest").msgclass
-        AcknowledgeSignalResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.irm.v1alpha2.AcknowledgeSignalResponse").msgclass
         SearchIncidentsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.irm.v1alpha2.SearchIncidentsRequest").msgclass
         SearchIncidentsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.irm.v1alpha2.SearchIncidentsResponse").msgclass
         EscalateIncidentRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.irm.v1alpha2.EscalateIncidentRequest").msgclass
@@ -247,12 +231,11 @@ module Google
         ListArtifactsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.irm.v1alpha2.ListArtifactsResponse").msgclass
         UpdateArtifactRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.irm.v1alpha2.UpdateArtifactRequest").msgclass
         DeleteArtifactRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.irm.v1alpha2.DeleteArtifactRequest").msgclass
-        GetShiftHandoffPresetsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.irm.v1alpha2.GetShiftHandoffPresetsRequest").msgclass
-        ShiftHandoffPresets = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.irm.v1alpha2.ShiftHandoffPresets").msgclass
         SendShiftHandoffRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.irm.v1alpha2.SendShiftHandoffRequest").msgclass
         SendShiftHandoffRequest::Incident = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.irm.v1alpha2.SendShiftHandoffRequest.Incident").msgclass
         SendShiftHandoffResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.irm.v1alpha2.SendShiftHandoffResponse").msgclass
         CreateSubscriptionRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.irm.v1alpha2.CreateSubscriptionRequest").msgclass
+        UpdateSubscriptionRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.irm.v1alpha2.UpdateSubscriptionRequest").msgclass
         ListSubscriptionsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.irm.v1alpha2.ListSubscriptionsRequest").msgclass
         ListSubscriptionsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.irm.v1alpha2.ListSubscriptionsResponse").msgclass
         DeleteSubscriptionRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.irm.v1alpha2.DeleteSubscriptionRequest").msgclass
