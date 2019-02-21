@@ -77,6 +77,9 @@ module Google
         # @!attribute [rw] speech_transcription_config
         #   @return [Google::Cloud::Videointelligence::V1::SpeechTranscriptionConfig]
         #     Config for SPEECH_TRANSCRIPTION.
+        # @!attribute [rw] text_detection_config
+        #   @return [Google::Cloud::Videointelligence::V1::TextDetectionConfig]
+        #     Config for TEXT_DETECTION.
         class VideoContext; end
 
         # Config for LABEL_DETECTION.
@@ -123,6 +126,16 @@ module Google
         #   @return [true, false]
         #     Whether bounding boxes be included in the face annotation output.
         class FaceDetectionConfig; end
+
+        # Config for TEXT_DETECTION.
+        # @!attribute [rw] language_hints
+        #   @return [Array<String>]
+        #     Language hint can be specified if the language to be detected is known a
+        #     priori. It can increase the accuracy of the detection. Language hint must
+        #     be language code in BCP-47 format.
+        #
+        #     Automatic language detection is performed if no hint is provided.
+        class TextDetectionConfig; end
 
         # Video segment.
         # @!attribute [rw] start_time_offset
@@ -280,6 +293,14 @@ module Google
         # @!attribute [rw] speech_transcriptions
         #   @return [Array<Google::Cloud::Videointelligence::V1::SpeechTranscription>]
         #     Speech transcription.
+        # @!attribute [rw] text_annotations
+        #   @return [Array<Google::Cloud::Videointelligence::V1::TextAnnotation>]
+        #     OCR text detection and tracking.
+        #     Annotations for list of detected text snippets. Each will have list of
+        #     frame information associated with it.
+        # @!attribute [rw] object_annotations
+        #   @return [Array<Google::Cloud::Videointelligence::V1::ObjectTrackingAnnotation>]
+        #     Annotations for list of objects detected and tracked in video.
         # @!attribute [rw] error
         #   @return [Google::Rpc::Status]
         #     If set, indicates an error. Note that for a single `AnnotateVideoRequest`
@@ -455,6 +476,111 @@ module Google
         #     and is only set if speaker diarization is enabled.
         class WordInfo; end
 
+        # A vertex represents a 2D point in the image.
+        # NOTE: the normalized vertex coordinates are relative to the original image
+        # and range from 0 to 1.
+        # @!attribute [rw] x
+        #   @return [Float]
+        #     X coordinate.
+        # @!attribute [rw] y
+        #   @return [Float]
+        #     Y coordinate.
+        class NormalizedVertex; end
+
+        # Normalized bounding polygon for text (that might not be aligned with axis).
+        # Contains list of the corner points in clockwise order starting from
+        # top-left corner. For example, for a rectangular bounding box:
+        # When the text is horizontal it might look like:
+        #         0----1
+        #         |    |
+        #         3----2
+        #
+        # When it's clockwise rotated 180 degrees around the top-left corner it
+        # becomes:
+        #         2----3
+        #         |    |
+        #         1----0
+        #
+        # and the vertex order will still be (0, 1, 2, 3). Note that values can be less
+        # than 0, or greater than 1 due to trignometric calculations for location of
+        # the box.
+        # @!attribute [rw] vertices
+        #   @return [Array<Google::Cloud::Videointelligence::V1::NormalizedVertex>]
+        #     Normalized vertices of the bounding polygon.
+        class NormalizedBoundingPoly; end
+
+        # Video segment level annotation results for text detection.
+        # @!attribute [rw] segment
+        #   @return [Google::Cloud::Videointelligence::V1::VideoSegment]
+        #     Video segment where a text snippet was detected.
+        # @!attribute [rw] confidence
+        #   @return [Float]
+        #     Confidence for the track of detected text. It is calculated as the highest
+        #     over all frames where OCR detected text appears.
+        # @!attribute [rw] frames
+        #   @return [Array<Google::Cloud::Videointelligence::V1::TextFrame>]
+        #     Information related to the frames where OCR detected text appears.
+        class TextSegment; end
+
+        # Video frame level annotation results for text annotation (OCR).
+        # Contains information regarding timestamp and bounding box locations for the
+        # frames containing detected OCR text snippets.
+        # @!attribute [rw] rotated_bounding_box
+        #   @return [Google::Cloud::Videointelligence::V1::NormalizedBoundingPoly]
+        #     Bounding polygon of the detected text for this frame.
+        # @!attribute [rw] time_offset
+        #   @return [Google::Protobuf::Duration]
+        #     Timestamp of this frame.
+        class TextFrame; end
+
+        # Annotations related to one detected OCR text snippet. This will contain the
+        # corresponding text, confidence value, and frame level information for each
+        # detection.
+        # @!attribute [rw] text
+        #   @return [String]
+        #     The detected text.
+        # @!attribute [rw] segments
+        #   @return [Array<Google::Cloud::Videointelligence::V1::TextSegment>]
+        #     All video segments where OCR detected text appears.
+        class TextAnnotation; end
+
+        # Video frame level annotations for object detection and tracking. This field
+        # stores per frame location, time offset, and confidence.
+        # @!attribute [rw] normalized_bounding_box
+        #   @return [Google::Cloud::Videointelligence::V1::NormalizedBoundingBox]
+        #     The normalized bounding box location of this object track for the frame.
+        # @!attribute [rw] time_offset
+        #   @return [Google::Protobuf::Duration]
+        #     The timestamp of the frame in microseconds.
+        class ObjectTrackingFrame; end
+
+        # Annotations corresponding to one tracked object.
+        # @!attribute [rw] segment
+        #   @return [Google::Cloud::Videointelligence::V1::VideoSegment]
+        #     Non-streaming batch mode ONLY.
+        #     Each object track corresponds to one video segment where it appears.
+        # @!attribute [rw] track_id
+        #   @return [Integer]
+        #     Streaming mode ONLY.
+        #     In streaming mode, we do not know the end time of a tracked object
+        #     before it is completed. Hence, there is no VideoSegment info returned.
+        #     Instead, we provide a unique identifiable integer track_id so that
+        #     the customers can correlate the results of the ongoing
+        #     ObjectTrackAnnotation of the same track_id over time.
+        # @!attribute [rw] entity
+        #   @return [Google::Cloud::Videointelligence::V1::Entity]
+        #     Entity to specify the object category that this track is labeled as.
+        # @!attribute [rw] confidence
+        #   @return [Float]
+        #     Object category's labeling confidence of this track.
+        # @!attribute [rw] frames
+        #   @return [Array<Google::Cloud::Videointelligence::V1::ObjectTrackingFrame>]
+        #     Information corresponding to all frames where this object track appears.
+        #     Non-streaming batch mode: it may be one or multiple ObjectTrackingFrame
+        #     messages in frames.
+        #     Streaming mode: it can only be one ObjectTrackingFrame message in frames.
+        class ObjectTrackingAnnotation; end
+
         # Video annotation feature.
         module Feature
           # Unspecified.
@@ -474,6 +600,12 @@ module Google
 
           # Speech transcription.
           SPEECH_TRANSCRIPTION = 6
+
+          # OCR text detection and tracking.
+          TEXT_DETECTION = 7
+
+          # Object detection and tracking.
+          OBJECT_TRACKING = 9
         end
 
         # Label detection mode.
