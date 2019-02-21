@@ -1,6 +1,6 @@
 ---
 layout: yard_main
-title: "Class: Google::Cloud::Videointelligence::V1::FaceDetectionConfig - Cloud"
+title: "Class: Google::Cloud::Videointelligence::V1::NormalizedVertex - Cloud"
 css: 
   - /docs/css/style.css
   - /docs/css/common.css
@@ -10,7 +10,7 @@ js:
   - /js/yard-main.js
 ---
 <script type="text/javascript" charset="utf-8">
-  pathId = "Google::Cloud::Videointelligence::V1::FaceDetectionConfig";
+  pathId = "Google::Cloud::Videointelligence::V1::NormalizedVertex";
   relpath = '../../../../';
 </script>
 
@@ -24,10 +24,10 @@ js:
   <div id="header">
     <div id="menu">
   
-    <a href="../../../../_index.html">Index (F)</a> &raquo;
+    <a href="../../../../_index.html">Index (N)</a> &raquo;
     <span class='title'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../Videointelligence.html" title="Google::Cloud::Videointelligence (module)">Videointelligence</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Videointelligence::V1 (module)">V1</a></span></span>
      &raquo; 
-    <span class="title">FaceDetectionConfig</span>
+    <span class="title">NormalizedVertex</span>
   
 </div>
 
@@ -47,7 +47,7 @@ js:
     <div class="clear"></div>
   </div>
 
-  <div id="content"><h1>Class: Google::Cloud::Videointelligence::V1::FaceDetectionConfig
+  <div id="content"><h1>Class: Google::Cloud::Videointelligence::V1::NormalizedVertex
   
   
   
@@ -62,7 +62,7 @@ js:
         <ul class="fullTree">
           <li>Object</li>
           
-            <li class="next">Google::Cloud::Videointelligence::V1::FaceDetectionConfig</li>
+            <li class="next">Google::Cloud::Videointelligence::V1::NormalizedVertex</li>
           
         </ul>
         <a href="#" class="inheritanceTree">show all</a>
@@ -89,7 +89,9 @@ js:
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>Config for FACE_DETECTION.</p>
+    <p>A vertex represents a 2D point in the image.
+NOTE: the normalized vertex coordinates are relative to the original image
+and range from 0 to 1.</p>
 
 
   </div>
@@ -107,7 +109,7 @@ js:
       <li class="public ">
   <span class="summary_signature">
     
-      <a href="#include_bounding_boxes-instance_method" title="#include_bounding_boxes (instance method)">#<strong>include_bounding_boxes</strong>  &#x21d2; true, false </a>
+      <a href="#x-instance_method" title="#x (instance method)">#<strong>x</strong>  &#x21d2; Float </a>
     
 
     
@@ -124,7 +126,7 @@ js:
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Whether bounding boxes be included in the face annotation output.</p>
+    <span class="summary_desc"><div class='inline'><p>X coordinate.</p>
 </div></span>
   
 </li>
@@ -133,7 +135,7 @@ js:
       <li class="public ">
   <span class="summary_signature">
     
-      <a href="#model-instance_method" title="#model (instance method)">#<strong>model</strong>  &#x21d2; String </a>
+      <a href="#y-instance_method" title="#y (instance method)">#<strong>y</strong>  &#x21d2; Float </a>
     
 
     
@@ -150,7 +152,7 @@ js:
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Model to use for face detection.</p>
+    <span class="summary_desc"><div class='inline'><p>Y coordinate.</p>
 </div></span>
   
 </li>
@@ -166,11 +168,11 @@ js:
     <h2>Instance Attribute Details</h2>
     
       
-      <span id="include_bounding_boxes=-instance_method"></span>
+      <span id="x=-instance_method"></span>
       <div class="method_details first">
-  <h3 class="signature first" id="include_bounding_boxes-instance_method">
+  <h3 class="signature first" id="x-instance_method">
   
-    #<strong>include_bounding_boxes</strong>  &#x21d2; <tt>true</tt>, <tt>false</tt> 
+    #<strong>x</strong>  &#x21d2; <tt>Float</tt> 
   
 
   
@@ -178,7 +180,7 @@ js:
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Whether bounding boxes be included in the face annotation output.</p>
+    <p>Returns X coordinate.</p>
 
 
   </div>
@@ -191,12 +193,12 @@ js:
     <li>
       
       
-        <span class='type'>(<tt>true</tt>, <tt>false</tt>)</span>
+        <span class='type'>(<tt>Float</tt>)</span>
       
       
       
         &mdash;
-        <div class='inline'><p>Whether bounding boxes be included in the face annotation output.</p>
+        <div class='inline'><p>X coordinate.</p>
 </div>
       
     </li>
@@ -209,23 +211,23 @@ js:
       <pre class="lines">
 
 
-128</pre>
+488</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/video_intelligence/v1/doc/google/cloud/videointelligence/v1/video_intelligence.rb', line 128</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/video_intelligence/v1/doc/google/cloud/videointelligence/v1/video_intelligence.rb', line 488</span>
 
-<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Videointelligence::V1::FaceDetectionConfig (class)">FaceDetectionConfig</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Videointelligence::V1::NormalizedVertex (class)">NormalizedVertex</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
 </div>
     
       
-      <span id="model=-instance_method"></span>
+      <span id="y=-instance_method"></span>
       <div class="method_details ">
-  <h3 class="signature " id="model-instance_method">
+  <h3 class="signature " id="y-instance_method">
   
-    #<strong>model</strong>  &#x21d2; <tt>String</tt> 
+    #<strong>y</strong>  &#x21d2; <tt>Float</tt> 
   
 
   
@@ -233,9 +235,7 @@ js:
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Model to use for face detection.
-Supported values: &quot;builtin/stable&quot; (the default if unset) and
-&quot;builtin/latest&quot;.</p>
+    <p>Returns Y coordinate.</p>
 
 
   </div>
@@ -248,14 +248,12 @@ Supported values: &quot;builtin/stable&quot; (the default if unset) and
     <li>
       
       
-        <span class='type'>(<tt>String</tt>)</span>
+        <span class='type'>(<tt>Float</tt>)</span>
       
       
       
         &mdash;
-        <div class='inline'><p>Model to use for face detection.
-Supported values: &quot;builtin/stable&quot; (the default if unset) and
-&quot;builtin/latest&quot;.</p>
+        <div class='inline'><p>Y coordinate.</p>
 </div>
       
     </li>
@@ -268,12 +266,12 @@ Supported values: &quot;builtin/stable&quot; (the default if unset) and
       <pre class="lines">
 
 
-128</pre>
+488</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/video_intelligence/v1/doc/google/cloud/videointelligence/v1/video_intelligence.rb', line 128</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/video_intelligence/v1/doc/google/cloud/videointelligence/v1/video_intelligence.rb', line 488</span>
 
-<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Videointelligence::V1::FaceDetectionConfig (class)">FaceDetectionConfig</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Videointelligence::V1::NormalizedVertex (class)">NormalizedVertex</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
