@@ -78,8 +78,7 @@ js:
     <h1>Ruby Client for Google Cloud Memorystore for Redis API (<a href="https://github.com/googleapis/google-cloud-ruby#versioning">Alpha</a>)</h1>
 
 <p><a href="https://cloud.google.com/memorystore">Google Cloud Memorystore for Redis API</a>:
-The Google Cloud Memorystore for Redis API is used for creating and managing
-Redis instances on the Google Cloud Platform.</p>
+Creates and manages Redis instances on the Google Cloud Platform.</p>
 
 <ul>
 <li><a href="https://cloud.google.com/memorystore">Product Documentation</a></li>
@@ -421,6 +420,7 @@ is used.</p>
       <pre class="lines">
 
 
+139
 140
 141
 142
@@ -432,11 +432,10 @@ is used.</p>
 148
 149
 150
-151
-152</pre>
+151</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/redis.rb', line 140</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/redis.rb', line 139</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='label'>version:</span> <span class='symbol'>:v1</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='rparen'>)</span>
   <span class='kw'>unless</span> <span class='const'><span class='object_link'><a href="#AVAILABLE_VERSIONS-constant" title="Google::Cloud::Redis::AVAILABLE_VERSIONS (constant)">AVAILABLE_VERSIONS</a></span></span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span><span class='lparen'>(</span><span class='id identifier rubyid_version'>version</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='period'>.</span><span class='id identifier rubyid_downcase'>downcase</span><span class='rparen'>)</span>
