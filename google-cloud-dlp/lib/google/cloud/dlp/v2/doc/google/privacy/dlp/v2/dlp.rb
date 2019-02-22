@@ -115,12 +115,12 @@ module Google
           #   @return [Integer]
           #     Max number of findings that will be returned for each item scanned.
           #     When set within `InspectDataSourceRequest`,
-          #     the maximum returned is 1000 regardless if this is set higher.
+          #     the maximum returned is 2000 regardless if this is set higher.
           #     When set within `InspectContentRequest`, this field is ignored.
           # @!attribute [rw] max_findings_per_request
           #   @return [Integer]
           #     Max number of findings that will be returned per request/job.
-          #     When set within `InspectContentRequest`, the maximum returned is 1000
+          #     When set within `InspectContentRequest`, the maximum returned is 2000
           #     regardless if this is set higher.
           # @!attribute [rw] max_findings_per_info_type
           #   @return [Array<Google::Privacy::Dlp::V2::InspectConfig::FindingLimits::InfoTypeLimit>]
@@ -620,6 +620,10 @@ module Google
         # @!attribute [rw] supported_by
         #   @return [Array<Google::Privacy::Dlp::V2::InfoTypeSupportedBy>]
         #     Which parts of the API supports this InfoType.
+        # @!attribute [rw] description
+        #   @return [String]
+        #     Description of the infotype. Translated when language is provided in the
+        #     request.
         class InfoTypeDescription; end
 
         # Request for the list of infoTypes.
@@ -1229,9 +1233,10 @@ module Google
         # Pseudonymization method that generates surrogates via cryptographic hashing.
         # Uses SHA-256.
         # The key size must be either 32 or 64 bytes.
-        # Outputs a 32 byte digest as an uppercase hex string
-        # (for example, 41D1567F7F99F1DC2A5FAB886DEE5BEE).
+        # Outputs a base64 encoded representation of the hashed output
+        # (for example, L7k0BHmF1ha5U3NfGykjro4xWi1MPVQPjhMAZbSV9mM=).
         # Currently, only string and integer values can be hashed.
+        # See https://cloud.google.com/dlp/docs/pseudonymization to learn more.
         # @!attribute [rw] crypto_key
         #   @return [Google::Privacy::Dlp::V2::CryptoKey]
         #     The key used by the hash function.
@@ -1611,7 +1616,8 @@ module Google
         class RecordCondition
           # The field type of `value` and `field` do not need to match to be
           # considered equal, but not all comparisons are possible.
-          #
+          # EQUAL_TO and NOT_EQUAL_TO attempt to compare even with incompatible types,
+          # but all other comparisons are invalid with incompatible types.
           # A `value` of type:
           #
           # * `string` can be compared against all other types
@@ -1673,7 +1679,7 @@ module Google
         # will be set.
         # @!attribute [rw] info_type
         #   @return [Google::Privacy::Dlp::V2::InfoType]
-        #     Set if the transformation was limited to a specific info_type.
+        #     Set if the transformation was limited to a specific InfoType.
         # @!attribute [rw] field
         #   @return [Google::Privacy::Dlp::V2::FieldId]
         #     Set if the transformation was limited to a specific FieldId.
@@ -1867,6 +1873,10 @@ module Google
         # @!attribute [rw] publish_summary_to_cscc
         #   @return [Google::Privacy::Dlp::V2::Action::PublishSummaryToCscc]
         #     Publish summary to Cloud Security Command Center (Alpha).
+        # @!attribute [rw] job_notification_emails
+        #   @return [Google::Privacy::Dlp::V2::Action::JobNotificationEmails]
+        #     Enable email notification to project owners and editors on job‘s
+        #     completion/failure.
         class Action
           # If set, the detailed findings will be persisted to the specified
           # OutputStorageConfig. Only a single instance of this action can be
@@ -1897,6 +1907,10 @@ module Google
           # Only a single instance of this action can be specified.
           # Compatible with: Inspect
           class PublishSummaryToCscc; end
+
+          # Enable email notification to project owners and editors on jobs's
+          # completion/failure.
+          class JobNotificationEmails; end
         end
 
         # Request message for CreateInspectTemplate.
@@ -2000,6 +2014,13 @@ module Google
         #     characters. Can be empty to allow the system to generate one.
         class CreateJobTriggerRequest; end
 
+        # Request message for ActivateJobTrigger.
+        # @!attribute [rw] name
+        #   @return [String]
+        #     Resource name of the trigger to activate, for example
+        #     `projects/dlp-test-project/jobTriggers/53234423`.
+        class ActivateJobTriggerRequest; end
+
         # Request message for UpdateJobTrigger.
         # @!attribute [rw] name
         #   @return [String]
@@ -2063,9 +2084,36 @@ module Google
         #
         #     * `create_time`: corresponds to time the JobTrigger was created.
         #     * `update_time`: corresponds to time the JobTrigger was last updated.
+        #     * `last_run_time`: corresponds to the last time the JobTrigger ran.
         #     * `name`: corresponds to JobTrigger's name.
         #     * `display_name`: corresponds to JobTrigger's display name.
         #     * `status`: corresponds to JobTrigger's status.
+        # @!attribute [rw] filter
+        #   @return [String]
+        #     Optional. Allows filtering.
+        #
+        #     Supported syntax:
+        #
+        #     * Filter expressions are made up of one or more restrictions.
+        #     * Restrictions can be combined by `AND` or `OR` logical operators. A
+        #       sequence of restrictions implicitly uses `AND`.
+        #     * A restriction has the form of `<field> <operator> <value>`.
+        #     * Supported fields/values for inspect jobs:
+        #       * `status` - HEALTHY|PAUSED|CANCELLED
+        #         * `inspected_storage` - DATASTORE|CLOUD_STORAGE|BIGQUERY
+        #         * 'last_run_time` - RFC 3339 formatted timestamp, surrounded by
+        #           quotation marks. Nanoseconds are ignored.
+        #         * 'error_count' - Number of errors that have occurred while running.
+        #       * The operator must be `=` or `!=` for status and inspected_storage.
+        #
+        #       Examples:
+        #
+        #     * inspected_storage = cloud_storage AND status = HEALTHY
+        #     * inspected_storage = cloud_storage OR inspected_storage = bigquery
+        #     * inspected_storage = cloud_storage AND (state = PAUSED OR state = HEALTHY)
+        #     * last_run_time > \"2017-12-12T00:00:00+00:00\"
+        #
+        #     The length of this field should be no more than 500 characters.
         class ListJobTriggersRequest; end
 
         # Response message for ListJobTriggers.
@@ -2554,10 +2602,10 @@ module Google
         module RelationalOperator
           RELATIONAL_OPERATOR_UNSPECIFIED = 0
 
-          # Equal.
+          # Equal. Attempts to match even with incompatible types.
           EQUAL_TO = 1
 
-          # Not equal to.
+          # Not equal to. Attempts to match even with incompatible types.
           NOT_EQUAL_TO = 2
 
           # Greater than.

@@ -124,6 +124,10 @@ module Google
           #     Pattern defining the regular expression. Its syntax
           #     (https://github.com/google/re2/wiki/Syntax) can be found under the
           #     google/re2 repository on GitHub.
+          # @!attribute [rw] group_indexes
+          #   @return [Array<Integer>]
+          #     The index of the submatch to extract as findings. When not
+          #     specified, the entire match is returned. No more than 3 may be included.
           class Regex; end
 
           # Message for detecting output from deidentification transformations
@@ -328,8 +332,15 @@ module Google
           # @!attribute [rw] url
           #   @return [String]
           #     The Cloud Storage url of the file(s) to scan, in the format
-          #     `gs://<bucket>/<path>`. Trailing wildcard in the path is allowed. Exactly
-          #     one of `url` or `regex_file_set` must be set.
+          #     `gs://<bucket>/<path>`. Trailing wildcard in the path is allowed.
+          #
+          #     If the url ends in a trailing slash, the bucket or directory represented
+          #     by the url will be scanned non-recursively (content in sub-directories
+          #     will not be scanned). This means that `gs://mybucket/` is equivalent to
+          #     `gs://mybucket/*`, and `gs://mybucket/directory/` is equivalent to
+          #     `gs://mybucket/directory/*`.
+          #
+          #     Exactly one of `url` or `regex_file_set` must be set.
           # @!attribute [rw] regex_file_set
           #   @return [Google::Privacy::Dlp::V2::CloudStorageRegexFileSet]
           #     The regex-filtered set of files to scan. Exactly one of `url` or
@@ -394,8 +405,8 @@ module Google
         #     inspection of entire columns which you know have no findings.
         class BigQueryOptions
           # How to sample rows if not all rows are scanned. Meaningful only when used
-          # in conjunction with rows_limit. If not specified, scanning would start
-          # from the top.
+          # in conjunction with either rows_limit or rows_limit_percent. If not
+          # specified, scanning would start from the top.
           module SampleMethod
             SAMPLE_METHOD_UNSPECIFIED = 0
 
@@ -515,6 +526,10 @@ module Google
         #   @return [Google::Privacy::Dlp::V2::DatastoreKey]
         # @!attribute [rw] big_query_key
         #   @return [Google::Privacy::Dlp::V2::BigQueryKey]
+        # @!attribute [rw] id_values
+        #   @return [Array<String>]
+        #     Values of identifying columns in the given row. Order of values matches
+        #     the order of field identifiers specified in the scanning request.
         class RecordKey; end
 
         # Message defining the location of a BigQuery table. A table is uniquely
@@ -568,6 +583,11 @@ module Google
           #   rb, rbw, rs, rc, scala, sh, sql, tex, txt, text, tsv, vcard, vcs, wml,
           #   xml, xsl, xsd, yml, yaml.
           TEXT_FILE = 2
+
+          # Included file extensions:
+          #   bmp, gif, jpg, jpeg, jpe, png.
+          # bytes_limit_per_file has no effect on image files.
+          IMAGE = 3
         end
 
         # Categorization of results based on how likely they are to represent a match,
