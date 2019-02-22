@@ -107,6 +107,32 @@ js:
       <li class="public ">
   <span class="summary_signature">
     
+      <a href="#filter-instance_method" title="#filter (instance method)">#<strong>filter</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Optional.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#order_by-instance_method" title="#order_by (instance method)">#<strong>order_by</strong>  &#x21d2; String </a>
     
 
@@ -218,9 +244,124 @@ js:
     <h2>Instance Attribute Details</h2>
     
       
-      <span id="order_by=-instance_method"></span>
+      <span id="filter=-instance_method"></span>
       <div class="method_details first">
-  <h3 class="signature first" id="order_by-instance_method">
+  <h3 class="signature first" id="filter-instance_method">
+  
+    #<strong>filter</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Optional. Allows filtering.</p>
+
+<p>Supported syntax:</p>
+
+<ul>
+<li>Filter expressions are made up of one or more restrictions.</li>
+<li>Restrictions can be combined by <code>AND</code> or <code>OR</code> logical operators. A
+sequence of restrictions implicitly uses <code>AND</code>.</li>
+<li>A restriction has the form of <code>&lt;field&gt; &lt;operator&gt; &lt;value&gt;</code>.</li>
+<li>Supported fields/values for inspect jobs:
+
+<ul>
+<li><code>status</code> - HEALTHY|PAUSED|CANCELLED</li>
+<li><code>inspected_storage</code> - DATASTORE|CLOUD_STORAGE|BIGQUERY</li>
+<li>&#39;last_run_time` - RFC 3339 formatted timestamp, surrounded by
+quotation marks. Nanoseconds are ignored.</li>
+<li>&#39;error_count&#39; - Number of errors that have occurred while running.</li>
+<li>The operator must be <code>=</code> or <code>!=</code> for status and inspected_storage.</li>
+</ul></li>
+</ul>
+
+<p>Examples:</p>
+
+<ul>
+<li>inspected_storage = cloud_storage AND status = HEALTHY</li>
+<li>inspected_storage = cloud_storage OR inspected_storage = bigquery</li>
+<li>inspected_storage = cloud_storage AND (state = PAUSED OR state = HEALTHY)</li>
+<li>last_run_time &gt; \&quot;2017-12-12T00:00:00+00:00\&quot;</li>
+</ul>
+
+<p>The length of this field should be no more than 500 characters.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Optional. Allows filtering.</p>
+
+<p>Supported syntax:</p>
+
+<ul>
+<li>Filter expressions are made up of one or more restrictions.</li>
+<li>Restrictions can be combined by <code>AND</code> or <code>OR</code> logical operators. A
+sequence of restrictions implicitly uses <code>AND</code>.</li>
+<li>A restriction has the form of <code>&lt;field&gt; &lt;operator&gt; &lt;value&gt;</code>.</li>
+<li>Supported fields/values for inspect jobs:
+
+<ul>
+<li><code>status</code> - HEALTHY|PAUSED|CANCELLED</li>
+<li><code>inspected_storage</code> - DATASTORE|CLOUD_STORAGE|BIGQUERY</li>
+<li>&#39;last_run_time` - RFC 3339 formatted timestamp, surrounded by
+quotation marks. Nanoseconds are ignored.</li>
+<li>&#39;error_count&#39; - Number of errors that have occurred while running.</li>
+<li>The operator must be <code>=</code> or <code>!=</code> for status and inspected_storage.</li>
+</ul></li>
+</ul>
+
+<p>Examples:</p>
+
+<ul>
+<li>inspected_storage = cloud_storage AND status = HEALTHY</li>
+<li>inspected_storage = cloud_storage OR inspected_storage = bigquery</li>
+<li>inspected_storage = cloud_storage AND (state = PAUSED OR state = HEALTHY)</li>
+<li>last_run_time &gt; \&quot;2017-12-12T00:00:00+00:00\&quot;</li>
+</ul>
+
+<p>The length of this field should be no more than 500 characters.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+2117</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/dlp.rb', line 2117</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Privacy::Dlp::V2::ListJobTriggersRequest (class)">ListJobTriggersRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="order_by=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="order_by-instance_method">
   
     #<strong>order_by</strong>  &#x21d2; <tt>String</tt> 
   
@@ -242,6 +383,7 @@ insignificant.</p>
 <ul>
 <li><code>create_time</code>: corresponds to time the JobTrigger was created.</li>
 <li><code>update_time</code>: corresponds to time the JobTrigger was last updated.</li>
+<li><code>last_run_time</code>: corresponds to the last time the JobTrigger ran.</li>
 <li><code>name</code>: corresponds to JobTrigger&#39;s name.</li>
 <li><code>display_name</code>: corresponds to JobTrigger&#39;s display name.</li>
 <li><code>status</code>: corresponds to JobTrigger&#39;s status.</li>
@@ -275,6 +417,7 @@ insignificant.</p>
 <ul>
 <li><code>create_time</code>: corresponds to time the JobTrigger was created.</li>
 <li><code>update_time</code>: corresponds to time the JobTrigger was last updated.</li>
+<li><code>last_run_time</code>: corresponds to the last time the JobTrigger ran.</li>
 <li><code>name</code>: corresponds to JobTrigger&#39;s name.</li>
 <li><code>display_name</code>: corresponds to JobTrigger&#39;s display name.</li>
 <li><code>status</code>: corresponds to JobTrigger&#39;s status.</li>
@@ -291,10 +434,10 @@ insignificant.</p>
       <pre class="lines">
 
 
-2069</pre>
+2117</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/dlp.rb', line 2069</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/dlp.rb', line 2117</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Privacy::Dlp::V2::ListJobTriggersRequest (class)">ListJobTriggersRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -346,10 +489,10 @@ insignificant.</p>
       <pre class="lines">
 
 
-2069</pre>
+2117</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/dlp.rb', line 2069</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/dlp.rb', line 2117</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Privacy::Dlp::V2::ListJobTriggersRequest (class)">ListJobTriggersRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -405,10 +548,10 @@ change for subsequent calls.</p>
       <pre class="lines">
 
 
-2069</pre>
+2117</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/dlp.rb', line 2069</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/dlp.rb', line 2117</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Privacy::Dlp::V2::ListJobTriggersRequest (class)">ListJobTriggersRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -460,10 +603,10 @@ change for subsequent calls.</p>
       <pre class="lines">
 
 
-2069</pre>
+2117</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/dlp.rb', line 2069</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/dlp.rb', line 2117</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Privacy::Dlp::V2::ListJobTriggersRequest (class)">ListJobTriggersRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>

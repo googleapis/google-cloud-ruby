@@ -504,7 +504,11 @@ Rules are applied in order that they are specified. Not supported for the
 199
 200
 201
-202</pre>
+202
+203
+204
+205
+206</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/storage.rb', line 80</span>
@@ -556,6 +560,10 @@ Rules are applied in order that they are specified. Not supported for the
 </span>  <span class='comment'>#     Pattern defining the regular expression. Its syntax
 </span>  <span class='comment'>#     (https://github.com/google/re2/wiki/Syntax) can be found under the
 </span>  <span class='comment'>#     google/re2 repository on GitHub.
+</span>  <span class='comment'># @!attribute [rw] group_indexes
+</span>  <span class='comment'>#   @return [Array&lt;Integer&gt;]
+</span>  <span class='comment'>#     The index of the submatch to extract as findings. When not
+</span>  <span class='comment'>#     specified, the entire match is returned. No more than 3 may be included.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="CustomInfoType/Regex.html" title="Google::Privacy::Dlp::V2::CustomInfoType::Regex (class)">Regex</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
   <span class='comment'># Message for detecting output from deidentification transformations
@@ -803,7 +811,11 @@ Rules are applied in order that they are specified. Not supported for the
 199
 200
 201
-202</pre>
+202
+203
+204
+205
+206</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/storage.rb', line 80</span>
@@ -855,6 +867,10 @@ Rules are applied in order that they are specified. Not supported for the
 </span>  <span class='comment'>#     Pattern defining the regular expression. Its syntax
 </span>  <span class='comment'>#     (https://github.com/google/re2/wiki/Syntax) can be found under the
 </span>  <span class='comment'>#     google/re2 repository on GitHub.
+</span>  <span class='comment'># @!attribute [rw] group_indexes
+</span>  <span class='comment'>#   @return [Array&lt;Integer&gt;]
+</span>  <span class='comment'>#     The index of the submatch to extract as findings. When not
+</span>  <span class='comment'>#     specified, the entire match is returned. No more than 3 may be included.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="CustomInfoType/Regex.html" title="Google::Privacy::Dlp::V2::CustomInfoType::Regex (class)">Regex</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
   <span class='comment'># Message for detecting output from deidentification transformations
@@ -1104,7 +1120,11 @@ to be returned. It still can be used for rules matching.</p>
 199
 200
 201
-202</pre>
+202
+203
+204
+205
+206</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/storage.rb', line 80</span>
@@ -1156,6 +1176,10 @@ to be returned. It still can be used for rules matching.</p>
 </span>  <span class='comment'>#     Pattern defining the regular expression. Its syntax
 </span>  <span class='comment'>#     (https://github.com/google/re2/wiki/Syntax) can be found under the
 </span>  <span class='comment'>#     google/re2 repository on GitHub.
+</span>  <span class='comment'># @!attribute [rw] group_indexes
+</span>  <span class='comment'>#   @return [Array&lt;Integer&gt;]
+</span>  <span class='comment'>#     The index of the submatch to extract as findings. When not
+</span>  <span class='comment'>#     specified, the entire match is returned. No more than 3 may be included.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="CustomInfoType/Regex.html" title="Google::Privacy::Dlp::V2::CustomInfoType::Regex (class)">Regex</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
   <span class='comment'># Message for detecting output from deidentification transformations
@@ -1413,7 +1437,11 @@ as a custom info type.</p>
 199
 200
 201
-202</pre>
+202
+203
+204
+205
+206</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/storage.rb', line 80</span>
@@ -1465,6 +1493,10 @@ as a custom info type.</p>
 </span>  <span class='comment'>#     Pattern defining the regular expression. Its syntax
 </span>  <span class='comment'>#     (https://github.com/google/re2/wiki/Syntax) can be found under the
 </span>  <span class='comment'>#     google/re2 repository on GitHub.
+</span>  <span class='comment'># @!attribute [rw] group_indexes
+</span>  <span class='comment'>#   @return [Array&lt;Integer&gt;]
+</span>  <span class='comment'>#     The index of the submatch to extract as findings. When not
+</span>  <span class='comment'>#     specified, the entire match is returned. No more than 3 may be included.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="CustomInfoType/Regex.html" title="Google::Privacy::Dlp::V2::CustomInfoType::Regex (class)">Regex</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
   <span class='comment'># Message for detecting output from deidentification transformations
@@ -1716,7 +1748,11 @@ the rule. Defaults to <code>VERY_LIKELY</code> if not specified.</p>
 199
 200
 201
-202</pre>
+202
+203
+204
+205
+206</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/storage.rb', line 80</span>
@@ -1768,6 +1804,10 @@ the rule. Defaults to <code>VERY_LIKELY</code> if not specified.</p>
 </span>  <span class='comment'>#     Pattern defining the regular expression. Its syntax
 </span>  <span class='comment'>#     (https://github.com/google/re2/wiki/Syntax) can be found under the
 </span>  <span class='comment'>#     google/re2 repository on GitHub.
+</span>  <span class='comment'># @!attribute [rw] group_indexes
+</span>  <span class='comment'>#   @return [Array&lt;Integer&gt;]
+</span>  <span class='comment'>#     The index of the submatch to extract as findings. When not
+</span>  <span class='comment'>#     specified, the entire match is returned. No more than 3 may be included.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="CustomInfoType/Regex.html" title="Google::Privacy::Dlp::V2::CustomInfoType::Regex (class)">Regex</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
   <span class='comment'># Message for detecting output from deidentification transformations
@@ -2015,7 +2055,11 @@ the rule. Defaults to <code>VERY_LIKELY</code> if not specified.</p>
 199
 200
 201
-202</pre>
+202
+203
+204
+205
+206</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/storage.rb', line 80</span>
@@ -2067,6 +2111,10 @@ the rule. Defaults to <code>VERY_LIKELY</code> if not specified.</p>
 </span>  <span class='comment'>#     Pattern defining the regular expression. Its syntax
 </span>  <span class='comment'>#     (https://github.com/google/re2/wiki/Syntax) can be found under the
 </span>  <span class='comment'>#     google/re2 repository on GitHub.
+</span>  <span class='comment'># @!attribute [rw] group_indexes
+</span>  <span class='comment'>#   @return [Array&lt;Integer&gt;]
+</span>  <span class='comment'>#     The index of the submatch to extract as findings. When not
+</span>  <span class='comment'>#     specified, the entire match is returned. No more than 3 may be included.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="CustomInfoType/Regex.html" title="Google::Privacy::Dlp::V2::CustomInfoType::Regex (class)">Regex</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
   <span class='comment'># Message for detecting output from deidentification transformations
@@ -2316,7 +2364,11 @@ the rule. Defaults to <code>VERY_LIKELY</code> if not specified.</p>
 199
 200
 201
-202</pre>
+202
+203
+204
+205
+206</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/storage.rb', line 80</span>
@@ -2368,6 +2420,10 @@ the rule. Defaults to <code>VERY_LIKELY</code> if not specified.</p>
 </span>  <span class='comment'>#     Pattern defining the regular expression. Its syntax
 </span>  <span class='comment'>#     (https://github.com/google/re2/wiki/Syntax) can be found under the
 </span>  <span class='comment'>#     google/re2 repository on GitHub.
+</span>  <span class='comment'># @!attribute [rw] group_indexes
+</span>  <span class='comment'>#   @return [Array&lt;Integer&gt;]
+</span>  <span class='comment'>#     The index of the submatch to extract as findings. When not
+</span>  <span class='comment'>#     specified, the entire match is returned. No more than 3 may be included.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="CustomInfoType/Regex.html" title="Google::Privacy::Dlp::V2::CustomInfoType::Regex (class)">Regex</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
   <span class='comment'># Message for detecting output from deidentification transformations
@@ -2617,7 +2673,11 @@ support reversing.</p>
 199
 200
 201
-202</pre>
+202
+203
+204
+205
+206</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/storage.rb', line 80</span>
@@ -2669,6 +2729,10 @@ support reversing.</p>
 </span>  <span class='comment'>#     Pattern defining the regular expression. Its syntax
 </span>  <span class='comment'>#     (https://github.com/google/re2/wiki/Syntax) can be found under the
 </span>  <span class='comment'>#     google/re2 repository on GitHub.
+</span>  <span class='comment'># @!attribute [rw] group_indexes
+</span>  <span class='comment'>#   @return [Array&lt;Integer&gt;]
+</span>  <span class='comment'>#     The index of the submatch to extract as findings. When not
+</span>  <span class='comment'>#     specified, the entire match is returned. No more than 3 may be included.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="CustomInfoType/Regex.html" title="Google::Privacy::Dlp::V2::CustomInfoType::Regex (class)">Regex</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
   <span class='comment'># Message for detecting output from deidentification transformations

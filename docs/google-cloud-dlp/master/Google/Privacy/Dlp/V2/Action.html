@@ -104,7 +104,7 @@ See <a href="https://cloud.google.com/dlp/docs/concepts-actions">https://cloud.g
     
   
     
-      <strong class="classes">Classes:</strong> <span class='object_link'><a href="Action/PublishSummaryToCscc.html" title="Google::Privacy::Dlp::V2::Action::PublishSummaryToCscc (class)">PublishSummaryToCscc</a></span>, <span class='object_link'><a href="Action/PublishToPubSub.html" title="Google::Privacy::Dlp::V2::Action::PublishToPubSub (class)">PublishToPubSub</a></span>, <span class='object_link'><a href="Action/SaveFindings.html" title="Google::Privacy::Dlp::V2::Action::SaveFindings (class)">SaveFindings</a></span>
+      <strong class="classes">Classes:</strong> <span class='object_link'><a href="Action/JobNotificationEmails.html" title="Google::Privacy::Dlp::V2::Action::JobNotificationEmails (class)">JobNotificationEmails</a></span>, <span class='object_link'><a href="Action/PublishSummaryToCscc.html" title="Google::Privacy::Dlp::V2::Action::PublishSummaryToCscc (class)">PublishSummaryToCscc</a></span>, <span class='object_link'><a href="Action/PublishToPubSub.html" title="Google::Privacy::Dlp::V2::Action::PublishToPubSub (class)">PublishToPubSub</a></span>, <span class='object_link'><a href="Action/SaveFindings.html" title="Google::Privacy::Dlp::V2::Action::SaveFindings (class)">SaveFindings</a></span>
     
   
 </p>
@@ -114,6 +114,32 @@ See <a href="https://cloud.google.com/dlp/docs/concepts-actions">https://cloud.g
 
   <h2>Instance Attribute Summary <small><a href="#" class="summary_toggle">collapse</a></small></h2>
   <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#job_notification_emails-instance_method" title="#job_notification_emails (instance method)">#<strong>job_notification_emails</strong>  &#x21d2; Google::Privacy::Dlp::V2::Action::JobNotificationEmails </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Enable email notification to project owners and editors on job‘s completion/failure.</p>
+</div></span>
+  
+</li>
+
     
       <li class="public ">
   <span class="summary_signature">
@@ -203,9 +229,134 @@ See <a href="https://cloud.google.com/dlp/docs/concepts-actions">https://cloud.g
     <h2>Instance Attribute Details</h2>
     
       
-      <span id="pub_sub=-instance_method"></span>
+      <span id="job_notification_emails=-instance_method"></span>
       <div class="method_details first">
-  <h3 class="signature first" id="pub_sub-instance_method">
+  <h3 class="signature first" id="job_notification_emails-instance_method">
+  
+    #<strong>job_notification_emails</strong>  &#x21d2; <tt><span class='object_link'><a href="Action/JobNotificationEmails.html" title="Google::Privacy::Dlp::V2::Action::JobNotificationEmails (class)">Google::Privacy::Dlp::V2::Action::JobNotificationEmails</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Enable email notification to project owners and editors on job‘s
+completion/failure.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Action/JobNotificationEmails.html" title="Google::Privacy::Dlp::V2::Action::JobNotificationEmails (class)">Google::Privacy::Dlp::V2::Action::JobNotificationEmails</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Enable email notification to project owners and editors on job‘s
+completion/failure.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+1880
+1881
+1882
+1883
+1884
+1885
+1886
+1887
+1888
+1889
+1890
+1891
+1892
+1893
+1894
+1895
+1896
+1897
+1898
+1899
+1900
+1901
+1902
+1903
+1904
+1905
+1906
+1907
+1908
+1909
+1910
+1911
+1912
+1913
+1914</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/dlp.rb', line 1880</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Privacy::Dlp::V2::Action (class)">Action</a></span></span>
+  <span class='comment'># If set, the detailed findings will be persisted to the specified
+</span>  <span class='comment'># OutputStorageConfig. Only a single instance of this action can be
+</span>  <span class='comment'># specified.
+</span>  <span class='comment'># Compatible with: Inspect, Risk
+</span>  <span class='comment'># @!attribute [rw] output_config
+</span>  <span class='comment'>#   @return [Google::Privacy::Dlp::V2::OutputStorageConfig]
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Action/SaveFindings.html" title="Google::Privacy::Dlp::V2::Action::SaveFindings (class)">SaveFindings</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+
+  <span class='comment'># Publish the results of a DlpJob to a pub sub channel.
+</span>  <span class='comment'># Compatible with: Inspect, Risk
+</span>  <span class='comment'># @!attribute [rw] topic
+</span>  <span class='comment'>#   @return [String]
+</span>  <span class='comment'>#     Cloud Pub/Sub topic to send notifications to. The topic must have given
+</span>  <span class='comment'>#     publishing access rights to the DLP API service account executing
+</span>  <span class='comment'>#     the long running DlpJob sending the notifications.
+</span>  <span class='comment'>#     Format is projects/\\{project}/topics/\\{topic}.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Action/PublishToPubSub.html" title="Google::Privacy::Dlp::V2::Action::PublishToPubSub (class)">PublishToPubSub</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+
+  <span class='comment'># Publish the result summary of a DlpJob to the Cloud Security
+</span>  <span class='comment'># Command Center (CSCC Alpha).
+</span>  <span class='comment'># This action is only available for projects which are parts of
+</span>  <span class='comment'># an organization and whitelisted for the alpha Cloud Security Command
+</span>  <span class='comment'># Center.
+</span>  <span class='comment'># The action will publish count of finding instances and their info types.
+</span>  <span class='comment'># The summary of findings will be persisted in CSCC and are governed by CSCC
+</span>  <span class='comment'># service-specific policy, see https://cloud.google.com/terms/service-terms
+</span>  <span class='comment'># Only a single instance of this action can be specified.
+</span>  <span class='comment'># Compatible with: Inspect
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Action/PublishSummaryToCscc.html" title="Google::Privacy::Dlp::V2::Action::PublishSummaryToCscc (class)">PublishSummaryToCscc</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+
+  <span class='comment'># Enable email notification to project owners and editors on jobs&#39;s
+</span>  <span class='comment'># completion/failure.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Action/JobNotificationEmails.html" title="Google::Privacy::Dlp::V2::Action::JobNotificationEmails (class)">JobNotificationEmails</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="pub_sub=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="pub_sub-instance_method">
   
     #<strong>pub_sub</strong>  &#x21d2; <tt><span class='object_link'><a href="Action/PublishToPubSub.html" title="Google::Privacy::Dlp::V2::Action::PublishToPubSub (class)">Google::Privacy::Dlp::V2::Action::PublishToPubSub</a></span></tt> 
   
@@ -246,16 +397,6 @@ See <a href="https://cloud.google.com/dlp/docs/concepts-actions">https://cloud.g
       <pre class="lines">
 
 
-1870
-1871
-1872
-1873
-1874
-1875
-1876
-1877
-1878
-1879
 1880
 1881
 1882
@@ -276,10 +417,24 @@ See <a href="https://cloud.google.com/dlp/docs/concepts-actions">https://cloud.g
 1897
 1898
 1899
-1900</pre>
+1900
+1901
+1902
+1903
+1904
+1905
+1906
+1907
+1908
+1909
+1910
+1911
+1912
+1913
+1914</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/dlp.rb', line 1870</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/dlp.rb', line 1880</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Privacy::Dlp::V2::Action (class)">Action</a></span></span>
   <span class='comment'># If set, the detailed findings will be persisted to the specified
@@ -311,6 +466,10 @@ See <a href="https://cloud.google.com/dlp/docs/concepts-actions">https://cloud.g
 </span>  <span class='comment'># Only a single instance of this action can be specified.
 </span>  <span class='comment'># Compatible with: Inspect
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Action/PublishSummaryToCscc.html" title="Google::Privacy::Dlp::V2::Action::PublishSummaryToCscc (class)">PublishSummaryToCscc</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+
+  <span class='comment'># Enable email notification to project owners and editors on jobs&#39;s
+</span>  <span class='comment'># completion/failure.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Action/JobNotificationEmails.html" title="Google::Privacy::Dlp::V2::Action::JobNotificationEmails (class)">JobNotificationEmails</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -361,16 +520,6 @@ See <a href="https://cloud.google.com/dlp/docs/concepts-actions">https://cloud.g
       <pre class="lines">
 
 
-1870
-1871
-1872
-1873
-1874
-1875
-1876
-1877
-1878
-1879
 1880
 1881
 1882
@@ -391,10 +540,24 @@ See <a href="https://cloud.google.com/dlp/docs/concepts-actions">https://cloud.g
 1897
 1898
 1899
-1900</pre>
+1900
+1901
+1902
+1903
+1904
+1905
+1906
+1907
+1908
+1909
+1910
+1911
+1912
+1913
+1914</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/dlp.rb', line 1870</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/dlp.rb', line 1880</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Privacy::Dlp::V2::Action (class)">Action</a></span></span>
   <span class='comment'># If set, the detailed findings will be persisted to the specified
@@ -426,6 +589,10 @@ See <a href="https://cloud.google.com/dlp/docs/concepts-actions">https://cloud.g
 </span>  <span class='comment'># Only a single instance of this action can be specified.
 </span>  <span class='comment'># Compatible with: Inspect
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Action/PublishSummaryToCscc.html" title="Google::Privacy::Dlp::V2::Action::PublishSummaryToCscc (class)">PublishSummaryToCscc</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+
+  <span class='comment'># Enable email notification to project owners and editors on jobs&#39;s
+</span>  <span class='comment'># completion/failure.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Action/JobNotificationEmails.html" title="Google::Privacy::Dlp::V2::Action::JobNotificationEmails (class)">JobNotificationEmails</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -476,16 +643,6 @@ See <a href="https://cloud.google.com/dlp/docs/concepts-actions">https://cloud.g
       <pre class="lines">
 
 
-1870
-1871
-1872
-1873
-1874
-1875
-1876
-1877
-1878
-1879
 1880
 1881
 1882
@@ -506,10 +663,24 @@ See <a href="https://cloud.google.com/dlp/docs/concepts-actions">https://cloud.g
 1897
 1898
 1899
-1900</pre>
+1900
+1901
+1902
+1903
+1904
+1905
+1906
+1907
+1908
+1909
+1910
+1911
+1912
+1913
+1914</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/dlp.rb', line 1870</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/dlp.rb', line 1880</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Privacy::Dlp::V2::Action (class)">Action</a></span></span>
   <span class='comment'># If set, the detailed findings will be persisted to the specified
@@ -541,6 +712,10 @@ See <a href="https://cloud.google.com/dlp/docs/concepts-actions">https://cloud.g
 </span>  <span class='comment'># Only a single instance of this action can be specified.
 </span>  <span class='comment'># Compatible with: Inspect
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Action/PublishSummaryToCscc.html" title="Google::Privacy::Dlp::V2::Action::PublishSummaryToCscc (class)">PublishSummaryToCscc</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+
+  <span class='comment'># Enable email notification to project owners and editors on jobs&#39;s
+</span>  <span class='comment'># completion/failure.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Action/JobNotificationEmails.html" title="Google::Privacy::Dlp::V2::Action::JobNotificationEmails (class)">JobNotificationEmails</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>

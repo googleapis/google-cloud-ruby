@@ -194,11 +194,6 @@ a field.</p>
       <pre class="lines">
 
 
-1611
-1612
-1613
-1614
-1615
 1616
 1617
 1618
@@ -243,15 +238,22 @@ a field.</p>
 1657
 1658
 1659
-1660</pre>
+1660
+1661
+1662
+1663
+1664
+1665
+1666</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/dlp.rb', line 1611</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/dlp.rb', line 1616</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Privacy::Dlp::V2::RecordCondition (class)">RecordCondition</a></span></span>
   <span class='comment'># The field type of `value` and `field` do not need to match to be
 </span>  <span class='comment'># considered equal, but not all comparisons are possible.
-</span>  <span class='comment'>#
+</span>  <span class='comment'># EQUAL_TO and NOT_EQUAL_TO attempt to compare even with incompatible types,
+</span>  <span class='comment'># but all other comparisons are invalid with incompatible types.
 </span>  <span class='comment'># A `value` of type:
 </span>  <span class='comment'>#
 </span>  <span class='comment'># * `string` can be compared against all other types
