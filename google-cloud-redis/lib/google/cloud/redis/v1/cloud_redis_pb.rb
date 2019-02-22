@@ -27,6 +27,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :tier, :enum, 17, "google.cloud.redis.v1.Instance.Tier"
     optional :memory_size_gb, :int32, 18
     optional :authorized_network, :string, 20
+    optional :persistence_iam_identity, :string, 21
   end
   add_enum "google.cloud.redis.v1.Instance.State" do
     value :STATE_UNSPECIFIED, 0
@@ -36,6 +37,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     value :DELETING, 4
     value :REPAIRING, 5
     value :MAINTENANCE, 6
+    value :IMPORTING, 8
+    value :FAILING_OVER, 9
   end
   add_enum "google.cloud.redis.v1.Instance.Tier" do
     value :TIER_UNSPECIFIED, 0
@@ -50,6 +53,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.cloud.redis.v1.ListInstancesResponse" do
     repeated :instances, :message, 1, "google.cloud.redis.v1.Instance"
     optional :next_page_token, :string, 2
+    repeated :unreachable, :string, 3
   end
   add_message "google.cloud.redis.v1.GetInstanceRequest" do
     optional :name, :string, 1
@@ -65,6 +69,39 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   end
   add_message "google.cloud.redis.v1.DeleteInstanceRequest" do
     optional :name, :string, 1
+  end
+  add_message "google.cloud.redis.v1.GcsSource" do
+    optional :uri, :string, 1
+  end
+  add_message "google.cloud.redis.v1.InputConfig" do
+    oneof :source do
+      optional :gcs_source, :message, 1, "google.cloud.redis.v1.GcsSource"
+    end
+  end
+  add_message "google.cloud.redis.v1.ImportInstanceRequest" do
+    optional :name, :string, 1
+    optional :input_config, :message, 3, "google.cloud.redis.v1.InputConfig"
+  end
+  add_message "google.cloud.redis.v1.GcsDestination" do
+    optional :uri, :string, 1
+  end
+  add_message "google.cloud.redis.v1.OutputConfig" do
+    oneof :destination do
+      optional :gcs_destination, :message, 1, "google.cloud.redis.v1.GcsDestination"
+    end
+  end
+  add_message "google.cloud.redis.v1.ExportInstanceRequest" do
+    optional :name, :string, 1
+    optional :output_config, :message, 3, "google.cloud.redis.v1.OutputConfig"
+  end
+  add_message "google.cloud.redis.v1.FailoverInstanceRequest" do
+    optional :name, :string, 1
+    optional :data_protection_mode, :enum, 2, "google.cloud.redis.v1.FailoverInstanceRequest.DataProtectionMode"
+  end
+  add_enum "google.cloud.redis.v1.FailoverInstanceRequest.DataProtectionMode" do
+    value :DATA_PROTECTION_MODE_UNSPECIFIED, 0
+    value :LIMITED_DATA_LOSS, 1
+    value :FORCE_DATA_LOSS, 2
   end
   add_message "google.cloud.redis.v1.OperationMetadata" do
     optional :create_time, :message, 1, "google.protobuf.Timestamp"
@@ -95,6 +132,14 @@ module Google
         CreateInstanceRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.redis.v1.CreateInstanceRequest").msgclass
         UpdateInstanceRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.redis.v1.UpdateInstanceRequest").msgclass
         DeleteInstanceRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.redis.v1.DeleteInstanceRequest").msgclass
+        GcsSource = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.redis.v1.GcsSource").msgclass
+        InputConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.redis.v1.InputConfig").msgclass
+        ImportInstanceRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.redis.v1.ImportInstanceRequest").msgclass
+        GcsDestination = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.redis.v1.GcsDestination").msgclass
+        OutputConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.redis.v1.OutputConfig").msgclass
+        ExportInstanceRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.redis.v1.ExportInstanceRequest").msgclass
+        FailoverInstanceRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.redis.v1.FailoverInstanceRequest").msgclass
+        FailoverInstanceRequest::DataProtectionMode = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.redis.v1.FailoverInstanceRequest.DataProtectionMode").enummodule
         OperationMetadata = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.redis.v1.OperationMetadata").msgclass
         LocationMetadata = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.redis.v1.LocationMetadata").msgclass
         ZoneMetadata = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.redis.v1.ZoneMetadata").msgclass
