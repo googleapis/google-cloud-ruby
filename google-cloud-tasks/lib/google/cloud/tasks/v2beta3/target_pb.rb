@@ -6,6 +6,12 @@ require 'google/protobuf'
 
 require 'google/api/annotations_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
+  add_message "google.cloud.tasks.v2beta3.HttpRequest" do
+    optional :url, :string, 1
+    optional :http_method, :enum, 2, "google.cloud.tasks.v2beta3.HttpMethod"
+    map :headers, :string, :string, 3
+    optional :body, :bytes, 4
+  end
   add_message "google.cloud.tasks.v2beta3.AppEngineHttpQueue" do
     optional :app_engine_routing_override, :message, 1, "google.cloud.tasks.v2beta3.AppEngineRouting"
   end
@@ -38,6 +44,7 @@ module Google
   module Cloud
     module Tasks
       module V2beta3
+        HttpRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.tasks.v2beta3.HttpRequest").msgclass
         AppEngineHttpQueue = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.tasks.v2beta3.AppEngineHttpQueue").msgclass
         AppEngineHttpRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.tasks.v2beta3.AppEngineHttpRequest").msgclass
         AppEngineRouting = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.tasks.v2beta3.AppEngineRouting").msgclass

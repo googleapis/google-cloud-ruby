@@ -44,6 +44,7 @@ module Google
         #   @return [Google::Cloud::Tasks::V2beta3::AppEngineHttpQueue]
         #     {Google::Cloud::Tasks::V2beta3::AppEngineHttpQueue AppEngineHttpQueue} settings apply only to
         #     {Google::Cloud::Tasks::V2beta3::AppEngineHttpRequest App Engine tasks} in this queue.
+        #     {Google::Cloud::Tasks::V2beta3::HttpRequest Http tasks} are not affected by this proto.
         # @!attribute [rw] rate_limits
         #   @return [Google::Cloud::Tasks::V2beta3::RateLimits]
         #     Rate limits for task dispatches.

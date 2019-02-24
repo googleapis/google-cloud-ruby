@@ -30,7 +30,8 @@ module Google
         #     * `PROJECT_ID` can contain letters ([A-Za-z]), numbers ([0-9]),
         #       hyphens (-), colons (:), or periods (.).
         #       For more information, see
-        #       [Identifying projects](https://cloud.google.com/resource-manager/docs/creating-managing-projects#identifying_projects)
+        #       [Identifying
+        #       projects](https://cloud.google.com/resource-manager/docs/creating-managing-projects#identifying_projects)
         #     * `LOCATION_ID` is the canonical ID for the task's location.
         #       The list of available locations can be obtained by calling
         #       {Google::Cloud::Location::Locations::ListLocations ListLocations}.
@@ -44,6 +45,15 @@ module Google
         #     HTTP request that is sent to the App Engine app handler.
         #
         #     An App Engine task is a task that has {Google::Cloud::Tasks::V2beta3::AppEngineHttpRequest AppEngineHttpRequest} set.
+        # @!attribute [rw] http_request
+        #   @return [Google::Cloud::Tasks::V2beta3::HttpRequest]
+        #     HTTP request that is sent to the task's target.
+        #
+        #     Warning: This is an [alpha](https://cloud.google.com/terms/launch-stages)
+        #     feature. If you haven't already joined, you can [use this form to sign
+        #     up](https://docs.google.com/forms/d/e/1FAIpQLSfc4uEy9CBHKYUSdnY1hdhKDCX7julVZHy3imOiR-XrU7bUNQ/viewform?usp=sf_link).
+        #
+        #     An HTTP task is a task that has {Google::Cloud::Tasks::V2beta3::HttpRequest HttpRequest} set.
         # @!attribute [rw] schedule_time
         #   @return [Google::Protobuf::Timestamp]
         #     The time when the task is scheduled to be attempted.
@@ -70,6 +80,9 @@ module Google
         #
         #     The default and maximum values depend on the type of request:
         #
+        #     * For {Google::Cloud::Tasks::V2beta3::HttpRequest HTTP tasks}, the default is
+        #       10 minutes.
+        #       The deadline must be in the interval [15 seconds, 30 minutes].
         #
         #     * For {Google::Cloud::Tasks::V2beta3::AppEngineHttpRequest App Engine tasks}, 0 indicates that the
         #       request has the default deadline. The default deadline depends on the
@@ -90,7 +103,7 @@ module Google
         #   @return [Integer]
         #     Output only. The number of attempts dispatched.
         #
-        #     This count includes tasks which have been dispatched but haven't
+        #     This count includes attempts which have been dispatched but haven't
         #     received a response.
         # @!attribute [rw] response_count
         #   @return [Integer]

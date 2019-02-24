@@ -22,6 +22,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :view, :enum, 10, "google.cloud.tasks.v2beta3.Task.View"
     oneof :payload_type do
       optional :app_engine_http_request, :message, 3, "google.cloud.tasks.v2beta3.AppEngineHttpRequest"
+      optional :http_request, :message, 11, "google.cloud.tasks.v2beta3.HttpRequest"
     end
   end
   add_enum "google.cloud.tasks.v2beta3.Task.View" do
