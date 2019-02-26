@@ -93,7 +93,8 @@ module Google
         #   @return [Google::Cloud::Speech::V1::RecognitionConfig::AudioEncoding]
         #     Encoding of audio data sent in all `RecognitionAudio` messages.
         #     This field is optional for `FLAC` and `WAV` audio files and required
-        #     for all other audio formats. For details, see {Google::Cloud::Speech::V1::RecognitionConfig::AudioEncoding AudioEncoding}.
+        #     for all other audio formats. For details, see
+        #     {Google::Cloud::Speech::V1::RecognitionConfig::AudioEncoding AudioEncoding}.
         # @!attribute [rw] sample_rate_hertz
         #   @return [Integer]
         #     Sample rate in Hertz of the audio data sent in all
@@ -102,7 +103,8 @@ module Google
         #     source to 16000 Hz. If that's not possible, use the native sample rate of
         #     the audio source (instead of re-sampling).
         #     This field is optional for `FLAC` and `WAV` audio files and required
-        #     for all other audio formats. For details, see {Google::Cloud::Speech::V1::RecognitionConfig::AudioEncoding AudioEncoding}.
+        #     for all other audio formats. For details, see
+        #     {Google::Cloud::Speech::V1::RecognitionConfig::AudioEncoding AudioEncoding}.
         # @!attribute [rw] audio_channel_count
         #   @return [Integer]
         #     *Optional* The number of channels in the input audio data.
@@ -234,7 +236,8 @@ module Google
           # an `AudioEncoding` when you send  send `FLAC` or `WAV` audio, the
           # encoding configuration must match the encoding described in the audio
           # header; otherwise the request returns an
-          # {Google::Rpc::Code::INVALID_ARGUMENT} error code.
+          # {Google::Rpc::Code::INVALID_ARGUMENT} error
+          # code.
           module AudioEncoding
             # Not specified.
             ENCODING_UNSPECIFIED = 0
@@ -295,8 +298,8 @@ module Google
 
         # Contains audio data in the encoding specified in the `RecognitionConfig`.
         # Either `content` or `uri` must be supplied. Supplying both or neither
-        # returns {Google::Rpc::Code::INVALID_ARGUMENT}. See
-        # [content limits](https://cloud.google.com/speech-to-text/quotas#content).
+        # returns {Google::Rpc::Code::INVALID_ARGUMENT}.
+        # See [content limits](https://cloud.google.com/speech-to-text/quotas#content).
         # @!attribute [rw] content
         #   @return [String]
         #     The audio data bytes encoded as specified in
@@ -309,8 +312,9 @@ module Google
         #     Currently, only Google Cloud Storage URIs are
         #     supported, which must be specified in the following format:
         #     `gs://bucket_name/object_name` (other URI formats return
-        #     {Google::Rpc::Code::INVALID_ARGUMENT}). For more information, see
-        #     [Request URIs](https://cloud.google.com/storage/docs/reference-uris).
+        #     {Google::Rpc::Code::INVALID_ARGUMENT}).
+        #     For more information, see [Request
+        #     URIs](https://cloud.google.com/storage/docs/reference-uris).
         class RecognitionAudio; end
 
         # The only message returned to the client by the `Recognize` method. It
@@ -399,8 +403,8 @@ module Google
         #   one or more (repeated) `results`.
         # @!attribute [rw] error
         #   @return [Google::Rpc::Status]
-        #     Output only. If set, returns a {Google::Rpc::Status} message that
-        #     specifies the error for the operation.
+        #     Output only. If set, returns a {Google::Rpc::Status}
+        #     message that specifies the error for the operation.
         # @!attribute [rw] results
         #   @return [Array<Google::Cloud::Speech::V1::StreamingRecognitionResult>]
         #     Output only. This repeated list contains zero or more results that
