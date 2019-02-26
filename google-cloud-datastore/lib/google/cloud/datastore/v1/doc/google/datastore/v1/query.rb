@@ -25,12 +25,12 @@ module Google
       #     The version of the entity, a strictly positive number that monotonically
       #     increases with changes to the entity.
       #
-      #     This field is set for {Google::Datastore::V1::EntityResult::ResultType::FULL `FULL`} entity
-      #     results.
+      #     This field is set for
+      #     {Google::Datastore::V1::EntityResult::ResultType::FULL `FULL`} entity results.
       #
-      #     For {Google::Datastore::V1::LookupResponse#missing missing} entities in `LookupResponse`, this
-      #     is the version of the snapshot that was used to look up the entity, and it
-      #     is always set except for eventually consistent reads.
+      #     For {Google::Datastore::V1::LookupResponse#missing missing} entities in
+      #     `LookupResponse`, this is the version of the snapshot that was used to look
+      #     up the entity, and it is always set except for eventually consistent reads.
       # @!attribute [rw] cursor
       #   @return [String]
       #     A cursor that points to the position after the result entity.
@@ -79,12 +79,14 @@ module Google
       #   @return [String]
       #     A starting point for the query results. Query cursors are
       #     returned in query result batches and
-      #     [can only be used to continue the same query](https://cloud.google.com/datastore/docs/concepts/queries#cursors_limits_and_offsets).
+      #     [can only be used to continue the same
+      #     query](https://cloud.google.com/datastore/docs/concepts/queries#cursors_limits_and_offsets).
       # @!attribute [rw] end_cursor
       #   @return [String]
       #     An ending point for the query results. Query cursors are
       #     returned in query result batches and
-      #     [can only be used to limit the same query](https://cloud.google.com/datastore/docs/concepts/queries#cursors_limits_and_offsets).
+      #     [can only be used to limit the same
+      #     query](https://cloud.google.com/datastore/docs/concepts/queries#cursors_limits_and_offsets).
       # @!attribute [rw] offset
       #   @return [Integer]
       #     The number of results to skip. Applies before limit, but after all other
@@ -201,7 +203,8 @@ module Google
         end
       end
 
-      # A [GQL query](https://cloud.google.com/datastore/docs/apis/gql/gql_reference).
+      # A [GQL
+      # query](https://cloud.google.com/datastore/docs/apis/gql/gql_reference).
       # @!attribute [rw] query_string
       #   @return [String]
       #     A string of the format described
