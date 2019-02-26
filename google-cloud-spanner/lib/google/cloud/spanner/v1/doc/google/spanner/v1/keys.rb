@@ -23,7 +23,8 @@ module Google
       #
       # Keys are represented by lists, where the ith value in the list
       # corresponds to the ith component of the table or index primary key.
-      # Individual values are encoded as described {Google::Spanner::V1::TypeCode here}.
+      # Individual values are encoded as described
+      # {Google::Spanner::V1::TypeCode here}.
       #
       # For example, consider the following table definition:
       #
@@ -136,8 +137,8 @@ module Google
       #     encoded as described {Google::Spanner::V1::TypeCode here}.
       # @!attribute [rw] ranges
       #   @return [Array<Google::Spanner::V1::KeyRange>]
-      #     A list of key ranges. See {Google::Spanner::V1::KeyRange KeyRange} for more information about
-      #     key range specifications.
+      #     A list of key ranges. See {Google::Spanner::V1::KeyRange KeyRange} for more
+      #     information about key range specifications.
       # @!attribute [rw] all
       #   @return [true, false]
       #     For convenience `all` can be set to `true` to indicate that this
