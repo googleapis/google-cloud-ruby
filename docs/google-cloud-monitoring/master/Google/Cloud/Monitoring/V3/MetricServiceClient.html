@@ -1287,10 +1287,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-505
-506
-507
-508
 509
 510
 511
@@ -1298,10 +1294,14 @@ retries, etc.</p>
 513
 514
 515
-516</pre>
+516
+517
+518
+519
+520</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/metric_service_client.rb', line 505</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/metric_service_client.rb', line 509</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_metric_descriptor'>create_metric_descriptor</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -1484,11 +1484,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-684
-685
-686
-687
-688
 689
 690
 691
@@ -1496,10 +1491,15 @@ retries, etc.</p>
 693
 694
 695
-696</pre>
+696
+697
+698
+699
+700
+701</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/metric_service_client.rb', line 684</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/metric_service_client.rb', line 689</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_time_series'>create_time_series</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -1659,20 +1659,20 @@ retries, etc.</p>
       <pre class="lines">
 
 
-540
-541
-542
-543
 544
 545
 546
 547
 548
 549
-550</pre>
+550
+551
+552
+553
+554</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/metric_service_client.rb', line 540</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/metric_service_client.rb', line 544</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete_metric_descriptor'>delete_metric_descriptor</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -1701,7 +1701,8 @@ retries, etc.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets a single metric descriptor. This method does not require a Stackdriver account.</p>
+    <p>Gets a single metric descriptor. This method does not require a Stackdriver
+account.</p>
 
 
   </div>
@@ -1838,19 +1839,19 @@ retries, etc.</p>
       <pre class="lines">
 
 
-464
-465
-466
-467
 468
 469
 470
 471
 472
-473</pre>
+473
+474
+475
+476
+477</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/metric_service_client.rb', line 464</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/metric_service_client.rb', line 468</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_metric_descriptor'>get_metric_descriptor</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -1878,7 +1879,8 @@ retries, etc.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets a single monitored resource descriptor. This method does not require a Stackdriver account.</p>
+    <p>Gets a single monitored resource descriptor. This method does not require a
+Stackdriver account.</p>
 
 
   </div>
@@ -2015,8 +2017,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-365
-366
 367
 368
 369
@@ -2024,10 +2024,12 @@ retries, etc.</p>
 371
 372
 373
-374</pre>
+374
+375
+376</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/metric_service_client.rb', line 365</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/metric_service_client.rb', line 367</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_monitored_resource_descriptor'>get_monitored_resource_descriptor</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -2055,7 +2057,8 @@ retries, etc.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Lists metric descriptors that match a filter. This method does not require a Stackdriver account.</p>
+    <p>Lists metric descriptors that match a filter. This method does not require
+a Stackdriver account.</p>
 
 
   </div>
@@ -2251,9 +2254,6 @@ object.</p>
       <pre class="lines">
 
 
-427
-428
-429
 430
 431
 432
@@ -2264,10 +2264,13 @@ object.</p>
 437
 438
 439
-440</pre>
+440
+441
+442
+443</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/metric_service_client.rb', line 427</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/metric_service_client.rb', line 430</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_metric_descriptors'>list_metric_descriptors</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -2299,7 +2302,8 @@ object.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Lists monitored resource descriptors that match a filter. This method does not require a Stackdriver account.</p>
+    <p>Lists monitored resource descriptors that match a filter. This method does
+not require a Stackdriver account.</p>
 
 
   </div>
@@ -2494,7 +2498,6 @@ object.</p>
       <pre class="lines">
 
 
-328
 329
 330
 331
@@ -2507,10 +2510,11 @@ object.</p>
 338
 339
 340
-341</pre>
+341
+342</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/metric_service_client.rb', line 328</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/metric_service_client.rb', line 329</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_monitored_resource_descriptors'>list_monitored_resource_descriptors</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -2542,7 +2546,8 @@ object.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Lists time series that match a filter. This method does not require a Stackdriver account.</p>
+    <p>Lists time series that match a filter. This method does not require a
+Stackdriver account.</p>
 
 
   </div>
@@ -2815,11 +2820,6 @@ object.</p>
       <pre class="lines">
 
 
-628
-629
-630
-631
-632
 633
 634
 635
@@ -2836,10 +2836,15 @@ object.</p>
 646
 647
 648
-649</pre>
+649
+650
+651
+652
+653
+654</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/metric_service_client.rb', line 628</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/metric_service_client.rb', line 633</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_time_series'>list_time_series</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
