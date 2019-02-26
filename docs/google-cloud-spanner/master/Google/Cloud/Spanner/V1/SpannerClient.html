@@ -1239,7 +1239,8 @@ custom error handling.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Begins a new transaction. This step can often be skipped:
-Read, ExecuteSql and
+Read,
+ExecuteSql and
 Commit can begin a new transaction as a
 side-effect.</p>
 
@@ -1395,21 +1396,21 @@ retries, etc.</p>
       <pre class="lines">
 
 
-972
-973
-974
-975
-976
-977
-978
-979
-980
-981
-982
-983</pre>
+998
+999
+1000
+1001
+1002
+1003
+1004
+1005
+1006
+1007
+1008
+1009</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/spanner_client.rb', line 972</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/spanner_client.rb', line 998</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_begin_transaction'>begin_transaction</span> \
     <span class='id identifier rubyid_session'>session</span><span class='comma'>,</span>
@@ -1642,25 +1643,25 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1034
-1035
-1036
-1037
-1038
-1039
-1040
-1041
-1042
-1043
-1044
-1045
-1046
-1047
-1048
-1049</pre>
+1060
+1061
+1062
+1063
+1064
+1065
+1066
+1067
+1068
+1069
+1070
+1071
+1072
+1073
+1074
+1075</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/spanner_client.rb', line 1034</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/spanner_client.rb', line 1060</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_commit'>commit</span> \
     <span class='id identifier rubyid_session'>session</span><span class='comma'>,</span>
@@ -2081,10 +2082,12 @@ a <code>FAILED_PRECONDITION</code> error.</p>
 
 <p>Operations inside read-write transactions might return <code>ABORTED</code>. If
 this occurs, the application should restart the transaction from
-the beginning. See <span class='object_link'><a href="../../../Spanner/V1/Transaction.html" title="Google::Spanner::V1::Transaction (class)">Transaction</a></span> for more details.</p>
+the beginning. See <span class='object_link'><a href="../../../Spanner/V1/Transaction.html" title="Google::Spanner::V1::Transaction (class)">Transaction</a></span> for more
+details.</p>
 
 <p>Larger result sets can be fetched in streaming fashion by calling
-ExecuteStreamingSql instead.</p>
+ExecuteStreamingSql
+instead.</p>
 
 
   </div>
@@ -2209,7 +2212,8 @@ can also be provided.</p>
         &mdash;
         <div class='inline'><p>It is not always possible for Cloud Spanner to infer the right SQL type
 from a JSON value.  For example, values of type <code>BYTES</code> and values
-of type <code>STRING</code> both appear in <span class='object_link'><a href="../../../Spanner/V1/ExecuteSqlRequest.html#params-instance_method" title="Google::Spanner::V1::ExecuteSqlRequest#params (method)">params</a></span> as JSON strings.</p>
+of type <code>STRING</code> both appear in
+<span class='object_link'><a href="../../../Spanner/V1/ExecuteSqlRequest.html#params-instance_method" title="Google::Spanner::V1::ExecuteSqlRequest#params (method)">params</a></span> as JSON strings.</p>
 
 <p>In these cases, <code>param_types</code> can be used to specify the exact
 SQL type for some or all of the SQL statement parameters. See the
@@ -2233,10 +2237,10 @@ can also be provided.</p>
         &mdash;
         <div class='inline'><p>If this request is resuming a previously interrupted SQL statement
 execution, <code>resume_token</code> should be copied from the last
-<span class='object_link'><a href="../../../Spanner/V1/PartialResultSet.html" title="Google::Spanner::V1::PartialResultSet (class)">PartialResultSet</a></span> yielded before the interruption. Doing this
-enables the new SQL statement execution to resume where the last one left
-off. The rest of the request parameters must exactly match the
-request that yielded this token.</p>
+<span class='object_link'><a href="../../../Spanner/V1/PartialResultSet.html" title="Google::Spanner::V1::PartialResultSet (class)">PartialResultSet</a></span> yielded before the
+interruption. Doing this enables the new SQL statement execution to resume
+where the last one left off. The rest of the request parameters must
+exactly match the request that yielded this token.</p>
 </div>
       
     </li>
@@ -2252,8 +2256,11 @@ request that yielded this token.</p>
       
         &mdash;
         <div class='inline'><p>Used to control the amount of debugging information returned in
-<span class='object_link'><a href="../../../Spanner/V1/ResultSetStats.html" title="Google::Spanner::V1::ResultSetStats (class)">ResultSetStats</a></span>. If <span class='object_link'><a href="../../../Spanner/V1/ExecuteSqlRequest.html#partition_token-instance_method" title="Google::Spanner::V1::ExecuteSqlRequest#partition_token (method)">partition_token</a></span> is set, <span class='object_link'><a href="../../../Spanner/V1/ExecuteSqlRequest.html#query_mode-instance_method" title="Google::Spanner::V1::ExecuteSqlRequest#query_mode (method)">query_mode</a></span> can only
-be set to <span class='object_link'><a href="../../../Spanner/V1/ExecuteSqlRequest/QueryMode.html#NORMAL-constant" title="Google::Spanner::V1::ExecuteSqlRequest::QueryMode::NORMAL (constant)">QueryMode::NORMAL</a></span>.</p>
+<span class='object_link'><a href="../../../Spanner/V1/ResultSetStats.html" title="Google::Spanner::V1::ResultSetStats (class)">ResultSetStats</a></span>. If
+<span class='object_link'><a href="../../../Spanner/V1/ExecuteSqlRequest.html#partition_token-instance_method" title="Google::Spanner::V1::ExecuteSqlRequest#partition_token (method)">partition_token</a></span> is
+set, <span class='object_link'><a href="../../../Spanner/V1/ExecuteSqlRequest.html#query_mode-instance_method" title="Google::Spanner::V1::ExecuteSqlRequest#query_mode (method)">query_mode</a></span> can only
+be set to
+<span class='object_link'><a href="../../../Spanner/V1/ExecuteSqlRequest/QueryMode.html#NORMAL-constant" title="Google::Spanner::V1::ExecuteSqlRequest::QueryMode::NORMAL (constant)">QueryMode::NORMAL</a></span>.</p>
 </div>
       
     </li>
@@ -2398,12 +2405,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-574
-575
-576
-577
-578
-579
 580
 581
 582
@@ -2423,10 +2424,16 @@ retries, etc.</p>
 596
 597
 598
-599</pre>
+599
+600
+601
+602
+603
+604
+605</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/spanner_client.rb', line 574</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/spanner_client.rb', line 580</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_execute_sql'>execute_sql</span> \
     <span class='id identifier rubyid_session'>session</span><span class='comma'>,</span>
@@ -2470,11 +2477,11 @@ retries, etc.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Like ExecuteSql, except returns the result
-set as a stream. Unlike ExecuteSql, there
-is no limit on the size of the returned result set. However, no
-individual row in the result set can exceed 100 MiB, and no
-column value can exceed 10 MiB.</p>
+    <p>Like ExecuteSql, except returns the
+result set as a stream. Unlike
+ExecuteSql, there is no limit on
+the size of the returned result set. However, no individual row in the
+result set can exceed 100 MiB, and no column value can exceed 10 MiB.</p>
 
 
   </div>
@@ -2601,7 +2608,8 @@ can also be provided.</p>
         &mdash;
         <div class='inline'><p>It is not always possible for Cloud Spanner to infer the right SQL type
 from a JSON value.  For example, values of type <code>BYTES</code> and values
-of type <code>STRING</code> both appear in <span class='object_link'><a href="../../../Spanner/V1/ExecuteSqlRequest.html#params-instance_method" title="Google::Spanner::V1::ExecuteSqlRequest#params (method)">params</a></span> as JSON strings.</p>
+of type <code>STRING</code> both appear in
+<span class='object_link'><a href="../../../Spanner/V1/ExecuteSqlRequest.html#params-instance_method" title="Google::Spanner::V1::ExecuteSqlRequest#params (method)">params</a></span> as JSON strings.</p>
 
 <p>In these cases, <code>param_types</code> can be used to specify the exact
 SQL type for some or all of the SQL statement parameters. See the
@@ -2625,10 +2633,10 @@ can also be provided.</p>
         &mdash;
         <div class='inline'><p>If this request is resuming a previously interrupted SQL statement
 execution, <code>resume_token</code> should be copied from the last
-<span class='object_link'><a href="../../../Spanner/V1/PartialResultSet.html" title="Google::Spanner::V1::PartialResultSet (class)">PartialResultSet</a></span> yielded before the interruption. Doing this
-enables the new SQL statement execution to resume where the last one left
-off. The rest of the request parameters must exactly match the
-request that yielded this token.</p>
+<span class='object_link'><a href="../../../Spanner/V1/PartialResultSet.html" title="Google::Spanner::V1::PartialResultSet (class)">PartialResultSet</a></span> yielded before the
+interruption. Doing this enables the new SQL statement execution to resume
+where the last one left off. The rest of the request parameters must
+exactly match the request that yielded this token.</p>
 </div>
       
     </li>
@@ -2644,8 +2652,11 @@ request that yielded this token.</p>
       
         &mdash;
         <div class='inline'><p>Used to control the amount of debugging information returned in
-<span class='object_link'><a href="../../../Spanner/V1/ResultSetStats.html" title="Google::Spanner::V1::ResultSetStats (class)">ResultSetStats</a></span>. If <span class='object_link'><a href="../../../Spanner/V1/ExecuteSqlRequest.html#partition_token-instance_method" title="Google::Spanner::V1::ExecuteSqlRequest#partition_token (method)">partition_token</a></span> is set, <span class='object_link'><a href="../../../Spanner/V1/ExecuteSqlRequest.html#query_mode-instance_method" title="Google::Spanner::V1::ExecuteSqlRequest#query_mode (method)">query_mode</a></span> can only
-be set to <span class='object_link'><a href="../../../Spanner/V1/ExecuteSqlRequest/QueryMode.html#NORMAL-constant" title="Google::Spanner::V1::ExecuteSqlRequest::QueryMode::NORMAL (constant)">QueryMode::NORMAL</a></span>.</p>
+<span class='object_link'><a href="../../../Spanner/V1/ResultSetStats.html" title="Google::Spanner::V1::ResultSetStats (class)">ResultSetStats</a></span>. If
+<span class='object_link'><a href="../../../Spanner/V1/ExecuteSqlRequest.html#partition_token-instance_method" title="Google::Spanner::V1::ExecuteSqlRequest#partition_token (method)">partition_token</a></span> is
+set, <span class='object_link'><a href="../../../Spanner/V1/ExecuteSqlRequest.html#query_mode-instance_method" title="Google::Spanner::V1::ExecuteSqlRequest#query_mode (method)">query_mode</a></span> can only
+be set to
+<span class='object_link'><a href="../../../Spanner/V1/ExecuteSqlRequest/QueryMode.html#NORMAL-constant" title="Google::Spanner::V1::ExecuteSqlRequest::QueryMode::NORMAL (constant)">QueryMode::NORMAL</a></span>.</p>
 </div>
       
     </li>
@@ -2751,16 +2762,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-701
-702
-703
-704
-705
-706
-707
-708
-709
-710
 711
 712
 713
@@ -2775,10 +2776,20 @@ retries, etc.</p>
 722
 723
 724
-725</pre>
+725
+726
+727
+728
+729
+730
+731
+732
+733
+734
+735</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/spanner_client.rb', line 701</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/spanner_client.rb', line 711</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_execute_streaming_sql'>execute_streaming_sql</span> \
     <span class='id identifier rubyid_session'>session</span><span class='comma'>,</span>
@@ -3250,10 +3261,11 @@ object.</p>
   <div class="discussion">
     <p>Creates a set of partition tokens that can be used to execute a query
 operation in parallel.  Each of the returned partition tokens can be used
-by ExecuteStreamingSql to specify a subset
-of the query result to read.  The same session and read-only transaction
-must be used by the PartitionQueryRequest used to create the
-partition tokens and the ExecuteSqlRequests that use the partition tokens.</p>
+by ExecuteStreamingSql to
+specify a subset of the query result to read.  The same session and
+read-only transaction must be used by the PartitionQueryRequest used to
+create the partition tokens and the ExecuteSqlRequests that use the
+partition tokens.</p>
 
 <p>Partition tokens become invalid when the session used to create them
 is deleted, is idle for too long, begins a new transaction, or becomes too
@@ -3315,7 +3327,8 @@ splits, remotely evaluates a subquery independently on each split, and
 then unions all results.</p>
 
 <p>This must not contain DML commands, such as INSERT, UPDATE, or
-DELETE. Use ExecuteStreamingSql with a
+DELETE. Use
+ExecuteStreamingSql with a
 PartitionedDml transaction for large, partition-friendly DML operations.</p>
 </div>
       
@@ -3381,7 +3394,8 @@ can also be provided.</p>
         &mdash;
         <div class='inline'><p>It is not always possible for Cloud Spanner to infer the right SQL type
 from a JSON value.  For example, values of type <code>BYTES</code> and values
-of type <code>STRING</code> both appear in <span class='object_link'><a href="../../../Spanner/V1/PartitionQueryRequest.html#params-instance_method" title="Google::Spanner::V1::PartitionQueryRequest#params (method)">params</a></span> as JSON strings.</p>
+of type <code>STRING</code> both appear in
+<span class='object_link'><a href="../../../Spanner/V1/PartitionQueryRequest.html#params-instance_method" title="Google::Spanner::V1::PartitionQueryRequest#params (method)">params</a></span> as JSON strings.</p>
 
 <p>In these cases, <code>param_types</code> can be used to specify the exact
 SQL type for some or all of the SQL query parameters. See the
@@ -3508,29 +3522,29 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1175
-1176
-1177
-1178
-1179
-1180
-1181
-1182
-1183
-1184
-1185
-1186
-1187
-1188
-1189
-1190
-1191
-1192
-1193
-1194</pre>
+1205
+1206
+1207
+1208
+1209
+1210
+1211
+1212
+1213
+1214
+1215
+1216
+1217
+1218
+1219
+1220
+1221
+1222
+1223
+1224</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/spanner_client.rb', line 1175</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/spanner_client.rb', line 1205</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_partition_query'>partition_query</span> \
     <span class='id identifier rubyid_session'>session</span><span class='comma'>,</span>
@@ -3570,12 +3584,13 @@ retries, etc.</p>
   <div class="discussion">
     <p>Creates a set of partition tokens that can be used to execute a read
 operation in parallel.  Each of the returned partition tokens can be used
-by StreamingRead to specify a subset of the read
-result to read.  The same session and read-only transaction must be used by
-the PartitionReadRequest used to create the partition tokens and the
-ReadRequests that use the partition tokens.  There are no ordering
-guarantees on rows returned among the returned partition tokens, or even
-within each individual StreamingRead call issued with a partition_token.</p>
+by StreamingRead to specify a
+subset of the read result to read.  The same session and read-only
+transaction must be used by the PartitionReadRequest used to create the
+partition tokens and the ReadRequests that use the partition tokens.  There
+are no ordering guarantees on rows returned among the returned partition
+tokens, or even within each individual StreamingRead call issued with a
+partition_token.</p>
 
 <p>Partition tokens become invalid when the session used to create them
 is deleted, is idle for too long, begins a new transaction, or becomes too
@@ -3648,8 +3663,11 @@ the whole operation must be restarted from the beginning.</p>
       
         &mdash;
         <div class='inline'><p>Required. <code>key_set</code> identifies the rows to be yielded. <code>key_set</code> names the
-primary keys of the rows in <span class='object_link'><a href="../../../Spanner/V1/PartitionReadRequest.html#table-instance_method" title="Google::Spanner::V1::PartitionReadRequest#table (method)">table</a></span> to be yielded, unless <span class='object_link'><a href="../../../Spanner/V1/PartitionReadRequest.html#index-instance_method" title="Google::Spanner::V1::PartitionReadRequest#index (method)">index</a></span>
-is present. If <span class='object_link'><a href="../../../Spanner/V1/PartitionReadRequest.html#index-instance_method" title="Google::Spanner::V1::PartitionReadRequest#index (method)">index</a></span> is present, then <span class='object_link'><a href="../../../Spanner/V1/PartitionReadRequest.html#key_set-instance_method" title="Google::Spanner::V1::PartitionReadRequest#key_set (method)">key_set</a></span> instead names
+primary keys of the rows in
+<span class='object_link'><a href="../../../Spanner/V1/PartitionReadRequest.html#table-instance_method" title="Google::Spanner::V1::PartitionReadRequest#table (method)">table</a></span> to be yielded, unless
+<span class='object_link'><a href="../../../Spanner/V1/PartitionReadRequest.html#index-instance_method" title="Google::Spanner::V1::PartitionReadRequest#index (method)">index</a></span> is present. If
+<span class='object_link'><a href="../../../Spanner/V1/PartitionReadRequest.html#index-instance_method" title="Google::Spanner::V1::PartitionReadRequest#index (method)">index</a></span> is present, then
+<span class='object_link'><a href="../../../Spanner/V1/PartitionReadRequest.html#key_set-instance_method" title="Google::Spanner::V1::PartitionReadRequest#key_set (method)">key_set</a></span> instead names
 index keys in <span class='object_link'><a href="../../../Spanner/V1/PartitionReadRequest.html#index-instance_method" title="Google::Spanner::V1::PartitionReadRequest#index (method)">index</a></span>.</p>
 
 <p>It is not an error for the <code>key_set</code> to name rows that do not
@@ -3688,9 +3706,12 @@ can also be provided.</p>
       
       
         &mdash;
-        <div class='inline'><p>If non-empty, the name of an index on <span class='object_link'><a href="../../../Spanner/V1/PartitionReadRequest.html#table-instance_method" title="Google::Spanner::V1::PartitionReadRequest#table (method)">table</a></span>. This index is
-used instead of the table primary key when interpreting <span class='object_link'><a href="../../../Spanner/V1/PartitionReadRequest.html#key_set-instance_method" title="Google::Spanner::V1::PartitionReadRequest#key_set (method)">key_set</a></span>
-and sorting result rows. See <span class='object_link'><a href="../../../Spanner/V1/PartitionReadRequest.html#key_set-instance_method" title="Google::Spanner::V1::PartitionReadRequest#key_set (method)">key_set</a></span> for further information.</p>
+        <div class='inline'><p>If non-empty, the name of an index on
+<span class='object_link'><a href="../../../Spanner/V1/PartitionReadRequest.html#table-instance_method" title="Google::Spanner::V1::PartitionReadRequest#table (method)">table</a></span>. This index is used
+instead of the table primary key when interpreting
+<span class='object_link'><a href="../../../Spanner/V1/PartitionReadRequest.html#key_set-instance_method" title="Google::Spanner::V1::PartitionReadRequest#key_set (method)">key_set</a></span> and sorting
+result rows. See <span class='object_link'><a href="../../../Spanner/V1/PartitionReadRequest.html#key_set-instance_method" title="Google::Spanner::V1::PartitionReadRequest#key_set (method)">key_set</a></span>
+for further information.</p>
 </div>
       
     </li>
@@ -3705,8 +3726,8 @@ and sorting result rows. See <span class='object_link'><a href="../../../Spanner
       
       
         &mdash;
-        <div class='inline'><p>The columns of <span class='object_link'><a href="../../../Spanner/V1/PartitionReadRequest.html#table-instance_method" title="Google::Spanner::V1::PartitionReadRequest#table (method)">table</a></span> to be returned for each row matching
-this request.</p>
+        <div class='inline'><p>The columns of <span class='object_link'><a href="../../../Spanner/V1/PartitionReadRequest.html#table-instance_method" title="Google::Spanner::V1::PartitionReadRequest#table (method)">table</a></span> to be
+returned for each row matching this request.</p>
 </div>
       
     </li>
@@ -3826,31 +3847,31 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1261
-1262
-1263
-1264
-1265
-1266
-1267
-1268
-1269
-1270
-1271
-1272
-1273
-1274
-1275
-1276
-1277
-1278
-1279
-1280
-1281
-1282</pre>
+1298
+1299
+1300
+1301
+1302
+1303
+1304
+1305
+1306
+1307
+1308
+1309
+1310
+1311
+1312
+1313
+1314
+1315
+1316
+1317
+1318
+1319</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/spanner_client.rb', line 1261</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/spanner_client.rb', line 1298</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_partition_read'>partition_read</span> \
     <span class='id identifier rubyid_session'>session</span><span class='comma'>,</span>
@@ -3892,14 +3913,15 @@ retries, etc.</p>
   <div class="discussion">
     <p>Reads rows from the database using key lookups and scans, as a
 simple key/value style alternative to
-ExecuteSql.  This method cannot be used to
-return a result set larger than 10 MiB; if the read matches more
+ExecuteSql.  This method cannot be
+used to return a result set larger than 10 MiB; if the read matches more
 data than that, the read fails with a <code>FAILED_PRECONDITION</code>
 error.</p>
 
 <p>Reads inside read-write transactions might return <code>ABORTED</code>. If
 this occurs, the application should restart the transaction from
-the beginning. See <span class='object_link'><a href="../../../Spanner/V1/Transaction.html" title="Google::Spanner::V1::Transaction (class)">Transaction</a></span> for more details.</p>
+the beginning. See <span class='object_link'><a href="../../../Spanner/V1/Transaction.html" title="Google::Spanner::V1::Transaction (class)">Transaction</a></span> for more
+details.</p>
 
 <p>Larger result sets can be yielded in streaming fashion by calling
 StreamingRead instead.</p>
@@ -3972,8 +3994,8 @@ StreamingRead instead.</p>
       
       
         &mdash;
-        <div class='inline'><p>The columns of <span class='object_link'><a href="../../../Spanner/V1/ReadRequest.html#table-instance_method" title="Google::Spanner::V1::ReadRequest#table (method)">table</a></span> to be returned for each row matching
-this request.</p>
+        <div class='inline'><p>The columns of <span class='object_link'><a href="../../../Spanner/V1/ReadRequest.html#table-instance_method" title="Google::Spanner::V1::ReadRequest#table (method)">table</a></span> to be returned
+for each row matching this request.</p>
 </div>
       
     </li>
@@ -3989,14 +4011,18 @@ this request.</p>
       
         &mdash;
         <div class='inline'><p>Required. <code>key_set</code> identifies the rows to be yielded. <code>key_set</code> names the
-primary keys of the rows in <span class='object_link'><a href="../../../Spanner/V1/ReadRequest.html#table-instance_method" title="Google::Spanner::V1::ReadRequest#table (method)">table</a></span> to be yielded, unless <span class='object_link'><a href="../../../Spanner/V1/ReadRequest.html#index-instance_method" title="Google::Spanner::V1::ReadRequest#index (method)">index</a></span>
-is present. If <span class='object_link'><a href="../../../Spanner/V1/ReadRequest.html#index-instance_method" title="Google::Spanner::V1::ReadRequest#index (method)">index</a></span> is present, then <span class='object_link'><a href="../../../Spanner/V1/ReadRequest.html#key_set-instance_method" title="Google::Spanner::V1::ReadRequest#key_set (method)">key_set</a></span> instead names
-index keys in <span class='object_link'><a href="../../../Spanner/V1/ReadRequest.html#index-instance_method" title="Google::Spanner::V1::ReadRequest#index (method)">index</a></span>.</p>
+primary keys of the rows in <span class='object_link'><a href="../../../Spanner/V1/ReadRequest.html#table-instance_method" title="Google::Spanner::V1::ReadRequest#table (method)">table</a></span> to
+be yielded, unless <span class='object_link'><a href="../../../Spanner/V1/ReadRequest.html#index-instance_method" title="Google::Spanner::V1::ReadRequest#index (method)">index</a></span> is present.
+If <span class='object_link'><a href="../../../Spanner/V1/ReadRequest.html#index-instance_method" title="Google::Spanner::V1::ReadRequest#index (method)">index</a></span> is present, then
+<span class='object_link'><a href="../../../Spanner/V1/ReadRequest.html#key_set-instance_method" title="Google::Spanner::V1::ReadRequest#key_set (method)">key_set</a></span> instead names index keys
+in <span class='object_link'><a href="../../../Spanner/V1/ReadRequest.html#index-instance_method" title="Google::Spanner::V1::ReadRequest#index (method)">index</a></span>.</p>
 
-<p>If the <span class='object_link'><a href="../../../Spanner/V1/ReadRequest.html#partition_token-instance_method" title="Google::Spanner::V1::ReadRequest#partition_token (method)">partition_token</a></span> field is empty, rows are yielded
-in table primary key order (if <span class='object_link'><a href="../../../Spanner/V1/ReadRequest.html#index-instance_method" title="Google::Spanner::V1::ReadRequest#index (method)">index</a></span> is empty) or index key order
-(if <span class='object_link'><a href="../../../Spanner/V1/ReadRequest.html#index-instance_method" title="Google::Spanner::V1::ReadRequest#index (method)">index</a></span> is non-empty).  If the <span class='object_link'><a href="../../../Spanner/V1/ReadRequest.html#partition_token-instance_method" title="Google::Spanner::V1::ReadRequest#partition_token (method)">partition_token</a></span> field is not
-empty, rows will be yielded in an unspecified order.</p>
+<p>If the <span class='object_link'><a href="../../../Spanner/V1/ReadRequest.html#partition_token-instance_method" title="Google::Spanner::V1::ReadRequest#partition_token (method)">partition_token</a></span>
+field is empty, rows are yielded in table primary key order (if
+<span class='object_link'><a href="../../../Spanner/V1/ReadRequest.html#index-instance_method" title="Google::Spanner::V1::ReadRequest#index (method)">index</a></span> is empty) or index key order
+(if <span class='object_link'><a href="../../../Spanner/V1/ReadRequest.html#index-instance_method" title="Google::Spanner::V1::ReadRequest#index (method)">index</a></span> is non-empty).  If the
+<span class='object_link'><a href="../../../Spanner/V1/ReadRequest.html#partition_token-instance_method" title="Google::Spanner::V1::ReadRequest#partition_token (method)">partition_token</a></span> field is
+not empty, rows will be yielded in an unspecified order.</p>
 
 <p>It is not an error for the <code>key_set</code> to name rows that do not
 exist in the database. Read yields nothing for nonexistent rows.
@@ -4034,9 +4060,12 @@ can also be provided.</p>
       
       
         &mdash;
-        <div class='inline'><p>If non-empty, the name of an index on <span class='object_link'><a href="../../../Spanner/V1/ReadRequest.html#table-instance_method" title="Google::Spanner::V1::ReadRequest#table (method)">table</a></span>. This index is
-used instead of the table primary key when interpreting <span class='object_link'><a href="../../../Spanner/V1/ReadRequest.html#key_set-instance_method" title="Google::Spanner::V1::ReadRequest#key_set (method)">key_set</a></span>
-and sorting result rows. See <span class='object_link'><a href="../../../Spanner/V1/ReadRequest.html#key_set-instance_method" title="Google::Spanner::V1::ReadRequest#key_set (method)">key_set</a></span> for further information.</p>
+        <div class='inline'><p>If non-empty, the name of an index on
+<span class='object_link'><a href="../../../Spanner/V1/ReadRequest.html#table-instance_method" title="Google::Spanner::V1::ReadRequest#table (method)">table</a></span>. This index is used instead of
+the table primary key when interpreting
+<span class='object_link'><a href="../../../Spanner/V1/ReadRequest.html#key_set-instance_method" title="Google::Spanner::V1::ReadRequest#key_set (method)">key_set</a></span> and sorting result rows.
+See <span class='object_link'><a href="../../../Spanner/V1/ReadRequest.html#key_set-instance_method" title="Google::Spanner::V1::ReadRequest#key_set (method)">key_set</a></span> for further
+information.</p>
 </div>
       
     </li>
@@ -4070,9 +4099,9 @@ is zero, the default is no limit. A limit cannot be specified if
         &mdash;
         <div class='inline'><p>If this request is resuming a previously interrupted read,
 <code>resume_token</code> should be copied from the last
-<span class='object_link'><a href="../../../Spanner/V1/PartialResultSet.html" title="Google::Spanner::V1::PartialResultSet (class)">PartialResultSet</a></span> yielded before the interruption. Doing this
-enables the new read to resume where the last read left off. The
-rest of the request parameters must exactly match the request
+<span class='object_link'><a href="../../../Spanner/V1/PartialResultSet.html" title="Google::Spanner::V1::PartialResultSet (class)">PartialResultSet</a></span> yielded before the
+interruption. Doing this enables the new read to resume where the last read
+left off. The rest of the request parameters must exactly match the request
 that yielded this token.</p>
 </div>
       
@@ -4194,24 +4223,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-812
-813
-814
-815
-816
-817
-818
-819
-820
-821
-822
-823
-824
-825
-826
-827
-828
-829
 830
 831
 832
@@ -4219,10 +4230,28 @@ retries, etc.</p>
 834
 835
 836
-837</pre>
+837
+838
+839
+840
+841
+842
+843
+844
+845
+846
+847
+848
+849
+850
+851
+852
+853
+854
+855</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/spanner_client.rb', line 812</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/spanner_client.rb', line 830</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_read'>read</span> \
     <span class='id identifier rubyid_session'>session</span><span class='comma'>,</span>
@@ -4268,8 +4297,9 @@ retries, etc.</p>
   <div class="discussion">
     <p>Rolls back a transaction, releasing any locks it holds. It is a good
 idea to call this for any transaction that includes one or more
-Read or ExecuteSql requests and
-ultimately decides not to commit.</p>
+Read or
+ExecuteSql requests and ultimately
+decides not to commit.</p>
 
 <p><code>Rollback</code> returns <code>OK</code> if it successfully aborts the transaction, the
 transaction was already aborted, or the transaction is not
@@ -4416,22 +4446,22 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1081
-1082
-1083
-1084
-1085
-1086
-1087
-1088
-1089
-1090
-1091
-1092
-1093</pre>
+1108
+1109
+1110
+1111
+1112
+1113
+1114
+1115
+1116
+1117
+1118
+1119
+1120</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/spanner_client.rb', line 1081</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/spanner_client.rb', line 1108</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_rollback'>rollback</span> \
     <span class='id identifier rubyid_session'>session</span><span class='comma'>,</span>
@@ -4462,9 +4492,9 @@ retries, etc.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Like Read, except returns the result set as a
-stream. Unlike Read, there is no limit on the
-size of the returned result set. However, no individual row in
+    <p>Like Read, except returns the result set
+as a stream. Unlike Read, there is no
+limit on the size of the returned result set. However, no individual row in
 the result set can exceed 100 MiB, and no column value can exceed
 10 MiB.</p>
 
@@ -4538,8 +4568,8 @@ the result set can exceed 100 MiB, and no column value can exceed
       
       
         &mdash;
-        <div class='inline'><p>The columns of <span class='object_link'><a href="../../../Spanner/V1/ReadRequest.html#table-instance_method" title="Google::Spanner::V1::ReadRequest#table (method)">table</a></span> to be returned for each row matching
-this request.</p>
+        <div class='inline'><p>The columns of <span class='object_link'><a href="../../../Spanner/V1/ReadRequest.html#table-instance_method" title="Google::Spanner::V1::ReadRequest#table (method)">table</a></span> to be returned
+for each row matching this request.</p>
 </div>
       
     </li>
@@ -4555,14 +4585,18 @@ this request.</p>
       
         &mdash;
         <div class='inline'><p>Required. <code>key_set</code> identifies the rows to be yielded. <code>key_set</code> names the
-primary keys of the rows in <span class='object_link'><a href="../../../Spanner/V1/ReadRequest.html#table-instance_method" title="Google::Spanner::V1::ReadRequest#table (method)">table</a></span> to be yielded, unless <span class='object_link'><a href="../../../Spanner/V1/ReadRequest.html#index-instance_method" title="Google::Spanner::V1::ReadRequest#index (method)">index</a></span>
-is present. If <span class='object_link'><a href="../../../Spanner/V1/ReadRequest.html#index-instance_method" title="Google::Spanner::V1::ReadRequest#index (method)">index</a></span> is present, then <span class='object_link'><a href="../../../Spanner/V1/ReadRequest.html#key_set-instance_method" title="Google::Spanner::V1::ReadRequest#key_set (method)">key_set</a></span> instead names
-index keys in <span class='object_link'><a href="../../../Spanner/V1/ReadRequest.html#index-instance_method" title="Google::Spanner::V1::ReadRequest#index (method)">index</a></span>.</p>
+primary keys of the rows in <span class='object_link'><a href="../../../Spanner/V1/ReadRequest.html#table-instance_method" title="Google::Spanner::V1::ReadRequest#table (method)">table</a></span> to
+be yielded, unless <span class='object_link'><a href="../../../Spanner/V1/ReadRequest.html#index-instance_method" title="Google::Spanner::V1::ReadRequest#index (method)">index</a></span> is present.
+If <span class='object_link'><a href="../../../Spanner/V1/ReadRequest.html#index-instance_method" title="Google::Spanner::V1::ReadRequest#index (method)">index</a></span> is present, then
+<span class='object_link'><a href="../../../Spanner/V1/ReadRequest.html#key_set-instance_method" title="Google::Spanner::V1::ReadRequest#key_set (method)">key_set</a></span> instead names index keys
+in <span class='object_link'><a href="../../../Spanner/V1/ReadRequest.html#index-instance_method" title="Google::Spanner::V1::ReadRequest#index (method)">index</a></span>.</p>
 
-<p>If the <span class='object_link'><a href="../../../Spanner/V1/ReadRequest.html#partition_token-instance_method" title="Google::Spanner::V1::ReadRequest#partition_token (method)">partition_token</a></span> field is empty, rows are yielded
-in table primary key order (if <span class='object_link'><a href="../../../Spanner/V1/ReadRequest.html#index-instance_method" title="Google::Spanner::V1::ReadRequest#index (method)">index</a></span> is empty) or index key order
-(if <span class='object_link'><a href="../../../Spanner/V1/ReadRequest.html#index-instance_method" title="Google::Spanner::V1::ReadRequest#index (method)">index</a></span> is non-empty).  If the <span class='object_link'><a href="../../../Spanner/V1/ReadRequest.html#partition_token-instance_method" title="Google::Spanner::V1::ReadRequest#partition_token (method)">partition_token</a></span> field is not
-empty, rows will be yielded in an unspecified order.</p>
+<p>If the <span class='object_link'><a href="../../../Spanner/V1/ReadRequest.html#partition_token-instance_method" title="Google::Spanner::V1::ReadRequest#partition_token (method)">partition_token</a></span>
+field is empty, rows are yielded in table primary key order (if
+<span class='object_link'><a href="../../../Spanner/V1/ReadRequest.html#index-instance_method" title="Google::Spanner::V1::ReadRequest#index (method)">index</a></span> is empty) or index key order
+(if <span class='object_link'><a href="../../../Spanner/V1/ReadRequest.html#index-instance_method" title="Google::Spanner::V1::ReadRequest#index (method)">index</a></span> is non-empty).  If the
+<span class='object_link'><a href="../../../Spanner/V1/ReadRequest.html#partition_token-instance_method" title="Google::Spanner::V1::ReadRequest#partition_token (method)">partition_token</a></span> field is
+not empty, rows will be yielded in an unspecified order.</p>
 
 <p>It is not an error for the <code>key_set</code> to name rows that do not
 exist in the database. Read yields nothing for nonexistent rows.
@@ -4600,9 +4634,12 @@ can also be provided.</p>
       
       
         &mdash;
-        <div class='inline'><p>If non-empty, the name of an index on <span class='object_link'><a href="../../../Spanner/V1/ReadRequest.html#table-instance_method" title="Google::Spanner::V1::ReadRequest#table (method)">table</a></span>. This index is
-used instead of the table primary key when interpreting <span class='object_link'><a href="../../../Spanner/V1/ReadRequest.html#key_set-instance_method" title="Google::Spanner::V1::ReadRequest#key_set (method)">key_set</a></span>
-and sorting result rows. See <span class='object_link'><a href="../../../Spanner/V1/ReadRequest.html#key_set-instance_method" title="Google::Spanner::V1::ReadRequest#key_set (method)">key_set</a></span> for further information.</p>
+        <div class='inline'><p>If non-empty, the name of an index on
+<span class='object_link'><a href="../../../Spanner/V1/ReadRequest.html#table-instance_method" title="Google::Spanner::V1::ReadRequest#table (method)">table</a></span>. This index is used instead of
+the table primary key when interpreting
+<span class='object_link'><a href="../../../Spanner/V1/ReadRequest.html#key_set-instance_method" title="Google::Spanner::V1::ReadRequest#key_set (method)">key_set</a></span> and sorting result rows.
+See <span class='object_link'><a href="../../../Spanner/V1/ReadRequest.html#key_set-instance_method" title="Google::Spanner::V1::ReadRequest#key_set (method)">key_set</a></span> for further
+information.</p>
 </div>
       
     </li>
@@ -4636,9 +4673,9 @@ is zero, the default is no limit. A limit cannot be specified if
         &mdash;
         <div class='inline'><p>If this request is resuming a previously interrupted read,
 <code>resume_token</code> should be copied from the last
-<span class='object_link'><a href="../../../Spanner/V1/PartialResultSet.html" title="Google::Spanner::V1::PartialResultSet (class)">PartialResultSet</a></span> yielded before the interruption. Doing this
-enables the new read to resume where the last read left off. The
-rest of the request parameters must exactly match the request
+<span class='object_link'><a href="../../../Spanner/V1/PartialResultSet.html" title="Google::Spanner::V1::PartialResultSet (class)">PartialResultSet</a></span> yielded before the
+interruption. Doing this enables the new read to resume where the last read
+left off. The rest of the request parameters must exactly match the request
 that yielded this token.</p>
 </div>
       
@@ -4721,34 +4758,34 @@ retries, etc.</p>
       <pre class="lines">
 
 
-917
-918
-919
-920
-921
-922
-923
-924
-925
-926
-927
-928
-929
-930
-931
-932
-933
-934
-935
-936
-937
-938
-939
-940
-941</pre>
+942
+943
+944
+945
+946
+947
+948
+949
+950
+951
+952
+953
+954
+955
+956
+957
+958
+959
+960
+961
+962
+963
+964
+965
+966</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/spanner_client.rb', line 917</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/spanner_client.rb', line 942</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_streaming_read'>streaming_read</span> \
     <span class='id identifier rubyid_session'>session</span><span class='comma'>,</span>

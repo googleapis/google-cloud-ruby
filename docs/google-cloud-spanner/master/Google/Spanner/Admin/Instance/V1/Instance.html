@@ -329,7 +329,6 @@ ListInstanceConfigs.</p>
       <pre class="lines">
 
 
-87
 88
 89
 90
@@ -344,10 +343,11 @@ ListInstanceConfigs.</p>
 99
 100
 101
-102</pre>
+102
+103</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/admin/instance/v1/doc/google/spanner/admin/instance/v1/spanner_instance_admin.rb', line 87</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/admin/instance/v1/doc/google/spanner/admin/instance/v1/spanner_instance_admin.rb', line 88</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Spanner::Admin::Instance::V1::Instance (class)">Instance</a></span></span>
   <span class='comment'># Indicates the current state of the instance.
@@ -416,7 +416,6 @@ Must be unique per project and between 4 and 30 characters in length.</p>
       <pre class="lines">
 
 
-87
 88
 89
 90
@@ -431,10 +430,11 @@ Must be unique per project and between 4 and 30 characters in length.</p>
 99
 100
 101
-102</pre>
+102
+103</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/admin/instance/v1/doc/google/spanner/admin/instance/v1/spanner_instance_admin.rb', line 87</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/admin/instance/v1/doc/google/spanner/admin/instance/v1/spanner_instance_admin.rb', line 88</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Spanner::Admin::Instance::V1::Instance (class)">Instance</a></span></span>
   <span class='comment'># Indicates the current state of the instance.
@@ -545,7 +545,6 @@ allow &quot;</em>&quot; in a future release.</p>
       <pre class="lines">
 
 
-87
 88
 89
 90
@@ -560,10 +559,11 @@ allow &quot;</em>&quot; in a future release.</p>
 99
 100
 101
-102</pre>
+102
+103</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/admin/instance/v1/doc/google/spanner/admin/instance/v1/spanner_instance_admin.rb', line 87</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/admin/instance/v1/doc/google/spanner/admin/instance/v1/spanner_instance_admin.rb', line 88</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Spanner::Admin::Instance::V1::Instance (class)">Instance</a></span></span>
   <span class='comment'># Indicates the current state of the instance.
@@ -636,7 +636,6 @@ segment of the name must be between 6 and 30 characters in length.</p>
       <pre class="lines">
 
 
-87
 88
 89
 90
@@ -651,10 +650,11 @@ segment of the name must be between 6 and 30 characters in length.</p>
 99
 100
 101
-102</pre>
+102
+103</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/admin/instance/v1/doc/google/spanner/admin/instance/v1/spanner_instance_admin.rb', line 87</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/admin/instance/v1/doc/google/spanner/admin/instance/v1/spanner_instance_admin.rb', line 88</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Spanner::Admin::Instance::V1::Instance (class)">Instance</a></span></span>
   <span class='comment'># Indicates the current state of the instance.
@@ -693,7 +693,8 @@ segment of the name must be between 6 and 30 characters in length.</p>
     <p>Returns Required. The number of nodes allocated to this instance. This may be zero
 in API responses for instances that are not yet in state <code>READY</code>.</p>
 
-<p>See <a href="https://cloud.google.com/spanner/docs/instances#node_count">the documentation</a>
+<p>See <a href="https://cloud.google.com/spanner/docs/instances#node_count">the
+documentation</a>
 for more information about nodes.</p>
 
 
@@ -715,7 +716,8 @@ for more information about nodes.</p>
         <div class='inline'><p>Required. The number of nodes allocated to this instance. This may be zero
 in API responses for instances that are not yet in state <code>READY</code>.</p>
 
-<p>See <a href="https://cloud.google.com/spanner/docs/instances#node_count">the documentation</a>
+<p>See <a href="https://cloud.google.com/spanner/docs/instances#node_count">the
+documentation</a>
 for more information about nodes.</p>
 </div>
       
@@ -729,7 +731,6 @@ for more information about nodes.</p>
       <pre class="lines">
 
 
-87
 88
 89
 90
@@ -744,10 +745,11 @@ for more information about nodes.</p>
 99
 100
 101
-102</pre>
+102
+103</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/admin/instance/v1/doc/google/spanner/admin/instance/v1/spanner_instance_admin.rb', line 87</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/admin/instance/v1/doc/google/spanner/admin/instance/v1/spanner_instance_admin.rb', line 88</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Spanner::Admin::Instance::V1::Instance (class)">Instance</a></span></span>
   <span class='comment'># Indicates the current state of the instance.
@@ -784,10 +786,10 @@ for more information about nodes.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns Output only. The current instance state. For
-CreateInstance, the state must be
-either omitted or set to <code>CREATING</code>. For
-UpdateInstance, the state must be
-either omitted or set to <code>READY</code>.</p>
+CreateInstance,
+the state must be either omitted or set to <code>CREATING</code>. For
+UpdateInstance,
+the state must be either omitted or set to <code>READY</code>.</p>
 
 
   </div>
@@ -806,10 +808,10 @@ either omitted or set to <code>READY</code>.</p>
       
         &mdash;
         <div class='inline'><p>Output only. The current instance state. For
-CreateInstance, the state must be
-either omitted or set to <code>CREATING</code>. For
-UpdateInstance, the state must be
-either omitted or set to <code>READY</code>.</p>
+CreateInstance,
+the state must be either omitted or set to <code>CREATING</code>. For
+UpdateInstance,
+the state must be either omitted or set to <code>READY</code>.</p>
 </div>
       
     </li>
@@ -822,7 +824,6 @@ either omitted or set to <code>READY</code>.</p>
       <pre class="lines">
 
 
-87
 88
 89
 90
@@ -837,10 +838,11 @@ either omitted or set to <code>READY</code>.</p>
 99
 100
 101
-102</pre>
+102
+103</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/admin/instance/v1/doc/google/spanner/admin/instance/v1/spanner_instance_admin.rb', line 87</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/admin/instance/v1/doc/google/spanner/admin/instance/v1/spanner_instance_admin.rb', line 88</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Spanner::Admin::Instance::V1::Instance (class)">Instance</a></span></span>
   <span class='comment'># Indicates the current state of the instance.

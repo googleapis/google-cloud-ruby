@@ -1104,8 +1104,8 @@ The returned <span class='object_link'><a href="../../../../../Longrunning/Opera
 have a name of the format <code>&lt;database_name&gt;/operations/&lt;operation_id&gt;</code> and
 can be used to track preparation of the database. The
 <span class='object_link'><a href="../../../../../Longrunning/Operation.html#metadata-instance_method" title="Google::Longrunning::Operation#metadata (method)">metadata</a></span> field type is
-<span class='object_link'><a href="../../../../../Spanner/Admin/Database/V1/CreateDatabaseMetadata.html" title="Google::Spanner::Admin::Database::V1::CreateDatabaseMetadata (class)">CreateDatabaseMetadata</a></span>. The
-<span class='object_link'><a href="../../../../../Longrunning/Operation.html#response-instance_method" title="Google::Longrunning::Operation#response (method)">response</a></span> field type is
+<span class='object_link'><a href="../../../../../Spanner/Admin/Database/V1/CreateDatabaseMetadata.html" title="Google::Spanner::Admin::Database::V1::CreateDatabaseMetadata (class)">CreateDatabaseMetadata</a></span>.
+The <span class='object_link'><a href="../../../../../Longrunning/Operation.html#response-instance_method" title="Google::Longrunning::Operation#response (method)">response</a></span> field type is
 <span class='object_link'><a href="../../../../../Spanner/Admin/Database/V1/Database.html" title="Google::Spanner::Admin::Database::V1::Database (class)">Database</a></span>, if successful.</p>
 
 
@@ -1451,9 +1451,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-566
-567
-568
 569
 570
 571
@@ -1461,10 +1458,13 @@ retries, etc.</p>
 573
 574
 575
-576</pre>
+576
+577
+578
+579</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/admin/database/v1/database_admin_client.rb', line 566</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/admin/database/v1/database_admin_client.rb', line 569</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_drop_database'>drop_database</span> \
     <span class='id identifier rubyid_database'>database</span><span class='comma'>,</span>
@@ -1804,19 +1804,19 @@ retries, etc.</p>
       <pre class="lines">
 
 
-599
-600
-601
 602
 603
 604
 605
 606
 607
-608</pre>
+608
+609
+610
+611</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/admin/database/v1/database_admin_client.rb', line 599</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/admin/database/v1/database_admin_client.rb', line 602</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_database_ddl'>get_database_ddl</span> \
     <span class='id identifier rubyid_database'>database</span><span class='comma'>,</span>
@@ -1984,19 +1984,19 @@ retries, etc.</p>
       <pre class="lines">
 
 
-683
-684
-685
 686
 687
 688
 689
 690
 691
-692</pre>
+692
+693
+694
+695</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/admin/database/v1/database_admin_client.rb', line 683</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/admin/database/v1/database_admin_client.rb', line 686</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_iam_policy'>get_iam_policy</span> \
     <span class='id identifier rubyid_resource'>resource</span><span class='comma'>,</span>
@@ -2404,9 +2404,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-645
-646
-647
 648
 649
 650
@@ -2415,10 +2412,13 @@ retries, etc.</p>
 653
 654
 655
-656</pre>
+656
+657
+658
+659</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/admin/database/v1/database_admin_client.rb', line 645</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/admin/database/v1/database_admin_client.rb', line 648</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_set_iam_policy'>set_iam_policy</span> \
     <span class='id identifier rubyid_resource'>resource</span><span class='comma'>,</span>
@@ -2610,9 +2610,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-728
-729
-730
 731
 732
 733
@@ -2621,10 +2618,13 @@ retries, etc.</p>
 736
 737
 738
-739</pre>
+739
+740
+741
+742</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/admin/database/v1/database_admin_client.rb', line 728</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/admin/database/v1/database_admin_client.rb', line 731</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_test_iam_permissions'>test_iam_permissions</span> \
     <span class='id identifier rubyid_resource'>resource</span><span class='comma'>,</span>
@@ -2660,7 +2660,8 @@ creating/altering/dropping tables, columns, indexes, etc. The returned
 the format <code>&lt;database_name&gt;/operations/&lt;operation_id&gt;</code> and can be used to
 track execution of the schema change(s). The
 <span class='object_link'><a href="../../../../../Longrunning/Operation.html#metadata-instance_method" title="Google::Longrunning::Operation#metadata (method)">metadata</a></span> field type is
-<span class='object_link'><a href="../../../../../Spanner/Admin/Database/V1/UpdateDatabaseDdlMetadata.html" title="Google::Spanner::Admin::Database::V1::UpdateDatabaseDdlMetadata (class)">UpdateDatabaseDdlMetadata</a></span>.  The operation has no response.</p>
+<span class='object_link'><a href="../../../../../Spanner/Admin/Database/V1/UpdateDatabaseDdlMetadata.html" title="Google::Spanner::Admin::Database::V1::UpdateDatabaseDdlMetadata (class)">UpdateDatabaseDdlMetadata</a></span>.
+The operation has no response.</p>
 
 
   </div>
@@ -2757,18 +2758,20 @@ is used to construct the name of the resulting
 
 <p>Specifying an explicit operation ID simplifies determining
 whether the statements were executed in the event that the
-UpdateDatabaseDdl call is replayed,
-or the return value is otherwise lost: the <span class='object_link'><a href="../../../../../Spanner/Admin/Database/V1/UpdateDatabaseDdlRequest.html#database-instance_method" title="Google::Spanner::Admin::Database::V1::UpdateDatabaseDdlRequest#database (method)">database</a></span> and
-<code>operation_id</code> fields can be combined to form the
+UpdateDatabaseDdl
+call is replayed, or the return value is otherwise lost: the
+<span class='object_link'><a href="../../../../../Spanner/Admin/Database/V1/UpdateDatabaseDdlRequest.html#database-instance_method" title="Google::Spanner::Admin::Database::V1::UpdateDatabaseDdlRequest#database (method)">database</a></span>
+and <code>operation_id</code> fields can be combined to form the
 <span class='object_link'><a href="../../../../../Longrunning/Operation.html#name-instance_method" title="Google::Longrunning::Operation#name (method)">name</a></span> of the resulting
-<span class='object_link'><a href="../../../../../Longrunning/Operation.html" title="Google::Longrunning::Operation (class)">longrunning::Operation</a></span>: <code>&lt;database&gt;/operations/&lt;operation_id&gt;</code>.</p>
+<span class='object_link'><a href="../../../../../Longrunning/Operation.html" title="Google::Longrunning::Operation (class)">longrunning::Operation</a></span>:
+<code>&lt;database&gt;/operations/&lt;operation_id&gt;</code>.</p>
 
 <p><code>operation_id</code> should be unique within the database, and must be
 a valid identifier: <code>[a-z][a-z0-9_]*</code>. Note that
 automatically-generated operation IDs always begin with an
 underscore. If the named operation already exists,
-UpdateDatabaseDdl returns
-<code>ALREADY_EXISTS</code>.</p>
+UpdateDatabaseDdl
+returns <code>ALREADY_EXISTS</code>.</p>
 </div>
       
     </li>
@@ -2828,9 +2831,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-526
-527
-528
 529
 530
 531
@@ -2848,10 +2848,13 @@ retries, etc.</p>
 543
 544
 545
-546</pre>
+546
+547
+548
+549</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/admin/database/v1/database_admin_client.rb', line 526</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/admin/database/v1/database_admin_client.rb', line 529</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update_database_ddl'>update_database_ddl</span> \
     <span class='id identifier rubyid_database'>database</span><span class='comma'>,</span>

@@ -89,7 +89,8 @@ js:
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>Node information for nodes appearing in a <span class='object_link'><a href="QueryPlan.html#plan_nodes-instance_method" title="Google::Spanner::V1::QueryPlan#plan_nodes (method)">QueryPlan#plan_nodes</a></span>.</p>
+    <p>Node information for nodes appearing in a
+<span class='object_link'><a href="QueryPlan.html#plan_nodes-instance_method" title="Google::Spanner::V1::QueryPlan#plan_nodes (method)">QueryPlan#plan_nodes</a></span>.</p>
 
 
   </div>
@@ -214,7 +215,7 @@ js:
   
 
   
-    <span class="summary_desc"><div class='inline'><p>The <code>PlanNode</code>&#39;s index in <span class='object_link'><a href="QueryPlan.html#plan_nodes-instance_method" title="Google::Spanner::V1::QueryPlan#plan_nodes (method)">node list</a></span>.</p>
+    <span class="summary_desc"><div class='inline'><p>The <code>PlanNode</code>&#39;s index in [node list][google.spanner.v1.QueryPlan.plan_nodes].</p>
 </div></span>
   
 </li>
@@ -351,9 +352,6 @@ js:
       <pre class="lines">
 
 
-55
-56
-57
 58
 59
 60
@@ -406,10 +404,13 @@ js:
 107
 108
 109
-110</pre>
+110
+111
+112
+113</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/doc/google/spanner/v1/query_plan.rb', line 55</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/doc/google/spanner/v1/query_plan.rb', line 58</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Spanner::V1::PlanNode (class)">PlanNode</a></span></span>
   <span class='comment'># Metadata associated with a parent-child relationship appearing in a
@@ -425,14 +426,14 @@ js:
 </span>  <span class='comment'>#     with the output variable.
 </span>  <span class='comment'># @!attribute [rw] variable
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Only present if the child node is {Google::Spanner::V1::PlanNode::Kind::SCALAR SCALAR} and corresponds
-</span>  <span class='comment'>#     to an output variable of the parent node. The field carries the name of
-</span>  <span class='comment'>#     the output variable.
-</span>  <span class='comment'>#     For example, a `TableScan` operator that reads rows from a table will
-</span>  <span class='comment'>#     have child links to the `SCALAR` nodes representing the output variables
-</span>  <span class='comment'>#     created for each column that is read by the operator. The corresponding
-</span>  <span class='comment'>#     `variable` fields will be set to the variable names assigned to the
-</span>  <span class='comment'>#     columns.
+</span>  <span class='comment'>#     Only present if the child node is
+</span>  <span class='comment'>#     {Google::Spanner::V1::PlanNode::Kind::SCALAR SCALAR} and corresponds to an
+</span>  <span class='comment'>#     output variable of the parent node. The field carries the name of the
+</span>  <span class='comment'>#     output variable. For example, a `TableScan` operator that reads rows from
+</span>  <span class='comment'>#     a table will have child links to the `SCALAR` nodes representing the
+</span>  <span class='comment'>#     output variables created for each column that is read by the operator.
+</span>  <span class='comment'>#     The corresponding `variable` fields will be set to the variable names
+</span>  <span class='comment'>#     assigned to the columns.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="PlanNode/ChildLink.html" title="Google::Spanner::V1::PlanNode::ChildLink (class)">ChildLink</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
   <span class='comment'># Condensed representation of a node and its subtree. Only present for
@@ -449,8 +450,8 @@ js:
 </span>  <span class='comment'>#     this node.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="PlanNode/ShortRepresentation.html" title="Google::Spanner::V1::PlanNode::ShortRepresentation (class)">ShortRepresentation</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
-  <span class='comment'># The kind of {Google::Spanner::V1::PlanNode PlanNode}. Distinguishes between the two different kinds of
-</span>  <span class='comment'># nodes that can appear in a query plan.
+  <span class='comment'># The kind of {Google::Spanner::V1::PlanNode PlanNode}. Distinguishes between
+</span>  <span class='comment'># the two different kinds of nodes that can appear in a query plan.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="PlanNode/Kind.html" title="Google::Spanner::V1::PlanNode::Kind (module)">Kind</a></span></span>
     <span class='comment'># Not specified.
 </span>    <span class='const'>KIND_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
@@ -516,9 +517,6 @@ js:
       <pre class="lines">
 
 
-55
-56
-57
 58
 59
 60
@@ -571,10 +569,13 @@ js:
 107
 108
 109
-110</pre>
+110
+111
+112
+113</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/doc/google/spanner/v1/query_plan.rb', line 55</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/doc/google/spanner/v1/query_plan.rb', line 58</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Spanner::V1::PlanNode (class)">PlanNode</a></span></span>
   <span class='comment'># Metadata associated with a parent-child relationship appearing in a
@@ -590,14 +591,14 @@ js:
 </span>  <span class='comment'>#     with the output variable.
 </span>  <span class='comment'># @!attribute [rw] variable
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Only present if the child node is {Google::Spanner::V1::PlanNode::Kind::SCALAR SCALAR} and corresponds
-</span>  <span class='comment'>#     to an output variable of the parent node. The field carries the name of
-</span>  <span class='comment'>#     the output variable.
-</span>  <span class='comment'>#     For example, a `TableScan` operator that reads rows from a table will
-</span>  <span class='comment'>#     have child links to the `SCALAR` nodes representing the output variables
-</span>  <span class='comment'>#     created for each column that is read by the operator. The corresponding
-</span>  <span class='comment'>#     `variable` fields will be set to the variable names assigned to the
-</span>  <span class='comment'>#     columns.
+</span>  <span class='comment'>#     Only present if the child node is
+</span>  <span class='comment'>#     {Google::Spanner::V1::PlanNode::Kind::SCALAR SCALAR} and corresponds to an
+</span>  <span class='comment'>#     output variable of the parent node. The field carries the name of the
+</span>  <span class='comment'>#     output variable. For example, a `TableScan` operator that reads rows from
+</span>  <span class='comment'>#     a table will have child links to the `SCALAR` nodes representing the
+</span>  <span class='comment'>#     output variables created for each column that is read by the operator.
+</span>  <span class='comment'>#     The corresponding `variable` fields will be set to the variable names
+</span>  <span class='comment'>#     assigned to the columns.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="PlanNode/ChildLink.html" title="Google::Spanner::V1::PlanNode::ChildLink (class)">ChildLink</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
   <span class='comment'># Condensed representation of a node and its subtree. Only present for
@@ -614,8 +615,8 @@ js:
 </span>  <span class='comment'>#     this node.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="PlanNode/ShortRepresentation.html" title="Google::Spanner::V1::PlanNode::ShortRepresentation (class)">ShortRepresentation</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
-  <span class='comment'># The kind of {Google::Spanner::V1::PlanNode PlanNode}. Distinguishes between the two different kinds of
-</span>  <span class='comment'># nodes that can appear in a query plan.
+  <span class='comment'># The kind of {Google::Spanner::V1::PlanNode PlanNode}. Distinguishes between
+</span>  <span class='comment'># the two different kinds of nodes that can appear in a query plan.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="PlanNode/Kind.html" title="Google::Spanner::V1::PlanNode::Kind (module)">Kind</a></span></span>
     <span class='comment'># Not specified.
 </span>    <span class='const'>KIND_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
@@ -687,9 +688,6 @@ execution etc.</p>
       <pre class="lines">
 
 
-55
-56
-57
 58
 59
 60
@@ -742,10 +740,13 @@ execution etc.</p>
 107
 108
 109
-110</pre>
+110
+111
+112
+113</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/doc/google/spanner/v1/query_plan.rb', line 55</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/doc/google/spanner/v1/query_plan.rb', line 58</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Spanner::V1::PlanNode (class)">PlanNode</a></span></span>
   <span class='comment'># Metadata associated with a parent-child relationship appearing in a
@@ -761,14 +762,14 @@ execution etc.</p>
 </span>  <span class='comment'>#     with the output variable.
 </span>  <span class='comment'># @!attribute [rw] variable
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Only present if the child node is {Google::Spanner::V1::PlanNode::Kind::SCALAR SCALAR} and corresponds
-</span>  <span class='comment'>#     to an output variable of the parent node. The field carries the name of
-</span>  <span class='comment'>#     the output variable.
-</span>  <span class='comment'>#     For example, a `TableScan` operator that reads rows from a table will
-</span>  <span class='comment'>#     have child links to the `SCALAR` nodes representing the output variables
-</span>  <span class='comment'>#     created for each column that is read by the operator. The corresponding
-</span>  <span class='comment'>#     `variable` fields will be set to the variable names assigned to the
-</span>  <span class='comment'>#     columns.
+</span>  <span class='comment'>#     Only present if the child node is
+</span>  <span class='comment'>#     {Google::Spanner::V1::PlanNode::Kind::SCALAR SCALAR} and corresponds to an
+</span>  <span class='comment'>#     output variable of the parent node. The field carries the name of the
+</span>  <span class='comment'>#     output variable. For example, a `TableScan` operator that reads rows from
+</span>  <span class='comment'>#     a table will have child links to the `SCALAR` nodes representing the
+</span>  <span class='comment'>#     output variables created for each column that is read by the operator.
+</span>  <span class='comment'>#     The corresponding `variable` fields will be set to the variable names
+</span>  <span class='comment'>#     assigned to the columns.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="PlanNode/ChildLink.html" title="Google::Spanner::V1::PlanNode::ChildLink (class)">ChildLink</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
   <span class='comment'># Condensed representation of a node and its subtree. Only present for
@@ -785,8 +786,8 @@ execution etc.</p>
 </span>  <span class='comment'>#     this node.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="PlanNode/ShortRepresentation.html" title="Google::Spanner::V1::PlanNode::ShortRepresentation (class)">ShortRepresentation</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
-  <span class='comment'># The kind of {Google::Spanner::V1::PlanNode PlanNode}. Distinguishes between the two different kinds of
-</span>  <span class='comment'># nodes that can appear in a query plan.
+  <span class='comment'># The kind of {Google::Spanner::V1::PlanNode PlanNode}. Distinguishes between
+</span>  <span class='comment'># the two different kinds of nodes that can appear in a query plan.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="PlanNode/Kind.html" title="Google::Spanner::V1::PlanNode::Kind (module)">Kind</a></span></span>
     <span class='comment'># Not specified.
 </span>    <span class='const'>KIND_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
@@ -821,7 +822,8 @@ execution etc.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns The <code>PlanNode</code>&#39;s index in <span class='object_link'><a href="QueryPlan.html#plan_nodes-instance_method" title="Google::Spanner::V1::QueryPlan#plan_nodes (method)">node list</a></span>.</p>
+    <p>Returns The <code>PlanNode</code>&#39;s index in [node
+list][google.spanner.v1.QueryPlan.plan_nodes].</p>
 
 
   </div>
@@ -839,7 +841,8 @@ execution etc.</p>
       
       
         &mdash;
-        <div class='inline'><p>The <code>PlanNode</code>&#39;s index in <span class='object_link'><a href="QueryPlan.html#plan_nodes-instance_method" title="Google::Spanner::V1::QueryPlan#plan_nodes (method)">node list</a></span>.</p>
+        <div class='inline'><p>The <code>PlanNode</code>&#39;s index in [node
+list][google.spanner.v1.QueryPlan.plan_nodes].</p>
 </div>
       
     </li>
@@ -852,9 +855,6 @@ execution etc.</p>
       <pre class="lines">
 
 
-55
-56
-57
 58
 59
 60
@@ -907,10 +907,13 @@ execution etc.</p>
 107
 108
 109
-110</pre>
+110
+111
+112
+113</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/doc/google/spanner/v1/query_plan.rb', line 55</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/doc/google/spanner/v1/query_plan.rb', line 58</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Spanner::V1::PlanNode (class)">PlanNode</a></span></span>
   <span class='comment'># Metadata associated with a parent-child relationship appearing in a
@@ -926,14 +929,14 @@ execution etc.</p>
 </span>  <span class='comment'>#     with the output variable.
 </span>  <span class='comment'># @!attribute [rw] variable
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Only present if the child node is {Google::Spanner::V1::PlanNode::Kind::SCALAR SCALAR} and corresponds
-</span>  <span class='comment'>#     to an output variable of the parent node. The field carries the name of
-</span>  <span class='comment'>#     the output variable.
-</span>  <span class='comment'>#     For example, a `TableScan` operator that reads rows from a table will
-</span>  <span class='comment'>#     have child links to the `SCALAR` nodes representing the output variables
-</span>  <span class='comment'>#     created for each column that is read by the operator. The corresponding
-</span>  <span class='comment'>#     `variable` fields will be set to the variable names assigned to the
-</span>  <span class='comment'>#     columns.
+</span>  <span class='comment'>#     Only present if the child node is
+</span>  <span class='comment'>#     {Google::Spanner::V1::PlanNode::Kind::SCALAR SCALAR} and corresponds to an
+</span>  <span class='comment'>#     output variable of the parent node. The field carries the name of the
+</span>  <span class='comment'>#     output variable. For example, a `TableScan` operator that reads rows from
+</span>  <span class='comment'>#     a table will have child links to the `SCALAR` nodes representing the
+</span>  <span class='comment'>#     output variables created for each column that is read by the operator.
+</span>  <span class='comment'>#     The corresponding `variable` fields will be set to the variable names
+</span>  <span class='comment'>#     assigned to the columns.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="PlanNode/ChildLink.html" title="Google::Spanner::V1::PlanNode::ChildLink (class)">ChildLink</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
   <span class='comment'># Condensed representation of a node and its subtree. Only present for
@@ -950,8 +953,8 @@ execution etc.</p>
 </span>  <span class='comment'>#     this node.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="PlanNode/ShortRepresentation.html" title="Google::Spanner::V1::PlanNode::ShortRepresentation (class)">ShortRepresentation</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
-  <span class='comment'># The kind of {Google::Spanner::V1::PlanNode PlanNode}. Distinguishes between the two different kinds of
-</span>  <span class='comment'># nodes that can appear in a query plan.
+  <span class='comment'># The kind of {Google::Spanner::V1::PlanNode PlanNode}. Distinguishes between
+</span>  <span class='comment'># the two different kinds of nodes that can appear in a query plan.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="PlanNode/Kind.html" title="Google::Spanner::V1::PlanNode::Kind (module)">Kind</a></span></span>
     <span class='comment'># Not specified.
 </span>    <span class='const'>KIND_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
@@ -988,9 +991,9 @@ execution etc.</p>
   <div class="discussion">
     <p>Returns Used to determine the type of node. May be needed for visualizing
 different kinds of nodes differently. For example, If the node is a
-<span class='object_link'><a href="PlanNode/Kind.html#SCALAR-constant" title="Google::Spanner::V1::PlanNode::Kind::SCALAR (constant)">SCALAR</a></span> node, it will have a condensed representation
-which can be used to directly embed a description of the node in its
-parent.</p>
+<span class='object_link'><a href="PlanNode/Kind.html#SCALAR-constant" title="Google::Spanner::V1::PlanNode::Kind::SCALAR (constant)">SCALAR</a></span> node, it will have a
+condensed representation which can be used to directly embed a description
+of the node in its parent.</p>
 
 
   </div>
@@ -1010,9 +1013,9 @@ parent.</p>
         &mdash;
         <div class='inline'><p>Used to determine the type of node. May be needed for visualizing
 different kinds of nodes differently. For example, If the node is a
-<span class='object_link'><a href="PlanNode/Kind.html#SCALAR-constant" title="Google::Spanner::V1::PlanNode::Kind::SCALAR (constant)">SCALAR</a></span> node, it will have a condensed representation
-which can be used to directly embed a description of the node in its
-parent.</p>
+<span class='object_link'><a href="PlanNode/Kind.html#SCALAR-constant" title="Google::Spanner::V1::PlanNode::Kind::SCALAR (constant)">SCALAR</a></span> node, it will have a
+condensed representation which can be used to directly embed a description
+of the node in its parent.</p>
 </div>
       
     </li>
@@ -1025,9 +1028,6 @@ parent.</p>
       <pre class="lines">
 
 
-55
-56
-57
 58
 59
 60
@@ -1080,10 +1080,13 @@ parent.</p>
 107
 108
 109
-110</pre>
+110
+111
+112
+113</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/doc/google/spanner/v1/query_plan.rb', line 55</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/doc/google/spanner/v1/query_plan.rb', line 58</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Spanner::V1::PlanNode (class)">PlanNode</a></span></span>
   <span class='comment'># Metadata associated with a parent-child relationship appearing in a
@@ -1099,14 +1102,14 @@ parent.</p>
 </span>  <span class='comment'>#     with the output variable.
 </span>  <span class='comment'># @!attribute [rw] variable
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Only present if the child node is {Google::Spanner::V1::PlanNode::Kind::SCALAR SCALAR} and corresponds
-</span>  <span class='comment'>#     to an output variable of the parent node. The field carries the name of
-</span>  <span class='comment'>#     the output variable.
-</span>  <span class='comment'>#     For example, a `TableScan` operator that reads rows from a table will
-</span>  <span class='comment'>#     have child links to the `SCALAR` nodes representing the output variables
-</span>  <span class='comment'>#     created for each column that is read by the operator. The corresponding
-</span>  <span class='comment'>#     `variable` fields will be set to the variable names assigned to the
-</span>  <span class='comment'>#     columns.
+</span>  <span class='comment'>#     Only present if the child node is
+</span>  <span class='comment'>#     {Google::Spanner::V1::PlanNode::Kind::SCALAR SCALAR} and corresponds to an
+</span>  <span class='comment'>#     output variable of the parent node. The field carries the name of the
+</span>  <span class='comment'>#     output variable. For example, a `TableScan` operator that reads rows from
+</span>  <span class='comment'>#     a table will have child links to the `SCALAR` nodes representing the
+</span>  <span class='comment'>#     output variables created for each column that is read by the operator.
+</span>  <span class='comment'>#     The corresponding `variable` fields will be set to the variable names
+</span>  <span class='comment'>#     assigned to the columns.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="PlanNode/ChildLink.html" title="Google::Spanner::V1::PlanNode::ChildLink (class)">ChildLink</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
   <span class='comment'># Condensed representation of a node and its subtree. Only present for
@@ -1123,8 +1126,8 @@ parent.</p>
 </span>  <span class='comment'>#     this node.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="PlanNode/ShortRepresentation.html" title="Google::Spanner::V1::PlanNode::ShortRepresentation (class)">ShortRepresentation</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
-  <span class='comment'># The kind of {Google::Spanner::V1::PlanNode PlanNode}. Distinguishes between the two different kinds of
-</span>  <span class='comment'># nodes that can appear in a query plan.
+  <span class='comment'># The kind of {Google::Spanner::V1::PlanNode PlanNode}. Distinguishes between
+</span>  <span class='comment'># the two different kinds of nodes that can appear in a query plan.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="PlanNode/Kind.html" title="Google::Spanner::V1::PlanNode::Kind (module)">Kind</a></span></span>
     <span class='comment'># Not specified.
 </span>    <span class='const'>KIND_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
@@ -1206,9 +1209,6 @@ information in its metadata:</p>
       <pre class="lines">
 
 
-55
-56
-57
 58
 59
 60
@@ -1261,10 +1261,13 @@ information in its metadata:</p>
 107
 108
 109
-110</pre>
+110
+111
+112
+113</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/doc/google/spanner/v1/query_plan.rb', line 55</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/doc/google/spanner/v1/query_plan.rb', line 58</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Spanner::V1::PlanNode (class)">PlanNode</a></span></span>
   <span class='comment'># Metadata associated with a parent-child relationship appearing in a
@@ -1280,14 +1283,14 @@ information in its metadata:</p>
 </span>  <span class='comment'>#     with the output variable.
 </span>  <span class='comment'># @!attribute [rw] variable
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Only present if the child node is {Google::Spanner::V1::PlanNode::Kind::SCALAR SCALAR} and corresponds
-</span>  <span class='comment'>#     to an output variable of the parent node. The field carries the name of
-</span>  <span class='comment'>#     the output variable.
-</span>  <span class='comment'>#     For example, a `TableScan` operator that reads rows from a table will
-</span>  <span class='comment'>#     have child links to the `SCALAR` nodes representing the output variables
-</span>  <span class='comment'>#     created for each column that is read by the operator. The corresponding
-</span>  <span class='comment'>#     `variable` fields will be set to the variable names assigned to the
-</span>  <span class='comment'>#     columns.
+</span>  <span class='comment'>#     Only present if the child node is
+</span>  <span class='comment'>#     {Google::Spanner::V1::PlanNode::Kind::SCALAR SCALAR} and corresponds to an
+</span>  <span class='comment'>#     output variable of the parent node. The field carries the name of the
+</span>  <span class='comment'>#     output variable. For example, a `TableScan` operator that reads rows from
+</span>  <span class='comment'>#     a table will have child links to the `SCALAR` nodes representing the
+</span>  <span class='comment'>#     output variables created for each column that is read by the operator.
+</span>  <span class='comment'>#     The corresponding `variable` fields will be set to the variable names
+</span>  <span class='comment'>#     assigned to the columns.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="PlanNode/ChildLink.html" title="Google::Spanner::V1::PlanNode::ChildLink (class)">ChildLink</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
   <span class='comment'># Condensed representation of a node and its subtree. Only present for
@@ -1304,8 +1307,8 @@ information in its metadata:</p>
 </span>  <span class='comment'>#     this node.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="PlanNode/ShortRepresentation.html" title="Google::Spanner::V1::PlanNode::ShortRepresentation (class)">ShortRepresentation</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
-  <span class='comment'># The kind of {Google::Spanner::V1::PlanNode PlanNode}. Distinguishes between the two different kinds of
-</span>  <span class='comment'># nodes that can appear in a query plan.
+  <span class='comment'># The kind of {Google::Spanner::V1::PlanNode PlanNode}. Distinguishes between
+</span>  <span class='comment'># the two different kinds of nodes that can appear in a query plan.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="PlanNode/Kind.html" title="Google::Spanner::V1::PlanNode::Kind (module)">Kind</a></span></span>
     <span class='comment'># Not specified.
 </span>    <span class='const'>KIND_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
@@ -1340,7 +1343,8 @@ information in its metadata:</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Condensed representation for <span class='object_link'><a href="PlanNode/Kind.html#SCALAR-constant" title="Google::Spanner::V1::PlanNode::Kind::SCALAR (constant)">SCALAR</a></span> nodes.</p>
+    <p>Returns Condensed representation for
+<span class='object_link'><a href="PlanNode/Kind.html#SCALAR-constant" title="Google::Spanner::V1::PlanNode::Kind::SCALAR (constant)">SCALAR</a></span> nodes.</p>
 
 
   </div>
@@ -1358,7 +1362,8 @@ information in its metadata:</p>
       
       
         &mdash;
-        <div class='inline'><p>Condensed representation for <span class='object_link'><a href="PlanNode/Kind.html#SCALAR-constant" title="Google::Spanner::V1::PlanNode::Kind::SCALAR (constant)">SCALAR</a></span> nodes.</p>
+        <div class='inline'><p>Condensed representation for
+<span class='object_link'><a href="PlanNode/Kind.html#SCALAR-constant" title="Google::Spanner::V1::PlanNode::Kind::SCALAR (constant)">SCALAR</a></span> nodes.</p>
 </div>
       
     </li>
@@ -1371,9 +1376,6 @@ information in its metadata:</p>
       <pre class="lines">
 
 
-55
-56
-57
 58
 59
 60
@@ -1426,10 +1428,13 @@ information in its metadata:</p>
 107
 108
 109
-110</pre>
+110
+111
+112
+113</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/doc/google/spanner/v1/query_plan.rb', line 55</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/doc/google/spanner/v1/query_plan.rb', line 58</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Spanner::V1::PlanNode (class)">PlanNode</a></span></span>
   <span class='comment'># Metadata associated with a parent-child relationship appearing in a
@@ -1445,14 +1450,14 @@ information in its metadata:</p>
 </span>  <span class='comment'>#     with the output variable.
 </span>  <span class='comment'># @!attribute [rw] variable
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Only present if the child node is {Google::Spanner::V1::PlanNode::Kind::SCALAR SCALAR} and corresponds
-</span>  <span class='comment'>#     to an output variable of the parent node. The field carries the name of
-</span>  <span class='comment'>#     the output variable.
-</span>  <span class='comment'>#     For example, a `TableScan` operator that reads rows from a table will
-</span>  <span class='comment'>#     have child links to the `SCALAR` nodes representing the output variables
-</span>  <span class='comment'>#     created for each column that is read by the operator. The corresponding
-</span>  <span class='comment'>#     `variable` fields will be set to the variable names assigned to the
-</span>  <span class='comment'>#     columns.
+</span>  <span class='comment'>#     Only present if the child node is
+</span>  <span class='comment'>#     {Google::Spanner::V1::PlanNode::Kind::SCALAR SCALAR} and corresponds to an
+</span>  <span class='comment'>#     output variable of the parent node. The field carries the name of the
+</span>  <span class='comment'>#     output variable. For example, a `TableScan` operator that reads rows from
+</span>  <span class='comment'>#     a table will have child links to the `SCALAR` nodes representing the
+</span>  <span class='comment'>#     output variables created for each column that is read by the operator.
+</span>  <span class='comment'>#     The corresponding `variable` fields will be set to the variable names
+</span>  <span class='comment'>#     assigned to the columns.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="PlanNode/ChildLink.html" title="Google::Spanner::V1::PlanNode::ChildLink (class)">ChildLink</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
   <span class='comment'># Condensed representation of a node and its subtree. Only present for
@@ -1469,8 +1474,8 @@ information in its metadata:</p>
 </span>  <span class='comment'>#     this node.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="PlanNode/ShortRepresentation.html" title="Google::Spanner::V1::PlanNode::ShortRepresentation (class)">ShortRepresentation</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
-  <span class='comment'># The kind of {Google::Spanner::V1::PlanNode PlanNode}. Distinguishes between the two different kinds of
-</span>  <span class='comment'># nodes that can appear in a query plan.
+  <span class='comment'># The kind of {Google::Spanner::V1::PlanNode PlanNode}. Distinguishes between
+</span>  <span class='comment'># the two different kinds of nodes that can appear in a query plan.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="PlanNode/Kind.html" title="Google::Spanner::V1::PlanNode::Kind (module)">Kind</a></span></span>
     <span class='comment'># Not specified.
 </span>    <span class='const'>KIND_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>

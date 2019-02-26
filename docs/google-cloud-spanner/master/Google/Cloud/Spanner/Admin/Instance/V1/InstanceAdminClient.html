@@ -1633,20 +1633,20 @@ retries, etc.</p>
       <pre class="lines">
 
 
-772
-773
-774
-775
 776
 777
 778
 779
 780
 781
-782</pre>
+782
+783
+784
+785
+786</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/admin/instance/v1/instance_admin_client.rb', line 772</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/admin/instance/v1/instance_admin_client.rb', line 776</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete_instance'>delete_instance</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -1815,19 +1815,19 @@ retries, etc.</p>
       <pre class="lines">
 
 
-857
-858
-859
-860
 861
 862
 863
 864
 865
-866</pre>
+866
+867
+868
+869
+870</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/admin/instance/v1/instance_admin_client.rb', line 857</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/admin/instance/v1/instance_admin_client.rb', line 861</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_iam_policy'>get_iam_policy</span> \
     <span class='id identifier rubyid_resource'>resource</span><span class='comma'>,</span>
@@ -2847,10 +2847,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-819
-820
-821
-822
 823
 824
 825
@@ -2858,10 +2854,14 @@ retries, etc.</p>
 827
 828
 829
-830</pre>
+830
+831
+832
+833
+834</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/admin/instance/v1/instance_admin_client.rb', line 819</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/admin/instance/v1/instance_admin_client.rb', line 823</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_set_iam_policy'>set_iam_policy</span> \
     <span class='id identifier rubyid_resource'>resource</span><span class='comma'>,</span>
@@ -3053,10 +3053,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-902
-903
-904
-905
 906
 907
 908
@@ -3064,10 +3060,14 @@ retries, etc.</p>
 910
 911
 912
-913</pre>
+913
+914
+915
+916
+917</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/admin/instance/v1/instance_admin_client.rb', line 902</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/admin/instance/v1/instance_admin_client.rb', line 906</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_test_iam_permissions'>test_iam_permissions</span> \
     <span class='id identifier rubyid_resource'>resource</span><span class='comma'>,</span>
@@ -3114,9 +3114,9 @@ has been requested, billing is based on the newly-requested level.</li>
 
 <ul>
 <li>Cancelling the operation sets its metadata&#39;s
-<span class='object_link'><a href="../../../../../Spanner/Admin/Instance/V1/UpdateInstanceMetadata.html#cancel_time-instance_method" title="Google::Spanner::Admin::Instance::V1::UpdateInstanceMetadata#cancel_time (method)">cancel_time</a></span>, and begins
-restoring resources to their pre-request values. The operation
-is guaranteed to succeed at undoing all resource changes,
+<span class='object_link'><a href="../../../../../Spanner/Admin/Instance/V1/UpdateInstanceMetadata.html#cancel_time-instance_method" title="Google::Spanner::Admin::Instance::V1::UpdateInstanceMetadata#cancel_time (method)">cancel_time</a></span>,
+and begins restoring resources to their pre-request values. The
+operation is guaranteed to succeed at undoing all resource changes,
 after which point it terminates with a <code>CANCELLED</code> status.
 
 <ul>
@@ -3208,7 +3208,9 @@ resource <span class='object_link'><a href="../../../../../Spanner/Admin/Instanc
       
         &mdash;
         <div class='inline'><p>Required. The instance to update, which must always include the instance
-name.  Otherwise, only fields mentioned in [][google.spanner.admin.instance.v1.UpdateInstanceRequest.field_mask] need be included.
+name.  Otherwise, only fields mentioned in
+[][google.spanner.admin.instance.v1.UpdateInstanceRequest.field_mask] need
+be included.
 A hash of the same form as <code>Google::Spanner::Admin::Instance::V1::Instance</code>
 can also be provided.</p>
 </div>
@@ -3225,10 +3227,12 @@ can also be provided.</p>
       
       
         &mdash;
-        <div class='inline'><p>Required. A mask specifying which fields in [][google.spanner.admin.instance.v1.UpdateInstanceRequest.instance] should be updated.
-The field mask must always be specified; this prevents any future fields in
-[][google.spanner.admin.instance.v1.Instance] from being erased accidentally by clients that do not know
-about them.
+        <div class='inline'><p>Required. A mask specifying which fields in
+[][google.spanner.admin.instance.v1.UpdateInstanceRequest.instance] should
+be updated. The field mask must always be specified; this prevents any
+future fields in
+[][google.spanner.admin.instance.v1.Instance] from being erased
+accidentally by clients that do not know about them.
 A hash of the same form as <code>Google::Protobuf::FieldMask</code>
 can also be provided.</p>
 </div>
@@ -3290,10 +3294,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-723
-724
-725
-726
 727
 728
 729
@@ -3308,10 +3308,14 @@ retries, etc.</p>
 738
 739
 740
-741</pre>
+741
+742
+743
+744
+745</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/admin/instance/v1/instance_admin_client.rb', line 723</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/admin/instance/v1/instance_admin_client.rb', line 727</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update_instance'>update_instance</span> \
     <span class='id identifier rubyid_instance'>instance</span><span class='comma'>,</span>

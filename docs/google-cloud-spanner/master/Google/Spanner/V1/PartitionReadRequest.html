@@ -308,8 +308,8 @@ js:
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns The columns of <span class='object_link'><a href="#table-instance_method" title="Google::Spanner::V1::PartitionReadRequest#table (method)">table</a></span> to be returned for each row matching
-this request.</p>
+    <p>The columns of <span class='object_link'><a href="#table-instance_method" title="Google::Spanner::V1::PartitionReadRequest#table (method)">table</a></span> to be
+returned for each row matching this request.</p>
 
 
   </div>
@@ -327,8 +327,8 @@ this request.</p>
       
       
         &mdash;
-        <div class='inline'><p>The columns of <span class='object_link'><a href="#table-instance_method" title="Google::Spanner::V1::PartitionReadRequest#table (method)">table</a></span> to be returned for each row matching
-this request.</p>
+        <div class='inline'><p>The columns of <span class='object_link'><a href="#table-instance_method" title="Google::Spanner::V1::PartitionReadRequest#table (method)">table</a></span> to be
+returned for each row matching this request.</p>
 </div>
       
     </li>
@@ -341,10 +341,10 @@ this request.</p>
       <pre class="lines">
 
 
-304</pre>
+317</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/doc/google/spanner/v1/spanner.rb', line 304</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/doc/google/spanner/v1/spanner.rb', line 317</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Spanner::V1::PartitionReadRequest (class)">PartitionReadRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -365,9 +365,12 @@ this request.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns If non-empty, the name of an index on <span class='object_link'><a href="#table-instance_method" title="Google::Spanner::V1::PartitionReadRequest#table (method)">table</a></span>. This index is
-used instead of the table primary key when interpreting <span class='object_link'><a href="#key_set-instance_method" title="Google::Spanner::V1::PartitionReadRequest#key_set (method)">key_set</a></span>
-and sorting result rows. See <span class='object_link'><a href="#key_set-instance_method" title="Google::Spanner::V1::PartitionReadRequest#key_set (method)">key_set</a></span> for further information.</p>
+    <p>Returns If non-empty, the name of an index on
+<span class='object_link'><a href="#table-instance_method" title="Google::Spanner::V1::PartitionReadRequest#table (method)">table</a></span>. This index is used
+instead of the table primary key when interpreting
+<span class='object_link'><a href="#key_set-instance_method" title="Google::Spanner::V1::PartitionReadRequest#key_set (method)">key_set</a></span> and sorting
+result rows. See <span class='object_link'><a href="#key_set-instance_method" title="Google::Spanner::V1::PartitionReadRequest#key_set (method)">key_set</a></span>
+for further information.</p>
 
 
   </div>
@@ -385,9 +388,12 @@ and sorting result rows. See <span class='object_link'><a href="#key_set-instanc
       
       
         &mdash;
-        <div class='inline'><p>If non-empty, the name of an index on <span class='object_link'><a href="#table-instance_method" title="Google::Spanner::V1::PartitionReadRequest#table (method)">table</a></span>. This index is
-used instead of the table primary key when interpreting <span class='object_link'><a href="#key_set-instance_method" title="Google::Spanner::V1::PartitionReadRequest#key_set (method)">key_set</a></span>
-and sorting result rows. See <span class='object_link'><a href="#key_set-instance_method" title="Google::Spanner::V1::PartitionReadRequest#key_set (method)">key_set</a></span> for further information.</p>
+        <div class='inline'><p>If non-empty, the name of an index on
+<span class='object_link'><a href="#table-instance_method" title="Google::Spanner::V1::PartitionReadRequest#table (method)">table</a></span>. This index is used
+instead of the table primary key when interpreting
+<span class='object_link'><a href="#key_set-instance_method" title="Google::Spanner::V1::PartitionReadRequest#key_set (method)">key_set</a></span> and sorting
+result rows. See <span class='object_link'><a href="#key_set-instance_method" title="Google::Spanner::V1::PartitionReadRequest#key_set (method)">key_set</a></span>
+for further information.</p>
 </div>
       
     </li>
@@ -400,10 +406,10 @@ and sorting result rows. See <span class='object_link'><a href="#key_set-instanc
       <pre class="lines">
 
 
-304</pre>
+317</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/doc/google/spanner/v1/spanner.rb', line 304</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/doc/google/spanner/v1/spanner.rb', line 317</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Spanner::V1::PartitionReadRequest (class)">PartitionReadRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -425,8 +431,11 @@ and sorting result rows. See <span class='object_link'><a href="#key_set-instanc
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns Required. <code>key_set</code> identifies the rows to be yielded. <code>key_set</code> names the
-primary keys of the rows in <span class='object_link'><a href="#table-instance_method" title="Google::Spanner::V1::PartitionReadRequest#table (method)">table</a></span> to be yielded, unless <span class='object_link'><a href="#index-instance_method" title="Google::Spanner::V1::PartitionReadRequest#index (method)">index</a></span>
-is present. If <span class='object_link'><a href="#index-instance_method" title="Google::Spanner::V1::PartitionReadRequest#index (method)">index</a></span> is present, then <span class='object_link'><a href="#key_set-instance_method" title="Google::Spanner::V1::PartitionReadRequest#key_set (method)">key_set</a></span> instead names
+primary keys of the rows in
+<span class='object_link'><a href="#table-instance_method" title="Google::Spanner::V1::PartitionReadRequest#table (method)">table</a></span> to be yielded, unless
+<span class='object_link'><a href="#index-instance_method" title="Google::Spanner::V1::PartitionReadRequest#index (method)">index</a></span> is present. If
+<span class='object_link'><a href="#index-instance_method" title="Google::Spanner::V1::PartitionReadRequest#index (method)">index</a></span> is present, then
+<span class='object_link'><a href="#key_set-instance_method" title="Google::Spanner::V1::PartitionReadRequest#key_set (method)">key_set</a></span> instead names
 index keys in <span class='object_link'><a href="#index-instance_method" title="Google::Spanner::V1::PartitionReadRequest#index (method)">index</a></span>.</p>
 
 <p>It is not an error for the <code>key_set</code> to name rows that do not
@@ -449,8 +458,11 @@ exist in the database. Read yields nothing for nonexistent rows.</p>
       
         &mdash;
         <div class='inline'><p>Required. <code>key_set</code> identifies the rows to be yielded. <code>key_set</code> names the
-primary keys of the rows in <span class='object_link'><a href="#table-instance_method" title="Google::Spanner::V1::PartitionReadRequest#table (method)">table</a></span> to be yielded, unless <span class='object_link'><a href="#index-instance_method" title="Google::Spanner::V1::PartitionReadRequest#index (method)">index</a></span>
-is present. If <span class='object_link'><a href="#index-instance_method" title="Google::Spanner::V1::PartitionReadRequest#index (method)">index</a></span> is present, then <span class='object_link'><a href="#key_set-instance_method" title="Google::Spanner::V1::PartitionReadRequest#key_set (method)">key_set</a></span> instead names
+primary keys of the rows in
+<span class='object_link'><a href="#table-instance_method" title="Google::Spanner::V1::PartitionReadRequest#table (method)">table</a></span> to be yielded, unless
+<span class='object_link'><a href="#index-instance_method" title="Google::Spanner::V1::PartitionReadRequest#index (method)">index</a></span> is present. If
+<span class='object_link'><a href="#index-instance_method" title="Google::Spanner::V1::PartitionReadRequest#index (method)">index</a></span> is present, then
+<span class='object_link'><a href="#key_set-instance_method" title="Google::Spanner::V1::PartitionReadRequest#key_set (method)">key_set</a></span> instead names
 index keys in <span class='object_link'><a href="#index-instance_method" title="Google::Spanner::V1::PartitionReadRequest#index (method)">index</a></span>.</p>
 
 <p>It is not an error for the <code>key_set</code> to name rows that do not
@@ -467,10 +479,10 @@ exist in the database. Read yields nothing for nonexistent rows.</p>
       <pre class="lines">
 
 
-304</pre>
+317</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/doc/google/spanner/v1/spanner.rb', line 304</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/doc/google/spanner/v1/spanner.rb', line 317</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Spanner::V1::PartitionReadRequest (class)">PartitionReadRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -522,10 +534,10 @@ exist in the database. Read yields nothing for nonexistent rows.</p>
       <pre class="lines">
 
 
-304</pre>
+317</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/doc/google/spanner/v1/spanner.rb', line 304</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/doc/google/spanner/v1/spanner.rb', line 317</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Spanner::V1::PartitionReadRequest (class)">PartitionReadRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -577,10 +589,10 @@ exist in the database. Read yields nothing for nonexistent rows.</p>
       <pre class="lines">
 
 
-304</pre>
+317</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/doc/google/spanner/v1/spanner.rb', line 304</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/doc/google/spanner/v1/spanner.rb', line 317</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Spanner::V1::PartitionReadRequest (class)">PartitionReadRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -632,10 +644,10 @@ exist in the database. Read yields nothing for nonexistent rows.</p>
       <pre class="lines">
 
 
-304</pre>
+317</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/doc/google/spanner/v1/spanner.rb', line 304</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/doc/google/spanner/v1/spanner.rb', line 317</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Spanner::V1::PartitionReadRequest (class)">PartitionReadRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -689,10 +701,10 @@ transactions are not.</p>
       <pre class="lines">
 
 
-304</pre>
+317</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/doc/google/spanner/v1/spanner.rb', line 304</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/doc/google/spanner/v1/spanner.rb', line 317</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Spanner::V1::PartitionReadRequest (class)">PartitionReadRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>

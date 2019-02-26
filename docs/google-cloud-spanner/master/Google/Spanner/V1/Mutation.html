@@ -301,7 +301,6 @@ rows were present.</p>
       <pre class="lines">
 
 
-45
 46
 47
 48
@@ -336,20 +335,30 @@ rows were present.</p>
 77
 78
 79
-80</pre>
+80
+81
+82
+83
+84
+85
+86
+87</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/doc/google/spanner/v1/mutation.rb', line 45</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/doc/google/spanner/v1/mutation.rb', line 46</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Spanner::V1::Mutation (class)">Mutation</a></span></span>
-  <span class='comment'># Arguments to {Google::Spanner::V1::Mutation#insert insert}, {Google::Spanner::V1::Mutation#update update}, {Google::Spanner::V1::Mutation#insert_or_update insert_or_update}, and
+  <span class='comment'># Arguments to {Google::Spanner::V1::Mutation#insert insert},
+</span>  <span class='comment'># {Google::Spanner::V1::Mutation#update update},
+</span>  <span class='comment'># {Google::Spanner::V1::Mutation#insert_or_update insert_or_update}, and
 </span>  <span class='comment'># {Google::Spanner::V1::Mutation#replace replace} operations.
 </span>  <span class='comment'># @!attribute [rw] table
 </span>  <span class='comment'>#   @return [String]
 </span>  <span class='comment'>#     Required. The table whose rows will be written.
 </span>  <span class='comment'># @!attribute [rw] columns
 </span>  <span class='comment'>#   @return [Array&lt;String&gt;]
-</span>  <span class='comment'>#     The names of the columns in {Google::Spanner::V1::Mutation::Write#table table} to be written.
+</span>  <span class='comment'>#     The names of the columns in
+</span>  <span class='comment'>#     {Google::Spanner::V1::Mutation::Write#table table} to be written.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     The list of columns must contain enough columns to allow
 </span>  <span class='comment'>#     Cloud Spanner to derive values for all primary key columns in the
@@ -359,11 +368,13 @@ rows were present.</p>
 </span>  <span class='comment'>#     The values to be written. `values` can contain more than one
 </span>  <span class='comment'>#     list of values. If it does, then multiple rows are written, one
 </span>  <span class='comment'>#     for each entry in `values`. Each list in `values` must have
-</span>  <span class='comment'>#     exactly as many entries as there are entries in {Google::Spanner::V1::Mutation::Write#columns columns}
-</span>  <span class='comment'>#     above. Sending multiple lists is equivalent to sending multiple
-</span>  <span class='comment'>#     `Mutation`s, each containing one `values` entry and repeating
-</span>  <span class='comment'>#     {Google::Spanner::V1::Mutation::Write#table table} and {Google::Spanner::V1::Mutation::Write#columns columns}. Individual values in each list are
-</span>  <span class='comment'>#     encoded as described {Google::Spanner::V1::TypeCode here}.
+</span>  <span class='comment'>#     exactly as many entries as there are entries in
+</span>  <span class='comment'>#     {Google::Spanner::V1::Mutation::Write#columns columns} above. Sending
+</span>  <span class='comment'>#     multiple lists is equivalent to sending multiple `Mutation`s, each
+</span>  <span class='comment'>#     containing one `values` entry and repeating
+</span>  <span class='comment'>#     {Google::Spanner::V1::Mutation::Write#table table} and
+</span>  <span class='comment'>#     {Google::Spanner::V1::Mutation::Write#columns columns}. Individual values in
+</span>  <span class='comment'>#     each list are encoded as described {Google::Spanner::V1::TypeCode here}.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Mutation/Write.html" title="Google::Spanner::V1::Mutation::Write (class)">Write</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
   <span class='comment'># Arguments to {Google::Spanner::V1::Mutation#delete delete} operations.
@@ -372,9 +383,10 @@ rows were present.</p>
 </span>  <span class='comment'>#     Required. The table whose rows will be deleted.
 </span>  <span class='comment'># @!attribute [rw] key_set
 </span>  <span class='comment'>#   @return [Google::Spanner::V1::KeySet]
-</span>  <span class='comment'>#     Required. The primary keys of the rows within {Google::Spanner::V1::Mutation::Delete#table table} to delete.
-</span>  <span class='comment'>#     Delete is idempotent. The transaction will succeed even if some or all
-</span>  <span class='comment'>#     rows do not exist.
+</span>  <span class='comment'>#     Required. The primary keys of the rows within
+</span>  <span class='comment'>#     {Google::Spanner::V1::Mutation::Delete#table table} to delete. Delete is
+</span>  <span class='comment'>#     idempotent. The transaction will succeed even if some or all rows do not
+</span>  <span class='comment'>#     exist.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Mutation/Delete.html" title="Google::Spanner::V1::Mutation::Delete (class)">Delete</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -428,7 +440,6 @@ the write or transaction fails with error <code>ALREADY_EXISTS</code>.</p>
       <pre class="lines">
 
 
-45
 46
 47
 48
@@ -463,20 +474,30 @@ the write or transaction fails with error <code>ALREADY_EXISTS</code>.</p>
 77
 78
 79
-80</pre>
+80
+81
+82
+83
+84
+85
+86
+87</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/doc/google/spanner/v1/mutation.rb', line 45</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/doc/google/spanner/v1/mutation.rb', line 46</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Spanner::V1::Mutation (class)">Mutation</a></span></span>
-  <span class='comment'># Arguments to {Google::Spanner::V1::Mutation#insert insert}, {Google::Spanner::V1::Mutation#update update}, {Google::Spanner::V1::Mutation#insert_or_update insert_or_update}, and
+  <span class='comment'># Arguments to {Google::Spanner::V1::Mutation#insert insert},
+</span>  <span class='comment'># {Google::Spanner::V1::Mutation#update update},
+</span>  <span class='comment'># {Google::Spanner::V1::Mutation#insert_or_update insert_or_update}, and
 </span>  <span class='comment'># {Google::Spanner::V1::Mutation#replace replace} operations.
 </span>  <span class='comment'># @!attribute [rw] table
 </span>  <span class='comment'>#   @return [String]
 </span>  <span class='comment'>#     Required. The table whose rows will be written.
 </span>  <span class='comment'># @!attribute [rw] columns
 </span>  <span class='comment'>#   @return [Array&lt;String&gt;]
-</span>  <span class='comment'>#     The names of the columns in {Google::Spanner::V1::Mutation::Write#table table} to be written.
+</span>  <span class='comment'>#     The names of the columns in
+</span>  <span class='comment'>#     {Google::Spanner::V1::Mutation::Write#table table} to be written.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     The list of columns must contain enough columns to allow
 </span>  <span class='comment'>#     Cloud Spanner to derive values for all primary key columns in the
@@ -486,11 +507,13 @@ the write or transaction fails with error <code>ALREADY_EXISTS</code>.</p>
 </span>  <span class='comment'>#     The values to be written. `values` can contain more than one
 </span>  <span class='comment'>#     list of values. If it does, then multiple rows are written, one
 </span>  <span class='comment'>#     for each entry in `values`. Each list in `values` must have
-</span>  <span class='comment'>#     exactly as many entries as there are entries in {Google::Spanner::V1::Mutation::Write#columns columns}
-</span>  <span class='comment'>#     above. Sending multiple lists is equivalent to sending multiple
-</span>  <span class='comment'>#     `Mutation`s, each containing one `values` entry and repeating
-</span>  <span class='comment'>#     {Google::Spanner::V1::Mutation::Write#table table} and {Google::Spanner::V1::Mutation::Write#columns columns}. Individual values in each list are
-</span>  <span class='comment'>#     encoded as described {Google::Spanner::V1::TypeCode here}.
+</span>  <span class='comment'>#     exactly as many entries as there are entries in
+</span>  <span class='comment'>#     {Google::Spanner::V1::Mutation::Write#columns columns} above. Sending
+</span>  <span class='comment'>#     multiple lists is equivalent to sending multiple `Mutation`s, each
+</span>  <span class='comment'>#     containing one `values` entry and repeating
+</span>  <span class='comment'>#     {Google::Spanner::V1::Mutation::Write#table table} and
+</span>  <span class='comment'>#     {Google::Spanner::V1::Mutation::Write#columns columns}. Individual values in
+</span>  <span class='comment'>#     each list are encoded as described {Google::Spanner::V1::TypeCode here}.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Mutation/Write.html" title="Google::Spanner::V1::Mutation::Write (class)">Write</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
   <span class='comment'># Arguments to {Google::Spanner::V1::Mutation#delete delete} operations.
@@ -499,9 +522,10 @@ the write or transaction fails with error <code>ALREADY_EXISTS</code>.</p>
 </span>  <span class='comment'>#     Required. The table whose rows will be deleted.
 </span>  <span class='comment'># @!attribute [rw] key_set
 </span>  <span class='comment'>#   @return [Google::Spanner::V1::KeySet]
-</span>  <span class='comment'>#     Required. The primary keys of the rows within {Google::Spanner::V1::Mutation::Delete#table table} to delete.
-</span>  <span class='comment'>#     Delete is idempotent. The transaction will succeed even if some or all
-</span>  <span class='comment'>#     rows do not exist.
+</span>  <span class='comment'>#     Required. The primary keys of the rows within
+</span>  <span class='comment'>#     {Google::Spanner::V1::Mutation::Delete#table table} to delete. Delete is
+</span>  <span class='comment'>#     idempotent. The transaction will succeed even if some or all rows do not
+</span>  <span class='comment'>#     exist.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Mutation/Delete.html" title="Google::Spanner::V1::Mutation::Delete (class)">Delete</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -522,9 +546,9 @@ the write or transaction fails with error <code>ALREADY_EXISTS</code>.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Like <span class='object_link'><a href="#insert-instance_method" title="Google::Spanner::V1::Mutation#insert (method)">insert</a></span>, except that if the row already exists, then
-its column values are overwritten with the ones provided. Any
-column values not explicitly written are preserved.</p>
+    <p>Returns Like <span class='object_link'><a href="#insert-instance_method" title="Google::Spanner::V1::Mutation#insert (method)">insert</a></span>, except that if the row
+already exists, then its column values are overwritten with the ones
+provided. Any column values not explicitly written are preserved.</p>
 
 
   </div>
@@ -542,9 +566,9 @@ column values not explicitly written are preserved.</p>
       
       
         &mdash;
-        <div class='inline'><p>Like <span class='object_link'><a href="#insert-instance_method" title="Google::Spanner::V1::Mutation#insert (method)">insert</a></span>, except that if the row already exists, then
-its column values are overwritten with the ones provided. Any
-column values not explicitly written are preserved.</p>
+        <div class='inline'><p>Like <span class='object_link'><a href="#insert-instance_method" title="Google::Spanner::V1::Mutation#insert (method)">insert</a></span>, except that if the row
+already exists, then its column values are overwritten with the ones
+provided. Any column values not explicitly written are preserved.</p>
 </div>
       
     </li>
@@ -557,7 +581,6 @@ column values not explicitly written are preserved.</p>
       <pre class="lines">
 
 
-45
 46
 47
 48
@@ -592,20 +615,30 @@ column values not explicitly written are preserved.</p>
 77
 78
 79
-80</pre>
+80
+81
+82
+83
+84
+85
+86
+87</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/doc/google/spanner/v1/mutation.rb', line 45</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/doc/google/spanner/v1/mutation.rb', line 46</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Spanner::V1::Mutation (class)">Mutation</a></span></span>
-  <span class='comment'># Arguments to {Google::Spanner::V1::Mutation#insert insert}, {Google::Spanner::V1::Mutation#update update}, {Google::Spanner::V1::Mutation#insert_or_update insert_or_update}, and
+  <span class='comment'># Arguments to {Google::Spanner::V1::Mutation#insert insert},
+</span>  <span class='comment'># {Google::Spanner::V1::Mutation#update update},
+</span>  <span class='comment'># {Google::Spanner::V1::Mutation#insert_or_update insert_or_update}, and
 </span>  <span class='comment'># {Google::Spanner::V1::Mutation#replace replace} operations.
 </span>  <span class='comment'># @!attribute [rw] table
 </span>  <span class='comment'>#   @return [String]
 </span>  <span class='comment'>#     Required. The table whose rows will be written.
 </span>  <span class='comment'># @!attribute [rw] columns
 </span>  <span class='comment'>#   @return [Array&lt;String&gt;]
-</span>  <span class='comment'>#     The names of the columns in {Google::Spanner::V1::Mutation::Write#table table} to be written.
+</span>  <span class='comment'>#     The names of the columns in
+</span>  <span class='comment'>#     {Google::Spanner::V1::Mutation::Write#table table} to be written.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     The list of columns must contain enough columns to allow
 </span>  <span class='comment'>#     Cloud Spanner to derive values for all primary key columns in the
@@ -615,11 +648,13 @@ column values not explicitly written are preserved.</p>
 </span>  <span class='comment'>#     The values to be written. `values` can contain more than one
 </span>  <span class='comment'>#     list of values. If it does, then multiple rows are written, one
 </span>  <span class='comment'>#     for each entry in `values`. Each list in `values` must have
-</span>  <span class='comment'>#     exactly as many entries as there are entries in {Google::Spanner::V1::Mutation::Write#columns columns}
-</span>  <span class='comment'>#     above. Sending multiple lists is equivalent to sending multiple
-</span>  <span class='comment'>#     `Mutation`s, each containing one `values` entry and repeating
-</span>  <span class='comment'>#     {Google::Spanner::V1::Mutation::Write#table table} and {Google::Spanner::V1::Mutation::Write#columns columns}. Individual values in each list are
-</span>  <span class='comment'>#     encoded as described {Google::Spanner::V1::TypeCode here}.
+</span>  <span class='comment'>#     exactly as many entries as there are entries in
+</span>  <span class='comment'>#     {Google::Spanner::V1::Mutation::Write#columns columns} above. Sending
+</span>  <span class='comment'>#     multiple lists is equivalent to sending multiple `Mutation`s, each
+</span>  <span class='comment'>#     containing one `values` entry and repeating
+</span>  <span class='comment'>#     {Google::Spanner::V1::Mutation::Write#table table} and
+</span>  <span class='comment'>#     {Google::Spanner::V1::Mutation::Write#columns columns}. Individual values in
+</span>  <span class='comment'>#     each list are encoded as described {Google::Spanner::V1::TypeCode here}.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Mutation/Write.html" title="Google::Spanner::V1::Mutation::Write (class)">Write</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
   <span class='comment'># Arguments to {Google::Spanner::V1::Mutation#delete delete} operations.
@@ -628,9 +663,10 @@ column values not explicitly written are preserved.</p>
 </span>  <span class='comment'>#     Required. The table whose rows will be deleted.
 </span>  <span class='comment'># @!attribute [rw] key_set
 </span>  <span class='comment'>#   @return [Google::Spanner::V1::KeySet]
-</span>  <span class='comment'>#     Required. The primary keys of the rows within {Google::Spanner::V1::Mutation::Delete#table table} to delete.
-</span>  <span class='comment'>#     Delete is idempotent. The transaction will succeed even if some or all
-</span>  <span class='comment'>#     rows do not exist.
+</span>  <span class='comment'>#     Required. The primary keys of the rows within
+</span>  <span class='comment'>#     {Google::Spanner::V1::Mutation::Delete#table table} to delete. Delete is
+</span>  <span class='comment'>#     idempotent. The transaction will succeed even if some or all rows do not
+</span>  <span class='comment'>#     exist.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Mutation/Delete.html" title="Google::Spanner::V1::Mutation::Delete (class)">Delete</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -651,10 +687,11 @@ column values not explicitly written are preserved.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Like <span class='object_link'><a href="#insert-instance_method" title="Google::Spanner::V1::Mutation#insert (method)">insert</a></span>, except that if the row already exists, it is
-deleted, and the column values provided are inserted
-instead. Unlike <span class='object_link'><a href="#insert_or_update-instance_method" title="Google::Spanner::V1::Mutation#insert_or_update (method)">insert_or_update</a></span>, this means any values not
-explicitly written become <code>NULL</code>.</p>
+    <p>Returns Like <span class='object_link'><a href="#insert-instance_method" title="Google::Spanner::V1::Mutation#insert (method)">insert</a></span>, except that if the row
+already exists, it is deleted, and the column values provided are
+inserted instead. Unlike
+<span class='object_link'><a href="#insert_or_update-instance_method" title="Google::Spanner::V1::Mutation#insert_or_update (method)">insert_or_update</a></span>, this
+means any values not explicitly written become <code>NULL</code>.</p>
 
 
   </div>
@@ -672,10 +709,11 @@ explicitly written become <code>NULL</code>.</p>
       
       
         &mdash;
-        <div class='inline'><p>Like <span class='object_link'><a href="#insert-instance_method" title="Google::Spanner::V1::Mutation#insert (method)">insert</a></span>, except that if the row already exists, it is
-deleted, and the column values provided are inserted
-instead. Unlike <span class='object_link'><a href="#insert_or_update-instance_method" title="Google::Spanner::V1::Mutation#insert_or_update (method)">insert_or_update</a></span>, this means any values not
-explicitly written become <code>NULL</code>.</p>
+        <div class='inline'><p>Like <span class='object_link'><a href="#insert-instance_method" title="Google::Spanner::V1::Mutation#insert (method)">insert</a></span>, except that if the row
+already exists, it is deleted, and the column values provided are
+inserted instead. Unlike
+<span class='object_link'><a href="#insert_or_update-instance_method" title="Google::Spanner::V1::Mutation#insert_or_update (method)">insert_or_update</a></span>, this
+means any values not explicitly written become <code>NULL</code>.</p>
 </div>
       
     </li>
@@ -688,7 +726,6 @@ explicitly written become <code>NULL</code>.</p>
       <pre class="lines">
 
 
-45
 46
 47
 48
@@ -723,20 +760,30 @@ explicitly written become <code>NULL</code>.</p>
 77
 78
 79
-80</pre>
+80
+81
+82
+83
+84
+85
+86
+87</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/doc/google/spanner/v1/mutation.rb', line 45</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/doc/google/spanner/v1/mutation.rb', line 46</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Spanner::V1::Mutation (class)">Mutation</a></span></span>
-  <span class='comment'># Arguments to {Google::Spanner::V1::Mutation#insert insert}, {Google::Spanner::V1::Mutation#update update}, {Google::Spanner::V1::Mutation#insert_or_update insert_or_update}, and
+  <span class='comment'># Arguments to {Google::Spanner::V1::Mutation#insert insert},
+</span>  <span class='comment'># {Google::Spanner::V1::Mutation#update update},
+</span>  <span class='comment'># {Google::Spanner::V1::Mutation#insert_or_update insert_or_update}, and
 </span>  <span class='comment'># {Google::Spanner::V1::Mutation#replace replace} operations.
 </span>  <span class='comment'># @!attribute [rw] table
 </span>  <span class='comment'>#   @return [String]
 </span>  <span class='comment'>#     Required. The table whose rows will be written.
 </span>  <span class='comment'># @!attribute [rw] columns
 </span>  <span class='comment'>#   @return [Array&lt;String&gt;]
-</span>  <span class='comment'>#     The names of the columns in {Google::Spanner::V1::Mutation::Write#table table} to be written.
+</span>  <span class='comment'>#     The names of the columns in
+</span>  <span class='comment'>#     {Google::Spanner::V1::Mutation::Write#table table} to be written.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     The list of columns must contain enough columns to allow
 </span>  <span class='comment'>#     Cloud Spanner to derive values for all primary key columns in the
@@ -746,11 +793,13 @@ explicitly written become <code>NULL</code>.</p>
 </span>  <span class='comment'>#     The values to be written. `values` can contain more than one
 </span>  <span class='comment'>#     list of values. If it does, then multiple rows are written, one
 </span>  <span class='comment'>#     for each entry in `values`. Each list in `values` must have
-</span>  <span class='comment'>#     exactly as many entries as there are entries in {Google::Spanner::V1::Mutation::Write#columns columns}
-</span>  <span class='comment'>#     above. Sending multiple lists is equivalent to sending multiple
-</span>  <span class='comment'>#     `Mutation`s, each containing one `values` entry and repeating
-</span>  <span class='comment'>#     {Google::Spanner::V1::Mutation::Write#table table} and {Google::Spanner::V1::Mutation::Write#columns columns}. Individual values in each list are
-</span>  <span class='comment'>#     encoded as described {Google::Spanner::V1::TypeCode here}.
+</span>  <span class='comment'>#     exactly as many entries as there are entries in
+</span>  <span class='comment'>#     {Google::Spanner::V1::Mutation::Write#columns columns} above. Sending
+</span>  <span class='comment'>#     multiple lists is equivalent to sending multiple `Mutation`s, each
+</span>  <span class='comment'>#     containing one `values` entry and repeating
+</span>  <span class='comment'>#     {Google::Spanner::V1::Mutation::Write#table table} and
+</span>  <span class='comment'>#     {Google::Spanner::V1::Mutation::Write#columns columns}. Individual values in
+</span>  <span class='comment'>#     each list are encoded as described {Google::Spanner::V1::TypeCode here}.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Mutation/Write.html" title="Google::Spanner::V1::Mutation::Write (class)">Write</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
   <span class='comment'># Arguments to {Google::Spanner::V1::Mutation#delete delete} operations.
@@ -759,9 +808,10 @@ explicitly written become <code>NULL</code>.</p>
 </span>  <span class='comment'>#     Required. The table whose rows will be deleted.
 </span>  <span class='comment'># @!attribute [rw] key_set
 </span>  <span class='comment'>#   @return [Google::Spanner::V1::KeySet]
-</span>  <span class='comment'>#     Required. The primary keys of the rows within {Google::Spanner::V1::Mutation::Delete#table table} to delete.
-</span>  <span class='comment'>#     Delete is idempotent. The transaction will succeed even if some or all
-</span>  <span class='comment'>#     rows do not exist.
+</span>  <span class='comment'>#     Required. The primary keys of the rows within
+</span>  <span class='comment'>#     {Google::Spanner::V1::Mutation::Delete#table table} to delete. Delete is
+</span>  <span class='comment'>#     idempotent. The transaction will succeed even if some or all rows do not
+</span>  <span class='comment'>#     exist.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Mutation/Delete.html" title="Google::Spanner::V1::Mutation::Delete (class)">Delete</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -815,7 +865,6 @@ already exist, the transaction fails with error <code>NOT_FOUND</code>.</p>
       <pre class="lines">
 
 
-45
 46
 47
 48
@@ -850,20 +899,30 @@ already exist, the transaction fails with error <code>NOT_FOUND</code>.</p>
 77
 78
 79
-80</pre>
+80
+81
+82
+83
+84
+85
+86
+87</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/doc/google/spanner/v1/mutation.rb', line 45</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/doc/google/spanner/v1/mutation.rb', line 46</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Spanner::V1::Mutation (class)">Mutation</a></span></span>
-  <span class='comment'># Arguments to {Google::Spanner::V1::Mutation#insert insert}, {Google::Spanner::V1::Mutation#update update}, {Google::Spanner::V1::Mutation#insert_or_update insert_or_update}, and
+  <span class='comment'># Arguments to {Google::Spanner::V1::Mutation#insert insert},
+</span>  <span class='comment'># {Google::Spanner::V1::Mutation#update update},
+</span>  <span class='comment'># {Google::Spanner::V1::Mutation#insert_or_update insert_or_update}, and
 </span>  <span class='comment'># {Google::Spanner::V1::Mutation#replace replace} operations.
 </span>  <span class='comment'># @!attribute [rw] table
 </span>  <span class='comment'>#   @return [String]
 </span>  <span class='comment'>#     Required. The table whose rows will be written.
 </span>  <span class='comment'># @!attribute [rw] columns
 </span>  <span class='comment'>#   @return [Array&lt;String&gt;]
-</span>  <span class='comment'>#     The names of the columns in {Google::Spanner::V1::Mutation::Write#table table} to be written.
+</span>  <span class='comment'>#     The names of the columns in
+</span>  <span class='comment'>#     {Google::Spanner::V1::Mutation::Write#table table} to be written.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     The list of columns must contain enough columns to allow
 </span>  <span class='comment'>#     Cloud Spanner to derive values for all primary key columns in the
@@ -873,11 +932,13 @@ already exist, the transaction fails with error <code>NOT_FOUND</code>.</p>
 </span>  <span class='comment'>#     The values to be written. `values` can contain more than one
 </span>  <span class='comment'>#     list of values. If it does, then multiple rows are written, one
 </span>  <span class='comment'>#     for each entry in `values`. Each list in `values` must have
-</span>  <span class='comment'>#     exactly as many entries as there are entries in {Google::Spanner::V1::Mutation::Write#columns columns}
-</span>  <span class='comment'>#     above. Sending multiple lists is equivalent to sending multiple
-</span>  <span class='comment'>#     `Mutation`s, each containing one `values` entry and repeating
-</span>  <span class='comment'>#     {Google::Spanner::V1::Mutation::Write#table table} and {Google::Spanner::V1::Mutation::Write#columns columns}. Individual values in each list are
-</span>  <span class='comment'>#     encoded as described {Google::Spanner::V1::TypeCode here}.
+</span>  <span class='comment'>#     exactly as many entries as there are entries in
+</span>  <span class='comment'>#     {Google::Spanner::V1::Mutation::Write#columns columns} above. Sending
+</span>  <span class='comment'>#     multiple lists is equivalent to sending multiple `Mutation`s, each
+</span>  <span class='comment'>#     containing one `values` entry and repeating
+</span>  <span class='comment'>#     {Google::Spanner::V1::Mutation::Write#table table} and
+</span>  <span class='comment'>#     {Google::Spanner::V1::Mutation::Write#columns columns}. Individual values in
+</span>  <span class='comment'>#     each list are encoded as described {Google::Spanner::V1::TypeCode here}.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Mutation/Write.html" title="Google::Spanner::V1::Mutation::Write (class)">Write</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
   <span class='comment'># Arguments to {Google::Spanner::V1::Mutation#delete delete} operations.
@@ -886,9 +947,10 @@ already exist, the transaction fails with error <code>NOT_FOUND</code>.</p>
 </span>  <span class='comment'>#     Required. The table whose rows will be deleted.
 </span>  <span class='comment'># @!attribute [rw] key_set
 </span>  <span class='comment'>#   @return [Google::Spanner::V1::KeySet]
-</span>  <span class='comment'>#     Required. The primary keys of the rows within {Google::Spanner::V1::Mutation::Delete#table table} to delete.
-</span>  <span class='comment'>#     Delete is idempotent. The transaction will succeed even if some or all
-</span>  <span class='comment'>#     rows do not exist.
+</span>  <span class='comment'>#     Required. The primary keys of the rows within
+</span>  <span class='comment'>#     {Google::Spanner::V1::Mutation::Delete#table table} to delete. Delete is
+</span>  <span class='comment'>#     idempotent. The transaction will succeed even if some or all rows do not
+</span>  <span class='comment'>#     exist.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Mutation/Delete.html" title="Google::Spanner::V1::Mutation::Delete (class)">Delete</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>

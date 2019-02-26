@@ -89,7 +89,9 @@ js:
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>Arguments to <span class='object_link'><a href="../Mutation.html#insert-instance_method" title="Google::Spanner::V1::Mutation#insert (method)">insert</a></span>, <span class='object_link'><a href="../Mutation.html#update-instance_method" title="Google::Spanner::V1::Mutation#update (method)">update</a></span>, <span class='object_link'><a href="../Mutation.html#insert_or_update-instance_method" title="Google::Spanner::V1::Mutation#insert_or_update (method)">insert_or_update</a></span>, and
+    <p>Arguments to <span class='object_link'><a href="../Mutation.html#insert-instance_method" title="Google::Spanner::V1::Mutation#insert (method)">insert</a></span>,
+<span class='object_link'><a href="../Mutation.html#update-instance_method" title="Google::Spanner::V1::Mutation#update (method)">update</a></span>,
+<span class='object_link'><a href="../Mutation.html#insert_or_update-instance_method" title="Google::Spanner::V1::Mutation#insert_or_update (method)">insert_or_update</a></span>, and
 <span class='object_link'><a href="../Mutation.html#replace-instance_method" title="Google::Spanner::V1::Mutation#replace (method)">replace</a></span> operations.</p>
 
 
@@ -205,7 +207,8 @@ js:
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns The names of the columns in <span class='object_link'><a href="#table-instance_method" title="Google::Spanner::V1::Mutation::Write#table (method)">table</a></span> to be written.</p>
+    <p>Returns The names of the columns in
+<span class='object_link'><a href="#table-instance_method" title="Google::Spanner::V1::Mutation::Write#table (method)">table</a></span> to be written.</p>
 
 <p>The list of columns must contain enough columns to allow
 Cloud Spanner to derive values for all primary key columns in the
@@ -227,7 +230,8 @@ row(s) to be modified.</p>
       
       
         &mdash;
-        <div class='inline'><p>The names of the columns in <span class='object_link'><a href="#table-instance_method" title="Google::Spanner::V1::Mutation::Write#table (method)">table</a></span> to be written.</p>
+        <div class='inline'><p>The names of the columns in
+<span class='object_link'><a href="#table-instance_method" title="Google::Spanner::V1::Mutation::Write#table (method)">table</a></span> to be written.</p>
 
 <p>The list of columns must contain enough columns to allow
 Cloud Spanner to derive values for all primary key columns in the
@@ -244,10 +248,10 @@ row(s) to be modified.</p>
       <pre class="lines">
 
 
-68</pre>
+74</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/doc/google/spanner/v1/mutation.rb', line 68</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/doc/google/spanner/v1/mutation.rb', line 74</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Spanner::V1::Mutation::Write (class)">Write</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -299,10 +303,10 @@ row(s) to be modified.</p>
       <pre class="lines">
 
 
-68</pre>
+74</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/doc/google/spanner/v1/mutation.rb', line 68</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/doc/google/spanner/v1/mutation.rb', line 74</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Spanner::V1::Mutation::Write (class)">Write</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -326,11 +330,13 @@ row(s) to be modified.</p>
     <p>Returns The values to be written. <code>values</code> can contain more than one
 list of values. If it does, then multiple rows are written, one
 for each entry in <code>values</code>. Each list in <code>values</code> must have
-exactly as many entries as there are entries in <span class='object_link'><a href="#columns-instance_method" title="Google::Spanner::V1::Mutation::Write#columns (method)">columns</a></span>
-above. Sending multiple lists is equivalent to sending multiple
-<code>Mutation</code>s, each containing one <code>values</code> entry and repeating
-<span class='object_link'><a href="#table-instance_method" title="Google::Spanner::V1::Mutation::Write#table (method)">table</a></span> and <span class='object_link'><a href="#columns-instance_method" title="Google::Spanner::V1::Mutation::Write#columns (method)">columns</a></span>. Individual values in each list are
-encoded as described <span class='object_link'><a href="../TypeCode.html" title="Google::Spanner::V1::TypeCode (module)">here</a></span>.</p>
+exactly as many entries as there are entries in
+<span class='object_link'><a href="#columns-instance_method" title="Google::Spanner::V1::Mutation::Write#columns (method)">columns</a></span> above. Sending
+multiple lists is equivalent to sending multiple <code>Mutation</code>s, each
+containing one <code>values</code> entry and repeating
+<span class='object_link'><a href="#table-instance_method" title="Google::Spanner::V1::Mutation::Write#table (method)">table</a></span> and
+<span class='object_link'><a href="#columns-instance_method" title="Google::Spanner::V1::Mutation::Write#columns (method)">columns</a></span>. Individual values in
+each list are encoded as described <span class='object_link'><a href="../TypeCode.html" title="Google::Spanner::V1::TypeCode (module)">here</a></span>.</p>
 
 
   </div>
@@ -351,11 +357,13 @@ encoded as described <span class='object_link'><a href="../TypeCode.html" title=
         <div class='inline'><p>The values to be written. <code>values</code> can contain more than one
 list of values. If it does, then multiple rows are written, one
 for each entry in <code>values</code>. Each list in <code>values</code> must have
-exactly as many entries as there are entries in <span class='object_link'><a href="#columns-instance_method" title="Google::Spanner::V1::Mutation::Write#columns (method)">columns</a></span>
-above. Sending multiple lists is equivalent to sending multiple
-<code>Mutation</code>s, each containing one <code>values</code> entry and repeating
-<span class='object_link'><a href="#table-instance_method" title="Google::Spanner::V1::Mutation::Write#table (method)">table</a></span> and <span class='object_link'><a href="#columns-instance_method" title="Google::Spanner::V1::Mutation::Write#columns (method)">columns</a></span>. Individual values in each list are
-encoded as described <span class='object_link'><a href="../TypeCode.html" title="Google::Spanner::V1::TypeCode (module)">here</a></span>.</p>
+exactly as many entries as there are entries in
+<span class='object_link'><a href="#columns-instance_method" title="Google::Spanner::V1::Mutation::Write#columns (method)">columns</a></span> above. Sending
+multiple lists is equivalent to sending multiple <code>Mutation</code>s, each
+containing one <code>values</code> entry and repeating
+<span class='object_link'><a href="#table-instance_method" title="Google::Spanner::V1::Mutation::Write#table (method)">table</a></span> and
+<span class='object_link'><a href="#columns-instance_method" title="Google::Spanner::V1::Mutation::Write#columns (method)">columns</a></span>. Individual values in
+each list are encoded as described <span class='object_link'><a href="../TypeCode.html" title="Google::Spanner::V1::TypeCode (module)">here</a></span>.</p>
 </div>
       
     </li>
@@ -368,10 +376,10 @@ encoded as described <span class='object_link'><a href="../TypeCode.html" title=
       <pre class="lines">
 
 
-68</pre>
+74</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/doc/google/spanner/v1/mutation.rb', line 68</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/doc/google/spanner/v1/mutation.rb', line 74</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Spanner::V1::Mutation::Write (class)">Write</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>

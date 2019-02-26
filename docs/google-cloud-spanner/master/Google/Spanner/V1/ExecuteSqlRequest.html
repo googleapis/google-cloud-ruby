@@ -373,7 +373,8 @@ ExecuteStreamingSql.</p>
   <div class="discussion">
     <p>Returns It is not always possible for Cloud Spanner to infer the right SQL type
 from a JSON value.  For example, values of type <code>BYTES</code> and values
-of type <code>STRING</code> both appear in <span class='object_link'><a href="#params-instance_method" title="Google::Spanner::V1::ExecuteSqlRequest#params (method)">params</a></span> as JSON strings.</p>
+of type <code>STRING</code> both appear in
+<span class='object_link'><a href="#params-instance_method" title="Google::Spanner::V1::ExecuteSqlRequest#params (method)">params</a></span> as JSON strings.</p>
 
 <p>In these cases, <code>param_types</code> can be used to specify the exact
 SQL type for some or all of the SQL statement parameters. See the
@@ -398,7 +399,8 @@ about SQL types.</p>
         &mdash;
         <div class='inline'><p>It is not always possible for Cloud Spanner to infer the right SQL type
 from a JSON value.  For example, values of type <code>BYTES</code> and values
-of type <code>STRING</code> both appear in <span class='object_link'><a href="#params-instance_method" title="Google::Spanner::V1::ExecuteSqlRequest#params (method)">params</a></span> as JSON strings.</p>
+of type <code>STRING</code> both appear in
+<span class='object_link'><a href="#params-instance_method" title="Google::Spanner::V1::ExecuteSqlRequest#params (method)">params</a></span> as JSON strings.</p>
 
 <p>In these cases, <code>param_types</code> can be used to specify the exact
 SQL type for some or all of the SQL statement parameters. See the
@@ -416,11 +418,6 @@ about SQL types.</p>
       <pre class="lines">
 
 
-183
-184
-185
-186
-187
 188
 189
 190
@@ -430,10 +427,15 @@ about SQL types.</p>
 194
 195
 196
-197</pre>
+197
+198
+199
+200
+201
+202</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/doc/google/spanner/v1/spanner.rb', line 183</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/doc/google/spanner/v1/spanner.rb', line 188</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Spanner::V1::ExecuteSqlRequest (class)">ExecuteSqlRequest</a></span></span>
   <span class='comment'># Mode in which the statement must be processed.
@@ -525,11 +527,6 @@ corresponding parameter values.</p>
       <pre class="lines">
 
 
-183
-184
-185
-186
-187
 188
 189
 190
@@ -539,10 +536,15 @@ corresponding parameter values.</p>
 194
 195
 196
-197</pre>
+197
+198
+199
+200
+201
+202</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/doc/google/spanner/v1/spanner.rb', line 183</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/doc/google/spanner/v1/spanner.rb', line 188</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Spanner::V1::ExecuteSqlRequest (class)">ExecuteSqlRequest</a></span></span>
   <span class='comment'># Mode in which the statement must be processed.
@@ -614,11 +616,6 @@ PartitionQueryRequest message used to create this partition_token.</p>
       <pre class="lines">
 
 
-183
-184
-185
-186
-187
 188
 189
 190
@@ -628,10 +625,15 @@ PartitionQueryRequest message used to create this partition_token.</p>
 194
 195
 196
-197</pre>
+197
+198
+199
+200
+201
+202</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/doc/google/spanner/v1/spanner.rb', line 183</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/doc/google/spanner/v1/spanner.rb', line 188</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Spanner::V1::ExecuteSqlRequest (class)">ExecuteSqlRequest</a></span></span>
   <span class='comment'># Mode in which the statement must be processed.
@@ -667,8 +669,11 @@ PartitionQueryRequest message used to create this partition_token.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns Used to control the amount of debugging information returned in
-<span class='object_link'><a href="ResultSetStats.html" title="Google::Spanner::V1::ResultSetStats (class)">ResultSetStats</a></span>. If <span class='object_link'><a href="#partition_token-instance_method" title="Google::Spanner::V1::ExecuteSqlRequest#partition_token (method)">partition_token</a></span> is set, <span class='object_link'><a href="#query_mode-instance_method" title="Google::Spanner::V1::ExecuteSqlRequest#query_mode (method)">query_mode</a></span> can only
-be set to <span class='object_link'><a href="ExecuteSqlRequest/QueryMode.html#NORMAL-constant" title="Google::Spanner::V1::ExecuteSqlRequest::QueryMode::NORMAL (constant)">QueryMode::NORMAL</a></span>.</p>
+<span class='object_link'><a href="ResultSetStats.html" title="Google::Spanner::V1::ResultSetStats (class)">ResultSetStats</a></span>. If
+<span class='object_link'><a href="#partition_token-instance_method" title="Google::Spanner::V1::ExecuteSqlRequest#partition_token (method)">partition_token</a></span> is
+set, <span class='object_link'><a href="#query_mode-instance_method" title="Google::Spanner::V1::ExecuteSqlRequest#query_mode (method)">query_mode</a></span> can only
+be set to
+<span class='object_link'><a href="ExecuteSqlRequest/QueryMode.html#NORMAL-constant" title="Google::Spanner::V1::ExecuteSqlRequest::QueryMode::NORMAL (constant)">QueryMode::NORMAL</a></span>.</p>
 
 
   </div>
@@ -687,8 +692,11 @@ be set to <span class='object_link'><a href="ExecuteSqlRequest/QueryMode.html#NO
       
         &mdash;
         <div class='inline'><p>Used to control the amount of debugging information returned in
-<span class='object_link'><a href="ResultSetStats.html" title="Google::Spanner::V1::ResultSetStats (class)">ResultSetStats</a></span>. If <span class='object_link'><a href="#partition_token-instance_method" title="Google::Spanner::V1::ExecuteSqlRequest#partition_token (method)">partition_token</a></span> is set, <span class='object_link'><a href="#query_mode-instance_method" title="Google::Spanner::V1::ExecuteSqlRequest#query_mode (method)">query_mode</a></span> can only
-be set to <span class='object_link'><a href="ExecuteSqlRequest/QueryMode.html#NORMAL-constant" title="Google::Spanner::V1::ExecuteSqlRequest::QueryMode::NORMAL (constant)">QueryMode::NORMAL</a></span>.</p>
+<span class='object_link'><a href="ResultSetStats.html" title="Google::Spanner::V1::ResultSetStats (class)">ResultSetStats</a></span>. If
+<span class='object_link'><a href="#partition_token-instance_method" title="Google::Spanner::V1::ExecuteSqlRequest#partition_token (method)">partition_token</a></span> is
+set, <span class='object_link'><a href="#query_mode-instance_method" title="Google::Spanner::V1::ExecuteSqlRequest#query_mode (method)">query_mode</a></span> can only
+be set to
+<span class='object_link'><a href="ExecuteSqlRequest/QueryMode.html#NORMAL-constant" title="Google::Spanner::V1::ExecuteSqlRequest::QueryMode::NORMAL (constant)">QueryMode::NORMAL</a></span>.</p>
 </div>
       
     </li>
@@ -701,11 +709,6 @@ be set to <span class='object_link'><a href="ExecuteSqlRequest/QueryMode.html#NO
       <pre class="lines">
 
 
-183
-184
-185
-186
-187
 188
 189
 190
@@ -715,10 +718,15 @@ be set to <span class='object_link'><a href="ExecuteSqlRequest/QueryMode.html#NO
 194
 195
 196
-197</pre>
+197
+198
+199
+200
+201
+202</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/doc/google/spanner/v1/spanner.rb', line 183</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/doc/google/spanner/v1/spanner.rb', line 188</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Spanner::V1::ExecuteSqlRequest (class)">ExecuteSqlRequest</a></span></span>
   <span class='comment'># Mode in which the statement must be processed.
@@ -755,10 +763,10 @@ be set to <span class='object_link'><a href="ExecuteSqlRequest/QueryMode.html#NO
   <div class="discussion">
     <p>Returns If this request is resuming a previously interrupted SQL statement
 execution, <code>resume_token</code> should be copied from the last
-<span class='object_link'><a href="PartialResultSet.html" title="Google::Spanner::V1::PartialResultSet (class)">PartialResultSet</a></span> yielded before the interruption. Doing this
-enables the new SQL statement execution to resume where the last one left
-off. The rest of the request parameters must exactly match the
-request that yielded this token.</p>
+<span class='object_link'><a href="PartialResultSet.html" title="Google::Spanner::V1::PartialResultSet (class)">PartialResultSet</a></span> yielded before the
+interruption. Doing this enables the new SQL statement execution to resume
+where the last one left off. The rest of the request parameters must
+exactly match the request that yielded this token.</p>
 
 
   </div>
@@ -778,10 +786,10 @@ request that yielded this token.</p>
         &mdash;
         <div class='inline'><p>If this request is resuming a previously interrupted SQL statement
 execution, <code>resume_token</code> should be copied from the last
-<span class='object_link'><a href="PartialResultSet.html" title="Google::Spanner::V1::PartialResultSet (class)">PartialResultSet</a></span> yielded before the interruption. Doing this
-enables the new SQL statement execution to resume where the last one left
-off. The rest of the request parameters must exactly match the
-request that yielded this token.</p>
+<span class='object_link'><a href="PartialResultSet.html" title="Google::Spanner::V1::PartialResultSet (class)">PartialResultSet</a></span> yielded before the
+interruption. Doing this enables the new SQL statement execution to resume
+where the last one left off. The rest of the request parameters must
+exactly match the request that yielded this token.</p>
 </div>
       
     </li>
@@ -794,11 +802,6 @@ request that yielded this token.</p>
       <pre class="lines">
 
 
-183
-184
-185
-186
-187
 188
 189
 190
@@ -808,10 +811,15 @@ request that yielded this token.</p>
 194
 195
 196
-197</pre>
+197
+198
+199
+200
+201
+202</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/doc/google/spanner/v1/spanner.rb', line 183</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/doc/google/spanner/v1/spanner.rb', line 188</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Spanner::V1::ExecuteSqlRequest (class)">ExecuteSqlRequest</a></span></span>
   <span class='comment'># Mode in which the statement must be processed.
@@ -895,11 +903,6 @@ handled requests will yield the same response as the first execution.</p>
       <pre class="lines">
 
 
-183
-184
-185
-186
-187
 188
 189
 190
@@ -909,10 +912,15 @@ handled requests will yield the same response as the first execution.</p>
 194
 195
 196
-197</pre>
+197
+198
+199
+200
+201
+202</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/doc/google/spanner/v1/spanner.rb', line 183</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/doc/google/spanner/v1/spanner.rb', line 188</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Spanner::V1::ExecuteSqlRequest (class)">ExecuteSqlRequest</a></span></span>
   <span class='comment'># Mode in which the statement must be processed.
@@ -978,11 +986,6 @@ handled requests will yield the same response as the first execution.</p>
       <pre class="lines">
 
 
-183
-184
-185
-186
-187
 188
 189
 190
@@ -992,10 +995,15 @@ handled requests will yield the same response as the first execution.</p>
 194
 195
 196
-197</pre>
+197
+198
+199
+200
+201
+202</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/doc/google/spanner/v1/spanner.rb', line 183</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/doc/google/spanner/v1/spanner.rb', line 188</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Spanner::V1::ExecuteSqlRequest (class)">ExecuteSqlRequest</a></span></span>
   <span class='comment'># Mode in which the statement must be processed.
@@ -1061,11 +1069,6 @@ handled requests will yield the same response as the first execution.</p>
       <pre class="lines">
 
 
-183
-184
-185
-186
-187
 188
 189
 190
@@ -1075,10 +1078,15 @@ handled requests will yield the same response as the first execution.</p>
 194
 195
 196
-197</pre>
+197
+198
+199
+200
+201
+202</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/doc/google/spanner/v1/spanner.rb', line 183</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/doc/google/spanner/v1/spanner.rb', line 188</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Spanner::V1::ExecuteSqlRequest (class)">ExecuteSqlRequest</a></span></span>
   <span class='comment'># Mode in which the statement must be processed.
@@ -1168,11 +1176,6 @@ either supply an existing transaction ID or begin a new transaction.</p>
       <pre class="lines">
 
 
-183
-184
-185
-186
-187
 188
 189
 190
@@ -1182,10 +1185,15 @@ either supply an existing transaction ID or begin a new transaction.</p>
 194
 195
 196
-197</pre>
+197
+198
+199
+200
+201
+202</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/doc/google/spanner/v1/spanner.rb', line 183</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/doc/google/spanner/v1/spanner.rb', line 188</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Spanner::V1::ExecuteSqlRequest (class)">ExecuteSqlRequest</a></span></span>
   <span class='comment'># Mode in which the statement must be processed.
