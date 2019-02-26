@@ -186,8 +186,10 @@ module Google
           #     are applied in the order specified.
           #
           #     This field is similar to the one in the
-          #     [`MetricService.ListTimeSeries` request](https://cloud.google.com/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list).
-          #     It is advisable to use the `ListTimeSeries` method when debugging this field.
+          #     [`MetricService.ListTimeSeries`
+          #     request](/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list). It
+          #     is advisable to use the `ListTimeSeries` method when debugging this
+          #     field.
           # @!attribute [rw] denominator_filter
           #   @return [String]
           #     A [filter](https://cloud.google.com/monitoring/api/v3/filters) that identifies a time
@@ -281,8 +283,10 @@ module Google
           #     are applied in the order specified.
           #
           #     This field is similar to the
-          #     one in the [`MetricService.ListTimeSeries` request](https://cloud.google.com/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list).
-          #     It is advisable to use the `ListTimeSeries` method when debugging this field.
+          #     one in the [`MetricService.ListTimeSeries`
+          #     request](/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list). It
+          #     is advisable to use the `ListTimeSeries` method when debugging this
+          #     field.
           # @!attribute [rw] duration
           #   @return [Google::Protobuf::Duration]
           #     The amount of time that a time series must fail to report new

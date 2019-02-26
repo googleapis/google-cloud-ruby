@@ -194,8 +194,9 @@ module Google
     # labels of a {Google::Api::MetricDescriptor `MetricDescriptor`}.
     # @!attribute [rw] type
     #   @return [String]
-    #     An existing metric type, see {Google::Api::MetricDescriptor}.
-    #     For example, `custom.googleapis.com/invoice/paid/amount`.
+    #     An existing metric type, see
+    #     {Google::Api::MetricDescriptor}. For example,
+    #     `custom.googleapis.com/invoice/paid/amount`.
     # @!attribute [rw] labels
     #   @return [Hash{String => String}]
     #     The set of label values that uniquely identify this metric. All
