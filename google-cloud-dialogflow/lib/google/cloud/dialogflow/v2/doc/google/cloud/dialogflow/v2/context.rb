@@ -35,7 +35,8 @@ module Google
         #     syntax.
         class Context; end
 
-        # The request message for {Google::Cloud::Dialogflow::V2::Contexts::ListContexts Contexts::ListContexts}.
+        # The request message for
+        # {Google::Cloud::Dialogflow::V2::Contexts::ListContexts Contexts::ListContexts}.
         # @!attribute [rw] parent
         #   @return [String]
         #     Required. The session to list all contexts from.
@@ -49,7 +50,8 @@ module Google
         #     Optional. The next_page_token value returned from a previous list request.
         class ListContextsRequest; end
 
-        # The response message for {Google::Cloud::Dialogflow::V2::Contexts::ListContexts Contexts::ListContexts}.
+        # The response message for
+        # {Google::Cloud::Dialogflow::V2::Contexts::ListContexts Contexts::ListContexts}.
         # @!attribute [rw] contexts
         #   @return [Array<Google::Cloud::Dialogflow::V2::Context>]
         #     The list of contexts. There will be a maximum number of items
@@ -60,14 +62,16 @@ module Google
         #     more results in the list.
         class ListContextsResponse; end
 
-        # The request message for {Google::Cloud::Dialogflow::V2::Contexts::GetContext Contexts::GetContext}.
+        # The request message for
+        # {Google::Cloud::Dialogflow::V2::Contexts::GetContext Contexts::GetContext}.
         # @!attribute [rw] name
         #   @return [String]
         #     Required. The name of the context. Format:
         #     `projects/<Project ID>/agent/sessions/<Session ID>/contexts/<Context ID>`.
         class GetContextRequest; end
 
-        # The request message for {Google::Cloud::Dialogflow::V2::Contexts::CreateContext Contexts::CreateContext}.
+        # The request message for
+        # {Google::Cloud::Dialogflow::V2::Contexts::CreateContext Contexts::CreateContext}.
         # @!attribute [rw] parent
         #   @return [String]
         #     Required. The session to create a context for.
@@ -77,7 +81,8 @@ module Google
         #     Required. The context to create.
         class CreateContextRequest; end
 
-        # The request message for {Google::Cloud::Dialogflow::V2::Contexts::UpdateContext Contexts::UpdateContext}.
+        # The request message for
+        # {Google::Cloud::Dialogflow::V2::Contexts::UpdateContext Contexts::UpdateContext}.
         # @!attribute [rw] context
         #   @return [Google::Cloud::Dialogflow::V2::Context]
         #     Required. The context to update.
@@ -86,14 +91,16 @@ module Google
         #     Optional. The mask to control which fields get updated.
         class UpdateContextRequest; end
 
-        # The request message for {Google::Cloud::Dialogflow::V2::Contexts::DeleteContext Contexts::DeleteContext}.
+        # The request message for
+        # {Google::Cloud::Dialogflow::V2::Contexts::DeleteContext Contexts::DeleteContext}.
         # @!attribute [rw] name
         #   @return [String]
         #     Required. The name of the context to delete. Format:
         #     `projects/<Project ID>/agent/sessions/<Session ID>/contexts/<Context ID>`.
         class DeleteContextRequest; end
 
-        # The request message for {Google::Cloud::Dialogflow::V2::Contexts::DeleteAllContexts Contexts::DeleteAllContexts}.
+        # The request message for
+        # {Google::Cloud::Dialogflow::V2::Contexts::DeleteAllContexts Contexts::DeleteAllContexts}.
         # @!attribute [rw] parent
         #   @return [String]
         #     Required. The name of the session to delete all contexts from. Format:

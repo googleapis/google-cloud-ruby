@@ -94,18 +94,22 @@ module Google
         # in your app, product, or service to determine user intent and respond to the
         # user in a natural way.
         #
-        # After you create an agent, you can add {Google::Cloud::Dialogflow::V2::Intents Intents}, {Google::Cloud::Dialogflow::V2::Contexts Contexts},
-        # {Google::Cloud::Dialogflow::V2::EntityTypes Entity Types}, {Google::Cloud::Dialogflow::V2::WebhookRequest Webhooks}, and so on to
-        # manage the flow of a conversation and match user input to predefined intents
-        # and actions.
+        # After you create an agent, you can add
+        # {Google::Cloud::Dialogflow::V2::Intents Intents},
+        # {Google::Cloud::Dialogflow::V2::Contexts Contexts}, [Entity
+        # Types][google.cloud.dialogflow.v2.EntityTypes],
+        # {Google::Cloud::Dialogflow::V2::WebhookRequest Webhooks}, and so on to manage
+        # the flow of a conversation and match user input to predefined intents and
+        # actions.
         #
         # You can create an agent using both Dialogflow Standard Edition and
         # Dialogflow Enterprise Edition. For details, see
         # [Dialogflow Editions](https://cloud.google.com/dialogflow-enterprise/docs/editions).
         #
         # You can save your agent for backup or versioning by exporting the agent by
-        # using the {Google::Cloud::Dialogflow::V2::Agents::ExportAgent ExportAgent} method. You can import a saved
-        # agent by using the {Google::Cloud::Dialogflow::V2::Agents::ImportAgent ImportAgent} method.
+        # using the {Google::Cloud::Dialogflow::V2::Agents::ExportAgent ExportAgent}
+        # method. You can import a saved agent by using the
+        # {Google::Cloud::Dialogflow::V2::Agents::ImportAgent ImportAgent} method.
         #
         # Dialogflow provides several
         # [prebuilt agents](https://dialogflow.com/docs/prebuilt-agents) for common
@@ -174,11 +178,11 @@ module Google
         #
         # You can include contexts as input parameters of a
         # {Google::Cloud::Dialogflow::V2::Sessions::DetectIntent DetectIntent} (or
-        # {Google::Cloud::Dialogflow::V2::Sessions::StreamingDetectIntent StreamingDetectIntent}) request,
-        # or as output contexts included in the returned intent.
-        # Contexts expire when an intent is matched, after the number of `DetectIntent`
-        # requests specified by the `lifespan_count` parameter, or after 10 minutes
-        # if no intents are matched for a `DetectIntent` request.
+        # {Google::Cloud::Dialogflow::V2::Sessions::StreamingDetectIntent StreamingDetectIntent})
+        # request, or as output contexts included in the returned intent. Contexts
+        # expire when an intent is matched, after the number of `DetectIntent` requests
+        # specified by the `lifespan_count` parameter, or after 10 minutes if no
+        # intents are matched for a `DetectIntent` request.
         #
         # For more information about contexts, see the
         # [Dialogflow documentation](https://dialogflow.com/docs/contexts).
@@ -256,7 +260,8 @@ module Google
         #
         # * **User** - entities that are built for an individual user such as
         #   favorites, preferences, playlists, and so on. A user entity is
-        #   represented by the {Google::Cloud::Dialogflow::V2::SessionEntityType SessionEntityType} type.
+        #   represented by the
+        #   {Google::Cloud::Dialogflow::V2::SessionEntityType SessionEntityType} type.
         #
         # For more information about entity types, see the
         # [Dialogflow documentation](https://dialogflow.com/docs/entities).
@@ -314,10 +319,10 @@ module Google
         # An intent represents a mapping between input from a user and an action to
         # be taken by your application. When you pass user input to the
         # {Google::Cloud::Dialogflow::V2::Sessions::DetectIntent DetectIntent} (or
-        # {Google::Cloud::Dialogflow::V2::Sessions::StreamingDetectIntent StreamingDetectIntent}) method, the
-        # Dialogflow API analyzes the input and searches
-        # for a matching intent. If no match is found, the Dialogflow API returns a
-        # fallback intent (`is_fallback` = true).
+        # {Google::Cloud::Dialogflow::V2::Sessions::StreamingDetectIntent StreamingDetectIntent})
+        # method, the Dialogflow API analyzes the input and searches for a matching
+        # intent. If no match is found, the Dialogflow API returns a fallback intent
+        # (`is_fallback` = true).
         #
         # You can provide additional information for the Dialogflow API to use to
         # match user input to an intent by adding the following to your intent.
@@ -457,9 +462,10 @@ module Google
       module Sessions
         ##
         # A session represents an interaction with a user. You retrieve user input
-        # and pass it to the {Google::Cloud::Dialogflow::V2::Sessions::DetectIntent DetectIntent} (or
-        # {Google::Cloud::Dialogflow::V2::Sessions::StreamingDetectIntent StreamingDetectIntent}) method to determine
-        # user intent and respond.
+        # and pass it to the
+        # {Google::Cloud::Dialogflow::V2::Sessions::DetectIntent DetectIntent} (or
+        # {Google::Cloud::Dialogflow::V2::Sessions::StreamingDetectIntent StreamingDetectIntent})
+        # method to determine user intent and respond.
         #
         # @param version [Symbol, String]
         #   The major version of the service to be used. By default :v2

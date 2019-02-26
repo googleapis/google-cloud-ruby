@@ -57,7 +57,8 @@ module Google
         #
         # * **User** - entities that are built for an individual user such as
         #   favorites, preferences, playlists, and so on. A user entity is
-        #   represented by the {Google::Cloud::Dialogflow::V2::SessionEntityType SessionEntityType} type.
+        #   represented by the
+        #   {Google::Cloud::Dialogflow::V2::SessionEntityType SessionEntityType} type.
         #
         # For more information about entity types, see the
         # [Dialogflow documentation](https://dialogflow.com/docs/entities).
@@ -530,7 +531,8 @@ module Google
 
           # Updates/Creates multiple entity types in the specified agent.
           #
-          # Operation <response: {Google::Cloud::Dialogflow::V2::BatchUpdateEntityTypesResponse BatchUpdateEntityTypesResponse},
+          # Operation <response:
+          # {Google::Cloud::Dialogflow::V2::BatchUpdateEntityTypesResponse BatchUpdateEntityTypesResponse},
           #            metadata: {Google::Protobuf::Struct}>
           #
           # @param parent [String]

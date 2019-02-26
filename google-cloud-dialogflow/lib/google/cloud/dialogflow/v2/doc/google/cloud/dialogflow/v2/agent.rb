@@ -80,14 +80,16 @@ module Google
           end
         end
 
-        # The request message for {Google::Cloud::Dialogflow::V2::Agents::GetAgent Agents::GetAgent}.
+        # The request message for
+        # {Google::Cloud::Dialogflow::V2::Agents::GetAgent Agents::GetAgent}.
         # @!attribute [rw] parent
         #   @return [String]
         #     Required. The project that the agent to fetch is associated with.
         #     Format: `projects/<Project ID>`.
         class GetAgentRequest; end
 
-        # The request message for {Google::Cloud::Dialogflow::V2::Agents::SearchAgents Agents::SearchAgents}.
+        # The request message for
+        # {Google::Cloud::Dialogflow::V2::Agents::SearchAgents Agents::SearchAgents}.
         # @!attribute [rw] parent
         #   @return [String]
         #     Required. The project to list agents from.
@@ -101,7 +103,8 @@ module Google
         #     Optional. The next_page_token value returned from a previous list request.
         class SearchAgentsRequest; end
 
-        # The response message for {Google::Cloud::Dialogflow::V2::Agents::SearchAgents Agents::SearchAgents}.
+        # The response message for
+        # {Google::Cloud::Dialogflow::V2::Agents::SearchAgents Agents::SearchAgents}.
         # @!attribute [rw] agents
         #   @return [Array<Google::Cloud::Dialogflow::V2::Agent>]
         #     The list of agents. There will be a maximum number of items returned based
@@ -112,14 +115,16 @@ module Google
         #     more results in the list.
         class SearchAgentsResponse; end
 
-        # The request message for {Google::Cloud::Dialogflow::V2::Agents::TrainAgent Agents::TrainAgent}.
+        # The request message for
+        # {Google::Cloud::Dialogflow::V2::Agents::TrainAgent Agents::TrainAgent}.
         # @!attribute [rw] parent
         #   @return [String]
         #     Required. The project that the agent to train is associated with.
         #     Format: `projects/<Project ID>`.
         class TrainAgentRequest; end
 
-        # The request message for {Google::Cloud::Dialogflow::V2::Agents::ExportAgent Agents::ExportAgent}.
+        # The request message for
+        # {Google::Cloud::Dialogflow::V2::Agents::ExportAgent Agents::ExportAgent}.
         # @!attribute [rw] parent
         #   @return [String]
         #     Required. The project that the agent to export is associated with.
@@ -131,7 +136,8 @@ module Google
         #     "gs://". If left unspecified, the serialized agent is returned inline.
         class ExportAgentRequest; end
 
-        # The response message for {Google::Cloud::Dialogflow::V2::Agents::ExportAgent Agents::ExportAgent}.
+        # The response message for
+        # {Google::Cloud::Dialogflow::V2::Agents::ExportAgent Agents::ExportAgent}.
         # @!attribute [rw] agent_uri
         #   @return [String]
         #     The URI to a file containing the exported agent. This field is populated
@@ -154,7 +160,8 @@ module Google
         #     | base64 --decode > <agent zip file>
         class ExportAgentResponse; end
 
-        # The request message for {Google::Cloud::Dialogflow::V2::Agents::ImportAgent Agents::ImportAgent}.
+        # The request message for
+        # {Google::Cloud::Dialogflow::V2::Agents::ImportAgent Agents::ImportAgent}.
         # @!attribute [rw] parent
         #   @return [String]
         #     Required. The project that the agent to import is associated with.
@@ -181,7 +188,8 @@ module Google
         #        }"
         class ImportAgentRequest; end
 
-        # The request message for {Google::Cloud::Dialogflow::V2::Agents::RestoreAgent Agents::RestoreAgent}.
+        # The request message for
+        # {Google::Cloud::Dialogflow::V2::Agents::RestoreAgent Agents::RestoreAgent}.
         # @!attribute [rw] parent
         #   @return [String]
         #     Required. The project that the agent to restore is associated with.

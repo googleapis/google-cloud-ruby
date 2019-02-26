@@ -28,10 +28,10 @@ module Google
           # An intent represents a mapping between input from a user and an action to
           # be taken by your application. When you pass user input to the
           # [DetectIntent][google.cloud.dialogflow.v2.Sessions.DetectIntent] (or
-          # [StreamingDetectIntent][google.cloud.dialogflow.v2.Sessions.StreamingDetectIntent]) method, the
-          # Dialogflow API analyzes the input and searches
-          # for a matching intent. If no match is found, the Dialogflow API returns a
-          # fallback intent (`is_fallback` = true).
+          # [StreamingDetectIntent][google.cloud.dialogflow.v2.Sessions.StreamingDetectIntent])
+          # method, the Dialogflow API analyzes the input and searches for a matching
+          # intent. If no match is found, the Dialogflow API returns a fallback intent
+          # (`is_fallback` = true).
           #
           # You can provide additional information for the Dialogflow API to use to
           # match user input to an intent by adding the following to your intent.
@@ -76,7 +76,8 @@ module Google
             rpc :DeleteIntent, DeleteIntentRequest, Google::Protobuf::Empty
             # Updates/Creates multiple intents in the specified agent.
             #
-            # Operation <response: [BatchUpdateIntentsResponse][google.cloud.dialogflow.v2.BatchUpdateIntentsResponse]>
+            # Operation <response:
+            # [BatchUpdateIntentsResponse][google.cloud.dialogflow.v2.BatchUpdateIntentsResponse]>
             rpc :BatchUpdateIntents, BatchUpdateIntentsRequest, Google::Longrunning::Operation
             # Deletes intents in the specified agent.
             #
