@@ -132,10 +132,10 @@ js:
     <p>An intent represents a mapping between input from a user and an action to
 be taken by your application. When you pass user input to the
 DetectIntent (or
-StreamingDetectIntent) method, the
-Dialogflow API analyzes the input and searches
-for a matching intent. If no match is found, the Dialogflow API returns a
-fallback intent (<code>is_fallback</code> = true).</p>
+StreamingDetectIntent)
+method, the Dialogflow API analyzes the input and searches for a matching
+intent. If no match is found, the Dialogflow API returns a fallback intent
+(<code>is_fallback</code> = true).</p>
 
 <p>You can provide additional information for the Dialogflow API to use to
 match user input to an intent by adding the following to your intent.</p>
@@ -284,11 +284,6 @@ custom error handling.</p>
       <pre class="lines">
 
 
-388
-389
-390
-391
-392
 393
 394
 395
@@ -304,10 +299,15 @@ custom error handling.</p>
 405
 406
 407
-408</pre>
+408
+409
+410
+411
+412
+413</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2.rb', line 388</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2.rb', line 393</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span> \
     <span class='label'>credentials:</span> <span class='kw'>nil</span><span class='comma'>,</span>

@@ -92,10 +92,10 @@ js:
     <p>An intent represents a mapping between input from a user and an action to
 be taken by your application. When you pass user input to the
 DetectIntent (or
-StreamingDetectIntent) method, the
-Dialogflow API analyzes the input and searches
-for a matching intent. If no match is found, the Dialogflow API returns a
-fallback intent (<code>is_fallback</code> = true).</p>
+StreamingDetectIntent)
+method, the Dialogflow API analyzes the input and searches for a matching
+intent. If no match is found, the Dialogflow API returns a fallback intent
+(<code>is_fallback</code> = true).</p>
 
 <p>You can provide additional information for the Dialogflow API to use to
 match user input to an intent by adding the following to your intent.</p>
@@ -1281,7 +1281,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-705
 706
 707
 708
@@ -1299,10 +1298,11 @@ retries, etc.</p>
 720
 721
 722
-723</pre>
+723
+724</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/intents_client.rb', line 705</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/intents_client.rb', line 706</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_batch_delete_intents'>batch_delete_intents</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -1341,7 +1341,8 @@ retries, etc.</p>
   <div class="discussion">
     <p>Updates/Creates multiple intents in the specified agent.</p>
 
-<p>Operation <response: <span class='object_link'><a href="BatchUpdateIntentsResponse.html" title="Google::Cloud::Dialogflow::V2::BatchUpdateIntentsResponse (class)">BatchUpdateIntentsResponse</a></span>></p>
+<p>Operation <response:
+<span class='object_link'><a href="BatchUpdateIntentsResponse.html" title="Google::Cloud::Dialogflow::V2::BatchUpdateIntentsResponse (class)">BatchUpdateIntentsResponse</a></span>></p>
 
 
   </div>
@@ -1547,7 +1548,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-624
 625
 626
 627
@@ -1573,10 +1573,11 @@ retries, etc.</p>
 647
 648
 649
-650</pre>
+650
+651</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/intents_client.rb', line 624</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/intents_client.rb', line 625</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_batch_update_intents'>batch_update_intents</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>

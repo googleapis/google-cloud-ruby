@@ -138,11 +138,11 @@ geographic location, and so on.</p>
 
 <p>You can include contexts as input parameters of a
 DetectIntent (or
-StreamingDetectIntent) request,
-or as output contexts included in the returned intent.
-Contexts expire when an intent is matched, after the number of <code>DetectIntent</code>
-requests specified by the <code>lifespan_count</code> parameter, or after 10 minutes
-if no intents are matched for a <code>DetectIntent</code> request.</p>
+StreamingDetectIntent)
+request, or as output contexts included in the returned intent. Contexts
+expire when an intent is matched, after the number of <code>DetectIntent</code> requests
+specified by the <code>lifespan_count</code> parameter, or after 10 minutes if no
+intents are matched for a <code>DetectIntent</code> request.</p>
 
 <p>For more information about contexts, see the
 <a href="https://dialogflow.com/docs/contexts">Dialogflow documentation</a>.</p>
@@ -270,10 +270,6 @@ custom error handling.</p>
       <pre class="lines">
 
 
-220
-221
-222
-223
 224
 225
 226
@@ -290,10 +286,14 @@ custom error handling.</p>
 237
 238
 239
-240</pre>
+240
+241
+242
+243
+244</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2.rb', line 220</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2.rb', line 224</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span> \
     <span class='label'>credentials:</span> <span class='kw'>nil</span><span class='comma'>,</span>

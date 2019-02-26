@@ -94,18 +94,22 @@ that transform user requests into actionable data. You can include agents
 in your app, product, or service to determine user intent and respond to the
 user in a natural way.</p>
 
-<p>After you create an agent, you can add <span class='object_link'><a href="Intents.html" title="Google::Cloud::Dialogflow::V2::Intents (module)">Intents</a></span>, <span class='object_link'><a href="Contexts.html" title="Google::Cloud::Dialogflow::V2::Contexts (module)">Contexts</a></span>,
-<span class='object_link'><a href="EntityTypes.html" title="Google::Cloud::Dialogflow::V2::EntityTypes (module)">Entity Types</a></span>, Webhooks, and so on to
-manage the flow of a conversation and match user input to predefined intents
-and actions.</p>
+<p>After you create an agent, you can add
+<span class='object_link'><a href="Intents.html" title="Google::Cloud::Dialogflow::V2::Intents (module)">Intents</a></span>,
+<span class='object_link'><a href="Contexts.html" title="Google::Cloud::Dialogflow::V2::Contexts (module)">Contexts</a></span>, [Entity
+Types][google.cloud.dialogflow.v2.EntityTypes],
+Webhooks, and so on to manage
+the flow of a conversation and match user input to predefined intents and
+actions.</p>
 
 <p>You can create an agent using both Dialogflow Standard Edition and
 Dialogflow Enterprise Edition. For details, see
 <a href="https://cloud.google.com/dialogflow-enterprise/docs/editions">Dialogflow Editions</a>.</p>
 
 <p>You can save your agent for backup or versioning by exporting the agent by
-using the ExportAgent method. You can import a saved
-agent by using the ImportAgent method.</p>
+using the ExportAgent
+method. You can import a saved agent by using the
+ImportAgent method.</p>
 
 <p>Dialogflow provides several
 <a href="https://dialogflow.com/docs/prebuilt-agents">prebuilt agents</a> for common
@@ -552,10 +556,6 @@ custom error handling.</p>
       <pre class="lines">
 
 
-145
-146
-147
-148
 149
 150
 151
@@ -665,10 +665,14 @@ custom error handling.</p>
 255
 256
 257
-258</pre>
+258
+259
+260
+261
+262</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/agents_client.rb', line 145</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/agents_client.rb', line 149</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span> \
     <span class='label'>credentials:</span> <span class='kw'>nil</span><span class='comma'>,</span>
@@ -849,14 +853,14 @@ custom error handling.</p>
       <pre class="lines">
 
 
-110
-111
-112
-113
-114</pre>
+114
+115
+116
+117
+118</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/agents_client.rb', line 110</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/agents_client.rb', line 114</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_project_path'>project_path</span> <span class='id identifier rubyid_project'>project</span>
   <span class='const'>PROJECT_PATH_TEMPLATE</span><span class='period'>.</span><span class='id identifier rubyid_render'>render</span><span class='lparen'>(</span>
@@ -887,7 +891,8 @@ custom error handling.</p>
   <div class="discussion">
     <p>Exports the specified agent to a ZIP file.</p>
 
-<p>Operation <response: <span class='object_link'><a href="ExportAgentResponse.html" title="Google::Cloud::Dialogflow::V2::ExportAgentResponse (class)">ExportAgentResponse</a></span>,
+<p>Operation <response:
+<span class='object_link'><a href="ExportAgentResponse.html" title="Google::Cloud::Dialogflow::V2::ExportAgentResponse (class)">ExportAgentResponse</a></span>,
            metadata: <span class='object_link'><a href="../../../Protobuf/Struct.html" title="Google::Protobuf::Struct (class)">Protobuf::Struct</a></span>></p>
 
 
@@ -1023,11 +1028,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-468
-469
-470
-471
-472
 473
 474
 475
@@ -1041,10 +1041,15 @@ retries, etc.</p>
 483
 484
 485
-486</pre>
+486
+487
+488
+489
+490
+491</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/agents_client.rb', line 468</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/agents_client.rb', line 473</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_export_agent'>export_agent</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -1216,19 +1221,19 @@ retries, etc.</p>
       <pre class="lines">
 
 
-282
-283
-284
-285
 286
 287
 288
 289
 290
-291</pre>
+291
+292
+293
+294
+295</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/agents_client.rb', line 282</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/agents_client.rb', line 286</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_agent'>get_agent</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -1425,11 +1430,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-556
-557
-558
-559
-560
 561
 562
 563
@@ -1445,10 +1445,15 @@ retries, etc.</p>
 573
 574
 575
-576</pre>
+576
+577
+578
+579
+580
+581</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/agents_client.rb', line 556</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/agents_client.rb', line 561</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_import_agent'>import_agent</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -1655,11 +1660,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-645
-646
-647
-648
-649
 650
 651
 652
@@ -1675,10 +1675,15 @@ retries, etc.</p>
 662
 663
 664
-665</pre>
+665
+666
+667
+668
+669
+670</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/agents_client.rb', line 645</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/agents_client.rb', line 650</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_restore_agent'>restore_agent</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -1896,10 +1901,6 @@ object.</p>
       <pre class="lines">
 
 
-341
-342
-343
-344
 345
 346
 347
@@ -1907,10 +1908,14 @@ object.</p>
 349
 350
 351
-352</pre>
+352
+353
+354
+355
+356</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/agents_client.rb', line 341</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/agents_client.rb', line 345</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_search_agents'>search_agents</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -2061,10 +2066,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-400
-401
-402
-403
 404
 405
 406
@@ -2077,10 +2078,14 @@ retries, etc.</p>
 413
 414
 415
-416</pre>
+416
+417
+418
+419
+420</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/agents_client.rb', line 400</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/agents_client.rb', line 404</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_train_agent'>train_agent</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>

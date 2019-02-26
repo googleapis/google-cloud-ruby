@@ -134,18 +134,22 @@ that transform user requests into actionable data. You can include agents
 in your app, product, or service to determine user intent and respond to the
 user in a natural way.</p>
 
-<p>After you create an agent, you can add <span class='object_link'><a href="V2/Intents.html" title="Google::Cloud::Dialogflow::V2::Intents (module)">Intents</a></span>, <span class='object_link'><a href="V2/Contexts.html" title="Google::Cloud::Dialogflow::V2::Contexts (module)">Contexts</a></span>,
-<span class='object_link'><a href="V2/EntityTypes.html" title="Google::Cloud::Dialogflow::V2::EntityTypes (module)">Entity Types</a></span>, Webhooks, and so on to
-manage the flow of a conversation and match user input to predefined intents
-and actions.</p>
+<p>After you create an agent, you can add
+<span class='object_link'><a href="V2/Intents.html" title="Google::Cloud::Dialogflow::V2::Intents (module)">Intents</a></span>,
+<span class='object_link'><a href="V2/Contexts.html" title="Google::Cloud::Dialogflow::V2::Contexts (module)">Contexts</a></span>, [Entity
+Types][google.cloud.dialogflow.v2.EntityTypes],
+Webhooks, and so on to manage
+the flow of a conversation and match user input to predefined intents and
+actions.</p>
 
 <p>You can create an agent using both Dialogflow Standard Edition and
 Dialogflow Enterprise Edition. For details, see
 <a href="https://cloud.google.com/dialogflow-enterprise/docs/editions">Dialogflow Editions</a>.</p>
 
 <p>You can save your agent for backup or versioning by exporting the agent by
-using the ExportAgent method. You can import a saved
-agent by using the ImportAgent method.</p>
+using the ExportAgent
+method. You can import a saved agent by using the
+ImportAgent method.</p>
 
 <p>Dialogflow provides several
 <a href="https://dialogflow.com/docs/prebuilt-agents">prebuilt agents</a> for common
@@ -309,10 +313,6 @@ is used.</p>
       <pre class="lines">
 
 
-151
-152
-153
-154
 155
 156
 157
@@ -321,10 +321,14 @@ is used.</p>
 160
 161
 162
-163</pre>
+163
+164
+165
+166
+167</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow.rb', line 151</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow.rb', line 155</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='label'>version:</span> <span class='symbol'>:v2</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='rparen'>)</span>
   <span class='kw'>unless</span> <span class='const'><span class='object_link'><a href="../Dialogflow.html#AVAILABLE_VERSIONS-constant" title="Google::Cloud::Dialogflow::AVAILABLE_VERSIONS (constant)">AVAILABLE_VERSIONS</a></span></span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span><span class='lparen'>(</span><span class='id identifier rubyid_version'>version</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='period'>.</span><span class='id identifier rubyid_downcase'>downcase</span><span class='rparen'>)</span>

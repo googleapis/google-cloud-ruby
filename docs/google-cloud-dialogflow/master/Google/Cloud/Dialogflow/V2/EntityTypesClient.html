@@ -111,7 +111,8 @@ a <code>pizza.topping</code> entity for different toppings, and so on. A develop
 entity is represented by the <code>EntityType</code> type.</p></li>
 <li><p><strong>User</strong> - entities that are built for an individual user such as
 favorites, preferences, playlists, and so on. A user entity is
-represented by the <span class='object_link'><a href="SessionEntityType.html" title="Google::Cloud::Dialogflow::V2::SessionEntityType (class)">SessionEntityType</a></span> type.</p></li>
+represented by the
+<span class='object_link'><a href="SessionEntityType.html" title="Google::Cloud::Dialogflow::V2::SessionEntityType (class)">SessionEntityType</a></span> type.</p></li>
 </ul>
 
 <p>For more information about entity types, see the
@@ -669,7 +670,6 @@ custom error handling.</p>
       <pre class="lines">
 
 
-164
 165
 166
 167
@@ -802,10 +802,11 @@ custom error handling.</p>
 294
 295
 296
-297</pre>
+297
+298</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/entity_types_client.rb', line 164</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/entity_types_client.rb', line 165</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span> \
     <span class='label'>credentials:</span> <span class='kw'>nil</span><span class='comma'>,</span>
@@ -1017,15 +1018,15 @@ custom error handling.</p>
       <pre class="lines">
 
 
-128
 129
 130
 131
 132
-133</pre>
+133
+134</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/entity_types_client.rb', line 128</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/entity_types_client.rb', line 129</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_entity_type_path'>entity_type_path</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span> <span class='id identifier rubyid_entity_type'>entity_type</span>
   <span class='const'>ENTITY_TYPE_PATH_TEMPLATE</span><span class='period'>.</span><span class='id identifier rubyid_render'>render</span><span class='lparen'>(</span>
@@ -1091,14 +1092,14 @@ custom error handling.</p>
       <pre class="lines">
 
 
-118
 119
 120
 121
-122</pre>
+122
+123</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/entity_types_client.rb', line 118</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/entity_types_client.rb', line 119</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_project_agent_path'>project_agent_path</span> <span class='id identifier rubyid_project'>project</span>
   <span class='const'>PROJECT_AGENT_PATH_TEMPLATE</span><span class='period'>.</span><span class='id identifier rubyid_render'>render</span><span class='lparen'>(</span>
@@ -1287,8 +1288,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-753
-754
 755
 756
 757
@@ -1307,10 +1306,12 @@ retries, etc.</p>
 770
 771
 772
-773</pre>
+773
+774
+775</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/entity_types_client.rb', line 753</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/entity_types_client.rb', line 755</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_batch_create_entities'>batch_create_entities</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -1509,8 +1510,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-922
-923
 924
 925
 926
@@ -1529,10 +1528,12 @@ retries, etc.</p>
 939
 940
 941
-942</pre>
+942
+943
+944</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/entity_types_client.rb', line 922</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/entity_types_client.rb', line 924</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_batch_delete_entities'>batch_delete_entities</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -1711,8 +1712,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-674
-675
 676
 677
 678
@@ -1729,10 +1728,12 @@ retries, etc.</p>
 689
 690
 691
-692</pre>
+692
+693
+694</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/entity_types_client.rb', line 674</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/entity_types_client.rb', line 676</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_batch_delete_entity_types'>batch_delete_entity_types</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -1947,8 +1948,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-839
-840
 841
 842
 843
@@ -1969,10 +1968,12 @@ retries, etc.</p>
 858
 859
 860
-861</pre>
+861
+862
+863</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/entity_types_client.rb', line 839</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/entity_types_client.rb', line 841</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_batch_update_entities'>batch_update_entities</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -2015,7 +2016,8 @@ retries, etc.</p>
   <div class="discussion">
     <p>Updates/Creates multiple entity types in the specified agent.</p>
 
-<p>Operation <response: <span class='object_link'><a href="BatchUpdateEntityTypesResponse.html" title="Google::Cloud::Dialogflow::V2::BatchUpdateEntityTypesResponse (class)">BatchUpdateEntityTypesResponse</a></span>,
+<p>Operation <response:
+<span class='object_link'><a href="BatchUpdateEntityTypesResponse.html" title="Google::Cloud::Dialogflow::V2::BatchUpdateEntityTypesResponse (class)">BatchUpdateEntityTypesResponse</a></span>,
            metadata: <span class='object_link'><a href="../../../Protobuf/Struct.html" title="Google::Protobuf::Struct (class)">Protobuf::Struct</a></span>></p>
 
 
@@ -2205,8 +2207,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-596
-597
 598
 599
 600
@@ -2229,10 +2229,12 @@ retries, etc.</p>
 617
 618
 619
-620</pre>
+620
+621
+622</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/entity_types_client.rb', line 596</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/entity_types_client.rb', line 598</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_batch_update_entity_types'>batch_update_entity_types</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -2449,7 +2451,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-436
 437
 438
 439
@@ -2462,10 +2463,11 @@ retries, etc.</p>
 446
 447
 448
-449</pre>
+449
+450</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/entity_types_client.rb', line 436</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/entity_types_client.rb', line 437</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_entity_type'>create_entity_type</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -2623,7 +2625,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-519
 520
 521
 522
@@ -2633,10 +2634,11 @@ retries, etc.</p>
 526
 527
 528
-529</pre>
+529
+530</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/entity_types_client.rb', line 519</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/entity_types_client.rb', line 520</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete_entity_type'>delete_entity_type</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -2819,7 +2821,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-390
 391
 392
 393
@@ -2830,10 +2831,11 @@ retries, etc.</p>
 398
 399
 400
-401</pre>
+401
+402</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/entity_types_client.rb', line 390</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/entity_types_client.rb', line 391</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_entity_type'>get_entity_type</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -3055,7 +3057,6 @@ object.</p>
       <pre class="lines">
 
 
-349
 350
 351
 352
@@ -3068,10 +3069,11 @@ object.</p>
 359
 360
 361
-362</pre>
+362
+363</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/entity_types_client.rb', line 349</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/entity_types_client.rb', line 350</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_entity_types'>list_entity_types</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -3278,7 +3280,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-485
 486
 487
 488
@@ -3291,10 +3292,11 @@ retries, etc.</p>
 495
 496
 497
-498</pre>
+498
+499</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/entity_types_client.rb', line 485</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/entity_types_client.rb', line 486</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update_entity_type'>update_entity_type</span> \
     <span class='id identifier rubyid_entity_type'>entity_type</span><span class='comma'>,</span>

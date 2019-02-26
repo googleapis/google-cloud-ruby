@@ -151,7 +151,8 @@ a <code>pizza.topping</code> entity for different toppings, and so on. A develop
 entity is represented by the <code>EntityType</code> type.</p></li>
 <li><p><strong>User</strong> - entities that are built for an individual user such as
 favorites, preferences, playlists, and so on. A user entity is
-represented by the <span class='object_link'><a href="V2/SessionEntityType.html" title="Google::Cloud::Dialogflow::V2::SessionEntityType (class)">SessionEntityType</a></span> type.</p></li>
+represented by the
+<span class='object_link'><a href="V2/SessionEntityType.html" title="Google::Cloud::Dialogflow::V2::SessionEntityType (class)">SessionEntityType</a></span> type.</p></li>
 </ul>
 
 <p>For more information about entity types, see the
@@ -311,11 +312,6 @@ is used.</p>
       <pre class="lines">
 
 
-297
-298
-299
-300
-301
 302
 303
 304
@@ -323,10 +319,15 @@ is used.</p>
 306
 307
 308
-309</pre>
+309
+310
+311
+312
+313
+314</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow.rb', line 297</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow.rb', line 302</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='label'>version:</span> <span class='symbol'>:v2</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='rparen'>)</span>
   <span class='kw'>unless</span> <span class='const'><span class='object_link'><a href="../Dialogflow.html#AVAILABLE_VERSIONS-constant" title="Google::Cloud::Dialogflow::AVAILABLE_VERSIONS (constant)">AVAILABLE_VERSIONS</a></span></span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span><span class='lparen'>(</span><span class='id identifier rubyid_version'>version</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='period'>.</span><span class='id identifier rubyid_downcase'>downcase</span><span class='rparen'>)</span>

@@ -130,9 +130,10 @@ js:
 </h3><div class="docstring">
   <div class="discussion">
     <p>A session represents an interaction with a user. You retrieve user input
-and pass it to the DetectIntent (or
-StreamingDetectIntent) method to determine
-user intent and respond.</p>
+and pass it to the
+DetectIntent (or
+StreamingDetectIntent)
+method to determine user intent and respond.</p>
 
 
   </div>
@@ -288,22 +289,22 @@ is used.</p>
       <pre class="lines">
 
 
-497
-498
-499
-500
-501
-502
 503
 504
 505
 506
 507
 508
-509</pre>
+509
+510
+511
+512
+513
+514
+515</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow.rb', line 497</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow.rb', line 503</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='label'>version:</span> <span class='symbol'>:v2</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='rparen'>)</span>
   <span class='kw'>unless</span> <span class='const'><span class='object_link'><a href="../Dialogflow.html#AVAILABLE_VERSIONS-constant" title="Google::Cloud::Dialogflow::AVAILABLE_VERSIONS (constant)">AVAILABLE_VERSIONS</a></span></span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span><span class='lparen'>(</span><span class='id identifier rubyid_version'>version</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='period'>.</span><span class='id identifier rubyid_downcase'>downcase</span><span class='rparen'>)</span>
