@@ -42,7 +42,8 @@ module Google
       # @!attribute [rw] user_agent
       #   @return [String]
       #     The user agent sent by the client. Example:
-      #     `"Mozilla/4.0 (compatible; MSIE 6.0; Windows 98; Q312461; .NET CLR 1.0.3705)"`.
+      #     `"Mozilla/4.0 (compatible; MSIE 6.0; Windows 98; Q312461; .NET
+      #     CLR 1.0.3705)"`.
       # @!attribute [rw] remote_ip
       #   @return [String]
       #     The IP address (IPv4 or IPv6) of the client that issued the HTTP
@@ -54,7 +55,8 @@ module Google
       # @!attribute [rw] referer
       #   @return [String]
       #     The referer URL of the request, as defined in
-      #     [HTTP/1.1 Header Field Definitions](http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html).
+      #     [HTTP/1.1 Header Field
+      #     Definitions](http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html).
       # @!attribute [rw] latency
       #   @return [Google::Protobuf::Duration]
       #     The request processing latency on the server, from the time the request was

@@ -408,7 +408,8 @@ module Google
           #   If this field is set to true, or if the sink is owned by a non-project
           #   resource such as an organization, then the value of `writer_identity` will
           #   be a unique service account used only for exports from the new sink.  For
-          #   more information, see `writer_identity` in {Google::Logging::V2::LogSink LogSink}.
+          #   more information, see `writer_identity` in
+          #   {Google::Logging::V2::LogSink LogSink}.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -730,8 +731,9 @@ module Google
           # @param update_mask [Google::Protobuf::FieldMask | Hash]
           #   Required. A nonempty list of fields to change in the existing exclusion.
           #   New values for the fields are taken from the corresponding fields in the
-          #   {Google::Logging::V2::LogExclusion LogExclusion} included in this request. Fields not mentioned in
-          #   `update_mask` are not changed and are ignored in the request.
+          #   {Google::Logging::V2::LogExclusion LogExclusion} included in this request.
+          #   Fields not mentioned in `update_mask` are not changed and are ignored in
+          #   the request.
           #
           #   For example, to change the filter and description of an exclusion,
           #   specify an `update_mask` of `"filter,description"`.
