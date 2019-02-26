@@ -824,7 +824,8 @@ can also be provided.</p>
         &mdash;
         <div class='inline'><p>A list of the full names of the assets. For example:
 <code>//compute.googleapis.com/projects/my_project_123/zones/zone1/instances/instance1</code>.
-See <a href="https://cloud.google.com/apis/design/resource_names#full_resource_name">Resource Names</a>
+See <a href="https://cloud.google.com/apis/design/resource_names#full_resource_name">Resource
+Names</a>
 for more info.</p>
 
 <p>The request becomes a no-op if the asset name list is empty, and the max
@@ -931,8 +932,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-357
-358
 359
 360
 361
@@ -946,10 +945,12 @@ retries, etc.</p>
 369
 370
 371
-372</pre>
+372
+373
+374</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/asset/v1beta1/asset_service_client.rb', line 357</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/asset/v1beta1/asset_service_client.rb', line 359</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_batch_get_assets_history'>batch_get_assets_history</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -985,8 +986,9 @@ retries, etc.</p>
   <div class="discussion">
     <p>Exports assets with time and resource types to a given Cloud Storage
 location. The output format is newline-delimited JSON.
-This API implements the <span class='object_link'><a href="../../../Longrunning/Operation.html" title="Google::Longrunning::Operation (class)">Longrunning::Operation</a></span> API allowing you
-to keep track of the export.</p>
+This API implements the
+<span class='object_link'><a href="../../../Longrunning/Operation.html" title="Google::Longrunning::Operation (class)">Longrunning::Operation</a></span> API allowing
+you to keep track of the export.</p>
 
 
   </div>
@@ -1183,7 +1185,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-281
 282
 283
 284
@@ -1207,10 +1208,11 @@ retries, etc.</p>
 302
 303
 304
-305</pre>
+305
+306</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/asset/v1beta1/asset_service_client.rb', line 281</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/asset/v1beta1/asset_service_client.rb', line 282</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_export_assets'>export_assets</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
