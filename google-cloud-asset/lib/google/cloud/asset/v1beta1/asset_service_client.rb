@@ -207,8 +207,9 @@ module Google
 
           # Exports assets with time and resource types to a given Cloud Storage
           # location. The output format is newline-delimited JSON.
-          # This API implements the {Google::Longrunning::Operation} API allowing you
-          # to keep track of the export.
+          # This API implements the
+          # {Google::Longrunning::Operation} API allowing
+          # you to keep track of the export.
           #
           # @param parent [String]
           #   Required. The relative name of the root asset. This can only be an
@@ -328,7 +329,8 @@ module Google
           # @param asset_names [Array<String>]
           #   A list of the full names of the assets. For example:
           #   `//compute.googleapis.com/projects/my_project_123/zones/zone1/instances/instance1`.
-          #   See [Resource Names](https://cloud.google.com/apis/design/resource_names#full_resource_name)
+          #   See [Resource
+          #   Names](https://cloud.google.com/apis/design/resource_names#full_resource_name)
           #   for more info.
           #
           #   The request becomes a no-op if the asset name list is empty, and the max

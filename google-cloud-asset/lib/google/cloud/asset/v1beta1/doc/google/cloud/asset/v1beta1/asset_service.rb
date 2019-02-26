@@ -49,8 +49,10 @@ module Google
         class ExportAssetsRequest; end
 
         # The export asset response. This message is returned by the
-        # {Google::Longrunning::Operations::GetOperation} method in the returned
-        # {Google::Longrunning::Operation#response} field.
+        # {Google::Longrunning::Operations::GetOperation}
+        # method in the returned
+        # {Google::Longrunning::Operation#response}
+        # field.
         # @!attribute [rw] read_time
         #   @return [Google::Protobuf::Timestamp]
         #     Time the snapshot was taken.
@@ -70,7 +72,8 @@ module Google
         #   @return [Array<String>]
         #     A list of the full names of the assets. For example:
         #     `//compute.googleapis.com/projects/my_project_123/zones/zone1/instances/instance1`.
-        #     See [Resource Names](https://cloud.google.com/apis/design/resource_names#full_resource_name)
+        #     See [Resource
+        #     Names](https://cloud.google.com/apis/design/resource_names#full_resource_name)
         #     for more info.
         #
         #     The request becomes a no-op if the asset name list is empty, and the max

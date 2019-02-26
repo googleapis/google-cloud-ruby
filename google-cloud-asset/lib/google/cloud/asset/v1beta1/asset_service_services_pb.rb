@@ -37,8 +37,9 @@ module Google
 
             # Exports assets with time and resource types to a given Cloud Storage
             # location. The output format is newline-delimited JSON.
-            # This API implements the [google.longrunning.Operation][google.longrunning.Operation] API allowing you
-            # to keep track of the export.
+            # This API implements the
+            # [google.longrunning.Operation][google.longrunning.Operation] API allowing
+            # you to keep track of the export.
             rpc :ExportAssets, ExportAssetsRequest, Google::Longrunning::Operation
             # Batch gets the update history of assets that overlap a time window.
             # For RESOURCE content, this API outputs history with asset in both
