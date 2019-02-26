@@ -89,16 +89,17 @@ js:
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>A <span class='object_link'><a href="" title="Google::Cloud::Kms::V1::CryptoKeyVersion (class)">CryptoKeyVersion</a></span> represents an individual cryptographic key, and the
-associated key material.</p>
+    <p>A <span class='object_link'><a href="" title="Google::Cloud::Kms::V1::CryptoKeyVersion (class)">CryptoKeyVersion</a></span> represents an
+individual cryptographic key, and the associated key material.</p>
 
-<p>An <span class='object_link'><a href="CryptoKeyVersion/CryptoKeyVersionState.html#ENABLED-constant" title="Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::ENABLED (constant)">ENABLED</a></span> version can be
-used for cryptographic operations.</p>
+<p>An
+<span class='object_link'><a href="CryptoKeyVersion/CryptoKeyVersionState.html#ENABLED-constant" title="Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::ENABLED (constant)">ENABLED</a></span>
+version can be used for cryptographic operations.</p>
 
 <p>For security reasons, the raw cryptographic key material represented by a
-<span class='object_link'><a href="" title="Google::Cloud::Kms::V1::CryptoKeyVersion (class)">CryptoKeyVersion</a></span> can never be viewed or exported. It can only be used to
-encrypt, decrypt, or sign data when an authorized user or application invokes
-Cloud KMS.</p>
+<span class='object_link'><a href="" title="Google::Cloud::Kms::V1::CryptoKeyVersion (class)">CryptoKeyVersion</a></span> can never be viewed
+or exported. It can only be used to encrypt, decrypt, or sign data when an
+authorized user or application invokes Cloud KMS.</p>
 
 
   </div>
@@ -379,8 +380,10 @@ Cloud KMS.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Output only. The <span class='object_link'><a href="CryptoKeyVersion/CryptoKeyVersionAlgorithm.html" title="Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionAlgorithm (module)">CryptoKeyVersionAlgorithm</a></span> that this
-<span class='object_link'><a href="" title="Google::Cloud::Kms::V1::CryptoKeyVersion (class)">CryptoKeyVersion</a></span> supports.</p>
+    <p>Returns Output only. The
+<span class='object_link'><a href="CryptoKeyVersion/CryptoKeyVersionAlgorithm.html" title="Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionAlgorithm (module)">CryptoKeyVersionAlgorithm</a></span>
+that this <span class='object_link'><a href="" title="Google::Cloud::Kms::V1::CryptoKeyVersion (class)">CryptoKeyVersion</a></span>
+supports.</p>
 
 
   </div>
@@ -398,8 +401,10 @@ Cloud KMS.</p>
       
       
         &mdash;
-        <div class='inline'><p>Output only. The <span class='object_link'><a href="CryptoKeyVersion/CryptoKeyVersionAlgorithm.html" title="Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionAlgorithm (module)">CryptoKeyVersionAlgorithm</a></span> that this
-<span class='object_link'><a href="" title="Google::Cloud::Kms::V1::CryptoKeyVersion (class)">CryptoKeyVersion</a></span> supports.</p>
+        <div class='inline'><p>Output only. The
+<span class='object_link'><a href="CryptoKeyVersion/CryptoKeyVersionAlgorithm.html" title="Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionAlgorithm (module)">CryptoKeyVersionAlgorithm</a></span>
+that this <span class='object_link'><a href="" title="Google::Cloud::Kms::V1::CryptoKeyVersion (class)">CryptoKeyVersion</a></span>
+supports.</p>
 </div>
       
     </li>
@@ -412,49 +417,6 @@ Cloud KMS.</p>
       <pre class="lines">
 
 
-206
-207
-208
-209
-210
-211
-212
-213
-214
-215
-216
-217
-218
-219
-220
-221
-222
-223
-224
-225
-226
-227
-228
-229
-230
-231
-232
-233
-234
-235
-236
-237
-238
-239
-240
-241
-242
-243
-244
-245
-246
-247
-248
 249
 250
 251
@@ -526,21 +488,83 @@ Cloud KMS.</p>
 317
 318
 319
-320</pre>
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376
+377
+378
+379</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/doc/google/cloud/kms/v1/resources.rb', line 206</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/doc/google/cloud/kms/v1/resources.rb', line 249</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Kms::V1::CryptoKeyVersion (class)">CryptoKeyVersion</a></span></span>
-  <span class='comment'># The algorithm of the {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}, indicating what
+  <span class='comment'># The algorithm of the
+</span>  <span class='comment'># {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}, indicating what
 </span>  <span class='comment'># parameters must be used for each cryptographic operation.
 </span>  <span class='comment'>#
 </span>  <span class='comment'># The
 </span>  <span class='comment'># {Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionAlgorithm::GOOGLE_SYMMETRIC_ENCRYPTION GOOGLE_SYMMETRIC_ENCRYPTION}
-</span>  <span class='comment'># algorithm is usable with {Google::Cloud::Kms::V1::CryptoKey#purpose CryptoKey#purpose}
+</span>  <span class='comment'># algorithm is usable with
+</span>  <span class='comment'># {Google::Cloud::Kms::V1::CryptoKey#purpose CryptoKey#purpose}
 </span>  <span class='comment'># {Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose::ENCRYPT_DECRYPT ENCRYPT_DECRYPT}.
 </span>  <span class='comment'>#
-</span>  <span class='comment'># Algorithms beginning with &quot;RSA_SIGN_&quot; are usable with {Google::Cloud::Kms::V1::CryptoKey#purpose CryptoKey#purpose}
+</span>  <span class='comment'># Algorithms beginning with &quot;RSA_SIGN_&quot; are usable with
+</span>  <span class='comment'># {Google::Cloud::Kms::V1::CryptoKey#purpose CryptoKey#purpose}
 </span>  <span class='comment'># {Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose::ASYMMETRIC_SIGN ASYMMETRIC_SIGN}.
 </span>  <span class='comment'>#
 </span>  <span class='comment'># The fields in the name after &quot;RSA_SIGN_&quot; correspond to the following
@@ -558,7 +582,8 @@ Cloud KMS.</p>
 </span>  <span class='comment'># The fields in the name after &quot;RSA_DECRYPT_&quot; correspond to the following
 </span>  <span class='comment'># parameters: padding algorithm, modulus bit length, and digest algorithm.
 </span>  <span class='comment'>#
-</span>  <span class='comment'># Algorithms beginning with &quot;EC_SIGN_&quot; are usable with {Google::Cloud::Kms::V1::CryptoKey#purpose CryptoKey#purpose}
+</span>  <span class='comment'># Algorithms beginning with &quot;EC_SIGN_&quot; are usable with
+</span>  <span class='comment'># {Google::Cloud::Kms::V1::CryptoKey#purpose CryptoKey#purpose}
 </span>  <span class='comment'># {Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose::ASYMMETRIC_SIGN ASYMMETRIC_SIGN}.
 </span>  <span class='comment'>#
 </span>  <span class='comment'># The fields in the name after &quot;EC_SIGN_&quot; correspond to the following
@@ -604,21 +629,26 @@ Cloud KMS.</p>
 </span>    <span class='const'>EC_SIGN_P384_SHA384</span> <span class='op'>=</span> <span class='int'>13</span>
   <span class='kw'>end</span>
 
-  <span class='comment'># The state of a {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}, indicating if it can be used.
+  <span class='comment'># The state of a {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion},
+</span>  <span class='comment'># indicating if it can be used.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="CryptoKeyVersion/CryptoKeyVersionState.html" title="Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState (module)">CryptoKeyVersionState</a></span></span>
     <span class='comment'># Not specified.
 </span>    <span class='const'>CRYPTO_KEY_VERSION_STATE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
 
     <span class='comment'># This version is still being generated. It may not be used, enabled,
 </span>    <span class='comment'># disabled, or destroyed yet. Cloud KMS will automatically mark this
-</span>    <span class='comment'># version {Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::ENABLED ENABLED} as soon as the version is ready.
+</span>    <span class='comment'># version
+</span>    <span class='comment'># {Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::ENABLED ENABLED}
+</span>    <span class='comment'># as soon as the version is ready.
 </span>    <span class='const'>PENDING_GENERATION</span> <span class='op'>=</span> <span class='int'>5</span>
 
     <span class='comment'># This version may be used for cryptographic operations.
 </span>    <span class='const'>ENABLED</span> <span class='op'>=</span> <span class='int'>1</span>
 
     <span class='comment'># This version may not be used, but the key material is still available,
-</span>    <span class='comment'># and the version can be placed back into the {Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::ENABLED ENABLED} state.
+</span>    <span class='comment'># and the version can be placed back into the
+</span>    <span class='comment'># {Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::ENABLED ENABLED}
+</span>    <span class='comment'># state.
 </span>    <span class='const'>DISABLED</span> <span class='op'>=</span> <span class='int'>2</span>
 
     <span class='comment'># This version is destroyed, and the key material is no longer stored.
@@ -628,20 +658,27 @@ Cloud KMS.</p>
     <span class='comment'># This version is scheduled for destruction, and will be destroyed soon.
 </span>    <span class='comment'># Call
 </span>    <span class='comment'># {Google::Cloud::Kms::V1::KeyManagementService::RestoreCryptoKeyVersion RestoreCryptoKeyVersion}
-</span>    <span class='comment'># to put it back into the {Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::DISABLED DISABLED} state.
+</span>    <span class='comment'># to put it back into the
+</span>    <span class='comment'># {Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::DISABLED DISABLED}
+</span>    <span class='comment'># state.
 </span>    <span class='const'>DESTROY_SCHEDULED</span> <span class='op'>=</span> <span class='int'>4</span>
   <span class='kw'>end</span>
 
-  <span class='comment'># A view for {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}s. Controls the level of detail returned
-</span>  <span class='comment'># for {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersions} in
-</span>  <span class='comment'># {Google::Cloud::Kms::V1::KeyManagementService::ListCryptoKeyVersions KeyManagementService::ListCryptoKeyVersions} and
+  <span class='comment'># A view for {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}s.
+</span>  <span class='comment'># Controls the level of detail returned for
+</span>  <span class='comment'># {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersions} in
+</span>  <span class='comment'># {Google::Cloud::Kms::V1::KeyManagementService::ListCryptoKeyVersions KeyManagementService::ListCryptoKeyVersions}
+</span>  <span class='comment'># and
 </span>  <span class='comment'># {Google::Cloud::Kms::V1::KeyManagementService::ListCryptoKeys KeyManagementService::ListCryptoKeys}.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="CryptoKeyVersion/CryptoKeyVersionView.html" title="Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionView (module)">CryptoKeyVersionView</a></span></span>
-    <span class='comment'># Default view for each {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}. Does not include
-</span>    <span class='comment'># the {Google::Cloud::Kms::V1::CryptoKeyVersion#attestation attestation} field.
+    <span class='comment'># Default view for each
+</span>    <span class='comment'># {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}. Does not
+</span>    <span class='comment'># include the
+</span>    <span class='comment'># {Google::Cloud::Kms::V1::CryptoKeyVersion#attestation attestation} field.
 </span>    <span class='const'>CRYPTO_KEY_VERSION_VIEW_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
 
-    <span class='comment'># Provides all fields in each {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}, including the
+    <span class='comment'># Provides all fields in each
+</span>    <span class='comment'># {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}, including the
 </span>    <span class='comment'># {Google::Cloud::Kms::V1::CryptoKeyVersion#attestation attestation}.
 </span>    <span class='const'>FULL</span> <span class='op'>=</span> <span class='int'>1</span>
   <span class='kw'>end</span>
@@ -667,7 +704,8 @@ Cloud KMS.</p>
     <p>Returns Output only. Statement that was generated and signed by the HSM at key
 creation time. Use this statement to verify attributes of the key as stored
 on the HSM, independently of Google. Only provided for key versions with
-<span class='object_link'><a href="#protection_level-instance_method" title="Google::Cloud::Kms::V1::CryptoKeyVersion#protection_level (method)">protection_level</a></span> <span class='object_link'><a href="ProtectionLevel.html#HSM-constant" title="Google::Cloud::Kms::V1::ProtectionLevel::HSM (constant)">HSM</a></span>.</p>
+<span class='object_link'><a href="#protection_level-instance_method" title="Google::Cloud::Kms::V1::CryptoKeyVersion#protection_level (method)">protection_level</a></span>
+<span class='object_link'><a href="ProtectionLevel.html#HSM-constant" title="Google::Cloud::Kms::V1::ProtectionLevel::HSM (constant)">HSM</a></span>.</p>
 
 
   </div>
@@ -688,7 +726,8 @@ on the HSM, independently of Google. Only provided for key versions with
         <div class='inline'><p>Output only. Statement that was generated and signed by the HSM at key
 creation time. Use this statement to verify attributes of the key as stored
 on the HSM, independently of Google. Only provided for key versions with
-<span class='object_link'><a href="#protection_level-instance_method" title="Google::Cloud::Kms::V1::CryptoKeyVersion#protection_level (method)">protection_level</a></span> <span class='object_link'><a href="ProtectionLevel.html#HSM-constant" title="Google::Cloud::Kms::V1::ProtectionLevel::HSM (constant)">HSM</a></span>.</p>
+<span class='object_link'><a href="#protection_level-instance_method" title="Google::Cloud::Kms::V1::CryptoKeyVersion#protection_level (method)">protection_level</a></span>
+<span class='object_link'><a href="ProtectionLevel.html#HSM-constant" title="Google::Cloud::Kms::V1::ProtectionLevel::HSM (constant)">HSM</a></span>.</p>
 </div>
       
     </li>
@@ -701,49 +740,6 @@ on the HSM, independently of Google. Only provided for key versions with
       <pre class="lines">
 
 
-206
-207
-208
-209
-210
-211
-212
-213
-214
-215
-216
-217
-218
-219
-220
-221
-222
-223
-224
-225
-226
-227
-228
-229
-230
-231
-232
-233
-234
-235
-236
-237
-238
-239
-240
-241
-242
-243
-244
-245
-246
-247
-248
 249
 250
 251
@@ -815,21 +811,83 @@ on the HSM, independently of Google. Only provided for key versions with
 317
 318
 319
-320</pre>
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376
+377
+378
+379</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/doc/google/cloud/kms/v1/resources.rb', line 206</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/doc/google/cloud/kms/v1/resources.rb', line 249</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Kms::V1::CryptoKeyVersion (class)">CryptoKeyVersion</a></span></span>
-  <span class='comment'># The algorithm of the {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}, indicating what
+  <span class='comment'># The algorithm of the
+</span>  <span class='comment'># {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}, indicating what
 </span>  <span class='comment'># parameters must be used for each cryptographic operation.
 </span>  <span class='comment'>#
 </span>  <span class='comment'># The
 </span>  <span class='comment'># {Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionAlgorithm::GOOGLE_SYMMETRIC_ENCRYPTION GOOGLE_SYMMETRIC_ENCRYPTION}
-</span>  <span class='comment'># algorithm is usable with {Google::Cloud::Kms::V1::CryptoKey#purpose CryptoKey#purpose}
+</span>  <span class='comment'># algorithm is usable with
+</span>  <span class='comment'># {Google::Cloud::Kms::V1::CryptoKey#purpose CryptoKey#purpose}
 </span>  <span class='comment'># {Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose::ENCRYPT_DECRYPT ENCRYPT_DECRYPT}.
 </span>  <span class='comment'>#
-</span>  <span class='comment'># Algorithms beginning with &quot;RSA_SIGN_&quot; are usable with {Google::Cloud::Kms::V1::CryptoKey#purpose CryptoKey#purpose}
+</span>  <span class='comment'># Algorithms beginning with &quot;RSA_SIGN_&quot; are usable with
+</span>  <span class='comment'># {Google::Cloud::Kms::V1::CryptoKey#purpose CryptoKey#purpose}
 </span>  <span class='comment'># {Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose::ASYMMETRIC_SIGN ASYMMETRIC_SIGN}.
 </span>  <span class='comment'>#
 </span>  <span class='comment'># The fields in the name after &quot;RSA_SIGN_&quot; correspond to the following
@@ -847,7 +905,8 @@ on the HSM, independently of Google. Only provided for key versions with
 </span>  <span class='comment'># The fields in the name after &quot;RSA_DECRYPT_&quot; correspond to the following
 </span>  <span class='comment'># parameters: padding algorithm, modulus bit length, and digest algorithm.
 </span>  <span class='comment'>#
-</span>  <span class='comment'># Algorithms beginning with &quot;EC_SIGN_&quot; are usable with {Google::Cloud::Kms::V1::CryptoKey#purpose CryptoKey#purpose}
+</span>  <span class='comment'># Algorithms beginning with &quot;EC_SIGN_&quot; are usable with
+</span>  <span class='comment'># {Google::Cloud::Kms::V1::CryptoKey#purpose CryptoKey#purpose}
 </span>  <span class='comment'># {Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose::ASYMMETRIC_SIGN ASYMMETRIC_SIGN}.
 </span>  <span class='comment'>#
 </span>  <span class='comment'># The fields in the name after &quot;EC_SIGN_&quot; correspond to the following
@@ -893,21 +952,26 @@ on the HSM, independently of Google. Only provided for key versions with
 </span>    <span class='const'>EC_SIGN_P384_SHA384</span> <span class='op'>=</span> <span class='int'>13</span>
   <span class='kw'>end</span>
 
-  <span class='comment'># The state of a {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}, indicating if it can be used.
+  <span class='comment'># The state of a {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion},
+</span>  <span class='comment'># indicating if it can be used.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="CryptoKeyVersion/CryptoKeyVersionState.html" title="Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState (module)">CryptoKeyVersionState</a></span></span>
     <span class='comment'># Not specified.
 </span>    <span class='const'>CRYPTO_KEY_VERSION_STATE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
 
     <span class='comment'># This version is still being generated. It may not be used, enabled,
 </span>    <span class='comment'># disabled, or destroyed yet. Cloud KMS will automatically mark this
-</span>    <span class='comment'># version {Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::ENABLED ENABLED} as soon as the version is ready.
+</span>    <span class='comment'># version
+</span>    <span class='comment'># {Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::ENABLED ENABLED}
+</span>    <span class='comment'># as soon as the version is ready.
 </span>    <span class='const'>PENDING_GENERATION</span> <span class='op'>=</span> <span class='int'>5</span>
 
     <span class='comment'># This version may be used for cryptographic operations.
 </span>    <span class='const'>ENABLED</span> <span class='op'>=</span> <span class='int'>1</span>
 
     <span class='comment'># This version may not be used, but the key material is still available,
-</span>    <span class='comment'># and the version can be placed back into the {Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::ENABLED ENABLED} state.
+</span>    <span class='comment'># and the version can be placed back into the
+</span>    <span class='comment'># {Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::ENABLED ENABLED}
+</span>    <span class='comment'># state.
 </span>    <span class='const'>DISABLED</span> <span class='op'>=</span> <span class='int'>2</span>
 
     <span class='comment'># This version is destroyed, and the key material is no longer stored.
@@ -917,20 +981,27 @@ on the HSM, independently of Google. Only provided for key versions with
     <span class='comment'># This version is scheduled for destruction, and will be destroyed soon.
 </span>    <span class='comment'># Call
 </span>    <span class='comment'># {Google::Cloud::Kms::V1::KeyManagementService::RestoreCryptoKeyVersion RestoreCryptoKeyVersion}
-</span>    <span class='comment'># to put it back into the {Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::DISABLED DISABLED} state.
+</span>    <span class='comment'># to put it back into the
+</span>    <span class='comment'># {Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::DISABLED DISABLED}
+</span>    <span class='comment'># state.
 </span>    <span class='const'>DESTROY_SCHEDULED</span> <span class='op'>=</span> <span class='int'>4</span>
   <span class='kw'>end</span>
 
-  <span class='comment'># A view for {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}s. Controls the level of detail returned
-</span>  <span class='comment'># for {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersions} in
-</span>  <span class='comment'># {Google::Cloud::Kms::V1::KeyManagementService::ListCryptoKeyVersions KeyManagementService::ListCryptoKeyVersions} and
+  <span class='comment'># A view for {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}s.
+</span>  <span class='comment'># Controls the level of detail returned for
+</span>  <span class='comment'># {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersions} in
+</span>  <span class='comment'># {Google::Cloud::Kms::V1::KeyManagementService::ListCryptoKeyVersions KeyManagementService::ListCryptoKeyVersions}
+</span>  <span class='comment'># and
 </span>  <span class='comment'># {Google::Cloud::Kms::V1::KeyManagementService::ListCryptoKeys KeyManagementService::ListCryptoKeys}.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="CryptoKeyVersion/CryptoKeyVersionView.html" title="Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionView (module)">CryptoKeyVersionView</a></span></span>
-    <span class='comment'># Default view for each {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}. Does not include
-</span>    <span class='comment'># the {Google::Cloud::Kms::V1::CryptoKeyVersion#attestation attestation} field.
+    <span class='comment'># Default view for each
+</span>    <span class='comment'># {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}. Does not
+</span>    <span class='comment'># include the
+</span>    <span class='comment'># {Google::Cloud::Kms::V1::CryptoKeyVersion#attestation attestation} field.
 </span>    <span class='const'>CRYPTO_KEY_VERSION_VIEW_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
 
-    <span class='comment'># Provides all fields in each {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}, including the
+    <span class='comment'># Provides all fields in each
+</span>    <span class='comment'># {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}, including the
 </span>    <span class='comment'># {Google::Cloud::Kms::V1::CryptoKeyVersion#attestation attestation}.
 </span>    <span class='const'>FULL</span> <span class='op'>=</span> <span class='int'>1</span>
   <span class='kw'>end</span>
@@ -953,7 +1024,8 @@ on the HSM, independently of Google. Only provided for key versions with
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Output only. The time at which this <span class='object_link'><a href="" title="Google::Cloud::Kms::V1::CryptoKeyVersion (class)">CryptoKeyVersion</a></span> was created.</p>
+    <p>Returns Output only. The time at which this
+<span class='object_link'><a href="" title="Google::Cloud::Kms::V1::CryptoKeyVersion (class)">CryptoKeyVersion</a></span> was created.</p>
 
 
   </div>
@@ -971,7 +1043,8 @@ on the HSM, independently of Google. Only provided for key versions with
       
       
         &mdash;
-        <div class='inline'><p>Output only. The time at which this <span class='object_link'><a href="" title="Google::Cloud::Kms::V1::CryptoKeyVersion (class)">CryptoKeyVersion</a></span> was created.</p>
+        <div class='inline'><p>Output only. The time at which this
+<span class='object_link'><a href="" title="Google::Cloud::Kms::V1::CryptoKeyVersion (class)">CryptoKeyVersion</a></span> was created.</p>
 </div>
       
     </li>
@@ -984,49 +1057,6 @@ on the HSM, independently of Google. Only provided for key versions with
       <pre class="lines">
 
 
-206
-207
-208
-209
-210
-211
-212
-213
-214
-215
-216
-217
-218
-219
-220
-221
-222
-223
-224
-225
-226
-227
-228
-229
-230
-231
-232
-233
-234
-235
-236
-237
-238
-239
-240
-241
-242
-243
-244
-245
-246
-247
-248
 249
 250
 251
@@ -1098,21 +1128,83 @@ on the HSM, independently of Google. Only provided for key versions with
 317
 318
 319
-320</pre>
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376
+377
+378
+379</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/doc/google/cloud/kms/v1/resources.rb', line 206</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/doc/google/cloud/kms/v1/resources.rb', line 249</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Kms::V1::CryptoKeyVersion (class)">CryptoKeyVersion</a></span></span>
-  <span class='comment'># The algorithm of the {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}, indicating what
+  <span class='comment'># The algorithm of the
+</span>  <span class='comment'># {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}, indicating what
 </span>  <span class='comment'># parameters must be used for each cryptographic operation.
 </span>  <span class='comment'>#
 </span>  <span class='comment'># The
 </span>  <span class='comment'># {Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionAlgorithm::GOOGLE_SYMMETRIC_ENCRYPTION GOOGLE_SYMMETRIC_ENCRYPTION}
-</span>  <span class='comment'># algorithm is usable with {Google::Cloud::Kms::V1::CryptoKey#purpose CryptoKey#purpose}
+</span>  <span class='comment'># algorithm is usable with
+</span>  <span class='comment'># {Google::Cloud::Kms::V1::CryptoKey#purpose CryptoKey#purpose}
 </span>  <span class='comment'># {Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose::ENCRYPT_DECRYPT ENCRYPT_DECRYPT}.
 </span>  <span class='comment'>#
-</span>  <span class='comment'># Algorithms beginning with &quot;RSA_SIGN_&quot; are usable with {Google::Cloud::Kms::V1::CryptoKey#purpose CryptoKey#purpose}
+</span>  <span class='comment'># Algorithms beginning with &quot;RSA_SIGN_&quot; are usable with
+</span>  <span class='comment'># {Google::Cloud::Kms::V1::CryptoKey#purpose CryptoKey#purpose}
 </span>  <span class='comment'># {Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose::ASYMMETRIC_SIGN ASYMMETRIC_SIGN}.
 </span>  <span class='comment'>#
 </span>  <span class='comment'># The fields in the name after &quot;RSA_SIGN_&quot; correspond to the following
@@ -1130,7 +1222,8 @@ on the HSM, independently of Google. Only provided for key versions with
 </span>  <span class='comment'># The fields in the name after &quot;RSA_DECRYPT_&quot; correspond to the following
 </span>  <span class='comment'># parameters: padding algorithm, modulus bit length, and digest algorithm.
 </span>  <span class='comment'>#
-</span>  <span class='comment'># Algorithms beginning with &quot;EC_SIGN_&quot; are usable with {Google::Cloud::Kms::V1::CryptoKey#purpose CryptoKey#purpose}
+</span>  <span class='comment'># Algorithms beginning with &quot;EC_SIGN_&quot; are usable with
+</span>  <span class='comment'># {Google::Cloud::Kms::V1::CryptoKey#purpose CryptoKey#purpose}
 </span>  <span class='comment'># {Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose::ASYMMETRIC_SIGN ASYMMETRIC_SIGN}.
 </span>  <span class='comment'>#
 </span>  <span class='comment'># The fields in the name after &quot;EC_SIGN_&quot; correspond to the following
@@ -1176,21 +1269,26 @@ on the HSM, independently of Google. Only provided for key versions with
 </span>    <span class='const'>EC_SIGN_P384_SHA384</span> <span class='op'>=</span> <span class='int'>13</span>
   <span class='kw'>end</span>
 
-  <span class='comment'># The state of a {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}, indicating if it can be used.
+  <span class='comment'># The state of a {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion},
+</span>  <span class='comment'># indicating if it can be used.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="CryptoKeyVersion/CryptoKeyVersionState.html" title="Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState (module)">CryptoKeyVersionState</a></span></span>
     <span class='comment'># Not specified.
 </span>    <span class='const'>CRYPTO_KEY_VERSION_STATE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
 
     <span class='comment'># This version is still being generated. It may not be used, enabled,
 </span>    <span class='comment'># disabled, or destroyed yet. Cloud KMS will automatically mark this
-</span>    <span class='comment'># version {Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::ENABLED ENABLED} as soon as the version is ready.
+</span>    <span class='comment'># version
+</span>    <span class='comment'># {Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::ENABLED ENABLED}
+</span>    <span class='comment'># as soon as the version is ready.
 </span>    <span class='const'>PENDING_GENERATION</span> <span class='op'>=</span> <span class='int'>5</span>
 
     <span class='comment'># This version may be used for cryptographic operations.
 </span>    <span class='const'>ENABLED</span> <span class='op'>=</span> <span class='int'>1</span>
 
     <span class='comment'># This version may not be used, but the key material is still available,
-</span>    <span class='comment'># and the version can be placed back into the {Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::ENABLED ENABLED} state.
+</span>    <span class='comment'># and the version can be placed back into the
+</span>    <span class='comment'># {Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::ENABLED ENABLED}
+</span>    <span class='comment'># state.
 </span>    <span class='const'>DISABLED</span> <span class='op'>=</span> <span class='int'>2</span>
 
     <span class='comment'># This version is destroyed, and the key material is no longer stored.
@@ -1200,20 +1298,27 @@ on the HSM, independently of Google. Only provided for key versions with
     <span class='comment'># This version is scheduled for destruction, and will be destroyed soon.
 </span>    <span class='comment'># Call
 </span>    <span class='comment'># {Google::Cloud::Kms::V1::KeyManagementService::RestoreCryptoKeyVersion RestoreCryptoKeyVersion}
-</span>    <span class='comment'># to put it back into the {Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::DISABLED DISABLED} state.
+</span>    <span class='comment'># to put it back into the
+</span>    <span class='comment'># {Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::DISABLED DISABLED}
+</span>    <span class='comment'># state.
 </span>    <span class='const'>DESTROY_SCHEDULED</span> <span class='op'>=</span> <span class='int'>4</span>
   <span class='kw'>end</span>
 
-  <span class='comment'># A view for {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}s. Controls the level of detail returned
-</span>  <span class='comment'># for {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersions} in
-</span>  <span class='comment'># {Google::Cloud::Kms::V1::KeyManagementService::ListCryptoKeyVersions KeyManagementService::ListCryptoKeyVersions} and
+  <span class='comment'># A view for {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}s.
+</span>  <span class='comment'># Controls the level of detail returned for
+</span>  <span class='comment'># {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersions} in
+</span>  <span class='comment'># {Google::Cloud::Kms::V1::KeyManagementService::ListCryptoKeyVersions KeyManagementService::ListCryptoKeyVersions}
+</span>  <span class='comment'># and
 </span>  <span class='comment'># {Google::Cloud::Kms::V1::KeyManagementService::ListCryptoKeys KeyManagementService::ListCryptoKeys}.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="CryptoKeyVersion/CryptoKeyVersionView.html" title="Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionView (module)">CryptoKeyVersionView</a></span></span>
-    <span class='comment'># Default view for each {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}. Does not include
-</span>    <span class='comment'># the {Google::Cloud::Kms::V1::CryptoKeyVersion#attestation attestation} field.
+    <span class='comment'># Default view for each
+</span>    <span class='comment'># {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}. Does not
+</span>    <span class='comment'># include the
+</span>    <span class='comment'># {Google::Cloud::Kms::V1::CryptoKeyVersion#attestation attestation} field.
 </span>    <span class='const'>CRYPTO_KEY_VERSION_VIEW_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
 
-    <span class='comment'># Provides all fields in each {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}, including the
+    <span class='comment'># Provides all fields in each
+</span>    <span class='comment'># {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}, including the
 </span>    <span class='comment'># {Google::Cloud::Kms::V1::CryptoKeyVersion#attestation attestation}.
 </span>    <span class='const'>FULL</span> <span class='op'>=</span> <span class='int'>1</span>
   <span class='kw'>end</span>
@@ -1237,7 +1342,8 @@ on the HSM, independently of Google. Only provided for key versions with
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns Output only. The time this CryptoKeyVersion&#39;s key material was
-destroyed. Only present if <span class='object_link'><a href="#state-instance_method" title="Google::Cloud::Kms::V1::CryptoKeyVersion#state (method)">state</a></span> is
+destroyed. Only present if
+<span class='object_link'><a href="#state-instance_method" title="Google::Cloud::Kms::V1::CryptoKeyVersion#state (method)">state</a></span> is
 <span class='object_link'><a href="CryptoKeyVersion/CryptoKeyVersionState.html#DESTROYED-constant" title="Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::DESTROYED (constant)">DESTROYED</a></span>.</p>
 
 
@@ -1257,7 +1363,8 @@ destroyed. Only present if <span class='object_link'><a href="#state-instance_me
       
         &mdash;
         <div class='inline'><p>Output only. The time this CryptoKeyVersion&#39;s key material was
-destroyed. Only present if <span class='object_link'><a href="#state-instance_method" title="Google::Cloud::Kms::V1::CryptoKeyVersion#state (method)">state</a></span> is
+destroyed. Only present if
+<span class='object_link'><a href="#state-instance_method" title="Google::Cloud::Kms::V1::CryptoKeyVersion#state (method)">state</a></span> is
 <span class='object_link'><a href="CryptoKeyVersion/CryptoKeyVersionState.html#DESTROYED-constant" title="Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::DESTROYED (constant)">DESTROYED</a></span>.</p>
 </div>
       
@@ -1271,49 +1378,6 @@ destroyed. Only present if <span class='object_link'><a href="#state-instance_me
       <pre class="lines">
 
 
-206
-207
-208
-209
-210
-211
-212
-213
-214
-215
-216
-217
-218
-219
-220
-221
-222
-223
-224
-225
-226
-227
-228
-229
-230
-231
-232
-233
-234
-235
-236
-237
-238
-239
-240
-241
-242
-243
-244
-245
-246
-247
-248
 249
 250
 251
@@ -1385,21 +1449,83 @@ destroyed. Only present if <span class='object_link'><a href="#state-instance_me
 317
 318
 319
-320</pre>
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376
+377
+378
+379</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/doc/google/cloud/kms/v1/resources.rb', line 206</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/doc/google/cloud/kms/v1/resources.rb', line 249</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Kms::V1::CryptoKeyVersion (class)">CryptoKeyVersion</a></span></span>
-  <span class='comment'># The algorithm of the {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}, indicating what
+  <span class='comment'># The algorithm of the
+</span>  <span class='comment'># {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}, indicating what
 </span>  <span class='comment'># parameters must be used for each cryptographic operation.
 </span>  <span class='comment'>#
 </span>  <span class='comment'># The
 </span>  <span class='comment'># {Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionAlgorithm::GOOGLE_SYMMETRIC_ENCRYPTION GOOGLE_SYMMETRIC_ENCRYPTION}
-</span>  <span class='comment'># algorithm is usable with {Google::Cloud::Kms::V1::CryptoKey#purpose CryptoKey#purpose}
+</span>  <span class='comment'># algorithm is usable with
+</span>  <span class='comment'># {Google::Cloud::Kms::V1::CryptoKey#purpose CryptoKey#purpose}
 </span>  <span class='comment'># {Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose::ENCRYPT_DECRYPT ENCRYPT_DECRYPT}.
 </span>  <span class='comment'>#
-</span>  <span class='comment'># Algorithms beginning with &quot;RSA_SIGN_&quot; are usable with {Google::Cloud::Kms::V1::CryptoKey#purpose CryptoKey#purpose}
+</span>  <span class='comment'># Algorithms beginning with &quot;RSA_SIGN_&quot; are usable with
+</span>  <span class='comment'># {Google::Cloud::Kms::V1::CryptoKey#purpose CryptoKey#purpose}
 </span>  <span class='comment'># {Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose::ASYMMETRIC_SIGN ASYMMETRIC_SIGN}.
 </span>  <span class='comment'>#
 </span>  <span class='comment'># The fields in the name after &quot;RSA_SIGN_&quot; correspond to the following
@@ -1417,7 +1543,8 @@ destroyed. Only present if <span class='object_link'><a href="#state-instance_me
 </span>  <span class='comment'># The fields in the name after &quot;RSA_DECRYPT_&quot; correspond to the following
 </span>  <span class='comment'># parameters: padding algorithm, modulus bit length, and digest algorithm.
 </span>  <span class='comment'>#
-</span>  <span class='comment'># Algorithms beginning with &quot;EC_SIGN_&quot; are usable with {Google::Cloud::Kms::V1::CryptoKey#purpose CryptoKey#purpose}
+</span>  <span class='comment'># Algorithms beginning with &quot;EC_SIGN_&quot; are usable with
+</span>  <span class='comment'># {Google::Cloud::Kms::V1::CryptoKey#purpose CryptoKey#purpose}
 </span>  <span class='comment'># {Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose::ASYMMETRIC_SIGN ASYMMETRIC_SIGN}.
 </span>  <span class='comment'>#
 </span>  <span class='comment'># The fields in the name after &quot;EC_SIGN_&quot; correspond to the following
@@ -1463,21 +1590,26 @@ destroyed. Only present if <span class='object_link'><a href="#state-instance_me
 </span>    <span class='const'>EC_SIGN_P384_SHA384</span> <span class='op'>=</span> <span class='int'>13</span>
   <span class='kw'>end</span>
 
-  <span class='comment'># The state of a {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}, indicating if it can be used.
+  <span class='comment'># The state of a {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion},
+</span>  <span class='comment'># indicating if it can be used.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="CryptoKeyVersion/CryptoKeyVersionState.html" title="Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState (module)">CryptoKeyVersionState</a></span></span>
     <span class='comment'># Not specified.
 </span>    <span class='const'>CRYPTO_KEY_VERSION_STATE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
 
     <span class='comment'># This version is still being generated. It may not be used, enabled,
 </span>    <span class='comment'># disabled, or destroyed yet. Cloud KMS will automatically mark this
-</span>    <span class='comment'># version {Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::ENABLED ENABLED} as soon as the version is ready.
+</span>    <span class='comment'># version
+</span>    <span class='comment'># {Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::ENABLED ENABLED}
+</span>    <span class='comment'># as soon as the version is ready.
 </span>    <span class='const'>PENDING_GENERATION</span> <span class='op'>=</span> <span class='int'>5</span>
 
     <span class='comment'># This version may be used for cryptographic operations.
 </span>    <span class='const'>ENABLED</span> <span class='op'>=</span> <span class='int'>1</span>
 
     <span class='comment'># This version may not be used, but the key material is still available,
-</span>    <span class='comment'># and the version can be placed back into the {Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::ENABLED ENABLED} state.
+</span>    <span class='comment'># and the version can be placed back into the
+</span>    <span class='comment'># {Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::ENABLED ENABLED}
+</span>    <span class='comment'># state.
 </span>    <span class='const'>DISABLED</span> <span class='op'>=</span> <span class='int'>2</span>
 
     <span class='comment'># This version is destroyed, and the key material is no longer stored.
@@ -1487,20 +1619,27 @@ destroyed. Only present if <span class='object_link'><a href="#state-instance_me
     <span class='comment'># This version is scheduled for destruction, and will be destroyed soon.
 </span>    <span class='comment'># Call
 </span>    <span class='comment'># {Google::Cloud::Kms::V1::KeyManagementService::RestoreCryptoKeyVersion RestoreCryptoKeyVersion}
-</span>    <span class='comment'># to put it back into the {Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::DISABLED DISABLED} state.
+</span>    <span class='comment'># to put it back into the
+</span>    <span class='comment'># {Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::DISABLED DISABLED}
+</span>    <span class='comment'># state.
 </span>    <span class='const'>DESTROY_SCHEDULED</span> <span class='op'>=</span> <span class='int'>4</span>
   <span class='kw'>end</span>
 
-  <span class='comment'># A view for {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}s. Controls the level of detail returned
-</span>  <span class='comment'># for {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersions} in
-</span>  <span class='comment'># {Google::Cloud::Kms::V1::KeyManagementService::ListCryptoKeyVersions KeyManagementService::ListCryptoKeyVersions} and
+  <span class='comment'># A view for {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}s.
+</span>  <span class='comment'># Controls the level of detail returned for
+</span>  <span class='comment'># {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersions} in
+</span>  <span class='comment'># {Google::Cloud::Kms::V1::KeyManagementService::ListCryptoKeyVersions KeyManagementService::ListCryptoKeyVersions}
+</span>  <span class='comment'># and
 </span>  <span class='comment'># {Google::Cloud::Kms::V1::KeyManagementService::ListCryptoKeys KeyManagementService::ListCryptoKeys}.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="CryptoKeyVersion/CryptoKeyVersionView.html" title="Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionView (module)">CryptoKeyVersionView</a></span></span>
-    <span class='comment'># Default view for each {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}. Does not include
-</span>    <span class='comment'># the {Google::Cloud::Kms::V1::CryptoKeyVersion#attestation attestation} field.
+    <span class='comment'># Default view for each
+</span>    <span class='comment'># {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}. Does not
+</span>    <span class='comment'># include the
+</span>    <span class='comment'># {Google::Cloud::Kms::V1::CryptoKeyVersion#attestation attestation} field.
 </span>    <span class='const'>CRYPTO_KEY_VERSION_VIEW_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
 
-    <span class='comment'># Provides all fields in each {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}, including the
+    <span class='comment'># Provides all fields in each
+</span>    <span class='comment'># {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}, including the
 </span>    <span class='comment'># {Google::Cloud::Kms::V1::CryptoKeyVersion#attestation attestation}.
 </span>    <span class='const'>FULL</span> <span class='op'>=</span> <span class='int'>1</span>
   <span class='kw'>end</span>
@@ -1523,8 +1662,10 @@ destroyed. Only present if <span class='object_link'><a href="#state-instance_me
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Output only. The time this <span class='object_link'><a href="" title="Google::Cloud::Kms::V1::CryptoKeyVersion (class)">CryptoKeyVersion</a></span>&#39;s key material is scheduled
-for destruction. Only present if <span class='object_link'><a href="#state-instance_method" title="Google::Cloud::Kms::V1::CryptoKeyVersion#state (method)">state</a></span> is
+    <p>Returns Output only. The time this
+<span class='object_link'><a href="" title="Google::Cloud::Kms::V1::CryptoKeyVersion (class)">CryptoKeyVersion</a></span>&#39;s key material is
+scheduled for destruction. Only present if
+<span class='object_link'><a href="#state-instance_method" title="Google::Cloud::Kms::V1::CryptoKeyVersion#state (method)">state</a></span> is
 <span class='object_link'><a href="CryptoKeyVersion/CryptoKeyVersionState.html#DESTROY_SCHEDULED-constant" title="Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::DESTROY_SCHEDULED (constant)">DESTROY_SCHEDULED</a></span>.</p>
 
 
@@ -1543,8 +1684,10 @@ for destruction. Only present if <span class='object_link'><a href="#state-insta
       
       
         &mdash;
-        <div class='inline'><p>Output only. The time this <span class='object_link'><a href="" title="Google::Cloud::Kms::V1::CryptoKeyVersion (class)">CryptoKeyVersion</a></span>&#39;s key material is scheduled
-for destruction. Only present if <span class='object_link'><a href="#state-instance_method" title="Google::Cloud::Kms::V1::CryptoKeyVersion#state (method)">state</a></span> is
+        <div class='inline'><p>Output only. The time this
+<span class='object_link'><a href="" title="Google::Cloud::Kms::V1::CryptoKeyVersion (class)">CryptoKeyVersion</a></span>&#39;s key material is
+scheduled for destruction. Only present if
+<span class='object_link'><a href="#state-instance_method" title="Google::Cloud::Kms::V1::CryptoKeyVersion#state (method)">state</a></span> is
 <span class='object_link'><a href="CryptoKeyVersion/CryptoKeyVersionState.html#DESTROY_SCHEDULED-constant" title="Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::DESTROY_SCHEDULED (constant)">DESTROY_SCHEDULED</a></span>.</p>
 </div>
       
@@ -1558,49 +1701,6 @@ for destruction. Only present if <span class='object_link'><a href="#state-insta
       <pre class="lines">
 
 
-206
-207
-208
-209
-210
-211
-212
-213
-214
-215
-216
-217
-218
-219
-220
-221
-222
-223
-224
-225
-226
-227
-228
-229
-230
-231
-232
-233
-234
-235
-236
-237
-238
-239
-240
-241
-242
-243
-244
-245
-246
-247
-248
 249
 250
 251
@@ -1672,21 +1772,83 @@ for destruction. Only present if <span class='object_link'><a href="#state-insta
 317
 318
 319
-320</pre>
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376
+377
+378
+379</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/doc/google/cloud/kms/v1/resources.rb', line 206</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/doc/google/cloud/kms/v1/resources.rb', line 249</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Kms::V1::CryptoKeyVersion (class)">CryptoKeyVersion</a></span></span>
-  <span class='comment'># The algorithm of the {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}, indicating what
+  <span class='comment'># The algorithm of the
+</span>  <span class='comment'># {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}, indicating what
 </span>  <span class='comment'># parameters must be used for each cryptographic operation.
 </span>  <span class='comment'>#
 </span>  <span class='comment'># The
 </span>  <span class='comment'># {Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionAlgorithm::GOOGLE_SYMMETRIC_ENCRYPTION GOOGLE_SYMMETRIC_ENCRYPTION}
-</span>  <span class='comment'># algorithm is usable with {Google::Cloud::Kms::V1::CryptoKey#purpose CryptoKey#purpose}
+</span>  <span class='comment'># algorithm is usable with
+</span>  <span class='comment'># {Google::Cloud::Kms::V1::CryptoKey#purpose CryptoKey#purpose}
 </span>  <span class='comment'># {Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose::ENCRYPT_DECRYPT ENCRYPT_DECRYPT}.
 </span>  <span class='comment'>#
-</span>  <span class='comment'># Algorithms beginning with &quot;RSA_SIGN_&quot; are usable with {Google::Cloud::Kms::V1::CryptoKey#purpose CryptoKey#purpose}
+</span>  <span class='comment'># Algorithms beginning with &quot;RSA_SIGN_&quot; are usable with
+</span>  <span class='comment'># {Google::Cloud::Kms::V1::CryptoKey#purpose CryptoKey#purpose}
 </span>  <span class='comment'># {Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose::ASYMMETRIC_SIGN ASYMMETRIC_SIGN}.
 </span>  <span class='comment'>#
 </span>  <span class='comment'># The fields in the name after &quot;RSA_SIGN_&quot; correspond to the following
@@ -1704,7 +1866,8 @@ for destruction. Only present if <span class='object_link'><a href="#state-insta
 </span>  <span class='comment'># The fields in the name after &quot;RSA_DECRYPT_&quot; correspond to the following
 </span>  <span class='comment'># parameters: padding algorithm, modulus bit length, and digest algorithm.
 </span>  <span class='comment'>#
-</span>  <span class='comment'># Algorithms beginning with &quot;EC_SIGN_&quot; are usable with {Google::Cloud::Kms::V1::CryptoKey#purpose CryptoKey#purpose}
+</span>  <span class='comment'># Algorithms beginning with &quot;EC_SIGN_&quot; are usable with
+</span>  <span class='comment'># {Google::Cloud::Kms::V1::CryptoKey#purpose CryptoKey#purpose}
 </span>  <span class='comment'># {Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose::ASYMMETRIC_SIGN ASYMMETRIC_SIGN}.
 </span>  <span class='comment'>#
 </span>  <span class='comment'># The fields in the name after &quot;EC_SIGN_&quot; correspond to the following
@@ -1750,21 +1913,26 @@ for destruction. Only present if <span class='object_link'><a href="#state-insta
 </span>    <span class='const'>EC_SIGN_P384_SHA384</span> <span class='op'>=</span> <span class='int'>13</span>
   <span class='kw'>end</span>
 
-  <span class='comment'># The state of a {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}, indicating if it can be used.
+  <span class='comment'># The state of a {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion},
+</span>  <span class='comment'># indicating if it can be used.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="CryptoKeyVersion/CryptoKeyVersionState.html" title="Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState (module)">CryptoKeyVersionState</a></span></span>
     <span class='comment'># Not specified.
 </span>    <span class='const'>CRYPTO_KEY_VERSION_STATE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
 
     <span class='comment'># This version is still being generated. It may not be used, enabled,
 </span>    <span class='comment'># disabled, or destroyed yet. Cloud KMS will automatically mark this
-</span>    <span class='comment'># version {Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::ENABLED ENABLED} as soon as the version is ready.
+</span>    <span class='comment'># version
+</span>    <span class='comment'># {Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::ENABLED ENABLED}
+</span>    <span class='comment'># as soon as the version is ready.
 </span>    <span class='const'>PENDING_GENERATION</span> <span class='op'>=</span> <span class='int'>5</span>
 
     <span class='comment'># This version may be used for cryptographic operations.
 </span>    <span class='const'>ENABLED</span> <span class='op'>=</span> <span class='int'>1</span>
 
     <span class='comment'># This version may not be used, but the key material is still available,
-</span>    <span class='comment'># and the version can be placed back into the {Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::ENABLED ENABLED} state.
+</span>    <span class='comment'># and the version can be placed back into the
+</span>    <span class='comment'># {Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::ENABLED ENABLED}
+</span>    <span class='comment'># state.
 </span>    <span class='const'>DISABLED</span> <span class='op'>=</span> <span class='int'>2</span>
 
     <span class='comment'># This version is destroyed, and the key material is no longer stored.
@@ -1774,20 +1942,27 @@ for destruction. Only present if <span class='object_link'><a href="#state-insta
     <span class='comment'># This version is scheduled for destruction, and will be destroyed soon.
 </span>    <span class='comment'># Call
 </span>    <span class='comment'># {Google::Cloud::Kms::V1::KeyManagementService::RestoreCryptoKeyVersion RestoreCryptoKeyVersion}
-</span>    <span class='comment'># to put it back into the {Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::DISABLED DISABLED} state.
+</span>    <span class='comment'># to put it back into the
+</span>    <span class='comment'># {Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::DISABLED DISABLED}
+</span>    <span class='comment'># state.
 </span>    <span class='const'>DESTROY_SCHEDULED</span> <span class='op'>=</span> <span class='int'>4</span>
   <span class='kw'>end</span>
 
-  <span class='comment'># A view for {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}s. Controls the level of detail returned
-</span>  <span class='comment'># for {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersions} in
-</span>  <span class='comment'># {Google::Cloud::Kms::V1::KeyManagementService::ListCryptoKeyVersions KeyManagementService::ListCryptoKeyVersions} and
+  <span class='comment'># A view for {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}s.
+</span>  <span class='comment'># Controls the level of detail returned for
+</span>  <span class='comment'># {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersions} in
+</span>  <span class='comment'># {Google::Cloud::Kms::V1::KeyManagementService::ListCryptoKeyVersions KeyManagementService::ListCryptoKeyVersions}
+</span>  <span class='comment'># and
 </span>  <span class='comment'># {Google::Cloud::Kms::V1::KeyManagementService::ListCryptoKeys KeyManagementService::ListCryptoKeys}.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="CryptoKeyVersion/CryptoKeyVersionView.html" title="Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionView (module)">CryptoKeyVersionView</a></span></span>
-    <span class='comment'># Default view for each {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}. Does not include
-</span>    <span class='comment'># the {Google::Cloud::Kms::V1::CryptoKeyVersion#attestation attestation} field.
+    <span class='comment'># Default view for each
+</span>    <span class='comment'># {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}. Does not
+</span>    <span class='comment'># include the
+</span>    <span class='comment'># {Google::Cloud::Kms::V1::CryptoKeyVersion#attestation attestation} field.
 </span>    <span class='const'>CRYPTO_KEY_VERSION_VIEW_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
 
-    <span class='comment'># Provides all fields in each {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}, including the
+    <span class='comment'># Provides all fields in each
+</span>    <span class='comment'># {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}, including the
 </span>    <span class='comment'># {Google::Cloud::Kms::V1::CryptoKeyVersion#attestation attestation}.
 </span>    <span class='const'>FULL</span> <span class='op'>=</span> <span class='int'>1</span>
   <span class='kw'>end</span>
@@ -1810,7 +1985,8 @@ for destruction. Only present if <span class='object_link'><a href="#state-insta
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Output only. The time this <span class='object_link'><a href="" title="Google::Cloud::Kms::V1::CryptoKeyVersion (class)">CryptoKeyVersion</a></span>&#39;s key material was
+    <p>Returns Output only. The time this
+<span class='object_link'><a href="" title="Google::Cloud::Kms::V1::CryptoKeyVersion (class)">CryptoKeyVersion</a></span>&#39;s key material was
 generated.</p>
 
 
@@ -1829,7 +2005,8 @@ generated.</p>
       
       
         &mdash;
-        <div class='inline'><p>Output only. The time this <span class='object_link'><a href="" title="Google::Cloud::Kms::V1::CryptoKeyVersion (class)">CryptoKeyVersion</a></span>&#39;s key material was
+        <div class='inline'><p>Output only. The time this
+<span class='object_link'><a href="" title="Google::Cloud::Kms::V1::CryptoKeyVersion (class)">CryptoKeyVersion</a></span>&#39;s key material was
 generated.</p>
 </div>
       
@@ -1843,49 +2020,6 @@ generated.</p>
       <pre class="lines">
 
 
-206
-207
-208
-209
-210
-211
-212
-213
-214
-215
-216
-217
-218
-219
-220
-221
-222
-223
-224
-225
-226
-227
-228
-229
-230
-231
-232
-233
-234
-235
-236
-237
-238
-239
-240
-241
-242
-243
-244
-245
-246
-247
-248
 249
 250
 251
@@ -1957,21 +2091,83 @@ generated.</p>
 317
 318
 319
-320</pre>
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376
+377
+378
+379</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/doc/google/cloud/kms/v1/resources.rb', line 206</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/doc/google/cloud/kms/v1/resources.rb', line 249</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Kms::V1::CryptoKeyVersion (class)">CryptoKeyVersion</a></span></span>
-  <span class='comment'># The algorithm of the {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}, indicating what
+  <span class='comment'># The algorithm of the
+</span>  <span class='comment'># {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}, indicating what
 </span>  <span class='comment'># parameters must be used for each cryptographic operation.
 </span>  <span class='comment'>#
 </span>  <span class='comment'># The
 </span>  <span class='comment'># {Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionAlgorithm::GOOGLE_SYMMETRIC_ENCRYPTION GOOGLE_SYMMETRIC_ENCRYPTION}
-</span>  <span class='comment'># algorithm is usable with {Google::Cloud::Kms::V1::CryptoKey#purpose CryptoKey#purpose}
+</span>  <span class='comment'># algorithm is usable with
+</span>  <span class='comment'># {Google::Cloud::Kms::V1::CryptoKey#purpose CryptoKey#purpose}
 </span>  <span class='comment'># {Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose::ENCRYPT_DECRYPT ENCRYPT_DECRYPT}.
 </span>  <span class='comment'>#
-</span>  <span class='comment'># Algorithms beginning with &quot;RSA_SIGN_&quot; are usable with {Google::Cloud::Kms::V1::CryptoKey#purpose CryptoKey#purpose}
+</span>  <span class='comment'># Algorithms beginning with &quot;RSA_SIGN_&quot; are usable with
+</span>  <span class='comment'># {Google::Cloud::Kms::V1::CryptoKey#purpose CryptoKey#purpose}
 </span>  <span class='comment'># {Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose::ASYMMETRIC_SIGN ASYMMETRIC_SIGN}.
 </span>  <span class='comment'>#
 </span>  <span class='comment'># The fields in the name after &quot;RSA_SIGN_&quot; correspond to the following
@@ -1989,7 +2185,8 @@ generated.</p>
 </span>  <span class='comment'># The fields in the name after &quot;RSA_DECRYPT_&quot; correspond to the following
 </span>  <span class='comment'># parameters: padding algorithm, modulus bit length, and digest algorithm.
 </span>  <span class='comment'>#
-</span>  <span class='comment'># Algorithms beginning with &quot;EC_SIGN_&quot; are usable with {Google::Cloud::Kms::V1::CryptoKey#purpose CryptoKey#purpose}
+</span>  <span class='comment'># Algorithms beginning with &quot;EC_SIGN_&quot; are usable with
+</span>  <span class='comment'># {Google::Cloud::Kms::V1::CryptoKey#purpose CryptoKey#purpose}
 </span>  <span class='comment'># {Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose::ASYMMETRIC_SIGN ASYMMETRIC_SIGN}.
 </span>  <span class='comment'>#
 </span>  <span class='comment'># The fields in the name after &quot;EC_SIGN_&quot; correspond to the following
@@ -2035,21 +2232,26 @@ generated.</p>
 </span>    <span class='const'>EC_SIGN_P384_SHA384</span> <span class='op'>=</span> <span class='int'>13</span>
   <span class='kw'>end</span>
 
-  <span class='comment'># The state of a {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}, indicating if it can be used.
+  <span class='comment'># The state of a {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion},
+</span>  <span class='comment'># indicating if it can be used.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="CryptoKeyVersion/CryptoKeyVersionState.html" title="Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState (module)">CryptoKeyVersionState</a></span></span>
     <span class='comment'># Not specified.
 </span>    <span class='const'>CRYPTO_KEY_VERSION_STATE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
 
     <span class='comment'># This version is still being generated. It may not be used, enabled,
 </span>    <span class='comment'># disabled, or destroyed yet. Cloud KMS will automatically mark this
-</span>    <span class='comment'># version {Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::ENABLED ENABLED} as soon as the version is ready.
+</span>    <span class='comment'># version
+</span>    <span class='comment'># {Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::ENABLED ENABLED}
+</span>    <span class='comment'># as soon as the version is ready.
 </span>    <span class='const'>PENDING_GENERATION</span> <span class='op'>=</span> <span class='int'>5</span>
 
     <span class='comment'># This version may be used for cryptographic operations.
 </span>    <span class='const'>ENABLED</span> <span class='op'>=</span> <span class='int'>1</span>
 
     <span class='comment'># This version may not be used, but the key material is still available,
-</span>    <span class='comment'># and the version can be placed back into the {Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::ENABLED ENABLED} state.
+</span>    <span class='comment'># and the version can be placed back into the
+</span>    <span class='comment'># {Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::ENABLED ENABLED}
+</span>    <span class='comment'># state.
 </span>    <span class='const'>DISABLED</span> <span class='op'>=</span> <span class='int'>2</span>
 
     <span class='comment'># This version is destroyed, and the key material is no longer stored.
@@ -2059,20 +2261,27 @@ generated.</p>
     <span class='comment'># This version is scheduled for destruction, and will be destroyed soon.
 </span>    <span class='comment'># Call
 </span>    <span class='comment'># {Google::Cloud::Kms::V1::KeyManagementService::RestoreCryptoKeyVersion RestoreCryptoKeyVersion}
-</span>    <span class='comment'># to put it back into the {Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::DISABLED DISABLED} state.
+</span>    <span class='comment'># to put it back into the
+</span>    <span class='comment'># {Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::DISABLED DISABLED}
+</span>    <span class='comment'># state.
 </span>    <span class='const'>DESTROY_SCHEDULED</span> <span class='op'>=</span> <span class='int'>4</span>
   <span class='kw'>end</span>
 
-  <span class='comment'># A view for {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}s. Controls the level of detail returned
-</span>  <span class='comment'># for {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersions} in
-</span>  <span class='comment'># {Google::Cloud::Kms::V1::KeyManagementService::ListCryptoKeyVersions KeyManagementService::ListCryptoKeyVersions} and
+  <span class='comment'># A view for {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}s.
+</span>  <span class='comment'># Controls the level of detail returned for
+</span>  <span class='comment'># {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersions} in
+</span>  <span class='comment'># {Google::Cloud::Kms::V1::KeyManagementService::ListCryptoKeyVersions KeyManagementService::ListCryptoKeyVersions}
+</span>  <span class='comment'># and
 </span>  <span class='comment'># {Google::Cloud::Kms::V1::KeyManagementService::ListCryptoKeys KeyManagementService::ListCryptoKeys}.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="CryptoKeyVersion/CryptoKeyVersionView.html" title="Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionView (module)">CryptoKeyVersionView</a></span></span>
-    <span class='comment'># Default view for each {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}. Does not include
-</span>    <span class='comment'># the {Google::Cloud::Kms::V1::CryptoKeyVersion#attestation attestation} field.
+    <span class='comment'># Default view for each
+</span>    <span class='comment'># {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}. Does not
+</span>    <span class='comment'># include the
+</span>    <span class='comment'># {Google::Cloud::Kms::V1::CryptoKeyVersion#attestation attestation} field.
 </span>    <span class='const'>CRYPTO_KEY_VERSION_VIEW_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
 
-    <span class='comment'># Provides all fields in each {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}, including the
+    <span class='comment'># Provides all fields in each
+</span>    <span class='comment'># {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}, including the
 </span>    <span class='comment'># {Google::Cloud::Kms::V1::CryptoKeyVersion#attestation attestation}.
 </span>    <span class='const'>FULL</span> <span class='op'>=</span> <span class='int'>1</span>
   <span class='kw'>end</span>
@@ -2095,7 +2304,8 @@ generated.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Output only. The resource name for this <span class='object_link'><a href="" title="Google::Cloud::Kms::V1::CryptoKeyVersion (class)">CryptoKeyVersion</a></span> in the format
+    <p>Returns Output only. The resource name for this
+<span class='object_link'><a href="" title="Google::Cloud::Kms::V1::CryptoKeyVersion (class)">CryptoKeyVersion</a></span> in the format
 <code>projects/*/locations/*/keyRings/*/cryptoKeys/*/cryptoKeyVersions/*</code>.</p>
 
 
@@ -2114,7 +2324,8 @@ generated.</p>
       
       
         &mdash;
-        <div class='inline'><p>Output only. The resource name for this <span class='object_link'><a href="" title="Google::Cloud::Kms::V1::CryptoKeyVersion (class)">CryptoKeyVersion</a></span> in the format
+        <div class='inline'><p>Output only. The resource name for this
+<span class='object_link'><a href="" title="Google::Cloud::Kms::V1::CryptoKeyVersion (class)">CryptoKeyVersion</a></span> in the format
 <code>projects/*/locations/*/keyRings/*/cryptoKeys/*/cryptoKeyVersions/*</code>.</p>
 </div>
       
@@ -2128,49 +2339,6 @@ generated.</p>
       <pre class="lines">
 
 
-206
-207
-208
-209
-210
-211
-212
-213
-214
-215
-216
-217
-218
-219
-220
-221
-222
-223
-224
-225
-226
-227
-228
-229
-230
-231
-232
-233
-234
-235
-236
-237
-238
-239
-240
-241
-242
-243
-244
-245
-246
-247
-248
 249
 250
 251
@@ -2242,21 +2410,83 @@ generated.</p>
 317
 318
 319
-320</pre>
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376
+377
+378
+379</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/doc/google/cloud/kms/v1/resources.rb', line 206</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/doc/google/cloud/kms/v1/resources.rb', line 249</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Kms::V1::CryptoKeyVersion (class)">CryptoKeyVersion</a></span></span>
-  <span class='comment'># The algorithm of the {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}, indicating what
+  <span class='comment'># The algorithm of the
+</span>  <span class='comment'># {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}, indicating what
 </span>  <span class='comment'># parameters must be used for each cryptographic operation.
 </span>  <span class='comment'>#
 </span>  <span class='comment'># The
 </span>  <span class='comment'># {Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionAlgorithm::GOOGLE_SYMMETRIC_ENCRYPTION GOOGLE_SYMMETRIC_ENCRYPTION}
-</span>  <span class='comment'># algorithm is usable with {Google::Cloud::Kms::V1::CryptoKey#purpose CryptoKey#purpose}
+</span>  <span class='comment'># algorithm is usable with
+</span>  <span class='comment'># {Google::Cloud::Kms::V1::CryptoKey#purpose CryptoKey#purpose}
 </span>  <span class='comment'># {Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose::ENCRYPT_DECRYPT ENCRYPT_DECRYPT}.
 </span>  <span class='comment'>#
-</span>  <span class='comment'># Algorithms beginning with &quot;RSA_SIGN_&quot; are usable with {Google::Cloud::Kms::V1::CryptoKey#purpose CryptoKey#purpose}
+</span>  <span class='comment'># Algorithms beginning with &quot;RSA_SIGN_&quot; are usable with
+</span>  <span class='comment'># {Google::Cloud::Kms::V1::CryptoKey#purpose CryptoKey#purpose}
 </span>  <span class='comment'># {Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose::ASYMMETRIC_SIGN ASYMMETRIC_SIGN}.
 </span>  <span class='comment'>#
 </span>  <span class='comment'># The fields in the name after &quot;RSA_SIGN_&quot; correspond to the following
@@ -2274,7 +2504,8 @@ generated.</p>
 </span>  <span class='comment'># The fields in the name after &quot;RSA_DECRYPT_&quot; correspond to the following
 </span>  <span class='comment'># parameters: padding algorithm, modulus bit length, and digest algorithm.
 </span>  <span class='comment'>#
-</span>  <span class='comment'># Algorithms beginning with &quot;EC_SIGN_&quot; are usable with {Google::Cloud::Kms::V1::CryptoKey#purpose CryptoKey#purpose}
+</span>  <span class='comment'># Algorithms beginning with &quot;EC_SIGN_&quot; are usable with
+</span>  <span class='comment'># {Google::Cloud::Kms::V1::CryptoKey#purpose CryptoKey#purpose}
 </span>  <span class='comment'># {Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose::ASYMMETRIC_SIGN ASYMMETRIC_SIGN}.
 </span>  <span class='comment'>#
 </span>  <span class='comment'># The fields in the name after &quot;EC_SIGN_&quot; correspond to the following
@@ -2320,21 +2551,26 @@ generated.</p>
 </span>    <span class='const'>EC_SIGN_P384_SHA384</span> <span class='op'>=</span> <span class='int'>13</span>
   <span class='kw'>end</span>
 
-  <span class='comment'># The state of a {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}, indicating if it can be used.
+  <span class='comment'># The state of a {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion},
+</span>  <span class='comment'># indicating if it can be used.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="CryptoKeyVersion/CryptoKeyVersionState.html" title="Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState (module)">CryptoKeyVersionState</a></span></span>
     <span class='comment'># Not specified.
 </span>    <span class='const'>CRYPTO_KEY_VERSION_STATE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
 
     <span class='comment'># This version is still being generated. It may not be used, enabled,
 </span>    <span class='comment'># disabled, or destroyed yet. Cloud KMS will automatically mark this
-</span>    <span class='comment'># version {Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::ENABLED ENABLED} as soon as the version is ready.
+</span>    <span class='comment'># version
+</span>    <span class='comment'># {Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::ENABLED ENABLED}
+</span>    <span class='comment'># as soon as the version is ready.
 </span>    <span class='const'>PENDING_GENERATION</span> <span class='op'>=</span> <span class='int'>5</span>
 
     <span class='comment'># This version may be used for cryptographic operations.
 </span>    <span class='const'>ENABLED</span> <span class='op'>=</span> <span class='int'>1</span>
 
     <span class='comment'># This version may not be used, but the key material is still available,
-</span>    <span class='comment'># and the version can be placed back into the {Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::ENABLED ENABLED} state.
+</span>    <span class='comment'># and the version can be placed back into the
+</span>    <span class='comment'># {Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::ENABLED ENABLED}
+</span>    <span class='comment'># state.
 </span>    <span class='const'>DISABLED</span> <span class='op'>=</span> <span class='int'>2</span>
 
     <span class='comment'># This version is destroyed, and the key material is no longer stored.
@@ -2344,20 +2580,27 @@ generated.</p>
     <span class='comment'># This version is scheduled for destruction, and will be destroyed soon.
 </span>    <span class='comment'># Call
 </span>    <span class='comment'># {Google::Cloud::Kms::V1::KeyManagementService::RestoreCryptoKeyVersion RestoreCryptoKeyVersion}
-</span>    <span class='comment'># to put it back into the {Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::DISABLED DISABLED} state.
+</span>    <span class='comment'># to put it back into the
+</span>    <span class='comment'># {Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::DISABLED DISABLED}
+</span>    <span class='comment'># state.
 </span>    <span class='const'>DESTROY_SCHEDULED</span> <span class='op'>=</span> <span class='int'>4</span>
   <span class='kw'>end</span>
 
-  <span class='comment'># A view for {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}s. Controls the level of detail returned
-</span>  <span class='comment'># for {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersions} in
-</span>  <span class='comment'># {Google::Cloud::Kms::V1::KeyManagementService::ListCryptoKeyVersions KeyManagementService::ListCryptoKeyVersions} and
+  <span class='comment'># A view for {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}s.
+</span>  <span class='comment'># Controls the level of detail returned for
+</span>  <span class='comment'># {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersions} in
+</span>  <span class='comment'># {Google::Cloud::Kms::V1::KeyManagementService::ListCryptoKeyVersions KeyManagementService::ListCryptoKeyVersions}
+</span>  <span class='comment'># and
 </span>  <span class='comment'># {Google::Cloud::Kms::V1::KeyManagementService::ListCryptoKeys KeyManagementService::ListCryptoKeys}.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="CryptoKeyVersion/CryptoKeyVersionView.html" title="Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionView (module)">CryptoKeyVersionView</a></span></span>
-    <span class='comment'># Default view for each {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}. Does not include
-</span>    <span class='comment'># the {Google::Cloud::Kms::V1::CryptoKeyVersion#attestation attestation} field.
+    <span class='comment'># Default view for each
+</span>    <span class='comment'># {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}. Does not
+</span>    <span class='comment'># include the
+</span>    <span class='comment'># {Google::Cloud::Kms::V1::CryptoKeyVersion#attestation attestation} field.
 </span>    <span class='const'>CRYPTO_KEY_VERSION_VIEW_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
 
-    <span class='comment'># Provides all fields in each {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}, including the
+    <span class='comment'># Provides all fields in each
+</span>    <span class='comment'># {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}, including the
 </span>    <span class='comment'># {Google::Cloud::Kms::V1::CryptoKeyVersion#attestation attestation}.
 </span>    <span class='const'>FULL</span> <span class='op'>=</span> <span class='int'>1</span>
   <span class='kw'>end</span>
@@ -2380,8 +2623,9 @@ generated.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Output only. The <span class='object_link'><a href="ProtectionLevel.html" title="Google::Cloud::Kms::V1::ProtectionLevel (module)">ProtectionLevel</a></span> describing how crypto operations are
-performed with this <span class='object_link'><a href="" title="Google::Cloud::Kms::V1::CryptoKeyVersion (class)">CryptoKeyVersion</a></span>.</p>
+    <p>Returns Output only. The <span class='object_link'><a href="ProtectionLevel.html" title="Google::Cloud::Kms::V1::ProtectionLevel (module)">ProtectionLevel</a></span>
+describing how crypto operations are performed with this
+<span class='object_link'><a href="" title="Google::Cloud::Kms::V1::CryptoKeyVersion (class)">CryptoKeyVersion</a></span>.</p>
 
 
   </div>
@@ -2399,8 +2643,9 @@ performed with this <span class='object_link'><a href="" title="Google::Cloud::K
       
       
         &mdash;
-        <div class='inline'><p>Output only. The <span class='object_link'><a href="ProtectionLevel.html" title="Google::Cloud::Kms::V1::ProtectionLevel (module)">ProtectionLevel</a></span> describing how crypto operations are
-performed with this <span class='object_link'><a href="" title="Google::Cloud::Kms::V1::CryptoKeyVersion (class)">CryptoKeyVersion</a></span>.</p>
+        <div class='inline'><p>Output only. The <span class='object_link'><a href="ProtectionLevel.html" title="Google::Cloud::Kms::V1::ProtectionLevel (module)">ProtectionLevel</a></span>
+describing how crypto operations are performed with this
+<span class='object_link'><a href="" title="Google::Cloud::Kms::V1::CryptoKeyVersion (class)">CryptoKeyVersion</a></span>.</p>
 </div>
       
     </li>
@@ -2413,49 +2658,6 @@ performed with this <span class='object_link'><a href="" title="Google::Cloud::K
       <pre class="lines">
 
 
-206
-207
-208
-209
-210
-211
-212
-213
-214
-215
-216
-217
-218
-219
-220
-221
-222
-223
-224
-225
-226
-227
-228
-229
-230
-231
-232
-233
-234
-235
-236
-237
-238
-239
-240
-241
-242
-243
-244
-245
-246
-247
-248
 249
 250
 251
@@ -2527,21 +2729,83 @@ performed with this <span class='object_link'><a href="" title="Google::Cloud::K
 317
 318
 319
-320</pre>
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376
+377
+378
+379</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/doc/google/cloud/kms/v1/resources.rb', line 206</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/doc/google/cloud/kms/v1/resources.rb', line 249</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Kms::V1::CryptoKeyVersion (class)">CryptoKeyVersion</a></span></span>
-  <span class='comment'># The algorithm of the {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}, indicating what
+  <span class='comment'># The algorithm of the
+</span>  <span class='comment'># {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}, indicating what
 </span>  <span class='comment'># parameters must be used for each cryptographic operation.
 </span>  <span class='comment'>#
 </span>  <span class='comment'># The
 </span>  <span class='comment'># {Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionAlgorithm::GOOGLE_SYMMETRIC_ENCRYPTION GOOGLE_SYMMETRIC_ENCRYPTION}
-</span>  <span class='comment'># algorithm is usable with {Google::Cloud::Kms::V1::CryptoKey#purpose CryptoKey#purpose}
+</span>  <span class='comment'># algorithm is usable with
+</span>  <span class='comment'># {Google::Cloud::Kms::V1::CryptoKey#purpose CryptoKey#purpose}
 </span>  <span class='comment'># {Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose::ENCRYPT_DECRYPT ENCRYPT_DECRYPT}.
 </span>  <span class='comment'>#
-</span>  <span class='comment'># Algorithms beginning with &quot;RSA_SIGN_&quot; are usable with {Google::Cloud::Kms::V1::CryptoKey#purpose CryptoKey#purpose}
+</span>  <span class='comment'># Algorithms beginning with &quot;RSA_SIGN_&quot; are usable with
+</span>  <span class='comment'># {Google::Cloud::Kms::V1::CryptoKey#purpose CryptoKey#purpose}
 </span>  <span class='comment'># {Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose::ASYMMETRIC_SIGN ASYMMETRIC_SIGN}.
 </span>  <span class='comment'>#
 </span>  <span class='comment'># The fields in the name after &quot;RSA_SIGN_&quot; correspond to the following
@@ -2559,7 +2823,8 @@ performed with this <span class='object_link'><a href="" title="Google::Cloud::K
 </span>  <span class='comment'># The fields in the name after &quot;RSA_DECRYPT_&quot; correspond to the following
 </span>  <span class='comment'># parameters: padding algorithm, modulus bit length, and digest algorithm.
 </span>  <span class='comment'>#
-</span>  <span class='comment'># Algorithms beginning with &quot;EC_SIGN_&quot; are usable with {Google::Cloud::Kms::V1::CryptoKey#purpose CryptoKey#purpose}
+</span>  <span class='comment'># Algorithms beginning with &quot;EC_SIGN_&quot; are usable with
+</span>  <span class='comment'># {Google::Cloud::Kms::V1::CryptoKey#purpose CryptoKey#purpose}
 </span>  <span class='comment'># {Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose::ASYMMETRIC_SIGN ASYMMETRIC_SIGN}.
 </span>  <span class='comment'>#
 </span>  <span class='comment'># The fields in the name after &quot;EC_SIGN_&quot; correspond to the following
@@ -2605,21 +2870,26 @@ performed with this <span class='object_link'><a href="" title="Google::Cloud::K
 </span>    <span class='const'>EC_SIGN_P384_SHA384</span> <span class='op'>=</span> <span class='int'>13</span>
   <span class='kw'>end</span>
 
-  <span class='comment'># The state of a {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}, indicating if it can be used.
+  <span class='comment'># The state of a {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion},
+</span>  <span class='comment'># indicating if it can be used.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="CryptoKeyVersion/CryptoKeyVersionState.html" title="Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState (module)">CryptoKeyVersionState</a></span></span>
     <span class='comment'># Not specified.
 </span>    <span class='const'>CRYPTO_KEY_VERSION_STATE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
 
     <span class='comment'># This version is still being generated. It may not be used, enabled,
 </span>    <span class='comment'># disabled, or destroyed yet. Cloud KMS will automatically mark this
-</span>    <span class='comment'># version {Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::ENABLED ENABLED} as soon as the version is ready.
+</span>    <span class='comment'># version
+</span>    <span class='comment'># {Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::ENABLED ENABLED}
+</span>    <span class='comment'># as soon as the version is ready.
 </span>    <span class='const'>PENDING_GENERATION</span> <span class='op'>=</span> <span class='int'>5</span>
 
     <span class='comment'># This version may be used for cryptographic operations.
 </span>    <span class='const'>ENABLED</span> <span class='op'>=</span> <span class='int'>1</span>
 
     <span class='comment'># This version may not be used, but the key material is still available,
-</span>    <span class='comment'># and the version can be placed back into the {Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::ENABLED ENABLED} state.
+</span>    <span class='comment'># and the version can be placed back into the
+</span>    <span class='comment'># {Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::ENABLED ENABLED}
+</span>    <span class='comment'># state.
 </span>    <span class='const'>DISABLED</span> <span class='op'>=</span> <span class='int'>2</span>
 
     <span class='comment'># This version is destroyed, and the key material is no longer stored.
@@ -2629,20 +2899,27 @@ performed with this <span class='object_link'><a href="" title="Google::Cloud::K
     <span class='comment'># This version is scheduled for destruction, and will be destroyed soon.
 </span>    <span class='comment'># Call
 </span>    <span class='comment'># {Google::Cloud::Kms::V1::KeyManagementService::RestoreCryptoKeyVersion RestoreCryptoKeyVersion}
-</span>    <span class='comment'># to put it back into the {Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::DISABLED DISABLED} state.
+</span>    <span class='comment'># to put it back into the
+</span>    <span class='comment'># {Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::DISABLED DISABLED}
+</span>    <span class='comment'># state.
 </span>    <span class='const'>DESTROY_SCHEDULED</span> <span class='op'>=</span> <span class='int'>4</span>
   <span class='kw'>end</span>
 
-  <span class='comment'># A view for {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}s. Controls the level of detail returned
-</span>  <span class='comment'># for {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersions} in
-</span>  <span class='comment'># {Google::Cloud::Kms::V1::KeyManagementService::ListCryptoKeyVersions KeyManagementService::ListCryptoKeyVersions} and
+  <span class='comment'># A view for {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}s.
+</span>  <span class='comment'># Controls the level of detail returned for
+</span>  <span class='comment'># {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersions} in
+</span>  <span class='comment'># {Google::Cloud::Kms::V1::KeyManagementService::ListCryptoKeyVersions KeyManagementService::ListCryptoKeyVersions}
+</span>  <span class='comment'># and
 </span>  <span class='comment'># {Google::Cloud::Kms::V1::KeyManagementService::ListCryptoKeys KeyManagementService::ListCryptoKeys}.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="CryptoKeyVersion/CryptoKeyVersionView.html" title="Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionView (module)">CryptoKeyVersionView</a></span></span>
-    <span class='comment'># Default view for each {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}. Does not include
-</span>    <span class='comment'># the {Google::Cloud::Kms::V1::CryptoKeyVersion#attestation attestation} field.
+    <span class='comment'># Default view for each
+</span>    <span class='comment'># {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}. Does not
+</span>    <span class='comment'># include the
+</span>    <span class='comment'># {Google::Cloud::Kms::V1::CryptoKeyVersion#attestation attestation} field.
 </span>    <span class='const'>CRYPTO_KEY_VERSION_VIEW_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
 
-    <span class='comment'># Provides all fields in each {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}, including the
+    <span class='comment'># Provides all fields in each
+</span>    <span class='comment'># {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}, including the
 </span>    <span class='comment'># {Google::Cloud::Kms::V1::CryptoKeyVersion#attestation attestation}.
 </span>    <span class='const'>FULL</span> <span class='op'>=</span> <span class='int'>1</span>
   <span class='kw'>end</span>
@@ -2665,7 +2942,8 @@ performed with this <span class='object_link'><a href="" title="Google::Cloud::K
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns The current state of the <span class='object_link'><a href="" title="Google::Cloud::Kms::V1::CryptoKeyVersion (class)">CryptoKeyVersion</a></span>.</p>
+    <p>Returns The current state of the
+<span class='object_link'><a href="" title="Google::Cloud::Kms::V1::CryptoKeyVersion (class)">CryptoKeyVersion</a></span>.</p>
 
 
   </div>
@@ -2683,7 +2961,8 @@ performed with this <span class='object_link'><a href="" title="Google::Cloud::K
       
       
         &mdash;
-        <div class='inline'><p>The current state of the <span class='object_link'><a href="" title="Google::Cloud::Kms::V1::CryptoKeyVersion (class)">CryptoKeyVersion</a></span>.</p>
+        <div class='inline'><p>The current state of the
+<span class='object_link'><a href="" title="Google::Cloud::Kms::V1::CryptoKeyVersion (class)">CryptoKeyVersion</a></span>.</p>
 </div>
       
     </li>
@@ -2696,49 +2975,6 @@ performed with this <span class='object_link'><a href="" title="Google::Cloud::K
       <pre class="lines">
 
 
-206
-207
-208
-209
-210
-211
-212
-213
-214
-215
-216
-217
-218
-219
-220
-221
-222
-223
-224
-225
-226
-227
-228
-229
-230
-231
-232
-233
-234
-235
-236
-237
-238
-239
-240
-241
-242
-243
-244
-245
-246
-247
-248
 249
 250
 251
@@ -2810,21 +3046,83 @@ performed with this <span class='object_link'><a href="" title="Google::Cloud::K
 317
 318
 319
-320</pre>
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376
+377
+378
+379</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/doc/google/cloud/kms/v1/resources.rb', line 206</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/doc/google/cloud/kms/v1/resources.rb', line 249</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Kms::V1::CryptoKeyVersion (class)">CryptoKeyVersion</a></span></span>
-  <span class='comment'># The algorithm of the {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}, indicating what
+  <span class='comment'># The algorithm of the
+</span>  <span class='comment'># {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}, indicating what
 </span>  <span class='comment'># parameters must be used for each cryptographic operation.
 </span>  <span class='comment'>#
 </span>  <span class='comment'># The
 </span>  <span class='comment'># {Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionAlgorithm::GOOGLE_SYMMETRIC_ENCRYPTION GOOGLE_SYMMETRIC_ENCRYPTION}
-</span>  <span class='comment'># algorithm is usable with {Google::Cloud::Kms::V1::CryptoKey#purpose CryptoKey#purpose}
+</span>  <span class='comment'># algorithm is usable with
+</span>  <span class='comment'># {Google::Cloud::Kms::V1::CryptoKey#purpose CryptoKey#purpose}
 </span>  <span class='comment'># {Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose::ENCRYPT_DECRYPT ENCRYPT_DECRYPT}.
 </span>  <span class='comment'>#
-</span>  <span class='comment'># Algorithms beginning with &quot;RSA_SIGN_&quot; are usable with {Google::Cloud::Kms::V1::CryptoKey#purpose CryptoKey#purpose}
+</span>  <span class='comment'># Algorithms beginning with &quot;RSA_SIGN_&quot; are usable with
+</span>  <span class='comment'># {Google::Cloud::Kms::V1::CryptoKey#purpose CryptoKey#purpose}
 </span>  <span class='comment'># {Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose::ASYMMETRIC_SIGN ASYMMETRIC_SIGN}.
 </span>  <span class='comment'>#
 </span>  <span class='comment'># The fields in the name after &quot;RSA_SIGN_&quot; correspond to the following
@@ -2842,7 +3140,8 @@ performed with this <span class='object_link'><a href="" title="Google::Cloud::K
 </span>  <span class='comment'># The fields in the name after &quot;RSA_DECRYPT_&quot; correspond to the following
 </span>  <span class='comment'># parameters: padding algorithm, modulus bit length, and digest algorithm.
 </span>  <span class='comment'>#
-</span>  <span class='comment'># Algorithms beginning with &quot;EC_SIGN_&quot; are usable with {Google::Cloud::Kms::V1::CryptoKey#purpose CryptoKey#purpose}
+</span>  <span class='comment'># Algorithms beginning with &quot;EC_SIGN_&quot; are usable with
+</span>  <span class='comment'># {Google::Cloud::Kms::V1::CryptoKey#purpose CryptoKey#purpose}
 </span>  <span class='comment'># {Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose::ASYMMETRIC_SIGN ASYMMETRIC_SIGN}.
 </span>  <span class='comment'>#
 </span>  <span class='comment'># The fields in the name after &quot;EC_SIGN_&quot; correspond to the following
@@ -2888,21 +3187,26 @@ performed with this <span class='object_link'><a href="" title="Google::Cloud::K
 </span>    <span class='const'>EC_SIGN_P384_SHA384</span> <span class='op'>=</span> <span class='int'>13</span>
   <span class='kw'>end</span>
 
-  <span class='comment'># The state of a {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}, indicating if it can be used.
+  <span class='comment'># The state of a {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion},
+</span>  <span class='comment'># indicating if it can be used.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="CryptoKeyVersion/CryptoKeyVersionState.html" title="Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState (module)">CryptoKeyVersionState</a></span></span>
     <span class='comment'># Not specified.
 </span>    <span class='const'>CRYPTO_KEY_VERSION_STATE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
 
     <span class='comment'># This version is still being generated. It may not be used, enabled,
 </span>    <span class='comment'># disabled, or destroyed yet. Cloud KMS will automatically mark this
-</span>    <span class='comment'># version {Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::ENABLED ENABLED} as soon as the version is ready.
+</span>    <span class='comment'># version
+</span>    <span class='comment'># {Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::ENABLED ENABLED}
+</span>    <span class='comment'># as soon as the version is ready.
 </span>    <span class='const'>PENDING_GENERATION</span> <span class='op'>=</span> <span class='int'>5</span>
 
     <span class='comment'># This version may be used for cryptographic operations.
 </span>    <span class='const'>ENABLED</span> <span class='op'>=</span> <span class='int'>1</span>
 
     <span class='comment'># This version may not be used, but the key material is still available,
-</span>    <span class='comment'># and the version can be placed back into the {Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::ENABLED ENABLED} state.
+</span>    <span class='comment'># and the version can be placed back into the
+</span>    <span class='comment'># {Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::ENABLED ENABLED}
+</span>    <span class='comment'># state.
 </span>    <span class='const'>DISABLED</span> <span class='op'>=</span> <span class='int'>2</span>
 
     <span class='comment'># This version is destroyed, and the key material is no longer stored.
@@ -2912,20 +3216,27 @@ performed with this <span class='object_link'><a href="" title="Google::Cloud::K
     <span class='comment'># This version is scheduled for destruction, and will be destroyed soon.
 </span>    <span class='comment'># Call
 </span>    <span class='comment'># {Google::Cloud::Kms::V1::KeyManagementService::RestoreCryptoKeyVersion RestoreCryptoKeyVersion}
-</span>    <span class='comment'># to put it back into the {Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::DISABLED DISABLED} state.
+</span>    <span class='comment'># to put it back into the
+</span>    <span class='comment'># {Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::DISABLED DISABLED}
+</span>    <span class='comment'># state.
 </span>    <span class='const'>DESTROY_SCHEDULED</span> <span class='op'>=</span> <span class='int'>4</span>
   <span class='kw'>end</span>
 
-  <span class='comment'># A view for {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}s. Controls the level of detail returned
-</span>  <span class='comment'># for {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersions} in
-</span>  <span class='comment'># {Google::Cloud::Kms::V1::KeyManagementService::ListCryptoKeyVersions KeyManagementService::ListCryptoKeyVersions} and
+  <span class='comment'># A view for {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}s.
+</span>  <span class='comment'># Controls the level of detail returned for
+</span>  <span class='comment'># {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersions} in
+</span>  <span class='comment'># {Google::Cloud::Kms::V1::KeyManagementService::ListCryptoKeyVersions KeyManagementService::ListCryptoKeyVersions}
+</span>  <span class='comment'># and
 </span>  <span class='comment'># {Google::Cloud::Kms::V1::KeyManagementService::ListCryptoKeys KeyManagementService::ListCryptoKeys}.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="CryptoKeyVersion/CryptoKeyVersionView.html" title="Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionView (module)">CryptoKeyVersionView</a></span></span>
-    <span class='comment'># Default view for each {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}. Does not include
-</span>    <span class='comment'># the {Google::Cloud::Kms::V1::CryptoKeyVersion#attestation attestation} field.
+    <span class='comment'># Default view for each
+</span>    <span class='comment'># {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}. Does not
+</span>    <span class='comment'># include the
+</span>    <span class='comment'># {Google::Cloud::Kms::V1::CryptoKeyVersion#attestation attestation} field.
 </span>    <span class='const'>CRYPTO_KEY_VERSION_VIEW_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
 
-    <span class='comment'># Provides all fields in each {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}, including the
+    <span class='comment'># Provides all fields in each
+</span>    <span class='comment'># {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}, including the
 </span>    <span class='comment'># {Google::Cloud::Kms::V1::CryptoKeyVersion#attestation attestation}.
 </span>    <span class='const'>FULL</span> <span class='op'>=</span> <span class='int'>1</span>
   <span class='kw'>end</span>

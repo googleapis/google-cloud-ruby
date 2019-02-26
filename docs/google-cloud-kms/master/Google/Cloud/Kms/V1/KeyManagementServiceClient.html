@@ -2204,8 +2204,10 @@ custom error handling.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Decrypts data that was encrypted with a public key retrieved from
-GetPublicKey corresponding to a <span class='object_link'><a href="CryptoKeyVersion.html" title="Google::Cloud::Kms::V1::CryptoKeyVersion (class)">CryptoKeyVersion</a></span> with
-<span class='object_link'><a href="CryptoKey.html#purpose-instance_method" title="Google::Cloud::Kms::V1::CryptoKey#purpose (method)">CryptoKey#purpose</a></span> ASYMMETRIC_DECRYPT.</p>
+GetPublicKey
+corresponding to a <span class='object_link'><a href="CryptoKeyVersion.html" title="Google::Cloud::Kms::V1::CryptoKeyVersion (class)">CryptoKeyVersion</a></span>
+with <span class='object_link'><a href="CryptoKey.html#purpose-instance_method" title="Google::Cloud::Kms::V1::CryptoKey#purpose (method)">CryptoKey#purpose</a></span>
+ASYMMETRIC_DECRYPT.</p>
 
 
   </div>
@@ -2239,7 +2241,8 @@ GetPublicKey corresponding to a <span class='object_link'><a href="CryptoKeyVers
       
       
         &mdash;
-        <div class='inline'><p>Required. The resource name of the <span class='object_link'><a href="CryptoKeyVersion.html" title="Google::Cloud::Kms::V1::CryptoKeyVersion (class)">CryptoKeyVersion</a></span> to use for
+        <div class='inline'><p>Required. The resource name of the
+<span class='object_link'><a href="CryptoKeyVersion.html" title="Google::Cloud::Kms::V1::CryptoKeyVersion (class)">CryptoKeyVersion</a></span> to use for
 decryption.</p>
 </div>
       
@@ -2255,8 +2258,9 @@ decryption.</p>
       
       
         &mdash;
-        <div class='inline'><p>Required. The data encrypted with the named <span class='object_link'><a href="CryptoKeyVersion.html" title="Google::Cloud::Kms::V1::CryptoKeyVersion (class)">CryptoKeyVersion</a></span>&#39;s public
-key using OAEP.</p>
+        <div class='inline'><p>Required. The data encrypted with the named
+<span class='object_link'><a href="CryptoKeyVersion.html" title="Google::Cloud::Kms::V1::CryptoKeyVersion (class)">CryptoKeyVersion</a></span>&#39;s public key using
+OAEP.</p>
 </div>
       
     </li>
@@ -2359,21 +2363,21 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1276
-1277
-1278
-1279
-1280
-1281
-1282
-1283
-1284
-1285
-1286
-1287</pre>
+1324
+1325
+1326
+1327
+1328
+1329
+1330
+1331
+1332
+1333
+1334
+1335</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 1276</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 1324</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_asymmetric_decrypt'>asymmetric_decrypt</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -2403,9 +2407,11 @@ retries, etc.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Signs data using a <span class='object_link'><a href="CryptoKeyVersion.html" title="Google::Cloud::Kms::V1::CryptoKeyVersion (class)">CryptoKeyVersion</a></span> with <span class='object_link'><a href="CryptoKey.html#purpose-instance_method" title="Google::Cloud::Kms::V1::CryptoKey#purpose (method)">CryptoKey#purpose</a></span>
+    <p>Signs data using a <span class='object_link'><a href="CryptoKeyVersion.html" title="Google::Cloud::Kms::V1::CryptoKeyVersion (class)">CryptoKeyVersion</a></span>
+with <span class='object_link'><a href="CryptoKey.html#purpose-instance_method" title="Google::Cloud::Kms::V1::CryptoKey#purpose (method)">CryptoKey#purpose</a></span>
 ASYMMETRIC_SIGN, producing a signature that can be verified with the public
-key retrieved from GetPublicKey.</p>
+key retrieved from
+GetPublicKey.</p>
 
 
   </div>
@@ -2439,7 +2445,9 @@ key retrieved from GetPublicKey.</p>
       
       
         &mdash;
-        <div class='inline'><p>Required. The resource name of the <span class='object_link'><a href="CryptoKeyVersion.html" title="Google::Cloud::Kms::V1::CryptoKeyVersion (class)">CryptoKeyVersion</a></span> to use for signing.</p>
+        <div class='inline'><p>Required. The resource name of the
+<span class='object_link'><a href="CryptoKeyVersion.html" title="Google::Cloud::Kms::V1::CryptoKeyVersion (class)">CryptoKeyVersion</a></span> to use for
+signing.</p>
 </div>
       
     </li>
@@ -2561,21 +2569,21 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1319
-1320
-1321
-1322
-1323
-1324
-1325
-1326
-1327
-1328
-1329
-1330</pre>
+1371
+1372
+1373
+1374
+1375
+1376
+1377
+1378
+1379
+1380
+1381
+1382</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 1319</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 1371</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_asymmetric_sign'>asymmetric_sign</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -2605,7 +2613,8 @@ retries, etc.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Create a new <span class='object_link'><a href="CryptoKey.html" title="Google::Cloud::Kms::V1::CryptoKey (class)">CryptoKey</a></span> within a <span class='object_link'><a href="KeyRing.html" title="Google::Cloud::Kms::V1::KeyRing (class)">KeyRing</a></span>.</p>
+    <p>Create a new <span class='object_link'><a href="CryptoKey.html" title="Google::Cloud::Kms::V1::CryptoKey (class)">CryptoKey</a></span> within a
+<span class='object_link'><a href="KeyRing.html" title="Google::Cloud::Kms::V1::KeyRing (class)">KeyRing</a></span>.</p>
 
 <p><span class='object_link'><a href="CryptoKey.html#purpose-instance_method" title="Google::Cloud::Kms::V1::CryptoKey#purpose (method)">CryptoKey#purpose</a></span> and
 <span class='object_link'><a href="CryptoKeyVersionTemplate.html#algorithm-instance_method" title="Google::Cloud::Kms::V1::CryptoKeyVersionTemplate#algorithm (method)">CryptoKey#version_template#algorithm</a></span>
@@ -2651,8 +2660,8 @@ are required.</p>
       
       
         &mdash;
-        <div class='inline'><p>Required. The <span class='object_link'><a href="KeyRing.html#name-instance_method" title="Google::Cloud::Kms::V1::KeyRing#name (method)">name</a></span> of the KeyRing associated with the
-<span class='object_link'><a href="CryptoKey.html" title="Google::Cloud::Kms::V1::CryptoKey (class)">CryptoKeys</a></span>.</p>
+        <div class='inline'><p>Required. The <span class='object_link'><a href="KeyRing.html#name-instance_method" title="Google::Cloud::Kms::V1::KeyRing#name (method)">name</a></span> of the KeyRing
+associated with the <span class='object_link'><a href="CryptoKey.html" title="Google::Cloud::Kms::V1::CryptoKey (class)">CryptoKeys</a></span>.</p>
 </div>
       
     </li>
@@ -2788,23 +2797,23 @@ retries, etc.</p>
       <pre class="lines">
 
 
-840
-841
-842
-843
-844
-845
-846
-847
-848
-849
 850
 851
 852
-853</pre>
+853
+854
+855
+856
+857
+858
+859
+860
+861
+862
+863</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 840</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 850</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_crypto_key'>create_crypto_key</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -2836,7 +2845,8 @@ retries, etc.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Create a new <span class='object_link'><a href="CryptoKeyVersion.html" title="Google::Cloud::Kms::V1::CryptoKeyVersion (class)">CryptoKeyVersion</a></span> in a <span class='object_link'><a href="CryptoKey.html" title="Google::Cloud::Kms::V1::CryptoKey (class)">CryptoKey</a></span>.</p>
+    <p>Create a new <span class='object_link'><a href="CryptoKeyVersion.html" title="Google::Cloud::Kms::V1::CryptoKeyVersion (class)">CryptoKeyVersion</a></span> in a
+<span class='object_link'><a href="CryptoKey.html" title="Google::Cloud::Kms::V1::CryptoKey (class)">CryptoKey</a></span>.</p>
 
 <p>The server will assign the next sequential id. If unset,
 <span class='object_link'><a href="CryptoKeyVersion.html#state-instance_method" title="Google::Cloud::Kms::V1::CryptoKeyVersion#state (method)">state</a></span> will be set to
@@ -2874,8 +2884,9 @@ retries, etc.</p>
       
       
         &mdash;
-        <div class='inline'><p>Required. The <span class='object_link'><a href="CryptoKey.html#name-instance_method" title="Google::Cloud::Kms::V1::CryptoKey#name (method)">name</a></span> of the <span class='object_link'><a href="CryptoKey.html" title="Google::Cloud::Kms::V1::CryptoKey (class)">CryptoKey</a></span> associated with
-the <span class='object_link'><a href="CryptoKeyVersion.html" title="Google::Cloud::Kms::V1::CryptoKeyVersion (class)">CryptoKeyVersions</a></span>.</p>
+        <div class='inline'><p>Required. The <span class='object_link'><a href="CryptoKey.html#name-instance_method" title="Google::Cloud::Kms::V1::CryptoKey#name (method)">name</a></span> of the
+<span class='object_link'><a href="CryptoKey.html" title="Google::Cloud::Kms::V1::CryptoKey (class)">CryptoKey</a></span> associated with the
+<span class='object_link'><a href="CryptoKeyVersion.html" title="Google::Cloud::Kms::V1::CryptoKeyVersion (class)">CryptoKeyVersions</a></span>.</p>
 </div>
       
     </li>
@@ -2890,7 +2901,8 @@ the <span class='object_link'><a href="CryptoKeyVersion.html" title="Google::Clo
       
       
         &mdash;
-        <div class='inline'><p>A <span class='object_link'><a href="CryptoKeyVersion.html" title="Google::Cloud::Kms::V1::CryptoKeyVersion (class)">CryptoKeyVersion</a></span> with initial field values.
+        <div class='inline'><p>A <span class='object_link'><a href="CryptoKeyVersion.html" title="Google::Cloud::Kms::V1::CryptoKeyVersion (class)">CryptoKeyVersion</a></span> with initial
+field values.
 A hash of the same form as <code>Google::Cloud::Kms::V1::CryptoKeyVersion</code>
 can also be provided.</p>
 </div>
@@ -2995,21 +3007,21 @@ retries, etc.</p>
       <pre class="lines">
 
 
-886
-887
-888
-889
-890
-891
-892
-893
-894
-895
-896
-897</pre>
+899
+900
+901
+902
+903
+904
+905
+906
+907
+908
+909
+910</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 886</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 899</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_crypto_key_version'>create_crypto_key_version</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -3039,7 +3051,8 @@ retries, etc.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Create a new <span class='object_link'><a href="KeyRing.html" title="Google::Cloud::Kms::V1::KeyRing (class)">KeyRing</a></span> in a given Project and Location.</p>
+    <p>Create a new <span class='object_link'><a href="KeyRing.html" title="Google::Cloud::Kms::V1::KeyRing (class)">KeyRing</a></span> in a given Project and
+Location.</p>
 
 
   </div>
@@ -3077,7 +3090,8 @@ retries, etc.</p>
       
         &mdash;
         <div class='inline'><p>Required. The resource name of the location associated with the
-<span class='object_link'><a href="KeyRing.html" title="Google::Cloud::Kms::V1::KeyRing (class)">KeyRings</a></span>, in the format <code>projects/*/locations/*</code>.</p>
+<span class='object_link'><a href="KeyRing.html" title="Google::Cloud::Kms::V1::KeyRing (class)">KeyRings</a></span>, in the format
+<code>projects/*/locations/*</code>.</p>
 </div>
       
     </li>
@@ -3213,23 +3227,23 @@ retries, etc.</p>
       <pre class="lines">
 
 
-783
-784
-785
-786
-787
-788
-789
-790
-791
 792
 793
 794
 795
-796</pre>
+796
+797
+798
+799
+800
+801
+802
+803
+804
+805</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 783</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 792</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_key_ring'>create_key_ring</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -3575,8 +3589,10 @@ retries, etc.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Decrypts data that was protected by Encrypt. The <span class='object_link'><a href="CryptoKey.html#purpose-instance_method" title="Google::Cloud::Kms::V1::CryptoKey#purpose (method)">CryptoKey#purpose</a></span>
-must be <span class='object_link'><a href="CryptoKey/CryptoKeyPurpose.html#ENCRYPT_DECRYPT-constant" title="Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose::ENCRYPT_DECRYPT (constant)">ENCRYPT_DECRYPT</a></span>.</p>
+    <p>Decrypts data that was protected by
+Encrypt. The
+<span class='object_link'><a href="CryptoKey.html#purpose-instance_method" title="Google::Cloud::Kms::V1::CryptoKey#purpose (method)">CryptoKey#purpose</a></span> must be
+<span class='object_link'><a href="CryptoKey/CryptoKeyPurpose.html#ENCRYPT_DECRYPT-constant" title="Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose::ENCRYPT_DECRYPT (constant)">ENCRYPT_DECRYPT</a></span>.</p>
 
 
   </div>
@@ -3610,8 +3626,9 @@ must be <span class='object_link'><a href="CryptoKey/CryptoKeyPurpose.html#ENCRY
       
       
         &mdash;
-        <div class='inline'><p>Required. The resource name of the <span class='object_link'><a href="CryptoKey.html" title="Google::Cloud::Kms::V1::CryptoKey (class)">CryptoKey</a></span> to use for decryption.
-The server will choose the appropriate version.</p>
+        <div class='inline'><p>Required. The resource name of the
+<span class='object_link'><a href="CryptoKey.html" title="Google::Cloud::Kms::V1::CryptoKey (class)">CryptoKey</a></span> to use for decryption. The
+server will choose the appropriate version.</p>
 </div>
       
     </li>
@@ -3746,23 +3763,23 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1083
-1084
-1085
-1086
-1087
-1088
-1089
-1090
-1091
-1092
-1093
-1094
-1095
-1096</pre>
+1111
+1112
+1113
+1114
+1115
+1116
+1117
+1118
+1119
+1120
+1121
+1122
+1123
+1124</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 1083</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 1111</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_decrypt'>decrypt</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -3794,18 +3811,24 @@ retries, etc.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Schedule a <span class='object_link'><a href="CryptoKeyVersion.html" title="Google::Cloud::Kms::V1::CryptoKeyVersion (class)">CryptoKeyVersion</a></span> for destruction.</p>
+    <p>Schedule a <span class='object_link'><a href="CryptoKeyVersion.html" title="Google::Cloud::Kms::V1::CryptoKeyVersion (class)">CryptoKeyVersion</a></span> for
+destruction.</p>
 
-<p>Upon calling this method, <span class='object_link'><a href="CryptoKeyVersion.html#state-instance_method" title="Google::Cloud::Kms::V1::CryptoKeyVersion#state (method)">CryptoKeyVersion#state</a></span> will be set to
+<p>Upon calling this method,
+<span class='object_link'><a href="CryptoKeyVersion.html#state-instance_method" title="Google::Cloud::Kms::V1::CryptoKeyVersion#state (method)">CryptoKeyVersion#state</a></span> will
+be set to
 <span class='object_link'><a href="CryptoKeyVersion/CryptoKeyVersionState.html#DESTROY_SCHEDULED-constant" title="Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::DESTROY_SCHEDULED (constant)">DESTROY_SCHEDULED</a></span>
-and <span class='object_link'><a href="CryptoKeyVersion.html#destroy_time-instance_method" title="Google::Cloud::Kms::V1::CryptoKeyVersion#destroy_time (method)">destroy_time</a></span> will be set to a time 24
-hours in the future, at which point the <span class='object_link'><a href="CryptoKeyVersion.html#state-instance_method" title="Google::Cloud::Kms::V1::CryptoKeyVersion#state (method)">state</a></span>
-will be changed to
-<span class='object_link'><a href="CryptoKeyVersion/CryptoKeyVersionState.html#DESTROYED-constant" title="Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::DESTROYED (constant)">DESTROYED</a></span>, and the key
-material will be irrevocably destroyed.</p>
+and <span class='object_link'><a href="CryptoKeyVersion.html#destroy_time-instance_method" title="Google::Cloud::Kms::V1::CryptoKeyVersion#destroy_time (method)">destroy_time</a></span> will
+be set to a time 24 hours in the future, at which point the
+<span class='object_link'><a href="CryptoKeyVersion.html#state-instance_method" title="Google::Cloud::Kms::V1::CryptoKeyVersion#state (method)">state</a></span> will be changed to
+<span class='object_link'><a href="CryptoKeyVersion/CryptoKeyVersionState.html#DESTROYED-constant" title="Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::DESTROYED (constant)">DESTROYED</a></span>,
+and the key material will be irrevocably destroyed.</p>
 
-<p>Before the <span class='object_link'><a href="CryptoKeyVersion.html#destroy_time-instance_method" title="Google::Cloud::Kms::V1::CryptoKeyVersion#destroy_time (method)">destroy_time</a></span> is reached,
-RestoreCryptoKeyVersion may be called to reverse the process.</p>
+<p>Before the
+<span class='object_link'><a href="CryptoKeyVersion.html#destroy_time-instance_method" title="Google::Cloud::Kms::V1::CryptoKeyVersion#destroy_time (method)">destroy_time</a></span> is
+reached,
+RestoreCryptoKeyVersion
+may be called to reverse the process.</p>
 
 
   </div>
@@ -3836,7 +3859,8 @@ RestoreCryptoKeyVersion may be called to reverse the process.</p>
       
       
         &mdash;
-        <div class='inline'><p>The resource name of the <span class='object_link'><a href="CryptoKeyVersion.html" title="Google::Cloud::Kms::V1::CryptoKeyVersion (class)">CryptoKeyVersion</a></span> to destroy.</p>
+        <div class='inline'><p>The resource name of the
+<span class='object_link'><a href="CryptoKeyVersion.html" title="Google::Cloud::Kms::V1::CryptoKeyVersion (class)">CryptoKeyVersion</a></span> to destroy.</p>
 </div>
       
     </li>
@@ -3939,19 +3963,19 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1167
-1168
-1169
-1170
-1171
-1172
-1173
-1174
-1175
-1176</pre>
+1206
+1207
+1208
+1209
+1210
+1211
+1212
+1213
+1214
+1215</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 1167</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 1206</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_destroy_crypto_key_version'>destroy_crypto_key_version</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -3979,8 +4003,9 @@ retries, etc.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Encrypts data, so that it can only be recovered by a call to Decrypt.
-The <span class='object_link'><a href="CryptoKey.html#purpose-instance_method" title="Google::Cloud::Kms::V1::CryptoKey#purpose (method)">CryptoKey#purpose</a></span> must be
+    <p>Encrypts data, so that it can only be recovered by a call to
+Decrypt. The
+<span class='object_link'><a href="CryptoKey.html#purpose-instance_method" title="Google::Cloud::Kms::V1::CryptoKey#purpose (method)">CryptoKey#purpose</a></span> must be
 <span class='object_link'><a href="CryptoKey/CryptoKeyPurpose.html#ENCRYPT_DECRYPT-constant" title="Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose::ENCRYPT_DECRYPT (constant)">ENCRYPT_DECRYPT</a></span>.</p>
 
 
@@ -4015,11 +4040,13 @@ The <span class='object_link'><a href="CryptoKey.html#purpose-instance_method" t
       
       
         &mdash;
-        <div class='inline'><p>Required. The resource name of the <span class='object_link'><a href="CryptoKey.html" title="Google::Cloud::Kms::V1::CryptoKey (class)">CryptoKey</a></span> or <span class='object_link'><a href="CryptoKeyVersion.html" title="Google::Cloud::Kms::V1::CryptoKeyVersion (class)">CryptoKeyVersion</a></span>
-to use for encryption.</p>
+        <div class='inline'><p>Required. The resource name of the
+<span class='object_link'><a href="CryptoKey.html" title="Google::Cloud::Kms::V1::CryptoKey (class)">CryptoKey</a></span> or
+<span class='object_link'><a href="CryptoKeyVersion.html" title="Google::Cloud::Kms::V1::CryptoKeyVersion (class)">CryptoKeyVersion</a></span> to use for
+encryption.</p>
 
-<p>If a <span class='object_link'><a href="CryptoKey.html" title="Google::Cloud::Kms::V1::CryptoKey (class)">CryptoKey</a></span> is specified, the server will use its
-<span class='object_link'><a href="CryptoKey.html#primary-instance_method" title="Google::Cloud::Kms::V1::CryptoKey#primary (method)">primary version</a></span>.</p>
+<p>If a <span class='object_link'><a href="CryptoKey.html" title="Google::Cloud::Kms::V1::CryptoKey (class)">CryptoKey</a></span> is specified, the server
+will use its <span class='object_link'><a href="CryptoKey.html#primary-instance_method" title="Google::Cloud::Kms::V1::CryptoKey#primary (method)">primary version</a></span>.</p>
 </div>
       
     </li>
@@ -4037,11 +4064,12 @@ to use for encryption.</p>
         <div class='inline'><p>Required. The data to encrypt. Must be no larger than 64KiB.</p>
 
 <p>The maximum size depends on the key version&#39;s
-<span class='object_link'><a href="CryptoKeyVersionTemplate.html#protection_level-instance_method" title="Google::Cloud::Kms::V1::CryptoKeyVersionTemplate#protection_level (method)">protection_level</a></span>. For
-<span class='object_link'><a href="ProtectionLevel.html#SOFTWARE-constant" title="Google::Cloud::Kms::V1::ProtectionLevel::SOFTWARE (constant)">SOFTWARE</a></span> keys, the plaintext must be no larger
-than 64KiB. For <span class='object_link'><a href="ProtectionLevel.html#HSM-constant" title="Google::Cloud::Kms::V1::ProtectionLevel::HSM (constant)">HSM</a></span> keys, the combined length of the
-plaintext and additional_authenticated_data fields must be no larger than
-8KiB.</p>
+<span class='object_link'><a href="CryptoKeyVersionTemplate.html#protection_level-instance_method" title="Google::Cloud::Kms::V1::CryptoKeyVersionTemplate#protection_level (method)">protection_level</a></span>.
+For <span class='object_link'><a href="ProtectionLevel.html#SOFTWARE-constant" title="Google::Cloud::Kms::V1::ProtectionLevel::SOFTWARE (constant)">SOFTWARE</a></span> keys, the
+plaintext must be no larger than 64KiB. For
+<span class='object_link'><a href="ProtectionLevel.html#HSM-constant" title="Google::Cloud::Kms::V1::ProtectionLevel::HSM (constant)">HSM</a></span> keys, the combined length of
+the plaintext and additional_authenticated_data fields must be no larger
+than 8KiB.</p>
 </div>
       
     </li>
@@ -4057,14 +4085,16 @@ plaintext and additional_authenticated_data fields must be no larger than
       
         &mdash;
         <div class='inline'><p>Optional data that, if specified, must also be provided during decryption
-through <span class='object_link'><a href="DecryptRequest.html#additional_authenticated_data-instance_method" title="Google::Cloud::Kms::V1::DecryptRequest#additional_authenticated_data (method)">DecryptRequest#additional_authenticated_data</a></span>.</p>
+through
+<span class='object_link'><a href="DecryptRequest.html#additional_authenticated_data-instance_method" title="Google::Cloud::Kms::V1::DecryptRequest#additional_authenticated_data (method)">DecryptRequest#additional_authenticated_data</a></span>.</p>
 
 <p>The maximum size depends on the key version&#39;s
-<span class='object_link'><a href="CryptoKeyVersionTemplate.html#protection_level-instance_method" title="Google::Cloud::Kms::V1::CryptoKeyVersionTemplate#protection_level (method)">protection_level</a></span>. For
-<span class='object_link'><a href="ProtectionLevel.html#SOFTWARE-constant" title="Google::Cloud::Kms::V1::ProtectionLevel::SOFTWARE (constant)">SOFTWARE</a></span> keys, the AAD must be no larger than
-64KiB. For <span class='object_link'><a href="ProtectionLevel.html#HSM-constant" title="Google::Cloud::Kms::V1::ProtectionLevel::HSM (constant)">HSM</a></span> keys, the combined length of the
-plaintext and additional_authenticated_data fields must be no larger than
-8KiB.</p>
+<span class='object_link'><a href="CryptoKeyVersionTemplate.html#protection_level-instance_method" title="Google::Cloud::Kms::V1::CryptoKeyVersionTemplate#protection_level (method)">protection_level</a></span>.
+For <span class='object_link'><a href="ProtectionLevel.html#SOFTWARE-constant" title="Google::Cloud::Kms::V1::ProtectionLevel::SOFTWARE (constant)">SOFTWARE</a></span> keys, the AAD
+must be no larger than 64KiB. For
+<span class='object_link'><a href="ProtectionLevel.html#HSM-constant" title="Google::Cloud::Kms::V1::ProtectionLevel::HSM (constant)">HSM</a></span> keys, the combined length of
+the plaintext and additional_authenticated_data fields must be no larger
+than 8KiB.</p>
 </div>
       
     </li>
@@ -4167,23 +4197,23 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1038
-1039
-1040
-1041
-1042
-1043
-1044
-1045
-1046
-1047
-1048
-1049
-1050
-1051</pre>
+1063
+1064
+1065
+1066
+1067
+1068
+1069
+1070
+1071
+1072
+1073
+1074
+1075
+1076</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 1038</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 1063</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_encrypt'>encrypt</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -4215,8 +4245,9 @@ retries, etc.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns metadata for a given <span class='object_link'><a href="CryptoKey.html" title="Google::Cloud::Kms::V1::CryptoKey (class)">CryptoKey</a></span>, as well as its
-<span class='object_link'><a href="CryptoKey.html#primary-instance_method" title="Google::Cloud::Kms::V1::CryptoKey#primary (method)">primary</a></span> <span class='object_link'><a href="CryptoKeyVersion.html" title="Google::Cloud::Kms::V1::CryptoKeyVersion (class)">CryptoKeyVersion</a></span>.</p>
+    <p>Returns metadata for a given <span class='object_link'><a href="CryptoKey.html" title="Google::Cloud::Kms::V1::CryptoKey (class)">CryptoKey</a></span>, as
+well as its <span class='object_link'><a href="CryptoKey.html#primary-instance_method" title="Google::Cloud::Kms::V1::CryptoKey#primary (method)">primary</a></span>
+<span class='object_link'><a href="CryptoKeyVersion.html" title="Google::Cloud::Kms::V1::CryptoKeyVersion (class)">CryptoKeyVersion</a></span>.</p>
 
 
   </div>
@@ -4247,7 +4278,8 @@ retries, etc.</p>
       
       
         &mdash;
-        <div class='inline'><p>The <span class='object_link'><a href="CryptoKey.html#name-instance_method" title="Google::Cloud::Kms::V1::CryptoKey#name (method)">name</a></span> of the <span class='object_link'><a href="CryptoKey.html" title="Google::Cloud::Kms::V1::CryptoKey (class)">CryptoKey</a></span> to get.</p>
+        <div class='inline'><p>The <span class='object_link'><a href="CryptoKey.html#name-instance_method" title="Google::Cloud::Kms::V1::CryptoKey#name (method)">name</a></span> of the
+<span class='object_link'><a href="CryptoKey.html" title="Google::Cloud::Kms::V1::CryptoKey (class)">CryptoKey</a></span> to get.</p>
 </div>
       
     </li>
@@ -4350,19 +4382,19 @@ retries, etc.</p>
       <pre class="lines">
 
 
-709
-710
-711
-712
-713
 714
 715
 716
 717
-718</pre>
+718
+719
+720
+721
+722
+723</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 709</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 714</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_crypto_key'>get_crypto_key</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -4390,7 +4422,8 @@ retries, etc.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns metadata for a given <span class='object_link'><a href="CryptoKeyVersion.html" title="Google::Cloud::Kms::V1::CryptoKeyVersion (class)">CryptoKeyVersion</a></span>.</p>
+    <p>Returns metadata for a given
+<span class='object_link'><a href="CryptoKeyVersion.html" title="Google::Cloud::Kms::V1::CryptoKeyVersion (class)">CryptoKeyVersion</a></span>.</p>
 
 
   </div>
@@ -4421,7 +4454,8 @@ retries, etc.</p>
       
       
         &mdash;
-        <div class='inline'><p>The <span class='object_link'><a href="CryptoKeyVersion.html#name-instance_method" title="Google::Cloud::Kms::V1::CryptoKeyVersion#name (method)">name</a></span> of the <span class='object_link'><a href="CryptoKeyVersion.html" title="Google::Cloud::Kms::V1::CryptoKeyVersion (class)">CryptoKeyVersion</a></span> to get.</p>
+        <div class='inline'><p>The <span class='object_link'><a href="CryptoKeyVersion.html#name-instance_method" title="Google::Cloud::Kms::V1::CryptoKeyVersion#name (method)">name</a></span> of the
+<span class='object_link'><a href="CryptoKeyVersion.html" title="Google::Cloud::Kms::V1::CryptoKeyVersion (class)">CryptoKeyVersion</a></span> to get.</p>
 </div>
       
     </li>
@@ -4524,19 +4558,19 @@ retries, etc.</p>
       <pre class="lines">
 
 
-739
-740
-741
-742
-743
-744
-745
 746
 747
-748</pre>
+748
+749
+750
+751
+752
+753
+754
+755</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 739</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 746</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_crypto_key_version'>get_crypto_key_version</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -4702,19 +4736,19 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1400
-1401
-1402
-1403
-1404
-1405
-1406
-1407
-1408
-1409</pre>
+1452
+1453
+1454
+1455
+1456
+1457
+1458
+1459
+1460
+1461</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 1400</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 1452</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_iam_policy'>get_iam_policy</span> \
     <span class='id identifier rubyid_resource'>resource</span><span class='comma'>,</span>
@@ -4773,7 +4807,8 @@ retries, etc.</p>
       
       
         &mdash;
-        <div class='inline'><p>The <span class='object_link'><a href="KeyRing.html#name-instance_method" title="Google::Cloud::Kms::V1::KeyRing#name (method)">name</a></span> of the <span class='object_link'><a href="KeyRing.html" title="Google::Cloud::Kms::V1::KeyRing (class)">KeyRing</a></span> to get.</p>
+        <div class='inline'><p>The <span class='object_link'><a href="KeyRing.html#name-instance_method" title="Google::Cloud::Kms::V1::KeyRing#name (method)">name</a></span> of the
+<span class='object_link'><a href="KeyRing.html" title="Google::Cloud::Kms::V1::KeyRing (class)">KeyRing</a></span> to get.</p>
 </div>
       
     </li>
@@ -4876,19 +4911,19 @@ retries, etc.</p>
       <pre class="lines">
 
 
-678
-679
-680
 681
 682
 683
 684
 685
 686
-687</pre>
+687
+688
+689
+690</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 678</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 681</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_key_ring'>get_key_ring</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -4916,9 +4951,11 @@ retries, etc.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns the public key for the given <span class='object_link'><a href="CryptoKeyVersion.html" title="Google::Cloud::Kms::V1::CryptoKeyVersion (class)">CryptoKeyVersion</a></span>. The
+    <p>Returns the public key for the given
+<span class='object_link'><a href="CryptoKeyVersion.html" title="Google::Cloud::Kms::V1::CryptoKeyVersion (class)">CryptoKeyVersion</a></span>. The
 <span class='object_link'><a href="CryptoKey.html#purpose-instance_method" title="Google::Cloud::Kms::V1::CryptoKey#purpose (method)">CryptoKey#purpose</a></span> must be
-<span class='object_link'><a href="CryptoKey/CryptoKeyPurpose.html#ASYMMETRIC_SIGN-constant" title="Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose::ASYMMETRIC_SIGN (constant)">ASYMMETRIC_SIGN</a></span> or
+<span class='object_link'><a href="CryptoKey/CryptoKeyPurpose.html#ASYMMETRIC_SIGN-constant" title="Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose::ASYMMETRIC_SIGN (constant)">ASYMMETRIC_SIGN</a></span>
+or
 <span class='object_link'><a href="CryptoKey/CryptoKeyPurpose.html#ASYMMETRIC_DECRYPT-constant" title="Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose::ASYMMETRIC_DECRYPT (constant)">ASYMMETRIC_DECRYPT</a></span>.</p>
 
 
@@ -4950,8 +4987,8 @@ retries, etc.</p>
       
       
         &mdash;
-        <div class='inline'><p>The <span class='object_link'><a href="CryptoKeyVersion.html#name-instance_method" title="Google::Cloud::Kms::V1::CryptoKeyVersion#name (method)">name</a></span> of the <span class='object_link'><a href="CryptoKeyVersion.html" title="Google::Cloud::Kms::V1::CryptoKeyVersion (class)">CryptoKeyVersion</a></span> public key to
-get.</p>
+        <div class='inline'><p>The <span class='object_link'><a href="CryptoKeyVersion.html#name-instance_method" title="Google::Cloud::Kms::V1::CryptoKeyVersion#name (method)">name</a></span> of the
+<span class='object_link'><a href="CryptoKeyVersion.html" title="Google::Cloud::Kms::V1::CryptoKeyVersion (class)">CryptoKeyVersion</a></span> public key to get.</p>
 </div>
       
     </li>
@@ -5054,19 +5091,19 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1237
-1238
-1239
-1240
-1241
-1242
-1243
-1244
-1245
-1246</pre>
+1281
+1282
+1283
+1284
+1285
+1286
+1287
+1288
+1289
+1290</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 1237</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 1281</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_public_key'>get_public_key</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -5227,7 +5264,8 @@ retries, etc.</p>
       
       
         &mdash;
-        <div class='inline'><p>Required. The resource name of the <span class='object_link'><a href="CryptoKey.html" title="Google::Cloud::Kms::V1::CryptoKey (class)">CryptoKey</a></span> to list, in the format
+        <div class='inline'><p>Required. The resource name of the
+<span class='object_link'><a href="CryptoKey.html" title="Google::Cloud::Kms::V1::CryptoKey (class)">CryptoKey</a></span> to list, in the format
 <code>projects/*/locations/*/keyRings/*/cryptoKeys/*</code>.</p>
 </div>
       
@@ -5372,8 +5410,6 @@ object.</p>
       <pre class="lines">
 
 
-644
-645
 646
 647
 648
@@ -5385,10 +5421,12 @@ object.</p>
 654
 655
 656
-657</pre>
+657
+658
+659</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 644</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 646</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_crypto_key_versions'>list_crypto_key_versions</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -5463,8 +5501,8 @@ object.</p>
       
       
         &mdash;
-        <div class='inline'><p>Required. The resource name of the <span class='object_link'><a href="KeyRing.html" title="Google::Cloud::Kms::V1::KeyRing (class)">KeyRing</a></span> to list, in the format
-<code>projects/*/locations/*/keyRings/*</code>.</p>
+        <div class='inline'><p>Required. The resource name of the <span class='object_link'><a href="KeyRing.html" title="Google::Cloud::Kms::V1::KeyRing (class)">KeyRing</a></span>
+to list, in the format <code>projects/*/locations/*/keyRings/*</code>.</p>
 </div>
       
     </li>
@@ -5608,7 +5646,6 @@ object.</p>
       <pre class="lines">
 
 
-585
 586
 587
 588
@@ -5621,10 +5658,11 @@ object.</p>
 595
 596
 597
-598</pre>
+598
+599</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 585</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 586</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_crypto_keys'>list_crypto_keys</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -5700,7 +5738,8 @@ object.</p>
       
         &mdash;
         <div class='inline'><p>Required. The resource name of the location associated with the
-<span class='object_link'><a href="KeyRing.html" title="Google::Cloud::Kms::V1::KeyRing (class)">KeyRings</a></span>, in the format <code>projects/*/locations/*</code>.</p>
+<span class='object_link'><a href="KeyRing.html" title="Google::Cloud::Kms::V1::KeyRing (class)">KeyRings</a></span>, in the format
+<code>projects/*/locations/*</code>.</p>
 </div>
       
     </li>
@@ -5829,7 +5868,6 @@ object.</p>
       <pre class="lines">
 
 
-528
 529
 530
 531
@@ -5840,10 +5878,11 @@ object.</p>
 536
 537
 538
-539</pre>
+539
+540</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 528</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 529</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_key_rings'>list_key_rings</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -5956,9 +5995,11 @@ object.</p>
 <span class='object_link'><a href="CryptoKeyVersion/CryptoKeyVersionState.html#DESTROY_SCHEDULED-constant" title="Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::DESTROY_SCHEDULED (constant)">DESTROY_SCHEDULED</a></span>
 state.</p>
 
-<p>Upon restoration of the CryptoKeyVersion, <span class='object_link'><a href="CryptoKeyVersion.html#state-instance_method" title="Google::Cloud::Kms::V1::CryptoKeyVersion#state (method)">state</a></span>
-will be set to <span class='object_link'><a href="CryptoKeyVersion/CryptoKeyVersionState.html#DISABLED-constant" title="Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::DISABLED (constant)">DISABLED</a></span>,
-and <span class='object_link'><a href="CryptoKeyVersion.html#destroy_time-instance_method" title="Google::Cloud::Kms::V1::CryptoKeyVersion#destroy_time (method)">destroy_time</a></span> will be cleared.</p>
+<p>Upon restoration of the CryptoKeyVersion,
+<span class='object_link'><a href="CryptoKeyVersion.html#state-instance_method" title="Google::Cloud::Kms::V1::CryptoKeyVersion#state (method)">state</a></span> will be set to
+<span class='object_link'><a href="CryptoKeyVersion/CryptoKeyVersionState.html#DISABLED-constant" title="Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::DISABLED (constant)">DISABLED</a></span>,
+and <span class='object_link'><a href="CryptoKeyVersion.html#destroy_time-instance_method" title="Google::Cloud::Kms::V1::CryptoKeyVersion#destroy_time (method)">destroy_time</a></span> will
+be cleared.</p>
 
 
   </div>
@@ -5989,7 +6030,8 @@ and <span class='object_link'><a href="CryptoKeyVersion.html#destroy_time-instan
       
       
         &mdash;
-        <div class='inline'><p>The resource name of the <span class='object_link'><a href="CryptoKeyVersion.html" title="Google::Cloud::Kms::V1::CryptoKeyVersion (class)">CryptoKeyVersion</a></span> to restore.</p>
+        <div class='inline'><p>The resource name of the
+<span class='object_link'><a href="CryptoKeyVersion.html" title="Google::Cloud::Kms::V1::CryptoKeyVersion (class)">CryptoKeyVersion</a></span> to restore.</p>
 </div>
       
     </li>
@@ -6092,19 +6134,19 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1203
-1204
-1205
-1206
-1207
-1208
-1209
-1210
-1211
-1212</pre>
+1245
+1246
+1247
+1248
+1249
+1250
+1251
+1252
+1253
+1254</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 1203</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 1245</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_restore_crypto_key_version'>restore_crypto_key_version</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -6292,21 +6334,21 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1364
-1365
-1366
-1367
-1368
-1369
-1370
-1371
-1372
-1373
-1374
-1375</pre>
+1416
+1417
+1418
+1419
+1420
+1421
+1422
+1423
+1424
+1425
+1426
+1427</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 1364</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 1416</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_set_iam_policy'>set_iam_policy</span> \
     <span class='id identifier rubyid_resource'>resource</span><span class='comma'>,</span>
@@ -6495,21 +6537,21 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1442
-1443
-1444
-1445
-1446
-1447
-1448
-1449
-1450
-1451
-1452
-1453</pre>
+1494
+1495
+1496
+1497
+1498
+1499
+1500
+1501
+1502
+1503
+1504
+1505</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 1442</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 1494</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_test_iam_permissions'>test_iam_permissions</span> \
     <span class='id identifier rubyid_resource'>resource</span><span class='comma'>,</span>
@@ -6697,21 +6739,21 @@ retries, etc.</p>
       <pre class="lines">
 
 
-929
-930
-931
-932
-933
-934
-935
-936
-937
-938
-939
-940</pre>
+942
+943
+944
+945
+946
+947
+948
+949
+950
+951
+952
+953</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 929</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 942</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update_crypto_key'>update_crypto_key</span> \
     <span class='id identifier rubyid_crypto_key'>crypto_key</span><span class='comma'>,</span>
@@ -6741,7 +6783,9 @@ retries, etc.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Update the version of a <span class='object_link'><a href="CryptoKey.html" title="Google::Cloud::Kms::V1::CryptoKey (class)">CryptoKey</a></span> that will be used in Encrypt.</p>
+    <p>Update the version of a <span class='object_link'><a href="CryptoKey.html" title="Google::Cloud::Kms::V1::CryptoKey (class)">CryptoKey</a></span> that
+will be used in
+Encrypt.</p>
 
 <p>Returns an error if called on an asymmetric key.</p>
 
@@ -6777,7 +6821,8 @@ retries, etc.</p>
       
       
         &mdash;
-        <div class='inline'><p>The resource name of the <span class='object_link'><a href="CryptoKey.html" title="Google::Cloud::Kms::V1::CryptoKey (class)">CryptoKey</a></span> to update.</p>
+        <div class='inline'><p>The resource name of the <span class='object_link'><a href="CryptoKey.html" title="Google::Cloud::Kms::V1::CryptoKey (class)">CryptoKey</a></span> to
+update.</p>
 </div>
       
     </li>
@@ -6792,7 +6837,8 @@ retries, etc.</p>
       
       
         &mdash;
-        <div class='inline'><p>The id of the child <span class='object_link'><a href="CryptoKeyVersion.html" title="Google::Cloud::Kms::V1::CryptoKeyVersion (class)">CryptoKeyVersion</a></span> to use as primary.</p>
+        <div class='inline'><p>The id of the child
+<span class='object_link'><a href="CryptoKeyVersion.html" title="Google::Cloud::Kms::V1::CryptoKeyVersion (class)">CryptoKeyVersion</a></span> to use as primary.</p>
 </div>
       
     </li>
@@ -6895,21 +6941,21 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1124
-1125
-1126
-1127
-1128
-1129
-1130
-1131
-1132
-1133
-1134
-1135</pre>
+1156
+1157
+1158
+1159
+1160
+1161
+1162
+1163
+1164
+1165
+1166
+1167</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 1124</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 1156</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update_crypto_key_primary_version'>update_crypto_key_primary_version</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -6939,13 +6985,18 @@ retries, etc.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Update a <span class='object_link'><a href="CryptoKeyVersion.html" title="Google::Cloud::Kms::V1::CryptoKeyVersion (class)">CryptoKeyVersion</a></span>&#39;s metadata.</p>
+    <p>Update a <span class='object_link'><a href="CryptoKeyVersion.html" title="Google::Cloud::Kms::V1::CryptoKeyVersion (class)">CryptoKeyVersion</a></span>&#39;s
+metadata.</p>
 
 <p><span class='object_link'><a href="CryptoKeyVersion.html#state-instance_method" title="Google::Cloud::Kms::V1::CryptoKeyVersion#state (method)">state</a></span> may be changed between
-<span class='object_link'><a href="CryptoKeyVersion/CryptoKeyVersionState.html#ENABLED-constant" title="Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::ENABLED (constant)">ENABLED</a></span> and
-<span class='object_link'><a href="CryptoKeyVersion/CryptoKeyVersionState.html#DISABLED-constant" title="Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::DISABLED (constant)">DISABLED</a></span> using this
-method. See DestroyCryptoKeyVersion and RestoreCryptoKeyVersion to
-move between other states.</p>
+<span class='object_link'><a href="CryptoKeyVersion/CryptoKeyVersionState.html#ENABLED-constant" title="Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::ENABLED (constant)">ENABLED</a></span>
+and
+<span class='object_link'><a href="CryptoKeyVersion/CryptoKeyVersionState.html#DISABLED-constant" title="Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::DISABLED (constant)">DISABLED</a></span>
+using this method. See
+DestroyCryptoKeyVersion
+and
+RestoreCryptoKeyVersion
+to move between other states.</p>
 
 
   </div>
@@ -6981,7 +7032,8 @@ move between other states.</p>
       
       
         &mdash;
-        <div class='inline'><p><span class='object_link'><a href="CryptoKeyVersion.html" title="Google::Cloud::Kms::V1::CryptoKeyVersion (class)">CryptoKeyVersion</a></span> with updated values.
+        <div class='inline'><p><span class='object_link'><a href="CryptoKeyVersion.html" title="Google::Cloud::Kms::V1::CryptoKeyVersion (class)">CryptoKeyVersion</a></span> with updated
+values.
 A hash of the same form as <code>Google::Cloud::Kms::V1::CryptoKeyVersion</code>
 can also be provided.</p>
 </div>
@@ -7103,21 +7155,21 @@ retries, etc.</p>
       <pre class="lines">
 
 
-978
-979
-980
-981
-982
-983
-984
-985
-986
-987
-988
-989</pre>
+997
+998
+999
+1000
+1001
+1002
+1003
+1004
+1005
+1006
+1007
+1008</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 978</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 997</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update_crypto_key_version'>update_crypto_key_version</span> \
     <span class='id identifier rubyid_crypto_key_version'>crypto_key_version</span><span class='comma'>,</span>
