@@ -24,11 +24,10 @@ module Google
       # @!attribute [rw] rows
       #   @return [Array<Google::Protobuf::ListValue>]
       #     Each element in `rows` is a row whose format is defined by
-      #     {Google::Spanner::V1::ResultSetMetadata#row_type metadata::row_type}. The ith element
-      #     in each row matches the ith field in
-      #     {Google::Spanner::V1::ResultSetMetadata#row_type metadata::row_type}. Elements are
-      #     encoded based on type as described
-      #     {Google::Spanner::V1::TypeCode here}.
+      #     {Google::Spanner::V1::ResultSetMetadata#row_type metadata::row_type}. The ith
+      #     element in each row matches the ith field in
+      #     {Google::Spanner::V1::ResultSetMetadata#row_type metadata::row_type}. Elements
+      #     are encoded based on type as described {Google::Spanner::V1::TypeCode here}.
       # @!attribute [rw] stats
       #   @return [Google::Spanner::V1::ResultSetStats]
       #     Query plan and execution statistics for the SQL statement that
@@ -36,7 +35,8 @@ module Google
       #     {Google::Spanner::V1::ExecuteSqlRequest#query_mode ExecuteSqlRequest#query_mode}.
       #     DML statements always produce stats containing the number of rows
       #     modified, unless executed using the
-      #     {Google::Spanner::V1::ExecuteSqlRequest::QueryMode::PLAN ExecuteSqlRequest::QueryMode::PLAN} {Google::Spanner::V1::ExecuteSqlRequest#query_mode ExecuteSqlRequest#query_mode}.
+      #     {Google::Spanner::V1::ExecuteSqlRequest::QueryMode::PLAN ExecuteSqlRequest::QueryMode::PLAN}
+      #     {Google::Spanner::V1::ExecuteSqlRequest#query_mode ExecuteSqlRequest#query_mode}.
       #     Other fields may or may not be populated, based on the
       #     {Google::Spanner::V1::ExecuteSqlRequest#query_mode ExecuteSqlRequest#query_mode}.
       class ResultSet; end
@@ -61,9 +61,10 @@ module Google
       #
       #     It is possible that the last value in values is "chunked",
       #     meaning that the rest of the value is sent in subsequent
-      #     `PartialResultSet`(s). This is denoted by the {Google::Spanner::V1::PartialResultSet#chunked_value chunked_value}
-      #     field. Two or more chunked values can be merged to form a
-      #     complete value as follows:
+      #     `PartialResultSet`(s). This is denoted by the
+      #     {Google::Spanner::V1::PartialResultSet#chunked_value chunked_value} field.
+      #     Two or more chunked values can be merged to form a complete value as
+      #     follows:
       #
       #     * `bool/number/null`: cannot be chunked
       #       * `string`: concatenate the strings
@@ -125,9 +126,10 @@ module Google
       #     field value `"World" = "W" + "orl" + "d"`.
       # @!attribute [rw] chunked_value
       #   @return [true, false]
-      #     If true, then the final value in {Google::Spanner::V1::PartialResultSet#values values} is chunked, and must
-      #     be combined with more values from subsequent `PartialResultSet`s
-      #     to obtain a complete field value.
+      #     If true, then the final value in
+      #     {Google::Spanner::V1::PartialResultSet#values values} is chunked, and must be
+      #     combined with more values from subsequent `PartialResultSet`s to obtain a
+      #     complete field value.
       # @!attribute [rw] resume_token
       #   @return [String]
       #     Streaming calls might be interrupted for a variety of reasons, such
@@ -139,13 +141,13 @@ module Google
       #   @return [Google::Spanner::V1::ResultSetStats]
       #     Query plan and execution statistics for the statement that produced this
       #     streaming result set. These can be requested by setting
-      #     {Google::Spanner::V1::ExecuteSqlRequest#query_mode ExecuteSqlRequest#query_mode} and are sent
-      #     only once with the last response in the stream.
-      #     This field will also be present in the last response for DML
-      #     statements.
+      #     {Google::Spanner::V1::ExecuteSqlRequest#query_mode ExecuteSqlRequest#query_mode}
+      #     and are sent only once with the last response in the stream. This field
+      #     will also be present in the last response for DML statements.
       class PartialResultSet; end
 
-      # Metadata about a {Google::Spanner::V1::ResultSet ResultSet} or {Google::Spanner::V1::PartialResultSet PartialResultSet}.
+      # Metadata about a {Google::Spanner::V1::ResultSet ResultSet} or
+      # {Google::Spanner::V1::PartialResultSet PartialResultSet}.
       # @!attribute [rw] row_type
       #   @return [Google::Spanner::V1::StructType]
       #     Indicates the field names and types for the rows in the result
@@ -162,10 +164,12 @@ module Google
       #     information about the new transaction is yielded here.
       class ResultSetMetadata; end
 
-      # Additional statistics about a {Google::Spanner::V1::ResultSet ResultSet} or {Google::Spanner::V1::PartialResultSet PartialResultSet}.
+      # Additional statistics about a {Google::Spanner::V1::ResultSet ResultSet} or
+      # {Google::Spanner::V1::PartialResultSet PartialResultSet}.
       # @!attribute [rw] query_plan
       #   @return [Google::Spanner::V1::QueryPlan]
-      #     {Google::Spanner::V1::QueryPlan QueryPlan} for the query associated with this result.
+      #     {Google::Spanner::V1::QueryPlan QueryPlan} for the query associated with this
+      #     result.
       # @!attribute [rw] query_stats
       #   @return [Google::Protobuf::Struct]
       #     Aggregated statistics from the execution of the query. Only present when

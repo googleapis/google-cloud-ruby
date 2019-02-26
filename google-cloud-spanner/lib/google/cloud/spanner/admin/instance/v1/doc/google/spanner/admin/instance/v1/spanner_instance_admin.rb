@@ -52,15 +52,16 @@ module Google
           #     Required. The number of nodes allocated to this instance. This may be zero
           #     in API responses for instances that are not yet in state `READY`.
           #
-          #     See [the documentation](https://cloud.google.com/spanner/docs/instances#node_count)
+          #     See [the
+          #     documentation](https://cloud.google.com/spanner/docs/instances#node_count)
           #     for more information about nodes.
           # @!attribute [rw] state
           #   @return [Google::Spanner::Admin::Instance::V1::Instance::State]
           #     Output only. The current instance state. For
-          #     {Google::Spanner::Admin::Instance::V1::InstanceAdmin::CreateInstance CreateInstance}, the state must be
-          #     either omitted or set to `CREATING`. For
-          #     {Google::Spanner::Admin::Instance::V1::InstanceAdmin::UpdateInstance UpdateInstance}, the state must be
-          #     either omitted or set to `READY`.
+          #     {Google::Spanner::Admin::Instance::V1::InstanceAdmin::CreateInstance CreateInstance},
+          #     the state must be either omitted or set to `CREATING`. For
+          #     {Google::Spanner::Admin::Instance::V1::InstanceAdmin::UpdateInstance UpdateInstance},
+          #     the state must be either omitted or set to `READY`.
           # @!attribute [rw] labels
           #   @return [Hash{String => String}]
           #     Cloud Labels are a flexible and lightweight mechanism for organizing cloud
@@ -101,7 +102,8 @@ module Google
             end
           end
 
-          # The request for {Google::Spanner::Admin::Instance::V1::InstanceAdmin::ListInstanceConfigs ListInstanceConfigs}.
+          # The request for
+          # {Google::Spanner::Admin::Instance::V1::InstanceAdmin::ListInstanceConfigs ListInstanceConfigs}.
           # @!attribute [rw] parent
           #   @return [String]
           #     Required. The name of the project for which a list of supported instance
@@ -115,18 +117,20 @@ module Google
           #   @return [String]
           #     If non-empty, `page_token` should contain a
           #     {Google::Spanner::Admin::Instance::V1::ListInstanceConfigsResponse#next_page_token next_page_token}
-          #     from a previous {Google::Spanner::Admin::Instance::V1::ListInstanceConfigsResponse ListInstanceConfigsResponse}.
+          #     from a previous
+          #     {Google::Spanner::Admin::Instance::V1::ListInstanceConfigsResponse ListInstanceConfigsResponse}.
           class ListInstanceConfigsRequest; end
 
-          # The response for {Google::Spanner::Admin::Instance::V1::InstanceAdmin::ListInstanceConfigs ListInstanceConfigs}.
+          # The response for
+          # {Google::Spanner::Admin::Instance::V1::InstanceAdmin::ListInstanceConfigs ListInstanceConfigs}.
           # @!attribute [rw] instance_configs
           #   @return [Array<Google::Spanner::Admin::Instance::V1::InstanceConfig>]
           #     The list of requested instance configurations.
           # @!attribute [rw] next_page_token
           #   @return [String]
           #     `next_page_token` can be sent in a subsequent
-          #     {Google::Spanner::Admin::Instance::V1::InstanceAdmin::ListInstanceConfigs ListInstanceConfigs} call to
-          #     fetch more of the matching instance configurations.
+          #     {Google::Spanner::Admin::Instance::V1::InstanceAdmin::ListInstanceConfigs ListInstanceConfigs}
+          #     call to fetch more of the matching instance configurations.
           class ListInstanceConfigsResponse; end
 
           # The request for
@@ -137,14 +141,16 @@ module Google
           #     the form `projects/<project>/instanceConfigs/<config>`.
           class GetInstanceConfigRequest; end
 
-          # The request for {Google::Spanner::Admin::Instance::V1::InstanceAdmin::GetInstance GetInstance}.
+          # The request for
+          # {Google::Spanner::Admin::Instance::V1::InstanceAdmin::GetInstance GetInstance}.
           # @!attribute [rw] name
           #   @return [String]
           #     Required. The name of the requested instance. Values are of the form
           #     `projects/<project>/instances/<instance>`.
           class GetInstanceRequest; end
 
-          # The request for {Google::Spanner::Admin::Instance::V1::InstanceAdmin::CreateInstance CreateInstance}.
+          # The request for
+          # {Google::Spanner::Admin::Instance::V1::InstanceAdmin::CreateInstance CreateInstance}.
           # @!attribute [rw] parent
           #   @return [String]
           #     Required. The name of the project in which to create the instance. Values
@@ -160,7 +166,8 @@ module Google
           #     specified must be `<parent>/instances/<instance_id>`.
           class CreateInstanceRequest; end
 
-          # The request for {Google::Spanner::Admin::Instance::V1::InstanceAdmin::ListInstances ListInstances}.
+          # The request for
+          # {Google::Spanner::Admin::Instance::V1::InstanceAdmin::ListInstances ListInstances}.
           # @!attribute [rw] parent
           #   @return [String]
           #     Required. The name of the project for which a list of instances is
@@ -172,8 +179,9 @@ module Google
           # @!attribute [rw] page_token
           #   @return [String]
           #     If non-empty, `page_token` should contain a
-          #     {Google::Spanner::Admin::Instance::V1::ListInstancesResponse#next_page_token next_page_token} from a
-          #     previous {Google::Spanner::Admin::Instance::V1::ListInstancesResponse ListInstancesResponse}.
+          #     {Google::Spanner::Admin::Instance::V1::ListInstancesResponse#next_page_token next_page_token}
+          #     from a previous
+          #     {Google::Spanner::Admin::Instance::V1::ListInstancesResponse ListInstancesResponse}.
           # @!attribute [rw] filter
           #   @return [String]
           #     An expression for filtering the results of the request. Filter rules are
@@ -197,31 +205,38 @@ module Google
           #         containing "dev".
           class ListInstancesRequest; end
 
-          # The response for {Google::Spanner::Admin::Instance::V1::InstanceAdmin::ListInstances ListInstances}.
+          # The response for
+          # {Google::Spanner::Admin::Instance::V1::InstanceAdmin::ListInstances ListInstances}.
           # @!attribute [rw] instances
           #   @return [Array<Google::Spanner::Admin::Instance::V1::Instance>]
           #     The list of requested instances.
           # @!attribute [rw] next_page_token
           #   @return [String]
           #     `next_page_token` can be sent in a subsequent
-          #     {Google::Spanner::Admin::Instance::V1::InstanceAdmin::ListInstances ListInstances} call to fetch more
-          #     of the matching instances.
+          #     {Google::Spanner::Admin::Instance::V1::InstanceAdmin::ListInstances ListInstances}
+          #     call to fetch more of the matching instances.
           class ListInstancesResponse; end
 
-          # The request for {Google::Spanner::Admin::Instance::V1::InstanceAdmin::UpdateInstance UpdateInstance}.
+          # The request for
+          # {Google::Spanner::Admin::Instance::V1::InstanceAdmin::UpdateInstance UpdateInstance}.
           # @!attribute [rw] instance
           #   @return [Google::Spanner::Admin::Instance::V1::Instance]
           #     Required. The instance to update, which must always include the instance
-          #     name.  Otherwise, only fields mentioned in [][google.spanner.admin.instance.v1.UpdateInstanceRequest.field_mask] need be included.
+          #     name.  Otherwise, only fields mentioned in
+          #     [][google.spanner.admin.instance.v1.UpdateInstanceRequest.field_mask] need
+          #     be included.
           # @!attribute [rw] field_mask
           #   @return [Google::Protobuf::FieldMask]
-          #     Required. A mask specifying which fields in [][google.spanner.admin.instance.v1.UpdateInstanceRequest.instance] should be updated.
-          #     The field mask must always be specified; this prevents any future fields in
-          #     [][google.spanner.admin.instance.v1.Instance] from being erased accidentally by clients that do not know
-          #     about them.
+          #     Required. A mask specifying which fields in
+          #     [][google.spanner.admin.instance.v1.UpdateInstanceRequest.instance] should
+          #     be updated. The field mask must always be specified; this prevents any
+          #     future fields in
+          #     [][google.spanner.admin.instance.v1.Instance] from being erased
+          #     accidentally by clients that do not know about them.
           class UpdateInstanceRequest; end
 
-          # The request for {Google::Spanner::Admin::Instance::V1::InstanceAdmin::DeleteInstance DeleteInstance}.
+          # The request for
+          # {Google::Spanner::Admin::Instance::V1::InstanceAdmin::DeleteInstance DeleteInstance}.
           # @!attribute [rw] name
           #   @return [String]
           #     Required. The name of the instance to be deleted. Values are of the form
@@ -236,8 +251,8 @@ module Google
           # @!attribute [rw] start_time
           #   @return [Google::Protobuf::Timestamp]
           #     The time at which the
-          #     {Google::Spanner::Admin::Instance::V1::InstanceAdmin::CreateInstance CreateInstance} request was
-          #     received.
+          #     {Google::Spanner::Admin::Instance::V1::InstanceAdmin::CreateInstance CreateInstance}
+          #     request was received.
           # @!attribute [rw] cancel_time
           #   @return [Google::Protobuf::Timestamp]
           #     The time at which this operation was cancelled. If set, this operation is
@@ -255,7 +270,8 @@ module Google
           #     The desired end state of the update.
           # @!attribute [rw] start_time
           #   @return [Google::Protobuf::Timestamp]
-          #     The time at which {Google::Spanner::Admin::Instance::V1::InstanceAdmin::UpdateInstance UpdateInstance}
+          #     The time at which
+          #     {Google::Spanner::Admin::Instance::V1::InstanceAdmin::UpdateInstance UpdateInstance}
           #     request was received.
           # @!attribute [rw] cancel_time
           #   @return [Google::Protobuf::Timestamp]

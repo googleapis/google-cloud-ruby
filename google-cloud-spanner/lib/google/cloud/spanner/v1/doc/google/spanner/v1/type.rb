@@ -23,23 +23,26 @@ module Google
       #     Required. The {Google::Spanner::V1::TypeCode TypeCode} for this type.
       # @!attribute [rw] array_element_type
       #   @return [Google::Spanner::V1::Type]
-      #     If {Google::Spanner::V1::Type#code code} == {Google::Spanner::V1::TypeCode::ARRAY ARRAY}, then `array_element_type`
-      #     is the type of the array elements.
+      #     If {Google::Spanner::V1::Type#code code} ==
+      #     {Google::Spanner::V1::TypeCode::ARRAY ARRAY}, then `array_element_type` is the
+      #     type of the array elements.
       # @!attribute [rw] struct_type
       #   @return [Google::Spanner::V1::StructType]
-      #     If {Google::Spanner::V1::Type#code code} == {Google::Spanner::V1::TypeCode::STRUCT STRUCT}, then `struct_type`
-      #     provides type information for the struct's fields.
+      #     If {Google::Spanner::V1::Type#code code} ==
+      #     {Google::Spanner::V1::TypeCode::STRUCT STRUCT}, then `struct_type` provides
+      #     type information for the struct's fields.
       class Type; end
 
-      # `StructType` defines the fields of a {Google::Spanner::V1::TypeCode::STRUCT STRUCT} type.
+      # `StructType` defines the fields of a
+      # {Google::Spanner::V1::TypeCode::STRUCT STRUCT} type.
       # @!attribute [rw] fields
       #   @return [Array<Google::Spanner::V1::StructType::Field>]
       #     The list of fields that make up this struct. Order is
       #     significant, because values of this struct type are represented as
       #     lists, where the order of field values matches the order of
-      #     fields in the {Google::Spanner::V1::StructType StructType}. In turn, the order of fields
-      #     matches the order of columns in a read request, or the order of
-      #     fields in the `SELECT` clause of a query.
+      #     fields in the {Google::Spanner::V1::StructType StructType}. In turn, the
+      #     order of fields matches the order of columns in a read request, or the
+      #     order of fields in the `SELECT` clause of a query.
       class StructType
         # Message representing a single field of a struct.
         # @!attribute [rw] name
@@ -99,7 +102,8 @@ module Google
         BYTES = 7
 
         # Encoded as `list`, where the list elements are represented
-        # according to {Google::Spanner::V1::Type#array_element_type array_element_type}.
+        # according to
+        # {Google::Spanner::V1::Type#array_element_type array_element_type}.
         ARRAY = 8
 
         # Encoded as `list`, where list element `i` is represented according
