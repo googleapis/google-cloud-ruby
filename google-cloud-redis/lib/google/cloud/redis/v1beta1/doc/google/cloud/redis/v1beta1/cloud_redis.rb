@@ -141,7 +141,8 @@ module Google
           end
         end
 
-        # Request for {Google::Cloud::Redis::V1beta1::CloudRedis::ListInstances ListInstances}.
+        # Request for
+        # {Google::Cloud::Redis::V1beta1::CloudRedis::ListInstances ListInstances}.
         # @!attribute [rw] parent
         #   @return [String]
         #     Required. The resource name of the instance location using the form:
@@ -162,7 +163,8 @@ module Google
         #     if any.
         class ListInstancesRequest; end
 
-        # Response for {Google::Cloud::Redis::V1beta1::CloudRedis::ListInstances ListInstances}.
+        # Response for
+        # {Google::Cloud::Redis::V1beta1::CloudRedis::ListInstances ListInstances}.
         # @!attribute [rw] instances
         #   @return [Array<Google::Cloud::Redis::V1beta1::Instance>]
         #     A list of Redis instances in the project in the specified location,
@@ -189,7 +191,8 @@ module Google
         #     where `location_id` refers to a GCP region
         class GetInstanceRequest; end
 
-        # Request for {Google::Cloud::Redis::V1beta1::CloudRedis::CreateInstance CreateInstance}.
+        # Request for
+        # {Google::Cloud::Redis::V1beta1::CloudRedis::CreateInstance CreateInstance}.
         # @!attribute [rw] parent
         #   @return [String]
         #     Required. The resource name of the instance location using the form:
@@ -210,7 +213,8 @@ module Google
         #     Required. A Redis [Instance] resource
         class CreateInstanceRequest; end
 
-        # Request for {Google::Cloud::Redis::V1beta1::CloudRedis::UpdateInstance UpdateInstance}.
+        # Request for
+        # {Google::Cloud::Redis::V1beta1::CloudRedis::UpdateInstance UpdateInstance}.
         # @!attribute [rw] update_mask
         #   @return [Google::Protobuf::FieldMask]
         #     Required. Mask of fields to update. At least one path must be supplied in
@@ -226,7 +230,8 @@ module Google
         #     Only fields specified in update_mask are updated.
         class UpdateInstanceRequest; end
 
-        # Request for {Google::Cloud::Redis::V1beta1::CloudRedis::DeleteInstance DeleteInstance}.
+        # Request for
+        # {Google::Cloud::Redis::V1beta1::CloudRedis::DeleteInstance DeleteInstance}.
         # @!attribute [rw] name
         #   @return [String]
         #     Required. Redis instance resource name using the form:
