@@ -684,7 +684,8 @@ custom error handling.</p>
 for authentication. To use an API key, append it to the URL as the value of
 a <code>key</code> parameter. For example:</p>
 
-<pre class="code ruby"><code class="ruby">POST https://clouderrorreporting.googleapis.com/v1beta1/projects/example-project/events:report?key=123ABC456</code></pre>
+<pre class="code ruby"><code class="ruby">POST
+https://clouderrorreporting.googleapis.com/v1beta1/projects/example-project/events:report?key=123ABC456</code></pre>
 
 
   </div>
@@ -720,8 +721,9 @@ a <code>key</code> parameter. For example:</p>
         &mdash;
         <div class='inline'><p>[Required] The resource name of the Google Cloud Platform project. Written
 as <code>projects/</code> plus the
-<a href="https://support.google.com/cloud/answer/6158840">Google Cloud Platform project ID</a>.
-Example: <code>projects/my-project-123</code>.</p>
+<a href="https://support.google.com/cloud/answer/6158840">Google Cloud Platform project
+ID</a>. Example:
+<code>projects/my-project-123</code>.</p>
 </div>
       
     </li>
@@ -841,8 +843,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-223
-224
 225
 226
 227
@@ -852,10 +852,12 @@ retries, etc.</p>
 231
 232
 233
-234</pre>
+234
+235
+236</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/error_reporting/v1beta1/report_errors_service_client.rb', line 223</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/error_reporting/v1beta1/report_errors_service_client.rb', line 225</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_report_error_event'>report_error_event</span> \
     <span class='id identifier rubyid_project_name'>project_name</span><span class='comma'>,</span>
