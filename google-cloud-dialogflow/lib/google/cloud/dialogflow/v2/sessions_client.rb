@@ -33,9 +33,10 @@ module Google
     module Dialogflow
       module V2
         # A session represents an interaction with a user. You retrieve user input
-        # and pass it to the {Google::Cloud::Dialogflow::V2::Sessions::DetectIntent DetectIntent} (or
-        # {Google::Cloud::Dialogflow::V2::Sessions::StreamingDetectIntent StreamingDetectIntent}) method to determine
-        # user intent and respond.
+        # and pass it to the
+        # {Google::Cloud::Dialogflow::V2::Sessions::DetectIntent DetectIntent} (or
+        # {Google::Cloud::Dialogflow::V2::Sessions::StreamingDetectIntent StreamingDetectIntent})
+        # method to determine user intent and respond.
         #
         # @!attribute [r] sessions_stub
         #   @return [Google::Cloud::Dialogflow::V2::Sessions::Stub]

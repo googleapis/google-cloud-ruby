@@ -538,7 +538,8 @@ module Google
           end
         end
 
-        # The request message for {Google::Cloud::Dialogflow::V2::Intents::ListIntents Intents::ListIntents}.
+        # The request message for
+        # {Google::Cloud::Dialogflow::V2::Intents::ListIntents Intents::ListIntents}.
         # @!attribute [rw] parent
         #   @return [String]
         #     Required. The agent to list all intents from.
@@ -562,7 +563,8 @@ module Google
         #     Optional. The next_page_token value returned from a previous list request.
         class ListIntentsRequest; end
 
-        # The response message for {Google::Cloud::Dialogflow::V2::Intents::ListIntents Intents::ListIntents}.
+        # The response message for
+        # {Google::Cloud::Dialogflow::V2::Intents::ListIntents Intents::ListIntents}.
         # @!attribute [rw] intents
         #   @return [Array<Google::Cloud::Dialogflow::V2::Intent>]
         #     The list of agent intents. There will be a maximum number of items
@@ -573,7 +575,8 @@ module Google
         #     more results in the list.
         class ListIntentsResponse; end
 
-        # The request message for {Google::Cloud::Dialogflow::V2::Intents::GetIntent Intents::GetIntent}.
+        # The request message for
+        # {Google::Cloud::Dialogflow::V2::Intents::GetIntent Intents::GetIntent}.
         # @!attribute [rw] name
         #   @return [String]
         #     Required. The name of the intent.
@@ -590,7 +593,8 @@ module Google
         #     Optional. The resource view to apply to the returned intent.
         class GetIntentRequest; end
 
-        # The request message for {Google::Cloud::Dialogflow::V2::Intents::CreateIntent Intents::CreateIntent}.
+        # The request message for
+        # {Google::Cloud::Dialogflow::V2::Intents::CreateIntent Intents::CreateIntent}.
         # @!attribute [rw] parent
         #   @return [String]
         #     Required. The agent to create a intent for.
@@ -610,7 +614,8 @@ module Google
         #     Optional. The resource view to apply to the returned intent.
         class CreateIntentRequest; end
 
-        # The request message for {Google::Cloud::Dialogflow::V2::Intents::UpdateIntent Intents::UpdateIntent}.
+        # The request message for
+        # {Google::Cloud::Dialogflow::V2::Intents::UpdateIntent Intents::UpdateIntent}.
         # @!attribute [rw] intent
         #   @return [Google::Cloud::Dialogflow::V2::Intent]
         #     Required. The intent to update.
@@ -630,14 +635,16 @@ module Google
         #     Optional. The resource view to apply to the returned intent.
         class UpdateIntentRequest; end
 
-        # The request message for {Google::Cloud::Dialogflow::V2::Intents::DeleteIntent Intents::DeleteIntent}.
+        # The request message for
+        # {Google::Cloud::Dialogflow::V2::Intents::DeleteIntent Intents::DeleteIntent}.
         # @!attribute [rw] name
         #   @return [String]
         #     Required. The name of the intent to delete.
         #     Format: `projects/<Project ID>/agent/intents/<Intent ID>`.
         class DeleteIntentRequest; end
 
-        # The request message for {Google::Cloud::Dialogflow::V2::Intents::BatchUpdateIntents Intents::BatchUpdateIntents}.
+        # The request message for
+        # {Google::Cloud::Dialogflow::V2::Intents::BatchUpdateIntents Intents::BatchUpdateIntents}.
         # @!attribute [rw] parent
         #   @return [String]
         #     Required. The name of the agent to update or create intents in.
@@ -665,13 +672,15 @@ module Google
         #     Optional. The resource view to apply to the returned intent.
         class BatchUpdateIntentsRequest; end
 
-        # The response message for {Google::Cloud::Dialogflow::V2::Intents::BatchUpdateIntents Intents::BatchUpdateIntents}.
+        # The response message for
+        # {Google::Cloud::Dialogflow::V2::Intents::BatchUpdateIntents Intents::BatchUpdateIntents}.
         # @!attribute [rw] intents
         #   @return [Array<Google::Cloud::Dialogflow::V2::Intent>]
         #     The collection of updated or created intents.
         class BatchUpdateIntentsResponse; end
 
-        # The request message for {Google::Cloud::Dialogflow::V2::Intents::BatchDeleteIntents Intents::BatchDeleteIntents}.
+        # The request message for
+        # {Google::Cloud::Dialogflow::V2::Intents::BatchDeleteIntents Intents::BatchDeleteIntents}.
         # @!attribute [rw] parent
         #   @return [String]
         #     Required. The name of the agent to delete all entities types for. Format:

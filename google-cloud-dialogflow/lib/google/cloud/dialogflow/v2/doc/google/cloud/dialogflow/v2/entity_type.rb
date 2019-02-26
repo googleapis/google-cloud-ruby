@@ -83,7 +83,8 @@ module Google
           end
         end
 
-        # The request message for {Google::Cloud::Dialogflow::V2::EntityTypes::ListEntityTypes EntityTypes::ListEntityTypes}.
+        # The request message for
+        # {Google::Cloud::Dialogflow::V2::EntityTypes::ListEntityTypes EntityTypes::ListEntityTypes}.
         # @!attribute [rw] parent
         #   @return [String]
         #     Required. The agent to list all entity types from.
@@ -104,7 +105,8 @@ module Google
         #     Optional. The next_page_token value returned from a previous list request.
         class ListEntityTypesRequest; end
 
-        # The response message for {Google::Cloud::Dialogflow::V2::EntityTypes::ListEntityTypes EntityTypes::ListEntityTypes}.
+        # The response message for
+        # {Google::Cloud::Dialogflow::V2::EntityTypes::ListEntityTypes EntityTypes::ListEntityTypes}.
         # @!attribute [rw] entity_types
         #   @return [Array<Google::Cloud::Dialogflow::V2::EntityType>]
         #     The list of agent entity types. There will be a maximum number of items
@@ -115,7 +117,8 @@ module Google
         #     more results in the list.
         class ListEntityTypesResponse; end
 
-        # The request message for {Google::Cloud::Dialogflow::V2::EntityTypes::GetEntityType EntityTypes::GetEntityType}.
+        # The request message for
+        # {Google::Cloud::Dialogflow::V2::EntityTypes::GetEntityType EntityTypes::GetEntityType}.
         # @!attribute [rw] name
         #   @return [String]
         #     Required. The name of the entity type.
@@ -129,7 +132,8 @@ module Google
         #     Note: languages must be enabled in the agent, before they can be used.
         class GetEntityTypeRequest; end
 
-        # The request message for {Google::Cloud::Dialogflow::V2::EntityTypes::CreateEntityType EntityTypes::CreateEntityType}.
+        # The request message for
+        # {Google::Cloud::Dialogflow::V2::EntityTypes::CreateEntityType EntityTypes::CreateEntityType}.
         # @!attribute [rw] parent
         #   @return [String]
         #     Required. The agent to create a entity type for.
@@ -146,7 +150,8 @@ module Google
         #     Note: languages must be enabled in the agent, before they can be used.
         class CreateEntityTypeRequest; end
 
-        # The request message for {Google::Cloud::Dialogflow::V2::EntityTypes::UpdateEntityType EntityTypes::UpdateEntityType}.
+        # The request message for
+        # {Google::Cloud::Dialogflow::V2::EntityTypes::UpdateEntityType EntityTypes::UpdateEntityType}.
         # @!attribute [rw] entity_type
         #   @return [Google::Cloud::Dialogflow::V2::EntityType]
         #     Required. The entity type to update.
@@ -163,14 +168,16 @@ module Google
         #     Optional. The mask to control which fields get updated.
         class UpdateEntityTypeRequest; end
 
-        # The request message for {Google::Cloud::Dialogflow::V2::EntityTypes::DeleteEntityType EntityTypes::DeleteEntityType}.
+        # The request message for
+        # {Google::Cloud::Dialogflow::V2::EntityTypes::DeleteEntityType EntityTypes::DeleteEntityType}.
         # @!attribute [rw] name
         #   @return [String]
         #     Required. The name of the entity type to delete.
         #     Format: `projects/<Project ID>/agent/entityTypes/<EntityType ID>`.
         class DeleteEntityTypeRequest; end
 
-        # The request message for {Google::Cloud::Dialogflow::V2::EntityTypes::BatchUpdateEntityTypes EntityTypes::BatchUpdateEntityTypes}.
+        # The request message for
+        # {Google::Cloud::Dialogflow::V2::EntityTypes::BatchUpdateEntityTypes EntityTypes::BatchUpdateEntityTypes}.
         # @!attribute [rw] parent
         #   @return [String]
         #     Required. The name of the agent to update or create entity types in.
@@ -196,13 +203,15 @@ module Google
         #     Optional. The mask to control which fields get updated.
         class BatchUpdateEntityTypesRequest; end
 
-        # The response message for {Google::Cloud::Dialogflow::V2::EntityTypes::BatchUpdateEntityTypes EntityTypes::BatchUpdateEntityTypes}.
+        # The response message for
+        # {Google::Cloud::Dialogflow::V2::EntityTypes::BatchUpdateEntityTypes EntityTypes::BatchUpdateEntityTypes}.
         # @!attribute [rw] entity_types
         #   @return [Array<Google::Cloud::Dialogflow::V2::EntityType>]
         #     The collection of updated or created entity types.
         class BatchUpdateEntityTypesResponse; end
 
-        # The request message for {Google::Cloud::Dialogflow::V2::EntityTypes::BatchDeleteEntityTypes EntityTypes::BatchDeleteEntityTypes}.
+        # The request message for
+        # {Google::Cloud::Dialogflow::V2::EntityTypes::BatchDeleteEntityTypes EntityTypes::BatchDeleteEntityTypes}.
         # @!attribute [rw] parent
         #   @return [String]
         #     Required. The name of the agent to delete all entities types for. Format:
@@ -213,7 +222,8 @@ module Google
         #     same agent as `parent`.
         class BatchDeleteEntityTypesRequest; end
 
-        # The request message for {Google::Cloud::Dialogflow::V2::EntityTypes::BatchCreateEntities EntityTypes::BatchCreateEntities}.
+        # The request message for
+        # {Google::Cloud::Dialogflow::V2::EntityTypes::BatchCreateEntities EntityTypes::BatchCreateEntities}.
         # @!attribute [rw] parent
         #   @return [String]
         #     Required. The name of the entity type to create entities in. Format:
@@ -230,7 +240,8 @@ module Google
         #     Note: languages must be enabled in the agent, before they can be used.
         class BatchCreateEntitiesRequest; end
 
-        # The response message for {Google::Cloud::Dialogflow::V2::EntityTypes::BatchCreateEntities EntityTypes::BatchCreateEntities}.
+        # The response message for
+        # {Google::Cloud::Dialogflow::V2::EntityTypes::BatchCreateEntities EntityTypes::BatchCreateEntities}.
         # @!attribute [rw] parent
         #   @return [String]
         #     Required. The name of the entity type to update the entities in. Format:
@@ -250,7 +261,8 @@ module Google
         #     Optional. The mask to control which fields get updated.
         class BatchUpdateEntitiesRequest; end
 
-        # The request message for {Google::Cloud::Dialogflow::V2::EntityTypes::BatchDeleteEntities EntityTypes::BatchDeleteEntities}.
+        # The request message for
+        # {Google::Cloud::Dialogflow::V2::EntityTypes::BatchDeleteEntities EntityTypes::BatchDeleteEntities}.
         # @!attribute [rw] parent
         #   @return [String]
         #     Required. The name of the entity type to delete entries for. Format:
