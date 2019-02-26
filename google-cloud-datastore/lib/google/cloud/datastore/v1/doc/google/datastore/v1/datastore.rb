@@ -67,7 +67,8 @@ module Google
       #     The GQL query to run.
       class RunQueryRequest; end
 
-      # The response for {Google::Datastore::V1::Datastore::RunQuery Datastore::RunQuery}.
+      # The response for
+      # {Google::Datastore::V1::Datastore::RunQuery Datastore::RunQuery}.
       # @!attribute [rw] batch
       #   @return [Google::Datastore::V1::QueryResultBatch]
       #     A batch of query results (always present).
@@ -76,7 +77,8 @@ module Google
       #     The parsed form of the `GqlQuery` from the request, if it was set.
       class RunQueryResponse; end
 
-      # The request for {Google::Datastore::V1::Datastore::BeginTransaction Datastore::BeginTransaction}.
+      # The request for
+      # {Google::Datastore::V1::Datastore::BeginTransaction Datastore::BeginTransaction}.
       # @!attribute [rw] project_id
       #   @return [String]
       #     The ID of the project against which to make the request.
@@ -85,7 +87,8 @@ module Google
       #     Options for a new transaction.
       class BeginTransactionRequest; end
 
-      # The response for {Google::Datastore::V1::Datastore::BeginTransaction Datastore::BeginTransaction}.
+      # The response for
+      # {Google::Datastore::V1::Datastore::BeginTransaction Datastore::BeginTransaction}.
       # @!attribute [rw] transaction
       #   @return [String]
       #     The transaction identifier (always present).
@@ -101,8 +104,9 @@ module Google
       #     {Google::Datastore::V1::Datastore::BeginTransaction Datastore::BeginTransaction}.
       class RollbackRequest; end
 
-      # The response for {Google::Datastore::V1::Datastore::Rollback Datastore::Rollback}.
-      # (an empty message).
+      # The response for
+      # {Google::Datastore::V1::Datastore::Rollback Datastore::Rollback}. (an empty
+      # message).
       class RollbackResponse; end
 
       # The request for {Google::Datastore::V1::Datastore::Commit Datastore::Commit}.
@@ -139,7 +143,8 @@ module Google
           MODE_UNSPECIFIED = 0
 
           # Transactional: The mutations are either all applied, or none are applied.
-          # Learn about transactions [here](https://cloud.google.com/datastore/docs/concepts/transactions).
+          # Learn about transactions
+          # [here](https://cloud.google.com/datastore/docs/concepts/transactions).
           TRANSACTIONAL = 1
 
           # Non-transactional: The mutations may not apply as all or none.
@@ -158,7 +163,8 @@ module Google
       #     updated.
       class CommitResponse; end
 
-      # The request for {Google::Datastore::V1::Datastore::AllocateIds Datastore::AllocateIds}.
+      # The request for
+      # {Google::Datastore::V1::Datastore::AllocateIds Datastore::AllocateIds}.
       # @!attribute [rw] project_id
       #   @return [String]
       #     The ID of the project against which to make the request.
@@ -168,14 +174,16 @@ module Google
       #     No key may be reserved/read-only.
       class AllocateIdsRequest; end
 
-      # The response for {Google::Datastore::V1::Datastore::AllocateIds Datastore::AllocateIds}.
+      # The response for
+      # {Google::Datastore::V1::Datastore::AllocateIds Datastore::AllocateIds}.
       # @!attribute [rw] keys
       #   @return [Array<Google::Datastore::V1::Key>]
       #     The keys specified in the request (in the same order), each with
       #     its key path completed with a newly allocated ID.
       class AllocateIdsResponse; end
 
-      # The request for {Google::Datastore::V1::Datastore::ReserveIds Datastore::ReserveIds}.
+      # The request for
+      # {Google::Datastore::V1::Datastore::ReserveIds Datastore::ReserveIds}.
       # @!attribute [rw] project_id
       #   @return [String]
       #     The ID of the project against which to make the request.
@@ -188,7 +196,8 @@ module Google
       #     auto-allocated.
       class ReserveIdsRequest; end
 
-      # The response for {Google::Datastore::V1::Datastore::ReserveIds Datastore::ReserveIds}.
+      # The response for
+      # {Google::Datastore::V1::Datastore::ReserveIds Datastore::ReserveIds}.
       class ReserveIdsResponse; end
 
       # A mutation to apply to an entity.
@@ -259,8 +268,10 @@ module Google
       # Options for beginning a new transaction.
       #
       # Transactions can be created explicitly with calls to
-      # {Google::Datastore::V1::Datastore::BeginTransaction Datastore::BeginTransaction} or implicitly by setting
-      # {Google::Datastore::V1::ReadOptions#new_transaction ReadOptions#new_transaction} in read requests.
+      # {Google::Datastore::V1::Datastore::BeginTransaction Datastore::BeginTransaction}
+      # or implicitly by setting
+      # {Google::Datastore::V1::ReadOptions#new_transaction ReadOptions#new_transaction}
+      # in read requests.
       # @!attribute [rw] read_write
       #   @return [Google::Datastore::V1::TransactionOptions::ReadWrite]
       #     The transaction should allow both reads and writes.
