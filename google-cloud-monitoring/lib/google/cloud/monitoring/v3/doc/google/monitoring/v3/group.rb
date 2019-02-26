@@ -59,7 +59,8 @@ module Google
       #     For groups with no parent, `parentName` is the empty string, `""`.
       # @!attribute [rw] filter
       #   @return [String]
-      #     The filter used to determine which monitored resources belong to this group.
+      #     The filter used to determine which monitored resources belong to this
+      #     group.
       # @!attribute [rw] is_cluster
       #   @return [true, false]
       #     If true, the members of this group are considered to be a cluster.

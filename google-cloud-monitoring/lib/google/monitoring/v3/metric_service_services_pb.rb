@@ -35,13 +35,17 @@ module Google
           self.unmarshal_class_method = :decode
           self.service_name = 'google.monitoring.v3.MetricService'
 
-          # Lists monitored resource descriptors that match a filter. This method does not require a Stackdriver account.
+          # Lists monitored resource descriptors that match a filter. This method does
+          # not require a Stackdriver account.
           rpc :ListMonitoredResourceDescriptors, ListMonitoredResourceDescriptorsRequest, ListMonitoredResourceDescriptorsResponse
-          # Gets a single monitored resource descriptor. This method does not require a Stackdriver account.
+          # Gets a single monitored resource descriptor. This method does not require a
+          # Stackdriver account.
           rpc :GetMonitoredResourceDescriptor, GetMonitoredResourceDescriptorRequest, Google::Api::MonitoredResourceDescriptor
-          # Lists metric descriptors that match a filter. This method does not require a Stackdriver account.
+          # Lists metric descriptors that match a filter. This method does not require
+          # a Stackdriver account.
           rpc :ListMetricDescriptors, ListMetricDescriptorsRequest, ListMetricDescriptorsResponse
-          # Gets a single metric descriptor. This method does not require a Stackdriver account.
+          # Gets a single metric descriptor. This method does not require a Stackdriver
+          # account.
           rpc :GetMetricDescriptor, GetMetricDescriptorRequest, Google::Api::MetricDescriptor
           # Creates a new metric descriptor.
           # User-created metric descriptors define
@@ -50,7 +54,8 @@ module Google
           # Deletes a metric descriptor. Only user-created
           # [custom metrics](/monitoring/custom-metrics) can be deleted.
           rpc :DeleteMetricDescriptor, DeleteMetricDescriptorRequest, Google::Protobuf::Empty
-          # Lists time series that match a filter. This method does not require a Stackdriver account.
+          # Lists time series that match a filter. This method does not require a
+          # Stackdriver account.
           rpc :ListTimeSeries, ListTimeSeriesRequest, ListTimeSeriesResponse
           # Creates or adds data to one or more time series.
           # The response is empty if all time series in the request were written.
