@@ -1,5 +1,9 @@
 # Release History
 
+### 1.2.0 / 2019-02-27
+
+* Add TEXT_DETECTION and OBJECT_TRACKING features
+
 ### 1.1.3 / 2018-11-14
 
 * Update documentation.
