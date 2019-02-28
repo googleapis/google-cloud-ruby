@@ -97,7 +97,17 @@ js:
 <div class="tags">
   
 
-</div>
+</div><h2>Defined Under Namespace</h2>
+<p class="children">
+  
+    
+  
+    
+      <strong class="classes">Classes:</strong> <span class='object_link'><a href="PushConfig/OidcToken.html" title="Google::Cloud::PubSub::V1::PushConfig::OidcToken (class)">OidcToken</a></span>
+    
+  
+</p>
+
 
 
 
@@ -125,6 +135,32 @@ js:
 
   
     <span class="summary_desc"><div class='inline'><p>Endpoint configuration attributes.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#oidc_token-instance_method" title="#oidc_token (instance method)">#<strong>oidc_token</strong>  &#x21d2; Google::Cloud::PubSub::V1::PushConfig::OidcToken </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>If specified, Pub/Sub will generate and attach an OIDC JWT token as an <code>Authorization</code> header in the HTTP request for every pushed message.</p>
 </div></span>
   
 </li>
@@ -253,12 +289,153 @@ created without this attribute.</p>
       <pre class="lines">
 
 
-331</pre>
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/doc/google/pubsub/v1/pubsub.rb', line 331</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/doc/google/pubsub/v1/pubsub.rb', line 335</span>
 
-<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::PubSub::V1::PushConfig (class)">PushConfig</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::PubSub::V1::PushConfig (class)">PushConfig</a></span></span>
+  <span class='comment'># Contains information needed for generating an
+</span>  <span class='comment'># [OpenID Connect
+</span>  <span class='comment'># token](https://developers.google.com/identity/protocols/OpenIDConnect).
+</span>  <span class='comment'># @!attribute [rw] service_account_email
+</span>  <span class='comment'>#   @return [String]
+</span>  <span class='comment'>#     [Service account
+</span>  <span class='comment'>#     email](https://cloud.google.com/iam/docs/service-accounts)
+</span>  <span class='comment'>#     to be used for generating the OIDC token. The caller (for
+</span>  <span class='comment'>#     CreateSubscription, UpdateSubscription, and ModifyPushConfig calls) must
+</span>  <span class='comment'>#     have the iam.serviceAccounts.actAs permission for the service account.
+</span>  <span class='comment'>#     See https://cloud.google.com/iam/docs/understanding-roles#service-accounts-roles.
+</span>  <span class='comment'># @!attribute [rw] audience
+</span>  <span class='comment'>#   @return [String]
+</span>  <span class='comment'>#     Audience to be used when generating OIDC token. The audience claim
+</span>  <span class='comment'>#     identifies the recipients that the JWT is intended for. The audience
+</span>  <span class='comment'>#     value is a single case-sensitive string. Having multiple values (array)
+</span>  <span class='comment'>#     for the audience field is not supported. More info about the OIDC JWT
+</span>  <span class='comment'>#     token audience here: https://tools.ietf.org/html/rfc7519#section-4.1.3
+</span>  <span class='comment'>#     Note: if not specified, the Push endpoint URL will be used.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="PushConfig/OidcToken.html" title="Google::Cloud::PubSub::V1::PushConfig::OidcToken (class)">OidcToken</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="oidc_token=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="oidc_token-instance_method">
+  
+    #<strong>oidc_token</strong>  &#x21d2; <tt><span class='object_link'><a href="PushConfig/OidcToken.html" title="Google::Cloud::PubSub::V1::PushConfig::OidcToken (class)">Google::Cloud::PubSub::V1::PushConfig::OidcToken</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns If specified, Pub/Sub will generate and attach an OIDC JWT token as an
+<code>Authorization</code> header in the HTTP request for every pushed message.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="PushConfig/OidcToken.html" title="Google::Cloud::PubSub::V1::PushConfig::OidcToken (class)">Google::Cloud::PubSub::V1::PushConfig::OidcToken</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>If specified, Pub/Sub will generate and attach an OIDC JWT token as an
+<code>Authorization</code> header in the HTTP request for every pushed message.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/doc/google/pubsub/v1/pubsub.rb', line 335</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::PubSub::V1::PushConfig (class)">PushConfig</a></span></span>
+  <span class='comment'># Contains information needed for generating an
+</span>  <span class='comment'># [OpenID Connect
+</span>  <span class='comment'># token](https://developers.google.com/identity/protocols/OpenIDConnect).
+</span>  <span class='comment'># @!attribute [rw] service_account_email
+</span>  <span class='comment'>#   @return [String]
+</span>  <span class='comment'>#     [Service account
+</span>  <span class='comment'>#     email](https://cloud.google.com/iam/docs/service-accounts)
+</span>  <span class='comment'>#     to be used for generating the OIDC token. The caller (for
+</span>  <span class='comment'>#     CreateSubscription, UpdateSubscription, and ModifyPushConfig calls) must
+</span>  <span class='comment'>#     have the iam.serviceAccounts.actAs permission for the service account.
+</span>  <span class='comment'>#     See https://cloud.google.com/iam/docs/understanding-roles#service-accounts-roles.
+</span>  <span class='comment'># @!attribute [rw] audience
+</span>  <span class='comment'>#   @return [String]
+</span>  <span class='comment'>#     Audience to be used when generating OIDC token. The audience claim
+</span>  <span class='comment'>#     identifies the recipients that the JWT is intended for. The audience
+</span>  <span class='comment'>#     value is a single case-sensitive string. Having multiple values (array)
+</span>  <span class='comment'>#     for the audience field is not supported. More info about the OIDC JWT
+</span>  <span class='comment'>#     token audience here: https://tools.ietf.org/html/rfc7519#section-4.1.3
+</span>  <span class='comment'>#     Note: if not specified, the Push endpoint URL will be used.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="PushConfig/OidcToken.html" title="Google::Cloud::PubSub::V1::PushConfig::OidcToken (class)">OidcToken</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -310,12 +487,54 @@ For example, a Webhook endpoint might use &quot;<a href="https://example.com/pus
       <pre class="lines">
 
 
-331</pre>
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/doc/google/pubsub/v1/pubsub.rb', line 331</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/doc/google/pubsub/v1/pubsub.rb', line 335</span>
 
-<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::PubSub::V1::PushConfig (class)">PushConfig</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::PubSub::V1::PushConfig (class)">PushConfig</a></span></span>
+  <span class='comment'># Contains information needed for generating an
+</span>  <span class='comment'># [OpenID Connect
+</span>  <span class='comment'># token](https://developers.google.com/identity/protocols/OpenIDConnect).
+</span>  <span class='comment'># @!attribute [rw] service_account_email
+</span>  <span class='comment'>#   @return [String]
+</span>  <span class='comment'>#     [Service account
+</span>  <span class='comment'>#     email](https://cloud.google.com/iam/docs/service-accounts)
+</span>  <span class='comment'>#     to be used for generating the OIDC token. The caller (for
+</span>  <span class='comment'>#     CreateSubscription, UpdateSubscription, and ModifyPushConfig calls) must
+</span>  <span class='comment'>#     have the iam.serviceAccounts.actAs permission for the service account.
+</span>  <span class='comment'>#     See https://cloud.google.com/iam/docs/understanding-roles#service-accounts-roles.
+</span>  <span class='comment'># @!attribute [rw] audience
+</span>  <span class='comment'>#   @return [String]
+</span>  <span class='comment'>#     Audience to be used when generating OIDC token. The audience claim
+</span>  <span class='comment'>#     identifies the recipients that the JWT is intended for. The audience
+</span>  <span class='comment'>#     value is a single case-sensitive string. Having multiple values (array)
+</span>  <span class='comment'>#     for the audience field is not supported. More info about the OIDC JWT
+</span>  <span class='comment'>#     token audience here: https://tools.ietf.org/html/rfc7519#section-4.1.3
+</span>  <span class='comment'>#     Note: if not specified, the Push endpoint URL will be used.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="PushConfig/OidcToken.html" title="Google::Cloud::PubSub::V1::PushConfig::OidcToken (class)">OidcToken</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
