@@ -328,7 +328,32 @@ module Google
       #
       #     * `v1beta1`: uses the push format defined in the v1beta1 Pub/Sub API.
       #     * `v1` or `v1beta2`: uses the push format defined in the v1 Pub/Sub API.
-      class PushConfig; end
+      # @!attribute [rw] oidc_token
+      #   @return [Google::Cloud::PubSub::V1::PushConfig::OidcToken]
+      #     If specified, Pub/Sub will generate and attach an OIDC JWT token as an
+      #     `Authorization` header in the HTTP request for every pushed message.
+      class PushConfig
+        # Contains information needed for generating an
+        # [OpenID Connect
+        # token](https://developers.google.com/identity/protocols/OpenIDConnect).
+        # @!attribute [rw] service_account_email
+        #   @return [String]
+        #     [Service account
+        #     email](https://cloud.google.com/iam/docs/service-accounts)
+        #     to be used for generating the OIDC token. The caller (for
+        #     CreateSubscription, UpdateSubscription, and ModifyPushConfig calls) must
+        #     have the iam.serviceAccounts.actAs permission for the service account.
+        #     See https://cloud.google.com/iam/docs/understanding-roles#service-accounts-roles.
+        # @!attribute [rw] audience
+        #   @return [String]
+        #     Audience to be used when generating OIDC token. The audience claim
+        #     identifies the recipients that the JWT is intended for. The audience
+        #     value is a single case-sensitive string. Having multiple values (array)
+        #     for the audience field is not supported. More info about the OIDC JWT
+        #     token audience here: https://tools.ietf.org/html/rfc7519#section-4.1.3
+        #     Note: if not specified, the Push endpoint URL will be used.
+        class OidcToken; end
+      end
 
       # A message and its corresponding acknowledgment ID.
       # @!attribute [rw] ack_id

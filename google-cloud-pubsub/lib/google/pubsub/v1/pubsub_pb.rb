@@ -84,6 +84,13 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.pubsub.v1.PushConfig" do
     optional :push_endpoint, :string, 1
     map :attributes, :string, :string, 2
+    oneof :authentication_method do
+      optional :oidc_token, :message, 3, "google.pubsub.v1.PushConfig.OidcToken"
+    end
+  end
+  add_message "google.pubsub.v1.PushConfig.OidcToken" do
+    optional :service_account_email, :string, 1
+    optional :audience, :string, 2
   end
   add_message "google.pubsub.v1.ReceivedMessage" do
     optional :ack_id, :string, 1
@@ -205,6 +212,7 @@ module Google::Cloud::PubSub::V1
   Subscription = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.Subscription").msgclass
   ExpirationPolicy = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.ExpirationPolicy").msgclass
   PushConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.PushConfig").msgclass
+  PushConfig::OidcToken = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.PushConfig.OidcToken").msgclass
   ReceivedMessage = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.ReceivedMessage").msgclass
   GetSubscriptionRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.GetSubscriptionRequest").msgclass
   UpdateSubscriptionRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.UpdateSubscriptionRequest").msgclass
