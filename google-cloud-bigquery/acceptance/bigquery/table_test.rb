@@ -510,19 +510,19 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
     query_job.query_plan.wont_be :empty?
     stage = query_job.query_plan.first
     stage.must_be_kind_of Google::Cloud::Bigquery::QueryJob::Stage
-    stage.compute_ratio_avg.must_be_kind_of Float
-    stage.compute_ratio_max.must_be_kind_of Float
+    stage.compute_ratio_avg.must_be_kind_of Numeric
+    stage.compute_ratio_max.must_be_kind_of Numeric
     stage.id.must_be_kind_of Integer
     stage.name.must_be_kind_of String
-    stage.read_ratio_avg.must_be_kind_of Float
-    stage.read_ratio_max.must_be_kind_of Float
+    stage.read_ratio_avg.must_be_kind_of Numeric
+    stage.read_ratio_max.must_be_kind_of Numeric
     stage.records_read.must_be_kind_of Integer
     stage.records_written.must_be_kind_of Integer
     stage.status.must_be_kind_of String
-    stage.wait_ratio_avg.must_be_kind_of Float
-    stage.wait_ratio_max.must_be_kind_of Float
-    stage.write_ratio_avg.must_be_kind_of Float
-    stage.write_ratio_max.must_be_kind_of Float
+    stage.wait_ratio_avg.must_be_kind_of Numeric
+    stage.wait_ratio_max.must_be_kind_of Numeric
+    stage.write_ratio_avg.must_be_kind_of Numeric
+    stage.write_ratio_max.must_be_kind_of Numeric
     stage.steps.wont_be_nil
     stage.steps.must_be_kind_of Array
     stage.steps.wont_be :empty?
@@ -657,19 +657,19 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
     query_job.query_plan.wont_be :empty?
     stage = query_job.query_plan.first
     stage.must_be_kind_of Google::Cloud::Bigquery::QueryJob::Stage
-    stage.compute_ratio_avg.must_be_kind_of Float
-    stage.compute_ratio_max.must_be_kind_of Float
+    stage.compute_ratio_avg.must_be_kind_of Numeric
+    stage.compute_ratio_max.must_be_kind_of Numeric
     stage.id.must_be_kind_of Integer
     stage.name.must_be_kind_of String
-    stage.read_ratio_avg.must_be_kind_of Float
-    stage.read_ratio_max.must_be_kind_of Float
+    stage.read_ratio_avg.must_be_kind_of Numeric
+    stage.read_ratio_max.must_be_kind_of Numeric
     stage.records_read.must_be_kind_of Integer
     stage.records_written.must_be_kind_of Integer
     stage.status.must_be_kind_of String
-    stage.wait_ratio_avg.must_be_kind_of Float
-    stage.wait_ratio_max.must_be_kind_of Float
-    stage.write_ratio_avg.must_be_kind_of Float
-    stage.write_ratio_max.must_be_kind_of Float
+    stage.wait_ratio_avg.must_be_kind_of Numeric
+    stage.wait_ratio_max.must_be_kind_of Numeric
+    stage.write_ratio_avg.must_be_kind_of Numeric
+    stage.write_ratio_max.must_be_kind_of Numeric
     stage.steps.wont_be_nil
     stage.steps.must_be_kind_of Array
     stage.steps.wont_be :empty?
