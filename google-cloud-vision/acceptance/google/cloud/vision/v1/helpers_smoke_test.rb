@@ -99,7 +99,7 @@ describe Google::Cloud::Vision::V1::ImageAnnotatorClient do
     labels = response.responses.map do |response|
       response.label_annotations.map { |label| label.description }
     end.flatten
-    assert_includes(labels, "Suit")
+    refute_empty labels
   end
 
   it "can successfully make face_detection requests and verify response" do
