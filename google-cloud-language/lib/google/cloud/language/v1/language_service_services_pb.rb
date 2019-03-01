@@ -41,8 +41,10 @@ module Google
             # along with entity types, salience, mentions for each entity, and
             # other properties.
             rpc :AnalyzeEntities, AnalyzeEntitiesRequest, AnalyzeEntitiesResponse
-            # Finds entities, similar to [AnalyzeEntities][google.cloud.language.v1.LanguageService.AnalyzeEntities] in the text and analyzes
-            # sentiment associated with each entity and its mentions.
+            # Finds entities, similar to
+            # [AnalyzeEntities][google.cloud.language.v1.LanguageService.AnalyzeEntities]
+            # in the text and analyzes sentiment associated with each entity and its
+            # mentions.
             rpc :AnalyzeEntitySentiment, AnalyzeEntitySentimentRequest, AnalyzeEntitySentimentResponse
             # Analyzes the syntax of the text and provides sentence boundaries and
             # tokenization along with part of speech tags, dependency trees, and other
