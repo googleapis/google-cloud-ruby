@@ -375,10 +375,10 @@ and manage this project-level, per-location bucket for you.</p>
       <pre class="lines">
 
 
-103</pre>
+106</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1/doc/google/cloud/dataproc/v1/clusters.rb', line 103</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1/doc/google/cloud/dataproc/v1/clusters.rb', line 106</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dataproc::V1::ClusterConfig (class)">ClusterConfig</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -430,10 +430,10 @@ and manage this project-level, per-location bucket for you.</p>
       <pre class="lines">
 
 
-103</pre>
+106</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1/doc/google/cloud/dataproc/v1/clusters.rb', line 103</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1/doc/google/cloud/dataproc/v1/clusters.rb', line 106</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dataproc::V1::ClusterConfig (class)">ClusterConfig</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -487,10 +487,10 @@ all instances in a cluster.</p>
       <pre class="lines">
 
 
-103</pre>
+106</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1/doc/google/cloud/dataproc/v1/clusters.rb', line 103</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1/doc/google/cloud/dataproc/v1/clusters.rb', line 106</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dataproc::V1::ClusterConfig (class)">ClusterConfig</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -514,9 +514,11 @@ all instances in a cluster.</p>
     <p>Returns Optional. Commands to execute on each node after config is
 completed. By default, executables are run on master and all worker nodes.
 You can test a node&#39;s <code>role</code> metadata to run an executable on
-a master or worker node, as shown below using <code>curl</code> (you can also use <code>wget</code>):</p>
+a master or worker node, as shown below using <code>curl</code> (you can also use
+<code>wget</code>):</p>
 
-<pre class="code ruby"><code class="ruby">ROLE=$(curl -H Metadata-Flavor:Google http://metadata/computeMetadata/v1/instance/attributes/dataproc-role)
+<pre class="code ruby"><code class="ruby">ROLE=$(curl -H Metadata-Flavor:Google
+http://metadata/computeMetadata/v1/instance/attributes/dataproc-role)
 if [[ &quot;${ROLE}&quot; == &#39;Master&#39; ]]; then
   ... master specific actions ...
 else
@@ -543,9 +545,11 @@ fi
         <div class='inline'><p>Optional. Commands to execute on each node after config is
 completed. By default, executables are run on master and all worker nodes.
 You can test a node&#39;s <code>role</code> metadata to run an executable on
-a master or worker node, as shown below using <code>curl</code> (you can also use <code>wget</code>):</p>
+a master or worker node, as shown below using <code>curl</code> (you can also use
+<code>wget</code>):</p>
 
-<pre class="code ruby"><code class="ruby">ROLE=$(curl -H Metadata-Flavor:Google http://metadata/computeMetadata/v1/instance/attributes/dataproc-role)
+<pre class="code ruby"><code class="ruby">ROLE=$(curl -H Metadata-Flavor:Google
+http://metadata/computeMetadata/v1/instance/attributes/dataproc-role)
 if [[ &quot;${ROLE}&quot; == &#39;Master&#39; ]]; then
   ... master specific actions ...
 else
@@ -564,10 +568,10 @@ fi
       <pre class="lines">
 
 
-103</pre>
+106</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1/doc/google/cloud/dataproc/v1/clusters.rb', line 103</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1/doc/google/cloud/dataproc/v1/clusters.rb', line 106</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dataproc::V1::ClusterConfig (class)">ClusterConfig</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -621,10 +625,10 @@ the master instance in a cluster.</p>
       <pre class="lines">
 
 
-103</pre>
+106</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1/doc/google/cloud/dataproc/v1/clusters.rb', line 103</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1/doc/google/cloud/dataproc/v1/clusters.rb', line 106</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dataproc::V1::ClusterConfig (class)">ClusterConfig</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -678,10 +682,10 @@ additional worker instances in a cluster.</p>
       <pre class="lines">
 
 
-103</pre>
+106</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1/doc/google/cloud/dataproc/v1/clusters.rb', line 103</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1/doc/google/cloud/dataproc/v1/clusters.rb', line 106</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dataproc::V1::ClusterConfig (class)">ClusterConfig</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -733,10 +737,10 @@ additional worker instances in a cluster.</p>
       <pre class="lines">
 
 
-103</pre>
+106</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1/doc/google/cloud/dataproc/v1/clusters.rb', line 103</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1/doc/google/cloud/dataproc/v1/clusters.rb', line 106</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dataproc::V1::ClusterConfig (class)">ClusterConfig</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -790,10 +794,10 @@ worker instances in a cluster.</p>
       <pre class="lines">
 
 
-103</pre>
+106</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1/doc/google/cloud/dataproc/v1/clusters.rb', line 103</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1/doc/google/cloud/dataproc/v1/clusters.rb', line 106</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dataproc::V1::ClusterConfig (class)">ClusterConfig</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>

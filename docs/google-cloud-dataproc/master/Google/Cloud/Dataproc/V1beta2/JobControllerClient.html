@@ -735,7 +735,8 @@ custom error handling.</p>
   <div class="discussion">
     <p>Starts a job cancellation request. To access the job resource
 after cancellation, call
-<a href="https://cloud.google.com/dataproc/docs/reference/rest/v1beta2/projects.regions.jobs/list">regions/{region}/jobs.list</a> or
+<a href="https://cloud.google.com/dataproc/docs/reference/rest/v1beta2/projects.regions.jobs/list">regions/{region}/jobs.list</a>
+or
 <a href="https://cloud.google.com/dataproc/docs/reference/rest/v1beta2/projects.regions.jobs/get">regions/{region}/jobs.get</a>.</p>
 
 
@@ -909,8 +910,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-515
-516
 517
 518
 519
@@ -922,10 +921,12 @@ retries, etc.</p>
 525
 526
 527
-528</pre>
+528
+529
+530</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1beta2/job_controller_client.rb', line 515</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1beta2/job_controller_client.rb', line 517</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_cancel_job'>cancel_job</span> \
     <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span>
@@ -1122,8 +1123,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-562
-563
 564
 565
 566
@@ -1136,10 +1135,12 @@ retries, etc.</p>
 573
 574
 575
-576</pre>
+576
+577
+578</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1beta2/job_controller_client.rb', line 562</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1beta2/job_controller_client.rb', line 564</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete_job'>delete_job</span> \
     <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span>
@@ -1345,7 +1346,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-302
 303
 304
 305
@@ -1358,10 +1358,11 @@ retries, etc.</p>
 312
 313
 314
-315</pre>
+315
+316</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1beta2/job_controller_client.rb', line 302</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1beta2/job_controller_client.rb', line 303</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_job'>get_job</span> \
     <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span>
@@ -1648,7 +1649,6 @@ object.</p>
       <pre class="lines">
 
 
-389
 390
 391
 392
@@ -1667,10 +1667,11 @@ object.</p>
 405
 406
 407
-408</pre>
+408
+409</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1beta2/job_controller_client.rb', line 389</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1beta2/job_controller_client.rb', line 390</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_jobs'>list_jobs</span> \
     <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span>
@@ -1796,9 +1797,10 @@ can also be provided.</p>
       
         &mdash;
         <div class='inline'><p>Optional. A unique id used to identify the request. If the server
-receives two <span class='object_link'><a href="SubmitJobRequest.html" title="Google::Cloud::Dataproc::V1beta2::SubmitJobRequest (class)">SubmitJobRequest</a></span> requests  with the same
-id, then the second request will be ignored and the
-first <span class='object_link'><a href="Job.html" title="Google::Cloud::Dataproc::V1beta2::Job (class)">Job</a></span> created and stored in the backend
+receives two
+<span class='object_link'><a href="SubmitJobRequest.html" title="Google::Cloud::Dataproc::V1beta2::SubmitJobRequest (class)">SubmitJobRequest</a></span> requests
+with the same id, then the second request will be ignored and the first
+<span class='object_link'><a href="Job.html" title="Google::Cloud::Dataproc::V1beta2::Job (class)">Job</a></span> created and stored in the backend
 is returned.</p>
 
 <p>It is recommended to always set this value to a
@@ -1908,7 +1910,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-253
 254
 255
 256
@@ -1923,10 +1924,11 @@ retries, etc.</p>
 265
 266
 267
-268</pre>
+268
+269</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1beta2/job_controller_client.rb', line 253</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1beta2/job_controller_client.rb', line 254</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_submit_job'>submit_job</span> \
     <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span>
@@ -2178,7 +2180,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-461
 462
 463
 464
@@ -2195,10 +2196,11 @@ retries, etc.</p>
 475
 476
 477
-478</pre>
+478
+479</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1beta2/job_controller_client.rb', line 461</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1beta2/job_controller_client.rb', line 462</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update_job'>update_job</span> \
     <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span>

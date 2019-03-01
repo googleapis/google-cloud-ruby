@@ -735,7 +735,8 @@ custom error handling.</p>
   <div class="discussion">
     <p>Starts a job cancellation request. To access the job resource
 after cancellation, call
-<a href="https://cloud.google.com/dataproc/docs/reference/rest/v1/projects.regions.jobs/list">regions/{region}/jobs.list</a> or
+<a href="https://cloud.google.com/dataproc/docs/reference/rest/v1/projects.regions.jobs/list">regions/{region}/jobs.list</a>
+or
 <a href="https://cloud.google.com/dataproc/docs/reference/rest/v1/projects.regions.jobs/get">regions/{region}/jobs.get</a>.</p>
 
 
@@ -909,7 +910,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-515
 516
 517
 518
@@ -922,10 +922,11 @@ retries, etc.</p>
 525
 526
 527
-528</pre>
+528
+529</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1/job_controller_client.rb', line 515</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1/job_controller_client.rb', line 516</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_cancel_job'>cancel_job</span> \
     <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span>
@@ -1122,7 +1123,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-562
 563
 564
 565
@@ -1136,10 +1136,11 @@ retries, etc.</p>
 573
 574
 575
-576</pre>
+576
+577</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1/job_controller_client.rb', line 562</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1/job_controller_client.rb', line 563</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete_job'>delete_job</span> \
     <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span>
@@ -1796,8 +1797,8 @@ can also be provided.</p>
       
         &mdash;
         <div class='inline'><p>Optional. A unique id used to identify the request. If the server
-receives two <span class='object_link'><a href="SubmitJobRequest.html" title="Google::Cloud::Dataproc::V1::SubmitJobRequest (class)">SubmitJobRequest</a></span> requests  with the same
-id, then the second request will be ignored and the
+receives two <span class='object_link'><a href="SubmitJobRequest.html" title="Google::Cloud::Dataproc::V1::SubmitJobRequest (class)">SubmitJobRequest</a></span>
+requests  with the same id, then the second request will be ignored and the
 first <span class='object_link'><a href="Job.html" title="Google::Cloud::Dataproc::V1::Job (class)">Job</a></span> created and stored in the backend
 is returned.</p>
 
