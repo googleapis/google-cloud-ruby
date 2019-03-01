@@ -254,7 +254,8 @@ module Google
       #     messages are not expunged from the subscription's backlog, even if they are
       #     acknowledged, until they fall out of the `message_retention_duration`
       #     window. This must be true if you would like to
-      #     <a href="https://cloud.google.com/pubsub/docs/replay-overview#seek_to_a_time">
+      #     <a
+      #     href="https://cloud.google.com/pubsub/docs/replay-overview#seek_to_a_time">
       #     Seek to a timestamp</a>.
       #     <br><br>
       #     <b>BETA:</b> This feature is part of a beta release. This API might be
@@ -538,9 +539,9 @@ module Google
       class StreamingPullResponse; end
 
       # Request for the `CreateSnapshot` method.<br><br>
-      # <b>BETA:</b> This feature is part of a beta release. This API might be changed in
-      # backward-incompatible ways and is not recommended for production use.
-      # It is not subject to any SLA or deprecation policy.
+      # <b>BETA:</b> This feature is part of a beta release. This API might be
+      # changed in backward-incompatible ways and is not recommended for production
+      # use. It is not subject to any SLA or deprecation policy.
       # @!attribute [rw] name
       #   @return [String]
       #     Optional user-provided name for this snapshot.
