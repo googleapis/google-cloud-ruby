@@ -195,10 +195,10 @@ module Google
           #   [Google Cloud Storage](https://cloud.google.com/storage/) URIs are
           #   supported, which must be specified in the following format:
           #   `gs://bucket-id/object-id` (other URI formats return
-          #   {Google::Rpc::Code::INVALID_ARGUMENT}). For more information, see
-          #   [Request URIs](https://cloud.google.com/storage/docs/reference-uris).
-          #   A video URI may include wildcards in `object-id`, and thus identify
-          #   multiple videos. Supported wildcards: '*' to match 0 or more characters;
+          #   {Google::Rpc::Code::INVALID_ARGUMENT}). For
+          #   more information, see [Request URIs](https://cloud.google.com/storage/docs/reference-uris). A video
+          #   URI may include wildcards in `object-id`, and thus identify multiple
+          #   videos. Supported wildcards: '*' to match 0 or more characters;
           #   '?' to match 1 character. If unset, the input video should be embedded
           #   in the request as `input_content`. If set, `input_content` should be unset.
           # @param features [Array<Google::Cloud::Videointelligence::V1beta1::Feature>]
@@ -215,8 +215,8 @@ module Google
           #   Currently, only [Google Cloud Storage](https://cloud.google.com/storage/)
           #   URIs are supported, which must be specified in the following format:
           #   `gs://bucket-id/object-id` (other URI formats return
-          #   {Google::Rpc::Code::INVALID_ARGUMENT}). For more information, see
-          #   [Request URIs](https://cloud.google.com/storage/docs/reference-uris).
+          #   {Google::Rpc::Code::INVALID_ARGUMENT}). For
+          #   more information, see [Request URIs](https://cloud.google.com/storage/docs/reference-uris).
           # @param location_id [String]
           #   Optional cloud region where annotation should take place. Supported cloud
           #   regions: `us-east1`, `us-west1`, `europe-west1`, `asia-east1`. If no region
