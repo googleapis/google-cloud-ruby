@@ -95,7 +95,8 @@ js:
 search. It uses the following resource model:</p>
 
 <ul>
-<li>The API has a collection of <span class='object_link'><a href="ProductSet.html" title="Google::Cloud::Vision::V1p3beta1::ProductSet (class)">ProductSet</a></span> resources, named
+<li>The API has a collection of
+<span class='object_link'><a href="ProductSet.html" title="Google::Cloud::Vision::V1p3beta1::ProductSet (class)">ProductSet</a></span> resources, named
 <code>projects/*/locations/*/productSets/*</code>, which acts as a way to put different
 products into groups to limit identification.</li>
 </ul>
@@ -103,9 +104,12 @@ products into groups to limit identification.</li>
 <p>In parallel,</p>
 
 <ul>
-<li><p>The API has a collection of <span class='object_link'><a href="Product.html" title="Google::Cloud::Vision::V1p3beta1::Product (class)">Product</a></span> resources, named
+<li><p>The API has a collection of
+<span class='object_link'><a href="Product.html" title="Google::Cloud::Vision::V1p3beta1::Product (class)">Product</a></span> resources, named
 <code>projects/*/locations/*/products/*</code></p></li>
-<li><p>Each <span class='object_link'><a href="Product.html" title="Google::Cloud::Vision::V1p3beta1::Product (class)">Product</a></span> has a collection of <span class='object_link'><a href="ReferenceImage.html" title="Google::Cloud::Vision::V1p3beta1::ReferenceImage (class)">ReferenceImage</a></span> resources, named
+<li><p>Each <span class='object_link'><a href="Product.html" title="Google::Cloud::Vision::V1p3beta1::Product (class)">Product</a></span> has a collection of
+<span class='object_link'><a href="ReferenceImage.html" title="Google::Cloud::Vision::V1p3beta1::ReferenceImage (class)">ReferenceImage</a></span> resources,
+named
 <code>projects/*/locations/*/products/*/referenceImages/*</code></p></li>
 </ul>
 
@@ -984,10 +988,6 @@ custom error handling.</p>
       <pre class="lines">
 
 
-208
-209
-210
-211
 212
 213
 214
@@ -1157,10 +1157,14 @@ custom error handling.</p>
 378
 379
 380
-381</pre>
+381
+382
+383
+384
+385</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/v1p3beta1/product_search_client.rb', line 208</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/v1p3beta1/product_search_client.rb', line 212</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span> \
     <span class='label'>credentials:</span> <span class='kw'>nil</span><span class='comma'>,</span>
@@ -1412,15 +1416,15 @@ custom error handling.</p>
       <pre class="lines">
 
 
-131
-132
-133
-134
 135
-136</pre>
+136
+137
+138
+139
+140</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/v1p3beta1/product_search_client.rb', line 131</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/v1p3beta1/product_search_client.rb', line 135</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_location_path'>location_path</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span> <span class='id identifier rubyid_location'>location</span>
   <span class='const'>LOCATION_PATH_TEMPLATE</span><span class='period'>.</span><span class='id identifier rubyid_render'>render</span><span class='lparen'>(</span>
@@ -1508,16 +1512,16 @@ custom error handling.</p>
       <pre class="lines">
 
 
-156
-157
-158
-159
 160
 161
-162</pre>
+162
+163
+164
+165
+166</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/v1p3beta1/product_search_client.rb', line 156</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/v1p3beta1/product_search_client.rb', line 160</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_product_path'>product_path</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span> <span class='id identifier rubyid_location'>location</span><span class='comma'>,</span> <span class='id identifier rubyid_product'>product</span>
   <span class='const'>PRODUCT_PATH_TEMPLATE</span><span class='period'>.</span><span class='id identifier rubyid_render'>render</span><span class='lparen'>(</span>
@@ -1606,16 +1610,16 @@ custom error handling.</p>
       <pre class="lines">
 
 
-143
-144
-145
-146
 147
 148
-149</pre>
+149
+150
+151
+152
+153</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/v1p3beta1/product_search_client.rb', line 143</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/v1p3beta1/product_search_client.rb', line 147</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_product_set_path'>product_set_path</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span> <span class='id identifier rubyid_location'>location</span><span class='comma'>,</span> <span class='id identifier rubyid_product_set'>product_set</span>
   <span class='const'>PRODUCT_SET_PATH_TEMPLATE</span><span class='period'>.</span><span class='id identifier rubyid_render'>render</span><span class='lparen'>(</span>
@@ -1715,17 +1719,17 @@ custom error handling.</p>
       <pre class="lines">
 
 
-170
-171
-172
-173
 174
 175
 176
-177</pre>
+177
+178
+179
+180
+181</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/v1p3beta1/product_search_client.rb', line 170</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/v1p3beta1/product_search_client.rb', line 174</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_reference_image_path'>reference_image_path</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span> <span class='id identifier rubyid_location'>location</span><span class='comma'>,</span> <span class='id identifier rubyid_product'>product</span><span class='comma'>,</span> <span class='id identifier rubyid_reference_image'>reference_image</span>
   <span class='const'>REFERENCE_IMAGE_PATH_TEMPLATE</span><span class='period'>.</span><span class='id identifier rubyid_render'>render</span><span class='lparen'>(</span>
@@ -1915,10 +1919,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1143
-1144
-1145
-1146
 1147
 1148
 1149
@@ -1927,10 +1927,14 @@ retries, etc.</p>
 1152
 1153
 1154
-1155</pre>
+1155
+1156
+1157
+1158
+1159</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/v1p3beta1/product_search_client.rb', line 1143</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/v1p3beta1/product_search_client.rb', line 1147</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_add_product_to_product_set'>add_product_to_product_set</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -2148,10 +2152,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-676
-677
-678
-679
 680
 681
 682
@@ -2161,10 +2161,14 @@ retries, etc.</p>
 686
 687
 688
-689</pre>
+689
+690
+691
+692
+693</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/v1p3beta1/product_search_client.rb', line 676</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/v1p3beta1/product_search_client.rb', line 680</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_product'>create_product</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -2380,10 +2384,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-426
-427
-428
-429
 430
 431
 432
@@ -2393,10 +2393,14 @@ retries, etc.</p>
 436
 437
 438
-439</pre>
+439
+440
+441
+442
+443</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/v1p3beta1/product_search_client.rb', line 426</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/v1p3beta1/product_search_client.rb', line 430</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_product_set'>create_product_set</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -2627,10 +2631,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-947
-948
-949
-950
 951
 952
 953
@@ -2640,10 +2640,14 @@ retries, etc.</p>
 957
 958
 959
-960</pre>
+960
+961
+962
+963
+964</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/v1p3beta1/product_search_client.rb', line 947</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/v1p3beta1/product_search_client.rb', line 951</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_reference_image'>create_reference_image</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -2813,20 +2817,20 @@ retries, etc.</p>
       <pre class="lines">
 
 
-879
-880
-881
-882
 883
 884
 885
 886
 887
 888
-889</pre>
+889
+890
+891
+892
+893</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/v1p3beta1/product_search_client.rb', line 879</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/v1p3beta1/product_search_client.rb', line 883</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete_product'>delete_product</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -2992,20 +2996,20 @@ retries, etc.</p>
       <pre class="lines">
 
 
-620
-621
-622
-623
 624
 625
 626
 627
 628
 629
-630</pre>
+630
+631
+632
+633
+634</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/v1p3beta1/product_search_client.rb', line 620</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/v1p3beta1/product_search_client.rb', line 624</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete_product_set'>delete_product_set</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -3175,20 +3179,20 @@ retries, etc.</p>
       <pre class="lines">
 
 
-994
-995
-996
-997
 998
 999
 1000
 1001
 1002
 1003
-1004</pre>
+1004
+1005
+1006
+1007
+1008</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/v1p3beta1/product_search_client.rb', line 994</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/v1p3beta1/product_search_client.rb', line 998</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete_reference_image'>delete_reference_image</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -3360,19 +3364,19 @@ retries, etc.</p>
       <pre class="lines">
 
 
-778
-779
-780
-781
 782
 783
 784
 785
 786
-787</pre>
+787
+788
+789
+790
+791</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/v1p3beta1/product_search_client.rb', line 778</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/v1p3beta1/product_search_client.rb', line 782</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_product'>get_product</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -3543,19 +3547,19 @@ retries, etc.</p>
       <pre class="lines">
 
 
-528
-529
-530
-531
 532
 533
 534
 535
 536
-537</pre>
+537
+538
+539
+540
+541</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/v1p3beta1/product_search_client.rb', line 528</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/v1p3beta1/product_search_client.rb', line 532</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_product_set'>get_product_set</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -3727,19 +3731,19 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1096
-1097
-1098
-1099
 1100
 1101
 1102
 1103
 1104
-1105</pre>
+1105
+1106
+1107
+1108
+1109</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/v1p3beta1/product_search_client.rb', line 1096</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/v1p3beta1/product_search_client.rb', line 1100</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_reference_image'>get_reference_image</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -3770,8 +3774,8 @@ retries, etc.</p>
     <p>Asynchronous API that imports a list of reference images to specified
 product sets based on a list of image information.</p>
 
-<p>The <span class='object_link'><a href="../../../Longrunning/Operation.html" title="Google::Longrunning::Operation (class)">Longrunning::Operation</a></span> API can be used to keep track of the
-progress and results of the request.
+<p>The <span class='object_link'><a href="../../../Longrunning/Operation.html" title="Google::Longrunning::Operation (class)">Longrunning::Operation</a></span> API can be
+used to keep track of the progress and results of the request.
 <code>Operation.metadata</code> contains <code>BatchOperationMetadata</code>. (progress)
 <code>Operation.response</code> contains <code>ImportProductSetsResponse</code>. (results)</p>
 
@@ -3916,10 +3920,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1328
-1329
-1330
-1331
 1332
 1333
 1334
@@ -3934,10 +3934,14 @@ retries, etc.</p>
 1343
 1344
 1345
-1346</pre>
+1346
+1347
+1348
+1349
+1350</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/v1p3beta1/product_search_client.rb', line 1328</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/v1p3beta1/product_search_client.rb', line 1332</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_import_product_sets'>import_product_sets</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -4155,10 +4159,6 @@ object.</p>
       <pre class="lines">
 
 
-489
-490
-491
-492
 493
 494
 495
@@ -4166,10 +4166,14 @@ object.</p>
 497
 498
 499
-500</pre>
+500
+501
+502
+503
+504</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/v1p3beta1/product_search_client.rb', line 489</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/v1p3beta1/product_search_client.rb', line 493</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_product_sets'>list_product_sets</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -4380,10 +4384,6 @@ object.</p>
       <pre class="lines">
 
 
-739
-740
-741
-742
 743
 744
 745
@@ -4391,10 +4391,14 @@ object.</p>
 747
 748
 749
-750</pre>
+750
+751
+752
+753
+754</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/v1p3beta1/product_search_client.rb', line 739</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/v1p3beta1/product_search_client.rb', line 743</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_products'>list_products</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -4607,10 +4611,6 @@ object.</p>
       <pre class="lines">
 
 
-1254
-1255
-1256
-1257
 1258
 1259
 1260
@@ -4618,10 +4618,14 @@ object.</p>
 1262
 1263
 1264
-1265</pre>
+1265
+1266
+1267
+1268
+1269</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/v1p3beta1/product_search_client.rb', line 1254</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/v1p3beta1/product_search_client.rb', line 1258</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_products_in_product_set'>list_products_in_product_set</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -4834,10 +4838,6 @@ object.</p>
       <pre class="lines">
 
 
-1056
-1057
-1058
-1059
 1060
 1061
 1062
@@ -4845,10 +4845,14 @@ object.</p>
 1064
 1065
 1066
-1067</pre>
+1067
+1068
+1069
+1070
+1071</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/v1p3beta1/product_search_client.rb', line 1056</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/v1p3beta1/product_search_client.rb', line 1060</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_reference_images'>list_reference_images</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -5393,10 +5397,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1190
-1191
-1192
-1193
 1194
 1195
 1196
@@ -5405,10 +5405,14 @@ retries, etc.</p>
 1199
 1200
 1201
-1202</pre>
+1202
+1203
+1204
+1205
+1206</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/v1p3beta1/product_search_client.rb', line 1190</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/v1p3beta1/product_search_client.rb', line 1194</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_remove_product_from_product_set'>remove_product_from_product_set</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -5617,10 +5621,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-837
-838
-839
-840
 841
 842
 843
@@ -5628,10 +5628,14 @@ retries, etc.</p>
 845
 846
 847
-848</pre>
+848
+849
+850
+851
+852</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/v1p3beta1/product_search_client.rb', line 837</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/v1p3beta1/product_search_client.rb', line 841</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update_product'>update_product</span> \
     <span class='id identifier rubyid_product'>product</span><span class='comma'>,</span>
@@ -5831,10 +5835,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-579
-580
-581
-582
 583
 584
 585
@@ -5842,10 +5842,14 @@ retries, etc.</p>
 587
 588
 589
-590</pre>
+590
+591
+592
+593
+594</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/v1p3beta1/product_search_client.rb', line 579</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/v1p3beta1/product_search_client.rb', line 583</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update_product_set'>update_product_set</span> \
     <span class='id identifier rubyid_product_set'>product_set</span><span class='comma'>,</span>

@@ -133,17 +133,19 @@ js:
 search. It uses the following resource model:</p>
 
 <ul>
-<li>The API has a collection of <span class='object_link'><a href="V1/ProductSet.html" title="Google::Cloud::Vision::V1::ProductSet (class)">ProductSet</a></span> resources, named
-<code>projects/*/locations/*/productSets/*</code>, which acts as a way to put different
-products into groups to limit identification.</li>
+<li>The API has a collection of <span class='object_link'><a href="V1/ProductSet.html" title="Google::Cloud::Vision::V1::ProductSet (class)">ProductSet</a></span>
+resources, named <code>projects/*/locations/*/productSets/*</code>, which acts as a way
+to put different products into groups to limit identification.</li>
 </ul>
 
 <p>In parallel,</p>
 
 <ul>
-<li><p>The API has a collection of <span class='object_link'><a href="V1/Product.html" title="Google::Cloud::Vision::V1::Product (class)">Product</a></span> resources, named
+<li><p>The API has a collection of <span class='object_link'><a href="V1/Product.html" title="Google::Cloud::Vision::V1::Product (class)">Product</a></span>
+resources, named
 <code>projects/*/locations/*/products/*</code></p></li>
-<li><p>Each <span class='object_link'><a href="V1/Product.html" title="Google::Cloud::Vision::V1::Product (class)">Product</a></span> has a collection of <span class='object_link'><a href="V1/ReferenceImage.html" title="Google::Cloud::Vision::V1::ReferenceImage (class)">ReferenceImage</a></span> resources, named
+<li><p>Each <span class='object_link'><a href="V1/Product.html" title="Google::Cloud::Vision::V1::Product (class)">Product</a></span> has a collection of
+<span class='object_link'><a href="V1/ReferenceImage.html" title="Google::Cloud::Vision::V1::ReferenceImage (class)">ReferenceImage</a></span> resources, named
 <code>projects/*/locations/*/products/*/referenceImages/*</code></p></li>
 </ul>
 
@@ -301,8 +303,6 @@ is used.</p>
       <pre class="lines">
 
 
-165
-166
 167
 168
 169
@@ -313,10 +313,12 @@ is used.</p>
 174
 175
 176
-177</pre>
+177
+178
+179</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision.rb', line 165</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision.rb', line 167</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='label'>version:</span> <span class='symbol'>:v1</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='rparen'>)</span>
   <span class='kw'>unless</span> <span class='const'><span class='object_link'><a href="../Vision.html#AVAILABLE_VERSIONS-constant" title="Google::Cloud::Vision::AVAILABLE_VERSIONS (constant)">AVAILABLE_VERSIONS</a></span></span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span><span class='lparen'>(</span><span class='id identifier rubyid_version'>version</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='period'>.</span><span class='id identifier rubyid_downcase'>downcase</span><span class='rparen'>)</span>
