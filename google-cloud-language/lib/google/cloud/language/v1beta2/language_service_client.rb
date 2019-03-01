@@ -274,8 +274,10 @@ module Google
             @analyze_entities.call(req, options, &block)
           end
 
-          # Finds entities, similar to {Google::Cloud::Language::V1beta2::LanguageService::AnalyzeEntities AnalyzeEntities} in the text and analyzes
-          # sentiment associated with each entity and its mentions.
+          # Finds entities, similar to
+          # {Google::Cloud::Language::V1beta2::LanguageService::AnalyzeEntities AnalyzeEntities}
+          # in the text and analyzes sentiment associated with each entity and its
+          # mentions.
           #
           # @param document [Google::Cloud::Language::V1beta2::Document | Hash]
           #   Input document.
