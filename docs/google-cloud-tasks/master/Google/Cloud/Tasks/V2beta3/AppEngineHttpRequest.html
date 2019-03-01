@@ -95,9 +95,11 @@ js:
 the task is dispatched.</p>
 
 <p>This proto can only be used for tasks in a queue which has
-<span class='object_link'><a href="Queue.html#app_engine_http_queue-instance_method" title="Google::Cloud::Tasks::V2beta3::Queue#app_engine_http_queue (method)">app_engine_http_queue</a></span> set.</p>
+<span class='object_link'><a href="Queue.html#app_engine_http_queue-instance_method" title="Google::Cloud::Tasks::V2beta3::Queue#app_engine_http_queue (method)">app_engine_http_queue</a></span>
+set.</p>
 
-<p>Using <span class='object_link'><a href="" title="Google::Cloud::Tasks::V2beta3::AppEngineHttpRequest (class)">AppEngineHttpRequest</a></span> requires
+<p>Using <span class='object_link'><a href="" title="Google::Cloud::Tasks::V2beta3::AppEngineHttpRequest (class)">AppEngineHttpRequest</a></span>
+requires
 <a href="https://cloud.google.com/appengine/docs/admin-api/access-control"><code>appengine.applications.get</code></a>
 Google IAM permission for the project
 and the following scope:</p>
@@ -106,24 +108,28 @@ and the following scope:</p>
 
 <p>The task will be delivered to the App Engine app which belongs to the same
 project as the queue. For more information, see
-<a href="https://cloud.google.com/appengine/docs/standard/python/how-requests-are-routed">How Requests are Routed</a>
+<a href="https://cloud.google.com/appengine/docs/standard/python/how-requests-are-routed">How Requests are
+Routed</a>
 and how routing is affected by
-<a href="https://cloud.google.com/appengine/docs/python/config/dispatchref">dispatch files</a>.
+<a href="https://cloud.google.com/appengine/docs/python/config/dispatchref">dispatch
+files</a>.
 Traffic is encrypted during transport and never leaves Google datacenters.
 Because this traffic is carried over a communication mechanism internal to
 Google, you cannot explicitly set the protocol (for example, HTTP or HTTPS).
 The request to the handler, however, will appear to have used the HTTP
 protocol.</p>
 
-<p>The <span class='object_link'><a href="AppEngineRouting.html" title="Google::Cloud::Tasks::V2beta3::AppEngineRouting (class)">AppEngineRouting</a></span> used to construct the URL that the task is
-delivered to can be set at the queue-level or task-level:</p>
+<p>The <span class='object_link'><a href="AppEngineRouting.html" title="Google::Cloud::Tasks::V2beta3::AppEngineRouting (class)">AppEngineRouting</a></span> used to
+construct the URL that the task is delivered to can be set at the queue-level
+or task-level:</p>
 
 <ul>
 <li>If set,
 <span class='object_link'><a href="AppEngineHttpQueue.html#app_engine_routing_override-instance_method" title="Google::Cloud::Tasks::V2beta3::AppEngineHttpQueue#app_engine_routing_override (method)">app_engine_routing_override</a></span>
 is used for all tasks in the queue, no matter what the setting
 is for the
-<span class='object_link'><a href="#app_engine_routing-instance_method" title="Google::Cloud::Tasks::V2beta3::AppEngineHttpRequest#app_engine_routing (method)">task-level app_engine_routing</a></span>.</li>
+[task-level
+app_engine_routing][google.cloud.tasks.v2beta3.AppEngineHttpRequest.app_engine_routing].</li>
 </ul>
 
 <p>The <code>url</code> that the task will be sent to is:</p>
@@ -135,10 +141,12 @@ is for the
 
 <p>Tasks can be dispatched to secure app handlers, unsecure app handlers, and
 URIs restricted with
-<a href="https://cloud.google.com/appengine/docs/standard/python/config/appref"><code>login: admin</code></a>.
+<a href="https://cloud.google.com/appengine/docs/standard/python/config/appref"><code>login:
+admin</code></a>.
 Because tasks are not run as any user, they cannot be dispatched to URIs
 restricted with
-<a href="https://cloud.google.com/appengine/docs/standard/python/config/appref"><code>login: required</code></a>
+<a href="https://cloud.google.com/appengine/docs/standard/python/config/appref"><code>login:
+required</code></a>
 Task dispatches also do not follow redirects.</p>
 
 <p>The task attempt has succeeded if the app&#39;s request handler returns
@@ -319,7 +327,8 @@ deadline is a failed attempt.</p>
 <p>If set,
 <span class='object_link'><a href="AppEngineHttpQueue.html#app_engine_routing_override-instance_method" title="Google::Cloud::Tasks::V2beta3::AppEngineHttpQueue#app_engine_routing_override (method)">app_engine_routing_override</a></span>
 is used for all tasks in the queue, no matter what the setting is for the
-<span class='object_link'><a href="#app_engine_routing-instance_method" title="Google::Cloud::Tasks::V2beta3::AppEngineHttpRequest#app_engine_routing (method)">task-level app_engine_routing</a></span>.</p>
+[task-level
+app_engine_routing][google.cloud.tasks.v2beta3.AppEngineHttpRequest.app_engine_routing].</p>
 
 
   </div>
@@ -342,7 +351,8 @@ is used for all tasks in the queue, no matter what the setting is for the
 <p>If set,
 <span class='object_link'><a href="AppEngineHttpQueue.html#app_engine_routing_override-instance_method" title="Google::Cloud::Tasks::V2beta3::AppEngineHttpQueue#app_engine_routing_override (method)">app_engine_routing_override</a></span>
 is used for all tasks in the queue, no matter what the setting is for the
-<span class='object_link'><a href="#app_engine_routing-instance_method" title="Google::Cloud::Tasks::V2beta3::AppEngineHttpRequest#app_engine_routing (method)">task-level app_engine_routing</a></span>.</p>
+[task-level
+app_engine_routing][google.cloud.tasks.v2beta3.AppEngineHttpRequest.app_engine_routing].</p>
 </div>
       
     </li>
@@ -355,10 +365,10 @@ is used for all tasks in the queue, no matter what the setting is for the
       <pre class="lines">
 
 
-260</pre>
+284</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/doc/google/cloud/tasks/v2beta3/target.rb', line 260</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/doc/google/cloud/tasks/v2beta3/target.rb', line 284</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Tasks::V2beta3::AppEngineHttpRequest (class)">AppEngineHttpRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -382,7 +392,8 @@ is used for all tasks in the queue, no matter what the setting is for the
     <p>Returns HTTP request body.</p>
 
 <p>A request body is allowed only if the HTTP method is POST or PUT. It is
-an error to set a body on a task with an incompatible <span class='object_link'><a href="HttpMethod.html" title="Google::Cloud::Tasks::V2beta3::HttpMethod (module)">HttpMethod</a></span>.</p>
+an error to set a body on a task with an incompatible
+<span class='object_link'><a href="HttpMethod.html" title="Google::Cloud::Tasks::V2beta3::HttpMethod (module)">HttpMethod</a></span>.</p>
 
 
   </div>
@@ -403,7 +414,8 @@ an error to set a body on a task with an incompatible <span class='object_link'>
         <div class='inline'><p>HTTP request body.</p>
 
 <p>A request body is allowed only if the HTTP method is POST or PUT. It is
-an error to set a body on a task with an incompatible <span class='object_link'><a href="HttpMethod.html" title="Google::Cloud::Tasks::V2beta3::HttpMethod (module)">HttpMethod</a></span>.</p>
+an error to set a body on a task with an incompatible
+<span class='object_link'><a href="HttpMethod.html" title="Google::Cloud::Tasks::V2beta3::HttpMethod (module)">HttpMethod</a></span>.</p>
 </div>
       
     </li>
@@ -416,10 +428,10 @@ an error to set a body on a task with an incompatible <span class='object_link'>
       <pre class="lines">
 
 
-260</pre>
+284</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/doc/google/cloud/tasks/v2beta3/target.rb', line 260</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/doc/google/cloud/tasks/v2beta3/target.rb', line 284</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Tasks::V2beta3::AppEngineHttpRequest (class)">AppEngineHttpRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -457,8 +469,9 @@ This header can be modified, but Cloud Tasks will append
 modified <code>User-Agent</code>.</li>
 </ul>
 
-<p>If the task has a <span class='object_link'><a href="#body-instance_method" title="Google::Cloud::Tasks::V2beta3::AppEngineHttpRequest#body (method)">body</a></span>, Cloud
-Tasks sets the following headers:</p>
+<p>If the task has a
+<span class='object_link'><a href="#body-instance_method" title="Google::Cloud::Tasks::V2beta3::AppEngineHttpRequest#body (method)">body</a></span>, Cloud Tasks
+sets the following headers:</p>
 
 <ul>
 <li><code>Content-Type</code>: By default, the <code>Content-Type</code> header is set to
@@ -480,13 +493,16 @@ output only.   It cannot be changed.</li>
 
 <p>In addition, Cloud Tasks sets some headers when the task is dispatched,
 such as headers containing information about the task; see
-<a href="https://cloud.google.com/appengine/docs/python/taskqueue/push/creating-handlers#reading_request_headers">request headers</a>.
+<a href="https://cloud.google.com/appengine/docs/python/taskqueue/push/creating-handlers#reading_request_headers">request
+headers</a>.
 These headers are set only when the task is dispatched, so they are not
 visible when the task is returned in a Cloud Tasks response.</p>
 
 <p>Although there is no specific limit for the maximum number of headers or
-the size, there is a limit on the maximum size of the <span class='object_link'><a href="Task.html" title="Google::Cloud::Tasks::V2beta3::Task (class)">Task</a></span>. For more
-information, see the CreateTask documentation.</p>
+the size, there is a limit on the maximum size of the
+<span class='object_link'><a href="Task.html" title="Google::Cloud::Tasks::V2beta3::Task (class)">Task</a></span>. For more information, see the
+CreateTask
+documentation.</p>
 
 
   </div>
@@ -521,8 +537,9 @@ This header can be modified, but Cloud Tasks will append
 modified <code>User-Agent</code>.</li>
 </ul>
 
-<p>If the task has a <span class='object_link'><a href="#body-instance_method" title="Google::Cloud::Tasks::V2beta3::AppEngineHttpRequest#body (method)">body</a></span>, Cloud
-Tasks sets the following headers:</p>
+<p>If the task has a
+<span class='object_link'><a href="#body-instance_method" title="Google::Cloud::Tasks::V2beta3::AppEngineHttpRequest#body (method)">body</a></span>, Cloud Tasks
+sets the following headers:</p>
 
 <ul>
 <li><code>Content-Type</code>: By default, the <code>Content-Type</code> header is set to
@@ -544,13 +561,16 @@ output only.   It cannot be changed.</li>
 
 <p>In addition, Cloud Tasks sets some headers when the task is dispatched,
 such as headers containing information about the task; see
-<a href="https://cloud.google.com/appengine/docs/python/taskqueue/push/creating-handlers#reading_request_headers">request headers</a>.
+<a href="https://cloud.google.com/appengine/docs/python/taskqueue/push/creating-handlers#reading_request_headers">request
+headers</a>.
 These headers are set only when the task is dispatched, so they are not
 visible when the task is returned in a Cloud Tasks response.</p>
 
 <p>Although there is no specific limit for the maximum number of headers or
-the size, there is a limit on the maximum size of the <span class='object_link'><a href="Task.html" title="Google::Cloud::Tasks::V2beta3::Task (class)">Task</a></span>. For more
-information, see the CreateTask documentation.</p>
+the size, there is a limit on the maximum size of the
+<span class='object_link'><a href="Task.html" title="Google::Cloud::Tasks::V2beta3::Task (class)">Task</a></span>. For more information, see the
+CreateTask
+documentation.</p>
 </div>
       
     </li>
@@ -563,10 +583,10 @@ information, see the CreateTask documentation.</p>
       <pre class="lines">
 
 
-260</pre>
+284</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/doc/google/cloud/tasks/v2beta3/target.rb', line 260</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/doc/google/cloud/tasks/v2beta3/target.rb', line 284</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Tasks::V2beta3::AppEngineHttpRequest (class)">AppEngineHttpRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -592,10 +612,12 @@ information, see the CreateTask documentation.</p>
 <p>The app&#39;s request handler for the task&#39;s target URL must be able to handle
 HTTP requests with this http_method, otherwise the task attempt will fail
 with error code 405 (Method Not Allowed). See
-<a href="https://cloud.google.com/appengine/docs/java/taskqueue/push/creating-handlers#writing_a_push_task_request_handler">Writing a push task request handler</a>
+<a href="https://cloud.google.com/appengine/docs/java/taskqueue/push/creating-handlers#writing_a_push_task_request_handler">Writing a push task request
+handler</a>
 and the documentation for the request handlers in the language your app is
 written in e.g.
-<a href="https://cloud.google.com/appengine/docs/python/tools/webapp/requesthandlerclass">Python Request Handler</a>.</p>
+<a href="https://cloud.google.com/appengine/docs/python/tools/webapp/requesthandlerclass">Python Request
+Handler</a>.</p>
 
 
   </div>
@@ -618,10 +640,12 @@ written in e.g.
 <p>The app&#39;s request handler for the task&#39;s target URL must be able to handle
 HTTP requests with this http_method, otherwise the task attempt will fail
 with error code 405 (Method Not Allowed). See
-<a href="https://cloud.google.com/appengine/docs/java/taskqueue/push/creating-handlers#writing_a_push_task_request_handler">Writing a push task request handler</a>
+<a href="https://cloud.google.com/appengine/docs/java/taskqueue/push/creating-handlers#writing_a_push_task_request_handler">Writing a push task request
+handler</a>
 and the documentation for the request handlers in the language your app is
 written in e.g.
-<a href="https://cloud.google.com/appengine/docs/python/tools/webapp/requesthandlerclass">Python Request Handler</a>.</p>
+<a href="https://cloud.google.com/appengine/docs/python/tools/webapp/requesthandlerclass">Python Request
+Handler</a>.</p>
 </div>
       
     </li>
@@ -634,10 +658,10 @@ written in e.g.
       <pre class="lines">
 
 
-260</pre>
+284</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/doc/google/cloud/tasks/v2beta3/target.rb', line 260</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/doc/google/cloud/tasks/v2beta3/target.rb', line 284</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Tasks::V2beta3::AppEngineHttpRequest (class)">AppEngineHttpRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -699,10 +723,10 @@ No spaces are allowed, and the maximum length allowed is 2083 characters.</p>
       <pre class="lines">
 
 
-260</pre>
+284</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/doc/google/cloud/tasks/v2beta3/target.rb', line 260</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/doc/google/cloud/tasks/v2beta3/target.rb', line 284</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Tasks::V2beta3::AppEngineHttpRequest (class)">AppEngineHttpRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>

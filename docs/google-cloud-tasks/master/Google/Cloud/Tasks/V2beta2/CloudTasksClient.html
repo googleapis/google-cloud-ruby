@@ -1792,12 +1792,13 @@ custom error handling.</p>
     <p>Acknowledges a pull task.</p>
 
 <p>The worker, that is, the entity that
-leased this task must call this method
-to indicate that the work associated with the task has finished.</p>
+leased this task must
+call this method to indicate that the work associated with the task has
+finished.</p>
 
 <p>The worker must acknowledge a task within the
-<span class='object_link'><a href="LeaseTasksRequest.html#lease_duration-instance_method" title="Google::Cloud::Tasks::V2beta2::LeaseTasksRequest#lease_duration (method)">lease_duration</a></span> or the lease
-will expire and the task will become available to be leased
+<span class='object_link'><a href="LeaseTasksRequest.html#lease_duration-instance_method" title="Google::Cloud::Tasks::V2beta2::LeaseTasksRequest#lease_duration (method)">lease_duration</a></span>
+or the lease will expire and the task will become available to be leased
 again. After the task is acknowledged, it will not be returned
 by a later LeaseTasks,
 GetTask, or
@@ -1858,8 +1859,8 @@ ListTasks.</p>
 <p>The task&#39;s current schedule time, available in the
 <span class='object_link'><a href="Task.html#schedule_time-instance_method" title="Google::Cloud::Tasks::V2beta2::Task#schedule_time (method)">schedule_time</a></span> returned by
 LeaseTasks response or
-RenewLease response. This restriction is
-to ensure that your worker currently holds the lease.
+RenewLease response.
+This restriction is to ensure that your worker currently holds the lease.
 A hash of the same form as <code>Google::Protobuf::Timestamp</code>
 can also be provided.</p>
 </div>
@@ -1955,22 +1956,22 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1386
-1387
-1388
-1389
-1390
-1391
-1392
-1393
-1394
-1395
-1396
-1397
-1398</pre>
+1408
+1409
+1410
+1411
+1412
+1413
+1414
+1415
+1416
+1417
+1418
+1419
+1420</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta2/cloud_tasks_client.rb', line 1386</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta2/cloud_tasks_client.rb', line 1408</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_acknowledge_task'>acknowledge_task</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -2004,9 +2005,9 @@ retries, etc.</p>
     <p>Cancel a pull task&#39;s lease.</p>
 
 <p>The worker can use this method to cancel a task&#39;s lease by
-setting its <span class='object_link'><a href="Task.html#schedule_time-instance_method" title="Google::Cloud::Tasks::V2beta2::Task#schedule_time (method)">schedule_time</a></span> to now. This will
-make the task available to be leased to the next caller of
-LeaseTasks.</p>
+setting its <span class='object_link'><a href="Task.html#schedule_time-instance_method" title="Google::Cloud::Tasks::V2beta2::Task#schedule_time (method)">schedule_time</a></span>
+to now. This will make the task available to be leased to the next caller
+of LeaseTasks.</p>
 
 
   </div>
@@ -2063,8 +2064,8 @@ LeaseTasks.</p>
 <p>The task&#39;s current schedule time, available in the
 <span class='object_link'><a href="Task.html#schedule_time-instance_method" title="Google::Cloud::Tasks::V2beta2::Task#schedule_time (method)">schedule_time</a></span> returned by
 LeaseTasks response or
-RenewLease response. This restriction is
-to ensure that your worker currently holds the lease.
+RenewLease response.
+This restriction is to ensure that your worker currently holds the lease.
 A hash of the same form as <code>Google::Protobuf::Timestamp</code>
 can also be provided.</p>
 </div>
@@ -2081,18 +2082,19 @@ can also be provided.</p>
       
       
         &mdash;
-        <div class='inline'><p>The response_view specifies which subset of the <span class='object_link'><a href="Task.html" title="Google::Cloud::Tasks::V2beta2::Task (class)">Task</a></span> will be
-returned.</p>
+        <div class='inline'><p>The response_view specifies which subset of the
+<span class='object_link'><a href="Task.html" title="Google::Cloud::Tasks::V2beta2::Task (class)">Task</a></span> will be returned.</p>
 
-<p>By default response_view is <span class='object_link'><a href="Task/View.html#BASIC-constant" title="Google::Cloud::Tasks::V2beta2::Task::View::BASIC (constant)">BASIC</a></span>; not all
-information is retrieved by default because some data, such as
-payloads, might be desirable to return only when needed because
-of its large size or because of the sensitivity of data that it
-contains.</p>
+<p>By default response_view is
+<span class='object_link'><a href="Task/View.html#BASIC-constant" title="Google::Cloud::Tasks::V2beta2::Task::View::BASIC (constant)">BASIC</a></span>; not all information is
+retrieved by default because some data, such as payloads, might be
+desirable to return only when needed because of its large size or because
+of the sensitivity of data that it contains.</p>
 
-<p>Authorization for <span class='object_link'><a href="Task/View.html#FULL-constant" title="Google::Cloud::Tasks::V2beta2::Task::View::FULL (constant)">FULL</a></span> requires
-<code>cloudtasks.tasks.fullView</code> <a href="https://cloud.google.com/iam/">Google IAM</a>
-permission on the <span class='object_link'><a href="Task.html" title="Google::Cloud::Tasks::V2beta2::Task (class)">Task</a></span> resource.</p>
+<p>Authorization for <span class='object_link'><a href="Task/View.html#FULL-constant" title="Google::Cloud::Tasks::V2beta2::Task::View::FULL (constant)">FULL</a></span>
+requires <code>cloudtasks.tasks.fullView</code> <a href="https://cloud.google.com/iam/">Google
+IAM</a> permission on the
+<span class='object_link'><a href="Task.html" title="Google::Cloud::Tasks::V2beta2::Task (class)">Task</a></span> resource.</p>
 </div>
       
     </li>
@@ -2195,23 +2197,23 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1535
-1536
-1537
-1538
-1539
-1540
-1541
-1542
-1543
-1544
-1545
-1546
-1547
-1548</pre>
+1560
+1561
+1562
+1563
+1564
+1565
+1566
+1567
+1568
+1569
+1570
+1571
+1572
+1573</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta2/cloud_tasks_client.rb', line 1535</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta2/cloud_tasks_client.rb', line 1560</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_cancel_lease'>cancel_lease</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -2246,14 +2248,15 @@ retries, etc.</p>
     <p>Creates a queue.</p>
 
 <p>Queues created with this method allow tasks to live for a maximum of 31
-days. After a task is 31 days old, the task will be deleted regardless of whether
-it was dispatched or not.</p>
+days. After a task is 31 days old, the task will be deleted regardless of
+whether it was dispatched or not.</p>
 
 <p>WARNING: Using this method may have unintended side effects if you are
 using an App Engine <code>queue.yaml</code> or <code>queue.xml</code> file to manage your queues.
 Read
-<a href="https://cloud.google.com/tasks/docs/queue-yaml">Overview of Queue Management and queue.yaml</a>
-before using this method.</p>
+<a href="https://cloud.google.com/tasks/docs/queue-yaml">Overview of Queue Management and
+queue.yaml</a> before using
+this method.</p>
 
 
   </div>
@@ -2313,7 +2316,8 @@ ListLocations.</p>
 
 <p>The queue to create.</p>
 
-<p><span class='object_link'><a href="Queue.html#name-instance_method" title="Google::Cloud::Tasks::V2beta2::Queue#name (method)">Queue&#39;s name</a></span> cannot be the same as an existing queue.
+<p><span class='object_link'><a href="Queue.html#name-instance_method" title="Google::Cloud::Tasks::V2beta2::Queue#name (method)">Queue&#39;s name</a></span> cannot be the same as
+an existing queue.
 A hash of the same form as <code>Google::Cloud::Tasks::V2beta2::Queue</code>
 can also be provided.</p>
 </div>
@@ -2418,8 +2422,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-566
-567
 568
 569
 570
@@ -2429,10 +2431,12 @@ retries, etc.</p>
 574
 575
 576
-577</pre>
+577
+578
+579</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta2/cloud_tasks_client.rb', line 566</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta2/cloud_tasks_client.rb', line 568</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_queue'>create_queue</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -2467,9 +2471,11 @@ retries, etc.</p>
 <p>Tasks cannot be updated after creation; there is no UpdateTask command.</p>
 
 <ul>
-<li>For <span class='object_link'><a href="AppEngineHttpTarget.html" title="Google::Cloud::Tasks::V2beta2::AppEngineHttpTarget (class)">App Engine queues</a></span>, the maximum task size is
+<li>For <span class='object_link'><a href="AppEngineHttpTarget.html" title="Google::Cloud::Tasks::V2beta2::AppEngineHttpTarget (class)">App Engine queues</a></span>,
+the maximum task size is
 100KB.</li>
-<li>For <span class='object_link'><a href="PullTarget.html" title="Google::Cloud::Tasks::V2beta2::PullTarget (class)">pull queues</a></span>, the maximum task size is 1MB.</li>
+<li>For <span class='object_link'><a href="PullTarget.html" title="Google::Cloud::Tasks::V2beta2::PullTarget (class)">pull queues</a></span>, the maximum
+task size is 1MB.</li>
 </ul>
 
 
@@ -2530,13 +2536,13 @@ retries, etc.</p>
 
 <p>Task names have the following format:
 <code>projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID</code>.
-The user can optionally specify a task <span class='object_link'><a href="Task.html#name-instance_method" title="Google::Cloud::Tasks::V2beta2::Task#name (method)">name</a></span>. If a
-name is not specified then the system will generate a random
-unique task id, which will be set in the task returned in the
-<span class='object_link'><a href="Task.html#name-instance_method" title="Google::Cloud::Tasks::V2beta2::Task#name (method)">response</a></span>.</p>
+The user can optionally specify a task
+<span class='object_link'><a href="Task.html#name-instance_method" title="Google::Cloud::Tasks::V2beta2::Task#name (method)">name</a></span>. If a name is not specified
+then the system will generate a random unique task id, which will be set in
+the task returned in the <span class='object_link'><a href="Task.html#name-instance_method" title="Google::Cloud::Tasks::V2beta2::Task#name (method)">response</a></span>.</p>
 
-<p>If <span class='object_link'><a href="Task.html#schedule_time-instance_method" title="Google::Cloud::Tasks::V2beta2::Task#schedule_time (method)">schedule_time</a></span> is not set or is in the
-past then Cloud Tasks will set it to the current time.</p>
+<p>If <span class='object_link'><a href="Task.html#schedule_time-instance_method" title="Google::Cloud::Tasks::V2beta2::Task#schedule_time (method)">schedule_time</a></span> is not
+set or is in the past then Cloud Tasks will set it to the current time.</p>
 
 <p>Task De-duplication:</p>
 
@@ -2551,10 +2557,10 @@ queue.xml, then another task with the same name can&#39;t be created
 for ~9days after the original task was deleted or completed.</p>
 
 <p>Because there is an extra lookup cost to identify duplicate task
-names, these CreateTask calls have significantly
-increased latency. Using hashed strings for the task id or for
-the prefix of the task id is recommended. Choosing task ids that
-are sequential or have sequential prefixes, for example using a
+names, these CreateTask
+calls have significantly increased latency. Using hashed strings for the
+task id or for the prefix of the task id is recommended. Choosing task ids
+that are sequential or have sequential prefixes, for example using a
 timestamp, causes an increase in latency and error rates in all
 task commands. The infrastructure relies on an approximately
 uniform distribution of task ids to store and serve tasks
@@ -2575,18 +2581,19 @@ can also be provided.</p>
       
       
         &mdash;
-        <div class='inline'><p>The response_view specifies which subset of the <span class='object_link'><a href="Task.html" title="Google::Cloud::Tasks::V2beta2::Task (class)">Task</a></span> will be
-returned.</p>
+        <div class='inline'><p>The response_view specifies which subset of the
+<span class='object_link'><a href="Task.html" title="Google::Cloud::Tasks::V2beta2::Task (class)">Task</a></span> will be returned.</p>
 
-<p>By default response_view is <span class='object_link'><a href="Task/View.html#BASIC-constant" title="Google::Cloud::Tasks::V2beta2::Task::View::BASIC (constant)">BASIC</a></span>; not all
-information is retrieved by default because some data, such as
-payloads, might be desirable to return only when needed because
-of its large size or because of the sensitivity of data that it
-contains.</p>
+<p>By default response_view is
+<span class='object_link'><a href="Task/View.html#BASIC-constant" title="Google::Cloud::Tasks::V2beta2::Task::View::BASIC (constant)">BASIC</a></span>; not all information is
+retrieved by default because some data, such as payloads, might be
+desirable to return only when needed because of its large size or because
+of the sensitivity of data that it contains.</p>
 
-<p>Authorization for <span class='object_link'><a href="Task/View.html#FULL-constant" title="Google::Cloud::Tasks::V2beta2::Task::View::FULL (constant)">FULL</a></span> requires
-<code>cloudtasks.tasks.fullView</code> <a href="https://cloud.google.com/iam/">Google IAM</a>
-permission on the <span class='object_link'><a href="Task.html" title="Google::Cloud::Tasks::V2beta2::Task (class)">Task</a></span> resource.</p>
+<p>Authorization for <span class='object_link'><a href="Task/View.html#FULL-constant" title="Google::Cloud::Tasks::V2beta2::Task::View::FULL (constant)">FULL</a></span>
+requires <code>cloudtasks.tasks.fullView</code> <a href="https://cloud.google.com/iam/">Google
+IAM</a> permission on the
+<span class='object_link'><a href="Task.html" title="Google::Cloud::Tasks::V2beta2::Task (class)">Task</a></span> resource.</p>
 </div>
       
     </li>
@@ -2689,23 +2696,23 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1161
-1162
-1163
-1164
-1165
-1166
-1167
-1168
-1169
-1170
-1171
-1172
-1173
-1174</pre>
+1177
+1178
+1179
+1180
+1181
+1182
+1183
+1184
+1185
+1186
+1187
+1188
+1189
+1190</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta2/cloud_tasks_client.rb', line 1161</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta2/cloud_tasks_client.rb', line 1177</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_task'>create_task</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -2747,8 +2754,9 @@ for 7 days.</p>
 <p>WARNING: Using this method may have unintended side effects if you are
 using an App Engine <code>queue.yaml</code> or <code>queue.xml</code> file to manage your queues.
 Read
-<a href="https://cloud.google.com/tasks/docs/queue-yaml">Overview of Queue Management and queue.yaml</a>
-before using this method.</p>
+<a href="https://cloud.google.com/tasks/docs/queue-yaml">Overview of Queue Management and
+queue.yaml</a> before using
+this method.</p>
 
 
   </div>
@@ -2876,20 +2884,20 @@ retries, etc.</p>
       <pre class="lines">
 
 
-674
-675
-676
-677
-678
-679
 680
 681
 682
 683
-684</pre>
+684
+685
+686
+687
+688
+689
+690</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta2/cloud_tasks_client.rb', line 674</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta2/cloud_tasks_client.rb', line 680</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete_queue'>delete_queue</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -3050,20 +3058,20 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1201
-1202
-1203
-1204
-1205
-1206
-1207
-1208
-1209
-1210
-1211</pre>
+1217
+1218
+1219
+1220
+1221
+1222
+1223
+1224
+1225
+1226
+1227</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta2/cloud_tasks_client.rb', line 1201</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta2/cloud_tasks_client.rb', line 1217</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete_task'>delete_task</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -3092,9 +3100,9 @@ retries, etc.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the access control policy for a <span class='object_link'><a href="Queue.html" title="Google::Cloud::Tasks::V2beta2::Queue (class)">Queue</a></span>.
-Returns an empty policy if the resource exists and does not have a policy
-set.</p>
+    <p>Gets the access control policy for a
+<span class='object_link'><a href="Queue.html" title="Google::Cloud::Tasks::V2beta2::Queue (class)">Queue</a></span>. Returns an empty policy if the
+resource exists and does not have a policy set.</p>
 
 <p>Authorization requires the following
 <a href="https://cloud.google.com/iam">Google IAM</a> permission on the specified
@@ -3238,19 +3246,19 @@ retries, etc.</p>
       <pre class="lines">
 
 
-836
-837
-838
-839
-840
-841
-842
-843
-844
-845</pre>
+846
+847
+848
+849
+850
+851
+852
+853
+854
+855</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta2/cloud_tasks_client.rb', line 836</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta2/cloud_tasks_client.rb', line 846</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_iam_policy'>get_iam_policy</span> \
     <span class='id identifier rubyid_resource'>resource</span><span class='comma'>,</span>
@@ -3504,18 +3512,19 @@ retries, etc.</p>
       
       
         &mdash;
-        <div class='inline'><p>The response_view specifies which subset of the <span class='object_link'><a href="Task.html" title="Google::Cloud::Tasks::V2beta2::Task (class)">Task</a></span> will be
-returned.</p>
+        <div class='inline'><p>The response_view specifies which subset of the
+<span class='object_link'><a href="Task.html" title="Google::Cloud::Tasks::V2beta2::Task (class)">Task</a></span> will be returned.</p>
 
-<p>By default response_view is <span class='object_link'><a href="Task/View.html#BASIC-constant" title="Google::Cloud::Tasks::V2beta2::Task::View::BASIC (constant)">BASIC</a></span>; not all
-information is retrieved by default because some data, such as
-payloads, might be desirable to return only when needed because
-of its large size or because of the sensitivity of data that it
-contains.</p>
+<p>By default response_view is
+<span class='object_link'><a href="Task/View.html#BASIC-constant" title="Google::Cloud::Tasks::V2beta2::Task::View::BASIC (constant)">BASIC</a></span>; not all information is
+retrieved by default because some data, such as payloads, might be
+desirable to return only when needed because of its large size or because
+of the sensitivity of data that it contains.</p>
 
-<p>Authorization for <span class='object_link'><a href="Task/View.html#FULL-constant" title="Google::Cloud::Tasks::V2beta2::Task::View::FULL (constant)">FULL</a></span> requires
-<code>cloudtasks.tasks.fullView</code> <a href="https://cloud.google.com/iam/">Google IAM</a>
-permission on the <span class='object_link'><a href="Task.html" title="Google::Cloud::Tasks::V2beta2::Task (class)">Task</a></span> resource.</p>
+<p>Authorization for <span class='object_link'><a href="Task/View.html#FULL-constant" title="Google::Cloud::Tasks::V2beta2::Task::View::FULL (constant)">FULL</a></span>
+requires <code>cloudtasks.tasks.fullView</code> <a href="https://cloud.google.com/iam/">Google
+IAM</a> permission on the
+<span class='object_link'><a href="Task.html" title="Google::Cloud::Tasks::V2beta2::Task (class)">Task</a></span> resource.</p>
 </div>
       
     </li>
@@ -3618,21 +3627,21 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1064
-1065
-1066
-1067
-1068
-1069
-1070
-1071
-1072
-1073
-1074
-1075</pre>
+1077
+1078
+1079
+1080
+1081
+1082
+1083
+1084
+1085
+1086
+1087
+1088</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta2/cloud_tasks_client.rb', line 1064</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta2/cloud_tasks_client.rb', line 1077</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_task'>get_task</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -3667,18 +3676,19 @@ retries, etc.</p>
 
 <p>This method is invoked by the worker to obtain a lease. The
 worker must acknowledge the task via
-AcknowledgeTask after they have
-performed the work associated with the task.</p>
+AcknowledgeTask
+after they have performed the work associated with the task.</p>
 
-<p>The <span class='object_link'><a href="PullMessage.html#payload-instance_method" title="Google::Cloud::Tasks::V2beta2::PullMessage#payload (method)">payload</a></span> is intended to store data that
-the worker needs to perform the work associated with the task. To
-return the payloads in the <span class='object_link'><a href="LeaseTasksResponse.html" title="Google::Cloud::Tasks::V2beta2::LeaseTasksResponse (class)">response</a></span>, set
-<span class='object_link'><a href="LeaseTasksRequest.html#response_view-instance_method" title="Google::Cloud::Tasks::V2beta2::LeaseTasksRequest#response_view (method)">response_view</a></span> to
-<span class='object_link'><a href="Task/View.html#FULL-constant" title="Google::Cloud::Tasks::V2beta2::Task::View::FULL (constant)">FULL</a></span>.</p>
+<p>The <span class='object_link'><a href="PullMessage.html#payload-instance_method" title="Google::Cloud::Tasks::V2beta2::PullMessage#payload (method)">payload</a></span> is intended
+to store data that the worker needs to perform the work associated with the
+task. To return the payloads in the
+<span class='object_link'><a href="LeaseTasksResponse.html" title="Google::Cloud::Tasks::V2beta2::LeaseTasksResponse (class)">response</a></span>, set
+<span class='object_link'><a href="LeaseTasksRequest.html#response_view-instance_method" title="Google::Cloud::Tasks::V2beta2::LeaseTasksRequest#response_view (method)">response_view</a></span>
+to <span class='object_link'><a href="Task/View.html#FULL-constant" title="Google::Cloud::Tasks::V2beta2::Task::View::FULL (constant)">FULL</a></span>.</p>
 
-<p>A maximum of 10 qps of LeaseTasks
-requests are allowed per
-queue. RESOURCE_EXHAUSTED
+<p>A maximum of 10 qps of
+LeaseTasks requests are
+allowed per queue. RESOURCE_EXHAUSTED
 is returned when this limit is
 exceeded. RESOURCE_EXHAUSTED
 is also returned when
@@ -3737,10 +3747,11 @@ is exceeded.</p>
         &mdash;
         <div class='inline'><p>After the worker has successfully finished the work associated
 with the task, the worker must call via
-AcknowledgeTask before the
-<span class='object_link'><a href="Task.html#schedule_time-instance_method" title="Google::Cloud::Tasks::V2beta2::Task#schedule_time (method)">schedule_time</a></span>. Otherwise the task will be
-returned to a later LeaseTasks call so
-that another worker can retry it.</p>
+AcknowledgeTask
+before the <span class='object_link'><a href="Task.html#schedule_time-instance_method" title="Google::Cloud::Tasks::V2beta2::Task#schedule_time (method)">schedule_time</a></span>.
+Otherwise the task will be returned to a later
+LeaseTasks call so that
+another worker can retry it.</p>
 
 <p>The maximum lease duration is 1 week.
 <code>lease_duration</code> will be truncated to the nearest second.
@@ -3780,18 +3791,19 @@ can also be provided.</p>
       
       
         &mdash;
-        <div class='inline'><p>The response_view specifies which subset of the <span class='object_link'><a href="Task.html" title="Google::Cloud::Tasks::V2beta2::Task (class)">Task</a></span> will be
-returned.</p>
+        <div class='inline'><p>The response_view specifies which subset of the
+<span class='object_link'><a href="Task.html" title="Google::Cloud::Tasks::V2beta2::Task (class)">Task</a></span> will be returned.</p>
 
-<p>By default response_view is <span class='object_link'><a href="Task/View.html#BASIC-constant" title="Google::Cloud::Tasks::V2beta2::Task::View::BASIC (constant)">BASIC</a></span>; not all
-information is retrieved by default because some data, such as
-payloads, might be desirable to return only when needed because
-of its large size or because of the sensitivity of data that it
-contains.</p>
+<p>By default response_view is
+<span class='object_link'><a href="Task/View.html#BASIC-constant" title="Google::Cloud::Tasks::V2beta2::Task::View::BASIC (constant)">BASIC</a></span>; not all information is
+retrieved by default because some data, such as payloads, might be
+desirable to return only when needed because of its large size or because
+of the sensitivity of data that it contains.</p>
 
-<p>Authorization for <span class='object_link'><a href="Task/View.html#FULL-constant" title="Google::Cloud::Tasks::V2beta2::Task::View::FULL (constant)">FULL</a></span> requires
-<code>cloudtasks.tasks.fullView</code> <a href="https://cloud.google.com/iam/">Google IAM</a>
-permission on the <span class='object_link'><a href="Task.html" title="Google::Cloud::Tasks::V2beta2::Task (class)">Task</a></span> resource.</p>
+<p>Authorization for <span class='object_link'><a href="Task/View.html#FULL-constant" title="Google::Cloud::Tasks::V2beta2::Task::View::FULL (constant)">FULL</a></span>
+requires <code>cloudtasks.tasks.fullView</code> <a href="https://cloud.google.com/iam/">Google
+IAM</a> permission on the
+<span class='object_link'><a href="Task.html" title="Google::Cloud::Tasks::V2beta2::Task (class)">Task</a></span> resource.</p>
 </div>
       
     </li>
@@ -3809,13 +3821,14 @@ permission on the <span class='object_link'><a href="Task.html" title="Google::C
         <div class='inline'><p><code>filter</code> can be used to specify a subset of tasks to lease.</p>
 
 <p>When <code>filter</code> is set to <code>tag=&lt;my-tag&gt;</code> then the
-<span class='object_link'><a href="LeaseTasksResponse.html" title="Google::Cloud::Tasks::V2beta2::LeaseTasksResponse (class)">response</a></span> will contain only tasks whose
-<span class='object_link'><a href="PullMessage.html#tag-instance_method" title="Google::Cloud::Tasks::V2beta2::PullMessage#tag (method)">tag</a></span> is equal to <code>&lt;my-tag&gt;</code>. <code>&lt;my-tag&gt;</code> must be
-less than 500 characters.</p>
+<span class='object_link'><a href="LeaseTasksResponse.html" title="Google::Cloud::Tasks::V2beta2::LeaseTasksResponse (class)">response</a></span> will contain only
+tasks whose <span class='object_link'><a href="PullMessage.html#tag-instance_method" title="Google::Cloud::Tasks::V2beta2::PullMessage#tag (method)">tag</a></span> is equal to
+<code>&lt;my-tag&gt;</code>. <code>&lt;my-tag&gt;</code> must be less than 500 characters.</p>
 
 <p>When <code>filter</code> is set to <code>tag_function=oldest_tag()</code>, only tasks which have
 the same tag as the task with the oldest
-<span class='object_link'><a href="Task.html#schedule_time-instance_method" title="Google::Cloud::Tasks::V2beta2::Task#schedule_time (method)">schedule_time</a></span> will be returned.</p>
+<span class='object_link'><a href="Task.html#schedule_time-instance_method" title="Google::Cloud::Tasks::V2beta2::Task#schedule_time (method)">schedule_time</a></span> will be
+returned.</p>
 
 <p>Grammar Syntax:</p>
 
@@ -3833,8 +3846,9 @@ string or
 <a href="https://cloud.google.com/appengine/docs/standard/java/javadoc/com/google/appengine/api/taskqueue/TaskOptions.html#tag-byte:A-">bytes</a>,
 only UTF-8 encoded tags can be used in Cloud Tasks. Tag which
 aren&#39;t UTF-8 encoded can&#39;t be used in the
-<span class='object_link'><a href="LeaseTasksRequest.html#filter-instance_method" title="Google::Cloud::Tasks::V2beta2::LeaseTasksRequest#filter (method)">filter</a></span> and the task&#39;s
-<span class='object_link'><a href="PullMessage.html#tag-instance_method" title="Google::Cloud::Tasks::V2beta2::PullMessage#tag (method)">tag</a></span> will be displayed as empty in Cloud Tasks.</p>
+<span class='object_link'><a href="LeaseTasksRequest.html#filter-instance_method" title="Google::Cloud::Tasks::V2beta2::LeaseTasksRequest#filter (method)">filter</a></span> and the
+task&#39;s <span class='object_link'><a href="PullMessage.html#tag-instance_method" title="Google::Cloud::Tasks::V2beta2::PullMessage#tag (method)">tag</a></span> will be displayed
+as empty in Cloud Tasks.</p>
 </div>
       
     </li>
@@ -3937,27 +3951,27 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1321
-1322
-1323
-1324
-1325
-1326
-1327
-1328
-1329
-1330
-1331
-1332
-1333
-1334
-1335
-1336
-1337
-1338</pre>
+1342
+1343
+1344
+1345
+1346
+1347
+1348
+1349
+1350
+1351
+1352
+1353
+1354
+1355
+1356
+1357
+1358
+1359</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta2/cloud_tasks_client.rb', line 1321</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta2/cloud_tasks_client.rb', line 1342</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_lease_tasks'>lease_tasks</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -4056,11 +4070,11 @@ For example: <code>projects/PROJECT_ID/locations/LOCATION_ID</code></p>
       
       
         &mdash;
-        <div class='inline'><p><code>filter</code> can be used to specify a subset of queues. Any <span class='object_link'><a href="Queue.html" title="Google::Cloud::Tasks::V2beta2::Queue (class)">Queue</a></span>
-field can be used as a filter and several operators as supported.
-For example: <code>&lt;=, &lt;, &gt;=, &gt;, !=, =, :</code>. The filter syntax is the same as
-described in
-<a href="https://cloud.google.com/logging/docs/view/advanced_filters">Stackdriver&#39;s Advanced Logs Filters</a>.</p>
+        <div class='inline'><p><code>filter</code> can be used to specify a subset of queues. Any
+<span class='object_link'><a href="Queue.html" title="Google::Cloud::Tasks::V2beta2::Queue (class)">Queue</a></span> field can be used as a filter and
+several operators as supported. For example: <code>&lt;=, &lt;, &gt;=, &gt;, !=, =, :</code>. The
+filter syntax is the same as described in <a href="https://cloud.google.com/logging/docs/view/advanced_filters">Stackdriver&#39;s Advanced Logs
+Filters</a>.</p>
 
 <p>Sample filter &quot;app_engine_http_target: *&quot;.</p>
 
@@ -4244,10 +4258,10 @@ object.</p>
   <div class="discussion">
     <p>Lists the tasks in a queue.</p>
 
-<p>By default, only the <span class='object_link'><a href="Task/View.html#BASIC-constant" title="Google::Cloud::Tasks::V2beta2::Task::View::BASIC (constant)">BASIC</a></span> view is retrieved
-due to performance considerations;
-<span class='object_link'><a href="ListTasksRequest.html#response_view-instance_method" title="Google::Cloud::Tasks::V2beta2::ListTasksRequest#response_view (method)">response_view</a></span> controls the
-subset of information which is returned.</p>
+<p>By default, only the <span class='object_link'><a href="Task/View.html#BASIC-constant" title="Google::Cloud::Tasks::V2beta2::Task::View::BASIC (constant)">BASIC</a></span>
+view is retrieved due to performance considerations;
+<span class='object_link'><a href="ListTasksRequest.html#response_view-instance_method" title="Google::Cloud::Tasks::V2beta2::ListTasksRequest#response_view (method)">response_view</a></span>
+controls the subset of information which is returned.</p>
 
 <p>The tasks may be returned in any order. The ordering may change at any
 time.</p>
@@ -4311,18 +4325,19 @@ time.</p>
       
       
         &mdash;
-        <div class='inline'><p>The response_view specifies which subset of the <span class='object_link'><a href="Task.html" title="Google::Cloud::Tasks::V2beta2::Task (class)">Task</a></span> will be
-returned.</p>
+        <div class='inline'><p>The response_view specifies which subset of the
+<span class='object_link'><a href="Task.html" title="Google::Cloud::Tasks::V2beta2::Task (class)">Task</a></span> will be returned.</p>
 
-<p>By default response_view is <span class='object_link'><a href="Task/View.html#BASIC-constant" title="Google::Cloud::Tasks::V2beta2::Task::View::BASIC (constant)">BASIC</a></span>; not all
-information is retrieved by default because some data, such as
-payloads, might be desirable to return only when needed because
-of its large size or because of the sensitivity of data that it
-contains.</p>
+<p>By default response_view is
+<span class='object_link'><a href="Task/View.html#BASIC-constant" title="Google::Cloud::Tasks::V2beta2::Task::View::BASIC (constant)">BASIC</a></span>; not all information is
+retrieved by default because some data, such as payloads, might be
+desirable to return only when needed because of its large size or because
+of the sensitivity of data that it contains.</p>
 
-<p>Authorization for <span class='object_link'><a href="Task/View.html#FULL-constant" title="Google::Cloud::Tasks::V2beta2::Task::View::FULL (constant)">FULL</a></span> requires
-<code>cloudtasks.tasks.fullView</code> <a href="https://cloud.google.com/iam/">Google IAM</a>
-permission on the <span class='object_link'><a href="Task.html" title="Google::Cloud::Tasks::V2beta2::Task (class)">Task</a></span> resource.</p>
+<p>Authorization for <span class='object_link'><a href="Task/View.html#FULL-constant" title="Google::Cloud::Tasks::V2beta2::Task::View::FULL (constant)">FULL</a></span>
+requires <code>cloudtasks.tasks.fullView</code> <a href="https://cloud.google.com/iam/">Google
+IAM</a> permission on the
+<span class='object_link'><a href="Task.html" title="Google::Cloud::Tasks::V2beta2::Task (class)">Task</a></span> resource.</p>
 </div>
       
     </li>
@@ -4451,23 +4466,23 @@ object.</p>
       <pre class="lines">
 
 
-1014
-1015
-1016
-1017
-1018
-1019
-1020
-1021
-1022
-1023
-1024
-1025
 1026
-1027</pre>
+1027
+1028
+1029
+1030
+1031
+1032
+1033
+1034
+1035
+1036
+1037
+1038
+1039</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta2/cloud_tasks_client.rb', line 1014</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta2/cloud_tasks_client.rb', line 1026</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_tasks'>list_tasks</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -4503,9 +4518,10 @@ object.</p>
 
 <p>If a queue is paused then the system will stop dispatching tasks
 until the queue is resumed via
-ResumeQueue. Tasks can still be added
-when the queue is paused. A queue is paused if its
-<span class='object_link'><a href="Queue.html#state-instance_method" title="Google::Cloud::Tasks::V2beta2::Queue#state (method)">state</a></span> is <span class='object_link'><a href="Queue/State.html#PAUSED-constant" title="Google::Cloud::Tasks::V2beta2::Queue::State::PAUSED (constant)">PAUSED</a></span>.</p>
+ResumeQueue. Tasks can
+still be added when the queue is paused. A queue is paused if its
+<span class='object_link'><a href="Queue.html#state-instance_method" title="Google::Cloud::Tasks::V2beta2::Queue#state (method)">state</a></span> is
+<span class='object_link'><a href="Queue/State.html#PAUSED-constant" title="Google::Cloud::Tasks::V2beta2::Queue::State::PAUSED (constant)">PAUSED</a></span>.</p>
 
 
   </div>
@@ -4642,19 +4658,19 @@ retries, etc.</p>
       <pre class="lines">
 
 
-752
-753
-754
-755
-756
-757
-758
 759
 760
-761</pre>
+761
+762
+763
+764
+765
+766
+767
+768</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta2/cloud_tasks_client.rb', line 752</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta2/cloud_tasks_client.rb', line 759</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_pause_queue'>pause_queue</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -4824,19 +4840,19 @@ retries, etc.</p>
       <pre class="lines">
 
 
-713
-714
-715
-716
-717
-718
 719
 720
 721
-722</pre>
+722
+723
+724
+725
+726
+727
+728</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta2/cloud_tasks_client.rb', line 713</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta2/cloud_tasks_client.rb', line 719</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_purge_queue'>purge_queue</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -4868,7 +4884,8 @@ retries, etc.</p>
 
 <p>The worker can use this method to extend the lease by a new
 duration, starting from now. The new task lease will be
-returned in the task&#39;s <span class='object_link'><a href="Task.html#schedule_time-instance_method" title="Google::Cloud::Tasks::V2beta2::Task#schedule_time (method)">schedule_time</a></span>.</p>
+returned in the task&#39;s
+<span class='object_link'><a href="Task.html#schedule_time-instance_method" title="Google::Cloud::Tasks::V2beta2::Task#schedule_time (method)">schedule_time</a></span>.</p>
 
 
   </div>
@@ -4928,8 +4945,8 @@ returned in the task&#39;s <span class='object_link'><a href="Task.html#schedule
 <p>The task&#39;s current schedule time, available in the
 <span class='object_link'><a href="Task.html#schedule_time-instance_method" title="Google::Cloud::Tasks::V2beta2::Task#schedule_time (method)">schedule_time</a></span> returned by
 LeaseTasks response or
-RenewLease response. This restriction is
-to ensure that your worker currently holds the lease.
+RenewLease response.
+This restriction is to ensure that your worker currently holds the lease.
 A hash of the same form as <code>Google::Protobuf::Timestamp</code>
 can also be provided.</p>
 </div>
@@ -4968,18 +4985,19 @@ can also be provided.</p>
       
       
         &mdash;
-        <div class='inline'><p>The response_view specifies which subset of the <span class='object_link'><a href="Task.html" title="Google::Cloud::Tasks::V2beta2::Task (class)">Task</a></span> will be
-returned.</p>
+        <div class='inline'><p>The response_view specifies which subset of the
+<span class='object_link'><a href="Task.html" title="Google::Cloud::Tasks::V2beta2::Task (class)">Task</a></span> will be returned.</p>
 
-<p>By default response_view is <span class='object_link'><a href="Task/View.html#BASIC-constant" title="Google::Cloud::Tasks::V2beta2::Task::View::BASIC (constant)">BASIC</a></span>; not all
-information is retrieved by default because some data, such as
-payloads, might be desirable to return only when needed because
-of its large size or because of the sensitivity of data that it
-contains.</p>
+<p>By default response_view is
+<span class='object_link'><a href="Task/View.html#BASIC-constant" title="Google::Cloud::Tasks::V2beta2::Task::View::BASIC (constant)">BASIC</a></span>; not all information is
+retrieved by default because some data, such as payloads, might be
+desirable to return only when needed because of its large size or because
+of the sensitivity of data that it contains.</p>
 
-<p>Authorization for <span class='object_link'><a href="Task/View.html#FULL-constant" title="Google::Cloud::Tasks::V2beta2::Task::View::FULL (constant)">FULL</a></span> requires
-<code>cloudtasks.tasks.fullView</code> <a href="https://cloud.google.com/iam/">Google IAM</a>
-permission on the <span class='object_link'><a href="Task.html" title="Google::Cloud::Tasks::V2beta2::Task (class)">Task</a></span> resource.</p>
+<p>Authorization for <span class='object_link'><a href="Task/View.html#FULL-constant" title="Google::Cloud::Tasks::V2beta2::Task::View::FULL (constant)">FULL</a></span>
+requires <code>cloudtasks.tasks.fullView</code> <a href="https://cloud.google.com/iam/">Google
+IAM</a> permission on the
+<span class='object_link'><a href="Task.html" title="Google::Cloud::Tasks::V2beta2::Task (class)">Task</a></span> resource.</p>
 </div>
       
     </li>
@@ -5082,25 +5100,25 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1465
-1466
-1467
-1468
-1469
-1470
-1471
-1472
-1473
-1474
-1475
-1476
-1477
-1478
-1479
-1480</pre>
+1489
+1490
+1491
+1492
+1493
+1494
+1495
+1496
+1497
+1498
+1499
+1500
+1501
+1502
+1503
+1504</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta2/cloud_tasks_client.rb', line 1465</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta2/cloud_tasks_client.rb', line 1489</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_renew_lease'>renew_lease</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -5138,14 +5156,17 @@ retries, etc.</p>
 
 <p>This method resumes a queue after it has been
 <span class='object_link'><a href="Queue/State.html#PAUSED-constant" title="Google::Cloud::Tasks::V2beta2::Queue::State::PAUSED (constant)">PAUSED</a></span> or
-<span class='object_link'><a href="Queue/State.html#DISABLED-constant" title="Google::Cloud::Tasks::V2beta2::Queue::State::DISABLED (constant)">DISABLED</a></span>. The state of a queue is stored
-in the queue&#39;s <span class='object_link'><a href="Queue.html#state-instance_method" title="Google::Cloud::Tasks::V2beta2::Queue#state (method)">state</a></span>; after calling this method it
-will be set to <span class='object_link'><a href="Queue/State.html#RUNNING-constant" title="Google::Cloud::Tasks::V2beta2::Queue::State::RUNNING (constant)">RUNNING</a></span>.</p>
+<span class='object_link'><a href="Queue/State.html#DISABLED-constant" title="Google::Cloud::Tasks::V2beta2::Queue::State::DISABLED (constant)">DISABLED</a></span>. The state of a
+queue is stored in the queue&#39;s
+<span class='object_link'><a href="Queue.html#state-instance_method" title="Google::Cloud::Tasks::V2beta2::Queue#state (method)">state</a></span>; after calling this method
+it will be set to
+<span class='object_link'><a href="Queue/State.html#RUNNING-constant" title="Google::Cloud::Tasks::V2beta2::Queue::State::RUNNING (constant)">RUNNING</a></span>.</p>
 
 <p>WARNING: Resuming many high-QPS queues at the same time can
 lead to target overloading. If you are resuming high-QPS
 queues, follow the 500/50/5 pattern described in
-<a href="https://cloud.google.com/tasks/docs/manage-cloud-task-scaling">Managing Cloud Tasks Scaling Risks</a>.</p>
+<a href="https://cloud.google.com/tasks/docs/manage-cloud-task-scaling">Managing Cloud Tasks Scaling
+Risks</a>.</p>
 
 
   </div>
@@ -5282,19 +5303,19 @@ retries, etc.</p>
       <pre class="lines">
 
 
-796
-797
-798
-799
-800
-801
-802
-803
-804
-805</pre>
+806
+807
+808
+809
+810
+811
+812
+813
+814
+815</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta2/cloud_tasks_client.rb', line 796</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta2/cloud_tasks_client.rb', line 806</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_resume_queue'>resume_queue</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -5325,30 +5346,33 @@ retries, etc.</p>
     <p>Forces a task to run now.</p>
 
 <p>When this method is called, Cloud Tasks will dispatch the task, even if
-the task is already running, the queue has reached its <span class='object_link'><a href="RateLimits.html" title="Google::Cloud::Tasks::V2beta2::RateLimits (class)">RateLimits</a></span> or
-is <span class='object_link'><a href="Queue/State.html#PAUSED-constant" title="Google::Cloud::Tasks::V2beta2::Queue::State::PAUSED (constant)">PAUSED</a></span>.</p>
+the task is already running, the queue has reached its
+<span class='object_link'><a href="RateLimits.html" title="Google::Cloud::Tasks::V2beta2::RateLimits (class)">RateLimits</a></span> or is
+<span class='object_link'><a href="Queue/State.html#PAUSED-constant" title="Google::Cloud::Tasks::V2beta2::Queue::State::PAUSED (constant)">PAUSED</a></span>.</p>
 
 <p>This command is meant to be used for manual debugging. For
-example, RunTask can be used to retry a failed
-task after a fix has been made or to manually force a task to be
-dispatched now.</p>
+example, RunTask can be
+used to retry a failed task after a fix has been made or to manually force
+a task to be dispatched now.</p>
 
 <p>The dispatched task is returned. That is, the task that is returned
-contains the <span class='object_link'><a href="Task.html#status-instance_method" title="Google::Cloud::Tasks::V2beta2::Task#status (method)">status</a></span> after the task is dispatched but
-before the task is received by its target.</p>
+contains the <span class='object_link'><a href="Task.html#status-instance_method" title="Google::Cloud::Tasks::V2beta2::Task#status (method)">status</a></span> after the
+task is dispatched but before the task is received by its target.</p>
 
 <p>If Cloud Tasks receives a successful response from the task&#39;s
 target, then the task will be deleted; otherwise the task&#39;s
-<span class='object_link'><a href="Task.html#schedule_time-instance_method" title="Google::Cloud::Tasks::V2beta2::Task#schedule_time (method)">schedule_time</a></span> will be reset to the time that
-RunTask was called plus the retry delay specified
-in the queue&#39;s <span class='object_link'><a href="RetryConfig.html" title="Google::Cloud::Tasks::V2beta2::RetryConfig (class)">RetryConfig</a></span>.</p>
+<span class='object_link'><a href="Task.html#schedule_time-instance_method" title="Google::Cloud::Tasks::V2beta2::Task#schedule_time (method)">schedule_time</a></span> will be
+reset to the time that
+RunTask was called plus
+the retry delay specified in the queue&#39;s
+<span class='object_link'><a href="RetryConfig.html" title="Google::Cloud::Tasks::V2beta2::RetryConfig (class)">RetryConfig</a></span>.</p>
 
 <p>RunTask returns
 NOT_FOUND when it is called on a
 task that has already succeeded or permanently failed.</p>
 
-<p>RunTask cannot be called on a
-<span class='object_link'><a href="PullMessage.html" title="Google::Cloud::Tasks::V2beta2::PullMessage (class)">pull task</a></span>.</p>
+<p>RunTask cannot be called
+on a <span class='object_link'><a href="PullMessage.html" title="Google::Cloud::Tasks::V2beta2::PullMessage (class)">pull task</a></span>.</p>
 
 
   </div>
@@ -5397,18 +5421,19 @@ task that has already succeeded or permanently failed.</p>
       
       
         &mdash;
-        <div class='inline'><p>The response_view specifies which subset of the <span class='object_link'><a href="Task.html" title="Google::Cloud::Tasks::V2beta2::Task (class)">Task</a></span> will be
-returned.</p>
+        <div class='inline'><p>The response_view specifies which subset of the
+<span class='object_link'><a href="Task.html" title="Google::Cloud::Tasks::V2beta2::Task (class)">Task</a></span> will be returned.</p>
 
-<p>By default response_view is <span class='object_link'><a href="Task/View.html#BASIC-constant" title="Google::Cloud::Tasks::V2beta2::Task::View::BASIC (constant)">BASIC</a></span>; not all
-information is retrieved by default because some data, such as
-payloads, might be desirable to return only when needed because
-of its large size or because of the sensitivity of data that it
-contains.</p>
+<p>By default response_view is
+<span class='object_link'><a href="Task/View.html#BASIC-constant" title="Google::Cloud::Tasks::V2beta2::Task::View::BASIC (constant)">BASIC</a></span>; not all information is
+retrieved by default because some data, such as payloads, might be
+desirable to return only when needed because of its large size or because
+of the sensitivity of data that it contains.</p>
 
-<p>Authorization for <span class='object_link'><a href="Task/View.html#FULL-constant" title="Google::Cloud::Tasks::V2beta2::Task::View::FULL (constant)">FULL</a></span> requires
-<code>cloudtasks.tasks.fullView</code> <a href="https://cloud.google.com/iam/">Google IAM</a>
-permission on the <span class='object_link'><a href="Task.html" title="Google::Cloud::Tasks::V2beta2::Task (class)">Task</a></span> resource.</p>
+<p>Authorization for <span class='object_link'><a href="Task/View.html#FULL-constant" title="Google::Cloud::Tasks::V2beta2::Task::View::FULL (constant)">FULL</a></span>
+requires <code>cloudtasks.tasks.fullView</code> <a href="https://cloud.google.com/iam/">Google
+IAM</a> permission on the
+<span class='object_link'><a href="Task.html" title="Google::Cloud::Tasks::V2beta2::Task (class)">Task</a></span> resource.</p>
 </div>
       
     </li>
@@ -5511,21 +5536,21 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1611
-1612
-1613
-1614
-1615
-1616
-1617
-1618
-1619
-1620
-1621
-1622</pre>
+1640
+1641
+1642
+1643
+1644
+1645
+1646
+1647
+1648
+1649
+1650
+1651</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta2/cloud_tasks_client.rb', line 1611</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta2/cloud_tasks_client.rb', line 1640</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_run_task'>run_task</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -5555,8 +5580,8 @@ retries, etc.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the access control policy for a <span class='object_link'><a href="Queue.html" title="Google::Cloud::Tasks::V2beta2::Queue (class)">Queue</a></span>. Replaces any existing
-policy.</p>
+    <p>Sets the access control policy for a
+<span class='object_link'><a href="Queue.html" title="Google::Cloud::Tasks::V2beta2::Queue (class)">Queue</a></span>. Replaces any existing policy.</p>
 
 <p>Note: The Cloud Console does not check queue-level IAM permissions yet.
 Project-level permissions are required to use the Cloud Console.</p>
@@ -5726,21 +5751,21 @@ retries, etc.</p>
       <pre class="lines">
 
 
-888
-889
-890
-891
-892
-893
-894
-895
-896
-897
 898
-899</pre>
+899
+900
+901
+902
+903
+904
+905
+906
+907
+908
+909</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta2/cloud_tasks_client.rb', line 888</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta2/cloud_tasks_client.rb', line 898</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_set_iam_policy'>set_iam_policy</span> \
     <span class='id identifier rubyid_resource'>resource</span><span class='comma'>,</span>
@@ -5770,9 +5795,10 @@ retries, etc.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns permissions that a caller has on a <span class='object_link'><a href="Queue.html" title="Google::Cloud::Tasks::V2beta2::Queue (class)">Queue</a></span>.
-If the resource does not exist, this will return an empty set of
-permissions, not a NOT_FOUND error.</p>
+    <p>Returns permissions that a caller has on a
+<span class='object_link'><a href="Queue.html" title="Google::Cloud::Tasks::V2beta2::Queue (class)">Queue</a></span>. If the resource does not exist,
+this will return an empty set of permissions, not a
+NOT_FOUND error.</p>
 
 <p>Note: This operation is designed to be used for building permission-aware
 UIs and command-line tools, not for authorization checking. This operation
@@ -5933,21 +5959,21 @@ retries, etc.</p>
       <pre class="lines">
 
 
-936
-937
-938
-939
-940
-941
-942
-943
-944
-945
-946
-947</pre>
+947
+948
+949
+950
+951
+952
+953
+954
+955
+956
+957
+958</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta2/cloud_tasks_client.rb', line 936</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta2/cloud_tasks_client.rb', line 947</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_test_iam_permissions'>test_iam_permissions</span> \
     <span class='id identifier rubyid_resource'>resource</span><span class='comma'>,</span>
@@ -5983,14 +6009,15 @@ retries, etc.</p>
 the queue if it does exist.</p>
 
 <p>Queues created with this method allow tasks to live for a maximum of 31
-days. After a task is 31 days old, the task will be deleted regardless of whether
-it was dispatched or not.</p>
+days. After a task is 31 days old, the task will be deleted regardless of
+whether it was dispatched or not.</p>
 
 <p>WARNING: Using this method may have unintended side effects if you are
 using an App Engine <code>queue.yaml</code> or <code>queue.xml</code> file to manage your queues.
 Read
-<a href="https://cloud.google.com/tasks/docs/queue-yaml">Overview of Queue Management and queue.yaml</a>
-before using this method.</p>
+<a href="https://cloud.google.com/tasks/docs/queue-yaml">Overview of Queue Management and
+queue.yaml</a> before using
+this method.</p>
 
 
   </div>
@@ -6027,11 +6054,13 @@ before using this method.</p>
 
 <p>The queue to create or update.</p>
 
-<p>The queue&#39;s <span class='object_link'><a href="Queue.html#name-instance_method" title="Google::Cloud::Tasks::V2beta2::Queue#name (method)">name</a></span> must be specified.</p>
+<p>The queue&#39;s <span class='object_link'><a href="Queue.html#name-instance_method" title="Google::Cloud::Tasks::V2beta2::Queue#name (method)">name</a></span> must be
+specified.</p>
 
 <p>Output only fields cannot be modified using UpdateQueue.
 Any value specified for an output only field will be ignored.
-The queue&#39;s <span class='object_link'><a href="Queue.html#name-instance_method" title="Google::Cloud::Tasks::V2beta2::Queue#name (method)">name</a></span> cannot be changed.
+The queue&#39;s <span class='object_link'><a href="Queue.html#name-instance_method" title="Google::Cloud::Tasks::V2beta2::Queue#name (method)">name</a></span> cannot be
+changed.
 A hash of the same form as <code>Google::Cloud::Tasks::V2beta2::Queue</code>
 can also be provided.</p>
 </div>
@@ -6155,21 +6184,21 @@ retries, etc.</p>
       <pre class="lines">
 
 
-629
-630
-631
-632
-633
 634
 635
 636
 637
 638
 639
-640</pre>
+640
+641
+642
+643
+644
+645</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta2/cloud_tasks_client.rb', line 629</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta2/cloud_tasks_client.rb', line 634</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update_queue'>update_queue</span> \
     <span class='id identifier rubyid_queue'>queue</span><span class='comma'>,</span>

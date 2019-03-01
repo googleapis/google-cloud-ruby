@@ -320,10 +320,12 @@ js:
   <div class="discussion">
     <p>Returns App Engine HTTP request that is sent to the task&#39;s target. Can
 be set only if
-<span class='object_link'><a href="Queue.html#app_engine_http_target-instance_method" title="Google::Cloud::Tasks::V2beta2::Queue#app_engine_http_target (method)">app_engine_http_target</a></span> is set
-on the queue.</p>
+<span class='object_link'><a href="Queue.html#app_engine_http_target-instance_method" title="Google::Cloud::Tasks::V2beta2::Queue#app_engine_http_target (method)">app_engine_http_target</a></span>
+is set on the queue.</p>
 
-<p>An App Engine task is a task that has <span class='object_link'><a href="AppEngineHttpRequest.html" title="Google::Cloud::Tasks::V2beta2::AppEngineHttpRequest (class)">AppEngineHttpRequest</a></span> set.</p>
+<p>An App Engine task is a task that has
+<span class='object_link'><a href="AppEngineHttpRequest.html" title="Google::Cloud::Tasks::V2beta2::AppEngineHttpRequest (class)">AppEngineHttpRequest</a></span>
+set.</p>
 
 
   </div>
@@ -343,10 +345,12 @@ on the queue.</p>
         &mdash;
         <div class='inline'><p>App Engine HTTP request that is sent to the task&#39;s target. Can
 be set only if
-<span class='object_link'><a href="Queue.html#app_engine_http_target-instance_method" title="Google::Cloud::Tasks::V2beta2::Queue#app_engine_http_target (method)">app_engine_http_target</a></span> is set
-on the queue.</p>
+<span class='object_link'><a href="Queue.html#app_engine_http_target-instance_method" title="Google::Cloud::Tasks::V2beta2::Queue#app_engine_http_target (method)">app_engine_http_target</a></span>
+is set on the queue.</p>
 
-<p>An App Engine task is a task that has <span class='object_link'><a href="AppEngineHttpRequest.html" title="Google::Cloud::Tasks::V2beta2::AppEngineHttpRequest (class)">AppEngineHttpRequest</a></span> set.</p>
+<p>An App Engine task is a task that has
+<span class='object_link'><a href="AppEngineHttpRequest.html" title="Google::Cloud::Tasks::V2beta2::AppEngineHttpRequest (class)">AppEngineHttpRequest</a></span>
+set.</p>
 </div>
       
     </li>
@@ -359,14 +363,6 @@ on the queue.</p>
       <pre class="lines">
 
 
-80
-81
-82
-83
-84
-85
-86
-87
 88
 89
 90
@@ -389,13 +385,26 @@ on the queue.</p>
 107
 108
 109
-110</pre>
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta2/doc/google/cloud/tasks/v2beta2/task.rb', line 80</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta2/doc/google/cloud/tasks/v2beta2/task.rb', line 88</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Tasks::V2beta2::Task (class)">Task</a></span></span>
-  <span class='comment'># The view specifies a subset of {Google::Cloud::Tasks::V2beta2::Task Task} data.
+  <span class='comment'># The view specifies a subset of {Google::Cloud::Tasks::V2beta2::Task Task}
+</span>  <span class='comment'># data.
 </span>  <span class='comment'>#
 </span>  <span class='comment'># When a task is returned in a response, not all
 </span>  <span class='comment'># information is retrieved by default because some data, such as
@@ -410,18 +419,21 @@ on the queue.</p>
 </span>    <span class='comment'># sensitive data.
 </span>    <span class='comment'>#
 </span>    <span class='comment'># This view does not include the
-</span>    <span class='comment'># ({Google::Cloud::Tasks::V2beta2::AppEngineHttpRequest payload in AppEngineHttpRequest} and
-</span>    <span class='comment'># {Google::Cloud::Tasks::V2beta2::PullMessage#payload payload in PullMessage}). These payloads are
-</span>    <span class='comment'># desirable to return only when needed, because they can be large
-</span>    <span class='comment'># and because of the sensitivity of the data that you choose to
-</span>    <span class='comment'># store in it.
+</span>    <span class='comment'># ([payload in
+</span>    <span class='comment'># AppEngineHttpRequest][google.cloud.tasks.v2beta2.AppEngineHttpRequest]
+</span>    <span class='comment'># and [payload in
+</span>    <span class='comment'># PullMessage][google.cloud.tasks.v2beta2.PullMessage.payload]). These
+</span>    <span class='comment'># payloads are desirable to return only when needed, because they can be
+</span>    <span class='comment'># large and because of the sensitivity of the data that you choose to store
+</span>    <span class='comment'># in it.
 </span>    <span class='const'>BASIC</span> <span class='op'>=</span> <span class='int'>1</span>
 
     <span class='comment'># All information is returned.
 </span>    <span class='comment'>#
-</span>    <span class='comment'># Authorization for {Google::Cloud::Tasks::V2beta2::Task::View::FULL FULL} requires
-</span>    <span class='comment'># `cloudtasks.tasks.fullView` [Google IAM](https://cloud.google.com/iam/)
-</span>    <span class='comment'># permission on the {Google::Cloud::Tasks::V2beta2::Queue Queue} resource.
+</span>    <span class='comment'># Authorization for {Google::Cloud::Tasks::V2beta2::Task::View::FULL FULL}
+</span>    <span class='comment'># requires `cloudtasks.tasks.fullView` [Google
+</span>    <span class='comment'># IAM](https://cloud.google.com/iam/) permission on the
+</span>    <span class='comment'># {Google::Cloud::Tasks::V2beta2::Queue Queue} resource.
 </span>    <span class='const'>FULL</span> <span class='op'>=</span> <span class='int'>2</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
@@ -478,14 +490,6 @@ on the queue.</p>
       <pre class="lines">
 
 
-80
-81
-82
-83
-84
-85
-86
-87
 88
 89
 90
@@ -508,13 +512,26 @@ on the queue.</p>
 107
 108
 109
-110</pre>
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta2/doc/google/cloud/tasks/v2beta2/task.rb', line 80</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta2/doc/google/cloud/tasks/v2beta2/task.rb', line 88</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Tasks::V2beta2::Task (class)">Task</a></span></span>
-  <span class='comment'># The view specifies a subset of {Google::Cloud::Tasks::V2beta2::Task Task} data.
+  <span class='comment'># The view specifies a subset of {Google::Cloud::Tasks::V2beta2::Task Task}
+</span>  <span class='comment'># data.
 </span>  <span class='comment'>#
 </span>  <span class='comment'># When a task is returned in a response, not all
 </span>  <span class='comment'># information is retrieved by default because some data, such as
@@ -529,18 +546,21 @@ on the queue.</p>
 </span>    <span class='comment'># sensitive data.
 </span>    <span class='comment'>#
 </span>    <span class='comment'># This view does not include the
-</span>    <span class='comment'># ({Google::Cloud::Tasks::V2beta2::AppEngineHttpRequest payload in AppEngineHttpRequest} and
-</span>    <span class='comment'># {Google::Cloud::Tasks::V2beta2::PullMessage#payload payload in PullMessage}). These payloads are
-</span>    <span class='comment'># desirable to return only when needed, because they can be large
-</span>    <span class='comment'># and because of the sensitivity of the data that you choose to
-</span>    <span class='comment'># store in it.
+</span>    <span class='comment'># ([payload in
+</span>    <span class='comment'># AppEngineHttpRequest][google.cloud.tasks.v2beta2.AppEngineHttpRequest]
+</span>    <span class='comment'># and [payload in
+</span>    <span class='comment'># PullMessage][google.cloud.tasks.v2beta2.PullMessage.payload]). These
+</span>    <span class='comment'># payloads are desirable to return only when needed, because they can be
+</span>    <span class='comment'># large and because of the sensitivity of the data that you choose to store
+</span>    <span class='comment'># in it.
 </span>    <span class='const'>BASIC</span> <span class='op'>=</span> <span class='int'>1</span>
 
     <span class='comment'># All information is returned.
 </span>    <span class='comment'>#
-</span>    <span class='comment'># Authorization for {Google::Cloud::Tasks::V2beta2::Task::View::FULL FULL} requires
-</span>    <span class='comment'># `cloudtasks.tasks.fullView` [Google IAM](https://cloud.google.com/iam/)
-</span>    <span class='comment'># permission on the {Google::Cloud::Tasks::V2beta2::Queue Queue} resource.
+</span>    <span class='comment'># Authorization for {Google::Cloud::Tasks::V2beta2::Task::View::FULL FULL}
+</span>    <span class='comment'># requires `cloudtasks.tasks.fullView` [Google
+</span>    <span class='comment'># IAM](https://cloud.google.com/iam/) permission on the
+</span>    <span class='comment'># {Google::Cloud::Tasks::V2beta2::Queue Queue} resource.
 </span>    <span class='const'>FULL</span> <span class='op'>=</span> <span class='int'>2</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
@@ -562,7 +582,8 @@ on the queue.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Optionally caller-specified in CreateTask.</p>
+    <p>Returns Optionally caller-specified in
+CreateTask.</p>
 
 <p>The task name.</p>
 
@@ -573,7 +594,8 @@ on the queue.</p>
 <li><code>PROJECT_ID</code> can contain letters ([A-Za-z]), numbers ([0-9]),
 hyphens (-), colons (:), or periods (.).
 For more information, see
-<a href="https://cloud.google.com/resource-manager/docs/creating-managing-projects#identifying_projects">Identifying projects</a></li>
+<a href="https://cloud.google.com/resource-manager/docs/creating-managing-projects#identifying_projects">Identifying
+projects</a></li>
 <li><code>LOCATION_ID</code> is the canonical ID for the task&#39;s location.
 The list of available locations can be obtained by calling
 ListLocations.
@@ -600,7 +622,8 @@ hyphens (-), or underscores (_). The maximum length is 500 characters.</li>
       
       
         &mdash;
-        <div class='inline'><p>Optionally caller-specified in CreateTask.</p>
+        <div class='inline'><p>Optionally caller-specified in
+CreateTask.</p>
 
 <p>The task name.</p>
 
@@ -611,7 +634,8 @@ hyphens (-), or underscores (_). The maximum length is 500 characters.</li>
 <li><code>PROJECT_ID</code> can contain letters ([A-Za-z]), numbers ([0-9]),
 hyphens (-), colons (:), or periods (.).
 For more information, see
-<a href="https://cloud.google.com/resource-manager/docs/creating-managing-projects#identifying_projects">Identifying projects</a></li>
+<a href="https://cloud.google.com/resource-manager/docs/creating-managing-projects#identifying_projects">Identifying
+projects</a></li>
 <li><code>LOCATION_ID</code> is the canonical ID for the task&#39;s location.
 The list of available locations can be obtained by calling
 ListLocations.
@@ -633,14 +657,6 @@ hyphens (-), or underscores (_). The maximum length is 500 characters.</li>
       <pre class="lines">
 
 
-80
-81
-82
-83
-84
-85
-86
-87
 88
 89
 90
@@ -663,13 +679,26 @@ hyphens (-), or underscores (_). The maximum length is 500 characters.</li>
 107
 108
 109
-110</pre>
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta2/doc/google/cloud/tasks/v2beta2/task.rb', line 80</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta2/doc/google/cloud/tasks/v2beta2/task.rb', line 88</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Tasks::V2beta2::Task (class)">Task</a></span></span>
-  <span class='comment'># The view specifies a subset of {Google::Cloud::Tasks::V2beta2::Task Task} data.
+  <span class='comment'># The view specifies a subset of {Google::Cloud::Tasks::V2beta2::Task Task}
+</span>  <span class='comment'># data.
 </span>  <span class='comment'>#
 </span>  <span class='comment'># When a task is returned in a response, not all
 </span>  <span class='comment'># information is retrieved by default because some data, such as
@@ -684,18 +713,21 @@ hyphens (-), or underscores (_). The maximum length is 500 characters.</li>
 </span>    <span class='comment'># sensitive data.
 </span>    <span class='comment'>#
 </span>    <span class='comment'># This view does not include the
-</span>    <span class='comment'># ({Google::Cloud::Tasks::V2beta2::AppEngineHttpRequest payload in AppEngineHttpRequest} and
-</span>    <span class='comment'># {Google::Cloud::Tasks::V2beta2::PullMessage#payload payload in PullMessage}). These payloads are
-</span>    <span class='comment'># desirable to return only when needed, because they can be large
-</span>    <span class='comment'># and because of the sensitivity of the data that you choose to
-</span>    <span class='comment'># store in it.
+</span>    <span class='comment'># ([payload in
+</span>    <span class='comment'># AppEngineHttpRequest][google.cloud.tasks.v2beta2.AppEngineHttpRequest]
+</span>    <span class='comment'># and [payload in
+</span>    <span class='comment'># PullMessage][google.cloud.tasks.v2beta2.PullMessage.payload]). These
+</span>    <span class='comment'># payloads are desirable to return only when needed, because they can be
+</span>    <span class='comment'># large and because of the sensitivity of the data that you choose to store
+</span>    <span class='comment'># in it.
 </span>    <span class='const'>BASIC</span> <span class='op'>=</span> <span class='int'>1</span>
 
     <span class='comment'># All information is returned.
 </span>    <span class='comment'>#
-</span>    <span class='comment'># Authorization for {Google::Cloud::Tasks::V2beta2::Task::View::FULL FULL} requires
-</span>    <span class='comment'># `cloudtasks.tasks.fullView` [Google IAM](https://cloud.google.com/iam/)
-</span>    <span class='comment'># permission on the {Google::Cloud::Tasks::V2beta2::Queue Queue} resource.
+</span>    <span class='comment'># Authorization for {Google::Cloud::Tasks::V2beta2::Task::View::FULL FULL}
+</span>    <span class='comment'># requires `cloudtasks.tasks.fullView` [Google
+</span>    <span class='comment'># IAM](https://cloud.google.com/iam/) permission on the
+</span>    <span class='comment'># {Google::Cloud::Tasks::V2beta2::Queue Queue} resource.
 </span>    <span class='const'>FULL</span> <span class='op'>=</span> <span class='int'>2</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
@@ -717,10 +749,13 @@ hyphens (-), or underscores (_). The maximum length is 500 characters.</li>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns LeaseTasks to process the task. Can be
-set only if <span class='object_link'><a href="Queue.html#pull_target-instance_method" title="Google::Cloud::Tasks::V2beta2::Queue#pull_target (method)">pull_target</a></span> is set on the queue.</p>
+    <p>Returns LeaseTasks to process
+the task. Can be set only if
+<span class='object_link'><a href="Queue.html#pull_target-instance_method" title="Google::Cloud::Tasks::V2beta2::Queue#pull_target (method)">pull_target</a></span> is set on the
+queue.</p>
 
-<p>A pull task is a task that has <span class='object_link'><a href="PullMessage.html" title="Google::Cloud::Tasks::V2beta2::PullMessage (class)">PullMessage</a></span> set.</p>
+<p>A pull task is a task that has
+<span class='object_link'><a href="PullMessage.html" title="Google::Cloud::Tasks::V2beta2::PullMessage (class)">PullMessage</a></span> set.</p>
 
 
   </div>
@@ -738,10 +773,13 @@ set only if <span class='object_link'><a href="Queue.html#pull_target-instance_m
       
       
         &mdash;
-        <div class='inline'><p>LeaseTasks to process the task. Can be
-set only if <span class='object_link'><a href="Queue.html#pull_target-instance_method" title="Google::Cloud::Tasks::V2beta2::Queue#pull_target (method)">pull_target</a></span> is set on the queue.</p>
+        <div class='inline'><p>LeaseTasks to process
+the task. Can be set only if
+<span class='object_link'><a href="Queue.html#pull_target-instance_method" title="Google::Cloud::Tasks::V2beta2::Queue#pull_target (method)">pull_target</a></span> is set on the
+queue.</p>
 
-<p>A pull task is a task that has <span class='object_link'><a href="PullMessage.html" title="Google::Cloud::Tasks::V2beta2::PullMessage (class)">PullMessage</a></span> set.</p>
+<p>A pull task is a task that has
+<span class='object_link'><a href="PullMessage.html" title="Google::Cloud::Tasks::V2beta2::PullMessage (class)">PullMessage</a></span> set.</p>
 </div>
       
     </li>
@@ -754,14 +792,6 @@ set only if <span class='object_link'><a href="Queue.html#pull_target-instance_m
       <pre class="lines">
 
 
-80
-81
-82
-83
-84
-85
-86
-87
 88
 89
 90
@@ -784,13 +814,26 @@ set only if <span class='object_link'><a href="Queue.html#pull_target-instance_m
 107
 108
 109
-110</pre>
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta2/doc/google/cloud/tasks/v2beta2/task.rb', line 80</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta2/doc/google/cloud/tasks/v2beta2/task.rb', line 88</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Tasks::V2beta2::Task (class)">Task</a></span></span>
-  <span class='comment'># The view specifies a subset of {Google::Cloud::Tasks::V2beta2::Task Task} data.
+  <span class='comment'># The view specifies a subset of {Google::Cloud::Tasks::V2beta2::Task Task}
+</span>  <span class='comment'># data.
 </span>  <span class='comment'>#
 </span>  <span class='comment'># When a task is returned in a response, not all
 </span>  <span class='comment'># information is retrieved by default because some data, such as
@@ -805,18 +848,21 @@ set only if <span class='object_link'><a href="Queue.html#pull_target-instance_m
 </span>    <span class='comment'># sensitive data.
 </span>    <span class='comment'>#
 </span>    <span class='comment'># This view does not include the
-</span>    <span class='comment'># ({Google::Cloud::Tasks::V2beta2::AppEngineHttpRequest payload in AppEngineHttpRequest} and
-</span>    <span class='comment'># {Google::Cloud::Tasks::V2beta2::PullMessage#payload payload in PullMessage}). These payloads are
-</span>    <span class='comment'># desirable to return only when needed, because they can be large
-</span>    <span class='comment'># and because of the sensitivity of the data that you choose to
-</span>    <span class='comment'># store in it.
+</span>    <span class='comment'># ([payload in
+</span>    <span class='comment'># AppEngineHttpRequest][google.cloud.tasks.v2beta2.AppEngineHttpRequest]
+</span>    <span class='comment'># and [payload in
+</span>    <span class='comment'># PullMessage][google.cloud.tasks.v2beta2.PullMessage.payload]). These
+</span>    <span class='comment'># payloads are desirable to return only when needed, because they can be
+</span>    <span class='comment'># large and because of the sensitivity of the data that you choose to store
+</span>    <span class='comment'># in it.
 </span>    <span class='const'>BASIC</span> <span class='op'>=</span> <span class='int'>1</span>
 
     <span class='comment'># All information is returned.
 </span>    <span class='comment'>#
-</span>    <span class='comment'># Authorization for {Google::Cloud::Tasks::V2beta2::Task::View::FULL FULL} requires
-</span>    <span class='comment'># `cloudtasks.tasks.fullView` [Google IAM](https://cloud.google.com/iam/)
-</span>    <span class='comment'># permission on the {Google::Cloud::Tasks::V2beta2::Queue Queue} resource.
+</span>    <span class='comment'># Authorization for {Google::Cloud::Tasks::V2beta2::Task::View::FULL FULL}
+</span>    <span class='comment'># requires `cloudtasks.tasks.fullView` [Google
+</span>    <span class='comment'># IAM](https://cloud.google.com/iam/) permission on the
+</span>    <span class='comment'># {Google::Cloud::Tasks::V2beta2::Queue Queue} resource.
 </span>    <span class='const'>FULL</span> <span class='op'>=</span> <span class='int'>2</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
@@ -845,7 +891,8 @@ set only if <span class='object_link'><a href="Queue.html#pull_target-instance_m
 <p>For pull queues, this is the time when the task is available to
 be leased; if a task is currently leased, this is the time when
 the current lease expires, that is, the time that the task was
-leased plus the <span class='object_link'><a href="LeaseTasksRequest.html#lease_duration-instance_method" title="Google::Cloud::Tasks::V2beta2::LeaseTasksRequest#lease_duration (method)">lease_duration</a></span>.</p>
+leased plus the
+<span class='object_link'><a href="LeaseTasksRequest.html#lease_duration-instance_method" title="Google::Cloud::Tasks::V2beta2::LeaseTasksRequest#lease_duration (method)">lease_duration</a></span>.</p>
 
 <p><code>schedule_time</code> will be truncated to the nearest microsecond.</p>
 
@@ -872,7 +919,8 @@ leased plus the <span class='object_link'><a href="LeaseTasksRequest.html#lease_
 <p>For pull queues, this is the time when the task is available to
 be leased; if a task is currently leased, this is the time when
 the current lease expires, that is, the time that the task was
-leased plus the <span class='object_link'><a href="LeaseTasksRequest.html#lease_duration-instance_method" title="Google::Cloud::Tasks::V2beta2::LeaseTasksRequest#lease_duration (method)">lease_duration</a></span>.</p>
+leased plus the
+<span class='object_link'><a href="LeaseTasksRequest.html#lease_duration-instance_method" title="Google::Cloud::Tasks::V2beta2::LeaseTasksRequest#lease_duration (method)">lease_duration</a></span>.</p>
 
 <p><code>schedule_time</code> will be truncated to the nearest microsecond.</p>
 </div>
@@ -887,14 +935,6 @@ leased plus the <span class='object_link'><a href="LeaseTasksRequest.html#lease_
       <pre class="lines">
 
 
-80
-81
-82
-83
-84
-85
-86
-87
 88
 89
 90
@@ -917,13 +957,26 @@ leased plus the <span class='object_link'><a href="LeaseTasksRequest.html#lease_
 107
 108
 109
-110</pre>
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta2/doc/google/cloud/tasks/v2beta2/task.rb', line 80</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta2/doc/google/cloud/tasks/v2beta2/task.rb', line 88</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Tasks::V2beta2::Task (class)">Task</a></span></span>
-  <span class='comment'># The view specifies a subset of {Google::Cloud::Tasks::V2beta2::Task Task} data.
+  <span class='comment'># The view specifies a subset of {Google::Cloud::Tasks::V2beta2::Task Task}
+</span>  <span class='comment'># data.
 </span>  <span class='comment'>#
 </span>  <span class='comment'># When a task is returned in a response, not all
 </span>  <span class='comment'># information is retrieved by default because some data, such as
@@ -938,18 +991,21 @@ leased plus the <span class='object_link'><a href="LeaseTasksRequest.html#lease_
 </span>    <span class='comment'># sensitive data.
 </span>    <span class='comment'>#
 </span>    <span class='comment'># This view does not include the
-</span>    <span class='comment'># ({Google::Cloud::Tasks::V2beta2::AppEngineHttpRequest payload in AppEngineHttpRequest} and
-</span>    <span class='comment'># {Google::Cloud::Tasks::V2beta2::PullMessage#payload payload in PullMessage}). These payloads are
-</span>    <span class='comment'># desirable to return only when needed, because they can be large
-</span>    <span class='comment'># and because of the sensitivity of the data that you choose to
-</span>    <span class='comment'># store in it.
+</span>    <span class='comment'># ([payload in
+</span>    <span class='comment'># AppEngineHttpRequest][google.cloud.tasks.v2beta2.AppEngineHttpRequest]
+</span>    <span class='comment'># and [payload in
+</span>    <span class='comment'># PullMessage][google.cloud.tasks.v2beta2.PullMessage.payload]). These
+</span>    <span class='comment'># payloads are desirable to return only when needed, because they can be
+</span>    <span class='comment'># large and because of the sensitivity of the data that you choose to store
+</span>    <span class='comment'># in it.
 </span>    <span class='const'>BASIC</span> <span class='op'>=</span> <span class='int'>1</span>
 
     <span class='comment'># All information is returned.
 </span>    <span class='comment'>#
-</span>    <span class='comment'># Authorization for {Google::Cloud::Tasks::V2beta2::Task::View::FULL FULL} requires
-</span>    <span class='comment'># `cloudtasks.tasks.fullView` [Google IAM](https://cloud.google.com/iam/)
-</span>    <span class='comment'># permission on the {Google::Cloud::Tasks::V2beta2::Queue Queue} resource.
+</span>    <span class='comment'># Authorization for {Google::Cloud::Tasks::V2beta2::Task::View::FULL FULL}
+</span>    <span class='comment'># requires `cloudtasks.tasks.fullView` [Google
+</span>    <span class='comment'># IAM](https://cloud.google.com/iam/) permission on the
+</span>    <span class='comment'># {Google::Cloud::Tasks::V2beta2::Queue Queue} resource.
 </span>    <span class='const'>FULL</span> <span class='op'>=</span> <span class='int'>2</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
@@ -1002,14 +1058,6 @@ leased plus the <span class='object_link'><a href="LeaseTasksRequest.html#lease_
       <pre class="lines">
 
 
-80
-81
-82
-83
-84
-85
-86
-87
 88
 89
 90
@@ -1032,13 +1080,26 @@ leased plus the <span class='object_link'><a href="LeaseTasksRequest.html#lease_
 107
 108
 109
-110</pre>
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta2/doc/google/cloud/tasks/v2beta2/task.rb', line 80</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta2/doc/google/cloud/tasks/v2beta2/task.rb', line 88</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Tasks::V2beta2::Task (class)">Task</a></span></span>
-  <span class='comment'># The view specifies a subset of {Google::Cloud::Tasks::V2beta2::Task Task} data.
+  <span class='comment'># The view specifies a subset of {Google::Cloud::Tasks::V2beta2::Task Task}
+</span>  <span class='comment'># data.
 </span>  <span class='comment'>#
 </span>  <span class='comment'># When a task is returned in a response, not all
 </span>  <span class='comment'># information is retrieved by default because some data, such as
@@ -1053,18 +1114,21 @@ leased plus the <span class='object_link'><a href="LeaseTasksRequest.html#lease_
 </span>    <span class='comment'># sensitive data.
 </span>    <span class='comment'>#
 </span>    <span class='comment'># This view does not include the
-</span>    <span class='comment'># ({Google::Cloud::Tasks::V2beta2::AppEngineHttpRequest payload in AppEngineHttpRequest} and
-</span>    <span class='comment'># {Google::Cloud::Tasks::V2beta2::PullMessage#payload payload in PullMessage}). These payloads are
-</span>    <span class='comment'># desirable to return only when needed, because they can be large
-</span>    <span class='comment'># and because of the sensitivity of the data that you choose to
-</span>    <span class='comment'># store in it.
+</span>    <span class='comment'># ([payload in
+</span>    <span class='comment'># AppEngineHttpRequest][google.cloud.tasks.v2beta2.AppEngineHttpRequest]
+</span>    <span class='comment'># and [payload in
+</span>    <span class='comment'># PullMessage][google.cloud.tasks.v2beta2.PullMessage.payload]). These
+</span>    <span class='comment'># payloads are desirable to return only when needed, because they can be
+</span>    <span class='comment'># large and because of the sensitivity of the data that you choose to store
+</span>    <span class='comment'># in it.
 </span>    <span class='const'>BASIC</span> <span class='op'>=</span> <span class='int'>1</span>
 
     <span class='comment'># All information is returned.
 </span>    <span class='comment'>#
-</span>    <span class='comment'># Authorization for {Google::Cloud::Tasks::V2beta2::Task::View::FULL FULL} requires
-</span>    <span class='comment'># `cloudtasks.tasks.fullView` [Google IAM](https://cloud.google.com/iam/)
-</span>    <span class='comment'># permission on the {Google::Cloud::Tasks::V2beta2::Queue Queue} resource.
+</span>    <span class='comment'># Authorization for {Google::Cloud::Tasks::V2beta2::Task::View::FULL FULL}
+</span>    <span class='comment'># requires `cloudtasks.tasks.fullView` [Google
+</span>    <span class='comment'># IAM](https://cloud.google.com/iam/) permission on the
+</span>    <span class='comment'># {Google::Cloud::Tasks::V2beta2::Queue Queue} resource.
 </span>    <span class='const'>FULL</span> <span class='op'>=</span> <span class='int'>2</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
@@ -1086,8 +1150,8 @@ leased plus the <span class='object_link'><a href="LeaseTasksRequest.html#lease_
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Output only. The view specifies which subset of the <span class='object_link'><a href="" title="Google::Cloud::Tasks::V2beta2::Task (class)">Task</a></span> has
-been returned.</p>
+    <p>Returns Output only. The view specifies which subset of the
+<span class='object_link'><a href="" title="Google::Cloud::Tasks::V2beta2::Task (class)">Task</a></span> has been returned.</p>
 
 
   </div>
@@ -1105,8 +1169,8 @@ been returned.</p>
       
       
         &mdash;
-        <div class='inline'><p>Output only. The view specifies which subset of the <span class='object_link'><a href="" title="Google::Cloud::Tasks::V2beta2::Task (class)">Task</a></span> has
-been returned.</p>
+        <div class='inline'><p>Output only. The view specifies which subset of the
+<span class='object_link'><a href="" title="Google::Cloud::Tasks::V2beta2::Task (class)">Task</a></span> has been returned.</p>
 </div>
       
     </li>
@@ -1119,14 +1183,6 @@ been returned.</p>
       <pre class="lines">
 
 
-80
-81
-82
-83
-84
-85
-86
-87
 88
 89
 90
@@ -1149,13 +1205,26 @@ been returned.</p>
 107
 108
 109
-110</pre>
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta2/doc/google/cloud/tasks/v2beta2/task.rb', line 80</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta2/doc/google/cloud/tasks/v2beta2/task.rb', line 88</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Tasks::V2beta2::Task (class)">Task</a></span></span>
-  <span class='comment'># The view specifies a subset of {Google::Cloud::Tasks::V2beta2::Task Task} data.
+  <span class='comment'># The view specifies a subset of {Google::Cloud::Tasks::V2beta2::Task Task}
+</span>  <span class='comment'># data.
 </span>  <span class='comment'>#
 </span>  <span class='comment'># When a task is returned in a response, not all
 </span>  <span class='comment'># information is retrieved by default because some data, such as
@@ -1170,18 +1239,21 @@ been returned.</p>
 </span>    <span class='comment'># sensitive data.
 </span>    <span class='comment'>#
 </span>    <span class='comment'># This view does not include the
-</span>    <span class='comment'># ({Google::Cloud::Tasks::V2beta2::AppEngineHttpRequest payload in AppEngineHttpRequest} and
-</span>    <span class='comment'># {Google::Cloud::Tasks::V2beta2::PullMessage#payload payload in PullMessage}). These payloads are
-</span>    <span class='comment'># desirable to return only when needed, because they can be large
-</span>    <span class='comment'># and because of the sensitivity of the data that you choose to
-</span>    <span class='comment'># store in it.
+</span>    <span class='comment'># ([payload in
+</span>    <span class='comment'># AppEngineHttpRequest][google.cloud.tasks.v2beta2.AppEngineHttpRequest]
+</span>    <span class='comment'># and [payload in
+</span>    <span class='comment'># PullMessage][google.cloud.tasks.v2beta2.PullMessage.payload]). These
+</span>    <span class='comment'># payloads are desirable to return only when needed, because they can be
+</span>    <span class='comment'># large and because of the sensitivity of the data that you choose to store
+</span>    <span class='comment'># in it.
 </span>    <span class='const'>BASIC</span> <span class='op'>=</span> <span class='int'>1</span>
 
     <span class='comment'># All information is returned.
 </span>    <span class='comment'>#
-</span>    <span class='comment'># Authorization for {Google::Cloud::Tasks::V2beta2::Task::View::FULL FULL} requires
-</span>    <span class='comment'># `cloudtasks.tasks.fullView` [Google IAM](https://cloud.google.com/iam/)
-</span>    <span class='comment'># permission on the {Google::Cloud::Tasks::V2beta2::Queue Queue} resource.
+</span>    <span class='comment'># Authorization for {Google::Cloud::Tasks::V2beta2::Task::View::FULL FULL}
+</span>    <span class='comment'># requires `cloudtasks.tasks.fullView` [Google
+</span>    <span class='comment'># IAM](https://cloud.google.com/iam/) permission on the
+</span>    <span class='comment'># {Google::Cloud::Tasks::V2beta2::Queue Queue} resource.
 </span>    <span class='const'>FULL</span> <span class='op'>=</span> <span class='int'>2</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>

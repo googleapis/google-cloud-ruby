@@ -73,7 +73,8 @@ js:
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>The view specifies a subset of <span class='object_link'><a href="../Task.html" title="Google::Cloud::Tasks::V2beta2::Task (class)">Task</a></span> data.</p>
+    <p>The view specifies a subset of <span class='object_link'><a href="../Task.html" title="Google::Cloud::Tasks::V2beta2::Task (class)">Task</a></span>
+data.</p>
 
 <p>When a task is returned in a response, not all
 information is retrieved by default because some data, such as
@@ -118,11 +119,13 @@ contains.</p>
 sensitive data.</p>
 
 <p>This view does not include the
-(<span class='object_link'><a href="../AppEngineHttpRequest.html" title="Google::Cloud::Tasks::V2beta2::AppEngineHttpRequest (class)">payload in AppEngineHttpRequest</a></span> and
-<span class='object_link'><a href="../PullMessage.html#payload-instance_method" title="Google::Cloud::Tasks::V2beta2::PullMessage#payload (method)">payload in PullMessage</a></span>). These payloads are
-desirable to return only when needed, because they can be large
-and because of the sensitivity of the data that you choose to
-store in it.</p>
+([payload in
+AppEngineHttpRequest][google.cloud.tasks.v2beta2.AppEngineHttpRequest]
+and [payload in
+PullMessage][google.cloud.tasks.v2beta2.PullMessage.payload]). These
+payloads are desirable to return only when needed, because they can be
+large and because of the sensitivity of the data that you choose to store
+in it.</p>
 
 
   </div>
@@ -139,9 +142,10 @@ store in it.</p>
   <div class="discussion">
     <p>All information is returned.</p>
 
-<p>Authorization for <span class='object_link'><a href="#FULL-constant" title="Google::Cloud::Tasks::V2beta2::Task::View::FULL (constant)">FULL</a></span> requires
-<code>cloudtasks.tasks.fullView</code> <a href="https://cloud.google.com/iam/">Google IAM</a>
-permission on the <span class='object_link'><a href="../Queue.html" title="Google::Cloud::Tasks::V2beta2::Queue (class)">Queue</a></span> resource.</p>
+<p>Authorization for <span class='object_link'><a href="#FULL-constant" title="Google::Cloud::Tasks::V2beta2::Task::View::FULL (constant)">FULL</a></span>
+requires <code>cloudtasks.tasks.fullView</code> <a href="https://cloud.google.com/iam/">Google
+IAM</a> permission on the
+<span class='object_link'><a href="../Queue.html" title="Google::Cloud::Tasks::V2beta2::Queue (class)">Queue</a></span> resource.</p>
 
 
   </div>

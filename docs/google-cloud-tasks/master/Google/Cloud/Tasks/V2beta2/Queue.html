@@ -322,7 +322,8 @@ retry options, target types, and others.</p>
   <div class="discussion">
     <p>Returns App Engine HTTP target.</p>
 
-<p>An App Engine queue is a queue that has an <span class='object_link'><a href="AppEngineHttpTarget.html" title="Google::Cloud::Tasks::V2beta2::AppEngineHttpTarget (class)">AppEngineHttpTarget</a></span>.</p>
+<p>An App Engine queue is a queue that has an
+<span class='object_link'><a href="AppEngineHttpTarget.html" title="Google::Cloud::Tasks::V2beta2::AppEngineHttpTarget (class)">AppEngineHttpTarget</a></span>.</p>
 
 
   </div>
@@ -342,7 +343,8 @@ retry options, target types, and others.</p>
         &mdash;
         <div class='inline'><p>App Engine HTTP target.</p>
 
-<p>An App Engine queue is a queue that has an <span class='object_link'><a href="AppEngineHttpTarget.html" title="Google::Cloud::Tasks::V2beta2::AppEngineHttpTarget (class)">AppEngineHttpTarget</a></span>.</p>
+<p>An App Engine queue is a queue that has an
+<span class='object_link'><a href="AppEngineHttpTarget.html" title="Google::Cloud::Tasks::V2beta2::AppEngineHttpTarget (class)">AppEngineHttpTarget</a></span>.</p>
 </div>
       
     </li>
@@ -355,17 +357,6 @@ retry options, target types, and others.</p>
       <pre class="lines">
 
 
-102
-103
-104
-105
-106
-107
-108
-109
-110
-111
-112
 113
 114
 115
@@ -394,10 +385,23 @@ retry options, target types, and others.</p>
 138
 139
 140
-141</pre>
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta2/doc/google/cloud/tasks/v2beta2/queue.rb', line 102</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta2/doc/google/cloud/tasks/v2beta2/queue.rb', line 113</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Tasks::V2beta2::Queue (class)">Queue</a></span></span>
   <span class='comment'># State of the queue.
@@ -418,21 +422,23 @@ retry options, target types, and others.</p>
     <span class='comment'># Tasks are paused by the user. If the queue is paused then Cloud
 </span>    <span class='comment'># Tasks will stop delivering tasks from it, but more tasks can
 </span>    <span class='comment'># still be added to it by the user. When a pull queue is paused,
-</span>    <span class='comment'># all {Google::Cloud::Tasks::V2beta2::CloudTasks::LeaseTasks LeaseTasks} calls will return a
-</span>    <span class='comment'># {Google::Rpc::Code::FAILED_PRECONDITION FAILED_PRECONDITION}.
+</span>    <span class='comment'># all {Google::Cloud::Tasks::V2beta2::CloudTasks::LeaseTasks LeaseTasks} calls
+</span>    <span class='comment'># will return a {Google::Rpc::Code::FAILED_PRECONDITION FAILED_PRECONDITION}.
 </span>    <span class='const'>PAUSED</span> <span class='op'>=</span> <span class='int'>2</span>
 
     <span class='comment'># The queue is disabled.
 </span>    <span class='comment'>#
 </span>    <span class='comment'># A queue becomes `DISABLED` when
-</span>    <span class='comment'># [queue.yaml](https://cloud.google.com/appengine/docs/python/config/queueref) or
-</span>    <span class='comment'># [queue.xml](https://cloud.google.com/appengine/docs/standard/java/config/queueref) is uploaded
-</span>    <span class='comment'># which does not contain the queue. You cannot directly disable a queue.
+</span>    <span class='comment'># [queue.yaml](https://cloud.google.com/appengine/docs/python/config/queueref)
+</span>    <span class='comment'># or
+</span>    <span class='comment'># [queue.xml](https://cloud.google.com/appengine/docs/standard/java/config/queueref)
+</span>    <span class='comment'># is uploaded which does not contain the queue. You cannot directly disable
+</span>    <span class='comment'># a queue.
 </span>    <span class='comment'>#
 </span>    <span class='comment'># When a queue is disabled, tasks can still be added to a queue
 </span>    <span class='comment'># but the tasks are not dispatched and
-</span>    <span class='comment'># {Google::Cloud::Tasks::V2beta2::CloudTasks::LeaseTasks LeaseTasks} calls return a
-</span>    <span class='comment'># `FAILED_PRECONDITION` error.
+</span>    <span class='comment'># {Google::Cloud::Tasks::V2beta2::CloudTasks::LeaseTasks LeaseTasks} calls
+</span>    <span class='comment'># return a `FAILED_PRECONDITION` error.
 </span>    <span class='comment'>#
 </span>    <span class='comment'># To permanently delete this queue and all of its tasks, call
 </span>    <span class='comment'># {Google::Cloud::Tasks::V2beta2::CloudTasks::DeleteQueue DeleteQueue}.
@@ -457,8 +463,9 @@ retry options, target types, and others.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Caller-specified and required in CreateQueue,
-after which it becomes output only.</p>
+    <p>Returns Caller-specified and required in
+CreateQueue, after
+which it becomes output only.</p>
 
 <p>The queue name.</p>
 
@@ -469,7 +476,8 @@ after which it becomes output only.</p>
 <li><code>PROJECT_ID</code> can contain letters ([A-Za-z]), numbers ([0-9]),
 hyphens (-), colons (:), or periods (.).
 For more information, see
-<a href="https://cloud.google.com/resource-manager/docs/creating-managing-projects#identifying_projects">Identifying projects</a></li>
+<a href="https://cloud.google.com/resource-manager/docs/creating-managing-projects#identifying_projects">Identifying
+projects</a></li>
 <li><code>LOCATION_ID</code> is the canonical ID for the queue&#39;s location.
 The list of available locations can be obtained by calling
 ListLocations.
@@ -494,8 +502,9 @@ hyphens (-). The maximum length is 100 characters.</li>
       
       
         &mdash;
-        <div class='inline'><p>Caller-specified and required in CreateQueue,
-after which it becomes output only.</p>
+        <div class='inline'><p>Caller-specified and required in
+CreateQueue, after
+which it becomes output only.</p>
 
 <p>The queue name.</p>
 
@@ -506,7 +515,8 @@ after which it becomes output only.</p>
 <li><code>PROJECT_ID</code> can contain letters ([A-Za-z]), numbers ([0-9]),
 hyphens (-), colons (:), or periods (.).
 For more information, see
-<a href="https://cloud.google.com/resource-manager/docs/creating-managing-projects#identifying_projects">Identifying projects</a></li>
+<a href="https://cloud.google.com/resource-manager/docs/creating-managing-projects#identifying_projects">Identifying
+projects</a></li>
 <li><code>LOCATION_ID</code> is the canonical ID for the queue&#39;s location.
 The list of available locations can be obtained by calling
 ListLocations.
@@ -526,17 +536,6 @@ hyphens (-). The maximum length is 100 characters.</li>
       <pre class="lines">
 
 
-102
-103
-104
-105
-106
-107
-108
-109
-110
-111
-112
 113
 114
 115
@@ -565,10 +564,23 @@ hyphens (-). The maximum length is 100 characters.</li>
 138
 139
 140
-141</pre>
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta2/doc/google/cloud/tasks/v2beta2/queue.rb', line 102</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta2/doc/google/cloud/tasks/v2beta2/queue.rb', line 113</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Tasks::V2beta2::Queue (class)">Queue</a></span></span>
   <span class='comment'># State of the queue.
@@ -589,21 +601,23 @@ hyphens (-). The maximum length is 100 characters.</li>
     <span class='comment'># Tasks are paused by the user. If the queue is paused then Cloud
 </span>    <span class='comment'># Tasks will stop delivering tasks from it, but more tasks can
 </span>    <span class='comment'># still be added to it by the user. When a pull queue is paused,
-</span>    <span class='comment'># all {Google::Cloud::Tasks::V2beta2::CloudTasks::LeaseTasks LeaseTasks} calls will return a
-</span>    <span class='comment'># {Google::Rpc::Code::FAILED_PRECONDITION FAILED_PRECONDITION}.
+</span>    <span class='comment'># all {Google::Cloud::Tasks::V2beta2::CloudTasks::LeaseTasks LeaseTasks} calls
+</span>    <span class='comment'># will return a {Google::Rpc::Code::FAILED_PRECONDITION FAILED_PRECONDITION}.
 </span>    <span class='const'>PAUSED</span> <span class='op'>=</span> <span class='int'>2</span>
 
     <span class='comment'># The queue is disabled.
 </span>    <span class='comment'>#
 </span>    <span class='comment'># A queue becomes `DISABLED` when
-</span>    <span class='comment'># [queue.yaml](https://cloud.google.com/appengine/docs/python/config/queueref) or
-</span>    <span class='comment'># [queue.xml](https://cloud.google.com/appengine/docs/standard/java/config/queueref) is uploaded
-</span>    <span class='comment'># which does not contain the queue. You cannot directly disable a queue.
+</span>    <span class='comment'># [queue.yaml](https://cloud.google.com/appengine/docs/python/config/queueref)
+</span>    <span class='comment'># or
+</span>    <span class='comment'># [queue.xml](https://cloud.google.com/appengine/docs/standard/java/config/queueref)
+</span>    <span class='comment'># is uploaded which does not contain the queue. You cannot directly disable
+</span>    <span class='comment'># a queue.
 </span>    <span class='comment'>#
 </span>    <span class='comment'># When a queue is disabled, tasks can still be added to a queue
 </span>    <span class='comment'># but the tasks are not dispatched and
-</span>    <span class='comment'># {Google::Cloud::Tasks::V2beta2::CloudTasks::LeaseTasks LeaseTasks} calls return a
-</span>    <span class='comment'># `FAILED_PRECONDITION` error.
+</span>    <span class='comment'># {Google::Cloud::Tasks::V2beta2::CloudTasks::LeaseTasks LeaseTasks} calls
+</span>    <span class='comment'># return a `FAILED_PRECONDITION` error.
 </span>    <span class='comment'>#
 </span>    <span class='comment'># To permanently delete this queue and all of its tasks, call
 </span>    <span class='comment'># {Google::Cloud::Tasks::V2beta2::CloudTasks::DeleteQueue DeleteQueue}.
@@ -630,7 +644,8 @@ hyphens (-). The maximum length is 100 characters.</li>
   <div class="discussion">
     <p>Returns Pull target.</p>
 
-<p>A pull queue is a queue that has a <span class='object_link'><a href="PullTarget.html" title="Google::Cloud::Tasks::V2beta2::PullTarget (class)">PullTarget</a></span>.</p>
+<p>A pull queue is a queue that has a
+<span class='object_link'><a href="PullTarget.html" title="Google::Cloud::Tasks::V2beta2::PullTarget (class)">PullTarget</a></span>.</p>
 
 
   </div>
@@ -650,7 +665,8 @@ hyphens (-). The maximum length is 100 characters.</li>
         &mdash;
         <div class='inline'><p>Pull target.</p>
 
-<p>A pull queue is a queue that has a <span class='object_link'><a href="PullTarget.html" title="Google::Cloud::Tasks::V2beta2::PullTarget (class)">PullTarget</a></span>.</p>
+<p>A pull queue is a queue that has a
+<span class='object_link'><a href="PullTarget.html" title="Google::Cloud::Tasks::V2beta2::PullTarget (class)">PullTarget</a></span>.</p>
 </div>
       
     </li>
@@ -663,17 +679,6 @@ hyphens (-). The maximum length is 100 characters.</li>
       <pre class="lines">
 
 
-102
-103
-104
-105
-106
-107
-108
-109
-110
-111
-112
 113
 114
 115
@@ -702,10 +707,23 @@ hyphens (-). The maximum length is 100 characters.</li>
 138
 139
 140
-141</pre>
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta2/doc/google/cloud/tasks/v2beta2/queue.rb', line 102</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta2/doc/google/cloud/tasks/v2beta2/queue.rb', line 113</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Tasks::V2beta2::Queue (class)">Queue</a></span></span>
   <span class='comment'># State of the queue.
@@ -726,21 +744,23 @@ hyphens (-). The maximum length is 100 characters.</li>
     <span class='comment'># Tasks are paused by the user. If the queue is paused then Cloud
 </span>    <span class='comment'># Tasks will stop delivering tasks from it, but more tasks can
 </span>    <span class='comment'># still be added to it by the user. When a pull queue is paused,
-</span>    <span class='comment'># all {Google::Cloud::Tasks::V2beta2::CloudTasks::LeaseTasks LeaseTasks} calls will return a
-</span>    <span class='comment'># {Google::Rpc::Code::FAILED_PRECONDITION FAILED_PRECONDITION}.
+</span>    <span class='comment'># all {Google::Cloud::Tasks::V2beta2::CloudTasks::LeaseTasks LeaseTasks} calls
+</span>    <span class='comment'># will return a {Google::Rpc::Code::FAILED_PRECONDITION FAILED_PRECONDITION}.
 </span>    <span class='const'>PAUSED</span> <span class='op'>=</span> <span class='int'>2</span>
 
     <span class='comment'># The queue is disabled.
 </span>    <span class='comment'>#
 </span>    <span class='comment'># A queue becomes `DISABLED` when
-</span>    <span class='comment'># [queue.yaml](https://cloud.google.com/appengine/docs/python/config/queueref) or
-</span>    <span class='comment'># [queue.xml](https://cloud.google.com/appengine/docs/standard/java/config/queueref) is uploaded
-</span>    <span class='comment'># which does not contain the queue. You cannot directly disable a queue.
+</span>    <span class='comment'># [queue.yaml](https://cloud.google.com/appengine/docs/python/config/queueref)
+</span>    <span class='comment'># or
+</span>    <span class='comment'># [queue.xml](https://cloud.google.com/appengine/docs/standard/java/config/queueref)
+</span>    <span class='comment'># is uploaded which does not contain the queue. You cannot directly disable
+</span>    <span class='comment'># a queue.
 </span>    <span class='comment'>#
 </span>    <span class='comment'># When a queue is disabled, tasks can still be added to a queue
 </span>    <span class='comment'># but the tasks are not dispatched and
-</span>    <span class='comment'># {Google::Cloud::Tasks::V2beta2::CloudTasks::LeaseTasks LeaseTasks} calls return a
-</span>    <span class='comment'># `FAILED_PRECONDITION` error.
+</span>    <span class='comment'># {Google::Cloud::Tasks::V2beta2::CloudTasks::LeaseTasks LeaseTasks} calls
+</span>    <span class='comment'># return a `FAILED_PRECONDITION` error.
 </span>    <span class='comment'>#
 </span>    <span class='comment'># To permanently delete this queue and all of its tasks, call
 </span>    <span class='comment'># {Google::Cloud::Tasks::V2beta2::CloudTasks::DeleteQueue DeleteQueue}.
@@ -767,11 +787,13 @@ hyphens (-). The maximum length is 100 characters.</li>
   <div class="discussion">
     <p>Returns Output only. The last time this queue was purged.</p>
 
-<p>All tasks that were <span class='object_link'><a href="Task.html#create_time-instance_method" title="Google::Cloud::Tasks::V2beta2::Task#create_time (method)">created</a></span> before this time
-were purged.</p>
+<p>All tasks that were <span class='object_link'><a href="Task.html#create_time-instance_method" title="Google::Cloud::Tasks::V2beta2::Task#create_time (method)">created</a></span>
+before this time were purged.</p>
 
-<p>A queue can be purged using PurgeQueue, the
-<a href="https://cloud.google.com/appengine/docs/standard/python/taskqueue/push/deleting-tasks-and-queues#purging_all_tasks_from_a_queue">App Engine Task Queue SDK, or the Cloud Console</a>.</p>
+<p>A queue can be purged using
+PurgeQueue, the <a href="https://cloud.google.com/appengine/docs/standard/python/taskqueue/push/deleting-tasks-and-queues#purging_all_tasks_from_a_queue">App
+Engine Task Queue SDK, or the Cloud
+Console</a>.</p>
 
 <p>Purge time will be truncated to the nearest microsecond. Purge
 time will be unset if the queue has never been purged.</p>
@@ -794,11 +816,13 @@ time will be unset if the queue has never been purged.</p>
         &mdash;
         <div class='inline'><p>Output only. The last time this queue was purged.</p>
 
-<p>All tasks that were <span class='object_link'><a href="Task.html#create_time-instance_method" title="Google::Cloud::Tasks::V2beta2::Task#create_time (method)">created</a></span> before this time
-were purged.</p>
+<p>All tasks that were <span class='object_link'><a href="Task.html#create_time-instance_method" title="Google::Cloud::Tasks::V2beta2::Task#create_time (method)">created</a></span>
+before this time were purged.</p>
 
-<p>A queue can be purged using PurgeQueue, the
-<a href="https://cloud.google.com/appengine/docs/standard/python/taskqueue/push/deleting-tasks-and-queues#purging_all_tasks_from_a_queue">App Engine Task Queue SDK, or the Cloud Console</a>.</p>
+<p>A queue can be purged using
+PurgeQueue, the <a href="https://cloud.google.com/appengine/docs/standard/python/taskqueue/push/deleting-tasks-and-queues#purging_all_tasks_from_a_queue">App
+Engine Task Queue SDK, or the Cloud
+Console</a>.</p>
 
 <p>Purge time will be truncated to the nearest microsecond. Purge
 time will be unset if the queue has never been purged.</p>
@@ -814,17 +838,6 @@ time will be unset if the queue has never been purged.</p>
       <pre class="lines">
 
 
-102
-103
-104
-105
-106
-107
-108
-109
-110
-111
-112
 113
 114
 115
@@ -853,10 +866,23 @@ time will be unset if the queue has never been purged.</p>
 138
 139
 140
-141</pre>
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta2/doc/google/cloud/tasks/v2beta2/queue.rb', line 102</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta2/doc/google/cloud/tasks/v2beta2/queue.rb', line 113</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Tasks::V2beta2::Queue (class)">Queue</a></span></span>
   <span class='comment'># State of the queue.
@@ -877,21 +903,23 @@ time will be unset if the queue has never been purged.</p>
     <span class='comment'># Tasks are paused by the user. If the queue is paused then Cloud
 </span>    <span class='comment'># Tasks will stop delivering tasks from it, but more tasks can
 </span>    <span class='comment'># still be added to it by the user. When a pull queue is paused,
-</span>    <span class='comment'># all {Google::Cloud::Tasks::V2beta2::CloudTasks::LeaseTasks LeaseTasks} calls will return a
-</span>    <span class='comment'># {Google::Rpc::Code::FAILED_PRECONDITION FAILED_PRECONDITION}.
+</span>    <span class='comment'># all {Google::Cloud::Tasks::V2beta2::CloudTasks::LeaseTasks LeaseTasks} calls
+</span>    <span class='comment'># will return a {Google::Rpc::Code::FAILED_PRECONDITION FAILED_PRECONDITION}.
 </span>    <span class='const'>PAUSED</span> <span class='op'>=</span> <span class='int'>2</span>
 
     <span class='comment'># The queue is disabled.
 </span>    <span class='comment'>#
 </span>    <span class='comment'># A queue becomes `DISABLED` when
-</span>    <span class='comment'># [queue.yaml](https://cloud.google.com/appengine/docs/python/config/queueref) or
-</span>    <span class='comment'># [queue.xml](https://cloud.google.com/appengine/docs/standard/java/config/queueref) is uploaded
-</span>    <span class='comment'># which does not contain the queue. You cannot directly disable a queue.
+</span>    <span class='comment'># [queue.yaml](https://cloud.google.com/appengine/docs/python/config/queueref)
+</span>    <span class='comment'># or
+</span>    <span class='comment'># [queue.xml](https://cloud.google.com/appengine/docs/standard/java/config/queueref)
+</span>    <span class='comment'># is uploaded which does not contain the queue. You cannot directly disable
+</span>    <span class='comment'># a queue.
 </span>    <span class='comment'>#
 </span>    <span class='comment'># When a queue is disabled, tasks can still be added to a queue
 </span>    <span class='comment'># but the tasks are not dispatched and
-</span>    <span class='comment'># {Google::Cloud::Tasks::V2beta2::CloudTasks::LeaseTasks LeaseTasks} calls return a
-</span>    <span class='comment'># `FAILED_PRECONDITION` error.
+</span>    <span class='comment'># {Google::Cloud::Tasks::V2beta2::CloudTasks::LeaseTasks LeaseTasks} calls
+</span>    <span class='comment'># return a `FAILED_PRECONDITION` error.
 </span>    <span class='comment'>#
 </span>    <span class='comment'># To permanently delete this queue and all of its tasks, call
 </span>    <span class='comment'># {Google::Cloud::Tasks::V2beta2::CloudTasks::DeleteQueue DeleteQueue}.
@@ -919,19 +947,21 @@ time will be unset if the queue has never been purged.</p>
     <p>Returns Rate limits for task dispatches.</p>
 
 <p><span class='object_link'><a href="#rate_limits-instance_method" title="Google::Cloud::Tasks::V2beta2::Queue#rate_limits (method)">rate_limits</a></span> and
-<span class='object_link'><a href="#retry_config-instance_method" title="Google::Cloud::Tasks::V2beta2::Queue#retry_config (method)">retry_config</a></span> are related because they both
-control task attempts however they control how tasks are
+<span class='object_link'><a href="#retry_config-instance_method" title="Google::Cloud::Tasks::V2beta2::Queue#retry_config (method)">retry_config</a></span> are related
+because they both control task attempts however they control how tasks are
 attempted in different ways:</p>
 
 <ul>
-<li><span class='object_link'><a href="#rate_limits-instance_method" title="Google::Cloud::Tasks::V2beta2::Queue#rate_limits (method)">rate_limits</a></span> controls the total rate of
+<li><span class='object_link'><a href="#rate_limits-instance_method" title="Google::Cloud::Tasks::V2beta2::Queue#rate_limits (method)">rate_limits</a></span> controls the
+total rate of
 dispatches from a queue (i.e. all traffic dispatched from the
 queue, regardless of whether the dispatch is from a first
 attempt or a retry).</li>
-<li><span class='object_link'><a href="#retry_config-instance_method" title="Google::Cloud::Tasks::V2beta2::Queue#retry_config (method)">retry_config</a></span> controls what happens to
+<li><span class='object_link'><a href="#retry_config-instance_method" title="Google::Cloud::Tasks::V2beta2::Queue#retry_config (method)">retry_config</a></span> controls
+what happens to
 particular a task after its first attempt fails. That is,
-<span class='object_link'><a href="#retry_config-instance_method" title="Google::Cloud::Tasks::V2beta2::Queue#retry_config (method)">retry_config</a></span> controls task retries (the
-second attempt, third attempt, etc).</li>
+<span class='object_link'><a href="#retry_config-instance_method" title="Google::Cloud::Tasks::V2beta2::Queue#retry_config (method)">retry_config</a></span> controls
+task retries (the second attempt, third attempt, etc).</li>
 </ul>
 
 
@@ -953,19 +983,21 @@ second attempt, third attempt, etc).</li>
         <div class='inline'><p>Rate limits for task dispatches.</p>
 
 <p><span class='object_link'><a href="#rate_limits-instance_method" title="Google::Cloud::Tasks::V2beta2::Queue#rate_limits (method)">rate_limits</a></span> and
-<span class='object_link'><a href="#retry_config-instance_method" title="Google::Cloud::Tasks::V2beta2::Queue#retry_config (method)">retry_config</a></span> are related because they both
-control task attempts however they control how tasks are
+<span class='object_link'><a href="#retry_config-instance_method" title="Google::Cloud::Tasks::V2beta2::Queue#retry_config (method)">retry_config</a></span> are related
+because they both control task attempts however they control how tasks are
 attempted in different ways:</p>
 
 <ul>
-<li><span class='object_link'><a href="#rate_limits-instance_method" title="Google::Cloud::Tasks::V2beta2::Queue#rate_limits (method)">rate_limits</a></span> controls the total rate of
+<li><span class='object_link'><a href="#rate_limits-instance_method" title="Google::Cloud::Tasks::V2beta2::Queue#rate_limits (method)">rate_limits</a></span> controls the
+total rate of
 dispatches from a queue (i.e. all traffic dispatched from the
 queue, regardless of whether the dispatch is from a first
 attempt or a retry).</li>
-<li><span class='object_link'><a href="#retry_config-instance_method" title="Google::Cloud::Tasks::V2beta2::Queue#retry_config (method)">retry_config</a></span> controls what happens to
+<li><span class='object_link'><a href="#retry_config-instance_method" title="Google::Cloud::Tasks::V2beta2::Queue#retry_config (method)">retry_config</a></span> controls
+what happens to
 particular a task after its first attempt fails. That is,
-<span class='object_link'><a href="#retry_config-instance_method" title="Google::Cloud::Tasks::V2beta2::Queue#retry_config (method)">retry_config</a></span> controls task retries (the
-second attempt, third attempt, etc).</li>
+<span class='object_link'><a href="#retry_config-instance_method" title="Google::Cloud::Tasks::V2beta2::Queue#retry_config (method)">retry_config</a></span> controls
+task retries (the second attempt, third attempt, etc).</li>
 </ul>
 </div>
       
@@ -979,17 +1011,6 @@ second attempt, third attempt, etc).</li>
       <pre class="lines">
 
 
-102
-103
-104
-105
-106
-107
-108
-109
-110
-111
-112
 113
 114
 115
@@ -1018,10 +1039,23 @@ second attempt, third attempt, etc).</li>
 138
 139
 140
-141</pre>
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta2/doc/google/cloud/tasks/v2beta2/queue.rb', line 102</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta2/doc/google/cloud/tasks/v2beta2/queue.rb', line 113</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Tasks::V2beta2::Queue (class)">Queue</a></span></span>
   <span class='comment'># State of the queue.
@@ -1042,21 +1076,23 @@ second attempt, third attempt, etc).</li>
     <span class='comment'># Tasks are paused by the user. If the queue is paused then Cloud
 </span>    <span class='comment'># Tasks will stop delivering tasks from it, but more tasks can
 </span>    <span class='comment'># still be added to it by the user. When a pull queue is paused,
-</span>    <span class='comment'># all {Google::Cloud::Tasks::V2beta2::CloudTasks::LeaseTasks LeaseTasks} calls will return a
-</span>    <span class='comment'># {Google::Rpc::Code::FAILED_PRECONDITION FAILED_PRECONDITION}.
+</span>    <span class='comment'># all {Google::Cloud::Tasks::V2beta2::CloudTasks::LeaseTasks LeaseTasks} calls
+</span>    <span class='comment'># will return a {Google::Rpc::Code::FAILED_PRECONDITION FAILED_PRECONDITION}.
 </span>    <span class='const'>PAUSED</span> <span class='op'>=</span> <span class='int'>2</span>
 
     <span class='comment'># The queue is disabled.
 </span>    <span class='comment'>#
 </span>    <span class='comment'># A queue becomes `DISABLED` when
-</span>    <span class='comment'># [queue.yaml](https://cloud.google.com/appengine/docs/python/config/queueref) or
-</span>    <span class='comment'># [queue.xml](https://cloud.google.com/appengine/docs/standard/java/config/queueref) is uploaded
-</span>    <span class='comment'># which does not contain the queue. You cannot directly disable a queue.
+</span>    <span class='comment'># [queue.yaml](https://cloud.google.com/appengine/docs/python/config/queueref)
+</span>    <span class='comment'># or
+</span>    <span class='comment'># [queue.xml](https://cloud.google.com/appengine/docs/standard/java/config/queueref)
+</span>    <span class='comment'># is uploaded which does not contain the queue. You cannot directly disable
+</span>    <span class='comment'># a queue.
 </span>    <span class='comment'>#
 </span>    <span class='comment'># When a queue is disabled, tasks can still be added to a queue
 </span>    <span class='comment'># but the tasks are not dispatched and
-</span>    <span class='comment'># {Google::Cloud::Tasks::V2beta2::CloudTasks::LeaseTasks LeaseTasks} calls return a
-</span>    <span class='comment'># `FAILED_PRECONDITION` error.
+</span>    <span class='comment'># {Google::Cloud::Tasks::V2beta2::CloudTasks::LeaseTasks LeaseTasks} calls
+</span>    <span class='comment'># return a `FAILED_PRECONDITION` error.
 </span>    <span class='comment'>#
 </span>    <span class='comment'># To permanently delete this queue and all of its tasks, call
 </span>    <span class='comment'># {Google::Cloud::Tasks::V2beta2::CloudTasks::DeleteQueue DeleteQueue}.
@@ -1090,7 +1126,8 @@ Retry settings cannot be set on individual tasks.</li>
 <li>For tasks created using the App Engine SDK: the queue-level retry
 settings apply to all tasks in the queue which do not have retry settings
 explicitly set on the task and were created by the App Engine SDK. See
-<a href="https://cloud.google.com/appengine/docs/standard/python/taskqueue/push/retrying-tasks">App Engine documentation</a>.</li>
+<a href="https://cloud.google.com/appengine/docs/standard/python/taskqueue/push/retrying-tasks">App Engine
+documentation</a>.</li>
 </ul>
 
 
@@ -1118,7 +1155,8 @@ Retry settings cannot be set on individual tasks.</li>
 <li>For tasks created using the App Engine SDK: the queue-level retry
 settings apply to all tasks in the queue which do not have retry settings
 explicitly set on the task and were created by the App Engine SDK. See
-<a href="https://cloud.google.com/appengine/docs/standard/python/taskqueue/push/retrying-tasks">App Engine documentation</a>.</li>
+<a href="https://cloud.google.com/appengine/docs/standard/python/taskqueue/push/retrying-tasks">App Engine
+documentation</a>.</li>
 </ul>
 </div>
       
@@ -1132,17 +1170,6 @@ explicitly set on the task and were created by the App Engine SDK. See
       <pre class="lines">
 
 
-102
-103
-104
-105
-106
-107
-108
-109
-110
-111
-112
 113
 114
 115
@@ -1171,10 +1198,23 @@ explicitly set on the task and were created by the App Engine SDK. See
 138
 139
 140
-141</pre>
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta2/doc/google/cloud/tasks/v2beta2/queue.rb', line 102</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta2/doc/google/cloud/tasks/v2beta2/queue.rb', line 113</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Tasks::V2beta2::Queue (class)">Queue</a></span></span>
   <span class='comment'># State of the queue.
@@ -1195,21 +1235,23 @@ explicitly set on the task and were created by the App Engine SDK. See
     <span class='comment'># Tasks are paused by the user. If the queue is paused then Cloud
 </span>    <span class='comment'># Tasks will stop delivering tasks from it, but more tasks can
 </span>    <span class='comment'># still be added to it by the user. When a pull queue is paused,
-</span>    <span class='comment'># all {Google::Cloud::Tasks::V2beta2::CloudTasks::LeaseTasks LeaseTasks} calls will return a
-</span>    <span class='comment'># {Google::Rpc::Code::FAILED_PRECONDITION FAILED_PRECONDITION}.
+</span>    <span class='comment'># all {Google::Cloud::Tasks::V2beta2::CloudTasks::LeaseTasks LeaseTasks} calls
+</span>    <span class='comment'># will return a {Google::Rpc::Code::FAILED_PRECONDITION FAILED_PRECONDITION}.
 </span>    <span class='const'>PAUSED</span> <span class='op'>=</span> <span class='int'>2</span>
 
     <span class='comment'># The queue is disabled.
 </span>    <span class='comment'>#
 </span>    <span class='comment'># A queue becomes `DISABLED` when
-</span>    <span class='comment'># [queue.yaml](https://cloud.google.com/appengine/docs/python/config/queueref) or
-</span>    <span class='comment'># [queue.xml](https://cloud.google.com/appengine/docs/standard/java/config/queueref) is uploaded
-</span>    <span class='comment'># which does not contain the queue. You cannot directly disable a queue.
+</span>    <span class='comment'># [queue.yaml](https://cloud.google.com/appengine/docs/python/config/queueref)
+</span>    <span class='comment'># or
+</span>    <span class='comment'># [queue.xml](https://cloud.google.com/appengine/docs/standard/java/config/queueref)
+</span>    <span class='comment'># is uploaded which does not contain the queue. You cannot directly disable
+</span>    <span class='comment'># a queue.
 </span>    <span class='comment'>#
 </span>    <span class='comment'># When a queue is disabled, tasks can still be added to a queue
 </span>    <span class='comment'># but the tasks are not dispatched and
-</span>    <span class='comment'># {Google::Cloud::Tasks::V2beta2::CloudTasks::LeaseTasks LeaseTasks} calls return a
-</span>    <span class='comment'># `FAILED_PRECONDITION` error.
+</span>    <span class='comment'># {Google::Cloud::Tasks::V2beta2::CloudTasks::LeaseTasks LeaseTasks} calls
+</span>    <span class='comment'># return a `FAILED_PRECONDITION` error.
 </span>    <span class='comment'>#
 </span>    <span class='comment'># To permanently delete this queue and all of its tasks, call
 </span>    <span class='comment'># {Google::Cloud::Tasks::V2beta2::CloudTasks::DeleteQueue DeleteQueue}.
@@ -1238,9 +1280,11 @@ explicitly set on the task and were created by the App Engine SDK. See
 
 <p><code>state</code> can only be changed by called
 PauseQueue,
-ResumeQueue, or uploading
+ResumeQueue, or
+uploading
 <a href="https://cloud.google.com/appengine/docs/python/config/queueref">queue.yaml/xml</a>.
-UpdateQueue cannot be used to change <code>state</code>.</p>
+UpdateQueue cannot be
+used to change <code>state</code>.</p>
 
 
   </div>
@@ -1262,9 +1306,11 @@ UpdateQueue cannot be used to change <code>state</code>.</p>
 
 <p><code>state</code> can only be changed by called
 PauseQueue,
-ResumeQueue, or uploading
+ResumeQueue, or
+uploading
 <a href="https://cloud.google.com/appengine/docs/python/config/queueref">queue.yaml/xml</a>.
-UpdateQueue cannot be used to change <code>state</code>.</p>
+UpdateQueue cannot be
+used to change <code>state</code>.</p>
 </div>
       
     </li>
@@ -1277,17 +1323,6 @@ UpdateQueue cannot be used to change <code>state</code>.</p>
       <pre class="lines">
 
 
-102
-103
-104
-105
-106
-107
-108
-109
-110
-111
-112
 113
 114
 115
@@ -1316,10 +1351,23 @@ UpdateQueue cannot be used to change <code>state</code>.</p>
 138
 139
 140
-141</pre>
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta2/doc/google/cloud/tasks/v2beta2/queue.rb', line 102</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta2/doc/google/cloud/tasks/v2beta2/queue.rb', line 113</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Tasks::V2beta2::Queue (class)">Queue</a></span></span>
   <span class='comment'># State of the queue.
@@ -1340,21 +1388,23 @@ UpdateQueue cannot be used to change <code>state</code>.</p>
     <span class='comment'># Tasks are paused by the user. If the queue is paused then Cloud
 </span>    <span class='comment'># Tasks will stop delivering tasks from it, but more tasks can
 </span>    <span class='comment'># still be added to it by the user. When a pull queue is paused,
-</span>    <span class='comment'># all {Google::Cloud::Tasks::V2beta2::CloudTasks::LeaseTasks LeaseTasks} calls will return a
-</span>    <span class='comment'># {Google::Rpc::Code::FAILED_PRECONDITION FAILED_PRECONDITION}.
+</span>    <span class='comment'># all {Google::Cloud::Tasks::V2beta2::CloudTasks::LeaseTasks LeaseTasks} calls
+</span>    <span class='comment'># will return a {Google::Rpc::Code::FAILED_PRECONDITION FAILED_PRECONDITION}.
 </span>    <span class='const'>PAUSED</span> <span class='op'>=</span> <span class='int'>2</span>
 
     <span class='comment'># The queue is disabled.
 </span>    <span class='comment'>#
 </span>    <span class='comment'># A queue becomes `DISABLED` when
-</span>    <span class='comment'># [queue.yaml](https://cloud.google.com/appengine/docs/python/config/queueref) or
-</span>    <span class='comment'># [queue.xml](https://cloud.google.com/appengine/docs/standard/java/config/queueref) is uploaded
-</span>    <span class='comment'># which does not contain the queue. You cannot directly disable a queue.
+</span>    <span class='comment'># [queue.yaml](https://cloud.google.com/appengine/docs/python/config/queueref)
+</span>    <span class='comment'># or
+</span>    <span class='comment'># [queue.xml](https://cloud.google.com/appengine/docs/standard/java/config/queueref)
+</span>    <span class='comment'># is uploaded which does not contain the queue. You cannot directly disable
+</span>    <span class='comment'># a queue.
 </span>    <span class='comment'>#
 </span>    <span class='comment'># When a queue is disabled, tasks can still be added to a queue
 </span>    <span class='comment'># but the tasks are not dispatched and
-</span>    <span class='comment'># {Google::Cloud::Tasks::V2beta2::CloudTasks::LeaseTasks LeaseTasks} calls return a
-</span>    <span class='comment'># `FAILED_PRECONDITION` error.
+</span>    <span class='comment'># {Google::Cloud::Tasks::V2beta2::CloudTasks::LeaseTasks LeaseTasks} calls
+</span>    <span class='comment'># return a `FAILED_PRECONDITION` error.
 </span>    <span class='comment'>#
 </span>    <span class='comment'># To permanently delete this queue and all of its tasks, call
 </span>    <span class='comment'># {Google::Cloud::Tasks::V2beta2::CloudTasks::DeleteQueue DeleteQueue}.

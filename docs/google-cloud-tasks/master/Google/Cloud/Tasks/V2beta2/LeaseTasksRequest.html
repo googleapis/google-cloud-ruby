@@ -89,7 +89,8 @@ js:
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>Request message for leasing tasks using LeaseTasks.</p>
+    <p>Request message for leasing tasks using
+LeaseTasks.</p>
 
 
   </div>
@@ -256,16 +257,17 @@ js:
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns <code>filter</code> can be used to specify a subset of tasks to lease.</p>
+    <p><code>filter</code> can be used to specify a subset of tasks to lease.</p>
 
 <p>When <code>filter</code> is set to <code>tag=&lt;my-tag&gt;</code> then the
-<span class='object_link'><a href="LeaseTasksResponse.html" title="Google::Cloud::Tasks::V2beta2::LeaseTasksResponse (class)">response</a></span> will contain only tasks whose
-<span class='object_link'><a href="PullMessage.html#tag-instance_method" title="Google::Cloud::Tasks::V2beta2::PullMessage#tag (method)">tag</a></span> is equal to <code>&lt;my-tag&gt;</code>. <code>&lt;my-tag&gt;</code> must be
-less than 500 characters.</p>
+<span class='object_link'><a href="LeaseTasksResponse.html" title="Google::Cloud::Tasks::V2beta2::LeaseTasksResponse (class)">response</a></span> will contain only
+tasks whose <span class='object_link'><a href="PullMessage.html#tag-instance_method" title="Google::Cloud::Tasks::V2beta2::PullMessage#tag (method)">tag</a></span> is equal to
+<code>&lt;my-tag&gt;</code>. <code>&lt;my-tag&gt;</code> must be less than 500 characters.</p>
 
 <p>When <code>filter</code> is set to <code>tag_function=oldest_tag()</code>, only tasks which have
 the same tag as the task with the oldest
-<span class='object_link'><a href="Task.html#schedule_time-instance_method" title="Google::Cloud::Tasks::V2beta2::Task#schedule_time (method)">schedule_time</a></span> will be returned.</p>
+<span class='object_link'><a href="Task.html#schedule_time-instance_method" title="Google::Cloud::Tasks::V2beta2::Task#schedule_time (method)">schedule_time</a></span> will be
+returned.</p>
 
 <p>Grammar Syntax:</p>
 
@@ -283,8 +285,9 @@ string or
 <a href="https://cloud.google.com/appengine/docs/standard/java/javadoc/com/google/appengine/api/taskqueue/TaskOptions.html#tag-byte:A-">bytes</a>,
 only UTF-8 encoded tags can be used in Cloud Tasks. Tag which
 aren&#39;t UTF-8 encoded can&#39;t be used in the
-<span class='object_link'><a href="#filter-instance_method" title="Google::Cloud::Tasks::V2beta2::LeaseTasksRequest#filter (method)">filter</a></span> and the task&#39;s
-<span class='object_link'><a href="PullMessage.html#tag-instance_method" title="Google::Cloud::Tasks::V2beta2::PullMessage#tag (method)">tag</a></span> will be displayed as empty in Cloud Tasks.</p>
+<span class='object_link'><a href="#filter-instance_method" title="Google::Cloud::Tasks::V2beta2::LeaseTasksRequest#filter (method)">filter</a></span> and the
+task&#39;s <span class='object_link'><a href="PullMessage.html#tag-instance_method" title="Google::Cloud::Tasks::V2beta2::PullMessage#tag (method)">tag</a></span> will be displayed
+as empty in Cloud Tasks.</p>
 
 
   </div>
@@ -305,13 +308,14 @@ aren&#39;t UTF-8 encoded can&#39;t be used in the
         <div class='inline'><p><code>filter</code> can be used to specify a subset of tasks to lease.</p>
 
 <p>When <code>filter</code> is set to <code>tag=&lt;my-tag&gt;</code> then the
-<span class='object_link'><a href="LeaseTasksResponse.html" title="Google::Cloud::Tasks::V2beta2::LeaseTasksResponse (class)">response</a></span> will contain only tasks whose
-<span class='object_link'><a href="PullMessage.html#tag-instance_method" title="Google::Cloud::Tasks::V2beta2::PullMessage#tag (method)">tag</a></span> is equal to <code>&lt;my-tag&gt;</code>. <code>&lt;my-tag&gt;</code> must be
-less than 500 characters.</p>
+<span class='object_link'><a href="LeaseTasksResponse.html" title="Google::Cloud::Tasks::V2beta2::LeaseTasksResponse (class)">response</a></span> will contain only
+tasks whose <span class='object_link'><a href="PullMessage.html#tag-instance_method" title="Google::Cloud::Tasks::V2beta2::PullMessage#tag (method)">tag</a></span> is equal to
+<code>&lt;my-tag&gt;</code>. <code>&lt;my-tag&gt;</code> must be less than 500 characters.</p>
 
 <p>When <code>filter</code> is set to <code>tag_function=oldest_tag()</code>, only tasks which have
 the same tag as the task with the oldest
-<span class='object_link'><a href="Task.html#schedule_time-instance_method" title="Google::Cloud::Tasks::V2beta2::Task#schedule_time (method)">schedule_time</a></span> will be returned.</p>
+<span class='object_link'><a href="Task.html#schedule_time-instance_method" title="Google::Cloud::Tasks::V2beta2::Task#schedule_time (method)">schedule_time</a></span> will be
+returned.</p>
 
 <p>Grammar Syntax:</p>
 
@@ -329,8 +333,9 @@ string or
 <a href="https://cloud.google.com/appengine/docs/standard/java/javadoc/com/google/appengine/api/taskqueue/TaskOptions.html#tag-byte:A-">bytes</a>,
 only UTF-8 encoded tags can be used in Cloud Tasks. Tag which
 aren&#39;t UTF-8 encoded can&#39;t be used in the
-<span class='object_link'><a href="#filter-instance_method" title="Google::Cloud::Tasks::V2beta2::LeaseTasksRequest#filter (method)">filter</a></span> and the task&#39;s
-<span class='object_link'><a href="PullMessage.html#tag-instance_method" title="Google::Cloud::Tasks::V2beta2::PullMessage#tag (method)">tag</a></span> will be displayed as empty in Cloud Tasks.</p>
+<span class='object_link'><a href="#filter-instance_method" title="Google::Cloud::Tasks::V2beta2::LeaseTasksRequest#filter (method)">filter</a></span> and the
+task&#39;s <span class='object_link'><a href="PullMessage.html#tag-instance_method" title="Google::Cloud::Tasks::V2beta2::PullMessage#tag (method)">tag</a></span> will be displayed
+as empty in Cloud Tasks.</p>
 </div>
       
     </li>
@@ -343,10 +348,10 @@ aren&#39;t UTF-8 encoded can&#39;t be used in the
       <pre class="lines">
 
 
-385</pre>
+413</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta2/doc/google/cloud/tasks/v2beta2/cloudtasks.rb', line 385</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta2/doc/google/cloud/tasks/v2beta2/cloudtasks.rb', line 413</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Tasks::V2beta2::LeaseTasksRequest (class)">LeaseTasksRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -367,12 +372,13 @@ aren&#39;t UTF-8 encoded can&#39;t be used in the
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>After the worker has successfully finished the work associated
+    <p>Returns After the worker has successfully finished the work associated
 with the task, the worker must call via
-AcknowledgeTask before the
-<span class='object_link'><a href="Task.html#schedule_time-instance_method" title="Google::Cloud::Tasks::V2beta2::Task#schedule_time (method)">schedule_time</a></span>. Otherwise the task will be
-returned to a later LeaseTasks call so
-that another worker can retry it.</p>
+AcknowledgeTask
+before the <span class='object_link'><a href="Task.html#schedule_time-instance_method" title="Google::Cloud::Tasks::V2beta2::Task#schedule_time (method)">schedule_time</a></span>.
+Otherwise the task will be returned to a later
+LeaseTasks call so that
+another worker can retry it.</p>
 
 <p>The maximum lease duration is 1 week.
 <code>lease_duration</code> will be truncated to the nearest second.</p>
@@ -395,10 +401,11 @@ that another worker can retry it.</p>
         &mdash;
         <div class='inline'><p>After the worker has successfully finished the work associated
 with the task, the worker must call via
-AcknowledgeTask before the
-<span class='object_link'><a href="Task.html#schedule_time-instance_method" title="Google::Cloud::Tasks::V2beta2::Task#schedule_time (method)">schedule_time</a></span>. Otherwise the task will be
-returned to a later LeaseTasks call so
-that another worker can retry it.</p>
+AcknowledgeTask
+before the <span class='object_link'><a href="Task.html#schedule_time-instance_method" title="Google::Cloud::Tasks::V2beta2::Task#schedule_time (method)">schedule_time</a></span>.
+Otherwise the task will be returned to a later
+LeaseTasks call so that
+another worker can retry it.</p>
 
 <p>The maximum lease duration is 1 week.
 <code>lease_duration</code> will be truncated to the nearest second.</p>
@@ -414,10 +421,10 @@ that another worker can retry it.</p>
       <pre class="lines">
 
 
-385</pre>
+413</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta2/doc/google/cloud/tasks/v2beta2/cloudtasks.rb', line 385</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta2/doc/google/cloud/tasks/v2beta2/cloudtasks.rb', line 413</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Tasks::V2beta2::LeaseTasksRequest (class)">LeaseTasksRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -479,10 +486,10 @@ that another worker can retry it.</p>
       <pre class="lines">
 
 
-385</pre>
+413</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta2/doc/google/cloud/tasks/v2beta2/cloudtasks.rb', line 385</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta2/doc/google/cloud/tasks/v2beta2/cloudtasks.rb', line 413</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Tasks::V2beta2::LeaseTasksRequest (class)">LeaseTasksRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -540,10 +547,10 @@ that another worker can retry it.</p>
       <pre class="lines">
 
 
-385</pre>
+413</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta2/doc/google/cloud/tasks/v2beta2/cloudtasks.rb', line 385</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta2/doc/google/cloud/tasks/v2beta2/cloudtasks.rb', line 413</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Tasks::V2beta2::LeaseTasksRequest (class)">LeaseTasksRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -564,18 +571,19 @@ that another worker can retry it.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The response_view specifies which subset of the <span class='object_link'><a href="Task.html" title="Google::Cloud::Tasks::V2beta2::Task (class)">Task</a></span> will be
-returned.</p>
+    <p>Returns The response_view specifies which subset of the
+<span class='object_link'><a href="Task.html" title="Google::Cloud::Tasks::V2beta2::Task (class)">Task</a></span> will be returned.</p>
 
-<p>By default response_view is <span class='object_link'><a href="Task/View.html#BASIC-constant" title="Google::Cloud::Tasks::V2beta2::Task::View::BASIC (constant)">BASIC</a></span>; not all
-information is retrieved by default because some data, such as
-payloads, might be desirable to return only when needed because
-of its large size or because of the sensitivity of data that it
-contains.</p>
+<p>By default response_view is
+<span class='object_link'><a href="Task/View.html#BASIC-constant" title="Google::Cloud::Tasks::V2beta2::Task::View::BASIC (constant)">BASIC</a></span>; not all information is
+retrieved by default because some data, such as payloads, might be
+desirable to return only when needed because of its large size or because
+of the sensitivity of data that it contains.</p>
 
-<p>Authorization for <span class='object_link'><a href="Task/View.html#FULL-constant" title="Google::Cloud::Tasks::V2beta2::Task::View::FULL (constant)">FULL</a></span> requires
-<code>cloudtasks.tasks.fullView</code> <a href="https://cloud.google.com/iam/">Google IAM</a>
-permission on the <span class='object_link'><a href="Task.html" title="Google::Cloud::Tasks::V2beta2::Task (class)">Task</a></span> resource.</p>
+<p>Authorization for <span class='object_link'><a href="Task/View.html#FULL-constant" title="Google::Cloud::Tasks::V2beta2::Task::View::FULL (constant)">FULL</a></span>
+requires <code>cloudtasks.tasks.fullView</code> <a href="https://cloud.google.com/iam/">Google
+IAM</a> permission on the
+<span class='object_link'><a href="Task.html" title="Google::Cloud::Tasks::V2beta2::Task (class)">Task</a></span> resource.</p>
 
 
   </div>
@@ -593,18 +601,19 @@ permission on the <span class='object_link'><a href="Task.html" title="Google::C
       
       
         &mdash;
-        <div class='inline'><p>The response_view specifies which subset of the <span class='object_link'><a href="Task.html" title="Google::Cloud::Tasks::V2beta2::Task (class)">Task</a></span> will be
-returned.</p>
+        <div class='inline'><p>The response_view specifies which subset of the
+<span class='object_link'><a href="Task.html" title="Google::Cloud::Tasks::V2beta2::Task (class)">Task</a></span> will be returned.</p>
 
-<p>By default response_view is <span class='object_link'><a href="Task/View.html#BASIC-constant" title="Google::Cloud::Tasks::V2beta2::Task::View::BASIC (constant)">BASIC</a></span>; not all
-information is retrieved by default because some data, such as
-payloads, might be desirable to return only when needed because
-of its large size or because of the sensitivity of data that it
-contains.</p>
+<p>By default response_view is
+<span class='object_link'><a href="Task/View.html#BASIC-constant" title="Google::Cloud::Tasks::V2beta2::Task::View::BASIC (constant)">BASIC</a></span>; not all information is
+retrieved by default because some data, such as payloads, might be
+desirable to return only when needed because of its large size or because
+of the sensitivity of data that it contains.</p>
 
-<p>Authorization for <span class='object_link'><a href="Task/View.html#FULL-constant" title="Google::Cloud::Tasks::V2beta2::Task::View::FULL (constant)">FULL</a></span> requires
-<code>cloudtasks.tasks.fullView</code> <a href="https://cloud.google.com/iam/">Google IAM</a>
-permission on the <span class='object_link'><a href="Task.html" title="Google::Cloud::Tasks::V2beta2::Task (class)">Task</a></span> resource.</p>
+<p>Authorization for <span class='object_link'><a href="Task/View.html#FULL-constant" title="Google::Cloud::Tasks::V2beta2::Task::View::FULL (constant)">FULL</a></span>
+requires <code>cloudtasks.tasks.fullView</code> <a href="https://cloud.google.com/iam/">Google
+IAM</a> permission on the
+<span class='object_link'><a href="Task.html" title="Google::Cloud::Tasks::V2beta2::Task (class)">Task</a></span> resource.</p>
 </div>
       
     </li>
@@ -617,10 +626,10 @@ permission on the <span class='object_link'><a href="Task.html" title="Google::C
       <pre class="lines">
 
 
-385</pre>
+413</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta2/doc/google/cloud/tasks/v2beta2/cloudtasks.rb', line 385</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta2/doc/google/cloud/tasks/v2beta2/cloudtasks.rb', line 413</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Tasks::V2beta2::LeaseTasksRequest (class)">LeaseTasksRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>

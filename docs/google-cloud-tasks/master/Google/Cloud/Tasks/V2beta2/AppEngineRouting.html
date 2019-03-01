@@ -92,10 +92,14 @@ js:
     <p>App Engine Routing.</p>
 
 <p>For more information about services, versions, and instances see
-<a href="https://cloud.google.com/appengine/docs/python/an-overview-of-app-engine">An Overview of App Engine</a>,
-<a href="https://cloud.google.com/appengine/docs/python/microservices-on-app-engine">Microservices Architecture on Google App Engine</a>,
-<a href="https://cloud.google.com/appengine/docs/standard/python/how-requests-are-routed">App Engine Standard request routing</a>,
-and <a href="https://cloud.google.com/appengine/docs/flexible/python/how-requests-are-routed">App Engine Flex request routing</a>.</p>
+<a href="https://cloud.google.com/appengine/docs/python/an-overview-of-app-engine">An Overview of App
+Engine</a>,
+<a href="https://cloud.google.com/appengine/docs/python/microservices-on-app-engine">Microservices Architecture on Google App
+Engine</a>,
+<a href="https://cloud.google.com/appengine/docs/standard/python/how-requests-are-routed">App Engine Standard request
+routing</a>,
+and <a href="https://cloud.google.com/appengine/docs/flexible/python/how-requests-are-routed">App Engine Flex request
+routing</a>.</p>
 
 
   </div>
@@ -239,7 +243,8 @@ and <a href="https://cloud.google.com/appengine/docs/flexible/python/how-request
     <p>Returns Output only. The host that the task is sent to.</p>
 
 <p>For more information, see
-<a href="https://cloud.google.com/appengine/docs/standard/python/how-requests-are-routed">How Requests are Routed</a>.</p>
+<a href="https://cloud.google.com/appengine/docs/standard/python/how-requests-are-routed">How Requests are
+Routed</a>.</p>
 
 <p>The host is constructed as:</p>
 
@@ -256,39 +261,44 @@ and <a href="https://cloud.google.com/appengine/docs/flexible/python/how-request
 example <app-id>.appspot.com, which is associated with the
 queue&#39;s project ID. Some tasks which were created using the App Engine
 SDK use a custom domain name.</p></li>
-<li><p><code>service =</code> <span class='object_link'><a href="#service-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#service (method)">service</a></span></p></li>
-<li><p><code>version =</code> <span class='object_link'><a href="#version-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#version (method)">version</a></span></p></li>
+<li><p><code>service =</code>
+<span class='object_link'><a href="#service-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#service (method)">service</a></span></p></li>
+<li><p><code>version =</code>
+<span class='object_link'><a href="#version-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#version (method)">version</a></span></p></li>
 <li><p><code>version_dot_service =</code>
 <span class='object_link'><a href="#version-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#version (method)">version</a></span> <code>+ &#39;.&#39; +</code>
 <span class='object_link'><a href="#service-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#service (method)">service</a></span></p></li>
-<li><p><code>instance =</code> <span class='object_link'><a href="#instance-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#instance (method)">instance</a></span></p></li>
+<li><p><code>instance =</code>
+<span class='object_link'><a href="#instance-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#instance (method)">instance</a></span></p></li>
 <li><p><code>instance_dot_service =</code>
-<span class='object_link'><a href="#instance-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#instance (method)">instance</a></span> <code>+ &#39;.&#39; +</code>
-<span class='object_link'><a href="#service-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#service (method)">service</a></span></p></li>
+<span class='object_link'><a href="#instance-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#instance (method)">instance</a></span> <code>+ &#39;.&#39;
++</code> <span class='object_link'><a href="#service-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#service (method)">service</a></span></p></li>
 <li><p><code>instance_dot_version =</code>
-<span class='object_link'><a href="#instance-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#instance (method)">instance</a></span> <code>+ &#39;.&#39; +</code>
-<span class='object_link'><a href="#version-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#version (method)">version</a></span></p></li>
+<span class='object_link'><a href="#instance-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#instance (method)">instance</a></span> <code>+ &#39;.&#39;
++</code> <span class='object_link'><a href="#version-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#version (method)">version</a></span></p></li>
 <li><p><code>instance_dot_version_dot_service =</code>
-<span class='object_link'><a href="#instance-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#instance (method)">instance</a></span> <code>+ &#39;.&#39; +</code>
-<span class='object_link'><a href="#version-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#version (method)">version</a></span> <code>+ &#39;.&#39; +</code>
-<span class='object_link'><a href="#service-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#service (method)">service</a></span></p></li>
+<span class='object_link'><a href="#instance-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#instance (method)">instance</a></span> <code>+ &#39;.&#39;
++</code> <span class='object_link'><a href="#version-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#version (method)">version</a></span> <code>+ &#39;.&#39;
++</code> <span class='object_link'><a href="#service-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#service (method)">service</a></span></p></li>
 </ul>
 
-<p>If <span class='object_link'><a href="#service-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#service (method)">service</a></span> is empty, then the task will be sent
-to the service which is the default service when the task is attempted.</p>
+<p>If <span class='object_link'><a href="#service-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#service (method)">service</a></span> is empty,
+then the task will be sent to the service which is the default service when
+the task is attempted.</p>
 
-<p>If <span class='object_link'><a href="#version-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#version (method)">version</a></span> is empty, then the task will be sent
-to the version which is the default version when the task is attempted.</p>
+<p>If <span class='object_link'><a href="#version-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#version (method)">version</a></span> is empty,
+then the task will be sent to the version which is the default version when
+the task is attempted.</p>
 
-<p>If <span class='object_link'><a href="#instance-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#instance (method)">instance</a></span> is empty, then the task
-will be sent to an instance which is available when the task is
-attempted.</p>
+<p>If <span class='object_link'><a href="#instance-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#instance (method)">instance</a></span> is
+empty, then the task will be sent to an instance which is available when
+the task is attempted.</p>
 
 <p>If <span class='object_link'><a href="#service-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#service (method)">service</a></span>,
 <span class='object_link'><a href="#version-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#version (method)">version</a></span>, or
-<span class='object_link'><a href="#instance-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#instance (method)">instance</a></span> is invalid, then the task
-will be sent to the default version of the default service when
-the task is attempted.</p>
+<span class='object_link'><a href="#instance-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#instance (method)">instance</a></span> is
+invalid, then the task will be sent to the default version of the default
+service when the task is attempted.</p>
 
 
   </div>
@@ -309,7 +319,8 @@ the task is attempted.</p>
         <div class='inline'><p>Output only. The host that the task is sent to.</p>
 
 <p>For more information, see
-<a href="https://cloud.google.com/appengine/docs/standard/python/how-requests-are-routed">How Requests are Routed</a>.</p>
+<a href="https://cloud.google.com/appengine/docs/standard/python/how-requests-are-routed">How Requests are
+Routed</a>.</p>
 
 <p>The host is constructed as:</p>
 
@@ -326,39 +337,44 @@ the task is attempted.</p>
 example <app-id>.appspot.com, which is associated with the
 queue&#39;s project ID. Some tasks which were created using the App Engine
 SDK use a custom domain name.</p></li>
-<li><p><code>service =</code> <span class='object_link'><a href="#service-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#service (method)">service</a></span></p></li>
-<li><p><code>version =</code> <span class='object_link'><a href="#version-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#version (method)">version</a></span></p></li>
+<li><p><code>service =</code>
+<span class='object_link'><a href="#service-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#service (method)">service</a></span></p></li>
+<li><p><code>version =</code>
+<span class='object_link'><a href="#version-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#version (method)">version</a></span></p></li>
 <li><p><code>version_dot_service =</code>
 <span class='object_link'><a href="#version-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#version (method)">version</a></span> <code>+ &#39;.&#39; +</code>
 <span class='object_link'><a href="#service-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#service (method)">service</a></span></p></li>
-<li><p><code>instance =</code> <span class='object_link'><a href="#instance-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#instance (method)">instance</a></span></p></li>
+<li><p><code>instance =</code>
+<span class='object_link'><a href="#instance-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#instance (method)">instance</a></span></p></li>
 <li><p><code>instance_dot_service =</code>
-<span class='object_link'><a href="#instance-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#instance (method)">instance</a></span> <code>+ &#39;.&#39; +</code>
-<span class='object_link'><a href="#service-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#service (method)">service</a></span></p></li>
+<span class='object_link'><a href="#instance-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#instance (method)">instance</a></span> <code>+ &#39;.&#39;
++</code> <span class='object_link'><a href="#service-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#service (method)">service</a></span></p></li>
 <li><p><code>instance_dot_version =</code>
-<span class='object_link'><a href="#instance-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#instance (method)">instance</a></span> <code>+ &#39;.&#39; +</code>
-<span class='object_link'><a href="#version-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#version (method)">version</a></span></p></li>
+<span class='object_link'><a href="#instance-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#instance (method)">instance</a></span> <code>+ &#39;.&#39;
++</code> <span class='object_link'><a href="#version-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#version (method)">version</a></span></p></li>
 <li><p><code>instance_dot_version_dot_service =</code>
-<span class='object_link'><a href="#instance-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#instance (method)">instance</a></span> <code>+ &#39;.&#39; +</code>
-<span class='object_link'><a href="#version-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#version (method)">version</a></span> <code>+ &#39;.&#39; +</code>
-<span class='object_link'><a href="#service-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#service (method)">service</a></span></p></li>
+<span class='object_link'><a href="#instance-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#instance (method)">instance</a></span> <code>+ &#39;.&#39;
++</code> <span class='object_link'><a href="#version-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#version (method)">version</a></span> <code>+ &#39;.&#39;
++</code> <span class='object_link'><a href="#service-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#service (method)">service</a></span></p></li>
 </ul>
 
-<p>If <span class='object_link'><a href="#service-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#service (method)">service</a></span> is empty, then the task will be sent
-to the service which is the default service when the task is attempted.</p>
+<p>If <span class='object_link'><a href="#service-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#service (method)">service</a></span> is empty,
+then the task will be sent to the service which is the default service when
+the task is attempted.</p>
 
-<p>If <span class='object_link'><a href="#version-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#version (method)">version</a></span> is empty, then the task will be sent
-to the version which is the default version when the task is attempted.</p>
+<p>If <span class='object_link'><a href="#version-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#version (method)">version</a></span> is empty,
+then the task will be sent to the version which is the default version when
+the task is attempted.</p>
 
-<p>If <span class='object_link'><a href="#instance-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#instance (method)">instance</a></span> is empty, then the task
-will be sent to an instance which is available when the task is
-attempted.</p>
+<p>If <span class='object_link'><a href="#instance-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#instance (method)">instance</a></span> is
+empty, then the task will be sent to an instance which is available when
+the task is attempted.</p>
 
 <p>If <span class='object_link'><a href="#service-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#service (method)">service</a></span>,
 <span class='object_link'><a href="#version-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#version (method)">version</a></span>, or
-<span class='object_link'><a href="#instance-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#instance (method)">instance</a></span> is invalid, then the task
-will be sent to the default version of the default service when
-the task is attempted.</p>
+<span class='object_link'><a href="#instance-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#instance (method)">instance</a></span> is
+invalid, then the task will be sent to the default version of the default
+service when the task is attempted.</p>
 </div>
       
     </li>
@@ -371,10 +387,10 @@ the task is attempted.</p>
       <pre class="lines">
 
 
-316</pre>
+355</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta2/doc/google/cloud/tasks/v2beta2/target.rb', line 316</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta2/doc/google/cloud/tasks/v2beta2/target.rb', line 355</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting (class)">AppEngineRouting</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -401,10 +417,13 @@ the task is attempted.</p>
 the task is attempted.</p>
 
 <p>Requests can only be sent to a specific instance if
-<a href="https://cloud.google.com/appengine/docs/python/an-overview-of-app-engine?hl=en_US#scaling_types_and_instance_classes">manual scaling is used in App Engine Standard</a>.
+<a href="https://cloud.google.com/appengine/docs/python/an-overview-of-app-engine?hl=en_US#scaling_types_and_instance_classes">manual scaling is used in App Engine
+Standard</a>.
 App Engine Flex does not support instances. For more information, see
-<a href="https://cloud.google.com/appengine/docs/standard/python/how-requests-are-routed">App Engine Standard request routing</a>
-and <a href="https://cloud.google.com/appengine/docs/flexible/python/how-requests-are-routed">App Engine Flex request routing</a>.</p>
+<a href="https://cloud.google.com/appengine/docs/standard/python/how-requests-are-routed">App Engine Standard request
+routing</a>
+and <a href="https://cloud.google.com/appengine/docs/flexible/python/how-requests-are-routed">App Engine Flex request
+routing</a>.</p>
 
 
   </div>
@@ -428,10 +447,13 @@ and <a href="https://cloud.google.com/appengine/docs/flexible/python/how-request
 the task is attempted.</p>
 
 <p>Requests can only be sent to a specific instance if
-<a href="https://cloud.google.com/appengine/docs/python/an-overview-of-app-engine?hl=en_US#scaling_types_and_instance_classes">manual scaling is used in App Engine Standard</a>.
+<a href="https://cloud.google.com/appengine/docs/python/an-overview-of-app-engine?hl=en_US#scaling_types_and_instance_classes">manual scaling is used in App Engine
+Standard</a>.
 App Engine Flex does not support instances. For more information, see
-<a href="https://cloud.google.com/appengine/docs/standard/python/how-requests-are-routed">App Engine Standard request routing</a>
-and <a href="https://cloud.google.com/appengine/docs/flexible/python/how-requests-are-routed">App Engine Flex request routing</a>.</p>
+<a href="https://cloud.google.com/appengine/docs/standard/python/how-requests-are-routed">App Engine Standard request
+routing</a>
+and <a href="https://cloud.google.com/appengine/docs/flexible/python/how-requests-are-routed">App Engine Flex request
+routing</a>.</p>
 </div>
       
     </li>
@@ -444,10 +466,10 @@ and <a href="https://cloud.google.com/appengine/docs/flexible/python/how-request
       <pre class="lines">
 
 
-316</pre>
+355</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta2/doc/google/cloud/tasks/v2beta2/target.rb', line 316</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta2/doc/google/cloud/tasks/v2beta2/target.rb', line 355</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting (class)">AppEngineRouting</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -474,16 +496,18 @@ and <a href="https://cloud.google.com/appengine/docs/flexible/python/how-request
 service when the task is attempted.</p>
 
 <p>For some queues or tasks which were created using the App Engine
-Task Queue API, <span class='object_link'><a href="#host-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#host (method)">host</a></span> is not parsable
-into <span class='object_link'><a href="#service-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#service (method)">service</a></span>,
-<span class='object_link'><a href="#version-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#version (method)">version</a></span>, and
-<span class='object_link'><a href="#instance-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#instance (method)">instance</a></span>. For example, some tasks
-which were created using the App Engine SDK use a custom domain
-name; custom domains are not parsed by Cloud Tasks. If
-<span class='object_link'><a href="#host-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#host (method)">host</a></span> is not parsable, then
+Task Queue API, <span class='object_link'><a href="#host-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#host (method)">host</a></span> is
+not parsable into
 <span class='object_link'><a href="#service-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#service (method)">service</a></span>,
 <span class='object_link'><a href="#version-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#version (method)">version</a></span>, and
-<span class='object_link'><a href="#instance-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#instance (method)">instance</a></span> are the empty string.</p>
+<span class='object_link'><a href="#instance-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#instance (method)">instance</a></span>. For
+example, some tasks which were created using the App Engine SDK use a
+custom domain name; custom domains are not parsed by Cloud Tasks. If
+<span class='object_link'><a href="#host-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#host (method)">host</a></span> is not parsable,
+then <span class='object_link'><a href="#service-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#service (method)">service</a></span>,
+<span class='object_link'><a href="#version-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#version (method)">version</a></span>, and
+<span class='object_link'><a href="#instance-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#instance (method)">instance</a></span> are the
+empty string.</p>
 
 
   </div>
@@ -507,16 +531,18 @@ name; custom domains are not parsed by Cloud Tasks. If
 service when the task is attempted.</p>
 
 <p>For some queues or tasks which were created using the App Engine
-Task Queue API, <span class='object_link'><a href="#host-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#host (method)">host</a></span> is not parsable
-into <span class='object_link'><a href="#service-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#service (method)">service</a></span>,
-<span class='object_link'><a href="#version-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#version (method)">version</a></span>, and
-<span class='object_link'><a href="#instance-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#instance (method)">instance</a></span>. For example, some tasks
-which were created using the App Engine SDK use a custom domain
-name; custom domains are not parsed by Cloud Tasks. If
-<span class='object_link'><a href="#host-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#host (method)">host</a></span> is not parsable, then
+Task Queue API, <span class='object_link'><a href="#host-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#host (method)">host</a></span> is
+not parsable into
 <span class='object_link'><a href="#service-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#service (method)">service</a></span>,
 <span class='object_link'><a href="#version-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#version (method)">version</a></span>, and
-<span class='object_link'><a href="#instance-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#instance (method)">instance</a></span> are the empty string.</p>
+<span class='object_link'><a href="#instance-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#instance (method)">instance</a></span>. For
+example, some tasks which were created using the App Engine SDK use a
+custom domain name; custom domains are not parsed by Cloud Tasks. If
+<span class='object_link'><a href="#host-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#host (method)">host</a></span> is not parsable,
+then <span class='object_link'><a href="#service-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#service (method)">service</a></span>,
+<span class='object_link'><a href="#version-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#version (method)">version</a></span>, and
+<span class='object_link'><a href="#instance-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#instance (method)">instance</a></span> are the
+empty string.</p>
 </div>
       
     </li>
@@ -529,10 +555,10 @@ name; custom domains are not parsed by Cloud Tasks. If
       <pre class="lines">
 
 
-316</pre>
+355</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta2/doc/google/cloud/tasks/v2beta2/target.rb', line 316</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta2/doc/google/cloud/tasks/v2beta2/target.rb', line 355</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting (class)">AppEngineRouting</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -559,16 +585,18 @@ name; custom domains are not parsed by Cloud Tasks. If
 version when the task is attempted.</p>
 
 <p>For some queues or tasks which were created using the App Engine
-Task Queue API, <span class='object_link'><a href="#host-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#host (method)">host</a></span> is not parsable
-into <span class='object_link'><a href="#service-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#service (method)">service</a></span>,
-<span class='object_link'><a href="#version-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#version (method)">version</a></span>, and
-<span class='object_link'><a href="#instance-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#instance (method)">instance</a></span>. For example, some tasks
-which were created using the App Engine SDK use a custom domain
-name; custom domains are not parsed by Cloud Tasks. If
-<span class='object_link'><a href="#host-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#host (method)">host</a></span> is not parsable, then
+Task Queue API, <span class='object_link'><a href="#host-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#host (method)">host</a></span> is
+not parsable into
 <span class='object_link'><a href="#service-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#service (method)">service</a></span>,
 <span class='object_link'><a href="#version-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#version (method)">version</a></span>, and
-<span class='object_link'><a href="#instance-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#instance (method)">instance</a></span> are the empty string.</p>
+<span class='object_link'><a href="#instance-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#instance (method)">instance</a></span>. For
+example, some tasks which were created using the App Engine SDK use a
+custom domain name; custom domains are not parsed by Cloud Tasks. If
+<span class='object_link'><a href="#host-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#host (method)">host</a></span> is not parsable,
+then <span class='object_link'><a href="#service-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#service (method)">service</a></span>,
+<span class='object_link'><a href="#version-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#version (method)">version</a></span>, and
+<span class='object_link'><a href="#instance-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#instance (method)">instance</a></span> are the
+empty string.</p>
 
 
   </div>
@@ -592,16 +620,18 @@ name; custom domains are not parsed by Cloud Tasks. If
 version when the task is attempted.</p>
 
 <p>For some queues or tasks which were created using the App Engine
-Task Queue API, <span class='object_link'><a href="#host-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#host (method)">host</a></span> is not parsable
-into <span class='object_link'><a href="#service-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#service (method)">service</a></span>,
-<span class='object_link'><a href="#version-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#version (method)">version</a></span>, and
-<span class='object_link'><a href="#instance-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#instance (method)">instance</a></span>. For example, some tasks
-which were created using the App Engine SDK use a custom domain
-name; custom domains are not parsed by Cloud Tasks. If
-<span class='object_link'><a href="#host-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#host (method)">host</a></span> is not parsable, then
+Task Queue API, <span class='object_link'><a href="#host-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#host (method)">host</a></span> is
+not parsable into
 <span class='object_link'><a href="#service-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#service (method)">service</a></span>,
 <span class='object_link'><a href="#version-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#version (method)">version</a></span>, and
-<span class='object_link'><a href="#instance-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#instance (method)">instance</a></span> are the empty string.</p>
+<span class='object_link'><a href="#instance-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#instance (method)">instance</a></span>. For
+example, some tasks which were created using the App Engine SDK use a
+custom domain name; custom domains are not parsed by Cloud Tasks. If
+<span class='object_link'><a href="#host-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#host (method)">host</a></span> is not parsable,
+then <span class='object_link'><a href="#service-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#service (method)">service</a></span>,
+<span class='object_link'><a href="#version-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#version (method)">version</a></span>, and
+<span class='object_link'><a href="#instance-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#instance (method)">instance</a></span> are the
+empty string.</p>
 </div>
       
     </li>
@@ -614,10 +644,10 @@ name; custom domains are not parsed by Cloud Tasks. If
       <pre class="lines">
 
 
-316</pre>
+355</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta2/doc/google/cloud/tasks/v2beta2/target.rb', line 316</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta2/doc/google/cloud/tasks/v2beta2/target.rb', line 355</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting (class)">AppEngineRouting</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
