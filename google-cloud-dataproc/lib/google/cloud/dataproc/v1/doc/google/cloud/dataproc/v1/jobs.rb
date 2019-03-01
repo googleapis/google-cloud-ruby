@@ -59,8 +59,10 @@ module Google
         end
 
         # A Cloud Dataproc job for running
-        # [Apache Hadoop MapReduce](https://hadoop.apache.org/docs/current/hadoop-mapreduce-client/hadoop-mapreduce-client-core/MapReduceTutorial.html)
-        # jobs on [Apache Hadoop YARN](https://hadoop.apache.org/docs/r2.7.1/hadoop-yarn/hadoop-yarn-site/YARN.html).
+        # [Apache Hadoop
+        # MapReduce](https://hadoop.apache.org/docs/current/hadoop-mapreduce-client/hadoop-mapreduce-client-core/MapReduceTutorial.html)
+        # jobs on [Apache Hadoop
+        # YARN](https://hadoop.apache.org/docs/r2.7.1/hadoop-yarn/hadoop-yarn-site/YARN.html).
         # @!attribute [rw] main_jar_file_uri
         #   @return [String]
         #     The HCFS URI of the jar file containing the main class.
@@ -75,8 +77,8 @@ module Google
         # @!attribute [rw] args
         #   @return [Array<String>]
         #     Optional. The arguments to pass to the driver. Do not
-        #     include arguments, such as `-libjars` or `-Dfoo=bar`, that can be set as job
-        #     properties, since a collision may occur that causes an incorrect job
+        #     include arguments, such as `-libjars` or `-Dfoo=bar`, that can be set as
+        #     job properties, since a collision may occur that causes an incorrect job
         #     submission.
         # @!attribute [rw] jar_file_uris
         #   @return [Array<String>]
@@ -142,7 +144,8 @@ module Google
         class SparkJob; end
 
         # A Cloud Dataproc job for running
-        # [Apache PySpark](https://spark.apache.org/docs/0.9.0/python-programming-guide.html)
+        # [Apache
+        # PySpark](https://spark.apache.org/docs/0.9.0/python-programming-guide.html)
         # applications on YARN.
         # @!attribute [rw] main_python_file_uri
         #   @return [String]
@@ -210,8 +213,8 @@ module Google
         # @!attribute [rw] continue_on_failure
         #   @return [true, false]
         #     Optional. Whether to continue executing queries if a query fails.
-        #     The default value is `false`. Setting to `true` can be useful when executing
-        #     independent parallel queries.
+        #     The default value is `false`. Setting to `true` can be useful when
+        #     executing independent parallel queries.
         # @!attribute [rw] script_variables
         #   @return [Hash{String => String}]
         #     Optional. Mapping of query variable names to values (equivalent to the
@@ -229,8 +232,8 @@ module Google
         #     and UDFs.
         class HiveJob; end
 
-        # A Cloud Dataproc job for running [Apache Spark SQL](http://spark.apache.org/sql/)
-        # queries.
+        # A Cloud Dataproc job for running [Apache Spark
+        # SQL](http://spark.apache.org/sql/) queries.
         # @!attribute [rw] query_file_uri
         #   @return [String]
         #     The HCFS URI of the script that contains SQL queries.
@@ -265,8 +268,8 @@ module Google
         # @!attribute [rw] continue_on_failure
         #   @return [true, false]
         #     Optional. Whether to continue executing queries if a query fails.
-        #     The default value is `false`. Setting to `true` can be useful when executing
-        #     independent parallel queries.
+        #     The default value is `false`. Setting to `true` can be useful when
+        #     executing independent parallel queries.
         # @!attribute [rw] script_variables
         #   @return [Hash{String => String}]
         #     Optional. Mapping of query variable names to values (equivalent to the Pig
@@ -484,8 +487,8 @@ module Google
         #   @return [Array<Google::Cloud::Dataproc::V1::YarnApplication>]
         #     Output only. The collection of YARN applications spun up by this job.
         #
-        #     **Beta** Feature: This report is available for testing purposes only. It may
-        #     be changed before final release.
+        #     **Beta** Feature: This report is available for testing purposes only. It
+        #     may be changed before final release.
         # @!attribute [rw] driver_output_resource_uri
         #   @return [String]
         #     Output only. A URI pointing to the location of the stdout of the job's
@@ -501,8 +504,9 @@ module Google
         #     Label **keys** must contain 1 to 63 characters, and must conform to
         #     [RFC 1035](https://www.ietf.org/rfc/rfc1035.txt).
         #     Label **values** may be empty, but, if present, must contain 1 to 63
-        #     characters, and must conform to [RFC 1035](https://www.ietf.org/rfc/rfc1035.txt).
-        #     No more than 32 labels can be associated with a job.
+        #     characters, and must conform to [RFC
+        #     1035](https://www.ietf.org/rfc/rfc1035.txt). No more than 32 labels can be
+        #     associated with a job.
         # @!attribute [rw] scheduling
         #   @return [Google::Cloud::Dataproc::V1::JobScheduling]
         #     Optional. Job scheduling configuration.
@@ -540,8 +544,8 @@ module Google
         # @!attribute [rw] request_id
         #   @return [String]
         #     Optional. A unique id used to identify the request. If the server
-        #     receives two {Google::Cloud::Dataproc::V1::SubmitJobRequest SubmitJobRequest} requests  with the same
-        #     id, then the second request will be ignored and the
+        #     receives two {Google::Cloud::Dataproc::V1::SubmitJobRequest SubmitJobRequest}
+        #     requests  with the same id, then the second request will be ignored and the
         #     first {Google::Cloud::Dataproc::V1::Job Job} created and stored in the backend
         #     is returned.
         #

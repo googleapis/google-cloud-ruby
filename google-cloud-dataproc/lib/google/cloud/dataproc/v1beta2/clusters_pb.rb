@@ -5,8 +5,8 @@
 require 'google/protobuf'
 
 require 'google/api/annotations_pb'
-require 'google/cloud/dataproc/v1beta2/shared_pb'
 require 'google/cloud/dataproc/v1beta2/operations_pb'
+require 'google/cloud/dataproc/v1beta2/shared_pb'
 require 'google/longrunning/operations_pb'
 require 'google/protobuf/duration_pb'
 require 'google/protobuf/field_mask_pb'

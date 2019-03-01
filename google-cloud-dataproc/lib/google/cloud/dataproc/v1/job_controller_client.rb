@@ -217,8 +217,8 @@ module Google
           #   can also be provided.
           # @param request_id [String]
           #   Optional. A unique id used to identify the request. If the server
-          #   receives two {Google::Cloud::Dataproc::V1::SubmitJobRequest SubmitJobRequest} requests  with the same
-          #   id, then the second request will be ignored and the
+          #   receives two {Google::Cloud::Dataproc::V1::SubmitJobRequest SubmitJobRequest}
+          #   requests  with the same id, then the second request will be ignored and the
           #   first {Google::Cloud::Dataproc::V1::Job Job} created and stored in the backend
           #   is returned.
           #
@@ -479,7 +479,8 @@ module Google
 
           # Starts a job cancellation request. To access the job resource
           # after cancellation, call
-          # [regions/\\{region}/jobs.list](https://cloud.google.com/dataproc/docs/reference/rest/v1/projects.regions.jobs/list) or
+          # [regions/\\{region}/jobs.list](https://cloud.google.com/dataproc/docs/reference/rest/v1/projects.regions.jobs/list)
+          # or
           # [regions/\\{region}/jobs.get](https://cloud.google.com/dataproc/docs/reference/rest/v1/projects.regions.jobs/get).
           #
           # @param project_id [String]

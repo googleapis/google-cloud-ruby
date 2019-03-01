@@ -36,8 +36,9 @@ module Google
         #     Label **keys** must contain 1 to 63 characters, and must conform to
         #     [RFC 1035](https://www.ietf.org/rfc/rfc1035.txt).
         #     Label **values** may be empty, but, if present, must contain 1 to 63
-        #     characters, and must conform to [RFC 1035](https://www.ietf.org/rfc/rfc1035.txt).
-        #     No more than 32 labels can be associated with a cluster.
+        #     characters, and must conform to [RFC
+        #     1035](https://www.ietf.org/rfc/rfc1035.txt). No more than 32 labels can be
+        #     associated with a cluster.
         # @!attribute [rw] status
         #   @return [Google::Cloud::Dataproc::V1beta2::ClusterStatus]
         #     Output only. Cluster status.
@@ -52,8 +53,8 @@ module Google
         #   @return [Google::Cloud::Dataproc::V1beta2::ClusterMetrics]
         #     Output only. Contains cluster daemon metrics such as HDFS and YARN stats.
         #
-        #     **Beta Feature**: This report is available for testing purposes only. It may
-        #     be changed before final release.
+        #     **Beta Feature**: This report is available for testing purposes only. It
+        #     may be changed before final release.
         class Cluster; end
 
         # The cluster config.
@@ -92,9 +93,11 @@ module Google
         #     Optional. Commands to execute on each node after config is
         #     completed. By default, executables are run on master and all worker nodes.
         #     You can test a node's <code>role</code> metadata to run an executable on
-        #     a master or worker node, as shown below using `curl` (you can also use `wget`):
+        #     a master or worker node, as shown below using `curl` (you can also use
+        #     `wget`):
         #
-        #         ROLE=$(curl -H Metadata-Flavor:Google http://metadata/computeMetadata/v1beta2/instance/attributes/dataproc-role)
+        #         ROLE=$(curl -H Metadata-Flavor:Google
+        #         http://metadata/computeMetadata/v1beta2/instance/attributes/dataproc-role)
         #         if [[ "${ROLE}" == 'Master' ]]; then
         #           ... master specific actions ...
         #         else
@@ -153,11 +156,11 @@ module Google
         # @!attribute [rw] internal_ip_only
         #   @return [true, false]
         #     Optional. If true, all instances in the cluster will only have internal IP
-        #     addresses. By default, clusters are not restricted to internal IP addresses,
-        #     and will have ephemeral external IP addresses assigned to each instance.
-        #     This `internal_ip_only` restriction can only be enabled for subnetwork
-        #     enabled networks, and all off-cluster dependencies must be configured to be
-        #     accessible without external IP addresses.
+        #     addresses. By default, clusters are not restricted to internal IP
+        #     addresses, and will have ephemeral external IP addresses assigned to each
+        #     instance. This `internal_ip_only` restriction can only be enabled for
+        #     subnetwork enabled networks, and all off-cluster dependencies must be
+        #     configured to be accessible without external IP addresses.
         # @!attribute [rw] service_account
         #   @return [String]
         #     Optional. The service account of the instances. Defaults to the default
@@ -167,7 +170,8 @@ module Google
         #     * roles/logging.logWriter
         #     * roles/storage.objectAdmin
         #
-        #     (see https://cloud.google.com/compute/docs/access/service-accounts#custom_service_accounts
+        #     (see
+        #     https://cloud.google.com/compute/docs/access/service-accounts#custom_service_accounts
         #     for more information).
         #     Example: `[account_id]@[project_id].iam.gserviceaccount.com`
         # @!attribute [rw] service_account_scopes
@@ -193,7 +197,8 @@ module Google
         # @!attribute [rw] metadata
         #   @return [Hash{String => String}]
         #     The Compute Engine metadata entries to add to all instances (see
-        #     [Project and instance metadata](https://cloud.google.com/compute/docs/storing-retrieving-metadata#project_and_instance_metadata)).
+        #     [Project and instance
+        #     metadata](https://cloud.google.com/compute/docs/storing-retrieving-metadata#project_and_instance_metadata)).
         class GceClusterConfig; end
 
         # Optional. The config settings for Compute Engine resources in
@@ -222,7 +227,8 @@ module Google
         #     * `n1-standard-2`
         #
         #     **Auto Zone Exception**: If you are using the Cloud Dataproc
-        #     [Auto Zone Placement](https://cloud.google.com/dataproc/docs/concepts/configuring-clusters/auto-zone#using_auto_zone_placement)
+        #     [Auto Zone
+        #     Placement](/dataproc/docs/concepts/configuring-clusters/auto-zone#using_auto_zone_placement)
         #     feature, you must use the short name of the machine type
         #     resource, for example, `n1-standard-2`.
         # @!attribute [rw] disk_config
@@ -230,7 +236,8 @@ module Google
         #     Optional. Disk option config settings.
         # @!attribute [rw] is_preemptible
         #   @return [true, false]
-        #     Optional. Specifies that this instance group contains preemptible instances.
+        #     Optional. Specifies that this instance group contains preemptible
+        #     instances.
         # @!attribute [rw] managed_group_config
         #   @return [Google::Cloud::Dataproc::V1beta2::ManagedGroupConfig]
         #     Output only. The config for Compute Engine Instance Group
@@ -274,7 +281,8 @@ module Google
         #     * `nvidia-tesla-k80`
         #
         #     **Auto Zone Exception**: If you are using the Cloud Dataproc
-        #     [Auto Zone Placement](https://cloud.google.com/dataproc/docs/concepts/configuring-clusters/auto-zone#using_auto_zone_placement)
+        #     [Auto Zone
+        #     Placement](/dataproc/docs/concepts/configuring-clusters/auto-zone#using_auto_zone_placement)
         #     feature, you must use the short name of the accelerator type
         #     resource, for example, `nvidia-tesla-k80`.
         # @!attribute [rw] accelerator_count
@@ -393,10 +401,12 @@ module Google
         # Specifies the selection and config of software inside the cluster.
         # @!attribute [rw] image_version
         #   @return [String]
-        #     Optional. The version of software inside the cluster. It must be one of the supported
-        #     [Cloud Dataproc Versions](https://cloud.google.com/dataproc/docs/concepts/versioning/dataproc-versions#supported_cloud_dataproc_versions),
+        #     Optional. The version of software inside the cluster. It must be one of the
+        #     supported [Cloud Dataproc
+        #     Versions](/dataproc/docs/concepts/versioning/dataproc-versions#supported_cloud_dataproc_versions),
         #     such as "1.2" (including a subminor version, such as "1.2.29"), or the
-        #     ["preview" version](https://cloud.google.com/dataproc/docs/concepts/versioning/dataproc-versions#other_versions).
+        #     ["preview"
+        #     version](/dataproc/docs/concepts/versioning/dataproc-versions#other_versions).
         #     If unspecified, it defaults to the latest version.
         # @!attribute [rw] properties
         #   @return [Hash{String => String}]
@@ -446,10 +456,11 @@ module Google
         # @!attribute [rw] request_id
         #   @return [String]
         #     Optional. A unique id used to identify the request. If the server
-        #     receives two {Google::Cloud::Dataproc::V1beta2::CreateClusterRequest CreateClusterRequest} requests  with the same
-        #     id, then the second request will be ignored and the
-        #     first {Google::Longrunning::Operation} created and stored in the backend
-        #     is returned.
+        #     receives two
+        #     {Google::Cloud::Dataproc::V1beta2::CreateClusterRequest CreateClusterRequest}
+        #     requests  with the same id, then the second request will be ignored and the
+        #     first {Google::Longrunning::Operation} created
+        #     and stored in the backend is returned.
         #
         #     It is recommended to always set this value to a
         #     [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier).
@@ -498,9 +509,10 @@ module Google
         #           }
         #         }
         #
-        #     Similarly, to change the number of preemptible workers in a cluster to 5, the
-        #     `update_mask` parameter would be `config.secondary_worker_config.num_instances`,
-        #     and the `PATCH` request body would be set as follows:
+        #     Similarly, to change the number of preemptible workers in a cluster to 5,
+        #     the `update_mask` parameter would be
+        #     `config.secondary_worker_config.num_instances`, and the `PATCH` request
+        #     body would be set as follows:
         #
         #         {
         #           "config":{
@@ -519,28 +531,34 @@ module Google
         #     <td>labels</td><td>Updates labels</td>
         #     </tr>
         #     <tr>
-        #     <td>config.worker_config.num_instances</td><td>Resize primary worker group</td>
+        #     <td>config.worker_config.num_instances</td><td>Resize primary worker
+        #     group</td>
         #     </tr>
         #     <tr>
-        #     <td>config.secondary_worker_config.num_instances</td><td>Resize secondary worker group</td>
+        #     <td>config.secondary_worker_config.num_instances</td><td>Resize secondary
+        #     worker group</td>
         #     </tr>
         #     <tr>
-        #     <td>config.lifecycle_config.auto_delete_ttl</td><td>Reset MAX TTL duration</td>
+        #     <td>config.lifecycle_config.auto_delete_ttl</td><td>Reset MAX TTL
+        #     duration</td>
         #     </tr>
         #     <tr>
-        #     <td>config.lifecycle_config.auto_delete_time</td><td>Update MAX TTL deletion timestamp</td>
+        #     <td>config.lifecycle_config.auto_delete_time</td><td>Update MAX TTL
+        #     deletion timestamp</td>
         #     </tr>
         #     <tr>
-        #     <td>config.lifecycle_config.idle_delete_ttl</td><td>Update Idle TTL duration</td>
+        #     <td>config.lifecycle_config.idle_delete_ttl</td><td>Update Idle TTL
+        #     duration</td>
         #     </tr>
         #     </table>
         # @!attribute [rw] request_id
         #   @return [String]
         #     Optional. A unique id used to identify the request. If the server
-        #     receives two {Google::Cloud::Dataproc::V1beta2::UpdateClusterRequest UpdateClusterRequest} requests  with the same
-        #     id, then the second request will be ignored and the
-        #     first {Google::Longrunning::Operation} created and stored in the
-        #     backend is returned.
+        #     receives two
+        #     {Google::Cloud::Dataproc::V1beta2::UpdateClusterRequest UpdateClusterRequest}
+        #     requests  with the same id, then the second request will be ignored and the
+        #     first {Google::Longrunning::Operation} created
+        #     and stored in the backend is returned.
         #
         #     It is recommended to always set this value to a
         #     [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier).
@@ -567,10 +585,11 @@ module Google
         # @!attribute [rw] request_id
         #   @return [String]
         #     Optional. A unique id used to identify the request. If the server
-        #     receives two {Google::Cloud::Dataproc::V1beta2::DeleteClusterRequest DeleteClusterRequest} requests  with the same
-        #     id, then the second request will be ignored and the
-        #     first {Google::Longrunning::Operation} created and stored in the
-        #     backend is returned.
+        #     receives two
+        #     {Google::Cloud::Dataproc::V1beta2::DeleteClusterRequest DeleteClusterRequest}
+        #     requests  with the same id, then the second request will be ignored and the
+        #     first {Google::Longrunning::Operation} created
+        #     and stored in the backend is returned.
         #
         #     It is recommended to always set this value to a
         #     [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier).

@@ -234,10 +234,11 @@ module Google
           #   can also be provided.
           # @param request_id [String]
           #   Optional. A unique id used to identify the request. If the server
-          #   receives two {Google::Cloud::Dataproc::V1beta2::CreateClusterRequest CreateClusterRequest} requests  with the same
-          #   id, then the second request will be ignored and the
-          #   first {Google::Longrunning::Operation} created and stored in the backend
-          #   is returned.
+          #   receives two
+          #   {Google::Cloud::Dataproc::V1beta2::CreateClusterRequest CreateClusterRequest}
+          #   requests  with the same id, then the second request will be ignored and the
+          #   first {Google::Longrunning::Operation} created
+          #   and stored in the backend is returned.
           #
           #   It is recommended to always set this value to a
           #   [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier).
@@ -342,9 +343,10 @@ module Google
           #         }
           #       }
           #
-          #   Similarly, to change the number of preemptible workers in a cluster to 5, the
-          #   `update_mask` parameter would be `config.secondary_worker_config.num_instances`,
-          #   and the `PATCH` request body would be set as follows:
+          #   Similarly, to change the number of preemptible workers in a cluster to 5,
+          #   the `update_mask` parameter would be
+          #   `config.secondary_worker_config.num_instances`, and the `PATCH` request
+          #   body would be set as follows:
           #
           #       {
           #         "config":{
@@ -363,19 +365,24 @@ module Google
           #   <td>labels</td><td>Updates labels</td>
           #   </tr>
           #   <tr>
-          #   <td>config.worker_config.num_instances</td><td>Resize primary worker group</td>
+          #   <td>config.worker_config.num_instances</td><td>Resize primary worker
+          #   group</td>
           #   </tr>
           #   <tr>
-          #   <td>config.secondary_worker_config.num_instances</td><td>Resize secondary worker group</td>
+          #   <td>config.secondary_worker_config.num_instances</td><td>Resize secondary
+          #   worker group</td>
           #   </tr>
           #   <tr>
-          #   <td>config.lifecycle_config.auto_delete_ttl</td><td>Reset MAX TTL duration</td>
+          #   <td>config.lifecycle_config.auto_delete_ttl</td><td>Reset MAX TTL
+          #   duration</td>
           #   </tr>
           #   <tr>
-          #   <td>config.lifecycle_config.auto_delete_time</td><td>Update MAX TTL deletion timestamp</td>
+          #   <td>config.lifecycle_config.auto_delete_time</td><td>Update MAX TTL
+          #   deletion timestamp</td>
           #   </tr>
           #   <tr>
-          #   <td>config.lifecycle_config.idle_delete_ttl</td><td>Update Idle TTL duration</td>
+          #   <td>config.lifecycle_config.idle_delete_ttl</td><td>Update Idle TTL
+          #   duration</td>
           #   </tr>
           #   </table>
           #   A hash of the same form as `Google::Protobuf::FieldMask`
@@ -393,10 +400,11 @@ module Google
           #   can also be provided.
           # @param request_id [String]
           #   Optional. A unique id used to identify the request. If the server
-          #   receives two {Google::Cloud::Dataproc::V1beta2::UpdateClusterRequest UpdateClusterRequest} requests  with the same
-          #   id, then the second request will be ignored and the
-          #   first {Google::Longrunning::Operation} created and stored in the
-          #   backend is returned.
+          #   receives two
+          #   {Google::Cloud::Dataproc::V1beta2::UpdateClusterRequest UpdateClusterRequest}
+          #   requests  with the same id, then the second request will be ignored and the
+          #   first {Google::Longrunning::Operation} created
+          #   and stored in the backend is returned.
           #
           #   It is recommended to always set this value to a
           #   [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier).
@@ -499,10 +507,11 @@ module Google
           #   (with error NOT_FOUND) if cluster with specified UUID does not exist.
           # @param request_id [String]
           #   Optional. A unique id used to identify the request. If the server
-          #   receives two {Google::Cloud::Dataproc::V1beta2::DeleteClusterRequest DeleteClusterRequest} requests  with the same
-          #   id, then the second request will be ignored and the
-          #   first {Google::Longrunning::Operation} created and stored in the
-          #   backend is returned.
+          #   receives two
+          #   {Google::Cloud::Dataproc::V1beta2::DeleteClusterRequest DeleteClusterRequest}
+          #   requests  with the same id, then the second request will be ignored and the
+          #   first {Google::Longrunning::Operation} created
+          #   and stored in the backend is returned.
           #
           #   It is recommended to always set this value to a
           #   [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier).
