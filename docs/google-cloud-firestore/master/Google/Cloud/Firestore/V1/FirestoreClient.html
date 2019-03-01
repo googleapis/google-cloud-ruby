@@ -1663,7 +1663,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-711
 712
 713
 714
@@ -1681,10 +1680,11 @@ retries, etc.</p>
 726
 727
 728
-729</pre>
+729
+730</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/v1/firestore_client.rb', line 711</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/v1/firestore_client.rb', line 712</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_batch_get_documents'>batch_get_documents</span> \
     <span class='id identifier rubyid_database'>database</span><span class='comma'>,</span>
@@ -1874,7 +1874,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-756
 757
 758
 759
@@ -1885,10 +1884,11 @@ retries, etc.</p>
 764
 765
 766
-767</pre>
+767
+768</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/v1/firestore_client.rb', line 756</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/v1/firestore_client.rb', line 757</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_begin_transaction'>begin_transaction</span> \
     <span class='id identifier rubyid_database'>database</span><span class='comma'>,</span>
@@ -2090,7 +2090,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-800
 801
 802
 803
@@ -2103,10 +2102,11 @@ retries, etc.</p>
 810
 811
 812
-813</pre>
+813
+814</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/v1/firestore_client.rb', line 800</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/v1/firestore_client.rb', line 801</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_commit'>commit</span> \
     <span class='id identifier rubyid_database'>database</span><span class='comma'>,</span>
@@ -2352,7 +2352,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-535
 536
 537
 538
@@ -2369,10 +2368,11 @@ retries, etc.</p>
 549
 550
 551
-552</pre>
+552
+553</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/v1/firestore_client.rb', line 535</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/v1/firestore_client.rb', line 536</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_document'>create_document</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -2552,7 +2552,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-644
 645
 646
 647
@@ -2564,10 +2563,11 @@ retries, etc.</p>
 653
 654
 655
-656</pre>
+656
+657</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/v1/firestore_client.rb', line 644</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/v1/firestore_client.rb', line 645</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete_document'>delete_document</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -3013,7 +3013,6 @@ object.</p>
       <pre class="lines">
 
 
-1028
 1029
 1030
 1031
@@ -3024,10 +3023,11 @@ object.</p>
 1036
 1037
 1038
-1039</pre>
+1039
+1040</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/v1/firestore_client.rb', line 1028</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/v1/firestore_client.rb', line 1029</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_collection_ids'>list_collection_ids</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -3228,8 +3228,9 @@ can also be provided.</p>
         &mdash;
         <div class='inline'><p>If the list should show missing documents. A missing document is a
 document that does not exist but has sub-documents. These documents will
-be returned with a key but will not have fields, <span class='object_link'><a href="../../../Firestore/V1/Document.html#create_time-instance_method" title="Google::Firestore::V1::Document#create_time (method)">Document#create_time</a></span>,
-or <span class='object_link'><a href="../../../Firestore/V1/Document.html#update_time-instance_method" title="Google::Firestore::V1::Document#update_time (method)">Document#update_time</a></span> set.</p>
+be returned with a key but will not have fields,
+<span class='object_link'><a href="../../../Firestore/V1/Document.html#create_time-instance_method" title="Google::Firestore::V1::Document#create_time (method)">Document#create_time</a></span>, or
+<span class='object_link'><a href="../../../Firestore/V1/Document.html#update_time-instance_method" title="Google::Firestore::V1::Document#update_time (method)">Document#update_time</a></span> set.</p>
 
 <p>Requests with <code>show_missing</code> may not specify <code>where</code> or
 <code>order_by</code>.</p>
@@ -3342,7 +3343,6 @@ object.</p>
       <pre class="lines">
 
 
-463
 464
 465
 466
@@ -3365,10 +3365,11 @@ object.</p>
 483
 484
 485
-486</pre>
+486
+487</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/v1/firestore_client.rb', line 463</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/v1/firestore_client.rb', line 464</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_documents'>list_documents</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -3518,15 +3519,15 @@ retries, etc.</p>
       <pre class="lines">
 
 
-977
 978
 979
 980
 981
-982</pre>
+982
+983</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/v1/firestore_client.rb', line 977</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/v1/firestore_client.rb', line 978</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_listen'>listen</span> <span class='id identifier rubyid_reqs'>reqs</span><span class='comma'>,</span> <span class='label'>options:</span> <span class='kw'>nil</span>
   <span class='id identifier rubyid_request_protos'>request_protos</span> <span class='op'>=</span> <span class='id identifier rubyid_reqs'>reqs</span><span class='period'>.</span><span class='id identifier rubyid_lazy'>lazy</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_req'>req</span><span class='op'>|</span>
@@ -3694,7 +3695,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-839
 840
 841
 842
@@ -3706,10 +3706,11 @@ retries, etc.</p>
 848
 849
 850
-851</pre>
+851
+852</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/v1/firestore_client.rb', line 839</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/v1/firestore_client.rb', line 840</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_rollback'>rollback</span> \
     <span class='id identifier rubyid_database'>database</span><span class='comma'>,</span>
@@ -3912,7 +3913,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-896
 897
 898
 899
@@ -3928,10 +3928,11 @@ retries, etc.</p>
 909
 910
 911
-912</pre>
+912
+913</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/v1/firestore_client.rb', line 896</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/v1/firestore_client.rb', line 897</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_run_query'>run_query</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -4169,7 +4170,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-603
 604
 605
 606
@@ -4184,10 +4184,11 @@ retries, etc.</p>
 615
 616
 617
-618</pre>
+618
+619</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/v1/firestore_client.rb', line 603</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/v1/firestore_client.rb', line 604</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update_document'>update_document</span> \
     <span class='id identifier rubyid_document'>document</span><span class='comma'>,</span>
@@ -4329,15 +4330,15 @@ retries, etc.</p>
       <pre class="lines">
 
 
-942
 943
 944
 945
 946
-947</pre>
+947
+948</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/v1/firestore_client.rb', line 942</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/v1/firestore_client.rb', line 943</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_write'>write</span> <span class='id identifier rubyid_reqs'>reqs</span><span class='comma'>,</span> <span class='label'>options:</span> <span class='kw'>nil</span>
   <span class='id identifier rubyid_request_protos'>request_protos</span> <span class='op'>=</span> <span class='id identifier rubyid_reqs'>reqs</span><span class='period'>.</span><span class='id identifier rubyid_lazy'>lazy</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_req'>req</span><span class='op'>|</span>
