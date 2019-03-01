@@ -20,7 +20,8 @@ module Google
         # A unit of scheduled work.
         # @!attribute [rw] name
         #   @return [String]
-        #     Optionally caller-specified in {Google::Cloud::Tasks::V2beta3::CloudTasks::CreateTask CreateTask}.
+        #     Optionally caller-specified in
+        #     {Google::Cloud::Tasks::V2beta3::CloudTasks::CreateTask CreateTask}.
         #
         #     The task name.
         #
@@ -44,7 +45,9 @@ module Google
         #   @return [Google::Cloud::Tasks::V2beta3::AppEngineHttpRequest]
         #     HTTP request that is sent to the App Engine app handler.
         #
-        #     An App Engine task is a task that has {Google::Cloud::Tasks::V2beta3::AppEngineHttpRequest AppEngineHttpRequest} set.
+        #     An App Engine task is a task that has
+        #     {Google::Cloud::Tasks::V2beta3::AppEngineHttpRequest AppEngineHttpRequest}
+        #     set.
         # @!attribute [rw] http_request
         #   @return [Google::Cloud::Tasks::V2beta3::HttpRequest]
         #     HTTP request that is sent to the task's target.
@@ -53,7 +56,8 @@ module Google
         #     feature. If you haven't already joined, you can [use this form to sign
         #     up](https://docs.google.com/forms/d/e/1FAIpQLSfc4uEy9CBHKYUSdnY1hdhKDCX7julVZHy3imOiR-XrU7bUNQ/viewform?usp=sf_link).
         #
-        #     An HTTP task is a task that has {Google::Cloud::Tasks::V2beta3::HttpRequest HttpRequest} set.
+        #     An HTTP task is a task that has
+        #     {Google::Cloud::Tasks::V2beta3::HttpRequest HttpRequest} set.
         # @!attribute [rw] schedule_time
         #   @return [Google::Protobuf::Timestamp]
         #     The time when the task is scheduled to be attempted.
@@ -71,7 +75,8 @@ module Google
         #     The deadline for requests sent to the worker. If the worker does not
         #     respond by this deadline then the request is cancelled and the attempt
         #     is marked as a `DEADLINE_EXCEEDED` failure. Cloud Tasks will retry the
-        #     task according to the {Google::Cloud::Tasks::V2beta3::RetryConfig RetryConfig}.
+        #     task according to the
+        #     {Google::Cloud::Tasks::V2beta3::RetryConfig RetryConfig}.
         #
         #     Note that when the request is cancelled, Cloud Tasks will stop listing for
         #     the response, but whether the worker stops processing depends on the
@@ -84,9 +89,11 @@ module Google
         #       10 minutes.
         #       The deadline must be in the interval [15 seconds, 30 minutes].
         #
-        #     * For {Google::Cloud::Tasks::V2beta3::AppEngineHttpRequest App Engine tasks}, 0 indicates that the
+        #     * For {Google::Cloud::Tasks::V2beta3::AppEngineHttpRequest App Engine tasks},
+        #       0 indicates that the
         #       request has the default deadline. The default deadline depends on the
-        #       [scaling type](https://cloud.google.com/appengine/docs/standard/go/how-instances-are-managed#instance_scaling)
+        #       [scaling
+        #       type](https://cloud.google.com/appengine/docs/standard/go/how-instances-are-managed#instance_scaling)
         #       of the service: 10 minutes for standard apps with automatic scaling, 24
         #       hours for standard apps with manual and basic scaling, and 60 minutes for
         #       flex apps. If the request deadline is set, it must be in the interval [15
@@ -112,17 +119,19 @@ module Google
         #   @return [Google::Cloud::Tasks::V2beta3::Attempt]
         #     Output only. The status of the task's first attempt.
         #
-        #     Only {Google::Cloud::Tasks::V2beta3::Attempt#dispatch_time dispatch_time} will be set.
-        #     The other {Google::Cloud::Tasks::V2beta3::Attempt Attempt} information is not retained by Cloud Tasks.
+        #     Only {Google::Cloud::Tasks::V2beta3::Attempt#dispatch_time dispatch_time} will
+        #     be set. The other {Google::Cloud::Tasks::V2beta3::Attempt Attempt} information
+        #     is not retained by Cloud Tasks.
         # @!attribute [rw] last_attempt
         #   @return [Google::Cloud::Tasks::V2beta3::Attempt]
         #     Output only. The status of the task's last attempt.
         # @!attribute [rw] view
         #   @return [Google::Cloud::Tasks::V2beta3::Task::View]
-        #     Output only. The view specifies which subset of the {Google::Cloud::Tasks::V2beta3::Task Task} has
-        #     been returned.
+        #     Output only. The view specifies which subset of the
+        #     {Google::Cloud::Tasks::V2beta3::Task Task} has been returned.
         class Task
-          # The view specifies a subset of {Google::Cloud::Tasks::V2beta3::Task Task} data.
+          # The view specifies a subset of {Google::Cloud::Tasks::V2beta3::Task Task}
+          # data.
           #
           # When a task is returned in a response, not all
           # information is retrieved by default because some data, such as
@@ -137,7 +146,8 @@ module Google
             # sensitive data.
             #
             # This view does not include the
-            # {Google::Cloud::Tasks::V2beta3::AppEngineHttpRequest#body body in AppEngineHttpRequest}.
+            # [body in
+            # AppEngineHttpRequest][google.cloud.tasks.v2beta3.AppEngineHttpRequest.body].
             # Bodies are desirable to return only when needed, because they
             # can be large and because of the sensitivity of the data that you
             # choose to store in it.
@@ -145,9 +155,10 @@ module Google
 
             # All information is returned.
             #
-            # Authorization for {Google::Cloud::Tasks::V2beta3::Task::View::FULL FULL} requires
-            # `cloudtasks.tasks.fullView` [Google IAM](https://cloud.google.com/iam/)
-            # permission on the {Google::Cloud::Tasks::V2beta3::Queue Queue} resource.
+            # Authorization for {Google::Cloud::Tasks::V2beta3::Task::View::FULL FULL}
+            # requires `cloudtasks.tasks.fullView` [Google
+            # IAM](https://cloud.google.com/iam/) permission on the
+            # {Google::Cloud::Tasks::V2beta3::Queue Queue} resource.
             FULL = 2
           end
         end
