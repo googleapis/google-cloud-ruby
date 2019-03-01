@@ -429,9 +429,11 @@ module Google
         #     product_display_name, product_category and labels are ignored.
         #
         #     If a Product doesn't exist and needs to be created on the fly, the
-        #     product_display_name field refers to {Google::Cloud::Vision::V1p3beta1::Product#display_name Product#display_name}, the
-        #     product_category field refers to {Google::Cloud::Vision::V1p3beta1::Product#product_category Product#product_category}, and the
-        #     labels field refers to {Product#labels}.
+        #     product_display_name field refers to
+        #     {Google::Cloud::Vision::V1p3beta1::Product#display_name Product#display_name},
+        #     the product_category field refers to
+        #     {Google::Cloud::Vision::V1p3beta1::Product#product_category Product#product_category},
+        #     and the labels field refers to {Product#labels}.
         #
         #     Labels (optional) should be a line containing a list of comma-separated
         #     key-value pairs, with the format
@@ -476,8 +478,10 @@ module Google
         # Response message for the `ImportProductSets` method.
         #
         # This message is returned by the
-        # {Google::Longrunning::Operations::GetOperation} method in the returned
-        # {Google::Longrunning::Operation#response} field.
+        # {Google::Longrunning::Operations::GetOperation}
+        # method in the returned
+        # {Google::Longrunning::Operation#response}
+        # field.
         # @!attribute [rw] reference_images
         #   @return [Array<Google::Cloud::Vision::V1p3beta1::ReferenceImage>]
         #     The list of reference_images that are imported successfully.
@@ -504,7 +508,8 @@ module Google
         # @!attribute [rw] end_time
         #   @return [Google::Protobuf::Timestamp]
         #     The time when the batch request is finished and
-        #     {Google::Longrunning::Operation#done} is set to true.
+        #     {Google::Longrunning::Operation#done} is
+        #     set to true.
         class BatchOperationMetadata
           # Enumerates the possible states that the batch request can be in.
           module State
