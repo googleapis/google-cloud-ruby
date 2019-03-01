@@ -423,15 +423,17 @@ module Google
         #     `product-display-name` column refers to
         #     {Google::Cloud::Vision::V1::Product#display_name display_name}, the
         #     `product-category` column refers to
-        #     {Google::Cloud::Vision::V1::Product#product_category product_category}, and the
-        #     `labels` column refers to {Google::Cloud::Vision::V1::Product#product_labels product_labels}.
+        #     {Google::Cloud::Vision::V1::Product#product_category product_category}, and
+        #     the `labels` column refers to
+        #     {Google::Cloud::Vision::V1::Product#product_labels product_labels}.
         #
         #     The `image-id` column is optional but must be unique if provided. If it is
         #     empty, the system will automatically assign a unique id to the image.
         #
         #     The `product-display-name` column is optional. If it is empty, the system
-        #     sets the {Google::Cloud::Vision::V1::Product#display_name display_name} field for the product to a
-        #     space (" "). You can update the `display_name` later by using the API.
+        #     sets the {Google::Cloud::Vision::V1::Product#display_name display_name} field
+        #     for the product to a space (" "). You can update the `display_name` later
+        #     by using the API.
         #
         #     If a `Product` with the specified `product-id` already exists, then the
         #     system ignores the `product-display-name`, `product-category`, and `labels`
@@ -482,8 +484,10 @@ module Google
         # Response message for the `ImportProductSets` method.
         #
         # This message is returned by the
-        # {Google::Longrunning::Operations::GetOperation} method in the returned
-        # {Google::Longrunning::Operation#response} field.
+        # {Google::Longrunning::Operations::GetOperation}
+        # method in the returned
+        # {Google::Longrunning::Operation#response}
+        # field.
         # @!attribute [rw] reference_images
         #   @return [Array<Google::Cloud::Vision::V1::ReferenceImage>]
         #     The list of reference_images that are imported successfully.
@@ -510,7 +514,8 @@ module Google
         # @!attribute [rw] end_time
         #   @return [Google::Protobuf::Timestamp]
         #     The time when the batch request is finished and
-        #     {Google::Longrunning::Operation#done} is set to true.
+        #     {Google::Longrunning::Operation#done} is
+        #     set to true.
         class BatchOperationMetadata
           # Enumerates the possible states that the batch request can be in.
           module State

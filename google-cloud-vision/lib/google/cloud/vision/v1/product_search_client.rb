@@ -37,16 +37,18 @@ module Google
         # Manages Products and ProductSets of reference images for use in product
         # search. It uses the following resource model:
         #
-        # * The API has a collection of {Google::Cloud::Vision::V1::ProductSet ProductSet} resources, named
-        #   `projects/*/locations/*/productSets/*`, which acts as a way to put different
-        #   products into groups to limit identification.
+        # * The API has a collection of {Google::Cloud::Vision::V1::ProductSet ProductSet}
+        #   resources, named `projects/*/locations/*/productSets/*`, which acts as a way
+        #   to put different products into groups to limit identification.
         #
         # In parallel,
         #
-        # * The API has a collection of {Google::Cloud::Vision::V1::Product Product} resources, named
+        # * The API has a collection of {Google::Cloud::Vision::V1::Product Product}
+        #   resources, named
         #   `projects/*/locations/*/products/*`
         #
-        # * Each {Google::Cloud::Vision::V1::Product Product} has a collection of {Google::Cloud::Vision::V1::ReferenceImage ReferenceImage} resources, named
+        # * Each {Google::Cloud::Vision::V1::Product Product} has a collection of
+        #   {Google::Cloud::Vision::V1::ReferenceImage ReferenceImage} resources, named
         #   `projects/*/locations/*/products/*/referenceImages/*`
         #
         # @!attribute [r] product_search_stub
@@ -1253,8 +1255,8 @@ module Google
           # Asynchronous API that imports a list of reference images to specified
           # product sets based on a list of image information.
           #
-          # The {Google::Longrunning::Operation} API can be used to keep track of the
-          # progress and results of the request.
+          # The {Google::Longrunning::Operation} API can be
+          # used to keep track of the progress and results of the request.
           # `Operation.metadata` contains `BatchOperationMetadata`. (progress)
           # `Operation.response` contains `ImportProductSetsResponse`. (results)
           #
