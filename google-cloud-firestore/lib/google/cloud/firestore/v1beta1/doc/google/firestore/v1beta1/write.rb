@@ -62,8 +62,9 @@ module Google
         # A transformation of a field of the document.
         # @!attribute [rw] field_path
         #   @return [String]
-        #     The path of the field. See {Google::Firestore::V1beta1::Document#fields Document#fields} for the field path syntax
-        #     reference.
+        #     The path of the field. See
+        #     {Google::Firestore::V1beta1::Document#fields Document#fields} for the field
+        #     path syntax reference.
         # @!attribute [rw] set_to_server_value
         #   @return [Google::Firestore::V1beta1::DocumentTransform::FieldTransform::ServerValue]
         #     Sets the field to the given server value.
@@ -156,17 +157,20 @@ module Google
       #     previous update_time.
       # @!attribute [rw] transform_results
       #   @return [Array<Google::Firestore::V1beta1::Value>]
-      #     The results of applying each {Google::Firestore::V1beta1::DocumentTransform::FieldTransform DocumentTransform::FieldTransform}, in the
-      #     same order.
+      #     The results of applying each
+      #     {Google::Firestore::V1beta1::DocumentTransform::FieldTransform DocumentTransform::FieldTransform},
+      #     in the same order.
       class WriteResult; end
 
       # A {Google::Firestore::V1beta1::Document Document} has changed.
       #
-      # May be the result of multiple {Google::Firestore::V1beta1::Write writes}, including deletes, that
-      # ultimately resulted in a new value for the {Google::Firestore::V1beta1::Document Document}.
+      # May be the result of multiple {Google::Firestore::V1beta1::Write writes},
+      # including deletes, that ultimately resulted in a new value for the
+      # {Google::Firestore::V1beta1::Document Document}.
       #
-      # Multiple {Google::Firestore::V1beta1::DocumentChange DocumentChange} messages may be returned for the same logical
-      # change, if multiple targets are affected.
+      # Multiple {Google::Firestore::V1beta1::DocumentChange DocumentChange} messages
+      # may be returned for the same logical change, if multiple targets are
+      # affected.
       # @!attribute [rw] document
       #   @return [Google::Firestore::V1beta1::Document]
       #     The new state of the {Google::Firestore::V1beta1::Document Document}.
@@ -182,14 +186,17 @@ module Google
 
       # A {Google::Firestore::V1beta1::Document Document} has been deleted.
       #
-      # May be the result of multiple {Google::Firestore::V1beta1::Write writes}, including updates, the
-      # last of which deleted the {Google::Firestore::V1beta1::Document Document}.
+      # May be the result of multiple {Google::Firestore::V1beta1::Write writes},
+      # including updates, the last of which deleted the
+      # {Google::Firestore::V1beta1::Document Document}.
       #
-      # Multiple {Google::Firestore::V1beta1::DocumentDelete DocumentDelete} messages may be returned for the same logical
-      # delete, if multiple targets are affected.
+      # Multiple {Google::Firestore::V1beta1::DocumentDelete DocumentDelete} messages
+      # may be returned for the same logical delete, if multiple targets are
+      # affected.
       # @!attribute [rw] document
       #   @return [String]
-      #     The resource name of the {Google::Firestore::V1beta1::Document Document} that was deleted.
+      #     The resource name of the {Google::Firestore::V1beta1::Document Document} that
+      #     was deleted.
       # @!attribute [rw] removed_target_ids
       #   @return [Array<Integer>]
       #     A set of target IDs for targets that previously matched this entity.
@@ -200,17 +207,20 @@ module Google
       #     Greater or equal to the `commit_time` of the delete.
       class DocumentDelete; end
 
-      # A {Google::Firestore::V1beta1::Document Document} has been removed from the view of the targets.
+      # A {Google::Firestore::V1beta1::Document Document} has been removed from the
+      # view of the targets.
       #
       # Sent if the document is no longer relevant to a target and is out of view.
       # Can be sent instead of a DocumentDelete or a DocumentChange if the server
       # can not send the new value of the document.
       #
-      # Multiple {Google::Firestore::V1beta1::DocumentRemove DocumentRemove} messages may be returned for the same logical
-      # write or delete, if multiple targets are affected.
+      # Multiple {Google::Firestore::V1beta1::DocumentRemove DocumentRemove} messages
+      # may be returned for the same logical write or delete, if multiple targets are
+      # affected.
       # @!attribute [rw] document
       #   @return [String]
-      #     The resource name of the {Google::Firestore::V1beta1::Document Document} that has gone out of view.
+      #     The resource name of the {Google::Firestore::V1beta1::Document Document} that
+      #     has gone out of view.
       # @!attribute [rw] removed_target_ids
       #   @return [Array<Integer>]
       #     A set of target IDs for targets that previously matched this document.
@@ -227,7 +237,8 @@ module Google
       #     The target ID to which this filter applies.
       # @!attribute [rw] count
       #   @return [Integer]
-      #     The total count of documents that match {Google::Firestore::V1beta1::ExistenceFilter#target_id target_id}.
+      #     The total count of documents that match
+      #     {Google::Firestore::V1beta1::ExistenceFilter#target_id target_id}.
       #
       #     If different from the count of documents in the client that match, the
       #     client must manually determine which documents no longer match the target.
