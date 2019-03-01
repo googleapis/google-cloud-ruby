@@ -17,7 +17,8 @@ module Google
   module Cloud
     module Tasks
       module V2beta3
-        # Request message for {Google::Cloud::Tasks::V2beta3::CloudTasks::ListQueues ListQueues}.
+        # Request message for
+        # {Google::Cloud::Tasks::V2beta3::CloudTasks::ListQueues ListQueues}.
         # @!attribute [rw] parent
         #   @return [String]
         #     Required.
@@ -26,11 +27,11 @@ module Google
         #     For example: `projects/PROJECT_ID/locations/LOCATION_ID`
         # @!attribute [rw] filter
         #   @return [String]
-        #     `filter` can be used to specify a subset of queues. Any {Google::Cloud::Tasks::V2beta3::Queue Queue}
-        #     field can be used as a filter and several operators as supported.
-        #     For example: `<=, <, >=, >, !=, =, :`. The filter syntax is the same as
-        #     described in
-        #     [Stackdriver's Advanced Logs Filters](https://cloud.google.com/logging/docs/view/advanced_filters).
+        #     `filter` can be used to specify a subset of queues. Any
+        #     {Google::Cloud::Tasks::V2beta3::Queue Queue} field can be used as a filter and
+        #     several operators as supported. For example: `<=, <, >=, >, !=, =, :`. The
+        #     filter syntax is the same as described in [Stackdriver's Advanced Logs
+        #     Filters](https://cloud.google.com/logging/docs/view/advanced_filters).
         #
         #     Sample filter "state: PAUSED".
         #
@@ -43,21 +44,24 @@ module Google
         #     The maximum page size is 9800. If unspecified, the page size will
         #     be the maximum. Fewer queues than requested might be returned,
         #     even if more queues exist; use the
-        #     {Google::Cloud::Tasks::V2beta3::ListQueuesResponse#next_page_token next_page_token} in the
-        #     response to determine if more queues exist.
+        #     {Google::Cloud::Tasks::V2beta3::ListQueuesResponse#next_page_token next_page_token}
+        #     in the response to determine if more queues exist.
         # @!attribute [rw] page_token
         #   @return [String]
         #     A token identifying the page of results to return.
         #
         #     To request the first page results, page_token must be empty. To
         #     request the next page of results, page_token must be the value of
-        #     {Google::Cloud::Tasks::V2beta3::ListQueuesResponse#next_page_token next_page_token} returned
-        #     from the previous call to {Google::Cloud::Tasks::V2beta3::CloudTasks::ListQueues ListQueues}
-        #     method. It is an error to switch the value of the
-        #     {Google::Cloud::Tasks::V2beta3::ListQueuesRequest#filter filter} while iterating through pages.
+        #     {Google::Cloud::Tasks::V2beta3::ListQueuesResponse#next_page_token next_page_token}
+        #     returned from the previous call to
+        #     {Google::Cloud::Tasks::V2beta3::CloudTasks::ListQueues ListQueues} method. It
+        #     is an error to switch the value of the
+        #     {Google::Cloud::Tasks::V2beta3::ListQueuesRequest#filter filter} while
+        #     iterating through pages.
         class ListQueuesRequest; end
 
-        # Response message for {Google::Cloud::Tasks::V2beta3::CloudTasks::ListQueues ListQueues}.
+        # Response message for
+        # {Google::Cloud::Tasks::V2beta3::CloudTasks::ListQueues ListQueues}.
         # @!attribute [rw] queues
         #   @return [Array<Google::Cloud::Tasks::V2beta3::Queue>]
         #     The list of queues.
@@ -66,7 +70,8 @@ module Google
         #     A token to retrieve next page of results.
         #
         #     To return the next page of results, call
-        #     {Google::Cloud::Tasks::V2beta3::CloudTasks::ListQueues ListQueues} with this value as the
+        #     {Google::Cloud::Tasks::V2beta3::CloudTasks::ListQueues ListQueues} with this
+        #     value as the
         #     {Google::Cloud::Tasks::V2beta3::ListQueuesRequest#page_token page_token}.
         #
         #     If the next_page_token is empty, there are no more results.
@@ -74,7 +79,8 @@ module Google
         #     The page token is valid for only 2 hours.
         class ListQueuesResponse; end
 
-        # Request message for {Google::Cloud::Tasks::V2beta3::CloudTasks::GetQueue GetQueue}.
+        # Request message for
+        # {Google::Cloud::Tasks::V2beta3::CloudTasks::GetQueue GetQueue}.
         # @!attribute [rw] name
         #   @return [String]
         #     Required.
@@ -83,7 +89,8 @@ module Google
         #     `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID`
         class GetQueueRequest; end
 
-        # Request message for {Google::Cloud::Tasks::V2beta3::CloudTasks::CreateQueue CreateQueue}.
+        # Request message for
+        # {Google::Cloud::Tasks::V2beta3::CloudTasks::CreateQueue CreateQueue}.
         # @!attribute [rw] parent
         #   @return [String]
         #     Required.
@@ -100,21 +107,25 @@ module Google
         #
         #     The queue to create.
         #
-        #     {Google::Cloud::Tasks::V2beta3::Queue#name Queue's name} cannot be the same as an existing queue.
+        #     {Google::Cloud::Tasks::V2beta3::Queue#name Queue's name} cannot be the same as
+        #     an existing queue.
         class CreateQueueRequest; end
 
-        # Request message for {Google::Cloud::Tasks::V2beta3::CloudTasks::UpdateQueue UpdateQueue}.
+        # Request message for
+        # {Google::Cloud::Tasks::V2beta3::CloudTasks::UpdateQueue UpdateQueue}.
         # @!attribute [rw] queue
         #   @return [Google::Cloud::Tasks::V2beta3::Queue]
         #     Required.
         #
         #     The queue to create or update.
         #
-        #     The queue's {Google::Cloud::Tasks::V2beta3::Queue#name name} must be specified.
+        #     The queue's {Google::Cloud::Tasks::V2beta3::Queue#name name} must be
+        #     specified.
         #
         #     Output only fields cannot be modified using UpdateQueue.
         #     Any value specified for an output only field will be ignored.
-        #     The queue's {Google::Cloud::Tasks::V2beta3::Queue#name name} cannot be changed.
+        #     The queue's {Google::Cloud::Tasks::V2beta3::Queue#name name} cannot be
+        #     changed.
         # @!attribute [rw] update_mask
         #   @return [Google::Protobuf::FieldMask]
         #     A mask used to specify which fields of the queue are being updated.
@@ -122,7 +133,8 @@ module Google
         #     If empty, then all fields will be updated.
         class UpdateQueueRequest; end
 
-        # Request message for {Google::Cloud::Tasks::V2beta3::CloudTasks::DeleteQueue DeleteQueue}.
+        # Request message for
+        # {Google::Cloud::Tasks::V2beta3::CloudTasks::DeleteQueue DeleteQueue}.
         # @!attribute [rw] name
         #   @return [String]
         #     Required.
@@ -131,7 +143,8 @@ module Google
         #     `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID`
         class DeleteQueueRequest; end
 
-        # Request message for {Google::Cloud::Tasks::V2beta3::CloudTasks::PurgeQueue PurgeQueue}.
+        # Request message for
+        # {Google::Cloud::Tasks::V2beta3::CloudTasks::PurgeQueue PurgeQueue}.
         # @!attribute [rw] name
         #   @return [String]
         #     Required.
@@ -140,7 +153,8 @@ module Google
         #     `projects/PROJECT_ID/location/LOCATION_ID/queues/QUEUE_ID`
         class PurgeQueueRequest; end
 
-        # Request message for {Google::Cloud::Tasks::V2beta3::CloudTasks::PauseQueue PauseQueue}.
+        # Request message for
+        # {Google::Cloud::Tasks::V2beta3::CloudTasks::PauseQueue PauseQueue}.
         # @!attribute [rw] name
         #   @return [String]
         #     Required.
@@ -149,7 +163,8 @@ module Google
         #     `projects/PROJECT_ID/location/LOCATION_ID/queues/QUEUE_ID`
         class PauseQueueRequest; end
 
-        # Request message for {Google::Cloud::Tasks::V2beta3::CloudTasks::ResumeQueue ResumeQueue}.
+        # Request message for
+        # {Google::Cloud::Tasks::V2beta3::CloudTasks::ResumeQueue ResumeQueue}.
         # @!attribute [rw] name
         #   @return [String]
         #     Required.
@@ -158,7 +173,8 @@ module Google
         #     `projects/PROJECT_ID/location/LOCATION_ID/queues/QUEUE_ID`
         class ResumeQueueRequest; end
 
-        # Request message for listing tasks using {Google::Cloud::Tasks::V2beta3::CloudTasks::ListTasks ListTasks}.
+        # Request message for listing tasks using
+        # {Google::Cloud::Tasks::V2beta3::CloudTasks::ListTasks ListTasks}.
         # @!attribute [rw] parent
         #   @return [String]
         #     Required.
@@ -167,18 +183,19 @@ module Google
         #     `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID`
         # @!attribute [rw] response_view
         #   @return [Google::Cloud::Tasks::V2beta3::Task::View]
-        #     The response_view specifies which subset of the {Google::Cloud::Tasks::V2beta3::Task Task} will be
-        #     returned.
+        #     The response_view specifies which subset of the
+        #     {Google::Cloud::Tasks::V2beta3::Task Task} will be returned.
         #
-        #     By default response_view is {Google::Cloud::Tasks::V2beta3::Task::View::BASIC BASIC}; not all
-        #     information is retrieved by default because some data, such as
-        #     payloads, might be desirable to return only when needed because
-        #     of its large size or because of the sensitivity of data that it
-        #     contains.
+        #     By default response_view is
+        #     {Google::Cloud::Tasks::V2beta3::Task::View::BASIC BASIC}; not all information is
+        #     retrieved by default because some data, such as payloads, might be
+        #     desirable to return only when needed because of its large size or because
+        #     of the sensitivity of data that it contains.
         #
-        #     Authorization for {Google::Cloud::Tasks::V2beta3::Task::View::FULL FULL} requires
-        #     `cloudtasks.tasks.fullView` [Google IAM](https://cloud.google.com/iam/)
-        #     permission on the {Google::Cloud::Tasks::V2beta3::Task Task} resource.
+        #     Authorization for {Google::Cloud::Tasks::V2beta3::Task::View::FULL FULL}
+        #     requires `cloudtasks.tasks.fullView` [Google
+        #     IAM](https://cloud.google.com/iam/) permission on the
+        #     {Google::Cloud::Tasks::V2beta3::Task Task} resource.
         # @!attribute [rw] page_size
         #   @return [Integer]
         #     Requested page size. Fewer tasks than requested might be returned.
@@ -186,22 +203,23 @@ module Google
         #     The maximum page size is 1000. If unspecified, the page size will
         #     be the maximum. Fewer tasks than requested might be returned,
         #     even if more tasks exist; use
-        #     {Google::Cloud::Tasks::V2beta3::ListTasksResponse#next_page_token next_page_token} in the
-        #     response to determine if more tasks exist.
+        #     {Google::Cloud::Tasks::V2beta3::ListTasksResponse#next_page_token next_page_token}
+        #     in the response to determine if more tasks exist.
         # @!attribute [rw] page_token
         #   @return [String]
         #     A token identifying the page of results to return.
         #
         #     To request the first page results, page_token must be empty. To
         #     request the next page of results, page_token must be the value of
-        #     {Google::Cloud::Tasks::V2beta3::ListTasksResponse#next_page_token next_page_token} returned
-        #     from the previous call to {Google::Cloud::Tasks::V2beta3::CloudTasks::ListTasks ListTasks}
-        #     method.
+        #     {Google::Cloud::Tasks::V2beta3::ListTasksResponse#next_page_token next_page_token}
+        #     returned from the previous call to
+        #     {Google::Cloud::Tasks::V2beta3::CloudTasks::ListTasks ListTasks} method.
         #
         #     The page token is valid for only 2 hours.
         class ListTasksRequest; end
 
-        # Response message for listing tasks using {Google::Cloud::Tasks::V2beta3::CloudTasks::ListTasks ListTasks}.
+        # Response message for listing tasks using
+        # {Google::Cloud::Tasks::V2beta3::CloudTasks::ListTasks ListTasks}.
         # @!attribute [rw] tasks
         #   @return [Array<Google::Cloud::Tasks::V2beta3::Task>]
         #     The list of tasks.
@@ -210,13 +228,15 @@ module Google
         #     A token to retrieve next page of results.
         #
         #     To return the next page of results, call
-        #     {Google::Cloud::Tasks::V2beta3::CloudTasks::ListTasks ListTasks} with this value as the
+        #     {Google::Cloud::Tasks::V2beta3::CloudTasks::ListTasks ListTasks} with this
+        #     value as the
         #     {Google::Cloud::Tasks::V2beta3::ListTasksRequest#page_token page_token}.
         #
         #     If the next_page_token is empty, there are no more results.
         class ListTasksResponse; end
 
-        # Request message for getting a task using {Google::Cloud::Tasks::V2beta3::CloudTasks::GetTask GetTask}.
+        # Request message for getting a task using
+        # {Google::Cloud::Tasks::V2beta3::CloudTasks::GetTask GetTask}.
         # @!attribute [rw] name
         #   @return [String]
         #     Required.
@@ -225,21 +245,23 @@ module Google
         #     `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID`
         # @!attribute [rw] response_view
         #   @return [Google::Cloud::Tasks::V2beta3::Task::View]
-        #     The response_view specifies which subset of the {Google::Cloud::Tasks::V2beta3::Task Task} will be
-        #     returned.
+        #     The response_view specifies which subset of the
+        #     {Google::Cloud::Tasks::V2beta3::Task Task} will be returned.
         #
-        #     By default response_view is {Google::Cloud::Tasks::V2beta3::Task::View::BASIC BASIC}; not all
-        #     information is retrieved by default because some data, such as
-        #     payloads, might be desirable to return only when needed because
-        #     of its large size or because of the sensitivity of data that it
-        #     contains.
+        #     By default response_view is
+        #     {Google::Cloud::Tasks::V2beta3::Task::View::BASIC BASIC}; not all information is
+        #     retrieved by default because some data, such as payloads, might be
+        #     desirable to return only when needed because of its large size or because
+        #     of the sensitivity of data that it contains.
         #
-        #     Authorization for {Google::Cloud::Tasks::V2beta3::Task::View::FULL FULL} requires
-        #     `cloudtasks.tasks.fullView` [Google IAM](https://cloud.google.com/iam/)
-        #     permission on the {Google::Cloud::Tasks::V2beta3::Task Task} resource.
+        #     Authorization for {Google::Cloud::Tasks::V2beta3::Task::View::FULL FULL}
+        #     requires `cloudtasks.tasks.fullView` [Google
+        #     IAM](https://cloud.google.com/iam/) permission on the
+        #     {Google::Cloud::Tasks::V2beta3::Task Task} resource.
         class GetTaskRequest; end
 
-        # Request message for {Google::Cloud::Tasks::V2beta3::CloudTasks::CreateTask CreateTask}.
+        # Request message for
+        # {Google::Cloud::Tasks::V2beta3::CloudTasks::CreateTask CreateTask}.
         # @!attribute [rw] parent
         #   @return [String]
         #     Required.
@@ -256,13 +278,13 @@ module Google
         #
         #     Task names have the following format:
         #     `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID`.
-        #     The user can optionally specify a task {Google::Cloud::Tasks::V2beta3::Task#name name}. If a
-        #     name is not specified then the system will generate a random
-        #     unique task id, which will be set in the task returned in the
-        #     {Google::Cloud::Tasks::V2beta3::Task#name response}.
+        #     The user can optionally specify a task
+        #     {Google::Cloud::Tasks::V2beta3::Task#name name}. If a name is not specified
+        #     then the system will generate a random unique task id, which will be set in
+        #     the task returned in the {Google::Cloud::Tasks::V2beta3::Task#name response}.
         #
-        #     If {Google::Cloud::Tasks::V2beta3::Task#schedule_time schedule_time} is not set or is in the
-        #     past then Cloud Tasks will set it to the current time.
+        #     If {Google::Cloud::Tasks::V2beta3::Task#schedule_time schedule_time} is not
+        #     set or is in the past then Cloud Tasks will set it to the current time.
         #
         #     Task De-duplication:
         #
@@ -277,28 +299,29 @@ module Google
         #     for ~9days after the original task was deleted or executed.
         #
         #     Because there is an extra lookup cost to identify duplicate task
-        #     names, these {Google::Cloud::Tasks::V2beta3::CloudTasks::CreateTask CreateTask} calls have significantly
-        #     increased latency. Using hashed strings for the task id or for
-        #     the prefix of the task id is recommended. Choosing task ids that
-        #     are sequential or have sequential prefixes, for example using a
+        #     names, these {Google::Cloud::Tasks::V2beta3::CloudTasks::CreateTask CreateTask}
+        #     calls have significantly increased latency. Using hashed strings for the
+        #     task id or for the prefix of the task id is recommended. Choosing task ids
+        #     that are sequential or have sequential prefixes, for example using a
         #     timestamp, causes an increase in latency and error rates in all
         #     task commands. The infrastructure relies on an approximately
         #     uniform distribution of task ids to store and serve tasks
         #     efficiently.
         # @!attribute [rw] response_view
         #   @return [Google::Cloud::Tasks::V2beta3::Task::View]
-        #     The response_view specifies which subset of the {Google::Cloud::Tasks::V2beta3::Task Task} will be
-        #     returned.
+        #     The response_view specifies which subset of the
+        #     {Google::Cloud::Tasks::V2beta3::Task Task} will be returned.
         #
-        #     By default response_view is {Google::Cloud::Tasks::V2beta3::Task::View::BASIC BASIC}; not all
-        #     information is retrieved by default because some data, such as
-        #     payloads, might be desirable to return only when needed because
-        #     of its large size or because of the sensitivity of data that it
-        #     contains.
+        #     By default response_view is
+        #     {Google::Cloud::Tasks::V2beta3::Task::View::BASIC BASIC}; not all information is
+        #     retrieved by default because some data, such as payloads, might be
+        #     desirable to return only when needed because of its large size or because
+        #     of the sensitivity of data that it contains.
         #
-        #     Authorization for {Google::Cloud::Tasks::V2beta3::Task::View::FULL FULL} requires
-        #     `cloudtasks.tasks.fullView` [Google IAM](https://cloud.google.com/iam/)
-        #     permission on the {Google::Cloud::Tasks::V2beta3::Task Task} resource.
+        #     Authorization for {Google::Cloud::Tasks::V2beta3::Task::View::FULL FULL}
+        #     requires `cloudtasks.tasks.fullView` [Google
+        #     IAM](https://cloud.google.com/iam/) permission on the
+        #     {Google::Cloud::Tasks::V2beta3::Task Task} resource.
         class CreateTaskRequest; end
 
         # Request message for deleting a task using
@@ -321,18 +344,19 @@ module Google
         #     `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID`
         # @!attribute [rw] response_view
         #   @return [Google::Cloud::Tasks::V2beta3::Task::View]
-        #     The response_view specifies which subset of the {Google::Cloud::Tasks::V2beta3::Task Task} will be
-        #     returned.
+        #     The response_view specifies which subset of the
+        #     {Google::Cloud::Tasks::V2beta3::Task Task} will be returned.
         #
-        #     By default response_view is {Google::Cloud::Tasks::V2beta3::Task::View::BASIC BASIC}; not all
-        #     information is retrieved by default because some data, such as
-        #     payloads, might be desirable to return only when needed because
-        #     of its large size or because of the sensitivity of data that it
-        #     contains.
+        #     By default response_view is
+        #     {Google::Cloud::Tasks::V2beta3::Task::View::BASIC BASIC}; not all information is
+        #     retrieved by default because some data, such as payloads, might be
+        #     desirable to return only when needed because of its large size or because
+        #     of the sensitivity of data that it contains.
         #
-        #     Authorization for {Google::Cloud::Tasks::V2beta3::Task::View::FULL FULL} requires
-        #     `cloudtasks.tasks.fullView` [Google IAM](https://cloud.google.com/iam/)
-        #     permission on the {Google::Cloud::Tasks::V2beta3::Task Task} resource.
+        #     Authorization for {Google::Cloud::Tasks::V2beta3::Task::View::FULL FULL}
+        #     requires `cloudtasks.tasks.fullView` [Google
+        #     IAM](https://cloud.google.com/iam/) permission on the
+        #     {Google::Cloud::Tasks::V2beta3::Task Task} resource.
         class RunTaskRequest; end
       end
     end
