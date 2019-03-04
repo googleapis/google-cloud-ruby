@@ -1,5 +1,9 @@
 # Release History
 
+### 1.2.0 / 2019-03-04
+
+* Re-generate google-cloud-video_intelligence files (#2975)
+
 ### 1.1.4 / 2019-02-27
 
 * Add TEXT_DETECTION and OBJECT_TRACKING features
