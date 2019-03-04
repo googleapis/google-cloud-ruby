@@ -219,6 +219,14 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     value :HTML_SANITIZATION_DISABLED, 1
     value :SIMPLE_FORMATTING_ONLY, 2
   end
+  add_enum "google.cloud.talent.v4beta1.CommuteMethod" do
+    value :COMMUTE_METHOD_UNSPECIFIED, 0
+    value :DRIVING, 1
+    value :TRANSIT, 2
+    value :WALKING, 3
+    value :CYCLING, 4
+    value :TRANSIT_ACCESSIBLE, 5
+  end
 end
 
 module Google
@@ -249,6 +257,7 @@ module Google
         Visibility = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4beta1.Visibility").enummodule
         ContactInfoUsage = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4beta1.ContactInfoUsage").enummodule
         HtmlSanitization = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4beta1.HtmlSanitization").enummodule
+        CommuteMethod = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4beta1.CommuteMethod").enummodule
       end
     end
   end

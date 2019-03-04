@@ -34,7 +34,7 @@ module Google
     #
     # 1. [Select or create a Cloud Platform project.](https://console.cloud.google.com/project)
     # 2. [Enable billing for your project.](https://cloud.google.com/billing/docs/how-to/modify-project#enable_billing_for_a_project)
-    # 3. [Enable the Cloud Talent Solution API.](https://console.cloud.google.com/apis/library/jobs.googleapis.com)
+    # 3. [Enable the Cloud Talent Solution API.](https://console.cloud.google.com/apis/library/talent.googleapis.com)
     # 4. [Setup Authentication.](https://googleapis.github.io/google-cloud-ruby/#/docs/google-cloud/master/guides/authentication)
     #
     # ### Installation
@@ -48,7 +48,7 @@ module Google
     # - View this [repository's main README](https://github.com/googleapis/google-cloud-ruby/blob/master/README.md)
     #   to see the full list of Cloud APIs that we cover.
     #
-    # [Product Documentation]: https://cloud.google.com/jobs
+    # [Product Documentation]: https://cloud.google.com/talent
     #
     # ## Enabling Logging
     #
@@ -89,7 +89,7 @@ module Google
 
       module CompanyService
         ##
-        # A service handles company management, including CRUD and job enumeration.
+        # A service that handles company management, including CRUD and enumeration.
         #
         # @param version [Symbol, String]
         #   The major version of the service to be used. By default :v4beta1
@@ -397,6 +397,58 @@ module Google
             .select {|sym| sym.to_s.downcase == version.to_s.downcase}
             .first
           Google::Cloud::Talent.const_get(version_module)::Resume.new(*args, **kwargs)
+        end
+      end
+
+      module TenantService
+        ##
+        # A service that handles tenant management, including CRUD and enumeration.
+        #
+        # @param version [Symbol, String]
+        #   The major version of the service to be used. By default :v4beta1
+        #   is used.
+        # @overload new(version:, credentials:, scopes:, client_config:, timeout:)
+        #   @param credentials [Google::Auth::Credentials, String, Hash, GRPC::Core::Channel, GRPC::Core::ChannelCredentials, Proc]
+        #     Provides the means for authenticating requests made by the client. This parameter can
+        #     be many types.
+        #     A `Google::Auth::Credentials` uses a the properties of its represented keyfile for
+        #     authenticating requests made by this client.
+        #     A `String` will be treated as the path to the keyfile to be used for the construction of
+        #     credentials for this client.
+        #     A `Hash` will be treated as the contents of a keyfile to be used for the construction of
+        #     credentials for this client.
+        #     A `GRPC::Core::Channel` will be used to make calls through.
+        #     A `GRPC::Core::ChannelCredentials` for the setting up the RPC client. The channel credentials
+        #     should already be composed with a `GRPC::Core::CallCredentials` object.
+        #     A `Proc` will be used as an updater_proc for the Grpc channel. The proc transforms the
+        #     metadata for requests, generally, to give OAuth credentials.
+        #   @param scopes [Array<String>]
+        #     The OAuth scopes for this service. This parameter is ignored if
+        #     an updater_proc is supplied.
+        #   @param client_config [Hash]
+        #     A Hash for call options for each method. See
+        #     Google::Gax#construct_settings for the structure of
+        #     this data. Falls back to the default config if not specified
+        #     or the specified config is missing data points.
+        #   @param timeout [Numeric]
+        #     The default timeout, in seconds, for calls made through this client.
+        #   @param metadata [Hash]
+        #     Default metadata to be sent with each request. This can be overridden on a per call basis.
+        #   @param exception_transformer [Proc]
+        #     An optional proc that intercepts any exceptions raised during an API call to inject
+        #     custom error handling.
+        def self.new(*args, version: :v4beta1, **kwargs)
+          unless AVAILABLE_VERSIONS.include?(version.to_s.downcase)
+            raise "The version: #{version} is not available. The available versions " \
+              "are: [#{AVAILABLE_VERSIONS.join(", ")}]"
+          end
+
+          require "#{FILE_DIR}/#{version.to_s.downcase}"
+          version_module = Google::Cloud::Talent
+            .constants
+            .select {|sym| sym.to_s.downcase == version.to_s.downcase}
+            .first
+          Google::Cloud::Talent.const_get(version_module)::TenantService.new(*args, **kwargs)
         end
       end
     end

@@ -17,72 +17,72 @@ module Google
   module Cloud
     module Talent
       module V4beta1
-        # The Request of the CreateCompany method.
+        # The Request of the CreateTenant method.
         # @!attribute [rw] parent
         #   @return [String]
         #     Required.
         #
-        #     Resource name of the project under which the company is created.
+        #     Resource name of the project under which the tenant is created.
         #
         #     The format is "projects/{project_id}", for example,
         #     "projects/api-test-project".
-        # @!attribute [rw] company
-        #   @return [Google::Cloud::Talent::V4beta1::Company]
+        # @!attribute [rw] tenant
+        #   @return [Google::Cloud::Talent::V4beta1::Tenant]
         #     Required.
         #
-        #     The company to be created.
-        class CreateCompanyRequest; end
+        #     The tenant to be created.
+        class CreateTenantRequest; end
 
-        # Request for getting a company by name.
+        # Request for getting a tenant by name.
         # @!attribute [rw] name
         #   @return [String]
         #     Required.
         #
-        #     The resource name of the company to be retrieved.
+        #     The resource name of the tenant to be retrieved.
         #
-        #     The format is "projects/{project_id}/companies/{company_id}", for example,
-        #     "projects/api-test-project/companies/foo".
-        class GetCompanyRequest; end
+        #     The format is "projects/{project_id}/tenants/{tenant_id}", for example,
+        #     "projects/api-test-project/tenants/foo".
+        class GetTenantRequest; end
 
-        # Request for updating a specified company.
-        # @!attribute [rw] company
-        #   @return [Google::Cloud::Talent::V4beta1::Company]
+        # Request for updating a specified tenant.
+        # @!attribute [rw] tenant
+        #   @return [Google::Cloud::Talent::V4beta1::Tenant]
         #     Required.
         #
-        #     The company resource to replace the current resource in the system.
+        #     The tenant resource to replace the current resource in the system.
         # @!attribute [rw] update_mask
         #   @return [Google::Protobuf::FieldMask]
         #     Optional but strongly recommended for the best service
         #     experience.
         #
         #     If
-        #     {Google::Cloud::Talent::V4beta1::UpdateCompanyRequest#update_mask update_mask}
+        #     {Google::Cloud::Talent::V4beta1::UpdateTenantRequest#update_mask update_mask}
         #     is provided, only the specified fields in
-        #     {Google::Cloud::Talent::V4beta1::UpdateCompanyRequest#company company} are
+        #     {Google::Cloud::Talent::V4beta1::UpdateTenantRequest#tenant tenant} are
         #     updated. Otherwise all the fields are updated.
         #
-        #     A field mask to specify the company fields to be updated. Only
-        #     top level fields of {Google::Cloud::Talent::V4beta1::Company Company} are
+        #     A field mask to specify the tenant fields to be updated. Only
+        #     top level fields of {Google::Cloud::Talent::V4beta1::Tenant Tenant} are
         #     supported.
-        class UpdateCompanyRequest; end
+        class UpdateTenantRequest; end
 
-        # Request to delete a company.
+        # Request to delete a tenant.
         # @!attribute [rw] name
         #   @return [String]
         #     Required.
         #
-        #     The resource name of the company to be deleted.
+        #     The resource name of the tenant to be deleted.
         #
-        #     The format is "projects/{project_id}/companies/{company_id}", for example,
-        #     "projects/api-test-project/companies/foo".
-        class DeleteCompanyRequest; end
+        #     The format is "projects/{project_id}/tenants/{tenant_id}", for example,
+        #     "projects/api-test-project/tenants/foo".
+        class DeleteTenantRequest; end
 
-        # List companies for which the client has ACL visibility.
+        # List tenants for which the client has ACL visibility.
         # @!attribute [rw] parent
         #   @return [String]
         #     Required.
         #
-        #     Resource name of the project under which the company is created.
+        #     Resource name of the project under which the tenant is created.
         #
         #     The format is "projects/{project_id}", for example,
         #     "projects/api-test-project".
@@ -95,27 +95,16 @@ module Google
         #   @return [Integer]
         #     Optional.
         #
-        #     The maximum number of companies to be returned, at most 100.
+        #     The maximum number of tenants to be returned, at most 100.
         #     Default is 100 if a non-positive number is provided.
-        # @!attribute [rw] require_open_jobs
-        #   @return [true, false]
-        #     Optional.
-        #
-        #     Set to true if the companies requested must have open jobs.
-        #
-        #     Defaults to false.
-        #
-        #     If true, at most
-        #     {Google::Cloud::Talent::V4beta1::ListCompaniesRequest#page_size page_size} of
-        #     companies are fetched, among which only those with open jobs are returned.
-        class ListCompaniesRequest; end
+        class ListTenantsRequest; end
 
         # Output only.
         #
-        # The List companies response object.
-        # @!attribute [rw] companies
-        #   @return [Array<Google::Cloud::Talent::V4beta1::Company>]
-        #     Companies for the current client.
+        # The List tenants response object.
+        # @!attribute [rw] tenants
+        #   @return [Array<Google::Cloud::Talent::V4beta1::Tenant>]
+        #     Tenants for the current client.
         # @!attribute [rw] next_page_token
         #   @return [String]
         #     A token to retrieve the next page of results.
@@ -123,7 +112,7 @@ module Google
         #   @return [Google::Cloud::Talent::V4beta1::ResponseMetadata]
         #     Additional information for the API invocation, such as the request
         #     tracking id.
-        class ListCompaniesResponse; end
+        class ListTenantsResponse; end
       end
     end
   end

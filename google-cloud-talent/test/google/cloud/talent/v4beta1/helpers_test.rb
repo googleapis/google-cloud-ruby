@@ -23,6 +23,7 @@ require "google/cloud/talent/v4beta1/helpers"
 require "google/cloud/talent/v4beta1/company_service_client"
 require "google/cloud/talent/v4beta1/job_service_client"
 require "google/cloud/talent/v4beta1/profile_service_client"
+require "google/cloud/talent/v4beta1/tenant_service_client"
 
 class HelperMockTalentCredentials_v4beta1 < Google::Cloud::Talent::V4beta1::Credentials
   def initialize
@@ -74,11 +75,11 @@ describe Google::Cloud::Talent::V4beta1::JobServiceClient do
     it "correctly calls Google::Cloud::Talent::V4beta1::JobServiceClient.job_path" do
       Google::Cloud::Talent::V4beta1::Credentials.stub(:default, mock_credentials) do
         project = "project"
-        job = "job"
+        jobs = "jobs"
         client = Google::Cloud::Talent::JobService.new version: :v4beta1
         assert_equal(
-          client.job_path(project, job),
-          Google::Cloud::Talent::V4beta1::JobServiceClient.job_path(project, job)
+          client.job_path(project, jobs),
+          Google::Cloud::Talent::V4beta1::JobServiceClient.job_path(project, jobs)
         )
       end
     end
@@ -101,30 +102,61 @@ end
 describe Google::Cloud::Talent::V4beta1::ProfileServiceClient do
   let(:mock_credentials) { HelperMockTalentCredentials_v4beta1.new }
 
-  describe "the company_path instance method" do
-    it "correctly calls Google::Cloud::Talent::V4beta1::ProfileServiceClient.company_path" do
+  describe "the profile_path instance method" do
+    it "correctly calls Google::Cloud::Talent::V4beta1::ProfileServiceClient.profile_path" do
       Google::Cloud::Talent::V4beta1::Credentials.stub(:default, mock_credentials) do
         project = "project"
-        company = "company"
+        tenant = "tenant"
+        profile = "profile"
         client = Google::Cloud::Talent::ProfileService.new version: :v4beta1
         assert_equal(
-          client.company_path(project, company),
-          Google::Cloud::Talent::V4beta1::ProfileServiceClient.company_path(project, company)
+          client.profile_path(project, tenant, profile),
+          Google::Cloud::Talent::V4beta1::ProfileServiceClient.profile_path(project, tenant, profile)
         )
       end
     end
   end
 
-  describe "the profile_path instance method" do
-    it "correctly calls Google::Cloud::Talent::V4beta1::ProfileServiceClient.profile_path" do
+  describe "the tenant_path instance method" do
+    it "correctly calls Google::Cloud::Talent::V4beta1::ProfileServiceClient.tenant_path" do
       Google::Cloud::Talent::V4beta1::Credentials.stub(:default, mock_credentials) do
         project = "project"
-        company = "company"
-        profile = "profile"
+        tenant = "tenant"
         client = Google::Cloud::Talent::ProfileService.new version: :v4beta1
         assert_equal(
-          client.profile_path(project, company, profile),
-          Google::Cloud::Talent::V4beta1::ProfileServiceClient.profile_path(project, company, profile)
+          client.tenant_path(project, tenant),
+          Google::Cloud::Talent::V4beta1::ProfileServiceClient.tenant_path(project, tenant)
+        )
+      end
+    end
+  end
+end
+
+describe Google::Cloud::Talent::V4beta1::TenantServiceClient do
+  let(:mock_credentials) { HelperMockTalentCredentials_v4beta1.new }
+
+  describe "the project_path instance method" do
+    it "correctly calls Google::Cloud::Talent::V4beta1::TenantServiceClient.project_path" do
+      Google::Cloud::Talent::V4beta1::Credentials.stub(:default, mock_credentials) do
+        project = "project"
+        client = Google::Cloud::Talent::TenantService.new version: :v4beta1
+        assert_equal(
+          client.project_path(project),
+          Google::Cloud::Talent::V4beta1::TenantServiceClient.project_path(project)
+        )
+      end
+    end
+  end
+
+  describe "the tenant_path instance method" do
+    it "correctly calls Google::Cloud::Talent::V4beta1::TenantServiceClient.tenant_path" do
+      Google::Cloud::Talent::V4beta1::Credentials.stub(:default, mock_credentials) do
+        project = "project"
+        tenant = "tenant"
+        client = Google::Cloud::Talent::TenantService.new version: :v4beta1
+        assert_equal(
+          client.tenant_path(project, tenant),
+          Google::Cloud::Talent::V4beta1::TenantServiceClient.tenant_path(project, tenant)
         )
       end
     end

@@ -30,9 +30,9 @@ module Google
         #   @return [String]
         #     Required.
         #
-        #     The bytes of the resume file in common format. Currently the API supports
-        #     the following formats:
-        #     PDF, TXT, DOC, RTF and DOCX.
+        #     The bytes of the resume file in common format, for example, PDF, TXT.
+        #     UTF-8 encoding is required if the resume is text-based, otherwise an error
+        #     is thrown.
         # @!attribute [rw] region_code
         #   @return [String]
         #     Optional.
@@ -54,7 +54,35 @@ module Google
         #     For more information, see
         #     [Tags for Identifying Languages](https://tools.ietf.org/html/bcp47){:
         #     class="external" target="_blank" }.
+        # @!attribute [rw] options
+        #   @return [Google::Cloud::Talent::V4beta1::ParseResumeOptions]
+        #     Optional.
+        #
+        #     Options that change how the resume parse is performed.
         class ParseResumeRequest; end
+
+        # Options that change how the resume parse is performed.
+        # @!attribute [rw] enable_ocr
+        #   @return [true, false]
+        #     Optional.
+        #
+        #     Controls whether Optical Character Recognition (OCR) is enabled.
+        #
+        #     OCR is used to decipher pictorial resumes, or resumes that have some
+        #     element of pictorial detail (for example, contact information placed within
+        #     an image in a pdf). Note that the API call has a higher latency if OCR is
+        #     enabled.
+        # @!attribute [rw] enable_full_skill_detection
+        #   @return [true, false]
+        #     Optional.
+        #
+        #     Controls whether detected skills are included in the parsed profile from
+        #     sections of the resume other than just skills sections.
+        #
+        #     Normally, returned skills are limited to those taken from a resume section
+        #     intended to list skills. When enabled, this feature causes detected
+        #     skills in other sections to also be included in the returned profile.
+        class ParseResumeOptions; end
 
         # Parse resume response.
         # @!attribute [rw] profile

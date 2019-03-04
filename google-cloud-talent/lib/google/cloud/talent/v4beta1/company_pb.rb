@@ -21,15 +21,9 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     repeated :keyword_searchable_job_custom_attributes, :string, 11
     optional :derived_info, :message, 12, "google.cloud.talent.v4beta1.Company.DerivedInfo"
     optional :suspended, :bool, 13
-    optional :learning_type, :enum, 14, "google.cloud.talent.v4beta1.Company.DataLearningType"
   end
   add_message "google.cloud.talent.v4beta1.Company.DerivedInfo" do
     optional :headquarters_location, :message, 1, "google.cloud.talent.v4beta1.Location"
-  end
-  add_enum "google.cloud.talent.v4beta1.Company.DataLearningType" do
-    value :DATA_LEARNING_TYPE_UNSPECIFIED, 0
-    value :AGGREGATED, 1
-    value :ISOLATED, 2
   end
 end
 
@@ -39,7 +33,6 @@ module Google
       module V4beta1
         Company = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4beta1.Company").msgclass
         Company::DerivedInfo = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4beta1.Company.DerivedInfo").msgclass
-        Company::DataLearningType = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4beta1.Company.DataLearningType").enummodule
       end
     end
   end

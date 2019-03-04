@@ -11,4 +11,3 @@ jsondoc/*
 # IDE settings
 .idea
 *.iml
-.autotest

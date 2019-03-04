@@ -10,7 +10,6 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.cloud.talent.v4beta1.ClientEvent" do
     optional :request_id, :string, 1
     optional :event_id, :string, 2
-    optional :parent_event_id, :string, 3
     optional :create_time, :message, 4, "google.protobuf.Timestamp"
     map :extra_info, :string, :string, 7
     oneof :event do

@@ -20,16 +20,16 @@ module Google
     # is relative to the Proleptic Gregorian Calendar. The day may be 0 to
     # represent a year and month where the day is not significant, e.g. credit card
     # expiration date. The year may be 0 to represent a month and day independent
-    # of year, e.g. anniversary date. Related types are {Google::Type::TimeOfDay}
-    # and `google.protobuf.Timestamp`.
+    # of year, e.g. anniversary date. Related types are
+    # {Google::Type::TimeOfDay} and
+    # `google.protobuf.Timestamp`.
     # @!attribute [rw] year
     #   @return [Integer]
     #     Year of date. Must be from 1 to 9999, or 0 if specifying a date without
     #     a year.
     # @!attribute [rw] month
     #   @return [Integer]
-    #     Month of year. Must be from 1 to 12, or 0 if specifying a date without a
-    #     month.
+    #     Month of year. Must be from 1 to 12.
     # @!attribute [rw] day
     #   @return [Integer]
     #     Day of month. Must be from 1 to 31 and valid for the year and month, or 0

@@ -28,9 +28,8 @@ gapic = gcp.GAPICGenerator()
 
 v4beta1 = gapic.ruby_library(
     'talent', 'v4beta1',
-    artman_output_name='google-cloud-ruby/google-cloud-jobs',
-    private=True,
-    config_path='artman_jobs_v4beta1.yaml'
+    artman_output_name='google-cloud-ruby/google-cloud-talent',
+    config_path='artman_talent_v4beta1.yaml'
 )
 s.copy(v4beta1 / 'acceptance')
 s.copy(v4beta1 / 'lib')
@@ -78,7 +77,7 @@ s.replace(
     'gem.add_development_dependency "rubocop", "~> 0.64.0"'
 )
 
-services = ['Company', 'Job', 'Profile']
+services = ['Company', 'Job', 'Profile', 'Tenant']
 # https://github.com/googleapis/gapic-generator/issues/2492
 for service in services:
     s.replace(

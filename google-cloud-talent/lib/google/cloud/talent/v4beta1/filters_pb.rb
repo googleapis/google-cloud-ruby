@@ -74,7 +74,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     value :ANNUALIZED_TOTAL_AMOUNT, 4
   end
   add_message "google.cloud.talent.v4beta1.CommuteFilter" do
-    optional :commute_method, :enum, 1, "google.cloud.talent.v4beta1.CommuteFilter.CommuteMethod"
+    optional :commute_method, :enum, 1, "google.cloud.talent.v4beta1.CommuteMethod"
     optional :start_coordinates, :message, 2, "google.type.LatLng"
     optional :travel_duration, :message, 3, "google.protobuf.Duration"
     optional :allow_imprecise_addresses, :bool, 4
@@ -82,14 +82,6 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :road_traffic, :enum, 5, "google.cloud.talent.v4beta1.CommuteFilter.RoadTraffic"
       optional :departure_time, :message, 6, "google.type.TimeOfDay"
     end
-  end
-  add_enum "google.cloud.talent.v4beta1.CommuteFilter.CommuteMethod" do
-    value :COMMUTE_METHOD_UNSPECIFIED, 0
-    value :DRIVING, 1
-    value :TRANSIT, 2
-    value :WALKING, 3
-    value :BICYCLING, 4
-    value :TRANSIT_ACCESSIBLE, 5
   end
   add_enum "google.cloud.talent.v4beta1.CommuteFilter.RoadTraffic" do
     value :ROAD_TRAFFIC_UNSPECIFIED, 0
@@ -170,7 +162,6 @@ module Google
         CompensationFilter = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4beta1.CompensationFilter").msgclass
         CompensationFilter::FilterType = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4beta1.CompensationFilter.FilterType").enummodule
         CommuteFilter = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4beta1.CommuteFilter").msgclass
-        CommuteFilter::CommuteMethod = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4beta1.CommuteFilter.CommuteMethod").enummodule
         CommuteFilter::RoadTraffic = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4beta1.CommuteFilter.RoadTraffic").enummodule
         JobTitleFilter = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4beta1.JobTitleFilter").msgclass
         SkillFilter = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4beta1.SkillFilter").msgclass

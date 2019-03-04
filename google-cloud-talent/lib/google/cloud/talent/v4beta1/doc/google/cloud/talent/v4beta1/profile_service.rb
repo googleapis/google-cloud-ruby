@@ -22,18 +22,19 @@ module Google
         #   @return [String]
         #     Required.
         #
-        #     The resource name of the company under which the job is created.
+        #     The resource name of the tenant under which the job is created.
         #
-        #     The format is "projects/{project_id}/companies/{company_id}", for example,
-        #     "projects/api-test-project/companies/foo".
+        #     The format is "projects/{project_id}/tenants/{tenant_id}", for example,
+        #     "projects/api-test-project/tenants/foo".
         # @!attribute [rw] page_token
         #   @return [String]
         #     Optional.
         #
         #     The token that specifies the current offset (that is, starting result).
         #
-        #     Please set the value to {Google::Cloud::Talent::V4beta1::ListProfilesResponse#next_page_token ListProfilesResponse#next_page_token} to
-        #     continue the list.
+        #     Please set the value to
+        #     {Google::Cloud::Talent::V4beta1::ListProfilesResponse#next_page_token ListProfilesResponse#next_page_token}
+        #     to continue the list.
         # @!attribute [rw] page_size
         #   @return [Integer]
         #     Optional.
@@ -56,7 +57,7 @@ module Google
         # The List profiles response object.
         # @!attribute [rw] profiles
         #   @return [Array<Google::Cloud::Talent::V4beta1::Profile>]
-        #     Profiles for the specific company.
+        #     Profiles for the specific tenant.
         # @!attribute [rw] next_page_token
         #   @return [String]
         #     A token to retrieve the next page of results. This is empty if there are no
@@ -68,10 +69,10 @@ module Google
         #   @return [String]
         #     Required.
         #
-        #     The name of the company this profile belongs to.
+        #     The name of the tenant this profile belongs to.
         #
-        #     The format is "projects/{project_id}/companies/{company_id}", for example,
-        #     "projects/api-test-project/companies/foo".
+        #     The format is "projects/{project_id}/tenants/{tenant_id}", for example,
+        #     "projects/api-test-project/tenants/foo".
         # @!attribute [rw] profile
         #   @return [Google::Cloud::Talent::V4beta1::Profile]
         #     Required.
@@ -87,8 +88,8 @@ module Google
         #     Resource name of the profile to get.
         #
         #     The format is
-        #     "projects/{project_id}/companies/{company_id}/profiles/{profile_id}",
-        #     for example, "projects/api-test-project/companies/foo/profiles/bar".
+        #     "projects/{project_id}/tenants/{tenant_id}/profiles/{profile_id}",
+        #     for example, "projects/api-test-project/tenants/foo/profiles/bar".
         class GetProfileRequest; end
 
         # Update profile request
@@ -140,8 +141,8 @@ module Google
         #     Resource name of the profile to be deleted.
         #
         #     The format is
-        #     "projects/{project_id}/companies/{company_id}/profiles/{profile_id}",
-        #     for example, "projects/api-test-project/companies/foo/profiles/bar".
+        #     "projects/{project_id}/tenants/{tenant_id}/profiles/{profile_id}",
+        #     for example, "projects/api-test-project/tenants/foo/profiles/bar".
         class DeleteProfileRequest; end
 
         # The request body of the `SearchProfiles` call.
@@ -149,10 +150,10 @@ module Google
         #   @return [String]
         #     Required.
         #
-        #     The resource name of the company to search within.
+        #     The resource name of the tenant to search within.
         #
-        #     The format is "projects/{project_id}/companies/{company_id}", for example,
-        #     "projects/api-test-project/companies/foo".
+        #     The format is "projects/{project_id}/tenants/{tenant_id}", for example,
+        #     "projects/api-test-project/tenants/foo".
         # @!attribute [rw] request_metadata
         #   @return [Google::Cloud::Talent::V4beta1::RequestMetadata]
         #     Required.
@@ -164,7 +165,8 @@ module Google
         #   @return [Google::Cloud::Talent::V4beta1::ProfileQuery]
         #     Optional.
         #
-        #     Search query to execute. See {Google::Cloud::Talent::V4beta1::ProfileQuery ProfileQuery} for more details.
+        #     Search query to execute. See
+        #     {Google::Cloud::Talent::V4beta1::ProfileQuery ProfileQuery} for more details.
         # @!attribute [rw] page_size
         #   @return [Integer]
         #     Optional.
@@ -180,16 +182,18 @@ module Google
         #     The pageToken, similar to offset enables users of the API to paginate
         #     through the search results. To retrieve the first page of results, set the
         #     pageToken to empty. The search response includes a
-        #     {Google::Cloud::Talent::V4beta1::SearchProfilesResponse#next_page_token nextPageToken} field that can be
-        #     used to populate the pageToken field for the next page of results. Using
-        #     pageToken instead of offset increases the performance of the API,
-        #     especially compared to larger offset values.
+        #     {Google::Cloud::Talent::V4beta1::SearchProfilesResponse#next_page_token nextPageToken}
+        #     field that can be used to populate the pageToken field for the next page of
+        #     results. Using pageToken instead of offset increases the performance of the
+        #     API, especially compared to larger offset values.
         # @!attribute [rw] offset
         #   @return [Integer]
         #     Optional.
         #
         #     An integer that specifies the current offset (that is, starting result) in
-        #     search results. This field is only considered if {Google::Cloud::Talent::V4beta1::SearchProfilesRequest#page_token page_token} is unset.
+        #     search results. This field is only considered if
+        #     {Google::Cloud::Talent::V4beta1::SearchProfilesRequest#page_token page_token}
+        #     is unset.
         #
         #     The maximum allowed value is 5000. Otherwise an error is thrown.
         #
@@ -239,7 +243,8 @@ module Google
         #     Optional.
         #
         #     A list of expressions specifies histogram requests against matching
-        #     profiles for {Google::Cloud::Talent::V4beta1::SearchProfilesRequest SearchProfilesRequest}.
+        #     profiles for
+        #     {Google::Cloud::Talent::V4beta1::SearchProfilesRequest SearchProfilesRequest}.
         #
         #     The expression syntax looks like a function definition with optional
         #     parameters.
@@ -292,19 +297,29 @@ module Google
         #     * experience_in_months: experience in months. 0 means 0 month to 1 month
         #       (exclusive).
         #     * application_date: The application date specifies application start dates.
-        #       See {Google::Cloud::Talent::V4beta1::ApplicationDateFilter ApplicationDateFilter} for more details.
+        #       See
+        #       {Google::Cloud::Talent::V4beta1::ApplicationDateFilter ApplicationDateFilter}
+        #       for more details.
         #     * application_outcome_reason: The application outcome reason specifies the
         #       outcome reasons of job application.
-        #       See {Google::Cloud::Talent::V4beta1::ApplicationOutcomeReasonFilter ApplicationOutcomeReasonFilter} for more details.
+        #       See
+        #       {Google::Cloud::Talent::V4beta1::ApplicationOutcomeReasonFilter ApplicationOutcomeReasonFilter}
+        #       for more details.
         #     * application_last_stage: The application last stage specifies the last
         #       stage of job application.
-        #       See {Google::Cloud::Talent::V4beta1::ApplicationLastStageFilter ApplicationLastStageFilter} for more details.
+        #       See
+        #       {Google::Cloud::Talent::V4beta1::ApplicationLastStageFilter ApplicationLastStageFilter}
+        #       for more details.
         #     * application_job_title: The application job title specifies the job
         #       applied for in the application.
-        #       See {Google::Cloud::Talent::V4beta1::ApplicationJobFilter ApplicationJobFilter} for more details.
+        #       See
+        #       {Google::Cloud::Talent::V4beta1::ApplicationJobFilter ApplicationJobFilter}
+        #       for more details.
         #     * application_status: The application status specifies the status of job
         #       application.
-        #       See {Google::Cloud::Talent::V4beta1::ApplicationStatusFilter ApplicationStatusFilter} for more details.
+        #       See
+        #       {Google::Cloud::Talent::V4beta1::ApplicationStatusFilter ApplicationStatusFilter}
+        #       for more details.
         #     * hirable_status: Hirable status specifies the profile's hirable status.
         #     * string_custom_attribute: String custom attributes. Values can be accessed
         #       via square bracket notation like string_custom_attribute["key1"].
@@ -344,12 +359,14 @@ module Google
         #     {Google::Cloud::Talent::V4beta1::SearchProfilesRequest#histogram_queries SearchProfilesRequest#histogram_queries}.
         # @!attribute [rw] summarized_profiles
         #   @return [Array<Google::Cloud::Talent::V4beta1::SummarizedProfile>]
-        #     The profile entities that match the specified {Google::Cloud::Talent::V4beta1::SearchProfilesRequest SearchProfilesRequest}.
+        #     The profile entities that match the specified
+        #     {Google::Cloud::Talent::V4beta1::SearchProfilesRequest SearchProfilesRequest}.
         class SearchProfilesResponse; end
 
         # Output only.
         #
-        # Profile entry with metadata inside {Google::Cloud::Talent::V4beta1::SearchProfilesResponse SearchProfilesResponse}.
+        # Profile entry with metadata inside
+        # {Google::Cloud::Talent::V4beta1::SearchProfilesResponse SearchProfilesResponse}.
         # @!attribute [rw] profiles
         #   @return [Array<Google::Cloud::Talent::V4beta1::Profile>]
         #     A list of profiles that are linked by {Profile#cluster_id}.

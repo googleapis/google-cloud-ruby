@@ -78,12 +78,7 @@ describe Google::Cloud::Talent::V4beta1::EventServiceClient do
       # Create expected grpc response
       request_id = "requestId37109963"
       event_id = "eventId278118624"
-      parent_event_id = "parentEventId-436467499"
-      expected_response = {
-        request_id: request_id,
-        event_id: event_id,
-        parent_event_id: parent_event_id
-      }
+      expected_response = { request_id: request_id, event_id: event_id }
       expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Talent::V4beta1::ClientEvent)
 
       # Mock Grpc layer

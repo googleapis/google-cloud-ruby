@@ -12,7 +12,7 @@ steps:
 
 1. [Select or create a Cloud Platform project.](https://console.cloud.google.com/project)
 2. [Enable billing for your project.](https://cloud.google.com/billing/docs/how-to/modify-project#enable_billing_for_a_project)
-3. [Enable the Cloud Talent Solution API.](https://console.cloud.google.com/apis/library/jobs.googleapis.com)
+3. [Enable the Cloud Talent Solution API.](https://console.cloud.google.com/apis/library/talent.googleapis.com)
 4. [Setup Authentication.](https://googleapis.github.io/google-cloud-ruby/#/docs/google-cloud/master/guides/authentication)
 
 ### Installation
@@ -29,7 +29,7 @@ $ gem install google-cloud-talent
   to see the full list of Cloud APIs that we cover.
 
 [Client Library Documentation]: https://googleapis.github.io/google-cloud-ruby/#/docs/google-cloud-talent/latest/google/cloud/talent/v4beta1
-[Product Documentation]: https://cloud.google.com/jobs
+[Product Documentation]: https://cloud.google.com/talent
 
 ## Enabling Logging
 
