@@ -780,16 +780,25 @@ the BCP-47 language code, such as &quot;en-US&quot; or &quot;sr-Latn&quot;.
 For more information, see
 <a href="https://tools.ietf.org/html/bcp47">Tags for Identifying Languages</a>.</p>
 
-<p>For <span class='object_link'><a href="CompleteQueryRequest/CompletionType.html#JOB_TITLE-constant" title="Google::Cloud::Talent::V4beta1::CompleteQueryRequest::CompletionType::JOB_TITLE (constant)">CompletionType::JOB_TITLE</a></span> type, only open jobs with the same
-<span class='object_link'><a href="CompleteQueryRequest.html#language_codes-instance_method" title="Google::Cloud::Talent::V4beta1::CompleteQueryRequest#language_codes (method)">language_codes</a></span> are returned.</p>
+<p>For
+<span class='object_link'><a href="CompleteQueryRequest/CompletionType.html#JOB_TITLE-constant" title="Google::Cloud::Talent::V4beta1::CompleteQueryRequest::CompletionType::JOB_TITLE (constant)">CompletionType::JOB_TITLE</a></span>
+type, only open jobs with the same
+<span class='object_link'><a href="CompleteQueryRequest.html#language_codes-instance_method" title="Google::Cloud::Talent::V4beta1::CompleteQueryRequest#language_codes (method)">language_codes</a></span>
+are returned.</p>
 
-<p>For <span class='object_link'><a href="CompleteQueryRequest/CompletionType.html#COMPANY_NAME-constant" title="Google::Cloud::Talent::V4beta1::CompleteQueryRequest::CompletionType::COMPANY_NAME (constant)">CompletionType::COMPANY_NAME</a></span> type,
-only companies having open jobs with the same <span class='object_link'><a href="CompleteQueryRequest.html#language_codes-instance_method" title="Google::Cloud::Talent::V4beta1::CompleteQueryRequest#language_codes (method)">language_codes</a></span> are
-returned.</p>
+<p>For
+<span class='object_link'><a href="CompleteQueryRequest/CompletionType.html#COMPANY_NAME-constant" title="Google::Cloud::Talent::V4beta1::CompleteQueryRequest::CompletionType::COMPANY_NAME (constant)">CompletionType::COMPANY_NAME</a></span>
+type, only companies having open jobs with the same
+<span class='object_link'><a href="CompleteQueryRequest.html#language_codes-instance_method" title="Google::Cloud::Talent::V4beta1::CompleteQueryRequest#language_codes (method)">language_codes</a></span>
+are returned.</p>
 
-<p>For <span class='object_link'><a href="CompleteQueryRequest/CompletionType.html#COMBINED-constant" title="Google::Cloud::Talent::V4beta1::CompleteQueryRequest::CompletionType::COMBINED (constant)">CompletionType::COMBINED</a></span> type, only open jobs with the same
-<span class='object_link'><a href="CompleteQueryRequest.html#language_codes-instance_method" title="Google::Cloud::Talent::V4beta1::CompleteQueryRequest#language_codes (method)">language_codes</a></span> or companies having open jobs with the same
-<span class='object_link'><a href="CompleteQueryRequest.html#language_codes-instance_method" title="Google::Cloud::Talent::V4beta1::CompleteQueryRequest#language_codes (method)">language_codes</a></span> are returned.</p>
+<p>For
+<span class='object_link'><a href="CompleteQueryRequest/CompletionType.html#COMBINED-constant" title="Google::Cloud::Talent::V4beta1::CompleteQueryRequest::CompletionType::COMBINED (constant)">CompletionType::COMBINED</a></span>
+type, only open jobs with the same
+<span class='object_link'><a href="CompleteQueryRequest.html#language_codes-instance_method" title="Google::Cloud::Talent::V4beta1::CompleteQueryRequest#language_codes (method)">language_codes</a></span>
+or companies having open jobs with the same
+<span class='object_link'><a href="CompleteQueryRequest.html#language_codes-instance_method" title="Google::Cloud::Talent::V4beta1::CompleteQueryRequest#language_codes (method)">language_codes</a></span>
+are returned.</p>
 
 <p>The maximum number of allowed characters is 255.</p>
 </div>
@@ -828,7 +837,8 @@ returned.</p>
         &mdash;
         <div class='inline'><p>Optional.</p>
 
-<p>The scope of the completion. The defaults is <span class='object_link'><a href="CompleteQueryRequest/CompletionScope.html#PUBLIC-constant" title="Google::Cloud::Talent::V4beta1::CompleteQueryRequest::CompletionScope::PUBLIC (constant)">CompletionScope::PUBLIC</a></span>.</p>
+<p>The scope of the completion. The defaults is
+<span class='object_link'><a href="CompleteQueryRequest/CompletionScope.html#PUBLIC-constant" title="Google::Cloud::Talent::V4beta1::CompleteQueryRequest::CompletionScope::PUBLIC (constant)">CompletionScope::PUBLIC</a></span>.</p>
 </div>
       
     </li>
@@ -845,7 +855,8 @@ returned.</p>
         &mdash;
         <div class='inline'><p>Optional.</p>
 
-<p>The completion topic. The default is <span class='object_link'><a href="CompleteQueryRequest/CompletionType.html#COMBINED-constant" title="Google::Cloud::Talent::V4beta1::CompleteQueryRequest::CompletionType::COMBINED (constant)">CompletionType::COMBINED</a></span>.</p>
+<p>The completion topic. The default is
+<span class='object_link'><a href="CompleteQueryRequest/CompletionType.html#COMBINED-constant" title="Google::Cloud::Talent::V4beta1::CompleteQueryRequest::CompletionType::COMBINED (constant)">CompletionType::COMBINED</a></span>.</p>
 </div>
       
     </li>
@@ -948,17 +959,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-266
-267
-268
-269
-270
-271
-272
-273
-274
-275
-276
 277
 278
 279
@@ -969,10 +969,21 @@ retries, etc.</p>
 284
 285
 286
-287</pre>
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/completion_client.rb', line 266</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/completion_client.rb', line 277</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_complete_query'>complete_query</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>

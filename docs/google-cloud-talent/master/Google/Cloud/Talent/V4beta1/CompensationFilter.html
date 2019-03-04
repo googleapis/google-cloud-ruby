@@ -277,18 +277,6 @@ js:
       <pre class="lines">
 
 
-453
-454
-455
-456
-457
-458
-459
-460
-461
-462
-463
-464
 465
 466
 467
@@ -311,10 +299,32 @@ js:
 484
 485
 486
-487</pre>
+487
+488
+489
+490
+491
+492
+493
+494
+495
+496
+497
+498
+499
+500
+501
+502
+503
+504
+505
+506
+507
+508
+509</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/filters.rb', line 453</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/filters.rb', line 465</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::CompensationFilter (class)">CompensationFilter</a></span></span>
   <span class='comment'># Specify the type of filtering.
@@ -324,11 +334,14 @@ js:
 
     <span class='comment'># Filter by `base compensation entry&#39;s` unit. A job is a match if and
 </span>    <span class='comment'># only if the job contains a base CompensationEntry and the base
-</span>    <span class='comment'># CompensationEntry&#39;s unit matches provided {Google::Cloud::Talent::V4beta1::CompensationFilter#units units}.
-</span>    <span class='comment'># Populate one or more {Google::Cloud::Talent::V4beta1::CompensationFilter#units units}.
+</span>    <span class='comment'># CompensationEntry&#39;s unit matches provided
+</span>    <span class='comment'># {Google::Cloud::Talent::V4beta1::CompensationFilter#units units}. Populate
+</span>    <span class='comment'># one or more
+</span>    <span class='comment'># {Google::Cloud::Talent::V4beta1::CompensationFilter#units units}.
 </span>    <span class='comment'>#
-</span>    <span class='comment'># See {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry CompensationInfo::CompensationEntry} for definition of
-</span>    <span class='comment'># base compensation entry.
+</span>    <span class='comment'># See
+</span>    <span class='comment'># {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry CompensationInfo::CompensationEntry}
+</span>    <span class='comment'># for definition of base compensation entry.
 </span>    <span class='const'>UNIT_ONLY</span> <span class='op'>=</span> <span class='int'>1</span>
 
     <span class='comment'># Filter by `base compensation entry&#39;s` unit and amount / range. A job
@@ -336,18 +349,25 @@ js:
 </span>    <span class='comment'># the base entry&#39;s unit matches provided {Compensation_units} and amount
 </span>    <span class='comment'># or range overlaps with provided {Compensation_range}.
 </span>    <span class='comment'>#
-</span>    <span class='comment'># See {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry CompensationInfo::CompensationEntry} for definition of
-</span>    <span class='comment'># base compensation entry.
+</span>    <span class='comment'># See
+</span>    <span class='comment'># {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry CompensationInfo::CompensationEntry}
+</span>    <span class='comment'># for definition of base compensation entry.
 </span>    <span class='comment'>#
-</span>    <span class='comment'># Set exactly one {Google::Cloud::Talent::V4beta1::CompensationFilter#units units} and populate {Google::Cloud::Talent::V4beta1::CompensationFilter#range range}.
+</span>    <span class='comment'># Set exactly one
+</span>    <span class='comment'># {Google::Cloud::Talent::V4beta1::CompensationFilter#units units} and
+</span>    <span class='comment'># populate {Google::Cloud::Talent::V4beta1::CompensationFilter#range range}.
 </span>    <span class='const'>UNIT_AND_AMOUNT</span> <span class='op'>=</span> <span class='int'>2</span>
 
     <span class='comment'># Filter by annualized base compensation amount and `base compensation
-</span>    <span class='comment'># entry&#39;s` unit. Populate {Google::Cloud::Talent::V4beta1::CompensationFilter#range range} and zero or more {Google::Cloud::Talent::V4beta1::CompensationFilter#units units}.
+</span>    <span class='comment'># entry&#39;s` unit. Populate
+</span>    <span class='comment'># {Google::Cloud::Talent::V4beta1::CompensationFilter#range range} and zero or
+</span>    <span class='comment'># more {Google::Cloud::Talent::V4beta1::CompensationFilter#units units}.
 </span>    <span class='const'>ANNUALIZED_BASE_AMOUNT</span> <span class='op'>=</span> <span class='int'>3</span>
 
     <span class='comment'># Filter by annualized total compensation amount and `base compensation
-</span>    <span class='comment'># entry&#39;s` unit . Populate {Google::Cloud::Talent::V4beta1::CompensationFilter#range range} and zero or more {Google::Cloud::Talent::V4beta1::CompensationFilter#units units}.
+</span>    <span class='comment'># entry&#39;s` unit . Populate
+</span>    <span class='comment'># {Google::Cloud::Talent::V4beta1::CompensationFilter#range range} and zero or
+</span>    <span class='comment'># more {Google::Cloud::Talent::V4beta1::CompensationFilter#units units}.
 </span>    <span class='const'>ANNUALIZED_TOTAL_AMOUNT</span> <span class='op'>=</span> <span class='int'>4</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
@@ -404,18 +424,6 @@ js:
       <pre class="lines">
 
 
-453
-454
-455
-456
-457
-458
-459
-460
-461
-462
-463
-464
 465
 466
 467
@@ -438,10 +446,32 @@ js:
 484
 485
 486
-487</pre>
+487
+488
+489
+490
+491
+492
+493
+494
+495
+496
+497
+498
+499
+500
+501
+502
+503
+504
+505
+506
+507
+508
+509</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/filters.rb', line 453</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/filters.rb', line 465</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::CompensationFilter (class)">CompensationFilter</a></span></span>
   <span class='comment'># Specify the type of filtering.
@@ -451,11 +481,14 @@ js:
 
     <span class='comment'># Filter by `base compensation entry&#39;s` unit. A job is a match if and
 </span>    <span class='comment'># only if the job contains a base CompensationEntry and the base
-</span>    <span class='comment'># CompensationEntry&#39;s unit matches provided {Google::Cloud::Talent::V4beta1::CompensationFilter#units units}.
-</span>    <span class='comment'># Populate one or more {Google::Cloud::Talent::V4beta1::CompensationFilter#units units}.
+</span>    <span class='comment'># CompensationEntry&#39;s unit matches provided
+</span>    <span class='comment'># {Google::Cloud::Talent::V4beta1::CompensationFilter#units units}. Populate
+</span>    <span class='comment'># one or more
+</span>    <span class='comment'># {Google::Cloud::Talent::V4beta1::CompensationFilter#units units}.
 </span>    <span class='comment'>#
-</span>    <span class='comment'># See {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry CompensationInfo::CompensationEntry} for definition of
-</span>    <span class='comment'># base compensation entry.
+</span>    <span class='comment'># See
+</span>    <span class='comment'># {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry CompensationInfo::CompensationEntry}
+</span>    <span class='comment'># for definition of base compensation entry.
 </span>    <span class='const'>UNIT_ONLY</span> <span class='op'>=</span> <span class='int'>1</span>
 
     <span class='comment'># Filter by `base compensation entry&#39;s` unit and amount / range. A job
@@ -463,18 +496,25 @@ js:
 </span>    <span class='comment'># the base entry&#39;s unit matches provided {Compensation_units} and amount
 </span>    <span class='comment'># or range overlaps with provided {Compensation_range}.
 </span>    <span class='comment'>#
-</span>    <span class='comment'># See {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry CompensationInfo::CompensationEntry} for definition of
-</span>    <span class='comment'># base compensation entry.
+</span>    <span class='comment'># See
+</span>    <span class='comment'># {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry CompensationInfo::CompensationEntry}
+</span>    <span class='comment'># for definition of base compensation entry.
 </span>    <span class='comment'>#
-</span>    <span class='comment'># Set exactly one {Google::Cloud::Talent::V4beta1::CompensationFilter#units units} and populate {Google::Cloud::Talent::V4beta1::CompensationFilter#range range}.
+</span>    <span class='comment'># Set exactly one
+</span>    <span class='comment'># {Google::Cloud::Talent::V4beta1::CompensationFilter#units units} and
+</span>    <span class='comment'># populate {Google::Cloud::Talent::V4beta1::CompensationFilter#range range}.
 </span>    <span class='const'>UNIT_AND_AMOUNT</span> <span class='op'>=</span> <span class='int'>2</span>
 
     <span class='comment'># Filter by annualized base compensation amount and `base compensation
-</span>    <span class='comment'># entry&#39;s` unit. Populate {Google::Cloud::Talent::V4beta1::CompensationFilter#range range} and zero or more {Google::Cloud::Talent::V4beta1::CompensationFilter#units units}.
+</span>    <span class='comment'># entry&#39;s` unit. Populate
+</span>    <span class='comment'># {Google::Cloud::Talent::V4beta1::CompensationFilter#range range} and zero or
+</span>    <span class='comment'># more {Google::Cloud::Talent::V4beta1::CompensationFilter#units units}.
 </span>    <span class='const'>ANNUALIZED_BASE_AMOUNT</span> <span class='op'>=</span> <span class='int'>3</span>
 
     <span class='comment'># Filter by annualized total compensation amount and `base compensation
-</span>    <span class='comment'># entry&#39;s` unit . Populate {Google::Cloud::Talent::V4beta1::CompensationFilter#range range} and zero or more {Google::Cloud::Talent::V4beta1::CompensationFilter#units units}.
+</span>    <span class='comment'># entry&#39;s` unit . Populate
+</span>    <span class='comment'># {Google::Cloud::Talent::V4beta1::CompensationFilter#range range} and zero or
+</span>    <span class='comment'># more {Google::Cloud::Talent::V4beta1::CompensationFilter#units units}.
 </span>    <span class='const'>ANNUALIZED_TOTAL_AMOUNT</span> <span class='op'>=</span> <span class='int'>4</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
@@ -531,18 +571,6 @@ js:
       <pre class="lines">
 
 
-453
-454
-455
-456
-457
-458
-459
-460
-461
-462
-463
-464
 465
 466
 467
@@ -565,10 +593,32 @@ js:
 484
 485
 486
-487</pre>
+487
+488
+489
+490
+491
+492
+493
+494
+495
+496
+497
+498
+499
+500
+501
+502
+503
+504
+505
+506
+507
+508
+509</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/filters.rb', line 453</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/filters.rb', line 465</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::CompensationFilter (class)">CompensationFilter</a></span></span>
   <span class='comment'># Specify the type of filtering.
@@ -578,11 +628,14 @@ js:
 
     <span class='comment'># Filter by `base compensation entry&#39;s` unit. A job is a match if and
 </span>    <span class='comment'># only if the job contains a base CompensationEntry and the base
-</span>    <span class='comment'># CompensationEntry&#39;s unit matches provided {Google::Cloud::Talent::V4beta1::CompensationFilter#units units}.
-</span>    <span class='comment'># Populate one or more {Google::Cloud::Talent::V4beta1::CompensationFilter#units units}.
+</span>    <span class='comment'># CompensationEntry&#39;s unit matches provided
+</span>    <span class='comment'># {Google::Cloud::Talent::V4beta1::CompensationFilter#units units}. Populate
+</span>    <span class='comment'># one or more
+</span>    <span class='comment'># {Google::Cloud::Talent::V4beta1::CompensationFilter#units units}.
 </span>    <span class='comment'>#
-</span>    <span class='comment'># See {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry CompensationInfo::CompensationEntry} for definition of
-</span>    <span class='comment'># base compensation entry.
+</span>    <span class='comment'># See
+</span>    <span class='comment'># {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry CompensationInfo::CompensationEntry}
+</span>    <span class='comment'># for definition of base compensation entry.
 </span>    <span class='const'>UNIT_ONLY</span> <span class='op'>=</span> <span class='int'>1</span>
 
     <span class='comment'># Filter by `base compensation entry&#39;s` unit and amount / range. A job
@@ -590,18 +643,25 @@ js:
 </span>    <span class='comment'># the base entry&#39;s unit matches provided {Compensation_units} and amount
 </span>    <span class='comment'># or range overlaps with provided {Compensation_range}.
 </span>    <span class='comment'>#
-</span>    <span class='comment'># See {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry CompensationInfo::CompensationEntry} for definition of
-</span>    <span class='comment'># base compensation entry.
+</span>    <span class='comment'># See
+</span>    <span class='comment'># {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry CompensationInfo::CompensationEntry}
+</span>    <span class='comment'># for definition of base compensation entry.
 </span>    <span class='comment'>#
-</span>    <span class='comment'># Set exactly one {Google::Cloud::Talent::V4beta1::CompensationFilter#units units} and populate {Google::Cloud::Talent::V4beta1::CompensationFilter#range range}.
+</span>    <span class='comment'># Set exactly one
+</span>    <span class='comment'># {Google::Cloud::Talent::V4beta1::CompensationFilter#units units} and
+</span>    <span class='comment'># populate {Google::Cloud::Talent::V4beta1::CompensationFilter#range range}.
 </span>    <span class='const'>UNIT_AND_AMOUNT</span> <span class='op'>=</span> <span class='int'>2</span>
 
     <span class='comment'># Filter by annualized base compensation amount and `base compensation
-</span>    <span class='comment'># entry&#39;s` unit. Populate {Google::Cloud::Talent::V4beta1::CompensationFilter#range range} and zero or more {Google::Cloud::Talent::V4beta1::CompensationFilter#units units}.
+</span>    <span class='comment'># entry&#39;s` unit. Populate
+</span>    <span class='comment'># {Google::Cloud::Talent::V4beta1::CompensationFilter#range range} and zero or
+</span>    <span class='comment'># more {Google::Cloud::Talent::V4beta1::CompensationFilter#units units}.
 </span>    <span class='const'>ANNUALIZED_BASE_AMOUNT</span> <span class='op'>=</span> <span class='int'>3</span>
 
     <span class='comment'># Filter by annualized total compensation amount and `base compensation
-</span>    <span class='comment'># entry&#39;s` unit . Populate {Google::Cloud::Talent::V4beta1::CompensationFilter#range range} and zero or more {Google::Cloud::Talent::V4beta1::CompensationFilter#units units}.
+</span>    <span class='comment'># entry&#39;s` unit . Populate
+</span>    <span class='comment'># {Google::Cloud::Talent::V4beta1::CompensationFilter#range range} and zero or
+</span>    <span class='comment'># more {Google::Cloud::Talent::V4beta1::CompensationFilter#units units}.
 </span>    <span class='const'>ANNUALIZED_TOTAL_AMOUNT</span> <span class='op'>=</span> <span class='int'>4</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
@@ -660,18 +720,6 @@ js:
       <pre class="lines">
 
 
-453
-454
-455
-456
-457
-458
-459
-460
-461
-462
-463
-464
 465
 466
 467
@@ -694,10 +742,32 @@ js:
 484
 485
 486
-487</pre>
+487
+488
+489
+490
+491
+492
+493
+494
+495
+496
+497
+498
+499
+500
+501
+502
+503
+504
+505
+506
+507
+508
+509</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/filters.rb', line 453</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/filters.rb', line 465</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::CompensationFilter (class)">CompensationFilter</a></span></span>
   <span class='comment'># Specify the type of filtering.
@@ -707,11 +777,14 @@ js:
 
     <span class='comment'># Filter by `base compensation entry&#39;s` unit. A job is a match if and
 </span>    <span class='comment'># only if the job contains a base CompensationEntry and the base
-</span>    <span class='comment'># CompensationEntry&#39;s unit matches provided {Google::Cloud::Talent::V4beta1::CompensationFilter#units units}.
-</span>    <span class='comment'># Populate one or more {Google::Cloud::Talent::V4beta1::CompensationFilter#units units}.
+</span>    <span class='comment'># CompensationEntry&#39;s unit matches provided
+</span>    <span class='comment'># {Google::Cloud::Talent::V4beta1::CompensationFilter#units units}. Populate
+</span>    <span class='comment'># one or more
+</span>    <span class='comment'># {Google::Cloud::Talent::V4beta1::CompensationFilter#units units}.
 </span>    <span class='comment'>#
-</span>    <span class='comment'># See {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry CompensationInfo::CompensationEntry} for definition of
-</span>    <span class='comment'># base compensation entry.
+</span>    <span class='comment'># See
+</span>    <span class='comment'># {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry CompensationInfo::CompensationEntry}
+</span>    <span class='comment'># for definition of base compensation entry.
 </span>    <span class='const'>UNIT_ONLY</span> <span class='op'>=</span> <span class='int'>1</span>
 
     <span class='comment'># Filter by `base compensation entry&#39;s` unit and amount / range. A job
@@ -719,18 +792,25 @@ js:
 </span>    <span class='comment'># the base entry&#39;s unit matches provided {Compensation_units} and amount
 </span>    <span class='comment'># or range overlaps with provided {Compensation_range}.
 </span>    <span class='comment'>#
-</span>    <span class='comment'># See {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry CompensationInfo::CompensationEntry} for definition of
-</span>    <span class='comment'># base compensation entry.
+</span>    <span class='comment'># See
+</span>    <span class='comment'># {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry CompensationInfo::CompensationEntry}
+</span>    <span class='comment'># for definition of base compensation entry.
 </span>    <span class='comment'>#
-</span>    <span class='comment'># Set exactly one {Google::Cloud::Talent::V4beta1::CompensationFilter#units units} and populate {Google::Cloud::Talent::V4beta1::CompensationFilter#range range}.
+</span>    <span class='comment'># Set exactly one
+</span>    <span class='comment'># {Google::Cloud::Talent::V4beta1::CompensationFilter#units units} and
+</span>    <span class='comment'># populate {Google::Cloud::Talent::V4beta1::CompensationFilter#range range}.
 </span>    <span class='const'>UNIT_AND_AMOUNT</span> <span class='op'>=</span> <span class='int'>2</span>
 
     <span class='comment'># Filter by annualized base compensation amount and `base compensation
-</span>    <span class='comment'># entry&#39;s` unit. Populate {Google::Cloud::Talent::V4beta1::CompensationFilter#range range} and zero or more {Google::Cloud::Talent::V4beta1::CompensationFilter#units units}.
+</span>    <span class='comment'># entry&#39;s` unit. Populate
+</span>    <span class='comment'># {Google::Cloud::Talent::V4beta1::CompensationFilter#range range} and zero or
+</span>    <span class='comment'># more {Google::Cloud::Talent::V4beta1::CompensationFilter#units units}.
 </span>    <span class='const'>ANNUALIZED_BASE_AMOUNT</span> <span class='op'>=</span> <span class='int'>3</span>
 
     <span class='comment'># Filter by annualized total compensation amount and `base compensation
-</span>    <span class='comment'># entry&#39;s` unit . Populate {Google::Cloud::Talent::V4beta1::CompensationFilter#range range} and zero or more {Google::Cloud::Talent::V4beta1::CompensationFilter#units units}.
+</span>    <span class='comment'># entry&#39;s` unit . Populate
+</span>    <span class='comment'># {Google::Cloud::Talent::V4beta1::CompensationFilter#range range} and zero or
+</span>    <span class='comment'># more {Google::Cloud::Talent::V4beta1::CompensationFilter#units units}.
 </span>    <span class='const'>ANNUALIZED_TOTAL_AMOUNT</span> <span class='op'>=</span> <span class='int'>4</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>

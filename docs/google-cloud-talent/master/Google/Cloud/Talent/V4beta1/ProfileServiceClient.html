@@ -198,30 +198,7 @@ this service.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#company_path-class_method" title="company_path (class method)">.<strong>company_path</strong>(project, company)  &#x21d2; String </a>
-    
-
-    
-  </span>
-  
-  
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'><p>Returns a fully-qualified company resource name string.</p>
-</div></span>
-  
-</li>
-
-      
-        <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#profile_path-class_method" title="profile_path (class method)">.<strong>profile_path</strong>(project, company, profile)  &#x21d2; String </a>
+      <a href="#profile_path-class_method" title="profile_path (class method)">.<strong>profile_path</strong>(project, tenant, profile)  &#x21d2; String </a>
     
 
     
@@ -241,19 +218,10 @@ this service.</p>
 </li>
 
       
-    </ul>
-  
-    <h2>
-      Instance Method Summary
-      <small><a href="#" class="summary_toggle">collapse</a></small>
-    </h2>
-
-    <ul class="summary">
-      
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#company_path-instance_method" title="#company_path (instance method)">#<strong>company_path</strong>(project, company)  &#x21d2; String </a>
+      <a href="#tenant_path-class_method" title="tenant_path (class method)">.<strong>tenant_path</strong>(project, tenant)  &#x21d2; String </a>
     
 
     
@@ -267,11 +235,20 @@ this service.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Alias for Google::Cloud::Talent::V4beta1::ProfileServiceClient.company_path.</p>
+    <span class="summary_desc"><div class='inline'><p>Returns a fully-qualified tenant resource name string.</p>
 </div></span>
   
 </li>
 
+      
+    </ul>
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
       
         <li class="public ">
   <span class="summary_signature">
@@ -393,7 +370,7 @@ this service.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#profile_path-instance_method" title="#profile_path (instance method)">#<strong>profile_path</strong>(project, company, profile)  &#x21d2; String </a>
+      <a href="#profile_path-instance_method" title="#profile_path (instance method)">#<strong>profile_path</strong>(project, tenant, profile)  &#x21d2; String </a>
     
 
     
@@ -430,7 +407,30 @@ this service.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Searches for profiles within a company.</p>
+    <span class="summary_desc"><div class='inline'><p>Searches for profiles within a tenant.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#tenant_path-instance_method" title="#tenant_path (instance method)">#<strong>tenant_path</strong>(project, tenant)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Alias for Google::Cloud::Talent::V4beta1::ProfileServiceClient.tenant_path.</p>
 </div></span>
   
 </li>
@@ -828,94 +828,9 @@ custom error handling.</p>
 
     
       <div class="method_details first">
-  <h3 class="signature first" id="company_path-class_method">
+  <h3 class="signature first" id="profile_path-class_method">
   
-    .<strong>company_path</strong>(project, company)  &#x21d2; <tt>String</tt> 
-  
-
-  
-
-  
-</h3><div class="docstring">
-  <div class="discussion">
-    <p>Returns a fully-qualified company resource name string.</p>
-
-
-  </div>
-</div>
-<div class="tags">
-  <p class="tag_title">Parameters:</p>
-<ul class="param">
-  
-    <li>
-      
-        <span class='name'>project</span>
-      
-      
-        <span class='type'>(<tt>String</tt>)</span>
-      
-      
-      
-    </li>
-  
-    <li>
-      
-        <span class='name'>company</span>
-      
-      
-        <span class='type'>(<tt>String</tt>)</span>
-      
-      
-      
-    </li>
-  
-</ul>
-
-<p class="tag_title">Returns:</p>
-<ul class="return">
-  
-    <li>
-      
-      
-        <span class='type'>(<tt>String</tt>)</span>
-      
-      
-      
-    </li>
-  
-</ul>
-
-</div><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-92
-93
-94
-95
-96
-97</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/profile_service_client.rb', line 92</span>
-
-<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_company_path'>company_path</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span> <span class='id identifier rubyid_company'>company</span>
-  <span class='const'>COMPANY_PATH_TEMPLATE</span><span class='period'>.</span><span class='id identifier rubyid_render'>render</span><span class='lparen'>(</span>
-    <span class='symbol'>:&quot;project&quot;</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span>
-    <span class='symbol'>:&quot;company&quot;</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_company'>company</span>
-  <span class='rparen'>)</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-      <div class="method_details ">
-  <h3 class="signature " id="profile_path-class_method">
-  
-    .<strong>profile_path</strong>(project, company, profile)  &#x21d2; <tt>String</tt> 
+    .<strong>profile_path</strong>(project, tenant, profile)  &#x21d2; <tt>String</tt> 
   
 
   
@@ -945,7 +860,7 @@ custom error handling.</p>
   
     <li>
       
-        <span class='name'>company</span>
+        <span class='name'>tenant</span>
       
       
         <span class='type'>(<tt>String</tt>)</span>
@@ -998,10 +913,10 @@ custom error handling.</p>
     <td>
       <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/profile_service_client.rb', line 104</span>
 
-<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_profile_path'>profile_path</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span> <span class='id identifier rubyid_company'>company</span><span class='comma'>,</span> <span class='id identifier rubyid_profile'>profile</span>
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_profile_path'>profile_path</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span> <span class='id identifier rubyid_tenant'>tenant</span><span class='comma'>,</span> <span class='id identifier rubyid_profile'>profile</span>
   <span class='const'>PROFILE_PATH_TEMPLATE</span><span class='period'>.</span><span class='id identifier rubyid_render'>render</span><span class='lparen'>(</span>
     <span class='symbol'>:&quot;project&quot;</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span>
-    <span class='symbol'>:&quot;company&quot;</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_company'>company</span><span class='comma'>,</span>
+    <span class='symbol'>:&quot;tenant&quot;</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_tenant'>tenant</span><span class='comma'>,</span>
     <span class='symbol'>:&quot;profile&quot;</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_profile'>profile</span>
   <span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
@@ -1010,16 +925,10 @@ custom error handling.</p>
 </table>
 </div>
     
-  </div>
-
-  <div id="instance_method_details" class="method_details_list">
-    <h2>Instance Method Details</h2>
-
-    
-      <div class="method_details first">
-  <h3 class="signature first" id="company_path-instance_method">
+      <div class="method_details ">
+  <h3 class="signature " id="tenant_path-class_method">
   
-    #<strong>company_path</strong>(project, company)  &#x21d2; <tt>String</tt> 
+    .<strong>tenant_path</strong>(project, tenant)  &#x21d2; <tt>String</tt> 
   
 
   
@@ -1027,7 +936,7 @@ custom error handling.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Alias for Google::Cloud::Talent::V4beta1::ProfileServiceClient.company_path.</p>
+    <p>Returns a fully-qualified tenant resource name string.</p>
 
 
   </div>
@@ -1049,7 +958,7 @@ custom error handling.</p>
   
     <li>
       
-        <span class='name'>company</span>
+        <span class='name'>tenant</span>
       
       
         <span class='type'>(<tt>String</tt>)</span>
@@ -1080,23 +989,35 @@ custom error handling.</p>
       <pre class="lines">
 
 
-57
-58
-59</pre>
+92
+93
+94
+95
+96
+97</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/helpers.rb', line 57</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/profile_service_client.rb', line 92</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_company_path'>company_path</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span> <span class='id identifier rubyid_company'>company</span>
-  <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_company_path'>company_path</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span> <span class='id identifier rubyid_company'>company</span>
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_tenant_path'>tenant_path</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span> <span class='id identifier rubyid_tenant'>tenant</span>
+  <span class='const'>TENANT_PATH_TEMPLATE</span><span class='period'>.</span><span class='id identifier rubyid_render'>render</span><span class='lparen'>(</span>
+    <span class='symbol'>:&quot;project&quot;</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span>
+    <span class='symbol'>:&quot;tenant&quot;</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_tenant'>tenant</span>
+  <span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
 </div>
     
-      <div class="method_details ">
-  <h3 class="signature " id="create_profile-instance_method">
+  </div>
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="create_profile-instance_method">
   
     #<strong>create_profile</strong>(parent, profile, options: nil) {|result, operation| ... } &#x21d2; <tt><span class='object_link'><a href="Profile.html" title="Google::Cloud::Talent::V4beta1::Profile (class)">Google::Cloud::Talent::V4beta1::Profile</a></span></tt> 
   
@@ -1120,7 +1041,7 @@ custom error handling.</p>
       <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/talent</span><span class='tstring_end'>&quot;</span></span>
 
 <span class='id identifier rubyid_profile_service_client'>profile_service_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Talent.html" title="Google::Cloud::Talent (module)">Talent</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../ProfileService.html" title="Google::Cloud::Talent::ProfileService (module)">ProfileService</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../ProfileService.html#new-class_method" title="Google::Cloud::Talent::ProfileService.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v4beta1</span><span class='rparen'>)</span>
-<span class='id identifier rubyid_formatted_parent'>formatted_parent</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Talent.html" title="Google::Cloud::Talent (module)">Talent</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V4beta1.html" title="Google::Cloud::Talent::V4beta1 (module)">V4beta1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::ProfileServiceClient (class)">ProfileServiceClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_company_path'><span class='object_link'><a href="#company_path-class_method" title="Google::Cloud::Talent::V4beta1::ProfileServiceClient.company_path (method)">company_path</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[PROJECT]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[COMPANY]</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+<span class='id identifier rubyid_formatted_parent'>formatted_parent</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Talent.html" title="Google::Cloud::Talent (module)">Talent</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V4beta1.html" title="Google::Cloud::Talent::V4beta1 (module)">V4beta1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::ProfileServiceClient (class)">ProfileServiceClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_tenant_path'><span class='object_link'><a href="#tenant_path-class_method" title="Google::Cloud::Talent::V4beta1::ProfileServiceClient.tenant_path (method)">tenant_path</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[PROJECT]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[TENANT]</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 
 <span class='comment'># TODO: Initialize `profile`:
 </span><span class='id identifier rubyid_profile'>profile</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
@@ -1142,10 +1063,10 @@ custom error handling.</p>
         &mdash;
         <div class='inline'><p>Required.</p>
 
-<p>The name of the company this profile belongs to.</p>
+<p>The name of the tenant this profile belongs to.</p>
 
-<p>The format is &quot;projects/project_id/companies/company_id&quot;, for example,
-&quot;projects/api-test-project/companies/foo&quot;.</p>
+<p>The format is &quot;projects/project_id/tenants/tenant_id&quot;, for example,
+&quot;projects/api-test-project/tenants/foo&quot;.</p>
 </div>
       
     </li>
@@ -1325,7 +1246,7 @@ retries, etc.</p>
       <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/talent</span><span class='tstring_end'>&quot;</span></span>
 
 <span class='id identifier rubyid_profile_service_client'>profile_service_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Talent.html" title="Google::Cloud::Talent (module)">Talent</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../ProfileService.html" title="Google::Cloud::Talent::ProfileService (module)">ProfileService</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../ProfileService.html#new-class_method" title="Google::Cloud::Talent::ProfileService.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v4beta1</span><span class='rparen'>)</span>
-<span class='id identifier rubyid_formatted_name'>formatted_name</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Talent.html" title="Google::Cloud::Talent (module)">Talent</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V4beta1.html" title="Google::Cloud::Talent::V4beta1 (module)">V4beta1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::ProfileServiceClient (class)">ProfileServiceClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_profile_path'><span class='object_link'><a href="#profile_path-class_method" title="Google::Cloud::Talent::V4beta1::ProfileServiceClient.profile_path (method)">profile_path</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[PROJECT]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[COMPANY]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[PROFILE]</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+<span class='id identifier rubyid_formatted_name'>formatted_name</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Talent.html" title="Google::Cloud::Talent (module)">Talent</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V4beta1.html" title="Google::Cloud::Talent::V4beta1 (module)">V4beta1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::ProfileServiceClient (class)">ProfileServiceClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_profile_path'><span class='object_link'><a href="#profile_path-class_method" title="Google::Cloud::Talent::V4beta1::ProfileServiceClient.profile_path (method)">profile_path</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[PROJECT]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[TENANT]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[PROFILE]</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 <span class='id identifier rubyid_profile_service_client'>profile_service_client</span><span class='period'>.</span><span class='id identifier rubyid_delete_profile'>delete_profile</span><span class='lparen'>(</span><span class='id identifier rubyid_formatted_name'>formatted_name</span><span class='rparen'>)</span></code></pre>
     
   </div>
@@ -1347,8 +1268,8 @@ retries, etc.</p>
 <p>Resource name of the profile to be deleted.</p>
 
 <p>The format is
-&quot;projects/project_id/companies/company_id/profiles/profile_id&quot;,
-for example, &quot;projects/api-test-project/companies/foo/profiles/bar&quot;.</p>
+&quot;projects/project_id/tenants/tenant_id/profiles/profile_id&quot;,
+for example, &quot;projects/api-test-project/tenants/foo/profiles/bar&quot;.</p>
 </div>
       
     </li>
@@ -1498,7 +1419,7 @@ retries, etc.</p>
       <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/talent</span><span class='tstring_end'>&quot;</span></span>
 
 <span class='id identifier rubyid_profile_service_client'>profile_service_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Talent.html" title="Google::Cloud::Talent (module)">Talent</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../ProfileService.html" title="Google::Cloud::Talent::ProfileService (module)">ProfileService</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../ProfileService.html#new-class_method" title="Google::Cloud::Talent::ProfileService.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v4beta1</span><span class='rparen'>)</span>
-<span class='id identifier rubyid_formatted_name'>formatted_name</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Talent.html" title="Google::Cloud::Talent (module)">Talent</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V4beta1.html" title="Google::Cloud::Talent::V4beta1 (module)">V4beta1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::ProfileServiceClient (class)">ProfileServiceClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_profile_path'><span class='object_link'><a href="#profile_path-class_method" title="Google::Cloud::Talent::V4beta1::ProfileServiceClient.profile_path (method)">profile_path</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[PROJECT]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[COMPANY]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[PROFILE]</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+<span class='id identifier rubyid_formatted_name'>formatted_name</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Talent.html" title="Google::Cloud::Talent (module)">Talent</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V4beta1.html" title="Google::Cloud::Talent::V4beta1 (module)">V4beta1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::ProfileServiceClient (class)">ProfileServiceClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_profile_path'><span class='object_link'><a href="#profile_path-class_method" title="Google::Cloud::Talent::V4beta1::ProfileServiceClient.profile_path (method)">profile_path</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[PROJECT]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[TENANT]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[PROFILE]</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_profile_service_client'>profile_service_client</span><span class='period'>.</span><span class='id identifier rubyid_get_profile'>get_profile</span><span class='lparen'>(</span><span class='id identifier rubyid_formatted_name'>formatted_name</span><span class='rparen'>)</span></code></pre>
     
   </div>
@@ -1520,8 +1441,8 @@ retries, etc.</p>
 <p>Resource name of the profile to get.</p>
 
 <p>The format is
-&quot;projects/project_id/companies/company_id/profiles/profile_id&quot;,
-for example, &quot;projects/api-test-project/companies/foo/profiles/bar&quot;.</p>
+&quot;projects/project_id/tenants/tenant_id/profiles/profile_id&quot;,
+for example, &quot;projects/api-test-project/tenants/foo/profiles/bar&quot;.</p>
 </div>
       
     </li>
@@ -1678,7 +1599,7 @@ retries, etc.</p>
       <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/talent</span><span class='tstring_end'>&quot;</span></span>
 
 <span class='id identifier rubyid_profile_service_client'>profile_service_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Talent.html" title="Google::Cloud::Talent (module)">Talent</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../ProfileService.html" title="Google::Cloud::Talent::ProfileService (module)">ProfileService</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../ProfileService.html#new-class_method" title="Google::Cloud::Talent::ProfileService.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v4beta1</span><span class='rparen'>)</span>
-<span class='id identifier rubyid_formatted_parent'>formatted_parent</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Talent.html" title="Google::Cloud::Talent (module)">Talent</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V4beta1.html" title="Google::Cloud::Talent::V4beta1 (module)">V4beta1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::ProfileServiceClient (class)">ProfileServiceClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_company_path'><span class='object_link'><a href="#company_path-class_method" title="Google::Cloud::Talent::V4beta1::ProfileServiceClient.company_path (method)">company_path</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[PROJECT]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[COMPANY]</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+<span class='id identifier rubyid_formatted_parent'>formatted_parent</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Talent.html" title="Google::Cloud::Talent (module)">Talent</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V4beta1.html" title="Google::Cloud::Talent::V4beta1 (module)">V4beta1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::ProfileServiceClient (class)">ProfileServiceClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_tenant_path'><span class='object_link'><a href="#tenant_path-class_method" title="Google::Cloud::Talent::V4beta1::ProfileServiceClient.tenant_path (method)">tenant_path</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[PROJECT]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[TENANT]</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 
 <span class='comment'># Iterate over all results.
 </span><span class='id identifier rubyid_profile_service_client'>profile_service_client</span><span class='period'>.</span><span class='id identifier rubyid_list_profiles'>list_profiles</span><span class='lparen'>(</span><span class='id identifier rubyid_formatted_parent'>formatted_parent</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_element'>element</span><span class='op'>|</span>
@@ -1709,10 +1630,10 @@ retries, etc.</p>
         &mdash;
         <div class='inline'><p>Required.</p>
 
-<p>The resource name of the company under which the job is created.</p>
+<p>The resource name of the tenant under which the job is created.</p>
 
-<p>The format is &quot;projects/project_id/companies/company_id&quot;, for example,
-&quot;projects/api-test-project/companies/foo&quot;.</p>
+<p>The format is &quot;projects/project_id/tenants/tenant_id&quot;, for example,
+&quot;projects/api-test-project/tenants/foo&quot;.</p>
 </div>
       
     </li>
@@ -1907,7 +1828,7 @@ object.</p>
       <div class="method_details ">
   <h3 class="signature " id="profile_path-instance_method">
   
-    #<strong>profile_path</strong>(project, company, profile)  &#x21d2; <tt>String</tt> 
+    #<strong>profile_path</strong>(project, tenant, profile)  &#x21d2; <tt>String</tt> 
   
 
   
@@ -1937,7 +1858,7 @@ object.</p>
   
     <li>
       
-        <span class='name'>company</span>
+        <span class='name'>tenant</span>
       
       
         <span class='type'>(<tt>String</tt>)</span>
@@ -1979,15 +1900,15 @@ object.</p>
       <pre class="lines">
 
 
-66
-67
-68</pre>
+58
+59
+60</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/helpers.rb', line 66</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/helpers.rb', line 58</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_profile_path'>profile_path</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span> <span class='id identifier rubyid_company'>company</span><span class='comma'>,</span> <span class='id identifier rubyid_profile'>profile</span>
-  <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_profile_path'>profile_path</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span> <span class='id identifier rubyid_company'>company</span><span class='comma'>,</span> <span class='id identifier rubyid_profile'>profile</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_profile_path'>profile_path</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span> <span class='id identifier rubyid_tenant'>tenant</span><span class='comma'>,</span> <span class='id identifier rubyid_profile'>profile</span>
+  <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_profile_path'>profile_path</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span> <span class='id identifier rubyid_tenant'>tenant</span><span class='comma'>,</span> <span class='id identifier rubyid_profile'>profile</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -2005,12 +1926,14 @@ object.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Searches for profiles within a company.</p>
+    <p>Searches for profiles within a tenant.</p>
 
 <p>For example, search by raw queries &quot;software engineer in Mountain View&quot; or
 search by structured filters (location filter, education filter, etc.).</p>
 
-<p>See <span class='object_link'><a href="SearchProfilesRequest.html" title="Google::Cloud::Talent::V4beta1::SearchProfilesRequest (class)">SearchProfilesRequest</a></span> for more information.</p>
+<p>See
+<span class='object_link'><a href="SearchProfilesRequest.html" title="Google::Cloud::Talent::V4beta1::SearchProfilesRequest (class)">SearchProfilesRequest</a></span>
+for more information.</p>
 
 
   </div>
@@ -2024,7 +1947,7 @@ search by structured filters (location filter, education filter, etc.).</p>
       <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/talent</span><span class='tstring_end'>&quot;</span></span>
 
 <span class='id identifier rubyid_profile_service_client'>profile_service_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Talent.html" title="Google::Cloud::Talent (module)">Talent</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../ProfileService.html" title="Google::Cloud::Talent::ProfileService (module)">ProfileService</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../ProfileService.html#new-class_method" title="Google::Cloud::Talent::ProfileService.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v4beta1</span><span class='rparen'>)</span>
-<span class='id identifier rubyid_formatted_parent'>formatted_parent</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Talent.html" title="Google::Cloud::Talent (module)">Talent</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V4beta1.html" title="Google::Cloud::Talent::V4beta1 (module)">V4beta1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::ProfileServiceClient (class)">ProfileServiceClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_company_path'><span class='object_link'><a href="#company_path-class_method" title="Google::Cloud::Talent::V4beta1::ProfileServiceClient.company_path (method)">company_path</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[PROJECT]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[COMPANY]</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+<span class='id identifier rubyid_formatted_parent'>formatted_parent</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Talent.html" title="Google::Cloud::Talent (module)">Talent</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V4beta1.html" title="Google::Cloud::Talent::V4beta1 (module)">V4beta1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::ProfileServiceClient (class)">ProfileServiceClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_tenant_path'><span class='object_link'><a href="#tenant_path-class_method" title="Google::Cloud::Talent::V4beta1::ProfileServiceClient.tenant_path (method)">tenant_path</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[PROJECT]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[TENANT]</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 
 <span class='comment'># TODO: Initialize `request_metadata`:
 </span><span class='id identifier rubyid_request_metadata'>request_metadata</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
@@ -2058,10 +1981,10 @@ search by structured filters (location filter, education filter, etc.).</p>
         &mdash;
         <div class='inline'><p>Required.</p>
 
-<p>The resource name of the company to search within.</p>
+<p>The resource name of the tenant to search within.</p>
 
-<p>The format is &quot;projects/project_id/companies/company_id&quot;, for example,
-&quot;projects/api-test-project/companies/foo&quot;.</p>
+<p>The format is &quot;projects/project_id/tenants/tenant_id&quot;, for example,
+&quot;projects/api-test-project/tenants/foo&quot;.</p>
 </div>
       
     </li>
@@ -2099,7 +2022,8 @@ can also be provided.</p>
         &mdash;
         <div class='inline'><p>Optional.</p>
 
-<p>Search query to execute. See <span class='object_link'><a href="ProfileQuery.html" title="Google::Cloud::Talent::V4beta1::ProfileQuery (class)">ProfileQuery</a></span> for more details.
+<p>Search query to execute. See
+<span class='object_link'><a href="ProfileQuery.html" title="Google::Cloud::Talent::V4beta1::ProfileQuery (class)">ProfileQuery</a></span> for more details.
 A hash of the same form as <code>Google::Cloud::Talent::V4beta1::ProfileQuery</code>
 can also be provided.</p>
 </div>
@@ -2138,7 +2062,9 @@ resources in a page.</p>
         <div class='inline'><p>Optional.</p>
 
 <p>An integer that specifies the current offset (that is, starting result) in
-search results. This field is only considered if <span class='object_link'><a href="SearchProfilesRequest.html#page_token-instance_method" title="Google::Cloud::Talent::V4beta1::SearchProfilesRequest#page_token (method)">page_token</a></span> is unset.</p>
+search results. This field is only considered if
+<span class='object_link'><a href="SearchProfilesRequest.html#page_token-instance_method" title="Google::Cloud::Talent::V4beta1::SearchProfilesRequest#page_token (method)">page_token</a></span>
+is unset.</p>
 
 <p>The maximum allowed value is 5000. Otherwise an error is thrown.</p>
 
@@ -2238,7 +2164,8 @@ is case in-sensitive sort (false).</p>
         <div class='inline'><p>Optional.</p>
 
 <p>A list of expressions specifies histogram requests against matching
-profiles for <span class='object_link'><a href="SearchProfilesRequest.html" title="Google::Cloud::Talent::V4beta1::SearchProfilesRequest (class)">SearchProfilesRequest</a></span>.</p>
+profiles for
+<span class='object_link'><a href="SearchProfilesRequest.html" title="Google::Cloud::Talent::V4beta1::SearchProfilesRequest (class)">SearchProfilesRequest</a></span>.</p>
 
 <p>The expression syntax looks like a function definition with optional
 parameters.</p>
@@ -2298,19 +2225,29 @@ lower levels of education degree.</li>
 <li>experience_in_months: experience in months. 0 means 0 month to 1 month
 (exclusive).</li>
 <li>application_date: The application date specifies application start dates.
-See <span class='object_link'><a href="ApplicationDateFilter.html" title="Google::Cloud::Talent::V4beta1::ApplicationDateFilter (class)">ApplicationDateFilter</a></span> for more details.</li>
+See
+<span class='object_link'><a href="ApplicationDateFilter.html" title="Google::Cloud::Talent::V4beta1::ApplicationDateFilter (class)">ApplicationDateFilter</a></span>
+for more details.</li>
 <li>application_outcome_reason: The application outcome reason specifies the
 outcome reasons of job application.
-See <span class='object_link'><a href="ApplicationOutcomeReasonFilter.html" title="Google::Cloud::Talent::V4beta1::ApplicationOutcomeReasonFilter (class)">ApplicationOutcomeReasonFilter</a></span> for more details.</li>
+See
+<span class='object_link'><a href="ApplicationOutcomeReasonFilter.html" title="Google::Cloud::Talent::V4beta1::ApplicationOutcomeReasonFilter (class)">ApplicationOutcomeReasonFilter</a></span>
+for more details.</li>
 <li>application_last_stage: The application last stage specifies the last
 stage of job application.
-See <span class='object_link'><a href="ApplicationLastStageFilter.html" title="Google::Cloud::Talent::V4beta1::ApplicationLastStageFilter (class)">ApplicationLastStageFilter</a></span> for more details.</li>
+See
+<span class='object_link'><a href="ApplicationLastStageFilter.html" title="Google::Cloud::Talent::V4beta1::ApplicationLastStageFilter (class)">ApplicationLastStageFilter</a></span>
+for more details.</li>
 <li>application_job_title: The application job title specifies the job
 applied for in the application.
-See <span class='object_link'><a href="ApplicationJobFilter.html" title="Google::Cloud::Talent::V4beta1::ApplicationJobFilter (class)">ApplicationJobFilter</a></span> for more details.</li>
+See
+<span class='object_link'><a href="ApplicationJobFilter.html" title="Google::Cloud::Talent::V4beta1::ApplicationJobFilter (class)">ApplicationJobFilter</a></span>
+for more details.</li>
 <li>application_status: The application status specifies the status of job
 application.
-See <span class='object_link'><a href="ApplicationStatusFilter.html" title="Google::Cloud::Talent::V4beta1::ApplicationStatusFilter (class)">ApplicationStatusFilter</a></span> for more details.</li>
+See
+<span class='object_link'><a href="ApplicationStatusFilter.html" title="Google::Cloud::Talent::V4beta1::ApplicationStatusFilter (class)">ApplicationStatusFilter</a></span>
+for more details.</li>
 <li>hirable_status: Hirable status specifies the profile&#39;s hirable status.</li>
 <li>string_custom_attribute: String custom attributes. Values can be accessed
 via square bracket notation like string_custom_attribute[&quot;key1&quot;].</li>
@@ -2439,22 +2376,6 @@ object.</p>
       <pre class="lines">
 
 
-711
-712
-713
-714
-715
-716
-717
-718
-719
-720
-721
-722
-723
-724
-725
-726
 727
 728
 729
@@ -2464,10 +2385,26 @@ object.</p>
 733
 734
 735
-736</pre>
+736
+737
+738
+739
+740
+741
+742
+743
+744
+745
+746
+747
+748
+749
+750
+751
+752</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/profile_service_client.rb', line 711</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/profile_service_client.rb', line 727</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_search_profiles'>search_profiles</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -2494,6 +2431,85 @@ object.</p>
   <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span>
   <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='id identifier rubyid_to_proto'>to_proto</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Talent.html" title="Google::Cloud::Talent (module)">Talent</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V4beta1.html" title="Google::Cloud::Talent::V4beta1 (module)">V4beta1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="SearchProfilesRequest.html" title="Google::Cloud::Talent::V4beta1::SearchProfilesRequest (class)">SearchProfilesRequest</a></span></span><span class='rparen'>)</span>
   <span class='ivar'>@search_profiles</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="tenant_path-instance_method">
+  
+    #<strong>tenant_path</strong>(project, tenant)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Alias for Google::Cloud::Talent::V4beta1::ProfileServiceClient.tenant_path.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>project</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>tenant</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+66
+67
+68</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/helpers.rb', line 66</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_tenant_path'>tenant_path</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span> <span class='id identifier rubyid_tenant'>tenant</span>
+  <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_tenant_path'>tenant_path</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span> <span class='id identifier rubyid_tenant'>tenant</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>

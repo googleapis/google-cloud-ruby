@@ -67,7 +67,7 @@ js:
   <dl>
     <dt>Defined in:</dt>
     <dd>lib/google/cloud/talent.rb<span class="defines">,<br />
-  lib/google/cloud/talent/v4beta1.rb,<br /> lib/google/cloud/talent/v4beta1/helpers.rb,<br /> lib/google/cloud/talent/v4beta1/credentials.rb,<br /> lib/google/cloud/talent/v4beta1/completion_client.rb,<br /> lib/google/cloud/talent/v4beta1/job_service_client.rb,<br /> lib/google/cloud/talent/v4beta1/event_service_client.rb,<br /> lib/google/cloud/talent/v4beta1/resume_service_client.rb,<br /> lib/google/cloud/talent/v4beta1/company_service_client.rb,<br /> lib/google/cloud/talent/v4beta1/profile_service_client.rb,<br /> lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job.rb,<br /> lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/event.rb,<br /> lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/common.rb,<br /> lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/company.rb,<br /> lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/filters.rb,<br /> lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/profile.rb,<br /> lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/histogram.rb,<br /> lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job_service.rb,<br /> lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/event_service.rb,<br /> lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/resume_service.rb,<br /> lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/company_service.rb,<br /> lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/profile_service.rb,<br /> lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/completion_service.rb</span>
+  lib/google/cloud/talent/v4beta1.rb,<br /> lib/google/cloud/talent/v4beta1/helpers.rb,<br /> lib/google/cloud/talent/v4beta1/credentials.rb,<br /> lib/google/cloud/talent/v4beta1/completion_client.rb,<br /> lib/google/cloud/talent/v4beta1/job_service_client.rb,<br /> lib/google/cloud/talent/v4beta1/event_service_client.rb,<br /> lib/google/cloud/talent/v4beta1/resume_service_client.rb,<br /> lib/google/cloud/talent/v4beta1/tenant_service_client.rb,<br /> lib/google/cloud/talent/v4beta1/company_service_client.rb,<br /> lib/google/cloud/talent/v4beta1/profile_service_client.rb,<br /> lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job.rb,<br /> lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/event.rb,<br /> lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/common.rb,<br /> lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/tenant.rb,<br /> lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/company.rb,<br /> lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/filters.rb,<br /> lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/profile.rb,<br /> lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/histogram.rb,<br /> lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job_service.rb,<br /> lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/event_service.rb,<br /> lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/resume_service.rb,<br /> lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/tenant_service.rb,<br /> lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/company_service.rb,<br /> lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/profile_service.rb,<br /> lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/completion_service.rb</span>
 </dd>
   </dl>
   
@@ -77,12 +77,12 @@ js:
   <div class="discussion">
     <h1>Ruby Client for Cloud Talent Solution API (<a href="https://github.com/googleapis/google-cloud-ruby#versioning">Alpha</a>)</h1>
 
-<p><a href="https://cloud.google.com/jobs">Cloud Talent Solution API</a>:
+<p><a href="https://cloud.google.com/talent">Cloud Talent Solution API</a>:
 Cloud Talent Solution provides the capability to create, read, update, and
 delete job postings, as well as search jobs based on keywords and filters.</p>
 
 <ul>
-<li><a href="https://cloud.google.com/jobs">Product Documentation</a></li>
+<li><a href="https://cloud.google.com/talent">Product Documentation</a></li>
 </ul>
 
 <h2>Quick Start</h2>
@@ -93,7 +93,7 @@ steps:</p>
 <ol>
 <li><a href="https://console.cloud.google.com/project">Select or create a Cloud Platform project.</a></li>
 <li><a href="https://cloud.google.com/billing/docs/how-to/modify-project#enable_billing_for_a_project">Enable billing for your project.</a></li>
-<li><a href="https://console.cloud.google.com/apis/library/jobs.googleapis.com">Enable the Cloud Talent Solution API.</a></li>
+<li><a href="https://console.cloud.google.com/apis/library/talent.googleapis.com">Enable the Cloud Talent Solution API.</a></li>
 <li><a href="https://googleapis.github.io/google-cloud-ruby/#/docs/google-cloud/master/guides/authentication">Setup Authentication.</a></li>
 </ol>
 
@@ -105,7 +105,7 @@ steps:</p>
 <h3>Next Steps</h3>
 
 <ul>
-<li>Read the <a href="https://cloud.google.com/jobs">Cloud Talent Solution API Product documentation</a>
+<li>Read the <a href="https://cloud.google.com/talent">Cloud Talent Solution API Product documentation</a>
 to learn more about the product and see How-to Guides.</li>
 <li>View this <a href="https://github.com/googleapis/google-cloud-ruby/blob/master/README.md">repository&#39;s main README</a>
 to see the full list of Cloud APIs that we cover.</li>
@@ -146,7 +146,7 @@ and the gRPC <a href="https://github.com/grpc/grpc/blob/master/src/ruby/spec/spe
 <p class="children">
   
     
-      <strong class="modules">Modules:</strong> <span class='object_link'><a href="Talent/CompanyService.html" title="Google::Cloud::Talent::CompanyService (module)">CompanyService</a></span>, <span class='object_link'><a href="Talent/Completion.html" title="Google::Cloud::Talent::Completion (module)">Completion</a></span>, <span class='object_link'><a href="Talent/Event.html" title="Google::Cloud::Talent::Event (module)">Event</a></span>, <span class='object_link'><a href="Talent/JobService.html" title="Google::Cloud::Talent::JobService (module)">JobService</a></span>, <span class='object_link'><a href="Talent/ProfileService.html" title="Google::Cloud::Talent::ProfileService (module)">ProfileService</a></span>, <span class='object_link'><a href="Talent/Resume.html" title="Google::Cloud::Talent::Resume (module)">Resume</a></span>, <span class='object_link'><a href="Talent/V4beta1.html" title="Google::Cloud::Talent::V4beta1 (module)">V4beta1</a></span>
+      <strong class="modules">Modules:</strong> <span class='object_link'><a href="Talent/CompanyService.html" title="Google::Cloud::Talent::CompanyService (module)">CompanyService</a></span>, <span class='object_link'><a href="Talent/Completion.html" title="Google::Cloud::Talent::Completion (module)">Completion</a></span>, <span class='object_link'><a href="Talent/Event.html" title="Google::Cloud::Talent::Event (module)">Event</a></span>, <span class='object_link'><a href="Talent/JobService.html" title="Google::Cloud::Talent::JobService (module)">JobService</a></span>, <span class='object_link'><a href="Talent/ProfileService.html" title="Google::Cloud::Talent::ProfileService (module)">ProfileService</a></span>, <span class='object_link'><a href="Talent/Resume.html" title="Google::Cloud::Talent::Resume (module)">Resume</a></span>, <span class='object_link'><a href="Talent/TenantService.html" title="Google::Cloud::Talent::TenantService (module)">TenantService</a></span>, <span class='object_link'><a href="Talent/V4beta1.html" title="Google::Cloud::Talent::V4beta1 (module)">V4beta1</a></span>
     
   
     

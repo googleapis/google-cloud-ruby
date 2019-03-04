@@ -191,11 +191,13 @@ implements Cloud Talent Solution.</p>
   <div class="discussion">
     <p>Returns Required.</p>
 
-<p>The <span class='object_link'><a href="Job.html#name-instance_method" title="Google::Cloud::Talent::V4beta1::Job#name (method)">job name(s)</a></span> associated with this event.
-For example, if this is an <span class='object_link'><a href="JobEvent/JobEventType.html#IMPRESSION-constant" title="Google::Cloud::Talent::V4beta1::JobEvent::JobEventType::IMPRESSION (constant)">impression</a></span> event,
-this field contains the identifiers of all jobs shown to the job seeker.
-If this was a <span class='object_link'><a href="JobEvent/JobEventType.html#VIEW-constant" title="Google::Cloud::Talent::V4beta1::JobEvent::JobEventType::VIEW (constant)">view</a></span> event, this field contains the
-identifier of the viewed job.</p>
+<p>The <span class='object_link'><a href="Job.html#name-instance_method" title="Google::Cloud::Talent::V4beta1::Job#name (method)">job name(s)</a></span> associated with
+this event. For example, if this is an
+<span class='object_link'><a href="JobEvent/JobEventType.html#IMPRESSION-constant" title="Google::Cloud::Talent::V4beta1::JobEvent::JobEventType::IMPRESSION (constant)">impression</a></span>
+event, this field contains the identifiers of all jobs shown to the job
+seeker. If this was a
+<span class='object_link'><a href="JobEvent/JobEventType.html#VIEW-constant" title="Google::Cloud::Talent::V4beta1::JobEvent::JobEventType::VIEW (constant)">view</a></span> event, this
+field contains the identifier of the viewed job.</p>
 
 
   </div>
@@ -215,11 +217,13 @@ identifier of the viewed job.</p>
         &mdash;
         <div class='inline'><p>Required.</p>
 
-<p>The <span class='object_link'><a href="Job.html#name-instance_method" title="Google::Cloud::Talent::V4beta1::Job#name (method)">job name(s)</a></span> associated with this event.
-For example, if this is an <span class='object_link'><a href="JobEvent/JobEventType.html#IMPRESSION-constant" title="Google::Cloud::Talent::V4beta1::JobEvent::JobEventType::IMPRESSION (constant)">impression</a></span> event,
-this field contains the identifiers of all jobs shown to the job seeker.
-If this was a <span class='object_link'><a href="JobEvent/JobEventType.html#VIEW-constant" title="Google::Cloud::Talent::V4beta1::JobEvent::JobEventType::VIEW (constant)">view</a></span> event, this field contains the
-identifier of the viewed job.</p>
+<p>The <span class='object_link'><a href="Job.html#name-instance_method" title="Google::Cloud::Talent::V4beta1::Job#name (method)">job name(s)</a></span> associated with
+this event. For example, if this is an
+<span class='object_link'><a href="JobEvent/JobEventType.html#IMPRESSION-constant" title="Google::Cloud::Talent::V4beta1::JobEvent::JobEventType::IMPRESSION (constant)">impression</a></span>
+event, this field contains the identifiers of all jobs shown to the job
+seeker. If this was a
+<span class='object_link'><a href="JobEvent/JobEventType.html#VIEW-constant" title="Google::Cloud::Talent::V4beta1::JobEvent::JobEventType::VIEW (constant)">view</a></span> event, this
+field contains the identifier of the viewed job.</p>
 </div>
       
     </li>
@@ -232,6 +236,16 @@ identifier of the viewed job.</p>
       <pre class="lines">
 
 
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
 90
 91
 92
@@ -326,14 +340,10 @@ identifier of the viewed job.</p>
 181
 182
 183
-184
-185
-186
-187
-188</pre>
+184</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/event.rb', line 90</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/event.rb', line 80</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::JobEvent (class)">JobEvent</a></span></span>
   <span class='comment'># An enumeration of an event attributed to the behavior of the end user,
@@ -372,7 +382,9 @@ identifier of the viewed job.</p>
 </span>    <span class='comment'># submitted an application for a job with a single click without
 </span>    <span class='comment'># entering information. If a job seeker performs this action, send only
 </span>    <span class='comment'># this event to the service. Do not also send
-</span>    <span class='comment'># {Google::Cloud::Talent::V4beta1::JobEvent::JobEventType::APPLICATION_START JobEventType::APPLICATION_START} or {Google::Cloud::Talent::V4beta1::JobEvent::JobEventType::APPLICATION_FINISH JobEventType::APPLICATION_FINISH}
+</span>    <span class='comment'># {Google::Cloud::Talent::V4beta1::JobEvent::JobEventType::APPLICATION_START JobEventType::APPLICATION_START}
+</span>    <span class='comment'># or
+</span>    <span class='comment'># {Google::Cloud::Talent::V4beta1::JobEvent::JobEventType::APPLICATION_FINISH JobEventType::APPLICATION_FINISH}
 </span>    <span class='comment'># events.
 </span>    <span class='const'>APPLICATION_QUICK_SUBMISSION</span> <span class='op'>=</span> <span class='int'>6</span>
 
@@ -392,8 +404,12 @@ identifier of the viewed job.</p>
 </span>    <span class='comment'># (without viewing the details of the job posting), and is redirected
 </span>    <span class='comment'># to a different website to complete the application. If a candidate
 </span>    <span class='comment'># performs this action, send only this event to the service. Do not also
-</span>    <span class='comment'># send {Google::Cloud::Talent::V4beta1::JobEvent::JobEventType::APPLICATION_START JobEventType::APPLICATION_START},
-</span>    <span class='comment'># {Google::Cloud::Talent::V4beta1::JobEvent::JobEventType::APPLICATION_FINISH JobEventType::APPLICATION_FINISH} or {Google::Cloud::Talent::V4beta1::JobEvent::JobEventType::VIEW JobEventType::VIEW} events.
+</span>    <span class='comment'># send
+</span>    <span class='comment'># {Google::Cloud::Talent::V4beta1::JobEvent::JobEventType::APPLICATION_START JobEventType::APPLICATION_START},
+</span>    <span class='comment'># {Google::Cloud::Talent::V4beta1::JobEvent::JobEventType::APPLICATION_FINISH JobEventType::APPLICATION_FINISH}
+</span>    <span class='comment'># or
+</span>    <span class='comment'># {Google::Cloud::Talent::V4beta1::JobEvent::JobEventType::VIEW JobEventType::VIEW}
+</span>    <span class='comment'># events.
 </span>    <span class='const'>APPLICATION_REDIRECT_FROM_SEARCH</span> <span class='op'>=</span> <span class='int'>9</span>
 
     <span class='comment'># This event should be used when a company submits an application
@@ -407,7 +423,7 @@ identifier of the viewed job.</p>
 
     <span class='comment'># The job seeker or other entity interacting with the service was
 </span>    <span class='comment'># sent a notification, such as an email alert or device notification,
-</span>    <span class='comment'># contatining one or more jobs listings generated by the service.
+</span>    <span class='comment'># containing one or more jobs listings generated by the service.
 </span>    <span class='const'>NOTIFICATION</span> <span class='op'>=</span> <span class='int'>12</span>
 
     <span class='comment'># The job seeker or other entity interacting with the service was
@@ -454,7 +470,8 @@ identifier of the viewed job.</p>
   <div class="discussion">
     <p>Returns Required.</p>
 
-<p>The type of the event (see <span class='object_link'><a href="JobEvent/JobEventType.html" title="Google::Cloud::Talent::V4beta1::JobEvent::JobEventType (module)">JobEventType</a></span>).</p>
+<p>The type of the event (see
+<span class='object_link'><a href="JobEvent/JobEventType.html" title="Google::Cloud::Talent::V4beta1::JobEvent::JobEventType (module)">JobEventType</a></span>).</p>
 
 
   </div>
@@ -474,7 +491,8 @@ identifier of the viewed job.</p>
         &mdash;
         <div class='inline'><p>Required.</p>
 
-<p>The type of the event (see <span class='object_link'><a href="JobEvent/JobEventType.html" title="Google::Cloud::Talent::V4beta1::JobEvent::JobEventType (module)">JobEventType</a></span>).</p>
+<p>The type of the event (see
+<span class='object_link'><a href="JobEvent/JobEventType.html" title="Google::Cloud::Talent::V4beta1::JobEvent::JobEventType (module)">JobEventType</a></span>).</p>
 </div>
       
     </li>
@@ -487,6 +505,16 @@ identifier of the viewed job.</p>
       <pre class="lines">
 
 
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
 90
 91
 92
@@ -581,14 +609,10 @@ identifier of the viewed job.</p>
 181
 182
 183
-184
-185
-186
-187
-188</pre>
+184</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/event.rb', line 90</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/event.rb', line 80</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::JobEvent (class)">JobEvent</a></span></span>
   <span class='comment'># An enumeration of an event attributed to the behavior of the end user,
@@ -627,7 +651,9 @@ identifier of the viewed job.</p>
 </span>    <span class='comment'># submitted an application for a job with a single click without
 </span>    <span class='comment'># entering information. If a job seeker performs this action, send only
 </span>    <span class='comment'># this event to the service. Do not also send
-</span>    <span class='comment'># {Google::Cloud::Talent::V4beta1::JobEvent::JobEventType::APPLICATION_START JobEventType::APPLICATION_START} or {Google::Cloud::Talent::V4beta1::JobEvent::JobEventType::APPLICATION_FINISH JobEventType::APPLICATION_FINISH}
+</span>    <span class='comment'># {Google::Cloud::Talent::V4beta1::JobEvent::JobEventType::APPLICATION_START JobEventType::APPLICATION_START}
+</span>    <span class='comment'># or
+</span>    <span class='comment'># {Google::Cloud::Talent::V4beta1::JobEvent::JobEventType::APPLICATION_FINISH JobEventType::APPLICATION_FINISH}
 </span>    <span class='comment'># events.
 </span>    <span class='const'>APPLICATION_QUICK_SUBMISSION</span> <span class='op'>=</span> <span class='int'>6</span>
 
@@ -647,8 +673,12 @@ identifier of the viewed job.</p>
 </span>    <span class='comment'># (without viewing the details of the job posting), and is redirected
 </span>    <span class='comment'># to a different website to complete the application. If a candidate
 </span>    <span class='comment'># performs this action, send only this event to the service. Do not also
-</span>    <span class='comment'># send {Google::Cloud::Talent::V4beta1::JobEvent::JobEventType::APPLICATION_START JobEventType::APPLICATION_START},
-</span>    <span class='comment'># {Google::Cloud::Talent::V4beta1::JobEvent::JobEventType::APPLICATION_FINISH JobEventType::APPLICATION_FINISH} or {Google::Cloud::Talent::V4beta1::JobEvent::JobEventType::VIEW JobEventType::VIEW} events.
+</span>    <span class='comment'># send
+</span>    <span class='comment'># {Google::Cloud::Talent::V4beta1::JobEvent::JobEventType::APPLICATION_START JobEventType::APPLICATION_START},
+</span>    <span class='comment'># {Google::Cloud::Talent::V4beta1::JobEvent::JobEventType::APPLICATION_FINISH JobEventType::APPLICATION_FINISH}
+</span>    <span class='comment'># or
+</span>    <span class='comment'># {Google::Cloud::Talent::V4beta1::JobEvent::JobEventType::VIEW JobEventType::VIEW}
+</span>    <span class='comment'># events.
 </span>    <span class='const'>APPLICATION_REDIRECT_FROM_SEARCH</span> <span class='op'>=</span> <span class='int'>9</span>
 
     <span class='comment'># This event should be used when a company submits an application
@@ -662,7 +692,7 @@ identifier of the viewed job.</p>
 
     <span class='comment'># The job seeker or other entity interacting with the service was
 </span>    <span class='comment'># sent a notification, such as an email alert or device notification,
-</span>    <span class='comment'># contatining one or more jobs listings generated by the service.
+</span>    <span class='comment'># containing one or more jobs listings generated by the service.
 </span>    <span class='const'>NOTIFICATION</span> <span class='op'>=</span> <span class='int'>12</span>
 
     <span class='comment'># The job seeker or other entity interacting with the service was

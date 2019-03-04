@@ -1,6 +1,6 @@
 ---
 layout: yard_main
-title: "Module: Google::Cloud::Talent::V4beta1::Company::DataLearningType - Cloud"
+title: "Module: Google::Cloud::Talent::V4beta1::CommuteMethod - Cloud"
 css: 
   - /docs/css/style.css
   - /docs/css/common.css
@@ -10,13 +10,13 @@ js:
   - /js/yard-main.js
 ---
 <script type="text/javascript" charset="utf-8">
-  pathId = "Google::Cloud::Talent::V4beta1::Company::DataLearningType";
-  relpath = '../../../../../';
+  pathId = "Google::Cloud::Talent::V4beta1::CommuteMethod";
+  relpath = '../../../../';
 </script>
 
 
 <div class="nav_wrap">
-  <iframe id="nav" src="../../../../../class_list.html?1"></iframe>
+  <iframe id="nav" src="../../../../class_list.html?1"></iframe>
   <div id="resizer"></div>
 </div>
 
@@ -24,17 +24,17 @@ js:
   <div id="header">
     <div id="menu">
   
-    <a href="../../../../../_index.html">Index (D)</a> &raquo;
-    <span class='title'><span class='object_link'><a href="../../../../../Google.html" title="Google (module)">Google</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../../Talent.html" title="Google::Cloud::Talent (module)">Talent</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../V4beta1.html" title="Google::Cloud::Talent::V4beta1 (module)">V4beta1</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../Company.html" title="Google::Cloud::Talent::V4beta1::Company (class)">Company</a></span></span>
+    <a href="../../../../_index.html">Index (C)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../Talent.html" title="Google::Cloud::Talent (module)">Talent</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../V4beta1.html" title="Google::Cloud::Talent::V4beta1 (module)">V4beta1</a></span></span>
      &raquo; 
-    <span class="title">DataLearningType</span>
+    <span class="title">CommuteMethod</span>
   
 </div>
 
     <div id="search">
   
     <a class="full_list_link" id="class_list_link"
-        href="../../../../../class_list.html">
+        href="../../../../class_list.html">
 
         <svg width="24" height="24">
           <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
@@ -47,7 +47,7 @@ js:
     <div class="clear"></div>
   </div>
 
-  <div id="content"><h1>Module: Google::Cloud::Talent::V4beta1::Company::DataLearningType
+  <div id="content"><h1>Module: Google::Cloud::Talent::V4beta1::CommuteMethod
   
   
   
@@ -66,14 +66,14 @@ js:
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/company.rb</dd>
+    <dd>lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/common.rb</dd>
   </dl>
   
 </div>
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>Enum that represents how user data owned by the company is used.</p>
+    <p>Method for commute.</p>
 
 
   </div>
@@ -90,10 +90,10 @@ js:
 
     <dl class="constants">
       
-        <dt id="DATA_LEARNING_TYPE_UNSPECIFIED-constant" class="">DATA_LEARNING_TYPE_UNSPECIFIED =
+        <dt id="COMMUTE_METHOD_UNSPECIFIED-constant" class="">COMMUTE_METHOD_UNSPECIFIED =
           <div class="docstring">
   <div class="discussion">
-    <p>Default value.</p>
+    <p>Commute method isn&#39;t specified.</p>
 
 
   </div>
@@ -105,11 +105,10 @@ js:
         </dt>
         <dd><pre class="code"><span class='int'>0</span></pre></dd>
       
-        <dt id="AGGREGATED-constant" class="">AGGREGATED =
+        <dt id="DRIVING-constant" class="">DRIVING =
           <div class="docstring">
   <div class="discussion">
-    <p>Data owned by this company is used to improve search/recommendation
-quality across companies.</p>
+    <p>Commute time is calculated based on driving time.</p>
 
 
   </div>
@@ -121,11 +120,11 @@ quality across companies.</p>
         </dt>
         <dd><pre class="code"><span class='int'>1</span></pre></dd>
       
-        <dt id="ISOLATED-constant" class="">ISOLATED =
+        <dt id="TRANSIT-constant" class="">TRANSIT =
           <div class="docstring">
   <div class="discussion">
-    <p>Data owned by this company is used to improve search/recommendation
-quality for this company only.</p>
+    <p>Commute time is calculated based on public transit including bus, metro,
+subway, etc.</p>
 
 
   </div>
@@ -136,6 +135,52 @@ quality for this company only.</p>
 </div>
         </dt>
         <dd><pre class="code"><span class='int'>2</span></pre></dd>
+      
+        <dt id="WALKING-constant" class="">WALKING =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Commute time is calculated based on walking time.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>3</span></pre></dd>
+      
+        <dt id="CYCLING-constant" class="">CYCLING =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Commute time is calculated based on biking time.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>4</span></pre></dd>
+      
+        <dt id="TRANSIT_ACCESSIBLE-constant" class="">TRANSIT_ACCESSIBLE =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Commute time is calculated based on public transit that is wheelchair
+accessible.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>5</span></pre></dd>
       
     </dl>
   

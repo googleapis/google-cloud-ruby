@@ -252,7 +252,7 @@ this service.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#parse_resume-instance_method" title="#parse_resume (instance method)">#<strong>parse_resume</strong>(parent, resume, region_code: nil, language_code: nil, options: nil) {|result, operation| ... } &#x21d2; Google::Cloud::Talent::V4beta1::ParseResumeResponse </a>
+      <a href="#parse_resume-instance_method" title="#parse_resume (instance method)">#<strong>parse_resume</strong>(parent, resume, region_code: nil, language_code: nil, options_: nil, options: nil) {|result, operation| ... } &#x21d2; Google::Cloud::Talent::V4beta1::ParseResumeResponse </a>
     
 
     
@@ -669,7 +669,7 @@ custom error handling.</p>
       <div class="method_details first">
   <h3 class="signature first" id="parse_resume-instance_method">
   
-    #<strong>parse_resume</strong>(parent, resume, region_code: nil, language_code: nil, options: nil) {|result, operation| ... } &#x21d2; <tt><span class='object_link'><a href="ParseResumeResponse.html" title="Google::Cloud::Talent::V4beta1::ParseResumeResponse (class)">Google::Cloud::Talent::V4beta1::ParseResumeResponse</a></span></tt> 
+    #<strong>parse_resume</strong>(parent, resume, region_code: nil, language_code: nil, options_: nil, options: nil) {|result, operation| ... } &#x21d2; <tt><span class='object_link'><a href="ParseResumeResponse.html" title="Google::Cloud::Talent::V4beta1::ParseResumeResponse (class)">Google::Cloud::Talent::V4beta1::ParseResumeResponse</a></span></tt> 
   
 
   
@@ -677,8 +677,9 @@ custom error handling.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Parses a resume into a <span class='object_link'><a href="Profile.html" title="Google::Cloud::Talent::V4beta1::Profile (class)">Profile</a></span>. The API attempts to fill out the
-following profile fields if present within the resume:</p>
+    <p>Parses a resume into a <span class='object_link'><a href="Profile.html" title="Google::Cloud::Talent::V4beta1::Profile (class)">Profile</a></span>. The
+API attempts to fill out the following profile fields if present within the
+resume:</p>
 
 <ul>
 <li>personNames</li>
@@ -698,7 +699,7 @@ not present within the resume or unrecognizable by the resume parser.</p>
 resume, clients need to call the CreateProfile method again with the
 profile returned.</p>
 
-<p>This API supports the following list of formats:</p>
+<p>The following list of formats are supported:</p>
 
 <ul>
 <li>PDF</li>
@@ -706,9 +707,9 @@ profile returned.</p>
 <li>DOC</li>
 <li>RTF</li>
 <li>DOCX</li>
+<li>PNG (only when ParseResumeRequest#enable_ocr is set to <code>true</code>,
+otherwise an error is thrown)</li>
 </ul>
-
-<p>An error is thrown if the input format is not supported.</p>
 
 
   </div>
@@ -764,9 +765,9 @@ profile returned.</p>
         &mdash;
         <div class='inline'><p>Required.</p>
 
-<p>The bytes of the resume file in common format. Currently the API supports
-the following formats:
-PDF, TXT, DOC, RTF and DOCX.</p>
+<p>The bytes of the resume file in common format, for example, PDF, TXT.
+UTF-8 encoding is required if the resume is text-based, otherwise an error
+is thrown.</p>
 </div>
       
     </li>
@@ -812,6 +813,25 @@ parsing quality and performance.</p>
 For more information, see
 <a href="https://tools.ietf.org/html/bcp47">Tags for Identifying Languages</a>{:
 class=&quot;external&quot; target=&quot;_blank&quot; }.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>options_</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="ParseResumeOptions.html" title="Google::Cloud::Talent::V4beta1::ParseResumeOptions (class)">Google::Cloud::Talent::V4beta1::ParseResumeOptions</a></span> | Hash</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Optional.</p>
+
+<p>Options that change how the resume parse is performed.
+A hash of the same form as <code>Google::Cloud::Talent::V4beta1::ParseResumeOptions</code>
+can also be provided.</p>
 </div>
       
     </li>
@@ -914,13 +934,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-267
-268
-269
-270
-271
-272
-273
 274
 275
 276
@@ -929,23 +942,34 @@ retries, etc.</p>
 279
 280
 281
-282</pre>
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/resume_service_client.rb', line 267</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/resume_service_client.rb', line 274</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_parse_resume'>parse_resume</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
     <span class='id identifier rubyid_resume'>resume</span><span class='comma'>,</span>
     <span class='label'>region_code:</span> <span class='kw'>nil</span><span class='comma'>,</span>
     <span class='label'>language_code:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+    <span class='label'>options_:</span> <span class='kw'>nil</span><span class='comma'>,</span>
     <span class='label'>options:</span> <span class='kw'>nil</span><span class='comma'>,</span>
     <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
   <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='lbrace'>{</span>
     <span class='label'>parent:</span> <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
     <span class='label'>resume:</span> <span class='id identifier rubyid_resume'>resume</span><span class='comma'>,</span>
     <span class='label'>region_code:</span> <span class='id identifier rubyid_region_code'>region_code</span><span class='comma'>,</span>
-    <span class='label'>language_code:</span> <span class='id identifier rubyid_language_code'>language_code</span>
+    <span class='label'>language_code:</span> <span class='id identifier rubyid_language_code'>language_code</span><span class='comma'>,</span>
+    <span class='label'>options:</span> <span class='id identifier rubyid_options_'>options_</span>
   <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span>
   <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='id identifier rubyid_to_proto'>to_proto</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Talent.html" title="Google::Cloud::Talent (module)">Talent</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V4beta1.html" title="Google::Cloud::Talent::V4beta1 (module)">V4beta1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="ParseResumeRequest.html" title="Google::Cloud::Talent::V4beta1::ParseResumeRequest (class)">ParseResumeRequest</a></span></span><span class='rparen'>)</span>
   <span class='ivar'>@parse_resume</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
