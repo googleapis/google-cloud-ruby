@@ -44,16 +44,25 @@ module Google
         #     For more information, see
         #     [Tags for Identifying Languages](https://tools.ietf.org/html/bcp47).
         #
-        #     For {Google::Cloud::Talent::V4beta1::CompleteQueryRequest::CompletionType::JOB_TITLE CompletionType::JOB_TITLE} type, only open jobs with the same
-        #     {Google::Cloud::Talent::V4beta1::CompleteQueryRequest#language_codes language_codes} are returned.
+        #     For
+        #     {Google::Cloud::Talent::V4beta1::CompleteQueryRequest::CompletionType::JOB_TITLE CompletionType::JOB_TITLE}
+        #     type, only open jobs with the same
+        #     {Google::Cloud::Talent::V4beta1::CompleteQueryRequest#language_codes language_codes}
+        #     are returned.
         #
-        #     For {Google::Cloud::Talent::V4beta1::CompleteQueryRequest::CompletionType::COMPANY_NAME CompletionType::COMPANY_NAME} type,
-        #     only companies having open jobs with the same {Google::Cloud::Talent::V4beta1::CompleteQueryRequest#language_codes language_codes} are
-        #     returned.
+        #     For
+        #     {Google::Cloud::Talent::V4beta1::CompleteQueryRequest::CompletionType::COMPANY_NAME CompletionType::COMPANY_NAME}
+        #     type, only companies having open jobs with the same
+        #     {Google::Cloud::Talent::V4beta1::CompleteQueryRequest#language_codes language_codes}
+        #     are returned.
         #
-        #     For {Google::Cloud::Talent::V4beta1::CompleteQueryRequest::CompletionType::COMBINED CompletionType::COMBINED} type, only open jobs with the same
-        #     {Google::Cloud::Talent::V4beta1::CompleteQueryRequest#language_codes language_codes} or companies having open jobs with the same
-        #     {Google::Cloud::Talent::V4beta1::CompleteQueryRequest#language_codes language_codes} are returned.
+        #     For
+        #     {Google::Cloud::Talent::V4beta1::CompleteQueryRequest::CompletionType::COMBINED CompletionType::COMBINED}
+        #     type, only open jobs with the same
+        #     {Google::Cloud::Talent::V4beta1::CompleteQueryRequest#language_codes language_codes}
+        #     or companies having open jobs with the same
+        #     {Google::Cloud::Talent::V4beta1::CompleteQueryRequest#language_codes language_codes}
+        #     are returned.
         #
         #     The maximum number of allowed characters is 255.
         # @!attribute [rw] page_size
@@ -75,12 +84,14 @@ module Google
         #   @return [Google::Cloud::Talent::V4beta1::CompleteQueryRequest::CompletionScope]
         #     Optional.
         #
-        #     The scope of the completion. The defaults is {Google::Cloud::Talent::V4beta1::CompleteQueryRequest::CompletionScope::PUBLIC CompletionScope::PUBLIC}.
+        #     The scope of the completion. The defaults is
+        #     {Google::Cloud::Talent::V4beta1::CompleteQueryRequest::CompletionScope::PUBLIC CompletionScope::PUBLIC}.
         # @!attribute [rw] type
         #   @return [Google::Cloud::Talent::V4beta1::CompleteQueryRequest::CompletionType]
         #     Optional.
         #
-        #     The completion topic. The default is {Google::Cloud::Talent::V4beta1::CompleteQueryRequest::CompletionType::COMBINED CompletionType::COMBINED}.
+        #     The completion topic. The default is
+        #     {Google::Cloud::Talent::V4beta1::CompleteQueryRequest::CompletionType::COMBINED CompletionType::COMBINED}.
         class CompleteQueryRequest
           # Enum to specify the scope of completion.
           module CompletionScope

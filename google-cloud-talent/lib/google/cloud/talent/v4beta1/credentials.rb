@@ -24,13 +24,13 @@ module Google
             "https://www.googleapis.com/auth/cloud-platform",
             "https://www.googleapis.com/auth/jobs"
           ].freeze
-          PATH_ENV_VARS = %w(JOBS_CREDENTIALS
-                             JOBS_KEYFILE
+          PATH_ENV_VARS = %w(TALENT_CREDENTIALS
+                             TALENT_KEYFILE
                              GOOGLE_CLOUD_CREDENTIALS
                              GOOGLE_CLOUD_KEYFILE
                              GCLOUD_KEYFILE)
-          JSON_ENV_VARS = %w(JOBS_CREDENTIALS_JSON
-                             JOBS_KEYFILE_JSON
+          JSON_ENV_VARS = %w(TALENT_CREDENTIALS_JSON
+                             TALENT_KEYFILE_JSON
                              GOOGLE_CLOUD_CREDENTIALS_JSON
                              GOOGLE_CLOUD_KEYFILE_JSON
                              GCLOUD_KEYFILE_JSON)

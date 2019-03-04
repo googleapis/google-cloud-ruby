@@ -18,8 +18,9 @@ module Google
     module Talent
       module V4beta1
         # A resource that represents the profile for a job candidate (also referred to
-        # as a "single-source profile"). A profile belongs to a {Google::Cloud::Talent::V4beta1::Company Company}, which is
-        # the company/organization that owns the profile.
+        # as a "single-source profile"). A profile belongs to a
+        # {Google::Cloud::Talent::V4beta1::Tenant Tenant}, which is an isolated instance
+        # of the customer that owns the profile.
         # @!attribute [rw] name
         #   @return [String]
         #     Required during profile update.
@@ -27,8 +28,8 @@ module Google
         #     Resource name assigned to a profile by the API.
         #
         #     The format is
-        #     "projects/{project_id}/companies/{company_id}/profiles/{profile_id}",
-        #     for example, "projects/api-test-project/companies/foo/profiles/bar".
+        #     "projects/{project_id}/tenants/{tenant_id}/profiles/{profile_id}",
+        #     for example, "projects/api-test-project/tenants/foo/profiles/bar".
         # @!attribute [rw] external_id
         #   @return [String]
         #     Optional.
@@ -60,17 +61,22 @@ module Google
         #     The cluster id of the profile to associate with other profile(s) for the
         #     same candidate.
         #
-        #     A random UUID is assigned if {Google::Cloud::Talent::V4beta1::Profile#group_id group_id} isn't provided. To ensure
-        #     global uniqueness, customized {Google::Cloud::Talent::V4beta1::Profile#group_id group_id} isn't supported. If
-        #     {Google::Cloud::Talent::V4beta1::Profile#group_id group_id} is set, there must be at least one other profile with the
-        #     same system generated {Google::Cloud::Talent::V4beta1::Profile#group_id group_id}, otherwise an error is thrown.
+        #     A random UUID is assigned if
+        #     {Google::Cloud::Talent::V4beta1::Profile#group_id group_id} isn't provided. To
+        #     ensure global uniqueness, customized
+        #     {Google::Cloud::Talent::V4beta1::Profile#group_id group_id} isn't supported.
+        #     If {Google::Cloud::Talent::V4beta1::Profile#group_id group_id} is set, there
+        #     must be at least one other profile with the same system generated
+        #     {Google::Cloud::Talent::V4beta1::Profile#group_id group_id}, otherwise an
+        #     error is thrown.
         #
         #     This is used to link multiple profiles to the same candidate. For example,
         #     a client has a candidate with two profiles, where one was created recently
         #     and the other one was created 5 years ago. These two profiles may be very
         #     different. The clients can create the first profile and get a generated
-        #     {Google::Cloud::Talent::V4beta1::Profile#group_id group_id}, and assign it when the second profile is created,
-        #     indicating these two profiles are referring to the same candidate.
+        #     {Google::Cloud::Talent::V4beta1::Profile#group_id group_id}, and assign it
+        #     when the second profile is created, indicating these two profiles are
+        #     referring to the same candidate.
         # @!attribute [rw] is_hirable
         #   @return [Google::Protobuf::BoolValue]
         #     Optional.
@@ -94,15 +100,21 @@ module Google
         #     See http://schemas.liquid-technologies.com/hr-xml/2007-04-15/ for more
         #     information about Human Resources XML.
         #
-        #     Users can create a profile with only {Google::Cloud::Talent::V4beta1::Profile#resume_hrxml resume_hrxml} field. For example,
-        #     the API parses the {Google::Cloud::Talent::V4beta1::Profile#resume_hrxml resume_hrxml} and creates a profile with all
-        #     structured fields populated, for example. {Google::Cloud::Talent::V4beta1::EmploymentRecord EmploymentRecord},
-        #     {Google::Cloud::Talent::V4beta1::EducationRecord EducationRecord}, etc. An error is thrown if the {Google::Cloud::Talent::V4beta1::Profile#resume_hrxml resume_hrxml} can't
-        #     be parsed.
+        #     Users can create a profile with only
+        #     {Google::Cloud::Talent::V4beta1::Profile#resume_hrxml resume_hrxml} field. For
+        #     example, the API parses the
+        #     {Google::Cloud::Talent::V4beta1::Profile#resume_hrxml resume_hrxml} and
+        #     creates a profile with all structured fields populated, for example.
+        #     {Google::Cloud::Talent::V4beta1::EmploymentRecord EmploymentRecord},
+        #     {Google::Cloud::Talent::V4beta1::EducationRecord EducationRecord}, etc. An
+        #     error is thrown if the
+        #     {Google::Cloud::Talent::V4beta1::Profile#resume_hrxml resume_hrxml} can't be
+        #     parsed.
         #
-        #     If the {Google::Cloud::Talent::V4beta1::Profile#resume_hrxml resume_hrxml} is provided during profile creation or update,
-        #     any other structured data provided in the profile is ignored. The
-        #     API populates these fields by parsing the HR-XML.
+        #     If the {Google::Cloud::Talent::V4beta1::Profile#resume_hrxml resume_hrxml} is
+        #     provided during profile creation or update, any other structured data
+        #     provided in the profile is ignored. The API populates these fields by
+        #     parsing the HR-XML.
         # @!attribute [rw] person_names
         #   @return [Array<Google::Cloud::Talent::V4beta1::PersonName>]
         #     Optional.
@@ -134,8 +146,12 @@ module Google
         #   @return [Array<Google::Cloud::Talent::V4beta1::AdditionalContactInfo>]
         #     Optional.
         #
-        #     Available contact information besides {Google::Cloud::Talent::V4beta1::Profile#addresses addresses}, {Google::Cloud::Talent::V4beta1::Profile#email_addresses email_addresses},
-        #     {Google::Cloud::Talent::V4beta1::Profile#phone_numbers phone_numbers} and {Google::Cloud::Talent::V4beta1::Profile#personal_uris personal_uris}. For example, Hang-out, Skype.
+        #     Available contact information besides
+        #     {Google::Cloud::Talent::V4beta1::Profile#addresses addresses},
+        #     {Google::Cloud::Talent::V4beta1::Profile#email_addresses email_addresses},
+        #     {Google::Cloud::Talent::V4beta1::Profile#phone_numbers phone_numbers} and
+        #     {Google::Cloud::Talent::V4beta1::Profile#personal_uris personal_uris}. For
+        #     example, Hang-out, Skype.
         # @!attribute [rw] employment_records
         #   @return [Array<Google::Cloud::Talent::V4beta1::EmploymentRecord>]
         #     Optional.
@@ -149,8 +165,10 @@ module Google
         #       change is.
         #       For example, only job title is changed from "software engineer" to "senior
         #       software engineer".
-        #     * Provide {Google::Cloud::Talent::V4beta1::EmploymentRecord#is_current EmploymentRecord#is_current} for the current employment if
-        #       possible. If not, it's inferred from user inputs.
+        #     * Provide
+        #       {Google::Cloud::Talent::V4beta1::EmploymentRecord#is_current EmploymentRecord#is_current}
+        #       for the current employment if possible. If not, it's inferred from user
+        #       inputs.
         # @!attribute [rw] education_records
         #   @return [Array<Google::Cloud::Talent::V4beta1::EducationRecord>]
         #     Optional.
@@ -163,8 +181,10 @@ module Google
         #     * List each education type separately, no matter how minor the change is.
         #       For example, the profile contains the education experience from the same
         #       school but different degrees.
-        #     * Provide {Google::Cloud::Talent::V4beta1::EducationRecord#is_current EducationRecord#is_current} for the current education if
-        #       possible. If not, it's inferred from user inputs.
+        #     * Provide
+        #       {Google::Cloud::Talent::V4beta1::EducationRecord#is_current EducationRecord#is_current}
+        #       for the current education if possible. If not, it's inferred from user
+        #       inputs.
         # @!attribute [rw] skills
         #   @return [Array<Google::Cloud::Talent::V4beta1::Skill>]
         #     Optional.
@@ -177,7 +197,8 @@ module Google
         #
         #     The individual or collaborative activities which the candidate has
         #     participated in, for example, open-source projects, class assignments that
-        #     aren't listed in {Google::Cloud::Talent::V4beta1::Profile#employment_records employment_records}.
+        #     aren't listed in
+        #     {Google::Cloud::Talent::V4beta1::Profile#employment_records employment_records}.
         # @!attribute [rw] publications
         #   @return [Array<Google::Cloud::Talent::V4beta1::Publication>]
         #     Optional.
@@ -212,7 +233,8 @@ module Google
         #
         #     A map of fields to hold both filterable and non-filterable custom profile
         #     attributes that aren't covered by the provided structured fields. See
-        #     {Google::Cloud::Talent::V4beta1::CustomAttribute CustomAttribute} for more details.
+        #     {Google::Cloud::Talent::V4beta1::CustomAttribute CustomAttribute} for more
+        #     details.
         #
         #     At most 100 filterable and at most 100 unfilterable keys are supported. If
         #     limit is exceeded, an error is thrown.
@@ -263,7 +285,9 @@ module Google
           #
           #     Given/first name.
           #
-          #     It's derived from {Google::Cloud::Talent::V4beta1::PersonName#formatted_name formatted_name} if not provided.
+          #     It's derived from
+          #     {Google::Cloud::Talent::V4beta1::PersonName#formatted_name formatted_name}
+          #     if not provided.
           #
           #     Number of characters allowed is 100.
           # @!attribute [rw] middle_initial
@@ -272,7 +296,9 @@ module Google
           #
           #     Middle initial.
           #
-          #     It's derived from {Google::Cloud::Talent::V4beta1::PersonName#formatted_name formatted_name} if not provided.
+          #     It's derived from
+          #     {Google::Cloud::Talent::V4beta1::PersonName#formatted_name formatted_name}
+          #     if not provided.
           #
           #     Number of characters allowed is 20.
           # @!attribute [rw] family_name
@@ -281,7 +307,9 @@ module Google
           #
           #     Family/last name.
           #
-          #     It's derived from {Google::Cloud::Talent::V4beta1::PersonName#formatted_name formatted_name} if not provided.
+          #     It's derived from
+          #     {Google::Cloud::Talent::V4beta1::PersonName#formatted_name formatted_name}
+          #     if not provided.
           #
           #     Number of characters allowed is 100.
           # @!attribute [rw] suffixes
@@ -531,19 +559,25 @@ module Google
         #     If this employment is current.
         # @!attribute [rw] job_title_snippet
         #   @return [String]
-        #     Output only. The job title snippet shows how the {Google::Cloud::Talent::V4beta1::EmploymentRecord#job_title job_title} is related
-        #     to a search query. It's empty if the {Google::Cloud::Talent::V4beta1::EmploymentRecord#job_title job_title} isn't related to the
-        #     search query.
+        #     Output only. The job title snippet shows how the
+        #     {Google::Cloud::Talent::V4beta1::EmploymentRecord#job_title job_title} is
+        #     related to a search query. It's empty if the
+        #     {Google::Cloud::Talent::V4beta1::EmploymentRecord#job_title job_title} isn't
+        #     related to the search query.
         # @!attribute [rw] job_description_snippet
         #   @return [String]
-        #     Output only. The job description snippet shows how the {Google::Cloud::Talent::V4beta1::EmploymentRecord#job_description job_description}
-        #     is related to a search query. It's empty if the {Google::Cloud::Talent::V4beta1::EmploymentRecord#job_description job_description} isn't
-        #     related to the search query.
+        #     Output only. The job description snippet shows how the
+        #     {Google::Cloud::Talent::V4beta1::EmploymentRecord#job_description job_description}
+        #     is related to a search query. It's empty if the
+        #     {Google::Cloud::Talent::V4beta1::EmploymentRecord#job_description job_description}
+        #     isn't related to the search query.
         # @!attribute [rw] employer_name_snippet
         #   @return [String]
-        #     Output only. The employer name snippet shows how the {Google::Cloud::Talent::V4beta1::EmploymentRecord#employer_name employer_name} is
-        #     related to a search query. It's empty if the {Google::Cloud::Talent::V4beta1::EmploymentRecord#employer_name employer_name} isn't
-        #     related to the search query.
+        #     Output only. The employer name snippet shows how the
+        #     {Google::Cloud::Talent::V4beta1::EmploymentRecord#employer_name employer_name}
+        #     is related to a search query. It's empty if the
+        #     {Google::Cloud::Talent::V4beta1::EmploymentRecord#employer_name employer_name}
+        #     isn't related to the search query.
         class EmploymentRecord; end
 
         # Resource that represents an education record of a candidate.
@@ -604,14 +638,18 @@ module Google
         #     If this education is current.
         # @!attribute [rw] school_name_snippet
         #   @return [String]
-        #     Output only. The school name snippet shows how the {Google::Cloud::Talent::V4beta1::EducationRecord#school_name school_name} is
+        #     Output only. The school name snippet shows how the
+        #     {Google::Cloud::Talent::V4beta1::EducationRecord#school_name school_name} is
         #     related to a search query in search result. It's empty if the
-        #     {Google::Cloud::Talent::V4beta1::EducationRecord#school_name school_name} isn't related to the search query.
+        #     {Google::Cloud::Talent::V4beta1::EducationRecord#school_name school_name}
+        #     isn't related to the search query.
         # @!attribute [rw] degree_snippet
         #   @return [String]
-        #     Output only. The job description snippet shows how the {Google::Cloud::Talent::V4beta1::Degree degree} is
-        #     related to a search query in search result. It's empty if the {Google::Cloud::Talent::V4beta1::Degree degree}
-        #     isn't related to the search query.
+        #     Output only. The job description snippet shows how the
+        #     {Google::Cloud::Talent::V4beta1::Degree degree} is related to a search query
+        #     in search result. It's empty if the
+        #     {Google::Cloud::Talent::V4beta1::Degree degree} isn't related to the search
+        #     query.
         class EducationRecord; end
 
         # Resource that represents a degree pursuing or acquired by a candidate.
@@ -670,9 +708,11 @@ module Google
         #     Number of characters allowed is 100,000.
         # @!attribute [rw] skill_name_snippet
         #   @return [String]
-        #     Output only. Skill name snippet shows how the {Google::Cloud::Talent::V4beta1::Skill#display_name display_name} is related
-        #     to a search query. It's empty if the {Google::Cloud::Talent::V4beta1::Skill#display_name display_name} isn't related to the
-        #     search query.
+        #     Output only. Skill name snippet shows how the
+        #     {Google::Cloud::Talent::V4beta1::Skill#display_name display_name} is related
+        #     to a search query. It's empty if the
+        #     {Google::Cloud::Talent::V4beta1::Skill#display_name display_name} isn't
+        #     related to the search query.
         class Skill
           # Enum that represents the skill proficiency level.
           module SkillProficiencyLevel
@@ -748,19 +788,25 @@ module Google
         #     A list of skills used in this activity.
         # @!attribute [rw] activity_name_snippet
         #   @return [String]
-        #     Output only. Activity name snippet shows how the {Google::Cloud::Talent::V4beta1::Activity#display_name display_name} is
-        #     related to a search query. It's empty if the {Google::Cloud::Talent::V4beta1::Activity#display_name display_name} isn't related
-        #     to the search query.
+        #     Output only. Activity name snippet shows how the
+        #     {Google::Cloud::Talent::V4beta1::Activity#display_name display_name} is
+        #     related to a search query. It's empty if the
+        #     {Google::Cloud::Talent::V4beta1::Activity#display_name display_name} isn't
+        #     related to the search query.
         # @!attribute [rw] activity_description_snippet
         #   @return [String]
         #     Output only. Activity description snippet shows how the
-        #     {Google::Cloud::Talent::V4beta1::Activity#description description} is related to a search query. It's empty if the
-        #     {Google::Cloud::Talent::V4beta1::Activity#description description} isn't related to the search query.
+        #     {Google::Cloud::Talent::V4beta1::Activity#description description} is related
+        #     to a search query. It's empty if the
+        #     {Google::Cloud::Talent::V4beta1::Activity#description description} isn't
+        #     related to the search query.
         # @!attribute [rw] skills_used_snippet
         #   @return [Array<String>]
         #     Output only. Skill used snippet shows how the corresponding
-        #     {Google::Cloud::Talent::V4beta1::Activity#skills_used skills_used} are related to a search query. It's empty if the
-        #     corresponding {Google::Cloud::Talent::V4beta1::Activity#skills_used skills_used} are not related to the search query.
+        #     {Google::Cloud::Talent::V4beta1::Activity#skills_used skills_used} are related
+        #     to a search query. It's empty if the corresponding
+        #     {Google::Cloud::Talent::V4beta1::Activity#skills_used skills_used} are not
+        #     related to the search query.
         class Activity; end
 
         # Resource that represents a publication resource of a candidate.
@@ -894,11 +940,16 @@ module Google
         #
         #     The information of job which the candidate applied for.
         #
-        #     If {Google::Cloud::Talent::V4beta1::Job#name Job#name} is provided, the corresponding {Google::Cloud::Talent::V4beta1::Job Job} must be created.
+        #     If {Google::Cloud::Talent::V4beta1::Job#name Job#name} is provided, the
+        #     corresponding {Google::Cloud::Talent::V4beta1::Job Job} must be created.
         #
-        #     Otherwise, only {Google::Cloud::Talent::V4beta1::Job#requisition_id Job#requisition_id}, {Google::Cloud::Talent::V4beta1::Job#title Job#title},
-        #     {Google::Cloud::Talent::V4beta1::Job#description Job#description} and {Google::Cloud::Talent::V4beta1::Job#addresses Job#addresses} provided here are persisted
-        #     in the application. No {Google::Cloud::Talent::V4beta1::Job Job} entity is created in this case.
+        #     Otherwise, only
+        #     {Google::Cloud::Talent::V4beta1::Job#requisition_id Job#requisition_id},
+        #     {Google::Cloud::Talent::V4beta1::Job#title Job#title},
+        #     {Google::Cloud::Talent::V4beta1::Job#description Job#description} and
+        #     {Google::Cloud::Talent::V4beta1::Job#addresses Job#addresses} provided here
+        #     are persisted in the application. No {Google::Cloud::Talent::V4beta1::Job Job}
+        #     entity is created in this case.
         # @!attribute [rw] application_id
         #   @return [String]
         #     Optional.

@@ -72,7 +72,7 @@ describe Google::Cloud::Talent::V4beta1::ProfileServiceClient do
 
     it 'invokes list_profiles without error' do
       # Create request parameters
-      formatted_parent = Google::Cloud::Talent::V4beta1::ProfileServiceClient.company_path("[PROJECT]", "[COMPANY]")
+      formatted_parent = Google::Cloud::Talent::V4beta1::ProfileServiceClient.tenant_path("[PROJECT]", "[TENANT]")
 
       # Create expected grpc response
       next_page_token = ""
@@ -110,7 +110,7 @@ describe Google::Cloud::Talent::V4beta1::ProfileServiceClient do
 
     it 'invokes list_profiles with error' do
       # Create request parameters
-      formatted_parent = Google::Cloud::Talent::V4beta1::ProfileServiceClient.company_path("[PROJECT]", "[COMPANY]")
+      formatted_parent = Google::Cloud::Talent::V4beta1::ProfileServiceClient.tenant_path("[PROJECT]", "[TENANT]")
 
       # Mock Grpc layer
       mock_method = proc do |request|
@@ -144,7 +144,7 @@ describe Google::Cloud::Talent::V4beta1::ProfileServiceClient do
 
     it 'invokes create_profile without error' do
       # Create request parameters
-      formatted_parent = Google::Cloud::Talent::V4beta1::ProfileServiceClient.company_path("[PROJECT]", "[COMPANY]")
+      formatted_parent = Google::Cloud::Talent::V4beta1::ProfileServiceClient.tenant_path("[PROJECT]", "[TENANT]")
       profile = {}
 
       # Create expected grpc response
@@ -202,7 +202,7 @@ describe Google::Cloud::Talent::V4beta1::ProfileServiceClient do
 
     it 'invokes create_profile with error' do
       # Create request parameters
-      formatted_parent = Google::Cloud::Talent::V4beta1::ProfileServiceClient.company_path("[PROJECT]", "[COMPANY]")
+      formatted_parent = Google::Cloud::Talent::V4beta1::ProfileServiceClient.tenant_path("[PROJECT]", "[TENANT]")
       profile = {}
 
       # Mock Grpc layer
@@ -238,7 +238,7 @@ describe Google::Cloud::Talent::V4beta1::ProfileServiceClient do
 
     it 'invokes get_profile without error' do
       # Create request parameters
-      formatted_name = Google::Cloud::Talent::V4beta1::ProfileServiceClient.profile_path("[PROJECT]", "[COMPANY]", "[PROFILE]")
+      formatted_name = Google::Cloud::Talent::V4beta1::ProfileServiceClient.profile_path("[PROJECT]", "[TENANT]", "[PROFILE]")
 
       # Create expected grpc response
       name_2 = "name2-1052831874"
@@ -294,7 +294,7 @@ describe Google::Cloud::Talent::V4beta1::ProfileServiceClient do
 
     it 'invokes get_profile with error' do
       # Create request parameters
-      formatted_name = Google::Cloud::Talent::V4beta1::ProfileServiceClient.profile_path("[PROJECT]", "[COMPANY]", "[PROFILE]")
+      formatted_name = Google::Cloud::Talent::V4beta1::ProfileServiceClient.profile_path("[PROJECT]", "[TENANT]", "[PROFILE]")
 
       # Mock Grpc layer
       mock_method = proc do |request|
@@ -418,7 +418,7 @@ describe Google::Cloud::Talent::V4beta1::ProfileServiceClient do
 
     it 'invokes delete_profile without error' do
       # Create request parameters
-      formatted_name = Google::Cloud::Talent::V4beta1::ProfileServiceClient.profile_path("[PROJECT]", "[COMPANY]", "[PROFILE]")
+      formatted_name = Google::Cloud::Talent::V4beta1::ProfileServiceClient.profile_path("[PROJECT]", "[TENANT]", "[PROFILE]")
 
       # Mock Grpc layer
       mock_method = proc do |request|
@@ -453,7 +453,7 @@ describe Google::Cloud::Talent::V4beta1::ProfileServiceClient do
 
     it 'invokes delete_profile with error' do
       # Create request parameters
-      formatted_name = Google::Cloud::Talent::V4beta1::ProfileServiceClient.profile_path("[PROJECT]", "[COMPANY]", "[PROFILE]")
+      formatted_name = Google::Cloud::Talent::V4beta1::ProfileServiceClient.profile_path("[PROJECT]", "[TENANT]", "[PROFILE]")
 
       # Mock Grpc layer
       mock_method = proc do |request|
@@ -487,7 +487,7 @@ describe Google::Cloud::Talent::V4beta1::ProfileServiceClient do
 
     it 'invokes search_profiles without error' do
       # Create request parameters
-      formatted_parent = Google::Cloud::Talent::V4beta1::ProfileServiceClient.company_path("[PROJECT]", "[COMPANY]")
+      formatted_parent = Google::Cloud::Talent::V4beta1::ProfileServiceClient.tenant_path("[PROJECT]", "[TENANT]")
       request_metadata = {}
 
       # Create expected grpc response
@@ -532,7 +532,7 @@ describe Google::Cloud::Talent::V4beta1::ProfileServiceClient do
 
     it 'invokes search_profiles with error' do
       # Create request parameters
-      formatted_parent = Google::Cloud::Talent::V4beta1::ProfileServiceClient.company_path("[PROJECT]", "[COMPANY]")
+      formatted_parent = Google::Cloud::Talent::V4beta1::ProfileServiceClient.tenant_path("[PROJECT]", "[TENANT]")
       request_metadata = {}
 
       # Mock Grpc layer

@@ -34,9 +34,7 @@ module Google
     # https://support.google.com/business/answer/6397478
     # @!attribute [rw] revision
     #   @return [Integer]
-    #     The schema revision of the `PostalAddress`. This must be set to 0, which is
-    #     the latest revision.
-    #
+    #     The schema revision of the `PostalAddress`.
     #     All new revisions **must** be backward compatible with old revisions.
     # @!attribute [rw] region_code
     #   @return [String]

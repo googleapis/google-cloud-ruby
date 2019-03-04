@@ -185,8 +185,9 @@ module Google
 
           # Service calls
 
-          # Parses a resume into a {Google::Cloud::Talent::V4beta1::Profile Profile}. The API attempts to fill out the
-          # following profile fields if present within the resume:
+          # Parses a resume into a {Google::Cloud::Talent::V4beta1::Profile Profile}. The
+          # API attempts to fill out the following profile fields if present within the
+          # resume:
           #
           # * personNames
           # * addresses
@@ -204,15 +205,15 @@ module Google
           # resume, clients need to call the CreateProfile method again with the
           # profile returned.
           #
-          # This API supports the following list of formats:
+          # The following list of formats are supported:
           #
           # * PDF
           # * TXT
           # * DOC
           # * RTF
           # * DOCX
-          #
-          # An error is thrown if the input format is not supported.
+          # * PNG (only when {ParseResumeRequest#enable_ocr} is set to `true`,
+          #   otherwise an error is thrown)
           #
           # @param parent [String]
           #   Required.
@@ -224,9 +225,9 @@ module Google
           # @param resume [String]
           #   Required.
           #
-          #   The bytes of the resume file in common format. Currently the API supports
-          #   the following formats:
-          #   PDF, TXT, DOC, RTF and DOCX.
+          #   The bytes of the resume file in common format, for example, PDF, TXT.
+          #   UTF-8 encoding is required if the resume is text-based, otherwise an error
+          #   is thrown.
           # @param region_code [String]
           #   Optional.
           #
@@ -246,6 +247,12 @@ module Google
           #   For more information, see
           #   [Tags for Identifying Languages](https://tools.ietf.org/html/bcp47){:
           #   class="external" target="_blank" }.
+          # @param options_ [Google::Cloud::Talent::V4beta1::ParseResumeOptions | Hash]
+          #   Optional.
+          #
+          #   Options that change how the resume parse is performed.
+          #   A hash of the same form as `Google::Cloud::Talent::V4beta1::ParseResumeOptions`
+          #   can also be provided.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -269,13 +276,15 @@ module Google
               resume,
               region_code: nil,
               language_code: nil,
+              options_: nil,
               options: nil,
               &block
             req = {
               parent: parent,
               resume: resume,
               region_code: region_code,
-              language_code: language_code
+              language_code: language_code,
+              options: options_
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Cloud::Talent::V4beta1::ParseResumeRequest)
             @parse_resume.call(req, options, &block)

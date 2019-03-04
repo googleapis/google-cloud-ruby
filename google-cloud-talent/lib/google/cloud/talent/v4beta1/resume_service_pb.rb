@@ -12,6 +12,11 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :resume, :bytes, 2
     optional :region_code, :string, 3
     optional :language_code, :string, 4
+    optional :options, :message, 5, "google.cloud.talent.v4beta1.ParseResumeOptions"
+  end
+  add_message "google.cloud.talent.v4beta1.ParseResumeOptions" do
+    optional :enable_ocr, :bool, 1
+    optional :enable_full_skill_detection, :bool, 2
   end
   add_message "google.cloud.talent.v4beta1.ParseResumeResponse" do
     optional :profile, :message, 1, "google.cloud.talent.v4beta1.Profile"
@@ -24,6 +29,7 @@ module Google
     module Talent
       module V4beta1
         ParseResumeRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4beta1.ParseResumeRequest").msgclass
+        ParseResumeOptions = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4beta1.ParseResumeOptions").msgclass
         ParseResumeResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4beta1.ParseResumeResponse").msgclass
       end
     end

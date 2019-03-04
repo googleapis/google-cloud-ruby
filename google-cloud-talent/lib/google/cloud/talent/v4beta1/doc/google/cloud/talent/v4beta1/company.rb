@@ -54,7 +54,8 @@ module Google
         #     The street address of the company's main headquarters, which may be
         #     different from the job location. The service attempts
         #     to geolocate the provided address, and populates a more specific
-        #     location wherever possible in {Google::Cloud::Talent::V4beta1::Company::DerivedInfo#headquarters_location DerivedInfo#headquarters_location}.
+        #     location wherever possible in
+        #     {Google::Cloud::Talent::V4beta1::Company::DerivedInfo#headquarters_location DerivedInfo#headquarters_location}.
         # @!attribute [rw] hiring_agency
         #   @return [true, false]
         #     Optional.
@@ -95,8 +96,9 @@ module Google
         #   @return [Array<String>]
         #     Optional.
         #
-        #     A list of keys of filterable {Google::Cloud::Talent::V4beta1::Job#custom_attributes Job#custom_attributes}, whose
-        #     corresponding `string_values` are used in keyword search. Jobs with
+        #     A list of keys of filterable
+        #     {Google::Cloud::Talent::V4beta1::Job#custom_attributes Job#custom_attributes},
+        #     whose corresponding `string_values` are used in keyword search. Jobs with
         #     `string_values` under these specified field keys are returned if any
         #     of the values matches the search keyword. Custom field values with
         #     parenthesis, brackets and special symbols won't be properly searchable,
@@ -109,14 +111,6 @@ module Google
         #     Output only. Indicates whether a company is flagged to be suspended from
         #     public availability by the service when job content appears suspicious,
         #     abusive, or spammy.
-        # @!attribute [rw] learning_type
-        #   @return [Google::Cloud::Talent::V4beta1::Company::DataLearningType]
-        #     Optional.
-        #
-        #     Indicates whether data owned by this company may be used to provide product
-        #     improvements across other companies.
-        #
-        #     Defaults behavior is {Google::Cloud::Talent::V4beta1::Company::DataLearningType::ISOLATED DataLearningType::ISOLATED} if it's unset.
         class Company
           # Derived details about the company.
           # @!attribute [rw] headquarters_location
@@ -124,20 +118,6 @@ module Google
           #     A structured headquarters location of the company, resolved from
           #     {Company#hq_location} if provided.
           class DerivedInfo; end
-
-          # Enum that represents how user data owned by the company is used.
-          module DataLearningType
-            # Default value.
-            DATA_LEARNING_TYPE_UNSPECIFIED = 0
-
-            # Data owned by this company is used to improve search/recommendation
-            # quality across companies.
-            AGGREGATED = 1
-
-            # Data owned by this company is used to improve search/recommendation
-            # quality for this company only.
-            ISOLATED = 2
-          end
         end
       end
     end

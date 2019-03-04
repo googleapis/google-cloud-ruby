@@ -73,38 +73,38 @@ module Google
           ].freeze
 
 
-          COMPANY_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
-            "projects/{project}/companies/{company}"
+          TENANT_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+            "projects/{project}/tenants/{tenant}"
           )
 
-          private_constant :COMPANY_PATH_TEMPLATE
+          private_constant :TENANT_PATH_TEMPLATE
 
           PROFILE_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
-            "projects/{project}/companies/{company}/profiles/{profile}"
+            "projects/{project}/tenants/{tenant}/profiles/{profile}"
           )
 
           private_constant :PROFILE_PATH_TEMPLATE
 
-          # Returns a fully-qualified company resource name string.
+          # Returns a fully-qualified tenant resource name string.
           # @param project [String]
-          # @param company [String]
+          # @param tenant [String]
           # @return [String]
-          def self.company_path project, company
-            COMPANY_PATH_TEMPLATE.render(
+          def self.tenant_path project, tenant
+            TENANT_PATH_TEMPLATE.render(
               :"project" => project,
-              :"company" => company
+              :"tenant" => tenant
             )
           end
 
           # Returns a fully-qualified profile resource name string.
           # @param project [String]
-          # @param company [String]
+          # @param tenant [String]
           # @param profile [String]
           # @return [String]
-          def self.profile_path project, company, profile
+          def self.profile_path project, tenant, profile
             PROFILE_PATH_TEMPLATE.render(
               :"project" => project,
-              :"company" => company,
+              :"tenant" => tenant,
               :"profile" => profile
             )
           end
@@ -251,10 +251,10 @@ module Google
           # @param parent [String]
           #   Required.
           #
-          #   The resource name of the company under which the job is created.
+          #   The resource name of the tenant under which the job is created.
           #
-          #   The format is "projects/{project_id}/companies/{company_id}", for example,
-          #   "projects/api-test-project/companies/foo".
+          #   The format is "projects/{project_id}/tenants/{tenant_id}", for example,
+          #   "projects/api-test-project/tenants/foo".
           # @param page_size [Integer]
           #   The maximum number of resources contained in the underlying API
           #   response. If page streaming is performed per-resource, this
@@ -288,7 +288,7 @@ module Google
           #   require "google/cloud/talent"
           #
           #   profile_service_client = Google::Cloud::Talent::ProfileService.new(version: :v4beta1)
-          #   formatted_parent = Google::Cloud::Talent::V4beta1::ProfileServiceClient.company_path("[PROJECT]", "[COMPANY]")
+          #   formatted_parent = Google::Cloud::Talent::V4beta1::ProfileServiceClient.tenant_path("[PROJECT]", "[TENANT]")
           #
           #   # Iterate over all results.
           #   profile_service_client.list_profiles(formatted_parent).each do |element|
@@ -323,10 +323,10 @@ module Google
           # @param parent [String]
           #   Required.
           #
-          #   The name of the company this profile belongs to.
+          #   The name of the tenant this profile belongs to.
           #
-          #   The format is "projects/{project_id}/companies/{company_id}", for example,
-          #   "projects/api-test-project/companies/foo".
+          #   The format is "projects/{project_id}/tenants/{tenant_id}", for example,
+          #   "projects/api-test-project/tenants/foo".
           # @param profile [Google::Cloud::Talent::V4beta1::Profile | Hash]
           #   Required.
           #
@@ -345,7 +345,7 @@ module Google
           #   require "google/cloud/talent"
           #
           #   profile_service_client = Google::Cloud::Talent::ProfileService.new(version: :v4beta1)
-          #   formatted_parent = Google::Cloud::Talent::V4beta1::ProfileServiceClient.company_path("[PROJECT]", "[COMPANY]")
+          #   formatted_parent = Google::Cloud::Talent::V4beta1::ProfileServiceClient.tenant_path("[PROJECT]", "[TENANT]")
           #
           #   # TODO: Initialize `profile`:
           #   profile = {}
@@ -372,8 +372,8 @@ module Google
           #   Resource name of the profile to get.
           #
           #   The format is
-          #   "projects/{project_id}/companies/{company_id}/profiles/{profile_id}",
-          #   for example, "projects/api-test-project/companies/foo/profiles/bar".
+          #   "projects/{project_id}/tenants/{tenant_id}/profiles/{profile_id}",
+          #   for example, "projects/api-test-project/tenants/foo/profiles/bar".
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -386,7 +386,7 @@ module Google
           #   require "google/cloud/talent"
           #
           #   profile_service_client = Google::Cloud::Talent::ProfileService.new(version: :v4beta1)
-          #   formatted_name = Google::Cloud::Talent::V4beta1::ProfileServiceClient.profile_path("[PROJECT]", "[COMPANY]", "[PROFILE]")
+          #   formatted_name = Google::Cloud::Talent::V4beta1::ProfileServiceClient.profile_path("[PROJECT]", "[TENANT]", "[PROFILE]")
           #   response = profile_service_client.get_profile(formatted_name)
 
           def get_profile \
@@ -480,8 +480,8 @@ module Google
           #   Resource name of the profile to be deleted.
           #
           #   The format is
-          #   "projects/{project_id}/companies/{company_id}/profiles/{profile_id}",
-          #   for example, "projects/api-test-project/companies/foo/profiles/bar".
+          #   "projects/{project_id}/tenants/{tenant_id}/profiles/{profile_id}",
+          #   for example, "projects/api-test-project/tenants/foo/profiles/bar".
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -493,7 +493,7 @@ module Google
           #   require "google/cloud/talent"
           #
           #   profile_service_client = Google::Cloud::Talent::ProfileService.new(version: :v4beta1)
-          #   formatted_name = Google::Cloud::Talent::V4beta1::ProfileServiceClient.profile_path("[PROJECT]", "[COMPANY]", "[PROFILE]")
+          #   formatted_name = Google::Cloud::Talent::V4beta1::ProfileServiceClient.profile_path("[PROJECT]", "[TENANT]", "[PROFILE]")
           #   profile_service_client.delete_profile(formatted_name)
 
           def delete_profile \
@@ -508,20 +508,22 @@ module Google
             nil
           end
 
-          # Searches for profiles within a company.
+          # Searches for profiles within a tenant.
           #
           # For example, search by raw queries "software engineer in Mountain View" or
           # search by structured filters (location filter, education filter, etc.).
           #
-          # See {Google::Cloud::Talent::V4beta1::SearchProfilesRequest SearchProfilesRequest} for more information.
+          # See
+          # {Google::Cloud::Talent::V4beta1::SearchProfilesRequest SearchProfilesRequest}
+          # for more information.
           #
           # @param parent [String]
           #   Required.
           #
-          #   The resource name of the company to search within.
+          #   The resource name of the tenant to search within.
           #
-          #   The format is "projects/{project_id}/companies/{company_id}", for example,
-          #   "projects/api-test-project/companies/foo".
+          #   The format is "projects/{project_id}/tenants/{tenant_id}", for example,
+          #   "projects/api-test-project/tenants/foo".
           # @param request_metadata [Google::Cloud::Talent::V4beta1::RequestMetadata | Hash]
           #   Required.
           #
@@ -533,7 +535,8 @@ module Google
           # @param profile_query [Google::Cloud::Talent::V4beta1::ProfileQuery | Hash]
           #   Optional.
           #
-          #   Search query to execute. See {Google::Cloud::Talent::V4beta1::ProfileQuery ProfileQuery} for more details.
+          #   Search query to execute. See
+          #   {Google::Cloud::Talent::V4beta1::ProfileQuery ProfileQuery} for more details.
           #   A hash of the same form as `Google::Cloud::Talent::V4beta1::ProfileQuery`
           #   can also be provided.
           # @param page_size [Integer]
@@ -546,7 +549,9 @@ module Google
           #   Optional.
           #
           #   An integer that specifies the current offset (that is, starting result) in
-          #   search results. This field is only considered if {Google::Cloud::Talent::V4beta1::SearchProfilesRequest#page_token page_token} is unset.
+          #   search results. This field is only considered if
+          #   {Google::Cloud::Talent::V4beta1::SearchProfilesRequest#page_token page_token}
+          #   is unset.
           #
           #   The maximum allowed value is 5000. Otherwise an error is thrown.
           #
@@ -592,7 +597,8 @@ module Google
           #   Optional.
           #
           #   A list of expressions specifies histogram requests against matching
-          #   profiles for {Google::Cloud::Talent::V4beta1::SearchProfilesRequest SearchProfilesRequest}.
+          #   profiles for
+          #   {Google::Cloud::Talent::V4beta1::SearchProfilesRequest SearchProfilesRequest}.
           #
           #   The expression syntax looks like a function definition with optional
           #   parameters.
@@ -645,19 +651,29 @@ module Google
           #   * experience_in_months: experience in months. 0 means 0 month to 1 month
           #     (exclusive).
           #   * application_date: The application date specifies application start dates.
-          #     See {Google::Cloud::Talent::V4beta1::ApplicationDateFilter ApplicationDateFilter} for more details.
+          #     See
+          #     {Google::Cloud::Talent::V4beta1::ApplicationDateFilter ApplicationDateFilter}
+          #     for more details.
           #   * application_outcome_reason: The application outcome reason specifies the
           #     outcome reasons of job application.
-          #     See {Google::Cloud::Talent::V4beta1::ApplicationOutcomeReasonFilter ApplicationOutcomeReasonFilter} for more details.
+          #     See
+          #     {Google::Cloud::Talent::V4beta1::ApplicationOutcomeReasonFilter ApplicationOutcomeReasonFilter}
+          #     for more details.
           #   * application_last_stage: The application last stage specifies the last
           #     stage of job application.
-          #     See {Google::Cloud::Talent::V4beta1::ApplicationLastStageFilter ApplicationLastStageFilter} for more details.
+          #     See
+          #     {Google::Cloud::Talent::V4beta1::ApplicationLastStageFilter ApplicationLastStageFilter}
+          #     for more details.
           #   * application_job_title: The application job title specifies the job
           #     applied for in the application.
-          #     See {Google::Cloud::Talent::V4beta1::ApplicationJobFilter ApplicationJobFilter} for more details.
+          #     See
+          #     {Google::Cloud::Talent::V4beta1::ApplicationJobFilter ApplicationJobFilter}
+          #     for more details.
           #   * application_status: The application status specifies the status of job
           #     application.
-          #     See {Google::Cloud::Talent::V4beta1::ApplicationStatusFilter ApplicationStatusFilter} for more details.
+          #     See
+          #     {Google::Cloud::Talent::V4beta1::ApplicationStatusFilter ApplicationStatusFilter}
+          #     for more details.
           #   * hirable_status: Hirable status specifies the profile's hirable status.
           #   * string_custom_attribute: String custom attributes. Values can be accessed
           #     via square bracket notation like string_custom_attribute["key1"].
@@ -690,7 +706,7 @@ module Google
           #   require "google/cloud/talent"
           #
           #   profile_service_client = Google::Cloud::Talent::ProfileService.new(version: :v4beta1)
-          #   formatted_parent = Google::Cloud::Talent::V4beta1::ProfileServiceClient.company_path("[PROJECT]", "[COMPANY]")
+          #   formatted_parent = Google::Cloud::Talent::V4beta1::ProfileServiceClient.tenant_path("[PROJECT]", "[TENANT]")
           #
           #   # TODO: Initialize `request_metadata`:
           #   request_metadata = {}
