@@ -16,25 +16,25 @@ require "helper"
 
 describe Google::Cloud::Spanner::Results, :anonymous_struct, :mock_spanner do
   let :results_hash do
-    {"metadata"=>
-      {"rowType"=>
-        {"fields"=>
-          [{"type"=>
-             {"code"=>"ARRAY",
-              "arrayElementType"=>
-               {"code"=>"STRUCT",
-                "structType"=>
-                 {"fields"=>
-                   [{"type"=>{"code"=>"INT64"}},
-                    {"type"=>{"code"=>"INT64"}}]}}}}]}},
-     "values"=>
-      [{"listValue"=>
-         {"values"=>
-           [{"listValue"=>
-              {"values"=>[{"stringValue"=>"1"}, {"stringValue"=>"2"}]}}]}}]}
+    {metadata:
+      {row_type:
+        {fields:
+          [{type:
+             {code: :ARRAY,
+              array_element_type:
+               {code: :STRUCT,
+                struct_type:
+                 {fields:
+                   [{type:{code: :INT64}},
+                    {type:{code: :INT64}}]}}}}]}},
+     values:
+      [{list_value:
+         {values:
+           [{list_value:
+              {values:[{string_value: "1"}, {string_value: "2"}]}}]}}]}
   end
   let(:results_enum) do
-    [Google::Spanner::V1::PartialResultSet.decode_json(results_hash.to_json)].to_enum
+    [Google::Spanner::V1::PartialResultSet.new(results_hash)].to_enum
   end
   let(:results) { Google::Cloud::Spanner::Results.from_enum results_enum, spanner.service }
 

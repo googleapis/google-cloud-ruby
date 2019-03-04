@@ -24,19 +24,18 @@ describe Google::Cloud::Spanner::Session, :keepalive, :mock_spanner do
   let :results_hash do
     {
       metadata: {
-        rowType: {
+        row_type: {
           fields: [
-            { type: { code: "INT64" } }
+            { type: { code: :INT64 } }
           ]
         }
       },
       values: [
-        { stringValue: "1" }
+        { string_value: "1" }
       ]
     }
   end
-  let(:results_json) { results_hash.to_json }
-  let(:results_grpc) { Google::Spanner::V1::PartialResultSet.decode_json results_json }
+  let(:results_grpc) { Google::Spanner::V1::PartialResultSet.new results_hash }
   let(:results_enum) { Array(results_grpc).to_enum }
 
   let(:labels) { { "env" => "production" } }

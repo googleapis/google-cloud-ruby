@@ -77,19 +77,19 @@ class MockSpanner < Minitest::Spec
 
   def instance_configs_hash
     {
-      instanceConfigs: [
+      instance_configs: [
         { name: "projects/#{project}/instanceConfigs/regional-europe-west1",
-          displayName: "EU West 1"},
+          display_name: "EU West 1"},
         { name: "projects/#{project}/instanceConfigs/regional-us-west1",
-          displayName: "US West 1"},
+          display_name: "US West 1"},
         { name: "projects/#{project}/instanceConfigs/regional-us-central1",
-          displayName: "US Central 1"}
+          display_name: "US Central 1"}
       ]
     }
   end
 
   def instance_config_hash
-    instance_configs_hash[:instanceConfigs].last
+    instance_configs_hash[:instance_configs].last
   end
 
   def instances_hash
@@ -100,8 +100,8 @@ class MockSpanner < Minitest::Spec
     {
       name: "projects/#{project}/instances/#{name}",
       config: "projects/#{project}/instanceConfigs/regional-us-central1",
-      displayName: name.split("-").map(&:capitalize).join(" "),
-      nodeCount: nodes,
+      display_name: name.split("-").map(&:capitalize).join(" "),
+      node_count: nodes,
       state: state,
       labels: labels
     }

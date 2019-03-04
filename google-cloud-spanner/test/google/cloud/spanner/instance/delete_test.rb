@@ -16,8 +16,7 @@ require "helper"
 
 describe Google::Cloud::Spanner::Instance, :delete, :mock_spanner do
   let(:instance_id) { "my-instance-id" }
-  let(:instance_json) { instance_hash(name: instance_id).to_json }
-  let(:instance_grpc) { Google::Spanner::Admin::Instance::V1::Instance.decode_json instance_json }
+  let(:instance_grpc) { Google::Spanner::Admin::Instance::V1::Instance.new instance_hash(name: instance_id) }
   let(:instance) { Google::Cloud::Spanner::Instance.from_grpc instance_grpc, spanner.service }
 
   it "can delete itself" do

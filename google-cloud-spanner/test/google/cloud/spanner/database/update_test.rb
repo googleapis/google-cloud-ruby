@@ -17,11 +17,17 @@ require "helper"
 describe Google::Cloud::Spanner::Database, :update, :mock_spanner do
   let(:instance_id) { "my-instance-id" }
   let(:database_id) { "my-database-id" }
-  let(:database_json) { database_hash(instance_id: instance_id, database_id: database_id).to_json }
-  let(:database_grpc) { Google::Spanner::Admin::Database::V1::Database.decode_json database_json }
+  let(:database_grpc) { Google::Spanner::Admin::Database::V1::Database.new database_hash(instance_id: instance_id, database_id: database_id) }
   let(:database) { Google::Cloud::Spanner::Database.from_grpc database_grpc, spanner.service }
-  let(:job_json) { "{\"name\":\"1234567890\",\"metadata\":{\"typeUrl\":\"google.spanner.admin.database.v1.UpdateDatabaseDdlRequest\",\"value\":\"\"}}" }
-  let(:job_grpc) { Google::Longrunning::Operation.decode_json job_json }
+  let(:job_grpc) do
+    Google::Longrunning::Operation.new(
+      name: "1234567890",
+      metadata: {
+        type_url: "google.spanner.admin.database.v1.UpdateDatabaseDdlRequest",
+        value: ""
+      }
+    )
+  end
 
   it "updates with single statement" do
     update_res = Google::Gax::Operation.new(

@@ -18,7 +18,7 @@ describe Google::Cloud::Spanner::Results, :empty_fields, :mock_spanner do
   let :results_types do
     {
       metadata: {
-        rowType: {
+        row_type: {
           fields: []
         }
       }
@@ -30,7 +30,7 @@ describe Google::Cloud::Spanner::Results, :empty_fields, :mock_spanner do
     }
   end
   let(:results_enum) do
-    [Google::Spanner::V1::PartialResultSet.decode_json(results_types.to_json)].to_enum
+    [Google::Spanner::V1::PartialResultSet.new(results_types)].to_enum
   end
   let(:results) { Google::Cloud::Spanner::Results.from_enum results_enum, spanner.service }
 

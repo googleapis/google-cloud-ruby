@@ -18,7 +18,7 @@ describe Google::Cloud::Spanner::Project, :instance, :mock_spanner do
   it "gets an instance" do
     instance_id = "found-instance"
 
-    get_res = Google::Spanner::Admin::Instance::V1::Instance.decode_json instance_hash(name: instance_id).to_json
+    get_res = Google::Spanner::Admin::Instance::V1::Instance.new instance_hash(name: instance_id)
     mock = Minitest::Mock.new
     mock.expect :get_instance, get_res, [instance_path(instance_id)]
     spanner.service.mocked_instances = mock

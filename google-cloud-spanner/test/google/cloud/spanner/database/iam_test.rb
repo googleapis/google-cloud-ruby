@@ -17,12 +17,11 @@ require "helper"
 describe Google::Cloud::Spanner::Database, :iam, :mock_spanner do
   let(:instance_id) { "my-instance-id" }
   let(:database_id) { "my-database-id" }
-  let(:database_json) { database_hash(instance_id: instance_id, database_id: database_id).to_json }
-  let(:database_grpc) { Google::Spanner::Admin::Database::V1::Database.decode_json database_json }
+  let(:database_grpc) { Google::Spanner::Admin::Database::V1::Database.new database_hash(instance_id: instance_id, database_id: database_id) }
   let(:database) { Google::Cloud::Spanner::Database.from_grpc database_grpc, spanner.service }
-  let(:viewer_policy_json) do
+  let(:viewer_policy_hash) do
     {
-      etag: "CAE=",
+      etag: "\b\x01",
       bindings: [{
         role: "roles/viewer",
         members: [
@@ -30,11 +29,11 @@ describe Google::Cloud::Spanner::Database, :iam, :mock_spanner do
           "serviceAccount:1234567890@developer.gserviceaccount.com"
          ]
       }]
-    }.to_json
+    }
   end
-  let(:owner_policy_json) do
+  let(:owner_policy_hash) do
     {
-      etag: "CAE=",
+      etag: "\b\x01",
       bindings: [{
         role: "roles/owner",
         members: [
@@ -42,11 +41,11 @@ describe Google::Cloud::Spanner::Database, :iam, :mock_spanner do
           "serviceAccount:0987654321@developer.gserviceaccount.com"
          ]
       }]
-    }.to_json
+    }
   end
 
   it "gets the IAM Policy" do
-    get_res = Google::Iam::V1::Policy.decode_json viewer_policy_json
+    get_res = Google::Iam::V1::Policy.new viewer_policy_hash
     mock = Minitest::Mock.new
     mock.expect :get_iam_policy, get_res, [database.path]
     database.service.mocked_databases = mock
@@ -66,16 +65,16 @@ describe Google::Cloud::Spanner::Database, :iam, :mock_spanner do
   end
 
   it "sets the IAM Policy" do
-    get_res = Google::Iam::V1::Policy.decode_json owner_policy_json
+    get_res = Google::Iam::V1::Policy.new owner_policy_hash
     mock = Minitest::Mock.new
     mock.expect :get_iam_policy, get_res, [database.path]
 
-    updated_policy_hash = JSON.parse owner_policy_json
-    updated_policy_hash["bindings"].first["members"].shift
-    updated_policy_hash["bindings"].first["members"] << "user:newowner@example.com"
+    updated_policy_hash = owner_policy_hash.dup
+    updated_policy_hash[:bindings].first[:members].shift
+    updated_policy_hash[:bindings].first[:members] << "user:newowner@example.com"
 
-    set_req = Google::Iam::V1::Policy.decode_json updated_policy_hash.to_json
-    set_res = Google::Iam::V1::Policy.decode_json updated_policy_hash.merge(etag: "CBD=").to_json
+    set_req = Google::Iam::V1::Policy.new updated_policy_hash
+    set_res = Google::Iam::V1::Policy.new updated_policy_hash.merge(etag: "\b\x10")
     mock.expect :set_iam_policy, set_res, [database.path, set_req]
     database.service.mocked_databases = mock
 
@@ -101,16 +100,16 @@ describe Google::Cloud::Spanner::Database, :iam, :mock_spanner do
 
   it "sets the IAM Policy in a block" do
 
-    get_res = Google::Iam::V1::Policy.decode_json owner_policy_json
+    get_res = Google::Iam::V1::Policy.new owner_policy_hash
     mock = Minitest::Mock.new
     mock.expect :get_iam_policy, get_res, [database.path]
 
-    updated_policy_hash = JSON.parse owner_policy_json
-    updated_policy_hash["bindings"].first["members"].shift
-    updated_policy_hash["bindings"].first["members"] << "user:newowner@example.com"
+    updated_policy_hash = owner_policy_hash.dup
+    updated_policy_hash[:bindings].first[:members].shift
+    updated_policy_hash[:bindings].first[:members] << "user:newowner@example.com"
 
-    set_req = Google::Iam::V1::Policy.decode_json updated_policy_hash.to_json
-    set_res = Google::Iam::V1::Policy.decode_json updated_policy_hash.merge(etag: "CBD=").to_json
+    set_req = Google::Iam::V1::Policy.new updated_policy_hash
+    set_res = Google::Iam::V1::Policy.new updated_policy_hash.merge(etag: "\b\x10")
     mock.expect :set_iam_policy, set_res, [database.path, set_req]
     database.service.mocked_databases = mock
 

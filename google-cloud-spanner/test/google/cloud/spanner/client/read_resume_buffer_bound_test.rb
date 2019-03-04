@@ -23,18 +23,18 @@ describe Google::Cloud::Spanner::Client, :read, :resume, :buffer_bound, :mock_sp
   let :results_header do
     {
       metadata: {
-        rowType: {
+        row_type: {
           fields: [
-            { name: "id",          type: { code: "INT64" } },
-            { name: "name",        type: { code: "STRING" } },
-            { name: "active",      type: { code: "BOOL" } },
-            { name: "age",         type: { code: "INT64" } },
-            { name: "score",       type: { code: "FLOAT64" } },
-            { name: "updated_at",  type: { code: "TIMESTAMP" } },
-            { name: "birthday",    type: { code: "DATE"} },
-            { name: "avatar",      type: { code: "BYTES" } },
-            { name: "project_ids", type: { code: "ARRAY",
-                                           arrayElementType: { code: "INT64" } } }
+            { name: "id",          type: { code: :INT64 } },
+            { name: "name",        type: { code: :STRING } },
+            { name: "active",      type: { code: :BOOL } },
+            { name: "age",         type: { code: :INT64 } },
+            { name: "score",       type: { code: :FLOAT64 } },
+            { name: "updated_at",  type: { code: :TIMESTAMP } },
+            { name: "birthday",    type: { code: :DATE} },
+            { name: "avatar",      type: { code: :BYTES } },
+            { name: "project_ids", type: { code: :ARRAY,
+                                           array_element_type: { code: :INT64 } } }
           ]
         }
       }
@@ -43,41 +43,41 @@ describe Google::Cloud::Spanner::Client, :read, :resume, :buffer_bound, :mock_sp
   let :results_hash1 do
     {
       values: [
-        { stringValue: "1" },
-        { stringValue: "Charlie" }
+        { string_value: "1" },
+        { string_value: "Charlie" }
       ]
     }
   end
   let :results_hash2 do
     {
       values: [
-        { boolValue: true},
-        { stringValue: "29" }
+        { bool_value: true},
+        { string_value: "29" }
       ]
     }
   end
   let :results_hash3 do
     {
       values: [
-        { numberValue: 0.9 },
-        { stringValue: "2017-01-02T03:04:05.060000000Z" }
+        { number_value: 0.9 },
+        { string_value: "2017-01-02T03:04:05.060000000Z" }
       ]
     }
   end
   let :results_hash4 do
     {
       values: [
-        { stringValue: "1950-01-01" },
-        { stringValue: "aW1hZ2U=" },
+        { string_value: "1950-01-01" },
+        { string_value: "aW1hZ2U=" },
       ]
     }
   end
   let :results_hash5 do
     {
       values: [
-        { listValue: { values: [ { stringValue: "1"},
-                                 { stringValue: "2"},
-                                 { stringValue: "3"} ]}}
+        { list_value: { values: [ { string_value: "1"},
+                                 { string_value: "2"},
+                                 { string_value: "3"} ]}}
       ]
     }
   end
@@ -86,22 +86,22 @@ describe Google::Cloud::Spanner::Client, :read, :resume, :buffer_bound, :mock_sp
 
   it "returns all rows even when there is no resume_token" do
     no_tokens_enum = [
-      Google::Spanner::V1::PartialResultSet.decode_json(results_header.to_json),
-      Google::Spanner::V1::PartialResultSet.decode_json(results_hash1.to_json),
-      Google::Spanner::V1::PartialResultSet.decode_json(results_hash2.to_json),
-      Google::Spanner::V1::PartialResultSet.decode_json(results_hash3.to_json),
-      Google::Spanner::V1::PartialResultSet.decode_json(results_hash4.to_json),
-      Google::Spanner::V1::PartialResultSet.decode_json(results_hash5.to_json),
-      Google::Spanner::V1::PartialResultSet.decode_json(results_hash1.to_json),
-      Google::Spanner::V1::PartialResultSet.decode_json(results_hash2.to_json),
-      Google::Spanner::V1::PartialResultSet.decode_json(results_hash3.to_json),
-      Google::Spanner::V1::PartialResultSet.decode_json(results_hash4.to_json),
-      Google::Spanner::V1::PartialResultSet.decode_json(results_hash5.to_json),
-      Google::Spanner::V1::PartialResultSet.decode_json(results_hash1.to_json),
-      Google::Spanner::V1::PartialResultSet.decode_json(results_hash2.to_json),
-      Google::Spanner::V1::PartialResultSet.decode_json(results_hash3.to_json),
-      Google::Spanner::V1::PartialResultSet.decode_json(results_hash4.to_json),
-      Google::Spanner::V1::PartialResultSet.decode_json(results_hash5.to_json)
+      Google::Spanner::V1::PartialResultSet.new(results_header),
+      Google::Spanner::V1::PartialResultSet.new(results_hash1),
+      Google::Spanner::V1::PartialResultSet.new(results_hash2),
+      Google::Spanner::V1::PartialResultSet.new(results_hash3),
+      Google::Spanner::V1::PartialResultSet.new(results_hash4),
+      Google::Spanner::V1::PartialResultSet.new(results_hash5),
+      Google::Spanner::V1::PartialResultSet.new(results_hash1),
+      Google::Spanner::V1::PartialResultSet.new(results_hash2),
+      Google::Spanner::V1::PartialResultSet.new(results_hash3),
+      Google::Spanner::V1::PartialResultSet.new(results_hash4),
+      Google::Spanner::V1::PartialResultSet.new(results_hash5),
+      Google::Spanner::V1::PartialResultSet.new(results_hash1),
+      Google::Spanner::V1::PartialResultSet.new(results_hash2),
+      Google::Spanner::V1::PartialResultSet.new(results_hash3),
+      Google::Spanner::V1::PartialResultSet.new(results_hash4),
+      Google::Spanner::V1::PartialResultSet.new(results_hash5)
     ].to_enum
 
     mock = Minitest::Mock.new
@@ -123,22 +123,22 @@ describe Google::Cloud::Spanner::Client, :read, :resume, :buffer_bound, :mock_sp
 
   it "returns all rows even when all requests have resume_token" do
     all_tokens_enum = [
-      Google::Spanner::V1::PartialResultSet.decode_json(results_header.to_json),
-      Google::Spanner::V1::PartialResultSet.decode_json(results_hash1.merge(resumeToken: Base64.strict_encode64("xyz123")).to_json),
-      Google::Spanner::V1::PartialResultSet.decode_json(results_hash2.merge(resumeToken: Base64.strict_encode64("xyz124")).to_json),
-      Google::Spanner::V1::PartialResultSet.decode_json(results_hash3.merge(resumeToken: Base64.strict_encode64("xyz125")).to_json),
-      Google::Spanner::V1::PartialResultSet.decode_json(results_hash4.merge(resumeToken: Base64.strict_encode64("xyz126")).to_json),
-      Google::Spanner::V1::PartialResultSet.decode_json(results_hash5.merge(resumeToken: Base64.strict_encode64("xyz127")).to_json),
-      Google::Spanner::V1::PartialResultSet.decode_json(results_hash1.merge(resumeToken: Base64.strict_encode64("xyz128")).to_json),
-      Google::Spanner::V1::PartialResultSet.decode_json(results_hash2.merge(resumeToken: Base64.strict_encode64("xyz129")).to_json),
-      Google::Spanner::V1::PartialResultSet.decode_json(results_hash3.merge(resumeToken: Base64.strict_encode64("xyz130")).to_json),
-      Google::Spanner::V1::PartialResultSet.decode_json(results_hash4.merge(resumeToken: Base64.strict_encode64("xyz131")).to_json),
-      Google::Spanner::V1::PartialResultSet.decode_json(results_hash5.merge(resumeToken: Base64.strict_encode64("xyz132")).to_json),
-      Google::Spanner::V1::PartialResultSet.decode_json(results_hash1.merge(resumeToken: Base64.strict_encode64("xyz133")).to_json),
-      Google::Spanner::V1::PartialResultSet.decode_json(results_hash2.merge(resumeToken: Base64.strict_encode64("xyz134")).to_json),
-      Google::Spanner::V1::PartialResultSet.decode_json(results_hash3.merge(resumeToken: Base64.strict_encode64("xyz135")).to_json),
-      Google::Spanner::V1::PartialResultSet.decode_json(results_hash4.merge(resumeToken: Base64.strict_encode64("xyz137")).to_json),
-      Google::Spanner::V1::PartialResultSet.decode_json(results_hash5.merge(resumeToken: Base64.strict_encode64("xyz128")).to_json)
+      Google::Spanner::V1::PartialResultSet.new(results_header),
+      Google::Spanner::V1::PartialResultSet.new(results_hash1.merge(resume_token: Base64.strict_encode64("xyz123"))),
+      Google::Spanner::V1::PartialResultSet.new(results_hash2.merge(resume_token: Base64.strict_encode64("xyz124"))),
+      Google::Spanner::V1::PartialResultSet.new(results_hash3.merge(resume_token: Base64.strict_encode64("xyz125"))),
+      Google::Spanner::V1::PartialResultSet.new(results_hash4.merge(resume_token: Base64.strict_encode64("xyz126"))),
+      Google::Spanner::V1::PartialResultSet.new(results_hash5.merge(resume_token: Base64.strict_encode64("xyz127"))),
+      Google::Spanner::V1::PartialResultSet.new(results_hash1.merge(resume_token: Base64.strict_encode64("xyz128"))),
+      Google::Spanner::V1::PartialResultSet.new(results_hash2.merge(resume_token: Base64.strict_encode64("xyz129"))),
+      Google::Spanner::V1::PartialResultSet.new(results_hash3.merge(resume_token: Base64.strict_encode64("xyz130"))),
+      Google::Spanner::V1::PartialResultSet.new(results_hash4.merge(resume_token: Base64.strict_encode64("xyz131"))),
+      Google::Spanner::V1::PartialResultSet.new(results_hash5.merge(resume_token: Base64.strict_encode64("xyz132"))),
+      Google::Spanner::V1::PartialResultSet.new(results_hash1.merge(resume_token: Base64.strict_encode64("xyz133"))),
+      Google::Spanner::V1::PartialResultSet.new(results_hash2.merge(resume_token: Base64.strict_encode64("xyz134"))),
+      Google::Spanner::V1::PartialResultSet.new(results_hash3.merge(resume_token: Base64.strict_encode64("xyz135"))),
+      Google::Spanner::V1::PartialResultSet.new(results_hash4.merge(resume_token: Base64.strict_encode64("xyz137"))),
+      Google::Spanner::V1::PartialResultSet.new(results_hash5.merge(resume_token: Base64.strict_encode64("xyz128")))
     ].to_enum
 
     mock = Minitest::Mock.new
@@ -160,23 +160,23 @@ describe Google::Cloud::Spanner::Client, :read, :resume, :buffer_bound, :mock_sp
 
   it "returns buffered responses once it hits the buffer bounds, but will re-raise if there is no resume_token" do
     bounds_with_abort_enum = [
-      Google::Spanner::V1::PartialResultSet.decode_json(results_header.to_json),
-      Google::Spanner::V1::PartialResultSet.decode_json(results_hash1.merge(resumeToken: Base64.strict_encode64("xyz123")).to_json),
-      Google::Spanner::V1::PartialResultSet.decode_json(results_hash2.to_json),
-      Google::Spanner::V1::PartialResultSet.decode_json(results_hash3.to_json),
-      Google::Spanner::V1::PartialResultSet.decode_json(results_hash4.to_json),
-      Google::Spanner::V1::PartialResultSet.decode_json(results_hash5.to_json),
-      Google::Spanner::V1::PartialResultSet.decode_json(results_hash1.to_json),
-      Google::Spanner::V1::PartialResultSet.decode_json(results_hash2.to_json),
-      Google::Spanner::V1::PartialResultSet.decode_json(results_hash3.to_json),
-      Google::Spanner::V1::PartialResultSet.decode_json(results_hash4.to_json),
-      Google::Spanner::V1::PartialResultSet.decode_json(results_hash5.to_json),
-      Google::Spanner::V1::PartialResultSet.decode_json(results_hash1.to_json),
-      Google::Spanner::V1::PartialResultSet.decode_json(results_hash2.to_json),
-      Google::Spanner::V1::PartialResultSet.decode_json(results_hash3.to_json),
+      Google::Spanner::V1::PartialResultSet.new(results_header),
+      Google::Spanner::V1::PartialResultSet.new(results_hash1.merge(resume_token: Base64.strict_encode64("xyz123"))),
+      Google::Spanner::V1::PartialResultSet.new(results_hash2),
+      Google::Spanner::V1::PartialResultSet.new(results_hash3),
+      Google::Spanner::V1::PartialResultSet.new(results_hash4),
+      Google::Spanner::V1::PartialResultSet.new(results_hash5),
+      Google::Spanner::V1::PartialResultSet.new(results_hash1),
+      Google::Spanner::V1::PartialResultSet.new(results_hash2),
+      Google::Spanner::V1::PartialResultSet.new(results_hash3),
+      Google::Spanner::V1::PartialResultSet.new(results_hash4),
+      Google::Spanner::V1::PartialResultSet.new(results_hash5),
+      Google::Spanner::V1::PartialResultSet.new(results_hash1),
+      Google::Spanner::V1::PartialResultSet.new(results_hash2),
+      Google::Spanner::V1::PartialResultSet.new(results_hash3),
       GRPC::Unavailable,
-      Google::Spanner::V1::PartialResultSet.decode_json(results_hash4.to_json),
-      Google::Spanner::V1::PartialResultSet.decode_json(results_hash5.to_json)
+      Google::Spanner::V1::PartialResultSet.new(results_hash4),
+      Google::Spanner::V1::PartialResultSet.new(results_hash5)
     ].to_enum
 
     mock = Minitest::Mock.new
