@@ -15,6 +15,10 @@
 require "helper"
 
 describe Google::Cloud::Firestore::CommitResponse, :mock_firestore do
+  let(:update_time) { Time.parse "2017-12-20T05:33:53.428000000Z" }
+  let(:update_timestamp) { Google::Cloud::Firestore::Convert.time_to_timestamp update_time }
+  let(:commit_time) { Time.parse "2017-12-20T05:35:21.295000000Z" }
+  let(:commit_timestamp) { Google::Cloud::Firestore::Convert.time_to_timestamp update_time }
 
   it "can represent no result" do
     grpc_response = nil
@@ -35,60 +39,91 @@ describe Google::Cloud::Firestore::CommitResponse, :mock_firestore do
   end
 
   it "can represent results with transforms" do
-    json = "{\"writeResults\":[{\"updateTime\":\"2017-12-20T05:33:53.441316000Z\",\"transformResults\":[{\"timestampValue\":\"2017-12-20T05:33:53.428000000Z\"},{\"timestampValue\":\"2017-12-20T05:33:53.428000000Z\"},{\"timestampValue\":\"2017-12-20T05:33:53.428000000Z\"}]}],\"commitTime\":\"2017-12-20T05:33:53.441316000Z\"}"
-    grpc_response = Google::Firestore::V1::CommitResponse.decode_json json
+    grpc_response = Google::Firestore::V1::CommitResponse.new(
+      write_results: [
+        {
+          update_time: update_timestamp,
+          transform_results: [
+            { timestamp_value: update_timestamp },
+            { timestamp_value: update_timestamp },
+            { timestamp_value: update_timestamp }
+          ]
+        }
+      ],
+      commit_time: commit_timestamp
+    )
 
     commit_response = Google::Cloud::Firestore::CommitResponse.from_grpc grpc_response, [[:one, :two]]
 
-    commit_response.commit_time.must_be_close_to Time.parse("2017-12-19 22:33:53 -0700"), 1
+    commit_response.commit_time.must_equal update_time
     commit_response.write_results.size.must_equal 1
     commit_response.write_results.first.tap do |write_result|
-      write_result.update_time.must_be_close_to Time.parse("2017-12-19 22:33:53 -0700"), 1
+      write_result.update_time.must_equal update_time
     end
   end
 
-  it "can represent results with and without updateTime" do
-    json = "{\"writeResults\":[{\"updateTime\":\"2017-12-20T05:34:53.441316000Z\"}, {}],\"commitTime\":\"2017-12-20T05:33:53.441316000Z\"}"
-    grpc_response = Google::Firestore::V1::CommitResponse.decode_json json
+  it "can represent results with and without update_time" do
+    grpc_response = Google::Firestore::V1::CommitResponse.new(
+      write_results: [
+        { update_time: update_timestamp },
+        {}
+      ],
+      commit_time: commit_timestamp
+    )
 
     commit_response = Google::Cloud::Firestore::CommitResponse.from_grpc grpc_response, [[:one, :two]]
 
-    commit_response.commit_time.must_be_close_to Time.parse("2017-12-19 22:33:53 -0700"), 1
+    commit_response.commit_time.must_equal update_time
     commit_response.write_results.size.must_equal 1
-    commit_response.write_results[0].update_time.must_be_close_to Time.parse("2017-12-19 22:34:53 -0700"), 1
+    commit_response.write_results[0].update_time.must_equal update_time
   end
 
-  it "can represent results without and with updateTime" do
-    json = "{\"writeResults\":[{}, {\"updateTime\":\"2017-12-20T05:34:53.441316000Z\"}],\"commitTime\":\"2017-12-20T05:33:53.441316000Z\"}"
-    grpc_response = Google::Firestore::V1::CommitResponse.decode_json json
+  it "can represent results without and with update_time" do
+    grpc_response = Google::Firestore::V1::CommitResponse.new(
+      write_results: [
+        {},
+        { update_time: update_timestamp }
+      ],
+      commit_time: commit_timestamp
+    )
 
     commit_response = Google::Cloud::Firestore::CommitResponse.from_grpc grpc_response, [[:one, :two]]
 
-    commit_response.commit_time.must_be_close_to Time.parse("2017-12-19 22:33:53 -0700"), 1
+    commit_response.commit_time.must_equal update_time
     commit_response.write_results.size.must_equal 1
-    commit_response.write_results[0].update_time.must_be_close_to Time.parse("2017-12-19 22:34:53 -0700"), 1
+    commit_response.write_results[0].update_time.must_equal update_time
   end
 
-  it "can represent results without updateTime" do
-    json = "{\"writeResults\":[{}, {}],\"commitTime\":\"2017-12-20T05:33:53.441316000Z\"}"
-    grpc_response = Google::Firestore::V1::CommitResponse.decode_json json
+  it "can represent results without update_time" do
+    grpc_response = Google::Firestore::V1::CommitResponse.new(
+      write_results: [
+        {},
+        {}
+      ],
+      commit_time: commit_timestamp
+    )
 
     commit_response = Google::Cloud::Firestore::CommitResponse.from_grpc grpc_response, [[:one, :two]]
 
-    commit_response.commit_time.must_be_close_to Time.parse("2017-12-19 22:33:53 -0700"), 1
+    commit_response.commit_time.must_equal update_time
     commit_response.write_results.size.must_equal 1
-    commit_response.write_results[0].update_time.must_be_close_to Time.parse("2017-12-19 22:33:53 -0700"), 1
+    commit_response.write_results[0].update_time.must_equal update_time
   end
 
   it "can represent results without mismatched writes" do
-    json = "{\"writeResults\":[{}, {}],\"commitTime\":\"2017-12-20T05:33:53.441316000Z\"}"
-    grpc_response = Google::Firestore::V1::CommitResponse.decode_json json
+    grpc_response = Google::Firestore::V1::CommitResponse.new(
+      write_results: [
+        {},
+        {}
+      ],
+      commit_time: commit_timestamp
+    )
 
     commit_response = Google::Cloud::Firestore::CommitResponse.from_grpc grpc_response, [[:one, :two], :three]
 
-    commit_response.commit_time.must_be_close_to Time.parse("2017-12-19 22:33:53 -0700"), 1
+    commit_response.commit_time.must_equal update_time
     commit_response.write_results.size.must_equal 2
-    commit_response.write_results[0].update_time.must_be_close_to Time.parse("2017-12-19 22:33:53 -0700"), 1
-    commit_response.write_results[1].update_time.must_be_close_to Time.parse("2017-12-19 22:33:53 -0700"), 1
+    commit_response.write_results[0].update_time.must_equal update_time
+    commit_response.write_results[1].update_time.must_equal update_time
   end
 end

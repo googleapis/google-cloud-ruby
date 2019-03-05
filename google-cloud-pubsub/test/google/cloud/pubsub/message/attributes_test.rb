@@ -18,12 +18,11 @@ require "base64"
 describe Google::Cloud::PubSub::Message, :attributes do
   let(:message_hash) do
     {
-      "data" => Base64.strict_encode64("hello world"),
-      "attributes" => { "foo" => "FOO", "bar" => "BAR" }
+      data: "hello world",
+      attributes: { "foo" => "FOO", "bar" => "BAR" }
     }
   end
-  let(:message_json)  { message_hash.to_json }
-  let(:message_grpc)  { Google::Cloud::PubSub::V1::PubsubMessage.decode_json message_json }
+  let(:message_grpc)  { Google::Cloud::PubSub::V1::PubsubMessage.new message_hash }
   let(:message_obj)  { Google::Cloud::PubSub::Message.from_grpc message_grpc }
 
   it "has attributes as a Hash even when being a Google API object" do

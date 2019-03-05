@@ -16,16 +16,15 @@ require "helper"
 
 describe Google::Cloud::Logging::Entry, :mock_logging do
   let(:entry_hash) { random_entry_hash }
-  let(:entry_json) { entry_hash.to_json }
-  let(:entry_grpc) { Google::Logging::V2::LogEntry.decode_json entry_json }
+  let(:entry_grpc) { Google::Logging::V2::LogEntry.new entry_hash }
   let(:entry) { Google::Cloud::Logging::Entry.from_grpc entry_grpc }
 
   it "knows its attributes" do
-    entry.log_name.must_equal             entry_hash["log_name"]
+    entry.log_name.must_equal             entry_hash[:log_name]
     entry.resource.must_be_kind_of        Google::Cloud::Logging::Resource
     entry.timestamp.to_i.must_equal       Time.parse("2014-10-02T15:01:23.045123456Z").to_i
-    entry.severity.must_equal             entry_hash["severity"]
-    entry.insert_id.must_equal            entry_hash["insert_id"]
+    entry.severity.must_equal             entry_hash[:severity]
+    entry.insert_id.must_equal            entry_hash[:insert_id]
     entry.labels.must_be_kind_of          Hash
     entry.labels["env"].must_equal        "production"
     entry.labels["foo"].must_equal        "bar"
@@ -47,7 +46,7 @@ describe Google::Cloud::Logging::Entry, :mock_logging do
   end
 
   it "timestamp returns nil when not present" do
-    entry_hash["timestamp"] = nil
+    entry_hash[:timestamp] = nil
     entry.timestamp.must_be :nil?
   end
 
@@ -57,7 +56,7 @@ describe Google::Cloud::Logging::Entry, :mock_logging do
   end
 
   it "labels will return a Hash even when missing from the Google API object" do
-    entry_hash["labels"] = nil
+    entry_hash[:labels] = nil
     entry.labels.must_be_kind_of Hash
     entry.labels.must_be :empty?
   end
@@ -81,13 +80,13 @@ describe Google::Cloud::Logging::Entry, :mock_logging do
   end
 
   it "has the correct resource attributes" do
-    entry.resource.type.must_equal entry_hash["resource"]["type"]
-    entry.resource.labels.keys.sort.must_equal   entry_hash["resource"]["labels"].keys.sort
-    entry.resource.labels.values.sort.must_equal entry_hash["resource"]["labels"].values.sort
+    entry.resource.type.must_equal entry_hash[:resource][:type]
+    entry.resource.labels.keys.sort.must_equal   entry_hash[:resource][:labels].keys.sort
+    entry.resource.labels.values.sort.must_equal entry_hash[:resource][:labels].values.sort
   end
 
   it "has a resource even if the Google API object doesn't have it" do
-    entry_hash.delete "resource"
+    entry_hash.delete :resource
 
     entry.resource.wont_be :nil?
     entry.resource.must_be_kind_of Google::Cloud::Logging::Resource
@@ -110,7 +109,7 @@ describe Google::Cloud::Logging::Entry, :mock_logging do
   end
 
   it "has an http_request even if the Google API object doesn't have it" do
-    entry_hash.delete "http_request"
+    entry_hash.delete :http_request
 
     entry.http_request.wont_be :nil?
     entry.http_request.must_be_kind_of Google::Cloud::Logging::Entry::HttpRequest
@@ -134,7 +133,7 @@ describe Google::Cloud::Logging::Entry, :mock_logging do
   end
 
   it "has an operation even if the Google API object doesn't have it" do
-    entry_hash.delete "operation"
+    entry_hash.delete :operation
 
     entry.operation.wont_be :nil?
     entry.operation.must_be_kind_of Google::Cloud::Logging::Entry::Operation
@@ -151,7 +150,7 @@ describe Google::Cloud::Logging::Entry, :mock_logging do
   end
 
   it "has a source location even if the Google API object doesn't have it" do
-    entry_hash.delete "source_location"
+    entry_hash.delete :source_location
 
     entry.source_location.wont_be :nil?
     entry.source_location.must_be_kind_of Google::Cloud::Logging::Entry::SourceLocation

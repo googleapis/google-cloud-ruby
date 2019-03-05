@@ -395,7 +395,7 @@ end
 def list_entries_res token = nil
   OpenStruct.new(
     page: OpenStruct.new(
-      response: Google::Logging::V2::ListLogEntriesResponse.decode_json(list_entries_json(3, token))
+      response: Google::Logging::V2::ListLogEntriesResponse.new(list_entries_hash(3, token))
     )
   )
 end
@@ -403,24 +403,24 @@ end
 def list_logs_res token = nil
   OpenStruct.new(
     page: OpenStruct.new(
-      response: Google::Logging::V2::ListLogsResponse.decode_json(list_logs_json(3, token))
+      response: Google::Logging::V2::ListLogsResponse.new(list_logs_hash(3, token))
     )
   )
 end
 
 def list_resource_descriptors_res
-  Google::Logging::V2::ListMonitoredResourceDescriptorsResponse.decode_json(list_resource_descriptors_json(3))
+  Google::Logging::V2::ListMonitoredResourceDescriptorsResponse.new(list_resource_descriptors_hash(3))
 end
 
 
 def get_sink_res
-  Google::Logging::V2::LogSink.decode_json(random_sink_hash.merge("name" => sink_name).to_json)
+  Google::Logging::V2::LogSink.new(random_sink_hash.merge(name:  sink_name).to_hash)
 end
 
 def list_sinks_res
   OpenStruct.new(
     page: OpenStruct.new(
-      response: Google::Logging::V2::ListSinksResponse.decode_json(list_sinks_json(3))
+      response: Google::Logging::V2::ListSinksResponse.new(list_sinks_hash(3))
     )
   )
 end
@@ -428,78 +428,82 @@ end
 def list_metrics_res
   OpenStruct.new(
     page: OpenStruct.new(
-      response: Google::Logging::V2::ListLogMetricsResponse.decode_json(list_metrics_json(3))
+      response: Google::Logging::V2::ListLogMetricsResponse.new(list_metrics_hash(3))
     )
   )
 end
 
-def list_resource_descriptors_json count = 2, token = nil
+def list_resource_descriptors_hash count = 2, token = nil
   {
     resource_descriptors: count.times.map { random_resource_descriptor_hash },
     next_page_token: token
-  }.delete_if { |_, v| v.nil? }.to_json
+  }.delete_if { |_, v| v.nil? }
 end
 
-def list_metrics_json count = 2, token = nil
+def list_metrics_hash count = 2, token = nil
   {
     metrics: count.times.map { random_metric_hash },
     next_page_token: token
-  }.delete_if { |_, v| v.nil? }.to_json
+  }.delete_if { |_, v| v.nil? }
 end
 
-def list_entries_json count = 2, token = nil
+def list_entries_hash count = 2, token = nil
   {
     entries: count.times.map { random_entry_hash },
     next_page_token: token
-  }.delete_if { |_, v| v.nil? }.to_json
+  }.delete_if { |_, v| v.nil? }
 end
 
 def random_entry_hash
+  timestamp = Time.parse "2014-10-02T15:01:23.045123456Z"
   {
-    "log_name"  => "projects/my-projectid/logs/syslog",
-    "resource"  => random_resource_hash,
-    "timestamp" => "2014-10-02T15:01:23.045123456Z",
-    "severity"  => :DEFAULT,
-    "insert_id" => "abc123",
-    "labels" => {
-      "env" => "production",
-      "foo" => "bar"
+    log_name:   "projects/my-projectid/logs/syslog",
+    resource:   random_resource_hash,
+    timestamp:  {
+      seconds:  timestamp.to_i,
+      nanos:    timestamp.nsec
     },
-    "text_payload" => "payload",
-    "http_request" => random_http_request_hash,
-    "operation"    => random_operation_hash
+    severity:   :DEFAULT,
+    insert_id:  "abc123",
+    labels:  {
+      "env" =>  "production",
+      "foo" =>  "bar"
+    },
+    text_payload:  "payload",
+    http_request:  random_http_request_hash,
+    operation:     random_operation_hash
   }
 end
 
 def random_http_request_hash
   {
-    "request_method" => "GET",
-    "request_url" => "http://test.local/foo?bar=baz",
-    "request_size" => 123,
-    "status" => 200,
-    "response_size" => 456,
-    "user_agent" => "google-cloud/1.0.0",
-    "remote_ip" => "127.0.0.1",
-    "referer" => "http://test.local/referer",
-    "cache_hit" => false,
-    "cache_validated_with_origin_server" => false
+    request_method:  "GET",
+    request_url:  "http://test.local/foo?bar=baz",
+    request_size:  123,
+    status:  200,
+    response_size:  456,
+    user_agent:  "google-cloud/1.0.0",
+    remote_ip:  "127.0.0.1",
+    referer:  "http://test.local/referer",
+    cache_hit:  false,
+    cache_validated_with_origin_server:  false
   }
 end
 
 def random_operation_hash
   {
-    "id" => "xyz789",
-    "producer" => "MyApp.MyClass#my_method",
-    "first" => false,
-    "last" => false
+    id:  "xyz789",
+    producer:  "MyApp.MyClass#my_method",
+    first:  false,
+    last:  false
   }
 end
 
 def random_resource_hash
   {
-    "type" => "gae_app",
-    "labels" => {
-      "module_id" => "1",
+    type:  "gae_app",
+    labels:  {
+      "module_id"  => "1",
       "version_id" => "20150925t173233"
     }
   }
@@ -507,54 +511,58 @@ end
 
 def random_resource_descriptor_hash
   {
-    "type"         => "cloudsql_database",
-    "display_name" => "Cloud SQL Database",
-    "description"  => "This resource is a Cloud SQL Database",
-    "labels"       => [
+    type:          "cloudsql_database",
+    display_name:  "Cloud SQL Database",
+    description:   "This resource is a Cloud SQL Database",
+    labels:        [
       {
-       "key"          => "database_id",
-       "description"  => "The ID of the database."
+        key:           "database_id",
+        description:   "The ID of the database."
       },
       {
-       "key"          => "zone",
-       "value_type"   => :STRING,
-       "description"  => "The GCP zone in which the database is running."
+        key:           "zone",
+        value_type:    :STRING,
+        description:   "The GCP zone in which the database is running."
       }
     ]
   }
 end
 
 def random_sink_hash
+  timestamp = Time.parse "2014-10-02T15:01:23.045123456Z"
   {
-    "name"                  => "my-severe-errors-to-pubsub",
-    "destination"           => "storage.googleapis.com/a-bucket",
-    "filter"                => "logName:syslog AND severity>=ERROR",
-    "output_version_format" => :VERSION_FORMAT_UNSPECIFIED,
-    "writer_identity"       => "roles/owner",
-    "start_time"            => "2014-10-02T15:01:23.045123456Z"
+    name:                   "my-severe-errors-to-pubsub",
+    destination:            "storage.googleapis.com/a-bucket",
+    filter:                 "logName:syslog AND severity>=ERROR",
+    output_version_format:  :VERSION_FORMAT_UNSPECIFIED,
+    writer_identity:        "roles/owner",
+    start_time:             {
+                              seconds:  timestamp.to_i,
+                              nanos:    timestamp.nsec
+                            }
   }
 end
 
 def random_metric_hash
   {
-    "name"        => "severe_errors",
-    "description" => "The servere errors metric",
-    "filter"      => "logName:syslog AND severity>=ERROR"
+    name:         "severe_errors",
+    description:  "The servere errors metric",
+    filter:       "logName:syslog AND severity>=ERROR"
   }
 end
 
-def list_sinks_json count = 2, token = nil
+def list_sinks_hash count = 2, token = nil
   {
     sinks: count.times.map { random_sink_hash },
     next_page_token: token
-  }.delete_if { |_, v| v.nil? }.to_json
+  }.delete_if { |_, v| v.nil? }
 end
 
-def list_logs_json count = 2, token = nil
+def list_logs_hash count = 2, token = nil
   {
     log_names: count.times.map { "log-name" },
     next_page_token: token
-  }.delete_if { |_, v| v.nil? }.to_json
+  }.delete_if { |_, v| v.nil? }
 end
 
 # Storage helpers
@@ -565,39 +573,39 @@ def object_access_control_gapi
 end
 
 def bucket_gapi name = "my-bucket"
-  Google::Apis::StorageV1::Bucket.from_json random_bucket_hash(name).to_json
+  Google::Apis::StorageV1::Bucket.new random_bucket_hash(name)
 end
 
 def random_bucket_hash(name = "my-bucket",
   url_root="https://www.googleapis.com/storage/v1", location="US",
   storage_class="STANDARD", versioning=nil, logging_bucket=nil,
   logging_prefix=nil, website_main=nil, website_404=nil)
-  versioning_config = { "enabled" => versioning } if versioning
-  { "kind" => "storage#bucket",
-    "id" => name,
-    "selfLink" => "#{url_root}/b/#{name}",
-    "projectNumber" => "1234567890",
-    "name" => name,
-    "timeCreated" => Time.now,
-    "metageneration" => "1",
-    "owner" => { "entity" => "project-owners-1234567890" },
-    "location" => location,
-    "cors" => [{"origin"=>["http://example.org"], "method"=>["GET","POST","DELETE"], "responseHeader"=>["X-My-Custom-Header"], "maxAgeSeconds"=>3600},{"origin"=>["http://example.org"], "method"=>["GET","POST","DELETE"], "responseHeader"=>["X-My-Custom-Header"], "maxAgeSeconds"=>3600}],
-    "logging" => logging_hash(logging_bucket, logging_prefix),
-    "storageClass" => storage_class,
-    "versioning" => versioning_config,
-    "website" => website_hash(website_main, website_404),
-    "etag" => "CAE=" }.delete_if { |_, v| v.nil? }
+  versioning_config = { enabled:  versioning } if versioning
+  { kind:  "storage#bucket",
+    id:  name,
+    selfLink:  "#{url_root}/b/#{name}",
+    projectNumber:  "1234567890",
+    name:  name,
+    timeCreated:  Time.now,
+    metageneration:  "1",
+    owner:  { entity:  "project-owners-1234567890" },
+    location:  location,
+    cors:  [{origin: ["http://example.org"], method: ["GET","POST","DELETE"], response_header: ["X-My-Custom-Header"], max_age_seconds: 3600},{origin: ["http://example.org"], method: ["GET","POST","DELETE"], response_header: ["X-My-Custom-Header"], max_age_seconds: 3600}],
+    logging:  logging_hash(logging_bucket, logging_prefix),
+    storageClass:  storage_class,
+    versioning:  versioning_config,
+    website:  website_hash(website_main, website_404),
+    etag:  "CAE=" }.delete_if { |_, v| v.nil? }
 end
 
 def logging_hash(bucket, prefix)
-  { "logBucket"       => bucket,
-    "logObjectPrefix" => prefix,
+  { log_bucket:         bucket,
+    log_object_prefix:  prefix,
   }.delete_if { |_, v| v.nil? } if bucket || prefix
 end
 
 def website_hash(website_main, website_404)
-  { "mainPageSuffix" => website_main,
-    "notFoundPage"   => website_404,
+  { main_page_suffix:  website_main,
+    not_found_page:    website_404,
   }.delete_if { |_, v| v.nil? } if website_main || website_404
 end

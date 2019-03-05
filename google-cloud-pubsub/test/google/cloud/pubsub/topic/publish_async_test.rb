@@ -16,13 +16,13 @@ require "helper"
 
 describe Google::Cloud::PubSub::Topic, :publish_async, :mock_pubsub do
   let(:topic_name) { "topic-name-goes-here" }
-  let(:topic) { Google::Cloud::PubSub::Topic.from_grpc Google::Cloud::PubSub::V1::Topic.decode_json(topic_json(topic_name)), pubsub.service }
+  let(:topic) { Google::Cloud::PubSub::Topic.from_grpc Google::Cloud::PubSub::V1::Topic.new(topic_hash(topic_name)), pubsub.service }
 
   it "publishes a message" do
     messages = [
       Google::Cloud::PubSub::V1::PubsubMessage.new(data: "async-message".encode(Encoding::ASCII_8BIT))
     ]
-    publish_res = Google::Cloud::PubSub::V1::PublishResponse.decode_json({ message_ids: ["msg1"] }.to_json)
+    publish_res = Google::Cloud::PubSub::V1::PublishResponse.new({ message_ids: ["msg1"] })
     mock = Minitest::Mock.new
     mock.expect :publish, publish_res, [topic_path(topic_name), messages, options: default_options]
     topic.service.mocked_publisher = mock
@@ -55,7 +55,7 @@ describe Google::Cloud::PubSub::Topic, :publish_async, :mock_pubsub do
     messages = [
       Google::Cloud::PubSub::V1::PubsubMessage.new(data: "async-message".encode(Encoding::ASCII_8BIT))
     ]
-    publish_res = Google::Cloud::PubSub::V1::PublishResponse.decode_json({ message_ids: ["msg1"] }.to_json)
+    publish_res = Google::Cloud::PubSub::V1::PublishResponse.new({ message_ids: ["msg1"] })
     mock = Minitest::Mock.new
     mock.expect :publish, publish_res, [topic_path(topic_name), messages, options: default_options]
     topic.service.mocked_publisher = mock
@@ -98,7 +98,7 @@ describe Google::Cloud::PubSub::Topic, :publish_async, :mock_pubsub do
     messages = [
       Google::Cloud::PubSub::V1::PubsubMessage.new(data: "\xE3\x81\x82".force_encoding(Encoding::ASCII_8BIT))
     ]
-    publish_res = Google::Cloud::PubSub::V1::PublishResponse.decode_json({ message_ids: ["msg1"] }.to_json)
+    publish_res = Google::Cloud::PubSub::V1::PublishResponse.new({ message_ids: ["msg1"] })
     mock = Minitest::Mock.new
     mock.expect :publish, publish_res, [topic_path(topic_name), messages, options: default_options]
     topic.service.mocked_publisher = mock
@@ -142,7 +142,7 @@ describe Google::Cloud::PubSub::Topic, :publish_async, :mock_pubsub do
     messages = [
       Google::Cloud::PubSub::V1::PubsubMessage.new(data: "\xE3\x81\x82".force_encoding(Encoding::ASCII_8BIT))
     ]
-    publish_res = Google::Cloud::PubSub::V1::PublishResponse.decode_json({ message_ids: ["msg1"] }.to_json)
+    publish_res = Google::Cloud::PubSub::V1::PublishResponse.new({ message_ids: ["msg1"] })
     mock = Minitest::Mock.new
     mock.expect :publish, publish_res, [topic_path(topic_name), messages, options: default_options]
     topic.service.mocked_publisher = mock
@@ -192,7 +192,7 @@ describe Google::Cloud::PubSub::Topic, :publish_async, :mock_pubsub do
     messages = [
       Google::Cloud::PubSub::V1::PubsubMessage.new(data: "async-message".encode(Encoding::ASCII_8BIT), attributes: {"format" => "text"})
     ]
-    publish_res = Google::Cloud::PubSub::V1::PublishResponse.decode_json({ message_ids: ["msg1"] }.to_json)
+    publish_res = Google::Cloud::PubSub::V1::PublishResponse.new({ message_ids: ["msg1"] })
     mock = Minitest::Mock.new
     mock.expect :publish, publish_res, [topic_path(topic_name), messages, options: default_options]
     topic.service.mocked_publisher = mock
@@ -242,7 +242,7 @@ describe Google::Cloud::PubSub::Topic, :publish_async, :mock_pubsub do
       messages = [
         Google::Cloud::PubSub::V1::PubsubMessage.new(data: "async-message".encode(Encoding::ASCII_8BIT))
       ]
-      publish_res = Google::Cloud::PubSub::V1::PublishResponse.decode_json({ message_ids: ["msg1"] }.to_json)
+      publish_res = Google::Cloud::PubSub::V1::PublishResponse.new({ message_ids: ["msg1"] })
       mock = Minitest::Mock.new
       mock.expect :publish, publish_res, [topic_path(topic_name), messages, options: default_options]
       topic.service.mocked_publisher = mock
@@ -275,7 +275,7 @@ describe Google::Cloud::PubSub::Topic, :publish_async, :mock_pubsub do
       messages = [
         Google::Cloud::PubSub::V1::PubsubMessage.new(data: "async-message".encode(Encoding::ASCII_8BIT), attributes: { "format" => "text" })
       ]
-      publish_res = Google::Cloud::PubSub::V1::PublishResponse.decode_json({ message_ids: ["msg1"] }.to_json)
+      publish_res = Google::Cloud::PubSub::V1::PublishResponse.new({ message_ids: ["msg1"] })
       mock = Minitest::Mock.new
       mock.expect :publish, publish_res, [topic_path(topic_name), messages, options: default_options]
       topic.service.mocked_publisher = mock

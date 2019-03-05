@@ -18,7 +18,7 @@ describe Google::Cloud::PubSub::Snapshot, :mock_pubsub do
   let(:topic_name) { "topic-name-goes-here" }
   let(:snapshot_name) { "snapshot-name-goes-here" }
   let(:labels) { { "foo" => "bar" } }
-  let(:snapshot_grpc) { Google::Cloud::PubSub::V1::Snapshot.decode_json(snapshot_json(topic_name, snapshot_name, labels: labels)) }
+  let(:snapshot_grpc) { Google::Cloud::PubSub::V1::Snapshot.new(snapshot_hash(topic_name, snapshot_name, labels: labels)) }
   let(:snapshot) { Google::Cloud::PubSub::Snapshot.from_grpc snapshot_grpc, pubsub.service }
   let(:new_labels) { { "baz" => "qux" } }
   let(:new_labels_map) do

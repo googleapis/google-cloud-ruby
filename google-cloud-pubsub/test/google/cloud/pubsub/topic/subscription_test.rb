@@ -16,12 +16,12 @@ require "helper"
 
 describe Google::Cloud::PubSub::Topic, :subscription, :mock_pubsub do
   let(:topic_name) { "topic-name-goes-here" }
-  let(:topic) { Google::Cloud::PubSub::Topic.from_grpc Google::Cloud::PubSub::V1::Topic.decode_json(topic_json(topic_name)), pubsub.service }
+  let(:topic) { Google::Cloud::PubSub::Topic.from_grpc Google::Cloud::PubSub::V1::Topic.new(topic_hash(topic_name)), pubsub.service }
   let(:found_sub_name) { "found-sub-#{Time.now.to_i}" }
   let(:not_found_sub_name) { "found-sub-#{Time.now.to_i}" }
 
   it "gets an existing subscription" do
-    get_res = Google::Cloud::PubSub::V1::Subscription.decode_json subscription_json(topic_name, found_sub_name)
+    get_res = Google::Cloud::PubSub::V1::Subscription.new subscription_hash(topic_name, found_sub_name)
     mock = Minitest::Mock.new
     mock.expect :get_subscription, get_res, [subscription_path(found_sub_name), options: default_options]
     topic.service.mocked_subscriber = mock
@@ -36,7 +36,7 @@ describe Google::Cloud::PubSub::Topic, :subscription, :mock_pubsub do
   end
 
   it "gets an existing subscription with get_subscription alias" do
-    get_res = Google::Cloud::PubSub::V1::Subscription.decode_json subscription_json(topic_name, found_sub_name)
+    get_res = Google::Cloud::PubSub::V1::Subscription.new subscription_hash(topic_name, found_sub_name)
     mock = Minitest::Mock.new
     mock.expect :get_subscription, get_res, [subscription_path(found_sub_name), options: default_options]
     topic.service.mocked_subscriber = mock
@@ -51,7 +51,7 @@ describe Google::Cloud::PubSub::Topic, :subscription, :mock_pubsub do
   end
 
   it "gets an existing subscription with find_subscription alias" do
-    get_res = Google::Cloud::PubSub::V1::Subscription.decode_json subscription_json(topic_name, found_sub_name)
+    get_res = Google::Cloud::PubSub::V1::Subscription.new subscription_hash(topic_name, found_sub_name)
     mock = Minitest::Mock.new
     mock.expect :get_subscription, get_res, [subscription_path(found_sub_name), options: default_options]
     topic.service.mocked_subscriber = mock
@@ -91,7 +91,7 @@ describe Google::Cloud::PubSub::Topic, :subscription, :mock_pubsub do
     let(:topic) { Google::Cloud::PubSub::Topic.from_name topic_name, pubsub.service }
 
     it "gets an existing subscription" do
-      get_res = Google::Cloud::PubSub::V1::Subscription.decode_json subscription_json(topic_name, found_sub_name)
+      get_res = Google::Cloud::PubSub::V1::Subscription.new subscription_hash(topic_name, found_sub_name)
       mock = Minitest::Mock.new
       mock.expect :get_subscription, get_res, [subscription_path(found_sub_name), options: default_options]
       topic.service.mocked_subscriber = mock

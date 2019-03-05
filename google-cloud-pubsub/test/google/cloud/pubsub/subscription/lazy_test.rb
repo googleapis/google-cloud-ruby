@@ -18,8 +18,8 @@ describe Google::Cloud::PubSub::Subscription, :name, :mock_pubsub do
   let(:topic_name) { "topic-name-goes-here" }
   let(:sub_name) { "subscription-name-goes-here" }
   let(:sub_path) { subscription_path sub_name }
-  let(:sub_json) { subscription_json topic_name, sub_name }
-  let(:sub_grpc) { Google::Cloud::PubSub::V1::Subscription.decode_json(sub_json) }
+  let(:sub_hash) { subscription_hash topic_name, sub_name }
+  let(:sub_grpc) { Google::Cloud::PubSub::V1::Subscription.new(sub_hash) }
   let(:subscription) { Google::Cloud::PubSub::Subscription.from_grpc sub_grpc, pubsub.service }
 
   it "is not reference when created with an HTTP method" do

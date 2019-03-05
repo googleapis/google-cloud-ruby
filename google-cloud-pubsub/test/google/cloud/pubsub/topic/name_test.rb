@@ -16,7 +16,7 @@ require "helper"
 
 describe Google::Cloud::PubSub::Topic, :name, :mock_pubsub do
   let(:topic_name) { "topic-name-goes-here" }
-  let(:topic) { Google::Cloud::PubSub::Topic.from_grpc Google::Cloud::PubSub::V1::Topic.decode_json(topic_json(topic_name)), pubsub.service }
+  let(:topic) { Google::Cloud::PubSub::Topic.from_grpc Google::Cloud::PubSub::V1::Topic.new(topic_hash(topic_name)), pubsub.service }
 
   it "gives the name returned from the HTTP method" do
     topic.name.must_equal "projects/#{project}/topics/#{topic_name}"

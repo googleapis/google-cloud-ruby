@@ -111,84 +111,87 @@ class MockPubsub < Minitest::Spec
                                  page_token: token)
   end
 
-  def topics_json num_topics, token = ""
+  def topics_hash num_topics, token = ""
     topics = num_topics.times.map do
-      JSON.parse(topic_json("topic-#{rand 1000}"))
+      topic_hash("topic-#{rand 1000}")
     end
-    data = { "topics" => topics }
-    data["next_page_token"] = token unless token.nil?
-    data.to_json
+    data = { topics: topics }
+    data[:next_page_token] = token unless token.nil?
+    data
   end
 
-  def topic_json topic_name, labels: nil
-    { "name" => topic_path(topic_name), labels: labels }.to_json
+  def topic_hash topic_name, labels: nil
+    { name: topic_path(topic_name), labels: labels }
   end
 
-  def topic_subscriptions_json num_subs, token = nil
+  def topic_subscriptions_hash num_subs, token = nil
     subs = num_subs.times.map do
       subscription_path("sub-#{rand 1000}")
     end
-    data = { "subscriptions" => subs }
-    data["next_page_token"] = token unless token.nil?
-    data.to_json
+    data = { subscriptions: subs }
+    data[:next_page_token] = token unless token.nil?
+    data
   end
 
-  def subscriptions_json topic_name, num_subs, token = nil
+  def subscriptions_hash topic_name, num_subs, token = nil
     subs = num_subs.times.map do
-      JSON.parse(subscription_json(topic_name, "sub-#{rand 1000}"))
+      subscription_hash(topic_name, "sub-#{rand 1000}")
     end
-    data = { "subscriptions" => subs }
-    data["next_page_token"] = token unless token.nil?
-    data.to_json
+    data = { subscriptions: subs }
+    data[:next_page_token] = token unless token.nil?
+    data
   end
 
-  def subscription_json topic_name, sub_name,
+  def subscription_hash topic_name, sub_name,
                         deadline = 60,
                         endpoint = "http://example.com/callback", labels: nil
-    { "name" => subscription_path(sub_name),
-      "topic" => topic_path(topic_name),
-      "push_config" => { "push_endpoint" => endpoint },
-      "ack_deadline_seconds" => deadline,
-      "retain_acked_messages" => true,
-      "message_retention_duration" => "600.900000000s", # 600.9 seconds
-      "labels" => labels
-    }.to_json
+    { name: subscription_path(sub_name),
+      topic: topic_path(topic_name),
+      push_config: { push_endpoint: endpoint },
+      ack_deadline_seconds: deadline,
+      retain_acked_messages: true,
+      message_retention_duration: { seconds: 600, nanos: 900000000 }, # 600.9 seconds
+      labels: labels
+    }
   end
 
-  def snapshots_json topic_name, num_snapshots, token = nil
+  def snapshots_hash topic_name, num_snapshots, token = nil
     snapshots = num_snapshots.times.map do
-      JSON.parse(snapshot_json(topic_name, "snapshot-#{rand 1000}"))
+      snapshot_hash(topic_name, "snapshot-#{rand 1000}")
     end
-    data = { "snapshots" => snapshots }
-    data["next_page_token"] = token unless token.nil?
-    data.to_json
+    data = { snapshots: snapshots }
+    data[:next_page_token] = token unless token.nil?
+    data
   end
 
-  def snapshot_json topic_name, snapshot_name, labels: nil
-    { "name" => snapshot_path(snapshot_name),
-      "topic" => topic_path(topic_name),
-      "expire_time" => Time.now.utc.strftime("%FT%T.%NZ"),
-      "labels" => labels
-    }.to_json
+  def snapshot_hash topic_name, snapshot_name, labels: nil
+    time = Time.now
+    timestamp = {
+      seconds: time.to_i,
+      nanos: time.nsec
+    }
+    { name: snapshot_path(snapshot_name),
+      topic: topic_path(topic_name),
+      expire_time: timestamp,
+      labels: labels
+    }
   end
 
-  def rec_message_json message, id = rand(1000000)
+  def rec_message_hash message, id = rand(1000000)
     {
-      "ack_id" => "ack-id-#{id}",
-      "message" => {
-        "data" => Base64.strict_encode64(message),
-        "attributes" => {},
-        "message_id" => "msg-id-#{id}",
+      ack_id: "ack-id-#{id}",
+      message: {
+        data: message,
+        attributes: {},
+        message_id: "msg-id-#{id}",
       }
-    }.to_json
+    }
   end
 
-  def rec_messages_json message, id = nil
+  def rec_messages_hash message, id = nil
     {
-      "received_messages" => [
-        JSON.parse(rec_message_json(message, id))
-      ]
-    }.to_json
+      received_messages: [rec_message_hash(message, id)]
+    }
   end
 
   def project_path

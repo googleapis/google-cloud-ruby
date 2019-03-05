@@ -17,7 +17,7 @@ require "helper"
 describe Google::Cloud::Logging::Project, :resource_descriptors, :mock_logging do
   it "lists resource descriptors" do
     num_descriptors = 3
-    list_res = Google::Logging::V2::ListMonitoredResourceDescriptorsResponse.decode_json(list_resource_descriptors_json(num_descriptors))
+    list_res = Google::Logging::V2::ListMonitoredResourceDescriptorsResponse.new(list_resource_descriptors_hash(num_descriptors))
 
     mock = Minitest::Mock.new
     mock.expect :list_monitored_resource_descriptors, list_res, [page_size: nil, options: default_options]
@@ -33,7 +33,7 @@ describe Google::Cloud::Logging::Project, :resource_descriptors, :mock_logging d
 
   it "lists resource descriptors with find_resource_descriptors alias" do
     num_descriptors = 3
-    list_res = Google::Logging::V2::ListMonitoredResourceDescriptorsResponse.decode_json(list_resource_descriptors_json(num_descriptors))
+    list_res = Google::Logging::V2::ListMonitoredResourceDescriptorsResponse.new(list_resource_descriptors_hash(num_descriptors))
 
     mock = Minitest::Mock.new
     mock.expect :list_monitored_resource_descriptors, list_res, [page_size: nil, options: default_options]
@@ -48,8 +48,8 @@ describe Google::Cloud::Logging::Project, :resource_descriptors, :mock_logging d
   end
 
   it "paginates resource descriptors" do
-    first_list_res = Google::Logging::V2::ListMonitoredResourceDescriptorsResponse.decode_json(list_resource_descriptors_json(3, "next_page_token"))
-    second_list_res = Google::Logging::V2::ListMonitoredResourceDescriptorsResponse.decode_json(list_resource_descriptors_json(2))
+    first_list_res = Google::Logging::V2::ListMonitoredResourceDescriptorsResponse.new(list_resource_descriptors_hash(3, "next_page_token"))
+    second_list_res = Google::Logging::V2::ListMonitoredResourceDescriptorsResponse.new(list_resource_descriptors_hash(2))
 
     mock = Minitest::Mock.new
     mock.expect :list_monitored_resource_descriptors, first_list_res, [page_size: nil, options: default_options]
@@ -72,8 +72,8 @@ describe Google::Cloud::Logging::Project, :resource_descriptors, :mock_logging d
   end
 
   it "paginates resource descriptors with next? and next" do
-    first_list_res = Google::Logging::V2::ListMonitoredResourceDescriptorsResponse.decode_json(list_resource_descriptors_json(3, "next_page_token"))
-    second_list_res = Google::Logging::V2::ListMonitoredResourceDescriptorsResponse.decode_json(list_resource_descriptors_json(2))
+    first_list_res = Google::Logging::V2::ListMonitoredResourceDescriptorsResponse.new(list_resource_descriptors_hash(3, "next_page_token"))
+    second_list_res = Google::Logging::V2::ListMonitoredResourceDescriptorsResponse.new(list_resource_descriptors_hash(2))
 
     mock = Minitest::Mock.new
     mock.expect :list_monitored_resource_descriptors, first_list_res, [page_size: nil, options: default_options]
@@ -96,8 +96,8 @@ describe Google::Cloud::Logging::Project, :resource_descriptors, :mock_logging d
   end
 
   it "paginates resource descriptors with next? and next and max set" do
-    first_list_res = Google::Logging::V2::ListMonitoredResourceDescriptorsResponse.decode_json(list_resource_descriptors_json(3, "next_page_token"))
-    second_list_res = Google::Logging::V2::ListMonitoredResourceDescriptorsResponse.decode_json(list_resource_descriptors_json(2, "second_page_token"))
+    first_list_res = Google::Logging::V2::ListMonitoredResourceDescriptorsResponse.new(list_resource_descriptors_hash(3, "next_page_token"))
+    second_list_res = Google::Logging::V2::ListMonitoredResourceDescriptorsResponse.new(list_resource_descriptors_hash(2, "second_page_token"))
 
     mock = Minitest::Mock.new
     mock.expect :list_monitored_resource_descriptors, first_list_res, [page_size: 3, options: default_options]
@@ -128,8 +128,8 @@ describe Google::Cloud::Logging::Project, :resource_descriptors, :mock_logging d
   end
 
   it "paginates resource descriptors with all" do
-    first_list_res = Google::Logging::V2::ListMonitoredResourceDescriptorsResponse.decode_json(list_resource_descriptors_json(3, "next_page_token"))
-    second_list_res = Google::Logging::V2::ListMonitoredResourceDescriptorsResponse.decode_json(list_resource_descriptors_json(2))
+    first_list_res = Google::Logging::V2::ListMonitoredResourceDescriptorsResponse.new(list_resource_descriptors_hash(3, "next_page_token"))
+    second_list_res = Google::Logging::V2::ListMonitoredResourceDescriptorsResponse.new(list_resource_descriptors_hash(2))
 
     mock = Minitest::Mock.new
     mock.expect :list_monitored_resource_descriptors, first_list_res, [page_size: nil, options: default_options]
@@ -146,8 +146,8 @@ describe Google::Cloud::Logging::Project, :resource_descriptors, :mock_logging d
   end
 
   it "paginates resource descriptors with all and max set" do
-    first_list_res = Google::Logging::V2::ListMonitoredResourceDescriptorsResponse.decode_json(list_resource_descriptors_json(3, "next_page_token"))
-    second_list_res = Google::Logging::V2::ListMonitoredResourceDescriptorsResponse.decode_json(list_resource_descriptors_json(2))
+    first_list_res = Google::Logging::V2::ListMonitoredResourceDescriptorsResponse.new(list_resource_descriptors_hash(3, "next_page_token"))
+    second_list_res = Google::Logging::V2::ListMonitoredResourceDescriptorsResponse.new(list_resource_descriptors_hash(2))
 
     mock = Minitest::Mock.new
     mock.expect :list_monitored_resource_descriptors, first_list_res, [page_size: 3, options: default_options]
@@ -164,8 +164,8 @@ describe Google::Cloud::Logging::Project, :resource_descriptors, :mock_logging d
   end
 
   it "paginates resource descriptors with all using Enumerator" do
-    first_list_res = Google::Logging::V2::ListMonitoredResourceDescriptorsResponse.decode_json(list_resource_descriptors_json(3, "next_page_token"))
-    second_list_res = Google::Logging::V2::ListMonitoredResourceDescriptorsResponse.decode_json(list_resource_descriptors_json(3, "second_page_token"))
+    first_list_res = Google::Logging::V2::ListMonitoredResourceDescriptorsResponse.new(list_resource_descriptors_hash(3, "next_page_token"))
+    second_list_res = Google::Logging::V2::ListMonitoredResourceDescriptorsResponse.new(list_resource_descriptors_hash(3, "second_page_token"))
 
     mock = Minitest::Mock.new
     mock.expect :list_monitored_resource_descriptors, first_list_res, [page_size: nil, options: default_options]
@@ -182,8 +182,8 @@ describe Google::Cloud::Logging::Project, :resource_descriptors, :mock_logging d
   end
 
   it "paginates resource descriptors with all and request_limit set" do
-    first_list_res = Google::Logging::V2::ListMonitoredResourceDescriptorsResponse.decode_json(list_resource_descriptors_json(3, "next_page_token"))
-    second_list_res = Google::Logging::V2::ListMonitoredResourceDescriptorsResponse.decode_json(list_resource_descriptors_json(3, "second_page_token"))
+    first_list_res = Google::Logging::V2::ListMonitoredResourceDescriptorsResponse.new(list_resource_descriptors_hash(3, "next_page_token"))
+    second_list_res = Google::Logging::V2::ListMonitoredResourceDescriptorsResponse.new(list_resource_descriptors_hash(3, "second_page_token"))
 
     mock = Minitest::Mock.new
     mock.expect :list_monitored_resource_descriptors, first_list_res, [page_size: nil, options: default_options]
@@ -200,7 +200,7 @@ describe Google::Cloud::Logging::Project, :resource_descriptors, :mock_logging d
   end
 
   it "paginates resource descriptors with max set" do
-    list_res = Google::Logging::V2::ListMonitoredResourceDescriptorsResponse.decode_json(list_resource_descriptors_json(3, "next_page_token"))
+    list_res = Google::Logging::V2::ListMonitoredResourceDescriptorsResponse.new(list_resource_descriptors_hash(3, "next_page_token"))
 
     mock = Minitest::Mock.new
     mock.expect :list_monitored_resource_descriptors, list_res, [page_size: 3, options: default_options]
@@ -217,7 +217,7 @@ describe Google::Cloud::Logging::Project, :resource_descriptors, :mock_logging d
   end
 
   it "paginates resource descriptors without max set" do
-    list_res = Google::Logging::V2::ListMonitoredResourceDescriptorsResponse.decode_json(list_resource_descriptors_json(3, "next_page_token"))
+    list_res = Google::Logging::V2::ListMonitoredResourceDescriptorsResponse.new(list_resource_descriptors_hash(3, "next_page_token"))
 
     mock = Minitest::Mock.new
     mock.expect :list_monitored_resource_descriptors, list_res, [page_size: nil, options: default_options]
@@ -233,10 +233,10 @@ describe Google::Cloud::Logging::Project, :resource_descriptors, :mock_logging d
     resource_descriptors.token.must_equal "next_page_token"
   end
 
-  def list_resource_descriptors_json count = 2, token = nil
+  def list_resource_descriptors_hash count = 2, token = nil
     {
       resource_descriptors: count.times.map { random_resource_descriptor_hash },
       next_page_token: token
-    }.delete_if { |_, v| v.nil? }.to_json
+    }.delete_if { |_, v| v.nil? }
   end
 end

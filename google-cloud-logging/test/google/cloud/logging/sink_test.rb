@@ -17,13 +17,12 @@ require "helper"
 describe Google::Cloud::Logging::Sink, :mock_logging do
   let(:sink) { Google::Cloud::Logging::Sink.from_grpc sink_grpc, logging.service }
   let(:sink_hash) { random_sink_hash }
-  let(:sink_json) { sink_hash.to_json }
-  let(:sink_grpc) { Google::Logging::V2::LogSink.decode_json sink_json }
+  let(:sink_grpc) { Google::Logging::V2::LogSink.new sink_hash }
 
   it "knows its attributes" do
-    sink.name.must_equal        sink_hash["name"]
-    sink.destination.must_equal sink_hash["destination"]
-    sink.filter.must_equal      sink_hash["filter"]
+    sink.name.must_equal        sink_hash[:name]
+    sink.destination.must_equal sink_hash[:destination]
+    sink.filter.must_equal      sink_hash[:filter]
     sink.writer_identity.must_equal  "roles/owner"
   end
 
