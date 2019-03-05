@@ -7,4 +7,4 @@ gem "google-cloud-env", path: "../google-cloud-env"
 
 gem "rake", "~> 12.3"
 
-gem "stackprof"
+gem "stackprof" unless Gem.win_platform?
