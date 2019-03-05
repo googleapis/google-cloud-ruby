@@ -28,7 +28,7 @@ require "grpc"
 module Acceptance
   class DebuggerTest < Minitest::Test
     MIN_DELAY = 2
-    MAX_DELAY = 11
+    MAX_DELAY = 15
 
     attr_accessor :debugger
 
