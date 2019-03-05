@@ -73,6 +73,26 @@ steps:</p>
 <pre class="code ruby"><code class="ruby">$ gem install google-cloud-kms
 </code></pre>
 
+<h3>Example</h3>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/kms</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='comment'># Create a client for a project and given credentials
+</span><span class='id identifier rubyid_kms'>kms</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Google/Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Google/Cloud/Kms.html" title="Google::Cloud::Kms (module)">Kms</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Google/Cloud/Kms.html#new-class_method" title="Google::Cloud::Kms.new (method)">new</a></span></span> <span class='label'>credentials:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/path/to/keyfile.json</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='comment'># Where to create key rings
+</span><span class='id identifier rubyid_key_ring_parent'>key_ring_parent</span> <span class='op'>=</span> <span class='id identifier rubyid_kms'>kms</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_location_path'>location_path</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-project</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>us-central1</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='comment'># Create a new key ring
+</span><span class='id identifier rubyid_key_ring'>key_ring</span> <span class='op'>=</span> <span class='id identifier rubyid_kms'>kms</span><span class='period'>.</span><span class='id identifier rubyid_create_key_ring'>create_key_ring</span> <span class='id identifier rubyid_key_ring_parent'>key_ring_parent</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-ring</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
+<span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Created at </span><span class='embexpr_beg'>#{</span><span class='const'>Time</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span> <span class='id identifier rubyid_key_ring'>key_ring</span><span class='period'>.</span><span class='id identifier rubyid_create_time'>create_time</span><span class='period'>.</span><span class='id identifier rubyid_seconds'>seconds</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='comment'># Iterate over created key rings
+</span><span class='id identifier rubyid_kms'>kms</span><span class='period'>.</span><span class='id identifier rubyid_list_key_rings'>list_key_rings</span><span class='lparen'>(</span><span class='id identifier rubyid_key_ring_parent'>key_ring_parent</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_key_ring'>key_ring</span><span class='op'>|</span>
+  <span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Found ring called </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_key_ring'>key_ring</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span>
+</code></pre>
+
 <h3>Next Steps</h3>
 
 <ul>
