@@ -15,8 +15,7 @@
 require "helper"
 
 describe Google::Cloud::Logging::Entry, :severity, :mock_logging do
-  let(:entry_json) { random_entry_hash.to_json }
-  let(:entry_grpc) { Google::Logging::V2::LogEntry.decode_json entry_json }
+  let(:entry_grpc) { Google::Logging::V2::LogEntry.new random_entry_hash }
   let(:entry) { Google::Cloud::Logging::Entry.from_grpc entry_grpc }
 
   it "has the correct helpers for DEFAULT" do

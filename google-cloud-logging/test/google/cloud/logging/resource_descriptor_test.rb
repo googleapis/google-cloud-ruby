@@ -16,8 +16,7 @@ require "helper"
 
 describe Google::Cloud::Logging::ResourceDescriptor, :mock_logging do
   let(:resource_descriptor_hash) { random_resource_descriptor_hash }
-  let(:resource_descriptor_json) { resource_descriptor_hash.to_json }
-  let(:resource_descriptor_grpc) { Google::Api::MonitoredResourceDescriptor.decode_json resource_descriptor_json }
+  let(:resource_descriptor_grpc) { Google::Api::MonitoredResourceDescriptor.new resource_descriptor_hash }
   let(:resource_descriptor) { Google::Cloud::Logging::ResourceDescriptor.from_grpc resource_descriptor_grpc }
 
   it "knows its attributes" do

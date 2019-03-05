@@ -16,14 +16,13 @@ require "helper"
 
 describe Google::Cloud::Logging::Metric, :mock_logging do
   let(:metric_hash) { random_metric_hash }
-  let(:metric_json) { metric_hash.to_json }
-  let(:metric_grpc) { Google::Logging::V2::LogMetric.decode_json metric_json }
+  let(:metric_grpc) { Google::Logging::V2::LogMetric.new metric_hash }
   let(:metric) { Google::Cloud::Logging::Metric.from_grpc metric_grpc, logging.service }
 
   it "knows its attributes" do
-    metric.name.must_equal        metric_hash["name"]
-    metric.description.must_equal metric_hash["description"]
-    metric.filter.must_equal      metric_hash["filter"]
+    metric.name.must_equal        metric_hash[:name]
+    metric.description.must_equal metric_hash[:description]
+    metric.filter.must_equal      metric_hash[:filter]
   end
 
   it "can save itself" do
