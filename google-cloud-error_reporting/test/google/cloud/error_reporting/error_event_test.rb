@@ -17,9 +17,8 @@ require "helper"
 
 describe Google::Cloud::ErrorReporting::ErrorEvent, :mock_error_reporting do
   let(:error_event_hash) { random_error_event_hash }
-  let(:error_event_json) { error_event_hash.to_json }
   let(:error_event_grpc) {
-    Google::Devtools::Clouderrorreporting::V1beta1::ReportedErrorEvent.decode_json error_event_json
+    Google::Devtools::Clouderrorreporting::V1beta1::ReportedErrorEvent.new error_event_hash
   }
   let(:error_event) {
     Google::Cloud::ErrorReporting::ErrorEvent.from_grpc error_event_grpc

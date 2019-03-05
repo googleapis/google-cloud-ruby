@@ -150,7 +150,7 @@ class MockPubsub < Minitest::Spec
       "push_config" => { "push_endpoint" => endpoint },
       "ack_deadline_seconds" => deadline,
       "retain_acked_messages" => true,
-      "message_retention_duration" => "600.900000000s", # 600.9 seconds
+      "message_retention_duration" => {"seconds" => 600, "nanos" => 900000000}, # 600.9 seconds
       "labels" => labels
     }.to_json
   end
@@ -165,9 +165,14 @@ class MockPubsub < Minitest::Spec
   end
 
   def snapshot_json topic_name, snapshot_name, labels: nil
+    time = Time.now
+    timestamp = {
+      "seconds" => time.to_i,
+      "nanos" => time.nsec
+    }
     { "name" => snapshot_path(snapshot_name),
       "topic" => topic_path(topic_name),
-      "expire_time" => Time.now.utc.strftime("%FT%T.%NZ"),
+      "expire_time" => timestamp,
       "labels" => labels
     }.to_json
   end
