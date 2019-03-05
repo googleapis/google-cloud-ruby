@@ -30,6 +30,8 @@ describe Google::Cloud::Debugger, :debugger do
       breakpoint.is_final_state
     end
 
+    breakpoint.must_be :is_final_state
+
     stack_frame = breakpoint.stack_frames[0]
     stack_frame.function.must_equal "trigger_breakpoint"
     stack_frame.locals.size.must_equal 1
@@ -61,6 +63,8 @@ describe Google::Cloud::Debugger, :debugger do
       entries = logging.entries filter: filter
       !entries.empty?
     end
+
+    entries.wont_be :empty?
 
     entries.first.payload.must_match "LOGPOINT"
     entries.first.payload.must_match "local_var is 42"
