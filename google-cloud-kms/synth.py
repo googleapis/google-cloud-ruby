@@ -20,6 +20,7 @@ import synthtool.languages.ruby as ruby
 import logging
 import re
 from subprocess import call
+from textwrap import dedent
 
 
 logging.basicConfig(level=logging.DEBUG)
@@ -46,6 +47,34 @@ s.replace(
       'lib/google/cloud/kms/v1.rb'
     ],
     '/kms\\.googleapis\\.com', '/cloudkms.googleapis.com')
+
+# PERMANENT: Add sample to readme
+s.replace(
+    'README.md',
+    '### Next Steps\n',
+    dedent("""\
+      ### Example
+
+      ```ruby
+      require "google/cloud/kms"
+
+      # Create a client for a project and given credentials
+      kms = Google::Cloud::Kms.new credentials: "/path/to/keyfile.json"
+
+      # Where to create key rings
+      key_ring_parent = kms.class.location_path "my-project", "us-central1"
+
+      # Create a new key ring
+      key_ring = kms.create_key_ring key_ring_parent, "my-ring", {}
+      puts "Created at #{Time.new key_ring.create_time.seconds}"
+
+      # Iterate over created key rings
+      kms.list_key_rings(key_ring_parent).each do |key_ring|
+        puts "Found ring called #{key_ring.name}"
+      end
+      ```
+
+      ### Next Steps\n"""))
 
 # https://github.com/googleapis/gapic-generator/issues/2242
 def escape_braces(match):
