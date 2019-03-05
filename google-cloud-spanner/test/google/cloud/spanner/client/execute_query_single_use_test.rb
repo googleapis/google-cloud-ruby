@@ -23,38 +23,37 @@ describe Google::Cloud::Spanner::Client, :execute_query, :single_use, :mock_span
   let :results_hash do
     {
       metadata: {
-        rowType: {
+        row_type: {
           fields: [
-            { name: "id",          type: { code: "INT64" } },
-            { name: "name",        type: { code: "STRING" } },
-            { name: "active",      type: { code: "BOOL" } },
-            { name: "age",         type: { code: "INT64" } },
-            { name: "score",       type: { code: "FLOAT64" } },
-            { name: "updated_at",  type: { code: "TIMESTAMP" } },
-            { name: "birthday",    type: { code: "DATE"} },
-            { name: "avatar",      type: { code: "BYTES" } },
-            { name: "project_ids", type: { code: "ARRAY",
-                                           arrayElementType: { code: "INT64" } } }
+            { name: "id",          type: { code: :INT64 } },
+            { name: "name",        type: { code: :STRING } },
+            { name: "active",      type: { code: :BOOL } },
+            { name: "age",         type: { code: :INT64 } },
+            { name: "score",       type: { code: :FLOAT64 } },
+            { name: "updated_at",  type: { code: :TIMESTAMP } },
+            { name: "birthday",    type: { code: :DATE} },
+            { name: "avatar",      type: { code: :BYTES } },
+            { name: "project_ids", type: { code: :ARRAY,
+                                           array_element_type: { code: :INT64 } } }
           ]
         }
       },
       values: [
-        { stringValue: "1" },
-        { stringValue: "Charlie" },
-        { boolValue: true},
-        { stringValue: "29" },
-        { numberValue: 0.9 },
-        { stringValue: "2017-01-02T03:04:05.060000000Z" },
-        { stringValue: "1950-01-01" },
-        { stringValue: "aW1hZ2U=" },
-        { listValue: { values: [ { stringValue: "1"},
-                                 { stringValue: "2"},
-                                 { stringValue: "3"} ]}}
+        { string_value: "1" },
+        { string_value: "Charlie" },
+        { bool_value: true},
+        { string_value: "29" },
+        { number_value: 0.9 },
+        { string_value: "2017-01-02T03:04:05.060000000Z" },
+        { string_value: "1950-01-01" },
+        { string_value: "aW1hZ2U=" },
+        { list_value: { values: [ { string_value: "1"},
+                                 { string_value: "2"},
+                                 { string_value: "3"} ]}}
       ]
     }
   end
-  let(:results_json) { results_hash.to_json }
-  let(:results_grpc) { Google::Spanner::V1::PartialResultSet.decode_json results_json }
+  let(:results_grpc) { Google::Spanner::V1::PartialResultSet.new results_hash }
   let(:results_enum) { Array(results_grpc).to_enum }
   let(:client) { spanner.client instance_id, database_id, pool: { min: 0 } }
   let(:time_obj) { Time.parse "2014-10-02T15:01:23.045123456Z" }

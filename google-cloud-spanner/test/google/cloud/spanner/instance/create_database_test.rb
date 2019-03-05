@@ -16,12 +16,18 @@ require "helper"
 
 describe Google::Cloud::Spanner::Instance, :create_database, :mock_spanner do
   let(:instance_id) { "my-instance-id" }
-  let(:instance_json) { instance_hash(name: instance_id).to_json }
-  let(:instance_grpc) { Google::Spanner::Admin::Instance::V1::Instance.decode_json instance_json }
+  let(:instance_grpc) { Google::Spanner::Admin::Instance::V1::Instance.new instance_hash(name: instance_id) }
   let(:instance) { Google::Cloud::Spanner::Instance.from_grpc instance_grpc, spanner.service }
 
-  let(:job_json) { "{\"name\":\"1234567890\",\"metadata\":{\"typeUrl\":\"google.spanner.admin.database.v1.CreateDatabaseMetadata\",\"value\":\"\"}}" }
-  let(:job_grpc) { Google::Longrunning::Operation.decode_json job_json }
+  let(:job_grpc) do
+    Google::Longrunning::Operation.new(
+      name: "1234567890",
+      metadata: {
+        type_url: "google.spanner.admin.database.v1.UpdateDatabaseDdlRequest",
+        value: ""
+      }
+    )
+  end
   let(:database_grpc) do
     Google::Spanner::Admin::Database::V1::Database.new \
       name: "projects/bustling-kayak-91516/instances/my-new-instance",

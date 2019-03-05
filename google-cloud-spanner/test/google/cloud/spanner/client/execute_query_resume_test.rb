@@ -23,18 +23,18 @@ describe Google::Cloud::Spanner::Client, :execute_query, :resume, :mock_spanner 
   let :results_hash1 do
     {
       metadata: {
-        rowType: {
+        row_type: {
           fields: [
-            { name: "id",          type: { code: "INT64" } },
-            { name: "name",        type: { code: "STRING" } },
-            { name: "active",      type: { code: "BOOL" } },
-            { name: "age",         type: { code: "INT64" } },
-            { name: "score",       type: { code: "FLOAT64" } },
-            { name: "updated_at",  type: { code: "TIMESTAMP" } },
-            { name: "birthday",    type: { code: "DATE"} },
-            { name: "avatar",      type: { code: "BYTES" } },
-            { name: "project_ids", type: { code: "ARRAY",
-                                           arrayElementType: { code: "INT64" } } }
+            { name: "id",          type: { code: :INT64 } },
+            { name: "name",        type: { code: :STRING } },
+            { name: "active",      type: { code: :BOOL } },
+            { name: "age",         type: { code: :INT64 } },
+            { name: "score",       type: { code: :FLOAT64 } },
+            { name: "updated_at",  type: { code: :TIMESTAMP } },
+            { name: "birthday",    type: { code: :DATE} },
+            { name: "avatar",      type: { code: :BYTES } },
+            { name: "project_ids", type: { code: :ARRAY,
+                                           array_element_type: { code: :INT64 } } }
           ]
         }
       }
@@ -43,62 +43,62 @@ describe Google::Cloud::Spanner::Client, :execute_query, :resume, :mock_spanner 
   let :results_hash2 do
     {
       values: [
-        { stringValue: "1" },
-        { stringValue: "Charlie" }
+        { string_value: "1" },
+        { string_value: "Charlie" }
       ],
-      resumeToken: Base64.strict_encode64("xyz890")
+      resume_token: "xyz890"
     }
   end
   let :results_hash3 do
     {
       values: [
-        { boolValue: true},
-        { stringValue: "29" }
+        { bool_value: true},
+        { string_value: "29" }
       ]
     }
   end
   let :results_hash4 do
     {
       values: [
-        { numberValue: 0.9 },
-        { stringValue: "2017-01-02T03:04:05.060000000Z" }
+        { number_value: 0.9 },
+        { string_value: "2017-01-02T03:04:05.060000000Z" }
       ],
-      resumeToken: Base64.strict_encode64("abc123")
+      resume_token: "abc123"
     }
   end
   let :results_hash5 do
     {
       values: [
-        { stringValue: "1950-01-01" },
-        { stringValue: "aW1hZ2U=" },
+        { string_value: "1950-01-01" },
+        { string_value: "aW1hZ2U=" },
       ]
     }
   end
   let :results_hash6 do
     {
       values: [
-        { listValue: { values: [ { stringValue: "1"},
-                                 { stringValue: "2"},
-                                 { stringValue: "3"} ]}}
+        { list_value: { values: [ { string_value: "1"},
+                                 { string_value: "2"},
+                                 { string_value: "3"} ]}}
       ]
     }
   end
   let(:results_enum1) do
     [
-      Google::Spanner::V1::PartialResultSet.decode_json(results_hash1.to_json),
-      Google::Spanner::V1::PartialResultSet.decode_json(results_hash2.to_json),
-      Google::Spanner::V1::PartialResultSet.decode_json(results_hash3.to_json),
-      Google::Spanner::V1::PartialResultSet.decode_json(results_hash4.to_json),
-      Google::Spanner::V1::PartialResultSet.decode_json(results_hash5.to_json),
+      Google::Spanner::V1::PartialResultSet.new(results_hash1),
+      Google::Spanner::V1::PartialResultSet.new(results_hash2),
+      Google::Spanner::V1::PartialResultSet.new(results_hash3),
+      Google::Spanner::V1::PartialResultSet.new(results_hash4),
+      Google::Spanner::V1::PartialResultSet.new(results_hash5),
       GRPC::Unavailable,
-      Google::Spanner::V1::PartialResultSet.decode_json(results_hash6.to_json)
+      Google::Spanner::V1::PartialResultSet.new(results_hash6)
     ].to_enum
   end
   let(:results_enum2) do
     [
-      Google::Spanner::V1::PartialResultSet.decode_json(results_hash1.to_json),
-      Google::Spanner::V1::PartialResultSet.decode_json(results_hash5.to_json),
-      Google::Spanner::V1::PartialResultSet.decode_json(results_hash6.to_json)
+      Google::Spanner::V1::PartialResultSet.new(results_hash1),
+      Google::Spanner::V1::PartialResultSet.new(results_hash5),
+      Google::Spanner::V1::PartialResultSet.new(results_hash6)
     ].to_enum
   end
   let(:client) { spanner.client instance_id, database_id, pool: { min: 0 } }

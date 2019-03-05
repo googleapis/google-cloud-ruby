@@ -25,7 +25,6 @@ describe Google::Cloud::Spanner::BatchClient, :mock_spanner do
   let(:timestamp_time) { Google::Cloud::Spanner::Convert.timestamp_to_time timestamp }
   let(:transaction_grpc) { Google::Spanner::V1::Transaction.new id: transaction_id, read_timestamp: timestamp }
   let(:batch_tx_hash) { { session: Base64.strict_encode64(session_grpc.to_proto), transaction: Base64.strict_encode64(transaction_grpc.to_proto) } }
-  let(:batch_tx_json) { batch_tx_hash.to_json }
   let(:snp_opts) { Google::Spanner::V1::TransactionOptions::ReadOnly.new return_read_timestamp: true }
   let(:tx_opts) { Google::Spanner::V1::TransactionOptions.new read_only: snp_opts }
   let(:default_options) { Google::Gax::CallOptions.new kwargs: { "google-cloud-resource-prefix" => database_path(instance_id, database_id) } }
@@ -47,7 +46,7 @@ describe Google::Cloud::Spanner::BatchClient, :mock_spanner do
   end
 
   it "retrieves the instance" do
-    get_res = Google::Spanner::Admin::Instance::V1::Instance.decode_json instance_hash(name: instance_id).to_json
+    get_res = Google::Spanner::Admin::Instance::V1::Instance.new instance_hash(name: instance_id)
     mock = Minitest::Mock.new
     mock.expect :get_instance, get_res, [instance_path(instance_id)]
     spanner.service.mocked_instances = mock
@@ -66,7 +65,7 @@ describe Google::Cloud::Spanner::BatchClient, :mock_spanner do
   end
 
   it "retrieves the database" do
-    get_res = Google::Spanner::Admin::Database::V1::Database.decode_json database_hash(instance_id: instance_id, database_id: database_id).to_json
+    get_res = Google::Spanner::Admin::Database::V1::Database.new database_hash(instance_id: instance_id, database_id: database_id)
     mock = Minitest::Mock.new
     mock.expect :get_database, get_res, [database_path(instance_id, database_id)]
     spanner.service.mocked_databases = mock
@@ -244,7 +243,7 @@ describe Google::Cloud::Spanner::BatchClient, :mock_spanner do
   end
 
   it "loads a batch_snapshot (json)" do
-    batch_snapshot = batch_client.load_batch_snapshot batch_tx_json
+    batch_snapshot = batch_client.load_batch_snapshot batch_tx_hash
 
     batch_snapshot.transaction_id.must_equal transaction_id
     batch_snapshot.timestamp.must_equal timestamp_time

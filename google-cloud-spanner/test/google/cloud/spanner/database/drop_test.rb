@@ -17,8 +17,7 @@ require "helper"
 describe Google::Cloud::Spanner::Database, :drop, :mock_spanner do
   let(:instance_id) { "my-instance-id" }
   let(:database_id) { "my-database-id" }
-  let(:database_json) { database_hash(instance_id: instance_id, database_id: database_id).to_json }
-  let(:database_grpc) { Google::Spanner::Admin::Database::V1::Database.decode_json database_json }
+  let(:database_grpc) { Google::Spanner::Admin::Database::V1::Database.new database_hash(instance_id: instance_id, database_id: database_id) }
   let(:database) { Google::Cloud::Spanner::Database.from_grpc database_grpc, spanner.service }
 
   it "can delete itself" do

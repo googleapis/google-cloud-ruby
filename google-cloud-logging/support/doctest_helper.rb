@@ -455,14 +455,10 @@ def list_entries_json count = 2, token = nil
 end
 
 def random_entry_hash
-  timestamp = Time.parse "2014-10-02T15:01:23.045123456Z"
   {
     "log_name"  => "projects/my-projectid/logs/syslog",
     "resource"  => random_resource_hash,
-    "timestamp" => {
-      "seconds" => timestamp.to_i,
-      "nanos"   => timestamp.nsec
-    },
+    "timestamp" => "2014-10-02T15:01:23.045123456Z",
     "severity"  => :DEFAULT,
     "insert_id" => "abc123",
     "labels" => {
@@ -535,7 +531,7 @@ def random_sink_hash
     "filter"                => "logName:syslog AND severity>=ERROR",
     "output_version_format" => :VERSION_FORMAT_UNSPECIFIED,
     "writer_identity"       => "roles/owner",
-    "start_time"            => { "seconds" => 1479920135, "nanos" => 711253000 }
+    "start_time"            => "2014-10-02T15:01:23.045123456Z"
   }
 end
 

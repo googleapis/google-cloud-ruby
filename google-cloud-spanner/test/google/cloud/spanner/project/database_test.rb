@@ -20,7 +20,7 @@ describe Google::Cloud::Spanner::Project, :database, :mock_spanner do
   it "gets an database" do
     database_id = "found-database"
 
-    get_res = Google::Spanner::Admin::Database::V1::Database.decode_json database_hash(instance_id: instance_id, database_id: database_id).to_json
+    get_res = Google::Spanner::Admin::Database::V1::Database.new database_hash(instance_id: instance_id, database_id: database_id)
     mock = Minitest::Mock.new
     mock.expect :get_database, get_res, [database_path(instance_id, database_id)]
     spanner.service.mocked_databases = mock

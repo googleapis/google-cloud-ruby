@@ -44,10 +44,7 @@ module Integration
           "path" => file_path,
           "line" => line
         },
-        "create_time" => {
-          "seconds" => Time.now.to_i,
-          "nanos"   => Time.now.nsec
-        },
+        "create_time" => Time.now.utc.strftime("%FT%T.%NZ"),
         "expressions" => ["local_var"]
       }
 
@@ -64,10 +61,7 @@ module Integration
           "path" => file_path,
           "line" => line
         },
-        "create_time" => {
-          "seconds" => Time.now.to_i,
-          "nanos"   => Time.now.nsec
-        },
+        "create_time" => Time.now.utc.strftime("%FT%T.%NZ"),
         "log_message_format" => "local_var is $0. #{token}",
         "expressions" => ["local_var"]
       }

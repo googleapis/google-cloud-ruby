@@ -23,25 +23,24 @@ describe Google::Cloud::Spanner::Client, :fields_for, :mock_spanner do
   let :results_hash do
     {
       metadata: {
-        rowType: {
+        row_type: {
           fields: [
-            { name: "id",          type: { code: "INT64" } },
-            { name: "name",        type: { code: "STRING" } },
-            { name: "active",      type: { code: "BOOL" } },
-            { name: "age",         type: { code: "INT64" } },
-            { name: "score",       type: { code: "FLOAT64" } },
-            { name: "updated_at",  type: { code: "TIMESTAMP" } },
-            { name: "birthday",    type: { code: "DATE"} },
-            { name: "avatar",      type: { code: "BYTES" } },
-            { name: "project_ids", type: { code: "ARRAY",
-                                           arrayElementType: { code: "INT64" } } }
+            { name: "id",          type: { code: :INT64 } },
+            { name: "name",        type: { code: :STRING } },
+            { name: "active",      type: { code: :BOOL } },
+            { name: "age",         type: { code: :INT64 } },
+            { name: "score",       type: { code: :FLOAT64 } },
+            { name: "updated_at",  type: { code: :TIMESTAMP } },
+            { name: "birthday",    type: { code: :DATE} },
+            { name: "avatar",      type: { code: :BYTES } },
+            { name: "project_ids", type: { code: :ARRAY,
+                                           array_element_type: { code: :INT64 } } }
           ]
         }
       }
     }
   end
-  let(:results_json) { results_hash.to_json }
-  let(:results_grpc) { Google::Spanner::V1::PartialResultSet.decode_json results_json }
+  let(:results_grpc) { Google::Spanner::V1::PartialResultSet.new results_hash }
   let(:results_enum) { Array(results_grpc).to_enum }
   let(:client) { spanner.client instance_id, database_id, pool: { min: 0 } }
 

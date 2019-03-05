@@ -16,26 +16,25 @@ require "helper"
 
 describe Google::Cloud::Spanner::Instance, :databases, :mock_spanner do
   let(:instance_id) { "my-instance-id" }
-  let(:instance_json) { instance_hash(name: instance_id).to_json }
-  let(:instance_grpc) { Google::Spanner::Admin::Instance::V1::Instance.decode_json instance_json }
+  let(:instance_grpc) { Google::Spanner::Admin::Instance::V1::Instance.new instance_hash(name: instance_id) }
   let(:instance) { Google::Cloud::Spanner::Instance.from_grpc instance_grpc, spanner.service }
   let(:first_page) do
     h = databases_hash instance_id: instance_id
-    h[:nextPageToken] = "next_page_token"
-    response = Google::Spanner::Admin::Database::V1::ListDatabasesResponse.decode_json h.to_json
+    h[:next_page_token] = "next_page_token"
+    response = Google::Spanner::Admin::Database::V1::ListDatabasesResponse.new h
     paged_enum_struct response
 
   end
   let(:second_page) do
     h = databases_hash instance_id: instance_id
-    h[:nextPageToken] = "second_page_token"
-    response = Google::Spanner::Admin::Database::V1::ListDatabasesResponse.decode_json h.to_json
+    h[:next_page_token] = "second_page_token"
+    response = Google::Spanner::Admin::Database::V1::ListDatabasesResponse.new h
     paged_enum_struct response
   end
   let(:last_page) do
     h = databases_hash instance_id: instance_id
     h[:databases].pop
-    response = Google::Spanner::Admin::Database::V1::ListDatabasesResponse.decode_json h.to_json
+    response = Google::Spanner::Admin::Database::V1::ListDatabasesResponse.new h
     paged_enum_struct response
   end
   let(:next_page_options) { Google::Gax::CallOptions.new page_token: "next_page_token" }

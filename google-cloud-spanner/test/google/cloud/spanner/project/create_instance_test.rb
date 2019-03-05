@@ -15,8 +15,15 @@
 require "helper"
 
 describe Google::Cloud::Spanner::Project, :create_instance, :mock_spanner do
-  let(:job_json) { "{\"name\":\"1234567890\",\"metadata\":{\"typeUrl\":\"google.spanner.admin.instance.v1.CreateInstanceMetadata\",\"value\":\"\"}}" }
-  let(:job_grpc) { Google::Longrunning::Operation.decode_json job_json }
+  let(:job_grpc) do
+    Google::Longrunning::Operation.new(
+      name: "1234567890",
+      metadata: {
+        type_url: "google.spanner.admin.database.v1.UpdateDatabaseDdlRequest",
+        value: ""
+      }
+    )
+  end
   let(:config) { instance_config_hash[:name] }
   let(:instance_grpc) do
     Google::Spanner::Admin::Instance::V1::Instance.new \

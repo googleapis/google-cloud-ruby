@@ -870,19 +870,21 @@ def instance_hash name: "my-instance", nodes: 1, state: "READY", labels: {}
   {
     name: "projects/#{project}/instances/#{name}",
     config: "projects/#{project}/instanceConfigs/regional-us-central1",
-    displayName: name.split("-").map(&:capitalize).join(" "),
+    display_name: name.split("-").map(&:capitalize).join(" "),
     nodeCount: nodes,
     state: state,
     labels: labels
   }
 end
 
-def job_json
-  "{\"name\":\"1234567890\",\"metadata\":{\"typeUrl\":\"google.spanner.admin.database.v1.CreateDatabaseMetadata\",\"value\":\"\"}}"
-end
-
 def job_grpc
-  Google::Longrunning::Operation.decode_json job_json
+  Google::Longrunning::Operation.new(
+    name: "1234567890",
+    metadata: {
+      type_url: "google.spanner.admin.database.v1.UpdateDatabaseDdlRequest",
+      value: ""
+    }
+  )
 end
 
 def create_instance_resp client: nil
@@ -896,29 +898,29 @@ end
 
 def instance_configs_hash
   {
-    instanceConfigs: [
+    instance_configs: [
       { name: "projects/#{project}/instanceConfigs/regional-europe-west1",
-        displayName: "EU West 1"},
+        display_name: "EU West 1"},
       { name: "projects/#{project}/instanceConfigs/regional-us-west1",
-        displayName: "US West 1"},
+        display_name: "US West 1"},
       { name: "projects/#{project}/instanceConfigs/regional-us-central1",
-        displayName: "US Central 1"}
+        display_name: "US Central 1"}
     ]
   }
 end
 
 def instance_config_hash
-  instance_configs_hash[:instanceConfigs].last
+  instance_configs_hash[:instance_configs].last
 end
 
 def instance_config_resp
-  Google::Spanner::Admin::Instance::V1::InstanceConfig.decode_json instance_config_hash.to_json
+  Google::Spanner::Admin::Instance::V1::InstanceConfig.new instance_config_hash
 end
 
 def instance_configs_resp token: nil
   h = instance_configs_hash
-  h[:nextPageToken] = token if token
-  response = Google::Spanner::Admin::Instance::V1::ListInstanceConfigsResponse.decode_json h.to_json
+  h[:next_page_token] = token if token
+  response = Google::Spanner::Admin::Instance::V1::ListInstanceConfigsResponse.new h
   paged_enum_struct response
 end
 
@@ -930,8 +932,8 @@ def instance_hash name: "my-instance", nodes: 1, state: "READY", labels: {}
   {
     name: "projects/#{project}/instances/#{name}",
     config: "projects/#{project}/instanceConfigs/regional-us-central1",
-    displayName: name.split("-").map(&:capitalize).join(" "),
-    nodeCount: nodes,
+    display_name: name.split("-").map(&:capitalize).join(" "),
+    node_count: nodes,
     state: state,
     labels: labels
   }
@@ -939,8 +941,8 @@ end
 
 def instances_resp token: nil
   h = instances_hash
-  h[:nextPageToken] = token if token
-  response = Google::Spanner::Admin::Instance::V1::ListInstancesResponse.decode_json h.to_json
+  h[:next_page_token] = token if token
+  response = Google::Spanner::Admin::Instance::V1::ListInstancesResponse.new h
   paged_enum_struct response
 end
 
@@ -965,13 +967,13 @@ def database_hash instance_id: "my-instance", database_id: "my-database", state:
 end
 
 def database_resp instance_id: "my-instance", database_id: "my-database"
-  Google::Spanner::Admin::Database::V1::Database.decode_json database_hash(instance_id: instance_id, database_id: database_id).to_json
+  Google::Spanner::Admin::Database::V1::Database.new database_hash(instance_id: instance_id, database_id: database_id)
 end
 
 def databases_resp token: nil
   h = databases_hash
-  h[:nextPageToken] = token if token
-  response = Google::Spanner::Admin::Database::V1::ListDatabasesResponse.decode_json h.to_json
+  h[:next_page_token] = token if token
+  response = Google::Spanner::Admin::Database::V1::ListDatabasesResponse.new h
   paged_enum_struct response
 end
 
@@ -985,9 +987,9 @@ def session_grpc
   Google::Spanner::V1::Session.new(name: "session-name")
 end
 
-def policy_json
+def policy_hash
   {
-    etag: "CAE=",
+    etag: "\b\x01",
     bindings: [{
       role: "roles/viewer",
       members: [
@@ -995,11 +997,11 @@ def policy_json
         "serviceAccount:1234567890@developer.gserviceaccount.com"
        ]
     }]
-  }.to_json
+  }
 end
 
 def policy_resp
-  Google::Iam::V1::Policy.decode_json policy_json
+  Google::Iam::V1::Policy.new policy_hash
 end
 
 def test_permissions_res permissions: ["spanner.instances.get"]
@@ -1020,18 +1022,18 @@ end
 def results_hash1
   {
     metadata: {
-      rowType: {
+      row_type: {
         fields: [
-          { name: "id",          type: { code: "INT64" } },
-          { name: "name",        type: { code: "STRING" } },
-          { name: "active",      type: { code: "BOOL" } },
-          { name: "age",         type: { code: "INT64" } },
-          { name: "score",       type: { code: "FLOAT64" } },
-          { name: "updated_at",  type: { code: "TIMESTAMP" } },
-          { name: "birthday",    type: { code: "DATE"} },
-          { name: "avatar",      type: { code: "BYTES" } },
-          { name: "project_ids", type: { code: "ARRAY",
-                                         arrayElementType: { code: "INT64" } } }
+          { name: "id",          type: { code: :INT64 } },
+          { name: "name",        type: { code: :STRING } },
+          { name: "active",      type: { code: :BOOL } },
+          { name: "age",         type: { code: :INT64 } },
+          { name: "score",       type: { code: :FLOAT64 } },
+          { name: "updated_at",  type: { code: :TIMESTAMP } },
+          { name: "birthday",    type: { code: :DATE} },
+          { name: "avatar",      type: { code: :BYTES } },
+          { name: "project_ids", type: { code: :ARRAY,
+                                         array_element_type: { code: :INT64 } } }
         ]
       }
     },
@@ -1044,9 +1046,9 @@ end
 def results_hash_marketing
   {
     metadata: {
-      rowType: {
+      row_type: {
         fields: [
-          { name: "marketing_budget",          type: { code: "INT64" } }
+          { name: "marketing_budget", type: { code: :INT64 } }
         ]
       }
     }
@@ -1056,19 +1058,19 @@ end
 def results_hash_marketing_2
   {
     values: [
-      { stringValue: "400000" }
+      { string_value: "400000" }
     ]
   }
 end
 
 def results_enum
-  [Google::Spanner::V1::PartialResultSet.decode_json(results_hash1.to_json)].to_enum
+  [Google::Spanner::V1::PartialResultSet.new(results_hash1)].to_enum
 end
 
 def results_enum_marketing
   [
-    Google::Spanner::V1::PartialResultSet.decode_json(results_hash_marketing.to_json),
-    Google::Spanner::V1::PartialResultSet.decode_json(results_hash_marketing_2.to_json)
+    Google::Spanner::V1::PartialResultSet.new(results_hash_marketing),
+    Google::Spanner::V1::PartialResultSet.new(results_hash_marketing_2)
   ].to_enum
 end
 

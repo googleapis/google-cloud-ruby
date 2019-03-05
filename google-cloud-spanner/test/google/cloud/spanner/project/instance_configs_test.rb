@@ -17,21 +17,21 @@ require "helper"
 describe Google::Cloud::Spanner::Project, :instance_configs, :mock_spanner do
   let(:first_page) do
     h = instance_configs_hash
-    h[:nextPageToken] = "next_page_token"
-    response = Google::Spanner::Admin::Instance::V1::ListInstanceConfigsResponse.decode_json h.to_json
+    h[:next_page_token] = "next_page_token"
+    response = Google::Spanner::Admin::Instance::V1::ListInstanceConfigsResponse.new h
     paged_enum_struct response
 
   end
   let(:second_page) do
     h = instance_configs_hash
-    h[:nextPageToken] = "second_page_token"
-    response = Google::Spanner::Admin::Instance::V1::ListInstanceConfigsResponse.decode_json h.to_json
+    h[:next_page_token] = "second_page_token"
+    response = Google::Spanner::Admin::Instance::V1::ListInstanceConfigsResponse.new h
     paged_enum_struct response
   end
   let(:last_page) do
     h = instance_configs_hash
-    h[:instanceConfigs].pop
-    response = Google::Spanner::Admin::Instance::V1::ListInstanceConfigsResponse.decode_json h.to_json
+    h[:instance_configs].pop
+    response = Google::Spanner::Admin::Instance::V1::ListInstanceConfigsResponse.new h
     paged_enum_struct response
   end
   let(:next_page_options) { Google::Gax::CallOptions.new page_token: "next_page_token" }

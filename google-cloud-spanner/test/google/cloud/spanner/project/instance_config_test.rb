@@ -15,13 +15,11 @@
 require "helper"
 
 describe Google::Cloud::Spanner::Project, :instance_config, :mock_spanner do
-  let(:instance_config_json) { instance_config_hash.to_json }
-
   it "gets an instance config" do
     config_name = "found-config"
 
 
-    get_res = Google::Spanner::Admin::Instance::V1::InstanceConfig.decode_json instance_config_json
+    get_res = Google::Spanner::Admin::Instance::V1::InstanceConfig.new instance_config_hash
     mock = Minitest::Mock.new
     mock.expect :get_instance_config, get_res, [instance_config_path(config_name)]
     spanner.service.mocked_instances = mock
@@ -33,8 +31,8 @@ describe Google::Cloud::Spanner::Project, :instance_config, :mock_spanner do
     config.project_id.must_equal project
     config.instance_config_id.must_equal instance_config_hash[:name].split("/").last
     config.path.must_equal instance_config_hash[:name]
-    config.name.must_equal instance_config_hash[:displayName]
-    config.display_name.must_equal instance_config_hash[:displayName]
+    config.name.must_equal instance_config_hash[:display_name]
+    config.display_name.must_equal instance_config_hash[:display_name]
   end
 
   it "returns nil when getting an non-existent instance config" do

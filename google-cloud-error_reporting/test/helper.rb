@@ -35,12 +35,8 @@ class MockErrorReporting < Minitest::Spec
   end
 
   def random_error_event_hash
-    timestamp = Time.parse "2014-10-02T15:01:23.045123456Z"
     {
-      "event_time" => {
-        "seconds" => timestamp.to_i,
-        "nanos" => timestamp.nsec
-      },
+      "event_time" => "2014-10-02T15:01:23.045123456Z",
       "message" => "error message",
       "service_context" => random_service_context_hash,
       "context" => random_error_context_hash,

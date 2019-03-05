@@ -25,18 +25,18 @@ describe Google::Cloud::Spanner::Session, :read, :mock_spanner do
   let :results_hash1 do
     {
       metadata: {
-        rowType: {
+        row_type: {
           fields: [
-            { name: "id",          type: { code: "INT64" } },
-            { name: "name",        type: { code: "STRING" } },
-            { name: "active",      type: { code: "BOOL" } },
-            { name: "age",         type: { code: "INT64" } },
-            { name: "score",       type: { code: "FLOAT64" } },
-            { name: "updated_at",  type: { code: "TIMESTAMP" } },
-            { name: "birthday",    type: { code: "DATE"} },
-            { name: "avatar",      type: { code: "BYTES" } },
-            { name: "project_ids", type: { code: "ARRAY",
-                                           arrayElementType: { code: "INT64" } } }
+            { name: "id",          type: { code: :INT64 } },
+            { name: "name",        type: { code: :STRING } },
+            { name: "active",      type: { code: :BOOL } },
+            { name: "age",         type: { code: :INT64 } },
+            { name: "score",       type: { code: :FLOAT64 } },
+            { name: "updated_at",  type: { code: :TIMESTAMP } },
+            { name: "birthday",    type: { code: :DATE} },
+            { name: "avatar",      type: { code: :BYTES } },
+            { name: "project_ids", type: { code: :ARRAY,
+                                           array_element_type: { code: :INT64 } } }
           ]
         }
       }
@@ -45,30 +45,30 @@ describe Google::Cloud::Spanner::Session, :read, :mock_spanner do
   let :results_hash2 do
     {
       values: [
-        { stringValue: "1" },
-        { stringValue: "Charlie" },
-        { boolValue: true},
-        { stringValue: "29" },
-        { numberValue: 0.9 },
-        { stringValue: "2017-01-02T03:04:05.060000000Z" },
-        { stringValue: "1950-01-01" },
-        { stringValue: "aW1hZ2U=" }
+        { string_value: "1" },
+        { string_value: "Charlie" },
+        { bool_value: true},
+        { string_value: "29" },
+        { number_value: 0.9 },
+        { string_value: "2017-01-02T03:04:05.060000000Z" },
+        { string_value: "1950-01-01" },
+        { string_value: "aW1hZ2U=" }
       ]
     }
   end
   let :results_hash3 do
     {
       values: [
-        { listValue: { values: [ { stringValue: "1"},
-                                 { stringValue: "2"},
-                                 { stringValue: "3"} ]}}
+        { list_value: { values: [ { string_value: "1"},
+                                 { string_value: "2"},
+                                 { string_value: "3"} ]}}
       ]
     }
   end
   let(:results_enum) do
-    [Google::Spanner::V1::PartialResultSet.decode_json(results_hash1.to_json),
-     Google::Spanner::V1::PartialResultSet.decode_json(results_hash2.to_json),
-     Google::Spanner::V1::PartialResultSet.decode_json(results_hash3.to_json)].to_enum
+    [Google::Spanner::V1::PartialResultSet.new(results_hash1),
+     Google::Spanner::V1::PartialResultSet.new(results_hash2),
+     Google::Spanner::V1::PartialResultSet.new(results_hash3)].to_enum
   end
 
   it "can read all rows" do

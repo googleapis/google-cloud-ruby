@@ -17,163 +17,163 @@ require "helper"
 describe Google::Cloud::Spanner::Results, :deeply_nested_list, :mock_spanner do
   let :results_metadata do
     { metadata:
-      { rowType:
+      { row_type:
         { fields:
           [{ type:
              { code: :ARRAY,
-               arrayElementType:
+               array_element_type:
                { code: :STRUCT,
-                 structType:
+                 struct_type:
                  { fields:
-                   [{ name: "name", type: { code: "STRING"}},
-                    { name: "numbers", type: { code: :ARRAY, arrayElementType: { code: :INT64 }}},
-                    { name: "strings", type: { code: :ARRAY, arrayElementType: { code: :STRING }}}] }}}}] }},
+                   [{ name: "name", type: { code: :STRING}},
+                    { name: "numbers", type: { code: :ARRAY, array_element_type: { code: :INT64 }}},
+                    { name: "strings", type: { code: :ARRAY, array_element_type: { code: :STRING }}}] }}}}] }},
     }
   end
   let :results_values1 do
     { values:
-      [{ listValue:
+      [{ list_value:
          { values:
-           [{ listValue:
+           [{ list_value:
               { values:
-                [{ stringValue: "foo"},
-                 { listValue:
+                [{ string_value: "foo"},
+                 { list_value:
                    { values:
-                     [{ stringValue: "111"},
-                      { stringValue: "222"}] }}] }}
+                     [{ string_value: "111"},
+                      { string_value: "222"}] }}] }}
       ] }}],
-    chunkedValue: true }
+    chunked_value: true }
   end
   let :results_values2 do
     { values:
-      [{ listValue:
+      [{ list_value:
          { values:
-           [{ listValue:
+           [{ list_value:
               { values:
-                [{ listValue:
+                [{ list_value:
                    { values:
-                     [{ stringValue: "333"}] }},
-                 { listValue:
+                     [{ string_value: "333"}] }},
+                 { list_value:
                    { values:
-                     [{ stringValue: "foo"},
-                      { stringValue: "bar"}] }}] }}
+                     [{ string_value: "foo"},
+                      { string_value: "bar"}] }}] }}
       ] }}],
-    chunkedValue: true }
+    chunked_value: true }
   end
   let :results_values3 do
     { values:
-      [{ listValue:
+      [{ list_value:
          { values:
-           [{ listValue:
+           [{ list_value:
               { values:
-                [{ listValue:
+                [{ list_value:
                    { values:
-                     [{ stringValue: "baz"}] }}] }},
-            { listValue:
+                     [{ string_value: "baz"}] }}] }},
+            { list_value:
               { values:
-                [{ stringValue: "bar"},
-                 { listValue:
+                [{ string_value: "bar"},
+                 { list_value:
                    { values:
-                     [{ stringValue: "444"}] }}] }}
+                     [{ string_value: "444"}] }}] }}
       ] }}],
-    chunkedValue: true }
+    chunked_value: true }
   end
   let :results_values4 do
     { values:
-      [{ listValue:
+      [{ list_value:
          { values:
-           [{ listValue:
+           [{ list_value:
               { values:
-                 [{ listValue:
+                 [{ list_value:
                     { values:
-                      [{ stringValue: "555"},
-                       { stringValue: "666"}] }},
-                  { listValue:
+                      [{ string_value: "555"},
+                       { string_value: "666"}] }},
+                  { list_value:
                     { values:
-                      [{ stringValue: "foo"}] }}] }}
+                      [{ string_value: "foo"}] }}] }}
       ] }}],
-    chunkedValue: true }
+    chunked_value: true }
   end
   let :results_values5 do
     { values:
-      [{ listValue:
+      [{ list_value:
          { values:
-           [{ listValue:
+           [{ list_value:
               { values:
-                [{ listValue:
+                [{ list_value:
                    { values:
-                     [{ stringValue: "bar"},
-                      { stringValue: "baz"}] }}] }},
-            { listValue:
+                     [{ string_value: "bar"},
+                      { string_value: "baz"}] }}] }},
+            { list_value:
               { values:
-                [{ stringValue: "baz"},
-                 { listValue:
+                [{ string_value: "baz"},
+                 { list_value:
                    { values:
-                     [{ stringValue: "777"}] }}] }}
+                     [{ string_value: "777"}] }}] }}
       ] }}],
-    chunkedValue: true }
+    chunked_value: true }
   end
   let :results_values6 do
     { values:
-      [{ listValue:
+      [{ list_value:
          { values:
-           [{ listValue:
+           [{ list_value:
               { values:
-                [{ listValue:
+                [{ list_value:
                    { values:
-                     [{ stringValue: "888"}] }}] }}
+                     [{ string_value: "888"}] }}] }}
       ] }}],
-    chunkedValue: true }
+    chunked_value: true }
   end
   let :results_values7 do
     { values:
-      [{ listValue:
+      [{ list_value:
          { values:
-           [{ listValue:
+           [{ list_value:
               { values:
-                [{ listValue:
+                [{ list_value:
                    { values:
-                     [{ stringValue: "999"}] }},
-                 { listValue:
+                     [{ string_value: "999"}] }},
+                 { list_value:
                    { values:
-                     [{ stringValue: "foo"}] }}] }}
+                     [{ string_value: "foo"}] }}] }}
       ] }}],
-    chunkedValue: true }
+    chunked_value: true }
   end
   let :results_values8 do
     { values:
-      [{ listValue:
+      [{ list_value:
          { values:
-           [{ listValue:
+           [{ list_value:
               { values:
-                [{ listValue:
+                [{ list_value:
                    { values:
-                     [{ stringValue: "bar"}] }}] }}
+                     [{ string_value: "bar"}] }}] }}
       ] }}],
-    chunkedValue: true }
+    chunked_value: true }
   end
   let :results_values9 do
     { values:
-      [{ listValue:
+      [{ list_value:
          { values:
-           [{ listValue:
+           [{ list_value:
               { values:
-                [{ listValue:
+                [{ list_value:
                    { values:
-                     [{ stringValue: "baz"}] }}] }}
+                     [{ string_value: "baz"}] }}] }}
       ] }}] }
   end
   let(:results_enum) do
-    [Google::Spanner::V1::PartialResultSet.decode_json(results_metadata.to_json),
-     Google::Spanner::V1::PartialResultSet.decode_json(results_values1.to_json),
-     Google::Spanner::V1::PartialResultSet.decode_json(results_values2.to_json),
-     Google::Spanner::V1::PartialResultSet.decode_json(results_values3.to_json),
-     Google::Spanner::V1::PartialResultSet.decode_json(results_values4.to_json),
-     Google::Spanner::V1::PartialResultSet.decode_json(results_values5.to_json),
-     Google::Spanner::V1::PartialResultSet.decode_json(results_values6.to_json),
-     Google::Spanner::V1::PartialResultSet.decode_json(results_values7.to_json),
-     Google::Spanner::V1::PartialResultSet.decode_json(results_values8.to_json),
-     Google::Spanner::V1::PartialResultSet.decode_json(results_values9.to_json)].to_enum
+    [Google::Spanner::V1::PartialResultSet.new(results_metadata),
+     Google::Spanner::V1::PartialResultSet.new(results_values1),
+     Google::Spanner::V1::PartialResultSet.new(results_values2),
+     Google::Spanner::V1::PartialResultSet.new(results_values3),
+     Google::Spanner::V1::PartialResultSet.new(results_values4),
+     Google::Spanner::V1::PartialResultSet.new(results_values5),
+     Google::Spanner::V1::PartialResultSet.new(results_values6),
+     Google::Spanner::V1::PartialResultSet.new(results_values7),
+     Google::Spanner::V1::PartialResultSet.new(results_values8),
+     Google::Spanner::V1::PartialResultSet.new(results_values9)].to_enum
   end
   let(:results) { Google::Cloud::Spanner::Results.from_enum results_enum, spanner.service }
 

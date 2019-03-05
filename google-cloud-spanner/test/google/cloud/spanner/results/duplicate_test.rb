@@ -18,12 +18,12 @@ describe Google::Cloud::Spanner::Results, :duplicate, :mock_spanner do
   let :results_types do
     {
       metadata: {
-        rowType: {
+        row_type: {
           fields: [
-            { name: "num", type: { code: "INT64" } },
-            { name: "str", type: { code: "INT64" } },
-            { name: "num", type: { code: "STRING" } },
-            { name: "str", type: { code: "STRING" } }
+            { name: "num", type: { code: :INT64 } },
+            { name: "str", type: { code: :INT64 } },
+            { name: "num", type: { code: :STRING } },
+            { name: "str", type: { code: :STRING } }
           ]
         }
       }
@@ -32,20 +32,20 @@ describe Google::Cloud::Spanner::Results, :duplicate, :mock_spanner do
   let :results_values do
     {
       values: [
-        { stringValue: "1" },
-        { stringValue: "2" },
-        { stringValue: "hello" },
-        { stringValue: "world" },
-        { stringValue: "3" },
-        { stringValue: "4" },
-        { stringValue: "hola" },
-        { stringValue: "mundo" }
+        { string_value: "1" },
+        { string_value: "2" },
+        { string_value: "hello" },
+        { string_value: "world" },
+        { string_value: "3" },
+        { string_value: "4" },
+        { string_value: "hola" },
+        { string_value: "mundo" }
       ]
     }
   end
   let(:results_enum) do
-    [Google::Spanner::V1::PartialResultSet.decode_json(results_types.to_json),
-     Google::Spanner::V1::PartialResultSet.decode_json(results_values.to_json)].to_enum
+    [Google::Spanner::V1::PartialResultSet.new(results_types),
+     Google::Spanner::V1::PartialResultSet.new(results_values)].to_enum
   end
   let(:results) { Google::Cloud::Spanner::Results.from_enum results_enum, spanner.service }
 

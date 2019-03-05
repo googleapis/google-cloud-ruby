@@ -17,14 +17,14 @@ require "helper"
 describe Google::Cloud::Spanner::Results, :merge, :mock_spanner do
   it "merges Strings" do
     results_hashes = [
-      { metadata: { rowType: { fields: [{ name: "f1", type: { code: "STRING" } }] } },
-        values: [{ stringValue: "abc" }],
-        chunkedValue: true },
-      { values: [{ stringValue: "def" }],
-        chunkedValue: true },
-      { values: [{ stringValue: "ghi" }] }
+      { metadata: { row_type: { fields: [{ name: "f1", type: { code: :STRING } }] } },
+        values: [{ string_value: "abc" }],
+        chunked_value: true },
+      { values: [{ string_value: "def" }],
+        chunked_value: true },
+      { values: [{ string_value: "ghi" }] }
     ]
-    results_enum = results_hashes.map { |hash| Google::Spanner::V1::PartialResultSet.decode_json hash.to_json }.to_enum
+    results_enum = results_hashes.map { |hash| Google::Spanner::V1::PartialResultSet.new hash }.to_enum
     results = Google::Cloud::Spanner::Results.from_enum results_enum, spanner.service
 
     results.must_be_kind_of Google::Cloud::Spanner::Results
@@ -43,14 +43,14 @@ describe Google::Cloud::Spanner::Results, :merge, :mock_spanner do
 
   it "merges String Arrays" do
     results_hashes = [
-      { metadata: { rowType: { fields: [{ name: "f1", type: { code: "ARRAY", arrayElementType: { code: "STRING" }}}] }},
-        values: [{ listValue: { values: [{ stringValue: "abc" }, { stringValue: "d" }] }}],
-        chunkedValue: true },
-      { values: [{ listValue: { values: [{ stringValue: "ef" }, { stringValue: "gh" }] }}],
-        chunkedValue: true },
-      { values: [{ listValue: { values: [{ stringValue: "i" }, { stringValue: "jkl" }] }}]}
+      { metadata: { row_type: { fields: [{ name: "f1", type: { code: :ARRAY, array_element_type: { code: :STRING }}}] }},
+        values: [{ list_value: { values: [{ string_value: "abc" }, { string_value: "d" }] }}],
+        chunked_value: true },
+      { values: [{ list_value: { values: [{ string_value: "ef" }, { string_value: "gh" }] }}],
+        chunked_value: true },
+      { values: [{ list_value: { values: [{ string_value: "i" }, { string_value: "jkl" }] }}]}
     ]
-    results_enum = results_hashes.map { |hash| Google::Spanner::V1::PartialResultSet.decode_json hash.to_json }.to_enum
+    results_enum = results_hashes.map { |hash| Google::Spanner::V1::PartialResultSet.new hash }.to_enum
     results = Google::Cloud::Spanner::Results.from_enum results_enum, spanner.service
 
     results.must_be_kind_of Google::Cloud::Spanner::Results
@@ -69,14 +69,14 @@ describe Google::Cloud::Spanner::Results, :merge, :mock_spanner do
 
   it "merges String Arrays With Nulls" do
     results_hashes = [
-      { metadata: { rowType: { fields: [{ name: "f1", type: { code: "ARRAY", arrayElementType: { code: "STRING" }}}] }},
-        values: [{ listValue: { values: [{ stringValue: "abc" }, { stringValue: "def" }] }}],
-        chunkedValue: true },
-      { values: [{ listValue: { values: [{ nullValue: "NULL_VALUE" }, { stringValue: "ghi" }] }}],
-        chunkedValue: true },
-      { values: [{ listValue: { values: [{ nullValue: "NULL_VALUE" }, { stringValue: "jkl" }] }}]}
+      { metadata: { row_type: { fields: [{ name: "f1", type: { code: :ARRAY, array_element_type: { code: :STRING }}}] }},
+        values: [{ list_value: { values: [{ string_value: "abc" }, { string_value: "def" }] }}],
+        chunked_value: true },
+      { values: [{ list_value: { values: [{ null_value: "NULL_VALUE" }, { string_value: "ghi" }] }}],
+        chunked_value: true },
+      { values: [{ list_value: { values: [{ null_value: "NULL_VALUE" }, { string_value: "jkl" }] }}]}
     ]
-    results_enum = results_hashes.map { |hash| Google::Spanner::V1::PartialResultSet.decode_json hash.to_json }.to_enum
+    results_enum = results_hashes.map { |hash| Google::Spanner::V1::PartialResultSet.new hash }.to_enum
     results = Google::Cloud::Spanner::Results.from_enum results_enum, spanner.service
 
     results.must_be_kind_of Google::Cloud::Spanner::Results
@@ -95,14 +95,14 @@ describe Google::Cloud::Spanner::Results, :merge, :mock_spanner do
 
   it "merges String Arrays With Empty Strings" do
     results_hashes = [
-      { metadata: { rowType: { fields: [{ name: "f1", type: { code: "ARRAY", arrayElementType: { code: "STRING" }}}] }},
-        values: [{ listValue: { values: [{ stringValue: "abc" }, { stringValue: "def" }] }}],
-        chunkedValue: true },
-      { values: [{ listValue: { values: [{ stringValue: "" }, { stringValue: "ghi" }] }}],
-        chunkedValue: true },
-      { values: [{ listValue: { values: [{ stringValue: "" }, { stringValue: "jkl" }] }}]}
+      { metadata: { row_type: { fields: [{ name: "f1", type: { code: :ARRAY, array_element_type: { code: :STRING }}}] }},
+        values: [{ list_value: { values: [{ string_value: "abc" }, { string_value: "def" }] }}],
+        chunked_value: true },
+      { values: [{ list_value: { values: [{ string_value: "" }, { string_value: "ghi" }] }}],
+        chunked_value: true },
+      { values: [{ list_value: { values: [{ string_value: "" }, { string_value: "jkl" }] }}]}
     ]
-    results_enum = results_hashes.map { |hash| Google::Spanner::V1::PartialResultSet.decode_json hash.to_json }.to_enum
+    results_enum = results_hashes.map { |hash| Google::Spanner::V1::PartialResultSet.new hash }.to_enum
     results = Google::Cloud::Spanner::Results.from_enum results_enum, spanner.service
 
     results.must_be_kind_of Google::Cloud::Spanner::Results
@@ -121,14 +121,14 @@ describe Google::Cloud::Spanner::Results, :merge, :mock_spanner do
 
   it "merges String Arrays With One Large String" do
     results_hashes = [
-      { metadata: { rowType: { fields: [{ name: "f1", type: { code: "ARRAY", arrayElementType: { code: "STRING" }}}] }},
-        values: [{ listValue: { values: [{ stringValue: "abc" }] }}],
-        chunkedValue: true },
-      { values: [{ listValue: { values: [{ stringValue: "def" }] }}],
-        chunkedValue: true },
-      { values: [{ listValue: { values: [{ stringValue: "ghi" }] }}]}
+      { metadata: { row_type: { fields: [{ name: "f1", type: { code: :ARRAY, array_element_type: { code: :STRING }}}] }},
+        values: [{ list_value: { values: [{ string_value: "abc" }] }}],
+        chunked_value: true },
+      { values: [{ list_value: { values: [{ string_value: "def" }] }}],
+        chunked_value: true },
+      { values: [{ list_value: { values: [{ string_value: "ghi" }] }}]}
     ]
-    results_enum = results_hashes.map { |hash| Google::Spanner::V1::PartialResultSet.decode_json hash.to_json }.to_enum
+    results_enum = results_hashes.map { |hash| Google::Spanner::V1::PartialResultSet.new hash }.to_enum
     results = Google::Cloud::Spanner::Results.from_enum results_enum, spanner.service
 
     results.must_be_kind_of Google::Cloud::Spanner::Results
@@ -147,14 +147,14 @@ describe Google::Cloud::Spanner::Results, :merge, :mock_spanner do
 
   it "merges INT64 Arrays" do
     results_hashes = [
-      { metadata: { rowType: { fields: [{ name: "f1", type: { code: "ARRAY", arrayElementType: { code: "INT64" }}}] }},
-        values: [{ listValue: { values: [{ stringValue: "1" }, { stringValue: "2" }] }}],
-        chunkedValue: true },
-      { values: [{ listValue: { values: [{ stringValue: "3" }, { stringValue: "4" }] }}],
-        chunkedValue: true },
-      { values: [{ listValue: { values: [{ nullValue: "NULL_VALUE" }, { stringValue: "5" }] }}]}
+      { metadata: { row_type: { fields: [{ name: "f1", type: { code: :ARRAY, array_element_type: { code: :INT64 }}}] }},
+        values: [{ list_value: { values: [{ string_value: "1" }, { string_value: "2" }] }}],
+        chunked_value: true },
+      { values: [{ list_value: { values: [{ string_value: "3" }, { string_value: "4" }] }}],
+        chunked_value: true },
+      { values: [{ list_value: { values: [{ null_value: "NULL_VALUE" }, { string_value: "5" }] }}]}
     ]
-    results_enum = results_hashes.map { |hash| Google::Spanner::V1::PartialResultSet.decode_json hash.to_json }.to_enum
+    results_enum = results_hashes.map { |hash| Google::Spanner::V1::PartialResultSet.new hash }.to_enum
     results = Google::Cloud::Spanner::Results.from_enum results_enum, spanner.service
 
     results.must_be_kind_of Google::Cloud::Spanner::Results
@@ -173,14 +173,14 @@ describe Google::Cloud::Spanner::Results, :merge, :mock_spanner do
 
   it "merges FLOAT64 Arrays" do
     results_hashes = [
-      { metadata: { rowType: { fields: [{ name: "f1", type: { code: "ARRAY", arrayElementType: { code: "FLOAT64" }}}] }},
-        values: [{ listValue: { values: [{ numberValue: 1.0 }, { numberValue: 2.0 }] }}],
-        chunkedValue: true },
-      { values: [{ listValue: { values: [{ stringValue: "Infinity" }, { stringValue: "-Infinity" }, { stringValue: "NaN" }] }}],
-        chunkedValue: true },
-      { values: [{ listValue: { values: [{ nullValue: "NULL_VALUE" }, { numberValue: 3.0 }] }}]}
+      { metadata: { row_type: { fields: [{ name: "f1", type: { code: :ARRAY, array_element_type: { code: :FLOAT64 }}}] }},
+        values: [{ list_value: { values: [{ number_value: 1.0 }, { number_value: 2.0 }] }}],
+        chunked_value: true },
+      { values: [{ list_value: { values: [{ string_value: "Infinity" }, { string_value: "-Infinity" }, { string_value: "NaN" }] }}],
+        chunked_value: true },
+      { values: [{ list_value: { values: [{ null_value: "NULL_VALUE" }, { number_value: 3.0 }] }}]}
     ]
-    results_enum = results_hashes.map { |hash| Google::Spanner::V1::PartialResultSet.decode_json hash.to_json }.to_enum
+    results_enum = results_hashes.map { |hash| Google::Spanner::V1::PartialResultSet.new hash }.to_enum
     results = Google::Cloud::Spanner::Results.from_enum results_enum, spanner.service
 
     results.must_be_kind_of Google::Cloud::Spanner::Results
@@ -199,15 +199,15 @@ describe Google::Cloud::Spanner::Results, :merge, :mock_spanner do
 
   it "merges Multiple Row Chunks/Non Chunks Interleaved" do
     results_hashes = [
-      { metadata: { rowType: { fields: [{ name: "f1", type: { code: "STRING" } }] } },
-        values: [{ stringValue: "a" }],
-        chunkedValue: true },
-      { values: [{ stringValue: "b" }, { stringValue: "c" }] },
-      { values: [{ stringValue: "d" }, { stringValue: "e" }],
-        chunkedValue: true },
-      { values: [{ stringValue: "f" }] }
+      { metadata: { row_type: { fields: [{ name: "f1", type: { code: :STRING } }] } },
+        values: [{ string_value: "a" }],
+        chunked_value: true },
+      { values: [{ string_value: "b" }, { string_value: "c" }] },
+      { values: [{ string_value: "d" }, { string_value: "e" }],
+        chunked_value: true },
+      { values: [{ string_value: "f" }] }
     ]
-    results_enum = results_hashes.map { |hash| Google::Spanner::V1::PartialResultSet.decode_json hash.to_json }.to_enum
+    results_enum = results_hashes.map { |hash| Google::Spanner::V1::PartialResultSet.new hash }.to_enum
     results = Google::Cloud::Spanner::Results.from_enum results_enum, spanner.service
 
     results.must_be_kind_of Google::Cloud::Spanner::Results
