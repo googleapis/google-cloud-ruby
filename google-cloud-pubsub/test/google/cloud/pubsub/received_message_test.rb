@@ -16,15 +16,14 @@ require "helper"
 
 describe Google::Cloud::PubSub::ReceivedMessage, :mock_pubsub do
   let(:topic_name) { "topic-name-goes-here" }
-  let(:topic) { Google::Cloud::PubSub::Topic.from_grpc Google::Cloud::PubSub::V1::Topic.decode_json(topic_json(topic_name)), pubsub.service }
+  let(:topic) { Google::Cloud::PubSub::Topic.from_grpc Google::Cloud::PubSub::V1::Topic.new(topic_hash(topic_name)), pubsub.service }
   let(:subscription_name) { "subscription-name-goes-here" }
-  let(:subscription_grpc) { Google::Cloud::PubSub::V1::Subscription.decode_json(subscription_json(topic_name, subscription_name)) }
+  let(:subscription_grpc) { Google::Cloud::PubSub::V1::Subscription.new(subscription_hash(topic_name, subscription_name)) }
   let(:subscription) { Google::Cloud::PubSub::Subscription.from_grpc subscription_grpc, pubsub.service }
   let(:rec_message_name) { "rec_message-name-goes-here" }
   let(:rec_message_msg)  { "rec_message-msg-goes-here" }
-  let(:rec_message_json_full)  { rec_message_json(rec_message_msg) }
-  let(:rec_message_data)  { JSON.parse rec_message_json_full }
-  let(:rec_message_grpc)  { Google::Cloud::PubSub::V1::ReceivedMessage.decode_json rec_message_json_full }
+  let(:rec_message_data)  { rec_message_hash(rec_message_msg) }
+  let(:rec_message_grpc)  { Google::Cloud::PubSub::V1::ReceivedMessage.new rec_message_data }
   let(:rec_message) { Google::Cloud::PubSub::ReceivedMessage.from_grpc rec_message_grpc, subscription }
 
   it "knows its subscription" do
@@ -33,16 +32,16 @@ describe Google::Cloud::PubSub::ReceivedMessage, :mock_pubsub do
   end
 
   it "knows its ack_id" do
-    rec_message.ack_id.must_equal rec_message_data["ack_id"]
+    rec_message.ack_id.must_equal rec_message_data[:ack_id]
   end
 
   it "has a message" do
     rec_message.message.wont_be :nil?
     rec_message.message.data.must_equal rec_message_msg
-    rec_message.message.attributes.keys.sort.must_equal   rec_message_data["message"]["attributes"].keys.sort
-    rec_message.message.attributes.values.sort.must_equal rec_message_data["message"]["attributes"].values.sort
-    rec_message.message.msg_id.must_equal rec_message_data["message"]["message_id"]
-    rec_message.message.message_id.must_equal rec_message_data["message"]["message_id"]
+    rec_message.message.attributes.keys.sort.must_equal   rec_message_data[:message][:attributes].keys.sort
+    rec_message.message.attributes.values.sort.must_equal rec_message_data[:message][:attributes].values.sort
+    rec_message.message.msg_id.must_equal rec_message_data[:message][:message_id]
+    rec_message.message.message_id.must_equal rec_message_data[:message][:message_id]
   end
 
   it "knows the message's data" do

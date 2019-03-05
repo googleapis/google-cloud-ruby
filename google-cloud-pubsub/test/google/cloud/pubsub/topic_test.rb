@@ -17,17 +17,17 @@ require "helper"
 describe Google::Cloud::PubSub::Topic, :mock_pubsub do
   let(:topic_name) { "topic-name-goes-here" }
   let(:labels) { { "foo" => "bar" } }
-  let(:topic) { Google::Cloud::PubSub::Topic.from_grpc Google::Cloud::PubSub::V1::Topic.decode_json(topic_json(topic_name, labels: labels)), pubsub.service }
+  let(:topic) { Google::Cloud::PubSub::Topic.from_grpc Google::Cloud::PubSub::V1::Topic.new(topic_hash(topic_name, labels: labels)), pubsub.service }
   let(:subscriptions_with_token) do
-    response = Google::Cloud::PubSub::V1::ListTopicSubscriptionsResponse.decode_json topic_subscriptions_json(3, "next_page_token")
+    response = Google::Cloud::PubSub::V1::ListTopicSubscriptionsResponse.new topic_subscriptions_hash(3, "next_page_token")
     paged_enum_struct response
   end
   let(:subscriptions_without_token) do
-    response = Google::Cloud::PubSub::V1::ListTopicSubscriptionsResponse.decode_json topic_subscriptions_json(2)
+    response = Google::Cloud::PubSub::V1::ListTopicSubscriptionsResponse.new topic_subscriptions_hash(2)
     paged_enum_struct response
   end
   let(:subscriptions_with_token_2) do
-    response = Google::Cloud::PubSub::V1::ListTopicSubscriptionsResponse.decode_json topic_subscriptions_json(3, "next_page_token")
+    response = Google::Cloud::PubSub::V1::ListTopicSubscriptionsResponse.new topic_subscriptions_hash(3, "next_page_token")
     paged_enum_struct response
   end
 
@@ -53,7 +53,7 @@ describe Google::Cloud::PubSub::Topic, :mock_pubsub do
 
   it "creates a subscription" do
     new_sub_name = "new-sub-#{Time.now.to_i}"
-    create_res = Google::Cloud::PubSub::V1::Subscription.decode_json subscription_json(topic_name, new_sub_name)
+    create_res = Google::Cloud::PubSub::V1::Subscription.new subscription_hash(topic_name, new_sub_name)
     mock = Minitest::Mock.new
     mock.expect :create_subscription, create_res, [subscription_path(new_sub_name), topic_path(topic_name), push_config: nil, ack_deadline_seconds: nil, retain_acked_messages: false, message_retention_duration: nil, labels: nil, options: default_options]
     topic.service.mocked_subscriber = mock
@@ -68,7 +68,7 @@ describe Google::Cloud::PubSub::Topic, :mock_pubsub do
 
   it "creates a subscription with create_subscription alias" do
     new_sub_name = "new-sub-#{Time.now.to_i}"
-    create_res = Google::Cloud::PubSub::V1::Subscription.decode_json subscription_json(topic_name, new_sub_name)
+    create_res = Google::Cloud::PubSub::V1::Subscription.new subscription_hash(topic_name, new_sub_name)
     mock = Minitest::Mock.new
     mock.expect :create_subscription, create_res, [subscription_path(new_sub_name), topic_path(topic_name), push_config: nil, ack_deadline_seconds: nil, retain_acked_messages: false, message_retention_duration: nil, labels: nil, options: default_options]
     topic.service.mocked_subscriber = mock
@@ -83,7 +83,7 @@ describe Google::Cloud::PubSub::Topic, :mock_pubsub do
 
   it "creates a subscription with new_subscription alias" do
     new_sub_name = "new-sub-#{Time.now.to_i}"
-    create_res = Google::Cloud::PubSub::V1::Subscription.decode_json subscription_json(topic_name, new_sub_name)
+    create_res = Google::Cloud::PubSub::V1::Subscription.new subscription_hash(topic_name, new_sub_name)
     mock = Minitest::Mock.new
     mock.expect :create_subscription, create_res, [subscription_path(new_sub_name), topic_path(topic_name), push_config: nil, ack_deadline_seconds: nil, retain_acked_messages: false, message_retention_duration: nil, labels: nil, options: default_options]
     topic.service.mocked_subscriber = mock
@@ -99,7 +99,7 @@ describe Google::Cloud::PubSub::Topic, :mock_pubsub do
   it "creates a subscription with a deadline" do
     new_sub_name = "new-sub-#{Time.now.to_i}"
     deadline = 42
-    create_res = Google::Cloud::PubSub::V1::Subscription.decode_json subscription_json(topic_name, new_sub_name)
+    create_res = Google::Cloud::PubSub::V1::Subscription.new subscription_hash(topic_name, new_sub_name)
     mock = Minitest::Mock.new
     mock.expect :create_subscription, create_res, [subscription_path(new_sub_name), topic_path(topic_name), push_config: nil, ack_deadline_seconds: 42, retain_acked_messages: false, message_retention_duration: nil, labels: nil, options: default_options]
     topic.service.mocked_subscriber = mock
@@ -114,7 +114,7 @@ describe Google::Cloud::PubSub::Topic, :mock_pubsub do
 
   it "creates a subscription with retain_acked and retention" do
     new_sub_name = "new-sub-#{Time.now.to_i}"
-    create_res = Google::Cloud::PubSub::V1::Subscription.decode_json subscription_json(topic_name, new_sub_name)
+    create_res = Google::Cloud::PubSub::V1::Subscription.new subscription_hash(topic_name, new_sub_name)
 
     duration = Google::Protobuf::Duration.new seconds: 600, nanos: 0
     mock = Minitest::Mock.new
@@ -133,7 +133,7 @@ describe Google::Cloud::PubSub::Topic, :mock_pubsub do
     new_sub_name = "new-sub-#{Time.now.to_i}"
     endpoint = "http://foo.bar/baz"
     push_config = Google::Cloud::PubSub::V1::PushConfig.new(push_endpoint: endpoint)
-    create_res = Google::Cloud::PubSub::V1::Subscription.decode_json subscription_json(topic_name, new_sub_name)
+    create_res = Google::Cloud::PubSub::V1::Subscription.new subscription_hash(topic_name, new_sub_name)
     mock = Minitest::Mock.new
     mock.expect :create_subscription, create_res, [subscription_path(new_sub_name), topic_path(topic_name), push_config: push_config, ack_deadline_seconds: nil, retain_acked_messages: false, message_retention_duration: nil, labels: nil, options: default_options]
     topic.service.mocked_subscriber = mock
@@ -148,7 +148,7 @@ describe Google::Cloud::PubSub::Topic, :mock_pubsub do
 
   it "creates a subscription with labels" do
     new_sub_name = "new-sub-#{Time.now.to_i}"
-    create_res = Google::Cloud::PubSub::V1::Subscription.decode_json subscription_json(topic_name, new_sub_name, labels: labels)
+    create_res = Google::Cloud::PubSub::V1::Subscription.new subscription_hash(topic_name, new_sub_name, labels: labels)
     mock = Minitest::Mock.new
     mock.expect :create_subscription, create_res, [subscription_path(new_sub_name), topic_path(topic_name), push_config: nil, ack_deadline_seconds: nil, retain_acked_messages: false, message_retention_duration: nil, labels: labels, options: default_options]
     topic.service.mocked_subscriber = mock
@@ -199,7 +199,7 @@ describe Google::Cloud::PubSub::Topic, :mock_pubsub do
   it "gets a subscription" do
     sub_name = "found-sub-#{Time.now.to_i}"
 
-    get_res = Google::Cloud::PubSub::V1::Subscription.decode_json subscription_json(topic_name, sub_name)
+    get_res = Google::Cloud::PubSub::V1::Subscription.new subscription_hash(topic_name, sub_name)
     mock = Minitest::Mock.new
     mock.expect :get_subscription, get_res, [subscription_path(sub_name), options: default_options]
     topic.service.mocked_subscriber = mock
@@ -217,7 +217,7 @@ describe Google::Cloud::PubSub::Topic, :mock_pubsub do
   it "gets a subscription with get_subscription alias" do
     sub_name = "found-sub-#{Time.now.to_i}"
 
-    get_res = Google::Cloud::PubSub::V1::Subscription.decode_json subscription_json(topic_name, sub_name)
+    get_res = Google::Cloud::PubSub::V1::Subscription.new subscription_hash(topic_name, sub_name)
     mock = Minitest::Mock.new
     mock.expect :get_subscription, get_res, [subscription_path(sub_name), options: default_options]
     topic.service.mocked_subscriber = mock
@@ -235,7 +235,7 @@ describe Google::Cloud::PubSub::Topic, :mock_pubsub do
   it "gets a subscription with find_subscription alias" do
     sub_name = "found-sub-#{Time.now.to_i}"
 
-    get_res = Google::Cloud::PubSub::V1::Subscription.decode_json subscription_json(topic_name, sub_name)
+    get_res = Google::Cloud::PubSub::V1::Subscription.new subscription_hash(topic_name, sub_name)
     mock = Minitest::Mock.new
     mock.expect :get_subscription, get_res, [subscription_path(sub_name), options: default_options]
     topic.service.mocked_subscriber = mock
@@ -490,7 +490,7 @@ describe Google::Cloud::PubSub::Topic, :mock_pubsub do
     messages = [
       Google::Cloud::PubSub::V1::PubsubMessage.new(data: encoded_msg)
     ]
-    publish_res = Google::Cloud::PubSub::V1::PublishResponse.decode_json({ message_ids: ["msg1"] }.to_json)
+    publish_res = Google::Cloud::PubSub::V1::PublishResponse.new({ message_ids: ["msg1"] })
     mock = Minitest::Mock.new
     mock.expect :publish, publish_res, [topic_path(topic_name), messages, options: default_options]
     topic.service.mocked_publisher = mock
@@ -509,7 +509,7 @@ describe Google::Cloud::PubSub::Topic, :mock_pubsub do
     messages = [
       Google::Cloud::PubSub::V1::PubsubMessage.new(data: encoded_msg, attributes: { "format" => "text" })
     ]
-    publish_res = Google::Cloud::PubSub::V1::PublishResponse.decode_json({ message_ids: ["msg1"] }.to_json)
+    publish_res = Google::Cloud::PubSub::V1::PublishResponse.new({ message_ids: ["msg1"] })
     mock = Minitest::Mock.new
     mock.expect :publish, publish_res, [topic_path(topic_name), messages, options: default_options]
     topic.service.mocked_publisher = mock
@@ -532,7 +532,7 @@ describe Google::Cloud::PubSub::Topic, :mock_pubsub do
       Google::Cloud::PubSub::V1::PubsubMessage.new(data: encoded_msg1),
       Google::Cloud::PubSub::V1::PubsubMessage.new(data: encoded_msg2, attributes: { "format" => "none" })
     ]
-    publish_res = Google::Cloud::PubSub::V1::PublishResponse.decode_json({ message_ids: ["msg1", "msg2"] }.to_json)
+    publish_res = Google::Cloud::PubSub::V1::PublishResponse.new({ message_ids: ["msg1", "msg2"] })
     mock = Minitest::Mock.new
     mock.expect :publish, publish_res, [topic_path(topic_name), messages, options: default_options]
     topic.service.mocked_publisher = mock

@@ -23,7 +23,7 @@ describe Google::Cloud::PubSub::Topic, :update, :mock_pubsub do
     new_labels.each { |k, v| labels_map[String(k)] = String(v) }
     labels_map
   end
-  let(:topic_grpc) { Google::Cloud::PubSub::V1::Topic.decode_json topic_json(topic_name, labels: labels) }
+  let(:topic_grpc) { Google::Cloud::PubSub::V1::Topic.new topic_hash(topic_name, labels: labels) }
   let(:topic) { Google::Cloud::PubSub::Topic.from_grpc topic_grpc, pubsub.service }
 
   it "updates labels" do

@@ -17,8 +17,8 @@ require "helper"
 describe Google::Cloud::PubSub::Subscription, :exists, :mock_pubsub do
   let(:topic_name) { "topic-name-goes-here" }
   let(:sub_name) { "subscription-name-goes-here" }
-  let(:sub_json) { subscription_json(topic_name, sub_name) }
-  let(:sub_grpc) { Google::Cloud::PubSub::V1::Subscription.decode_json(sub_json) }
+  let(:sub_hash) { subscription_hash(topic_name, sub_name) }
+  let(:sub_grpc) { Google::Cloud::PubSub::V1::Subscription.new(sub_hash) }
   let(:subscription) { Google::Cloud::PubSub::Subscription.from_grpc sub_grpc, pubsub.service }
 
   it "knows if it exists when created with an HTTP method" do
@@ -36,7 +36,7 @@ describe Google::Cloud::PubSub::Subscription, :exists, :mock_pubsub do
     end
 
     it "checks if the subscription exists by making an HTTP call" do
-      get_res = Google::Cloud::PubSub::V1::Subscription.decode_json subscription_json(topic_name, sub_name)
+      get_res = Google::Cloud::PubSub::V1::Subscription.new subscription_hash(topic_name, sub_name)
       mock = Minitest::Mock.new
       mock.expect :get_subscription, get_res, [subscription_path(sub_name), options: default_options]
       subscription.service.mocked_subscriber = mock

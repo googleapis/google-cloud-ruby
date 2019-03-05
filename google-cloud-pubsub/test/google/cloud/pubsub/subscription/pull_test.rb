@@ -17,14 +17,13 @@ require "helper"
 describe Google::Cloud::PubSub::Subscription, :pull, :mock_pubsub do
   let(:topic_name) { "topic-name-goes-here" }
   let(:sub_name) { "subscription-name-goes-here" }
-  let(:sub_json) { subscription_json topic_name, sub_name }
-  let(:sub_hash) { JSON.parse sub_json }
-  let(:sub_grpc) { Google::Cloud::PubSub::V1::Subscription.decode_json(sub_json) }
+  let(:sub_hash) { subscription_hash topic_name, sub_name }
+  let(:sub_grpc) { Google::Cloud::PubSub::V1::Subscription.new(sub_hash) }
   let(:subscription) { Google::Cloud::PubSub::Subscription.from_grpc sub_grpc, pubsub.service }
 
   it "can pull messages" do
     rec_message_msg = "pulled-message"
-    pull_res = Google::Cloud::PubSub::V1::PullResponse.decode_json rec_messages_json(rec_message_msg)
+    pull_res = Google::Cloud::PubSub::V1::PullResponse.new rec_messages_hash(rec_message_msg)
     mock = Minitest::Mock.new
     mock.expect :pull, pull_res, [subscription_path(sub_name), 100, return_immediately: true, options: default_options]
     subscription.service.mocked_subscriber = mock
@@ -45,7 +44,7 @@ describe Google::Cloud::PubSub::Subscription, :pull, :mock_pubsub do
 
     it "can pull messages" do
       rec_message_msg = "pulled-message"
-      pull_res = Google::Cloud::PubSub::V1::PullResponse.decode_json rec_messages_json(rec_message_msg)
+      pull_res = Google::Cloud::PubSub::V1::PullResponse.new rec_messages_hash(rec_message_msg)
       mock = Minitest::Mock.new
       mock.expect :pull, pull_res, [subscription_path(sub_name), 100, return_immediately: true, options: default_options]
       subscription.service.mocked_subscriber = mock

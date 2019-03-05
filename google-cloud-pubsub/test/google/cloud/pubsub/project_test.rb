@@ -16,39 +16,39 @@ require "helper"
 
 describe Google::Cloud::PubSub::Project, :mock_pubsub do
   let(:topics_with_token) do
-    response = Google::Cloud::PubSub::V1::ListTopicsResponse.decode_json topics_json(3, "next_page_token")
+    response = Google::Cloud::PubSub::V1::ListTopicsResponse.new topics_hash(3, "next_page_token")
     paged_enum_struct response
   end
   let(:topics_without_token) do
-    response = Google::Cloud::PubSub::V1::ListTopicsResponse.decode_json topics_json(2)
+    response = Google::Cloud::PubSub::V1::ListTopicsResponse.new topics_hash(2)
     paged_enum_struct response
   end
   let(:topics_with_token_2) do
-    response = Google::Cloud::PubSub::V1::ListTopicsResponse.decode_json topics_json(3, "second_page_token")
+    response = Google::Cloud::PubSub::V1::ListTopicsResponse.new topics_hash(3, "second_page_token")
     paged_enum_struct response
   end
   let(:subscriptions_with_token) do
-    response = Google::Cloud::PubSub::V1::ListSubscriptionsResponse.decode_json subscriptions_json("fake-topic", 3, "next_page_token")
+    response = Google::Cloud::PubSub::V1::ListSubscriptionsResponse.new subscriptions_hash("fake-topic", 3, "next_page_token")
     paged_enum_struct response
   end
   let(:subscriptions_without_token) do
-    response = Google::Cloud::PubSub::V1::ListSubscriptionsResponse.decode_json subscriptions_json("fake-topic", 2)
+    response = Google::Cloud::PubSub::V1::ListSubscriptionsResponse.new subscriptions_hash("fake-topic", 2)
     paged_enum_struct response
   end
   let(:subscriptions_with_token_2) do
-    response = Google::Cloud::PubSub::V1::ListSubscriptionsResponse.decode_json subscriptions_json("fake-topic", 3, "second_page_token")
+    response = Google::Cloud::PubSub::V1::ListSubscriptionsResponse.new subscriptions_hash("fake-topic", 3, "second_page_token")
     paged_enum_struct response
   end
   let(:snapshots_with_token) do
-    response = Google::Cloud::PubSub::V1::ListSnapshotsResponse.decode_json snapshots_json("fake-topic", 3, "next_page_token")
+    response = Google::Cloud::PubSub::V1::ListSnapshotsResponse.new snapshots_hash("fake-topic", 3, "next_page_token")
     paged_enum_struct response
   end
   let(:snapshots_without_token) do
-    response = Google::Cloud::PubSub::V1::ListSnapshotsResponse.decode_json snapshots_json("fake-topic", 2)
+    response = Google::Cloud::PubSub::V1::ListSnapshotsResponse.new snapshots_hash("fake-topic", 2)
     paged_enum_struct response
   end
   let(:snapshots_with_token_2) do
-    response = Google::Cloud::PubSub::V1::ListSnapshotsResponse.decode_json snapshots_json("fake-topic", 3, "second_page_token")
+    response = Google::Cloud::PubSub::V1::ListSnapshotsResponse.new snapshots_hash("fake-topic", 3, "second_page_token")
     paged_enum_struct response
   end
   let(:labels) { { "foo" => "bar" } }
@@ -60,7 +60,7 @@ describe Google::Cloud::PubSub::Project, :mock_pubsub do
   it "creates a topic" do
     new_topic_name = "new-topic-#{Time.now.to_i}"
 
-    create_res = Google::Cloud::PubSub::V1::Topic.decode_json topic_json(new_topic_name)
+    create_res = Google::Cloud::PubSub::V1::Topic.new topic_hash(new_topic_name)
     mock = Minitest::Mock.new
     mock.expect :create_topic, create_res, [topic_path(new_topic_name), labels: nil, options: default_options]
     pubsub.service.mocked_publisher = mock
@@ -75,7 +75,7 @@ describe Google::Cloud::PubSub::Project, :mock_pubsub do
   it "creates a topic with new_topic_alias" do
     new_topic_name = "new-topic-#{Time.now.to_i}"
 
-    create_res = Google::Cloud::PubSub::V1::Topic.decode_json topic_json(new_topic_name)
+    create_res = Google::Cloud::PubSub::V1::Topic.new topic_hash(new_topic_name)
     mock = Minitest::Mock.new
     mock.expect :create_topic, create_res, [topic_path(new_topic_name), labels: nil, options: default_options]
     pubsub.service.mocked_publisher = mock
@@ -90,7 +90,7 @@ describe Google::Cloud::PubSub::Project, :mock_pubsub do
   it "creates a topic with labels" do
     new_topic_name = "new-topic-#{Time.now.to_i}"
 
-    create_res = Google::Cloud::PubSub::V1::Topic.decode_json topic_json(new_topic_name, labels: labels)
+    create_res = Google::Cloud::PubSub::V1::Topic.new topic_hash(new_topic_name, labels: labels)
     mock = Minitest::Mock.new
     mock.expect :create_topic, create_res, [topic_path(new_topic_name), labels: labels, options: default_options]
     pubsub.service.mocked_publisher = mock
@@ -107,7 +107,7 @@ describe Google::Cloud::PubSub::Project, :mock_pubsub do
   it "gets a topic" do
     topic_name = "found-topic"
 
-    get_res = Google::Cloud::PubSub::V1::Topic.decode_json topic_json(topic_name)
+    get_res = Google::Cloud::PubSub::V1::Topic.new topic_hash(topic_name)
     mock = Minitest::Mock.new
     mock.expect :get_topic, get_res, [topic_path(topic_name), options: default_options]
     pubsub.service.mocked_publisher = mock
@@ -124,7 +124,7 @@ describe Google::Cloud::PubSub::Project, :mock_pubsub do
   it "gets a topic with get_topic alias" do
     topic_name = "found-topic"
 
-    get_res = Google::Cloud::PubSub::V1::Topic.decode_json topic_json(topic_name)
+    get_res = Google::Cloud::PubSub::V1::Topic.new topic_hash(topic_name)
     mock = Minitest::Mock.new
     mock.expect :get_topic, get_res, [topic_path(topic_name), options: default_options]
     pubsub.service.mocked_publisher = mock
@@ -141,7 +141,7 @@ describe Google::Cloud::PubSub::Project, :mock_pubsub do
   it "gets a topic with find_topic alias" do
     topic_name = "found-topic"
 
-    get_res = Google::Cloud::PubSub::V1::Topic.decode_json topic_json(topic_name)
+    get_res = Google::Cloud::PubSub::V1::Topic.new topic_hash(topic_name)
     mock = Minitest::Mock.new
     mock.expect :get_topic, get_res, [topic_path(topic_name), options: default_options]
     pubsub.service.mocked_publisher = mock
@@ -374,7 +374,7 @@ describe Google::Cloud::PubSub::Project, :mock_pubsub do
   it "gets a subscription" do
     sub_name = "found-sub-#{Time.now.to_i}"
 
-    get_res = Google::Cloud::PubSub::V1::Subscription.decode_json subscription_json("random-topic", sub_name)
+    get_res = Google::Cloud::PubSub::V1::Subscription.new subscription_hash("random-topic", sub_name)
     mock = Minitest::Mock.new
     mock.expect :get_subscription, get_res, [subscription_path(sub_name), options: default_options]
     pubsub.service.mocked_subscriber = mock
@@ -393,7 +393,7 @@ describe Google::Cloud::PubSub::Project, :mock_pubsub do
   it "gets a subscription with get_subscription alias" do
     sub_name = "found-sub-#{Time.now.to_i}"
 
-    get_res = Google::Cloud::PubSub::V1::Subscription.decode_json subscription_json("random-topic", sub_name)
+    get_res = Google::Cloud::PubSub::V1::Subscription.new subscription_hash("random-topic", sub_name)
     mock = Minitest::Mock.new
     mock.expect :get_subscription, get_res, [subscription_path(sub_name), options: default_options]
     pubsub.service.mocked_subscriber = mock
@@ -412,7 +412,7 @@ describe Google::Cloud::PubSub::Project, :mock_pubsub do
   it "gets a subscription with find_subscription alias" do
     sub_name = "found-sub-#{Time.now.to_i}"
 
-    get_res = Google::Cloud::PubSub::V1::Subscription.decode_json subscription_json("random-topic", sub_name)
+    get_res = Google::Cloud::PubSub::V1::Subscription.new subscription_hash("random-topic", sub_name)
     mock = Minitest::Mock.new
     mock.expect :get_subscription, get_res, [subscription_path(sub_name), options: default_options]
     pubsub.service.mocked_subscriber = mock

@@ -25,11 +25,10 @@ describe Google::Cloud::PubSub::Subscription, :update, :mock_pubsub do
     new_labels.each { |k, v| labels_map[String(k)] = String(v) }
     labels_map
   end
-  let(:sub_json) { subscription_json topic_name, sub_name, labels: labels }
-  let(:sub_hash) { JSON.parse sub_json }
+  let(:sub_hash) { subscription_hash topic_name, sub_name, labels: labels }
   let(:sub_deadline) { sub_hash["ack_deadline_seconds"] }
   let(:sub_endpoint) { sub_hash["push_config"]["push_endpoint"] }
-  let(:sub_grpc) { Google::Cloud::PubSub::V1::Subscription.decode_json(sub_json) }
+  let(:sub_grpc) { Google::Cloud::PubSub::V1::Subscription.new(sub_hash) }
   let(:subscription) { Google::Cloud::PubSub::Subscription.from_grpc sub_grpc, pubsub.service }
 
   it "updates deadline" do

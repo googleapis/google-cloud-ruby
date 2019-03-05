@@ -17,17 +17,16 @@ require "helper"
 describe Google::Cloud::PubSub::Subscriber, :error, :mock_pubsub do
   let(:topic_name) { "topic-name-goes-here" }
   let(:sub_name) { "subscription-name-goes-here" }
-  let(:sub_json) { subscription_json topic_name, sub_name }
-  let(:sub_hash) { JSON.parse sub_json }
-  let(:sub_grpc) { Google::Cloud::PubSub::V1::Subscription.decode_json(sub_json) }
+  let(:sub_hash) { subscription_hash topic_name, sub_name }
+  let(:sub_grpc) { Google::Cloud::PubSub::V1::Subscription.new(sub_hash) }
   let(:sub_path) { sub_grpc.name }
   let(:subscription) { Google::Cloud::PubSub::Subscription.from_grpc sub_grpc, pubsub.service }
-  let(:rec_msg1_grpc) { Google::Cloud::PubSub::V1::ReceivedMessage.decode_json \
-                          rec_message_json("rec_message1-msg-goes-here", 1111) }
-  let(:rec_msg2_grpc) { Google::Cloud::PubSub::V1::ReceivedMessage.decode_json \
-                          rec_message_json("rec_message2-msg-goes-here", 1112) }
-  let(:rec_msg3_grpc) { Google::Cloud::PubSub::V1::ReceivedMessage.decode_json \
-                          rec_message_json("rec_message3-msg-goes-here", 1113) }
+  let(:rec_msg1_grpc) { Google::Cloud::PubSub::V1::ReceivedMessage.new \
+                          rec_message_hash("rec_message1-msg-goes-here", 1111) }
+  let(:rec_msg2_grpc) { Google::Cloud::PubSub::V1::ReceivedMessage.new \
+                          rec_message_hash("rec_message2-msg-goes-here", 1112) }
+  let(:rec_msg3_grpc) { Google::Cloud::PubSub::V1::ReceivedMessage.new \
+                          rec_message_hash("rec_message3-msg-goes-here", 1113) }
 
   it "restarts on known errors" do
     pull_res1 = Google::Cloud::PubSub::V1::StreamingPullResponse.new received_messages: [rec_msg1_grpc]
