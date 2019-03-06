@@ -1,4 +1,4 @@
-# Copyright 2018 Google LLC
+# Copyright 2019 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,8 +18,9 @@ module Google
     module Scheduler
       module V1beta1
         # Http target. The job will be pushed to the job handler by means of
-        # an HTTP request via an {Google::Cloud::Scheduler::V1beta1::HttpTarget#http_method http_method} such as HTTP
-        # POST, HTTP GET, etc. The job is acknowledged by means of an HTTP
+        # an HTTP request via an
+        # {Google::Cloud::Scheduler::V1beta1::HttpTarget#http_method http_method} such as
+        # HTTP POST, HTTP GET, etc. The job is acknowledged by means of an HTTP
         # response code in the range [200 - 299]. A failure to receive a response
         # constitutes a failed execution. For a redirected request, the response
         # returned by the redirected request is considered.
@@ -61,14 +62,14 @@ module Google
         class HttpTarget; end
 
         # App Engine target. The job will be pushed to a job handler by means
-        # of an HTTP request via an {Google::Cloud::Scheduler::V1beta1::AppEngineHttpTarget#http_method http_method} such
-        # as HTTP POST, HTTP GET, etc. The job is acknowledged by means of an
-        # HTTP response code in the range [200 - 299]. Error 503 is
-        # considered an App Engine system error instead of an application
-        # error. Requests returning error 503 will be retried regardless of
-        # retry configuration and not counted against retry counts. Any other
-        # response code, or a failure to receive a response before the
-        # deadline, constitutes a failed attempt.
+        # of an HTTP request via an
+        # {Google::Cloud::Scheduler::V1beta1::AppEngineHttpTarget#http_method http_method}
+        # such as HTTP POST, HTTP GET, etc. The job is acknowledged by means of an HTTP
+        # response code in the range [200 - 299]. Error 503 is considered an App Engine
+        # system error instead of an application error. Requests returning error 503
+        # will be retried regardless of retry configuration and not counted against
+        # retry counts. Any other response code, or a failure to receive a response
+        # before the deadline, constitutes a failed attempt.
         # @!attribute [rw] http_method
         #   @return [Google::Cloud::Scheduler::V1beta1::HttpMethod]
         #     The HTTP method to use for the request. PATCH and OPTIONS are not
@@ -99,8 +100,9 @@ module Google
         #       `"AppEngine-Google; (+http://code.google.com/appengine)"` to the
         #       modified `User-Agent`.
         #
-        #     If the job has an {Google::Cloud::Scheduler::V1beta1::AppEngineHttpTarget#body body}, Cloud Scheduler sets the
-        #     following headers:
+        #     If the job has an
+        #     {Google::Cloud::Scheduler::V1beta1::AppEngineHttpTarget#body body}, Cloud
+        #     Scheduler sets the following headers:
         #
         #     * `Content-Type`: By default, the `Content-Type` header is set to
         #       `"application/octet-stream"`. The default can be overridden by explictly
@@ -114,18 +116,21 @@ module Google
         #
         #     * `X-Google-*`: For Google internal use only.
         #     * `X-AppEngine-*`: For Google internal use only. See
-        #       [Reading request headers](https://cloud.google.com/appengine/docs/python/taskqueue/push/creating-handlers#reading_request_headers).
+        #       [Reading request
+        #       headers](https://cloud.google.com/appengine/docs/python/taskqueue/push/creating-handlers#reading_request_headers).
         #
         #     In addition, some App Engine headers, which contain
         #     job-specific information, are also be sent to the job handler; see
-        #     [request headers](https://cloud.google.comappengine/docs/standard/python/config/cron#securing_urls_for_cron).
+        #     [request
+        #     headers](https://cloud.google.com/appengine/docs/standard/python/config/cron#securing_urls_for_cron).
         # @!attribute [rw] body
         #   @return [String]
         #     Body.
         #
         #     HTTP request body. A request body is allowed only if the HTTP method is
         #     POST or PUT. It will result in invalid argument error to set a body on a
-        #     job with an incompatible {Google::Cloud::Scheduler::V1beta1::HttpMethod HttpMethod}.
+        #     job with an incompatible
+        #     {Google::Cloud::Scheduler::V1beta1::HttpMethod HttpMethod}.
         class AppEngineHttpTarget; end
 
         # Pub/Sub target. The job will be delivered by publishing a message to
@@ -158,10 +163,14 @@ module Google
         # App Engine Routing.
         #
         # For more information about services, versions, and instances see
-        # [An Overview of App Engine](https://cloud.google.com/appengine/docs/python/an-overview-of-app-engine),
-        # [Microservices Architecture on Google App Engine](https://cloud.google.com/appengine/docs/python/microservices-on-app-engine),
-        # [App Engine Standard request routing](https://cloud.google.com/appengine/docs/standard/python/how-requests-are-routed), and
-        # [App Engine Flex request routing](https://cloud.google.com/appengine/docs/flexible/python/how-requests-are-routed).
+        # [An Overview of App
+        # Engine](https://cloud.google.com/appengine/docs/python/an-overview-of-app-engine),
+        # [Microservices Architecture on Google App
+        # Engine](https://cloud.google.com/appengine/docs/python/microservices-on-app-engine),
+        # [App Engine Standard request
+        # routing](https://cloud.google.com/appengine/docs/standard/python/how-requests-are-routed),
+        # and [App Engine Flex request
+        # routing](https://cloud.google.com/appengine/docs/flexible/python/how-requests-are-routed).
         # @!attribute [rw] service
         #   @return [String]
         #     App service.
@@ -182,10 +191,13 @@ module Google
         #     the job is attempted.
         #
         #     Requests can only be sent to a specific instance if
-        #     [manual scaling is used in App Engine Standard](https://cloud.google.com/appengine/docs/python/an-overview-of-app-engine?hl=en_US#scaling_types_and_instance_classes).
+        #     [manual scaling is used in App Engine
+        #     Standard](https://cloud.google.com/appengine/docs/python/an-overview-of-app-engine?hl=en_US#scaling_types_and_instance_classes).
         #     App Engine Flex does not support instances. For more information, see
-        #     [App Engine Standard request routing](https://cloud.google.com/appengine/docs/standard/python/how-requests-are-routed) and
-        #     [App Engine Flex request routing](https://cloud.google.com/appengine/docs/flexible/python/how-requests-are-routed).
+        #     [App Engine Standard request
+        #     routing](https://cloud.google.com/appengine/docs/standard/python/how-requests-are-routed)
+        #     and [App Engine Flex request
+        #     routing](https://cloud.google.com/appengine/docs/flexible/python/how-requests-are-routed).
         # @!attribute [rw] host
         #   @return [String]
         #     Output only. The host that the job is sent to.
@@ -209,43 +221,51 @@ module Google
         #       example <app-id>.appspot.com, which is associated with the
         #       job's project ID.
         #
-        #     * `service =` {Google::Cloud::Scheduler::V1beta1::AppEngineRouting#service service}
-        #
-        #     * `version =` {Google::Cloud::Scheduler::V1beta1::AppEngineRouting#version version}
-        #
-        #     * `version_dot_service =`
-        #       {Google::Cloud::Scheduler::V1beta1::AppEngineRouting#version version} `+ '.' +`
+        #     * `service =`
         #       {Google::Cloud::Scheduler::V1beta1::AppEngineRouting#service service}
         #
-        #     * `instance =` {Google::Cloud::Scheduler::V1beta1::AppEngineRouting#instance instance}
-        #
-        #     * `instance_dot_service =`
-        #       {Google::Cloud::Scheduler::V1beta1::AppEngineRouting#instance instance} `+ '.' +`
-        #       {Google::Cloud::Scheduler::V1beta1::AppEngineRouting#service service}
-        #
-        #     * `instance_dot_version =`
-        #       {Google::Cloud::Scheduler::V1beta1::AppEngineRouting#instance instance} `+ '.' +`
+        #     * `version =`
         #       {Google::Cloud::Scheduler::V1beta1::AppEngineRouting#version version}
         #
+        #     * `version_dot_service =`
+        #       {Google::Cloud::Scheduler::V1beta1::AppEngineRouting#version version} `+ '.'
+        #       +` {Google::Cloud::Scheduler::V1beta1::AppEngineRouting#service service}
+        #
+        #     * `instance =`
+        #       {Google::Cloud::Scheduler::V1beta1::AppEngineRouting#instance instance}
+        #
+        #     * `instance_dot_service =`
+        #       {Google::Cloud::Scheduler::V1beta1::AppEngineRouting#instance instance} `+
+        #       '.' +` {Google::Cloud::Scheduler::V1beta1::AppEngineRouting#service service}
+        #
+        #     * `instance_dot_version =`
+        #       {Google::Cloud::Scheduler::V1beta1::AppEngineRouting#instance instance} `+
+        #       '.' +` {Google::Cloud::Scheduler::V1beta1::AppEngineRouting#version version}
+        #
         #     * `instance_dot_version_dot_service =`
-        #       {Google::Cloud::Scheduler::V1beta1::AppEngineRouting#instance instance} `+ '.' +`
-        #       {Google::Cloud::Scheduler::V1beta1::AppEngineRouting#version version} `+ '.' +`
+        #       {Google::Cloud::Scheduler::V1beta1::AppEngineRouting#instance instance} `+
+        #       '.' +` {Google::Cloud::Scheduler::V1beta1::AppEngineRouting#version version}
+        #       `+ '.' +`
         #       {Google::Cloud::Scheduler::V1beta1::AppEngineRouting#service service}
         #
         #
-        #     If {Google::Cloud::Scheduler::V1beta1::AppEngineRouting#service service} is empty, then the job will be sent
-        #     to the service which is the default service when the job is attempted.
+        #     If {Google::Cloud::Scheduler::V1beta1::AppEngineRouting#service service} is
+        #     empty, then the job will be sent to the service which is the default
+        #     service when the job is attempted.
         #
-        #     If {Google::Cloud::Scheduler::V1beta1::AppEngineRouting#version version} is empty, then the job will be sent
-        #     to the version which is the default version when the job is attempted.
+        #     If {Google::Cloud::Scheduler::V1beta1::AppEngineRouting#version version} is
+        #     empty, then the job will be sent to the version which is the default
+        #     version when the job is attempted.
         #
-        #     If {Google::Cloud::Scheduler::V1beta1::AppEngineRouting#instance instance} is empty, then the job will be
-        #     sent to an instance which is available when the job is attempted.
+        #     If {Google::Cloud::Scheduler::V1beta1::AppEngineRouting#instance instance} is
+        #     empty, then the job will be sent to an instance which is available when the
+        #     job is attempted.
         #
         #     If {Google::Cloud::Scheduler::V1beta1::AppEngineRouting#service service},
         #     {Google::Cloud::Scheduler::V1beta1::AppEngineRouting#version version}, or
-        #     {Google::Cloud::Scheduler::V1beta1::AppEngineRouting#instance instance} is invalid, then the job will be sent
-        #     to the default version of the default service when the job is attempted.
+        #     {Google::Cloud::Scheduler::V1beta1::AppEngineRouting#instance instance} is
+        #     invalid, then the job will be sent to the default version of the default
+        #     service when the job is attempted.
         class AppEngineRouting; end
 
         # The HTTP method used to execute the job.
