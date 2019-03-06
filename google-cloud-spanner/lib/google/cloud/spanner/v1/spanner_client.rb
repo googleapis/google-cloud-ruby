@@ -244,6 +244,11 @@ module Google
               defaults["execute_streaming_sql"],
               exception_transformer: exception_transformer
             )
+            @execute_batch_dml = Google::Gax.create_api_call(
+              @spanner_stub.method(:execute_batch_dml),
+              defaults["execute_batch_dml"],
+              exception_transformer: exception_transformer
+            )
             @read = Google::Gax.create_api_call(
               @spanner_stub.method(:read),
               defaults["read"],
@@ -436,7 +441,9 @@ module Google
             @list_sessions.call(req, options, &block)
           end
 
-          # Ends a session, releasing server resources associated with it.
+          # Ends a session, releasing server resources associated with it. This will
+          # asynchronously trigger cancellation of any operations that are running with
+          # this session.
           #
           # @param name [String]
           #   Required. The name of the session to delete.
@@ -732,6 +739,89 @@ module Google
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Spanner::V1::ExecuteSqlRequest)
             @execute_streaming_sql.call(req, options)
+          end
+
+          # Executes a batch of SQL DML statements. This method allows many statements
+          # to be run with lower latency than submitting them sequentially with
+          # {Google::Spanner::V1::Spanner::ExecuteSql ExecuteSql}.
+          #
+          # Statements are executed in order, sequentially.
+          # {Spanner::ExecuteBatchDmlResponse ExecuteBatchDmlResponse} will contain a
+          # {Google::Spanner::V1::ResultSet ResultSet} for each DML statement that has successfully executed. If a
+          # statement fails, its error status will be returned as part of the
+          # {Spanner::ExecuteBatchDmlResponse ExecuteBatchDmlResponse}. Execution will
+          # stop at the first failed statement; the remaining statements will not run.
+          #
+          # ExecuteBatchDml is expected to return an OK status with a response even if
+          # there was an error while processing one of the DML statements. Clients must
+          # inspect response.status to determine if there were any errors while
+          # processing the request.
+          #
+          # See more details in
+          # {Spanner::ExecuteBatchDmlRequest ExecuteBatchDmlRequest} and
+          # {Spanner::ExecuteBatchDmlResponse ExecuteBatchDmlResponse}.
+          #
+          # @param session [String]
+          #   Required. The session in which the DML statements should be performed.
+          # @param transaction [Google::Spanner::V1::TransactionSelector | Hash]
+          #   The transaction to use. A ReadWrite transaction is required. Single-use
+          #   transactions are not supported (to avoid replay).  The caller must either
+          #   supply an existing transaction ID or begin a new transaction.
+          #   A hash of the same form as `Google::Spanner::V1::TransactionSelector`
+          #   can also be provided.
+          # @param statements [Array<Google::Spanner::V1::ExecuteBatchDmlRequest::Statement | Hash>]
+          #   The list of statements to execute in this batch. Statements are executed
+          #   serially, such that the effects of statement i are visible to statement
+          #   i+1. Each statement must be a DML statement. Execution will stop at the
+          #   first failed statement; the remaining statements will not run.
+          #
+          #   REQUIRES: statements_size() > 0.
+          #   A hash of the same form as `Google::Spanner::V1::ExecuteBatchDmlRequest::Statement`
+          #   can also be provided.
+          # @param seqno [Integer]
+          #   A per-transaction sequence number used to identify this request. This is
+          #   used in the same space as the seqno in
+          #   {Spanner::ExecuteSqlRequest ExecuteSqlRequest}. See more details
+          #   in {Spanner::ExecuteSqlRequest ExecuteSqlRequest}.
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Spanner::V1::ExecuteBatchDmlResponse]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
+          # @return [Google::Spanner::V1::ExecuteBatchDmlResponse]
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/spanner/v1"
+          #
+          #   spanner_client = Google::Cloud::Spanner::V1::SpannerClient.new
+          #   formatted_session = Google::Cloud::Spanner::V1::SpannerClient.session_path("[PROJECT]", "[INSTANCE]", "[DATABASE]", "[SESSION]")
+          #
+          #   # TODO: Initialize `transaction`:
+          #   transaction = {}
+          #
+          #   # TODO: Initialize `statements`:
+          #   statements = []
+          #
+          #   # TODO: Initialize `seqno`:
+          #   seqno = 0
+          #   response = spanner_client.execute_batch_dml(formatted_session, transaction, statements, seqno)
+
+          def execute_batch_dml \
+              session,
+              transaction,
+              statements,
+              seqno,
+              options: nil,
+              &block
+            req = {
+              session: session,
+              transaction: transaction,
+              statements: statements,
+              seqno: seqno
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Spanner::V1::ExecuteBatchDmlRequest)
+            @execute_batch_dml.call(req, options, &block)
           end
 
           # Reads rows from the database using key lookups and scans, as a
