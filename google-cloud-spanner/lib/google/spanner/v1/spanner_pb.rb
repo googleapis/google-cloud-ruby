@@ -8,6 +8,7 @@ require 'google/api/annotations_pb'
 require 'google/protobuf/empty_pb'
 require 'google/protobuf/struct_pb'
 require 'google/protobuf/timestamp_pb'
+require 'google/rpc/status_pb'
 require 'google/spanner/v1/keys_pb'
 require 'google/spanner/v1/mutation_pb'
 require 'google/spanner/v1/result_set_pb'
@@ -55,6 +56,21 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     value :NORMAL, 0
     value :PLAN, 1
     value :PROFILE, 2
+  end
+  add_message "google.spanner.v1.ExecuteBatchDmlRequest" do
+    optional :session, :string, 1
+    optional :transaction, :message, 2, "google.spanner.v1.TransactionSelector"
+    repeated :statements, :message, 3, "google.spanner.v1.ExecuteBatchDmlRequest.Statement"
+    optional :seqno, :int64, 4
+  end
+  add_message "google.spanner.v1.ExecuteBatchDmlRequest.Statement" do
+    optional :sql, :string, 1
+    optional :params, :message, 2, "google.protobuf.Struct"
+    map :param_types, :string, :message, 3, "google.spanner.v1.Type"
+  end
+  add_message "google.spanner.v1.ExecuteBatchDmlResponse" do
+    repeated :result_sets, :message, 1, "google.spanner.v1.ResultSet"
+    optional :status, :message, 2, "google.rpc.Status"
   end
   add_message "google.spanner.v1.PartitionOptions" do
     optional :partition_size_bytes, :int64, 1
@@ -127,6 +143,9 @@ module Google
       DeleteSessionRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.DeleteSessionRequest").msgclass
       ExecuteSqlRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.ExecuteSqlRequest").msgclass
       ExecuteSqlRequest::QueryMode = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.ExecuteSqlRequest.QueryMode").enummodule
+      ExecuteBatchDmlRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.ExecuteBatchDmlRequest").msgclass
+      ExecuteBatchDmlRequest::Statement = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.ExecuteBatchDmlRequest.Statement").msgclass
+      ExecuteBatchDmlResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.ExecuteBatchDmlResponse").msgclass
       PartitionOptions = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.PartitionOptions").msgclass
       PartitionQueryRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.PartitionQueryRequest").msgclass
       PartitionReadRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.PartitionReadRequest").msgclass
