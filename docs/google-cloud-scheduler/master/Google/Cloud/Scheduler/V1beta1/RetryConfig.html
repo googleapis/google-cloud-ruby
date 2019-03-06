@@ -93,7 +93,8 @@ js:
 
 <p>By default, if a job does not complete successfully (meaning that
 an acknowledgement is not received from the handler, then it will be retried
-with exponential backoff according to the settings in <span class='object_link'><a href="" title="Google::Cloud::Scheduler::V1beta1::RetryConfig (class)">RetryConfig</a></span>.</p>
+with exponential backoff according to the settings in
+<span class='object_link'><a href="" title="Google::Cloud::Scheduler::V1beta1::RetryConfig (class)">RetryConfig</a></span>.</p>
 
 
   </div>
@@ -297,10 +298,10 @@ it fails.</p>
       <pre class="lines">
 
 
-195</pre>
+207</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/scheduler/v1beta1/doc/google/cloud/scheduler/v1beta1/job.rb', line 195</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/scheduler/v1beta1/doc/google/cloud/scheduler/v1beta1/job.rb', line 207</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Scheduler::V1beta1::RetryConfig (class)">RetryConfig</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -324,20 +325,25 @@ it fails.</p>
     <p>Returns The time between retries will double <code>max_doublings</code> times.</p>
 
 <p>A job&#39;s retry interval starts at
-<span class='object_link'><a href="#min_backoff_duration-instance_method" title="Google::Cloud::Scheduler::V1beta1::RetryConfig#min_backoff_duration (method)">min_backoff_duration</a></span>, then doubles
-<code>max_doublings</code> times, then increases linearly, and finally
+<span class='object_link'><a href="#min_backoff_duration-instance_method" title="Google::Cloud::Scheduler::V1beta1::RetryConfig#min_backoff_duration (method)">min_backoff_duration</a></span>,
+then doubles <code>max_doublings</code> times, then increases linearly, and finally
 retries retries at intervals of
-<span class='object_link'><a href="#max_backoff_duration-instance_method" title="Google::Cloud::Scheduler::V1beta1::RetryConfig#max_backoff_duration (method)">max_backoff_duration</a></span> up to
-<span class='object_link'><a href="#retry_count-instance_method" title="Google::Cloud::Scheduler::V1beta1::RetryConfig#retry_count (method)">retry_count</a></span> times.</p>
+<span class='object_link'><a href="#max_backoff_duration-instance_method" title="Google::Cloud::Scheduler::V1beta1::RetryConfig#max_backoff_duration (method)">max_backoff_duration</a></span>
+up to <span class='object_link'><a href="#retry_count-instance_method" title="Google::Cloud::Scheduler::V1beta1::RetryConfig#retry_count (method)">retry_count</a></span>
+times.</p>
 
-<p>For example, if <span class='object_link'><a href="#min_backoff_duration-instance_method" title="Google::Cloud::Scheduler::V1beta1::RetryConfig#min_backoff_duration (method)">min_backoff_duration</a></span> is
-10s, <span class='object_link'><a href="#max_backoff_duration-instance_method" title="Google::Cloud::Scheduler::V1beta1::RetryConfig#max_backoff_duration (method)">max_backoff_duration</a></span> is 300s, and
-<code>max_doublings</code> is 3, then the a job will first be retried in 10s. The
-retry interval will double three times, and then increase linearly by
-2^3 * 10s.  Finally, the job will retry at intervals of
-<span class='object_link'><a href="#max_backoff_duration-instance_method" title="Google::Cloud::Scheduler::V1beta1::RetryConfig#max_backoff_duration (method)">max_backoff_duration</a></span> until the job has
-been attempted <span class='object_link'><a href="#retry_count-instance_method" title="Google::Cloud::Scheduler::V1beta1::RetryConfig#retry_count (method)">retry_count</a></span> times. Thus, the
-requests will retry at 10s, 20s, 40s, 80s, 160s, 240s, 300s, 300s, ....</p>
+<p>For example, if
+<span class='object_link'><a href="#min_backoff_duration-instance_method" title="Google::Cloud::Scheduler::V1beta1::RetryConfig#min_backoff_duration (method)">min_backoff_duration</a></span>
+is 10s,
+<span class='object_link'><a href="#max_backoff_duration-instance_method" title="Google::Cloud::Scheduler::V1beta1::RetryConfig#max_backoff_duration (method)">max_backoff_duration</a></span>
+is 300s, and <code>max_doublings</code> is 3, then the a job will first be retried in
+10s. The retry interval will double three times, and then increase linearly
+by 2^3 * 10s.  Finally, the job will retry at intervals of
+<span class='object_link'><a href="#max_backoff_duration-instance_method" title="Google::Cloud::Scheduler::V1beta1::RetryConfig#max_backoff_duration (method)">max_backoff_duration</a></span>
+until the job has been attempted
+<span class='object_link'><a href="#retry_count-instance_method" title="Google::Cloud::Scheduler::V1beta1::RetryConfig#retry_count (method)">retry_count</a></span>
+times. Thus, the requests will retry at 10s, 20s, 40s, 80s, 160s, 240s,
+300s, 300s, ....</p>
 
 <p>The default value of this field is 5.</p>
 
@@ -360,20 +366,25 @@ requests will retry at 10s, 20s, 40s, 80s, 160s, 240s, 300s, 300s, ....</p>
         <div class='inline'><p>The time between retries will double <code>max_doublings</code> times.</p>
 
 <p>A job&#39;s retry interval starts at
-<span class='object_link'><a href="#min_backoff_duration-instance_method" title="Google::Cloud::Scheduler::V1beta1::RetryConfig#min_backoff_duration (method)">min_backoff_duration</a></span>, then doubles
-<code>max_doublings</code> times, then increases linearly, and finally
+<span class='object_link'><a href="#min_backoff_duration-instance_method" title="Google::Cloud::Scheduler::V1beta1::RetryConfig#min_backoff_duration (method)">min_backoff_duration</a></span>,
+then doubles <code>max_doublings</code> times, then increases linearly, and finally
 retries retries at intervals of
-<span class='object_link'><a href="#max_backoff_duration-instance_method" title="Google::Cloud::Scheduler::V1beta1::RetryConfig#max_backoff_duration (method)">max_backoff_duration</a></span> up to
-<span class='object_link'><a href="#retry_count-instance_method" title="Google::Cloud::Scheduler::V1beta1::RetryConfig#retry_count (method)">retry_count</a></span> times.</p>
+<span class='object_link'><a href="#max_backoff_duration-instance_method" title="Google::Cloud::Scheduler::V1beta1::RetryConfig#max_backoff_duration (method)">max_backoff_duration</a></span>
+up to <span class='object_link'><a href="#retry_count-instance_method" title="Google::Cloud::Scheduler::V1beta1::RetryConfig#retry_count (method)">retry_count</a></span>
+times.</p>
 
-<p>For example, if <span class='object_link'><a href="#min_backoff_duration-instance_method" title="Google::Cloud::Scheduler::V1beta1::RetryConfig#min_backoff_duration (method)">min_backoff_duration</a></span> is
-10s, <span class='object_link'><a href="#max_backoff_duration-instance_method" title="Google::Cloud::Scheduler::V1beta1::RetryConfig#max_backoff_duration (method)">max_backoff_duration</a></span> is 300s, and
-<code>max_doublings</code> is 3, then the a job will first be retried in 10s. The
-retry interval will double three times, and then increase linearly by
-2^3 * 10s.  Finally, the job will retry at intervals of
-<span class='object_link'><a href="#max_backoff_duration-instance_method" title="Google::Cloud::Scheduler::V1beta1::RetryConfig#max_backoff_duration (method)">max_backoff_duration</a></span> until the job has
-been attempted <span class='object_link'><a href="#retry_count-instance_method" title="Google::Cloud::Scheduler::V1beta1::RetryConfig#retry_count (method)">retry_count</a></span> times. Thus, the
-requests will retry at 10s, 20s, 40s, 80s, 160s, 240s, 300s, 300s, ....</p>
+<p>For example, if
+<span class='object_link'><a href="#min_backoff_duration-instance_method" title="Google::Cloud::Scheduler::V1beta1::RetryConfig#min_backoff_duration (method)">min_backoff_duration</a></span>
+is 10s,
+<span class='object_link'><a href="#max_backoff_duration-instance_method" title="Google::Cloud::Scheduler::V1beta1::RetryConfig#max_backoff_duration (method)">max_backoff_duration</a></span>
+is 300s, and <code>max_doublings</code> is 3, then the a job will first be retried in
+10s. The retry interval will double three times, and then increase linearly
+by 2^3 * 10s.  Finally, the job will retry at intervals of
+<span class='object_link'><a href="#max_backoff_duration-instance_method" title="Google::Cloud::Scheduler::V1beta1::RetryConfig#max_backoff_duration (method)">max_backoff_duration</a></span>
+until the job has been attempted
+<span class='object_link'><a href="#retry_count-instance_method" title="Google::Cloud::Scheduler::V1beta1::RetryConfig#retry_count (method)">retry_count</a></span>
+times. Thus, the requests will retry at 10s, 20s, 40s, 80s, 160s, 240s,
+300s, 300s, ....</p>
 
 <p>The default value of this field is 5.</p>
 </div>
@@ -388,10 +399,10 @@ requests will retry at 10s, 20s, 40s, 80s, 160s, 240s, 300s, 300s, ....</p>
       <pre class="lines">
 
 
-195</pre>
+207</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/scheduler/v1beta1/doc/google/cloud/scheduler/v1beta1/job.rb', line 195</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/scheduler/v1beta1/doc/google/cloud/scheduler/v1beta1/job.rb', line 207</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Scheduler::V1beta1::RetryConfig (class)">RetryConfig</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -414,8 +425,8 @@ requests will retry at 10s, 20s, 40s, 80s, 160s, 240s, 300s, 300s, ....</p>
   <div class="discussion">
     <p>Returns The time limit for retrying a failed job, measured from time when an
 execution was first attempted. If specified with
-<span class='object_link'><a href="#retry_count-instance_method" title="Google::Cloud::Scheduler::V1beta1::RetryConfig#retry_count (method)">retry_count</a></span>, the job will be retried until both limits are
-reached.</p>
+<span class='object_link'><a href="#retry_count-instance_method" title="Google::Cloud::Scheduler::V1beta1::RetryConfig#retry_count (method)">retry_count</a></span>, the
+job will be retried until both limits are reached.</p>
 
 <p>The default value for max_retry_duration is zero, which means retry
 duration is unlimited.</p>
@@ -438,8 +449,8 @@ duration is unlimited.</p>
         &mdash;
         <div class='inline'><p>The time limit for retrying a failed job, measured from time when an
 execution was first attempted. If specified with
-<span class='object_link'><a href="#retry_count-instance_method" title="Google::Cloud::Scheduler::V1beta1::RetryConfig#retry_count (method)">retry_count</a></span>, the job will be retried until both limits are
-reached.</p>
+<span class='object_link'><a href="#retry_count-instance_method" title="Google::Cloud::Scheduler::V1beta1::RetryConfig#retry_count (method)">retry_count</a></span>, the
+job will be retried until both limits are reached.</p>
 
 <p>The default value for max_retry_duration is zero, which means retry
 duration is unlimited.</p>
@@ -455,10 +466,10 @@ duration is unlimited.</p>
       <pre class="lines">
 
 
-195</pre>
+207</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/scheduler/v1beta1/doc/google/cloud/scheduler/v1beta1/job.rb', line 195</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/scheduler/v1beta1/doc/google/cloud/scheduler/v1beta1/job.rb', line 207</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Scheduler::V1beta1::RetryConfig (class)">RetryConfig</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -516,10 +527,10 @@ it fails.</p>
       <pre class="lines">
 
 
-195</pre>
+207</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/scheduler/v1beta1/doc/google/cloud/scheduler/v1beta1/job.rb', line 195</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/scheduler/v1beta1/doc/google/cloud/scheduler/v1beta1/job.rb', line 207</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Scheduler::V1beta1::RetryConfig (class)">RetryConfig</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -601,10 +612,10 @@ whichever comes first.</p>
       <pre class="lines">
 
 
-195</pre>
+207</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/scheduler/v1beta1/doc/google/cloud/scheduler/v1beta1/job.rb', line 195</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/scheduler/v1beta1/doc/google/cloud/scheduler/v1beta1/job.rb', line 207</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Scheduler::V1beta1::RetryConfig (class)">RetryConfig</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
