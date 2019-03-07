@@ -110,10 +110,10 @@ module Google
         # The default HTTP headers to be sent on all API calls.
         def default_http_headers
           @default_http_headers ||= {
-            "User-Agent":                   "gcloud-ruby/#{Google::Cloud::Translate::VERSION}",
-            "google-cloud-resource-prefix": "projects/#{@project}",
-            "Content-Type":                 "application/json",
-            "x-goog-api-client":            "gl-ruby/#{RUBY_VERSION} " \
+            "User-Agent"                   => "gcloud-ruby/#{Google::Cloud::Translate::VERSION}",
+            "google-cloud-resource-prefix" => "projects/#{@project}",
+            "Content-Type"                 => "application/json",
+            "x-goog-api-client"            => "gl-ruby/#{RUBY_VERSION} " \
               "gccl/#{Google::Cloud::Translate::VERSION}"
           }
         end
