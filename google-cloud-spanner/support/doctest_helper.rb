@@ -284,6 +284,21 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
+  # BatchUpdate
+
+  doctest.before "Google::Cloud::Spanner::BatchUpdate" do
+    mock_spanner do |mock, mock_instances, mock_databases|
+      20.times do
+        mock.expect :create_session, session_grpc, ["projects/my-project/instances/my-instance/databases/my-database", Hash]
+      end
+      5.times do
+        mock.expect :begin_transaction, tx_resp, ["session-name", Google::Spanner::V1::TransactionOptions, Hash]
+      end
+      mock.expect :execute_batch_dml, batch_response_grpc, ["session-name", Google::Spanner::V1::TransactionSelector, Array, Integer, Hash]
+      mock.expect :commit, commit_resp, ["session-name", Array, Hash]
+    end
+  end
+
   # Partition
 
   doctest.before "Google::Cloud::Spanner::Partition" do
@@ -775,6 +790,19 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
+  doctest.before "Google::Cloud::Spanner::Transaction#batch_update" do
+    mock_spanner do |mock, mock_instances, mock_databases|
+      20.times do
+        mock.expect :create_session, session_grpc, ["projects/my-project/instances/my-instance/databases/my-database", Hash]
+      end
+      5.times do
+        mock.expect :begin_transaction, tx_resp, ["session-name", Google::Spanner::V1::TransactionOptions, Hash]
+      end
+      mock.expect :execute_batch_dml, batch_response_grpc, ["session-name", Google::Spanner::V1::TransactionSelector, Array, Integer, Hash]
+      mock.expect :commit, commit_resp, ["session-name", Array, Hash]
+    end
+  end
+
   doctest.before "Google::Cloud::Spanner::Transaction#execute" do
     mock_spanner do |mock, mock_instances, mock_databases|
       20.times do
@@ -1072,6 +1100,23 @@ def results_enum_marketing
     Google::Spanner::V1::PartialResultSet.new(results_hash_marketing),
     Google::Spanner::V1::PartialResultSet.new(results_hash_marketing_2)
   ].to_enum
+end
+
+def batch_result_sets_grpc count, row_count_exact: 1
+  count.times.map do
+    Google::Spanner::V1::ResultSet.new(
+      stats: Google::Spanner::V1::ResultSetStats.new(
+        row_count_exact: row_count_exact
+      )
+    )
+  end
+end
+
+def batch_response_grpc count = 1
+  Google::Spanner::V1::ExecuteBatchDmlResponse.new(
+    result_sets: batch_result_sets_grpc(count),
+    status: Google::Rpc::Status.new(code: 0)
+  )
 end
 
 def commit_timestamp

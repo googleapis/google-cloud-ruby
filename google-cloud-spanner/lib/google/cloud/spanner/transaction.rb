@@ -333,7 +333,7 @@ module Google
         #
         #   db.transaction do |tx|
         #     row_count = tx.execute_update(
-        #       "UPDATE users SET name = 'Charlie' WHERE id = 1",
+        #       "UPDATE users SET name = 'Charlie' WHERE id = 1"
         #     )
         #   end
         #
@@ -360,6 +360,70 @@ module Google
                   "DML statement is invalid."
           end
           results.row_count
+        end
+
+        ##
+        # Executes DML statements in a batch.
+        #
+        # @yield [batch_update] a batch update object
+        # @yieldparam [Google::Cloud::Spanner::BatchUpdate] batch_update a batch
+        #   update object accepting DML statements and optional parameters and
+        #   types of the parameters.
+        #
+        # @raise [Google::Cloud::Spanner::BatchUpdateError] If an error occurred
+        #   while executing a statement. The error object contains a cause error
+        #   with the service error type and message, and a list with the exact
+        #   number of rows that were modified for each successful statement
+        #   before the error.
+        #
+        # @return [Array<Integer>] A list with the exact number of rows that
+        #   were modified for each DML statement.
+        #
+        # @example
+        #   require "google/cloud/spanner"
+        #
+        #   spanner = Google::Cloud::Spanner.new
+        #   db = spanner.client "my-instance", "my-database"
+        #
+        #   db.transaction do |tx|
+        #     begin
+        #       row_counts = tx.batch_update do |b|
+        #         statement_count = b.batch_update(
+        #           "UPDATE users SET name = 'Charlie' WHERE id = 1"
+        #         )
+        #       end
+        #       puts row_counts.inspect
+        #     rescue Google::Cloud::Spanner::BatchUpdateError => err
+        #       puts err.cause.message
+        #       puts err.row_counts.inspect
+        #     end
+        #   end
+        #
+        # @example Update using SQL parameters:
+        #   require "google/cloud/spanner"
+        #
+        #   spanner = Google::Cloud::Spanner.new
+        #   db = spanner.client "my-instance", "my-database"
+        #
+        #   db.transaction do |tx|
+        #     begin
+        #       row_counts = tx.batch_update do |b|
+        #         statement_count = b.batch_update(
+        #           "UPDATE users SET name = 'Charlie' WHERE id = 1",
+        #           params: { id: 1, name: "Charlie" }
+        #         )
+        #       end
+        #       puts row_counts.inspect
+        #     rescue Google::Cloud::Spanner::BatchUpdateError => err
+        #       puts err.cause.message
+        #       puts err.row_counts.inspect
+        #     end
+        #   end
+        #
+        def batch_update &block
+          ensure_session!
+          @seqno += 1
+          session.batch_update tx_selector, @seqno, &block
         end
 
         ##

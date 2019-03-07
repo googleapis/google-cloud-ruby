@@ -273,6 +273,27 @@ module Google
           end
         end
 
+        def execute_batch_dml session_name, transaction, statements, seqno
+          opts = default_options_from_session session_name
+          statements = statements.map(&:to_grpc)
+          results = execute do
+            service.execute_batch_dml session_name,
+                                      transaction,
+                                      statements,
+                                      seqno,
+                                      options: opts
+          end
+          if results.status.code.zero?
+            results.result_sets.map { |rs| rs.stats.row_count_exact }
+          else
+            begin
+              raise Google::Cloud::Error.from_error results.status
+            rescue Google::Cloud::Error
+              raise Google::Cloud::Spanner::BatchUpdateError.from_grpc results
+            end
+          end
+        end
+
         def streaming_read_table session_name, table_name, columns, keys: nil,
                                  index: nil, transaction: nil, limit: nil,
                                  resume_token: nil, partition_token: nil
