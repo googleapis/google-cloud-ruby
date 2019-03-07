@@ -39,8 +39,6 @@ module Google
     # See {file:OVERVIEW.md Translation Overview}.
     #
     module Translate
-      # rubocop:disable Metrics/AbcSize
-
       ##
       # Creates a new object for connecting to Cloud Translation API. Each call
       # creates a new connection.
@@ -129,9 +127,7 @@ module Google
           credentials = Translate::Credentials.new credentials, scope: scope
         end
 
-        if credentials.respond_to? :project_id
-          project_id ||= credentials.project_id
-        end
+        project_id ||= credentials.project_id if credentials.respond_to? :project_id
         project_id = project_id.to_s # Always cast to a string
         raise ArgumentError, "project_id is missing" if project_id.empty?
 
@@ -141,8 +137,6 @@ module Google
           )
         )
       end
-
-      # rubocop:enable Metrics/AbcSize
 
       ##
       # Configure the Google Cloud Translate library.
