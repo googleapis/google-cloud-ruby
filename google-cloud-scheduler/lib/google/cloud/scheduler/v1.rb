@@ -13,7 +13,7 @@
 # limitations under the License.
 
 
-require "google/cloud/scheduler/v1beta1/cloud_scheduler_client"
+require "google/cloud/scheduler/v1/cloud_scheduler_client"
 
 module Google
   module Cloud
@@ -75,7 +75,7 @@ module Google
       # end
       # ```
       #
-      module V1beta1
+      module V1
         # rubocop:enable LineLength
 
         ##
@@ -130,7 +130,7 @@ module Google
             lib_name: lib_name,
             lib_version: lib_version
           }.select { |_, v| v != nil }
-          Google::Cloud::Scheduler::V1beta1::CloudSchedulerClient.new(**kwargs)
+          Google::Cloud::Scheduler::V1::CloudSchedulerClient.new(**kwargs)
         end
       end
     end

@@ -34,13 +34,27 @@ v1beta1_library = gapic.ruby_library(
     artman_output_name='google-cloud-ruby/google-cloud-cloudscheduler',
 )
 
-s.copy(v1beta1_library / 'lib')
-s.copy(v1beta1_library / 'test')
-s.copy(v1beta1_library / 'README.md')
-s.copy(v1beta1_library / 'LICENSE')
-s.copy(v1beta1_library / '.gitignore')
-s.copy(v1beta1_library / '.yardopts')
-s.copy(v1beta1_library / 'google-cloud-scheduler.gemspec', merge=ruby.merge_gemspec)
+s.copy(v1beta1_library / 'lib/google/cloud/scheduler/v1beta1')
+s.copy(v1beta1_library / 'lib/google/cloud/scheduler/v1beta1.rb')
+s.copy(v1beta1_library / 'test/google/cloud/scheduler/v1beta1')
+
+
+v1_library = gapic.ruby_library(
+    'scheduler',
+    'v1',
+    config_path='artman_cloudscheduler_v1.yaml',
+    artman_output_name='google-cloud-ruby/google-cloud-cloudscheduler',
+)
+
+s.copy(v1_library / 'lib/google/cloud/scheduler/v1')
+s.copy(v1_library / 'lib/google/cloud/scheduler/v1.rb')
+s.copy(v1_library / 'lib/google/cloud/scheduler.rb')
+s.copy(v1_library / 'test/google/cloud/scheduler/v1')
+s.copy(v1_library / 'README.md')
+s.copy(v1_library / 'LICENSE')
+s.copy(v1_library / '.gitignore')
+s.copy(v1_library / '.yardopts')
+s.copy(v1_library / 'google-cloud-scheduler.gemspec', merge=ruby.merge_gemspec)
 
 s.replace(
     'google-cloud-scheduler.gemspec',
@@ -68,17 +82,17 @@ s.replace(
 
 # https://github.com/googleapis/gapic-generator/issues/2243
 s.replace(
-    f'lib/google/cloud/scheduler/v1beta1/*_client.rb',
+    'lib/google/cloud/scheduler/**/*_client.rb',
     '(\n\\s+class \\w+Client\n)(\\s+)(attr_reader :\\w+_stub)',
     '\\1\\2# @private\n\\2\\3')
 
 # Require the helpers file
 s.replace(
-    f'lib/google/cloud/scheduler/v1beta1.rb',
-    f'require "google/cloud/scheduler/v1beta1/cloud_scheduler_client"',
+    'lib/google/cloud/scheduler/**.rb',
+    'require "google/cloud/scheduler/**/cloud_scheduler_client"',
     '\n'.join([
-        f'require "google/cloud/scheduler/v1beta1/cloud_scheduler_client"',
-        f'require "google/cloud/scheduler/v1beta1/helpers"',
+        'require "google/cloud/scheduler/**/cloud_scheduler_client"',
+        'require "google/cloud/scheduler/**/helpers"',
     ])
 )
 
