@@ -294,7 +294,7 @@ YARD::Doctest.configure do |doctest|
       5.times do
         mock.expect :begin_transaction, tx_resp, ["session-name", Google::Spanner::V1::TransactionOptions, Hash]
       end
-      mock.expect :execute_batch_dml, batch_response_grpc, ["session-name", Array, Hash]
+      mock.expect :execute_batch_dml, batch_response_grpc, ["session-name", Google::Spanner::V1::TransactionSelector, Array, Integer, Hash]
       mock.expect :commit, commit_resp, ["session-name", Array, Hash]
     end
   end
@@ -798,7 +798,7 @@ YARD::Doctest.configure do |doctest|
       5.times do
         mock.expect :begin_transaction, tx_resp, ["session-name", Google::Spanner::V1::TransactionOptions, Hash]
       end
-      mock.expect :execute_batch_dml, batch_response_grpc, ["session-name", Array, Hash]
+      mock.expect :execute_batch_dml, batch_response_grpc, ["session-name", Google::Spanner::V1::TransactionSelector, Array, Integer, Hash]
       mock.expect :commit, commit_resp, ["session-name", Array, Hash]
     end
   end

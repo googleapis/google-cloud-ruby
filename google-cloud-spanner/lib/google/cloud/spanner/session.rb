@@ -297,8 +297,8 @@ module Google
 
           yield batch
 
-          results = service.execute_batch_dml path, batch.statements,
-                                              transaction, seqno
+          results = service.execute_batch_dml path, transaction,
+                                              batch.statements, seqno
           @last_updated_at = Time.now
           results
         end

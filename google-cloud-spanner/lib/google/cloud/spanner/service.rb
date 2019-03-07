@@ -273,14 +273,14 @@ module Google
           end
         end
 
-        def execute_batch_dml session_name, statements, transaction, seqno
+        def execute_batch_dml session_name, transaction, statements, seqno
           opts = default_options_from_session session_name
           statements = statements.map(&:to_grpc)
           results = execute do
             service.execute_batch_dml session_name,
+                                      transaction,
                                       statements,
-                                      transaction: transaction,
-                                      seqno: seqno,
+                                      seqno,
                                       options: opts
           end
           if results.status.code.zero?
