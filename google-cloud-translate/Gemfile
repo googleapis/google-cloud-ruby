@@ -6,7 +6,3 @@ gem "google-cloud-core", path: "../google-cloud-core"
 gem "google-cloud-env", path: "../google-cloud-env"
 
 gem "rake", "~> 12.3"
-
-group :test, :development do
-  gem "google-style", git: "https://github.com/googleapis/ruby-style.git"
-end
