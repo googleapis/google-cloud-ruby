@@ -91,7 +91,7 @@ module Google
       # schedule asynchronous jobs.
       #
       # @param version [Symbol, String]
-      #   The major version of the service to be used. By default :v1beta1
+      #   The major version of the service to be used. By default :v1
       #   is used.
       # @overload new(version:, credentials:, scopes:, client_config:, timeout:)
       #   @param credentials [Google::Auth::Credentials, String, Hash, GRPC::Core::Channel, GRPC::Core::ChannelCredentials, Proc]
@@ -123,7 +123,7 @@ module Google
       #   @param exception_transformer [Proc]
       #     An optional proc that intercepts any exceptions raised during an API call to inject
       #     custom error handling.
-      def self.new(*args, version: :v1beta1, **kwargs)
+      def self.new(*args, version: :v1, **kwargs)
         unless AVAILABLE_VERSIONS.include?(version.to_s.downcase)
           raise "The version: #{version} is not available. The available versions " \
             "are: [#{AVAILABLE_VERSIONS.join(", ")}]"

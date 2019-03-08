@@ -1,5 +1,5 @@
 {
-  "updateTime": "2019-03-06T20:08:59.683531Z",
+  "updateTime": "2019-03-07T23:58:49.706950Z",
   "sources": [
     {
       "generator": {
@@ -12,8 +12,7 @@
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "b56ebb3c1b798dcfc4b736dda6d80f752367dd41",
-        "internalRef": "237067127"
+        "sha": "c986e1d9618ac41343962b353d136201d72626ae"
       }
     }
   ],
@@ -26,6 +25,16 @@
         "language": "ruby",
         "generator": "gapic",
         "config": "google/cloud/scheduler/artman_cloudscheduler_v1beta1.yaml"
+      }
+    },
+    {
+      "client": {
+        "source": "googleapis",
+        "apiName": "scheduler",
+        "apiVersion": "v1",
+        "language": "ruby",
+        "generator": "gapic",
+        "config": "google/cloud/scheduler/artman_cloudscheduler_v1.yaml"
       }
     }
   ]
