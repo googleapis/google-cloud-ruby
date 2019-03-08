@@ -1,5 +1,7 @@
 inherit_gem:
   google-style: google-style.yml
+Style/MutableConstant:
+  Enabled: false
 AllCops:
   Exclude:
   - google-cloud-container.gemspec

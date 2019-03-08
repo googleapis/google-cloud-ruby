@@ -98,7 +98,6 @@ s.replace(
     'gem.add_development_dependency "google-style", "~> 0.1"'
 )
 
-# Read YAML file
 with open('.rubocop.yml', 'r') as contents:
     excluded = {
         'AllCops': {
@@ -106,22 +105,21 @@ with open('.rubocop.yml', 'r') as contents:
         }
     }
 
-rubo_inherit = {
-    'inherit_gem': {
-        'google-style': 'google-style.yml'
-    },
-}
+rubo_inherit = '\n'.join([
+    'inherit_gem:',
+    '  google-style: google-style.yml',
+    'Style/MutableConstant:',
+    '  Enabled: false\n'
+])
 
-# Write YAML file
 with io.open('.rubocop.yml', 'w', encoding='utf8') as rubocop:
-    yaml.dump(rubo_inherit, rubocop, default_flow_style=False, allow_unicode=True)
+    rubocop.write(rubo_inherit)
 
 try:
     call('bundle update && bundle exec rubocop -a', shell=True)
 except:
     print('Unable to completely autofix style')
 
-# Write YAML file
 with io.open('.rubocop.yml', 'a', encoding='utf8') as rubocop:
     yaml.dump(excluded, rubocop, default_flow_style=False, allow_unicode=True)
 

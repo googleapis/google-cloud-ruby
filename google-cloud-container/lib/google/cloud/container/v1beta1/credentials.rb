@@ -27,13 +27,13 @@ module Google
                              CONTAINER_KEYFILE
                              GOOGLE_CLOUD_CREDENTIALS
                              GOOGLE_CLOUD_KEYFILE
-                             GCLOUD_KEYFILE].freeze
+                             GCLOUD_KEYFILE]
           JSON_ENV_VARS = %w[CONTAINER_CREDENTIALS_JSON
                              CONTAINER_KEYFILE_JSON
                              GOOGLE_CLOUD_CREDENTIALS_JSON
                              GOOGLE_CLOUD_KEYFILE_JSON
-                             GCLOUD_KEYFILE_JSON].freeze
-          DEFAULT_PATHS = ["~/.config/gcloud/application_default_credentials.json"].freeze
+                             GCLOUD_KEYFILE_JSON]
+          DEFAULT_PATHS = ["~/.config/gcloud/application_default_credentials.json"]
         end
       end
     end

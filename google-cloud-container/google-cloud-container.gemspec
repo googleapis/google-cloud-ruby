@@ -3,13 +3,13 @@
 
 Gem::Specification.new do |gem|
   gem.name          = "google-cloud-container"
-  gem.version       = "0.3.0"
+  gem.version       = "0.1.0"
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
   gem.description   = "google-cloud-container is the official library for Kubernetes Engine API."
   gem.summary       = "API Client library for Kubernetes Engine API"
-  gem.homepage      = "https://github.com/googleapis/google-cloud-ruby/tree/master/google-cloud-container"
+  gem.homepage      = "https://github.com/googleapis/googleapis"
   gem.license       = "Apache-2.0"
 
   gem.platform      = Gem::Platform::RUBY

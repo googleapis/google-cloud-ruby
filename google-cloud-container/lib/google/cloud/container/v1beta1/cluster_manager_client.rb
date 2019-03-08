@@ -47,7 +47,7 @@ module Google
           DEFAULT_SERVICE_PORT = 443
 
           # The default set of gRPC interceptors.
-          GRPC_INTERCEPTORS = [].freeze
+          GRPC_INTERCEPTORS = []
 
           DEFAULT_TIMEOUT = 30
 
