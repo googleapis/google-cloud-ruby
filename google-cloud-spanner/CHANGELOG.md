@@ -1,5 +1,13 @@
 # Release History
 
+### 1.9.0 / 2019-03-08
+
+* Spanner Batch DML.
+  * Add Transaction#batch_update.
+  * Add BatchUpdate.
+  * Add BatchUpdateError.
+  * Add SpannerClient#execute_batch_dml.
+
 ### 1.8.0 / 2019-02-01
 
 * Make use of Credentials#project_id
