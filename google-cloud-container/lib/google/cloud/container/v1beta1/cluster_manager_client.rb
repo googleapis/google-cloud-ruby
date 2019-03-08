@@ -14,7 +14,7 @@
 #
 # EDITING INSTRUCTIONS
 # This file was generated from the file
-# https://github.com/googleapis/googleapis/blob/master/google/container/v1/cluster_service.proto,
+# https://github.com/googleapis/googleapis/blob/master/google/container/v1beta1/cluster_service.proto,
 # and updates to that file get reflected here through a refresh process.
 # For the short term, the refresh process will only be runnable by Google
 # engineers.
@@ -25,17 +25,17 @@ require "pathname"
 
 require "google/gax"
 
-require "google/container/v1/cluster_service_pb"
-require "google/cloud/container/v1/credentials"
+require "google/container/v1beta1/cluster_service_pb"
+require "google/cloud/container/v1beta1/credentials"
 
 module Google
   module Cloud
     module Container
-      module V1
-        # Google Kubernetes Engine Cluster Manager v1
+      module V1beta1
+        # Google Kubernetes Engine Cluster Manager v1beta1
         #
         # @!attribute [r] cluster_manager_stub
-        #   @return [Google::Container::V1::ClusterManager::Stub]
+        #   @return [Google::Container::V1beta1::ClusterManager::Stub]
         class ClusterManagerClient
           # @private
           attr_reader :cluster_manager_stub
@@ -50,6 +50,16 @@ module Google
           GRPC_INTERCEPTORS = [].freeze
 
           DEFAULT_TIMEOUT = 30
+
+          PAGE_DESCRIPTORS = {
+            "list_usable_subnetworks" => Google::Gax::PageDescriptor.new(
+              "page_token",
+              "next_page_token",
+              "subnetworks"
+            )
+          }.freeze
+
+          private_constant :PAGE_DESCRIPTORS
 
           # The scopes needed to make gRPC calls to all of the methods defined in
           # this service.
@@ -100,12 +110,12 @@ module Google
             # the gRPC module only when it's required.
             # See https://github.com/googleapis/toolkit/issues/446
             require "google/gax/grpc"
-            require "google/container/v1/cluster_service_services_pb"
+            require "google/container/v1beta1/cluster_service_services_pb"
 
-            credentials ||= Google::Cloud::Container::V1::Credentials.default
+            credentials ||= Google::Cloud::Container::V1beta1::Credentials.default
 
             if credentials.is_a?(String) || credentials.is_a?(Hash)
-              updater_proc = Google::Cloud::Container::V1::Credentials.new(credentials).updater_proc
+              updater_proc = Google::Cloud::Container::V1beta1::Credentials.new(credentials).updater_proc
             end
             channel = credentials if credentials.is_a? GRPC::Core::Channel
             chan_creds = credentials if credentials.is_a? GRPC::Core::ChannelCredentials
@@ -127,13 +137,14 @@ module Google
             )
             defaults = client_config_file.open do |f|
               Google::Gax.construct_settings(
-                "google.container.v1.ClusterManager",
+                "google.container.v1beta1.ClusterManager",
                 JSON.parse(f.read),
                 client_config,
                 Google::Gax::Grpc::STATUS_CODE_NAMES,
                 timeout,
-                errors:   Google::Gax::Grpc::API_ERRORS,
-                metadata: headers
+                page_descriptors: PAGE_DESCRIPTORS,
+                errors:           Google::Gax::Grpc::API_ERRORS,
+                metadata:         headers
               )
             end
 
@@ -149,7 +160,7 @@ module Google
               updater_proc: updater_proc,
               scopes:       scopes,
               interceptors: interceptors,
-              &Google::Container::V1::ClusterManager::Stub.method(:new)
+              &Google::Container::V1beta1::ClusterManager::Stub.method(:new)
             )
 
             @list_clusters = Google::Gax.create_api_call(
@@ -302,6 +313,16 @@ module Google
               defaults["set_maintenance_policy"],
               exception_transformer: exception_transformer
             )
+            @list_usable_subnetworks = Google::Gax.create_api_call(
+              @cluster_manager_stub.method(:list_usable_subnetworks),
+              defaults["list_usable_subnetworks"],
+              exception_transformer: exception_transformer
+            )
+            @list_locations = Google::Gax.create_api_call(
+              @cluster_manager_stub.method(:list_locations),
+              defaults["list_locations"],
+              exception_transformer: exception_transformer
+            )
           end
 
           # Service calls
@@ -326,14 +347,14 @@ module Google
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
           # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result [Google::Container::V1::ListClustersResponse]
+          # @yieldparam result [Google::Container::V1beta1::ListClustersResponse]
           # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @return [Google::Container::V1::ListClustersResponse]
+          # @return [Google::Container::V1beta1::ListClustersResponse]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
           #   require "google/cloud/container"
           #
-          #   cluster_manager_client = Google::Cloud::Container.new(version: :v1)
+          #   cluster_manager_client = Google::Cloud::Container.new(version: :v1beta1)
           #
           #   # TODO: Initialize `project_id`:
           #   project_id = ''
@@ -353,11 +374,11 @@ module Google
               zone:       zone,
               parent:     parent
             }.delete_if { |_, v| v.nil? }
-            req = Google::Gax.to_proto req, Google::Container::V1::ListClustersRequest
+            req = Google::Gax.to_proto req, Google::Container::V1beta1::ListClustersRequest
             @list_clusters.call(req, options, &block)
           end
 
-          # Gets the details of a specific cluster.
+          # Gets the details for a specific cluster.
           #
           # @param project_id [String]
           #   Deprecated. The Google Developers Console [project ID or project
@@ -378,14 +399,14 @@ module Google
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
           # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result [Google::Container::V1::Cluster]
+          # @yieldparam result [Google::Container::V1beta1::Cluster]
           # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @return [Google::Container::V1::Cluster]
+          # @return [Google::Container::V1beta1::Cluster]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
           #   require "google/cloud/container"
           #
-          #   cluster_manager_client = Google::Cloud::Container.new(version: :v1)
+          #   cluster_manager_client = Google::Cloud::Container.new(version: :v1beta1)
           #
           #   # TODO: Initialize `project_id`:
           #   project_id = ''
@@ -410,7 +431,7 @@ module Google
               cluster_id: cluster_id,
               name:       name
             }.delete_if { |_, v| v.nil? }
-            req = Google::Gax.to_proto req, Google::Container::V1::GetClusterRequest
+            req = Google::Gax.to_proto req, Google::Container::V1beta1::GetClusterRequest
             @get_cluster.call(req, options, &block)
           end
 
@@ -437,10 +458,10 @@ module Google
           #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
           #   resides.
           #   This field has been deprecated and replaced by the parent field.
-          # @param cluster [Google::Container::V1::Cluster | Hash]
+          # @param cluster [Google::Container::V1beta1::Cluster | Hash]
           #   A [cluster
-          #   resource](/container-engine/reference/rest/v1/projects.zones.clusters)
-          #   A hash of the same form as `Google::Container::V1::Cluster`
+          #   resource](/container-engine/reference/rest/v1beta1/projects.zones.clusters)
+          #   A hash of the same form as `Google::Container::V1beta1::Cluster`
           #   can also be provided.
           # @param parent [String]
           #   The parent (project and location) where the cluster will be created.
@@ -449,14 +470,14 @@ module Google
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
           # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result [Google::Container::V1::Operation]
+          # @yieldparam result [Google::Container::V1beta1::Operation]
           # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @return [Google::Container::V1::Operation]
+          # @return [Google::Container::V1beta1::Operation]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
           #   require "google/cloud/container"
           #
-          #   cluster_manager_client = Google::Cloud::Container.new(version: :v1)
+          #   cluster_manager_client = Google::Cloud::Container.new(version: :v1beta1)
           #
           #   # TODO: Initialize `project_id`:
           #   project_id = ''
@@ -481,11 +502,11 @@ module Google
               cluster:    cluster,
               parent:     parent
             }.delete_if { |_, v| v.nil? }
-            req = Google::Gax.to_proto req, Google::Container::V1::CreateClusterRequest
+            req = Google::Gax.to_proto req, Google::Container::V1beta1::CreateClusterRequest
             @create_cluster.call(req, options, &block)
           end
 
-          # Updates the settings of a specific cluster.
+          # Updates the settings for a specific cluster.
           #
           # @param project_id [String]
           #   Deprecated. The Google Developers Console [project ID or project
@@ -499,9 +520,9 @@ module Google
           # @param cluster_id [String]
           #   Deprecated. The name of the cluster to upgrade.
           #   This field has been deprecated and replaced by the name field.
-          # @param update [Google::Container::V1::ClusterUpdate | Hash]
+          # @param update [Google::Container::V1beta1::ClusterUpdate | Hash]
           #   A description of the update.
-          #   A hash of the same form as `Google::Container::V1::ClusterUpdate`
+          #   A hash of the same form as `Google::Container::V1beta1::ClusterUpdate`
           #   can also be provided.
           # @param name [String]
           #   The name (project, location, cluster) of the cluster to update.
@@ -510,14 +531,14 @@ module Google
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
           # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result [Google::Container::V1::Operation]
+          # @yieldparam result [Google::Container::V1beta1::Operation]
           # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @return [Google::Container::V1::Operation]
+          # @return [Google::Container::V1beta1::Operation]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
           #   require "google/cloud/container"
           #
-          #   cluster_manager_client = Google::Cloud::Container.new(version: :v1)
+          #   cluster_manager_client = Google::Cloud::Container.new(version: :v1beta1)
           #
           #   # TODO: Initialize `project_id`:
           #   project_id = ''
@@ -547,11 +568,11 @@ module Google
               update:     update,
               name:       name
             }.delete_if { |_, v| v.nil? }
-            req = Google::Gax.to_proto req, Google::Container::V1::UpdateClusterRequest
+            req = Google::Gax.to_proto req, Google::Container::V1beta1::UpdateClusterRequest
             @update_cluster.call(req, options, &block)
           end
 
-          # Updates the version and/or image type for a specific node pool.
+          # Updates the version and/or image type of a specific node pool.
           #
           # @param project_id [String]
           #   Deprecated. The Google Developers Console [project ID or project
@@ -590,14 +611,14 @@ module Google
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
           # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result [Google::Container::V1::Operation]
+          # @yieldparam result [Google::Container::V1beta1::Operation]
           # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @return [Google::Container::V1::Operation]
+          # @return [Google::Container::V1beta1::Operation]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
           #   require "google/cloud/container"
           #
-          #   cluster_manager_client = Google::Cloud::Container.new(version: :v1)
+          #   cluster_manager_client = Google::Cloud::Container.new(version: :v1beta1)
           #
           #   # TODO: Initialize `project_id`:
           #   project_id = ''
@@ -637,11 +658,11 @@ module Google
               image_type:   image_type,
               name:         name
             }.delete_if { |_, v| v.nil? }
-            req = Google::Gax.to_proto req, Google::Container::V1::UpdateNodePoolRequest
+            req = Google::Gax.to_proto req, Google::Container::V1beta1::UpdateNodePoolRequest
             @update_node_pool.call(req, options, &block)
           end
 
-          # Sets the autoscaling settings for a specific node pool.
+          # Sets the autoscaling settings of a specific node pool.
           #
           # @param project_id [String]
           #   Deprecated. The Google Developers Console [project ID or project
@@ -658,9 +679,9 @@ module Google
           # @param node_pool_id [String]
           #   Deprecated. The name of the node pool to upgrade.
           #   This field has been deprecated and replaced by the name field.
-          # @param autoscaling [Google::Container::V1::NodePoolAutoscaling | Hash]
+          # @param autoscaling [Google::Container::V1beta1::NodePoolAutoscaling | Hash]
           #   Autoscaling configuration for the node pool.
-          #   A hash of the same form as `Google::Container::V1::NodePoolAutoscaling`
+          #   A hash of the same form as `Google::Container::V1beta1::NodePoolAutoscaling`
           #   can also be provided.
           # @param name [String]
           #   The name (project, location, cluster, node pool) of the node pool to set
@@ -670,14 +691,14 @@ module Google
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
           # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result [Google::Container::V1::Operation]
+          # @yieldparam result [Google::Container::V1beta1::Operation]
           # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @return [Google::Container::V1::Operation]
+          # @return [Google::Container::V1beta1::Operation]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
           #   require "google/cloud/container"
           #
-          #   cluster_manager_client = Google::Cloud::Container.new(version: :v1)
+          #   cluster_manager_client = Google::Cloud::Container.new(version: :v1beta1)
           #
           #   # TODO: Initialize `project_id`:
           #   project_id = ''
@@ -712,7 +733,7 @@ module Google
               autoscaling:  autoscaling,
               name:         name
             }.delete_if { |_, v| v.nil? }
-            req = Google::Gax.to_proto req, Google::Container::V1::SetNodePoolAutoscalingRequest
+            req = Google::Gax.to_proto req, Google::Container::V1beta1::SetNodePoolAutoscalingRequest
             @set_node_pool_autoscaling.call(req, options, &block)
           end
 
@@ -743,14 +764,14 @@ module Google
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
           # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result [Google::Container::V1::Operation]
+          # @yieldparam result [Google::Container::V1beta1::Operation]
           # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @return [Google::Container::V1::Operation]
+          # @return [Google::Container::V1beta1::Operation]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
           #   require "google/cloud/container"
           #
-          #   cluster_manager_client = Google::Cloud::Container.new(version: :v1)
+          #   cluster_manager_client = Google::Cloud::Container.new(version: :v1beta1)
           #
           #   # TODO: Initialize `project_id`:
           #   project_id = ''
@@ -780,7 +801,7 @@ module Google
               logging_service: logging_service,
               name:            name
             }.delete_if { |_, v| v.nil? }
-            req = Google::Gax.to_proto req, Google::Container::V1::SetLoggingServiceRequest
+            req = Google::Gax.to_proto req, Google::Container::V1beta1::SetLoggingServiceRequest
             @set_logging_service.call(req, options, &block)
           end
 
@@ -811,14 +832,14 @@ module Google
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
           # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result [Google::Container::V1::Operation]
+          # @yieldparam result [Google::Container::V1beta1::Operation]
           # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @return [Google::Container::V1::Operation]
+          # @return [Google::Container::V1beta1::Operation]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
           #   require "google/cloud/container"
           #
-          #   cluster_manager_client = Google::Cloud::Container.new(version: :v1)
+          #   cluster_manager_client = Google::Cloud::Container.new(version: :v1beta1)
           #
           #   # TODO: Initialize `project_id`:
           #   project_id = ''
@@ -848,7 +869,7 @@ module Google
               monitoring_service: monitoring_service,
               name:               name
             }.delete_if { |_, v| v.nil? }
-            req = Google::Gax.to_proto req, Google::Container::V1::SetMonitoringServiceRequest
+            req = Google::Gax.to_proto req, Google::Container::V1beta1::SetMonitoringServiceRequest
             @set_monitoring_service.call(req, options, &block)
           end
 
@@ -866,10 +887,10 @@ module Google
           # @param cluster_id [String]
           #   Deprecated. The name of the cluster to upgrade.
           #   This field has been deprecated and replaced by the name field.
-          # @param addons_config [Google::Container::V1::AddonsConfig | Hash]
+          # @param addons_config [Google::Container::V1beta1::AddonsConfig | Hash]
           #   The desired configurations for the various addons available to run in the
           #   cluster.
-          #   A hash of the same form as `Google::Container::V1::AddonsConfig`
+          #   A hash of the same form as `Google::Container::V1beta1::AddonsConfig`
           #   can also be provided.
           # @param name [String]
           #   The name (project, location, cluster) of the cluster to set addons.
@@ -878,14 +899,14 @@ module Google
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
           # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result [Google::Container::V1::Operation]
+          # @yieldparam result [Google::Container::V1beta1::Operation]
           # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @return [Google::Container::V1::Operation]
+          # @return [Google::Container::V1beta1::Operation]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
           #   require "google/cloud/container"
           #
-          #   cluster_manager_client = Google::Cloud::Container.new(version: :v1)
+          #   cluster_manager_client = Google::Cloud::Container.new(version: :v1beta1)
           #
           #   # TODO: Initialize `project_id`:
           #   project_id = ''
@@ -915,7 +936,7 @@ module Google
               addons_config: addons_config,
               name:          name
             }.delete_if { |_, v| v.nil? }
-            req = Google::Gax.to_proto req, Google::Container::V1::SetAddonsConfigRequest
+            req = Google::Gax.to_proto req, Google::Container::V1beta1::SetAddonsConfigRequest
             @set_addons_config.call(req, options, &block)
           end
 
@@ -935,7 +956,7 @@ module Google
           #   This field has been deprecated and replaced by the name field.
           # @param locations [Array<String>]
           #   The desired list of Google Compute Engine
-          #   [locations](https://cloud.google.com/compute/docs/zones#available) in which the cluster's nodes
+          #   [zones](https://cloud.google.com/compute/docs/zones#available) in which the cluster's nodes
           #   should be located. Changing the locations a cluster is in will result
           #   in nodes being either created or removed from the cluster, depending on
           #   whether locations are being added or removed.
@@ -948,14 +969,14 @@ module Google
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
           # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result [Google::Container::V1::Operation]
+          # @yieldparam result [Google::Container::V1beta1::Operation]
           # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @return [Google::Container::V1::Operation]
+          # @return [Google::Container::V1beta1::Operation]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
           #   require "google/cloud/container"
           #
-          #   cluster_manager_client = Google::Cloud::Container.new(version: :v1)
+          #   cluster_manager_client = Google::Cloud::Container.new(version: :v1beta1)
           #
           #   # TODO: Initialize `project_id`:
           #   project_id = ''
@@ -985,7 +1006,7 @@ module Google
               locations:  locations,
               name:       name
             }.delete_if { |_, v| v.nil? }
-            req = Google::Gax.to_proto req, Google::Container::V1::SetLocationsRequest
+            req = Google::Gax.to_proto req, Google::Container::V1beta1::SetLocationsRequest
             @set_locations.call(req, options, &block)
           end
 
@@ -1006,8 +1027,8 @@ module Google
           # @param master_version [String]
           #   The Kubernetes version to change the master to.
           #
-          #   Users may specify either explicit versions offered by Kubernetes Engine or
-          #   version aliases, which have the following behavior:
+          #   Users may specify either explicit versions offered by
+          #   Kubernetes Engine or version aliases, which have the following behavior:
           #
           #   * "latest": picks the highest valid Kubernetes version
           #   * "1.X": picks the highest valid patch+gke.N patch in the 1.X version
@@ -1021,14 +1042,14 @@ module Google
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
           # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result [Google::Container::V1::Operation]
+          # @yieldparam result [Google::Container::V1beta1::Operation]
           # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @return [Google::Container::V1::Operation]
+          # @return [Google::Container::V1beta1::Operation]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
           #   require "google/cloud/container"
           #
-          #   cluster_manager_client = Google::Cloud::Container.new(version: :v1)
+          #   cluster_manager_client = Google::Cloud::Container.new(version: :v1beta1)
           #
           #   # TODO: Initialize `project_id`:
           #   project_id = ''
@@ -1058,13 +1079,14 @@ module Google
               master_version: master_version,
               name:           name
             }.delete_if { |_, v| v.nil? }
-            req = Google::Gax.to_proto req, Google::Container::V1::UpdateMasterRequest
+            req = Google::Gax.to_proto req, Google::Container::V1beta1::UpdateMasterRequest
             @update_master.call(req, options, &block)
           end
 
           # Used to set master auth materials. Currently supports :-
           # Changing the admin password for a specific cluster.
-          # This can be either via password generation or explicitly set the password.
+          # This can be either via password generation or explicitly set.
+          # Modify basic_auth.csv and reset the K8S API server.
           #
           # @param project_id [String]
           #   Deprecated. The Google Developers Console [project ID or project
@@ -1078,11 +1100,11 @@ module Google
           # @param cluster_id [String]
           #   Deprecated. The name of the cluster to upgrade.
           #   This field has been deprecated and replaced by the name field.
-          # @param action [Google::Container::V1::SetMasterAuthRequest::Action]
+          # @param action [Google::Container::V1beta1::SetMasterAuthRequest::Action]
           #   The exact form of action to be taken on the master auth.
-          # @param update [Google::Container::V1::MasterAuth | Hash]
+          # @param update [Google::Container::V1beta1::MasterAuth | Hash]
           #   A description of the update.
-          #   A hash of the same form as `Google::Container::V1::MasterAuth`
+          #   A hash of the same form as `Google::Container::V1beta1::MasterAuth`
           #   can also be provided.
           # @param name [String]
           #   The name (project, location, cluster) of the cluster to set auth.
@@ -1091,14 +1113,14 @@ module Google
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
           # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result [Google::Container::V1::Operation]
+          # @yieldparam result [Google::Container::V1beta1::Operation]
           # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @return [Google::Container::V1::Operation]
+          # @return [Google::Container::V1beta1::Operation]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
           #   require "google/cloud/container"
           #
-          #   cluster_manager_client = Google::Cloud::Container.new(version: :v1)
+          #   cluster_manager_client = Google::Cloud::Container.new(version: :v1beta1)
           #
           #   # TODO: Initialize `project_id`:
           #   project_id = ''
@@ -1133,7 +1155,7 @@ module Google
               update:     update,
               name:       name
             }.delete_if { |_, v| v.nil? }
-            req = Google::Gax.to_proto req, Google::Container::V1::SetMasterAuthRequest
+            req = Google::Gax.to_proto req, Google::Container::V1beta1::SetMasterAuthRequest
             @set_master_auth.call(req, options, &block)
           end
 
@@ -1166,14 +1188,14 @@ module Google
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
           # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result [Google::Container::V1::Operation]
+          # @yieldparam result [Google::Container::V1beta1::Operation]
           # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @return [Google::Container::V1::Operation]
+          # @return [Google::Container::V1beta1::Operation]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
           #   require "google/cloud/container"
           #
-          #   cluster_manager_client = Google::Cloud::Container.new(version: :v1)
+          #   cluster_manager_client = Google::Cloud::Container.new(version: :v1beta1)
           #
           #   # TODO: Initialize `project_id`:
           #   project_id = ''
@@ -1198,7 +1220,7 @@ module Google
               cluster_id: cluster_id,
               name:       name
             }.delete_if { |_, v| v.nil? }
-            req = Google::Gax.to_proto req, Google::Container::V1::DeleteClusterRequest
+            req = Google::Gax.to_proto req, Google::Container::V1beta1::DeleteClusterRequest
             @delete_cluster.call(req, options, &block)
           end
 
@@ -1220,14 +1242,14 @@ module Google
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
           # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result [Google::Container::V1::ListOperationsResponse]
+          # @yieldparam result [Google::Container::V1beta1::ListOperationsResponse]
           # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @return [Google::Container::V1::ListOperationsResponse]
+          # @return [Google::Container::V1beta1::ListOperationsResponse]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
           #   require "google/cloud/container"
           #
-          #   cluster_manager_client = Google::Cloud::Container.new(version: :v1)
+          #   cluster_manager_client = Google::Cloud::Container.new(version: :v1beta1)
           #
           #   # TODO: Initialize `project_id`:
           #   project_id = ''
@@ -1247,7 +1269,7 @@ module Google
               zone:       zone,
               parent:     parent
             }.delete_if { |_, v| v.nil? }
-            req = Google::Gax.to_proto req, Google::Container::V1::ListOperationsRequest
+            req = Google::Gax.to_proto req, Google::Container::V1beta1::ListOperationsRequest
             @list_operations.call(req, options, &block)
           end
 
@@ -1272,14 +1294,14 @@ module Google
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
           # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result [Google::Container::V1::Operation]
+          # @yieldparam result [Google::Container::V1beta1::Operation]
           # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @return [Google::Container::V1::Operation]
+          # @return [Google::Container::V1beta1::Operation]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
           #   require "google/cloud/container"
           #
-          #   cluster_manager_client = Google::Cloud::Container.new(version: :v1)
+          #   cluster_manager_client = Google::Cloud::Container.new(version: :v1beta1)
           #
           #   # TODO: Initialize `project_id`:
           #   project_id = ''
@@ -1304,7 +1326,7 @@ module Google
               operation_id: operation_id,
               name:         name
             }.delete_if { |_, v| v.nil? }
-            req = Google::Gax.to_proto req, Google::Container::V1::GetOperationRequest
+            req = Google::Gax.to_proto req, Google::Container::V1beta1::GetOperationRequest
             @get_operation.call(req, options, &block)
           end
 
@@ -1334,7 +1356,7 @@ module Google
           # @example
           #   require "google/cloud/container"
           #
-          #   cluster_manager_client = Google::Cloud::Container.new(version: :v1)
+          #   cluster_manager_client = Google::Cloud::Container.new(version: :v1beta1)
           #
           #   # TODO: Initialize `project_id`:
           #   project_id = ''
@@ -1359,7 +1381,7 @@ module Google
               operation_id: operation_id,
               name:         name
             }.delete_if { |_, v| v.nil? }
-            req = Google::Gax.to_proto req, Google::Container::V1::CancelOperationRequest
+            req = Google::Gax.to_proto req, Google::Container::V1beta1::CancelOperationRequest
             @cancel_operation.call(req, options, &block)
             nil
           end
@@ -1381,14 +1403,14 @@ module Google
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
           # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result [Google::Container::V1::ServerConfig]
+          # @yieldparam result [Google::Container::V1beta1::ServerConfig]
           # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @return [Google::Container::V1::ServerConfig]
+          # @return [Google::Container::V1beta1::ServerConfig]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
           #   require "google/cloud/container"
           #
-          #   cluster_manager_client = Google::Cloud::Container.new(version: :v1)
+          #   cluster_manager_client = Google::Cloud::Container.new(version: :v1beta1)
           #
           #   # TODO: Initialize `project_id`:
           #   project_id = ''
@@ -1408,7 +1430,7 @@ module Google
               zone:       zone,
               name:       name
             }.delete_if { |_, v| v.nil? }
-            req = Google::Gax.to_proto req, Google::Container::V1::GetServerConfigRequest
+            req = Google::Gax.to_proto req, Google::Container::V1beta1::GetServerConfigRequest
             @get_server_config.call(req, options, &block)
           end
 
@@ -1433,14 +1455,14 @@ module Google
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
           # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result [Google::Container::V1::ListNodePoolsResponse]
+          # @yieldparam result [Google::Container::V1beta1::ListNodePoolsResponse]
           # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @return [Google::Container::V1::ListNodePoolsResponse]
+          # @return [Google::Container::V1beta1::ListNodePoolsResponse]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
           #   require "google/cloud/container"
           #
-          #   cluster_manager_client = Google::Cloud::Container.new(version: :v1)
+          #   cluster_manager_client = Google::Cloud::Container.new(version: :v1beta1)
           #
           #   # TODO: Initialize `project_id`:
           #   project_id = ''
@@ -1465,7 +1487,7 @@ module Google
               cluster_id: cluster_id,
               parent:     parent
             }.delete_if { |_, v| v.nil? }
-            req = Google::Gax.to_proto req, Google::Container::V1::ListNodePoolsRequest
+            req = Google::Gax.to_proto req, Google::Container::V1beta1::ListNodePoolsRequest
             @list_node_pools.call(req, options, &block)
           end
 
@@ -1494,14 +1516,14 @@ module Google
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
           # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result [Google::Container::V1::NodePool]
+          # @yieldparam result [Google::Container::V1beta1::NodePool]
           # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @return [Google::Container::V1::NodePool]
+          # @return [Google::Container::V1beta1::NodePool]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
           #   require "google/cloud/container"
           #
-          #   cluster_manager_client = Google::Cloud::Container.new(version: :v1)
+          #   cluster_manager_client = Google::Cloud::Container.new(version: :v1beta1)
           #
           #   # TODO: Initialize `project_id`:
           #   project_id = ''
@@ -1531,7 +1553,7 @@ module Google
               node_pool_id: node_pool_id,
               name:         name
             }.delete_if { |_, v| v.nil? }
-            req = Google::Gax.to_proto req, Google::Container::V1::GetNodePoolRequest
+            req = Google::Gax.to_proto req, Google::Container::V1beta1::GetNodePoolRequest
             @get_node_pool.call(req, options, &block)
           end
 
@@ -1549,9 +1571,9 @@ module Google
           # @param cluster_id [String]
           #   Deprecated. The name of the cluster.
           #   This field has been deprecated and replaced by the parent field.
-          # @param node_pool [Google::Container::V1::NodePool | Hash]
+          # @param node_pool [Google::Container::V1beta1::NodePool | Hash]
           #   The node pool to create.
-          #   A hash of the same form as `Google::Container::V1::NodePool`
+          #   A hash of the same form as `Google::Container::V1beta1::NodePool`
           #   can also be provided.
           # @param parent [String]
           #   The parent (project, location, cluster id) where the node pool will be
@@ -1561,14 +1583,14 @@ module Google
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
           # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result [Google::Container::V1::Operation]
+          # @yieldparam result [Google::Container::V1beta1::Operation]
           # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @return [Google::Container::V1::Operation]
+          # @return [Google::Container::V1beta1::Operation]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
           #   require "google/cloud/container"
           #
-          #   cluster_manager_client = Google::Cloud::Container.new(version: :v1)
+          #   cluster_manager_client = Google::Cloud::Container.new(version: :v1beta1)
           #
           #   # TODO: Initialize `project_id`:
           #   project_id = ''
@@ -1598,7 +1620,7 @@ module Google
               node_pool:  node_pool,
               parent:     parent
             }.delete_if { |_, v| v.nil? }
-            req = Google::Gax.to_proto req, Google::Container::V1::CreateNodePoolRequest
+            req = Google::Gax.to_proto req, Google::Container::V1beta1::CreateNodePoolRequest
             @create_node_pool.call(req, options, &block)
           end
 
@@ -1627,14 +1649,14 @@ module Google
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
           # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result [Google::Container::V1::Operation]
+          # @yieldparam result [Google::Container::V1beta1::Operation]
           # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @return [Google::Container::V1::Operation]
+          # @return [Google::Container::V1beta1::Operation]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
           #   require "google/cloud/container"
           #
-          #   cluster_manager_client = Google::Cloud::Container.new(version: :v1)
+          #   cluster_manager_client = Google::Cloud::Container.new(version: :v1beta1)
           #
           #   # TODO: Initialize `project_id`:
           #   project_id = ''
@@ -1664,7 +1686,7 @@ module Google
               node_pool_id: node_pool_id,
               name:         name
             }.delete_if { |_, v| v.nil? }
-            req = Google::Gax.to_proto req, Google::Container::V1::DeleteNodePoolRequest
+            req = Google::Gax.to_proto req, Google::Container::V1beta1::DeleteNodePoolRequest
             @delete_node_pool.call(req, options, &block)
           end
 
@@ -1694,14 +1716,14 @@ module Google
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
           # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result [Google::Container::V1::Operation]
+          # @yieldparam result [Google::Container::V1beta1::Operation]
           # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @return [Google::Container::V1::Operation]
+          # @return [Google::Container::V1beta1::Operation]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
           #   require "google/cloud/container"
           #
-          #   cluster_manager_client = Google::Cloud::Container.new(version: :v1)
+          #   cluster_manager_client = Google::Cloud::Container.new(version: :v1beta1)
           #
           #   # TODO: Initialize `project_id`:
           #   project_id = ''
@@ -1731,7 +1753,7 @@ module Google
               node_pool_id: node_pool_id,
               name:         name
             }.delete_if { |_, v| v.nil? }
-            req = Google::Gax.to_proto req, Google::Container::V1::RollbackNodePoolUpgradeRequest
+            req = Google::Gax.to_proto req, Google::Container::V1beta1::RollbackNodePoolUpgradeRequest
             @rollback_node_pool_upgrade.call(req, options, &block)
           end
 
@@ -1752,9 +1774,9 @@ module Google
           # @param node_pool_id [String]
           #   Deprecated. The name of the node pool to update.
           #   This field has been deprecated and replaced by the name field.
-          # @param management [Google::Container::V1::NodeManagement | Hash]
+          # @param management [Google::Container::V1beta1::NodeManagement | Hash]
           #   NodeManagement configuration for the node pool.
-          #   A hash of the same form as `Google::Container::V1::NodeManagement`
+          #   A hash of the same form as `Google::Container::V1beta1::NodeManagement`
           #   can also be provided.
           # @param name [String]
           #   The name (project, location, cluster, node pool id) of the node pool to set
@@ -1764,14 +1786,14 @@ module Google
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
           # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result [Google::Container::V1::Operation]
+          # @yieldparam result [Google::Container::V1beta1::Operation]
           # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @return [Google::Container::V1::Operation]
+          # @return [Google::Container::V1beta1::Operation]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
           #   require "google/cloud/container"
           #
-          #   cluster_manager_client = Google::Cloud::Container.new(version: :v1)
+          #   cluster_manager_client = Google::Cloud::Container.new(version: :v1beta1)
           #
           #   # TODO: Initialize `project_id`:
           #   project_id = ''
@@ -1806,7 +1828,7 @@ module Google
               management:   management,
               name:         name
             }.delete_if { |_, v| v.nil? }
-            req = Google::Gax.to_proto req, Google::Container::V1::SetNodePoolManagementRequest
+            req = Google::Gax.to_proto req, Google::Container::V1beta1::SetNodePoolManagementRequest
             @set_node_pool_management.call(req, options, &block)
           end
 
@@ -1840,14 +1862,14 @@ module Google
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
           # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result [Google::Container::V1::Operation]
+          # @yieldparam result [Google::Container::V1beta1::Operation]
           # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @return [Google::Container::V1::Operation]
+          # @return [Google::Container::V1beta1::Operation]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
           #   require "google/cloud/container"
           #
-          #   cluster_manager_client = Google::Cloud::Container.new(version: :v1)
+          #   cluster_manager_client = Google::Cloud::Container.new(version: :v1beta1)
           #
           #   # TODO: Initialize `project_id`:
           #   project_id = ''
@@ -1882,7 +1904,7 @@ module Google
               label_fingerprint: label_fingerprint,
               name:              name
             }.delete_if { |_, v| v.nil? }
-            req = Google::Gax.to_proto req, Google::Container::V1::SetLabelsRequest
+            req = Google::Gax.to_proto req, Google::Container::V1beta1::SetLabelsRequest
             @set_labels.call(req, options, &block)
           end
 
@@ -1909,14 +1931,14 @@ module Google
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
           # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result [Google::Container::V1::Operation]
+          # @yieldparam result [Google::Container::V1beta1::Operation]
           # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @return [Google::Container::V1::Operation]
+          # @return [Google::Container::V1beta1::Operation]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
           #   require "google/cloud/container"
           #
-          #   cluster_manager_client = Google::Cloud::Container.new(version: :v1)
+          #   cluster_manager_client = Google::Cloud::Container.new(version: :v1beta1)
           #
           #   # TODO: Initialize `project_id`:
           #   project_id = ''
@@ -1946,7 +1968,7 @@ module Google
               enabled:    enabled,
               name:       name
             }.delete_if { |_, v| v.nil? }
-            req = Google::Gax.to_proto req, Google::Container::V1::SetLegacyAbacRequest
+            req = Google::Gax.to_proto req, Google::Container::V1beta1::SetLegacyAbacRequest
             @set_legacy_abac.call(req, options, &block)
           end
 
@@ -1973,14 +1995,14 @@ module Google
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
           # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result [Google::Container::V1::Operation]
+          # @yieldparam result [Google::Container::V1beta1::Operation]
           # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @return [Google::Container::V1::Operation]
+          # @return [Google::Container::V1beta1::Operation]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
           #   require "google/cloud/container"
           #
-          #   cluster_manager_client = Google::Cloud::Container.new(version: :v1)
+          #   cluster_manager_client = Google::Cloud::Container.new(version: :v1beta1)
           #
           #   # TODO: Initialize `project_id`:
           #   project_id = ''
@@ -2007,7 +2029,7 @@ module Google
               name:               name,
               rotate_credentials: rotate_credentials
             }.delete_if { |_, v| v.nil? }
-            req = Google::Gax.to_proto req, Google::Container::V1::StartIPRotationRequest
+            req = Google::Gax.to_proto req, Google::Container::V1beta1::StartIPRotationRequest
             @start_ip_rotation.call(req, options, &block)
           end
 
@@ -2032,14 +2054,14 @@ module Google
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
           # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result [Google::Container::V1::Operation]
+          # @yieldparam result [Google::Container::V1beta1::Operation]
           # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @return [Google::Container::V1::Operation]
+          # @return [Google::Container::V1beta1::Operation]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
           #   require "google/cloud/container"
           #
-          #   cluster_manager_client = Google::Cloud::Container.new(version: :v1)
+          #   cluster_manager_client = Google::Cloud::Container.new(version: :v1beta1)
           #
           #   # TODO: Initialize `project_id`:
           #   project_id = ''
@@ -2064,7 +2086,7 @@ module Google
               cluster_id: cluster_id,
               name:       name
             }.delete_if { |_, v| v.nil? }
-            req = Google::Gax.to_proto req, Google::Container::V1::CompleteIPRotationRequest
+            req = Google::Gax.to_proto req, Google::Container::V1beta1::CompleteIPRotationRequest
             @complete_ip_rotation.call(req, options, &block)
           end
 
@@ -2095,14 +2117,14 @@ module Google
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
           # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result [Google::Container::V1::Operation]
+          # @yieldparam result [Google::Container::V1beta1::Operation]
           # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @return [Google::Container::V1::Operation]
+          # @return [Google::Container::V1beta1::Operation]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
           #   require "google/cloud/container"
           #
-          #   cluster_manager_client = Google::Cloud::Container.new(version: :v1)
+          #   cluster_manager_client = Google::Cloud::Container.new(version: :v1beta1)
           #
           #   # TODO: Initialize `project_id`:
           #   project_id = ''
@@ -2137,7 +2159,7 @@ module Google
               node_count:   node_count,
               name:         name
             }.delete_if { |_, v| v.nil? }
-            req = Google::Gax.to_proto req, Google::Container::V1::SetNodePoolSizeRequest
+            req = Google::Gax.to_proto req, Google::Container::V1beta1::SetNodePoolSizeRequest
             @set_node_pool_size.call(req, options, &block)
           end
 
@@ -2155,9 +2177,9 @@ module Google
           # @param cluster_id [String]
           #   Deprecated. The name of the cluster.
           #   This field has been deprecated and replaced by the name field.
-          # @param network_policy [Google::Container::V1::NetworkPolicy | Hash]
+          # @param network_policy [Google::Container::V1beta1::NetworkPolicy | Hash]
           #   Configuration options for the NetworkPolicy feature.
-          #   A hash of the same form as `Google::Container::V1::NetworkPolicy`
+          #   A hash of the same form as `Google::Container::V1beta1::NetworkPolicy`
           #   can also be provided.
           # @param name [String]
           #   The name (project, location, cluster id) of the cluster to set networking
@@ -2166,14 +2188,14 @@ module Google
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
           # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result [Google::Container::V1::Operation]
+          # @yieldparam result [Google::Container::V1beta1::Operation]
           # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @return [Google::Container::V1::Operation]
+          # @return [Google::Container::V1beta1::Operation]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
           #   require "google/cloud/container"
           #
-          #   cluster_manager_client = Google::Cloud::Container.new(version: :v1)
+          #   cluster_manager_client = Google::Cloud::Container.new(version: :v1beta1)
           #
           #   # TODO: Initialize `project_id`:
           #   project_id = ''
@@ -2203,7 +2225,7 @@ module Google
               network_policy: network_policy,
               name:           name
             }.delete_if { |_, v| v.nil? }
-            req = Google::Gax.to_proto req, Google::Container::V1::SetNetworkPolicyRequest
+            req = Google::Gax.to_proto req, Google::Container::V1beta1::SetNetworkPolicyRequest
             @set_network_policy.call(req, options, &block)
           end
 
@@ -2218,10 +2240,10 @@ module Google
           #   resides.
           # @param cluster_id [String]
           #   The name of the cluster to update.
-          # @param maintenance_policy [Google::Container::V1::MaintenancePolicy | Hash]
+          # @param maintenance_policy [Google::Container::V1beta1::MaintenancePolicy | Hash]
           #   The maintenance policy to be set for the cluster. An empty field
           #   clears the existing maintenance policy.
-          #   A hash of the same form as `Google::Container::V1::MaintenancePolicy`
+          #   A hash of the same form as `Google::Container::V1beta1::MaintenancePolicy`
           #   can also be provided.
           # @param name [String]
           #   The name (project, location, cluster id) of the cluster to set maintenance
@@ -2231,14 +2253,14 @@ module Google
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
           # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result [Google::Container::V1::Operation]
+          # @yieldparam result [Google::Container::V1beta1::Operation]
           # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @return [Google::Container::V1::Operation]
+          # @return [Google::Container::V1beta1::Operation]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
           #   require "google/cloud/container"
           #
-          #   cluster_manager_client = Google::Cloud::Container.new(version: :v1)
+          #   cluster_manager_client = Google::Cloud::Container.new(version: :v1beta1)
           #
           #   # TODO: Initialize `project_id`:
           #   project_id = ''
@@ -2268,8 +2290,105 @@ module Google
               maintenance_policy: maintenance_policy,
               name:               name
             }.delete_if { |_, v| v.nil? }
-            req = Google::Gax.to_proto req, Google::Container::V1::SetMaintenancePolicyRequest
+            req = Google::Gax.to_proto req, Google::Container::V1beta1::SetMaintenancePolicyRequest
             @set_maintenance_policy.call(req, options, &block)
+          end
+
+          # Lists subnetworks that are usable for creating clusters in a project.
+          #
+          # @param parent [String]
+          #   The parent project where subnetworks are usable.
+          #   Specified in the format 'projects/*'.
+          # @param filter [String]
+          #   Filtering currently only supports equality on the networkProjectId and must
+          #   be in the form: "networkProjectId=[PROJECTID]", where `networkProjectId`
+          #   is the project which owns the listed subnetworks. This defaults to the
+          #   parent project ID.
+          # @param page_size [Integer]
+          #   The maximum number of resources contained in the underlying API
+          #   response. If page streaming is performed per-resource, this
+          #   parameter does not affect the return value. If page streaming is
+          #   performed per-page, this determines the maximum number of
+          #   resources in a page.
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Gax::PagedEnumerable<Google::Container::V1beta1::UsableSubnetwork>]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
+          # @return [Google::Gax::PagedEnumerable<Google::Container::V1beta1::UsableSubnetwork>]
+          #   An enumerable of Google::Container::V1beta1::UsableSubnetwork instances.
+          #   See Google::Gax::PagedEnumerable documentation for other
+          #   operations such as per-page iteration or access to the response
+          #   object.
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/container"
+          #
+          #   cluster_manager_client = Google::Cloud::Container.new(version: :v1beta1)
+          #
+          #   # TODO: Initialize `parent`:
+          #   parent = ''
+          #
+          #   # Iterate over all results.
+          #   cluster_manager_client.list_usable_subnetworks(parent).each do |element|
+          #     # Process element.
+          #   end
+          #
+          #   # Or iterate over results one page at a time.
+          #   cluster_manager_client.list_usable_subnetworks(parent).each_page do |page|
+          #     # Process each page at a time.
+          #     page.each do |element|
+          #       # Process element.
+          #     end
+          #   end
+
+          def list_usable_subnetworks \
+              parent,
+              filter: nil,
+              page_size: nil,
+              options: nil,
+              &block
+            req = {
+              parent:    parent,
+              filter:    filter,
+              page_size: page_size
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax.to_proto req, Google::Container::V1beta1::ListUsableSubnetworksRequest
+            @list_usable_subnetworks.call(req, options, &block)
+          end
+
+          # Used to fetch locations that offer GKE.
+          #
+          # @param parent [String]
+          #   Contains the name of the resource requested.
+          #   Specified in the format 'projects/*'.
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Container::V1beta1::ListLocationsResponse]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
+          # @return [Google::Container::V1beta1::ListLocationsResponse]
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/container"
+          #
+          #   cluster_manager_client = Google::Cloud::Container.new(version: :v1beta1)
+          #
+          #   # TODO: Initialize `parent`:
+          #   parent = ''
+          #   response = cluster_manager_client.list_locations(parent)
+
+          def list_locations \
+              parent,
+              options: nil,
+              &block
+            req = {
+              parent: parent
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax.to_proto req, Google::Container::V1beta1::ListLocationsRequest
+            @list_locations.call(req, options, &block)
           end
         end
       end

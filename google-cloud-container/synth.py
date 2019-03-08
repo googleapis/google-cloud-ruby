@@ -19,11 +19,24 @@ import synthtool.gcp as gcp
 import synthtool.languages.ruby as ruby
 import logging
 import re
+import yaml
+import io
 from textwrap import dedent
+from subprocess import call
 
 logging.basicConfig(level=logging.DEBUG)
 
 gapic = gcp.GAPICGenerator()
+
+v1beta1_library = gapic.ruby_library(
+    'container', 'v1beta1', config_path='/google/container/artman_container_v1beta1.yaml',
+    artman_output_name='google-cloud-ruby/google-cloud-container'
+)
+s.copy(v1beta1_library / 'acceptance/google/cloud/container/v1beta1')
+s.copy(v1beta1_library / 'lib/google/cloud/container/v1beta1')
+s.copy(v1beta1_library / 'lib/google/container/v1beta1')
+s.copy(v1beta1_library / 'lib/google/cloud/container/v1beta1.rb')
+s.copy(v1beta1_library / 'test/google/cloud/container/v1beta1')
 
 v1_library = gapic.ruby_library(
     'container', 'v1', config_path='/google/container/artman_container_v1.yaml',
@@ -36,6 +49,7 @@ s.copy(v1_library / 'README.md')
 s.copy(v1_library / 'LICENSE')
 s.copy(v1_library / '.gitignore')
 s.copy(v1_library / '.yardopts')
+s.copy(v1_library / '.rubocop.yml')
 s.copy(v1_library / 'google-cloud-container.gemspec', merge=ruby.merge_gemspec)
 
 # https://github.com/googleapis/gapic-generator/issues/2196
@@ -82,5 +96,44 @@ s.replace(
 s.replace(
     'google-cloud-container.gemspec',
     'gem.add_development_dependency "rubocop".*$',
-    'gem.add_development_dependency "rubocop", "~> 0.64.0"'
+    'gem.add_development_dependency "google-style", "~> 0.1"'
+)
+
+s.replace(
+    'google-cloud-container.gemspec',
+    'gem.add_development_dependency "rubocop".*$',
+    'gem.add_development_dependency "google-style", "~> 0.1"'
+)
+
+# Read YAML file
+with open('.rubocop.yml', 'r') as stream:
+    excluded = {
+        'AllCops': {
+            'Exclude': yaml.load(stream)['AllCops']['Exclude']
+        }
+    }
+
+temp_rubo = {
+    'inherit_gem': {
+        'google-style': 'google-style.yml'
+    },
+}
+
+# Write YAML file
+with io.open('.rubocop.yml', 'w', encoding='utf8') as outfile:
+    yaml.dump(temp_rubo, outfile, default_flow_style=False, allow_unicode=True)
+
+try:
+    call('bundle update && bundle exec rubocop -a', shell=True)
+except:
+    print('Unable to completely autofix style')
+
+# Write YAML file
+with io.open('.rubocop.yml', 'a', encoding='utf8') as outfile:
+    yaml.dump(excluded, outfile, default_flow_style=False, allow_unicode=True)
+
+s.replace(
+    'lib/google/container/**/*.rb',
+    'require "google/iam/v1/.*\n',
+    ''
 )

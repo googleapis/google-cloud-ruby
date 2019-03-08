@@ -60,7 +60,7 @@ end
 
 # Acceptance tests
 desc "Run the google-cloud-container acceptance tests."
-task :acceptance, :project, :keyfile do |t, args|
+task :acceptance, :project, :keyfile do |_t, args|
   project = args[:project]
   project ||=
     ENV["CONTAINER_TEST_PROJECT"] ||
@@ -77,7 +77,7 @@ task :acceptance, :project, :keyfile do |t, args|
       ENV["GCLOUD_TEST_KEYFILE_JSON"]
   end
   if project.nil? || keyfile.nil?
-    fail "You must provide a project and keyfile. e.g. rake acceptance[test123, /path/to/keyfile.json] or CONTAINER_TEST_PROJECT=test123 CONTAINER_TEST_KEYFILE=/path/to/keyfile.json rake acceptance"
+    raise "You must provide a project and keyfile. e.g. rake acceptance[test123, /path/to/keyfile.json] or CONTAINER_TEST_PROJECT=test123 CONTAINER_TEST_KEYFILE=/path/to/keyfile.json rake acceptance"
   end
   require "google/cloud/container/v1/credentials"
   (Google::Cloud::Container::V1::Credentials::PATH_ENV_VARS +
@@ -144,7 +144,7 @@ namespace :ci do
   end
 end
 
-task :default => :test
+task default: :test
 
 def header str, token = "#"
   line_length = str.length + 8

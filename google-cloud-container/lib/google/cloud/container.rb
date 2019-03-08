@@ -90,13 +90,13 @@ module Google
     module Container
       # rubocop:enable LineLength
 
-      FILE_DIR = File.realdirpath(Pathname.new(__FILE__).join("..").join("container"))
+      FILE_DIR = File.realdirpath Pathname.new(__FILE__).join("..").join("container")
 
       AVAILABLE_VERSIONS = Dir["#{FILE_DIR}/*"]
-        .select { |file| File.directory?(file) }
-        .select { |dir| Google::Gax::VERSION_MATCHER.match(File.basename(dir)) }
-        .select { |dir| File.exist?(dir + ".rb") }
-        .map { |dir| File.basename(dir) }
+                           .select { |file| File.directory? file }
+                           .select { |dir| Google::Gax::VERSION_MATCHER.match File.basename(dir) }
+                           .select { |dir| File.exist? dir + ".rb" }
+                           .map { |dir| File.basename dir }
 
       ##
       # Google Kubernetes Engine Cluster Manager v1
@@ -134,17 +134,17 @@ module Google
       #   @param exception_transformer [Proc]
       #     An optional proc that intercepts any exceptions raised during an API call to inject
       #     custom error handling.
-      def self.new(*args, version: :v1, **kwargs)
-        unless AVAILABLE_VERSIONS.include?(version.to_s.downcase)
+      def self.new *args, version: :v1, **kwargs
+        unless AVAILABLE_VERSIONS.include? version.to_s.downcase
           raise "The version: #{version} is not available. The available versions " \
-            "are: [#{AVAILABLE_VERSIONS.join(", ")}]"
+            "are: [#{AVAILABLE_VERSIONS.join ', '}]"
         end
 
         require "#{FILE_DIR}/#{version.to_s.downcase}"
         version_module = Google::Cloud::Container
-          .constants
-          .select {|sym| sym.to_s.downcase == version.to_s.downcase}
-          .first
+                         .constants
+                         .select { |sym| sym.to_s.casecmp(version.to_s).zero? }
+                         .first
         Google::Cloud::Container.const_get(version_module).new(*args, **kwargs)
       end
     end

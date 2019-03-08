@@ -13,7 +13,7 @@
 # limitations under the License.
 
 
-require "google/cloud/container/v1/cluster_manager_client"
+require "google/cloud/container/v1beta1/cluster_manager_client"
 
 module Google
   module Cloud
@@ -24,8 +24,8 @@ module Google
       # # Ruby Client for Kubernetes Engine API ([Beta](https://github.com/googleapis/google-cloud-ruby#versioning))
       #
       # [Kubernetes Engine API][Product Documentation]:
-      # The Google Kubernetes Engine API is used for building and managing container
-      # based applications, powered by the open source Kubernetes technology.
+      # Builds and manages container-based applications, powered by the open source
+      # Kubernetes technology.
       # - [Product Documentation][]
       #
       # ## Quick Start
@@ -47,7 +47,7 @@ module Google
       # ```rb
       # require "google/cloud/container"
       #
-      # cluster_manager_client = Google::Cloud::Container.new(version: :v1)
+      # cluster_manager_client = Google::Cloud::Container.new(version: :v1beta1)
       # project_id_2 = project_id
       # zone = "us-central1-a"
       # response = cluster_manager_client.list_clusters(project_id_2, zone)
@@ -59,7 +59,7 @@ module Google
       # - View this [repository's main README](https://github.com/googleapis/google-cloud-ruby/blob/master/README.md)
       #   to see the full list of Cloud APIs that we cover.
       #
-      # [Product Documentation]: https://cloud.google.com/kubernetes-engine
+      # [Product Documentation]: https://cloud.google.com/container
       #
       # ## Enabling Logging
       #
@@ -87,11 +87,11 @@ module Google
       # end
       # ```
       #
-      module V1
+      module V1beta1
         # rubocop:enable LineLength
 
         ##
-        # Google Kubernetes Engine Cluster Manager v1
+        # Google Kubernetes Engine Cluster Manager v1beta1
         #
         # @param credentials [Google::Auth::Credentials, String, Hash, GRPC::Core::Channel, GRPC::Core::ChannelCredentials, Proc]
         #   Provides the means for authenticating requests made by the client. This parameter can
@@ -141,7 +141,7 @@ module Google
             lib_name:              lib_name,
             lib_version:           lib_version
           }.reject { |_, v| v.nil? }
-          Google::Cloud::Container::V1::ClusterManagerClient.new(**kwargs)
+          Google::Cloud::Container::V1beta1::ClusterManagerClient.new(**kwargs)
         end
       end
     end

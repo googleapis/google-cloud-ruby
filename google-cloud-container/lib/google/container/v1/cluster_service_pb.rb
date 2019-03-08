@@ -2,10 +2,10 @@
 # source: google/container/v1/cluster_service.proto
 
 
-require 'google/protobuf'
+require "google/protobuf"
 
-require 'google/api/annotations_pb'
-require 'google/protobuf/empty_pb'
+require "google/api/annotations_pb"
+require "google/protobuf/empty_pb"
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.container.v1.NodeConfig" do
     optional :machine_type, :string, 1
