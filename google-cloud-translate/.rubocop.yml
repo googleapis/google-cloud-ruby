@@ -1,3 +1,6 @@
+inherit_gem:
+  google-style: google-style.yml
+
 AllCops:
   Exclude:
     - "acceptance/**/*"
@@ -5,33 +8,11 @@ AllCops:
     - "Rakefile"
     - "support/**/*"
     - "test/**/*"
-  TargetRubyVersion: 2.2
-
 Documentation:
   Enabled: false
-
-Style/StringLiterals:
-  EnforcedStyle: double_quotes
-Style/MethodDefParentheses:
-  EnforcedStyle: require_no_parentheses
-Metrics/CyclomaticComplexity:
-  Max: 10
-Metrics/PerceivedComplexity:
-  Max: 10
-Metrics/AbcSize:
-  Max: 25
-Metrics/ClassLength:
-  Enabled: false
 Metrics/MethodLength:
-  Max: 20
   Exclude:
     - "lib/google/cloud/translate.rb"
-Metrics/ParameterLists:
-  Enabled: false
-Layout/EmptyLineAfterGuardClause:
-  Enabled: false
-Layout/EmptyLines: # for the extra line between copyright and code
-  Enabled: false
 Naming/FileName:
   Exclude:
     - "lib/google-cloud-translate.rb"

@@ -110,10 +110,10 @@ module Google
         # The default HTTP headers to be sent on all API calls.
         def default_http_headers
           @default_http_headers ||= {
-            "User-Agent" => "gcloud-ruby/#{Google::Cloud::Translate::VERSION}",
+            "User-Agent"                   => "gcloud-ruby/#{Google::Cloud::Translate::VERSION}",
             "google-cloud-resource-prefix" => "projects/#{@project}",
-            "Content-Type" => "application/json",
-            "x-goog-api-client" => "gl-ruby/#{RUBY_VERSION} " \
+            "Content-Type"                 => "application/json",
+            "x-goog-api-client"            => "gl-ruby/#{RUBY_VERSION} " \
               "gccl/#{Google::Cloud::Translate::VERSION}"
           }
         end
@@ -189,14 +189,10 @@ module Google
           end
 
           def retry_error_reason? response #:nodoc:
-            result = JSON.parse(response.body)
-            if result &&
-               result["error"] &&
-               result["error"]["errors"]
+            result = JSON.parse response.body
+            if result && result["error"] && result["error"]["errors"]
               Array(result["error"]["errors"]).each do |error|
-                if error["reason"] && @reasons.include?(error["reason"])
-                  return true
-                end
+                return true if error["reason"] && @reasons.include?(error["reason"])
               end
             end
             false

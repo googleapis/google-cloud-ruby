@@ -223,7 +223,7 @@ module Google
         def detect *text
           return nil if text.empty?
           text = Array(text).flatten
-          gapi = service.detect(text)
+          gapi = service.detect text
           Detection.from_gapi gapi, text
         end
 
