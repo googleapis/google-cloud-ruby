@@ -99,22 +99,22 @@ s.replace(
 )
 
 # Read YAML file
-with open('.rubocop.yml', 'r') as stream:
+with open('.rubocop.yml', 'r') as contents:
     excluded = {
         'AllCops': {
-            'Exclude': yaml.load(stream)['AllCops']['Exclude']
+            'Exclude': yaml.load(contents)['AllCops']['Exclude']
         }
     }
 
-temp_rubo = {
+rubo_inherit = {
     'inherit_gem': {
         'google-style': 'google-style.yml'
     },
 }
 
 # Write YAML file
-with io.open('.rubocop.yml', 'w', encoding='utf8') as outfile:
-    yaml.dump(temp_rubo, outfile, default_flow_style=False, allow_unicode=True)
+with io.open('.rubocop.yml', 'w', encoding='utf8') as rubocop:
+    yaml.dump(rubo_inherit, rubocop, default_flow_style=False, allow_unicode=True)
 
 try:
     call('bundle update && bundle exec rubocop -a', shell=True)
@@ -122,8 +122,8 @@ except:
     print('Unable to completely autofix style')
 
 # Write YAML file
-with io.open('.rubocop.yml', 'a', encoding='utf8') as outfile:
-    yaml.dump(excluded, outfile, default_flow_style=False, allow_unicode=True)
+with io.open('.rubocop.yml', 'a', encoding='utf8') as rubocop:
+    yaml.dump(excluded, rubocop, default_flow_style=False, allow_unicode=True)
 
 s.replace(
     'lib/google/container/**/*.rb',
