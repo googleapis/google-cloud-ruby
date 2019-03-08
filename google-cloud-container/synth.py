@@ -92,13 +92,6 @@ s.replace(
     'https://googleapis.github.io/google-cloud-ruby'
 )
 
-# https://github.com/googleapis/gapic-generator/issues/2393
-s.replace(
-    'google-cloud-container.gemspec',
-    'gem.add_development_dependency "rubocop".*$',
-    'gem.add_development_dependency "google-style", "~> 0.1"'
-)
-
 s.replace(
     'google-cloud-container.gemspec',
     'gem.add_development_dependency "rubocop".*$',
