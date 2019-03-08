@@ -387,6 +387,7 @@ google-cloud-resource_manager:
 google-cloud-scheduler:
 - v0.1.0
 google-cloud-spanner:
+- v1.9.0
 - v1.8.0
 - v1.7.2
 - v1.7.1
