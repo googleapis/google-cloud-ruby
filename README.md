@@ -16,7 +16,7 @@ Availability (GA)](#versioning) quality level:
 
 * [BigQuery](#bigquery-ga) (GA)
 * [Cloud Datastore](#cloud-datastore-ga) (GA)
-* [Cloud Key Management Service](#cloud-key-management-service-beta) (GA)
+* [Cloud Key Management Service](#cloud-key-management-service-ga) (GA)
 * [Stackdriver Logging](#stackdriver-logging-ga) (GA)
 * [Cloud Spanner API](#cloud-spanner-api-ga) (GA)
 * [Cloud Storage](#cloud-storage-ga) (GA)
