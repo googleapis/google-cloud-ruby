@@ -465,6 +465,8 @@ google-cloud-storage:
 - v0.20.2
 - v0.20.1
 - v0.20.0
+google-cloud-talent:
+- v0.1.0
 google-cloud-tasks:
 - v0.3.0
 - v0.2.6
