@@ -21,7 +21,7 @@ module Google
     # rubocop:disable LineLength
 
     ##
-    # # Ruby Client for Cloud Key Management Service (KMS) API ([Beta](https://github.com/googleapis/google-cloud-ruby#versioning))
+    # # Ruby Client for Cloud Key Management Service (KMS) API ([GA](https://github.com/googleapis/google-cloud-ruby#versioning))
     #
     # [Cloud Key Management Service (KMS) API][Product Documentation]:
     # Manages keys and performs cryptographic operations in a central cloud
