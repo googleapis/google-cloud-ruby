@@ -50,6 +50,7 @@ This client supports the following Google Cloud Platform services at an
 * [Cloud Resource Manager](#cloud-resource-manager-alpha) (Alpha)
 * [Cloud Scheduler](#cloud-scheduler-alpha) (Alpha)
 * [Cloud Speech API](#cloud-speech-api-alpha) (Alpha)
+* [Cloud Talent Solutions API](#cloud-talent-solutions-api-alpha) (Alpha)
 * [Cloud Tasks API](#cloud-tasks-api-alpha) (Alpha)
 * [Cloud Text-To-Speech API](#cloud-text-to-speech-api-alpha) (Alpha)
 * [Cloud Vision API](#cloud-vision-api-alpha) (Alpha)
@@ -867,6 +868,44 @@ file.download "/tasks/attachments/#{file.name}"
 # Copy the file to a backup bucket
 backup = storage.bucket "task-attachment-backups"
 file.copy backup, file.name
+```
+
+### Cloud Talent Solutions API (Alpha)
+
+- [google-cloud-talent README](google-cloud-talent/README.md)
+- [google-cloud-talent API documentation](https://googleapis.github.io/google-cloud-ruby/docs/google-cloud-talent/latest)
+- [google-cloud-talent on RubyGems](https://rubygems.org/gems/google-cloud-talent/)
+- [Google Cloud Talent Solutions documentation](https://cloud.google.com/talent-solution/docs)
+
+#### Quick Start
+
+```sh
+$ gem install google-cloud-talent
+```
+
+#### Preview
+
+```rb
+ require "google/cloud/talent"
+
+ require "google/cloud/talent"
+ job_service_client = Google::Cloud::Talent::JobService.new(version: :v4beta1)
+ formatted_parent = job_service_client.project_path("[PROJECT]")
+
+ # TODO: Initialize `filter`:
+ filter = ''
+ # Iterate over all results.
+ job_service_client.list_jobs(formatted_parent, filter).each do |element|
+   # Process element.
+ end
+
+ # Or iterate over results one page at a time.
+ job_service_client.list_jobs(formatted_parent, filter).each_page do |page|
+   # Process each page at a time.
+   page.each do |element|
+     # Process element.
+   end
+ end
 ```
 
 ### Cloud Tasks API (Alpha)
