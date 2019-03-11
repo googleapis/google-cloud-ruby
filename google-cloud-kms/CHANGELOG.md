@@ -1,5 +1,11 @@
 # Release History
 
+### 1.0.0 / 2019-03-11
+
+* Bump release level to GA.
+* Support Cavium V2 compression.
+* Add example to readme.
+
 ### 0.3.0 / 2019-02-07
 
 * Move library to Beta.
