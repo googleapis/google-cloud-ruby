@@ -25,6 +25,16 @@ logging.basicConfig(level=logging.DEBUG)
 
 gapic = gcp.GAPICGenerator()
 
+v1beta1_library = gapic.ruby_library(
+    'container', 'v1beta1', config_path='/google/container/artman_container_v1beta1.yaml',
+    artman_output_name='google-cloud-ruby/google-cloud-container'
+)
+s.copy(v1beta1_library / 'acceptance/google/cloud/container/v1beta1')
+s.copy(v1beta1_library / 'lib/google/cloud/container/v1beta1')
+s.copy(v1beta1_library / 'lib/google/container/v1beta1')
+s.copy(v1beta1_library / 'lib/google/cloud/container/v1beta1.rb')
+s.copy(v1beta1_library / 'test/google/cloud/container/v1beta1')
+
 v1_library = gapic.ruby_library(
     'container', 'v1', config_path='/google/container/artman_container_v1.yaml',
     artman_output_name='google-cloud-ruby/google-cloud-container'
@@ -83,4 +93,10 @@ s.replace(
     'google-cloud-container.gemspec',
     'gem.add_development_dependency "rubocop".*$',
     'gem.add_development_dependency "rubocop", "~> 0.64.0"'
+)
+
+s.replace(
+    'lib/google/container/**/*.rb',
+    'require \'google/iam/v1/.*\n',
+    ''
 )
