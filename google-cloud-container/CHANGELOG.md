@@ -1,5 +1,9 @@
 # Release History
 
+### 0.4.0 / 2019-03-11
+
+* Add v1beta1 API version
+
 ### 0.3.0 / 2018-12-10
 
 * Add support for Regional Clusters.
