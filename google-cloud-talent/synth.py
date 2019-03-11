@@ -106,12 +106,19 @@ for service in services:
 
 # Require the helpers file
 s.replace(
-    f'lib/google/cloud/talent/v4beta1.rb',
-    f'require "google/cloud/talent/v4beta1/resume_service_client"',
+    'lib/google/cloud/talent/v4beta1.rb',
+    'require "google/cloud/talent/v4beta1/resume_service_client"',
     '\n'.join([
-        f'require "google/cloud/talent/v4beta1/resume_service_client"',
-        f'require "google/cloud/talent/v4beta1/helpers"',
+        'require "google/cloud/talent/v4beta1/resume_service_client"',
+        'require "google/cloud/talent/v4beta1/helpers"',
     ])
+)
+
+# Correct README url
+s.replace(
+    'README.md',
+    'https://cloud.google.com/talent',
+    'https://cloud.google.com/talent-solution'
 )
 
 # Generate the helper methods

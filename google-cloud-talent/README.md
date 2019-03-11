@@ -29,7 +29,7 @@ $ gem install google-cloud-talent
   to see the full list of Cloud APIs that we cover.
 
 [Client Library Documentation]: https://googleapis.github.io/google-cloud-ruby/#/docs/google-cloud-talent/latest/google/cloud/talent/v4beta1
-[Product Documentation]: https://cloud.google.com/talent
+[Product Documentation]: https://cloud.google.com/talent-solution
 
 ## Enabling Logging
 
