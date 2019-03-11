@@ -1,5 +1,9 @@
 # Release History
 
+### 0.5.0 / 2019-03-11
+
+* Update google-cloud-kms release to 1.0.0
+
 ### 0.57.0 / 2018-12-14
 
 * Add Cloud Asset
