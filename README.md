@@ -16,6 +16,7 @@ Availability (GA)](#versioning) quality level:
 
 * [BigQuery](#bigquery-ga) (GA)
 * [Cloud Datastore](#cloud-datastore-ga) (GA)
+* [Cloud Key Management Service](#cloud-key-management-service-ga) (GA)
 * [Stackdriver Logging](#stackdriver-logging-ga) (GA)
 * [Cloud Spanner API](#cloud-spanner-api-ga) (GA)
 * [Cloud Storage](#cloud-storage-ga) (GA)
@@ -31,7 +32,6 @@ This client supports the following Google Cloud Platform services at a
 * [Stackdriver Debugger](#stackdriver-debugger-beta) (Beta)
 * [Stackdriver Error Reporting](#stackdriver-error-reporting-beta) (Beta)
 * [Cloud Firestore](#cloud-firestore-beta) (Beta)
-* [Cloud Key Management Service](#cloud-key-management-service-beta) (Beta)
 * [Cloud Pub/Sub](#cloud-pubsub-beta) (Beta)
 * [Stackdriver Monitoring API](#stackdriver-monitoring-api-beta) (Beta)
 * [Stackdriver Trace](#stackdriver-trace-beta) (Beta)
@@ -479,7 +479,7 @@ firestore.transaction do |tx|
 end
 ```
 
-### Cloud Key Management Service (Beta)
+### Cloud Key Management Service (GA)
 
 - [google-cloud-kms README](google-cloud-kms/README.md)
 - [google-cloud-kms API documentation](https://googleapis.github.io/google-cloud-ruby/docs/google-cloud-kms/latest)
@@ -490,6 +490,27 @@ end
 
 ```sh
 $ gem install google-cloud-kms
+```
+
+#### Preview
+
+```ruby
+require "google/cloud/kms"
+
+# Create a client for a project and given credentials
+kms = Google::Cloud::Kms.new credentials: "/path/to/keyfile.json"
+
+# Where to create key rings
+key_ring_parent = kms.class.location_path "my-project", "us-central1"
+
+# Create a new key ring
+key_ring = kms.create_key_ring key_ring_parent, "my-ring", {}
+puts "Created at #{Time.new key_ring.create_time.seconds}"
+
+# Iterate over created key rings
+kms.list_key_rings(key_ring_parent).each do |key_ring|
+  puts "Found ring called #{key_ring.name}"
+end
 ```
 
 ### Stackdriver Logging (GA)
