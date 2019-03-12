@@ -97,7 +97,12 @@ languages over compactness; for example, the fields of this representation
 can be trivially provided to the constructor of &quot;java.awt.Color&quot; in Java; it
 can also be trivially provided to UIColor&#39;s &quot;+colorWithRed:green:blue:alpha&quot;
 method in iOS; and, with just a little work, it can be easily formatted into
-a CSS &quot;rgba()&quot; string in JavaScript, as well. Here are some examples:</p>
+a CSS &quot;rgba()&quot; string in JavaScript, as well.</p>
+
+<p>Note: this proto does not carry information about the absolute color space
+that should be used to interpret the RGB value (e.g. sRGB, Adobe RGB,
+DCI-P3, BT.2020, etc.). By default, applications SHOULD assume the sRGB color
+space.</p>
 
 <p>Example (Java):</p>
 
@@ -160,7 +165,7 @@ a CSS &quot;rgba()&quot; string in JavaScript, as well. Here are some examples:<
      if (![color getRed:&amp;red green:&amp;green blue:&amp;blue alpha:&amp;alpha]) {
        return nil;
      }
-     Color* result = [Color alloc] init];
+     Color* result = [[Color alloc] init];
      [result setRed:red];
      [result setGreen:green];
      [result setBlue:blue];
@@ -399,10 +404,10 @@ If omitted, this color object is to be rendered as a solid color
       <pre class="lines">
 
 
-154</pre>
+159</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/v1/doc/google/type/color.rb', line 154</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/v1/doc/google/type/color.rb', line 159</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Type::Color (class)">Color</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -454,10 +459,10 @@ If omitted, this color object is to be rendered as a solid color
       <pre class="lines">
 
 
-154</pre>
+159</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/v1/doc/google/type/color.rb', line 154</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/v1/doc/google/type/color.rb', line 159</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Type::Color (class)">Color</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -509,10 +514,10 @@ If omitted, this color object is to be rendered as a solid color
       <pre class="lines">
 
 
-154</pre>
+159</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/v1/doc/google/type/color.rb', line 154</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/v1/doc/google/type/color.rb', line 159</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Type::Color (class)">Color</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -564,10 +569,10 @@ If omitted, this color object is to be rendered as a solid color
       <pre class="lines">
 
 
-154</pre>
+159</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/v1/doc/google/type/color.rb', line 154</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/v1/doc/google/type/color.rb', line 159</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Type::Color (class)">Color</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
