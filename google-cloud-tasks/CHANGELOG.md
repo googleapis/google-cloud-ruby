@@ -1,5 +1,12 @@
 # Release History
 
+### 0.4.0 / 2019-03-12
+
+* Add HTTP Request to V2beta3
+  * Add Task#http_request
+  * Add HttpMethod
+* Update documentation
+
 ### 0.3.0 / 2019-02-01
 
 * Add Task#dispatch_deadline attribute.
