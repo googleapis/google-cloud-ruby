@@ -18,6 +18,7 @@ require "google/cloud/storage/file/acl"
 require "google/cloud/storage/file/list"
 require "google/cloud/storage/file/verifier"
 require "google/cloud/storage/file/signer"
+require "google/cloud/storage/file/v4_signer"
 require "zlib"
 
 module Google

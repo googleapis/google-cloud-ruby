@@ -401,7 +401,7 @@ module Google
         # @see https://cloud.google.com/storage/docs/access-control#Signed-URLs
         #   Access Control Signed URLs guide
         #
-        # @param [String] bucket Name of the bucket.
+        # @param [String, nil] bucket Name of the bucket, or nil if URL for all buckets is desired.
         # @param [String] path Path to the file in Google Cloud Storage.
         # @param [String] method The HTTP verb to be used with the signed URL.
         #   Signed URLs can be used
@@ -430,6 +430,8 @@ module Google
         #   using the URL, but only when the file resource is missing the
         #   corresponding values. (These values can be permanently set using
         #   {File#content_disposition=} and {File#content_type=}.)
+        # @param [Symbol] version The version of signed credential to create.
+        #   Must be one of ':v2' or ':v4'. The default value is ':v2'.
         #
         # @return [String]
         #
@@ -483,14 +485,26 @@ module Google
         def signed_url bucket, path, method: nil, expires: nil,
                        content_type: nil, content_md5: nil, headers: nil,
                        issuer: nil, client_email: nil, signing_key: nil,
-                       private_key: nil, query: nil
-          signer = File::Signer.new bucket, path, service
-          signer.signed_url method: method, expires: expires, headers: headers,
-                            content_type: content_type,
-                            content_md5: content_md5,
-                            issuer: issuer, client_email: client_email,
-                            signing_key: signing_key, private_key: private_key,
-                            query: query
+                       private_key: nil, query: nil, version: :v2
+          case version
+          when :v2
+            signer = File::Signer.new bucket, path, service
+
+            signer.signed_url method: method, expires: expires, headers: headers,
+                              content_type: content_type,
+                              content_md5: content_md5,
+                              issuer: issuer, client_email: client_email,
+                              signing_key: signing_key, private_key: private_key,
+                              query: query
+          when :v4
+            signer = File::V4Signer.new bucket, path, service
+            signer.signed_url method: method, expires: expires, headers: headers,
+                              issuer: issuer, client_email: client_email,
+                              signing_key: signing_key, private_key: private_key,
+                              query: query
+          else
+            raise ArgumentError, "version '#{version}' not supported"
+          end
         end
 
         protected
