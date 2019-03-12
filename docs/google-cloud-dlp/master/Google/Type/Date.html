@@ -89,14 +89,18 @@ js:
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>Represents a whole calendar date, e.g. date of birth. The time of day and
-time zone are either specified elsewhere or are not significant. The date
-is relative to the Proleptic Gregorian Calendar. The day may be 0 to
-represent a year and month where the day is not significant, e.g. credit card
-expiration date. The year may be 0 to represent a month and day independent
-of year, e.g. anniversary date. Related types are
-<span class='object_link'><a href="TimeOfDay.html" title="Google::Type::TimeOfDay (class)">TimeOfDay</a></span> and
-<code>google.protobuf.Timestamp</code>.</p>
+    <p>Represents a whole or partial calendar date, e.g. a birthday. The time of day
+and time zone are either specified elsewhere or are not significant. The date
+is relative to the Proleptic Gregorian Calendar. This can represent:</p>
+
+<ul>
+<li>A full date, with non-zero year, month and day values</li>
+<li>A month and day value, with a zero year, e.g. an anniversary</li>
+<li>A year on its own, with zero month and day values</li>
+<li>A year and month value, with a zero day, e.g. a credit card expiration date</li>
+</ul>
+
+<p>Related types are <span class='object_link'><a href="TimeOfDay.html" title="Google::Type::TimeOfDay (class)">TimeOfDay</a></span> and <code>google.protobuf.Timestamp</code>.</p>
 
 
   </div>
@@ -212,7 +216,8 @@ of year, e.g. anniversary date. Related types are
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns Day of month. Must be from 1 to 31 and valid for the year and month, or 0
-if specifying a year/month where the day is not significant.</p>
+if specifying a year by itself or a year and month where the day is not
+significant.</p>
 
 
   </div>
@@ -231,7 +236,8 @@ if specifying a year/month where the day is not significant.</p>
       
         &mdash;
         <div class='inline'><p>Day of month. Must be from 1 to 31 and valid for the year and month, or 0
-if specifying a year/month where the day is not significant.</p>
+if specifying a year by itself or a year and month where the day is not
+significant.</p>
 </div>
       
     </li>
@@ -244,10 +250,10 @@ if specifying a year/month where the day is not significant.</p>
       <pre class="lines">
 
 
-37</pre>
+41</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/type/date.rb', line 37</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/type/date.rb', line 41</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Type::Date (class)">Date</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -268,7 +274,8 @@ if specifying a year/month where the day is not significant.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Month of year. Must be from 1 to 12.</p>
+    <p>Returns Month of year. Must be from 1 to 12, or 0 if specifying a year without a
+month and day.</p>
 
 
   </div>
@@ -286,7 +293,8 @@ if specifying a year/month where the day is not significant.</p>
       
       
         &mdash;
-        <div class='inline'><p>Month of year. Must be from 1 to 12.</p>
+        <div class='inline'><p>Month of year. Must be from 1 to 12, or 0 if specifying a year without a
+month and day.</p>
 </div>
       
     </li>
@@ -299,10 +307,10 @@ if specifying a year/month where the day is not significant.</p>
       <pre class="lines">
 
 
-37</pre>
+41</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/type/date.rb', line 37</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/type/date.rb', line 41</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Type::Date (class)">Date</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -356,10 +364,10 @@ a year.</p>
       <pre class="lines">
 
 
-37</pre>
+41</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/type/date.rb', line 37</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/type/date.rb', line 41</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Type::Date (class)">Date</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
