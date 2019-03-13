@@ -1,5 +1,10 @@
 # Release History
 
+### 0.58.0 / 2019-03-13
+
+* Add Cloud Talent
+* Update Cloud KMS to 1.0
+
 ### 0.57.0 / 2018-12-14
 
 * Add Cloud Asset
