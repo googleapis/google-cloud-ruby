@@ -93,7 +93,7 @@ module Google
         # * As such, Redis instances are resources of the form:
         #   `/projects/{project_id}/locations/{location_id}/instances/{instance_id}`
         #
-        # Note that location_id must be refering to a GCP `region`; for example:
+        # Note that location_id must be referring to a GCP `region`; for example:
         # * `projects/redpepper-1290/locations/us-central1/instances/my-redis`
         #
         # @param credentials [Google::Auth::Credentials, String, Hash, GRPC::Core::Channel, GRPC::Core::ChannelCredentials, Proc]
