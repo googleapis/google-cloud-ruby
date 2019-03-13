@@ -31,7 +31,7 @@ module Google
     # @!attribute [rw] done
     #   @return [true, false]
     #     If the value is `false`, it means the operation is still in progress.
-    #     If true, the operation is completed, and either `error` or `response` is
+    #     If `true`, the operation is completed, and either `error` or `response` is
     #     available.
     # @!attribute [rw] error
     #   @return [Google::Rpc::Status]
