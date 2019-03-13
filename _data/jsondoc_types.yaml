@@ -663,6 +663,7 @@ publishresponse: PublishResponse
 publishresult: PublishResult
 publishsummarytocscc: PublishSummaryToCscc
 publishtopubsub: PublishToPubSub
+pubsub: PubSub
 pubsubmessage: PubsubMessage
 pullmessage: PullMessage
 pullrequest: PullRequest
