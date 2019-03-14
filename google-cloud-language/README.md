@@ -1,9 +1,9 @@
-# Ruby Client for Google Cloud Natural Language API ([Alpha](https://github.com/googleapis/google-cloud-ruby#versioning))
+# Ruby Client for Cloud Natural Language API ([Alpha](https://github.com/googleapis/google-cloud-ruby#versioning))
 
-[Google Cloud Natural Language API][Product Documentation]:
-Google Cloud Natural Language API provides natural language understanding
-technologies to developers. Examples include sentiment analysis, entity
-recognition, and text annotations.
+[Cloud Natural Language API][Product Documentation]:
+Provides natural language understanding technologies, such as sentiment
+analysis, entity recognition, entity sentiment analysis, and other text
+annotations, to developers.
 - [Client Library Documentation][]
 - [Product Documentation][]
 
@@ -13,7 +13,7 @@ steps:
 
 1. [Select or create a Cloud Platform project.](https://console.cloud.google.com/project)
 2. [Enable billing for your project.](https://cloud.google.com/billing/docs/how-to/modify-project#enable_billing_for_a_project)
-3. [Enable the Google Cloud Natural Language API.](https://console.cloud.google.com/apis/library/language.googleapis.com)
+3. [Enable the Cloud Natural Language API.](https://console.cloud.google.com/apis/library/language.googleapis.com)
 4. [Setup Authentication.](https://googleapis.github.io/google-cloud-ruby/#/docs/google-cloud/master/guides/authentication)
 
 ### Installation
@@ -21,22 +21,10 @@ steps:
 $ gem install google-cloud-language
 ```
 
-### Preview
-#### LanguageServiceClient
-```rb
-require "google/cloud/language"
-
-language_service_client = Google::Cloud::Language.new
-content = "Hello, world!"
-type = :PLAIN_TEXT
-document = { content: content, type: type }
-response = language_service_client.analyze_sentiment(document)
-```
-
 ### Next Steps
-- Read the [Client Library Documentation][] for Google Cloud Natural Language API
+- Read the [Client Library Documentation][] for Cloud Natural Language API
   to see other available methods on the client.
-- Read the [Google Cloud Natural Language API Product documentation][Product Documentation]
+- Read the [Cloud Natural Language API Product documentation][Product Documentation]
   to learn more about the product and see How-to Guides.
 - View this [repository's main README](https://github.com/googleapis/google-cloud-ruby/blob/master/README.md)
   to see the full list of Cloud APIs that we cover.

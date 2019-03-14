@@ -40,6 +40,11 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     value :WORK_OF_ART, 5
     value :CONSUMER_GOOD, 6
     value :OTHER, 7
+    value :PHONE_NUMBER, 9
+    value :ADDRESS, 10
+    value :DATE, 11
+    value :NUMBER, 12
+    value :PRICE, 13
   end
   add_message "google.cloud.language.v1.Token" do
     optional :text, :message, 1, "google.cloud.language.v1.TextSpan"

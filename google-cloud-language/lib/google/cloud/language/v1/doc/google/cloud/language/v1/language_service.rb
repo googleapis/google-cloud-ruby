@@ -127,6 +127,21 @@ module Google
 
             # Other types
             OTHER = 7
+
+            # Phone number
+            PHONE_NUMBER = 9
+
+            # Address
+            ADDRESS = 10
+
+            # Date
+            DATE = 11
+
+            # Number
+            NUMBER = 12
+
+            # Price
+            PRICE = 13
           end
         end
 
@@ -798,7 +813,8 @@ module Google
         # Represents a category returned from the text classifier.
         # @!attribute [rw] name
         #   @return [String]
-        #     The name of the category representing the document.
+        #     The name of the category representing the document, from the [predefined
+        #     taxonomy](/natural-language/docs/categories).
         # @!attribute [rw] confidence
         #   @return [Float]
         #     The classifier's confidence of the category. Number represents how certain
@@ -985,7 +1001,7 @@ module Google
           UTF8 = 1
 
           # Encoding-dependent information (such as `begin_offset`) is calculated based
-          # on the UTF-16 encoding of the input. Java and Javascript are examples of
+          # on the UTF-16 encoding of the input. Java and JavaScript are examples of
           # languages that use this encoding natively.
           UTF16 = 2
 
