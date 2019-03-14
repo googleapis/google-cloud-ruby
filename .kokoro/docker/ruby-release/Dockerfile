@@ -17,7 +17,7 @@ RUN apt-get -y autoclean
 # Install Ruby
 RUN mkdir $HOME/.ruby
 RUN git clone https://github.com/rbenv/ruby-build.git $HOME/.ruby-build
-RUN $HOME/.ruby-build/bin/ruby-build 2.5.3 $HOME/.ruby
+RUN $HOME/.ruby-build/bin/ruby-build 2.5.4 $HOME/.ruby
 ENV PATH /root/.ruby/bin:$PATH
 ENV RUBY_CONFIGURE_OPTS --disable-install-doc
 RUN echo 'gem: --no-rdoc --no-ri' >> /.gemrc
