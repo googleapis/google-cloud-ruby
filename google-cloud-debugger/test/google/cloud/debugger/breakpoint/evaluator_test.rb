@@ -111,9 +111,14 @@ describe Google::Cloud::Debugger::Breakpoint::Evaluator do
     it "doesn't allow return operation in expression" do
       expression = "return"
       result = evaluator.readonly_eval_expression binding, expression
-      if RUBY_VERSION.to_f >= 2.4
+      if RUBY_VERSION.to_f >= 2.6
+        # Ruby 2.6 raises LocalJumpError
+        result.message.must_match "unexpected return"
+      elsif RUBY_VERSION.to_f >= 2.4
+        # Ruby 2.4 and 2.5 treat this as a mutation
         result.message.must_match evaluator::PROHIBITED_OPERATION_MSG
       else
+        # Ruby 2.3 fails compilation
         result.message.must_match evaluator::COMPILATION_FAIL_MSG
       end
     end

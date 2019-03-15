@@ -18,7 +18,8 @@ require "google/cloud/debugger/tracer/tracer_scenarios_test"
 ##
 # Helper method to test tracer
 def tracer_test_func
-  true
+  s = true
+  s
 end
 
 ##
@@ -44,7 +45,8 @@ end
 ##
 # Helper method to test tracer
 def tracer_test_func5
-  true
+  s = true
+  s
 end
 
 ##
