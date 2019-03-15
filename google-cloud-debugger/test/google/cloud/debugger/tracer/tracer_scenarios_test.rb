@@ -33,25 +33,25 @@ end
 describe Google::Cloud::Debugger::Tracer, :mock_debugger do
   let(:breakpoint_path) { File.expand_path("../tracer_test_helper.rb", __FILE__) }
   let(:breakpoint1) {
-    Google::Cloud::Debugger::Breakpoint.new "1", breakpoint_path, 21 }
+    Google::Cloud::Debugger::Breakpoint.new "1", breakpoint_path, 22 }
   let(:breakpoint2) {
-    Google::Cloud::Debugger::Breakpoint.new "2", breakpoint_path, 34 }
+    Google::Cloud::Debugger::Breakpoint.new "2", breakpoint_path, 35 }
   let(:breakpoint3) {
-    Google::Cloud::Debugger::Breakpoint.new "3", breakpoint_path, 47 }
+    Google::Cloud::Debugger::Breakpoint.new "3", breakpoint_path, 49 }
   let(:breakpoint4) {
-    Google::Cloud::Debugger::Breakpoint.new "4", breakpoint_path, 54 }
+    Google::Cloud::Debugger::Breakpoint.new "4", breakpoint_path, 56 }
   let(:breakpoint5) {
-    Google::Cloud::Debugger::Breakpoint.new "5", breakpoint_path, 62 }
+    Google::Cloud::Debugger::Breakpoint.new "5", breakpoint_path, 64 }
   let(:breakpoint6) {
-    Google::Cloud::Debugger::Breakpoint.new "6", breakpoint_path, 70 }
+    Google::Cloud::Debugger::Breakpoint.new "6", breakpoint_path, 72 }
   let(:breakpoint7) {
-    Google::Cloud::Debugger::Breakpoint.new "7", breakpoint_path, 72 }
+    Google::Cloud::Debugger::Breakpoint.new "7", breakpoint_path, 74 }
   let(:breakpoint8) {
-    Google::Cloud::Debugger::Breakpoint.new "8", breakpoint_path, 82 }
+    Google::Cloud::Debugger::Breakpoint.new "8", breakpoint_path, 84 }
   let(:breakpoint9) {
-    Google::Cloud::Debugger::Breakpoint.new "9", breakpoint_path, 89 }
+    Google::Cloud::Debugger::Breakpoint.new "9", breakpoint_path, 91 }
   let(:breakpoint10) {
-    Google::Cloud::Debugger::Breakpoint.new "10", breakpoint_path, 97 }
+    Google::Cloud::Debugger::Breakpoint.new "10", breakpoint_path, 99 }
 
   it "catches breakpoint from function call" do
     hit = false
