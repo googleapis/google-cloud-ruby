@@ -25,9 +25,9 @@ describe Google::Cloud::Debugger::Breakpoint, :mock_debugger do
   }
 
   let(:logpoint) {
-    breakpoint_hash[:action] = :LOG
-    breakpoint_hash[:log_message_format] = "Hello $0"
-    breakpoint_hash[:expressions] = ["World"]
+    breakpoint_hash["action"] = :LOG
+    breakpoint_hash["log_message_format"] = "Hello $0"
+    breakpoint_hash["expressions"] = ["World"]
 
     Google::Cloud::Debugger::Breakpoint.from_grpc breakpoint_grpc
   }
