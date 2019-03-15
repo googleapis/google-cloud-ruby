@@ -26,9 +26,8 @@ describe Google::Cloud::Debugger::Breakpoint::StatusMessage, :mock_debugger do
       }
     }
   end
-  let(:status_message_json) { status_message_hash.to_json }
   let(:status_message_grpc) {
-    Google::Devtools::Clouddebugger::V2::StatusMessage.decode_json status_message_json
+    Google::Devtools::Clouddebugger::V2::StatusMessage.new status_message_hash
   }
   let(:status_message) {
     Google::Cloud::Debugger::Breakpoint::StatusMessage.from_grpc status_message_grpc

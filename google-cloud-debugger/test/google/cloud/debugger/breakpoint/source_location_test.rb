@@ -17,10 +17,9 @@ require "helper"
 
 describe Google::Cloud::Debugger::Breakpoint::SourceLocation, :mock_debugger do
   let(:source_location_hash) { random_source_location_hash }
-  let(:source_location_json) { source_location_hash.to_json }
   let(:source_location_grpc) {
-    Google::Devtools::Clouddebugger::V2::SourceLocation.decode_json \
-      source_location_json
+    Google::Devtools::Clouddebugger::V2::SourceLocation.new \
+      source_location_hash
   }
   let(:source_loc) {
     Google::Cloud::Debugger::Breakpoint::SourceLocation.from_grpc \

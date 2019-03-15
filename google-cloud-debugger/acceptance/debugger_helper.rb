@@ -72,11 +72,14 @@ module Acceptance
           "path" => file_path,
           "line" => line
         },
-        "create_time" => Time.now.utc.strftime("%FT%T.%NZ"),
+        "create_time" => {
+          "seconds" => Time.now.to_i,
+          "nanos" => Time.now.nsec
+        },
         "expressions" => ["local_var"]
       }
 
-      Google::Devtools::Clouddebugger::V2::Breakpoint.decode_json breakpoint_hash.to_json
+      Google::Devtools::Clouddebugger::V2::Breakpoint.new breakpoint_hash
     end
 
     ##
@@ -92,12 +95,15 @@ module Acceptance
           "path" => file_path,
           "line" => line
         },
-        "create_time" => Time.now.utc.strftime("%FT%T.%NZ"),
+        "create_time" => {
+          "seconds" => Time.now.to_i,
+          "nanos" => Time.now.nsec
+        },
         "log_message_format" => "local_var is $0. #{token}",
         "expressions" => ["local_var"]
       }
 
-      Google::Devtools::Clouddebugger::V2::Breakpoint.decode_json breakpoint_hash.to_json
+      Google::Devtools::Clouddebugger::V2::Breakpoint.new breakpoint_hash
     end
 
     ##

@@ -17,18 +17,17 @@ require "helper"
 
 describe Google::Cloud::Debugger::Breakpoint, :mock_debugger do
   let(:breakpoint_hash) { random_breakpoint_hash }
-  let(:breakpoint_json) { breakpoint_hash.to_json }
   let(:breakpoint_grpc) {
-    Google::Devtools::Clouddebugger::V2::Breakpoint.decode_json breakpoint_json
+    Google::Devtools::Clouddebugger::V2::Breakpoint.new breakpoint_hash
   }
   let(:breakpoint) {
     Google::Cloud::Debugger::Breakpoint.from_grpc breakpoint_grpc
   }
 
   let(:logpoint) {
-    breakpoint_hash[:action] = :LOG
-    breakpoint_hash[:log_message_format] = "Hello $0"
-    breakpoint_hash[:expressions] = ["World"]
+    breakpoint_hash["action"] = :LOG
+    breakpoint_hash["log_message_format"] = "Hello $0"
+    breakpoint_hash["expressions"] = ["World"]
 
     Google::Cloud::Debugger::Breakpoint.from_grpc breakpoint_grpc
   }
