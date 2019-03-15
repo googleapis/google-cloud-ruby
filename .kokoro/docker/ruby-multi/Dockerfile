@@ -32,6 +32,6 @@ ENV RUBY_CONFIGURE_OPTS --disable-install-doc
 RUN echo 'gem: --no-rdoc --no-ri' >> /.gemrc
 RUN rbenv install 2.3.8 && rbenv global 2.3.8 && gem install bundler --version 1.17.3
 RUN rbenv install 2.4.5 && rbenv global 2.4.5 && gem install bundler --version 1.17.3
-RUN rbenv install 2.5.3 && rbenv global 2.5.3 && gem install bundler --version 1.17.3
+RUN rbenv install 2.5.4 && rbenv global 2.5.4 && gem install bundler --version 1.17.3
 
 RUN apt-get -y autoremove && apt-get -y autoclean
