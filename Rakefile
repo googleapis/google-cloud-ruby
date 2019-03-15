@@ -647,7 +647,7 @@ namespace :kokoro do
       1
     end
   end
-  
+
 end
 
 def run_command_with_timeout command, timeout
@@ -704,6 +704,7 @@ def updated_gems
 end
 
 def valid_gems
+  return ["google-cloud-pubsub"]
   gems.select { |gem|
     spec = Gem::Specification::load("#{gem}/#{gem}.gemspec")
     spec.required_ruby_version.satisfied_by? Gem::Version.new(RUBY_VERSION)
