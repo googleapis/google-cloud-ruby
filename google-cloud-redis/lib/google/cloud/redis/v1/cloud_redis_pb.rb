@@ -5,7 +5,6 @@
 require 'google/protobuf'
 
 require 'google/api/annotations_pb'
-require 'google/api/resource_pb'
 require 'google/longrunning/operations_pb'
 require 'google/protobuf/field_mask_pb'
 require 'google/protobuf/timestamp_pb'
