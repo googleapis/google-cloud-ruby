@@ -111,8 +111,14 @@ class MockDebugger < Minitest::Spec
       "id" => "abc123",
       "action" => :CAPTURE,
       "location" => random_source_location_hash,
-      "create_time" => "2014-10-02T15:01:23.045123456Z",
-      "final_time" => "2014-10-02T15:01:23.045123456Z",
+      "create_time" => {
+        "seconds" => 1412262083,
+        "nanos" => 45123456
+      },
+      "final_time" => {
+        "seconds" => 1412262083,
+        "nanos" => 45123456
+      },
       "stack_frames" => [random_stack_frame_hash],
       "condition" => "i == 2",
       "expressions" => ["[3]"],
