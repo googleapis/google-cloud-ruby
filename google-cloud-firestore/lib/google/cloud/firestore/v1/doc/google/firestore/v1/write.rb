@@ -26,7 +26,7 @@ module Google
       #     `projects/{project_id}/databases/{database_id}/documents/{document_path}`.
       # @!attribute [rw] transform
       #   @return [Google::Firestore::V1::DocumentTransform]
-      #     Applies a tranformation to a document.
+      #     Applies a transformation to a document.
       #     At most one `transform` per document is allowed in a given request.
       #     An `update` cannot follow a `transform` on the same document in a given
       #     request.
