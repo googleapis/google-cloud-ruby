@@ -92,6 +92,30 @@ namespace :ci do
   end
 end
 
+task :generate_partials do
+  require "google/cloud/tasks"
+  Google::Cloud::Tasks::AVAILABLE_VERSIONS.each do |version|
+    require "google/cloud/tasks/#{version}/cloud_tasks_client"
+    class_methods = Google::Cloud::Tasks.const_get(version.capitalize)::CloudTasksClient.methods false
+    class_methods.sort!
+    file_path = "./lib/google/cloud/tasks/#{version}/helpers.rb"
+    params = Hash[class_methods.collect { |method_name| [method_name, ""] }]
+    params.each do |method_name, _|
+      args = Google::Cloud::Tasks.const_get(version.capitalize)::CloudTasksClient.method(method_name).parameters
+      params[method_name] = args.map(&:last)
+    end
+    File.open file_path, "w" do |f|
+      config = ERB.new File.read("./synth/helpers.rb.erb")
+      f.write config.result(binding)
+    end
+    file_path = "./test/google/cloud/tasks/#{version}/helpers_test.rb"
+    File.open file_path, "w" do |f|
+      config = ERB.new File.read("./synth/helpers_test.rb.erb")
+      f.write config.result(binding)
+    end
+  end
+end
+
 task :default => :test
 
 def header str, token = "#"

@@ -14,6 +14,7 @@
 
 
 require "google/cloud/tasks/v2beta3/cloud_tasks_client"
+require "google/cloud/tasks/v2beta3/helpers"
 
 module Google
   module Cloud
