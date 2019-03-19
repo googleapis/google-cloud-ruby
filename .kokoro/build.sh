@@ -20,7 +20,7 @@ ruby --version
 # https://github.com/bundler/bundler/issues/6154
 export BUNDLE_GEMFILE=
 
-RUBY_VERSIONS=("2.3.8" "2.4.5" "2.5.4")
+versions=($RUBY_VERSIONS)
 
 # Capture failures
 EXIT_STATUS=0 # everything passed
@@ -29,16 +29,16 @@ function set_failed_status {
 }
 
 if [ "$PACKAGE" = "post" ]; then
-    rbenv global ${RUBY_VERSIONS[-1]}
+    rbenv global ${versions[2]}
     (bundle update && bundle exec rake kokoro:post) || set_failed_status
 elif [ "$JOB_TYPE" = "nightly" ]; then
-    for version in "${RUBY_VERSIONS[@]}"; do
+    for version in "${versions[@]}"; do
         rbenv global "$version"
         (bundle update && bundle exec rake kokoro:nightly) || set_failed_status
     done
 elif [ "$JOB_TYPE" = "continuous" ]; then
     git fetch --depth=10000
-    for version in "${RUBY_VERSIONS[@]}"; do
+    for version in "${versions[@]}"; do
         rbenv global "$version"
         (bundle update && bundle exec rake kokoro:continuous) || set_failed_status
     done
@@ -48,7 +48,7 @@ elif [ "$JOB_TYPE" = "release" ]; then
     python3 -m releasetool publish-reporter-script > /tmp/publisher-script; source /tmp/publisher-script
     (bundle update && bundle exec rake kokoro:release) || set_failed_status
 else
-    for version in "${RUBY_VERSIONS[@]}"; do
+    for version in "${versions[@]}"; do
         rbenv global "$version"
         (bundle update && bundle exec rake kokoro:presubmit) || set_failed_status
     done
