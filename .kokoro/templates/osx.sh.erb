@@ -45,11 +45,6 @@ if [ "$JOB_TYPE" = "presubmit" ]; then
     rvm use $version@global --default
     echo "using it"
     echo $PATH
-    gem uninstall --force --silent bundler bundle
-    echo "uninstalled bundler"
-    gem install bundler --version 1.17.3
-    echo "installed bundler"
-    echo $PATH
     which bundler
     which ruby
     gem update --system
@@ -65,11 +60,8 @@ else
         fi
         rvm use "$version"@global --default
         git fetch --depth=10000
-        gem install bundler --version 1.17.3
         gem update --system
-        gem regenerate_binstubs
         ruby --version
-        which bundle
         (bundle update && bundle exec rake kokoro:"$JOB_TYPE") || set_failed_status
     done
 fi
