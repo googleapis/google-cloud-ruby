@@ -310,16 +310,16 @@ module Google
           # @example
           #   require "google/cloud/monitoring"
           #
-          #   metric_service_client = Google::Cloud::Monitoring::Metric.new(version: :v3)
+          #   metric_client = Google::Cloud::Monitoring::Metric.new(version: :v3)
           #   formatted_name = Google::Cloud::Monitoring::V3::MetricServiceClient.project_path("[PROJECT]")
           #
           #   # Iterate over all results.
-          #   metric_service_client.list_monitored_resource_descriptors(formatted_name).each do |element|
+          #   metric_client.list_monitored_resource_descriptors(formatted_name).each do |element|
           #     # Process element.
           #   end
           #
           #   # Or iterate over results one page at a time.
-          #   metric_service_client.list_monitored_resource_descriptors(formatted_name).each_page do |page|
+          #   metric_client.list_monitored_resource_descriptors(formatted_name).each_page do |page|
           #     # Process each page at a time.
           #     page.each do |element|
           #       # Process element.
@@ -360,9 +360,9 @@ module Google
           # @example
           #   require "google/cloud/monitoring"
           #
-          #   metric_service_client = Google::Cloud::Monitoring::Metric.new(version: :v3)
+          #   metric_client = Google::Cloud::Monitoring::Metric.new(version: :v3)
           #   formatted_name = Google::Cloud::Monitoring::V3::MetricServiceClient.monitored_resource_descriptor_path("[PROJECT]", "[MONITORED_RESOURCE_DESCRIPTOR]")
-          #   response = metric_service_client.get_monitored_resource_descriptor(formatted_name)
+          #   response = metric_client.get_monitored_resource_descriptor(formatted_name)
 
           def get_monitored_resource_descriptor \
               name,
@@ -411,16 +411,16 @@ module Google
           # @example
           #   require "google/cloud/monitoring"
           #
-          #   metric_service_client = Google::Cloud::Monitoring::Metric.new(version: :v3)
+          #   metric_client = Google::Cloud::Monitoring::Metric.new(version: :v3)
           #   formatted_name = Google::Cloud::Monitoring::V3::MetricServiceClient.project_path("[PROJECT]")
           #
           #   # Iterate over all results.
-          #   metric_service_client.list_metric_descriptors(formatted_name).each do |element|
+          #   metric_client.list_metric_descriptors(formatted_name).each do |element|
           #     # Process element.
           #   end
           #
           #   # Or iterate over results one page at a time.
-          #   metric_service_client.list_metric_descriptors(formatted_name).each_page do |page|
+          #   metric_client.list_metric_descriptors(formatted_name).each_page do |page|
           #     # Process each page at a time.
           #     page.each do |element|
           #       # Process element.
@@ -461,9 +461,9 @@ module Google
           # @example
           #   require "google/cloud/monitoring"
           #
-          #   metric_service_client = Google::Cloud::Monitoring::Metric.new(version: :v3)
+          #   metric_client = Google::Cloud::Monitoring::Metric.new(version: :v3)
           #   formatted_name = Google::Cloud::Monitoring::V3::MetricServiceClient.metric_descriptor_path("[PROJECT]", "[METRIC_DESCRIPTOR]")
-          #   response = metric_service_client.get_metric_descriptor(formatted_name)
+          #   response = metric_client.get_metric_descriptor(formatted_name)
 
           def get_metric_descriptor \
               name,
@@ -499,12 +499,12 @@ module Google
           # @example
           #   require "google/cloud/monitoring"
           #
-          #   metric_service_client = Google::Cloud::Monitoring::Metric.new(version: :v3)
+          #   metric_client = Google::Cloud::Monitoring::Metric.new(version: :v3)
           #   formatted_name = Google::Cloud::Monitoring::V3::MetricServiceClient.project_path("[PROJECT]")
           #
           #   # TODO: Initialize `metric_descriptor`:
           #   metric_descriptor = {}
-          #   response = metric_service_client.create_metric_descriptor(formatted_name, metric_descriptor)
+          #   response = metric_client.create_metric_descriptor(formatted_name, metric_descriptor)
 
           def create_metric_descriptor \
               name,
@@ -537,9 +537,9 @@ module Google
           # @example
           #   require "google/cloud/monitoring"
           #
-          #   metric_service_client = Google::Cloud::Monitoring::Metric.new(version: :v3)
+          #   metric_client = Google::Cloud::Monitoring::Metric.new(version: :v3)
           #   formatted_name = Google::Cloud::Monitoring::V3::MetricServiceClient.metric_descriptor_path("[PROJECT]", "[METRIC_DESCRIPTOR]")
-          #   metric_service_client.delete_metric_descriptor(formatted_name)
+          #   metric_client.delete_metric_descriptor(formatted_name)
 
           def delete_metric_descriptor \
               name,
@@ -605,7 +605,7 @@ module Google
           # @example
           #   require "google/cloud/monitoring"
           #
-          #   metric_service_client = Google::Cloud::Monitoring::Metric.new(version: :v3)
+          #   metric_client = Google::Cloud::Monitoring::Metric.new(version: :v3)
           #   formatted_name = Google::Cloud::Monitoring::V3::MetricServiceClient.project_path("[PROJECT]")
           #
           #   # TODO: Initialize `filter`:
@@ -618,12 +618,12 @@ module Google
           #   view = :FULL
           #
           #   # Iterate over all results.
-          #   metric_service_client.list_time_series(formatted_name, filter, interval, view).each do |element|
+          #   metric_client.list_time_series(formatted_name, filter, interval, view).each do |element|
           #     # Process element.
           #   end
           #
           #   # Or iterate over results one page at a time.
-          #   metric_service_client.list_time_series(formatted_name, filter, interval, view).each_page do |page|
+          #   metric_client.list_time_series(formatted_name, filter, interval, view).each_page do |page|
           #     # Process each page at a time.
           #     page.each do |element|
           #       # Process element.
@@ -679,12 +679,12 @@ module Google
           # @example
           #   require "google/cloud/monitoring"
           #
-          #   metric_service_client = Google::Cloud::Monitoring::Metric.new(version: :v3)
+          #   metric_client = Google::Cloud::Monitoring::Metric.new(version: :v3)
           #   formatted_name = Google::Cloud::Monitoring::V3::MetricServiceClient.project_path("[PROJECT]")
           #
           #   # TODO: Initialize `time_series`:
           #   time_series = []
-          #   metric_service_client.create_time_series(formatted_name, time_series)
+          #   metric_client.create_time_series(formatted_name, time_series)
 
           def create_time_series \
               name,

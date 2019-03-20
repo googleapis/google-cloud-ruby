@@ -277,16 +277,16 @@ module Google
           # @example
           #   require "google/cloud/monitoring"
           #
-          #   uptime_check_service_client = Google::Cloud::Monitoring::UptimeCheck.new(version: :v3)
+          #   uptime_check_client = Google::Cloud::Monitoring::UptimeCheck.new(version: :v3)
           #   formatted_parent = Google::Cloud::Monitoring::V3::UptimeCheckServiceClient.project_path("[PROJECT]")
           #
           #   # Iterate over all results.
-          #   uptime_check_service_client.list_uptime_check_configs(formatted_parent).each do |element|
+          #   uptime_check_client.list_uptime_check_configs(formatted_parent).each do |element|
           #     # Process element.
           #   end
           #
           #   # Or iterate over results one page at a time.
-          #   uptime_check_service_client.list_uptime_check_configs(formatted_parent).each_page do |page|
+          #   uptime_check_client.list_uptime_check_configs(formatted_parent).each_page do |page|
           #     # Process each page at a time.
           #     page.each do |element|
           #       # Process element.
@@ -322,9 +322,9 @@ module Google
           # @example
           #   require "google/cloud/monitoring"
           #
-          #   uptime_check_service_client = Google::Cloud::Monitoring::UptimeCheck.new(version: :v3)
+          #   uptime_check_client = Google::Cloud::Monitoring::UptimeCheck.new(version: :v3)
           #   formatted_name = Google::Cloud::Monitoring::V3::UptimeCheckServiceClient.uptime_check_config_path("[PROJECT]", "[UPTIME_CHECK_CONFIG]")
-          #   response = uptime_check_service_client.get_uptime_check_config(formatted_name)
+          #   response = uptime_check_client.get_uptime_check_config(formatted_name)
 
           def get_uptime_check_config \
               name,
@@ -357,12 +357,12 @@ module Google
           # @example
           #   require "google/cloud/monitoring"
           #
-          #   uptime_check_service_client = Google::Cloud::Monitoring::UptimeCheck.new(version: :v3)
+          #   uptime_check_client = Google::Cloud::Monitoring::UptimeCheck.new(version: :v3)
           #   formatted_parent = Google::Cloud::Monitoring::V3::UptimeCheckServiceClient.project_path("[PROJECT]")
           #
           #   # TODO: Initialize `uptime_check_config`:
           #   uptime_check_config = {}
-          #   response = uptime_check_service_client.create_uptime_check_config(formatted_parent, uptime_check_config)
+          #   response = uptime_check_client.create_uptime_check_config(formatted_parent, uptime_check_config)
 
           def create_uptime_check_config \
               parent,
@@ -414,11 +414,11 @@ module Google
           # @example
           #   require "google/cloud/monitoring"
           #
-          #   uptime_check_service_client = Google::Cloud::Monitoring::UptimeCheck.new(version: :v3)
+          #   uptime_check_client = Google::Cloud::Monitoring::UptimeCheck.new(version: :v3)
           #
           #   # TODO: Initialize `uptime_check_config`:
           #   uptime_check_config = {}
-          #   response = uptime_check_service_client.update_uptime_check_config(uptime_check_config)
+          #   response = uptime_check_client.update_uptime_check_config(uptime_check_config)
 
           def update_uptime_check_config \
               uptime_check_config,
@@ -450,9 +450,9 @@ module Google
           # @example
           #   require "google/cloud/monitoring"
           #
-          #   uptime_check_service_client = Google::Cloud::Monitoring::UptimeCheck.new(version: :v3)
+          #   uptime_check_client = Google::Cloud::Monitoring::UptimeCheck.new(version: :v3)
           #   formatted_name = Google::Cloud::Monitoring::V3::UptimeCheckServiceClient.uptime_check_config_path("[PROJECT]", "[UPTIME_CHECK_CONFIG]")
-          #   uptime_check_service_client.delete_uptime_check_config(formatted_name)
+          #   uptime_check_client.delete_uptime_check_config(formatted_name)
 
           def delete_uptime_check_config \
               name,
@@ -489,15 +489,15 @@ module Google
           # @example
           #   require "google/cloud/monitoring"
           #
-          #   uptime_check_service_client = Google::Cloud::Monitoring::UptimeCheck.new(version: :v3)
+          #   uptime_check_client = Google::Cloud::Monitoring::UptimeCheck.new(version: :v3)
           #
           #   # Iterate over all results.
-          #   uptime_check_service_client.list_uptime_check_ips.each do |element|
+          #   uptime_check_client.list_uptime_check_ips.each do |element|
           #     # Process element.
           #   end
           #
           #   # Or iterate over results one page at a time.
-          #   uptime_check_service_client.list_uptime_check_ips.each_page do |page|
+          #   uptime_check_client.list_uptime_check_ips.each_page do |page|
           #     # Process each page at a time.
           #     page.each do |element|
           #       # Process element.

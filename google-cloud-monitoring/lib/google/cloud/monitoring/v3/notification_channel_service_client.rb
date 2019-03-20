@@ -300,16 +300,16 @@ module Google
           # @example
           #   require "google/cloud/monitoring"
           #
-          #   notification_channel_service_client = Google::Cloud::Monitoring::NotificationChannel.new(version: :v3)
+          #   notification_channel_client = Google::Cloud::Monitoring::NotificationChannel.new(version: :v3)
           #   formatted_name = Google::Cloud::Monitoring::V3::NotificationChannelServiceClient.project_path("[PROJECT]")
           #
           #   # Iterate over all results.
-          #   notification_channel_service_client.list_notification_channel_descriptors(formatted_name).each do |element|
+          #   notification_channel_client.list_notification_channel_descriptors(formatted_name).each do |element|
           #     # Process element.
           #   end
           #
           #   # Or iterate over results one page at a time.
-          #   notification_channel_service_client.list_notification_channel_descriptors(formatted_name).each_page do |page|
+          #   notification_channel_client.list_notification_channel_descriptors(formatted_name).each_page do |page|
           #     # Process each page at a time.
           #     page.each do |element|
           #       # Process element.
@@ -346,9 +346,9 @@ module Google
           # @example
           #   require "google/cloud/monitoring"
           #
-          #   notification_channel_service_client = Google::Cloud::Monitoring::NotificationChannel.new(version: :v3)
+          #   notification_channel_client = Google::Cloud::Monitoring::NotificationChannel.new(version: :v3)
           #   formatted_name = Google::Cloud::Monitoring::V3::NotificationChannelServiceClient.notification_channel_descriptor_path("[PROJECT]", "[CHANNEL_DESCRIPTOR]")
-          #   response = notification_channel_service_client.get_notification_channel_descriptor(formatted_name)
+          #   response = notification_channel_client.get_notification_channel_descriptor(formatted_name)
 
           def get_notification_channel_descriptor \
               name,
@@ -405,16 +405,16 @@ module Google
           # @example
           #   require "google/cloud/monitoring"
           #
-          #   notification_channel_service_client = Google::Cloud::Monitoring::NotificationChannel.new(version: :v3)
+          #   notification_channel_client = Google::Cloud::Monitoring::NotificationChannel.new(version: :v3)
           #   formatted_name = Google::Cloud::Monitoring::V3::NotificationChannelServiceClient.project_path("[PROJECT]")
           #
           #   # Iterate over all results.
-          #   notification_channel_service_client.list_notification_channels(formatted_name).each do |element|
+          #   notification_channel_client.list_notification_channels(formatted_name).each do |element|
           #     # Process element.
           #   end
           #
           #   # Or iterate over results one page at a time.
-          #   notification_channel_service_client.list_notification_channels(formatted_name).each_page do |page|
+          #   notification_channel_client.list_notification_channels(formatted_name).each_page do |page|
           #     # Process each page at a time.
           #     page.each do |element|
           #       # Process element.
@@ -458,9 +458,9 @@ module Google
           # @example
           #   require "google/cloud/monitoring"
           #
-          #   notification_channel_service_client = Google::Cloud::Monitoring::NotificationChannel.new(version: :v3)
+          #   notification_channel_client = Google::Cloud::Monitoring::NotificationChannel.new(version: :v3)
           #   formatted_name = Google::Cloud::Monitoring::V3::NotificationChannelServiceClient.notification_channel_path("[PROJECT]", "[NOTIFICATION_CHANNEL]")
-          #   response = notification_channel_service_client.get_notification_channel(formatted_name)
+          #   response = notification_channel_client.get_notification_channel(formatted_name)
 
           def get_notification_channel \
               name,
@@ -500,12 +500,12 @@ module Google
           # @example
           #   require "google/cloud/monitoring"
           #
-          #   notification_channel_service_client = Google::Cloud::Monitoring::NotificationChannel.new(version: :v3)
+          #   notification_channel_client = Google::Cloud::Monitoring::NotificationChannel.new(version: :v3)
           #   formatted_name = Google::Cloud::Monitoring::V3::NotificationChannelServiceClient.project_path("[PROJECT]")
           #
           #   # TODO: Initialize `notification_channel`:
           #   notification_channel = {}
-          #   response = notification_channel_service_client.create_notification_channel(formatted_name, notification_channel)
+          #   response = notification_channel_client.create_notification_channel(formatted_name, notification_channel)
 
           def create_notification_channel \
               name,
@@ -545,11 +545,11 @@ module Google
           # @example
           #   require "google/cloud/monitoring"
           #
-          #   notification_channel_service_client = Google::Cloud::Monitoring::NotificationChannel.new(version: :v3)
+          #   notification_channel_client = Google::Cloud::Monitoring::NotificationChannel.new(version: :v3)
           #
           #   # TODO: Initialize `notification_channel`:
           #   notification_channel = {}
-          #   response = notification_channel_service_client.update_notification_channel(notification_channel)
+          #   response = notification_channel_client.update_notification_channel(notification_channel)
 
           def update_notification_channel \
               notification_channel,
@@ -584,9 +584,9 @@ module Google
           # @example
           #   require "google/cloud/monitoring"
           #
-          #   notification_channel_service_client = Google::Cloud::Monitoring::NotificationChannel.new(version: :v3)
+          #   notification_channel_client = Google::Cloud::Monitoring::NotificationChannel.new(version: :v3)
           #   formatted_name = Google::Cloud::Monitoring::V3::NotificationChannelServiceClient.notification_channel_path("[PROJECT]", "[NOTIFICATION_CHANNEL]")
-          #   notification_channel_service_client.delete_notification_channel(formatted_name)
+          #   notification_channel_client.delete_notification_channel(formatted_name)
 
           def delete_notification_channel \
               name,

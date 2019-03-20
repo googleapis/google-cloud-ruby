@@ -295,16 +295,16 @@ module Google
           # @example
           #   require "google/cloud/monitoring"
           #
-          #   group_service_client = Google::Cloud::Monitoring::Group.new(version: :v3)
+          #   group_client = Google::Cloud::Monitoring::Group.new(version: :v3)
           #   formatted_name = Google::Cloud::Monitoring::V3::GroupServiceClient.project_path("[PROJECT]")
           #
           #   # Iterate over all results.
-          #   group_service_client.list_groups(formatted_name).each do |element|
+          #   group_client.list_groups(formatted_name).each do |element|
           #     # Process element.
           #   end
           #
           #   # Or iterate over results one page at a time.
-          #   group_service_client.list_groups(formatted_name).each_page do |page|
+          #   group_client.list_groups(formatted_name).each_page do |page|
           #     # Process each page at a time.
           #     page.each do |element|
           #       # Process element.
@@ -346,9 +346,9 @@ module Google
           # @example
           #   require "google/cloud/monitoring"
           #
-          #   group_service_client = Google::Cloud::Monitoring::Group.new(version: :v3)
+          #   group_client = Google::Cloud::Monitoring::Group.new(version: :v3)
           #   formatted_name = Google::Cloud::Monitoring::V3::GroupServiceClient.group_path("[PROJECT]", "[GROUP]")
-          #   response = group_service_client.get_group(formatted_name)
+          #   response = group_client.get_group(formatted_name)
 
           def get_group \
               name,
@@ -384,12 +384,12 @@ module Google
           # @example
           #   require "google/cloud/monitoring"
           #
-          #   group_service_client = Google::Cloud::Monitoring::Group.new(version: :v3)
+          #   group_client = Google::Cloud::Monitoring::Group.new(version: :v3)
           #   formatted_name = Google::Cloud::Monitoring::V3::GroupServiceClient.project_path("[PROJECT]")
           #
           #   # TODO: Initialize `group`:
           #   group = {}
-          #   response = group_service_client.create_group(formatted_name, group)
+          #   response = group_client.create_group(formatted_name, group)
 
           def create_group \
               name,
@@ -427,11 +427,11 @@ module Google
           # @example
           #   require "google/cloud/monitoring"
           #
-          #   group_service_client = Google::Cloud::Monitoring::Group.new(version: :v3)
+          #   group_client = Google::Cloud::Monitoring::Group.new(version: :v3)
           #
           #   # TODO: Initialize `group`:
           #   group = {}
-          #   response = group_service_client.update_group(group)
+          #   response = group_client.update_group(group)
 
           def update_group \
               group,
@@ -461,9 +461,9 @@ module Google
           # @example
           #   require "google/cloud/monitoring"
           #
-          #   group_service_client = Google::Cloud::Monitoring::Group.new(version: :v3)
+          #   group_client = Google::Cloud::Monitoring::Group.new(version: :v3)
           #   formatted_name = Google::Cloud::Monitoring::V3::GroupServiceClient.group_path("[PROJECT]", "[GROUP]")
-          #   group_service_client.delete_group(formatted_name)
+          #   group_client.delete_group(formatted_name)
 
           def delete_group \
               name,
@@ -518,16 +518,16 @@ module Google
           # @example
           #   require "google/cloud/monitoring"
           #
-          #   group_service_client = Google::Cloud::Monitoring::Group.new(version: :v3)
+          #   group_client = Google::Cloud::Monitoring::Group.new(version: :v3)
           #   formatted_name = Google::Cloud::Monitoring::V3::GroupServiceClient.group_path("[PROJECT]", "[GROUP]")
           #
           #   # Iterate over all results.
-          #   group_service_client.list_group_members(formatted_name).each do |element|
+          #   group_client.list_group_members(formatted_name).each do |element|
           #     # Process element.
           #   end
           #
           #   # Or iterate over results one page at a time.
-          #   group_service_client.list_group_members(formatted_name).each_page do |page|
+          #   group_client.list_group_members(formatted_name).each_page do |page|
           #     # Process each page at a time.
           #     page.each do |element|
           #       # Process element.
