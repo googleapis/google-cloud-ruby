@@ -1,5 +1,9 @@
 # Release History
 
+### 0.5.0 / 2019-03-20
+
+* add instance aliases for class methods (#3034)
+
 ### 0.4.0 / 2019-03-12
 
 * Add HTTP Request to V2beta3
