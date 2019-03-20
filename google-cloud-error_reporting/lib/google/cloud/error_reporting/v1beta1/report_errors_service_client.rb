@@ -215,12 +215,12 @@ module Google
           # @example
           #   require "google/cloud/error_reporting"
           #
-          #   report_errors_service_client = Google::Cloud::ErrorReporting::ReportErrors.new(version: :v1beta1)
+          #   report_errors_client = Google::Cloud::ErrorReporting::ReportErrors.new(version: :v1beta1)
           #   formatted_project_name = Google::Cloud::ErrorReporting::V1beta1::ReportErrorsServiceClient.project_path("[PROJECT]")
           #
           #   # TODO: Initialize `event`:
           #   event = {}
-          #   response = report_errors_service_client.report_error_event(formatted_project_name, event)
+          #   response = report_errors_client.report_error_event(formatted_project_name, event)
 
           def report_error_event \
               project_name,

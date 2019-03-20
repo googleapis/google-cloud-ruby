@@ -273,19 +273,19 @@ module Google
           # @example
           #   require "google/cloud/error_reporting"
           #
-          #   error_stats_service_client = Google::Cloud::ErrorReporting::ErrorStats.new(version: :v1beta1)
+          #   error_stats_client = Google::Cloud::ErrorReporting::ErrorStats.new(version: :v1beta1)
           #   formatted_project_name = Google::Cloud::ErrorReporting::V1beta1::ErrorStatsServiceClient.project_path("[PROJECT]")
           #
           #   # TODO: Initialize `time_range`:
           #   time_range = {}
           #
           #   # Iterate over all results.
-          #   error_stats_service_client.list_group_stats(formatted_project_name, time_range).each do |element|
+          #   error_stats_client.list_group_stats(formatted_project_name, time_range).each do |element|
           #     # Process element.
           #   end
           #
           #   # Or iterate over results one page at a time.
-          #   error_stats_service_client.list_group_stats(formatted_project_name, time_range).each_page do |page|
+          #   error_stats_client.list_group_stats(formatted_project_name, time_range).each_page do |page|
           #     # Process each page at a time.
           #     page.each do |element|
           #       # Process element.
@@ -362,19 +362,19 @@ module Google
           # @example
           #   require "google/cloud/error_reporting"
           #
-          #   error_stats_service_client = Google::Cloud::ErrorReporting::ErrorStats.new(version: :v1beta1)
+          #   error_stats_client = Google::Cloud::ErrorReporting::ErrorStats.new(version: :v1beta1)
           #   formatted_project_name = Google::Cloud::ErrorReporting::V1beta1::ErrorStatsServiceClient.project_path("[PROJECT]")
           #
           #   # TODO: Initialize `group_id`:
           #   group_id = ''
           #
           #   # Iterate over all results.
-          #   error_stats_service_client.list_events(formatted_project_name, group_id).each do |element|
+          #   error_stats_client.list_events(formatted_project_name, group_id).each do |element|
           #     # Process element.
           #   end
           #
           #   # Or iterate over results one page at a time.
-          #   error_stats_service_client.list_events(formatted_project_name, group_id).each_page do |page|
+          #   error_stats_client.list_events(formatted_project_name, group_id).each_page do |page|
           #     # Process each page at a time.
           #     page.each do |element|
           #       # Process element.
@@ -419,9 +419,9 @@ module Google
           # @example
           #   require "google/cloud/error_reporting"
           #
-          #   error_stats_service_client = Google::Cloud::ErrorReporting::ErrorStats.new(version: :v1beta1)
+          #   error_stats_client = Google::Cloud::ErrorReporting::ErrorStats.new(version: :v1beta1)
           #   formatted_project_name = Google::Cloud::ErrorReporting::V1beta1::ErrorStatsServiceClient.project_path("[PROJECT]")
-          #   response = error_stats_service_client.delete_events(formatted_project_name)
+          #   response = error_stats_client.delete_events(formatted_project_name)
 
           def delete_events \
               project_name,

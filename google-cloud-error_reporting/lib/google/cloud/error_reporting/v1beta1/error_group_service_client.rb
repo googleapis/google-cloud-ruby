@@ -213,9 +213,9 @@ module Google
           # @example
           #   require "google/cloud/error_reporting"
           #
-          #   error_group_service_client = Google::Cloud::ErrorReporting::ErrorGroup.new(version: :v1beta1)
+          #   error_group_client = Google::Cloud::ErrorReporting::ErrorGroup.new(version: :v1beta1)
           #   formatted_group_name = Google::Cloud::ErrorReporting::V1beta1::ErrorGroupServiceClient.group_path("[PROJECT]", "[GROUP]")
-          #   response = error_group_service_client.get_group(formatted_group_name)
+          #   response = error_group_client.get_group(formatted_group_name)
 
           def get_group \
               group_name,
@@ -246,11 +246,11 @@ module Google
           # @example
           #   require "google/cloud/error_reporting"
           #
-          #   error_group_service_client = Google::Cloud::ErrorReporting::ErrorGroup.new(version: :v1beta1)
+          #   error_group_client = Google::Cloud::ErrorReporting::ErrorGroup.new(version: :v1beta1)
           #
           #   # TODO: Initialize `group`:
           #   group = {}
-          #   response = error_group_service_client.update_group(group)
+          #   response = error_group_client.update_group(group)
 
           def update_group \
               group,
