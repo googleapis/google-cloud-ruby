@@ -2,7 +2,11 @@
 
 ### 0.5.0 / 2019-03-20
 
-* add instance aliases for class methods
+* Alias the following CloudTasksClient class methods to instance methods.
+  * location_path
+  * project_path
+  * queue_path
+  * task_path
 
 ### 0.4.0 / 2019-03-12
 
