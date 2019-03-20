@@ -258,12 +258,12 @@ module Google
           # @example
           #   require "google/cloud/talent"
           #
-          #   tenant_service_client = Google::Cloud::Talent::TenantService.new(version: :v4beta1)
+          #   tenant_client = Google::Cloud::Talent::TenantService.new(version: :v4beta1)
           #   formatted_parent = Google::Cloud::Talent::V4beta1::TenantServiceClient.project_path("[PROJECT]")
           #
           #   # TODO: Initialize `tenant`:
           #   tenant = {}
-          #   response = tenant_service_client.create_tenant(formatted_parent, tenant)
+          #   response = tenant_client.create_tenant(formatted_parent, tenant)
 
           def create_tenant \
               parent,
@@ -298,9 +298,9 @@ module Google
           # @example
           #   require "google/cloud/talent"
           #
-          #   tenant_service_client = Google::Cloud::Talent::TenantService.new(version: :v4beta1)
+          #   tenant_client = Google::Cloud::Talent::TenantService.new(version: :v4beta1)
           #   formatted_name = Google::Cloud::Talent::V4beta1::TenantServiceClient.tenant_path("[PROJECT]", "[TENANT]")
-          #   response = tenant_service_client.get_tenant(formatted_name)
+          #   response = tenant_client.get_tenant(formatted_name)
 
           def get_tenant \
               name,
@@ -347,11 +347,11 @@ module Google
           # @example
           #   require "google/cloud/talent"
           #
-          #   tenant_service_client = Google::Cloud::Talent::TenantService.new(version: :v4beta1)
+          #   tenant_client = Google::Cloud::Talent::TenantService.new(version: :v4beta1)
           #
           #   # TODO: Initialize `tenant`:
           #   tenant = {}
-          #   response = tenant_service_client.update_tenant(tenant)
+          #   response = tenant_client.update_tenant(tenant)
 
           def update_tenant \
               tenant,
@@ -385,9 +385,9 @@ module Google
           # @example
           #   require "google/cloud/talent"
           #
-          #   tenant_service_client = Google::Cloud::Talent::TenantService.new(version: :v4beta1)
+          #   tenant_client = Google::Cloud::Talent::TenantService.new(version: :v4beta1)
           #   formatted_name = Google::Cloud::Talent::V4beta1::TenantServiceClient.tenant_path("[PROJECT]", "[TENANT]")
-          #   tenant_service_client.delete_tenant(formatted_name)
+          #   tenant_client.delete_tenant(formatted_name)
 
           def delete_tenant \
               name,
@@ -431,16 +431,16 @@ module Google
           # @example
           #   require "google/cloud/talent"
           #
-          #   tenant_service_client = Google::Cloud::Talent::TenantService.new(version: :v4beta1)
+          #   tenant_client = Google::Cloud::Talent::TenantService.new(version: :v4beta1)
           #   formatted_parent = Google::Cloud::Talent::V4beta1::TenantServiceClient.project_path("[PROJECT]")
           #
           #   # Iterate over all results.
-          #   tenant_service_client.list_tenants(formatted_parent).each do |element|
+          #   tenant_client.list_tenants(formatted_parent).each do |element|
           #     # Process element.
           #   end
           #
           #   # Or iterate over results one page at a time.
-          #   tenant_service_client.list_tenants(formatted_parent).each_page do |page|
+          #   tenant_client.list_tenants(formatted_parent).each_page do |page|
           #     # Process each page at a time.
           #     page.each do |element|
           #       # Process element.

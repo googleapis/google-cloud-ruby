@@ -284,12 +284,12 @@ module Google
           # @example
           #   require "google/cloud/talent"
           #
-          #   job_service_client = Google::Cloud::Talent::JobService.new(version: :v4beta1)
+          #   job_client = Google::Cloud::Talent::JobService.new(version: :v4beta1)
           #   formatted_parent = Google::Cloud::Talent::V4beta1::JobServiceClient.project_path("[PROJECT]")
           #
           #   # TODO: Initialize `job`:
           #   job = {}
-          #   response = job_service_client.create_job(formatted_parent, job)
+          #   response = job_client.create_job(formatted_parent, job)
 
           def create_job \
               parent,
@@ -325,9 +325,9 @@ module Google
           # @example
           #   require "google/cloud/talent"
           #
-          #   job_service_client = Google::Cloud::Talent::JobService.new(version: :v4beta1)
+          #   job_client = Google::Cloud::Talent::JobService.new(version: :v4beta1)
           #   formatted_name = Google::Cloud::Talent::V4beta1::JobServiceClient.job_path("[PROJECT]", "[JOBS]")
-          #   response = job_service_client.get_job(formatted_name)
+          #   response = job_client.get_job(formatted_name)
 
           def get_job \
               name,
@@ -375,11 +375,11 @@ module Google
           # @example
           #   require "google/cloud/talent"
           #
-          #   job_service_client = Google::Cloud::Talent::JobService.new(version: :v4beta1)
+          #   job_client = Google::Cloud::Talent::JobService.new(version: :v4beta1)
           #
           #   # TODO: Initialize `job`:
           #   job = {}
-          #   response = job_service_client.update_job(job)
+          #   response = job_client.update_job(job)
 
           def update_job \
               job,
@@ -416,9 +416,9 @@ module Google
           # @example
           #   require "google/cloud/talent"
           #
-          #   job_service_client = Google::Cloud::Talent::JobService.new(version: :v4beta1)
+          #   job_client = Google::Cloud::Talent::JobService.new(version: :v4beta1)
           #   formatted_name = Google::Cloud::Talent::V4beta1::JobServiceClient.job_path("[PROJECT]", "[JOBS]")
-          #   job_service_client.delete_job(formatted_name)
+          #   job_client.delete_job(formatted_name)
 
           def delete_job \
               name,
@@ -490,19 +490,19 @@ module Google
           # @example
           #   require "google/cloud/talent"
           #
-          #   job_service_client = Google::Cloud::Talent::JobService.new(version: :v4beta1)
+          #   job_client = Google::Cloud::Talent::JobService.new(version: :v4beta1)
           #   formatted_parent = Google::Cloud::Talent::V4beta1::JobServiceClient.project_path("[PROJECT]")
           #
           #   # TODO: Initialize `filter`:
           #   filter = ''
           #
           #   # Iterate over all results.
-          #   job_service_client.list_jobs(formatted_parent, filter).each do |element|
+          #   job_client.list_jobs(formatted_parent, filter).each do |element|
           #     # Process element.
           #   end
           #
           #   # Or iterate over results one page at a time.
-          #   job_service_client.list_jobs(formatted_parent, filter).each_page do |page|
+          #   job_client.list_jobs(formatted_parent, filter).each_page do |page|
           #     # Process each page at a time.
           #     page.each do |element|
           #       # Process element.
@@ -559,12 +559,12 @@ module Google
           # @example
           #   require "google/cloud/talent"
           #
-          #   job_service_client = Google::Cloud::Talent::JobService.new(version: :v4beta1)
+          #   job_client = Google::Cloud::Talent::JobService.new(version: :v4beta1)
           #   formatted_parent = Google::Cloud::Talent::V4beta1::JobServiceClient.project_path("[PROJECT]")
           #
           #   # TODO: Initialize `filter`:
           #   filter = ''
-          #   job_service_client.batch_delete_jobs(formatted_parent, filter)
+          #   job_client.batch_delete_jobs(formatted_parent, filter)
 
           def batch_delete_jobs \
               parent,
@@ -876,19 +876,19 @@ module Google
           # @example
           #   require "google/cloud/talent"
           #
-          #   job_service_client = Google::Cloud::Talent::JobService.new(version: :v4beta1)
+          #   job_client = Google::Cloud::Talent::JobService.new(version: :v4beta1)
           #   formatted_parent = Google::Cloud::Talent::V4beta1::JobServiceClient.project_path("[PROJECT]")
           #
           #   # TODO: Initialize `request_metadata`:
           #   request_metadata = {}
           #
           #   # Iterate over all results.
-          #   job_service_client.search_jobs(formatted_parent, request_metadata).each do |element|
+          #   job_client.search_jobs(formatted_parent, request_metadata).each do |element|
           #     # Process element.
           #   end
           #
           #   # Or iterate over results one page at a time.
-          #   job_service_client.search_jobs(formatted_parent, request_metadata).each_page do |page|
+          #   job_client.search_jobs(formatted_parent, request_metadata).each_page do |page|
           #     # Process each page at a time.
           #     page.each do |element|
           #       # Process element.
@@ -1233,19 +1233,19 @@ module Google
           # @example
           #   require "google/cloud/talent"
           #
-          #   job_service_client = Google::Cloud::Talent::JobService.new(version: :v4beta1)
+          #   job_client = Google::Cloud::Talent::JobService.new(version: :v4beta1)
           #   formatted_parent = Google::Cloud::Talent::V4beta1::JobServiceClient.project_path("[PROJECT]")
           #
           #   # TODO: Initialize `request_metadata`:
           #   request_metadata = {}
           #
           #   # Iterate over all results.
-          #   job_service_client.search_jobs_for_alert(formatted_parent, request_metadata).each do |element|
+          #   job_client.search_jobs_for_alert(formatted_parent, request_metadata).each do |element|
           #     # Process element.
           #   end
           #
           #   # Or iterate over results one page at a time.
-          #   job_service_client.search_jobs_for_alert(formatted_parent, request_metadata).each_page do |page|
+          #   job_client.search_jobs_for_alert(formatted_parent, request_metadata).each_page do |page|
           #     # Process each page at a time.
           #     page.each do |element|
           #       # Process element.
