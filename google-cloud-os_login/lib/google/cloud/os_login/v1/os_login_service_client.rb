@@ -265,9 +265,9 @@ module Google
           # @example
           #   require "google/cloud/os_login"
           #
-          #   os_login_service_client = Google::Cloud::OsLogin.new(version: :v1)
+          #   os_login_client = Google::Cloud::OsLogin.new(version: :v1)
           #   formatted_name = Google::Cloud::OsLogin::V1::OsLoginServiceClient.project_path("[USER]", "[PROJECT]")
-          #   os_login_service_client.delete_posix_account(formatted_name)
+          #   os_login_client.delete_posix_account(formatted_name)
 
           def delete_posix_account \
               name,
@@ -297,9 +297,9 @@ module Google
           # @example
           #   require "google/cloud/os_login"
           #
-          #   os_login_service_client = Google::Cloud::OsLogin.new(version: :v1)
+          #   os_login_client = Google::Cloud::OsLogin.new(version: :v1)
           #   formatted_name = Google::Cloud::OsLogin::V1::OsLoginServiceClient.fingerprint_path("[USER]", "[FINGERPRINT]")
-          #   os_login_service_client.delete_ssh_public_key(formatted_name)
+          #   os_login_client.delete_ssh_public_key(formatted_name)
 
           def delete_ssh_public_key \
               name,
@@ -329,9 +329,9 @@ module Google
           # @example
           #   require "google/cloud/os_login"
           #
-          #   os_login_service_client = Google::Cloud::OsLogin.new(version: :v1)
+          #   os_login_client = Google::Cloud::OsLogin.new(version: :v1)
           #   formatted_name = Google::Cloud::OsLogin::V1::OsLoginServiceClient.user_path("[USER]")
-          #   response = os_login_service_client.get_login_profile(formatted_name)
+          #   response = os_login_client.get_login_profile(formatted_name)
 
           def get_login_profile \
               name,
@@ -361,9 +361,9 @@ module Google
           # @example
           #   require "google/cloud/os_login"
           #
-          #   os_login_service_client = Google::Cloud::OsLogin.new(version: :v1)
+          #   os_login_client = Google::Cloud::OsLogin.new(version: :v1)
           #   formatted_name = Google::Cloud::OsLogin::V1::OsLoginServiceClient.fingerprint_path("[USER]", "[FINGERPRINT]")
-          #   response = os_login_service_client.get_ssh_public_key(formatted_name)
+          #   response = os_login_client.get_ssh_public_key(formatted_name)
 
           def get_ssh_public_key \
               name,
@@ -399,12 +399,12 @@ module Google
           # @example
           #   require "google/cloud/os_login"
           #
-          #   os_login_service_client = Google::Cloud::OsLogin.new(version: :v1)
+          #   os_login_client = Google::Cloud::OsLogin.new(version: :v1)
           #   formatted_parent = Google::Cloud::OsLogin::V1::OsLoginServiceClient.user_path("[USER]")
           #
           #   # TODO: Initialize `ssh_public_key`:
           #   ssh_public_key = {}
-          #   response = os_login_service_client.import_ssh_public_key(formatted_parent, ssh_public_key)
+          #   response = os_login_client.import_ssh_public_key(formatted_parent, ssh_public_key)
 
           def import_ssh_public_key \
               parent,
@@ -447,12 +447,12 @@ module Google
           # @example
           #   require "google/cloud/os_login"
           #
-          #   os_login_service_client = Google::Cloud::OsLogin.new(version: :v1)
+          #   os_login_client = Google::Cloud::OsLogin.new(version: :v1)
           #   formatted_name = Google::Cloud::OsLogin::V1::OsLoginServiceClient.fingerprint_path("[USER]", "[FINGERPRINT]")
           #
           #   # TODO: Initialize `ssh_public_key`:
           #   ssh_public_key = {}
-          #   response = os_login_service_client.update_ssh_public_key(formatted_name, ssh_public_key)
+          #   response = os_login_client.update_ssh_public_key(formatted_name, ssh_public_key)
 
           def update_ssh_public_key \
               name,
