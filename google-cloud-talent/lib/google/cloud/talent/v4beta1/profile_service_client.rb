@@ -287,16 +287,16 @@ module Google
           # @example
           #   require "google/cloud/talent"
           #
-          #   profile_service_client = Google::Cloud::Talent::ProfileService.new(version: :v4beta1)
+          #   profile_client = Google::Cloud::Talent::ProfileService.new(version: :v4beta1)
           #   formatted_parent = Google::Cloud::Talent::V4beta1::ProfileServiceClient.tenant_path("[PROJECT]", "[TENANT]")
           #
           #   # Iterate over all results.
-          #   profile_service_client.list_profiles(formatted_parent).each do |element|
+          #   profile_client.list_profiles(formatted_parent).each do |element|
           #     # Process element.
           #   end
           #
           #   # Or iterate over results one page at a time.
-          #   profile_service_client.list_profiles(formatted_parent).each_page do |page|
+          #   profile_client.list_profiles(formatted_parent).each_page do |page|
           #     # Process each page at a time.
           #     page.each do |element|
           #       # Process element.
@@ -344,12 +344,12 @@ module Google
           # @example
           #   require "google/cloud/talent"
           #
-          #   profile_service_client = Google::Cloud::Talent::ProfileService.new(version: :v4beta1)
+          #   profile_client = Google::Cloud::Talent::ProfileService.new(version: :v4beta1)
           #   formatted_parent = Google::Cloud::Talent::V4beta1::ProfileServiceClient.tenant_path("[PROJECT]", "[TENANT]")
           #
           #   # TODO: Initialize `profile`:
           #   profile = {}
-          #   response = profile_service_client.create_profile(formatted_parent, profile)
+          #   response = profile_client.create_profile(formatted_parent, profile)
 
           def create_profile \
               parent,
@@ -385,9 +385,9 @@ module Google
           # @example
           #   require "google/cloud/talent"
           #
-          #   profile_service_client = Google::Cloud::Talent::ProfileService.new(version: :v4beta1)
+          #   profile_client = Google::Cloud::Talent::ProfileService.new(version: :v4beta1)
           #   formatted_name = Google::Cloud::Talent::V4beta1::ProfileServiceClient.profile_path("[PROJECT]", "[TENANT]", "[PROFILE]")
-          #   response = profile_service_client.get_profile(formatted_name)
+          #   response = profile_client.get_profile(formatted_name)
 
           def get_profile \
               name,
@@ -453,11 +453,11 @@ module Google
           # @example
           #   require "google/cloud/talent"
           #
-          #   profile_service_client = Google::Cloud::Talent::ProfileService.new(version: :v4beta1)
+          #   profile_client = Google::Cloud::Talent::ProfileService.new(version: :v4beta1)
           #
           #   # TODO: Initialize `profile`:
           #   profile = {}
-          #   response = profile_service_client.update_profile(profile)
+          #   response = profile_client.update_profile(profile)
 
           def update_profile \
               profile,
@@ -492,9 +492,9 @@ module Google
           # @example
           #   require "google/cloud/talent"
           #
-          #   profile_service_client = Google::Cloud::Talent::ProfileService.new(version: :v4beta1)
+          #   profile_client = Google::Cloud::Talent::ProfileService.new(version: :v4beta1)
           #   formatted_name = Google::Cloud::Talent::V4beta1::ProfileServiceClient.profile_path("[PROJECT]", "[TENANT]", "[PROFILE]")
-          #   profile_service_client.delete_profile(formatted_name)
+          #   profile_client.delete_profile(formatted_name)
 
           def delete_profile \
               name,
@@ -705,19 +705,19 @@ module Google
           # @example
           #   require "google/cloud/talent"
           #
-          #   profile_service_client = Google::Cloud::Talent::ProfileService.new(version: :v4beta1)
+          #   profile_client = Google::Cloud::Talent::ProfileService.new(version: :v4beta1)
           #   formatted_parent = Google::Cloud::Talent::V4beta1::ProfileServiceClient.tenant_path("[PROJECT]", "[TENANT]")
           #
           #   # TODO: Initialize `request_metadata`:
           #   request_metadata = {}
           #
           #   # Iterate over all results.
-          #   profile_service_client.search_profiles(formatted_parent, request_metadata).each do |element|
+          #   profile_client.search_profiles(formatted_parent, request_metadata).each do |element|
           #     # Process element.
           #   end
           #
           #   # Or iterate over results one page at a time.
-          #   profile_service_client.search_profiles(formatted_parent, request_metadata).each_page do |page|
+          #   profile_client.search_profiles(formatted_parent, request_metadata).each_page do |page|
           #     # Process each page at a time.
           #     page.each do |element|
           #       # Process element.

@@ -258,12 +258,12 @@ module Google
           # @example
           #   require "google/cloud/talent"
           #
-          #   company_service_client = Google::Cloud::Talent::CompanyService.new(version: :v4beta1)
+          #   company_client = Google::Cloud::Talent::CompanyService.new(version: :v4beta1)
           #   formatted_parent = Google::Cloud::Talent::V4beta1::CompanyServiceClient.project_path("[PROJECT]")
           #
           #   # TODO: Initialize `company`:
           #   company = {}
-          #   response = company_service_client.create_company(formatted_parent, company)
+          #   response = company_client.create_company(formatted_parent, company)
 
           def create_company \
               parent,
@@ -298,9 +298,9 @@ module Google
           # @example
           #   require "google/cloud/talent"
           #
-          #   company_service_client = Google::Cloud::Talent::CompanyService.new(version: :v4beta1)
+          #   company_client = Google::Cloud::Talent::CompanyService.new(version: :v4beta1)
           #   formatted_name = Google::Cloud::Talent::V4beta1::CompanyServiceClient.company_path("[PROJECT]", "[COMPANY]")
-          #   response = company_service_client.get_company(formatted_name)
+          #   response = company_client.get_company(formatted_name)
 
           def get_company \
               name,
@@ -347,11 +347,11 @@ module Google
           # @example
           #   require "google/cloud/talent"
           #
-          #   company_service_client = Google::Cloud::Talent::CompanyService.new(version: :v4beta1)
+          #   company_client = Google::Cloud::Talent::CompanyService.new(version: :v4beta1)
           #
           #   # TODO: Initialize `company`:
           #   company = {}
-          #   response = company_service_client.update_company(company)
+          #   response = company_client.update_company(company)
 
           def update_company \
               company,
@@ -386,9 +386,9 @@ module Google
           # @example
           #   require "google/cloud/talent"
           #
-          #   company_service_client = Google::Cloud::Talent::CompanyService.new(version: :v4beta1)
+          #   company_client = Google::Cloud::Talent::CompanyService.new(version: :v4beta1)
           #   formatted_name = Google::Cloud::Talent::V4beta1::CompanyServiceClient.company_path("[PROJECT]", "[COMPANY]")
-          #   company_service_client.delete_company(formatted_name)
+          #   company_client.delete_company(formatted_name)
 
           def delete_company \
               name,
@@ -442,16 +442,16 @@ module Google
           # @example
           #   require "google/cloud/talent"
           #
-          #   company_service_client = Google::Cloud::Talent::CompanyService.new(version: :v4beta1)
+          #   company_client = Google::Cloud::Talent::CompanyService.new(version: :v4beta1)
           #   formatted_parent = Google::Cloud::Talent::V4beta1::CompanyServiceClient.project_path("[PROJECT]")
           #
           #   # Iterate over all results.
-          #   company_service_client.list_companies(formatted_parent).each do |element|
+          #   company_client.list_companies(formatted_parent).each do |element|
           #     # Process element.
           #   end
           #
           #   # Or iterate over results one page at a time.
-          #   company_service_client.list_companies(formatted_parent).each_page do |page|
+          #   company_client.list_companies(formatted_parent).each_page do |page|
           #     # Process each page at a time.
           #     page.each do |element|
           #       # Process element.

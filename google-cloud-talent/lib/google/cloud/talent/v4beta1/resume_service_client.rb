@@ -264,12 +264,12 @@ module Google
           # @example
           #   require "google/cloud/talent"
           #
-          #   resume_service_client = Google::Cloud::Talent::Resume.new(version: :v4beta1)
+          #   resume_client = Google::Cloud::Talent::Resume.new(version: :v4beta1)
           #   formatted_parent = Google::Cloud::Talent::V4beta1::ResumeServiceClient.project_path("[PROJECT]")
           #
           #   # TODO: Initialize `resume`:
           #   resume = ''
-          #   response = resume_service_client.parse_resume(formatted_parent, resume)
+          #   response = resume_client.parse_resume(formatted_parent, resume)
 
           def parse_resume \
               parent,

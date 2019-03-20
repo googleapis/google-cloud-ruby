@@ -213,12 +213,12 @@ module Google
           # @example
           #   require "google/cloud/talent"
           #
-          #   event_service_client = Google::Cloud::Talent::Event.new(version: :v4beta1)
+          #   event_client = Google::Cloud::Talent::Event.new(version: :v4beta1)
           #   formatted_parent = Google::Cloud::Talent::V4beta1::EventServiceClient.project_path("[PROJECT]")
           #
           #   # TODO: Initialize `client_event`:
           #   client_event = {}
-          #   response = event_service_client.create_client_event(formatted_parent, client_event)
+          #   response = event_client.create_client_event(formatted_parent, client_event)
 
           def create_client_event \
               parent,
