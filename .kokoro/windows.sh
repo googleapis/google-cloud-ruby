@@ -12,7 +12,7 @@ set -eo pipefail
 # Debug: show build environment
 env | grep KOKORO
 
-cd github/google-cloud-ruby/
+cd $REPO_DIR
 
 # Print out Ruby version
 ruby --version

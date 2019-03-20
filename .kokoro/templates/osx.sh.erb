@@ -2,17 +2,16 @@
 
 # This file runs tests for merges, PRs, and nightlies.
 # There are a few rules for what tests are run:
-#  * PRs run all non-acceptance tests for every library.
-#  * Merges run all non-acceptance tests for every library, and acceptance tests for all altered libraries.
-#  * Nightlies run all acceptance tests for every library.
-#  * Currently only runs tests on 2.5.0
+#  * PRs run all non-acceptance tests for every library against the second latest ruby.
+#  * Merges run all non-acceptance tests for every library, and acceptance tests for all altered libraries, against all rubies.
+#  * Nightlies run all acceptance tests for every library, against all rubies.
 
 set -eo pipefail
 
 # Debug: show build environment
 env | grep KOKORO
 
-cd github/google-cloud-ruby/
+cd $REPO_DIR
 
 # Capture failures
 EXIT_STATUS=0 # everything passed
