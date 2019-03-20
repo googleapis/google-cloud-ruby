@@ -246,14 +246,14 @@ module Google
           # @example
           #   require "google/cloud/asset"
           #
-          #   asset_service_client = Google::Cloud::Asset.new(version: :v1beta1)
+          #   asset_client = Google::Cloud::Asset.new(version: :v1beta1)
           #   formatted_parent = Google::Cloud::Asset::V1beta1::AssetServiceClient.project_path("[PROJECT]")
           #
           #   # TODO: Initialize `output_config`:
           #   output_config = {}
           #
           #   # Register a callback during the method call.
-          #   operation = asset_service_client.export_assets(formatted_parent, output_config) do |op|
+          #   operation = asset_client.export_assets(formatted_parent, output_config) do |op|
           #     raise op.results.message if op.error?
           #     op_results = op.results
           #     # Process the results.
@@ -346,7 +346,7 @@ module Google
           # @example
           #   require "google/cloud/asset"
           #
-          #   asset_service_client = Google::Cloud::Asset.new(version: :v1beta1)
+          #   asset_client = Google::Cloud::Asset.new(version: :v1beta1)
           #   formatted_parent = Google::Cloud::Asset::V1beta1::AssetServiceClient.project_path("[PROJECT]")
           #
           #   # TODO: Initialize `content_type`:
@@ -354,7 +354,7 @@ module Google
           #
           #   # TODO: Initialize `read_time_window`:
           #   read_time_window = {}
-          #   response = asset_service_client.batch_get_assets_history(formatted_parent, content_type, read_time_window)
+          #   response = asset_client.batch_get_assets_history(formatted_parent, content_type, read_time_window)
 
           def batch_get_assets_history \
               parent,
