@@ -20,34 +20,20 @@ function set_failed_status {
     EXIT_STATUS=1
 }
 
-echo "script started"
-echo $PATH
 source ~/.rvm/scripts/rvm
-echo "rvm sourced"
 rvm get head --auto-dotfiles
-echo "ran rvm auto-dotfiles"
 
 versions=(<%= ruby_versions.join " " %>)
-echo "set versions"
 rvm_versions=$(rvm list rubies)
 
 if [ "$JOB_TYPE" = "presubmit" ]; then
     version=${versions[<%= ruby_versions.size - 2 %>]}
-    echo "set version to $version"
-    echo "recognized presubmit"
-    if [[ $rvm_versions == *$version* ]]; then
-      echo "found it, gonna use it"
-    else
-      echo "couldn't find it, gonna install it"
+    if [[ $rvm_versions != *$version* ]]; then
       rvm install $version
     fi
-    echo "installed it, gonna use it"
     rvm use $version@global --default
-    echo "using it"
     gem update --system
-    echo "updated system"
     bundle update
-    echo "ran bundle update"
     bundle exec rake kokoro:presubmit || set_failed_status
 else
     for version in "${versions[@]}"; do
