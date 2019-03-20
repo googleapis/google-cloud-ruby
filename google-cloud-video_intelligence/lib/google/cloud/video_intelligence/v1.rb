@@ -48,13 +48,13 @@ module Google
       # ```rb
       # require "google/cloud/video_intelligence"
       #
-      # video_intelligence_service_client = Google::Cloud::VideoIntelligence.new(version: :v1)
+      # video_intelligence_client = Google::Cloud::VideoIntelligence.new(version: :v1)
       # input_uri = "gs://demomaker/cat.mp4"
       # features_element = :LABEL_DETECTION
       # features = [features_element]
       #
       # # Register a callback during the method call.
-      # operation = video_intelligence_service_client.annotate_video(input_uri: input_uri, features: features) do |op|
+      # operation = video_intelligence_client.annotate_video(input_uri: input_uri, features: features) do |op|
       #   raise op.results.message if op.error?
       #   op_results = op.results
       #   # Process the results.
