@@ -11,6 +11,7 @@ set -eo pipefail
 # Debug: show build environment
 env | grep KOKORO
 
+echo "REPO_DIR == $REPO_DIR"
 cd $REPO_DIR
 
 # Print out Ruby version
