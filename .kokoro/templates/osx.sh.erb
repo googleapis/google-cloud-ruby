@@ -44,15 +44,11 @@ if [ "$JOB_TYPE" = "presubmit" ]; then
     echo "installed it, gonna use it"
     rvm use $version@global --default
     echo "using it"
-    echo $PATH
-    which bundler
-    which ruby
     gem update --system
     echo "updated system"
-    echo $PATH
-    which bundler
-    which ruby
-    (bundle update && bundle exec rake kokoro:presubmit) || set_failed_status
+    bundle update
+    echo "ran bundle update"
+    bundle exec rake kokoro:presubmit || set_failed_status
 else
     for version in "${versions[@]}"; do
         if [[ $rvm_versions != *$version* ]]; then
@@ -62,7 +58,8 @@ else
         git fetch --depth=10000
         gem update --system
         ruby --version
-        (bundle update && bundle exec rake kokoro:"$JOB_TYPE") || set_failed_status
+        bundle update
+        bundle exec rake kokoro:"$JOB_TYPE" || set_failed_status
     done
 fi
 
