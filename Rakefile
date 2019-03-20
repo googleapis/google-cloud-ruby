@@ -5,6 +5,8 @@ require "erb"
 require "fileutils"
 require "timeout"
 
+KOKORO_RUBY_VERSIONS = ["2.3.8", "2.4.5", "2.5.5", "2.6.2"]
+
 task :bundleupdate do
   valid_gems.each do |gem|
     Dir.chdir gem do
@@ -545,6 +547,8 @@ namespace :kokoro do
   desc "Generate configs for kokoro"
   task :build do
     generate_kokoro_configs
+    update_kokoro_ruby_versions
+    update_supported_ruby_versions
   end
 
   task :presubmit do
@@ -647,7 +651,6 @@ namespace :kokoro do
       1
     end
   end
-  
 end
 
 def run_command_with_timeout command, timeout
@@ -690,6 +693,36 @@ def generate_kokoro_configs
   File.open("./.kokoro/continuous/linux/#{gem}.cfg", "w") do |f|
     config = ERB.new(File.read("./.kokoro/templates/linux.cfg.erb"))
     f.write(config.result(binding))
+  end
+end
+
+def update_kokoro_ruby_versions
+  ruby_versions = KOKORO_RUBY_VERSIONS
+  ["ruby-multi", "ruby-release"].each do |docker_image|
+    File.open("./.kokoro/docker/#{docker_image}/Dockerfile", "w") do |f|
+      docker_file = ERB.new(File.read("./.kokoro/templates/#{docker_image}.Dockerfile.erb"))
+      f.write(docker_file.result(binding))
+    end
+  end
+  File.open("./.kokoro/osx.sh", "w") do |f|
+    docker_file = ERB.new(File.read("./.kokoro/templates/osx.sh.erb"))
+    f.write(docker_file.result(binding))
+  end
+end
+
+def update_supported_ruby_versions
+  readme_text = ""
+  File.open("./README.md", "r+") do |f|
+    readme_text = f.read
+  end
+  earliest_ruby = KOKORO_RUBY_VERSIONS.first.split(".")[0...-1].join(".")
+  ruby_version_text = "These libraries are currently supported on Ruby "
+  new_content = readme_text.gsub(
+    /#{ruby_version_text}(.*)\+/,
+    "#{ruby_version_text}#{earliest_ruby}+"
+  )
+  File.open("./README.md", "w") do |f|
+    f.write new_content
   end
 end
 

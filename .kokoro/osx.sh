@@ -14,28 +14,38 @@ env | grep KOKORO
 
 cd github/google-cloud-ruby/
 
-# Print out Ruby version
-ruby --version
-
-# Temporary workaround for a known bundler+docker issue:
-# https://github.com/bundler/bundler/issues/6154
-export BUNDLE_GEMFILE=
-
 # Capture failures
 EXIT_STATUS=0 # everything passed
 function set_failed_status {
     EXIT_STATUS=1
 }
 
-gem install bundler --version 1.17.3
+source ~/.rvm/scripts/rvm
+rvm get head --auto-dotfiles
 
-if [ "$JOB_TYPE" = "nightly" ]; then
-    (bundle update && bundle exec rake kokoro:nightly) || set_failed_status
-elif [ "$JOB_TYPE" = "continuous" ]; then
-    git fetch --depth=10000
-    (bundle update && bundle exec rake kokoro:continuous) || set_failed_status
+versions=(2.3.8 2.4.5 2.5.5 2.6.2)
+rvm_versions=$(rvm list rubies)
+
+if [ "$JOB_TYPE" = "presubmit" ]; then
+    version=${versions[2]}
+    if [[ $rvm_versions != *$version* ]]; then
+      rvm install $version
+    fi
+    rvm use $version@global --default
+    gem update --system
+    bundle update
+    bundle exec rake kokoro:presubmit || set_failed_status
 else
-    (bundle update && bundle exec rake kokoro:presubmit) || set_failed_status
+    for version in "${versions[@]}"; do
+        if [[ $rvm_versions != *$version* ]]; then
+            rvm install "$version"
+        fi
+        rvm use "$version"@global --default
+        git fetch --depth=10000
+        gem update --system
+        bundle update
+        bundle exec rake kokoro:"$JOB_TYPE" || set_failed_status
+    done
 fi
 
 exit $EXIT_STATUS
