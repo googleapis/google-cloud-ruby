@@ -26,16 +26,16 @@ describe "MetricServiceSmokeTest v3" do
     end
     project_id = ENV["MONITORING_TEST_PROJECT"].freeze
 
-    metric_service_client = Google::Cloud::Monitoring::Metric.new(version: :v3)
+    metric_client = Google::Cloud::Monitoring::Metric.new(version: :v3)
     formatted_name = Google::Cloud::Monitoring::V3::MetricServiceClient.project_path(project_id)
 
     # Iterate over all results.
-    metric_service_client.list_monitored_resource_descriptors(formatted_name).each do |element|
+    metric_client.list_monitored_resource_descriptors(formatted_name).each do |element|
       # Process element.
     end
 
     # Or iterate over results one page at a time.
-    metric_service_client.list_monitored_resource_descriptors(formatted_name).each_page do |page|
+    metric_client.list_monitored_resource_descriptors(formatted_name).each_page do |page|
       # Process each page at a time.
       page.each do |element|
         # Process element.

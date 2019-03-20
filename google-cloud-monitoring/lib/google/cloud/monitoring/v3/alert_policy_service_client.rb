@@ -307,16 +307,16 @@ module Google
           # @example
           #   require "google/cloud/monitoring"
           #
-          #   alert_policy_service_client = Google::Cloud::Monitoring::AlertPolicy.new(version: :v3)
+          #   alert_policy_client = Google::Cloud::Monitoring::AlertPolicy.new(version: :v3)
           #   formatted_name = Google::Cloud::Monitoring::V3::AlertPolicyServiceClient.project_path("[PROJECT]")
           #
           #   # Iterate over all results.
-          #   alert_policy_service_client.list_alert_policies(formatted_name).each do |element|
+          #   alert_policy_client.list_alert_policies(formatted_name).each do |element|
           #     # Process element.
           #   end
           #
           #   # Or iterate over results one page at a time.
-          #   alert_policy_service_client.list_alert_policies(formatted_name).each_page do |page|
+          #   alert_policy_client.list_alert_policies(formatted_name).each_page do |page|
           #     # Process each page at a time.
           #     page.each do |element|
           #       # Process element.
@@ -357,9 +357,9 @@ module Google
           # @example
           #   require "google/cloud/monitoring"
           #
-          #   alert_policy_service_client = Google::Cloud::Monitoring::AlertPolicy.new(version: :v3)
+          #   alert_policy_client = Google::Cloud::Monitoring::AlertPolicy.new(version: :v3)
           #   formatted_name = Google::Cloud::Monitoring::V3::AlertPolicyServiceClient.alert_policy_path("[PROJECT]", "[ALERT_POLICY]")
-          #   response = alert_policy_service_client.get_alert_policy(formatted_name)
+          #   response = alert_policy_client.get_alert_policy(formatted_name)
 
           def get_alert_policy \
               name,
@@ -400,12 +400,12 @@ module Google
           # @example
           #   require "google/cloud/monitoring"
           #
-          #   alert_policy_service_client = Google::Cloud::Monitoring::AlertPolicy.new(version: :v3)
+          #   alert_policy_client = Google::Cloud::Monitoring::AlertPolicy.new(version: :v3)
           #   formatted_name = Google::Cloud::Monitoring::V3::AlertPolicyServiceClient.project_path("[PROJECT]")
           #
           #   # TODO: Initialize `alert_policy`:
           #   alert_policy = {}
-          #   response = alert_policy_service_client.create_alert_policy(formatted_name, alert_policy)
+          #   response = alert_policy_client.create_alert_policy(formatted_name, alert_policy)
 
           def create_alert_policy \
               name,
@@ -438,9 +438,9 @@ module Google
           # @example
           #   require "google/cloud/monitoring"
           #
-          #   alert_policy_service_client = Google::Cloud::Monitoring::AlertPolicy.new(version: :v3)
+          #   alert_policy_client = Google::Cloud::Monitoring::AlertPolicy.new(version: :v3)
           #   formatted_name = Google::Cloud::Monitoring::V3::AlertPolicyServiceClient.alert_policy_path("[PROJECT]", "[ALERT_POLICY]")
-          #   alert_policy_service_client.delete_alert_policy(formatted_name)
+          #   alert_policy_client.delete_alert_policy(formatted_name)
 
           def delete_alert_policy \
               name,
@@ -501,11 +501,11 @@ module Google
           # @example
           #   require "google/cloud/monitoring"
           #
-          #   alert_policy_service_client = Google::Cloud::Monitoring::AlertPolicy.new(version: :v3)
+          #   alert_policy_client = Google::Cloud::Monitoring::AlertPolicy.new(version: :v3)
           #
           #   # TODO: Initialize `alert_policy`:
           #   alert_policy = {}
-          #   response = alert_policy_service_client.update_alert_policy(alert_policy)
+          #   response = alert_policy_client.update_alert_policy(alert_policy)
 
           def update_alert_policy \
               alert_policy,
