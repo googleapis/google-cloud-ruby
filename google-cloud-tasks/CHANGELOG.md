@@ -2,7 +2,7 @@
 
 ### 0.5.0 / 2019-03-20
 
-* add instance aliases for class methods (#3034)
+* add instance aliases for class methods
 
 ### 0.4.0 / 2019-03-12
 
