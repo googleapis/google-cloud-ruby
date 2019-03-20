@@ -82,7 +82,9 @@ js:
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/google/cloud/tasks/v2beta2/cloud_tasks_client.rb</dd>
+    <dd>lib/google/cloud/tasks/v2beta2/cloud_tasks_client.rb<span class="defines">,<br />
+  lib/google/cloud/tasks/v2beta2/helpers.rb</span>
+</dd>
   </dl>
   
 </div>
@@ -597,6 +599,29 @@ this service.</p>
         <li class="public ">
   <span class="summary_signature">
     
+      <a href="#location_path-instance_method" title="#location_path (instance method)">#<strong>location_path</strong>(project, location)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Alias for Google::Cloud::Tasks::V2beta2::CloudTasksClient.location_path.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#pause_queue-instance_method" title="#pause_queue (instance method)">#<strong>pause_queue</strong>(name, options: nil) {|result, operation| ... } &#x21d2; Google::Cloud::Tasks::V2beta2::Queue </a>
     
 
@@ -620,6 +645,29 @@ this service.</p>
         <li class="public ">
   <span class="summary_signature">
     
+      <a href="#project_path-instance_method" title="#project_path (instance method)">#<strong>project_path</strong>(project)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Alias for Google::Cloud::Tasks::V2beta2::CloudTasksClient.project_path.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#purge_queue-instance_method" title="#purge_queue (instance method)">#<strong>purge_queue</strong>(name, options: nil) {|result, operation| ... } &#x21d2; Google::Cloud::Tasks::V2beta2::Queue </a>
     
 
@@ -635,6 +683,29 @@ this service.</p>
 
   
     <span class="summary_desc"><div class='inline'><p>Purges a queue by deleting all of its tasks.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#queue_path-instance_method" title="#queue_path (instance method)">#<strong>queue_path</strong>(project, location, queue)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Alias for Google::Cloud::Tasks::V2beta2::CloudTasksClient.queue_path.</p>
 </div></span>
   
 </li>
@@ -727,6 +798,29 @@ this service.</p>
 
   
     <span class="summary_desc"><div class='inline'><p>Sets the access control policy for a <span class='object_link'><a href="Queue.html" title="Google::Cloud::Tasks::V2beta2::Queue (class)">Queue</a></span>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#task_path-instance_method" title="#task_path (instance method)">#<strong>task_path</strong>(project, location, queue, task)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Alias for Google::Cloud::Tasks::V2beta2::CloudTasksClient.task_path.</p>
 </div></span>
   
 </li>
@@ -4504,6 +4598,85 @@ object.</p>
 </div>
     
       <div class="method_details ">
+  <h3 class="signature " id="location_path-instance_method">
+  
+    #<strong>location_path</strong>(project, location)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Alias for Google::Cloud::Tasks::V2beta2::CloudTasksClient.location_path.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>project</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>location</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+23
+24
+25</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta2/helpers.rb', line 23</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_location_path'>location_path</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span> <span class='id identifier rubyid_location'>location</span>
+  <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_location_path'>location_path</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span> <span class='id identifier rubyid_location'>location</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
   <h3 class="signature " id="pause_queue-instance_method">
   
     #<strong>pause_queue</strong>(name, options: nil) {|result, operation| ... } &#x21d2; <tt><span class='object_link'><a href="Queue.html" title="Google::Cloud::Tasks::V2beta2::Queue (class)">Google::Cloud::Tasks::V2beta2::Queue</a></span></tt> 
@@ -4688,6 +4861,74 @@ retries, etc.</p>
 </div>
     
       <div class="method_details ">
+  <h3 class="signature " id="project_path-instance_method">
+  
+    #<strong>project_path</strong>(project)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Alias for Google::Cloud::Tasks::V2beta2::CloudTasksClient.project_path.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>project</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+30
+31
+32</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta2/helpers.rb', line 30</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_project_path'>project_path</span> <span class='id identifier rubyid_project'>project</span>
+  <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_project_path'>project_path</span> <span class='id identifier rubyid_project'>project</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
   <h3 class="signature " id="purge_queue-instance_method">
   
     #<strong>purge_queue</strong>(name, options: nil) {|result, operation| ... } &#x21d2; <tt><span class='object_link'><a href="Queue.html" title="Google::Cloud::Tasks::V2beta2::Queue (class)">Google::Cloud::Tasks::V2beta2::Queue</a></span></tt> 
@@ -4863,6 +5104,96 @@ retries, etc.</p>
   <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span>
   <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='id identifier rubyid_to_proto'>to_proto</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Tasks.html" title="Google::Cloud::Tasks (module)">Tasks</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V2beta2.html" title="Google::Cloud::Tasks::V2beta2 (module)">V2beta2</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="PurgeQueueRequest.html" title="Google::Cloud::Tasks::V2beta2::PurgeQueueRequest (class)">PurgeQueueRequest</a></span></span><span class='rparen'>)</span>
   <span class='ivar'>@purge_queue</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="queue_path-instance_method">
+  
+    #<strong>queue_path</strong>(project, location, queue)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Alias for Google::Cloud::Tasks::V2beta2::CloudTasksClient.queue_path.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>project</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>location</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>queue</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+39
+40
+41</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta2/helpers.rb', line 39</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_queue_path'>queue_path</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span> <span class='id identifier rubyid_location'>location</span><span class='comma'>,</span> <span class='id identifier rubyid_queue'>queue</span>
+  <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_queue_path'>queue_path</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span> <span class='id identifier rubyid_location'>location</span><span class='comma'>,</span> <span class='id identifier rubyid_queue'>queue</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -5778,6 +6109,107 @@ retries, etc.</p>
   <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span>
   <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='id identifier rubyid_to_proto'>to_proto</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Iam.html" title="Google::Iam (module)">Iam</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Iam/V1.html" title="Google::Iam::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Iam/V1/SetIamPolicyRequest.html" title="Google::Iam::V1::SetIamPolicyRequest (class)">SetIamPolicyRequest</a></span></span><span class='rparen'>)</span>
   <span class='ivar'>@set_iam_policy</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="task_path-instance_method">
+  
+    #<strong>task_path</strong>(project, location, queue, task)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Alias for Google::Cloud::Tasks::V2beta2::CloudTasksClient.task_path.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>project</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>location</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>queue</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>task</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+49
+50
+51</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta2/helpers.rb', line 49</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_task_path'>task_path</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span> <span class='id identifier rubyid_location'>location</span><span class='comma'>,</span> <span class='id identifier rubyid_queue'>queue</span><span class='comma'>,</span> <span class='id identifier rubyid_task'>task</span>
+  <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_task_path'>task_path</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span> <span class='id identifier rubyid_location'>location</span><span class='comma'>,</span> <span class='id identifier rubyid_queue'>queue</span><span class='comma'>,</span> <span class='id identifier rubyid_task'>task</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
