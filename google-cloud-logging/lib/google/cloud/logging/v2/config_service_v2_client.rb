@@ -312,16 +312,16 @@ module Google
           # @example
           #   require "google/cloud/logging/v2"
           #
-          #   config_service_v2_client = Google::Cloud::Logging::V2::ConfigServiceV2Client.new
+          #   config_client = Google::Cloud::Logging::V2::ConfigServiceV2Client.new
           #   formatted_parent = Google::Cloud::Logging::V2::ConfigServiceV2Client.project_path("[PROJECT]")
           #
           #   # Iterate over all results.
-          #   config_service_v2_client.list_sinks(formatted_parent).each do |element|
+          #   config_client.list_sinks(formatted_parent).each do |element|
           #     # Process element.
           #   end
           #
           #   # Or iterate over results one page at a time.
-          #   config_service_v2_client.list_sinks(formatted_parent).each_page do |page|
+          #   config_client.list_sinks(formatted_parent).each_page do |page|
           #     # Process each page at a time.
           #     page.each do |element|
           #       # Process element.
@@ -363,9 +363,9 @@ module Google
           # @example
           #   require "google/cloud/logging/v2"
           #
-          #   config_service_v2_client = Google::Cloud::Logging::V2::ConfigServiceV2Client.new
+          #   config_client = Google::Cloud::Logging::V2::ConfigServiceV2Client.new
           #   formatted_sink_name = Google::Cloud::Logging::V2::ConfigServiceV2Client.sink_path("[PROJECT]", "[SINK]")
-          #   response = config_service_v2_client.get_sink(formatted_sink_name)
+          #   response = config_client.get_sink(formatted_sink_name)
 
           def get_sink \
               sink_name,
@@ -421,12 +421,12 @@ module Google
           # @example
           #   require "google/cloud/logging/v2"
           #
-          #   config_service_v2_client = Google::Cloud::Logging::V2::ConfigServiceV2Client.new
+          #   config_client = Google::Cloud::Logging::V2::ConfigServiceV2Client.new
           #   formatted_parent = Google::Cloud::Logging::V2::ConfigServiceV2Client.project_path("[PROJECT]")
           #
           #   # TODO: Initialize `sink`:
           #   sink = {}
-          #   response = config_service_v2_client.create_sink(formatted_parent, sink)
+          #   response = config_client.create_sink(formatted_parent, sink)
 
           def create_sink \
               parent,
@@ -504,12 +504,12 @@ module Google
           # @example
           #   require "google/cloud/logging/v2"
           #
-          #   config_service_v2_client = Google::Cloud::Logging::V2::ConfigServiceV2Client.new
+          #   config_client = Google::Cloud::Logging::V2::ConfigServiceV2Client.new
           #   formatted_sink_name = Google::Cloud::Logging::V2::ConfigServiceV2Client.sink_path("[PROJECT]", "[SINK]")
           #
           #   # TODO: Initialize `sink`:
           #   sink = {}
-          #   response = config_service_v2_client.update_sink(formatted_sink_name, sink)
+          #   response = config_client.update_sink(formatted_sink_name, sink)
 
           def update_sink \
               sink_name,
@@ -551,9 +551,9 @@ module Google
           # @example
           #   require "google/cloud/logging/v2"
           #
-          #   config_service_v2_client = Google::Cloud::Logging::V2::ConfigServiceV2Client.new
+          #   config_client = Google::Cloud::Logging::V2::ConfigServiceV2Client.new
           #   formatted_sink_name = Google::Cloud::Logging::V2::ConfigServiceV2Client.sink_path("[PROJECT]", "[SINK]")
-          #   config_service_v2_client.delete_sink(formatted_sink_name)
+          #   config_client.delete_sink(formatted_sink_name)
 
           def delete_sink \
               sink_name,
@@ -597,16 +597,16 @@ module Google
           # @example
           #   require "google/cloud/logging/v2"
           #
-          #   config_service_v2_client = Google::Cloud::Logging::V2::ConfigServiceV2Client.new
+          #   config_client = Google::Cloud::Logging::V2::ConfigServiceV2Client.new
           #   formatted_parent = Google::Cloud::Logging::V2::ConfigServiceV2Client.project_path("[PROJECT]")
           #
           #   # Iterate over all results.
-          #   config_service_v2_client.list_exclusions(formatted_parent).each do |element|
+          #   config_client.list_exclusions(formatted_parent).each do |element|
           #     # Process element.
           #   end
           #
           #   # Or iterate over results one page at a time.
-          #   config_service_v2_client.list_exclusions(formatted_parent).each_page do |page|
+          #   config_client.list_exclusions(formatted_parent).each_page do |page|
           #     # Process each page at a time.
           #     page.each do |element|
           #       # Process element.
@@ -648,9 +648,9 @@ module Google
           # @example
           #   require "google/cloud/logging/v2"
           #
-          #   config_service_v2_client = Google::Cloud::Logging::V2::ConfigServiceV2Client.new
+          #   config_client = Google::Cloud::Logging::V2::ConfigServiceV2Client.new
           #   formatted_name = Google::Cloud::Logging::V2::ConfigServiceV2Client.exclusion_path("[PROJECT]", "[EXCLUSION]")
-          #   response = config_service_v2_client.get_exclusion(formatted_name)
+          #   response = config_client.get_exclusion(formatted_name)
 
           def get_exclusion \
               name,
@@ -692,12 +692,12 @@ module Google
           # @example
           #   require "google/cloud/logging/v2"
           #
-          #   config_service_v2_client = Google::Cloud::Logging::V2::ConfigServiceV2Client.new
+          #   config_client = Google::Cloud::Logging::V2::ConfigServiceV2Client.new
           #   formatted_parent = Google::Cloud::Logging::V2::ConfigServiceV2Client.project_path("[PROJECT]")
           #
           #   # TODO: Initialize `exclusion`:
           #   exclusion = {}
-          #   response = config_service_v2_client.create_exclusion(formatted_parent, exclusion)
+          #   response = config_client.create_exclusion(formatted_parent, exclusion)
 
           def create_exclusion \
               parent,
@@ -750,7 +750,7 @@ module Google
           # @example
           #   require "google/cloud/logging/v2"
           #
-          #   config_service_v2_client = Google::Cloud::Logging::V2::ConfigServiceV2Client.new
+          #   config_client = Google::Cloud::Logging::V2::ConfigServiceV2Client.new
           #   formatted_name = Google::Cloud::Logging::V2::ConfigServiceV2Client.exclusion_path("[PROJECT]", "[EXCLUSION]")
           #
           #   # TODO: Initialize `exclusion`:
@@ -758,7 +758,7 @@ module Google
           #
           #   # TODO: Initialize `update_mask`:
           #   update_mask = {}
-          #   response = config_service_v2_client.update_exclusion(formatted_name, exclusion, update_mask)
+          #   response = config_client.update_exclusion(formatted_name, exclusion, update_mask)
 
           def update_exclusion \
               name,
@@ -796,9 +796,9 @@ module Google
           # @example
           #   require "google/cloud/logging/v2"
           #
-          #   config_service_v2_client = Google::Cloud::Logging::V2::ConfigServiceV2Client.new
+          #   config_client = Google::Cloud::Logging::V2::ConfigServiceV2Client.new
           #   formatted_name = Google::Cloud::Logging::V2::ConfigServiceV2Client.exclusion_path("[PROJECT]", "[EXCLUSION]")
-          #   config_service_v2_client.delete_exclusion(formatted_name)
+          #   config_client.delete_exclusion(formatted_name)
 
           def delete_exclusion \
               name,
