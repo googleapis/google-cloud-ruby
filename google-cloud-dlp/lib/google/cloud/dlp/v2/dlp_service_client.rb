@@ -552,9 +552,9 @@ module Google
           # @example
           #   require "google/cloud/dlp"
           #
-          #   dlp_service_client = Google::Cloud::Dlp.new(version: :v2)
+          #   dlp_client = Google::Cloud::Dlp.new(version: :v2)
           #   formatted_parent = Google::Cloud::Dlp::V2::DlpServiceClient.project_path("[PROJECT]")
-          #   response = dlp_service_client.inspect_content(formatted_parent)
+          #   response = dlp_client.inspect_content(formatted_parent)
 
           def inspect_content \
               parent,
@@ -610,9 +610,9 @@ module Google
           # @example
           #   require "google/cloud/dlp"
           #
-          #   dlp_service_client = Google::Cloud::Dlp.new(version: :v2)
+          #   dlp_client = Google::Cloud::Dlp.new(version: :v2)
           #   formatted_parent = Google::Cloud::Dlp::V2::DlpServiceClient.project_path("[PROJECT]")
-          #   response = dlp_service_client.redact_image(formatted_parent)
+          #   response = dlp_client.redact_image(formatted_parent)
 
           def redact_image \
               parent,
@@ -683,9 +683,9 @@ module Google
           # @example
           #   require "google/cloud/dlp"
           #
-          #   dlp_service_client = Google::Cloud::Dlp.new(version: :v2)
+          #   dlp_client = Google::Cloud::Dlp.new(version: :v2)
           #   formatted_parent = Google::Cloud::Dlp::V2::DlpServiceClient.project_path("[PROJECT]")
-          #   response = dlp_service_client.deidentify_content(formatted_parent)
+          #   response = dlp_client.deidentify_content(formatted_parent)
 
           def deidentify_content \
               parent,
@@ -759,9 +759,9 @@ module Google
           # @example
           #   require "google/cloud/dlp"
           #
-          #   dlp_service_client = Google::Cloud::Dlp.new(version: :v2)
+          #   dlp_client = Google::Cloud::Dlp.new(version: :v2)
           #   formatted_parent = Google::Cloud::Dlp::V2::DlpServiceClient.project_path("[PROJECT]")
-          #   response = dlp_service_client.reidentify_content(formatted_parent)
+          #   response = dlp_client.reidentify_content(formatted_parent)
 
           def reidentify_content \
               parent,
@@ -806,8 +806,8 @@ module Google
           # @example
           #   require "google/cloud/dlp"
           #
-          #   dlp_service_client = Google::Cloud::Dlp.new(version: :v2)
-          #   response = dlp_service_client.list_info_types
+          #   dlp_client = Google::Cloud::Dlp.new(version: :v2)
+          #   response = dlp_client.list_info_types
 
           def list_info_types \
               language_code: nil,
@@ -849,9 +849,9 @@ module Google
           # @example
           #   require "google/cloud/dlp"
           #
-          #   dlp_service_client = Google::Cloud::Dlp.new(version: :v2)
+          #   dlp_client = Google::Cloud::Dlp.new(version: :v2)
           #   formatted_parent = Google::Cloud::Dlp::V2::DlpServiceClient.organization_path("[ORGANIZATION]")
-          #   response = dlp_service_client.create_inspect_template(formatted_parent)
+          #   response = dlp_client.create_inspect_template(formatted_parent)
 
           def create_inspect_template \
               parent,
@@ -894,9 +894,9 @@ module Google
           # @example
           #   require "google/cloud/dlp"
           #
-          #   dlp_service_client = Google::Cloud::Dlp.new(version: :v2)
+          #   dlp_client = Google::Cloud::Dlp.new(version: :v2)
           #   formatted_name = Google::Cloud::Dlp::V2::DlpServiceClient.organization_inspect_template_path("[ORGANIZATION]", "[INSPECT_TEMPLATE]")
-          #   response = dlp_service_client.update_inspect_template(formatted_name)
+          #   response = dlp_client.update_inspect_template(formatted_name)
 
           def update_inspect_template \
               name,
@@ -931,8 +931,8 @@ module Google
           # @example
           #   require "google/cloud/dlp"
           #
-          #   dlp_service_client = Google::Cloud::Dlp.new(version: :v2)
-          #   response = dlp_service_client.get_inspect_template
+          #   dlp_client = Google::Cloud::Dlp.new(version: :v2)
+          #   response = dlp_client.get_inspect_template
 
           def get_inspect_template \
               name: nil,
@@ -986,16 +986,16 @@ module Google
           # @example
           #   require "google/cloud/dlp"
           #
-          #   dlp_service_client = Google::Cloud::Dlp.new(version: :v2)
+          #   dlp_client = Google::Cloud::Dlp.new(version: :v2)
           #   formatted_parent = Google::Cloud::Dlp::V2::DlpServiceClient.organization_path("[ORGANIZATION]")
           #
           #   # Iterate over all results.
-          #   dlp_service_client.list_inspect_templates(formatted_parent).each do |element|
+          #   dlp_client.list_inspect_templates(formatted_parent).each do |element|
           #     # Process element.
           #   end
           #
           #   # Or iterate over results one page at a time.
-          #   dlp_service_client.list_inspect_templates(formatted_parent).each_page do |page|
+          #   dlp_client.list_inspect_templates(formatted_parent).each_page do |page|
           #     # Process each page at a time.
           #     page.each do |element|
           #       # Process element.
@@ -1034,9 +1034,9 @@ module Google
           # @example
           #   require "google/cloud/dlp"
           #
-          #   dlp_service_client = Google::Cloud::Dlp.new(version: :v2)
+          #   dlp_client = Google::Cloud::Dlp.new(version: :v2)
           #   formatted_name = Google::Cloud::Dlp::V2::DlpServiceClient.organization_inspect_template_path("[ORGANIZATION]", "[INSPECT_TEMPLATE]")
-          #   dlp_service_client.delete_inspect_template(formatted_name)
+          #   dlp_client.delete_inspect_template(formatted_name)
 
           def delete_inspect_template \
               name,
@@ -1078,9 +1078,9 @@ module Google
           # @example
           #   require "google/cloud/dlp"
           #
-          #   dlp_service_client = Google::Cloud::Dlp.new(version: :v2)
+          #   dlp_client = Google::Cloud::Dlp.new(version: :v2)
           #   formatted_parent = Google::Cloud::Dlp::V2::DlpServiceClient.organization_path("[ORGANIZATION]")
-          #   response = dlp_service_client.create_deidentify_template(formatted_parent)
+          #   response = dlp_client.create_deidentify_template(formatted_parent)
 
           def create_deidentify_template \
               parent,
@@ -1124,9 +1124,9 @@ module Google
           # @example
           #   require "google/cloud/dlp"
           #
-          #   dlp_service_client = Google::Cloud::Dlp.new(version: :v2)
+          #   dlp_client = Google::Cloud::Dlp.new(version: :v2)
           #   formatted_name = Google::Cloud::Dlp::V2::DlpServiceClient.organization_deidentify_template_path("[ORGANIZATION]", "[DEIDENTIFY_TEMPLATE]")
-          #   response = dlp_service_client.update_deidentify_template(formatted_name)
+          #   response = dlp_client.update_deidentify_template(formatted_name)
 
           def update_deidentify_template \
               name,
@@ -1162,9 +1162,9 @@ module Google
           # @example
           #   require "google/cloud/dlp"
           #
-          #   dlp_service_client = Google::Cloud::Dlp.new(version: :v2)
+          #   dlp_client = Google::Cloud::Dlp.new(version: :v2)
           #   formatted_name = Google::Cloud::Dlp::V2::DlpServiceClient.organization_deidentify_template_path("[ORGANIZATION]", "[DEIDENTIFY_TEMPLATE]")
-          #   response = dlp_service_client.get_deidentify_template(formatted_name)
+          #   response = dlp_client.get_deidentify_template(formatted_name)
 
           def get_deidentify_template \
               name,
@@ -1219,16 +1219,16 @@ module Google
           # @example
           #   require "google/cloud/dlp"
           #
-          #   dlp_service_client = Google::Cloud::Dlp.new(version: :v2)
+          #   dlp_client = Google::Cloud::Dlp.new(version: :v2)
           #   formatted_parent = Google::Cloud::Dlp::V2::DlpServiceClient.organization_path("[ORGANIZATION]")
           #
           #   # Iterate over all results.
-          #   dlp_service_client.list_deidentify_templates(formatted_parent).each do |element|
+          #   dlp_client.list_deidentify_templates(formatted_parent).each do |element|
           #     # Process element.
           #   end
           #
           #   # Or iterate over results one page at a time.
-          #   dlp_service_client.list_deidentify_templates(formatted_parent).each_page do |page|
+          #   dlp_client.list_deidentify_templates(formatted_parent).each_page do |page|
           #     # Process each page at a time.
           #     page.each do |element|
           #       # Process element.
@@ -1268,9 +1268,9 @@ module Google
           # @example
           #   require "google/cloud/dlp"
           #
-          #   dlp_service_client = Google::Cloud::Dlp.new(version: :v2)
+          #   dlp_client = Google::Cloud::Dlp.new(version: :v2)
           #   formatted_name = Google::Cloud::Dlp::V2::DlpServiceClient.organization_deidentify_template_path("[ORGANIZATION]", "[DEIDENTIFY_TEMPLATE]")
-          #   dlp_service_client.delete_deidentify_template(formatted_name)
+          #   dlp_client.delete_deidentify_template(formatted_name)
 
           def delete_deidentify_template \
               name,
@@ -1316,9 +1316,9 @@ module Google
           # @example
           #   require "google/cloud/dlp"
           #
-          #   dlp_service_client = Google::Cloud::Dlp.new(version: :v2)
+          #   dlp_client = Google::Cloud::Dlp.new(version: :v2)
           #   formatted_parent = Google::Cloud::Dlp::V2::DlpServiceClient.project_path("[PROJECT]")
-          #   response = dlp_service_client.create_dlp_job(formatted_parent)
+          #   response = dlp_client.create_dlp_job(formatted_parent)
 
           def create_dlp_job \
               parent,
@@ -1404,16 +1404,16 @@ module Google
           # @example
           #   require "google/cloud/dlp"
           #
-          #   dlp_service_client = Google::Cloud::Dlp.new(version: :v2)
+          #   dlp_client = Google::Cloud::Dlp.new(version: :v2)
           #   formatted_parent = Google::Cloud::Dlp::V2::DlpServiceClient.project_path("[PROJECT]")
           #
           #   # Iterate over all results.
-          #   dlp_service_client.list_dlp_jobs(formatted_parent).each do |element|
+          #   dlp_client.list_dlp_jobs(formatted_parent).each do |element|
           #     # Process element.
           #   end
           #
           #   # Or iterate over results one page at a time.
-          #   dlp_service_client.list_dlp_jobs(formatted_parent).each_page do |page|
+          #   dlp_client.list_dlp_jobs(formatted_parent).each_page do |page|
           #     # Process each page at a time.
           #     page.each do |element|
           #       # Process element.
@@ -1456,9 +1456,9 @@ module Google
           # @example
           #   require "google/cloud/dlp"
           #
-          #   dlp_service_client = Google::Cloud::Dlp.new(version: :v2)
+          #   dlp_client = Google::Cloud::Dlp.new(version: :v2)
           #   formatted_name = Google::Cloud::Dlp::V2::DlpServiceClient.dlp_job_path("[PROJECT]", "[DLP_JOB]")
-          #   response = dlp_service_client.get_dlp_job(formatted_name)
+          #   response = dlp_client.get_dlp_job(formatted_name)
 
           def get_dlp_job \
               name,
@@ -1489,9 +1489,9 @@ module Google
           # @example
           #   require "google/cloud/dlp"
           #
-          #   dlp_service_client = Google::Cloud::Dlp.new(version: :v2)
+          #   dlp_client = Google::Cloud::Dlp.new(version: :v2)
           #   formatted_name = Google::Cloud::Dlp::V2::DlpServiceClient.dlp_job_path("[PROJECT]", "[DLP_JOB]")
-          #   dlp_service_client.delete_dlp_job(formatted_name)
+          #   dlp_client.delete_dlp_job(formatted_name)
 
           def delete_dlp_job \
               name,
@@ -1523,9 +1523,9 @@ module Google
           # @example
           #   require "google/cloud/dlp"
           #
-          #   dlp_service_client = Google::Cloud::Dlp.new(version: :v2)
+          #   dlp_client = Google::Cloud::Dlp.new(version: :v2)
           #   formatted_name = Google::Cloud::Dlp::V2::DlpServiceClient.dlp_job_path("[PROJECT]", "[DLP_JOB]")
-          #   dlp_service_client.cancel_dlp_job(formatted_name)
+          #   dlp_client.cancel_dlp_job(formatted_name)
 
           def cancel_dlp_job \
               name,
@@ -1606,16 +1606,16 @@ module Google
           # @example
           #   require "google/cloud/dlp"
           #
-          #   dlp_service_client = Google::Cloud::Dlp.new(version: :v2)
+          #   dlp_client = Google::Cloud::Dlp.new(version: :v2)
           #   formatted_parent = Google::Cloud::Dlp::V2::DlpServiceClient.project_path("[PROJECT]")
           #
           #   # Iterate over all results.
-          #   dlp_service_client.list_job_triggers(formatted_parent).each do |element|
+          #   dlp_client.list_job_triggers(formatted_parent).each do |element|
           #     # Process element.
           #   end
           #
           #   # Or iterate over results one page at a time.
-          #   dlp_service_client.list_job_triggers(formatted_parent).each_page do |page|
+          #   dlp_client.list_job_triggers(formatted_parent).each_page do |page|
           #     # Process each page at a time.
           #     page.each do |element|
           #       # Process element.
@@ -1656,9 +1656,9 @@ module Google
           # @example
           #   require "google/cloud/dlp"
           #
-          #   dlp_service_client = Google::Cloud::Dlp.new(version: :v2)
+          #   dlp_client = Google::Cloud::Dlp.new(version: :v2)
           #   formatted_name = Google::Cloud::Dlp::V2::DlpServiceClient.project_job_trigger_path("[PROJECT]", "[JOB_TRIGGER]")
-          #   response = dlp_service_client.get_job_trigger(formatted_name)
+          #   response = dlp_client.get_job_trigger(formatted_name)
 
           def get_job_trigger \
               name,
@@ -1687,11 +1687,11 @@ module Google
           # @example
           #   require "google/cloud/dlp"
           #
-          #   dlp_service_client = Google::Cloud::Dlp.new(version: :v2)
+          #   dlp_client = Google::Cloud::Dlp.new(version: :v2)
           #
           #   # TODO: Initialize `name`:
           #   name = ''
-          #   dlp_service_client.delete_job_trigger(name)
+          #   dlp_client.delete_job_trigger(name)
 
           def delete_job_trigger \
               name,
@@ -1730,9 +1730,9 @@ module Google
           # @example
           #   require "google/cloud/dlp"
           #
-          #   dlp_service_client = Google::Cloud::Dlp.new(version: :v2)
+          #   dlp_client = Google::Cloud::Dlp.new(version: :v2)
           #   formatted_name = Google::Cloud::Dlp::V2::DlpServiceClient.project_job_trigger_path("[PROJECT]", "[JOB_TRIGGER]")
-          #   response = dlp_service_client.update_job_trigger(formatted_name)
+          #   response = dlp_client.update_job_trigger(formatted_name)
 
           def update_job_trigger \
               name,
@@ -1775,9 +1775,9 @@ module Google
           # @example
           #   require "google/cloud/dlp"
           #
-          #   dlp_service_client = Google::Cloud::Dlp.new(version: :v2)
+          #   dlp_client = Google::Cloud::Dlp.new(version: :v2)
           #   formatted_parent = Google::Cloud::Dlp::V2::DlpServiceClient.project_path("[PROJECT]")
-          #   response = dlp_service_client.create_job_trigger(formatted_parent)
+          #   response = dlp_client.create_job_trigger(formatted_parent)
 
           def create_job_trigger \
               parent,
@@ -1821,9 +1821,9 @@ module Google
           # @example
           #   require "google/cloud/dlp"
           #
-          #   dlp_service_client = Google::Cloud::Dlp.new(version: :v2)
+          #   dlp_client = Google::Cloud::Dlp.new(version: :v2)
           #   formatted_parent = Google::Cloud::Dlp::V2::DlpServiceClient.organization_path("[ORGANIZATION]")
-          #   response = dlp_service_client.create_stored_info_type(formatted_parent)
+          #   response = dlp_client.create_stored_info_type(formatted_parent)
 
           def create_stored_info_type \
               parent,
@@ -1870,9 +1870,9 @@ module Google
           # @example
           #   require "google/cloud/dlp"
           #
-          #   dlp_service_client = Google::Cloud::Dlp.new(version: :v2)
+          #   dlp_client = Google::Cloud::Dlp.new(version: :v2)
           #   formatted_name = Google::Cloud::Dlp::V2::DlpServiceClient.organization_stored_info_type_path("[ORGANIZATION]", "[STORED_INFO_TYPE]")
-          #   response = dlp_service_client.update_stored_info_type(formatted_name)
+          #   response = dlp_client.update_stored_info_type(formatted_name)
 
           def update_stored_info_type \
               name,
@@ -1908,9 +1908,9 @@ module Google
           # @example
           #   require "google/cloud/dlp"
           #
-          #   dlp_service_client = Google::Cloud::Dlp.new(version: :v2)
+          #   dlp_client = Google::Cloud::Dlp.new(version: :v2)
           #   formatted_name = Google::Cloud::Dlp::V2::DlpServiceClient.organization_stored_info_type_path("[ORGANIZATION]", "[STORED_INFO_TYPE]")
-          #   response = dlp_service_client.get_stored_info_type(formatted_name)
+          #   response = dlp_client.get_stored_info_type(formatted_name)
 
           def get_stored_info_type \
               name,
@@ -1966,16 +1966,16 @@ module Google
           # @example
           #   require "google/cloud/dlp"
           #
-          #   dlp_service_client = Google::Cloud::Dlp.new(version: :v2)
+          #   dlp_client = Google::Cloud::Dlp.new(version: :v2)
           #   formatted_parent = Google::Cloud::Dlp::V2::DlpServiceClient.organization_path("[ORGANIZATION]")
           #
           #   # Iterate over all results.
-          #   dlp_service_client.list_stored_info_types(formatted_parent).each do |element|
+          #   dlp_client.list_stored_info_types(formatted_parent).each do |element|
           #     # Process element.
           #   end
           #
           #   # Or iterate over results one page at a time.
-          #   dlp_service_client.list_stored_info_types(formatted_parent).each_page do |page|
+          #   dlp_client.list_stored_info_types(formatted_parent).each_page do |page|
           #     # Process each page at a time.
           #     page.each do |element|
           #       # Process element.
@@ -2015,9 +2015,9 @@ module Google
           # @example
           #   require "google/cloud/dlp"
           #
-          #   dlp_service_client = Google::Cloud::Dlp.new(version: :v2)
+          #   dlp_client = Google::Cloud::Dlp.new(version: :v2)
           #   formatted_name = Google::Cloud::Dlp::V2::DlpServiceClient.organization_stored_info_type_path("[ORGANIZATION]", "[STORED_INFO_TYPE]")
-          #   dlp_service_client.delete_stored_info_type(formatted_name)
+          #   dlp_client.delete_stored_info_type(formatted_name)
 
           def delete_stored_info_type \
               name,
