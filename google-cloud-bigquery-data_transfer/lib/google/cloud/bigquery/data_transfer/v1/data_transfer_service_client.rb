@@ -379,9 +379,9 @@ module Google
             # @example
             #   require "google/cloud/bigquery/data_transfer"
             #
-            #   data_transfer_service_client = Google::Cloud::Bigquery::DataTransfer.new(version: :v1)
+            #   data_transfer_client = Google::Cloud::Bigquery::DataTransfer.new(version: :v1)
             #   formatted_name = Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient.project_data_source_path("[PROJECT]", "[DATA_SOURCE]")
-            #   response = data_transfer_service_client.get_data_source(formatted_name)
+            #   response = data_transfer_client.get_data_source(formatted_name)
 
             def get_data_source \
                 name,
@@ -421,16 +421,16 @@ module Google
             # @example
             #   require "google/cloud/bigquery/data_transfer"
             #
-            #   data_transfer_service_client = Google::Cloud::Bigquery::DataTransfer.new(version: :v1)
+            #   data_transfer_client = Google::Cloud::Bigquery::DataTransfer.new(version: :v1)
             #   formatted_parent = Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient.project_path("[PROJECT]")
             #
             #   # Iterate over all results.
-            #   data_transfer_service_client.list_data_sources(formatted_parent).each do |element|
+            #   data_transfer_client.list_data_sources(formatted_parent).each do |element|
             #     # Process element.
             #   end
             #
             #   # Or iterate over results one page at a time.
-            #   data_transfer_service_client.list_data_sources(formatted_parent).each_page do |page|
+            #   data_transfer_client.list_data_sources(formatted_parent).each_page do |page|
             #     # Process each page at a time.
             #     page.each do |element|
             #       # Process element.
@@ -489,12 +489,12 @@ module Google
             # @example
             #   require "google/cloud/bigquery/data_transfer"
             #
-            #   data_transfer_service_client = Google::Cloud::Bigquery::DataTransfer.new(version: :v1)
+            #   data_transfer_client = Google::Cloud::Bigquery::DataTransfer.new(version: :v1)
             #   formatted_parent = Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient.project_path("[PROJECT]")
             #
             #   # TODO: Initialize `transfer_config`:
             #   transfer_config = {}
-            #   response = data_transfer_service_client.create_transfer_config(formatted_parent, transfer_config)
+            #   response = data_transfer_client.create_transfer_config(formatted_parent, transfer_config)
 
             def create_transfer_config \
                 parent,
@@ -550,14 +550,14 @@ module Google
             # @example
             #   require "google/cloud/bigquery/data_transfer"
             #
-            #   data_transfer_service_client = Google::Cloud::Bigquery::DataTransfer.new(version: :v1)
+            #   data_transfer_client = Google::Cloud::Bigquery::DataTransfer.new(version: :v1)
             #
             #   # TODO: Initialize `transfer_config`:
             #   transfer_config = {}
             #
             #   # TODO: Initialize `update_mask`:
             #   update_mask = {}
-            #   response = data_transfer_service_client.update_transfer_config(transfer_config, update_mask)
+            #   response = data_transfer_client.update_transfer_config(transfer_config, update_mask)
 
             def update_transfer_config \
                 transfer_config,
@@ -590,9 +590,9 @@ module Google
             # @example
             #   require "google/cloud/bigquery/data_transfer"
             #
-            #   data_transfer_service_client = Google::Cloud::Bigquery::DataTransfer.new(version: :v1)
+            #   data_transfer_client = Google::Cloud::Bigquery::DataTransfer.new(version: :v1)
             #   formatted_name = Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient.project_transfer_config_path("[PROJECT]", "[TRANSFER_CONFIG]")
-            #   data_transfer_service_client.delete_transfer_config(formatted_name)
+            #   data_transfer_client.delete_transfer_config(formatted_name)
 
             def delete_transfer_config \
                 name,
@@ -622,9 +622,9 @@ module Google
             # @example
             #   require "google/cloud/bigquery/data_transfer"
             #
-            #   data_transfer_service_client = Google::Cloud::Bigquery::DataTransfer.new(version: :v1)
+            #   data_transfer_client = Google::Cloud::Bigquery::DataTransfer.new(version: :v1)
             #   formatted_name = Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient.project_transfer_config_path("[PROJECT]", "[TRANSFER_CONFIG]")
-            #   response = data_transfer_service_client.get_transfer_config(formatted_name)
+            #   response = data_transfer_client.get_transfer_config(formatted_name)
 
             def get_transfer_config \
                 name,
@@ -665,16 +665,16 @@ module Google
             # @example
             #   require "google/cloud/bigquery/data_transfer"
             #
-            #   data_transfer_service_client = Google::Cloud::Bigquery::DataTransfer.new(version: :v1)
+            #   data_transfer_client = Google::Cloud::Bigquery::DataTransfer.new(version: :v1)
             #   formatted_parent = Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient.project_path("[PROJECT]")
             #
             #   # Iterate over all results.
-            #   data_transfer_service_client.list_transfer_configs(formatted_parent).each do |element|
+            #   data_transfer_client.list_transfer_configs(formatted_parent).each do |element|
             #     # Process element.
             #   end
             #
             #   # Or iterate over results one page at a time.
-            #   data_transfer_service_client.list_transfer_configs(formatted_parent).each_page do |page|
+            #   data_transfer_client.list_transfer_configs(formatted_parent).each_page do |page|
             #     # Process each page at a time.
             #     page.each do |element|
             #       # Process element.
@@ -725,7 +725,7 @@ module Google
             # @example
             #   require "google/cloud/bigquery/data_transfer"
             #
-            #   data_transfer_service_client = Google::Cloud::Bigquery::DataTransfer.new(version: :v1)
+            #   data_transfer_client = Google::Cloud::Bigquery::DataTransfer.new(version: :v1)
             #   formatted_parent = Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient.project_transfer_config_path("[PROJECT]", "[TRANSFER_CONFIG]")
             #
             #   # TODO: Initialize `start_time`:
@@ -733,7 +733,7 @@ module Google
             #
             #   # TODO: Initialize `end_time`:
             #   end_time = {}
-            #   response = data_transfer_service_client.schedule_transfer_runs(formatted_parent, start_time, end_time)
+            #   response = data_transfer_client.schedule_transfer_runs(formatted_parent, start_time, end_time)
 
             def schedule_transfer_runs \
                 parent,
@@ -766,9 +766,9 @@ module Google
             # @example
             #   require "google/cloud/bigquery/data_transfer"
             #
-            #   data_transfer_service_client = Google::Cloud::Bigquery::DataTransfer.new(version: :v1)
+            #   data_transfer_client = Google::Cloud::Bigquery::DataTransfer.new(version: :v1)
             #   formatted_name = Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient.project_run_path("[PROJECT]", "[TRANSFER_CONFIG]", "[RUN]")
-            #   response = data_transfer_service_client.get_transfer_run(formatted_name)
+            #   response = data_transfer_client.get_transfer_run(formatted_name)
 
             def get_transfer_run \
                 name,
@@ -796,9 +796,9 @@ module Google
             # @example
             #   require "google/cloud/bigquery/data_transfer"
             #
-            #   data_transfer_service_client = Google::Cloud::Bigquery::DataTransfer.new(version: :v1)
+            #   data_transfer_client = Google::Cloud::Bigquery::DataTransfer.new(version: :v1)
             #   formatted_name = Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient.project_run_path("[PROJECT]", "[TRANSFER_CONFIG]", "[RUN]")
-            #   data_transfer_service_client.delete_transfer_run(formatted_name)
+            #   data_transfer_client.delete_transfer_run(formatted_name)
 
             def delete_transfer_run \
                 name,
@@ -843,16 +843,16 @@ module Google
             # @example
             #   require "google/cloud/bigquery/data_transfer"
             #
-            #   data_transfer_service_client = Google::Cloud::Bigquery::DataTransfer.new(version: :v1)
+            #   data_transfer_client = Google::Cloud::Bigquery::DataTransfer.new(version: :v1)
             #   formatted_parent = Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient.project_transfer_config_path("[PROJECT]", "[TRANSFER_CONFIG]")
             #
             #   # Iterate over all results.
-            #   data_transfer_service_client.list_transfer_runs(formatted_parent).each do |element|
+            #   data_transfer_client.list_transfer_runs(formatted_parent).each do |element|
             #     # Process element.
             #   end
             #
             #   # Or iterate over results one page at a time.
-            #   data_transfer_service_client.list_transfer_runs(formatted_parent).each_page do |page|
+            #   data_transfer_client.list_transfer_runs(formatted_parent).each_page do |page|
             #     # Process each page at a time.
             #     page.each do |element|
             #       # Process element.
@@ -905,16 +905,16 @@ module Google
             # @example
             #   require "google/cloud/bigquery/data_transfer"
             #
-            #   data_transfer_service_client = Google::Cloud::Bigquery::DataTransfer.new(version: :v1)
+            #   data_transfer_client = Google::Cloud::Bigquery::DataTransfer.new(version: :v1)
             #   formatted_parent = Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient.project_run_path("[PROJECT]", "[TRANSFER_CONFIG]", "[RUN]")
             #
             #   # Iterate over all results.
-            #   data_transfer_service_client.list_transfer_logs(formatted_parent).each do |element|
+            #   data_transfer_client.list_transfer_logs(formatted_parent).each do |element|
             #     # Process element.
             #   end
             #
             #   # Or iterate over results one page at a time.
-            #   data_transfer_service_client.list_transfer_logs(formatted_parent).each_page do |page|
+            #   data_transfer_client.list_transfer_logs(formatted_parent).each_page do |page|
             #     # Process each page at a time.
             #     page.each do |element|
             #       # Process element.
@@ -957,9 +957,9 @@ module Google
             # @example
             #   require "google/cloud/bigquery/data_transfer"
             #
-            #   data_transfer_service_client = Google::Cloud::Bigquery::DataTransfer.new(version: :v1)
+            #   data_transfer_client = Google::Cloud::Bigquery::DataTransfer.new(version: :v1)
             #   formatted_name = Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient.project_data_source_path("[PROJECT]", "[DATA_SOURCE]")
-            #   response = data_transfer_service_client.check_valid_creds(formatted_name)
+            #   response = data_transfer_client.check_valid_creds(formatted_name)
 
             def check_valid_creds \
                 name,
