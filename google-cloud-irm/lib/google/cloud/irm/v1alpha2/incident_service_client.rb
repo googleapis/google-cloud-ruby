@@ -523,12 +523,12 @@ module Google
           # @example
           #   require "google/cloud/irm"
           #
-          #   incident_service_client = Google::Cloud::Irm.new(version: :v1alpha2)
+          #   incident_client = Google::Cloud::Irm.new(version: :v1alpha2)
           #
           #   # TODO: Initialize `incident`:
           #   incident = {}
           #   formatted_parent = Google::Cloud::Irm::V1alpha2::IncidentServiceClient.project_path("[PROJECT]")
-          #   response = incident_service_client.create_incident(incident, formatted_parent)
+          #   response = incident_client.create_incident(incident, formatted_parent)
 
           def create_incident \
               incident,
@@ -559,9 +559,9 @@ module Google
           # @example
           #   require "google/cloud/irm"
           #
-          #   incident_service_client = Google::Cloud::Irm.new(version: :v1alpha2)
+          #   incident_client = Google::Cloud::Irm.new(version: :v1alpha2)
           #   formatted_name = Google::Cloud::Irm::V1alpha2::IncidentServiceClient.incident_path("[PROJECT]", "[INCIDENT]")
-          #   response = incident_service_client.get_incident(formatted_name)
+          #   response = incident_client.get_incident(formatted_name)
 
           def get_incident \
               name,
@@ -658,16 +658,16 @@ module Google
           # @example
           #   require "google/cloud/irm"
           #
-          #   incident_service_client = Google::Cloud::Irm.new(version: :v1alpha2)
+          #   incident_client = Google::Cloud::Irm.new(version: :v1alpha2)
           #   formatted_parent = Google::Cloud::Irm::V1alpha2::IncidentServiceClient.project_path("[PROJECT]")
           #
           #   # Iterate over all results.
-          #   incident_service_client.search_incidents(formatted_parent).each do |element|
+          #   incident_client.search_incidents(formatted_parent).each do |element|
           #     # Process element.
           #   end
           #
           #   # Or iterate over results one page at a time.
-          #   incident_service_client.search_incidents(formatted_parent).each_page do |page|
+          #   incident_client.search_incidents(formatted_parent).each_page do |page|
           #     # Process each page at a time.
           #     page.each do |element|
           #       # Process element.
@@ -712,11 +712,11 @@ module Google
           # @example
           #   require "google/cloud/irm"
           #
-          #   incident_service_client = Google::Cloud::Irm.new(version: :v1alpha2)
+          #   incident_client = Google::Cloud::Irm.new(version: :v1alpha2)
           #
           #   # TODO: Initialize `incident`:
           #   incident = {}
-          #   response = incident_service_client.update_incident(incident)
+          #   response = incident_client.update_incident(incident)
 
           def update_incident \
               incident,
@@ -759,16 +759,16 @@ module Google
           # @example
           #   require "google/cloud/irm"
           #
-          #   incident_service_client = Google::Cloud::Irm.new(version: :v1alpha2)
+          #   incident_client = Google::Cloud::Irm.new(version: :v1alpha2)
           #   formatted_name = Google::Cloud::Irm::V1alpha2::IncidentServiceClient.incident_path("[PROJECT]", "[INCIDENT]")
           #
           #   # Iterate over all results.
-          #   incident_service_client.search_similar_incidents(formatted_name).each do |element|
+          #   incident_client.search_similar_incidents(formatted_name).each do |element|
           #     # Process element.
           #   end
           #
           #   # Or iterate over results one page at a time.
-          #   incident_service_client.search_similar_incidents(formatted_name).each_page do |page|
+          #   incident_client.search_similar_incidents(formatted_name).each_page do |page|
           #     # Process each page at a time.
           #     page.each do |element|
           #       # Process element.
@@ -809,12 +809,12 @@ module Google
           # @example
           #   require "google/cloud/irm"
           #
-          #   incident_service_client = Google::Cloud::Irm.new(version: :v1alpha2)
+          #   incident_client = Google::Cloud::Irm.new(version: :v1alpha2)
           #   formatted_parent = Google::Cloud::Irm::V1alpha2::IncidentServiceClient.incident_path("[PROJECT]", "[INCIDENT]")
           #
           #   # TODO: Initialize `annotation`:
           #   annotation = {}
-          #   response = incident_service_client.create_annotation(formatted_parent, annotation)
+          #   response = incident_client.create_annotation(formatted_parent, annotation)
 
           def create_annotation \
               parent,
@@ -856,16 +856,16 @@ module Google
           # @example
           #   require "google/cloud/irm"
           #
-          #   incident_service_client = Google::Cloud::Irm.new(version: :v1alpha2)
+          #   incident_client = Google::Cloud::Irm.new(version: :v1alpha2)
           #   formatted_parent = Google::Cloud::Irm::V1alpha2::IncidentServiceClient.incident_path("[PROJECT]", "[INCIDENT]")
           #
           #   # Iterate over all results.
-          #   incident_service_client.list_annotations(formatted_parent).each do |element|
+          #   incident_client.list_annotations(formatted_parent).each do |element|
           #     # Process element.
           #   end
           #
           #   # Or iterate over results one page at a time.
-          #   incident_service_client.list_annotations(formatted_parent).each_page do |page|
+          #   incident_client.list_annotations(formatted_parent).each_page do |page|
           #     # Process each page at a time.
           #     page.each do |element|
           #       # Process element.
@@ -905,12 +905,12 @@ module Google
           # @example
           #   require "google/cloud/irm"
           #
-          #   incident_service_client = Google::Cloud::Irm.new(version: :v1alpha2)
+          #   incident_client = Google::Cloud::Irm.new(version: :v1alpha2)
           #   formatted_parent = Google::Cloud::Irm::V1alpha2::IncidentServiceClient.incident_path("[PROJECT]", "[INCIDENT]")
           #
           #   # TODO: Initialize `tag`:
           #   tag = {}
-          #   response = incident_service_client.create_tag(formatted_parent, tag)
+          #   response = incident_client.create_tag(formatted_parent, tag)
 
           def create_tag \
               parent,
@@ -939,9 +939,9 @@ module Google
           # @example
           #   require "google/cloud/irm"
           #
-          #   incident_service_client = Google::Cloud::Irm.new(version: :v1alpha2)
+          #   incident_client = Google::Cloud::Irm.new(version: :v1alpha2)
           #   formatted_name = Google::Cloud::Irm::V1alpha2::IncidentServiceClient.tag_path("[PROJECT]", "[INCIDENT]", "[TAG]")
-          #   incident_service_client.delete_tag(formatted_name)
+          #   incident_client.delete_tag(formatted_name)
 
           def delete_tag \
               name,
@@ -981,16 +981,16 @@ module Google
           # @example
           #   require "google/cloud/irm"
           #
-          #   incident_service_client = Google::Cloud::Irm.new(version: :v1alpha2)
+          #   incident_client = Google::Cloud::Irm.new(version: :v1alpha2)
           #   formatted_parent = Google::Cloud::Irm::V1alpha2::IncidentServiceClient.incident_path("[PROJECT]", "[INCIDENT]")
           #
           #   # Iterate over all results.
-          #   incident_service_client.list_tags(formatted_parent).each do |element|
+          #   incident_client.list_tags(formatted_parent).each do |element|
           #     # Process element.
           #   end
           #
           #   # Or iterate over results one page at a time.
-          #   incident_service_client.list_tags(formatted_parent).each_page do |page|
+          #   incident_client.list_tags(formatted_parent).each_page do |page|
           #     # Process each page at a time.
           #     page.each do |element|
           #       # Process element.
@@ -1030,12 +1030,12 @@ module Google
           # @example
           #   require "google/cloud/irm"
           #
-          #   incident_service_client = Google::Cloud::Irm.new(version: :v1alpha2)
+          #   incident_client = Google::Cloud::Irm.new(version: :v1alpha2)
           #   formatted_parent = Google::Cloud::Irm::V1alpha2::IncidentServiceClient.project_path("[PROJECT]")
           #
           #   # TODO: Initialize `signal`:
           #   signal = {}
-          #   response = incident_service_client.create_signal(formatted_parent, signal)
+          #   response = incident_client.create_signal(formatted_parent, signal)
 
           def create_signal \
               parent,
@@ -1079,16 +1079,16 @@ module Google
           # @example
           #   require "google/cloud/irm"
           #
-          #   incident_service_client = Google::Cloud::Irm.new(version: :v1alpha2)
+          #   incident_client = Google::Cloud::Irm.new(version: :v1alpha2)
           #   formatted_parent = Google::Cloud::Irm::V1alpha2::IncidentServiceClient.project_path("[PROJECT]")
           #
           #   # Iterate over all results.
-          #   incident_service_client.search_signals(formatted_parent).each do |element|
+          #   incident_client.search_signals(formatted_parent).each do |element|
           #     # Process element.
           #   end
           #
           #   # Or iterate over results one page at a time.
-          #   incident_service_client.search_signals(formatted_parent).each_page do |page|
+          #   incident_client.search_signals(formatted_parent).each_page do |page|
           #     # Process each page at a time.
           #     page.each do |element|
           #       # Process element.
@@ -1126,9 +1126,9 @@ module Google
           # @example
           #   require "google/cloud/irm"
           #
-          #   incident_service_client = Google::Cloud::Irm.new(version: :v1alpha2)
+          #   incident_client = Google::Cloud::Irm.new(version: :v1alpha2)
           #   formatted_name = Google::Cloud::Irm::V1alpha2::IncidentServiceClient.signal_path("[PROJECT]", "[SIGNAL]")
-          #   response = incident_service_client.get_signal(formatted_name)
+          #   response = incident_client.get_signal(formatted_name)
 
           def get_signal \
               name,
@@ -1163,11 +1163,11 @@ module Google
           # @example
           #   require "google/cloud/irm"
           #
-          #   incident_service_client = Google::Cloud::Irm.new(version: :v1alpha2)
+          #   incident_client = Google::Cloud::Irm.new(version: :v1alpha2)
           #
           #   # TODO: Initialize `signal`:
           #   signal = {}
-          #   response = incident_service_client.update_signal(signal)
+          #   response = incident_client.update_signal(signal)
 
           def update_signal \
               signal,
@@ -1221,11 +1221,11 @@ module Google
           # @example
           #   require "google/cloud/irm"
           #
-          #   incident_service_client = Google::Cloud::Irm.new(version: :v1alpha2)
+          #   incident_client = Google::Cloud::Irm.new(version: :v1alpha2)
           #
           #   # TODO: Initialize `incident`:
           #   incident = {}
-          #   response = incident_service_client.escalate_incident(incident)
+          #   response = incident_client.escalate_incident(incident)
 
           def escalate_incident \
               incident,
@@ -1268,12 +1268,12 @@ module Google
           # @example
           #   require "google/cloud/irm"
           #
-          #   incident_service_client = Google::Cloud::Irm.new(version: :v1alpha2)
+          #   incident_client = Google::Cloud::Irm.new(version: :v1alpha2)
           #   formatted_parent = Google::Cloud::Irm::V1alpha2::IncidentServiceClient.incident_path("[PROJECT]", "[INCIDENT]")
           #
           #   # TODO: Initialize `artifact`:
           #   artifact = {}
-          #   response = incident_service_client.create_artifact(formatted_parent, artifact)
+          #   response = incident_client.create_artifact(formatted_parent, artifact)
 
           def create_artifact \
               parent,
@@ -1314,16 +1314,16 @@ module Google
           # @example
           #   require "google/cloud/irm"
           #
-          #   incident_service_client = Google::Cloud::Irm.new(version: :v1alpha2)
+          #   incident_client = Google::Cloud::Irm.new(version: :v1alpha2)
           #   formatted_parent = Google::Cloud::Irm::V1alpha2::IncidentServiceClient.incident_path("[PROJECT]", "[INCIDENT]")
           #
           #   # Iterate over all results.
-          #   incident_service_client.list_artifacts(formatted_parent).each do |element|
+          #   incident_client.list_artifacts(formatted_parent).each do |element|
           #     # Process element.
           #   end
           #
           #   # Or iterate over results one page at a time.
-          #   incident_service_client.list_artifacts(formatted_parent).each_page do |page|
+          #   incident_client.list_artifacts(formatted_parent).each_page do |page|
           #     # Process each page at a time.
           #     page.each do |element|
           #       # Process element.
@@ -1364,11 +1364,11 @@ module Google
           # @example
           #   require "google/cloud/irm"
           #
-          #   incident_service_client = Google::Cloud::Irm.new(version: :v1alpha2)
+          #   incident_client = Google::Cloud::Irm.new(version: :v1alpha2)
           #
           #   # TODO: Initialize `artifact`:
           #   artifact = {}
-          #   response = incident_service_client.update_artifact(artifact)
+          #   response = incident_client.update_artifact(artifact)
 
           def update_artifact \
               artifact,
@@ -1397,9 +1397,9 @@ module Google
           # @example
           #   require "google/cloud/irm"
           #
-          #   incident_service_client = Google::Cloud::Irm.new(version: :v1alpha2)
+          #   incident_client = Google::Cloud::Irm.new(version: :v1alpha2)
           #   formatted_name = Google::Cloud::Irm::V1alpha2::IncidentServiceClient.artifact_path("[PROJECT]", "[INCIDENT]", "[ARTIFACT]")
-          #   incident_service_client.delete_artifact(formatted_name)
+          #   incident_client.delete_artifact(formatted_name)
 
           def delete_artifact \
               name,
@@ -1447,7 +1447,7 @@ module Google
           # @example
           #   require "google/cloud/irm"
           #
-          #   incident_service_client = Google::Cloud::Irm.new(version: :v1alpha2)
+          #   incident_client = Google::Cloud::Irm.new(version: :v1alpha2)
           #   formatted_parent = Google::Cloud::Irm::V1alpha2::IncidentServiceClient.project_path("[PROJECT]")
           #
           #   # TODO: Initialize `recipients`:
@@ -1455,7 +1455,7 @@ module Google
           #
           #   # TODO: Initialize `subject`:
           #   subject = ''
-          #   response = incident_service_client.send_shift_handoff(formatted_parent, recipients, subject)
+          #   response = incident_client.send_shift_handoff(formatted_parent, recipients, subject)
 
           def send_shift_handoff \
               parent,
@@ -1505,12 +1505,12 @@ module Google
           # @example
           #   require "google/cloud/irm"
           #
-          #   incident_service_client = Google::Cloud::Irm.new(version: :v1alpha2)
+          #   incident_client = Google::Cloud::Irm.new(version: :v1alpha2)
           #   formatted_parent = Google::Cloud::Irm::V1alpha2::IncidentServiceClient.incident_path("[PROJECT]", "[INCIDENT]")
           #
           #   # TODO: Initialize `subscription`:
           #   subscription = {}
-          #   response = incident_service_client.create_subscription(formatted_parent, subscription)
+          #   response = incident_client.create_subscription(formatted_parent, subscription)
 
           def create_subscription \
               parent,
@@ -1546,11 +1546,11 @@ module Google
           # @example
           #   require "google/cloud/irm"
           #
-          #   incident_service_client = Google::Cloud::Irm.new(version: :v1alpha2)
+          #   incident_client = Google::Cloud::Irm.new(version: :v1alpha2)
           #
           #   # TODO: Initialize `subscription`:
           #   subscription = {}
-          #   response = incident_service_client.update_subscription(subscription)
+          #   response = incident_client.update_subscription(subscription)
 
           def update_subscription \
               subscription,
@@ -1591,16 +1591,16 @@ module Google
           # @example
           #   require "google/cloud/irm"
           #
-          #   incident_service_client = Google::Cloud::Irm.new(version: :v1alpha2)
+          #   incident_client = Google::Cloud::Irm.new(version: :v1alpha2)
           #   formatted_parent = Google::Cloud::Irm::V1alpha2::IncidentServiceClient.incident_path("[PROJECT]", "[INCIDENT]")
           #
           #   # Iterate over all results.
-          #   incident_service_client.list_subscriptions(formatted_parent).each do |element|
+          #   incident_client.list_subscriptions(formatted_parent).each do |element|
           #     # Process element.
           #   end
           #
           #   # Or iterate over results one page at a time.
-          #   incident_service_client.list_subscriptions(formatted_parent).each_page do |page|
+          #   incident_client.list_subscriptions(formatted_parent).each_page do |page|
           #     # Process each page at a time.
           #     page.each do |element|
           #       # Process element.
@@ -1634,9 +1634,9 @@ module Google
           # @example
           #   require "google/cloud/irm"
           #
-          #   incident_service_client = Google::Cloud::Irm.new(version: :v1alpha2)
+          #   incident_client = Google::Cloud::Irm.new(version: :v1alpha2)
           #   formatted_name = Google::Cloud::Irm::V1alpha2::IncidentServiceClient.subscription_path("[PROJECT]", "[INCIDENT]", "[SUBSCRIPTION]")
-          #   incident_service_client.delete_subscription(formatted_name)
+          #   incident_client.delete_subscription(formatted_name)
 
           def delete_subscription \
               name,
@@ -1674,12 +1674,12 @@ module Google
           # @example
           #   require "google/cloud/irm"
           #
-          #   incident_service_client = Google::Cloud::Irm.new(version: :v1alpha2)
+          #   incident_client = Google::Cloud::Irm.new(version: :v1alpha2)
           #   formatted_parent = Google::Cloud::Irm::V1alpha2::IncidentServiceClient.incident_path("[PROJECT]", "[INCIDENT]")
           #
           #   # TODO: Initialize `incident_role_assignment`:
           #   incident_role_assignment = {}
-          #   response = incident_service_client.create_incident_role_assignment(formatted_parent, incident_role_assignment)
+          #   response = incident_client.create_incident_role_assignment(formatted_parent, incident_role_assignment)
 
           def create_incident_role_assignment \
               parent,
@@ -1708,9 +1708,9 @@ module Google
           # @example
           #   require "google/cloud/irm"
           #
-          #   incident_service_client = Google::Cloud::Irm.new(version: :v1alpha2)
+          #   incident_client = Google::Cloud::Irm.new(version: :v1alpha2)
           #   formatted_name = Google::Cloud::Irm::V1alpha2::IncidentServiceClient.role_assignment_path("[PROJECT]", "[INCIDENT]", "[ROLE_ASSIGNMENT]")
-          #   incident_service_client.delete_incident_role_assignment(formatted_name)
+          #   incident_client.delete_incident_role_assignment(formatted_name)
 
           def delete_incident_role_assignment \
               name,
@@ -1750,16 +1750,16 @@ module Google
           # @example
           #   require "google/cloud/irm"
           #
-          #   incident_service_client = Google::Cloud::Irm.new(version: :v1alpha2)
+          #   incident_client = Google::Cloud::Irm.new(version: :v1alpha2)
           #   formatted_parent = Google::Cloud::Irm::V1alpha2::IncidentServiceClient.incident_path("[PROJECT]", "[INCIDENT]")
           #
           #   # Iterate over all results.
-          #   incident_service_client.list_incident_role_assignments(formatted_parent).each do |element|
+          #   incident_client.list_incident_role_assignments(formatted_parent).each do |element|
           #     # Process element.
           #   end
           #
           #   # Or iterate over results one page at a time.
-          #   incident_service_client.list_incident_role_assignments(formatted_parent).each_page do |page|
+          #   incident_client.list_incident_role_assignments(formatted_parent).each_page do |page|
           #     # Process each page at a time.
           #     page.each do |element|
           #       # Process element.
@@ -1800,12 +1800,12 @@ module Google
           # @example
           #   require "google/cloud/irm"
           #
-          #   incident_service_client = Google::Cloud::Irm.new(version: :v1alpha2)
+          #   incident_client = Google::Cloud::Irm.new(version: :v1alpha2)
           #   formatted_name = Google::Cloud::Irm::V1alpha2::IncidentServiceClient.role_assignment_path("[PROJECT]", "[INCIDENT]", "[ROLE_ASSIGNMENT]")
           #
           #   # TODO: Initialize `new_assignee`:
           #   new_assignee = {}
-          #   response = incident_service_client.request_incident_role_handover(formatted_name, new_assignee)
+          #   response = incident_client.request_incident_role_handover(formatted_name, new_assignee)
 
           def request_incident_role_handover \
               name,
@@ -1843,12 +1843,12 @@ module Google
           # @example
           #   require "google/cloud/irm"
           #
-          #   incident_service_client = Google::Cloud::Irm.new(version: :v1alpha2)
+          #   incident_client = Google::Cloud::Irm.new(version: :v1alpha2)
           #   formatted_name = Google::Cloud::Irm::V1alpha2::IncidentServiceClient.role_assignment_path("[PROJECT]", "[INCIDENT]", "[ROLE_ASSIGNMENT]")
           #
           #   # TODO: Initialize `new_assignee`:
           #   new_assignee = {}
-          #   response = incident_service_client.confirm_incident_role_handover(formatted_name, new_assignee)
+          #   response = incident_client.confirm_incident_role_handover(formatted_name, new_assignee)
 
           def confirm_incident_role_handover \
               name,
@@ -1886,12 +1886,12 @@ module Google
           # @example
           #   require "google/cloud/irm"
           #
-          #   incident_service_client = Google::Cloud::Irm.new(version: :v1alpha2)
+          #   incident_client = Google::Cloud::Irm.new(version: :v1alpha2)
           #   formatted_name = Google::Cloud::Irm::V1alpha2::IncidentServiceClient.role_assignment_path("[PROJECT]", "[INCIDENT]", "[ROLE_ASSIGNMENT]")
           #
           #   # TODO: Initialize `new_assignee`:
           #   new_assignee = {}
-          #   response = incident_service_client.force_incident_role_handover(formatted_name, new_assignee)
+          #   response = incident_client.force_incident_role_handover(formatted_name, new_assignee)
 
           def force_incident_role_handover \
               name,
@@ -1929,12 +1929,12 @@ module Google
           # @example
           #   require "google/cloud/irm"
           #
-          #   incident_service_client = Google::Cloud::Irm.new(version: :v1alpha2)
+          #   incident_client = Google::Cloud::Irm.new(version: :v1alpha2)
           #   formatted_name = Google::Cloud::Irm::V1alpha2::IncidentServiceClient.role_assignment_path("[PROJECT]", "[INCIDENT]", "[ROLE_ASSIGNMENT]")
           #
           #   # TODO: Initialize `new_assignee`:
           #   new_assignee = {}
-          #   response = incident_service_client.cancel_incident_role_handover(formatted_name, new_assignee)
+          #   response = incident_client.cancel_incident_role_handover(formatted_name, new_assignee)
 
           def cancel_incident_role_handover \
               name,
