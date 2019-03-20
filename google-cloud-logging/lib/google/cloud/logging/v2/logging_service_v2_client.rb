@@ -284,9 +284,9 @@ module Google
           # @example
           #   require "google/cloud/logging/v2"
           #
-          #   logging_service_v2_client = Google::Cloud::Logging::V2::LoggingServiceV2Client.new
+          #   logging_client = Google::Cloud::Logging::V2::LoggingServiceV2Client.new
           #   formatted_log_name = Google::Cloud::Logging::V2::LoggingServiceV2Client.log_path("[PROJECT]", "[LOG]")
-          #   logging_service_v2_client.delete_log(formatted_log_name)
+          #   logging_client.delete_log(formatted_log_name)
 
           def delete_log \
               log_name,
@@ -389,11 +389,11 @@ module Google
           # @example
           #   require "google/cloud/logging/v2"
           #
-          #   logging_service_v2_client = Google::Cloud::Logging::V2::LoggingServiceV2Client.new
+          #   logging_client = Google::Cloud::Logging::V2::LoggingServiceV2Client.new
           #
           #   # TODO: Initialize `entries`:
           #   entries = []
-          #   response = logging_service_v2_client.write_log_entries(entries)
+          #   response = logging_client.write_log_entries(entries)
 
           def write_log_entries \
               entries,
@@ -472,18 +472,18 @@ module Google
           # @example
           #   require "google/cloud/logging/v2"
           #
-          #   logging_service_v2_client = Google::Cloud::Logging::V2::LoggingServiceV2Client.new
+          #   logging_client = Google::Cloud::Logging::V2::LoggingServiceV2Client.new
           #
           #   # TODO: Initialize `formatted_resource_names`:
           #   formatted_resource_names = []
           #
           #   # Iterate over all results.
-          #   logging_service_v2_client.list_log_entries(formatted_resource_names).each do |element|
+          #   logging_client.list_log_entries(formatted_resource_names).each do |element|
           #     # Process element.
           #   end
           #
           #   # Or iterate over results one page at a time.
-          #   logging_service_v2_client.list_log_entries(formatted_resource_names).each_page do |page|
+          #   logging_client.list_log_entries(formatted_resource_names).each_page do |page|
           #     # Process each page at a time.
           #     page.each do |element|
           #       # Process element.
@@ -532,15 +532,15 @@ module Google
           # @example
           #   require "google/cloud/logging/v2"
           #
-          #   logging_service_v2_client = Google::Cloud::Logging::V2::LoggingServiceV2Client.new
+          #   logging_client = Google::Cloud::Logging::V2::LoggingServiceV2Client.new
           #
           #   # Iterate over all results.
-          #   logging_service_v2_client.list_monitored_resource_descriptors.each do |element|
+          #   logging_client.list_monitored_resource_descriptors.each do |element|
           #     # Process element.
           #   end
           #
           #   # Or iterate over results one page at a time.
-          #   logging_service_v2_client.list_monitored_resource_descriptors.each_page do |page|
+          #   logging_client.list_monitored_resource_descriptors.each_page do |page|
           #     # Process each page at a time.
           #     page.each do |element|
           #       # Process element.
@@ -589,16 +589,16 @@ module Google
           # @example
           #   require "google/cloud/logging/v2"
           #
-          #   logging_service_v2_client = Google::Cloud::Logging::V2::LoggingServiceV2Client.new
+          #   logging_client = Google::Cloud::Logging::V2::LoggingServiceV2Client.new
           #   formatted_parent = Google::Cloud::Logging::V2::LoggingServiceV2Client.project_path("[PROJECT]")
           #
           #   # Iterate over all results.
-          #   logging_service_v2_client.list_logs(formatted_parent).each do |element|
+          #   logging_client.list_logs(formatted_parent).each do |element|
           #     # Process element.
           #   end
           #
           #   # Or iterate over results one page at a time.
-          #   logging_service_v2_client.list_logs(formatted_parent).each_page do |page|
+          #   logging_client.list_logs(formatted_parent).each_page do |page|
           #     # Process each page at a time.
           #     page.each do |element|
           #       # Process element.
