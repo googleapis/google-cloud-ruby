@@ -43,7 +43,6 @@ else
         rvm use "$version"@global --default
         git fetch --depth=10000
         gem update --system
-        ruby --version
         bundle update
         bundle exec rake kokoro:"$JOB_TYPE" || set_failed_status
     done
