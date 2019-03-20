@@ -19,6 +19,7 @@ import synthtool.gcp as gcp
 import synthtool.languages.ruby as ruby
 import logging
 import re
+from subprocess import call
 
 
 logging.basicConfig(level=logging.DEBUG)
@@ -102,3 +103,17 @@ s.replace(
     'gem.add_development_dependency "rubocop".*$',
     'gem.add_development_dependency "rubocop", "~> 0.64.0"'
 )
+
+for version in ['v2beta2', 'v2beta3']:
+    # Require the helpers file
+    s.replace(
+        f'lib/google/cloud/tasks/{version}.rb',
+        f'require "google/cloud/tasks/{version}/cloud_tasks_client"',
+        '\n'.join([
+            f'require "google/cloud/tasks/{version}/cloud_tasks_client"',
+            f'require "google/cloud/tasks/{version}/helpers"',
+        ])
+    )
+
+# Generate the helper methods
+call('bundle update && bundle exec rake generate_partials', shell=True)
