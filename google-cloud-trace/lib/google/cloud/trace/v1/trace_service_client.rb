@@ -217,14 +217,14 @@ module Google
           # @example
           #   require "google/cloud/trace"
           #
-          #   trace_service_client = Google::Cloud::Trace.new(version: :v1)
+          #   trace_client = Google::Cloud::Trace.new(version: :v1)
           #
           #   # TODO: Initialize `project_id`:
           #   project_id = ''
           #
           #   # TODO: Initialize `traces`:
           #   traces = {}
-          #   trace_service_client.patch_traces(project_id, traces)
+          #   trace_client.patch_traces(project_id, traces)
 
           def patch_traces \
               project_id,
@@ -257,14 +257,14 @@ module Google
           # @example
           #   require "google/cloud/trace"
           #
-          #   trace_service_client = Google::Cloud::Trace.new(version: :v1)
+          #   trace_client = Google::Cloud::Trace.new(version: :v1)
           #
           #   # TODO: Initialize `project_id`:
           #   project_id = ''
           #
           #   # TODO: Initialize `trace_id`:
           #   trace_id = ''
-          #   response = trace_service_client.get_trace(project_id, trace_id)
+          #   response = trace_client.get_trace(project_id, trace_id)
 
           def get_trace \
               project_id,
@@ -360,18 +360,18 @@ module Google
           # @example
           #   require "google/cloud/trace"
           #
-          #   trace_service_client = Google::Cloud::Trace.new(version: :v1)
+          #   trace_client = Google::Cloud::Trace.new(version: :v1)
           #
           #   # TODO: Initialize `project_id`:
           #   project_id = ''
           #
           #   # Iterate over all results.
-          #   trace_service_client.list_traces(project_id).each do |element|
+          #   trace_client.list_traces(project_id).each do |element|
           #     # Process element.
           #   end
           #
           #   # Or iterate over results one page at a time.
-          #   trace_service_client.list_traces(project_id).each_page do |page|
+          #   trace_client.list_traces(project_id).each_page do |page|
           #     # Process each page at a time.
           #     page.each do |element|
           #       # Process element.

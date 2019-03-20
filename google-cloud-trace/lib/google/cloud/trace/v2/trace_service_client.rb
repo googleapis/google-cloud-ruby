@@ -234,12 +234,12 @@ module Google
           # @example
           #   require "google/cloud/trace"
           #
-          #   trace_service_client = Google::Cloud::Trace.new(version: :v2)
+          #   trace_client = Google::Cloud::Trace.new(version: :v2)
           #   formatted_name = Google::Cloud::Trace::V2::TraceServiceClient.project_path("[PROJECT]")
           #
           #   # TODO: Initialize `spans`:
           #   spans = []
-          #   trace_service_client.batch_write_spans(formatted_name, spans)
+          #   trace_client.batch_write_spans(formatted_name, spans)
 
           def batch_write_spans \
               name,
@@ -339,7 +339,7 @@ module Google
           # @example
           #   require "google/cloud/trace"
           #
-          #   trace_service_client = Google::Cloud::Trace.new(version: :v2)
+          #   trace_client = Google::Cloud::Trace.new(version: :v2)
           #   formatted_name = Google::Cloud::Trace::V2::TraceServiceClient.span_path("[PROJECT]", "[TRACE]", "[SPAN]")
           #
           #   # TODO: Initialize `span_id`:
@@ -353,7 +353,7 @@ module Google
           #
           #   # TODO: Initialize `end_time`:
           #   end_time = {}
-          #   response = trace_service_client.create_span(formatted_name, span_id, display_name, start_time, end_time)
+          #   response = trace_client.create_span(formatted_name, span_id, display_name, start_time, end_time)
 
           def create_span \
               name,
