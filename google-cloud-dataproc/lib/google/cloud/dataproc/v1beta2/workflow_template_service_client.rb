@@ -282,12 +282,12 @@ module Google
           # @example
           #   require "google/cloud/dataproc"
           #
-          #   workflow_template_service_client = Google::Cloud::Dataproc::WorkflowTemplateService.new(version: :v1beta2)
+          #   workflow_template_client = Google::Cloud::Dataproc::WorkflowTemplateService.new(version: :v1beta2)
           #   formatted_parent = Google::Cloud::Dataproc::V1beta2::WorkflowTemplateServiceClient.region_path("[PROJECT]", "[REGION]")
           #
           #   # TODO: Initialize `template`:
           #   template = {}
-          #   response = workflow_template_service_client.create_workflow_template(formatted_parent, template)
+          #   response = workflow_template_client.create_workflow_template(formatted_parent, template)
 
           def create_workflow_template \
               parent,
@@ -327,9 +327,9 @@ module Google
           # @example
           #   require "google/cloud/dataproc"
           #
-          #   workflow_template_service_client = Google::Cloud::Dataproc::WorkflowTemplateService.new(version: :v1beta2)
+          #   workflow_template_client = Google::Cloud::Dataproc::WorkflowTemplateService.new(version: :v1beta2)
           #   formatted_name = Google::Cloud::Dataproc::V1beta2::WorkflowTemplateServiceClient.workflow_template_path("[PROJECT]", "[REGION]", "[WORKFLOW_TEMPLATE]")
-          #   response = workflow_template_service_client.get_workflow_template(formatted_name)
+          #   response = workflow_template_client.get_workflow_template(formatted_name)
 
           def get_workflow_template \
               name,
@@ -397,11 +397,11 @@ module Google
           # @example
           #   require "google/cloud/dataproc"
           #
-          #   workflow_template_service_client = Google::Cloud::Dataproc::WorkflowTemplateService.new(version: :v1beta2)
+          #   workflow_template_client = Google::Cloud::Dataproc::WorkflowTemplateService.new(version: :v1beta2)
           #   formatted_name = Google::Cloud::Dataproc::V1beta2::WorkflowTemplateServiceClient.workflow_template_path("[PROJECT]", "[REGION]", "[WORKFLOW_TEMPLATE]")
           #
           #   # Register a callback during the method call.
-          #   operation = workflow_template_service_client.instantiate_workflow_template(formatted_name) do |op|
+          #   operation = workflow_template_client.instantiate_workflow_template(formatted_name) do |op|
           #     raise op.results.message if op.error?
           #     op_results = op.results
           #     # Process the results.
@@ -505,14 +505,14 @@ module Google
           # @example
           #   require "google/cloud/dataproc"
           #
-          #   workflow_template_service_client = Google::Cloud::Dataproc::WorkflowTemplateService.new(version: :v1beta2)
+          #   workflow_template_client = Google::Cloud::Dataproc::WorkflowTemplateService.new(version: :v1beta2)
           #   formatted_parent = Google::Cloud::Dataproc::V1beta2::WorkflowTemplateServiceClient.region_path("[PROJECT]", "[REGION]")
           #
           #   # TODO: Initialize `template`:
           #   template = {}
           #
           #   # Register a callback during the method call.
-          #   operation = workflow_template_service_client.instantiate_inline_workflow_template(formatted_parent, template) do |op|
+          #   operation = workflow_template_client.instantiate_inline_workflow_template(formatted_parent, template) do |op|
           #     raise op.results.message if op.error?
           #     op_results = op.results
           #     # Process the results.
@@ -582,11 +582,11 @@ module Google
           # @example
           #   require "google/cloud/dataproc"
           #
-          #   workflow_template_service_client = Google::Cloud::Dataproc::WorkflowTemplateService.new(version: :v1beta2)
+          #   workflow_template_client = Google::Cloud::Dataproc::WorkflowTemplateService.new(version: :v1beta2)
           #
           #   # TODO: Initialize `template`:
           #   template = {}
-          #   response = workflow_template_service_client.update_workflow_template(template)
+          #   response = workflow_template_client.update_workflow_template(template)
 
           def update_workflow_template \
               template,
@@ -626,16 +626,16 @@ module Google
           # @example
           #   require "google/cloud/dataproc"
           #
-          #   workflow_template_service_client = Google::Cloud::Dataproc::WorkflowTemplateService.new(version: :v1beta2)
+          #   workflow_template_client = Google::Cloud::Dataproc::WorkflowTemplateService.new(version: :v1beta2)
           #   formatted_parent = Google::Cloud::Dataproc::V1beta2::WorkflowTemplateServiceClient.region_path("[PROJECT]", "[REGION]")
           #
           #   # Iterate over all results.
-          #   workflow_template_service_client.list_workflow_templates(formatted_parent).each do |element|
+          #   workflow_template_client.list_workflow_templates(formatted_parent).each do |element|
           #     # Process element.
           #   end
           #
           #   # Or iterate over results one page at a time.
-          #   workflow_template_service_client.list_workflow_templates(formatted_parent).each_page do |page|
+          #   workflow_template_client.list_workflow_templates(formatted_parent).each_page do |page|
           #     # Process each page at a time.
           #     page.each do |element|
           #       # Process element.
@@ -675,9 +675,9 @@ module Google
           # @example
           #   require "google/cloud/dataproc"
           #
-          #   workflow_template_service_client = Google::Cloud::Dataproc::WorkflowTemplateService.new(version: :v1beta2)
+          #   workflow_template_client = Google::Cloud::Dataproc::WorkflowTemplateService.new(version: :v1beta2)
           #   formatted_name = Google::Cloud::Dataproc::V1beta2::WorkflowTemplateServiceClient.workflow_template_path("[PROJECT]", "[REGION]", "[WORKFLOW_TEMPLATE]")
-          #   workflow_template_service_client.delete_workflow_template(formatted_name)
+          #   workflow_template_client.delete_workflow_template(formatted_name)
 
           def delete_workflow_template \
               name,
