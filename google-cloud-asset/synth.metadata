@@ -1,5 +1,5 @@
 {
-  "updateTime": "2019-03-20T10:38:54.472326Z",
+  "updateTime": "2019-03-20T23:58:11.335029Z",
   "sources": [
     {
       "generator": {
@@ -18,6 +18,16 @@
     }
   ],
   "destinations": [
+    {
+      "client": {
+        "source": "googleapis",
+        "apiName": "asset",
+        "apiVersion": "v1",
+        "language": "ruby",
+        "generator": "gapic",
+        "config": "google/cloud/asset/artman_cloudasset_v1.yaml"
+      }
+    },
     {
       "client": {
         "source": "googleapis",

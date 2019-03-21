@@ -27,7 +27,7 @@ $ gem install google-cloud-asset
 - View this [repository's main README](https://github.com/googleapis/google-cloud-ruby/blob/master/README.md)
   to see the full list of Cloud APIs that we cover.
 
-[Client Library Documentation]: https://googleapis.github.io/google-cloud-ruby/#/docs/google-cloud-asset/latest/google/cloud/asset/v1beta1
+[Client Library Documentation]: https://googleapis.github.io/google-cloud-ruby/#/docs/google-cloud-asset/latest/google/cloud/asset/v1
 [Product Documentation]: https://cloud.google.com/asset
 
 ## Enabling Logging
