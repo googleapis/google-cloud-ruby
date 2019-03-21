@@ -19,23 +19,33 @@ import synthtool.gcp as gcp
 import synthtool.languages.ruby as ruby
 import logging
 import re
-
+from subprocess import call
 
 logging.basicConfig(level=logging.DEBUG)
 
 gapic = gcp.GAPICGenerator()
 
+v1_library = gapic.ruby_library(
+    'asset', 'v1', artman_output_name='google-cloud-ruby/google-cloud-asset',
+    config_path='artman_cloudasset_v1.yaml'
+)
+s.copy(v1_library / 'lib/google/cloud/asset/v1.rb')
+s.copy(v1_library / 'lib/google/cloud/asset/v1')
+s.copy(v1_library / 'test/google/cloud/asset/v1')
+s.copy(v1_library / 'lib/google/cloud/asset.rb')
+s.copy(v1_library / 'README.md')
+s.copy(v1_library / 'LICENSE')
+s.copy(v1_library / '.gitignore')
+s.copy(v1_library / '.yardopts')
+s.copy(v1_library / 'google-cloud-asset.gemspec', merge=ruby.merge_gemspec)
+
 v1beta1_library = gapic.ruby_library(
     'asset', 'v1beta1', artman_output_name='google-cloud-ruby/google-cloud-asset',
     config_path='artman_cloudasset_v1beta1.yaml'
 )
-s.copy(v1beta1_library / 'lib')
-s.copy(v1beta1_library / 'test')
-s.copy(v1beta1_library / 'README.md')
-s.copy(v1beta1_library / 'LICENSE')
-s.copy(v1beta1_library / '.gitignore')
-s.copy(v1beta1_library / '.yardopts')
-s.copy(v1beta1_library / 'google-cloud-asset.gemspec', merge=ruby.merge_gemspec)
+s.copy(v1beta1_library / 'lib/google/cloud/asset/v1beta1.rb')
+s.copy(v1beta1_library / 'lib/google/cloud/asset/v1beta1')
+s.copy(v1beta1_library / 'test/google/cloud/asset/v1beta1')
 
 # https://github.com/googleapis/gapic-generator/issues/2180
 s.replace(
@@ -45,7 +55,7 @@ s.replace(
 
 # https://github.com/googleapis/gapic-generator/issues/2232
 s.replace(
-    'lib/google/cloud/asset/v1beta1/asset_service_client.rb',
+    'lib/google/cloud/asset/**/asset_service_client.rb',
     '\n\n(\\s+)class OperationsClient < Google::Longrunning::OperationsClient',
     '\n\n\\1# @private\n\\1class OperationsClient < Google::Longrunning::OperationsClient')
 
@@ -62,7 +72,7 @@ def escape_braces(match):
 
 
 s.replace(
-    'lib/google/cloud/asset/v1beta1/**/*.rb',
+    'lib/google/cloud/asset/**/**/*.rb',
     '\n(\\s+)#[^\n]*[^\n#\\$\\\\]\\{[\\w,]+\\}',
     escape_braces)
 
@@ -107,3 +117,17 @@ s.replace(
     'gem.add_development_dependency "rubocop".*$',
     'gem.add_development_dependency "rubocop", "~> 0.64.0"'
 )
+
+for version in ['v1', 'v1beta1']:
+    # Require the helpers file
+    s.replace(
+        f'lib/google/cloud/asset/{version}.rb',
+        f'require "google/cloud/asset/{version}/asset_service_client"',
+        '\n'.join([
+            f'require "google/cloud/asset/{version}/asset_service_client"',
+            f'require "google/cloud/asset/{version}/helpers"',
+        ])
+    )
+
+# Generate the helper methods
+call('bundle update && bundle exec rake generate_partials', shell=True)

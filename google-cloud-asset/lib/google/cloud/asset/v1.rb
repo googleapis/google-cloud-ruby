@@ -13,8 +13,8 @@
 # limitations under the License.
 
 
-require "google/cloud/asset/v1beta1/asset_service_client"
-require "google/cloud/asset/v1beta1/helpers"
+require "google/cloud/asset/v1/asset_service_client"
+require "google/cloud/asset/v1/helpers"
 
 module Google
   module Cloud
@@ -76,7 +76,7 @@ module Google
       # end
       # ```
       #
-      module V1beta1
+      module V1
         # rubocop:enable LineLength
 
         ##
@@ -130,7 +130,7 @@ module Google
             lib_name: lib_name,
             lib_version: lib_version
           }.select { |_, v| v != nil }
-          Google::Cloud::Asset::V1beta1::AssetServiceClient.new(**kwargs)
+          Google::Cloud::Asset::V1::AssetServiceClient.new(**kwargs)
         end
       end
     end
