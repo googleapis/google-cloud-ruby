@@ -44,6 +44,8 @@ describe Google::Cloud::Debugger, :debugger do
   end
 
   it "catches and evaluates logpoint" do
+    skip "Listing log entries is unreliable"
+
     token = rand 0x10000000000
 
     set_test_logpoint token
