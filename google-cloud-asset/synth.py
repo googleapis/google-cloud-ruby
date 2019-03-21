@@ -19,7 +19,7 @@ import synthtool.gcp as gcp
 import synthtool.languages.ruby as ruby
 import logging
 import re
-
+from subprocess import call
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -117,3 +117,17 @@ s.replace(
     'gem.add_development_dependency "rubocop".*$',
     'gem.add_development_dependency "rubocop", "~> 0.64.0"'
 )
+
+for version in ['v1', 'v1beta1']:
+    # Require the helpers file
+    s.replace(
+        f'lib/google/cloud/asset/{version}.rb',
+        f'require "google/cloud/asset/{version}/asset_service_client"',
+        '\n'.join([
+            f'require "google/cloud/asset/{version}/asset_service_client"',
+            f'require "google/cloud/asset/{version}/helpers"',
+        ])
+    )
+
+# Generate the helper methods
+call('bundle update && bundle exec rake generate_partials', shell=True)

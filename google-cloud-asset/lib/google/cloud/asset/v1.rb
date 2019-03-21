@@ -14,6 +14,7 @@
 
 
 require "google/cloud/asset/v1/asset_service_client"
+require "google/cloud/asset/v1/helpers"
 
 module Google
   module Cloud
