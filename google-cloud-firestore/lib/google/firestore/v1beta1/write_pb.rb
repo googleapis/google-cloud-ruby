@@ -4,10 +4,10 @@
 
 require 'google/protobuf'
 
-require 'google/api/annotations_pb'
 require 'google/firestore/v1beta1/common_pb'
 require 'google/firestore/v1beta1/document_pb'
 require 'google/protobuf/timestamp_pb'
+require 'google/api/annotations_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.firestore.v1beta1.Write" do
     optional :update_mask, :message, 3, "google.firestore.v1beta1.DocumentMask"

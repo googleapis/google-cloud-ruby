@@ -20,13 +20,11 @@ module Google
       # Used to restrict a get or update operation on a document to a subset of its
       # fields.
       # This is different from standard field masks, as this is always scoped to a
-      # {Google::Firestore::V1::Document Document}, and takes in account the dynamic
-      # nature of {Google::Firestore::V1::Value Value}.
+      # {Google::Firestore::V1::Document Document}, and takes in account the dynamic nature of {Google::Firestore::V1::Value Value}.
       # @!attribute [rw] field_paths
       #   @return [Array<String>]
-      #     The list of field paths in the mask. See
-      #     {Google::Firestore::V1::Document#fields Document#fields} for a field path
-      #     syntax reference.
+      #     The list of field paths in the mask. See {Google::Firestore::V1::Document#fields Document#fields} for a field
+      #     path syntax reference.
       class DocumentMask; end
 
       # A precondition on a document, used for conditional operations.

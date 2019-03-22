@@ -16,8 +16,7 @@
 module Google
   module Firestore
     module V1beta1
-      # The request for
-      # {Google::Firestore::V1beta1::Firestore::GetDocument Firestore::GetDocument}.
+      # The request for {Google::Firestore::V1beta1::Firestore::GetDocument Firestore::GetDocument}.
       # @!attribute [rw] name
       #   @return [String]
       #     The resource name of the Document to get. In the format:
@@ -37,8 +36,7 @@ module Google
       #     This may not be older than 60 seconds.
       class GetDocumentRequest; end
 
-      # The request for
-      # {Google::Firestore::V1beta1::Firestore::ListDocuments Firestore::ListDocuments}.
+      # The request for {Google::Firestore::V1beta1::Firestore::ListDocuments Firestore::ListDocuments}.
       # @!attribute [rw] parent
       #   @return [String]
       #     The parent resource name. In the format:
@@ -77,16 +75,14 @@ module Google
       #   @return [true, false]
       #     If the list should show missing documents. A missing document is a
       #     document that does not exist but has sub-documents. These documents will
-      #     be returned with a key but will not have fields,
-      #     {Google::Firestore::V1beta1::Document#create_time Document#create_time}, or
-      #     {Google::Firestore::V1beta1::Document#update_time Document#update_time} set.
+      #     be returned with a key but will not have fields, {Google::Firestore::V1beta1::Document#create_time Document#create_time},
+      #     or {Google::Firestore::V1beta1::Document#update_time Document#update_time} set.
       #
       #     Requests with `show_missing` may not specify `where` or
       #     `order_by`.
       class ListDocumentsRequest; end
 
-      # The response for
-      # {Google::Firestore::V1beta1::Firestore::ListDocuments Firestore::ListDocuments}.
+      # The response for {Google::Firestore::V1beta1::Firestore::ListDocuments Firestore::ListDocuments}.
       # @!attribute [rw] documents
       #   @return [Array<Google::Firestore::V1beta1::Document>]
       #     The Documents found.
@@ -95,8 +91,7 @@ module Google
       #     The next page token.
       class ListDocumentsResponse; end
 
-      # The request for
-      # {Google::Firestore::V1beta1::Firestore::CreateDocument Firestore::CreateDocument}.
+      # The request for {Google::Firestore::V1beta1::Firestore::CreateDocument Firestore::CreateDocument}.
       # @!attribute [rw] parent
       #   @return [String]
       #     The parent resource. For example:
@@ -121,8 +116,7 @@ module Google
       #     will not be returned in the response.
       class CreateDocumentRequest; end
 
-      # The request for
-      # {Google::Firestore::V1beta1::Firestore::UpdateDocument Firestore::UpdateDocument}.
+      # The request for {Google::Firestore::V1beta1::Firestore::UpdateDocument Firestore::UpdateDocument}.
       # @!attribute [rw] document
       #   @return [Google::Firestore::V1beta1::Document]
       #     The updated document.
@@ -148,8 +142,7 @@ module Google
       #     The request will fail if this is set and not met by the target document.
       class UpdateDocumentRequest; end
 
-      # The request for
-      # {Google::Firestore::V1beta1::Firestore::DeleteDocument Firestore::DeleteDocument}.
+      # The request for {Google::Firestore::V1beta1::Firestore::DeleteDocument Firestore::DeleteDocument}.
       # @!attribute [rw] name
       #   @return [String]
       #     The resource name of the Document to delete. In the format:
@@ -160,8 +153,7 @@ module Google
       #     The request will fail if this is set and not met by the target document.
       class DeleteDocumentRequest; end
 
-      # The request for
-      # {Google::Firestore::V1beta1::Firestore::BatchGetDocuments Firestore::BatchGetDocuments}.
+      # The request for {Google::Firestore::V1beta1::Firestore::BatchGetDocuments Firestore::BatchGetDocuments}.
       # @!attribute [rw] database
       #   @return [String]
       #     The database name. In the format:
@@ -193,8 +185,7 @@ module Google
       #     This may not be older than 60 seconds.
       class BatchGetDocumentsRequest; end
 
-      # The streamed response for
-      # {Google::Firestore::V1beta1::Firestore::BatchGetDocuments Firestore::BatchGetDocuments}.
+      # The streamed response for {Google::Firestore::V1beta1::Firestore::BatchGetDocuments Firestore::BatchGetDocuments}.
       # @!attribute [rw] found
       #   @return [Google::Firestore::V1beta1::Document]
       #     A document that was requested.
@@ -206,8 +197,7 @@ module Google
       #   @return [String]
       #     The transaction that was started as part of this request.
       #     Will only be set in the first response, and only if
-      #     {Google::Firestore::V1beta1::BatchGetDocumentsRequest#new_transaction BatchGetDocumentsRequest#new_transaction}
-      #     was set in the request.
+      #     {Google::Firestore::V1beta1::BatchGetDocumentsRequest#new_transaction BatchGetDocumentsRequest#new_transaction} was set in the request.
       # @!attribute [rw] read_time
       #   @return [Google::Protobuf::Timestamp]
       #     The time at which the document was read.
@@ -216,8 +206,7 @@ module Google
       #     read_time and this one.
       class BatchGetDocumentsResponse; end
 
-      # The request for
-      # {Google::Firestore::V1beta1::Firestore::BeginTransaction Firestore::BeginTransaction}.
+      # The request for {Google::Firestore::V1beta1::Firestore::BeginTransaction Firestore::BeginTransaction}.
       # @!attribute [rw] database
       #   @return [String]
       #     The database name. In the format:
@@ -228,15 +217,13 @@ module Google
       #     Defaults to a read-write transaction.
       class BeginTransactionRequest; end
 
-      # The response for
-      # {Google::Firestore::V1beta1::Firestore::BeginTransaction Firestore::BeginTransaction}.
+      # The response for {Google::Firestore::V1beta1::Firestore::BeginTransaction Firestore::BeginTransaction}.
       # @!attribute [rw] transaction
       #   @return [String]
       #     The transaction that was started.
       class BeginTransactionResponse; end
 
-      # The request for
-      # {Google::Firestore::V1beta1::Firestore::Commit Firestore::Commit}.
+      # The request for {Google::Firestore::V1beta1::Firestore::Commit Firestore::Commit}.
       # @!attribute [rw] database
       #   @return [String]
       #     The database name. In the format:
@@ -251,8 +238,7 @@ module Google
       #     If set, applies all writes in this transaction, and commits it.
       class CommitRequest; end
 
-      # The response for
-      # {Google::Firestore::V1beta1::Firestore::Commit Firestore::Commit}.
+      # The response for {Google::Firestore::V1beta1::Firestore::Commit Firestore::Commit}.
       # @!attribute [rw] write_results
       #   @return [Array<Google::Firestore::V1beta1::WriteResult>]
       #     The result of applying the writes.
@@ -264,8 +250,7 @@ module Google
       #     The time at which the commit occurred.
       class CommitResponse; end
 
-      # The request for
-      # {Google::Firestore::V1beta1::Firestore::Rollback Firestore::Rollback}.
+      # The request for {Google::Firestore::V1beta1::Firestore::Rollback Firestore::Rollback}.
       # @!attribute [rw] database
       #   @return [String]
       #     The database name. In the format:
@@ -275,8 +260,7 @@ module Google
       #     The transaction to roll back.
       class RollbackRequest; end
 
-      # The request for
-      # {Google::Firestore::V1beta1::Firestore::RunQuery Firestore::RunQuery}.
+      # The request for {Google::Firestore::V1beta1::Firestore::RunQuery Firestore::RunQuery}.
       # @!attribute [rw] parent
       #   @return [String]
       #     The parent resource name. In the format:
@@ -303,15 +287,13 @@ module Google
       #     This may not be older than 60 seconds.
       class RunQueryRequest; end
 
-      # The response for
-      # {Google::Firestore::V1beta1::Firestore::RunQuery Firestore::RunQuery}.
+      # The response for {Google::Firestore::V1beta1::Firestore::RunQuery Firestore::RunQuery}.
       # @!attribute [rw] transaction
       #   @return [String]
       #     The transaction that was started as part of this request.
       #     Can only be set in the first response, and only if
-      #     {Google::Firestore::V1beta1::RunQueryRequest#new_transaction RunQueryRequest#new_transaction}
-      #     was set in the request. If set, no other fields will be set in this
-      #     response.
+      #     {Google::Firestore::V1beta1::RunQueryRequest#new_transaction RunQueryRequest#new_transaction} was set in the request.
+      #     If set, no other fields will be set in this response.
       # @!attribute [rw] document
       #   @return [Google::Firestore::V1beta1::Document]
       #     A query result.
@@ -364,9 +346,9 @@ module Google
       #     A stream token that was previously sent by the server.
       #
       #     The client should set this field to the token from the most recent
-      #     {Google::Firestore::V1beta1::WriteResponse WriteResponse} it has received.
-      #     This acknowledges that the client has received responses up to this token.
-      #     After sending this token, earlier tokens may not be used anymore.
+      #     {Google::Firestore::V1beta1::WriteResponse WriteResponse} it has received. This acknowledges that the client has
+      #     received responses up to this token. After sending this token, earlier
+      #     tokens may not be used anymore.
       #
       #     The server may close the stream if there are too many unacknowledged
       #     responses.
@@ -418,8 +400,7 @@ module Google
       #     Labels associated with this target change.
       class ListenRequest; end
 
-      # The response for
-      # {Google::Firestore::V1beta1::Firestore::Listen Firestore::Listen}.
+      # The response for {Google::Firestore::V1beta1::Firestore::Listen Firestore::Listen}.
       # @!attribute [rw] target_change
       #   @return [Google::Firestore::V1beta1::TargetChange]
       #     Targets have changed.
@@ -431,8 +412,8 @@ module Google
       #     A {Google::Firestore::V1beta1::Document Document} has been deleted.
       # @!attribute [rw] document_remove
       #   @return [Google::Firestore::V1beta1::DocumentRemove]
-      #     A {Google::Firestore::V1beta1::Document Document} has been removed from a
-      #     target (because it is no longer relevant to that target).
+      #     A {Google::Firestore::V1beta1::Document Document} has been removed from a target (because it is no longer
+      #     relevant to that target).
       # @!attribute [rw] filter
       #   @return [Google::Firestore::V1beta1::ExistenceFilter]
       #     A filter to apply to the set of documents previously returned for the
@@ -451,9 +432,7 @@ module Google
       #     A target specified by a set of document names.
       # @!attribute [rw] resume_token
       #   @return [String]
-      #     A resume token from a prior
-      #     {Google::Firestore::V1beta1::TargetChange TargetChange} for an identical
-      #     target.
+      #     A resume token from a prior {Google::Firestore::V1beta1::TargetChange TargetChange} for an identical target.
       #
       #     Using a resume token with a different target is unsupported and may fail.
       # @!attribute [rw] read_time
@@ -566,8 +545,7 @@ module Google
         end
       end
 
-      # The request for
-      # {Google::Firestore::V1beta1::Firestore::ListCollectionIds Firestore::ListCollectionIds}.
+      # The request for {Google::Firestore::V1beta1::Firestore::ListCollectionIds Firestore::ListCollectionIds}.
       # @!attribute [rw] parent
       #   @return [String]
       #     The parent document. In the format:
@@ -583,8 +561,7 @@ module Google
       #     {Google::Firestore::V1beta1::ListCollectionIdsResponse ListCollectionIdsResponse}.
       class ListCollectionIdsRequest; end
 
-      # The response from
-      # {Google::Firestore::V1beta1::Firestore::ListCollectionIds Firestore::ListCollectionIds}.
+      # The response from {Google::Firestore::V1beta1::Firestore::ListCollectionIds Firestore::ListCollectionIds}.
       # @!attribute [rw] collection_ids
       #   @return [Array<String>]
       #     The collection ids.
