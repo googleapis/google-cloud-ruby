@@ -23,6 +23,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     map :attributes, :string, :string, 2
     optional :message_id, :string, 3
     optional :publish_time, :message, 4, "google.protobuf.Timestamp"
+    optional :ordering_key, :string, 5
   end
   add_message "google.pubsub.v1.GetTopicRequest" do
     optional :topic, :string, 1
@@ -76,6 +77,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :retain_acked_messages, :bool, 7
     optional :message_retention_duration, :message, 8, "google.protobuf.Duration"
     map :labels, :string, :string, 9
+    optional :enable_message_ordering, :bool, 10
     optional :expiration_policy, :message, 11, "google.pubsub.v1.ExpirationPolicy"
   end
   add_message "google.pubsub.v1.ExpirationPolicy" do
