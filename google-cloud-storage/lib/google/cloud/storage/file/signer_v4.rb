@@ -24,7 +24,7 @@ module Google
       class File
         ##
         # @private Create a signed_url for a file.
-        class V4Signer
+        class SignerV4
           def initialize bucket_name, file_name, service
             @bucket_name = bucket_name
             @file_name = file_name

@@ -17,8 +17,8 @@ require "google/cloud/storage/convert"
 require "google/cloud/storage/file/acl"
 require "google/cloud/storage/file/list"
 require "google/cloud/storage/file/verifier"
-require "google/cloud/storage/file/signer"
-require "google/cloud/storage/file/v4_signer"
+require "google/cloud/storage/file/signer_v2"
+require "google/cloud/storage/file/signer_v4"
 require "zlib"
 
 module Google
@@ -1484,7 +1484,7 @@ module Google
                        client_email: nil, signing_key: nil, private_key: nil,
                        query: nil
           ensure_service!
-          signer = File::Signer.from_file self
+          signer = File::SignerV2.from_file self
           signer.signed_url method: method, expires: expires, headers: headers,
                             content_type: content_type,
                             content_md5: content_md5,

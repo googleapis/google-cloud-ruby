@@ -15,9 +15,9 @@
 require "helper"
 require "json"
 
-class V4SignerTest < MockStorage
+class SignerV4Test < MockStorage
   def setup
-    account = self.class.load_json "../../../../data/v4_signer_test_account.json"
+    account = self.class.load_json "../../../../data/signer_v4_test_account.json"
     credentials.issuer = account["client_email"]
     credentials.signing_key = OpenSSL::PKey::RSA.new account["private_key"]
   end
@@ -36,7 +36,7 @@ class V4SignerTest < MockStorage
   def self.build_test_for test, index
     define_method("test_#{index}: #{test["description"]}") do
       # start: test method body
-      signer = Google::Cloud::Storage::File::V4Signer.new test["bucket"],
+      signer = Google::Cloud::Storage::File::SignerV4.new test["bucket"],
                                                           test["object"],
                                                           storage.service
       Time.stub :now, Time.parse(test["timestamp"]) do
@@ -52,8 +52,8 @@ class V4SignerTest < MockStorage
   end
 end
 
-tests = V4SignerTest.load_json "../../../../data/v4_signer_test_data.json"
+tests = SignerV4Test.load_json "../../../../data/signer_v4_test_data.json"
 tests.each_with_index do |test, index|
   next if [6,8].include? index # TODO: Support multiple headers
-  V4SignerTest.build_test_for test, index
+  SignerV4Test.build_test_for test, index
 end

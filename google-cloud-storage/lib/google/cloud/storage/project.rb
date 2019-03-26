@@ -488,7 +488,7 @@ module Google
                        private_key: nil, query: nil, version: :v2
           case version
           when :v2
-            signer = File::Signer.new bucket, path, service
+            signer = File::SignerV2.new bucket, path, service
 
             signer.signed_url method: method, expires: expires, headers: headers,
                               content_type: content_type,
@@ -497,7 +497,7 @@ module Google
                               signing_key: signing_key, private_key: private_key,
                               query: query
           when :v4
-            signer = File::V4Signer.new bucket, path, service
+            signer = File::SignerV4.new bucket, path, service
             signer.signed_url method: method, expires: expires, headers: headers,
                               issuer: issuer, client_email: client_email,
                               signing_key: signing_key, private_key: private_key,

@@ -1453,7 +1453,7 @@ module Google
                        client_email: nil, signing_key: nil, private_key: nil,
                        query: nil
           ensure_service!
-          signer = File::Signer.from_bucket self, path
+          signer = File::SignerV2.from_bucket self, path
           signer.signed_url method: method, expires: expires, headers: headers,
                             content_type: content_type,
                             content_md5: content_md5, issuer: issuer,
@@ -1563,7 +1563,7 @@ module Google
                         private_key: nil
           ensure_service!
 
-          signer = File::Signer.from_bucket self, path
+          signer = File::SignerV2.from_bucket self, path
           signer.post_object issuer: issuer, client_email: client_email,
                              signing_key: signing_key, private_key: private_key,
                              policy: policy
