@@ -48,11 +48,11 @@ module Google
       # ```rb
       # require "google/cloud/language"
       #
-      # language_service_client = Google::Cloud::Language.new(version: :v1beta2)
+      # language_client = Google::Cloud::Language.new(version: :v1beta2)
       # content = "Hello, world!"
       # type = :PLAIN_TEXT
       # document = { content: content, type: type }
-      # response = language_service_client.analyze_sentiment(document)
+      # response = language_client.analyze_sentiment(document)
       # ```
       #
       # ### Next Steps

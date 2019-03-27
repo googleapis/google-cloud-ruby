@@ -21,7 +21,6 @@ module Google
       module V1
         class Credentials < Google::Auth::Credentials
           SCOPE = [
-            "https://www.googleapis.com/auth/cloud-language",
             "https://www.googleapis.com/auth/cloud-platform"
           ].freeze
           PATH_ENV_VARS = %w(LANGUAGE_CREDENTIALS

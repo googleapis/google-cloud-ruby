@@ -97,3 +97,12 @@ s.replace(
     'gem.add_development_dependency "rubocop".*$',
     'gem.add_development_dependency "rubocop", "~> 0.64.0"'
 )
+
+s.replace(
+    'lib/google/cloud/language/**/credentials.rb',
+    '\n'.join([
+        '"https://www.googleapis.com/auth/cloud-language",',
+        '            "https://www.googleapis.com/auth/cloud-platform"'
+    ]),
+    '"https://www.googleapis.com/auth/cloud-platform"'
+)
