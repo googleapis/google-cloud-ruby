@@ -401,7 +401,8 @@ module Google
         # @see https://cloud.google.com/storage/docs/access-control#Signed-URLs
         #   Access Control Signed URLs guide
         #
-        # @param [String, nil] bucket Name of the bucket, or nil if URL for all buckets is desired.
+        # @param [String, nil] bucket Name of the bucket, or nil if URL for all
+        #   buckets is desired.
         # @param [String] path Path to the file in Google Cloud Storage.
         # @param [String] method The HTTP verb to be used with the signed URL.
         #   Signed URLs can be used
@@ -490,18 +491,19 @@ module Google
           when :v2
             signer = File::SignerV2.new bucket, path, service
 
-            signer.signed_url method: method, expires: expires, headers: headers,
-                              content_type: content_type,
-                              content_md5: content_md5,
-                              issuer: issuer, client_email: client_email,
-                              signing_key: signing_key, private_key: private_key,
-                              query: query
+            signer.signed_url method: method, expires: expires,
+                              headers: headers, content_type: content_type,
+                              content_md5: content_md5, issuer: issuer,
+                              client_email: client_email,
+                              signing_key: signing_key,
+                              private_key: private_key, query: query
           when :v4
             signer = File::SignerV4.new bucket, path, service
-            signer.signed_url method: method, expires: expires, headers: headers,
-                              issuer: issuer, client_email: client_email,
-                              signing_key: signing_key, private_key: private_key,
-                              query: query
+            signer.signed_url method: method, expires: expires,
+                              headers: headers, issuer: issuer,
+                              client_email: client_email,
+                              signing_key: signing_key,
+                              private_key: private_key, query: query
           else
             raise ArgumentError, "version '#{version}' not supported"
           end

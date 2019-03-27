@@ -39,21 +39,6 @@ module Google
             new bucket.name, file_name, bucket.service
           end
 
-          ##
-          # The external path to the file.
-          def ext_path
-            escaped_path = String(@file_name).split("/").map do |node|
-              CGI.escape node
-            end.join("/")
-            "/#{CGI.escape @bucket_name}/#{escaped_path}"
-          end
-
-          ##
-          # The external url to the file.
-          def ext_url
-            "#{GOOGLEAPIS_URL}#{ext_path}"
-          end
-
           def signature_str options
             [options[:method], options[:content_md5],
              options[:content_type], options[:expires],
@@ -62,93 +47,85 @@ module Google
 
           def signed_url method: "GET", expires: nil, headers: nil,
                          issuer: nil, client_email: nil,
-                         access_token: nil, project_id: nil, signing_key: nil,
+                         access_token: nil, signing_key: nil,
                          private_key: nil, query: nil
-
-            headers = Hash[headers.map{ |k,v| [k.downcase, v.strip.gsub(/\s+/, " ")] } ] if headers
-
-            # Select appropriate signer
-            signer = nil
-            if !access_token.nil? && !client_email.nil? && !project_id.nil?
-              # Use access token
-              signer = iam_signer project_id, CGI.escape(client_email), access_token
-            else
-              # Use service account
-              # Parse the Service Account and get client id and private key
-
-
-
-              issuer = issuer || client_email || @service.credentials.issuer
-              raise SignedUrlUnavailable, "issuer (client_email) not found "unless issuer
-              signing_key = signing_key ||
-                private_key || @service.credentials.signing_key
-              raise SignedUrlUnavailable, "signing_key (private_key) not found "unless signing_key
-              signer = service_account_signer signing_key
-            end
-            expires ||= 604800 # Default is 7 days.
-            if expires > 604800
-              fail "Expiration time can't be longer than a week"
-            end
-
+            issuer, signer = issuer_and_signer issuer, client_email,
+                                               access_token, signing_key,
+                                               private_key
             datetime_now = Time.now.utc
-            goog_date = datetime_now.strftime("%Y%m%dT%H%M%SZ")
-            datestamp = datetime_now.strftime("%Y%m%d")
-            algorithm = "GOOG4-RSA-SHA256"
+            goog_date = datetime_now.strftime "%Y%m%dT%H%M%SZ"
+            datestamp = datetime_now.strftime "%Y%m%d"
             # goog4_request is not checked.
-            region_name = "auto"
-            credential_scope = "#{datestamp}/#{region_name}/storage/goog4_request"
-            # Headers needs to be in alpha order.
-            canonical_headers = headers || {}
-            canonical_headers["host"] = "storage.googleapis.com"
+            scope = "#{datestamp}/auto/storage/goog4_request"
 
-            canonical_headers = canonical_headers.sort_by { |k, v| k.downcase }.to_h
-            canonical_headers_str = ""
-            canonical_headers.each { |k, v| canonical_headers_str += "#{k}:#{v}\n" }
-            signed_headers_str = ""
-            canonical_headers.each { |k, v| signed_headers_str += "#{k};" }
-            signed_headers_str = signed_headers_str.chomp(';') # remove trailing ';'
+            canonical_headers_str, signed_headers_str = \
+              canonical_and_signed_headers headers
 
-            # Begin constructing string_to_sign
-            # Needs to be in alpha order
-            credential = CGI.escape(issuer + "/" + credential_scope)
-            query ||={}
-            query["X-Goog-Algorithm"] = algorithm
-            query["X-Goog-Credential"] = credential
-            query["X-Goog-Date"] = goog_date
-            query["X-Goog-Expires"] = expires
-            query["X-Goog-SignedHeaders"] = CGI.escape(signed_headers_str)
-            query = query.sort_by { |k, v| k.to_s.downcase }.to_h
-            canonical_querystring = ""
-            query.each { |k, v| canonical_querystring += "#{k}=#{v}&" }
-            canonical_querystring = canonical_querystring.chomp("&") # remove trailing '&'
+            algorithm = "GOOG4-RSA-SHA256"
+            expires = determine_expires expires
+            credential = CGI.escape issuer + "/" + scope
+            canonical_query_str = canonical_query query, algorithm,
+                                                  credential, goog_date,
+                                                  expires, signed_headers_str
 
-            # From AWS: You don't include a payload hash in the Canonical Request,
-            # because when you create a presigned URL, you don't know the payload
-            # content because the URL is used to upload an arbitrary payload. Instead,
-            # you use a constant string UNSIGNED-PAYLOAD.
+            # From AWS: You don't include a payload hash in the Canonical
+            # Request, because when you create a presigned URL, you don't know
+            # the payload content because the URL is used to upload an arbitrary
+            # payload. Instead, you use a constant string UNSIGNED-PAYLOAD.
             canonical_request = [method,
                                  ext_path,
-                                 canonical_querystring,
+                                 canonical_query_str,
                                  canonical_headers_str,
                                  signed_headers_str,
                                  "UNSIGNED-PAYLOAD"].join("\n")
 
             # Construct string to sign
-            string_to_sign = [algorithm,
-                              goog_date,
-                              credential_scope,
-                              Digest::SHA256.hexdigest(canonical_request)].join("\n")
+            req_sha = Digest::SHA256.hexdigest canonical_request
+            string_to_sign = [algorithm, goog_date, scope, req_sha].join "\n"
 
-
-            # puts "\n\ncanonical_request\n\n#{canonical_request}\n\nstring_to_sign\n\n#{string_to_sign}\n\n"
             # Sign string
-            signature = signer.call(string_to_sign)
+            signature = signer.call string_to_sign
 
             # Construct signed URL
-            "#{ext_url}?#{canonical_querystring}&X-Goog-Signature=#{signature}"
+            "#{ext_url}?#{canonical_query_str}&X-Goog-Signature=#{signature}"
           end
 
           protected
+
+          def canonical_and_signed_headers headers
+            # Headers needs to be in alpha order.
+            canonical_headers = headers || {}
+            canonical_headers = Hash[canonical_headers.map do |k, v|
+                                       [k.downcase, v.strip.gsub(/\s+/, " ")]
+                                     end]
+            canonical_headers["host"] = "storage.googleapis.com"
+
+            canonical_headers = canonical_headers.sort_by do |k, _|
+              k.downcase
+            end.to_h
+            canonical_headers_str = ""
+            canonical_headers.each do |k, v|
+              canonical_headers_str += "#{k}:#{v}\n"
+            end
+            signed_headers_str = ""
+            canonical_headers.each_key { |k| signed_headers_str += "#{k};" }
+            signed_headers_str = signed_headers_str.chomp ";"
+            [canonical_headers_str, signed_headers_str]
+          end
+
+          def canonical_query query, algorithm, credential, goog_date, expires,
+                              signed_headers_str
+            query ||= {}
+            query["X-Goog-Algorithm"] = algorithm
+            query["X-Goog-Credential"] = credential
+            query["X-Goog-Date"] = goog_date
+            query["X-Goog-Expires"] = expires
+            query["X-Goog-SignedHeaders"] = CGI.escape signed_headers_str
+            query = query.sort_by { |k, _| k.to_s.downcase }.to_h
+            canonical_query_str = ""
+            query.each { |k, v| canonical_query_str += "#{k}=#{v}&" }
+            canonical_query_str.chomp "&"
+          end
 
           ##
           # The external path to the file.
@@ -171,31 +148,75 @@ module Google
             end
             # Sign string to sign
             lambda do |string_to_sign|
-              signature = signer.sign(OpenSSL::Digest::SHA256.new, string_to_sign).unpack('H*').first
+              sig = signer.sign OpenSSL::Digest::SHA256.new, string_to_sign
+              sig.unpack("H*").first
             end
           end
 
-          def iam_signer project_id, client_email, access_token
+          def determine_expires expires
+            expires ||= 604_800 # Default is 7 days.
+            if expires > 604_800
+              raise ArgumentError, "Expiration time can't be longer than a week"
+            end
+            expires
+          end
+
+          def determine_signing_key signing_key, private_key
+            signing_key = signing_key || private_key ||
+                          @service.credentials.signing_key
+            unless signing_key
+              raise SignedUrlUnavailable, "signing_key (private_key) missing"
+            end
+            signing_key
+          end
+
+          def determine_issuer issuer, client_email
+            # Parse the Service Account and get client id and private key
+            issuer = issuer || client_email || @service.credentials.issuer
+            unless issuer
+              raise SignedUrlUnavailable, "issuer (client_email) missing"
+            end
+            issuer
+          end
+
+          # Select appropriate signer
+          def issuer_and_signer issuer, client_email, access_token, signing_key,
+                                private_key
+            if access_token
+              # Use access token
+              issuer ||= client_email
+              signer = iam_signer CGI.escape(issuer), access_token
+            else
+              # Use service account
+              issuer = determine_issuer issuer, client_email
+              signing_key = determine_signing_key signing_key, private_key
+              signer = service_account_signer signing_key
+            end
+            [issuer, signer]
+          end
+
+          def iam_signer client_email, access_token
             lambda do |string_to_sign|
-              begin
-                uri = URI("https://iam.googleapis.com/v1/projects/-/serviceAccounts/#{client_email}:signBlob")
-                http = Net::HTTP.new(uri.host, uri.port)
-                http.use_ssl = true
-                #http.set_debug_output($stdout)
-                header = {}
-                header["Authorization"] = "Bearer #{access_token}"
-                header["Content-type"] = "application/json"
-                req = Net::HTTP::Post.new(uri, header)
-                req.body = {"bytesToSign" => Base64.strict_encode64(string_to_sign)}.to_json
-                res = http.request req
-                unless res.kind_of? Net::HTTPSuccess
-                  fail "Unable to sign string #{res.body}"
-                end
-                puts res.body
-                Base64.strict_decode64(JSON.parse(res.body)["signature"]).unpack('H*').first
-              rescue => err
-                fail "Error occurred: #{err}"
+              uri = URI(
+                "https://iam.googleapis.com/v1/projects/-/serviceAccounts/"\
+                "#{client_email}:signBlob"
+              )
+              http = Net::HTTP.new uri.host, uri.port
+              http.use_ssl = true
+              # http.set_debug_output($stdout)
+              header = {}
+              header["Authorization"] = "Bearer #{access_token}"
+              header["Content-type"] = "application/json"
+              req = Net::HTTP::Post.new uri, header
+              string_to_sign_base64 = Base64.strict_encode64 string_to_sign
+              req.body = { "bytesToSign" => string_to_sign_base64 }.to_json
+              res = http.request req
+              unless res.is_a? Net::HTTPSuccess
+                raise "Unable to sign string #{res.body}"
               end
+              puts res.body
+              signature = JSON.parse(res.body)["signature"]
+              Base64.strict_decode64(signature).unpack("H*").first
             end
           end
         end
