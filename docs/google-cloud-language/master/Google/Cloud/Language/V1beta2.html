@@ -1,6 +1,6 @@
 ---
 layout: yard_main
-title: "Module: Google::Cloud::Language::V1beta2 - Google"
+title: "Module: Google::Cloud::Language::V1beta2 - Cloud"
 css: 
   - /docs/css/style.css
   - /docs/css/common.css
@@ -109,11 +109,11 @@ steps:</p>
 
 <pre class="code rb"><code class="rb">require &quot;google/cloud/language&quot;
 
-language_service_client = Google::Cloud::Language.new(version: :v1beta2)
+language_client = Google::Cloud::Language.new(version: :v1beta2)
 content = &quot;Hello, world!&quot;
 type = :PLAIN_TEXT
 document = { content: content, type: type }
-response = language_service_client.analyze_sentiment(document)
+response = language_client.analyze_sentiment(document)
 </code></pre>
 
 <h3>Next Steps</h3>

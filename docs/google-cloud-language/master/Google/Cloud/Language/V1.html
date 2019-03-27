@@ -1,6 +1,6 @@
 ---
 layout: yard_main
-title: "Module: Google::Cloud::Language::V1 - Google"
+title: "Module: Google::Cloud::Language::V1 - Cloud"
 css: 
   - /docs/css/style.css
   - /docs/css/common.css
@@ -75,12 +75,12 @@ js:
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <h1>Ruby Client for Google Cloud Natural Language API (<a href="https://github.com/googleapis/google-cloud-ruby#versioning">Alpha</a>)</h1>
+    <h1>Ruby Client for Cloud Natural Language API (<a href="https://github.com/googleapis/google-cloud-ruby#versioning">Alpha</a>)</h1>
 
-<p><a href="https://cloud.google.com/natural-language">Google Cloud Natural Language API</a>:
-Google Cloud Natural Language API provides natural language understanding
-technologies to developers. Examples include sentiment analysis, entity
-recognition, and text annotations.</p>
+<p><a href="https://cloud.google.com/natural-language">Cloud Natural Language API</a>:
+Provides natural language understanding technologies, such as sentiment
+analysis, entity recognition, entity sentiment analysis, and other text
+annotations, to developers.</p>
 
 <ul>
 <li><a href="https://cloud.google.com/natural-language">Product Documentation</a></li>
@@ -94,7 +94,7 @@ steps:</p>
 <ol>
 <li><a href="https://console.cloud.google.com/project">Select or create a Cloud Platform project.</a></li>
 <li><a href="https://cloud.google.com/billing/docs/how-to/modify-project#enable_billing_for_a_project">Enable billing for your project.</a></li>
-<li><a href="https://console.cloud.google.com/apis/library/language.googleapis.com">Enable the Google Cloud Natural Language API.</a></li>
+<li><a href="https://console.cloud.google.com/apis/library/language.googleapis.com">Enable the Cloud Natural Language API.</a></li>
 <li><a href="https://googleapis.github.io/google-cloud-ruby/#/docs/google-cloud/master/guides/authentication">Setup Authentication.</a></li>
 </ol>
 
@@ -103,23 +103,10 @@ steps:</p>
 <pre class="code ruby"><code class="ruby">$ gem install google-cloud-language
 </code></pre>
 
-<h3>Preview</h3>
-
-<h4>LanguageServiceClient</h4>
-
-<pre class="code rb"><code class="rb">require &quot;google/cloud/language&quot;
-
-language_service_client = Google::Cloud::Language.new(version: :v1)
-content = &quot;Hello, world!&quot;
-type = :PLAIN_TEXT
-document = { content: content, type: type }
-response = language_service_client.analyze_sentiment(document)
-</code></pre>
-
 <h3>Next Steps</h3>
 
 <ul>
-<li>Read the <a href="https://cloud.google.com/natural-language">Google Cloud Natural Language API Product documentation</a>
+<li>Read the <a href="https://cloud.google.com/natural-language">Cloud Natural Language API Product documentation</a>
 to learn more about the product and see How-to Guides.</li>
 <li>View this <a href="https://github.com/googleapis/google-cloud-ruby/blob/master/README.md">repository&#39;s main README</a>
 to see the full list of Cloud APIs that we cover.</li>
@@ -352,6 +339,18 @@ custom error handling.</p>
       <pre class="lines">
 
 
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
 128
 129
 130
@@ -360,22 +359,10 @@ custom error handling.</p>
 133
 134
 135
-136
-137
-138
-139
-140
-141
-142
-143
-144
-145
-146
-147
-148</pre>
+136</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/language/v1.rb', line 128</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/language/v1.rb', line 116</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span> \
     <span class='label'>credentials:</span> <span class='kw'>nil</span><span class='comma'>,</span>

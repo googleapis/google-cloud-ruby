@@ -1,6 +1,6 @@
 ---
 layout: yard_main
-title: "Class: Google::Cloud::Language::V1::LanguageServiceClient - Google"
+title: "Class: Google::Cloud::Language::V1::LanguageServiceClient - Cloud"
 css: 
   - /docs/css/style.css
   - /docs/css/common.css
@@ -172,6 +172,7 @@ this service.</p>
 </div>
         </dt>
         <dd><pre class="code"><span class='lbracket'>[</span>
+  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>https://www.googleapis.com/auth/cloud-language</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
   <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>https://www.googleapis.com/auth/cloud-platform</span><span class='tstring_end'>&quot;</span></span>
 <span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_freeze'>freeze</span></pre></dd>
       
@@ -497,7 +498,6 @@ custom error handling.</p>
       <pre class="lines">
 
 
-91
 92
 93
 94
@@ -600,10 +600,11 @@ custom error handling.</p>
 191
 192
 193
-194</pre>
+194
+195</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/language/v1/language_service_client.rb', line 91</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/language/v1/language_service_client.rb', line 92</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span> \
     <span class='label'>credentials:</span> <span class='kw'>nil</span><span class='comma'>,</span>
@@ -747,11 +748,11 @@ other properties.</p>
       
       <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/language</span><span class='tstring_end'>&quot;</span></span>
 
-<span class='id identifier rubyid_language_service_client'>language_service_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Language.html" title="Google::Cloud::Language (module)">Language</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Language.html#new-class_method" title="Google::Cloud::Language.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v1</span><span class='rparen'>)</span>
+<span class='id identifier rubyid_language_client'>language_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Language.html" title="Google::Cloud::Language (module)">Language</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Language.html#new-class_method" title="Google::Cloud::Language.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v1</span><span class='rparen'>)</span>
 
 <span class='comment'># TODO: Initialize `document`:
 </span><span class='id identifier rubyid_document'>document</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
-<span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_language_service_client'>language_service_client</span><span class='period'>.</span><span class='id identifier rubyid_analyze_entities'>analyze_entities</span><span class='lparen'>(</span><span class='id identifier rubyid_document'>document</span><span class='rparen'>)</span></code></pre>
+<span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_language_client'>language_client</span><span class='period'>.</span><span class='id identifier rubyid_analyze_entities'>analyze_entities</span><span class='lparen'>(</span><span class='id identifier rubyid_document'>document</span><span class='rparen'>)</span></code></pre>
     
   </div>
 <p class="tag_title">Parameters:</p>
@@ -887,7 +888,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-263
 264
 265
 266
@@ -898,10 +898,11 @@ retries, etc.</p>
 271
 272
 273
-274</pre>
+274
+275</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/language/v1/language_service_client.rb', line 263</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/language/v1/language_service_client.rb', line 264</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_analyze_entities'>analyze_entities</span> \
     <span class='id identifier rubyid_document'>document</span><span class='comma'>,</span>
@@ -947,11 +948,11 @@ mentions.</p>
       
       <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/language</span><span class='tstring_end'>&quot;</span></span>
 
-<span class='id identifier rubyid_language_service_client'>language_service_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Language.html" title="Google::Cloud::Language (module)">Language</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Language.html#new-class_method" title="Google::Cloud::Language.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v1</span><span class='rparen'>)</span>
+<span class='id identifier rubyid_language_client'>language_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Language.html" title="Google::Cloud::Language (module)">Language</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Language.html#new-class_method" title="Google::Cloud::Language.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v1</span><span class='rparen'>)</span>
 
 <span class='comment'># TODO: Initialize `document`:
 </span><span class='id identifier rubyid_document'>document</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
-<span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_language_service_client'>language_service_client</span><span class='period'>.</span><span class='id identifier rubyid_analyze_entity_sentiment'>analyze_entity_sentiment</span><span class='lparen'>(</span><span class='id identifier rubyid_document'>document</span><span class='rparen'>)</span></code></pre>
+<span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_language_client'>language_client</span><span class='period'>.</span><span class='id identifier rubyid_analyze_entity_sentiment'>analyze_entity_sentiment</span><span class='lparen'>(</span><span class='id identifier rubyid_document'>document</span><span class='rparen'>)</span></code></pre>
     
   </div>
 <p class="tag_title">Parameters:</p>
@@ -1087,7 +1088,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-304
 305
 306
 307
@@ -1098,10 +1098,11 @@ retries, etc.</p>
 312
 313
 314
-315</pre>
+315
+316</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/language/v1/language_service_client.rb', line 304</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/language/v1/language_service_client.rb', line 305</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_analyze_entity_sentiment'>analyze_entity_sentiment</span> \
     <span class='id identifier rubyid_document'>document</span><span class='comma'>,</span>
@@ -1144,11 +1145,11 @@ retries, etc.</p>
       
       <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/language</span><span class='tstring_end'>&quot;</span></span>
 
-<span class='id identifier rubyid_language_service_client'>language_service_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Language.html" title="Google::Cloud::Language (module)">Language</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Language.html#new-class_method" title="Google::Cloud::Language.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v1</span><span class='rparen'>)</span>
+<span class='id identifier rubyid_language_client'>language_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Language.html" title="Google::Cloud::Language (module)">Language</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Language.html#new-class_method" title="Google::Cloud::Language.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v1</span><span class='rparen'>)</span>
 
 <span class='comment'># TODO: Initialize `document`:
 </span><span class='id identifier rubyid_document'>document</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
-<span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_language_service_client'>language_service_client</span><span class='period'>.</span><span class='id identifier rubyid_analyze_sentiment'>analyze_sentiment</span><span class='lparen'>(</span><span class='id identifier rubyid_document'>document</span><span class='rparen'>)</span></code></pre>
+<span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_language_client'>language_client</span><span class='period'>.</span><span class='id identifier rubyid_analyze_sentiment'>analyze_sentiment</span><span class='lparen'>(</span><span class='id identifier rubyid_document'>document</span><span class='rparen'>)</span></code></pre>
     
   </div>
 <p class="tag_title">Parameters:</p>
@@ -1284,7 +1285,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-223
 224
 225
 226
@@ -1295,10 +1295,11 @@ retries, etc.</p>
 231
 232
 233
-234</pre>
+234
+235</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/language/v1/language_service_client.rb', line 223</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/language/v1/language_service_client.rb', line 224</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_analyze_sentiment'>analyze_sentiment</span> \
     <span class='id identifier rubyid_document'>document</span><span class='comma'>,</span>
@@ -1343,11 +1344,11 @@ properties.</p>
       
       <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/language</span><span class='tstring_end'>&quot;</span></span>
 
-<span class='id identifier rubyid_language_service_client'>language_service_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Language.html" title="Google::Cloud::Language (module)">Language</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Language.html#new-class_method" title="Google::Cloud::Language.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v1</span><span class='rparen'>)</span>
+<span class='id identifier rubyid_language_client'>language_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Language.html" title="Google::Cloud::Language (module)">Language</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Language.html#new-class_method" title="Google::Cloud::Language.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v1</span><span class='rparen'>)</span>
 
 <span class='comment'># TODO: Initialize `document`:
 </span><span class='id identifier rubyid_document'>document</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
-<span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_language_service_client'>language_service_client</span><span class='period'>.</span><span class='id identifier rubyid_analyze_syntax'>analyze_syntax</span><span class='lparen'>(</span><span class='id identifier rubyid_document'>document</span><span class='rparen'>)</span></code></pre>
+<span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_language_client'>language_client</span><span class='period'>.</span><span class='id identifier rubyid_analyze_syntax'>analyze_syntax</span><span class='lparen'>(</span><span class='id identifier rubyid_document'>document</span><span class='rparen'>)</span></code></pre>
     
   </div>
 <p class="tag_title">Parameters:</p>
@@ -1483,7 +1484,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-344
 345
 346
 347
@@ -1494,10 +1494,11 @@ retries, etc.</p>
 352
 353
 354
-355</pre>
+355
+356</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/language/v1/language_service_client.rb', line 344</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/language/v1/language_service_client.rb', line 345</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_analyze_syntax'>analyze_syntax</span> \
     <span class='id identifier rubyid_document'>document</span><span class='comma'>,</span>
@@ -1541,14 +1542,14 @@ analyzeEntities, and analyzeSyntax provide in one call.</p>
       
       <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/language</span><span class='tstring_end'>&quot;</span></span>
 
-<span class='id identifier rubyid_language_service_client'>language_service_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Language.html" title="Google::Cloud::Language (module)">Language</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Language.html#new-class_method" title="Google::Cloud::Language.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v1</span><span class='rparen'>)</span>
+<span class='id identifier rubyid_language_client'>language_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Language.html" title="Google::Cloud::Language (module)">Language</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Language.html#new-class_method" title="Google::Cloud::Language.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v1</span><span class='rparen'>)</span>
 
 <span class='comment'># TODO: Initialize `document`:
 </span><span class='id identifier rubyid_document'>document</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
 
 <span class='comment'># TODO: Initialize `features`:
 </span><span class='id identifier rubyid_features'>features</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
-<span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_language_service_client'>language_service_client</span><span class='period'>.</span><span class='id identifier rubyid_annotate_text'>annotate_text</span><span class='lparen'>(</span><span class='id identifier rubyid_document'>document</span><span class='comma'>,</span> <span class='id identifier rubyid_features'>features</span><span class='rparen'>)</span></code></pre>
+<span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_language_client'>language_client</span><span class='period'>.</span><span class='id identifier rubyid_annotate_text'>annotate_text</span><span class='lparen'>(</span><span class='id identifier rubyid_document'>document</span><span class='comma'>,</span> <span class='id identifier rubyid_features'>features</span><span class='rparen'>)</span></code></pre>
     
   </div>
 <p class="tag_title">Parameters:</p>
@@ -1701,7 +1702,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-424
 425
 426
 427
@@ -1714,10 +1714,11 @@ retries, etc.</p>
 434
 435
 436
-437</pre>
+437
+438</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/language/v1/language_service_client.rb', line 424</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/language/v1/language_service_client.rb', line 425</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_annotate_text'>annotate_text</span> \
     <span class='id identifier rubyid_document'>document</span><span class='comma'>,</span>
@@ -1762,11 +1763,11 @@ retries, etc.</p>
       
       <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/language</span><span class='tstring_end'>&quot;</span></span>
 
-<span class='id identifier rubyid_language_service_client'>language_service_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Language.html" title="Google::Cloud::Language (module)">Language</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Language.html#new-class_method" title="Google::Cloud::Language.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v1</span><span class='rparen'>)</span>
+<span class='id identifier rubyid_language_client'>language_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Language.html" title="Google::Cloud::Language (module)">Language</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Language.html#new-class_method" title="Google::Cloud::Language.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v1</span><span class='rparen'>)</span>
 
 <span class='comment'># TODO: Initialize `document`:
 </span><span class='id identifier rubyid_document'>document</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
-<span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_language_service_client'>language_service_client</span><span class='period'>.</span><span class='id identifier rubyid_classify_text'>classify_text</span><span class='lparen'>(</span><span class='id identifier rubyid_document'>document</span><span class='rparen'>)</span></code></pre>
+<span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_language_client'>language_client</span><span class='period'>.</span><span class='id identifier rubyid_classify_text'>classify_text</span><span class='lparen'>(</span><span class='id identifier rubyid_document'>document</span><span class='rparen'>)</span></code></pre>
     
   </div>
 <p class="tag_title">Parameters:</p>
@@ -1887,7 +1888,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-380
 381
 382
 383
@@ -1896,10 +1896,11 @@ retries, etc.</p>
 386
 387
 388
-389</pre>
+389
+390</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/language/v1/language_service_client.rb', line 380</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/language/v1/language_service_client.rb', line 381</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_classify_text'>classify_text</span> \
     <span class='id identifier rubyid_document'>document</span><span class='comma'>,</span>
