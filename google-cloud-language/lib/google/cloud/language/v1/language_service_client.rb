@@ -55,6 +55,7 @@ module Google
           # The scopes needed to make gRPC calls to all of the methods defined in
           # this service.
           ALL_SCOPES = [
+            "https://www.googleapis.com/auth/cloud-language",
             "https://www.googleapis.com/auth/cloud-platform"
           ].freeze
 
@@ -214,11 +215,11 @@ module Google
           # @example
           #   require "google/cloud/language"
           #
-          #   language_service_client = Google::Cloud::Language.new(version: :v1)
+          #   language_client = Google::Cloud::Language.new(version: :v1)
           #
           #   # TODO: Initialize `document`:
           #   document = {}
-          #   response = language_service_client.analyze_sentiment(document)
+          #   response = language_client.analyze_sentiment(document)
 
           def analyze_sentiment \
               document,
@@ -254,11 +255,11 @@ module Google
           # @example
           #   require "google/cloud/language"
           #
-          #   language_service_client = Google::Cloud::Language.new(version: :v1)
+          #   language_client = Google::Cloud::Language.new(version: :v1)
           #
           #   # TODO: Initialize `document`:
           #   document = {}
-          #   response = language_service_client.analyze_entities(document)
+          #   response = language_client.analyze_entities(document)
 
           def analyze_entities \
               document,
@@ -295,11 +296,11 @@ module Google
           # @example
           #   require "google/cloud/language"
           #
-          #   language_service_client = Google::Cloud::Language.new(version: :v1)
+          #   language_client = Google::Cloud::Language.new(version: :v1)
           #
           #   # TODO: Initialize `document`:
           #   document = {}
-          #   response = language_service_client.analyze_entity_sentiment(document)
+          #   response = language_client.analyze_entity_sentiment(document)
 
           def analyze_entity_sentiment \
               document,
@@ -335,11 +336,11 @@ module Google
           # @example
           #   require "google/cloud/language"
           #
-          #   language_service_client = Google::Cloud::Language.new(version: :v1)
+          #   language_client = Google::Cloud::Language.new(version: :v1)
           #
           #   # TODO: Initialize `document`:
           #   document = {}
-          #   response = language_service_client.analyze_syntax(document)
+          #   response = language_client.analyze_syntax(document)
 
           def analyze_syntax \
               document,
@@ -371,11 +372,11 @@ module Google
           # @example
           #   require "google/cloud/language"
           #
-          #   language_service_client = Google::Cloud::Language.new(version: :v1)
+          #   language_client = Google::Cloud::Language.new(version: :v1)
           #
           #   # TODO: Initialize `document`:
           #   document = {}
-          #   response = language_service_client.classify_text(document)
+          #   response = language_client.classify_text(document)
 
           def classify_text \
               document,
@@ -412,14 +413,14 @@ module Google
           # @example
           #   require "google/cloud/language"
           #
-          #   language_service_client = Google::Cloud::Language.new(version: :v1)
+          #   language_client = Google::Cloud::Language.new(version: :v1)
           #
           #   # TODO: Initialize `document`:
           #   document = {}
           #
           #   # TODO: Initialize `features`:
           #   features = {}
-          #   response = language_service_client.annotate_text(document, features)
+          #   response = language_client.annotate_text(document, features)
 
           def annotate_text \
               document,
