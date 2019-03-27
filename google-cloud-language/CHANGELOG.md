@@ -3,7 +3,7 @@
 ### 0.32.0 / 2019-03-27
 
 * Update documentation
-* Add following Entity types:
+* Add the following Entity types:
   * PHONE_NUMBER
   * ADDRESS
   * DATE
