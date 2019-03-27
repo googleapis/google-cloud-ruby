@@ -45,6 +45,8 @@ module Google
             # Updates the specified profile and returns the updated result.
             rpc :UpdateProfile, UpdateProfileRequest, Profile
             # Deletes the specified profile.
+            # Prerequisite: The profile has no associated applications or assignments
+            # associated.
             rpc :DeleteProfile, DeleteProfileRequest, Google::Protobuf::Empty
             # Searches for profiles within a tenant.
             #

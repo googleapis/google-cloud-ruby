@@ -19,8 +19,8 @@ module Google
       module V4beta1
         # A resource that represents the profile for a job candidate (also referred to
         # as a "single-source profile"). A profile belongs to a
-        # {Google::Cloud::Talent::V4beta1::Tenant Tenant}, which is an isolated instance
-        # of the customer that owns the profile.
+        # {Google::Cloud::Talent::V4beta1::Company Company}, which is the
+        # company/organization that owns the profile.
         # @!attribute [rw] name
         #   @return [String]
         #     Required during profile update.
@@ -214,19 +214,12 @@ module Google
         #     Optional.
         #
         #     The certifications acquired by the candidate.
-        # @!attribute [rw] job_applications
-        #   @return [Array<Google::Cloud::Talent::V4beta1::JobApplication>]
-        #     Optional.
-        #
-        #     The job applications of the candidate.
-        # @!attribute [rw] recruiting_notes
-        #   @return [Array<Google::Cloud::Talent::V4beta1::RecruitingNote>]
-        #     Optional.
-        #
-        #     The recruiting notes added for the candidate.
-        #
-        #     For example, the recruiter can add some unstructured comments for this
-        #     candidate like "this candidate also has experiences in volunteer work".
+        # @!attribute [rw] applications
+        #   @return [Array<String>]
+        #     Output only. The resource names of the candidate's applications.
+        # @!attribute [rw] assignments
+        #   @return [Array<String>]
+        #     Output only. The resource names of the candidate's assignments.
         # @!attribute [rw] custom_attributes
         #   @return [Hash{String => Google::Cloud::Talent::V4beta1::CustomAttribute}]
         #     Optional.
@@ -237,19 +230,19 @@ module Google
         #     details.
         #
         #     At most 100 filterable and at most 100 unfilterable keys are supported. If
-        #     limit is exceeded, an error is thrown.
+        #     limit is exceeded, an error is thrown. Custom attributes are `unfilterable`
+        #     by default. These are filterable when the `filterable` flag is set to
+        #     `true`.
         #
         #     Numeric custom attributes: each key can only map to one numeric value,
-        #     otherwise an error is thrown.
+        #     otherwise an error is thrown. Client can also filter on numeric custom
+        #     attributes using '>', '<' or '=' operators.
         #
         #     String custom attributes: each key can map up to 50 string values. For
         #     filterable string value, each value has a byte size of no more than 256B.
         #     For unfilterable string values, the maximum byte size of a single key is
         #     64B. An error is thrown for any request exceeding the limit.
         #     The maximum total byte size is 10KB.
-        #
-        #     Currently filterable numeric custom attributes are not supported, and
-        #     they automatically set to unfilterable.
         # @!attribute [rw] processed
         #   @return [true, false]
         #     Output only. Indicates if the profile is fully processed and searchable.
@@ -351,7 +344,7 @@ module Google
         #
         #     Structured address that contains street address, city, state, country,
         #     etc.
-        # @!attribute [rw] is_current
+        # @!attribute [rw] current
         #   @return [Google::Protobuf::BoolValue]
         #     Optional.
         #
@@ -542,11 +535,11 @@ module Google
         #     The description of job content.
         #
         #     Number of characters allowed is 100,000.
-        # @!attribute [rw] is_supervised_position
+        # @!attribute [rw] is_supervisor
         #   @return [Google::Protobuf::BoolValue]
         #     Optional.
         #
-        #     If it's a supervised position.
+        #     If it is a supervisor position.
         # @!attribute [rw] is_self_employed
         #   @return [Google::Protobuf::BoolValue]
         #     Optional.
@@ -677,68 +670,6 @@ module Google
         #
         #     Number of characters allowed is 100.
         class Degree; end
-
-        # Resource that represents a skill of a candidate.
-        # @!attribute [rw] display_name
-        #   @return [String]
-        #     Optional.
-        #
-        #     Skill display name.
-        #
-        #     For example, "Java", "Python".
-        #
-        #     Number of characters allowed is 100.
-        # @!attribute [rw] last_used_date
-        #   @return [Google::Type::Date]
-        #     Optional.
-        #
-        #     The last time this skill was used.
-        # @!attribute [rw] level
-        #   @return [Google::Cloud::Talent::V4beta1::Skill::SkillProficiencyLevel]
-        #     Optional.
-        #
-        #     Skill proficiency level which indicates how proficient the candidate is at
-        #     this skill.
-        # @!attribute [rw] context
-        #   @return [String]
-        #     Optional.
-        #
-        #     A paragraph describes context of this skill.
-        #
-        #     Number of characters allowed is 100,000.
-        # @!attribute [rw] skill_name_snippet
-        #   @return [String]
-        #     Output only. Skill name snippet shows how the
-        #     {Google::Cloud::Talent::V4beta1::Skill#display_name display_name} is related
-        #     to a search query. It's empty if the
-        #     {Google::Cloud::Talent::V4beta1::Skill#display_name display_name} isn't
-        #     related to the search query.
-        class Skill
-          # Enum that represents the skill proficiency level.
-          module SkillProficiencyLevel
-            # Default value.
-            SKILL_PROFICIENCY_LEVEL_UNSPECIFIED = 0
-
-            # Have a common knowledge or an understanding of basic techniques and
-            # concepts.
-            FUNDAMENTAL_AWARENESS = 1
-
-            # Have the level of experience gained in a classroom and/or experimental
-            # scenarios or as a trainee on-the-job.
-            NOVICE = 2
-
-            # Be able to successfully complete tasks in this skill as requested. Help
-            # from an expert may be required from time to time, but can usually perform
-            # skill independently.
-            INTERMEDIATE = 3
-
-            # Can perform the actions associated with this skill without assistance.
-            ADVANCED = 4
-
-            # Known as an expert in this area.
-            EXPERT = 5
-          end
-        end
 
         # Resource that represents an individual or collaborative activity participated
         # in by a candidate, for example, an open-source project, a class assignment,
@@ -932,193 +863,6 @@ module Google
         #
         #     The skills used in this patent.
         class Patent; end
-
-        # Resource that represents a job application record of a candidate.
-        # @!attribute [rw] job
-        #   @return [Google::Cloud::Talent::V4beta1::Job]
-        #     Optional.
-        #
-        #     The information of job which the candidate applied for.
-        #
-        #     If {Google::Cloud::Talent::V4beta1::Job#name Job#name} is provided, the
-        #     corresponding {Google::Cloud::Talent::V4beta1::Job Job} must be created.
-        #
-        #     Otherwise, only
-        #     {Google::Cloud::Talent::V4beta1::Job#requisition_id Job#requisition_id},
-        #     {Google::Cloud::Talent::V4beta1::Job#title Job#title},
-        #     {Google::Cloud::Talent::V4beta1::Job#description Job#description} and
-        #     {Google::Cloud::Talent::V4beta1::Job#addresses Job#addresses} provided here
-        #     are persisted in the application. No {Google::Cloud::Talent::V4beta1::Job Job}
-        #     entity is created in this case.
-        # @!attribute [rw] application_id
-        #   @return [String]
-        #     Optional.
-        #
-        #     The job application id.
-        #
-        #     Number of characters allowed is 100.
-        # @!attribute [rw] application_date
-        #   @return [Google::Type::Date]
-        #     Optional.
-        #
-        #     The application date.
-        # @!attribute [rw] last_stage
-        #   @return [String]
-        #     Optional.
-        #
-        #     The last stage the candidate reached in the application progress.
-        #     For example, "new", "phone screen", "interview".
-        # @!attribute [rw] state
-        #   @return [Google::Cloud::Talent::V4beta1::JobApplication::ApplicationStatus]
-        #     Optional.
-        #
-        #     The application state.
-        # @!attribute [rw] average_interview_score
-        #   @return [Float]
-        #     Optional.
-        #
-        #     The average interview score.
-        # @!attribute [rw] interview_score_scale_id
-        #   @return [String]
-        #     Optional.
-        #
-        #     The scale id of the interview score.
-        #
-        #     Number of characters allowed is 100.
-        # @!attribute [rw] number_of_interviews
-        #   @return [Integer]
-        #     Optional.
-        #
-        #     The number of interviews.
-        # @!attribute [rw] is_employee_referred
-        #   @return [Google::Protobuf::BoolValue]
-        #     Optional.
-        #
-        #     If the candidate is referred by a employee.
-        # @!attribute [rw] update_time
-        #   @return [Google::Protobuf::Timestamp]
-        #     Optional.
-        #
-        #     The last update timestamp.
-        # @!attribute [rw] outcome_reason
-        #   @return [String]
-        #     Optional.
-        #
-        #     The outcome reason for the job application.
-        #
-        #     Number of characters allowed is 100.
-        # @!attribute [rw] outcome_positiveness
-        #   @return [Float]
-        #     Optional.
-        #
-        #     Outcome positiveness shows how positive the outcome is.
-        #
-        #     Currently only -1, 0 and 1 are accepted, where -1 means not positive, 0
-        #     means neutral and 1 means positive. An error is thrown if other value is
-        #     set.
-        # @!attribute [rw] is_match
-        #   @return [Google::Protobuf::BoolValue]
-        #     Output only. Indicates whether this job application is a match to
-        #     application related filters. This value is only applicable in profile
-        #     search response.
-        # @!attribute [rw] job_title_snippet
-        #   @return [String]
-        #     Output only. Job title snippet shows how the job title is related to a
-        #     search query. It's empty if the job title isn't related to the search
-        #     query.
-        class JobApplication
-          # Enum that represents the application status.
-          module ApplicationStatus
-            # Default value.
-            APPLICATION_STATUS_UNSPECIFIED = 0
-
-            # The offer is extended.
-            OFFER_EXTENDED = 1
-
-            # The offer is rejected by candidate.
-            REJECTED_BY_CANDIDATE = 2
-
-            # The application is active.
-            ACTIVE = 3
-
-            # The candidate is rejected by employer.
-            REJECTED_BY_EMPLOYER = 4
-
-            # The candidate is hired and hasn't started the new job.
-            HIRED_PENDING_DATE = 5
-
-            # The candidate is hired started.
-            HIRED_STARTED = 6
-
-            # The candidate is a prospect candidate.
-            PROSPECTED = 7
-          end
-        end
-
-        # Resource that represents a license or certification.
-        # @!attribute [rw] display_name
-        #   @return [String]
-        #     Optional.
-        #
-        #     Name of license or certification.
-        #
-        #     Number of characters allowed is 100.
-        # @!attribute [rw] acquire_date
-        #   @return [Google::Type::Date]
-        #     Optional.
-        #
-        #     Acquirement date or effective date of license or certification.
-        # @!attribute [rw] expire_date
-        #   @return [Google::Type::Date]
-        #     Optional.
-        #
-        #     Expiration date of license of certification.
-        # @!attribute [rw] authority
-        #   @return [String]
-        #     Optional.
-        #
-        #     Authority of license, such as government.
-        #
-        #     Number of characters allowed is 100.
-        # @!attribute [rw] description
-        #   @return [String]
-        #     Optional.
-        #
-        #     Description of license or certification.
-        #
-        #     Number of characters allowed is 100,000.
-        class Certification; end
-
-        # RecruitingNote represents a note/comment regarding the recruiting for a
-        # candidate. For example, "This candidate is a potential match for a frontend
-        # engineer at SF".
-        # @!attribute [rw] note
-        #   @return [String]
-        #     Optional.
-        #
-        #     The content of note.
-        #
-        #     Number of characters allowed is 4,000.
-        # @!attribute [rw] commenter
-        #   @return [String]
-        #     Optional.
-        #
-        #     The person who wrote the notes.
-        #
-        #     Number of characters allowed is 100.
-        # @!attribute [rw] create_date
-        #   @return [Google::Type::Date]
-        #     Optional.
-        #
-        #     The create date of the note.
-        # @!attribute [rw] type
-        #   @return [String]
-        #     Optional.
-        #
-        #     The note type.
-        #
-        #     Number of characters allowed is 100.
-        class RecruitingNote; end
       end
     end
   end

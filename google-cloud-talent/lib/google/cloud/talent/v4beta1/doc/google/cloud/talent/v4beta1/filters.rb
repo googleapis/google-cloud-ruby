@@ -28,7 +28,7 @@ module Google
         #     location fields.
         #
         #     The maximum number of allowed characters is 255.
-        # @!attribute [rw] company_names
+        # @!attribute [rw] companies
         #   @return [Array<String>]
         #     Optional.
         #
@@ -40,8 +40,12 @@ module Google
         #     If multiple values are specified, jobs are searched against the
         #     companies specified.
         #
-        #     The format is "projects/{project_id}/companies/{company_id}", for example,
-        #     "projects/api-test-project/companies/foo".
+        #     The format is
+        #     "projects/{project_id}/tenants/{tenant_id}/companies/{company_id}", for
+        #     example, "projects/api-test-project/tenants/foo/companies/bar".
+        #
+        #     Tenant id is optional and the default tenant is used if unspecified, for
+        #     example, "projects/api-test-project/companies/bar".
         #
         #     At most 20 company filters are allowed.
         # @!attribute [rw] location_filters
@@ -308,11 +312,11 @@ module Google
         #     Optional.
         #
         #     The application date filters specify application date ranges to match on.
-        # @!attribute [rw] application_outcome_reason_filters
-        #   @return [Array<Google::Cloud::Talent::V4beta1::ApplicationOutcomeReasonFilter>]
+        # @!attribute [rw] application_outcome_notes_filters
+        #   @return [Array<Google::Cloud::Talent::V4beta1::ApplicationOutcomeNotesFilter>]
         #     Optional.
         #
-        #     The application outcome reason filters specify the reasons for outcome of
+        #     The application outcome notes filters specify the notes for the outcome of
         #     the job application.
         # @!attribute [rw] application_last_stage_filters
         #   @return [Array<Google::Cloud::Talent::V4beta1::ApplicationLastStageFilter>]
@@ -340,9 +344,13 @@ module Google
         #
         #     The syntax for this expression is a subset of Google SQL syntax.
         #
-        #     Supported operators are: =, != where the left of the operator is a custom
-        #     field key and the right of the operator is a string (surrounded by quotes)
-        #     value.
+        #     String custom attributes: supported operators are =, != where the left of
+        #     the operator is a custom field key and the right of the operator is a
+        #     string (surrounded by quotes) value.
+        #
+        #     Numeric custom attributes: Supported operators are '>', '<' or '='
+        #     operators where the left of the operator is a custom field key and the
+        #     right of the operator is a numeric value.
         #
         #     Supported functions are LOWER(<field_name>) to
         #     perform case insensitive match and EMPTY(<field_name>) to filter on the
@@ -697,7 +705,7 @@ module Google
         # Application Date Range Filter.
         #
         # The API matches profiles with
-        # {Google::Cloud::Talent::V4beta1::JobApplication#application_date JobApplication#application_date}
+        # {Google::Cloud::Talent::V4beta1::Application#application_date Application#application_date}
         # between start date and end date (both boundaries are inclusive). The filter
         # is ignored if both
         # {Google::Cloud::Talent::V4beta1::ApplicationDateFilter#start_date start_date}
@@ -719,22 +727,22 @@ module Google
 
         # Input only.
         #
-        # Outcome Reason Filter.
-        # @!attribute [rw] outcome_reason
+        # Outcome Notes Filter.
+        # @!attribute [rw] outcome_notes
         #   @return [String]
         #     Required.
         #
         #     User entered or selected outcome reason. The API does an exact match on the
-        #     {Google::Cloud::Talent::V4beta1::JobApplication#outcome_reason JobApplication#outcome_reason}
+        #     {Google::Cloud::Talent::V4beta1::Application#outcome_notes Application#outcome_notes}
         #     in profiles.
         # @!attribute [rw] negated
         #   @return [true, false]
         #     Optional.
         #
         #     If true, The API excludes all candidates with any
-        #     {Google::Cloud::Talent::V4beta1::JobApplication#outcome_reason JobApplication#outcome_reason}
+        #     {Google::Cloud::Talent::V4beta1::Application#outcome_notes Application#outcome_notes}
         #     matching the outcome reason specified in the filter.
-        class ApplicationOutcomeReasonFilter; end
+        class ApplicationOutcomeNotesFilter; end
 
         # Input only.
         #
@@ -745,68 +753,66 @@ module Google
         #
         #     User entered or selected last stage the candidate reached in the
         #     application. The API does an exact match on the
-        #     {Google::Cloud::Talent::V4beta1::JobApplication#last_stage JobApplication#last_stage}
-        #     in profiles.
+        #     {Application#last_stage} in profiles.
         # @!attribute [rw] negated
         #   @return [true, false]
         #     Optional.
         #     If true, The API excludes all candidates with any
-        #     {Google::Cloud::Talent::V4beta1::JobApplication#last_stage JobApplication#last_stage}
-        #     matching the last stage specified in the filter.
+        #     {Application#last_stage} matching the last stage specified in the
+        #     filter.
         class ApplicationLastStageFilter; end
 
         # Input only.
         #
         # Filter on the job information of Application.
-        # @!attribute [rw] job_name
+        # @!attribute [rw] job
         #   @return [String]
         #     Optional.
         #
         #     The job resource name in the application. The API does an exact match on
         #     the {Google::Cloud::Talent::V4beta1::Job#name Job#name} of
-        #     {Google::Cloud::Talent::V4beta1::JobApplication#job JobApplication#job} in
-        #     profiles.
+        #     {Google::Cloud::Talent::V4beta1::Application#job Application#job} in profiles.
         # @!attribute [rw] job_requisition_id
         #   @return [String]
         #     Optional.
         #
         #     The job requisition id in the application. The API does an exact match on
         #     the {Job#requisistion_id} of
-        #     {Google::Cloud::Talent::V4beta1::JobApplication#job JobApplication#job} in
-        #     profiles.
+        #     {Google::Cloud::Talent::V4beta1::Application#job Application#job} in profiles.
         # @!attribute [rw] job_title
         #   @return [String]
         #     Optional.
         #
         #     The job title in the application. The API does an exact match on the
         #     {Google::Cloud::Talent::V4beta1::Job#title Job#title} of
-        #     {Google::Cloud::Talent::V4beta1::JobApplication#job JobApplication#job} in
-        #     profiles.
+        #     {Google::Cloud::Talent::V4beta1::Application#job Application#job} in profiles.
         # @!attribute [rw] negated
         #   @return [true, false]
         #     Optional.
         #
         #     If true, the API excludes all profiles with any
-        #     {Google::Cloud::Talent::V4beta1::JobApplication#job JobApplication#job}
-        #     matching the filters.
+        #     {Google::Cloud::Talent::V4beta1::Application#job Application#job} matching the
+        #     filters.
         class ApplicationJobFilter; end
 
         # Input only.
         #
-        # Filter on status of Application.
-        # @!attribute [rw] application_status
-        #   @return [Google::Cloud::Talent::V4beta1::JobApplication::ApplicationStatus]
+        # Filter on state of Application.
+        # @!attribute [rw] application_state
+        #   @return [Google::Cloud::Talent::V4beta1::Application::ApplicationState]
         #     Required.
         #
-        #     User entered or selected application status. The API does an exact match
-        #     between the application status specified in this filter and the
-        #     {JobApplication#status} in profiles.
+        #     User entered or selected application state. The API does an exact match
+        #     between the application state specified in this filter and the
+        #     {Google::Cloud::Talent::V4beta1::Application#state Application#state} in
+        #     profiles.
         # @!attribute [rw] negated
         #   @return [true, false]
         #     Optional.
         #
-        #     If true, The API excludes all candidates with any {JobApplication#status}
-        #     matching the status specified in the filter.
+        #     If true, The API excludes all candidates with any
+        #     {Google::Cloud::Talent::V4beta1::Application#state Application#state} matching
+        #     the state specified in the filter.
         class ApplicationStatusFilter; end
 
         # Input only.

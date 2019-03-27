@@ -261,7 +261,7 @@ module Google
           #   parameter does not affect the return value. If page streaming is
           #   performed per-page, this determines the maximum number of
           #   resources in a page.
-          # @param field_mask [Google::Protobuf::FieldMask | Hash]
+          # @param read_mask [Google::Protobuf::FieldMask | Hash]
           #   Optional.
           #
           #   A field mask to specify the profile fields to be listed in response.
@@ -306,13 +306,13 @@ module Google
           def list_profiles \
               parent,
               page_size: nil,
-              field_mask: nil,
+              read_mask: nil,
               options: nil,
               &block
             req = {
               parent: parent,
               page_size: page_size,
-              field_mask: field_mask
+              read_mask: read_mask
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Cloud::Talent::V4beta1::ListProfilesRequest)
             @list_profiles.call(req, options, &block)
@@ -437,7 +437,6 @@ module Google
           #   * publications
           #   * patents
           #   * certifications
-          #   * jobApplications
           #   * recruitingNotes
           #   * customAttributes
           #   A hash of the same form as `Google::Protobuf::FieldMask`
@@ -473,6 +472,8 @@ module Google
           end
 
           # Deletes the specified profile.
+          # Prerequisite: The profile has no associated applications or assignments
+          # associated.
           #
           # @param name [String]
           #   Required.
@@ -646,7 +647,7 @@ module Google
           #   * institution: The school name. For example, "MIT",
           #     "University of California, Berkeley"
           #   * degree: Highest education degree in ISCED code. Each value in degree
-          #     covers specific level of education, without any expansion to upper nor
+          #     covers a specific level of education, without any expansion to upper nor
           #     lower levels of education degree.
           #   * experience_in_months: experience in months. 0 means 0 month to 1 month
           #     (exclusive).
@@ -654,10 +655,10 @@ module Google
           #     See
           #     {Google::Cloud::Talent::V4beta1::ApplicationDateFilter ApplicationDateFilter}
           #     for more details.
-          #   * application_outcome_reason: The application outcome reason specifies the
-          #     outcome reasons of job application.
+          #   * application_outcome_notes: The application outcome reason specifies the
+          #     reasons behind the outcome of the job application.
           #     See
-          #     {Google::Cloud::Talent::V4beta1::ApplicationOutcomeReasonFilter ApplicationOutcomeReasonFilter}
+          #     {Google::Cloud::Talent::V4beta1::ApplicationOutcomeNotesFilter ApplicationOutcomeNotesFilter}
           #     for more details.
           #   * application_last_stage: The application last stage specifies the last
           #     stage of job application.

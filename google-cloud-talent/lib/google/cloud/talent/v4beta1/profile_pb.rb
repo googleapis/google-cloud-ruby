@@ -7,6 +7,8 @@ require 'google/protobuf'
 require 'google/api/annotations_pb'
 require 'google/cloud/talent/v4beta1/common_pb'
 require 'google/cloud/talent/v4beta1/job_pb'
+require 'google/protobuf/duration_pb'
+require 'google/protobuf/field_mask_pb'
 require 'google/protobuf/timestamp_pb'
 require 'google/protobuf/wrappers_pb'
 require 'google/type/date_pb'
@@ -35,8 +37,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     repeated :publications, :message, 21, "google.cloud.talent.v4beta1.Publication"
     repeated :patents, :message, 22, "google.cloud.talent.v4beta1.Patent"
     repeated :certifications, :message, 23, "google.cloud.talent.v4beta1.Certification"
-    repeated :job_applications, :message, 24, "google.cloud.talent.v4beta1.JobApplication"
-    repeated :recruiting_notes, :message, 25, "google.cloud.talent.v4beta1.RecruitingNote"
+    repeated :applications, :string, 47
+    repeated :assignments, :string, 48
     map :custom_attributes, :string, :message, 26, "google.cloud.talent.v4beta1.CustomAttribute"
     optional :processed, :bool, 27
     optional :keyword_snippet, :string, 28
@@ -57,7 +59,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   end
   add_message "google.cloud.talent.v4beta1.Address" do
     optional :usage, :enum, 1, "google.cloud.talent.v4beta1.ContactInfoUsage"
-    optional :is_current, :message, 4, "google.protobuf.BoolValue"
+    optional :current, :message, 4, "google.protobuf.BoolValue"
     oneof :address do
       optional :unstructured_address, :string, 2
       optional :structured_address, :message, 3, "google.type.PostalAddress"
@@ -101,7 +103,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :address, :message, 5, "google.cloud.talent.v4beta1.Address"
     optional :job_title, :string, 6
     optional :job_description, :string, 7
-    optional :is_supervised_position, :message, 8, "google.protobuf.BoolValue"
+    optional :is_supervisor, :message, 8, "google.protobuf.BoolValue"
     optional :is_self_employed, :message, 9, "google.protobuf.BoolValue"
     optional :is_current, :message, 10, "google.protobuf.BoolValue"
     optional :job_title_snippet, :string, 11
@@ -127,21 +129,6 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :degree_type, :enum, 1, "google.cloud.talent.v4beta1.DegreeType"
     optional :degree_name, :string, 2
     repeated :fields_of_study, :string, 3
-  end
-  add_message "google.cloud.talent.v4beta1.Skill" do
-    optional :display_name, :string, 1
-    optional :last_used_date, :message, 2, "google.type.Date"
-    optional :level, :enum, 3, "google.cloud.talent.v4beta1.Skill.SkillProficiencyLevel"
-    optional :context, :string, 4
-    optional :skill_name_snippet, :string, 5
-  end
-  add_enum "google.cloud.talent.v4beta1.Skill.SkillProficiencyLevel" do
-    value :SKILL_PROFICIENCY_LEVEL_UNSPECIFIED, 0
-    value :FUNDAMENTAL_AWARENESS, 1
-    value :NOVICE, 2
-    value :INTERMEDIATE, 3
-    value :ADVANCED, 4
-    value :EXPERT, 5
   end
   add_message "google.cloud.talent.v4beta1.Activity" do
     optional :display_name, :string, 1
@@ -177,45 +164,6 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :patent_description, :string, 8
     repeated :skills_used, :message, 9, "google.cloud.talent.v4beta1.Skill"
   end
-  add_message "google.cloud.talent.v4beta1.JobApplication" do
-    optional :job, :message, 1, "google.cloud.talent.v4beta1.Job"
-    optional :application_id, :string, 2
-    optional :application_date, :message, 3, "google.type.Date"
-    optional :last_stage, :string, 4
-    optional :state, :enum, 5, "google.cloud.talent.v4beta1.JobApplication.ApplicationStatus"
-    optional :average_interview_score, :double, 6
-    optional :interview_score_scale_id, :string, 7
-    optional :number_of_interviews, :int32, 8
-    optional :is_employee_referred, :message, 9, "google.protobuf.BoolValue"
-    optional :update_time, :message, 10, "google.protobuf.Timestamp"
-    optional :outcome_reason, :string, 11
-    optional :outcome_positiveness, :double, 12
-    optional :is_match, :message, 13, "google.protobuf.BoolValue"
-    optional :job_title_snippet, :string, 14
-  end
-  add_enum "google.cloud.talent.v4beta1.JobApplication.ApplicationStatus" do
-    value :APPLICATION_STATUS_UNSPECIFIED, 0
-    value :OFFER_EXTENDED, 1
-    value :REJECTED_BY_CANDIDATE, 2
-    value :ACTIVE, 3
-    value :REJECTED_BY_EMPLOYER, 4
-    value :HIRED_PENDING_DATE, 5
-    value :HIRED_STARTED, 6
-    value :PROSPECTED, 7
-  end
-  add_message "google.cloud.talent.v4beta1.Certification" do
-    optional :display_name, :string, 1
-    optional :acquire_date, :message, 2, "google.type.Date"
-    optional :expire_date, :message, 3, "google.type.Date"
-    optional :authority, :string, 4
-    optional :description, :string, 5
-  end
-  add_message "google.cloud.talent.v4beta1.RecruitingNote" do
-    optional :note, :string, 1
-    optional :commenter, :string, 2
-    optional :create_date, :message, 3, "google.type.Date"
-    optional :type, :string, 4
-  end
 end
 
 module Google
@@ -234,15 +182,9 @@ module Google
         EmploymentRecord = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4beta1.EmploymentRecord").msgclass
         EducationRecord = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4beta1.EducationRecord").msgclass
         Degree = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4beta1.Degree").msgclass
-        Skill = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4beta1.Skill").msgclass
-        Skill::SkillProficiencyLevel = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4beta1.Skill.SkillProficiencyLevel").enummodule
         Activity = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4beta1.Activity").msgclass
         Publication = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4beta1.Publication").msgclass
         Patent = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4beta1.Patent").msgclass
-        JobApplication = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4beta1.JobApplication").msgclass
-        JobApplication::ApplicationStatus = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4beta1.JobApplication.ApplicationStatus").enummodule
-        Certification = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4beta1.Certification").msgclass
-        RecruitingNote = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4beta1.RecruitingNote").msgclass
       end
     end
   end

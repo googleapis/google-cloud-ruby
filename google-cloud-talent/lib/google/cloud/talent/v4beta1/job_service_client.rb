@@ -76,33 +76,35 @@ module Google
           ].freeze
 
 
-          PROJECT_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
-            "projects/{project}"
+          TENANT_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+            "projects/{project}/tenants/{tenant}"
           )
 
-          private_constant :PROJECT_PATH_TEMPLATE
+          private_constant :TENANT_PATH_TEMPLATE
 
-          JOB_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+          JOB_OLD_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
             "projects/{project}/jobs/{jobs}"
           )
 
-          private_constant :JOB_PATH_TEMPLATE
+          private_constant :JOB_OLD_PATH_TEMPLATE
 
-          # Returns a fully-qualified project resource name string.
+          # Returns a fully-qualified tenant resource name string.
           # @param project [String]
+          # @param tenant [String]
           # @return [String]
-          def self.project_path project
-            PROJECT_PATH_TEMPLATE.render(
-              :"project" => project
+          def self.tenant_path project, tenant
+            TENANT_PATH_TEMPLATE.render(
+              :"project" => project,
+              :"tenant" => tenant
             )
           end
 
-          # Returns a fully-qualified job resource name string.
+          # Returns a fully-qualified job_old resource name string.
           # @param project [String]
           # @param jobs [String]
           # @return [String]
-          def self.job_path project, jobs
-            JOB_PATH_TEMPLATE.render(
+          def self.job_old_path project, jobs
+            JOB_OLD_PATH_TEMPLATE.render(
               :"project" => project,
               :"jobs" => jobs
             )
@@ -263,10 +265,13 @@ module Google
           # @param parent [String]
           #   Required.
           #
-          #   The resource name of the project under which the job is created.
+          #   The resource name of the tenant under which the job is created.
           #
-          #   The format is "projects/{project_id}", for example,
-          #   "projects/api-test-project".
+          #   The format is "projects/{project_id}/tenants/{tenant_id}", for example,
+          #   "projects/api-test-project/tenant/foo".
+          #
+          #   Tenant id is optional and a default tenant is created if unspecified, for
+          #   example, "projects/api-test-project".
           # @param job [Google::Cloud::Talent::V4beta1::Job | Hash]
           #   Required.
           #
@@ -285,7 +290,7 @@ module Google
           #   require "google/cloud/talent"
           #
           #   job_client = Google::Cloud::Talent::JobService.new(version: :v4beta1)
-          #   formatted_parent = Google::Cloud::Talent::V4beta1::JobServiceClient.project_path("[PROJECT]")
+          #   formatted_parent = Google::Cloud::Talent::V4beta1::JobServiceClient.tenant_path("[PROJECT]", "[TENANT]")
           #
           #   # TODO: Initialize `job`:
           #   job = {}
@@ -312,8 +317,12 @@ module Google
           #
           #   The resource name of the job to retrieve.
           #
-          #   The format is "projects/{project_id}/jobs/{job_id}",
-          #   for example, "projects/api-test-project/jobs/1234".
+          #   The format is
+          #   "projects/{project_id}/tenants/{tenant_id}/jobs/{job_id}", for
+          #   example, "projects/api-test-project/tenants/foo/jobs/1234".
+          #
+          #   Tenant id is optional and the default tenant is used if unspecified, for
+          #   example, "projects/api-test-project/jobs/1234".
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -326,7 +335,7 @@ module Google
           #   require "google/cloud/talent"
           #
           #   job_client = Google::Cloud::Talent::JobService.new(version: :v4beta1)
-          #   formatted_name = Google::Cloud::Talent::V4beta1::JobServiceClient.job_path("[PROJECT]", "[JOBS]")
+          #   formatted_name = Google::Cloud::Talent::V4beta1::JobServiceClient.job_old_path("[PROJECT]", "[JOBS]")
           #   response = job_client.get_job(formatted_name)
 
           def get_job \
@@ -404,8 +413,12 @@ module Google
           #
           #   The resource name of the job to be deleted.
           #
-          #   The format is "projects/{project_id}/jobs/{job_id}",
-          #   for example, "projects/api-test-project/jobs/1234".
+          #   The format is
+          #   "projects/{project_id}/tenants/{tenant_id}/jobs/{job_id}", for
+          #   example, "projects/api-test-project/tenants/foo/jobs/1234".
+          #
+          #   Tenant id is optional and the default tenant is used if unspecified, for
+          #   example, "projects/api-test-project/jobs/1234".
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -417,7 +430,7 @@ module Google
           #   require "google/cloud/talent"
           #
           #   job_client = Google::Cloud::Talent::JobService.new(version: :v4beta1)
-          #   formatted_name = Google::Cloud::Talent::V4beta1::JobServiceClient.job_path("[PROJECT]", "[JOBS]")
+          #   formatted_name = Google::Cloud::Talent::V4beta1::JobServiceClient.job_old_path("[PROJECT]", "[JOBS]")
           #   job_client.delete_job(formatted_name)
 
           def delete_job \
@@ -437,10 +450,13 @@ module Google
           # @param parent [String]
           #   Required.
           #
-          #   The resource name of the project under which the job is created.
+          #   The resource name of the tenant under which the job is created.
           #
-          #   The format is "projects/{project_id}", for example,
-          #   "projects/api-test-project".
+          #   The format is "projects/{project_id}/tenants/{tenant_id}", for example,
+          #   "projects/api-test-project/tenant/foo".
+          #
+          #   Tenant id is optional and the default tenant is used if unspecified, for
+          #   example, "projects/api-test-project".
           # @param filter [String]
           #   Required.
           #
@@ -457,11 +473,11 @@ module Google
           #
           #   Sample Query:
           #
-          #   * companyName = "projects/api-test-project/companies/123"
-          #   * companyName = "projects/api-test-project/companies/123" AND requisitionId
-          #     = "req-1"
-          #   * companyName = "projects/api-test-project/companies/123" AND status =
-          #     "EXPIRED"
+          #   * companyName = "projects/api-test-project/tenants/foo/companies/bar"
+          #   * companyName = "projects/api-test-project/tenants/foo/companies/bar" AND
+          #     requisitionId = "req-1"
+          #   * companyName = "projects/api-test-project/tenants/foo/companies/bar" AND
+          #     status = "EXPIRED"
           # @param page_size [Integer]
           #   The maximum number of resources contained in the underlying API
           #   response. If page streaming is performed per-resource, this
@@ -491,7 +507,7 @@ module Google
           #   require "google/cloud/talent"
           #
           #   job_client = Google::Cloud::Talent::JobService.new(version: :v4beta1)
-          #   formatted_parent = Google::Cloud::Talent::V4beta1::JobServiceClient.project_path("[PROJECT]")
+          #   formatted_parent = Google::Cloud::Talent::V4beta1::JobServiceClient.tenant_path("[PROJECT]", "[TENANT]")
           #
           #   # TODO: Initialize `filter`:
           #   filter = ''
@@ -531,10 +547,13 @@ module Google
           # @param parent [String]
           #   Required.
           #
-          #   The resource name of the project under which the job is created.
+          #   The resource name of the tenant under which the job is created.
           #
-          #   The format is "projects/{project_id}", for example,
-          #   "projects/api-test-project".
+          #   The format is "projects/{project_id}/tenants/{tenant_id}", for example,
+          #   "projects/api-test-project/tenant/foo".
+          #
+          #   Tenant id is optional and the default tenant is used if unspecified, for
+          #   example, "projects/api-test-project".
           # @param filter [String]
           #   Required.
           #
@@ -560,7 +579,7 @@ module Google
           #   require "google/cloud/talent"
           #
           #   job_client = Google::Cloud::Talent::JobService.new(version: :v4beta1)
-          #   formatted_parent = Google::Cloud::Talent::V4beta1::JobServiceClient.project_path("[PROJECT]")
+          #   formatted_parent = Google::Cloud::Talent::V4beta1::JobServiceClient.tenant_path("[PROJECT]", "[TENANT]")
           #
           #   # TODO: Initialize `filter`:
           #   filter = ''
@@ -591,10 +610,13 @@ module Google
           # @param parent [String]
           #   Required.
           #
-          #   The resource name of the project to search within.
+          #   The resource name of the tenant to search within.
           #
-          #   The format is "projects/{project_id}", for example,
-          #   "projects/api-test-project".
+          #   The format is "projects/{project_id}/tenants/{tenant_id}", for example,
+          #   "projects/api-test-project/tenant/foo".
+          #
+          #   Tenant id is optional and the default tenant is used if unspecified, for
+          #   example, "projects/api-test-project".
           # @param request_metadata [Google::Cloud::Talent::V4beta1::RequestMetadata | Hash]
           #   Required.
           #
@@ -877,7 +899,7 @@ module Google
           #   require "google/cloud/talent"
           #
           #   job_client = Google::Cloud::Talent::JobService.new(version: :v4beta1)
-          #   formatted_parent = Google::Cloud::Talent::V4beta1::JobServiceClient.project_path("[PROJECT]")
+          #   formatted_parent = Google::Cloud::Talent::V4beta1::JobServiceClient.tenant_path("[PROJECT]", "[TENANT]")
           #
           #   # TODO: Initialize `request_metadata`:
           #   request_metadata = {}
@@ -948,10 +970,13 @@ module Google
           # @param parent [String]
           #   Required.
           #
-          #   The resource name of the project to search within.
+          #   The resource name of the tenant to search within.
           #
-          #   The format is "projects/{project_id}", for example,
-          #   "projects/api-test-project".
+          #   The format is "projects/{project_id}/tenants/{tenant_id}", for example,
+          #   "projects/api-test-project/tenant/foo".
+          #
+          #   Tenant id is optional and the default tenant is used if unspecified, for
+          #   example, "projects/api-test-project".
           # @param request_metadata [Google::Cloud::Talent::V4beta1::RequestMetadata | Hash]
           #   Required.
           #
@@ -1234,7 +1259,7 @@ module Google
           #   require "google/cloud/talent"
           #
           #   job_client = Google::Cloud::Talent::JobService.new(version: :v4beta1)
-          #   formatted_parent = Google::Cloud::Talent::V4beta1::JobServiceClient.project_path("[PROJECT]")
+          #   formatted_parent = Google::Cloud::Talent::V4beta1::JobServiceClient.tenant_path("[PROJECT]", "[TENANT]")
           #
           #   # TODO: Initialize `request_metadata`:
           #   request_metadata = {}

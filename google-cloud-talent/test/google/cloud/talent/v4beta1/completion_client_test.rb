@@ -72,7 +72,7 @@ describe Google::Cloud::Talent::V4beta1::CompletionClient do
 
     it 'invokes complete_query without error' do
       # Create request parameters
-      formatted_name = Google::Cloud::Talent::V4beta1::CompletionClient.project_path("[PROJECT]")
+      formatted_parent = Google::Cloud::Talent::V4beta1::CompletionClient.tenant_path("[PROJECT]", "[TENANT]")
       query = ''
       page_size = 0
 
@@ -83,7 +83,7 @@ describe Google::Cloud::Talent::V4beta1::CompletionClient do
       # Mock Grpc layer
       mock_method = proc do |request|
         assert_instance_of(Google::Cloud::Talent::V4beta1::CompleteQueryRequest, request)
-        assert_equal(formatted_name, request.name)
+        assert_equal(formatted_parent, request.parent)
         assert_equal(query, request.query)
         assert_equal(page_size, request.page_size)
         OpenStruct.new(execute: expected_response)
@@ -99,7 +99,7 @@ describe Google::Cloud::Talent::V4beta1::CompletionClient do
 
           # Call method
           response = client.complete_query(
-            formatted_name,
+            formatted_parent,
             query,
             page_size
           )
@@ -109,7 +109,7 @@ describe Google::Cloud::Talent::V4beta1::CompletionClient do
 
           # Call method with block
           client.complete_query(
-            formatted_name,
+            formatted_parent,
             query,
             page_size
           ) do |response, operation|
@@ -123,14 +123,14 @@ describe Google::Cloud::Talent::V4beta1::CompletionClient do
 
     it 'invokes complete_query with error' do
       # Create request parameters
-      formatted_name = Google::Cloud::Talent::V4beta1::CompletionClient.project_path("[PROJECT]")
+      formatted_parent = Google::Cloud::Talent::V4beta1::CompletionClient.tenant_path("[PROJECT]", "[TENANT]")
       query = ''
       page_size = 0
 
       # Mock Grpc layer
       mock_method = proc do |request|
         assert_instance_of(Google::Cloud::Talent::V4beta1::CompleteQueryRequest, request)
-        assert_equal(formatted_name, request.name)
+        assert_equal(formatted_parent, request.parent)
         assert_equal(query, request.query)
         assert_equal(page_size, request.page_size)
         raise custom_error
@@ -147,7 +147,7 @@ describe Google::Cloud::Talent::V4beta1::CompletionClient do
           # Call method
           err = assert_raises Google::Gax::GaxError do
             client.complete_query(
-              formatted_name,
+              formatted_parent,
               query,
               page_size
             )

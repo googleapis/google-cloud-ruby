@@ -20,14 +20,17 @@ module Google
         # Input only.
         #
         # Auto-complete parameters.
-        # @!attribute [rw] name
+        # @!attribute [rw] parent
         #   @return [String]
         #     Required.
         #
-        #     Resource name of project the completion is performed within.
+        #     Resource name of tenant the completion is performed within.
         #
-        #     The format is "projects/{project_id}", for example,
-        #     "projects/api-test-project".
+        #     The format is "projects/{project_id}/tenants/{tenant_id}", for example,
+        #     "projects/api-test-project/tenant/foo".
+        #
+        #     Tenant id is optional and the default tenant is used if unspecified, for
+        #     example, "projects/api-test-project".
         # @!attribute [rw] query
         #   @return [String]
         #     Required.
@@ -72,14 +75,18 @@ module Google
         #     Completion result count.
         #
         #     The maximum allowed page size is 10.
-        # @!attribute [rw] company_name
+        # @!attribute [rw] company
         #   @return [String]
         #     Optional.
         #
         #     If provided, restricts completion to specified company.
         #
-        #     The format is "projects/{project_id}/companies/{company_id}", for example,
-        #     "projects/api-test-project/companies/foo".
+        #     The format is
+        #     "projects/{project_id}/tenants/{tenant_id}/companies/{company_id}", for
+        #     example, "projects/api-test-project/tenants/foo/companies/bar".
+        #
+        #     Tenant id is optional and the default tenant is used if unspecified, for
+        #     example, "projects/api-test-project/companies/bar".
         # @!attribute [rw] scope
         #   @return [Google::Cloud::Talent::V4beta1::CompleteQueryRequest::CompletionScope]
         #     Optional.

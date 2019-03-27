@@ -11,7 +11,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :request_id, :string, 1
     optional :event_id, :string, 2
     optional :create_time, :message, 4, "google.protobuf.Timestamp"
-    map :extra_info, :string, :string, 7
+    optional :event_notes, :string, 9
     oneof :event do
       optional :job_event, :message, 5, "google.cloud.talent.v4beta1.JobEvent"
       optional :profile_event, :message, 6, "google.cloud.talent.v4beta1.ProfileEvent"
@@ -43,20 +43,13 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.cloud.talent.v4beta1.ProfileEvent" do
     optional :type, :enum, 1, "google.cloud.talent.v4beta1.ProfileEvent.ProfileEventType"
     repeated :profiles, :string, 2
-    optional :job_id, :string, 3
+    repeated :jobs, :string, 6
   end
   add_enum "google.cloud.talent.v4beta1.ProfileEvent.ProfileEventType" do
     value :PROFILE_EVENT_TYPE_UNSPECIFIED, 0
     value :IMPRESSION, 1
     value :VIEW, 2
     value :BOOKMARK, 3
-    value :COMMENT_ADDED, 4
-    value :EMAIL_SENT, 5
-    value :RESUME_VIEWED, 6
-    value :ADD_TO_JOB, 7
-    value :POSITIVE_REACTION_TO_PROFILE, 8
-    value :NEGATIVE_REACTION_TO_PROFILE, 9
-    value :SCREEN, 10
   end
 end
 

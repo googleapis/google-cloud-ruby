@@ -7,10 +7,11 @@ require 'google/protobuf'
 require 'google/api/annotations_pb'
 require 'google/cloud/talent/v4beta1/common_pb'
 require 'google/protobuf/timestamp_pb'
+require 'google/protobuf/wrappers_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.cloud.talent.v4beta1.Job" do
     optional :name, :string, 1
-    optional :company_name, :string, 2
+    optional :company, :string, 2
     optional :requisition_id, :string, 3
     optional :title, :string, 4
     optional :description, :string, 5

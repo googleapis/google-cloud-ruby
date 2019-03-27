@@ -24,10 +24,13 @@ module Google
         #   @return [String]
         #     Required.
         #
-        #     The resource name of the project under which the job is created.
+        #     The resource name of the tenant under which the job is created.
         #
-        #     The format is "projects/{project_id}", for example,
-        #     "projects/api-test-project".
+        #     The format is "projects/{project_id}/tenants/{tenant_id}", for example,
+        #     "projects/api-test-project/tenant/foo".
+        #
+        #     Tenant id is optional and a default tenant is created if unspecified, for
+        #     example, "projects/api-test-project".
         # @!attribute [rw] job
         #   @return [Google::Cloud::Talent::V4beta1::Job]
         #     Required.
@@ -44,8 +47,12 @@ module Google
         #
         #     The resource name of the job to retrieve.
         #
-        #     The format is "projects/{project_id}/jobs/{job_id}",
-        #     for example, "projects/api-test-project/jobs/1234".
+        #     The format is
+        #     "projects/{project_id}/tenants/{tenant_id}/jobs/{job_id}", for
+        #     example, "projects/api-test-project/tenants/foo/jobs/1234".
+        #
+        #     Tenant id is optional and the default tenant is used if unspecified, for
+        #     example, "projects/api-test-project/jobs/1234".
         class GetJobRequest; end
 
         # Input only.
@@ -79,8 +86,12 @@ module Google
         #
         #     The resource name of the job to be deleted.
         #
-        #     The format is "projects/{project_id}/jobs/{job_id}",
-        #     for example, "projects/api-test-project/jobs/1234".
+        #     The format is
+        #     "projects/{project_id}/tenants/{tenant_id}/jobs/{job_id}", for
+        #     example, "projects/api-test-project/tenants/foo/jobs/1234".
+        #
+        #     Tenant id is optional and the default tenant is used if unspecified, for
+        #     example, "projects/api-test-project/jobs/1234".
         class DeleteJobRequest; end
 
         # Input only.
@@ -90,10 +101,13 @@ module Google
         #   @return [String]
         #     Required.
         #
-        #     The resource name of the project under which the job is created.
+        #     The resource name of the tenant under which the job is created.
         #
-        #     The format is "projects/{project_id}", for example,
-        #     "projects/api-test-project".
+        #     The format is "projects/{project_id}/tenants/{tenant_id}", for example,
+        #     "projects/api-test-project/tenant/foo".
+        #
+        #     Tenant id is optional and the default tenant is used if unspecified, for
+        #     example, "projects/api-test-project".
         # @!attribute [rw] filter
         #   @return [String]
         #     Required.
@@ -118,10 +132,13 @@ module Google
         #   @return [String]
         #     Required.
         #
-        #     The resource name of the project under which the job is created.
+        #     The resource name of the tenant under which the job is created.
         #
-        #     The format is "projects/{project_id}", for example,
-        #     "projects/api-test-project".
+        #     The format is "projects/{project_id}/tenants/{tenant_id}", for example,
+        #     "projects/api-test-project/tenant/foo".
+        #
+        #     Tenant id is optional and the default tenant is used if unspecified, for
+        #     example, "projects/api-test-project".
         # @!attribute [rw] filter
         #   @return [String]
         #     Required.
@@ -139,11 +156,11 @@ module Google
         #
         #     Sample Query:
         #
-        #     * companyName = "projects/api-test-project/companies/123"
-        #     * companyName = "projects/api-test-project/companies/123" AND requisitionId
-        #       = "req-1"
-        #     * companyName = "projects/api-test-project/companies/123" AND status =
-        #       "EXPIRED"
+        #     * companyName = "projects/api-test-project/tenants/foo/companies/bar"
+        #     * companyName = "projects/api-test-project/tenants/foo/companies/bar" AND
+        #       requisitionId = "req-1"
+        #     * companyName = "projects/api-test-project/tenants/foo/companies/bar" AND
+        #       status = "EXPIRED"
         # @!attribute [rw] page_token
         #   @return [String]
         #     Optional.
@@ -197,10 +214,13 @@ module Google
         #   @return [String]
         #     Required.
         #
-        #     The resource name of the project to search within.
+        #     The resource name of the tenant to search within.
         #
-        #     The format is "projects/{project_id}", for example,
-        #     "projects/api-test-project".
+        #     The format is "projects/{project_id}/tenants/{tenant_id}", for example,
+        #     "projects/api-test-project/tenant/foo".
+        #
+        #     Tenant id is optional and the default tenant is used if unspecified, for
+        #     example, "projects/api-test-project".
         # @!attribute [rw] search_mode
         #   @return [Google::Cloud::Talent::V4beta1::SearchJobsRequest::SearchMode]
         #     Optional.
@@ -706,8 +726,7 @@ module Google
           # A minimal view of the job, with the following attributes:
           # {Google::Cloud::Talent::V4beta1::Job#name Job#name},
           # {Google::Cloud::Talent::V4beta1::Job#requisition_id Job#requisition_id},
-          # {Job#job_title},
-          # {Google::Cloud::Talent::V4beta1::Job#company_name Job#company_name},
+          # {Job#job_title}, {Google::Cloud::Talent::V4beta1::Job#company Job#company},
           # {Google::Cloud::Talent::V4beta1::Job::DerivedInfo#locations Job::DerivedInfo#locations},
           # {Google::Cloud::Talent::V4beta1::Job#language_code Job#language_code}.
           JOB_VIEW_MINIMAL = 2
@@ -715,8 +734,7 @@ module Google
           # A small view of the job, with the following attributes in the search
           # results: {Google::Cloud::Talent::V4beta1::Job#name Job#name},
           # {Google::Cloud::Talent::V4beta1::Job#requisition_id Job#requisition_id},
-          # {Job#job_title},
-          # {Google::Cloud::Talent::V4beta1::Job#company_name Job#company_name},
+          # {Job#job_title}, {Google::Cloud::Talent::V4beta1::Job#company Job#company},
           # {Google::Cloud::Talent::V4beta1::Job::DerivedInfo#locations Job::DerivedInfo#locations},
           # {Google::Cloud::Talent::V4beta1::Job#visibility Job#visibility},
           # {Google::Cloud::Talent::V4beta1::Job#language_code Job#language_code},

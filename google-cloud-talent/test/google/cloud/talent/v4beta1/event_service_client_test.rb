@@ -72,13 +72,18 @@ describe Google::Cloud::Talent::V4beta1::EventServiceClient do
 
     it 'invokes create_client_event without error' do
       # Create request parameters
-      formatted_parent = Google::Cloud::Talent::V4beta1::EventServiceClient.project_path("[PROJECT]")
+      formatted_parent = Google::Cloud::Talent::V4beta1::EventServiceClient.tenant_path("[PROJECT]", "[TENANT]")
       client_event = {}
 
       # Create expected grpc response
       request_id = "requestId37109963"
       event_id = "eventId278118624"
-      expected_response = { request_id: request_id, event_id: event_id }
+      event_notes = "eventNotes445073628"
+      expected_response = {
+        request_id: request_id,
+        event_id: event_id,
+        event_notes: event_notes
+      }
       expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Talent::V4beta1::ClientEvent)
 
       # Mock Grpc layer
@@ -115,7 +120,7 @@ describe Google::Cloud::Talent::V4beta1::EventServiceClient do
 
     it 'invokes create_client_event with error' do
       # Create request parameters
-      formatted_parent = Google::Cloud::Talent::V4beta1::EventServiceClient.project_path("[PROJECT]")
+      formatted_parent = Google::Cloud::Talent::V4beta1::EventServiceClient.tenant_path("[PROJECT]", "[TENANT]")
       client_event = {}
 
       # Mock Grpc layer
