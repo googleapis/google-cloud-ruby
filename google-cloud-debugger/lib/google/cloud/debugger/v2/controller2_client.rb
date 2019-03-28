@@ -188,7 +188,10 @@ module Google
             @list_active_breakpoints = Google::Gax.create_api_call(
               @controller2_stub.method(:list_active_breakpoints),
               defaults["list_active_breakpoints"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'debuggee_id' => request.debuggee_id}
+              end
             )
             @update_active_breakpoint = Google::Gax.create_api_call(
               @controller2_stub.method(:update_active_breakpoint),
