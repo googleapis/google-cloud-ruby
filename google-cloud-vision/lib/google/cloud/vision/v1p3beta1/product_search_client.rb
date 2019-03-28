@@ -295,92 +295,146 @@ module Google
             @create_product_set = Google::Gax.create_api_call(
               @product_search_stub.method(:create_product_set),
               defaults["create_product_set"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
             )
             @list_product_sets = Google::Gax.create_api_call(
               @product_search_stub.method(:list_product_sets),
               defaults["list_product_sets"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
             )
             @get_product_set = Google::Gax.create_api_call(
               @product_search_stub.method(:get_product_set),
               defaults["get_product_set"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @update_product_set = Google::Gax.create_api_call(
               @product_search_stub.method(:update_product_set),
               defaults["update_product_set"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'product_set.name' => request.product_set.name}
+              end
             )
             @delete_product_set = Google::Gax.create_api_call(
               @product_search_stub.method(:delete_product_set),
               defaults["delete_product_set"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @create_product = Google::Gax.create_api_call(
               @product_search_stub.method(:create_product),
               defaults["create_product"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
             )
             @list_products = Google::Gax.create_api_call(
               @product_search_stub.method(:list_products),
               defaults["list_products"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
             )
             @get_product = Google::Gax.create_api_call(
               @product_search_stub.method(:get_product),
               defaults["get_product"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @update_product = Google::Gax.create_api_call(
               @product_search_stub.method(:update_product),
               defaults["update_product"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'product.name' => request.product.name}
+              end
             )
             @delete_product = Google::Gax.create_api_call(
               @product_search_stub.method(:delete_product),
               defaults["delete_product"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @create_reference_image = Google::Gax.create_api_call(
               @product_search_stub.method(:create_reference_image),
               defaults["create_reference_image"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
             )
             @delete_reference_image = Google::Gax.create_api_call(
               @product_search_stub.method(:delete_reference_image),
               defaults["delete_reference_image"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @list_reference_images = Google::Gax.create_api_call(
               @product_search_stub.method(:list_reference_images),
               defaults["list_reference_images"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
             )
             @get_reference_image = Google::Gax.create_api_call(
               @product_search_stub.method(:get_reference_image),
               defaults["get_reference_image"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @add_product_to_product_set = Google::Gax.create_api_call(
               @product_search_stub.method(:add_product_to_product_set),
               defaults["add_product_to_product_set"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @remove_product_from_product_set = Google::Gax.create_api_call(
               @product_search_stub.method(:remove_product_from_product_set),
               defaults["remove_product_from_product_set"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @list_products_in_product_set = Google::Gax.create_api_call(
               @product_search_stub.method(:list_products_in_product_set),
               defaults["list_products_in_product_set"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @import_product_sets = Google::Gax.create_api_call(
               @product_search_stub.method(:import_product_sets),
               defaults["import_product_sets"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
             )
           end
 
