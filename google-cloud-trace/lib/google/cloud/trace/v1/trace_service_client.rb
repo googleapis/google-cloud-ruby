@@ -179,7 +179,10 @@ module Google
             @patch_traces = Google::Gax.create_api_call(
               @trace_service_stub.method(:patch_traces),
               defaults["patch_traces"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'project_id' => request.project_id}
+              end
             )
             @get_trace = Google::Gax.create_api_call(
               @trace_service_stub.method(:get_trace),
@@ -189,7 +192,10 @@ module Google
             @list_traces = Google::Gax.create_api_call(
               @trace_service_stub.method(:list_traces),
               defaults["list_traces"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'project_id' => request.project_id}
+              end
             )
           end
 
