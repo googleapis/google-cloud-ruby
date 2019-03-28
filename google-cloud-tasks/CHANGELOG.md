@@ -1,5 +1,9 @@
 # Release History
 
+### 0.6.0 / 2019-03-28
+
+* Add v2 api version
+
 ### 0.5.0 / 2019-03-20
 
 * Alias the following CloudTasksClient class methods to instance methods.
