@@ -169,37 +169,58 @@ module Google
             @lookup = Google::Gax.create_api_call(
               @datastore_stub.method(:lookup),
               defaults["lookup"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'project_id' => request.project_id}
+              end
             )
             @run_query = Google::Gax.create_api_call(
               @datastore_stub.method(:run_query),
               defaults["run_query"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'project_id' => request.project_id}
+              end
             )
             @begin_transaction = Google::Gax.create_api_call(
               @datastore_stub.method(:begin_transaction),
               defaults["begin_transaction"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'project_id' => request.project_id}
+              end
             )
             @commit = Google::Gax.create_api_call(
               @datastore_stub.method(:commit),
               defaults["commit"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'project_id' => request.project_id}
+              end
             )
             @rollback = Google::Gax.create_api_call(
               @datastore_stub.method(:rollback),
               defaults["rollback"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'project_id' => request.project_id}
+              end
             )
             @allocate_ids = Google::Gax.create_api_call(
               @datastore_stub.method(:allocate_ids),
               defaults["allocate_ids"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'project_id' => request.project_id}
+              end
             )
             @reserve_ids = Google::Gax.create_api_call(
               @datastore_stub.method(:reserve_ids),
               defaults["reserve_ids"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'project_id' => request.project_id}
+              end
             )
           end
 
