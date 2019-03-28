@@ -363,22 +363,34 @@ module Google
             @inspect_content = Google::Gax.create_api_call(
               @dlp_service_stub.method(:inspect_content),
               defaults["inspect_content"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
             )
             @redact_image = Google::Gax.create_api_call(
               @dlp_service_stub.method(:redact_image),
               defaults["redact_image"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
             )
             @deidentify_content = Google::Gax.create_api_call(
               @dlp_service_stub.method(:deidentify_content),
               defaults["deidentify_content"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
             )
             @reidentify_content = Google::Gax.create_api_call(
               @dlp_service_stub.method(:reidentify_content),
               defaults["reidentify_content"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
             )
             @list_info_types = Google::Gax.create_api_call(
               @dlp_service_stub.method(:list_info_types),
@@ -388,127 +400,202 @@ module Google
             @create_inspect_template = Google::Gax.create_api_call(
               @dlp_service_stub.method(:create_inspect_template),
               defaults["create_inspect_template"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
             )
             @update_inspect_template = Google::Gax.create_api_call(
               @dlp_service_stub.method(:update_inspect_template),
               defaults["update_inspect_template"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @get_inspect_template = Google::Gax.create_api_call(
               @dlp_service_stub.method(:get_inspect_template),
               defaults["get_inspect_template"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @list_inspect_templates = Google::Gax.create_api_call(
               @dlp_service_stub.method(:list_inspect_templates),
               defaults["list_inspect_templates"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
             )
             @delete_inspect_template = Google::Gax.create_api_call(
               @dlp_service_stub.method(:delete_inspect_template),
               defaults["delete_inspect_template"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @create_deidentify_template = Google::Gax.create_api_call(
               @dlp_service_stub.method(:create_deidentify_template),
               defaults["create_deidentify_template"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
             )
             @update_deidentify_template = Google::Gax.create_api_call(
               @dlp_service_stub.method(:update_deidentify_template),
               defaults["update_deidentify_template"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @get_deidentify_template = Google::Gax.create_api_call(
               @dlp_service_stub.method(:get_deidentify_template),
               defaults["get_deidentify_template"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @list_deidentify_templates = Google::Gax.create_api_call(
               @dlp_service_stub.method(:list_deidentify_templates),
               defaults["list_deidentify_templates"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
             )
             @delete_deidentify_template = Google::Gax.create_api_call(
               @dlp_service_stub.method(:delete_deidentify_template),
               defaults["delete_deidentify_template"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @create_dlp_job = Google::Gax.create_api_call(
               @dlp_service_stub.method(:create_dlp_job),
               defaults["create_dlp_job"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
             )
             @list_dlp_jobs = Google::Gax.create_api_call(
               @dlp_service_stub.method(:list_dlp_jobs),
               defaults["list_dlp_jobs"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
             )
             @get_dlp_job = Google::Gax.create_api_call(
               @dlp_service_stub.method(:get_dlp_job),
               defaults["get_dlp_job"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @delete_dlp_job = Google::Gax.create_api_call(
               @dlp_service_stub.method(:delete_dlp_job),
               defaults["delete_dlp_job"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @cancel_dlp_job = Google::Gax.create_api_call(
               @dlp_service_stub.method(:cancel_dlp_job),
               defaults["cancel_dlp_job"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @list_job_triggers = Google::Gax.create_api_call(
               @dlp_service_stub.method(:list_job_triggers),
               defaults["list_job_triggers"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
             )
             @get_job_trigger = Google::Gax.create_api_call(
               @dlp_service_stub.method(:get_job_trigger),
               defaults["get_job_trigger"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @delete_job_trigger = Google::Gax.create_api_call(
               @dlp_service_stub.method(:delete_job_trigger),
               defaults["delete_job_trigger"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @update_job_trigger = Google::Gax.create_api_call(
               @dlp_service_stub.method(:update_job_trigger),
               defaults["update_job_trigger"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @create_job_trigger = Google::Gax.create_api_call(
               @dlp_service_stub.method(:create_job_trigger),
               defaults["create_job_trigger"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
             )
             @create_stored_info_type = Google::Gax.create_api_call(
               @dlp_service_stub.method(:create_stored_info_type),
               defaults["create_stored_info_type"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
             )
             @update_stored_info_type = Google::Gax.create_api_call(
               @dlp_service_stub.method(:update_stored_info_type),
               defaults["update_stored_info_type"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @get_stored_info_type = Google::Gax.create_api_call(
               @dlp_service_stub.method(:get_stored_info_type),
               defaults["get_stored_info_type"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @list_stored_info_types = Google::Gax.create_api_call(
               @dlp_service_stub.method(:list_stored_info_types),
               defaults["list_stored_info_types"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
             )
             @delete_stored_info_type = Google::Gax.create_api_call(
               @dlp_service_stub.method(:delete_stored_info_type),
               defaults["delete_stored_info_type"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
           end
 
