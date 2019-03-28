@@ -225,37 +225,58 @@ module Google
             @create_workflow_template = Google::Gax.create_api_call(
               @workflow_template_service_stub.method(:create_workflow_template),
               defaults["create_workflow_template"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
             )
             @get_workflow_template = Google::Gax.create_api_call(
               @workflow_template_service_stub.method(:get_workflow_template),
               defaults["get_workflow_template"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @instantiate_workflow_template = Google::Gax.create_api_call(
               @workflow_template_service_stub.method(:instantiate_workflow_template),
               defaults["instantiate_workflow_template"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @instantiate_inline_workflow_template = Google::Gax.create_api_call(
               @workflow_template_service_stub.method(:instantiate_inline_workflow_template),
               defaults["instantiate_inline_workflow_template"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
             )
             @update_workflow_template = Google::Gax.create_api_call(
               @workflow_template_service_stub.method(:update_workflow_template),
               defaults["update_workflow_template"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'template.name' => request.template.name}
+              end
             )
             @list_workflow_templates = Google::Gax.create_api_call(
               @workflow_template_service_stub.method(:list_workflow_templates),
               defaults["list_workflow_templates"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
             )
             @delete_workflow_template = Google::Gax.create_api_call(
               @workflow_template_service_stub.method(:delete_workflow_template),
               defaults["delete_workflow_template"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
           end
 
