@@ -178,7 +178,10 @@ module Google
             @report_error_event = Google::Gax.create_api_call(
               @report_errors_service_stub.method(:report_error_event),
               defaults["report_error_event"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'project_name' => request.project_name}
+              end
             )
           end
 
