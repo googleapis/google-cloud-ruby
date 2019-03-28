@@ -1,5 +1,15 @@
 # Release History
 
+### 0.32.0 / 2019-03-27
+
+* Update documentation
+* Add the following Entity types:
+  * PHONE_NUMBER
+  * ADDRESS
+  * DATE
+  * NUMBER
+  * PRICE
+
 ### 0.31.2 / 2018-09-20
 
 * Update documentation.
