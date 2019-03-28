@@ -43,9 +43,9 @@ module Google
           # The external path to the file.
           def ext_path
             escaped_path = String(@path).split("/").map do |node|
-              CGI.escape node
+              Addressable::URI.escape node
             end.join("/")
-            "/#{CGI.escape @bucket}/#{escaped_path}"
+            "/#{Addressable::URI.escape @bucket}/#{escaped_path}"
           end
 
           ##
