@@ -218,32 +218,50 @@ module Google
             @delete_posix_account = Google::Gax.create_api_call(
               @os_login_service_stub.method(:delete_posix_account),
               defaults["delete_posix_account"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @delete_ssh_public_key = Google::Gax.create_api_call(
               @os_login_service_stub.method(:delete_ssh_public_key),
               defaults["delete_ssh_public_key"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @get_login_profile = Google::Gax.create_api_call(
               @os_login_service_stub.method(:get_login_profile),
               defaults["get_login_profile"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @get_ssh_public_key = Google::Gax.create_api_call(
               @os_login_service_stub.method(:get_ssh_public_key),
               defaults["get_ssh_public_key"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @import_ssh_public_key = Google::Gax.create_api_call(
               @os_login_service_stub.method(:import_ssh_public_key),
               defaults["import_ssh_public_key"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
             )
             @update_ssh_public_key = Google::Gax.create_api_call(
               @os_login_service_stub.method(:update_ssh_public_key),
               defaults["update_ssh_public_key"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
           end
 
