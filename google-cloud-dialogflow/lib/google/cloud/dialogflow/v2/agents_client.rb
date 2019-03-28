@@ -232,32 +232,50 @@ module Google
             @get_agent = Google::Gax.create_api_call(
               @agents_stub.method(:get_agent),
               defaults["get_agent"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
             )
             @search_agents = Google::Gax.create_api_call(
               @agents_stub.method(:search_agents),
               defaults["search_agents"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
             )
             @train_agent = Google::Gax.create_api_call(
               @agents_stub.method(:train_agent),
               defaults["train_agent"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
             )
             @export_agent = Google::Gax.create_api_call(
               @agents_stub.method(:export_agent),
               defaults["export_agent"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
             )
             @import_agent = Google::Gax.create_api_call(
               @agents_stub.method(:import_agent),
               defaults["import_agent"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
             )
             @restore_agent = Google::Gax.create_api_call(
               @agents_stub.method(:restore_agent),
               defaults["restore_agent"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
             )
           end
 

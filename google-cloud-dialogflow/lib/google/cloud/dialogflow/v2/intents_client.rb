@@ -268,37 +268,58 @@ module Google
             @list_intents = Google::Gax.create_api_call(
               @intents_stub.method(:list_intents),
               defaults["list_intents"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
             )
             @get_intent = Google::Gax.create_api_call(
               @intents_stub.method(:get_intent),
               defaults["get_intent"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @create_intent = Google::Gax.create_api_call(
               @intents_stub.method(:create_intent),
               defaults["create_intent"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
             )
             @update_intent = Google::Gax.create_api_call(
               @intents_stub.method(:update_intent),
               defaults["update_intent"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'intent.name' => request.intent.name}
+              end
             )
             @delete_intent = Google::Gax.create_api_call(
               @intents_stub.method(:delete_intent),
               defaults["delete_intent"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @batch_update_intents = Google::Gax.create_api_call(
               @intents_stub.method(:batch_update_intents),
               defaults["batch_update_intents"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
             )
             @batch_delete_intents = Google::Gax.create_api_call(
               @intents_stub.method(:batch_delete_intents),
               defaults["batch_delete_intents"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
             )
           end
 

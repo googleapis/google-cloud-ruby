@@ -225,32 +225,50 @@ module Google
             @list_contexts = Google::Gax.create_api_call(
               @contexts_stub.method(:list_contexts),
               defaults["list_contexts"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
             )
             @get_context = Google::Gax.create_api_call(
               @contexts_stub.method(:get_context),
               defaults["get_context"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @create_context = Google::Gax.create_api_call(
               @contexts_stub.method(:create_context),
               defaults["create_context"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
             )
             @update_context = Google::Gax.create_api_call(
               @contexts_stub.method(:update_context),
               defaults["update_context"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'context.name' => request.context.name}
+              end
             )
             @delete_context = Google::Gax.create_api_call(
               @contexts_stub.method(:delete_context),
               defaults["delete_context"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @delete_all_contexts = Google::Gax.create_api_call(
               @contexts_stub.method(:delete_all_contexts),
               defaults["delete_all_contexts"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
             )
           end
 

@@ -220,27 +220,42 @@ module Google
             @list_session_entity_types = Google::Gax.create_api_call(
               @session_entity_types_stub.method(:list_session_entity_types),
               defaults["list_session_entity_types"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
             )
             @get_session_entity_type = Google::Gax.create_api_call(
               @session_entity_types_stub.method(:get_session_entity_type),
               defaults["get_session_entity_type"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @create_session_entity_type = Google::Gax.create_api_call(
               @session_entity_types_stub.method(:create_session_entity_type),
               defaults["create_session_entity_type"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
             )
             @update_session_entity_type = Google::Gax.create_api_call(
               @session_entity_types_stub.method(:update_session_entity_type),
               defaults["update_session_entity_type"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'session_entity_type.name' => request.session_entity_type.name}
+              end
             )
             @delete_session_entity_type = Google::Gax.create_api_call(
               @session_entity_types_stub.method(:delete_session_entity_type),
               defaults["delete_session_entity_type"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
           end
 
