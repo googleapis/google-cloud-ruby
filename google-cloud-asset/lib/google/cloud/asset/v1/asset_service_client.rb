@@ -194,12 +194,18 @@ module Google
             @export_assets = Google::Gax.create_api_call(
               @asset_service_stub.method(:export_assets),
               defaults["export_assets"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
             )
             @batch_get_assets_history = Google::Gax.create_api_call(
               @asset_service_stub.method(:batch_get_assets_history),
               defaults["batch_get_assets_history"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
             )
           end
 
