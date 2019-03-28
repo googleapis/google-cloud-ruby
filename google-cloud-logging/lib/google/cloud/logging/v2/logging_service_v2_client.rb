@@ -230,7 +230,10 @@ module Google
             @delete_log = Google::Gax.create_api_call(
               @logging_service_v2_stub.method(:delete_log),
               defaults["delete_log"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'log_name' => request.log_name}
+              end
             )
             @write_log_entries = Google::Gax.create_api_call(
               @logging_service_v2_stub.method(:write_log_entries),
@@ -250,7 +253,10 @@ module Google
             @list_logs = Google::Gax.create_api_call(
               @logging_service_v2_stub.method(:list_logs),
               defaults["list_logs"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
             )
           end
 
