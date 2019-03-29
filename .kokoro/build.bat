@@ -26,6 +26,12 @@ SET EXIT_STATUS=0
 
 
 git fetch --depth=10000
+
+git add -A
+git commit -m "Saving files before refreshing line endings"
+rm .git/index
+git reset
+
 ECHO "Fetched"
 bundle update || CALL:set_failed_status
 ECHO "updated"
