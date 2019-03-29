@@ -27,7 +27,7 @@ SET EXIT_STATUS=0
 
 git fetch --depth=10000
 
-git add --renormalize .
+REM git add --renormalize .
 
 ECHO "Fetched"
 bundle update || CALL:set_failed_status
