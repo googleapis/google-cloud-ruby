@@ -13,9 +13,9 @@ REM SET HOME=C:\Users\ContainerAdministrator
 REM ECHO %HOME%
 ECHO "RUBYOPT = %RUBYOPT%"
 
-SET RUBYOPT=""
-SETX RUBYOPT ""
-ECHO "RUBYOPT = %RUBYOPT%"
+REM SET RUBYOPT=""
+REM SETX RUBYOPT ""
+REM ECHO "RUBYOPT = %RUBYOPT%"
 CD %REPO_DIR%
 
 REM ECHO ruby --version
@@ -29,9 +29,9 @@ git fetch --depth=10000
 REM git add --renormalize .
 
 ECHO "Fetched"
-bundle update || CALL:set_failed_status
+bundle update || CALL :set_failed_status
 ECHO "updated"
-bundle exec rake kokoro:%JOB_TYPE% || CALL:set_failed_status
+bundle exec rake kokoro:%JOB_TYPE% || CALL :set_failed_status
 
 EXIT /B %EXIT_STATUS%
 
