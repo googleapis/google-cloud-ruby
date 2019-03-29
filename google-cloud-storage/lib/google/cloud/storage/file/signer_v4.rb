@@ -13,7 +13,7 @@
 # limitations under the License.
 
 
-require "base64"
+require "cgi"
 require "addressable/uri"
 require "openssl"
 require "google/cloud/storage/errors"
@@ -39,19 +39,11 @@ module Google
             new bucket.name, file_name, bucket.service
           end
 
-          def signature_str options
-            [options[:method], options[:content_md5],
-             options[:content_type], options[:expires],
-             format_extension_headers(options[:headers]) + ext_path].join "\n"
-          end
-
           def signed_url method: "GET", expires: nil, headers: nil,
-                         issuer: nil, client_email: nil,
-                         access_token: nil, signing_key: nil,
+                         issuer: nil, client_email: nil, signing_key: nil,
                          private_key: nil, query: nil
             issuer, signer = issuer_and_signer issuer, client_email,
-                                               access_token, signing_key,
-                                               private_key
+                                               signing_key, private_key
             datetime_now = Time.now.utc
             goog_date = datetime_now.strftime "%Y%m%dT%H%M%SZ"
             datestamp = datetime_now.strftime "%Y%m%d"
@@ -91,6 +83,42 @@ module Google
 
           protected
 
+          def determine_issuer issuer, client_email
+            # Parse the Service Account and get client id and private key
+            issuer = issuer || client_email || @service.credentials.issuer
+            unless issuer
+              raise SignedUrlUnavailable, "issuer (client_email) missing"
+            end
+            issuer
+          end
+
+          def determine_signing_key signing_key, private_key
+            signing_key = signing_key || private_key ||
+                          @service.credentials.signing_key
+            unless signing_key
+              raise SignedUrlUnavailable, "signing_key (private_key) missing"
+            end
+            signing_key
+          end
+
+          def service_account_signer signer
+            unless signer.respond_to? :sign
+              signer = OpenSSL::PKey::RSA.new signer
+            end
+            # Sign string to sign
+            lambda do |string_to_sign|
+              sig = signer.sign OpenSSL::Digest::SHA256.new, string_to_sign
+              sig.unpack("H*").first
+            end
+          end
+
+          def issuer_and_signer issuer, client_email, signing_key, private_key
+            issuer = determine_issuer issuer, client_email
+            signing_key = determine_signing_key signing_key, private_key
+            signer = service_account_signer signing_key
+            [issuer, signer]
+          end
+
           def canonical_and_signed_headers headers
             # Headers needs to be in alpha order.
             canonical_headers = headers || {}
@@ -110,6 +138,14 @@ module Google
             canonical_headers.each_key { |k| signed_headers_str += "#{k};" }
             signed_headers_str = signed_headers_str.chomp ";"
             [canonical_headers_str, signed_headers_str]
+          end
+
+          def determine_expires expires
+            expires ||= 604_800 # Default is 7 days.
+            if expires > 604_800
+              raise ArgumentError, "Expiration time can't be longer than a week"
+            end
+            expires
           end
 
           def canonical_query query, algorithm, credential, goog_date, expires,
@@ -138,84 +174,6 @@ module Google
           # The external url to the file.
           def ext_url
             "#{GOOGLEAPIS_URL}#{ext_path}"
-          end
-
-          def service_account_signer signer
-            unless signer.respond_to? :sign
-              signer = OpenSSL::PKey::RSA.new signer
-            end
-            # Sign string to sign
-            lambda do |string_to_sign|
-              sig = signer.sign OpenSSL::Digest::SHA256.new, string_to_sign
-              sig.unpack("H*").first
-            end
-          end
-
-          def determine_expires expires
-            expires ||= 604_800 # Default is 7 days.
-            if expires > 604_800
-              raise ArgumentError, "Expiration time can't be longer than a week"
-            end
-            expires
-          end
-
-          def determine_signing_key signing_key, private_key
-            signing_key = signing_key || private_key ||
-                          @service.credentials.signing_key
-            unless signing_key
-              raise SignedUrlUnavailable, "signing_key (private_key) missing"
-            end
-            signing_key
-          end
-
-          def determine_issuer issuer, client_email
-            # Parse the Service Account and get client id and private key
-            issuer = issuer || client_email || @service.credentials.issuer
-            unless issuer
-              raise SignedUrlUnavailable, "issuer (client_email) missing"
-            end
-            issuer
-          end
-
-          # Select appropriate signer
-          def issuer_and_signer issuer, client_email, access_token, signing_key,
-                                private_key
-            if access_token
-              # Use access token
-              issuer ||= client_email
-              signer = iam_signer CGI.escape(issuer), access_token
-            else
-              # Use service account
-              issuer = determine_issuer issuer, client_email
-              signing_key = determine_signing_key signing_key, private_key
-              signer = service_account_signer signing_key
-            end
-            [issuer, signer]
-          end
-
-          def iam_signer client_email, access_token
-            lambda do |string_to_sign|
-              uri = URI(
-                "https://iam.googleapis.com/v1/projects/-/serviceAccounts/"\
-                "#{client_email}:signBlob"
-              )
-              http = Net::HTTP.new uri.host, uri.port
-              http.use_ssl = true
-              # http.set_debug_output($stdout)
-              header = {}
-              header["Authorization"] = "Bearer #{access_token}"
-              header["Content-type"] = "application/json"
-              req = Net::HTTP::Post.new uri, header
-              string_to_sign_base64 = Base64.strict_encode64 string_to_sign
-              req.body = { "bytesToSign" => string_to_sign_base64 }.to_json
-              res = http.request req
-              unless res.is_a? Net::HTTPSuccess
-                raise "Unable to sign string #{res.body}"
-              end
-              puts res.body
-              signature = JSON.parse(res.body)["signature"]
-              Base64.strict_decode64(signature).unpack("H*").first
-            end
           end
         end
       end
