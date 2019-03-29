@@ -14,7 +14,7 @@
 
 
 require "base64"
-require "cgi"
+require "addressable/uri"
 require "openssl"
 require "google/cloud/storage/errors"
 
@@ -78,7 +78,6 @@ module Google
                                  canonical_headers_str,
                                  signed_headers_str,
                                  "UNSIGNED-PAYLOAD"].join("\n")
-
             # Construct string to sign
             req_sha = Digest::SHA256.hexdigest canonical_request
             string_to_sign = [algorithm, goog_date, scope, req_sha].join "\n"
@@ -128,12 +127,11 @@ module Google
           end
 
           ##
-          # The external path to the file.
+          # The URI-encoded (percent encoded) external path to the file.
           def ext_path
-            escaped_path = String(@file_name).split("/").map do |node|
-              CGI.escape node
-            end.join("/")
-            "/#{CGI.escape @bucket_name}/#{escaped_path}"
+            path = "/#{@bucket_name}"
+            path += "/#{String(@file_name)}" if @file_name && !@file_name.empty?
+            Addressable::URI.escape path
           end
 
           ##

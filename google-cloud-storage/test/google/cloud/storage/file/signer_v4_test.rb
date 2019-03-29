@@ -22,11 +22,6 @@ class SignerV4Test < MockStorage
     credentials.signing_key = OpenSSL::PKey::RSA.new account["private_key"]
   end
 
-  def headers_from_json headers
-    return nil if headers.nil? || headers.empty?
-    Hash[headers.map{ |k,v| [k, v.join(",")] } ]
-  end
-
   def self.load_json rel_path
     json_file = File.expand_path rel_path, __dir__
     json_contents = File.read json_file
@@ -43,7 +38,7 @@ class SignerV4Test < MockStorage
         # method under test
         signed_url = signer.signed_url method: test["method"],
                                        expires: test["expiration"].to_i,
-                                       headers: headers_from_json(test["headers"])
+                                       headers: test["headers"]
 
         signed_url.must_equal test["expectedUrl"]
       end
@@ -54,6 +49,5 @@ end
 
 tests = SignerV4Test.load_json "../../../../data/signer_v4_test_data.json"
 tests.each_with_index do |test, index|
-  next if [6,8].include? index # TODO: Support multiple headers
   SignerV4Test.build_test_for test, index
 end
