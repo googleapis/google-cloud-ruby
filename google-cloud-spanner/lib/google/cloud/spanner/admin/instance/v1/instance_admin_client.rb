@@ -265,52 +265,82 @@ module Google
                 @list_instance_configs = Google::Gax.create_api_call(
                   @instance_admin_stub.method(:list_instance_configs),
                   defaults["list_instance_configs"],
-                  exception_transformer: exception_transformer
+                  exception_transformer: exception_transformer,
+                  params_extractor: proc do |request|
+                    {'parent' => request.parent}
+                  end
                 )
                 @get_instance_config = Google::Gax.create_api_call(
                   @instance_admin_stub.method(:get_instance_config),
                   defaults["get_instance_config"],
-                  exception_transformer: exception_transformer
+                  exception_transformer: exception_transformer,
+                  params_extractor: proc do |request|
+                    {'name' => request.name}
+                  end
                 )
                 @list_instances = Google::Gax.create_api_call(
                   @instance_admin_stub.method(:list_instances),
                   defaults["list_instances"],
-                  exception_transformer: exception_transformer
+                  exception_transformer: exception_transformer,
+                  params_extractor: proc do |request|
+                    {'parent' => request.parent}
+                  end
                 )
                 @get_instance = Google::Gax.create_api_call(
                   @instance_admin_stub.method(:get_instance),
                   defaults["get_instance"],
-                  exception_transformer: exception_transformer
+                  exception_transformer: exception_transformer,
+                  params_extractor: proc do |request|
+                    {'name' => request.name}
+                  end
                 )
                 @create_instance = Google::Gax.create_api_call(
                   @instance_admin_stub.method(:create_instance),
                   defaults["create_instance"],
-                  exception_transformer: exception_transformer
+                  exception_transformer: exception_transformer,
+                  params_extractor: proc do |request|
+                    {'parent' => request.parent}
+                  end
                 )
                 @update_instance = Google::Gax.create_api_call(
                   @instance_admin_stub.method(:update_instance),
                   defaults["update_instance"],
-                  exception_transformer: exception_transformer
+                  exception_transformer: exception_transformer,
+                  params_extractor: proc do |request|
+                    {'instance.name' => request.instance.name}
+                  end
                 )
                 @delete_instance = Google::Gax.create_api_call(
                   @instance_admin_stub.method(:delete_instance),
                   defaults["delete_instance"],
-                  exception_transformer: exception_transformer
+                  exception_transformer: exception_transformer,
+                  params_extractor: proc do |request|
+                    {'name' => request.name}
+                  end
                 )
                 @set_iam_policy = Google::Gax.create_api_call(
                   @instance_admin_stub.method(:set_iam_policy),
                   defaults["set_iam_policy"],
-                  exception_transformer: exception_transformer
+                  exception_transformer: exception_transformer,
+                  params_extractor: proc do |request|
+                    {'resource' => request.resource}
+                  end
                 )
                 @get_iam_policy = Google::Gax.create_api_call(
                   @instance_admin_stub.method(:get_iam_policy),
                   defaults["get_iam_policy"],
-                  exception_transformer: exception_transformer
+                  exception_transformer: exception_transformer,
+                  params_extractor: proc do |request|
+                    {'resource' => request.resource}
+                  end
                 )
                 @test_iam_permissions = Google::Gax.create_api_call(
                   @instance_admin_stub.method(:test_iam_permissions),
                   defaults["test_iam_permissions"],
-                  exception_transformer: exception_transformer
+                  exception_transformer: exception_transformer,
+                  params_extractor: proc do |request|
+                    {'resource' => request.resource}
+                  end
                 )
               end
 

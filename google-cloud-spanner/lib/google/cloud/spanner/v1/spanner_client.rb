@@ -217,72 +217,114 @@ module Google
             @create_session = Google::Gax.create_api_call(
               @spanner_stub.method(:create_session),
               defaults["create_session"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'database' => request.database}
+              end
             )
             @get_session = Google::Gax.create_api_call(
               @spanner_stub.method(:get_session),
               defaults["get_session"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @list_sessions = Google::Gax.create_api_call(
               @spanner_stub.method(:list_sessions),
               defaults["list_sessions"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'database' => request.database}
+              end
             )
             @delete_session = Google::Gax.create_api_call(
               @spanner_stub.method(:delete_session),
               defaults["delete_session"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @execute_sql = Google::Gax.create_api_call(
               @spanner_stub.method(:execute_sql),
               defaults["execute_sql"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'session' => request.session}
+              end
             )
             @execute_streaming_sql = Google::Gax.create_api_call(
               @spanner_stub.method(:execute_streaming_sql),
               defaults["execute_streaming_sql"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'session' => request.session}
+              end
             )
             @execute_batch_dml = Google::Gax.create_api_call(
               @spanner_stub.method(:execute_batch_dml),
               defaults["execute_batch_dml"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'session' => request.session}
+              end
             )
             @read = Google::Gax.create_api_call(
               @spanner_stub.method(:read),
               defaults["read"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'session' => request.session}
+              end
             )
             @streaming_read = Google::Gax.create_api_call(
               @spanner_stub.method(:streaming_read),
               defaults["streaming_read"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'session' => request.session}
+              end
             )
             @begin_transaction = Google::Gax.create_api_call(
               @spanner_stub.method(:begin_transaction),
               defaults["begin_transaction"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'session' => request.session}
+              end
             )
             @commit = Google::Gax.create_api_call(
               @spanner_stub.method(:commit),
               defaults["commit"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'session' => request.session}
+              end
             )
             @rollback = Google::Gax.create_api_call(
               @spanner_stub.method(:rollback),
               defaults["rollback"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'session' => request.session}
+              end
             )
             @partition_query = Google::Gax.create_api_call(
               @spanner_stub.method(:partition_query),
               defaults["partition_query"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'session' => request.session}
+              end
             )
             @partition_read = Google::Gax.create_api_call(
               @spanner_stub.method(:partition_read),
               defaults["partition_read"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'session' => request.session}
+              end
             )
           end
 

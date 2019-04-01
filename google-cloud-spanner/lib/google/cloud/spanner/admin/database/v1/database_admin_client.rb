@@ -232,47 +232,74 @@ module Google
                 @list_databases = Google::Gax.create_api_call(
                   @database_admin_stub.method(:list_databases),
                   defaults["list_databases"],
-                  exception_transformer: exception_transformer
+                  exception_transformer: exception_transformer,
+                  params_extractor: proc do |request|
+                    {'parent' => request.parent}
+                  end
                 )
                 @create_database = Google::Gax.create_api_call(
                   @database_admin_stub.method(:create_database),
                   defaults["create_database"],
-                  exception_transformer: exception_transformer
+                  exception_transformer: exception_transformer,
+                  params_extractor: proc do |request|
+                    {'parent' => request.parent}
+                  end
                 )
                 @get_database = Google::Gax.create_api_call(
                   @database_admin_stub.method(:get_database),
                   defaults["get_database"],
-                  exception_transformer: exception_transformer
+                  exception_transformer: exception_transformer,
+                  params_extractor: proc do |request|
+                    {'name' => request.name}
+                  end
                 )
                 @update_database_ddl = Google::Gax.create_api_call(
                   @database_admin_stub.method(:update_database_ddl),
                   defaults["update_database_ddl"],
-                  exception_transformer: exception_transformer
+                  exception_transformer: exception_transformer,
+                  params_extractor: proc do |request|
+                    {'database' => request.database}
+                  end
                 )
                 @drop_database = Google::Gax.create_api_call(
                   @database_admin_stub.method(:drop_database),
                   defaults["drop_database"],
-                  exception_transformer: exception_transformer
+                  exception_transformer: exception_transformer,
+                  params_extractor: proc do |request|
+                    {'database' => request.database}
+                  end
                 )
                 @get_database_ddl = Google::Gax.create_api_call(
                   @database_admin_stub.method(:get_database_ddl),
                   defaults["get_database_ddl"],
-                  exception_transformer: exception_transformer
+                  exception_transformer: exception_transformer,
+                  params_extractor: proc do |request|
+                    {'database' => request.database}
+                  end
                 )
                 @set_iam_policy = Google::Gax.create_api_call(
                   @database_admin_stub.method(:set_iam_policy),
                   defaults["set_iam_policy"],
-                  exception_transformer: exception_transformer
+                  exception_transformer: exception_transformer,
+                  params_extractor: proc do |request|
+                    {'resource' => request.resource}
+                  end
                 )
                 @get_iam_policy = Google::Gax.create_api_call(
                   @database_admin_stub.method(:get_iam_policy),
                   defaults["get_iam_policy"],
-                  exception_transformer: exception_transformer
+                  exception_transformer: exception_transformer,
+                  params_extractor: proc do |request|
+                    {'resource' => request.resource}
+                  end
                 )
                 @test_iam_permissions = Google::Gax.create_api_call(
                   @database_admin_stub.method(:test_iam_permissions),
                   defaults["test_iam_permissions"],
-                  exception_transformer: exception_transformer
+                  exception_transformer: exception_transformer,
+                  params_extractor: proc do |request|
+                    {'resource' => request.resource}
+                  end
                 )
               end
 
