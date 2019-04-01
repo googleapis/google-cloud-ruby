@@ -523,7 +523,10 @@ custom error handling.</p>
 191
 192
 193
-194</pre>
+194
+195
+196
+197</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/sessions_client.rb', line 111</span>
@@ -604,7 +607,10 @@ custom error handling.</p>
   <span class='ivar'>@detect_intent</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
     <span class='ivar'>@sessions_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:detect_intent</span><span class='rparen'>)</span><span class='comma'>,</span>
     <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>detect_intent</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
-    <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span>
+    <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span><span class='comma'>,</span>
+    <span class='label'>params_extractor:</span> <span class='id identifier rubyid_proc'>proc</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_request'>request</span><span class='op'>|</span>
+      <span class='lbrace'>{</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>session</span><span class='tstring_end'>&#39;</span></span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_request'>request</span><span class='period'>.</span><span class='id identifier rubyid_session'>session</span><span class='rbrace'>}</span>
+    <span class='kw'>end</span>
   <span class='rparen'>)</span>
   <span class='ivar'>@streaming_detect_intent</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
     <span class='ivar'>@sessions_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:streaming_detect_intent</span><span class='rparen'>)</span><span class='comma'>,</span>
@@ -928,9 +934,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-246
-247
-248
 249
 250
 251
@@ -943,10 +946,13 @@ retries, etc.</p>
 258
 259
 260
-261</pre>
+261
+262
+263
+264</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/sessions_client.rb', line 246</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/sessions_client.rb', line 249</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_detect_intent'>detect_intent</span> \
     <span class='id identifier rubyid_session'>session</span><span class='comma'>,</span>
@@ -1095,15 +1101,15 @@ retries, etc.</p>
       <pre class="lines">
 
 
-298
-299
-300
 301
 302
-303</pre>
+303
+304
+305
+306</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/sessions_client.rb', line 298</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/sessions_client.rb', line 301</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_streaming_detect_intent'>streaming_detect_intent</span> <span class='id identifier rubyid_reqs'>reqs</span><span class='comma'>,</span> <span class='label'>options:</span> <span class='kw'>nil</span>
   <span class='id identifier rubyid_request_protos'>request_protos</span> <span class='op'>=</span> <span class='id identifier rubyid_reqs'>reqs</span><span class='period'>.</span><span class='id identifier rubyid_lazy'>lazy</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_req'>req</span><span class='op'>|</span>
