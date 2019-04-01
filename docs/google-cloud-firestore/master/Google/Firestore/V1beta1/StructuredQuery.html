@@ -599,6 +599,15 @@ js:
     <span class='kw'>end</span>
   <span class='kw'>end</span>
 
+  <span class='comment'># The projection of document&#39;s fields to return.
+</span>  <span class='comment'># @!attribute [rw] fields
+</span>  <span class='comment'>#   @return [Array&lt;Google::Firestore::V1beta1::StructuredQuery::FieldReference&gt;]
+</span>  <span class='comment'>#     The fields to return.
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#     If empty, all fields are returned. To only return the name
+</span>  <span class='comment'>#     of the document, use `[&#39;__name__&#39;]`.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="StructuredQuery/Projection.html" title="Google::Firestore::V1beta1::StructuredQuery::Projection (class)">Projection</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+
   <span class='comment'># A filter with a single operand.
 </span>  <span class='comment'># @!attribute [rw] op
 </span>  <span class='comment'>#   @return [Google::Firestore::V1beta1::StructuredQuery::UnaryFilter::Operator]
@@ -633,15 +642,6 @@ js:
 </span>  <span class='comment'># @!attribute [rw] field_path
 </span>  <span class='comment'>#   @return [String]
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="StructuredQuery/FieldReference.html" title="Google::Firestore::V1beta1::StructuredQuery::FieldReference (class)">FieldReference</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
-
-  <span class='comment'># The projection of document&#39;s fields to return.
-</span>  <span class='comment'># @!attribute [rw] fields
-</span>  <span class='comment'>#   @return [Array&lt;Google::Firestore::V1beta1::StructuredQuery::FieldReference&gt;]
-</span>  <span class='comment'>#     The fields to return.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     If empty, all fields are returned. To only return the name
-</span>  <span class='comment'>#     of the document, use `[&#39;__name__&#39;]`.
-</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="StructuredQuery/Projection.html" title="Google::Firestore::V1beta1::StructuredQuery::Projection (class)">Projection</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
   <span class='comment'># A sort direction.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="StructuredQuery/Direction.html" title="Google::Firestore::V1beta1::StructuredQuery::Direction (module)">Direction</a></span></span>
@@ -926,6 +926,15 @@ js:
     <span class='kw'>end</span>
   <span class='kw'>end</span>
 
+  <span class='comment'># The projection of document&#39;s fields to return.
+</span>  <span class='comment'># @!attribute [rw] fields
+</span>  <span class='comment'>#   @return [Array&lt;Google::Firestore::V1beta1::StructuredQuery::FieldReference&gt;]
+</span>  <span class='comment'>#     The fields to return.
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#     If empty, all fields are returned. To only return the name
+</span>  <span class='comment'>#     of the document, use `[&#39;__name__&#39;]`.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="StructuredQuery/Projection.html" title="Google::Firestore::V1beta1::StructuredQuery::Projection (class)">Projection</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+
   <span class='comment'># A filter with a single operand.
 </span>  <span class='comment'># @!attribute [rw] op
 </span>  <span class='comment'>#   @return [Google::Firestore::V1beta1::StructuredQuery::UnaryFilter::Operator]
@@ -960,15 +969,6 @@ js:
 </span>  <span class='comment'># @!attribute [rw] field_path
 </span>  <span class='comment'>#   @return [String]
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="StructuredQuery/FieldReference.html" title="Google::Firestore::V1beta1::StructuredQuery::FieldReference (class)">FieldReference</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
-
-  <span class='comment'># The projection of document&#39;s fields to return.
-</span>  <span class='comment'># @!attribute [rw] fields
-</span>  <span class='comment'>#   @return [Array&lt;Google::Firestore::V1beta1::StructuredQuery::FieldReference&gt;]
-</span>  <span class='comment'>#     The fields to return.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     If empty, all fields are returned. To only return the name
-</span>  <span class='comment'>#     of the document, use `[&#39;__name__&#39;]`.
-</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="StructuredQuery/Projection.html" title="Google::Firestore::V1beta1::StructuredQuery::Projection (class)">Projection</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
   <span class='comment'># A sort direction.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="StructuredQuery/Direction.html" title="Google::Firestore::V1beta1::StructuredQuery::Direction (module)">Direction</a></span></span>
@@ -1259,6 +1259,15 @@ Must be &gt;= 0 if specified.</p>
     <span class='kw'>end</span>
   <span class='kw'>end</span>
 
+  <span class='comment'># The projection of document&#39;s fields to return.
+</span>  <span class='comment'># @!attribute [rw] fields
+</span>  <span class='comment'>#   @return [Array&lt;Google::Firestore::V1beta1::StructuredQuery::FieldReference&gt;]
+</span>  <span class='comment'>#     The fields to return.
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#     If empty, all fields are returned. To only return the name
+</span>  <span class='comment'>#     of the document, use `[&#39;__name__&#39;]`.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="StructuredQuery/Projection.html" title="Google::Firestore::V1beta1::StructuredQuery::Projection (class)">Projection</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+
   <span class='comment'># A filter with a single operand.
 </span>  <span class='comment'># @!attribute [rw] op
 </span>  <span class='comment'>#   @return [Google::Firestore::V1beta1::StructuredQuery::UnaryFilter::Operator]
@@ -1293,15 +1302,6 @@ Must be &gt;= 0 if specified.</p>
 </span>  <span class='comment'># @!attribute [rw] field_path
 </span>  <span class='comment'>#   @return [String]
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="StructuredQuery/FieldReference.html" title="Google::Firestore::V1beta1::StructuredQuery::FieldReference (class)">FieldReference</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
-
-  <span class='comment'># The projection of document&#39;s fields to return.
-</span>  <span class='comment'># @!attribute [rw] fields
-</span>  <span class='comment'>#   @return [Array&lt;Google::Firestore::V1beta1::StructuredQuery::FieldReference&gt;]
-</span>  <span class='comment'>#     The fields to return.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     If empty, all fields are returned. To only return the name
-</span>  <span class='comment'>#     of the document, use `[&#39;__name__&#39;]`.
-</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="StructuredQuery/Projection.html" title="Google::Firestore::V1beta1::StructuredQuery::Projection (class)">Projection</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
   <span class='comment'># A sort direction.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="StructuredQuery/Direction.html" title="Google::Firestore::V1beta1::StructuredQuery::Direction (module)">Direction</a></span></span>
@@ -1592,6 +1592,15 @@ specified.</p>
     <span class='kw'>end</span>
   <span class='kw'>end</span>
 
+  <span class='comment'># The projection of document&#39;s fields to return.
+</span>  <span class='comment'># @!attribute [rw] fields
+</span>  <span class='comment'>#   @return [Array&lt;Google::Firestore::V1beta1::StructuredQuery::FieldReference&gt;]
+</span>  <span class='comment'>#     The fields to return.
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#     If empty, all fields are returned. To only return the name
+</span>  <span class='comment'>#     of the document, use `[&#39;__name__&#39;]`.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="StructuredQuery/Projection.html" title="Google::Firestore::V1beta1::StructuredQuery::Projection (class)">Projection</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+
   <span class='comment'># A filter with a single operand.
 </span>  <span class='comment'># @!attribute [rw] op
 </span>  <span class='comment'>#   @return [Google::Firestore::V1beta1::StructuredQuery::UnaryFilter::Operator]
@@ -1626,15 +1635,6 @@ specified.</p>
 </span>  <span class='comment'># @!attribute [rw] field_path
 </span>  <span class='comment'>#   @return [String]
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="StructuredQuery/FieldReference.html" title="Google::Firestore::V1beta1::StructuredQuery::FieldReference (class)">FieldReference</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
-
-  <span class='comment'># The projection of document&#39;s fields to return.
-</span>  <span class='comment'># @!attribute [rw] fields
-</span>  <span class='comment'>#   @return [Array&lt;Google::Firestore::V1beta1::StructuredQuery::FieldReference&gt;]
-</span>  <span class='comment'>#     The fields to return.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     If empty, all fields are returned. To only return the name
-</span>  <span class='comment'>#     of the document, use `[&#39;__name__&#39;]`.
-</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="StructuredQuery/Projection.html" title="Google::Firestore::V1beta1::StructuredQuery::Projection (class)">Projection</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
   <span class='comment'># A sort direction.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="StructuredQuery/Direction.html" title="Google::Firestore::V1beta1::StructuredQuery::Direction (module)">Direction</a></span></span>
@@ -1961,6 +1961,15 @@ specified, or &#39;ASCENDING&#39; if no order was specified. For example:</p>
     <span class='kw'>end</span>
   <span class='kw'>end</span>
 
+  <span class='comment'># The projection of document&#39;s fields to return.
+</span>  <span class='comment'># @!attribute [rw] fields
+</span>  <span class='comment'>#   @return [Array&lt;Google::Firestore::V1beta1::StructuredQuery::FieldReference&gt;]
+</span>  <span class='comment'>#     The fields to return.
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#     If empty, all fields are returned. To only return the name
+</span>  <span class='comment'>#     of the document, use `[&#39;__name__&#39;]`.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="StructuredQuery/Projection.html" title="Google::Firestore::V1beta1::StructuredQuery::Projection (class)">Projection</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+
   <span class='comment'># A filter with a single operand.
 </span>  <span class='comment'># @!attribute [rw] op
 </span>  <span class='comment'>#   @return [Google::Firestore::V1beta1::StructuredQuery::UnaryFilter::Operator]
@@ -1995,15 +2004,6 @@ specified, or &#39;ASCENDING&#39; if no order was specified. For example:</p>
 </span>  <span class='comment'># @!attribute [rw] field_path
 </span>  <span class='comment'>#   @return [String]
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="StructuredQuery/FieldReference.html" title="Google::Firestore::V1beta1::StructuredQuery::FieldReference (class)">FieldReference</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
-
-  <span class='comment'># The projection of document&#39;s fields to return.
-</span>  <span class='comment'># @!attribute [rw] fields
-</span>  <span class='comment'>#   @return [Array&lt;Google::Firestore::V1beta1::StructuredQuery::FieldReference&gt;]
-</span>  <span class='comment'>#     The fields to return.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     If empty, all fields are returned. To only return the name
-</span>  <span class='comment'>#     of the document, use `[&#39;__name__&#39;]`.
-</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="StructuredQuery/Projection.html" title="Google::Firestore::V1beta1::StructuredQuery::Projection (class)">Projection</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
   <span class='comment'># A sort direction.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="StructuredQuery/Direction.html" title="Google::Firestore::V1beta1::StructuredQuery::Direction (module)">Direction</a></span></span>
@@ -2288,6 +2288,15 @@ specified, or &#39;ASCENDING&#39; if no order was specified. For example:</p>
     <span class='kw'>end</span>
   <span class='kw'>end</span>
 
+  <span class='comment'># The projection of document&#39;s fields to return.
+</span>  <span class='comment'># @!attribute [rw] fields
+</span>  <span class='comment'>#   @return [Array&lt;Google::Firestore::V1beta1::StructuredQuery::FieldReference&gt;]
+</span>  <span class='comment'>#     The fields to return.
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#     If empty, all fields are returned. To only return the name
+</span>  <span class='comment'>#     of the document, use `[&#39;__name__&#39;]`.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="StructuredQuery/Projection.html" title="Google::Firestore::V1beta1::StructuredQuery::Projection (class)">Projection</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+
   <span class='comment'># A filter with a single operand.
 </span>  <span class='comment'># @!attribute [rw] op
 </span>  <span class='comment'>#   @return [Google::Firestore::V1beta1::StructuredQuery::UnaryFilter::Operator]
@@ -2322,15 +2331,6 @@ specified, or &#39;ASCENDING&#39; if no order was specified. For example:</p>
 </span>  <span class='comment'># @!attribute [rw] field_path
 </span>  <span class='comment'>#   @return [String]
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="StructuredQuery/FieldReference.html" title="Google::Firestore::V1beta1::StructuredQuery::FieldReference (class)">FieldReference</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
-
-  <span class='comment'># The projection of document&#39;s fields to return.
-</span>  <span class='comment'># @!attribute [rw] fields
-</span>  <span class='comment'>#   @return [Array&lt;Google::Firestore::V1beta1::StructuredQuery::FieldReference&gt;]
-</span>  <span class='comment'>#     The fields to return.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     If empty, all fields are returned. To only return the name
-</span>  <span class='comment'>#     of the document, use `[&#39;__name__&#39;]`.
-</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="StructuredQuery/Projection.html" title="Google::Firestore::V1beta1::StructuredQuery::Projection (class)">Projection</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
   <span class='comment'># A sort direction.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="StructuredQuery/Direction.html" title="Google::Firestore::V1beta1::StructuredQuery::Direction (module)">Direction</a></span></span>
@@ -2615,6 +2615,15 @@ specified, or &#39;ASCENDING&#39; if no order was specified. For example:</p>
     <span class='kw'>end</span>
   <span class='kw'>end</span>
 
+  <span class='comment'># The projection of document&#39;s fields to return.
+</span>  <span class='comment'># @!attribute [rw] fields
+</span>  <span class='comment'>#   @return [Array&lt;Google::Firestore::V1beta1::StructuredQuery::FieldReference&gt;]
+</span>  <span class='comment'>#     The fields to return.
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#     If empty, all fields are returned. To only return the name
+</span>  <span class='comment'>#     of the document, use `[&#39;__name__&#39;]`.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="StructuredQuery/Projection.html" title="Google::Firestore::V1beta1::StructuredQuery::Projection (class)">Projection</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+
   <span class='comment'># A filter with a single operand.
 </span>  <span class='comment'># @!attribute [rw] op
 </span>  <span class='comment'>#   @return [Google::Firestore::V1beta1::StructuredQuery::UnaryFilter::Operator]
@@ -2649,15 +2658,6 @@ specified, or &#39;ASCENDING&#39; if no order was specified. For example:</p>
 </span>  <span class='comment'># @!attribute [rw] field_path
 </span>  <span class='comment'>#   @return [String]
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="StructuredQuery/FieldReference.html" title="Google::Firestore::V1beta1::StructuredQuery::FieldReference (class)">FieldReference</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
-
-  <span class='comment'># The projection of document&#39;s fields to return.
-</span>  <span class='comment'># @!attribute [rw] fields
-</span>  <span class='comment'>#   @return [Array&lt;Google::Firestore::V1beta1::StructuredQuery::FieldReference&gt;]
-</span>  <span class='comment'>#     The fields to return.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     If empty, all fields are returned. To only return the name
-</span>  <span class='comment'>#     of the document, use `[&#39;__name__&#39;]`.
-</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="StructuredQuery/Projection.html" title="Google::Firestore::V1beta1::StructuredQuery::Projection (class)">Projection</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
   <span class='comment'># A sort direction.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="StructuredQuery/Direction.html" title="Google::Firestore::V1beta1::StructuredQuery::Direction (module)">Direction</a></span></span>
@@ -2942,6 +2942,15 @@ specified, or &#39;ASCENDING&#39; if no order was specified. For example:</p>
     <span class='kw'>end</span>
   <span class='kw'>end</span>
 
+  <span class='comment'># The projection of document&#39;s fields to return.
+</span>  <span class='comment'># @!attribute [rw] fields
+</span>  <span class='comment'>#   @return [Array&lt;Google::Firestore::V1beta1::StructuredQuery::FieldReference&gt;]
+</span>  <span class='comment'>#     The fields to return.
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#     If empty, all fields are returned. To only return the name
+</span>  <span class='comment'>#     of the document, use `[&#39;__name__&#39;]`.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="StructuredQuery/Projection.html" title="Google::Firestore::V1beta1::StructuredQuery::Projection (class)">Projection</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+
   <span class='comment'># A filter with a single operand.
 </span>  <span class='comment'># @!attribute [rw] op
 </span>  <span class='comment'>#   @return [Google::Firestore::V1beta1::StructuredQuery::UnaryFilter::Operator]
@@ -2976,15 +2985,6 @@ specified, or &#39;ASCENDING&#39; if no order was specified. For example:</p>
 </span>  <span class='comment'># @!attribute [rw] field_path
 </span>  <span class='comment'>#   @return [String]
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="StructuredQuery/FieldReference.html" title="Google::Firestore::V1beta1::StructuredQuery::FieldReference (class)">FieldReference</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
-
-  <span class='comment'># The projection of document&#39;s fields to return.
-</span>  <span class='comment'># @!attribute [rw] fields
-</span>  <span class='comment'>#   @return [Array&lt;Google::Firestore::V1beta1::StructuredQuery::FieldReference&gt;]
-</span>  <span class='comment'>#     The fields to return.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     If empty, all fields are returned. To only return the name
-</span>  <span class='comment'>#     of the document, use `[&#39;__name__&#39;]`.
-</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="StructuredQuery/Projection.html" title="Google::Firestore::V1beta1::StructuredQuery::Projection (class)">Projection</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
   <span class='comment'># A sort direction.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="StructuredQuery/Direction.html" title="Google::Firestore::V1beta1::StructuredQuery::Direction (module)">Direction</a></span></span>
