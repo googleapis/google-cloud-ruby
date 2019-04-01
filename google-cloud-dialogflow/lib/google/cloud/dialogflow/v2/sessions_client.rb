@@ -184,7 +184,10 @@ module Google
             @detect_intent = Google::Gax.create_api_call(
               @sessions_stub.method(:detect_intent),
               defaults["detect_intent"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'session' => request.session}
+              end
             )
             @streaming_detect_intent = Google::Gax.create_api_call(
               @sessions_stub.method(:streaming_detect_intent),

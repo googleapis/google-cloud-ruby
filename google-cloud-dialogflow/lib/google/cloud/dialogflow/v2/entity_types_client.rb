@@ -248,52 +248,82 @@ module Google
             @list_entity_types = Google::Gax.create_api_call(
               @entity_types_stub.method(:list_entity_types),
               defaults["list_entity_types"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
             )
             @get_entity_type = Google::Gax.create_api_call(
               @entity_types_stub.method(:get_entity_type),
               defaults["get_entity_type"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @create_entity_type = Google::Gax.create_api_call(
               @entity_types_stub.method(:create_entity_type),
               defaults["create_entity_type"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
             )
             @update_entity_type = Google::Gax.create_api_call(
               @entity_types_stub.method(:update_entity_type),
               defaults["update_entity_type"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'entity_type.name' => request.entity_type.name}
+              end
             )
             @delete_entity_type = Google::Gax.create_api_call(
               @entity_types_stub.method(:delete_entity_type),
               defaults["delete_entity_type"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @batch_update_entity_types = Google::Gax.create_api_call(
               @entity_types_stub.method(:batch_update_entity_types),
               defaults["batch_update_entity_types"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
             )
             @batch_delete_entity_types = Google::Gax.create_api_call(
               @entity_types_stub.method(:batch_delete_entity_types),
               defaults["batch_delete_entity_types"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
             )
             @batch_create_entities = Google::Gax.create_api_call(
               @entity_types_stub.method(:batch_create_entities),
               defaults["batch_create_entities"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
             )
             @batch_update_entities = Google::Gax.create_api_call(
               @entity_types_stub.method(:batch_update_entities),
               defaults["batch_update_entities"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
             )
             @batch_delete_entities = Google::Gax.create_api_call(
               @entity_types_stub.method(:batch_delete_entities),
               defaults["batch_delete_entities"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
             )
           end
 
