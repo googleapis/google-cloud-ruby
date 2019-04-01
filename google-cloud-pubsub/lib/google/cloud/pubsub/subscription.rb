@@ -257,6 +257,47 @@ module Google
         end
 
         ##
+        # The duration (in seconds) for when a subscription expires after the
+        # subscription goes inactive. A subscription is considered active as
+        # long as any connected subscriber is successfully consuming messages
+        # from the subscription or is issuing operations on the subscription.
+        #
+        # If `expires_in` is not set, a *default* value of of 31 days will be
+        # used. The minimum allowed value is 1 day.
+        #
+        # Makes an API call to retrieve the labels value when called on a
+        # reference object. See {#reference?}.
+        #
+        # @return [Numeric, nil] The expiration duration, or `nil` if unset.
+        #
+        def expires_in
+          ensure_grpc!
+
+          return nil if @grpc.expiration_policy.nil?
+
+          Convert.duration_to_number @grpc.expiration_policy.ttl
+        end
+
+        ##
+        # Sets the duration (in seconds) for when a subscription expires after
+        # the subscription goes inactive.
+        #
+        # @param [Numeric, nil] ttl The expiration duration, or `nil` to unset.
+        #
+        def expires_in= ttl
+          new_expiration_policy = if ttl
+                                    Google::Pubsub::V1::ExpirationPolicy.new(
+                                      ttl: Convert.number_to_duration(ttl)
+                                    )
+                                  end
+
+          update_grpc = Google::Cloud::PubSub::V1::Subscription.new \
+            name: name, expiration_policy: new_expiration_policy
+          @grpc = service.update_subscription update_grpc, :expiration_policy
+          @resource_name = nil
+        end
+
+        ##
         # Determines whether the subscription exists in the Pub/Sub service.
         #
         # Makes an API call to determine whether the subscription resource
