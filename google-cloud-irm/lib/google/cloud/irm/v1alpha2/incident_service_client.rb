@@ -345,157 +345,250 @@ module Google
             @create_incident = Google::Gax.create_api_call(
               @incident_service_stub.method(:create_incident),
               defaults["create_incident"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
             )
             @get_incident = Google::Gax.create_api_call(
               @incident_service_stub.method(:get_incident),
               defaults["get_incident"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @search_incidents = Google::Gax.create_api_call(
               @incident_service_stub.method(:search_incidents),
               defaults["search_incidents"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
             )
             @update_incident = Google::Gax.create_api_call(
               @incident_service_stub.method(:update_incident),
               defaults["update_incident"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'incident.name' => request.incident.name}
+              end
             )
             @search_similar_incidents = Google::Gax.create_api_call(
               @incident_service_stub.method(:search_similar_incidents),
               defaults["search_similar_incidents"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @create_annotation = Google::Gax.create_api_call(
               @incident_service_stub.method(:create_annotation),
               defaults["create_annotation"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
             )
             @list_annotations = Google::Gax.create_api_call(
               @incident_service_stub.method(:list_annotations),
               defaults["list_annotations"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
             )
             @create_tag = Google::Gax.create_api_call(
               @incident_service_stub.method(:create_tag),
               defaults["create_tag"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
             )
             @delete_tag = Google::Gax.create_api_call(
               @incident_service_stub.method(:delete_tag),
               defaults["delete_tag"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @list_tags = Google::Gax.create_api_call(
               @incident_service_stub.method(:list_tags),
               defaults["list_tags"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
             )
             @create_signal = Google::Gax.create_api_call(
               @incident_service_stub.method(:create_signal),
               defaults["create_signal"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
             )
             @search_signals = Google::Gax.create_api_call(
               @incident_service_stub.method(:search_signals),
               defaults["search_signals"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
             )
             @get_signal = Google::Gax.create_api_call(
               @incident_service_stub.method(:get_signal),
               defaults["get_signal"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @update_signal = Google::Gax.create_api_call(
               @incident_service_stub.method(:update_signal),
               defaults["update_signal"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'signal.name' => request.signal.name}
+              end
             )
             @escalate_incident = Google::Gax.create_api_call(
               @incident_service_stub.method(:escalate_incident),
               defaults["escalate_incident"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'incident.name' => request.incident.name}
+              end
             )
             @create_artifact = Google::Gax.create_api_call(
               @incident_service_stub.method(:create_artifact),
               defaults["create_artifact"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
             )
             @list_artifacts = Google::Gax.create_api_call(
               @incident_service_stub.method(:list_artifacts),
               defaults["list_artifacts"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
             )
             @update_artifact = Google::Gax.create_api_call(
               @incident_service_stub.method(:update_artifact),
               defaults["update_artifact"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'artifact.name' => request.artifact.name}
+              end
             )
             @delete_artifact = Google::Gax.create_api_call(
               @incident_service_stub.method(:delete_artifact),
               defaults["delete_artifact"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @send_shift_handoff = Google::Gax.create_api_call(
               @incident_service_stub.method(:send_shift_handoff),
               defaults["send_shift_handoff"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
             )
             @create_subscription = Google::Gax.create_api_call(
               @incident_service_stub.method(:create_subscription),
               defaults["create_subscription"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
             )
             @update_subscription = Google::Gax.create_api_call(
               @incident_service_stub.method(:update_subscription),
               defaults["update_subscription"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'subscription.name' => request.subscription.name}
+              end
             )
             @list_subscriptions = Google::Gax.create_api_call(
               @incident_service_stub.method(:list_subscriptions),
               defaults["list_subscriptions"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
             )
             @delete_subscription = Google::Gax.create_api_call(
               @incident_service_stub.method(:delete_subscription),
               defaults["delete_subscription"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @create_incident_role_assignment = Google::Gax.create_api_call(
               @incident_service_stub.method(:create_incident_role_assignment),
               defaults["create_incident_role_assignment"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
             )
             @delete_incident_role_assignment = Google::Gax.create_api_call(
               @incident_service_stub.method(:delete_incident_role_assignment),
               defaults["delete_incident_role_assignment"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @list_incident_role_assignments = Google::Gax.create_api_call(
               @incident_service_stub.method(:list_incident_role_assignments),
               defaults["list_incident_role_assignments"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
             )
             @request_incident_role_handover = Google::Gax.create_api_call(
               @incident_service_stub.method(:request_incident_role_handover),
               defaults["request_incident_role_handover"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @confirm_incident_role_handover = Google::Gax.create_api_call(
               @incident_service_stub.method(:confirm_incident_role_handover),
               defaults["confirm_incident_role_handover"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @force_incident_role_handover = Google::Gax.create_api_call(
               @incident_service_stub.method(:force_incident_role_handover),
               defaults["force_incident_role_handover"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @cancel_incident_role_handover = Google::Gax.create_api_call(
               @incident_service_stub.method(:cancel_incident_role_handover),
               defaults["cancel_incident_role_handover"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
           end
 
