@@ -547,7 +547,13 @@ custom error handling.</p>
 209
 210
 211
-212</pre>
+212
+213
+214
+215
+216
+217
+218</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/google/cloud/trace/v2/trace_service_client.rb', line 129</span>
@@ -628,12 +634,18 @@ custom error handling.</p>
   <span class='ivar'>@batch_write_spans</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
     <span class='ivar'>@trace_service_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:batch_write_spans</span><span class='rparen'>)</span><span class='comma'>,</span>
     <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>batch_write_spans</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
-    <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span>
+    <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span><span class='comma'>,</span>
+    <span class='label'>params_extractor:</span> <span class='id identifier rubyid_proc'>proc</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_request'>request</span><span class='op'>|</span>
+      <span class='lbrace'>{</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>name</span><span class='tstring_end'>&#39;</span></span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_request'>request</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span><span class='rbrace'>}</span>
+    <span class='kw'>end</span>
   <span class='rparen'>)</span>
   <span class='ivar'>@create_span</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
     <span class='ivar'>@trace_service_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:create_span</span><span class='rparen'>)</span><span class='comma'>,</span>
     <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>create_span</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
-    <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span>
+    <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span><span class='comma'>,</span>
+    <span class='label'>params_extractor:</span> <span class='id identifier rubyid_proc'>proc</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_request'>request</span><span class='op'>|</span>
+      <span class='lbrace'>{</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>name</span><span class='tstring_end'>&#39;</span></span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_request'>request</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span><span class='rbrace'>}</span>
+    <span class='kw'>end</span>
   <span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -983,22 +995,22 @@ retries, etc.</p>
       <pre class="lines">
 
 
-244
-245
-246
-247
-248
-249
 250
 251
 252
 253
 254
 255
-256</pre>
+256
+257
+258
+259
+260
+261
+262</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/trace/v2/trace_service_client.rb', line 244</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/trace/v2/trace_service_client.rb', line 250</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_batch_write_spans'>batch_write_spans</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -1401,12 +1413,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-358
-359
-360
-361
-362
-363
 364
 365
 366
@@ -1434,10 +1440,16 @@ retries, etc.</p>
 388
 389
 390
-391</pre>
+391
+392
+393
+394
+395
+396
+397</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/trace/v2/trace_service_client.rb', line 358</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/trace/v2/trace_service_client.rb', line 364</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_span'>create_span</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
