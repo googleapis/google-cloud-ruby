@@ -202,12 +202,18 @@ module Google
             @batch_write_spans = Google::Gax.create_api_call(
               @trace_service_stub.method(:batch_write_spans),
               defaults["batch_write_spans"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @create_span = Google::Gax.create_api_call(
               @trace_service_stub.method(:create_span),
               defaults["create_span"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
           end
 
