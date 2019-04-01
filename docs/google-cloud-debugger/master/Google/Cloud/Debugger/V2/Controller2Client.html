@@ -535,7 +535,10 @@ custom error handling.</p>
 195
 196
 197
-198</pre>
+198
+199
+200
+201</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger/v2/controller2_client.rb', line 110</span>
@@ -621,7 +624,10 @@ custom error handling.</p>
   <span class='ivar'>@list_active_breakpoints</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
     <span class='ivar'>@controller2_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:list_active_breakpoints</span><span class='rparen'>)</span><span class='comma'>,</span>
     <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>list_active_breakpoints</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
-    <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span>
+    <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span><span class='comma'>,</span>
+    <span class='label'>params_extractor:</span> <span class='id identifier rubyid_proc'>proc</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_request'>request</span><span class='op'>|</span>
+      <span class='lbrace'>{</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>debuggee_id</span><span class='tstring_end'>&#39;</span></span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_request'>request</span><span class='period'>.</span><span class='id identifier rubyid_debuggee_id'>debuggee_id</span><span class='rbrace'>}</span>
+    <span class='kw'>end</span>
   <span class='rparen'>)</span>
   <span class='ivar'>@update_active_breakpoint</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
     <span class='ivar'>@controller2_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:update_active_breakpoint</span><span class='rparen'>)</span><span class='comma'>,</span>
@@ -838,9 +844,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-292
-293
-294
 295
 296
 297
@@ -851,10 +854,13 @@ retries, etc.</p>
 302
 303
 304
-305</pre>
+305
+306
+307
+308</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger/v2/controller2_client.rb', line 292</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger/v2/controller2_client.rb', line 295</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_active_breakpoints'>list_active_breakpoints</span> \
     <span class='id identifier rubyid_debuggee_id'>debuggee_id</span><span class='comma'>,</span>
@@ -1035,19 +1041,19 @@ retries, etc.</p>
       <pre class="lines">
 
 
-236
-237
-238
 239
 240
 241
 242
 243
 244
-245</pre>
+245
+246
+247
+248</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger/v2/controller2_client.rb', line 236</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger/v2/controller2_client.rb', line 239</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_register_debuggee'>register_debuggee</span> \
     <span class='id identifier rubyid_debuggee'>debuggee</span><span class='comma'>,</span>
@@ -1240,9 +1246,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-344
-345
-346
 347
 348
 349
@@ -1251,10 +1254,13 @@ retries, etc.</p>
 352
 353
 354
-355</pre>
+355
+356
+357
+358</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger/v2/controller2_client.rb', line 344</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger/v2/controller2_client.rb', line 347</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update_active_breakpoint'>update_active_breakpoint</span> \
     <span class='id identifier rubyid_debuggee_id'>debuggee_id</span><span class='comma'>,</span>
