@@ -632,7 +632,13 @@ custom error handling.</p>
 252
 253
 254
-255</pre>
+255
+256
+257
+258
+259
+260
+261</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/logging_service_v2_client.rb', line 155</span>
@@ -715,7 +721,10 @@ custom error handling.</p>
   <span class='ivar'>@delete_log</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
     <span class='ivar'>@logging_service_v2_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:delete_log</span><span class='rparen'>)</span><span class='comma'>,</span>
     <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>delete_log</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
-    <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span>
+    <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span><span class='comma'>,</span>
+    <span class='label'>params_extractor:</span> <span class='id identifier rubyid_proc'>proc</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_request'>request</span><span class='op'>|</span>
+      <span class='lbrace'>{</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>log_name</span><span class='tstring_end'>&#39;</span></span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_request'>request</span><span class='period'>.</span><span class='id identifier rubyid_log_name'>log_name</span><span class='rbrace'>}</span>
+    <span class='kw'>end</span>
   <span class='rparen'>)</span>
   <span class='ivar'>@write_log_entries</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
     <span class='ivar'>@logging_service_v2_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:write_log_entries</span><span class='rparen'>)</span><span class='comma'>,</span>
@@ -735,7 +744,10 @@ custom error handling.</p>
   <span class='ivar'>@list_logs</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
     <span class='ivar'>@logging_service_v2_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:list_logs</span><span class='rparen'>)</span><span class='comma'>,</span>
     <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>list_logs</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
-    <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span>
+    <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span><span class='comma'>,</span>
+    <span class='label'>params_extractor:</span> <span class='id identifier rubyid_proc'>proc</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_request'>request</span><span class='op'>|</span>
+      <span class='lbrace'>{</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>parent</span><span class='tstring_end'>&#39;</span></span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_request'>request</span><span class='period'>.</span><span class='id identifier rubyid_parent'>parent</span><span class='rbrace'>}</span>
+    <span class='kw'>end</span>
   <span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -1064,20 +1076,20 @@ retries, etc.</p>
       <pre class="lines">
 
 
-291
-292
-293
-294
-295
-296
 297
 298
 299
 300
-301</pre>
+301
+302
+303
+304
+305
+306
+307</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/logging_service_v2_client.rb', line 291</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/logging_service_v2_client.rb', line 297</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete_log'>delete_log</span> \
     <span class='id identifier rubyid_log_name'>log_name</span><span class='comma'>,</span>
@@ -1351,12 +1363,6 @@ object.</p>
       <pre class="lines">
 
 
-493
-494
-495
-496
-497
-498
 499
 500
 501
@@ -1368,10 +1374,16 @@ object.</p>
 507
 508
 509
-510</pre>
+510
+511
+512
+513
+514
+515
+516</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/logging_service_v2_client.rb', line 493</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/logging_service_v2_client.rb', line 499</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_log_entries'>list_log_entries</span> \
     <span class='id identifier rubyid_resource_names'>resource_names</span><span class='comma'>,</span>
@@ -1586,21 +1598,21 @@ object.</p>
       <pre class="lines">
 
 
-608
-609
-610
-611
-612
-613
 614
 615
 616
 617
 618
-619</pre>
+619
+620
+621
+622
+623
+624
+625</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/logging_service_v2_client.rb', line 608</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/logging_service_v2_client.rb', line 614</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_logs'>list_logs</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -1786,19 +1798,19 @@ object.</p>
       <pre class="lines">
 
 
-550
-551
-552
-553
-554
-555
 556
 557
 558
-559</pre>
+559
+560
+561
+562
+563
+564
+565</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/logging_service_v2_client.rb', line 550</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/logging_service_v2_client.rb', line 556</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_monitored_resource_descriptors'>list_monitored_resource_descriptors</span> \
     <span class='label'>page_size:</span> <span class='kw'>nil</span><span class='comma'>,</span>
@@ -2104,12 +2116,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-398
-399
-400
-401
-402
-403
 404
 405
 406
@@ -2123,10 +2129,16 @@ retries, etc.</p>
 414
 415
 416
-417</pre>
+417
+418
+419
+420
+421
+422
+423</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/logging_service_v2_client.rb', line 398</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/logging_service_v2_client.rb', line 404</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_write_log_entries'>write_log_entries</span> \
     <span class='id identifier rubyid_entries'>entries</span><span class='comma'>,</span>
