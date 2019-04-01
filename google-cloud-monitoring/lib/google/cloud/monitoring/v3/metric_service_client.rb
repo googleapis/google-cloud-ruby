@@ -234,42 +234,66 @@ module Google
             @list_monitored_resource_descriptors = Google::Gax.create_api_call(
               @metric_service_stub.method(:list_monitored_resource_descriptors),
               defaults["list_monitored_resource_descriptors"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @get_monitored_resource_descriptor = Google::Gax.create_api_call(
               @metric_service_stub.method(:get_monitored_resource_descriptor),
               defaults["get_monitored_resource_descriptor"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @list_metric_descriptors = Google::Gax.create_api_call(
               @metric_service_stub.method(:list_metric_descriptors),
               defaults["list_metric_descriptors"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @get_metric_descriptor = Google::Gax.create_api_call(
               @metric_service_stub.method(:get_metric_descriptor),
               defaults["get_metric_descriptor"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @create_metric_descriptor = Google::Gax.create_api_call(
               @metric_service_stub.method(:create_metric_descriptor),
               defaults["create_metric_descriptor"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @delete_metric_descriptor = Google::Gax.create_api_call(
               @metric_service_stub.method(:delete_metric_descriptor),
               defaults["delete_metric_descriptor"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @list_time_series = Google::Gax.create_api_call(
               @metric_service_stub.method(:list_time_series),
               defaults["list_time_series"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @create_time_series = Google::Gax.create_api_call(
               @metric_service_stub.method(:create_time_series),
               defaults["create_time_series"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
           end
 

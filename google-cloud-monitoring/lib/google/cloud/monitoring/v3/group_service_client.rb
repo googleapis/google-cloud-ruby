@@ -223,32 +223,50 @@ module Google
             @list_groups = Google::Gax.create_api_call(
               @group_service_stub.method(:list_groups),
               defaults["list_groups"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @get_group = Google::Gax.create_api_call(
               @group_service_stub.method(:get_group),
               defaults["get_group"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @create_group = Google::Gax.create_api_call(
               @group_service_stub.method(:create_group),
               defaults["create_group"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @update_group = Google::Gax.create_api_call(
               @group_service_stub.method(:update_group),
               defaults["update_group"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'group.name' => request.group.name}
+              end
             )
             @delete_group = Google::Gax.create_api_call(
               @group_service_stub.method(:delete_group),
               defaults["delete_group"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @list_group_members = Google::Gax.create_api_call(
               @group_service_stub.method(:list_group_members),
               defaults["list_group_members"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
           end
 

@@ -230,37 +230,58 @@ module Google
             @list_notification_channel_descriptors = Google::Gax.create_api_call(
               @notification_channel_service_stub.method(:list_notification_channel_descriptors),
               defaults["list_notification_channel_descriptors"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @get_notification_channel_descriptor = Google::Gax.create_api_call(
               @notification_channel_service_stub.method(:get_notification_channel_descriptor),
               defaults["get_notification_channel_descriptor"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @list_notification_channels = Google::Gax.create_api_call(
               @notification_channel_service_stub.method(:list_notification_channels),
               defaults["list_notification_channels"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @get_notification_channel = Google::Gax.create_api_call(
               @notification_channel_service_stub.method(:get_notification_channel),
               defaults["get_notification_channel"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @create_notification_channel = Google::Gax.create_api_call(
               @notification_channel_service_stub.method(:create_notification_channel),
               defaults["create_notification_channel"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @update_notification_channel = Google::Gax.create_api_call(
               @notification_channel_service_stub.method(:update_notification_channel),
               defaults["update_notification_channel"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'notification_channel.name' => request.notification_channel.name}
+              end
             )
             @delete_notification_channel = Google::Gax.create_api_call(
               @notification_channel_service_stub.method(:delete_notification_channel),
               defaults["delete_notification_channel"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
           end
 

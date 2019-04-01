@@ -235,27 +235,42 @@ module Google
             @list_alert_policies = Google::Gax.create_api_call(
               @alert_policy_service_stub.method(:list_alert_policies),
               defaults["list_alert_policies"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @get_alert_policy = Google::Gax.create_api_call(
               @alert_policy_service_stub.method(:get_alert_policy),
               defaults["get_alert_policy"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @create_alert_policy = Google::Gax.create_api_call(
               @alert_policy_service_stub.method(:create_alert_policy),
               defaults["create_alert_policy"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @delete_alert_policy = Google::Gax.create_api_call(
               @alert_policy_service_stub.method(:delete_alert_policy),
               defaults["delete_alert_policy"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @update_alert_policy = Google::Gax.create_api_call(
               @alert_policy_service_stub.method(:update_alert_policy),
               defaults["update_alert_policy"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'alert_policy.name' => request.alert_policy.name}
+              end
             )
           end
 

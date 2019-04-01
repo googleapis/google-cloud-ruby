@@ -219,27 +219,42 @@ module Google
             @list_uptime_check_configs = Google::Gax.create_api_call(
               @uptime_check_service_stub.method(:list_uptime_check_configs),
               defaults["list_uptime_check_configs"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
             )
             @get_uptime_check_config = Google::Gax.create_api_call(
               @uptime_check_service_stub.method(:get_uptime_check_config),
               defaults["get_uptime_check_config"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @create_uptime_check_config = Google::Gax.create_api_call(
               @uptime_check_service_stub.method(:create_uptime_check_config),
               defaults["create_uptime_check_config"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
             )
             @update_uptime_check_config = Google::Gax.create_api_call(
               @uptime_check_service_stub.method(:update_uptime_check_config),
               defaults["update_uptime_check_config"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'uptime_check_config.name' => request.uptime_check_config.name}
+              end
             )
             @delete_uptime_check_config = Google::Gax.create_api_call(
               @uptime_check_service_stub.method(:delete_uptime_check_config),
               defaults["delete_uptime_check_config"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @list_uptime_check_ips = Google::Gax.create_api_call(
               @uptime_check_service_stub.method(:list_uptime_check_ips),
