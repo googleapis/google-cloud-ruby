@@ -173,162 +173,258 @@ module Google
             @list_clusters = Google::Gax.create_api_call(
               @cluster_manager_stub.method(:list_clusters),
               defaults["list_clusters"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
             )
             @get_cluster = Google::Gax.create_api_call(
               @cluster_manager_stub.method(:get_cluster),
               defaults["get_cluster"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @create_cluster = Google::Gax.create_api_call(
               @cluster_manager_stub.method(:create_cluster),
               defaults["create_cluster"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
             )
             @update_cluster = Google::Gax.create_api_call(
               @cluster_manager_stub.method(:update_cluster),
               defaults["update_cluster"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @update_node_pool = Google::Gax.create_api_call(
               @cluster_manager_stub.method(:update_node_pool),
               defaults["update_node_pool"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @set_node_pool_autoscaling = Google::Gax.create_api_call(
               @cluster_manager_stub.method(:set_node_pool_autoscaling),
               defaults["set_node_pool_autoscaling"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @set_logging_service = Google::Gax.create_api_call(
               @cluster_manager_stub.method(:set_logging_service),
               defaults["set_logging_service"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @set_monitoring_service = Google::Gax.create_api_call(
               @cluster_manager_stub.method(:set_monitoring_service),
               defaults["set_monitoring_service"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @set_addons_config = Google::Gax.create_api_call(
               @cluster_manager_stub.method(:set_addons_config),
               defaults["set_addons_config"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @set_locations = Google::Gax.create_api_call(
               @cluster_manager_stub.method(:set_locations),
               defaults["set_locations"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @update_master = Google::Gax.create_api_call(
               @cluster_manager_stub.method(:update_master),
               defaults["update_master"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @set_master_auth = Google::Gax.create_api_call(
               @cluster_manager_stub.method(:set_master_auth),
               defaults["set_master_auth"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @delete_cluster = Google::Gax.create_api_call(
               @cluster_manager_stub.method(:delete_cluster),
               defaults["delete_cluster"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @list_operations = Google::Gax.create_api_call(
               @cluster_manager_stub.method(:list_operations),
               defaults["list_operations"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
             )
             @get_operation = Google::Gax.create_api_call(
               @cluster_manager_stub.method(:get_operation),
               defaults["get_operation"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @cancel_operation = Google::Gax.create_api_call(
               @cluster_manager_stub.method(:cancel_operation),
               defaults["cancel_operation"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @get_server_config = Google::Gax.create_api_call(
               @cluster_manager_stub.method(:get_server_config),
               defaults["get_server_config"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @list_node_pools = Google::Gax.create_api_call(
               @cluster_manager_stub.method(:list_node_pools),
               defaults["list_node_pools"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
             )
             @get_node_pool = Google::Gax.create_api_call(
               @cluster_manager_stub.method(:get_node_pool),
               defaults["get_node_pool"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @create_node_pool = Google::Gax.create_api_call(
               @cluster_manager_stub.method(:create_node_pool),
               defaults["create_node_pool"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
             )
             @delete_node_pool = Google::Gax.create_api_call(
               @cluster_manager_stub.method(:delete_node_pool),
               defaults["delete_node_pool"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @rollback_node_pool_upgrade = Google::Gax.create_api_call(
               @cluster_manager_stub.method(:rollback_node_pool_upgrade),
               defaults["rollback_node_pool_upgrade"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @set_node_pool_management = Google::Gax.create_api_call(
               @cluster_manager_stub.method(:set_node_pool_management),
               defaults["set_node_pool_management"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @set_labels = Google::Gax.create_api_call(
               @cluster_manager_stub.method(:set_labels),
               defaults["set_labels"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @set_legacy_abac = Google::Gax.create_api_call(
               @cluster_manager_stub.method(:set_legacy_abac),
               defaults["set_legacy_abac"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @start_ip_rotation = Google::Gax.create_api_call(
               @cluster_manager_stub.method(:start_ip_rotation),
               defaults["start_ip_rotation"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @complete_ip_rotation = Google::Gax.create_api_call(
               @cluster_manager_stub.method(:complete_ip_rotation),
               defaults["complete_ip_rotation"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @set_node_pool_size = Google::Gax.create_api_call(
               @cluster_manager_stub.method(:set_node_pool_size),
               defaults["set_node_pool_size"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @set_network_policy = Google::Gax.create_api_call(
               @cluster_manager_stub.method(:set_network_policy),
               defaults["set_network_policy"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @set_maintenance_policy = Google::Gax.create_api_call(
               @cluster_manager_stub.method(:set_maintenance_policy),
               defaults["set_maintenance_policy"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @list_usable_subnetworks = Google::Gax.create_api_call(
               @cluster_manager_stub.method(:list_usable_subnetworks),
               defaults["list_usable_subnetworks"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
             )
             @list_locations = Google::Gax.create_api_call(
               @cluster_manager_stub.method(:list_locations),
               defaults["list_locations"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
             )
           end
 
