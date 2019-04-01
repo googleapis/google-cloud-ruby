@@ -180,12 +180,18 @@ module Google
             @get_group = Google::Gax.create_api_call(
               @error_group_service_stub.method(:get_group),
               defaults["get_group"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'group_name' => request.group_name}
+              end
             )
             @update_group = Google::Gax.create_api_call(
               @error_group_service_stub.method(:update_group),
               defaults["update_group"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'group.name' => request.group.name}
+              end
             )
           end
 

@@ -193,17 +193,26 @@ module Google
             @list_group_stats = Google::Gax.create_api_call(
               @error_stats_service_stub.method(:list_group_stats),
               defaults["list_group_stats"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'project_name' => request.project_name}
+              end
             )
             @list_events = Google::Gax.create_api_call(
               @error_stats_service_stub.method(:list_events),
               defaults["list_events"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'project_name' => request.project_name}
+              end
             )
             @delete_events = Google::Gax.create_api_call(
               @error_stats_service_stub.method(:delete_events),
               defaults["delete_events"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'project_name' => request.project_name}
+              end
             )
           end
 
