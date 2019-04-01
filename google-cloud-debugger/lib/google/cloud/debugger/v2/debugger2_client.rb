@@ -175,7 +175,10 @@ module Google
             @set_breakpoint = Google::Gax.create_api_call(
               @debugger2_stub.method(:set_breakpoint),
               defaults["set_breakpoint"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'debuggee_id' => request.debuggee_id}
+              end
             )
             @get_breakpoint = Google::Gax.create_api_call(
               @debugger2_stub.method(:get_breakpoint),
@@ -190,7 +193,10 @@ module Google
             @list_breakpoints = Google::Gax.create_api_call(
               @debugger2_stub.method(:list_breakpoints),
               defaults["list_breakpoints"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'debuggee_id' => request.debuggee_id}
+              end
             )
             @list_debuggees = Google::Gax.create_api_call(
               @debugger2_stub.method(:list_debuggees),
