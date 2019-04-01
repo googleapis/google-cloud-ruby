@@ -16,6 +16,7 @@
 require "google/cloud/pubsub/convert"
 require "google/cloud/errors"
 require "google/cloud/pubsub/subscription/list"
+require "google/cloud/pubsub/subscription/push_config"
 require "google/cloud/pubsub/received_message"
 require "google/cloud/pubsub/snapshot"
 require "google/cloud/pubsub/subscriber"
@@ -216,6 +217,44 @@ module Google
             push_endpoint: new_endpoint,
             attributes:    {}
           )
+        end
+
+        ##
+        # Inspect the Subscription's push configuration settings. The
+        # configuration can be changed by modifying the values in the method's
+        # block.
+        #
+        # Subscription objects that are reference only will return an empty
+        # {Subscription::PushConfig} object, which can be configured and saved
+        # using the method's block. Unlike {#endpoint}, which will retrieve the
+        # full resource from the API before returning. To get the actual values
+        # for a reference object, call {#reload!} before calling {#push_config}.
+        #
+        # @yield [push_config] a block for modifying the push configuration
+        # @yieldparam [Subscription::PushConfig] push_config the push
+        #   configuration
+        #
+        # @return [Subscription::PushConfig]
+        #
+        def push_config
+          ensure_service!
+
+          orig_config = reference? ? nil : @grpc.push_config
+          config = PushConfig.from_grpc orig_config
+
+          if block_given?
+            old_config = config.to_grpc.dup
+            yield config
+            new_config = config.to_grpc
+
+            if old_config != new_config # has the object been changed?
+              update_grpc = Google::Cloud::PubSub::V1::Subscription.new \
+                name: name, push_config: new_config
+              @grpc = service.update_subscription update_grpc, :push_config
+            end
+          end
+
+          config.freeze
         end
 
         ##
