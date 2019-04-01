@@ -225,42 +225,66 @@ module Google
             @list_jobs = Google::Gax.create_api_call(
               @cloud_scheduler_stub.method(:list_jobs),
               defaults["list_jobs"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
             )
             @get_job = Google::Gax.create_api_call(
               @cloud_scheduler_stub.method(:get_job),
               defaults["get_job"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @create_job = Google::Gax.create_api_call(
               @cloud_scheduler_stub.method(:create_job),
               defaults["create_job"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
             )
             @update_job = Google::Gax.create_api_call(
               @cloud_scheduler_stub.method(:update_job),
               defaults["update_job"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'job.name' => request.job.name}
+              end
             )
             @delete_job = Google::Gax.create_api_call(
               @cloud_scheduler_stub.method(:delete_job),
               defaults["delete_job"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @pause_job = Google::Gax.create_api_call(
               @cloud_scheduler_stub.method(:pause_job),
               defaults["pause_job"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @resume_job = Google::Gax.create_api_call(
               @cloud_scheduler_stub.method(:resume_job),
               defaults["resume_job"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @run_job = Google::Gax.create_api_call(
               @cloud_scheduler_stub.method(:run_job),
               defaults["run_job"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
           end
 
