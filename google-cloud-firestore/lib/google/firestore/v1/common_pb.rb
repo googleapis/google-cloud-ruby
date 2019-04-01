@@ -4,8 +4,8 @@
 
 require 'google/protobuf'
 
-require 'google/api/annotations_pb'
 require 'google/protobuf/timestamp_pb'
+require 'google/api/annotations_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.firestore.v1.DocumentMask" do
     repeated :field_paths, :string, 1

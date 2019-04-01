@@ -4,9 +4,9 @@
 
 require 'google/protobuf'
 
-require 'google/api/annotations_pb'
 require 'google/firestore/v1beta1/document_pb'
 require 'google/protobuf/wrappers_pb'
+require 'google/api/annotations_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.firestore.v1beta1.StructuredQuery" do
     optional :select, :message, 1, "google.firestore.v1beta1.StructuredQuery.Projection"
@@ -51,6 +51,9 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     value :EQUAL, 5
     value :ARRAY_CONTAINS, 7
   end
+  add_message "google.firestore.v1beta1.StructuredQuery.Projection" do
+    repeated :fields, :message, 2, "google.firestore.v1beta1.StructuredQuery.FieldReference"
+  end
   add_message "google.firestore.v1beta1.StructuredQuery.UnaryFilter" do
     optional :op, :enum, 1, "google.firestore.v1beta1.StructuredQuery.UnaryFilter.Operator"
     oneof :operand_type do
@@ -68,9 +71,6 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   end
   add_message "google.firestore.v1beta1.StructuredQuery.FieldReference" do
     optional :field_path, :string, 2
-  end
-  add_message "google.firestore.v1beta1.StructuredQuery.Projection" do
-    repeated :fields, :message, 2, "google.firestore.v1beta1.StructuredQuery.FieldReference"
   end
   add_enum "google.firestore.v1beta1.StructuredQuery.Direction" do
     value :DIRECTION_UNSPECIFIED, 0
@@ -93,11 +93,11 @@ module Google
       StructuredQuery::CompositeFilter::Operator = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1beta1.StructuredQuery.CompositeFilter.Operator").enummodule
       StructuredQuery::FieldFilter = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1beta1.StructuredQuery.FieldFilter").msgclass
       StructuredQuery::FieldFilter::Operator = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1beta1.StructuredQuery.FieldFilter.Operator").enummodule
+      StructuredQuery::Projection = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1beta1.StructuredQuery.Projection").msgclass
       StructuredQuery::UnaryFilter = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1beta1.StructuredQuery.UnaryFilter").msgclass
       StructuredQuery::UnaryFilter::Operator = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1beta1.StructuredQuery.UnaryFilter.Operator").enummodule
       StructuredQuery::Order = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1beta1.StructuredQuery.Order").msgclass
       StructuredQuery::FieldReference = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1beta1.StructuredQuery.FieldReference").msgclass
-      StructuredQuery::Projection = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1beta1.StructuredQuery.Projection").msgclass
       StructuredQuery::Direction = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1beta1.StructuredQuery.Direction").enummodule
       Cursor = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1beta1.Cursor").msgclass
     end
