@@ -231,52 +231,82 @@ module Google
             @list_sinks = Google::Gax.create_api_call(
               @config_service_v2_stub.method(:list_sinks),
               defaults["list_sinks"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
             )
             @get_sink = Google::Gax.create_api_call(
               @config_service_v2_stub.method(:get_sink),
               defaults["get_sink"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'sink_name' => request.sink_name}
+              end
             )
             @create_sink = Google::Gax.create_api_call(
               @config_service_v2_stub.method(:create_sink),
               defaults["create_sink"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
             )
             @update_sink = Google::Gax.create_api_call(
               @config_service_v2_stub.method(:update_sink),
               defaults["update_sink"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'sink_name' => request.sink_name}
+              end
             )
             @delete_sink = Google::Gax.create_api_call(
               @config_service_v2_stub.method(:delete_sink),
               defaults["delete_sink"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'sink_name' => request.sink_name}
+              end
             )
             @list_exclusions = Google::Gax.create_api_call(
               @config_service_v2_stub.method(:list_exclusions),
               defaults["list_exclusions"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
             )
             @get_exclusion = Google::Gax.create_api_call(
               @config_service_v2_stub.method(:get_exclusion),
               defaults["get_exclusion"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @create_exclusion = Google::Gax.create_api_call(
               @config_service_v2_stub.method(:create_exclusion),
               defaults["create_exclusion"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
             )
             @update_exclusion = Google::Gax.create_api_call(
               @config_service_v2_stub.method(:update_exclusion),
               defaults["update_exclusion"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @delete_exclusion = Google::Gax.create_api_call(
               @config_service_v2_stub.method(:delete_exclusion),
               defaults["delete_exclusion"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
           end
 

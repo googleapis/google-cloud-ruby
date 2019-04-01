@@ -209,27 +209,42 @@ module Google
             @list_log_metrics = Google::Gax.create_api_call(
               @metrics_service_v2_stub.method(:list_log_metrics),
               defaults["list_log_metrics"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
             )
             @get_log_metric = Google::Gax.create_api_call(
               @metrics_service_v2_stub.method(:get_log_metric),
               defaults["get_log_metric"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'metric_name' => request.metric_name}
+              end
             )
             @create_log_metric = Google::Gax.create_api_call(
               @metrics_service_v2_stub.method(:create_log_metric),
               defaults["create_log_metric"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
             )
             @update_log_metric = Google::Gax.create_api_call(
               @metrics_service_v2_stub.method(:update_log_metric),
               defaults["update_log_metric"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'metric_name' => request.metric_name}
+              end
             )
             @delete_log_metric = Google::Gax.create_api_call(
               @metrics_service_v2_stub.method(:delete_log_metric),
               defaults["delete_log_metric"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'metric_name' => request.metric_name}
+              end
             )
           end
 
