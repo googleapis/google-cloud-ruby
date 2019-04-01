@@ -1519,7 +1519,94 @@ custom error handling.</p>
 510
 511
 512
-513</pre>
+513
+514
+515
+516
+517
+518
+519
+520
+521
+522
+523
+524
+525
+526
+527
+528
+529
+530
+531
+532
+533
+534
+535
+536
+537
+538
+539
+540
+541
+542
+543
+544
+545
+546
+547
+548
+549
+550
+551
+552
+553
+554
+555
+556
+557
+558
+559
+560
+561
+562
+563
+564
+565
+566
+567
+568
+569
+570
+571
+572
+573
+574
+575
+576
+577
+578
+579
+580
+581
+582
+583
+584
+585
+586
+587
+588
+589
+590
+591
+592
+593
+594
+595
+596
+597
+598
+599
+600</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 289</span>
@@ -1601,22 +1688,34 @@ custom error handling.</p>
   <span class='ivar'>@inspect_content</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
     <span class='ivar'>@dlp_service_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:inspect_content</span><span class='rparen'>)</span><span class='comma'>,</span>
     <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>inspect_content</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
-    <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span>
+    <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span><span class='comma'>,</span>
+    <span class='label'>params_extractor:</span> <span class='id identifier rubyid_proc'>proc</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_request'>request</span><span class='op'>|</span>
+      <span class='lbrace'>{</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>parent</span><span class='tstring_end'>&#39;</span></span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_request'>request</span><span class='period'>.</span><span class='id identifier rubyid_parent'>parent</span><span class='rbrace'>}</span>
+    <span class='kw'>end</span>
   <span class='rparen'>)</span>
   <span class='ivar'>@redact_image</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
     <span class='ivar'>@dlp_service_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:redact_image</span><span class='rparen'>)</span><span class='comma'>,</span>
     <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>redact_image</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
-    <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span>
+    <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span><span class='comma'>,</span>
+    <span class='label'>params_extractor:</span> <span class='id identifier rubyid_proc'>proc</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_request'>request</span><span class='op'>|</span>
+      <span class='lbrace'>{</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>parent</span><span class='tstring_end'>&#39;</span></span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_request'>request</span><span class='period'>.</span><span class='id identifier rubyid_parent'>parent</span><span class='rbrace'>}</span>
+    <span class='kw'>end</span>
   <span class='rparen'>)</span>
   <span class='ivar'>@deidentify_content</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
     <span class='ivar'>@dlp_service_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:deidentify_content</span><span class='rparen'>)</span><span class='comma'>,</span>
     <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>deidentify_content</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
-    <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span>
+    <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span><span class='comma'>,</span>
+    <span class='label'>params_extractor:</span> <span class='id identifier rubyid_proc'>proc</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_request'>request</span><span class='op'>|</span>
+      <span class='lbrace'>{</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>parent</span><span class='tstring_end'>&#39;</span></span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_request'>request</span><span class='period'>.</span><span class='id identifier rubyid_parent'>parent</span><span class='rbrace'>}</span>
+    <span class='kw'>end</span>
   <span class='rparen'>)</span>
   <span class='ivar'>@reidentify_content</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
     <span class='ivar'>@dlp_service_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:reidentify_content</span><span class='rparen'>)</span><span class='comma'>,</span>
     <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>reidentify_content</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
-    <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span>
+    <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span><span class='comma'>,</span>
+    <span class='label'>params_extractor:</span> <span class='id identifier rubyid_proc'>proc</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_request'>request</span><span class='op'>|</span>
+      <span class='lbrace'>{</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>parent</span><span class='tstring_end'>&#39;</span></span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_request'>request</span><span class='period'>.</span><span class='id identifier rubyid_parent'>parent</span><span class='rbrace'>}</span>
+    <span class='kw'>end</span>
   <span class='rparen'>)</span>
   <span class='ivar'>@list_info_types</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
     <span class='ivar'>@dlp_service_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:list_info_types</span><span class='rparen'>)</span><span class='comma'>,</span>
@@ -1626,127 +1725,202 @@ custom error handling.</p>
   <span class='ivar'>@create_inspect_template</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
     <span class='ivar'>@dlp_service_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:create_inspect_template</span><span class='rparen'>)</span><span class='comma'>,</span>
     <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>create_inspect_template</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
-    <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span>
+    <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span><span class='comma'>,</span>
+    <span class='label'>params_extractor:</span> <span class='id identifier rubyid_proc'>proc</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_request'>request</span><span class='op'>|</span>
+      <span class='lbrace'>{</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>parent</span><span class='tstring_end'>&#39;</span></span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_request'>request</span><span class='period'>.</span><span class='id identifier rubyid_parent'>parent</span><span class='rbrace'>}</span>
+    <span class='kw'>end</span>
   <span class='rparen'>)</span>
   <span class='ivar'>@update_inspect_template</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
     <span class='ivar'>@dlp_service_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:update_inspect_template</span><span class='rparen'>)</span><span class='comma'>,</span>
     <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>update_inspect_template</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
-    <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span>
+    <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span><span class='comma'>,</span>
+    <span class='label'>params_extractor:</span> <span class='id identifier rubyid_proc'>proc</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_request'>request</span><span class='op'>|</span>
+      <span class='lbrace'>{</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>name</span><span class='tstring_end'>&#39;</span></span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_request'>request</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span><span class='rbrace'>}</span>
+    <span class='kw'>end</span>
   <span class='rparen'>)</span>
   <span class='ivar'>@get_inspect_template</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
     <span class='ivar'>@dlp_service_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:get_inspect_template</span><span class='rparen'>)</span><span class='comma'>,</span>
     <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>get_inspect_template</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
-    <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span>
+    <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span><span class='comma'>,</span>
+    <span class='label'>params_extractor:</span> <span class='id identifier rubyid_proc'>proc</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_request'>request</span><span class='op'>|</span>
+      <span class='lbrace'>{</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>name</span><span class='tstring_end'>&#39;</span></span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_request'>request</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span><span class='rbrace'>}</span>
+    <span class='kw'>end</span>
   <span class='rparen'>)</span>
   <span class='ivar'>@list_inspect_templates</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
     <span class='ivar'>@dlp_service_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:list_inspect_templates</span><span class='rparen'>)</span><span class='comma'>,</span>
     <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>list_inspect_templates</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
-    <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span>
+    <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span><span class='comma'>,</span>
+    <span class='label'>params_extractor:</span> <span class='id identifier rubyid_proc'>proc</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_request'>request</span><span class='op'>|</span>
+      <span class='lbrace'>{</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>parent</span><span class='tstring_end'>&#39;</span></span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_request'>request</span><span class='period'>.</span><span class='id identifier rubyid_parent'>parent</span><span class='rbrace'>}</span>
+    <span class='kw'>end</span>
   <span class='rparen'>)</span>
   <span class='ivar'>@delete_inspect_template</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
     <span class='ivar'>@dlp_service_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:delete_inspect_template</span><span class='rparen'>)</span><span class='comma'>,</span>
     <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>delete_inspect_template</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
-    <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span>
+    <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span><span class='comma'>,</span>
+    <span class='label'>params_extractor:</span> <span class='id identifier rubyid_proc'>proc</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_request'>request</span><span class='op'>|</span>
+      <span class='lbrace'>{</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>name</span><span class='tstring_end'>&#39;</span></span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_request'>request</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span><span class='rbrace'>}</span>
+    <span class='kw'>end</span>
   <span class='rparen'>)</span>
   <span class='ivar'>@create_deidentify_template</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
     <span class='ivar'>@dlp_service_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:create_deidentify_template</span><span class='rparen'>)</span><span class='comma'>,</span>
     <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>create_deidentify_template</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
-    <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span>
+    <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span><span class='comma'>,</span>
+    <span class='label'>params_extractor:</span> <span class='id identifier rubyid_proc'>proc</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_request'>request</span><span class='op'>|</span>
+      <span class='lbrace'>{</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>parent</span><span class='tstring_end'>&#39;</span></span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_request'>request</span><span class='period'>.</span><span class='id identifier rubyid_parent'>parent</span><span class='rbrace'>}</span>
+    <span class='kw'>end</span>
   <span class='rparen'>)</span>
   <span class='ivar'>@update_deidentify_template</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
     <span class='ivar'>@dlp_service_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:update_deidentify_template</span><span class='rparen'>)</span><span class='comma'>,</span>
     <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>update_deidentify_template</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
-    <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span>
+    <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span><span class='comma'>,</span>
+    <span class='label'>params_extractor:</span> <span class='id identifier rubyid_proc'>proc</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_request'>request</span><span class='op'>|</span>
+      <span class='lbrace'>{</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>name</span><span class='tstring_end'>&#39;</span></span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_request'>request</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span><span class='rbrace'>}</span>
+    <span class='kw'>end</span>
   <span class='rparen'>)</span>
   <span class='ivar'>@get_deidentify_template</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
     <span class='ivar'>@dlp_service_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:get_deidentify_template</span><span class='rparen'>)</span><span class='comma'>,</span>
     <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>get_deidentify_template</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
-    <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span>
+    <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span><span class='comma'>,</span>
+    <span class='label'>params_extractor:</span> <span class='id identifier rubyid_proc'>proc</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_request'>request</span><span class='op'>|</span>
+      <span class='lbrace'>{</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>name</span><span class='tstring_end'>&#39;</span></span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_request'>request</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span><span class='rbrace'>}</span>
+    <span class='kw'>end</span>
   <span class='rparen'>)</span>
   <span class='ivar'>@list_deidentify_templates</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
     <span class='ivar'>@dlp_service_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:list_deidentify_templates</span><span class='rparen'>)</span><span class='comma'>,</span>
     <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>list_deidentify_templates</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
-    <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span>
+    <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span><span class='comma'>,</span>
+    <span class='label'>params_extractor:</span> <span class='id identifier rubyid_proc'>proc</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_request'>request</span><span class='op'>|</span>
+      <span class='lbrace'>{</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>parent</span><span class='tstring_end'>&#39;</span></span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_request'>request</span><span class='period'>.</span><span class='id identifier rubyid_parent'>parent</span><span class='rbrace'>}</span>
+    <span class='kw'>end</span>
   <span class='rparen'>)</span>
   <span class='ivar'>@delete_deidentify_template</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
     <span class='ivar'>@dlp_service_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:delete_deidentify_template</span><span class='rparen'>)</span><span class='comma'>,</span>
     <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>delete_deidentify_template</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
-    <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span>
+    <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span><span class='comma'>,</span>
+    <span class='label'>params_extractor:</span> <span class='id identifier rubyid_proc'>proc</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_request'>request</span><span class='op'>|</span>
+      <span class='lbrace'>{</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>name</span><span class='tstring_end'>&#39;</span></span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_request'>request</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span><span class='rbrace'>}</span>
+    <span class='kw'>end</span>
   <span class='rparen'>)</span>
   <span class='ivar'>@create_dlp_job</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
     <span class='ivar'>@dlp_service_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:create_dlp_job</span><span class='rparen'>)</span><span class='comma'>,</span>
     <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>create_dlp_job</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
-    <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span>
+    <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span><span class='comma'>,</span>
+    <span class='label'>params_extractor:</span> <span class='id identifier rubyid_proc'>proc</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_request'>request</span><span class='op'>|</span>
+      <span class='lbrace'>{</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>parent</span><span class='tstring_end'>&#39;</span></span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_request'>request</span><span class='period'>.</span><span class='id identifier rubyid_parent'>parent</span><span class='rbrace'>}</span>
+    <span class='kw'>end</span>
   <span class='rparen'>)</span>
   <span class='ivar'>@list_dlp_jobs</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
     <span class='ivar'>@dlp_service_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:list_dlp_jobs</span><span class='rparen'>)</span><span class='comma'>,</span>
     <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>list_dlp_jobs</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
-    <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span>
+    <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span><span class='comma'>,</span>
+    <span class='label'>params_extractor:</span> <span class='id identifier rubyid_proc'>proc</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_request'>request</span><span class='op'>|</span>
+      <span class='lbrace'>{</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>parent</span><span class='tstring_end'>&#39;</span></span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_request'>request</span><span class='period'>.</span><span class='id identifier rubyid_parent'>parent</span><span class='rbrace'>}</span>
+    <span class='kw'>end</span>
   <span class='rparen'>)</span>
   <span class='ivar'>@get_dlp_job</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
     <span class='ivar'>@dlp_service_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:get_dlp_job</span><span class='rparen'>)</span><span class='comma'>,</span>
     <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>get_dlp_job</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
-    <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span>
+    <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span><span class='comma'>,</span>
+    <span class='label'>params_extractor:</span> <span class='id identifier rubyid_proc'>proc</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_request'>request</span><span class='op'>|</span>
+      <span class='lbrace'>{</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>name</span><span class='tstring_end'>&#39;</span></span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_request'>request</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span><span class='rbrace'>}</span>
+    <span class='kw'>end</span>
   <span class='rparen'>)</span>
   <span class='ivar'>@delete_dlp_job</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
     <span class='ivar'>@dlp_service_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:delete_dlp_job</span><span class='rparen'>)</span><span class='comma'>,</span>
     <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>delete_dlp_job</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
-    <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span>
+    <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span><span class='comma'>,</span>
+    <span class='label'>params_extractor:</span> <span class='id identifier rubyid_proc'>proc</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_request'>request</span><span class='op'>|</span>
+      <span class='lbrace'>{</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>name</span><span class='tstring_end'>&#39;</span></span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_request'>request</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span><span class='rbrace'>}</span>
+    <span class='kw'>end</span>
   <span class='rparen'>)</span>
   <span class='ivar'>@cancel_dlp_job</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
     <span class='ivar'>@dlp_service_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:cancel_dlp_job</span><span class='rparen'>)</span><span class='comma'>,</span>
     <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>cancel_dlp_job</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
-    <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span>
+    <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span><span class='comma'>,</span>
+    <span class='label'>params_extractor:</span> <span class='id identifier rubyid_proc'>proc</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_request'>request</span><span class='op'>|</span>
+      <span class='lbrace'>{</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>name</span><span class='tstring_end'>&#39;</span></span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_request'>request</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span><span class='rbrace'>}</span>
+    <span class='kw'>end</span>
   <span class='rparen'>)</span>
   <span class='ivar'>@list_job_triggers</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
     <span class='ivar'>@dlp_service_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:list_job_triggers</span><span class='rparen'>)</span><span class='comma'>,</span>
     <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>list_job_triggers</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
-    <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span>
+    <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span><span class='comma'>,</span>
+    <span class='label'>params_extractor:</span> <span class='id identifier rubyid_proc'>proc</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_request'>request</span><span class='op'>|</span>
+      <span class='lbrace'>{</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>parent</span><span class='tstring_end'>&#39;</span></span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_request'>request</span><span class='period'>.</span><span class='id identifier rubyid_parent'>parent</span><span class='rbrace'>}</span>
+    <span class='kw'>end</span>
   <span class='rparen'>)</span>
   <span class='ivar'>@get_job_trigger</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
     <span class='ivar'>@dlp_service_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:get_job_trigger</span><span class='rparen'>)</span><span class='comma'>,</span>
     <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>get_job_trigger</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
-    <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span>
+    <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span><span class='comma'>,</span>
+    <span class='label'>params_extractor:</span> <span class='id identifier rubyid_proc'>proc</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_request'>request</span><span class='op'>|</span>
+      <span class='lbrace'>{</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>name</span><span class='tstring_end'>&#39;</span></span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_request'>request</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span><span class='rbrace'>}</span>
+    <span class='kw'>end</span>
   <span class='rparen'>)</span>
   <span class='ivar'>@delete_job_trigger</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
     <span class='ivar'>@dlp_service_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:delete_job_trigger</span><span class='rparen'>)</span><span class='comma'>,</span>
     <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>delete_job_trigger</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
-    <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span>
+    <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span><span class='comma'>,</span>
+    <span class='label'>params_extractor:</span> <span class='id identifier rubyid_proc'>proc</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_request'>request</span><span class='op'>|</span>
+      <span class='lbrace'>{</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>name</span><span class='tstring_end'>&#39;</span></span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_request'>request</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span><span class='rbrace'>}</span>
+    <span class='kw'>end</span>
   <span class='rparen'>)</span>
   <span class='ivar'>@update_job_trigger</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
     <span class='ivar'>@dlp_service_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:update_job_trigger</span><span class='rparen'>)</span><span class='comma'>,</span>
     <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>update_job_trigger</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
-    <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span>
+    <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span><span class='comma'>,</span>
+    <span class='label'>params_extractor:</span> <span class='id identifier rubyid_proc'>proc</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_request'>request</span><span class='op'>|</span>
+      <span class='lbrace'>{</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>name</span><span class='tstring_end'>&#39;</span></span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_request'>request</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span><span class='rbrace'>}</span>
+    <span class='kw'>end</span>
   <span class='rparen'>)</span>
   <span class='ivar'>@create_job_trigger</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
     <span class='ivar'>@dlp_service_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:create_job_trigger</span><span class='rparen'>)</span><span class='comma'>,</span>
     <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>create_job_trigger</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
-    <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span>
+    <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span><span class='comma'>,</span>
+    <span class='label'>params_extractor:</span> <span class='id identifier rubyid_proc'>proc</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_request'>request</span><span class='op'>|</span>
+      <span class='lbrace'>{</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>parent</span><span class='tstring_end'>&#39;</span></span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_request'>request</span><span class='period'>.</span><span class='id identifier rubyid_parent'>parent</span><span class='rbrace'>}</span>
+    <span class='kw'>end</span>
   <span class='rparen'>)</span>
   <span class='ivar'>@create_stored_info_type</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
     <span class='ivar'>@dlp_service_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:create_stored_info_type</span><span class='rparen'>)</span><span class='comma'>,</span>
     <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>create_stored_info_type</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
-    <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span>
+    <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span><span class='comma'>,</span>
+    <span class='label'>params_extractor:</span> <span class='id identifier rubyid_proc'>proc</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_request'>request</span><span class='op'>|</span>
+      <span class='lbrace'>{</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>parent</span><span class='tstring_end'>&#39;</span></span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_request'>request</span><span class='period'>.</span><span class='id identifier rubyid_parent'>parent</span><span class='rbrace'>}</span>
+    <span class='kw'>end</span>
   <span class='rparen'>)</span>
   <span class='ivar'>@update_stored_info_type</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
     <span class='ivar'>@dlp_service_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:update_stored_info_type</span><span class='rparen'>)</span><span class='comma'>,</span>
     <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>update_stored_info_type</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
-    <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span>
+    <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span><span class='comma'>,</span>
+    <span class='label'>params_extractor:</span> <span class='id identifier rubyid_proc'>proc</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_request'>request</span><span class='op'>|</span>
+      <span class='lbrace'>{</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>name</span><span class='tstring_end'>&#39;</span></span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_request'>request</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span><span class='rbrace'>}</span>
+    <span class='kw'>end</span>
   <span class='rparen'>)</span>
   <span class='ivar'>@get_stored_info_type</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
     <span class='ivar'>@dlp_service_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:get_stored_info_type</span><span class='rparen'>)</span><span class='comma'>,</span>
     <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>get_stored_info_type</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
-    <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span>
+    <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span><span class='comma'>,</span>
+    <span class='label'>params_extractor:</span> <span class='id identifier rubyid_proc'>proc</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_request'>request</span><span class='op'>|</span>
+      <span class='lbrace'>{</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>name</span><span class='tstring_end'>&#39;</span></span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_request'>request</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span><span class='rbrace'>}</span>
+    <span class='kw'>end</span>
   <span class='rparen'>)</span>
   <span class='ivar'>@list_stored_info_types</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
     <span class='ivar'>@dlp_service_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:list_stored_info_types</span><span class='rparen'>)</span><span class='comma'>,</span>
     <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>list_stored_info_types</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
-    <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span>
+    <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span><span class='comma'>,</span>
+    <span class='label'>params_extractor:</span> <span class='id identifier rubyid_proc'>proc</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_request'>request</span><span class='op'>|</span>
+      <span class='lbrace'>{</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>parent</span><span class='tstring_end'>&#39;</span></span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_request'>request</span><span class='period'>.</span><span class='id identifier rubyid_parent'>parent</span><span class='rbrace'>}</span>
+    <span class='kw'>end</span>
   <span class='rparen'>)</span>
   <span class='ivar'>@delete_stored_info_type</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
     <span class='ivar'>@dlp_service_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:delete_stored_info_type</span><span class='rparen'>)</span><span class='comma'>,</span>
     <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>delete_stored_info_type</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
-    <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span>
+    <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span><span class='comma'>,</span>
+    <span class='label'>params_extractor:</span> <span class='id identifier rubyid_proc'>proc</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_request'>request</span><span class='op'>|</span>
+      <span class='lbrace'>{</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>name</span><span class='tstring_end'>&#39;</span></span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_request'>request</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span><span class='rbrace'>}</span>
+    <span class='kw'>end</span>
   <span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -2731,20 +2905,20 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1530
-1531
-1532
-1533
-1534
-1535
-1536
-1537
-1538
-1539
-1540</pre>
+1617
+1618
+1619
+1620
+1621
+1622
+1623
+1624
+1625
+1626
+1627</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 1530</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 1617</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_cancel_dlp_job'>cancel_dlp_job</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -2946,23 +3120,23 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1085
-1086
-1087
-1088
-1089
-1090
-1091
-1092
-1093
-1094
-1095
-1096
-1097
-1098</pre>
+1172
+1173
+1174
+1175
+1176
+1177
+1178
+1179
+1180
+1181
+1182
+1183
+1184
+1185</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 1085</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 1172</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_deidentify_template'>create_deidentify_template</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -3184,25 +3358,25 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1323
-1324
-1325
-1326
-1327
-1328
-1329
-1330
-1331
-1332
-1333
-1334
-1335
-1336
-1337
-1338</pre>
+1410
+1411
+1412
+1413
+1414
+1415
+1416
+1417
+1418
+1419
+1420
+1421
+1422
+1423
+1424
+1425</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 1323</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 1410</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_dlp_job'>create_dlp_job</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -3408,23 +3582,23 @@ retries, etc.</p>
       <pre class="lines">
 
 
-856
-857
-858
-859
-860
-861
-862
-863
-864
-865
-866
-867
-868
-869</pre>
+943
+944
+945
+946
+947
+948
+949
+950
+951
+952
+953
+954
+955
+956</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 856</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 943</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_inspect_template'>create_inspect_template</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -3627,23 +3801,23 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1782
-1783
-1784
-1785
-1786
-1787
-1788
-1789
-1790
-1791
-1792
-1793
-1794
-1795</pre>
+1869
+1870
+1871
+1872
+1873
+1874
+1875
+1876
+1877
+1878
+1879
+1880
+1881
+1882</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 1782</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 1869</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_job_trigger'>create_job_trigger</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -3847,23 +4021,23 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1828
-1829
-1830
-1831
-1832
-1833
-1834
-1835
-1836
-1837
-1838
-1839
-1840
-1841</pre>
+1915
+1916
+1917
+1918
+1919
+1920
+1921
+1922
+1923
+1924
+1925
+1926
+1927
+1928</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 1828</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 1915</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_stored_info_type'>create_stored_info_type</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -4129,29 +4303,29 @@ retries, etc.</p>
       <pre class="lines">
 
 
-690
-691
-692
-693
-694
-695
-696
-697
-698
-699
-700
-701
-702
-703
-704
-705
-706
-707
-708
-709</pre>
+777
+778
+779
+780
+781
+782
+783
+784
+785
+786
+787
+788
+789
+790
+791
+792
+793
+794
+795
+796</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 690</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 777</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_deidentify_content'>deidentify_content</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -4318,20 +4492,20 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1275
-1276
-1277
-1278
-1279
-1280
-1281
-1282
-1283
-1284
-1285</pre>
+1362
+1363
+1364
+1365
+1366
+1367
+1368
+1369
+1370
+1371
+1372</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 1275</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 1362</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete_deidentify_template'>delete_deidentify_template</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -4489,20 +4663,20 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1496
-1497
-1498
-1499
-1500
-1501
-1502
-1503
-1504
-1505
-1506</pre>
+1583
+1584
+1585
+1586
+1587
+1588
+1589
+1590
+1591
+1592
+1593</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 1496</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 1583</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete_dlp_job'>delete_dlp_job</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -4659,20 +4833,20 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1041
-1042
-1043
-1044
-1045
-1046
-1047
-1048
-1049
-1050
-1051</pre>
+1128
+1129
+1130
+1131
+1132
+1133
+1134
+1135
+1136
+1137
+1138</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 1041</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 1128</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete_inspect_template'>delete_inspect_template</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -4830,20 +5004,20 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1696
-1697
-1698
-1699
-1700
-1701
-1702
-1703
-1704
-1705
-1706</pre>
+1783
+1784
+1785
+1786
+1787
+1788
+1789
+1790
+1791
+1792
+1793</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 1696</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 1783</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete_job_trigger'>delete_job_trigger</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -5001,20 +5175,20 @@ retries, etc.</p>
       <pre class="lines">
 
 
-2022
-2023
-2024
-2025
-2026
-2027
-2028
-2029
-2030
-2031
-2032</pre>
+2109
+2110
+2111
+2112
+2113
+2114
+2115
+2116
+2117
+2118
+2119</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 2022</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 2109</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete_stored_info_type'>delete_stored_info_type</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -5181,19 +5355,19 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1169
-1170
-1171
-1172
-1173
-1174
-1175
-1176
-1177
-1178</pre>
+1256
+1257
+1258
+1259
+1260
+1261
+1262
+1263
+1264
+1265</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 1169</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 1256</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_deidentify_template'>get_deidentify_template</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -5357,19 +5531,19 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1463
-1464
-1465
-1466
-1467
-1468
-1469
-1470
-1471
-1472</pre>
+1550
+1551
+1552
+1553
+1554
+1555
+1556
+1557
+1558
+1559</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 1463</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 1550</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_dlp_job'>get_dlp_job</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -5533,19 +5707,19 @@ retries, etc.</p>
       <pre class="lines">
 
 
-937
-938
-939
-940
-941
-942
-943
-944
-945
-946</pre>
+1024
+1025
+1026
+1027
+1028
+1029
+1030
+1031
+1032
+1033</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 937</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 1024</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_inspect_template'>get_inspect_template</span> \
     <span class='label'>name:</span> <span class='kw'>nil</span><span class='comma'>,</span>
@@ -5709,19 +5883,19 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1663
-1664
-1665
-1666
-1667
-1668
-1669
-1670
-1671
-1672</pre>
+1750
+1751
+1752
+1753
+1754
+1755
+1756
+1757
+1758
+1759</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 1663</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 1750</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_job_trigger'>get_job_trigger</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -5887,19 +6061,19 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1915
-1916
-1917
-1918
-1919
-1920
-1921
-1922
-1923
-1924</pre>
+2002
+2003
+2004
+2005
+2006
+2007
+2008
+2009
+2010
+2011</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 1915</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 2002</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_stored_info_type'>get_stored_info_type</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -6123,25 +6297,25 @@ retries, etc.</p>
       <pre class="lines">
 
 
-559
-560
-561
-562
-563
-564
-565
-566
-567
-568
-569
-570
-571
-572
-573
-574</pre>
+646
+647
+648
+649
+650
+651
+652
+653
+654
+655
+656
+657
+658
+659
+660
+661</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 559</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 646</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_inspect_content'>inspect_content</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -6379,23 +6553,23 @@ object.</p>
       <pre class="lines">
 
 
-1238
-1239
-1240
-1241
-1242
-1243
-1244
-1245
-1246
-1247
-1248
-1249
-1250
-1251</pre>
+1325
+1326
+1327
+1328
+1329
+1330
+1331
+1332
+1333
+1334
+1335
+1336
+1337
+1338</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 1238</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 1325</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_deidentify_templates'>list_deidentify_templates</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -6689,27 +6863,27 @@ object.</p>
       <pre class="lines">
 
 
-1423
-1424
-1425
-1426
-1427
-1428
-1429
-1430
-1431
-1432
-1433
-1434
-1435
-1436
-1437
-1438
-1439
-1440</pre>
+1510
+1511
+1512
+1513
+1514
+1515
+1516
+1517
+1518
+1519
+1520
+1521
+1522
+1523
+1524
+1525
+1526
+1527</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 1423</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 1510</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_dlp_jobs'>list_dlp_jobs</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -6898,21 +7072,21 @@ retries, etc.</p>
       <pre class="lines">
 
 
-812
-813
-814
-815
-816
-817
-818
-819
-820
-821
-822
-823</pre>
+899
+900
+901
+902
+903
+904
+905
+906
+907
+908
+909
+910</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 812</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 899</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_info_types'>list_info_types</span> \
     <span class='label'>language_code:</span> <span class='kw'>nil</span><span class='comma'>,</span>
@@ -7145,23 +7319,23 @@ object.</p>
       <pre class="lines">
 
 
-1005
-1006
-1007
-1008
-1009
-1010
-1011
-1012
-1013
-1014
-1015
-1016
-1017
-1018</pre>
+1092
+1093
+1094
+1095
+1096
+1097
+1098
+1099
+1100
+1101
+1102
+1103
+1104
+1105</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 1005</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 1092</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_inspect_templates'>list_inspect_templates</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -7442,25 +7616,25 @@ object.</p>
       <pre class="lines">
 
 
-1625
-1626
-1627
-1628
-1629
-1630
-1631
-1632
-1633
-1634
-1635
-1636
-1637
-1638
-1639
-1640</pre>
+1712
+1713
+1714
+1715
+1716
+1717
+1718
+1719
+1720
+1721
+1722
+1723
+1724
+1725
+1726
+1727</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 1625</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 1712</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_job_triggers'>list_job_triggers</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -7699,23 +7873,23 @@ object.</p>
       <pre class="lines">
 
 
-1985
-1986
-1987
-1988
-1989
-1990
-1991
-1992
-1993
-1994
-1995
-1996
-1997
-1998</pre>
+2072
+2073
+2074
+2075
+2076
+2077
+2078
+2079
+2080
+2081
+2082
+2083
+2084
+2085</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 1985</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 2072</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_stored_info_types'>list_stored_info_types</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -7955,27 +8129,27 @@ retries, etc.</p>
       <pre class="lines">
 
 
-617
-618
-619
-620
-621
-622
-623
-624
-625
-626
-627
-628
-629
-630
-631
-632
-633
-634</pre>
+704
+705
+706
+707
+708
+709
+710
+711
+712
+713
+714
+715
+716
+717
+718
+719
+720
+721</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 617</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 704</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_redact_image'>redact_image</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -8248,29 +8422,29 @@ retries, etc.</p>
       <pre class="lines">
 
 
-766
-767
-768
-769
-770
-771
-772
-773
-774
-775
-776
-777
-778
-779
-780
-781
-782
-783
-784
-785</pre>
+853
+854
+855
+856
+857
+858
+859
+860
+861
+862
+863
+864
+865
+866
+867
+868
+869
+870
+871
+872</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 766</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 853</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_reidentify_content'>reidentify_content</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -8480,23 +8654,23 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1131
-1132
-1133
-1134
-1135
-1136
-1137
-1138
-1139
-1140
-1141
-1142
-1143
-1144</pre>
+1218
+1219
+1220
+1221
+1222
+1223
+1224
+1225
+1226
+1227
+1228
+1229
+1230
+1231</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 1131</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 1218</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update_deidentify_template'>update_deidentify_template</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -8699,23 +8873,23 @@ retries, etc.</p>
       <pre class="lines">
 
 
-901
-902
-903
-904
-905
-906
-907
-908
-909
-910
-911
-912
-913
-914</pre>
+988
+989
+990
+991
+992
+993
+994
+995
+996
+997
+998
+999
+1000
+1001</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 901</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 988</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update_inspect_template'>update_inspect_template</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -8917,23 +9091,23 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1737
-1738
-1739
-1740
-1741
-1742
-1743
-1744
-1745
-1746
-1747
-1748
-1749
-1750</pre>
+1824
+1825
+1826
+1827
+1828
+1829
+1830
+1831
+1832
+1833
+1834
+1835
+1836
+1837</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 1737</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 1824</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update_job_trigger'>update_job_trigger</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -9140,23 +9314,23 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1877
-1878
-1879
-1880
-1881
-1882
-1883
-1884
-1885
-1886
-1887
-1888
-1889
-1890</pre>
+1964
+1965
+1966
+1967
+1968
+1969
+1970
+1971
+1972
+1973
+1974
+1975
+1976
+1977</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 1877</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 1964</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update_stored_info_type'>update_stored_info_type</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
