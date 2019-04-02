@@ -37,10 +37,10 @@ module Google
         # An intent represents a mapping between input from a user and an action to
         # be taken by your application. When you pass user input to the
         # {Google::Cloud::Dialogflow::V2::Sessions::DetectIntent DetectIntent} (or
-        # {Google::Cloud::Dialogflow::V2::Sessions::StreamingDetectIntent StreamingDetectIntent})
-        # method, the Dialogflow API analyzes the input and searches for a matching
-        # intent. If no match is found, the Dialogflow API returns a fallback intent
-        # (`is_fallback` = true).
+        # {Google::Cloud::Dialogflow::V2::Sessions::StreamingDetectIntent StreamingDetectIntent}) method, the
+        # Dialogflow API analyzes the input and searches
+        # for a matching intent. If no match is found, the Dialogflow API returns a
+        # fallback intent (`is_fallback` = true).
         #
         # You can provide additional information for the Dialogflow API to use to
         # match user input to an intent by adding the following to your intent.
@@ -48,7 +48,7 @@ module Google
         # * **Contexts** - provide additional context for intent analysis. For
         #   example, if an intent is related to an object in your application that
         #   plays music, you can provide a context to determine when to match the
-        #   intent if the user input is “turn it off”.  You can include a context
+        #   intent if the user input is "turn it off". You can include a context
         #   that matches the intent when there is previous user input of
         #   "play music", and not when there is previous user input of
         #   "turn on the light".
@@ -64,7 +64,8 @@ module Google
         #   Dialogflow API agent to better match intents.
         #
         # For more information about intents, see the
-        # [Dialogflow documentation](https://dialogflow.com/docs/intents).
+        # [Dialogflow
+        # documentation](https://cloud.google.com/dialogflow-enterprise/docs/intents-overview).
         #
         # @!attribute [r] intents_stub
         #   @return [Google::Cloud::Dialogflow::V2::Intents::Stub]
@@ -95,7 +96,8 @@ module Google
           # The scopes needed to make gRPC calls to all of the methods defined in
           # this service.
           ALL_SCOPES = [
-            "https://www.googleapis.com/auth/cloud-platform"
+            "https://www.googleapis.com/auth/cloud-platform",
+            "https://www.googleapis.com/auth/dialogflow"
           ].freeze
 
           # @private
@@ -333,9 +335,10 @@ module Google
           # @param language_code [String]
           #   Optional. The language to list training phrases, parameters and rich
           #   messages for. If not specified, the agent's default language is used.
-          #   [More than a dozen
-          #   languages](https://dialogflow.com/docs/reference/language) are supported.
-          #   Note: languages must be enabled in the agent before they can be used.
+          #   [Many
+          #   languages](https://cloud.google.com/dialogflow-enterprise/docs/reference/language)
+          #   are supported. Note: languages must be enabled in the agent before they can
+          #   be used.
           # @param intent_view [Google::Cloud::Dialogflow::V2::IntentView]
           #   Optional. The resource view to apply to the returned intent.
           # @param page_size [Integer]
@@ -400,9 +403,10 @@ module Google
           # @param language_code [String]
           #   Optional. The language to retrieve training phrases, parameters and rich
           #   messages for. If not specified, the agent's default language is used.
-          #   [More than a dozen
-          #   languages](https://dialogflow.com/docs/reference/language) are supported.
-          #   Note: languages must be enabled in the agent, before they can be used.
+          #   [Many
+          #   languages](https://cloud.google.com/dialogflow-enterprise/docs/reference/language)
+          #   are supported. Note: languages must be enabled in the agent before they can
+          #   be used.
           # @param intent_view [Google::Cloud::Dialogflow::V2::IntentView]
           #   Optional. The resource view to apply to the returned intent.
           # @param options [Google::Gax::CallOptions]
@@ -447,9 +451,10 @@ module Google
           # @param language_code [String]
           #   Optional. The language of training phrases, parameters and rich messages
           #   defined in `intent`. If not specified, the agent's default language is
-          #   used. [More than a dozen
-          #   languages](https://dialogflow.com/docs/reference/language) are supported.
-          #   Note: languages must be enabled in the agent, before they can be used.
+          #   used. [Many
+          #   languages](https://cloud.google.com/dialogflow-enterprise/docs/reference/language)
+          #   are supported. Note: languages must be enabled in the agent before they can
+          #   be used.
           # @param intent_view [Google::Cloud::Dialogflow::V2::IntentView]
           #   Optional. The resource view to apply to the returned intent.
           # @param options [Google::Gax::CallOptions]
@@ -491,15 +496,15 @@ module Google
           #
           # @param intent [Google::Cloud::Dialogflow::V2::Intent | Hash]
           #   Required. The intent to update.
-          #   Format: `projects/<Project ID>/agent/intents/<Intent ID>`.
           #   A hash of the same form as `Google::Cloud::Dialogflow::V2::Intent`
           #   can also be provided.
           # @param language_code [String]
           #   Optional. The language of training phrases, parameters and rich messages
           #   defined in `intent`. If not specified, the agent's default language is
-          #   used. [More than a dozen
-          #   languages](https://dialogflow.com/docs/reference/language) are supported.
-          #   Note: languages must be enabled in the agent, before they can be used.
+          #   used. [Many
+          #   languages](https://cloud.google.com/dialogflow-enterprise/docs/reference/language)
+          #   are supported. Note: languages must be enabled in the agent before they can
+          #   be used.
           # @param update_mask [Google::Protobuf::FieldMask | Hash]
           #   Optional. The mask to control which fields get updated.
           #   A hash of the same form as `Google::Protobuf::FieldMask`
@@ -543,10 +548,11 @@ module Google
             @update_intent.call(req, options, &block)
           end
 
-          # Deletes the specified intent.
+          # Deletes the specified intent and its direct or indirect followup intents.
           #
           # @param name [String]
-          #   Required. The name of the intent to delete.
+          #   Required. The name of the intent to delete. If this intent has direct or
+          #   indirect followup intents, we also delete them.
           #   Format: `projects/<Project ID>/agent/intents/<Intent ID>`.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
@@ -576,8 +582,7 @@ module Google
 
           # Updates/Creates multiple intents in the specified agent.
           #
-          # Operation <response:
-          # {Google::Cloud::Dialogflow::V2::BatchUpdateIntentsResponse BatchUpdateIntentsResponse}>
+          # Operation <response: {Google::Cloud::Dialogflow::V2::BatchUpdateIntentsResponse BatchUpdateIntentsResponse}>
           #
           # @param parent [String]
           #   Required. The name of the agent to update or create intents in.
@@ -585,9 +590,10 @@ module Google
           # @param language_code [String]
           #   Optional. The language of training phrases, parameters and rich messages
           #   defined in `intents`. If not specified, the agent's default language is
-          #   used. [More than a dozen
-          #   languages](https://dialogflow.com/docs/reference/language) are supported.
-          #   Note: languages must be enabled in the agent, before they can be used.
+          #   used. [Many
+          #   languages](https://cloud.google.com/dialogflow-enterprise/docs/reference/language)
+          #   are supported. Note: languages must be enabled in the agent before they can
+          #   be used.
           # @param intent_batch_uri [String]
           #   The URI to a Google Cloud Storage file containing intents to update or
           #   create. The file format can either be a serialized proto (of IntentBatch

@@ -43,7 +43,8 @@ module Google
         # entity type at the session level.
         #
         # For more information about entity types, see the
-        # [Dialogflow documentation](https://dialogflow.com/docs/entities).
+        # [Dialogflow
+        # documentation](https://cloud.google.com/dialogflow-enterprise/docs/entities-overview).
         #
         # @!attribute [r] session_entity_types_stub
         #   @return [Google::Cloud::Dialogflow::V2::SessionEntityTypes::Stub]
@@ -74,7 +75,8 @@ module Google
           # The scopes needed to make gRPC calls to all of the methods defined in
           # this service.
           ALL_SCOPES = [
-            "https://www.googleapis.com/auth/cloud-platform"
+            "https://www.googleapis.com/auth/cloud-platform",
+            "https://www.googleapis.com/auth/dialogflow"
           ].freeze
 
 
@@ -349,6 +351,9 @@ module Google
           end
 
           # Creates a session entity type.
+          #
+          # If the specified session entity type already exists, overrides the session
+          # entity type.
           #
           # @param parent [String]
           #   Required. The session to create a session entity type for.

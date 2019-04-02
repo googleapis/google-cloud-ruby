@@ -77,7 +77,8 @@ describe Google::Cloud::Dialogflow::V2::SessionsClient do
 
       # Create expected grpc response
       response_id = "responseId1847552473"
-      expected_response = { response_id: response_id }
+      output_audio = "24"
+      expected_response = { response_id: response_id, output_audio: output_audio }
       expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Dialogflow::V2::DetectIntentResponse)
 
       # Mock Grpc layer
@@ -156,7 +157,8 @@ describe Google::Cloud::Dialogflow::V2::SessionsClient do
 
       # Create expected grpc response
       response_id = "responseId1847552473"
-      expected_response = { response_id: response_id }
+      output_audio = "24"
+      expected_response = { response_id: response_id, output_audio: output_audio }
       expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Dialogflow::V2::StreamingDetectIntentResponse)
 
       # Mock Grpc layer
