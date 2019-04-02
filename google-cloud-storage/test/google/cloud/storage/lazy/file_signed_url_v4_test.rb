@@ -14,9 +14,13 @@
 
 require "helper"
 
-describe Google::Cloud::Storage::Project, :signed_url, :v4, :mock_storage do
+describe Google::Cloud::Storage::Project, :signed_url, :v4, :lazy, :mock_storage do
   let(:bucket_name) { "bucket" }
-  let(:file_path) { "file.ext" }
+  let(:bucket_gapi) { Google::Apis::StorageV1::Bucket.from_json random_bucket_hash(bucket_name).to_json }
+  let(:bucket) { Google::Cloud::Storage::Bucket.from_gapi bucket_gapi, storage.service }
+
+  let(:file_name) { "file.ext" }
+  let(:file) { Google::Cloud::Storage::File.new_lazy bucket_name, file_name, storage.service }
 
   it "uses the credentials' issuer and signing_key to generate signed_url" do
     Time.stub :now, Time.new(2012,1,1,0,0,0, "+00:00") do
@@ -25,7 +29,7 @@ describe Google::Cloud::Storage::Project, :signed_url, :v4, :mock_storage do
       credentials.issuer = "native_client_email"
       credentials.signing_key = signing_key_mock
 
-      signed_url = storage.signed_url bucket_name, file_path, version: :v4
+      signed_url = file.signed_url version: :v4
 
       signed_url_params = CGI::parse(URI(signed_url).query)
       signed_url_params["X-Goog-Algorithm"].must_equal  ["GOOG4-RSA-SHA256"]
@@ -47,9 +51,8 @@ describe Google::Cloud::Storage::Project, :signed_url, :v4, :mock_storage do
       signing_key_mock = Minitest::Mock.new
       signing_key_mock.expect :sign, "option-signature", [OpenSSL::Digest::SHA256, "GOOG4-RSA-SHA256\n20120101T000000Z\n20120101/auto/storage/goog4_request\nef7980d38d1a4f86ce3e40e92c71ef5e73a4891d69a36e7ef3e7fcf4feb0eb97"]
 
-      signed_url = storage.signed_url bucket_name, file_path,
-                                      issuer: "option_issuer",
-                                      signing_key: signing_key_mock, version: :v4
+      signed_url = file.signed_url issuer: "option_issuer",
+                                   signing_key: signing_key_mock, version: :v4
 
       signed_url_params = CGI::parse(URI(signed_url).query)
       signed_url_params["X-Goog-Algorithm"].must_equal  ["GOOG4-RSA-SHA256"]
@@ -73,9 +76,8 @@ describe Google::Cloud::Storage::Project, :signed_url, :v4, :mock_storage do
 
       OpenSSL::PKey::RSA.stub :new, signing_key_mock do
 
-        signed_url = storage.signed_url bucket_name, file_path,
-                                        client_email: "option_client_email",
-                                        private_key: "option_private_key", version: :v4
+        signed_url = file.signed_url client_email: "option_client_email",
+                                     private_key: "option_private_key", version: :v4
 
         signed_url_params = CGI::parse(URI(signed_url).query)
         signed_url_params["X-Goog-Algorithm"].must_equal  ["GOOG4-RSA-SHA256"]
@@ -98,9 +100,8 @@ describe Google::Cloud::Storage::Project, :signed_url, :v4, :mock_storage do
       credentials.issuer = "native_client_email"
       credentials.signing_key = signing_key_mock
 
-      signed_url = storage.signed_url bucket_name, file_path,
-                                      headers: { "X-Goog-Meta-FOO" => "bar,baz",
-                                                 "X-Goog-ACL" => "public-read" }, version: :v4
+      signed_url = file.signed_url headers: { "X-Goog-Meta-FOO" => "bar,baz",
+                                              "X-Goog-ACL" => "public-read" }, version: :v4
 
       signed_url_params = CGI::parse(URI(signed_url).query)
       signed_url_params["X-Goog-Algorithm"].must_equal  ["GOOG4-RSA-SHA256"]
@@ -119,7 +120,7 @@ describe Google::Cloud::Storage::Project, :signed_url, :v4, :mock_storage do
     credentials.signing_key = PoisonSigningKey.new
 
     expect {
-      storage.signed_url bucket_name, file_path, version: :v4
+      file.signed_url version: :v4
     }.must_raise Google::Cloud::Storage::SignedUrlUnavailable
   end
 
@@ -128,7 +129,7 @@ describe Google::Cloud::Storage::Project, :signed_url, :v4, :mock_storage do
     credentials.signing_key = nil
 
     expect {
-      storage.signed_url bucket_name, file_path, version: :v4
+      file.signed_url version: :v4
     }.must_raise Google::Cloud::Storage::SignedUrlUnavailable
   end
 
@@ -139,8 +140,7 @@ describe Google::Cloud::Storage::Project, :signed_url, :v4, :mock_storage do
       credentials.issuer = "native_client_email"
       credentials.signing_key = signing_key_mock
 
-      signed_url = storage.signed_url bucket_name, file_path,
-                                      query: { "response-content-disposition" => "attachment; filename=\"google-cloud.png\"" }, version: :v4
+      signed_url = file.signed_url query: { "response-content-disposition" => "attachment; filename=\"google-cloud.png\"" }, version: :v4
 
       signed_url_params = CGI::parse(URI(signed_url).query)
       signed_url_params["X-Goog-Algorithm"].must_equal  ["GOOG4-RSA-SHA256"]
@@ -160,8 +160,7 @@ describe Google::Cloud::Storage::Project, :signed_url, :v4, :mock_storage do
       credentials.issuer = "native_client_email"
       credentials.signing_key = signing_key_mock
 
-      signed_url = storage.signed_url bucket_name, file_path,
-                                      query: { disposition: :inline }, version: :v4
+      signed_url = file.signed_url query: { disposition: :inline }, version: :v4
 
       signed_url_params = CGI::parse(URI(signed_url).query)
       signed_url_params["X-Goog-Algorithm"].must_equal  ["GOOG4-RSA-SHA256"]

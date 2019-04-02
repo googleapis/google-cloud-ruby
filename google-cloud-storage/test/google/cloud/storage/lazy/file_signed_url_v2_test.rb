@@ -1,4 +1,4 @@
-# Copyright 2015 Google LLC
+# Copyright 2017 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,12 +14,13 @@
 
 require "helper"
 
-describe Google::Cloud::Storage::Bucket, :signed_url, :mock_storage do
+describe Google::Cloud::Storage::File, :signed_url, :v2, :lazy, :mock_storage do
   let(:bucket_name) { "bucket" }
   let(:bucket_gapi) { Google::Apis::StorageV1::Bucket.from_json random_bucket_hash(bucket_name).to_json }
   let(:bucket) { Google::Cloud::Storage::Bucket.from_gapi bucket_gapi, storage.service }
 
-  let(:file_path) { "file.ext" }
+  let(:file_name) { "file.ext" }
+  let(:file) { Google::Cloud::Storage::File.new_lazy bucket_name, file_name, storage.service }
 
   it "uses the credentials' issuer and signing_key to generate signed_url" do
     Time.stub :now, Time.new(2012,1,1,0,0,0, "+00:00") do
@@ -28,7 +29,7 @@ describe Google::Cloud::Storage::Bucket, :signed_url, :mock_storage do
       credentials.issuer = "native_client_email"
       credentials.signing_key = signing_key_mock
 
-      signed_url = bucket.signed_url file_path
+      signed_url = file.signed_url
 
       signed_url_params = CGI::parse(URI(signed_url).query)
       signed_url_params["GoogleAccessId"].must_equal ["native_client_email"]
@@ -46,8 +47,8 @@ describe Google::Cloud::Storage::Bucket, :signed_url, :mock_storage do
       signing_key_mock = Minitest::Mock.new
       signing_key_mock.expect :sign, "option-signature", [OpenSSL::Digest::SHA256, "GET\n\n\n1325376300\n/bucket/file.ext"]
 
-      signed_url = bucket.signed_url file_path, issuer: "option_issuer",
-                                                signing_key: signing_key_mock
+      signed_url = file.signed_url issuer: "option_issuer",
+                                   signing_key: signing_key_mock
 
       signed_url_params = CGI::parse(URI(signed_url).query)
       signed_url_params["GoogleAccessId"].must_equal ["option_issuer"]
@@ -67,8 +68,8 @@ describe Google::Cloud::Storage::Bucket, :signed_url, :mock_storage do
 
       OpenSSL::PKey::RSA.stub :new, signing_key_mock do
 
-        signed_url = bucket.signed_url file_path, client_email: "option_client_email",
-                                                  private_key: "option_private_key"
+        signed_url = file.signed_url client_email: "option_client_email",
+                                     private_key: "option_private_key"
 
         signed_url_params = CGI::parse(URI(signed_url).query)
         signed_url_params["GoogleAccessId"].must_equal ["option_client_email"]
@@ -87,12 +88,30 @@ describe Google::Cloud::Storage::Bucket, :signed_url, :mock_storage do
       credentials.issuer = "native_client_email"
       credentials.signing_key = signing_key_mock
 
-      signed_url = bucket.signed_url file_path, headers: { "X-Goog-Meta-FOO" => "bar,baz",
-                                                           "X-Goog-ACL" => "public-read" }
+      signed_url = file.signed_url headers: { "X-Goog-Meta-FOO" => "bar,baz",
+                                              "X-Goog-ACL" => "public-read" }
 
       signed_url_params = CGI::parse(URI(signed_url).query)
       signed_url_params["GoogleAccessId"].must_equal ["native_client_email"]
       signed_url_params["Signature"].must_equal [Base64.strict_encode64("native-signature").delete("\n")]
+
+      signing_key_mock.verify
+    end
+  end
+
+  it "allows response content type and disposition to be passed in as options" do
+    Time.stub :now, Time.new(2012,1,1,0,0,0, "+00:00") do
+      signing_key_mock = Minitest::Mock.new
+      signing_key_mock.expect :sign, "native-signature", [OpenSSL::Digest::SHA256, "GET\n\n\n1325376300\n/bucket/file.ext"]
+      credentials.issuer = "native_client_email"
+      credentials.signing_key = signing_key_mock
+
+      signed_url = file.signed_url query: { "response-content-disposition" => "attachment; filename=\"test.png\"" }
+
+      signed_url_params = CGI::parse(URI(signed_url).query)
+      signed_url_params["GoogleAccessId"].must_equal ["native_client_email"]
+      signed_url_params["Signature"].must_equal [Base64.strict_encode64("native-signature").delete("\n")]
+      signed_url_params["response-content-disposition"].must_equal ["attachment; filename=\"test.png\""]
 
       signing_key_mock.verify
     end
@@ -103,7 +122,7 @@ describe Google::Cloud::Storage::Bucket, :signed_url, :mock_storage do
     credentials.signing_key = PoisonSigningKey.new
 
     expect {
-      bucket.signed_url file_path
+      file.signed_url
     }.must_raise Google::Cloud::Storage::SignedUrlUnavailable
   end
 
@@ -112,12 +131,12 @@ describe Google::Cloud::Storage::Bucket, :signed_url, :mock_storage do
     credentials.signing_key = nil
 
     expect {
-      bucket.signed_url file_path
+      file.signed_url
     }.must_raise Google::Cloud::Storage::SignedUrlUnavailable
   end
 
   describe "Files with spaces in them" do
-    let(:file_path) { "hello world.txt" }
+    let(:file_name) { "hello world.txt" }
 
     it "properly escapes the path when generating signed_url" do
       Time.stub :now, Time.new(2012,1,1,0,0,0, "+00:00") do
@@ -126,7 +145,7 @@ describe Google::Cloud::Storage::Bucket, :signed_url, :mock_storage do
         credentials.issuer = "native_client_email"
         credentials.signing_key = signing_key_mock
 
-        signed_url = bucket.signed_url file_path
+        signed_url = file.signed_url
 
         signed_uri = URI signed_url
         signed_uri.path.must_equal "/bucket/hello+world.txt"
@@ -147,8 +166,7 @@ describe Google::Cloud::Storage::Bucket, :signed_url, :mock_storage do
       credentials.issuer = "native_client_email"
       credentials.signing_key = signing_key_mock
 
-      signed_url = bucket.signed_url file_path,
-                                     query: { "response-content-disposition" => "attachment; filename=\"google-cloud.png\"" }
+      signed_url = file.signed_url query: { "response-content-disposition" => "attachment; filename=\"google-cloud.png\"" }
 
       signed_url_params = CGI::parse(URI(signed_url).query)
       signed_url_params["GoogleAccessId"].must_equal ["native_client_email"]

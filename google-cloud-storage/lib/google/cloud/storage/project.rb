@@ -408,12 +408,15 @@ module Google
         #   Signed URLs can be used
         #   with `GET`, `HEAD`, `PUT`, and `DELETE` requests. Default is `GET`.
         # @param [Integer] expires The number of seconds until the URL expires.
-        #   Default is 300/5 minutes.
+        #   If the `version` is `:v2`, the default is 300 (5 minutes). If the
+        #   `version` is `:v4`, the default is 604800 (7 days).
         # @param [String] content_type When provided, the client (browser) must
-        #   send this value in the HTTP header. e.g. `text/plain`
+        #   send this value in the HTTP header. e.g. `text/plain`. This param is
+        #   not used if the `version` is `:v4`.
         # @param [String] content_md5 The MD5 digest value in base64. If you
         #   provide this in the string, the client (usually a browser) must
-        #   provide this HTTP header with this same value in its request.
+        #   provide this HTTP header with this same value in its request. This
+        #   param is not used if the `version` is `:v4`.
         # @param [Hash] headers Google extension headers (custom HTTP headers
         #   that begin with `x-goog-`) that must be included in requests that
         #   use the signed URL.
@@ -431,8 +434,9 @@ module Google
         #   using the URL, but only when the file resource is missing the
         #   corresponding values. (These values can be permanently set using
         #   {File#content_disposition=} and {File#content_type=}.)
-        # @param [Symbol] version The version of signed credential to create.
-        #   Must be one of ':v2' or ':v4'. The default value is ':v2'.
+        # @param [Symbol, String] version The version of the signed credential
+        #   to create. Must be one of ':v2' or ':v4'. The default value is
+        #   ':v2'.
         #
         # @return [String]
         #
@@ -487,7 +491,7 @@ module Google
                        content_type: nil, content_md5: nil, headers: nil,
                        issuer: nil, client_email: nil, signing_key: nil,
                        private_key: nil, query: nil, version: :v2
-          case version
+          case version.to_sym
           when :v2
             signer = File::SignerV2.new bucket, path, service
 
