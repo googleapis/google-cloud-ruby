@@ -262,7 +262,7 @@ module Google
         # long as any connected subscriber is successfully consuming messages
         # from the subscription or is issuing operations on the subscription.
         #
-        # If `expires_in` is not set, a *default* value of of 31 days will be
+        # If {#expires_in=} is not set, a *default* value of of 31 days will be
         # used. The minimum allowed value is 1 day.
         #
         # Makes an API call to retrieve the labels value when called on a
@@ -282,7 +282,10 @@ module Google
         # Sets the duration (in seconds) for when a subscription expires after
         # the subscription goes inactive.
         #
-        # @param [Numeric, nil] ttl The expiration duration, or `nil` to unset.
+        # See also {#expires_in}.
+        #
+        # @param [Numeric, nil] ttl The expiration duration in seconds, or `nil`
+        #   to unset.
         #
         def expires_in= ttl
           new_expiration_policy = if ttl
