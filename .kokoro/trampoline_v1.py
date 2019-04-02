@@ -121,7 +121,7 @@ def run_docker(image, env_file, kokoro_artifacts_dir, build_file):
     p = Popen(" ".join(exec_args), stdout=PIPE, encoding="utf-8", stderr=PIPE)
     output, err = p.communicate()
     print(output)
-    if err:
+    if p.returncode != 0:
         print(err)
         raise RuntimeError(err)
 
