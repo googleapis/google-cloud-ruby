@@ -267,7 +267,10 @@ module Google
             @get_document = Google::Gax.create_api_call(
               @firestore_stub.method(:get_document),
               defaults["get_document"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @list_documents = Google::Gax.create_api_call(
               @firestore_stub.method(:list_documents),
@@ -282,37 +285,58 @@ module Google
             @update_document = Google::Gax.create_api_call(
               @firestore_stub.method(:update_document),
               defaults["update_document"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'document.name' => request.document.name}
+              end
             )
             @delete_document = Google::Gax.create_api_call(
               @firestore_stub.method(:delete_document),
               defaults["delete_document"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @batch_get_documents = Google::Gax.create_api_call(
               @firestore_stub.method(:batch_get_documents),
               defaults["batch_get_documents"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'database' => request.database}
+              end
             )
             @begin_transaction = Google::Gax.create_api_call(
               @firestore_stub.method(:begin_transaction),
               defaults["begin_transaction"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'database' => request.database}
+              end
             )
             @commit = Google::Gax.create_api_call(
               @firestore_stub.method(:commit),
               defaults["commit"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'database' => request.database}
+              end
             )
             @rollback = Google::Gax.create_api_call(
               @firestore_stub.method(:rollback),
               defaults["rollback"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'database' => request.database}
+              end
             )
             @run_query = Google::Gax.create_api_call(
               @firestore_stub.method(:run_query),
               defaults["run_query"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
             )
             @write = Google::Gax.create_api_call(
               @firestore_stub.method(:write),
@@ -327,7 +351,10 @@ module Google
             @list_collection_ids = Google::Gax.create_api_call(
               @firestore_stub.method(:list_collection_ids),
               defaults["list_collection_ids"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
             )
           end
 
