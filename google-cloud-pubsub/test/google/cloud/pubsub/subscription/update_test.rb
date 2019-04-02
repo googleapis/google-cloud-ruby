@@ -156,6 +156,24 @@ describe Google::Cloud::PubSub::Subscription, :update, :mock_pubsub do
     subscription.expires_in = week_seconds
 
     mock.verify
+
+    subscription.expires_in.must_equal week_seconds
+  end
+
+  it "can update the expires_in to nil" do
+    expiration_policy = Google::Cloud::PubSub::V1::ExpirationPolicy.new
+    update_sub = Google::Cloud::PubSub::V1::Subscription.new \
+      name: sub_path, expiration_policy: expiration_policy
+    update_mask = Google::Protobuf::FieldMask.new paths: ["expiration_policy"]
+    mock = Minitest::Mock.new
+    mock.expect :update_subscription, update_sub, [update_sub, update_mask, options: default_options]
+    pubsub.service.mocked_subscriber = mock
+
+    subscription.expires_in = nil
+
+    mock.verify
+
+    subscription.expires_in.must_be :nil?
   end
 
   describe :reference do

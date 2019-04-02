@@ -288,11 +288,9 @@ module Google
         #   to unset.
         #
         def expires_in= ttl
-          new_expiration_policy = if ttl
-                                    Google::Pubsub::V1::ExpirationPolicy.new(
-                                      ttl: Convert.number_to_duration(ttl)
-                                    )
-                                  end
+          new_expiration_policy = Google::Pubsub::V1::ExpirationPolicy.new(
+            ttl: Convert.number_to_duration(ttl)
+          )
 
           update_grpc = Google::Cloud::PubSub::V1::Subscription.new \
             name: name, expiration_policy: new_expiration_policy
