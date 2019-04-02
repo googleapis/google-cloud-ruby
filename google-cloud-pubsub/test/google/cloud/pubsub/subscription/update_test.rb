@@ -126,6 +126,56 @@ describe Google::Cloud::PubSub::Subscription, :update, :mock_pubsub do
     subscription.labels.must_equal labels
   end
 
+  it "can update the endpoint" do
+    new_push_endpoint = "https://foo.bar/baz"
+
+    push_config = Google::Cloud::PubSub::V1::PushConfig.new(push_endpoint: new_push_endpoint)
+    mpc_res = nil
+    mock = Minitest::Mock.new
+    mock.expect :modify_push_config, mpc_res, [subscription_path(sub_name), push_config, options: default_options]
+    pubsub.service.mocked_subscriber = mock
+
+    subscription.endpoint = new_push_endpoint
+
+    mock.verify
+  end
+
+  it "can update the expires_in" do
+    week_seconds = 60*60*24*7
+
+    expiration_policy = Google::Cloud::PubSub::V1::ExpirationPolicy.new(
+      ttl: Google::Cloud::PubSub::Convert.number_to_duration(week_seconds)
+    )
+    update_sub = Google::Cloud::PubSub::V1::Subscription.new \
+      name: sub_path, expiration_policy: expiration_policy
+    update_mask = Google::Protobuf::FieldMask.new paths: ["expiration_policy"]
+    mock = Minitest::Mock.new
+    mock.expect :update_subscription, update_sub, [update_sub, update_mask, options: default_options]
+    pubsub.service.mocked_subscriber = mock
+
+    subscription.expires_in = week_seconds
+
+    mock.verify
+
+    subscription.expires_in.must_equal week_seconds
+  end
+
+  it "can update the expires_in to nil" do
+    expiration_policy = Google::Cloud::PubSub::V1::ExpirationPolicy.new
+    update_sub = Google::Cloud::PubSub::V1::Subscription.new \
+      name: sub_path, expiration_policy: expiration_policy
+    update_mask = Google::Protobuf::FieldMask.new paths: ["expiration_policy"]
+    mock = Minitest::Mock.new
+    mock.expect :update_subscription, update_sub, [update_sub, update_mask, options: default_options]
+    pubsub.service.mocked_subscriber = mock
+
+    subscription.expires_in = nil
+
+    mock.verify
+
+    subscription.expires_in.must_be :nil?
+  end
+
   describe :reference do
     let(:subscription) { Google::Cloud::PubSub::Subscription.from_name sub_name, pubsub.service }
 
@@ -215,6 +265,133 @@ describe Google::Cloud::PubSub::Subscription, :update, :mock_pubsub do
       subscription.wont_be :reference?
       subscription.must_be :resource?
       subscription.labels.must_equal new_labels
+    end
+
+    it "makes an HTTP API call to update endpoint" do
+      new_push_endpoint = "https://foo.bar/baz"
+
+      push_config = Google::Cloud::PubSub::V1::PushConfig.new(push_endpoint: new_push_endpoint)
+      mpc_res = nil
+      mock = Minitest::Mock.new
+      mock.expect :modify_push_config, mpc_res, [subscription_path(sub_name), push_config, options: default_options]
+      pubsub.service.mocked_subscriber = mock
+
+      subscription.endpoint = new_push_endpoint
+
+      mock.verify
+    end
+
+    it "makes an HTTP API call to update expires_in" do
+      week_seconds = 60*60*24*7
+
+      expiration_policy = Google::Cloud::PubSub::V1::ExpirationPolicy.new(
+        ttl: Google::Cloud::PubSub::Convert.number_to_duration(week_seconds)
+      )
+      update_sub = Google::Cloud::PubSub::V1::Subscription.new \
+        name: sub_path, expiration_policy: expiration_policy
+      update_mask = Google::Protobuf::FieldMask.new paths: ["expiration_policy"]
+      mock = Minitest::Mock.new
+      mock.expect :update_subscription, update_sub, [update_sub, update_mask, options: default_options]
+      pubsub.service.mocked_subscriber = mock
+
+      subscription.expires_in = week_seconds
+
+      mock.verify
+    end
+  end
+
+  describe "reference subscription object of a subscription that does not exist" do
+    let :subscription do
+      Google::Cloud::PubSub::Subscription.from_name sub_name,
+                                            pubsub.service
+    end
+
+    it "raises NotFoundError when updating deadline" do
+      stub = Object.new
+      def stub.update_subscription *args
+        gax_error = Google::Gax::GaxError.new "not found"
+        gax_error.instance_variable_set :@cause, GRPC::BadStatus.new(5, "not found")
+        raise gax_error
+      end
+      subscription.service.mocked_subscriber = stub
+
+      expect do
+        subscription.deadline = 30
+      end.must_raise Google::Cloud::NotFoundError
+    end
+
+    it "raises NotFoundError when updating retain_acked" do
+      stub = Object.new
+      def stub.update_subscription *args
+        gax_error = Google::Gax::GaxError.new "not found"
+        gax_error.instance_variable_set :@cause, GRPC::BadStatus.new(5, "not found")
+        raise gax_error
+      end
+      subscription.service.mocked_subscriber = stub
+
+      expect do
+        subscription.retain_acked = true
+      end.must_raise Google::Cloud::NotFoundError
+    end
+
+    it "raises NotFoundError when updating retention" do
+      stub = Object.new
+      def stub.update_subscription *args
+        gax_error = Google::Gax::GaxError.new "not found"
+        gax_error.instance_variable_set :@cause, GRPC::BadStatus.new(5, "not found")
+        raise gax_error
+      end
+      subscription.service.mocked_subscriber = stub
+
+      expect do
+        subscription.retention = 600.2
+      end.must_raise Google::Cloud::NotFoundError
+    end
+
+    it "raises NotFoundError when updating labels" do
+      stub = Object.new
+      def stub.update_subscription *args
+        gax_error = Google::Gax::GaxError.new "not found"
+        gax_error.instance_variable_set :@cause, GRPC::BadStatus.new(5, "not found")
+        raise gax_error
+      end
+      subscription.service.mocked_subscriber = stub
+
+      expect do
+        subscription.labels = new_labels
+      end.must_raise Google::Cloud::NotFoundError
+    end
+
+    it "raises NotFoundError when updating endpoint" do
+      new_push_endpoint = "https://foo.bar/baz"
+
+      stub = Object.new
+      def stub.modify_push_config *args
+        gax_error = Google::Gax::GaxError.new "not found"
+        gax_error.instance_variable_set :@cause, GRPC::BadStatus.new(5, "not found")
+        raise gax_error
+      end
+      subscription.service.mocked_subscriber = stub
+
+      expect do
+        subscription.endpoint = new_push_endpoint
+      end.must_raise Google::Cloud::NotFoundError
+    end
+
+    it "raises NotFoundError when updating expires_in" do
+      week_seconds = 60*60*24*7
+
+      stub = Object.new
+      def stub.update_subscription *args
+        gax_error = Google::Gax::GaxError.new "not found"
+        gax_error.instance_variable_set :@cause, GRPC::BadStatus.new(5, "not found")
+        raise gax_error
+      end
+      subscription.service.mocked_subscriber = stub
+
+      expect do
+        subscription.expires_in = week_seconds
+      end.must_raise Google::Cloud::NotFoundError
     end
   end
 end

@@ -151,7 +151,8 @@ class MockPubsub < Minitest::Spec
       ack_deadline_seconds: deadline,
       retain_acked_messages: true,
       message_retention_duration: { seconds: 600, nanos: 900000000 }, # 600.9 seconds
-      labels: labels
+      labels: labels,
+      expiration_policy: { ttl: { seconds: 172800, nanos: 0 } }, # 2 days
     }
   end
 
