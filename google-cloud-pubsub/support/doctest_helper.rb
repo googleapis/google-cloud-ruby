@@ -406,6 +406,14 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
+  doctest.before "Google::Cloud::PubSub::Subscription#reload!" do
+    mock_pubsub do |mock_publisher, mock_subscriber|
+      mock_subscriber.expect :get_subscription, subscription_resp, [String, Hash]
+      mock_subscriber.expect :get_subscription, subscription_resp, [String, Hash]
+    end
+  end
+  doctest.skip "Google::Cloud::PubSub::Subscription#refresh!"
+
   ##
   # Subscription::List
 
@@ -518,6 +526,14 @@ YARD::Doctest.configure do |doctest|
       mock_publisher.expect :test_iam_permissions, topic_permissions_resp, ["projects/my-project/topics/my-topic", ["pubsub.topics.get", "pubsub.topics.publish"], Hash]
     end
   end
+
+  doctest.before "Google::Cloud::PubSub::Topic#reload!" do
+    mock_pubsub do |mock_publisher, mock_subscriber|
+      mock_publisher.expect :get_topic, topic_resp, [String, Hash]
+      mock_publisher.expect :get_topic, topic_resp, [String, Hash]
+    end
+  end
+  doctest.skip "Google::Cloud::PubSub::Topic#refresh!"
 
   ##
   # Topic::List

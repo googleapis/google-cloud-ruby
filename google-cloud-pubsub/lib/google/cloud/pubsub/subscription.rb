@@ -683,6 +683,28 @@ module Google
         end
 
         ##
+        # Reloads the subscription with current data from the Pub/Sub service.
+        #
+        # @return [Google::Cloud::PubSub::Subscription] Returns the reloaded
+        #   subscription
+        #
+        # @example
+        #   require "google/cloud/pubsub"
+        #
+        #   pubsub = Google::Cloud::PubSub.new
+        #
+        #   sub = pubsub.get_subscription "my-topic-sub"
+        #   sub.reload!
+        #
+        def reload!
+          ensure_service!
+          @grpc = service.get_subscription name
+          @resource_name = nil
+          self
+        end
+        alias refresh! reload!
+
+        ##
         # Gets the [Cloud IAM](https://cloud.google.com/iam/) access control
         # policy for this subscription.
         #
@@ -834,8 +856,7 @@ module Google
         # Ensures a Google::Cloud::PubSub::V1::Subscription object exists.
         def ensure_grpc!
           ensure_service!
-          @grpc = service.get_subscription name if reference?
-          @resource_name = nil
+          reload! if reference?
         end
 
         ##

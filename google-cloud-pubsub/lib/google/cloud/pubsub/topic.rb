@@ -607,6 +607,27 @@ module Google
         end
 
         ##
+        # Reloads the topic with current data from the Pub/Sub service.
+        #
+        # @return [Google::Cloud::PubSub::Topic] Returns the reloaded topic
+        #
+        # @example
+        #   require "google/cloud/pubsub"
+        #
+        #   pubsub = Google::Cloud::PubSub.new
+        #
+        #   topic = pubsub.topic "my-topic"
+        #   topic.reload!
+        #
+        def reload!
+          ensure_service!
+          @grpc = service.get_topic name
+          @resource_name = nil
+          self
+        end
+        alias refresh! reload!
+
+        ##
         # @private New Topic from a Google::Cloud::PubSub::V1::Topic object.
         def self.from_grpc grpc, service, async: nil
           new.tap do |t|
@@ -638,8 +659,7 @@ module Google
         # Ensures a Google::Cloud::PubSub::V1::Topic object exists.
         def ensure_grpc!
           ensure_service!
-          @grpc = service.get_topic name if reference?
-          @resource_name = nil
+          reload! if reference?
         end
 
         ##

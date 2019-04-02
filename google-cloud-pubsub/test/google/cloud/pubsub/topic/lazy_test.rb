@@ -16,10 +16,22 @@ require "helper"
 
 describe Google::Cloud::PubSub::Topic, :reference, :mock_pubsub do
   let(:topic_name) { "topic-name-goes-here" }
-  let(:topic) { Google::Cloud::PubSub::Topic.from_grpc Google::Cloud::PubSub::V1::Topic.new(topic_hash(topic_name)), pubsub.service }
+  let(:topic_grpc) { Google::Cloud::PubSub::V1::Topic.new topic_hash(topic_name) }
+  let(:topic) { Google::Cloud::PubSub::Topic.from_grpc topic_grpc, pubsub.service }
 
   it "is not reference when created with an HTTP method" do
     topic.wont_be :reference?
     topic.must_be :resource?
+  end
+
+  describe "reference topic" do
+    let :topic do
+      Google::Cloud::PubSub::Topic.from_name topic_name, pubsub.service
+    end
+
+    it "is reference" do
+      topic.must_be :reference?
+      topic.wont_be :resource?
+    end
   end
 end
