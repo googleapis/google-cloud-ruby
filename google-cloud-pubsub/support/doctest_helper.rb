@@ -412,13 +412,7 @@ YARD::Doctest.configure do |doctest|
       mock_subscriber.expect :get_subscription, subscription_resp, [String, Hash]
     end
   end
-
-  doctest.before "Google::Cloud::PubSub::Subscription#refresh!" do
-    mock_pubsub do |mock_publisher, mock_subscriber|
-      mock_subscriber.expect :get_subscription, subscription_resp, [String, Hash]
-      mock_subscriber.expect :get_subscription, subscription_resp, [String, Hash]
-    end
-  end
+  doctest.skip "Google::Cloud::PubSub::Subscription#refresh!"
 
   ##
   # Subscription::List
@@ -539,14 +533,7 @@ YARD::Doctest.configure do |doctest|
       mock_publisher.expect :get_topic, topic_resp, [String, Hash]
     end
   end
-
-  doctest.before "Google::Cloud::PubSub::Topic#refresh!" do
-    mock_pubsub do |mock_publisher, mock_subscriber|
-      mock_publisher.expect :get_topic, topic_resp, [String, Hash]
-      mock_publisher.expect :get_topic, topic_resp, [String, Hash]
-    end
-  end
-
+  doctest.skip "Google::Cloud::PubSub::Topic#refresh!"
 
   ##
   # Topic::List
