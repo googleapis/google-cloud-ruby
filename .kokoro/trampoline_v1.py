@@ -105,7 +105,6 @@ def run_docker(image, env_file, kokoro_artifacts_dir, build_file):
         '--rm',
         '--interactive',  # Attach stdin.
         '--volume="C:\\Users\\kbuilder:C:\\src\\github"',
-
         # Set the working directory to the workspace.
         '--workdir={}'.format(kokoro_artifacts_dir),
         # Run the test script.
@@ -125,6 +124,7 @@ def run_docker(image, env_file, kokoro_artifacts_dir, build_file):
 
 def main():
     kokoro_artifacts_dir = os.environ['KOKORO_ARTIFACTS_DIR']
+    # Windows docker containers do not like non-C:\\ drives
     kokoro_artifacts_dir = kokoro_artifacts_dir.replace(
         "T:\\", "C:\\").replace("t:\\", "C:\\")
     kokoro_gfile_dir = os.environ['KOKORO_GFILE_DIR']

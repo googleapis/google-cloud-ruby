@@ -4,6 +4,7 @@ REM  * PRs run all non-acceptance tests for every library, against all rubies.
 REM  * Merges run all non-acceptance tests for every library, and acceptance tests for all altered libraries, against all rubies.
 REM  * Nightlies run all acceptance tests for every library, against all rubies.
 
+REM Ruby can't access the files in the mounted volumn, so copying it
 powershell -C Copy-Item -Recurse C:\src\%REPO_DIR% C:\repo
 
 SET /A ERROR_CODE=0

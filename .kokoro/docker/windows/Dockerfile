@@ -7,6 +7,8 @@ ENV HOMEPATH=\\Users\\ContainerAdministrator
 ENV HOMEDRIVE=C:
 ENV HOME=C:\\Users\\ContainerAdministrator
 
+# Fixes https://cloud.google.com/compute/docs/containers/#mtu_failures
+# There is a similar script that has to run periodically on the VM as well.
 RUN $output = netsh interface ipv4 show subinterfaces; \
     for ($i = 0; $i -le ($output.length - 1); $i += 1) { \
         if($output[$i] -like '*vEthernet*') { \
