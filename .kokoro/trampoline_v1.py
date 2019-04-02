@@ -118,8 +118,12 @@ def run_docker(image, env_file, kokoro_artifacts_dir, build_file):
     print('Executing: {}'.format(' '.join(exec_args)))
     sys.stdout.flush()
     sys.stderr.flush()
-
-    os.system(" ".join(exec_args))
+    p = Popen(" ".join(exec_args), stdout=PIPE, encoding="utf-8", stderr=PIPE)
+    output, err = p.communicate()
+    print(output)
+    if err:
+        print(err)
+        raise RuntimeError(err)
 
 
 def main():
