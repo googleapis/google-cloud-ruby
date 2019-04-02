@@ -5,6 +5,7 @@
 require 'google/protobuf'
 
 require 'google/api/annotations_pb'
+require 'google/api/resource_pb'
 require 'google/privacy/dlp/v2/storage_pb'
 require 'google/protobuf/duration_pb'
 require 'google/protobuf/empty_pb'
@@ -440,6 +441,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :time_part_config, :message, 8, "google.privacy.dlp.v2.TimePartConfig"
       optional :crypto_hash_config, :message, 9, "google.privacy.dlp.v2.CryptoHashConfig"
       optional :date_shift_config, :message, 11, "google.privacy.dlp.v2.DateShiftConfig"
+      optional :crypto_deterministic_config, :message, 12, "google.privacy.dlp.v2.CryptoDeterministicConfig"
     end
   end
   add_message "google.privacy.dlp.v2.TimePartConfig" do
@@ -456,6 +458,11 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   end
   add_message "google.privacy.dlp.v2.CryptoHashConfig" do
     optional :crypto_key, :message, 1, "google.privacy.dlp.v2.CryptoKey"
+  end
+  add_message "google.privacy.dlp.v2.CryptoDeterministicConfig" do
+    optional :crypto_key, :message, 1, "google.privacy.dlp.v2.CryptoKey"
+    optional :surrogate_info_type, :message, 2, "google.privacy.dlp.v2.InfoType"
+    optional :context, :message, 3, "google.privacy.dlp.v2.FieldId"
   end
   add_message "google.privacy.dlp.v2.ReplaceValueConfig" do
     optional :new_value, :message, 1, "google.privacy.dlp.v2.Value"
@@ -988,6 +995,7 @@ module Google
         TimePartConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.TimePartConfig").msgclass
         TimePartConfig::TimePart = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.TimePartConfig.TimePart").enummodule
         CryptoHashConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.CryptoHashConfig").msgclass
+        CryptoDeterministicConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.CryptoDeterministicConfig").msgclass
         ReplaceValueConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.ReplaceValueConfig").msgclass
         ReplaceWithInfoTypeConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.ReplaceWithInfoTypeConfig").msgclass
         RedactConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.RedactConfig").msgclass

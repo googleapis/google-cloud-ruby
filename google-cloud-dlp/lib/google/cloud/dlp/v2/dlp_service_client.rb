@@ -923,7 +923,7 @@ module Google
           # @param template_id [String]
           #   The template id can contain uppercase and lowercase letters,
           #   numbers, and hyphens; that is, it must match the regular
-          #   expression: `[a-zA-Z\\d-]+`. The maximum length is 100
+          #   expression: `[a-zA-Z\\d-_]+`. The maximum length is 100
           #   characters. Can be empty to allow the system to generate one.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
@@ -1152,7 +1152,7 @@ module Google
           # @param template_id [String]
           #   The template id can contain uppercase and lowercase letters,
           #   numbers, and hyphens; that is, it must match the regular
-          #   expression: `[a-zA-Z\\d-]+`. The maximum length is 100
+          #   expression: `[a-zA-Z\\d-_]+`. The maximum length is 100
           #   characters. Can be empty to allow the system to generate one.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
@@ -1390,7 +1390,7 @@ module Google
           # @param job_id [String]
           #   The job id can contain uppercase and lowercase letters,
           #   numbers, and hyphens; that is, it must match the regular
-          #   expression: `[a-zA-Z\\d-]+`. The maximum length is 100
+          #   expression: `[a-zA-Z\\d-_]+`. The maximum length is 100
           #   characters. Can be empty to allow the system to generate one.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
@@ -1849,7 +1849,7 @@ module Google
           # @param trigger_id [String]
           #   The trigger id can contain uppercase and lowercase letters,
           #   numbers, and hyphens; that is, it must match the regular
-          #   expression: `[a-zA-Z\\d-]+`. The maximum length is 100
+          #   expression: `[a-zA-Z\\d-_]+`. The maximum length is 100
           #   characters. Can be empty to allow the system to generate one.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
@@ -1895,7 +1895,7 @@ module Google
           # @param stored_info_type_id [String]
           #   The storedInfoType ID can contain uppercase and lowercase letters,
           #   numbers, and hyphens; that is, it must match the regular
-          #   expression: `[a-zA-Z\\d-]+`. The maximum length is 100
+          #   expression: `[a-zA-Z\\d-_]+`. The maximum length is 100
           #   characters. Can be empty to allow the system to generate one.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
