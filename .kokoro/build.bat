@@ -9,8 +9,7 @@ powershell -C Copy-Item -Recurse C:\src\%REPO_DIR% C:\repo
 
 SET /A ERROR_CODE=0
 
-cd ..
-cd repo
+cd C:\repo
 
 IF "%JOB_TYPE%"=="continuous" (
     git fetch --depth=10000
