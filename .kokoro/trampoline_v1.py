@@ -102,7 +102,7 @@ def create_docker_envfile(tmpdir):
 def copy(src, dest):
     delete(dest)
     try:
-        shutil.copytree(src, dest)
+        shutil.copytree(src, dest, symlinks=True)
     except OSError as e:
         # If the error was caused because the source wasn't a directory
         if e.errno == errno.ENOTDIR:
@@ -114,7 +114,8 @@ def delete(src):
     try:
         shutil.rmtree(src)
     except:
-        print("nothing to delete")
+        e = sys.exc_info()[0]
+        print('Error while deleting {}: {}'.format(src, e))
 
 
 
