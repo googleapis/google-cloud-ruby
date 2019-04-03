@@ -113,6 +113,8 @@ def copy(src, dest):
 def delete(src):
     try:
         shutil.rmtree(src)
+    except:
+        print("nothing to delete")
 
 
 
