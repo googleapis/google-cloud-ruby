@@ -16,7 +16,7 @@ git config --global core.autocrlf true
 REM Ruby can't access the files in the mounted volume.
 REM Neither Powershell's Copy-Item nor xcopy correctly copy the symlinks.
 REM So we clone/checkout the repo ourselves rather than relying Kokoro.
-SET "run_kokoro=bundle update && bundle exec rake kokoro:%JOB_TYPE%"
+SET "run_kokoro=ridk enable && bundle update && bundle exec rake kokoro:%JOB_TYPE%"
 
 SET "git_commands=ECHO %JOB_TYPE%"
 
