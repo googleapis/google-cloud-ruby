@@ -8,14 +8,9 @@ SET /A ERROR_CODE=1
 
 CD C:\
 
-REM Rubocop expects native line endings
-REM TODO: set this in Dockerfile or change .rubocop.yml or skip rubocop on windows
-git config --system --unset core.autocrlf
-git config --global core.autocrlf true
-
 REM Ruby can't access the files in the mounted volume.
 REM Neither Powershell's Copy-Item nor xcopy correctly copy the symlinks.
-REM So we clone/checkout the repo ourselves rather than relying Kokoro.
+REM So we clone/checkout the repo ourselves rather than relying on Kokoro.
 SET "run_kokoro=ridk enable && bundle update && bundle exec rake kokoro:%JOB_TYPE%"
 
 SET "git_commands=ECHO %JOB_TYPE%"
@@ -34,6 +29,5 @@ IF "%JOB_TYPE%"=="nightly" (
 )
 
 ruby -e %clone_command% && CD %REPO_DIR% && %git_commands% && %run_kokoro% && SET /A ERROR_CODE=0
-
 
 EXIT /B %ERROR_CODE%

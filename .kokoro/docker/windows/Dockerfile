@@ -25,8 +25,8 @@ RUN iex ((new-object net.webclient).DownloadString('https://chocolatey.org/insta
 RUN choco feature enable -n=allowGlobalConfirmation; \
     choco install git
 
-RUN git config --global core.autocrlf false
-RUN git config --system core.autocrlf false
+# Rubocop expects us to use native line endings
+RUN git config --global core.autocrlf true
 
 RUN [Net.ServicePointManager]::SecurityProtocol = 'tls12, tls11, tls'; \
     Invoke-WebRequest -Method Get -Uri https://github.com/oneclick/rubyinstaller2/releases/download/rubyinstaller-2.5.3-1/rubyinstaller-devkit-2.5.3-1-x64.exe -OutFile C:\rubyinstaller.exe ; \
@@ -38,5 +38,3 @@ RUN C:\Ruby25-x64\bin\ridk install 1 2 3
 RUN gem install bundler:1.17.3
 
 RUN gem update --system
-
-RUN powershell -C New-Item -ItemType Directory -Force -Path C:\Users\kbuilder
