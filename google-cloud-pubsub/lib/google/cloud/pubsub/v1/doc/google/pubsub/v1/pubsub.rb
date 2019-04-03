@@ -76,6 +76,15 @@ module Google
       #     The time at which the message was published, populated by the server when
       #     it receives the `Publish` call. It must not be populated by the
       #     publisher in a `Publish` call.
+      # @!attribute [rw] ordering_key
+      #   @return [String]
+      #     Identifies related messages for which publish order should be respected.
+      #     If a `Subscription` has `enable_message_ordering` set to `true`, messages
+      #     published with the same `ordering_key` value will be delivered to
+      #     subscribers in the order in which they are received by the Pub/Sub system.
+      #     <b>EXPERIMENTAL:</b> This feature is part of a closed alpha release. This
+      #     API might be changed in backward-incompatible ways and is not recommended
+      #     for production use. It is not subject to any SLA or deprecation policy.
       class PubsubMessage; end
 
       # Request for the GetTopic method.
@@ -276,6 +285,15 @@ module Google
       #   @return [Hash{String => String}]
       #     See <a href="https://cloud.google.com/pubsub/docs/labels"> Creating and
       #     managing labels</a>.
+      # @!attribute [rw] enable_message_ordering
+      #   @return [true, false]
+      #     If true, messages published with the same `ordering_key` in `PubsubMessage`
+      #     will be delivered to the subscribers in the order in which they
+      #     are received by the Pub/Sub system. Otherwise, they may be delivered in
+      #     any order.
+      #     <b>EXPERIMENTAL:</b> This feature is part of a closed alpha release. This
+      #     API might be changed in backward-incompatible ways and is not recommended
+      #     for production use. It is not subject to any SLA or deprecation policy.
       # @!attribute [rw] expiration_policy
       #   @return [Google::Cloud::PubSub::V1::ExpirationPolicy]
       #     A policy that specifies the conditions for this subscription's expiration.

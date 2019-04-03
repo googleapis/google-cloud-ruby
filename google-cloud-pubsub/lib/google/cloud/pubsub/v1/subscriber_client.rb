@@ -431,6 +431,14 @@ module Google
           # @param labels [Hash{String => String}]
           #   See <a href="https://cloud.google.com/pubsub/docs/labels"> Creating and
           #   managing labels</a>.
+          # @param enable_message_ordering [true, false]
+          #   If true, messages published with the same `ordering_key` in `PubsubMessage`
+          #   will be delivered to the subscribers in the order in which they
+          #   are received by the Pub/Sub system. Otherwise, they may be delivered in
+          #   any order.
+          #   <b>EXPERIMENTAL:</b> This feature is part of a closed alpha release. This
+          #   API might be changed in backward-incompatible ways and is not recommended
+          #   for production use. It is not subject to any SLA or deprecation policy.
           # @param expiration_policy [Google::Cloud::PubSub::V1::ExpirationPolicy | Hash]
           #   A policy that specifies the conditions for this subscription's expiration.
           #   A subscription is considered active as long as any connected subscriber is
@@ -467,6 +475,7 @@ module Google
               retain_acked_messages: nil,
               message_retention_duration: nil,
               labels: nil,
+              enable_message_ordering: nil,
               expiration_policy: nil,
               options: nil,
               &block
@@ -478,6 +487,7 @@ module Google
               retain_acked_messages: retain_acked_messages,
               message_retention_duration: message_retention_duration,
               labels: labels,
+              enable_message_ordering: enable_message_ordering,
               expiration_policy: expiration_policy
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Cloud::PubSub::V1::Subscription)
