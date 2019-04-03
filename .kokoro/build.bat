@@ -4,17 +4,28 @@ REM  * PRs run all non-acceptance tests for every library, against all rubies.
 REM  * Merges run all non-acceptance tests for every library, and acceptance tests for all altered libraries, against all rubies.
 REM  * Nightlies run all acceptance tests for every library, against all rubies.
 
-REM Ruby can't access the files in the mounted volumn, so copying it
-POWERSHELL -C Copy-Item -Recurse C:\src\%REPO_DIR% C:\repo
-
 SET /A ERROR_CODE=1
 
-CD C:\repo
+CD C:\
 
+REM Ruby can't access the files in the mounted volume.
+REM Neither Powershell's Copy-Item nor xcopy correctly copy the symlinks.
+REM So we clone/checkout the repo ourselves rather than relying Kokoro.
+
+SET clone_command="`git clone #{ENV['KOKORO_GITHUB_PULL_REQUEST_URL'].split('/pull')[0]}`"
+
+SET run_kokoro="bundle update && bundle exec rake kokoro:%JOB_TYPE%"
+
+SET "git_commands=ECHO %JOB_TYPE%"
+
+IF "%JOB_TYPE%"=="presubmit" (
+    SET git_commands="git fetch && git checkout %KOKORO_GIT_COMMIT%"
+)
 IF "%JOB_TYPE%"=="continuous" (
-    git fetch --depth=10000
+    SET git_commands="git fetch --depth=10000 && git checkout %KOKORO_GIT_COMMIT%"
 )
 
-bundle update && bundle exec rake kokoro:%JOB_TYPE% && SET /A ERROR_CODE=0
+CD %REPO_DIR% && ruby -e %clone_command% && %git_commands% && %run_kokoro% && SET /A ERROR_CODE=0
+
 
 EXIT /B %ERROR_CODE%
