@@ -8,14 +8,13 @@ SET /A ERROR_CODE=1
 
 CD C:\
 
-REM Ruby can't access the files in the mounted volume.
-POWERSHELL -C Copy-Item -Recurse %KOKORO_GFILE_DIR% C:\gfile
-SET KOKORO_GFILE_DIR=C:\gfile
-SETX KOKORO_GFILE_DIR C:\gfile
+REM Rubocop expects native line endings
+REM TODO: set this in Dockerfile
+git config --global core.autocrlf auto
 
+REM Ruby can't access the files in the mounted volume.
 REM Neither Powershell's Copy-Item nor xcopy correctly copy the symlinks.
 REM So we clone/checkout the repo ourselves rather than relying Kokoro.
-
 SET "run_kokoro=bundle update && bundle exec rake kokoro:%JOB_TYPE%"
 
 SET "git_commands=ECHO %JOB_TYPE%"
