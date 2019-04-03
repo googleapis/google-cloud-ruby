@@ -15,11 +15,7 @@ IF "%JOB_TYPE%"=="continuous" (
     git fetch --depth=10000
 )
 
-bundle update || CALL :SET_ERROR_CODE
-bundle exec rake kokoro:%JOB_TYPE% || CALL :SET_ERROR_CODE
+bundle update || SET /A ERROR_CODE=1
+bundle exec rake kokoro:%JOB_TYPE% || SET /A ERROR_CODE=1
 
 EXIT /B %ERROR_CODE%
-
-:SET_ERROR_CODE
-SET /A ERROR_CODE=1 
-EXIT /B 0
