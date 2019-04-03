@@ -125,7 +125,7 @@ def run_docker(image, env_file, kokoro_artifacts_dir, build_file):
         'run',
         '--rm',
         '--interactive',  # Attach stdin.
-        '--volume="C:\\Users\\kbuilder:C:\\src\\github"',
+        '--volume="C:\\src\\github:C:\\src\\github"',
         # Set the working directory to the workspace.
         '--workdir={}'.format(kokoro_artifacts_dir),
         # Run the test script.
