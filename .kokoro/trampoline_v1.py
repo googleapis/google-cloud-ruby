@@ -100,6 +100,7 @@ def create_docker_envfile(tmpdir):
 
  
 def copy(src, dest):
+    delete(dest)
     try:
         shutil.copytree(src, dest)
     except OSError as e:
