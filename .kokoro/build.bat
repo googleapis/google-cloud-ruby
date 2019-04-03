@@ -9,6 +9,10 @@ SET /A ERROR_CODE=1
 CD C:\
 
 REM Ruby can't access the files in the mounted volume.
+POWERSHELL -C Copy-Item -Recurse %KOKORO_GFILE_DIR% C:\gfile
+SET KOKORO_GFILE_DIR=C:\gfile
+SETX KOKORO_GFILE_DIR C:\gfile
+
 REM Neither Powershell's Copy-Item nor xcopy correctly copy the symlinks.
 REM So we clone/checkout the repo ourselves rather than relying Kokoro.
 
