@@ -133,6 +133,32 @@ js:
       <li class="public ">
   <span class="summary_signature">
     
+      <a href="#enable_message_ordering-instance_method" title="#enable_message_ordering (instance method)">#<strong>enable_message_ordering</strong>  &#x21d2; true, false </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>If true, messages published with the same <code>ordering_key</code> in <code>PubsubMessage</code> will be delivered to the subscribers in the order in which they are received by the Pub/Sub system.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#expiration_policy-instance_method" title="#expiration_policy (instance method)">#<strong>expiration_policy</strong>  &#x21d2; Google::Cloud::PubSub::V1::ExpirationPolicy </a>
     
 
@@ -403,10 +429,77 @@ system will eventually redeliver the message.</p>
       <pre class="lines">
 
 
-290</pre>
+308</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/doc/google/pubsub/v1/pubsub.rb', line 290</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/doc/google/pubsub/v1/pubsub.rb', line 308</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::PubSub::V1::Subscription (class)">Subscription</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="enable_message_ordering=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="enable_message_ordering-instance_method">
+  
+    #<strong>enable_message_ordering</strong>  &#x21d2; <tt>true</tt>, <tt>false</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns If true, messages published with the same <code>ordering_key</code> in <code>PubsubMessage</code>
+will be delivered to the subscribers in the order in which they
+are received by the Pub/Sub system. Otherwise, they may be delivered in
+any order.
+<b>EXPERIMENTAL:</b> This feature is part of a closed alpha release. This
+API might be changed in backward-incompatible ways and is not recommended
+for production use. It is not subject to any SLA or deprecation policy.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>true</tt>, <tt>false</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>If true, messages published with the same <code>ordering_key</code> in <code>PubsubMessage</code>
+will be delivered to the subscribers in the order in which they
+are received by the Pub/Sub system. Otherwise, they may be delivered in
+any order.
+<b>EXPERIMENTAL:</b> This feature is part of a closed alpha release. This
+API might be changed in backward-incompatible ways and is not recommended
+for production use. It is not subject to any SLA or deprecation policy.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+308</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/doc/google/pubsub/v1/pubsub.rb', line 308</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::PubSub::V1::Subscription (class)">Subscription</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -474,10 +567,10 @@ use. It is not subject to any SLA or deprecation policy.</p>
       <pre class="lines">
 
 
-290</pre>
+308</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/doc/google/pubsub/v1/pubsub.rb', line 290</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/doc/google/pubsub/v1/pubsub.rb', line 308</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::PubSub::V1::Subscription (class)">Subscription</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -531,10 +624,10 @@ managing labels</a>.</p>
       <pre class="lines">
 
 
-290</pre>
+308</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/doc/google/pubsub/v1/pubsub.rb', line 290</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/doc/google/pubsub/v1/pubsub.rb', line 308</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::PubSub::V1::Subscription (class)">Subscription</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -602,10 +695,10 @@ use. It is not subject to any SLA or deprecation policy.</p>
       <pre class="lines">
 
 
-290</pre>
+308</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/doc/google/pubsub/v1/pubsub.rb', line 290</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/doc/google/pubsub/v1/pubsub.rb', line 308</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::PubSub::V1::Subscription (class)">Subscription</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -667,10 +760,10 @@ in length, and it must not start with <code>&quot;goog&quot;</code></p>
       <pre class="lines">
 
 
-290</pre>
+308</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/doc/google/pubsub/v1/pubsub.rb', line 290</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/doc/google/pubsub/v1/pubsub.rb', line 308</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::PubSub::V1::Subscription (class)">Subscription</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -726,10 +819,10 @@ will pull and ack messages using API methods.</p>
       <pre class="lines">
 
 
-290</pre>
+308</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/doc/google/pubsub/v1/pubsub.rb', line 290</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/doc/google/pubsub/v1/pubsub.rb', line 308</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::PubSub::V1::Subscription (class)">Subscription</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -801,10 +894,10 @@ use. It is not subject to any SLA or deprecation policy.</p>
       <pre class="lines">
 
 
-290</pre>
+308</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/doc/google/pubsub/v1/pubsub.rb', line 290</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/doc/google/pubsub/v1/pubsub.rb', line 308</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::PubSub::V1::Subscription (class)">Subscription</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -862,10 +955,10 @@ deleted.</p>
       <pre class="lines">
 
 
-290</pre>
+308</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/doc/google/pubsub/v1/pubsub.rb', line 290</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/doc/google/pubsub/v1/pubsub.rb', line 308</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::PubSub::V1::Subscription (class)">Subscription</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>

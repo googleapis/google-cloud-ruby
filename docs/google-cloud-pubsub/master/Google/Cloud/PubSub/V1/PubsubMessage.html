@@ -192,6 +192,32 @@ for more information about message limits.</p>
       <li class="public ">
   <span class="summary_signature">
     
+      <a href="#ordering_key-instance_method" title="#ordering_key (instance method)">#<strong>ordering_key</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Identifies related messages for which publish order should be respected.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#publish_time-instance_method" title="#publish_time (instance method)">#<strong>publish_time</strong>  &#x21d2; Google::Protobuf::Timestamp </a>
     
 
@@ -268,10 +294,10 @@ for more information about message limits.</p>
       <pre class="lines">
 
 
-79</pre>
+88</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/doc/google/pubsub/v1/pubsub.rb', line 79</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/doc/google/pubsub/v1/pubsub.rb', line 88</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::PubSub::V1::PubsubMessage (class)">PubsubMessage</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -325,10 +351,10 @@ at least one attribute.</p>
       <pre class="lines">
 
 
-79</pre>
+88</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/doc/google/pubsub/v1/pubsub.rb', line 79</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/doc/google/pubsub/v1/pubsub.rb', line 88</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::PubSub::V1::PubsubMessage (class)">PubsubMessage</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -386,10 +412,77 @@ delivery. It must not be populated by the publisher in a <code>Publish</code> ca
       <pre class="lines">
 
 
-79</pre>
+88</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/doc/google/pubsub/v1/pubsub.rb', line 79</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/doc/google/pubsub/v1/pubsub.rb', line 88</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::PubSub::V1::PubsubMessage (class)">PubsubMessage</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="ordering_key=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="ordering_key-instance_method">
+  
+    #<strong>ordering_key</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Identifies related messages for which publish order should be respected.
+If a <code>Subscription</code> has <code>enable_message_ordering</code> set to <code>true</code>, messages
+published with the same <code>ordering_key</code> value will be delivered to
+subscribers in the order in which they are received by the Pub/Sub system.
+<b>EXPERIMENTAL:</b> This feature is part of a closed alpha release. This
+API might be changed in backward-incompatible ways and is not recommended
+for production use. It is not subject to any SLA or deprecation policy.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Identifies related messages for which publish order should be respected.
+If a <code>Subscription</code> has <code>enable_message_ordering</code> set to <code>true</code>, messages
+published with the same <code>ordering_key</code> value will be delivered to
+subscribers in the order in which they are received by the Pub/Sub system.
+<b>EXPERIMENTAL:</b> This feature is part of a closed alpha release. This
+API might be changed in backward-incompatible ways and is not recommended
+for production use. It is not subject to any SLA or deprecation policy.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+88</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/doc/google/pubsub/v1/pubsub.rb', line 88</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::PubSub::V1::PubsubMessage (class)">PubsubMessage</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -445,10 +538,10 @@ publisher in a <code>Publish</code> call.</p>
       <pre class="lines">
 
 
-79</pre>
+88</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/doc/google/pubsub/v1/pubsub.rb', line 79</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/doc/google/pubsub/v1/pubsub.rb', line 88</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::PubSub::V1::PubsubMessage (class)">PubsubMessage</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
