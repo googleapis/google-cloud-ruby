@@ -25,7 +25,7 @@ IF "%JOB_TYPE%"=="continuous" (
     SET git_commands="git fetch --depth=10000 && git checkout %KOKORO_GIT_COMMIT%"
 )
 
-CD %REPO_DIR% && ruby -e %clone_command% && %git_commands% && %run_kokoro% && SET /A ERROR_CODE=0
+ruby -e %clone_command% && CD %REPO_DIR% && %git_commands% && %run_kokoro% && SET /A ERROR_CODE=0
 
 
 EXIT /B %ERROR_CODE%
