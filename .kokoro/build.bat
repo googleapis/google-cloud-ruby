@@ -12,20 +12,20 @@ REM Ruby can't access the files in the mounted volume.
 REM Neither Powershell's Copy-Item nor xcopy correctly copy the symlinks.
 REM So we clone/checkout the repo ourselves rather than relying Kokoro.
 
-SET run_kokoro="bundle update && bundle exec rake kokoro:%JOB_TYPE%"
+SET run_kokoro=bundle update && bundle exec rake kokoro:%JOB_TYPE%
 
 SET "git_commands=ECHO %JOB_TYPE%"
 
 IF "%JOB_TYPE%"=="presubmit" (
-    SET git_commands="git fetch && git checkout %KOKORO_GIT_COMMIT%"
+    SET git_commands=git fetch && git checkout %KOKORO_GIT_COMMIT%
     SET clone_command="`git clone #{ENV['KOKORO_GITHUB_PULL_REQUEST_URL'].split('/pull')[0]}.git`"
 )
 IF "%JOB_TYPE%"=="continuous" (
-    SET git_commands="git fetch --depth=10000 && git checkout %KOKORO_GIT_COMMIT%"
+    SET git_commands=git fetch --depth=10000 && git checkout %KOKORO_GIT_COMMIT%
     SET clone_command="`git clone #{ENV['KOKORO_GITHUB_COMMIT_URL'].split('/commit')[0]}.git`"
 )
 IF "%JOB_TYPE%"=="nightly" (
-    SET git_commands="git fetch --depth=10000 && git checkout %KOKORO_GIT_COMMIT%"
+    SET git_commands=git fetch --depth=10000 && git checkout %KOKORO_GIT_COMMIT%
     SET clone_command="`git clone #{ENV['KOKORO_GITHUB_COMMIT_URL'].split('/commit')[0]}.git`"
 )
 
