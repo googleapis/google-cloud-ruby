@@ -184,6 +184,44 @@ describe Google::Cloud::Storage, :storage do
       resp["Content-Disposition"].must_equal "attachment; filename=\"google-cloud.png\""
     end
 
+    it "should create a signed read url to list objects with version v2" do
+      local_file = File.new files[:logo][:path]
+      file = bucket.create_file local_file, "CloudLogoSignedUrlGetBucket.png"
+
+      five_min_from_now = 5 * 60
+      url = bucket.signed_url method: "GET", expires: five_min_from_now
+
+      uri = URI url
+      uri.path.must_equal "/#{bucket_name}/"
+
+      http = Net::HTTP.new uri.host, uri.port
+      http.use_ssl = true
+      http.ca_file ||= ENV["SSL_CERT_FILE"] if ENV["SSL_CERT_FILE"]
+
+      resp = http.get uri.request_uri
+      resp.code.must_equal "200"
+      resp.body.must_match "CloudLogoSignedUrlGetBucket.png" # in XML
+    end
+
+    it "should create a signed read url to list objects with version v4" do
+      local_file = File.new files[:logo][:path]
+      file = bucket.create_file local_file, "CloudLogoSignedUrlGetBucket.png"
+
+      five_min_from_now = 5 * 60
+      url = bucket.signed_url method: "GET", expires: five_min_from_now, version: :v4
+
+      uri = URI url
+      uri.path.must_equal "/#{bucket_name}"
+
+      http = Net::HTTP.new uri.host, uri.port
+      http.use_ssl = true
+      http.ca_file ||= ENV["SSL_CERT_FILE"] if ENV["SSL_CERT_FILE"]
+
+      resp = http.get uri.request_uri
+      resp.code.must_equal "200"
+      resp.body.must_match "CloudLogoSignedUrlGetBucket.png" # in XML
+    end
+
     it "should create a signed POST url version v4" do
       five_min_from_now = 60 * 60
       url = bucket.signed_url "CloudLogoBucketSignedUrlPost.png",

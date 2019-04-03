@@ -21,6 +21,29 @@ describe Google::Cloud::Storage::Bucket, :signed_url, :v4, :mock_storage do
   
   let(:file_path) { "file.ext" }
 
+  it "accepts missing path argument to return URL for listing objects in bucket" do
+    Time.stub :now, Time.new(2012,1,1,0,0,0, "+00:00") do
+      signing_key_mock = Minitest::Mock.new
+      signing_key_mock.expect :sign, "native-signature", [OpenSSL::Digest::SHA256, "GOOG4-RSA-SHA256\n20120101T000000Z\n20120101/auto/storage/goog4_request\nf087e8d0ad6fca774e1a291a807a2a118c0d31d1b5980b4b8e0424d719b5ec09"]
+      credentials.issuer = "native_client_email"
+      credentials.signing_key = signing_key_mock
+
+      signed_url = bucket.signed_url version: :v4
+
+      signed_uri = URI(signed_url)
+      signed_uri.path.must_equal "/bucket"
+      signed_url_params = CGI::parse(signed_uri.query)
+      signed_url_params["X-Goog-Algorithm"].must_equal  ["GOOG4-RSA-SHA256"]
+      signed_url_params["X-Goog-Credential"].must_equal  ["native_client_email/20120101/auto/storage/goog4_request"]
+      signed_url_params["X-Goog-Date"].must_equal  ["20120101T000000Z"]
+      signed_url_params["X-Goog-Expires"].must_equal  ["604800"]
+      signed_url_params["X-Goog-SignedHeaders"].must_equal  ["host"]
+      signed_url_params["X-Goog-Signature"].must_equal  ["6e61746976652d7369676e6174757265"]
+
+      signing_key_mock.verify
+    end
+  end
+
   it "uses the credentials' issuer and signing_key to generate signed_url" do
     Time.stub :now, Time.new(2012,1,1,0,0,0, "+00:00") do
       signing_key_mock = Minitest::Mock.new

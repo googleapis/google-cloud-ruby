@@ -1375,7 +1375,8 @@ module Google
         # @see https://cloud.google.com/storage/docs/access-control#Signed-URLs
         #   Access Control Signed URLs guide
         #
-        # @param [String] path Path to the file in Google Cloud Storage.
+        # @param [String, nil] path Path to the file in Google Cloud Storage, or
+        #   `nil` to generate a URL for listing all files in the bucket.
         # @param [String] method The HTTP verb to be used with the signed URL.
         #   Signed URLs can be used
         #   with `GET`, `HEAD`, `PUT`, and `DELETE` requests. Default is `GET`.
@@ -1465,7 +1466,15 @@ module Google
         #                                version: :v4
         #   # Send the `x-goog-resumable:start` header with the POST request.
         #
-        def signed_url path, method: nil, expires: nil, content_type: nil,
+        # @example Omitting `path` for a URL to list all files in the bucket.
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "my-todo-app"
+        #   list_files_url = bucket.signed_url version: :v4
+        #
+        def signed_url path = nil, method: nil, expires: nil, content_type: nil,
                        content_md5: nil, headers: nil, issuer: nil,
                        client_email: nil, signing_key: nil, private_key: nil,
                        query: nil, version: :v2

@@ -21,6 +21,25 @@ describe Google::Cloud::Storage::Bucket, :signed_url, :mock_storage do
 
   let(:file_path) { "file.ext" }
 
+  it "accepts missing path argument to return URL for listing objects in bucket" do
+    Time.stub :now, Time.new(2012,1,1,0,0,0, "+00:00") do
+      signing_key_mock = Minitest::Mock.new
+      signing_key_mock.expect :sign, "native-signature", [OpenSSL::Digest::SHA256, "GET\n\n\n1325376300\n/bucket/"]
+      credentials.issuer = "native_client_email"
+      credentials.signing_key = signing_key_mock
+
+      signed_url = bucket.signed_url
+
+      signed_uri = URI(signed_url)
+      signed_uri.path.must_equal "/bucket/"
+      signed_url_params = CGI::parse(signed_uri.query)
+      signed_url_params["GoogleAccessId"].must_equal ["native_client_email"]
+      signed_url_params["Signature"].must_equal [Base64.strict_encode64("native-signature").delete("\n")]
+
+      signing_key_mock.verify
+    end
+  end
+
   it "uses the credentials' issuer and signing_key to generate signed_url" do
     Time.stub :now, Time.new(2012,1,1,0,0,0, "+00:00") do
       signing_key_mock = Minitest::Mock.new
