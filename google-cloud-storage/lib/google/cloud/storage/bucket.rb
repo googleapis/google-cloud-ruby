@@ -1420,18 +1420,17 @@ module Google
         #   bucket = storage.bucket "my-todo-app"
         #   shared_url = bucket.signed_url "avatars/heidi/400x400.png"
         #
-        # @example Any of the option parameters may be specified:
+        # @example Using the `expires` and `version` options:
         #   require "google/cloud/storage"
         #
         #   storage = Google::Cloud::Storage.new
         #
         #   bucket = storage.bucket "my-todo-app"
         #   shared_url = bucket.signed_url "avatars/heidi/400x400.png",
-        #                                  method: "PUT",
-        #                                  content_type: "image/png",
-        #                                  expires: 300 # 5 minutes from now
+        #                                  expires: 300, # 5 minutes from now
+        #                                  version: :v4
         #
-        # @example Using the issuer and signing_key options:
+        # @example Using the `issuer` and `signing_key` options:
         #   require "google/cloud/storage"
         #
         #   storage = Google::Cloud.storage
@@ -1442,7 +1441,7 @@ module Google
         #                                  issuer: "service-account@gcloud.com",
         #                                  signing_key: key
         #
-        # @example Using the headers option:
+        # @example Using the `headers` option:
         #   require "google/cloud/storage"
         #
         #   storage = Google::Cloud.storage
@@ -1453,6 +1452,18 @@ module Google
         #                                    "x-goog-acl" => "private",
         #                                    "x-goog-meta-foo" => "bar,baz"
         #                                  }
+        #
+        # @example POST URL `:v4` for use with `x-goog-resumable:start` header:
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "my-todo-app"
+        #   file = bucket.file "avatars/heidi/400x400.png", skip_lookup: true
+        #   post_url = bucket.signed_url "avatars/heidi/400x400.png",
+        #                                method: "POST",
+        #                                version: :v4
+        #   # Send the `x-goog-resumable:start` header with the POST request.
         #
         def signed_url path, method: nil, expires: nil, content_type: nil,
                        content_md5: nil, headers: nil, issuer: nil,
