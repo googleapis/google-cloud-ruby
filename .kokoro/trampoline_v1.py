@@ -17,6 +17,7 @@
 
 """Trampoline handles launching into a docker container for running tests."""
 
+import errno
 import os
 import shutil
 import subprocess
@@ -97,8 +98,24 @@ def create_docker_envfile(tmpdir):
     return env_file_name
 
 
+ 
+def copy(src, dest):
+    try:
+        shutil.copytree(src, dest)
+    except OSError as e:
+        # If the error was caused because the source wasn't a directory
+        if e.errno == errno.ENOTDIR:
+            shutil.copy(src, dest)
+        else:
+            print('Directory not copied. Error: %s' % e)
+
+def delete(src):
+    try:
+        shutil.rmtree(src)
+
+
+
 def run_docker(image, env_file, kokoro_artifacts_dir, build_file):
-    bash = '"C:\Program Files\Git\git-bash.exe"'
     docker_args = [
         'docker',
         'run',
@@ -127,11 +144,17 @@ def run_docker(image, env_file, kokoro_artifacts_dir, build_file):
 
 
 def main():
-    kokoro_artifacts_dir = os.environ['KOKORO_ARTIFACTS_DIR']
-    # Windows docker containers do not like non-C:\\ drives
-    kokoro_artifacts_dir = kokoro_artifacts_dir.replace(
+     # Windows docker containers do not like non-C:\\ drives
+    old_kokoro_artifacts_dir = os.environ['KOKORO_ARTIFACTS_DIR']
+    kokoro_artifacts_dir = old_kokoro_artifacts_dir.replace(
         "T:\\", "C:\\").replace("t:\\", "C:\\")
-    kokoro_gfile_dir = os.environ['KOKORO_GFILE_DIR']
+    copy(old_kokoro_artifacts_dir, kokoro_artifacts_dir)
+
+    old_kokoro_gfile_dir = os.environ['KOKORO_GFILE_DIR']
+    kokoro_gfile_dir =  old_kokoro_gfile_dir.replace(
+        "T:\\", "C:\\").replace("t:\\", "C:\\")
+    copy(old_kokoro_gfile_dir, kokoro_gfile_dir)
+
     service_account_key_file = os.path.join(
         kokoro_gfile_dir, 'kokoro-trampoline.service-account.json')
     image = os.environ['TRAMPOLINE_IMAGE']

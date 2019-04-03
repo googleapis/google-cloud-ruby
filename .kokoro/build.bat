@@ -9,17 +9,17 @@ POWERSHELL -C Copy-Item -Recurse C:\src\%REPO_DIR% C:\repo
 
 SET /A ERROR_CODE=0
 
-cd C:\repo
+CD C:\repo
 
 IF "%JOB_TYPE%"=="continuous" (
     git fetch --depth=10000
 )
 
-bundle update || CALL :set_error_code
-bundle exec rake kokoro:%JOB_TYPE% || CALL :set_error_code
+bundle update || CALL :SET_ERROR_CODE
+bundle exec rake kokoro:%JOB_TYPE% || CALL :SET_ERROR_CODE
 
 EXIT /B %ERROR_CODE%
 
-:set_error_code
+:SET_ERROR_CODE
 SET /A ERROR_CODE=1 
 EXIT /B 0
