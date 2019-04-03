@@ -9,9 +9,9 @@ SET /A ERROR_CODE=1
 CD C:\
 
 REM Rubocop expects native line endings
-REM TODO: set this in Dockerfile or change rubocop config
+REM TODO: set this in Dockerfile or change .rubocop.yml or skip rubocop on windows
 git config --system --unset core.autocrlf
-git config --global core.autocrlf auto
+git config --global core.autocrlf true
 
 REM Ruby can't access the files in the mounted volume.
 REM Neither Powershell's Copy-Item nor xcopy correctly copy the symlinks.
