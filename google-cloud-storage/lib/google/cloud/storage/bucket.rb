@@ -1480,8 +1480,9 @@ module Google
         def signed_url path = nil, method: nil, expires: nil, content_type: nil,
                        content_md5: nil, headers: nil, issuer: nil,
                        client_email: nil, signing_key: nil, private_key: nil,
-                       query: nil, version: :v2
+                       query: nil, version: nil
           ensure_service!
+          version ||= :v2
           case version.to_sym
           when :v2
             signer = File::SignerV2.from_bucket self, path
