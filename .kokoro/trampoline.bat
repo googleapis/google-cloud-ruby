@@ -1,4 +1,3 @@
-REM python %KOKORO_GFILE_DIR%\trampoline_v1.py
-REM TODO: upload and run from KOKORO_GFILE_DIR
+REM Run trampoline from gfile, so that the repos that copy this script can run
 
-python github\\%REPO_DIR%\\.kokoro\\trampoline_v1.py
+python %KOKORO_GFILE_DIR%\\trampoline_windows.py
