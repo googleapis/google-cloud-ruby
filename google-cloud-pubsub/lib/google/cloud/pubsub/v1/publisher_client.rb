@@ -237,52 +237,82 @@ module Google
             @create_topic = Google::Gax.create_api_call(
               @publisher_stub.method(:create_topic),
               defaults["create_topic"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @update_topic = Google::Gax.create_api_call(
               @publisher_stub.method(:update_topic),
               defaults["update_topic"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'topic.name' => request.topic.name}
+              end
             )
             @publish = Google::Gax.create_api_call(
               @publisher_stub.method(:publish),
               defaults["publish"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'topic' => request.topic}
+              end
             )
             @get_topic = Google::Gax.create_api_call(
               @publisher_stub.method(:get_topic),
               defaults["get_topic"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'topic' => request.topic}
+              end
             )
             @list_topics = Google::Gax.create_api_call(
               @publisher_stub.method(:list_topics),
               defaults["list_topics"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'project' => request.project}
+              end
             )
             @list_topic_subscriptions = Google::Gax.create_api_call(
               @publisher_stub.method(:list_topic_subscriptions),
               defaults["list_topic_subscriptions"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'topic' => request.topic}
+              end
             )
             @delete_topic = Google::Gax.create_api_call(
               @publisher_stub.method(:delete_topic),
               defaults["delete_topic"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'topic' => request.topic}
+              end
             )
             @set_iam_policy = Google::Gax.create_api_call(
               @iam_policy_stub.method(:set_iam_policy),
               defaults["set_iam_policy"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'resource' => request.resource}
+              end
             )
             @get_iam_policy = Google::Gax.create_api_call(
               @iam_policy_stub.method(:get_iam_policy),
               defaults["get_iam_policy"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'resource' => request.resource}
+              end
             )
             @test_iam_permissions = Google::Gax.create_api_call(
               @iam_policy_stub.method(:test_iam_permissions),
               defaults["test_iam_permissions"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'resource' => request.resource}
+              end
             )
           end
 
