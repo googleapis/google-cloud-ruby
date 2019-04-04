@@ -1353,14 +1353,12 @@ module Google
         alias combine compose
 
         ##
-        # Access without authentication can be granted to a File for a specified
-        # period of time. This URL uses a cryptographic signature of your
-        # credentials to access the file identified by `path`. A URL can be
-        # created for paths that do not yet exist. For instance, a URL can be
-        # created to `PUT` file contents to.
+        # Generates a signed URL. See [Signed
+        # URLs](https://cloud.google.com/storage/docs/access-control/signed-urls)
+        # for more information.
         #
-        # Generating a URL requires service account credentials, either by
-        # connecting with a service account when calling
+        # Generating a signed URL requires service account credentials, either
+        # by connecting with a service account when calling
         # {Google::Cloud.storage}, or by passing in the service account `issuer`
         # and `signing_key` values. Although the private key can be passed as a
         # string for convenience, creating and storing an instance of
@@ -1372,8 +1370,10 @@ module Google
         # steps in [Service Account Authentication](
         # https://cloud.google.com/storage/docs/authentication#service_accounts).
         #
-        # @see https://cloud.google.com/storage/docs/access-control#Signed-URLs
-        #   Access Control Signed URLs guide
+        # @see https://cloud.google.com/storage/docs/access-control/signed-urls
+        #   Signed URLs guide
+        # @see https://cloud.google.com/storage/docs/access-control/signed-urls#signing-resumable
+        #   Using signed URLs with resumable uploads
         #
         # @param [String, nil] path Path to the file in Google Cloud Storage, or
         #   `nil` to generate a URL for listing all files in the bucket.
@@ -1434,7 +1434,7 @@ module Google
         # @example Using the `issuer` and `signing_key` options:
         #   require "google/cloud/storage"
         #
-        #   storage = Google::Cloud.storage
+        #   storage = Google::Cloud::Storage.new
         #
         #   bucket = storage.bucket "my-todo-app"
         #   key = OpenSSL::PKey::RSA.new "-----BEGIN PRIVATE KEY-----\n..."
@@ -1445,7 +1445,7 @@ module Google
         # @example Using the `headers` option:
         #   require "google/cloud/storage"
         #
-        #   storage = Google::Cloud.storage
+        #   storage = Google::Cloud::Storage.new
         #
         #   bucket = storage.bucket "my-todo-app"
         #   shared_url = bucket.signed_url "avatars/heidi/400x400.png",
@@ -1454,17 +1454,20 @@ module Google
         #                                    "x-goog-meta-foo" => "bar,baz"
         #                                  }
         #
-        # @example POST URL `:v4` for use with `x-goog-resumable:start` header:
+        # @example Generating a signed URL for resumable upload:
         #   require "google/cloud/storage"
         #
         #   storage = Google::Cloud::Storage.new
         #
         #   bucket = storage.bucket "my-todo-app"
-        #   file = bucket.file "avatars/heidi/400x400.png", skip_lookup: true
-        #   post_url = bucket.signed_url "avatars/heidi/400x400.png",
-        #                                method: "POST",
-        #                                version: :v4
-        #   # Send the `x-goog-resumable:start` header with the POST request.
+        #   url = bucket.signed_url "avatars/heidi/400x400.png",
+        #                           method: "POST",
+        #                           content_type: "image/png",
+        #                           headers: {
+        #                             "x-goog-resumable" => "start"
+        #                           }
+        #   # Send the `x-goog-resumable:start` header and the content type
+        #   # with the resumable upload POST request.
         #
         # @example Omitting `path` for a URL to list all files in the bucket.
         #   require "google/cloud/storage"

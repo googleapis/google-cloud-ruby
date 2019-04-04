@@ -379,11 +379,9 @@ module Google
         end
 
         ##
-        # Access without authentication can be granted to a File for a specified
-        # period of time. This URL uses a cryptographic signature of your
-        # credentials to access the file identified by `path`. A URL can be
-        # created for paths that do not yet exist. For instance, a URL can be
-        # created to `PUT` file contents to.
+        # Generates a signed URL. See [Signed
+        # URLs](https://cloud.google.com/storage/docs/access-control/signed-urls)
+        # for more information.
         #
         # Generating a URL requires service account credentials, either by
         # connecting with a service account when calling
@@ -398,8 +396,10 @@ module Google
         # steps in [Service Account Authentication](
         # https://cloud.google.com/storage/docs/authentication#service_accounts).
         #
-        # @see https://cloud.google.com/storage/docs/access-control#Signed-URLs
-        #   Access Control Signed URLs guide
+        # @see https://cloud.google.com/storage/docs/access-control/signed-urls
+        #   Signed URLs guide
+        # @see https://cloud.google.com/storage/docs/access-control/signed-urls#signing-resumable
+        #   Using signed URLs with resumable uploads
         #
         # @param [String, nil] bucket Name of the bucket, or nil if URL for all
         #   buckets is desired.
@@ -463,7 +463,7 @@ module Google
         # @example Using the `issuer` and `signing_key` options:
         #   require "google/cloud/storage"
         #
-        #   storage = Google::Cloud.storage
+        #   storage = Google::Cloud::Storage.new
         #
         #   bucket_name = "my-todo-app"
         #   file_path = "avatars/heidi/400x400.png"
@@ -476,7 +476,7 @@ module Google
         # @example Using the `headers` option:
         #   require "google/cloud/storage"
         #
-        #   storage = Google::Cloud.storage
+        #   storage = Google::Cloud::Storage.new
         #
         #   bucket_name = "my-todo-app"
         #   file_path = "avatars/heidi/400x400.png"
@@ -486,17 +486,22 @@ module Google
         #                                     "x-goog-meta-foo" => "bar,baz"
         #                                   }
         #
-        # @example POST URL `:v4` for use with `x-goog-resumable:start` header:
+        # @example Generating a signed URL for resumable upload:
         #   require "google/cloud/storage"
         #
         #   storage = Google::Cloud::Storage.new
         #
         #   bucket_name = "my-todo-app"
         #   file_path = "avatars/heidi/400x400.png"
-        #   post_url = storage.signed_url bucket_name, file_path,
-        #                                 method: "POST",
-        #                                 version: :v4
-        #   # Send the `x-goog-resumable:start` header with the POST request.
+        #
+        #   url = storage.signed_url bucket_name, file_path,
+        #                            method: "POST",
+        #                            content_type: "image/png",
+        #                            headers: {
+        #                              "x-goog-resumable" => "start"
+        #                            }
+        #   # Send the `x-goog-resumable:start` header and the content type
+        #   # with the resumable upload POST request.
         #
         def signed_url bucket, path, method: nil, expires: nil,
                        content_type: nil, content_md5: nil, headers: nil,

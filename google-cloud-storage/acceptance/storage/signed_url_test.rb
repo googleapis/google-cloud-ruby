@@ -94,19 +94,39 @@ describe Google::Cloud::Storage, :storage do
       end
     end
 
+    it "should create a signed POST url version v2" do
+      url = storage.signed_url bucket.name,
+                               "CloudLogoProjectSignedUrlPost.png",
+                               method: "POST",
+                               content_type: "image/png", # Required for V2
+                               headers: { "x-goog-resumable" => "start" },
+                               version: :v2
+      puts "\n\n#{url}\n\n"
+      uri = URI.parse url
+      https = Net::HTTP.new uri.host,uri.port
+      https.use_ssl = true
+      headers = { "x-goog-resumable" => "start" }
+      req = Net::HTTP::Post.new uri.request_uri, headers
+      req.content_type = "image/png"    # Required for V2
+      resp = https.request(req)
+
+      resp.message.must_equal "Created"
+      resp.code.must_equal "201"
+    end
+
     it "should create a signed POST url version v4" do
       five_min_from_now = 60 * 60
       url = storage.signed_url bucket.name,
                                "CloudLogoProjectSignedUrlPost.png",
                                method: "POST",
                                expires: five_min_from_now,
+                               headers: { "x-goog-resumable" => "start" },
                                version: :v4
 
       uri = URI url
       https = Net::HTTP.new uri.host,uri.port
       https.use_ssl = true
       req = Net::HTTP::Post.new url, { "X-Goog-Resumable" => "start" }
-      req.body = "abc123"
       resp = https.request(req)
 
       resp.message.must_equal "Created"
