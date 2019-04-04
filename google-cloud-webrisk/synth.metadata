@@ -1,0 +1,32 @@
+{
+  "updateTime": "2019-04-04T18:01:58.873309Z",
+  "sources": [
+    {
+      "generator": {
+        "name": "artman",
+        "version": "0.16.23",
+        "dockerImage": "googleapis/artman@sha256:f3a3f88000dc1cd1b4826104c5574aa5c534f6793fbf66e888d11c0d7ef5762e"
+      }
+    },
+    {
+      "git": {
+        "name": "googleapis",
+        "remote": "https://github.com/googleapis/googleapis.git",
+        "sha": "b0b5b852f3b1687785d1732a72db7c1fb2ff352c",
+        "internalRef": "241958194"
+      }
+    }
+  ],
+  "destinations": [
+    {
+      "client": {
+        "source": "googleapis",
+        "apiName": "webrisk",
+        "apiVersion": "v1beta1",
+        "language": "ruby",
+        "generator": "gapic",
+        "config": "google/cloud/webrisk/artman_webrisk_v1beta1.yaml"
+      }
+    }
+  ]
+}
