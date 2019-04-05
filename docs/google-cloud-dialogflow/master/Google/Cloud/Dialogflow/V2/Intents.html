@@ -132,10 +132,10 @@ js:
     <p>An intent represents a mapping between input from a user and an action to
 be taken by your application. When you pass user input to the
 DetectIntent (or
-StreamingDetectIntent)
-method, the Dialogflow API analyzes the input and searches for a matching
-intent. If no match is found, the Dialogflow API returns a fallback intent
-(<code>is_fallback</code> = true).</p>
+StreamingDetectIntent) method, the
+Dialogflow API analyzes the input and searches
+for a matching intent. If no match is found, the Dialogflow API returns a
+fallback intent (<code>is_fallback</code> = true).</p>
 
 <p>You can provide additional information for the Dialogflow API to use to
 match user input to an intent by adding the following to your intent.</p>
@@ -144,7 +144,7 @@ match user input to an intent by adding the following to your intent.</p>
 <li><p><strong>Contexts</strong> - provide additional context for intent analysis. For
 example, if an intent is related to an object in your application that
 plays music, you can provide a context to determine when to match the
-intent if the user input is “turn it off”.  You can include a context
+intent if the user input is &quot;turn it off&quot;. You can include a context
 that matches the intent when there is previous user input of
 &quot;play music&quot;, and not when there is previous user input of
 &quot;turn on the light&quot;.</p></li>
@@ -159,7 +159,8 @@ Dialogflow API agent to better match intents.</p></li>
 </ul>
 
 <p>For more information about intents, see the
-<a href="https://dialogflow.com/docs/intents">Dialogflow documentation</a>.</p>
+<a href="https://cloud.google.com/dialogflow-enterprise/docs/intents-overview">Dialogflow
+documentation</a>.</p>
 
 
   </div>
@@ -284,7 +285,6 @@ custom error handling.</p>
       <pre class="lines">
 
 
-393
 394
 395
 396
@@ -304,10 +304,11 @@ custom error handling.</p>
 410
 411
 412
-413</pre>
+413
+414</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2.rb', line 393</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2.rb', line 394</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span> \
     <span class='label'>credentials:</span> <span class='kw'>nil</span><span class='comma'>,</span>

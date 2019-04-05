@@ -89,8 +89,7 @@ js:
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>The request message for
-Intents::DeleteIntent.</p>
+    <p>The request message for Intents::DeleteIntent.</p>
 
 
   </div>
@@ -153,7 +152,8 @@ Intents::DeleteIntent.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Required. The name of the intent to delete.
+    <p>Returns Required. The name of the intent to delete. If this intent has direct or
+indirect followup intents, we also delete them.
 Format: <code>projects/&lt;Project ID&gt;/agent/intents/&lt;Intent ID&gt;</code>.</p>
 
 
@@ -172,7 +172,8 @@ Format: <code>projects/&lt;Project ID&gt;/agent/intents/&lt;Intent ID&gt;</code>
       
       
         &mdash;
-        <div class='inline'><p>Required. The name of the intent to delete.
+        <div class='inline'><p>Required. The name of the intent to delete. If this intent has direct or
+indirect followup intents, we also delete them.
 Format: <code>projects/&lt;Project ID&gt;/agent/intents/&lt;Intent ID&gt;</code>.</p>
 </div>
       
@@ -186,10 +187,10 @@ Format: <code>projects/&lt;Project ID&gt;/agent/intents/&lt;Intent ID&gt;</code>
       <pre class="lines">
 
 
-644</pre>
+671</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/intent.rb', line 644</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/intent.rb', line 671</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dialogflow::V2::DeleteIntentRequest (class)">DeleteIntentRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>

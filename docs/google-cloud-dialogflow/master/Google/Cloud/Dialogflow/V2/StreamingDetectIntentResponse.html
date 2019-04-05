@@ -119,6 +119,58 @@ and optionally <code>webhook_status</code> if a WebHook was called.</p></li>
       <li class="public ">
   <span class="summary_signature">
     
+      <a href="#output_audio-instance_method" title="#output_audio (instance method)">#<strong>output_audio</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The audio data bytes encoded as specified in the request.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#output_audio_config-instance_method" title="#output_audio_config (instance method)">#<strong>output_audio_config</strong>  &#x21d2; Google::Cloud::Dialogflow::V2::OutputAudioConfig </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Instructs the speech synthesizer how to generate the output audio.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#query_result-instance_method" title="#query_result (instance method)">#<strong>query_result</strong>  &#x21d2; Google::Cloud::Dialogflow::V2::QueryResult </a>
     
 
@@ -230,9 +282,123 @@ and optionally <code>webhook_status</code> if a WebHook was called.</p></li>
     <h2>Instance Attribute Details</h2>
     
       
-      <span id="query_result=-instance_method"></span>
+      <span id="output_audio=-instance_method"></span>
       <div class="method_details first">
-  <h3 class="signature first" id="query_result-instance_method">
+  <h3 class="signature first" id="output_audio-instance_method">
+  
+    #<strong>output_audio</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns The audio data bytes encoded as specified in the request.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The audio data bytes encoded as specified in the request.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+300</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/session.rb', line 300</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dialogflow::V2::StreamingDetectIntentResponse (class)">StreamingDetectIntentResponse</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="output_audio_config=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="output_audio_config-instance_method">
+  
+    #<strong>output_audio_config</strong>  &#x21d2; <tt><span class='object_link'><a href="OutputAudioConfig.html" title="Google::Cloud::Dialogflow::V2::OutputAudioConfig (class)">Google::Cloud::Dialogflow::V2::OutputAudioConfig</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Instructs the speech synthesizer how to generate the output audio. This
+field is populated from the agent-level speech synthesizer configuration,
+if enabled.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="OutputAudioConfig.html" title="Google::Cloud::Dialogflow::V2::OutputAudioConfig (class)">Google::Cloud::Dialogflow::V2::OutputAudioConfig</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Instructs the speech synthesizer how to generate the output audio. This
+field is populated from the agent-level speech synthesizer configuration,
+if enabled.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+300</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/session.rb', line 300</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dialogflow::V2::StreamingDetectIntentResponse (class)">StreamingDetectIntentResponse</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="query_result=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="query_result-instance_method">
   
     #<strong>query_result</strong>  &#x21d2; <tt><span class='object_link'><a href="QueryResult.html" title="Google::Cloud::Dialogflow::V2::QueryResult (class)">Google::Cloud::Dialogflow::V2::QueryResult</a></span></tt> 
   
@@ -273,10 +439,10 @@ and optionally <code>webhook_status</code> if a WebHook was called.</p></li>
       <pre class="lines">
 
 
-259</pre>
+300</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/session.rb', line 259</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/session.rb', line 300</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dialogflow::V2::StreamingDetectIntentResponse (class)">StreamingDetectIntentResponse</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -328,10 +494,10 @@ and optionally <code>webhook_status</code> if a WebHook was called.</p></li>
       <pre class="lines">
 
 
-259</pre>
+300</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/session.rb', line 259</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/session.rb', line 300</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dialogflow::V2::StreamingDetectIntentResponse (class)">StreamingDetectIntentResponse</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -385,10 +551,10 @@ locate a response in the training example set or for reporting issues.</p>
       <pre class="lines">
 
 
-259</pre>
+300</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/session.rb', line 259</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/session.rb', line 300</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dialogflow::V2::StreamingDetectIntentResponse (class)">StreamingDetectIntentResponse</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -440,10 +606,10 @@ locate a response in the training example set or for reporting issues.</p>
       <pre class="lines">
 
 
-259</pre>
+300</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/session.rb', line 259</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/session.rb', line 300</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dialogflow::V2::StreamingDetectIntentResponse (class)">StreamingDetectIntentResponse</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>

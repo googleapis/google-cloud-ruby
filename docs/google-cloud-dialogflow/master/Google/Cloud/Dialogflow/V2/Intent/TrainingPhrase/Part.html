@@ -231,7 +231,8 @@ js:
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns Optional. The parameter name for the value extracted from the
-annotated part of the example.</p>
+annotated part of the example.
+This field is required for annotated parts of the training phrase.</p>
 
 
   </div>
@@ -250,7 +251,8 @@ annotated part of the example.</p>
       
         &mdash;
         <div class='inline'><p>Optional. The parameter name for the value extracted from the
-annotated part of the example.</p>
+annotated part of the example.
+This field is required for annotated parts of the training phrase.</p>
 </div>
       
     </li>
@@ -263,10 +265,10 @@ annotated part of the example.</p>
       <pre class="lines">
 
 
-140</pre>
+165</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/intent.rb', line 140</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/intent.rb', line 165</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dialogflow::V2::Intent::TrainingPhrase::Part (class)">Part</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -287,9 +289,8 @@ annotated part of the example.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Optional. The entity type name prefixed with <code>@</code>. This field is
-required for the annotated part of the text and applies only to
-examples.</p>
+    <p>Returns Optional. The entity type name prefixed with <code>@</code>.
+This field is required for annotated parts of the training phrase.</p>
 
 
   </div>
@@ -307,9 +308,8 @@ examples.</p>
       
       
         &mdash;
-        <div class='inline'><p>Optional. The entity type name prefixed with <code>@</code>. This field is
-required for the annotated part of the text and applies only to
-examples.</p>
+        <div class='inline'><p>Optional. The entity type name prefixed with <code>@</code>.
+This field is required for annotated parts of the training phrase.</p>
 </div>
       
     </li>
@@ -322,10 +322,10 @@ examples.</p>
       <pre class="lines">
 
 
-140</pre>
+165</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/intent.rb', line 140</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/intent.rb', line 165</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dialogflow::V2::Intent::TrainingPhrase::Part (class)">Part</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -346,9 +346,7 @@ examples.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Required. The text corresponding to the example or template,
-if there are no annotations. For
-annotated examples, it is the text for one of the example&#39;s parts.</p>
+    <p>Returns Required. The text for this part.</p>
 
 
   </div>
@@ -366,9 +364,7 @@ annotated examples, it is the text for one of the example&#39;s parts.</p>
       
       
         &mdash;
-        <div class='inline'><p>Required. The text corresponding to the example or template,
-if there are no annotations. For
-annotated examples, it is the text for one of the example&#39;s parts.</p>
+        <div class='inline'><p>Required. The text for this part.</p>
 </div>
       
     </li>
@@ -381,10 +377,10 @@ annotated examples, it is the text for one of the example&#39;s parts.</p>
       <pre class="lines">
 
 
-140</pre>
+165</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/intent.rb', line 140</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/intent.rb', line 165</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dialogflow::V2::Intent::TrainingPhrase::Part (class)">Part</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -405,8 +401,10 @@ annotated examples, it is the text for one of the example&#39;s parts.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Optional. Indicates whether the text was manually annotated by the
-developer.</p>
+    <p>Returns Optional. Indicates whether the text was manually annotated.
+This field is set to true when the Dialogflow Console is used to
+manually annotate the part. When creating an annotated part with the
+API, you must set this to true.</p>
 
 
   </div>
@@ -424,8 +422,10 @@ developer.</p>
       
       
         &mdash;
-        <div class='inline'><p>Optional. Indicates whether the text was manually annotated by the
-developer.</p>
+        <div class='inline'><p>Optional. Indicates whether the text was manually annotated.
+This field is set to true when the Dialogflow Console is used to
+manually annotate the part. When creating an annotated part with the
+API, you must set this to true.</p>
 </div>
       
     </li>
@@ -438,10 +438,10 @@ developer.</p>
       <pre class="lines">
 
 
-140</pre>
+165</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/intent.rb', line 140</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/intent.rb', line 165</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dialogflow::V2::Intent::TrainingPhrase::Part (class)">Part</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>

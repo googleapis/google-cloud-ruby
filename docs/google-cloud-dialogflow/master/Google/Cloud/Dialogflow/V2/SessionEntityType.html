@@ -253,9 +253,6 @@ type.</p>
       <pre class="lines">
 
 
-40
-41
-42
 43
 44
 45
@@ -271,10 +268,16 @@ type.</p>
 55
 56
 57
-58</pre>
+58
+59
+60
+61
+62
+63
+64</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/session_entity_type.rb', line 40</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/session_entity_type.rb', line 43</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dialogflow::V2::SessionEntityType (class)">SessionEntityType</a></span></span>
   <span class='comment'># The types of modifications for a session entity type.
@@ -288,10 +291,13 @@ type.</p>
 
     <span class='comment'># The collection of session entities extends the collection of entities in
 </span>    <span class='comment'># the corresponding developer entity type.
-</span>    <span class='comment'># Calls to `ListSessionEntityTypes`, `GetSessionEntityType`,
-</span>    <span class='comment'># `CreateSessionEntityType` and `UpdateSessionEntityType` return the full
-</span>    <span class='comment'># collection of entities from the developer entity type in the agent&#39;s
-</span>    <span class='comment'># default language and the session entity type.
+</span>    <span class='comment'>#
+</span>    <span class='comment'># Note: Even in this override mode calls to `ListSessionEntityTypes`,
+</span>    <span class='comment'># `GetSessionEntityType`, `CreateSessionEntityType` and
+</span>    <span class='comment'># `UpdateSessionEntityType` only return the additional entities added in
+</span>    <span class='comment'># this session entity type. If you want to get the supplemented list,
+</span>    <span class='comment'># please call {Google::Cloud::Dialogflow::V2::EntityTypes::GetEntityType EntityTypes::GetEntityType} on the developer entity type
+</span>    <span class='comment'># and merge.
 </span>    <span class='const'>ENTITY_OVERRIDE_MODE_SUPPLEMENT</span> <span class='op'>=</span> <span class='int'>2</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
@@ -346,9 +352,6 @@ supplement the developer entity type definition.</p>
       <pre class="lines">
 
 
-40
-41
-42
 43
 44
 45
@@ -364,10 +367,16 @@ supplement the developer entity type definition.</p>
 55
 56
 57
-58</pre>
+58
+59
+60
+61
+62
+63
+64</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/session_entity_type.rb', line 40</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/session_entity_type.rb', line 43</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dialogflow::V2::SessionEntityType (class)">SessionEntityType</a></span></span>
   <span class='comment'># The types of modifications for a session entity type.
@@ -381,10 +390,13 @@ supplement the developer entity type definition.</p>
 
     <span class='comment'># The collection of session entities extends the collection of entities in
 </span>    <span class='comment'># the corresponding developer entity type.
-</span>    <span class='comment'># Calls to `ListSessionEntityTypes`, `GetSessionEntityType`,
-</span>    <span class='comment'># `CreateSessionEntityType` and `UpdateSessionEntityType` return the full
-</span>    <span class='comment'># collection of entities from the developer entity type in the agent&#39;s
-</span>    <span class='comment'># default language and the session entity type.
+</span>    <span class='comment'>#
+</span>    <span class='comment'># Note: Even in this override mode calls to `ListSessionEntityTypes`,
+</span>    <span class='comment'># `GetSessionEntityType`, `CreateSessionEntityType` and
+</span>    <span class='comment'># `UpdateSessionEntityType` only return the additional entities added in
+</span>    <span class='comment'># this session entity type. If you want to get the supplemented list,
+</span>    <span class='comment'># please call {Google::Cloud::Dialogflow::V2::EntityTypes::GetEntityType EntityTypes::GetEntityType} on the developer entity type
+</span>    <span class='comment'># and merge.
 </span>    <span class='const'>ENTITY_OVERRIDE_MODE_SUPPLEMENT</span> <span class='op'>=</span> <span class='int'>2</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
@@ -410,6 +422,9 @@ supplement the developer entity type definition.</p>
 <code>projects/&lt;Project ID&gt;/agent/sessions/&lt;Session ID&gt;/entityTypes/&lt;Entity Type
 Display Name&gt;</code>.</p>
 
+<p><code>&lt;Entity Type Display Name&gt;</code> must be the display name of an existing entity
+type in the same agent that will be overridden or supplemented.</p>
+
 
   </div>
 </div>
@@ -429,6 +444,9 @@ Display Name&gt;</code>.</p>
         <div class='inline'><p>Required. The unique identifier of this session entity type. Format:
 <code>projects/&lt;Project ID&gt;/agent/sessions/&lt;Session ID&gt;/entityTypes/&lt;Entity Type
 Display Name&gt;</code>.</p>
+
+<p><code>&lt;Entity Type Display Name&gt;</code> must be the display name of an existing entity
+type in the same agent that will be overridden or supplemented.</p>
 </div>
       
     </li>
@@ -441,9 +459,6 @@ Display Name&gt;</code>.</p>
       <pre class="lines">
 
 
-40
-41
-42
 43
 44
 45
@@ -459,10 +474,16 @@ Display Name&gt;</code>.</p>
 55
 56
 57
-58</pre>
+58
+59
+60
+61
+62
+63
+64</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/session_entity_type.rb', line 40</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/session_entity_type.rb', line 43</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dialogflow::V2::SessionEntityType (class)">SessionEntityType</a></span></span>
   <span class='comment'># The types of modifications for a session entity type.
@@ -476,10 +497,13 @@ Display Name&gt;</code>.</p>
 
     <span class='comment'># The collection of session entities extends the collection of entities in
 </span>    <span class='comment'># the corresponding developer entity type.
-</span>    <span class='comment'># Calls to `ListSessionEntityTypes`, `GetSessionEntityType`,
-</span>    <span class='comment'># `CreateSessionEntityType` and `UpdateSessionEntityType` return the full
-</span>    <span class='comment'># collection of entities from the developer entity type in the agent&#39;s
-</span>    <span class='comment'># default language and the session entity type.
+</span>    <span class='comment'>#
+</span>    <span class='comment'># Note: Even in this override mode calls to `ListSessionEntityTypes`,
+</span>    <span class='comment'># `GetSessionEntityType`, `CreateSessionEntityType` and
+</span>    <span class='comment'># `UpdateSessionEntityType` only return the additional entities added in
+</span>    <span class='comment'># this session entity type. If you want to get the supplemented list,
+</span>    <span class='comment'># please call {Google::Cloud::Dialogflow::V2::EntityTypes::GetEntityType EntityTypes::GetEntityType} on the developer entity type
+</span>    <span class='comment'># and merge.
 </span>    <span class='const'>ENTITY_OVERRIDE_MODE_SUPPLEMENT</span> <span class='op'>=</span> <span class='int'>2</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>

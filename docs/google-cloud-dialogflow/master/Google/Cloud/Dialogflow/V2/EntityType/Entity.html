@@ -89,7 +89,7 @@ js:
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>Optional. Represents an entity.</p>
+    <p>An <strong>entity entry</strong> for an associated entity type.</p>
 
 
   </div>
@@ -178,8 +178,15 @@ js:
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Required. A collection of synonyms. For <code>KIND_LIST</code> entity types this
-must contain exactly one synonym equal to <code>value</code>.</p>
+    <p>Returns Required. A collection of value synonyms. For example, if the entity type
+is <em>vegetable</em>, and <code>value</code> is <em>scallions</em>, a synonym could be <em>green
+onions</em>.</p>
+
+<p>For <code>KIND_LIST</code> entity types:</p>
+
+<ul>
+<li>This collection must contain exactly one synonym equal to <code>value</code>.</li>
+</ul>
 
 
   </div>
@@ -197,8 +204,15 @@ must contain exactly one synonym equal to <code>value</code>.</p>
       
       
         &mdash;
-        <div class='inline'><p>Required. A collection of synonyms. For <code>KIND_LIST</code> entity types this
-must contain exactly one synonym equal to <code>value</code>.</p>
+        <div class='inline'><p>Required. A collection of value synonyms. For example, if the entity type
+is <em>vegetable</em>, and <code>value</code> is <em>scallions</em>, a synonym could be <em>green
+onions</em>.</p>
+
+<p>For <code>KIND_LIST</code> entity types:</p>
+
+<ul>
+<li>This collection must contain exactly one synonym equal to <code>value</code>.</li>
+</ul>
 </div>
       
     </li>
@@ -211,10 +225,10 @@ must contain exactly one synonym equal to <code>value</code>.</p>
       <pre class="lines">
 
 
-56</pre>
+67</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/entity_type.rb', line 56</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/entity_type.rb', line 67</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dialogflow::V2::EntityType::Entity (class)">Entity</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -235,12 +249,22 @@ must contain exactly one synonym equal to <code>value</code>.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Required.
-For <code>KIND_MAP</code> entity types:
-  A canonical name to be used in place of synonyms.
-For <code>KIND_LIST</code> entity types:
-  A string that can contain references to other entity types (with or
-  without aliases).</p>
+    <p>Returns Required. The primary value associated with this entity entry.
+For example, if the entity type is <em>vegetable</em>, the value could be
+<em>scallions</em>.</p>
+
+<p>For <code>KIND_MAP</code> entity types:</p>
+
+<ul>
+<li>A canonical value to be used in place of synonyms.</li>
+</ul>
+
+<p>For <code>KIND_LIST</code> entity types:</p>
+
+<ul>
+<li>A string that can contain references to other entity types (with or
+without aliases).</li>
+</ul>
 
 
   </div>
@@ -258,12 +282,22 @@ For <code>KIND_LIST</code> entity types:
       
       
         &mdash;
-        <div class='inline'><p>Required.
-For <code>KIND_MAP</code> entity types:
-  A canonical name to be used in place of synonyms.
-For <code>KIND_LIST</code> entity types:
-  A string that can contain references to other entity types (with or
-  without aliases).</p>
+        <div class='inline'><p>Required. The primary value associated with this entity entry.
+For example, if the entity type is <em>vegetable</em>, the value could be
+<em>scallions</em>.</p>
+
+<p>For <code>KIND_MAP</code> entity types:</p>
+
+<ul>
+<li>A canonical value to be used in place of synonyms.</li>
+</ul>
+
+<p>For <code>KIND_LIST</code> entity types:</p>
+
+<ul>
+<li>A string that can contain references to other entity types (with or
+without aliases).</li>
+</ul>
 </div>
       
     </li>
@@ -276,10 +310,10 @@ For <code>KIND_LIST</code> entity types:
       <pre class="lines">
 
 
-56</pre>
+67</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/entity_type.rb', line 56</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/entity_type.rb', line 67</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dialogflow::V2::EntityType::Entity (class)">Entity</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>

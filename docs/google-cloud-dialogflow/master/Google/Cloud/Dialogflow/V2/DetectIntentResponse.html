@@ -107,6 +107,58 @@ js:
       <li class="public ">
   <span class="summary_signature">
     
+      <a href="#output_audio-instance_method" title="#output_audio (instance method)">#<strong>output_audio</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The audio data bytes encoded as specified in the request.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#output_audio_config-instance_method" title="#output_audio_config (instance method)">#<strong>output_audio_config</strong>  &#x21d2; Google::Cloud::Dialogflow::V2::OutputAudioConfig </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The config used by the speech synthesizer to generate the output audio.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#query_result-instance_method" title="#query_result (instance method)">#<strong>query_result</strong>  &#x21d2; Google::Cloud::Dialogflow::V2::QueryResult </a>
     
 
@@ -124,7 +176,7 @@ js:
   
 
   
-    <span class="summary_desc"><div class='inline'><p>The results of the conversational query or event processing.</p>
+    <span class="summary_desc"><div class='inline'><p>The selected results of the conversational query or event processing.</p>
 </div></span>
   
 </li>
@@ -192,9 +244,129 @@ js:
     <h2>Instance Attribute Details</h2>
     
       
-      <span id="query_result=-instance_method"></span>
+      <span id="output_audio=-instance_method"></span>
       <div class="method_details first">
-  <h3 class="signature first" id="query_result-instance_method">
+  <h3 class="signature first" id="output_audio-instance_method">
+  
+    #<strong>output_audio</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns The audio data bytes encoded as specified in the request.
+Note: The output audio is generated based on the values of default platform
+text responses found in the <code>query_result.fulfillment_messages</code> field. If
+multiple default text responses exist, they will be concatenated when
+generating audio. If no default platform text responses exist, the
+generated audio content will be empty.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The audio data bytes encoded as specified in the request.
+Note: The output audio is generated based on the values of default platform
+text responses found in the <code>query_result.fulfillment_messages</code> field. If
+multiple default text responses exist, they will be concatenated when
+generating audio. If no default platform text responses exist, the
+generated audio content will be empty.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+76</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/session.rb', line 76</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dialogflow::V2::DetectIntentResponse (class)">DetectIntentResponse</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="output_audio_config=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="output_audio_config-instance_method">
+  
+    #<strong>output_audio_config</strong>  &#x21d2; <tt><span class='object_link'><a href="OutputAudioConfig.html" title="Google::Cloud::Dialogflow::V2::OutputAudioConfig (class)">Google::Cloud::Dialogflow::V2::OutputAudioConfig</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns The config used by the speech synthesizer to generate the output audio.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="OutputAudioConfig.html" title="Google::Cloud::Dialogflow::V2::OutputAudioConfig (class)">Google::Cloud::Dialogflow::V2::OutputAudioConfig</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The config used by the speech synthesizer to generate the output audio.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+76</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/session.rb', line 76</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dialogflow::V2::DetectIntentResponse (class)">DetectIntentResponse</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="query_result=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="query_result-instance_method">
   
     #<strong>query_result</strong>  &#x21d2; <tt><span class='object_link'><a href="QueryResult.html" title="Google::Cloud::Dialogflow::V2::QueryResult (class)">Google::Cloud::Dialogflow::V2::QueryResult</a></span></tt> 
   
@@ -204,7 +376,8 @@ js:
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns The results of the conversational query or event processing.</p>
+    <p>Returns The selected results of the conversational query or event processing.
+See <code>alternative_query_results</code> for additional potential results.</p>
 
 
   </div>
@@ -222,7 +395,8 @@ js:
       
       
         &mdash;
-        <div class='inline'><p>The results of the conversational query or event processing.</p>
+        <div class='inline'><p>The selected results of the conversational query or event processing.
+See <code>alternative_query_results</code> for additional potential results.</p>
 </div>
       
     </li>
@@ -235,10 +409,10 @@ js:
       <pre class="lines">
 
 
-60</pre>
+76</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/session.rb', line 60</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/session.rb', line 76</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dialogflow::V2::DetectIntentResponse (class)">DetectIntentResponse</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -292,10 +466,10 @@ locate a response in the training example set or for reporting issues.</p>
       <pre class="lines">
 
 
-60</pre>
+76</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/session.rb', line 60</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/session.rb', line 76</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dialogflow::V2::DetectIntentResponse (class)">DetectIntentResponse</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -316,8 +490,7 @@ locate a response in the training example set or for reporting issues.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Specifies the status of the webhook request. <code>webhook_status</code>
-is never populated in webhook requests.</p>
+    <p>Returns Specifies the status of the webhook request.</p>
 
 
   </div>
@@ -335,8 +508,7 @@ is never populated in webhook requests.</p>
       
       
         &mdash;
-        <div class='inline'><p>Specifies the status of the webhook request. <code>webhook_status</code>
-is never populated in webhook requests.</p>
+        <div class='inline'><p>Specifies the status of the webhook request.</p>
 </div>
       
     </li>
@@ -349,10 +521,10 @@ is never populated in webhook requests.</p>
       <pre class="lines">
 
 
-60</pre>
+76</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/session.rb', line 60</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/session.rb', line 76</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dialogflow::V2::DetectIntentResponse (class)">DetectIntentResponse</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>

@@ -1,6 +1,6 @@
 ---
 layout: yard_main
-title: "Module: Google::Cloud::Dialogflow::V2::SessionEntityType::EntityOverrideMode - Dialogflow"
+title: "Module: Google::Cloud::Dialogflow::V2::OutputAudioEncoding - Dialogflow"
 css: 
   - /docs/css/style.css
   - /docs/css/common.css
@@ -10,13 +10,13 @@ js:
   - /js/yard-main.js
 ---
 <script type="text/javascript" charset="utf-8">
-  pathId = "Google::Cloud::Dialogflow::V2::SessionEntityType::EntityOverrideMode";
-  relpath = '../../../../../';
+  pathId = "Google::Cloud::Dialogflow::V2::OutputAudioEncoding";
+  relpath = '../../../../';
 </script>
 
 
 <div class="nav_wrap">
-  <iframe id="nav" src="../../../../../class_list.html?1"></iframe>
+  <iframe id="nav" src="../../../../class_list.html?1"></iframe>
   <div id="resizer"></div>
 </div>
 
@@ -24,17 +24,17 @@ js:
   <div id="header">
     <div id="menu">
   
-    <a href="../../../../../_index.html">Index (E)</a> &raquo;
-    <span class='title'><span class='object_link'><a href="../../../../../Google.html" title="Google (module)">Google</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../../Dialogflow.html" title="Google::Cloud::Dialogflow (module)">Dialogflow</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../V2.html" title="Google::Cloud::Dialogflow::V2 (module)">V2</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../SessionEntityType.html" title="Google::Cloud::Dialogflow::V2::SessionEntityType (class)">SessionEntityType</a></span></span>
+    <a href="../../../../_index.html">Index (O)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../Dialogflow.html" title="Google::Cloud::Dialogflow (module)">Dialogflow</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../V2.html" title="Google::Cloud::Dialogflow::V2 (module)">V2</a></span></span>
      &raquo; 
-    <span class="title">EntityOverrideMode</span>
+    <span class="title">OutputAudioEncoding</span>
   
 </div>
 
     <div id="search">
   
     <a class="full_list_link" id="class_list_link"
-        href="../../../../../class_list.html">
+        href="../../../../class_list.html">
 
         <svg width="24" height="24">
           <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
@@ -47,7 +47,7 @@ js:
     <div class="clear"></div>
   </div>
 
-  <div id="content"><h1>Module: Google::Cloud::Dialogflow::V2::SessionEntityType::EntityOverrideMode
+  <div id="content"><h1>Module: Google::Cloud::Dialogflow::V2::OutputAudioEncoding
   
   
   
@@ -66,14 +66,14 @@ js:
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/session_entity_type.rb</dd>
+    <dd>lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/audio_config.rb</dd>
   </dl>
   
 </div>
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>The types of modifications for a session entity type.</p>
+    <p>Audio encoding of the output audio format in Text-To-Speech.</p>
 
 
   </div>
@@ -90,10 +90,10 @@ js:
 
     <dl class="constants">
       
-        <dt id="ENTITY_OVERRIDE_MODE_UNSPECIFIED-constant" class="">ENTITY_OVERRIDE_MODE_UNSPECIFIED =
+        <dt id="OUTPUT_AUDIO_ENCODING_UNSPECIFIED-constant" class="">OUTPUT_AUDIO_ENCODING_UNSPECIFIED =
           <div class="docstring">
   <div class="discussion">
-    <p>Not specified. This value should be never used.</p>
+    <p>Not specified.</p>
 
 
   </div>
@@ -105,11 +105,11 @@ js:
         </dt>
         <dd><pre class="code"><span class='int'>0</span></pre></dd>
       
-        <dt id="ENTITY_OVERRIDE_MODE_OVERRIDE-constant" class="">ENTITY_OVERRIDE_MODE_OVERRIDE =
+        <dt id="OUTPUT_AUDIO_ENCODING_LINEAR_16-constant" class="">OUTPUT_AUDIO_ENCODING_LINEAR_16 =
           <div class="docstring">
   <div class="discussion">
-    <p>The collection of session entities overrides the collection of entities
-in the corresponding developer entity type.</p>
+    <p>Uncompressed 16-bit signed little-endian samples (Linear PCM).
+Audio content returned as LINEAR16 also contains a WAV header.</p>
 
 
   </div>
@@ -121,18 +121,10 @@ in the corresponding developer entity type.</p>
         </dt>
         <dd><pre class="code"><span class='int'>1</span></pre></dd>
       
-        <dt id="ENTITY_OVERRIDE_MODE_SUPPLEMENT-constant" class="">ENTITY_OVERRIDE_MODE_SUPPLEMENT =
+        <dt id="OUTPUT_AUDIO_ENCODING_MP3-constant" class="">OUTPUT_AUDIO_ENCODING_MP3 =
           <div class="docstring">
   <div class="discussion">
-    <p>The collection of session entities extends the collection of entities in
-the corresponding developer entity type.</p>
-
-<p>Note: Even in this override mode calls to <code>ListSessionEntityTypes</code>,
-<code>GetSessionEntityType</code>, <code>CreateSessionEntityType</code> and
-<code>UpdateSessionEntityType</code> only return the additional entities added in
-this session entity type. If you want to get the supplemented list,
-please call EntityTypes::GetEntityType on the developer entity type
-and merge.</p>
+    <p>MP3 audio.</p>
 
 
   </div>
@@ -143,6 +135,24 @@ and merge.</p>
 </div>
         </dt>
         <dd><pre class="code"><span class='int'>2</span></pre></dd>
+      
+        <dt id="OUTPUT_AUDIO_ENCODING_OGG_OPUS-constant" class="">OUTPUT_AUDIO_ENCODING_OGG_OPUS =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Opus encoded audio wrapped in an ogg container. The result will be a
+file which can be played natively on Android, and in browsers (at least
+Chrome and Firefox). The quality of the encoding is considerably higher
+than MP3 while using approximately the same bitrate.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>3</span></pre></dd>
       
     </dl>
   

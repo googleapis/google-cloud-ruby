@@ -92,10 +92,10 @@ js:
     <p>An intent represents a mapping between input from a user and an action to
 be taken by your application. When you pass user input to the
 DetectIntent (or
-StreamingDetectIntent)
-method, the Dialogflow API analyzes the input and searches for a matching
-intent. If no match is found, the Dialogflow API returns a fallback intent
-(<code>is_fallback</code> = true).</p>
+StreamingDetectIntent) method, the
+Dialogflow API analyzes the input and searches
+for a matching intent. If no match is found, the Dialogflow API returns a
+fallback intent (<code>is_fallback</code> = true).</p>
 
 <p>You can provide additional information for the Dialogflow API to use to
 match user input to an intent by adding the following to your intent.</p>
@@ -104,7 +104,7 @@ match user input to an intent by adding the following to your intent.</p>
 <li><p><strong>Contexts</strong> - provide additional context for intent analysis. For
 example, if an intent is related to an object in your application that
 plays music, you can provide a context to determine when to match the
-intent if the user input is “turn it off”.  You can include a context
+intent if the user input is &quot;turn it off&quot;. You can include a context
 that matches the intent when there is previous user input of
 &quot;play music&quot;, and not when there is previous user input of
 &quot;turn on the light&quot;.</p></li>
@@ -119,7 +119,8 @@ Dialogflow API agent to better match intents.</p></li>
 </ul>
 
 <p>For more information about intents, see the
-<a href="https://dialogflow.com/docs/intents">Dialogflow documentation</a>.</p>
+<a href="https://cloud.google.com/dialogflow-enterprise/docs/intents-overview">Dialogflow
+documentation</a>.</p>
 
 
   </div>
@@ -201,7 +202,8 @@ this service.</p>
 </div>
         </dt>
         <dd><pre class="code"><span class='lbracket'>[</span>
-  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>https://www.googleapis.com/auth/cloud-platform</span><span class='tstring_end'>&quot;</span></span>
+  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>https://www.googleapis.com/auth/cloud-platform</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>https://www.googleapis.com/auth/dialogflow</span><span class='tstring_end'>&quot;</span></span>
 <span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_freeze'>freeze</span></pre></dd>
       
     </dl>
@@ -385,7 +387,7 @@ this service.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Deletes the specified intent.</p>
+    <span class="summary_desc"><div class='inline'><p>Deletes the specified intent and its direct or indirect followup intents.</p>
 </div></span>
   
 </li>
@@ -627,8 +629,6 @@ custom error handling.</p>
       <pre class="lines">
 
 
-185
-186
 187
 188
 189
@@ -766,10 +766,12 @@ custom error handling.</p>
 321
 322
 323
-324</pre>
+324
+325
+326</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/intents_client.rb', line 185</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/intents_client.rb', line 187</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span> \
     <span class='label'>credentials:</span> <span class='kw'>nil</span><span class='comma'>,</span>
@@ -987,15 +989,15 @@ custom error handling.</p>
       <pre class="lines">
 
 
-149
-150
 151
 152
 153
-154</pre>
+154
+155
+156</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/intents_client.rb', line 149</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/intents_client.rb', line 151</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_agent_path'>agent_path</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span> <span class='id identifier rubyid_agent'>agent</span>
   <span class='const'>AGENT_PATH_TEMPLATE</span><span class='period'>.</span><span class='id identifier rubyid_render'>render</span><span class='lparen'>(</span>
@@ -1072,15 +1074,15 @@ custom error handling.</p>
       <pre class="lines">
 
 
-138
-139
 140
 141
 142
-143</pre>
+143
+144
+145</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/intents_client.rb', line 138</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/intents_client.rb', line 140</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_intent_path'>intent_path</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span> <span class='id identifier rubyid_intent'>intent</span>
   <span class='const'>INTENT_PATH_TEMPLATE</span><span class='period'>.</span><span class='id identifier rubyid_render'>render</span><span class='lparen'>(</span>
@@ -1146,14 +1148,14 @@ custom error handling.</p>
       <pre class="lines">
 
 
-128
-129
 130
 131
-132</pre>
+132
+133
+134</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/intents_client.rb', line 128</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/intents_client.rb', line 130</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_project_agent_path'>project_agent_path</span> <span class='id identifier rubyid_project'>project</span>
   <span class='const'>PROJECT_AGENT_PATH_TEMPLATE</span><span class='period'>.</span><span class='id identifier rubyid_render'>render</span><span class='lparen'>(</span>
@@ -1323,12 +1325,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-727
-728
-729
-730
-731
-732
 733
 734
 735
@@ -1341,10 +1337,16 @@ retries, etc.</p>
 742
 743
 744
-745</pre>
+745
+746
+747
+748
+749
+750
+751</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/intents_client.rb', line 727</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/intents_client.rb', line 733</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_batch_delete_intents'>batch_delete_intents</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -1383,8 +1385,7 @@ retries, etc.</p>
   <div class="discussion">
     <p>Updates/Creates multiple intents in the specified agent.</p>
 
-<p>Operation <response:
-<span class='object_link'><a href="BatchUpdateIntentsResponse.html" title="Google::Cloud::Dialogflow::V2::BatchUpdateIntentsResponse (class)">BatchUpdateIntentsResponse</a></span>></p>
+<p>Operation <response: <span class='object_link'><a href="BatchUpdateIntentsResponse.html" title="Google::Cloud::Dialogflow::V2::BatchUpdateIntentsResponse (class)">BatchUpdateIntentsResponse</a></span>></p>
 
 
   </div>
@@ -1462,9 +1463,10 @@ Format: <code>projects/&lt;Project ID&gt;/agent</code>.</p>
         &mdash;
         <div class='inline'><p>Optional. The language of training phrases, parameters and rich messages
 defined in <code>intents</code>. If not specified, the agent&#39;s default language is
-used. <a href="https://dialogflow.com/docs/reference/language">More than a dozen
-languages</a> are supported.
-Note: languages must be enabled in the agent, before they can be used.</p>
+used. <a href="https://cloud.google.com/dialogflow-enterprise/docs/reference/language">Many
+languages</a>
+are supported. Note: languages must be enabled in the agent before they can
+be used.</p>
 </div>
       
     </li>
@@ -1590,12 +1592,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-646
-647
-648
-649
-650
-651
 652
 653
 654
@@ -1616,10 +1612,16 @@ retries, etc.</p>
 669
 670
 671
-672</pre>
+672
+673
+674
+675
+676
+677
+678</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/intents_client.rb', line 646</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/intents_client.rb', line 652</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_batch_update_intents'>batch_update_intents</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -1733,9 +1735,10 @@ can also be provided.</p>
         &mdash;
         <div class='inline'><p>Optional. The language of training phrases, parameters and rich messages
 defined in <code>intent</code>. If not specified, the agent&#39;s default language is
-used. <a href="https://dialogflow.com/docs/reference/language">More than a dozen
-languages</a> are supported.
-Note: languages must be enabled in the agent, before they can be used.</p>
+used. <a href="https://cloud.google.com/dialogflow-enterprise/docs/reference/language">Many
+languages</a>
+are supported. Note: languages must be enabled in the agent before they can
+be used.</p>
 </div>
       
     </li>
@@ -1853,11 +1856,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-473
-474
-475
-476
-477
 478
 479
 480
@@ -1868,10 +1866,15 @@ retries, etc.</p>
 485
 486
 487
-488</pre>
+488
+489
+490
+491
+492
+493</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/intents_client.rb', line 473</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/intents_client.rb', line 478</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_intent'>create_intent</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -1905,7 +1908,7 @@ retries, etc.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Deletes the specified intent.</p>
+    <p>Deletes the specified intent and its direct or indirect followup intents.</p>
 
 
   </div>
@@ -1936,7 +1939,8 @@ retries, etc.</p>
       
       
         &mdash;
-        <div class='inline'><p>Required. The name of the intent to delete.
+        <div class='inline'><p>Required. The name of the intent to delete. If this intent has direct or
+indirect followup intents, we also delete them.
 Format: <code>projects/&lt;Project ID&gt;/agent/intents/&lt;Intent ID&gt;</code>.</p>
 </div>
       
@@ -2031,20 +2035,20 @@ retries, etc.</p>
       <pre class="lines">
 
 
-565
-566
-567
-568
-569
-570
 571
 572
 573
 574
-575</pre>
+575
+576
+577
+578
+579
+580
+581</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/intents_client.rb', line 565</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/intents_client.rb', line 571</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete_intent'>delete_intent</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -2122,9 +2126,10 @@ Format: <code>projects/&lt;Project ID&gt;/agent/intents/&lt;Intent ID&gt;</code>
         &mdash;
         <div class='inline'><p>Optional. The language to retrieve training phrases, parameters and rich
 messages for. If not specified, the agent&#39;s default language is used.
-<a href="https://dialogflow.com/docs/reference/language">More than a dozen
-languages</a> are supported.
-Note: languages must be enabled in the agent, before they can be used.</p>
+<a href="https://cloud.google.com/dialogflow-enterprise/docs/reference/language">Many
+languages</a>
+are supported. Note: languages must be enabled in the agent before they can
+be used.</p>
 </div>
       
     </li>
@@ -2242,10 +2247,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-423
-424
-425
-426
 427
 428
 429
@@ -2255,10 +2256,14 @@ retries, etc.</p>
 433
 434
 435
-436</pre>
+436
+437
+438
+439
+440</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/intents_client.rb', line 423</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/intents_client.rb', line 427</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_intent'>get_intent</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -2351,9 +2356,10 @@ Format: <code>projects/&lt;Project ID&gt;/agent</code>.</p>
         &mdash;
         <div class='inline'><p>Optional. The language to list training phrases, parameters and rich
 messages for. If not specified, the agent&#39;s default language is used.
-<a href="https://dialogflow.com/docs/reference/language">More than a dozen
-languages</a> are supported.
-Note: languages must be enabled in the agent before they can be used.</p>
+<a href="https://cloud.google.com/dialogflow-enterprise/docs/reference/language">Many
+languages</a>
+are supported. Note: languages must be enabled in the agent before they can
+be used.</p>
 </div>
       
     </li>
@@ -2497,9 +2503,6 @@ object.</p>
       <pre class="lines">
 
 
-378
-379
-380
 381
 382
 383
@@ -2512,10 +2515,13 @@ object.</p>
 390
 391
 392
-393</pre>
+393
+394
+395
+396</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/intents_client.rb', line 378</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/intents_client.rb', line 381</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_intents'>list_intents</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -2586,7 +2592,6 @@ object.</p>
       
         &mdash;
         <div class='inline'><p>Required. The intent to update.
-Format: <code>projects/&lt;Project ID&gt;/agent/intents/&lt;Intent ID&gt;</code>.
 A hash of the same form as <code>Google::Cloud::Dialogflow::V2::Intent</code>
 can also be provided.</p>
 </div>
@@ -2605,9 +2610,10 @@ can also be provided.</p>
         &mdash;
         <div class='inline'><p>Optional. The language of training phrases, parameters and rich messages
 defined in <code>intent</code>. If not specified, the agent&#39;s default language is
-used. <a href="https://dialogflow.com/docs/reference/language">More than a dozen
-languages</a> are supported.
-Note: languages must be enabled in the agent, before they can be used.</p>
+used. <a href="https://cloud.google.com/dialogflow-enterprise/docs/reference/language">Many
+languages</a>
+are supported. Note: languages must be enabled in the agent before they can
+be used.</p>
 </div>
       
     </li>
@@ -2742,11 +2748,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-529
-530
-531
-532
-533
 534
 535
 536
@@ -2757,10 +2758,15 @@ retries, etc.</p>
 541
 542
 543
-544</pre>
+544
+545
+546
+547
+548
+549</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/intents_client.rb', line 529</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/intents_client.rb', line 534</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update_intent'>update_intent</span> \
     <span class='id identifier rubyid_intent'>intent</span><span class='comma'>,</span>

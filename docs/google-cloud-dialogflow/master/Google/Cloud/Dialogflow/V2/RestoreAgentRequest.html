@@ -89,8 +89,7 @@ js:
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>The request message for
-Agents::RestoreAgent.</p>
+    <p>The request message for Agents::RestoreAgent.</p>
 
 
   </div>
@@ -209,16 +208,17 @@ Agents::RestoreAgent.</p>
 
 <p>Example for how to restore an agent via the command line:</p>
 
-<p>curl \
-  &#39;<a href="https://dialogflow.googleapis.com/v2/projects/">https://dialogflow.googleapis.com/v2/projects/</a><project_name>/agent:restore\
+<pre class="code ruby"><code class="ruby">curl \
+  &#39;https://dialogflow.googleapis.com/v2/projects/&lt;project_name&gt;/agent:restore\
    -X POST \
-   -H &#39;Authorization: Bearer &#39;$(gcloud auth print-access-token) \
+   -H &#39;Authorization: Bearer &#39;$(gcloud auth application-default
+   print-access-token) \
    -H &#39;Accept: application/json&#39; \
    -H &#39;Content-Type: application/json&#39; \
    --compressed \
    --data-binary &quot;{
-       &#39;agentContent&#39;: &#39;$(cat <agent zip file> | base64 -w 0)&#39;
-   }&quot; \</p>
+       &#39;agentContent&#39;: &#39;$(cat &lt;agent zip file&gt; | base64 -w 0)&#39;
+   }&quot;</code></pre>
 
 
   </div>
@@ -240,16 +240,17 @@ Agents::RestoreAgent.</p>
 
 <p>Example for how to restore an agent via the command line:</p>
 
-<p>curl \
-  &#39;<a href="https://dialogflow.googleapis.com/v2/projects/">https://dialogflow.googleapis.com/v2/projects/</a><project_name>/agent:restore\
+<pre class="code ruby"><code class="ruby">curl \
+  &#39;https://dialogflow.googleapis.com/v2/projects/&lt;project_name&gt;/agent:restore\
    -X POST \
-   -H &#39;Authorization: Bearer &#39;$(gcloud auth print-access-token) \
+   -H &#39;Authorization: Bearer &#39;$(gcloud auth application-default
+   print-access-token) \
    -H &#39;Accept: application/json&#39; \
    -H &#39;Content-Type: application/json&#39; \
    --compressed \
    --data-binary &quot;{
-       &#39;agentContent&#39;: &#39;$(cat <agent zip file> | base64 -w 0)&#39;
-   }&quot; \</p>
+       &#39;agentContent&#39;: &#39;$(cat &lt;agent zip file&gt; | base64 -w 0)&#39;
+   }&quot;</code></pre>
 </div>
       
     </li>
@@ -262,10 +263,10 @@ Agents::RestoreAgent.</p>
       <pre class="lines">
 
 
-217</pre>
+214</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/agent.rb', line 217</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/agent.rb', line 214</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dialogflow::V2::RestoreAgentRequest (class)">RestoreAgentRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -319,10 +320,10 @@ Note: The URI must start with &quot;gs://&quot;.</p>
       <pre class="lines">
 
 
-217</pre>
+214</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/agent.rb', line 217</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/agent.rb', line 214</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dialogflow::V2::RestoreAgentRequest (class)">RestoreAgentRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -376,10 +377,10 @@ Format: <code>projects/&lt;Project ID&gt;</code>.</p>
       <pre class="lines">
 
 
-217</pre>
+214</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/agent.rb', line 217</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/agent.rb', line 214</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dialogflow::V2::RestoreAgentRequest (class)">RestoreAgentRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>

@@ -89,8 +89,7 @@ js:
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>The request message for
-Agents::ExportAgent.</p>
+    <p>The request message for Agents::ExportAgent.</p>
 
 
   </div>
@@ -179,9 +178,11 @@ Agents::ExportAgent.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Optional. The Google Cloud Storage URI to export the agent to.
-Note: The URI must start with
-&quot;gs://&quot;. If left unspecified, the serialized agent is returned inline.</p>
+    <p>Returns Optional. The
+<a href="https://cloud.google.com/storage/docs/">Google Cloud Storage</a>
+URI to export the agent to.
+The format of this URI must be <code>gs://&lt;bucket-name&gt;/&lt;object-name&gt;</code>.
+If left unspecified, the serialized agent is returned inline.</p>
 
 
   </div>
@@ -199,9 +200,11 @@ Note: The URI must start with
       
       
         &mdash;
-        <div class='inline'><p>Optional. The Google Cloud Storage URI to export the agent to.
-Note: The URI must start with
-&quot;gs://&quot;. If left unspecified, the serialized agent is returned inline.</p>
+        <div class='inline'><p>Optional. The
+<a href="https://cloud.google.com/storage/docs/">Google Cloud Storage</a>
+URI to export the agent to.
+The format of this URI must be <code>gs://&lt;bucket-name&gt;/&lt;object-name&gt;</code>.
+If left unspecified, the serialized agent is returned inline.</p>
 </div>
       
     </li>

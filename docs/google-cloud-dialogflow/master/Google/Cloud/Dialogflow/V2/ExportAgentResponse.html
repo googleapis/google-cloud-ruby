@@ -89,8 +89,7 @@ js:
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>The response message for
-Agents::ExportAgent.</p>
+    <p>The response message for Agents::ExportAgent.</p>
 
 
   </div>
@@ -183,16 +182,17 @@ Agents::ExportAgent.</p>
 
 <p>Example for how to export an agent to a zip file via a command line:</p>
 
-<p>curl \
-  &#39;<a href="https://dialogflow.googleapis.com/v2/projects/">https://dialogflow.googleapis.com/v2/projects/</a><project_name>/agent:export&#39;\
+<pre class="code ruby"><code class="ruby">curl \
+  &#39;https://dialogflow.googleapis.com/v2/projects/&lt;project_name&gt;/agent:export&#39;\
   -X POST \
-  -H &#39;Authorization: Bearer &#39;$(gcloud auth print-access-token) \
+  -H &#39;Authorization: Bearer &#39;$(gcloud auth application-default
+  print-access-token) \
   -H &#39;Accept: application/json&#39; \
   -H &#39;Content-Type: application/json&#39; \
   --compressed \
   --data-binary &#39;{}&#39; \
-| grep agentContent | sed -e &#39;s/.<em>&quot;agentContent&quot;: &quot;([^&quot;]</em>)&quot;.*/\1/&#39; \
-| base64 --decode &gt; <agent zip file></p>
+| grep agentContent | sed -e &#39;s/.*&quot;agentContent&quot;: &quot;\([^&quot;]*\)&quot;.*/\1/&#39; \
+| base64 --decode &gt; &lt;agent zip file&gt;</code></pre>
 
 
   </div>
@@ -214,16 +214,17 @@ Agents::ExportAgent.</p>
 
 <p>Example for how to export an agent to a zip file via a command line:</p>
 
-<p>curl \
-  &#39;<a href="https://dialogflow.googleapis.com/v2/projects/">https://dialogflow.googleapis.com/v2/projects/</a><project_name>/agent:export&#39;\
+<pre class="code ruby"><code class="ruby">curl \
+  &#39;https://dialogflow.googleapis.com/v2/projects/&lt;project_name&gt;/agent:export&#39;\
   -X POST \
-  -H &#39;Authorization: Bearer &#39;$(gcloud auth print-access-token) \
+  -H &#39;Authorization: Bearer &#39;$(gcloud auth application-default
+  print-access-token) \
   -H &#39;Accept: application/json&#39; \
   -H &#39;Content-Type: application/json&#39; \
   --compressed \
   --data-binary &#39;{}&#39; \
-| grep agentContent | sed -e &#39;s/.<em>&quot;agentContent&quot;: &quot;([^&quot;]</em>)&quot;.*/\1/&#39; \
-| base64 --decode &gt; <agent zip file></p>
+| grep agentContent | sed -e &#39;s/.*&quot;agentContent&quot;: &quot;\([^&quot;]*\)&quot;.*/\1/&#39; \
+| base64 --decode &gt; &lt;agent zip file&gt;</code></pre>
 </div>
       
     </li>
@@ -236,10 +237,10 @@ Agents::ExportAgent.</p>
       <pre class="lines">
 
 
-161</pre>
+160</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/agent.rb', line 161</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/agent.rb', line 160</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dialogflow::V2::ExportAgentResponse (class)">ExportAgentResponse</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -293,10 +294,10 @@ only if <code>agent_uri</code> is specified in <code>ExportAgentRequest</code>.<
       <pre class="lines">
 
 
-161</pre>
+160</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/agent.rb', line 161</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/agent.rb', line 160</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dialogflow::V2::ExportAgentResponse (class)">ExportAgentResponse</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>

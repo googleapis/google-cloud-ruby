@@ -89,7 +89,7 @@ js:
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>Represents an example or template that the agent is trained on.</p>
+    <p>Represents an example that the agent is trained on.</p>
 
 
   </div>
@@ -136,7 +136,7 @@ js:
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Required.</p>
+    <span class="summary_desc"><div class='inline'><p>Output only.</p>
 </div></span>
   
 </li>
@@ -242,7 +242,7 @@ js:
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Required. The unique identifier of this training phrase.</p>
+    <p>Returns Output only. The unique identifier of this training phrase.</p>
 
 
   </div>
@@ -260,7 +260,7 @@ js:
       
       
         &mdash;
-        <div class='inline'><p>Required. The unique identifier of this training phrase.</p>
+        <div class='inline'><p>Output only. The unique identifier of this training phrase.</p>
 </div>
       
     </li>
@@ -273,31 +273,6 @@ js:
       <pre class="lines">
 
 
-120
-121
-122
-123
-124
-125
-126
-127
-128
-129
-130
-131
-132
-133
-134
-135
-136
-137
-138
-139
-140
-141
-142
-143
-144
 145
 146
 147
@@ -308,31 +283,60 @@ js:
 152
 153
 154
-155</pre>
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/intent.rb', line 120</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/intent.rb', line 145</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dialogflow::V2::Intent::TrainingPhrase (class)">TrainingPhrase</a></span></span>
   <span class='comment'># Represents a part of a training phrase.
 </span>  <span class='comment'># @!attribute [rw] text
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Required. The text corresponding to the example or template,
-</span>  <span class='comment'>#     if there are no annotations. For
-</span>  <span class='comment'>#     annotated examples, it is the text for one of the example&#39;s parts.
+</span>  <span class='comment'>#     Required. The text for this part.
 </span>  <span class='comment'># @!attribute [rw] entity_type
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Optional. The entity type name prefixed with `@`. This field is
-</span>  <span class='comment'>#     required for the annotated part of the text and applies only to
-</span>  <span class='comment'>#     examples.
+</span>  <span class='comment'>#     Optional. The entity type name prefixed with `@`.
+</span>  <span class='comment'>#     This field is required for annotated parts of the training phrase.
 </span>  <span class='comment'># @!attribute [rw] alias
 </span>  <span class='comment'>#   @return [String]
 </span>  <span class='comment'>#     Optional. The parameter name for the value extracted from the
 </span>  <span class='comment'>#     annotated part of the example.
+</span>  <span class='comment'>#     This field is required for annotated parts of the training phrase.
 </span>  <span class='comment'># @!attribute [rw] user_defined
 </span>  <span class='comment'>#   @return [true, false]
-</span>  <span class='comment'>#     Optional. Indicates whether the text was manually annotated by the
-</span>  <span class='comment'>#     developer.
+</span>  <span class='comment'>#     Optional. Indicates whether the text was manually annotated.
+</span>  <span class='comment'>#     This field is set to true when the Dialogflow Console is used to
+</span>  <span class='comment'>#     manually annotate the part. When creating an annotated part with the
+</span>  <span class='comment'>#     API, you must set this to true.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="TrainingPhrase/Part.html" title="Google::Cloud::Dialogflow::V2::Intent::TrainingPhrase::Part (class)">Part</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
   <span class='comment'># Represents different types of training phrases.
@@ -346,6 +350,10 @@ js:
 
     <span class='comment'># Templates are not annotated with entity types, but they can contain
 </span>    <span class='comment'># @-prefixed entity type names as substrings.
+</span>    <span class='comment'># Template mode has been deprecated. Example mode is the only supported
+</span>    <span class='comment'># way to create new training phrases. If you have existing training
+</span>    <span class='comment'># phrases that you&#39;ve created in template mode, those will continue to
+</span>    <span class='comment'># work.
 </span>    <span class='const'>TEMPLATE</span> <span class='op'>=</span> <span class='int'>2</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
@@ -367,9 +375,27 @@ js:
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Required. The collection of training phrase parts (can be annotated).
-Fields: <code>entity_type</code>, <code>alias</code> and <code>user_defined</code> should be populated
-only for the annotated parts of the training phrase.</p>
+    <p>Returns Required. The ordered list of training phrase parts.
+The parts are concatenated in order to form the training phrase.</p>
+
+<p>Note: The API does not automatically annotate training phrases like the
+Dialogflow Console does.</p>
+
+<p>Note: Do not forget to include whitespace at part boundaries,
+so the training phrase is well formatted when the parts are concatenated.</p>
+
+<p>If the training phrase does not need to be annotated with parameters,
+you just need a single part with only the <span class='object_link'><a href="TrainingPhrase/Part.html#text-instance_method" title="Google::Cloud::Dialogflow::V2::Intent::TrainingPhrase::Part#text (method)">Part#text</a></span> field set.</p>
+
+<p>If you want to annotate the training phrase, you must create multiple
+parts, where the fields of each part are populated in one of two ways:</p>
+
+<ul>
+<li><code>Part.text</code> is set to a part of the phrase that has no parameters.</li>
+<li><code>Part.text</code> is set to a part of the phrase that you want to annotate,
+and the <code>entity_type</code>, <code>alias</code>, and <code>user_defined</code> fields are all
+set.</li>
+</ul>
 
 
   </div>
@@ -387,9 +413,27 @@ only for the annotated parts of the training phrase.</p>
       
       
         &mdash;
-        <div class='inline'><p>Required. The collection of training phrase parts (can be annotated).
-Fields: <code>entity_type</code>, <code>alias</code> and <code>user_defined</code> should be populated
-only for the annotated parts of the training phrase.</p>
+        <div class='inline'><p>Required. The ordered list of training phrase parts.
+The parts are concatenated in order to form the training phrase.</p>
+
+<p>Note: The API does not automatically annotate training phrases like the
+Dialogflow Console does.</p>
+
+<p>Note: Do not forget to include whitespace at part boundaries,
+so the training phrase is well formatted when the parts are concatenated.</p>
+
+<p>If the training phrase does not need to be annotated with parameters,
+you just need a single part with only the <span class='object_link'><a href="TrainingPhrase/Part.html#text-instance_method" title="Google::Cloud::Dialogflow::V2::Intent::TrainingPhrase::Part#text (method)">Part#text</a></span> field set.</p>
+
+<p>If you want to annotate the training phrase, you must create multiple
+parts, where the fields of each part are populated in one of two ways:</p>
+
+<ul>
+<li><code>Part.text</code> is set to a part of the phrase that has no parameters.</li>
+<li><code>Part.text</code> is set to a part of the phrase that you want to annotate,
+and the <code>entity_type</code>, <code>alias</code>, and <code>user_defined</code> fields are all
+set.</li>
+</ul>
 </div>
       
     </li>
@@ -402,31 +446,6 @@ only for the annotated parts of the training phrase.</p>
       <pre class="lines">
 
 
-120
-121
-122
-123
-124
-125
-126
-127
-128
-129
-130
-131
-132
-133
-134
-135
-136
-137
-138
-139
-140
-141
-142
-143
-144
 145
 146
 147
@@ -437,31 +456,60 @@ only for the annotated parts of the training phrase.</p>
 152
 153
 154
-155</pre>
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/intent.rb', line 120</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/intent.rb', line 145</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dialogflow::V2::Intent::TrainingPhrase (class)">TrainingPhrase</a></span></span>
   <span class='comment'># Represents a part of a training phrase.
 </span>  <span class='comment'># @!attribute [rw] text
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Required. The text corresponding to the example or template,
-</span>  <span class='comment'>#     if there are no annotations. For
-</span>  <span class='comment'>#     annotated examples, it is the text for one of the example&#39;s parts.
+</span>  <span class='comment'>#     Required. The text for this part.
 </span>  <span class='comment'># @!attribute [rw] entity_type
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Optional. The entity type name prefixed with `@`. This field is
-</span>  <span class='comment'>#     required for the annotated part of the text and applies only to
-</span>  <span class='comment'>#     examples.
+</span>  <span class='comment'>#     Optional. The entity type name prefixed with `@`.
+</span>  <span class='comment'>#     This field is required for annotated parts of the training phrase.
 </span>  <span class='comment'># @!attribute [rw] alias
 </span>  <span class='comment'>#   @return [String]
 </span>  <span class='comment'>#     Optional. The parameter name for the value extracted from the
 </span>  <span class='comment'>#     annotated part of the example.
+</span>  <span class='comment'>#     This field is required for annotated parts of the training phrase.
 </span>  <span class='comment'># @!attribute [rw] user_defined
 </span>  <span class='comment'>#   @return [true, false]
-</span>  <span class='comment'>#     Optional. Indicates whether the text was manually annotated by the
-</span>  <span class='comment'>#     developer.
+</span>  <span class='comment'>#     Optional. Indicates whether the text was manually annotated.
+</span>  <span class='comment'>#     This field is set to true when the Dialogflow Console is used to
+</span>  <span class='comment'>#     manually annotate the part. When creating an annotated part with the
+</span>  <span class='comment'>#     API, you must set this to true.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="TrainingPhrase/Part.html" title="Google::Cloud::Dialogflow::V2::Intent::TrainingPhrase::Part (class)">Part</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
   <span class='comment'># Represents different types of training phrases.
@@ -475,6 +523,10 @@ only for the annotated parts of the training phrase.</p>
 
     <span class='comment'># Templates are not annotated with entity types, but they can contain
 </span>    <span class='comment'># @-prefixed entity type names as substrings.
+</span>    <span class='comment'># Template mode has been deprecated. Example mode is the only supported
+</span>    <span class='comment'># way to create new training phrases. If you have existing training
+</span>    <span class='comment'># phrases that you&#39;ve created in template mode, those will continue to
+</span>    <span class='comment'># work.
 </span>    <span class='const'>TEMPLATE</span> <span class='op'>=</span> <span class='int'>2</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
@@ -496,7 +548,7 @@ only for the annotated parts of the training phrase.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Optional. Indicates how many times this example or template was added to
+    <p>Returns Optional. Indicates how many times this example was added to
 the intent. Each time a developer adds an existing sample by editing an
 intent or training, this counter is increased.</p>
 
@@ -516,7 +568,7 @@ intent or training, this counter is increased.</p>
       
       
         &mdash;
-        <div class='inline'><p>Optional. Indicates how many times this example or template was added to
+        <div class='inline'><p>Optional. Indicates how many times this example was added to
 the intent. Each time a developer adds an existing sample by editing an
 intent or training, this counter is increased.</p>
 </div>
@@ -531,31 +583,6 @@ intent or training, this counter is increased.</p>
       <pre class="lines">
 
 
-120
-121
-122
-123
-124
-125
-126
-127
-128
-129
-130
-131
-132
-133
-134
-135
-136
-137
-138
-139
-140
-141
-142
-143
-144
 145
 146
 147
@@ -566,31 +593,60 @@ intent or training, this counter is increased.</p>
 152
 153
 154
-155</pre>
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/intent.rb', line 120</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/intent.rb', line 145</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dialogflow::V2::Intent::TrainingPhrase (class)">TrainingPhrase</a></span></span>
   <span class='comment'># Represents a part of a training phrase.
 </span>  <span class='comment'># @!attribute [rw] text
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Required. The text corresponding to the example or template,
-</span>  <span class='comment'>#     if there are no annotations. For
-</span>  <span class='comment'>#     annotated examples, it is the text for one of the example&#39;s parts.
+</span>  <span class='comment'>#     Required. The text for this part.
 </span>  <span class='comment'># @!attribute [rw] entity_type
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Optional. The entity type name prefixed with `@`. This field is
-</span>  <span class='comment'>#     required for the annotated part of the text and applies only to
-</span>  <span class='comment'>#     examples.
+</span>  <span class='comment'>#     Optional. The entity type name prefixed with `@`.
+</span>  <span class='comment'>#     This field is required for annotated parts of the training phrase.
 </span>  <span class='comment'># @!attribute [rw] alias
 </span>  <span class='comment'>#   @return [String]
 </span>  <span class='comment'>#     Optional. The parameter name for the value extracted from the
 </span>  <span class='comment'>#     annotated part of the example.
+</span>  <span class='comment'>#     This field is required for annotated parts of the training phrase.
 </span>  <span class='comment'># @!attribute [rw] user_defined
 </span>  <span class='comment'>#   @return [true, false]
-</span>  <span class='comment'>#     Optional. Indicates whether the text was manually annotated by the
-</span>  <span class='comment'>#     developer.
+</span>  <span class='comment'>#     Optional. Indicates whether the text was manually annotated.
+</span>  <span class='comment'>#     This field is set to true when the Dialogflow Console is used to
+</span>  <span class='comment'>#     manually annotate the part. When creating an annotated part with the
+</span>  <span class='comment'>#     API, you must set this to true.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="TrainingPhrase/Part.html" title="Google::Cloud::Dialogflow::V2::Intent::TrainingPhrase::Part (class)">Part</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
   <span class='comment'># Represents different types of training phrases.
@@ -604,6 +660,10 @@ intent or training, this counter is increased.</p>
 
     <span class='comment'># Templates are not annotated with entity types, but they can contain
 </span>    <span class='comment'># @-prefixed entity type names as substrings.
+</span>    <span class='comment'># Template mode has been deprecated. Example mode is the only supported
+</span>    <span class='comment'># way to create new training phrases. If you have existing training
+</span>    <span class='comment'># phrases that you&#39;ve created in template mode, those will continue to
+</span>    <span class='comment'># work.
 </span>    <span class='const'>TEMPLATE</span> <span class='op'>=</span> <span class='int'>2</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
@@ -656,31 +716,6 @@ intent or training, this counter is increased.</p>
       <pre class="lines">
 
 
-120
-121
-122
-123
-124
-125
-126
-127
-128
-129
-130
-131
-132
-133
-134
-135
-136
-137
-138
-139
-140
-141
-142
-143
-144
 145
 146
 147
@@ -691,31 +726,60 @@ intent or training, this counter is increased.</p>
 152
 153
 154
-155</pre>
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/intent.rb', line 120</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/intent.rb', line 145</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dialogflow::V2::Intent::TrainingPhrase (class)">TrainingPhrase</a></span></span>
   <span class='comment'># Represents a part of a training phrase.
 </span>  <span class='comment'># @!attribute [rw] text
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Required. The text corresponding to the example or template,
-</span>  <span class='comment'>#     if there are no annotations. For
-</span>  <span class='comment'>#     annotated examples, it is the text for one of the example&#39;s parts.
+</span>  <span class='comment'>#     Required. The text for this part.
 </span>  <span class='comment'># @!attribute [rw] entity_type
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Optional. The entity type name prefixed with `@`. This field is
-</span>  <span class='comment'>#     required for the annotated part of the text and applies only to
-</span>  <span class='comment'>#     examples.
+</span>  <span class='comment'>#     Optional. The entity type name prefixed with `@`.
+</span>  <span class='comment'>#     This field is required for annotated parts of the training phrase.
 </span>  <span class='comment'># @!attribute [rw] alias
 </span>  <span class='comment'>#   @return [String]
 </span>  <span class='comment'>#     Optional. The parameter name for the value extracted from the
 </span>  <span class='comment'>#     annotated part of the example.
+</span>  <span class='comment'>#     This field is required for annotated parts of the training phrase.
 </span>  <span class='comment'># @!attribute [rw] user_defined
 </span>  <span class='comment'>#   @return [true, false]
-</span>  <span class='comment'>#     Optional. Indicates whether the text was manually annotated by the
-</span>  <span class='comment'>#     developer.
+</span>  <span class='comment'>#     Optional. Indicates whether the text was manually annotated.
+</span>  <span class='comment'>#     This field is set to true when the Dialogflow Console is used to
+</span>  <span class='comment'>#     manually annotate the part. When creating an annotated part with the
+</span>  <span class='comment'>#     API, you must set this to true.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="TrainingPhrase/Part.html" title="Google::Cloud::Dialogflow::V2::Intent::TrainingPhrase::Part (class)">Part</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
   <span class='comment'># Represents different types of training phrases.
@@ -729,6 +793,10 @@ intent or training, this counter is increased.</p>
 
     <span class='comment'># Templates are not annotated with entity types, but they can contain
 </span>    <span class='comment'># @-prefixed entity type names as substrings.
+</span>    <span class='comment'># Template mode has been deprecated. Example mode is the only supported
+</span>    <span class='comment'># way to create new training phrases. If you have existing training
+</span>    <span class='comment'># phrases that you&#39;ve created in template mode, those will continue to
+</span>    <span class='comment'># work.
 </span>    <span class='const'>TEMPLATE</span> <span class='op'>=</span> <span class='int'>2</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>

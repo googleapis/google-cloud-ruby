@@ -94,30 +94,29 @@ that transform user requests into actionable data. You can include agents
 in your app, product, or service to determine user intent and respond to the
 user in a natural way.</p>
 
-<p>After you create an agent, you can add
-<span class='object_link'><a href="Intents.html" title="Google::Cloud::Dialogflow::V2::Intents (module)">Intents</a></span>,
-<span class='object_link'><a href="Contexts.html" title="Google::Cloud::Dialogflow::V2::Contexts (module)">Contexts</a></span>, [Entity
-Types][google.cloud.dialogflow.v2.EntityTypes],
-Webhooks, and so on to manage
-the flow of a conversation and match user input to predefined intents and
-actions.</p>
+<p>After you create an agent, you can add <span class='object_link'><a href="Intents.html" title="Google::Cloud::Dialogflow::V2::Intents (module)">Intents</a></span>, <span class='object_link'><a href="Contexts.html" title="Google::Cloud::Dialogflow::V2::Contexts (module)">Contexts</a></span>,
+<span class='object_link'><a href="EntityTypes.html" title="Google::Cloud::Dialogflow::V2::EntityTypes (module)">Entity Types</a></span>, Webhooks, and so on to
+manage the flow of a conversation and match user input to predefined intents
+and actions.</p>
 
 <p>You can create an agent using both Dialogflow Standard Edition and
 Dialogflow Enterprise Edition. For details, see
-<a href="https://cloud.google.com/dialogflow-enterprise/docs/editions">Dialogflow Editions</a>.</p>
+<a href="https://cloud.google.com/dialogflow-enterprise/docs/editions">Dialogflow
+Editions</a>.</p>
 
 <p>You can save your agent for backup or versioning by exporting the agent by
-using the ExportAgent
-method. You can import a saved agent by using the
-ImportAgent method.</p>
+using the ExportAgent method. You can import a saved
+agent by using the ImportAgent method.</p>
 
 <p>Dialogflow provides several
-<a href="https://dialogflow.com/docs/prebuilt-agents">prebuilt agents</a> for common
-conversation scenarios such as determining a date and time, converting
-currency, and so on.</p>
+<a href="https://cloud.google.com/dialogflow-enterprise/docs/agents-prebuilt">prebuilt
+agents</a>
+for common conversation scenarios such as determining a date and time,
+converting currency, and so on.</p>
 
 <p>For more information about agents, see the
-<a href="https://dialogflow.com/docs/agents">Dialogflow documentation</a>.</p>
+<a href="https://cloud.google.com/dialogflow-enterprise/docs/agents-overview">Dialogflow
+documentation</a>.</p>
 
 
   </div>
@@ -199,7 +198,8 @@ this service.</p>
 </div>
         </dt>
         <dd><pre class="code"><span class='lbracket'>[</span>
-  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>https://www.googleapis.com/auth/cloud-platform</span><span class='tstring_end'>&quot;</span></span>
+  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>https://www.googleapis.com/auth/cloud-platform</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>https://www.googleapis.com/auth/dialogflow</span><span class='tstring_end'>&quot;</span></span>
 <span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_freeze'>freeze</span></pre></dd>
       
     </dl>
@@ -927,9 +927,7 @@ custom error handling.</p>
   <div class="discussion">
     <p>Exports the specified agent to a ZIP file.</p>
 
-<p>Operation <response:
-<span class='object_link'><a href="ExportAgentResponse.html" title="Google::Cloud::Dialogflow::V2::ExportAgentResponse (class)">ExportAgentResponse</a></span>,
-           metadata: <span class='object_link'><a href="../../../Protobuf/Struct.html" title="Google::Protobuf::Struct (class)">Protobuf::Struct</a></span>></p>
+<p>Operation <response: <span class='object_link'><a href="ExportAgentResponse.html" title="Google::Cloud::Dialogflow::V2::ExportAgentResponse (class)">ExportAgentResponse</a></span>></p>
 
 
   </div>
@@ -1002,9 +1000,11 @@ Format: <code>projects/&lt;Project ID&gt;</code>.</p>
       
       
         &mdash;
-        <div class='inline'><p>Optional. The Google Cloud Storage URI to export the agent to.
-Note: The URI must start with
-&quot;gs://&quot;. If left unspecified, the serialized agent is returned inline.</p>
+        <div class='inline'><p>Optional. The
+<a href="https://cloud.google.com/storage/docs/">Google Cloud Storage</a>
+URI to export the agent to.
+The format of this URI must be <code>gs://&lt;bucket-name&gt;/&lt;object-name&gt;</code>.
+If left unspecified, the serialized agent is returned inline.</p>
 </div>
       
     </li>
@@ -1064,6 +1064,7 @@ retries, etc.</p>
       <pre class="lines">
 
 
+490
 491
 492
 493
@@ -1081,11 +1082,10 @@ retries, etc.</p>
 505
 506
 507
-508
-509</pre>
+508</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/agents_client.rb', line 491</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/agents_client.rb', line 490</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_export_agent'>export_agent</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -1303,8 +1303,7 @@ retries, etc.</p>
 Intents and entity types with the same name are replaced with the new
 versions from ImportAgentRequest.</p>
 
-<p>Operation <response: <span class='object_link'><a href="../../../Protobuf/Empty.html" title="Google::Protobuf::Empty (class)">Protobuf::Empty</a></span>,
-           metadata: <span class='object_link'><a href="../../../Protobuf/Struct.html" title="Google::Protobuf::Struct (class)">Protobuf::Struct</a></span>></p>
+<p>Operation <response: <span class='object_link'><a href="../../../Protobuf/Empty.html" title="Google::Protobuf::Empty (class)">Protobuf::Empty</a></span>></p>
 
 
   </div>
@@ -1397,16 +1396,17 @@ Note: The URI must start with &quot;gs://&quot;.</p>
 
 <p>Example for how to import an agent via the command line:</p>
 
-<p>curl \
-  &#39;<a href="https://dialogflow.googleapis.com/v2/projects/">https://dialogflow.googleapis.com/v2/projects/</a><project_name>/agent:import\
+<pre class="code ruby"><code class="ruby">curl \
+  &#39;https://dialogflow.googleapis.com/v2/projects/&lt;project_name&gt;/agent:import\
    -X POST \
-   -H &#39;Authorization: Bearer &#39;$(gcloud auth print-access-token) \
+   -H &#39;Authorization: Bearer &#39;$(gcloud auth application-default
+   print-access-token) \
    -H &#39;Accept: application/json&#39; \
    -H &#39;Content-Type: application/json&#39; \
    --compressed \
    --data-binary &quot;{
-      &#39;agentContent&#39;: &#39;$(cat <agent zip file> | base64 -w 0)&#39;
-   }&quot;</p>
+      &#39;agentContent&#39;: &#39;$(cat &lt;agent zip file&gt; | base64 -w 0)&#39;
+   }&quot;</code></pre>
 </div>
       
     </li>
@@ -1466,6 +1466,8 @@ retries, etc.</p>
       <pre class="lines">
 
 
+577
+578
 579
 580
 581
@@ -1484,12 +1486,10 @@ retries, etc.</p>
 594
 595
 596
-597
-598
-599</pre>
+597</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/agents_client.rb', line 579</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/agents_client.rb', line 577</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_import_agent'>import_agent</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -1533,8 +1533,7 @@ retries, etc.</p>
 <p>Replaces the current agent version with a new one. All the intents and
 entity types in the older version are deleted.</p>
 
-<p>Operation <response: <span class='object_link'><a href="../../../Protobuf/Empty.html" title="Google::Protobuf::Empty (class)">Protobuf::Empty</a></span>,
-           metadata: <span class='object_link'><a href="../../../Protobuf/Struct.html" title="Google::Protobuf::Struct (class)">Protobuf::Struct</a></span>></p>
+<p>Operation <response: <span class='object_link'><a href="../../../Protobuf/Empty.html" title="Google::Protobuf::Empty (class)">Protobuf::Empty</a></span>></p>
 
 
   </div>
@@ -1627,16 +1626,17 @@ Note: The URI must start with &quot;gs://&quot;.</p>
 
 <p>Example for how to restore an agent via the command line:</p>
 
-<p>curl \
-  &#39;<a href="https://dialogflow.googleapis.com/v2/projects/">https://dialogflow.googleapis.com/v2/projects/</a><project_name>/agent:restore\
+<pre class="code ruby"><code class="ruby">curl \
+  &#39;https://dialogflow.googleapis.com/v2/projects/&lt;project_name&gt;/agent:restore\
    -X POST \
-   -H &#39;Authorization: Bearer &#39;$(gcloud auth print-access-token) \
+   -H &#39;Authorization: Bearer &#39;$(gcloud auth application-default
+   print-access-token) \
    -H &#39;Accept: application/json&#39; \
    -H &#39;Content-Type: application/json&#39; \
    --compressed \
    --data-binary &quot;{
-       &#39;agentContent&#39;: &#39;$(cat <agent zip file> | base64 -w 0)&#39;
-   }&quot; \</p>
+       &#39;agentContent&#39;: &#39;$(cat &lt;agent zip file&gt; | base64 -w 0)&#39;
+   }&quot;</code></pre>
 </div>
       
     </li>
@@ -1696,6 +1696,9 @@ retries, etc.</p>
       <pre class="lines">
 
 
+665
+666
+667
 668
 669
 670
@@ -1713,13 +1716,10 @@ retries, etc.</p>
 682
 683
 684
-685
-686
-687
-688</pre>
+685</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/agents_client.rb', line 668</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/agents_client.rb', line 665</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_restore_agent'>restore_agent</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -1983,8 +1983,7 @@ object.</p>
   <div class="discussion">
     <p>Trains the specified agent.</p>
 
-<p>Operation <response: <span class='object_link'><a href="../../../Protobuf/Empty.html" title="Google::Protobuf::Empty (class)">Protobuf::Empty</a></span>,
-           metadata: <span class='object_link'><a href="../../../Protobuf/Struct.html" title="Google::Protobuf::Struct (class)">Protobuf::Struct</a></span>></p>
+<p>Operation <response: <span class='object_link'><a href="../../../Protobuf/Empty.html" title="Google::Protobuf::Empty (class)">Protobuf::Empty</a></span>></p>
 
 
   </div>
@@ -2102,6 +2101,7 @@ retries, etc.</p>
       <pre class="lines">
 
 
+421
 422
 423
 424
@@ -2117,11 +2117,10 @@ retries, etc.</p>
 434
 435
 436
-437
-438</pre>
+437</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/agents_client.rb', line 422</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/agents_client.rb', line 421</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_train_agent'>train_agent</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>

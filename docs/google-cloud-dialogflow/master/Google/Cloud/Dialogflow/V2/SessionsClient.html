@@ -90,10 +90,9 @@ js:
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
     <p>A session represents an interaction with a user. You retrieve user input
-and pass it to the
-DetectIntent (or
-StreamingDetectIntent)
-method to determine user intent and respond.</p>
+and pass it to the DetectIntent (or
+StreamingDetectIntent) method to determine
+user intent and respond.</p>
 
 
   </div>
@@ -175,7 +174,8 @@ this service.</p>
 </div>
         </dt>
         <dd><pre class="code"><span class='lbracket'>[</span>
-  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>https://www.googleapis.com/auth/cloud-platform</span><span class='tstring_end'>&quot;</span></span>
+  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>https://www.googleapis.com/auth/cloud-platform</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>https://www.googleapis.com/auth/dialogflow</span><span class='tstring_end'>&quot;</span></span>
 <span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_freeze'>freeze</span></pre></dd>
       
     </dl>
@@ -230,7 +230,7 @@ this service.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#detect_intent-instance_method" title="#detect_intent (instance method)">#<strong>detect_intent</strong>(session, query_input, query_params: nil, input_audio: nil, options: nil) {|result, operation| ... } &#x21d2; Google::Cloud::Dialogflow::V2::DetectIntentResponse </a>
+      <a href="#detect_intent-instance_method" title="#detect_intent (instance method)">#<strong>detect_intent</strong>(session, query_input, query_params: nil, output_audio_config: nil, input_audio: nil, options: nil) {|result, operation| ... } &#x21d2; Google::Cloud::Dialogflow::V2::DetectIntentResponse </a>
     
 
     
@@ -724,7 +724,7 @@ custom error handling.</p>
       <div class="method_details first">
   <h3 class="signature first" id="detect_intent-instance_method">
   
-    #<strong>detect_intent</strong>(session, query_input, query_params: nil, input_audio: nil, options: nil) {|result, operation| ... } &#x21d2; <tt><span class='object_link'><a href="DetectIntentResponse.html" title="Google::Cloud::Dialogflow::V2::DetectIntentResponse (class)">Google::Cloud::Dialogflow::V2::DetectIntentResponse</a></span></tt> 
+    #<strong>detect_intent</strong>(session, query_input, query_params: nil, output_audio_config: nil, input_audio: nil, options: nil) {|result, operation| ... } &#x21d2; <tt><span class='object_link'><a href="DetectIntentResponse.html" title="Google::Cloud::Dialogflow::V2::DetectIntentResponse (class)">Google::Cloud::Dialogflow::V2::DetectIntentResponse</a></span></tt> 
   
 
   
@@ -814,6 +814,25 @@ can also be provided.</p></li>
         &mdash;
         <div class='inline'><p>Optional. The parameters of this query.
 A hash of the same form as <code>Google::Cloud::Dialogflow::V2::QueryParameters</code>
+can also be provided.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>output_audio_config</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="OutputAudioConfig.html" title="Google::Cloud::Dialogflow::V2::OutputAudioConfig (class)">Google::Cloud::Dialogflow::V2::OutputAudioConfig</a></span> | Hash</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Optional. Instructs the speech synthesizer how to generate the output
+audio. If this field is not set and agent-level speech synthesizer is not
+configured, no output audio is generated.
+A hash of the same form as <code>Google::Cloud::Dialogflow::V2::OutputAudioConfig</code>
 can also be provided.</p>
 </div>
       
@@ -934,12 +953,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-249
-250
-251
-252
-253
-254
 255
 256
 257
@@ -949,15 +962,24 @@ retries, etc.</p>
 261
 262
 263
-264</pre>
+264
+265
+266
+267
+268
+269
+270
+271
+272</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/sessions_client.rb', line 249</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/sessions_client.rb', line 255</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_detect_intent'>detect_intent</span> \
     <span class='id identifier rubyid_session'>session</span><span class='comma'>,</span>
     <span class='id identifier rubyid_query_input'>query_input</span><span class='comma'>,</span>
     <span class='label'>query_params:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+    <span class='label'>output_audio_config:</span> <span class='kw'>nil</span><span class='comma'>,</span>
     <span class='label'>input_audio:</span> <span class='kw'>nil</span><span class='comma'>,</span>
     <span class='label'>options:</span> <span class='kw'>nil</span><span class='comma'>,</span>
     <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
@@ -965,6 +987,7 @@ retries, etc.</p>
     <span class='label'>session:</span> <span class='id identifier rubyid_session'>session</span><span class='comma'>,</span>
     <span class='label'>query_input:</span> <span class='id identifier rubyid_query_input'>query_input</span><span class='comma'>,</span>
     <span class='label'>query_params:</span> <span class='id identifier rubyid_query_params'>query_params</span><span class='comma'>,</span>
+    <span class='label'>output_audio_config:</span> <span class='id identifier rubyid_output_audio_config'>output_audio_config</span><span class='comma'>,</span>
     <span class='label'>input_audio:</span> <span class='id identifier rubyid_input_audio'>input_audio</span>
   <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span>
   <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='id identifier rubyid_to_proto'>to_proto</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Dialogflow.html" title="Google::Cloud::Dialogflow (module)">Dialogflow</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V2.html" title="Google::Cloud::Dialogflow::V2 (module)">V2</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="DetectIntentRequest.html" title="Google::Cloud::Dialogflow::V2::DetectIntentRequest (class)">DetectIntentRequest</a></span></span><span class='rparen'>)</span>
@@ -1101,15 +1124,15 @@ retries, etc.</p>
       <pre class="lines">
 
 
-301
-302
-303
-304
-305
-306</pre>
+309
+310
+311
+312
+313
+314</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/sessions_client.rb', line 301</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/sessions_client.rb', line 309</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_streaming_detect_intent'>streaming_detect_intent</span> <span class='id identifier rubyid_reqs'>reqs</span><span class='comma'>,</span> <span class='label'>options:</span> <span class='kw'>nil</span>
   <span class='id identifier rubyid_request_protos'>request_protos</span> <span class='op'>=</span> <span class='id identifier rubyid_reqs'>reqs</span><span class='period'>.</span><span class='id identifier rubyid_lazy'>lazy</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_req'>req</span><span class='op'>|</span>

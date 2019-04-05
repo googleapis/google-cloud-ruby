@@ -1,6 +1,6 @@
 ---
 layout: yard_main
-title: "Module: Google::Cloud::Dialogflow::V2::SessionEntityType::EntityOverrideMode - Dialogflow"
+title: "Module: Google::Cloud::Dialogflow::V2::SsmlVoiceGender - Dialogflow"
 css: 
   - /docs/css/style.css
   - /docs/css/common.css
@@ -10,13 +10,13 @@ js:
   - /js/yard-main.js
 ---
 <script type="text/javascript" charset="utf-8">
-  pathId = "Google::Cloud::Dialogflow::V2::SessionEntityType::EntityOverrideMode";
-  relpath = '../../../../../';
+  pathId = "Google::Cloud::Dialogflow::V2::SsmlVoiceGender";
+  relpath = '../../../../';
 </script>
 
 
 <div class="nav_wrap">
-  <iframe id="nav" src="../../../../../class_list.html?1"></iframe>
+  <iframe id="nav" src="../../../../class_list.html?1"></iframe>
   <div id="resizer"></div>
 </div>
 
@@ -24,17 +24,17 @@ js:
   <div id="header">
     <div id="menu">
   
-    <a href="../../../../../_index.html">Index (E)</a> &raquo;
-    <span class='title'><span class='object_link'><a href="../../../../../Google.html" title="Google (module)">Google</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../../Dialogflow.html" title="Google::Cloud::Dialogflow (module)">Dialogflow</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../V2.html" title="Google::Cloud::Dialogflow::V2 (module)">V2</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../SessionEntityType.html" title="Google::Cloud::Dialogflow::V2::SessionEntityType (class)">SessionEntityType</a></span></span>
+    <a href="../../../../_index.html">Index (S)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../Dialogflow.html" title="Google::Cloud::Dialogflow (module)">Dialogflow</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../V2.html" title="Google::Cloud::Dialogflow::V2 (module)">V2</a></span></span>
      &raquo; 
-    <span class="title">EntityOverrideMode</span>
+    <span class="title">SsmlVoiceGender</span>
   
 </div>
 
     <div id="search">
   
     <a class="full_list_link" id="class_list_link"
-        href="../../../../../class_list.html">
+        href="../../../../class_list.html">
 
         <svg width="24" height="24">
           <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
@@ -47,7 +47,7 @@ js:
     <div class="clear"></div>
   </div>
 
-  <div id="content"><h1>Module: Google::Cloud::Dialogflow::V2::SessionEntityType::EntityOverrideMode
+  <div id="content"><h1>Module: Google::Cloud::Dialogflow::V2::SsmlVoiceGender
   
   
   
@@ -66,14 +66,15 @@ js:
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/session_entity_type.rb</dd>
+    <dd>lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/audio_config.rb</dd>
   </dl>
   
 </div>
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>The types of modifications for a session entity type.</p>
+    <p>Gender of the voice as described in
+<a href="https://www.w3.org/TR/speech-synthesis11/#edef_voice">SSML voice element</a>.</p>
 
 
   </div>
@@ -90,10 +91,11 @@ js:
 
     <dl class="constants">
       
-        <dt id="ENTITY_OVERRIDE_MODE_UNSPECIFIED-constant" class="">ENTITY_OVERRIDE_MODE_UNSPECIFIED =
+        <dt id="SSML_VOICE_GENDER_UNSPECIFIED-constant" class="">SSML_VOICE_GENDER_UNSPECIFIED =
           <div class="docstring">
   <div class="discussion">
-    <p>Not specified. This value should be never used.</p>
+    <p>An unspecified gender, which means that the client doesn&#39;t care which
+gender the selected voice will have.</p>
 
 
   </div>
@@ -105,11 +107,10 @@ js:
         </dt>
         <dd><pre class="code"><span class='int'>0</span></pre></dd>
       
-        <dt id="ENTITY_OVERRIDE_MODE_OVERRIDE-constant" class="">ENTITY_OVERRIDE_MODE_OVERRIDE =
+        <dt id="SSML_VOICE_GENDER_MALE-constant" class="">SSML_VOICE_GENDER_MALE =
           <div class="docstring">
   <div class="discussion">
-    <p>The collection of session entities overrides the collection of entities
-in the corresponding developer entity type.</p>
+    <p>A male voice.</p>
 
 
   </div>
@@ -121,18 +122,10 @@ in the corresponding developer entity type.</p>
         </dt>
         <dd><pre class="code"><span class='int'>1</span></pre></dd>
       
-        <dt id="ENTITY_OVERRIDE_MODE_SUPPLEMENT-constant" class="">ENTITY_OVERRIDE_MODE_SUPPLEMENT =
+        <dt id="SSML_VOICE_GENDER_FEMALE-constant" class="">SSML_VOICE_GENDER_FEMALE =
           <div class="docstring">
   <div class="discussion">
-    <p>The collection of session entities extends the collection of entities in
-the corresponding developer entity type.</p>
-
-<p>Note: Even in this override mode calls to <code>ListSessionEntityTypes</code>,
-<code>GetSessionEntityType</code>, <code>CreateSessionEntityType</code> and
-<code>UpdateSessionEntityType</code> only return the additional entities added in
-this session entity type. If you want to get the supplemented list,
-please call EntityTypes::GetEntityType on the developer entity type
-and merge.</p>
+    <p>A female voice.</p>
 
 
   </div>
@@ -143,6 +136,21 @@ and merge.</p>
 </div>
         </dt>
         <dd><pre class="code"><span class='int'>2</span></pre></dd>
+      
+        <dt id="SSML_VOICE_GENDER_NEUTRAL-constant" class="">SSML_VOICE_GENDER_NEUTRAL =
+          <div class="docstring">
+  <div class="discussion">
+    <p>A gender-neutral voice.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>3</span></pre></dd>
       
     </dl>
   
