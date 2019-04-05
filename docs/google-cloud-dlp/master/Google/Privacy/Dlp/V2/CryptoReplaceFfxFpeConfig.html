@@ -89,16 +89,19 @@ js:
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>Replaces an identifier with a surrogate using FPE with the FFX
-mode of operation; however when used in the <code>ReidentifyContent</code> API method,
-it serves the opposite function by reversing the surrogate back into
-the original identifier.
-The identifier must be encoded as ASCII.
-For a given crypto key and context, the same identifier will be
-replaced with the same surrogate.
-Identifiers must be at least two characters long.
-In the case that the identifier is the empty string, it will be skipped.
-See <a href="https://cloud.google.com/dlp/docs/pseudonymization">https://cloud.google.com/dlp/docs/pseudonymization</a> to learn more.</p>
+    <p>Replaces an identifier with a surrogate using Format Preserving Encryption
+(FPE) with the FFX mode of operation; however when used in the
+<code>ReidentifyContent</code> API method, it serves the opposite function by reversing
+the surrogate back into the original identifier. The identifier must be
+encoded as ASCII. For a given crypto key and context, the same identifier
+will be replaced with the same surrogate. Identifiers must be at least two
+characters long. In the case that the identifier is the empty string, it will
+be skipped. See <a href="https://cloud.google.com/dlp/docs/pseudonymization">https://cloud.google.com/dlp/docs/pseudonymization</a> to learn
+more.</p>
+
+<p>Note: We recommend using  CryptoDeterministicConfig for all use cases which
+do not require preserving the input alphabet space and size, plus warrant
+referential integrity.</p>
 
 
   </div>
@@ -326,29 +329,29 @@ See <a href="https://cloud.google.com/dlp/docs/pseudonymization">https://cloud.g
       <pre class="lines">
 
 
-1455
-1456
-1457
-1458
-1459
-1460
-1461
-1462
-1463
-1464
-1465
-1466
-1467
-1468
-1469
-1470
-1471
-1472
-1473
-1474</pre>
+1518
+1519
+1520
+1521
+1522
+1523
+1524
+1525
+1526
+1527
+1528
+1529
+1530
+1531
+1532
+1533
+1534
+1535
+1536
+1537</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/dlp.rb', line 1455</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/dlp.rb', line 1518</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Privacy::Dlp::V2::CryptoReplaceFfxFpeConfig (class)">CryptoReplaceFfxFpeConfig</a></span></span>
   <span class='comment'># These are commonly used subsets of the alphabet that the FFX mode
@@ -465,29 +468,29 @@ such that:</p>
       <pre class="lines">
 
 
-1455
-1456
-1457
-1458
-1459
-1460
-1461
-1462
-1463
-1464
-1465
-1466
-1467
-1468
-1469
-1470
-1471
-1472
-1473
-1474</pre>
+1518
+1519
+1520
+1521
+1522
+1523
+1524
+1525
+1526
+1527
+1528
+1529
+1530
+1531
+1532
+1533
+1534
+1535
+1536
+1537</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/dlp.rb', line 1455</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/dlp.rb', line 1518</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Privacy::Dlp::V2::CryptoReplaceFfxFpeConfig (class)">CryptoReplaceFfxFpeConfig</a></span></span>
   <span class='comment'># These are commonly used subsets of the alphabet that the FFX mode
@@ -558,29 +561,29 @@ such that:</p>
       <pre class="lines">
 
 
-1455
-1456
-1457
-1458
-1459
-1460
-1461
-1462
-1463
-1464
-1465
-1466
-1467
-1468
-1469
-1470
-1471
-1472
-1473
-1474</pre>
+1518
+1519
+1520
+1521
+1522
+1523
+1524
+1525
+1526
+1527
+1528
+1529
+1530
+1531
+1532
+1533
+1534
+1535
+1536
+1537</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/dlp.rb', line 1455</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/dlp.rb', line 1518</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Privacy::Dlp::V2::CryptoReplaceFfxFpeConfig (class)">CryptoReplaceFfxFpeConfig</a></span></span>
   <span class='comment'># These are commonly used subsets of the alphabet that the FFX mode
@@ -663,29 +666,29 @@ The order of characters does not matter.</p>
       <pre class="lines">
 
 
-1455
-1456
-1457
-1458
-1459
-1460
-1461
-1462
-1463
-1464
-1465
-1466
-1467
-1468
-1469
-1470
-1471
-1472
-1473
-1474</pre>
+1518
+1519
+1520
+1521
+1522
+1523
+1524
+1525
+1526
+1527
+1528
+1529
+1530
+1531
+1532
+1533
+1534
+1535
+1536
+1537</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/dlp.rb', line 1455</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/dlp.rb', line 1518</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Privacy::Dlp::V2::CryptoReplaceFfxFpeConfig (class)">CryptoReplaceFfxFpeConfig</a></span></span>
   <span class='comment'># These are commonly used subsets of the alphabet that the FFX mode
@@ -756,29 +759,29 @@ The order of characters does not matter.</p>
       <pre class="lines">
 
 
-1455
-1456
-1457
-1458
-1459
-1460
-1461
-1462
-1463
-1464
-1465
-1466
-1467
-1468
-1469
-1470
-1471
-1472
-1473
-1474</pre>
+1518
+1519
+1520
+1521
+1522
+1523
+1524
+1525
+1526
+1527
+1528
+1529
+1530
+1531
+1532
+1533
+1534
+1535
+1536
+1537</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/dlp.rb', line 1455</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/dlp.rb', line 1518</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Privacy::Dlp::V2::CryptoReplaceFfxFpeConfig (class)">CryptoReplaceFfxFpeConfig</a></span></span>
   <span class='comment'># These are commonly used subsets of the alphabet that the FFX mode
@@ -897,29 +900,29 @@ the symbol with the hex code point 29DD might be used like so:
       <pre class="lines">
 
 
-1455
-1456
-1457
-1458
-1459
-1460
-1461
-1462
-1463
-1464
-1465
-1466
-1467
-1468
-1469
-1470
-1471
-1472
-1473
-1474</pre>
+1518
+1519
+1520
+1521
+1522
+1523
+1524
+1525
+1526
+1527
+1528
+1529
+1530
+1531
+1532
+1533
+1534
+1535
+1536
+1537</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/dlp.rb', line 1455</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/dlp.rb', line 1518</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Privacy::Dlp::V2::CryptoReplaceFfxFpeConfig (class)">CryptoReplaceFfxFpeConfig</a></span></span>
   <span class='comment'># These are commonly used subsets of the alphabet that the FFX mode
