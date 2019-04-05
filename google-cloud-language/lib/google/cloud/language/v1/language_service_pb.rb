@@ -5,6 +5,8 @@
 require 'google/protobuf'
 
 require 'google/api/annotations_pb'
+require 'google/api/client_pb'
+require 'google/api/field_behavior_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.cloud.language.v1.Document" do
     optional :type, :enum, 1, "google.cloud.language.v1.Document.Type"
