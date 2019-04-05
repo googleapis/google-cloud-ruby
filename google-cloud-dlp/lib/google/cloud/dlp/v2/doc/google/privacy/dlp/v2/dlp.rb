@@ -597,6 +597,7 @@ module Google
           #   @return [Google::Privacy::Dlp::V2::InspectJobConfig]
           class RequestedOptions; end
 
+          # All result fields mentioned below are updated while the job is processing.
           # @!attribute [rw] processed_bytes
           #   @return [Integer]
           #     Total size in bytes that were processed.
@@ -1200,6 +1201,8 @@ module Google
         #   @return [Google::Privacy::Dlp::V2::CryptoHashConfig]
         # @!attribute [rw] date_shift_config
         #   @return [Google::Privacy::Dlp::V2::DateShiftConfig]
+        # @!attribute [rw] crypto_deterministic_config
+        #   @return [Google::Privacy::Dlp::V2::CryptoDeterministicConfig]
         class PrimitiveTransformation; end
 
         # For use with `Date`, `Timestamp`, and `TimeOfDay`, extract or preserve a
@@ -1241,6 +1244,63 @@ module Google
         #   @return [Google::Privacy::Dlp::V2::CryptoKey]
         #     The key used by the hash function.
         class CryptoHashConfig; end
+
+        # Pseudonymization method that generates deterministic encryption for the given
+        # input. Outputs a base64 encoded representation of the encrypted output.
+        # Uses AES-SIV based on the RFC https://tools.ietf.org/html/rfc5297.
+        # @!attribute [rw] crypto_key
+        #   @return [Google::Privacy::Dlp::V2::CryptoKey]
+        #     The key used by the encryption function.
+        # @!attribute [rw] surrogate_info_type
+        #   @return [Google::Privacy::Dlp::V2::InfoType]
+        #     The custom info type to annotate the surrogate with.
+        #     This annotation will be applied to the surrogate by prefixing it with
+        #     the name of the custom info type followed by the number of
+        #     characters comprising the surrogate. The following scheme defines the
+        #     format: <info type name>(<surrogate character count>):<surrogate>
+        #
+        #     For example, if the name of custom info type is 'MY_TOKEN_INFO_TYPE' and
+        #     the surrogate is 'abc', the full replacement value
+        #     will be: 'MY_TOKEN_INFO_TYPE(3):abc'
+        #
+        #     This annotation identifies the surrogate when inspecting content using the
+        #     custom info type 'Surrogate'. This facilitates reversal of the
+        #     surrogate when it occurs in free text.
+        #
+        #     In order for inspection to work properly, the name of this info type must
+        #     not occur naturally anywhere in your data; otherwise, inspection may either
+        #
+        #     * reverse a surrogate that does not correspond to an actual identifier
+        #     * be unable to parse the surrogate and result in an error
+        #
+        #     Therefore, choose your custom info type name carefully after considering
+        #     what your data looks like. One way to select a name that has a high chance
+        #     of yielding reliable detection is to include one or more unicode characters
+        #     that are highly improbable to exist in your data.
+        #     For example, assuming your data is entered from a regular ASCII keyboard,
+        #     the symbol with the hex code point 29DD might be used like so:
+        #     ⧝MY_TOKEN_TYPE
+        # @!attribute [rw] context
+        #   @return [Google::Privacy::Dlp::V2::FieldId]
+        #     Optional. A context may be used for higher security and maintaining
+        #     referential integrity such that the same identifier in two different
+        #     contexts will be given a distinct surrogate. The context is appended to
+        #     plaintext value being encrypted. On decryption the provided context is
+        #     validated against the value used during encryption. If a context was
+        #     provided during encryption, same context must be provided during decryption
+        #     as well.
+        #
+        #     If the context is not set, plaintext would be used as is for encryption.
+        #     If the context is set but:
+        #
+        #     1. there is no record present when transforming a given value or
+        #     2. the field is not present when transforming a given value,
+        #
+        #     plaintext would be used as is for encryption.
+        #
+        #     Note that case (1) is expected when an `InfoTypeTransformation` is
+        #     applied to both structured and non-structured `ContentItem`s.
+        class CryptoDeterministicConfig; end
 
         # Replace each input value with a given `Value`.
         # @!attribute [rw] new_value
@@ -1376,16 +1436,19 @@ module Google
           class Bucket; end
         end
 
-        # Replaces an identifier with a surrogate using FPE with the FFX
-        # mode of operation; however when used in the `ReidentifyContent` API method,
-        # it serves the opposite function by reversing the surrogate back into
-        # the original identifier.
-        # The identifier must be encoded as ASCII.
-        # For a given crypto key and context, the same identifier will be
-        # replaced with the same surrogate.
-        # Identifiers must be at least two characters long.
-        # In the case that the identifier is the empty string, it will be skipped.
-        # See https://cloud.google.com/dlp/docs/pseudonymization to learn more.
+        # Replaces an identifier with a surrogate using Format Preserving Encryption
+        # (FPE) with the FFX mode of operation; however when used in the
+        # `ReidentifyContent` API method, it serves the opposite function by reversing
+        # the surrogate back into the original identifier. The identifier must be
+        # encoded as ASCII. For a given crypto key and context, the same identifier
+        # will be replaced with the same surrogate. Identifiers must be at least two
+        # characters long. In the case that the identifier is the empty string, it will
+        # be skipped. See https://cloud.google.com/dlp/docs/pseudonymization to learn
+        # more.
+        #
+        # Note: We recommend using  CryptoDeterministicConfig for all use cases which
+        # do not require preserving the input alphabet space and size, plus warrant
+        # referential integrity.
         # @!attribute [rw] crypto_key
         #   @return [Google::Privacy::Dlp::V2::CryptoKey]
         #     The key used by the encryption algorithm. [required]
@@ -1502,10 +1565,11 @@ module Google
         # leaking the key. Choose another type of key if possible.
         # @!attribute [rw] key
         #   @return [String]
-        #     The AES 128/192/256 bit key. [required]
+        #     A 128/192/256 bit key. [required]
         class UnwrappedCryptoKey; end
 
         # Include to use an existing data crypto key wrapped by KMS.
+        # The wrapped key must be a 128/192/256 bit key.
         # Authorization requires the following IAM permissions when sending a request
         # to perform a crypto transformation using a kms-wrapped crypto key:
         # dlp.kms.encrypt
@@ -1674,7 +1738,7 @@ module Google
         #     Transformations applied to the dataset.
         class TransformationOverview; end
 
-        # Summary of a single tranformation.
+        # Summary of a single transformation.
         # Only one of 'transformation', 'field_transformation', or 'record_suppress'
         # will be set.
         # @!attribute [rw] info_type
@@ -1875,7 +1939,7 @@ module Google
         #     Publish summary to Cloud Security Command Center (Alpha).
         # @!attribute [rw] job_notification_emails
         #   @return [Google::Privacy::Dlp::V2::Action::JobNotificationEmails]
-        #     Enable email notification to project owners and editors on job‘s
+        #     Enable email notification to project owners and editors on job's
         #     completion/failure.
         class Action
           # If set, the detailed findings will be persisted to the specified
@@ -1925,7 +1989,7 @@ module Google
         #   @return [String]
         #     The template id can contain uppercase and lowercase letters,
         #     numbers, and hyphens; that is, it must match the regular
-        #     expression: `[a-zA-Z\\d-]+`. The maximum length is 100
+        #     expression: `[a-zA-Z\\d-_]+`. The maximum length is 100
         #     characters. Can be empty to allow the system to generate one.
         class CreateInspectTemplateRequest; end
 
@@ -2010,7 +2074,7 @@ module Google
         #   @return [String]
         #     The trigger id can contain uppercase and lowercase letters,
         #     numbers, and hyphens; that is, it must match the regular
-        #     expression: `[a-zA-Z\\d-]+`. The maximum length is 100
+        #     expression: `[a-zA-Z\\d-_]+`. The maximum length is 100
         #     characters. Can be empty to allow the system to generate one.
         class CreateJobTriggerRequest; end
 
@@ -2055,7 +2119,7 @@ module Google
         #   @return [String]
         #     The job id can contain uppercase and lowercase letters,
         #     numbers, and hyphens; that is, it must match the regular
-        #     expression: `[a-zA-Z\\d-]+`. The maximum length is 100
+        #     expression: `[a-zA-Z\\d-_]+`. The maximum length is 100
         #     characters. Can be empty to allow the system to generate one.
         class CreateDlpJobRequest; end
 
@@ -2297,7 +2361,7 @@ module Google
         #   @return [String]
         #     The template id can contain uppercase and lowercase letters,
         #     numbers, and hyphens; that is, it must match the regular
-        #     expression: `[a-zA-Z\\d-]+`. The maximum length is 100
+        #     expression: `[a-zA-Z\\d-_]+`. The maximum length is 100
         #     characters. Can be empty to allow the system to generate one.
         class CreateDeidentifyTemplateRequest; end
 
@@ -2458,7 +2522,7 @@ module Google
         #   @return [String]
         #     The storedInfoType ID can contain uppercase and lowercase letters,
         #     numbers, and hyphens; that is, it must match the regular
-        #     expression: `[a-zA-Z\\d-]+`. The maximum length is 100
+        #     expression: `[a-zA-Z\\d-_]+`. The maximum length is 100
         #     characters. Can be empty to allow the system to generate one.
         class CreateStoredInfoTypeRequest; end
 
