@@ -90,9 +90,8 @@ js:
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
     <p>Http target. The job will be pushed to the job handler by means of
-an HTTP request via an
-<span class='object_link'><a href="#http_method-instance_method" title="Google::Cloud::Scheduler::V1beta1::HttpTarget#http_method (method)">http_method</a></span> such as
-HTTP POST, HTTP GET, etc. The job is acknowledged by means of an HTTP
+an HTTP request via an <span class='object_link'><a href="#http_method-instance_method" title="Google::Cloud::Scheduler::V1beta1::HttpTarget#http_method (method)">http_method</a></span> such as HTTP
+POST, HTTP GET, etc. The job is acknowledged by means of an HTTP
 response code in the range [200 - 299]. A failure to receive a response
 constitutes a failed execution. For a redirected request, the response
 returned by the redirected request is considered.</p>
@@ -191,6 +190,58 @@ returned by the redirected request is considered.</p>
       <li class="public ">
   <span class="summary_signature">
     
+      <a href="#oauth_token-instance_method" title="#oauth_token (instance method)">#<strong>oauth_token</strong>  &#x21d2; Google::Cloud::Scheduler::V1beta1::OAuthToken </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>If specified, an <a href="https://developers.google.com/identity/protocols/OAuth2">OAuth token</a> will be generated and attached as an <code>Authorization</code> header in the HTTP request.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#oidc_token-instance_method" title="#oidc_token (instance method)">#<strong>oidc_token</strong>  &#x21d2; Google::Cloud::Scheduler::V1beta1::OidcToken </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>If specified, an <a href="https://developers.google.com/identity/protocols/OpenIDConnect">OIDC</a> token will be generated and attached as an <code>Authorization</code> header in the HTTP request.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#uri-instance_method" title="#uri (instance method)">#<strong>uri</strong>  &#x21d2; String </a>
     
 
@@ -271,10 +322,10 @@ incompatible <span class='object_link'><a href="HttpMethod.html" title="Google::
       <pre class="lines">
 
 
-62</pre>
+79</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/scheduler/v1beta1/doc/google/cloud/scheduler/v1beta1/target.rb', line 62</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/scheduler/v1beta1/doc/google/cloud/scheduler/v1beta1/target.rb', line 79</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Scheduler::V1beta1::HttpTarget (class)">HttpTarget</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -360,10 +411,10 @@ will be ignored or replaced is below:</p>
       <pre class="lines">
 
 
-62</pre>
+79</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/scheduler/v1beta1/doc/google/cloud/scheduler/v1beta1/target.rb', line 62</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/scheduler/v1beta1/doc/google/cloud/scheduler/v1beta1/target.rb', line 79</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Scheduler::V1beta1::HttpTarget (class)">HttpTarget</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -415,10 +466,144 @@ will be ignored or replaced is below:</p>
       <pre class="lines">
 
 
-62</pre>
+79</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/scheduler/v1beta1/doc/google/cloud/scheduler/v1beta1/target.rb', line 62</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/scheduler/v1beta1/doc/google/cloud/scheduler/v1beta1/target.rb', line 79</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Scheduler::V1beta1::HttpTarget (class)">HttpTarget</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="oauth_token=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="oauth_token-instance_method">
+  
+    #<strong>oauth_token</strong>  &#x21d2; <tt><span class='object_link'><a href="OAuthToken.html" title="Google::Cloud::Scheduler::V1beta1::OAuthToken (class)">Google::Cloud::Scheduler::V1beta1::OAuthToken</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns If specified, an
+<a href="https://developers.google.com/identity/protocols/OAuth2">OAuth token</a>
+will be generated and attached as an <code>Authorization</code> header in the HTTP
+request.</p>
+
+<p>This type of authorization should be used when sending requests to a GCP
+endpoint.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="OAuthToken.html" title="Google::Cloud::Scheduler::V1beta1::OAuthToken (class)">Google::Cloud::Scheduler::V1beta1::OAuthToken</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>If specified, an
+<a href="https://developers.google.com/identity/protocols/OAuth2">OAuth token</a>
+will be generated and attached as an <code>Authorization</code> header in the HTTP
+request.</p>
+
+<p>This type of authorization should be used when sending requests to a GCP
+endpoint.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+79</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/scheduler/v1beta1/doc/google/cloud/scheduler/v1beta1/target.rb', line 79</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Scheduler::V1beta1::HttpTarget (class)">HttpTarget</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="oidc_token=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="oidc_token-instance_method">
+  
+    #<strong>oidc_token</strong>  &#x21d2; <tt><span class='object_link'><a href="OidcToken.html" title="Google::Cloud::Scheduler::V1beta1::OidcToken (class)">Google::Cloud::Scheduler::V1beta1::OidcToken</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns If specified, an
+<a href="https://developers.google.com/identity/protocols/OpenIDConnect">OIDC</a>
+token will be generated and attached as an <code>Authorization</code> header in the
+HTTP request.</p>
+
+<p>This type of authorization should be used when sending requests to third
+party endpoints.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="OidcToken.html" title="Google::Cloud::Scheduler::V1beta1::OidcToken (class)">Google::Cloud::Scheduler::V1beta1::OidcToken</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>If specified, an
+<a href="https://developers.google.com/identity/protocols/OpenIDConnect">OIDC</a>
+token will be generated and attached as an <code>Authorization</code> header in the
+HTTP request.</p>
+
+<p>This type of authorization should be used when sending requests to third
+party endpoints.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+79</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/scheduler/v1beta1/doc/google/cloud/scheduler/v1beta1/target.rb', line 79</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Scheduler::V1beta1::HttpTarget (class)">HttpTarget</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -484,10 +669,10 @@ URL length is 2083 characters after encoding.</p>
       <pre class="lines">
 
 
-62</pre>
+79</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/scheduler/v1beta1/doc/google/cloud/scheduler/v1beta1/target.rb', line 62</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/scheduler/v1beta1/doc/google/cloud/scheduler/v1beta1/target.rb', line 79</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Scheduler::V1beta1::HttpTarget (class)">HttpTarget</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>

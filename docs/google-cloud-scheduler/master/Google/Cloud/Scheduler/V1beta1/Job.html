@@ -144,6 +144,32 @@ The maximum allowed size for a job is 100KB.</p>
       <li class="public ">
   <span class="summary_signature">
     
+      <a href="#attempt_deadline-instance_method" title="#attempt_deadline (instance method)">#<strong>attempt_deadline</strong>  &#x21d2; Google::Protobuf::Duration </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The deadline for job attempts.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#description-instance_method" title="#description (instance method)">#<strong>description</strong>  &#x21d2; String </a>
     
 
@@ -161,7 +187,7 @@ The maximum allowed size for a job is 100KB.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>A human-readable description for the job.</p>
+    <span class="summary_desc"><div class='inline'><p>Optionally caller-specified in CreateJob or UpdateJob.</p>
 </div></span>
   
 </li>
@@ -239,7 +265,7 @@ The maximum allowed size for a job is 100KB.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>The job name.</p>
+    <span class="summary_desc"><div class='inline'><p>Optionally caller-specified in CreateJob, after which it becomes output only.</p>
 </div></span>
   
 </li>
@@ -317,7 +343,7 @@ The maximum allowed size for a job is 100KB.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Required.</p>
+    <span class="summary_desc"><div class='inline'><p>Required, except when used with UpdateJob.</p>
 </div></span>
   
 </li>
@@ -506,24 +532,6 @@ The maximum allowed size for a job is 100KB.</p>
       <pre class="lines">
 
 
-109
-110
-111
-112
-113
-114
-115
-116
-117
-118
-119
-120
-121
-122
-123
-124
-125
-126
 127
 128
 129
@@ -531,10 +539,26 @@ The maximum allowed size for a job is 100KB.</p>
 131
 132
 133
-134</pre>
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/scheduler/v1beta1/doc/google/cloud/scheduler/v1beta1/job.rb', line 109</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/scheduler/v1beta1/doc/google/cloud/scheduler/v1beta1/job.rb', line 127</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Scheduler::V1beta1::Job (class)">Job</a></span></span>
   <span class='comment'># State of the job.
@@ -554,11 +578,136 @@ The maximum allowed size for a job is 100KB.</p>
 </span>    <span class='comment'># cannot directly set a job to be disabled.
 </span>    <span class='const'>DISABLED</span> <span class='op'>=</span> <span class='int'>3</span>
 
-    <span class='comment'># The job state resulting from a failed
-</span>    <span class='comment'># {Google::Cloud::Scheduler::V1beta1::CloudScheduler::UpdateJob CloudScheduler::UpdateJob}
+    <span class='comment'># The job state resulting from a failed {Google::Cloud::Scheduler::V1beta1::CloudScheduler::UpdateJob CloudScheduler::UpdateJob}
 </span>    <span class='comment'># operation. To recover a job from this state, retry
-</span>    <span class='comment'># {Google::Cloud::Scheduler::V1beta1::CloudScheduler::UpdateJob CloudScheduler::UpdateJob}
-</span>    <span class='comment'># until a successful response is received.
+</span>    <span class='comment'># {Google::Cloud::Scheduler::V1beta1::CloudScheduler::UpdateJob CloudScheduler::UpdateJob} until a successful response is received.
+</span>    <span class='const'>UPDATE_FAILED</span> <span class='op'>=</span> <span class='int'>4</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="attempt_deadline=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="attempt_deadline-instance_method">
+  
+    #<strong>attempt_deadline</strong>  &#x21d2; <tt><span class='object_link'><a href="../../../Protobuf/Duration.html" title="Google::Protobuf::Duration (class)">Google::Protobuf::Duration</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns The deadline for job attempts. If the request handler does not respond by
+this deadline then the request is cancelled and the attempt is marked as a
+<code>DEADLINE_EXCEEDED</code> failure. The failed attempt can be viewed in
+execution logs. Cloud Scheduler will retry the job according
+to the <span class='object_link'><a href="RetryConfig.html" title="Google::Cloud::Scheduler::V1beta1::RetryConfig (class)">RetryConfig</a></span>.</p>
+
+<p>The allowed duration for this deadline is:</p>
+
+<ul>
+<li>For <span class='object_link'><a href="#http_target-instance_method" title="Google::Cloud::Scheduler::V1beta1::Job#http_target (method)">HTTP targets</a></span>, between 15 seconds and 30 minutes.</li>
+<li>For <span class='object_link'><a href="#app_engine_http_target-instance_method" title="Google::Cloud::Scheduler::V1beta1::Job#app_engine_http_target (method)">App Engine HTTP targets</a></span>, between 15
+seconds and 24 hours.</li>
+<li>For <span class='object_link'><a href="#pubsub_target-instance_method" title="Google::Cloud::Scheduler::V1beta1::Job#pubsub_target (method)">PubSub targets</a></span>, this field is ignored.</li>
+</ul>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../../Protobuf/Duration.html" title="Google::Protobuf::Duration (class)">Google::Protobuf::Duration</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The deadline for job attempts. If the request handler does not respond by
+this deadline then the request is cancelled and the attempt is marked as a
+<code>DEADLINE_EXCEEDED</code> failure. The failed attempt can be viewed in
+execution logs. Cloud Scheduler will retry the job according
+to the <span class='object_link'><a href="RetryConfig.html" title="Google::Cloud::Scheduler::V1beta1::RetryConfig (class)">RetryConfig</a></span>.</p>
+
+<p>The allowed duration for this deadline is:</p>
+
+<ul>
+<li>For <span class='object_link'><a href="#http_target-instance_method" title="Google::Cloud::Scheduler::V1beta1::Job#http_target (method)">HTTP targets</a></span>, between 15 seconds and 30 minutes.</li>
+<li>For <span class='object_link'><a href="#app_engine_http_target-instance_method" title="Google::Cloud::Scheduler::V1beta1::Job#app_engine_http_target (method)">App Engine HTTP targets</a></span>, between 15
+seconds and 24 hours.</li>
+<li>For <span class='object_link'><a href="#pubsub_target-instance_method" title="Google::Cloud::Scheduler::V1beta1::Job#pubsub_target (method)">PubSub targets</a></span>, this field is ignored.</li>
+</ul>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/scheduler/v1beta1/doc/google/cloud/scheduler/v1beta1/job.rb', line 127</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Scheduler::V1beta1::Job (class)">Job</a></span></span>
+  <span class='comment'># State of the job.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Job/State.html" title="Google::Cloud::Scheduler::V1beta1::Job::State (module)">State</a></span></span>
+    <span class='comment'># Unspecified state.
+</span>    <span class='const'>STATE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># The job is executing normally.
+</span>    <span class='const'>ENABLED</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># The job is paused by the user. It will not execute. A user can
+</span>    <span class='comment'># intentionally pause the job using
+</span>    <span class='comment'># {Google::Cloud::Scheduler::V1beta1::PauseJobRequest PauseJobRequest}.
+</span>    <span class='const'>PAUSED</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># The job is disabled by the system due to error. The user
+</span>    <span class='comment'># cannot directly set a job to be disabled.
+</span>    <span class='const'>DISABLED</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># The job state resulting from a failed {Google::Cloud::Scheduler::V1beta1::CloudScheduler::UpdateJob CloudScheduler::UpdateJob}
+</span>    <span class='comment'># operation. To recover a job from this state, retry
+</span>    <span class='comment'># {Google::Cloud::Scheduler::V1beta1::CloudScheduler::UpdateJob CloudScheduler::UpdateJob} until a successful response is received.
 </span>    <span class='const'>UPDATE_FAILED</span> <span class='op'>=</span> <span class='int'>4</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
@@ -580,7 +729,10 @@ The maximum allowed size for a job is 100KB.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns A human-readable description for the job. This string must not contain
+    <p>Returns Optionally caller-specified in CreateJob or
+UpdateJob.</p>
+
+<p>A human-readable description for the job. This string must not contain
 more than 500 characters.</p>
 
 
@@ -599,7 +751,10 @@ more than 500 characters.</p>
       
       
         &mdash;
-        <div class='inline'><p>A human-readable description for the job. This string must not contain
+        <div class='inline'><p>Optionally caller-specified in CreateJob or
+UpdateJob.</p>
+
+<p>A human-readable description for the job. This string must not contain
 more than 500 characters.</p>
 </div>
       
@@ -613,24 +768,6 @@ more than 500 characters.</p>
       <pre class="lines">
 
 
-109
-110
-111
-112
-113
-114
-115
-116
-117
-118
-119
-120
-121
-122
-123
-124
-125
-126
 127
 128
 129
@@ -638,10 +775,26 @@ more than 500 characters.</p>
 131
 132
 133
-134</pre>
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/scheduler/v1beta1/doc/google/cloud/scheduler/v1beta1/job.rb', line 109</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/scheduler/v1beta1/doc/google/cloud/scheduler/v1beta1/job.rb', line 127</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Scheduler::V1beta1::Job (class)">Job</a></span></span>
   <span class='comment'># State of the job.
@@ -661,11 +814,9 @@ more than 500 characters.</p>
 </span>    <span class='comment'># cannot directly set a job to be disabled.
 </span>    <span class='const'>DISABLED</span> <span class='op'>=</span> <span class='int'>3</span>
 
-    <span class='comment'># The job state resulting from a failed
-</span>    <span class='comment'># {Google::Cloud::Scheduler::V1beta1::CloudScheduler::UpdateJob CloudScheduler::UpdateJob}
+    <span class='comment'># The job state resulting from a failed {Google::Cloud::Scheduler::V1beta1::CloudScheduler::UpdateJob CloudScheduler::UpdateJob}
 </span>    <span class='comment'># operation. To recover a job from this state, retry
-</span>    <span class='comment'># {Google::Cloud::Scheduler::V1beta1::CloudScheduler::UpdateJob CloudScheduler::UpdateJob}
-</span>    <span class='comment'># until a successful response is received.
+</span>    <span class='comment'># {Google::Cloud::Scheduler::V1beta1::CloudScheduler::UpdateJob CloudScheduler::UpdateJob} until a successful response is received.
 </span>    <span class='const'>UPDATE_FAILED</span> <span class='op'>=</span> <span class='int'>4</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
@@ -718,24 +869,6 @@ more than 500 characters.</p>
       <pre class="lines">
 
 
-109
-110
-111
-112
-113
-114
-115
-116
-117
-118
-119
-120
-121
-122
-123
-124
-125
-126
 127
 128
 129
@@ -743,10 +876,26 @@ more than 500 characters.</p>
 131
 132
 133
-134</pre>
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/scheduler/v1beta1/doc/google/cloud/scheduler/v1beta1/job.rb', line 109</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/scheduler/v1beta1/doc/google/cloud/scheduler/v1beta1/job.rb', line 127</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Scheduler::V1beta1::Job (class)">Job</a></span></span>
   <span class='comment'># State of the job.
@@ -766,11 +915,9 @@ more than 500 characters.</p>
 </span>    <span class='comment'># cannot directly set a job to be disabled.
 </span>    <span class='const'>DISABLED</span> <span class='op'>=</span> <span class='int'>3</span>
 
-    <span class='comment'># The job state resulting from a failed
-</span>    <span class='comment'># {Google::Cloud::Scheduler::V1beta1::CloudScheduler::UpdateJob CloudScheduler::UpdateJob}
+    <span class='comment'># The job state resulting from a failed {Google::Cloud::Scheduler::V1beta1::CloudScheduler::UpdateJob CloudScheduler::UpdateJob}
 </span>    <span class='comment'># operation. To recover a job from this state, retry
-</span>    <span class='comment'># {Google::Cloud::Scheduler::V1beta1::CloudScheduler::UpdateJob CloudScheduler::UpdateJob}
-</span>    <span class='comment'># until a successful response is received.
+</span>    <span class='comment'># {Google::Cloud::Scheduler::V1beta1::CloudScheduler::UpdateJob CloudScheduler::UpdateJob} until a successful response is received.
 </span>    <span class='const'>UPDATE_FAILED</span> <span class='op'>=</span> <span class='int'>4</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
@@ -823,24 +970,6 @@ more than 500 characters.</p>
       <pre class="lines">
 
 
-109
-110
-111
-112
-113
-114
-115
-116
-117
-118
-119
-120
-121
-122
-123
-124
-125
-126
 127
 128
 129
@@ -848,10 +977,26 @@ more than 500 characters.</p>
 131
 132
 133
-134</pre>
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/scheduler/v1beta1/doc/google/cloud/scheduler/v1beta1/job.rb', line 109</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/scheduler/v1beta1/doc/google/cloud/scheduler/v1beta1/job.rb', line 127</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Scheduler::V1beta1::Job (class)">Job</a></span></span>
   <span class='comment'># State of the job.
@@ -871,11 +1016,9 @@ more than 500 characters.</p>
 </span>    <span class='comment'># cannot directly set a job to be disabled.
 </span>    <span class='const'>DISABLED</span> <span class='op'>=</span> <span class='int'>3</span>
 
-    <span class='comment'># The job state resulting from a failed
-</span>    <span class='comment'># {Google::Cloud::Scheduler::V1beta1::CloudScheduler::UpdateJob CloudScheduler::UpdateJob}
+    <span class='comment'># The job state resulting from a failed {Google::Cloud::Scheduler::V1beta1::CloudScheduler::UpdateJob CloudScheduler::UpdateJob}
 </span>    <span class='comment'># operation. To recover a job from this state, retry
-</span>    <span class='comment'># {Google::Cloud::Scheduler::V1beta1::CloudScheduler::UpdateJob CloudScheduler::UpdateJob}
-</span>    <span class='comment'># until a successful response is received.
+</span>    <span class='comment'># {Google::Cloud::Scheduler::V1beta1::CloudScheduler::UpdateJob CloudScheduler::UpdateJob} until a successful response is received.
 </span>    <span class='const'>UPDATE_FAILED</span> <span class='op'>=</span> <span class='int'>4</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
@@ -897,7 +1040,10 @@ more than 500 characters.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns The job name. For example:
+    <p>Returns Optionally caller-specified in CreateJob, after
+which it becomes output only.</p>
+
+<p>The job name. For example:
 <code>projects/PROJECT_ID/locations/LOCATION_ID/jobs/JOB_ID</code>.</p>
 
 <ul>
@@ -930,7 +1076,10 @@ hyphens (-), or underscores (_). The maximum length is 500 characters.</li>
       
       
         &mdash;
-        <div class='inline'><p>The job name. For example:
+        <div class='inline'><p>Optionally caller-specified in CreateJob, after
+which it becomes output only.</p>
+
+<p>The job name. For example:
 <code>projects/PROJECT_ID/locations/LOCATION_ID/jobs/JOB_ID</code>.</p>
 
 <ul>
@@ -958,24 +1107,6 @@ hyphens (-), or underscores (_). The maximum length is 500 characters.</li>
       <pre class="lines">
 
 
-109
-110
-111
-112
-113
-114
-115
-116
-117
-118
-119
-120
-121
-122
-123
-124
-125
-126
 127
 128
 129
@@ -983,10 +1114,26 @@ hyphens (-), or underscores (_). The maximum length is 500 characters.</li>
 131
 132
 133
-134</pre>
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/scheduler/v1beta1/doc/google/cloud/scheduler/v1beta1/job.rb', line 109</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/scheduler/v1beta1/doc/google/cloud/scheduler/v1beta1/job.rb', line 127</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Scheduler::V1beta1::Job (class)">Job</a></span></span>
   <span class='comment'># State of the job.
@@ -1006,11 +1153,9 @@ hyphens (-), or underscores (_). The maximum length is 500 characters.</li>
 </span>    <span class='comment'># cannot directly set a job to be disabled.
 </span>    <span class='const'>DISABLED</span> <span class='op'>=</span> <span class='int'>3</span>
 
-    <span class='comment'># The job state resulting from a failed
-</span>    <span class='comment'># {Google::Cloud::Scheduler::V1beta1::CloudScheduler::UpdateJob CloudScheduler::UpdateJob}
+    <span class='comment'># The job state resulting from a failed {Google::Cloud::Scheduler::V1beta1::CloudScheduler::UpdateJob CloudScheduler::UpdateJob}
 </span>    <span class='comment'># operation. To recover a job from this state, retry
-</span>    <span class='comment'># {Google::Cloud::Scheduler::V1beta1::CloudScheduler::UpdateJob CloudScheduler::UpdateJob}
-</span>    <span class='comment'># until a successful response is received.
+</span>    <span class='comment'># {Google::Cloud::Scheduler::V1beta1::CloudScheduler::UpdateJob CloudScheduler::UpdateJob} until a successful response is received.
 </span>    <span class='const'>UPDATE_FAILED</span> <span class='op'>=</span> <span class='int'>4</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
@@ -1063,24 +1208,6 @@ hyphens (-), or underscores (_). The maximum length is 500 characters.</li>
       <pre class="lines">
 
 
-109
-110
-111
-112
-113
-114
-115
-116
-117
-118
-119
-120
-121
-122
-123
-124
-125
-126
 127
 128
 129
@@ -1088,10 +1215,26 @@ hyphens (-), or underscores (_). The maximum length is 500 characters.</li>
 131
 132
 133
-134</pre>
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/scheduler/v1beta1/doc/google/cloud/scheduler/v1beta1/job.rb', line 109</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/scheduler/v1beta1/doc/google/cloud/scheduler/v1beta1/job.rb', line 127</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Scheduler::V1beta1::Job (class)">Job</a></span></span>
   <span class='comment'># State of the job.
@@ -1111,11 +1254,9 @@ hyphens (-), or underscores (_). The maximum length is 500 characters.</li>
 </span>    <span class='comment'># cannot directly set a job to be disabled.
 </span>    <span class='const'>DISABLED</span> <span class='op'>=</span> <span class='int'>3</span>
 
-    <span class='comment'># The job state resulting from a failed
-</span>    <span class='comment'># {Google::Cloud::Scheduler::V1beta1::CloudScheduler::UpdateJob CloudScheduler::UpdateJob}
+    <span class='comment'># The job state resulting from a failed {Google::Cloud::Scheduler::V1beta1::CloudScheduler::UpdateJob CloudScheduler::UpdateJob}
 </span>    <span class='comment'># operation. To recover a job from this state, retry
-</span>    <span class='comment'># {Google::Cloud::Scheduler::V1beta1::CloudScheduler::UpdateJob CloudScheduler::UpdateJob}
-</span>    <span class='comment'># until a successful response is received.
+</span>    <span class='comment'># {Google::Cloud::Scheduler::V1beta1::CloudScheduler::UpdateJob CloudScheduler::UpdateJob} until a successful response is received.
 </span>    <span class='const'>UPDATE_FAILED</span> <span class='op'>=</span> <span class='int'>4</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
@@ -1168,24 +1309,6 @@ hyphens (-), or underscores (_). The maximum length is 500 characters.</li>
       <pre class="lines">
 
 
-109
-110
-111
-112
-113
-114
-115
-116
-117
-118
-119
-120
-121
-122
-123
-124
-125
-126
 127
 128
 129
@@ -1193,10 +1316,26 @@ hyphens (-), or underscores (_). The maximum length is 500 characters.</li>
 131
 132
 133
-134</pre>
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/scheduler/v1beta1/doc/google/cloud/scheduler/v1beta1/job.rb', line 109</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/scheduler/v1beta1/doc/google/cloud/scheduler/v1beta1/job.rb', line 127</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Scheduler::V1beta1::Job (class)">Job</a></span></span>
   <span class='comment'># State of the job.
@@ -1216,11 +1355,9 @@ hyphens (-), or underscores (_). The maximum length is 500 characters.</li>
 </span>    <span class='comment'># cannot directly set a job to be disabled.
 </span>    <span class='const'>DISABLED</span> <span class='op'>=</span> <span class='int'>3</span>
 
-    <span class='comment'># The job state resulting from a failed
-</span>    <span class='comment'># {Google::Cloud::Scheduler::V1beta1::CloudScheduler::UpdateJob CloudScheduler::UpdateJob}
+    <span class='comment'># The job state resulting from a failed {Google::Cloud::Scheduler::V1beta1::CloudScheduler::UpdateJob CloudScheduler::UpdateJob}
 </span>    <span class='comment'># operation. To recover a job from this state, retry
-</span>    <span class='comment'># {Google::Cloud::Scheduler::V1beta1::CloudScheduler::UpdateJob CloudScheduler::UpdateJob}
-</span>    <span class='comment'># until a successful response is received.
+</span>    <span class='comment'># {Google::Cloud::Scheduler::V1beta1::CloudScheduler::UpdateJob CloudScheduler::UpdateJob} until a successful response is received.
 </span>    <span class='const'>UPDATE_FAILED</span> <span class='op'>=</span> <span class='int'>4</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
@@ -1242,9 +1379,17 @@ hyphens (-), or underscores (_). The maximum length is 500 characters.</li>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Required.</p>
+    <p>Returns Required, except when used with UpdateJob.</p>
 
 <p>Describes the schedule on which the job will be executed.</p>
+
+<p>The schedule can be either of the following types:</p>
+
+<ul>
+<li><a href="http://en.wikipedia.org/wiki/Cron#Overview">Crontab</a></li>
+<li>English-like
+<a href="https://cloud.google.com/scheduler/docs/configuring/cron-job-schedules">schedule</a></li>
+</ul>
 
 <p>As a general rule, execution <code>n + 1</code> of a job will not begin
 until execution <code>n</code> has finished. Cloud Scheduler will never
@@ -1255,19 +1400,10 @@ execution will not start until <code>16:15</code>.
 A scheduled start time will be delayed if the previous
 execution has not ended when its scheduled time occurs.</p>
 
-<p>If <span class='object_link'><a href="RetryConfig.html#retry_count-instance_method" title="Google::Cloud::Scheduler::V1beta1::RetryConfig#retry_count (method)">retry_count</a></span> &gt;
-0 and a job attempt fails, the job will be tried a total of
-<span class='object_link'><a href="RetryConfig.html#retry_count-instance_method" title="Google::Cloud::Scheduler::V1beta1::RetryConfig#retry_count (method)">retry_count</a></span>
+<p>If <span class='object_link'><a href="RetryConfig.html#retry_count-instance_method" title="Google::Cloud::Scheduler::V1beta1::RetryConfig#retry_count (method)">retry_count</a></span> &gt; 0 and a job attempt fails,
+the job will be tried a total of <span class='object_link'><a href="RetryConfig.html#retry_count-instance_method" title="Google::Cloud::Scheduler::V1beta1::RetryConfig#retry_count (method)">retry_count</a></span>
 times, with exponential backoff, until the next scheduled start
 time.</p>
-
-<p>The schedule can be either of the following types:</p>
-
-<ul>
-<li><a href="http://en.wikipedia.org/wiki/Cron#Overview">Crontab</a></li>
-<li>English-like
-<a href="https://cloud.google.com/scheduler/docs/configuring/cron-job-schedules">schedule</a></li>
-</ul>
 
 
   </div>
@@ -1285,9 +1421,17 @@ time.</p>
       
       
         &mdash;
-        <div class='inline'><p>Required.</p>
+        <div class='inline'><p>Required, except when used with UpdateJob.</p>
 
 <p>Describes the schedule on which the job will be executed.</p>
+
+<p>The schedule can be either of the following types:</p>
+
+<ul>
+<li><a href="http://en.wikipedia.org/wiki/Cron#Overview">Crontab</a></li>
+<li>English-like
+<a href="https://cloud.google.com/scheduler/docs/configuring/cron-job-schedules">schedule</a></li>
+</ul>
 
 <p>As a general rule, execution <code>n + 1</code> of a job will not begin
 until execution <code>n</code> has finished. Cloud Scheduler will never
@@ -1298,19 +1442,10 @@ execution will not start until <code>16:15</code>.
 A scheduled start time will be delayed if the previous
 execution has not ended when its scheduled time occurs.</p>
 
-<p>If <span class='object_link'><a href="RetryConfig.html#retry_count-instance_method" title="Google::Cloud::Scheduler::V1beta1::RetryConfig#retry_count (method)">retry_count</a></span> &gt;
-0 and a job attempt fails, the job will be tried a total of
-<span class='object_link'><a href="RetryConfig.html#retry_count-instance_method" title="Google::Cloud::Scheduler::V1beta1::RetryConfig#retry_count (method)">retry_count</a></span>
+<p>If <span class='object_link'><a href="RetryConfig.html#retry_count-instance_method" title="Google::Cloud::Scheduler::V1beta1::RetryConfig#retry_count (method)">retry_count</a></span> &gt; 0 and a job attempt fails,
+the job will be tried a total of <span class='object_link'><a href="RetryConfig.html#retry_count-instance_method" title="Google::Cloud::Scheduler::V1beta1::RetryConfig#retry_count (method)">retry_count</a></span>
 times, with exponential backoff, until the next scheduled start
 time.</p>
-
-<p>The schedule can be either of the following types:</p>
-
-<ul>
-<li><a href="http://en.wikipedia.org/wiki/Cron#Overview">Crontab</a></li>
-<li>English-like
-<a href="https://cloud.google.com/scheduler/docs/configuring/cron-job-schedules">schedule</a></li>
-</ul>
 </div>
       
     </li>
@@ -1323,24 +1458,6 @@ time.</p>
       <pre class="lines">
 
 
-109
-110
-111
-112
-113
-114
-115
-116
-117
-118
-119
-120
-121
-122
-123
-124
-125
-126
 127
 128
 129
@@ -1348,10 +1465,26 @@ time.</p>
 131
 132
 133
-134</pre>
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/scheduler/v1beta1/doc/google/cloud/scheduler/v1beta1/job.rb', line 109</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/scheduler/v1beta1/doc/google/cloud/scheduler/v1beta1/job.rb', line 127</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Scheduler::V1beta1::Job (class)">Job</a></span></span>
   <span class='comment'># State of the job.
@@ -1371,11 +1504,9 @@ time.</p>
 </span>    <span class='comment'># cannot directly set a job to be disabled.
 </span>    <span class='const'>DISABLED</span> <span class='op'>=</span> <span class='int'>3</span>
 
-    <span class='comment'># The job state resulting from a failed
-</span>    <span class='comment'># {Google::Cloud::Scheduler::V1beta1::CloudScheduler::UpdateJob CloudScheduler::UpdateJob}
+    <span class='comment'># The job state resulting from a failed {Google::Cloud::Scheduler::V1beta1::CloudScheduler::UpdateJob CloudScheduler::UpdateJob}
 </span>    <span class='comment'># operation. To recover a job from this state, retry
-</span>    <span class='comment'># {Google::Cloud::Scheduler::V1beta1::CloudScheduler::UpdateJob CloudScheduler::UpdateJob}
-</span>    <span class='comment'># until a successful response is received.
+</span>    <span class='comment'># {Google::Cloud::Scheduler::V1beta1::CloudScheduler::UpdateJob CloudScheduler::UpdateJob} until a successful response is received.
 </span>    <span class='const'>UPDATE_FAILED</span> <span class='op'>=</span> <span class='int'>4</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
@@ -1432,24 +1563,6 @@ according to the schedule.</p>
       <pre class="lines">
 
 
-109
-110
-111
-112
-113
-114
-115
-116
-117
-118
-119
-120
-121
-122
-123
-124
-125
-126
 127
 128
 129
@@ -1457,10 +1570,26 @@ according to the schedule.</p>
 131
 132
 133
-134</pre>
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/scheduler/v1beta1/doc/google/cloud/scheduler/v1beta1/job.rb', line 109</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/scheduler/v1beta1/doc/google/cloud/scheduler/v1beta1/job.rb', line 127</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Scheduler::V1beta1::Job (class)">Job</a></span></span>
   <span class='comment'># State of the job.
@@ -1480,11 +1609,9 @@ according to the schedule.</p>
 </span>    <span class='comment'># cannot directly set a job to be disabled.
 </span>    <span class='const'>DISABLED</span> <span class='op'>=</span> <span class='int'>3</span>
 
-    <span class='comment'># The job state resulting from a failed
-</span>    <span class='comment'># {Google::Cloud::Scheduler::V1beta1::CloudScheduler::UpdateJob CloudScheduler::UpdateJob}
+    <span class='comment'># The job state resulting from a failed {Google::Cloud::Scheduler::V1beta1::CloudScheduler::UpdateJob CloudScheduler::UpdateJob}
 </span>    <span class='comment'># operation. To recover a job from this state, retry
-</span>    <span class='comment'># {Google::Cloud::Scheduler::V1beta1::CloudScheduler::UpdateJob CloudScheduler::UpdateJob}
-</span>    <span class='comment'># until a successful response is received.
+</span>    <span class='comment'># {Google::Cloud::Scheduler::V1beta1::CloudScheduler::UpdateJob CloudScheduler::UpdateJob} until a successful response is received.
 </span>    <span class='const'>UPDATE_FAILED</span> <span class='op'>=</span> <span class='int'>4</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
@@ -1537,24 +1664,6 @@ according to the schedule.</p>
       <pre class="lines">
 
 
-109
-110
-111
-112
-113
-114
-115
-116
-117
-118
-119
-120
-121
-122
-123
-124
-125
-126
 127
 128
 129
@@ -1562,10 +1671,26 @@ according to the schedule.</p>
 131
 132
 133
-134</pre>
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/scheduler/v1beta1/doc/google/cloud/scheduler/v1beta1/job.rb', line 109</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/scheduler/v1beta1/doc/google/cloud/scheduler/v1beta1/job.rb', line 127</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Scheduler::V1beta1::Job (class)">Job</a></span></span>
   <span class='comment'># State of the job.
@@ -1585,11 +1710,9 @@ according to the schedule.</p>
 </span>    <span class='comment'># cannot directly set a job to be disabled.
 </span>    <span class='const'>DISABLED</span> <span class='op'>=</span> <span class='int'>3</span>
 
-    <span class='comment'># The job state resulting from a failed
-</span>    <span class='comment'># {Google::Cloud::Scheduler::V1beta1::CloudScheduler::UpdateJob CloudScheduler::UpdateJob}
+    <span class='comment'># The job state resulting from a failed {Google::Cloud::Scheduler::V1beta1::CloudScheduler::UpdateJob CloudScheduler::UpdateJob}
 </span>    <span class='comment'># operation. To recover a job from this state, retry
-</span>    <span class='comment'># {Google::Cloud::Scheduler::V1beta1::CloudScheduler::UpdateJob CloudScheduler::UpdateJob}
-</span>    <span class='comment'># until a successful response is received.
+</span>    <span class='comment'># {Google::Cloud::Scheduler::V1beta1::CloudScheduler::UpdateJob CloudScheduler::UpdateJob} until a successful response is received.
 </span>    <span class='const'>UPDATE_FAILED</span> <span class='op'>=</span> <span class='int'>4</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
@@ -1642,24 +1765,6 @@ according to the schedule.</p>
       <pre class="lines">
 
 
-109
-110
-111
-112
-113
-114
-115
-116
-117
-118
-119
-120
-121
-122
-123
-124
-125
-126
 127
 128
 129
@@ -1667,10 +1772,26 @@ according to the schedule.</p>
 131
 132
 133
-134</pre>
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/scheduler/v1beta1/doc/google/cloud/scheduler/v1beta1/job.rb', line 109</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/scheduler/v1beta1/doc/google/cloud/scheduler/v1beta1/job.rb', line 127</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Scheduler::V1beta1::Job (class)">Job</a></span></span>
   <span class='comment'># State of the job.
@@ -1690,11 +1811,9 @@ according to the schedule.</p>
 </span>    <span class='comment'># cannot directly set a job to be disabled.
 </span>    <span class='const'>DISABLED</span> <span class='op'>=</span> <span class='int'>3</span>
 
-    <span class='comment'># The job state resulting from a failed
-</span>    <span class='comment'># {Google::Cloud::Scheduler::V1beta1::CloudScheduler::UpdateJob CloudScheduler::UpdateJob}
+    <span class='comment'># The job state resulting from a failed {Google::Cloud::Scheduler::V1beta1::CloudScheduler::UpdateJob CloudScheduler::UpdateJob}
 </span>    <span class='comment'># operation. To recover a job from this state, retry
-</span>    <span class='comment'># {Google::Cloud::Scheduler::V1beta1::CloudScheduler::UpdateJob CloudScheduler::UpdateJob}
-</span>    <span class='comment'># until a successful response is received.
+</span>    <span class='comment'># {Google::Cloud::Scheduler::V1beta1::CloudScheduler::UpdateJob CloudScheduler::UpdateJob} until a successful response is received.
 </span>    <span class='const'>UPDATE_FAILED</span> <span class='op'>=</span> <span class='int'>4</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
@@ -1717,9 +1836,8 @@ according to the schedule.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns Specifies the time zone to be used in interpreting
-<span class='object_link'><a href="#schedule-instance_method" title="Google::Cloud::Scheduler::V1beta1::Job#schedule (method)">schedule</a></span>. The value of this
-field must be a time zone name from the <a href="http://en.wikipedia.org/wiki/Tz_database">tz
-database</a>.</p>
+<span class='object_link'><a href="#schedule-instance_method" title="Google::Cloud::Scheduler::V1beta1::Job#schedule (method)">schedule</a></span>. The value of this field must be a time
+zone name from the <a href="http://en.wikipedia.org/wiki/Tz_database">tz database</a>.</p>
 
 <p>Note that some time zones include a provision for
 daylight savings time. The rules for daylight saving time are
@@ -1744,9 +1862,8 @@ as GMT).</p>
       
         &mdash;
         <div class='inline'><p>Specifies the time zone to be used in interpreting
-<span class='object_link'><a href="#schedule-instance_method" title="Google::Cloud::Scheduler::V1beta1::Job#schedule (method)">schedule</a></span>. The value of this
-field must be a time zone name from the <a href="http://en.wikipedia.org/wiki/Tz_database">tz
-database</a>.</p>
+<span class='object_link'><a href="#schedule-instance_method" title="Google::Cloud::Scheduler::V1beta1::Job#schedule (method)">schedule</a></span>. The value of this field must be a time
+zone name from the <a href="http://en.wikipedia.org/wiki/Tz_database">tz database</a>.</p>
 
 <p>Note that some time zones include a provision for
 daylight savings time. The rules for daylight saving time are
@@ -1765,24 +1882,6 @@ as GMT).</p>
       <pre class="lines">
 
 
-109
-110
-111
-112
-113
-114
-115
-116
-117
-118
-119
-120
-121
-122
-123
-124
-125
-126
 127
 128
 129
@@ -1790,10 +1889,26 @@ as GMT).</p>
 131
 132
 133
-134</pre>
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/scheduler/v1beta1/doc/google/cloud/scheduler/v1beta1/job.rb', line 109</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/scheduler/v1beta1/doc/google/cloud/scheduler/v1beta1/job.rb', line 127</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Scheduler::V1beta1::Job (class)">Job</a></span></span>
   <span class='comment'># State of the job.
@@ -1813,11 +1928,9 @@ as GMT).</p>
 </span>    <span class='comment'># cannot directly set a job to be disabled.
 </span>    <span class='const'>DISABLED</span> <span class='op'>=</span> <span class='int'>3</span>
 
-    <span class='comment'># The job state resulting from a failed
-</span>    <span class='comment'># {Google::Cloud::Scheduler::V1beta1::CloudScheduler::UpdateJob CloudScheduler::UpdateJob}
+    <span class='comment'># The job state resulting from a failed {Google::Cloud::Scheduler::V1beta1::CloudScheduler::UpdateJob CloudScheduler::UpdateJob}
 </span>    <span class='comment'># operation. To recover a job from this state, retry
-</span>    <span class='comment'># {Google::Cloud::Scheduler::V1beta1::CloudScheduler::UpdateJob CloudScheduler::UpdateJob}
-</span>    <span class='comment'># until a successful response is received.
+</span>    <span class='comment'># {Google::Cloud::Scheduler::V1beta1::CloudScheduler::UpdateJob CloudScheduler::UpdateJob} until a successful response is received.
 </span>    <span class='const'>UPDATE_FAILED</span> <span class='op'>=</span> <span class='int'>4</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
@@ -1870,24 +1983,6 @@ as GMT).</p>
       <pre class="lines">
 
 
-109
-110
-111
-112
-113
-114
-115
-116
-117
-118
-119
-120
-121
-122
-123
-124
-125
-126
 127
 128
 129
@@ -1895,10 +1990,26 @@ as GMT).</p>
 131
 132
 133
-134</pre>
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/scheduler/v1beta1/doc/google/cloud/scheduler/v1beta1/job.rb', line 109</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/scheduler/v1beta1/doc/google/cloud/scheduler/v1beta1/job.rb', line 127</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Scheduler::V1beta1::Job (class)">Job</a></span></span>
   <span class='comment'># State of the job.
@@ -1918,11 +2029,9 @@ as GMT).</p>
 </span>    <span class='comment'># cannot directly set a job to be disabled.
 </span>    <span class='const'>DISABLED</span> <span class='op'>=</span> <span class='int'>3</span>
 
-    <span class='comment'># The job state resulting from a failed
-</span>    <span class='comment'># {Google::Cloud::Scheduler::V1beta1::CloudScheduler::UpdateJob CloudScheduler::UpdateJob}
+    <span class='comment'># The job state resulting from a failed {Google::Cloud::Scheduler::V1beta1::CloudScheduler::UpdateJob CloudScheduler::UpdateJob}
 </span>    <span class='comment'># operation. To recover a job from this state, retry
-</span>    <span class='comment'># {Google::Cloud::Scheduler::V1beta1::CloudScheduler::UpdateJob CloudScheduler::UpdateJob}
-</span>    <span class='comment'># until a successful response is received.
+</span>    <span class='comment'># {Google::Cloud::Scheduler::V1beta1::CloudScheduler::UpdateJob CloudScheduler::UpdateJob} until a successful response is received.
 </span>    <span class='const'>UPDATE_FAILED</span> <span class='op'>=</span> <span class='int'>4</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>

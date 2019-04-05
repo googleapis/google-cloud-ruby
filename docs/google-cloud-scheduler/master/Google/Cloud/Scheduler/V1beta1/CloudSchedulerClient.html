@@ -1313,8 +1313,7 @@ custom error handling.</p>
         <div class='inline'><p>Required.</p>
 
 <p>The job to add. The user can optionally specify a name for the
-job in <span class='object_link'><a href="Job.html#name-instance_method" title="Google::Cloud::Scheduler::V1beta1::Job#name (method)">name</a></span>.
-<span class='object_link'><a href="Job.html#name-instance_method" title="Google::Cloud::Scheduler::V1beta1::Job#name (method)">name</a></span> cannot be the same as an
+job in <span class='object_link'><a href="Job.html#name-instance_method" title="Google::Cloud::Scheduler::V1beta1::Job#name (method)">name</a></span>. <span class='object_link'><a href="Job.html#name-instance_method" title="Google::Cloud::Scheduler::V1beta1::Job#name (method)">name</a></span> cannot be the same as an
 existing job. If a name is not specified then the system will
 generate a random unique name that will be returned
 (<span class='object_link'><a href="Job.html#name-instance_method" title="Google::Cloud::Scheduler::V1beta1::Job#name (method)">name</a></span>) in the response.
@@ -1422,6 +1421,7 @@ retries, etc.</p>
       <pre class="lines">
 
 
+418
 419
 420
 421
@@ -1432,11 +1432,10 @@ retries, etc.</p>
 426
 427
 428
-429
-430</pre>
+429</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/scheduler/v1beta1/cloud_scheduler_client.rb', line 419</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/scheduler/v1beta1/cloud_scheduler_client.rb', line 418</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_job'>create_job</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -1594,6 +1593,9 @@ retries, etc.</p>
       <pre class="lines">
 
 
+505
+506
+507
 508
 509
 510
@@ -1601,13 +1603,10 @@ retries, etc.</p>
 512
 513
 514
-515
-516
-517
-518</pre>
+515</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/scheduler/v1beta1/cloud_scheduler_client.rb', line 508</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/scheduler/v1beta1/cloud_scheduler_client.rb', line 505</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete_job'>delete_job</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -2204,14 +2203,10 @@ object.</p>
     <p>Pauses a job.</p>
 
 <p>If a job is paused then the system will stop executing the job
-until it is re-enabled via
-ResumeJob. The
-state of the job is stored in
-<span class='object_link'><a href="Job.html#state-instance_method" title="Google::Cloud::Scheduler::V1beta1::Job#state (method)">state</a></span>; if paused it will be set
-to <span class='object_link'><a href="Job/State.html#PAUSED-constant" title="Google::Cloud::Scheduler::V1beta1::Job::State::PAUSED (constant)">Job::State::PAUSED</a></span>. A
-job must be in
-<span class='object_link'><a href="Job/State.html#ENABLED-constant" title="Google::Cloud::Scheduler::V1beta1::Job::State::ENABLED (constant)">Job::State::ENABLED</a></span> to be
-paused.</p>
+until it is re-enabled via ResumeJob. The
+state of the job is stored in <span class='object_link'><a href="Job.html#state-instance_method" title="Google::Cloud::Scheduler::V1beta1::Job#state (method)">state</a></span>; if paused it
+will be set to <span class='object_link'><a href="Job/State.html#PAUSED-constant" title="Google::Cloud::Scheduler::V1beta1::Job::State::PAUSED (constant)">Job::State::PAUSED</a></span>. A job must be in <span class='object_link'><a href="Job/State.html#ENABLED-constant" title="Google::Cloud::Scheduler::V1beta1::Job::State::ENABLED (constant)">Job::State::ENABLED</a></span>
+to be paused.</p>
 
 
   </div>
@@ -2348,19 +2343,19 @@ retries, etc.</p>
       <pre class="lines">
 
 
+545
+546
+547
+548
+549
+550
+551
 552
 553
-554
-555
-556
-557
-558
-559
-560
-561</pre>
+554</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/scheduler/v1beta1/cloud_scheduler_client.rb', line 552</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/scheduler/v1beta1/cloud_scheduler_client.rb', line 545</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_pause_job'>pause_job</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -2458,15 +2453,10 @@ retries, etc.</p>
   <div class="discussion">
     <p>Resume a job.</p>
 
-<p>This method reenables a job after it has been
-<span class='object_link'><a href="Job/State.html#PAUSED-constant" title="Google::Cloud::Scheduler::V1beta1::Job::State::PAUSED (constant)">Job::State::PAUSED</a></span>. The
-state of a job is stored in
-<span class='object_link'><a href="Job.html#state-instance_method" title="Google::Cloud::Scheduler::V1beta1::Job#state (method)">Job#state</a></span>; after calling this
-method it will be set to
-<span class='object_link'><a href="Job/State.html#ENABLED-constant" title="Google::Cloud::Scheduler::V1beta1::Job::State::ENABLED (constant)">Job::State::ENABLED</a></span>. A
-job must be in
-<span class='object_link'><a href="Job/State.html#PAUSED-constant" title="Google::Cloud::Scheduler::V1beta1::Job::State::PAUSED (constant)">Job::State::PAUSED</a></span> to be
-resumed.</p>
+<p>This method reenables a job after it has been <span class='object_link'><a href="Job/State.html#PAUSED-constant" title="Google::Cloud::Scheduler::V1beta1::Job::State::PAUSED (constant)">Job::State::PAUSED</a></span>. The
+state of a job is stored in <span class='object_link'><a href="Job.html#state-instance_method" title="Google::Cloud::Scheduler::V1beta1::Job#state (method)">Job#state</a></span>; after calling this method it
+will be set to <span class='object_link'><a href="Job/State.html#ENABLED-constant" title="Google::Cloud::Scheduler::V1beta1::Job::State::ENABLED (constant)">Job::State::ENABLED</a></span>. A job must be in
+<span class='object_link'><a href="Job/State.html#PAUSED-constant" title="Google::Cloud::Scheduler::V1beta1::Job::State::PAUSED (constant)">Job::State::PAUSED</a></span> to be resumed.</p>
 
 
   </div>
@@ -2603,19 +2593,19 @@ retries, etc.</p>
       <pre class="lines">
 
 
-595
-596
-597
-598
-599
-600
-601
-602
-603
-604</pre>
+583
+584
+585
+586
+587
+588
+589
+590
+591
+592</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/scheduler/v1beta1/cloud_scheduler_client.rb', line 595</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/scheduler/v1beta1/cloud_scheduler_client.rb', line 583</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_resume_job'>resume_job</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -2783,19 +2773,19 @@ retries, etc.</p>
       <pre class="lines">
 
 
-631
-632
-633
-634
-635
-636
-637
-638
-639
-640</pre>
+619
+620
+621
+622
+623
+624
+625
+626
+627
+628</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/scheduler/v1beta1/cloud_scheduler_client.rb', line 631</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/scheduler/v1beta1/cloud_scheduler_client.rb', line 619</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_run_job'>run_job</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -2825,14 +2815,13 @@ retries, etc.</p>
   <div class="discussion">
     <p>Updates a job.</p>
 
-<p>If successful, the updated <span class='object_link'><a href="Job.html" title="Google::Cloud::Scheduler::V1beta1::Job (class)">Job</a></span> is
-returned. If the job does not exist, <code>NOT_FOUND</code> is returned.</p>
+<p>If successful, the updated <span class='object_link'><a href="Job.html" title="Google::Cloud::Scheduler::V1beta1::Job (class)">Job</a></span> is returned. If the job does
+not exist, <code>NOT_FOUND</code> is returned.</p>
 
 <p>If UpdateJob does not successfully return, it is possible for the
-job to be in an
-<span class='object_link'><a href="Job/State.html#UPDATE_FAILED-constant" title="Google::Cloud::Scheduler::V1beta1::Job::State::UPDATE_FAILED (constant)">Job::State::UPDATE_FAILED</a></span>
-state. A job in this state may not be executed. If this happens, retry the
-UpdateJob request until a successful response is received.</p>
+job to be in an <span class='object_link'><a href="Job/State.html#UPDATE_FAILED-constant" title="Google::Cloud::Scheduler::V1beta1::Job::State::UPDATE_FAILED (constant)">Job::State::UPDATE_FAILED</a></span> state. A job in this state may
+not be executed. If this happens, retry the UpdateJob request
+until a successful response is received.</p>
 
 
   </div>
@@ -2867,8 +2856,7 @@ UpdateJob request until a successful response is received.</p>
         &mdash;
         <div class='inline'><p>Required.</p>
 
-<p>The new job properties. <span class='object_link'><a href="Job.html#name-instance_method" title="Google::Cloud::Scheduler::V1beta1::Job#name (method)">name</a></span>
-must be specified.</p>
+<p>The new job properties. <span class='object_link'><a href="Job.html#name-instance_method" title="Google::Cloud::Scheduler::V1beta1::Job#name (method)">name</a></span> must be specified.</p>
 
 <p>Output only fields cannot be modified using UpdateJob.
 Any value specified for an output only field will be ignored.
@@ -2993,6 +2981,9 @@ retries, etc.</p>
       <pre class="lines">
 
 
+471
+472
+473
 474
 475
 476
@@ -3001,13 +2992,10 @@ retries, etc.</p>
 479
 480
 481
-482
-483
-484
-485</pre>
+482</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/scheduler/v1beta1/cloud_scheduler_client.rb', line 474</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/scheduler/v1beta1/cloud_scheduler_client.rb', line 471</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update_job'>update_job</span> \
     <span class='id identifier rubyid_job'>job</span><span class='comma'>,</span>
