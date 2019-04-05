@@ -5,6 +5,7 @@
 require 'google/protobuf'
 
 require 'google/api/annotations_pb'
+require 'google/api/resource_pb'
 require 'google/cloud/tasks/v2beta3/target_pb'
 require 'google/protobuf/duration_pb'
 require 'google/protobuf/timestamp_pb'
@@ -15,6 +16,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :retry_config, :message, 5, "google.cloud.tasks.v2beta3.RetryConfig"
     optional :state, :enum, 6, "google.cloud.tasks.v2beta3.Queue.State"
     optional :purge_time, :message, 7, "google.protobuf.Timestamp"
+    optional :log_sampling_ratio, :double, 10
     oneof :queue_type do
       optional :app_engine_http_queue, :message, 3, "google.cloud.tasks.v2beta3.AppEngineHttpQueue"
     end
