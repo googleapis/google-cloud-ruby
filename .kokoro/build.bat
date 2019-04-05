@@ -18,7 +18,7 @@ SET git_commands="`git fetch --depth=10000 && git checkout #{ENV['KOKORO_GIT_COM
 IF "%JOB_TYPE%"=="presubmit" (
     SET git_commands="pr_number = ENV['KOKORO_GITHUB_PULL_REQUEST_NUMBER'];"
     SET git_commands="%pr_number% `git fetch origin pull/#{pr_number}/merge:pull_branch`;"
-    SET git_commands="%pr_number% `checkout pull_branch`"
+    SET git_commands="%pr_number% `git checkout pull_branch`"
     SET clone_command="`git clone #{ENV['KOKORO_GITHUB_PULL_REQUEST_URL'].split('/pull')[0]}.git`"
 )
 
