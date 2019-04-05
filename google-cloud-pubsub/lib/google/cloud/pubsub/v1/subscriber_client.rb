@@ -260,42 +260,66 @@ module Google
             @create_subscription = Google::Gax.create_api_call(
               @subscriber_stub.method(:create_subscription),
               defaults["create_subscription"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @get_subscription = Google::Gax.create_api_call(
               @subscriber_stub.method(:get_subscription),
               defaults["get_subscription"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'subscription' => request.subscription}
+              end
             )
             @update_subscription = Google::Gax.create_api_call(
               @subscriber_stub.method(:update_subscription),
               defaults["update_subscription"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'subscription.name' => request.subscription.name}
+              end
             )
             @list_subscriptions = Google::Gax.create_api_call(
               @subscriber_stub.method(:list_subscriptions),
               defaults["list_subscriptions"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'project' => request.project}
+              end
             )
             @delete_subscription = Google::Gax.create_api_call(
               @subscriber_stub.method(:delete_subscription),
               defaults["delete_subscription"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'subscription' => request.subscription}
+              end
             )
             @modify_ack_deadline = Google::Gax.create_api_call(
               @subscriber_stub.method(:modify_ack_deadline),
               defaults["modify_ack_deadline"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'subscription' => request.subscription}
+              end
             )
             @acknowledge = Google::Gax.create_api_call(
               @subscriber_stub.method(:acknowledge),
               defaults["acknowledge"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'subscription' => request.subscription}
+              end
             )
             @pull = Google::Gax.create_api_call(
               @subscriber_stub.method(:pull),
               defaults["pull"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'subscription' => request.subscription}
+              end
             )
             @streaming_pull = Google::Gax.create_api_call(
               @subscriber_stub.method(:streaming_pull),
@@ -305,47 +329,74 @@ module Google
             @modify_push_config = Google::Gax.create_api_call(
               @subscriber_stub.method(:modify_push_config),
               defaults["modify_push_config"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'subscription' => request.subscription}
+              end
             )
             @list_snapshots = Google::Gax.create_api_call(
               @subscriber_stub.method(:list_snapshots),
               defaults["list_snapshots"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'project' => request.project}
+              end
             )
             @create_snapshot = Google::Gax.create_api_call(
               @subscriber_stub.method(:create_snapshot),
               defaults["create_snapshot"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @update_snapshot = Google::Gax.create_api_call(
               @subscriber_stub.method(:update_snapshot),
               defaults["update_snapshot"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'snapshot.name' => request.snapshot.name}
+              end
             )
             @delete_snapshot = Google::Gax.create_api_call(
               @subscriber_stub.method(:delete_snapshot),
               defaults["delete_snapshot"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'snapshot' => request.snapshot}
+              end
             )
             @seek = Google::Gax.create_api_call(
               @subscriber_stub.method(:seek),
               defaults["seek"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'subscription' => request.subscription}
+              end
             )
             @set_iam_policy = Google::Gax.create_api_call(
               @iam_policy_stub.method(:set_iam_policy),
               defaults["set_iam_policy"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'resource' => request.resource}
+              end
             )
             @get_iam_policy = Google::Gax.create_api_call(
               @iam_policy_stub.method(:get_iam_policy),
               defaults["get_iam_policy"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'resource' => request.resource}
+              end
             )
             @test_iam_permissions = Google::Gax.create_api_call(
               @iam_policy_stub.method(:test_iam_permissions),
               defaults["test_iam_permissions"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'resource' => request.resource}
+              end
             )
           end
 
