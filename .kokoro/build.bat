@@ -13,15 +13,14 @@ REM Neither Powershell's Copy-Item nor xcopy correctly copy the symlinks.
 REM So we clone/checkout the repo ourselves rather than relying on Kokoro.
 SET "run_kokoro=ridk enable && bundle update && bundle exec rake kokoro:%JOB_TYPE%"
 SET clone_command="`git clone #{ENV['KOKORO_GITHUB_COMMIT_URL'].split('/commit')[0]}.git`"
-SET git_commands="`git fetch --depth=10000 && git checkout #{ENV['KOKORO_GIT_COMMIT']}`"
+SET "git_commands=git fetch --depth=10000 && git checkout %KOKORO_GIT_COMMIT%"
 
 IF "%JOB_TYPE%"=="presubmit" (
-    SET git_commands="pr_number = ENV['KOKORO_GITHUB_PULL_REQUEST_NUMBER'];"
-    SET git_commands="%pr_number% `git fetch origin pull/#{pr_number}/merge:pull_branch`;"
-    SET git_commands="%pr_number% `git checkout pull_branch`"
     SET clone_command="`git clone #{ENV['KOKORO_GITHUB_PULL_REQUEST_URL'].split('/pull')[0]}.git`"
+    SET "git_commands=git fetch origin pull/%KOKORO_GITHUB_PULL_REQUEST_NUMBER%/merge:pull_branch"
+    SET "git_commands=%git_commands% && git checkout pull_branch"
 )
 
-ruby -e %clone_command% && CD %REPO_DIR% && ruby -e %git_commands% && %run_kokoro% && SET /A ERROR_CODE=0
+ruby -e %clone_command% && CD %REPO_DIR% && %git_commands% && %run_kokoro% && SET /A ERROR_CODE=0
 
 EXIT /B %ERROR_CODE%
