@@ -15,6 +15,27 @@ module Google
   module Cloud
     module Talent
       module V4beta1
+        class ApplicationServiceClient
+          # Alias for Google::Cloud::Talent::V4beta1::ApplicationServiceClient.application_path.
+          # @param project [String]
+          # @param tenant [String]
+          # @param profile [String]
+          # @param application [String]
+          # @return [String]
+          def application_path project, tenant, profile, application
+            self.class.application_path project, tenant, profile, application
+          end
+        
+          # Alias for Google::Cloud::Talent::V4beta1::ApplicationServiceClient.profile_path.
+          # @param project [String]
+          # @param tenant [String]
+          # @param profile [String]
+          # @return [String]
+          def profile_path project, tenant, profile
+            self.class.profile_path project, tenant, profile
+          end
+        end
+        
         class CompanyServiceClient
           # Alias for Google::Cloud::Talent::V4beta1::CompanyServiceClient.company_old_path.
           # @param project [String]
@@ -34,6 +55,14 @@ module Google
         end
         
         class JobServiceClient
+          # Alias for Google::Cloud::Talent::V4beta1::JobServiceClient.company_old_path.
+          # @param project [String]
+          # @param company [String]
+          # @return [String]
+          def company_old_path project, company
+            self.class.company_old_path project, company
+          end
+        
           # Alias for Google::Cloud::Talent::V4beta1::JobServiceClient.job_old_path.
           # @param project [String]
           # @param jobs [String]

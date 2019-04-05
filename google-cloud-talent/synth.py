@@ -77,7 +77,7 @@ s.replace(
     'gem.add_development_dependency "rubocop", "~> 0.64.0"'
 )
 
-services = ['Company', 'Job', 'Profile', 'Tenant']
+services = ['Application', 'Company', 'Job', 'Profile', 'Tenant']
 # https://github.com/googleapis/gapic-generator/issues/2492
 for service in services:
     s.replace(
@@ -107,9 +107,9 @@ for service in services:
 # Require the helpers file
 s.replace(
     'lib/google/cloud/talent/v4beta1.rb',
-    'require "google/cloud/talent/v4beta1/resume_service_client"',
+    'require "google/cloud/talent/v4beta1/application_service_client"',
     '\n'.join([
-        'require "google/cloud/talent/v4beta1/resume_service_client"',
+        'require "google/cloud/talent/v4beta1/application_service_client"',
         'require "google/cloud/talent/v4beta1/helpers"',
     ])
 )

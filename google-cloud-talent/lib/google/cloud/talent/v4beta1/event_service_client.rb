@@ -181,7 +181,10 @@ module Google
             @create_client_event = Google::Gax.create_api_call(
               @event_service_stub.method(:create_client_event),
               defaults["create_client_event"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
             )
           end
 

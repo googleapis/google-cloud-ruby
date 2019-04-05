@@ -215,32 +215,50 @@ module Google
             @list_profiles = Google::Gax.create_api_call(
               @profile_service_stub.method(:list_profiles),
               defaults["list_profiles"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
             )
             @create_profile = Google::Gax.create_api_call(
               @profile_service_stub.method(:create_profile),
               defaults["create_profile"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
             )
             @get_profile = Google::Gax.create_api_call(
               @profile_service_stub.method(:get_profile),
               defaults["get_profile"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @update_profile = Google::Gax.create_api_call(
               @profile_service_stub.method(:update_profile),
               defaults["update_profile"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'profile.name' => request.profile.name}
+              end
             )
             @delete_profile = Google::Gax.create_api_call(
               @profile_service_stub.method(:delete_profile),
               defaults["delete_profile"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @search_profiles = Google::Gax.create_api_call(
               @profile_service_stub.method(:search_profiles),
               defaults["search_profiles"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
             )
           end
 

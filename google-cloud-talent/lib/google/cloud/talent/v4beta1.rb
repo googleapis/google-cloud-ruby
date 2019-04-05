@@ -14,6 +14,7 @@
 
 
 require "google/cloud/talent/v4beta1/application_service_client"
+require "google/cloud/talent/v4beta1/helpers"
 require "google/cloud/talent/v4beta1/company_service_client"
 require "google/cloud/talent/v4beta1/completion_client"
 require "google/cloud/talent/v4beta1/event_service_client"
@@ -85,7 +86,7 @@ module Google
       module V4beta1
         # rubocop:enable LineLength
 
-        module Application
+        module ApplicationService
           ##
           # A service that handles application management, including CRUD and
           # enumeration.

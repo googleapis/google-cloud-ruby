@@ -208,27 +208,42 @@ module Google
             @create_company = Google::Gax.create_api_call(
               @company_service_stub.method(:create_company),
               defaults["create_company"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
             )
             @get_company = Google::Gax.create_api_call(
               @company_service_stub.method(:get_company),
               defaults["get_company"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @update_company = Google::Gax.create_api_call(
               @company_service_stub.method(:update_company),
               defaults["update_company"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'company.name' => request.company.name}
+              end
             )
             @delete_company = Google::Gax.create_api_call(
               @company_service_stub.method(:delete_company),
               defaults["delete_company"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @list_companies = Google::Gax.create_api_call(
               @company_service_stub.method(:list_companies),
               defaults["list_companies"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
             )
           end
 

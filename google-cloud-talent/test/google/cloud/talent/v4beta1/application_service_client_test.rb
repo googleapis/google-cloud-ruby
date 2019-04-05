@@ -108,7 +108,7 @@ describe Google::Cloud::Talent::V4beta1::ApplicationServiceClient do
 
       Google::Cloud::Talent::V4beta1::ApplicationService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Talent::V4beta1::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Talent::Application.new(version: :v4beta1)
+          client = Google::Cloud::Talent::ApplicationService.new(version: :v4beta1)
 
           # Call method
           response = client.create_application(formatted_parent, application)
@@ -145,7 +145,7 @@ describe Google::Cloud::Talent::V4beta1::ApplicationServiceClient do
 
       Google::Cloud::Talent::V4beta1::ApplicationService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Talent::V4beta1::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Talent::Application.new(version: :v4beta1)
+          client = Google::Cloud::Talent::ApplicationService.new(version: :v4beta1)
 
           # Call method
           err = assert_raises Google::Gax::GaxError do
@@ -198,7 +198,7 @@ describe Google::Cloud::Talent::V4beta1::ApplicationServiceClient do
 
       Google::Cloud::Talent::V4beta1::ApplicationService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Talent::V4beta1::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Talent::Application.new(version: :v4beta1)
+          client = Google::Cloud::Talent::ApplicationService.new(version: :v4beta1)
 
           # Call method
           response = client.get_application(formatted_name)
@@ -233,7 +233,7 @@ describe Google::Cloud::Talent::V4beta1::ApplicationServiceClient do
 
       Google::Cloud::Talent::V4beta1::ApplicationService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Talent::V4beta1::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Talent::Application.new(version: :v4beta1)
+          client = Google::Cloud::Talent::ApplicationService.new(version: :v4beta1)
 
           # Call method
           err = assert_raises Google::Gax::GaxError do
@@ -286,7 +286,7 @@ describe Google::Cloud::Talent::V4beta1::ApplicationServiceClient do
 
       Google::Cloud::Talent::V4beta1::ApplicationService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Talent::V4beta1::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Talent::Application.new(version: :v4beta1)
+          client = Google::Cloud::Talent::ApplicationService.new(version: :v4beta1)
 
           # Call method
           response = client.update_application(application)
@@ -321,7 +321,7 @@ describe Google::Cloud::Talent::V4beta1::ApplicationServiceClient do
 
       Google::Cloud::Talent::V4beta1::ApplicationService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Talent::V4beta1::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Talent::Application.new(version: :v4beta1)
+          client = Google::Cloud::Talent::ApplicationService.new(version: :v4beta1)
 
           # Call method
           err = assert_raises Google::Gax::GaxError do
@@ -355,7 +355,7 @@ describe Google::Cloud::Talent::V4beta1::ApplicationServiceClient do
 
       Google::Cloud::Talent::V4beta1::ApplicationService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Talent::V4beta1::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Talent::Application.new(version: :v4beta1)
+          client = Google::Cloud::Talent::ApplicationService.new(version: :v4beta1)
 
           # Call method
           response = client.delete_application(formatted_name)
@@ -390,7 +390,7 @@ describe Google::Cloud::Talent::V4beta1::ApplicationServiceClient do
 
       Google::Cloud::Talent::V4beta1::ApplicationService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Talent::V4beta1::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Talent::Application.new(version: :v4beta1)
+          client = Google::Cloud::Talent::ApplicationService.new(version: :v4beta1)
 
           # Call method
           err = assert_raises Google::Gax::GaxError do
@@ -431,7 +431,7 @@ describe Google::Cloud::Talent::V4beta1::ApplicationServiceClient do
 
       Google::Cloud::Talent::V4beta1::ApplicationService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Talent::V4beta1::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Talent::Application.new(version: :v4beta1)
+          client = Google::Cloud::Talent::ApplicationService.new(version: :v4beta1)
 
           # Call method
           response = client.list_applications(formatted_parent)
@@ -462,7 +462,7 @@ describe Google::Cloud::Talent::V4beta1::ApplicationServiceClient do
 
       Google::Cloud::Talent::V4beta1::ApplicationService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Talent::V4beta1::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Talent::Application.new(version: :v4beta1)
+          client = Google::Cloud::Talent::ApplicationService.new(version: :v4beta1)
 
           # Call method
           err = assert_raises Google::Gax::GaxError do
