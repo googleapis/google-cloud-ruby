@@ -11,6 +11,10 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :http_method, :enum, 2, "google.cloud.tasks.v2beta3.HttpMethod"
     map :headers, :string, :string, 3
     optional :body, :bytes, 4
+    oneof :authorization_header do
+      optional :oauth_token, :message, 5, "google.cloud.tasks.v2beta3.OAuthToken"
+      optional :oidc_token, :message, 6, "google.cloud.tasks.v2beta3.OidcToken"
+    end
   end
   add_message "google.cloud.tasks.v2beta3.AppEngineHttpQueue" do
     optional :app_engine_routing_override, :message, 1, "google.cloud.tasks.v2beta3.AppEngineRouting"
@@ -27,6 +31,14 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :version, :string, 2
     optional :instance, :string, 3
     optional :host, :string, 4
+  end
+  add_message "google.cloud.tasks.v2beta3.OAuthToken" do
+    optional :service_account_email, :string, 1
+    optional :scope, :string, 2
+  end
+  add_message "google.cloud.tasks.v2beta3.OidcToken" do
+    optional :service_account_email, :string, 1
+    optional :audience, :string, 2
   end
   add_enum "google.cloud.tasks.v2beta3.HttpMethod" do
     value :HTTP_METHOD_UNSPECIFIED, 0
@@ -48,6 +60,8 @@ module Google
         AppEngineHttpQueue = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.tasks.v2beta3.AppEngineHttpQueue").msgclass
         AppEngineHttpRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.tasks.v2beta3.AppEngineHttpRequest").msgclass
         AppEngineRouting = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.tasks.v2beta3.AppEngineRouting").msgclass
+        OAuthToken = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.tasks.v2beta3.OAuthToken").msgclass
+        OidcToken = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.tasks.v2beta3.OidcToken").msgclass
         HttpMethod = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.tasks.v2beta3.HttpMethod").enummodule
       end
     end
