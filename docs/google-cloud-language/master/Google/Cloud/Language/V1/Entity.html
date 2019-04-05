@@ -327,8 +327,6 @@ supports proper noun mentions.</p>
       <pre class="lines">
 
 
-104
-105
 106
 107
 108
@@ -369,13 +367,46 @@ supports proper noun mentions.</p>
 143
 144
 145
-146</pre>
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/language/v1/doc/google/cloud/language/v1/language_service.rb', line 104</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/language/v1/doc/google/cloud/language/v1/language_service.rb', line 106</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Language::V1::Entity (class)">Entity</a></span></span>
-  <span class='comment'># The type of the entity.
+  <span class='comment'># The type of the entity. For most entity types, the associated metadata is a
+</span>  <span class='comment'># Wikipedia URL (`wikipedia_url`) and Knowledge Graph MID (`mid`). The table
+</span>  <span class='comment'># below lists the associated fields for entities that have different
+</span>  <span class='comment'># metadata.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Entity/Type.html" title="Google::Cloud::Language::V1::Entity::Type (module)">Type</a></span></span>
     <span class='comment'># Unknown
 </span>    <span class='const'>UNKNOWN</span> <span class='op'>=</span> <span class='int'>0</span>
@@ -392,28 +423,53 @@ supports proper noun mentions.</p>
     <span class='comment'># Event
 </span>    <span class='const'>EVENT</span> <span class='op'>=</span> <span class='int'>4</span>
 
-    <span class='comment'># Work of art
+    <span class='comment'># Artwork
 </span>    <span class='const'>WORK_OF_ART</span> <span class='op'>=</span> <span class='int'>5</span>
 
-    <span class='comment'># Consumer goods
+    <span class='comment'># Consumer product
 </span>    <span class='const'>CONSUMER_GOOD</span> <span class='op'>=</span> <span class='int'>6</span>
 
-    <span class='comment'># Other types
+    <span class='comment'># Other types of entities
 </span>    <span class='const'>OTHER</span> <span class='op'>=</span> <span class='int'>7</span>
 
-    <span class='comment'># Phone number
+    <span class='comment'># Phone number&lt;br&gt;&lt;br&gt;
+</span>    <span class='comment'># The metadata lists the phone number, formatted according to local
+</span>    <span class='comment'># convention, plus whichever additional elements appear in the text:&lt;ul&gt;
+</span>    <span class='comment'># &lt;li&gt;&lt;code&gt;number&lt;/code&gt; &amp;ndash; the actual number, broken down into
+</span>    <span class='comment'># sections as per local convention&lt;/li&gt; &lt;li&gt;&lt;code&gt;national_prefix&lt;/code&gt;
+</span>    <span class='comment'># &amp;ndash; country code, if detected&lt;/li&gt; &lt;li&gt;&lt;code&gt;area_code&lt;/code&gt; &amp;ndash;
+</span>    <span class='comment'># region or area code, if detected&lt;/li&gt; &lt;li&gt;&lt;code&gt;extension&lt;/code&gt; &amp;ndash;
+</span>    <span class='comment'># phone extension (to be dialed after connection), if detected&lt;/li&gt;&lt;/ul&gt;
 </span>    <span class='const'>PHONE_NUMBER</span> <span class='op'>=</span> <span class='int'>9</span>
 
-    <span class='comment'># Address
+    <span class='comment'># Address&lt;br&gt;&lt;br&gt;
+</span>    <span class='comment'># The metadata identifies the street number and locality plus whichever
+</span>    <span class='comment'># additional elements appear in the text:&lt;ul&gt;
+</span>    <span class='comment'># &lt;li&gt;&lt;code&gt;street_number&lt;/code&gt; &amp;ndash; street number&lt;/li&gt;
+</span>    <span class='comment'># &lt;li&gt;&lt;code&gt;locality&lt;/code&gt; &amp;ndash; city or town&lt;/li&gt;
+</span>    <span class='comment'># &lt;li&gt;&lt;code&gt;street_name&lt;/code&gt; &amp;ndash; street/route name, if detected&lt;/li&gt;
+</span>    <span class='comment'># &lt;li&gt;&lt;code&gt;postal_code&lt;/code&gt; &amp;ndash; postal code, if detected&lt;/li&gt;
+</span>    <span class='comment'># &lt;li&gt;&lt;code&gt;country&lt;/code&gt; &amp;ndash; country, if detected&lt;/li&gt;
+</span>    <span class='comment'># &lt;li&gt;&lt;code&gt;broad_region&lt;/code&gt; &amp;ndash; administrative area, such as the
+</span>    <span class='comment'># state, if detected&lt;/li&gt; &lt;li&gt;&lt;code&gt;narrow_region&lt;/code&gt; &amp;ndash; smaller
+</span>    <span class='comment'># administrative area, such as county, if detected&lt;/li&gt;
+</span>    <span class='comment'># &lt;li&gt;&lt;code&gt;sublocality&lt;/code&gt; &amp;ndash; used in Asian addresses to demark a
+</span>    <span class='comment'># district within a city, if detected&lt;/li&gt;&lt;/ul&gt;
 </span>    <span class='const'>ADDRESS</span> <span class='op'>=</span> <span class='int'>10</span>
 
-    <span class='comment'># Date
+    <span class='comment'># Date&lt;br&gt;&lt;br&gt;
+</span>    <span class='comment'># The metadata identifies the components of the date:&lt;ul&gt;
+</span>    <span class='comment'># &lt;li&gt;&lt;code&gt;year&lt;/code&gt; &amp;ndash; four digit year, if detected&lt;/li&gt;
+</span>    <span class='comment'># &lt;li&gt;&lt;code&gt;month&lt;/code&gt; &amp;ndash; two digit month number, if detected&lt;/li&gt;
+</span>    <span class='comment'># &lt;li&gt;&lt;code&gt;day&lt;/code&gt; &amp;ndash; two digit day number, if detected&lt;/li&gt;&lt;/ul&gt;
 </span>    <span class='const'>DATE</span> <span class='op'>=</span> <span class='int'>11</span>
 
-    <span class='comment'># Number
+    <span class='comment'># Number&lt;br&gt;&lt;br&gt;
+</span>    <span class='comment'># The metadata is the number itself.
 </span>    <span class='const'>NUMBER</span> <span class='op'>=</span> <span class='int'>12</span>
 
-    <span class='comment'># Price
+    <span class='comment'># Price&lt;br&gt;&lt;br&gt;
+</span>    <span class='comment'># The metadata identifies the &lt;code&gt;value&lt;/code&gt; and &lt;code&gt;currency&lt;/code&gt;.
 </span>    <span class='const'>PRICE</span> <span class='op'>=</span> <span class='int'>13</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
@@ -437,8 +493,9 @@ supports proper noun mentions.</p>
   <div class="discussion">
     <p>Returns Metadata associated with the entity.</p>
 
-<p>Currently, Wikipedia URLs and Knowledge Graph MIDs are provided, if
-available. The associated keys are &quot;wikipedia_url&quot; and &quot;mid&quot;, respectively.</p>
+<p>For most entity types, the metadata is a Wikipedia URL (<code>wikipedia_url</code>)
+and Knowledge Graph MID (<code>mid</code>), if they are available. For the metadata
+associated with other entity types, see the Type table below.</p>
 
 
   </div>
@@ -458,8 +515,9 @@ available. The associated keys are &quot;wikipedia_url&quot; and &quot;mid&quot;
         &mdash;
         <div class='inline'><p>Metadata associated with the entity.</p>
 
-<p>Currently, Wikipedia URLs and Knowledge Graph MIDs are provided, if
-available. The associated keys are &quot;wikipedia_url&quot; and &quot;mid&quot;, respectively.</p>
+<p>For most entity types, the metadata is a Wikipedia URL (<code>wikipedia_url</code>)
+and Knowledge Graph MID (<code>mid</code>), if they are available. For the metadata
+associated with other entity types, see the Type table below.</p>
 </div>
       
     </li>
@@ -472,8 +530,6 @@ available. The associated keys are &quot;wikipedia_url&quot; and &quot;mid&quot;
       <pre class="lines">
 
 
-104
-105
 106
 107
 108
@@ -514,13 +570,46 @@ available. The associated keys are &quot;wikipedia_url&quot; and &quot;mid&quot;
 143
 144
 145
-146</pre>
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/language/v1/doc/google/cloud/language/v1/language_service.rb', line 104</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/language/v1/doc/google/cloud/language/v1/language_service.rb', line 106</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Language::V1::Entity (class)">Entity</a></span></span>
-  <span class='comment'># The type of the entity.
+  <span class='comment'># The type of the entity. For most entity types, the associated metadata is a
+</span>  <span class='comment'># Wikipedia URL (`wikipedia_url`) and Knowledge Graph MID (`mid`). The table
+</span>  <span class='comment'># below lists the associated fields for entities that have different
+</span>  <span class='comment'># metadata.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Entity/Type.html" title="Google::Cloud::Language::V1::Entity::Type (module)">Type</a></span></span>
     <span class='comment'># Unknown
 </span>    <span class='const'>UNKNOWN</span> <span class='op'>=</span> <span class='int'>0</span>
@@ -537,28 +626,53 @@ available. The associated keys are &quot;wikipedia_url&quot; and &quot;mid&quot;
     <span class='comment'># Event
 </span>    <span class='const'>EVENT</span> <span class='op'>=</span> <span class='int'>4</span>
 
-    <span class='comment'># Work of art
+    <span class='comment'># Artwork
 </span>    <span class='const'>WORK_OF_ART</span> <span class='op'>=</span> <span class='int'>5</span>
 
-    <span class='comment'># Consumer goods
+    <span class='comment'># Consumer product
 </span>    <span class='const'>CONSUMER_GOOD</span> <span class='op'>=</span> <span class='int'>6</span>
 
-    <span class='comment'># Other types
+    <span class='comment'># Other types of entities
 </span>    <span class='const'>OTHER</span> <span class='op'>=</span> <span class='int'>7</span>
 
-    <span class='comment'># Phone number
+    <span class='comment'># Phone number&lt;br&gt;&lt;br&gt;
+</span>    <span class='comment'># The metadata lists the phone number, formatted according to local
+</span>    <span class='comment'># convention, plus whichever additional elements appear in the text:&lt;ul&gt;
+</span>    <span class='comment'># &lt;li&gt;&lt;code&gt;number&lt;/code&gt; &amp;ndash; the actual number, broken down into
+</span>    <span class='comment'># sections as per local convention&lt;/li&gt; &lt;li&gt;&lt;code&gt;national_prefix&lt;/code&gt;
+</span>    <span class='comment'># &amp;ndash; country code, if detected&lt;/li&gt; &lt;li&gt;&lt;code&gt;area_code&lt;/code&gt; &amp;ndash;
+</span>    <span class='comment'># region or area code, if detected&lt;/li&gt; &lt;li&gt;&lt;code&gt;extension&lt;/code&gt; &amp;ndash;
+</span>    <span class='comment'># phone extension (to be dialed after connection), if detected&lt;/li&gt;&lt;/ul&gt;
 </span>    <span class='const'>PHONE_NUMBER</span> <span class='op'>=</span> <span class='int'>9</span>
 
-    <span class='comment'># Address
+    <span class='comment'># Address&lt;br&gt;&lt;br&gt;
+</span>    <span class='comment'># The metadata identifies the street number and locality plus whichever
+</span>    <span class='comment'># additional elements appear in the text:&lt;ul&gt;
+</span>    <span class='comment'># &lt;li&gt;&lt;code&gt;street_number&lt;/code&gt; &amp;ndash; street number&lt;/li&gt;
+</span>    <span class='comment'># &lt;li&gt;&lt;code&gt;locality&lt;/code&gt; &amp;ndash; city or town&lt;/li&gt;
+</span>    <span class='comment'># &lt;li&gt;&lt;code&gt;street_name&lt;/code&gt; &amp;ndash; street/route name, if detected&lt;/li&gt;
+</span>    <span class='comment'># &lt;li&gt;&lt;code&gt;postal_code&lt;/code&gt; &amp;ndash; postal code, if detected&lt;/li&gt;
+</span>    <span class='comment'># &lt;li&gt;&lt;code&gt;country&lt;/code&gt; &amp;ndash; country, if detected&lt;/li&gt;
+</span>    <span class='comment'># &lt;li&gt;&lt;code&gt;broad_region&lt;/code&gt; &amp;ndash; administrative area, such as the
+</span>    <span class='comment'># state, if detected&lt;/li&gt; &lt;li&gt;&lt;code&gt;narrow_region&lt;/code&gt; &amp;ndash; smaller
+</span>    <span class='comment'># administrative area, such as county, if detected&lt;/li&gt;
+</span>    <span class='comment'># &lt;li&gt;&lt;code&gt;sublocality&lt;/code&gt; &amp;ndash; used in Asian addresses to demark a
+</span>    <span class='comment'># district within a city, if detected&lt;/li&gt;&lt;/ul&gt;
 </span>    <span class='const'>ADDRESS</span> <span class='op'>=</span> <span class='int'>10</span>
 
-    <span class='comment'># Date
+    <span class='comment'># Date&lt;br&gt;&lt;br&gt;
+</span>    <span class='comment'># The metadata identifies the components of the date:&lt;ul&gt;
+</span>    <span class='comment'># &lt;li&gt;&lt;code&gt;year&lt;/code&gt; &amp;ndash; four digit year, if detected&lt;/li&gt;
+</span>    <span class='comment'># &lt;li&gt;&lt;code&gt;month&lt;/code&gt; &amp;ndash; two digit month number, if detected&lt;/li&gt;
+</span>    <span class='comment'># &lt;li&gt;&lt;code&gt;day&lt;/code&gt; &amp;ndash; two digit day number, if detected&lt;/li&gt;&lt;/ul&gt;
 </span>    <span class='const'>DATE</span> <span class='op'>=</span> <span class='int'>11</span>
 
-    <span class='comment'># Number
+    <span class='comment'># Number&lt;br&gt;&lt;br&gt;
+</span>    <span class='comment'># The metadata is the number itself.
 </span>    <span class='const'>NUMBER</span> <span class='op'>=</span> <span class='int'>12</span>
 
-    <span class='comment'># Price
+    <span class='comment'># Price&lt;br&gt;&lt;br&gt;
+</span>    <span class='comment'># The metadata identifies the &lt;code&gt;value&lt;/code&gt; and &lt;code&gt;currency&lt;/code&gt;.
 </span>    <span class='const'>PRICE</span> <span class='op'>=</span> <span class='int'>13</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
@@ -611,8 +725,6 @@ available. The associated keys are &quot;wikipedia_url&quot; and &quot;mid&quot;
       <pre class="lines">
 
 
-104
-105
 106
 107
 108
@@ -653,13 +765,46 @@ available. The associated keys are &quot;wikipedia_url&quot; and &quot;mid&quot;
 143
 144
 145
-146</pre>
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/language/v1/doc/google/cloud/language/v1/language_service.rb', line 104</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/language/v1/doc/google/cloud/language/v1/language_service.rb', line 106</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Language::V1::Entity (class)">Entity</a></span></span>
-  <span class='comment'># The type of the entity.
+  <span class='comment'># The type of the entity. For most entity types, the associated metadata is a
+</span>  <span class='comment'># Wikipedia URL (`wikipedia_url`) and Knowledge Graph MID (`mid`). The table
+</span>  <span class='comment'># below lists the associated fields for entities that have different
+</span>  <span class='comment'># metadata.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Entity/Type.html" title="Google::Cloud::Language::V1::Entity::Type (module)">Type</a></span></span>
     <span class='comment'># Unknown
 </span>    <span class='const'>UNKNOWN</span> <span class='op'>=</span> <span class='int'>0</span>
@@ -676,28 +821,53 @@ available. The associated keys are &quot;wikipedia_url&quot; and &quot;mid&quot;
     <span class='comment'># Event
 </span>    <span class='const'>EVENT</span> <span class='op'>=</span> <span class='int'>4</span>
 
-    <span class='comment'># Work of art
+    <span class='comment'># Artwork
 </span>    <span class='const'>WORK_OF_ART</span> <span class='op'>=</span> <span class='int'>5</span>
 
-    <span class='comment'># Consumer goods
+    <span class='comment'># Consumer product
 </span>    <span class='const'>CONSUMER_GOOD</span> <span class='op'>=</span> <span class='int'>6</span>
 
-    <span class='comment'># Other types
+    <span class='comment'># Other types of entities
 </span>    <span class='const'>OTHER</span> <span class='op'>=</span> <span class='int'>7</span>
 
-    <span class='comment'># Phone number
+    <span class='comment'># Phone number&lt;br&gt;&lt;br&gt;
+</span>    <span class='comment'># The metadata lists the phone number, formatted according to local
+</span>    <span class='comment'># convention, plus whichever additional elements appear in the text:&lt;ul&gt;
+</span>    <span class='comment'># &lt;li&gt;&lt;code&gt;number&lt;/code&gt; &amp;ndash; the actual number, broken down into
+</span>    <span class='comment'># sections as per local convention&lt;/li&gt; &lt;li&gt;&lt;code&gt;national_prefix&lt;/code&gt;
+</span>    <span class='comment'># &amp;ndash; country code, if detected&lt;/li&gt; &lt;li&gt;&lt;code&gt;area_code&lt;/code&gt; &amp;ndash;
+</span>    <span class='comment'># region or area code, if detected&lt;/li&gt; &lt;li&gt;&lt;code&gt;extension&lt;/code&gt; &amp;ndash;
+</span>    <span class='comment'># phone extension (to be dialed after connection), if detected&lt;/li&gt;&lt;/ul&gt;
 </span>    <span class='const'>PHONE_NUMBER</span> <span class='op'>=</span> <span class='int'>9</span>
 
-    <span class='comment'># Address
+    <span class='comment'># Address&lt;br&gt;&lt;br&gt;
+</span>    <span class='comment'># The metadata identifies the street number and locality plus whichever
+</span>    <span class='comment'># additional elements appear in the text:&lt;ul&gt;
+</span>    <span class='comment'># &lt;li&gt;&lt;code&gt;street_number&lt;/code&gt; &amp;ndash; street number&lt;/li&gt;
+</span>    <span class='comment'># &lt;li&gt;&lt;code&gt;locality&lt;/code&gt; &amp;ndash; city or town&lt;/li&gt;
+</span>    <span class='comment'># &lt;li&gt;&lt;code&gt;street_name&lt;/code&gt; &amp;ndash; street/route name, if detected&lt;/li&gt;
+</span>    <span class='comment'># &lt;li&gt;&lt;code&gt;postal_code&lt;/code&gt; &amp;ndash; postal code, if detected&lt;/li&gt;
+</span>    <span class='comment'># &lt;li&gt;&lt;code&gt;country&lt;/code&gt; &amp;ndash; country, if detected&lt;/li&gt;
+</span>    <span class='comment'># &lt;li&gt;&lt;code&gt;broad_region&lt;/code&gt; &amp;ndash; administrative area, such as the
+</span>    <span class='comment'># state, if detected&lt;/li&gt; &lt;li&gt;&lt;code&gt;narrow_region&lt;/code&gt; &amp;ndash; smaller
+</span>    <span class='comment'># administrative area, such as county, if detected&lt;/li&gt;
+</span>    <span class='comment'># &lt;li&gt;&lt;code&gt;sublocality&lt;/code&gt; &amp;ndash; used in Asian addresses to demark a
+</span>    <span class='comment'># district within a city, if detected&lt;/li&gt;&lt;/ul&gt;
 </span>    <span class='const'>ADDRESS</span> <span class='op'>=</span> <span class='int'>10</span>
 
-    <span class='comment'># Date
+    <span class='comment'># Date&lt;br&gt;&lt;br&gt;
+</span>    <span class='comment'># The metadata identifies the components of the date:&lt;ul&gt;
+</span>    <span class='comment'># &lt;li&gt;&lt;code&gt;year&lt;/code&gt; &amp;ndash; four digit year, if detected&lt;/li&gt;
+</span>    <span class='comment'># &lt;li&gt;&lt;code&gt;month&lt;/code&gt; &amp;ndash; two digit month number, if detected&lt;/li&gt;
+</span>    <span class='comment'># &lt;li&gt;&lt;code&gt;day&lt;/code&gt; &amp;ndash; two digit day number, if detected&lt;/li&gt;&lt;/ul&gt;
 </span>    <span class='const'>DATE</span> <span class='op'>=</span> <span class='int'>11</span>
 
-    <span class='comment'># Number
+    <span class='comment'># Number&lt;br&gt;&lt;br&gt;
+</span>    <span class='comment'># The metadata is the number itself.
 </span>    <span class='const'>NUMBER</span> <span class='op'>=</span> <span class='int'>12</span>
 
-    <span class='comment'># Price
+    <span class='comment'># Price&lt;br&gt;&lt;br&gt;
+</span>    <span class='comment'># The metadata identifies the &lt;code&gt;value&lt;/code&gt; and &lt;code&gt;currency&lt;/code&gt;.
 </span>    <span class='const'>PRICE</span> <span class='op'>=</span> <span class='int'>13</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
@@ -760,8 +930,6 @@ salient.</p>
       <pre class="lines">
 
 
-104
-105
 106
 107
 108
@@ -802,13 +970,46 @@ salient.</p>
 143
 144
 145
-146</pre>
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/language/v1/doc/google/cloud/language/v1/language_service.rb', line 104</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/language/v1/doc/google/cloud/language/v1/language_service.rb', line 106</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Language::V1::Entity (class)">Entity</a></span></span>
-  <span class='comment'># The type of the entity.
+  <span class='comment'># The type of the entity. For most entity types, the associated metadata is a
+</span>  <span class='comment'># Wikipedia URL (`wikipedia_url`) and Knowledge Graph MID (`mid`). The table
+</span>  <span class='comment'># below lists the associated fields for entities that have different
+</span>  <span class='comment'># metadata.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Entity/Type.html" title="Google::Cloud::Language::V1::Entity::Type (module)">Type</a></span></span>
     <span class='comment'># Unknown
 </span>    <span class='const'>UNKNOWN</span> <span class='op'>=</span> <span class='int'>0</span>
@@ -825,28 +1026,53 @@ salient.</p>
     <span class='comment'># Event
 </span>    <span class='const'>EVENT</span> <span class='op'>=</span> <span class='int'>4</span>
 
-    <span class='comment'># Work of art
+    <span class='comment'># Artwork
 </span>    <span class='const'>WORK_OF_ART</span> <span class='op'>=</span> <span class='int'>5</span>
 
-    <span class='comment'># Consumer goods
+    <span class='comment'># Consumer product
 </span>    <span class='const'>CONSUMER_GOOD</span> <span class='op'>=</span> <span class='int'>6</span>
 
-    <span class='comment'># Other types
+    <span class='comment'># Other types of entities
 </span>    <span class='const'>OTHER</span> <span class='op'>=</span> <span class='int'>7</span>
 
-    <span class='comment'># Phone number
+    <span class='comment'># Phone number&lt;br&gt;&lt;br&gt;
+</span>    <span class='comment'># The metadata lists the phone number, formatted according to local
+</span>    <span class='comment'># convention, plus whichever additional elements appear in the text:&lt;ul&gt;
+</span>    <span class='comment'># &lt;li&gt;&lt;code&gt;number&lt;/code&gt; &amp;ndash; the actual number, broken down into
+</span>    <span class='comment'># sections as per local convention&lt;/li&gt; &lt;li&gt;&lt;code&gt;national_prefix&lt;/code&gt;
+</span>    <span class='comment'># &amp;ndash; country code, if detected&lt;/li&gt; &lt;li&gt;&lt;code&gt;area_code&lt;/code&gt; &amp;ndash;
+</span>    <span class='comment'># region or area code, if detected&lt;/li&gt; &lt;li&gt;&lt;code&gt;extension&lt;/code&gt; &amp;ndash;
+</span>    <span class='comment'># phone extension (to be dialed after connection), if detected&lt;/li&gt;&lt;/ul&gt;
 </span>    <span class='const'>PHONE_NUMBER</span> <span class='op'>=</span> <span class='int'>9</span>
 
-    <span class='comment'># Address
+    <span class='comment'># Address&lt;br&gt;&lt;br&gt;
+</span>    <span class='comment'># The metadata identifies the street number and locality plus whichever
+</span>    <span class='comment'># additional elements appear in the text:&lt;ul&gt;
+</span>    <span class='comment'># &lt;li&gt;&lt;code&gt;street_number&lt;/code&gt; &amp;ndash; street number&lt;/li&gt;
+</span>    <span class='comment'># &lt;li&gt;&lt;code&gt;locality&lt;/code&gt; &amp;ndash; city or town&lt;/li&gt;
+</span>    <span class='comment'># &lt;li&gt;&lt;code&gt;street_name&lt;/code&gt; &amp;ndash; street/route name, if detected&lt;/li&gt;
+</span>    <span class='comment'># &lt;li&gt;&lt;code&gt;postal_code&lt;/code&gt; &amp;ndash; postal code, if detected&lt;/li&gt;
+</span>    <span class='comment'># &lt;li&gt;&lt;code&gt;country&lt;/code&gt; &amp;ndash; country, if detected&lt;/li&gt;
+</span>    <span class='comment'># &lt;li&gt;&lt;code&gt;broad_region&lt;/code&gt; &amp;ndash; administrative area, such as the
+</span>    <span class='comment'># state, if detected&lt;/li&gt; &lt;li&gt;&lt;code&gt;narrow_region&lt;/code&gt; &amp;ndash; smaller
+</span>    <span class='comment'># administrative area, such as county, if detected&lt;/li&gt;
+</span>    <span class='comment'># &lt;li&gt;&lt;code&gt;sublocality&lt;/code&gt; &amp;ndash; used in Asian addresses to demark a
+</span>    <span class='comment'># district within a city, if detected&lt;/li&gt;&lt;/ul&gt;
 </span>    <span class='const'>ADDRESS</span> <span class='op'>=</span> <span class='int'>10</span>
 
-    <span class='comment'># Date
+    <span class='comment'># Date&lt;br&gt;&lt;br&gt;
+</span>    <span class='comment'># The metadata identifies the components of the date:&lt;ul&gt;
+</span>    <span class='comment'># &lt;li&gt;&lt;code&gt;year&lt;/code&gt; &amp;ndash; four digit year, if detected&lt;/li&gt;
+</span>    <span class='comment'># &lt;li&gt;&lt;code&gt;month&lt;/code&gt; &amp;ndash; two digit month number, if detected&lt;/li&gt;
+</span>    <span class='comment'># &lt;li&gt;&lt;code&gt;day&lt;/code&gt; &amp;ndash; two digit day number, if detected&lt;/li&gt;&lt;/ul&gt;
 </span>    <span class='const'>DATE</span> <span class='op'>=</span> <span class='int'>11</span>
 
-    <span class='comment'># Number
+    <span class='comment'># Number&lt;br&gt;&lt;br&gt;
+</span>    <span class='comment'># The metadata is the number itself.
 </span>    <span class='const'>NUMBER</span> <span class='op'>=</span> <span class='int'>12</span>
 
-    <span class='comment'># Price
+    <span class='comment'># Price&lt;br&gt;&lt;br&gt;
+</span>    <span class='comment'># The metadata identifies the &lt;code&gt;value&lt;/code&gt; and &lt;code&gt;currency&lt;/code&gt;.
 </span>    <span class='const'>PRICE</span> <span class='op'>=</span> <span class='int'>13</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
@@ -869,9 +1095,9 @@ salient.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns For calls to AnalyzeEntitySentiment or if
-<span class='object_link'><a href="AnnotateTextRequest/Features.html#extract_entity_sentiment-instance_method" title="Google::Cloud::Language::V1::AnnotateTextRequest::Features#extract_entity_sentiment (method)">AnnotateTextRequest::Features#extract_entity_sentiment</a></span>
-is set to true, this field will contain the aggregate sentiment expressed
-for this entity in the provided document.</p>
+<span class='object_link'><a href="AnnotateTextRequest/Features.html#extract_entity_sentiment-instance_method" title="Google::Cloud::Language::V1::AnnotateTextRequest::Features#extract_entity_sentiment (method)">AnnotateTextRequest::Features#extract_entity_sentiment</a></span> is set to
+true, this field will contain the aggregate sentiment expressed for this
+entity in the provided document.</p>
 
 
   </div>
@@ -890,9 +1116,9 @@ for this entity in the provided document.</p>
       
         &mdash;
         <div class='inline'><p>For calls to AnalyzeEntitySentiment or if
-<span class='object_link'><a href="AnnotateTextRequest/Features.html#extract_entity_sentiment-instance_method" title="Google::Cloud::Language::V1::AnnotateTextRequest::Features#extract_entity_sentiment (method)">AnnotateTextRequest::Features#extract_entity_sentiment</a></span>
-is set to true, this field will contain the aggregate sentiment expressed
-for this entity in the provided document.</p>
+<span class='object_link'><a href="AnnotateTextRequest/Features.html#extract_entity_sentiment-instance_method" title="Google::Cloud::Language::V1::AnnotateTextRequest::Features#extract_entity_sentiment (method)">AnnotateTextRequest::Features#extract_entity_sentiment</a></span> is set to
+true, this field will contain the aggregate sentiment expressed for this
+entity in the provided document.</p>
 </div>
       
     </li>
@@ -905,8 +1131,6 @@ for this entity in the provided document.</p>
       <pre class="lines">
 
 
-104
-105
 106
 107
 108
@@ -947,13 +1171,46 @@ for this entity in the provided document.</p>
 143
 144
 145
-146</pre>
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/language/v1/doc/google/cloud/language/v1/language_service.rb', line 104</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/language/v1/doc/google/cloud/language/v1/language_service.rb', line 106</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Language::V1::Entity (class)">Entity</a></span></span>
-  <span class='comment'># The type of the entity.
+  <span class='comment'># The type of the entity. For most entity types, the associated metadata is a
+</span>  <span class='comment'># Wikipedia URL (`wikipedia_url`) and Knowledge Graph MID (`mid`). The table
+</span>  <span class='comment'># below lists the associated fields for entities that have different
+</span>  <span class='comment'># metadata.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Entity/Type.html" title="Google::Cloud::Language::V1::Entity::Type (module)">Type</a></span></span>
     <span class='comment'># Unknown
 </span>    <span class='const'>UNKNOWN</span> <span class='op'>=</span> <span class='int'>0</span>
@@ -970,28 +1227,53 @@ for this entity in the provided document.</p>
     <span class='comment'># Event
 </span>    <span class='const'>EVENT</span> <span class='op'>=</span> <span class='int'>4</span>
 
-    <span class='comment'># Work of art
+    <span class='comment'># Artwork
 </span>    <span class='const'>WORK_OF_ART</span> <span class='op'>=</span> <span class='int'>5</span>
 
-    <span class='comment'># Consumer goods
+    <span class='comment'># Consumer product
 </span>    <span class='const'>CONSUMER_GOOD</span> <span class='op'>=</span> <span class='int'>6</span>
 
-    <span class='comment'># Other types
+    <span class='comment'># Other types of entities
 </span>    <span class='const'>OTHER</span> <span class='op'>=</span> <span class='int'>7</span>
 
-    <span class='comment'># Phone number
+    <span class='comment'># Phone number&lt;br&gt;&lt;br&gt;
+</span>    <span class='comment'># The metadata lists the phone number, formatted according to local
+</span>    <span class='comment'># convention, plus whichever additional elements appear in the text:&lt;ul&gt;
+</span>    <span class='comment'># &lt;li&gt;&lt;code&gt;number&lt;/code&gt; &amp;ndash; the actual number, broken down into
+</span>    <span class='comment'># sections as per local convention&lt;/li&gt; &lt;li&gt;&lt;code&gt;national_prefix&lt;/code&gt;
+</span>    <span class='comment'># &amp;ndash; country code, if detected&lt;/li&gt; &lt;li&gt;&lt;code&gt;area_code&lt;/code&gt; &amp;ndash;
+</span>    <span class='comment'># region or area code, if detected&lt;/li&gt; &lt;li&gt;&lt;code&gt;extension&lt;/code&gt; &amp;ndash;
+</span>    <span class='comment'># phone extension (to be dialed after connection), if detected&lt;/li&gt;&lt;/ul&gt;
 </span>    <span class='const'>PHONE_NUMBER</span> <span class='op'>=</span> <span class='int'>9</span>
 
-    <span class='comment'># Address
+    <span class='comment'># Address&lt;br&gt;&lt;br&gt;
+</span>    <span class='comment'># The metadata identifies the street number and locality plus whichever
+</span>    <span class='comment'># additional elements appear in the text:&lt;ul&gt;
+</span>    <span class='comment'># &lt;li&gt;&lt;code&gt;street_number&lt;/code&gt; &amp;ndash; street number&lt;/li&gt;
+</span>    <span class='comment'># &lt;li&gt;&lt;code&gt;locality&lt;/code&gt; &amp;ndash; city or town&lt;/li&gt;
+</span>    <span class='comment'># &lt;li&gt;&lt;code&gt;street_name&lt;/code&gt; &amp;ndash; street/route name, if detected&lt;/li&gt;
+</span>    <span class='comment'># &lt;li&gt;&lt;code&gt;postal_code&lt;/code&gt; &amp;ndash; postal code, if detected&lt;/li&gt;
+</span>    <span class='comment'># &lt;li&gt;&lt;code&gt;country&lt;/code&gt; &amp;ndash; country, if detected&lt;/li&gt;
+</span>    <span class='comment'># &lt;li&gt;&lt;code&gt;broad_region&lt;/code&gt; &amp;ndash; administrative area, such as the
+</span>    <span class='comment'># state, if detected&lt;/li&gt; &lt;li&gt;&lt;code&gt;narrow_region&lt;/code&gt; &amp;ndash; smaller
+</span>    <span class='comment'># administrative area, such as county, if detected&lt;/li&gt;
+</span>    <span class='comment'># &lt;li&gt;&lt;code&gt;sublocality&lt;/code&gt; &amp;ndash; used in Asian addresses to demark a
+</span>    <span class='comment'># district within a city, if detected&lt;/li&gt;&lt;/ul&gt;
 </span>    <span class='const'>ADDRESS</span> <span class='op'>=</span> <span class='int'>10</span>
 
-    <span class='comment'># Date
+    <span class='comment'># Date&lt;br&gt;&lt;br&gt;
+</span>    <span class='comment'># The metadata identifies the components of the date:&lt;ul&gt;
+</span>    <span class='comment'># &lt;li&gt;&lt;code&gt;year&lt;/code&gt; &amp;ndash; four digit year, if detected&lt;/li&gt;
+</span>    <span class='comment'># &lt;li&gt;&lt;code&gt;month&lt;/code&gt; &amp;ndash; two digit month number, if detected&lt;/li&gt;
+</span>    <span class='comment'># &lt;li&gt;&lt;code&gt;day&lt;/code&gt; &amp;ndash; two digit day number, if detected&lt;/li&gt;&lt;/ul&gt;
 </span>    <span class='const'>DATE</span> <span class='op'>=</span> <span class='int'>11</span>
 
-    <span class='comment'># Number
+    <span class='comment'># Number&lt;br&gt;&lt;br&gt;
+</span>    <span class='comment'># The metadata is the number itself.
 </span>    <span class='const'>NUMBER</span> <span class='op'>=</span> <span class='int'>12</span>
 
-    <span class='comment'># Price
+    <span class='comment'># Price&lt;br&gt;&lt;br&gt;
+</span>    <span class='comment'># The metadata identifies the &lt;code&gt;value&lt;/code&gt; and &lt;code&gt;currency&lt;/code&gt;.
 </span>    <span class='const'>PRICE</span> <span class='op'>=</span> <span class='int'>13</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
@@ -1044,8 +1326,6 @@ for this entity in the provided document.</p>
       <pre class="lines">
 
 
-104
-105
 106
 107
 108
@@ -1086,13 +1366,46 @@ for this entity in the provided document.</p>
 143
 144
 145
-146</pre>
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/language/v1/doc/google/cloud/language/v1/language_service.rb', line 104</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/language/v1/doc/google/cloud/language/v1/language_service.rb', line 106</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Language::V1::Entity (class)">Entity</a></span></span>
-  <span class='comment'># The type of the entity.
+  <span class='comment'># The type of the entity. For most entity types, the associated metadata is a
+</span>  <span class='comment'># Wikipedia URL (`wikipedia_url`) and Knowledge Graph MID (`mid`). The table
+</span>  <span class='comment'># below lists the associated fields for entities that have different
+</span>  <span class='comment'># metadata.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Entity/Type.html" title="Google::Cloud::Language::V1::Entity::Type (module)">Type</a></span></span>
     <span class='comment'># Unknown
 </span>    <span class='const'>UNKNOWN</span> <span class='op'>=</span> <span class='int'>0</span>
@@ -1109,28 +1422,53 @@ for this entity in the provided document.</p>
     <span class='comment'># Event
 </span>    <span class='const'>EVENT</span> <span class='op'>=</span> <span class='int'>4</span>
 
-    <span class='comment'># Work of art
+    <span class='comment'># Artwork
 </span>    <span class='const'>WORK_OF_ART</span> <span class='op'>=</span> <span class='int'>5</span>
 
-    <span class='comment'># Consumer goods
+    <span class='comment'># Consumer product
 </span>    <span class='const'>CONSUMER_GOOD</span> <span class='op'>=</span> <span class='int'>6</span>
 
-    <span class='comment'># Other types
+    <span class='comment'># Other types of entities
 </span>    <span class='const'>OTHER</span> <span class='op'>=</span> <span class='int'>7</span>
 
-    <span class='comment'># Phone number
+    <span class='comment'># Phone number&lt;br&gt;&lt;br&gt;
+</span>    <span class='comment'># The metadata lists the phone number, formatted according to local
+</span>    <span class='comment'># convention, plus whichever additional elements appear in the text:&lt;ul&gt;
+</span>    <span class='comment'># &lt;li&gt;&lt;code&gt;number&lt;/code&gt; &amp;ndash; the actual number, broken down into
+</span>    <span class='comment'># sections as per local convention&lt;/li&gt; &lt;li&gt;&lt;code&gt;national_prefix&lt;/code&gt;
+</span>    <span class='comment'># &amp;ndash; country code, if detected&lt;/li&gt; &lt;li&gt;&lt;code&gt;area_code&lt;/code&gt; &amp;ndash;
+</span>    <span class='comment'># region or area code, if detected&lt;/li&gt; &lt;li&gt;&lt;code&gt;extension&lt;/code&gt; &amp;ndash;
+</span>    <span class='comment'># phone extension (to be dialed after connection), if detected&lt;/li&gt;&lt;/ul&gt;
 </span>    <span class='const'>PHONE_NUMBER</span> <span class='op'>=</span> <span class='int'>9</span>
 
-    <span class='comment'># Address
+    <span class='comment'># Address&lt;br&gt;&lt;br&gt;
+</span>    <span class='comment'># The metadata identifies the street number and locality plus whichever
+</span>    <span class='comment'># additional elements appear in the text:&lt;ul&gt;
+</span>    <span class='comment'># &lt;li&gt;&lt;code&gt;street_number&lt;/code&gt; &amp;ndash; street number&lt;/li&gt;
+</span>    <span class='comment'># &lt;li&gt;&lt;code&gt;locality&lt;/code&gt; &amp;ndash; city or town&lt;/li&gt;
+</span>    <span class='comment'># &lt;li&gt;&lt;code&gt;street_name&lt;/code&gt; &amp;ndash; street/route name, if detected&lt;/li&gt;
+</span>    <span class='comment'># &lt;li&gt;&lt;code&gt;postal_code&lt;/code&gt; &amp;ndash; postal code, if detected&lt;/li&gt;
+</span>    <span class='comment'># &lt;li&gt;&lt;code&gt;country&lt;/code&gt; &amp;ndash; country, if detected&lt;/li&gt;
+</span>    <span class='comment'># &lt;li&gt;&lt;code&gt;broad_region&lt;/code&gt; &amp;ndash; administrative area, such as the
+</span>    <span class='comment'># state, if detected&lt;/li&gt; &lt;li&gt;&lt;code&gt;narrow_region&lt;/code&gt; &amp;ndash; smaller
+</span>    <span class='comment'># administrative area, such as county, if detected&lt;/li&gt;
+</span>    <span class='comment'># &lt;li&gt;&lt;code&gt;sublocality&lt;/code&gt; &amp;ndash; used in Asian addresses to demark a
+</span>    <span class='comment'># district within a city, if detected&lt;/li&gt;&lt;/ul&gt;
 </span>    <span class='const'>ADDRESS</span> <span class='op'>=</span> <span class='int'>10</span>
 
-    <span class='comment'># Date
+    <span class='comment'># Date&lt;br&gt;&lt;br&gt;
+</span>    <span class='comment'># The metadata identifies the components of the date:&lt;ul&gt;
+</span>    <span class='comment'># &lt;li&gt;&lt;code&gt;year&lt;/code&gt; &amp;ndash; four digit year, if detected&lt;/li&gt;
+</span>    <span class='comment'># &lt;li&gt;&lt;code&gt;month&lt;/code&gt; &amp;ndash; two digit month number, if detected&lt;/li&gt;
+</span>    <span class='comment'># &lt;li&gt;&lt;code&gt;day&lt;/code&gt; &amp;ndash; two digit day number, if detected&lt;/li&gt;&lt;/ul&gt;
 </span>    <span class='const'>DATE</span> <span class='op'>=</span> <span class='int'>11</span>
 
-    <span class='comment'># Number
+    <span class='comment'># Number&lt;br&gt;&lt;br&gt;
+</span>    <span class='comment'># The metadata is the number itself.
 </span>    <span class='const'>NUMBER</span> <span class='op'>=</span> <span class='int'>12</span>
 
-    <span class='comment'># Price
+    <span class='comment'># Price&lt;br&gt;&lt;br&gt;
+</span>    <span class='comment'># The metadata identifies the &lt;code&gt;value&lt;/code&gt; and &lt;code&gt;currency&lt;/code&gt;.
 </span>    <span class='const'>PRICE</span> <span class='op'>=</span> <span class='int'>13</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>

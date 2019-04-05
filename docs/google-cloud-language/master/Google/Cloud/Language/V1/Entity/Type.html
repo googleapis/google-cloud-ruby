@@ -73,7 +73,10 @@ js:
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>The type of the entity.</p>
+    <p>The type of the entity. For most entity types, the associated metadata is a
+Wikipedia URL (<code>wikipedia_url</code>) and Knowledge Graph MID (<code>mid</code>). The table
+below lists the associated fields for entities that have different
+metadata.</p>
 
 
   </div>
@@ -168,7 +171,7 @@ js:
         <dt id="WORK_OF_ART-constant" class="">WORK_OF_ART =
           <div class="docstring">
   <div class="discussion">
-    <p>Work of art</p>
+    <p>Artwork</p>
 
 
   </div>
@@ -183,7 +186,7 @@ js:
         <dt id="CONSUMER_GOOD-constant" class="">CONSUMER_GOOD =
           <div class="docstring">
   <div class="discussion">
-    <p>Consumer goods</p>
+    <p>Consumer product</p>
 
 
   </div>
@@ -198,7 +201,7 @@ js:
         <dt id="OTHER-constant" class="">OTHER =
           <div class="docstring">
   <div class="discussion">
-    <p>Other types</p>
+    <p>Other types of entities</p>
 
 
   </div>
@@ -213,7 +216,14 @@ js:
         <dt id="PHONE_NUMBER-constant" class="">PHONE_NUMBER =
           <div class="docstring">
   <div class="discussion">
-    <p>Phone number</p>
+    <p>Phone number<br><br>
+The metadata lists the phone number, formatted according to local
+convention, plus whichever additional elements appear in the text:<ul>
+<li><code>number</code> &ndash; the actual number, broken down into
+sections as per local convention</li> <li><code>national_prefix</code>
+&ndash; country code, if detected</li> <li><code>area_code</code> &ndash;
+region or area code, if detected</li> <li><code>extension</code> &ndash;
+phone extension (to be dialed after connection), if detected</li></ul></p>
 
 
   </div>
@@ -228,7 +238,19 @@ js:
         <dt id="ADDRESS-constant" class="">ADDRESS =
           <div class="docstring">
   <div class="discussion">
-    <p>Address</p>
+    <p>Address<br><br>
+The metadata identifies the street number and locality plus whichever
+additional elements appear in the text:<ul>
+<li><code>street_number</code> &ndash; street number</li>
+<li><code>locality</code> &ndash; city or town</li>
+<li><code>street_name</code> &ndash; street/route name, if detected</li>
+<li><code>postal_code</code> &ndash; postal code, if detected</li>
+<li><code>country</code> &ndash; country, if detected</li>
+<li><code>broad_region</code> &ndash; administrative area, such as the
+state, if detected</li> <li><code>narrow_region</code> &ndash; smaller
+administrative area, such as county, if detected</li>
+<li><code>sublocality</code> &ndash; used in Asian addresses to demark a
+district within a city, if detected</li></ul></p>
 
 
   </div>
@@ -243,7 +265,11 @@ js:
         <dt id="DATE-constant" class="">DATE =
           <div class="docstring">
   <div class="discussion">
-    <p>Date</p>
+    <p>Date<br><br>
+The metadata identifies the components of the date:<ul>
+<li><code>year</code> &ndash; four digit year, if detected</li>
+<li><code>month</code> &ndash; two digit month number, if detected</li>
+<li><code>day</code> &ndash; two digit day number, if detected</li></ul></p>
 
 
   </div>
@@ -258,7 +284,8 @@ js:
         <dt id="NUMBER-constant" class="">NUMBER =
           <div class="docstring">
   <div class="discussion">
-    <p>Number</p>
+    <p>Number<br><br>
+The metadata is the number itself.</p>
 
 
   </div>
@@ -273,7 +300,8 @@ js:
         <dt id="PRICE-constant" class="">PRICE =
           <div class="docstring">
   <div class="discussion">
-    <p>Price</p>
+    <p>Price<br><br>
+The metadata identifies the <code>value</code> and <code>currency</code>.</p>
 
 
   </div>
