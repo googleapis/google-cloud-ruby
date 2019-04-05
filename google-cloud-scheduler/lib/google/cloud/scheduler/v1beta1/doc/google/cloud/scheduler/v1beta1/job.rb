@@ -21,6 +21,9 @@ module Google
         # The maximum allowed size for a job is 100KB.
         # @!attribute [rw] name
         #   @return [String]
+        #     Optionally caller-specified in {Google::Cloud::Scheduler::V1beta1::CloudScheduler::CreateJob CreateJob}, after
+        #     which it becomes output only.
+        #
         #     The job name. For example:
         #     `projects/PROJECT_ID/locations/LOCATION_ID/jobs/JOB_ID`.
         #
@@ -37,6 +40,9 @@ module Google
         #       hyphens (-), or underscores (_). The maximum length is 500 characters.
         # @!attribute [rw] description
         #   @return [String]
+        #     Optionally caller-specified in {Google::Cloud::Scheduler::V1beta1::CloudScheduler::CreateJob CreateJob} or
+        #     {Google::Cloud::Scheduler::V1beta1::CloudScheduler::UpdateJob UpdateJob}.
+        #
         #     A human-readable description for the job. This string must not contain
         #     more than 500 characters.
         # @!attribute [rw] pubsub_target
@@ -50,9 +56,15 @@ module Google
         #     HTTP target.
         # @!attribute [rw] schedule
         #   @return [String]
-        #     Required.
+        #     Required, except when used with {Google::Cloud::Scheduler::V1beta1::CloudScheduler::UpdateJob UpdateJob}.
         #
         #     Describes the schedule on which the job will be executed.
+        #
+        #     The schedule can be either of the following types:
+        #
+        #     * [Crontab](http://en.wikipedia.org/wiki/Cron#Overview)
+        #     * English-like
+        #       [schedule](https://cloud.google.com/scheduler/docs/configuring/cron-job-schedules)
         #
         #     As a general rule, execution `n + 1` of a job will not begin
         #     until execution `n` has finished. Cloud Scheduler will never
@@ -63,23 +75,15 @@ module Google
         #     A scheduled start time will be delayed if the previous
         #     execution has not ended when its scheduled time occurs.
         #
-        #     If {Google::Cloud::Scheduler::V1beta1::RetryConfig#retry_count retry_count} >
-        #     0 and a job attempt fails, the job will be tried a total of
-        #     {Google::Cloud::Scheduler::V1beta1::RetryConfig#retry_count retry_count}
+        #     If {Google::Cloud::Scheduler::V1beta1::RetryConfig#retry_count retry_count} > 0 and a job attempt fails,
+        #     the job will be tried a total of {Google::Cloud::Scheduler::V1beta1::RetryConfig#retry_count retry_count}
         #     times, with exponential backoff, until the next scheduled start
         #     time.
-        #
-        #     The schedule can be either of the following types:
-        #
-        #     * [Crontab](http://en.wikipedia.org/wiki/Cron#Overview)
-        #     * English-like
-        #       [schedule](https://cloud.google.com/scheduler/docs/configuring/cron-job-schedules)
         # @!attribute [rw] time_zone
         #   @return [String]
         #     Specifies the time zone to be used in interpreting
-        #     {Google::Cloud::Scheduler::V1beta1::Job#schedule schedule}. The value of this
-        #     field must be a time zone name from the [tz
-        #     database](http://en.wikipedia.org/wiki/Tz_database).
+        #     {Google::Cloud::Scheduler::V1beta1::Job#schedule schedule}. The value of this field must be a time
+        #     zone name from the [tz database](http://en.wikipedia.org/wiki/Tz_database).
         #
         #     Note that some time zones include a provision for
         #     daylight savings time. The rules for daylight saving time are
@@ -106,6 +110,20 @@ module Google
         # @!attribute [rw] retry_config
         #   @return [Google::Cloud::Scheduler::V1beta1::RetryConfig]
         #     Settings that determine the retry behavior.
+        # @!attribute [rw] attempt_deadline
+        #   @return [Google::Protobuf::Duration]
+        #     The deadline for job attempts. If the request handler does not respond by
+        #     this deadline then the request is cancelled and the attempt is marked as a
+        #     `DEADLINE_EXCEEDED` failure. The failed attempt can be viewed in
+        #     execution logs. Cloud Scheduler will retry the job according
+        #     to the {Google::Cloud::Scheduler::V1beta1::RetryConfig RetryConfig}.
+        #
+        #     The allowed duration for this deadline is:
+        #
+        #     * For {Google::Cloud::Scheduler::V1beta1::Job#http_target HTTP targets}, between 15 seconds and 30 minutes.
+        #     * For {Google::Cloud::Scheduler::V1beta1::Job#app_engine_http_target App Engine HTTP targets}, between 15
+        #       seconds and 24 hours.
+        #     * For {Google::Cloud::Scheduler::V1beta1::Job#pubsub_target PubSub targets}, this field is ignored.
         class Job
           # State of the job.
           module State
@@ -124,11 +142,9 @@ module Google
             # cannot directly set a job to be disabled.
             DISABLED = 3
 
-            # The job state resulting from a failed
-            # {Google::Cloud::Scheduler::V1beta1::CloudScheduler::UpdateJob CloudScheduler::UpdateJob}
+            # The job state resulting from a failed {Google::Cloud::Scheduler::V1beta1::CloudScheduler::UpdateJob CloudScheduler::UpdateJob}
             # operation. To recover a job from this state, retry
-            # {Google::Cloud::Scheduler::V1beta1::CloudScheduler::UpdateJob CloudScheduler::UpdateJob}
-            # until a successful response is received.
+            # {Google::Cloud::Scheduler::V1beta1::CloudScheduler::UpdateJob CloudScheduler::UpdateJob} until a successful response is received.
             UPDATE_FAILED = 4
           end
         end
@@ -137,8 +153,7 @@ module Google
         #
         # By default, if a job does not complete successfully (meaning that
         # an acknowledgement is not received from the handler, then it will be retried
-        # with exponential backoff according to the settings in
-        # {Google::Cloud::Scheduler::V1beta1::RetryConfig RetryConfig}.
+        # with exponential backoff according to the settings in {Google::Cloud::Scheduler::V1beta1::RetryConfig RetryConfig}.
         # @!attribute [rw] retry_count
         #   @return [Integer]
         #     The number of attempts that the system will make to run a job using the
@@ -161,8 +176,8 @@ module Google
         #   @return [Google::Protobuf::Duration]
         #     The time limit for retrying a failed job, measured from time when an
         #     execution was first attempted. If specified with
-        #     {Google::Cloud::Scheduler::V1beta1::RetryConfig#retry_count retry_count}, the
-        #     job will be retried until both limits are reached.
+        #     {Google::Cloud::Scheduler::V1beta1::RetryConfig#retry_count retry_count}, the job will be retried until both
+        #     limits are reached.
         #
         #     The default value for max_retry_duration is zero, which means retry
         #     duration is unlimited.
@@ -183,25 +198,20 @@ module Google
         #     The time between retries will double `max_doublings` times.
         #
         #     A job's retry interval starts at
-        #     {Google::Cloud::Scheduler::V1beta1::RetryConfig#min_backoff_duration min_backoff_duration},
-        #     then doubles `max_doublings` times, then increases linearly, and finally
+        #     {Google::Cloud::Scheduler::V1beta1::RetryConfig#min_backoff_duration min_backoff_duration}, then doubles
+        #     `max_doublings` times, then increases linearly, and finally
         #     retries retries at intervals of
-        #     {Google::Cloud::Scheduler::V1beta1::RetryConfig#max_backoff_duration max_backoff_duration}
-        #     up to {Google::Cloud::Scheduler::V1beta1::RetryConfig#retry_count retry_count}
-        #     times.
+        #     {Google::Cloud::Scheduler::V1beta1::RetryConfig#max_backoff_duration max_backoff_duration} up to
+        #     {Google::Cloud::Scheduler::V1beta1::RetryConfig#retry_count retry_count} times.
         #
-        #     For example, if
-        #     {Google::Cloud::Scheduler::V1beta1::RetryConfig#min_backoff_duration min_backoff_duration}
-        #     is 10s,
-        #     {Google::Cloud::Scheduler::V1beta1::RetryConfig#max_backoff_duration max_backoff_duration}
-        #     is 300s, and `max_doublings` is 3, then the a job will first be retried in
-        #     10s. The retry interval will double three times, and then increase linearly
-        #     by 2^3 * 10s.  Finally, the job will retry at intervals of
-        #     {Google::Cloud::Scheduler::V1beta1::RetryConfig#max_backoff_duration max_backoff_duration}
-        #     until the job has been attempted
-        #     {Google::Cloud::Scheduler::V1beta1::RetryConfig#retry_count retry_count}
-        #     times. Thus, the requests will retry at 10s, 20s, 40s, 80s, 160s, 240s,
-        #     300s, 300s, ....
+        #     For example, if {Google::Cloud::Scheduler::V1beta1::RetryConfig#min_backoff_duration min_backoff_duration} is
+        #     10s, {Google::Cloud::Scheduler::V1beta1::RetryConfig#max_backoff_duration max_backoff_duration} is 300s, and
+        #     `max_doublings` is 3, then the a job will first be retried in 10s. The
+        #     retry interval will double three times, and then increase linearly by
+        #     2^3 * 10s.  Finally, the job will retry at intervals of
+        #     {Google::Cloud::Scheduler::V1beta1::RetryConfig#max_backoff_duration max_backoff_duration} until the job has
+        #     been attempted {Google::Cloud::Scheduler::V1beta1::RetryConfig#retry_count retry_count} times. Thus, the
+        #     requests will retry at 10s, 20s, 40s, 80s, 160s, 240s, 300s, 300s, ....
         #
         #     The default value of this field is 5.
         class RetryConfig; end
