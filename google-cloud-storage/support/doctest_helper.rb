@@ -40,14 +40,15 @@ module Google
         def signed_url bucket, path, method: nil, expires: nil,
                        content_type: nil, content_md5: nil, headers: nil,
                        issuer: nil, client_email: nil, signing_key: nil,
-                       private_key: nil
+                       private_key: nil, version: nil
           # no-op stub, but ensures that calls match this copied signature
         end
       end
       class Bucket
         def signed_url path, method: nil, expires: nil, content_type: nil,
                        content_md5: nil, headers: nil, issuer: nil,
-                       client_email: nil, signing_key: nil, private_key: nil
+                       client_email: nil, signing_key: nil, private_key: nil,
+                       version: nil
           # no-op stub, but ensures that calls match this copied signature
         end
 
@@ -69,7 +70,8 @@ module Google
 
         def signed_url method: nil, expires: nil, content_type: nil,
                        content_md5: nil, headers: nil, issuer: nil,
-                       client_email: nil, signing_key: nil, private_key: nil
+                       client_email: nil, signing_key: nil, private_key: nil,
+                       version: nil
           # no-op stub, but ensures that calls match this copied signature
         end
       end

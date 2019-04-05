@@ -1353,14 +1353,12 @@ module Google
         alias combine compose
 
         ##
-        # Access without authentication can be granted to a File for a specified
-        # period of time. This URL uses a cryptographic signature of your
-        # credentials to access the file identified by `path`. A URL can be
-        # created for paths that do not yet exist. For instance, a URL can be
-        # created to `PUT` file contents to.
+        # Generates a signed URL. See [Signed
+        # URLs](https://cloud.google.com/storage/docs/access-control/signed-urls)
+        # for more information.
         #
-        # Generating a URL requires service account credentials, either by
-        # connecting with a service account when calling
+        # Generating a signed URL requires service account credentials, either
+        # by connecting with a service account when calling
         # {Google::Cloud.storage}, or by passing in the service account `issuer`
         # and `signing_key` values. Although the private key can be passed as a
         # string for convenience, creating and storing an instance of
@@ -1372,20 +1370,26 @@ module Google
         # steps in [Service Account Authentication](
         # https://cloud.google.com/storage/docs/authentication#service_accounts).
         #
-        # @see https://cloud.google.com/storage/docs/access-control#Signed-URLs
-        #   Access Control Signed URLs guide
+        # @see https://cloud.google.com/storage/docs/access-control/signed-urls
+        #   Signed URLs guide
+        # @see https://cloud.google.com/storage/docs/access-control/signed-urls#signing-resumable
+        #   Using signed URLs with resumable uploads
         #
-        # @param [String] path Path to the file in Google Cloud Storage.
+        # @param [String, nil] path Path to the file in Google Cloud Storage, or
+        #   `nil` to generate a URL for listing all files in the bucket.
         # @param [String] method The HTTP verb to be used with the signed URL.
         #   Signed URLs can be used
         #   with `GET`, `HEAD`, `PUT`, and `DELETE` requests. Default is `GET`.
         # @param [Integer] expires The number of seconds until the URL expires.
-        #   Default is 300/5 minutes.
+        #   If the `version` is `:v2`, the default is 300 (5 minutes). If the
+        #   `version` is `:v4`, the default is 604800 (7 days).
         # @param [String] content_type When provided, the client (browser) must
-        #   send this value in the HTTP header. e.g. `text/plain`
+        #   send this value in the HTTP header. e.g. `text/plain`. This param is
+        #   not used if the `version` is `:v4`.
         # @param [String] content_md5 The MD5 digest value in base64. If you
         #   provide this in the string, the client (usually a browser) must
-        #   provide this HTTP header with this same value in its request.
+        #   provide this HTTP header with this same value in its request. This
+        #   param is not used if the `version` is `:v4`.
         # @param [Hash] headers Google extension headers (custom HTTP headers
         #   that begin with `x-goog-`) that must be included in requests that
         #   use the signed URL.
@@ -1403,6 +1407,9 @@ module Google
         #   using the URL, but only when the file resource is missing the
         #   corresponding values. (These values can be permanently set using
         #   {File#content_disposition=} and {File#content_type=}.)
+        # @param [Symbol, String] version The version of the signed credential
+        #   to create. Must be one of ':v2' or ':v4'. The default value is
+        #   ':v2'.
         #
         # @return [String]
         #
@@ -1414,21 +1421,20 @@ module Google
         #   bucket = storage.bucket "my-todo-app"
         #   shared_url = bucket.signed_url "avatars/heidi/400x400.png"
         #
-        # @example Any of the option parameters may be specified:
+        # @example Using the `expires` and `version` options:
         #   require "google/cloud/storage"
         #
         #   storage = Google::Cloud::Storage.new
         #
         #   bucket = storage.bucket "my-todo-app"
         #   shared_url = bucket.signed_url "avatars/heidi/400x400.png",
-        #                                  method: "PUT",
-        #                                  content_type: "image/png",
-        #                                  expires: 300 # 5 minutes from now
+        #                                  expires: 300, # 5 minutes from now
+        #                                  version: :v4
         #
-        # @example Using the issuer and signing_key options:
+        # @example Using the `issuer` and `signing_key` options:
         #   require "google/cloud/storage"
         #
-        #   storage = Google::Cloud.storage
+        #   storage = Google::Cloud::Storage.new
         #
         #   bucket = storage.bucket "my-todo-app"
         #   key = OpenSSL::PKey::RSA.new "-----BEGIN PRIVATE KEY-----\n..."
@@ -1436,10 +1442,10 @@ module Google
         #                                  issuer: "service-account@gcloud.com",
         #                                  signing_key: key
         #
-        # @example Using the headers option:
+        # @example Using the `headers` option:
         #   require "google/cloud/storage"
         #
-        #   storage = Google::Cloud.storage
+        #   storage = Google::Cloud::Storage.new
         #
         #   bucket = storage.bucket "my-todo-app"
         #   shared_url = bucket.signed_url "avatars/heidi/400x400.png",
@@ -1448,18 +1454,54 @@ module Google
         #                                    "x-goog-meta-foo" => "bar,baz"
         #                                  }
         #
-        def signed_url path, method: nil, expires: nil, content_type: nil,
+        # @example Generating a signed URL for resumable upload:
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "my-todo-app"
+        #   url = bucket.signed_url "avatars/heidi/400x400.png",
+        #                           method: "POST",
+        #                           content_type: "image/png",
+        #                           headers: {
+        #                             "x-goog-resumable" => "start"
+        #                           }
+        #   # Send the `x-goog-resumable:start` header and the content type
+        #   # with the resumable upload POST request.
+        #
+        # @example Omitting `path` for a URL to list all files in the bucket.
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "my-todo-app"
+        #   list_files_url = bucket.signed_url version: :v4
+        #
+        def signed_url path = nil, method: nil, expires: nil, content_type: nil,
                        content_md5: nil, headers: nil, issuer: nil,
                        client_email: nil, signing_key: nil, private_key: nil,
-                       query: nil
+                       query: nil, version: nil
           ensure_service!
-          signer = File::Signer.from_bucket self, path
-          signer.signed_url method: method, expires: expires, headers: headers,
-                            content_type: content_type,
-                            content_md5: content_md5, issuer: issuer,
-                            client_email: client_email,
-                            signing_key: signing_key, private_key: private_key,
-                            query: query
+          version ||= :v2
+          case version.to_sym
+          when :v2
+            signer = File::SignerV2.from_bucket self, path
+            signer.signed_url method: method, expires: expires,
+                              headers: headers, content_type: content_type,
+                              content_md5: content_md5, issuer: issuer,
+                              client_email: client_email,
+                              signing_key: signing_key,
+                              private_key: private_key, query: query
+          when :v4
+            signer = File::SignerV4.from_bucket self, path
+            signer.signed_url method: method, expires: expires,
+                              headers: headers, issuer: issuer,
+                              client_email: client_email,
+                              signing_key: signing_key,
+                              private_key: private_key, query: query
+          else
+            raise ArgumentError, "version '#{version}' not supported"
+          end
         end
 
         ##
@@ -1563,7 +1605,7 @@ module Google
                         private_key: nil
           ensure_service!
 
-          signer = File::Signer.from_bucket self, path
+          signer = File::SignerV2.from_bucket self, path
           signer.post_object issuer: issuer, client_email: client_email,
                              signing_key: signing_key, private_key: private_key,
                              policy: policy
