@@ -206,27 +206,42 @@ module Google
             @create_tenant = Google::Gax.create_api_call(
               @tenant_service_stub.method(:create_tenant),
               defaults["create_tenant"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
             )
             @get_tenant = Google::Gax.create_api_call(
               @tenant_service_stub.method(:get_tenant),
               defaults["get_tenant"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @update_tenant = Google::Gax.create_api_call(
               @tenant_service_stub.method(:update_tenant),
               defaults["update_tenant"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'tenant.name' => request.tenant.name}
+              end
             )
             @delete_tenant = Google::Gax.create_api_call(
               @tenant_service_stub.method(:delete_tenant),
               defaults["delete_tenant"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @list_tenants = Google::Gax.create_api_call(
               @tenant_service_stub.method(:list_tenants),
               defaults["list_tenants"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
             )
           end
 

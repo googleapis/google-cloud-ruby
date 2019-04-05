@@ -20,6 +20,7 @@ require "google/gax"
 require "google/cloud/talent"
 require "google/cloud/talent/v4beta1/helpers"
 
+require "google/cloud/talent/v4beta1/application_service_client"
 require "google/cloud/talent/v4beta1/company_service_client"
 require "google/cloud/talent/v4beta1/job_service_client"
 require "google/cloud/talent/v4beta1/profile_service_client"
@@ -33,6 +34,41 @@ class HelperMockTalentCredentials_v4beta1 < Google::Cloud::Talent::V4beta1::Cred
     proc do
       raise "The client was trying to make a grpc request. This should not " \
           "happen since the grpc layer is being mocked."
+    end
+  end
+end
+
+describe Google::Cloud::Talent::V4beta1::ApplicationServiceClient do
+  let(:mock_credentials) { HelperMockTalentCredentials_v4beta1.new }
+
+  describe "the application_path instance method" do
+    it "correctly calls Google::Cloud::Talent::V4beta1::ApplicationServiceClient.application_path" do
+      Google::Cloud::Talent::V4beta1::Credentials.stub(:default, mock_credentials) do
+        project = "project"
+        tenant = "tenant"
+        profile = "profile"
+        application = "application"
+        client = Google::Cloud::Talent::ApplicationService.new version: :v4beta1
+        assert_equal(
+          client.application_path(project, tenant, profile, application),
+          Google::Cloud::Talent::V4beta1::ApplicationServiceClient.application_path(project, tenant, profile, application)
+        )
+      end
+    end
+  end
+
+  describe "the profile_path instance method" do
+    it "correctly calls Google::Cloud::Talent::V4beta1::ApplicationServiceClient.profile_path" do
+      Google::Cloud::Talent::V4beta1::Credentials.stub(:default, mock_credentials) do
+        project = "project"
+        tenant = "tenant"
+        profile = "profile"
+        client = Google::Cloud::Talent::ApplicationService.new version: :v4beta1
+        assert_equal(
+          client.profile_path(project, tenant, profile),
+          Google::Cloud::Talent::V4beta1::ApplicationServiceClient.profile_path(project, tenant, profile)
+        )
+      end
     end
   end
 end
@@ -71,6 +107,20 @@ end
 
 describe Google::Cloud::Talent::V4beta1::JobServiceClient do
   let(:mock_credentials) { HelperMockTalentCredentials_v4beta1.new }
+
+  describe "the company_old_path instance method" do
+    it "correctly calls Google::Cloud::Talent::V4beta1::JobServiceClient.company_old_path" do
+      Google::Cloud::Talent::V4beta1::Credentials.stub(:default, mock_credentials) do
+        project = "project"
+        company = "company"
+        client = Google::Cloud::Talent::JobService.new version: :v4beta1
+        assert_equal(
+          client.company_old_path(project, company),
+          Google::Cloud::Talent::V4beta1::JobServiceClient.company_old_path(project, company)
+        )
+      end
+    end
+  end
 
   describe "the job_old_path instance method" do
     it "correctly calls Google::Cloud::Talent::V4beta1::JobServiceClient.job_old_path" do

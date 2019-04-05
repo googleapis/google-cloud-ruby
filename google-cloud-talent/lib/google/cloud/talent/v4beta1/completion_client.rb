@@ -65,6 +65,12 @@ module Google
 
           private_constant :TENANT_PATH_TEMPLATE
 
+          COMPANY_OLD_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+            "projects/{project}/companies/{company}"
+          )
+
+          private_constant :COMPANY_OLD_PATH_TEMPLATE
+
           # Returns a fully-qualified tenant resource name string.
           # @param project [String]
           # @param tenant [String]
@@ -73,6 +79,17 @@ module Google
             TENANT_PATH_TEMPLATE.render(
               :"project" => project,
               :"tenant" => tenant
+            )
+          end
+
+          # Returns a fully-qualified company_old resource name string.
+          # @param project [String]
+          # @param company [String]
+          # @return [String]
+          def self.company_old_path project, company
+            COMPANY_OLD_PATH_TEMPLATE.render(
+              :"project" => project,
+              :"company" => company
             )
           end
 
@@ -181,7 +198,10 @@ module Google
             @complete_query = Google::Gax.create_api_call(
               @completion_stub.method(:complete_query),
               defaults["complete_query"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
             )
           end
 

@@ -215,27 +215,42 @@ module Google
             @create_application = Google::Gax.create_api_call(
               @application_service_stub.method(:create_application),
               defaults["create_application"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
             )
             @get_application = Google::Gax.create_api_call(
               @application_service_stub.method(:get_application),
               defaults["get_application"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @update_application = Google::Gax.create_api_call(
               @application_service_stub.method(:update_application),
               defaults["update_application"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'application.name' => request.application.name}
+              end
             )
             @delete_application = Google::Gax.create_api_call(
               @application_service_stub.method(:delete_application),
               defaults["delete_application"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @list_applications = Google::Gax.create_api_call(
               @application_service_stub.method(:list_applications),
               defaults["list_applications"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
             )
           end
 
@@ -268,7 +283,7 @@ module Google
           # @example
           #   require "google/cloud/talent"
           #
-          #   application_client = Google::Cloud::Talent::Application.new(version: :v4beta1)
+          #   application_client = Google::Cloud::Talent::ApplicationService.new(version: :v4beta1)
           #   formatted_parent = Google::Cloud::Talent::V4beta1::ApplicationServiceClient.profile_path("[PROJECT]", "[TENANT]", "[PROFILE]")
           #
           #   # TODO: Initialize `application`:
@@ -310,7 +325,7 @@ module Google
           # @example
           #   require "google/cloud/talent"
           #
-          #   application_client = Google::Cloud::Talent::Application.new(version: :v4beta1)
+          #   application_client = Google::Cloud::Talent::ApplicationService.new(version: :v4beta1)
           #   formatted_name = Google::Cloud::Talent::V4beta1::ApplicationServiceClient.application_path("[PROJECT]", "[TENANT]", "[PROFILE]", "[APPLICATION]")
           #   response = application_client.get_application(formatted_name)
 
@@ -359,7 +374,7 @@ module Google
           # @example
           #   require "google/cloud/talent"
           #
-          #   application_client = Google::Cloud::Talent::Application.new(version: :v4beta1)
+          #   application_client = Google::Cloud::Talent::ApplicationService.new(version: :v4beta1)
           #
           #   # TODO: Initialize `application`:
           #   application = {}
@@ -399,7 +414,7 @@ module Google
           # @example
           #   require "google/cloud/talent"
           #
-          #   application_client = Google::Cloud::Talent::Application.new(version: :v4beta1)
+          #   application_client = Google::Cloud::Talent::ApplicationService.new(version: :v4beta1)
           #   formatted_name = Google::Cloud::Talent::V4beta1::ApplicationServiceClient.application_path("[PROJECT]", "[TENANT]", "[PROFILE]", "[APPLICATION]")
           #   application_client.delete_application(formatted_name)
 
@@ -446,7 +461,7 @@ module Google
           # @example
           #   require "google/cloud/talent"
           #
-          #   application_client = Google::Cloud::Talent::Application.new(version: :v4beta1)
+          #   application_client = Google::Cloud::Talent::ApplicationService.new(version: :v4beta1)
           #   formatted_parent = Google::Cloud::Talent::V4beta1::ApplicationServiceClient.profile_path("[PROJECT]", "[TENANT]", "[PROFILE]")
           #
           #   # Iterate over all results.

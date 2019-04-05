@@ -87,7 +87,7 @@ module Google
         .select { |dir| File.exist?(dir + ".rb") }
         .map { |dir| File.basename(dir) }
 
-      module Application
+      module ApplicationService
         ##
         # A service that handles application management, including CRUD and
         # enumeration.
@@ -136,7 +136,7 @@ module Google
             .constants
             .select {|sym| sym.to_s.downcase == version.to_s.downcase}
             .first
-          Google::Cloud::Talent.const_get(version_module)::Application.new(*args, **kwargs)
+          Google::Cloud::Talent.const_get(version_module)::ApplicationService.new(*args, **kwargs)
         end
       end
 
