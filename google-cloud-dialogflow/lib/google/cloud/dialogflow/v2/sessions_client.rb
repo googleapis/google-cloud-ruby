@@ -33,10 +33,9 @@ module Google
     module Dialogflow
       module V2
         # A session represents an interaction with a user. You retrieve user input
-        # and pass it to the
-        # {Google::Cloud::Dialogflow::V2::Sessions::DetectIntent DetectIntent} (or
-        # {Google::Cloud::Dialogflow::V2::Sessions::StreamingDetectIntent StreamingDetectIntent})
-        # method to determine user intent and respond.
+        # and pass it to the {Google::Cloud::Dialogflow::V2::Sessions::DetectIntent DetectIntent} (or
+        # {Google::Cloud::Dialogflow::V2::Sessions::StreamingDetectIntent StreamingDetectIntent}) method to determine
+        # user intent and respond.
         #
         # @!attribute [r] sessions_stub
         #   @return [Google::Cloud::Dialogflow::V2::Sessions::Stub]
@@ -58,7 +57,8 @@ module Google
           # The scopes needed to make gRPC calls to all of the methods defined in
           # this service.
           ALL_SCOPES = [
-            "https://www.googleapis.com/auth/cloud-platform"
+            "https://www.googleapis.com/auth/cloud-platform",
+            "https://www.googleapis.com/auth/dialogflow"
           ].freeze
 
 
@@ -224,6 +224,12 @@ module Google
           #   Optional. The parameters of this query.
           #   A hash of the same form as `Google::Cloud::Dialogflow::V2::QueryParameters`
           #   can also be provided.
+          # @param output_audio_config [Google::Cloud::Dialogflow::V2::OutputAudioConfig | Hash]
+          #   Optional. Instructs the speech synthesizer how to generate the output
+          #   audio. If this field is not set and agent-level speech synthesizer is not
+          #   configured, no output audio is generated.
+          #   A hash of the same form as `Google::Cloud::Dialogflow::V2::OutputAudioConfig`
+          #   can also be provided.
           # @param input_audio [String]
           #   Optional. The natural language speech audio to be processed. This field
           #   should be populated iff `query_input` is set to an input audio config.
@@ -250,6 +256,7 @@ module Google
               session,
               query_input,
               query_params: nil,
+              output_audio_config: nil,
               input_audio: nil,
               options: nil,
               &block
@@ -257,6 +264,7 @@ module Google
               session: session,
               query_input: query_input,
               query_params: query_params,
+              output_audio_config: output_audio_config,
               input_audio: input_audio
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Cloud::Dialogflow::V2::DetectIntentRequest)

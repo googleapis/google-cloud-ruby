@@ -29,6 +29,9 @@ module Google
         #     Required. The unique identifier of this session entity type. Format:
         #     `projects/<Project ID>/agent/sessions/<Session ID>/entityTypes/<Entity Type
         #     Display Name>`.
+        #
+        #     `<Entity Type Display Name>` must be the display name of an existing entity
+        #     type in the same agent that will be overridden or supplemented.
         # @!attribute [rw] entity_override_mode
         #   @return [Google::Cloud::Dialogflow::V2::SessionEntityType::EntityOverrideMode]
         #     Required. Indicates whether the additional data should override or
@@ -49,16 +52,18 @@ module Google
 
             # The collection of session entities extends the collection of entities in
             # the corresponding developer entity type.
-            # Calls to `ListSessionEntityTypes`, `GetSessionEntityType`,
-            # `CreateSessionEntityType` and `UpdateSessionEntityType` return the full
-            # collection of entities from the developer entity type in the agent's
-            # default language and the session entity type.
+            #
+            # Note: Even in this override mode calls to `ListSessionEntityTypes`,
+            # `GetSessionEntityType`, `CreateSessionEntityType` and
+            # `UpdateSessionEntityType` only return the additional entities added in
+            # this session entity type. If you want to get the supplemented list,
+            # please call {Google::Cloud::Dialogflow::V2::EntityTypes::GetEntityType EntityTypes::GetEntityType} on the developer entity type
+            # and merge.
             ENTITY_OVERRIDE_MODE_SUPPLEMENT = 2
           end
         end
 
-        # The request message for
-        # {Google::Cloud::Dialogflow::V2::SessionEntityTypes::ListSessionEntityTypes SessionEntityTypes::ListSessionEntityTypes}.
+        # The request message for {Google::Cloud::Dialogflow::V2::SessionEntityTypes::ListSessionEntityTypes SessionEntityTypes::ListSessionEntityTypes}.
         # @!attribute [rw] parent
         #   @return [String]
         #     Required. The session to list all session entity types from.
@@ -72,8 +77,7 @@ module Google
         #     Optional. The next_page_token value returned from a previous list request.
         class ListSessionEntityTypesRequest; end
 
-        # The response message for
-        # {Google::Cloud::Dialogflow::V2::SessionEntityTypes::ListSessionEntityTypes SessionEntityTypes::ListSessionEntityTypes}.
+        # The response message for {Google::Cloud::Dialogflow::V2::SessionEntityTypes::ListSessionEntityTypes SessionEntityTypes::ListSessionEntityTypes}.
         # @!attribute [rw] session_entity_types
         #   @return [Array<Google::Cloud::Dialogflow::V2::SessionEntityType>]
         #     The list of session entity types. There will be a maximum number of items
@@ -84,8 +88,7 @@ module Google
         #     more results in the list.
         class ListSessionEntityTypesResponse; end
 
-        # The request message for
-        # {Google::Cloud::Dialogflow::V2::SessionEntityTypes::GetSessionEntityType SessionEntityTypes::GetSessionEntityType}.
+        # The request message for {Google::Cloud::Dialogflow::V2::SessionEntityTypes::GetSessionEntityType SessionEntityTypes::GetSessionEntityType}.
         # @!attribute [rw] name
         #   @return [String]
         #     Required. The name of the session entity type. Format:
@@ -93,8 +96,7 @@ module Google
         #     Display Name>`.
         class GetSessionEntityTypeRequest; end
 
-        # The request message for
-        # {Google::Cloud::Dialogflow::V2::SessionEntityTypes::CreateSessionEntityType SessionEntityTypes::CreateSessionEntityType}.
+        # The request message for {Google::Cloud::Dialogflow::V2::SessionEntityTypes::CreateSessionEntityType SessionEntityTypes::CreateSessionEntityType}.
         # @!attribute [rw] parent
         #   @return [String]
         #     Required. The session to create a session entity type for.
@@ -104,8 +106,7 @@ module Google
         #     Required. The session entity type to create.
         class CreateSessionEntityTypeRequest; end
 
-        # The request message for
-        # {Google::Cloud::Dialogflow::V2::SessionEntityTypes::UpdateSessionEntityType SessionEntityTypes::UpdateSessionEntityType}.
+        # The request message for {Google::Cloud::Dialogflow::V2::SessionEntityTypes::UpdateSessionEntityType SessionEntityTypes::UpdateSessionEntityType}.
         # @!attribute [rw] session_entity_type
         #   @return [Google::Cloud::Dialogflow::V2::SessionEntityType]
         #     Required. The entity type to update. Format:
@@ -116,8 +117,7 @@ module Google
         #     Optional. The mask to control which fields get updated.
         class UpdateSessionEntityTypeRequest; end
 
-        # The request message for
-        # {Google::Cloud::Dialogflow::V2::SessionEntityTypes::DeleteSessionEntityType SessionEntityTypes::DeleteSessionEntityType}.
+        # The request message for {Google::Cloud::Dialogflow::V2::SessionEntityTypes::DeleteSessionEntityType SessionEntityTypes::DeleteSessionEntityType}.
         # @!attribute [rw] name
         #   @return [String]
         #     Required. The name of the entity type to delete. Format:

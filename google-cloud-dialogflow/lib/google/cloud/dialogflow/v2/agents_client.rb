@@ -39,30 +39,29 @@ module Google
         # in your app, product, or service to determine user intent and respond to the
         # user in a natural way.
         #
-        # After you create an agent, you can add
-        # {Google::Cloud::Dialogflow::V2::Intents Intents},
-        # {Google::Cloud::Dialogflow::V2::Contexts Contexts}, [Entity
-        # Types][google.cloud.dialogflow.v2.EntityTypes],
-        # {Google::Cloud::Dialogflow::V2::WebhookRequest Webhooks}, and so on to manage
-        # the flow of a conversation and match user input to predefined intents and
-        # actions.
+        # After you create an agent, you can add {Google::Cloud::Dialogflow::V2::Intents Intents}, {Google::Cloud::Dialogflow::V2::Contexts Contexts},
+        # {Google::Cloud::Dialogflow::V2::EntityTypes Entity Types}, {Google::Cloud::Dialogflow::V2::WebhookRequest Webhooks}, and so on to
+        # manage the flow of a conversation and match user input to predefined intents
+        # and actions.
         #
         # You can create an agent using both Dialogflow Standard Edition and
         # Dialogflow Enterprise Edition. For details, see
-        # [Dialogflow Editions](https://cloud.google.com/dialogflow-enterprise/docs/editions).
+        # [Dialogflow
+        # Editions](https://cloud.google.com/dialogflow-enterprise/docs/editions).
         #
         # You can save your agent for backup or versioning by exporting the agent by
-        # using the {Google::Cloud::Dialogflow::V2::Agents::ExportAgent ExportAgent}
-        # method. You can import a saved agent by using the
-        # {Google::Cloud::Dialogflow::V2::Agents::ImportAgent ImportAgent} method.
+        # using the {Google::Cloud::Dialogflow::V2::Agents::ExportAgent ExportAgent} method. You can import a saved
+        # agent by using the {Google::Cloud::Dialogflow::V2::Agents::ImportAgent ImportAgent} method.
         #
         # Dialogflow provides several
-        # [prebuilt agents](https://dialogflow.com/docs/prebuilt-agents) for common
-        # conversation scenarios such as determining a date and time, converting
-        # currency, and so on.
+        # [prebuilt
+        # agents](https://cloud.google.com/dialogflow-enterprise/docs/agents-prebuilt)
+        # for common conversation scenarios such as determining a date and time,
+        # converting currency, and so on.
         #
         # For more information about agents, see the
-        # [Dialogflow documentation](https://dialogflow.com/docs/agents).
+        # [Dialogflow
+        # documentation](https://cloud.google.com/dialogflow-enterprise/docs/agents-overview).
         #
         # @!attribute [r] agents_stub
         #   @return [Google::Cloud::Dialogflow::V2::Agents::Stub]
@@ -93,7 +92,8 @@ module Google
           # The scopes needed to make gRPC calls to all of the methods defined in
           # this service.
           ALL_SCOPES = [
-            "https://www.googleapis.com/auth/cloud-platform"
+            "https://www.googleapis.com/auth/cloud-platform",
+            "https://www.googleapis.com/auth/dialogflow"
           ].freeze
 
           # @private
@@ -375,8 +375,7 @@ module Google
 
           # Trains the specified agent.
           #
-          # Operation <response: {Google::Protobuf::Empty},
-          #            metadata: {Google::Protobuf::Struct}>
+          # Operation <response: {Google::Protobuf::Empty}>
           #
           # @param parent [String]
           #   Required. The project that the agent to train is associated with.
@@ -439,17 +438,17 @@ module Google
 
           # Exports the specified agent to a ZIP file.
           #
-          # Operation <response:
-          # {Google::Cloud::Dialogflow::V2::ExportAgentResponse ExportAgentResponse},
-          #            metadata: {Google::Protobuf::Struct}>
+          # Operation <response: {Google::Cloud::Dialogflow::V2::ExportAgentResponse ExportAgentResponse}>
           #
           # @param parent [String]
           #   Required. The project that the agent to export is associated with.
           #   Format: `projects/<Project ID>`.
           # @param agent_uri [String]
-          #   Optional. The Google Cloud Storage URI to export the agent to.
-          #   Note: The URI must start with
-          #   "gs://". If left unspecified, the serialized agent is returned inline.
+          #   Optional. The
+          #   [Google Cloud Storage](https://cloud.google.com/storage/docs/)
+          #   URI to export the agent to.
+          #   The format of this URI must be `gs://<bucket-name>/<object-name>`.
+          #   If left unspecified, the serialized agent is returned inline.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -514,8 +513,7 @@ module Google
           # Intents and entity types with the same name are replaced with the new
           # versions from ImportAgentRequest.
           #
-          # Operation <response: {Google::Protobuf::Empty},
-          #            metadata: {Google::Protobuf::Struct}>
+          # Operation <response: {Google::Protobuf::Empty}>
           #
           # @param parent [String]
           #   Required. The project that the agent to import is associated with.
@@ -527,17 +525,17 @@ module Google
           #   The agent to import.
           #
           #   Example for how to import an agent via the command line:
-          #
-          #   curl \
-          #     'https://dialogflow.googleapis.com/v2/projects/<project_name>/agent:import\
+          #   <pre>curl \
+          #     'https://dialogflow.googleapis.com/v2/projects/&lt;project_name&gt;/agent:import\
           #      -X POST \
-          #      -H 'Authorization: Bearer '$(gcloud auth print-access-token) \
+          #      -H 'Authorization: Bearer '$(gcloud auth application-default
+          #      print-access-token) \
           #      -H 'Accept: application/json' \
           #      -H 'Content-Type: application/json' \
           #      --compressed \
           #      --data-binary "{
-          #         'agentContent': '$(cat <agent zip file> | base64 -w 0)'
-          #      }"
+          #         'agentContent': '$(cat &lt;agent zip file&gt; | base64 -w 0)'
+          #      }"</pre>
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -603,8 +601,7 @@ module Google
           # Replaces the current agent version with a new one. All the intents and
           # entity types in the older version are deleted.
           #
-          # Operation <response: {Google::Protobuf::Empty},
-          #            metadata: {Google::Protobuf::Struct}>
+          # Operation <response: {Google::Protobuf::Empty}>
           #
           # @param parent [String]
           #   Required. The project that the agent to restore is associated with.
@@ -616,17 +613,17 @@ module Google
           #   The agent to restore.
           #
           #   Example for how to restore an agent via the command line:
-          #
-          #   curl \
-          #     'https://dialogflow.googleapis.com/v2/projects/<project_name>/agent:restore\
+          #   <pre>curl \
+          #     'https://dialogflow.googleapis.com/v2/projects/&lt;project_name&gt;/agent:restore\
           #      -X POST \
-          #      -H 'Authorization: Bearer '$(gcloud auth print-access-token) \
+          #      -H 'Authorization: Bearer '$(gcloud auth application-default
+          #      print-access-token) \
           #      -H 'Accept: application/json' \
           #      -H 'Content-Type: application/json' \
           #      --compressed \
           #      --data-binary "{
-          #          'agentContent': '$(cat <agent zip file> | base64 -w 0)'
-          #      }" \
+          #          'agentContent': '$(cat &lt;agent zip file&gt; | base64 -w 0)'
+          #      }"</pre>
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.

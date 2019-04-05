@@ -1,8 +1,8 @@
 # Ruby Client for Dialogflow API ([Alpha](https://github.com/googleapis/google-cloud-ruby#versioning))
 
 [Dialogflow API][Product Documentation]:
-An end-to-end development suite for conversational interfaces (e.g.,
-chatbots, voice-powered apps and devices).
+Builds conversational interfaces (for example, chatbots, and voice-powered
+apps and devices).
 - [Client Library Documentation][]
 - [Product Documentation][]
 

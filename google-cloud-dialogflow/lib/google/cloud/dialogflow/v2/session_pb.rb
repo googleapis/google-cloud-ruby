@@ -5,6 +5,8 @@
 require 'google/protobuf'
 
 require 'google/api/annotations_pb'
+require 'google/api/resource_pb'
+require 'google/cloud/dialogflow/v2/audio_config_pb'
 require 'google/cloud/dialogflow/v2/context_pb'
 require 'google/cloud/dialogflow/v2/intent_pb'
 require 'google/cloud/dialogflow/v2/session_entity_type_pb'
@@ -16,12 +18,15 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :session, :string, 1
     optional :query_params, :message, 2, "google.cloud.dialogflow.v2.QueryParameters"
     optional :query_input, :message, 3, "google.cloud.dialogflow.v2.QueryInput"
+    optional :output_audio_config, :message, 4, "google.cloud.dialogflow.v2.OutputAudioConfig"
     optional :input_audio, :bytes, 5
   end
   add_message "google.cloud.dialogflow.v2.DetectIntentResponse" do
     optional :response_id, :string, 1
     optional :query_result, :message, 2, "google.cloud.dialogflow.v2.QueryResult"
     optional :webhook_status, :message, 3, "google.rpc.Status"
+    optional :output_audio, :bytes, 4
+    optional :output_audio_config, :message, 6, "google.cloud.dialogflow.v2.OutputAudioConfig"
   end
   add_message "google.cloud.dialogflow.v2.QueryParameters" do
     optional :time_zone, :string, 1
@@ -30,6 +35,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :reset_contexts, :bool, 4
     repeated :session_entity_types, :message, 5, "google.cloud.dialogflow.v2.SessionEntityType"
     optional :payload, :message, 6, "google.protobuf.Struct"
+    optional :sentiment_analysis_request_config, :message, 10, "google.cloud.dialogflow.v2.SentimentAnalysisRequestConfig"
   end
   add_message "google.cloud.dialogflow.v2.QueryInput" do
     oneof :input do
@@ -53,12 +59,14 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :intent, :message, 11, "google.cloud.dialogflow.v2.Intent"
     optional :intent_detection_confidence, :float, 12
     optional :diagnostic_info, :message, 14, "google.protobuf.Struct"
+    optional :sentiment_analysis_result, :message, 17, "google.cloud.dialogflow.v2.SentimentAnalysisResult"
   end
   add_message "google.cloud.dialogflow.v2.StreamingDetectIntentRequest" do
     optional :session, :string, 1
     optional :query_params, :message, 2, "google.cloud.dialogflow.v2.QueryParameters"
     optional :query_input, :message, 3, "google.cloud.dialogflow.v2.QueryInput"
     optional :single_utterance, :bool, 4
+    optional :output_audio_config, :message, 5, "google.cloud.dialogflow.v2.OutputAudioConfig"
     optional :input_audio, :bytes, 6
   end
   add_message "google.cloud.dialogflow.v2.StreamingDetectIntentResponse" do
@@ -66,6 +74,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :recognition_result, :message, 2, "google.cloud.dialogflow.v2.StreamingRecognitionResult"
     optional :query_result, :message, 3, "google.cloud.dialogflow.v2.QueryResult"
     optional :webhook_status, :message, 4, "google.rpc.Status"
+    optional :output_audio, :bytes, 5
+    optional :output_audio_config, :message, 6, "google.cloud.dialogflow.v2.OutputAudioConfig"
   end
   add_message "google.cloud.dialogflow.v2.StreamingRecognitionResult" do
     optional :message_type, :enum, 1, "google.cloud.dialogflow.v2.StreamingRecognitionResult.MessageType"
@@ -92,6 +102,16 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :name, :string, 1
     optional :parameters, :message, 2, "google.protobuf.Struct"
     optional :language_code, :string, 3
+  end
+  add_message "google.cloud.dialogflow.v2.SentimentAnalysisRequestConfig" do
+    optional :analyze_query_text_sentiment, :bool, 1
+  end
+  add_message "google.cloud.dialogflow.v2.SentimentAnalysisResult" do
+    optional :query_text_sentiment, :message, 1, "google.cloud.dialogflow.v2.Sentiment"
+  end
+  add_message "google.cloud.dialogflow.v2.Sentiment" do
+    optional :score, :float, 1
+    optional :magnitude, :float, 2
   end
   add_enum "google.cloud.dialogflow.v2.AudioEncoding" do
     value :AUDIO_ENCODING_UNSPECIFIED, 0
@@ -121,6 +141,9 @@ module Google
         InputAudioConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.InputAudioConfig").msgclass
         TextInput = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.TextInput").msgclass
         EventInput = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.EventInput").msgclass
+        SentimentAnalysisRequestConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.SentimentAnalysisRequestConfig").msgclass
+        SentimentAnalysisResult = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.SentimentAnalysisResult").msgclass
+        Sentiment = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.Sentiment").msgclass
         AudioEncoding = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.AudioEncoding").enummodule
       end
     end

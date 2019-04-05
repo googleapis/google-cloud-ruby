@@ -57,11 +57,11 @@ module Google
         #
         # * **User** - entities that are built for an individual user such as
         #   favorites, preferences, playlists, and so on. A user entity is
-        #   represented by the
-        #   {Google::Cloud::Dialogflow::V2::SessionEntityType SessionEntityType} type.
+        #   represented by the {Google::Cloud::Dialogflow::V2::SessionEntityType SessionEntityType} type.
         #
         # For more information about entity types, see the
-        # [Dialogflow documentation](https://dialogflow.com/docs/entities).
+        # [Dialogflow
+        # documentation](https://cloud.google.com/dialogflow-enterprise/docs/entities-overview).
         #
         # @!attribute [r] entity_types_stub
         #   @return [Google::Cloud::Dialogflow::V2::EntityTypes::Stub]
@@ -92,7 +92,8 @@ module Google
           # The scopes needed to make gRPC calls to all of the methods defined in
           # this service.
           ALL_SCOPES = [
-            "https://www.googleapis.com/auth/cloud-platform"
+            "https://www.googleapis.com/auth/cloud-platform",
+            "https://www.googleapis.com/auth/dialogflow"
           ].freeze
 
           # @private
@@ -337,9 +338,10 @@ module Google
           # @param language_code [String]
           #   Optional. The language to list entity synonyms for. If not specified,
           #   the agent's default language is used.
-          #   [More than a dozen
-          #   languages](https://dialogflow.com/docs/reference/language) are supported.
-          #   Note: languages must be enabled in the agent, before they can be used.
+          #   [Many
+          #   languages](https://cloud.google.com/dialogflow-enterprise/docs/reference/language)
+          #   are supported. Note: languages must be enabled in the agent before they can
+          #   be used.
           # @param page_size [Integer]
           #   The maximum number of resources contained in the underlying API
           #   response. If page streaming is performed per-resource, this
@@ -400,9 +402,10 @@ module Google
           # @param language_code [String]
           #   Optional. The language to retrieve entity synonyms for. If not specified,
           #   the agent's default language is used.
-          #   [More than a dozen
-          #   languages](https://dialogflow.com/docs/reference/language) are supported.
-          #   Note: languages must be enabled in the agent, before they can be used.
+          #   [Many
+          #   languages](https://cloud.google.com/dialogflow-enterprise/docs/reference/language)
+          #   are supported. Note: languages must be enabled in the agent before they can
+          #   be used.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -443,9 +446,10 @@ module Google
           # @param language_code [String]
           #   Optional. The language of entity synonyms defined in `entity_type`. If not
           #   specified, the agent's default language is used.
-          #   [More than a dozen
-          #   languages](https://dialogflow.com/docs/reference/language) are supported.
-          #   Note: languages must be enabled in the agent, before they can be used.
+          #   [Many
+          #   languages](https://cloud.google.com/dialogflow-enterprise/docs/reference/language)
+          #   are supported. Note: languages must be enabled in the agent before they can
+          #   be used.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -483,15 +487,15 @@ module Google
           #
           # @param entity_type [Google::Cloud::Dialogflow::V2::EntityType | Hash]
           #   Required. The entity type to update.
-          #   Format: `projects/<Project ID>/agent/entityTypes/<EntityType ID>`.
           #   A hash of the same form as `Google::Cloud::Dialogflow::V2::EntityType`
           #   can also be provided.
           # @param language_code [String]
           #   Optional. The language of entity synonyms defined in `entity_type`. If not
           #   specified, the agent's default language is used.
-          #   [More than a dozen
-          #   languages](https://dialogflow.com/docs/reference/language) are supported.
-          #   Note: languages must be enabled in the agent, before they can be used.
+          #   [Many
+          #   languages](https://cloud.google.com/dialogflow-enterprise/docs/reference/language)
+          #   are supported. Note: languages must be enabled in the agent before they can
+          #   be used.
           # @param update_mask [Google::Protobuf::FieldMask | Hash]
           #   Optional. The mask to control which fields get updated.
           #   A hash of the same form as `Google::Protobuf::FieldMask`
@@ -561,9 +565,7 @@ module Google
 
           # Updates/Creates multiple entity types in the specified agent.
           #
-          # Operation <response:
-          # {Google::Cloud::Dialogflow::V2::BatchUpdateEntityTypesResponse BatchUpdateEntityTypesResponse},
-          #            metadata: {Google::Protobuf::Struct}>
+          # Operation <response: {Google::Cloud::Dialogflow::V2::BatchUpdateEntityTypesResponse BatchUpdateEntityTypesResponse}>
           #
           # @param parent [String]
           #   Required. The name of the agent to update or create entity types in.
@@ -574,15 +576,16 @@ module Google
           #   EntityBatch type) or a JSON object. Note: The URI must start with
           #   "gs://".
           # @param entity_type_batch_inline [Google::Cloud::Dialogflow::V2::EntityTypeBatch | Hash]
-          #   The collection of entity type to update or create.
+          #   The collection of entity types to update or create.
           #   A hash of the same form as `Google::Cloud::Dialogflow::V2::EntityTypeBatch`
           #   can also be provided.
           # @param language_code [String]
           #   Optional. The language of entity synonyms defined in `entity_types`. If not
           #   specified, the agent's default language is used.
-          #   [More than a dozen
-          #   languages](https://dialogflow.com/docs/reference/language) are supported.
-          #   Note: languages must be enabled in the agent, before they can be used.
+          #   [Many
+          #   languages](https://cloud.google.com/dialogflow-enterprise/docs/reference/language)
+          #   are supported. Note: languages must be enabled in the agent before they can
+          #   be used.
           # @param update_mask [Google::Protobuf::FieldMask | Hash]
           #   Optional. The mask to control which fields get updated.
           #   A hash of the same form as `Google::Protobuf::FieldMask`
@@ -653,8 +656,7 @@ module Google
 
           # Deletes entity types in the specified agent.
           #
-          # Operation <response: {Google::Protobuf::Empty},
-          #            metadata: {Google::Protobuf::Struct}>
+          # Operation <response: {Google::Protobuf::Empty}>
           #
           # @param parent [String]
           #   Required. The name of the agent to delete all entities types for. Format:
@@ -723,8 +725,7 @@ module Google
             operation
           end
 
-          # Creates multiple new entities in the specified entity type (extends the
-          # existing collection of entries).
+          # Creates multiple new entities in the specified entity type.
           #
           # Operation <response: {Google::Protobuf::Empty}>
           #
@@ -732,15 +733,16 @@ module Google
           #   Required. The name of the entity type to create entities in. Format:
           #   `projects/<Project ID>/agent/entityTypes/<Entity Type ID>`.
           # @param entities [Array<Google::Cloud::Dialogflow::V2::EntityType::Entity | Hash>]
-          #   Required. The collection of entities to create.
+          #   Required. The entities to create.
           #   A hash of the same form as `Google::Cloud::Dialogflow::V2::EntityType::Entity`
           #   can also be provided.
           # @param language_code [String]
           #   Optional. The language of entity synonyms defined in `entities`. If not
           #   specified, the agent's default language is used.
-          #   [More than a dozen
-          #   languages](https://dialogflow.com/docs/reference/language) are supported.
-          #   Note: languages must be enabled in the agent, before they can be used.
+          #   [Many
+          #   languages](https://cloud.google.com/dialogflow-enterprise/docs/reference/language)
+          #   are supported. Note: languages must be enabled in the agent before they can
+          #   be used.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -804,25 +806,26 @@ module Google
             operation
           end
 
-          # Updates entities in the specified entity type (replaces the existing
-          # collection of entries).
+          # Updates or creates multiple entities in the specified entity type. This
+          # method does not affect entities in the entity type that aren't explicitly
+          # specified in the request.
           #
-          # Operation <response: {Google::Protobuf::Empty},
-          #            metadata: {Google::Protobuf::Struct}>
+          # Operation <response: {Google::Protobuf::Empty}>
           #
           # @param parent [String]
-          #   Required. The name of the entity type to update the entities in. Format:
-          #   `projects/<Project ID>/agent/entityTypes/<Entity Type ID>`.
+          #   Required. The name of the entity type to update or create entities in.
+          #   Format: `projects/<Project ID>/agent/entityTypes/<Entity Type ID>`.
           # @param entities [Array<Google::Cloud::Dialogflow::V2::EntityType::Entity | Hash>]
-          #   Required. The collection of new entities to replace the existing entities.
+          #   Required. The entities to update or create.
           #   A hash of the same form as `Google::Cloud::Dialogflow::V2::EntityType::Entity`
           #   can also be provided.
           # @param language_code [String]
           #   Optional. The language of entity synonyms defined in `entities`. If not
           #   specified, the agent's default language is used.
-          #   [More than a dozen
-          #   languages](https://dialogflow.com/docs/reference/language) are supported.
-          #   Note: languages must be enabled in the agent, before they can be used.
+          #   [Many
+          #   languages](https://cloud.google.com/dialogflow-enterprise/docs/reference/language)
+          #   are supported. Note: languages must be enabled in the agent before they can
+          #   be used.
           # @param update_mask [Google::Protobuf::FieldMask | Hash]
           #   Optional. The mask to control which fields get updated.
           #   A hash of the same form as `Google::Protobuf::FieldMask`
@@ -894,8 +897,7 @@ module Google
 
           # Deletes entities in the specified entity type.
           #
-          # Operation <response: {Google::Protobuf::Empty},
-          #            metadata: {Google::Protobuf::Struct}>
+          # Operation <response: {Google::Protobuf::Empty}>
           #
           # @param parent [String]
           #   Required. The name of the entity type to delete entries for. Format:
@@ -907,9 +909,10 @@ module Google
           # @param language_code [String]
           #   Optional. The language of entity synonyms defined in `entities`. If not
           #   specified, the agent's default language is used.
-          #   [More than a dozen
-          #   languages](https://dialogflow.com/docs/reference/language) are supported.
-          #   Note: languages must be enabled in the agent, before they can be used.
+          #   [Many
+          #   languages](https://cloud.google.com/dialogflow-enterprise/docs/reference/language)
+          #   are supported. Note: languages must be enabled in the agent before they can
+          #   be used.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.

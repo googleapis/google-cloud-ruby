@@ -21,7 +21,8 @@ module Google
       module V2
         class Credentials < Google::Auth::Credentials
           SCOPE = [
-            "https://www.googleapis.com/auth/cloud-platform"
+            "https://www.googleapis.com/auth/cloud-platform",
+            "https://www.googleapis.com/auth/dialogflow"
           ].freeze
           PATH_ENV_VARS = %w(DIALOGFLOW_CREDENTIALS
                              DIALOGFLOW_KEYFILE

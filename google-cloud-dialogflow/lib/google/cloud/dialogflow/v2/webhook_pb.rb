@@ -4,11 +4,11 @@
 
 require 'google/protobuf'
 
-require 'google/api/annotations_pb'
 require 'google/cloud/dialogflow/v2/context_pb'
 require 'google/cloud/dialogflow/v2/intent_pb'
 require 'google/cloud/dialogflow/v2/session_pb'
 require 'google/protobuf/struct_pb'
+require 'google/api/annotations_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.cloud.dialogflow.v2.WebhookRequest" do
     optional :session, :string, 4
@@ -26,6 +26,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   end
   add_message "google.cloud.dialogflow.v2.OriginalDetectIntentRequest" do
     optional :source, :string, 1
+    optional :version, :string, 2
     optional :payload, :message, 3, "google.protobuf.Struct"
   end
 end

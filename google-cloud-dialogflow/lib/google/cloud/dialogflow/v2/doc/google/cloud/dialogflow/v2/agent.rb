@@ -28,9 +28,10 @@ module Google
         # @!attribute [rw] default_language_code
         #   @return [String]
         #     Required. The default language of the agent as a language tag. See
-        #     [Language Support](https://dialogflow.com/docs/reference/language) for a
-        #     list of the currently supported language codes.
-        #     This field cannot be set by the `Update` method.
+        #     [Language
+        #     Support](https://cloud.google.com/dialogflow-enterprise/docs/reference/language)
+        #     for a list of the currently supported language codes. This field cannot be
+        #     set by the `Update` method.
         # @!attribute [rw] supported_language_codes
         #   @return [Array<String>]
         #     Optional. The list of all languages supported by this agent (except for the
@@ -48,7 +49,9 @@ module Google
         #   @return [String]
         #     Optional. The URI of the agent's avatar.
         #     Avatars are used throughout the Dialogflow console and in the self-hosted
-        #     [Web Demo](https://dialogflow.com/docs/integrations/web-demo) integration.
+        #     [Web
+        #     Demo](https://cloud.google.com/dialogflow-enterprise/docs/integrations/web-demo)
+        #     integration.
         # @!attribute [rw] enable_logging
         #   @return [true, false]
         #     Optional. Determines whether this agent should log conversation queries.
@@ -60,7 +63,7 @@ module Google
         #     Optional. To filter out false positive results and still get variety in
         #     matched natural language inputs for your agent, you can tune the machine
         #     learning classification threshold. If the returned score value is less than
-        #     the threshold value, then a fallback intent is be triggered or, if there
+        #     the threshold value, then a fallback intent will be triggered or, if there
         #     are no fallback intents defined, no intent will be triggered. The score
         #     values range from 0.0 (completely uncertain) to 1.0 (completely certain).
         #     If set to 0.0, the default of 0.3 is used.
@@ -80,16 +83,14 @@ module Google
           end
         end
 
-        # The request message for
-        # {Google::Cloud::Dialogflow::V2::Agents::GetAgent Agents::GetAgent}.
+        # The request message for {Google::Cloud::Dialogflow::V2::Agents::GetAgent Agents::GetAgent}.
         # @!attribute [rw] parent
         #   @return [String]
         #     Required. The project that the agent to fetch is associated with.
         #     Format: `projects/<Project ID>`.
         class GetAgentRequest; end
 
-        # The request message for
-        # {Google::Cloud::Dialogflow::V2::Agents::SearchAgents Agents::SearchAgents}.
+        # The request message for {Google::Cloud::Dialogflow::V2::Agents::SearchAgents Agents::SearchAgents}.
         # @!attribute [rw] parent
         #   @return [String]
         #     Required. The project to list agents from.
@@ -103,8 +104,7 @@ module Google
         #     Optional. The next_page_token value returned from a previous list request.
         class SearchAgentsRequest; end
 
-        # The response message for
-        # {Google::Cloud::Dialogflow::V2::Agents::SearchAgents Agents::SearchAgents}.
+        # The response message for {Google::Cloud::Dialogflow::V2::Agents::SearchAgents Agents::SearchAgents}.
         # @!attribute [rw] agents
         #   @return [Array<Google::Cloud::Dialogflow::V2::Agent>]
         #     The list of agents. There will be a maximum number of items returned based
@@ -115,29 +115,28 @@ module Google
         #     more results in the list.
         class SearchAgentsResponse; end
 
-        # The request message for
-        # {Google::Cloud::Dialogflow::V2::Agents::TrainAgent Agents::TrainAgent}.
+        # The request message for {Google::Cloud::Dialogflow::V2::Agents::TrainAgent Agents::TrainAgent}.
         # @!attribute [rw] parent
         #   @return [String]
         #     Required. The project that the agent to train is associated with.
         #     Format: `projects/<Project ID>`.
         class TrainAgentRequest; end
 
-        # The request message for
-        # {Google::Cloud::Dialogflow::V2::Agents::ExportAgent Agents::ExportAgent}.
+        # The request message for {Google::Cloud::Dialogflow::V2::Agents::ExportAgent Agents::ExportAgent}.
         # @!attribute [rw] parent
         #   @return [String]
         #     Required. The project that the agent to export is associated with.
         #     Format: `projects/<Project ID>`.
         # @!attribute [rw] agent_uri
         #   @return [String]
-        #     Optional. The Google Cloud Storage URI to export the agent to.
-        #     Note: The URI must start with
-        #     "gs://". If left unspecified, the serialized agent is returned inline.
+        #     Optional. The
+        #     [Google Cloud Storage](https://cloud.google.com/storage/docs/)
+        #     URI to export the agent to.
+        #     The format of this URI must be `gs://<bucket-name>/<object-name>`.
+        #     If left unspecified, the serialized agent is returned inline.
         class ExportAgentRequest; end
 
-        # The response message for
-        # {Google::Cloud::Dialogflow::V2::Agents::ExportAgent Agents::ExportAgent}.
+        # The response message for {Google::Cloud::Dialogflow::V2::Agents::ExportAgent Agents::ExportAgent}.
         # @!attribute [rw] agent_uri
         #   @return [String]
         #     The URI to a file containing the exported agent. This field is populated
@@ -147,21 +146,20 @@ module Google
         #     The exported agent.
         #
         #     Example for how to export an agent to a zip file via a command line:
-        #
-        #     curl \
-        #       'https://dialogflow.googleapis.com/v2/projects/<project_name>/agent:export'\
+        #     <pre>curl \
+        #       'https://dialogflow.googleapis.com/v2/projects/&lt;project_name&gt;/agent:export'\
         #       -X POST \
-        #       -H 'Authorization: Bearer '$(gcloud auth print-access-token) \
+        #       -H 'Authorization: Bearer '$(gcloud auth application-default
+        #       print-access-token) \
         #       -H 'Accept: application/json' \
         #       -H 'Content-Type: application/json' \
         #       --compressed \
         #       --data-binary '{}' \
         #     | grep agentContent | sed -e 's/.*"agentContent": "\([^"]*\)".*/\1/' \
-        #     | base64 --decode > <agent zip file>
+        #     | base64 --decode > &lt;agent zip file&gt;</pre>
         class ExportAgentResponse; end
 
-        # The request message for
-        # {Google::Cloud::Dialogflow::V2::Agents::ImportAgent Agents::ImportAgent}.
+        # The request message for {Google::Cloud::Dialogflow::V2::Agents::ImportAgent Agents::ImportAgent}.
         # @!attribute [rw] parent
         #   @return [String]
         #     Required. The project that the agent to import is associated with.
@@ -175,21 +173,20 @@ module Google
         #     The agent to import.
         #
         #     Example for how to import an agent via the command line:
-        #
-        #     curl \
-        #       'https://dialogflow.googleapis.com/v2/projects/<project_name>/agent:import\
+        #     <pre>curl \
+        #       'https://dialogflow.googleapis.com/v2/projects/&lt;project_name&gt;/agent:import\
         #        -X POST \
-        #        -H 'Authorization: Bearer '$(gcloud auth print-access-token) \
+        #        -H 'Authorization: Bearer '$(gcloud auth application-default
+        #        print-access-token) \
         #        -H 'Accept: application/json' \
         #        -H 'Content-Type: application/json' \
         #        --compressed \
         #        --data-binary "{
-        #           'agentContent': '$(cat <agent zip file> | base64 -w 0)'
-        #        }"
+        #           'agentContent': '$(cat &lt;agent zip file&gt; | base64 -w 0)'
+        #        }"</pre>
         class ImportAgentRequest; end
 
-        # The request message for
-        # {Google::Cloud::Dialogflow::V2::Agents::RestoreAgent Agents::RestoreAgent}.
+        # The request message for {Google::Cloud::Dialogflow::V2::Agents::RestoreAgent Agents::RestoreAgent}.
         # @!attribute [rw] parent
         #   @return [String]
         #     Required. The project that the agent to restore is associated with.
@@ -203,17 +200,17 @@ module Google
         #     The agent to restore.
         #
         #     Example for how to restore an agent via the command line:
-        #
-        #     curl \
-        #       'https://dialogflow.googleapis.com/v2/projects/<project_name>/agent:restore\
+        #     <pre>curl \
+        #       'https://dialogflow.googleapis.com/v2/projects/&lt;project_name&gt;/agent:restore\
         #        -X POST \
-        #        -H 'Authorization: Bearer '$(gcloud auth print-access-token) \
+        #        -H 'Authorization: Bearer '$(gcloud auth application-default
+        #        print-access-token) \
         #        -H 'Accept: application/json' \
         #        -H 'Content-Type: application/json' \
         #        --compressed \
         #        --data-binary "{
-        #            'agentContent': '$(cat <agent zip file> | base64 -w 0)'
-        #        }" \
+        #            'agentContent': '$(cat &lt;agent zip file&gt; | base64 -w 0)'
+        #        }"</pre>
         class RestoreAgentRequest; end
       end
     end

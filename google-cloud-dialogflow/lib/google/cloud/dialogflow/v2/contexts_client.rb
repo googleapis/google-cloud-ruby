@@ -41,14 +41,15 @@ module Google
         #
         # You can include contexts as input parameters of a
         # {Google::Cloud::Dialogflow::V2::Sessions::DetectIntent DetectIntent} (or
-        # {Google::Cloud::Dialogflow::V2::Sessions::StreamingDetectIntent StreamingDetectIntent})
-        # request, or as output contexts included in the returned intent. Contexts
-        # expire when an intent is matched, after the number of `DetectIntent` requests
-        # specified by the `lifespan_count` parameter, or after 10 minutes if no
-        # intents are matched for a `DetectIntent` request.
+        # {Google::Cloud::Dialogflow::V2::Sessions::StreamingDetectIntent StreamingDetectIntent}) request,
+        # or as output contexts included in the returned intent.
+        # Contexts expire when an intent is matched, after the number of `DetectIntent`
+        # requests specified by the `lifespan_count` parameter, or after 20 minutes
+        # if no intents are matched for a `DetectIntent` request.
         #
         # For more information about contexts, see the
-        # [Dialogflow documentation](https://dialogflow.com/docs/contexts).
+        # [Dialogflow
+        # documentation](https://cloud.google.com/dialogflow-enterprise/docs/contexts-overview).
         #
         # @!attribute [r] contexts_stub
         #   @return [Google::Cloud::Dialogflow::V2::Contexts::Stub]
@@ -79,7 +80,8 @@ module Google
           # The scopes needed to make gRPC calls to all of the methods defined in
           # this service.
           ALL_SCOPES = [
-            "https://www.googleapis.com/auth/cloud-platform"
+            "https://www.googleapis.com/auth/cloud-platform",
+            "https://www.googleapis.com/auth/dialogflow"
           ].freeze
 
 
@@ -361,6 +363,8 @@ module Google
           end
 
           # Creates a context.
+          #
+          # If the specified context already exists, overrides the context.
           #
           # @param parent [String]
           #   Required. The session to create a context for.

@@ -5,6 +5,7 @@
 require 'google/protobuf'
 
 require 'google/api/annotations_pb'
+require 'google/api/resource_pb'
 require 'google/cloud/dialogflow/v2/entity_type_pb'
 require 'google/protobuf/empty_pb'
 require 'google/protobuf/field_mask_pb'
