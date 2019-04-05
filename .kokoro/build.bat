@@ -15,8 +15,7 @@ SET "run_kokoro=ridk enable && bundle update && bundle exec rake kokoro:%JOB_TYP
 
 IF "%JOB_TYPE%"=="presubmit" (
     SET clone_command="`git clone #{ENV['KOKORO_GITHUB_PULL_REQUEST_URL'].split('/pull')[0]}.git`"
-    SET "git_commands=git fetch origin pull/%KOKORO_GITHUB_PULL_REQUEST_NUMBER%/merge:pull_branch"
-    SET "git_commands=%git_commands% && git checkout pull_branch"
+    SET "git_commands=git fetch origin pull/%KOKORO_GITHUB_PULL_REQUEST_NUMBER%/merge:pull_branch && git checkout pull_branch"
 ) ELSE (
     SET clone_command="`git clone #{ENV['KOKORO_GITHUB_COMMIT_URL'].split('/commit')[0]}.git`"
     SET "git_commands=git fetch --depth=10000 && git checkout %KOKORO_GIT_COMMIT%"
