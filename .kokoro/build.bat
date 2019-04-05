@@ -12,20 +12,14 @@ REM Ruby can't access the files in the mounted volume.
 REM Neither Powershell's Copy-Item nor xcopy correctly copy the symlinks.
 REM So we clone/checkout the repo ourselves rather than relying on Kokoro.
 SET "run_kokoro=ridk enable && bundle update && bundle exec rake kokoro:%JOB_TYPE%"
-
-SET "git_commands=ECHO %JOB_TYPE%"
+SET clone_command="`git clone #{ENV['KOKORO_GITHUB_COMMIT_URL'].split('/commit')[0]}.git`"
+SET git_commands="`git fetch --depth=10000 && git checkout #{ENV['KOKORO_GIT_COMMIT']}`"
 
 IF "%JOB_TYPE%"=="presubmit" (
-    SET "git_commands=git fetch && git checkout %KOKORO_GIT_COMMIT%"
+    SET git_commands="pr_number = ENV['KOKORO_GITHUB_PULL_REQUEST_NUMBER'];"
+    SET git_commands="%pr_number% `git fetch origin pull/#{pr_number}/merge:pull_branch`;"
+    SET git_commands="%pr_number% `checkout pull_branch`"
     SET clone_command="`git clone #{ENV['KOKORO_GITHUB_PULL_REQUEST_URL'].split('/pull')[0]}.git`"
-)
-IF "%JOB_TYPE%"=="continuous" (
-    SET "git_commands=git fetch --depth=10000 && git checkout %KOKORO_GIT_COMMIT%"
-    SET clone_command="`git clone #{ENV['KOKORO_GITHUB_COMMIT_URL'].split('/commit')[0]}.git`"
-)
-IF "%JOB_TYPE%"=="nightly" (
-    SET "git_commands=git fetch --depth=10000 && git checkout %KOKORO_GIT_COMMIT%"
-    SET clone_command="`git clone #{ENV['KOKORO_GITHUB_COMMIT_URL'].split('/commit')[0]}.git`"
 )
 
 ruby -e %clone_command% && CD %REPO_DIR% && %git_commands% && %run_kokoro% && SET /A ERROR_CODE=0
