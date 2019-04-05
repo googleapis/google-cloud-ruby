@@ -22,6 +22,6 @@ IF "%JOB_TYPE%"=="presubmit" (
     SET clone_command="`git clone #{ENV['KOKORO_GITHUB_PULL_REQUEST_URL'].split('/pull')[0]}.git`"
 )
 
-ruby -e %clone_command% && CD %REPO_DIR% && %git_commands% && %run_kokoro% && SET /A ERROR_CODE=0
+ruby -e %clone_command% && CD %REPO_DIR% && ruby -e %git_commands% && %run_kokoro% && SET /A ERROR_CODE=0
 
 EXIT /B %ERROR_CODE%
