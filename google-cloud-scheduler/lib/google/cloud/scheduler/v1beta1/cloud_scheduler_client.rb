@@ -391,8 +391,7 @@ module Google
           #   Required.
           #
           #   The job to add. The user can optionally specify a name for the
-          #   job in {Google::Cloud::Scheduler::V1beta1::Job#name name}.
-          #   {Google::Cloud::Scheduler::V1beta1::Job#name name} cannot be the same as an
+          #   job in {Google::Cloud::Scheduler::V1beta1::Job#name name}. {Google::Cloud::Scheduler::V1beta1::Job#name name} cannot be the same as an
           #   existing job. If a name is not specified then the system will
           #   generate a random unique name that will be returned
           #   ({Google::Cloud::Scheduler::V1beta1::Job#name name}) in the response.
@@ -431,20 +430,18 @@ module Google
 
           # Updates a job.
           #
-          # If successful, the updated {Google::Cloud::Scheduler::V1beta1::Job Job} is
-          # returned. If the job does not exist, `NOT_FOUND` is returned.
+          # If successful, the updated {Google::Cloud::Scheduler::V1beta1::Job Job} is returned. If the job does
+          # not exist, `NOT_FOUND` is returned.
           #
           # If UpdateJob does not successfully return, it is possible for the
-          # job to be in an
-          # {Google::Cloud::Scheduler::V1beta1::Job::State::UPDATE_FAILED Job::State::UPDATE_FAILED}
-          # state. A job in this state may not be executed. If this happens, retry the
-          # UpdateJob request until a successful response is received.
+          # job to be in an {Google::Cloud::Scheduler::V1beta1::Job::State::UPDATE_FAILED Job::State::UPDATE_FAILED} state. A job in this state may
+          # not be executed. If this happens, retry the UpdateJob request
+          # until a successful response is received.
           #
           # @param job [Google::Cloud::Scheduler::V1beta1::Job | Hash]
           #   Required.
           #
-          #   The new job properties. {Google::Cloud::Scheduler::V1beta1::Job#name name}
-          #   must be specified.
+          #   The new job properties. {Google::Cloud::Scheduler::V1beta1::Job#name name} must be specified.
           #
           #   Output only fields cannot be modified using UpdateJob.
           #   Any value specified for an output only field will be ignored.
@@ -520,14 +517,10 @@ module Google
           # Pauses a job.
           #
           # If a job is paused then the system will stop executing the job
-          # until it is re-enabled via
-          # {Google::Cloud::Scheduler::V1beta1::CloudScheduler::ResumeJob ResumeJob}. The
-          # state of the job is stored in
-          # {Google::Cloud::Scheduler::V1beta1::Job#state state}; if paused it will be set
-          # to {Google::Cloud::Scheduler::V1beta1::Job::State::PAUSED Job::State::PAUSED}. A
-          # job must be in
-          # {Google::Cloud::Scheduler::V1beta1::Job::State::ENABLED Job::State::ENABLED} to be
-          # paused.
+          # until it is re-enabled via {Google::Cloud::Scheduler::V1beta1::CloudScheduler::ResumeJob ResumeJob}. The
+          # state of the job is stored in {Google::Cloud::Scheduler::V1beta1::Job#state state}; if paused it
+          # will be set to {Google::Cloud::Scheduler::V1beta1::Job::State::PAUSED Job::State::PAUSED}. A job must be in {Google::Cloud::Scheduler::V1beta1::Job::State::ENABLED Job::State::ENABLED}
+          # to be paused.
           #
           # @param name [String]
           #   Required.
@@ -562,15 +555,10 @@ module Google
 
           # Resume a job.
           #
-          # This method reenables a job after it has been
-          # {Google::Cloud::Scheduler::V1beta1::Job::State::PAUSED Job::State::PAUSED}. The
-          # state of a job is stored in
-          # {Google::Cloud::Scheduler::V1beta1::Job#state Job#state}; after calling this
-          # method it will be set to
-          # {Google::Cloud::Scheduler::V1beta1::Job::State::ENABLED Job::State::ENABLED}. A
-          # job must be in
-          # {Google::Cloud::Scheduler::V1beta1::Job::State::PAUSED Job::State::PAUSED} to be
-          # resumed.
+          # This method reenables a job after it has been {Google::Cloud::Scheduler::V1beta1::Job::State::PAUSED Job::State::PAUSED}. The
+          # state of a job is stored in {Google::Cloud::Scheduler::V1beta1::Job#state Job#state}; after calling this method it
+          # will be set to {Google::Cloud::Scheduler::V1beta1::Job::State::ENABLED Job::State::ENABLED}. A job must be in
+          # {Google::Cloud::Scheduler::V1beta1::Job::State::PAUSED Job::State::PAUSED} to be resumed.
           #
           # @param name [String]
           #   Required.
