@@ -89,8 +89,7 @@ js:
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>Request message for
-ListQueues.</p>
+    <p>Request message for ListQueues.</p>
 
 
   </div>
@@ -231,11 +230,11 @@ ListQueues.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns <code>filter</code> can be used to specify a subset of queues. Any
-<span class='object_link'><a href="Queue.html" title="Google::Cloud::Tasks::V2beta3::Queue (class)">Queue</a></span> field can be used as a filter and
-several operators as supported. For example: <code>&lt;=, &lt;, &gt;=, &gt;, !=, =, :</code>. The
-filter syntax is the same as described in <a href="https://cloud.google.com/logging/docs/view/advanced_filters">Stackdriver&#39;s Advanced Logs
-Filters</a>.</p>
+    <p>Returns <code>filter</code> can be used to specify a subset of queues. Any <span class='object_link'><a href="Queue.html" title="Google::Cloud::Tasks::V2beta3::Queue (class)">Queue</a></span>
+field can be used as a filter and several operators as supported.
+For example: <code>&lt;=, &lt;, &gt;=, &gt;, !=, =, :</code>. The filter syntax is the same as
+described in
+<a href="https://cloud.google.com/logging/docs/view/advanced_filters">Stackdriver&#39;s Advanced Logs Filters</a>.</p>
 
 <p>Sample filter &quot;state: PAUSED&quot;.</p>
 
@@ -258,11 +257,11 @@ requested page_size to be returned.</p>
       
       
         &mdash;
-        <div class='inline'><p><code>filter</code> can be used to specify a subset of queues. Any
-<span class='object_link'><a href="Queue.html" title="Google::Cloud::Tasks::V2beta3::Queue (class)">Queue</a></span> field can be used as a filter and
-several operators as supported. For example: <code>&lt;=, &lt;, &gt;=, &gt;, !=, =, :</code>. The
-filter syntax is the same as described in <a href="https://cloud.google.com/logging/docs/view/advanced_filters">Stackdriver&#39;s Advanced Logs
-Filters</a>.</p>
+        <div class='inline'><p><code>filter</code> can be used to specify a subset of queues. Any <span class='object_link'><a href="Queue.html" title="Google::Cloud::Tasks::V2beta3::Queue (class)">Queue</a></span>
+field can be used as a filter and several operators as supported.
+For example: <code>&lt;=, &lt;, &gt;=, &gt;, !=, =, :</code>. The filter syntax is the same as
+described in
+<a href="https://cloud.google.com/logging/docs/view/advanced_filters">Stackdriver&#39;s Advanced Logs Filters</a>.</p>
 
 <p>Sample filter &quot;state: PAUSED&quot;.</p>
 
@@ -280,10 +279,10 @@ requested page_size to be returned.</p>
       <pre class="lines">
 
 
-61</pre>
+58</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/doc/google/cloud/tasks/v2beta3/cloudtasks.rb', line 61</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/doc/google/cloud/tasks/v2beta3/cloudtasks.rb', line 58</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Tasks::V2beta3::ListQueuesRequest (class)">ListQueuesRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -309,8 +308,8 @@ requested page_size to be returned.</p>
 <p>The maximum page size is 9800. If unspecified, the page size will
 be the maximum. Fewer queues than requested might be returned,
 even if more queues exist; use the
-<span class='object_link'><a href="ListQueuesResponse.html#next_page_token-instance_method" title="Google::Cloud::Tasks::V2beta3::ListQueuesResponse#next_page_token (method)">next_page_token</a></span>
-in the response to determine if more queues exist.</p>
+<span class='object_link'><a href="ListQueuesResponse.html#next_page_token-instance_method" title="Google::Cloud::Tasks::V2beta3::ListQueuesResponse#next_page_token (method)">next_page_token</a></span> in the
+response to determine if more queues exist.</p>
 
 
   </div>
@@ -333,8 +332,8 @@ in the response to determine if more queues exist.</p>
 <p>The maximum page size is 9800. If unspecified, the page size will
 be the maximum. Fewer queues than requested might be returned,
 even if more queues exist; use the
-<span class='object_link'><a href="ListQueuesResponse.html#next_page_token-instance_method" title="Google::Cloud::Tasks::V2beta3::ListQueuesResponse#next_page_token (method)">next_page_token</a></span>
-in the response to determine if more queues exist.</p>
+<span class='object_link'><a href="ListQueuesResponse.html#next_page_token-instance_method" title="Google::Cloud::Tasks::V2beta3::ListQueuesResponse#next_page_token (method)">next_page_token</a></span> in the
+response to determine if more queues exist.</p>
 </div>
       
     </li>
@@ -347,10 +346,10 @@ in the response to determine if more queues exist.</p>
       <pre class="lines">
 
 
-61</pre>
+58</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/doc/google/cloud/tasks/v2beta3/cloudtasks.rb', line 61</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/doc/google/cloud/tasks/v2beta3/cloudtasks.rb', line 58</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Tasks::V2beta3::ListQueuesRequest (class)">ListQueuesRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -371,16 +370,14 @@ in the response to determine if more queues exist.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>A token identifying the page of results to return.</p>
+    <p>Returns A token identifying the page of results to return.</p>
 
 <p>To request the first page results, page_token must be empty. To
 request the next page of results, page_token must be the value of
-<span class='object_link'><a href="ListQueuesResponse.html#next_page_token-instance_method" title="Google::Cloud::Tasks::V2beta3::ListQueuesResponse#next_page_token (method)">next_page_token</a></span>
-returned from the previous call to
-ListQueues method. It
-is an error to switch the value of the
-<span class='object_link'><a href="#filter-instance_method" title="Google::Cloud::Tasks::V2beta3::ListQueuesRequest#filter (method)">filter</a></span> while
-iterating through pages.</p>
+<span class='object_link'><a href="ListQueuesResponse.html#next_page_token-instance_method" title="Google::Cloud::Tasks::V2beta3::ListQueuesResponse#next_page_token (method)">next_page_token</a></span> returned
+from the previous call to ListQueues
+method. It is an error to switch the value of the
+<span class='object_link'><a href="#filter-instance_method" title="Google::Cloud::Tasks::V2beta3::ListQueuesRequest#filter (method)">filter</a></span> while iterating through pages.</p>
 
 
   </div>
@@ -402,12 +399,10 @@ iterating through pages.</p>
 
 <p>To request the first page results, page_token must be empty. To
 request the next page of results, page_token must be the value of
-<span class='object_link'><a href="ListQueuesResponse.html#next_page_token-instance_method" title="Google::Cloud::Tasks::V2beta3::ListQueuesResponse#next_page_token (method)">next_page_token</a></span>
-returned from the previous call to
-ListQueues method. It
-is an error to switch the value of the
-<span class='object_link'><a href="#filter-instance_method" title="Google::Cloud::Tasks::V2beta3::ListQueuesRequest#filter (method)">filter</a></span> while
-iterating through pages.</p>
+<span class='object_link'><a href="ListQueuesResponse.html#next_page_token-instance_method" title="Google::Cloud::Tasks::V2beta3::ListQueuesResponse#next_page_token (method)">next_page_token</a></span> returned
+from the previous call to ListQueues
+method. It is an error to switch the value of the
+<span class='object_link'><a href="#filter-instance_method" title="Google::Cloud::Tasks::V2beta3::ListQueuesRequest#filter (method)">filter</a></span> while iterating through pages.</p>
 </div>
       
     </li>
@@ -420,10 +415,10 @@ iterating through pages.</p>
       <pre class="lines">
 
 
-61</pre>
+58</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/doc/google/cloud/tasks/v2beta3/cloudtasks.rb', line 61</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/doc/google/cloud/tasks/v2beta3/cloudtasks.rb', line 58</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Tasks::V2beta3::ListQueuesRequest (class)">ListQueuesRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -481,10 +476,10 @@ For example: <code>projects/PROJECT_ID/locations/LOCATION_ID</code></p>
       <pre class="lines">
 
 
-61</pre>
+58</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/doc/google/cloud/tasks/v2beta3/cloudtasks.rb', line 61</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/doc/google/cloud/tasks/v2beta3/cloudtasks.rb', line 58</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Tasks::V2beta3::ListQueuesRequest (class)">ListQueuesRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>

@@ -315,10 +315,10 @@ queue.yaml/xml</a>.</p>
       <pre class="lines">
 
 
-341</pre>
+329</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/doc/google/cloud/tasks/v2beta3/queue.rb', line 341</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/doc/google/cloud/tasks/v2beta3/queue.rb', line 329</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Tasks::V2beta3::RetryConfig (class)">RetryConfig</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -339,13 +339,11 @@ queue.yaml/xml</a>.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns A task will be <span class='object_link'><a href="Task.html#schedule_time-instance_method" title="Google::Cloud::Tasks::V2beta3::Task#schedule_time (method)">scheduled</a></span>
-for retry between
+    <p>Returns A task will be <span class='object_link'><a href="Task.html#schedule_time-instance_method" title="Google::Cloud::Tasks::V2beta3::Task#schedule_time (method)">scheduled</a></span> for retry between
 <span class='object_link'><a href="#min_backoff-instance_method" title="Google::Cloud::Tasks::V2beta3::RetryConfig#min_backoff (method)">min_backoff</a></span> and
-<span class='object_link'><a href="#max_backoff-instance_method" title="Google::Cloud::Tasks::V2beta3::RetryConfig#max_backoff (method)">max_backoff</a></span> duration
-after it fails, if the queue&#39;s
-<span class='object_link'><a href="" title="Google::Cloud::Tasks::V2beta3::RetryConfig (class)">RetryConfig</a></span> specifies that the
-task should be retried.</p>
+<span class='object_link'><a href="#max_backoff-instance_method" title="Google::Cloud::Tasks::V2beta3::RetryConfig#max_backoff (method)">max_backoff</a></span> duration after it fails,
+if the queue&#39;s <span class='object_link'><a href="" title="Google::Cloud::Tasks::V2beta3::RetryConfig (class)">RetryConfig</a></span> specifies that the task should be
+retried.</p>
 
 <p>If unspecified when the queue is created, Cloud Tasks will pick the
 default.</p>
@@ -372,13 +370,11 @@ queue.yaml/xml</a>.</p>
       
       
         &mdash;
-        <div class='inline'><p>A task will be <span class='object_link'><a href="Task.html#schedule_time-instance_method" title="Google::Cloud::Tasks::V2beta3::Task#schedule_time (method)">scheduled</a></span>
-for retry between
+        <div class='inline'><p>A task will be <span class='object_link'><a href="Task.html#schedule_time-instance_method" title="Google::Cloud::Tasks::V2beta3::Task#schedule_time (method)">scheduled</a></span> for retry between
 <span class='object_link'><a href="#min_backoff-instance_method" title="Google::Cloud::Tasks::V2beta3::RetryConfig#min_backoff (method)">min_backoff</a></span> and
-<span class='object_link'><a href="#max_backoff-instance_method" title="Google::Cloud::Tasks::V2beta3::RetryConfig#max_backoff (method)">max_backoff</a></span> duration
-after it fails, if the queue&#39;s
-<span class='object_link'><a href="" title="Google::Cloud::Tasks::V2beta3::RetryConfig (class)">RetryConfig</a></span> specifies that the
-task should be retried.</p>
+<span class='object_link'><a href="#max_backoff-instance_method" title="Google::Cloud::Tasks::V2beta3::RetryConfig#max_backoff (method)">max_backoff</a></span> duration after it fails,
+if the queue&#39;s <span class='object_link'><a href="" title="Google::Cloud::Tasks::V2beta3::RetryConfig (class)">RetryConfig</a></span> specifies that the task should be
+retried.</p>
 
 <p>If unspecified when the queue is created, Cloud Tasks will pick the
 default.</p>
@@ -400,10 +396,10 @@ queue.yaml/xml</a>.</p>
       <pre class="lines">
 
 
-341</pre>
+329</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/doc/google/cloud/tasks/v2beta3/queue.rb', line 341</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/doc/google/cloud/tasks/v2beta3/queue.rb', line 329</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Tasks::V2beta3::RetryConfig (class)">RetryConfig</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -427,23 +423,21 @@ queue.yaml/xml</a>.</p>
     <p>Returns The time between retries will double <code>max_doublings</code> times.</p>
 
 <p>A task&#39;s retry interval starts at
-<span class='object_link'><a href="#min_backoff-instance_method" title="Google::Cloud::Tasks::V2beta3::RetryConfig#min_backoff (method)">min_backoff</a></span>, then
-doubles <code>max_doublings</code> times, then increases linearly, and finally retries
-retries at intervals of
+<span class='object_link'><a href="#min_backoff-instance_method" title="Google::Cloud::Tasks::V2beta3::RetryConfig#min_backoff (method)">min_backoff</a></span>, then doubles
+<code>max_doublings</code> times, then increases linearly, and finally
+retries retries at intervals of
 <span class='object_link'><a href="#max_backoff-instance_method" title="Google::Cloud::Tasks::V2beta3::RetryConfig#max_backoff (method)">max_backoff</a></span> up to
 <span class='object_link'><a href="#max_attempts-instance_method" title="Google::Cloud::Tasks::V2beta3::RetryConfig#max_attempts (method)">max_attempts</a></span> times.</p>
 
-<p>For example, if
-<span class='object_link'><a href="#min_backoff-instance_method" title="Google::Cloud::Tasks::V2beta3::RetryConfig#min_backoff (method)">min_backoff</a></span> is 10s,
-<span class='object_link'><a href="#max_backoff-instance_method" title="Google::Cloud::Tasks::V2beta3::RetryConfig#max_backoff (method)">max_backoff</a></span> is 300s,
-and <code>max_doublings</code> is 3, then the a task will first be retried in 10s. The
-retry interval will double three times, and then increase linearly by 2^3 *
-10s.  Finally, the task will retry at intervals of
-<span class='object_link'><a href="#max_backoff-instance_method" title="Google::Cloud::Tasks::V2beta3::RetryConfig#max_backoff (method)">max_backoff</a></span> until the
-task has been attempted
-<span class='object_link'><a href="#max_attempts-instance_method" title="Google::Cloud::Tasks::V2beta3::RetryConfig#max_attempts (method)">max_attempts</a></span> times.
-Thus, the requests will retry at 10s, 20s, 40s, 80s, 160s, 240s, 300s,
-300s, ....</p>
+<p>For example, if <span class='object_link'><a href="#min_backoff-instance_method" title="Google::Cloud::Tasks::V2beta3::RetryConfig#min_backoff (method)">min_backoff</a></span> is 10s,
+<span class='object_link'><a href="#max_backoff-instance_method" title="Google::Cloud::Tasks::V2beta3::RetryConfig#max_backoff (method)">max_backoff</a></span> is 300s, and
+<code>max_doublings</code> is 3, then the a task will first be retried in
+10s. The retry interval will double three times, and then
+increase linearly by 2^3 * 10s.  Finally, the task will retry at
+intervals of <span class='object_link'><a href="#max_backoff-instance_method" title="Google::Cloud::Tasks::V2beta3::RetryConfig#max_backoff (method)">max_backoff</a></span> until the
+task has been attempted <span class='object_link'><a href="#max_attempts-instance_method" title="Google::Cloud::Tasks::V2beta3::RetryConfig#max_attempts (method)">max_attempts</a></span>
+times. Thus, the requests will retry at 10s, 20s, 40s, 80s, 160s,
+240s, 300s, 300s, ....</p>
 
 <p>If unspecified when the queue is created, Cloud Tasks will pick the
 default.</p>
@@ -471,23 +465,21 @@ queue.yaml/xml</a>.</p>
         <div class='inline'><p>The time between retries will double <code>max_doublings</code> times.</p>
 
 <p>A task&#39;s retry interval starts at
-<span class='object_link'><a href="#min_backoff-instance_method" title="Google::Cloud::Tasks::V2beta3::RetryConfig#min_backoff (method)">min_backoff</a></span>, then
-doubles <code>max_doublings</code> times, then increases linearly, and finally retries
-retries at intervals of
+<span class='object_link'><a href="#min_backoff-instance_method" title="Google::Cloud::Tasks::V2beta3::RetryConfig#min_backoff (method)">min_backoff</a></span>, then doubles
+<code>max_doublings</code> times, then increases linearly, and finally
+retries retries at intervals of
 <span class='object_link'><a href="#max_backoff-instance_method" title="Google::Cloud::Tasks::V2beta3::RetryConfig#max_backoff (method)">max_backoff</a></span> up to
 <span class='object_link'><a href="#max_attempts-instance_method" title="Google::Cloud::Tasks::V2beta3::RetryConfig#max_attempts (method)">max_attempts</a></span> times.</p>
 
-<p>For example, if
-<span class='object_link'><a href="#min_backoff-instance_method" title="Google::Cloud::Tasks::V2beta3::RetryConfig#min_backoff (method)">min_backoff</a></span> is 10s,
-<span class='object_link'><a href="#max_backoff-instance_method" title="Google::Cloud::Tasks::V2beta3::RetryConfig#max_backoff (method)">max_backoff</a></span> is 300s,
-and <code>max_doublings</code> is 3, then the a task will first be retried in 10s. The
-retry interval will double three times, and then increase linearly by 2^3 *
-10s.  Finally, the task will retry at intervals of
-<span class='object_link'><a href="#max_backoff-instance_method" title="Google::Cloud::Tasks::V2beta3::RetryConfig#max_backoff (method)">max_backoff</a></span> until the
-task has been attempted
-<span class='object_link'><a href="#max_attempts-instance_method" title="Google::Cloud::Tasks::V2beta3::RetryConfig#max_attempts (method)">max_attempts</a></span> times.
-Thus, the requests will retry at 10s, 20s, 40s, 80s, 160s, 240s, 300s,
-300s, ....</p>
+<p>For example, if <span class='object_link'><a href="#min_backoff-instance_method" title="Google::Cloud::Tasks::V2beta3::RetryConfig#min_backoff (method)">min_backoff</a></span> is 10s,
+<span class='object_link'><a href="#max_backoff-instance_method" title="Google::Cloud::Tasks::V2beta3::RetryConfig#max_backoff (method)">max_backoff</a></span> is 300s, and
+<code>max_doublings</code> is 3, then the a task will first be retried in
+10s. The retry interval will double three times, and then
+increase linearly by 2^3 * 10s.  Finally, the task will retry at
+intervals of <span class='object_link'><a href="#max_backoff-instance_method" title="Google::Cloud::Tasks::V2beta3::RetryConfig#max_backoff (method)">max_backoff</a></span> until the
+task has been attempted <span class='object_link'><a href="#max_attempts-instance_method" title="Google::Cloud::Tasks::V2beta3::RetryConfig#max_attempts (method)">max_attempts</a></span>
+times. Thus, the requests will retry at 10s, 20s, 40s, 80s, 160s,
+240s, 300s, 300s, ....</p>
 
 <p>If unspecified when the queue is created, Cloud Tasks will pick the
 default.</p>
@@ -507,10 +499,10 @@ queue.yaml/xml</a>.</p>
       <pre class="lines">
 
 
-341</pre>
+329</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/doc/google/cloud/tasks/v2beta3/queue.rb', line 341</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/doc/google/cloud/tasks/v2beta3/queue.rb', line 329</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Tasks::V2beta3::RetryConfig (class)">RetryConfig</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -534,9 +526,9 @@ queue.yaml/xml</a>.</p>
     <p>Returns If positive, <code>max_retry_duration</code> specifies the time limit for
 retrying a failed task, measured from when the task was first
 attempted. Once <code>max_retry_duration</code> time has passed <em>and</em> the
-task has been attempted
-<span class='object_link'><a href="#max_attempts-instance_method" title="Google::Cloud::Tasks::V2beta3::RetryConfig#max_attempts (method)">max_attempts</a></span> times,
-no further attempts will be made and the task will be deleted.</p>
+task has been attempted <span class='object_link'><a href="#max_attempts-instance_method" title="Google::Cloud::Tasks::V2beta3::RetryConfig#max_attempts (method)">max_attempts</a></span>
+times, no further attempts will be made and the task will be
+deleted.</p>
 
 <p>If zero, then the task age is unlimited.</p>
 
@@ -568,9 +560,9 @@ queue.yaml/xml</a>.</p>
         <div class='inline'><p>If positive, <code>max_retry_duration</code> specifies the time limit for
 retrying a failed task, measured from when the task was first
 attempted. Once <code>max_retry_duration</code> time has passed <em>and</em> the
-task has been attempted
-<span class='object_link'><a href="#max_attempts-instance_method" title="Google::Cloud::Tasks::V2beta3::RetryConfig#max_attempts (method)">max_attempts</a></span> times,
-no further attempts will be made and the task will be deleted.</p>
+task has been attempted <span class='object_link'><a href="#max_attempts-instance_method" title="Google::Cloud::Tasks::V2beta3::RetryConfig#max_attempts (method)">max_attempts</a></span>
+times, no further attempts will be made and the task will be
+deleted.</p>
 
 <p>If zero, then the task age is unlimited.</p>
 
@@ -594,10 +586,10 @@ queue.yaml/xml</a>.</p>
       <pre class="lines">
 
 
-341</pre>
+329</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/doc/google/cloud/tasks/v2beta3/queue.rb', line 341</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/doc/google/cloud/tasks/v2beta3/queue.rb', line 329</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Tasks::V2beta3::RetryConfig (class)">RetryConfig</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -618,13 +610,11 @@ queue.yaml/xml</a>.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns A task will be <span class='object_link'><a href="Task.html#schedule_time-instance_method" title="Google::Cloud::Tasks::V2beta3::Task#schedule_time (method)">scheduled</a></span>
-for retry between
+    <p>Returns A task will be <span class='object_link'><a href="Task.html#schedule_time-instance_method" title="Google::Cloud::Tasks::V2beta3::Task#schedule_time (method)">scheduled</a></span> for retry between
 <span class='object_link'><a href="#min_backoff-instance_method" title="Google::Cloud::Tasks::V2beta3::RetryConfig#min_backoff (method)">min_backoff</a></span> and
-<span class='object_link'><a href="#max_backoff-instance_method" title="Google::Cloud::Tasks::V2beta3::RetryConfig#max_backoff (method)">max_backoff</a></span> duration
-after it fails, if the queue&#39;s
-<span class='object_link'><a href="" title="Google::Cloud::Tasks::V2beta3::RetryConfig (class)">RetryConfig</a></span> specifies that the
-task should be retried.</p>
+<span class='object_link'><a href="#max_backoff-instance_method" title="Google::Cloud::Tasks::V2beta3::RetryConfig#max_backoff (method)">max_backoff</a></span> duration after it fails,
+if the queue&#39;s <span class='object_link'><a href="" title="Google::Cloud::Tasks::V2beta3::RetryConfig (class)">RetryConfig</a></span> specifies that the task should be
+retried.</p>
 
 <p>If unspecified when the queue is created, Cloud Tasks will pick the
 default.</p>
@@ -651,13 +641,11 @@ queue.yaml/xml</a>.</p>
       
       
         &mdash;
-        <div class='inline'><p>A task will be <span class='object_link'><a href="Task.html#schedule_time-instance_method" title="Google::Cloud::Tasks::V2beta3::Task#schedule_time (method)">scheduled</a></span>
-for retry between
+        <div class='inline'><p>A task will be <span class='object_link'><a href="Task.html#schedule_time-instance_method" title="Google::Cloud::Tasks::V2beta3::Task#schedule_time (method)">scheduled</a></span> for retry between
 <span class='object_link'><a href="#min_backoff-instance_method" title="Google::Cloud::Tasks::V2beta3::RetryConfig#min_backoff (method)">min_backoff</a></span> and
-<span class='object_link'><a href="#max_backoff-instance_method" title="Google::Cloud::Tasks::V2beta3::RetryConfig#max_backoff (method)">max_backoff</a></span> duration
-after it fails, if the queue&#39;s
-<span class='object_link'><a href="" title="Google::Cloud::Tasks::V2beta3::RetryConfig (class)">RetryConfig</a></span> specifies that the
-task should be retried.</p>
+<span class='object_link'><a href="#max_backoff-instance_method" title="Google::Cloud::Tasks::V2beta3::RetryConfig#max_backoff (method)">max_backoff</a></span> duration after it fails,
+if the queue&#39;s <span class='object_link'><a href="" title="Google::Cloud::Tasks::V2beta3::RetryConfig (class)">RetryConfig</a></span> specifies that the task should be
+retried.</p>
 
 <p>If unspecified when the queue is created, Cloud Tasks will pick the
 default.</p>
@@ -679,10 +667,10 @@ queue.yaml/xml</a>.</p>
       <pre class="lines">
 
 
-341</pre>
+329</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/doc/google/cloud/tasks/v2beta3/queue.rb', line 341</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/doc/google/cloud/tasks/v2beta3/queue.rb', line 329</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Tasks::V2beta3::RetryConfig (class)">RetryConfig</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
