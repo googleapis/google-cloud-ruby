@@ -25,7 +25,7 @@ module Google
         #         `projects/{project_id}/locations/{location_id}/instances/{instance_id}`
         #
         #     Note: Redis instances are managed and addressed at regional level so
-        #     location_id here refers to a GCP region; however, users get to choose which
+        #     location_id here refers to a GCP region; however, users may choose which
         #     specific zone (or collection of zones for cross-zone instances) an instance
         #     should be provisioned in. Refer to [location_id] and
         #     [alternative_location_id] fields for more details.
@@ -40,7 +40,7 @@ module Google
         #     Optional. The zone where the instance will be provisioned. If not provided,
         #     the service will choose a zone for the instance. For STANDARD_HA tier,
         #     instances will be created across two zones for protection against zonal
-        #     failures. if [alternative_location_id] is also provided, it must be
+        #     failures. If [alternative_location_id] is also provided, it must be
         #     different from [location_id].
         # @!attribute [rw] alternative_location_id
         #   @return [String]
@@ -50,27 +50,32 @@ module Google
         # @!attribute [rw] redis_version
         #   @return [String]
         #     Optional. The version of Redis software.
-        #     If not provided, latest supported version will be used.
+        #     If not provided, latest supported version will be used. Updating the
+        #     version will perform an upgrade/downgrade to the new version. Currently,
+        #     the supported values are:
+        #
+        #     * `REDIS_4_0` for Redis 4.0 compatibility
+        #       * `REDIS_3_2` for Redis 3.2 compatibility (default)
         # @!attribute [rw] reserved_ip_range
         #   @return [String]
         #     Optional. The CIDR range of internal addresses that are reserved for this
         #     instance. If not provided, the service will choose an unused /29 block,
         #     for example, 10.0.0.0/29 or 192.168.0.0/29. Ranges must be unique
-        #     and non-overlapping with existing subnets in a network.
+        #     and non-overlapping with existing subnets in an authorized network.
         # @!attribute [rw] host
         #   @return [String]
-        #     Output only. Hostname or IP address of the exposed redis endpoint used by
+        #     Output only. Hostname or IP address of the exposed Redis endpoint used by
         #     clients to connect to the service.
         # @!attribute [rw] port
         #   @return [Integer]
-        #     Output only. The port number of the exposed redis endpoint.
+        #     Output only. The port number of the exposed Redis endpoint.
         # @!attribute [rw] current_location_id
         #   @return [String]
-        #     Output only. The current zone where the Redis endpoint is placed. In
-        #     single zone deployments, this will always be the same as [location_id]
-        #     provided by the user at creation time. In cross-zone instances (only
-        #     applicable in STANDARD_HA tier), this can be either [location_id] or
-        #     [alternative_location_id] and can change on a failover event.
+        #     Output only. The current zone where the Redis endpoint is placed. For Basic
+        #     Tier instances, this will always be the same as the [location_id]
+        #     provided by the user at creation time. For Standard Tier instances,
+        #     this can be either [location_id] or [alternative_location_id] and can
+        #     change after a failover event.
         # @!attribute [rw] create_time
         #   @return [Google::Protobuf::Timestamp]
         #     Output only. The time the instance was created.
@@ -86,14 +91,23 @@ module Google
         #     Optional. Redis configuration parameters, according to
         #     http://redis.io/topics/config. Currently, the only supported parameters
         #     are:
+        #
+        #      Redis 3.2 and above:
+        #
         #     * maxmemory-policy
         #       * notify-keyspace-events
+        #
+        #       Redis 4.0 and above:
+        #
+        #     * activedefrag
+        #       * lfu-log-factor
+        #     * lfu-decay-time
         # @!attribute [rw] tier
         #   @return [Google::Cloud::Redis::V1beta1::Instance::Tier]
         #     Required. The service tier of the instance.
         # @!attribute [rw] memory_size_gb
         #   @return [Integer]
-        #     Required. Redis memory size in GB.
+        #     Required. Redis memory size in GiB.
         # @!attribute [rw] authorized_network
         #   @return [String]
         #     Optional. The full name of the Google Compute Engine
@@ -120,12 +134,17 @@ module Google
             # Redis instance is being deleted.
             DELETING = 4
 
-            # Redis instance is being repaired and may be unusable. Details can be
-            # found in the `status_message` field.
+            # Redis instance is being repaired and may be unusable.
             REPAIRING = 5
 
             # Maintenance is being performed on this Redis instance.
             MAINTENANCE = 6
+
+            # Redis instance is importing data (availability may be affected).
+            IMPORTING = 8
+
+            # Redis instance is failing over (availability may be affected).
+            FAILING_OVER = 10
           end
 
           # Available service tiers to choose from
@@ -181,6 +200,9 @@ module Google
         #   @return [String]
         #     Token to retrieve the next page of results, or empty if there are no more
         #     results in the list.
+        # @!attribute [rw] unreachable
+        #   @return [Array<String>]
+        #     Locations that could not be reached.
         class ListInstancesResponse; end
 
         # Request for {Google::Cloud::Redis::V1beta1::CloudRedis::GetInstance GetInstance}.
@@ -219,11 +241,12 @@ module Google
         #   @return [Google::Protobuf::FieldMask]
         #     Required. Mask of fields to update. At least one path must be supplied in
         #     this field. The elements of the repeated paths field may only include these
-        #     fields from {CloudRedis::Instance Instance}:
-        #     * `display_name`
-        #     * `labels`
-        #     * `memory_size_gb`
-        #     * `redis_config`
+        #     fields from {Google::Cloud::Redis::V1beta1::Instance Instance}:
+        #
+        #     * `displayName`
+        #       * `labels`
+        #     * `memorySizeGb`
+        #       * `redisConfig`
         # @!attribute [rw] instance
         #   @return [Google::Cloud::Redis::V1beta1::Instance]
         #     Required. Update description.
@@ -238,6 +261,32 @@ module Google
         #         `projects/{project_id}/locations/{location_id}/instances/{instance_id}`
         #     where `location_id` refers to a GCP region
         class DeleteInstanceRequest; end
+
+        # Request for
+        # {Google::Cloud::Redis::V1beta1::CloudRedis::FailoverInstance Failover}.
+        # @!attribute [rw] name
+        #   @return [String]
+        #     Required. Redis instance resource name using the form:
+        #         `projects/{project_id}/locations/{location_id}/instances/{instance_id}`
+        #     where `location_id` refers to a GCP region
+        # @!attribute [rw] data_protection_mode
+        #   @return [Google::Cloud::Redis::V1beta1::FailoverInstanceRequest::DataProtectionMode]
+        #     Optional. Available data protection modes that the user can choose. If it's
+        #     unspecified, data protection mode will be LIMITED_DATA_LOSS by default.
+        class FailoverInstanceRequest
+          module DataProtectionMode
+            DATA_PROTECTION_MODE_UNSPECIFIED = 0
+
+            # Instance failover will be protected with data loss control. More
+            # specifically, the failover will only be performed if the current
+            # replication offset diff between master and replica is under a certain
+            # threshold.
+            LIMITED_DATA_LOSS = 1
+
+            # Instance failover will be performed without data loss control.
+            FORCE_DATA_LOSS = 2
+          end
+        end
 
         # This location metadata represents additional configuration options for a
         # given location where a Redis instance may be created. All fields are output

@@ -5,6 +5,7 @@
 require 'google/protobuf'
 
 require 'google/api/annotations_pb'
+require 'google/api/resource_pb'
 require 'google/longrunning/operations_pb'
 require 'google/protobuf/field_mask_pb'
 require 'google/protobuf/timestamp_pb'
@@ -36,6 +37,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     value :DELETING, 4
     value :REPAIRING, 5
     value :MAINTENANCE, 6
+    value :IMPORTING, 8
+    value :FAILING_OVER, 10
   end
   add_enum "google.cloud.redis.v1beta1.Instance.Tier" do
     value :TIER_UNSPECIFIED, 0
@@ -50,6 +53,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.cloud.redis.v1beta1.ListInstancesResponse" do
     repeated :instances, :message, 1, "google.cloud.redis.v1beta1.Instance"
     optional :next_page_token, :string, 2
+    repeated :unreachable, :string, 3
   end
   add_message "google.cloud.redis.v1beta1.GetInstanceRequest" do
     optional :name, :string, 1
@@ -65,6 +69,15 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   end
   add_message "google.cloud.redis.v1beta1.DeleteInstanceRequest" do
     optional :name, :string, 1
+  end
+  add_message "google.cloud.redis.v1beta1.FailoverInstanceRequest" do
+    optional :name, :string, 1
+    optional :data_protection_mode, :enum, 2, "google.cloud.redis.v1beta1.FailoverInstanceRequest.DataProtectionMode"
+  end
+  add_enum "google.cloud.redis.v1beta1.FailoverInstanceRequest.DataProtectionMode" do
+    value :DATA_PROTECTION_MODE_UNSPECIFIED, 0
+    value :LIMITED_DATA_LOSS, 1
+    value :FORCE_DATA_LOSS, 2
   end
   add_message "google.cloud.redis.v1beta1.LocationMetadata" do
     map :available_zones, :string, :message, 1, "google.cloud.redis.v1beta1.ZoneMetadata"
@@ -86,6 +99,8 @@ module Google
         CreateInstanceRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.redis.v1beta1.CreateInstanceRequest").msgclass
         UpdateInstanceRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.redis.v1beta1.UpdateInstanceRequest").msgclass
         DeleteInstanceRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.redis.v1beta1.DeleteInstanceRequest").msgclass
+        FailoverInstanceRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.redis.v1beta1.FailoverInstanceRequest").msgclass
+        FailoverInstanceRequest::DataProtectionMode = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.redis.v1beta1.FailoverInstanceRequest.DataProtectionMode").enummodule
         LocationMetadata = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.redis.v1beta1.LocationMetadata").msgclass
         ZoneMetadata = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.redis.v1beta1.ZoneMetadata").msgclass
       end

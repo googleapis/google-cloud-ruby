@@ -239,32 +239,50 @@ module Google
             @list_instances = Google::Gax.create_api_call(
               @cloud_redis_stub.method(:list_instances),
               defaults["list_instances"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
             )
             @get_instance = Google::Gax.create_api_call(
               @cloud_redis_stub.method(:get_instance),
               defaults["get_instance"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @create_instance = Google::Gax.create_api_call(
               @cloud_redis_stub.method(:create_instance),
               defaults["create_instance"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
             )
             @update_instance = Google::Gax.create_api_call(
               @cloud_redis_stub.method(:update_instance),
               defaults["update_instance"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'instance.name' => request.instance.name}
+              end
             )
             @delete_instance = Google::Gax.create_api_call(
               @cloud_redis_stub.method(:delete_instance),
               defaults["delete_instance"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @failover_instance = Google::Gax.create_api_call(
               @cloud_redis_stub.method(:failover_instance),
               defaults["failover_instance"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
           end
 

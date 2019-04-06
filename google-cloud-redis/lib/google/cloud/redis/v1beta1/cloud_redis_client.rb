@@ -239,27 +239,50 @@ module Google
             @list_instances = Google::Gax.create_api_call(
               @cloud_redis_stub.method(:list_instances),
               defaults["list_instances"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
             )
             @get_instance = Google::Gax.create_api_call(
               @cloud_redis_stub.method(:get_instance),
               defaults["get_instance"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @create_instance = Google::Gax.create_api_call(
               @cloud_redis_stub.method(:create_instance),
               defaults["create_instance"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
             )
             @update_instance = Google::Gax.create_api_call(
               @cloud_redis_stub.method(:update_instance),
               defaults["update_instance"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'instance.name' => request.instance.name}
+              end
             )
             @delete_instance = Google::Gax.create_api_call(
               @cloud_redis_stub.method(:delete_instance),
               defaults["delete_instance"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
+            )
+            @failover_instance = Google::Gax.create_api_call(
+              @cloud_redis_stub.method(:failover_instance),
+              defaults["failover_instance"],
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
           end
 
@@ -362,7 +385,7 @@ module Google
 
           # Creates a Redis instance based on the specified tier and memory size.
           #
-          # By default, the instance is peered to the project's
+          # By default, the instance is accessible from the project's
           # [default network](https://cloud.google.com/compute/docs/networks-and-firewalls#networks).
           #
           # The creation is executed asynchronously and callers may check the returned
@@ -463,11 +486,12 @@ module Google
           # @param update_mask [Google::Protobuf::FieldMask | Hash]
           #   Required. Mask of fields to update. At least one path must be supplied in
           #   this field. The elements of the repeated paths field may only include these
-          #   fields from {CloudRedis::Instance Instance}:
-          #   * `display_name`
-          #   * `labels`
-          #   * `memory_size_gb`
-          #   * `redis_config`
+          #   fields from {Google::Cloud::Redis::V1beta1::Instance Instance}:
+          #
+          #   * `displayName`
+          #     * `labels`
+          #   * `memorySizeGb`
+          #     * `redisConfig`
           #   A hash of the same form as `Google::Protobuf::FieldMask`
           #   can also be provided.
           # @param instance [Google::Cloud::Redis::V1beta1::Instance | Hash]
@@ -595,6 +619,77 @@ module Google
               @delete_instance.call(req, options),
               @operations_client,
               Google::Protobuf::Empty,
+              Google::Protobuf::Any,
+              call_options: options
+            )
+            operation.on_done { |operation| yield(operation) } if block_given?
+            operation
+          end
+
+          # Failover the master role to current replica node against a specific
+          # STANDARD tier redis instance.
+          #
+          # @param name [String]
+          #   Required. Redis instance resource name using the form:
+          #       `projects/{project_id}/locations/{location_id}/instances/{instance_id}`
+          #   where `location_id` refers to a GCP region
+          # @param data_protection_mode [Google::Cloud::Redis::V1beta1::FailoverInstanceRequest::DataProtectionMode]
+          #   Optional. Available data protection modes that the user can choose. If it's
+          #   unspecified, data protection mode will be LIMITED_DATA_LOSS by default.
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @return [Google::Gax::Operation]
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/redis"
+          #
+          #   cloud_redis_client = Google::Cloud::Redis.new(version: :v1beta1)
+          #   formatted_name = Google::Cloud::Redis::V1beta1::CloudRedisClient.instance_path("[PROJECT]", "[LOCATION]", "[INSTANCE]")
+          #
+          #   # TODO: Initialize `data_protection_mode`:
+          #   data_protection_mode = :DATA_PROTECTION_MODE_UNSPECIFIED
+          #
+          #   # Register a callback during the method call.
+          #   operation = cloud_redis_client.failover_instance(formatted_name, data_protection_mode) do |op|
+          #     raise op.results.message if op.error?
+          #     op_results = op.results
+          #     # Process the results.
+          #
+          #     metadata = op.metadata
+          #     # Process the metadata.
+          #   end
+          #
+          #   # Or use the return value to register a callback.
+          #   operation.on_done do |op|
+          #     raise op.results.message if op.error?
+          #     op_results = op.results
+          #     # Process the results.
+          #
+          #     metadata = op.metadata
+          #     # Process the metadata.
+          #   end
+          #
+          #   # Manually reload the operation.
+          #   operation.reload!
+          #
+          #   # Or block until the operation completes, triggering callbacks on
+          #   # completion.
+          #   operation.wait_until_done!
+
+          def failover_instance \
+              name,
+              data_protection_mode,
+              options: nil
+            req = {
+              name: name,
+              data_protection_mode: data_protection_mode
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Cloud::Redis::V1beta1::FailoverInstanceRequest)
+            operation = Google::Gax::Operation.new(
+              @failover_instance.call(req, options),
+              @operations_client,
+              Google::Cloud::Redis::V1beta1::Instance,
               Google::Protobuf::Any,
               call_options: options
             )
