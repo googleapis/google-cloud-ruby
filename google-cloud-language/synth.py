@@ -106,3 +106,12 @@ s.replace(
     ]),
     '"https://www.googleapis.com/auth/cloud-platform"'
 )
+
+s.replace(
+    'google-cloud-language.gemspec',
+    'gem.add_dependency "google-gax", "~> 1.3"',
+    "\n".join([
+        'gem.add_dependency "google-gax", "~> 1.3"',
+        '  gem.add_dependency "googleapis-common-protos", ">= 1.3.9", "< 2.0"'
+    ])
+)
