@@ -129,5 +129,14 @@ for version in ['v2beta2', 'v2beta3', 'v2']:
         ])
     )
 
+s.replace(
+    'google-cloud-tasks.gemspec',
+    'gem.add_dependency "google-gax", "~> 1.3"',
+    "\n".join([
+        'gem.add_dependency "google-gax", "~> 1.3"',
+        '  gem.add_dependency "googleapis-common-protos", ">= 1.3.9", "< 2.0"'
+    ])
+)
+
 # Generate the helper methods
 call('bundle update && bundle exec rake generate_partials', shell=True)
