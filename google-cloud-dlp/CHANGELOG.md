@@ -15,10 +15,10 @@
   * Add CustomInfoType::Regex#group_indexes
   * Add RecordKey#id_values
   * Add FileType::IMAGE enumerated value
-* Update documentation
 * Add CryptoDeterministicConfig
 * Add PrimitiveTransformation#crypto_deterministic_config
-* Update documented regex to allow underscores in values for template_id, job_id, trigger_id, stored_info_type_id
+* Update documented regex to allow underscores in values for template_id, job_id, trigger_id, and stored_info_type_id
+* Update documentation
 
 ### 0.8.0 / 2018-11-15
 
