@@ -1,5 +1,13 @@
 # Release History
 
+### 1.18.0 / 2019-04-09
+
+* Add support for V4 signed URLs.
+  * Add version param to #signed_url.
+* Fix file path encoding for V2 signed URLs.
+  * Change CGI encoding to URI (percent) encoding to fix URLs containing spaces in file path.
+* Fix documentation typo.
+
 ### 1.17.0 / 2019-02-07
 
 * Add support for Bucket Policy Only with `Bucket#policy_only?`,
