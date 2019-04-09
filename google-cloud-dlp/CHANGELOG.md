@@ -2,7 +2,6 @@
 
 ### 0.9.0 / 2019-04-09
 
-* Extract gRPC header values from request
 * Update V2::DlpServiceClient:
   * Add Add filter optional argument to list_job_triggers
     * Add ListJobTriggersRequest#filter
@@ -18,6 +17,7 @@
 * Add CryptoDeterministicConfig
 * Add PrimitiveTransformation#crypto_deterministic_config
 * Update documented regex to allow underscores in values for template_id, job_id, trigger_id, and stored_info_type_id
+* Extract gRPC header values from request
 * Update documentation
 
 ### 0.8.0 / 2018-11-15
