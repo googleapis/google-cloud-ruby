@@ -83,3 +83,12 @@ s.replace(
     'gem.add_development_dependency "rubocop".*$',
     'gem.add_development_dependency "rubocop", "~> 0.64.0"'
 )
+
+s.replace(
+    'google-cloud-dialogflow.gemspec',
+    'gem.add_dependency "google-gax", "~> 1.3"',
+    "\n".join([
+        'gem.add_dependency "google-gax", "~> 1.3"',
+        '  gem.add_dependency "googleapis-common-protos", ">= 1.3.9", "< 2.0"'
+    ])
+)
