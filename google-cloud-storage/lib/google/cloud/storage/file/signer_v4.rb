@@ -13,8 +13,8 @@
 # limitations under the License.
 
 
-require "cgi"
 require "addressable/uri"
+require "cgi"
 require "openssl"
 require "google/cloud/storage/errors"
 

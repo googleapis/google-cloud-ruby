@@ -101,7 +101,6 @@ describe Google::Cloud::Storage, :storage do
                                content_type: "image/png", # Required for V2
                                headers: { "x-goog-resumable" => "start" },
                                version: :v2
-      puts "\n\n#{url}\n\n"
       uri = URI.parse url
       https = Net::HTTP.new uri.host,uri.port
       https.use_ssl = true
