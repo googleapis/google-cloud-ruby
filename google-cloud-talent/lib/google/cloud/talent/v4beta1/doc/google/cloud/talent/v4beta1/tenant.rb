@@ -44,9 +44,7 @@ module Google
         #     Indicates whether data owned by this tenant may be used to provide product
         #     improvements across other tenants.
         #
-        #     Defaults behavior is
-        #     {Google::Cloud::Talent::V4beta1::Tenant::DataUsageType::ISOLATED DataUsageType::ISOLATED}
-        #     if it's unset.
+        #     Defaults behavior is {Google::Cloud::Talent::V4beta1::Tenant::DataUsageType::ISOLATED DataUsageType::ISOLATED} if it's unset.
         class Tenant
           # Enum that represents how user data owned by the tenant is used.
           module DataUsageType

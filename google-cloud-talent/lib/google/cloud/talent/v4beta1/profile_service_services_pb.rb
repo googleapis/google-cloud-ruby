@@ -53,9 +53,7 @@ module Google
             # For example, search by raw queries "software engineer in Mountain View" or
             # search by structured filters (location filter, education filter, etc.).
             #
-            # See
-            # [SearchProfilesRequest][google.cloud.talent.v4beta1.SearchProfilesRequest]
-            # for more information.
+            # See [SearchProfilesRequest][google.cloud.talent.v4beta1.SearchProfilesRequest] for more information.
             rpc :SearchProfiles, SearchProfilesRequest, SearchProfilesResponse
           end
 

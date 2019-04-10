@@ -5,7 +5,6 @@
 require 'google/protobuf'
 
 require 'google/api/annotations_pb'
-require 'google/cloud/talent/v4beta1/batch_pb'
 require 'google/cloud/talent/v4beta1/common_pb'
 require 'google/cloud/talent/v4beta1/filters_pb'
 require 'google/cloud/talent/v4beta1/histogram_pb'

@@ -55,15 +55,11 @@ module Google
         #     Optional but strongly recommended for the best service
         #     experience.
         #
-        #     If
-        #     {Google::Cloud::Talent::V4beta1::UpdateTenantRequest#update_mask update_mask}
-        #     is provided, only the specified fields in
-        #     {Google::Cloud::Talent::V4beta1::UpdateTenantRequest#tenant tenant} are
-        #     updated. Otherwise all the fields are updated.
+        #     If {Google::Cloud::Talent::V4beta1::UpdateTenantRequest#update_mask update_mask} is provided, only the specified fields in
+        #     {Google::Cloud::Talent::V4beta1::UpdateTenantRequest#tenant tenant} are updated. Otherwise all the fields are updated.
         #
         #     A field mask to specify the tenant fields to be updated. Only
-        #     top level fields of {Google::Cloud::Talent::V4beta1::Tenant Tenant} are
-        #     supported.
+        #     top level fields of {Google::Cloud::Talent::V4beta1::Tenant Tenant} are supported.
         class UpdateTenantRequest; end
 
         # Request to delete a tenant.
