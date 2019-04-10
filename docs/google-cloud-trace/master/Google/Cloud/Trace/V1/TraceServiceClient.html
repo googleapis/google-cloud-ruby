@@ -926,9 +926,11 @@ retries, etc.</p>
       
       
         &mdash;
-        <div class='inline'><p>Maximum number of traces to return. If not specified or &lt;= 0, the
-implementation selects a reasonable value.  The implementation may
-return fewer traces than the requested page size. Optional.</p>
+        <div class='inline'><p>The maximum number of resources contained in the underlying API
+response. If page streaming is performed per-resource, this
+parameter does not affect the return value. If page streaming is
+performed per-page, this determines the maximum number of
+resources in a page.</p>
 </div>
       
     </li>
@@ -1149,8 +1151,6 @@ object.</p>
       <pre class="lines">
 
 
-387
-388
 389
 390
 391
@@ -1170,10 +1170,12 @@ object.</p>
 405
 406
 407
-408</pre>
+408
+409
+410</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/trace/v1/trace_service_client.rb', line 387</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/trace/v1/trace_service_client.rb', line 389</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_traces'>list_traces</span> \
     <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span>
