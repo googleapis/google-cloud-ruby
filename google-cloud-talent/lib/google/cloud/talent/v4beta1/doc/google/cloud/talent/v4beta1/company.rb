@@ -58,8 +58,7 @@ module Google
         #     The street address of the company's main headquarters, which may be
         #     different from the job location. The service attempts
         #     to geolocate the provided address, and populates a more specific
-        #     location wherever possible in
-        #     {Google::Cloud::Talent::V4beta1::Company::DerivedInfo#headquarters_location DerivedInfo#headquarters_location}.
+        #     location wherever possible in {Google::Cloud::Talent::V4beta1::Company::DerivedInfo#headquarters_location DerivedInfo#headquarters_location}.
         # @!attribute [rw] hiring_agency
         #   @return [true, false]
         #     Optional.
@@ -100,9 +99,8 @@ module Google
         #   @return [Array<String>]
         #     Optional.
         #
-        #     A list of keys of filterable
-        #     {Google::Cloud::Talent::V4beta1::Job#custom_attributes Job#custom_attributes},
-        #     whose corresponding `string_values` are used in keyword searches. Jobs with
+        #     A list of keys of filterable {Google::Cloud::Talent::V4beta1::Job#custom_attributes Job#custom_attributes}, whose
+        #     corresponding `string_values` are used in keyword searches. Jobs with
         #     `string_values` under these specified field keys are returned if any
         #     of the values match the search keyword. Custom field values with
         #     parenthesis, brackets and special symbols are not searchable as-is,

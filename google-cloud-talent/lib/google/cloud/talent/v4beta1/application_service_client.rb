@@ -352,15 +352,11 @@ module Google
           #   Optional but strongly recommended for the best service
           #   experience.
           #
-          #   If
-          #   {Google::Cloud::Talent::V4beta1::UpdateApplicationRequest#update_mask update_mask}
-          #   is provided, only the specified fields in
-          #   {Google::Cloud::Talent::V4beta1::UpdateApplicationRequest#application application}
-          #   are updated. Otherwise all the fields are updated.
+          #   If {Google::Cloud::Talent::V4beta1::UpdateApplicationRequest#update_mask update_mask} is provided, only the specified fields in
+          #   {Google::Cloud::Talent::V4beta1::UpdateApplicationRequest#application application} are updated. Otherwise all the fields are updated.
           #
           #   A field mask to specify the application fields to be updated. Only
-          #   top level fields of {Google::Cloud::Talent::V4beta1::Application Application}
-          #   are supported.
+          #   top level fields of {Google::Cloud::Talent::V4beta1::Application Application} are supported.
           #   A hash of the same form as `Google::Protobuf::FieldMask`
           #   can also be provided.
           # @param options [Google::Gax::CallOptions]

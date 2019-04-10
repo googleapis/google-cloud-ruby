@@ -32,9 +32,8 @@ module Google
         #
         #     The token that specifies the current offset (that is, starting result).
         #
-        #     Please set the value to
-        #     {Google::Cloud::Talent::V4beta1::ListProfilesResponse#next_page_token ListProfilesResponse#next_page_token}
-        #     to continue the list.
+        #     Please set the value to {Google::Cloud::Talent::V4beta1::ListProfilesResponse#next_page_token ListProfilesResponse#next_page_token} to
+        #     continue the list.
         # @!attribute [rw] page_size
         #   @return [Integer]
         #     Optional.
@@ -130,6 +129,7 @@ module Google
         #     * certifications
         #     * recruitingNotes
         #     * customAttributes
+        #     * groupId
         class UpdateProfileRequest; end
 
         # Delete profile request.
@@ -164,8 +164,7 @@ module Google
         #   @return [Google::Cloud::Talent::V4beta1::ProfileQuery]
         #     Optional.
         #
-        #     Search query to execute. See
-        #     {Google::Cloud::Talent::V4beta1::ProfileQuery ProfileQuery} for more details.
+        #     Search query to execute. See {Google::Cloud::Talent::V4beta1::ProfileQuery ProfileQuery} for more details.
         # @!attribute [rw] page_size
         #   @return [Integer]
         #     Optional.
@@ -181,18 +180,16 @@ module Google
         #     The pageToken, similar to offset enables users of the API to paginate
         #     through the search results. To retrieve the first page of results, set the
         #     pageToken to empty. The search response includes a
-        #     {Google::Cloud::Talent::V4beta1::SearchProfilesResponse#next_page_token nextPageToken}
-        #     field that can be used to populate the pageToken field for the next page of
-        #     results. Using pageToken instead of offset increases the performance of the
-        #     API, especially compared to larger offset values.
+        #     {Google::Cloud::Talent::V4beta1::SearchProfilesResponse#next_page_token nextPageToken} field that can be
+        #     used to populate the pageToken field for the next page of results. Using
+        #     pageToken instead of offset increases the performance of the API,
+        #     especially compared to larger offset values.
         # @!attribute [rw] offset
         #   @return [Integer]
         #     Optional.
         #
         #     An integer that specifies the current offset (that is, starting result) in
-        #     search results. This field is only considered if
-        #     {Google::Cloud::Talent::V4beta1::SearchProfilesRequest#page_token page_token}
-        #     is unset.
+        #     search results. This field is only considered if {Google::Cloud::Talent::V4beta1::SearchProfilesRequest#page_token page_token} is unset.
         #
         #     The maximum allowed value is 5000. Otherwise an error is thrown.
         #
@@ -242,8 +239,7 @@ module Google
         #     Optional.
         #
         #     A list of expressions specifies histogram requests against matching
-        #     profiles for
-        #     {Google::Cloud::Talent::V4beta1::SearchProfilesRequest SearchProfilesRequest}.
+        #     profiles for {Google::Cloud::Talent::V4beta1::SearchProfilesRequest SearchProfilesRequest}.
         #
         #     The expression syntax looks like a function definition with optional
         #     parameters.
@@ -296,29 +292,19 @@ module Google
         #     * experience_in_months: experience in months. 0 means 0 month to 1 month
         #       (exclusive).
         #     * application_date: The application date specifies application start dates.
-        #       See
-        #       {Google::Cloud::Talent::V4beta1::ApplicationDateFilter ApplicationDateFilter}
-        #       for more details.
+        #       See {Google::Cloud::Talent::V4beta1::ApplicationDateFilter ApplicationDateFilter} for more details.
         #     * application_outcome_notes: The application outcome reason specifies the
         #       reasons behind the outcome of the job application.
-        #       See
-        #       {Google::Cloud::Talent::V4beta1::ApplicationOutcomeNotesFilter ApplicationOutcomeNotesFilter}
-        #       for more details.
+        #       See {Google::Cloud::Talent::V4beta1::ApplicationOutcomeNotesFilter ApplicationOutcomeNotesFilter} for more details.
         #     * application_last_stage: The application last stage specifies the last
         #       stage of job application.
-        #       See
-        #       {Google::Cloud::Talent::V4beta1::ApplicationLastStageFilter ApplicationLastStageFilter}
-        #       for more details.
+        #       See {ApplicationLastStageFilter} for more details.
         #     * application_job_title: The application job title specifies the job
         #       applied for in the application.
-        #       See
-        #       {Google::Cloud::Talent::V4beta1::ApplicationJobFilter ApplicationJobFilter}
-        #       for more details.
+        #       See {Google::Cloud::Talent::V4beta1::ApplicationJobFilter ApplicationJobFilter} for more details.
         #     * application_status: The application status specifies the status of job
         #       application.
-        #       See
-        #       {Google::Cloud::Talent::V4beta1::ApplicationStatusFilter ApplicationStatusFilter}
-        #       for more details.
+        #       See {ApplicationStatusFilter} for more details.
         #     * hirable_status: Hirable status specifies the profile's hirable status.
         #     * string_custom_attribute: String custom attributes. Values can be accessed
         #       via square bracket notation like string_custom_attribute["key1"].
@@ -358,14 +344,12 @@ module Google
         #     {Google::Cloud::Talent::V4beta1::SearchProfilesRequest#histogram_queries SearchProfilesRequest#histogram_queries}.
         # @!attribute [rw] summarized_profiles
         #   @return [Array<Google::Cloud::Talent::V4beta1::SummarizedProfile>]
-        #     The profile entities that match the specified
-        #     {Google::Cloud::Talent::V4beta1::SearchProfilesRequest SearchProfilesRequest}.
+        #     The profile entities that match the specified {Google::Cloud::Talent::V4beta1::SearchProfilesRequest SearchProfilesRequest}.
         class SearchProfilesResponse; end
 
         # Output only.
         #
-        # Profile entry with metadata inside
-        # {Google::Cloud::Talent::V4beta1::SearchProfilesResponse SearchProfilesResponse}.
+        # Profile entry with metadata inside {Google::Cloud::Talent::V4beta1::SearchProfilesResponse SearchProfilesResponse}.
         # @!attribute [rw] profiles
         #   @return [Array<Google::Cloud::Talent::V4beta1::Profile>]
         #     A list of profiles that are linked by {Profile#cluster_id}.

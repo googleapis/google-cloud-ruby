@@ -25,11 +25,8 @@ module Google
         #     An expression specifies a histogram request against matching resources
         #     (for example, jobs, profiles) for searches.
         #
-        #     See
-        #     {Google::Cloud::Talent::V4beta1::SearchJobsRequest#histogram_queries SearchJobsRequest#histogram_queries}
-        #     and
-        #     {Google::Cloud::Talent::V4beta1::SearchProfilesRequest#histogram_queries SearchProfilesRequest#histogram_queries}
-        #     for details about syntax.
+        #     See {Google::Cloud::Talent::V4beta1::SearchJobsRequest#histogram_queries SearchJobsRequest#histogram_queries} and
+        #     {Google::Cloud::Talent::V4beta1::SearchProfilesRequest#histogram_queries SearchProfilesRequest#histogram_queries} for details about syntax.
         class HistogramQuery; end
 
         # Output only.

@@ -4,7 +4,6 @@
 
 require 'google/protobuf'
 
-require 'google/api/annotations_pb'
 require 'google/cloud/talent/v4beta1/application_pb'
 require 'google/cloud/talent/v4beta1/common_pb'
 require 'google/cloud/talent/v4beta1/job_pb'
@@ -15,6 +14,7 @@ require 'google/protobuf/wrappers_pb'
 require 'google/type/date_pb'
 require 'google/type/latlng_pb'
 require 'google/type/timeofday_pb'
+require 'google/api/annotations_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.cloud.talent.v4beta1.JobQuery" do
     optional :query, :string, 1
@@ -43,10 +43,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :hirable_filter, :message, 9, "google.protobuf.BoolValue"
     repeated :application_date_filters, :message, 10, "google.cloud.talent.v4beta1.ApplicationDateFilter"
     repeated :application_outcome_notes_filters, :message, 11, "google.cloud.talent.v4beta1.ApplicationOutcomeNotesFilter"
-    repeated :application_last_stage_filters, :message, 12, "google.cloud.talent.v4beta1.ApplicationLastStageFilter"
     repeated :application_job_filters, :message, 13, "google.cloud.talent.v4beta1.ApplicationJobFilter"
-    repeated :application_status_filters, :message, 14, "google.cloud.talent.v4beta1.ApplicationStatusFilter"
-    optional :custom_field_filter, :string, 15
+    optional :custom_attribute_filter, :string, 15
   end
   add_message "google.cloud.talent.v4beta1.LocationFilter" do
     optional :address, :string, 1
@@ -126,19 +124,10 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :outcome_notes, :string, 1
     optional :negated, :bool, 2
   end
-  add_message "google.cloud.talent.v4beta1.ApplicationLastStageFilter" do
-    optional :last_stage, :string, 1
-    optional :negated, :bool, 2
-  end
   add_message "google.cloud.talent.v4beta1.ApplicationJobFilter" do
-    optional :job, :string, 1
     optional :job_requisition_id, :string, 2
     optional :job_title, :string, 3
     optional :negated, :bool, 4
-  end
-  add_message "google.cloud.talent.v4beta1.ApplicationStatusFilter" do
-    optional :application_state, :enum, 1, "google.cloud.talent.v4beta1.Application.ApplicationState"
-    optional :negated, :bool, 2
   end
   add_message "google.cloud.talent.v4beta1.TimeFilter" do
     optional :start_time, :message, 1, "google.protobuf.Timestamp"
@@ -172,9 +161,7 @@ module Google
         WorkExperienceFilter = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4beta1.WorkExperienceFilter").msgclass
         ApplicationDateFilter = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4beta1.ApplicationDateFilter").msgclass
         ApplicationOutcomeNotesFilter = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4beta1.ApplicationOutcomeNotesFilter").msgclass
-        ApplicationLastStageFilter = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4beta1.ApplicationLastStageFilter").msgclass
         ApplicationJobFilter = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4beta1.ApplicationJobFilter").msgclass
-        ApplicationStatusFilter = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4beta1.ApplicationStatusFilter").msgclass
         TimeFilter = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4beta1.TimeFilter").msgclass
         TimeFilter::TimeField = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4beta1.TimeFilter.TimeField").enummodule
       end

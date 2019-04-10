@@ -60,19 +60,16 @@ module Google
         #   @return [Google::Cloud::Talent::V4beta1::JobEvent::JobEventType]
         #     Required.
         #
-        #     The type of the event (see
-        #     {Google::Cloud::Talent::V4beta1::JobEvent::JobEventType JobEventType}).
+        #     The type of the event (see {Google::Cloud::Talent::V4beta1::JobEvent::JobEventType JobEventType}).
         # @!attribute [rw] jobs
         #   @return [Array<String>]
         #     Required.
         #
-        #     The {Google::Cloud::Talent::V4beta1::Job#name job name(s)} associated with
-        #     this event. For example, if this is an
-        #     {Google::Cloud::Talent::V4beta1::JobEvent::JobEventType::IMPRESSION impression}
-        #     event, this field contains the identifiers of all jobs shown to the job
-        #     seeker. If this was a
-        #     {Google::Cloud::Talent::V4beta1::JobEvent::JobEventType::VIEW view} event, this
-        #     field contains the identifier of the viewed job.
+        #     The {Google::Cloud::Talent::V4beta1::Job#name job name(s)} associated with this event.
+        #     For example, if this is an {Google::Cloud::Talent::V4beta1::JobEvent::JobEventType::IMPRESSION impression} event,
+        #     this field contains the identifiers of all jobs shown to the job seeker.
+        #     If this was a {Google::Cloud::Talent::V4beta1::JobEvent::JobEventType::VIEW view} event, this field contains the
+        #     identifier of the viewed job.
         class JobEvent
           # An enumeration of an event attributed to the behavior of the end user,
           # such as a job seeker.
@@ -110,9 +107,7 @@ module Google
             # submitted an application for a job with a single click without
             # entering information. If a job seeker performs this action, send only
             # this event to the service. Do not also send
-            # {Google::Cloud::Talent::V4beta1::JobEvent::JobEventType::APPLICATION_START JobEventType::APPLICATION_START}
-            # or
-            # {Google::Cloud::Talent::V4beta1::JobEvent::JobEventType::APPLICATION_FINISH JobEventType::APPLICATION_FINISH}
+            # {Google::Cloud::Talent::V4beta1::JobEvent::JobEventType::APPLICATION_START JobEventType::APPLICATION_START} or {Google::Cloud::Talent::V4beta1::JobEvent::JobEventType::APPLICATION_FINISH JobEventType::APPLICATION_FINISH}
             # events.
             APPLICATION_QUICK_SUBMISSION = 6
 
@@ -132,12 +127,8 @@ module Google
             # (without viewing the details of the job posting), and is redirected
             # to a different website to complete the application. If a candidate
             # performs this action, send only this event to the service. Do not also
-            # send
-            # {Google::Cloud::Talent::V4beta1::JobEvent::JobEventType::APPLICATION_START JobEventType::APPLICATION_START},
-            # {Google::Cloud::Talent::V4beta1::JobEvent::JobEventType::APPLICATION_FINISH JobEventType::APPLICATION_FINISH}
-            # or
-            # {Google::Cloud::Talent::V4beta1::JobEvent::JobEventType::VIEW JobEventType::VIEW}
-            # events.
+            # send {Google::Cloud::Talent::V4beta1::JobEvent::JobEventType::APPLICATION_START JobEventType::APPLICATION_START},
+            # {Google::Cloud::Talent::V4beta1::JobEvent::JobEventType::APPLICATION_FINISH JobEventType::APPLICATION_FINISH} or {Google::Cloud::Talent::V4beta1::JobEvent::JobEventType::VIEW JobEventType::VIEW} events.
             APPLICATION_REDIRECT_FROM_SEARCH = 9
 
             # This event should be used when a company submits an application
@@ -190,8 +181,7 @@ module Google
         #   @return [Array<String>]
         #     Required.
         #
-        #     The {Google::Cloud::Talent::V4beta1::Profile#name profile name(s)} associated
-        #     with this client event.
+        #     The {Google::Cloud::Talent::V4beta1::Profile#name profile name(s)} associated with this client event.
         # @!attribute [rw] jobs
         #   @return [Array<String>]
         #     Optional.

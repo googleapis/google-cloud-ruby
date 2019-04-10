@@ -52,8 +52,8 @@ module Google
         #     Resource name of the job which the candidate applied for.
         #
         #     The format is
-        #     "projects/{project_id}/jobs/{job_id}",
-        #     for example, "projects/api-test-project/jobs/bar".
+        #     "projects/{project_id}/tenants/{tenant_id}/jobs/{job_id}",
+        #     for example, "projects/api-test-project/tenants/foo/jobs/bar".
         # @!attribute [rw] company
         #   @return [String]
         #     One of either a job or a company is required.
@@ -61,8 +61,8 @@ module Google
         #     Resource name of the company which the candidate applied for.
         #
         #     The format is
-        #     "projects/{project_id}/companies/{company_id}",
-        #     for example, "projects/api-test-project/companies/foo".
+        #     "projects/{project_id}/tenants/{tenant_id}/companies/{company_id}",
+        #     for example, "projects/api-test-project/tenants/foo/companies/bar".
         # @!attribute [rw] application_date
         #   @return [Google::Type::Date]
         #     Optional.
@@ -85,9 +85,9 @@ module Google
         #   @return [Array<Google::Cloud::Talent::V4beta1::Interview>]
         #     Optional.
         #
-        #     All interviews (screen, onsite, etc) conducted as part of this application
-        #     (includes details such as user conducting the interview, timestamp,
-        #     feedback, etc).
+        #     All interviews (screen, onsite, and so on) conducted as part of this
+        #     application (includes details such as user conducting the interview,
+        #     timestamp, feedback, and so on).
         # @!attribute [rw] referral
         #   @return [Google::Protobuf::BoolValue]
         #     Optional.
