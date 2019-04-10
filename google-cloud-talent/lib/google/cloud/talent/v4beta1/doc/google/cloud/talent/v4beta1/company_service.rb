@@ -22,10 +22,13 @@ module Google
         #   @return [String]
         #     Required.
         #
-        #     Resource name of the project under which the company is created.
+        #     Resource name of the tenant under which the company is created.
         #
-        #     The format is "projects/{project_id}", for example,
-        #     "projects/api-test-project".
+        #     The format is "projects/{project_id}/tenants/{tenant_id}", for example,
+        #     "projects/api-test-project/tenant/foo".
+        #
+        #     Tenant id is optional and a default tenant is created if unspecified, for
+        #     example, "projects/api-test-project".
         # @!attribute [rw] company
         #   @return [Google::Cloud::Talent::V4beta1::Company]
         #     Required.
@@ -40,8 +43,12 @@ module Google
         #
         #     The resource name of the company to be retrieved.
         #
-        #     The format is "projects/{project_id}/companies/{company_id}", for example,
-        #     "projects/api-test-project/companies/foo".
+        #     The format is
+        #     "projects/{project_id}/tenants/{tenant_id}/companies/{company_id}", for
+        #     example, "projects/api-test-project/tenants/foo/companies/bar".
+        #
+        #     Tenant id is optional and the default tenant is used if unspecified, for
+        #     example, "projects/api-test-project/companies/bar".
         class GetCompanyRequest; end
 
         # Request for updating a specified company.
@@ -73,8 +80,12 @@ module Google
         #
         #     The resource name of the company to be deleted.
         #
-        #     The format is "projects/{project_id}/companies/{company_id}", for example,
-        #     "projects/api-test-project/companies/foo".
+        #     The format is
+        #     "projects/{project_id}/tenants/{tenant_id}/companies/{company_id}", for
+        #     example, "projects/api-test-project/tenants/foo/companies/bar".
+        #
+        #     Tenant id is optional and the default tenant is used if unspecified, for
+        #     example, "projects/api-test-project/companies/bar".
         class DeleteCompanyRequest; end
 
         # List companies for which the client has ACL visibility.
@@ -82,10 +93,13 @@ module Google
         #   @return [String]
         #     Required.
         #
-        #     Resource name of the project under which the company is created.
+        #     Resource name of the tenant under which the company is created.
         #
-        #     The format is "projects/{project_id}", for example,
-        #     "projects/api-test-project".
+        #     The format is "projects/{project_id}/tenants/{tenant_id}", for example,
+        #     "projects/api-test-project/tenant/foo".
+        #
+        #     Tenant id is optional and the default tenant is used if unspecified, for
+        #     example, "projects/api-test-project".
         # @!attribute [rw] page_token
         #   @return [String]
         #     Optional.

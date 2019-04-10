@@ -42,7 +42,7 @@ module Google
         #     The maximum number of profiles to be returned, at most 100.
         #
         #     Default is 100 unless a positive number smaller than 100 is specified.
-        # @!attribute [rw] field_mask
+        # @!attribute [rw] read_mask
         #   @return [Google::Protobuf::FieldMask]
         #     Optional.
         #
@@ -128,7 +128,6 @@ module Google
         #     * publications
         #     * patents
         #     * certifications
-        #     * jobApplications
         #     * recruitingNotes
         #     * customAttributes
         class UpdateProfileRequest; end
@@ -292,7 +291,7 @@ module Google
         #     * institution: The school name. For example, "MIT",
         #       "University of California, Berkeley"
         #     * degree: Highest education degree in ISCED code. Each value in degree
-        #       covers specific level of education, without any expansion to upper nor
+        #       covers a specific level of education, without any expansion to upper nor
         #       lower levels of education degree.
         #     * experience_in_months: experience in months. 0 means 0 month to 1 month
         #       (exclusive).
@@ -300,10 +299,10 @@ module Google
         #       See
         #       {Google::Cloud::Talent::V4beta1::ApplicationDateFilter ApplicationDateFilter}
         #       for more details.
-        #     * application_outcome_reason: The application outcome reason specifies the
-        #       outcome reasons of job application.
+        #     * application_outcome_notes: The application outcome reason specifies the
+        #       reasons behind the outcome of the job application.
         #       See
-        #       {Google::Cloud::Talent::V4beta1::ApplicationOutcomeReasonFilter ApplicationOutcomeReasonFilter}
+        #       {Google::Cloud::Talent::V4beta1::ApplicationOutcomeNotesFilter ApplicationOutcomeNotesFilter}
         #       for more details.
         #     * application_last_stage: The application last stage specifies the last
         #       stage of job application.

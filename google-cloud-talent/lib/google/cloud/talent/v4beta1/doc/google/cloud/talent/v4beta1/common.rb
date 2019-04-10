@@ -20,10 +20,10 @@ module Google
         # Message representing a period of time between two timestamps.
         # @!attribute [rw] start_time
         #   @return [Google::Protobuf::Timestamp]
-        #     Begin of the period.
+        #     Begin of the period (inclusive).
         # @!attribute [rw] end_time
         #   @return [Google::Protobuf::Timestamp]
-        #     End of the period.
+        #     End of the period (exclusive).
         class TimestampRange; end
 
         # Output only.
@@ -480,6 +480,107 @@ module Google
           end
         end
 
+        # Resource that represents a license or certification.
+        # @!attribute [rw] display_name
+        #   @return [String]
+        #     Optional.
+        #
+        #     Name of license or certification.
+        #
+        #     Number of characters allowed is 100.
+        # @!attribute [rw] acquire_date
+        #   @return [Google::Type::Date]
+        #     Optional.
+        #
+        #     Acquisition date or effective date of license or certification.
+        # @!attribute [rw] expire_date
+        #   @return [Google::Type::Date]
+        #     Optional.
+        #
+        #     Expiration date of license of certification.
+        # @!attribute [rw] authority
+        #   @return [String]
+        #     Optional.
+        #
+        #     Authority of license, such as government.
+        #
+        #     Number of characters allowed is 100.
+        # @!attribute [rw] description
+        #   @return [String]
+        #     Optional.
+        #
+        #     Description of license or certification.
+        #
+        #     Number of characters allowed is 100,000.
+        class Certification; end
+
+        # Resource that represents a skill of a candidate.
+        # @!attribute [rw] display_name
+        #   @return [String]
+        #     Optional.
+        #
+        #     Skill display name.
+        #
+        #     For example, "Java", "Python".
+        #
+        #     Number of characters allowed is 100.
+        # @!attribute [rw] last_used_date
+        #   @return [Google::Type::Date]
+        #     Optional.
+        #
+        #     The last time this skill was used.
+        # @!attribute [rw] level
+        #   @return [Google::Cloud::Talent::V4beta1::SkillProficiencyLevel]
+        #     Optional.
+        #
+        #     Skill proficiency level which indicates how proficient the candidate is at
+        #     this skill.
+        # @!attribute [rw] context
+        #   @return [String]
+        #     Optional.
+        #
+        #     A paragraph describes context of this skill.
+        #
+        #     Number of characters allowed is 100,000.
+        # @!attribute [rw] skill_name_snippet
+        #   @return [String]
+        #     Output only. Skill name snippet shows how the
+        #     {Google::Cloud::Talent::V4beta1::Skill#display_name display_name} is related
+        #     to a search query. It's empty if the
+        #     {Google::Cloud::Talent::V4beta1::Skill#display_name display_name} isn't
+        #     related to the search query.
+        class Skill; end
+
+        # Details of an interview.
+        # @!attribute [rw] rating
+        #   @return [Google::Cloud::Talent::V4beta1::Rating]
+        #     Optional.
+        #
+        #     The rating on this interview.
+        # @!attribute [rw] outcome
+        #   @return [Google::Cloud::Talent::V4beta1::Outcome]
+        #     Required.
+        #
+        #     The overall decision resulting from this interview (positive, negative,
+        #     nuetral).
+        class Interview; end
+
+        # The details of the score received for an assessment or interview.
+        # @!attribute [rw] overall
+        #   @return [Float]
+        #     Overall score.
+        # @!attribute [rw] min
+        #   @return [Float]
+        #     The minimum value for the score.
+        # @!attribute [rw] max
+        #   @return [Float]
+        #     The maximum value for the score.
+        # @!attribute [rw] interval
+        #   @return [Float]
+        #     The steps within the score (for example, interval = 1 max = 5
+        #     min = 1 indicates that the score can be 1, 2, 3, 4, or 5)
+        class Rating; end
+
         # Method for commute.
         module CommuteMethod
           # Commute method isn't specified.
@@ -497,10 +598,6 @@ module Google
 
           # Commute time is calculated based on biking time.
           CYCLING = 4
-
-          # Commute time is calculated based on public transit that is wheelchair
-          # accessible.
-          TRANSIT_ACCESSIBLE = 5
         end
 
         # An enum that represents the size of the company.
@@ -834,6 +931,29 @@ module Google
           EXECUTIVE = 5
         end
 
+        # The overall outcome /decision / result indicator.
+        module Outcome
+          # Default value.
+          OUTCOME_UNSPECIFIED = 0
+
+          # A positive outcome / passing indicator (for example, candidate was
+          # recommended for hiring or to be moved forward in the hiring process,
+          # candidate passed a test).
+          POSITIVE = 1
+
+          # A neutral outcome / no clear indicator (for example, no strong
+          # reccommendation either to move forward / not move forward, neutral score).
+          NEUTRAL = 2
+
+          # A negative outcome / failing indicator (for example, candidate was
+          # recommended to NOT move forward in the hiring process, failed a test).
+          NEGATIVE = 3
+
+          # The assessment outcome is not available or otherwise unknown (for example,
+          # candidate did not complete assessment).
+          OUTCOME_NOT_AVAILABLE = 4
+        end
+
         # An enum that represents the job posting region. In most cases, job postings
         # don't need to specify a region. If a region is given, jobs are
         # eligible for searches in the specified region.
@@ -866,6 +986,31 @@ module Google
           # If {Locations} are provided with this value, the job is
           # considered as having a location, but telecommuting is allowed.
           TELECOMMUTE = 3
+        end
+
+        # Enum that represents the skill proficiency level.
+        module SkillProficiencyLevel
+          # Default value.
+          SKILL_PROFICIENCY_LEVEL_UNSPECIFIED = 0
+
+          # Have a common knowledge or an understanding of basic techniques and
+          # concepts.
+          FUNDAMENTAL_AWARENESS = 1
+
+          # Have the level of experience gained in a classroom and/or experimental
+          # scenarios or as a trainee on-the-job.
+          NOVICE = 2
+
+          # Be able to successfully complete tasks in this skill as requested. Help
+          # from an expert may be required from time to time, but can usually perform
+          # skill independently.
+          INTERMEDIATE = 3
+
+          # Can perform the actions associated with this skill without assistance.
+          ADVANCED = 4
+
+          # Known as an expert in this area.
+          EXPERT = 5
         end
 
         # An enum that represents who has view access to the resource.

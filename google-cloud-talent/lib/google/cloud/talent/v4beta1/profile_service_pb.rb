@@ -16,7 +16,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :parent, :string, 1
     optional :page_token, :string, 2
     optional :page_size, :int32, 3
-    optional :field_mask, :message, 4, "google.protobuf.FieldMask"
+    optional :read_mask, :message, 4, "google.protobuf.FieldMask"
   end
   add_message "google.cloud.talent.v4beta1.ListProfilesResponse" do
     repeated :profiles, :message, 1, "google.cloud.talent.v4beta1.Profile"

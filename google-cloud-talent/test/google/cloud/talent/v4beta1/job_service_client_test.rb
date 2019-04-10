@@ -72,12 +72,12 @@ describe Google::Cloud::Talent::V4beta1::JobServiceClient do
 
     it 'invokes create_job without error' do
       # Create request parameters
-      formatted_parent = Google::Cloud::Talent::V4beta1::JobServiceClient.project_path("[PROJECT]")
+      formatted_parent = Google::Cloud::Talent::V4beta1::JobServiceClient.tenant_path("[PROJECT]", "[TENANT]")
       job = {}
 
       # Create expected grpc response
       name = "name3373707"
-      company_name = "companyName1429880077"
+      company = "company950484093"
       requisition_id = "requisitionId980224926"
       title = "title110371416"
       description = "description-1724546052"
@@ -90,7 +90,7 @@ describe Google::Cloud::Talent::V4beta1::JobServiceClient do
       company_display_name = "companyDisplayName1982424170"
       expected_response = {
         name: name,
-        company_name: company_name,
+        company: company,
         requisition_id: requisition_id,
         title: title,
         description: description,
@@ -138,7 +138,7 @@ describe Google::Cloud::Talent::V4beta1::JobServiceClient do
 
     it 'invokes create_job with error' do
       # Create request parameters
-      formatted_parent = Google::Cloud::Talent::V4beta1::JobServiceClient.project_path("[PROJECT]")
+      formatted_parent = Google::Cloud::Talent::V4beta1::JobServiceClient.tenant_path("[PROJECT]", "[TENANT]")
       job = {}
 
       # Mock Grpc layer
@@ -174,11 +174,11 @@ describe Google::Cloud::Talent::V4beta1::JobServiceClient do
 
     it 'invokes get_job without error' do
       # Create request parameters
-      formatted_name = Google::Cloud::Talent::V4beta1::JobServiceClient.job_path("[PROJECT]", "[JOBS]")
+      formatted_name = Google::Cloud::Talent::V4beta1::JobServiceClient.job_old_path("[PROJECT]", "[JOBS]")
 
       # Create expected grpc response
       name_2 = "name2-1052831874"
-      company_name = "companyName1429880077"
+      company = "company950484093"
       requisition_id = "requisitionId980224926"
       title = "title110371416"
       description = "description-1724546052"
@@ -191,7 +191,7 @@ describe Google::Cloud::Talent::V4beta1::JobServiceClient do
       company_display_name = "companyDisplayName1982424170"
       expected_response = {
         name: name_2,
-        company_name: company_name,
+        company: company,
         requisition_id: requisition_id,
         title: title,
         description: description,
@@ -238,7 +238,7 @@ describe Google::Cloud::Talent::V4beta1::JobServiceClient do
 
     it 'invokes get_job with error' do
       # Create request parameters
-      formatted_name = Google::Cloud::Talent::V4beta1::JobServiceClient.job_path("[PROJECT]", "[JOBS]")
+      formatted_name = Google::Cloud::Talent::V4beta1::JobServiceClient.job_old_path("[PROJECT]", "[JOBS]")
 
       # Mock Grpc layer
       mock_method = proc do |request|
@@ -276,7 +276,7 @@ describe Google::Cloud::Talent::V4beta1::JobServiceClient do
 
       # Create expected grpc response
       name = "name3373707"
-      company_name = "companyName1429880077"
+      company = "company950484093"
       requisition_id = "requisitionId980224926"
       title = "title110371416"
       description = "description-1724546052"
@@ -289,7 +289,7 @@ describe Google::Cloud::Talent::V4beta1::JobServiceClient do
       company_display_name = "companyDisplayName1982424170"
       expected_response = {
         name: name,
-        company_name: company_name,
+        company: company,
         requisition_id: requisition_id,
         title: title,
         description: description,
@@ -370,7 +370,7 @@ describe Google::Cloud::Talent::V4beta1::JobServiceClient do
 
     it 'invokes delete_job without error' do
       # Create request parameters
-      formatted_name = Google::Cloud::Talent::V4beta1::JobServiceClient.job_path("[PROJECT]", "[JOBS]")
+      formatted_name = Google::Cloud::Talent::V4beta1::JobServiceClient.job_old_path("[PROJECT]", "[JOBS]")
 
       # Mock Grpc layer
       mock_method = proc do |request|
@@ -405,7 +405,7 @@ describe Google::Cloud::Talent::V4beta1::JobServiceClient do
 
     it 'invokes delete_job with error' do
       # Create request parameters
-      formatted_name = Google::Cloud::Talent::V4beta1::JobServiceClient.job_path("[PROJECT]", "[JOBS]")
+      formatted_name = Google::Cloud::Talent::V4beta1::JobServiceClient.job_old_path("[PROJECT]", "[JOBS]")
 
       # Mock Grpc layer
       mock_method = proc do |request|
@@ -439,7 +439,7 @@ describe Google::Cloud::Talent::V4beta1::JobServiceClient do
 
     it 'invokes list_jobs without error' do
       # Create request parameters
-      formatted_parent = Google::Cloud::Talent::V4beta1::JobServiceClient.project_path("[PROJECT]")
+      formatted_parent = Google::Cloud::Talent::V4beta1::JobServiceClient.tenant_path("[PROJECT]", "[TENANT]")
       filter = ''
 
       # Create expected grpc response
@@ -479,7 +479,7 @@ describe Google::Cloud::Talent::V4beta1::JobServiceClient do
 
     it 'invokes list_jobs with error' do
       # Create request parameters
-      formatted_parent = Google::Cloud::Talent::V4beta1::JobServiceClient.project_path("[PROJECT]")
+      formatted_parent = Google::Cloud::Talent::V4beta1::JobServiceClient.tenant_path("[PROJECT]", "[TENANT]")
       filter = ''
 
       # Mock Grpc layer
@@ -515,7 +515,7 @@ describe Google::Cloud::Talent::V4beta1::JobServiceClient do
 
     it 'invokes batch_delete_jobs without error' do
       # Create request parameters
-      formatted_parent = Google::Cloud::Talent::V4beta1::JobServiceClient.project_path("[PROJECT]")
+      formatted_parent = Google::Cloud::Talent::V4beta1::JobServiceClient.tenant_path("[PROJECT]", "[TENANT]")
       filter = ''
 
       # Mock Grpc layer
@@ -552,7 +552,7 @@ describe Google::Cloud::Talent::V4beta1::JobServiceClient do
 
     it 'invokes batch_delete_jobs with error' do
       # Create request parameters
-      formatted_parent = Google::Cloud::Talent::V4beta1::JobServiceClient.project_path("[PROJECT]")
+      formatted_parent = Google::Cloud::Talent::V4beta1::JobServiceClient.tenant_path("[PROJECT]", "[TENANT]")
       filter = ''
 
       # Mock Grpc layer
@@ -588,7 +588,7 @@ describe Google::Cloud::Talent::V4beta1::JobServiceClient do
 
     it 'invokes search_jobs without error' do
       # Create request parameters
-      formatted_parent = Google::Cloud::Talent::V4beta1::JobServiceClient.project_path("[PROJECT]")
+      formatted_parent = Google::Cloud::Talent::V4beta1::JobServiceClient.tenant_path("[PROJECT]", "[TENANT]")
       request_metadata = {}
 
       # Create expected grpc response
@@ -637,7 +637,7 @@ describe Google::Cloud::Talent::V4beta1::JobServiceClient do
 
     it 'invokes search_jobs with error' do
       # Create request parameters
-      formatted_parent = Google::Cloud::Talent::V4beta1::JobServiceClient.project_path("[PROJECT]")
+      formatted_parent = Google::Cloud::Talent::V4beta1::JobServiceClient.tenant_path("[PROJECT]", "[TENANT]")
       request_metadata = {}
 
       # Mock Grpc layer
@@ -673,7 +673,7 @@ describe Google::Cloud::Talent::V4beta1::JobServiceClient do
 
     it 'invokes search_jobs_for_alert without error' do
       # Create request parameters
-      formatted_parent = Google::Cloud::Talent::V4beta1::JobServiceClient.project_path("[PROJECT]")
+      formatted_parent = Google::Cloud::Talent::V4beta1::JobServiceClient.tenant_path("[PROJECT]", "[TENANT]")
       request_metadata = {}
 
       # Create expected grpc response
@@ -722,7 +722,7 @@ describe Google::Cloud::Talent::V4beta1::JobServiceClient do
 
     it 'invokes search_jobs_for_alert with error' do
       # Create request parameters
-      formatted_parent = Google::Cloud::Talent::V4beta1::JobServiceClient.project_path("[PROJECT]")
+      formatted_parent = Google::Cloud::Talent::V4beta1::JobServiceClient.tenant_path("[PROJECT]", "[TENANT]")
       request_metadata = {}
 
       # Mock Grpc layer

@@ -8,11 +8,11 @@ require 'google/api/annotations_pb'
 require 'google/cloud/talent/v4beta1/common_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.cloud.talent.v4beta1.CompleteQueryRequest" do
-    optional :name, :string, 1
+    optional :parent, :string, 1
     optional :query, :string, 2
     repeated :language_codes, :string, 3
     optional :page_size, :int32, 4
-    optional :company_name, :string, 5
+    optional :company, :string, 5
     optional :scope, :enum, 6, "google.cloud.talent.v4beta1.CompleteQueryRequest.CompletionScope"
     optional :type, :enum, 7, "google.cloud.talent.v4beta1.CompleteQueryRequest.CompletionType"
   end

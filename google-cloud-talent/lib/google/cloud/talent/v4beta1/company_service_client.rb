@@ -68,33 +68,35 @@ module Google
           ].freeze
 
 
-          PROJECT_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
-            "projects/{project}"
+          TENANT_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+            "projects/{project}/tenants/{tenant}"
           )
 
-          private_constant :PROJECT_PATH_TEMPLATE
+          private_constant :TENANT_PATH_TEMPLATE
 
-          COMPANY_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+          COMPANY_OLD_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
             "projects/{project}/companies/{company}"
           )
 
-          private_constant :COMPANY_PATH_TEMPLATE
+          private_constant :COMPANY_OLD_PATH_TEMPLATE
 
-          # Returns a fully-qualified project resource name string.
+          # Returns a fully-qualified tenant resource name string.
           # @param project [String]
+          # @param tenant [String]
           # @return [String]
-          def self.project_path project
-            PROJECT_PATH_TEMPLATE.render(
-              :"project" => project
+          def self.tenant_path project, tenant
+            TENANT_PATH_TEMPLATE.render(
+              :"project" => project,
+              :"tenant" => tenant
             )
           end
 
-          # Returns a fully-qualified company resource name string.
+          # Returns a fully-qualified company_old resource name string.
           # @param project [String]
           # @param company [String]
           # @return [String]
-          def self.company_path project, company
-            COMPANY_PATH_TEMPLATE.render(
+          def self.company_old_path project, company
+            COMPANY_OLD_PATH_TEMPLATE.render(
               :"project" => project,
               :"company" => company
             )
@@ -206,27 +208,42 @@ module Google
             @create_company = Google::Gax.create_api_call(
               @company_service_stub.method(:create_company),
               defaults["create_company"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
             )
             @get_company = Google::Gax.create_api_call(
               @company_service_stub.method(:get_company),
               defaults["get_company"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @update_company = Google::Gax.create_api_call(
               @company_service_stub.method(:update_company),
               defaults["update_company"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'company.name' => request.company.name}
+              end
             )
             @delete_company = Google::Gax.create_api_call(
               @company_service_stub.method(:delete_company),
               defaults["delete_company"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @list_companies = Google::Gax.create_api_call(
               @company_service_stub.method(:list_companies),
               defaults["list_companies"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
             )
           end
 
@@ -237,10 +254,13 @@ module Google
           # @param parent [String]
           #   Required.
           #
-          #   Resource name of the project under which the company is created.
+          #   Resource name of the tenant under which the company is created.
           #
-          #   The format is "projects/{project_id}", for example,
-          #   "projects/api-test-project".
+          #   The format is "projects/{project_id}/tenants/{tenant_id}", for example,
+          #   "projects/api-test-project/tenant/foo".
+          #
+          #   Tenant id is optional and a default tenant is created if unspecified, for
+          #   example, "projects/api-test-project".
           # @param company [Google::Cloud::Talent::V4beta1::Company | Hash]
           #   Required.
           #
@@ -259,7 +279,7 @@ module Google
           #   require "google/cloud/talent"
           #
           #   company_client = Google::Cloud::Talent::CompanyService.new(version: :v4beta1)
-          #   formatted_parent = Google::Cloud::Talent::V4beta1::CompanyServiceClient.project_path("[PROJECT]")
+          #   formatted_parent = Google::Cloud::Talent::V4beta1::CompanyServiceClient.tenant_path("[PROJECT]", "[TENANT]")
           #
           #   # TODO: Initialize `company`:
           #   company = {}
@@ -285,8 +305,12 @@ module Google
           #
           #   The resource name of the company to be retrieved.
           #
-          #   The format is "projects/{project_id}/companies/{company_id}", for example,
-          #   "projects/api-test-project/companies/foo".
+          #   The format is
+          #   "projects/{project_id}/tenants/{tenant_id}/companies/{company_id}", for
+          #   example, "projects/api-test-project/tenants/foo/companies/bar".
+          #
+          #   Tenant id is optional and the default tenant is used if unspecified, for
+          #   example, "projects/api-test-project/companies/bar".
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -299,7 +323,7 @@ module Google
           #   require "google/cloud/talent"
           #
           #   company_client = Google::Cloud::Talent::CompanyService.new(version: :v4beta1)
-          #   formatted_name = Google::Cloud::Talent::V4beta1::CompanyServiceClient.company_path("[PROJECT]", "[COMPANY]")
+          #   formatted_name = Google::Cloud::Talent::V4beta1::CompanyServiceClient.company_old_path("[PROJECT]", "[COMPANY]")
           #   response = company_client.get_company(formatted_name)
 
           def get_company \
@@ -374,8 +398,12 @@ module Google
           #
           #   The resource name of the company to be deleted.
           #
-          #   The format is "projects/{project_id}/companies/{company_id}", for example,
-          #   "projects/api-test-project/companies/foo".
+          #   The format is
+          #   "projects/{project_id}/tenants/{tenant_id}/companies/{company_id}", for
+          #   example, "projects/api-test-project/tenants/foo/companies/bar".
+          #
+          #   Tenant id is optional and the default tenant is used if unspecified, for
+          #   example, "projects/api-test-project/companies/bar".
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -387,7 +415,7 @@ module Google
           #   require "google/cloud/talent"
           #
           #   company_client = Google::Cloud::Talent::CompanyService.new(version: :v4beta1)
-          #   formatted_name = Google::Cloud::Talent::V4beta1::CompanyServiceClient.company_path("[PROJECT]", "[COMPANY]")
+          #   formatted_name = Google::Cloud::Talent::V4beta1::CompanyServiceClient.company_old_path("[PROJECT]", "[COMPANY]")
           #   company_client.delete_company(formatted_name)
 
           def delete_company \
@@ -407,10 +435,13 @@ module Google
           # @param parent [String]
           #   Required.
           #
-          #   Resource name of the project under which the company is created.
+          #   Resource name of the tenant under which the company is created.
           #
-          #   The format is "projects/{project_id}", for example,
-          #   "projects/api-test-project".
+          #   The format is "projects/{project_id}/tenants/{tenant_id}", for example,
+          #   "projects/api-test-project/tenant/foo".
+          #
+          #   Tenant id is optional and the default tenant is used if unspecified, for
+          #   example, "projects/api-test-project".
           # @param page_size [Integer]
           #   The maximum number of resources contained in the underlying API
           #   response. If page streaming is performed per-resource, this
@@ -443,7 +474,7 @@ module Google
           #   require "google/cloud/talent"
           #
           #   company_client = Google::Cloud::Talent::CompanyService.new(version: :v4beta1)
-          #   formatted_parent = Google::Cloud::Talent::V4beta1::CompanyServiceClient.project_path("[PROJECT]")
+          #   formatted_parent = Google::Cloud::Talent::V4beta1::CompanyServiceClient.tenant_path("[PROJECT]", "[TENANT]")
           #
           #   # Iterate over all results.
           #   company_client.list_companies(formatted_parent).each do |element|

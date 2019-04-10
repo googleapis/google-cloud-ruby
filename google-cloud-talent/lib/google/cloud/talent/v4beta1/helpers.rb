@@ -15,37 +15,68 @@ module Google
   module Cloud
     module Talent
       module V4beta1
+        class ApplicationServiceClient
+          # Alias for Google::Cloud::Talent::V4beta1::ApplicationServiceClient.application_path.
+          # @param project [String]
+          # @param tenant [String]
+          # @param profile [String]
+          # @param application [String]
+          # @return [String]
+          def application_path project, tenant, profile, application
+            self.class.application_path project, tenant, profile, application
+          end
+        
+          # Alias for Google::Cloud::Talent::V4beta1::ApplicationServiceClient.profile_path.
+          # @param project [String]
+          # @param tenant [String]
+          # @param profile [String]
+          # @return [String]
+          def profile_path project, tenant, profile
+            self.class.profile_path project, tenant, profile
+          end
+        end
+        
         class CompanyServiceClient
-          # Alias for Google::Cloud::Talent::V4beta1::CompanyServiceClient.company_path.
+          # Alias for Google::Cloud::Talent::V4beta1::CompanyServiceClient.company_old_path.
           # @param project [String]
           # @param company [String]
           # @return [String]
-          def company_path project, company
-            self.class.company_path project, company
+          def company_old_path project, company
+            self.class.company_old_path project, company
           end
         
-          # Alias for Google::Cloud::Talent::V4beta1::CompanyServiceClient.project_path.
+          # Alias for Google::Cloud::Talent::V4beta1::CompanyServiceClient.tenant_path.
           # @param project [String]
+          # @param tenant [String]
           # @return [String]
-          def project_path project
-            self.class.project_path project
+          def tenant_path project, tenant
+            self.class.tenant_path project, tenant
           end
         end
         
         class JobServiceClient
-          # Alias for Google::Cloud::Talent::V4beta1::JobServiceClient.job_path.
+          # Alias for Google::Cloud::Talent::V4beta1::JobServiceClient.company_old_path.
+          # @param project [String]
+          # @param company [String]
+          # @return [String]
+          def company_old_path project, company
+            self.class.company_old_path project, company
+          end
+        
+          # Alias for Google::Cloud::Talent::V4beta1::JobServiceClient.job_old_path.
           # @param project [String]
           # @param jobs [String]
           # @return [String]
-          def job_path project, jobs
-            self.class.job_path project, jobs
+          def job_old_path project, jobs
+            self.class.job_old_path project, jobs
           end
         
-          # Alias for Google::Cloud::Talent::V4beta1::JobServiceClient.project_path.
+          # Alias for Google::Cloud::Talent::V4beta1::JobServiceClient.tenant_path.
           # @param project [String]
+          # @param tenant [String]
           # @return [String]
-          def project_path project
-            self.class.project_path project
+          def tenant_path project, tenant
+            self.class.tenant_path project, tenant
           end
         end
         

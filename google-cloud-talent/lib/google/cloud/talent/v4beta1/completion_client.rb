@@ -59,18 +59,37 @@ module Google
           ].freeze
 
 
-          PROJECT_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
-            "projects/{project}"
+          TENANT_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+            "projects/{project}/tenants/{tenant}"
           )
 
-          private_constant :PROJECT_PATH_TEMPLATE
+          private_constant :TENANT_PATH_TEMPLATE
 
-          # Returns a fully-qualified project resource name string.
+          COMPANY_OLD_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+            "projects/{project}/companies/{company}"
+          )
+
+          private_constant :COMPANY_OLD_PATH_TEMPLATE
+
+          # Returns a fully-qualified tenant resource name string.
           # @param project [String]
+          # @param tenant [String]
           # @return [String]
-          def self.project_path project
-            PROJECT_PATH_TEMPLATE.render(
-              :"project" => project
+          def self.tenant_path project, tenant
+            TENANT_PATH_TEMPLATE.render(
+              :"project" => project,
+              :"tenant" => tenant
+            )
+          end
+
+          # Returns a fully-qualified company_old resource name string.
+          # @param project [String]
+          # @param company [String]
+          # @return [String]
+          def self.company_old_path project, company
+            COMPANY_OLD_PATH_TEMPLATE.render(
+              :"project" => project,
+              :"company" => company
             )
           end
 
@@ -179,7 +198,10 @@ module Google
             @complete_query = Google::Gax.create_api_call(
               @completion_stub.method(:complete_query),
               defaults["complete_query"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
             )
           end
 
@@ -188,13 +210,16 @@ module Google
           # Completes the specified prefix with keyword suggestions.
           # Intended for use by a job search auto-complete search box.
           #
-          # @param name [String]
+          # @param parent [String]
           #   Required.
           #
-          #   Resource name of project the completion is performed within.
+          #   Resource name of tenant the completion is performed within.
           #
-          #   The format is "projects/{project_id}", for example,
-          #   "projects/api-test-project".
+          #   The format is "projects/{project_id}/tenants/{tenant_id}", for example,
+          #   "projects/api-test-project/tenant/foo".
+          #
+          #   Tenant id is optional and the default tenant is used if unspecified, for
+          #   example, "projects/api-test-project".
           # @param query [String]
           #   Required.
           #
@@ -236,13 +261,17 @@ module Google
           #   are returned.
           #
           #   The maximum number of allowed characters is 255.
-          # @param company_name [String]
+          # @param company [String]
           #   Optional.
           #
           #   If provided, restricts completion to specified company.
           #
-          #   The format is "projects/{project_id}/companies/{company_id}", for example,
-          #   "projects/api-test-project/companies/foo".
+          #   The format is
+          #   "projects/{project_id}/tenants/{tenant_id}/companies/{company_id}", for
+          #   example, "projects/api-test-project/tenants/foo/companies/bar".
+          #
+          #   Tenant id is optional and the default tenant is used if unspecified, for
+          #   example, "projects/api-test-project/companies/bar".
           # @param scope [Google::Cloud::Talent::V4beta1::CompleteQueryRequest::CompletionScope]
           #   Optional.
           #
@@ -265,31 +294,31 @@ module Google
           #   require "google/cloud/talent"
           #
           #   completion_client = Google::Cloud::Talent::Completion.new(version: :v4beta1)
-          #   formatted_name = Google::Cloud::Talent::V4beta1::CompletionClient.project_path("[PROJECT]")
+          #   formatted_parent = Google::Cloud::Talent::V4beta1::CompletionClient.tenant_path("[PROJECT]", "[TENANT]")
           #
           #   # TODO: Initialize `query`:
           #   query = ''
           #
           #   # TODO: Initialize `page_size`:
           #   page_size = 0
-          #   response = completion_client.complete_query(formatted_name, query, page_size)
+          #   response = completion_client.complete_query(formatted_parent, query, page_size)
 
           def complete_query \
-              name,
+              parent,
               query,
               page_size,
               language_codes: nil,
-              company_name: nil,
+              company: nil,
               scope: nil,
               type: nil,
               options: nil,
               &block
             req = {
-              name: name,
+              parent: parent,
               query: query,
               page_size: page_size,
               language_codes: language_codes,
-              company_name: company_name,
+              company: company,
               scope: scope,
               type: type
             }.delete_if { |_, v| v.nil? }

@@ -14,7 +14,7 @@
 #
 # EDITING INSTRUCTIONS
 # This file was generated from the file
-# https://github.com/googleapis/googleapis/blob/master/google/cloud/talent/v4beta1/tenant_service.proto,
+# https://github.com/googleapis/googleapis/blob/master/google/cloud/talent/v4beta1/application_service.proto,
 # and updates to that file get reflected here through a refresh process.
 # For the short term, the refresh process will only be runnable by Google
 # engineers.
@@ -25,20 +25,21 @@ require "pathname"
 
 require "google/gax"
 
-require "google/cloud/talent/v4beta1/tenant_service_pb"
+require "google/cloud/talent/v4beta1/application_service_pb"
 require "google/cloud/talent/v4beta1/credentials"
 
 module Google
   module Cloud
     module Talent
       module V4beta1
-        # A service that handles tenant management, including CRUD and enumeration.
+        # A service that handles application management, including CRUD and
+        # enumeration.
         #
-        # @!attribute [r] tenant_service_stub
-        #   @return [Google::Cloud::Talent::V4beta1::TenantService::Stub]
-        class TenantServiceClient
+        # @!attribute [r] application_service_stub
+        #   @return [Google::Cloud::Talent::V4beta1::ApplicationService::Stub]
+        class ApplicationServiceClient
           # @private
-          attr_reader :tenant_service_stub
+          attr_reader :application_service_stub
 
           # The default address of the service.
           SERVICE_ADDRESS = "jobs.googleapis.com".freeze
@@ -52,10 +53,10 @@ module Google
           DEFAULT_TIMEOUT = 30
 
           PAGE_DESCRIPTORS = {
-            "list_tenants" => Google::Gax::PageDescriptor.new(
+            "list_applications" => Google::Gax::PageDescriptor.new(
               "page_token",
               "next_page_token",
-              "tenants")
+              "applications")
           }.freeze
 
           private_constant :PAGE_DESCRIPTORS
@@ -68,35 +69,43 @@ module Google
           ].freeze
 
 
-          PROJECT_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
-            "projects/{project}"
+          PROFILE_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+            "projects/{project}/tenants/{tenant}/profiles/{profile}"
           )
 
-          private_constant :PROJECT_PATH_TEMPLATE
+          private_constant :PROFILE_PATH_TEMPLATE
 
-          TENANT_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
-            "projects/{project}/tenants/{tenant}"
+          APPLICATION_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+            "projects/{project}/tenants/{tenant}/profiles/{profile}/applications/{application}"
           )
 
-          private_constant :TENANT_PATH_TEMPLATE
+          private_constant :APPLICATION_PATH_TEMPLATE
 
-          # Returns a fully-qualified project resource name string.
+          # Returns a fully-qualified profile resource name string.
           # @param project [String]
+          # @param tenant [String]
+          # @param profile [String]
           # @return [String]
-          def self.project_path project
-            PROJECT_PATH_TEMPLATE.render(
-              :"project" => project
+          def self.profile_path project, tenant, profile
+            PROFILE_PATH_TEMPLATE.render(
+              :"project" => project,
+              :"tenant" => tenant,
+              :"profile" => profile
             )
           end
 
-          # Returns a fully-qualified tenant resource name string.
+          # Returns a fully-qualified application resource name string.
           # @param project [String]
           # @param tenant [String]
+          # @param profile [String]
+          # @param application [String]
           # @return [String]
-          def self.tenant_path project, tenant
-            TENANT_PATH_TEMPLATE.render(
+          def self.application_path project, tenant, profile, application
+            APPLICATION_PATH_TEMPLATE.render(
               :"project" => project,
-              :"tenant" => tenant
+              :"tenant" => tenant,
+              :"profile" => profile,
+              :"application" => application
             )
           end
 
@@ -142,7 +151,7 @@ module Google
             # the gRPC module only when it's required.
             # See https://github.com/googleapis/toolkit/issues/446
             require "google/gax/grpc"
-            require "google/cloud/talent/v4beta1/tenant_service_services_pb"
+            require "google/cloud/talent/v4beta1/application_service_services_pb"
 
             credentials ||= Google::Cloud::Talent::V4beta1::Credentials.default
 
@@ -173,11 +182,11 @@ module Google
             headers = { :"x-goog-api-client" => google_api_client }
             headers.merge!(metadata) unless metadata.nil?
             client_config_file = Pathname.new(__dir__).join(
-              "tenant_service_client_config.json"
+              "application_service_client_config.json"
             )
             defaults = client_config_file.open do |f|
               Google::Gax.construct_settings(
-                "google.cloud.talent.v4beta1.TenantService",
+                "google.cloud.talent.v4beta1.ApplicationService",
                 JSON.parse(f.read),
                 client_config,
                 Google::Gax::Grpc::STATUS_CODE_NAMES,
@@ -192,7 +201,7 @@ module Google
             service_path = self.class::SERVICE_ADDRESS
             port = self.class::DEFAULT_SERVICE_PORT
             interceptors = self.class::GRPC_INTERCEPTORS
-            @tenant_service_stub = Google::Gax::Grpc.create_stub(
+            @application_service_stub = Google::Gax::Grpc.create_stub(
               service_path,
               port,
               chan_creds: chan_creds,
@@ -200,44 +209,44 @@ module Google
               updater_proc: updater_proc,
               scopes: scopes,
               interceptors: interceptors,
-              &Google::Cloud::Talent::V4beta1::TenantService::Stub.method(:new)
+              &Google::Cloud::Talent::V4beta1::ApplicationService::Stub.method(:new)
             )
 
-            @create_tenant = Google::Gax.create_api_call(
-              @tenant_service_stub.method(:create_tenant),
-              defaults["create_tenant"],
+            @create_application = Google::Gax.create_api_call(
+              @application_service_stub.method(:create_application),
+              defaults["create_application"],
               exception_transformer: exception_transformer,
               params_extractor: proc do |request|
                 {'parent' => request.parent}
               end
             )
-            @get_tenant = Google::Gax.create_api_call(
-              @tenant_service_stub.method(:get_tenant),
-              defaults["get_tenant"],
+            @get_application = Google::Gax.create_api_call(
+              @application_service_stub.method(:get_application),
+              defaults["get_application"],
               exception_transformer: exception_transformer,
               params_extractor: proc do |request|
                 {'name' => request.name}
               end
             )
-            @update_tenant = Google::Gax.create_api_call(
-              @tenant_service_stub.method(:update_tenant),
-              defaults["update_tenant"],
+            @update_application = Google::Gax.create_api_call(
+              @application_service_stub.method(:update_application),
+              defaults["update_application"],
               exception_transformer: exception_transformer,
               params_extractor: proc do |request|
-                {'tenant.name' => request.tenant.name}
+                {'application.name' => request.application.name}
               end
             )
-            @delete_tenant = Google::Gax.create_api_call(
-              @tenant_service_stub.method(:delete_tenant),
-              defaults["delete_tenant"],
+            @delete_application = Google::Gax.create_api_call(
+              @application_service_stub.method(:delete_application),
+              defaults["delete_application"],
               exception_transformer: exception_transformer,
               params_extractor: proc do |request|
                 {'name' => request.name}
               end
             )
-            @list_tenants = Google::Gax.create_api_call(
-              @tenant_service_stub.method(:list_tenants),
-              defaults["list_tenants"],
+            @list_applications = Google::Gax.create_api_call(
+              @application_service_stub.method(:list_applications),
+              defaults["list_applications"],
               exception_transformer: exception_transformer,
               params_extractor: proc do |request|
                 {'parent' => request.parent}
@@ -247,149 +256,154 @@ module Google
 
           # Service calls
 
-          # Creates a new tenant entity.
+          # Creates a new application entity.
           #
           # @param parent [String]
           #   Required.
           #
-          #   Resource name of the project under which the tenant is created.
+          #   Resource name of the profile under which the application is created.
           #
-          #   The format is "projects/{project_id}", for example,
-          #   "projects/api-test-project".
-          # @param tenant [Google::Cloud::Talent::V4beta1::Tenant | Hash]
+          #   The format is
+          #   "projects/{project_id}/tenants/{tenant_id}/profiles/{profile_id}", for
+          #   example, "projects/test-project/tenants/test-tenant/profiles/test-profile".
+          # @param application [Google::Cloud::Talent::V4beta1::Application | Hash]
           #   Required.
           #
-          #   The tenant to be created.
-          #   A hash of the same form as `Google::Cloud::Talent::V4beta1::Tenant`
+          #   The application to be created.
+          #   A hash of the same form as `Google::Cloud::Talent::V4beta1::Application`
           #   can also be provided.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
           # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result [Google::Cloud::Talent::V4beta1::Tenant]
+          # @yieldparam result [Google::Cloud::Talent::V4beta1::Application]
           # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @return [Google::Cloud::Talent::V4beta1::Tenant]
+          # @return [Google::Cloud::Talent::V4beta1::Application]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
           #   require "google/cloud/talent"
           #
-          #   tenant_client = Google::Cloud::Talent::TenantService.new(version: :v4beta1)
-          #   formatted_parent = Google::Cloud::Talent::V4beta1::TenantServiceClient.project_path("[PROJECT]")
+          #   application_client = Google::Cloud::Talent::ApplicationService.new(version: :v4beta1)
+          #   formatted_parent = Google::Cloud::Talent::V4beta1::ApplicationServiceClient.profile_path("[PROJECT]", "[TENANT]", "[PROFILE]")
           #
-          #   # TODO: Initialize `tenant`:
-          #   tenant = {}
-          #   response = tenant_client.create_tenant(formatted_parent, tenant)
+          #   # TODO: Initialize `application`:
+          #   application = {}
+          #   response = application_client.create_application(formatted_parent, application)
 
-          def create_tenant \
+          def create_application \
               parent,
-              tenant,
+              application,
               options: nil,
               &block
             req = {
               parent: parent,
-              tenant: tenant
+              application: application
             }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Cloud::Talent::V4beta1::CreateTenantRequest)
-            @create_tenant.call(req, options, &block)
+            req = Google::Gax::to_proto(req, Google::Cloud::Talent::V4beta1::CreateApplicationRequest)
+            @create_application.call(req, options, &block)
           end
 
-          # Retrieves specified tenant.
+          # Retrieves specified application.
           #
           # @param name [String]
           #   Required.
           #
-          #   The resource name of the tenant to be retrieved.
+          #   The resource name of the application to be retrieved.
           #
-          #   The format is "projects/{project_id}/tenants/{tenant_id}", for example,
-          #   "projects/api-test-project/tenants/foo".
+          #   The format is
+          #   "projects/{project_id}/tenants/{tenant_id}/profiles/{profile_id}/applications/{application_id}",
+          #   for example,
+          #   "projects/test-project/tenants/test-tenant/profiles/test-profile/applications/test-application".
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
           # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result [Google::Cloud::Talent::V4beta1::Tenant]
+          # @yieldparam result [Google::Cloud::Talent::V4beta1::Application]
           # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @return [Google::Cloud::Talent::V4beta1::Tenant]
+          # @return [Google::Cloud::Talent::V4beta1::Application]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
           #   require "google/cloud/talent"
           #
-          #   tenant_client = Google::Cloud::Talent::TenantService.new(version: :v4beta1)
-          #   formatted_name = Google::Cloud::Talent::V4beta1::TenantServiceClient.tenant_path("[PROJECT]", "[TENANT]")
-          #   response = tenant_client.get_tenant(formatted_name)
+          #   application_client = Google::Cloud::Talent::ApplicationService.new(version: :v4beta1)
+          #   formatted_name = Google::Cloud::Talent::V4beta1::ApplicationServiceClient.application_path("[PROJECT]", "[TENANT]", "[PROFILE]", "[APPLICATION]")
+          #   response = application_client.get_application(formatted_name)
 
-          def get_tenant \
+          def get_application \
               name,
               options: nil,
               &block
             req = {
               name: name
             }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Cloud::Talent::V4beta1::GetTenantRequest)
-            @get_tenant.call(req, options, &block)
+            req = Google::Gax::to_proto(req, Google::Cloud::Talent::V4beta1::GetApplicationRequest)
+            @get_application.call(req, options, &block)
           end
 
-          # Updates specified tenant.
+          # Updates specified application.
           #
-          # @param tenant [Google::Cloud::Talent::V4beta1::Tenant | Hash]
+          # @param application [Google::Cloud::Talent::V4beta1::Application | Hash]
           #   Required.
           #
-          #   The tenant resource to replace the current resource in the system.
-          #   A hash of the same form as `Google::Cloud::Talent::V4beta1::Tenant`
+          #   The application resource to replace the current resource in the system.
+          #   A hash of the same form as `Google::Cloud::Talent::V4beta1::Application`
           #   can also be provided.
           # @param update_mask [Google::Protobuf::FieldMask | Hash]
           #   Optional but strongly recommended for the best service
           #   experience.
           #
           #   If
-          #   {Google::Cloud::Talent::V4beta1::UpdateTenantRequest#update_mask update_mask}
+          #   {Google::Cloud::Talent::V4beta1::UpdateApplicationRequest#update_mask update_mask}
           #   is provided, only the specified fields in
-          #   {Google::Cloud::Talent::V4beta1::UpdateTenantRequest#tenant tenant} are
-          #   updated. Otherwise all the fields are updated.
+          #   {Google::Cloud::Talent::V4beta1::UpdateApplicationRequest#application application}
+          #   are updated. Otherwise all the fields are updated.
           #
-          #   A field mask to specify the tenant fields to be updated. Only
-          #   top level fields of {Google::Cloud::Talent::V4beta1::Tenant Tenant} are
-          #   supported.
+          #   A field mask to specify the application fields to be updated. Only
+          #   top level fields of {Google::Cloud::Talent::V4beta1::Application Application}
+          #   are supported.
           #   A hash of the same form as `Google::Protobuf::FieldMask`
           #   can also be provided.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
           # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result [Google::Cloud::Talent::V4beta1::Tenant]
+          # @yieldparam result [Google::Cloud::Talent::V4beta1::Application]
           # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @return [Google::Cloud::Talent::V4beta1::Tenant]
+          # @return [Google::Cloud::Talent::V4beta1::Application]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
           #   require "google/cloud/talent"
           #
-          #   tenant_client = Google::Cloud::Talent::TenantService.new(version: :v4beta1)
+          #   application_client = Google::Cloud::Talent::ApplicationService.new(version: :v4beta1)
           #
-          #   # TODO: Initialize `tenant`:
-          #   tenant = {}
-          #   response = tenant_client.update_tenant(tenant)
+          #   # TODO: Initialize `application`:
+          #   application = {}
+          #   response = application_client.update_application(application)
 
-          def update_tenant \
-              tenant,
+          def update_application \
+              application,
               update_mask: nil,
               options: nil,
               &block
             req = {
-              tenant: tenant,
+              application: application,
               update_mask: update_mask
             }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Cloud::Talent::V4beta1::UpdateTenantRequest)
-            @update_tenant.call(req, options, &block)
+            req = Google::Gax::to_proto(req, Google::Cloud::Talent::V4beta1::UpdateApplicationRequest)
+            @update_application.call(req, options, &block)
           end
 
-          # Deletes specified tenant.
+          # Deletes specified application.
           #
           # @param name [String]
           #   Required.
           #
-          #   The resource name of the tenant to be deleted.
+          #   The resource name of the application to be deleted.
           #
-          #   The format is "projects/{project_id}/tenants/{tenant_id}", for example,
-          #   "projects/api-test-project/tenants/foo".
+          #   The format is
+          #   "projects/{project_id}/tenants/{tenant_id}/profiles/{profile_id}/applications/{application_id}",
+          #   for example,
+          #   "projects/test-project/tenants/test-tenant/profiles/test-profile/applications/test-application".
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -400,31 +414,32 @@ module Google
           # @example
           #   require "google/cloud/talent"
           #
-          #   tenant_client = Google::Cloud::Talent::TenantService.new(version: :v4beta1)
-          #   formatted_name = Google::Cloud::Talent::V4beta1::TenantServiceClient.tenant_path("[PROJECT]", "[TENANT]")
-          #   tenant_client.delete_tenant(formatted_name)
+          #   application_client = Google::Cloud::Talent::ApplicationService.new(version: :v4beta1)
+          #   formatted_name = Google::Cloud::Talent::V4beta1::ApplicationServiceClient.application_path("[PROJECT]", "[TENANT]", "[PROFILE]", "[APPLICATION]")
+          #   application_client.delete_application(formatted_name)
 
-          def delete_tenant \
+          def delete_application \
               name,
               options: nil,
               &block
             req = {
               name: name
             }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Cloud::Talent::V4beta1::DeleteTenantRequest)
-            @delete_tenant.call(req, options, &block)
+            req = Google::Gax::to_proto(req, Google::Cloud::Talent::V4beta1::DeleteApplicationRequest)
+            @delete_application.call(req, options, &block)
             nil
           end
 
-          # Lists all tenants associated with the project.
+          # Lists all applications associated with the profile.
           #
           # @param parent [String]
           #   Required.
           #
-          #   Resource name of the project under which the tenant is created.
+          #   Resource name of the profile under which the application is created.
           #
-          #   The format is "projects/{project_id}", for example,
-          #   "projects/api-test-project".
+          #   The format is
+          #   "projects/{project_id}/tenants/{tenant_id}/profiles/{profile_id}", for
+          #   example, "projects/test-project/tenants/test-tenant/profiles/test-profile".
           # @param page_size [Integer]
           #   The maximum number of resources contained in the underlying API
           #   response. If page streaming is performed per-resource, this
@@ -435,10 +450,10 @@ module Google
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
           # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result [Google::Gax::PagedEnumerable<Google::Cloud::Talent::V4beta1::Tenant>]
+          # @yieldparam result [Google::Gax::PagedEnumerable<Google::Cloud::Talent::V4beta1::Application>]
           # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @return [Google::Gax::PagedEnumerable<Google::Cloud::Talent::V4beta1::Tenant>]
-          #   An enumerable of Google::Cloud::Talent::V4beta1::Tenant instances.
+          # @return [Google::Gax::PagedEnumerable<Google::Cloud::Talent::V4beta1::Application>]
+          #   An enumerable of Google::Cloud::Talent::V4beta1::Application instances.
           #   See Google::Gax::PagedEnumerable documentation for other
           #   operations such as per-page iteration or access to the response
           #   object.
@@ -446,23 +461,23 @@ module Google
           # @example
           #   require "google/cloud/talent"
           #
-          #   tenant_client = Google::Cloud::Talent::TenantService.new(version: :v4beta1)
-          #   formatted_parent = Google::Cloud::Talent::V4beta1::TenantServiceClient.project_path("[PROJECT]")
+          #   application_client = Google::Cloud::Talent::ApplicationService.new(version: :v4beta1)
+          #   formatted_parent = Google::Cloud::Talent::V4beta1::ApplicationServiceClient.profile_path("[PROJECT]", "[TENANT]", "[PROFILE]")
           #
           #   # Iterate over all results.
-          #   tenant_client.list_tenants(formatted_parent).each do |element|
+          #   application_client.list_applications(formatted_parent).each do |element|
           #     # Process element.
           #   end
           #
           #   # Or iterate over results one page at a time.
-          #   tenant_client.list_tenants(formatted_parent).each_page do |page|
+          #   application_client.list_applications(formatted_parent).each_page do |page|
           #     # Process each page at a time.
           #     page.each do |element|
           #       # Process element.
           #     end
           #   end
 
-          def list_tenants \
+          def list_applications \
               parent,
               page_size: nil,
               options: nil,
@@ -471,8 +486,8 @@ module Google
               parent: parent,
               page_size: page_size
             }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Cloud::Talent::V4beta1::ListTenantsRequest)
-            @list_tenants.call(req, options, &block)
+            req = Google::Gax::to_proto(req, Google::Cloud::Talent::V4beta1::ListApplicationsRequest)
+            @list_applications.call(req, options, &block)
           end
         end
       end

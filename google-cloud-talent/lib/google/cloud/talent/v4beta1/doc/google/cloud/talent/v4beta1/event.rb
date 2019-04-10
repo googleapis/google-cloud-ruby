@@ -46,16 +46,12 @@ module Google
         #   @return [Google::Cloud::Talent::V4beta1::ProfileEvent]
         #     An event issued when a profile searcher interacts with the application
         #     that implements Cloud Talent Solution.
-        # @!attribute [rw] extra_info
-        #   @return [Hash{String => String}]
+        # @!attribute [rw] event_notes
+        #   @return [String]
         #     Optional.
         #
-        #     Extra information about this event. Used for storing information with no
-        #     matching field in {Google::Cloud::Talent::V4beta1::Event event} payload, for
-        #     example, user application specific context or details.
-        #
-        #     At most 20 keys are supported. The maximum total size of all keys and
-        #     values is 2 KB.
+        #     Notes about the event provided by recruiters or other users, for example,
+        #     feedback on why a profile was bookmarked.
         class ClientEvent; end
 
         # An event issued when a job seeker interacts with the application that
@@ -196,8 +192,8 @@ module Google
         #
         #     The {Google::Cloud::Talent::V4beta1::Profile#name profile name(s)} associated
         #     with this client event.
-        # @!attribute [rw] job_id
-        #   @return [String]
+        # @!attribute [rw] jobs
+        #   @return [Array<String>]
         #     Optional.
         #
         #     The job ID associated with this client event if there is one. Leave it
@@ -219,31 +215,6 @@ module Google
 
             # The profile is bookmarked.
             BOOKMARK = 3
-
-            # Comment added to the profile.
-            COMMENT_ADDED = 4
-
-            # Email sent regarding the profile.
-            EMAIL_SENT = 5
-
-            # The resume of the profile is viewed.
-            RESUME_VIEWED = 6
-
-            # The profile is added to a job.
-            ADD_TO_JOB = 7
-
-            # The recruiter explicitly highlights that a given profile is interesting
-            # enough for later review or is a good result for the search.
-            POSITIVE_REACTION_TO_PROFILE = 8
-
-            # The recruiter explicitly highlights that a given profile is not
-            # interesting enough for later review or is not a good result for the
-            # search.
-            NEGATIVE_REACTION_TO_PROFILE = 9
-
-            # The candidate is interesting enough to set up an initial screen with the
-            # recruiter. This step may be skipped based on the interview process.
-            SCREEN = 10
           end
         end
       end

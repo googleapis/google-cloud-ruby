@@ -7,9 +7,12 @@ require 'google/protobuf'
 require 'google/api/annotations_pb'
 require 'google/protobuf/timestamp_pb'
 require 'google/protobuf/wrappers_pb'
+require 'google/type/date_pb'
+require 'google/type/dayofweek_pb'
 require 'google/type/latlng_pb'
 require 'google/type/money_pb'
 require 'google/type/postal_address_pb'
+require 'google/type/timeofday_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.cloud.talent.v4beta1.TimestampRange" do
     optional :start_time, :message, 1, "google.protobuf.Timestamp"
@@ -106,6 +109,30 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     value :YEARLY, 5
     value :ONE_TIME, 6
     value :OTHER_COMPENSATION_UNIT, 7
+  end
+  add_message "google.cloud.talent.v4beta1.Certification" do
+    optional :display_name, :string, 1
+    optional :acquire_date, :message, 2, "google.type.Date"
+    optional :expire_date, :message, 3, "google.type.Date"
+    optional :authority, :string, 4
+    optional :description, :string, 5
+  end
+  add_message "google.cloud.talent.v4beta1.Skill" do
+    optional :display_name, :string, 1
+    optional :last_used_date, :message, 2, "google.type.Date"
+    optional :level, :enum, 3, "google.cloud.talent.v4beta1.SkillProficiencyLevel"
+    optional :context, :string, 4
+    optional :skill_name_snippet, :string, 5
+  end
+  add_message "google.cloud.talent.v4beta1.Interview" do
+    optional :rating, :message, 6, "google.cloud.talent.v4beta1.Rating"
+    optional :outcome, :enum, 7, "google.cloud.talent.v4beta1.Outcome"
+  end
+  add_message "google.cloud.talent.v4beta1.Rating" do
+    optional :overall, :double, 1
+    optional :min, :double, 2
+    optional :max, :double, 3
+    optional :interval, :double, 4
   end
   add_enum "google.cloud.talent.v4beta1.CompanySize" do
     value :COMPANY_SIZE_UNSPECIFIED, 0
@@ -225,7 +252,21 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     value :TRANSIT, 2
     value :WALKING, 3
     value :CYCLING, 4
-    value :TRANSIT_ACCESSIBLE, 5
+  end
+  add_enum "google.cloud.talent.v4beta1.SkillProficiencyLevel" do
+    value :SKILL_PROFICIENCY_LEVEL_UNSPECIFIED, 0
+    value :FUNDAMENTAL_AWARENESS, 1
+    value :NOVICE, 2
+    value :INTERMEDIATE, 3
+    value :ADVANCED, 4
+    value :EXPERT, 5
+  end
+  add_enum "google.cloud.talent.v4beta1.Outcome" do
+    value :OUTCOME_UNSPECIFIED, 0
+    value :POSITIVE, 1
+    value :NEUTRAL, 2
+    value :NEGATIVE, 3
+    value :OUTCOME_NOT_AVAILABLE, 4
   end
 end
 
@@ -247,6 +288,10 @@ module Google
         CompensationInfo::CompensationRange = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4beta1.CompensationInfo.CompensationRange").msgclass
         CompensationInfo::CompensationType = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4beta1.CompensationInfo.CompensationType").enummodule
         CompensationInfo::CompensationUnit = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4beta1.CompensationInfo.CompensationUnit").enummodule
+        Certification = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4beta1.Certification").msgclass
+        Skill = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4beta1.Skill").msgclass
+        Interview = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4beta1.Interview").msgclass
+        Rating = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4beta1.Rating").msgclass
         CompanySize = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4beta1.CompanySize").enummodule
         JobBenefit = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4beta1.JobBenefit").enummodule
         DegreeType = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4beta1.DegreeType").enummodule
@@ -258,6 +303,8 @@ module Google
         ContactInfoUsage = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4beta1.ContactInfoUsage").enummodule
         HtmlSanitization = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4beta1.HtmlSanitization").enummodule
         CommuteMethod = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4beta1.CommuteMethod").enummodule
+        SkillProficiencyLevel = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4beta1.SkillProficiencyLevel").enummodule
+        Outcome = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4beta1.Outcome").enummodule
       end
     end
   end
