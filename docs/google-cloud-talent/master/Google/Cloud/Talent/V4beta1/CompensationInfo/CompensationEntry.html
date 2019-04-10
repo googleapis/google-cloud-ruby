@@ -95,17 +95,9 @@ as base pay, bonus, or other compensation type.</p>
 <p>Annualization: One compensation entry can be annualized if</p>
 
 <ul>
-<li>it contains valid
-<span class='object_link'><a href="#amount-instance_method" title="Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#amount (method)">amount</a></span>
-or
-<span class='object_link'><a href="#range-instance_method" title="Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#range (method)">range</a></span>.</li>
-<li>and its
-<span class='object_link'><a href="#expected_units_per_year-instance_method" title="Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#expected_units_per_year (method)">expected_units_per_year</a></span>
-is set or can be derived. Its annualized range is determined as
-(<span class='object_link'><a href="#amount-instance_method" title="Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#amount (method)">amount</a></span>
-or
-<span class='object_link'><a href="#range-instance_method" title="Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#range (method)">range</a></span>)
-times
+<li>it contains valid <span class='object_link'><a href="#amount-instance_method" title="Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#amount (method)">amount</a></span> or <span class='object_link'><a href="#range-instance_method" title="Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#range (method)">range</a></span>.</li>
+<li>and its <span class='object_link'><a href="#expected_units_per_year-instance_method" title="Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#expected_units_per_year (method)">expected_units_per_year</a></span> is set or can be derived.
+Its annualized range is determined as (<span class='object_link'><a href="#amount-instance_method" title="Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#amount (method)">amount</a></span> or <span class='object_link'><a href="#range-instance_method" title="Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#range (method)">range</a></span>) times
 <span class='object_link'><a href="#expected_units_per_year-instance_method" title="Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#expected_units_per_year (method)">expected_units_per_year</a></span>.</li>
 </ul>
 
@@ -335,10 +327,10 @@ times
       <pre class="lines">
 
 
-376</pre>
+343</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/common.rb', line 376</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/common.rb', line 343</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry (class)">CompensationEntry</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -398,10 +390,10 @@ bonus.</p>
       <pre class="lines">
 
 
-376</pre>
+343</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/common.rb', line 376</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/common.rb', line 343</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry (class)">CompensationEntry</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -425,10 +417,8 @@ bonus.</p>
     <p>Returns Optional.</p>
 
 <p>Expected number of units paid each year. If not specified, when
-<span class='object_link'><a href="../Job.html#employment_types-instance_method" title="Google::Cloud::Talent::V4beta1::Job#employment_types (method)">Job#employment_types</a></span>
-is FULLTIME, a default value is inferred based on
-<span class='object_link'><a href="#unit-instance_method" title="Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#unit (method)">unit</a></span>.
-Default values:</p>
+<span class='object_link'><a href="../Job.html#employment_types-instance_method" title="Google::Cloud::Talent::V4beta1::Job#employment_types (method)">Job#employment_types</a></span> is FULLTIME, a default value is inferred
+based on <span class='object_link'><a href="#unit-instance_method" title="Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#unit (method)">unit</a></span>. Default values:</p>
 
 <ul>
 <li>HOURLY: 2080</li>
@@ -457,10 +447,8 @@ Default values:</p>
         <div class='inline'><p>Optional.</p>
 
 <p>Expected number of units paid each year. If not specified, when
-<span class='object_link'><a href="../Job.html#employment_types-instance_method" title="Google::Cloud::Talent::V4beta1::Job#employment_types (method)">Job#employment_types</a></span>
-is FULLTIME, a default value is inferred based on
-<span class='object_link'><a href="#unit-instance_method" title="Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#unit (method)">unit</a></span>.
-Default values:</p>
+<span class='object_link'><a href="../Job.html#employment_types-instance_method" title="Google::Cloud::Talent::V4beta1::Job#employment_types (method)">Job#employment_types</a></span> is FULLTIME, a default value is inferred
+based on <span class='object_link'><a href="#unit-instance_method" title="Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#unit (method)">unit</a></span>. Default values:</p>
 
 <ul>
 <li>HOURLY: 2080</li>
@@ -481,10 +469,10 @@ Default values:</p>
       <pre class="lines">
 
 
-376</pre>
+343</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/common.rb', line 376</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/common.rb', line 343</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry (class)">CompensationEntry</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -540,10 +528,10 @@ Default values:</p>
       <pre class="lines">
 
 
-376</pre>
+343</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/common.rb', line 376</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/common.rb', line 343</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry (class)">CompensationEntry</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -603,10 +591,10 @@ Default values:</p>
       <pre class="lines">
 
 
-376</pre>
+343</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/common.rb', line 376</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/common.rb', line 343</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry (class)">CompensationEntry</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -631,8 +619,7 @@ Default values:</p>
 
 <p>Frequency of the specified amount.</p>
 
-<p>Default is
-<span class='object_link'><a href="CompensationUnit.html#OTHER_COMPENSATION_UNIT-constant" title="Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationUnit::OTHER_COMPENSATION_UNIT (constant)">CompensationUnit::OTHER_COMPENSATION_UNIT</a></span>.</p>
+<p>Default is <span class='object_link'><a href="CompensationUnit.html#OTHER_COMPENSATION_UNIT-constant" title="Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationUnit::OTHER_COMPENSATION_UNIT (constant)">CompensationUnit::OTHER_COMPENSATION_UNIT</a></span>.</p>
 
 
   </div>
@@ -654,8 +641,7 @@ Default values:</p>
 
 <p>Frequency of the specified amount.</p>
 
-<p>Default is
-<span class='object_link'><a href="CompensationUnit.html#OTHER_COMPENSATION_UNIT-constant" title="Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationUnit::OTHER_COMPENSATION_UNIT (constant)">CompensationUnit::OTHER_COMPENSATION_UNIT</a></span>.</p>
+<p>Default is <span class='object_link'><a href="CompensationUnit.html#OTHER_COMPENSATION_UNIT-constant" title="Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationUnit::OTHER_COMPENSATION_UNIT (constant)">CompensationUnit::OTHER_COMPENSATION_UNIT</a></span>.</p>
 </div>
       
     </li>
@@ -668,10 +654,10 @@ Default values:</p>
       <pre class="lines">
 
 
-376</pre>
+343</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/common.rb', line 376</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/common.rb', line 343</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry (class)">CompensationEntry</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>

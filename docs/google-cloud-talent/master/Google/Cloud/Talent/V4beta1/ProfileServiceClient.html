@@ -1401,7 +1401,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-518
 519
 520
 521
@@ -1411,10 +1410,11 @@ retries, etc.</p>
 525
 526
 527
-528</pre>
+528
+529</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/profile_service_client.rb', line 518</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/profile_service_client.rb', line 519</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete_profile'>delete_profile</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -1969,9 +1969,7 @@ object.</p>
 <p>For example, search by raw queries &quot;software engineer in Mountain View&quot; or
 search by structured filters (location filter, education filter, etc.).</p>
 
-<p>See
-<span class='object_link'><a href="SearchProfilesRequest.html" title="Google::Cloud::Talent::V4beta1::SearchProfilesRequest (class)">SearchProfilesRequest</a></span>
-for more information.</p>
+<p>See <span class='object_link'><a href="SearchProfilesRequest.html" title="Google::Cloud::Talent::V4beta1::SearchProfilesRequest (class)">SearchProfilesRequest</a></span> for more information.</p>
 
 
   </div>
@@ -2060,8 +2058,7 @@ can also be provided.</p>
         &mdash;
         <div class='inline'><p>Optional.</p>
 
-<p>Search query to execute. See
-<span class='object_link'><a href="ProfileQuery.html" title="Google::Cloud::Talent::V4beta1::ProfileQuery (class)">ProfileQuery</a></span> for more details.
+<p>Search query to execute. See <span class='object_link'><a href="ProfileQuery.html" title="Google::Cloud::Talent::V4beta1::ProfileQuery (class)">ProfileQuery</a></span> for more details.
 A hash of the same form as <code>Google::Cloud::Talent::V4beta1::ProfileQuery</code>
 can also be provided.</p>
 </div>
@@ -2100,9 +2097,7 @@ resources in a page.</p>
         <div class='inline'><p>Optional.</p>
 
 <p>An integer that specifies the current offset (that is, starting result) in
-search results. This field is only considered if
-<span class='object_link'><a href="SearchProfilesRequest.html#page_token-instance_method" title="Google::Cloud::Talent::V4beta1::SearchProfilesRequest#page_token (method)">page_token</a></span>
-is unset.</p>
+search results. This field is only considered if <span class='object_link'><a href="SearchProfilesRequest.html#page_token-instance_method" title="Google::Cloud::Talent::V4beta1::SearchProfilesRequest#page_token (method)">page_token</a></span> is unset.</p>
 
 <p>The maximum allowed value is 5000. Otherwise an error is thrown.</p>
 
@@ -2202,8 +2197,7 @@ is case in-sensitive sort (false).</p>
         <div class='inline'><p>Optional.</p>
 
 <p>A list of expressions specifies histogram requests against matching
-profiles for
-<span class='object_link'><a href="SearchProfilesRequest.html" title="Google::Cloud::Talent::V4beta1::SearchProfilesRequest (class)">SearchProfilesRequest</a></span>.</p>
+profiles for <span class='object_link'><a href="SearchProfilesRequest.html" title="Google::Cloud::Talent::V4beta1::SearchProfilesRequest (class)">SearchProfilesRequest</a></span>.</p>
 
 <p>The expression syntax looks like a function definition with optional
 parameters.</p>
@@ -2263,29 +2257,19 @@ lower levels of education degree.</li>
 <li>experience_in_months: experience in months. 0 means 0 month to 1 month
 (exclusive).</li>
 <li>application_date: The application date specifies application start dates.
-See
-<span class='object_link'><a href="ApplicationDateFilter.html" title="Google::Cloud::Talent::V4beta1::ApplicationDateFilter (class)">ApplicationDateFilter</a></span>
-for more details.</li>
+See <span class='object_link'><a href="ApplicationDateFilter.html" title="Google::Cloud::Talent::V4beta1::ApplicationDateFilter (class)">ApplicationDateFilter</a></span> for more details.</li>
 <li>application_outcome_notes: The application outcome reason specifies the
 reasons behind the outcome of the job application.
-See
-<span class='object_link'><a href="ApplicationOutcomeNotesFilter.html" title="Google::Cloud::Talent::V4beta1::ApplicationOutcomeNotesFilter (class)">ApplicationOutcomeNotesFilter</a></span>
-for more details.</li>
+See <span class='object_link'><a href="ApplicationOutcomeNotesFilter.html" title="Google::Cloud::Talent::V4beta1::ApplicationOutcomeNotesFilter (class)">ApplicationOutcomeNotesFilter</a></span> for more details.</li>
 <li>application_last_stage: The application last stage specifies the last
 stage of job application.
-See
-<span class='object_link'><a href="ApplicationLastStageFilter.html" title="Google::Cloud::Talent::V4beta1::ApplicationLastStageFilter (class)">ApplicationLastStageFilter</a></span>
-for more details.</li>
+See ApplicationLastStageFilter for more details.</li>
 <li>application_job_title: The application job title specifies the job
 applied for in the application.
-See
-<span class='object_link'><a href="ApplicationJobFilter.html" title="Google::Cloud::Talent::V4beta1::ApplicationJobFilter (class)">ApplicationJobFilter</a></span>
-for more details.</li>
+See <span class='object_link'><a href="ApplicationJobFilter.html" title="Google::Cloud::Talent::V4beta1::ApplicationJobFilter (class)">ApplicationJobFilter</a></span> for more details.</li>
 <li>application_status: The application status specifies the status of job
 application.
-See
-<span class='object_link'><a href="ApplicationStatusFilter.html" title="Google::Cloud::Talent::V4beta1::ApplicationStatusFilter (class)">ApplicationStatusFilter</a></span>
-for more details.</li>
+See ApplicationStatusFilter for more details.</li>
 <li>hirable_status: Hirable status specifies the profile&#39;s hirable status.</li>
 <li>string_custom_attribute: String custom attributes. Values can be accessed
 via square bracket notation like string_custom_attribute[&quot;key1&quot;].</li>
@@ -2414,6 +2398,21 @@ object.</p>
       <pre class="lines">
 
 
+731
+732
+733
+734
+735
+736
+737
+738
+739
+740
+741
+742
+743
+744
+745
 746
 747
 748
@@ -2424,25 +2423,10 @@ object.</p>
 753
 754
 755
-756
-757
-758
-759
-760
-761
-762
-763
-764
-765
-766
-767
-768
-769
-770
-771</pre>
+756</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/profile_service_client.rb', line 746</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/profile_service_client.rb', line 731</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_search_profiles'>search_profiles</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -2647,7 +2631,8 @@ can also be provided.</p>
 <li>patents</li>
 <li>certifications</li>
 <li>recruitingNotes</li>
-<li>customAttributes
+<li>customAttributes</li>
+<li>groupId
 A hash of the same form as <code>Google::Protobuf::FieldMask</code>
 can also be provided.</li>
 </ul>
@@ -2753,7 +2738,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-479
 480
 481
 482
@@ -2764,10 +2748,11 @@ retries, etc.</p>
 487
 488
 489
-490</pre>
+490
+491</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/profile_service_client.rb', line 479</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/profile_service_client.rb', line 480</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update_profile'>update_profile</span> \
     <span class='id identifier rubyid_profile'>profile</span><span class='comma'>,</span>

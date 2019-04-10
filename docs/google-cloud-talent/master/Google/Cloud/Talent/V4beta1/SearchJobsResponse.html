@@ -415,6 +415,37 @@ with offset after this result set should contain all broadened results.</p>
       <pre class="lines">
 
 
+633
+634
+635
+636
+637
+638
+639
+640
+641
+642
+643
+644
+645
+646
+647
+648
+649
+650
+651
+652
+653
+654
+655
+656
+657
+658
+659
+660
+661
+662
+663
 664
 665
 666
@@ -425,55 +456,18 @@ with offset after this result set should contain all broadened results.</p>
 671
 672
 673
-674
-675
-676
-677
-678
-679
-680
-681
-682
-683
-684
-685
-686
-687
-688
-689
-690
-691
-692
-693
-694
-695
-696
-697
-698
-699
-700
-701
-702
-703
-704
-705
-706
-707
-708
-709</pre>
+674</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job_service.rb', line 664</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job_service.rb', line 633</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::SearchJobsResponse (class)">SearchJobsResponse</a></span></span>
   <span class='comment'># Output only.
 </span>  <span class='comment'>#
-</span>  <span class='comment'># Job entry with metadata inside
-</span>  <span class='comment'># {Google::Cloud::Talent::V4beta1::SearchJobsResponse SearchJobsResponse}.
+</span>  <span class='comment'># Job entry with metadata inside {Google::Cloud::Talent::V4beta1::SearchJobsResponse SearchJobsResponse}.
 </span>  <span class='comment'># @!attribute [rw] job
 </span>  <span class='comment'>#   @return [Google::Cloud::Talent::V4beta1::Job]
-</span>  <span class='comment'>#     Job resource that matches the specified
-</span>  <span class='comment'>#     {Google::Cloud::Talent::V4beta1::SearchJobsRequest SearchJobsRequest}.
+</span>  <span class='comment'>#     Job resource that matches the specified {Google::Cloud::Talent::V4beta1::SearchJobsRequest SearchJobsRequest}.
 </span>  <span class='comment'># @!attribute [rw] job_summary
 </span>  <span class='comment'>#   @return [String]
 </span>  <span class='comment'>#     A summary of the job with core information that&#39;s displayed on the search
@@ -485,12 +479,10 @@ with offset after this result set should contain all broadened results.</p>
 </span>  <span class='comment'>#     query keywords are enclosed in HTML bold tags.
 </span>  <span class='comment'># @!attribute [rw] search_text_snippet
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Contains snippets of text from the
-</span>  <span class='comment'>#     {Google::Cloud::Talent::V4beta1::Job#description Job#description} and
-</span>  <span class='comment'>#     similar fields that most closely match a search query&#39;s keywords, if
-</span>  <span class='comment'>#     available. All HTML tags in the original fields are stripped when
-</span>  <span class='comment'>#     returned in this field, and matching query keywords are enclosed in HTML
-</span>  <span class='comment'>#     bold tags.
+</span>  <span class='comment'>#     Contains snippets of text from the {Google::Cloud::Talent::V4beta1::Job#description Job#description} and similar
+</span>  <span class='comment'>#     fields that most closely match a search query&#39;s keywords, if available.
+</span>  <span class='comment'>#     All HTML tags in the original fields are stripped when returned in this
+</span>  <span class='comment'>#     field, and matching query keywords are enclosed in HTML bold tags.
 </span>  <span class='comment'># @!attribute [rw] commute_info
 </span>  <span class='comment'>#   @return [Google::Cloud::Talent::V4beta1::SearchJobsResponse::CommuteInfo]
 </span>  <span class='comment'>#     Commute information which is generated based on specified
@@ -566,6 +558,37 @@ see Enable_precise_result_size.</p>
       <pre class="lines">
 
 
+633
+634
+635
+636
+637
+638
+639
+640
+641
+642
+643
+644
+645
+646
+647
+648
+649
+650
+651
+652
+653
+654
+655
+656
+657
+658
+659
+660
+661
+662
+663
 664
 665
 666
@@ -576,55 +599,18 @@ see Enable_precise_result_size.</p>
 671
 672
 673
-674
-675
-676
-677
-678
-679
-680
-681
-682
-683
-684
-685
-686
-687
-688
-689
-690
-691
-692
-693
-694
-695
-696
-697
-698
-699
-700
-701
-702
-703
-704
-705
-706
-707
-708
-709</pre>
+674</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job_service.rb', line 664</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job_service.rb', line 633</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::SearchJobsResponse (class)">SearchJobsResponse</a></span></span>
   <span class='comment'># Output only.
 </span>  <span class='comment'>#
-</span>  <span class='comment'># Job entry with metadata inside
-</span>  <span class='comment'># {Google::Cloud::Talent::V4beta1::SearchJobsResponse SearchJobsResponse}.
+</span>  <span class='comment'># Job entry with metadata inside {Google::Cloud::Talent::V4beta1::SearchJobsResponse SearchJobsResponse}.
 </span>  <span class='comment'># @!attribute [rw] job
 </span>  <span class='comment'>#   @return [Google::Cloud::Talent::V4beta1::Job]
-</span>  <span class='comment'>#     Job resource that matches the specified
-</span>  <span class='comment'>#     {Google::Cloud::Talent::V4beta1::SearchJobsRequest SearchJobsRequest}.
+</span>  <span class='comment'>#     Job resource that matches the specified {Google::Cloud::Talent::V4beta1::SearchJobsRequest SearchJobsRequest}.
 </span>  <span class='comment'># @!attribute [rw] job_summary
 </span>  <span class='comment'>#   @return [String]
 </span>  <span class='comment'>#     A summary of the job with core information that&#39;s displayed on the search
@@ -636,12 +622,10 @@ see Enable_precise_result_size.</p>
 </span>  <span class='comment'>#     query keywords are enclosed in HTML bold tags.
 </span>  <span class='comment'># @!attribute [rw] search_text_snippet
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Contains snippets of text from the
-</span>  <span class='comment'>#     {Google::Cloud::Talent::V4beta1::Job#description Job#description} and
-</span>  <span class='comment'>#     similar fields that most closely match a search query&#39;s keywords, if
-</span>  <span class='comment'>#     available. All HTML tags in the original fields are stripped when
-</span>  <span class='comment'>#     returned in this field, and matching query keywords are enclosed in HTML
-</span>  <span class='comment'>#     bold tags.
+</span>  <span class='comment'>#     Contains snippets of text from the {Google::Cloud::Talent::V4beta1::Job#description Job#description} and similar
+</span>  <span class='comment'>#     fields that most closely match a search query&#39;s keywords, if available.
+</span>  <span class='comment'>#     All HTML tags in the original fields are stripped when returned in this
+</span>  <span class='comment'>#     field, and matching query keywords are enclosed in HTML bold tags.
 </span>  <span class='comment'># @!attribute [rw] commute_info
 </span>  <span class='comment'>#   @return [Google::Cloud::Talent::V4beta1::SearchJobsResponse::CommuteInfo]
 </span>  <span class='comment'>#     Commute information which is generated based on specified
@@ -713,6 +697,37 @@ see Enable_precise_result_size.</p>
       <pre class="lines">
 
 
+633
+634
+635
+636
+637
+638
+639
+640
+641
+642
+643
+644
+645
+646
+647
+648
+649
+650
+651
+652
+653
+654
+655
+656
+657
+658
+659
+660
+661
+662
+663
 664
 665
 666
@@ -723,55 +738,18 @@ see Enable_precise_result_size.</p>
 671
 672
 673
-674
-675
-676
-677
-678
-679
-680
-681
-682
-683
-684
-685
-686
-687
-688
-689
-690
-691
-692
-693
-694
-695
-696
-697
-698
-699
-700
-701
-702
-703
-704
-705
-706
-707
-708
-709</pre>
+674</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job_service.rb', line 664</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job_service.rb', line 633</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::SearchJobsResponse (class)">SearchJobsResponse</a></span></span>
   <span class='comment'># Output only.
 </span>  <span class='comment'>#
-</span>  <span class='comment'># Job entry with metadata inside
-</span>  <span class='comment'># {Google::Cloud::Talent::V4beta1::SearchJobsResponse SearchJobsResponse}.
+</span>  <span class='comment'># Job entry with metadata inside {Google::Cloud::Talent::V4beta1::SearchJobsResponse SearchJobsResponse}.
 </span>  <span class='comment'># @!attribute [rw] job
 </span>  <span class='comment'>#   @return [Google::Cloud::Talent::V4beta1::Job]
-</span>  <span class='comment'>#     Job resource that matches the specified
-</span>  <span class='comment'>#     {Google::Cloud::Talent::V4beta1::SearchJobsRequest SearchJobsRequest}.
+</span>  <span class='comment'>#     Job resource that matches the specified {Google::Cloud::Talent::V4beta1::SearchJobsRequest SearchJobsRequest}.
 </span>  <span class='comment'># @!attribute [rw] job_summary
 </span>  <span class='comment'>#   @return [String]
 </span>  <span class='comment'>#     A summary of the job with core information that&#39;s displayed on the search
@@ -783,12 +761,10 @@ see Enable_precise_result_size.</p>
 </span>  <span class='comment'>#     query keywords are enclosed in HTML bold tags.
 </span>  <span class='comment'># @!attribute [rw] search_text_snippet
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Contains snippets of text from the
-</span>  <span class='comment'>#     {Google::Cloud::Talent::V4beta1::Job#description Job#description} and
-</span>  <span class='comment'>#     similar fields that most closely match a search query&#39;s keywords, if
-</span>  <span class='comment'>#     available. All HTML tags in the original fields are stripped when
-</span>  <span class='comment'>#     returned in this field, and matching query keywords are enclosed in HTML
-</span>  <span class='comment'>#     bold tags.
+</span>  <span class='comment'>#     Contains snippets of text from the {Google::Cloud::Talent::V4beta1::Job#description Job#description} and similar
+</span>  <span class='comment'>#     fields that most closely match a search query&#39;s keywords, if available.
+</span>  <span class='comment'>#     All HTML tags in the original fields are stripped when returned in this
+</span>  <span class='comment'>#     field, and matching query keywords are enclosed in HTML bold tags.
 </span>  <span class='comment'># @!attribute [rw] commute_info
 </span>  <span class='comment'>#   @return [Google::Cloud::Talent::V4beta1::SearchJobsResponse::CommuteInfo]
 </span>  <span class='comment'>#     Commute information which is generated based on specified
@@ -862,6 +838,37 @@ JobLocation::LocationType#LOCATION_TYPE_UNSPECIFIED.</p>
       <pre class="lines">
 
 
+633
+634
+635
+636
+637
+638
+639
+640
+641
+642
+643
+644
+645
+646
+647
+648
+649
+650
+651
+652
+653
+654
+655
+656
+657
+658
+659
+660
+661
+662
+663
 664
 665
 666
@@ -872,55 +879,18 @@ JobLocation::LocationType#LOCATION_TYPE_UNSPECIFIED.</p>
 671
 672
 673
-674
-675
-676
-677
-678
-679
-680
-681
-682
-683
-684
-685
-686
-687
-688
-689
-690
-691
-692
-693
-694
-695
-696
-697
-698
-699
-700
-701
-702
-703
-704
-705
-706
-707
-708
-709</pre>
+674</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job_service.rb', line 664</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job_service.rb', line 633</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::SearchJobsResponse (class)">SearchJobsResponse</a></span></span>
   <span class='comment'># Output only.
 </span>  <span class='comment'>#
-</span>  <span class='comment'># Job entry with metadata inside
-</span>  <span class='comment'># {Google::Cloud::Talent::V4beta1::SearchJobsResponse SearchJobsResponse}.
+</span>  <span class='comment'># Job entry with metadata inside {Google::Cloud::Talent::V4beta1::SearchJobsResponse SearchJobsResponse}.
 </span>  <span class='comment'># @!attribute [rw] job
 </span>  <span class='comment'>#   @return [Google::Cloud::Talent::V4beta1::Job]
-</span>  <span class='comment'>#     Job resource that matches the specified
-</span>  <span class='comment'>#     {Google::Cloud::Talent::V4beta1::SearchJobsRequest SearchJobsRequest}.
+</span>  <span class='comment'>#     Job resource that matches the specified {Google::Cloud::Talent::V4beta1::SearchJobsRequest SearchJobsRequest}.
 </span>  <span class='comment'># @!attribute [rw] job_summary
 </span>  <span class='comment'>#   @return [String]
 </span>  <span class='comment'>#     A summary of the job with core information that&#39;s displayed on the search
@@ -932,12 +902,10 @@ JobLocation::LocationType#LOCATION_TYPE_UNSPECIFIED.</p>
 </span>  <span class='comment'>#     query keywords are enclosed in HTML bold tags.
 </span>  <span class='comment'># @!attribute [rw] search_text_snippet
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Contains snippets of text from the
-</span>  <span class='comment'>#     {Google::Cloud::Talent::V4beta1::Job#description Job#description} and
-</span>  <span class='comment'>#     similar fields that most closely match a search query&#39;s keywords, if
-</span>  <span class='comment'>#     available. All HTML tags in the original fields are stripped when
-</span>  <span class='comment'>#     returned in this field, and matching query keywords are enclosed in HTML
-</span>  <span class='comment'>#     bold tags.
+</span>  <span class='comment'>#     Contains snippets of text from the {Google::Cloud::Talent::V4beta1::Job#description Job#description} and similar
+</span>  <span class='comment'>#     fields that most closely match a search query&#39;s keywords, if available.
+</span>  <span class='comment'>#     All HTML tags in the original fields are stripped when returned in this
+</span>  <span class='comment'>#     field, and matching query keywords are enclosed in HTML bold tags.
 </span>  <span class='comment'># @!attribute [rw] commute_info
 </span>  <span class='comment'>#   @return [Google::Cloud::Talent::V4beta1::SearchJobsResponse::CommuteInfo]
 </span>  <span class='comment'>#     Commute information which is generated based on specified
@@ -976,8 +944,7 @@ JobLocation::LocationType#LOCATION_TYPE_UNSPECIFIED.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns The Job entities that match the specified
-<span class='object_link'><a href="SearchJobsRequest.html" title="Google::Cloud::Talent::V4beta1::SearchJobsRequest (class)">SearchJobsRequest</a></span>.</p>
+    <p>Returns The Job entities that match the specified <span class='object_link'><a href="SearchJobsRequest.html" title="Google::Cloud::Talent::V4beta1::SearchJobsRequest (class)">SearchJobsRequest</a></span>.</p>
 
 
   </div>
@@ -995,8 +962,7 @@ JobLocation::LocationType#LOCATION_TYPE_UNSPECIFIED.</p>
       
       
         &mdash;
-        <div class='inline'><p>The Job entities that match the specified
-<span class='object_link'><a href="SearchJobsRequest.html" title="Google::Cloud::Talent::V4beta1::SearchJobsRequest (class)">SearchJobsRequest</a></span>.</p>
+        <div class='inline'><p>The Job entities that match the specified <span class='object_link'><a href="SearchJobsRequest.html" title="Google::Cloud::Talent::V4beta1::SearchJobsRequest (class)">SearchJobsRequest</a></span>.</p>
 </div>
       
     </li>
@@ -1009,6 +975,37 @@ JobLocation::LocationType#LOCATION_TYPE_UNSPECIFIED.</p>
       <pre class="lines">
 
 
+633
+634
+635
+636
+637
+638
+639
+640
+641
+642
+643
+644
+645
+646
+647
+648
+649
+650
+651
+652
+653
+654
+655
+656
+657
+658
+659
+660
+661
+662
+663
 664
 665
 666
@@ -1019,55 +1016,18 @@ JobLocation::LocationType#LOCATION_TYPE_UNSPECIFIED.</p>
 671
 672
 673
-674
-675
-676
-677
-678
-679
-680
-681
-682
-683
-684
-685
-686
-687
-688
-689
-690
-691
-692
-693
-694
-695
-696
-697
-698
-699
-700
-701
-702
-703
-704
-705
-706
-707
-708
-709</pre>
+674</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job_service.rb', line 664</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job_service.rb', line 633</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::SearchJobsResponse (class)">SearchJobsResponse</a></span></span>
   <span class='comment'># Output only.
 </span>  <span class='comment'>#
-</span>  <span class='comment'># Job entry with metadata inside
-</span>  <span class='comment'># {Google::Cloud::Talent::V4beta1::SearchJobsResponse SearchJobsResponse}.
+</span>  <span class='comment'># Job entry with metadata inside {Google::Cloud::Talent::V4beta1::SearchJobsResponse SearchJobsResponse}.
 </span>  <span class='comment'># @!attribute [rw] job
 </span>  <span class='comment'>#   @return [Google::Cloud::Talent::V4beta1::Job]
-</span>  <span class='comment'>#     Job resource that matches the specified
-</span>  <span class='comment'>#     {Google::Cloud::Talent::V4beta1::SearchJobsRequest SearchJobsRequest}.
+</span>  <span class='comment'>#     Job resource that matches the specified {Google::Cloud::Talent::V4beta1::SearchJobsRequest SearchJobsRequest}.
 </span>  <span class='comment'># @!attribute [rw] job_summary
 </span>  <span class='comment'>#   @return [String]
 </span>  <span class='comment'>#     A summary of the job with core information that&#39;s displayed on the search
@@ -1079,12 +1039,10 @@ JobLocation::LocationType#LOCATION_TYPE_UNSPECIFIED.</p>
 </span>  <span class='comment'>#     query keywords are enclosed in HTML bold tags.
 </span>  <span class='comment'># @!attribute [rw] search_text_snippet
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Contains snippets of text from the
-</span>  <span class='comment'>#     {Google::Cloud::Talent::V4beta1::Job#description Job#description} and
-</span>  <span class='comment'>#     similar fields that most closely match a search query&#39;s keywords, if
-</span>  <span class='comment'>#     available. All HTML tags in the original fields are stripped when
-</span>  <span class='comment'>#     returned in this field, and matching query keywords are enclosed in HTML
-</span>  <span class='comment'>#     bold tags.
+</span>  <span class='comment'>#     Contains snippets of text from the {Google::Cloud::Talent::V4beta1::Job#description Job#description} and similar
+</span>  <span class='comment'>#     fields that most closely match a search query&#39;s keywords, if available.
+</span>  <span class='comment'>#     All HTML tags in the original fields are stripped when returned in this
+</span>  <span class='comment'>#     field, and matching query keywords are enclosed in HTML bold tags.
 </span>  <span class='comment'># @!attribute [rw] commute_info
 </span>  <span class='comment'>#   @return [Google::Cloud::Talent::V4beta1::SearchJobsResponse::CommuteInfo]
 </span>  <span class='comment'>#     Commute information which is generated based on specified
@@ -1156,6 +1114,37 @@ tracking id.</p>
       <pre class="lines">
 
 
+633
+634
+635
+636
+637
+638
+639
+640
+641
+642
+643
+644
+645
+646
+647
+648
+649
+650
+651
+652
+653
+654
+655
+656
+657
+658
+659
+660
+661
+662
+663
 664
 665
 666
@@ -1166,55 +1155,18 @@ tracking id.</p>
 671
 672
 673
-674
-675
-676
-677
-678
-679
-680
-681
-682
-683
-684
-685
-686
-687
-688
-689
-690
-691
-692
-693
-694
-695
-696
-697
-698
-699
-700
-701
-702
-703
-704
-705
-706
-707
-708
-709</pre>
+674</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job_service.rb', line 664</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job_service.rb', line 633</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::SearchJobsResponse (class)">SearchJobsResponse</a></span></span>
   <span class='comment'># Output only.
 </span>  <span class='comment'>#
-</span>  <span class='comment'># Job entry with metadata inside
-</span>  <span class='comment'># {Google::Cloud::Talent::V4beta1::SearchJobsResponse SearchJobsResponse}.
+</span>  <span class='comment'># Job entry with metadata inside {Google::Cloud::Talent::V4beta1::SearchJobsResponse SearchJobsResponse}.
 </span>  <span class='comment'># @!attribute [rw] job
 </span>  <span class='comment'>#   @return [Google::Cloud::Talent::V4beta1::Job]
-</span>  <span class='comment'>#     Job resource that matches the specified
-</span>  <span class='comment'>#     {Google::Cloud::Talent::V4beta1::SearchJobsRequest SearchJobsRequest}.
+</span>  <span class='comment'>#     Job resource that matches the specified {Google::Cloud::Talent::V4beta1::SearchJobsRequest SearchJobsRequest}.
 </span>  <span class='comment'># @!attribute [rw] job_summary
 </span>  <span class='comment'>#   @return [String]
 </span>  <span class='comment'>#     A summary of the job with core information that&#39;s displayed on the search
@@ -1226,12 +1178,10 @@ tracking id.</p>
 </span>  <span class='comment'>#     query keywords are enclosed in HTML bold tags.
 </span>  <span class='comment'># @!attribute [rw] search_text_snippet
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Contains snippets of text from the
-</span>  <span class='comment'>#     {Google::Cloud::Talent::V4beta1::Job#description Job#description} and
-</span>  <span class='comment'>#     similar fields that most closely match a search query&#39;s keywords, if
-</span>  <span class='comment'>#     available. All HTML tags in the original fields are stripped when
-</span>  <span class='comment'>#     returned in this field, and matching query keywords are enclosed in HTML
-</span>  <span class='comment'>#     bold tags.
+</span>  <span class='comment'>#     Contains snippets of text from the {Google::Cloud::Talent::V4beta1::Job#description Job#description} and similar
+</span>  <span class='comment'>#     fields that most closely match a search query&#39;s keywords, if available.
+</span>  <span class='comment'>#     All HTML tags in the original fields are stripped when returned in this
+</span>  <span class='comment'>#     field, and matching query keywords are enclosed in HTML bold tags.
 </span>  <span class='comment'># @!attribute [rw] commute_info
 </span>  <span class='comment'>#   @return [Google::Cloud::Talent::V4beta1::SearchJobsResponse::CommuteInfo]
 </span>  <span class='comment'>#     Commute information which is generated based on specified
@@ -1303,6 +1253,37 @@ This field is empty if there are no more results.</p>
       <pre class="lines">
 
 
+633
+634
+635
+636
+637
+638
+639
+640
+641
+642
+643
+644
+645
+646
+647
+648
+649
+650
+651
+652
+653
+654
+655
+656
+657
+658
+659
+660
+661
+662
+663
 664
 665
 666
@@ -1313,55 +1294,18 @@ This field is empty if there are no more results.</p>
 671
 672
 673
-674
-675
-676
-677
-678
-679
-680
-681
-682
-683
-684
-685
-686
-687
-688
-689
-690
-691
-692
-693
-694
-695
-696
-697
-698
-699
-700
-701
-702
-703
-704
-705
-706
-707
-708
-709</pre>
+674</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job_service.rb', line 664</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job_service.rb', line 633</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::SearchJobsResponse (class)">SearchJobsResponse</a></span></span>
   <span class='comment'># Output only.
 </span>  <span class='comment'>#
-</span>  <span class='comment'># Job entry with metadata inside
-</span>  <span class='comment'># {Google::Cloud::Talent::V4beta1::SearchJobsResponse SearchJobsResponse}.
+</span>  <span class='comment'># Job entry with metadata inside {Google::Cloud::Talent::V4beta1::SearchJobsResponse SearchJobsResponse}.
 </span>  <span class='comment'># @!attribute [rw] job
 </span>  <span class='comment'>#   @return [Google::Cloud::Talent::V4beta1::Job]
-</span>  <span class='comment'>#     Job resource that matches the specified
-</span>  <span class='comment'>#     {Google::Cloud::Talent::V4beta1::SearchJobsRequest SearchJobsRequest}.
+</span>  <span class='comment'>#     Job resource that matches the specified {Google::Cloud::Talent::V4beta1::SearchJobsRequest SearchJobsRequest}.
 </span>  <span class='comment'># @!attribute [rw] job_summary
 </span>  <span class='comment'>#   @return [String]
 </span>  <span class='comment'>#     A summary of the job with core information that&#39;s displayed on the search
@@ -1373,12 +1317,10 @@ This field is empty if there are no more results.</p>
 </span>  <span class='comment'>#     query keywords are enclosed in HTML bold tags.
 </span>  <span class='comment'># @!attribute [rw] search_text_snippet
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Contains snippets of text from the
-</span>  <span class='comment'>#     {Google::Cloud::Talent::V4beta1::Job#description Job#description} and
-</span>  <span class='comment'>#     similar fields that most closely match a search query&#39;s keywords, if
-</span>  <span class='comment'>#     available. All HTML tags in the original fields are stripped when
-</span>  <span class='comment'>#     returned in this field, and matching query keywords are enclosed in HTML
-</span>  <span class='comment'>#     bold tags.
+</span>  <span class='comment'>#     Contains snippets of text from the {Google::Cloud::Talent::V4beta1::Job#description Job#description} and similar
+</span>  <span class='comment'>#     fields that most closely match a search query&#39;s keywords, if available.
+</span>  <span class='comment'>#     All HTML tags in the original fields are stripped when returned in this
+</span>  <span class='comment'>#     field, and matching query keywords are enclosed in HTML bold tags.
 </span>  <span class='comment'># @!attribute [rw] commute_info
 </span>  <span class='comment'>#   @return [Google::Cloud::Talent::V4beta1::SearchJobsResponse::CommuteInfo]
 </span>  <span class='comment'>#     Commute information which is generated based on specified
@@ -1448,6 +1390,37 @@ This field is empty if there are no more results.</p>
       <pre class="lines">
 
 
+633
+634
+635
+636
+637
+638
+639
+640
+641
+642
+643
+644
+645
+646
+647
+648
+649
+650
+651
+652
+653
+654
+655
+656
+657
+658
+659
+660
+661
+662
+663
 664
 665
 666
@@ -1458,55 +1431,18 @@ This field is empty if there are no more results.</p>
 671
 672
 673
-674
-675
-676
-677
-678
-679
-680
-681
-682
-683
-684
-685
-686
-687
-688
-689
-690
-691
-692
-693
-694
-695
-696
-697
-698
-699
-700
-701
-702
-703
-704
-705
-706
-707
-708
-709</pre>
+674</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job_service.rb', line 664</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job_service.rb', line 633</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::SearchJobsResponse (class)">SearchJobsResponse</a></span></span>
   <span class='comment'># Output only.
 </span>  <span class='comment'>#
-</span>  <span class='comment'># Job entry with metadata inside
-</span>  <span class='comment'># {Google::Cloud::Talent::V4beta1::SearchJobsResponse SearchJobsResponse}.
+</span>  <span class='comment'># Job entry with metadata inside {Google::Cloud::Talent::V4beta1::SearchJobsResponse SearchJobsResponse}.
 </span>  <span class='comment'># @!attribute [rw] job
 </span>  <span class='comment'>#   @return [Google::Cloud::Talent::V4beta1::Job]
-</span>  <span class='comment'>#     Job resource that matches the specified
-</span>  <span class='comment'>#     {Google::Cloud::Talent::V4beta1::SearchJobsRequest SearchJobsRequest}.
+</span>  <span class='comment'>#     Job resource that matches the specified {Google::Cloud::Talent::V4beta1::SearchJobsRequest SearchJobsRequest}.
 </span>  <span class='comment'># @!attribute [rw] job_summary
 </span>  <span class='comment'>#   @return [String]
 </span>  <span class='comment'>#     A summary of the job with core information that&#39;s displayed on the search
@@ -1518,12 +1454,10 @@ This field is empty if there are no more results.</p>
 </span>  <span class='comment'>#     query keywords are enclosed in HTML bold tags.
 </span>  <span class='comment'># @!attribute [rw] search_text_snippet
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Contains snippets of text from the
-</span>  <span class='comment'>#     {Google::Cloud::Talent::V4beta1::Job#description Job#description} and
-</span>  <span class='comment'>#     similar fields that most closely match a search query&#39;s keywords, if
-</span>  <span class='comment'>#     available. All HTML tags in the original fields are stripped when
-</span>  <span class='comment'>#     returned in this field, and matching query keywords are enclosed in HTML
-</span>  <span class='comment'>#     bold tags.
+</span>  <span class='comment'>#     Contains snippets of text from the {Google::Cloud::Talent::V4beta1::Job#description Job#description} and similar
+</span>  <span class='comment'>#     fields that most closely match a search query&#39;s keywords, if available.
+</span>  <span class='comment'>#     All HTML tags in the original fields are stripped when returned in this
+</span>  <span class='comment'>#     field, and matching query keywords are enclosed in HTML bold tags.
 </span>  <span class='comment'># @!attribute [rw] commute_info
 </span>  <span class='comment'>#   @return [Google::Cloud::Talent::V4beta1::SearchJobsResponse::CommuteInfo]
 </span>  <span class='comment'>#     Commute information which is generated based on specified
@@ -1597,6 +1531,37 @@ is the last page of results. Otherwise, the value is <code>-1</code>.</p>
       <pre class="lines">
 
 
+633
+634
+635
+636
+637
+638
+639
+640
+641
+642
+643
+644
+645
+646
+647
+648
+649
+650
+651
+652
+653
+654
+655
+656
+657
+658
+659
+660
+661
+662
+663
 664
 665
 666
@@ -1607,55 +1572,18 @@ is the last page of results. Otherwise, the value is <code>-1</code>.</p>
 671
 672
 673
-674
-675
-676
-677
-678
-679
-680
-681
-682
-683
-684
-685
-686
-687
-688
-689
-690
-691
-692
-693
-694
-695
-696
-697
-698
-699
-700
-701
-702
-703
-704
-705
-706
-707
-708
-709</pre>
+674</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job_service.rb', line 664</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job_service.rb', line 633</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::SearchJobsResponse (class)">SearchJobsResponse</a></span></span>
   <span class='comment'># Output only.
 </span>  <span class='comment'>#
-</span>  <span class='comment'># Job entry with metadata inside
-</span>  <span class='comment'># {Google::Cloud::Talent::V4beta1::SearchJobsResponse SearchJobsResponse}.
+</span>  <span class='comment'># Job entry with metadata inside {Google::Cloud::Talent::V4beta1::SearchJobsResponse SearchJobsResponse}.
 </span>  <span class='comment'># @!attribute [rw] job
 </span>  <span class='comment'>#   @return [Google::Cloud::Talent::V4beta1::Job]
-</span>  <span class='comment'>#     Job resource that matches the specified
-</span>  <span class='comment'>#     {Google::Cloud::Talent::V4beta1::SearchJobsRequest SearchJobsRequest}.
+</span>  <span class='comment'>#     Job resource that matches the specified {Google::Cloud::Talent::V4beta1::SearchJobsRequest SearchJobsRequest}.
 </span>  <span class='comment'># @!attribute [rw] job_summary
 </span>  <span class='comment'>#   @return [String]
 </span>  <span class='comment'>#     A summary of the job with core information that&#39;s displayed on the search
@@ -1667,12 +1595,10 @@ is the last page of results. Otherwise, the value is <code>-1</code>.</p>
 </span>  <span class='comment'>#     query keywords are enclosed in HTML bold tags.
 </span>  <span class='comment'># @!attribute [rw] search_text_snippet
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Contains snippets of text from the
-</span>  <span class='comment'>#     {Google::Cloud::Talent::V4beta1::Job#description Job#description} and
-</span>  <span class='comment'>#     similar fields that most closely match a search query&#39;s keywords, if
-</span>  <span class='comment'>#     available. All HTML tags in the original fields are stripped when
-</span>  <span class='comment'>#     returned in this field, and matching query keywords are enclosed in HTML
-</span>  <span class='comment'>#     bold tags.
+</span>  <span class='comment'>#     Contains snippets of text from the {Google::Cloud::Talent::V4beta1::Job#description Job#description} and similar
+</span>  <span class='comment'>#     fields that most closely match a search query&#39;s keywords, if available.
+</span>  <span class='comment'>#     All HTML tags in the original fields are stripped when returned in this
+</span>  <span class='comment'>#     field, and matching query keywords are enclosed in HTML bold tags.
 </span>  <span class='comment'># @!attribute [rw] commute_info
 </span>  <span class='comment'>#   @return [Google::Cloud::Talent::V4beta1::SearchJobsResponse::CommuteInfo]
 </span>  <span class='comment'>#     Commute information which is generated based on specified
