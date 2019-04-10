@@ -293,9 +293,11 @@ module Google
           #   Type of data returned for traces in the list. Optional. Default is
           #   `MINIMAL`.
           # @param page_size [Integer]
-          #   Maximum number of traces to return. If not specified or <= 0, the
-          #   implementation selects a reasonable value.  The implementation may
-          #   return fewer traces than the requested page size. Optional.
+          #   The maximum number of resources contained in the underlying API
+          #   response. If page streaming is performed per-resource, this
+          #   parameter does not affect the return value. If page streaming is
+          #   performed per-page, this determines the maximum number of
+          #   resources in a page.
           # @param start_time [Google::Protobuf::Timestamp | Hash]
           #   Start of the time interval (inclusive) during which the trace data was
           #   collected from the application.
