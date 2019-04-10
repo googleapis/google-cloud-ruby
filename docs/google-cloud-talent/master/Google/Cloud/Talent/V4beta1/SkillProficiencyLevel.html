@@ -1,6 +1,6 @@
 ---
 layout: yard_main
-title: "Module: Google::Cloud::Talent::V4beta1::JobApplication::ApplicationStatus - Cloud"
+title: "Module: Google::Cloud::Talent::V4beta1::SkillProficiencyLevel - Cloud"
 css: 
   - /docs/css/style.css
   - /docs/css/common.css
@@ -10,13 +10,13 @@ js:
   - /js/yard-main.js
 ---
 <script type="text/javascript" charset="utf-8">
-  pathId = "Google::Cloud::Talent::V4beta1::JobApplication::ApplicationStatus";
-  relpath = '../../../../../';
+  pathId = "Google::Cloud::Talent::V4beta1::SkillProficiencyLevel";
+  relpath = '../../../../';
 </script>
 
 
 <div class="nav_wrap">
-  <iframe id="nav" src="../../../../../class_list.html?1"></iframe>
+  <iframe id="nav" src="../../../../class_list.html?1"></iframe>
   <div id="resizer"></div>
 </div>
 
@@ -24,17 +24,17 @@ js:
   <div id="header">
     <div id="menu">
   
-    <a href="../../../../../_index.html">Index (A)</a> &raquo;
-    <span class='title'><span class='object_link'><a href="../../../../../Google.html" title="Google (module)">Google</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../../Talent.html" title="Google::Cloud::Talent (module)">Talent</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../V4beta1.html" title="Google::Cloud::Talent::V4beta1 (module)">V4beta1</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../JobApplication.html" title="Google::Cloud::Talent::V4beta1::JobApplication (class)">JobApplication</a></span></span>
+    <a href="../../../../_index.html">Index (S)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../Talent.html" title="Google::Cloud::Talent (module)">Talent</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../V4beta1.html" title="Google::Cloud::Talent::V4beta1 (module)">V4beta1</a></span></span>
      &raquo; 
-    <span class="title">ApplicationStatus</span>
+    <span class="title">SkillProficiencyLevel</span>
   
 </div>
 
     <div id="search">
   
     <a class="full_list_link" id="class_list_link"
-        href="../../../../../class_list.html">
+        href="../../../../class_list.html">
 
         <svg width="24" height="24">
           <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
@@ -47,7 +47,7 @@ js:
     <div class="clear"></div>
   </div>
 
-  <div id="content"><h1>Module: Google::Cloud::Talent::V4beta1::JobApplication::ApplicationStatus
+  <div id="content"><h1>Module: Google::Cloud::Talent::V4beta1::SkillProficiencyLevel
   
   
   
@@ -66,14 +66,14 @@ js:
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/profile.rb</dd>
+    <dd>lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/common.rb</dd>
   </dl>
   
 </div>
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>Enum that represents the application status.</p>
+    <p>Enum that represents the skill proficiency level.</p>
 
 
   </div>
@@ -90,7 +90,7 @@ js:
 
     <dl class="constants">
       
-        <dt id="APPLICATION_STATUS_UNSPECIFIED-constant" class="">APPLICATION_STATUS_UNSPECIFIED =
+        <dt id="SKILL_PROFICIENCY_LEVEL_UNSPECIFIED-constant" class="">SKILL_PROFICIENCY_LEVEL_UNSPECIFIED =
           <div class="docstring">
   <div class="discussion">
     <p>Default value.</p>
@@ -105,10 +105,11 @@ js:
         </dt>
         <dd><pre class="code"><span class='int'>0</span></pre></dd>
       
-        <dt id="OFFER_EXTENDED-constant" class="">OFFER_EXTENDED =
+        <dt id="FUNDAMENTAL_AWARENESS-constant" class="">FUNDAMENTAL_AWARENESS =
           <div class="docstring">
   <div class="discussion">
-    <p>The offer is extended.</p>
+    <p>Have a common knowledge or an understanding of basic techniques and
+concepts.</p>
 
 
   </div>
@@ -120,10 +121,11 @@ js:
         </dt>
         <dd><pre class="code"><span class='int'>1</span></pre></dd>
       
-        <dt id="REJECTED_BY_CANDIDATE-constant" class="">REJECTED_BY_CANDIDATE =
+        <dt id="NOVICE-constant" class="">NOVICE =
           <div class="docstring">
   <div class="discussion">
-    <p>The offer is rejected by candidate.</p>
+    <p>Have the level of experience gained in a classroom and/or experimental
+scenarios or as a trainee on-the-job.</p>
 
 
   </div>
@@ -135,10 +137,12 @@ js:
         </dt>
         <dd><pre class="code"><span class='int'>2</span></pre></dd>
       
-        <dt id="ACTIVE-constant" class="">ACTIVE =
+        <dt id="INTERMEDIATE-constant" class="">INTERMEDIATE =
           <div class="docstring">
   <div class="discussion">
-    <p>The application is active.</p>
+    <p>Be able to successfully complete tasks in this skill as requested. Help
+from an expert may be required from time to time, but can usually perform
+skill independently.</p>
 
 
   </div>
@@ -150,10 +154,10 @@ js:
         </dt>
         <dd><pre class="code"><span class='int'>3</span></pre></dd>
       
-        <dt id="REJECTED_BY_EMPLOYER-constant" class="">REJECTED_BY_EMPLOYER =
+        <dt id="ADVANCED-constant" class="">ADVANCED =
           <div class="docstring">
   <div class="discussion">
-    <p>The candidate is rejected by employer.</p>
+    <p>Can perform the actions associated with this skill without assistance.</p>
 
 
   </div>
@@ -165,10 +169,10 @@ js:
         </dt>
         <dd><pre class="code"><span class='int'>4</span></pre></dd>
       
-        <dt id="HIRED_PENDING_DATE-constant" class="">HIRED_PENDING_DATE =
+        <dt id="EXPERT-constant" class="">EXPERT =
           <div class="docstring">
   <div class="discussion">
-    <p>The candidate is hired and hasn&#39;t started the new job.</p>
+    <p>Known as an expert in this area.</p>
 
 
   </div>
@@ -179,36 +183,6 @@ js:
 </div>
         </dt>
         <dd><pre class="code"><span class='int'>5</span></pre></dd>
-      
-        <dt id="HIRED_STARTED-constant" class="">HIRED_STARTED =
-          <div class="docstring">
-  <div class="discussion">
-    <p>The candidate is hired started.</p>
-
-
-  </div>
-</div>
-<div class="tags">
-  
-
-</div>
-        </dt>
-        <dd><pre class="code"><span class='int'>6</span></pre></dd>
-      
-        <dt id="PROSPECTED-constant" class="">PROSPECTED =
-          <div class="docstring">
-  <div class="discussion">
-    <p>The candidate is a prospect candidate.</p>
-
-
-  </div>
-</div>
-<div class="tags">
-  
-
-</div>
-        </dt>
-        <dd><pre class="code"><span class='int'>7</span></pre></dd>
       
     </dl>
   

@@ -156,8 +156,12 @@ js:
 
 <p>The resource name of the company to be deleted.</p>
 
-<p>The format is &quot;projects/project_id/companies/company_id&quot;, for example,
-&quot;projects/api-test-project/companies/foo&quot;.</p>
+<p>The format is
+&quot;projects/project_id/tenants/tenant_id/companies/company_id&quot;, for
+example, &quot;projects/api-test-project/tenants/foo/companies/bar&quot;.</p>
+
+<p>Tenant id is optional and the default tenant is used if unspecified, for
+example, &quot;projects/api-test-project/companies/bar&quot;.</p>
 
 
   </div>
@@ -179,8 +183,12 @@ js:
 
 <p>The resource name of the company to be deleted.</p>
 
-<p>The format is &quot;projects/project_id/companies/company_id&quot;, for example,
-&quot;projects/api-test-project/companies/foo&quot;.</p>
+<p>The format is
+&quot;projects/project_id/tenants/tenant_id/companies/company_id&quot;, for
+example, &quot;projects/api-test-project/tenants/foo/companies/bar&quot;.</p>
+
+<p>Tenant id is optional and the default tenant is used if unspecified, for
+example, &quot;projects/api-test-project/companies/bar&quot;.</p>
 </div>
       
     </li>
@@ -193,10 +201,10 @@ js:
       <pre class="lines">
 
 
-78</pre>
+89</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/company_service.rb', line 78</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/company_service.rb', line 89</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::DeleteCompanyRequest (class)">DeleteCompanyRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>

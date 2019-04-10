@@ -91,8 +91,8 @@ js:
   <div class="discussion">
     <p>A resource that represents the profile for a job candidate (also referred to
 as a &quot;single-source profile&quot;). A profile belongs to a
-<span class='object_link'><a href="Tenant.html" title="Google::Cloud::Talent::V4beta1::Tenant (class)">Tenant</a></span>, which is an isolated instance
-of the customer that owns the profile.</p>
+<span class='object_link'><a href="Company.html" title="Google::Cloud::Talent::V4beta1::Company (class)">Company</a></span>, which is the
+company/organization that owns the profile.</p>
 
 
   </div>
@@ -180,6 +180,58 @@ of the customer that owns the profile.</p>
 
   
     <span class="summary_desc"><div class='inline'><p>Optional.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#applications-instance_method" title="#applications (instance method)">#<strong>applications</strong>  &#x21d2; Array&lt;String&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Output only.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#assignments-instance_method" title="#assignments (instance method)">#<strong>assignments</strong>  &#x21d2; Array&lt;String&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Output only.</p>
 </div></span>
   
 </li>
@@ -422,32 +474,6 @@ of the customer that owns the profile.</p>
       <li class="public ">
   <span class="summary_signature">
     
-      <a href="#job_applications-instance_method" title="#job_applications (instance method)">#<strong>job_applications</strong>  &#x21d2; Array&lt;Google::Cloud::Talent::V4beta1::JobApplication&gt; </a>
-    
-
-    
-  </span>
-  
-  
-  
-    
-    
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'><p>Optional.</p>
-</div></span>
-  
-</li>
-
-    
-      <li class="public ">
-  <span class="summary_signature">
-    
       <a href="#keyword_snippet-instance_method" title="#keyword_snippet (instance method)">#<strong>keyword_snippet</strong>  &#x21d2; String </a>
     
 
@@ -631,32 +657,6 @@ of the customer that owns the profile.</p>
   <span class="summary_signature">
     
       <a href="#publications-instance_method" title="#publications (instance method)">#<strong>publications</strong>  &#x21d2; Array&lt;Google::Cloud::Talent::V4beta1::Publication&gt; </a>
-    
-
-    
-  </span>
-  
-  
-  
-    
-    
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'><p>Optional.</p>
-</div></span>
-  
-</li>
-
-    
-      <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#recruiting_notes-instance_method" title="#recruiting_notes (instance method)">#<strong>recruiting_notes</strong>  &#x21d2; Array&lt;Google::Cloud::Talent::V4beta1::RecruitingNote&gt; </a>
     
 
     
@@ -872,10 +872,10 @@ aren&#39;t listed in
       <pre class="lines">
 
 
-260</pre>
+253</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/profile.rb', line 260</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/profile.rb', line 253</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::Profile (class)">Profile</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -941,10 +941,10 @@ example, Hang-out, Skype.</p>
       <pre class="lines">
 
 
-260</pre>
+253</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/profile.rb', line 260</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/profile.rb', line 253</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::Profile (class)">Profile</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -1000,10 +1000,120 @@ example, Hang-out, Skype.</p>
       <pre class="lines">
 
 
-260</pre>
+253</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/profile.rb', line 260</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/profile.rb', line 253</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::Profile (class)">Profile</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="applications=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="applications-instance_method">
+  
+    #<strong>applications</strong>  &#x21d2; <tt>Array&lt;String&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Output only. The resource names of the candidate&#39;s applications.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;String&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Output only. The resource names of the candidate&#39;s applications.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+253</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/profile.rb', line 253</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::Profile (class)">Profile</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="assignments=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="assignments-instance_method">
+  
+    #<strong>assignments</strong>  &#x21d2; <tt>Array&lt;String&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Output only. The resource names of the candidate&#39;s assignments.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;String&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Output only. The resource names of the candidate&#39;s assignments.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+253</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/profile.rb', line 253</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::Profile (class)">Profile</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -1059,10 +1169,10 @@ example, Hang-out, Skype.</p>
       <pre class="lines">
 
 
-260</pre>
+253</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/profile.rb', line 260</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/profile.rb', line 253</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::Profile (class)">Profile</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -1118,10 +1228,10 @@ example, Hang-out, Skype.</p>
       <pre class="lines">
 
 
-260</pre>
+253</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/profile.rb', line 260</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/profile.rb', line 253</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::Profile (class)">Profile</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -1150,19 +1260,19 @@ attributes that aren&#39;t covered by the provided structured fields. See
 details.</p>
 
 <p>At most 100 filterable and at most 100 unfilterable keys are supported. If
-limit is exceeded, an error is thrown.</p>
+limit is exceeded, an error is thrown. Custom attributes are <code>unfilterable</code>
+by default. These are filterable when the <code>filterable</code> flag is set to
+<code>true</code>.</p>
 
 <p>Numeric custom attributes: each key can only map to one numeric value,
-otherwise an error is thrown.</p>
+otherwise an error is thrown. Client can also filter on numeric custom
+attributes using &#39;&gt;&#39;, &#39;&lt;&#39; or &#39;=&#39; operators.</p>
 
 <p>String custom attributes: each key can map up to 50 string values. For
 filterable string value, each value has a byte size of no more than 256B.
 For unfilterable string values, the maximum byte size of a single key is
 64B. An error is thrown for any request exceeding the limit.
 The maximum total byte size is 10KB.</p>
-
-<p>Currently filterable numeric custom attributes are not supported, and
-they automatically set to unfilterable.</p>
 
 
   </div>
@@ -1188,19 +1298,19 @@ attributes that aren&#39;t covered by the provided structured fields. See
 details.</p>
 
 <p>At most 100 filterable and at most 100 unfilterable keys are supported. If
-limit is exceeded, an error is thrown.</p>
+limit is exceeded, an error is thrown. Custom attributes are <code>unfilterable</code>
+by default. These are filterable when the <code>filterable</code> flag is set to
+<code>true</code>.</p>
 
 <p>Numeric custom attributes: each key can only map to one numeric value,
-otherwise an error is thrown.</p>
+otherwise an error is thrown. Client can also filter on numeric custom
+attributes using &#39;&gt;&#39;, &#39;&lt;&#39; or &#39;=&#39; operators.</p>
 
 <p>String custom attributes: each key can map up to 50 string values. For
 filterable string value, each value has a byte size of no more than 256B.
 For unfilterable string values, the maximum byte size of a single key is
 64B. An error is thrown for any request exceeding the limit.
 The maximum total byte size is 10KB.</p>
-
-<p>Currently filterable numeric custom attributes are not supported, and
-they automatically set to unfilterable.</p>
 </div>
       
     </li>
@@ -1213,10 +1323,10 @@ they automatically set to unfilterable.</p>
       <pre class="lines">
 
 
-260</pre>
+253</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/profile.rb', line 260</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/profile.rb', line 253</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::Profile (class)">Profile</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -1298,10 +1408,10 @@ inputs.</li>
       <pre class="lines">
 
 
-260</pre>
+253</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/profile.rb', line 260</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/profile.rb', line 253</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::Profile (class)">Profile</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -1357,10 +1467,10 @@ inputs.</li>
       <pre class="lines">
 
 
-260</pre>
+253</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/profile.rb', line 260</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/profile.rb', line 253</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::Profile (class)">Profile</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -1444,10 +1554,10 @@ inputs.</li>
       <pre class="lines">
 
 
-260</pre>
+253</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/profile.rb', line 260</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/profile.rb', line 253</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::Profile (class)">Profile</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -1507,10 +1617,10 @@ inputs.</li>
       <pre class="lines">
 
 
-260</pre>
+253</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/profile.rb', line 260</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/profile.rb', line 253</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::Profile (class)">Profile</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -1602,10 +1712,10 @@ referring to the same candidate.</p>
       <pre class="lines">
 
 
-260</pre>
+253</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/profile.rb', line 260</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/profile.rb', line 253</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::Profile (class)">Profile</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -1661,69 +1771,10 @@ referring to the same candidate.</p>
       <pre class="lines">
 
 
-260</pre>
+253</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/profile.rb', line 260</span>
-
-<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::Profile (class)">Profile</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-      
-      <span id="job_applications=-instance_method"></span>
-      <div class="method_details ">
-  <h3 class="signature " id="job_applications-instance_method">
-  
-    #<strong>job_applications</strong>  &#x21d2; <tt>Array&lt;<span class='object_link'><a href="JobApplication.html" title="Google::Cloud::Talent::V4beta1::JobApplication (class)">Google::Cloud::Talent::V4beta1::JobApplication</a></span>&gt;</tt> 
-  
-
-  
-
-  
-</h3><div class="docstring">
-  <div class="discussion">
-    <p>Returns Optional.</p>
-
-<p>The job applications of the candidate.</p>
-
-
-  </div>
-</div>
-<div class="tags">
-  
-<p class="tag_title">Returns:</p>
-<ul class="return">
-  
-    <li>
-      
-      
-        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="JobApplication.html" title="Google::Cloud::Talent::V4beta1::JobApplication (class)">Google::Cloud::Talent::V4beta1::JobApplication</a></span>&gt;</tt>)</span>
-      
-      
-      
-        &mdash;
-        <div class='inline'><p>Optional.</p>
-
-<p>The job applications of the candidate.</p>
-</div>
-      
-    </li>
-  
-</ul>
-
-</div><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-260</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/profile.rb', line 260</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/profile.rb', line 253</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::Profile (class)">Profile</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -1777,10 +1828,10 @@ search query.</p>
       <pre class="lines">
 
 
-260</pre>
+253</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/profile.rb', line 260</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/profile.rb', line 253</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::Profile (class)">Profile</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -1844,10 +1895,10 @@ for example, &quot;projects/api-test-project/tenants/foo/profiles/bar&quot;.</p>
       <pre class="lines">
 
 
-260</pre>
+253</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/profile.rb', line 260</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/profile.rb', line 253</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::Profile (class)">Profile</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -1903,10 +1954,10 @@ for example, &quot;projects/api-test-project/tenants/foo/profiles/bar&quot;.</p>
       <pre class="lines">
 
 
-260</pre>
+253</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/profile.rb', line 260</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/profile.rb', line 253</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::Profile (class)">Profile</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -1966,10 +2017,10 @@ for example, &quot;projects/api-test-project/tenants/foo/profiles/bar&quot;.</p>
       <pre class="lines">
 
 
-260</pre>
+253</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/profile.rb', line 260</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/profile.rb', line 253</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::Profile (class)">Profile</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -2025,10 +2076,10 @@ for example, &quot;projects/api-test-project/tenants/foo/profiles/bar&quot;.</p>
       <pre class="lines">
 
 
-260</pre>
+253</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/profile.rb', line 260</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/profile.rb', line 253</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::Profile (class)">Profile</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -2084,10 +2135,10 @@ for example, &quot;projects/api-test-project/tenants/foo/profiles/bar&quot;.</p>
       <pre class="lines">
 
 
-260</pre>
+253</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/profile.rb', line 260</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/profile.rb', line 253</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::Profile (class)">Profile</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -2139,10 +2190,10 @@ for example, &quot;projects/api-test-project/tenants/foo/profiles/bar&quot;.</p>
       <pre class="lines">
 
 
-260</pre>
+253</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/profile.rb', line 260</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/profile.rb', line 253</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::Profile (class)">Profile</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -2198,75 +2249,10 @@ for example, &quot;projects/api-test-project/tenants/foo/profiles/bar&quot;.</p>
       <pre class="lines">
 
 
-260</pre>
+253</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/profile.rb', line 260</span>
-
-<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::Profile (class)">Profile</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-      
-      <span id="recruiting_notes=-instance_method"></span>
-      <div class="method_details ">
-  <h3 class="signature " id="recruiting_notes-instance_method">
-  
-    #<strong>recruiting_notes</strong>  &#x21d2; <tt>Array&lt;<span class='object_link'><a href="RecruitingNote.html" title="Google::Cloud::Talent::V4beta1::RecruitingNote (class)">Google::Cloud::Talent::V4beta1::RecruitingNote</a></span>&gt;</tt> 
-  
-
-  
-
-  
-</h3><div class="docstring">
-  <div class="discussion">
-    <p>Returns Optional.</p>
-
-<p>The recruiting notes added for the candidate.</p>
-
-<p>For example, the recruiter can add some unstructured comments for this
-candidate like &quot;this candidate also has experiences in volunteer work&quot;.</p>
-
-
-  </div>
-</div>
-<div class="tags">
-  
-<p class="tag_title">Returns:</p>
-<ul class="return">
-  
-    <li>
-      
-      
-        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="RecruitingNote.html" title="Google::Cloud::Talent::V4beta1::RecruitingNote (class)">Google::Cloud::Talent::V4beta1::RecruitingNote</a></span>&gt;</tt>)</span>
-      
-      
-      
-        &mdash;
-        <div class='inline'><p>Optional.</p>
-
-<p>The recruiting notes added for the candidate.</p>
-
-<p>For example, the recruiter can add some unstructured comments for this
-candidate like &quot;this candidate also has experiences in volunteer work&quot;.</p>
-</div>
-      
-    </li>
-  
-</ul>
-
-</div><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-260</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/profile.rb', line 260</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/profile.rb', line 253</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::Profile (class)">Profile</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -2358,10 +2344,10 @@ parsing the HR-XML.</p>
       <pre class="lines">
 
 
-260</pre>
+253</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/profile.rb', line 260</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/profile.rb', line 253</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::Profile (class)">Profile</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -2419,10 +2405,10 @@ much information as possible to help improve the search quality.</p>
       <pre class="lines">
 
 
-260</pre>
+253</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/profile.rb', line 260</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/profile.rb', line 253</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::Profile (class)">Profile</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -2488,10 +2474,10 @@ input &quot;resume&quot; here to indicate the source.</p>
       <pre class="lines">
 
 
-260</pre>
+253</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/profile.rb', line 260</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/profile.rb', line 253</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::Profile (class)">Profile</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -2547,10 +2533,10 @@ input &quot;resume&quot; here to indicate the source.</p>
       <pre class="lines">
 
 
-260</pre>
+253</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/profile.rb', line 260</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/profile.rb', line 253</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::Profile (class)">Profile</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -2610,10 +2596,10 @@ input &quot;resume&quot; here to indicate the source.</p>
       <pre class="lines">
 
 
-260</pre>
+253</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/profile.rb', line 260</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/profile.rb', line 253</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::Profile (class)">Profile</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>

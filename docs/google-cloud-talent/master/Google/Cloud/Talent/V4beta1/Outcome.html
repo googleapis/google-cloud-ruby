@@ -1,6 +1,6 @@
 ---
 layout: yard_main
-title: "Module: Google::Cloud::Talent::V4beta1::Skill::SkillProficiencyLevel - Cloud"
+title: "Module: Google::Cloud::Talent::V4beta1::Outcome - Cloud"
 css: 
   - /docs/css/style.css
   - /docs/css/common.css
@@ -10,13 +10,13 @@ js:
   - /js/yard-main.js
 ---
 <script type="text/javascript" charset="utf-8">
-  pathId = "Google::Cloud::Talent::V4beta1::Skill::SkillProficiencyLevel";
-  relpath = '../../../../../';
+  pathId = "Google::Cloud::Talent::V4beta1::Outcome";
+  relpath = '../../../../';
 </script>
 
 
 <div class="nav_wrap">
-  <iframe id="nav" src="../../../../../class_list.html?1"></iframe>
+  <iframe id="nav" src="../../../../class_list.html?1"></iframe>
   <div id="resizer"></div>
 </div>
 
@@ -24,17 +24,17 @@ js:
   <div id="header">
     <div id="menu">
   
-    <a href="../../../../../_index.html">Index (S)</a> &raquo;
-    <span class='title'><span class='object_link'><a href="../../../../../Google.html" title="Google (module)">Google</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../../Talent.html" title="Google::Cloud::Talent (module)">Talent</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../V4beta1.html" title="Google::Cloud::Talent::V4beta1 (module)">V4beta1</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../Skill.html" title="Google::Cloud::Talent::V4beta1::Skill (class)">Skill</a></span></span>
+    <a href="../../../../_index.html">Index (O)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../Talent.html" title="Google::Cloud::Talent (module)">Talent</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../V4beta1.html" title="Google::Cloud::Talent::V4beta1 (module)">V4beta1</a></span></span>
      &raquo; 
-    <span class="title">SkillProficiencyLevel</span>
+    <span class="title">Outcome</span>
   
 </div>
 
     <div id="search">
   
     <a class="full_list_link" id="class_list_link"
-        href="../../../../../class_list.html">
+        href="../../../../class_list.html">
 
         <svg width="24" height="24">
           <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
@@ -47,7 +47,7 @@ js:
     <div class="clear"></div>
   </div>
 
-  <div id="content"><h1>Module: Google::Cloud::Talent::V4beta1::Skill::SkillProficiencyLevel
+  <div id="content"><h1>Module: Google::Cloud::Talent::V4beta1::Outcome
   
   
   
@@ -66,14 +66,14 @@ js:
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/profile.rb</dd>
+    <dd>lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/common.rb</dd>
   </dl>
   
 </div>
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>Enum that represents the skill proficiency level.</p>
+    <p>The overall outcome /decision / result indicator.</p>
 
 
   </div>
@@ -90,7 +90,7 @@ js:
 
     <dl class="constants">
       
-        <dt id="SKILL_PROFICIENCY_LEVEL_UNSPECIFIED-constant" class="">SKILL_PROFICIENCY_LEVEL_UNSPECIFIED =
+        <dt id="OUTCOME_UNSPECIFIED-constant" class="">OUTCOME_UNSPECIFIED =
           <div class="docstring">
   <div class="discussion">
     <p>Default value.</p>
@@ -105,11 +105,12 @@ js:
         </dt>
         <dd><pre class="code"><span class='int'>0</span></pre></dd>
       
-        <dt id="FUNDAMENTAL_AWARENESS-constant" class="">FUNDAMENTAL_AWARENESS =
+        <dt id="POSITIVE-constant" class="">POSITIVE =
           <div class="docstring">
   <div class="discussion">
-    <p>Have a common knowledge or an understanding of basic techniques and
-concepts.</p>
+    <p>A positive outcome / passing indicator (for example, candidate was
+recommended for hiring or to be moved forward in the hiring process,
+candidate passed a test).</p>
 
 
   </div>
@@ -121,11 +122,11 @@ concepts.</p>
         </dt>
         <dd><pre class="code"><span class='int'>1</span></pre></dd>
       
-        <dt id="NOVICE-constant" class="">NOVICE =
+        <dt id="NEUTRAL-constant" class="">NEUTRAL =
           <div class="docstring">
   <div class="discussion">
-    <p>Have the level of experience gained in a classroom and/or experimental
-scenarios or as a trainee on-the-job.</p>
+    <p>A neutral outcome / no clear indicator (for example, no strong
+reccommendation either to move forward / not move forward, neutral score).</p>
 
 
   </div>
@@ -137,12 +138,11 @@ scenarios or as a trainee on-the-job.</p>
         </dt>
         <dd><pre class="code"><span class='int'>2</span></pre></dd>
       
-        <dt id="INTERMEDIATE-constant" class="">INTERMEDIATE =
+        <dt id="NEGATIVE-constant" class="">NEGATIVE =
           <div class="docstring">
   <div class="discussion">
-    <p>Be able to successfully complete tasks in this skill as requested. Help
-from an expert may be required from time to time, but can usually perform
-skill independently.</p>
+    <p>A negative outcome / failing indicator (for example, candidate was
+recommended to NOT move forward in the hiring process, failed a test).</p>
 
 
   </div>
@@ -154,10 +154,11 @@ skill independently.</p>
         </dt>
         <dd><pre class="code"><span class='int'>3</span></pre></dd>
       
-        <dt id="ADVANCED-constant" class="">ADVANCED =
+        <dt id="OUTCOME_NOT_AVAILABLE-constant" class="">OUTCOME_NOT_AVAILABLE =
           <div class="docstring">
   <div class="discussion">
-    <p>Can perform the actions associated with this skill without assistance.</p>
+    <p>The assessment outcome is not available or otherwise unknown (for example,
+candidate did not complete assessment).</p>
 
 
   </div>
@@ -168,21 +169,6 @@ skill independently.</p>
 </div>
         </dt>
         <dd><pre class="code"><span class='int'>4</span></pre></dd>
-      
-        <dt id="EXPERT-constant" class="">EXPERT =
-          <div class="docstring">
-  <div class="discussion">
-    <p>Known as an expert in this area.</p>
-
-
-  </div>
-</div>
-<div class="tags">
-  
-
-</div>
-        </dt>
-        <dd><pre class="code"><span class='int'>5</span></pre></dd>
       
     </dl>
   

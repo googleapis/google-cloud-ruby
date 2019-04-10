@@ -1,0 +1,3368 @@
+---
+layout: yard_main
+title: "Class: Google::Cloud::Talent::V4beta1::Application - Cloud"
+css: 
+  - /docs/css/style.css
+  - /docs/css/common.css
+  - /css/yard-main.css
+js: 
+  - /docs/js/app.js
+  - /js/yard-main.js
+---
+<script type="text/javascript" charset="utf-8">
+  pathId = "Google::Cloud::Talent::V4beta1::Application";
+  relpath = '../../../../';
+</script>
+
+
+<div class="nav_wrap">
+  <iframe id="nav" src="../../../../class_list.html?1"></iframe>
+  <div id="resizer"></div>
+</div>
+
+<div id="main" tabindex="-1">
+  <div id="header">
+    <div id="menu">
+  
+    <a href="../../../../_index.html">Index (A)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../Talent.html" title="Google::Cloud::Talent (module)">Talent</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../V4beta1.html" title="Google::Cloud::Talent::V4beta1 (module)">V4beta1</a></span></span>
+     &raquo; 
+    <span class="title">Application</span>
+  
+</div>
+
+    <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../../../../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+    <div class="clear"></div>
+  </div>
+
+  <div id="content"><h1>Class: Google::Cloud::Talent::V4beta1::Application
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Google::Cloud::Talent::V4beta1::Application</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/application.rb</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>Resource that represents a job application record of a candidate.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><h2>Defined Under Namespace</h2>
+<p class="children">
+  
+    
+      <strong class="modules">Modules:</strong> <span class='object_link'><a href="Application/ApplicationStage.html" title="Google::Cloud::Talent::V4beta1::Application::ApplicationStage (module)">ApplicationStage</a></span>, <span class='object_link'><a href="Application/ApplicationState.html" title="Google::Cloud::Talent::V4beta1::Application::ApplicationState (module)">ApplicationState</a></span>
+    
+  
+    
+  
+</p>
+
+
+
+
+  <h2>Instance Attribute Summary <small><a href="#" class="summary_toggle">collapse</a></small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#application_date-instance_method" title="#application_date (instance method)">#<strong>application_date</strong>  &#x21d2; Google::Type::Date </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Optional.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#company-instance_method" title="#company (instance method)">#<strong>company</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>One of either a job or a company is required.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#create_time-instance_method" title="#create_time (instance method)">#<strong>create_time</strong>  &#x21d2; Google::Protobuf::Timestamp </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Required.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#external_id-instance_method" title="#external_id (instance method)">#<strong>external_id</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Required.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#interviews-instance_method" title="#interviews (instance method)">#<strong>interviews</strong>  &#x21d2; Array&lt;Google::Cloud::Talent::V4beta1::Interview&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Optional.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#is_match-instance_method" title="#is_match (instance method)">#<strong>is_match</strong>  &#x21d2; Google::Protobuf::BoolValue </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Output only.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#job-instance_method" title="#job (instance method)">#<strong>job</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>One of either a job or a company is required.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#job_title_snippet-instance_method" title="#job_title_snippet (instance method)">#<strong>job_title_snippet</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Output only.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#name-instance_method" title="#name (instance method)">#<strong>name</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Required during application update.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#outcome-instance_method" title="#outcome (instance method)">#<strong>outcome</strong>  &#x21d2; Google::Cloud::Talent::V4beta1::Outcome </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Optional.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#outcome_notes-instance_method" title="#outcome_notes (instance method)">#<strong>outcome_notes</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Optional.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#profile-instance_method" title="#profile (instance method)">#<strong>profile</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Required.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#referral-instance_method" title="#referral (instance method)">#<strong>referral</strong>  &#x21d2; Google::Protobuf::BoolValue </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Optional.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#stage-instance_method" title="#stage (instance method)">#<strong>stage</strong>  &#x21d2; Google::Cloud::Talent::V4beta1::Application::ApplicationStage </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Required.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#state-instance_method" title="#state (instance method)">#<strong>state</strong>  &#x21d2; Google::Cloud::Talent::V4beta1::Application::ApplicationState </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Optional.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#update_time-instance_method" title="#update_time (instance method)">#<strong>update_time</strong>  &#x21d2; Google::Protobuf::Timestamp </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Optional.</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+
+
+
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id="application_date=-instance_method"></span>
+      <div class="method_details first">
+  <h3 class="signature first" id="application_date-instance_method">
+  
+    #<strong>application_date</strong>  &#x21d2; <tt><span class='object_link'><a href="../../../Type/Date.html" title="Google::Type::Date (class)">Google::Type::Date</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Optional.</p>
+
+<p>The application date.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../../Type/Date.html" title="Google::Type::Date (class)">Google::Type::Date</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Optional.</p>
+
+<p>The application date.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/application.rb', line 129</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::Application (class)">Application</a></span></span>
+  <span class='comment'># The stage of the application.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Application/ApplicationStage.html" title="Google::Cloud::Talent::V4beta1::Application::ApplicationStage (module)">ApplicationStage</a></span></span>
+    <span class='comment'># Default value.
+</span>    <span class='const'>APPLICATION_STAGE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Candidate has applied or a recruiter put candidate into consideration but
+</span>    <span class='comment'># candidate is not yet screened / no decision has been made to move or not
+</span>    <span class='comment'># move the candidate to the next stage.
+</span>    <span class='const'>NEW</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># A recruiter decided to screen the candidate for this role.
+</span>    <span class='const'>SCREEN</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># Candidate is being / was sent to the customer / hiring manager for
+</span>    <span class='comment'># detailed review.
+</span>    <span class='const'>HIRING_MANAGER_REVIEW</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># Candidate was approved by the client / hiring manager and is being / was
+</span>    <span class='comment'># interviewed for the role.
+</span>    <span class='const'>INTERVIEW</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># Candidate will be / has been given an offer of employment.
+</span>    <span class='const'>OFFER_EXTENDED</span> <span class='op'>=</span> <span class='int'>5</span>
+
+    <span class='comment'># Candidate has accepted their offer of employment.
+</span>    <span class='const'>OFFER_ACCEPTED</span> <span class='op'>=</span> <span class='int'>6</span>
+
+    <span class='comment'># Candidate has begun (or completed) their employment or assignment with
+</span>    <span class='comment'># the employer.
+</span>    <span class='const'>STARTED</span> <span class='op'>=</span> <span class='int'>7</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># Enum that represents the application status.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Application/ApplicationState.html" title="Google::Cloud::Talent::V4beta1::Application::ApplicationState (module)">ApplicationState</a></span></span>
+    <span class='comment'># Default value.
+</span>    <span class='const'>APPLICATION_STATE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># The current stage is in progress or pending, for example, interviews in
+</span>    <span class='comment'># progress.
+</span>    <span class='const'>IN_PROGRESS</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># The current stage was terminated by a candidate decision.
+</span>    <span class='const'>CANDIDATE_WITHDREW</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># The current stage was terminated by an employer or agency decision.
+</span>    <span class='const'>EMPLOYER_WITHDREW</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># The current stage is successfully completed, but the next stage (if
+</span>    <span class='comment'># applicable) has not begun.
+</span>    <span class='const'>COMPLETED</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># The current stage was closed without an exception, or terminated for
+</span>    <span class='comment'># reasons unrealated to the candidate.
+</span>    <span class='const'>CLOSED</span> <span class='op'>=</span> <span class='int'>5</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="company=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="company-instance_method">
+  
+    #<strong>company</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns One of either a job or a company is required.</p>
+
+<p>Resource name of the company which the candidate applied for.</p>
+
+<p>The format is
+&quot;projects/project_id/companies/company_id&quot;,
+for example, &quot;projects/api-test-project/companies/foo&quot;.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>One of either a job or a company is required.</p>
+
+<p>Resource name of the company which the candidate applied for.</p>
+
+<p>The format is
+&quot;projects/project_id/companies/company_id&quot;,
+for example, &quot;projects/api-test-project/companies/foo&quot;.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/application.rb', line 129</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::Application (class)">Application</a></span></span>
+  <span class='comment'># The stage of the application.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Application/ApplicationStage.html" title="Google::Cloud::Talent::V4beta1::Application::ApplicationStage (module)">ApplicationStage</a></span></span>
+    <span class='comment'># Default value.
+</span>    <span class='const'>APPLICATION_STAGE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Candidate has applied or a recruiter put candidate into consideration but
+</span>    <span class='comment'># candidate is not yet screened / no decision has been made to move or not
+</span>    <span class='comment'># move the candidate to the next stage.
+</span>    <span class='const'>NEW</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># A recruiter decided to screen the candidate for this role.
+</span>    <span class='const'>SCREEN</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># Candidate is being / was sent to the customer / hiring manager for
+</span>    <span class='comment'># detailed review.
+</span>    <span class='const'>HIRING_MANAGER_REVIEW</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># Candidate was approved by the client / hiring manager and is being / was
+</span>    <span class='comment'># interviewed for the role.
+</span>    <span class='const'>INTERVIEW</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># Candidate will be / has been given an offer of employment.
+</span>    <span class='const'>OFFER_EXTENDED</span> <span class='op'>=</span> <span class='int'>5</span>
+
+    <span class='comment'># Candidate has accepted their offer of employment.
+</span>    <span class='const'>OFFER_ACCEPTED</span> <span class='op'>=</span> <span class='int'>6</span>
+
+    <span class='comment'># Candidate has begun (or completed) their employment or assignment with
+</span>    <span class='comment'># the employer.
+</span>    <span class='const'>STARTED</span> <span class='op'>=</span> <span class='int'>7</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># Enum that represents the application status.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Application/ApplicationState.html" title="Google::Cloud::Talent::V4beta1::Application::ApplicationState (module)">ApplicationState</a></span></span>
+    <span class='comment'># Default value.
+</span>    <span class='const'>APPLICATION_STATE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># The current stage is in progress or pending, for example, interviews in
+</span>    <span class='comment'># progress.
+</span>    <span class='const'>IN_PROGRESS</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># The current stage was terminated by a candidate decision.
+</span>    <span class='const'>CANDIDATE_WITHDREW</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># The current stage was terminated by an employer or agency decision.
+</span>    <span class='const'>EMPLOYER_WITHDREW</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># The current stage is successfully completed, but the next stage (if
+</span>    <span class='comment'># applicable) has not begun.
+</span>    <span class='const'>COMPLETED</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># The current stage was closed without an exception, or terminated for
+</span>    <span class='comment'># reasons unrealated to the candidate.
+</span>    <span class='const'>CLOSED</span> <span class='op'>=</span> <span class='int'>5</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="create_time=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="create_time-instance_method">
+  
+    #<strong>create_time</strong>  &#x21d2; <tt><span class='object_link'><a href="../../../Protobuf/Timestamp.html" title="Google::Protobuf::Timestamp (class)">Google::Protobuf::Timestamp</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Required.</p>
+
+<p>Reflects the time that the application was created.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../../Protobuf/Timestamp.html" title="Google::Protobuf::Timestamp (class)">Google::Protobuf::Timestamp</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Required.</p>
+
+<p>Reflects the time that the application was created.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/application.rb', line 129</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::Application (class)">Application</a></span></span>
+  <span class='comment'># The stage of the application.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Application/ApplicationStage.html" title="Google::Cloud::Talent::V4beta1::Application::ApplicationStage (module)">ApplicationStage</a></span></span>
+    <span class='comment'># Default value.
+</span>    <span class='const'>APPLICATION_STAGE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Candidate has applied or a recruiter put candidate into consideration but
+</span>    <span class='comment'># candidate is not yet screened / no decision has been made to move or not
+</span>    <span class='comment'># move the candidate to the next stage.
+</span>    <span class='const'>NEW</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># A recruiter decided to screen the candidate for this role.
+</span>    <span class='const'>SCREEN</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># Candidate is being / was sent to the customer / hiring manager for
+</span>    <span class='comment'># detailed review.
+</span>    <span class='const'>HIRING_MANAGER_REVIEW</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># Candidate was approved by the client / hiring manager and is being / was
+</span>    <span class='comment'># interviewed for the role.
+</span>    <span class='const'>INTERVIEW</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># Candidate will be / has been given an offer of employment.
+</span>    <span class='const'>OFFER_EXTENDED</span> <span class='op'>=</span> <span class='int'>5</span>
+
+    <span class='comment'># Candidate has accepted their offer of employment.
+</span>    <span class='const'>OFFER_ACCEPTED</span> <span class='op'>=</span> <span class='int'>6</span>
+
+    <span class='comment'># Candidate has begun (or completed) their employment or assignment with
+</span>    <span class='comment'># the employer.
+</span>    <span class='const'>STARTED</span> <span class='op'>=</span> <span class='int'>7</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># Enum that represents the application status.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Application/ApplicationState.html" title="Google::Cloud::Talent::V4beta1::Application::ApplicationState (module)">ApplicationState</a></span></span>
+    <span class='comment'># Default value.
+</span>    <span class='const'>APPLICATION_STATE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># The current stage is in progress or pending, for example, interviews in
+</span>    <span class='comment'># progress.
+</span>    <span class='const'>IN_PROGRESS</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># The current stage was terminated by a candidate decision.
+</span>    <span class='const'>CANDIDATE_WITHDREW</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># The current stage was terminated by an employer or agency decision.
+</span>    <span class='const'>EMPLOYER_WITHDREW</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># The current stage is successfully completed, but the next stage (if
+</span>    <span class='comment'># applicable) has not begun.
+</span>    <span class='const'>COMPLETED</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># The current stage was closed without an exception, or terminated for
+</span>    <span class='comment'># reasons unrealated to the candidate.
+</span>    <span class='const'>CLOSED</span> <span class='op'>=</span> <span class='int'>5</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="external_id=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="external_id-instance_method">
+  
+    #<strong>external_id</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Required.</p>
+
+<p>Client side application identifier, used to uniquely identify the
+recruiter.</p>
+
+<p>The maximum number of allowed characters is 255.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Required.</p>
+
+<p>Client side application identifier, used to uniquely identify the
+recruiter.</p>
+
+<p>The maximum number of allowed characters is 255.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/application.rb', line 129</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::Application (class)">Application</a></span></span>
+  <span class='comment'># The stage of the application.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Application/ApplicationStage.html" title="Google::Cloud::Talent::V4beta1::Application::ApplicationStage (module)">ApplicationStage</a></span></span>
+    <span class='comment'># Default value.
+</span>    <span class='const'>APPLICATION_STAGE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Candidate has applied or a recruiter put candidate into consideration but
+</span>    <span class='comment'># candidate is not yet screened / no decision has been made to move or not
+</span>    <span class='comment'># move the candidate to the next stage.
+</span>    <span class='const'>NEW</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># A recruiter decided to screen the candidate for this role.
+</span>    <span class='const'>SCREEN</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># Candidate is being / was sent to the customer / hiring manager for
+</span>    <span class='comment'># detailed review.
+</span>    <span class='const'>HIRING_MANAGER_REVIEW</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># Candidate was approved by the client / hiring manager and is being / was
+</span>    <span class='comment'># interviewed for the role.
+</span>    <span class='const'>INTERVIEW</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># Candidate will be / has been given an offer of employment.
+</span>    <span class='const'>OFFER_EXTENDED</span> <span class='op'>=</span> <span class='int'>5</span>
+
+    <span class='comment'># Candidate has accepted their offer of employment.
+</span>    <span class='const'>OFFER_ACCEPTED</span> <span class='op'>=</span> <span class='int'>6</span>
+
+    <span class='comment'># Candidate has begun (or completed) their employment or assignment with
+</span>    <span class='comment'># the employer.
+</span>    <span class='const'>STARTED</span> <span class='op'>=</span> <span class='int'>7</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># Enum that represents the application status.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Application/ApplicationState.html" title="Google::Cloud::Talent::V4beta1::Application::ApplicationState (module)">ApplicationState</a></span></span>
+    <span class='comment'># Default value.
+</span>    <span class='const'>APPLICATION_STATE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># The current stage is in progress or pending, for example, interviews in
+</span>    <span class='comment'># progress.
+</span>    <span class='const'>IN_PROGRESS</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># The current stage was terminated by a candidate decision.
+</span>    <span class='const'>CANDIDATE_WITHDREW</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># The current stage was terminated by an employer or agency decision.
+</span>    <span class='const'>EMPLOYER_WITHDREW</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># The current stage is successfully completed, but the next stage (if
+</span>    <span class='comment'># applicable) has not begun.
+</span>    <span class='const'>COMPLETED</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># The current stage was closed without an exception, or terminated for
+</span>    <span class='comment'># reasons unrealated to the candidate.
+</span>    <span class='const'>CLOSED</span> <span class='op'>=</span> <span class='int'>5</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="interviews=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="interviews-instance_method">
+  
+    #<strong>interviews</strong>  &#x21d2; <tt>Array&lt;<span class='object_link'><a href="Interview.html" title="Google::Cloud::Talent::V4beta1::Interview (class)">Google::Cloud::Talent::V4beta1::Interview</a></span>&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Optional.</p>
+
+<p>All interviews (screen, onsite, etc) conducted as part of this application
+(includes details such as user conducting the interview, timestamp,
+feedback, etc).</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="Interview.html" title="Google::Cloud::Talent::V4beta1::Interview (class)">Google::Cloud::Talent::V4beta1::Interview</a></span>&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Optional.</p>
+
+<p>All interviews (screen, onsite, etc) conducted as part of this application
+(includes details such as user conducting the interview, timestamp,
+feedback, etc).</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/application.rb', line 129</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::Application (class)">Application</a></span></span>
+  <span class='comment'># The stage of the application.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Application/ApplicationStage.html" title="Google::Cloud::Talent::V4beta1::Application::ApplicationStage (module)">ApplicationStage</a></span></span>
+    <span class='comment'># Default value.
+</span>    <span class='const'>APPLICATION_STAGE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Candidate has applied or a recruiter put candidate into consideration but
+</span>    <span class='comment'># candidate is not yet screened / no decision has been made to move or not
+</span>    <span class='comment'># move the candidate to the next stage.
+</span>    <span class='const'>NEW</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># A recruiter decided to screen the candidate for this role.
+</span>    <span class='const'>SCREEN</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># Candidate is being / was sent to the customer / hiring manager for
+</span>    <span class='comment'># detailed review.
+</span>    <span class='const'>HIRING_MANAGER_REVIEW</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># Candidate was approved by the client / hiring manager and is being / was
+</span>    <span class='comment'># interviewed for the role.
+</span>    <span class='const'>INTERVIEW</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># Candidate will be / has been given an offer of employment.
+</span>    <span class='const'>OFFER_EXTENDED</span> <span class='op'>=</span> <span class='int'>5</span>
+
+    <span class='comment'># Candidate has accepted their offer of employment.
+</span>    <span class='const'>OFFER_ACCEPTED</span> <span class='op'>=</span> <span class='int'>6</span>
+
+    <span class='comment'># Candidate has begun (or completed) their employment or assignment with
+</span>    <span class='comment'># the employer.
+</span>    <span class='const'>STARTED</span> <span class='op'>=</span> <span class='int'>7</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># Enum that represents the application status.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Application/ApplicationState.html" title="Google::Cloud::Talent::V4beta1::Application::ApplicationState (module)">ApplicationState</a></span></span>
+    <span class='comment'># Default value.
+</span>    <span class='const'>APPLICATION_STATE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># The current stage is in progress or pending, for example, interviews in
+</span>    <span class='comment'># progress.
+</span>    <span class='const'>IN_PROGRESS</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># The current stage was terminated by a candidate decision.
+</span>    <span class='const'>CANDIDATE_WITHDREW</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># The current stage was terminated by an employer or agency decision.
+</span>    <span class='const'>EMPLOYER_WITHDREW</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># The current stage is successfully completed, but the next stage (if
+</span>    <span class='comment'># applicable) has not begun.
+</span>    <span class='const'>COMPLETED</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># The current stage was closed without an exception, or terminated for
+</span>    <span class='comment'># reasons unrealated to the candidate.
+</span>    <span class='const'>CLOSED</span> <span class='op'>=</span> <span class='int'>5</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="is_match=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="is_match-instance_method">
+  
+    #<strong>is_match</strong>  &#x21d2; <tt><span class='object_link'><a href="../../../Protobuf/BoolValue.html" title="Google::Protobuf::BoolValue (class)">Google::Protobuf::BoolValue</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Output only. Indicates whether this job application is a match to
+application related filters. This value is only applicable in profile
+search response.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../../Protobuf/BoolValue.html" title="Google::Protobuf::BoolValue (class)">Google::Protobuf::BoolValue</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Output only. Indicates whether this job application is a match to
+application related filters. This value is only applicable in profile
+search response.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/application.rb', line 129</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::Application (class)">Application</a></span></span>
+  <span class='comment'># The stage of the application.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Application/ApplicationStage.html" title="Google::Cloud::Talent::V4beta1::Application::ApplicationStage (module)">ApplicationStage</a></span></span>
+    <span class='comment'># Default value.
+</span>    <span class='const'>APPLICATION_STAGE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Candidate has applied or a recruiter put candidate into consideration but
+</span>    <span class='comment'># candidate is not yet screened / no decision has been made to move or not
+</span>    <span class='comment'># move the candidate to the next stage.
+</span>    <span class='const'>NEW</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># A recruiter decided to screen the candidate for this role.
+</span>    <span class='const'>SCREEN</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># Candidate is being / was sent to the customer / hiring manager for
+</span>    <span class='comment'># detailed review.
+</span>    <span class='const'>HIRING_MANAGER_REVIEW</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># Candidate was approved by the client / hiring manager and is being / was
+</span>    <span class='comment'># interviewed for the role.
+</span>    <span class='const'>INTERVIEW</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># Candidate will be / has been given an offer of employment.
+</span>    <span class='const'>OFFER_EXTENDED</span> <span class='op'>=</span> <span class='int'>5</span>
+
+    <span class='comment'># Candidate has accepted their offer of employment.
+</span>    <span class='const'>OFFER_ACCEPTED</span> <span class='op'>=</span> <span class='int'>6</span>
+
+    <span class='comment'># Candidate has begun (or completed) their employment or assignment with
+</span>    <span class='comment'># the employer.
+</span>    <span class='const'>STARTED</span> <span class='op'>=</span> <span class='int'>7</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># Enum that represents the application status.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Application/ApplicationState.html" title="Google::Cloud::Talent::V4beta1::Application::ApplicationState (module)">ApplicationState</a></span></span>
+    <span class='comment'># Default value.
+</span>    <span class='const'>APPLICATION_STATE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># The current stage is in progress or pending, for example, interviews in
+</span>    <span class='comment'># progress.
+</span>    <span class='const'>IN_PROGRESS</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># The current stage was terminated by a candidate decision.
+</span>    <span class='const'>CANDIDATE_WITHDREW</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># The current stage was terminated by an employer or agency decision.
+</span>    <span class='const'>EMPLOYER_WITHDREW</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># The current stage is successfully completed, but the next stage (if
+</span>    <span class='comment'># applicable) has not begun.
+</span>    <span class='const'>COMPLETED</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># The current stage was closed without an exception, or terminated for
+</span>    <span class='comment'># reasons unrealated to the candidate.
+</span>    <span class='const'>CLOSED</span> <span class='op'>=</span> <span class='int'>5</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="job=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="job-instance_method">
+  
+    #<strong>job</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns One of either a job or a company is required.</p>
+
+<p>Resource name of the job which the candidate applied for.</p>
+
+<p>The format is
+&quot;projects/project_id/jobs/job_id&quot;,
+for example, &quot;projects/api-test-project/jobs/bar&quot;.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>One of either a job or a company is required.</p>
+
+<p>Resource name of the job which the candidate applied for.</p>
+
+<p>The format is
+&quot;projects/project_id/jobs/job_id&quot;,
+for example, &quot;projects/api-test-project/jobs/bar&quot;.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/application.rb', line 129</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::Application (class)">Application</a></span></span>
+  <span class='comment'># The stage of the application.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Application/ApplicationStage.html" title="Google::Cloud::Talent::V4beta1::Application::ApplicationStage (module)">ApplicationStage</a></span></span>
+    <span class='comment'># Default value.
+</span>    <span class='const'>APPLICATION_STAGE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Candidate has applied or a recruiter put candidate into consideration but
+</span>    <span class='comment'># candidate is not yet screened / no decision has been made to move or not
+</span>    <span class='comment'># move the candidate to the next stage.
+</span>    <span class='const'>NEW</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># A recruiter decided to screen the candidate for this role.
+</span>    <span class='const'>SCREEN</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># Candidate is being / was sent to the customer / hiring manager for
+</span>    <span class='comment'># detailed review.
+</span>    <span class='const'>HIRING_MANAGER_REVIEW</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># Candidate was approved by the client / hiring manager and is being / was
+</span>    <span class='comment'># interviewed for the role.
+</span>    <span class='const'>INTERVIEW</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># Candidate will be / has been given an offer of employment.
+</span>    <span class='const'>OFFER_EXTENDED</span> <span class='op'>=</span> <span class='int'>5</span>
+
+    <span class='comment'># Candidate has accepted their offer of employment.
+</span>    <span class='const'>OFFER_ACCEPTED</span> <span class='op'>=</span> <span class='int'>6</span>
+
+    <span class='comment'># Candidate has begun (or completed) their employment or assignment with
+</span>    <span class='comment'># the employer.
+</span>    <span class='const'>STARTED</span> <span class='op'>=</span> <span class='int'>7</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># Enum that represents the application status.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Application/ApplicationState.html" title="Google::Cloud::Talent::V4beta1::Application::ApplicationState (module)">ApplicationState</a></span></span>
+    <span class='comment'># Default value.
+</span>    <span class='const'>APPLICATION_STATE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># The current stage is in progress or pending, for example, interviews in
+</span>    <span class='comment'># progress.
+</span>    <span class='const'>IN_PROGRESS</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># The current stage was terminated by a candidate decision.
+</span>    <span class='const'>CANDIDATE_WITHDREW</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># The current stage was terminated by an employer or agency decision.
+</span>    <span class='const'>EMPLOYER_WITHDREW</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># The current stage is successfully completed, but the next stage (if
+</span>    <span class='comment'># applicable) has not begun.
+</span>    <span class='const'>COMPLETED</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># The current stage was closed without an exception, or terminated for
+</span>    <span class='comment'># reasons unrealated to the candidate.
+</span>    <span class='const'>CLOSED</span> <span class='op'>=</span> <span class='int'>5</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="job_title_snippet=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="job_title_snippet-instance_method">
+  
+    #<strong>job_title_snippet</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Output only. Job title snippet shows how the job title is related to a
+search query. It&#39;s empty if the job title isn&#39;t related to the search
+query.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Output only. Job title snippet shows how the job title is related to a
+search query. It&#39;s empty if the job title isn&#39;t related to the search
+query.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/application.rb', line 129</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::Application (class)">Application</a></span></span>
+  <span class='comment'># The stage of the application.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Application/ApplicationStage.html" title="Google::Cloud::Talent::V4beta1::Application::ApplicationStage (module)">ApplicationStage</a></span></span>
+    <span class='comment'># Default value.
+</span>    <span class='const'>APPLICATION_STAGE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Candidate has applied or a recruiter put candidate into consideration but
+</span>    <span class='comment'># candidate is not yet screened / no decision has been made to move or not
+</span>    <span class='comment'># move the candidate to the next stage.
+</span>    <span class='const'>NEW</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># A recruiter decided to screen the candidate for this role.
+</span>    <span class='const'>SCREEN</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># Candidate is being / was sent to the customer / hiring manager for
+</span>    <span class='comment'># detailed review.
+</span>    <span class='const'>HIRING_MANAGER_REVIEW</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># Candidate was approved by the client / hiring manager and is being / was
+</span>    <span class='comment'># interviewed for the role.
+</span>    <span class='const'>INTERVIEW</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># Candidate will be / has been given an offer of employment.
+</span>    <span class='const'>OFFER_EXTENDED</span> <span class='op'>=</span> <span class='int'>5</span>
+
+    <span class='comment'># Candidate has accepted their offer of employment.
+</span>    <span class='const'>OFFER_ACCEPTED</span> <span class='op'>=</span> <span class='int'>6</span>
+
+    <span class='comment'># Candidate has begun (or completed) their employment or assignment with
+</span>    <span class='comment'># the employer.
+</span>    <span class='const'>STARTED</span> <span class='op'>=</span> <span class='int'>7</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># Enum that represents the application status.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Application/ApplicationState.html" title="Google::Cloud::Talent::V4beta1::Application::ApplicationState (module)">ApplicationState</a></span></span>
+    <span class='comment'># Default value.
+</span>    <span class='const'>APPLICATION_STATE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># The current stage is in progress or pending, for example, interviews in
+</span>    <span class='comment'># progress.
+</span>    <span class='const'>IN_PROGRESS</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># The current stage was terminated by a candidate decision.
+</span>    <span class='const'>CANDIDATE_WITHDREW</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># The current stage was terminated by an employer or agency decision.
+</span>    <span class='const'>EMPLOYER_WITHDREW</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># The current stage is successfully completed, but the next stage (if
+</span>    <span class='comment'># applicable) has not begun.
+</span>    <span class='const'>COMPLETED</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># The current stage was closed without an exception, or terminated for
+</span>    <span class='comment'># reasons unrealated to the candidate.
+</span>    <span class='const'>CLOSED</span> <span class='op'>=</span> <span class='int'>5</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="name=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="name-instance_method">
+  
+    #<strong>name</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Required during application update.</p>
+
+<p>Resource name assigned to an application by the API.</p>
+
+<p>The format is
+&quot;projects/project_id/tenants/tenant_id/profiles/profile_id/applications/application_id&quot;,
+for example,
+&quot;projects/api-test-project/tenants/foo/profiles/bar/applications/baz&quot;.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Required during application update.</p>
+
+<p>Resource name assigned to an application by the API.</p>
+
+<p>The format is
+&quot;projects/project_id/tenants/tenant_id/profiles/profile_id/applications/application_id&quot;,
+for example,
+&quot;projects/api-test-project/tenants/foo/profiles/bar/applications/baz&quot;.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/application.rb', line 129</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::Application (class)">Application</a></span></span>
+  <span class='comment'># The stage of the application.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Application/ApplicationStage.html" title="Google::Cloud::Talent::V4beta1::Application::ApplicationStage (module)">ApplicationStage</a></span></span>
+    <span class='comment'># Default value.
+</span>    <span class='const'>APPLICATION_STAGE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Candidate has applied or a recruiter put candidate into consideration but
+</span>    <span class='comment'># candidate is not yet screened / no decision has been made to move or not
+</span>    <span class='comment'># move the candidate to the next stage.
+</span>    <span class='const'>NEW</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># A recruiter decided to screen the candidate for this role.
+</span>    <span class='const'>SCREEN</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># Candidate is being / was sent to the customer / hiring manager for
+</span>    <span class='comment'># detailed review.
+</span>    <span class='const'>HIRING_MANAGER_REVIEW</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># Candidate was approved by the client / hiring manager and is being / was
+</span>    <span class='comment'># interviewed for the role.
+</span>    <span class='const'>INTERVIEW</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># Candidate will be / has been given an offer of employment.
+</span>    <span class='const'>OFFER_EXTENDED</span> <span class='op'>=</span> <span class='int'>5</span>
+
+    <span class='comment'># Candidate has accepted their offer of employment.
+</span>    <span class='const'>OFFER_ACCEPTED</span> <span class='op'>=</span> <span class='int'>6</span>
+
+    <span class='comment'># Candidate has begun (or completed) their employment or assignment with
+</span>    <span class='comment'># the employer.
+</span>    <span class='const'>STARTED</span> <span class='op'>=</span> <span class='int'>7</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># Enum that represents the application status.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Application/ApplicationState.html" title="Google::Cloud::Talent::V4beta1::Application::ApplicationState (module)">ApplicationState</a></span></span>
+    <span class='comment'># Default value.
+</span>    <span class='const'>APPLICATION_STATE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># The current stage is in progress or pending, for example, interviews in
+</span>    <span class='comment'># progress.
+</span>    <span class='const'>IN_PROGRESS</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># The current stage was terminated by a candidate decision.
+</span>    <span class='const'>CANDIDATE_WITHDREW</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># The current stage was terminated by an employer or agency decision.
+</span>    <span class='const'>EMPLOYER_WITHDREW</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># The current stage is successfully completed, but the next stage (if
+</span>    <span class='comment'># applicable) has not begun.
+</span>    <span class='const'>COMPLETED</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># The current stage was closed without an exception, or terminated for
+</span>    <span class='comment'># reasons unrealated to the candidate.
+</span>    <span class='const'>CLOSED</span> <span class='op'>=</span> <span class='int'>5</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="outcome=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="outcome-instance_method">
+  
+    #<strong>outcome</strong>  &#x21d2; <tt><span class='object_link'><a href="Outcome.html" title="Google::Cloud::Talent::V4beta1::Outcome (module)">Google::Cloud::Talent::V4beta1::Outcome</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Optional.</p>
+
+<p>Outcome positiveness shows how positive the outcome is.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Outcome.html" title="Google::Cloud::Talent::V4beta1::Outcome (module)">Google::Cloud::Talent::V4beta1::Outcome</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Optional.</p>
+
+<p>Outcome positiveness shows how positive the outcome is.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/application.rb', line 129</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::Application (class)">Application</a></span></span>
+  <span class='comment'># The stage of the application.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Application/ApplicationStage.html" title="Google::Cloud::Talent::V4beta1::Application::ApplicationStage (module)">ApplicationStage</a></span></span>
+    <span class='comment'># Default value.
+</span>    <span class='const'>APPLICATION_STAGE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Candidate has applied or a recruiter put candidate into consideration but
+</span>    <span class='comment'># candidate is not yet screened / no decision has been made to move or not
+</span>    <span class='comment'># move the candidate to the next stage.
+</span>    <span class='const'>NEW</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># A recruiter decided to screen the candidate for this role.
+</span>    <span class='const'>SCREEN</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># Candidate is being / was sent to the customer / hiring manager for
+</span>    <span class='comment'># detailed review.
+</span>    <span class='const'>HIRING_MANAGER_REVIEW</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># Candidate was approved by the client / hiring manager and is being / was
+</span>    <span class='comment'># interviewed for the role.
+</span>    <span class='const'>INTERVIEW</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># Candidate will be / has been given an offer of employment.
+</span>    <span class='const'>OFFER_EXTENDED</span> <span class='op'>=</span> <span class='int'>5</span>
+
+    <span class='comment'># Candidate has accepted their offer of employment.
+</span>    <span class='const'>OFFER_ACCEPTED</span> <span class='op'>=</span> <span class='int'>6</span>
+
+    <span class='comment'># Candidate has begun (or completed) their employment or assignment with
+</span>    <span class='comment'># the employer.
+</span>    <span class='const'>STARTED</span> <span class='op'>=</span> <span class='int'>7</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># Enum that represents the application status.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Application/ApplicationState.html" title="Google::Cloud::Talent::V4beta1::Application::ApplicationState (module)">ApplicationState</a></span></span>
+    <span class='comment'># Default value.
+</span>    <span class='const'>APPLICATION_STATE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># The current stage is in progress or pending, for example, interviews in
+</span>    <span class='comment'># progress.
+</span>    <span class='const'>IN_PROGRESS</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># The current stage was terminated by a candidate decision.
+</span>    <span class='const'>CANDIDATE_WITHDREW</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># The current stage was terminated by an employer or agency decision.
+</span>    <span class='const'>EMPLOYER_WITHDREW</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># The current stage is successfully completed, but the next stage (if
+</span>    <span class='comment'># applicable) has not begun.
+</span>    <span class='const'>COMPLETED</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># The current stage was closed without an exception, or terminated for
+</span>    <span class='comment'># reasons unrealated to the candidate.
+</span>    <span class='const'>CLOSED</span> <span class='op'>=</span> <span class='int'>5</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="outcome_notes=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="outcome_notes-instance_method">
+  
+    #<strong>outcome_notes</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Optional.</p>
+
+<p>Free text reason behind the recruitement outcome (for example, reason for
+withdraw / reject, reason for an unsuccessful finish, and so on).</p>
+
+<p>Number of characters allowed is 100.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Optional.</p>
+
+<p>Free text reason behind the recruitement outcome (for example, reason for
+withdraw / reject, reason for an unsuccessful finish, and so on).</p>
+
+<p>Number of characters allowed is 100.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/application.rb', line 129</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::Application (class)">Application</a></span></span>
+  <span class='comment'># The stage of the application.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Application/ApplicationStage.html" title="Google::Cloud::Talent::V4beta1::Application::ApplicationStage (module)">ApplicationStage</a></span></span>
+    <span class='comment'># Default value.
+</span>    <span class='const'>APPLICATION_STAGE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Candidate has applied or a recruiter put candidate into consideration but
+</span>    <span class='comment'># candidate is not yet screened / no decision has been made to move or not
+</span>    <span class='comment'># move the candidate to the next stage.
+</span>    <span class='const'>NEW</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># A recruiter decided to screen the candidate for this role.
+</span>    <span class='const'>SCREEN</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># Candidate is being / was sent to the customer / hiring manager for
+</span>    <span class='comment'># detailed review.
+</span>    <span class='const'>HIRING_MANAGER_REVIEW</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># Candidate was approved by the client / hiring manager and is being / was
+</span>    <span class='comment'># interviewed for the role.
+</span>    <span class='const'>INTERVIEW</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># Candidate will be / has been given an offer of employment.
+</span>    <span class='const'>OFFER_EXTENDED</span> <span class='op'>=</span> <span class='int'>5</span>
+
+    <span class='comment'># Candidate has accepted their offer of employment.
+</span>    <span class='const'>OFFER_ACCEPTED</span> <span class='op'>=</span> <span class='int'>6</span>
+
+    <span class='comment'># Candidate has begun (or completed) their employment or assignment with
+</span>    <span class='comment'># the employer.
+</span>    <span class='const'>STARTED</span> <span class='op'>=</span> <span class='int'>7</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># Enum that represents the application status.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Application/ApplicationState.html" title="Google::Cloud::Talent::V4beta1::Application::ApplicationState (module)">ApplicationState</a></span></span>
+    <span class='comment'># Default value.
+</span>    <span class='const'>APPLICATION_STATE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># The current stage is in progress or pending, for example, interviews in
+</span>    <span class='comment'># progress.
+</span>    <span class='const'>IN_PROGRESS</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># The current stage was terminated by a candidate decision.
+</span>    <span class='const'>CANDIDATE_WITHDREW</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># The current stage was terminated by an employer or agency decision.
+</span>    <span class='const'>EMPLOYER_WITHDREW</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># The current stage is successfully completed, but the next stage (if
+</span>    <span class='comment'># applicable) has not begun.
+</span>    <span class='const'>COMPLETED</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># The current stage was closed without an exception, or terminated for
+</span>    <span class='comment'># reasons unrealated to the candidate.
+</span>    <span class='const'>CLOSED</span> <span class='op'>=</span> <span class='int'>5</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="profile=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="profile-instance_method">
+  
+    #<strong>profile</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Required.</p>
+
+<p>Resource name of the candidate of this application.</p>
+
+<p>The format is
+&quot;projects/project_id/tenants/tenant_id/profiles/profile_id&quot;,
+for example, &quot;projects/api-test-project/tenants/foo/profiles/bar&quot;.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Required.</p>
+
+<p>Resource name of the candidate of this application.</p>
+
+<p>The format is
+&quot;projects/project_id/tenants/tenant_id/profiles/profile_id&quot;,
+for example, &quot;projects/api-test-project/tenants/foo/profiles/bar&quot;.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/application.rb', line 129</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::Application (class)">Application</a></span></span>
+  <span class='comment'># The stage of the application.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Application/ApplicationStage.html" title="Google::Cloud::Talent::V4beta1::Application::ApplicationStage (module)">ApplicationStage</a></span></span>
+    <span class='comment'># Default value.
+</span>    <span class='const'>APPLICATION_STAGE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Candidate has applied or a recruiter put candidate into consideration but
+</span>    <span class='comment'># candidate is not yet screened / no decision has been made to move or not
+</span>    <span class='comment'># move the candidate to the next stage.
+</span>    <span class='const'>NEW</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># A recruiter decided to screen the candidate for this role.
+</span>    <span class='const'>SCREEN</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># Candidate is being / was sent to the customer / hiring manager for
+</span>    <span class='comment'># detailed review.
+</span>    <span class='const'>HIRING_MANAGER_REVIEW</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># Candidate was approved by the client / hiring manager and is being / was
+</span>    <span class='comment'># interviewed for the role.
+</span>    <span class='const'>INTERVIEW</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># Candidate will be / has been given an offer of employment.
+</span>    <span class='const'>OFFER_EXTENDED</span> <span class='op'>=</span> <span class='int'>5</span>
+
+    <span class='comment'># Candidate has accepted their offer of employment.
+</span>    <span class='const'>OFFER_ACCEPTED</span> <span class='op'>=</span> <span class='int'>6</span>
+
+    <span class='comment'># Candidate has begun (or completed) their employment or assignment with
+</span>    <span class='comment'># the employer.
+</span>    <span class='const'>STARTED</span> <span class='op'>=</span> <span class='int'>7</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># Enum that represents the application status.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Application/ApplicationState.html" title="Google::Cloud::Talent::V4beta1::Application::ApplicationState (module)">ApplicationState</a></span></span>
+    <span class='comment'># Default value.
+</span>    <span class='const'>APPLICATION_STATE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># The current stage is in progress or pending, for example, interviews in
+</span>    <span class='comment'># progress.
+</span>    <span class='const'>IN_PROGRESS</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># The current stage was terminated by a candidate decision.
+</span>    <span class='const'>CANDIDATE_WITHDREW</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># The current stage was terminated by an employer or agency decision.
+</span>    <span class='const'>EMPLOYER_WITHDREW</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># The current stage is successfully completed, but the next stage (if
+</span>    <span class='comment'># applicable) has not begun.
+</span>    <span class='const'>COMPLETED</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># The current stage was closed without an exception, or terminated for
+</span>    <span class='comment'># reasons unrealated to the candidate.
+</span>    <span class='const'>CLOSED</span> <span class='op'>=</span> <span class='int'>5</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="referral=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="referral-instance_method">
+  
+    #<strong>referral</strong>  &#x21d2; <tt><span class='object_link'><a href="../../../Protobuf/BoolValue.html" title="Google::Protobuf::BoolValue (class)">Google::Protobuf::BoolValue</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Optional.</p>
+
+<p>If the candidate is referred by a employee.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../../Protobuf/BoolValue.html" title="Google::Protobuf::BoolValue (class)">Google::Protobuf::BoolValue</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Optional.</p>
+
+<p>If the candidate is referred by a employee.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/application.rb', line 129</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::Application (class)">Application</a></span></span>
+  <span class='comment'># The stage of the application.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Application/ApplicationStage.html" title="Google::Cloud::Talent::V4beta1::Application::ApplicationStage (module)">ApplicationStage</a></span></span>
+    <span class='comment'># Default value.
+</span>    <span class='const'>APPLICATION_STAGE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Candidate has applied or a recruiter put candidate into consideration but
+</span>    <span class='comment'># candidate is not yet screened / no decision has been made to move or not
+</span>    <span class='comment'># move the candidate to the next stage.
+</span>    <span class='const'>NEW</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># A recruiter decided to screen the candidate for this role.
+</span>    <span class='const'>SCREEN</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># Candidate is being / was sent to the customer / hiring manager for
+</span>    <span class='comment'># detailed review.
+</span>    <span class='const'>HIRING_MANAGER_REVIEW</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># Candidate was approved by the client / hiring manager and is being / was
+</span>    <span class='comment'># interviewed for the role.
+</span>    <span class='const'>INTERVIEW</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># Candidate will be / has been given an offer of employment.
+</span>    <span class='const'>OFFER_EXTENDED</span> <span class='op'>=</span> <span class='int'>5</span>
+
+    <span class='comment'># Candidate has accepted their offer of employment.
+</span>    <span class='const'>OFFER_ACCEPTED</span> <span class='op'>=</span> <span class='int'>6</span>
+
+    <span class='comment'># Candidate has begun (or completed) their employment or assignment with
+</span>    <span class='comment'># the employer.
+</span>    <span class='const'>STARTED</span> <span class='op'>=</span> <span class='int'>7</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># Enum that represents the application status.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Application/ApplicationState.html" title="Google::Cloud::Talent::V4beta1::Application::ApplicationState (module)">ApplicationState</a></span></span>
+    <span class='comment'># Default value.
+</span>    <span class='const'>APPLICATION_STATE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># The current stage is in progress or pending, for example, interviews in
+</span>    <span class='comment'># progress.
+</span>    <span class='const'>IN_PROGRESS</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># The current stage was terminated by a candidate decision.
+</span>    <span class='const'>CANDIDATE_WITHDREW</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># The current stage was terminated by an employer or agency decision.
+</span>    <span class='const'>EMPLOYER_WITHDREW</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># The current stage is successfully completed, but the next stage (if
+</span>    <span class='comment'># applicable) has not begun.
+</span>    <span class='const'>COMPLETED</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># The current stage was closed without an exception, or terminated for
+</span>    <span class='comment'># reasons unrealated to the candidate.
+</span>    <span class='const'>CLOSED</span> <span class='op'>=</span> <span class='int'>5</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="stage=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="stage-instance_method">
+  
+    #<strong>stage</strong>  &#x21d2; <tt><span class='object_link'><a href="Application/ApplicationStage.html" title="Google::Cloud::Talent::V4beta1::Application::ApplicationStage (module)">Google::Cloud::Talent::V4beta1::Application::ApplicationStage</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Required.</p>
+
+<p>What is the most recent stage of the application (that is, new, screen,
+send cv, hired, finished work)?  This field is intentionally not
+comprehensive of every possible status, but instead, represents statuses
+that would be used to indicate to the ML models good / bad matches.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Application/ApplicationStage.html" title="Google::Cloud::Talent::V4beta1::Application::ApplicationStage (module)">Google::Cloud::Talent::V4beta1::Application::ApplicationStage</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Required.</p>
+
+<p>What is the most recent stage of the application (that is, new, screen,
+send cv, hired, finished work)?  This field is intentionally not
+comprehensive of every possible status, but instead, represents statuses
+that would be used to indicate to the ML models good / bad matches.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/application.rb', line 129</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::Application (class)">Application</a></span></span>
+  <span class='comment'># The stage of the application.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Application/ApplicationStage.html" title="Google::Cloud::Talent::V4beta1::Application::ApplicationStage (module)">ApplicationStage</a></span></span>
+    <span class='comment'># Default value.
+</span>    <span class='const'>APPLICATION_STAGE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Candidate has applied or a recruiter put candidate into consideration but
+</span>    <span class='comment'># candidate is not yet screened / no decision has been made to move or not
+</span>    <span class='comment'># move the candidate to the next stage.
+</span>    <span class='const'>NEW</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># A recruiter decided to screen the candidate for this role.
+</span>    <span class='const'>SCREEN</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># Candidate is being / was sent to the customer / hiring manager for
+</span>    <span class='comment'># detailed review.
+</span>    <span class='const'>HIRING_MANAGER_REVIEW</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># Candidate was approved by the client / hiring manager and is being / was
+</span>    <span class='comment'># interviewed for the role.
+</span>    <span class='const'>INTERVIEW</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># Candidate will be / has been given an offer of employment.
+</span>    <span class='const'>OFFER_EXTENDED</span> <span class='op'>=</span> <span class='int'>5</span>
+
+    <span class='comment'># Candidate has accepted their offer of employment.
+</span>    <span class='const'>OFFER_ACCEPTED</span> <span class='op'>=</span> <span class='int'>6</span>
+
+    <span class='comment'># Candidate has begun (or completed) their employment or assignment with
+</span>    <span class='comment'># the employer.
+</span>    <span class='const'>STARTED</span> <span class='op'>=</span> <span class='int'>7</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># Enum that represents the application status.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Application/ApplicationState.html" title="Google::Cloud::Talent::V4beta1::Application::ApplicationState (module)">ApplicationState</a></span></span>
+    <span class='comment'># Default value.
+</span>    <span class='const'>APPLICATION_STATE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># The current stage is in progress or pending, for example, interviews in
+</span>    <span class='comment'># progress.
+</span>    <span class='const'>IN_PROGRESS</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># The current stage was terminated by a candidate decision.
+</span>    <span class='const'>CANDIDATE_WITHDREW</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># The current stage was terminated by an employer or agency decision.
+</span>    <span class='const'>EMPLOYER_WITHDREW</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># The current stage is successfully completed, but the next stage (if
+</span>    <span class='comment'># applicable) has not begun.
+</span>    <span class='const'>COMPLETED</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># The current stage was closed without an exception, or terminated for
+</span>    <span class='comment'># reasons unrealated to the candidate.
+</span>    <span class='const'>CLOSED</span> <span class='op'>=</span> <span class='int'>5</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="state=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="state-instance_method">
+  
+    #<strong>state</strong>  &#x21d2; <tt><span class='object_link'><a href="Application/ApplicationState.html" title="Google::Cloud::Talent::V4beta1::Application::ApplicationState (module)">Google::Cloud::Talent::V4beta1::Application::ApplicationState</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Optional.</p>
+
+<p>The application state.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Application/ApplicationState.html" title="Google::Cloud::Talent::V4beta1::Application::ApplicationState (module)">Google::Cloud::Talent::V4beta1::Application::ApplicationState</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Optional.</p>
+
+<p>The application state.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/application.rb', line 129</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::Application (class)">Application</a></span></span>
+  <span class='comment'># The stage of the application.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Application/ApplicationStage.html" title="Google::Cloud::Talent::V4beta1::Application::ApplicationStage (module)">ApplicationStage</a></span></span>
+    <span class='comment'># Default value.
+</span>    <span class='const'>APPLICATION_STAGE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Candidate has applied or a recruiter put candidate into consideration but
+</span>    <span class='comment'># candidate is not yet screened / no decision has been made to move or not
+</span>    <span class='comment'># move the candidate to the next stage.
+</span>    <span class='const'>NEW</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># A recruiter decided to screen the candidate for this role.
+</span>    <span class='const'>SCREEN</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># Candidate is being / was sent to the customer / hiring manager for
+</span>    <span class='comment'># detailed review.
+</span>    <span class='const'>HIRING_MANAGER_REVIEW</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># Candidate was approved by the client / hiring manager and is being / was
+</span>    <span class='comment'># interviewed for the role.
+</span>    <span class='const'>INTERVIEW</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># Candidate will be / has been given an offer of employment.
+</span>    <span class='const'>OFFER_EXTENDED</span> <span class='op'>=</span> <span class='int'>5</span>
+
+    <span class='comment'># Candidate has accepted their offer of employment.
+</span>    <span class='const'>OFFER_ACCEPTED</span> <span class='op'>=</span> <span class='int'>6</span>
+
+    <span class='comment'># Candidate has begun (or completed) their employment or assignment with
+</span>    <span class='comment'># the employer.
+</span>    <span class='const'>STARTED</span> <span class='op'>=</span> <span class='int'>7</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># Enum that represents the application status.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Application/ApplicationState.html" title="Google::Cloud::Talent::V4beta1::Application::ApplicationState (module)">ApplicationState</a></span></span>
+    <span class='comment'># Default value.
+</span>    <span class='const'>APPLICATION_STATE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># The current stage is in progress or pending, for example, interviews in
+</span>    <span class='comment'># progress.
+</span>    <span class='const'>IN_PROGRESS</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># The current stage was terminated by a candidate decision.
+</span>    <span class='const'>CANDIDATE_WITHDREW</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># The current stage was terminated by an employer or agency decision.
+</span>    <span class='const'>EMPLOYER_WITHDREW</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># The current stage is successfully completed, but the next stage (if
+</span>    <span class='comment'># applicable) has not begun.
+</span>    <span class='const'>COMPLETED</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># The current stage was closed without an exception, or terminated for
+</span>    <span class='comment'># reasons unrealated to the candidate.
+</span>    <span class='const'>CLOSED</span> <span class='op'>=</span> <span class='int'>5</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="update_time=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="update_time-instance_method">
+  
+    #<strong>update_time</strong>  &#x21d2; <tt><span class='object_link'><a href="../../../Protobuf/Timestamp.html" title="Google::Protobuf::Timestamp (class)">Google::Protobuf::Timestamp</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Optional.</p>
+
+<p>The last update timestamp.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../../Protobuf/Timestamp.html" title="Google::Protobuf::Timestamp (class)">Google::Protobuf::Timestamp</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Optional.</p>
+
+<p>The last update timestamp.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/application.rb', line 129</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::Application (class)">Application</a></span></span>
+  <span class='comment'># The stage of the application.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Application/ApplicationStage.html" title="Google::Cloud::Talent::V4beta1::Application::ApplicationStage (module)">ApplicationStage</a></span></span>
+    <span class='comment'># Default value.
+</span>    <span class='const'>APPLICATION_STAGE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Candidate has applied or a recruiter put candidate into consideration but
+</span>    <span class='comment'># candidate is not yet screened / no decision has been made to move or not
+</span>    <span class='comment'># move the candidate to the next stage.
+</span>    <span class='const'>NEW</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># A recruiter decided to screen the candidate for this role.
+</span>    <span class='const'>SCREEN</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># Candidate is being / was sent to the customer / hiring manager for
+</span>    <span class='comment'># detailed review.
+</span>    <span class='const'>HIRING_MANAGER_REVIEW</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># Candidate was approved by the client / hiring manager and is being / was
+</span>    <span class='comment'># interviewed for the role.
+</span>    <span class='const'>INTERVIEW</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># Candidate will be / has been given an offer of employment.
+</span>    <span class='const'>OFFER_EXTENDED</span> <span class='op'>=</span> <span class='int'>5</span>
+
+    <span class='comment'># Candidate has accepted their offer of employment.
+</span>    <span class='const'>OFFER_ACCEPTED</span> <span class='op'>=</span> <span class='int'>6</span>
+
+    <span class='comment'># Candidate has begun (or completed) their employment or assignment with
+</span>    <span class='comment'># the employer.
+</span>    <span class='const'>STARTED</span> <span class='op'>=</span> <span class='int'>7</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># Enum that represents the application status.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Application/ApplicationState.html" title="Google::Cloud::Talent::V4beta1::Application::ApplicationState (module)">ApplicationState</a></span></span>
+    <span class='comment'># Default value.
+</span>    <span class='const'>APPLICATION_STATE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># The current stage is in progress or pending, for example, interviews in
+</span>    <span class='comment'># progress.
+</span>    <span class='const'>IN_PROGRESS</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># The current stage was terminated by a candidate decision.
+</span>    <span class='const'>CANDIDATE_WITHDREW</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># The current stage was terminated by an employer or agency decision.
+</span>    <span class='const'>EMPLOYER_WITHDREW</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># The current stage is successfully completed, but the next stage (if
+</span>    <span class='comment'># applicable) has not begun.
+</span>    <span class='const'>COMPLETED</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># The current stage was closed without an exception, or terminated for
+</span>    <span class='comment'># reasons unrealated to the candidate.
+</span>    <span class='const'>CLOSED</span> <span class='op'>=</span> <span class='int'>5</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+</div>
+
+  <div id="footer">
+  <ul class="footer-links">
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby" title="Google Cloud on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> GitHub
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues" title="Google Cloud issues on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> Issues
+      </a>
+    </li>
+    <li>
+      <a href="http://stackoverflow.com/questions/tagged/google-cloud-ruby" title="Google Cloud on StackOverflow">
+      <img src="/google-cloud-ruby/img/icon-link-stackoverflow.svg" alt="StackOverflow icon"> StackOverflow
+    </a>
+    </li>
+    <li>
+      <a href="http://rubygems.org/gems/google-cloud" title="Google Cloud on RubyGems">
+        <img src="/google-cloud-ruby/img/icon-link-package-manager.svg" alt="RubyGems icon"> RubyGems
+      </a>
+    </li>
+  </ul>
+
+  <p>
+    Documentation generated by <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool">yard</a>.
+  </p>
+</div>
+
+</div>

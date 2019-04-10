@@ -276,11 +276,11 @@ OPEN if no value is specified.</li>
 <p>Sample Query:</p>
 
 <ul>
-<li>companyName = &quot;projects/api-test-project/companies/123&quot;</li>
-<li>companyName = &quot;projects/api-test-project/companies/123&quot; AND requisitionId
-= &quot;req-1&quot;</li>
-<li>companyName = &quot;projects/api-test-project/companies/123&quot; AND status =
-&quot;EXPIRED&quot;</li>
+<li>companyName = &quot;projects/api-test-project/tenants/foo/companies/bar&quot;</li>
+<li>companyName = &quot;projects/api-test-project/tenants/foo/companies/bar&quot; AND
+requisitionId = &quot;req-1&quot;</li>
+<li>companyName = &quot;projects/api-test-project/tenants/foo/companies/bar&quot; AND
+status = &quot;EXPIRED&quot;</li>
 </ul>
 
 
@@ -317,11 +317,11 @@ OPEN if no value is specified.</li>
 <p>Sample Query:</p>
 
 <ul>
-<li>companyName = &quot;projects/api-test-project/companies/123&quot;</li>
-<li>companyName = &quot;projects/api-test-project/companies/123&quot; AND requisitionId
-= &quot;req-1&quot;</li>
-<li>companyName = &quot;projects/api-test-project/companies/123&quot; AND status =
-&quot;EXPIRED&quot;</li>
+<li>companyName = &quot;projects/api-test-project/tenants/foo/companies/bar&quot;</li>
+<li>companyName = &quot;projects/api-test-project/tenants/foo/companies/bar&quot; AND
+requisitionId = &quot;req-1&quot;</li>
+<li>companyName = &quot;projects/api-test-project/tenants/foo/companies/bar&quot; AND
+status = &quot;EXPIRED&quot;</li>
 </ul>
 </div>
       
@@ -335,10 +335,10 @@ OPEN if no value is specified.</li>
       <pre class="lines">
 
 
-173</pre>
+190</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job_service.rb', line 173</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job_service.rb', line 190</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::ListJobsRequest (class)">ListJobsRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -400,10 +400,10 @@ if no value is specified.</p>
       <pre class="lines">
 
 
-173</pre>
+190</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job_service.rb', line 173</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job_service.rb', line 190</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::ListJobsRequest (class)">ListJobsRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -475,10 +475,10 @@ size is 100.</p>
       <pre class="lines">
 
 
-173</pre>
+190</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job_service.rb', line 173</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job_service.rb', line 190</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::ListJobsRequest (class)">ListJobsRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -534,10 +534,10 @@ size is 100.</p>
       <pre class="lines">
 
 
-173</pre>
+190</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job_service.rb', line 173</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job_service.rb', line 190</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::ListJobsRequest (class)">ListJobsRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -560,10 +560,13 @@ size is 100.</p>
   <div class="discussion">
     <p>Returns Required.</p>
 
-<p>The resource name of the project under which the job is created.</p>
+<p>The resource name of the tenant under which the job is created.</p>
 
-<p>The format is &quot;projects/project_id&quot;, for example,
-&quot;projects/api-test-project&quot;.</p>
+<p>The format is &quot;projects/project_id/tenants/tenant_id&quot;, for example,
+&quot;projects/api-test-project/tenant/foo&quot;.</p>
+
+<p>Tenant id is optional and the default tenant is used if unspecified, for
+example, &quot;projects/api-test-project&quot;.</p>
 
 
   </div>
@@ -583,10 +586,13 @@ size is 100.</p>
         &mdash;
         <div class='inline'><p>Required.</p>
 
-<p>The resource name of the project under which the job is created.</p>
+<p>The resource name of the tenant under which the job is created.</p>
 
-<p>The format is &quot;projects/project_id&quot;, for example,
-&quot;projects/api-test-project&quot;.</p>
+<p>The format is &quot;projects/project_id/tenants/tenant_id&quot;, for example,
+&quot;projects/api-test-project/tenant/foo&quot;.</p>
+
+<p>Tenant id is optional and the default tenant is used if unspecified, for
+example, &quot;projects/api-test-project&quot;.</p>
 </div>
       
     </li>
@@ -599,10 +605,10 @@ size is 100.</p>
       <pre class="lines">
 
 
-173</pre>
+190</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job_service.rb', line 173</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job_service.rb', line 190</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::ListJobsRequest (class)">ListJobsRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>

@@ -172,6 +172,32 @@ responsible for the job.</p>
       <li class="public ">
   <span class="summary_signature">
     
+      <a href="#company-instance_method" title="#company (instance method)">#<strong>company</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Required.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#company_display_name-instance_method" title="#company_display_name (instance method)">#<strong>company_display_name</strong>  &#x21d2; String </a>
     
 
@@ -190,32 +216,6 @@ responsible for the job.</p>
 
   
     <span class="summary_desc"><div class='inline'><p>Output only.</p>
-</div></span>
-  
-</li>
-
-    
-      <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#company_name-instance_method" title="#company_name (instance method)">#<strong>company_name</strong>  &#x21d2; String </a>
-    
-
-    
-  </span>
-  
-  
-  
-    
-    
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'><p>Required.</p>
 </div></span>
   
 </li>
@@ -988,16 +988,6 @@ search experience.</p>
       <pre class="lines">
 
 
-316
-317
-318
-319
-320
-321
-322
-323
-324
-325
 326
 327
 328
@@ -1077,10 +1067,20 @@ search experience.</p>
 402
 403
 404
-405</pre>
+405
+406
+407
+408
+409
+410
+411
+412
+413
+414
+415</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job.rb', line 316</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job.rb', line 326</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::Job (class)">Job</a></span></span>
   <span class='comment'># Application related details of a job posting.
@@ -1229,16 +1229,6 @@ specified.</p>
       <pre class="lines">
 
 
-316
-317
-318
-319
-320
-321
-322
-323
-324
-325
 326
 327
 328
@@ -1318,10 +1308,271 @@ specified.</p>
 402
 403
 404
-405</pre>
+405
+406
+407
+408
+409
+410
+411
+412
+413
+414
+415</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job.rb', line 316</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job.rb', line 326</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::Job (class)">Job</a></span></span>
+  <span class='comment'># Application related details of a job posting.
+</span>  <span class='comment'># @!attribute [rw] emails
+</span>  <span class='comment'>#   @return [Array&lt;String&gt;]
+</span>  <span class='comment'>#     Optional but at least one of
+</span>  <span class='comment'>#     {Google::Cloud::Talent::V4beta1::Job::ApplicationInfo#uris uris},
+</span>  <span class='comment'>#     {Google::Cloud::Talent::V4beta1::Job::ApplicationInfo#emails emails} or
+</span>  <span class='comment'>#     {Google::Cloud::Talent::V4beta1::Job::ApplicationInfo#instruction instruction}
+</span>  <span class='comment'>#     must be specified.
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#     Use this field to specify email address(es) to which resumes or
+</span>  <span class='comment'>#     applications can be sent.
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#     The maximum number of allowed characters for each entry is 255.
+</span>  <span class='comment'># @!attribute [rw] instruction
+</span>  <span class='comment'>#   @return [String]
+</span>  <span class='comment'>#     Optional but at least one of
+</span>  <span class='comment'>#     {Google::Cloud::Talent::V4beta1::Job::ApplicationInfo#uris uris},
+</span>  <span class='comment'>#     {Google::Cloud::Talent::V4beta1::Job::ApplicationInfo#emails emails} or
+</span>  <span class='comment'>#     {Google::Cloud::Talent::V4beta1::Job::ApplicationInfo#instruction instruction}
+</span>  <span class='comment'>#     must be specified.
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#     Use this field to provide instructions, such as &quot;Mail your application
+</span>  <span class='comment'>#     to ...&quot;, that a candidate can follow to apply for the job.
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#     This field accepts and sanitizes HTML input, and also accepts
+</span>  <span class='comment'>#     bold, italic, ordered list, and unordered list markup tags.
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#     The maximum number of allowed characters is 3,000.
+</span>  <span class='comment'># @!attribute [rw] uris
+</span>  <span class='comment'>#   @return [Array&lt;String&gt;]
+</span>  <span class='comment'>#     Optional but at least one of
+</span>  <span class='comment'>#     {Google::Cloud::Talent::V4beta1::Job::ApplicationInfo#uris uris},
+</span>  <span class='comment'>#     {Google::Cloud::Talent::V4beta1::Job::ApplicationInfo#emails emails} or
+</span>  <span class='comment'>#     {Google::Cloud::Talent::V4beta1::Job::ApplicationInfo#instruction instruction}
+</span>  <span class='comment'>#     must be specified.
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#     Use this URI field to direct an applicant to a website, for example to
+</span>  <span class='comment'>#     link to an online application form.
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#     The maximum number of allowed characters for each entry is 2,000.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Job/ApplicationInfo.html" title="Google::Cloud::Talent::V4beta1::Job::ApplicationInfo (class)">ApplicationInfo</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+
+  <span class='comment'># Output only.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># Derived details about the job posting.
+</span>  <span class='comment'># @!attribute [rw] locations
+</span>  <span class='comment'>#   @return [Array&lt;Google::Cloud::Talent::V4beta1::Location&gt;]
+</span>  <span class='comment'>#     Structured locations of the job, resolved from
+</span>  <span class='comment'>#     {Google::Cloud::Talent::V4beta1::Job#addresses Job#addresses}.
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#     {Google::Cloud::Talent::V4beta1::Job::DerivedInfo#locations locations} are
+</span>  <span class='comment'>#     exactly matched to
+</span>  <span class='comment'>#     {Google::Cloud::Talent::V4beta1::Job#addresses Job#addresses} in the same
+</span>  <span class='comment'>#     order.
+</span>  <span class='comment'># @!attribute [rw] job_categories
+</span>  <span class='comment'>#   @return [Array&lt;Google::Cloud::Talent::V4beta1::JobCategory&gt;]
+</span>  <span class='comment'>#     Job categories derived from
+</span>  <span class='comment'>#     {Google::Cloud::Talent::V4beta1::Job#title Job#title} and
+</span>  <span class='comment'>#     {Google::Cloud::Talent::V4beta1::Job#description Job#description}.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Job/DerivedInfo.html" title="Google::Cloud::Talent::V4beta1::Job::DerivedInfo (class)">DerivedInfo</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+
+  <span class='comment'># Input only.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># Options for job processing.
+</span>  <span class='comment'># @!attribute [rw] disable_street_address_resolution
+</span>  <span class='comment'>#   @return [true, false]
+</span>  <span class='comment'>#     Optional.
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#     If set to `true`, the service does not attempt to resolve a
+</span>  <span class='comment'>#     more precise address for the job.
+</span>  <span class='comment'># @!attribute [rw] html_sanitization
+</span>  <span class='comment'>#   @return [Google::Cloud::Talent::V4beta1::HtmlSanitization]
+</span>  <span class='comment'>#     Optional.
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#     Option for job HTML content sanitization. Applied fields are:
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#     * description
+</span>  <span class='comment'>#     * applicationInfo.instruction
+</span>  <span class='comment'>#     * incentives
+</span>  <span class='comment'>#     * qualifications
+</span>  <span class='comment'>#     * responsibilities
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#     HTML tags in these fields may be stripped if sanitiazation isn&#39;t
+</span>  <span class='comment'>#     disabled.
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#     Defaults to
+</span>  <span class='comment'>#     {Google::Cloud::Talent::V4beta1::HtmlSanitization::SIMPLE_FORMATTING_ONLY HtmlSanitization::SIMPLE_FORMATTING_ONLY}.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Job/ProcessingOptions.html" title="Google::Cloud::Talent::V4beta1::Job::ProcessingOptions (class)">ProcessingOptions</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="company=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="company-instance_method">
+  
+    #<strong>company</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Required.</p>
+
+<p>The resource name of the company listing the job.</p>
+
+<p>The format is
+&quot;projects/project_id/tenants/tenant_id/companies/company_id&quot;, for
+example, &quot;projects/api-test-project/tenants/foo/companies/bar&quot;.</p>
+
+<p>Tenant id is optional and the default tenant is used if unspecified, for
+example, &quot;projects/api-test-project/companies/bar&quot;.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Required.</p>
+
+<p>The resource name of the company listing the job.</p>
+
+<p>The format is
+&quot;projects/project_id/tenants/tenant_id/companies/company_id&quot;, for
+example, &quot;projects/api-test-project/tenants/foo/companies/bar&quot;.</p>
+
+<p>Tenant id is optional and the default tenant is used if unspecified, for
+example, &quot;projects/api-test-project/companies/bar&quot;.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376
+377
+378
+379
+380
+381
+382
+383
+384
+385
+386
+387
+388
+389
+390
+391
+392
+393
+394
+395
+396
+397
+398
+399
+400
+401
+402
+403
+404
+405
+406
+407
+408
+409
+410
+411
+412
+413
+414
+415</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job.rb', line 326</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::Job (class)">Job</a></span></span>
   <span class='comment'># Application related details of a job posting.
@@ -1462,16 +1713,6 @@ specified.</p>
       <pre class="lines">
 
 
-316
-317
-318
-319
-320
-321
-322
-323
-324
-325
 326
 327
 328
@@ -1551,249 +1792,20 @@ specified.</p>
 402
 403
 404
-405</pre>
+405
+406
+407
+408
+409
+410
+411
+412
+413
+414
+415</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job.rb', line 316</span>
-
-<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::Job (class)">Job</a></span></span>
-  <span class='comment'># Application related details of a job posting.
-</span>  <span class='comment'># @!attribute [rw] emails
-</span>  <span class='comment'>#   @return [Array&lt;String&gt;]
-</span>  <span class='comment'>#     Optional but at least one of
-</span>  <span class='comment'>#     {Google::Cloud::Talent::V4beta1::Job::ApplicationInfo#uris uris},
-</span>  <span class='comment'>#     {Google::Cloud::Talent::V4beta1::Job::ApplicationInfo#emails emails} or
-</span>  <span class='comment'>#     {Google::Cloud::Talent::V4beta1::Job::ApplicationInfo#instruction instruction}
-</span>  <span class='comment'>#     must be specified.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Use this field to specify email address(es) to which resumes or
-</span>  <span class='comment'>#     applications can be sent.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     The maximum number of allowed characters for each entry is 255.
-</span>  <span class='comment'># @!attribute [rw] instruction
-</span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Optional but at least one of
-</span>  <span class='comment'>#     {Google::Cloud::Talent::V4beta1::Job::ApplicationInfo#uris uris},
-</span>  <span class='comment'>#     {Google::Cloud::Talent::V4beta1::Job::ApplicationInfo#emails emails} or
-</span>  <span class='comment'>#     {Google::Cloud::Talent::V4beta1::Job::ApplicationInfo#instruction instruction}
-</span>  <span class='comment'>#     must be specified.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Use this field to provide instructions, such as &quot;Mail your application
-</span>  <span class='comment'>#     to ...&quot;, that a candidate can follow to apply for the job.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     This field accepts and sanitizes HTML input, and also accepts
-</span>  <span class='comment'>#     bold, italic, ordered list, and unordered list markup tags.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     The maximum number of allowed characters is 3,000.
-</span>  <span class='comment'># @!attribute [rw] uris
-</span>  <span class='comment'>#   @return [Array&lt;String&gt;]
-</span>  <span class='comment'>#     Optional but at least one of
-</span>  <span class='comment'>#     {Google::Cloud::Talent::V4beta1::Job::ApplicationInfo#uris uris},
-</span>  <span class='comment'>#     {Google::Cloud::Talent::V4beta1::Job::ApplicationInfo#emails emails} or
-</span>  <span class='comment'>#     {Google::Cloud::Talent::V4beta1::Job::ApplicationInfo#instruction instruction}
-</span>  <span class='comment'>#     must be specified.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Use this URI field to direct an applicant to a website, for example to
-</span>  <span class='comment'>#     link to an online application form.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     The maximum number of allowed characters for each entry is 2,000.
-</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Job/ApplicationInfo.html" title="Google::Cloud::Talent::V4beta1::Job::ApplicationInfo (class)">ApplicationInfo</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
-
-  <span class='comment'># Output only.
-</span>  <span class='comment'>#
-</span>  <span class='comment'># Derived details about the job posting.
-</span>  <span class='comment'># @!attribute [rw] locations
-</span>  <span class='comment'>#   @return [Array&lt;Google::Cloud::Talent::V4beta1::Location&gt;]
-</span>  <span class='comment'>#     Structured locations of the job, resolved from
-</span>  <span class='comment'>#     {Google::Cloud::Talent::V4beta1::Job#addresses Job#addresses}.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     {Google::Cloud::Talent::V4beta1::Job::DerivedInfo#locations locations} are
-</span>  <span class='comment'>#     exactly matched to
-</span>  <span class='comment'>#     {Google::Cloud::Talent::V4beta1::Job#addresses Job#addresses} in the same
-</span>  <span class='comment'>#     order.
-</span>  <span class='comment'># @!attribute [rw] job_categories
-</span>  <span class='comment'>#   @return [Array&lt;Google::Cloud::Talent::V4beta1::JobCategory&gt;]
-</span>  <span class='comment'>#     Job categories derived from
-</span>  <span class='comment'>#     {Google::Cloud::Talent::V4beta1::Job#title Job#title} and
-</span>  <span class='comment'>#     {Google::Cloud::Talent::V4beta1::Job#description Job#description}.
-</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Job/DerivedInfo.html" title="Google::Cloud::Talent::V4beta1::Job::DerivedInfo (class)">DerivedInfo</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
-
-  <span class='comment'># Input only.
-</span>  <span class='comment'>#
-</span>  <span class='comment'># Options for job processing.
-</span>  <span class='comment'># @!attribute [rw] disable_street_address_resolution
-</span>  <span class='comment'>#   @return [true, false]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     If set to `true`, the service does not attempt to resolve a
-</span>  <span class='comment'>#     more precise address for the job.
-</span>  <span class='comment'># @!attribute [rw] html_sanitization
-</span>  <span class='comment'>#   @return [Google::Cloud::Talent::V4beta1::HtmlSanitization]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Option for job HTML content sanitization. Applied fields are:
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     * description
-</span>  <span class='comment'>#     * applicationInfo.instruction
-</span>  <span class='comment'>#     * incentives
-</span>  <span class='comment'>#     * qualifications
-</span>  <span class='comment'>#     * responsibilities
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     HTML tags in these fields may be stripped if sanitiazation isn&#39;t
-</span>  <span class='comment'>#     disabled.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Defaults to
-</span>  <span class='comment'>#     {Google::Cloud::Talent::V4beta1::HtmlSanitization::SIMPLE_FORMATTING_ONLY HtmlSanitization::SIMPLE_FORMATTING_ONLY}.
-</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Job/ProcessingOptions.html" title="Google::Cloud::Talent::V4beta1::Job::ProcessingOptions (class)">ProcessingOptions</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-      
-      <span id="company_name=-instance_method"></span>
-      <div class="method_details ">
-  <h3 class="signature " id="company_name-instance_method">
-  
-    #<strong>company_name</strong>  &#x21d2; <tt>String</tt> 
-  
-
-  
-
-  
-</h3><div class="docstring">
-  <div class="discussion">
-    <p>Returns Required.</p>
-
-<p>The resource name of the company listing the job, such as
-&quot;projects/api-test-project/companies/foo&quot;.</p>
-
-
-  </div>
-</div>
-<div class="tags">
-  
-<p class="tag_title">Returns:</p>
-<ul class="return">
-  
-    <li>
-      
-      
-        <span class='type'>(<tt>String</tt>)</span>
-      
-      
-      
-        &mdash;
-        <div class='inline'><p>Required.</p>
-
-<p>The resource name of the company listing the job, such as
-&quot;projects/api-test-project/companies/foo&quot;.</p>
-</div>
-      
-    </li>
-  
-</ul>
-
-</div><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-316
-317
-318
-319
-320
-321
-322
-323
-324
-325
-326
-327
-328
-329
-330
-331
-332
-333
-334
-335
-336
-337
-338
-339
-340
-341
-342
-343
-344
-345
-346
-347
-348
-349
-350
-351
-352
-353
-354
-355
-356
-357
-358
-359
-360
-361
-362
-363
-364
-365
-366
-367
-368
-369
-370
-371
-372
-373
-374
-375
-376
-377
-378
-379
-380
-381
-382
-383
-384
-385
-386
-387
-388
-389
-390
-391
-392
-393
-394
-395
-396
-397
-398
-399
-400
-401
-402
-403
-404
-405</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job.rb', line 316</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job.rb', line 326</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::Job (class)">Job</a></span></span>
   <span class='comment'># Application related details of a job posting.
@@ -1905,7 +1917,8 @@ specified.</p>
   <div class="discussion">
     <p>Returns Optional.</p>
 
-<p>Job compensation information.</p>
+<p>Job compensation information (a.k.a. &quot;pay rate&quot;) i.e., the compensation
+that will paid to the employee.</p>
 
 
   </div>
@@ -1925,7 +1938,8 @@ specified.</p>
         &mdash;
         <div class='inline'><p>Optional.</p>
 
-<p>Job compensation information.</p>
+<p>Job compensation information (a.k.a. &quot;pay rate&quot;) i.e., the compensation
+that will paid to the employee.</p>
 </div>
       
     </li>
@@ -1938,16 +1952,6 @@ specified.</p>
       <pre class="lines">
 
 
-316
-317
-318
-319
-320
-321
-322
-323
-324
-325
 326
 327
 328
@@ -2027,10 +2031,20 @@ specified.</p>
 402
 403
 404
-405</pre>
+405
+406
+407
+408
+409
+410
+411
+412
+413
+414
+415</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job.rb', line 316</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job.rb', line 326</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::Job (class)">Job</a></span></span>
   <span class='comment'># Application related details of a job posting.
@@ -2197,16 +2211,6 @@ is 50KB.</p>
       <pre class="lines">
 
 
-316
-317
-318
-319
-320
-321
-322
-323
-324
-325
 326
 327
 328
@@ -2286,10 +2290,20 @@ is 50KB.</p>
 402
 403
 404
-405</pre>
+405
+406
+407
+408
+409
+410
+411
+412
+413
+414
+415</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job.rb', line 316</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job.rb', line 326</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::Job (class)">Job</a></span></span>
   <span class='comment'># Application related details of a job posting.
@@ -2434,16 +2448,6 @@ is 50KB.</p>
       <pre class="lines">
 
 
-316
-317
-318
-319
-320
-321
-322
-323
-324
-325
 326
 327
 328
@@ -2523,10 +2527,20 @@ is 50KB.</p>
 402
 403
 404
-405</pre>
+405
+406
+407
+408
+409
+410
+411
+412
+413
+414
+415</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job.rb', line 316</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job.rb', line 326</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::Job (class)">Job</a></span></span>
   <span class='comment'># Application related details of a job posting.
@@ -2677,16 +2691,6 @@ position.</p>
       <pre class="lines">
 
 
-316
-317
-318
-319
-320
-321
-322
-323
-324
-325
 326
 327
 328
@@ -2766,10 +2770,20 @@ position.</p>
 402
 403
 404
-405</pre>
+405
+406
+407
+408
+409
+410
+411
+412
+413
+414
+415</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job.rb', line 316</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job.rb', line 326</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::Job (class)">Job</a></span></span>
   <span class='comment'># Application related details of a job posting.
@@ -2910,16 +2924,6 @@ position.</p>
       <pre class="lines">
 
 
-316
-317
-318
-319
-320
-321
-322
-323
-324
-325
 326
 327
 328
@@ -2999,10 +3003,20 @@ position.</p>
 402
 403
 404
-405</pre>
+405
+406
+407
+408
+409
+410
+411
+412
+413
+414
+415</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job.rb', line 316</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job.rb', line 326</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::Job (class)">Job</a></span></span>
   <span class='comment'># Application related details of a job posting.
@@ -3167,16 +3181,6 @@ bold, italic, ordered list, and unordered list markup tags.</p>
       <pre class="lines">
 
 
-316
-317
-318
-319
-320
-321
-322
-323
-324
-325
 326
 327
 328
@@ -3256,10 +3260,20 @@ bold, italic, ordered list, and unordered list markup tags.</p>
 402
 403
 404
-405</pre>
+405
+406
+407
+408
+409
+410
+411
+412
+413
+414
+415</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job.rb', line 316</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job.rb', line 326</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::Job (class)">Job</a></span></span>
   <span class='comment'># Application related details of a job posting.
@@ -3408,16 +3422,6 @@ bold, italic, ordered list, and unordered list markup tags.</p>
       <pre class="lines">
 
 
-316
-317
-318
-319
-320
-321
-322
-323
-324
-325
 326
 327
 328
@@ -3497,10 +3501,20 @@ bold, italic, ordered list, and unordered list markup tags.</p>
 402
 403
 404
-405</pre>
+405
+406
+407
+408
+409
+410
+411
+412
+413
+414
+415</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job.rb', line 316</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job.rb', line 326</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::Job (class)">Job</a></span></span>
   <span class='comment'># Application related details of a job posting.
@@ -3651,16 +3665,6 @@ incentives associated with the job not including salary or pay.</p>
       <pre class="lines">
 
 
-316
-317
-318
-319
-320
-321
-322
-323
-324
-325
 326
 327
 328
@@ -3740,10 +3744,20 @@ incentives associated with the job not including salary or pay.</p>
 402
 403
 404
-405</pre>
+405
+406
+407
+408
+409
+410
+411
+412
+413
+414
+415</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job.rb', line 316</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job.rb', line 326</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::Job (class)">Job</a></span></span>
   <span class='comment'># Application related details of a job posting.
@@ -3888,16 +3902,6 @@ incentives associated with the job not including salary or pay.</p>
       <pre class="lines">
 
 
-316
-317
-318
-319
-320
-321
-322
-323
-324
-325
 326
 327
 328
@@ -3977,10 +3981,20 @@ incentives associated with the job not including salary or pay.</p>
 402
 403
 404
-405</pre>
+405
+406
+407
+408
+409
+410
+411
+412
+413
+414
+415</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job.rb', line 316</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job.rb', line 326</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::Job (class)">Job</a></span></span>
   <span class='comment'># Application related details of a job posting.
@@ -4127,16 +4141,6 @@ engagements. Invalid timestamps are ignored.</p>
       <pre class="lines">
 
 
-316
-317
-318
-319
-320
-321
-322
-323
-324
-325
 326
 327
 328
@@ -4216,10 +4220,20 @@ engagements. Invalid timestamps are ignored.</p>
 402
 403
 404
-405</pre>
+405
+406
+407
+408
+409
+410
+411
+412
+413
+414
+415</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job.rb', line 316</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job.rb', line 326</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::Job (class)">Job</a></span></span>
   <span class='comment'># Application related details of a job posting.
@@ -4364,16 +4378,6 @@ engagements. Invalid timestamps are ignored.</p>
       <pre class="lines">
 
 
-316
-317
-318
-319
-320
-321
-322
-323
-324
-325
 326
 327
 328
@@ -4453,10 +4457,20 @@ engagements. Invalid timestamps are ignored.</p>
 402
 403
 404
-405</pre>
+405
+406
+407
+408
+409
+410
+411
+412
+413
+414
+415</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job.rb', line 316</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job.rb', line 326</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::Job (class)">Job</a></span></span>
   <span class='comment'># Application related details of a job posting.
@@ -4603,16 +4617,6 @@ is used for contracting engagements. Invalid timestamps are ignored.</p>
       <pre class="lines">
 
 
-316
-317
-318
-319
-320
-321
-322
-323
-324
-325
 326
 327
 328
@@ -4692,10 +4696,20 @@ is used for contracting engagements. Invalid timestamps are ignored.</p>
 402
 403
 404
-405</pre>
+405
+406
+407
+408
+409
+410
+411
+412
+413
+414
+415</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job.rb', line 316</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job.rb', line 326</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::Job (class)">Job</a></span></span>
   <span class='comment'># Application related details of a job posting.
@@ -4864,16 +4878,6 @@ otherwise defaults to &#39;en_US&#39;.</p>
       <pre class="lines">
 
 
-316
-317
-318
-319
-320
-321
-322
-323
-324
-325
 326
 327
 328
@@ -4953,10 +4957,20 @@ otherwise defaults to &#39;en_US&#39;.</p>
 402
 403
 404
-405</pre>
+405
+406
+407
+408
+409
+410
+411
+412
+413
+414
+415</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job.rb', line 316</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job.rb', line 326</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::Job (class)">Job</a></span></span>
   <span class='comment'># Application related details of a job posting.
@@ -5071,8 +5085,12 @@ otherwise defaults to &#39;en_US&#39;.</p>
 <p>The resource name for the job. This is generated by the service when a
 job is created.</p>
 
-<p>The format is &quot;projects/project_id/jobs/job_id&quot;,
-for example, &quot;projects/api-test-project/jobs/1234&quot;.</p>
+<p>The format is
+&quot;projects/project_id/tenants/tenant_id/jobs/job_id&quot;, for
+example, &quot;projects/api-test-project/tenants/foo/jobs/1234&quot;.</p>
+
+<p>Tenant id is optional and the default tenant is used if unspecified, for
+example, &quot;projects/api-test-project/jobs/1234&quot;.</p>
 
 <p>Use of this field in job queries and API calls is preferred over the use of
 <span class='object_link'><a href="#requisition_id-instance_method" title="Google::Cloud::Talent::V4beta1::Job#requisition_id (method)">requisition_id</a></span> since this
@@ -5099,8 +5117,12 @@ value is unique.</p>
 <p>The resource name for the job. This is generated by the service when a
 job is created.</p>
 
-<p>The format is &quot;projects/project_id/jobs/job_id&quot;,
-for example, &quot;projects/api-test-project/jobs/1234&quot;.</p>
+<p>The format is
+&quot;projects/project_id/tenants/tenant_id/jobs/job_id&quot;, for
+example, &quot;projects/api-test-project/tenants/foo/jobs/1234&quot;.</p>
+
+<p>Tenant id is optional and the default tenant is used if unspecified, for
+example, &quot;projects/api-test-project/jobs/1234&quot;.</p>
 
 <p>Use of this field in job queries and API calls is preferred over the use of
 <span class='object_link'><a href="#requisition_id-instance_method" title="Google::Cloud::Talent::V4beta1::Job#requisition_id (method)">requisition_id</a></span> since this
@@ -5117,16 +5139,6 @@ value is unique.</p>
       <pre class="lines">
 
 
-316
-317
-318
-319
-320
-321
-322
-323
-324
-325
 326
 327
 328
@@ -5206,10 +5218,20 @@ value is unique.</p>
 402
 403
 404
-405</pre>
+405
+406
+407
+408
+409
+410
+411
+412
+413
+414
+415</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job.rb', line 316</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job.rb', line 326</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::Job (class)">Job</a></span></span>
   <span class='comment'># Application related details of a job posting.
@@ -5350,16 +5372,6 @@ value is unique.</p>
       <pre class="lines">
 
 
-316
-317
-318
-319
-320
-321
-322
-323
-324
-325
 326
 327
 328
@@ -5439,10 +5451,20 @@ value is unique.</p>
 402
 403
 404
-405</pre>
+405
+406
+407
+408
+409
+410
+411
+412
+413
+414
+415</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job.rb', line 316</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job.rb', line 326</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::Job (class)">Job</a></span></span>
   <span class='comment'># Application related details of a job posting.
@@ -5562,8 +5584,7 @@ ListJobs APIs, but it can be retrieved with the GetJob API or
 updated with the UpdateJob API. An expired job can be updated and
 opened again by using a future expiration timestamp. Updating an expired
 job fails if there is another existing open job with same
-<span class='object_link'><a href="#name-instance_method" title="Google::Cloud::Talent::V4beta1::Job#name (method)">company</a></span>[],
-<span class='object_link'><a href="#language_code-instance_method" title="Google::Cloud::Talent::V4beta1::Job#language_code (method)">language_code</a></span> and
+<span class='object_link'><a href="#name-instance_method" title="Google::Cloud::Talent::V4beta1::Job#name (method)">company</a></span>[], Language_code and
 <span class='object_link'><a href="#requisition_id-instance_method" title="Google::Cloud::Talent::V4beta1::Job#requisition_id (method)">requisition_id</a></span>.</p>
 
 <p>The expired jobs are retained in our system for 90 days. However, the
@@ -5615,8 +5636,7 @@ ListJobs APIs, but it can be retrieved with the GetJob API or
 updated with the UpdateJob API. An expired job can be updated and
 opened again by using a future expiration timestamp. Updating an expired
 job fails if there is another existing open job with same
-<span class='object_link'><a href="#name-instance_method" title="Google::Cloud::Talent::V4beta1::Job#name (method)">company</a></span>[],
-<span class='object_link'><a href="#language_code-instance_method" title="Google::Cloud::Talent::V4beta1::Job#language_code (method)">language_code</a></span> and
+<span class='object_link'><a href="#name-instance_method" title="Google::Cloud::Talent::V4beta1::Job#name (method)">company</a></span>[], Language_code and
 <span class='object_link'><a href="#requisition_id-instance_method" title="Google::Cloud::Talent::V4beta1::Job#requisition_id (method)">requisition_id</a></span>.</p>
 
 <p>The expired jobs are retained in our system for 90 days. However, the
@@ -5653,16 +5673,6 @@ job&#39;s last update time. Otherwise the expiration date isn&#39;t updated.</p>
       <pre class="lines">
 
 
-316
-317
-318
-319
-320
-321
-322
-323
-324
-325
 326
 327
 328
@@ -5742,10 +5752,20 @@ job&#39;s last update time. Otherwise the expiration date isn&#39;t updated.</p>
 402
 403
 404
-405</pre>
+405
+406
+407
+408
+409
+410
+411
+412
+413
+414
+415</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job.rb', line 316</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job.rb', line 326</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::Job (class)">Job</a></span></span>
   <span class='comment'># Application related details of a job posting.
@@ -5894,16 +5914,6 @@ ignored.</p>
       <pre class="lines">
 
 
-316
-317
-318
-319
-320
-321
-322
-323
-324
-325
 326
 327
 328
@@ -5983,10 +5993,20 @@ ignored.</p>
 402
 403
 404
-405</pre>
+405
+406
+407
+408
+409
+410
+411
+412
+413
+414
+415</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job.rb', line 316</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job.rb', line 326</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::Job (class)">Job</a></span></span>
   <span class='comment'># Application related details of a job posting.
@@ -6149,16 +6169,6 @@ the same location level as this field is strongly recommended.</p>
       <pre class="lines">
 
 
-316
-317
-318
-319
-320
-321
-322
-323
-324
-325
 326
 327
 328
@@ -6238,10 +6248,20 @@ the same location level as this field is strongly recommended.</p>
 402
 403
 404
-405</pre>
+405
+406
+407
+408
+409
+410
+411
+412
+413
+414
+415</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job.rb', line 316</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job.rb', line 326</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::Job (class)">Job</a></span></span>
   <span class='comment'># Application related details of a job posting.
@@ -6382,16 +6402,6 @@ the same location level as this field is strongly recommended.</p>
       <pre class="lines">
 
 
-316
-317
-318
-319
-320
-321
-322
-323
-324
-325
 326
 327
 328
@@ -6471,10 +6481,20 @@ the same location level as this field is strongly recommended.</p>
 402
 403
 404
-405</pre>
+405
+406
+407
+408
+409
+410
+411
+412
+413
+414
+415</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job.rb', line 316</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job.rb', line 326</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::Job (class)">Job</a></span></span>
   <span class='comment'># Application related details of a job posting.
@@ -6619,16 +6639,6 @@ the same location level as this field is strongly recommended.</p>
       <pre class="lines">
 
 
-316
-317
-318
-319
-320
-321
-322
-323
-324
-325
 326
 327
 328
@@ -6708,10 +6718,20 @@ the same location level as this field is strongly recommended.</p>
 402
 403
 404
-405</pre>
+405
+406
+407
+408
+409
+410
+411
+412
+413
+414
+415</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job.rb', line 316</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job.rb', line 326</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::Job (class)">Job</a></span></span>
   <span class='comment'># Application related details of a job posting.
@@ -6868,16 +6888,6 @@ jobs with a promotionValue &gt;0 are returned in a FEATURED_JOB_SEARCH.</p>
       <pre class="lines">
 
 
-316
-317
-318
-319
-320
-321
-322
-323
-324
-325
 326
 327
 328
@@ -6957,10 +6967,20 @@ jobs with a promotionValue &gt;0 are returned in a FEATURED_JOB_SEARCH.</p>
 402
 403
 404
-405</pre>
+405
+406
+407
+408
+409
+410
+411
+412
+413
+414
+415</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job.rb', line 316</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job.rb', line 326</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::Job (class)">Job</a></span></span>
   <span class='comment'># Application related details of a job posting.
@@ -7121,16 +7141,6 @@ bold, italic, ordered list, and unordered list markup tags.</p>
       <pre class="lines">
 
 
-316
-317
-318
-319
-320
-321
-322
-323
-324
-325
 326
 327
 328
@@ -7210,10 +7220,20 @@ bold, italic, ordered list, and unordered list markup tags.</p>
 402
 403
 404
-405</pre>
+405
+406
+407
+408
+409
+410
+411
+412
+413
+414
+415</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job.rb', line 316</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job.rb', line 326</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::Job (class)">Job</a></span></span>
   <span class='comment'># Application related details of a job posting.
@@ -7374,16 +7394,6 @@ to be created if there is another job with the same
       <pre class="lines">
 
 
-316
-317
-318
-319
-320
-321
-322
-323
-324
-325
 326
 327
 328
@@ -7463,10 +7473,20 @@ to be created if there is another job with the same
 402
 403
 404
-405</pre>
+405
+406
+407
+408
+409
+410
+411
+412
+413
+414
+415</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job.rb', line 316</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job.rb', line 326</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::Job (class)">Job</a></span></span>
   <span class='comment'># Application related details of a job posting.
@@ -7625,16 +7645,6 @@ bold, italic, ordered list, and unordered list markup tags.</p>
       <pre class="lines">
 
 
-316
-317
-318
-319
-320
-321
-322
-323
-324
-325
 326
 327
 328
@@ -7714,10 +7724,20 @@ bold, italic, ordered list, and unordered list markup tags.</p>
 402
 403
 404
-405</pre>
+405
+406
+407
+408
+409
+410
+411
+412
+413
+414
+415</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job.rb', line 316</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job.rb', line 326</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::Job (class)">Job</a></span></span>
   <span class='comment'># Application related details of a job posting.
@@ -7866,16 +7886,6 @@ bold, italic, ordered list, and unordered list markup tags.</p>
       <pre class="lines">
 
 
-316
-317
-318
-319
-320
-321
-322
-323
-324
-325
 326
 327
 328
@@ -7955,10 +7965,20 @@ bold, italic, ordered list, and unordered list markup tags.</p>
 402
 403
 404
-405</pre>
+405
+406
+407
+408
+409
+410
+411
+412
+413
+414
+415</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job.rb', line 316</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job.rb', line 326</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::Job (class)">Job</a></span></span>
   <span class='comment'># Application related details of a job posting.
@@ -8111,16 +8131,6 @@ if not specified.</p>
       <pre class="lines">
 
 
-316
-317
-318
-319
-320
-321
-322
-323
-324
-325
 326
 327
 328
@@ -8200,10 +8210,20 @@ if not specified.</p>
 402
 403
 404
-405</pre>
+405
+406
+407
+408
+409
+410
+411
+412
+413
+414
+415</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job.rb', line 316</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job.rb', line 326</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::Job (class)">Job</a></span></span>
   <span class='comment'># Application related details of a job posting.

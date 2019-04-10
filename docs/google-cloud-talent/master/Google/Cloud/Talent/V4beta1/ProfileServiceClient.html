@@ -347,7 +347,7 @@ this service.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#list_profiles-instance_method" title="#list_profiles (instance method)">#<strong>list_profiles</strong>(parent, page_size: nil, field_mask: nil, options: nil) {|result, operation| ... } &#x21d2; Google::Gax::PagedEnumerable&lt;Google::Cloud::Talent::V4beta1::Profile&gt; </a>
+      <a href="#list_profiles-instance_method" title="#list_profiles (instance method)">#<strong>list_profiles</strong>(parent, page_size: nil, read_mask: nil, options: nil) {|result, operation| ... } &#x21d2; Google::Gax::PagedEnumerable&lt;Google::Cloud::Talent::V4beta1::Profile&gt; </a>
     
 
     
@@ -705,7 +705,25 @@ custom error handling.</p>
 242
 243
 244
-245</pre>
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/profile_service_client.rb', line 141</span>
@@ -787,32 +805,50 @@ custom error handling.</p>
   <span class='ivar'>@list_profiles</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
     <span class='ivar'>@profile_service_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:list_profiles</span><span class='rparen'>)</span><span class='comma'>,</span>
     <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>list_profiles</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
-    <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span>
+    <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span><span class='comma'>,</span>
+    <span class='label'>params_extractor:</span> <span class='id identifier rubyid_proc'>proc</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_request'>request</span><span class='op'>|</span>
+      <span class='lbrace'>{</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>parent</span><span class='tstring_end'>&#39;</span></span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_request'>request</span><span class='period'>.</span><span class='id identifier rubyid_parent'>parent</span><span class='rbrace'>}</span>
+    <span class='kw'>end</span>
   <span class='rparen'>)</span>
   <span class='ivar'>@create_profile</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
     <span class='ivar'>@profile_service_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:create_profile</span><span class='rparen'>)</span><span class='comma'>,</span>
     <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>create_profile</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
-    <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span>
+    <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span><span class='comma'>,</span>
+    <span class='label'>params_extractor:</span> <span class='id identifier rubyid_proc'>proc</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_request'>request</span><span class='op'>|</span>
+      <span class='lbrace'>{</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>parent</span><span class='tstring_end'>&#39;</span></span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_request'>request</span><span class='period'>.</span><span class='id identifier rubyid_parent'>parent</span><span class='rbrace'>}</span>
+    <span class='kw'>end</span>
   <span class='rparen'>)</span>
   <span class='ivar'>@get_profile</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
     <span class='ivar'>@profile_service_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:get_profile</span><span class='rparen'>)</span><span class='comma'>,</span>
     <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>get_profile</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
-    <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span>
+    <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span><span class='comma'>,</span>
+    <span class='label'>params_extractor:</span> <span class='id identifier rubyid_proc'>proc</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_request'>request</span><span class='op'>|</span>
+      <span class='lbrace'>{</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>name</span><span class='tstring_end'>&#39;</span></span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_request'>request</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span><span class='rbrace'>}</span>
+    <span class='kw'>end</span>
   <span class='rparen'>)</span>
   <span class='ivar'>@update_profile</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
     <span class='ivar'>@profile_service_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:update_profile</span><span class='rparen'>)</span><span class='comma'>,</span>
     <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>update_profile</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
-    <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span>
+    <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span><span class='comma'>,</span>
+    <span class='label'>params_extractor:</span> <span class='id identifier rubyid_proc'>proc</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_request'>request</span><span class='op'>|</span>
+      <span class='lbrace'>{</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>profile.name</span><span class='tstring_end'>&#39;</span></span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_request'>request</span><span class='period'>.</span><span class='id identifier rubyid_profile'>profile</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span><span class='rbrace'>}</span>
+    <span class='kw'>end</span>
   <span class='rparen'>)</span>
   <span class='ivar'>@delete_profile</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
     <span class='ivar'>@profile_service_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:delete_profile</span><span class='rparen'>)</span><span class='comma'>,</span>
     <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>delete_profile</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
-    <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span>
+    <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span><span class='comma'>,</span>
+    <span class='label'>params_extractor:</span> <span class='id identifier rubyid_proc'>proc</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_request'>request</span><span class='op'>|</span>
+      <span class='lbrace'>{</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>name</span><span class='tstring_end'>&#39;</span></span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_request'>request</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span><span class='rbrace'>}</span>
+    <span class='kw'>end</span>
   <span class='rparen'>)</span>
   <span class='ivar'>@search_profiles</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
     <span class='ivar'>@profile_service_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:search_profiles</span><span class='rparen'>)</span><span class='comma'>,</span>
     <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>search_profiles</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
-    <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span>
+    <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span><span class='comma'>,</span>
+    <span class='label'>params_extractor:</span> <span class='id identifier rubyid_proc'>proc</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_request'>request</span><span class='op'>|</span>
+      <span class='lbrace'>{</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>parent</span><span class='tstring_end'>&#39;</span></span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_request'>request</span><span class='period'>.</span><span class='id identifier rubyid_parent'>parent</span><span class='rbrace'>}</span>
+    <span class='kw'>end</span>
   <span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -1188,21 +1224,21 @@ retries, etc.</p>
       <pre class="lines">
 
 
-354
-355
-356
-357
-358
-359
-360
-361
-362
-363
-364
-365</pre>
+372
+373
+374
+375
+376
+377
+378
+379
+380
+381
+382
+383</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/profile_service_client.rb', line 354</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/profile_service_client.rb', line 372</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_profile'>create_profile</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -1232,7 +1268,9 @@ retries, etc.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Deletes the specified profile.</p>
+    <p>Deletes the specified profile.
+Prerequisite: The profile has no associated applications or assignments
+associated.</p>
 
 
   </div>
@@ -1363,20 +1401,20 @@ retries, etc.</p>
       <pre class="lines">
 
 
-499
-500
-501
-502
-503
-504
-505
-506
-507
-508
-509</pre>
+518
+519
+520
+521
+522
+523
+524
+525
+526
+527
+528</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/profile_service_client.rb', line 499</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/profile_service_client.rb', line 518</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete_profile'>delete_profile</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -1545,19 +1583,19 @@ retries, etc.</p>
       <pre class="lines">
 
 
-392
-393
-394
-395
-396
-397
-398
-399
-400
-401</pre>
+410
+411
+412
+413
+414
+415
+416
+417
+418
+419</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/profile_service_client.rb', line 392</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/profile_service_client.rb', line 410</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_profile'>get_profile</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -1577,7 +1615,7 @@ retries, etc.</p>
       <div class="method_details ">
   <h3 class="signature " id="list_profiles-instance_method">
   
-    #<strong>list_profiles</strong>(parent, page_size: nil, field_mask: nil, options: nil) {|result, operation| ... } &#x21d2; <tt>Google::Gax::PagedEnumerable&lt;<span class='object_link'><a href="Profile.html" title="Google::Cloud::Talent::V4beta1::Profile (class)">Google::Cloud::Talent::V4beta1::Profile</a></span>&gt;</tt> 
+    #<strong>list_profiles</strong>(parent, page_size: nil, read_mask: nil, options: nil) {|result, operation| ... } &#x21d2; <tt>Google::Gax::PagedEnumerable&lt;<span class='object_link'><a href="Profile.html" title="Google::Cloud::Talent::V4beta1::Profile (class)">Google::Cloud::Talent::V4beta1::Profile</a></span>&gt;</tt> 
   
 
   
@@ -1659,7 +1697,7 @@ resources in a page.</p>
   
     <li>
       
-        <span class='name'>field_mask</span>
+        <span class='name'>read_mask</span>
       
       
         <span class='type'>(<tt><span class='object_link'><a href="../../../Protobuf/FieldMask.html" title="Google::Protobuf::FieldMask (class)">Google::Protobuf::FieldMask</a></span> | Hash</tt>)</span>
@@ -1788,34 +1826,34 @@ object.</p>
       <pre class="lines">
 
 
-306
-307
-308
-309
-310
-311
-312
-313
-314
-315
-316
-317
-318
-319</pre>
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/profile_service_client.rb', line 306</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/profile_service_client.rb', line 324</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_profiles'>list_profiles</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
     <span class='label'>page_size:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-    <span class='label'>field_mask:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+    <span class='label'>read_mask:</span> <span class='kw'>nil</span><span class='comma'>,</span>
     <span class='label'>options:</span> <span class='kw'>nil</span><span class='comma'>,</span>
     <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
   <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='lbrace'>{</span>
     <span class='label'>parent:</span> <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
     <span class='label'>page_size:</span> <span class='id identifier rubyid_page_size'>page_size</span><span class='comma'>,</span>
-    <span class='label'>field_mask:</span> <span class='id identifier rubyid_field_mask'>field_mask</span>
+    <span class='label'>read_mask:</span> <span class='id identifier rubyid_read_mask'>read_mask</span>
   <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span>
   <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='id identifier rubyid_to_proto'>to_proto</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Talent.html" title="Google::Cloud::Talent (module)">Talent</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V4beta1.html" title="Google::Cloud::Talent::V4beta1 (module)">V4beta1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="ListProfilesRequest.html" title="Google::Cloud::Talent::V4beta1::ListProfilesRequest (class)">ListProfilesRequest</a></span></span><span class='rparen'>)</span>
   <span class='ivar'>@list_profiles</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
@@ -1900,12 +1938,12 @@ object.</p>
       <pre class="lines">
 
 
-58
-59
-60</pre>
+89
+90
+91</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/helpers.rb', line 58</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/helpers.rb', line 89</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_profile_path'>profile_path</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span> <span class='id identifier rubyid_tenant'>tenant</span><span class='comma'>,</span> <span class='id identifier rubyid_profile'>profile</span>
   <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_profile_path'>profile_path</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span> <span class='id identifier rubyid_tenant'>tenant</span><span class='comma'>,</span> <span class='id identifier rubyid_profile'>profile</span>
@@ -2220,7 +2258,7 @@ JP, GB.</li>
 <li>institution: The school name. For example, &quot;MIT&quot;,
 &quot;University of California, Berkeley&quot;</li>
 <li>degree: Highest education degree in ISCED code. Each value in degree
-covers specific level of education, without any expansion to upper nor
+covers a specific level of education, without any expansion to upper nor
 lower levels of education degree.</li>
 <li>experience_in_months: experience in months. 0 means 0 month to 1 month
 (exclusive).</li>
@@ -2228,10 +2266,10 @@ lower levels of education degree.</li>
 See
 <span class='object_link'><a href="ApplicationDateFilter.html" title="Google::Cloud::Talent::V4beta1::ApplicationDateFilter (class)">ApplicationDateFilter</a></span>
 for more details.</li>
-<li>application_outcome_reason: The application outcome reason specifies the
-outcome reasons of job application.
+<li>application_outcome_notes: The application outcome reason specifies the
+reasons behind the outcome of the job application.
 See
-<span class='object_link'><a href="ApplicationOutcomeReasonFilter.html" title="Google::Cloud::Talent::V4beta1::ApplicationOutcomeReasonFilter (class)">ApplicationOutcomeReasonFilter</a></span>
+<span class='object_link'><a href="ApplicationOutcomeNotesFilter.html" title="Google::Cloud::Talent::V4beta1::ApplicationOutcomeNotesFilter (class)">ApplicationOutcomeNotesFilter</a></span>
 for more details.</li>
 <li>application_last_stage: The application last stage specifies the last
 stage of job application.
@@ -2376,35 +2414,35 @@ object.</p>
       <pre class="lines">
 
 
-727
-728
-729
-730
-731
-732
-733
-734
-735
-736
-737
-738
-739
-740
-741
-742
-743
-744
-745
 746
 747
 748
 749
 750
 751
-752</pre>
+752
+753
+754
+755
+756
+757
+758
+759
+760
+761
+762
+763
+764
+765
+766
+767
+768
+769
+770
+771</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/profile_service_client.rb', line 727</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/profile_service_client.rb', line 746</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_search_profiles'>search_profiles</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -2501,12 +2539,12 @@ object.</p>
       <pre class="lines">
 
 
-66
-67
-68</pre>
+97
+98
+99</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/helpers.rb', line 66</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/helpers.rb', line 97</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_tenant_path'>tenant_path</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span> <span class='id identifier rubyid_tenant'>tenant</span>
   <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_tenant_path'>tenant_path</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span> <span class='id identifier rubyid_tenant'>tenant</span>
@@ -2608,7 +2646,6 @@ can also be provided.</p>
 <li>publications</li>
 <li>patents</li>
 <li>certifications</li>
-<li>jobApplications</li>
 <li>recruitingNotes</li>
 <li>customAttributes
 A hash of the same form as <code>Google::Protobuf::FieldMask</code>
@@ -2716,21 +2753,21 @@ retries, etc.</p>
       <pre class="lines">
 
 
-462
-463
-464
-465
-466
-467
-468
-469
-470
-471
-472
-473</pre>
+479
+480
+481
+482
+483
+484
+485
+486
+487
+488
+489
+490</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/profile_service_client.rb', line 462</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/profile_service_client.rb', line 479</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update_profile'>update_profile</span> \
     <span class='id identifier rubyid_profile'>profile</span><span class='comma'>,</span>

@@ -135,7 +135,7 @@ js:
       <li class="public ">
   <span class="summary_signature">
     
-      <a href="#company_display_names-instance_method" title="#company_display_names (instance method)">#<strong>company_display_names</strong>  &#x21d2; Array&lt;String&gt; </a>
+      <a href="#companies-instance_method" title="#companies (instance method)">#<strong>companies</strong>  &#x21d2; Array&lt;String&gt; </a>
     
 
     
@@ -161,7 +161,7 @@ js:
       <li class="public ">
   <span class="summary_signature">
     
-      <a href="#company_names-instance_method" title="#company_names (instance method)">#<strong>company_names</strong>  &#x21d2; Array&lt;String&gt; </a>
+      <a href="#company_display_names-instance_method" title="#company_display_names (instance method)">#<strong>company_display_names</strong>  &#x21d2; Array&lt;String&gt; </a>
     
 
     
@@ -511,10 +511,99 @@ js:
       <pre class="lines">
 
 
-187</pre>
+191</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/filters.rb', line 187</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/filters.rb', line 191</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::JobQuery (class)">JobQuery</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="companies=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="companies-instance_method">
+  
+    #<strong>companies</strong>  &#x21d2; <tt>Array&lt;String&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Optional.</p>
+
+<p>This filter specifies the company entities to search against.</p>
+
+<p>If a value isn&#39;t specified, jobs are searched for against all
+companies.</p>
+
+<p>If multiple values are specified, jobs are searched against the
+companies specified.</p>
+
+<p>The format is
+&quot;projects/project_id/tenants/tenant_id/companies/company_id&quot;, for
+example, &quot;projects/api-test-project/tenants/foo/companies/bar&quot;.</p>
+
+<p>Tenant id is optional and the default tenant is used if unspecified, for
+example, &quot;projects/api-test-project/companies/bar&quot;.</p>
+
+<p>At most 20 company filters are allowed.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;String&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Optional.</p>
+
+<p>This filter specifies the company entities to search against.</p>
+
+<p>If a value isn&#39;t specified, jobs are searched for against all
+companies.</p>
+
+<p>If multiple values are specified, jobs are searched against the
+companies specified.</p>
+
+<p>The format is
+&quot;projects/project_id/tenants/tenant_id/companies/company_id&quot;, for
+example, &quot;projects/api-test-project/tenants/foo/companies/bar&quot;.</p>
+
+<p>Tenant id is optional and the default tenant is used if unspecified, for
+example, &quot;projects/api-test-project/companies/bar&quot;.</p>
+
+<p>At most 20 company filters are allowed.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+191</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/filters.rb', line 191</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::JobQuery (class)">JobQuery</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -588,91 +677,10 @@ associated with any of the specified companies.</p>
       <pre class="lines">
 
 
-187</pre>
+191</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/filters.rb', line 187</span>
-
-<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::JobQuery (class)">JobQuery</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-      
-      <span id="company_names=-instance_method"></span>
-      <div class="method_details ">
-  <h3 class="signature " id="company_names-instance_method">
-  
-    #<strong>company_names</strong>  &#x21d2; <tt>Array&lt;String&gt;</tt> 
-  
-
-  
-
-  
-</h3><div class="docstring">
-  <div class="discussion">
-    <p>Returns Optional.</p>
-
-<p>This filter specifies the company entities to search against.</p>
-
-<p>If a value isn&#39;t specified, jobs are searched for against all
-companies.</p>
-
-<p>If multiple values are specified, jobs are searched against the
-companies specified.</p>
-
-<p>The format is &quot;projects/project_id/companies/company_id&quot;, for example,
-&quot;projects/api-test-project/companies/foo&quot;.</p>
-
-<p>At most 20 company filters are allowed.</p>
-
-
-  </div>
-</div>
-<div class="tags">
-  
-<p class="tag_title">Returns:</p>
-<ul class="return">
-  
-    <li>
-      
-      
-        <span class='type'>(<tt>Array&lt;String&gt;</tt>)</span>
-      
-      
-      
-        &mdash;
-        <div class='inline'><p>Optional.</p>
-
-<p>This filter specifies the company entities to search against.</p>
-
-<p>If a value isn&#39;t specified, jobs are searched for against all
-companies.</p>
-
-<p>If multiple values are specified, jobs are searched against the
-companies specified.</p>
-
-<p>The format is &quot;projects/project_id/companies/company_id&quot;, for example,
-&quot;projects/api-test-project/companies/foo&quot;.</p>
-
-<p>At most 20 company filters are allowed.</p>
-</div>
-      
-    </li>
-  
-</ul>
-
-</div><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-187</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/filters.rb', line 187</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/filters.rb', line 191</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::JobQuery (class)">JobQuery</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -736,10 +744,10 @@ filter isn&#39;t defined, all open jobs are searched.</p>
       <pre class="lines">
 
 
-187</pre>
+191</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/filters.rb', line 187</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/filters.rb', line 191</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::JobQuery (class)">JobQuery</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -839,10 +847,10 @@ driving_years &gt; 10</code></p>
       <pre class="lines">
 
 
-187</pre>
+191</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/filters.rb', line 187</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/filters.rb', line 191</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::JobQuery (class)">JobQuery</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -906,10 +914,10 @@ for example, &quot;enginee&quot; is corrected to &quot;engineer&quot;.</p>
       <pre class="lines">
 
 
-187</pre>
+191</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/filters.rb', line 187</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/filters.rb', line 191</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::JobQuery (class)">JobQuery</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -981,10 +989,10 @@ any of the specified employment types.</p>
       <pre class="lines">
 
 
-187</pre>
+191</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/filters.rb', line 187</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/filters.rb', line 191</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::JobQuery (class)">JobQuery</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -1044,10 +1052,10 @@ any of the specified employment types.</p>
       <pre class="lines">
 
 
-187</pre>
+191</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/filters.rb', line 187</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/filters.rb', line 191</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::JobQuery (class)">JobQuery</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -1115,10 +1123,10 @@ categories are searched against.</p>
       <pre class="lines">
 
 
-187</pre>
+191</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/filters.rb', line 187</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/filters.rb', line 191</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::JobQuery (class)">JobQuery</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -1194,10 +1202,10 @@ For more information, see
       <pre class="lines">
 
 
-187</pre>
+191</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/filters.rb', line 187</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/filters.rb', line 191</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::JobQuery (class)">JobQuery</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -1279,10 +1287,10 @@ parameter, the maximum provided distance is used for all locations.</p>
       <pre class="lines">
 
 
-187</pre>
+191</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/filters.rb', line 187</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/filters.rb', line 191</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::JobQuery (class)">JobQuery</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -1340,10 +1348,10 @@ against.</p>
       <pre class="lines">
 
 
-187</pre>
+191</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/filters.rb', line 187</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/filters.rb', line 191</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::JobQuery (class)">JobQuery</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -1405,10 +1413,10 @@ location fields.</p>
       <pre class="lines">
 
 
-187</pre>
+191</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/filters.rb', line 187</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/filters.rb', line 191</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::JobQuery (class)">JobQuery</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>

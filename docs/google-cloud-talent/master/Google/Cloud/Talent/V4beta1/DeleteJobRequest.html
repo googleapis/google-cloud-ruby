@@ -158,8 +158,12 @@ js:
 
 <p>The resource name of the job to be deleted.</p>
 
-<p>The format is &quot;projects/project_id/jobs/job_id&quot;,
-for example, &quot;projects/api-test-project/jobs/1234&quot;.</p>
+<p>The format is
+&quot;projects/project_id/tenants/tenant_id/jobs/job_id&quot;, for
+example, &quot;projects/api-test-project/tenants/foo/jobs/1234&quot;.</p>
+
+<p>Tenant id is optional and the default tenant is used if unspecified, for
+example, &quot;projects/api-test-project/jobs/1234&quot;.</p>
 
 
   </div>
@@ -181,8 +185,12 @@ for example, &quot;projects/api-test-project/jobs/1234&quot;.</p>
 
 <p>The resource name of the job to be deleted.</p>
 
-<p>The format is &quot;projects/project_id/jobs/job_id&quot;,
-for example, &quot;projects/api-test-project/jobs/1234&quot;.</p>
+<p>The format is
+&quot;projects/project_id/tenants/tenant_id/jobs/job_id&quot;, for
+example, &quot;projects/api-test-project/tenants/foo/jobs/1234&quot;.</p>
+
+<p>Tenant id is optional and the default tenant is used if unspecified, for
+example, &quot;projects/api-test-project/jobs/1234&quot;.</p>
 </div>
       
     </li>
@@ -195,10 +203,10 @@ for example, &quot;projects/api-test-project/jobs/1234&quot;.</p>
       <pre class="lines">
 
 
-84</pre>
+95</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job_service.rb', line 84</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job_service.rb', line 95</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::DeleteJobRequest (class)">DeleteJobRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>

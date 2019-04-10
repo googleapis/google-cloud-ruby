@@ -119,7 +119,7 @@ js:
       <li class="public ">
   <span class="summary_signature">
     
-      <a href="#company_name-instance_method" title="#company_name (instance method)">#<strong>company_name</strong>  &#x21d2; String </a>
+      <a href="#company-instance_method" title="#company (instance method)">#<strong>company</strong>  &#x21d2; String </a>
     
 
     
@@ -171,7 +171,7 @@ js:
       <li class="public ">
   <span class="summary_signature">
     
-      <a href="#name-instance_method" title="#name (instance method)">#<strong>name</strong>  &#x21d2; String </a>
+      <a href="#page_size-instance_method" title="#page_size (instance method)">#<strong>page_size</strong>  &#x21d2; Integer </a>
     
 
     
@@ -197,7 +197,7 @@ js:
       <li class="public ">
   <span class="summary_signature">
     
-      <a href="#page_size-instance_method" title="#page_size (instance method)">#<strong>page_size</strong>  &#x21d2; Integer </a>
+      <a href="#parent-instance_method" title="#parent (instance method)">#<strong>parent</strong>  &#x21d2; String </a>
     
 
     
@@ -308,11 +308,11 @@ js:
     <h2>Instance Attribute Details</h2>
     
       
-      <span id="company_name=-instance_method"></span>
+      <span id="company=-instance_method"></span>
       <div class="method_details first">
-  <h3 class="signature first" id="company_name-instance_method">
+  <h3 class="signature first" id="company-instance_method">
   
-    #<strong>company_name</strong>  &#x21d2; <tt>String</tt> 
+    #<strong>company</strong>  &#x21d2; <tt>String</tt> 
   
 
   
@@ -324,8 +324,12 @@ js:
 
 <p>If provided, restricts completion to specified company.</p>
 
-<p>The format is &quot;projects/project_id/companies/company_id&quot;, for example,
-&quot;projects/api-test-project/companies/foo&quot;.</p>
+<p>The format is
+&quot;projects/project_id/tenants/tenant_id/companies/company_id&quot;, for
+example, &quot;projects/api-test-project/tenants/foo/companies/bar&quot;.</p>
+
+<p>Tenant id is optional and the default tenant is used if unspecified, for
+example, &quot;projects/api-test-project/companies/bar&quot;.</p>
 
 
   </div>
@@ -347,8 +351,12 @@ js:
 
 <p>If provided, restricts completion to specified company.</p>
 
-<p>The format is &quot;projects/project_id/companies/company_id&quot;, for example,
-&quot;projects/api-test-project/companies/foo&quot;.</p>
+<p>The format is
+&quot;projects/project_id/tenants/tenant_id/companies/company_id&quot;, for
+example, &quot;projects/api-test-project/tenants/foo/companies/bar&quot;.</p>
+
+<p>Tenant id is optional and the default tenant is used if unspecified, for
+example, &quot;projects/api-test-project/companies/bar&quot;.</p>
 </div>
       
     </li>
@@ -361,13 +369,6 @@ js:
       <pre class="lines">
 
 
-95
-96
-97
-98
-99
-100
-101
 102
 103
 104
@@ -389,10 +390,17 @@ js:
 120
 121
 122
-123</pre>
+123
+124
+125
+126
+127
+128
+129
+130</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/completion_service.rb', line 95</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/completion_service.rb', line 102</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::CompleteQueryRequest (class)">CompleteQueryRequest</a></span></span>
   <span class='comment'># Enum to specify the scope of completion.
@@ -526,13 +534,6 @@ are returned.</p>
       <pre class="lines">
 
 
-95
-96
-97
-98
-99
-100
-101
 102
 103
 104
@@ -554,131 +555,17 @@ are returned.</p>
 120
 121
 122
-123</pre>
+123
+124
+125
+126
+127
+128
+129
+130</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/completion_service.rb', line 95</span>
-
-<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::CompleteQueryRequest (class)">CompleteQueryRequest</a></span></span>
-  <span class='comment'># Enum to specify the scope of completion.
-</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="CompleteQueryRequest/CompletionScope.html" title="Google::Cloud::Talent::V4beta1::CompleteQueryRequest::CompletionScope (module)">CompletionScope</a></span></span>
-    <span class='comment'># Default value.
-</span>    <span class='const'>COMPLETION_SCOPE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
-
-    <span class='comment'># Suggestions are based only on the data provided by the client.
-</span>    <span class='const'>TENANT</span> <span class='op'>=</span> <span class='int'>1</span>
-
-    <span class='comment'># Suggestions are based on all jobs data in the system that&#39;s visible to
-</span>    <span class='comment'># the client
-</span>    <span class='const'>PUBLIC</span> <span class='op'>=</span> <span class='int'>2</span>
-  <span class='kw'>end</span>
-
-  <span class='comment'># Enum to specify auto-completion topics.
-</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="CompleteQueryRequest/CompletionType.html" title="Google::Cloud::Talent::V4beta1::CompleteQueryRequest::CompletionType (module)">CompletionType</a></span></span>
-    <span class='comment'># Default value.
-</span>    <span class='const'>COMPLETION_TYPE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
-
-    <span class='comment'># Only suggest job titles.
-</span>    <span class='const'>JOB_TITLE</span> <span class='op'>=</span> <span class='int'>1</span>
-
-    <span class='comment'># Only suggest company names.
-</span>    <span class='const'>COMPANY_NAME</span> <span class='op'>=</span> <span class='int'>2</span>
-
-    <span class='comment'># Suggest both job titles and company names.
-</span>    <span class='const'>COMBINED</span> <span class='op'>=</span> <span class='int'>3</span>
-  <span class='kw'>end</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-      
-      <span id="name=-instance_method"></span>
-      <div class="method_details ">
-  <h3 class="signature " id="name-instance_method">
-  
-    #<strong>name</strong>  &#x21d2; <tt>String</tt> 
-  
-
-  
-
-  
-</h3><div class="docstring">
-  <div class="discussion">
-    <p>Returns Required.</p>
-
-<p>Resource name of project the completion is performed within.</p>
-
-<p>The format is &quot;projects/project_id&quot;, for example,
-&quot;projects/api-test-project&quot;.</p>
-
-
-  </div>
-</div>
-<div class="tags">
-  
-<p class="tag_title">Returns:</p>
-<ul class="return">
-  
-    <li>
-      
-      
-        <span class='type'>(<tt>String</tt>)</span>
-      
-      
-      
-        &mdash;
-        <div class='inline'><p>Required.</p>
-
-<p>Resource name of project the completion is performed within.</p>
-
-<p>The format is &quot;projects/project_id&quot;, for example,
-&quot;projects/api-test-project&quot;.</p>
-</div>
-      
-    </li>
-  
-</ul>
-
-</div><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-95
-96
-97
-98
-99
-100
-101
-102
-103
-104
-105
-106
-107
-108
-109
-110
-111
-112
-113
-114
-115
-116
-117
-118
-119
-120
-121
-122
-123</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/completion_service.rb', line 95</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/completion_service.rb', line 102</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::CompleteQueryRequest (class)">CompleteQueryRequest</a></span></span>
   <span class='comment'># Enum to specify the scope of completion.
@@ -766,13 +653,6 @@ are returned.</p>
       <pre class="lines">
 
 
-95
-96
-97
-98
-99
-100
-101
 102
 103
 104
@@ -794,10 +674,144 @@ are returned.</p>
 120
 121
 122
-123</pre>
+123
+124
+125
+126
+127
+128
+129
+130</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/completion_service.rb', line 95</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/completion_service.rb', line 102</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::CompleteQueryRequest (class)">CompleteQueryRequest</a></span></span>
+  <span class='comment'># Enum to specify the scope of completion.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="CompleteQueryRequest/CompletionScope.html" title="Google::Cloud::Talent::V4beta1::CompleteQueryRequest::CompletionScope (module)">CompletionScope</a></span></span>
+    <span class='comment'># Default value.
+</span>    <span class='const'>COMPLETION_SCOPE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Suggestions are based only on the data provided by the client.
+</span>    <span class='const'>TENANT</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># Suggestions are based on all jobs data in the system that&#39;s visible to
+</span>    <span class='comment'># the client
+</span>    <span class='const'>PUBLIC</span> <span class='op'>=</span> <span class='int'>2</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># Enum to specify auto-completion topics.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="CompleteQueryRequest/CompletionType.html" title="Google::Cloud::Talent::V4beta1::CompleteQueryRequest::CompletionType (module)">CompletionType</a></span></span>
+    <span class='comment'># Default value.
+</span>    <span class='const'>COMPLETION_TYPE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Only suggest job titles.
+</span>    <span class='const'>JOB_TITLE</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># Only suggest company names.
+</span>    <span class='const'>COMPANY_NAME</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># Suggest both job titles and company names.
+</span>    <span class='const'>COMBINED</span> <span class='op'>=</span> <span class='int'>3</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="parent=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="parent-instance_method">
+  
+    #<strong>parent</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Required.</p>
+
+<p>Resource name of tenant the completion is performed within.</p>
+
+<p>The format is &quot;projects/project_id/tenants/tenant_id&quot;, for example,
+&quot;projects/api-test-project/tenant/foo&quot;.</p>
+
+<p>Tenant id is optional and the default tenant is used if unspecified, for
+example, &quot;projects/api-test-project&quot;.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Required.</p>
+
+<p>Resource name of tenant the completion is performed within.</p>
+
+<p>The format is &quot;projects/project_id/tenants/tenant_id&quot;, for example,
+&quot;projects/api-test-project/tenant/foo&quot;.</p>
+
+<p>Tenant id is optional and the default tenant is used if unspecified, for
+example, &quot;projects/api-test-project&quot;.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/completion_service.rb', line 102</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::CompleteQueryRequest (class)">CompleteQueryRequest</a></span></span>
   <span class='comment'># Enum to specify the scope of completion.
@@ -885,13 +899,6 @@ are returned.</p>
       <pre class="lines">
 
 
-95
-96
-97
-98
-99
-100
-101
 102
 103
 104
@@ -913,10 +920,17 @@ are returned.</p>
 120
 121
 122
-123</pre>
+123
+124
+125
+126
+127
+128
+129
+130</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/completion_service.rb', line 95</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/completion_service.rb', line 102</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::CompleteQueryRequest (class)">CompleteQueryRequest</a></span></span>
   <span class='comment'># Enum to specify the scope of completion.
@@ -1002,13 +1016,6 @@ are returned.</p>
       <pre class="lines">
 
 
-95
-96
-97
-98
-99
-100
-101
 102
 103
 104
@@ -1030,10 +1037,17 @@ are returned.</p>
 120
 121
 122
-123</pre>
+123
+124
+125
+126
+127
+128
+129
+130</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/completion_service.rb', line 95</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/completion_service.rb', line 102</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::CompleteQueryRequest (class)">CompleteQueryRequest</a></span></span>
   <span class='comment'># Enum to specify the scope of completion.
@@ -1119,13 +1133,6 @@ are returned.</p>
       <pre class="lines">
 
 
-95
-96
-97
-98
-99
-100
-101
 102
 103
 104
@@ -1147,10 +1154,17 @@ are returned.</p>
 120
 121
 122
-123</pre>
+123
+124
+125
+126
+127
+128
+129
+130</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/completion_service.rb', line 95</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/completion_service.rb', line 102</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::CompleteQueryRequest (class)">CompleteQueryRequest</a></span></span>
   <span class='comment'># Enum to specify the scope of completion.

@@ -107,32 +107,6 @@ js:
       <li class="public ">
   <span class="summary_signature">
     
-      <a href="#field_mask-instance_method" title="#field_mask (instance method)">#<strong>field_mask</strong>  &#x21d2; Google::Protobuf::FieldMask </a>
-    
-
-    
-  </span>
-  
-  
-  
-    
-    
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'><p>Optional.</p>
-</div></span>
-  
-</li>
-
-    
-      <li class="public ">
-  <span class="summary_signature">
-    
       <a href="#page_size-instance_method" title="#page_size (instance method)">#<strong>page_size</strong>  &#x21d2; Integer </a>
     
 
@@ -208,6 +182,32 @@ js:
 </li>
 
     
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#read_mask-instance_method" title="#read_mask (instance method)">#<strong>read_mask</strong>  &#x21d2; Google::Protobuf::FieldMask </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Optional.</p>
+</div></span>
+  
+</li>
+
+    
   </ul>
 
 
@@ -218,82 +218,9 @@ js:
     <h2>Instance Attribute Details</h2>
     
       
-      <span id="field_mask=-instance_method"></span>
-      <div class="method_details first">
-  <h3 class="signature first" id="field_mask-instance_method">
-  
-    #<strong>field_mask</strong>  &#x21d2; <tt><span class='object_link'><a href="../../../Protobuf/FieldMask.html" title="Google::Protobuf::FieldMask (class)">Google::Protobuf::FieldMask</a></span></tt> 
-  
-
-  
-
-  
-</h3><div class="docstring">
-  <div class="discussion">
-    <p>Returns Optional.</p>
-
-<p>A field mask to specify the profile fields to be listed in response.
-All fields are listed if it is unset.</p>
-
-<p>Valid values are:</p>
-
-<ul>
-<li>name</li>
-</ul>
-
-
-  </div>
-</div>
-<div class="tags">
-  
-<p class="tag_title">Returns:</p>
-<ul class="return">
-  
-    <li>
-      
-      
-        <span class='type'>(<tt><span class='object_link'><a href="../../../Protobuf/FieldMask.html" title="Google::Protobuf::FieldMask (class)">Google::Protobuf::FieldMask</a></span></tt>)</span>
-      
-      
-      
-        &mdash;
-        <div class='inline'><p>Optional.</p>
-
-<p>A field mask to specify the profile fields to be listed in response.
-All fields are listed if it is unset.</p>
-
-<p>Valid values are:</p>
-
-<ul>
-<li>name</li>
-</ul>
-</div>
-      
-    </li>
-  
-</ul>
-
-</div><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-55</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/profile_service.rb', line 55</span>
-
-<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::ListProfilesRequest (class)">ListProfilesRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-      
       <span id="page_size=-instance_method"></span>
-      <div class="method_details ">
-  <h3 class="signature " id="page_size-instance_method">
+      <div class="method_details first">
+  <h3 class="signature first" id="page_size-instance_method">
   
     #<strong>page_size</strong>  &#x21d2; <tt>Integer</tt> 
   
@@ -462,6 +389,79 @@ to continue the list.</p>
 
 <p>The format is &quot;projects/project_id/tenants/tenant_id&quot;, for example,
 &quot;projects/api-test-project/tenants/foo&quot;.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+55</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/profile_service.rb', line 55</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::ListProfilesRequest (class)">ListProfilesRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="read_mask=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="read_mask-instance_method">
+  
+    #<strong>read_mask</strong>  &#x21d2; <tt><span class='object_link'><a href="../../../Protobuf/FieldMask.html" title="Google::Protobuf::FieldMask (class)">Google::Protobuf::FieldMask</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Optional.</p>
+
+<p>A field mask to specify the profile fields to be listed in response.
+All fields are listed if it is unset.</p>
+
+<p>Valid values are:</p>
+
+<ul>
+<li>name</li>
+</ul>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../../Protobuf/FieldMask.html" title="Google::Protobuf::FieldMask (class)">Google::Protobuf::FieldMask</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Optional.</p>
+
+<p>A field mask to specify the profile fields to be listed in response.
+All fields are listed if it is unset.</p>
+
+<p>Valid values are:</p>
+
+<ul>
+<li>name</li>
+</ul>
 </div>
       
     </li>

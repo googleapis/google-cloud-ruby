@@ -91,7 +91,7 @@ js:
   <div class="discussion">
     <p>Input only.</p>
 
-<p>Filter on status of Application.</p>
+<p>Filter on state of Application.</p>
 
 
   </div>
@@ -109,7 +109,7 @@ js:
       <li class="public ">
   <span class="summary_signature">
     
-      <a href="#application_status-instance_method" title="#application_status (instance method)">#<strong>application_status</strong>  &#x21d2; Google::Cloud::Talent::V4beta1::JobApplication::ApplicationStatus </a>
+      <a href="#application_state-instance_method" title="#application_state (instance method)">#<strong>application_state</strong>  &#x21d2; Google::Cloud::Talent::V4beta1::Application::ApplicationState </a>
     
 
     
@@ -168,11 +168,11 @@ js:
     <h2>Instance Attribute Details</h2>
     
       
-      <span id="application_status=-instance_method"></span>
+      <span id="application_state=-instance_method"></span>
       <div class="method_details first">
-  <h3 class="signature first" id="application_status-instance_method">
+  <h3 class="signature first" id="application_state-instance_method">
   
-    #<strong>application_status</strong>  &#x21d2; <tt><span class='object_link'><a href="JobApplication/ApplicationStatus.html" title="Google::Cloud::Talent::V4beta1::JobApplication::ApplicationStatus (module)">Google::Cloud::Talent::V4beta1::JobApplication::ApplicationStatus</a></span></tt> 
+    #<strong>application_state</strong>  &#x21d2; <tt><span class='object_link'><a href="Application/ApplicationState.html" title="Google::Cloud::Talent::V4beta1::Application::ApplicationState (module)">Google::Cloud::Talent::V4beta1::Application::ApplicationState</a></span></tt> 
   
 
   
@@ -182,9 +182,10 @@ js:
   <div class="discussion">
     <p>Returns Required.</p>
 
-<p>User entered or selected application status. The API does an exact match
-between the application status specified in this filter and the
-JobApplication#status in profiles.</p>
+<p>User entered or selected application state. The API does an exact match
+between the application state specified in this filter and the
+<span class='object_link'><a href="Application.html#state-instance_method" title="Google::Cloud::Talent::V4beta1::Application#state (method)">Application#state</a></span> in
+profiles.</p>
 
 
   </div>
@@ -197,16 +198,17 @@ JobApplication#status in profiles.</p>
     <li>
       
       
-        <span class='type'>(<tt><span class='object_link'><a href="JobApplication/ApplicationStatus.html" title="Google::Cloud::Talent::V4beta1::JobApplication::ApplicationStatus (module)">Google::Cloud::Talent::V4beta1::JobApplication::ApplicationStatus</a></span></tt>)</span>
+        <span class='type'>(<tt><span class='object_link'><a href="Application/ApplicationState.html" title="Google::Cloud::Talent::V4beta1::Application::ApplicationState (module)">Google::Cloud::Talent::V4beta1::Application::ApplicationState</a></span></tt>)</span>
       
       
       
         &mdash;
         <div class='inline'><p>Required.</p>
 
-<p>User entered or selected application status. The API does an exact match
-between the application status specified in this filter and the
-JobApplication#status in profiles.</p>
+<p>User entered or selected application state. The API does an exact match
+between the application state specified in this filter and the
+<span class='object_link'><a href="Application.html#state-instance_method" title="Google::Cloud::Talent::V4beta1::Application#state (method)">Application#state</a></span> in
+profiles.</p>
 </div>
       
     </li>
@@ -219,10 +221,10 @@ JobApplication#status in profiles.</p>
       <pre class="lines">
 
 
-810</pre>
+816</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/filters.rb', line 810</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/filters.rb', line 816</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::ApplicationStatusFilter (class)">ApplicationStatusFilter</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -245,8 +247,9 @@ JobApplication#status in profiles.</p>
   <div class="discussion">
     <p>Returns Optional.</p>
 
-<p>If true, The API excludes all candidates with any JobApplication#status
-matching the status specified in the filter.</p>
+<p>If true, The API excludes all candidates with any
+<span class='object_link'><a href="Application.html#state-instance_method" title="Google::Cloud::Talent::V4beta1::Application#state (method)">Application#state</a></span> matching
+the state specified in the filter.</p>
 
 
   </div>
@@ -266,8 +269,9 @@ matching the status specified in the filter.</p>
         &mdash;
         <div class='inline'><p>Optional.</p>
 
-<p>If true, The API excludes all candidates with any JobApplication#status
-matching the status specified in the filter.</p>
+<p>If true, The API excludes all candidates with any
+<span class='object_link'><a href="Application.html#state-instance_method" title="Google::Cloud::Talent::V4beta1::Application#state (method)">Application#state</a></span> matching
+the state specified in the filter.</p>
 </div>
       
     </li>
@@ -280,10 +284,10 @@ matching the status specified in the filter.</p>
       <pre class="lines">
 
 
-810</pre>
+816</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/filters.rb', line 810</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/filters.rb', line 816</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::ApplicationStatusFilter (class)">ApplicationStatusFilter</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
