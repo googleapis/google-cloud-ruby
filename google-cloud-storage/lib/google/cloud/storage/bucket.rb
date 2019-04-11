@@ -1408,8 +1408,8 @@ module Google
         #   corresponding values. (These values can be permanently set using
         #   {File#content_disposition=} and {File#content_type=}.)
         # @param [Symbol, String] version The version of the signed credential
-        #   to create. Must be one of ':v2' or ':v4'. The default value is
-        #   ':v2'.
+        #   to create. Must be one of `:v2` or `:v4`. The default value is
+        #   `:v2`.
         #
         # @return [String]
         #
