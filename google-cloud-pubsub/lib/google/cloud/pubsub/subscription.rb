@@ -238,6 +238,27 @@ module Google
         #
         # @return [Subscription::PushConfig]
         #
+        # @example
+        #   require "google/cloud/pubsub"
+        #
+        #   pubsub = Google::Cloud::PubSub.new
+        #
+        #   sub = pubsub.subscription "my-topic-sub"
+        #   sub.push_config.endpoint #=> "http://example.com/callback"
+        #   sub.push_config.authentication.email #=> "user@example.com"
+        #   sub.push_config.authentication.audience #=> "client-12345"
+        #
+        # @example Update the push configuration by passing a block:
+        #   require "google/cloud/pubsub"
+        #
+        #   pubsub = Google::Cloud::PubSub.new
+        #   sub = pubsub.subscription "my-subscription"
+        #
+        #   sub.push_config do |pc|
+        #     pc.endpoint = "http://example.net/callback"
+        #     pc.set_oidc_token "user@example.net", "client-67890"
+        #   end
+        #
         def push_config
           ensure_service!
 
