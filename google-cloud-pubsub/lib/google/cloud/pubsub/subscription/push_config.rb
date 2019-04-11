@@ -19,13 +19,16 @@ module Google
   module Cloud
     module PubSub
       class Subscription
+        ##
         # Configuration for a push delivery endpoint.
         class PushConfig
+          ##
           # @private
           def initialize
             @grpc = Google::Cloud::PubSub::V1::PushConfig.new
           end
 
+          ##
           # A URL locating the endpoint to which messages should be pushed.
           #
           # @return [String]
@@ -33,6 +36,7 @@ module Google
             @grpc.push_endpoint
           end
 
+          ##
           # Sets the URL locating the endpoint to which messages should be
           # pushed.
           #
@@ -41,6 +45,7 @@ module Google
             @grpc.push_endpoint = String new_endpoint
           end
 
+          ##
           # The authentication method used by push endpoints to verify the
           # source of push requests.
           #
@@ -52,6 +57,7 @@ module Google
             OidcToken.from_grpc @grpc.oidc_token
           end
 
+          ##
           # Sets the authentication method used by push endpoints to verify the
           # source of push requests.
           #
@@ -66,6 +72,7 @@ module Google
             end
           end
 
+          ##
           # Sets the authentication method to use an {OidcToken}.
           #
           # @param [String] email Service account email.
@@ -78,6 +85,7 @@ module Google
             self.authentication = oidc_token
           end
 
+          ##
           # The format of the pushed message. This attribute indicates the
           # version of the data expected by the endpoint. This controls the
           # shape of the pushed message (i.e., its fields and metadata). The
@@ -98,6 +106,7 @@ module Google
             @grpc.attributes["x-goog-version"]
           end
 
+          ##
           # Sets the format of the pushed message.
           #
           # The possible values for this attribute are:
@@ -116,11 +125,13 @@ module Google
             end
           end
 
+          ##
           # @private
           def to_grpc
             @grpc
           end
 
+          ##
           # @private
           def self.from_grpc grpc
             new.tap do |pc|
@@ -128,14 +139,17 @@ module Google
             end
           end
 
+          ##
           # Contains information needed for generating an [OpenID Connect
           # token](https://developers.google.com/identity/protocols/OpenIDConnect).
           class OidcToken
+            ##
             # @private
             def initialize
               @grpc = Google::Cloud::PubSub::V1::PushConfig::OidcToken.new
             end
 
+            ##
             # Service account email to be used for generating the OIDC token.
             #
             # @return [String]
@@ -143,6 +157,7 @@ module Google
               @grpc.service_account_email
             end
 
+            ##
             # Service account email to be used for generating the OIDC token.
             #
             # @param [String] new_email New service account email value.
@@ -150,6 +165,7 @@ module Google
               @grpc.service_account_email = new_email
             end
 
+            ##
             # Audience to be used when generating OIDC token. The audience claim
             # identifies the recipients that the JWT is intended for. The
             # audience value is a single case-sensitive string.
@@ -165,6 +181,7 @@ module Google
               @grpc.audience
             end
 
+            ##
             # Sets the audience to be used when generating OIDC token.
             #
             # @param [String] new_audience New audience value.
@@ -172,11 +189,13 @@ module Google
               @grpc.audience = new_audience
             end
 
+            ##
             # @private
             def to_grpc
               @grpc
             end
 
+            ##
             # @private
             def self.from_grpc grpc
               grpc ||= Google::Cloud::PubSub::V1::PushConfig::OidcToken.new
