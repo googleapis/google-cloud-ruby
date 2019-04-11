@@ -71,6 +71,7 @@ describe Google::Cloud::PubSub::Subscription, :attributes, :mock_pubsub do
     subscription.push_config.authentication.must_be_kind_of Google::Cloud::PubSub::Subscription::PushConfig::OidcToken
     subscription.push_config.authentication.email.must_equal "user@example.com"
     subscription.push_config.authentication.audience.must_equal "client-12345"
+    subscription.push_config.must_be :oidc_token?
   end
 
   describe "reference subscription object of a subscription that does exist" do

@@ -75,6 +75,14 @@ module Google
           end
 
           ##
+          # Checks whether authentication is an {OidcToken}.
+          #
+          # @return [Boolean]
+          def oidc_token?
+            authentication.is_a? OidcToken
+          end
+
+          ##
           # Sets the authentication method to use an {OidcToken}.
           #
           # @param [String] email Service account email.
