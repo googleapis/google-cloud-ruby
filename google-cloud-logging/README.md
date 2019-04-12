@@ -36,9 +36,10 @@ the `google-cloud-logging` gem.
 You can directly read or write log entries through the client library:
 
 ```ruby
-require "google/cloud/logging"
+require "google/cloud"
 
-logging = Google::Cloud::Logging.new
+gcloud = Google::Cloud.new
+logging = gcloud.logging
 
 # List all log entries
 logging.entries.each do |e|
