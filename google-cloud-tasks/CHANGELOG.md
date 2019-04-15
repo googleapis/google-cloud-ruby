@@ -1,5 +1,15 @@
 # Release History
 
+### 0.7.0 / 2019-04-15
+
+* Add Queue#log_sampling_ratio
+* Add HttpRequest#authorization_header
+* Add HttpRequest#oauth_token
+* Add HttpRequest#oidc_token
+* Add OAuthToken
+* Add OidcToken
+* Update generated documentation
+
 ### 0.6.0 / 2019-03-28
 
 * Add v2 api version
