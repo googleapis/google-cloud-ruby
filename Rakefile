@@ -325,7 +325,7 @@ task :release, :tag do |t, args|
   gem_was_published = nil
   if File.file? path_to_be_pushed
     begin
-      ::Gems.push(File.new path_to_be_pushed)
+      puts ::Gems.push(File.new path_to_be_pushed)
       gem_was_published = true
       puts "Successfully built and pushed #{package} for version #{version}"
     rescue => e
