@@ -25,8 +25,7 @@ module Google
       # # Ruby Client for Google Cloud Memorystore for Redis API ([Alpha](https://github.com/googleapis/google-cloud-ruby#versioning))
       #
       # [Google Cloud Memorystore for Redis API][Product Documentation]:
-      # The Google Cloud Memorystore for Redis API is used for creating and managing
-      # Redis instances on the Google Cloud Platform.
+      # Creates and manages Redis instances on the Google Cloud Platform.
       # - [Product Documentation][]
       #
       # ## Quick Start
