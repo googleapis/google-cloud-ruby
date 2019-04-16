@@ -83,7 +83,7 @@ js:
   <dl>
     <dt>Defined in:</dt>
     <dd>lib/google/cloud/pubsub/subscription.rb<span class="defines">,<br />
-  lib/google/cloud/pubsub/subscription/list.rb</span>
+  lib/google/cloud/pubsub/subscription/list.rb,<br /> lib/google/cloud/pubsub/subscription/push_config.rb</span>
 </dd>
   </dl>
   
@@ -130,7 +130,7 @@ specific <span class='object_link'><a href="Topic.html" title="Google::Cloud::Pu
     
   
     
-      <strong class="classes">Classes:</strong> <span class='object_link'><a href="Subscription/List.html" title="Google::Cloud::PubSub::Subscription::List (class)">List</a></span>
+      <strong class="classes">Classes:</strong> <span class='object_link'><a href="Subscription/List.html" title="Google::Cloud::PubSub::Subscription::List (class)">List</a></span>, <span class='object_link'><a href="Subscription/PushConfig.html" title="Google::Cloud::PubSub::Subscription::PushConfig (class)">PushConfig</a></span>
     
   
 </p>
@@ -547,6 +547,29 @@ specific <span class='object_link'><a href="Topic.html" title="Google::Cloud::Pu
         <li class="public ">
   <span class="summary_signature">
     
+      <a href="#push_config-instance_method" title="#push_config (instance method)">#<strong>push_config</strong> {|push_config| ... } &#x21d2; Subscription::PushConfig </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Inspect the Subscription&#39;s push configuration settings.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#reference%3F-instance_method" title="#reference? (instance method)">#<strong>reference?</strong>  &#x21d2; Boolean </a>
     
 
@@ -903,16 +926,16 @@ This is only used for messages received via pull.</p>
       <pre class="lines">
 
 
-540
-541
-542
-543
-544
-545
-546</pre>
+602
+603
+604
+605
+606
+607
+608</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscription.rb', line 540</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscription.rb', line 602</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_acknowledge'>acknowledge</span> <span class='op'>*</span><span class='id identifier rubyid_messages'>messages</span>
   <span class='id identifier rubyid_ack_ids'>ack_ids</span> <span class='op'>=</span> <span class='id identifier rubyid_coerce_ack_ids'>coerce_ack_ids</span> <span class='id identifier rubyid_messages'>messages</span>
@@ -1054,14 +1077,14 @@ Managing Labels</a>.</p>
       <pre class="lines">
 
 
-630
-631
-632
-633
-634</pre>
+692
+693
+694
+695
+696</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscription.rb', line 630</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscription.rb', line 692</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_snapshot'>create_snapshot</span> <span class='id identifier rubyid_snapshot_name'>snapshot_name</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>labels:</span> <span class='kw'>nil</span>
   <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
@@ -1116,13 +1139,13 @@ reference object. See <span class='object_link'><a href="#reference%3F-instance_
       <pre class="lines">
 
 
-106
 107
 108
-109</pre>
+109
+110</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscription.rb', line 106</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscription.rb', line 107</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_deadline'>deadline</span>
   <span class='id identifier rubyid_ensure_grpc!'>ensure_grpc!</span>
@@ -1179,16 +1202,16 @@ message.</p>
       <pre class="lines">
 
 
-118
 119
 120
 121
 122
 123
-124</pre>
+124
+125</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscription.rb', line 118</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscription.rb', line 119</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_deadline='>deadline=</span> <span class='id identifier rubyid_new_deadline'>new_deadline</span>
   <span class='id identifier rubyid_update_grpc'>update_grpc</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../PubSub.html" title="Google::Cloud::PubSub (module)">PubSub</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="V1.html" title="Google::Cloud::PubSub::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="V1/Subscription.html" title="Google::Cloud::PubSub::V1::Subscription (class)">Subscription</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span> \
@@ -1258,14 +1281,14 @@ All pending messages in the subscription are immediately dropped.</p>
       <pre class="lines">
 
 
-342
-343
-344
-345
-346</pre>
+404
+405
+406
+407
+408</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscription.rb', line 342</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscription.rb', line 404</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete'>delete</span>
   <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
@@ -1289,7 +1312,8 @@ All pending messages in the subscription are immediately dropped.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns the URL locating the endpoint to which messages should be
-pushed.</p>
+pushed. For example, a Webhook endpoint might use
+&quot;<a href="https://example.com/push">https://example.com/push</a>&quot;.</p>
 
 <p>Makes an API call to retrieve the endpoint value when called on a
 reference object. See <span class='object_link'><a href="#reference%3F-instance_method" title="Google::Cloud::PubSub::Subscription#reference? (method)">#reference?</a></span>.</p>
@@ -1319,13 +1343,13 @@ reference object. See <span class='object_link'><a href="#reference%3F-instance_
       <pre class="lines">
 
 
-199
-200
 201
-202</pre>
+202
+203
+204</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscription.rb', line 199</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscription.rb', line 201</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_endpoint'>endpoint</span>
   <span class='id identifier rubyid_ensure_grpc!'>ensure_grpc!</span>
@@ -1347,7 +1371,8 @@ reference object. See <span class='object_link'><a href="#reference%3F-instance_
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the URL locating the endpoint to which messages should be pushed.</p>
+    <p>Sets the URL locating the endpoint to which messages should be pushed.
+For example, a Webhook endpoint might use &quot;<a href="https://example.com/push">https://example.com/push</a>&quot;.</p>
 
 
   </div>
@@ -1380,9 +1405,6 @@ reference object. See <span class='object_link'><a href="#reference%3F-instance_
       <pre class="lines">
 
 
-209
-210
-211
 212
 213
 214
@@ -1390,10 +1412,13 @@ reference object. See <span class='object_link'><a href="#reference%3F-instance_
 216
 217
 218
-219</pre>
+219
+220
+221
+222</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscription.rb', line 209</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscription.rb', line 212</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_endpoint='>endpoint=</span> <span class='id identifier rubyid_new_endpoint'>new_endpoint</span>
   <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
@@ -1465,19 +1490,19 @@ exists when called on a reference object. See <span class='object_link'><a href=
       <pre class="lines">
 
 
-317
-318
-319
-320
-321
-322
-323
-324
-325
-326</pre>
+379
+380
+381
+382
+383
+384
+385
+386
+387
+388</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscription.rb', line 317</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscription.rb', line 379</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_exists?'>exists?</span>
   <span class='comment'># Always true if the object is not set as reference
@@ -1545,16 +1570,16 @@ reference object. See <span class='object_link'><a href="#reference%3F-instance_
       <pre class="lines">
 
 
-273
-274
-275
-276
-277
-278
-279</pre>
+335
+336
+337
+338
+339
+340
+341</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscription.rb', line 273</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscription.rb', line 335</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_expires_in'>expires_in</span>
   <span class='id identifier rubyid_ensure_grpc!'>ensure_grpc!</span>
@@ -1616,19 +1641,19 @@ to unset.</p>
       <pre class="lines">
 
 
-290
-291
-292
-293
-294
-295
-296
-297
-298
-299</pre>
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscription.rb', line 290</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscription.rb', line 352</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_expires_in='>expires_in=</span> <span class='id identifier rubyid_ttl'>ttl</span>
   <span class='id identifier rubyid_new_expiration_policy'>new_expiration_policy</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Pubsub</span><span class='op'>::</span><span class='const'>V1</span><span class='op'>::</span><span class='const'>ExpirationPolicy</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span>
@@ -1695,13 +1720,13 @@ reference object. See <span class='object_link'><a href="#reference%3F-instance_
       <pre class="lines">
 
 
-234
-235
-236
-237</pre>
+296
+297
+298
+299</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscription.rb', line 234</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscription.rb', line 296</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_labels'>labels</span>
   <span class='id identifier rubyid_ensure_grpc!'>ensure_grpc!</span>
@@ -1776,16 +1801,16 @@ Labels</a>.</p>
       <pre class="lines">
 
 
-251
-252
-253
-254
-255
-256
-257</pre>
+313
+314
+315
+316
+317
+318
+319</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscription.rb', line 251</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscription.rb', line 313</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_labels='>labels=</span> <span class='id identifier rubyid_new_labels'>new_labels</span>
   <span class='id identifier rubyid_raise'>raise</span> <span class='const'>ArgumentError</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Value must be a Hash</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>if</span> <span class='id identifier rubyid_new_labels'>new_labels</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
@@ -2001,18 +2026,18 @@ message</p>
       <pre class="lines">
 
 
-508
-509
-510
-511
-512
-513
-514
-515
-516</pre>
+570
+571
+572
+573
+574
+575
+576
+577
+578</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscription.rb', line 508</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscription.rb', line 570</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_listen'>listen</span> <span class='label'>deadline:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>streams:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>inventory:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>threads:</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='comma'>,</span>
            <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
@@ -2112,15 +2137,15 @@ the message available for another pull request.</p>
       <pre class="lines">
 
 
-575
-576
-577
-578
-579
-580</pre>
+637
+638
+639
+640
+641
+642</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscription.rb', line 575</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscription.rb', line 637</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_modify_ack_deadline'>modify_ack_deadline</span> <span class='id identifier rubyid_new_deadline'>new_deadline</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_messages'>messages</span>
   <span class='id identifier rubyid_ack_ids'>ack_ids</span> <span class='op'>=</span> <span class='id identifier rubyid_coerce_ack_ids'>coerce_ack_ids</span> <span class='id identifier rubyid_messages'>messages</span>
@@ -2171,13 +2196,13 @@ the message available for another pull request.</p>
       <pre class="lines">
 
 
-71
 72
 73
-74</pre>
+74
+75</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscription.rb', line 71</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscription.rb', line 72</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_name'>name</span>
   <span class='kw'>return</span> <span class='ivar'>@resource_name</span> <span class='kw'>if</span> <span class='id identifier rubyid_reference?'>reference?</span>
@@ -2304,17 +2329,17 @@ subscription</p>
       <pre class="lines">
 
 
-783
-784
-785
-786
-787
-788
-789
-790</pre>
+845
+846
+847
+848
+849
+850
+851
+852</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscription.rb', line 783</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscription.rb', line 845</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_policy'>policy</span>
   <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
@@ -2456,19 +2481,19 @@ specified. The default value is <code>100</code>, the maximum value is <code>100
       <pre class="lines">
 
 
-400
-401
-402
-403
-404
-405
-406
-407
-408
-409</pre>
+462
+463
+464
+465
+466
+467
+468
+469
+470
+471</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscription.rb', line 400</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscription.rb', line 462</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_pull'>pull</span> <span class='label'>immediate:</span> <span class='kw'>true</span><span class='comma'>,</span> <span class='label'>max:</span> <span class='int'>100</span>
   <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
@@ -2479,6 +2504,167 @@ specified. The default value is <code>100</code>, the maximum value is <code>100
   <span class='kw'>end</span>
 <span class='kw'>rescue</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'>DeadlineExceededError</span>
   <span class='lbracket'>[</span><span class='rbracket'>]</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="push_config-instance_method">
+  
+    #<strong>push_config</strong> {|push_config| ... } &#x21d2; <tt><span class='object_link'><a href="Subscription/PushConfig.html" title="Google::Cloud::PubSub::Subscription::PushConfig (class)">Subscription::PushConfig</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Inspect the Subscription&#39;s push configuration settings. The
+configuration can be changed by modifying the values in the method&#39;s
+block.</p>
+
+<p>Subscription objects that are reference only will return an empty
+<span class='object_link'><a href="Subscription/PushConfig.html" title="Google::Cloud::PubSub::Subscription::PushConfig (class)">PushConfig</a></span> object, which can be configured and saved
+using the method&#39;s block. Unlike <span class='object_link'><a href="#endpoint-instance_method" title="Google::Cloud::PubSub::Subscription#endpoint (method)">#endpoint</a></span>, which will retrieve the
+full resource from the API before returning. To get the actual values
+for a reference object, call <span class='object_link'><a href="#reload!-instance_method" title="Google::Cloud::PubSub::Subscription#reload! (method)">#reload!</a></span> before calling <span class='object_link'><a href="#push_config-instance_method" title="Google::Cloud::PubSub::Subscription#push_config (method)">#push_config</a></span>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/pubsub</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_pubsub'>pubsub</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../PubSub.html" title="Google::Cloud::PubSub (module)">PubSub</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../PubSub.html#new-class_method" title="Google::Cloud::PubSub.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_sub'>sub</span> <span class='op'>=</span> <span class='id identifier rubyid_pubsub'>pubsub</span><span class='period'>.</span><span class='id identifier rubyid_subscription'>subscription</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-topic-sub</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_sub'>sub</span><span class='period'>.</span><span class='id identifier rubyid_push_config'>push_config</span><span class='period'>.</span><span class='id identifier rubyid_endpoint'>endpoint</span> <span class='comment'>#=&gt; &quot;http://example.com/callback&quot;
+</span><span class='id identifier rubyid_sub'>sub</span><span class='period'>.</span><span class='id identifier rubyid_push_config'>push_config</span><span class='period'>.</span><span class='id identifier rubyid_authentication'>authentication</span><span class='period'>.</span><span class='id identifier rubyid_email'>email</span> <span class='comment'>#=&gt; &quot;user@example.com&quot;
+</span><span class='id identifier rubyid_sub'>sub</span><span class='period'>.</span><span class='id identifier rubyid_push_config'>push_config</span><span class='period'>.</span><span class='id identifier rubyid_authentication'>authentication</span><span class='period'>.</span><span class='id identifier rubyid_audience'>audience</span> <span class='comment'>#=&gt; &quot;client-12345&quot;</span></code></pre>
+    
+      
+        <p class="example_title"><div class='inline'><p>Update the push configuration by passing a block:</p>
+</div></p>
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/pubsub</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_pubsub'>pubsub</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../PubSub.html" title="Google::Cloud::PubSub (module)">PubSub</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../PubSub.html#new-class_method" title="Google::Cloud::PubSub.new (method)">new</a></span></span>
+<span class='id identifier rubyid_sub'>sub</span> <span class='op'>=</span> <span class='id identifier rubyid_pubsub'>pubsub</span><span class='period'>.</span><span class='id identifier rubyid_subscription'>subscription</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-subscription</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_sub'>sub</span><span class='period'>.</span><span class='id identifier rubyid_push_config'>push_config</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_pc'>pc</span><span class='op'>|</span>
+  <span class='id identifier rubyid_pc'>pc</span><span class='period'>.</span><span class='id identifier rubyid_endpoint'>endpoint</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>http://example.net/callback</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_pc'>pc</span><span class='period'>.</span><span class='id identifier rubyid_set_oidc_token'>set_oidc_token</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>user@example.net</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>client-67890</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span></code></pre>
+    
+  </div>
+
+<p class="tag_title">Yields:</p>
+<ul class="yield">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="#push_config-instance_method" title="Google::Cloud::PubSub::Subscription#push_config (method)">push_config</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a block for modifying the push configuration</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Yield Parameters:</p>
+<ul class="yieldparam">
+  
+    <li>
+      
+        <span class='name'>push_config</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Subscription/PushConfig.html" title="Google::Cloud::PubSub::Subscription::PushConfig (class)">Subscription::PushConfig</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the push
+configuration</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Subscription/PushConfig.html" title="Google::Cloud::PubSub::Subscription::PushConfig (class)">Subscription::PushConfig</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscription.rb', line 262</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_push_config'>push_config</span>
+  <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
+
+  <span class='id identifier rubyid_orig_config'>orig_config</span> <span class='op'>=</span> <span class='id identifier rubyid_reference?'>reference?</span> <span class='op'>?</span> <span class='kw'>nil</span> <span class='op'>:</span> <span class='ivar'>@grpc</span><span class='period'>.</span><span class='id identifier rubyid_push_config'>push_config</span>
+  <span class='id identifier rubyid_config'>config</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Subscription/PushConfig.html" title="Google::Cloud::PubSub::Subscription::PushConfig (class)">PushConfig</a></span></span><span class='period'>.</span><span class='id identifier rubyid_from_grpc'>from_grpc</span> <span class='id identifier rubyid_orig_config'>orig_config</span>
+
+  <span class='kw'>if</span> <span class='id identifier rubyid_block_given?'>block_given?</span>
+    <span class='id identifier rubyid_old_config'>old_config</span> <span class='op'>=</span> <span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_to_grpc'>to_grpc</span><span class='period'>.</span><span class='id identifier rubyid_dup'>dup</span>
+    <span class='kw'>yield</span> <span class='id identifier rubyid_config'>config</span>
+    <span class='id identifier rubyid_new_config'>new_config</span> <span class='op'>=</span> <span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_to_grpc'>to_grpc</span>
+
+    <span class='kw'>if</span> <span class='id identifier rubyid_old_config'>old_config</span> <span class='op'>!=</span> <span class='id identifier rubyid_new_config'>new_config</span> <span class='comment'># has the object been changed?
+</span>      <span class='id identifier rubyid_update_grpc'>update_grpc</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../PubSub.html" title="Google::Cloud::PubSub (module)">PubSub</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="V1.html" title="Google::Cloud::PubSub::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="V1/Subscription.html" title="Google::Cloud::PubSub::V1::Subscription (class)">Subscription</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span> \
+        <span class='label'>name:</span> <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='label'>push_config:</span> <span class='id identifier rubyid_new_config'>new_config</span>
+      <span class='ivar'>@grpc</span> <span class='op'>=</span> <span class='id identifier rubyid_service'>service</span><span class='period'>.</span><span class='id identifier rubyid_update_subscription'>update_subscription</span> <span class='id identifier rubyid_update_grpc'>update_grpc</span><span class='comma'>,</span> <span class='symbol'>:push_config</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+
+  <span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_freeze'>freeze</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -2542,12 +2728,12 @@ resource representation, <code>false</code> otherwise.</p>
       <pre class="lines">
 
 
-704
-705
-706</pre>
+766
+767
+768</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscription.rb', line 704</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscription.rb', line 766</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_reference?'>reference?</span>
   <span class='ivar'>@grpc</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
@@ -2617,15 +2803,15 @@ subscription</p>
       <pre class="lines">
 
 
-741
-742
-743
-744
-745
-746</pre>
+803
+804
+805
+806
+807
+808</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscription.rb', line 741</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscription.rb', line 803</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_reload!'>reload!</span>
   <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
@@ -2695,12 +2881,12 @@ resource representation, <code>false</code> otherwise.</p>
       <pre class="lines">
 
 
-723
-724
-725</pre>
+785
+786
+787</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscription.rb', line 723</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscription.rb', line 785</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_resource?'>resource?</span>
   <span class='op'>!</span><span class='ivar'>@grpc</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
@@ -2759,13 +2945,13 @@ retained.</p>
       <pre class="lines">
 
 
-138
 139
 140
-141</pre>
+141
+142</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscription.rb', line 138</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscription.rb', line 139</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_retain_acked'>retain_acked</span>
   <span class='id identifier rubyid_ensure_grpc!'>ensure_grpc!</span>
@@ -2821,16 +3007,16 @@ value.</p>
       <pre class="lines">
 
 
-149
 150
 151
 152
 153
 154
-155</pre>
+155
+156</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscription.rb', line 149</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscription.rb', line 150</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_retain_acked='>retain_acked=</span> <span class='id identifier rubyid_new_retain_acked'>new_retain_acked</span>
   <span class='id identifier rubyid_update_grpc'>update_grpc</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../PubSub.html" title="Google::Cloud::PubSub (module)">PubSub</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="V1.html" title="Google::Cloud::PubSub::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="V1/Subscription.html" title="Google::Cloud::PubSub::V1::Subscription (class)">Subscription</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span> \
@@ -2895,13 +3081,13 @@ reference object. See <span class='object_link'><a href="#reference%3F-instance_
       <pre class="lines">
 
 
-171
 172
 173
-174</pre>
+174
+175</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscription.rb', line 171</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscription.rb', line 172</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_retention'>retention</span>
   <span class='id identifier rubyid_ensure_grpc!'>ensure_grpc!</span>
@@ -2956,17 +3142,17 @@ reference object. See <span class='object_link'><a href="#reference%3F-instance_
       <pre class="lines">
 
 
-181
 182
 183
 184
 185
 186
 187
-188</pre>
+188
+189</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscription.rb', line 181</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscription.rb', line 182</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_retention='>retention=</span> <span class='id identifier rubyid_new_retention'>new_retention</span>
   <span class='id identifier rubyid_new_retention_duration'>new_retention_duration</span> <span class='op'>=</span> <span class='const'>Convert</span><span class='period'>.</span><span class='id identifier rubyid_number_to_duration'>number_to_duration</span> <span class='id identifier rubyid_new_retention'>new_retention</span>
@@ -3092,14 +3278,14 @@ not be restored.</p>
       <pre class="lines">
 
 
-683
-684
-685
-686
-687</pre>
+745
+746
+747
+748
+749</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscription.rb', line 683</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscription.rb', line 745</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_seek'>seek</span> <span class='id identifier rubyid_snapshot'>snapshot</span>
   <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
@@ -3208,15 +3394,15 @@ check access for. Permissions with wildcards (such as <code>*</code> or
       <pre class="lines">
 
 
-860
-861
-862
-863
-864
-865</pre>
+922
+923
+924
+925
+926
+927</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscription.rb', line 860</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscription.rb', line 922</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_test_permissions'>test_permissions</span> <span class='op'>*</span><span class='id identifier rubyid_permissions'>permissions</span>
   <span class='id identifier rubyid_permissions'>permissions</span> <span class='op'>=</span> <span class='const'>Array</span><span class='lparen'>(</span><span class='id identifier rubyid_permissions'>permissions</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_flatten'>flatten</span>
@@ -3283,13 +3469,13 @@ reference object. See <span class='object_link'><a href="#reference%3F-instance_
       <pre class="lines">
 
 
-92
 93
 94
-95</pre>
+95
+96</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscription.rb', line 92</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscription.rb', line 93</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_topic'>topic</span>
   <span class='id identifier rubyid_ensure_grpc!'>ensure_grpc!</span>
@@ -3396,14 +3582,14 @@ subscription</p>
       <pre class="lines">
 
 
-821
-822
-823
-824
-825</pre>
+883
+884
+885
+886
+887</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscription.rb', line 821</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscription.rb', line 883</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update_policy'>update_policy</span> <span class='id identifier rubyid_new_policy'>new_policy</span>
   <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
@@ -3496,12 +3682,12 @@ specified. The default value is <code>100</code>, the maximum value is <code>100
       <pre class="lines">
 
 
-437
-438
-439</pre>
+499
+500
+501</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscription.rb', line 437</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscription.rb', line 499</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_wait_for_messages'>wait_for_messages</span> <span class='label'>max:</span> <span class='int'>100</span>
   <span class='id identifier rubyid_pull'>pull</span> <span class='label'>immediate:</span> <span class='kw'>false</span><span class='comma'>,</span> <span class='label'>max:</span> <span class='id identifier rubyid_max'>max</span>
