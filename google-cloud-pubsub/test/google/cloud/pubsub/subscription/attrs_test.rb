@@ -65,7 +65,16 @@ describe Google::Cloud::PubSub::Subscription, :attributes, :mock_pubsub do
     subscription.expires_in.must_equal two_days_seconds
   end
 
-  describe "reference subscription object of a subscription exists" do
+  it "gets push_config from the Google API object" do
+    subscription.push_config.must_be_kind_of Google::Cloud::PubSub::Subscription::PushConfig
+    subscription.push_config.endpoint.must_equal sub_endpoint
+    subscription.push_config.authentication.must_be_kind_of Google::Cloud::PubSub::Subscription::PushConfig::OidcToken
+    subscription.push_config.authentication.email.must_equal "user@example.com"
+    subscription.push_config.authentication.audience.must_equal "client-12345"
+    subscription.push_config.must_be :oidc_token?
+  end
+
+  describe "reference subscription object of a subscription that does exist" do
     let :subscription do
       Google::Cloud::PubSub::Subscription.from_name sub_name,
                                             pubsub.service
@@ -131,6 +140,12 @@ describe Google::Cloud::PubSub::Subscription, :attributes, :mock_pubsub do
 
       mock.verify
     end
+
+    it "does not make an HTTP API call to access push_config" do
+      subscription.push_config.must_be_kind_of Google::Cloud::PubSub::Subscription::PushConfig
+      subscription.push_config.endpoint.must_be :empty?
+      subscription.push_config.authentication.must_be :nil?
+    end
   end
 
   describe "reference subscription object of a subscription that does not exist" do
@@ -193,6 +208,12 @@ describe Google::Cloud::PubSub::Subscription, :attributes, :mock_pubsub do
       expect do
         subscription.expires_in
       end.must_raise Google::Cloud::NotFoundError
+    end
+
+    it "does not raise NotFoundError when accessing push_config" do
+      subscription.push_config.must_be_kind_of Google::Cloud::PubSub::Subscription::PushConfig
+      subscription.push_config.endpoint.must_be :empty?
+      subscription.push_config.authentication.must_be :nil?
     end
   end
 end

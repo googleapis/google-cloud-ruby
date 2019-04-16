@@ -147,7 +147,13 @@ class MockPubsub < Minitest::Spec
                         endpoint = "http://example.com/callback", labels: nil
     { name: subscription_path(sub_name),
       topic: topic_path(topic_name),
-      push_config: { push_endpoint: endpoint },
+      push_config: {
+        push_endpoint: endpoint,
+        oidc_token: {
+          service_account_email: "user@example.com",
+          audience: "client-12345"
+        }
+      },
       ack_deadline_seconds: deadline,
       retain_acked_messages: true,
       message_retention_duration: { seconds: 600, nanos: 900000000 }, # 600.9 seconds

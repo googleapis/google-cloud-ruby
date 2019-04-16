@@ -414,6 +414,33 @@ YARD::Doctest.configure do |doctest|
   end
   doctest.skip "Google::Cloud::PubSub::Subscription#refresh!"
 
+  doctest.before "Google::Cloud::PubSub::Subscription#push_config" do
+    mock_pubsub do |mock_publisher, mock_subscriber|
+      mock_subscriber.expect :get_subscription, subscription_resp, [String, Hash]
+    end
+  end
+  doctest.before "Google::Cloud::PubSub::Subscription#push_config@Update the push configuration by passing a block:" do
+    mock_pubsub do |mock_publisher, mock_subscriber|
+      mock_subscriber.expect :get_subscription, subscription_resp, [String, Hash]
+      mock_subscriber.expect :update_subscription, subscription_resp, [Google::Cloud::PubSub::V1::Subscription, Google::Protobuf::FieldMask, Hash]
+    end
+  end
+
+  ##
+  # Subscription::PushConfig
+
+  doctest.before "Google::Cloud::PubSub::Subscription::PushConfig" do
+    mock_pubsub do |mock_publisher, mock_subscriber|
+      mock_subscriber.expect :get_subscription, subscription_resp, [String, Hash]
+    end
+  end
+  doctest.before "Google::Cloud::PubSub::Subscription::PushConfig@Update the push configuration by passing a block:" do
+    mock_pubsub do |mock_publisher, mock_subscriber|
+      mock_subscriber.expect :get_subscription, subscription_resp, [String, Hash]
+      mock_subscriber.expect :update_subscription, subscription_resp, [Google::Cloud::PubSub::V1::Subscription, Google::Protobuf::FieldMask, Hash]
+    end
+  end
+
   ##
   # Subscription::List
 
@@ -614,7 +641,13 @@ def subscription_hash topic_name, sub_name,
                       endpoint = "http://example.com/callback", labels: nil
   { name: subscription_path(sub_name),
     topic: topic_path(topic_name),
-    push_config: { "push_endpoint" => endpoint },
+    push_config: {
+      push_endpoint: endpoint,
+      oidc_token: {
+        service_account_email: "user@example.com",
+        audience: "client-12345"
+      }
+    },
     ack_deadline_seconds: deadline,
     retain_acked_messages: true,
     message_retention_duration: { seconds: 600, nanos: 900000000 }, # 600.9 seconds

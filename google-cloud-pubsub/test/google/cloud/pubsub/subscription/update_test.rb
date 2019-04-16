@@ -176,6 +176,41 @@ describe Google::Cloud::PubSub::Subscription, :update, :mock_pubsub do
     subscription.expires_in.must_be :nil?
   end
 
+  it "updates push_config" do
+    subscription.push_config.must_be_kind_of Google::Cloud::PubSub::Subscription::PushConfig
+    subscription.push_config.endpoint.must_equal "http://example.com/callback"
+    subscription.push_config.authentication.must_be_kind_of Google::Cloud::PubSub::Subscription::PushConfig::OidcToken
+    subscription.push_config.authentication.email.must_equal "user@example.com"
+    subscription.push_config.authentication.audience.must_equal "client-12345"
+
+    update_sub = Google::Cloud::PubSub::V1::Subscription.new(
+      name: sub_path, push_config: Google::Cloud::PubSub::V1::PushConfig.new(
+        push_endpoint: "http://example.net/endpoint",
+        oidc_token: Google::Cloud::PubSub::V1::PushConfig::OidcToken.new(
+          service_account_email: "admin@example.net",
+          audience: "some-header-value"
+        )
+      )
+    )
+    update_mask = Google::Protobuf::FieldMask.new paths: ["push_config"]
+    mock = Minitest::Mock.new
+    mock.expect :update_subscription, update_sub, [update_sub, update_mask, options: default_options]
+    subscription.service.mocked_subscriber = mock
+
+    subscription.push_config do |pc|
+      pc.endpoint = "http://example.net/endpoint"
+      pc.set_oidc_token "admin@example.net", "some-header-value"
+    end
+
+    mock.verify
+
+    subscription.push_config.must_be_kind_of Google::Cloud::PubSub::Subscription::PushConfig
+    subscription.push_config.endpoint.must_equal "http://example.net/endpoint"
+    subscription.push_config.authentication.must_be_kind_of Google::Cloud::PubSub::Subscription::PushConfig::OidcToken
+    subscription.push_config.authentication.email.must_equal "admin@example.net"
+    subscription.push_config.authentication.audience.must_equal "some-header-value"
+  end
+
   describe :reference do
     let(:subscription) { Google::Cloud::PubSub::Subscription.from_name sub_name, pubsub.service }
 
