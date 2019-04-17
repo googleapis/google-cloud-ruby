@@ -22,7 +22,7 @@ Gem::Specification.new do |gem|
   gem.add_dependency "google-api-client", "~> 0.26"
   gem.add_dependency "googleauth", ">= 0.6.2", "< 0.10.0"
   gem.add_dependency "digest-crc", "~> 0.4"
-  gem.add_dependency "addressable", "~> 2.6.0"
+  gem.add_dependency "addressable", "~> 2.5"
 
   gem.add_development_dependency "minitest", "~> 5.10"
   gem.add_development_dependency "minitest-autotest", "~> 1.0"
