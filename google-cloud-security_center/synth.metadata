@@ -1,0 +1,32 @@
+{
+  "updateTime": "2019-04-23T16:55:28.951776Z",
+  "sources": [
+    {
+      "generator": {
+        "name": "artman",
+        "version": "0.17.0",
+        "dockerImage": "googleapis/artman@sha256:c58f4ec3838eb4e0718eb1bccc6512bd6850feaa85a360a9e38f6f848ec73bc2"
+      }
+    },
+    {
+      "git": {
+        "name": "googleapis",
+        "remote": "https://github.com/googleapis/googleapis.git",
+        "sha": "2adb4dd3290049a699337bde3b8108cf423d0504",
+        "internalRef": "244868078"
+      }
+    }
+  ],
+  "destinations": [
+    {
+      "client": {
+        "source": "googleapis",
+        "apiName": "securitycenter",
+        "apiVersion": "v1",
+        "language": "ruby",
+        "generator": "gapic",
+        "config": "google/cloud/securitycenter/artman_securitycenter_v1.yaml"
+      }
+    }
+  ]
+}
