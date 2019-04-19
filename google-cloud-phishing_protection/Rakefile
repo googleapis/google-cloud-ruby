@@ -99,10 +99,10 @@ task :generate_partials do
   snake_module = "phishing_protection"
   require "google/cloud/#{snake_module}"
   Google::Cloud.const_get(module_name)::AVAILABLE_VERSIONS.each do |version|
-    require "google/cloud/phishing_protection/#{version}/#{file_name}"
+    require "google/cloud/#{snake_module}/#{version}/#{file_name}"
     class_methods = Google::Cloud.const_get(module_name).const_get(version.capitalize).const_get(class_name).methods false
     class_methods.sort!
-    file_path = "./lib/google/cloud/phishing_protection/#{version}/helpers.rb"
+    file_path = "./lib/google/cloud/#{snake_module}/#{version}/helpers.rb"
     params = Hash[class_methods.collect { |method_name| [method_name, ""] }]
     params.each do |method_name, _|
       args = Google::Cloud.const_get(module_name).const_get(version.capitalize).const_get(class_name).method(method_name).parameters
