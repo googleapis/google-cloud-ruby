@@ -133,6 +133,11 @@ s.replace(
     '"google.cloud.phishingprotection.v1beta1.PhishingProtection"',
     '"google.cloud.phishingprotection.v1beta1.PhishingProtectionServiceV1Beta1"'
 )
+s.replace(
+    'lib/**/credentials.rb',
+    'PHISHINGPROTECTION_',
+    'PHISHING_PROTECTION_'
+)
 
 s.replace(
     'test/**/*.rb',
@@ -144,7 +149,6 @@ s.replace(
     'ServiceV1Beta1',
     ''
 )
-
 
 # Require the helpers file
 s.replace(

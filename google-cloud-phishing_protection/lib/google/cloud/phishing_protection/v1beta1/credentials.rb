@@ -23,13 +23,13 @@ module Google
           SCOPE = [
             "https://www.googleapis.com/auth/cloud-platform"
           ].freeze
-          PATH_ENV_VARS = %w(PHISHINGPROTECTION_CREDENTIALS
-                             PHISHINGPROTECTION_KEYFILE
+          PATH_ENV_VARS = %w(PHISHING_PROTECTION_CREDENTIALS
+                             PHISHING_PROTECTION_KEYFILE
                              GOOGLE_CLOUD_CREDENTIALS
                              GOOGLE_CLOUD_KEYFILE
                              GCLOUD_KEYFILE)
-          JSON_ENV_VARS = %w(PHISHINGPROTECTION_CREDENTIALS_JSON
-                             PHISHINGPROTECTION_KEYFILE_JSON
+          JSON_ENV_VARS = %w(PHISHING_PROTECTION_CREDENTIALS_JSON
+                             PHISHING_PROTECTION_KEYFILE_JSON
                              GOOGLE_CLOUD_CREDENTIALS_JSON
                              GOOGLE_CLOUD_KEYFILE_JSON
                              GCLOUD_KEYFILE_JSON)
