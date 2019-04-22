@@ -1,5 +1,10 @@
 AllCops:
   TargetRubyVersion: 2.2
+  TargetRubyVersion: 2.2
+  TargetRubyVersion: 2.2
+  TargetRubyVersion: 2.2
+  TargetRubyVersion: 2.2
+  TargetRubyVersion: 2.2
   Exclude:
     - "google-cloud-phishing_protection.gemspec"
     - "lib/google/**/*"
