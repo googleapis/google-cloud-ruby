@@ -161,21 +161,22 @@ and leave the others untouched. If a resource is passed in to
 describe the updated values, the API ignores the values of all
 fields not covered by the mask.</p>
 
-<p>If a repeated field is specified for an update operation, the existing
-repeated values in the target resource will be overwritten by the new values.
-Note that a repeated field is only allowed in the last position of a <code>paths</code>
-string.</p>
+<p>If a repeated field is specified for an update operation, new values will
+be appended to the existing repeated field in the target resource. Note that
+a repeated field is only allowed in the last position of a <code>paths</code> string.</p>
 
 <p>If a sub-message is specified in the last position of the field mask for an
-update operation, then the existing sub-message in the target resource is
-overwritten. Given the target message:</p>
+update operation, then new value will be merged into the existing sub-message
+in the target resource.</p>
+
+<p>For example, given the target message:</p>
 
 <pre class="code ruby"><code class="ruby">f {
   b {
-    d : 1
-    x : 2
+    d: 1
+    x: 2
   }
-  c : 1
+  c: [1]
 }
 </code></pre>
 
@@ -183,39 +184,29 @@ overwritten. Given the target message:</p>
 
 <pre class="code ruby"><code class="ruby">f {
   b {
-    d : 10
+    d: 10
   }
+  c: [2]
 }
 </code></pre>
 
 <p>then if the field mask is:</p>
 
-<p>paths: &quot;f.b&quot;</p>
+<p>paths: [&quot;f.b&quot;, &quot;f.c&quot;]</p>
 
 <p>then the result will be:</p>
 
 <pre class="code ruby"><code class="ruby">f {
   b {
-    d : 10
+    d: 10
+    x: 2
   }
-  c : 1
+  c: [1, 2]
 }
 </code></pre>
 
-<p>However, if the update mask was:</p>
-
-<p>paths: &quot;f.b.d&quot;</p>
-
-<p>then the result would be:</p>
-
-<pre class="code ruby"><code class="ruby">f {
-  b {
-    d : 10
-    x : 2
-  }
-  c : 1
-}
-</code></pre>
+<p>An implementation may provide options to override this default behavior for
+repeated and message fields.</p>
 
 <p>In order to reset a field&#39;s value to the default, the field must
 be in the mask and set to the default value in the provided resource.
@@ -403,10 +394,10 @@ request should verify the included field paths, and return an
       <pre class="lines">
 
 
-228</pre>
+220</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/v1/doc/google/protobuf/field_mask.rb', line 228</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/v1/doc/google/protobuf/field_mask.rb', line 220</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Protobuf::FieldMask (class)">FieldMask</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
