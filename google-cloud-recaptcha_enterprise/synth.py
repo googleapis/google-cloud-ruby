@@ -139,12 +139,6 @@ s.replace(
     ''
 )
 
-s.replace(
-    '.rubocop.yml',
-    'AllCops:(\r\n|\r|\n)',
-    'AllCops:\n  TargetRubyVersion: 2.2\n'
-)
-
 # Require the helpers file
 s.replace(
     f'lib/google/cloud/recaptcha_enterprise/v1beta1.rb',
