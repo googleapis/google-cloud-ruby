@@ -73,9 +73,12 @@ module Google
       #
       # @param [Hash] env Mock environment variables.
       # @param [Faraday::Connection] connection Faraday connection to use.
-      # @param [Hash] metadata_cache Mock cache.
+      # @param [Hash,false] metadata_cache The metadata cache. You may pass
+      #     a prepopuated cache, an empty cache (the default) or `false` to
+      #     disable the cache completely.
       #
       def initialize env: nil, connection: nil, metadata_cache: nil
+        @disable_metadata_cache = metadata_cache == false
         @metadata_cache = metadata_cache || {}
         @env = env || ::ENV
         @connection = connection ||
@@ -318,17 +321,18 @@ module Google
       # @return [Boolean]
       #
       def metadata?
-        unless metadata_cache.include? METADATA_ROOT_PATH
+        path = METADATA_ROOT_PATH
+        if @disable_metadata_cache || !metadata_cache.include?(path)
           begin
-            resp = connection.get METADATA_ROOT_PATH
-            metadata_cache[METADATA_ROOT_PATH] = \
+            resp = connection.get path
+            metadata_cache[path] = \
               resp.status == 200 && resp.headers["Metadata-Flavor"] == "Google"
           rescue ::Faraday::TimeoutError, ::Faraday::ConnectionFailed,
                  Errno::EHOSTDOWN
-            metadata_cache[METADATA_ROOT_PATH] = false
+            metadata_cache[path] = false
           end
         end
-        metadata_cache[METADATA_ROOT_PATH]
+        metadata_cache[path]
       end
 
       ##
@@ -343,7 +347,7 @@ module Google
       #
       def lookup_metadata type, entry
         path = "#{METADATA_PATH_BASE}/#{type}/#{entry}"
-        if !metadata_cache.include?(path) && metadata?
+        if @disable_metadata_cache || !metadata_cache.include?(path)
           begin
             resp = connection.get path do |req|
               req.headers = { "Metadata-Flavor" => "Google" }
