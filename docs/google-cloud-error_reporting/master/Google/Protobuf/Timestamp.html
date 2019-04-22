@@ -89,17 +89,19 @@ js:
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>A Timestamp represents a point in time independent of any time zone
-or calendar, represented as seconds and fractions of seconds at
-nanosecond resolution in UTC Epoch time. It is encoded using the
-Proleptic Gregorian Calendar which extends the Gregorian calendar
-backwards to year one. It is encoded assuming all minutes are 60
-seconds long, i.e. leap seconds are &quot;smeared&quot; so that no leap second
-table is needed for interpretation. Range is from
-0001-01-01T00:00:00Z to 9999-12-31T23:59:59.999999999Z.
-By restricting to that range, we ensure that we can convert to
-and from  RFC 3339 date strings.
-See <a href="https://www.ietf.org/rfc/rfc3339.txt">https://www.ietf.org/rfc/rfc3339.txt</a>.</p>
+    <p>A Timestamp represents a point in time independent of any time zone or local
+calendar, encoded as a count of seconds and fractions of seconds at
+nanosecond resolution. The count is relative to an epoch at UTC midnight on
+January 1, 1970, in the proleptic Gregorian calendar which extends the
+Gregorian calendar backwards to year one.</p>
+
+<p>All minutes are 60 seconds long. Leap seconds are &quot;smeared&quot; so that no leap
+second table is needed for interpretation, using a <a href="https://developers.google.com/time/smear">24-hour linear
+smear</a>.</p>
+
+<p>The range is from 0001-01-01T00:00:00Z to 9999-12-31T23:59:59.999999999Z. By
+restricting to that range, we ensure that we can convert to and from <a href="https://www.ietf.org/rfc/rfc3339.txt">RFC
+3339</a> date strings.</p>
 
 <p>= Examples</p>
 
@@ -164,9 +166,11 @@ able to accept both UTC and other timezones (as indicated by an offset).</p>
 01:30 UTC on January 15, 2017.</p>
 
 <p>In JavaScript, one can convert a Date object to this format using the
-standard <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toISOString%5D%0Amethod.%20In%20Python,%20a%20standard%20%60datetime.datetime%60%20object%20can%20be%20converted%0Ato%20this%20format%20using%20%5B%60strftime%60%5D(https://docs.python.org/2/library/time.html#time.strftime)%0Awith%20the%20time%20format%20spec%20&#x27;%Y-%m-%dT%H:%M:%S.%fZ&#x27;.%20Likewise,%20in%20Java,%20one%0Acan%20use%20the%20Joda%20Time&#x27;s%20%5B%60ISODateTimeFormat.dateTime(">toISOString()</a>`](
-<a href="http://www.joda.org/joda-time/apidocs/org/joda/time/format/ISODateTimeFormat.html#dateTime--">http://www.joda.org/joda-time/apidocs/org/joda/time/format/ISODateTimeFormat.html#dateTime--</a>
-) to obtain a formatter capable of generating timestamps in this format.</p>
+standard <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toISOString">toISOString()</a>
+method. In Python, a standard <code>datetime.datetime</code> object can be converted
+to this format using <a href="https://docs.python.org/2/library/time.html#time.strftime"><code>strftime</code></a>
+with the time format spec &#39;%Y-%m-%dT%H:%M:%S.%fZ&#39;. Likewise, in Java, one
+can use the Joda Time&#39;s <a href="http://www.joda.org/joda-time/apidocs/org/joda/time/format/ISODateTimeFormat.html#dateTime%2D%2D"><code>ISODateTimeFormat.dateTime()</code></a> to obtain a formatter capable of generating timestamps in this format.</p>
 
 
   </div>
@@ -292,10 +296,10 @@ inclusive.</p>
       <pre class="lines">
 
 
-107</pre>
+109</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/error_reporting/v1beta1/doc/google/protobuf/timestamp.rb', line 107</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/error_reporting/v1beta1/doc/google/protobuf/timestamp.rb', line 109</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Protobuf::Timestamp (class)">Timestamp</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -351,10 +355,10 @@ inclusive.</p>
       <pre class="lines">
 
 
-107</pre>
+109</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/error_reporting/v1beta1/doc/google/protobuf/timestamp.rb', line 107</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/error_reporting/v1beta1/doc/google/protobuf/timestamp.rb', line 109</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Protobuf::Timestamp (class)">Timestamp</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
