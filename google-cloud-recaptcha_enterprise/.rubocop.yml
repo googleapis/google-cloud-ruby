@@ -1,4 +1,5 @@
 AllCops:
+  TargetRubyVersion: 2.2
   Exclude:
     - "google-cloud-recaptcha_enterprise.gemspec"
     - "lib/google/**/*"
