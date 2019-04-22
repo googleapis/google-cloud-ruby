@@ -2,9 +2,6 @@ source "https://rubygems.org"
 
 gemspec
 
-# WORKAROUND: builds are having problems since the release of 3.0.0
-# pin to the last known good version
-gem "public_suffix", "~> 2.0"
 gem "rake", "~> 11.0"
 if Gem::Version.new(RUBY_VERSION) < Gem::Version.new("2.1")
   # WORKAROUND: builds are failing on Ruby 2.0.
