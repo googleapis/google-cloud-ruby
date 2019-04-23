@@ -78,12 +78,6 @@ module Google
           ].freeze
 
 
-          PROJECT_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
-            "projects/{project}"
-          )
-
-          private_constant :PROJECT_PATH_TEMPLATE
-
           ALERT_POLICY_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
             "projects/{project}/alertPolicies/{alert_policy}"
           )
@@ -96,14 +90,11 @@ module Google
 
           private_constant :ALERT_POLICY_CONDITION_PATH_TEMPLATE
 
-          # Returns a fully-qualified project resource name string.
-          # @param project [String]
-          # @return [String]
-          def self.project_path project
-            PROJECT_PATH_TEMPLATE.render(
-              :"project" => project
-            )
-          end
+          PROJECT_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+            "projects/{project}"
+          )
+
+          private_constant :PROJECT_PATH_TEMPLATE
 
           # Returns a fully-qualified alert_policy resource name string.
           # @param project [String]
@@ -126,6 +117,15 @@ module Google
               :"project" => project,
               :"alert_policy" => alert_policy,
               :"condition" => condition
+            )
+          end
+
+          # Returns a fully-qualified project resource name string.
+          # @param project [String]
+          # @return [String]
+          def self.project_path project
+            PROJECT_PATH_TEMPLATE.render(
+              :"project" => project
             )
           end
 
