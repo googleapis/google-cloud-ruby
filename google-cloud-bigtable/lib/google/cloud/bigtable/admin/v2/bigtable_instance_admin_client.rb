@@ -85,18 +85,6 @@ module Google
               self::GRPC_INTERCEPTORS = BigtableInstanceAdminClient::GRPC_INTERCEPTORS
             end
 
-            PROJECT_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
-              "projects/{project}"
-            )
-
-            private_constant :PROJECT_PATH_TEMPLATE
-
-            INSTANCE_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
-              "projects/{project}/instances/{instance}"
-            )
-
-            private_constant :INSTANCE_PATH_TEMPLATE
-
             APP_PROFILE_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
               "projects/{project}/instances/{instance}/appProfiles/{app_profile}"
             )
@@ -109,31 +97,23 @@ module Google
 
             private_constant :CLUSTER_PATH_TEMPLATE
 
+            INSTANCE_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+              "projects/{project}/instances/{instance}"
+            )
+
+            private_constant :INSTANCE_PATH_TEMPLATE
+
             LOCATION_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
               "projects/{project}/locations/{location}"
             )
 
             private_constant :LOCATION_PATH_TEMPLATE
 
-            # Returns a fully-qualified project resource name string.
-            # @param project [String]
-            # @return [String]
-            def self.project_path project
-              PROJECT_PATH_TEMPLATE.render(
-                :"project" => project
-              )
-            end
+            PROJECT_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+              "projects/{project}"
+            )
 
-            # Returns a fully-qualified instance resource name string.
-            # @param project [String]
-            # @param instance [String]
-            # @return [String]
-            def self.instance_path project, instance
-              INSTANCE_PATH_TEMPLATE.render(
-                :"project" => project,
-                :"instance" => instance
-              )
-            end
+            private_constant :PROJECT_PATH_TEMPLATE
 
             # Returns a fully-qualified app_profile resource name string.
             # @param project [String]
@@ -161,6 +141,17 @@ module Google
               )
             end
 
+            # Returns a fully-qualified instance resource name string.
+            # @param project [String]
+            # @param instance [String]
+            # @return [String]
+            def self.instance_path project, instance
+              INSTANCE_PATH_TEMPLATE.render(
+                :"project" => project,
+                :"instance" => instance
+              )
+            end
+
             # Returns a fully-qualified location resource name string.
             # @param project [String]
             # @param location [String]
@@ -169,6 +160,15 @@ module Google
               LOCATION_PATH_TEMPLATE.render(
                 :"project" => project,
                 :"location" => location
+              )
+            end
+
+            # Returns a fully-qualified project resource name string.
+            # @param project [String]
+            # @return [String]
+            def self.project_path project
+              PROJECT_PATH_TEMPLATE.render(
+                :"project" => project
               )
             end
 

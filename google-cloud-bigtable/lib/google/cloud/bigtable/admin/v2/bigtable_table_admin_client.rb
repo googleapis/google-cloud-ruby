@@ -91,17 +91,17 @@ module Google
               self::GRPC_INTERCEPTORS = BigtableTableAdminClient::GRPC_INTERCEPTORS
             end
 
-            INSTANCE_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
-              "projects/{project}/instances/{instance}"
-            )
-
-            private_constant :INSTANCE_PATH_TEMPLATE
-
             CLUSTER_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
               "projects/{project}/instances/{instance}/clusters/{cluster}"
             )
 
             private_constant :CLUSTER_PATH_TEMPLATE
+
+            INSTANCE_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+              "projects/{project}/instances/{instance}"
+            )
+
+            private_constant :INSTANCE_PATH_TEMPLATE
 
             SNAPSHOT_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
               "projects/{project}/instances/{instance}/clusters/{cluster}/snapshots/{snapshot}"
@@ -115,17 +115,6 @@ module Google
 
             private_constant :TABLE_PATH_TEMPLATE
 
-            # Returns a fully-qualified instance resource name string.
-            # @param project [String]
-            # @param instance [String]
-            # @return [String]
-            def self.instance_path project, instance
-              INSTANCE_PATH_TEMPLATE.render(
-                :"project" => project,
-                :"instance" => instance
-              )
-            end
-
             # Returns a fully-qualified cluster resource name string.
             # @param project [String]
             # @param instance [String]
@@ -136,6 +125,17 @@ module Google
                 :"project" => project,
                 :"instance" => instance,
                 :"cluster" => cluster
+              )
+            end
+
+            # Returns a fully-qualified instance resource name string.
+            # @param project [String]
+            # @param instance [String]
+            # @return [String]
+            def self.instance_path project, instance
+              INSTANCE_PATH_TEMPLATE.render(
+                :"project" => project,
+                :"instance" => instance
               )
             end
 
