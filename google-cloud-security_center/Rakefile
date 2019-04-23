@@ -145,6 +145,34 @@ namespace :ci do
   end
 end
 
+task :generate_partials do
+  module_name = "SecurityCenter"
+  class_name = "SecurityCenterClient"
+  file_name = "security_center_client"
+  snake_module = "security_center"
+  require "google/cloud/#{snake_module}"
+  Google::Cloud.const_get(module_name)::AVAILABLE_VERSIONS.each do |version|
+    require "google/cloud/#{snake_module}/#{version}/#{file_name}"
+    class_methods = Google::Cloud.const_get(module_name).const_get(version.capitalize).const_get(class_name).methods false
+    class_methods.sort!
+    file_path = "./lib/google/cloud/#{snake_module}/#{version}/helpers.rb"
+    params = Hash[class_methods.collect { |method_name| [method_name, ""] }]
+    params.each do |method_name, _|
+      args = Google::Cloud.const_get(module_name).const_get(version.capitalize).const_get(class_name).method(method_name).parameters
+      params[method_name] = args.map(&:last)
+    end
+    File.open file_path, "w" do |f|
+      config = ERB.new File.read("./synth/helpers.rb.erb")
+      f.write config.result(binding)
+    end
+    file_path = "./test/google/cloud/#{snake_module}/#{version}/helpers_test.rb"
+    File.open file_path, "w" do |f|
+      config = ERB.new File.read("./synth/helpers_test.rb.erb")
+      f.write config.result(binding)
+    end
+  end
+end
+
 task :default => :test
 
 def header str, token = "#"

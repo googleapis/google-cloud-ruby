@@ -14,6 +14,7 @@
 
 
 require "google/cloud/security_center/v1/security_center_client"
+require "google/cloud/security_center/v1/helpers"
 
 module Google
   module Cloud

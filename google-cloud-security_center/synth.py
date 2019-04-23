@@ -20,6 +20,7 @@ import synthtool.languages.ruby as ruby
 import logging
 import os
 import re
+import subprocess
 
 
 logging.basicConfig(level=logging.DEBUG)
@@ -109,3 +110,22 @@ s.replace(
     'gem.add_development_dependency "rubocop".*$',
     'gem.add_development_dependency "rubocop", "~> 0.64.0"'
 )
+
+s.replace(
+    'lib/**/credentials.rb',
+    'SECURITYCENTER_',
+    'SECURITY_CENTER_'
+)
+
+# Require the helpers file
+s.replace(
+    f'lib/google/cloud/security_center/v1.rb',
+    f'require "google/cloud/security_center/v1/security_center_client"',
+    '\n'.join([
+        f'require "google/cloud/security_center/v1/security_center_client"',
+        f'require "google/cloud/security_center/v1/helpers"'
+    ])
+)
+
+# Generate the helper methods
+subprocess.call('bundle update && bundle exec rake generate_partials', shell=True)
