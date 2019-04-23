@@ -95,18 +95,6 @@ module Google
           ].freeze
 
 
-          PROJECT_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
-            "projects/{project}"
-          )
-
-          private_constant :PROJECT_PATH_TEMPLATE
-
-          INCIDENT_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
-            "projects/{project}/incidents/{incident}"
-          )
-
-          private_constant :INCIDENT_PATH_TEMPLATE
-
           ANNOTATION_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
             "projects/{project}/incidents/{incident}/annotations/{annotation}"
           )
@@ -119,11 +107,29 @@ module Google
 
           private_constant :ARTIFACT_PATH_TEMPLATE
 
+          INCIDENT_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+            "projects/{project}/incidents/{incident}"
+          )
+
+          private_constant :INCIDENT_PATH_TEMPLATE
+
+          PROJECT_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+            "projects/{project}"
+          )
+
+          private_constant :PROJECT_PATH_TEMPLATE
+
           ROLE_ASSIGNMENT_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
             "projects/{project}/incidents/{incident}/roleAssignments/{role_assignment}"
           )
 
           private_constant :ROLE_ASSIGNMENT_PATH_TEMPLATE
+
+          SIGNAL_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+            "projects/{project}/signals/{signal}"
+          )
+
+          private_constant :SIGNAL_PATH_TEMPLATE
 
           SUBSCRIPTION_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
             "projects/{project}/incidents/{incident}/subscriptions/{subscription}"
@@ -136,32 +142,6 @@ module Google
           )
 
           private_constant :TAG_PATH_TEMPLATE
-
-          SIGNAL_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
-            "projects/{project}/signals/{signal}"
-          )
-
-          private_constant :SIGNAL_PATH_TEMPLATE
-
-          # Returns a fully-qualified project resource name string.
-          # @param project [String]
-          # @return [String]
-          def self.project_path project
-            PROJECT_PATH_TEMPLATE.render(
-              :"project" => project
-            )
-          end
-
-          # Returns a fully-qualified incident resource name string.
-          # @param project [String]
-          # @param incident [String]
-          # @return [String]
-          def self.incident_path project, incident
-            INCIDENT_PATH_TEMPLATE.render(
-              :"project" => project,
-              :"incident" => incident
-            )
-          end
 
           # Returns a fully-qualified annotation resource name string.
           # @param project [String]
@@ -189,6 +169,26 @@ module Google
             )
           end
 
+          # Returns a fully-qualified incident resource name string.
+          # @param project [String]
+          # @param incident [String]
+          # @return [String]
+          def self.incident_path project, incident
+            INCIDENT_PATH_TEMPLATE.render(
+              :"project" => project,
+              :"incident" => incident
+            )
+          end
+
+          # Returns a fully-qualified project resource name string.
+          # @param project [String]
+          # @return [String]
+          def self.project_path project
+            PROJECT_PATH_TEMPLATE.render(
+              :"project" => project
+            )
+          end
+
           # Returns a fully-qualified role_assignment resource name string.
           # @param project [String]
           # @param incident [String]
@@ -199,6 +199,17 @@ module Google
               :"project" => project,
               :"incident" => incident,
               :"role_assignment" => role_assignment
+            )
+          end
+
+          # Returns a fully-qualified signal resource name string.
+          # @param project [String]
+          # @param signal [String]
+          # @return [String]
+          def self.signal_path project, signal
+            SIGNAL_PATH_TEMPLATE.render(
+              :"project" => project,
+              :"signal" => signal
             )
           end
 
@@ -225,17 +236,6 @@ module Google
               :"project" => project,
               :"incident" => incident,
               :"tag" => tag
-            )
-          end
-
-          # Returns a fully-qualified signal resource name string.
-          # @param project [String]
-          # @param signal [String]
-          # @return [String]
-          def self.signal_path project, signal
-            SIGNAL_PATH_TEMPLATE.render(
-              :"project" => project,
-              :"signal" => signal
             )
           end
 
