@@ -88,11 +88,11 @@ module Google
           ].freeze
 
 
-          KEY_RING_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
-            "projects/{project}/locations/{location}/keyRings/{key_ring}"
+          CRYPTO_KEY_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+            "projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}"
           )
 
-          private_constant :KEY_RING_PATH_TEMPLATE
+          private_constant :CRYPTO_KEY_PATH_TEMPLATE
 
           CRYPTO_KEY_PATH_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
             "projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key_path=**}"
@@ -100,34 +100,36 @@ module Google
 
           private_constant :CRYPTO_KEY_PATH_PATH_TEMPLATE
 
-          LOCATION_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
-            "projects/{project}/locations/{location}"
-          )
-
-          private_constant :LOCATION_PATH_TEMPLATE
-
-          CRYPTO_KEY_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
-            "projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}"
-          )
-
-          private_constant :CRYPTO_KEY_PATH_TEMPLATE
-
           CRYPTO_KEY_VERSION_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
             "projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}/cryptoKeyVersions/{crypto_key_version}"
           )
 
           private_constant :CRYPTO_KEY_VERSION_PATH_TEMPLATE
 
-          # Returns a fully-qualified key_ring resource name string.
+          KEY_RING_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+            "projects/{project}/locations/{location}/keyRings/{key_ring}"
+          )
+
+          private_constant :KEY_RING_PATH_TEMPLATE
+
+          LOCATION_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+            "projects/{project}/locations/{location}"
+          )
+
+          private_constant :LOCATION_PATH_TEMPLATE
+
+          # Returns a fully-qualified crypto_key resource name string.
           # @param project [String]
           # @param location [String]
           # @param key_ring [String]
+          # @param crypto_key [String]
           # @return [String]
-          def self.key_ring_path project, location, key_ring
-            KEY_RING_PATH_TEMPLATE.render(
+          def self.crypto_key_path project, location, key_ring, crypto_key
+            CRYPTO_KEY_PATH_TEMPLATE.render(
               :"project" => project,
               :"location" => location,
-              :"key_ring" => key_ring
+              :"key_ring" => key_ring,
+              :"crypto_key" => crypto_key
             )
           end
 
@@ -146,32 +148,6 @@ module Google
             )
           end
 
-          # Returns a fully-qualified location resource name string.
-          # @param project [String]
-          # @param location [String]
-          # @return [String]
-          def self.location_path project, location
-            LOCATION_PATH_TEMPLATE.render(
-              :"project" => project,
-              :"location" => location
-            )
-          end
-
-          # Returns a fully-qualified crypto_key resource name string.
-          # @param project [String]
-          # @param location [String]
-          # @param key_ring [String]
-          # @param crypto_key [String]
-          # @return [String]
-          def self.crypto_key_path project, location, key_ring, crypto_key
-            CRYPTO_KEY_PATH_TEMPLATE.render(
-              :"project" => project,
-              :"location" => location,
-              :"key_ring" => key_ring,
-              :"crypto_key" => crypto_key
-            )
-          end
-
           # Returns a fully-qualified crypto_key_version resource name string.
           # @param project [String]
           # @param location [String]
@@ -186,6 +162,30 @@ module Google
               :"key_ring" => key_ring,
               :"crypto_key" => crypto_key,
               :"crypto_key_version" => crypto_key_version
+            )
+          end
+
+          # Returns a fully-qualified key_ring resource name string.
+          # @param project [String]
+          # @param location [String]
+          # @param key_ring [String]
+          # @return [String]
+          def self.key_ring_path project, location, key_ring
+            KEY_RING_PATH_TEMPLATE.render(
+              :"project" => project,
+              :"location" => location,
+              :"key_ring" => key_ring
+            )
+          end
+
+          # Returns a fully-qualified location resource name string.
+          # @param project [String]
+          # @param location [String]
+          # @return [String]
+          def self.location_path project, location
+            LOCATION_PATH_TEMPLATE.render(
+              :"project" => project,
+              :"location" => location
             )
           end
 
