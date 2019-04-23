@@ -87,17 +87,17 @@ module Google
           ].freeze
 
 
+          ANY_PATH_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+            "projects/{project}/databases/{database}/documents/{document}/{any_path=**}"
+          )
+
+          private_constant :ANY_PATH_PATH_TEMPLATE
+
           DATABASE_ROOT_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
             "projects/{project}/databases/{database}"
           )
 
           private_constant :DATABASE_ROOT_PATH_TEMPLATE
-
-          DOCUMENT_ROOT_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
-            "projects/{project}/databases/{database}/documents"
-          )
-
-          private_constant :DOCUMENT_ROOT_PATH_TEMPLATE
 
           DOCUMENT_PATH_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
             "projects/{project}/databases/{database}/documents/{document_path=**}"
@@ -105,11 +105,26 @@ module Google
 
           private_constant :DOCUMENT_PATH_PATH_TEMPLATE
 
-          ANY_PATH_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
-            "projects/{project}/databases/{database}/documents/{document}/{any_path=**}"
+          DOCUMENT_ROOT_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+            "projects/{project}/databases/{database}/documents"
           )
 
-          private_constant :ANY_PATH_PATH_TEMPLATE
+          private_constant :DOCUMENT_ROOT_PATH_TEMPLATE
+
+          # Returns a fully-qualified any_path resource name string.
+          # @param project [String]
+          # @param database [String]
+          # @param document [String]
+          # @param any_path [String]
+          # @return [String]
+          def self.any_path_path project, database, document, any_path
+            ANY_PATH_PATH_TEMPLATE.render(
+              :"project" => project,
+              :"database" => database,
+              :"document" => document,
+              :"any_path" => any_path
+            )
+          end
 
           # Returns a fully-qualified database_root resource name string.
           # @param project [String]
@@ -117,17 +132,6 @@ module Google
           # @return [String]
           def self.database_root_path project, database
             DATABASE_ROOT_PATH_TEMPLATE.render(
-              :"project" => project,
-              :"database" => database
-            )
-          end
-
-          # Returns a fully-qualified document_root resource name string.
-          # @param project [String]
-          # @param database [String]
-          # @return [String]
-          def self.document_root_path project, database
-            DOCUMENT_ROOT_PATH_TEMPLATE.render(
               :"project" => project,
               :"database" => database
             )
@@ -146,18 +150,14 @@ module Google
             )
           end
 
-          # Returns a fully-qualified any_path resource name string.
+          # Returns a fully-qualified document_root resource name string.
           # @param project [String]
           # @param database [String]
-          # @param document [String]
-          # @param any_path [String]
           # @return [String]
-          def self.any_path_path project, database, document, any_path
-            ANY_PATH_PATH_TEMPLATE.render(
+          def self.document_root_path project, database
+            DOCUMENT_ROOT_PATH_TEMPLATE.render(
               :"project" => project,
-              :"database" => database,
-              :"document" => document,
-              :"any_path" => any_path
+              :"database" => database
             )
           end
 
