@@ -64,11 +64,11 @@ module Google
           ].freeze
 
 
-          USER_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
-            "users/{user}"
+          FINGERPRINT_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+            "users/{user}/sshPublicKeys/{fingerprint}"
           )
 
-          private_constant :USER_PATH_TEMPLATE
+          private_constant :FINGERPRINT_PATH_TEMPLATE
 
           PROJECT_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
             "users/{user}/projects/{project}"
@@ -76,18 +76,20 @@ module Google
 
           private_constant :PROJECT_PATH_TEMPLATE
 
-          FINGERPRINT_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
-            "users/{user}/sshPublicKeys/{fingerprint}"
+          USER_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+            "users/{user}"
           )
 
-          private_constant :FINGERPRINT_PATH_TEMPLATE
+          private_constant :USER_PATH_TEMPLATE
 
-          # Returns a fully-qualified user resource name string.
+          # Returns a fully-qualified fingerprint resource name string.
           # @param user [String]
+          # @param fingerprint [String]
           # @return [String]
-          def self.user_path user
-            USER_PATH_TEMPLATE.render(
-              :"user" => user
+          def self.fingerprint_path user, fingerprint
+            FINGERPRINT_PATH_TEMPLATE.render(
+              :"user" => user,
+              :"fingerprint" => fingerprint
             )
           end
 
@@ -102,14 +104,12 @@ module Google
             )
           end
 
-          # Returns a fully-qualified fingerprint resource name string.
+          # Returns a fully-qualified user resource name string.
           # @param user [String]
-          # @param fingerprint [String]
           # @return [String]
-          def self.fingerprint_path user, fingerprint
-            FINGERPRINT_PATH_TEMPLATE.render(
-              :"user" => user,
-              :"fingerprint" => fingerprint
+          def self.user_path user
+            USER_PATH_TEMPLATE.render(
+              :"user" => user
             )
           end
 
