@@ -101,11 +101,11 @@ module Google
                 self::GRPC_INTERCEPTORS = InstanceAdminClient::GRPC_INTERCEPTORS
               end
 
-              PROJECT_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
-                "projects/{project}"
+              INSTANCE_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+                "projects/{project}/instances/{instance}"
               )
 
-              private_constant :PROJECT_PATH_TEMPLATE
+              private_constant :INSTANCE_PATH_TEMPLATE
 
               INSTANCE_CONFIG_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
                 "projects/{project}/instanceConfigs/{instance_config}"
@@ -113,18 +113,20 @@ module Google
 
               private_constant :INSTANCE_CONFIG_PATH_TEMPLATE
 
-              INSTANCE_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
-                "projects/{project}/instances/{instance}"
+              PROJECT_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+                "projects/{project}"
               )
 
-              private_constant :INSTANCE_PATH_TEMPLATE
+              private_constant :PROJECT_PATH_TEMPLATE
 
-              # Returns a fully-qualified project resource name string.
+              # Returns a fully-qualified instance resource name string.
               # @param project [String]
+              # @param instance [String]
               # @return [String]
-              def self.project_path project
-                PROJECT_PATH_TEMPLATE.render(
-                  :"project" => project
+              def self.instance_path project, instance
+                INSTANCE_PATH_TEMPLATE.render(
+                  :"project" => project,
+                  :"instance" => instance
                 )
               end
 
@@ -139,14 +141,12 @@ module Google
                 )
               end
 
-              # Returns a fully-qualified instance resource name string.
+              # Returns a fully-qualified project resource name string.
               # @param project [String]
-              # @param instance [String]
               # @return [String]
-              def self.instance_path project, instance
-                INSTANCE_PATH_TEMPLATE.render(
-                  :"project" => project,
-                  :"instance" => instance
+              def self.project_path project
+                PROJECT_PATH_TEMPLATE.render(
+                  :"project" => project
                 )
               end
 
