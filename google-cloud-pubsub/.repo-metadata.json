@@ -1,0 +1,6 @@
+{
+  "distribution_name": "google-cloud-pubsub",
+  "module_name": "PubSub",
+  "module_name_credentials": "PubSub::V1",
+  "env_var_prefix": "PUBSUB"
+}

@@ -1,0 +1,6 @@
+{
+  "distribution_name": "google-cloud-trace",
+  "module_name": "Trace",
+  "module_name_credentials": "Trace::V2",
+  "env_var_prefix": "TRACE"
+}

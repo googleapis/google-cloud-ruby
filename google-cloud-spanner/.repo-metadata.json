@@ -1,0 +1,6 @@
+{
+  "distribution_name": "google-cloud-spanner",
+  "module_name": "Spanner",
+  "module_name_credentials": "Spanner::V1",
+  "env_var_prefix": "SPANNER"
+}

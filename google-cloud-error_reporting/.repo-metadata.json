@@ -1,0 +1,6 @@
+{
+  "distribution_name": "google-cloud-error_reporting",
+  "module_name": "ErrorReporting",
+  "module_name_credentials": "ErrorReporting::V1beta1",
+  "env_var_prefix": "ERROR_REPORTING"
+}

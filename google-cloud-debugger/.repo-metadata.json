@@ -1,0 +1,6 @@
+{
+  "distribution_name": "google-cloud-debugger",
+  "module_name": "Debugger",
+  "module_name_credentials": "Debugger::V2",
+  "env_var_prefix": "DEBUGGER"
+}
