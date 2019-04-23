@@ -85,28 +85,17 @@ module Google
           ].freeze
 
 
-          SESSION_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
-            "projects/{project}/agent/sessions/{session}"
-          )
-
-          private_constant :SESSION_PATH_TEMPLATE
-
           CONTEXT_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
             "projects/{project}/agent/sessions/{session}/contexts/{context}"
           )
 
           private_constant :CONTEXT_PATH_TEMPLATE
 
-          # Returns a fully-qualified session resource name string.
-          # @param project [String]
-          # @param session [String]
-          # @return [String]
-          def self.session_path project, session
-            SESSION_PATH_TEMPLATE.render(
-              :"project" => project,
-              :"session" => session
-            )
-          end
+          SESSION_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+            "projects/{project}/agent/sessions/{session}"
+          )
+
+          private_constant :SESSION_PATH_TEMPLATE
 
           # Returns a fully-qualified context resource name string.
           # @param project [String]
@@ -118,6 +107,17 @@ module Google
               :"project" => project,
               :"session" => session,
               :"context" => context
+            )
+          end
+
+          # Returns a fully-qualified session resource name string.
+          # @param project [String]
+          # @param session [String]
+          # @return [String]
+          def self.session_path project, session
+            SESSION_PATH_TEMPLATE.render(
+              :"project" => project,
+              :"session" => session
             )
           end
 

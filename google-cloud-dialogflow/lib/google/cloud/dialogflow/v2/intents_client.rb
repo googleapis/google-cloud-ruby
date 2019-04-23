@@ -106,11 +106,11 @@ module Google
             self::GRPC_INTERCEPTORS = IntentsClient::GRPC_INTERCEPTORS
           end
 
-          PROJECT_AGENT_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
-            "projects/{project}/agent"
+          AGENT_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+            "projects/{project}/agents/{agent}"
           )
 
-          private_constant :PROJECT_AGENT_PATH_TEMPLATE
+          private_constant :AGENT_PATH_TEMPLATE
 
           INTENT_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
             "projects/{project}/agent/intents/{intent}"
@@ -118,18 +118,20 @@ module Google
 
           private_constant :INTENT_PATH_TEMPLATE
 
-          AGENT_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
-            "projects/{project}/agents/{agent}"
+          PROJECT_AGENT_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+            "projects/{project}/agent"
           )
 
-          private_constant :AGENT_PATH_TEMPLATE
+          private_constant :PROJECT_AGENT_PATH_TEMPLATE
 
-          # Returns a fully-qualified project_agent resource name string.
+          # Returns a fully-qualified agent resource name string.
           # @param project [String]
+          # @param agent [String]
           # @return [String]
-          def self.project_agent_path project
-            PROJECT_AGENT_PATH_TEMPLATE.render(
-              :"project" => project
+          def self.agent_path project, agent
+            AGENT_PATH_TEMPLATE.render(
+              :"project" => project,
+              :"agent" => agent
             )
           end
 
@@ -144,14 +146,12 @@ module Google
             )
           end
 
-          # Returns a fully-qualified agent resource name string.
+          # Returns a fully-qualified project_agent resource name string.
           # @param project [String]
-          # @param agent [String]
           # @return [String]
-          def self.agent_path project, agent
-            AGENT_PATH_TEMPLATE.render(
-              :"project" => project,
-              :"agent" => agent
+          def self.project_agent_path project
+            PROJECT_AGENT_PATH_TEMPLATE.render(
+              :"project" => project
             )
           end
 

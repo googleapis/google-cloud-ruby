@@ -102,26 +102,17 @@ module Google
             self::GRPC_INTERCEPTORS = EntityTypesClient::GRPC_INTERCEPTORS
           end
 
-          PROJECT_AGENT_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
-            "projects/{project}/agent"
-          )
-
-          private_constant :PROJECT_AGENT_PATH_TEMPLATE
-
           ENTITY_TYPE_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
             "projects/{project}/agent/entityTypes/{entity_type}"
           )
 
           private_constant :ENTITY_TYPE_PATH_TEMPLATE
 
-          # Returns a fully-qualified project_agent resource name string.
-          # @param project [String]
-          # @return [String]
-          def self.project_agent_path project
-            PROJECT_AGENT_PATH_TEMPLATE.render(
-              :"project" => project
-            )
-          end
+          PROJECT_AGENT_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+            "projects/{project}/agent"
+          )
+
+          private_constant :PROJECT_AGENT_PATH_TEMPLATE
 
           # Returns a fully-qualified entity_type resource name string.
           # @param project [String]
@@ -131,6 +122,15 @@ module Google
             ENTITY_TYPE_PATH_TEMPLATE.render(
               :"project" => project,
               :"entity_type" => entity_type
+            )
+          end
+
+          # Returns a fully-qualified project_agent resource name string.
+          # @param project [String]
+          # @return [String]
+          def self.project_agent_path project
+            PROJECT_AGENT_PATH_TEMPLATE.render(
+              :"project" => project
             )
           end
 
