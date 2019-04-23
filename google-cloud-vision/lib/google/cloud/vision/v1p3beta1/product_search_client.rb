@@ -110,17 +110,17 @@ module Google
 
           private_constant :LOCATION_PATH_TEMPLATE
 
-          PRODUCT_SET_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
-            "projects/{project}/locations/{location}/productSets/{product_set}"
-          )
-
-          private_constant :PRODUCT_SET_PATH_TEMPLATE
-
           PRODUCT_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
             "projects/{project}/locations/{location}/products/{product}"
           )
 
           private_constant :PRODUCT_PATH_TEMPLATE
+
+          PRODUCT_SET_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+            "projects/{project}/locations/{location}/productSets/{product_set}"
+          )
+
+          private_constant :PRODUCT_SET_PATH_TEMPLATE
 
           REFERENCE_IMAGE_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
             "projects/{project}/locations/{location}/products/{product}/referenceImages/{reference_image}"
@@ -139,19 +139,6 @@ module Google
             )
           end
 
-          # Returns a fully-qualified product_set resource name string.
-          # @param project [String]
-          # @param location [String]
-          # @param product_set [String]
-          # @return [String]
-          def self.product_set_path project, location, product_set
-            PRODUCT_SET_PATH_TEMPLATE.render(
-              :"project" => project,
-              :"location" => location,
-              :"product_set" => product_set
-            )
-          end
-
           # Returns a fully-qualified product resource name string.
           # @param project [String]
           # @param location [String]
@@ -162,6 +149,19 @@ module Google
               :"project" => project,
               :"location" => location,
               :"product" => product
+            )
+          end
+
+          # Returns a fully-qualified product_set resource name string.
+          # @param project [String]
+          # @param location [String]
+          # @param product_set [String]
+          # @return [String]
+          def self.product_set_path project, location, product_set
+            PRODUCT_SET_PATH_TEMPLATE.render(
+              :"project" => project,
+              :"location" => location,
+              :"product_set" => product_set
             )
           end
 

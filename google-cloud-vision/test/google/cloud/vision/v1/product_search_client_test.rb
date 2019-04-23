@@ -1135,13 +1135,13 @@ describe Google::Cloud::Vision::V1::ProductSearchClient do
     it 'invokes add_product_to_product_set without error' do
       # Create request parameters
       formatted_name = Google::Cloud::Vision::V1::ProductSearchClient.product_set_path("[PROJECT]", "[LOCATION]", "[PRODUCT_SET]")
-      product = ''
+      formatted_product = Google::Cloud::Vision::V1::ProductSearchClient.product_path("[PROJECT]", "[LOCATION]", "[PRODUCT]")
 
       # Mock Grpc layer
       mock_method = proc do |request|
         assert_instance_of(Google::Cloud::Vision::V1::AddProductToProductSetRequest, request)
         assert_equal(formatted_name, request.name)
-        assert_equal(product, request.product)
+        assert_equal(formatted_product, request.product)
         OpenStruct.new(execute: nil)
       end
       mock_stub = MockGrpcClientStub_v1.new(:add_product_to_product_set, mock_method)
@@ -1154,13 +1154,13 @@ describe Google::Cloud::Vision::V1::ProductSearchClient do
           client = Google::Cloud::Vision::ProductSearch.new(version: :v1)
 
           # Call method
-          response = client.add_product_to_product_set(formatted_name, product)
+          response = client.add_product_to_product_set(formatted_name, formatted_product)
 
           # Verify the response
           assert_nil(response)
 
           # Call method with block
-          client.add_product_to_product_set(formatted_name, product) do |response, operation|
+          client.add_product_to_product_set(formatted_name, formatted_product) do |response, operation|
             # Verify the response
             assert_nil(response)
             refute_nil(operation)
@@ -1172,13 +1172,13 @@ describe Google::Cloud::Vision::V1::ProductSearchClient do
     it 'invokes add_product_to_product_set with error' do
       # Create request parameters
       formatted_name = Google::Cloud::Vision::V1::ProductSearchClient.product_set_path("[PROJECT]", "[LOCATION]", "[PRODUCT_SET]")
-      product = ''
+      formatted_product = Google::Cloud::Vision::V1::ProductSearchClient.product_path("[PROJECT]", "[LOCATION]", "[PRODUCT]")
 
       # Mock Grpc layer
       mock_method = proc do |request|
         assert_instance_of(Google::Cloud::Vision::V1::AddProductToProductSetRequest, request)
         assert_equal(formatted_name, request.name)
-        assert_equal(product, request.product)
+        assert_equal(formatted_product, request.product)
         raise custom_error
       end
       mock_stub = MockGrpcClientStub_v1.new(:add_product_to_product_set, mock_method)
@@ -1192,7 +1192,7 @@ describe Google::Cloud::Vision::V1::ProductSearchClient do
 
           # Call method
           err = assert_raises Google::Gax::GaxError do
-            client.add_product_to_product_set(formatted_name, product)
+            client.add_product_to_product_set(formatted_name, formatted_product)
           end
 
           # Verify the GaxError wrapped the custom error that was raised.
@@ -1208,13 +1208,13 @@ describe Google::Cloud::Vision::V1::ProductSearchClient do
     it 'invokes remove_product_from_product_set without error' do
       # Create request parameters
       formatted_name = Google::Cloud::Vision::V1::ProductSearchClient.product_set_path("[PROJECT]", "[LOCATION]", "[PRODUCT_SET]")
-      product = ''
+      formatted_product = Google::Cloud::Vision::V1::ProductSearchClient.product_path("[PROJECT]", "[LOCATION]", "[PRODUCT]")
 
       # Mock Grpc layer
       mock_method = proc do |request|
         assert_instance_of(Google::Cloud::Vision::V1::RemoveProductFromProductSetRequest, request)
         assert_equal(formatted_name, request.name)
-        assert_equal(product, request.product)
+        assert_equal(formatted_product, request.product)
         OpenStruct.new(execute: nil)
       end
       mock_stub = MockGrpcClientStub_v1.new(:remove_product_from_product_set, mock_method)
@@ -1227,13 +1227,13 @@ describe Google::Cloud::Vision::V1::ProductSearchClient do
           client = Google::Cloud::Vision::ProductSearch.new(version: :v1)
 
           # Call method
-          response = client.remove_product_from_product_set(formatted_name, product)
+          response = client.remove_product_from_product_set(formatted_name, formatted_product)
 
           # Verify the response
           assert_nil(response)
 
           # Call method with block
-          client.remove_product_from_product_set(formatted_name, product) do |response, operation|
+          client.remove_product_from_product_set(formatted_name, formatted_product) do |response, operation|
             # Verify the response
             assert_nil(response)
             refute_nil(operation)
@@ -1245,13 +1245,13 @@ describe Google::Cloud::Vision::V1::ProductSearchClient do
     it 'invokes remove_product_from_product_set with error' do
       # Create request parameters
       formatted_name = Google::Cloud::Vision::V1::ProductSearchClient.product_set_path("[PROJECT]", "[LOCATION]", "[PRODUCT_SET]")
-      product = ''
+      formatted_product = Google::Cloud::Vision::V1::ProductSearchClient.product_path("[PROJECT]", "[LOCATION]", "[PRODUCT]")
 
       # Mock Grpc layer
       mock_method = proc do |request|
         assert_instance_of(Google::Cloud::Vision::V1::RemoveProductFromProductSetRequest, request)
         assert_equal(formatted_name, request.name)
-        assert_equal(product, request.product)
+        assert_equal(formatted_product, request.product)
         raise custom_error
       end
       mock_stub = MockGrpcClientStub_v1.new(:remove_product_from_product_set, mock_method)
@@ -1265,7 +1265,7 @@ describe Google::Cloud::Vision::V1::ProductSearchClient do
 
           # Call method
           err = assert_raises Google::Gax::GaxError do
-            client.remove_product_from_product_set(formatted_name, product)
+            client.remove_product_from_product_set(formatted_name, formatted_product)
           end
 
           # Verify the GaxError wrapped the custom error that was raised.
