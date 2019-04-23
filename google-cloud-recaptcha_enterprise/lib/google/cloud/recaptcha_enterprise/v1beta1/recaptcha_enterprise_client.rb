@@ -58,26 +58,17 @@ module Google
           ].freeze
 
 
-          PROJECT_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
-            "projects/{project}"
-          )
-
-          private_constant :PROJECT_PATH_TEMPLATE
-
           ASSESSMENT_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
             "projects/{project}/assessments/{assessment}"
           )
 
           private_constant :ASSESSMENT_PATH_TEMPLATE
 
-          # Returns a fully-qualified project resource name string.
-          # @param project [String]
-          # @return [String]
-          def self.project_path project
-            PROJECT_PATH_TEMPLATE.render(
-              :"project" => project
-            )
-          end
+          PROJECT_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+            "projects/{project}"
+          )
+
+          private_constant :PROJECT_PATH_TEMPLATE
 
           # Returns a fully-qualified assessment resource name string.
           # @param project [String]
@@ -87,6 +78,15 @@ module Google
             ASSESSMENT_PATH_TEMPLATE.render(
               :"project" => project,
               :"assessment" => assessment
+            )
+          end
+
+          # Returns a fully-qualified project resource name string.
+          # @param project [String]
+          # @return [String]
+          def self.project_path project
+            PROJECT_PATH_TEMPLATE.render(
+              :"project" => project
             )
           end
 
