@@ -48,6 +48,10 @@ s.copy(v1p3beta1 / 'lib/google/cloud/vision/v1p3beta1.rb')
 s.copy(v1p3beta1 / 'acceptance/google/cloud/vision/v1p3beta1')
 s.copy(v1p3beta1 / 'test/google/cloud/vision/v1p3beta1')
 
+# Copy common templates
+templates = gcp.CommonTemplates().ruby_library()
+s.copy(templates)
+
 # PERMANENT: Add migration guide to docs
 s.replace(
     'lib/google/cloud/vision.rb',

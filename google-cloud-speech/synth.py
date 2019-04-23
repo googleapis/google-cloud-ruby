@@ -40,6 +40,10 @@ s.copy(v1_library / '.gitignore')
 s.copy(v1_library / '.yardopts')
 s.copy(v1_library / 'google-cloud-speech.gemspec', merge=ruby.merge_gemspec)
 
+# Copy common templates
+templates = gcp.CommonTemplates().ruby_library()
+s.copy(templates)
+
 v1p1beta1_library = gapic.ruby_library(
     'speech', 'v1p1beta1',
     artman_output_name='google-cloud-ruby/google-cloud-speech'

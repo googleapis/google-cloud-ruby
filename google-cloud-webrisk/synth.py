@@ -37,6 +37,9 @@ s.copy(v1beta1 / '.gitignore')
 s.copy(v1beta1 / '.yardopts')
 s.copy(v1beta1 / 'google-cloud-webrisk.gemspec', merge=ruby.merge_gemspec)
 
+# Copy common templates
+templates = gcp.CommonTemplates().ruby_library()
+s.copy(templates)
 
 # https://github.com/googleapis/gapic-generator/issues/2243
 s.replace(

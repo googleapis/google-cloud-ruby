@@ -33,6 +33,10 @@ s.copy(v2_library / 'lib/google/cloud/debugger/v2.rb')
 s.copy(v2_library / 'lib/google/devtools')
 s.copy(v2_library / 'test/google/cloud/debugger/v2')
 
+# Copy common templates
+templates = gcp.CommonTemplates().ruby_library()
+s.copy(templates)
+
 # PERMANENT: Handwritten layer owns Debugger.new so low-level clients need to
 # use Debugger::V2.new instead of Debugger.new(version: :v2). Update the
 # examples and tests.

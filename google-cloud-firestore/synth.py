@@ -43,6 +43,10 @@ s.copy(v1beta1_library / 'lib/google/cloud/firestore/v1beta1.rb')
 s.copy(v1beta1_library / 'lib/google/firestore/v1beta1')
 s.copy(v1beta1_library / 'test/google/cloud/firestore/v1beta1')
 
+# Copy common templates
+templates = gcp.CommonTemplates().ruby_library()
+s.copy(templates)
+
 # PERMANENT: Handwritten layer owns Firestore.new so low-level clients need to
 # use Firestore::V1beta1.new instead of Firestore.new(version: :v1beta1).
 # Update the examples and tests.

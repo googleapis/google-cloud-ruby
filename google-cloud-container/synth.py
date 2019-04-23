@@ -35,6 +35,10 @@ s.copy(v1beta1_library / 'lib/google/container/v1beta1')
 s.copy(v1beta1_library / 'lib/google/cloud/container/v1beta1.rb')
 s.copy(v1beta1_library / 'test/google/cloud/container/v1beta1')
 
+# Copy common templates
+templates = gcp.CommonTemplates().ruby_library()
+s.copy(templates)
+
 v1_library = gapic.ruby_library(
     'container', 'v1', config_path='/google/container/artman_container_v1.yaml',
     artman_output_name='google-cloud-ruby/google-cloud-container'
