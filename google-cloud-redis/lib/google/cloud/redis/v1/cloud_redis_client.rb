@@ -88,28 +88,17 @@ module Google
             self::GRPC_INTERCEPTORS = CloudRedisClient::GRPC_INTERCEPTORS
           end
 
-          LOCATION_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
-            "projects/{project}/locations/{location}"
-          )
-
-          private_constant :LOCATION_PATH_TEMPLATE
-
           INSTANCE_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
             "projects/{project}/locations/{location}/instances/{instance}"
           )
 
           private_constant :INSTANCE_PATH_TEMPLATE
 
-          # Returns a fully-qualified location resource name string.
-          # @param project [String]
-          # @param location [String]
-          # @return [String]
-          def self.location_path project, location
-            LOCATION_PATH_TEMPLATE.render(
-              :"project" => project,
-              :"location" => location
-            )
-          end
+          LOCATION_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+            "projects/{project}/locations/{location}"
+          )
+
+          private_constant :LOCATION_PATH_TEMPLATE
 
           # Returns a fully-qualified instance resource name string.
           # @param project [String]
@@ -121,6 +110,17 @@ module Google
               :"project" => project,
               :"location" => location,
               :"instance" => instance
+            )
+          end
+
+          # Returns a fully-qualified location resource name string.
+          # @param project [String]
+          # @param location [String]
+          # @return [String]
+          def self.location_path project, location
+            LOCATION_PATH_TEMPLATE.render(
+              :"project" => project,
+              :"location" => location
             )
           end
 
