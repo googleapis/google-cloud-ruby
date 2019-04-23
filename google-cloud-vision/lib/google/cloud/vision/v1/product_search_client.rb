@@ -108,17 +108,17 @@ module Google
 
           private_constant :LOCATION_PATH_TEMPLATE
 
-          PRODUCT_SET_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
-            "projects/{project}/locations/{location}/productSets/{product_set}"
-          )
-
-          private_constant :PRODUCT_SET_PATH_TEMPLATE
-
           PRODUCT_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
             "projects/{project}/locations/{location}/products/{product}"
           )
 
           private_constant :PRODUCT_PATH_TEMPLATE
+
+          PRODUCT_SET_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+            "projects/{project}/locations/{location}/productSets/{product_set}"
+          )
+
+          private_constant :PRODUCT_SET_PATH_TEMPLATE
 
           REFERENCE_IMAGE_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
             "projects/{project}/locations/{location}/products/{product}/referenceImages/{reference_image}"
@@ -137,19 +137,6 @@ module Google
             )
           end
 
-          # Returns a fully-qualified product_set resource name string.
-          # @param project [String]
-          # @param location [String]
-          # @param product_set [String]
-          # @return [String]
-          def self.product_set_path project, location, product_set
-            PRODUCT_SET_PATH_TEMPLATE.render(
-              :"project" => project,
-              :"location" => location,
-              :"product_set" => product_set
-            )
-          end
-
           # Returns a fully-qualified product resource name string.
           # @param project [String]
           # @param location [String]
@@ -160,6 +147,19 @@ module Google
               :"project" => project,
               :"location" => location,
               :"product" => product
+            )
+          end
+
+          # Returns a fully-qualified product_set resource name string.
+          # @param project [String]
+          # @param location [String]
+          # @param product_set [String]
+          # @return [String]
+          def self.product_set_path project, location, product_set
+            PRODUCT_SET_PATH_TEMPLATE.render(
+              :"project" => project,
+              :"location" => location,
+              :"product_set" => product_set
             )
           end
 
@@ -1177,10 +1177,8 @@ module Google
           #
           #   product_search_client = Google::Cloud::Vision::ProductSearch.new(version: :v1)
           #   formatted_name = Google::Cloud::Vision::V1::ProductSearchClient.product_set_path("[PROJECT]", "[LOCATION]", "[PRODUCT_SET]")
-          #
-          #   # TODO: Initialize `product`:
-          #   product = ''
-          #   product_search_client.add_product_to_product_set(formatted_name, product)
+          #   formatted_product = Google::Cloud::Vision::V1::ProductSearchClient.product_path("[PROJECT]", "[LOCATION]", "[PRODUCT]")
+          #   product_search_client.add_product_to_product_set(formatted_name, formatted_product)
 
           def add_product_to_product_set \
               name,
@@ -1224,10 +1222,8 @@ module Google
           #
           #   product_search_client = Google::Cloud::Vision::ProductSearch.new(version: :v1)
           #   formatted_name = Google::Cloud::Vision::V1::ProductSearchClient.product_set_path("[PROJECT]", "[LOCATION]", "[PRODUCT_SET]")
-          #
-          #   # TODO: Initialize `product`:
-          #   product = ''
-          #   product_search_client.remove_product_from_product_set(formatted_name, product)
+          #   formatted_product = Google::Cloud::Vision::V1::ProductSearchClient.product_path("[PROJECT]", "[LOCATION]", "[PRODUCT]")
+          #   product_search_client.remove_product_from_product_set(formatted_name, formatted_product)
 
           def remove_product_from_product_set \
               name,
