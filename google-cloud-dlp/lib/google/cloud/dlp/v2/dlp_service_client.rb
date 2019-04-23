@@ -91,6 +91,12 @@ module Google
           ].freeze
 
 
+          DLP_JOB_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+            "projects/{project}/dlpJobs/{dlp_job}"
+          )
+
+          private_constant :DLP_JOB_PATH_TEMPLATE
+
           ORGANIZATION_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
             "organizations/{organization}"
           )
@@ -103,17 +109,29 @@ module Google
 
           private_constant :ORGANIZATION_DEIDENTIFY_TEMPLATE_PATH_TEMPLATE
 
-          PROJECT_DEIDENTIFY_TEMPLATE_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
-            "projects/{project}/deidentifyTemplates/{deidentify_template}"
-          )
-
-          private_constant :PROJECT_DEIDENTIFY_TEMPLATE_PATH_TEMPLATE
-
           ORGANIZATION_INSPECT_TEMPLATE_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
             "organizations/{organization}/inspectTemplates/{inspect_template}"
           )
 
           private_constant :ORGANIZATION_INSPECT_TEMPLATE_PATH_TEMPLATE
+
+          ORGANIZATION_STORED_INFO_TYPE_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+            "organizations/{organization}/storedInfoTypes/{stored_info_type}"
+          )
+
+          private_constant :ORGANIZATION_STORED_INFO_TYPE_PATH_TEMPLATE
+
+          PROJECT_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+            "projects/{project}"
+          )
+
+          private_constant :PROJECT_PATH_TEMPLATE
+
+          PROJECT_DEIDENTIFY_TEMPLATE_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+            "projects/{project}/deidentifyTemplates/{deidentify_template}"
+          )
+
+          private_constant :PROJECT_DEIDENTIFY_TEMPLATE_PATH_TEMPLATE
 
           PROJECT_INSPECT_TEMPLATE_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
             "projects/{project}/inspectTemplates/{inspect_template}"
@@ -127,29 +145,22 @@ module Google
 
           private_constant :PROJECT_JOB_TRIGGER_PATH_TEMPLATE
 
-          PROJECT_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
-            "projects/{project}"
-          )
-
-          private_constant :PROJECT_PATH_TEMPLATE
-
-          DLP_JOB_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
-            "projects/{project}/dlpJobs/{dlp_job}"
-          )
-
-          private_constant :DLP_JOB_PATH_TEMPLATE
-
-          ORGANIZATION_STORED_INFO_TYPE_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
-            "organizations/{organization}/storedInfoTypes/{stored_info_type}"
-          )
-
-          private_constant :ORGANIZATION_STORED_INFO_TYPE_PATH_TEMPLATE
-
           PROJECT_STORED_INFO_TYPE_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
             "projects/{project}/storedInfoTypes/{stored_info_type}"
           )
 
           private_constant :PROJECT_STORED_INFO_TYPE_PATH_TEMPLATE
+
+          # Returns a fully-qualified dlp_job resource name string.
+          # @param project [String]
+          # @param dlp_job [String]
+          # @return [String]
+          def self.dlp_job_path project, dlp_job
+            DLP_JOB_PATH_TEMPLATE.render(
+              :"project" => project,
+              :"dlp_job" => dlp_job
+            )
+          end
 
           # Returns a fully-qualified organization resource name string.
           # @param organization [String]
@@ -171,17 +182,6 @@ module Google
             )
           end
 
-          # Returns a fully-qualified project_deidentify_template resource name string.
-          # @param project [String]
-          # @param deidentify_template [String]
-          # @return [String]
-          def self.project_deidentify_template_path project, deidentify_template
-            PROJECT_DEIDENTIFY_TEMPLATE_PATH_TEMPLATE.render(
-              :"project" => project,
-              :"deidentify_template" => deidentify_template
-            )
-          end
-
           # Returns a fully-qualified organization_inspect_template resource name string.
           # @param organization [String]
           # @param inspect_template [String]
@@ -190,6 +190,37 @@ module Google
             ORGANIZATION_INSPECT_TEMPLATE_PATH_TEMPLATE.render(
               :"organization" => organization,
               :"inspect_template" => inspect_template
+            )
+          end
+
+          # Returns a fully-qualified organization_stored_info_type resource name string.
+          # @param organization [String]
+          # @param stored_info_type [String]
+          # @return [String]
+          def self.organization_stored_info_type_path organization, stored_info_type
+            ORGANIZATION_STORED_INFO_TYPE_PATH_TEMPLATE.render(
+              :"organization" => organization,
+              :"stored_info_type" => stored_info_type
+            )
+          end
+
+          # Returns a fully-qualified project resource name string.
+          # @param project [String]
+          # @return [String]
+          def self.project_path project
+            PROJECT_PATH_TEMPLATE.render(
+              :"project" => project
+            )
+          end
+
+          # Returns a fully-qualified project_deidentify_template resource name string.
+          # @param project [String]
+          # @param deidentify_template [String]
+          # @return [String]
+          def self.project_deidentify_template_path project, deidentify_template
+            PROJECT_DEIDENTIFY_TEMPLATE_PATH_TEMPLATE.render(
+              :"project" => project,
+              :"deidentify_template" => deidentify_template
             )
           end
 
@@ -212,37 +243,6 @@ module Google
             PROJECT_JOB_TRIGGER_PATH_TEMPLATE.render(
               :"project" => project,
               :"job_trigger" => job_trigger
-            )
-          end
-
-          # Returns a fully-qualified project resource name string.
-          # @param project [String]
-          # @return [String]
-          def self.project_path project
-            PROJECT_PATH_TEMPLATE.render(
-              :"project" => project
-            )
-          end
-
-          # Returns a fully-qualified dlp_job resource name string.
-          # @param project [String]
-          # @param dlp_job [String]
-          # @return [String]
-          def self.dlp_job_path project, dlp_job
-            DLP_JOB_PATH_TEMPLATE.render(
-              :"project" => project,
-              :"dlp_job" => dlp_job
-            )
-          end
-
-          # Returns a fully-qualified organization_stored_info_type resource name string.
-          # @param organization [String]
-          # @param stored_info_type [String]
-          # @return [String]
-          def self.organization_stored_info_type_path organization, stored_info_type
-            ORGANIZATION_STORED_INFO_TYPE_PATH_TEMPLATE.render(
-              :"organization" => organization,
-              :"stored_info_type" => stored_info_type
             )
           end
 
