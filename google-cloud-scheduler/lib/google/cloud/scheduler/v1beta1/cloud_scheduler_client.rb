@@ -68,11 +68,11 @@ module Google
           ].freeze
 
 
-          PROJECT_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
-            "projects/{project}"
+          JOB_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+            "projects/{project}/locations/{location}/jobs/{job}"
           )
 
-          private_constant :PROJECT_PATH_TEMPLATE
+          private_constant :JOB_PATH_TEMPLATE
 
           LOCATION_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
             "projects/{project}/locations/{location}"
@@ -80,18 +80,22 @@ module Google
 
           private_constant :LOCATION_PATH_TEMPLATE
 
-          JOB_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
-            "projects/{project}/locations/{location}/jobs/{job}"
+          PROJECT_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+            "projects/{project}"
           )
 
-          private_constant :JOB_PATH_TEMPLATE
+          private_constant :PROJECT_PATH_TEMPLATE
 
-          # Returns a fully-qualified project resource name string.
+          # Returns a fully-qualified job resource name string.
           # @param project [String]
+          # @param location [String]
+          # @param job [String]
           # @return [String]
-          def self.project_path project
-            PROJECT_PATH_TEMPLATE.render(
-              :"project" => project
+          def self.job_path project, location, job
+            JOB_PATH_TEMPLATE.render(
+              :"project" => project,
+              :"location" => location,
+              :"job" => job
             )
           end
 
@@ -106,16 +110,12 @@ module Google
             )
           end
 
-          # Returns a fully-qualified job resource name string.
+          # Returns a fully-qualified project resource name string.
           # @param project [String]
-          # @param location [String]
-          # @param job [String]
           # @return [String]
-          def self.job_path project, location, job
-            JOB_PATH_TEMPLATE.render(
-              :"project" => project,
-              :"location" => location,
-              :"job" => job
+          def self.project_path project
+            PROJECT_PATH_TEMPLATE.render(
+              :"project" => project
             )
           end
 
