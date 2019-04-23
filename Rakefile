@@ -655,6 +655,18 @@ namespace :kokoro do
   end
 end
 
+desc "Runs python -m synthtool for each gem containing a synth.py file (see https://github.com/googleapis/synthtool)"
+task :synthtool do
+  gapic_gems.each do |gem|
+    Dir.chdir gem do
+      Bundler.with_clean_env do
+        header "Run `python -m synthtool` for #{gem}"
+        sh "python -m synthtool"
+      end
+    end
+  end
+end
+
 def run_command_with_timeout command, timeout
   job = Process.spawn(command)
   begin
@@ -743,6 +755,10 @@ def valid_gems
     spec = Gem::Specification::load("#{gem}/#{gem}.gemspec")
     spec.required_ruby_version.satisfied_by? Gem::Version.new(RUBY_VERSION)
   }
+end
+
+def gapic_gems
+  gems.select { |gem| File.exist? "#{gem}/synth.py" }
 end
 
 def valid_gems_with_coverage_filters
