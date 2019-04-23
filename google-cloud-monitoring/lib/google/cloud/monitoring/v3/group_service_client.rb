@@ -85,26 +85,17 @@ module Google
           ].freeze
 
 
-          PROJECT_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
-            "projects/{project}"
-          )
-
-          private_constant :PROJECT_PATH_TEMPLATE
-
           GROUP_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
             "projects/{project}/groups/{group}"
           )
 
           private_constant :GROUP_PATH_TEMPLATE
 
-          # Returns a fully-qualified project resource name string.
-          # @param project [String]
-          # @return [String]
-          def self.project_path project
-            PROJECT_PATH_TEMPLATE.render(
-              :"project" => project
-            )
-          end
+          PROJECT_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+            "projects/{project}"
+          )
+
+          private_constant :PROJECT_PATH_TEMPLATE
 
           # Returns a fully-qualified group resource name string.
           # @param project [String]
@@ -114,6 +105,15 @@ module Google
             GROUP_PATH_TEMPLATE.render(
               :"project" => project,
               :"group" => group
+            )
+          end
+
+          # Returns a fully-qualified project resource name string.
+          # @param project [String]
+          # @return [String]
+          def self.project_path project
+            PROJECT_PATH_TEMPLATE.render(
+              :"project" => project
             )
           end
 
