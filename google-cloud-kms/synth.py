@@ -39,6 +39,10 @@ s.copy(v1_library / '.gitignore')
 s.copy(v1_library / '.yardopts')
 s.copy(v1_library / 'google-cloud-kms.gemspec', merge=ruby.merge_gemspec)
 
+# Copy common templates
+templates = gcp.CommonTemplates().ruby_library()
+s.copy(templates)
+
 # PERMANENT: API name for cloudkms
 s.replace(
     [

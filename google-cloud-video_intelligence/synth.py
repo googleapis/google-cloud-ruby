@@ -79,6 +79,10 @@ s.copy(v1beta2_library / 'lib/google/cloud/video_intelligence/v1beta2.rb')
 s.copy(v1beta2_library / 'lib/google/cloud/videointelligence/v1beta2')
 s.copy(v1beta2_library / 'test/google/cloud/video_intelligence/v1beta2')
 
+# Copy common templates
+templates = gcp.CommonTemplates().ruby_library()
+s.copy(templates)
+
 # PERMANENT: API name for videointelligence
 s.replace(
     [

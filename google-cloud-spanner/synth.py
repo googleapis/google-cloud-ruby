@@ -42,6 +42,10 @@ s.copy(v1_database_library / 'lib/google/cloud/spanner/admin/database/v1')
 s.copy(v1_database_library / 'lib/google/spanner/admin/database/v1')
 s.copy(v1_database_library / 'test/google/cloud/spanner/admin/database/v1')
 
+# Copy common templates
+templates = gcp.CommonTemplates().ruby_library()
+s.copy(templates)
+
 v1_instance_library = gapic.ruby_library(
     'spanneradmininstance', 'v1',
     config_path='/google/spanner/admin/instance/artman_spanner_admin_instance.yaml',

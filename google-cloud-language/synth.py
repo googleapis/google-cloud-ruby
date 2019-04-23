@@ -50,6 +50,10 @@ s.copy(v1beta2_library / 'lib/google/cloud/language/v1beta2.rb')
 s.copy(v1beta2_library / 'lib/google/cloud/language/v1beta2')
 s.copy(v1beta2_library / 'test/google/cloud/language/v1beta2')
 
+# Copy common templates
+templates = gcp.CommonTemplates().ruby_library()
+s.copy(templates)
+
 # https://github.com/googleapis/gapic-generator/issues/2196
 s.replace(
     [

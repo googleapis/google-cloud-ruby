@@ -37,6 +37,10 @@ s.copy(v2_library / '.gitignore')
 s.copy(v2_library / '.yardopts')
 s.copy(v2_library / 'google-cloud-dialogflow.gemspec', merge=ruby.merge_gemspec)
 
+# Copy common templates
+templates = gcp.CommonTemplates().ruby_library()
+s.copy(templates)
+
 # https://github.com/googleapis/gapic-generator/issues/2232
 s.replace(
     [

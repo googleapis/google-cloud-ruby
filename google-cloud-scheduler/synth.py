@@ -38,6 +38,10 @@ s.copy(v1beta1_library / 'lib/google/cloud/scheduler/v1beta1')
 s.copy(v1beta1_library / 'lib/google/cloud/scheduler/v1beta1.rb')
 s.copy(v1beta1_library / 'test/google/cloud/scheduler/v1beta1')
 
+# Copy common templates
+templates = gcp.CommonTemplates().ruby_library()
+s.copy(templates)
+
 
 v1_library = gapic.ruby_library(
     'scheduler',

@@ -39,6 +39,10 @@ s.copy(v1beta1_library / '.gitignore')
 s.copy(v1beta1_library / '.yardopts')
 s.copy(v1beta1_library / 'google-cloud-recaptcha_enterprise.gemspec', merge=ruby.merge_gemspec)
 
+# Copy common templates
+templates = gcp.CommonTemplates().ruby_library()
+s.copy(templates)
+
 # https://github.com/googleapis/gapic-generator/issues/2180
 s.replace(
     'google-cloud-recaptcha_enterprise.gemspec',

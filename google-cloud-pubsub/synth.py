@@ -34,6 +34,10 @@ os.rename(v1_library / 'lib/google/cloud/pub_sub.rb', v1_library / 'lib/google/c
 s.copy(v1_library / 'lib/google/cloud/pubsub/v1')
 s.copy(v1_library / 'lib/google/pubsub/v1')
 
+# Copy common templates
+templates = gcp.CommonTemplates().ruby_library()
+s.copy(templates)
+
 # Omitting lib/google/cloud/pusbusb/v1.rb for now because we are not exposing
 # the low-level API.
 

@@ -45,6 +45,10 @@ s.copy(v1beta1_library / 'lib/google/cloud/text_to_speech/v1beta1.rb')
 s.copy(v1beta1_library / 'lib/google/cloud/texttospeech/v1beta1')
 s.copy(v1beta1_library / 'test/google/cloud/text_to_speech/v1beta1')
 
+# Copy common templates
+templates = gcp.CommonTemplates().ruby_library()
+s.copy(templates)
+
 # https://github.com/googleapis/gapic-generator/issues/2243
 s.replace(
     'lib/google/cloud/text_to_speech/*/*_client.rb',

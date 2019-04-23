@@ -1,0 +1,6 @@
+{
+  "distribution_name": "google-cloud-firestore",
+  "module_name": "Firestore",
+  "module_name_credentials": "Firestore::V1",
+  "env_var_prefix": "FIRESTORE"
+}

@@ -42,6 +42,10 @@ s.copy(v1_library / '.gitignore')
 s.copy(v1_library / '.yardopts')
 s.copy(v1_library / 'google-cloud-os_login.gemspec', merge=ruby.merge_gemspec)
 
+# Copy common templates
+templates = gcp.CommonTemplates().ruby_library()
+s.copy(templates)
+
 v1beta_library = gapic.ruby_library(
     'oslogin', 'v1beta',
     config_path='/google/cloud/oslogin/artman_oslogin_v1beta.yaml',

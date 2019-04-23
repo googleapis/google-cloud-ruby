@@ -47,6 +47,10 @@ s.copy(v1beta1_library / 'lib/google/cloud/asset/v1beta1.rb')
 s.copy(v1beta1_library / 'lib/google/cloud/asset/v1beta1')
 s.copy(v1beta1_library / 'test/google/cloud/asset/v1beta1')
 
+# Copy common templates
+templates = gcp.CommonTemplates().ruby_library()
+s.copy(templates)
+
 # https://github.com/googleapis/gapic-generator/issues/2180
 s.replace(
     'google-cloud-asset.gemspec',

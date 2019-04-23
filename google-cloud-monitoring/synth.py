@@ -39,6 +39,10 @@ s.copy(v3_library / '.gitignore')
 s.copy(v3_library / '.yardopts')
 s.copy(v3_library / 'google-cloud-monitoring.gemspec', merge=ruby.merge_gemspec)
 
+# Copy common templates
+templates = gcp.CommonTemplates().ruby_library()
+s.copy(templates)
+
 # PERMANENT: Use a compatible version of googleapis-common-protos-types
 s.replace(
     'google-cloud-monitoring.gemspec',

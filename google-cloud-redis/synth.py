@@ -39,6 +39,10 @@ s.copy(v1_library / '.gitignore')
 s.copy(v1_library / '.yardopts')
 s.copy(v1_library / 'google-cloud-redis.gemspec', merge=ruby.merge_gemspec)
 
+# Copy common templates
+templates = gcp.CommonTemplates().ruby_library()
+s.copy(templates)
+
 v1beta1_library = gapic.ruby_library(
     'redis', 'v1beta1',
     artman_output_name='google-cloud-ruby/google-cloud-redis'

@@ -42,6 +42,10 @@ s.copy(v2_library / 'lib/google/devtools/cloudtrace/v2')
 # Omitting lib/google/cloud/trace/v{1,2}.rb for now because we are not exposing
 # the low-level API.
 
+# Copy common templates
+templates = gcp.CommonTemplates().ruby_library()
+s.copy(templates)
+
 # https://github.com/googleapis/gapic-generator/issues/2124
 s.replace(
     [

@@ -1,0 +1,6 @@
+{
+  "distribution_name": "google-cloud-text_to_speech",
+  "module_name": "TextToSpeech",
+  "module_name_credentials": "TextToSpeech::V1",
+  "env_var_prefix": "TEXT_TO_SPEECH"
+}

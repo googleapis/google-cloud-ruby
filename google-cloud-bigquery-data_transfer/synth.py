@@ -38,6 +38,10 @@ s.copy(v1_library / '.gitignore')
 s.copy(v1_library / '.yardopts')
 s.copy(v1_library / 'google-cloud-bigquery-data_transfer.gemspec', merge=ruby.merge_gemspec)
 
+# Copy common templates
+templates = gcp.CommonTemplates().ruby_library()
+s.copy(templates)
+
 # PERMANENT: Use custom credentials env variable names
 s.replace(
     'lib/google/cloud/bigquery/data_transfer/v1/credentials.rb',
