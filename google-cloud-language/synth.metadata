@@ -1,19 +1,26 @@
 {
-  "updateTime": "2019-04-09T21:06:26.146460Z",
+  "updateTime": "2019-04-24T10:42:14.701110Z",
   "sources": [
     {
       "generator": {
         "name": "artman",
-        "version": "0.16.25",
-        "dockerImage": "googleapis/artman@sha256:d9597f983d1d4e61272c63cb97b7d8f8234da9999526c35d357de3d781f0ec1b"
+        "version": "0.17.0",
+        "dockerImage": "googleapis/artman@sha256:c58f4ec3838eb4e0718eb1bccc6512bd6850feaa85a360a9e38f6f848ec73bc2"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "3f57de2fbe951640b587d9c2d503daf554747749",
-        "internalRef": "242707837"
+        "sha": "45199a22a4e47c8d53213d1ac4a5ad7f22382c56",
+        "internalRef": "244925894"
+      }
+    },
+    {
+      "template": {
+        "name": "ruby_library",
+        "origin": "synthtool.gcp",
+        "version": "2019.4.10"
       }
     }
   ],
