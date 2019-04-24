@@ -144,3 +144,14 @@ s.replace(
     'gem.add_development_dependency "rubocop".*$',
     'gem.add_development_dependency "rubocop", "~> 0.64.0"'
 )
+
+s.replace(
+    'google-cloud-video_intelligence.gemspec',
+    '"README.md"',
+    '"README.md", "AUTHENTICATION.md"'
+)
+s.replace(
+    '.yardopts',
+    'README.md',
+    'README.md\nAUTHENTICATION.md'
+)

@@ -148,5 +148,17 @@ s.replace(
     'README.md',
     '\n'.join(['README.md', 'LICENSE'])
 )
+
+s.replace(
+    'google-cloud-vision.gemspec',
+    '"README.md"',
+    '"README.md", "AUTHENTICATION.md"'
+)
+s.replace(
+    '.yardopts',
+    'README.md',
+    'README.md\nAUTHENTICATION.md'
+)
+
 # Generate the helper methods
 call('bundle update && bundle exec rake generate_partials', shell=True)

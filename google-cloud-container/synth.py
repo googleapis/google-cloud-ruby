@@ -104,3 +104,14 @@ s.replace(
     'require \'google/iam/v1/.*\n',
     ''
 )
+
+s.replace(
+    'google-cloud-container.gemspec',
+    '"README.md"',
+    '"README.md", "AUTHENTICATION.md"'
+)
+s.replace(
+    '.yardopts',
+    'README.md',
+    'README.md\nAUTHENTICATION.md'
+)

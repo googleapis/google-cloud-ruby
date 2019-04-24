@@ -164,5 +164,16 @@ s.replace(
     ])
 )
 
+s.replace(
+    'google-cloud-phishing_protection.gemspec',
+    '"README.md"',
+    '"README.md", "AUTHENTICATION.md"'
+)
+s.replace(
+    '.yardopts',
+    'README.md',
+    'README.md\nAUTHENTICATION.md'
+)
+
 # Generate the helper methods
 call('bundle update && bundle exec rake generate_partials', shell=True)

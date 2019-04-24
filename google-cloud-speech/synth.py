@@ -170,6 +170,17 @@ s.replace(
     'https://googleapis.github.io/google-cloud-ruby'
 )
 
+s.replace(
+    'google-cloud-speech.gemspec',
+    '"README.md"',
+    '"README.md", "AUTHENTICATION.md"'
+)
+s.replace(
+    '.yardopts',
+    'README.md',
+    'README.md\nAUTHENTICATION.md'
+)
+
 # https://github.com/googleapis/gapic-generator/issues/2393
 s.replace(
     'google-cloud-speech.gemspec',

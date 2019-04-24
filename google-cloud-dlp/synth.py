@@ -98,3 +98,14 @@ s.replace(
         '  gem.add_dependency "googleapis-common-protos", ">= 1.3.9", "< 2.0"'
     ])
 )
+
+s.replace(
+    'google-cloud-dlp.gemspec',
+    '"README.md"',
+    '"README.md", "AUTHENTICATION.md"'
+)
+s.replace(
+    '.yardopts',
+    'README.md',
+    'README.md\nAUTHENTICATION.md'
+)

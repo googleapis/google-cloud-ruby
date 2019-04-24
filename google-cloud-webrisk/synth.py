@@ -81,3 +81,14 @@ s.replace(
     'https://cloud.google.com/webrisk',
     'https://cloud.google.com/web-risk'
 )
+
+s.replace(
+    'google-cloud-webrisk.gemspec',
+    '"README.md"',
+    '"README.md", "AUTHENTICATION.md"'
+)
+s.replace(
+    '.yardopts',
+    'README.md',
+    'README.md\nAUTHENTICATION.md'
+)
