@@ -2,20 +2,39 @@
 
 In general, the google-cloud-logging library uses [Service
 Account](https://cloud.google.com/iam/docs/creating-managing-service-accounts)
-credentials to connect to Google Cloud services. When running on Compute Engine
+credentials to connect to Google Cloud services. When running within [Google
+Cloud Platform environments](#google-cloud-platform-environments)
 the credentials will be discovered automatically. When running on other
 environments, the Service Account credentials can be specified by providing the
 path to the [JSON
 keyfile](https://cloud.google.com/iam/docs/managing-service-account-keys) for
-the account (or the JSON itself) in environment variables. Additionally, Cloud
-SDK credentials can also be discovered automatically, but this is only
-recommended during development.
+the account (or the JSON itself) in [environment
+variables](#environment-variables). Additionally, Cloud SDK credentials can also
+be discovered automatically, but this is only recommended during development.
+
+## Quickstart
+
+1. [Create a service account and credentials](#creating-a-service-account).
+2. Set the [environment variable](#environment-variables).
+
+```sh
+export LOGGING_CREDENTIALS=/path/to/json`
+```
+
+3. Initialize the client.
+
+```ruby
+require "google/cloud/logging"
+
+client = Google::Cloud::Logging.new
+```
 
 ## Project and Credential Lookup
 
-The google-cloud-logging library aims to make authentication as simple as
-possible, and provides several mechanisms to configure your system without
-providing **Project ID** and **Service Account Credentials** directly in code.
+The google-cloud-logging library aims to make authentication
+as simple as possible, and provides several mechanisms to configure your system
+without providing **Project ID** and **Service Account Credentials** directly in
+code.
 
 **Project ID** is discovered in the following order:
 
@@ -23,6 +42,7 @@ providing **Project ID** and **Service Account Credentials** directly in code.
 2. Specify project ID in configuration
 3. Discover project ID in environment variables
 4. Discover GCE project ID
+5. Discover project ID in credentials JSON
 
 **Credentials** are discovered in the following order:
 
@@ -73,13 +93,12 @@ environment variable, or the **Credentials JSON** itself can be stored for
 environments such as Docker containers where writing files is difficult or not
 encouraged.
 
-The environment variables that Logging checks for project ID are:
+The environment variables that google-cloud-logging checks for project ID are:
 
 1. `LOGGING_PROJECT`
 2. `GOOGLE_CLOUD_PROJECT`
 
-The environment variables that Logging checks for credentials are configured on
-{Google::Cloud::Logging::V2::Credentials}:
+The environment variables that google-cloud-logging checks for credentials are configured on {Google::Cloud::Logging::V2::Credentials}:
 
 1. `LOGGING_CREDENTIALS` - Path to JSON file, or JSON contents
 2. `LOGGING_KEYFILE` - Path to JSON file, or JSON contents
@@ -93,7 +112,7 @@ require "google/cloud/logging"
 ENV["LOGGING_PROJECT"]     = "my-project-id"
 ENV["LOGGING_CREDENTIALS"] = "path/to/keyfile.json"
 
-logging = Google::Cloud::Logging.new
+client = Google::Cloud::Logging.new
 ```
 
 ### Configuration
@@ -108,7 +127,7 @@ Google::Cloud::Logging.configure do |config|
   config.credentials = "path/to/keyfile.json"
 end
 
-logging = Google::Cloud::Logging.new
+client = Google::Cloud::Logging.new
 ```
 
 ### Cloud SDK
@@ -141,7 +160,8 @@ Google Cloud requires a **Project ID** and **Service Account Credentials** to
 connect to the APIs. You will use the **Project ID** and **JSON key file** to
 connect to most services with google-cloud-logging.
 
-If you are not running this client on Google Compute Engine, you need a Google
+If you are not running this client within [Google Cloud Platform
+environments](#google-cloud-platform-environments), you need a Google
 Developers service account.
 
 1. Visit the [Google Developers Console][dev-console].
