@@ -142,22 +142,16 @@ s.replace(
     'gem.add_development_dependency "rubocop".*$',
     'gem.add_development_dependency "rubocop", "~> 0.64.0"'
 )
-# Adds LICENSE to .yardopts
-s.replace(
-    '.yardopts',
-    'README.md',
-    '\n'.join(['README.md', 'LICENSE'])
-)
 
 s.replace(
     'google-cloud-vision.gemspec',
-    '"README.md"',
-    '"README.md", "AUTHENTICATION.md"'
+    '"README.md", "LICENSE"',
+    '"README.md", "AUTHENTICATION.md", "LICENSE"'
 )
 s.replace(
     '.yardopts',
-    'README.md',
-    'README.md\nAUTHENTICATION.md'
+    'README.md\n',
+    'README.md\nAUTHENTICATION.md\nLICENSE\n'
 )
 
 # Generate the helper methods

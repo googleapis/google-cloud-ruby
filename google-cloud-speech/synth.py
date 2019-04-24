@@ -172,13 +172,13 @@ s.replace(
 
 s.replace(
     'google-cloud-speech.gemspec',
-    '"README.md"',
-    '"README.md", "AUTHENTICATION.md"'
+    '"README.md", "LICENSE"',
+    '"README.md", "AUTHENTICATION.md", "LICENSE"'
 )
 s.replace(
     '.yardopts',
-    'README.md',
-    'README.md\nAUTHENTICATION.md'
+    'README.md\n',
+    'README.md\nAUTHENTICATION.md\nLICENSE\n'
 )
 
 # https://github.com/googleapis/gapic-generator/issues/2393

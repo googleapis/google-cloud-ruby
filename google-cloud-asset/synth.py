@@ -135,13 +135,13 @@ for version in ['v1', 'v1beta1']:
 
 s.replace(
     'google-cloud-asset.gemspec',
-    '"README.md"',
-    '"README.md", "AUTHENTICATION.md"'
+    '"README.md", "LICENSE"',
+    '"README.md", "AUTHENTICATION.md", "LICENSE"'
 )
 s.replace(
     '.yardopts',
-    'README.md',
-    'README.md\nAUTHENTICATION.md'
+    'README.md\n',
+    'README.md\nAUTHENTICATION.md\nLICENSE\n'
 )
 
 # Generate the helper methods
