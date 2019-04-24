@@ -613,8 +613,6 @@ $ gem install google-cloud-os_login
 $ gem install google-cloud-phishing_protection
 ```
 
-
-
 ### Cloud Pub/Sub (Beta)
 
 - [google-cloud-pubsub README](google-cloud-pubsub/README.md)
