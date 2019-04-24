@@ -33,10 +33,6 @@ s.copy(v1_library / 'lib/google/datastore/v1')
 # Omitting lib/google/cloud/datastore/v1.rb for now because we are not exposing
 # the low-level API.
 
-# Copy common templates
-templates = gcp.CommonTemplates().ruby_library()
-s.copy(templates)
-
 # https://github.com/googleapis/gapic-generator/issues/2124
 s.replace(
     'lib/google/cloud/datastore/v1/credentials.rb',

@@ -1,6 +1,0 @@
-{
-  "distribution_name": "google-cloud-datastore",
-  "module_name": "Datastore",
-  "module_name_credentials": "Datastore::V1",
-  "env_var_prefix": "DATASTORE"
-}

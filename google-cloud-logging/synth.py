@@ -34,10 +34,6 @@ s.copy(v2_library / 'lib/google/logging/v2')
 # Omitting lib/google/cloud/logging/v2.rb for now because we are not exposing
 # the low-level API.
 
-# Copy common templates
-templates = gcp.CommonTemplates().ruby_library()
-s.copy(templates)
-
 # PERMANENT: Handwritten layer owns Logging.new so low-level clients need to
 # use Logging::V2.new instead of Logging.new(version: :v2). Update the
 # examples and tests.

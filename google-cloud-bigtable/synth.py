@@ -43,10 +43,6 @@ s.copy(v2_admin_library / 'lib/google/cloud/bigtable/admin.rb')
 s.copy(v2_admin_library / 'lib/google/bigtable/admin/v2')
 s.copy(v2_admin_library / 'test/google/cloud/bigtable/admin/v2')
 
-# Copy common templates
-templates = gcp.CommonTemplates().ruby_library()
-s.copy(templates)
-
 # PERMANENT: We're combining bigtable and bigtable-admin into one gem.
 s.replace(
     [
