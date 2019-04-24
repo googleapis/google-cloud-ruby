@@ -1,6 +1,0 @@
-{
-  "distribution_name": "google-cloud-logging",
-  "module_name": "Logging",
-  "module_name_credentials": "Logging::V2",
-  "env_var_prefix": "LOGGING"
-}

@@ -31,10 +31,6 @@ v1beta1_library = gapic.ruby_library(
 s.copy(v1beta1_library / 'lib/google/cloud/error_reporting/v1beta1')
 s.copy(v1beta1_library / 'lib/google/devtools/clouderrorreporting/v1beta1')
 
-# Copy common templates
-templates = gcp.CommonTemplates().ruby_library()
-s.copy(templates)
-
 # Omitting lib/google/cloud/error_reporting/v1beta1.rb for now because we are
 # not exposing the low-level API.
 

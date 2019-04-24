@@ -1,6 +1,0 @@
-{
-  "distribution_name": "google-cloud-bigtable",
-  "module_name": "Bigtable",
-  "module_name_credentials": "Bigtable::V2",
-  "env_var_prefix": "BIGTABLE"
-}
