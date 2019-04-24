@@ -600,6 +600,21 @@ annotation.tokens.count #=> 13
 $ gem install google-cloud-os_login
 ```
 
+### Phishing Protection (Alpha)
+
+- [google-cloud-phishing_protection README](google-cloud-phishing_protection/README.md)
+- [google-cloud-phishing_protection API documentation](https://googleapis.github.io/google-cloud-ruby/docs/google-cloud-phishing_protection/latest)
+- [google-cloud-phishing_protection on RubyGems](https://rubygems.org/gems/google-cloud-phishing_protection)
+- [Phishing Protection documentation](https://cloud.google.com/phishing-protection/docs/)
+
+#### Quick Start
+
+```sh
+$ gem install google-cloud-phishing_protection
+```
+
+
+
 ### Cloud Pub/Sub (Beta)
 
 - [google-cloud-pubsub README](google-cloud-pubsub/README.md)
