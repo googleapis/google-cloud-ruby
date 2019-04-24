@@ -659,7 +659,6 @@ subscriber.stop.wait!
 $ gem install google-cloud-recaptcha_enterprise
 ```
 
-
 ### Cloud Redis API (Alpha)
 
 - [google-cloud-redis README](google-cloud-redis/README.md)
