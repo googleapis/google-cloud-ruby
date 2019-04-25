@@ -46,6 +46,7 @@ This client supports the following Google Cloud Platform services at an
 * [Cloud DNS](#cloud-dns-alpha) (Alpha)
 * [Cloud Natural Language API](#cloud-natural-language-api-alpha) (Alpha)
 * [Cloud OS Login](#cloud-os-login-alpha) (Alpha)
+* [Recaptcha Enterprise](#recaptcha-enterprise-alpha) (Alpha)
 * [Cloud Redis](#cloud-redis-api-alpha) (Alpha)
 * [Cloud Resource Manager](#cloud-resource-manager-alpha) (Alpha)
 * [Cloud Scheduler](#cloud-scheduler-alpha) (Alpha)
@@ -645,6 +646,20 @@ subscriber.start
 # Shut down the subscriber when ready to stop receiving messages.
 subscriber.stop.wait!
 ```
+
+### Recaptcha Enterprise (Alpha)
+
+- [google-cloud-recaptcha_enterprise README](google-cloud-recaptcha_enterprise/README.md)
+- [google-cloud-recaptcha_enterprise API documentation](https://googleapis.github.io/google-cloud-ruby/docs/google-cloud-recaptcha_enterprise/latest)
+- [google-cloud-recaptcha_enterprise on RubyGems](https://rubygems.org/gems/google-cloud-recaptcha_enterprise)
+- [Recaptcha Enterprise documentation](https://cloud.google.com/recaptcha-enterprise/docs/)
+
+#### Quick Start
+
+```sh
+$ gem install google-cloud-recaptcha_enterprise
+```
+
 ### Cloud Redis API (Alpha)
 
 - [google-cloud-redis README](google-cloud-redis/README.md)
