@@ -82,17 +82,17 @@ module Google
 
           private_constant :TENANT_PATH_TEMPLATE
 
-          COMPANY_OLD_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
-            "projects/{project}/companies/{company}"
+          COMPANY_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+            "projects/{project}/tenants/{tenant}/companies/{company}"
           )
 
-          private_constant :COMPANY_OLD_PATH_TEMPLATE
+          private_constant :COMPANY_PATH_TEMPLATE
 
-          JOB_OLD_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
-            "projects/{project}/jobs/{jobs}"
+          JOB_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+            "projects/{project}/tenants/{tenant}/jobs/{jobs}"
           )
 
-          private_constant :JOB_OLD_PATH_TEMPLATE
+          private_constant :JOB_PATH_TEMPLATE
 
           # Returns a fully-qualified tenant resource name string.
           # @param project [String]
@@ -105,24 +105,28 @@ module Google
             )
           end
 
-          # Returns a fully-qualified company_old resource name string.
+          # Returns a fully-qualified company resource name string.
           # @param project [String]
+          # @param tenant [String]
           # @param company [String]
           # @return [String]
-          def self.company_old_path project, company
-            COMPANY_OLD_PATH_TEMPLATE.render(
+          def self.company_path project, tenant, company
+            COMPANY_PATH_TEMPLATE.render(
               :"project" => project,
+              :"tenant" => tenant,
               :"company" => company
             )
           end
 
-          # Returns a fully-qualified job_old resource name string.
+          # Returns a fully-qualified job resource name string.
           # @param project [String]
+          # @param tenant [String]
           # @param jobs [String]
           # @return [String]
-          def self.job_old_path project, jobs
-            JOB_OLD_PATH_TEMPLATE.render(
+          def self.job_path project, tenant, jobs
+            JOB_PATH_TEMPLATE.render(
               :"project" => project,
+              :"tenant" => tenant,
               :"jobs" => jobs
             )
           end
@@ -376,7 +380,7 @@ module Google
           #   require "google/cloud/talent"
           #
           #   job_client = Google::Cloud::Talent::JobService.new(version: :v4beta1)
-          #   formatted_name = Google::Cloud::Talent::V4beta1::JobServiceClient.job_old_path("[PROJECT]", "[JOBS]")
+          #   formatted_name = Google::Cloud::Talent::V4beta1::JobServiceClient.job_path("[PROJECT]", "[TENANT]", "[JOBS]")
           #   response = job_client.get_job(formatted_name)
 
           def get_job \
@@ -469,7 +473,7 @@ module Google
           #   require "google/cloud/talent"
           #
           #   job_client = Google::Cloud::Talent::JobService.new(version: :v4beta1)
-          #   formatted_name = Google::Cloud::Talent::V4beta1::JobServiceClient.job_old_path("[PROJECT]", "[JOBS]")
+          #   formatted_name = Google::Cloud::Talent::V4beta1::JobServiceClient.job_path("[PROJECT]", "[TENANT]", "[JOBS]")
           #   job_client.delete_job(formatted_name)
 
           def delete_job \

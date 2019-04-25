@@ -74,11 +74,11 @@ module Google
 
           private_constant :TENANT_PATH_TEMPLATE
 
-          COMPANY_OLD_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
-            "projects/{project}/companies/{company}"
+          COMPANY_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+            "projects/{project}/tenants/{tenant}/companies/{company}"
           )
 
-          private_constant :COMPANY_OLD_PATH_TEMPLATE
+          private_constant :COMPANY_PATH_TEMPLATE
 
           # Returns a fully-qualified tenant resource name string.
           # @param project [String]
@@ -91,13 +91,15 @@ module Google
             )
           end
 
-          # Returns a fully-qualified company_old resource name string.
+          # Returns a fully-qualified company resource name string.
           # @param project [String]
+          # @param tenant [String]
           # @param company [String]
           # @return [String]
-          def self.company_old_path project, company
-            COMPANY_OLD_PATH_TEMPLATE.render(
+          def self.company_path project, tenant, company
+            COMPANY_PATH_TEMPLATE.render(
               :"project" => project,
+              :"tenant" => tenant,
               :"company" => company
             )
           end
@@ -323,7 +325,7 @@ module Google
           #   require "google/cloud/talent"
           #
           #   company_client = Google::Cloud::Talent::CompanyService.new(version: :v4beta1)
-          #   formatted_name = Google::Cloud::Talent::V4beta1::CompanyServiceClient.company_old_path("[PROJECT]", "[COMPANY]")
+          #   formatted_name = Google::Cloud::Talent::V4beta1::CompanyServiceClient.company_path("[PROJECT]", "[TENANT]", "[COMPANY]")
           #   response = company_client.get_company(formatted_name)
 
           def get_company \
@@ -411,7 +413,7 @@ module Google
           #   require "google/cloud/talent"
           #
           #   company_client = Google::Cloud::Talent::CompanyService.new(version: :v4beta1)
-          #   formatted_name = Google::Cloud::Talent::V4beta1::CompanyServiceClient.company_old_path("[PROJECT]", "[COMPANY]")
+          #   formatted_name = Google::Cloud::Talent::V4beta1::CompanyServiceClient.company_path("[PROJECT]", "[TENANT]", "[COMPANY]")
           #   company_client.delete_company(formatted_name)
 
           def delete_company \

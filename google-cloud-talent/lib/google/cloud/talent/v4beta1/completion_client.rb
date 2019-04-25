@@ -65,11 +65,11 @@ module Google
 
           private_constant :TENANT_PATH_TEMPLATE
 
-          COMPANY_OLD_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
-            "projects/{project}/companies/{company}"
+          COMPANY_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+            "projects/{project}/tenants/{tenant}/companies/{company}"
           )
 
-          private_constant :COMPANY_OLD_PATH_TEMPLATE
+          private_constant :COMPANY_PATH_TEMPLATE
 
           # Returns a fully-qualified tenant resource name string.
           # @param project [String]
@@ -82,13 +82,15 @@ module Google
             )
           end
 
-          # Returns a fully-qualified company_old resource name string.
+          # Returns a fully-qualified company resource name string.
           # @param project [String]
+          # @param tenant [String]
           # @param company [String]
           # @return [String]
-          def self.company_old_path project, company
-            COMPANY_OLD_PATH_TEMPLATE.render(
+          def self.company_path project, tenant, company
+            COMPANY_PATH_TEMPLATE.render(
               :"project" => project,
+              :"tenant" => tenant,
               :"company" => company
             )
           end
