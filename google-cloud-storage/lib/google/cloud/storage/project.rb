@@ -232,6 +232,12 @@ module Google
         # for the bucket, including a block that defines CORS rule. See
         # {Bucket::Cors} for details.
         #
+        # Before enabling Bucket Policy Only (see {Bucket#policy_only=}) please
+        # review [feature
+        # documentation](https://cloud.google.com/storage/docs/bucket-policy-only),
+        # as well as [Should you use Bucket Policy
+        # Only?](https://cloud.google.com/storage/docs/bucket-policy-only#should-you-use).
+        #
         # @see https://cloud.google.com/storage/docs/cross-origin Cross-Origin
         #   Resource Sharing (CORS)
         # @see https://cloud.google.com/storage/docs/website-configuration How

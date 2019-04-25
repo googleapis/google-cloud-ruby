@@ -47,9 +47,11 @@ This client supports the following Google Cloud Platform services at an
 * [Cloud Natural Language API](#cloud-natural-language-api-alpha) (Alpha)
 * [Cloud OS Login](#cloud-os-login-alpha) (Alpha)
 * [Phishing Protection](#phishing-protection-alpha) (Alpha)
+* [Recaptcha Enterprise](#recaptcha-enterprise-alpha) (Alpha)
 * [Cloud Redis](#cloud-redis-api-alpha) (Alpha)
 * [Cloud Resource Manager](#cloud-resource-manager-alpha) (Alpha)
 * [Cloud Scheduler](#cloud-scheduler-alpha) (Alpha)
+* [Cloud Security Center](#cloud-security-center-alpha) (Alpha)
 * [Cloud Speech API](#cloud-speech-api-alpha) (Alpha)
 * [Cloud Talent Solutions API](#cloud-talent-solutions-api-alpha) (Alpha)
 * [Cloud Tasks API](#cloud-tasks-api-alpha) (Alpha)
@@ -658,6 +660,20 @@ subscriber.start
 # Shut down the subscriber when ready to stop receiving messages.
 subscriber.stop.wait!
 ```
+
+### Recaptcha Enterprise (Alpha)
+
+- [google-cloud-recaptcha_enterprise README](google-cloud-recaptcha_enterprise/README.md)
+- [google-cloud-recaptcha_enterprise API documentation](https://googleapis.github.io/google-cloud-ruby/docs/google-cloud-recaptcha_enterprise/latest)
+- [google-cloud-recaptcha_enterprise on RubyGems](https://rubygems.org/gems/google-cloud-recaptcha_enterprise)
+- [Recaptcha Enterprise documentation](https://cloud.google.com/recaptcha-enterprise/docs/)
+
+#### Quick Start
+
+```sh
+$ gem install google-cloud-recaptcha_enterprise
+```
+
 ### Cloud Redis API (Alpha)
 
 - [google-cloud-redis README](google-cloud-redis/README.md)
@@ -847,6 +863,19 @@ end
 module GRPC
   extend MyLogger
 end
+```
+
+### Cloud Security Center API (Alpha)
+
+- [google-cloud-security_center README](google-cloud-security_center/README.md)
+- [google-cloud-security_center API documentation](https://googleapis.github.io/google-cloud-ruby/docs/google-cloud-security_center/latest)
+- [google-cloud-security_center on RubyGems](https://rubygems.org/gems/google-cloud-security_center)
+- [Google Cloud Security Center API documentation](https://cloud.google.com/security-command-center/docs)
+
+#### Quick Start
+
+```sh
+$ gem install google-cloud-security_center
 ```
 
 ### Cloud Storage (GA)

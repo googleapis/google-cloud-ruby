@@ -129,3 +129,14 @@ s.replace(
         '  gem.add_dependency "googleapis-common-protos", ">= 1.3.9", "< 2.0"'
     ])
 )
+
+s.replace(
+    'google-cloud-redis.gemspec',
+    '"README.md", "LICENSE"',
+    '"README.md", "AUTHENTICATION.md", "LICENSE"'
+)
+s.replace(
+    '.yardopts',
+    'README.md\n',
+    'README.md\nAUTHENTICATION.md\nLICENSE\n'
+)

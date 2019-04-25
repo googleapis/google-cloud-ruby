@@ -38,8 +38,9 @@ Gem::Specification.new do |gem|
   gem.add_dependency "google-cloud-os_login", "~> 0.1"
   gem.add_dependency "google-cloud-phishing_protection", "~> 0.1"
   gem.add_dependency "google-cloud-pubsub", "~> 0.30"
-  gem.add_dependency "google-cloud-resource_manager", "~> 0.29"
+  gem.add_dependency "google-cloud-recaptcha_enterprise", "~> 0.1"
   gem.add_dependency "google-cloud-redis", "~> 0.2"
+  gem.add_dependency "google-cloud-resource_manager", "~> 0.29"
   gem.add_dependency "google-cloud-scheduler", "~> 0.1"
   gem.add_dependency "google-cloud-spanner", "~> 1.3"
   gem.add_dependency "google-cloud-speech", "~> 0.29"
@@ -52,25 +53,25 @@ Gem::Specification.new do |gem|
   gem.add_dependency "google-cloud-video_intelligence", "~> 1.0"
   gem.add_dependency "google-cloud-vision", "~> 0.28"
 
+  gem.add_development_dependency "autotest-suffix", "~> 1.1"
   gem.add_development_dependency "minitest", "~> 5.10"
   gem.add_development_dependency "minitest-autotest", "~> 1.0"
   gem.add_development_dependency "minitest-focus", "~> 1.1"
   gem.add_development_dependency "minitest-rg", "~> 5.2"
-  gem.add_development_dependency "autotest-suffix", "~> 1.1"
   gem.add_development_dependency "redcarpet", "~> 3.0"
   gem.add_development_dependency "rubocop", "~> 0.64.0"
   gem.add_development_dependency "simplecov", "~> 0.9"
   gem.add_development_dependency "yard", "~> 0.9"
   gem.add_development_dependency "yard-doctest", "~> 0.1.13"
 
-  gem.post_install_message = <<-POSTINSTALL
-------------------------------
-Thank you for installing Google Cloud!
+  gem.post_install_message = <<~POSTINSTALL
+    ------------------------------
+    Thank you for installing Google Cloud!
 
-IMPORTANT NOTICE:
-The google-cloud gem contains all the google-cloud-* gems.
-Instead of depending on this gem, we encourage you to install just
-the individual gems needed for your project.
-------------------------------
-POSTINSTALL
+    IMPORTANT NOTICE:
+    The google-cloud gem contains all the google-cloud-* gems.
+    Instead of depending on this gem, we encourage you to install just
+    the individual gems needed for your project.
+    ------------------------------
+  POSTINSTALL
 end

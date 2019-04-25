@@ -125,5 +125,16 @@ s.replace(
     'https://cloud.google.com/talent-solution'
 )
 
+s.replace(
+    'google-cloud-talent.gemspec',
+    '"README.md", "LICENSE"',
+    '"README.md", "AUTHENTICATION.md", "LICENSE"'
+)
+s.replace(
+    '.yardopts',
+    'README.md\n',
+    'README.md\nAUTHENTICATION.md\nLICENSE\n'
+)
+
 # Generate the helper methods
 call(f'bundle update && bundle exec rake generate_partials TALENT_SERVICES={",".join(services)}', shell=True)
