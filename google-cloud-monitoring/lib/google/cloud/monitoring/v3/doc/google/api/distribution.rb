@@ -185,7 +185,7 @@ module Google
       #   @return [Array<Google::Protobuf::Any>]
       #     Contextual information about the example value. Examples are:
       #
-      #       Trace ID: type.googleapis.com/google.devtools.cloudtrace.v1.Trace
+      #       Trace: type.googleapis.com/google.monitoring.v3.SpanContext
       #
       #       Literal string: type.googleapis.com/google.protobuf.StringValue
       #
