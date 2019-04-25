@@ -1,5 +1,18 @@
 # Release History
 
+### 0.35.0 / 2019-04-25
+
+* Add Subscription#push_config and Subscription::PushConfig
+* Add Subscription#expires_in
+* Add Topic#reload!
+* Add Subscription#reload!
+* Update low-level generated files  
+  * Add PushConfig#oidc_token
+  * Add ordering_key to PubsubMessage.
+  * Add enable_message_ordering to Subscription.
+  * Extract gRPC header values from request.
+  * Update documentation.
+
 ### 0.34.1 / 2019-02-13
 
 * Fix bug (typo) in retrieving default on_error proc.
