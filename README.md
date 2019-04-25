@@ -49,6 +49,7 @@ This client supports the following Google Cloud Platform services at an
 * [Cloud Redis](#cloud-redis-api-alpha) (Alpha)
 * [Cloud Resource Manager](#cloud-resource-manager-alpha) (Alpha)
 * [Cloud Scheduler](#cloud-scheduler-alpha) (Alpha)
+* [Cloud Security Center](#cloud-security-center-alpha) (Alpha)
 * [Cloud Speech API](#cloud-speech-api-alpha) (Alpha)
 * [Cloud Talent Solutions API](#cloud-talent-solutions-api-alpha) (Alpha)
 * [Cloud Tasks API](#cloud-tasks-api-alpha) (Alpha)
@@ -833,6 +834,19 @@ end
 module GRPC
   extend MyLogger
 end
+```
+
+### Cloud Security Center API (Alpha)
+
+- [google-cloud-security_center README](google-cloud-security_center/README.md)
+- [google-cloud-security_center API documentation](https://googleapis.github.io/google-cloud-ruby/docs/google-cloud-security_center/latest)
+- [google-cloud-security_center on RubyGems](https://rubygems.org/gems/google-cloud-security_center)
+- [Google Cloud Security Center API documentation](https://cloud.google.com/security-command-center/docs)
+
+#### Quick Start
+
+```sh
+$ gem install google-cloud-security_center
 ```
 
 ### Cloud Storage (GA)
