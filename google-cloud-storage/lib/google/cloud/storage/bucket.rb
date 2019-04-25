@@ -800,6 +800,11 @@ module Google
         # Any requests which attempt to use the ACL API to view or manipulate
         # ACLs will fail with 400 errors.
         #
+        # Before enabling Bucket Policy Only please review [feature
+        # documentation](https://cloud.google.com/storage/docs/bucket-policy-only),
+        # as well as [Should you use Bucket Policy
+        # Only?](https://cloud.google.com/storage/docs/bucket-policy-only#should-you-use).
+        #
         # @param [Boolean] new_policy_only When set to `true`, Bucket Policy
         #   Only is enabled in the bucket's IAM configuration.
         #
