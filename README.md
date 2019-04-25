@@ -46,6 +46,7 @@ This client supports the following Google Cloud Platform services at an
 * [Cloud DNS](#cloud-dns-alpha) (Alpha)
 * [Cloud Natural Language API](#cloud-natural-language-api-alpha) (Alpha)
 * [Cloud OS Login](#cloud-os-login-alpha) (Alpha)
+* [Phishing Protection](#phishing-protection-alpha) (Alpha)
 * [Recaptcha Enterprise](#recaptcha-enterprise-alpha) (Alpha)
 * [Cloud Redis](#cloud-redis-api-alpha) (Alpha)
 * [Cloud Resource Manager](#cloud-resource-manager-alpha) (Alpha)
@@ -600,6 +601,19 @@ annotation.tokens.count #=> 13
 
 ```sh
 $ gem install google-cloud-os_login
+```
+
+### Phishing Protection (Alpha)
+
+- [google-cloud-phishing_protection README](google-cloud-phishing_protection/README.md)
+- [google-cloud-phishing_protection API documentation](https://googleapis.github.io/google-cloud-ruby/docs/google-cloud-phishing_protection/latest)
+- [google-cloud-phishing_protection on RubyGems](https://rubygems.org/gems/google-cloud-phishing_protection)
+- [Phishing Protection documentation](https://cloud.google.com/phishing-protection/docs/)
+
+#### Quick Start
+
+```sh
+$ gem install google-cloud-phishing_protection
 ```
 
 ### Cloud Pub/Sub (Beta)
