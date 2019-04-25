@@ -195,7 +195,7 @@ this service.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#company_old_path-class_method" title="company_old_path (class method)">.<strong>company_old_path</strong>(project, company)  &#x21d2; String </a>
+      <a href="#company_path-class_method" title="company_path (class method)">.<strong>company_path</strong>(project, tenant, company)  &#x21d2; String </a>
     
 
     
@@ -209,7 +209,7 @@ this service.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Returns a fully-qualified company_old resource name string.</p>
+    <span class="summary_desc"><div class='inline'><p>Returns a fully-qualified company resource name string.</p>
 </div></span>
   
 </li>
@@ -437,8 +437,6 @@ custom error handling.</p>
       <pre class="lines">
 
 
-125
-126
 127
 128
 129
@@ -518,10 +516,12 @@ custom error handling.</p>
 203
 204
 205
-206</pre>
+206
+207
+208</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/completion_client.rb', line 125</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/completion_client.rb', line 127</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span> \
     <span class='label'>credentials:</span> <span class='kw'>nil</span><span class='comma'>,</span>
@@ -618,9 +618,9 @@ custom error handling.</p>
 
     
       <div class="method_details first">
-  <h3 class="signature first" id="company_old_path-class_method">
+  <h3 class="signature first" id="company_path-class_method">
   
-    .<strong>company_old_path</strong>(project, company)  &#x21d2; <tt>String</tt> 
+    .<strong>company_path</strong>(project, tenant, company)  &#x21d2; <tt>String</tt> 
   
 
   
@@ -628,7 +628,7 @@ custom error handling.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns a fully-qualified company_old resource name string.</p>
+    <p>Returns a fully-qualified company resource name string.</p>
 
 
   </div>
@@ -640,6 +640,17 @@ custom error handling.</p>
     <li>
       
         <span class='name'>project</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>tenant</span>
       
       
         <span class='type'>(<tt>String</tt>)</span>
@@ -681,19 +692,21 @@ custom error handling.</p>
       <pre class="lines">
 
 
-89
 90
 91
 92
 93
-94</pre>
+94
+95
+96</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/completion_client.rb', line 89</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/completion_client.rb', line 90</span>
 
-<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_company_old_path'>company_old_path</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span> <span class='id identifier rubyid_company'>company</span>
-  <span class='const'>COMPANY_OLD_PATH_TEMPLATE</span><span class='period'>.</span><span class='id identifier rubyid_render'>render</span><span class='lparen'>(</span>
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_company_path'>company_path</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span> <span class='id identifier rubyid_tenant'>tenant</span><span class='comma'>,</span> <span class='id identifier rubyid_company'>company</span>
+  <span class='const'>COMPANY_PATH_TEMPLATE</span><span class='period'>.</span><span class='id identifier rubyid_render'>render</span><span class='lparen'>(</span>
     <span class='symbol'>:&quot;project&quot;</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span>
+    <span class='symbol'>:&quot;tenant&quot;</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_tenant'>tenant</span><span class='comma'>,</span>
     <span class='symbol'>:&quot;company&quot;</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_company'>company</span>
   <span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
@@ -1082,8 +1095,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-295
-296
 297
 298
 299
@@ -1103,10 +1114,12 @@ retries, etc.</p>
 313
 314
 315
-316</pre>
+316
+317
+318</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/completion_client.rb', line 295</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/completion_client.rb', line 297</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_complete_query'>complete_query</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
