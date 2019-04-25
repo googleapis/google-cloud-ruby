@@ -682,6 +682,12 @@ settings</a>
 for the bucket, including a block that defines CORS rule. See
 <span class='object_link'><a href="Bucket/Cors.html" title="Google::Cloud::Storage::Bucket::Cors (class)">Bucket::Cors</a></span> for details.</p>
 
+<p>Before enabling Bucket Policy Only (see <span class='object_link'><a href="Bucket.html#policy_only=-instance_method" title="Google::Cloud::Storage::Bucket#policy_only= (method)">Bucket#policy_only=</a></span>) please
+review <a href="https://cloud.google.com/storage/docs/bucket-policy-only">feature
+documentation</a>,
+as well as <a href="https://cloud.google.com/storage/docs/bucket-policy-only#should-you-use">Should you use Bucket Policy
+Only?</a>.</p>
+
 
   </div>
 </div>
@@ -1028,12 +1034,6 @@ created</p>
       <pre class="lines">
 
 
-352
-353
-354
-355
-356
-357
 358
 359
 360
@@ -1055,10 +1055,16 @@ created</p>
 376
 377
 378
-379</pre>
+379
+380
+381
+382
+383
+384
+385</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/storage/project.rb', line 352</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/storage/project.rb', line 358</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_bucket'>create_bucket</span> <span class='id identifier rubyid_bucket_name'>bucket_name</span><span class='comma'>,</span> <span class='label'>acl:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>default_acl:</span> <span class='kw'>nil</span><span class='comma'>,</span>
                   <span class='label'>location:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>storage_class:</span> <span class='kw'>nil</span><span class='comma'>,</span>
@@ -1589,12 +1595,6 @@ to create. Must be one of <code>:v2</code> or <code>:v4</code>. The default valu
       <pre class="lines">
 
 
-506
-507
-508
-509
-510
-511
 512
 513
 514
@@ -1614,10 +1614,16 @@ to create. Must be one of <code>:v2</code> or <code>:v4</code>. The default valu
 528
 529
 530
-531</pre>
+531
+532
+533
+534
+535
+536
+537</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/storage/project.rb', line 506</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/storage/project.rb', line 512</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_signed_url'>signed_url</span> <span class='id identifier rubyid_bucket'>bucket</span><span class='comma'>,</span> <span class='id identifier rubyid_path'>path</span><span class='comma'>,</span> <span class='label'>method:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>expires:</span> <span class='kw'>nil</span><span class='comma'>,</span>
                <span class='label'>content_type:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>content_md5:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>headers:</span> <span class='kw'>nil</span><span class='comma'>,</span>
