@@ -37,12 +37,13 @@ module Google
         end
         
         class CompanyServiceClient
-          # Alias for Google::Cloud::Talent::V4beta1::CompanyServiceClient.company_old_path.
+          # Alias for Google::Cloud::Talent::V4beta1::CompanyServiceClient.company_path.
           # @param project [String]
+          # @param tenant [String]
           # @param company [String]
           # @return [String]
-          def company_old_path project, company
-            self.class.company_old_path project, company
+          def company_path project, tenant, company
+            self.class.company_path project, tenant, company
           end
         
           # Alias for Google::Cloud::Talent::V4beta1::CompanyServiceClient.tenant_path.
@@ -55,20 +56,22 @@ module Google
         end
         
         class JobServiceClient
-          # Alias for Google::Cloud::Talent::V4beta1::JobServiceClient.company_old_path.
+          # Alias for Google::Cloud::Talent::V4beta1::JobServiceClient.company_path.
           # @param project [String]
+          # @param tenant [String]
           # @param company [String]
           # @return [String]
-          def company_old_path project, company
-            self.class.company_old_path project, company
+          def company_path project, tenant, company
+            self.class.company_path project, tenant, company
           end
         
-          # Alias for Google::Cloud::Talent::V4beta1::JobServiceClient.job_old_path.
+          # Alias for Google::Cloud::Talent::V4beta1::JobServiceClient.job_path.
           # @param project [String]
+          # @param tenant [String]
           # @param jobs [String]
           # @return [String]
-          def job_old_path project, jobs
-            self.class.job_old_path project, jobs
+          def job_path project, tenant, jobs
+            self.class.job_path project, tenant, jobs
           end
         
           # Alias for Google::Cloud::Talent::V4beta1::JobServiceClient.tenant_path.

@@ -170,7 +170,7 @@ describe Google::Cloud::Talent::V4beta1::CompanyServiceClient do
 
     it 'invokes get_company without error' do
       # Create request parameters
-      formatted_name = Google::Cloud::Talent::V4beta1::CompanyServiceClient.company_old_path("[PROJECT]", "[COMPANY]")
+      formatted_name = Google::Cloud::Talent::V4beta1::CompanyServiceClient.company_path("[PROJECT]", "[TENANT]", "[COMPANY]")
 
       # Create expected grpc response
       name_2 = "name2-1052831874"
@@ -230,7 +230,7 @@ describe Google::Cloud::Talent::V4beta1::CompanyServiceClient do
 
     it 'invokes get_company with error' do
       # Create request parameters
-      formatted_name = Google::Cloud::Talent::V4beta1::CompanyServiceClient.company_old_path("[PROJECT]", "[COMPANY]")
+      formatted_name = Google::Cloud::Talent::V4beta1::CompanyServiceClient.company_path("[PROJECT]", "[TENANT]", "[COMPANY]")
 
       # Mock Grpc layer
       mock_method = proc do |request|
@@ -358,7 +358,7 @@ describe Google::Cloud::Talent::V4beta1::CompanyServiceClient do
 
     it 'invokes delete_company without error' do
       # Create request parameters
-      formatted_name = Google::Cloud::Talent::V4beta1::CompanyServiceClient.company_old_path("[PROJECT]", "[COMPANY]")
+      formatted_name = Google::Cloud::Talent::V4beta1::CompanyServiceClient.company_path("[PROJECT]", "[TENANT]", "[COMPANY]")
 
       # Mock Grpc layer
       mock_method = proc do |request|
@@ -393,7 +393,7 @@ describe Google::Cloud::Talent::V4beta1::CompanyServiceClient do
 
     it 'invokes delete_company with error' do
       # Create request parameters
-      formatted_name = Google::Cloud::Talent::V4beta1::CompanyServiceClient.company_old_path("[PROJECT]", "[COMPANY]")
+      formatted_name = Google::Cloud::Talent::V4beta1::CompanyServiceClient.company_path("[PROJECT]", "[TENANT]", "[COMPANY]")
 
       # Mock Grpc layer
       mock_method = proc do |request|
