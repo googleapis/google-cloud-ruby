@@ -15,7 +15,7 @@ Gem::Specification.new do |gem|
   gem.platform      = Gem::Platform::RUBY
 
   gem.files         = `git ls-files -- lib/*`.split("\n") +
-                      ["README.md", "LICENSE", ".yardopts"]
+                      ["README.md", "AUTHENTICATION.md", "LICENSE", ".yardopts"]
   gem.require_paths = ["lib"]
 
   gem.required_ruby_version = ">= 2.0.0"
