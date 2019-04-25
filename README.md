@@ -46,6 +46,7 @@ This client supports the following Google Cloud Platform services at an
 * [Cloud DNS](#cloud-dns-alpha) (Alpha)
 * [Cloud Natural Language API](#cloud-natural-language-api-alpha) (Alpha)
 * [Cloud OS Login](#cloud-os-login-alpha) (Alpha)
+* [Phishing Protection](#phishing-protection-alpha) (Alpha)
 * [Cloud Redis](#cloud-redis-api-alpha) (Alpha)
 * [Cloud Resource Manager](#cloud-resource-manager-alpha) (Alpha)
 * [Cloud Scheduler](#cloud-scheduler-alpha) (Alpha)
