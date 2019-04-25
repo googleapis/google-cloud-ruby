@@ -69,15 +69,20 @@ s.replace(
     'gem.add_development_dependency "rubocop".*$',
     'gem.add_development_dependency "rubocop", "~> 0.64.0"'
 )
-# Adds LICENSE to .yardopts
-s.replace(
-    '.yardopts',
-    'README.md',
-    '\n'.join(['README.md', 'LICENSE'])
-)
 # Fix product documentation links
 s.replace(
     ['README.md', 'lib/**/*.rb'],
     'https://cloud.google.com/webrisk',
     'https://cloud.google.com/web-risk'
+)
+
+s.replace(
+    'google-cloud-webrisk.gemspec',
+    '"README.md", "LICENSE"',
+    '"README.md", "AUTHENTICATION.md", "LICENSE"'
+)
+s.replace(
+    '.yardopts',
+    'README.md\n',
+    'README.md\nAUTHENTICATION.md\nLICENSE\n'
 )

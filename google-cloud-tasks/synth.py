@@ -142,5 +142,16 @@ s.replace(
     ])
 )
 
+s.replace(
+    'google-cloud-tasks.gemspec',
+    '"README.md", "LICENSE"',
+    '"README.md", "AUTHENTICATION.md", "LICENSE"'
+)
+s.replace(
+    '.yardopts',
+    'README.md\n',
+    'README.md\nAUTHENTICATION.md\nLICENSE\n'
+)
+
 # Generate the helper methods
 call('bundle update && bundle exec rake generate_partials', shell=True)

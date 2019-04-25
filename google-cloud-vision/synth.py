@@ -142,11 +142,17 @@ s.replace(
     'gem.add_development_dependency "rubocop".*$',
     'gem.add_development_dependency "rubocop", "~> 0.64.0"'
 )
-# Adds LICENSE to .yardopts
+
+s.replace(
+    'google-cloud-vision.gemspec',
+    '"README.md", "LICENSE"',
+    '"README.md", "AUTHENTICATION.md", "LICENSE"'
+)
 s.replace(
     '.yardopts',
-    'README.md',
-    '\n'.join(['README.md', 'LICENSE'])
+    'README.md\n',
+    'README.md\nAUTHENTICATION.md\nLICENSE\n'
 )
+
 # Generate the helper methods
 call('bundle update && bundle exec rake generate_partials', shell=True)
