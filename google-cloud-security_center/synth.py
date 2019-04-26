@@ -46,6 +46,10 @@ s.copy(v1_library / '.gitignore')
 s.copy(v1_library / '.yardopts')
 s.copy(v1_library / 'google-cloud-security_center.gemspec', merge=ruby.merge_gemspec)
 
+# Copy common templates
+templates = gcp.CommonTemplates().ruby_library()
+s.copy(templates)
+
 # Permanent: rename securitycenter file paths to security_center
 s.replace(
     [
@@ -125,6 +129,17 @@ s.replace(
         f'require "google/cloud/security_center/v1/security_center_client"',
         f'require "google/cloud/security_center/v1/helpers"'
     ])
+)
+
+s.replace(
+    'google-cloud-security_center.gemspec',
+    '"README.md", "LICENSE"',
+    '"README.md", "AUTHENTICATION.md", "LICENSE"'
+)
+s.replace(
+    '.yardopts',
+    'README.md\n',
+    'README.md\nAUTHENTICATION.md\nLICENSE\n'
 )
 
 # Generate the helper methods
