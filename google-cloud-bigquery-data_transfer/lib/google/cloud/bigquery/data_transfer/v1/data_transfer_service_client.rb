@@ -83,23 +83,17 @@ module Google
             ].freeze
 
 
-            PROJECT_DATA_SOURCE_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
-              "projects/{project}/dataSources/{data_source}"
-            )
-
-            private_constant :PROJECT_DATA_SOURCE_PATH_TEMPLATE
-
             PROJECT_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
               "projects/{project}"
             )
 
             private_constant :PROJECT_PATH_TEMPLATE
 
-            PROJECT_TRANSFER_CONFIG_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
-              "projects/{project}/transferConfigs/{transfer_config}"
+            PROJECT_DATA_SOURCE_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+              "projects/{project}/dataSources/{data_source}"
             )
 
-            private_constant :PROJECT_TRANSFER_CONFIG_PATH_TEMPLATE
+            private_constant :PROJECT_DATA_SOURCE_PATH_TEMPLATE
 
             PROJECT_RUN_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
               "projects/{project}/transferConfigs/{transfer_config}/runs/{run}"
@@ -107,16 +101,11 @@ module Google
 
             private_constant :PROJECT_RUN_PATH_TEMPLATE
 
-            # Returns a fully-qualified project_data_source resource name string.
-            # @param project [String]
-            # @param data_source [String]
-            # @return [String]
-            def self.project_data_source_path project, data_source
-              PROJECT_DATA_SOURCE_PATH_TEMPLATE.render(
-                :"project" => project,
-                :"data_source" => data_source
-              )
-            end
+            PROJECT_TRANSFER_CONFIG_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+              "projects/{project}/transferConfigs/{transfer_config}"
+            )
+
+            private_constant :PROJECT_TRANSFER_CONFIG_PATH_TEMPLATE
 
             # Returns a fully-qualified project resource name string.
             # @param project [String]
@@ -127,14 +116,14 @@ module Google
               )
             end
 
-            # Returns a fully-qualified project_transfer_config resource name string.
+            # Returns a fully-qualified project_data_source resource name string.
             # @param project [String]
-            # @param transfer_config [String]
+            # @param data_source [String]
             # @return [String]
-            def self.project_transfer_config_path project, transfer_config
-              PROJECT_TRANSFER_CONFIG_PATH_TEMPLATE.render(
+            def self.project_data_source_path project, data_source
+              PROJECT_DATA_SOURCE_PATH_TEMPLATE.render(
                 :"project" => project,
-                :"transfer_config" => transfer_config
+                :"data_source" => data_source
               )
             end
 
@@ -148,6 +137,17 @@ module Google
                 :"project" => project,
                 :"transfer_config" => transfer_config,
                 :"run" => run
+              )
+            end
+
+            # Returns a fully-qualified project_transfer_config resource name string.
+            # @param project [String]
+            # @param transfer_config [String]
+            # @return [String]
+            def self.project_transfer_config_path project, transfer_config
+              PROJECT_TRANSFER_CONFIG_PATH_TEMPLATE.render(
+                :"project" => project,
+                :"transfer_config" => transfer_config
               )
             end
 
