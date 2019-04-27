@@ -71,26 +71,17 @@ module Google
           ].freeze
 
 
-          PROJECT_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
-            "projects/{project}"
-          )
-
-          private_constant :PROJECT_PATH_TEMPLATE
-
           METRIC_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
             "projects/{project}/metrics/{metric}"
           )
 
           private_constant :METRIC_PATH_TEMPLATE
 
-          # Returns a fully-qualified project resource name string.
-          # @param project [String]
-          # @return [String]
-          def self.project_path project
-            PROJECT_PATH_TEMPLATE.render(
-              :"project" => project
-            )
-          end
+          PROJECT_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+            "projects/{project}"
+          )
+
+          private_constant :PROJECT_PATH_TEMPLATE
 
           # Returns a fully-qualified metric resource name string.
           # @param project [String]
@@ -100,6 +91,15 @@ module Google
             METRIC_PATH_TEMPLATE.render(
               :"project" => project,
               :"metric" => metric
+            )
+          end
+
+          # Returns a fully-qualified project resource name string.
+          # @param project [String]
+          # @return [String]
+          def self.project_path project
+            PROJECT_PATH_TEMPLATE.render(
+              :"project" => project
             )
           end
 
