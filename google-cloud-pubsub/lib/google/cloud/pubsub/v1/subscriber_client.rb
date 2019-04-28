@@ -77,6 +77,18 @@ module Google
           ].freeze
 
 
+          PROJECT_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+            "projects/{project}"
+          )
+
+          private_constant :PROJECT_PATH_TEMPLATE
+
+          SNAPSHOT_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+            "projects/{project}/snapshots/{snapshot}"
+          )
+
+          private_constant :SNAPSHOT_PATH_TEMPLATE
+
           SUBSCRIPTION_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
             "projects/{project}/subscriptions/{subscription}"
           )
@@ -89,17 +101,25 @@ module Google
 
           private_constant :TOPIC_PATH_TEMPLATE
 
-          PROJECT_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
-            "projects/{project}"
-          )
+          # Returns a fully-qualified project resource name string.
+          # @param project [String]
+          # @return [String]
+          def self.project_path project
+            PROJECT_PATH_TEMPLATE.render(
+              :"project" => project
+            )
+          end
 
-          private_constant :PROJECT_PATH_TEMPLATE
-
-          SNAPSHOT_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
-            "projects/{project}/snapshots/{snapshot}"
-          )
-
-          private_constant :SNAPSHOT_PATH_TEMPLATE
+          # Returns a fully-qualified snapshot resource name string.
+          # @param project [String]
+          # @param snapshot [String]
+          # @return [String]
+          def self.snapshot_path project, snapshot
+            SNAPSHOT_PATH_TEMPLATE.render(
+              :"project" => project,
+              :"snapshot" => snapshot
+            )
+          end
 
           # Returns a fully-qualified subscription resource name string.
           # @param project [String]
@@ -120,26 +140,6 @@ module Google
             TOPIC_PATH_TEMPLATE.render(
               :"project" => project,
               :"topic" => topic
-            )
-          end
-
-          # Returns a fully-qualified project resource name string.
-          # @param project [String]
-          # @return [String]
-          def self.project_path project
-            PROJECT_PATH_TEMPLATE.render(
-              :"project" => project
-            )
-          end
-
-          # Returns a fully-qualified snapshot resource name string.
-          # @param project [String]
-          # @param snapshot [String]
-          # @return [String]
-          def self.snapshot_path project, snapshot
-            SNAPSHOT_PATH_TEMPLATE.render(
-              :"project" => project,
-              :"snapshot" => snapshot
             )
           end
 
