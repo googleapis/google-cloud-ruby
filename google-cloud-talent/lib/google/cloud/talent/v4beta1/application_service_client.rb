@@ -69,30 +69,17 @@ module Google
           ].freeze
 
 
-          PROFILE_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
-            "projects/{project}/tenants/{tenant}/profiles/{profile}"
-          )
-
-          private_constant :PROFILE_PATH_TEMPLATE
-
           APPLICATION_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
             "projects/{project}/tenants/{tenant}/profiles/{profile}/applications/{application}"
           )
 
           private_constant :APPLICATION_PATH_TEMPLATE
 
-          # Returns a fully-qualified profile resource name string.
-          # @param project [String]
-          # @param tenant [String]
-          # @param profile [String]
-          # @return [String]
-          def self.profile_path project, tenant, profile
-            PROFILE_PATH_TEMPLATE.render(
-              :"project" => project,
-              :"tenant" => tenant,
-              :"profile" => profile
-            )
-          end
+          PROFILE_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+            "projects/{project}/tenants/{tenant}/profiles/{profile}"
+          )
+
+          private_constant :PROFILE_PATH_TEMPLATE
 
           # Returns a fully-qualified application resource name string.
           # @param project [String]
@@ -106,6 +93,19 @@ module Google
               :"tenant" => tenant,
               :"profile" => profile,
               :"application" => application
+            )
+          end
+
+          # Returns a fully-qualified profile resource name string.
+          # @param project [String]
+          # @param tenant [String]
+          # @param profile [String]
+          # @return [String]
+          def self.profile_path project, tenant, profile
+            PROFILE_PATH_TEMPLATE.render(
+              :"project" => project,
+              :"tenant" => tenant,
+              :"profile" => profile
             )
           end
 

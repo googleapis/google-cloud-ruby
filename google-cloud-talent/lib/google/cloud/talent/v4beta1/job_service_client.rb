@@ -76,12 +76,6 @@ module Google
           ].freeze
 
 
-          TENANT_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
-            "projects/{project}/tenants/{tenant}"
-          )
-
-          private_constant :TENANT_PATH_TEMPLATE
-
           COMPANY_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
             "projects/{project}/tenants/{tenant}/companies/{company}"
           )
@@ -94,16 +88,11 @@ module Google
 
           private_constant :JOB_PATH_TEMPLATE
 
-          # Returns a fully-qualified tenant resource name string.
-          # @param project [String]
-          # @param tenant [String]
-          # @return [String]
-          def self.tenant_path project, tenant
-            TENANT_PATH_TEMPLATE.render(
-              :"project" => project,
-              :"tenant" => tenant
-            )
-          end
+          TENANT_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+            "projects/{project}/tenants/{tenant}"
+          )
+
+          private_constant :TENANT_PATH_TEMPLATE
 
           # Returns a fully-qualified company resource name string.
           # @param project [String]
@@ -128,6 +117,17 @@ module Google
               :"project" => project,
               :"tenant" => tenant,
               :"jobs" => jobs
+            )
+          end
+
+          # Returns a fully-qualified tenant resource name string.
+          # @param project [String]
+          # @param tenant [String]
+          # @return [String]
+          def self.tenant_path project, tenant
+            TENANT_PATH_TEMPLATE.render(
+              :"project" => project,
+              :"tenant" => tenant
             )
           end
 
