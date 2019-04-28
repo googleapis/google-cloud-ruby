@@ -76,6 +76,12 @@ module Google
           ].freeze
 
 
+          EXCLUSION_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+            "projects/{project}/exclusions/{exclusion}"
+          )
+
+          private_constant :EXCLUSION_PATH_TEMPLATE
+
           PROJECT_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
             "projects/{project}"
           )
@@ -88,11 +94,16 @@ module Google
 
           private_constant :SINK_PATH_TEMPLATE
 
-          EXCLUSION_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
-            "projects/{project}/exclusions/{exclusion}"
-          )
-
-          private_constant :EXCLUSION_PATH_TEMPLATE
+          # Returns a fully-qualified exclusion resource name string.
+          # @param project [String]
+          # @param exclusion [String]
+          # @return [String]
+          def self.exclusion_path project, exclusion
+            EXCLUSION_PATH_TEMPLATE.render(
+              :"project" => project,
+              :"exclusion" => exclusion
+            )
+          end
 
           # Returns a fully-qualified project resource name string.
           # @param project [String]
@@ -111,17 +122,6 @@ module Google
             SINK_PATH_TEMPLATE.render(
               :"project" => project,
               :"sink" => sink
-            )
-          end
-
-          # Returns a fully-qualified exclusion resource name string.
-          # @param project [String]
-          # @param exclusion [String]
-          # @return [String]
-          def self.exclusion_path project, exclusion
-            EXCLUSION_PATH_TEMPLATE.render(
-              :"project" => project,
-              :"exclusion" => exclusion
             )
           end
 
