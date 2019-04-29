@@ -1,5 +1,11 @@
 # Release History
 
+### 0.34.1 / 2019-04-29
+
+* Add AUTHENTICATION.md guide.
+* Update documentation for common types.
+* Update generated documentation.
+
 ### 0.34.0 / 2019-02-01
 
 * Add RecognitionConfig#audio_channel_count attribute
