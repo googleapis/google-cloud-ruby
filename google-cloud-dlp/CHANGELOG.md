@@ -1,5 +1,10 @@
 # Release History
 
+### 0.9.1 / 2019-04-29
+
+* Add AUTHENTICATION.md guide.
+* Update documentation for common types.
+
 ### 0.9.0 / 2019-04-09
 
 * Update V2::DlpServiceClient:
