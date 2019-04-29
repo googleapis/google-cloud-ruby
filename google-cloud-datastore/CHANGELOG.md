@@ -1,5 +1,11 @@
 # Release History
 
+### 1.5.2 / 2019-04-29
+
+* Add AUTHENTICATION.md guide.
+* Update generated documentation.
+* Extract gRPC header values from request.
+
 ### 1.5.1 / 2019-02-13
 
 * Add `ReadOnlyTransaction` convenience methods:
