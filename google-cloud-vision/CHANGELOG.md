@@ -1,5 +1,14 @@
 # Release History
 
+### 0.32.3 / 2019-04-29
+
+* Add AUTHENTICATION.md guide.
+* Update documentation for common types.
+* Update generated documentation.
+* Update generated code examples.
+* Remove Python code example from documentation.
+* Extract gRPC header values from request.
+
 ### 0.32.2 / 2018-12-14
 
 * Add image_context as optional parameter to ImageAnnotatorClient.*_detection helpers
