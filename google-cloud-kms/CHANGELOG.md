@@ -1,5 +1,12 @@
 # Release History
 
+### 1.0.1 / 2019-04-29
+
+* Update RPC retry configuration.
+* Add AUTHENTICATION.md guide.
+* Update documentation for common types.
+* Update generated code examples.
+
 ### 1.0.0 / 2019-03-11
 
 * Bump release level to GA.
