@@ -1,5 +1,12 @@
 # Release History
 
+### 0.29.4 / 2019-04-29
+
+* Add AUTHENTICATION.md guide.
+* Update generated documentation.
+* Update generated code examples.
+* Extract gRPC header values from request.
+
 ### 0.29.3 / 2019-02-01
 
 * Update network configuration.
