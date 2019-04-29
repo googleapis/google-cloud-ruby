@@ -1,5 +1,12 @@
 # Release History
 
+### 0.25.1 / 2019-04-29
+
+* Add AUTHENTICATION.md guide.
+* Update documentation for V1 Server API to GA.
+* Update generated documentation.
+* Extract gRPC header values from request.
+
 ### 0.25.0 / 2019-02-01
 
 * Switch Firestore to use the V1 API:
