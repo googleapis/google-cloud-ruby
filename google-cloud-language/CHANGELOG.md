@@ -1,5 +1,10 @@
 # Release History
 
+### 0.32.1 / 2019-04-29
+
+* Add AUTHENTICATION.md guide.
+* Update generated documentation.
+
 ### 0.32.0 / 2019-03-27
 
 * Update documentation
