@@ -1,5 +1,11 @@
 # Release History
 
+### 1.1.5 / 2019-04-29
+
+* Add AUTHENTICATION.md guide.
+* Update generated documentation.
+* Update generated code examples.
+
 ### 1.1.4 / 2019-02-27
 
 * Add TEXT_DETECTION and OBJECT_TRACKING features
