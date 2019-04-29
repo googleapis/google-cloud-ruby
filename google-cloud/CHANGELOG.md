@@ -1,6 +1,6 @@
 # Release History
 
-### 0.2.0 / 2019-04-29
+### 0.59.0 / 2019-04-29
 
 * Add google-cloud-security_center.
 * Add google-cloud-phishing_protection.
