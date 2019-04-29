@@ -1,5 +1,12 @@
 # Release History
 
+### 0.31.4 / 2019-04-29
+
+* Add AUTHENTICATION.md guide.
+* Update documentation for common types.
+* Update generated code examples.
+* Extract gRPC header values from request.
+
 ### 0.31.3 / 2019-02-13
 
 * Fix bug (typo) in retrieving default on_error proc.
