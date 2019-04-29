@@ -1,5 +1,10 @@
 # Release History
 
+### 0.4.1 / 2019-04-29
+
+* Add AUTHENTICATION.md guide.
+* Extract gRPC header values from request.
+
 ### 0.4.0 / 2019-03-11
 
 * Add v1beta1 API version
