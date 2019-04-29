@@ -243,7 +243,14 @@ module Google
             @new_sessions_in_process += 1
           end
 
-          session = @client.create_new_session
+          begin
+            session = @client.create_new_session
+          rescue StandardError => e
+            @mutex.synchronize do
+              @new_sessions_in_process -= 1
+            end
+            raise e
+          end
 
           @mutex.synchronize do
             @new_sessions_in_process -= 1
