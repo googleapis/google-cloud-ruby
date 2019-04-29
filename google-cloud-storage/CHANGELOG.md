@@ -1,5 +1,9 @@
 # Release History
 
+### 1.18.1 / 2019-04-29
+
+* Update Storage Bucket Policy Only documentation.
+
 ### 1.18.0 / 2019-04-09
 
 * Add support for V4 signed URLs.
