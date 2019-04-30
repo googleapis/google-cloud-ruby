@@ -3,8 +3,6 @@
 ### 0.3.0 / 2019-04-29
 
 * Add Instance#persistence_iam_identity attribute.
-* Add CloudRedisClient#import_instance.
-* Add CloudRedisClient#export_instance.
 * Add CloudRedisClient#failover_instance.
 * Add ListInstancesResponse#unreachable.
 * Add AUTHENTICATION.md guide.
