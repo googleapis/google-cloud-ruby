@@ -1,5 +1,15 @@
 # Release History
 
+### 0.3.0 / 2019-04-29
+
+* Add Instance#persistence_iam_identity attribute.
+* Add CloudRedisClient#failover_instance.
+* Add ListInstancesResponse#unreachable.
+* Add AUTHENTICATION.md guide.
+* Update generated documentation for common types.
+* Update generated documentation.
+* Extract gRPC header values from request.
+
 ### 0.2.3 / 2018-09-20
 
 * Update documentation.
