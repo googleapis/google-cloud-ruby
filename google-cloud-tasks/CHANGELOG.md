@@ -1,5 +1,10 @@
 # Release History
 
+### 0.7.1 / 2019-04-29
+
+* Add AUTHENTICATION.md guide.
+* Update documentation for common types.
+
 ### 0.7.0 / 2019-04-15
 
 * Add Queue#log_sampling_ratio
