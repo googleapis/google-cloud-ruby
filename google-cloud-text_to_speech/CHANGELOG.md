@@ -1,6 +1,6 @@
 # Release History
 
-### 0.2.1 / 2019-04-29
+### 0.3.0 / 2019-04-29
 
 * Add V1beta1 client.
 * Add AUTHENTICATION.md guide.
