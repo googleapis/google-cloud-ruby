@@ -383,6 +383,7 @@ google-cloud-pubsub:
 google-cloud-recaptcha_enterprise:
 - v0.1.0
 google-cloud-redis:
+- v0.3.0
 - v0.2.3
 - v0.2.2
 - v0.2.1
