@@ -6,6 +6,13 @@ require 'google/protobuf'
 
 require 'google/api/annotations_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
+  add_message "google.cloud.dialogflow.v2.InputAudioConfig" do
+    optional :audio_encoding, :enum, 1, "google.cloud.dialogflow.v2.AudioEncoding"
+    optional :sample_rate_hertz, :int32, 2
+    optional :language_code, :string, 3
+    repeated :phrase_hints, :string, 4
+    optional :model_variant, :enum, 10, "google.cloud.dialogflow.v2.SpeechModelVariant"
+  end
   add_message "google.cloud.dialogflow.v2.VoiceSelectionParams" do
     optional :name, :string, 1
     optional :ssml_gender, :enum, 2, "google.cloud.dialogflow.v2.SsmlVoiceGender"
@@ -21,6 +28,22 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :audio_encoding, :enum, 1, "google.cloud.dialogflow.v2.OutputAudioEncoding"
     optional :sample_rate_hertz, :int32, 2
     optional :synthesize_speech_config, :message, 3, "google.cloud.dialogflow.v2.SynthesizeSpeechConfig"
+  end
+  add_enum "google.cloud.dialogflow.v2.AudioEncoding" do
+    value :AUDIO_ENCODING_UNSPECIFIED, 0
+    value :AUDIO_ENCODING_LINEAR_16, 1
+    value :AUDIO_ENCODING_FLAC, 2
+    value :AUDIO_ENCODING_MULAW, 3
+    value :AUDIO_ENCODING_AMR, 4
+    value :AUDIO_ENCODING_AMR_WB, 5
+    value :AUDIO_ENCODING_OGG_OPUS, 6
+    value :AUDIO_ENCODING_SPEEX_WITH_HEADER_BYTE, 7
+  end
+  add_enum "google.cloud.dialogflow.v2.SpeechModelVariant" do
+    value :SPEECH_MODEL_VARIANT_UNSPECIFIED, 0
+    value :USE_BEST_AVAILABLE, 1
+    value :USE_STANDARD, 2
+    value :USE_ENHANCED, 3
   end
   add_enum "google.cloud.dialogflow.v2.SsmlVoiceGender" do
     value :SSML_VOICE_GENDER_UNSPECIFIED, 0
@@ -40,9 +63,12 @@ module Google
   module Cloud
     module Dialogflow
       module V2
+        InputAudioConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.InputAudioConfig").msgclass
         VoiceSelectionParams = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.VoiceSelectionParams").msgclass
         SynthesizeSpeechConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.SynthesizeSpeechConfig").msgclass
         OutputAudioConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.OutputAudioConfig").msgclass
+        AudioEncoding = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.AudioEncoding").enummodule
+        SpeechModelVariant = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.SpeechModelVariant").enummodule
         SsmlVoiceGender = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.SsmlVoiceGender").enummodule
         OutputAudioEncoding = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.OutputAudioEncoding").enummodule
       end
