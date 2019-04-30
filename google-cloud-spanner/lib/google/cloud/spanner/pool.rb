@@ -71,7 +71,6 @@ module Google
               return write_transaction.session if write_transaction
 
               if can_allocate_more_sessions?
-                @new_sessions_in_process += 1
                 action = :new
                 break
               end
@@ -127,7 +126,6 @@ module Google
               end
 
               if can_allocate_more_sessions?
-                @new_sessions_in_process += 1
                 action = :new
                 break
               end
@@ -204,7 +202,7 @@ module Google
           # init the thread pool
           @thread_pool = Concurrent::FixedThreadPool.new @threads
           # init the queues
-          @new_sessions_in_process = @min.to_i
+          @new_sessions_in_process = 0
           @all_sessions = []
           @session_queue = []
           @transaction_queue = []
@@ -241,15 +239,24 @@ module Google
         end
 
         def new_session!
-          session = @client.create_new_session
+          @mutex.synchronize do
+            @new_sessions_in_process += 1
+          end
+
+          begin
+            session = @client.create_new_session
+          rescue StandardError => e
+            @mutex.synchronize do
+              @new_sessions_in_process -= 1
+            end
+            raise e
+          end
 
           @mutex.synchronize do
-            # don't add if the pool is closed
-            return session.release! if @closed
-
             @new_sessions_in_process -= 1
             all_sessions << session
           end
+
           session
         end
 
