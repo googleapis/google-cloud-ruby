@@ -1,5 +1,13 @@
 # Release History
 
+### 1.9.1 / 2019-04-30
+
+* Fix Spanner session limit bug.
+* Update AUTHENTICATION.md guide.
+* Update documentation for common types.
+* Update generated documentation.
+* Extract gRPC header values from request.
+
 ### 1.9.0 / 2019-03-08
 
 * Spanner Batch DML.
