@@ -1,5 +1,10 @@
 # Release History
 
+### 0.3.0 / 2019-04-29
+
+* Add V1beta1 client.
+* Add AUTHENTICATION.md guide.
+
 ### 0.2.0 / 2019-02-01
 
 * Add AudioConfig#effects_profile_id.
