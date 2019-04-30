@@ -1,5 +1,11 @@
 # Release History
 
+### 0.59.0 / 2019-04-29
+
+* Add google-cloud-security_center.
+* Add google-cloud-phishing_protection.
+* Add google-cloud-recaptcha_enterprise.
+
 ### 0.58.0 / 2019-03-13
 
 * Add Cloud Talent
