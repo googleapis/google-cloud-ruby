@@ -95,9 +95,9 @@ describe Google::Cloud::PubSub::Subscriber, :acknowledge, :mock_pubsub do
 
     subscriber_retries = 0
     while called < 3
-      fail "total number of calls were never made" if subscriber_retries > 100
+      fail "total number of calls were never made" if subscriber_retries > 200
       subscriber_retries += 1
-      sleep 0.03
+      sleep 0.01
     end
 
     subscriber.stop
