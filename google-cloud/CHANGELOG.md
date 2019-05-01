@@ -1,5 +1,9 @@
 # Release History
 
+### 1.10.0 / 2019-05-01
+
+*
+
 ### 0.59.0 / 2019-04-29
 
 * Add google-cloud-security_center.
