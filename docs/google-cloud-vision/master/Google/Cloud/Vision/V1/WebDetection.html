@@ -408,6 +408,17 @@ Inferred from similar images on the open web.</p>
 </span>  <span class='comment'>#     (Deprecated) Overall relevancy score for the image.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="WebDetection/WebImage.html" title="Google::Cloud::Vision::V1::WebDetection::WebImage (class)">WebImage</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
+  <span class='comment'># Label to provide extra metadata for the web detection.
+</span>  <span class='comment'># @!attribute [rw] label
+</span>  <span class='comment'>#   @return [String]
+</span>  <span class='comment'>#     Label for extra metadata.
+</span>  <span class='comment'># @!attribute [rw] language_code
+</span>  <span class='comment'>#   @return [String]
+</span>  <span class='comment'>#     The BCP-47 language code for `label`, such as &quot;en-US&quot; or &quot;sr-Latn&quot;.
+</span>  <span class='comment'>#     For more information, see
+</span>  <span class='comment'>#     http://www.unicode.org/reports/tr35/#Unicode_locale_identifier.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="WebDetection/WebLabel.html" title="Google::Cloud::Vision::V1::WebDetection::WebLabel (class)">WebLabel</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+
   <span class='comment'># Metadata for web pages.
 </span>  <span class='comment'># @!attribute [rw] url
 </span>  <span class='comment'>#   @return [String]
@@ -429,17 +440,6 @@ Inferred from similar images on the open web.</p>
 </span>  <span class='comment'>#     example an original image will likely have partial matching for its
 </span>  <span class='comment'>#     crops.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="WebDetection/WebPage.html" title="Google::Cloud::Vision::V1::WebDetection::WebPage (class)">WebPage</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
-
-  <span class='comment'># Label to provide extra metadata for the web detection.
-</span>  <span class='comment'># @!attribute [rw] label
-</span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Label for extra metadata.
-</span>  <span class='comment'># @!attribute [rw] language_code
-</span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     The BCP-47 language code for `label`, such as &quot;en-US&quot; or &quot;sr-Latn&quot;.
-</span>  <span class='comment'>#     For more information, see
-</span>  <span class='comment'>#     http://www.unicode.org/reports/tr35/#Unicode_locale_identifier.
-</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="WebDetection/WebLabel.html" title="Google::Cloud::Vision::V1::WebDetection::WebLabel (class)">WebLabel</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -575,6 +575,17 @@ Can include resized copies of the query image.</p>
 </span>  <span class='comment'>#     (Deprecated) Overall relevancy score for the image.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="WebDetection/WebImage.html" title="Google::Cloud::Vision::V1::WebDetection::WebImage (class)">WebImage</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
+  <span class='comment'># Label to provide extra metadata for the web detection.
+</span>  <span class='comment'># @!attribute [rw] label
+</span>  <span class='comment'>#   @return [String]
+</span>  <span class='comment'>#     Label for extra metadata.
+</span>  <span class='comment'># @!attribute [rw] language_code
+</span>  <span class='comment'>#   @return [String]
+</span>  <span class='comment'>#     The BCP-47 language code for `label`, such as &quot;en-US&quot; or &quot;sr-Latn&quot;.
+</span>  <span class='comment'>#     For more information, see
+</span>  <span class='comment'>#     http://www.unicode.org/reports/tr35/#Unicode_locale_identifier.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="WebDetection/WebLabel.html" title="Google::Cloud::Vision::V1::WebDetection::WebLabel (class)">WebLabel</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+
   <span class='comment'># Metadata for web pages.
 </span>  <span class='comment'># @!attribute [rw] url
 </span>  <span class='comment'>#   @return [String]
@@ -596,17 +607,6 @@ Can include resized copies of the query image.</p>
 </span>  <span class='comment'>#     example an original image will likely have partial matching for its
 </span>  <span class='comment'>#     crops.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="WebDetection/WebPage.html" title="Google::Cloud::Vision::V1::WebDetection::WebPage (class)">WebPage</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
-
-  <span class='comment'># Label to provide extra metadata for the web detection.
-</span>  <span class='comment'># @!attribute [rw] label
-</span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Label for extra metadata.
-</span>  <span class='comment'># @!attribute [rw] language_code
-</span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     The BCP-47 language code for `label`, such as &quot;en-US&quot; or &quot;sr-Latn&quot;.
-</span>  <span class='comment'>#     For more information, see
-</span>  <span class='comment'>#     http://www.unicode.org/reports/tr35/#Unicode_locale_identifier.
-</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="WebDetection/WebLabel.html" title="Google::Cloud::Vision::V1::WebDetection::WebLabel (class)">WebLabel</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -740,6 +740,17 @@ Can include resized copies of the query image.</p>
 </span>  <span class='comment'>#     (Deprecated) Overall relevancy score for the image.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="WebDetection/WebImage.html" title="Google::Cloud::Vision::V1::WebDetection::WebImage (class)">WebImage</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
+  <span class='comment'># Label to provide extra metadata for the web detection.
+</span>  <span class='comment'># @!attribute [rw] label
+</span>  <span class='comment'>#   @return [String]
+</span>  <span class='comment'>#     Label for extra metadata.
+</span>  <span class='comment'># @!attribute [rw] language_code
+</span>  <span class='comment'>#   @return [String]
+</span>  <span class='comment'>#     The BCP-47 language code for `label`, such as &quot;en-US&quot; or &quot;sr-Latn&quot;.
+</span>  <span class='comment'>#     For more information, see
+</span>  <span class='comment'>#     http://www.unicode.org/reports/tr35/#Unicode_locale_identifier.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="WebDetection/WebLabel.html" title="Google::Cloud::Vision::V1::WebDetection::WebLabel (class)">WebLabel</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+
   <span class='comment'># Metadata for web pages.
 </span>  <span class='comment'># @!attribute [rw] url
 </span>  <span class='comment'>#   @return [String]
@@ -761,17 +772,6 @@ Can include resized copies of the query image.</p>
 </span>  <span class='comment'>#     example an original image will likely have partial matching for its
 </span>  <span class='comment'>#     crops.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="WebDetection/WebPage.html" title="Google::Cloud::Vision::V1::WebDetection::WebPage (class)">WebPage</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
-
-  <span class='comment'># Label to provide extra metadata for the web detection.
-</span>  <span class='comment'># @!attribute [rw] label
-</span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Label for extra metadata.
-</span>  <span class='comment'># @!attribute [rw] language_code
-</span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     The BCP-47 language code for `label`, such as &quot;en-US&quot; or &quot;sr-Latn&quot;.
-</span>  <span class='comment'>#     For more information, see
-</span>  <span class='comment'>#     http://www.unicode.org/reports/tr35/#Unicode_locale_identifier.
-</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="WebDetection/WebLabel.html" title="Google::Cloud::Vision::V1::WebDetection::WebLabel (class)">WebLabel</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -909,6 +909,17 @@ example an original image will likely have partial matching for its crops.</p>
 </span>  <span class='comment'>#     (Deprecated) Overall relevancy score for the image.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="WebDetection/WebImage.html" title="Google::Cloud::Vision::V1::WebDetection::WebImage (class)">WebImage</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
+  <span class='comment'># Label to provide extra metadata for the web detection.
+</span>  <span class='comment'># @!attribute [rw] label
+</span>  <span class='comment'>#   @return [String]
+</span>  <span class='comment'>#     Label for extra metadata.
+</span>  <span class='comment'># @!attribute [rw] language_code
+</span>  <span class='comment'>#   @return [String]
+</span>  <span class='comment'>#     The BCP-47 language code for `label`, such as &quot;en-US&quot; or &quot;sr-Latn&quot;.
+</span>  <span class='comment'>#     For more information, see
+</span>  <span class='comment'>#     http://www.unicode.org/reports/tr35/#Unicode_locale_identifier.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="WebDetection/WebLabel.html" title="Google::Cloud::Vision::V1::WebDetection::WebLabel (class)">WebLabel</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+
   <span class='comment'># Metadata for web pages.
 </span>  <span class='comment'># @!attribute [rw] url
 </span>  <span class='comment'>#   @return [String]
@@ -930,17 +941,6 @@ example an original image will likely have partial matching for its crops.</p>
 </span>  <span class='comment'>#     example an original image will likely have partial matching for its
 </span>  <span class='comment'>#     crops.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="WebDetection/WebPage.html" title="Google::Cloud::Vision::V1::WebDetection::WebPage (class)">WebPage</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
-
-  <span class='comment'># Label to provide extra metadata for the web detection.
-</span>  <span class='comment'># @!attribute [rw] label
-</span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Label for extra metadata.
-</span>  <span class='comment'># @!attribute [rw] language_code
-</span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     The BCP-47 language code for `label`, such as &quot;en-US&quot; or &quot;sr-Latn&quot;.
-</span>  <span class='comment'>#     For more information, see
-</span>  <span class='comment'>#     http://www.unicode.org/reports/tr35/#Unicode_locale_identifier.
-</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="WebDetection/WebLabel.html" title="Google::Cloud::Vision::V1::WebDetection::WebLabel (class)">WebLabel</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -1074,6 +1074,17 @@ example an original image will likely have partial matching for its crops.</p>
 </span>  <span class='comment'>#     (Deprecated) Overall relevancy score for the image.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="WebDetection/WebImage.html" title="Google::Cloud::Vision::V1::WebDetection::WebImage (class)">WebImage</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
+  <span class='comment'># Label to provide extra metadata for the web detection.
+</span>  <span class='comment'># @!attribute [rw] label
+</span>  <span class='comment'>#   @return [String]
+</span>  <span class='comment'>#     Label for extra metadata.
+</span>  <span class='comment'># @!attribute [rw] language_code
+</span>  <span class='comment'>#   @return [String]
+</span>  <span class='comment'>#     The BCP-47 language code for `label`, such as &quot;en-US&quot; or &quot;sr-Latn&quot;.
+</span>  <span class='comment'>#     For more information, see
+</span>  <span class='comment'>#     http://www.unicode.org/reports/tr35/#Unicode_locale_identifier.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="WebDetection/WebLabel.html" title="Google::Cloud::Vision::V1::WebDetection::WebLabel (class)">WebLabel</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+
   <span class='comment'># Metadata for web pages.
 </span>  <span class='comment'># @!attribute [rw] url
 </span>  <span class='comment'>#   @return [String]
@@ -1095,17 +1106,6 @@ example an original image will likely have partial matching for its crops.</p>
 </span>  <span class='comment'>#     example an original image will likely have partial matching for its
 </span>  <span class='comment'>#     crops.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="WebDetection/WebPage.html" title="Google::Cloud::Vision::V1::WebDetection::WebPage (class)">WebPage</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
-
-  <span class='comment'># Label to provide extra metadata for the web detection.
-</span>  <span class='comment'># @!attribute [rw] label
-</span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Label for extra metadata.
-</span>  <span class='comment'># @!attribute [rw] language_code
-</span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     The BCP-47 language code for `label`, such as &quot;en-US&quot; or &quot;sr-Latn&quot;.
-</span>  <span class='comment'>#     For more information, see
-</span>  <span class='comment'>#     http://www.unicode.org/reports/tr35/#Unicode_locale_identifier.
-</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="WebDetection/WebLabel.html" title="Google::Cloud::Vision::V1::WebDetection::WebLabel (class)">WebLabel</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -1239,6 +1239,17 @@ example an original image will likely have partial matching for its crops.</p>
 </span>  <span class='comment'>#     (Deprecated) Overall relevancy score for the image.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="WebDetection/WebImage.html" title="Google::Cloud::Vision::V1::WebDetection::WebImage (class)">WebImage</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
+  <span class='comment'># Label to provide extra metadata for the web detection.
+</span>  <span class='comment'># @!attribute [rw] label
+</span>  <span class='comment'>#   @return [String]
+</span>  <span class='comment'>#     Label for extra metadata.
+</span>  <span class='comment'># @!attribute [rw] language_code
+</span>  <span class='comment'>#   @return [String]
+</span>  <span class='comment'>#     The BCP-47 language code for `label`, such as &quot;en-US&quot; or &quot;sr-Latn&quot;.
+</span>  <span class='comment'>#     For more information, see
+</span>  <span class='comment'>#     http://www.unicode.org/reports/tr35/#Unicode_locale_identifier.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="WebDetection/WebLabel.html" title="Google::Cloud::Vision::V1::WebDetection::WebLabel (class)">WebLabel</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+
   <span class='comment'># Metadata for web pages.
 </span>  <span class='comment'># @!attribute [rw] url
 </span>  <span class='comment'>#   @return [String]
@@ -1260,17 +1271,6 @@ example an original image will likely have partial matching for its crops.</p>
 </span>  <span class='comment'>#     example an original image will likely have partial matching for its
 </span>  <span class='comment'>#     crops.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="WebDetection/WebPage.html" title="Google::Cloud::Vision::V1::WebDetection::WebPage (class)">WebPage</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
-
-  <span class='comment'># Label to provide extra metadata for the web detection.
-</span>  <span class='comment'># @!attribute [rw] label
-</span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Label for extra metadata.
-</span>  <span class='comment'># @!attribute [rw] language_code
-</span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     The BCP-47 language code for `label`, such as &quot;en-US&quot; or &quot;sr-Latn&quot;.
-</span>  <span class='comment'>#     For more information, see
-</span>  <span class='comment'>#     http://www.unicode.org/reports/tr35/#Unicode_locale_identifier.
-</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="WebDetection/WebLabel.html" title="Google::Cloud::Vision::V1::WebDetection::WebLabel (class)">WebLabel</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>

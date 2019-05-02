@@ -222,6 +222,52 @@ this service.</p>
         <li class="public ">
   <span class="summary_signature">
     
+      <a href="#async_batch_annotate_images-instance_method" title="#async_batch_annotate_images (instance method)">#<strong>async_batch_annotate_images</strong>(requests, output_config, options: nil)  &#x21d2; Google::Gax::Operation </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Run asynchronous image detection and annotation for a list of images.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#batch_annotate_files-instance_method" title="#batch_annotate_files (instance method)">#<strong>batch_annotate_files</strong>(requests, options: nil) {|result, operation| ... } &#x21d2; Google::Cloud::Vision::V1::BatchAnnotateFilesResponse </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Service that performs image detection and annotation for a batch of files.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#batch_annotate_images-instance_method" title="#batch_annotate_images (instance method)">#<strong>batch_annotate_images</strong>(requests, options: nil) {|result, operation| ... } &#x21d2; Google::Cloud::Vision::V1::BatchAnnotateImagesResponse </a>
     
 
@@ -765,7 +811,17 @@ custom error handling.</p>
 189
 190
 191
-192</pre>
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/v1/image_annotator_client.rb', line 100</span>
@@ -855,6 +911,16 @@ custom error handling.</p>
   <span class='ivar'>@batch_annotate_images</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
     <span class='ivar'>@image_annotator_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:batch_annotate_images</span><span class='rparen'>)</span><span class='comma'>,</span>
     <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>batch_annotate_images</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
+    <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span>
+  <span class='rparen'>)</span>
+  <span class='ivar'>@batch_annotate_files</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
+    <span class='ivar'>@image_annotator_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:batch_annotate_files</span><span class='rparen'>)</span><span class='comma'>,</span>
+    <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>batch_annotate_files</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
+    <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span>
+  <span class='rparen'>)</span>
+  <span class='ivar'>@async_batch_annotate_images</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
+    <span class='ivar'>@image_annotator_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:async_batch_annotate_images</span><span class='rparen'>)</span><span class='comma'>,</span>
+    <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>async_batch_annotate_images</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
     <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span>
   <span class='rparen'>)</span>
   <span class='ivar'>@async_batch_annotate_files</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
@@ -1012,26 +1078,26 @@ retries, etc.</p>
       <pre class="lines">
 
 
-281
-282
-283
-284
-285
-286
-287
-288
-289
-290
-291
-292
-293
-294
-295
-296
-297</pre>
+413
+414
+415
+416
+417
+418
+419
+420
+421
+422
+423
+424
+425
+426
+427
+428
+429</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/v1/image_annotator_client.rb', line 281</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/v1/image_annotator_client.rb', line 413</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_async_batch_annotate_files'>async_batch_annotate_files</span> \
     <span class='id identifier rubyid_requests'>requests</span><span class='comma'>,</span>
@@ -1049,6 +1115,398 @@ retries, etc.</p>
   <span class='rparen'>)</span>
   <span class='id identifier rubyid_operation'>operation</span><span class='period'>.</span><span class='id identifier rubyid_on_done'>on_done</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_operation'>operation</span><span class='op'>|</span> <span class='kw'>yield</span><span class='lparen'>(</span><span class='id identifier rubyid_operation'>operation</span><span class='rparen'>)</span> <span class='rbrace'>}</span> <span class='kw'>if</span> <span class='id identifier rubyid_block_given?'>block_given?</span>
   <span class='id identifier rubyid_operation'>operation</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="async_batch_annotate_images-instance_method">
+  
+    #<strong>async_batch_annotate_images</strong>(requests, output_config, options: nil)  &#x21d2; <tt>Google::Gax::Operation</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Run asynchronous image detection and annotation for a list of images.</p>
+
+<p>Progress and results can be retrieved through the
+<code>google.longrunning.Operations</code> interface.
+<code>Operation.metadata</code> contains <code>OperationMetadata</code> (metadata).
+<code>Operation.response</code> contains <code>AsyncBatchAnnotateImagesResponse</code> (results).</p>
+
+<p>This service will write image annotation outputs to json files in customer
+GCS bucket, each json file containing BatchAnnotateImagesResponse proto.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/vision</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_image_annotator_client'>image_annotator_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Vision.html" title="Google::Cloud::Vision (module)">Vision</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../ImageAnnotator.html" title="Google::Cloud::Vision::ImageAnnotator (module)">ImageAnnotator</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../ImageAnnotator.html#new-class_method" title="Google::Cloud::Vision::ImageAnnotator.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v1</span><span class='rparen'>)</span>
+
+<span class='comment'># TODO: Initialize `requests`:
+</span><span class='id identifier rubyid_requests'>requests</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
+
+<span class='comment'># TODO: Initialize `output_config`:
+</span><span class='id identifier rubyid_output_config'>output_config</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
+
+<span class='comment'># Register a callback during the method call.
+</span><span class='id identifier rubyid_operation'>operation</span> <span class='op'>=</span> <span class='id identifier rubyid_image_annotator_client'>image_annotator_client</span><span class='period'>.</span><span class='id identifier rubyid_async_batch_annotate_images'>async_batch_annotate_images</span><span class='lparen'>(</span><span class='id identifier rubyid_requests'>requests</span><span class='comma'>,</span> <span class='id identifier rubyid_output_config'>output_config</span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_op'>op</span><span class='op'>|</span>
+  <span class='id identifier rubyid_raise'>raise</span> <span class='id identifier rubyid_op'>op</span><span class='period'>.</span><span class='id identifier rubyid_results'>results</span><span class='period'>.</span><span class='id identifier rubyid_message'>message</span> <span class='kw'>if</span> <span class='id identifier rubyid_op'>op</span><span class='period'>.</span><span class='id identifier rubyid_error?'>error?</span>
+  <span class='id identifier rubyid_op_results'>op_results</span> <span class='op'>=</span> <span class='id identifier rubyid_op'>op</span><span class='period'>.</span><span class='id identifier rubyid_results'>results</span>
+  <span class='comment'># Process the results.
+</span>
+  <span class='id identifier rubyid_metadata'>metadata</span> <span class='op'>=</span> <span class='id identifier rubyid_op'>op</span><span class='period'>.</span><span class='id identifier rubyid_metadata'>metadata</span>
+  <span class='comment'># Process the metadata.
+</span><span class='kw'>end</span>
+
+<span class='comment'># Or use the return value to register a callback.
+</span><span class='id identifier rubyid_operation'>operation</span><span class='period'>.</span><span class='id identifier rubyid_on_done'>on_done</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_op'>op</span><span class='op'>|</span>
+  <span class='id identifier rubyid_raise'>raise</span> <span class='id identifier rubyid_op'>op</span><span class='period'>.</span><span class='id identifier rubyid_results'>results</span><span class='period'>.</span><span class='id identifier rubyid_message'>message</span> <span class='kw'>if</span> <span class='id identifier rubyid_op'>op</span><span class='period'>.</span><span class='id identifier rubyid_error?'>error?</span>
+  <span class='id identifier rubyid_op_results'>op_results</span> <span class='op'>=</span> <span class='id identifier rubyid_op'>op</span><span class='period'>.</span><span class='id identifier rubyid_results'>results</span>
+  <span class='comment'># Process the results.
+</span>
+  <span class='id identifier rubyid_metadata'>metadata</span> <span class='op'>=</span> <span class='id identifier rubyid_op'>op</span><span class='period'>.</span><span class='id identifier rubyid_metadata'>metadata</span>
+  <span class='comment'># Process the metadata.
+</span><span class='kw'>end</span>
+
+<span class='comment'># Manually reload the operation.
+</span><span class='id identifier rubyid_operation'>operation</span><span class='period'>.</span><span class='id identifier rubyid_reload!'>reload!</span>
+
+<span class='comment'># Or block until the operation completes, triggering callbacks on
+</span><span class='comment'># completion.
+</span><span class='id identifier rubyid_operation'>operation</span><span class='period'>.</span><span class='id identifier rubyid_wait_until_done!'>wait_until_done!</span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>requests</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="AnnotateImageRequest.html" title="Google::Cloud::Vision::V1::AnnotateImageRequest (class)">Google::Cloud::Vision::V1::AnnotateImageRequest</a></span> | Hash&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Individual image annotation requests for this batch.
+A hash of the same form as <code>Google::Cloud::Vision::V1::AnnotateImageRequest</code>
+can also be provided.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>output_config</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="OutputConfig.html" title="Google::Cloud::Vision::V1::OutputConfig (class)">Google::Cloud::Vision::V1::OutputConfig</a></span> | Hash</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Required. The desired output location and metadata (e.g. format).
+A hash of the same form as <code>Google::Cloud::Vision::V1::OutputConfig</code>
+can also be provided.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>options</span>
+      
+      
+        <span class='type'>(<tt>Google::Gax::CallOptions</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Overrides the default settings for this call, e.g, timeout,
+retries, etc.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Google::Gax::Operation</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Raises:</p>
+<ul class="raise">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Google::Gax::GaxError</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>if the RPC is aborted.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/v1/image_annotator_client.rb', line 342</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_async_batch_annotate_images'>async_batch_annotate_images</span> \
+    <span class='id identifier rubyid_requests'>requests</span><span class='comma'>,</span>
+    <span class='id identifier rubyid_output_config'>output_config</span><span class='comma'>,</span>
+    <span class='label'>options:</span> <span class='kw'>nil</span>
+  <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='lbrace'>{</span>
+    <span class='label'>requests:</span> <span class='id identifier rubyid_requests'>requests</span><span class='comma'>,</span>
+    <span class='label'>output_config:</span> <span class='id identifier rubyid_output_config'>output_config</span>
+  <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span>
+  <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='id identifier rubyid_to_proto'>to_proto</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Vision.html" title="Google::Cloud::Vision (module)">Vision</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Vision::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="AsyncBatchAnnotateImagesRequest.html" title="Google::Cloud::Vision::V1::AsyncBatchAnnotateImagesRequest (class)">AsyncBatchAnnotateImagesRequest</a></span></span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_operation'>operation</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='const'>Operation</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span>
+    <span class='ivar'>@async_batch_annotate_images</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='rparen'>)</span><span class='comma'>,</span>
+    <span class='ivar'>@operations_client</span><span class='comma'>,</span>
+    <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Vision.html" title="Google::Cloud::Vision (module)">Vision</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Vision::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="AsyncBatchAnnotateImagesResponse.html" title="Google::Cloud::Vision::V1::AsyncBatchAnnotateImagesResponse (class)">AsyncBatchAnnotateImagesResponse</a></span></span><span class='comma'>,</span>
+    <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Vision.html" title="Google::Cloud::Vision (module)">Vision</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Vision::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="OperationMetadata.html" title="Google::Cloud::Vision::V1::OperationMetadata (class)">OperationMetadata</a></span></span><span class='comma'>,</span>
+    <span class='label'>call_options:</span> <span class='id identifier rubyid_options'>options</span>
+  <span class='rparen'>)</span>
+  <span class='id identifier rubyid_operation'>operation</span><span class='period'>.</span><span class='id identifier rubyid_on_done'>on_done</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_operation'>operation</span><span class='op'>|</span> <span class='kw'>yield</span><span class='lparen'>(</span><span class='id identifier rubyid_operation'>operation</span><span class='rparen'>)</span> <span class='rbrace'>}</span> <span class='kw'>if</span> <span class='id identifier rubyid_block_given?'>block_given?</span>
+  <span class='id identifier rubyid_operation'>operation</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="batch_annotate_files-instance_method">
+  
+    #<strong>batch_annotate_files</strong>(requests, options: nil) {|result, operation| ... } &#x21d2; <tt><span class='object_link'><a href="BatchAnnotateFilesResponse.html" title="Google::Cloud::Vision::V1::BatchAnnotateFilesResponse (class)">Google::Cloud::Vision::V1::BatchAnnotateFilesResponse</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Service that performs image detection and annotation for a batch of files.
+Now only &quot;application/pdf&quot;, &quot;image/tiff&quot; and &quot;image/gif&quot; are supported.</p>
+
+<p>This service will extract at most 5 (customers can specify which 5 in
+AnnotateFileRequest.pages) frames (gif) or pages (pdf or tiff) from each
+file provided and perform detection and annotation for each image
+extracted.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/vision</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_image_annotator_client'>image_annotator_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Vision.html" title="Google::Cloud::Vision (module)">Vision</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../ImageAnnotator.html" title="Google::Cloud::Vision::ImageAnnotator (module)">ImageAnnotator</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../ImageAnnotator.html#new-class_method" title="Google::Cloud::Vision::ImageAnnotator.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v1</span><span class='rparen'>)</span>
+
+<span class='comment'># TODO: Initialize `requests`:
+</span><span class='id identifier rubyid_requests'>requests</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
+<span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_image_annotator_client'>image_annotator_client</span><span class='period'>.</span><span class='id identifier rubyid_batch_annotate_files'>batch_annotate_files</span><span class='lparen'>(</span><span class='id identifier rubyid_requests'>requests</span><span class='rparen'>)</span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>requests</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="AnnotateFileRequest.html" title="Google::Cloud::Vision::V1::AnnotateFileRequest (class)">Google::Cloud::Vision::V1::AnnotateFileRequest</a></span> | Hash&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The list of file annotation requests. Right now we support only one
+AnnotateFileRequest in BatchAnnotateFilesRequest.
+A hash of the same form as <code>Google::Cloud::Vision::V1::AnnotateFileRequest</code>
+can also be provided.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>options</span>
+      
+      
+        <span class='type'>(<tt>Google::Gax::CallOptions</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Overrides the default settings for this call, e.g, timeout,
+retries, etc.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Yields:</p>
+<ul class="yield">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>result</tt>, <tt>operation</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Access the result along with the RPC operation</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Yield Parameters:</p>
+<ul class="yieldparam">
+  
+    <li>
+      
+        <span class='name'>result</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="BatchAnnotateFilesResponse.html" title="Google::Cloud::Vision::V1::BatchAnnotateFilesResponse (class)">Google::Cloud::Vision::V1::BatchAnnotateFilesResponse</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>operation</span>
+      
+      
+        <span class='type'>(<tt>GRPC::ActiveCall::Operation</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="BatchAnnotateFilesResponse.html" title="Google::Cloud::Vision::V1::BatchAnnotateFilesResponse (class)">Google::Cloud::Vision::V1::BatchAnnotateFilesResponse</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Raises:</p>
+<ul class="raise">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Google::Gax::GaxError</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>if the RPC is aborted.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/v1/image_annotator_client.rb', line 270</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_batch_annotate_files'>batch_annotate_files</span> \
+    <span class='id identifier rubyid_requests'>requests</span><span class='comma'>,</span>
+    <span class='label'>options:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+    <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
+  <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='lbrace'>{</span>
+    <span class='label'>requests:</span> <span class='id identifier rubyid_requests'>requests</span>
+  <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span>
+  <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='id identifier rubyid_to_proto'>to_proto</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Vision.html" title="Google::Cloud::Vision (module)">Vision</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Vision::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="BatchAnnotateFilesRequest.html" title="Google::Cloud::Vision::V1::BatchAnnotateFilesRequest (class)">BatchAnnotateFilesRequest</a></span></span><span class='rparen'>)</span>
+  <span class='ivar'>@batch_annotate_files</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -1204,19 +1662,19 @@ retries, etc.</p>
       <pre class="lines">
 
 
-219
-220
-221
-222
-223
-224
-225
-226
-227
-228</pre>
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/v1/image_annotator_client.rb', line 219</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/v1/image_annotator_client.rb', line 229</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_batch_annotate_images'>batch_annotate_images</span> \
     <span class='id identifier rubyid_requests'>requests</span><span class='comma'>,</span>

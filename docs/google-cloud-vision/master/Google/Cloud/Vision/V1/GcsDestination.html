@@ -124,7 +124,7 @@ js:
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Google Cloud Storage URI where the results will be stored.</p>
+    <span class="summary_desc"><div class='inline'><p>Google Cloud Storage URI prefix where the results will be stored.</p>
 </div></span>
   
 </li>
@@ -152,17 +152,23 @@ js:
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Google Cloud Storage URI where the results will be stored. Results will
-be in JSON format and preceded by its corresponding input URI. This field
-can either represent a single file, or a prefix for multiple outputs.
-Prefixes must end in a <code>/</code>.</p>
+    <p>Returns Google Cloud Storage URI prefix where the results will be stored. Results
+will be in JSON format and preceded by its corresponding input URI prefix.
+This field can either represent a gcs file prefix or gcs directory. In
+either case, the uri should be unique because in order to get all of the
+output files, you will need to do a wildcard gcs search on the uri prefix
+you provide.</p>
 
 <p>Examples:</p>
 
 <ul>
-<li>File: gs://bucket-name/filename.json</li>
-<li>Prefix: gs://bucket-name/prefix/here/</li>
-<li>File: gs://bucket-name/prefix/here</li>
+<li><p>File Prefix: gs://bucket-name/here/filenameprefix   The output files
+will be created in gs://bucket-name/here/ and the names of the
+output files will begin with &quot;filenameprefix&quot;.</p></li>
+<li><p>Directory Prefix: gs://bucket-name/some/location/   The output files
+will be created in gs://bucket-name/some/location/ and the names of the
+output files could be anything because there was no filename prefix
+specified.</p></li>
 </ul>
 
 <p>If multiple outputs, each response is still AnnotateFileResponse, each of
@@ -186,17 +192,23 @@ and overflows into multiple sharded files.</p>
       
       
         &mdash;
-        <div class='inline'><p>Google Cloud Storage URI where the results will be stored. Results will
-be in JSON format and preceded by its corresponding input URI. This field
-can either represent a single file, or a prefix for multiple outputs.
-Prefixes must end in a <code>/</code>.</p>
+        <div class='inline'><p>Google Cloud Storage URI prefix where the results will be stored. Results
+will be in JSON format and preceded by its corresponding input URI prefix.
+This field can either represent a gcs file prefix or gcs directory. In
+either case, the uri should be unique because in order to get all of the
+output files, you will need to do a wildcard gcs search on the uri prefix
+you provide.</p>
 
 <p>Examples:</p>
 
 <ul>
-<li>File: gs://bucket-name/filename.json</li>
-<li>Prefix: gs://bucket-name/prefix/here/</li>
-<li>File: gs://bucket-name/prefix/here</li>
+<li><p>File Prefix: gs://bucket-name/here/filenameprefix   The output files
+will be created in gs://bucket-name/here/ and the names of the
+output files will begin with &quot;filenameprefix&quot;.</p></li>
+<li><p>Directory Prefix: gs://bucket-name/some/location/   The output files
+will be created in gs://bucket-name/some/location/ and the names of the
+output files could be anything because there was no filename prefix
+specified.</p></li>
 </ul>
 
 <p>If multiple outputs, each response is still AnnotateFileResponse, each of
@@ -215,10 +227,10 @@ and overflows into multiple sharded files.</p>
       <pre class="lines">
 
 
-707</pre>
+782</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/v1/doc/google/cloud/vision/v1/image_annotator.rb', line 707</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/v1/doc/google/cloud/vision/v1/image_annotator.rb', line 782</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Vision::V1::GcsDestination (class)">GcsDestination</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>

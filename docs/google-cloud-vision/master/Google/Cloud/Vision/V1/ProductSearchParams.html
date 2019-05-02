@@ -263,10 +263,10 @@ Optional. If it is not specified, system discretion will be applied.</p>
       <pre class="lines">
 
 
-45</pre>
+47</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/v1/doc/google/cloud/vision/v1/product_search.rb', line 45</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/v1/doc/google/cloud/vision/v1/product_search.rb', line 47</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Vision::V1::ProductSearchParams (class)">ProductSearchParams</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -289,10 +289,12 @@ Optional. If it is not specified, system discretion will be applied.</p>
   <div class="discussion">
     <p>Returns The filtering expression. This can be used to restrict search results based
 on Product labels. We currently support an AND of OR of key-value
-expressions, where each expression within an OR must have the same key.</p>
+expressions, where each expression within an OR must have the same key. An
+&#39;=&#39; should be used to connect the key and value.</p>
 
 <p>For example, &quot;(color = red OR color = blue) AND brand = Google&quot; is
-acceptable, but not &quot;(color = red OR brand = Google)&quot; or &quot;color: red&quot;.</p>
+acceptable, but &quot;(color = red OR brand = Google)&quot; is not acceptable.
+&quot;color: red&quot; is not acceptable because it uses a &#39;:&#39; instead of an &#39;=&#39;.</p>
 
 
   </div>
@@ -312,10 +314,12 @@ acceptable, but not &quot;(color = red OR brand = Google)&quot; or &quot;color: 
         &mdash;
         <div class='inline'><p>The filtering expression. This can be used to restrict search results based
 on Product labels. We currently support an AND of OR of key-value
-expressions, where each expression within an OR must have the same key.</p>
+expressions, where each expression within an OR must have the same key. An
+&#39;=&#39; should be used to connect the key and value.</p>
 
 <p>For example, &quot;(color = red OR color = blue) AND brand = Google&quot; is
-acceptable, but not &quot;(color = red OR brand = Google)&quot; or &quot;color: red&quot;.</p>
+acceptable, but &quot;(color = red OR brand = Google)&quot; is not acceptable.
+&quot;color: red&quot; is not acceptable because it uses a &#39;:&#39; instead of an &#39;=&#39;.</p>
 </div>
       
     </li>
@@ -328,10 +332,10 @@ acceptable, but not &quot;(color = red OR brand = Google)&quot; or &quot;color: 
       <pre class="lines">
 
 
-45</pre>
+47</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/v1/doc/google/cloud/vision/v1/product_search.rb', line 45</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/v1/doc/google/cloud/vision/v1/product_search.rb', line 47</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Vision::V1::ProductSearchParams (class)">ProductSearchParams</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -387,10 +391,10 @@ specified.</p>
       <pre class="lines">
 
 
-45</pre>
+47</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/v1/doc/google/cloud/vision/v1/product_search.rb', line 45</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/v1/doc/google/cloud/vision/v1/product_search.rb', line 47</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Vision::V1::ProductSearchParams (class)">ProductSearchParams</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -450,10 +454,10 @@ be searched for similar images.</p>
       <pre class="lines">
 
 
-45</pre>
+47</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/v1/doc/google/cloud/vision/v1/product_search.rb', line 45</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/v1/doc/google/cloud/vision/v1/product_search.rb', line 47</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Vision::V1::ProductSearchParams (class)">ProductSearchParams</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
