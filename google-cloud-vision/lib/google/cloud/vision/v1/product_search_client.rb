@@ -69,6 +69,10 @@ module Google
           DEFAULT_TIMEOUT = 30
 
           PAGE_DESCRIPTORS = {
+            "list_product_sets" => Google::Gax::PageDescriptor.new(
+              "page_token",
+              "next_page_token",
+              "product_sets"),
             "list_products" => Google::Gax::PageDescriptor.new(
               "page_token",
               "next_page_token",
@@ -77,10 +81,6 @@ module Google
               "page_token",
               "next_page_token",
               "reference_images"),
-            "list_product_sets" => Google::Gax::PageDescriptor.new(
-              "page_token",
-              "next_page_token",
-              "product_sets"),
             "list_products_in_product_set" => Google::Gax::PageDescriptor.new(
               "page_token",
               "next_page_token",
@@ -290,78 +290,6 @@ module Google
               &Google::Cloud::Vision::V1::ProductSearch::Stub.method(:new)
             )
 
-            @create_product = Google::Gax.create_api_call(
-              @product_search_stub.method(:create_product),
-              defaults["create_product"],
-              exception_transformer: exception_transformer,
-              params_extractor: proc do |request|
-                {'parent' => request.parent}
-              end
-            )
-            @list_products = Google::Gax.create_api_call(
-              @product_search_stub.method(:list_products),
-              defaults["list_products"],
-              exception_transformer: exception_transformer,
-              params_extractor: proc do |request|
-                {'parent' => request.parent}
-              end
-            )
-            @get_product = Google::Gax.create_api_call(
-              @product_search_stub.method(:get_product),
-              defaults["get_product"],
-              exception_transformer: exception_transformer,
-              params_extractor: proc do |request|
-                {'name' => request.name}
-              end
-            )
-            @update_product = Google::Gax.create_api_call(
-              @product_search_stub.method(:update_product),
-              defaults["update_product"],
-              exception_transformer: exception_transformer,
-              params_extractor: proc do |request|
-                {'product.name' => request.product.name}
-              end
-            )
-            @delete_product = Google::Gax.create_api_call(
-              @product_search_stub.method(:delete_product),
-              defaults["delete_product"],
-              exception_transformer: exception_transformer,
-              params_extractor: proc do |request|
-                {'name' => request.name}
-              end
-            )
-            @list_reference_images = Google::Gax.create_api_call(
-              @product_search_stub.method(:list_reference_images),
-              defaults["list_reference_images"],
-              exception_transformer: exception_transformer,
-              params_extractor: proc do |request|
-                {'parent' => request.parent}
-              end
-            )
-            @get_reference_image = Google::Gax.create_api_call(
-              @product_search_stub.method(:get_reference_image),
-              defaults["get_reference_image"],
-              exception_transformer: exception_transformer,
-              params_extractor: proc do |request|
-                {'name' => request.name}
-              end
-            )
-            @delete_reference_image = Google::Gax.create_api_call(
-              @product_search_stub.method(:delete_reference_image),
-              defaults["delete_reference_image"],
-              exception_transformer: exception_transformer,
-              params_extractor: proc do |request|
-                {'name' => request.name}
-              end
-            )
-            @create_reference_image = Google::Gax.create_api_call(
-              @product_search_stub.method(:create_reference_image),
-              defaults["create_reference_image"],
-              exception_transformer: exception_transformer,
-              params_extractor: proc do |request|
-                {'parent' => request.parent}
-              end
-            )
             @create_product_set = Google::Gax.create_api_call(
               @product_search_stub.method(:create_product_set),
               defaults["create_product_set"],
@@ -402,6 +330,78 @@ module Google
                 {'name' => request.name}
               end
             )
+            @create_product = Google::Gax.create_api_call(
+              @product_search_stub.method(:create_product),
+              defaults["create_product"],
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
+            )
+            @list_products = Google::Gax.create_api_call(
+              @product_search_stub.method(:list_products),
+              defaults["list_products"],
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
+            )
+            @get_product = Google::Gax.create_api_call(
+              @product_search_stub.method(:get_product),
+              defaults["get_product"],
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
+            )
+            @update_product = Google::Gax.create_api_call(
+              @product_search_stub.method(:update_product),
+              defaults["update_product"],
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'product.name' => request.product.name}
+              end
+            )
+            @delete_product = Google::Gax.create_api_call(
+              @product_search_stub.method(:delete_product),
+              defaults["delete_product"],
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
+            )
+            @create_reference_image = Google::Gax.create_api_call(
+              @product_search_stub.method(:create_reference_image),
+              defaults["create_reference_image"],
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
+            )
+            @delete_reference_image = Google::Gax.create_api_call(
+              @product_search_stub.method(:delete_reference_image),
+              defaults["delete_reference_image"],
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
+            )
+            @list_reference_images = Google::Gax.create_api_call(
+              @product_search_stub.method(:list_reference_images),
+              defaults["list_reference_images"],
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
+            )
+            @get_reference_image = Google::Gax.create_api_call(
+              @product_search_stub.method(:get_reference_image),
+              defaults["get_reference_image"],
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
+            )
             @add_product_to_product_set = Google::Gax.create_api_call(
               @product_search_stub.method(:add_product_to_product_set),
               defaults["add_product_to_product_set"],
@@ -437,6 +437,243 @@ module Google
           end
 
           # Service calls
+
+          # Creates and returns a new ProductSet resource.
+          #
+          # Possible errors:
+          #
+          # * Returns INVALID_ARGUMENT if display_name is missing, or is longer than
+          #   4096 characters.
+          #
+          # @param parent [String]
+          #   The project in which the ProductSet should be created.
+          #
+          #   Format is `projects/PROJECT_ID/locations/LOC_ID`.
+          # @param product_set [Google::Cloud::Vision::V1::ProductSet | Hash]
+          #   The ProductSet to create.
+          #   A hash of the same form as `Google::Cloud::Vision::V1::ProductSet`
+          #   can also be provided.
+          # @param product_set_id [String]
+          #   A user-supplied resource id for this ProductSet. If set, the server will
+          #   attempt to use this value as the resource id. If it is already in use, an
+          #   error is returned with code ALREADY_EXISTS. Must be at most 128 characters
+          #   long. It cannot contain the character `/`.
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Cloud::Vision::V1::ProductSet]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
+          # @return [Google::Cloud::Vision::V1::ProductSet]
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/vision"
+          #
+          #   product_search_client = Google::Cloud::Vision::ProductSearch.new(version: :v1)
+          #   formatted_parent = Google::Cloud::Vision::V1::ProductSearchClient.location_path("[PROJECT]", "[LOCATION]")
+          #
+          #   # TODO: Initialize `product_set`:
+          #   product_set = {}
+          #   response = product_search_client.create_product_set(formatted_parent, product_set)
+
+          def create_product_set \
+              parent,
+              product_set,
+              product_set_id: nil,
+              options: nil,
+              &block
+            req = {
+              parent: parent,
+              product_set: product_set,
+              product_set_id: product_set_id
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Cloud::Vision::V1::CreateProductSetRequest)
+            @create_product_set.call(req, options, &block)
+          end
+
+          # Lists ProductSets in an unspecified order.
+          #
+          # Possible errors:
+          #
+          # * Returns INVALID_ARGUMENT if page_size is greater than 100, or less
+          #   than 1.
+          #
+          # @param parent [String]
+          #   The project from which ProductSets should be listed.
+          #
+          #   Format is `projects/PROJECT_ID/locations/LOC_ID`.
+          # @param page_size [Integer]
+          #   The maximum number of resources contained in the underlying API
+          #   response. If page streaming is performed per-resource, this
+          #   parameter does not affect the return value. If page streaming is
+          #   performed per-page, this determines the maximum number of
+          #   resources in a page.
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Gax::PagedEnumerable<Google::Cloud::Vision::V1::ProductSet>]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
+          # @return [Google::Gax::PagedEnumerable<Google::Cloud::Vision::V1::ProductSet>]
+          #   An enumerable of Google::Cloud::Vision::V1::ProductSet instances.
+          #   See Google::Gax::PagedEnumerable documentation for other
+          #   operations such as per-page iteration or access to the response
+          #   object.
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/vision"
+          #
+          #   product_search_client = Google::Cloud::Vision::ProductSearch.new(version: :v1)
+          #   formatted_parent = Google::Cloud::Vision::V1::ProductSearchClient.location_path("[PROJECT]", "[LOCATION]")
+          #
+          #   # Iterate over all results.
+          #   product_search_client.list_product_sets(formatted_parent).each do |element|
+          #     # Process element.
+          #   end
+          #
+          #   # Or iterate over results one page at a time.
+          #   product_search_client.list_product_sets(formatted_parent).each_page do |page|
+          #     # Process each page at a time.
+          #     page.each do |element|
+          #       # Process element.
+          #     end
+          #   end
+
+          def list_product_sets \
+              parent,
+              page_size: nil,
+              options: nil,
+              &block
+            req = {
+              parent: parent,
+              page_size: page_size
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Cloud::Vision::V1::ListProductSetsRequest)
+            @list_product_sets.call(req, options, &block)
+          end
+
+          # Gets information associated with a ProductSet.
+          #
+          # Possible errors:
+          #
+          # * Returns NOT_FOUND if the ProductSet does not exist.
+          #
+          # @param name [String]
+          #   Resource name of the ProductSet to get.
+          #
+          #   Format is:
+          #   `projects/PROJECT_ID/locations/LOG_ID/productSets/PRODUCT_SET_ID`
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Cloud::Vision::V1::ProductSet]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
+          # @return [Google::Cloud::Vision::V1::ProductSet]
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/vision"
+          #
+          #   product_search_client = Google::Cloud::Vision::ProductSearch.new(version: :v1)
+          #   formatted_name = Google::Cloud::Vision::V1::ProductSearchClient.product_set_path("[PROJECT]", "[LOCATION]", "[PRODUCT_SET]")
+          #   response = product_search_client.get_product_set(formatted_name)
+
+          def get_product_set \
+              name,
+              options: nil,
+              &block
+            req = {
+              name: name
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Cloud::Vision::V1::GetProductSetRequest)
+            @get_product_set.call(req, options, &block)
+          end
+
+          # Makes changes to a ProductSet resource.
+          # Only display_name can be updated currently.
+          #
+          # Possible errors:
+          #
+          # * Returns NOT_FOUND if the ProductSet does not exist.
+          # * Returns INVALID_ARGUMENT if display_name is present in update_mask but
+          #   missing from the request or longer than 4096 characters.
+          #
+          # @param product_set [Google::Cloud::Vision::V1::ProductSet | Hash]
+          #   The ProductSet resource which replaces the one on the server.
+          #   A hash of the same form as `Google::Cloud::Vision::V1::ProductSet`
+          #   can also be provided.
+          # @param update_mask [Google::Protobuf::FieldMask | Hash]
+          #   The {Google::Protobuf::FieldMask FieldMask} that specifies which fields to
+          #   update.
+          #   If update_mask isn't specified, all mutable fields are to be updated.
+          #   Valid mask path is `display_name`.
+          #   A hash of the same form as `Google::Protobuf::FieldMask`
+          #   can also be provided.
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Cloud::Vision::V1::ProductSet]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
+          # @return [Google::Cloud::Vision::V1::ProductSet]
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/vision"
+          #
+          #   product_search_client = Google::Cloud::Vision::ProductSearch.new(version: :v1)
+          #
+          #   # TODO: Initialize `product_set`:
+          #   product_set = {}
+          #   response = product_search_client.update_product_set(product_set)
+
+          def update_product_set \
+              product_set,
+              update_mask: nil,
+              options: nil,
+              &block
+            req = {
+              product_set: product_set,
+              update_mask: update_mask
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Cloud::Vision::V1::UpdateProductSetRequest)
+            @update_product_set.call(req, options, &block)
+          end
+
+          # Permanently deletes a ProductSet. Products and ReferenceImages in the
+          # ProductSet are not deleted.
+          #
+          # The actual image files are not deleted from Google Cloud Storage.
+          #
+          # @param name [String]
+          #   Resource name of the ProductSet to delete.
+          #
+          #   Format is:
+          #   `projects/PROJECT_ID/locations/LOC_ID/productSets/PRODUCT_SET_ID`
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result []
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/vision"
+          #
+          #   product_search_client = Google::Cloud::Vision::ProductSearch.new(version: :v1)
+          #   formatted_name = Google::Cloud::Vision::V1::ProductSearchClient.product_set_path("[PROJECT]", "[LOCATION]", "[PRODUCT_SET]")
+          #   product_search_client.delete_product_set(formatted_name)
+
+          def delete_product_set \
+              name,
+              options: nil,
+              &block
+            req = {
+              name: name
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Cloud::Vision::V1::DeleteProductSetRequest)
+            @delete_product_set.call(req, options, &block)
+            nil
+          end
 
           # Creates and returns a new product resource.
           #
@@ -657,10 +894,6 @@ module Google
           # search queries against ProductSets containing the product may still work
           # until all related caches are refreshed.
           #
-          # Possible errors:
-          #
-          # * Returns NOT_FOUND if the product does not exist.
-          #
           # @param name [String]
           #   Resource name of product to delete.
           #
@@ -689,6 +922,114 @@ module Google
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Cloud::Vision::V1::DeleteProductRequest)
             @delete_product.call(req, options, &block)
+            nil
+          end
+
+          # Creates and returns a new ReferenceImage resource.
+          #
+          # The `bounding_poly` field is optional. If `bounding_poly` is not specified,
+          # the system will try to detect regions of interest in the image that are
+          # compatible with the product_category on the parent product. If it is
+          # specified, detection is ALWAYS skipped. The system converts polygons into
+          # non-rotated rectangles.
+          #
+          # Note that the pipeline will resize the image if the image resolution is too
+          # large to process (above 50MP).
+          #
+          # Possible errors:
+          #
+          # * Returns INVALID_ARGUMENT if the image_uri is missing or longer than 4096
+          #   characters.
+          # * Returns INVALID_ARGUMENT if the product does not exist.
+          # * Returns INVALID_ARGUMENT if bounding_poly is not provided, and nothing
+          #   compatible with the parent product's product_category is detected.
+          # * Returns INVALID_ARGUMENT if bounding_poly contains more than 10 polygons.
+          #
+          # @param parent [String]
+          #   Resource name of the product in which to create the reference image.
+          #
+          #   Format is
+          #   `projects/PROJECT_ID/locations/LOC_ID/products/PRODUCT_ID`.
+          # @param reference_image [Google::Cloud::Vision::V1::ReferenceImage | Hash]
+          #   The reference image to create.
+          #   If an image ID is specified, it is ignored.
+          #   A hash of the same form as `Google::Cloud::Vision::V1::ReferenceImage`
+          #   can also be provided.
+          # @param reference_image_id [String]
+          #   A user-supplied resource id for the ReferenceImage to be added. If set,
+          #   the server will attempt to use this value as the resource id. If it is
+          #   already in use, an error is returned with code ALREADY_EXISTS. Must be at
+          #   most 128 characters long. It cannot contain the character `/`.
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Cloud::Vision::V1::ReferenceImage]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
+          # @return [Google::Cloud::Vision::V1::ReferenceImage]
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/vision"
+          #
+          #   product_search_client = Google::Cloud::Vision::ProductSearch.new(version: :v1)
+          #   formatted_parent = Google::Cloud::Vision::V1::ProductSearchClient.product_path("[PROJECT]", "[LOCATION]", "[PRODUCT]")
+          #
+          #   # TODO: Initialize `reference_image`:
+          #   reference_image = {}
+          #   response = product_search_client.create_reference_image(formatted_parent, reference_image)
+
+          def create_reference_image \
+              parent,
+              reference_image,
+              reference_image_id: nil,
+              options: nil,
+              &block
+            req = {
+              parent: parent,
+              reference_image: reference_image,
+              reference_image_id: reference_image_id
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Cloud::Vision::V1::CreateReferenceImageRequest)
+            @create_reference_image.call(req, options, &block)
+          end
+
+          # Permanently deletes a reference image.
+          #
+          # The image metadata will be deleted right away, but search queries
+          # against ProductSets containing the image may still work until all related
+          # caches are refreshed.
+          #
+          # The actual image files are not deleted from Google Cloud Storage.
+          #
+          # @param name [String]
+          #   The resource name of the reference image to delete.
+          #
+          #   Format is:
+          #
+          #   `projects/PROJECT_ID/locations/LOC_ID/products/PRODUCT_ID/referenceImages/IMAGE_ID`
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result []
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/vision"
+          #
+          #   product_search_client = Google::Cloud::Vision::ProductSearch.new(version: :v1)
+          #   formatted_name = Google::Cloud::Vision::V1::ProductSearchClient.reference_image_path("[PROJECT]", "[LOCATION]", "[PRODUCT]", "[REFERENCE_IMAGE]")
+          #   product_search_client.delete_reference_image(formatted_name)
+
+          def delete_reference_image \
+              name,
+              options: nil,
+              &block
+            req = {
+              name: name
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Cloud::Vision::V1::DeleteReferenceImageRequest)
+            @delete_reference_image.call(req, options, &block)
             nil
           end
 
@@ -793,359 +1134,6 @@ module Google
             @get_reference_image.call(req, options, &block)
           end
 
-          # Permanently deletes a reference image.
-          #
-          # The image metadata will be deleted right away, but search queries
-          # against ProductSets containing the image may still work until all related
-          # caches are refreshed.
-          #
-          # The actual image files are not deleted from Google Cloud Storage.
-          #
-          # Possible errors:
-          #
-          # * Returns NOT_FOUND if the reference image does not exist.
-          #
-          # @param name [String]
-          #   The resource name of the reference image to delete.
-          #
-          #   Format is:
-          #
-          #   `projects/PROJECT_ID/locations/LOC_ID/products/PRODUCT_ID/referenceImages/IMAGE_ID`
-          # @param options [Google::Gax::CallOptions]
-          #   Overrides the default settings for this call, e.g, timeout,
-          #   retries, etc.
-          # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result []
-          # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @raise [Google::Gax::GaxError] if the RPC is aborted.
-          # @example
-          #   require "google/cloud/vision"
-          #
-          #   product_search_client = Google::Cloud::Vision::ProductSearch.new(version: :v1)
-          #   formatted_name = Google::Cloud::Vision::V1::ProductSearchClient.reference_image_path("[PROJECT]", "[LOCATION]", "[PRODUCT]", "[REFERENCE_IMAGE]")
-          #   product_search_client.delete_reference_image(formatted_name)
-
-          def delete_reference_image \
-              name,
-              options: nil,
-              &block
-            req = {
-              name: name
-            }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Cloud::Vision::V1::DeleteReferenceImageRequest)
-            @delete_reference_image.call(req, options, &block)
-            nil
-          end
-
-          # Creates and returns a new ReferenceImage resource.
-          #
-          # The `bounding_poly` field is optional. If `bounding_poly` is not specified,
-          # the system will try to detect regions of interest in the image that are
-          # compatible with the product_category on the parent product. If it is
-          # specified, detection is ALWAYS skipped. The system converts polygons into
-          # non-rotated rectangles.
-          #
-          # Note that the pipeline will resize the image if the image resolution is too
-          # large to process (above 50MP).
-          #
-          # Possible errors:
-          #
-          # * Returns INVALID_ARGUMENT if the image_uri is missing or longer than 4096
-          #   characters.
-          # * Returns INVALID_ARGUMENT if the product does not exist.
-          # * Returns INVALID_ARGUMENT if bounding_poly is not provided, and nothing
-          #   compatible with the parent product's product_category is detected.
-          # * Returns INVALID_ARGUMENT if bounding_poly contains more than 10 polygons.
-          #
-          # @param parent [String]
-          #   Resource name of the product in which to create the reference image.
-          #
-          #   Format is
-          #   `projects/PROJECT_ID/locations/LOC_ID/products/PRODUCT_ID`.
-          # @param reference_image [Google::Cloud::Vision::V1::ReferenceImage | Hash]
-          #   The reference image to create.
-          #   If an image ID is specified, it is ignored.
-          #   A hash of the same form as `Google::Cloud::Vision::V1::ReferenceImage`
-          #   can also be provided.
-          # @param reference_image_id [String]
-          #   A user-supplied resource id for the ReferenceImage to be added. If set,
-          #   the server will attempt to use this value as the resource id. If it is
-          #   already in use, an error is returned with code ALREADY_EXISTS. Must be at
-          #   most 128 characters long. It cannot contain the character `/`.
-          # @param options [Google::Gax::CallOptions]
-          #   Overrides the default settings for this call, e.g, timeout,
-          #   retries, etc.
-          # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result [Google::Cloud::Vision::V1::ReferenceImage]
-          # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @return [Google::Cloud::Vision::V1::ReferenceImage]
-          # @raise [Google::Gax::GaxError] if the RPC is aborted.
-          # @example
-          #   require "google/cloud/vision"
-          #
-          #   product_search_client = Google::Cloud::Vision::ProductSearch.new(version: :v1)
-          #   formatted_parent = Google::Cloud::Vision::V1::ProductSearchClient.product_path("[PROJECT]", "[LOCATION]", "[PRODUCT]")
-          #
-          #   # TODO: Initialize `reference_image`:
-          #   reference_image = {}
-          #   response = product_search_client.create_reference_image(formatted_parent, reference_image)
-
-          def create_reference_image \
-              parent,
-              reference_image,
-              reference_image_id: nil,
-              options: nil,
-              &block
-            req = {
-              parent: parent,
-              reference_image: reference_image,
-              reference_image_id: reference_image_id
-            }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Cloud::Vision::V1::CreateReferenceImageRequest)
-            @create_reference_image.call(req, options, &block)
-          end
-
-          # Creates and returns a new ProductSet resource.
-          #
-          # Possible errors:
-          #
-          # * Returns INVALID_ARGUMENT if display_name is missing, or is longer than
-          #   4096 characters.
-          #
-          # @param parent [String]
-          #   The project in which the ProductSet should be created.
-          #
-          #   Format is `projects/PROJECT_ID/locations/LOC_ID`.
-          # @param product_set [Google::Cloud::Vision::V1::ProductSet | Hash]
-          #   The ProductSet to create.
-          #   A hash of the same form as `Google::Cloud::Vision::V1::ProductSet`
-          #   can also be provided.
-          # @param product_set_id [String]
-          #   A user-supplied resource id for this ProductSet. If set, the server will
-          #   attempt to use this value as the resource id. If it is already in use, an
-          #   error is returned with code ALREADY_EXISTS. Must be at most 128 characters
-          #   long. It cannot contain the character `/`.
-          # @param options [Google::Gax::CallOptions]
-          #   Overrides the default settings for this call, e.g, timeout,
-          #   retries, etc.
-          # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result [Google::Cloud::Vision::V1::ProductSet]
-          # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @return [Google::Cloud::Vision::V1::ProductSet]
-          # @raise [Google::Gax::GaxError] if the RPC is aborted.
-          # @example
-          #   require "google/cloud/vision"
-          #
-          #   product_search_client = Google::Cloud::Vision::ProductSearch.new(version: :v1)
-          #   formatted_parent = Google::Cloud::Vision::V1::ProductSearchClient.location_path("[PROJECT]", "[LOCATION]")
-          #
-          #   # TODO: Initialize `product_set`:
-          #   product_set = {}
-          #   response = product_search_client.create_product_set(formatted_parent, product_set)
-
-          def create_product_set \
-              parent,
-              product_set,
-              product_set_id: nil,
-              options: nil,
-              &block
-            req = {
-              parent: parent,
-              product_set: product_set,
-              product_set_id: product_set_id
-            }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Cloud::Vision::V1::CreateProductSetRequest)
-            @create_product_set.call(req, options, &block)
-          end
-
-          # Lists ProductSets in an unspecified order.
-          #
-          # Possible errors:
-          #
-          # * Returns INVALID_ARGUMENT if page_size is greater than 100, or less
-          #   than 1.
-          #
-          # @param parent [String]
-          #   The project from which ProductSets should be listed.
-          #
-          #   Format is `projects/PROJECT_ID/locations/LOC_ID`.
-          # @param page_size [Integer]
-          #   The maximum number of resources contained in the underlying API
-          #   response. If page streaming is performed per-resource, this
-          #   parameter does not affect the return value. If page streaming is
-          #   performed per-page, this determines the maximum number of
-          #   resources in a page.
-          # @param options [Google::Gax::CallOptions]
-          #   Overrides the default settings for this call, e.g, timeout,
-          #   retries, etc.
-          # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result [Google::Gax::PagedEnumerable<Google::Cloud::Vision::V1::ProductSet>]
-          # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @return [Google::Gax::PagedEnumerable<Google::Cloud::Vision::V1::ProductSet>]
-          #   An enumerable of Google::Cloud::Vision::V1::ProductSet instances.
-          #   See Google::Gax::PagedEnumerable documentation for other
-          #   operations such as per-page iteration or access to the response
-          #   object.
-          # @raise [Google::Gax::GaxError] if the RPC is aborted.
-          # @example
-          #   require "google/cloud/vision"
-          #
-          #   product_search_client = Google::Cloud::Vision::ProductSearch.new(version: :v1)
-          #   formatted_parent = Google::Cloud::Vision::V1::ProductSearchClient.location_path("[PROJECT]", "[LOCATION]")
-          #
-          #   # Iterate over all results.
-          #   product_search_client.list_product_sets(formatted_parent).each do |element|
-          #     # Process element.
-          #   end
-          #
-          #   # Or iterate over results one page at a time.
-          #   product_search_client.list_product_sets(formatted_parent).each_page do |page|
-          #     # Process each page at a time.
-          #     page.each do |element|
-          #       # Process element.
-          #     end
-          #   end
-
-          def list_product_sets \
-              parent,
-              page_size: nil,
-              options: nil,
-              &block
-            req = {
-              parent: parent,
-              page_size: page_size
-            }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Cloud::Vision::V1::ListProductSetsRequest)
-            @list_product_sets.call(req, options, &block)
-          end
-
-          # Gets information associated with a ProductSet.
-          #
-          # Possible errors:
-          #
-          # * Returns NOT_FOUND if the ProductSet does not exist.
-          #
-          # @param name [String]
-          #   Resource name of the ProductSet to get.
-          #
-          #   Format is:
-          #   `projects/PROJECT_ID/locations/LOG_ID/productSets/PRODUCT_SET_ID`
-          # @param options [Google::Gax::CallOptions]
-          #   Overrides the default settings for this call, e.g, timeout,
-          #   retries, etc.
-          # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result [Google::Cloud::Vision::V1::ProductSet]
-          # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @return [Google::Cloud::Vision::V1::ProductSet]
-          # @raise [Google::Gax::GaxError] if the RPC is aborted.
-          # @example
-          #   require "google/cloud/vision"
-          #
-          #   product_search_client = Google::Cloud::Vision::ProductSearch.new(version: :v1)
-          #   formatted_name = Google::Cloud::Vision::V1::ProductSearchClient.product_set_path("[PROJECT]", "[LOCATION]", "[PRODUCT_SET]")
-          #   response = product_search_client.get_product_set(formatted_name)
-
-          def get_product_set \
-              name,
-              options: nil,
-              &block
-            req = {
-              name: name
-            }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Cloud::Vision::V1::GetProductSetRequest)
-            @get_product_set.call(req, options, &block)
-          end
-
-          # Makes changes to a ProductSet resource.
-          # Only display_name can be updated currently.
-          #
-          # Possible errors:
-          #
-          # * Returns NOT_FOUND if the ProductSet does not exist.
-          # * Returns INVALID_ARGUMENT if display_name is present in update_mask but
-          #   missing from the request or longer than 4096 characters.
-          #
-          # @param product_set [Google::Cloud::Vision::V1::ProductSet | Hash]
-          #   The ProductSet resource which replaces the one on the server.
-          #   A hash of the same form as `Google::Cloud::Vision::V1::ProductSet`
-          #   can also be provided.
-          # @param update_mask [Google::Protobuf::FieldMask | Hash]
-          #   The {Google::Protobuf::FieldMask FieldMask} that specifies which fields to
-          #   update.
-          #   If update_mask isn't specified, all mutable fields are to be updated.
-          #   Valid mask path is `display_name`.
-          #   A hash of the same form as `Google::Protobuf::FieldMask`
-          #   can also be provided.
-          # @param options [Google::Gax::CallOptions]
-          #   Overrides the default settings for this call, e.g, timeout,
-          #   retries, etc.
-          # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result [Google::Cloud::Vision::V1::ProductSet]
-          # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @return [Google::Cloud::Vision::V1::ProductSet]
-          # @raise [Google::Gax::GaxError] if the RPC is aborted.
-          # @example
-          #   require "google/cloud/vision"
-          #
-          #   product_search_client = Google::Cloud::Vision::ProductSearch.new(version: :v1)
-          #
-          #   # TODO: Initialize `product_set`:
-          #   product_set = {}
-          #   response = product_search_client.update_product_set(product_set)
-
-          def update_product_set \
-              product_set,
-              update_mask: nil,
-              options: nil,
-              &block
-            req = {
-              product_set: product_set,
-              update_mask: update_mask
-            }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Cloud::Vision::V1::UpdateProductSetRequest)
-            @update_product_set.call(req, options, &block)
-          end
-
-          # Permanently deletes a ProductSet. Products and ReferenceImages in the
-          # ProductSet are not deleted.
-          #
-          # The actual image files are not deleted from Google Cloud Storage.
-          #
-          # Possible errors:
-          #
-          # * Returns NOT_FOUND if the ProductSet does not exist.
-          #
-          # @param name [String]
-          #   Resource name of the ProductSet to delete.
-          #
-          #   Format is:
-          #   `projects/PROJECT_ID/locations/LOC_ID/productSets/PRODUCT_SET_ID`
-          # @param options [Google::Gax::CallOptions]
-          #   Overrides the default settings for this call, e.g, timeout,
-          #   retries, etc.
-          # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result []
-          # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @raise [Google::Gax::GaxError] if the RPC is aborted.
-          # @example
-          #   require "google/cloud/vision"
-          #
-          #   product_search_client = Google::Cloud::Vision::ProductSearch.new(version: :v1)
-          #   formatted_name = Google::Cloud::Vision::V1::ProductSearchClient.product_set_path("[PROJECT]", "[LOCATION]", "[PRODUCT_SET]")
-          #   product_search_client.delete_product_set(formatted_name)
-
-          def delete_product_set \
-              name,
-              options: nil,
-              &block
-            req = {
-              name: name
-            }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Cloud::Vision::V1::DeleteProductSetRequest)
-            @delete_product_set.call(req, options, &block)
-            nil
-          end
-
           # Adds a Product to the specified ProductSet. If the Product is already
           # present, no change is made.
           #
@@ -1195,10 +1183,6 @@ module Google
           end
 
           # Removes a Product from the specified ProductSet.
-          #
-          # Possible errors:
-          #
-          # * Returns NOT_FOUND If the Product is not found under the ProductSet.
           #
           # @param name [String]
           #   The resource name for the ProductSet to modify.

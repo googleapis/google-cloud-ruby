@@ -23,16 +23,16 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :url, :string, 1
     optional :score, :float, 2
   end
+  add_message "google.cloud.vision.v1.WebDetection.WebLabel" do
+    optional :label, :string, 1
+    optional :language_code, :string, 2
+  end
   add_message "google.cloud.vision.v1.WebDetection.WebPage" do
     optional :url, :string, 1
     optional :score, :float, 2
     optional :page_title, :string, 3
     repeated :full_matching_images, :message, 4, "google.cloud.vision.v1.WebDetection.WebImage"
     repeated :partial_matching_images, :message, 5, "google.cloud.vision.v1.WebDetection.WebImage"
-  end
-  add_message "google.cloud.vision.v1.WebDetection.WebLabel" do
-    optional :label, :string, 1
-    optional :language_code, :string, 2
   end
 end
 
@@ -43,8 +43,8 @@ module Google
         WebDetection = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vision.v1.WebDetection").msgclass
         WebDetection::WebEntity = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vision.v1.WebDetection.WebEntity").msgclass
         WebDetection::WebImage = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vision.v1.WebDetection.WebImage").msgclass
-        WebDetection::WebPage = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vision.v1.WebDetection.WebPage").msgclass
         WebDetection::WebLabel = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vision.v1.WebDetection.WebLabel").msgclass
+        WebDetection::WebPage = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vision.v1.WebDetection.WebPage").msgclass
       end
     end
   end

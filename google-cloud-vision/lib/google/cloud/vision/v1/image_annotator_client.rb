@@ -184,6 +184,16 @@ module Google
               defaults["batch_annotate_images"],
               exception_transformer: exception_transformer
             )
+            @batch_annotate_files = Google::Gax.create_api_call(
+              @image_annotator_stub.method(:batch_annotate_files),
+              defaults["batch_annotate_files"],
+              exception_transformer: exception_transformer
+            )
+            @async_batch_annotate_images = Google::Gax.create_api_call(
+              @image_annotator_stub.method(:async_batch_annotate_images),
+              defaults["async_batch_annotate_images"],
+              exception_transformer: exception_transformer
+            )
             @async_batch_annotate_files = Google::Gax.create_api_call(
               @image_annotator_stub.method(:async_batch_annotate_files),
               defaults["async_batch_annotate_files"],
@@ -225,6 +235,128 @@ module Google
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Cloud::Vision::V1::BatchAnnotateImagesRequest)
             @batch_annotate_images.call(req, options, &block)
+          end
+
+          # Service that performs image detection and annotation for a batch of files.
+          # Now only "application/pdf", "image/tiff" and "image/gif" are supported.
+          #
+          # This service will extract at most 5 (customers can specify which 5 in
+          # AnnotateFileRequest.pages) frames (gif) or pages (pdf or tiff) from each
+          # file provided and perform detection and annotation for each image
+          # extracted.
+          #
+          # @param requests [Array<Google::Cloud::Vision::V1::AnnotateFileRequest | Hash>]
+          #   The list of file annotation requests. Right now we support only one
+          #   AnnotateFileRequest in BatchAnnotateFilesRequest.
+          #   A hash of the same form as `Google::Cloud::Vision::V1::AnnotateFileRequest`
+          #   can also be provided.
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Cloud::Vision::V1::BatchAnnotateFilesResponse]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
+          # @return [Google::Cloud::Vision::V1::BatchAnnotateFilesResponse]
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/vision"
+          #
+          #   image_annotator_client = Google::Cloud::Vision::ImageAnnotator.new(version: :v1)
+          #
+          #   # TODO: Initialize `requests`:
+          #   requests = []
+          #   response = image_annotator_client.batch_annotate_files(requests)
+
+          def batch_annotate_files \
+              requests,
+              options: nil,
+              &block
+            req = {
+              requests: requests
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Cloud::Vision::V1::BatchAnnotateFilesRequest)
+            @batch_annotate_files.call(req, options, &block)
+          end
+
+          # Run asynchronous image detection and annotation for a list of images.
+          #
+          # Progress and results can be retrieved through the
+          # `google.longrunning.Operations` interface.
+          # `Operation.metadata` contains `OperationMetadata` (metadata).
+          # `Operation.response` contains `AsyncBatchAnnotateImagesResponse` (results).
+          #
+          # This service will write image annotation outputs to json files in customer
+          # GCS bucket, each json file containing BatchAnnotateImagesResponse proto.
+          #
+          # @param requests [Array<Google::Cloud::Vision::V1::AnnotateImageRequest | Hash>]
+          #   Individual image annotation requests for this batch.
+          #   A hash of the same form as `Google::Cloud::Vision::V1::AnnotateImageRequest`
+          #   can also be provided.
+          # @param output_config [Google::Cloud::Vision::V1::OutputConfig | Hash]
+          #   Required. The desired output location and metadata (e.g. format).
+          #   A hash of the same form as `Google::Cloud::Vision::V1::OutputConfig`
+          #   can also be provided.
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @return [Google::Gax::Operation]
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/vision"
+          #
+          #   image_annotator_client = Google::Cloud::Vision::ImageAnnotator.new(version: :v1)
+          #
+          #   # TODO: Initialize `requests`:
+          #   requests = []
+          #
+          #   # TODO: Initialize `output_config`:
+          #   output_config = {}
+          #
+          #   # Register a callback during the method call.
+          #   operation = image_annotator_client.async_batch_annotate_images(requests, output_config) do |op|
+          #     raise op.results.message if op.error?
+          #     op_results = op.results
+          #     # Process the results.
+          #
+          #     metadata = op.metadata
+          #     # Process the metadata.
+          #   end
+          #
+          #   # Or use the return value to register a callback.
+          #   operation.on_done do |op|
+          #     raise op.results.message if op.error?
+          #     op_results = op.results
+          #     # Process the results.
+          #
+          #     metadata = op.metadata
+          #     # Process the metadata.
+          #   end
+          #
+          #   # Manually reload the operation.
+          #   operation.reload!
+          #
+          #   # Or block until the operation completes, triggering callbacks on
+          #   # completion.
+          #   operation.wait_until_done!
+
+          def async_batch_annotate_images \
+              requests,
+              output_config,
+              options: nil
+            req = {
+              requests: requests,
+              output_config: output_config
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Cloud::Vision::V1::AsyncBatchAnnotateImagesRequest)
+            operation = Google::Gax::Operation.new(
+              @async_batch_annotate_images.call(req, options),
+              @operations_client,
+              Google::Cloud::Vision::V1::AsyncBatchAnnotateImagesResponse,
+              Google::Cloud::Vision::V1::OperationMetadata,
+              call_options: options
+            )
+            operation.on_done { |operation| yield(operation) } if block_given?
+            operation
           end
 
           # Run asynchronous image detection and annotation for a list of generic

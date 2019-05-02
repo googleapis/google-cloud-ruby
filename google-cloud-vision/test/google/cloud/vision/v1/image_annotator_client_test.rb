@@ -147,6 +147,212 @@ describe Google::Cloud::Vision::V1::ImageAnnotatorClient do
     end
   end
 
+  describe 'batch_annotate_files' do
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Vision::V1::ImageAnnotatorClient#batch_annotate_files."
+
+    it 'invokes batch_annotate_files without error' do
+      # Create request parameters
+      requests = []
+
+      # Create expected grpc response
+      expected_response = {}
+      expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Vision::V1::BatchAnnotateFilesResponse)
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Cloud::Vision::V1::BatchAnnotateFilesRequest, request)
+        requests = requests.map do |req|
+          Google::Gax::to_proto(req, Google::Cloud::Vision::V1::AnnotateFileRequest)
+        end
+        assert_equal(requests, request.requests)
+        OpenStruct.new(execute: expected_response)
+      end
+      mock_stub = MockGrpcClientStub_v1.new(:batch_annotate_files, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockImageAnnotatorCredentials_v1.new("batch_annotate_files")
+
+      Google::Cloud::Vision::V1::ImageAnnotator::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Vision::ImageAnnotator.new(version: :v1)
+
+          # Call method
+          response = client.batch_annotate_files(requests)
+
+          # Verify the response
+          assert_equal(expected_response, response)
+
+          # Call method with block
+          client.batch_annotate_files(requests) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
+        end
+      end
+    end
+
+    it 'invokes batch_annotate_files with error' do
+      # Create request parameters
+      requests = []
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Cloud::Vision::V1::BatchAnnotateFilesRequest, request)
+        requests = requests.map do |req|
+          Google::Gax::to_proto(req, Google::Cloud::Vision::V1::AnnotateFileRequest)
+        end
+        assert_equal(requests, request.requests)
+        raise custom_error
+      end
+      mock_stub = MockGrpcClientStub_v1.new(:batch_annotate_files, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockImageAnnotatorCredentials_v1.new("batch_annotate_files")
+
+      Google::Cloud::Vision::V1::ImageAnnotator::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Vision::ImageAnnotator.new(version: :v1)
+
+          # Call method
+          err = assert_raises Google::Gax::GaxError do
+            client.batch_annotate_files(requests)
+          end
+
+          # Verify the GaxError wrapped the custom error that was raised.
+          assert_match(custom_error.message, err.message)
+        end
+      end
+    end
+  end
+
+  describe 'async_batch_annotate_images' do
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Vision::V1::ImageAnnotatorClient#async_batch_annotate_images."
+
+    it 'invokes async_batch_annotate_images without error' do
+      # Create request parameters
+      requests = []
+      output_config = {}
+
+      # Create expected grpc response
+      expected_response = {}
+      expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Vision::V1::AsyncBatchAnnotateImagesResponse)
+      result = Google::Protobuf::Any.new
+      result.pack(expected_response)
+      operation = Google::Longrunning::Operation.new(
+        name: 'operations/async_batch_annotate_images_test',
+        done: true,
+        response: result
+      )
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Cloud::Vision::V1::AsyncBatchAnnotateImagesRequest, request)
+        requests = requests.map do |req|
+          Google::Gax::to_proto(req, Google::Cloud::Vision::V1::AnnotateImageRequest)
+        end
+        assert_equal(requests, request.requests)
+        assert_equal(Google::Gax::to_proto(output_config, Google::Cloud::Vision::V1::OutputConfig), request.output_config)
+        OpenStruct.new(execute: operation)
+      end
+      mock_stub = MockGrpcClientStub_v1.new(:async_batch_annotate_images, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockImageAnnotatorCredentials_v1.new("async_batch_annotate_images")
+
+      Google::Cloud::Vision::V1::ImageAnnotator::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Vision::ImageAnnotator.new(version: :v1)
+
+          # Call method
+          response = client.async_batch_annotate_images(requests, output_config)
+
+          # Verify the response
+          assert_equal(expected_response, response.response)
+        end
+      end
+    end
+
+    it 'invokes async_batch_annotate_images and returns an operation error.' do
+      # Create request parameters
+      requests = []
+      output_config = {}
+
+      # Create expected grpc response
+      operation_error = Google::Rpc::Status.new(
+        message: 'Operation error for Google::Cloud::Vision::V1::ImageAnnotatorClient#async_batch_annotate_images.'
+      )
+      operation = Google::Longrunning::Operation.new(
+        name: 'operations/async_batch_annotate_images_test',
+        done: true,
+        error: operation_error
+      )
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Cloud::Vision::V1::AsyncBatchAnnotateImagesRequest, request)
+        requests = requests.map do |req|
+          Google::Gax::to_proto(req, Google::Cloud::Vision::V1::AnnotateImageRequest)
+        end
+        assert_equal(requests, request.requests)
+        assert_equal(Google::Gax::to_proto(output_config, Google::Cloud::Vision::V1::OutputConfig), request.output_config)
+        OpenStruct.new(execute: operation)
+      end
+      mock_stub = MockGrpcClientStub_v1.new(:async_batch_annotate_images, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockImageAnnotatorCredentials_v1.new("async_batch_annotate_images")
+
+      Google::Cloud::Vision::V1::ImageAnnotator::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Vision::ImageAnnotator.new(version: :v1)
+
+          # Call method
+          response = client.async_batch_annotate_images(requests, output_config)
+
+          # Verify the response
+          assert(response.error?)
+          assert_equal(operation_error, response.error)
+        end
+      end
+    end
+
+    it 'invokes async_batch_annotate_images with error' do
+      # Create request parameters
+      requests = []
+      output_config = {}
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Cloud::Vision::V1::AsyncBatchAnnotateImagesRequest, request)
+        requests = requests.map do |req|
+          Google::Gax::to_proto(req, Google::Cloud::Vision::V1::AnnotateImageRequest)
+        end
+        assert_equal(requests, request.requests)
+        assert_equal(Google::Gax::to_proto(output_config, Google::Cloud::Vision::V1::OutputConfig), request.output_config)
+        raise custom_error
+      end
+      mock_stub = MockGrpcClientStub_v1.new(:async_batch_annotate_images, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockImageAnnotatorCredentials_v1.new("async_batch_annotate_images")
+
+      Google::Cloud::Vision::V1::ImageAnnotator::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Vision::ImageAnnotator.new(version: :v1)
+
+          # Call method
+          err = assert_raises Google::Gax::GaxError do
+            client.async_batch_annotate_images(requests, output_config)
+          end
+
+          # Verify the GaxError wrapped the custom error that was raised.
+          assert_match(custom_error.message, err.message)
+        end
+      end
+    end
+  end
+
   describe 'async_batch_annotate_files' do
     custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Vision::V1::ImageAnnotatorClient#async_batch_annotate_files."
 

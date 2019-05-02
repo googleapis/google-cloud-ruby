@@ -68,6 +68,376 @@ end
 
 describe Google::Cloud::Vision::V1::ProductSearchClient do
 
+  describe 'create_product_set' do
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Vision::V1::ProductSearchClient#create_product_set."
+
+    it 'invokes create_product_set without error' do
+      # Create request parameters
+      formatted_parent = Google::Cloud::Vision::V1::ProductSearchClient.location_path("[PROJECT]", "[LOCATION]")
+      product_set = {}
+
+      # Create expected grpc response
+      name = "name3373707"
+      display_name = "displayName1615086568"
+      expected_response = { name: name, display_name: display_name }
+      expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Vision::V1::ProductSet)
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Cloud::Vision::V1::CreateProductSetRequest, request)
+        assert_equal(formatted_parent, request.parent)
+        assert_equal(Google::Gax::to_proto(product_set, Google::Cloud::Vision::V1::ProductSet), request.product_set)
+        OpenStruct.new(execute: expected_response)
+      end
+      mock_stub = MockGrpcClientStub_v1.new(:create_product_set, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockProductSearchCredentials_v1.new("create_product_set")
+
+      Google::Cloud::Vision::V1::ProductSearch::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Vision::ProductSearch.new(version: :v1)
+
+          # Call method
+          response = client.create_product_set(formatted_parent, product_set)
+
+          # Verify the response
+          assert_equal(expected_response, response)
+
+          # Call method with block
+          client.create_product_set(formatted_parent, product_set) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
+        end
+      end
+    end
+
+    it 'invokes create_product_set with error' do
+      # Create request parameters
+      formatted_parent = Google::Cloud::Vision::V1::ProductSearchClient.location_path("[PROJECT]", "[LOCATION]")
+      product_set = {}
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Cloud::Vision::V1::CreateProductSetRequest, request)
+        assert_equal(formatted_parent, request.parent)
+        assert_equal(Google::Gax::to_proto(product_set, Google::Cloud::Vision::V1::ProductSet), request.product_set)
+        raise custom_error
+      end
+      mock_stub = MockGrpcClientStub_v1.new(:create_product_set, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockProductSearchCredentials_v1.new("create_product_set")
+
+      Google::Cloud::Vision::V1::ProductSearch::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Vision::ProductSearch.new(version: :v1)
+
+          # Call method
+          err = assert_raises Google::Gax::GaxError do
+            client.create_product_set(formatted_parent, product_set)
+          end
+
+          # Verify the GaxError wrapped the custom error that was raised.
+          assert_match(custom_error.message, err.message)
+        end
+      end
+    end
+  end
+
+  describe 'list_product_sets' do
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Vision::V1::ProductSearchClient#list_product_sets."
+
+    it 'invokes list_product_sets without error' do
+      # Create request parameters
+      formatted_parent = Google::Cloud::Vision::V1::ProductSearchClient.location_path("[PROJECT]", "[LOCATION]")
+
+      # Create expected grpc response
+      next_page_token = ""
+      product_sets_element = {}
+      product_sets = [product_sets_element]
+      expected_response = { next_page_token: next_page_token, product_sets: product_sets }
+      expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Vision::V1::ListProductSetsResponse)
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Cloud::Vision::V1::ListProductSetsRequest, request)
+        assert_equal(formatted_parent, request.parent)
+        OpenStruct.new(execute: expected_response)
+      end
+      mock_stub = MockGrpcClientStub_v1.new(:list_product_sets, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockProductSearchCredentials_v1.new("list_product_sets")
+
+      Google::Cloud::Vision::V1::ProductSearch::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Vision::ProductSearch.new(version: :v1)
+
+          # Call method
+          response = client.list_product_sets(formatted_parent)
+
+          # Verify the response
+          assert(response.instance_of?(Google::Gax::PagedEnumerable))
+          assert_equal(expected_response, response.page.response)
+          assert_nil(response.next_page)
+          assert_equal(expected_response.product_sets.to_a, response.to_a)
+        end
+      end
+    end
+
+    it 'invokes list_product_sets with error' do
+      # Create request parameters
+      formatted_parent = Google::Cloud::Vision::V1::ProductSearchClient.location_path("[PROJECT]", "[LOCATION]")
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Cloud::Vision::V1::ListProductSetsRequest, request)
+        assert_equal(formatted_parent, request.parent)
+        raise custom_error
+      end
+      mock_stub = MockGrpcClientStub_v1.new(:list_product_sets, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockProductSearchCredentials_v1.new("list_product_sets")
+
+      Google::Cloud::Vision::V1::ProductSearch::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Vision::ProductSearch.new(version: :v1)
+
+          # Call method
+          err = assert_raises Google::Gax::GaxError do
+            client.list_product_sets(formatted_parent)
+          end
+
+          # Verify the GaxError wrapped the custom error that was raised.
+          assert_match(custom_error.message, err.message)
+        end
+      end
+    end
+  end
+
+  describe 'get_product_set' do
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Vision::V1::ProductSearchClient#get_product_set."
+
+    it 'invokes get_product_set without error' do
+      # Create request parameters
+      formatted_name = Google::Cloud::Vision::V1::ProductSearchClient.product_set_path("[PROJECT]", "[LOCATION]", "[PRODUCT_SET]")
+
+      # Create expected grpc response
+      name_2 = "name2-1052831874"
+      display_name = "displayName1615086568"
+      expected_response = { name: name_2, display_name: display_name }
+      expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Vision::V1::ProductSet)
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Cloud::Vision::V1::GetProductSetRequest, request)
+        assert_equal(formatted_name, request.name)
+        OpenStruct.new(execute: expected_response)
+      end
+      mock_stub = MockGrpcClientStub_v1.new(:get_product_set, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockProductSearchCredentials_v1.new("get_product_set")
+
+      Google::Cloud::Vision::V1::ProductSearch::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Vision::ProductSearch.new(version: :v1)
+
+          # Call method
+          response = client.get_product_set(formatted_name)
+
+          # Verify the response
+          assert_equal(expected_response, response)
+
+          # Call method with block
+          client.get_product_set(formatted_name) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
+        end
+      end
+    end
+
+    it 'invokes get_product_set with error' do
+      # Create request parameters
+      formatted_name = Google::Cloud::Vision::V1::ProductSearchClient.product_set_path("[PROJECT]", "[LOCATION]", "[PRODUCT_SET]")
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Cloud::Vision::V1::GetProductSetRequest, request)
+        assert_equal(formatted_name, request.name)
+        raise custom_error
+      end
+      mock_stub = MockGrpcClientStub_v1.new(:get_product_set, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockProductSearchCredentials_v1.new("get_product_set")
+
+      Google::Cloud::Vision::V1::ProductSearch::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Vision::ProductSearch.new(version: :v1)
+
+          # Call method
+          err = assert_raises Google::Gax::GaxError do
+            client.get_product_set(formatted_name)
+          end
+
+          # Verify the GaxError wrapped the custom error that was raised.
+          assert_match(custom_error.message, err.message)
+        end
+      end
+    end
+  end
+
+  describe 'update_product_set' do
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Vision::V1::ProductSearchClient#update_product_set."
+
+    it 'invokes update_product_set without error' do
+      # Create request parameters
+      product_set = {}
+
+      # Create expected grpc response
+      name = "name3373707"
+      display_name = "displayName1615086568"
+      expected_response = { name: name, display_name: display_name }
+      expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Vision::V1::ProductSet)
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Cloud::Vision::V1::UpdateProductSetRequest, request)
+        assert_equal(Google::Gax::to_proto(product_set, Google::Cloud::Vision::V1::ProductSet), request.product_set)
+        OpenStruct.new(execute: expected_response)
+      end
+      mock_stub = MockGrpcClientStub_v1.new(:update_product_set, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockProductSearchCredentials_v1.new("update_product_set")
+
+      Google::Cloud::Vision::V1::ProductSearch::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Vision::ProductSearch.new(version: :v1)
+
+          # Call method
+          response = client.update_product_set(product_set)
+
+          # Verify the response
+          assert_equal(expected_response, response)
+
+          # Call method with block
+          client.update_product_set(product_set) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
+        end
+      end
+    end
+
+    it 'invokes update_product_set with error' do
+      # Create request parameters
+      product_set = {}
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Cloud::Vision::V1::UpdateProductSetRequest, request)
+        assert_equal(Google::Gax::to_proto(product_set, Google::Cloud::Vision::V1::ProductSet), request.product_set)
+        raise custom_error
+      end
+      mock_stub = MockGrpcClientStub_v1.new(:update_product_set, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockProductSearchCredentials_v1.new("update_product_set")
+
+      Google::Cloud::Vision::V1::ProductSearch::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Vision::ProductSearch.new(version: :v1)
+
+          # Call method
+          err = assert_raises Google::Gax::GaxError do
+            client.update_product_set(product_set)
+          end
+
+          # Verify the GaxError wrapped the custom error that was raised.
+          assert_match(custom_error.message, err.message)
+        end
+      end
+    end
+  end
+
+  describe 'delete_product_set' do
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Vision::V1::ProductSearchClient#delete_product_set."
+
+    it 'invokes delete_product_set without error' do
+      # Create request parameters
+      formatted_name = Google::Cloud::Vision::V1::ProductSearchClient.product_set_path("[PROJECT]", "[LOCATION]", "[PRODUCT_SET]")
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Cloud::Vision::V1::DeleteProductSetRequest, request)
+        assert_equal(formatted_name, request.name)
+        OpenStruct.new(execute: nil)
+      end
+      mock_stub = MockGrpcClientStub_v1.new(:delete_product_set, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockProductSearchCredentials_v1.new("delete_product_set")
+
+      Google::Cloud::Vision::V1::ProductSearch::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Vision::ProductSearch.new(version: :v1)
+
+          # Call method
+          response = client.delete_product_set(formatted_name)
+
+          # Verify the response
+          assert_nil(response)
+
+          # Call method with block
+          client.delete_product_set(formatted_name) do |response, operation|
+            # Verify the response
+            assert_nil(response)
+            refute_nil(operation)
+          end
+        end
+      end
+    end
+
+    it 'invokes delete_product_set with error' do
+      # Create request parameters
+      formatted_name = Google::Cloud::Vision::V1::ProductSearchClient.product_set_path("[PROJECT]", "[LOCATION]", "[PRODUCT_SET]")
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Cloud::Vision::V1::DeleteProductSetRequest, request)
+        assert_equal(formatted_name, request.name)
+        raise custom_error
+      end
+      mock_stub = MockGrpcClientStub_v1.new(:delete_product_set, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockProductSearchCredentials_v1.new("delete_product_set")
+
+      Google::Cloud::Vision::V1::ProductSearch::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Vision::ProductSearch.new(version: :v1)
+
+          # Call method
+          err = assert_raises Google::Gax::GaxError do
+            client.delete_product_set(formatted_name)
+          end
+
+          # Verify the GaxError wrapped the custom error that was raised.
+          assert_match(custom_error.message, err.message)
+        end
+      end
+    end
+  end
+
   describe 'create_product' do
     custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Vision::V1::ProductSearchClient#create_product."
 
@@ -459,6 +829,154 @@ describe Google::Cloud::Vision::V1::ProductSearchClient do
     end
   end
 
+  describe 'create_reference_image' do
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Vision::V1::ProductSearchClient#create_reference_image."
+
+    it 'invokes create_reference_image without error' do
+      # Create request parameters
+      formatted_parent = Google::Cloud::Vision::V1::ProductSearchClient.product_path("[PROJECT]", "[LOCATION]", "[PRODUCT]")
+      reference_image = {}
+
+      # Create expected grpc response
+      name = "name3373707"
+      uri = "uri116076"
+      expected_response = { name: name, uri: uri }
+      expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Vision::V1::ReferenceImage)
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Cloud::Vision::V1::CreateReferenceImageRequest, request)
+        assert_equal(formatted_parent, request.parent)
+        assert_equal(Google::Gax::to_proto(reference_image, Google::Cloud::Vision::V1::ReferenceImage), request.reference_image)
+        OpenStruct.new(execute: expected_response)
+      end
+      mock_stub = MockGrpcClientStub_v1.new(:create_reference_image, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockProductSearchCredentials_v1.new("create_reference_image")
+
+      Google::Cloud::Vision::V1::ProductSearch::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Vision::ProductSearch.new(version: :v1)
+
+          # Call method
+          response = client.create_reference_image(formatted_parent, reference_image)
+
+          # Verify the response
+          assert_equal(expected_response, response)
+
+          # Call method with block
+          client.create_reference_image(formatted_parent, reference_image) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
+        end
+      end
+    end
+
+    it 'invokes create_reference_image with error' do
+      # Create request parameters
+      formatted_parent = Google::Cloud::Vision::V1::ProductSearchClient.product_path("[PROJECT]", "[LOCATION]", "[PRODUCT]")
+      reference_image = {}
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Cloud::Vision::V1::CreateReferenceImageRequest, request)
+        assert_equal(formatted_parent, request.parent)
+        assert_equal(Google::Gax::to_proto(reference_image, Google::Cloud::Vision::V1::ReferenceImage), request.reference_image)
+        raise custom_error
+      end
+      mock_stub = MockGrpcClientStub_v1.new(:create_reference_image, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockProductSearchCredentials_v1.new("create_reference_image")
+
+      Google::Cloud::Vision::V1::ProductSearch::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Vision::ProductSearch.new(version: :v1)
+
+          # Call method
+          err = assert_raises Google::Gax::GaxError do
+            client.create_reference_image(formatted_parent, reference_image)
+          end
+
+          # Verify the GaxError wrapped the custom error that was raised.
+          assert_match(custom_error.message, err.message)
+        end
+      end
+    end
+  end
+
+  describe 'delete_reference_image' do
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Vision::V1::ProductSearchClient#delete_reference_image."
+
+    it 'invokes delete_reference_image without error' do
+      # Create request parameters
+      formatted_name = Google::Cloud::Vision::V1::ProductSearchClient.reference_image_path("[PROJECT]", "[LOCATION]", "[PRODUCT]", "[REFERENCE_IMAGE]")
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Cloud::Vision::V1::DeleteReferenceImageRequest, request)
+        assert_equal(formatted_name, request.name)
+        OpenStruct.new(execute: nil)
+      end
+      mock_stub = MockGrpcClientStub_v1.new(:delete_reference_image, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockProductSearchCredentials_v1.new("delete_reference_image")
+
+      Google::Cloud::Vision::V1::ProductSearch::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Vision::ProductSearch.new(version: :v1)
+
+          # Call method
+          response = client.delete_reference_image(formatted_name)
+
+          # Verify the response
+          assert_nil(response)
+
+          # Call method with block
+          client.delete_reference_image(formatted_name) do |response, operation|
+            # Verify the response
+            assert_nil(response)
+            refute_nil(operation)
+          end
+        end
+      end
+    end
+
+    it 'invokes delete_reference_image with error' do
+      # Create request parameters
+      formatted_name = Google::Cloud::Vision::V1::ProductSearchClient.reference_image_path("[PROJECT]", "[LOCATION]", "[PRODUCT]", "[REFERENCE_IMAGE]")
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Cloud::Vision::V1::DeleteReferenceImageRequest, request)
+        assert_equal(formatted_name, request.name)
+        raise custom_error
+      end
+      mock_stub = MockGrpcClientStub_v1.new(:delete_reference_image, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockProductSearchCredentials_v1.new("delete_reference_image")
+
+      Google::Cloud::Vision::V1::ProductSearch::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Vision::ProductSearch.new(version: :v1)
+
+          # Call method
+          err = assert_raises Google::Gax::GaxError do
+            client.delete_reference_image(formatted_name)
+          end
+
+          # Verify the GaxError wrapped the custom error that was raised.
+          assert_match(custom_error.message, err.message)
+        end
+      end
+    end
+  end
+
   describe 'list_reference_images' do
     custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Vision::V1::ProductSearchClient#list_reference_images."
 
@@ -602,524 +1120,6 @@ describe Google::Cloud::Vision::V1::ProductSearchClient do
           # Call method
           err = assert_raises Google::Gax::GaxError do
             client.get_reference_image(formatted_name)
-          end
-
-          # Verify the GaxError wrapped the custom error that was raised.
-          assert_match(custom_error.message, err.message)
-        end
-      end
-    end
-  end
-
-  describe 'delete_reference_image' do
-    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Vision::V1::ProductSearchClient#delete_reference_image."
-
-    it 'invokes delete_reference_image without error' do
-      # Create request parameters
-      formatted_name = Google::Cloud::Vision::V1::ProductSearchClient.reference_image_path("[PROJECT]", "[LOCATION]", "[PRODUCT]", "[REFERENCE_IMAGE]")
-
-      # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::Vision::V1::DeleteReferenceImageRequest, request)
-        assert_equal(formatted_name, request.name)
-        OpenStruct.new(execute: nil)
-      end
-      mock_stub = MockGrpcClientStub_v1.new(:delete_reference_image, mock_method)
-
-      # Mock auth layer
-      mock_credentials = MockProductSearchCredentials_v1.new("delete_reference_image")
-
-      Google::Cloud::Vision::V1::ProductSearch::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Vision::ProductSearch.new(version: :v1)
-
-          # Call method
-          response = client.delete_reference_image(formatted_name)
-
-          # Verify the response
-          assert_nil(response)
-
-          # Call method with block
-          client.delete_reference_image(formatted_name) do |response, operation|
-            # Verify the response
-            assert_nil(response)
-            refute_nil(operation)
-          end
-        end
-      end
-    end
-
-    it 'invokes delete_reference_image with error' do
-      # Create request parameters
-      formatted_name = Google::Cloud::Vision::V1::ProductSearchClient.reference_image_path("[PROJECT]", "[LOCATION]", "[PRODUCT]", "[REFERENCE_IMAGE]")
-
-      # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::Vision::V1::DeleteReferenceImageRequest, request)
-        assert_equal(formatted_name, request.name)
-        raise custom_error
-      end
-      mock_stub = MockGrpcClientStub_v1.new(:delete_reference_image, mock_method)
-
-      # Mock auth layer
-      mock_credentials = MockProductSearchCredentials_v1.new("delete_reference_image")
-
-      Google::Cloud::Vision::V1::ProductSearch::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Vision::ProductSearch.new(version: :v1)
-
-          # Call method
-          err = assert_raises Google::Gax::GaxError do
-            client.delete_reference_image(formatted_name)
-          end
-
-          # Verify the GaxError wrapped the custom error that was raised.
-          assert_match(custom_error.message, err.message)
-        end
-      end
-    end
-  end
-
-  describe 'create_reference_image' do
-    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Vision::V1::ProductSearchClient#create_reference_image."
-
-    it 'invokes create_reference_image without error' do
-      # Create request parameters
-      formatted_parent = Google::Cloud::Vision::V1::ProductSearchClient.product_path("[PROJECT]", "[LOCATION]", "[PRODUCT]")
-      reference_image = {}
-
-      # Create expected grpc response
-      name = "name3373707"
-      uri = "uri116076"
-      expected_response = { name: name, uri: uri }
-      expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Vision::V1::ReferenceImage)
-
-      # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::Vision::V1::CreateReferenceImageRequest, request)
-        assert_equal(formatted_parent, request.parent)
-        assert_equal(Google::Gax::to_proto(reference_image, Google::Cloud::Vision::V1::ReferenceImage), request.reference_image)
-        OpenStruct.new(execute: expected_response)
-      end
-      mock_stub = MockGrpcClientStub_v1.new(:create_reference_image, mock_method)
-
-      # Mock auth layer
-      mock_credentials = MockProductSearchCredentials_v1.new("create_reference_image")
-
-      Google::Cloud::Vision::V1::ProductSearch::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Vision::ProductSearch.new(version: :v1)
-
-          # Call method
-          response = client.create_reference_image(formatted_parent, reference_image)
-
-          # Verify the response
-          assert_equal(expected_response, response)
-
-          # Call method with block
-          client.create_reference_image(formatted_parent, reference_image) do |response, operation|
-            # Verify the response
-            assert_equal(expected_response, response)
-            refute_nil(operation)
-          end
-        end
-      end
-    end
-
-    it 'invokes create_reference_image with error' do
-      # Create request parameters
-      formatted_parent = Google::Cloud::Vision::V1::ProductSearchClient.product_path("[PROJECT]", "[LOCATION]", "[PRODUCT]")
-      reference_image = {}
-
-      # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::Vision::V1::CreateReferenceImageRequest, request)
-        assert_equal(formatted_parent, request.parent)
-        assert_equal(Google::Gax::to_proto(reference_image, Google::Cloud::Vision::V1::ReferenceImage), request.reference_image)
-        raise custom_error
-      end
-      mock_stub = MockGrpcClientStub_v1.new(:create_reference_image, mock_method)
-
-      # Mock auth layer
-      mock_credentials = MockProductSearchCredentials_v1.new("create_reference_image")
-
-      Google::Cloud::Vision::V1::ProductSearch::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Vision::ProductSearch.new(version: :v1)
-
-          # Call method
-          err = assert_raises Google::Gax::GaxError do
-            client.create_reference_image(formatted_parent, reference_image)
-          end
-
-          # Verify the GaxError wrapped the custom error that was raised.
-          assert_match(custom_error.message, err.message)
-        end
-      end
-    end
-  end
-
-  describe 'create_product_set' do
-    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Vision::V1::ProductSearchClient#create_product_set."
-
-    it 'invokes create_product_set without error' do
-      # Create request parameters
-      formatted_parent = Google::Cloud::Vision::V1::ProductSearchClient.location_path("[PROJECT]", "[LOCATION]")
-      product_set = {}
-
-      # Create expected grpc response
-      name = "name3373707"
-      display_name = "displayName1615086568"
-      expected_response = { name: name, display_name: display_name }
-      expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Vision::V1::ProductSet)
-
-      # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::Vision::V1::CreateProductSetRequest, request)
-        assert_equal(formatted_parent, request.parent)
-        assert_equal(Google::Gax::to_proto(product_set, Google::Cloud::Vision::V1::ProductSet), request.product_set)
-        OpenStruct.new(execute: expected_response)
-      end
-      mock_stub = MockGrpcClientStub_v1.new(:create_product_set, mock_method)
-
-      # Mock auth layer
-      mock_credentials = MockProductSearchCredentials_v1.new("create_product_set")
-
-      Google::Cloud::Vision::V1::ProductSearch::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Vision::ProductSearch.new(version: :v1)
-
-          # Call method
-          response = client.create_product_set(formatted_parent, product_set)
-
-          # Verify the response
-          assert_equal(expected_response, response)
-
-          # Call method with block
-          client.create_product_set(formatted_parent, product_set) do |response, operation|
-            # Verify the response
-            assert_equal(expected_response, response)
-            refute_nil(operation)
-          end
-        end
-      end
-    end
-
-    it 'invokes create_product_set with error' do
-      # Create request parameters
-      formatted_parent = Google::Cloud::Vision::V1::ProductSearchClient.location_path("[PROJECT]", "[LOCATION]")
-      product_set = {}
-
-      # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::Vision::V1::CreateProductSetRequest, request)
-        assert_equal(formatted_parent, request.parent)
-        assert_equal(Google::Gax::to_proto(product_set, Google::Cloud::Vision::V1::ProductSet), request.product_set)
-        raise custom_error
-      end
-      mock_stub = MockGrpcClientStub_v1.new(:create_product_set, mock_method)
-
-      # Mock auth layer
-      mock_credentials = MockProductSearchCredentials_v1.new("create_product_set")
-
-      Google::Cloud::Vision::V1::ProductSearch::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Vision::ProductSearch.new(version: :v1)
-
-          # Call method
-          err = assert_raises Google::Gax::GaxError do
-            client.create_product_set(formatted_parent, product_set)
-          end
-
-          # Verify the GaxError wrapped the custom error that was raised.
-          assert_match(custom_error.message, err.message)
-        end
-      end
-    end
-  end
-
-  describe 'list_product_sets' do
-    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Vision::V1::ProductSearchClient#list_product_sets."
-
-    it 'invokes list_product_sets without error' do
-      # Create request parameters
-      formatted_parent = Google::Cloud::Vision::V1::ProductSearchClient.location_path("[PROJECT]", "[LOCATION]")
-
-      # Create expected grpc response
-      next_page_token = ""
-      product_sets_element = {}
-      product_sets = [product_sets_element]
-      expected_response = { next_page_token: next_page_token, product_sets: product_sets }
-      expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Vision::V1::ListProductSetsResponse)
-
-      # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::Vision::V1::ListProductSetsRequest, request)
-        assert_equal(formatted_parent, request.parent)
-        OpenStruct.new(execute: expected_response)
-      end
-      mock_stub = MockGrpcClientStub_v1.new(:list_product_sets, mock_method)
-
-      # Mock auth layer
-      mock_credentials = MockProductSearchCredentials_v1.new("list_product_sets")
-
-      Google::Cloud::Vision::V1::ProductSearch::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Vision::ProductSearch.new(version: :v1)
-
-          # Call method
-          response = client.list_product_sets(formatted_parent)
-
-          # Verify the response
-          assert(response.instance_of?(Google::Gax::PagedEnumerable))
-          assert_equal(expected_response, response.page.response)
-          assert_nil(response.next_page)
-          assert_equal(expected_response.product_sets.to_a, response.to_a)
-        end
-      end
-    end
-
-    it 'invokes list_product_sets with error' do
-      # Create request parameters
-      formatted_parent = Google::Cloud::Vision::V1::ProductSearchClient.location_path("[PROJECT]", "[LOCATION]")
-
-      # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::Vision::V1::ListProductSetsRequest, request)
-        assert_equal(formatted_parent, request.parent)
-        raise custom_error
-      end
-      mock_stub = MockGrpcClientStub_v1.new(:list_product_sets, mock_method)
-
-      # Mock auth layer
-      mock_credentials = MockProductSearchCredentials_v1.new("list_product_sets")
-
-      Google::Cloud::Vision::V1::ProductSearch::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Vision::ProductSearch.new(version: :v1)
-
-          # Call method
-          err = assert_raises Google::Gax::GaxError do
-            client.list_product_sets(formatted_parent)
-          end
-
-          # Verify the GaxError wrapped the custom error that was raised.
-          assert_match(custom_error.message, err.message)
-        end
-      end
-    end
-  end
-
-  describe 'get_product_set' do
-    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Vision::V1::ProductSearchClient#get_product_set."
-
-    it 'invokes get_product_set without error' do
-      # Create request parameters
-      formatted_name = Google::Cloud::Vision::V1::ProductSearchClient.product_set_path("[PROJECT]", "[LOCATION]", "[PRODUCT_SET]")
-
-      # Create expected grpc response
-      name_2 = "name2-1052831874"
-      display_name = "displayName1615086568"
-      expected_response = { name: name_2, display_name: display_name }
-      expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Vision::V1::ProductSet)
-
-      # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::Vision::V1::GetProductSetRequest, request)
-        assert_equal(formatted_name, request.name)
-        OpenStruct.new(execute: expected_response)
-      end
-      mock_stub = MockGrpcClientStub_v1.new(:get_product_set, mock_method)
-
-      # Mock auth layer
-      mock_credentials = MockProductSearchCredentials_v1.new("get_product_set")
-
-      Google::Cloud::Vision::V1::ProductSearch::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Vision::ProductSearch.new(version: :v1)
-
-          # Call method
-          response = client.get_product_set(formatted_name)
-
-          # Verify the response
-          assert_equal(expected_response, response)
-
-          # Call method with block
-          client.get_product_set(formatted_name) do |response, operation|
-            # Verify the response
-            assert_equal(expected_response, response)
-            refute_nil(operation)
-          end
-        end
-      end
-    end
-
-    it 'invokes get_product_set with error' do
-      # Create request parameters
-      formatted_name = Google::Cloud::Vision::V1::ProductSearchClient.product_set_path("[PROJECT]", "[LOCATION]", "[PRODUCT_SET]")
-
-      # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::Vision::V1::GetProductSetRequest, request)
-        assert_equal(formatted_name, request.name)
-        raise custom_error
-      end
-      mock_stub = MockGrpcClientStub_v1.new(:get_product_set, mock_method)
-
-      # Mock auth layer
-      mock_credentials = MockProductSearchCredentials_v1.new("get_product_set")
-
-      Google::Cloud::Vision::V1::ProductSearch::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Vision::ProductSearch.new(version: :v1)
-
-          # Call method
-          err = assert_raises Google::Gax::GaxError do
-            client.get_product_set(formatted_name)
-          end
-
-          # Verify the GaxError wrapped the custom error that was raised.
-          assert_match(custom_error.message, err.message)
-        end
-      end
-    end
-  end
-
-  describe 'update_product_set' do
-    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Vision::V1::ProductSearchClient#update_product_set."
-
-    it 'invokes update_product_set without error' do
-      # Create request parameters
-      product_set = {}
-
-      # Create expected grpc response
-      name = "name3373707"
-      display_name = "displayName1615086568"
-      expected_response = { name: name, display_name: display_name }
-      expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Vision::V1::ProductSet)
-
-      # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::Vision::V1::UpdateProductSetRequest, request)
-        assert_equal(Google::Gax::to_proto(product_set, Google::Cloud::Vision::V1::ProductSet), request.product_set)
-        OpenStruct.new(execute: expected_response)
-      end
-      mock_stub = MockGrpcClientStub_v1.new(:update_product_set, mock_method)
-
-      # Mock auth layer
-      mock_credentials = MockProductSearchCredentials_v1.new("update_product_set")
-
-      Google::Cloud::Vision::V1::ProductSearch::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Vision::ProductSearch.new(version: :v1)
-
-          # Call method
-          response = client.update_product_set(product_set)
-
-          # Verify the response
-          assert_equal(expected_response, response)
-
-          # Call method with block
-          client.update_product_set(product_set) do |response, operation|
-            # Verify the response
-            assert_equal(expected_response, response)
-            refute_nil(operation)
-          end
-        end
-      end
-    end
-
-    it 'invokes update_product_set with error' do
-      # Create request parameters
-      product_set = {}
-
-      # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::Vision::V1::UpdateProductSetRequest, request)
-        assert_equal(Google::Gax::to_proto(product_set, Google::Cloud::Vision::V1::ProductSet), request.product_set)
-        raise custom_error
-      end
-      mock_stub = MockGrpcClientStub_v1.new(:update_product_set, mock_method)
-
-      # Mock auth layer
-      mock_credentials = MockProductSearchCredentials_v1.new("update_product_set")
-
-      Google::Cloud::Vision::V1::ProductSearch::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Vision::ProductSearch.new(version: :v1)
-
-          # Call method
-          err = assert_raises Google::Gax::GaxError do
-            client.update_product_set(product_set)
-          end
-
-          # Verify the GaxError wrapped the custom error that was raised.
-          assert_match(custom_error.message, err.message)
-        end
-      end
-    end
-  end
-
-  describe 'delete_product_set' do
-    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Vision::V1::ProductSearchClient#delete_product_set."
-
-    it 'invokes delete_product_set without error' do
-      # Create request parameters
-      formatted_name = Google::Cloud::Vision::V1::ProductSearchClient.product_set_path("[PROJECT]", "[LOCATION]", "[PRODUCT_SET]")
-
-      # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::Vision::V1::DeleteProductSetRequest, request)
-        assert_equal(formatted_name, request.name)
-        OpenStruct.new(execute: nil)
-      end
-      mock_stub = MockGrpcClientStub_v1.new(:delete_product_set, mock_method)
-
-      # Mock auth layer
-      mock_credentials = MockProductSearchCredentials_v1.new("delete_product_set")
-
-      Google::Cloud::Vision::V1::ProductSearch::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Vision::ProductSearch.new(version: :v1)
-
-          # Call method
-          response = client.delete_product_set(formatted_name)
-
-          # Verify the response
-          assert_nil(response)
-
-          # Call method with block
-          client.delete_product_set(formatted_name) do |response, operation|
-            # Verify the response
-            assert_nil(response)
-            refute_nil(operation)
-          end
-        end
-      end
-    end
-
-    it 'invokes delete_product_set with error' do
-      # Create request parameters
-      formatted_name = Google::Cloud::Vision::V1::ProductSearchClient.product_set_path("[PROJECT]", "[LOCATION]", "[PRODUCT_SET]")
-
-      # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::Vision::V1::DeleteProductSetRequest, request)
-        assert_equal(formatted_name, request.name)
-        raise custom_error
-      end
-      mock_stub = MockGrpcClientStub_v1.new(:delete_product_set, mock_method)
-
-      # Mock auth layer
-      mock_credentials = MockProductSearchCredentials_v1.new("delete_product_set")
-
-      Google::Cloud::Vision::V1::ProductSearch::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Vision::ProductSearch.new(version: :v1)
-
-          # Call method
-          err = assert_raises Google::Gax::GaxError do
-            client.delete_product_set(formatted_name)
           end
 
           # Verify the GaxError wrapped the custom error that was raised.
