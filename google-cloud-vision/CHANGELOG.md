@@ -1,5 +1,18 @@
 # Release History
 
+### 0.33.0 / 2019-05-02
+
+* Add ImageAnnotatorClient#batch_annotate_files
+  * Add AnnotateFileRequest
+  * Add BatchAnnotateFilesRequest
+  * Add BatchAnnotateFilesResponse
+* Add ImageAnnotatorClient#async_batch_annotate_images
+  * Add AsyncBatchAnnotateImagesRequest
+  * Add AsyncBatchAnnotateImagesResponse
+* Add AnnotateFileResponse#total_pages
+* Add InputConfig#content
+* Update documentation
+
 ### 0.32.3 / 2019-04-29
 
 * Add AUTHENTICATION.md guide.
