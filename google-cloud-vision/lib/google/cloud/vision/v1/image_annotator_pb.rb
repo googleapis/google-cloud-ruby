@@ -199,12 +199,25 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.cloud.vision.v1.AnnotateFileResponse" do
     optional :input_config, :message, 1, "google.cloud.vision.v1.InputConfig"
     repeated :responses, :message, 2, "google.cloud.vision.v1.AnnotateImageResponse"
+    optional :total_pages, :int32, 3
   end
   add_message "google.cloud.vision.v1.BatchAnnotateImagesRequest" do
     repeated :requests, :message, 1, "google.cloud.vision.v1.AnnotateImageRequest"
   end
   add_message "google.cloud.vision.v1.BatchAnnotateImagesResponse" do
     repeated :responses, :message, 1, "google.cloud.vision.v1.AnnotateImageResponse"
+  end
+  add_message "google.cloud.vision.v1.AnnotateFileRequest" do
+    optional :input_config, :message, 1, "google.cloud.vision.v1.InputConfig"
+    repeated :features, :message, 2, "google.cloud.vision.v1.Feature"
+    optional :image_context, :message, 3, "google.cloud.vision.v1.ImageContext"
+    repeated :pages, :int32, 4
+  end
+  add_message "google.cloud.vision.v1.BatchAnnotateFilesRequest" do
+    repeated :requests, :message, 1, "google.cloud.vision.v1.AnnotateFileRequest"
+  end
+  add_message "google.cloud.vision.v1.BatchAnnotateFilesResponse" do
+    repeated :responses, :message, 1, "google.cloud.vision.v1.AnnotateFileResponse"
   end
   add_message "google.cloud.vision.v1.AsyncAnnotateFileRequest" do
     optional :input_config, :message, 1, "google.cloud.vision.v1.InputConfig"
@@ -215,6 +228,13 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.cloud.vision.v1.AsyncAnnotateFileResponse" do
     optional :output_config, :message, 1, "google.cloud.vision.v1.OutputConfig"
   end
+  add_message "google.cloud.vision.v1.AsyncBatchAnnotateImagesRequest" do
+    repeated :requests, :message, 1, "google.cloud.vision.v1.AnnotateImageRequest"
+    optional :output_config, :message, 2, "google.cloud.vision.v1.OutputConfig"
+  end
+  add_message "google.cloud.vision.v1.AsyncBatchAnnotateImagesResponse" do
+    optional :output_config, :message, 1, "google.cloud.vision.v1.OutputConfig"
+  end
   add_message "google.cloud.vision.v1.AsyncBatchAnnotateFilesRequest" do
     repeated :requests, :message, 1, "google.cloud.vision.v1.AsyncAnnotateFileRequest"
   end
@@ -223,6 +243,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   end
   add_message "google.cloud.vision.v1.InputConfig" do
     optional :gcs_source, :message, 1, "google.cloud.vision.v1.GcsSource"
+    optional :content, :bytes, 3
     optional :mime_type, :string, 2
   end
   add_message "google.cloud.vision.v1.OutputConfig" do
@@ -288,8 +309,13 @@ module Google
         AnnotateFileResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vision.v1.AnnotateFileResponse").msgclass
         BatchAnnotateImagesRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vision.v1.BatchAnnotateImagesRequest").msgclass
         BatchAnnotateImagesResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vision.v1.BatchAnnotateImagesResponse").msgclass
+        AnnotateFileRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vision.v1.AnnotateFileRequest").msgclass
+        BatchAnnotateFilesRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vision.v1.BatchAnnotateFilesRequest").msgclass
+        BatchAnnotateFilesResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vision.v1.BatchAnnotateFilesResponse").msgclass
         AsyncAnnotateFileRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vision.v1.AsyncAnnotateFileRequest").msgclass
         AsyncAnnotateFileResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vision.v1.AsyncAnnotateFileResponse").msgclass
+        AsyncBatchAnnotateImagesRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vision.v1.AsyncBatchAnnotateImagesRequest").msgclass
+        AsyncBatchAnnotateImagesResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vision.v1.AsyncBatchAnnotateImagesResponse").msgclass
         AsyncBatchAnnotateFilesRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vision.v1.AsyncBatchAnnotateFilesRequest").msgclass
         AsyncBatchAnnotateFilesResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vision.v1.AsyncBatchAnnotateFilesResponse").msgclass
         InputConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vision.v1.InputConfig").msgclass

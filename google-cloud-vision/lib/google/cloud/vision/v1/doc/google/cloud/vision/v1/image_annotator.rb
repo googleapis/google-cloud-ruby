@@ -128,7 +128,7 @@ module Google
         # @!attribute [rw] bounding_poly
         #   @return [Google::Cloud::Vision::V1::BoundingPoly]
         #     The bounding polygon around the face. The coordinates of the bounding box
-        #     are in the original image's scale, as returned in `ImageParams`.
+        #     are in the original image's scale.
         #     The bounding box is computed to "frame" the face in accordance with human
         #     expectations. It is based on the landmarker results.
         #     Note that one or more x and/or y coordinates may not be generated in the
@@ -459,7 +459,7 @@ module Google
         # @!attribute [rw] bounding_poly
         #   @return [Google::Cloud::Vision::V1::BoundingPoly]
         #     The bounding polygon for the crop region. The coordinates of the bounding
-        #     box are in the original image's scale, as returned in `ImageParams`.
+        #     box are in the original image's scale.
         # @!attribute [rw] confidence
         #   @return [Float]
         #     Confidence of this being a salient region.  Range [0, 1].
@@ -518,7 +518,7 @@ module Google
         class ImageContext; end
 
         # Request for performing Google Cloud Vision API tasks over a user-provided
-        # image, with user-requested features.
+        # image, with user-requested features, and with context information.
         # @!attribute [rw] image
         #   @return [Google::Cloud::Vision::V1::Image]
         #     The image to be processed.
@@ -601,6 +601,9 @@ module Google
         # @!attribute [rw] responses
         #   @return [Array<Google::Cloud::Vision::V1::AnnotateImageResponse>]
         #     Individual responses to images found within the file.
+        # @!attribute [rw] total_pages
+        #   @return [Integer]
+        #     This field gives the total number of pages in the file.
         class AnnotateFileResponse; end
 
         # Multiple image annotation requests are batched into a single service call.
@@ -614,6 +617,48 @@ module Google
         #   @return [Array<Google::Cloud::Vision::V1::AnnotateImageResponse>]
         #     Individual responses to image annotation requests within the batch.
         class BatchAnnotateImagesResponse; end
+
+        # A request to annotate one single file, e.g. a PDF, TIFF or GIF file.
+        # @!attribute [rw] input_config
+        #   @return [Google::Cloud::Vision::V1::InputConfig]
+        #     Required. Information about the input file.
+        # @!attribute [rw] features
+        #   @return [Array<Google::Cloud::Vision::V1::Feature>]
+        #     Required. Requested features.
+        # @!attribute [rw] image_context
+        #   @return [Google::Cloud::Vision::V1::ImageContext]
+        #     Additional context that may accompany the image(s) in the file.
+        # @!attribute [rw] pages
+        #   @return [Array<Integer>]
+        #     Pages of the file to perform image annotation.
+        #
+        #     Pages starts from 1, we assume the first page of the file is page 1.
+        #     At most 5 pages are supported per request. Pages can be negative.
+        #
+        #     Page 1 means the first page.
+        #     Page 2 means the second page.
+        #     Page -1 means the last page.
+        #     Page -2 means the second to the last page.
+        #
+        #     If the file is GIF instead of PDF or TIFF, page refers to GIF frames.
+        #
+        #     If this field is empty, by default the service performs image annotation
+        #     for the first 5 pages of the file.
+        class AnnotateFileRequest; end
+
+        # A list of requests to annotate files using the BatchAnnotateFiles API.
+        # @!attribute [rw] requests
+        #   @return [Array<Google::Cloud::Vision::V1::AnnotateFileRequest>]
+        #     The list of file annotation requests. Right now we support only one
+        #     AnnotateFileRequest in BatchAnnotateFilesRequest.
+        class BatchAnnotateFilesRequest; end
+
+        # A list of file annotation responses.
+        # @!attribute [rw] responses
+        #   @return [Array<Google::Cloud::Vision::V1::AnnotateFileResponse>]
+        #     The list of file annotation responses, each response corresponding to each
+        #     AnnotateFileRequest in BatchAnnotateFilesRequest.
+        class BatchAnnotateFilesResponse; end
 
         # An offline file annotation request.
         # @!attribute [rw] input_config
@@ -636,6 +681,21 @@ module Google
         #     The output location and metadata from AsyncAnnotateFileRequest.
         class AsyncAnnotateFileResponse; end
 
+        # Request for async image annotation for a list of images.
+        # @!attribute [rw] requests
+        #   @return [Array<Google::Cloud::Vision::V1::AnnotateImageRequest>]
+        #     Individual image annotation requests for this batch.
+        # @!attribute [rw] output_config
+        #   @return [Google::Cloud::Vision::V1::OutputConfig]
+        #     Required. The desired output location and metadata (e.g. format).
+        class AsyncBatchAnnotateImagesRequest; end
+
+        # Response to an async batch image annotation request.
+        # @!attribute [rw] output_config
+        #   @return [Google::Cloud::Vision::V1::OutputConfig]
+        #     The output location and metadata from AsyncBatchAnnotateImagesRequest.
+        class AsyncBatchAnnotateImagesResponse; end
+
         # Multiple async file annotation requests are batched into a single service
         # call.
         # @!attribute [rw] requests
@@ -654,6 +714,14 @@ module Google
         # @!attribute [rw] gcs_source
         #   @return [Google::Cloud::Vision::V1::GcsSource]
         #     The Google Cloud Storage location to read the input from.
+        # @!attribute [rw] content
+        #   @return [String]
+        #     File content, represented as a stream of bytes.
+        #     Note: As with all `bytes` fields, protobuffers use a pure binary
+        #     representation, whereas JSON representations use base64.
+        #
+        #     Currently, this field only works for BatchAnnotateFiles requests. It does
+        #     not work for AsyncBatchAnnotateFiles requests.
         # @!attribute [rw] mime_type
         #   @return [String]
         #     The type of the file. Currently only "application/pdf" and "image/tiff"
@@ -689,16 +757,23 @@ module Google
         # The Google Cloud Storage location where the output will be written to.
         # @!attribute [rw] uri
         #   @return [String]
-        #     Google Cloud Storage URI where the results will be stored. Results will
-        #     be in JSON format and preceded by its corresponding input URI. This field
-        #     can either represent a single file, or a prefix for multiple outputs.
-        #     Prefixes must end in a `/`.
+        #     Google Cloud Storage URI prefix where the results will be stored. Results
+        #     will be in JSON format and preceded by its corresponding input URI prefix.
+        #     This field can either represent a gcs file prefix or gcs directory. In
+        #     either case, the uri should be unique because in order to get all of the
+        #     output files, you will need to do a wildcard gcs search on the uri prefix
+        #     you provide.
         #
         #     Examples:
         #
-        #     * File: gs://bucket-name/filename.json
-        #     * Prefix: gs://bucket-name/prefix/here/
-        #     * File: gs://bucket-name/prefix/here
+        #     * File Prefix: gs://bucket-name/here/filenameprefix   The output files
+        #       will be created in gs://bucket-name/here/ and the names of the
+        #       output files will begin with "filenameprefix".
+        #
+        #     * Directory Prefix: gs://bucket-name/some/location/   The output files
+        #       will be created in gs://bucket-name/some/location/ and the names of the
+        #       output files could be anything because there was no filename prefix
+        #       specified.
         #
         #     If multiple outputs, each response is still AnnotateFileResponse, each of
         #     which contains some subset of the full list of AnnotateImageResponse.

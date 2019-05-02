@@ -63,6 +63,17 @@ module Google
           #     (Deprecated) Overall relevancy score for the image.
           class WebImage; end
 
+          # Label to provide extra metadata for the web detection.
+          # @!attribute [rw] label
+          #   @return [String]
+          #     Label for extra metadata.
+          # @!attribute [rw] language_code
+          #   @return [String]
+          #     The BCP-47 language code for `label`, such as "en-US" or "sr-Latn".
+          #     For more information, see
+          #     http://www.unicode.org/reports/tr35/#Unicode_locale_identifier.
+          class WebLabel; end
+
           # Metadata for web pages.
           # @!attribute [rw] url
           #   @return [String]
@@ -84,17 +95,6 @@ module Google
           #     example an original image will likely have partial matching for its
           #     crops.
           class WebPage; end
-
-          # Label to provide extra metadata for the web detection.
-          # @!attribute [rw] label
-          #   @return [String]
-          #     Label for extra metadata.
-          # @!attribute [rw] language_code
-          #   @return [String]
-          #     The BCP-47 language code for `label`, such as "en-US" or "sr-Latn".
-          #     For more information, see
-          #     http://www.unicode.org/reports/tr35/#Unicode_locale_identifier.
-          class WebLabel; end
         end
       end
     end
