@@ -1,5 +1,5 @@
 {
-  "updateTime": "2019-05-01T10:41:52.557066Z",
+  "updateTime": "2019-05-03T10:41:19.156510Z",
   "sources": [
     {
       "generator": {
@@ -12,15 +12,15 @@
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "316b54c401ab9bc08ed71cb362915b9e7a23bb05",
-        "internalRef": "246014263"
+        "sha": "fe77c6737fda6d3c43cc4666aff7d27be61fbfb6",
+        "internalRef": "246437748"
       }
     },
     {
       "template": {
         "name": "ruby_library",
         "origin": "synthtool.gcp",
-        "version": "2019.4.10"
+        "version": "2019.5.2"
       }
     }
   ],
