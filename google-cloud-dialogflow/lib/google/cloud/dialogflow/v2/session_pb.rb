@@ -88,12 +88,6 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     value :TRANSCRIPT, 1
     value :END_OF_SINGLE_UTTERANCE, 2
   end
-  add_message "google.cloud.dialogflow.v2.InputAudioConfig" do
-    optional :audio_encoding, :enum, 1, "google.cloud.dialogflow.v2.AudioEncoding"
-    optional :sample_rate_hertz, :int32, 2
-    optional :language_code, :string, 3
-    repeated :phrase_hints, :string, 4
-  end
   add_message "google.cloud.dialogflow.v2.TextInput" do
     optional :text, :string, 1
     optional :language_code, :string, 2
@@ -113,16 +107,6 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :score, :float, 1
     optional :magnitude, :float, 2
   end
-  add_enum "google.cloud.dialogflow.v2.AudioEncoding" do
-    value :AUDIO_ENCODING_UNSPECIFIED, 0
-    value :AUDIO_ENCODING_LINEAR_16, 1
-    value :AUDIO_ENCODING_FLAC, 2
-    value :AUDIO_ENCODING_MULAW, 3
-    value :AUDIO_ENCODING_AMR, 4
-    value :AUDIO_ENCODING_AMR_WB, 5
-    value :AUDIO_ENCODING_OGG_OPUS, 6
-    value :AUDIO_ENCODING_SPEEX_WITH_HEADER_BYTE, 7
-  end
 end
 
 module Google
@@ -138,13 +122,11 @@ module Google
         StreamingDetectIntentResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.StreamingDetectIntentResponse").msgclass
         StreamingRecognitionResult = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.StreamingRecognitionResult").msgclass
         StreamingRecognitionResult::MessageType = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.StreamingRecognitionResult.MessageType").enummodule
-        InputAudioConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.InputAudioConfig").msgclass
         TextInput = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.TextInput").msgclass
         EventInput = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.EventInput").msgclass
         SentimentAnalysisRequestConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.SentimentAnalysisRequestConfig").msgclass
         SentimentAnalysisResult = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.SentimentAnalysisResult").msgclass
         Sentiment = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.Sentiment").msgclass
-        AudioEncoding = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.AudioEncoding").enummodule
       end
     end
   end
