@@ -213,9 +213,9 @@ entry = table.new_mutation_entry("user-1")
 entry.set_cell(
   "cf-1",
   "field-1",
-  "XYZ"
+  "XYZ",
   timestamp: Time.now.to_i * 1000 # Time stamp in milli seconds.
-).delete_from_column("cf2", "field02")
+).delete_cells("cf2", "field02")
 
 table.mutate_row(entry)
 ```
