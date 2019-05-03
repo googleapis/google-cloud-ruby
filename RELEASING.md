@@ -102,7 +102,7 @@ green, you may create a release as follows:
    gem, repeat steps 4 through 12 for the `stackdriver` gem.
 
 1. After your pull request has passed all checks and been approved by reviewers,
-   **Squash and merge** it. This will trigger a build on [Kokoro](#checking-the-status-of-kokoro-builds), which will create the [GitHub release summary](https://github.com/googleapis/google-cloud-ruby/releases) and build and push the gem to [rubygems](https://rubygems.org/). If yoshi-automation reports a failure creating the [GitHub release summary](https://github.com/googleapis/google-cloud-ruby/releases), file a bug on [releasetool's issue tracker](https://github.com/googleapis/releasetool/issues), and [write the release manually](writing-a-github-release-summary-manually). If yoshi-automation reports that the release build has failed, follow [these steps](#checking-the-status-of-kokoro-builds), selecting the Kokoro build titled "Kokoro - Release".
+   **Squash and merge** it. Do **not** delete the branch. [Kokoro](#checking-the-status-of-kokoro-builds) will create the [GitHub release summary](https://github.com/googleapis/google-cloud-ruby/releases) and build and push the gem to [rubygems](https://rubygems.org/). If yoshi-automation reports a failure creating the [GitHub release summary](https://github.com/googleapis/google-cloud-ruby/releases), file a bug on [releasetool's issue tracker](https://github.com/googleapis/releasetool/issues), and [write the release manually](writing-a-github-release-summary-manually). If yoshi-automation reports that the release build has failed, follow [these steps](#checking-the-status-of-kokoro-builds), selecting the Kokoro build titled "Kokoro - Release".
 
 1. If everything has gone successfully, [yoshi-automation](https://github.com/yoshi-automation) will post twice on the merged PR. Once to provide the status and link for the [GitHub release summary](https://github.com/googleapis/google-cloud-ruby/releases), and again to provide the status of the task to publish to [rubygems](https://rubygems.org/). At this point, please delete the branch created by releasetool in step 11(iv).
 
@@ -114,7 +114,7 @@ green, you may create a release as follows:
 
 1. Verify that the correct version of the gem was published on [rubygems](https://rubygems.org/).
 
-1. Verify that the [Kokoro Jobs](#checking-the-status-of-kokoro-builds) have succeeded.
+1. Verify that the [Kokoro Jobs](#checking-the-status-of-kokoro-builds) have succeeded. If so, you may now delete the branch belonging to the pull request. 
 
 High fives all around!
 
