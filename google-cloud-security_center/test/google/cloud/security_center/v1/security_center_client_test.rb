@@ -883,7 +883,7 @@ describe Google::Cloud::SecurityCenter::V1::SecurityCenterClient do
 
       # Create expected grpc response
       expected_response = {}
-      expected_response = Google::Gax::to_proto(expected_response, Google::Protobuf::Empty)
+      expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::SecurityCenter::V1::RunAssetDiscoveryResponse)
       result = Google::Protobuf::Any.new
       result.pack(expected_response)
       operation = Google::Longrunning::Operation.new(

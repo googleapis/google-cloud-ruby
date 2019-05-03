@@ -1435,7 +1435,7 @@ module Google
             operation = Google::Gax::Operation.new(
               @run_asset_discovery.call(req, options),
               @operations_client,
-              Google::Protobuf::Empty,
+              Google::Cloud::SecurityCenter::V1::RunAssetDiscoveryResponse,
               Google::Protobuf::Empty,
               call_options: options
             )
