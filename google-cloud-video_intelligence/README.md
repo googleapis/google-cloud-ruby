@@ -25,7 +25,7 @@ $ gem install google-cloud-video_intelligence
 require "google/cloud/video_intelligence"
 
 video_intelligence_client = Google::Cloud::VideoIntelligence.new
-input_uri = "gs://demomaker/cat.mp4"
+input_uri = "gs://videodemomaker/cat.mp4"
 features_element = :LABEL_DETECTION
 features = [features_element]
 
