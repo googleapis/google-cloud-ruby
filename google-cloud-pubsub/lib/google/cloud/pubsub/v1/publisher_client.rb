@@ -341,6 +341,14 @@ module Google
           #   response, then no constraints are in effect.
           #   A hash of the same form as `Google::Cloud::PubSub::V1::MessageStoragePolicy`
           #   can also be provided.
+          # @param kms_key_name [String]
+          #   The resource name of the Cloud KMS CryptoKey to be used to protect access
+          #   to messages published on this topic.
+          #
+          #   The expected format is `projects/*/locations/*/keyRings/*/cryptoKeys/*`.
+          #   <b>EXPERIMENTAL:</b> This feature is part of a closed alpha release. This
+          #   API might be changed in backward-incompatible ways and is not recommended
+          #   for production use. It is not subject to any SLA or deprecation policy.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -360,12 +368,14 @@ module Google
               name,
               labels: nil,
               message_storage_policy: nil,
+              kms_key_name: nil,
               options: nil,
               &block
             req = {
               name: name,
               labels: labels,
-              message_storage_policy: message_storage_policy
+              message_storage_policy: message_storage_policy,
+              kms_key_name: kms_key_name
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Cloud::PubSub::V1::Topic)
             @create_topic.call(req, options, &block)
