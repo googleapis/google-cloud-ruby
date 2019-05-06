@@ -153,7 +153,7 @@ module Google
           # Set the default values
           self.retries = 3
           self.http_codes = [500, 503]
-          self.reasons = %w[rateLimitExceeded userRateLimitExceeded]
+          self.reasons = ["rateLimitExceeded", "userRateLimitExceeded"]
           self.backoff = ->(retries) { sleep retries.to_i }
 
           def initialize options = {} #:nodoc:
