@@ -1,6 +1,6 @@
 # Release History
 
-### 0.2.0 / 2019-05-03
+### 0.2.0 / 2019-05-06
 
 * Update SecurityCenterClient#run_asset_discovery response value.
   * The long running Operation response type has been updated to
