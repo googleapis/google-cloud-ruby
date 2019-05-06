@@ -3,7 +3,6 @@
     "google.spanner.v1.Spanner": {
       "retry_codes": {
         "idempotent": [
-          "DEADLINE_EXCEEDED",
           "UNAVAILABLE"
         ],
         "non_idempotent": [],
