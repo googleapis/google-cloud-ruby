@@ -217,7 +217,7 @@ module Google
         #     "field-1",
         #     "XYZ",
         #     timestamp: Time.now.to_i * 1000 # Time stamp in micro seconds.
-        #   ).delete_from_column("cf2", "field02")
+        #   ).delete_cells("cf2", "field02")
         #
         #   otherwise_mutations = Google::Cloud::Bigtable::MutationEntry.new
         #   otherwise_mutations.delete_from_family("cf3")

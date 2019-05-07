@@ -96,7 +96,7 @@ module Google
         #   entry.set_cell(
         #     "cf-1",
         #     "field-1",
-        #     "XYZ"
+        #     "XYZ",
         #     timestamp: Time.now.to_i * 1000 # Time stamp in millis seconds.
         #   )
         #
