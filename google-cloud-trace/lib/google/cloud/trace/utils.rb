@@ -32,10 +32,11 @@ module Google
 
           # This is called with different types of objects. Extract
           # the nanoseconds appropriately.
-          nanos = case time.class
-                  when Time
+          puts "SEPH: ", time.class, time
+          nanos = case
+                  when time.is_a?(Time)
                     time.nsec
-                  when Float
+                  when time.is_a?(Float)
                     # Float only appear to have 6 digits of precision. Toss the rest. :shrug:
                     (time.modulo(1) * 1_000_000).truncate * 1_000
                   else
