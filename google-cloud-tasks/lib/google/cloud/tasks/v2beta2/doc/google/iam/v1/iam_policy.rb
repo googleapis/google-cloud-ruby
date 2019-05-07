@@ -20,8 +20,7 @@ module Google
       # @!attribute [rw] resource
       #   @return [String]
       #     REQUIRED: The resource for which the policy is being specified.
-      #     `resource` is usually specified as a path. For example, a Project
-      #     resource is specified as `projects/{project}`.
+      #     See the operation documentation for the appropriate value for this field.
       # @!attribute [rw] policy
       #   @return [Google::Iam::V1::Policy]
       #     REQUIRED: The complete policy to be applied to the `resource`. The size of
@@ -34,16 +33,14 @@ module Google
       # @!attribute [rw] resource
       #   @return [String]
       #     REQUIRED: The resource for which the policy is being requested.
-      #     `resource` is usually specified as a path. For example, a Project
-      #     resource is specified as `projects/{project}`.
+      #     See the operation documentation for the appropriate value for this field.
       class GetIamPolicyRequest; end
 
       # Request message for `TestIamPermissions` method.
       # @!attribute [rw] resource
       #   @return [String]
       #     REQUIRED: The resource for which the policy detail is being requested.
-      #     `resource` is usually specified as a path. For example, a Project
-      #     resource is specified as `projects/{project}`.
+      #     See the operation documentation for the appropriate value for this field.
       # @!attribute [rw] permissions
       #   @return [Array<String>]
       #     The set of permissions to check for the `resource`. Permissions with
