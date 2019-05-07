@@ -32,7 +32,6 @@ module Google
 
           # This is called with different types of objects. Extract
           # the nanoseconds appropriately.
-          puts "SEPH: ", time.class, time
           nanos = case
                   when time.is_a?(Time)
                     time.nsec
