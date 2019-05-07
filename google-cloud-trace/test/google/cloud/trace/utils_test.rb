@@ -20,6 +20,10 @@ describe Google::Cloud::Trace::Utils do
   let(:time_proto) {
     Google::Protobuf::Timestamp.new seconds: secs, nanos: nsecs
   }
+  let(:time_proto_truncated) {
+    Google::Protobuf::Timestamp.new seconds: secs, nanos: 1000 * (nsecs / 1000)
+  }
+
   let(:time_obj) {
     Time.at(secs, Rational(nsecs, 1000))
   }
@@ -27,6 +31,12 @@ describe Google::Cloud::Trace::Utils do
   it "converts time objects to proto objects" do
     Google::Cloud::Trace::Utils.time_to_grpc(time_obj).must_equal time_proto
   end
+
+  it "converts float objects to proto objects" do
+    Google::Cloud::Trace::Utils.time_to_grpc(secs + nsecs.to_f / 1000000000).must_equal time_proto_truncated
+  end
+
+
 
   it "converts proto objects to time objects" do
     Google::Cloud::Trace::Utils.grpc_to_time(time_proto).must_equal time_obj

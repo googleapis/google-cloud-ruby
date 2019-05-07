@@ -29,8 +29,21 @@ module Google
         #
         def self.time_to_grpc time
           return nil if time.nil?
+
+          # This is called with different types of objects. Extract
+          # the nanoseconds appropriately.
+          nanos = case time.class
+                  when Time
+                    time.nsec
+                  when Float
+                    # Float only appear to have 6 digits of precision. Toss the rest. :shrug:
+                    (time.modulo(1) * 1_000_000).truncate * 1_000
+                  else
+                    0
+                  end
+
           Google::Protobuf::Timestamp.new seconds: time.to_i,
-                                          nanos: time.nsec
+                                          nanos: nanos
         end
 
         ##
