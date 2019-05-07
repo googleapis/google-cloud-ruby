@@ -30,20 +30,14 @@ module Google
         def self.time_to_grpc time
           return nil if time.nil?
 
-          # This is called with different types of objects. Extract
-          # the nanoseconds appropriately.
-          nanos = case
-                  when time.is_a?(Time)
-                    time.nsec
-                  when time.is_a?(Float)
-                    # Float only appear to have 6 digits of precision. Toss the rest. :shrug:
-                    (time.modulo(1) * 1_000_000).truncate * 1_000
-                  else
-                    0
-                  end
+          # sometimes this gets called with time as a float or
+          # int. Coerce into a time object, and move on.
+          time = Time.at(time) if time.is_a? Numeric
+
+          raise ArgumentError unless time.is_a? Time
 
           Google::Protobuf::Timestamp.new seconds: time.to_i,
-                                          nanos: nanos
+                                          nanos: time.nsec
         end
 
         ##
