@@ -30,6 +30,7 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
                          "responseHeader" => ["X-My-Custom-Header"] }] }
   let(:bucket_lifecycle) { {"rule" => [{"action" => {"storageClass" => "NEARLINE","type" => "SetStorageClass"},"condition" => {"age" => 32}}]} }
   let(:bucket_location) { "US" }
+  let(:bucket_location_type) { "MULTI_REGION" }
   let(:bucket_logging_bucket) { "bucket-name-logging" }
   let(:bucket_logging_prefix) { "AccessLog" }
   let(:bucket_storage_class) { "STANDARD" }
@@ -56,6 +57,7 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
     bucket_complete.created_at.must_be_within_delta bucket_complete_hash["timeCreated"].to_datetime
     bucket_complete.api_url.must_equal bucket_url
     bucket_complete.location.must_equal bucket_location
+    bucket_complete.location_type.must_equal bucket_location_type
     bucket_complete.logging_bucket.must_equal bucket_logging_bucket
     bucket_complete.logging_prefix.must_equal bucket_logging_prefix
     bucket_complete.storage_class.must_equal bucket_storage_class

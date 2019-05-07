@@ -286,6 +286,15 @@ module Google
         end
 
         ##
+        # The type of the bucket location.
+        #
+        # @return [String]
+        #
+        def location_type
+          @gapi.location_type
+        end
+
+        ##
         # The destination bucket name for the bucket's logs.
         #
         # @return [String]
