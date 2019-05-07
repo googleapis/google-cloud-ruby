@@ -40,8 +40,8 @@ describe Google::Cloud::Asset::V1::AssetServiceClient do
   describe "the project_path instance method" do
     it "correctly calls Google::Cloud::Asset::V1::AssetServiceClient.project_path" do
       Google::Cloud::Asset::V1::Credentials.stub(:default, mock_credentials) do
-        parameters = Google::Cloud::Asset::V1::AssetServiceClient.method("project_path").parameters.map { |arg| arg.last.to_s }
         client = Google::Cloud::Asset.new version: :v1
+        parameters = client.method("project_path").parameters.map { |arg| arg.last.to_s }
         assert_equal(
           client.project_path(*parameters),
           Google::Cloud::Asset::V1::AssetServiceClient.project_path(*parameters)
