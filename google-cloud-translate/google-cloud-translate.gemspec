@@ -23,7 +23,7 @@ Gem::Specification.new do |gem|
   gem.add_dependency "googleauth", ">= 0.6.2", "< 0.10.0"
 
   gem.add_development_dependency "autotest-suffix", "~> 1.1"
-  gem.add_development_dependency "google-style", "~> 0.1"
+  gem.add_development_dependency "google-style", "~> 0.3"
   gem.add_development_dependency "minitest", "~> 5.10"
   gem.add_development_dependency "minitest-autotest", "~> 1.0"
   gem.add_development_dependency "minitest-focus", "~> 1.1"
