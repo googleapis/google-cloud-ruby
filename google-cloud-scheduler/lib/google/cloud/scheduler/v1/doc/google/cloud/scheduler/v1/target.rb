@@ -58,6 +58,24 @@ module Google
         #     HTTP request body. A request body is allowed only if the HTTP
         #     method is POST, PUT, or PATCH. It is an error to set body on a job with an
         #     incompatible {Google::Cloud::Scheduler::V1::HttpMethod HttpMethod}.
+        # @!attribute [rw] oauth_token
+        #   @return [Google::Cloud::Scheduler::V1::OAuthToken]
+        #     If specified, an
+        #     [OAuth token](https://developers.google.com/identity/protocols/OAuth2)
+        #     will be generated and attached as an `Authorization` header in the HTTP
+        #     request.
+        #
+        #     This type of authorization should be used when sending requests to a GCP
+        #     endpoint.
+        # @!attribute [rw] oidc_token
+        #   @return [Google::Cloud::Scheduler::V1::OidcToken]
+        #     If specified, an
+        #     [OIDC](https://developers.google.com/identity/protocols/OpenIDConnect)
+        #     token will be generated and attached as an `Authorization` header in the
+        #     HTTP request.
+        #
+        #     This type of authorization should be used when sending requests to third
+        #     party endpoints or Cloud Run.
         class HttpTarget; end
 
         # App Engine target. The job will be pushed to a job handler by means
@@ -253,6 +271,40 @@ module Google
         #     {Google::Cloud::Scheduler::V1::AppEngineRouting#instance instance} is invalid, then the job will be sent
         #     to the default version of the default service when the job is attempted.
         class AppEngineRouting; end
+
+        # Contains information needed for generating an
+        # [OAuth token](https://developers.google.com/identity/protocols/OAuth2).
+        # This type of authorization should be used when sending requests to a GCP
+        # endpoint.
+        # @!attribute [rw] service_account_email
+        #   @return [String]
+        #     [Service account email](https://cloud.google.com/iam/docs/service-accounts)
+        #     to be used for generating OAuth token.
+        #     The service account must be within the same project as the job. The caller
+        #     must have iam.serviceAccounts.actAs permission for the service account.
+        # @!attribute [rw] scope
+        #   @return [String]
+        #     OAuth scope to be used for generating OAuth access token.
+        #     If not specified, "https://www.googleapis.com/auth/cloud-platform"
+        #     will be used.
+        class OAuthToken; end
+
+        # Contains information needed for generating an
+        # [OpenID Connect
+        # token](https://developers.google.com/identity/protocols/OpenIDConnect). This
+        # type of authorization should be used when sending requests to third party
+        # endpoints or Cloud Run.
+        # @!attribute [rw] service_account_email
+        #   @return [String]
+        #     [Service account email](https://cloud.google.com/iam/docs/service-accounts)
+        #     to be used for generating OIDC token.
+        #     The service account must be within the same project as the job. The caller
+        #     must have iam.serviceAccounts.actAs permission for the service account.
+        # @!attribute [rw] audience
+        #   @return [String]
+        #     Audience to be used when generating OIDC token. If not specified, the URI
+        #     specified in target will be used.
+        class OidcToken; end
 
         # The HTTP method used to execute the job.
         module HttpMethod

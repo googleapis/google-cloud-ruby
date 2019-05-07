@@ -12,6 +12,10 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :http_method, :enum, 2, "google.cloud.scheduler.v1.HttpMethod"
     map :headers, :string, :string, 3
     optional :body, :bytes, 4
+    oneof :authorization_header do
+      optional :oauth_token, :message, 5, "google.cloud.scheduler.v1.OAuthToken"
+      optional :oidc_token, :message, 6, "google.cloud.scheduler.v1.OidcToken"
+    end
   end
   add_message "google.cloud.scheduler.v1.AppEngineHttpTarget" do
     optional :http_method, :enum, 1, "google.cloud.scheduler.v1.HttpMethod"
@@ -30,6 +34,14 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :version, :string, 2
     optional :instance, :string, 3
     optional :host, :string, 4
+  end
+  add_message "google.cloud.scheduler.v1.OAuthToken" do
+    optional :service_account_email, :string, 1
+    optional :scope, :string, 2
+  end
+  add_message "google.cloud.scheduler.v1.OidcToken" do
+    optional :service_account_email, :string, 1
+    optional :audience, :string, 2
   end
   add_enum "google.cloud.scheduler.v1.HttpMethod" do
     value :HTTP_METHOD_UNSPECIFIED, 0
@@ -51,6 +63,8 @@ module Google
         AppEngineHttpTarget = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.scheduler.v1.AppEngineHttpTarget").msgclass
         PubsubTarget = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.scheduler.v1.PubsubTarget").msgclass
         AppEngineRouting = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.scheduler.v1.AppEngineRouting").msgclass
+        OAuthToken = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.scheduler.v1.OAuthToken").msgclass
+        OidcToken = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.scheduler.v1.OidcToken").msgclass
         HttpMethod = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.scheduler.v1.HttpMethod").enummodule
       end
     end

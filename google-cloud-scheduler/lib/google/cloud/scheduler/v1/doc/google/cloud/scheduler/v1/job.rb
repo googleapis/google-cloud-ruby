@@ -110,6 +110,18 @@ module Google
         # @!attribute [rw] retry_config
         #   @return [Google::Cloud::Scheduler::V1::RetryConfig]
         #     Settings that determine the retry behavior.
+        # @!attribute [rw] attempt_deadline
+        #   @return [Google::Protobuf::Duration]
+        #     The deadline for job attempts. If the request handler does not respond by
+        #     this deadline then the request is cancelled and the attempt is marked as a
+        #     `DEADLINE_EXCEEDED` failure. The failed attempt can be viewed in
+        #     execution logs. Cloud Scheduler will retry the job according
+        #     to the {Google::Cloud::Scheduler::V1::RetryConfig RetryConfig}.
+        #
+        #     The allowed duration for this deadline is:
+        #     * For {Google::Cloud::Scheduler::V1::Job#http_target HTTP targets}, between 15 seconds and 30 minutes.
+        #     * For {Google::Cloud::Scheduler::V1::Job#app_engine_http_target App Engine HTTP targets}, between 15
+        #       seconds and 24 hours.
         class Job
           # State of the job.
           module State
