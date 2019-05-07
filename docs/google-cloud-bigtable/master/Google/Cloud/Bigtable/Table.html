@@ -1111,7 +1111,7 @@ Each table is served using the resources of its parent cluster.</p>
   <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>field-1</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
   <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>XYZ</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
   <span class='label'>timestamp:</span> <span class='const'>Time</span><span class='period'>.</span><span class='id identifier rubyid_now'>now</span><span class='period'>.</span><span class='id identifier rubyid_to_i'>to_i</span> <span class='op'>*</span> <span class='int'>1000</span> <span class='comment'># Time stamp in micro seconds.
-</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_delete_from_column'>delete_from_column</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>cf2</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>field02</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_delete_cells'>delete_cells</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>cf2</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>field02</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 
 <span class='id identifier rubyid_otherwise_mutations'>otherwise_mutations</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Bigtable.html" title="Google::Cloud::Bigtable (module)">Bigtable</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="MutationEntry.html" title="Google::Cloud::Bigtable::MutationEntry (class)">MutationEntry</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Bigtable.html#new-class_method" title="Google::Cloud::Bigtable.new (method)">new</a></span></span>
 <span class='id identifier rubyid_otherwise_mutations'>otherwise_mutations</span><span class='period'>.</span><span class='id identifier rubyid_delete_from_family'>delete_from_family</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>cf3</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
@@ -2582,21 +2582,21 @@ Must contain at least one mutation entry and at most 100,000.</p>
         <p class="example_title"><div class='inline'><p>Multiple mutations on row.</p>
 </div></p>
       
-      <pre class="example code"><code>require &quot;google/cloud&quot;
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud</span><span class='tstring_end'>&quot;</span></span>
 
-bigtable = Google::Cloud::Bigtable.new
+<span class='id identifier rubyid_bigtable'>bigtable</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Bigtable.html" title="Google::Cloud::Bigtable (module)">Bigtable</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Bigtable.html#new-class_method" title="Google::Cloud::Bigtable.new (method)">new</a></span></span>
 
-table = bigtable.table(&quot;my-instance&quot;, &quot;my-table&quot;)
+<span class='id identifier rubyid_table'>table</span> <span class='op'>=</span> <span class='id identifier rubyid_bigtable'>bigtable</span><span class='period'>.</span><span class='id identifier rubyid_table'>table</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-instance</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-table</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 
-entry = table.new_mutation_entry(&quot;user-1&quot;)
-entry.set_cell(
-  &quot;cf-1&quot;,
-  &quot;field-1&quot;,
-  &quot;XYZ&quot;
-  timestamp: Time.now.to_i * 1000 # Time stamp in milli seconds.
-).delete_from_column(&quot;cf2&quot;, &quot;field02&quot;)
+<span class='id identifier rubyid_entry'>entry</span> <span class='op'>=</span> <span class='id identifier rubyid_table'>table</span><span class='period'>.</span><span class='id identifier rubyid_new_mutation_entry'>new_mutation_entry</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>user-1</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+<span class='id identifier rubyid_entry'>entry</span><span class='period'>.</span><span class='id identifier rubyid_set_cell'>set_cell</span><span class='lparen'>(</span>
+  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>cf-1</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>field-1</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>XYZ</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+  <span class='label'>timestamp:</span> <span class='const'>Time</span><span class='period'>.</span><span class='id identifier rubyid_now'>now</span><span class='period'>.</span><span class='id identifier rubyid_to_i'>to_i</span> <span class='op'>*</span> <span class='int'>1000</span> <span class='comment'># Time stamp in milli seconds.
+</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_delete_cells'>delete_cells</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>cf2</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>field02</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 
-table.mutate_row(entry)</code></pre>
+<span class='id identifier rubyid_table'>table</span><span class='period'>.</span><span class='id identifier rubyid_mutate_row'>mutate_row</span><span class='lparen'>(</span><span class='id identifier rubyid_entry'>entry</span><span class='rparen'>)</span></code></pre>
     
   </div>
 <p class="tag_title">Parameters:</p>
