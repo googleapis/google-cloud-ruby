@@ -109,6 +109,32 @@ js:
       <li class="public ">
   <span class="summary_signature">
     
+      <a href="#condition-instance_method" title="#condition (instance method)">#<strong>condition</strong>  &#x21d2; Google::Type::Expr </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The condition that is associated with this binding.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#members-instance_method" title="#members (instance method)">#<strong>members</strong>  &#x21d2; Array&lt;String&gt; </a>
     
 
@@ -168,9 +194,70 @@ js:
     <h2>Instance Attribute Details</h2>
     
       
-      <span id="members=-instance_method"></span>
+      <span id="condition=-instance_method"></span>
       <div class="method_details first">
-  <h3 class="signature first" id="members-instance_method">
+  <h3 class="signature first" id="condition-instance_method">
+  
+    #<strong>condition</strong>  &#x21d2; <tt><span class='object_link'><a href="../../Type/Expr.html" title="Google::Type::Expr (class)">Google::Type::Expr</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns The condition that is associated with this binding.
+NOTE: An unsatisfied condition will not allow user access via current
+binding. Different bindings, including their conditions, are examined
+independently.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../Type/Expr.html" title="Google::Type::Expr (class)">Google::Type::Expr</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The condition that is associated with this binding.
+NOTE: An unsatisfied condition will not allow user access via current
+binding. Different bindings, including their conditions, are examined
+independently.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+120</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/admin/database/v1/doc/google/iam/v1/policy.rb', line 120</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Iam::V1::Binding (class)">Binding</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="members=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="members-instance_method">
   
     #<strong>members</strong>  &#x21d2; <tt>Array&lt;String&gt;</tt> 
   
@@ -189,12 +276,12 @@ on the internet; with or without a Google account.</p></li>
 <li><p><code>allAuthenticatedUsers</code>: A special identifier that represents anyone
 who is authenticated with a Google account or a service account.</p></li>
 <li><p><code>user:{emailid}</code>: An email address that represents a specific Google
-account. For example, <code>alice@gmail.com</code> or <code>joe@example.com</code>.</p></li>
+account. For example, <code>alice@gmail.com</code> .</p></li>
 <li><p><code>serviceAccount:{emailid}</code>: An email address that represents a service
 account. For example, <code>my-other-app@appspot.gserviceaccount.com</code>.</p></li>
 <li><p><code>group:{emailid}</code>: An email address that represents a Google group.
 For example, <code>admins@example.com</code>.</p></li>
-<li><p><code>domain:{domain}</code>: A Google Apps domain name that represents all the
+<li><p><code>domain:{domain}</code>: The G Suite domain (primary) that represents all the
 users of that domain. For example, <code>google.com</code> or <code>example.com</code>.</p></li>
 </ul>
 
@@ -223,12 +310,12 @@ on the internet; with or without a Google account.</p></li>
 <li><p><code>allAuthenticatedUsers</code>: A special identifier that represents anyone
 who is authenticated with a Google account or a service account.</p></li>
 <li><p><code>user:{emailid}</code>: An email address that represents a specific Google
-account. For example, <code>alice@gmail.com</code> or <code>joe@example.com</code>.</p></li>
+account. For example, <code>alice@gmail.com</code> .</p></li>
 <li><p><code>serviceAccount:{emailid}</code>: An email address that represents a service
 account. For example, <code>my-other-app@appspot.gserviceaccount.com</code>.</p></li>
 <li><p><code>group:{emailid}</code>: An email address that represents a Google group.
 For example, <code>admins@example.com</code>.</p></li>
-<li><p><code>domain:{domain}</code>: A Google Apps domain name that represents all the
+<li><p><code>domain:{domain}</code>: The G Suite domain (primary) that represents all the
 users of that domain. For example, <code>google.com</code> or <code>example.com</code>.</p></li>
 </ul>
 </div>
@@ -243,10 +330,10 @@ users of that domain. For example, <code>google.com</code> or <code>example.com<
       <pre class="lines">
 
 
-101</pre>
+120</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/admin/database/v1/doc/google/iam/v1/policy.rb', line 101</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/admin/database/v1/doc/google/iam/v1/policy.rb', line 120</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Iam::V1::Binding (class)">Binding</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -268,8 +355,7 @@ users of that domain. For example, <code>google.com</code> or <code>example.com<
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns Role that is assigned to <code>members</code>.
-For example, <code>roles/viewer</code>, <code>roles/editor</code>, or <code>roles/owner</code>.
-Required</p>
+For example, <code>roles/viewer</code>, <code>roles/editor</code>, or <code>roles/owner</code>.</p>
 
 
   </div>
@@ -288,8 +374,7 @@ Required</p>
       
         &mdash;
         <div class='inline'><p>Role that is assigned to <code>members</code>.
-For example, <code>roles/viewer</code>, <code>roles/editor</code>, or <code>roles/owner</code>.
-Required</p>
+For example, <code>roles/viewer</code>, <code>roles/editor</code>, or <code>roles/owner</code>.</p>
 </div>
       
     </li>
@@ -302,10 +387,10 @@ Required</p>
       <pre class="lines">
 
 
-101</pre>
+120</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/admin/database/v1/doc/google/iam/v1/policy.rb', line 101</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/admin/database/v1/doc/google/iam/v1/policy.rb', line 120</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Iam::V1::Binding (class)">Binding</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>

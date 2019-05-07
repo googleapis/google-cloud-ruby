@@ -1934,8 +1934,7 @@ policy if a database exists but does not have a policy set.</p>
       
         &mdash;
         <div class='inline'><p>REQUIRED: The resource for which the policy is being requested.
-<code>resource</code> is usually specified as a path. For example, a Project
-resource is specified as <code>projects/{project}</code>.</p>
+See the operation documentation for the appropriate value for this field.</p>
 </div>
       
     </li>
@@ -2038,6 +2037,8 @@ retries, etc.</p>
       <pre class="lines">
 
 
+711
+712
 713
 714
 715
@@ -2045,12 +2046,10 @@ retries, etc.</p>
 717
 718
 719
-720
-721
-722</pre>
+720</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/admin/database/v1/database_admin_client.rb', line 713</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/admin/database/v1/database_admin_client.rb', line 711</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_iam_policy'>get_iam_policy</span> \
     <span class='id identifier rubyid_resource'>resource</span><span class='comma'>,</span>
@@ -2334,8 +2333,7 @@ existing policy.</p>
       
         &mdash;
         <div class='inline'><p>REQUIRED: The resource for which the policy is being specified.
-<code>resource</code> is usually specified as a path. For example, a Project
-resource is specified as <code>projects/{project}</code>.</p>
+See the operation documentation for the appropriate value for this field.</p>
 </div>
       
     </li>
@@ -2458,6 +2456,7 @@ retries, etc.</p>
       <pre class="lines">
 
 
+674
 675
 676
 677
@@ -2468,11 +2467,10 @@ retries, etc.</p>
 682
 683
 684
-685
-686</pre>
+685</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/admin/database/v1/database_admin_client.rb', line 675</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/admin/database/v1/database_admin_client.rb', line 674</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_set_iam_policy'>set_iam_policy</span> \
     <span class='id identifier rubyid_resource'>resource</span><span class='comma'>,</span>
@@ -2542,8 +2540,7 @@ permissions.</p>
       
         &mdash;
         <div class='inline'><p>REQUIRED: The resource for which the policy detail is being requested.
-<code>resource</code> is usually specified as a path. For example, a Project
-resource is specified as <code>projects/{project}</code>.</p>
+See the operation documentation for the appropriate value for this field.</p>
 </div>
       
     </li>
@@ -2664,6 +2661,9 @@ retries, etc.</p>
       <pre class="lines">
 
 
+755
+756
+757
 758
 759
 760
@@ -2672,13 +2672,10 @@ retries, etc.</p>
 763
 764
 765
-766
-767
-768
-769</pre>
+766</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/admin/database/v1/database_admin_client.rb', line 758</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/admin/database/v1/database_admin_client.rb', line 755</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_test_iam_permissions'>test_iam_permissions</span> \
     <span class='id identifier rubyid_resource'>resource</span><span class='comma'>,</span>
