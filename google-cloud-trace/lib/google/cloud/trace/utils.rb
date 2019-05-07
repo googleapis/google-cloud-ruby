@@ -29,6 +29,13 @@ module Google
         #
         def self.time_to_grpc time
           return nil if time.nil?
+
+          # sometimes this gets called with time as a float or
+          # int. Coerce into a time object, and move on.
+          time = Time.at(time) if time.is_a? Numeric
+
+          raise ArgumentError unless time.is_a? Time
+
           Google::Protobuf::Timestamp.new seconds: time.to_i,
                                           nanos: time.nsec
         end
