@@ -3496,8 +3496,7 @@ policy if an instance exists but does not have a policy set.</p>
       
         &mdash;
         <div class='inline'><p>REQUIRED: The resource for which the policy is being requested.
-<code>resource</code> is usually specified as a path. For example, a Project
-resource is specified as <code>projects/{project}</code>.</p>
+See the operation documentation for the appropriate value for this field.</p>
 </div>
       
     </li>
@@ -3600,6 +3599,7 @@ retries, etc.</p>
       <pre class="lines">
 
 
+1324
 1325
 1326
 1327
@@ -3608,11 +3608,10 @@ retries, etc.</p>
 1330
 1331
 1332
-1333
-1334</pre>
+1333</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/admin/v2/bigtable_instance_admin_client.rb', line 1325</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/admin/v2/bigtable_instance_admin_client.rb', line 1324</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_iam_policy'>get_iam_policy</span> \
     <span class='id identifier rubyid_resource'>resource</span><span class='comma'>,</span>
@@ -4658,8 +4657,7 @@ existing policy.</p>
       
         &mdash;
         <div class='inline'><p>REQUIRED: The resource for which the policy is being specified.
-<code>resource</code> is usually specified as a path. For example, a Project
-resource is specified as <code>projects/{project}</code>.</p>
+See the operation documentation for the appropriate value for this field.</p>
 </div>
       
     </li>
@@ -4782,6 +4780,8 @@ retries, etc.</p>
       <pre class="lines">
 
 
+1366
+1367
 1368
 1369
 1370
@@ -4791,12 +4791,10 @@ retries, etc.</p>
 1374
 1375
 1376
-1377
-1378
-1379</pre>
+1377</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/admin/v2/bigtable_instance_admin_client.rb', line 1368</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/admin/v2/bigtable_instance_admin_client.rb', line 1366</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_set_iam_policy'>set_iam_policy</span> \
     <span class='id identifier rubyid_resource'>resource</span><span class='comma'>,</span>
@@ -4861,8 +4859,7 @@ retries, etc.</p>
       
         &mdash;
         <div class='inline'><p>REQUIRED: The resource for which the policy detail is being requested.
-<code>resource</code> is usually specified as a path. For example, a Project
-resource is specified as <code>projects/{project}</code>.</p>
+See the operation documentation for the appropriate value for this field.</p>
 </div>
       
     </li>
@@ -4983,6 +4980,9 @@ retries, etc.</p>
       <pre class="lines">
 
 
+1407
+1408
+1409
 1410
 1411
 1412
@@ -4991,13 +4991,10 @@ retries, etc.</p>
 1415
 1416
 1417
-1418
-1419
-1420
-1421</pre>
+1418</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/admin/v2/bigtable_instance_admin_client.rb', line 1410</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/admin/v2/bigtable_instance_admin_client.rb', line 1407</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_test_iam_permissions'>test_iam_permissions</span> \
     <span class='id identifier rubyid_resource'>resource</span><span class='comma'>,</span>
