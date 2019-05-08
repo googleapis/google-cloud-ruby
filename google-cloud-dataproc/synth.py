@@ -163,5 +163,5 @@ for version in ['v1', 'v1beta2']:
     s.replace(
         f'lib/google/cloud/dataproc/{version}/*_client.rb',
         'Gem.loaded_specs\[.*\]\.version\.version',
-        'package_version = Google::Cloud::Dataproc::VERSION'
+        'Google::Cloud::Dataproc::VERSION'
     )
