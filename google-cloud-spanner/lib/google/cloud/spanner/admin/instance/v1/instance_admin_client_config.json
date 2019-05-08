@@ -3,7 +3,6 @@
     "google.spanner.admin.instance.v1.InstanceAdmin": {
       "retry_codes": {
         "idempotent": [
-          "DEADLINE_EXCEEDED",
           "UNAVAILABLE"
         ],
         "non_idempotent": []
