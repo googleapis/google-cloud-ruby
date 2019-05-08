@@ -27,6 +27,7 @@ require "google/gax"
 
 require "google/cloud/dataproc/v1/jobs_pb"
 require "google/cloud/dataproc/v1/credentials"
+require "google/cloud/dataproc/version"
 
 module Google
   module Cloud
@@ -129,7 +130,7 @@ module Google
               updater_proc = credentials.updater_proc
             end
 
-            package_version = Gem.loaded_specs['google-cloud-dataproc'].version.version
+            package_version = package_version = Google::Cloud::Dataproc::VERSION
 
             google_api_client = "gl-ruby/#{RUBY_VERSION}"
             google_api_client << " #{lib_name}/#{lib_version}" if lib_name

@@ -1,9 +1,10 @@
 # -*- ruby -*-
 # encoding: utf-8
+require File.expand_path("../lib/google/cloud/dataproc/version", __FILE__)
 
 Gem::Specification.new do |gem|
   gem.name          = "google-cloud-dataproc"
-  gem.version       = "0.3.1"
+  gem.version       = Google::Cloud::Dataproc::VERSION
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
