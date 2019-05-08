@@ -3,7 +3,6 @@
     "google.bigtable.admin.v2.BigtableInstanceAdmin": {
       "retry_codes": {
         "idempotent": [
-          "DEADLINE_EXCEEDED",
           "UNAVAILABLE"
         ],
         "non_idempotent": [
