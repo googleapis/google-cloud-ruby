@@ -3,7 +3,6 @@
     "google.cloud.securitycenter.v1.SecurityCenter": {
       "retry_codes": {
         "idempotent": [
-          "DEADLINE_EXCEEDED",
           "UNAVAILABLE"
         ],
         "non_idempotent": []
