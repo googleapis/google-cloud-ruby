@@ -27,6 +27,7 @@ require "google/gax"
 
 require "google/datastore/v1/datastore_pb"
 require "google/cloud/datastore/v1/credentials"
+require "google/cloud/datastore/version"
 
 module Google
   module Cloud
@@ -126,7 +127,7 @@ module Google
               updater_proc = credentials.updater_proc
             end
 
-            package_version = Gem.loaded_specs['google-cloud-datastore'].version.version
+            package_version = package_version = Google::Cloud::Datastore::VERSION
 
             google_api_client = "gl-ruby/#{RUBY_VERSION}"
             google_api_client << " #{lib_name}/#{lib_version}" if lib_name
