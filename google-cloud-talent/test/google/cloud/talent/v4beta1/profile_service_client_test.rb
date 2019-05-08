@@ -153,7 +153,6 @@ describe Google::Cloud::Talent::V4beta1::ProfileServiceClient do
       source = "source-896505829"
       uri = "uri116076"
       group_id = "groupId506361563"
-      resume_hrxml = "resumeHrxml1834730555"
       processed = true
       keyword_snippet = "keywordSnippet1325317319"
       expected_response = {
@@ -162,7 +161,6 @@ describe Google::Cloud::Talent::V4beta1::ProfileServiceClient do
         source: source,
         uri: uri,
         group_id: group_id,
-        resume_hrxml: resume_hrxml,
         processed: processed,
         keyword_snippet: keyword_snippet
       }
@@ -246,7 +244,6 @@ describe Google::Cloud::Talent::V4beta1::ProfileServiceClient do
       source = "source-896505829"
       uri = "uri116076"
       group_id = "groupId506361563"
-      resume_hrxml = "resumeHrxml1834730555"
       processed = true
       keyword_snippet = "keywordSnippet1325317319"
       expected_response = {
@@ -255,7 +252,6 @@ describe Google::Cloud::Talent::V4beta1::ProfileServiceClient do
         source: source,
         uri: uri,
         group_id: group_id,
-        resume_hrxml: resume_hrxml,
         processed: processed,
         keyword_snippet: keyword_snippet
       }
@@ -336,7 +332,6 @@ describe Google::Cloud::Talent::V4beta1::ProfileServiceClient do
       source = "source-896505829"
       uri = "uri116076"
       group_id = "groupId506361563"
-      resume_hrxml = "resumeHrxml1834730555"
       processed = true
       keyword_snippet = "keywordSnippet1325317319"
       expected_response = {
@@ -345,7 +340,6 @@ describe Google::Cloud::Talent::V4beta1::ProfileServiceClient do
         source: source,
         uri: uri,
         group_id: group_id,
-        resume_hrxml: resume_hrxml,
         processed: processed,
         keyword_snippet: keyword_snippet
       }

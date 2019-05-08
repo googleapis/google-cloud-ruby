@@ -45,6 +45,16 @@ module Google
         #     improvements across other tenants.
         #
         #     Defaults behavior is {Google::Cloud::Talent::V4beta1::Tenant::DataUsageType::ISOLATED DataUsageType::ISOLATED} if it's unset.
+        # @!attribute [rw] keyword_searchable_profile_custom_attributes
+        #   @return [Array<String>]
+        #     Optional.
+        #
+        #     A list of keys of filterable {Google::Cloud::Talent::V4beta1::Profile#custom_attributes Profile#custom_attributes}, whose
+        #     corresponding `string_values` are used in keyword searches. Profiles with
+        #     `string_values` under these specified field keys are returned if any
+        #     of the values match the search keyword. Custom field values with
+        #     parenthesis, brackets and special symbols are not searchable as-is,
+        #     and must be surrounded by quotes.
         class Tenant
           # Enum that represents how user data owned by the tenant is used.
           module DataUsageType

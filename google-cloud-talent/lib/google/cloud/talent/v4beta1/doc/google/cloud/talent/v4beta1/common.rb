@@ -26,9 +26,8 @@ module Google
         #     End of the period (exclusive).
         class TimestampRange; end
 
-        # Output only.
-        #
-        # A resource that represents a location with full geographic information.
+        # Output only. A resource that represents a location with full geographic
+        # information.
         # @!attribute [rw] location_type
         #   @return [Google::Cloud::Talent::V4beta1::Location::LocationType]
         #     The type of a location, which corresponds to the address lines field of
@@ -159,9 +158,8 @@ module Google
         #     service.
         class RequestMetadata; end
 
-        # Output only.
-        #
-        # Additional information returned to client, such as debugging information.
+        # Output only. Additional information returned to client, such as debugging
+        # information.
         # @!attribute [rw] request_id
         #   @return [String]
         #     A unique id associated with this call.
@@ -244,9 +242,7 @@ module Google
         #     Default is false.
         class CustomAttribute; end
 
-        # Output only.
-        #
-        # Spell check result.
+        # Output only. Spell check result.
         # @!attribute [rw] corrected
         #   @return [true, false]
         #     Indicates if the query was corrected by the spell checker.
