@@ -1,5 +1,17 @@
 # Release History
 
+### 0.3.0 / 2019-05-08
+
+Update generated google-cloud-asset files (#3304)
+* Update error retry configuration.
+
+Update generated google-cloud-asset files (#3292)
+* Update IAM:
+* Deprecate Policy#version
+* Add Binding#condition
+* Add Google::Type::Expr
+* Update documentation
+
 ### 0.2.1 / 2019-04-29
 
 * Add AUTHENTICATION.md guide.
