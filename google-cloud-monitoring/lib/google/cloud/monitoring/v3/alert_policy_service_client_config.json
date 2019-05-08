@@ -3,7 +3,6 @@
     "google.monitoring.v3.AlertPolicyService": {
       "retry_codes": {
         "idempotent": [
-          "DEADLINE_EXCEEDED",
           "UNAVAILABLE"
         ],
         "non_idempotent": []
