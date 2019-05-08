@@ -1841,22 +1841,22 @@ retries, etc.</p>
       <pre class="lines">
 
 
+790
+791
+792
+793
+794
+795
+796
+797
+798
+799
 800
 801
-802
-803
-804
-805
-806
-807
-808
-809
-810
-811
-812</pre>
+802</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/subscriber_client.rb', line 800</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/subscriber_client.rb', line 790</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_acknowledge'>acknowledge</span> \
     <span class='id identifier rubyid_subscription'>subscription</span><span class='comma'>,</span>
@@ -1893,11 +1893,7 @@ operations, which allow
 you to manage message acknowledgments in bulk. That is, you can set the
 acknowledgment state of messages in an existing subscription to the state
 captured by a snapshot.
-<br><br>
-<b>BETA:</b> This feature is part of a beta release. This API might be
-changed in backward-incompatible ways and is not recommended for production
-use. It is not subject to any SLA or deprecation policy.<br><br>
-If the snapshot already exists, returns <code>ALREADY_EXISTS</code>.
+<br><br>If the snapshot already exists, returns <code>ALREADY_EXISTS</code>.
 If the requested subscription doesn&#39;t exist, returns <code>NOT_FOUND</code>.
 If the backlog in the subscription is too old -- and the resulting snapshot
 would expire in less than 1 hour -- then <code>FAILED_PRECONDITION</code> is returned.
@@ -2088,23 +2084,23 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1079
-1080
-1081
-1082
-1083
-1084
-1085
-1086
-1087
-1088
-1089
-1090
-1091
-1092</pre>
+1062
+1063
+1064
+1065
+1066
+1067
+1068
+1069
+1070
+1071
+1072
+1073
+1074
+1075</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/subscriber_client.rb', line 1079</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/subscriber_client.rb', line 1062</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_snapshot'>create_snapshot</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -2277,11 +2273,7 @@ acknowledged, until they fall out of the <code>message_retention_duration</code>
 window. This must be true if you would like to
 <a
 href="https://cloud.google.com/pubsub/docs/replay-overview#seek_to_a_time">
-Seek to a timestamp</a>.
-<br><br>
-<b>BETA:</b> This feature is part of a beta release. This API might be
-changed in backward-incompatible ways and is not recommended for production
-use. It is not subject to any SLA or deprecation policy.</p>
+Seek to a timestamp</a>.</p>
 </div>
       
     </li>
@@ -2301,10 +2293,7 @@ from the moment a message is published.
 If <code>retain_acked_messages</code> is true, then this also configures the retention
 of acknowledged messages, and thus configures how far back in time a <code>Seek</code>
 can be done. Defaults to 7 days. Cannot be more than 7 days or less than 10
-minutes.<br><br>
-<b>BETA:</b> This feature is part of a beta release. This API might be
-changed in backward-incompatible ways and is not recommended for production
-use. It is not subject to any SLA or deprecation policy.
+minutes.
 A hash of the same form as <code>Google::Protobuf::Duration</code>
 can also be provided.</p>
 </div>
@@ -2364,9 +2353,6 @@ successfully consuming messages from the subscription or is issuing
 operations on the subscription. If <code>expiration_policy</code> is not set, a
 <em>default policy</em> with <code>ttl</code> of 31 days will be used. The minimum allowed
 value for <code>expiration_policy.ttl</code> is 1 day.
-<b>BETA:</b> This feature is part of a beta release. This API might be
-changed in backward-incompatible ways and is not recommended for production
-use. It is not subject to any SLA or deprecation policy.
 A hash of the same form as <code>Google::Cloud::PubSub::V1::ExpirationPolicy</code>
 can also be provided.</p>
 </div>
@@ -2471,6 +2457,16 @@ retries, etc.</p>
       <pre class="lines">
 
 
+511
+512
+513
+514
+515
+516
+517
+518
+519
+520
 521
 522
 523
@@ -2486,20 +2482,10 @@ retries, etc.</p>
 533
 534
 535
-536
-537
-538
-539
-540
-541
-542
-543
-544
-545
-546</pre>
+536</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/subscriber_client.rb', line 521</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/subscriber_client.rb', line 511</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_subscription'>create_subscription</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -2549,9 +2535,6 @@ operations, which allow
 you to manage message acknowledgments in bulk. That is, you can set the
 acknowledgment state of messages in an existing subscription to the state
 captured by a snapshot.<br><br>
-<b>BETA:</b> This feature is part of a beta release. This API might be
-changed in backward-incompatible ways and is not recommended for production
-use. It is not subject to any SLA or deprecation policy.
 When the snapshot is deleted, all messages retained in the snapshot
 are immediately dropped. After a snapshot is deleted, a new one may be
 created with the same name, but the new one has no association with the old
@@ -2681,20 +2664,20 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1178
-1179
-1180
-1181
-1182
-1183
-1184
-1185
-1186
-1187
-1188</pre>
+1154
+1155
+1156
+1157
+1158
+1159
+1160
+1161
+1162
+1163
+1164</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/subscriber_client.rb', line 1178</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/subscriber_client.rb', line 1154</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete_snapshot'>delete_snapshot</span> \
     <span class='id identifier rubyid_snapshot'>snapshot</span><span class='comma'>,</span>
@@ -2853,20 +2836,20 @@ retries, etc.</p>
       <pre class="lines">
 
 
-701
-702
-703
-704
-705
-706
-707
-708
-709
-710
-711</pre>
+691
+692
+693
+694
+695
+696
+697
+698
+699
+700
+701</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/subscriber_client.rb', line 701</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/subscriber_client.rb', line 691</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete_subscription'>delete_subscription</span> \
     <span class='id identifier rubyid_subscription'>subscription</span><span class='comma'>,</span>
@@ -3033,19 +3016,19 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1320
-1321
-1322
-1323
-1324
-1325
-1326
-1327
-1328
-1329</pre>
+1293
+1294
+1295
+1296
+1297
+1298
+1299
+1300
+1301
+1302</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/subscriber_client.rb', line 1320</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/subscriber_client.rb', line 1293</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_iam_policy'>get_iam_policy</span> \
     <span class='id identifier rubyid_resource'>resource</span><span class='comma'>,</span>
@@ -3208,19 +3191,19 @@ retries, etc.</p>
       <pre class="lines">
 
 
-568
-569
-570
-571
-572
-573
-574
-575
-576
-577</pre>
+558
+559
+560
+561
+562
+563
+564
+565
+566
+567</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/subscriber_client.rb', line 568</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/subscriber_client.rb', line 558</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_subscription'>get_subscription</span> \
     <span class='id identifier rubyid_subscription'>subscription</span><span class='comma'>,</span>
@@ -3253,10 +3236,7 @@ retries, etc.</p>
 operations, which allow
 you to manage message acknowledgments in bulk. That is, you can set the
 acknowledgment state of messages in an existing subscription to the state
-captured by a snapshot.<br><br>
-<b>BETA:</b> This feature is part of a beta release. This API might be
-changed in backward-incompatible ways and is not recommended for production
-use. It is not subject to any SLA or deprecation policy.</p>
+captured by a snapshot.</p>
 
 
   </div>
@@ -3429,21 +3409,21 @@ object.</p>
       <pre class="lines">
 
 
-1006
-1007
-1008
-1009
-1010
-1011
-1012
-1013
-1014
-1015
-1016
-1017</pre>
+993
+994
+995
+996
+997
+998
+999
+1000
+1001
+1002
+1003
+1004</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/subscriber_client.rb', line 1006</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/subscriber_client.rb', line 993</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_snapshots'>list_snapshots</span> \
     <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span>
@@ -3646,21 +3626,21 @@ object.</p>
       <pre class="lines">
 
 
+655
+656
+657
+658
+659
+660
+661
+662
+663
+664
 665
-666
-667
-668
-669
-670
-671
-672
-673
-674
-675
-676</pre>
+666</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/subscriber_client.rb', line 665</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/subscriber_client.rb', line 655</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_subscriptions'>list_subscriptions</span> \
     <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span>
@@ -3863,24 +3843,24 @@ retries, etc.</p>
       <pre class="lines">
 
 
+743
+744
+745
+746
+747
+748
+749
+750
+751
+752
 753
 754
 755
 756
-757
-758
-759
-760
-761
-762
-763
-764
-765
-766
-767</pre>
+757</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/subscriber_client.rb', line 753</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/subscriber_client.rb', line 743</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_modify_ack_deadline'>modify_ack_deadline</span> \
     <span class='id identifier rubyid_subscription'>subscription</span><span class='comma'>,</span>
@@ -4069,22 +4049,22 @@ retries, etc.</p>
       <pre class="lines">
 
 
+932
+933
+934
+935
+936
+937
+938
+939
+940
+941
 942
 943
-944
-945
-946
-947
-948
-949
-950
-951
-952
-953
-954</pre>
+944</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/subscriber_client.rb', line 942</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/subscriber_client.rb', line 932</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_modify_push_config'>modify_push_config</span> \
     <span class='id identifier rubyid_subscription'>subscription</span><span class='comma'>,</span>
@@ -4289,23 +4269,23 @@ retries, etc.</p>
       <pre class="lines">
 
 
+837
+838
+839
+840
+841
+842
+843
+844
+845
+846
 847
 848
 849
-850
-851
-852
-853
-854
-855
-856
-857
-858
-859
-860</pre>
+850</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/subscriber_client.rb', line 847</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/subscriber_client.rb', line 837</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_pull'>pull</span> \
     <span class='id identifier rubyid_subscription'>subscription</span><span class='comma'>,</span>
@@ -4344,10 +4324,7 @@ operations, which allow
 you to manage message acknowledgments in bulk. That is, you can set the
 acknowledgment state of messages in an existing subscription to the state
 captured by a snapshot. Note that both the subscription and the snapshot
-must be on the same topic.<br><br>
-<b>BETA:</b> This feature is part of a beta release. This API might be
-changed in backward-incompatible ways and is not recommended for production
-use. It is not subject to any SLA or deprecation policy.</p>
+must be on the same topic.</p>
 
 
   </div>
@@ -4525,23 +4502,23 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1237
-1238
-1239
-1240
-1241
-1242
-1243
-1244
-1245
-1246
-1247
-1248
-1249
-1250</pre>
+1210
+1211
+1212
+1213
+1214
+1215
+1216
+1217
+1218
+1219
+1220
+1221
+1222
+1223</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/subscriber_client.rb', line 1237</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/subscriber_client.rb', line 1210</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_seek'>seek</span> \
     <span class='id identifier rubyid_subscription'>subscription</span><span class='comma'>,</span>
@@ -4733,21 +4710,21 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1284
-1285
-1286
-1287
-1288
-1289
-1290
-1291
-1292
-1293
-1294
-1295</pre>
+1257
+1258
+1259
+1260
+1261
+1262
+1263
+1264
+1265
+1266
+1267
+1268</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/subscriber_client.rb', line 1284</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/subscriber_client.rb', line 1257</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_set_iam_policy'>set_iam_policy</span> \
     <span class='id identifier rubyid_resource'>resource</span><span class='comma'>,</span>
@@ -4894,15 +4871,15 @@ retries, etc.</p>
       <pre class="lines">
 
 
-899
-900
-901
-902
-903
-904</pre>
+889
+890
+891
+892
+893
+894</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/subscriber_client.rb', line 899</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/subscriber_client.rb', line 889</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_streaming_pull'>streaming_pull</span> <span class='id identifier rubyid_reqs'>reqs</span><span class='comma'>,</span> <span class='label'>options:</span> <span class='kw'>nil</span>
   <span class='id identifier rubyid_request_protos'>request_protos</span> <span class='op'>=</span> <span class='id identifier rubyid_reqs'>reqs</span><span class='period'>.</span><span class='id identifier rubyid_lazy'>lazy</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_req'>req</span><span class='op'>|</span>
@@ -5085,21 +5062,21 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1362
-1363
-1364
-1365
-1366
-1367
-1368
-1369
-1370
-1371
-1372
-1373</pre>
+1335
+1336
+1337
+1338
+1339
+1340
+1341
+1342
+1343
+1344
+1345
+1346</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/subscriber_client.rb', line 1362</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/subscriber_client.rb', line 1335</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_test_iam_permissions'>test_iam_permissions</span> \
     <span class='id identifier rubyid_resource'>resource</span><span class='comma'>,</span>
@@ -5134,11 +5111,7 @@ retries, etc.</p>
 operations, which allow
 you to manage message acknowledgments in bulk. That is, you can set the
 acknowledgment state of messages in an existing subscription to the state
-captured by a snapshot.<br><br>
-<b>BETA:</b> This feature is part of a beta release. This API might be
-changed in backward-incompatible ways and is not recommended for production
-use. It is not subject to any SLA or deprecation policy.
-Note that certain properties of a snapshot are not modifiable.</p>
+captured by a snapshot.</p>
 
 
   </div>
@@ -5297,21 +5270,21 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1134
-1135
-1136
-1137
-1138
-1139
-1140
-1141
-1142
-1143
-1144
-1145</pre>
+1113
+1114
+1115
+1116
+1117
+1118
+1119
+1120
+1121
+1122
+1123
+1124</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/subscriber_client.rb', line 1134</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/subscriber_client.rb', line 1113</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update_snapshot'>update_snapshot</span> \
     <span class='id identifier rubyid_snapshot'>snapshot</span><span class='comma'>,</span>
@@ -5500,21 +5473,21 @@ retries, etc.</p>
       <pre class="lines">
 
 
+600
+601
+602
+603
+604
+605
+606
+607
+608
+609
 610
-611
-612
-613
-614
-615
-616
-617
-618
-619
-620
-621</pre>
+611</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/subscriber_client.rb', line 610</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/subscriber_client.rb', line 600</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update_subscription'>update_subscription</span> \
     <span class='id identifier rubyid_subscription'>subscription</span><span class='comma'>,</span>
