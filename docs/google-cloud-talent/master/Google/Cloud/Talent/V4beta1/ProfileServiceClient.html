@@ -2261,15 +2261,9 @@ See <span class='object_link'><a href="ApplicationDateFilter.html" title="Google
 <li>application_outcome_notes: The application outcome reason specifies the
 reasons behind the outcome of the job application.
 See <span class='object_link'><a href="ApplicationOutcomeNotesFilter.html" title="Google::Cloud::Talent::V4beta1::ApplicationOutcomeNotesFilter (class)">ApplicationOutcomeNotesFilter</a></span> for more details.</li>
-<li>application_last_stage: The application last stage specifies the last
-stage of job application.
-See ApplicationLastStageFilter for more details.</li>
 <li>application_job_title: The application job title specifies the job
 applied for in the application.
 See <span class='object_link'><a href="ApplicationJobFilter.html" title="Google::Cloud::Talent::V4beta1::ApplicationJobFilter (class)">ApplicationJobFilter</a></span> for more details.</li>
-<li>application_status: The application status specifies the status of job
-application.
-See ApplicationStatusFilter for more details.</li>
 <li>hirable_status: Hirable status specifies the profile&#39;s hirable status.</li>
 <li>string_custom_attribute: String custom attributes. Values can be accessed
 via square bracket notation like string_custom_attribute[&quot;key1&quot;].</li>
@@ -2398,6 +2392,12 @@ object.</p>
       <pre class="lines">
 
 
+725
+726
+727
+728
+729
+730
 731
 732
 733
@@ -2417,16 +2417,10 @@ object.</p>
 747
 748
 749
-750
-751
-752
-753
-754
-755
-756</pre>
+750</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/profile_service_client.rb', line 731</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/profile_service_client.rb', line 725</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_search_profiles'>search_profiles</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>

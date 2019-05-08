@@ -146,6 +146,32 @@ different groups.</p>
       <li class="public ">
   <span class="summary_signature">
     
+      <a href="#keyword_searchable_profile_custom_attributes-instance_method" title="#keyword_searchable_profile_custom_attributes (instance method)">#<strong>keyword_searchable_profile_custom_attributes</strong>  &#x21d2; Array&lt;String&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Optional.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#name-instance_method" title="#name (instance method)">#<strong>name</strong>  &#x21d2; String </a>
     
 
@@ -256,24 +282,121 @@ different groups.</p>
       <pre class="lines">
 
 
-48
-49
-50
-51
-52
-53
-54
-55
-56
-57
 58
 59
 60
 61
-62</pre>
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/tenant.rb', line 48</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/tenant.rb', line 58</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::Tenant (class)">Tenant</a></span></span>
+  <span class='comment'># Enum that represents how user data owned by the tenant is used.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Tenant/DataUsageType.html" title="Google::Cloud::Talent::V4beta1::Tenant::DataUsageType (module)">DataUsageType</a></span></span>
+    <span class='comment'># Default value.
+</span>    <span class='const'>DATA_USAGE_TYPE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Data owned by this tenant is used to improve search/recommendation
+</span>    <span class='comment'># quality across tenants.
+</span>    <span class='const'>AGGREGATED</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># Data owned by this tenant is used to improve search/recommendation
+</span>    <span class='comment'># quality for this tenant only.
+</span>    <span class='const'>ISOLATED</span> <span class='op'>=</span> <span class='int'>2</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="keyword_searchable_profile_custom_attributes=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="keyword_searchable_profile_custom_attributes-instance_method">
+  
+    #<strong>keyword_searchable_profile_custom_attributes</strong>  &#x21d2; <tt>Array&lt;String&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Optional.</p>
+
+<p>A list of keys of filterable <span class='object_link'><a href="Profile.html#custom_attributes-instance_method" title="Google::Cloud::Talent::V4beta1::Profile#custom_attributes (method)">Profile#custom_attributes</a></span>, whose
+corresponding <code>string_values</code> are used in keyword searches. Profiles with
+<code>string_values</code> under these specified field keys are returned if any
+of the values match the search keyword. Custom field values with
+parenthesis, brackets and special symbols are not searchable as-is,
+and must be surrounded by quotes.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;String&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Optional.</p>
+
+<p>A list of keys of filterable <span class='object_link'><a href="Profile.html#custom_attributes-instance_method" title="Google::Cloud::Talent::V4beta1::Profile#custom_attributes (method)">Profile#custom_attributes</a></span>, whose
+corresponding <code>string_values</code> are used in keyword searches. Profiles with
+<code>string_values</code> under these specified field keys are returned if any
+of the values match the search keyword. Custom field values with
+parenthesis, brackets and special symbols are not searchable as-is,
+and must be surrounded by quotes.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/tenant.rb', line 58</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::Tenant (class)">Tenant</a></span></span>
   <span class='comment'># Enum that represents how user data owned by the tenant is used.
@@ -351,24 +474,24 @@ tenant is created.</p>
       <pre class="lines">
 
 
-48
-49
-50
-51
-52
-53
-54
-55
-56
-57
 58
 59
 60
 61
-62</pre>
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/tenant.rb', line 48</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/tenant.rb', line 58</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::Tenant (class)">Tenant</a></span></span>
   <span class='comment'># Enum that represents how user data owned by the tenant is used.
@@ -444,24 +567,24 @@ improvements across other tenants.</p>
       <pre class="lines">
 
 
-48
-49
-50
-51
-52
-53
-54
-55
-56
-57
 58
 59
 60
 61
-62</pre>
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/tenant.rb', line 48</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/tenant.rb', line 58</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::Tenant (class)">Tenant</a></span></span>
   <span class='comment'># Enum that represents how user data owned by the tenant is used.
