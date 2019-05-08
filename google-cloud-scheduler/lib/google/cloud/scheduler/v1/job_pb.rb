@@ -5,6 +5,7 @@
 require 'google/protobuf'
 
 require 'google/api/annotations_pb'
+require 'google/api/resource_pb'
 require 'google/cloud/scheduler/v1/target_pb'
 require 'google/protobuf/duration_pb'
 require 'google/protobuf/timestamp_pb'
@@ -21,6 +22,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :schedule_time, :message, 17, "google.protobuf.Timestamp"
     optional :last_attempt_time, :message, 18, "google.protobuf.Timestamp"
     optional :retry_config, :message, 19, "google.cloud.scheduler.v1.RetryConfig"
+    optional :attempt_deadline, :message, 22, "google.protobuf.Duration"
     oneof :target do
       optional :pubsub_target, :message, 4, "google.cloud.scheduler.v1.PubsubTarget"
       optional :app_engine_http_target, :message, 5, "google.cloud.scheduler.v1.AppEngineHttpTarget"
