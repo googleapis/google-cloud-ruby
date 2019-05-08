@@ -144,6 +144,32 @@ The maximum allowed size for a job is 100KB.</p>
       <li class="public ">
   <span class="summary_signature">
     
+      <a href="#attempt_deadline-instance_method" title="#attempt_deadline (instance method)">#<strong>attempt_deadline</strong>  &#x21d2; Google::Protobuf::Duration </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The deadline for job attempts.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#description-instance_method" title="#description (instance method)">#<strong>description</strong>  &#x21d2; String </a>
     
 
@@ -506,18 +532,6 @@ The maximum allowed size for a job is 100KB.</p>
       <pre class="lines">
 
 
-113
-114
-115
-116
-117
-118
-119
-120
-121
-122
-123
-124
 125
 126
 127
@@ -529,10 +543,147 @@ The maximum allowed size for a job is 100KB.</p>
 133
 134
 135
-136</pre>
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/scheduler/v1/doc/google/cloud/scheduler/v1/job.rb', line 113</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/scheduler/v1/doc/google/cloud/scheduler/v1/job.rb', line 125</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Scheduler::V1::Job (class)">Job</a></span></span>
+  <span class='comment'># State of the job.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Job/State.html" title="Google::Cloud::Scheduler::V1::Job::State (module)">State</a></span></span>
+    <span class='comment'># Unspecified state.
+</span>    <span class='const'>STATE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># The job is executing normally.
+</span>    <span class='const'>ENABLED</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># The job is paused by the user. It will not execute. A user can
+</span>    <span class='comment'># intentionally pause the job using
+</span>    <span class='comment'># {Google::Cloud::Scheduler::V1::PauseJobRequest PauseJobRequest}.
+</span>    <span class='const'>PAUSED</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># The job is disabled by the system due to error. The user
+</span>    <span class='comment'># cannot directly set a job to be disabled.
+</span>    <span class='const'>DISABLED</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># The job state resulting from a failed {Google::Cloud::Scheduler::V1::CloudScheduler::UpdateJob CloudScheduler::UpdateJob}
+</span>    <span class='comment'># operation. To recover a job from this state, retry
+</span>    <span class='comment'># {Google::Cloud::Scheduler::V1::CloudScheduler::UpdateJob CloudScheduler::UpdateJob} until a successful response is received.
+</span>    <span class='const'>UPDATE_FAILED</span> <span class='op'>=</span> <span class='int'>4</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="attempt_deadline=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="attempt_deadline-instance_method">
+  
+    #<strong>attempt_deadline</strong>  &#x21d2; <tt><span class='object_link'><a href="../../../Protobuf/Duration.html" title="Google::Protobuf::Duration (class)">Google::Protobuf::Duration</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns The deadline for job attempts. If the request handler does not respond by
+this deadline then the request is cancelled and the attempt is marked as a
+<code>DEADLINE_EXCEEDED</code> failure. The failed attempt can be viewed in
+execution logs. Cloud Scheduler will retry the job according
+to the <span class='object_link'><a href="RetryConfig.html" title="Google::Cloud::Scheduler::V1::RetryConfig (class)">RetryConfig</a></span>.</p>
+
+<p>The allowed duration for this deadline is:</p>
+
+<ul>
+<li>For <span class='object_link'><a href="#http_target-instance_method" title="Google::Cloud::Scheduler::V1::Job#http_target (method)">HTTP targets</a></span>, between 15 seconds and 30 minutes.</li>
+<li>For <span class='object_link'><a href="#app_engine_http_target-instance_method" title="Google::Cloud::Scheduler::V1::Job#app_engine_http_target (method)">App Engine HTTP targets</a></span>, between 15
+seconds and 24 hours.</li>
+</ul>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../../Protobuf/Duration.html" title="Google::Protobuf::Duration (class)">Google::Protobuf::Duration</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The deadline for job attempts. If the request handler does not respond by
+this deadline then the request is cancelled and the attempt is marked as a
+<code>DEADLINE_EXCEEDED</code> failure. The failed attempt can be viewed in
+execution logs. Cloud Scheduler will retry the job according
+to the <span class='object_link'><a href="RetryConfig.html" title="Google::Cloud::Scheduler::V1::RetryConfig (class)">RetryConfig</a></span>.</p>
+
+<p>The allowed duration for this deadline is:</p>
+
+<ul>
+<li>For <span class='object_link'><a href="#http_target-instance_method" title="Google::Cloud::Scheduler::V1::Job#http_target (method)">HTTP targets</a></span>, between 15 seconds and 30 minutes.</li>
+<li>For <span class='object_link'><a href="#app_engine_http_target-instance_method" title="Google::Cloud::Scheduler::V1::Job#app_engine_http_target (method)">App Engine HTTP targets</a></span>, between 15
+seconds and 24 hours.</li>
+</ul>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/scheduler/v1/doc/google/cloud/scheduler/v1/job.rb', line 125</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Scheduler::V1::Job (class)">Job</a></span></span>
   <span class='comment'># State of the job.
@@ -615,18 +766,6 @@ more than 500 characters.</p>
       <pre class="lines">
 
 
-113
-114
-115
-116
-117
-118
-119
-120
-121
-122
-123
-124
 125
 126
 127
@@ -638,10 +777,22 @@ more than 500 characters.</p>
 133
 134
 135
-136</pre>
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/scheduler/v1/doc/google/cloud/scheduler/v1/job.rb', line 113</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/scheduler/v1/doc/google/cloud/scheduler/v1/job.rb', line 125</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Scheduler::V1::Job (class)">Job</a></span></span>
   <span class='comment'># State of the job.
@@ -716,18 +867,6 @@ more than 500 characters.</p>
       <pre class="lines">
 
 
-113
-114
-115
-116
-117
-118
-119
-120
-121
-122
-123
-124
 125
 126
 127
@@ -739,10 +878,22 @@ more than 500 characters.</p>
 133
 134
 135
-136</pre>
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/scheduler/v1/doc/google/cloud/scheduler/v1/job.rb', line 113</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/scheduler/v1/doc/google/cloud/scheduler/v1/job.rb', line 125</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Scheduler::V1::Job (class)">Job</a></span></span>
   <span class='comment'># State of the job.
@@ -817,18 +968,6 @@ more than 500 characters.</p>
       <pre class="lines">
 
 
-113
-114
-115
-116
-117
-118
-119
-120
-121
-122
-123
-124
 125
 126
 127
@@ -840,10 +979,22 @@ more than 500 characters.</p>
 133
 134
 135
-136</pre>
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/scheduler/v1/doc/google/cloud/scheduler/v1/job.rb', line 113</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/scheduler/v1/doc/google/cloud/scheduler/v1/job.rb', line 125</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Scheduler::V1::Job (class)">Job</a></span></span>
   <span class='comment'># State of the job.
@@ -954,18 +1105,6 @@ hyphens (-), or underscores (_). The maximum length is 500 characters.</li>
       <pre class="lines">
 
 
-113
-114
-115
-116
-117
-118
-119
-120
-121
-122
-123
-124
 125
 126
 127
@@ -977,10 +1116,22 @@ hyphens (-), or underscores (_). The maximum length is 500 characters.</li>
 133
 134
 135
-136</pre>
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/scheduler/v1/doc/google/cloud/scheduler/v1/job.rb', line 113</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/scheduler/v1/doc/google/cloud/scheduler/v1/job.rb', line 125</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Scheduler::V1::Job (class)">Job</a></span></span>
   <span class='comment'># State of the job.
@@ -1055,18 +1206,6 @@ hyphens (-), or underscores (_). The maximum length is 500 characters.</li>
       <pre class="lines">
 
 
-113
-114
-115
-116
-117
-118
-119
-120
-121
-122
-123
-124
 125
 126
 127
@@ -1078,10 +1217,22 @@ hyphens (-), or underscores (_). The maximum length is 500 characters.</li>
 133
 134
 135
-136</pre>
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/scheduler/v1/doc/google/cloud/scheduler/v1/job.rb', line 113</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/scheduler/v1/doc/google/cloud/scheduler/v1/job.rb', line 125</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Scheduler::V1::Job (class)">Job</a></span></span>
   <span class='comment'># State of the job.
@@ -1156,18 +1307,6 @@ hyphens (-), or underscores (_). The maximum length is 500 characters.</li>
       <pre class="lines">
 
 
-113
-114
-115
-116
-117
-118
-119
-120
-121
-122
-123
-124
 125
 126
 127
@@ -1179,10 +1318,22 @@ hyphens (-), or underscores (_). The maximum length is 500 characters.</li>
 133
 134
 135
-136</pre>
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/scheduler/v1/doc/google/cloud/scheduler/v1/job.rb', line 113</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/scheduler/v1/doc/google/cloud/scheduler/v1/job.rb', line 125</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Scheduler::V1::Job (class)">Job</a></span></span>
   <span class='comment'># State of the job.
@@ -1305,18 +1456,6 @@ time.</p>
       <pre class="lines">
 
 
-113
-114
-115
-116
-117
-118
-119
-120
-121
-122
-123
-124
 125
 126
 127
@@ -1328,10 +1467,22 @@ time.</p>
 133
 134
 135
-136</pre>
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/scheduler/v1/doc/google/cloud/scheduler/v1/job.rb', line 113</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/scheduler/v1/doc/google/cloud/scheduler/v1/job.rb', line 125</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Scheduler::V1::Job (class)">Job</a></span></span>
   <span class='comment'># State of the job.
@@ -1410,18 +1561,6 @@ according to the schedule.</p>
       <pre class="lines">
 
 
-113
-114
-115
-116
-117
-118
-119
-120
-121
-122
-123
-124
 125
 126
 127
@@ -1433,10 +1572,22 @@ according to the schedule.</p>
 133
 134
 135
-136</pre>
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/scheduler/v1/doc/google/cloud/scheduler/v1/job.rb', line 113</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/scheduler/v1/doc/google/cloud/scheduler/v1/job.rb', line 125</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Scheduler::V1::Job (class)">Job</a></span></span>
   <span class='comment'># State of the job.
@@ -1511,18 +1662,6 @@ according to the schedule.</p>
       <pre class="lines">
 
 
-113
-114
-115
-116
-117
-118
-119
-120
-121
-122
-123
-124
 125
 126
 127
@@ -1534,10 +1673,22 @@ according to the schedule.</p>
 133
 134
 135
-136</pre>
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/scheduler/v1/doc/google/cloud/scheduler/v1/job.rb', line 113</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/scheduler/v1/doc/google/cloud/scheduler/v1/job.rb', line 125</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Scheduler::V1::Job (class)">Job</a></span></span>
   <span class='comment'># State of the job.
@@ -1612,18 +1763,6 @@ according to the schedule.</p>
       <pre class="lines">
 
 
-113
-114
-115
-116
-117
-118
-119
-120
-121
-122
-123
-124
 125
 126
 127
@@ -1635,10 +1774,22 @@ according to the schedule.</p>
 133
 134
 135
-136</pre>
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/scheduler/v1/doc/google/cloud/scheduler/v1/job.rb', line 113</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/scheduler/v1/doc/google/cloud/scheduler/v1/job.rb', line 125</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Scheduler::V1::Job (class)">Job</a></span></span>
   <span class='comment'># State of the job.
@@ -1729,18 +1880,6 @@ as GMT).</p>
       <pre class="lines">
 
 
-113
-114
-115
-116
-117
-118
-119
-120
-121
-122
-123
-124
 125
 126
 127
@@ -1752,10 +1891,22 @@ as GMT).</p>
 133
 134
 135
-136</pre>
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/scheduler/v1/doc/google/cloud/scheduler/v1/job.rb', line 113</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/scheduler/v1/doc/google/cloud/scheduler/v1/job.rb', line 125</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Scheduler::V1::Job (class)">Job</a></span></span>
   <span class='comment'># State of the job.
@@ -1830,18 +1981,6 @@ as GMT).</p>
       <pre class="lines">
 
 
-113
-114
-115
-116
-117
-118
-119
-120
-121
-122
-123
-124
 125
 126
 127
@@ -1853,10 +1992,22 @@ as GMT).</p>
 133
 134
 135
-136</pre>
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/scheduler/v1/doc/google/cloud/scheduler/v1/job.rb', line 113</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/scheduler/v1/doc/google/cloud/scheduler/v1/job.rb', line 125</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Scheduler::V1::Job (class)">Job</a></span></span>
   <span class='comment'># State of the job.
