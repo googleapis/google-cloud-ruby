@@ -48,6 +48,15 @@ module Google
       #     CreateTopic or to UpdateTopic. This field will be populated in the
       #     responses for GetTopic, CreateTopic, and UpdateTopic: if not present in the
       #     response, then no constraints are in effect.
+      # @!attribute [rw] kms_key_name
+      #   @return [String]
+      #     The resource name of the Cloud KMS CryptoKey to be used to protect access
+      #     to messages published on this topic.
+      #
+      #     The expected format is `projects/*/locations/*/keyRings/*/cryptoKeys/*`.
+      #     <b>EXPERIMENTAL:</b> This feature is part of a closed alpha release. This
+      #     API might be changed in backward-incompatible ways and is not recommended
+      #     for production use. It is not subject to any SLA or deprecation policy.
       class Topic; end
 
       # A message that is published by publishers and consumed by subscribers. The
@@ -176,10 +185,7 @@ module Google
       #     `ListTopicSubscriptionsRequest` to get more subscriptions.
       class ListTopicSubscriptionsResponse; end
 
-      # Request for the `ListTopicSnapshots` method. <br><br>
-      # <b>BETA:</b> This feature is part of a beta release. This API might be
-      # changed in backward-incompatible ways and is not recommended for production
-      # use. It is not subject to any SLA or deprecation policy.
+      # Request for the `ListTopicSnapshots` method.
       # @!attribute [rw] topic
       #   @return [String]
       #     The name of the topic that snapshots are attached to.
@@ -194,10 +200,7 @@ module Google
       #     that the system should return the next page of data.
       class ListTopicSnapshotsRequest; end
 
-      # Response for the `ListTopicSnapshots` method.<br><br>
-      # <b>BETA:</b> This feature is part of a beta release. This API might be
-      # changed in backward-incompatible ways and is not recommended for production
-      # use. It is not subject to any SLA or deprecation policy.
+      # Response for the `ListTopicSnapshots` method.
       # @!attribute [rw] snapshots
       #   @return [Array<String>]
       #     The names of the snapshots that match the request.
@@ -266,10 +269,6 @@ module Google
       #     <a
       #     href="https://cloud.google.com/pubsub/docs/replay-overview#seek_to_a_time">
       #     Seek to a timestamp</a>.
-      #     <br><br>
-      #     <b>BETA:</b> This feature is part of a beta release. This API might be
-      #     changed in backward-incompatible ways and is not recommended for production
-      #     use. It is not subject to any SLA or deprecation policy.
       # @!attribute [rw] message_retention_duration
       #   @return [Google::Protobuf::Duration]
       #     How long to retain unacknowledged messages in the subscription's backlog,
@@ -277,10 +276,7 @@ module Google
       #     If `retain_acked_messages` is true, then this also configures the retention
       #     of acknowledged messages, and thus configures how far back in time a `Seek`
       #     can be done. Defaults to 7 days. Cannot be more than 7 days or less than 10
-      #     minutes.<br><br>
-      #     <b>BETA:</b> This feature is part of a beta release. This API might be
-      #     changed in backward-incompatible ways and is not recommended for production
-      #     use. It is not subject to any SLA or deprecation policy.
+      #     minutes.
       # @!attribute [rw] labels
       #   @return [Hash{String => String}]
       #     See <a href="https://cloud.google.com/pubsub/docs/labels"> Creating and
@@ -302,9 +298,6 @@ module Google
       #     operations on the subscription. If `expiration_policy` is not set, a
       #     *default policy* with `ttl` of 31 days will be used. The minimum allowed
       #     value for `expiration_policy.ttl` is 1 day.
-      #     <b>BETA:</b> This feature is part of a beta release. This API might be
-      #     changed in backward-incompatible ways and is not recommended for production
-      #     use. It is not subject to any SLA or deprecation policy.
       class Subscription; end
 
       # A policy that specifies the conditions for resource expiration (i.e.,
@@ -360,9 +353,8 @@ module Google
         #     [Service account
         #     email](https://cloud.google.com/iam/docs/service-accounts)
         #     to be used for generating the OIDC token. The caller (for
-        #     CreateSubscription, UpdateSubscription, and ModifyPushConfig calls) must
+        #     CreateSubscription, UpdateSubscription, and ModifyPushConfig RPCs) must
         #     have the iam.serviceAccounts.actAs permission for the service account.
-        #     See https://cloud.google.com/iam/docs/understanding-roles#service-accounts-roles.
         # @!attribute [rw] audience
         #   @return [String]
         #     Audience to be used when generating OIDC token. The audience claim
@@ -556,10 +548,7 @@ module Google
       #     Received Pub/Sub messages. This will not be empty.
       class StreamingPullResponse; end
 
-      # Request for the `CreateSnapshot` method.<br><br>
-      # <b>BETA:</b> This feature is part of a beta release. This API might be
-      # changed in backward-incompatible ways and is not recommended for production
-      # use. It is not subject to any SLA or deprecation policy.
+      # Request for the `CreateSnapshot` method.
       # @!attribute [rw] name
       #   @return [String]
       #     Optional user-provided name for this snapshot.
@@ -586,10 +575,7 @@ module Google
       #     managing labels</a>.
       class CreateSnapshotRequest; end
 
-      # Request for the UpdateSnapshot method.<br><br>
-      # <b>BETA:</b> This feature is part of a beta release. This API might be
-      # changed in backward-incompatible ways and is not recommended for production
-      # use. It is not subject to any SLA or deprecation policy.
+      # Request for the UpdateSnapshot method.
       # @!attribute [rw] snapshot
       #   @return [Google::Cloud::PubSub::V1::Snapshot]
       #     The updated snapshot object.
@@ -604,10 +590,7 @@ module Google
       # operations, which allow
       # you to manage message acknowledgments in bulk. That is, you can set the
       # acknowledgment state of messages in an existing subscription to the state
-      # captured by a snapshot.<br><br>
-      # <b>BETA:</b> This feature is part of a beta release. This API might be
-      # changed in backward-incompatible ways and is not recommended for production
-      # use. It is not subject to any SLA or deprecation policy.
+      # captured by a snapshot.
       # @!attribute [rw] name
       #   @return [String]
       #     The name of the snapshot.
@@ -632,20 +615,14 @@ module Google
       #     managing labels</a>.
       class Snapshot; end
 
-      # Request for the GetSnapshot method.<br><br>
-      # <b>BETA:</b> This feature is part of a beta release. This API might be
-      # changed in backward-incompatible ways and is not recommended for production
-      # use. It is not subject to any SLA or deprecation policy.
+      # Request for the GetSnapshot method.
       # @!attribute [rw] snapshot
       #   @return [String]
       #     The name of the snapshot to get.
       #     Format is `projects/{project}/snapshots/{snap}`.
       class GetSnapshotRequest; end
 
-      # Request for the `ListSnapshots` method.<br><br>
-      # <b>BETA:</b> This feature is part of a beta release. This API might be
-      # changed in backward-incompatible ways and is not recommended for production
-      # use. It is not subject to any SLA or deprecation policy.
+      # Request for the `ListSnapshots` method.
       # @!attribute [rw] project
       #   @return [String]
       #     The name of the project in which to list snapshots.
@@ -660,10 +637,7 @@ module Google
       #     should return the next page of data.
       class ListSnapshotsRequest; end
 
-      # Response for the `ListSnapshots` method.<br><br>
-      # <b>BETA:</b> This feature is part of a beta release. This API might be
-      # changed in backward-incompatible ways and is not recommended for production
-      # use. It is not subject to any SLA or deprecation policy.
+      # Response for the `ListSnapshots` method.
       # @!attribute [rw] snapshots
       #   @return [Array<Google::Cloud::PubSub::V1::Snapshot>]
       #     The resulting snapshots.
@@ -673,20 +647,14 @@ module Google
       #     request; this value should be passed in a new `ListSnapshotsRequest`.
       class ListSnapshotsResponse; end
 
-      # Request for the `DeleteSnapshot` method.<br><br>
-      # <b>BETA:</b> This feature is part of a beta release. This API might be
-      # changed in backward-incompatible ways and is not recommended for production
-      # use. It is not subject to any SLA or deprecation policy.
+      # Request for the `DeleteSnapshot` method.
       # @!attribute [rw] snapshot
       #   @return [String]
       #     The name of the snapshot to delete.
       #     Format is `projects/{project}/snapshots/{snap}`.
       class DeleteSnapshotRequest; end
 
-      # Request for the `Seek` method. <br><br>
-      # <b>BETA:</b> This feature is part of a beta release. This API might be
-      # changed in backward-incompatible ways and is not recommended for production
-      # use. It is not subject to any SLA or deprecation policy.
+      # Request for the `Seek` method.
       # @!attribute [rw] subscription
       #   @return [String]
       #     The subscription to affect.

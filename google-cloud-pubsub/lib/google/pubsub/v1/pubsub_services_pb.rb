@@ -61,10 +61,7 @@ module Google::Cloud::PubSub::V1
       # operations, which allow
       # you to manage message acknowledgments in bulk. That is, you can set the
       # acknowledgment state of messages in an existing subscription to the state
-      # captured by a snapshot.<br><br>
-      # <b>BETA:</b> This feature is part of a beta release. This API might be
-      # changed in backward-incompatible ways and is not recommended for production
-      # use. It is not subject to any SLA or deprecation policy.
+      # captured by a snapshot.
       rpc :ListTopicSnapshots, ListTopicSnapshotsRequest, ListTopicSnapshotsResponse
       # Deletes the topic with the given name. Returns `NOT_FOUND` if the topic
       # does not exist. After a topic is deleted, a new topic may be created with
@@ -152,20 +149,14 @@ module Google::Cloud::PubSub::V1
       # <a href="https://cloud.google.com/pubsub/docs/replay-overview">Seek</a>
       # operations, which allow you to manage message acknowledgments in bulk. That
       # is, you can set the acknowledgment state of messages in an existing
-      # subscription to the state captured by a snapshot.<br><br>
-      # <b>BETA:</b> This feature is part of a beta release. This API might be
-      # changed in backward-incompatible ways and is not recommended for production
-      # use. It is not subject to any SLA or deprecation policy.
+      # subscription to the state captured by a snapshot.
       rpc :GetSnapshot, GetSnapshotRequest, Snapshot
       # Lists the existing snapshots. Snapshots are used in
       # <a href="https://cloud.google.com/pubsub/docs/replay-overview">Seek</a>
       # operations, which allow
       # you to manage message acknowledgments in bulk. That is, you can set the
       # acknowledgment state of messages in an existing subscription to the state
-      # captured by a snapshot.<br><br>
-      # <b>BETA:</b> This feature is part of a beta release. This API might be
-      # changed in backward-incompatible ways and is not recommended for production
-      # use. It is not subject to any SLA or deprecation policy.
+      # captured by a snapshot.
       rpc :ListSnapshots, ListSnapshotsRequest, ListSnapshotsResponse
       # Creates a snapshot from the requested subscription. Snapshots are used in
       # <a href="https://cloud.google.com/pubsub/docs/replay-overview">Seek</a>
@@ -173,11 +164,7 @@ module Google::Cloud::PubSub::V1
       # you to manage message acknowledgments in bulk. That is, you can set the
       # acknowledgment state of messages in an existing subscription to the state
       # captured by a snapshot.
-      # <br><br>
-      # <b>BETA:</b> This feature is part of a beta release. This API might be
-      # changed in backward-incompatible ways and is not recommended for production
-      # use. It is not subject to any SLA or deprecation policy.<br><br>
-      # If the snapshot already exists, returns `ALREADY_EXISTS`.
+      # <br><br>If the snapshot already exists, returns `ALREADY_EXISTS`.
       # If the requested subscription doesn't exist, returns `NOT_FOUND`.
       # If the backlog in the subscription is too old -- and the resulting snapshot
       # would expire in less than 1 hour -- then `FAILED_PRECONDITION` is returned.
@@ -195,11 +182,7 @@ module Google::Cloud::PubSub::V1
       # operations, which allow
       # you to manage message acknowledgments in bulk. That is, you can set the
       # acknowledgment state of messages in an existing subscription to the state
-      # captured by a snapshot.<br><br>
-      # <b>BETA:</b> This feature is part of a beta release. This API might be
-      # changed in backward-incompatible ways and is not recommended for production
-      # use. It is not subject to any SLA or deprecation policy.
-      # Note that certain properties of a snapshot are not modifiable.
+      # captured by a snapshot.
       rpc :UpdateSnapshot, UpdateSnapshotRequest, Snapshot
       # Removes an existing snapshot. Snapshots are used in
       # <a href="https://cloud.google.com/pubsub/docs/replay-overview">Seek</a>
@@ -207,9 +190,6 @@ module Google::Cloud::PubSub::V1
       # you to manage message acknowledgments in bulk. That is, you can set the
       # acknowledgment state of messages in an existing subscription to the state
       # captured by a snapshot.<br><br>
-      # <b>BETA:</b> This feature is part of a beta release. This API might be
-      # changed in backward-incompatible ways and is not recommended for production
-      # use. It is not subject to any SLA or deprecation policy.
       # When the snapshot is deleted, all messages retained in the snapshot
       # are immediately dropped. After a snapshot is deleted, a new one may be
       # created with the same name, but the new one has no association with the old
@@ -222,10 +202,7 @@ module Google::Cloud::PubSub::V1
       # you to manage message acknowledgments in bulk. That is, you can set the
       # acknowledgment state of messages in an existing subscription to the state
       # captured by a snapshot. Note that both the subscription and the snapshot
-      # must be on the same topic.<br><br>
-      # <b>BETA:</b> This feature is part of a beta release. This API might be
-      # changed in backward-incompatible ways and is not recommended for production
-      # use. It is not subject to any SLA or deprecation policy.
+      # must be on the same topic.
       rpc :Seek, SeekRequest, SeekResponse
     end
 

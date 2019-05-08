@@ -5,6 +5,7 @@
 require 'google/protobuf'
 
 require 'google/api/annotations_pb'
+require 'google/api/resource_pb'
 require 'google/protobuf/duration_pb'
 require 'google/protobuf/empty_pb'
 require 'google/protobuf/field_mask_pb'
@@ -17,6 +18,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :name, :string, 1
     map :labels, :string, :string, 2
     optional :message_storage_policy, :message, 3, "google.pubsub.v1.MessageStoragePolicy"
+    optional :kms_key_name, :string, 5
   end
   add_message "google.pubsub.v1.PubsubMessage" do
     optional :data, :bytes, 1
