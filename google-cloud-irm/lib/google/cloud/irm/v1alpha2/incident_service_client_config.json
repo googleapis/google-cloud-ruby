@@ -3,7 +3,6 @@
     "google.cloud.irm.v1alpha2.IncidentService": {
       "retry_codes": {
         "idempotent": [
-          "DEADLINE_EXCEEDED",
           "UNAVAILABLE"
         ],
         "non_idempotent": []
