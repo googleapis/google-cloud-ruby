@@ -183,7 +183,7 @@ module Google
         #
         #     This filter specifies a list of job names to be excluded during search.
         #
-        #     At most 200 excluded job names are allowed.
+        #     At most 400 excluded job names are allowed.
         class JobQuery; end
 
         # Filters to apply when performing the search query.

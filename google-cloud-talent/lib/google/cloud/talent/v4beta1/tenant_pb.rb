@@ -11,6 +11,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :name, :string, 1
     optional :external_id, :string, 2
     optional :usage_type, :enum, 3, "google.cloud.talent.v4beta1.Tenant.DataUsageType"
+    repeated :keyword_searchable_profile_custom_attributes, :string, 4
   end
   add_enum "google.cloud.talent.v4beta1.Tenant.DataUsageType" do
     value :DATA_USAGE_TYPE_UNSPECIFIED, 0
