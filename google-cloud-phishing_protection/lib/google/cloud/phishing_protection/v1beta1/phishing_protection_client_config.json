@@ -3,7 +3,6 @@
     "google.cloud.phishingprotection.v1beta1.PhishingProtectionServiceV1Beta1": {
       "retry_codes": {
         "idempotent": [
-          "DEADLINE_EXCEEDED",
           "UNAVAILABLE"
         ],
         "non_idempotent": []
