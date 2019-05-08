@@ -3,7 +3,6 @@
     "google.spanner.admin.database.v1.DatabaseAdmin": {
       "retry_codes": {
         "idempotent": [
-          "DEADLINE_EXCEEDED",
           "UNAVAILABLE"
         ],
         "non_idempotent": []
