@@ -111,5 +111,5 @@ s.replace(
 s.replace(
     'lib/google/cloud/debugger/v2/*_client.rb',
     'Gem.loaded_specs\[.*\]\.version\.version',
-    'package_version = Google::Cloud::Debugger::VERSION'
+    'Google::Cloud::Debugger::VERSION'
 )
