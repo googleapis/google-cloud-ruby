@@ -60,5 +60,5 @@ s.replace(
 s.replace(
     'lib/google/cloud/datastore/v1/*_client.rb',
     'Gem.loaded_specs\[.*\]\.version\.version',
-    'package_version = Google::Cloud::Datastore::VERSION'
+    'Google::Cloud::Datastore::VERSION'
 )
