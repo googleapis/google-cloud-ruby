@@ -89,13 +89,13 @@ describe Google::Cloud::PubSub::Subscriber, :acknowledge, :mock_pubsub do
 
       assert_kind_of Google::Cloud::PubSub::ReceivedMessage, msg
       msg.ack!
-      called +=1
+      called += 1
     end
     subscriber.start
 
     subscriber_retries = 0
     while called < 3
-      fail "total number of calls were never made" if subscriber_retries > 100
+      fail "total number of calls were never made" if subscriber_retries > 200
       subscriber_retries += 1
       sleep 0.01
     end

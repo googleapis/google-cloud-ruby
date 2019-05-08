@@ -46,7 +46,7 @@ describe Google::Cloud::PubSub, :pubsub do
   describe "Topic", :pubsub do
 
     it "should be listed" do
-      topics = pubsub.topics
+      topics = pubsub.topics.all
       topics.each do |topic|
         topic.must_be_kind_of Google::Cloud::PubSub::Topic
       end
@@ -54,7 +54,7 @@ describe Google::Cloud::PubSub, :pubsub do
     end
 
     it "should return a token if there are more results" do
-      topic_count = pubsub.topics.count
+      topic_count = pubsub.topics.all.count
       topics = pubsub.topics max: (topic_count - 1)
       topics.count.must_equal (topic_count - 1)
       topics.each do |topic|
@@ -115,7 +115,7 @@ describe Google::Cloud::PubSub, :pubsub do
     end
 
     it "should list all subscriptions registered to the topic" do
-      subscriptions = pubsub.subscriptions
+      subscriptions = pubsub.subscriptions.all
       subscriptions.each do |subscription|
         # subscriptions on project are objects...
         subscription.must_be_kind_of Google::Cloud::PubSub::Subscription
@@ -124,7 +124,7 @@ describe Google::Cloud::PubSub, :pubsub do
     end
 
     it "should return a token if there are more results" do
-      sub_count = pubsub.subscriptions.count
+      sub_count = pubsub.subscriptions.all.count
       subscriptions = pubsub.subscriptions max: (sub_count - 1)
       subscriptions.count.must_equal (sub_count - 1)
       subscriptions.each do |subscription|
