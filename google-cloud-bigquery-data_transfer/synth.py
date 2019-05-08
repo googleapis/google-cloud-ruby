@@ -121,3 +121,25 @@ s.replace(
     'README.md\n',
     'README.md\nAUTHENTICATION.md\nLICENSE\n'
 )
+
+# https://github.com/googleapis/google-cloud-ruby/issues/3058
+s.replace(
+    'google-cloud-bigquery-data_transfer.gemspec',
+    '\nGem::Specification.new do',
+    'require File.expand_path("../lib/google/cloud/bigquery/data_transfer/version", __FILE__)\n\nGem::Specification.new do'
+)
+s.replace(
+    'google-cloud-bigquery-data_transfer.gemspec',
+    '(gem.version\s+=\s+).\d+.\d+.\d.*$',
+    '\\1Google::Cloud::Bigquery::DataTransfer::VERSION'
+)
+s.replace(
+    f'lib/google/cloud/bigquery/data_transfer/v1/data_transfer_service_client.rb',
+    f'require "google/cloud/bigquery/data_transfer/v1/credentials"',
+    f'require "google/cloud/bigquery/data_transfer/v1/credentials"\nrequire "google/cloud/bigquery/data_transfer/version"'
+)
+s.replace(
+    f'lib/google/cloud/bigquery/data_transfer/v1/data_transfer_service_client.rb',
+    'package_version = (.+)',
+    'package_version = Google::Cloud::Bigquery::DataTransfer::VERSION'
+)

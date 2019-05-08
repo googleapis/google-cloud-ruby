@@ -1,9 +1,10 @@
 # -*- ruby -*-
 # encoding: utf-8
+require File.expand_path("../lib/google/cloud/bigquery/data_transfer/version", __FILE__)
 
 Gem::Specification.new do |gem|
   gem.name          = "google-cloud-bigquery-data_transfer"
-  gem.version       = "0.2.4"
+  gem.version       = Google::Cloud::Bigquery::DataTransfer::VERSION
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
