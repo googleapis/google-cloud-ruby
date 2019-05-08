@@ -39,7 +39,7 @@ describe Google::Cloud::Trace::Utils do
     # Float math is imprecise, so we're faking a sorta-equal
     result = Google::Cloud::Trace::Utils.time_to_grpc(time_float)
     result.seconds.must_equal secs
-    result.nanos.truncate(-3).must_equal nsecs.truncate(-3)
+    result.nanos.must_be_close_to nsecs, 1000
   end
 
   it "converts int objects to proto objects" do
