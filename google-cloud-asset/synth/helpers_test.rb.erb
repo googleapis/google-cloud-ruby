@@ -17,12 +17,12 @@ require "minitest/spec"
 
 require "google/gax"
 
-require "google/cloud/asset"
-require "google/cloud/asset/<%= version %>/helpers"
+require "google/cloud/<%= snake_module %>"
+require "google/cloud/<%= snake_module %>/<%= version %>/helpers"
 
-require "google/cloud/asset/<%= version %>/asset_service_client"
+require "google/cloud/<%= snake_module %>/<%= version %>/<%= file_name %>"
 
-class HelperMockAssetCredentials_<%= version %> < Google::Cloud::Asset::<%= version.capitalize %>::Credentials
+class HelperMock<%= module_name %>Credentials_<%= version %> < Google::Cloud::<%= module_name %>::<%= version.capitalize %>::Credentials
   def initialize
   end
 
@@ -34,21 +34,22 @@ class HelperMockAssetCredentials_<%= version %> < Google::Cloud::Asset::<%= vers
   end
 end
 
-describe Google::Cloud::Asset::<%= version.capitalize %>::AssetServiceClient do
-  let(:mock_credentials) { HelperMockAssetCredentials_<%= version %>.new }
+describe Google::Cloud::<%= module_name %>::<%= version.capitalize %>::<%= class_name %> do
+  let(:mock_credentials) { HelperMock<%= module_name %>Credentials_<%= version %>.new }
 
 <%= 
   describe_block = []
   class_methods.each do |method_name| 
     describe_block += ["describe \"the #{method_name} instance method\" do"]
+
     describe_block += [
-      "  it \"correctly calls Google::Cloud::Asset::#{version.capitalize}::AssetServiceClient.#{method_name}\" do",
-      "    Google::Cloud::Asset::#{version.capitalize}::Credentials.stub(:default, mock_credentials) do",
-      "      parameters = Google::Cloud::Asset::#{version.capitalize}::AssetServiceClient.method(\"#{method_name}\").parameters.map { |arg| arg.last.to_s }",
-      "      client = Google::Cloud::Asset.new version: :#{version}",
+      "  it \"correctly calls Google::Cloud::#{module_name}::#{version.capitalize}::#{class_name}.#{method_name}\" do",
+      "    Google::Cloud::#{module_name}::#{version.capitalize}::Credentials.stub(:default, mock_credentials) do",
+      "      client = Google::Cloud::#{module_name}.new version: :#{version}",
+      "      parameters = client.method(\"#{method_name}\").parameters.map { |arg| arg.last.to_s }",
       "      assert_equal(",
       "        client.#{method_name}(*parameters),",
-      "        Google::Cloud::Asset::#{version.capitalize}::AssetServiceClient.#{method_name}(*parameters)",
+      "        Google::Cloud::#{module_name}::#{version.capitalize}::#{class_name}.#{method_name}(*parameters)",
       "      )",
       "    end",
       "  end",

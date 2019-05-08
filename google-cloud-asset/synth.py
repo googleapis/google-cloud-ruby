@@ -144,5 +144,29 @@ s.replace(
     'README.md\nAUTHENTICATION.md\nLICENSE\n'
 )
 
+# https://github.com/googleapis/google-cloud-ruby/issues/3058
+s.replace(
+    'google-cloud-asset.gemspec',
+    '\nGem::Specification.new do',
+    'require File.expand_path("../lib/google/cloud/asset/version", __FILE__)\n\nGem::Specification.new do'
+)
+s.replace(
+    'google-cloud-asset.gemspec',
+    '(gem.version\s+=\s+).\d+.\d+.\d.*$',
+    '\\1 Google::Cloud::Asset::VERSION'
+)
+for version in ['v1', 'v1beta1']:
+    s.replace(
+        f'lib/google/cloud/asset/{version}/asset_service_client.rb',
+        f'require "google/cloud/asset/{version}/credentials"',
+        f'require "google/cloud/asset/{version}/credentials"\nrequire "google/cloud/asset/version"'
+    )
+    s.replace(
+        f'lib/google/cloud/asset/{version}/asset_service_client.rb',
+        'package_version = (.+)',
+        'package_version = Google::Cloud::Asset::VERSION'
+    )
+
+
 # Generate the helper methods
-call('bundle update && bundle exec rake generate_partials', shell=True)
+call('bundle update && bundle exec rake generate', shell=True)

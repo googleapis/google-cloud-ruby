@@ -11,11 +11,13 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # # limitations under the License.
- module Google
+
+module Google
   module Cloud
     module Asset
       module V1beta1
         class AssetServiceClient
+
           # Alias for Google::Cloud::Asset::V1beta1::AssetServiceClient.project_path.
           # @param project [String]
           # @return [String]
