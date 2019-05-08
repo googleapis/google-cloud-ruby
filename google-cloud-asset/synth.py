@@ -153,7 +153,7 @@ s.replace(
 s.replace(
     'google-cloud-asset.gemspec',
     '(gem.version\s+=\s+).\d+.\d+.\d.*$',
-    '\\1 Google::Cloud::Asset::VERSION'
+    '\\1Google::Cloud::Asset::VERSION'
 )
 for version in ['v1', 'v1beta1']:
     s.replace(

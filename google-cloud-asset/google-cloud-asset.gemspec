@@ -4,7 +4,7 @@ require File.expand_path("../lib/google/cloud/asset/version", __FILE__)
 
 Gem::Specification.new do |gem|
   gem.name          = "google-cloud-asset"
-  gem.version       =  Google::Cloud::Asset::VERSION
+  gem.version       = Google::Cloud::Asset::VERSION
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
