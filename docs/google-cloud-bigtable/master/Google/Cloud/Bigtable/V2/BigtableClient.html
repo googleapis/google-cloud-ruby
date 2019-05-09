@@ -533,7 +533,6 @@ custom error handling.</p>
       <pre class="lines">
 
 
-114
 115
 116
 117
@@ -654,10 +653,11 @@ custom error handling.</p>
 232
 233
 234
-235</pre>
+235
+236</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/v2/bigtable_client.rb', line 114</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/v2/bigtable_client.rb', line 115</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span> \
     <span class='label'>credentials:</span> <span class='kw'>nil</span><span class='comma'>,</span>
@@ -692,7 +692,7 @@ custom error handling.</p>
     <span class='id identifier rubyid_updater_proc'>updater_proc</span> <span class='op'>=</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='period'>.</span><span class='id identifier rubyid_updater_proc'>updater_proc</span>
   <span class='kw'>end</span>
 
-  <span class='id identifier rubyid_package_version'>package_version</span> <span class='op'>=</span> <span class='const'>Gem</span><span class='period'>.</span><span class='id identifier rubyid_loaded_specs'>loaded_specs</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>google-cloud-bigtable</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_version'>version</span><span class='period'>.</span><span class='id identifier rubyid_version'>version</span>
+  <span class='id identifier rubyid_package_version'>package_version</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Bigtable.html" title="Google::Cloud::Bigtable (module)">Bigtable</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Bigtable.html#VERSION-constant" title="Google::Cloud::Bigtable::VERSION (constant)">VERSION</a></span></span>
 
   <span class='id identifier rubyid_google_api_client'>google_api_client</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gl-ruby/</span><span class='embexpr_beg'>#{</span><span class='const'>RUBY_VERSION</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
   <span class='id identifier rubyid_google_api_client'>google_api_client</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'> </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_lib_name'>lib_name</span><span class='embexpr_end'>}</span><span class='tstring_content'>/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_lib_version'>lib_version</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>if</span> <span class='id identifier rubyid_lib_name'>lib_name</span>
@@ -868,16 +868,16 @@ custom error handling.</p>
       <pre class="lines">
 
 
-77
 78
 79
 80
 81
 82
-83</pre>
+83
+84</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/v2/bigtable_client.rb', line 77</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/v2/bigtable_client.rb', line 78</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_table_path'>table_path</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span> <span class='id identifier rubyid_instance'>instance</span><span class='comma'>,</span> <span class='id identifier rubyid_table'>table</span>
   <span class='const'>TABLE_PATH_TEMPLATE</span><span class='period'>.</span><span class='id identifier rubyid_render'>render</span><span class='lparen'>(</span>
@@ -1141,7 +1141,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-497
 498
 499
 500
@@ -1160,10 +1159,11 @@ retries, etc.</p>
 513
 514
 515
-516</pre>
+516
+517</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/v2/bigtable_client.rb', line 497</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/v2/bigtable_client.rb', line 498</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_check_and_mutate_row'>check_and_mutate_row</span> \
     <span class='id identifier rubyid_table_name'>table_name</span><span class='comma'>,</span>
@@ -1394,7 +1394,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-377
 378
 379
 380
@@ -1409,10 +1408,11 @@ retries, etc.</p>
 389
 390
 391
-392</pre>
+392
+393</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/v2/bigtable_client.rb', line 377</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/v2/bigtable_client.rb', line 378</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_mutate_row'>mutate_row</span> \
     <span class='id identifier rubyid_table_name'>table_name</span><span class='comma'>,</span>
@@ -1585,7 +1585,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-430
 431
 432
 433
@@ -1597,10 +1596,11 @@ retries, etc.</p>
 439
 440
 441
-442</pre>
+442
+443</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/v2/bigtable_client.rb', line 430</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/v2/bigtable_client.rb', line 431</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_mutate_rows'>mutate_rows</span> \
     <span class='id identifier rubyid_table_name'>table_name</span><span class='comma'>,</span>
@@ -1828,7 +1828,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-561
 562
 563
 564
@@ -1843,10 +1842,11 @@ retries, etc.</p>
 573
 574
 575
-576</pre>
+576
+577</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/v2/bigtable_client.rb', line 561</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/v2/bigtable_client.rb', line 562</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_read_modify_write_row'>read_modify_write_row</span> \
     <span class='id identifier rubyid_table_name'>table_name</span><span class='comma'>,</span>
@@ -2050,7 +2050,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-280
 281
 282
 283
@@ -2066,10 +2065,11 @@ retries, etc.</p>
 293
 294
 295
-296</pre>
+296
+297</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/v2/bigtable_client.rb', line 280</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/v2/bigtable_client.rb', line 281</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_read_rows'>read_rows</span> \
     <span class='id identifier rubyid_table_name'>table_name</span><span class='comma'>,</span>
@@ -2222,7 +2222,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-326
 327
 328
 329
@@ -2232,10 +2231,11 @@ retries, etc.</p>
 333
 334
 335
-336</pre>
+336
+337</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/v2/bigtable_client.rb', line 326</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/v2/bigtable_client.rb', line 327</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_sample_row_keys'>sample_row_keys</span> \
     <span class='id identifier rubyid_table_name'>table_name</span><span class='comma'>,</span>

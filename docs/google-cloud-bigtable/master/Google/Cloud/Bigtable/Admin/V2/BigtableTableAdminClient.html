@@ -769,7 +769,6 @@ custom error handling.</p>
       <pre class="lines">
 
 
-199
 200
 201
 202
@@ -956,10 +955,11 @@ custom error handling.</p>
 383
 384
 385
-386</pre>
+386
+387</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/admin/v2/bigtable_table_admin_client.rb', line 199</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/admin/v2/bigtable_table_admin_client.rb', line 200</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span> \
     <span class='label'>credentials:</span> <span class='kw'>nil</span><span class='comma'>,</span>
@@ -1003,7 +1003,7 @@ custom error handling.</p>
     <span class='id identifier rubyid_updater_proc'>updater_proc</span> <span class='op'>=</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='period'>.</span><span class='id identifier rubyid_updater_proc'>updater_proc</span>
   <span class='kw'>end</span>
 
-  <span class='id identifier rubyid_package_version'>package_version</span> <span class='op'>=</span> <span class='const'>Gem</span><span class='period'>.</span><span class='id identifier rubyid_loaded_specs'>loaded_specs</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>google-cloud-bigtable</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_version'>version</span><span class='period'>.</span><span class='id identifier rubyid_version'>version</span>
+  <span class='id identifier rubyid_package_version'>package_version</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Bigtable.html" title="Google::Cloud::Bigtable (module)">Bigtable</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Bigtable.html#VERSION-constant" title="Google::Cloud::Bigtable::VERSION (constant)">VERSION</a></span></span>
 
   <span class='id identifier rubyid_google_api_client'>google_api_client</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gl-ruby/</span><span class='embexpr_beg'>#{</span><span class='const'>RUBY_VERSION</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
   <span class='id identifier rubyid_google_api_client'>google_api_client</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'> </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_lib_name'>lib_name</span><span class='embexpr_end'>}</span><span class='tstring_content'>/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_lib_version'>lib_version</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>if</span> <span class='id identifier rubyid_lib_name'>lib_name</span>
@@ -1236,16 +1236,16 @@ custom error handling.</p>
       <pre class="lines">
 
 
-123
 124
 125
 126
 127
 128
-129</pre>
+129
+130</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/admin/v2/bigtable_table_admin_client.rb', line 123</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/admin/v2/bigtable_table_admin_client.rb', line 124</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_cluster_path'>cluster_path</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span> <span class='id identifier rubyid_instance'>instance</span><span class='comma'>,</span> <span class='id identifier rubyid_cluster'>cluster</span>
   <span class='const'>CLUSTER_PATH_TEMPLATE</span><span class='period'>.</span><span class='id identifier rubyid_render'>render</span><span class='lparen'>(</span>
@@ -1323,15 +1323,15 @@ custom error handling.</p>
       <pre class="lines">
 
 
-135
 136
 137
 138
 139
-140</pre>
+140
+141</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/admin/v2/bigtable_table_admin_client.rb', line 135</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/admin/v2/bigtable_table_admin_client.rb', line 136</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_instance_path'>instance_path</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span> <span class='id identifier rubyid_instance'>instance</span>
   <span class='const'>INSTANCE_PATH_TEMPLATE</span><span class='period'>.</span><span class='id identifier rubyid_render'>render</span><span class='lparen'>(</span>
@@ -1430,17 +1430,17 @@ custom error handling.</p>
       <pre class="lines">
 
 
-148
 149
 150
 151
 152
 153
 154
-155</pre>
+155
+156</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/admin/v2/bigtable_table_admin_client.rb', line 148</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/admin/v2/bigtable_table_admin_client.rb', line 149</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_snapshot_path'>snapshot_path</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span> <span class='id identifier rubyid_instance'>instance</span><span class='comma'>,</span> <span class='id identifier rubyid_cluster'>cluster</span><span class='comma'>,</span> <span class='id identifier rubyid_snapshot'>snapshot</span>
   <span class='const'>SNAPSHOT_PATH_TEMPLATE</span><span class='period'>.</span><span class='id identifier rubyid_render'>render</span><span class='lparen'>(</span>
@@ -1530,16 +1530,16 @@ custom error handling.</p>
       <pre class="lines">
 
 
-162
 163
 164
 165
 166
 167
-168</pre>
+168
+169</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/admin/v2/bigtable_table_admin_client.rb', line 162</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/admin/v2/bigtable_table_admin_client.rb', line 163</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_table_path'>table_path</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span> <span class='id identifier rubyid_instance'>instance</span><span class='comma'>,</span> <span class='id identifier rubyid_table'>table</span>
   <span class='const'>TABLE_PATH_TEMPLATE</span><span class='period'>.</span><span class='id identifier rubyid_render'>render</span><span class='lparen'>(</span>
@@ -1726,7 +1726,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-826
 827
 828
 829
@@ -1737,10 +1736,11 @@ retries, etc.</p>
 834
 835
 836
-837</pre>
+837
+838</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/admin/v2/bigtable_table_admin_client.rb', line 826</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/admin/v2/bigtable_table_admin_client.rb', line 827</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_check_consistency'>check_consistency</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -1983,7 +1983,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-444
 445
 446
 447
@@ -1998,10 +1997,11 @@ retries, etc.</p>
 456
 457
 458
-459</pre>
+459
+460</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/admin/v2/bigtable_table_admin_client.rb', line 444</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/admin/v2/bigtable_table_admin_client.rb', line 445</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_table'>create_table</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -2200,7 +2200,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-525
 526
 527
 528
@@ -2220,10 +2219,11 @@ retries, etc.</p>
 542
 543
 544
-545</pre>
+545
+546</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/admin/v2/bigtable_table_admin_client.rb', line 525</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/admin/v2/bigtable_table_admin_client.rb', line 526</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_table_from_snapshot'>create_table_from_snapshot</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -2395,7 +2395,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1071
 1072
 1073
 1074
@@ -2405,10 +2404,11 @@ retries, etc.</p>
 1078
 1079
 1080
-1081</pre>
+1081
+1082</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/admin/v2/bigtable_table_admin_client.rb', line 1071</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/admin/v2/bigtable_table_admin_client.rb', line 1072</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete_snapshot'>delete_snapshot</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -2564,7 +2564,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-661
 662
 663
 664
@@ -2574,10 +2573,11 @@ retries, etc.</p>
 668
 669
 670
-671</pre>
+671
+672</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/admin/v2/bigtable_table_admin_client.rb', line 661</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/admin/v2/bigtable_table_admin_client.rb', line 662</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete_table'>delete_table</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -2766,7 +2766,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-747
 748
 749
 750
@@ -2780,10 +2779,11 @@ retries, etc.</p>
 758
 759
 760
-761</pre>
+761
+762</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/admin/v2/bigtable_table_admin_client.rb', line 747</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/admin/v2/bigtable_table_admin_client.rb', line 748</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_drop_row_range'>drop_row_range</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -2955,7 +2955,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-787
 788
 789
 790
@@ -2964,10 +2963,11 @@ retries, etc.</p>
 793
 794
 795
-796</pre>
+796
+797</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/admin/v2/bigtable_table_admin_client.rb', line 787</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/admin/v2/bigtable_table_admin_client.rb', line 788</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_generate_consistency_token'>generate_consistency_token</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -3137,7 +3137,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-970
 971
 972
 973
@@ -3146,10 +3145,11 @@ retries, etc.</p>
 976
 977
 978
-979</pre>
+979
+980</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/admin/v2/bigtable_table_admin_client.rb', line 970</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/admin/v2/bigtable_table_admin_client.rb', line 971</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_snapshot'>get_snapshot</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -3329,7 +3329,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-628
 629
 630
 631
@@ -3340,10 +3339,11 @@ retries, etc.</p>
 636
 637
 638
-639</pre>
+639
+640</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/admin/v2/bigtable_table_admin_client.rb', line 628</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/admin/v2/bigtable_table_admin_client.rb', line 629</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_table'>get_table</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -3555,7 +3555,6 @@ object.</p>
       <pre class="lines">
 
 
-1032
 1033
 1034
 1035
@@ -3566,10 +3565,11 @@ object.</p>
 1040
 1041
 1042
-1043</pre>
+1043
+1044</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/admin/v2/bigtable_table_admin_client.rb', line 1032</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/admin/v2/bigtable_table_admin_client.rb', line 1033</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_snapshots'>list_snapshots</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -3785,7 +3785,6 @@ object.</p>
       <pre class="lines">
 
 
-589
 590
 591
 592
@@ -3798,10 +3797,11 @@ object.</p>
 599
 600
 601
-602</pre>
+602
+603</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/admin/v2/bigtable_table_admin_client.rb', line 589</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/admin/v2/bigtable_table_admin_client.rb', line 590</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_tables'>list_tables</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -3995,7 +3995,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-707
 708
 709
 710
@@ -4006,10 +4005,11 @@ retries, etc.</p>
 715
 716
 717
-718</pre>
+718
+719</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/admin/v2/bigtable_table_admin_client.rb', line 707</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/admin/v2/bigtable_table_admin_client.rb', line 708</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_modify_column_families'>modify_column_families</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -4244,7 +4244,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-917
 918
 919
 920
@@ -4268,10 +4267,11 @@ retries, etc.</p>
 938
 939
 940
-941</pre>
+941
+942</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/admin/v2/bigtable_table_admin_client.rb', line 917</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/admin/v2/bigtable_table_admin_client.rb', line 918</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_snapshot_table'>snapshot_table</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
