@@ -29,6 +29,7 @@ require "google/longrunning/operations_client"
 
 require "google/bigtable/admin/v2/bigtable_table_admin_pb"
 require "google/cloud/bigtable/admin/v2/credentials"
+require "google/cloud/bigtable/version"
 
 module Google
   module Cloud
@@ -238,7 +239,7 @@ module Google
                 updater_proc = credentials.updater_proc
               end
 
-              package_version = Gem.loaded_specs['google-cloud-bigtable'].version.version
+              package_version = Google::Cloud::Bigtable::VERSION
 
               google_api_client = "gl-ruby/#{RUBY_VERSION}"
               google_api_client << " #{lib_name}/#{lib_version}" if lib_name
