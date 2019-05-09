@@ -27,6 +27,7 @@ require "google/gax"
 
 require "google/container/v1beta1/cluster_service_pb"
 require "google/cloud/container/v1beta1/credentials"
+require "google/cloud/container/version"
 
 module Google
   module Cloud
@@ -129,7 +130,7 @@ module Google
               updater_proc = credentials.updater_proc
             end
 
-            package_version = Gem.loaded_specs['google-cloud-container'].version.version
+            package_version = Google::Cloud::Container::VERSION
 
             google_api_client = "gl-ruby/#{RUBY_VERSION}"
             google_api_client << " #{lib_name}/#{lib_version}" if lib_name

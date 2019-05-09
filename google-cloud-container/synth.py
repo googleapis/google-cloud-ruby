@@ -115,3 +115,26 @@ s.replace(
     'README.md\n',
     'README.md\nAUTHENTICATION.md\nLICENSE\n'
 )
+
+# https://github.com/googleapis/google-cloud-ruby/issues/3058
+s.replace(
+    'google-cloud-container.gemspec',
+    '\nGem::Specification.new do',
+    'require File.expand_path("../lib/google/cloud/container/version", __FILE__)\n\nGem::Specification.new do'
+)
+s.replace(
+    'google-cloud-container.gemspec',
+    '(gem.version\s+=\s+).\d+.\d+.\d.*$',
+    '\\1Google::Cloud::Container::VERSION'
+)
+for version in ['v1', 'v1beta1']:
+    s.replace(
+        f'lib/google/cloud/container/{version}/cluster_manager_client.rb',
+        f'require "google/cloud/container/{version}/credentials"',
+        f'require "google/cloud/container/{version}/credentials"\nrequire "google/cloud/container/version"'
+    )
+    s.replace(
+        f'lib/google/cloud/container/{version}/cluster_manager_client.rb',
+        'Gem.loaded_specs\[.*\]\.version\.version',
+        'Google::Cloud::Container::VERSION'
+    )
