@@ -27,6 +27,7 @@ require "google/gax"
 
 require "google/devtools/clouddebugger/v2/debugger_pb"
 require "google/cloud/debugger/v2/credentials"
+require "google/cloud/debugger/version"
 
 module Google
   module Cloud
@@ -132,7 +133,7 @@ module Google
               updater_proc = credentials.updater_proc
             end
 
-            package_version = Gem.loaded_specs['google-cloud-debugger'].version.version
+            package_version = Google::Cloud::Debugger::VERSION
 
             google_api_client = "gl-ruby/#{RUBY_VERSION}"
             google_api_client << " #{lib_name}/#{lib_version}" if lib_name

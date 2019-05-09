@@ -101,3 +101,15 @@ s.replace(
     'https://googlecloudplatform\\.github\\.io/google-cloud-ruby',
     'https://googleapis.github.io/google-cloud-ruby'
 )
+
+# https://github.com/googleapis/google-cloud-ruby/issues/3058
+s.replace(
+    'lib/google/cloud/debugger/v2/*_client.rb',
+    'require "google/cloud/debugger/v2/credentials"',
+    'require "google/cloud/debugger/v2/credentials"\nrequire "google/cloud/debugger/version"'
+)
+s.replace(
+    'lib/google/cloud/debugger/v2/*_client.rb',
+    'Gem.loaded_specs\[.*\]\.version\.version',
+    'Google::Cloud::Debugger::VERSION'
+)
