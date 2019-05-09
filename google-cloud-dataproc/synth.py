@@ -142,3 +142,26 @@ s.replace(
     'README.md\n',
     'README.md\nAUTHENTICATION.md\nLICENSE\n'
 )
+
+# https://github.com/googleapis/google-cloud-ruby/issues/3058
+s.replace(
+    'google-cloud-dataproc.gemspec',
+    '\nGem::Specification.new do',
+    'require File.expand_path("../lib/google/cloud/dataproc/version", __FILE__)\n\nGem::Specification.new do'
+)
+s.replace(
+    'google-cloud-dataproc.gemspec',
+    '(gem.version\s+=\s+).\d+.\d+.\d.*$',
+    '\\1Google::Cloud::Dataproc::VERSION'
+)
+for version in ['v1', 'v1beta2']:
+    s.replace(
+        f'lib/google/cloud/dataproc/{version}/*_client.rb',
+        f'require "google/cloud/dataproc/{version}/credentials"',
+        f'require "google/cloud/dataproc/{version}/credentials"\nrequire "google/cloud/dataproc/version"'
+    )
+    s.replace(
+        f'lib/google/cloud/dataproc/{version}/*_client.rb',
+        'Gem.loaded_specs\[.*\]\.version\.version',
+        'Google::Cloud::Dataproc::VERSION'
+    )
