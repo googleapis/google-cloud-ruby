@@ -3,6 +3,7 @@
     "google.logging.v2.LoggingServiceV2": {
       "retry_codes": {
         "idempotent": [
+          "DEADLINE_EXCEEDED",
           "INTERNAL",
           "UNAVAILABLE"
         ],
