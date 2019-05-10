@@ -231,7 +231,7 @@ module Google
           #   require "google/cloud/video_intelligence"
           #
           #   video_intelligence_client = Google::Cloud::VideoIntelligence.new(version: :v1)
-          #   input_uri = "gs://videodemomaker/cat.mp4"
+          #   input_uri = "gs://cloud-samples-data/video/cat.mp4"
           #   features_element = :LABEL_DETECTION
           #   features = [features_element]
           #
