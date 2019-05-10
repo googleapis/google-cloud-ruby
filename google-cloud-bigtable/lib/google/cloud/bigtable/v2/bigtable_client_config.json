@@ -3,6 +3,7 @@
     "google.bigtable.v2.Bigtable": {
       "retry_codes": {
         "idempotent": [
+          "DEADLINE_EXCEEDED",
           "UNAVAILABLE"
         ],
         "non_idempotent": []
