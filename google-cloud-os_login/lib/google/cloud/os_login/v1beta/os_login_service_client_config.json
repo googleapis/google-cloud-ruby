@@ -3,6 +3,7 @@
     "google.cloud.oslogin.v1beta.OsLoginService": {
       "retry_codes": {
         "idempotent": [
+          "DEADLINE_EXCEEDED",
           "UNAVAILABLE"
         ],
         "non_idempotent": []
