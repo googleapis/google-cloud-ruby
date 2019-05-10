@@ -1,5 +1,15 @@
 # Release History
 
+### 0.3.0 / 2019-05-10
+
+* Add Resume resource
+* Add Profile#resume
+* Remove Profile#resume_hrxml (Breaking change)
+* Add PersonStructuredName#preferred_name
+* Add Tenant#keyword_searchable_profile_custom_attributes
+* Update error retry configuration.
+* Update generated documentation.
+
 ### 0.2.0 / 2019-04-29
 
 This is a breaking change.
