@@ -3,6 +3,7 @@
     "google.devtools.clouddebugger.v2.Controller2": {
       "retry_codes": {
         "idempotent": [
+          "DEADLINE_EXCEEDED",
           "UNAVAILABLE"
         ],
         "non_idempotent": []
