@@ -3,6 +3,7 @@
     "google.devtools.clouderrorreporting.v1beta1.ErrorStatsService": {
       "retry_codes": {
         "idempotent": [
+          "DEADLINE_EXCEEDED",
           "UNAVAILABLE"
         ],
         "non_idempotent": []
