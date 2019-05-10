@@ -2,6 +2,8 @@
 
 ### 0.3.0 / 2019-05-10
 
+This is a breaking change.
+
 * Add Resume resource
 * Add Profile#resume
 * Remove Profile#resume_hrxml (Breaking change)
