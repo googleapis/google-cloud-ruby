@@ -117,7 +117,7 @@ module Google
         #     HTTP request.
         #
         #     This type of authorization should be used when sending requests to third
-        #     party endpoints.
+        #     party endpoints or Cloud Run.
         class HttpRequest; end
 
         # App Engine HTTP queue.
@@ -147,9 +147,6 @@ module Google
         #
         # The message defines the HTTP request that is sent to an App Engine app when
         # the task is dispatched.
-        #
-        # This proto can only be used for tasks in a queue which has
-        # {Google::Cloud::Tasks::V2beta3::Queue#app_engine_http_queue app_engine_http_queue} set.
         #
         # Using {Google::Cloud::Tasks::V2beta3::AppEngineHttpRequest AppEngineHttpRequest} requires
         # [`appengine.applications.get`](https://cloud.google.com/appengine/docs/admin-api/access-control)
@@ -386,7 +383,7 @@ module Google
         # [OpenID Connect
         # token](https://developers.google.com/identity/protocols/OpenIDConnect). This
         # type of authorization should be used when sending requests to third party
-        # endpoints.
+        # endpoints or Cloud Run.
         # @!attribute [rw] service_account_email
         #   @return [String]
         #     [Service account email](https://cloud.google.com/iam/docs/service-accounts)
