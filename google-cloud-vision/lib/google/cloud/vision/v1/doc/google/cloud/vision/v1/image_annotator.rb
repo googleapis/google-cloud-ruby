@@ -724,8 +724,8 @@ module Google
         #     not work for AsyncBatchAnnotateFiles requests.
         # @!attribute [rw] mime_type
         #   @return [String]
-        #     The type of the file. Currently only "application/pdf" and "image/tiff"
-        #     are supported. Wildcards are not supported.
+        #     The type of the file. Currently only "application/pdf", "image/tiff" and
+        #     "image/gif" are supported. Wildcards are not supported.
         class InputConfig; end
 
         # The desired output location and metadata.
