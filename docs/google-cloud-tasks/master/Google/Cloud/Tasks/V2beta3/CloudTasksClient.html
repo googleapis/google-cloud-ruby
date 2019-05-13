@@ -1736,8 +1736,9 @@ it was dispatched or not.</p>
 <p>WARNING: Using this method may have unintended side effects if you are
 using an App Engine <code>queue.yaml</code> or <code>queue.xml</code> file to manage your queues.
 Read
-<a href="https://cloud.google.com/tasks/docs/queue-yaml">Overview of Queue Management and queue.yaml</a>
-before using this method.</p>
+<a href="https://cloud.google.com/tasks/docs/queue-yaml">Overview of Queue Management and
+queue.yaml</a> before using
+this method.</p>
 
 
   </div>
@@ -1902,8 +1903,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-534
-535
 536
 537
 538
@@ -1913,10 +1912,12 @@ retries, etc.</p>
 542
 543
 544
-545</pre>
+545
+546
+547</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/cloud_tasks_client.rb', line 534</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/cloud_tasks_client.rb', line 536</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_queue'>create_queue</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -2172,11 +2173,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1125
-1126
-1127
-1128
-1129
 1130
 1131
 1132
@@ -2185,10 +2181,15 @@ retries, etc.</p>
 1135
 1136
 1137
-1138</pre>
+1138
+1139
+1140
+1141
+1142
+1143</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/cloud_tasks_client.rb', line 1125</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/cloud_tasks_client.rb', line 1130</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_task'>create_task</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -2230,8 +2231,9 @@ for 7 days.</p>
 <p>WARNING: Using this method may have unintended side effects if you are
 using an App Engine <code>queue.yaml</code> or <code>queue.xml</code> file to manage your queues.
 Read
-<a href="https://cloud.google.com/tasks/docs/queue-yaml">Overview of Queue Management and queue.yaml</a>
-before using this method.</p>
+<a href="https://cloud.google.com/tasks/docs/queue-yaml">Overview of Queue Management and
+queue.yaml</a> before using
+this method.</p>
 
 
   </div>
@@ -2359,20 +2361,20 @@ retries, etc.</p>
       <pre class="lines">
 
 
-642
-643
-644
-645
 646
 647
 648
 649
 650
 651
-652</pre>
+652
+653
+654
+655
+656</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/cloud_tasks_client.rb', line 642</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/cloud_tasks_client.rb', line 646</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete_queue'>delete_queue</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -2533,20 +2535,20 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1165
-1166
-1167
-1168
-1169
 1170
 1171
 1172
 1173
 1174
-1175</pre>
+1175
+1176
+1177
+1178
+1179
+1180</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/cloud_tasks_client.rb', line 1165</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/cloud_tasks_client.rb', line 1170</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete_task'>delete_task</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -2720,19 +2722,19 @@ retries, etc.</p>
       <pre class="lines">
 
 
-803
-804
-805
-806
-807
 808
 809
 810
 811
-812</pre>
+812
+813
+814
+815
+816
+817</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/cloud_tasks_client.rb', line 803</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/cloud_tasks_client.rb', line 808</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_iam_policy'>get_iam_policy</span> \
     <span class='id identifier rubyid_resource'>resource</span><span class='comma'>,</span>
@@ -2897,7 +2899,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-476
 477
 478
 479
@@ -2906,10 +2907,11 @@ retries, etc.</p>
 482
 483
 484
-485</pre>
+485
+486</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/cloud_tasks_client.rb', line 476</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/cloud_tasks_client.rb', line 477</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_queue'>get_queue</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -3100,21 +3102,21 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1029
-1030
-1031
-1032
-1033
 1034
 1035
 1036
 1037
 1038
 1039
-1040</pre>
+1040
+1041
+1042
+1043
+1044
+1045</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/cloud_tasks_client.rb', line 1029</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/cloud_tasks_client.rb', line 1034</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_task'>get_task</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -3211,7 +3213,8 @@ For example: <code>projects/PROJECT_ID/locations/LOCATION_ID</code></p>
 field can be used as a filter and several operators as supported.
 For example: <code>&lt;=, &lt;, &gt;=, &gt;, !=, =, :</code>. The filter syntax is the same as
 described in
-<a href="https://cloud.google.com/logging/docs/view/advanced_filters">Stackdriver&#39;s Advanced Logs Filters</a>.</p>
+<a href="https://cloud.google.com/logging/docs/view/advanced_filters">Stackdriver&#39;s Advanced Logs
+Filters</a>.</p>
 
 <p>Sample filter &quot;state: PAUSED&quot;.</p>
 
@@ -3345,7 +3348,6 @@ object.</p>
       <pre class="lines">
 
 
-439
 440
 441
 442
@@ -3358,10 +3360,11 @@ object.</p>
 449
 450
 451
-452</pre>
+452
+453</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/cloud_tasks_client.rb', line 439</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/cloud_tasks_client.rb', line 440</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_queues'>list_queues</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -3602,11 +3605,6 @@ object.</p>
       <pre class="lines">
 
 
-979
-980
-981
-982
-983
 984
 985
 986
@@ -3615,10 +3613,15 @@ object.</p>
 989
 990
 991
-992</pre>
+992
+993
+994
+995
+996
+997</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/cloud_tasks_client.rb', line 979</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/cloud_tasks_client.rb', line 984</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_tasks'>list_tasks</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -3872,19 +3875,19 @@ retries, etc.</p>
       <pre class="lines">
 
 
-720
-721
-722
-723
 724
 725
 726
 727
 728
-729</pre>
+729
+730
+731
+732
+733</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/cloud_tasks_client.rb', line 720</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/cloud_tasks_client.rb', line 724</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_pause_queue'>pause_queue</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -4122,19 +4125,19 @@ retries, etc.</p>
       <pre class="lines">
 
 
-681
-682
-683
-684
 685
 686
 687
 688
 689
-690</pre>
+690
+691
+692
+693
+694</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/cloud_tasks_client.rb', line 681</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/cloud_tasks_client.rb', line 685</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_purge_queue'>purge_queue</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -4263,7 +4266,8 @@ will be set to <span class='object_link'><a href="Queue/State.html#RUNNING-const
 <p>WARNING: Resuming many high-QPS queues at the same time can
 lead to target overloading. If you are resuming high-QPS
 queues, follow the 500/50/5 pattern described in
-<a href="https://cloud.google.com/tasks/docs/manage-cloud-task-scaling">Managing Cloud Tasks Scaling Risks</a>.</p>
+<a href="https://cloud.google.com/tasks/docs/manage-cloud-task-scaling">Managing Cloud Tasks Scaling
+Risks</a>.</p>
 
 
   </div>
@@ -4400,19 +4404,19 @@ retries, etc.</p>
       <pre class="lines">
 
 
-764
-765
-766
-767
-768
 769
 770
 771
 772
-773</pre>
+773
+774
+775
+776
+777
+778</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/cloud_tasks_client.rb', line 764</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/cloud_tasks_client.rb', line 769</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_resume_queue'>resume_queue</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -4626,21 +4630,21 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1235
-1236
-1237
-1238
-1239
 1240
 1241
 1242
 1243
 1244
 1245
-1246</pre>
+1246
+1247
+1248
+1249
+1250
+1251</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/cloud_tasks_client.rb', line 1235</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/cloud_tasks_client.rb', line 1240</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_run_task'>run_task</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -4840,21 +4844,21 @@ retries, etc.</p>
       <pre class="lines">
 
 
-854
-855
-856
-857
-858
 859
 860
 861
 862
 863
 864
-865</pre>
+865
+866
+867
+868
+869
+870</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/cloud_tasks_client.rb', line 854</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/cloud_tasks_client.rb', line 859</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_set_iam_policy'>set_iam_policy</span> \
     <span class='id identifier rubyid_resource'>resource</span><span class='comma'>,</span>
@@ -5147,21 +5151,21 @@ retries, etc.</p>
       <pre class="lines">
 
 
-901
-902
-903
-904
-905
 906
 907
 908
 909
 910
 911
-912</pre>
+912
+913
+914
+915
+916
+917</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/cloud_tasks_client.rb', line 901</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/cloud_tasks_client.rb', line 906</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_test_iam_permissions'>test_iam_permissions</span> \
     <span class='id identifier rubyid_resource'>resource</span><span class='comma'>,</span>
@@ -5203,8 +5207,9 @@ it was dispatched or not.</p>
 <p>WARNING: Using this method may have unintended side effects if you are
 using an App Engine <code>queue.yaml</code> or <code>queue.xml</code> file to manage your queues.
 Read
-<a href="https://cloud.google.com/tasks/docs/queue-yaml">Overview of Queue Management and queue.yaml</a>
-before using this method.</p>
+<a href="https://cloud.google.com/tasks/docs/queue-yaml">Overview of Queue Management and
+queue.yaml</a> before using
+this method.</p>
 
 
   </div>
@@ -5369,9 +5374,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-597
-598
-599
 600
 601
 602
@@ -5380,10 +5382,13 @@ retries, etc.</p>
 605
 606
 607
-608</pre>
+608
+609
+610
+611</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/cloud_tasks_client.rb', line 597</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/cloud_tasks_client.rb', line 600</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update_queue'>update_queue</span> \
     <span class='id identifier rubyid_queue'>queue</span><span class='comma'>,</span>
