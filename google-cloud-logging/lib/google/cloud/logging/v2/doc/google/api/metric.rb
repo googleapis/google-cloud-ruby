@@ -126,10 +126,14 @@ module Google
     # @!attribute [rw] metadata
     #   @return [Google::Api::MetricDescriptor::MetricDescriptorMetadata]
     #     Optional. Metadata which can be used to guide usage of the metric.
+    # @!attribute [rw] launch_stage
+    #   @return [Google::Api::LaunchStage]
+    #     Optional. The launch stage of the metric definition.
     class MetricDescriptor
       # Additional annotations that can be used to guide the usage of a metric.
       # @!attribute [rw] launch_stage
       #   @return [Google::Api::LaunchStage]
+      #     Deprecated. Please use the MetricDescriptor.launch_stage instead.
       #     The launch stage of the metric definition.
       # @!attribute [rw] sample_period
       #   @return [Google::Protobuf::Duration]

@@ -52,6 +52,9 @@ module Google
     #     Required. A set of labels used to describe instances of this monitored
     #     resource type. For example, an individual Google Cloud SQL database is
     #     identified by values for the labels `"database_id"` and `"zone"`.
+    # @!attribute [rw] launch_stage
+    #   @return [Google::Api::LaunchStage]
+    #     Optional. The launch stage of the monitored resource definition.
     class MonitoredResourceDescriptor; end
 
     # An object representing a resource that can be used for monitoring, logging,
