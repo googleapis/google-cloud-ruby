@@ -816,15 +816,3 @@ def extract_args args, *keys
 end
 
 task :default => :test
-
-
-task :synthall do
-  gems.each do |gem|
-    Dir.chdir gem do
-      Bundler.with_clean_env do
-        sh "gsynth"
-        sh "brakeup"
-      end
-    end
-  end
-end

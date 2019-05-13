@@ -173,7 +173,7 @@ s.replace(
 s.replace(
     'lib/google/cloud/spanner/admin/database/v1/*_admin_client.rb',
     'Gem.loaded_specs\[.*\]\.version\.version',
-    'Google::Cloud::Bigtable::VERSION'
+    'Google::Cloud::Spanner::VERSION'
 )
 s.replace(
     'lib/google/cloud/spanner/admin/instance/v1/*_admin_client.rb',
@@ -183,7 +183,7 @@ s.replace(
 s.replace(
     'lib/google/cloud/spanner/admin/instance/v1/*_admin_client.rb',
     'Gem.loaded_specs\[.*\]\.version\.version',
-    'Google::Cloud::Bigtable::VERSION'
+    'Google::Cloud::Spanner::VERSION'
 )
 s.replace(
     'lib/google/cloud/spanner/v1/spanner_client.rb',
@@ -193,5 +193,5 @@ s.replace(
 s.replace(
     'lib/google/cloud/spanner/v1/spanner_client.rb',
     'Gem.loaded_specs\[.*\]\.version\.version',
-    'Google::Cloud::Bigtable::VERSION'
+    'Google::Cloud::Spanner::VERSION'
 )
