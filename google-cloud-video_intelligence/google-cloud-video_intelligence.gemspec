@@ -1,9 +1,10 @@
 # -*- ruby -*-
 # encoding: utf-8
+require File.expand_path("../lib/google/cloud/video_intelligence/version", __FILE__)
 
 Gem::Specification.new do |gem|
   gem.name          = "google-cloud-video_intelligence"
-  gem.version       = "1.1.5"
+  gem.version       = Google::Cloud::VideoIntelligence::VERSION
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"

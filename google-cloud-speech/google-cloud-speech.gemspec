@@ -1,9 +1,10 @@
 # -*- ruby -*-
 # encoding: utf-8
+require File.expand_path("../lib/google/cloud/speech/version", __FILE__)
 
 Gem::Specification.new do |gem|
   gem.name          = "google-cloud-speech"
-  gem.version       = "0.34.1"
+  gem.version       = Google::Cloud::Speech::VERSION
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"

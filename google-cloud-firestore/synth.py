@@ -111,3 +111,16 @@ s.replace(
     'https://googlecloudplatform\\.github\\.io/google-cloud-ruby',
     'https://googleapis.github.io/google-cloud-ruby'
 )
+
+# https://github.com/googleapis/google-cloud-ruby/issues/3058
+for version in ['v1', 'v1beta1']:
+    s.replace(
+        f'lib/google/cloud/firestore/{version}/*_client.rb',
+        f'require "google/cloud/firestore/{version}/credentials"',
+        f'require "google/cloud/firestore/{version}/credentials"\nrequire "google/cloud/firestore/version"'
+    )
+    s.replace(
+        f'lib/google/cloud/firestore/{version}/*_client.rb',
+        'Gem.loaded_specs\[.*\]\.version\.version',
+        'Google::Cloud::Firestore::VERSION'
+    )

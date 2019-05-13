@@ -148,8 +148,7 @@ describe Google::Cloud::Tasks::V2beta3::CloudTasksClient do
 
       # Create expected grpc response
       name_2 = "name2-1052831874"
-      log_sampling_ratio = -1.25350193E8
-      expected_response = { name: name_2, log_sampling_ratio: log_sampling_ratio }
+      expected_response = { name: name_2 }
       expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Tasks::V2beta3::Queue)
 
       # Mock Grpc layer
@@ -224,8 +223,7 @@ describe Google::Cloud::Tasks::V2beta3::CloudTasksClient do
 
       # Create expected grpc response
       name = "name3373707"
-      log_sampling_ratio = -1.25350193E8
-      expected_response = { name: name, log_sampling_ratio: log_sampling_ratio }
+      expected_response = { name: name }
       expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Tasks::V2beta3::Queue)
 
       # Mock Grpc layer
@@ -302,8 +300,7 @@ describe Google::Cloud::Tasks::V2beta3::CloudTasksClient do
 
       # Create expected grpc response
       name = "name3373707"
-      log_sampling_ratio = -1.25350193E8
-      expected_response = { name: name, log_sampling_ratio: log_sampling_ratio }
+      expected_response = { name: name }
       expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Tasks::V2beta3::Queue)
 
       # Mock Grpc layer
@@ -446,8 +443,7 @@ describe Google::Cloud::Tasks::V2beta3::CloudTasksClient do
 
       # Create expected grpc response
       name_2 = "name2-1052831874"
-      log_sampling_ratio = -1.25350193E8
-      expected_response = { name: name_2, log_sampling_ratio: log_sampling_ratio }
+      expected_response = { name: name_2 }
       expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Tasks::V2beta3::Queue)
 
       # Mock Grpc layer
@@ -521,8 +517,7 @@ describe Google::Cloud::Tasks::V2beta3::CloudTasksClient do
 
       # Create expected grpc response
       name_2 = "name2-1052831874"
-      log_sampling_ratio = -1.25350193E8
-      expected_response = { name: name_2, log_sampling_ratio: log_sampling_ratio }
+      expected_response = { name: name_2 }
       expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Tasks::V2beta3::Queue)
 
       # Mock Grpc layer
@@ -596,8 +591,7 @@ describe Google::Cloud::Tasks::V2beta3::CloudTasksClient do
 
       # Create expected grpc response
       name_2 = "name2-1052831874"
-      log_sampling_ratio = -1.25350193E8
-      expected_response = { name: name_2, log_sampling_ratio: log_sampling_ratio }
+      expected_response = { name: name_2 }
       expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Tasks::V2beta3::Queue)
 
       # Mock Grpc layer

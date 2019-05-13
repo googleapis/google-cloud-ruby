@@ -27,6 +27,7 @@ require "google/gax"
 
 require "google/privacy/dlp/v2/dlp_pb"
 require "google/cloud/dlp/v2/credentials"
+require "google/cloud/dlp/version"
 
 module Google
   module Cloud
@@ -319,7 +320,7 @@ module Google
               updater_proc = credentials.updater_proc
             end
 
-            package_version = Gem.loaded_specs['google-cloud-dlp'].version.version
+            package_version = Google::Cloud::Dlp::VERSION
 
             google_api_client = "gl-ruby/#{RUBY_VERSION}"
             google_api_client << " #{lib_name}/#{lib_version}" if lib_name

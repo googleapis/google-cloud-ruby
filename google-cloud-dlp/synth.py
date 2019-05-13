@@ -109,3 +109,25 @@ s.replace(
     'README.md\n',
     'README.md\nAUTHENTICATION.md\nLICENSE\n'
 )
+
+# https://github.com/googleapis/google-cloud-ruby/issues/3058
+s.replace(
+    'google-cloud-dlp.gemspec',
+    '\nGem::Specification.new do',
+    'require File.expand_path("../lib/google/cloud/dlp/version", __FILE__)\n\nGem::Specification.new do'
+)
+s.replace(
+    'google-cloud-dlp.gemspec',
+    '(gem.version\s+=\s+).\d+.\d+.\d.*$',
+    '\\1Google::Cloud::Dlp::VERSION'
+)
+s.replace(
+    'lib/google/cloud/dlp/v2/*_client.rb',
+    'require "google/cloud/dlp/v2/credentials"',
+    'require "google/cloud/dlp/v2/credentials"\nrequire "google/cloud/dlp/version"'
+)
+s.replace(
+    'lib/google/cloud/dlp/v2/*_client.rb',
+    'Gem.loaded_specs\[.*\]\.version\.version',
+    'Google::Cloud::Dlp::VERSION'
+)

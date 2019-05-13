@@ -1,9 +1,10 @@
 # -*- ruby -*-
 # encoding: utf-8
+require File.expand_path("../lib/google/cloud/redis/version", __FILE__)
 
 Gem::Specification.new do |gem|
   gem.name          = "google-cloud-redis"
-  gem.version       = "0.3.0"
+  gem.version       = Google::Cloud::Redis::VERSION
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"

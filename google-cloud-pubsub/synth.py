@@ -107,3 +107,15 @@ s.replace(
     '\n  end\n',
     '\n  end\n  end\n'
 )
+
+# https://github.com/googleapis/google-cloud-ruby/issues/3058
+s.replace(
+    'lib/google/cloud/pubsub/v1/*_client.rb',
+    'require "google/cloud/pubsub/v1/credentials"',
+    'require "google/cloud/pubsub/v1/credentials"\nrequire "google/cloud/pubsub/version"'
+)
+s.replace(
+    'lib/google/cloud/pubsub/v1/*_client.rb',
+    'Gem.loaded_specs\[.*\]\.version\.version',
+    'Google::Cloud::PubSub::VERSION'
+)

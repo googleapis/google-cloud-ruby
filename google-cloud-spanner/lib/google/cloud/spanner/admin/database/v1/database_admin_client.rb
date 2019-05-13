@@ -29,6 +29,7 @@ require "google/longrunning/operations_client"
 
 require "google/spanner/admin/database/v1/spanner_database_admin_pb"
 require "google/cloud/spanner/admin/database/v1/credentials"
+require "google/cloud/spanner/version"
 
 module Google
   module Cloud
@@ -188,7 +189,7 @@ module Google
                   updater_proc = credentials.updater_proc
                 end
 
-                package_version = Gem.loaded_specs['google-cloud-spanner'].version.version
+                package_version = Google::Cloud::Bigtable::VERSION
 
                 google_api_client = "gl-ruby/#{RUBY_VERSION}"
                 google_api_client << " #{lib_name}/#{lib_version}" if lib_name

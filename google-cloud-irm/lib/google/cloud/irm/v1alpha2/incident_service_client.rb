@@ -27,6 +27,7 @@ require "google/gax"
 
 require "google/cloud/irm/v1alpha2/incidents_service_pb"
 require "google/cloud/irm/v1alpha2/credentials"
+require "google/cloud/irm/version"
 
 module Google
   module Cloud
@@ -301,7 +302,7 @@ module Google
               updater_proc = credentials.updater_proc
             end
 
-            package_version = Gem.loaded_specs['google-cloud-irm'].version.version
+            package_version = Google::Cloud::Irm::VERSION
 
             google_api_client = "gl-ruby/#{RUBY_VERSION}"
             google_api_client << " #{lib_name}/#{lib_version}" if lib_name

@@ -29,6 +29,7 @@ require "google/longrunning/operations_client"
 
 require "google/cloud/redis/v1/cloud_redis_pb"
 require "google/cloud/redis/v1/credentials"
+require "google/cloud/redis/version"
 
 module Google
   module Cloud
@@ -195,7 +196,7 @@ module Google
               updater_proc = credentials.updater_proc
             end
 
-            package_version = Gem.loaded_specs['google-cloud-redis'].version.version
+            package_version = Google::Cloud::Redis::VERSION
 
             google_api_client = "gl-ruby/#{RUBY_VERSION}"
             google_api_client << " #{lib_name}/#{lib_version}" if lib_name

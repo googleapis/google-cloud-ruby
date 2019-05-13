@@ -86,3 +86,25 @@ s.replace(
     'README.md\n',
     'README.md\nAUTHENTICATION.md\nLICENSE\n'
 )
+
+# https://github.com/googleapis/google-cloud-ruby/issues/3058
+s.replace(
+    'google-cloud-webrisk.gemspec',
+    '\nGem::Specification.new do',
+    'require File.expand_path("../lib/google/cloud/webrisk/version", __FILE__)\n\nGem::Specification.new do'
+)
+s.replace(
+    'google-cloud-webrisk.gemspec',
+    '(gem.version\s+=\s+).\d+.\d+.\d.*$',
+    '\\1Google::Cloud::Webrisk::VERSION'
+)
+s.replace(
+    'lib/google/cloud/webrisk/v1beta1/*_client.rb',
+    'require "google/cloud/webrisk/v1beta1/credentials"',
+    'require "google/cloud/webrisk/v1beta1/credentials"\nrequire "google/cloud/webrisk/version"'
+)
+s.replace(
+    'lib/google/cloud/webrisk/v1beta1/*_client.rb',
+    'Gem.loaded_specs\[.*\]\.version\.version',
+    'Google::Cloud::Webrisk::VERSION'
+)

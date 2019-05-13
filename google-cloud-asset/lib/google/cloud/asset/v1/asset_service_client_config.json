@@ -3,6 +3,7 @@
     "google.cloud.asset.v1.AssetService": {
       "retry_codes": {
         "idempotent": [
+          "DEADLINE_EXCEEDED",
           "UNAVAILABLE"
         ],
         "non_idempotent": []

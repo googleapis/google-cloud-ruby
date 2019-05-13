@@ -142,5 +142,27 @@ s.replace(
     'README.md\nAUTHENTICATION.md\nLICENSE\n'
 )
 
+# https://github.com/googleapis/google-cloud-ruby/issues/3058
+s.replace(
+    'google-cloud-security_center.gemspec',
+    '\nGem::Specification.new do',
+    'require File.expand_path("../lib/google/cloud/security_center/version", __FILE__)\n\nGem::Specification.new do'
+)
+s.replace(
+    'google-cloud-security_center.gemspec',
+    '(gem.version\s+=\s+).\d+.\d+.\d.*$',
+    '\\1Google::Cloud::SecurityCenter::VERSION'
+)
+s.replace(
+    'lib/google/cloud/security_center/v1/*_client.rb',
+    'require "google/cloud/security_center/v1/credentials"',
+    'require "google/cloud/security_center/v1/credentials"\nrequire "google/cloud/security_center/version"'
+)
+s.replace(
+    'lib/google/cloud/security_center/v1/*_client.rb',
+    'Gem.loaded_specs\[.*\]\.version\.version',
+    'Google::Cloud::SecurityCenter::VERSION'
+)
+
 # Generate the helper methods
 subprocess.call('bundle update && bundle exec rake generate_partials', shell=True)

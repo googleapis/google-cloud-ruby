@@ -27,6 +27,7 @@ require "google/gax"
 
 require "google/cloud/tasks/v2beta3/cloudtasks_pb"
 require "google/cloud/tasks/v2beta3/credentials"
+require "google/cloud/tasks/version"
 
 module Google
   module Cloud
@@ -206,7 +207,7 @@ module Google
               updater_proc = credentials.updater_proc
             end
 
-            package_version = Gem.loaded_specs['google-cloud-tasks'].version.version
+            package_version = Google::Cloud::Tasks::VERSION
 
             google_api_client = "gl-ruby/#{RUBY_VERSION}"
             google_api_client << " #{lib_name}/#{lib_version}" if lib_name
@@ -393,7 +394,8 @@ module Google
           #   field can be used as a filter and several operators as supported.
           #   For example: `<=, <, >=, >, !=, =, :`. The filter syntax is the same as
           #   described in
-          #   [Stackdriver's Advanced Logs Filters](https://cloud.google.com/logging/docs/view/advanced_filters).
+          #   [Stackdriver's Advanced Logs
+          #   Filters](https://cloud.google.com/logging/docs/view/advanced_filters).
           #
           #   Sample filter "state: PAUSED".
           #
@@ -493,8 +495,9 @@ module Google
           # WARNING: Using this method may have unintended side effects if you are
           # using an App Engine `queue.yaml` or `queue.xml` file to manage your queues.
           # Read
-          # [Overview of Queue Management and queue.yaml](https://cloud.google.com/tasks/docs/queue-yaml)
-          # before using this method.
+          # [Overview of Queue Management and
+          # queue.yaml](https://cloud.google.com/tasks/docs/queue-yaml) before using
+          # this method.
           #
           # @param parent [String]
           #   Required.
@@ -556,8 +559,9 @@ module Google
           # WARNING: Using this method may have unintended side effects if you are
           # using an App Engine `queue.yaml` or `queue.xml` file to manage your queues.
           # Read
-          # [Overview of Queue Management and queue.yaml](https://cloud.google.com/tasks/docs/queue-yaml)
-          # before using this method.
+          # [Overview of Queue Management and
+          # queue.yaml](https://cloud.google.com/tasks/docs/queue-yaml) before using
+          # this method.
           #
           # @param queue [Google::Cloud::Tasks::V2beta3::Queue | Hash]
           #   Required.
@@ -617,8 +621,9 @@ module Google
           # WARNING: Using this method may have unintended side effects if you are
           # using an App Engine `queue.yaml` or `queue.xml` file to manage your queues.
           # Read
-          # [Overview of Queue Management and queue.yaml](https://cloud.google.com/tasks/docs/queue-yaml)
-          # before using this method.
+          # [Overview of Queue Management and
+          # queue.yaml](https://cloud.google.com/tasks/docs/queue-yaml) before using
+          # this method.
           #
           # @param name [String]
           #   Required.
@@ -739,7 +744,8 @@ module Google
           # WARNING: Resuming many high-QPS queues at the same time can
           # lead to target overloading. If you are resuming high-QPS
           # queues, follow the 500/50/5 pattern described in
-          # [Managing Cloud Tasks Scaling Risks](https://cloud.google.com/tasks/docs/manage-cloud-task-scaling).
+          # [Managing Cloud Tasks Scaling
+          # Risks](https://cloud.google.com/tasks/docs/manage-cloud-task-scaling).
           #
           # @param name [String]
           #   Required.
@@ -1043,8 +1049,7 @@ module Google
           #
           # Tasks cannot be updated after creation; there is no UpdateTask command.
           #
-          # * For {Google::Cloud::Tasks::V2beta3::AppEngineHttpQueue App Engine queues}, the maximum task size is
-          #   100KB.
+          # * The maximum task size is 100KB.
           #
           # @param parent [String]
           #   Required.

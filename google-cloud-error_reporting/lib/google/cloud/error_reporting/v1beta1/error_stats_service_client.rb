@@ -27,6 +27,7 @@ require "google/gax"
 
 require "google/devtools/clouderrorreporting/v1beta1/error_stats_service_pb"
 require "google/cloud/error_reporting/v1beta1/credentials"
+require "google/cloud/error_reporting/version"
 
 module Google
   module Cloud
@@ -149,7 +150,7 @@ module Google
               updater_proc = credentials.updater_proc
             end
 
-            package_version = Gem.loaded_specs['google-cloud-error_reporting'].version.version
+            package_version = Google::Cloud::ErrorReporting::VERSION
 
             google_api_client = "gl-ruby/#{RUBY_VERSION}"
             google_api_client << " #{lib_name}/#{lib_version}" if lib_name

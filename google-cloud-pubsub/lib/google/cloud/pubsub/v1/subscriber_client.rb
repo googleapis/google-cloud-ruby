@@ -28,6 +28,7 @@ require "google/gax"
 require "google/iam/v1/iam_policy_pb"
 require "google/pubsub/v1/pubsub_pb"
 require "google/cloud/pubsub/v1/credentials"
+require "google/cloud/pubsub/version"
 
 module Google
   module Cloud
@@ -206,7 +207,7 @@ module Google
               updater_proc = credentials.updater_proc
             end
 
-            package_version = Gem.loaded_specs['google-cloud-pubsub'].version.version
+            package_version = Google::Cloud::PubSub::VERSION
 
             google_api_client = "gl-ruby/#{RUBY_VERSION}"
             google_api_client << " #{lib_name}/#{lib_version}" if lib_name
@@ -1227,8 +1228,7 @@ module Google
           #
           # @param resource [String]
           #   REQUIRED: The resource for which the policy is being specified.
-          #   `resource` is usually specified as a path. For example, a Project
-          #   resource is specified as `projects/{project}`.
+          #   See the operation documentation for the appropriate value for this field.
           # @param policy [Google::Iam::V1::Policy | Hash]
           #   REQUIRED: The complete policy to be applied to the `resource`. The size of
           #   the policy is limited to a few 10s of KB. An empty policy is a
@@ -1273,8 +1273,7 @@ module Google
           #
           # @param resource [String]
           #   REQUIRED: The resource for which the policy is being requested.
-          #   `resource` is usually specified as a path. For example, a Project
-          #   resource is specified as `projects/{project}`.
+          #   See the operation documentation for the appropriate value for this field.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -1305,10 +1304,13 @@ module Google
           # If the resource does not exist, this will return an empty set of
           # permissions, not a NOT_FOUND error.
           #
+          # Note: This operation is designed to be used for building permission-aware
+          # UIs and command-line tools, not for authorization checking. This operation
+          # may "fail open" without warning.
+          #
           # @param resource [String]
           #   REQUIRED: The resource for which the policy detail is being requested.
-          #   `resource` is usually specified as a path. For example, a Project
-          #   resource is specified as `projects/{project}`.
+          #   See the operation documentation for the appropriate value for this field.
           # @param permissions [Array<String>]
           #   The set of permissions to check for the `resource`. Permissions with
           #   wildcards (such as '*' or 'storage.*') are not allowed. For more

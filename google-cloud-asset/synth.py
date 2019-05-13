@@ -163,8 +163,8 @@ for version in ['v1', 'v1beta1']:
     )
     s.replace(
         f'lib/google/cloud/asset/{version}/asset_service_client.rb',
-        'package_version = (.+)',
-        'package_version = Google::Cloud::Asset::VERSION'
+        'Gem.loaded_specs\[.*\]\.version\.version',
+        'Google::Cloud::Asset::VERSION'
     )
 
 

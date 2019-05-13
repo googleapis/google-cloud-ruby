@@ -109,3 +109,25 @@ s.replace(
     'README.md\n',
     'README.md\nAUTHENTICATION.md\nLICENSE\n'
 )
+
+# https://github.com/googleapis/google-cloud-ruby/issues/3058
+s.replace(
+    'google-cloud-monitoring.gemspec',
+    '\nGem::Specification.new do',
+    'require File.expand_path("../lib/google/cloud/monitoring/version", __FILE__)\n\nGem::Specification.new do'
+)
+s.replace(
+    'google-cloud-monitoring.gemspec',
+    '(gem.version\s+=\s+).\d+.\d+.\d.*$',
+    '\\1Google::Cloud::Monitoring::VERSION'
+)
+s.replace(
+    'lib/google/cloud/monitoring/v3/*_client.rb',
+    'require "google/cloud/monitoring/v3/credentials"',
+    'require "google/cloud/monitoring/v3/credentials"\nrequire "google/cloud/monitoring/version"'
+)
+s.replace(
+    'lib/google/cloud/monitoring/v3/*_client.rb',
+    'Gem.loaded_specs\[.*\]\.version\.version',
+    'Google::Cloud::Monitoring::VERSION'
+)

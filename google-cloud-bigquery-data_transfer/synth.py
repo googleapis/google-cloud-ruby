@@ -134,12 +134,12 @@ s.replace(
     '\\1Google::Cloud::Bigquery::DataTransfer::VERSION'
 )
 s.replace(
-    f'lib/google/cloud/bigquery/data_transfer/v1/data_transfer_service_client.rb',
-    f'require "google/cloud/bigquery/data_transfer/v1/credentials"',
-    f'require "google/cloud/bigquery/data_transfer/v1/credentials"\nrequire "google/cloud/bigquery/data_transfer/version"'
+    'lib/google/cloud/bigquery/data_transfer/v1/data_transfer_service_client.rb',
+    'require "google/cloud/bigquery/data_transfer/v1/credentials"',
+    'require "google/cloud/bigquery/data_transfer/v1/credentials"\nrequire "google/cloud/bigquery/data_transfer/version"'
 )
 s.replace(
-    f'lib/google/cloud/bigquery/data_transfer/v1/data_transfer_service_client.rb',
-    'package_version = (.+)',
-    'package_version = Google::Cloud::Bigquery::DataTransfer::VERSION'
+    'lib/google/cloud/bigquery/data_transfer/v1/data_transfer_service_client.rb',
+    'Gem.loaded_specs\[.*\]\.version\.version',
+    'Google::Cloud::Bigquery::DataTransfer::VERSION'
 )
