@@ -1627,8 +1627,7 @@ set.</p>
       
         &mdash;
         <div class='inline'><p>REQUIRED: The resource for which the policy is being requested.
-<code>resource</code> is usually specified as a path. For example, a Project
-resource is specified as <code>projects/{project}</code>.</p>
+See the operation documentation for the appropriate value for this field.</p>
 </div>
       
     </li>
@@ -1731,6 +1730,8 @@ retries, etc.</p>
       <pre class="lines">
 
 
+715
+716
 717
 718
 719
@@ -1738,12 +1739,10 @@ retries, etc.</p>
 721
 722
 723
-724
-725
-726</pre>
+724</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/publisher_client.rb', line 717</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/publisher_client.rb', line 715</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_iam_policy'>get_iam_policy</span> \
     <span class='id identifier rubyid_resource'>resource</span><span class='comma'>,</span>
@@ -2616,8 +2615,7 @@ existing policy.</p>
       
         &mdash;
         <div class='inline'><p>REQUIRED: The resource for which the policy is being specified.
-<code>resource</code> is usually specified as a path. For example, a Project
-resource is specified as <code>projects/{project}</code>.</p>
+See the operation documentation for the appropriate value for this field.</p>
 </div>
       
     </li>
@@ -2740,6 +2738,7 @@ retries, etc.</p>
       <pre class="lines">
 
 
+680
 681
 682
 683
@@ -2750,11 +2749,10 @@ retries, etc.</p>
 688
 689
 690
-691
-692</pre>
+691</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/publisher_client.rb', line 681</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/publisher_client.rb', line 680</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_set_iam_policy'>set_iam_policy</span> \
     <span class='id identifier rubyid_resource'>resource</span><span class='comma'>,</span>
@@ -2787,6 +2785,10 @@ retries, etc.</p>
     <p>Returns permissions that a caller has on the specified resource.
 If the resource does not exist, this will return an empty set of
 permissions, not a NOT_FOUND error.</p>
+
+<p>Note: This operation is designed to be used for building permission-aware
+UIs and command-line tools, not for authorization checking. This operation
+may &quot;fail open&quot; without warning.</p>
 
 
   </div>
@@ -2821,8 +2823,7 @@ permissions, not a NOT_FOUND error.</p>
       
         &mdash;
         <div class='inline'><p>REQUIRED: The resource for which the policy detail is being requested.
-<code>resource</code> is usually specified as a path. For example, a Project
-resource is specified as <code>projects/{project}</code>.</p>
+See the operation documentation for the appropriate value for this field.</p>
 </div>
       
     </li>
@@ -2943,7 +2944,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-759
 760
 761
 762
@@ -2954,10 +2954,11 @@ retries, etc.</p>
 767
 768
 769
-770</pre>
+770
+771</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/publisher_client.rb', line 759</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/publisher_client.rb', line 760</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_test_iam_permissions'>test_iam_permissions</span> \
     <span class='id identifier rubyid_resource'>resource</span><span class='comma'>,</span>
