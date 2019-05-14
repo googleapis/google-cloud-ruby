@@ -168,8 +168,8 @@ s.replace(
 for version in ['v1', 'v1p3beta1']:
     s.replace(
         f'lib/google/cloud/vision/{version}/*_client.rb',
-        f'require "google/cloud/vision/{version}/credentials"',
-        f'require "google/cloud/vision/{version}/credentials"\nrequire "google/cloud/vision/version"'
+        f'(require \".*credentials\"\n)\n',
+        f'\\1require "google/cloud/vision/version"\n\n'
     )
     s.replace(
         f'lib/google/cloud/vision/{version}/*_client.rb',

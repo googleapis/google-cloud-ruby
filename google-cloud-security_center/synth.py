@@ -155,8 +155,8 @@ s.replace(
 )
 s.replace(
     'lib/google/cloud/security_center/v1/*_client.rb',
-    'require "google/cloud/security_center/v1/credentials"',
-    'require "google/cloud/security_center/v1/credentials"\nrequire "google/cloud/security_center/version"'
+    '(require \".*credentials\"\n)\n',
+    '\\1require "google/cloud/security_center/version"\n\n'
 )
 s.replace(
     'lib/google/cloud/security_center/v1/*_client.rb',

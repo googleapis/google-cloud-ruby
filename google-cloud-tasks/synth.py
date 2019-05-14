@@ -167,8 +167,8 @@ s.replace(
 for version in ['v2', 'v2beta2', 'v2beta3']:
     s.replace(
         f'lib/google/cloud/tasks/{version}/*_client.rb',
-        f'require "google/cloud/tasks/{version}/credentials"',
-        f'require "google/cloud/tasks/{version}/credentials"\nrequire "google/cloud/tasks/version"'
+        f'(require \".*credentials\"\n)\n',
+        f'\\1require "google/cloud/tasks/version"\n\n'
     )
     s.replace(
         f'lib/google/cloud/tasks/{version}/*_client.rb',

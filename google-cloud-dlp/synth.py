@@ -123,8 +123,8 @@ s.replace(
 )
 s.replace(
     'lib/google/cloud/dlp/v2/*_client.rb',
-    'require "google/cloud/dlp/v2/credentials"',
-    'require "google/cloud/dlp/v2/credentials"\nrequire "google/cloud/dlp/version"'
+    '(require \".*credentials\"\n)\n',
+    '\\1require "google/cloud/dlp/version"\n\n'
 )
 s.replace(
     'lib/google/cloud/dlp/v2/*_client.rb',

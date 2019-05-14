@@ -113,8 +113,8 @@ s.replace(
 )
 s.replace(
     'lib/google/cloud/irm/v1alpha2/*_client.rb',
-    'require "google/cloud/irm/v1alpha2/credentials"',
-    'require "google/cloud/irm/v1alpha2/credentials"\nrequire "google/cloud/irm/version"'
+    '(require \".*credentials\"\n)\n',
+    '\\1require "google/cloud/irm/version"\n\n'
 )
 s.replace(
     'lib/google/cloud/irm/v1alpha2/*_client.rb',

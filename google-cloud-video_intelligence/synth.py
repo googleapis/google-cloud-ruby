@@ -170,8 +170,8 @@ s.replace(
 for version in ['v1', 'v1beta1', 'v1beta2', 'v1p1beta1', 'v1p2beta1']:
     s.replace(
         f'lib/google/cloud/video_intelligence/{version}/*_client.rb',
-        f'require "google/cloud/video_intelligence/{version}/credentials"',
-        f'require "google/cloud/video_intelligence/{version}/credentials"\nrequire "google/cloud/video_intelligence/version"'
+        f'(require \".*credentials\"\n)\n',
+        f'\\1require "google/cloud/video_intelligence/version"\n\n'
     )
     s.replace(
         f'lib/google/cloud/video_intelligence/{version}/*_client.rb',

@@ -177,8 +177,8 @@ s.replace(
 )
 s.replace(
     'lib/google/cloud/recaptcha_enterprise/v1beta1/*_client.rb',
-    'require "google/cloud/recaptcha_enterprise/v1beta1/credentials"',
-    'require "google/cloud/recaptcha_enterprise/v1beta1/credentials"\nrequire "google/cloud/recaptcha_enterprise/version"'
+    '(require \".*credentials\"\n)\n',
+    '\\1require "google/cloud/recaptcha_enterprise/version"\n\n'
 )
 s.replace(
     'lib/google/cloud/recaptcha_enterprise/v1beta1/*_client.rb',

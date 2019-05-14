@@ -17,7 +17,7 @@ require "minitest/spec"
 
 require "google/gax"
 
-require "google/cloud/bigtable/v2"
+require "google/cloud/bigtable"
 require "google/cloud/bigtable/v2/bigtable_client"
 require "google/bigtable/v2/bigtable_services_pb"
 
@@ -92,7 +92,7 @@ describe Google::Cloud::Bigtable::V2::BigtableClient do
 
       Google::Bigtable::V2::Bigtable::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::V2::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Bigtable::V2.new
+          client = Google::Cloud::Bigtable.new(version: :v2)
 
           # Call method
           response = client.read_rows(formatted_table_name)
@@ -121,7 +121,7 @@ describe Google::Cloud::Bigtable::V2::BigtableClient do
 
       Google::Bigtable::V2::Bigtable::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::V2::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Bigtable::V2.new
+          client = Google::Cloud::Bigtable.new(version: :v2)
 
           # Call method
           err = assert_raises Google::Gax::GaxError do
@@ -161,7 +161,7 @@ describe Google::Cloud::Bigtable::V2::BigtableClient do
 
       Google::Bigtable::V2::Bigtable::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::V2::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Bigtable::V2.new
+          client = Google::Cloud::Bigtable.new(version: :v2)
 
           # Call method
           response = client.sample_row_keys(formatted_table_name)
@@ -190,7 +190,7 @@ describe Google::Cloud::Bigtable::V2::BigtableClient do
 
       Google::Bigtable::V2::Bigtable::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::V2::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Bigtable::V2.new
+          client = Google::Cloud::Bigtable.new(version: :v2)
 
           # Call method
           err = assert_raises Google::Gax::GaxError do
@@ -235,7 +235,7 @@ describe Google::Cloud::Bigtable::V2::BigtableClient do
 
       Google::Bigtable::V2::Bigtable::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::V2::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Bigtable::V2.new
+          client = Google::Cloud::Bigtable.new(version: :v2)
 
           # Call method
           response = client.mutate_row(
@@ -285,7 +285,7 @@ describe Google::Cloud::Bigtable::V2::BigtableClient do
 
       Google::Bigtable::V2::Bigtable::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::V2::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Bigtable::V2.new
+          client = Google::Cloud::Bigtable.new(version: :v2)
 
           # Call method
           err = assert_raises Google::Gax::GaxError do
@@ -332,7 +332,7 @@ describe Google::Cloud::Bigtable::V2::BigtableClient do
 
       Google::Bigtable::V2::Bigtable::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::V2::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Bigtable::V2.new
+          client = Google::Cloud::Bigtable.new(version: :v2)
 
           # Call method
           response = client.mutate_rows(formatted_table_name, entries)
@@ -366,7 +366,7 @@ describe Google::Cloud::Bigtable::V2::BigtableClient do
 
       Google::Bigtable::V2::Bigtable::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::V2::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Bigtable::V2.new
+          client = Google::Cloud::Bigtable.new(version: :v2)
 
           # Call method
           err = assert_raises Google::Gax::GaxError do
@@ -407,7 +407,7 @@ describe Google::Cloud::Bigtable::V2::BigtableClient do
 
       Google::Bigtable::V2::Bigtable::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::V2::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Bigtable::V2.new
+          client = Google::Cloud::Bigtable.new(version: :v2)
 
           # Call method
           response = client.check_and_mutate_row(formatted_table_name, row_key)
@@ -444,7 +444,7 @@ describe Google::Cloud::Bigtable::V2::BigtableClient do
 
       Google::Bigtable::V2::Bigtable::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::V2::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Bigtable::V2.new
+          client = Google::Cloud::Bigtable.new(version: :v2)
 
           # Call method
           err = assert_raises Google::Gax::GaxError do
@@ -489,7 +489,7 @@ describe Google::Cloud::Bigtable::V2::BigtableClient do
 
       Google::Bigtable::V2::Bigtable::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::V2::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Bigtable::V2.new
+          client = Google::Cloud::Bigtable.new(version: :v2)
 
           # Call method
           response = client.read_modify_write_row(
@@ -539,7 +539,7 @@ describe Google::Cloud::Bigtable::V2::BigtableClient do
 
       Google::Bigtable::V2::Bigtable::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::V2::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Bigtable::V2.new
+          client = Google::Cloud::Bigtable.new(version: :v2)
 
           # Call method
           err = assert_raises Google::Gax::GaxError do

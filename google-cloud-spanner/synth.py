@@ -167,8 +167,8 @@ s.replace(
 # https://github.com/googleapis/google-cloud-ruby/issues/3058
 s.replace(
     'lib/google/cloud/spanner/admin/database/v1/*_admin_client.rb',
-    'require "google/cloud/spanner/admin/database/v1/credentials"',
-    'require "google/cloud/spanner/admin/database/v1/credentials"\nrequire "google/cloud/spanner/version"'
+    '(require \".*credentials\"\n)\n',
+    '\\1require "google/cloud/spanner/version"\n\n'
 )
 s.replace(
     'lib/google/cloud/spanner/admin/database/v1/*_admin_client.rb',
@@ -177,8 +177,8 @@ s.replace(
 )
 s.replace(
     'lib/google/cloud/spanner/admin/instance/v1/*_admin_client.rb',
-    'require "google/cloud/spanner/admin/instance/v1/credentials"',
-    'require "google/cloud/spanner/admin/instance/v1/credentials"\nrequire "google/cloud/spanner/version"'
+    '(require \".*credentials\"\n)\n',
+    '\\1require "google/cloud/spanner/version"\n\n'
 )
 s.replace(
     'lib/google/cloud/spanner/admin/instance/v1/*_admin_client.rb',
@@ -187,8 +187,8 @@ s.replace(
 )
 s.replace(
     'lib/google/cloud/spanner/v1/spanner_client.rb',
-    'require "google/cloud/spanner/v1/credentials"',
-    'require "google/cloud/spanner/v1/credentials"\nrequire "google/cloud/spanner/version"'
+    '(require \".*credentials\"\n)\n',
+    '\\1require "google/cloud/spanner/version"\n\n'
 )
 s.replace(
     'lib/google/cloud/spanner/v1/spanner_client.rb',

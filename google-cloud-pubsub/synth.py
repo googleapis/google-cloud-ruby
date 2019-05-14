@@ -111,8 +111,8 @@ s.replace(
 # https://github.com/googleapis/google-cloud-ruby/issues/3058
 s.replace(
     'lib/google/cloud/pubsub/v1/*_client.rb',
-    'require "google/cloud/pubsub/v1/credentials"',
-    'require "google/cloud/pubsub/v1/credentials"\nrequire "google/cloud/pubsub/version"'
+    '(require \".*credentials\"\n)\n',
+    '\\1require "google/cloud/pubsub/version"\n\n'
 )
 s.replace(
     'lib/google/cloud/pubsub/v1/*_client.rb',

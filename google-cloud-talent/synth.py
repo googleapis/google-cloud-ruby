@@ -149,8 +149,8 @@ s.replace(
 )
 s.replace(
     'lib/google/cloud/talent/v4beta1/*_client.rb',
-    'require "google/cloud/talent/v4beta1/credentials"',
-    'require "google/cloud/talent/v4beta1/credentials"\nrequire "google/cloud/talent/version"'
+    '(require \".*credentials\"\n)\n',
+    '\\1require "google/cloud/talent/version"\n\n'
 )
 s.replace(
     'lib/google/cloud/talent/v4beta1/*_client.rb',

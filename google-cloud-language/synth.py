@@ -145,8 +145,8 @@ s.replace(
 for version in ['v1', 'v1beta2']:
     s.replace(
         f'lib/google/cloud/language/{version}/*_client.rb',
-        f'require "google/cloud/language/{version}/credentials"',
-        f'require "google/cloud/language/{version}/credentials"\nrequire "google/cloud/language/version"'
+        f'(require \".*credentials\"\n)\n',
+        f'\\1require "google/cloud/language/version"\n\n'
     )
     s.replace(
         f'lib/google/cloud/language/{version}/*_client.rb',

@@ -96,8 +96,8 @@ s.replace(
 for version in ['v1', 'v2']:
     s.replace(
         f'lib/google/cloud/trace/{version}/*_client.rb',
-        f'require "google/cloud/trace/{version}/credentials"',
-        f'require "google/cloud/trace/{version}/credentials"\nrequire "google/cloud/trace/version"'
+        f'(require \".*credentials\"\n)\n',
+        f'\\1require "google/cloud/trace/version"\n\n'
     )
     s.replace(
         f'lib/google/cloud/trace/{version}/*_client.rb',

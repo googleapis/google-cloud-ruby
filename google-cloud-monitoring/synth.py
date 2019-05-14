@@ -123,8 +123,8 @@ s.replace(
 )
 s.replace(
     'lib/google/cloud/monitoring/v3/*_client.rb',
-    'require "google/cloud/monitoring/v3/credentials"',
-    'require "google/cloud/monitoring/v3/credentials"\nrequire "google/cloud/monitoring/version"'
+    '(require \".*credentials\"\n)\n',
+    '\\1require "google/cloud/monitoring/version"\n\n'
 )
 s.replace(
     'lib/google/cloud/monitoring/v3/*_client.rb',

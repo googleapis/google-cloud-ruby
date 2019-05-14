@@ -135,8 +135,8 @@ s.replace(
 )
 s.replace(
     'lib/google/cloud/bigquery/data_transfer/v1/data_transfer_service_client.rb',
-    'require "google/cloud/bigquery/data_transfer/v1/credentials"',
-    'require "google/cloud/bigquery/data_transfer/v1/credentials"\nrequire "google/cloud/bigquery/data_transfer/version"'
+    '(require \".*credentials\"\n)\n',
+    '\\1require "google/cloud/bigquery/data_transfer/version"\n\n'
 )
 s.replace(
     'lib/google/cloud/bigquery/data_transfer/v1/data_transfer_service_client.rb',

@@ -62,8 +62,8 @@ s.replace(
 # https://github.com/googleapis/google-cloud-ruby/issues/3058
 s.replace(
     'lib/google/cloud/error_reporting/v1beta1/*_client.rb',
-    'require "google/cloud/error_reporting/v1beta1/credentials"',
-    'require "google/cloud/error_reporting/v1beta1/credentials"\nrequire "google/cloud/error_reporting/version"'
+    '(require \".*credentials\"\n)\n',
+    '\\1require "google/cloud/error_reporting/version"\n\n'
 )
 s.replace(
     'lib/google/cloud/error_reporting/v1beta1/*_client.rb',

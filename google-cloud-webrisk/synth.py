@@ -100,8 +100,8 @@ s.replace(
 )
 s.replace(
     'lib/google/cloud/webrisk/v1beta1/*_client.rb',
-    'require "google/cloud/webrisk/v1beta1/credentials"',
-    'require "google/cloud/webrisk/v1beta1/credentials"\nrequire "google/cloud/webrisk/version"'
+    '(require \".*credentials\"\n)\n',
+    '\\1require "google/cloud/webrisk/version"\n\n'
 )
 s.replace(
     'lib/google/cloud/webrisk/v1beta1/*_client.rb',

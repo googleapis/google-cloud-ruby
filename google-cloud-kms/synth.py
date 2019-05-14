@@ -164,8 +164,8 @@ s.replace(
 )
 s.replace(
     'lib/google/cloud/kms/v1/*_client.rb',
-    'require "google/cloud/kms/v1/credentials"',
-    'require "google/cloud/kms/v1/credentials"\nrequire "google/cloud/kms/version"'
+    '(require \".*credentials\"\n)\n',
+    '\\1require "google/cloud/kms/version"\n\n'
 )
 s.replace(
     'lib/google/cloud/kms/v1/*_client.rb',

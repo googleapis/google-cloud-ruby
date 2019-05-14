@@ -92,8 +92,8 @@ s.replace(
 # https://github.com/googleapis/google-cloud-ruby/issues/3058
 s.replace(
     'lib/google/cloud/logging/v2/*_client.rb',
-    'require "google/cloud/logging/v2/credentials"',
-    'require "google/cloud/logging/v2/credentials"\nrequire "google/cloud/logging/version"'
+    '(require \".*credentials\"\n)\n',
+    '\\1require "google/cloud/logging/version"\n\n'
 )
 s.replace(
     'lib/google/cloud/logging/v2/*_client.rb',

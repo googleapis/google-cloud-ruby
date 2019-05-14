@@ -1,5 +1,5 @@
 {
-  "updateTime": "2019-05-13T21:11:15.790771Z",
+  "updateTime": "2019-05-14T19:06:15.435252Z",
   "sources": [
     {
       "generator": {
@@ -12,8 +12,8 @@
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "bb798133097a12dd7a6deed4092b096dfc1cd316",
-        "internalRef": "248006867"
+        "sha": "eb2691466614fe6595d5122f1158f16cdc84c6ea",
+        "internalRef": "248181106"
       }
     }
   ],
@@ -26,16 +26,6 @@
         "language": "ruby",
         "generator": "gapic",
         "config": "google/bigtable/artman_bigtable.yaml"
-      }
-    },
-    {
-      "client": {
-        "source": "googleapis",
-        "apiName": "bigtableadmin",
-        "apiVersion": "v2",
-        "language": "ruby",
-        "generator": "gapic",
-        "config": "google/bigtable/admin/artman_bigtableadmin.yaml"
       }
     }
   ]

@@ -121,8 +121,8 @@ s.replace(
 )
 s.replace(
     'lib/google/cloud/dialogflow/v2/*_client.rb',
-    'require "google/cloud/dialogflow/v2/credentials"',
-    'require "google/cloud/dialogflow/v2/credentials"\nrequire "google/cloud/dialogflow/version"'
+    '(require \".*credentials\"\n)\n',
+    '\\1require "google/cloud/dialogflow/version"\n\n'
 )
 s.replace(
     'lib/google/cloud/dialogflow/v2/*_client.rb',

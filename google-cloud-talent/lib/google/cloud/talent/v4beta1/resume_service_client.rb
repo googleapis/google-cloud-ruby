@@ -28,7 +28,6 @@ require "google/gax"
 require "google/cloud/talent/v4beta1/resume_service_pb"
 require "google/cloud/talent/v4beta1/credentials"
 require "google/cloud/talent/version"
-require "google/cloud/talent/version"
 
 module Google
   module Cloud

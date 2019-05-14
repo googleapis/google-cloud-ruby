@@ -158,8 +158,8 @@ s.replace(
 for version in ['v1', 'v1beta1']:
     s.replace(
         f'lib/google/cloud/asset/{version}/asset_service_client.rb',
-        f'require "google/cloud/asset/{version}/credentials"',
-        f'require "google/cloud/asset/{version}/credentials"\nrequire "google/cloud/asset/version"'
+        f'(require \".*credentials\"\n)\n',
+        f'\\1require "google/cloud/asset/version"\n\n'
     )
     s.replace(
         f'lib/google/cloud/asset/{version}/asset_service_client.rb',

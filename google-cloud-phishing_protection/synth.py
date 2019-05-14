@@ -188,8 +188,8 @@ s.replace(
 )
 s.replace(
     'lib/google/cloud/phishing_protection/v1beta1/*_client.rb',
-    'require "google/cloud/phishing_protection/v1beta1/credentials"',
-    'require "google/cloud/phishing_protection/v1beta1/credentials"\nrequire "google/cloud/phishing_protection/version"'
+    '(require \".*credentials\"\n)\n',
+    '\\1require "google/cloud/phishing_protection/version"\n\n'
 )
 s.replace(
     'lib/google/cloud/phishing_protection/v1beta1/*_client.rb',

@@ -19,7 +19,6 @@
 # For the short term, the refresh process will only be runnable by Google
 # engineers.
 
-
 require "json"
 require "pathname"
 
@@ -27,7 +26,6 @@ require "google/gax"
 
 require "google/bigtable/v2/bigtable_pb"
 require "google/cloud/bigtable/v2/credentials"
-require "google/cloud/bigtable/version"
 
 module Google
   module Cloud
@@ -38,7 +36,6 @@ module Google
         # @!attribute [r] bigtable_stub
         #   @return [Google::Bigtable::V2::Bigtable::Stub]
         class BigtableClient
-          # @private
           attr_reader :bigtable_stub
 
           # The default address of the service.
@@ -145,7 +142,7 @@ module Google
               updater_proc = credentials.updater_proc
             end
 
-            package_version = Google::Cloud::Bigtable::VERSION
+            package_version = Gem.loaded_specs['google-cloud-bigtable'].version.version
 
             google_api_client = "gl-ruby/#{RUBY_VERSION}"
             google_api_client << " #{lib_name}/#{lib_version}" if lib_name
@@ -270,9 +267,9 @@ module Google
           #
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/bigtable/v2"
+          #   require "google/cloud/bigtable"
           #
-          #   bigtable_client = Google::Cloud::Bigtable::V2.new
+          #   bigtable_client = Google::Cloud::Bigtable.new(version: :v2)
           #   formatted_table_name = Google::Cloud::Bigtable::V2::BigtableClient.table_path("[PROJECT]", "[INSTANCE]", "[TABLE]")
           #   bigtable_client.read_rows(formatted_table_name).each do |element|
           #     # Process element.
@@ -316,9 +313,9 @@ module Google
           #
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/bigtable/v2"
+          #   require "google/cloud/bigtable"
           #
-          #   bigtable_client = Google::Cloud::Bigtable::V2.new
+          #   bigtable_client = Google::Cloud::Bigtable.new(version: :v2)
           #   formatted_table_name = Google::Cloud::Bigtable::V2::BigtableClient.table_path("[PROJECT]", "[INSTANCE]", "[TABLE]")
           #   bigtable_client.sample_row_keys(formatted_table_name).each do |element|
           #     # Process element.
@@ -363,9 +360,9 @@ module Google
           # @return [Google::Bigtable::V2::MutateRowResponse]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/bigtable/v2"
+          #   require "google/cloud/bigtable"
           #
-          #   bigtable_client = Google::Cloud::Bigtable::V2.new
+          #   bigtable_client = Google::Cloud::Bigtable.new(version: :v2)
           #   formatted_table_name = Google::Cloud::Bigtable::V2::BigtableClient.table_path("[PROJECT]", "[INSTANCE]", "[TABLE]")
           #
           #   # TODO: Initialize `row_key`:
@@ -417,9 +414,9 @@ module Google
           #
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/bigtable/v2"
+          #   require "google/cloud/bigtable"
           #
-          #   bigtable_client = Google::Cloud::Bigtable::V2.new
+          #   bigtable_client = Google::Cloud::Bigtable.new(version: :v2)
           #   formatted_table_name = Google::Cloud::Bigtable::V2::BigtableClient.table_path("[PROJECT]", "[INSTANCE]", "[TABLE]")
           #
           #   # TODO: Initialize `entries`:
@@ -486,9 +483,9 @@ module Google
           # @return [Google::Bigtable::V2::CheckAndMutateRowResponse]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/bigtable/v2"
+          #   require "google/cloud/bigtable"
           #
-          #   bigtable_client = Google::Cloud::Bigtable::V2.new
+          #   bigtable_client = Google::Cloud::Bigtable.new(version: :v2)
           #   formatted_table_name = Google::Cloud::Bigtable::V2::BigtableClient.table_path("[PROJECT]", "[INSTANCE]", "[TABLE]")
           #
           #   # TODO: Initialize `row_key`:
@@ -547,9 +544,9 @@ module Google
           # @return [Google::Bigtable::V2::ReadModifyWriteRowResponse]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/bigtable/v2"
+          #   require "google/cloud/bigtable"
           #
-          #   bigtable_client = Google::Cloud::Bigtable::V2.new
+          #   bigtable_client = Google::Cloud::Bigtable.new(version: :v2)
           #   formatted_table_name = Google::Cloud::Bigtable::V2::BigtableClient.table_path("[PROJECT]", "[INSTANCE]", "[TABLE]")
           #
           #   # TODO: Initialize `row_key`:
