@@ -27,7 +27,7 @@ require "google/gax"
 
 require "google/cloud/oslogin/v1beta/oslogin_pb"
 require "google/cloud/os_login/v1beta/credentials"
-require "google/cloud/os_login"
+require "google/cloud/os_login/version"
 
 module Google
   module Cloud

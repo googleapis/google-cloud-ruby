@@ -27,7 +27,7 @@ require "google/gax"
 
 require "google/devtools/clouderrorreporting/v1beta1/report_errors_service_pb"
 require "google/cloud/error_reporting/v1beta1/credentials"
-require "google/cloud/error_reporting"
+require "google/cloud/error_reporting/version"
 
 module Google
   module Cloud

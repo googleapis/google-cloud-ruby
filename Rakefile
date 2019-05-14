@@ -816,3 +816,30 @@ def extract_args args, *keys
 end
 
 task :default => :test
+
+task :fixit do
+  underscored = %w[
+    phishing_protection security_center os_login text_to_speech error_reporting recaptcha_enterprise video_intelligence
+  ]
+  plain = underscored.map { |a| a.split("_").join }
+  Dir.glob("**/*").each do |file|
+    next unless File.file? file
+    next unless file.include? ".rb"
+    content = File.read file
+    next unless /require .*credentials.\nrequire "\w+.\w+.\w+"/.match content
+    match = /require .(.*credentials).\nrequire "(\w+.\w+.\w+)"/.match content
+    modules = file.split(".").first.split("/").last.split("-")
+    creds = match[1]
+    version = match[2] + "/version"
+    puts creds
+    puts version
+    new_content = content.gsub(
+      /require .*credentials.\nrequire "\w+.\w+.\w+"/,
+      "require \"#{creds}\"\nrequire \"#{version}\""
+    )
+    File.open(file, 'w') do |actual_file|
+      actual_file.write new_content
+    end
+    puts "updated #{file}"
+  end
+end

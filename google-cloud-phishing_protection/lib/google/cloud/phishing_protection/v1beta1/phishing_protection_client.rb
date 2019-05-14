@@ -27,7 +27,7 @@ require "google/gax"
 
 require "google/cloud/phishingprotection/v1beta1/phishingprotection_pb"
 require "google/cloud/phishing_protection/v1beta1/credentials"
-require "google/cloud/phishing_protection"
+require "google/cloud/phishing_protection/version"
 
 module Google
   module Cloud

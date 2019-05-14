@@ -18,7 +18,7 @@ require "google/cloud/datastore/errors"
 require "google/cloud/datastore/dataset"
 require "google/cloud/datastore/transaction"
 require "google/cloud/datastore/credentials"
-require "google/cloud/config"
+require "google/cloud/config/version"
 require "google/cloud/env"
 
 module Google

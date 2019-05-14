@@ -29,7 +29,7 @@ require "google/longrunning/operations_client"
 
 require "google/cloud/security_center/v1/securitycenter_service_pb"
 require "google/cloud/security_center/v1/credentials"
-require "google/cloud/security_center"
+require "google/cloud/security_center/version"
 
 module Google
   module Cloud

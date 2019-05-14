@@ -29,7 +29,7 @@ require "google/longrunning/operations_client"
 
 require "google/cloud/videointelligence/v1beta2/video_intelligence_pb"
 require "google/cloud/video_intelligence/v1beta2/credentials"
-require "google/cloud/video_intelligence"
+require "google/cloud/video_intelligence/version"
 
 module Google
   module Cloud
