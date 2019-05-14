@@ -91,10 +91,6 @@ js:
   <div class="discussion">
     <p>HTTP request.</p>
 
-<p>Warning: This is an <a href="https://cloud.google.com/terms/launch-stages">alpha</a>
-feature. If you haven&#39;t already joined, you can <a href="https://docs.google.com/forms/d/e/1FAIpQLSfc4uEy9CBHKYUSdnY1hdhKDCX7julVZHy3imOiR-XrU7bUNQ/viewform">use this form to sign
-up</a>.</p>
-
 <p>The task will be pushed to the worker as an HTTP request. If the worker
 or the redirected worker acknowledges the task by returning a successful HTTP
 response code ([<code>200</code> - <code>299</code>]), the task will removed from the queue. If
@@ -357,10 +353,10 @@ error to set body on a task with an incompatible <span class='object_link'><a hr
       <pre class="lines">
 
 
-121</pre>
+118</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/doc/google/cloud/tasks/v2beta3/target.rb', line 121</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/doc/google/cloud/tasks/v2beta3/target.rb', line 118</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Tasks::V2beta3::HttpRequest (class)">HttpRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -470,10 +466,10 @@ specified using comma-separated values.</p>
       <pre class="lines">
 
 
-121</pre>
+118</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/doc/google/cloud/tasks/v2beta3/target.rb', line 121</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/doc/google/cloud/tasks/v2beta3/target.rb', line 118</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Tasks::V2beta3::HttpRequest (class)">HttpRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -525,10 +521,10 @@ specified using comma-separated values.</p>
       <pre class="lines">
 
 
-121</pre>
+118</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/doc/google/cloud/tasks/v2beta3/target.rb', line 121</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/doc/google/cloud/tasks/v2beta3/target.rb', line 118</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Tasks::V2beta3::HttpRequest (class)">HttpRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -554,8 +550,8 @@ specified using comma-separated values.</p>
 will be generated and attached as an <code>Authorization</code> header in the HTTP
 request.</p>
 
-<p>This type of authorization should be used when sending requests to a GCP
-endpoint.</p>
+<p>This type of authorization should generally only be used when calling
+Google APIs hosted on *.googleapis.com.</p>
 
 
   </div>
@@ -578,8 +574,8 @@ endpoint.</p>
 will be generated and attached as an <code>Authorization</code> header in the HTTP
 request.</p>
 
-<p>This type of authorization should be used when sending requests to a GCP
-endpoint.</p>
+<p>This type of authorization should generally only be used when calling
+Google APIs hosted on *.googleapis.com.</p>
 </div>
       
     </li>
@@ -592,10 +588,10 @@ endpoint.</p>
       <pre class="lines">
 
 
-121</pre>
+118</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/doc/google/cloud/tasks/v2beta3/target.rb', line 121</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/doc/google/cloud/tasks/v2beta3/target.rb', line 118</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Tasks::V2beta3::HttpRequest (class)">HttpRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -621,8 +617,9 @@ endpoint.</p>
 token will be generated and attached as an <code>Authorization</code> header in the
 HTTP request.</p>
 
-<p>This type of authorization should be used when sending requests to third
-party endpoints or Cloud Run.</p>
+<p>This type of authorization can be used for many scenarios, including
+calling Cloud Run, or endpoints where you intend to validate the token
+yourself.</p>
 
 
   </div>
@@ -645,8 +642,9 @@ party endpoints or Cloud Run.</p>
 token will be generated and attached as an <code>Authorization</code> header in the
 HTTP request.</p>
 
-<p>This type of authorization should be used when sending requests to third
-party endpoints or Cloud Run.</p>
+<p>This type of authorization can be used for many scenarios, including
+calling Cloud Run, or endpoints where you intend to validate the token
+yourself.</p>
 </div>
       
     </li>
@@ -659,10 +657,10 @@ party endpoints or Cloud Run.</p>
       <pre class="lines">
 
 
-121</pre>
+118</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/doc/google/cloud/tasks/v2beta3/target.rb', line 121</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/doc/google/cloud/tasks/v2beta3/target.rb', line 118</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Tasks::V2beta3::HttpRequest (class)">HttpRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -730,10 +728,10 @@ may be followed. The redirect is not counted as a separate attempt.</p>
       <pre class="lines">
 
 
-121</pre>
+118</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/doc/google/cloud/tasks/v2beta3/target.rb', line 121</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/doc/google/cloud/tasks/v2beta3/target.rb', line 118</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Tasks::V2beta3::HttpRequest (class)">HttpRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>

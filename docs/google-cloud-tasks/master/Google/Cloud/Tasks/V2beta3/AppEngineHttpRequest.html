@@ -142,13 +142,17 @@ restricted with
 required</code></a>
 Task dispatches also do not follow redirects.</p>
 
-<p>The task attempt has succeeded if the app&#39;s request handler returns
-an HTTP response code in the range [<code>200</code> - <code>299</code>]. <code>503</code> is
-considered an App Engine system error instead of an application
-error. Requests returning error <code>503</code> will be retried regardless of
-retry configuration and not counted against retry counts.
-Any other response code or a failure to receive a response before the
-deadline is a failed attempt.</p>
+<p>The task attempt has succeeded if the app&#39;s request handler returns an HTTP
+response code in the range [<code>200</code> - <code>299</code>]. The task attempt has failed if
+the app&#39;s handler returns a non-2xx response code or Cloud Tasks does
+not receive response before the <span class='object_link'><a href="Task.html#dispatch_deadline-instance_method" title="Google::Cloud::Tasks::V2beta3::Task#dispatch_deadline (method)">deadline</a></span>. Failed
+tasks will be retried according to the
+retry configuration. <code>503</code> (Service Unavailable) is
+considered an App Engine system error instead of an application error and
+will cause Cloud Tasks&#39; traffic congestion control to temporarily throttle
+the queue&#39;s dispatches. Unlike other types of task targets, a <code>429</code> (Too Many
+Requests) response from an app handler does not cause traffic congestion
+control to throttle the queue.</p>
 
 
   </div>
@@ -356,10 +360,10 @@ is used for all tasks in the queue, no matter what the setting is for the
       <pre class="lines">
 
 
-282</pre>
+283</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/doc/google/cloud/tasks/v2beta3/target.rb', line 282</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/doc/google/cloud/tasks/v2beta3/target.rb', line 283</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Tasks::V2beta3::AppEngineHttpRequest (class)">AppEngineHttpRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -417,10 +421,10 @@ an error to set a body on a task with an incompatible <span class='object_link'>
       <pre class="lines">
 
 
-282</pre>
+283</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/doc/google/cloud/tasks/v2beta3/target.rb', line 282</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/doc/google/cloud/tasks/v2beta3/target.rb', line 283</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Tasks::V2beta3::AppEngineHttpRequest (class)">AppEngineHttpRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -566,10 +570,10 @@ information, see the CreateTask documentation.</p>
       <pre class="lines">
 
 
-282</pre>
+283</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/doc/google/cloud/tasks/v2beta3/target.rb', line 282</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/doc/google/cloud/tasks/v2beta3/target.rb', line 283</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Tasks::V2beta3::AppEngineHttpRequest (class)">AppEngineHttpRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -641,10 +645,10 @@ Handler</a>.</p>
       <pre class="lines">
 
 
-282</pre>
+283</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/doc/google/cloud/tasks/v2beta3/target.rb', line 282</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/doc/google/cloud/tasks/v2beta3/target.rb', line 283</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Tasks::V2beta3::AppEngineHttpRequest (class)">AppEngineHttpRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -706,10 +710,10 @@ No spaces are allowed, and the maximum length allowed is 2083 characters.</p>
       <pre class="lines">
 
 
-282</pre>
+283</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/doc/google/cloud/tasks/v2beta3/target.rb', line 282</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/doc/google/cloud/tasks/v2beta3/target.rb', line 283</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Tasks::V2beta3::AppEngineHttpRequest (class)">AppEngineHttpRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>

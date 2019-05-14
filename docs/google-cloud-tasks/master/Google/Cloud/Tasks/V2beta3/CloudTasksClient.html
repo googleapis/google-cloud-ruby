@@ -1952,8 +1952,7 @@ retries, etc.</p>
 <p>Tasks cannot be updated after creation; there is no UpdateTask command.</p>
 
 <ul>
-<li>For <span class='object_link'><a href="AppEngineHttpQueue.html" title="Google::Cloud::Tasks::V2beta3::AppEngineHttpQueue (class)">App Engine queues</a></span>, the maximum task size is
-100KB.</li>
+<li>The maximum task size is 100KB.</li>
 </ul>
 
 
@@ -2173,6 +2172,7 @@ retries, etc.</p>
       <pre class="lines">
 
 
+1129
 1130
 1131
 1132
@@ -2185,11 +2185,10 @@ retries, etc.</p>
 1139
 1140
 1141
-1142
-1143</pre>
+1142</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/cloud_tasks_client.rb', line 1130</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/cloud_tasks_client.rb', line 1129</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_task'>create_task</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -2535,6 +2534,7 @@ retries, etc.</p>
       <pre class="lines">
 
 
+1169
 1170
 1171
 1172
@@ -2544,11 +2544,10 @@ retries, etc.</p>
 1176
 1177
 1178
-1179
-1180</pre>
+1179</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/cloud_tasks_client.rb', line 1170</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/cloud_tasks_client.rb', line 1169</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete_task'>delete_task</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -4630,6 +4629,7 @@ retries, etc.</p>
       <pre class="lines">
 
 
+1239
 1240
 1241
 1242
@@ -4640,11 +4640,10 @@ retries, etc.</p>
 1247
 1248
 1249
-1250
-1251</pre>
+1250</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/cloud_tasks_client.rb', line 1240</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta3/cloud_tasks_client.rb', line 1239</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_run_task'>run_task</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
