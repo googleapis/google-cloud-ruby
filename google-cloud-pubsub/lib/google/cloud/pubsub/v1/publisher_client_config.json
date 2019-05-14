@@ -14,7 +14,6 @@
         "publish": [
           "ABORTED",
           "CANCELLED",
-          "DEADLINE_EXCEEDED",
           "INTERNAL",
           "RESOURCE_EXHAUSTED",
           "UNAVAILABLE",
