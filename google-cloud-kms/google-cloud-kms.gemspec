@@ -1,9 +1,10 @@
 # -*- ruby -*-
 # encoding: utf-8
+require File.expand_path("../lib/google/cloud/kms/version", __FILE__)
 
 Gem::Specification.new do |gem|
   gem.name          = "google-cloud-kms"
-  gem.version       = "1.0.1"
+  gem.version       = Google::Cloud::Kms::VERSION
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"

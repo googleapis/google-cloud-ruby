@@ -27,7 +27,7 @@ require "google/gax"
 
 require "google/cloud/recaptchaenterprise/v1beta1/recaptchaenterprise_pb"
 require "google/cloud/recaptcha_enterprise/v1beta1/credentials"
-require "google/cloud/recaptchaenterprise/version"
+require "google/cloud/recaptcha_enterprise"
 
 module Google
   module Cloud

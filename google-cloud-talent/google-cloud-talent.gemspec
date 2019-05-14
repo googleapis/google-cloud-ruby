@@ -1,9 +1,10 @@
 # -*- ruby -*-
 # encoding: utf-8
+require File.expand_path("../lib/google/cloud/talent/version", __FILE__)
 
 Gem::Specification.new do |gem|
   gem.name          = "google-cloud-talent"
-  gem.version       = "0.3.0"
+  gem.version       = Google::Cloud::Talent::VERSION
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"

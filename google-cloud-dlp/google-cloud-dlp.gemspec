@@ -1,9 +1,10 @@
 # -*- ruby -*-
 # encoding: utf-8
+require File.expand_path("../lib/google/cloud/dlp/version", __FILE__)
 
 Gem::Specification.new do |gem|
   gem.name          = "google-cloud-dlp"
-  gem.version       = "0.9.1"
+  gem.version       = Google::Cloud::Dlp::VERSION
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"

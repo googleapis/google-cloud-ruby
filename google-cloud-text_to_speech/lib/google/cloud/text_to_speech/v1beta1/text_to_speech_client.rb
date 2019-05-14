@@ -27,7 +27,7 @@ require "google/gax"
 
 require "google/cloud/texttospeech/v1beta1/cloud_tts_pb"
 require "google/cloud/text_to_speech/v1beta1/credentials"
-require "google/cloud/texttospeech/version"
+require "google/cloud/text_to_speech"
 
 module Google
   module Cloud

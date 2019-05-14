@@ -1,9 +1,10 @@
 # -*- ruby -*-
 # encoding: utf-8
+require File.expand_path("../lib/google/cloud/scheduler/version", __FILE__)
 
 Gem::Specification.new do |gem|
   gem.name          = "google-cloud-scheduler"
-  gem.version       = "0.3.1"
+  gem.version       = Google::Cloud::Scheduler::VERSION
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
