@@ -487,12 +487,12 @@ describe Google::Cloud::Talent::V4beta1::ProfileServiceClient do
       # Create expected grpc response
       estimated_total_size = 1882144769
       next_page_token = ""
-      histogram_query_results_element = {}
-      histogram_query_results = [histogram_query_results_element]
+      summarized_profiles_element = {}
+      summarized_profiles = [summarized_profiles_element]
       expected_response = {
         estimated_total_size: estimated_total_size,
         next_page_token: next_page_token,
-        histogram_query_results: histogram_query_results
+        summarized_profiles: summarized_profiles
       }
       expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Talent::V4beta1::SearchProfilesResponse)
 
@@ -519,7 +519,7 @@ describe Google::Cloud::Talent::V4beta1::ProfileServiceClient do
           assert(response.instance_of?(Google::Gax::PagedEnumerable))
           assert_equal(expected_response, response.page.response)
           assert_nil(response.next_page)
-          assert_equal(expected_response.histogram_query_results.to_a, response.to_a)
+          assert_equal(expected_response.summarized_profiles.to_a, response.to_a)
         end
       end
     end
