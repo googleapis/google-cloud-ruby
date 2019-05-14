@@ -475,6 +475,21 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
+  doctest.before "Google::Cloud::PubSub::Topic#kms_key" do
+    mock_pubsub do |mock_publisher, mock_subscriber|
+      this_topic = topic_resp "my-topic", kms_key_name: "projects/a/locations/b/keyRings/c/cryptoKeys/d"
+      mock_publisher.expect :get_topic, this_topic, ["projects/my-project/topics/my-topic", Hash]
+    end
+  end
+
+  doctest.before "Google::Cloud::PubSub::Topic#kms_key=" do
+    mock_pubsub do |mock_publisher, mock_subscriber|
+      this_topic = topic_resp "my-topic", kms_key_name: "projects/a/locations/b/keyRings/c/cryptoKeys/d"
+      mock_publisher.expect :get_topic, topic_resp, ["projects/my-project/topics/my-topic", Hash]
+      mock_publisher.expect :update_topic, this_topic, [this_topic, Google::Protobuf::FieldMask.new(paths: ["kms_key_name"]), Hash]
+    end
+  end
+
   doctest.before "Google::Cloud::PubSub::Topic#delete" do
     mock_pubsub do |mock_publisher, mock_subscriber|
       mock_publisher.expect :get_topic, topic_resp, ["projects/my-project/topics/my-topic", Hash]
@@ -614,8 +629,9 @@ def topics_hash num_topics, token = ""
   data
 end
 
-def topic_resp topic_name = "my-topic"
-  Google::Cloud::PubSub::V1::Topic.new name: topic_path(topic_name)
+def topic_resp topic_name = "my-topic", kms_key_name: nil
+  Google::Cloud::PubSub::V1::Topic.new name: topic_path(topic_name),
+                                       kms_key_name: kms_key_name
 end
 
 def topic_subscriptions_hash num_subs, token = nil
