@@ -60,7 +60,7 @@ module Google
             "search_profiles" => Google::Gax::PageDescriptor.new(
               "page_token",
               "next_page_token",
-              "histogram_query_results")
+              "summarized_profiles")
           }.freeze
 
           private_constant :PAGE_DESCRIPTORS
@@ -692,10 +692,10 @@ module Google
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
           # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result [Google::Gax::PagedEnumerable<Google::Cloud::Talent::V4beta1::HistogramQueryResult>]
+          # @yieldparam result [Google::Gax::PagedEnumerable<Google::Cloud::Talent::V4beta1::SummarizedProfile>]
           # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @return [Google::Gax::PagedEnumerable<Google::Cloud::Talent::V4beta1::HistogramQueryResult>]
-          #   An enumerable of Google::Cloud::Talent::V4beta1::HistogramQueryResult instances.
+          # @return [Google::Gax::PagedEnumerable<Google::Cloud::Talent::V4beta1::SummarizedProfile>]
+          #   An enumerable of Google::Cloud::Talent::V4beta1::SummarizedProfile instances.
           #   See Google::Gax::PagedEnumerable documentation for other
           #   operations such as per-page iteration or access to the response
           #   object.
