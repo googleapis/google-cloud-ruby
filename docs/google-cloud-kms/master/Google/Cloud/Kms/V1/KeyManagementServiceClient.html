@@ -4632,8 +4632,7 @@ set.</p>
       
         &mdash;
         <div class='inline'><p>REQUIRED: The resource for which the policy is being requested.
-<code>resource</code> is usually specified as a path. For example, a Project
-resource is specified as <code>projects/{project}</code>.</p>
+See the operation documentation for the appropriate value for this field.</p>
 </div>
       
     </li>
@@ -4736,6 +4735,8 @@ retries, etc.</p>
       <pre class="lines">
 
 
+1450
+1451
 1452
 1453
 1454
@@ -4743,12 +4744,10 @@ retries, etc.</p>
 1456
 1457
 1458
-1459
-1460
-1461</pre>
+1459</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 1452</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 1450</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_iam_policy'>get_iam_policy</span> \
     <span class='id identifier rubyid_resource'>resource</span><span class='comma'>,</span>
@@ -6210,8 +6209,7 @@ existing policy.</p>
       
         &mdash;
         <div class='inline'><p>REQUIRED: The resource for which the policy is being specified.
-<code>resource</code> is usually specified as a path. For example, a Project
-resource is specified as <code>projects/{project}</code>.</p>
+See the operation documentation for the appropriate value for this field.</p>
 </div>
       
     </li>
@@ -6334,6 +6332,7 @@ retries, etc.</p>
       <pre class="lines">
 
 
+1415
 1416
 1417
 1418
@@ -6344,11 +6343,10 @@ retries, etc.</p>
 1423
 1424
 1425
-1426
-1427</pre>
+1426</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 1416</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 1415</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_set_iam_policy'>set_iam_policy</span> \
     <span class='id identifier rubyid_resource'>resource</span><span class='comma'>,</span>
@@ -6381,6 +6379,10 @@ retries, etc.</p>
     <p>Returns permissions that a caller has on the specified resource.
 If the resource does not exist, this will return an empty set of
 permissions, not a NOT_FOUND error.</p>
+
+<p>Note: This operation is designed to be used for building permission-aware
+UIs and command-line tools, not for authorization checking. This operation
+may &quot;fail open&quot; without warning.</p>
 
 
   </div>
@@ -6415,8 +6417,7 @@ permissions, not a NOT_FOUND error.</p>
       
         &mdash;
         <div class='inline'><p>REQUIRED: The resource for which the policy detail is being requested.
-<code>resource</code> is usually specified as a path. For example, a Project
-resource is specified as <code>projects/{project}</code>.</p>
+See the operation documentation for the appropriate value for this field.</p>
 </div>
       
     </li>
@@ -6537,7 +6538,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1494
 1495
 1496
 1497
@@ -6548,10 +6548,11 @@ retries, etc.</p>
 1502
 1503
 1504
-1505</pre>
+1505
+1506</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 1494</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 1495</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_test_iam_permissions'>test_iam_permissions</span> \
     <span class='id identifier rubyid_resource'>resource</span><span class='comma'>,</span>
