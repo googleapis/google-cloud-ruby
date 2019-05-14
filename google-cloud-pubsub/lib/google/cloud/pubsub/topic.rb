@@ -138,7 +138,7 @@ module Google
         # For example: `projects/a/locations/b/keyRings/c/cryptoKeys/d`
         # The default value is `nil`, which means default encryption is used.
         #
-        # Makes an API call to retrieve the labels values when called on a
+        # Makes an API call to retrieve the KMS encryption key when called on a
         # reference object. See {#reference?}.
         #
         # @return [String]
