@@ -164,5 +164,27 @@ s.replace(
     'README.md\nAUTHENTICATION.md\nLICENSE\n'
 )
 
+# https://github.com/googleapis/google-cloud-ruby/issues/3058
+s.replace(
+    'google-cloud-recaptcha_enterprise.gemspec',
+    '\nGem::Specification.new do',
+    'require File.expand_path("../lib/google/cloud/recaptcha_enterprise/version", __FILE__)\n\nGem::Specification.new do'
+)
+s.replace(
+    'google-cloud-recaptcha_enterprise.gemspec',
+    '(gem.version\s+=\s+).\d+.\d+.\d.*$',
+    '\\1Google::Cloud::RecaptchaEnterprise::VERSION'
+)
+s.replace(
+    'lib/google/cloud/recaptcha_enterprise/v1beta1/*_client.rb',
+    '(require \".*credentials\"\n)\n',
+    '\\1require "google/cloud/recaptcha_enterprise/version"\n\n'
+)
+s.replace(
+    'lib/google/cloud/recaptcha_enterprise/v1beta1/*_client.rb',
+    'Gem.loaded_specs\[.*\]\.version\.version',
+    'Google::Cloud::RecaptchaEnterprise::VERSION'
+)
+
 # Generate the helper methods
 call('bundle update && bundle exec rake generate_partials', shell=True)

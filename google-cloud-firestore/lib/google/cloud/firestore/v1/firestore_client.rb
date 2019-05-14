@@ -27,6 +27,7 @@ require "google/gax"
 
 require "google/firestore/v1/firestore_pb"
 require "google/cloud/firestore/v1/credentials"
+require "google/cloud/firestore/version"
 
 module Google
   module Cloud
@@ -223,7 +224,7 @@ module Google
               updater_proc = credentials.updater_proc
             end
 
-            package_version = Gem.loaded_specs['google-cloud-firestore'].version.version
+            package_version = Google::Cloud::Firestore::VERSION
 
             google_api_client = "gl-ruby/#{RUBY_VERSION}"
             google_api_client << " #{lib_name}/#{lib_version}" if lib_name

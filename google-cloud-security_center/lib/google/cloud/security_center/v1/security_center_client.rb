@@ -29,6 +29,7 @@ require "google/longrunning/operations_client"
 
 require "google/cloud/security_center/v1/securitycenter_service_pb"
 require "google/cloud/security_center/v1/credentials"
+require "google/cloud/securitycenter/version"
 
 module Google
   module Cloud
@@ -294,7 +295,7 @@ module Google
               updater_proc = credentials.updater_proc
             end
 
-            package_version = Gem.loaded_specs['google-cloud-security_center'].version.version
+            package_version = Google::Cloud::SecurityCenter::VERSION
 
             google_api_client = "gl-ruby/#{RUBY_VERSION}"
             google_api_client << " #{lib_name}/#{lib_version}" if lib_name

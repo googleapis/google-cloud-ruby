@@ -29,6 +29,7 @@ require "google/longrunning/operations_client"
 
 require "google/cloud/speech/v1/cloud_speech_pb"
 require "google/cloud/speech/v1/credentials"
+require "google/cloud/speech/version"
 
 module Google
   module Cloud
@@ -136,7 +137,7 @@ module Google
               updater_proc = credentials.updater_proc
             end
 
-            package_version = Gem.loaded_specs['google-cloud-speech'].version.version
+            package_version = Google::Cloud::Speech::VERSION
 
             google_api_client = "gl-ruby/#{RUBY_VERSION}"
             google_api_client << " #{lib_name}/#{lib_version}" if lib_name

@@ -28,6 +28,7 @@ require "google/gax"
 require "google/cloud/kms/v1/service_pb"
 require "google/iam/v1/iam_policy_pb"
 require "google/cloud/kms/v1/credentials"
+require "google/cloud/kms/version"
 
 module Google
   module Cloud
@@ -252,7 +253,7 @@ module Google
               updater_proc = credentials.updater_proc
             end
 
-            package_version = Gem.loaded_specs['google-cloud-kms'].version.version
+            package_version = Google::Cloud::Kms::VERSION
 
             google_api_client = "gl-ruby/#{RUBY_VERSION}"
             google_api_client << " #{lib_name}/#{lib_version}" if lib_name

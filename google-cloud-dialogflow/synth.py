@@ -107,3 +107,25 @@ s.replace(
     'README.md\n',
     'README.md\nAUTHENTICATION.md\nLICENSE\n'
 )
+
+# https://github.com/googleapis/google-cloud-ruby/issues/3058
+s.replace(
+    'google-cloud-dialogflow.gemspec',
+    '\nGem::Specification.new do',
+    'require File.expand_path("../lib/google/cloud/dialogflow/version", __FILE__)\n\nGem::Specification.new do'
+)
+s.replace(
+    'google-cloud-dialogflow.gemspec',
+    '(gem.version\s+=\s+).\d+.\d+.\d.*$',
+    '\\1Google::Cloud::Dialogflow::VERSION'
+)
+s.replace(
+    'lib/google/cloud/dialogflow/v2/*_client.rb',
+    '(require \".*credentials\"\n)\n',
+    '\\1require "google/cloud/dialogflow/version"\n\n'
+)
+s.replace(
+    'lib/google/cloud/dialogflow/v2/*_client.rb',
+    'Gem.loaded_specs\[.*\]\.version\.version',
+    'Google::Cloud::Dialogflow::VERSION'
+)
