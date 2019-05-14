@@ -54,7 +54,7 @@ describe Google::Cloud::Spanner::Convert, :number_to_duration, :mock_spanner do
   end
 
   it "converts a BigDecimal" do
-    number = BigDecimal.new "643383279502884.1971693993751058209749445923078164062"
+    number = BigDecimal "643383279502884.1971693993751058209749445923078164062"
     duration = Google::Cloud::Spanner::Convert.number_to_duration number
     duration.must_be_kind_of Google::Protobuf::Duration
     duration.seconds.must_equal 643383279502884
@@ -62,7 +62,7 @@ describe Google::Cloud::Spanner::Convert, :number_to_duration, :mock_spanner do
   end
 
   it "converts a negative BigDecimal" do
-    number = BigDecimal.new "-643383279502884.1971693993751058209749445923078164062"
+    number = BigDecimal "-643383279502884.1971693993751058209749445923078164062"
     duration = Google::Cloud::Spanner::Convert.number_to_duration number
     duration.must_be_kind_of Google::Protobuf::Duration
     # This should really be -643383279502884, but BigDecimal is doing something here...
