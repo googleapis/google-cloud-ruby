@@ -120,8 +120,12 @@ class MockPubsub < Minitest::Spec
     data
   end
 
-  def topic_hash topic_name, labels: nil, kms_key_name: nil
-    { name: topic_path(topic_name), labels: labels, kms_key_name: kms_key_name }
+  def topic_hash topic_name, labels: nil, kms_key_name: nil, persistence_regions: nil
+    hash = { name: topic_path(topic_name), labels: labels, kms_key_name: kms_key_name }
+    if persistence_regions
+      hash[:message_storage_policy] = { allowed_persistence_regions: persistence_regions }
+    end
+    hash
   end
 
   def topic_subscriptions_hash num_subs, token = nil
