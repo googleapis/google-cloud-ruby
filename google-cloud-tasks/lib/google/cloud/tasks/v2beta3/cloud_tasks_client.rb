@@ -1048,8 +1048,7 @@ module Google
           #
           # Tasks cannot be updated after creation; there is no UpdateTask command.
           #
-          # * For {Google::Cloud::Tasks::V2beta3::AppEngineHttpQueue App Engine queues}, the maximum task size is
-          #   100KB.
+          # * The maximum task size is 100KB.
           #
           # @param parent [String]
           #   Required.
