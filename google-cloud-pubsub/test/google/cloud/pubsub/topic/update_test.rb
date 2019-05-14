@@ -23,6 +23,8 @@ describe Google::Cloud::PubSub::Topic, :update, :mock_pubsub do
     new_labels.each { |k, v| labels_map[String(k)] = String(v) }
     labels_map
   end
+  let(:kms_key_name) { "projects/a/locations/b/keyRings/c/cryptoKeys/d" }
+  let(:new_kms_key_name) { "projects/d/locations/c/keyRings/b/cryptoKeys/a" }
   let(:topic_grpc) { Google::Cloud::PubSub::V1::Topic.new topic_hash(topic_name, labels: labels) }
   let(:topic) { Google::Cloud::PubSub::Topic.from_grpc topic_grpc, pubsub.service }
 
@@ -70,6 +72,63 @@ describe Google::Cloud::PubSub::Topic, :update, :mock_pubsub do
     topic.labels.must_equal labels
   end
 
+  it "updates kms_key" do
+    topic_grpc.kms_key_name = kms_key_name
+    topic.kms_key.must_equal kms_key_name
+
+    update_grpc = Google::Cloud::PubSub::V1::Topic.new \
+      name: topic_path(topic_name),
+      kms_key_name: new_kms_key_name
+    update_mask = Google::Protobuf::FieldMask.new paths: ["kms_key_name"]
+    mock = Minitest::Mock.new
+    mock.expect :update_topic, update_grpc, [update_grpc, update_mask, options: default_options]
+    topic.service.mocked_publisher = mock
+
+    topic.kms_key = new_kms_key_name
+
+    mock.verify
+
+    topic.kms_key.must_equal new_kms_key_name
+  end
+
+  it "updates kms_key to empty string" do
+    topic_grpc.kms_key_name = kms_key_name
+    topic.kms_key.must_equal kms_key_name
+
+    update_grpc = Google::Cloud::PubSub::V1::Topic.new \
+      name: topic_path(topic_name),
+      kms_key_name: ""
+    update_mask = Google::Protobuf::FieldMask.new paths: ["kms_key_name"]
+    mock = Minitest::Mock.new
+    mock.expect :update_topic, update_grpc, [update_grpc, update_mask, options: default_options]
+    topic.service.mocked_publisher = mock
+
+    topic.kms_key = ""
+
+    mock.verify
+
+    topic.kms_key.must_be :empty?
+  end
+
+  it "updates kms_key to nil" do
+    topic_grpc.kms_key_name = kms_key_name
+    topic.kms_key.must_equal kms_key_name
+
+    update_grpc = Google::Cloud::PubSub::V1::Topic.new \
+      name: topic_path(topic_name),
+      kms_key_name: ""
+    update_mask = Google::Protobuf::FieldMask.new paths: ["kms_key_name"]
+    mock = Minitest::Mock.new
+    mock.expect :update_topic, update_grpc, [update_grpc, update_mask, options: default_options]
+    topic.service.mocked_publisher = mock
+
+    topic.kms_key = nil
+
+    mock.verify
+
+    topic.kms_key.must_be :empty?
+  end
+
   describe :reference do
     let(:topic) { Google::Cloud::PubSub::Topic.from_name topic_name, pubsub.service }
 
@@ -93,6 +152,28 @@ describe Google::Cloud::PubSub::Topic, :update, :mock_pubsub do
       topic.wont_be :reference?
       topic.must_be :resource?
       topic.labels.must_equal new_labels
+    end
+
+    it "updates kms_key" do
+      topic.must_be :reference?
+      topic.wont_be :resource?
+
+      update_grpc = Google::Cloud::PubSub::V1::Topic.new \
+        name: topic_path(topic_name),
+        kms_key_name: new_kms_key_name
+      topic_grpc.kms_key_name = new_kms_key_name
+      update_mask = Google::Protobuf::FieldMask.new paths: ["kms_key_name"]
+      mock = Minitest::Mock.new
+      mock.expect :update_topic, topic_grpc, [update_grpc, update_mask, options: default_options]
+      topic.service.mocked_publisher = mock
+
+      topic.kms_key = new_kms_key_name
+
+      mock.verify
+
+      topic.wont_be :reference?
+      topic.must_be :resource?
+      topic.kms_key.must_equal new_kms_key_name
     end
   end
 end
