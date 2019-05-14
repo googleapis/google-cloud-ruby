@@ -30,7 +30,8 @@ module Google
         #     field can be used as a filter and several operators as supported.
         #     For example: `<=, <, >=, >, !=, =, :`. The filter syntax is the same as
         #     described in
-        #     [Stackdriver's Advanced Logs Filters](https://cloud.google.com/logging/docs/view/advanced_filters).
+        #     [Stackdriver's Advanced Logs
+        #     Filters](https://cloud.google.com/logging/docs/view/advanced_filters).
         #
         #     Sample filter "state: PAUSED".
         #
@@ -181,13 +182,14 @@ module Google
         #     permission on the {Google::Cloud::Tasks::V2::Task Task} resource.
         # @!attribute [rw] page_size
         #   @return [Integer]
-        #     Requested page size. Fewer tasks than requested might be returned.
+        #     Maximum page size.
         #
-        #     The maximum page size is 1000. If unspecified, the page size will
-        #     be the maximum. Fewer tasks than requested might be returned,
-        #     even if more tasks exist; use
-        #     {Google::Cloud::Tasks::V2::ListTasksResponse#next_page_token next_page_token} in the
-        #     response to determine if more tasks exist.
+        #     Fewer tasks than requested might be returned, even if more tasks exist; use
+        #     {Google::Cloud::Tasks::V2::ListTasksResponse#next_page_token next_page_token} in the response to
+        #     determine if more tasks exist.
+        #
+        #     The maximum page size is 1000. If unspecified, the page size will be the
+        #     maximum.
         # @!attribute [rw] page_token
         #   @return [String]
         #     A token identifying the page of results to return.
