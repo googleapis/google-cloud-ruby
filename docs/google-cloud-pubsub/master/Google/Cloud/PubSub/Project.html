@@ -138,7 +138,7 @@ to subscribers.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#create_topic-instance_method" title="#create_topic (instance method)">#<strong>create_topic</strong>(topic_name, labels: nil, async: nil)  &#x21d2; Google::Cloud::PubSub::Topic </a>
+      <a href="#create_topic-instance_method" title="#create_topic (instance method)">#<strong>create_topic</strong>(topic_name, labels: nil, kms_key: nil, async: nil)  &#x21d2; Google::Cloud::PubSub::Topic </a>
     
 
     
@@ -322,7 +322,7 @@ to subscribers.</p>
       <div class="method_details first">
   <h3 class="signature first" id="create_topic-instance_method">
   
-    #<strong>create_topic</strong>(topic_name, labels: nil, async: nil)  &#x21d2; <tt><span class='object_link'><a href="Topic.html" title="Google::Cloud::PubSub::Topic (class)">Google::Cloud::PubSub::Topic</a></span></tt> 
+    #<strong>create_topic</strong>(topic_name, labels: nil, kms_key: nil, async: nil)  &#x21d2; <tt><span class='object_link'><a href="Topic.html" title="Google::Cloud::PubSub::Topic (class)">Google::Cloud::PubSub::Topic</a></span></tt> 
   
 
   
@@ -393,6 +393,23 @@ Labels</a>.</p>
   
     <li>
       
+        <span class='name'>kms_key</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The Cloud KMS encryption key that will be used
+to protect access to messages published on this topic. Optional.
+For example: <code>projects/a/locations/b/keyRings/c/cryptoKeys/d</code></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
         <span class='name'>async</span>
       
       
@@ -451,18 +468,22 @@ published messages&#39; callbacks. Default is 8.</li>
       <pre class="lines">
 
 
-202
-203
-204
 205
-206</pre>
+206
+207
+208
+209
+210
+211</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/project.rb', line 202</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/project.rb', line 205</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_create_topic'>create_topic</span> <span class='id identifier rubyid_topic_name'>topic_name</span><span class='comma'>,</span> <span class='label'>labels:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>async:</span> <span class='kw'>nil</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_create_topic'>create_topic</span> <span class='id identifier rubyid_topic_name'>topic_name</span><span class='comma'>,</span> <span class='label'>labels:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>kms_key:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>async:</span> <span class='kw'>nil</span>
   <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
-  <span class='id identifier rubyid_grpc'>grpc</span> <span class='op'>=</span> <span class='id identifier rubyid_service'>service</span><span class='period'>.</span><span class='id identifier rubyid_create_topic'>create_topic</span> <span class='id identifier rubyid_topic_name'>topic_name</span><span class='comma'>,</span> <span class='label'>labels:</span> <span class='id identifier rubyid_labels'>labels</span>
+  <span class='id identifier rubyid_grpc'>grpc</span> <span class='op'>=</span> <span class='id identifier rubyid_service'>service</span><span class='period'>.</span><span class='id identifier rubyid_create_topic'>create_topic</span> <span class='id identifier rubyid_topic_name'>topic_name</span><span class='comma'>,</span>
+                              <span class='label'>labels:</span>       <span class='id identifier rubyid_labels'>labels</span><span class='comma'>,</span>
+                              <span class='label'>kms_key_name:</span> <span class='id identifier rubyid_kms_key'>kms_key</span>
   <span class='const'><span class='object_link'><a href="Topic.html" title="Google::Cloud::PubSub::Topic (class)">Topic</a></span></span><span class='period'>.</span><span class='id identifier rubyid_from_grpc'>from_grpc</span> <span class='id identifier rubyid_grpc'>grpc</span><span class='comma'>,</span> <span class='id identifier rubyid_service'>service</span><span class='comma'>,</span> <span class='label'>async:</span> <span class='id identifier rubyid_async'>async</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -639,15 +660,15 @@ part of the larger set of results to view.</p>
       <pre class="lines">
 
 
-365
-366
-367
-368
-369
-370</pre>
+370
+371
+372
+373
+374
+375</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/project.rb', line 365</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/project.rb', line 370</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_snapshots'>snapshots</span> <span class='label'>token:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>max:</span> <span class='kw'>nil</span>
   <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
@@ -786,20 +807,20 @@ the subscription does not exist</p>
       <pre class="lines">
 
 
-281
-282
-283
-284
-285
 286
 287
 288
 289
 290
-291</pre>
+291
+292
+293
+294
+295
+296</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/project.rb', line 281</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/project.rb', line 286</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_subscription'>subscription</span> <span class='id identifier rubyid_subscription_name'>subscription_name</span><span class='comma'>,</span> <span class='label'>project:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>skip_lookup:</span> <span class='kw'>nil</span>
   <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
@@ -927,15 +948,15 @@ part of the larger set of results to view.</p>
       <pre class="lines">
 
 
-325
-326
-327
-328
-329
-330</pre>
+330
+331
+332
+333
+334
+335</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/project.rb', line 325</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/project.rb', line 330</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_subscriptions'>subscriptions</span> <span class='label'>token:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>max:</span> <span class='kw'>nil</span>
   <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
@@ -1283,15 +1304,15 @@ the system should return the next page of data.</p>
       <pre class="lines">
 
 
-240
-241
-242
-243
-244
-245</pre>
+245
+246
+247
+248
+249
+250</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/project.rb', line 240</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/project.rb', line 245</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_topics'>topics</span> <span class='label'>token:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>max:</span> <span class='kw'>nil</span>
   <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
