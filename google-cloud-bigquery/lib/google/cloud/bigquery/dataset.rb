@@ -17,6 +17,7 @@ require "json"
 require "google/cloud/errors"
 require "google/cloud/bigquery/service"
 require "google/cloud/bigquery/table"
+require "google/cloud/bigquery/model"
 require "google/cloud/bigquery/external"
 require "google/cloud/bigquery/dataset/list"
 require "google/cloud/bigquery/dataset/access"
@@ -666,6 +667,90 @@ module Google
           options = { token: token, max: max }
           gapi = service.list_tables dataset_id, options
           Table::List.from_gapi gapi, service, dataset_id, max
+        end
+
+        ##
+        # Retrieves an existing model by ID.
+        #
+        # @param [String] model_id The ID of a model.
+        # @param [Boolean] skip_lookup Optionally create just a local reference
+        #   object without verifying that the resource exists on the BigQuery
+        #   service. Calls made on this object will raise errors if the resource
+        #   does not exist. Default is `false`. Optional.
+        #
+        # @return [Google::Cloud::Bigquery::Model, nil] Returns `nil` if the
+        #   model does not exist.
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #
+        #   model = dataset.model "my_model"
+        #   puts model.model_id
+        #
+        # @example Avoid retrieving the model resource with `skip_lookup`:
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #
+        #   dataset = bigquery.dataset "my_dataset"
+        #
+        #   model = dataset.model "my_model", skip_lookup: true
+        #
+        # @!group Model
+        #
+        def model model_id, skip_lookup: nil
+          ensure_service!
+          if skip_lookup
+            return Model.new_reference project_id, dataset_id, model_id, service
+          end
+          gapi = service.get_model dataset_id, model_id
+          Model.from_gapi_json gapi, service
+        rescue Google::Cloud::NotFoundError
+          nil
+        end
+
+        ##
+        # Retrieves the list of models belonging to the dataset.
+        #
+        # @param [String] token A previously-returned page token representing
+        #   part of the larger set of results to view.
+        # @param [Integer] max Maximum number of models to return.
+        #
+        # @return [Array<Google::Cloud::Bigquery::Model>] An array of models
+        #   (See {Google::Cloud::Bigquery::Model::List})
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #
+        #   models = dataset.models
+        #   models.each do |model|
+        #     puts model.model_id
+        #   end
+        #
+        # @example Retrieve all models: (See {Model::List#all})
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #
+        #   models = dataset.models
+        #   models.all do |model|
+        #     puts model.model_id
+        #   end
+        #
+        # @!group Model
+        #
+        def models token: nil, max: nil
+          ensure_service!
+          options = { token: token, max: max }
+          gapi = service.list_models dataset_id, options
+          Model::List.from_gapi gapi, service, dataset_id, max
         end
 
         ##

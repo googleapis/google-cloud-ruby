@@ -239,6 +239,57 @@ module Google
         end
 
         ##
+        # Lists all models in the specified dataset.
+        # Requires the READER dataset role.
+        def list_models dataset_id, options = {}
+          # The list operation is considered idempotent
+          execute backoff: true do
+            json_txt = service.list_models @project, dataset_id,
+                                           max_results: options[:max],
+                                           page_token:  options[:token]
+            JSON.parse json_txt, symbolize_names: true
+          end
+        end
+
+        # Gets the specified model resource by model ID.
+        # This method does not return the data in the model,
+        # it only returns the model resource,
+        # which describes the structure of this model.
+        def get_model dataset_id, model_id
+          # The get operation is considered idempotent
+          execute backoff: true do
+            json_txt = service.get_model @project, dataset_id, model_id
+            JSON.parse json_txt, symbolize_names: true
+          end
+        end
+
+        ##
+        # Updates information in an existing model, replacing fields that
+        # are provided in the submitted model resource.
+        def patch_model dataset_id, model_id, patched_model_gapi, etag = nil
+          patch_with_backoff = false
+          options = {}
+          if etag
+            options[:header] = { "If-Match" => etag }
+            # The patch with etag operation is considered idempotent
+            patch_with_backoff = true
+          end
+          execute backoff: patch_with_backoff do
+            json_txt = service.patch_model @project, dataset_id, model_id,
+                                           patched_model_gapi,
+                                           options: options
+            JSON.parse json_txt, symbolize_names: true
+          end
+        end
+
+        ##
+        # Deletes the model specified by modelId from the dataset.
+        # If the model contains data, all the data will be deleted.
+        def delete_model dataset_id, model_id
+          execute { service.delete_model @project, dataset_id, model_id }
+        end
+
+        ##
         # Lists all jobs in the specified project to which you have
         # been granted the READER job role.
         def list_jobs options = {}
