@@ -89,16 +89,16 @@ module Acceptance
       end
     end
 
-    def self.run_one_method klass, method_name, reporter
-      result = nil
-      reporter.prerecord klass, method_name
-      (1..3).each do |try|
-        result = Minitest.run_one_method(klass, method_name)
-        break if (result.passed? || result.skipped?)
-        puts "Retrying #{klass}##{method_name} (#{try})"
-      end
-      reporter.record result
-    end
+    # def self.run_one_method klass, method_name, reporter
+    #   result = nil
+    #   reporter.prerecord klass, method_name
+    #   (1..3).each do |try|
+    #     result = Minitest.run_one_method(klass, method_name)
+    #     break if (result.passed? || result.skipped?)
+    #     puts "Retrying #{klass}##{method_name} (#{try})"
+    #   end
+    #   reporter.record result
+    # end
   end
 end
 
@@ -144,10 +144,27 @@ def clean_up_storage_buckets proj = $storage, names = $bucket_names, user_projec
 rescue => e
   puts "Error while cleaning up storage buckets after tests.\n\n#{e}"
   raise e
+  end
+
+def clean_up_hmac_keys proj = $storage
+  puts "Cleaning up HMAC keys after tests for #{proj.project}."
+  proj.hmac_keys.each do |hmac_key|
+    begin
+      hmac_key = proj.hmac_key hmac_key.access_id # reload to avoid error: Etag does not match expected value.
+      hmac_key.inactive! if hmac_key.active?
+      safe_gcs_execute { hmac_key.delete! }
+    rescue => e
+      puts "Error while cleaning up HMAC key id: #{hmac_key.id}\n\n#{e}\n#{e.backtrace}"
+    end
+  end
+rescue => e
+  puts "Error while cleaning up HMAC keys after tests.\n\n#{e}"
+  raise e
 end
 
 Minitest.after_run do
   clean_up_storage_buckets
+  clean_up_hmac_keys
   if $storage_2
     clean_up_storage_buckets $storage_2, $bucket_names_2, user_project: true
   else
