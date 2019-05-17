@@ -65,6 +65,11 @@ module Google
       # @private URL path for metadata server root.
       METADATA_ROOT_PATH = "/".freeze
 
+      # @private
+      METADATA_RETRY_EXCEPTIONS =
+        ::Faraday::Request::Retry::DEFAULT_EXCEPTIONS +
+        [::Errno::ETIMEDOUT, ::Faraday::ConnectionFailed, ::Errno::EHOSTDOWN]
+
       ##
       # Create a new instance of the environment information.
       # Most client should not need to call this directly. Obtain a singleton
@@ -72,18 +77,43 @@ module Google
       # is provided for internal testing and allows mocking of the data.
       #
       # @param [Hash] env Mock environment variables.
-      # @param [Faraday::Connection] connection Faraday connection to use.
       # @param [Hash,false] metadata_cache The metadata cache. You may pass
       #     a prepopuated cache, an empty cache (the default) or `false` to
       #     disable the cache completely.
+      # @param [Numeric] request_timeout Timeout for each http request.
+      #     Defaults to 0.1.
+      # @param [Integer] retries Number of times to retry http requests.
+      #     Defaults to 0.
+      # @param [Proc] build_proc A proc to be used to build the Faraday
+      #     connection. It should take a `Faraday::RackBuilder` as its single
+      #     parameter, and should add middleware and set the adapter as if it
+      #     were passed as a block to `Faraday.new`.
+      # @param [Faraday::Connection] connection Faraday connection to use.
+      #     If specified, overrides the `request_timeout`, `retries`, and
+      #     `build_proc` settings.
       #
-      def initialize env: nil, connection: nil, metadata_cache: nil
+      def initialize env: nil, connection: nil, metadata_cache: nil,
+                     request_timeout: 0.1, retries: 0, build_proc: nil
         @disable_metadata_cache = metadata_cache == false
         @metadata_cache = metadata_cache || {}
         @env = env || ::ENV
-        @connection = connection ||
-                      ::Faraday.new(url: METADATA_HOST,
-                                    request: { timeout: 0.1 })
+        @connection =
+          connection ||
+          begin
+            options = { url: METADATA_HOST,
+                        request: { timeout: request_timeout } }
+            ::Faraday.new options do |builder|
+              if retries > 0
+                builder.request :retry, max: retries, interval: 0.05,
+                                        exceptions: METADATA_RETRY_EXCEPTIONS
+              end
+              if build_proc
+                build_proc.call builder
+              else
+                builder.adapter ::Faraday.default_adapter
+              end
+            end
+          end
       end
 
       ##
