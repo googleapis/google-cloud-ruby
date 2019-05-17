@@ -26,20 +26,20 @@ describe Google::Cloud::Storage::Project, :storage do
   it "should create a new HMAC key" do
     client_email = "542339357638-cr0dserr2evg7sv1meghqeu703274f3h@developer.gserviceaccount.com"
 
+    # Create key.
     hmac_key = storage.create_hmac_key service_account_email: client_email
 
     hmac_key.wont_be :nil?
     hmac_key.must_be_kind_of Google::Cloud::Storage::HmacKey
 
+    # Check response fields.
     hmac_key.secret.must_be_kind_of String
     hmac_key.secret.length.must_equal 40
-
     hmac_key.access_id.must_be_kind_of String
     hmac_key.etag.must_be_kind_of String
     hmac_key.id.must_be_kind_of String
     hmac_key.created_at.must_be_kind_of DateTime
     hmac_key.updated_at.must_be_kind_of DateTime
-
     hmac_key.service_account_email.must_equal client_email
     hmac_key.state.must_equal "ACTIVE"
     hmac_key.must_be :active?
@@ -47,6 +47,7 @@ describe Google::Cloud::Storage::Project, :storage do
     hmac_keys = storage.hmac_keys
     hmac_keys.wont_be :empty?
 
+    # Verify it shows up in list.
     hmac_key_list_item = hmac_keys.find { |k| k.access_id == hmac_key.access_id }
     hmac_key_list_item.wont_be :nil?
     #hmac_key_list_item.etag.must_equal hmac_key.etag   unreliable!
@@ -55,17 +56,46 @@ describe Google::Cloud::Storage::Project, :storage do
     # hmac_key_list_item.state.must_equal "INACTIVE"
     # hmac_key_list_item.must_be :inactive?
 
-    hmac_key.reload!
+    hmac_key.reload! # GET the key.
+    # Update key to INACTIVE state
     hmac_key.inactive!
     hmac_key.state.must_equal "INACTIVE"
     hmac_key.must_be :inactive?
 
+    # Delete key.
     hmac_key.delete!
     hmac_key.state.must_equal "DELETED"
     hmac_key.must_be :deleted?
 
+    # Verify it does not show up in list.
+    hmac_keys = storage.hmac_keys
+    hmac_key_list_item = hmac_keys.find { |k| k.access_id == hmac_key.access_id }
+    hmac_key_list_item.must_be :nil?
+
+    # GET the deleted key.
     hmac_key = storage.hmac_key hmac_key.access_id # similar to reload! above
     hmac_key.state.must_equal "DELETED"
     hmac_key.must_be :deleted?
+
+    # Create 5 keys.
+    5.times do
+      hmac_key = storage.create_hmac_key service_account_email: client_email
+    end
+
+    # List with max_results=2
+    hmac_keys = storage.hmac_keys max: 2
+    # Verify next_page_token returned and only two list results
+    hmac_keys.token.wont_be :nil?
+    hmac_keys.size.must_equal 2
+    hmac_keys.next?.must_equal true
+
+    # take next_page_token and pass it into page_token.
+    hmac_keys_2 = hmac_keys.next
+    hmac_keys_2.size.must_equal 2
+    hmac_keys_2.next?.must_equal true
+
+    hmac_keys_3 = hmac_keys.next
+    hmac_keys_3.wont_be :empty? # Contains at least 1 more since we created 5.
+
   end
 end
