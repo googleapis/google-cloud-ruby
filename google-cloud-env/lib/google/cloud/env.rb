@@ -83,7 +83,7 @@ module Google
       # @param [Numeric] request_timeout Timeout for each http request.
       #     Defaults to 0.1.
       # @param [Integer] retries Number of times to retry http requests.
-      #     Defaults to 0.
+      #     Defaults to 1.
       # @param [Proc] build_proc A proc to be used to build the Faraday
       #     connection. It should take a `Faraday::RackBuilder` as its single
       #     parameter, and should add middleware and set the adapter as if it
@@ -93,7 +93,7 @@ module Google
       #     `build_proc` settings.
       #
       def initialize env: nil, connection: nil, metadata_cache: nil,
-                     request_timeout: 0.1, retries: 0, build_proc: nil
+                     request_timeout: 0.1, retries: 1, build_proc: nil
         @disable_metadata_cache = metadata_cache == false
         @metadata_cache = metadata_cache || {}
         @env = env || ::ENV
