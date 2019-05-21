@@ -1,5 +1,15 @@
 # Release History
 
+### 0.36.0 / 2019-05-21
+
+* Add Topic#kms_key
+  * Add the Cloud KMS encryption key that will be used to
+    protect access to messages published on a topic.
+* Updates to the low-level API:
+  * Add Topic#kms_key_name (experimental)
+  * Snapshots no longer marked beta.
+  * Update IAM documentation.
+
 ### 0.35.0 / 2019-04-25
 
 * Add Subscription#push_config and Subscription::PushConfig
