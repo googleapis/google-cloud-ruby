@@ -77,7 +77,8 @@ module Google
               user_project: @user_project
 
             HmacKey::List.from_gapi \
-              gapi, @service, service_account_email: @service_account_email,
+              gapi, @service,
+              service_account_email: @service_account_email,
               show_deleted_keys: @show_deleted_keys, max: @max,
               user_project: @user_project
           end
@@ -107,7 +108,7 @@ module Google
           #
           #   hmac_keys = storage.hmac_keys
           #   hmac_keys.all do |key|
-          #     puts key.name
+          #     puts key.access_id
           #   end
           #
           # @example Using the enumerator by not passing a block:
@@ -117,7 +118,7 @@ module Google
           #
           #   hmac_keys = storage.hmac_keys
           #   all_names = hmac_keys.all.map do |key|
-          #     key.name
+          #     key.access_id
           #   end
           #
           # @example Limit the number of API calls made:
@@ -127,7 +128,7 @@ module Google
           #
           #   hmac_keys = storage.hmac_keys
           #   hmac_keys.all(request_limit: 10) do |key|
-          #     puts key.name
+          #     puts key.access_id
           #   end
           #
           def all request_limit: nil

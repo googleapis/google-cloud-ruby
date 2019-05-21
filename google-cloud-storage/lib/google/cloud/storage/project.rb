@@ -444,7 +444,8 @@ module Google
             show_deleted_keys: show_deleted_keys, user_project: user_project
 
           HmacKey::List.from_gapi \
-            gapi, service, service_account_email: nil, show_deleted_keys: nil,
+            gapi, service,
+            service_account_email: nil, show_deleted_keys: nil,
             max: max, user_project: user_project
         end
 

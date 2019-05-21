@@ -491,9 +491,9 @@ module Google
           execute do
             service.list_project_hmac_keys \
               @project, max_results: max, page_token: token,
-              service_account_email: service_account_email,
-              show_deleted_keys: show_deleted_keys,
-              user_project: user_project(user_project)
+                        service_account_email: service_account_email,
+                        show_deleted_keys: show_deleted_keys,
+                        user_project: user_project(user_project)
           end
         end
 

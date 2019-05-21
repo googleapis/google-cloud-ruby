@@ -164,7 +164,8 @@ module Google
         ##
         # Updates the state of the HMAC key to `ACTIVE`.
         #
-        # @return [Boolean] Returns `true` if the HMAC key was updated.
+        # @return [Google::Cloud::Storage::HmacKey] Returns the HMAC key for
+        #   chaining.
         #
         # @example
         #   require "google/cloud/storage"
@@ -193,7 +194,8 @@ module Google
         ##
         # Updates the state of the HMAC key to `INACTIVE`.
         #
-        # @return [Boolean] Returns `true` if the HMAC key was updated.
+        # @return [Google::Cloud::Storage::HmacKey] Returns the HMAC key for
+        #   chaining.
         #
         # @example
         #   require "google/cloud/storage"
@@ -226,7 +228,8 @@ module Google
         # The API call to delete the notification may be retried under certain
         # conditions. See {Google::Cloud#storage} to control this behavior.
         #
-        # @return [Boolean] Returns `true` if the notification was deleted.
+        # @return [Google::Cloud::Storage::HmacKey] Returns the HMAC key for
+        #   chaining.
         #
         # @example
         #   require "google/cloud/storage"
@@ -241,8 +244,7 @@ module Google
           ensure_service!
           @service.delete_hmac_key access_id,
                                    user_project: @user_project
-          @gapi = @service.get_hmac_key access_id,
-                                           user_project: @user_project
+          @gapi = @service.get_hmac_key access_id, user_project: @user_project
           self
         end
         alias delete delete!
@@ -264,9 +266,9 @@ module Google
         #
         #
         def self.from_gapi gapi, service, user_project: nil
-          hmac_key = self.from_gapi_metadata gapi.metadata,
-                                             service,
-                                             user_project: user_project
+          hmac_key = from_gapi_metadata gapi.metadata,
+                                        service,
+                                        user_project: user_project
           hmac_key.tap do |f|
             f.instance_variable_set :@secret, gapi.secret
           end
