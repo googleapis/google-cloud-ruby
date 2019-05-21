@@ -1,5 +1,9 @@
 # Release History
 
+### 1.11.1 / 2019-05-21
+
+* Declare explicit dependency on mime-types
+
 ### 1.11.0 / 2019-02-01
 
 * Make use of Credentials#project_id
