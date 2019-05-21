@@ -1,5 +1,11 @@
 # Release History
 
+### 0.4.0 / 2019-05-21
+
+* Add Google::Cloud::Bigtable::VERSION
+* Set gRPC headers to allow maximum message size
+* Fix errors in code sample documentation
+
 ### 0.3.1 / 2019-04-29
 
 * Add AUTHENTICATION.md guide.
