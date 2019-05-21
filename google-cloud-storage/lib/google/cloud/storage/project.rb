@@ -388,6 +388,9 @@ module Google
         ##
         # Creates a new HMAC key.
         #
+        # @param [String] service_account_email The email address of the service
+        #   account. Used to create the HMAC key.
+        #
         # @param [String] user_project If this parameter is set to a project ID
         #   other than the current project, and that project is authorized for
         #   the currently authenticated service account, transit costs will be
@@ -395,7 +398,7 @@ module Google
         #
         # @return [Google::Cloud::Storage::HmacKey]
         #
-        def create_hmac_key service_account_email: nil, user_project: nil
+        def create_hmac_key service_account_email, user_project: nil
           gapi = service.create_hmac_key service_account_email,
                                          user_project: user_project
           HmacKey.from_gapi gapi, service, user_project: user_project

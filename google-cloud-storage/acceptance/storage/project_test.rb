@@ -24,10 +24,10 @@ describe Google::Cloud::Storage::Project, :storage do
   end
   focus
   it "should create a new HMAC key" do
-    client_email = "542339357638-cr0dserr2evg7sv1meghqeu703274f3h@developer.gserviceaccount.com"
+    service_account_email = "542339357638-cr0dserr2evg7sv1meghqeu703274f3h@developer.gserviceaccount.com"
 
     # Create key.
-    hmac_key = storage.create_hmac_key service_account_email: client_email
+    hmac_key = storage.create_hmac_key service_account_email
 
     hmac_key.wont_be :nil?
     hmac_key.must_be_kind_of Google::Cloud::Storage::HmacKey
@@ -40,7 +40,7 @@ describe Google::Cloud::Storage::Project, :storage do
     hmac_key.id.must_be_kind_of String
     hmac_key.created_at.must_be_kind_of DateTime
     hmac_key.updated_at.must_be_kind_of DateTime
-    hmac_key.service_account_email.must_equal client_email
+    hmac_key.service_account_email.must_equal service_account_email
     hmac_key.state.must_equal "ACTIVE"
     hmac_key.must_be :active?
 
@@ -79,7 +79,7 @@ describe Google::Cloud::Storage::Project, :storage do
 
     # Create 5 keys.
     5.times do
-      hmac_key = storage.create_hmac_key service_account_email: client_email
+      hmac_key = storage.create_hmac_key service_account_email
     end
 
     # List with max_results=2

@@ -1014,7 +1014,7 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud::Storage::HmacKey" do
     mock_storage do |mock|
-      mock.expect :create_project_hmac_key, hmac_key_created_gapi, ["my-project", nil, Hash]
+      mock.expect :create_project_hmac_key, hmac_key_gapi, ["my-project", "my_account@developer.gserviceaccount.com", Hash]
       mock.expect :get_project_hmac_key, hmac_key_metadata_gapi, ["my-project", "my-access-id", Hash]
       mock.expect :update_project_hmac_key, hmac_key_metadata_gapi, ["my-project", "my-access-id", Google::Apis::StorageV1::HmacKeyMetadata, Hash]
       mock.expect :delete_project_hmac_key, hmac_key_metadata_gapi, ["my-project", "my-access-id", Hash]
@@ -1430,7 +1430,7 @@ def hmac_key_metadata_gapi
   )
 end
 
-def hmac_key_created_gapi
+def hmac_key_gapi
   Google::Apis::StorageV1::HmacKey.new(
     secret: "0123456789012345678901234567890123456789",
     metadata: hmac_key_metadata_gapi

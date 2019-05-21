@@ -36,7 +36,8 @@ module Google
       #
       #   storage = Google::Cloud::Storage.new
       #
-      #   hmac_key = storage.create_hmac_key
+      #   service_account_email = "my_account@developer.gserviceaccount.com"
+      #   hmac_key = storage.create_hmac_key service_account_email
       #   hmac_key.secret # ...
       #
       #   hmac_key = storage.hmac_key hmac_key.access_id
