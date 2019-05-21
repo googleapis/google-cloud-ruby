@@ -1,5 +1,9 @@
 # Release History
 
+### 1.18.2 / 2019-05-21
+
+* Declare explicit dependency on mime-types
+
 ### 1.18.1 / 2019-04-29
 
 * Update Storage Bucket Policy Only documentation.
