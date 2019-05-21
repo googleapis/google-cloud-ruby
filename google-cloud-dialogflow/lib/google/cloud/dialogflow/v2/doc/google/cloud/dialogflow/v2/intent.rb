@@ -86,8 +86,8 @@ module Google
         #     `Response` field in the Dialogflow console.
         # @!attribute [rw] default_response_platforms
         #   @return [Array<Google::Cloud::Dialogflow::V2::Intent::Message::Platform>]
-        #     Optional. The list of platforms for which the first response will be
-        #     taken from among the messages assigned to the DEFAULT_PLATFORM.
+        #     Optional. The list of platforms for which the first responses will be
+        #     copied from the messages in PLATFORM_UNSPECIFIED (i.e. default platform).
         # @!attribute [rw] root_followup_intent_name
         #   @return [String]
         #     Read-only. The unique identifier of the root intent in the chain of
@@ -539,6 +539,9 @@ module Google
               #   }
               # }</pre>
               ACTIONS_ON_GOOGLE = 8
+
+              # Google Hangouts.
+              GOOGLE_HANGOUTS = 11
             end
           end
 
