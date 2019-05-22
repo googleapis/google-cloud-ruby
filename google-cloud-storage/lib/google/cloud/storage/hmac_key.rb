@@ -90,7 +90,7 @@ module Google
         end
 
         ##
-        # The creation time of the HMAC key.
+        # Creation time of the HMAC key.
         #
         # @return [String]
         #
@@ -145,7 +145,7 @@ module Google
         end
 
         ##
-        # The last modification time of the HMAC key metadata.
+        # Last modification time of the HMAC key metadata.
         #
         # @return [String]
         #
