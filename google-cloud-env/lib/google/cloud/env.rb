@@ -72,7 +72,7 @@ module Google
         Errno::EHOSTDOWN,
         Errno::ETIMEDOUT,
         Timeout::Error
-      ]
+      ].freeze
 
       ##
       # Create a new instance of the environment information.
@@ -86,15 +86,13 @@ module Google
       #     disable the cache completely.
       # @param [Numeric] request_timeout Timeout for each http request.
       #     Defaults to 0.1.
-      # @param [Integer] retries Number of times to retry http requests.
-      #     Defaults to 1.
-      # @param [Proc] build_proc A proc to be used to build the Faraday
-      #     connection. It should take a `Faraday::RackBuilder` as its single
-      #     parameter, and should add middleware and set the adapter as if it
-      #     were passed as a block to `Faraday.new`.
+      # @param [Integer] retry_count Number of times to retry http requests.
+      #     Defaults to 1. Not overridden if a custom `connection` is provided.
+      # @param [Numeric] retry_interval Time between retries in seconds.
+      #     Defaults to 0.1. Not overridden if a custom `connection` is
+      #     provided.
       # @param [Faraday::Connection] connection Faraday connection to use.
-      #     If specified, overrides the `request_timeout`, `retries`, and
-      #     `build_proc` settings.
+      #     If specified, overrides the `request_timeout` setting.
       #
       def initialize env: nil, connection: nil, metadata_cache: nil,
                      request_timeout: 0.1, retry_count: 1, retry_interval: 0.1
@@ -353,7 +351,7 @@ module Google
           rescue *METADATA_FAILURE_EXCEPTIONS
             retries_remaining -= 1
             if retries_remaining >= 0
-              sleep @retry_interval if @retry_interval
+              sleep @retry_interval
               retry
             end
             metadata_cache[path] = false
@@ -384,7 +382,7 @@ module Google
           rescue *METADATA_FAILURE_EXCEPTIONS
             retries_remaining -= 1
             if retries_remaining >= 0
-              sleep @retry_interval if @retry_interval
+              sleep @retry_interval
               retry
             end
             metadata_cache[path] = nil
