@@ -84,16 +84,16 @@ describe Google::Cloud::Env do
     end
   end
 
-  def gce_faraday_build failure_count: 0
-    proc do |builder|
+  def gce_conn failure_count: 0
+    Faraday::Connection.new do |builder|
       builder.adapter :test, gce_stubs(failure_count: failure_count) do |stub|
         stub.get(//) { |env| [404, {}, "not found"] }
       end
     end
   end
 
-  def gke_faraday_build failure_count: 0
-    proc do |builder|
+  def gke_conn failure_count: 0
+    Faraday::Connection.new do |builder|
       builder.adapter :test, gce_stubs(failure_count: failure_count) do |stub|
         stub.get("/computeMetadata/v1/instance/attributes/cluster-name") { |env|
           [200, {}, gke_cluster]
@@ -103,8 +103,8 @@ describe Google::Cloud::Env do
     end
   end
 
-  def ext_faraday_build failure_count: 0
-    proc do |builder|
+  def ext_conn failure_count: 0
+    Faraday::Connection.new do |builder|
       builder.adapter :test do |stub|
         stub.get(//) { |env| raise ::Errno::EHOSTDOWN }
       end
@@ -112,8 +112,7 @@ describe Google::Cloud::Env do
   end
 
   it "returns correct values when running on app engine" do
-    env = ::Google::Cloud::Env.new env: gae_env,
-                                   build_proc: gce_faraday_build
+    env = ::Google::Cloud::Env.new env: gae_env, connection: gce_conn
 
     env.app_engine?.must_equal true
     env.kubernetes_engine?.must_equal false
@@ -137,8 +136,7 @@ describe Google::Cloud::Env do
   end
 
   it "returns correct values when running on kubernetes engine" do
-    env = ::Google::Cloud::Env.new env: gke_env,
-                                   build_proc: gke_faraday_build
+    env = ::Google::Cloud::Env.new env: gke_env, connection: gke_conn
 
     env.app_engine?.must_equal false
     env.kubernetes_engine?.must_equal true
@@ -162,8 +160,7 @@ describe Google::Cloud::Env do
   end
 
   it "returns correct values when running on cloud shell" do
-    env = ::Google::Cloud::Env.new env: cloud_shell_env,
-                                   build_proc: gce_faraday_build
+    env = ::Google::Cloud::Env.new env: cloud_shell_env, connection: gce_conn
 
     env.app_engine?.must_equal false
     env.kubernetes_engine?.must_equal false
@@ -187,8 +184,7 @@ describe Google::Cloud::Env do
   end
 
   it "returns correct values when running on compute engine" do
-    env = ::Google::Cloud::Env.new env: gce_env,
-                                   build_proc: gce_faraday_build
+    env = ::Google::Cloud::Env.new env: gce_env, connection: gce_conn
 
     env.app_engine?.must_equal false
     env.kubernetes_engine?.must_equal false
@@ -212,8 +208,7 @@ describe Google::Cloud::Env do
   end
 
   it "returns correct values when not running on gcp" do
-    env = ::Google::Cloud::Env.new env: gce_env,
-                                   build_proc: ext_faraday_build
+    env = ::Google::Cloud::Env.new env: gce_env, connection: ext_conn
 
     env.app_engine?.must_equal false
     env.kubernetes_engine?.must_equal false
@@ -237,16 +232,16 @@ describe Google::Cloud::Env do
   end
 
   it "fails if requests fail and there are not enough retries" do
-    build_proc = gce_faraday_build failure_count: 2
-    env = ::Google::Cloud::Env.new env: gce_env, retries: 1,
-                                   build_proc: build_proc
+    conn = gce_conn failure_count: 2
+    env = ::Google::Cloud::Env.new env: gce_env, retry_count: 1,
+                                   connection: conn
     env.compute_engine?.must_equal false
   end
 
   it "succeeds if requests fail and there are sufficient retries" do
-    build_proc = gce_faraday_build failure_count: 2
-    env = ::Google::Cloud::Env.new env: gce_env, retries: 2,
-                                   build_proc: build_proc
+    conn = gce_conn failure_count: 2
+    env = ::Google::Cloud::Env.new env: gce_env, retry_count: 2,
+                                   connection: conn
     env.compute_engine?.must_equal true
   end
 end
