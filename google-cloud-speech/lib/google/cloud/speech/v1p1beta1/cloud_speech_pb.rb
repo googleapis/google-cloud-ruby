@@ -59,6 +59,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     value :AMR_WB, 5
     value :OGG_OPUS, 6
     value :SPEEX_WITH_HEADER_BYTE, 7
+    value :MP3, 8
   end
   add_message "google.cloud.speech.v1p1beta1.RecognitionMetadata" do
     optional :interaction_type, :enum, 1, "google.cloud.speech.v1p1beta1.RecognitionMetadata.InteractionType"
@@ -104,6 +105,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   end
   add_message "google.cloud.speech.v1p1beta1.SpeechContext" do
     repeated :phrases, :string, 1
+    optional :boost, :float, 4
   end
   add_message "google.cloud.speech.v1p1beta1.RecognitionAudio" do
     oneof :audio_source do
