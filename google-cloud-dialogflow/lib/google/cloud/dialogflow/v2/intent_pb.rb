@@ -5,7 +5,6 @@
 require 'google/protobuf'
 
 require 'google/api/annotations_pb'
-require 'google/api/resource_pb'
 require 'google/cloud/dialogflow/v2/context_pb'
 require 'google/longrunning/operations_pb'
 require 'google/protobuf/duration_pb'
@@ -162,6 +161,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     value :LINE, 6
     value :VIBER, 7
     value :ACTIONS_ON_GOOGLE, 8
+    value :GOOGLE_HANGOUTS, 11
   end
   add_message "google.cloud.dialogflow.v2.Intent.FollowupIntentInfo" do
     optional :followup_intent_name, :string, 1
