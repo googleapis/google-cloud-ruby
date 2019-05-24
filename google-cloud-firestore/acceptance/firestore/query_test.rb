@@ -190,4 +190,101 @@ describe "Query", :firestore_acceptance do
     results.map(&:document_id).must_equal ["doc1", "doc2"]
     results.map { |doc| doc[:foo] }.must_equal ["a", "b"]
   end
+
+  describe "Collection Group" do
+    it "queries a collection group" do
+      collection_group = "b-#{SecureRandom.hex(4)}"
+      doc_paths = [
+          "abc/123/#{collection_group}/cg-doc1",
+          "abc/123/#{collection_group}/cg-doc2",
+          "#{collection_group}/cg-doc3",
+          "#{collection_group}/cg-doc4",
+          "def/456/#{collection_group}/cg-doc5",
+          "#{collection_group}/virtual-doc/nested-coll/not-cg-doc",
+          "x#{collection_group}/not-cg-doc",
+          "#{collection_group}x/not-cg-doc",
+          "abc/123/#{collection_group}x/not-cg-doc",
+          "abc/123/x#{collection_group}/not-cg-doc",
+          "abc/#{collection_group}"
+      ]
+      firestore.batch do |b|
+        doc_paths.each do |doc_path|
+          doc_ref = firestore.document doc_path
+          b.set doc_ref, {x: 1}
+        end
+      end
+
+      query = firestore.collection_group collection_group
+      snapshots = query.get
+      snapshots.map(&:document_id).must_equal ["cg-doc1", "cg-doc2", "cg-doc3", "cg-doc4", "cg-doc5"]
+    end
+
+    it "queries a collection group with start_at and end_at" do
+      collection_group = "b-#{SecureRandom.hex(4)}"
+      doc_paths = [
+        "a/a/#{collection_group}/cg-doc1",
+        "a/b/a/b/#{collection_group}/cg-doc2",
+        "a/b/#{collection_group}/cg-doc3",
+        "a/b/c/d/#{collection_group}/cg-doc4",
+        "a/c/#{collection_group}/cg-doc5",
+        "#{collection_group}/cg-doc6",
+        "a/b/nope/nope"
+      ]
+      firestore.batch do |b|
+        doc_paths.each do |doc_path|
+          doc_ref = firestore.document doc_path
+          b.set doc_ref, {x: 1}
+        end
+      end
+
+      query = firestore.collection_group(collection_group)
+        .order_by("__name__")
+        .start_at(firestore.document("a/b"))
+        .end_at(firestore.document("a/b0"))
+
+      snapshots = query.get
+      snapshots.map(&:document_id).must_equal ["cg-doc2", "cg-doc3", "cg-doc4"]
+
+      query = firestore.collection_group(collection_group)
+        .order_by("__name__")
+        .start_after(firestore.document("a/b"))
+        .end_before(firestore.document("a/b/#{collection_group}/cg-doc3"))
+      snapshots = query.get
+      snapshots.map(&:document_id).must_equal ["cg-doc2"]
+    end
+
+    it "queries a collection group with filters" do
+      collection_group = "b-#{SecureRandom.hex(4)}"
+      doc_paths = [
+        "a/a/#{collection_group}/cg-doc1",
+        "a/b/a/b/#{collection_group}/cg-doc2",
+        "a/b/#{collection_group}/cg-doc3",
+        "a/b/c/d/#{collection_group}/cg-doc4",
+        "a/c/#{collection_group}/cg-doc5",
+        "#{collection_group}/cg-doc6",
+        "a/b/nope/nope"
+      ]
+      firestore.batch do |b|
+        doc_paths.each do |doc_path|
+          doc_ref = firestore.document doc_path
+          b.set doc_ref, {x: 1}
+        end
+      end
+
+      query = firestore.collection_group(collection_group)
+        .where("__name__", ">=", firestore.document("a/b"))
+        .where("__name__", "<=", firestore.document("a/b0"))
+
+      snapshots = query.get
+      snapshots.map(&:document_id).must_equal ["cg-doc2", "cg-doc3", "cg-doc4"]
+
+      query = firestore.collection_group(collection_group)
+        .where("__name__", ">", firestore.document("a/b"))
+        .where(
+          "__name__", "<", firestore.document("a/b/#{collection_group}/cg-doc3")
+        )
+      snapshots = query.get
+      snapshots.map(&:document_id).must_equal ["cg-doc2"]
+    end
+  end
 end
