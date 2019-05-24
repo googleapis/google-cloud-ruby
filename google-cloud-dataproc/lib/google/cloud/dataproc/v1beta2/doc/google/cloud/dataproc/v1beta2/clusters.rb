@@ -60,15 +60,18 @@ module Google
         # The cluster config.
         # @!attribute [rw] config_bucket
         #   @return [String]
-        #     Optional. A Cloud Storage staging bucket used for sharing generated
-        #     SSH keys and config. If you do not specify a staging bucket, Cloud
-        #     Dataproc will determine an appropriate Cloud Storage location (US,
+        #     Optional. A Google Cloud Storage bucket used to stage job
+        #     dependencies, config files, and job driver console output.
+        #     If you do not specify a staging bucket, Cloud
+        #     Dataproc will determine a Cloud Storage location (US,
         #     ASIA, or EU) for your cluster's staging bucket according to the Google
-        #     Compute Engine zone where your cluster is deployed, and then it will create
-        #     and manage this project-level, per-location bucket for you.
+        #     Compute Engine zone where your cluster is deployed, and then create
+        #     and manage this project-level, per-location bucket (see
+        #     [Cloud Dataproc staging
+        #     bucket](/dataproc/docs/concepts/configuring-clusters/staging-bucket)).
         # @!attribute [rw] gce_cluster_config
         #   @return [Google::Cloud::Dataproc::V1beta2::GceClusterConfig]
-        #     Required. The shared Compute Engine config settings for
+        #     Optional. The shared Compute Engine config settings for
         #     all instances in a cluster.
         # @!attribute [rw] master_config
         #   @return [Google::Cloud::Dataproc::V1beta2::InstanceGroupConfig]
@@ -106,7 +109,42 @@ module Google
         # @!attribute [rw] encryption_config
         #   @return [Google::Cloud::Dataproc::V1beta2::EncryptionConfig]
         #     Optional. Encryption settings for the cluster.
+        # @!attribute [rw] autoscaling_config
+        #   @return [Google::Cloud::Dataproc::V1beta2::AutoscalingConfig]
+        #     Optional. Autoscaling config for the policy associated with the cluster.
+        #     Cluster does not autoscale if this field is unset.
+        # @!attribute [rw] endpoint_config
+        #   @return [Google::Cloud::Dataproc::V1beta2::EndpointConfig]
+        #     Optional. Port/endpoint configuration for this cluster
+        # @!attribute [rw] security_config
+        #   @return [Google::Cloud::Dataproc::V1beta2::SecurityConfig]
+        #     Optional. Security related configuration.
         class ClusterConfig; end
+
+        # Endpoint config for this cluster
+        # @!attribute [rw] http_ports
+        #   @return [Hash{String => String}]
+        #     Output only. The map of port descriptions to URLs. Will only be populated
+        #     if enable_http_port_access is true.
+        # @!attribute [rw] enable_http_port_access
+        #   @return [true, false]
+        #     Optional. If true, enable http access to specific ports on the cluster
+        #     from external sources. Defaults to false.
+        class EndpointConfig; end
+
+        # Autoscaling Policy config associated with the cluster.
+        # @!attribute [rw] policy_uri
+        #   @return [String]
+        #     Optional. The autoscaling policy used by the cluster.
+        #
+        #     Only resource names including projectid and location (region) are valid.
+        #     Examples:
+        #
+        #     * `https://www.googleapis.com/compute/v1/projects/[project_id]/locations/[dataproc_region]/autoscalingPolicies/[policy_id]`
+        #     * `projects/[project_id]/locations/[dataproc_region]/autoscalingPolicies/[policy_id]`
+        #
+        #     Note that the policy must be in the same project and Cloud Dataproc region.
+        class AutoscalingConfig; end
 
         # Encryption settings for the cluster.
         # @!attribute [rw] gce_pd_kms_key_name
@@ -150,8 +188,8 @@ module Google
         #
         #     A full URL, partial URI, or short name are valid. Examples:
         #
-        #     * `https://www.googleapis.com/compute/v1/projects/[project_id]/regions/us-east1/sub0`
-        #     * `projects/[project_id]/regions/us-east1/sub0`
+        #     * `https://www.googleapis.com/compute/v1/projects/[project_id]/regions/us-east1/subnetworks/sub0`
+        #     * `projects/[project_id]/regions/us-east1/subnetworks/sub0`
         #     * `sub0`
         # @!attribute [rw] internal_ip_only
         #   @return [true, false]
@@ -199,6 +237,9 @@ module Google
         #     The Compute Engine metadata entries to add to all instances (see
         #     [Project and instance
         #     metadata](https://cloud.google.com/compute/docs/storing-retrieving-metadata#project_and_instance_metadata)).
+        # @!attribute [rw] reservation_affinity
+        #   @return [Google::Cloud::Dataproc::V1beta2::ReservationAffinity]
+        #     Optional. Reservation Affinity for consuming Zonal reservation.
         class GceClusterConfig; end
 
         # Optional. The config settings for Compute Engine resources in
@@ -272,8 +313,9 @@ module Google
         # @!attribute [rw] accelerator_type_uri
         #   @return [String]
         #     Full URL, partial URI, or short name of the accelerator type resource to
-        #     expose to this instance. See [Compute Engine AcceleratorTypes](
-        #     /compute/docs/reference/beta/acceleratorTypes)
+        #     expose to this instance. See
+        #     [Compute Engine
+        #     AcceleratorTypes](/compute/docs/reference/beta/acceleratorTypes)
         #
         #     Examples
         #     * `https://www.googleapis.com/compute/beta/projects/[project_id]/zones/us-east1-a/acceleratorTypes/nvidia-tesla-k80`
@@ -328,6 +370,77 @@ module Google
         #
         #     Example: **"1d"**, to delete the cluster 1 day after its creation..
         class LifecycleConfig; end
+
+        # Security related configuration, including encryption, Kerberos, etc.
+        # @!attribute [rw] kerberos_config
+        #   @return [Google::Cloud::Dataproc::V1beta2::KerberosConfig]
+        #     Kerberos related configuration.
+        class SecurityConfig; end
+
+        # Specifies Kerberos related configuration.
+        # @!attribute [rw] enable_kerberos
+        #   @return [true, false]
+        #     Optional. Flag to indicate whether to Kerberize the cluster.
+        # @!attribute [rw] root_principal_password_uri
+        #   @return [String]
+        #     Required. The Cloud Storage URI of a KMS encrypted file containing the root
+        #     principal password.
+        # @!attribute [rw] kms_key_uri
+        #   @return [String]
+        #     Required. The uri of the KMS key used to encrypt various sensitive
+        #     files.
+        # @!attribute [rw] keystore_uri
+        #   @return [String]
+        #     Optional. The Cloud Storage URI of the keystore file used for SSL
+        #     encryption. If not provided, Dataproc will provide a self-signed
+        #     certificate.
+        # @!attribute [rw] truststore_uri
+        #   @return [String]
+        #     Optional. The Cloud Storage URI of the truststore file used for SSL
+        #     encryption. If not provided, Dataproc will provide a self-signed
+        #     certificate.
+        # @!attribute [rw] keystore_password_uri
+        #   @return [String]
+        #     Optional. The Cloud Storage URI of a KMS encrypted file containing the
+        #     password to the user provided keystore. For the self-signed certificate,
+        #     this password is generated by Dataproc.
+        # @!attribute [rw] key_password_uri
+        #   @return [String]
+        #     Optional. The Cloud Storage URI of a KMS encrypted file containing the
+        #     password to the user provided key. For the self-signed certificate, this
+        #     password is generated by Dataproc.
+        # @!attribute [rw] truststore_password_uri
+        #   @return [String]
+        #     Optional. The Cloud Storage URI of a KMS encrypted file containing the
+        #     password to the user provided truststore. For the self-signed certificate,
+        #     this password is generated by Dataproc.
+        # @!attribute [rw] cross_realm_trust_realm
+        #   @return [String]
+        #     Optional. The remote realm the Dataproc on-cluster KDC will trust, should
+        #     the user enable cross realm trust.
+        # @!attribute [rw] cross_realm_trust_kdc
+        #   @return [String]
+        #     Optional. The KDC (IP or hostname) for the remote trusted realm in a cross
+        #     realm trust relationship.
+        # @!attribute [rw] cross_realm_trust_admin_server
+        #   @return [String]
+        #     Optional. The admin server (IP or hostname) for the remote trusted realm in
+        #     a cross realm trust relationship.
+        # @!attribute [rw] cross_realm_trust_shared_password_uri
+        #   @return [String]
+        #     Optional. The Cloud Storage URI of a KMS encrypted file containing the
+        #     shared password between the on-cluster Kerberos realm and the remote
+        #     trusted realm, in a cross realm trust relationship.
+        # @!attribute [rw] kdc_db_key_uri
+        #   @return [String]
+        #     Optional. The Cloud Storage URI of a KMS encrypted file containing the
+        #     master key of the KDC database.
+        # @!attribute [rw] tgt_lifetime_hours
+        #   @return [Integer]
+        #     Optional. The lifetime of the ticket granting ticket, in hours.
+        #     If not specified, or user specifies 0, then default value 10
+        #     will be used.
+        class KerberosConfig; end
 
         # Specifies an executable to run on a fully configured node and a
         # timeout period for executable completion.
@@ -407,13 +520,13 @@ module Google
         #     such as "1.2" (including a subminor version, such as "1.2.29"), or the
         #     ["preview"
         #     version](/dataproc/docs/concepts/versioning/dataproc-versions#other_versions).
-        #     If unspecified, it defaults to the latest version.
+        #     If unspecified, it defaults to the latest Debian version.
         # @!attribute [rw] properties
         #   @return [Hash{String => String}]
         #     Optional. The properties to set on daemon config files.
         #
-        #     Property keys are specified in `prefix:property` format, such as
-        #     `core:fs.defaultFS`. The following are supported prefixes
+        #     Property keys are specified in `prefix:property` format, for example
+        #     `core:hadoop.tmp.dir`. The following are supported prefixes
         #     and their mappings:
         #
         #     * capacity-scheduler: `capacity-scheduler.xml`
@@ -428,6 +541,9 @@ module Google
         #
         #     For more information, see
         #     [Cluster properties](https://cloud.google.com/dataproc/docs/concepts/cluster-properties).
+        # @!attribute [rw] optional_components
+        #   @return [Array<Google::Cloud::Dataproc::V1beta2::Component>]
+        #     The set of optional components to activate on the cluster.
         class SoftwareConfig; end
 
         # Contains cluster daemon metrics, such as HDFS and YARN stats.
@@ -456,11 +572,10 @@ module Google
         # @!attribute [rw] request_id
         #   @return [String]
         #     Optional. A unique id used to identify the request. If the server
-        #     receives two
-        #     {Google::Cloud::Dataproc::V1beta2::CreateClusterRequest CreateClusterRequest}
-        #     requests  with the same id, then the second request will be ignored and the
-        #     first {Google::Longrunning::Operation} created
-        #     and stored in the backend is returned.
+        #     receives two {Google::Cloud::Dataproc::V1beta2::CreateClusterRequest CreateClusterRequest} requests  with the same
+        #     id, then the second request will be ignored and the
+        #     first {Google::Longrunning::Operation} created and stored in the backend
+        #     is returned.
         #
         #     It is recommended to always set this value to a
         #     [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier).
@@ -550,15 +665,18 @@ module Google
         #     <td>config.lifecycle_config.idle_delete_ttl</td><td>Update Idle TTL
         #     duration</td>
         #     </tr>
+        #     <tr>
+        #     <td>config.autoscaling_config.policy_uri</td><td>Use, stop using, or change
+        #     autoscaling policies</td>
+        #     </tr>
         #     </table>
         # @!attribute [rw] request_id
         #   @return [String]
         #     Optional. A unique id used to identify the request. If the server
-        #     receives two
-        #     {Google::Cloud::Dataproc::V1beta2::UpdateClusterRequest UpdateClusterRequest}
-        #     requests  with the same id, then the second request will be ignored and the
-        #     first {Google::Longrunning::Operation} created
-        #     and stored in the backend is returned.
+        #     receives two {Google::Cloud::Dataproc::V1beta2::UpdateClusterRequest UpdateClusterRequest} requests  with the same
+        #     id, then the second request will be ignored and the
+        #     first {Google::Longrunning::Operation} created and stored in the
+        #     backend is returned.
         #
         #     It is recommended to always set this value to a
         #     [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier).
@@ -585,11 +703,10 @@ module Google
         # @!attribute [rw] request_id
         #   @return [String]
         #     Optional. A unique id used to identify the request. If the server
-        #     receives two
-        #     {Google::Cloud::Dataproc::V1beta2::DeleteClusterRequest DeleteClusterRequest}
-        #     requests  with the same id, then the second request will be ignored and the
-        #     first {Google::Longrunning::Operation} created
-        #     and stored in the backend is returned.
+        #     receives two {Google::Cloud::Dataproc::V1beta2::DeleteClusterRequest DeleteClusterRequest} requests  with the same
+        #     id, then the second request will be ignored and the
+        #     first {Google::Longrunning::Operation} created and stored in the
+        #     backend is returned.
         #
         #     It is recommended to always set this value to a
         #     [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier).
@@ -679,6 +796,33 @@ module Google
         #     The output report is a plain text file with a summary of collected
         #     diagnostics.
         class DiagnoseClusterResults; end
+
+        # Reservation Affinity for consuming Zonal reservation.
+        # @!attribute [rw] consume_reservation_type
+        #   @return [Google::Cloud::Dataproc::V1beta2::ReservationAffinity::Type]
+        #     Optional. Type of reservation to consume
+        # @!attribute [rw] key
+        #   @return [String]
+        #     Optional. Corresponds to the label key of reservation resource.
+        # @!attribute [rw] values
+        #   @return [Array<String>]
+        #     Optional. Corresponds to the label values of reservation resource.
+        class ReservationAffinity
+          # Indicates whether to consume capacity from an reservation or not.
+          module Type
+            TYPE_UNSPECIFIED = 0
+
+            # Do not consume from any allocated capacity.
+            NO_RESERVATION = 1
+
+            # Consume any reservation available.
+            ANY_RESERVATION = 2
+
+            # Must consume from a specific reservation. Must specify key value fields
+            # for specifying the reservations.
+            SPECIFIC_RESERVATION = 3
+          end
+        end
       end
     end
   end

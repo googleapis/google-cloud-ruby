@@ -6,12 +6,24 @@ require 'google/protobuf'
 
 require 'google/api/annotations_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
+  add_enum "google.cloud.dataproc.v1beta2.Component" do
+    value :COMPONENT_UNSPECIFIED, 0
+    value :ANACONDA, 5
+    value :DRUID, 9
+    value :HIVE_WEBHCAT, 3
+    value :JUPYTER, 1
+    value :KERBEROS, 7
+    value :PRESTO, 6
+    value :ZEPPELIN, 4
+    value :ZOOKEEPER, 8
+  end
 end
 
 module Google
   module Cloud
     module Dataproc
       module V1beta2
+        Component = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1beta2.Component").enummodule
       end
     end
   end
