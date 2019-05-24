@@ -1,5 +1,16 @@
 # Release History
 
+### 1.0.0 / 2019-05-24
+
+* GA release
+* Remove Queue#log_sampling_ratio (Breaking change)
+* Add Queue#stackdriver_logging_config
+* Add StackdriverLoggingConfig
+* Update IAM:
+  * Deprecate Policy#version
+  * Add Binding#condition
+  * Add Google::Type::Expr
+
 ### 0.7.1 / 2019-04-29
 
 * Add AUTHENTICATION.md guide.
