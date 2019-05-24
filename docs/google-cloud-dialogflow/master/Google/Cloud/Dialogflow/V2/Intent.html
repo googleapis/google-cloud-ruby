@@ -1098,7 +1098,10 @@ Note: The action name must not contain whitespaces.</p>
 565
 566
 567
-568</pre>
+568
+569
+570
+571</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/intent.rb', line 111</span>
@@ -1534,6 +1537,9 @@ Note: The action name must not contain whitespaces.</p>
 </span>      <span class='comment'>#   }
 </span>      <span class='comment'># }&lt;/pre&gt;
 </span>      <span class='const'>ACTIONS_ON_GOOGLE</span> <span class='op'>=</span> <span class='int'>8</span>
+
+      <span class='comment'># Google Hangouts.
+</span>      <span class='const'>GOOGLE_HANGOUTS</span> <span class='op'>=</span> <span class='int'>11</span>
     <span class='kw'>end</span>
   <span class='kw'>end</span>
 
@@ -1579,8 +1585,8 @@ Note: The action name must not contain whitespaces.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Optional. The list of platforms for which the first response will be
-taken from among the messages assigned to the DEFAULT_PLATFORM.</p>
+    <p>Returns Optional. The list of platforms for which the first responses will be
+copied from the messages in PLATFORM_UNSPECIFIED (i.e. default platform).</p>
 
 
   </div>
@@ -1598,8 +1604,8 @@ taken from among the messages assigned to the DEFAULT_PLATFORM.</p>
       
       
         &mdash;
-        <div class='inline'><p>Optional. The list of platforms for which the first response will be
-taken from among the messages assigned to the DEFAULT_PLATFORM.</p>
+        <div class='inline'><p>Optional. The list of platforms for which the first responses will be
+copied from the messages in PLATFORM_UNSPECIFIED (i.e. default platform).</p>
 </div>
       
     </li>
@@ -2069,7 +2075,10 @@ taken from among the messages assigned to the DEFAULT_PLATFORM.</p>
 565
 566
 567
-568</pre>
+568
+569
+570
+571</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/intent.rb', line 111</span>
@@ -2505,6 +2514,9 @@ taken from among the messages assigned to the DEFAULT_PLATFORM.</p>
 </span>      <span class='comment'>#   }
 </span>      <span class='comment'># }&lt;/pre&gt;
 </span>      <span class='const'>ACTIONS_ON_GOOGLE</span> <span class='op'>=</span> <span class='int'>8</span>
+
+      <span class='comment'># Google Hangouts.
+</span>      <span class='const'>GOOGLE_HANGOUTS</span> <span class='op'>=</span> <span class='int'>11</span>
     <span class='kw'>end</span>
   <span class='kw'>end</span>
 
@@ -3038,7 +3050,10 @@ taken from among the messages assigned to the DEFAULT_PLATFORM.</p>
 565
 566
 567
-568</pre>
+568
+569
+570
+571</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/intent.rb', line 111</span>
@@ -3474,6 +3489,9 @@ taken from among the messages assigned to the DEFAULT_PLATFORM.</p>
 </span>      <span class='comment'>#   }
 </span>      <span class='comment'># }&lt;/pre&gt;
 </span>      <span class='const'>ACTIONS_ON_GOOGLE</span> <span class='op'>=</span> <span class='int'>8</span>
+
+      <span class='comment'># Google Hangouts.
+</span>      <span class='const'>GOOGLE_HANGOUTS</span> <span class='op'>=</span> <span class='int'>11</span>
     <span class='kw'>end</span>
   <span class='kw'>end</span>
 
@@ -4011,7 +4029,10 @@ be present in the active user session for an event to trigger this intent.</p>
 565
 566
 567
-568</pre>
+568
+569
+570
+571</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/intent.rb', line 111</span>
@@ -4447,6 +4468,9 @@ be present in the active user session for an event to trigger this intent.</p>
 </span>      <span class='comment'>#   }
 </span>      <span class='comment'># }&lt;/pre&gt;
 </span>      <span class='const'>ACTIONS_ON_GOOGLE</span> <span class='op'>=</span> <span class='int'>8</span>
+
+      <span class='comment'># Google Hangouts.
+</span>      <span class='const'>GOOGLE_HANGOUTS</span> <span class='op'>=</span> <span class='int'>11</span>
     <span class='kw'>end</span>
   <span class='kw'>end</span>
 
@@ -4982,7 +5006,10 @@ a direct or indirect parent. We populate this field only in the output.</p>
 565
 566
 567
-568</pre>
+568
+569
+570
+571</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/intent.rb', line 111</span>
@@ -5418,6 +5445,9 @@ a direct or indirect parent. We populate this field only in the output.</p>
 </span>      <span class='comment'>#   }
 </span>      <span class='comment'># }&lt;/pre&gt;
 </span>      <span class='const'>ACTIONS_ON_GOOGLE</span> <span class='op'>=</span> <span class='int'>8</span>
+
+      <span class='comment'># Google Hangouts.
+</span>      <span class='const'>GOOGLE_HANGOUTS</span> <span class='op'>=</span> <span class='int'>11</span>
     <span class='kw'>end</span>
   <span class='kw'>end</span>
 
@@ -5955,7 +5985,10 @@ Format: <code>projects/&lt;Project ID&gt;/agent/sessions/-/contexts/&lt;Context 
 565
 566
 567
-568</pre>
+568
+569
+570
+571</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/intent.rb', line 111</span>
@@ -6391,6 +6424,9 @@ Format: <code>projects/&lt;Project ID&gt;/agent/sessions/-/contexts/&lt;Context 
 </span>      <span class='comment'>#   }
 </span>      <span class='comment'># }&lt;/pre&gt;
 </span>      <span class='const'>ACTIONS_ON_GOOGLE</span> <span class='op'>=</span> <span class='int'>8</span>
+
+      <span class='comment'># Google Hangouts.
+</span>      <span class='const'>GOOGLE_HANGOUTS</span> <span class='op'>=</span> <span class='int'>11</span>
     <span class='kw'>end</span>
   <span class='kw'>end</span>
 
@@ -6924,7 +6960,10 @@ Format: <code>projects/&lt;Project ID&gt;/agent/sessions/-/contexts/&lt;Context 
 565
 566
 567
-568</pre>
+568
+569
+570
+571</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/intent.rb', line 111</span>
@@ -7360,6 +7399,9 @@ Format: <code>projects/&lt;Project ID&gt;/agent/sessions/-/contexts/&lt;Context 
 </span>      <span class='comment'>#   }
 </span>      <span class='comment'># }&lt;/pre&gt;
 </span>      <span class='const'>ACTIONS_ON_GOOGLE</span> <span class='op'>=</span> <span class='int'>8</span>
+
+      <span class='comment'># Google Hangouts.
+</span>      <span class='const'>GOOGLE_HANGOUTS</span> <span class='op'>=</span> <span class='int'>11</span>
     <span class='kw'>end</span>
   <span class='kw'>end</span>
 
@@ -7895,7 +7937,10 @@ Format: <code>projects/&lt;Project ID&gt;/agent/sessions/-/contexts/&lt;Context 
 565
 566
 567
-568</pre>
+568
+569
+570
+571</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/intent.rb', line 111</span>
@@ -8331,6 +8376,9 @@ Format: <code>projects/&lt;Project ID&gt;/agent/sessions/-/contexts/&lt;Context 
 </span>      <span class='comment'>#   }
 </span>      <span class='comment'># }&lt;/pre&gt;
 </span>      <span class='const'>ACTIONS_ON_GOOGLE</span> <span class='op'>=</span> <span class='int'>8</span>
+
+      <span class='comment'># Google Hangouts.
+</span>      <span class='const'>GOOGLE_HANGOUTS</span> <span class='op'>=</span> <span class='int'>11</span>
     <span class='kw'>end</span>
   <span class='kw'>end</span>
 
@@ -8870,7 +8918,10 @@ auto-markup in the UI is turned off.</p>
 565
 566
 567
-568</pre>
+568
+569
+570
+571</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/intent.rb', line 111</span>
@@ -9306,6 +9357,9 @@ auto-markup in the UI is turned off.</p>
 </span>      <span class='comment'>#   }
 </span>      <span class='comment'># }&lt;/pre&gt;
 </span>      <span class='const'>ACTIONS_ON_GOOGLE</span> <span class='op'>=</span> <span class='int'>8</span>
+
+      <span class='comment'># Google Hangouts.
+</span>      <span class='const'>GOOGLE_HANGOUTS</span> <span class='op'>=</span> <span class='int'>11</span>
     <span class='kw'>end</span>
   <span class='kw'>end</span>
 
@@ -9845,7 +9899,10 @@ Format: <code>projects/&lt;Project ID&gt;/agent/intents/&lt;Intent ID&gt;</code>
 565
 566
 567
-568</pre>
+568
+569
+570
+571</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/intent.rb', line 111</span>
@@ -10281,6 +10338,9 @@ Format: <code>projects/&lt;Project ID&gt;/agent/intents/&lt;Intent ID&gt;</code>
 </span>      <span class='comment'>#   }
 </span>      <span class='comment'># }&lt;/pre&gt;
 </span>      <span class='const'>ACTIONS_ON_GOOGLE</span> <span class='op'>=</span> <span class='int'>8</span>
+
+      <span class='comment'># Google Hangouts.
+</span>      <span class='const'>GOOGLE_HANGOUTS</span> <span class='op'>=</span> <span class='int'>11</span>
     <span class='kw'>end</span>
   <span class='kw'>end</span>
 
@@ -10822,7 +10882,10 @@ Format: <code>projects/&lt;Project ID&gt;/agent/sessions/-/contexts/&lt;Context 
 565
 566
 567
-568</pre>
+568
+569
+570
+571</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/intent.rb', line 111</span>
@@ -11258,6 +11321,9 @@ Format: <code>projects/&lt;Project ID&gt;/agent/sessions/-/contexts/&lt;Context 
 </span>      <span class='comment'>#   }
 </span>      <span class='comment'># }&lt;/pre&gt;
 </span>      <span class='const'>ACTIONS_ON_GOOGLE</span> <span class='op'>=</span> <span class='int'>8</span>
+
+      <span class='comment'># Google Hangouts.
+</span>      <span class='const'>GOOGLE_HANGOUTS</span> <span class='op'>=</span> <span class='int'>11</span>
     <span class='kw'>end</span>
   <span class='kw'>end</span>
 
@@ -11791,7 +11857,10 @@ Format: <code>projects/&lt;Project ID&gt;/agent/sessions/-/contexts/&lt;Context 
 565
 566
 567
-568</pre>
+568
+569
+570
+571</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/intent.rb', line 111</span>
@@ -12227,6 +12296,9 @@ Format: <code>projects/&lt;Project ID&gt;/agent/sessions/-/contexts/&lt;Context 
 </span>      <span class='comment'>#   }
 </span>      <span class='comment'># }&lt;/pre&gt;
 </span>      <span class='const'>ACTIONS_ON_GOOGLE</span> <span class='op'>=</span> <span class='int'>8</span>
+
+      <span class='comment'># Google Hangouts.
+</span>      <span class='const'>GOOGLE_HANGOUTS</span> <span class='op'>=</span> <span class='int'>11</span>
     <span class='kw'>end</span>
   <span class='kw'>end</span>
 
@@ -12772,7 +12844,10 @@ Format: <code>projects/&lt;Project ID&gt;/agent/intents/&lt;Intent ID&gt;</code>
 565
 566
 567
-568</pre>
+568
+569
+570
+571</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/intent.rb', line 111</span>
@@ -13208,6 +13283,9 @@ Format: <code>projects/&lt;Project ID&gt;/agent/intents/&lt;Intent ID&gt;</code>
 </span>      <span class='comment'>#   }
 </span>      <span class='comment'># }&lt;/pre&gt;
 </span>      <span class='const'>ACTIONS_ON_GOOGLE</span> <span class='op'>=</span> <span class='int'>8</span>
+
+      <span class='comment'># Google Hangouts.
+</span>      <span class='const'>GOOGLE_HANGOUTS</span> <span class='op'>=</span> <span class='int'>11</span>
     <span class='kw'>end</span>
   <span class='kw'>end</span>
 
@@ -13749,7 +13827,10 @@ priority 500000.</p>
 565
 566
 567
-568</pre>
+568
+569
+570
+571</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/intent.rb', line 111</span>
@@ -14185,6 +14266,9 @@ priority 500000.</p>
 </span>      <span class='comment'>#   }
 </span>      <span class='comment'># }&lt;/pre&gt;
 </span>      <span class='const'>ACTIONS_ON_GOOGLE</span> <span class='op'>=</span> <span class='int'>8</span>
+
+      <span class='comment'># Google Hangouts.
+</span>      <span class='const'>GOOGLE_HANGOUTS</span> <span class='op'>=</span> <span class='int'>11</span>
     <span class='kw'>end</span>
   <span class='kw'>end</span>
 
@@ -14720,7 +14804,10 @@ session when this intent is matched.</p>
 565
 566
 567
-568</pre>
+568
+569
+570
+571</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/intent.rb', line 111</span>
@@ -15156,6 +15243,9 @@ session when this intent is matched.</p>
 </span>      <span class='comment'>#   }
 </span>      <span class='comment'># }&lt;/pre&gt;
 </span>      <span class='const'>ACTIONS_ON_GOOGLE</span> <span class='op'>=</span> <span class='int'>8</span>
+
+      <span class='comment'># Google Hangouts.
+</span>      <span class='const'>GOOGLE_HANGOUTS</span> <span class='op'>=</span> <span class='int'>11</span>
     <span class='kw'>end</span>
   <span class='kw'>end</span>
 
@@ -15697,7 +15787,10 @@ this intent. We populate this field only in the output.</p>
 565
 566
 567
-568</pre>
+568
+569
+570
+571</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/intent.rb', line 111</span>
@@ -16133,6 +16226,9 @@ this intent. We populate this field only in the output.</p>
 </span>      <span class='comment'>#   }
 </span>      <span class='comment'># }&lt;/pre&gt;
 </span>      <span class='const'>ACTIONS_ON_GOOGLE</span> <span class='op'>=</span> <span class='int'>8</span>
+
+      <span class='comment'># Google Hangouts.
+</span>      <span class='const'>GOOGLE_HANGOUTS</span> <span class='op'>=</span> <span class='int'>11</span>
     <span class='kw'>end</span>
   <span class='kw'>end</span>
 
@@ -16668,7 +16764,10 @@ trained on.</p>
 565
 566
 567
-568</pre>
+568
+569
+570
+571</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/intent.rb', line 111</span>
@@ -17104,6 +17203,9 @@ trained on.</p>
 </span>      <span class='comment'>#   }
 </span>      <span class='comment'># }&lt;/pre&gt;
 </span>      <span class='const'>ACTIONS_ON_GOOGLE</span> <span class='op'>=</span> <span class='int'>8</span>
+
+      <span class='comment'># Google Hangouts.
+</span>      <span class='const'>GOOGLE_HANGOUTS</span> <span class='op'>=</span> <span class='int'>11</span>
     <span class='kw'>end</span>
   <span class='kw'>end</span>
 
@@ -17637,7 +17739,10 @@ trained on.</p>
 565
 566
 567
-568</pre>
+568
+569
+570
+571</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/intent.rb', line 111</span>
@@ -18073,6 +18178,9 @@ trained on.</p>
 </span>      <span class='comment'>#   }
 </span>      <span class='comment'># }&lt;/pre&gt;
 </span>      <span class='const'>ACTIONS_ON_GOOGLE</span> <span class='op'>=</span> <span class='int'>8</span>
+
+      <span class='comment'># Google Hangouts.
+</span>      <span class='const'>GOOGLE_HANGOUTS</span> <span class='op'>=</span> <span class='int'>11</span>
     <span class='kw'>end</span>
   <span class='kw'>end</span>
 
