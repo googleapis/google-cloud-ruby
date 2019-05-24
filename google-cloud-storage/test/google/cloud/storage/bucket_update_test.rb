@@ -31,11 +31,12 @@ describe Google::Cloud::Storage::Bucket, :update, :mock_storage do
     http_method: ["*"],
     response_header: ["X-My-Custom-Header"]) }
   let(:bucket_cors_hash) { JSON.parse bucket_cors_gapi.to_json }
+  let(:bucket_lifecycle_created_before) { Date.parse("2013-01-15") }
   let(:bucket_lifecycle_gapi) do
     lifecycle_gapi lifecycle_rule_gapi("SetStorageClass",
                                        storage_class: "NEARLINE",
                                        age: 32,
-                                       created_before: "2013-01-15",
+                                       created_before: bucket_lifecycle_created_before,
                                        is_live: true,
                                        matches_storage_class: ["MULTI_REGIONAL"],
                                        num_newer_versions: 3)
@@ -493,7 +494,7 @@ describe Google::Cloud::Storage::Bucket, :update, :mock_storage do
       lifecycle = bucket.lifecycle do |l|
         l.add_set_storage_class_rule "NEARLINE",
                                      age: 32,
-                                     created_before: "2013-01-15",
+                                     created_before: bucket_lifecycle_created_before,
                                      is_live: true,
                                      matches_storage_class: ["MULTI_REGIONAL"],
                                      num_newer_versions: 3
@@ -506,7 +507,7 @@ describe Google::Cloud::Storage::Bucket, :update, :mock_storage do
       rule.action.must_equal "SetStorageClass"
       rule.storage_class.must_equal "NEARLINE"
       rule.age.must_equal 32
-      rule.created_before.must_equal "2013-01-15"
+      rule.created_before.must_equal bucket_lifecycle_created_before
       rule.is_live.must_equal true
       rule.matches_storage_class.must_equal ["MULTI_REGIONAL"]
       rule.num_newer_versions.must_equal 3
@@ -526,13 +527,14 @@ describe Google::Cloud::Storage::Bucket, :update, :mock_storage do
           lifecycle_rule_gapi("SetStorageClass",
                               storage_class: "COLDLINE",
                               age: 32,
-                              created_before: "2013-01-15",
+                              created_before: bucket_lifecycle_created_before,
                               is_live: true,
                               matches_storage_class: ["MULTI_REGIONAL"],
                               num_newer_versions: 3),
           lifecycle_rule_gapi("Delete", age: 40, is_live: false)
         )
       )
+
       returned_bucket_gapi = Google::Apis::StorageV1::Bucket.from_json \
         random_bucket_hash(bucket_name, bucket_url, bucket_location, bucket_storage_class, nil, nil, nil, nil, nil, nil, nil, bucket_lifecycle_hash).to_json
       mock.expect :patch_bucket, returned_bucket_gapi,
@@ -583,7 +585,7 @@ describe Google::Cloud::Storage::Bucket, :update, :mock_storage do
             lifecycle_rule_gapi("SetStorageClass",
                                 storage_class: "NEARLINE",
                                 age: 32,
-                                created_before: "2013-01-15",
+                                created_before: bucket_lifecycle_created_before,
                                 is_live: true,
                                 matches_storage_class: ["MULTI_REGIONAL"],
                                 num_newer_versions: 3),
@@ -616,7 +618,7 @@ describe Google::Cloud::Storage::Bucket, :update, :mock_storage do
             lifecycle_rule_gapi("SetStorageClass",
                                 storage_class: "NEARLINE",
                                 age: 32,
-                                created_before: "2013-01-15",
+                                created_before: bucket_lifecycle_created_before,
                                 is_live: true,
                                 matches_storage_class: ["MULTI_REGIONAL"],
                                 num_newer_versions: 3),
