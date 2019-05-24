@@ -108,6 +108,32 @@ in the results.</p>
       <li class="public ">
   <span class="summary_signature">
     
+      <a href="#boost-instance_method" title="#boost (instance method)">#<strong>boost</strong>  &#x21d2; Float </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Hint Boost.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#phrases-instance_method" title="#phrases (instance method)">#<strong>phrases</strong>  &#x21d2; Array&lt;String&gt; </a>
     
 
@@ -141,9 +167,78 @@ in the results.</p>
     <h2>Instance Attribute Details</h2>
     
       
-      <span id="phrases=-instance_method"></span>
+      <span id="boost=-instance_method"></span>
       <div class="method_details first">
-  <h3 class="signature first" id="phrases-instance_method">
+  <h3 class="signature first" id="boost-instance_method">
+  
+    #<strong>boost</strong>  &#x21d2; <tt>Float</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Hint Boost. Positive value will increase the probability that a specific
+phrase will be recognized over other similar sounding phrases. The higher
+the boost, the higher the chance of false positive recognition as well.
+Negative boost values would correspond to anti-biasing. Anti-biasing is not
+enabled, so negative boost will simply be ignored. Though <code>boost</code> can
+accept a wide range of positive values, most use cases are best served with
+values between 0 and 20. We recommend using a binary search approach to
+finding the optimal value for your use case.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Hint Boost. Positive value will increase the probability that a specific
+phrase will be recognized over other similar sounding phrases. The higher
+the boost, the higher the chance of false positive recognition as well.
+Negative boost values would correspond to anti-biasing. Anti-biasing is not
+enabled, so negative boost will simply be ignored. Though <code>boost</code> can
+accept a wide range of positive values, most use cases are best served with
+values between 0 and 20. We recommend using a binary search approach to
+finding the optimal value for your use case.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+483</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/speech/v1p1beta1/doc/google/cloud/speech/v1p1beta1/cloud_speech.rb', line 483</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Speech::V1p1beta1::SpeechContext (class)">SpeechContext</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="phrases=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="phrases-instance_method">
   
     #<strong>phrases</strong>  &#x21d2; <tt>Array&lt;String&gt;</tt> 
   
@@ -194,10 +289,10 @@ to add additional words to the vocabulary of the recognizer. See
       <pre class="lines">
 
 
-468</pre>
+483</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/speech/v1p1beta1/doc/google/cloud/speech/v1p1beta1/cloud_speech.rb', line 468</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/speech/v1p1beta1/doc/google/cloud/speech/v1p1beta1/cloud_speech.rb', line 483</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Speech::V1p1beta1::SpeechContext (class)">SpeechContext</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>

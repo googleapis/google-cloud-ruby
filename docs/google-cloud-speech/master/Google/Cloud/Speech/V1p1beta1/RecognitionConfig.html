@@ -698,7 +698,12 @@ transcription).</p>
 322
 323
 324
-325</pre>
+325
+326
+327
+328
+329
+330</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/google/cloud/speech/v1p1beta1/doc/google/cloud/speech/v1p1beta1/cloud_speech.rb', line 259</span>
@@ -768,6 +773,11 @@ transcription).</p>
 </span>    <span class='comment'># is replaced with a single byte containing the block length. Only Speex
 </span>    <span class='comment'># wideband is supported. `sample_rate_hertz` must be 16000.
 </span>    <span class='const'>SPEEX_WITH_HEADER_BYTE</span> <span class='op'>=</span> <span class='int'>7</span>
+
+    <span class='comment'># MP3 audio. Support all standard MP3 bitrates (which range from 32-320
+</span>    <span class='comment'># kbps). When using this encoding, `sample_rate_hertz` can be optionally
+</span>    <span class='comment'># unset if not known.
+</span>    <span class='const'>MP3</span> <span class='op'>=</span> <span class='int'>8</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -901,7 +911,12 @@ To perform independent recognition on each channel set
 322
 323
 324
-325</pre>
+325
+326
+327
+328
+329
+330</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/google/cloud/speech/v1p1beta1/doc/google/cloud/speech/v1p1beta1/cloud_speech.rb', line 259</span>
@@ -971,6 +986,11 @@ To perform independent recognition on each channel set
 </span>    <span class='comment'># is replaced with a single byte containing the block length. Only Speex
 </span>    <span class='comment'># wideband is supported. `sample_rate_hertz` must be 16000.
 </span>    <span class='const'>SPEEX_WITH_HEADER_BYTE</span> <span class='op'>=</span> <span class='int'>7</span>
+
+    <span class='comment'># MP3 audio. Support all standard MP3 bitrates (which range from 32-320
+</span>    <span class='comment'># kbps). When using this encoding, `sample_rate_hertz` can be optionally
+</span>    <span class='comment'># unset if not known.
+</span>    <span class='const'>MP3</span> <span class='op'>=</span> <span class='int'>8</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -1094,7 +1114,12 @@ Ignored unless enable_speaker_diarization is set to true.&quot;</p>
 322
 323
 324
-325</pre>
+325
+326
+327
+328
+329
+330</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/google/cloud/speech/v1p1beta1/doc/google/cloud/speech/v1p1beta1/cloud_speech.rb', line 259</span>
@@ -1164,6 +1189,11 @@ Ignored unless enable_speaker_diarization is set to true.&quot;</p>
 </span>    <span class='comment'># is replaced with a single byte containing the block length. Only Speex
 </span>    <span class='comment'># wideband is supported. `sample_rate_hertz` must be 16000.
 </span>    <span class='const'>SPEEX_WITH_HEADER_BYTE</span> <span class='op'>=</span> <span class='int'>7</span>
+
+    <span class='comment'># MP3 audio. Support all standard MP3 bitrates (which range from 32-320
+</span>    <span class='comment'># kbps). When using this encoding, `sample_rate_hertz` can be optionally
+</span>    <span class='comment'># unset if not known.
+</span>    <span class='const'>MP3</span> <span class='op'>=</span> <span class='int'>8</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -1293,7 +1323,12 @@ premium feature.</p>
 322
 323
 324
-325</pre>
+325
+326
+327
+328
+329
+330</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/google/cloud/speech/v1p1beta1/doc/google/cloud/speech/v1p1beta1/cloud_speech.rb', line 259</span>
@@ -1363,6 +1398,11 @@ premium feature.</p>
 </span>    <span class='comment'># is replaced with a single byte containing the block length. Only Speex
 </span>    <span class='comment'># wideband is supported. `sample_rate_hertz` must be 16000.
 </span>    <span class='const'>SPEEX_WITH_HEADER_BYTE</span> <span class='op'>=</span> <span class='int'>7</span>
+
+    <span class='comment'># MP3 audio. Support all standard MP3 bitrates (which range from 32-320
+</span>    <span class='comment'># kbps). When using this encoding, `sample_rate_hertz` can be optionally
+</span>    <span class='comment'># unset if not known.
+</span>    <span class='const'>MP3</span> <span class='op'>=</span> <span class='int'>8</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -1490,7 +1530,12 @@ request is billed cumulatively for all channels recognized:
 322
 323
 324
-325</pre>
+325
+326
+327
+328
+329
+330</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/google/cloud/speech/v1p1beta1/doc/google/cloud/speech/v1p1beta1/cloud_speech.rb', line 259</span>
@@ -1560,6 +1605,11 @@ request is billed cumulatively for all channels recognized:
 </span>    <span class='comment'># is replaced with a single byte containing the block length. Only Speex
 </span>    <span class='comment'># wideband is supported. `sample_rate_hertz` must be 16000.
 </span>    <span class='const'>SPEEX_WITH_HEADER_BYTE</span> <span class='op'>=</span> <span class='int'>7</span>
+
+    <span class='comment'># MP3 audio. Support all standard MP3 bitrates (which range from 32-320
+</span>    <span class='comment'># kbps). When using this encoding, `sample_rate_hertz` can be optionally
+</span>    <span class='comment'># unset if not known.
+</span>    <span class='const'>MP3</span> <span class='op'>=</span> <span class='int'>8</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -1693,7 +1743,12 @@ in the top alternative of the FINAL SpeechRecognitionResult.</p>
 322
 323
 324
-325</pre>
+325
+326
+327
+328
+329
+330</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/google/cloud/speech/v1p1beta1/doc/google/cloud/speech/v1p1beta1/cloud_speech.rb', line 259</span>
@@ -1763,6 +1818,11 @@ in the top alternative of the FINAL SpeechRecognitionResult.</p>
 </span>    <span class='comment'># is replaced with a single byte containing the block length. Only Speex
 </span>    <span class='comment'># wideband is supported. `sample_rate_hertz` must be 16000.
 </span>    <span class='const'>SPEEX_WITH_HEADER_BYTE</span> <span class='op'>=</span> <span class='int'>7</span>
+
+    <span class='comment'># MP3 audio. Support all standard MP3 bitrates (which range from 32-320
+</span>    <span class='comment'># kbps). When using this encoding, `sample_rate_hertz` can be optionally
+</span>    <span class='comment'># unset if not known.
+</span>    <span class='const'>MP3</span> <span class='op'>=</span> <span class='int'>8</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -1884,7 +1944,12 @@ information is returned. The default is <code>false</code>.</p>
 322
 323
 324
-325</pre>
+325
+326
+327
+328
+329
+330</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/google/cloud/speech/v1p1beta1/doc/google/cloud/speech/v1p1beta1/cloud_speech.rb', line 259</span>
@@ -1954,6 +2019,11 @@ information is returned. The default is <code>false</code>.</p>
 </span>    <span class='comment'># is replaced with a single byte containing the block length. Only Speex
 </span>    <span class='comment'># wideband is supported. `sample_rate_hertz` must be 16000.
 </span>    <span class='const'>SPEEX_WITH_HEADER_BYTE</span> <span class='op'>=</span> <span class='int'>7</span>
+
+    <span class='comment'># MP3 audio. Support all standard MP3 bitrates (which range from 32-320
+</span>    <span class='comment'># kbps). When using this encoding, `sample_rate_hertz` can be optionally
+</span>    <span class='comment'># unset if not known.
+</span>    <span class='const'>MP3</span> <span class='op'>=</span> <span class='int'>8</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -2077,7 +2147,12 @@ the start and end time offsets (timestamps) for those words. If
 322
 323
 324
-325</pre>
+325
+326
+327
+328
+329
+330</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/google/cloud/speech/v1p1beta1/doc/google/cloud/speech/v1p1beta1/cloud_speech.rb', line 259</span>
@@ -2147,6 +2222,11 @@ the start and end time offsets (timestamps) for those words. If
 </span>    <span class='comment'># is replaced with a single byte containing the block length. Only Speex
 </span>    <span class='comment'># wideband is supported. `sample_rate_hertz` must be 16000.
 </span>    <span class='const'>SPEEX_WITH_HEADER_BYTE</span> <span class='op'>=</span> <span class='int'>7</span>
+
+    <span class='comment'># MP3 audio. Support all standard MP3 bitrates (which range from 32-320
+</span>    <span class='comment'># kbps). When using this encoding, `sample_rate_hertz` can be optionally
+</span>    <span class='comment'># unset if not known.
+</span>    <span class='const'>MP3</span> <span class='op'>=</span> <span class='int'>8</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -2270,7 +2350,12 @@ for all other audio formats. For details, see
 322
 323
 324
-325</pre>
+325
+326
+327
+328
+329
+330</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/google/cloud/speech/v1p1beta1/doc/google/cloud/speech/v1p1beta1/cloud_speech.rb', line 259</span>
@@ -2340,6 +2425,11 @@ for all other audio formats. For details, see
 </span>    <span class='comment'># is replaced with a single byte containing the block length. Only Speex
 </span>    <span class='comment'># wideband is supported. `sample_rate_hertz` must be 16000.
 </span>    <span class='const'>SPEEX_WITH_HEADER_BYTE</span> <span class='op'>=</span> <span class='int'>7</span>
+
+    <span class='comment'># MP3 audio. Support all standard MP3 bitrates (which range from 32-320
+</span>    <span class='comment'># kbps). When using this encoding, `sample_rate_hertz` can be optionally
+</span>    <span class='comment'># unset if not known.
+</span>    <span class='const'>MP3</span> <span class='op'>=</span> <span class='int'>8</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -2465,7 +2555,12 @@ for a list of the currently supported language codes.</p>
 322
 323
 324
-325</pre>
+325
+326
+327
+328
+329
+330</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/google/cloud/speech/v1p1beta1/doc/google/cloud/speech/v1p1beta1/cloud_speech.rb', line 259</span>
@@ -2535,6 +2630,11 @@ for a list of the currently supported language codes.</p>
 </span>    <span class='comment'># is replaced with a single byte containing the block length. Only Speex
 </span>    <span class='comment'># wideband is supported. `sample_rate_hertz` must be 16000.
 </span>    <span class='const'>SPEEX_WITH_HEADER_BYTE</span> <span class='op'>=</span> <span class='int'>7</span>
+
+    <span class='comment'># MP3 audio. Support all standard MP3 bitrates (which range from 32-320
+</span>    <span class='comment'># kbps). When using this encoding, `sample_rate_hertz` can be optionally
+</span>    <span class='comment'># unset if not known.
+</span>    <span class='const'>MP3</span> <span class='op'>=</span> <span class='int'>8</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -2662,7 +2762,12 @@ one. If omitted, will return a maximum of one.</p>
 322
 323
 324
-325</pre>
+325
+326
+327
+328
+329
+330</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/google/cloud/speech/v1p1beta1/doc/google/cloud/speech/v1p1beta1/cloud_speech.rb', line 259</span>
@@ -2732,6 +2837,11 @@ one. If omitted, will return a maximum of one.</p>
 </span>    <span class='comment'># is replaced with a single byte containing the block length. Only Speex
 </span>    <span class='comment'># wideband is supported. `sample_rate_hertz` must be 16000.
 </span>    <span class='const'>SPEEX_WITH_HEADER_BYTE</span> <span class='op'>=</span> <span class='int'>7</span>
+
+    <span class='comment'># MP3 audio. Support all standard MP3 bitrates (which range from 32-320
+</span>    <span class='comment'># kbps). When using this encoding, `sample_rate_hertz` can be optionally
+</span>    <span class='comment'># unset if not known.
+</span>    <span class='const'>MP3</span> <span class='op'>=</span> <span class='int'>8</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -2849,7 +2959,12 @@ one. If omitted, will return a maximum of one.</p>
 322
 323
 324
-325</pre>
+325
+326
+327
+328
+329
+330</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/google/cloud/speech/v1p1beta1/doc/google/cloud/speech/v1p1beta1/cloud_speech.rb', line 259</span>
@@ -2919,6 +3034,11 @@ one. If omitted, will return a maximum of one.</p>
 </span>    <span class='comment'># is replaced with a single byte containing the block length. Only Speex
 </span>    <span class='comment'># wideband is supported. `sample_rate_hertz` must be 16000.
 </span>    <span class='const'>SPEEX_WITH_HEADER_BYTE</span> <span class='op'>=</span> <span class='int'>7</span>
+
+    <span class='comment'># MP3 audio. Support all standard MP3 bitrates (which range from 32-320
+</span>    <span class='comment'># kbps). When using this encoding, `sample_rate_hertz` can be optionally
+</span>    <span class='comment'># unset if not known.
+</span>    <span class='const'>MP3</span> <span class='op'>=</span> <span class='int'>8</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -3100,7 +3220,12 @@ in the RecognitionConfig.</p>
 322
 323
 324
-325</pre>
+325
+326
+327
+328
+329
+330</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/google/cloud/speech/v1p1beta1/doc/google/cloud/speech/v1p1beta1/cloud_speech.rb', line 259</span>
@@ -3170,6 +3295,11 @@ in the RecognitionConfig.</p>
 </span>    <span class='comment'># is replaced with a single byte containing the block length. Only Speex
 </span>    <span class='comment'># wideband is supported. `sample_rate_hertz` must be 16000.
 </span>    <span class='const'>SPEEX_WITH_HEADER_BYTE</span> <span class='op'>=</span> <span class='int'>7</span>
+
+    <span class='comment'># MP3 audio. Support all standard MP3 bitrates (which range from 32-320
+</span>    <span class='comment'># kbps). When using this encoding, `sample_rate_hertz` can be optionally
+</span>    <span class='comment'># unset if not known.
+</span>    <span class='const'>MP3</span> <span class='op'>=</span> <span class='int'>8</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -3293,7 +3423,12 @@ won&#39;t be filtered out.</p>
 322
 323
 324
-325</pre>
+325
+326
+327
+328
+329
+330</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/google/cloud/speech/v1p1beta1/doc/google/cloud/speech/v1p1beta1/cloud_speech.rb', line 259</span>
@@ -3363,6 +3498,11 @@ won&#39;t be filtered out.</p>
 </span>    <span class='comment'># is replaced with a single byte containing the block length. Only Speex
 </span>    <span class='comment'># wideband is supported. `sample_rate_hertz` must be 16000.
 </span>    <span class='const'>SPEEX_WITH_HEADER_BYTE</span> <span class='op'>=</span> <span class='int'>7</span>
+
+    <span class='comment'># MP3 audio. Support all standard MP3 bitrates (which range from 32-320
+</span>    <span class='comment'># kbps). When using this encoding, `sample_rate_hertz` can be optionally
+</span>    <span class='comment'># unset if not known.
+</span>    <span class='const'>MP3</span> <span class='op'>=</span> <span class='int'>8</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -3494,7 +3634,12 @@ for all other audio formats. For details, see
 322
 323
 324
-325</pre>
+325
+326
+327
+328
+329
+330</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/google/cloud/speech/v1p1beta1/doc/google/cloud/speech/v1p1beta1/cloud_speech.rb', line 259</span>
@@ -3564,6 +3709,11 @@ for all other audio formats. For details, see
 </span>    <span class='comment'># is replaced with a single byte containing the block length. Only Speex
 </span>    <span class='comment'># wideband is supported. `sample_rate_hertz` must be 16000.
 </span>    <span class='const'>SPEEX_WITH_HEADER_BYTE</span> <span class='op'>=</span> <span class='int'>7</span>
+
+    <span class='comment'># MP3 audio. Support all standard MP3 bitrates (which range from 32-320
+</span>    <span class='comment'># kbps). When using this encoding, `sample_rate_hertz` can be optionally
+</span>    <span class='comment'># unset if not known.
+</span>    <span class='const'>MP3</span> <span class='op'>=</span> <span class='int'>8</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -3687,7 +3837,12 @@ provide context to assist the speech recognition. For more information, see
 322
 323
 324
-325</pre>
+325
+326
+327
+328
+329
+330</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/google/cloud/speech/v1p1beta1/doc/google/cloud/speech/v1p1beta1/cloud_speech.rb', line 259</span>
@@ -3757,6 +3912,11 @@ provide context to assist the speech recognition. For more information, see
 </span>    <span class='comment'># is replaced with a single byte containing the block length. Only Speex
 </span>    <span class='comment'># wideband is supported. `sample_rate_hertz` must be 16000.
 </span>    <span class='const'>SPEEX_WITH_HEADER_BYTE</span> <span class='op'>=</span> <span class='int'>7</span>
+
+    <span class='comment'># MP3 audio. Support all standard MP3 bitrates (which range from 32-320
+</span>    <span class='comment'># kbps). When using this encoding, `sample_rate_hertz` can be optionally
+</span>    <span class='comment'># unset if not known.
+</span>    <span class='const'>MP3</span> <span class='op'>=</span> <span class='int'>8</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -3908,7 +4068,12 @@ will receive an error.</p>
 322
 323
 324
-325</pre>
+325
+326
+327
+328
+329
+330</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/google/cloud/speech/v1p1beta1/doc/google/cloud/speech/v1p1beta1/cloud_speech.rb', line 259</span>
@@ -3978,6 +4143,11 @@ will receive an error.</p>
 </span>    <span class='comment'># is replaced with a single byte containing the block length. Only Speex
 </span>    <span class='comment'># wideband is supported. `sample_rate_hertz` must be 16000.
 </span>    <span class='const'>SPEEX_WITH_HEADER_BYTE</span> <span class='op'>=</span> <span class='int'>7</span>
+
+    <span class='comment'># MP3 audio. Support all standard MP3 bitrates (which range from 32-320
+</span>    <span class='comment'># kbps). When using this encoding, `sample_rate_hertz` can be optionally
+</span>    <span class='comment'># unset if not known.
+</span>    <span class='const'>MP3</span> <span class='op'>=</span> <span class='int'>8</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
