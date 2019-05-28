@@ -95,7 +95,7 @@ describe Google::Cloud::Dataproc::V1beta2::AutoscalingPolicyServiceClient do
 
       Google::Cloud::Dataproc::V1beta2::AutoscalingPolicyService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dataproc::V1beta2::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Dataproc::AutoscalingPolicy.new(version: :v1beta2)
+          client = Google::Cloud::Dataproc::AutoscalingPolicyService.new(version: :v1beta2)
 
           # Call method
           response = client.create_autoscaling_policy(formatted_parent, policy)
@@ -132,7 +132,7 @@ describe Google::Cloud::Dataproc::V1beta2::AutoscalingPolicyServiceClient do
 
       Google::Cloud::Dataproc::V1beta2::AutoscalingPolicyService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dataproc::V1beta2::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Dataproc::AutoscalingPolicy.new(version: :v1beta2)
+          client = Google::Cloud::Dataproc::AutoscalingPolicyService.new(version: :v1beta2)
 
           # Call method
           err = assert_raises Google::Gax::GaxError do
@@ -172,7 +172,7 @@ describe Google::Cloud::Dataproc::V1beta2::AutoscalingPolicyServiceClient do
 
       Google::Cloud::Dataproc::V1beta2::AutoscalingPolicyService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dataproc::V1beta2::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Dataproc::AutoscalingPolicy.new(version: :v1beta2)
+          client = Google::Cloud::Dataproc::AutoscalingPolicyService.new(version: :v1beta2)
 
           # Call method
           response = client.update_autoscaling_policy(policy)
@@ -207,7 +207,7 @@ describe Google::Cloud::Dataproc::V1beta2::AutoscalingPolicyServiceClient do
 
       Google::Cloud::Dataproc::V1beta2::AutoscalingPolicyService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dataproc::V1beta2::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Dataproc::AutoscalingPolicy.new(version: :v1beta2)
+          client = Google::Cloud::Dataproc::AutoscalingPolicyService.new(version: :v1beta2)
 
           # Call method
           err = assert_raises Google::Gax::GaxError do
@@ -247,7 +247,7 @@ describe Google::Cloud::Dataproc::V1beta2::AutoscalingPolicyServiceClient do
 
       Google::Cloud::Dataproc::V1beta2::AutoscalingPolicyService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dataproc::V1beta2::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Dataproc::AutoscalingPolicy.new(version: :v1beta2)
+          client = Google::Cloud::Dataproc::AutoscalingPolicyService.new(version: :v1beta2)
 
           # Call method
           response = client.get_autoscaling_policy(formatted_name)
@@ -282,7 +282,7 @@ describe Google::Cloud::Dataproc::V1beta2::AutoscalingPolicyServiceClient do
 
       Google::Cloud::Dataproc::V1beta2::AutoscalingPolicyService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dataproc::V1beta2::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Dataproc::AutoscalingPolicy.new(version: :v1beta2)
+          client = Google::Cloud::Dataproc::AutoscalingPolicyService.new(version: :v1beta2)
 
           # Call method
           err = assert_raises Google::Gax::GaxError do
@@ -323,7 +323,7 @@ describe Google::Cloud::Dataproc::V1beta2::AutoscalingPolicyServiceClient do
 
       Google::Cloud::Dataproc::V1beta2::AutoscalingPolicyService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dataproc::V1beta2::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Dataproc::AutoscalingPolicy.new(version: :v1beta2)
+          client = Google::Cloud::Dataproc::AutoscalingPolicyService.new(version: :v1beta2)
 
           # Call method
           response = client.list_autoscaling_policies(formatted_parent)
@@ -354,7 +354,7 @@ describe Google::Cloud::Dataproc::V1beta2::AutoscalingPolicyServiceClient do
 
       Google::Cloud::Dataproc::V1beta2::AutoscalingPolicyService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dataproc::V1beta2::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Dataproc::AutoscalingPolicy.new(version: :v1beta2)
+          client = Google::Cloud::Dataproc::AutoscalingPolicyService.new(version: :v1beta2)
 
           # Call method
           err = assert_raises Google::Gax::GaxError do
@@ -388,7 +388,7 @@ describe Google::Cloud::Dataproc::V1beta2::AutoscalingPolicyServiceClient do
 
       Google::Cloud::Dataproc::V1beta2::AutoscalingPolicyService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dataproc::V1beta2::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Dataproc::AutoscalingPolicy.new(version: :v1beta2)
+          client = Google::Cloud::Dataproc::AutoscalingPolicyService.new(version: :v1beta2)
 
           # Call method
           response = client.delete_autoscaling_policy(formatted_name)
@@ -423,7 +423,7 @@ describe Google::Cloud::Dataproc::V1beta2::AutoscalingPolicyServiceClient do
 
       Google::Cloud::Dataproc::V1beta2::AutoscalingPolicyService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dataproc::V1beta2::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Dataproc::AutoscalingPolicy.new(version: :v1beta2)
+          client = Google::Cloud::Dataproc::AutoscalingPolicyService.new(version: :v1beta2)
 
           # Call method
           err = assert_raises Google::Gax::GaxError do

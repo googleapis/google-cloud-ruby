@@ -273,7 +273,7 @@ module Google
           # @example
           #   require "google/cloud/dataproc"
           #
-          #   autoscaling_policy_client = Google::Cloud::Dataproc::AutoscalingPolicy.new(version: :v1beta2)
+          #   autoscaling_policy_client = Google::Cloud::Dataproc::AutoscalingPolicyService.new(version: :v1beta2)
           #   formatted_parent = Google::Cloud::Dataproc::V1beta2::AutoscalingPolicyServiceClient.region_path("[PROJECT]", "[REGION]")
           #
           #   # TODO: Initialize `policy`:
@@ -313,7 +313,7 @@ module Google
           # @example
           #   require "google/cloud/dataproc"
           #
-          #   autoscaling_policy_client = Google::Cloud::Dataproc::AutoscalingPolicy.new(version: :v1beta2)
+          #   autoscaling_policy_client = Google::Cloud::Dataproc::AutoscalingPolicyService.new(version: :v1beta2)
           #
           #   # TODO: Initialize `policy`:
           #   policy = {}
@@ -347,7 +347,7 @@ module Google
           # @example
           #   require "google/cloud/dataproc"
           #
-          #   autoscaling_policy_client = Google::Cloud::Dataproc::AutoscalingPolicy.new(version: :v1beta2)
+          #   autoscaling_policy_client = Google::Cloud::Dataproc::AutoscalingPolicyService.new(version: :v1beta2)
           #   formatted_name = Google::Cloud::Dataproc::V1beta2::AutoscalingPolicyServiceClient.autoscaling_policy_path("[PROJECT]", "[REGION]", "[AUTOSCALING_POLICY]")
           #   response = autoscaling_policy_client.get_autoscaling_policy(formatted_name)
 
@@ -389,7 +389,7 @@ module Google
           # @example
           #   require "google/cloud/dataproc"
           #
-          #   autoscaling_policy_client = Google::Cloud::Dataproc::AutoscalingPolicy.new(version: :v1beta2)
+          #   autoscaling_policy_client = Google::Cloud::Dataproc::AutoscalingPolicyService.new(version: :v1beta2)
           #   formatted_parent = Google::Cloud::Dataproc::V1beta2::AutoscalingPolicyServiceClient.region_path("[PROJECT]", "[REGION]")
           #
           #   # Iterate over all results.
@@ -435,7 +435,7 @@ module Google
           # @example
           #   require "google/cloud/dataproc"
           #
-          #   autoscaling_policy_client = Google::Cloud::Dataproc::AutoscalingPolicy.new(version: :v1beta2)
+          #   autoscaling_policy_client = Google::Cloud::Dataproc::AutoscalingPolicyService.new(version: :v1beta2)
           #   formatted_name = Google::Cloud::Dataproc::V1beta2::AutoscalingPolicyServiceClient.autoscaling_policy_path("[PROJECT]", "[REGION]", "[AUTOSCALING_POLICY]")
           #   autoscaling_policy_client.delete_autoscaling_policy(formatted_name)
 

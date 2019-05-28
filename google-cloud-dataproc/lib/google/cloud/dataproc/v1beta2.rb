@@ -107,7 +107,7 @@ module Google
       module V1beta2
         # rubocop:enable LineLength
 
-        module AutoscalingPolicy
+        module AutoscalingPolicyService
           ##
           # The API interface for managing autoscaling policies in the
           # Google Cloud Dataproc API.

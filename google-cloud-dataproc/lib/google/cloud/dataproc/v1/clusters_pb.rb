@@ -6,6 +6,7 @@ require 'google/protobuf'
 
 require 'google/api/annotations_pb'
 require 'google/cloud/dataproc/v1/operations_pb'
+require 'google/cloud/dataproc/v1/shared_pb'
 require 'google/longrunning/operations_pb'
 require 'google/protobuf/duration_pb'
 require 'google/protobuf/field_mask_pb'
@@ -93,6 +94,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.cloud.dataproc.v1.SoftwareConfig" do
     optional :image_version, :string, 1
     map :properties, :string, :string, 2
+    repeated :optional_components, :enum, 3, "google.cloud.dataproc.v1.Component"
   end
   add_message "google.cloud.dataproc.v1.ClusterMetrics" do
     map :hdfs_metrics, :string, :int64, 1

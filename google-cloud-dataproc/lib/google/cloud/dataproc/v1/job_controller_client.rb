@@ -218,8 +218,8 @@ module Google
           #   can also be provided.
           # @param request_id [String]
           #   Optional. A unique id used to identify the request. If the server
-          #   receives two {Google::Cloud::Dataproc::V1::SubmitJobRequest SubmitJobRequest}
-          #   requests  with the same id, then the second request will be ignored and the
+          #   receives two {Google::Cloud::Dataproc::V1::SubmitJobRequest SubmitJobRequest} requests  with the same
+          #   id, then the second request will be ignored and the
           #   first {Google::Cloud::Dataproc::V1::Job Job} created and stored in the backend
           #   is returned.
           #
