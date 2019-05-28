@@ -1,5 +1,13 @@
 # Release History
 
+### 1.0.0 / 2019-05-24
+
+* GA release
+* Add Job#attempt_deadline
+  * Add HttpTarget#authorization_header
+  * Add HttpTarget#oauth_token (OAuthToken)
+  * Add HttpTarget#oidc_token (OidcToken)
+
 ### 0.3.1 / 2019-04-29
 
 * Add AUTHENTICATION.md guide.
