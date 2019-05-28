@@ -47,7 +47,7 @@ Gem::Specification.new do |gem|
   gem.add_dependency "google-cloud-speech", "~> 0.29"
   gem.add_dependency "google-cloud-storage", "~> 1.10"
   gem.add_dependency "google-cloud-talent", "~> 0.1"
-  gem.add_dependency "google-cloud-tasks", "~> 0.2"
+  gem.add_dependency "google-cloud-tasks", "~> 1.0"
   gem.add_dependency "google-cloud-text_to_speech", "~> 0.1"
   gem.add_dependency "google-cloud-trace", "~> 0.31"
   gem.add_dependency "google-cloud-translate", "~> 1.2"
