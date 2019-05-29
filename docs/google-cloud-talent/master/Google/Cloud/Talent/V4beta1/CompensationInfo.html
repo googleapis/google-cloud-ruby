@@ -217,10 +217,14 @@ js:
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns Output only. Annualized base compensation range. Computed as
-base compensation entry&#39;s CompensationEntry#compensation times
+base compensation entry&#39;s
+<span class='object_link'><a href="CompensationInfo/CompensationEntry.html#amount-instance_method" title="Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#amount (method)">CompensationEntry#amount</a></span>
+times
 <span class='object_link'><a href="CompensationInfo/CompensationEntry.html#expected_units_per_year-instance_method" title="Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#expected_units_per_year (method)">CompensationEntry#expected_units_per_year</a></span>.</p>
 
-<p>See <span class='object_link'><a href="CompensationInfo/CompensationEntry.html" title="Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry (class)">CompensationEntry</a></span> for explanation on compensation annualization.</p>
+<p>See
+<span class='object_link'><a href="CompensationInfo/CompensationEntry.html" title="Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry (class)">CompensationEntry</a></span>
+for explanation on compensation annualization.</p>
 
 
   </div>
@@ -239,10 +243,14 @@ base compensation entry&#39;s CompensationEntry#compensation times
       
         &mdash;
         <div class='inline'><p>Output only. Annualized base compensation range. Computed as
-base compensation entry&#39;s CompensationEntry#compensation times
+base compensation entry&#39;s
+<span class='object_link'><a href="CompensationInfo/CompensationEntry.html#amount-instance_method" title="Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#amount (method)">CompensationEntry#amount</a></span>
+times
 <span class='object_link'><a href="CompensationInfo/CompensationEntry.html#expected_units_per_year-instance_method" title="Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#expected_units_per_year (method)">CompensationEntry#expected_units_per_year</a></span>.</p>
 
-<p>See <span class='object_link'><a href="CompensationInfo/CompensationEntry.html" title="Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry (class)">CompensationEntry</a></span> for explanation on compensation annualization.</p>
+<p>See
+<span class='object_link'><a href="CompensationInfo/CompensationEntry.html" title="Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry (class)">CompensationEntry</a></span>
+for explanation on compensation annualization.</p>
 </div>
       
     </li>
@@ -255,34 +263,6 @@ base compensation entry&#39;s CompensationEntry#compensation times
       <pre class="lines">
 
 
-287
-288
-289
-290
-291
-292
-293
-294
-295
-296
-297
-298
-299
-300
-301
-302
-303
-304
-305
-306
-307
-308
-309
-310
-311
-312
-313
-314
 315
 316
 317
@@ -401,19 +381,78 @@ base compensation entry&#39;s CompensationEntry#compensation times
 430
 431
 432
-433</pre>
+433
+434
+435
+436
+437
+438
+439
+440
+441
+442
+443
+444
+445
+446
+447
+448
+449
+450
+451
+452
+453
+454
+455
+456
+457
+458
+459
+460
+461
+462
+463
+464
+465
+466
+467
+468
+469
+470
+471
+472
+473
+474
+475
+476
+477
+478
+479
+480
+481
+482
+483
+484</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/common.rb', line 287</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/common.rb', line 315</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::CompensationInfo (class)">CompensationInfo</a></span></span>
   <span class='comment'># A compensation entry that represents one component of compensation, such
 </span>  <span class='comment'># as base pay, bonus, or other compensation type.
 </span>  <span class='comment'>#
 </span>  <span class='comment'># Annualization: One compensation entry can be annualized if
-</span>  <span class='comment'># * it contains valid {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#amount amount} or {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#range range}.
-</span>  <span class='comment'># * and its {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#expected_units_per_year expected_units_per_year} is set or can be derived.
-</span>  <span class='comment'>#   Its annualized range is determined as ({Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#amount amount} or {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#range range}) times
+</span>  <span class='comment'># * it contains valid
+</span>  <span class='comment'>#   {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#amount amount}
+</span>  <span class='comment'>#   or
+</span>  <span class='comment'>#   {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#range range}.
+</span>  <span class='comment'># * and its
+</span>  <span class='comment'>#   {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#expected_units_per_year expected_units_per_year}
+</span>  <span class='comment'>#   is set or can be derived. Its annualized range is determined as
+</span>  <span class='comment'>#   ({Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#amount amount}
+</span>  <span class='comment'>#   or
+</span>  <span class='comment'>#   {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#range range})
+</span>  <span class='comment'>#   times
 </span>  <span class='comment'>#   {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#expected_units_per_year expected_units_per_year}.
 </span>  <span class='comment'># @!attribute [rw] type
 </span>  <span class='comment'>#   @return [Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationType]
@@ -421,14 +460,16 @@ base compensation entry&#39;s CompensationEntry#compensation times
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     Compensation type.
 </span>  <span class='comment'>#
-</span>  <span class='comment'>#     Default is {CompensationUnit::OTHER_COMPENSATION_TYPE}.
+</span>  <span class='comment'>#     Default is
+</span>  <span class='comment'>#     {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationType::COMPENSATION_TYPE_UNSPECIFIED CompensationType::COMPENSATION_TYPE_UNSPECIFIED}.
 </span>  <span class='comment'># @!attribute [rw] unit
 </span>  <span class='comment'>#   @return [Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationUnit]
 </span>  <span class='comment'>#     Optional.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     Frequency of the specified amount.
 </span>  <span class='comment'>#
-</span>  <span class='comment'>#     Default is {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationUnit::OTHER_COMPENSATION_UNIT CompensationUnit::OTHER_COMPENSATION_UNIT}.
+</span>  <span class='comment'>#     Default is
+</span>  <span class='comment'>#     {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationUnit::COMPENSATION_UNIT_UNSPECIFIED CompensationUnit::COMPENSATION_UNIT_UNSPECIFIED}.
 </span>  <span class='comment'># @!attribute [rw] amount
 </span>  <span class='comment'>#   @return [Google::Type::Money]
 </span>  <span class='comment'>#     Optional.
@@ -451,8 +492,10 @@ base compensation entry&#39;s CompensationEntry#compensation times
 </span>  <span class='comment'>#     Optional.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     Expected number of units paid each year. If not specified, when
-</span>  <span class='comment'>#     {Google::Cloud::Talent::V4beta1::Job#employment_types Job#employment_types} is FULLTIME, a default value is inferred
-</span>  <span class='comment'>#     based on {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#unit unit}. Default values:
+</span>  <span class='comment'>#     {Google::Cloud::Talent::V4beta1::Job#employment_types Job#employment_types}
+</span>  <span class='comment'>#     is FULLTIME, a default value is inferred based on
+</span>  <span class='comment'>#     {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#unit unit}.
+</span>  <span class='comment'>#     Default values:
 </span>  <span class='comment'>#     * HOURLY: 2080
 </span>  <span class='comment'>#     * DAILY: 260
 </span>  <span class='comment'>#     * WEEKLY: 52
@@ -481,19 +524,30 @@ base compensation entry&#39;s CompensationEntry#compensation times
   <span class='comment'># The type of compensation.
 </span>  <span class='comment'>#
 </span>  <span class='comment'># For compensation amounts specified in non-monetary amounts,
-</span>  <span class='comment'># describe the compensation scheme in the {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#description CompensationEntry#description}.
+</span>  <span class='comment'># describe the compensation scheme in the
+</span>  <span class='comment'># {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#description CompensationEntry#description}.
 </span>  <span class='comment'>#
 </span>  <span class='comment'># For example, tipping format is described in
-</span>  <span class='comment'># {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#description CompensationEntry#description} (for example, &quot;expect 15-20% tips based
-</span>  <span class='comment'># on customer bill.&quot;) and an estimate of the tips provided in
-</span>  <span class='comment'># {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#amount CompensationEntry#amount} or {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#range CompensationEntry#range} ($10 per hour).
+</span>  <span class='comment'># {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#description CompensationEntry#description}
+</span>  <span class='comment'># (for example, &quot;expect 15-20% tips based on customer bill.&quot;) and an estimate
+</span>  <span class='comment'># of the tips provided in
+</span>  <span class='comment'># {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#amount CompensationEntry#amount}
+</span>  <span class='comment'># or
+</span>  <span class='comment'># {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#range CompensationEntry#range}
+</span>  <span class='comment'># ($10 per hour).
 </span>  <span class='comment'>#
-</span>  <span class='comment'># For example, equity is described in {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#description CompensationEntry#description}
+</span>  <span class='comment'># For example, equity is described in
+</span>  <span class='comment'># {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#description CompensationEntry#description}
 </span>  <span class='comment'># (for example, &quot;1% - 2% equity vesting over 4 years, 1 year cliff&quot;) and
-</span>  <span class='comment'># value estimated in {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#amount CompensationEntry#amount} or
-</span>  <span class='comment'># {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#range CompensationEntry#range}. If no value estimate is possible, units are
-</span>  <span class='comment'># {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationUnit::COMPENSATION_UNIT_UNSPECIFIED CompensationUnit::COMPENSATION_UNIT_UNSPECIFIED} and then further
-</span>  <span class='comment'># clarified in {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#description CompensationEntry#description} field.
+</span>  <span class='comment'># value estimated in
+</span>  <span class='comment'># {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#amount CompensationEntry#amount}
+</span>  <span class='comment'># or
+</span>  <span class='comment'># {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#range CompensationEntry#range}.
+</span>  <span class='comment'># If no value estimate is possible, units are
+</span>  <span class='comment'># {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationUnit::COMPENSATION_UNIT_UNSPECIFIED CompensationUnit::COMPENSATION_UNIT_UNSPECIFIED}
+</span>  <span class='comment'># and then further clarified in
+</span>  <span class='comment'># {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#description CompensationEntry#description}
+</span>  <span class='comment'># field.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="CompensationInfo/CompensationType.html" title="Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationType (module)">CompensationType</a></span></span>
     <span class='comment'># Default value.
 </span>    <span class='const'>COMPENSATION_TYPE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
@@ -572,10 +626,14 @@ base compensation entry&#39;s CompensationEntry#compensation times
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns Output only. Annualized total compensation range. Computed as
-all compensation entries&#39; CompensationEntry#compensation times
+all compensation entries&#39;
+<span class='object_link'><a href="CompensationInfo/CompensationEntry.html#amount-instance_method" title="Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#amount (method)">CompensationEntry#amount</a></span>
+times
 <span class='object_link'><a href="CompensationInfo/CompensationEntry.html#expected_units_per_year-instance_method" title="Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#expected_units_per_year (method)">CompensationEntry#expected_units_per_year</a></span>.</p>
 
-<p>See <span class='object_link'><a href="CompensationInfo/CompensationEntry.html" title="Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry (class)">CompensationEntry</a></span> for explanation on compensation annualization.</p>
+<p>See
+<span class='object_link'><a href="CompensationInfo/CompensationEntry.html" title="Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry (class)">CompensationEntry</a></span>
+for explanation on compensation annualization.</p>
 
 
   </div>
@@ -594,10 +652,14 @@ all compensation entries&#39; CompensationEntry#compensation times
       
         &mdash;
         <div class='inline'><p>Output only. Annualized total compensation range. Computed as
-all compensation entries&#39; CompensationEntry#compensation times
+all compensation entries&#39;
+<span class='object_link'><a href="CompensationInfo/CompensationEntry.html#amount-instance_method" title="Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#amount (method)">CompensationEntry#amount</a></span>
+times
 <span class='object_link'><a href="CompensationInfo/CompensationEntry.html#expected_units_per_year-instance_method" title="Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#expected_units_per_year (method)">CompensationEntry#expected_units_per_year</a></span>.</p>
 
-<p>See <span class='object_link'><a href="CompensationInfo/CompensationEntry.html" title="Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry (class)">CompensationEntry</a></span> for explanation on compensation annualization.</p>
+<p>See
+<span class='object_link'><a href="CompensationInfo/CompensationEntry.html" title="Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry (class)">CompensationEntry</a></span>
+for explanation on compensation annualization.</p>
 </div>
       
     </li>
@@ -610,34 +672,6 @@ all compensation entries&#39; CompensationEntry#compensation times
       <pre class="lines">
 
 
-287
-288
-289
-290
-291
-292
-293
-294
-295
-296
-297
-298
-299
-300
-301
-302
-303
-304
-305
-306
-307
-308
-309
-310
-311
-312
-313
-314
 315
 316
 317
@@ -756,19 +790,78 @@ all compensation entries&#39; CompensationEntry#compensation times
 430
 431
 432
-433</pre>
+433
+434
+435
+436
+437
+438
+439
+440
+441
+442
+443
+444
+445
+446
+447
+448
+449
+450
+451
+452
+453
+454
+455
+456
+457
+458
+459
+460
+461
+462
+463
+464
+465
+466
+467
+468
+469
+470
+471
+472
+473
+474
+475
+476
+477
+478
+479
+480
+481
+482
+483
+484</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/common.rb', line 287</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/common.rb', line 315</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::CompensationInfo (class)">CompensationInfo</a></span></span>
   <span class='comment'># A compensation entry that represents one component of compensation, such
 </span>  <span class='comment'># as base pay, bonus, or other compensation type.
 </span>  <span class='comment'>#
 </span>  <span class='comment'># Annualization: One compensation entry can be annualized if
-</span>  <span class='comment'># * it contains valid {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#amount amount} or {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#range range}.
-</span>  <span class='comment'># * and its {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#expected_units_per_year expected_units_per_year} is set or can be derived.
-</span>  <span class='comment'>#   Its annualized range is determined as ({Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#amount amount} or {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#range range}) times
+</span>  <span class='comment'># * it contains valid
+</span>  <span class='comment'>#   {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#amount amount}
+</span>  <span class='comment'>#   or
+</span>  <span class='comment'>#   {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#range range}.
+</span>  <span class='comment'># * and its
+</span>  <span class='comment'>#   {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#expected_units_per_year expected_units_per_year}
+</span>  <span class='comment'>#   is set or can be derived. Its annualized range is determined as
+</span>  <span class='comment'>#   ({Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#amount amount}
+</span>  <span class='comment'>#   or
+</span>  <span class='comment'>#   {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#range range})
+</span>  <span class='comment'>#   times
 </span>  <span class='comment'>#   {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#expected_units_per_year expected_units_per_year}.
 </span>  <span class='comment'># @!attribute [rw] type
 </span>  <span class='comment'>#   @return [Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationType]
@@ -776,14 +869,16 @@ all compensation entries&#39; CompensationEntry#compensation times
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     Compensation type.
 </span>  <span class='comment'>#
-</span>  <span class='comment'>#     Default is {CompensationUnit::OTHER_COMPENSATION_TYPE}.
+</span>  <span class='comment'>#     Default is
+</span>  <span class='comment'>#     {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationType::COMPENSATION_TYPE_UNSPECIFIED CompensationType::COMPENSATION_TYPE_UNSPECIFIED}.
 </span>  <span class='comment'># @!attribute [rw] unit
 </span>  <span class='comment'>#   @return [Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationUnit]
 </span>  <span class='comment'>#     Optional.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     Frequency of the specified amount.
 </span>  <span class='comment'>#
-</span>  <span class='comment'>#     Default is {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationUnit::OTHER_COMPENSATION_UNIT CompensationUnit::OTHER_COMPENSATION_UNIT}.
+</span>  <span class='comment'>#     Default is
+</span>  <span class='comment'>#     {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationUnit::COMPENSATION_UNIT_UNSPECIFIED CompensationUnit::COMPENSATION_UNIT_UNSPECIFIED}.
 </span>  <span class='comment'># @!attribute [rw] amount
 </span>  <span class='comment'>#   @return [Google::Type::Money]
 </span>  <span class='comment'>#     Optional.
@@ -806,8 +901,10 @@ all compensation entries&#39; CompensationEntry#compensation times
 </span>  <span class='comment'>#     Optional.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     Expected number of units paid each year. If not specified, when
-</span>  <span class='comment'>#     {Google::Cloud::Talent::V4beta1::Job#employment_types Job#employment_types} is FULLTIME, a default value is inferred
-</span>  <span class='comment'>#     based on {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#unit unit}. Default values:
+</span>  <span class='comment'>#     {Google::Cloud::Talent::V4beta1::Job#employment_types Job#employment_types}
+</span>  <span class='comment'>#     is FULLTIME, a default value is inferred based on
+</span>  <span class='comment'>#     {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#unit unit}.
+</span>  <span class='comment'>#     Default values:
 </span>  <span class='comment'>#     * HOURLY: 2080
 </span>  <span class='comment'>#     * DAILY: 260
 </span>  <span class='comment'>#     * WEEKLY: 52
@@ -836,19 +933,30 @@ all compensation entries&#39; CompensationEntry#compensation times
   <span class='comment'># The type of compensation.
 </span>  <span class='comment'>#
 </span>  <span class='comment'># For compensation amounts specified in non-monetary amounts,
-</span>  <span class='comment'># describe the compensation scheme in the {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#description CompensationEntry#description}.
+</span>  <span class='comment'># describe the compensation scheme in the
+</span>  <span class='comment'># {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#description CompensationEntry#description}.
 </span>  <span class='comment'>#
 </span>  <span class='comment'># For example, tipping format is described in
-</span>  <span class='comment'># {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#description CompensationEntry#description} (for example, &quot;expect 15-20% tips based
-</span>  <span class='comment'># on customer bill.&quot;) and an estimate of the tips provided in
-</span>  <span class='comment'># {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#amount CompensationEntry#amount} or {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#range CompensationEntry#range} ($10 per hour).
+</span>  <span class='comment'># {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#description CompensationEntry#description}
+</span>  <span class='comment'># (for example, &quot;expect 15-20% tips based on customer bill.&quot;) and an estimate
+</span>  <span class='comment'># of the tips provided in
+</span>  <span class='comment'># {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#amount CompensationEntry#amount}
+</span>  <span class='comment'># or
+</span>  <span class='comment'># {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#range CompensationEntry#range}
+</span>  <span class='comment'># ($10 per hour).
 </span>  <span class='comment'>#
-</span>  <span class='comment'># For example, equity is described in {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#description CompensationEntry#description}
+</span>  <span class='comment'># For example, equity is described in
+</span>  <span class='comment'># {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#description CompensationEntry#description}
 </span>  <span class='comment'># (for example, &quot;1% - 2% equity vesting over 4 years, 1 year cliff&quot;) and
-</span>  <span class='comment'># value estimated in {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#amount CompensationEntry#amount} or
-</span>  <span class='comment'># {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#range CompensationEntry#range}. If no value estimate is possible, units are
-</span>  <span class='comment'># {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationUnit::COMPENSATION_UNIT_UNSPECIFIED CompensationUnit::COMPENSATION_UNIT_UNSPECIFIED} and then further
-</span>  <span class='comment'># clarified in {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#description CompensationEntry#description} field.
+</span>  <span class='comment'># value estimated in
+</span>  <span class='comment'># {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#amount CompensationEntry#amount}
+</span>  <span class='comment'># or
+</span>  <span class='comment'># {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#range CompensationEntry#range}.
+</span>  <span class='comment'># If no value estimate is possible, units are
+</span>  <span class='comment'># {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationUnit::COMPENSATION_UNIT_UNSPECIFIED CompensationUnit::COMPENSATION_UNIT_UNSPECIFIED}
+</span>  <span class='comment'># and then further clarified in
+</span>  <span class='comment'># {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#description CompensationEntry#description}
+</span>  <span class='comment'># field.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="CompensationInfo/CompensationType.html" title="Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationType (module)">CompensationType</a></span></span>
     <span class='comment'># Default value.
 </span>    <span class='const'>COMPENSATION_TYPE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
@@ -931,8 +1039,8 @@ all compensation entries&#39; CompensationEntry#compensation times
 <p>Job compensation information.</p>
 
 <p>At most one entry can be of type
-<span class='object_link'><a href="CompensationInfo/CompensationType.html#BASE-constant" title="Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationType::BASE (constant)">CompensationInfo::CompensationType::BASE</a></span>, which is
-referred as ** base compensation entry ** for the job.</p>
+<span class='object_link'><a href="CompensationInfo/CompensationType.html#BASE-constant" title="Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationType::BASE (constant)">CompensationInfo::CompensationType::BASE</a></span>,
+which is referred as <strong>base compensation entry</strong> for the job.</p>
 
 
   </div>
@@ -955,8 +1063,8 @@ referred as ** base compensation entry ** for the job.</p>
 <p>Job compensation information.</p>
 
 <p>At most one entry can be of type
-<span class='object_link'><a href="CompensationInfo/CompensationType.html#BASE-constant" title="Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationType::BASE (constant)">CompensationInfo::CompensationType::BASE</a></span>, which is
-referred as ** base compensation entry ** for the job.</p>
+<span class='object_link'><a href="CompensationInfo/CompensationType.html#BASE-constant" title="Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationType::BASE (constant)">CompensationInfo::CompensationType::BASE</a></span>,
+which is referred as <strong>base compensation entry</strong> for the job.</p>
 </div>
       
     </li>
@@ -969,34 +1077,6 @@ referred as ** base compensation entry ** for the job.</p>
       <pre class="lines">
 
 
-287
-288
-289
-290
-291
-292
-293
-294
-295
-296
-297
-298
-299
-300
-301
-302
-303
-304
-305
-306
-307
-308
-309
-310
-311
-312
-313
-314
 315
 316
 317
@@ -1115,19 +1195,78 @@ referred as ** base compensation entry ** for the job.</p>
 430
 431
 432
-433</pre>
+433
+434
+435
+436
+437
+438
+439
+440
+441
+442
+443
+444
+445
+446
+447
+448
+449
+450
+451
+452
+453
+454
+455
+456
+457
+458
+459
+460
+461
+462
+463
+464
+465
+466
+467
+468
+469
+470
+471
+472
+473
+474
+475
+476
+477
+478
+479
+480
+481
+482
+483
+484</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/common.rb', line 287</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/common.rb', line 315</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::CompensationInfo (class)">CompensationInfo</a></span></span>
   <span class='comment'># A compensation entry that represents one component of compensation, such
 </span>  <span class='comment'># as base pay, bonus, or other compensation type.
 </span>  <span class='comment'>#
 </span>  <span class='comment'># Annualization: One compensation entry can be annualized if
-</span>  <span class='comment'># * it contains valid {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#amount amount} or {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#range range}.
-</span>  <span class='comment'># * and its {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#expected_units_per_year expected_units_per_year} is set or can be derived.
-</span>  <span class='comment'>#   Its annualized range is determined as ({Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#amount amount} or {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#range range}) times
+</span>  <span class='comment'># * it contains valid
+</span>  <span class='comment'>#   {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#amount amount}
+</span>  <span class='comment'>#   or
+</span>  <span class='comment'>#   {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#range range}.
+</span>  <span class='comment'># * and its
+</span>  <span class='comment'>#   {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#expected_units_per_year expected_units_per_year}
+</span>  <span class='comment'>#   is set or can be derived. Its annualized range is determined as
+</span>  <span class='comment'>#   ({Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#amount amount}
+</span>  <span class='comment'>#   or
+</span>  <span class='comment'>#   {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#range range})
+</span>  <span class='comment'>#   times
 </span>  <span class='comment'>#   {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#expected_units_per_year expected_units_per_year}.
 </span>  <span class='comment'># @!attribute [rw] type
 </span>  <span class='comment'>#   @return [Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationType]
@@ -1135,14 +1274,16 @@ referred as ** base compensation entry ** for the job.</p>
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     Compensation type.
 </span>  <span class='comment'>#
-</span>  <span class='comment'>#     Default is {CompensationUnit::OTHER_COMPENSATION_TYPE}.
+</span>  <span class='comment'>#     Default is
+</span>  <span class='comment'>#     {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationType::COMPENSATION_TYPE_UNSPECIFIED CompensationType::COMPENSATION_TYPE_UNSPECIFIED}.
 </span>  <span class='comment'># @!attribute [rw] unit
 </span>  <span class='comment'>#   @return [Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationUnit]
 </span>  <span class='comment'>#     Optional.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     Frequency of the specified amount.
 </span>  <span class='comment'>#
-</span>  <span class='comment'>#     Default is {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationUnit::OTHER_COMPENSATION_UNIT CompensationUnit::OTHER_COMPENSATION_UNIT}.
+</span>  <span class='comment'>#     Default is
+</span>  <span class='comment'>#     {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationUnit::COMPENSATION_UNIT_UNSPECIFIED CompensationUnit::COMPENSATION_UNIT_UNSPECIFIED}.
 </span>  <span class='comment'># @!attribute [rw] amount
 </span>  <span class='comment'>#   @return [Google::Type::Money]
 </span>  <span class='comment'>#     Optional.
@@ -1165,8 +1306,10 @@ referred as ** base compensation entry ** for the job.</p>
 </span>  <span class='comment'>#     Optional.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     Expected number of units paid each year. If not specified, when
-</span>  <span class='comment'>#     {Google::Cloud::Talent::V4beta1::Job#employment_types Job#employment_types} is FULLTIME, a default value is inferred
-</span>  <span class='comment'>#     based on {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#unit unit}. Default values:
+</span>  <span class='comment'>#     {Google::Cloud::Talent::V4beta1::Job#employment_types Job#employment_types}
+</span>  <span class='comment'>#     is FULLTIME, a default value is inferred based on
+</span>  <span class='comment'>#     {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#unit unit}.
+</span>  <span class='comment'>#     Default values:
 </span>  <span class='comment'>#     * HOURLY: 2080
 </span>  <span class='comment'>#     * DAILY: 260
 </span>  <span class='comment'>#     * WEEKLY: 52
@@ -1195,19 +1338,30 @@ referred as ** base compensation entry ** for the job.</p>
   <span class='comment'># The type of compensation.
 </span>  <span class='comment'>#
 </span>  <span class='comment'># For compensation amounts specified in non-monetary amounts,
-</span>  <span class='comment'># describe the compensation scheme in the {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#description CompensationEntry#description}.
+</span>  <span class='comment'># describe the compensation scheme in the
+</span>  <span class='comment'># {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#description CompensationEntry#description}.
 </span>  <span class='comment'>#
 </span>  <span class='comment'># For example, tipping format is described in
-</span>  <span class='comment'># {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#description CompensationEntry#description} (for example, &quot;expect 15-20% tips based
-</span>  <span class='comment'># on customer bill.&quot;) and an estimate of the tips provided in
-</span>  <span class='comment'># {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#amount CompensationEntry#amount} or {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#range CompensationEntry#range} ($10 per hour).
+</span>  <span class='comment'># {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#description CompensationEntry#description}
+</span>  <span class='comment'># (for example, &quot;expect 15-20% tips based on customer bill.&quot;) and an estimate
+</span>  <span class='comment'># of the tips provided in
+</span>  <span class='comment'># {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#amount CompensationEntry#amount}
+</span>  <span class='comment'># or
+</span>  <span class='comment'># {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#range CompensationEntry#range}
+</span>  <span class='comment'># ($10 per hour).
 </span>  <span class='comment'>#
-</span>  <span class='comment'># For example, equity is described in {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#description CompensationEntry#description}
+</span>  <span class='comment'># For example, equity is described in
+</span>  <span class='comment'># {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#description CompensationEntry#description}
 </span>  <span class='comment'># (for example, &quot;1% - 2% equity vesting over 4 years, 1 year cliff&quot;) and
-</span>  <span class='comment'># value estimated in {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#amount CompensationEntry#amount} or
-</span>  <span class='comment'># {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#range CompensationEntry#range}. If no value estimate is possible, units are
-</span>  <span class='comment'># {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationUnit::COMPENSATION_UNIT_UNSPECIFIED CompensationUnit::COMPENSATION_UNIT_UNSPECIFIED} and then further
-</span>  <span class='comment'># clarified in {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#description CompensationEntry#description} field.
+</span>  <span class='comment'># value estimated in
+</span>  <span class='comment'># {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#amount CompensationEntry#amount}
+</span>  <span class='comment'># or
+</span>  <span class='comment'># {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#range CompensationEntry#range}.
+</span>  <span class='comment'># If no value estimate is possible, units are
+</span>  <span class='comment'># {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationUnit::COMPENSATION_UNIT_UNSPECIFIED CompensationUnit::COMPENSATION_UNIT_UNSPECIFIED}
+</span>  <span class='comment'># and then further clarified in
+</span>  <span class='comment'># {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#description CompensationEntry#description}
+</span>  <span class='comment'># field.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="CompensationInfo/CompensationType.html" title="Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationType (module)">CompensationType</a></span></span>
     <span class='comment'># Default value.
 </span>    <span class='const'>COMPENSATION_TYPE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>

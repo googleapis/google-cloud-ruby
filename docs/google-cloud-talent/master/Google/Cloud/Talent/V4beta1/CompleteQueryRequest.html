@@ -369,17 +369,6 @@ example, &quot;projects/api-test-project/companies/bar&quot;.</p>
       <pre class="lines">
 
 
-91
-92
-93
-94
-95
-96
-97
-98
-99
-100
-101
 102
 103
 104
@@ -397,10 +386,21 @@ example, &quot;projects/api-test-project/companies/bar&quot;.</p>
 116
 117
 118
-119</pre>
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/completion_service.rb', line 91</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/completion_service.rb', line 102</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::CompleteQueryRequest (class)">CompleteQueryRequest</a></span></span>
   <span class='comment'># Enum to specify the scope of completion.
@@ -449,23 +449,32 @@ example, &quot;projects/api-test-project/companies/bar&quot;.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Optional.</p>
+    <p>Returns Optional.</p>
 
 <p>The list of languages of the query. This is
 the BCP-47 language code, such as &quot;en-US&quot; or &quot;sr-Latn&quot;.
 For more information, see
 <a href="https://tools.ietf.org/html/bcp47">Tags for Identifying Languages</a>.</p>
 
-<p>For <span class='object_link'><a href="CompleteQueryRequest/CompletionType.html#JOB_TITLE-constant" title="Google::Cloud::Talent::V4beta1::CompleteQueryRequest::CompletionType::JOB_TITLE (constant)">CompletionType::JOB_TITLE</a></span> type, only open jobs with the same
-<span class='object_link'><a href="#language_codes-instance_method" title="Google::Cloud::Talent::V4beta1::CompleteQueryRequest#language_codes (method)">language_codes</a></span> are returned.</p>
+<p>For
+<span class='object_link'><a href="CompleteQueryRequest/CompletionType.html#JOB_TITLE-constant" title="Google::Cloud::Talent::V4beta1::CompleteQueryRequest::CompletionType::JOB_TITLE (constant)">CompletionType::JOB_TITLE</a></span>
+type, only open jobs with the same
+<span class='object_link'><a href="#language_codes-instance_method" title="Google::Cloud::Talent::V4beta1::CompleteQueryRequest#language_codes (method)">language_codes</a></span>
+are returned.</p>
 
-<p>For <span class='object_link'><a href="CompleteQueryRequest/CompletionType.html#COMPANY_NAME-constant" title="Google::Cloud::Talent::V4beta1::CompleteQueryRequest::CompletionType::COMPANY_NAME (constant)">CompletionType::COMPANY_NAME</a></span> type,
-only companies having open jobs with the same <span class='object_link'><a href="#language_codes-instance_method" title="Google::Cloud::Talent::V4beta1::CompleteQueryRequest#language_codes (method)">language_codes</a></span> are
-returned.</p>
+<p>For
+<span class='object_link'><a href="CompleteQueryRequest/CompletionType.html#COMPANY_NAME-constant" title="Google::Cloud::Talent::V4beta1::CompleteQueryRequest::CompletionType::COMPANY_NAME (constant)">CompletionType::COMPANY_NAME</a></span>
+type, only companies having open jobs with the same
+<span class='object_link'><a href="#language_codes-instance_method" title="Google::Cloud::Talent::V4beta1::CompleteQueryRequest#language_codes (method)">language_codes</a></span>
+are returned.</p>
 
-<p>For <span class='object_link'><a href="CompleteQueryRequest/CompletionType.html#COMBINED-constant" title="Google::Cloud::Talent::V4beta1::CompleteQueryRequest::CompletionType::COMBINED (constant)">CompletionType::COMBINED</a></span> type, only open jobs with the same
-<span class='object_link'><a href="#language_codes-instance_method" title="Google::Cloud::Talent::V4beta1::CompleteQueryRequest#language_codes (method)">language_codes</a></span> or companies having open jobs with the same
-<span class='object_link'><a href="#language_codes-instance_method" title="Google::Cloud::Talent::V4beta1::CompleteQueryRequest#language_codes (method)">language_codes</a></span> are returned.</p>
+<p>For
+<span class='object_link'><a href="CompleteQueryRequest/CompletionType.html#COMBINED-constant" title="Google::Cloud::Talent::V4beta1::CompleteQueryRequest::CompletionType::COMBINED (constant)">CompletionType::COMBINED</a></span>
+type, only open jobs with the same
+<span class='object_link'><a href="#language_codes-instance_method" title="Google::Cloud::Talent::V4beta1::CompleteQueryRequest#language_codes (method)">language_codes</a></span>
+or companies having open jobs with the same
+<span class='object_link'><a href="#language_codes-instance_method" title="Google::Cloud::Talent::V4beta1::CompleteQueryRequest#language_codes (method)">language_codes</a></span>
+are returned.</p>
 
 <p>The maximum number of allowed characters is 255.</p>
 
@@ -492,16 +501,25 @@ the BCP-47 language code, such as &quot;en-US&quot; or &quot;sr-Latn&quot;.
 For more information, see
 <a href="https://tools.ietf.org/html/bcp47">Tags for Identifying Languages</a>.</p>
 
-<p>For <span class='object_link'><a href="CompleteQueryRequest/CompletionType.html#JOB_TITLE-constant" title="Google::Cloud::Talent::V4beta1::CompleteQueryRequest::CompletionType::JOB_TITLE (constant)">CompletionType::JOB_TITLE</a></span> type, only open jobs with the same
-<span class='object_link'><a href="#language_codes-instance_method" title="Google::Cloud::Talent::V4beta1::CompleteQueryRequest#language_codes (method)">language_codes</a></span> are returned.</p>
+<p>For
+<span class='object_link'><a href="CompleteQueryRequest/CompletionType.html#JOB_TITLE-constant" title="Google::Cloud::Talent::V4beta1::CompleteQueryRequest::CompletionType::JOB_TITLE (constant)">CompletionType::JOB_TITLE</a></span>
+type, only open jobs with the same
+<span class='object_link'><a href="#language_codes-instance_method" title="Google::Cloud::Talent::V4beta1::CompleteQueryRequest#language_codes (method)">language_codes</a></span>
+are returned.</p>
 
-<p>For <span class='object_link'><a href="CompleteQueryRequest/CompletionType.html#COMPANY_NAME-constant" title="Google::Cloud::Talent::V4beta1::CompleteQueryRequest::CompletionType::COMPANY_NAME (constant)">CompletionType::COMPANY_NAME</a></span> type,
-only companies having open jobs with the same <span class='object_link'><a href="#language_codes-instance_method" title="Google::Cloud::Talent::V4beta1::CompleteQueryRequest#language_codes (method)">language_codes</a></span> are
-returned.</p>
+<p>For
+<span class='object_link'><a href="CompleteQueryRequest/CompletionType.html#COMPANY_NAME-constant" title="Google::Cloud::Talent::V4beta1::CompleteQueryRequest::CompletionType::COMPANY_NAME (constant)">CompletionType::COMPANY_NAME</a></span>
+type, only companies having open jobs with the same
+<span class='object_link'><a href="#language_codes-instance_method" title="Google::Cloud::Talent::V4beta1::CompleteQueryRequest#language_codes (method)">language_codes</a></span>
+are returned.</p>
 
-<p>For <span class='object_link'><a href="CompleteQueryRequest/CompletionType.html#COMBINED-constant" title="Google::Cloud::Talent::V4beta1::CompleteQueryRequest::CompletionType::COMBINED (constant)">CompletionType::COMBINED</a></span> type, only open jobs with the same
-<span class='object_link'><a href="#language_codes-instance_method" title="Google::Cloud::Talent::V4beta1::CompleteQueryRequest#language_codes (method)">language_codes</a></span> or companies having open jobs with the same
-<span class='object_link'><a href="#language_codes-instance_method" title="Google::Cloud::Talent::V4beta1::CompleteQueryRequest#language_codes (method)">language_codes</a></span> are returned.</p>
+<p>For
+<span class='object_link'><a href="CompleteQueryRequest/CompletionType.html#COMBINED-constant" title="Google::Cloud::Talent::V4beta1::CompleteQueryRequest::CompletionType::COMBINED (constant)">CompletionType::COMBINED</a></span>
+type, only open jobs with the same
+<span class='object_link'><a href="#language_codes-instance_method" title="Google::Cloud::Talent::V4beta1::CompleteQueryRequest#language_codes (method)">language_codes</a></span>
+or companies having open jobs with the same
+<span class='object_link'><a href="#language_codes-instance_method" title="Google::Cloud::Talent::V4beta1::CompleteQueryRequest#language_codes (method)">language_codes</a></span>
+are returned.</p>
 
 <p>The maximum number of allowed characters is 255.</p>
 </div>
@@ -516,17 +534,6 @@ returned.</p>
       <pre class="lines">
 
 
-91
-92
-93
-94
-95
-96
-97
-98
-99
-100
-101
 102
 103
 104
@@ -544,10 +551,21 @@ returned.</p>
 116
 117
 118
-119</pre>
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/completion_service.rb', line 91</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/completion_service.rb', line 102</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::CompleteQueryRequest (class)">CompleteQueryRequest</a></span></span>
   <span class='comment'># Enum to specify the scope of completion.
@@ -635,17 +653,6 @@ returned.</p>
       <pre class="lines">
 
 
-91
-92
-93
-94
-95
-96
-97
-98
-99
-100
-101
 102
 103
 104
@@ -663,10 +670,21 @@ returned.</p>
 116
 117
 118
-119</pre>
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/completion_service.rb', line 91</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/completion_service.rb', line 102</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::CompleteQueryRequest (class)">CompleteQueryRequest</a></span></span>
   <span class='comment'># Enum to specify the scope of completion.
@@ -762,17 +780,6 @@ example, &quot;projects/api-test-project&quot;.</p>
       <pre class="lines">
 
 
-91
-92
-93
-94
-95
-96
-97
-98
-99
-100
-101
 102
 103
 104
@@ -790,10 +797,21 @@ example, &quot;projects/api-test-project&quot;.</p>
 116
 117
 118
-119</pre>
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/completion_service.rb', line 91</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/completion_service.rb', line 102</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::CompleteQueryRequest (class)">CompleteQueryRequest</a></span></span>
   <span class='comment'># Enum to specify the scope of completion.
@@ -881,17 +899,6 @@ example, &quot;projects/api-test-project&quot;.</p>
       <pre class="lines">
 
 
-91
-92
-93
-94
-95
-96
-97
-98
-99
-100
-101
 102
 103
 104
@@ -909,10 +916,21 @@ example, &quot;projects/api-test-project&quot;.</p>
 116
 117
 118
-119</pre>
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/completion_service.rb', line 91</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/completion_service.rb', line 102</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::CompleteQueryRequest (class)">CompleteQueryRequest</a></span></span>
   <span class='comment'># Enum to specify the scope of completion.
@@ -963,7 +981,8 @@ example, &quot;projects/api-test-project&quot;.</p>
   <div class="discussion">
     <p>Returns Optional.</p>
 
-<p>The scope of the completion. The defaults is <span class='object_link'><a href="CompleteQueryRequest/CompletionScope.html#PUBLIC-constant" title="Google::Cloud::Talent::V4beta1::CompleteQueryRequest::CompletionScope::PUBLIC (constant)">CompletionScope::PUBLIC</a></span>.</p>
+<p>The scope of the completion. The defaults is
+<span class='object_link'><a href="CompleteQueryRequest/CompletionScope.html#PUBLIC-constant" title="Google::Cloud::Talent::V4beta1::CompleteQueryRequest::CompletionScope::PUBLIC (constant)">CompletionScope::PUBLIC</a></span>.</p>
 
 
   </div>
@@ -983,7 +1002,8 @@ example, &quot;projects/api-test-project&quot;.</p>
         &mdash;
         <div class='inline'><p>Optional.</p>
 
-<p>The scope of the completion. The defaults is <span class='object_link'><a href="CompleteQueryRequest/CompletionScope.html#PUBLIC-constant" title="Google::Cloud::Talent::V4beta1::CompleteQueryRequest::CompletionScope::PUBLIC (constant)">CompletionScope::PUBLIC</a></span>.</p>
+<p>The scope of the completion. The defaults is
+<span class='object_link'><a href="CompleteQueryRequest/CompletionScope.html#PUBLIC-constant" title="Google::Cloud::Talent::V4beta1::CompleteQueryRequest::CompletionScope::PUBLIC (constant)">CompletionScope::PUBLIC</a></span>.</p>
 </div>
       
     </li>
@@ -996,17 +1016,6 @@ example, &quot;projects/api-test-project&quot;.</p>
       <pre class="lines">
 
 
-91
-92
-93
-94
-95
-96
-97
-98
-99
-100
-101
 102
 103
 104
@@ -1024,10 +1033,21 @@ example, &quot;projects/api-test-project&quot;.</p>
 116
 117
 118
-119</pre>
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/completion_service.rb', line 91</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/completion_service.rb', line 102</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::CompleteQueryRequest (class)">CompleteQueryRequest</a></span></span>
   <span class='comment'># Enum to specify the scope of completion.
@@ -1078,7 +1098,8 @@ example, &quot;projects/api-test-project&quot;.</p>
   <div class="discussion">
     <p>Returns Optional.</p>
 
-<p>The completion topic. The default is <span class='object_link'><a href="CompleteQueryRequest/CompletionType.html#COMBINED-constant" title="Google::Cloud::Talent::V4beta1::CompleteQueryRequest::CompletionType::COMBINED (constant)">CompletionType::COMBINED</a></span>.</p>
+<p>The completion topic. The default is
+<span class='object_link'><a href="CompleteQueryRequest/CompletionType.html#COMBINED-constant" title="Google::Cloud::Talent::V4beta1::CompleteQueryRequest::CompletionType::COMBINED (constant)">CompletionType::COMBINED</a></span>.</p>
 
 
   </div>
@@ -1098,7 +1119,8 @@ example, &quot;projects/api-test-project&quot;.</p>
         &mdash;
         <div class='inline'><p>Optional.</p>
 
-<p>The completion topic. The default is <span class='object_link'><a href="CompleteQueryRequest/CompletionType.html#COMBINED-constant" title="Google::Cloud::Talent::V4beta1::CompleteQueryRequest::CompletionType::COMBINED (constant)">CompletionType::COMBINED</a></span>.</p>
+<p>The completion topic. The default is
+<span class='object_link'><a href="CompleteQueryRequest/CompletionType.html#COMBINED-constant" title="Google::Cloud::Talent::V4beta1::CompleteQueryRequest::CompletionType::COMBINED (constant)">CompletionType::COMBINED</a></span>.</p>
 </div>
       
     </li>
@@ -1111,17 +1133,6 @@ example, &quot;projects/api-test-project&quot;.</p>
       <pre class="lines">
 
 
-91
-92
-93
-94
-95
-96
-97
-98
-99
-100
-101
 102
 103
 104
@@ -1139,10 +1150,21 @@ example, &quot;projects/api-test-project&quot;.</p>
 116
 117
 118
-119</pre>
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/completion_service.rb', line 91</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/completion_service.rb', line 102</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::CompleteQueryRequest (class)">CompleteQueryRequest</a></span></span>
   <span class='comment'># Enum to specify the scope of completion.

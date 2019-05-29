@@ -1969,7 +1969,9 @@ object.</p>
 <p>For example, search by raw queries &quot;software engineer in Mountain View&quot; or
 search by structured filters (location filter, education filter, etc.).</p>
 
-<p>See <span class='object_link'><a href="SearchProfilesRequest.html" title="Google::Cloud::Talent::V4beta1::SearchProfilesRequest (class)">SearchProfilesRequest</a></span> for more information.</p>
+<p>See
+<span class='object_link'><a href="SearchProfilesRequest.html" title="Google::Cloud::Talent::V4beta1::SearchProfilesRequest (class)">SearchProfilesRequest</a></span>
+for more information.</p>
 
 
   </div>
@@ -2058,7 +2060,8 @@ can also be provided.</p>
         &mdash;
         <div class='inline'><p>Optional.</p>
 
-<p>Search query to execute. See <span class='object_link'><a href="ProfileQuery.html" title="Google::Cloud::Talent::V4beta1::ProfileQuery (class)">ProfileQuery</a></span> for more details.
+<p>Search query to execute. See
+<span class='object_link'><a href="ProfileQuery.html" title="Google::Cloud::Talent::V4beta1::ProfileQuery (class)">ProfileQuery</a></span> for more details.
 A hash of the same form as <code>Google::Cloud::Talent::V4beta1::ProfileQuery</code>
 can also be provided.</p>
 </div>
@@ -2097,7 +2100,9 @@ resources in a page.</p>
         <div class='inline'><p>Optional.</p>
 
 <p>An integer that specifies the current offset (that is, starting result) in
-search results. This field is only considered if <span class='object_link'><a href="SearchProfilesRequest.html#page_token-instance_method" title="Google::Cloud::Talent::V4beta1::SearchProfilesRequest#page_token (method)">page_token</a></span> is unset.</p>
+search results. This field is only considered if
+<span class='object_link'><a href="SearchProfilesRequest.html#page_token-instance_method" title="Google::Cloud::Talent::V4beta1::SearchProfilesRequest#page_token (method)">page_token</a></span>
+is unset.</p>
 
 <p>The maximum allowed value is 5000. Otherwise an error is thrown.</p>
 
@@ -2148,18 +2153,28 @@ Defaults is &quot;relevance desc&quot; if no value is specified.</p>
 <ul>
 <li>&quot;relevance desc&quot;: By descending relevance, as determined by the API
 algorithms.</li>
-<li>&quot;update_date desc&quot;: Sort by Profile#update_date in descending order
+<li>&quot;update_time desc&quot;: Sort by
+<span class='object_link'><a href="Profile.html#update_time-instance_method" title="Google::Cloud::Talent::V4beta1::Profile#update_time (method)">Profile#update_time</a></span> in
+descending order
 (recently updated profiles first).</li>
-<li>&quot;create_date desc&quot;: Sort by Profile#create_date in descending order
+<li>&quot;create_time desc&quot;: Sort by
+<span class='object_link'><a href="Profile.html#create_time-instance_method" title="Google::Cloud::Talent::V4beta1::Profile#create_time (method)">Profile#create_time</a></span> in
+descending order
 (recently created profiles first).</li>
-<li>&quot;first_name&quot;: Sort by PersonStrcuturedName#given_name in ascending
-order.</li>
-<li>&quot;first_name desc&quot;: Sort by PersonStrcuturedName#given_name in
-descending order.</li>
-<li>&quot;last_name&quot;: Sort by PersonStrcuturedName#family_name in ascending
-order.</li>
-<li>&quot;last_name desc&quot;: Sort by PersonStrcuturedName#family_name in
+<li>&quot;first_name&quot;: Sort by
+<span class='object_link'><a href="PersonName/PersonStructuredName.html#given_name-instance_method" title="Google::Cloud::Talent::V4beta1::PersonName::PersonStructuredName#given_name (method)">PersonName::PersonStructuredName#given_name</a></span>
+in
 ascending order.</li>
+<li>&quot;first_name desc&quot;: Sort by
+<span class='object_link'><a href="PersonName/PersonStructuredName.html#given_name-instance_method" title="Google::Cloud::Talent::V4beta1::PersonName::PersonStructuredName#given_name (method)">PersonName::PersonStructuredName#given_name</a></span>
+in descending order.</li>
+<li>&quot;last_name&quot;: Sort by
+<span class='object_link'><a href="PersonName/PersonStructuredName.html#family_name-instance_method" title="Google::Cloud::Talent::V4beta1::PersonName::PersonStructuredName#family_name (method)">PersonName::PersonStructuredName#family_name</a></span>
+in
+ascending order.</li>
+<li>&quot;last_name desc&quot;: Sort by
+<span class='object_link'><a href="PersonName/PersonStructuredName.html#family_name-instance_method" title="Google::Cloud::Talent::V4beta1::PersonName::PersonStructuredName#family_name (method)">PersonName::PersonStructuredName#family_name</a></span>
+in ascending order.</li>
 </ul>
 </div>
       
@@ -2197,7 +2212,8 @@ is case in-sensitive sort (false).</p>
         <div class='inline'><p>Optional.</p>
 
 <p>A list of expressions specifies histogram requests against matching
-profiles for <span class='object_link'><a href="SearchProfilesRequest.html" title="Google::Cloud::Talent::V4beta1::SearchProfilesRequest (class)">SearchProfilesRequest</a></span>.</p>
+profiles for
+<span class='object_link'><a href="SearchProfilesRequest.html" title="Google::Cloud::Talent::V4beta1::SearchProfilesRequest (class)">SearchProfilesRequest</a></span>.</p>
 
 <p>The expression syntax looks like a function definition with optional
 parameters.</p>
@@ -2257,13 +2273,19 @@ lower levels of education degree.</li>
 <li>experience_in_months: experience in months. 0 means 0 month to 1 month
 (exclusive).</li>
 <li>application_date: The application date specifies application start dates.
-See <span class='object_link'><a href="ApplicationDateFilter.html" title="Google::Cloud::Talent::V4beta1::ApplicationDateFilter (class)">ApplicationDateFilter</a></span> for more details.</li>
+See
+<span class='object_link'><a href="ApplicationDateFilter.html" title="Google::Cloud::Talent::V4beta1::ApplicationDateFilter (class)">ApplicationDateFilter</a></span>
+for more details.</li>
 <li>application_outcome_notes: The application outcome reason specifies the
 reasons behind the outcome of the job application.
-See <span class='object_link'><a href="ApplicationOutcomeNotesFilter.html" title="Google::Cloud::Talent::V4beta1::ApplicationOutcomeNotesFilter (class)">ApplicationOutcomeNotesFilter</a></span> for more details.</li>
+See
+<span class='object_link'><a href="ApplicationOutcomeNotesFilter.html" title="Google::Cloud::Talent::V4beta1::ApplicationOutcomeNotesFilter (class)">ApplicationOutcomeNotesFilter</a></span>
+for more details.</li>
 <li>application_job_title: The application job title specifies the job
 applied for in the application.
-See <span class='object_link'><a href="ApplicationJobFilter.html" title="Google::Cloud::Talent::V4beta1::ApplicationJobFilter (class)">ApplicationJobFilter</a></span> for more details.</li>
+See
+<span class='object_link'><a href="ApplicationJobFilter.html" title="Google::Cloud::Talent::V4beta1::ApplicationJobFilter (class)">ApplicationJobFilter</a></span>
+for more details.</li>
 <li>hirable_status: Hirable status specifies the profile&#39;s hirable status.</li>
 <li>string_custom_attribute: String custom attributes. Values can be accessed
 via square bracket notation like string_custom_attribute[&quot;key1&quot;].</li>
@@ -2392,35 +2414,35 @@ object.</p>
       <pre class="lines">
 
 
-725
-726
-727
-728
-729
-730
-731
-732
-733
-734
-735
-736
-737
-738
-739
-740
-741
-742
-743
-744
-745
-746
 747
 748
 749
-750</pre>
+750
+751
+752
+753
+754
+755
+756
+757
+758
+759
+760
+761
+762
+763
+764
+765
+766
+767
+768
+769
+770
+771
+772</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/profile_service_client.rb', line 725</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/profile_service_client.rb', line 747</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_search_profiles'>search_profiles</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>

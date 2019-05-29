@@ -217,11 +217,12 @@ that implements Cloud Talent Solution.</p>
   <div class="discussion">
     <p>Returns Optional.</p>
 
-<p>The job ID associated with this client event if there is one. Leave it
-empty if the event isn&#39;t associated with a job.</p>
+<p>The <span class='object_link'><a href="Job.html#name-instance_method" title="Google::Cloud::Talent::V4beta1::Job#name (method)">job name(s)</a></span> associated with
+this client event. Leave it empty if the event isn&#39;t associated with a job.</p>
 
-<p>The job ID should be consistent with the
-JobApplication#job#requisition_id in the profile.</p>
+<p>The format is
+&quot;projects/project_id/tenants/tenant_id/jobs/job_id&quot;, for
+example, &quot;projects/api-test-project/tenants/foo/jobs/1234&quot;.</p>
 
 
   </div>
@@ -241,11 +242,12 @@ JobApplication#job#requisition_id in the profile.</p>
         &mdash;
         <div class='inline'><p>Optional.</p>
 
-<p>The job ID associated with this client event if there is one. Leave it
-empty if the event isn&#39;t associated with a job.</p>
+<p>The <span class='object_link'><a href="Job.html#name-instance_method" title="Google::Cloud::Talent::V4beta1::Job#name (method)">job name(s)</a></span> associated with
+this client event. Leave it empty if the event isn&#39;t associated with a job.</p>
 
-<p>The job ID should be consistent with the
-JobApplication#job#requisition_id in the profile.</p>
+<p>The format is
+&quot;projects/project_id/tenants/tenant_id/jobs/job_id&quot;, for
+example, &quot;projects/api-test-project/tenants/foo/jobs/1234&quot;.</p>
 </div>
       
     </li>
@@ -258,25 +260,25 @@ JobApplication#job#requisition_id in the profile.</p>
       <pre class="lines">
 
 
-194
-195
-196
-197
-198
-199
-200
-201
-202
-203
-204
-205
-206
-207
-208
-209</pre>
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/event.rb', line 194</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/event.rb', line 219</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::ProfileEvent (class)">ProfileEvent</a></span></span>
   <span class='comment'># The enum represents types of client events for a candidate profile.
@@ -314,7 +316,12 @@ JobApplication#job#requisition_id in the profile.</p>
   <div class="discussion">
     <p>Returns Required.</p>
 
-<p>The <span class='object_link'><a href="Profile.html#name-instance_method" title="Google::Cloud::Talent::V4beta1::Profile#name (method)">profile name(s)</a></span> associated with this client event.</p>
+<p>The <span class='object_link'><a href="Profile.html#name-instance_method" title="Google::Cloud::Talent::V4beta1::Profile#name (method)">profile name(s)</a></span> associated
+with this client event.</p>
+
+<p>The format is
+&quot;projects/project_id/tenants/tenant_id/profiles/profile_id&quot;,
+for example, &quot;projects/api-test-project/tenants/foo/profiles/bar&quot;.</p>
 
 
   </div>
@@ -334,7 +341,12 @@ JobApplication#job#requisition_id in the profile.</p>
         &mdash;
         <div class='inline'><p>Required.</p>
 
-<p>The <span class='object_link'><a href="Profile.html#name-instance_method" title="Google::Cloud::Talent::V4beta1::Profile#name (method)">profile name(s)</a></span> associated with this client event.</p>
+<p>The <span class='object_link'><a href="Profile.html#name-instance_method" title="Google::Cloud::Talent::V4beta1::Profile#name (method)">profile name(s)</a></span> associated
+with this client event.</p>
+
+<p>The format is
+&quot;projects/project_id/tenants/tenant_id/profiles/profile_id&quot;,
+for example, &quot;projects/api-test-project/tenants/foo/profiles/bar&quot;.</p>
 </div>
       
     </li>
@@ -347,25 +359,25 @@ JobApplication#job#requisition_id in the profile.</p>
       <pre class="lines">
 
 
-194
-195
-196
-197
-198
-199
-200
-201
-202
-203
-204
-205
-206
-207
-208
-209</pre>
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/event.rb', line 194</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/event.rb', line 219</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::ProfileEvent (class)">ProfileEvent</a></span></span>
   <span class='comment'># The enum represents types of client events for a candidate profile.
@@ -436,25 +448,25 @@ JobApplication#job#requisition_id in the profile.</p>
       <pre class="lines">
 
 
-194
-195
-196
-197
-198
-199
-200
-201
-202
-203
-204
-205
-206
-207
-208
-209</pre>
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/event.rb', line 194</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/event.rb', line 219</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::ProfileEvent (class)">ProfileEvent</a></span></span>
   <span class='comment'># The enum represents types of client events for a candidate profile.
