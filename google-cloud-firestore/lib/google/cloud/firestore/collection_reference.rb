@@ -25,7 +25,7 @@ module Google
       ##
       # # CollectionReference
       #
-      # A collection reference object ise used for adding documents, getting
+      # A collection reference object is used for adding documents, getting
       # document references, and querying for documents (See {Query}).
       #
       # @example
