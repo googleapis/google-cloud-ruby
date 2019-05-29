@@ -126,7 +126,7 @@ repeated fields via a nested block.</p>
   <p class="tag_title">See Also:</p>
   <ul class="see">
     
-      <li><a href="https://cloud.google.com/bigquery/preparing-data-for-bigquery" target="_parent" title="Preparing Data for BigQuery">Preparing Data for BigQuery</a></li>
+      <li><a href="https://cloud.google.com/bigquery/docs/loading-data#loading_denormalized_nested_and_repeated_data" target="_parent" title="Loading denormalized, nested, and repeated data">Loading denormalized, nested, and repeated data</a></li>
     
   </ul>
 
@@ -2051,7 +2051,8 @@ characters.</p>
   <div class="discussion">
     <p>Adds a record field to the schema. A block must be passed describing
 the nested fields of the record. For more information about nested
-and repeated records, see <a href="https://cloud.google.com/bigquery/preparing-data-for-bigquery">Preparing Data for BigQuery
+and repeated records, see <a href="https://cloud.google.com/bigquery/docs/loading-data#loading_denormalized_nested_and_repeated_data">Loading denormalized, nested, and repeated
+data
 </a>.</p>
 
 
@@ -2190,7 +2191,6 @@ nested schema</p>
       <pre class="lines">
 
 
-459
 460
 461
 462
@@ -2198,10 +2198,11 @@ nested schema</p>
 464
 465
 466
-467</pre>
+467
+468</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/schema.rb', line 459</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/schema.rb', line 460</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_record'>record</span> <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='label'>description:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>mode:</span> <span class='kw'>nil</span>
   <span class='comment'># TODO: do we need to raise if no block was given?

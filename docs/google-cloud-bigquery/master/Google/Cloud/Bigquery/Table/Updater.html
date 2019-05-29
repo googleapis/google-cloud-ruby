@@ -894,15 +894,15 @@ characters.</p>
       <pre class="lines">
 
 
-2939
 2940
 2941
 2942
 2943
-2944</pre>
+2944
+2945</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/table.rb', line 2939</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/table.rb', line 2940</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_check_for_mutated_schema!'>check_for_mutated_schema!</span>
   <span class='kw'>return</span> <span class='kw'>if</span> <span class='ivar'>@schema</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
@@ -1589,7 +1589,8 @@ characters.</p>
   <div class="discussion">
     <p>Adds a record field to the schema. A block must be passed describing
 the nested fields of the record. For more information about nested
-and repeated records, see <a href="https://cloud.google.com/bigquery/preparing-data-for-bigquery">Preparing Data for BigQuery
+and repeated records, see <a href="https://cloud.google.com/bigquery/docs/loading-data#loading_denormalized_nested_and_repeated_data">Loading denormalized, nested, and
+repeated data
 </a>.</p>
 
 <p>See <span class='object_link'><a href="../Schema.html#record-instance_method" title="Google::Cloud::Bigquery::Schema#record (method)">Schema#record</a></span>.</p>
@@ -1714,12 +1715,12 @@ nested schema</p>
       <pre class="lines">
 
 
-2933
 2934
-2935</pre>
+2935
+2936</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/table.rb', line 2933</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/table.rb', line 2934</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_record'>record</span> <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='label'>description:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>mode:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
   <span class='id identifier rubyid_schema'>schema</span><span class='period'>.</span><span class='id identifier rubyid_record'>record</span> <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='label'>description:</span> <span class='id identifier rubyid_description'>description</span><span class='comma'>,</span> <span class='label'>mode:</span> <span class='id identifier rubyid_mode'>mode</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
@@ -2249,13 +2250,13 @@ characters.</p>
       <pre class="lines">
 
 
-2946
 2947
 2948
-2949</pre>
+2949
+2950</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/table.rb', line 2946</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/table.rb', line 2947</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_to_gapi'>to_gapi</span>
   <span class='id identifier rubyid_check_for_mutated_schema!'>check_for_mutated_schema!</span>
