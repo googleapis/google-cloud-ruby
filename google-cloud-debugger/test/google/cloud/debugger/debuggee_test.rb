@@ -67,6 +67,7 @@ describe Google::Cloud::Debugger::Debuggee, :mock_debugger do
       numeric_id = 1234567890
       path_base = "#{Google::Cloud::Env::METADATA_PATH_BASE}/project"
       metadata_cache = {
+        Google::Cloud::Env::METADATA_ROOT_PATH => true,
         "#{path_base}/project-id" => project,
         "#{path_base}/numeric-project-id" => numeric_id
       }

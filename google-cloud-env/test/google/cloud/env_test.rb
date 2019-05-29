@@ -54,8 +54,11 @@ describe Google::Cloud::Env do
   let(:gce_env) { {} }
   let(:ext_env) { {} }
 
-  def gce_stubs
+  def gce_stubs failure_count: 0
     ::Faraday::Adapter::Test::Stubs.new do |stub|
+      failure_count.times do
+        stub.get("") { |env| raise ::Errno::EHOSTDOWN }
+      end
       stub.get("") { |env| [200, {"Metadata-Flavor" => "Google"}, ""] }
       stub.get("/computeMetadata/v1/project/project-id") { |env|
         [200, {}, project_id]
@@ -81,17 +84,17 @@ describe Google::Cloud::Env do
     end
   end
 
-  let :gce_conn do
+  def gce_conn failure_count: 0
     Faraday::Connection.new do |builder|
-      builder.adapter :test, gce_stubs do |stub|
+      builder.adapter :test, gce_stubs(failure_count: failure_count) do |stub|
         stub.get(//) { |env| [404, {}, "not found"] }
       end
     end
   end
 
-  let :gke_conn do
+  def gke_conn failure_count: 0
     Faraday::Connection.new do |builder|
-      builder.adapter :test, gce_stubs do |stub|
+      builder.adapter :test, gce_stubs(failure_count: failure_count) do |stub|
         stub.get("/computeMetadata/v1/instance/attributes/cluster-name") { |env|
           [200, {}, gke_cluster]
         }
@@ -100,10 +103,10 @@ describe Google::Cloud::Env do
     end
   end
 
-  let :ext_conn do
+  def ext_conn failure_count: 0
     Faraday::Connection.new do |builder|
       builder.adapter :test do |stub|
-        stub.get(//) { |env| [404, {}, "not found"] }
+        stub.get(//) { |env| raise ::Errno::EHOSTDOWN }
       end
     end
   end
@@ -205,7 +208,7 @@ describe Google::Cloud::Env do
   end
 
   it "returns correct values when not running on gcp" do
-    env = ::Google::Cloud::Env.new env: ext_env, connection: ext_conn
+    env = ::Google::Cloud::Env.new env: gce_env, connection: ext_conn
 
     env.app_engine?.must_equal false
     env.kubernetes_engine?.must_equal false
@@ -228,4 +231,17 @@ describe Google::Cloud::Env do
     env.kubernetes_engine_namespace_id.must_be_nil
   end
 
+  it "fails if requests fail and there are not enough retries" do
+    conn = gce_conn failure_count: 2
+    env = ::Google::Cloud::Env.new env: gce_env, retry_count: 1,
+                                   connection: conn
+    env.compute_engine?.must_equal false
+  end
+
+  it "succeeds if requests fail and there are sufficient retries" do
+    conn = gce_conn failure_count: 2
+    env = ::Google::Cloud::Env.new env: gce_env, retry_count: 2,
+                                   connection: conn
+    env.compute_engine?.must_equal true
+  end
 end
