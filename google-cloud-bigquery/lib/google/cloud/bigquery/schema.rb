@@ -26,8 +26,8 @@ module Google
       # {Dataset#create_table} and {Table#schema}. Supports nested and
       # repeated fields via a nested block.
       #
-      # @see https://cloud.google.com/bigquery/preparing-data-for-bigquery
-      #   Preparing Data for BigQuery
+      # @see https://cloud.google.com/bigquery/docs/loading-data#loading_denormalized_nested_and_repeated_data
+      #   Loading denormalized, nested, and repeated data
       #
       # @example
       #   require "google/cloud/bigquery"
@@ -426,8 +426,9 @@ module Google
         ##
         # Adds a record field to the schema. A block must be passed describing
         # the nested fields of the record. For more information about nested
-        # and repeated records, see [Preparing Data for BigQuery
-        # ](https://cloud.google.com/bigquery/preparing-data-for-bigquery).
+        # and repeated records, see [Loading denormalized, nested, and repeated
+        # data
+        # ](https://cloud.google.com/bigquery/docs/loading-data#loading_denormalized_nested_and_repeated_data).
         #
         # @param [String] name The field name. The name must contain only
         #   letters (a-z, A-Z), numbers (0-9), or underscores (_), and must

@@ -22,8 +22,8 @@ module Google
         #
         # The fields of a table schema.
         #
-        # @see https://cloud.google.com/bigquery/preparing-data-for-bigquery
-        #   Preparing Data for BigQuery
+        # @see https://cloud.google.com/bigquery/docs/loading-data#loading_denormalized_nested_and_repeated_data
+        #   Loading denormalized, nested, and repeated data
         #
         # @example
         #   require "google/cloud/bigquery"
@@ -508,7 +508,7 @@ module Google
           # Adds a record field to the nested schema of a record field. A block
           # must be passed describing the nested fields of the record. For more
           # information about nested and repeated records, see [Preparing Data
-          # for BigQuery](https://cloud.google.com/bigquery/preparing-data-for-bigquery).
+          # for BigQuery](https://cloud.google.com/bigquery/docs/loading-data#loading_denormalized_nested_and_repeated_data).
           #
           # This can only be called on fields that are of type `RECORD`.
           #
