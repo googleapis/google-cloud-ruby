@@ -254,6 +254,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   end
   add_enum "google.cloud.talent.v4beta1.SkillProficiencyLevel" do
     value :SKILL_PROFICIENCY_LEVEL_UNSPECIFIED, 0
+    value :UNSKILLED, 6
     value :FUNDAMENTAL_AWARENESS, 1
     value :NOVICE, 2
     value :INTERMEDIATE, 3

@@ -57,23 +57,31 @@ module Google
             rpc :ListJobs, ListJobsRequest, ListJobsResponse
             # Deletes a list of [Job][google.cloud.talent.v4beta1.Job]s by filter.
             rpc :BatchDeleteJobs, BatchDeleteJobsRequest, Google::Protobuf::Empty
-            # Searches for jobs using the provided [SearchJobsRequest][google.cloud.talent.v4beta1.SearchJobsRequest].
+            # Searches for jobs using the provided
+            # [SearchJobsRequest][google.cloud.talent.v4beta1.SearchJobsRequest].
             #
-            # This call constrains the [visibility][google.cloud.talent.v4beta1.Job.visibility] of jobs
-            # present in the database, and only returns jobs that the caller has
-            # permission to search against.
+            # This call constrains the
+            # [visibility][google.cloud.talent.v4beta1.Job.visibility] of jobs present in
+            # the database, and only returns jobs that the caller has permission to
+            # search against.
             rpc :SearchJobs, SearchJobsRequest, SearchJobsResponse
-            # Searches for jobs using the provided [SearchJobsRequest][google.cloud.talent.v4beta1.SearchJobsRequest].
+            # Searches for jobs using the provided
+            # [SearchJobsRequest][google.cloud.talent.v4beta1.SearchJobsRequest].
             #
             # This API call is intended for the use case of targeting passive job
             # seekers (for example, job seekers who have signed up to receive email
             # alerts about potential job opportunities), and has different algorithmic
             # adjustments that are targeted to passive job seekers.
             #
-            # This call constrains the [visibility][google.cloud.talent.v4beta1.Job.visibility] of jobs
-            # present in the database, and only returns jobs the caller has
-            # permission to search against.
+            # This call constrains the
+            # [visibility][google.cloud.talent.v4beta1.Job.visibility] of jobs present in
+            # the database, and only returns jobs the caller has permission to search
+            # against.
             rpc :SearchJobsForAlert, SearchJobsRequest, SearchJobsResponse
+            # Begins executing a batch create jobs operation.
+            rpc :BatchCreateJobs, BatchCreateJobsRequest, Google::Longrunning::Operation
+            # Begins executing a batch update jobs operation.
+            rpc :BatchUpdateJobs, BatchUpdateJobsRequest, Google::Longrunning::Operation
           end
 
           Stub = Service.rpc_stub_class

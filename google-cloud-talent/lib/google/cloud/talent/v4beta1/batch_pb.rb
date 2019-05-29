@@ -9,12 +9,42 @@ require 'google/cloud/talent/v4beta1/job_pb'
 require 'google/protobuf/timestamp_pb'
 require 'google/rpc/status_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
+  add_message "google.cloud.talent.v4beta1.BatchOperationMetadata" do
+    optional :state, :enum, 1, "google.cloud.talent.v4beta1.BatchOperationMetadata.State"
+    optional :state_description, :string, 2
+    optional :success_count, :int32, 3
+    optional :failure_count, :int32, 4
+    optional :total_count, :int32, 5
+    optional :create_time, :message, 6, "google.protobuf.Timestamp"
+    optional :update_time, :message, 7, "google.protobuf.Timestamp"
+    optional :end_time, :message, 8, "google.protobuf.Timestamp"
+  end
+  add_enum "google.cloud.talent.v4beta1.BatchOperationMetadata.State" do
+    value :STATE_UNSPECIFIED, 0
+    value :INITIALIZING, 1
+    value :PROCESSING, 2
+    value :SUCCEEDED, 3
+    value :FAILED, 4
+    value :CANCELLING, 5
+    value :CANCELLED, 6
+  end
+  add_message "google.cloud.talent.v4beta1.JobOperationResult" do
+    repeated :job_results, :message, 1, "google.cloud.talent.v4beta1.JobOperationResult.JobResult"
+  end
+  add_message "google.cloud.talent.v4beta1.JobOperationResult.JobResult" do
+    optional :job, :message, 1, "google.cloud.talent.v4beta1.Job"
+    optional :status, :message, 2, "google.rpc.Status"
+  end
 end
 
 module Google
   module Cloud
     module Talent
       module V4beta1
+        BatchOperationMetadata = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4beta1.BatchOperationMetadata").msgclass
+        BatchOperationMetadata::State = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4beta1.BatchOperationMetadata.State").enummodule
+        JobOperationResult = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4beta1.JobOperationResult").msgclass
+        JobOperationResult::JobResult = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4beta1.JobOperationResult.JobResult").msgclass
       end
     end
   end

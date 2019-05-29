@@ -533,7 +533,9 @@ module Google
           # For example, search by raw queries "software engineer in Mountain View" or
           # search by structured filters (location filter, education filter, etc.).
           #
-          # See {Google::Cloud::Talent::V4beta1::SearchProfilesRequest SearchProfilesRequest} for more information.
+          # See
+          # {Google::Cloud::Talent::V4beta1::SearchProfilesRequest SearchProfilesRequest}
+          # for more information.
           #
           # @param parent [String]
           #   Required.
@@ -553,7 +555,8 @@ module Google
           # @param profile_query [Google::Cloud::Talent::V4beta1::ProfileQuery | Hash]
           #   Optional.
           #
-          #   Search query to execute. See {Google::Cloud::Talent::V4beta1::ProfileQuery ProfileQuery} for more details.
+          #   Search query to execute. See
+          #   {Google::Cloud::Talent::V4beta1::ProfileQuery ProfileQuery} for more details.
           #   A hash of the same form as `Google::Cloud::Talent::V4beta1::ProfileQuery`
           #   can also be provided.
           # @param page_size [Integer]
@@ -566,7 +569,9 @@ module Google
           #   Optional.
           #
           #   An integer that specifies the current offset (that is, starting result) in
-          #   search results. This field is only considered if {Google::Cloud::Talent::V4beta1::SearchProfilesRequest#page_token page_token} is unset.
+          #   search results. This field is only considered if
+          #   {Google::Cloud::Talent::V4beta1::SearchProfilesRequest#page_token page_token}
+          #   is unset.
           #
           #   The maximum allowed value is 5000. Otherwise an error is thrown.
           #
@@ -590,18 +595,28 @@ module Google
           #
           #   * "relevance desc": By descending relevance, as determined by the API
           #     algorithms.
-          #   * "update_date desc": Sort by {Profile#update_date} in descending order
+          #   * "update_time desc": Sort by
+          #     {Google::Cloud::Talent::V4beta1::Profile#update_time Profile#update_time} in
+          #     descending order
           #     (recently updated profiles first).
-          #   * "create_date desc": Sort by {Profile#create_date} in descending order
+          #   * "create_time desc": Sort by
+          #     {Google::Cloud::Talent::V4beta1::Profile#create_time Profile#create_time} in
+          #     descending order
           #     (recently created profiles first).
-          #   * "first_name": Sort by {PersonStrcuturedName#given_name} in ascending
-          #     order.
-          #   * "first_name desc": Sort by {PersonStrcuturedName#given_name} in
-          #     descending order.
-          #   * "last_name": Sort by {PersonStrcuturedName#family_name} in ascending
-          #     order.
-          #   * "last_name desc": Sort by {PersonStrcuturedName#family_name} in
+          #   * "first_name": Sort by
+          #     {Google::Cloud::Talent::V4beta1::PersonName::PersonStructuredName#given_name PersonName::PersonStructuredName#given_name}
+          #     in
           #     ascending order.
+          #   * "first_name desc": Sort by
+          #     {Google::Cloud::Talent::V4beta1::PersonName::PersonStructuredName#given_name PersonName::PersonStructuredName#given_name}
+          #     in descending order.
+          #   * "last_name": Sort by
+          #     {Google::Cloud::Talent::V4beta1::PersonName::PersonStructuredName#family_name PersonName::PersonStructuredName#family_name}
+          #     in
+          #     ascending order.
+          #   * "last_name desc": Sort by
+          #     {Google::Cloud::Talent::V4beta1::PersonName::PersonStructuredName#family_name PersonName::PersonStructuredName#family_name}
+          #     in ascending order.
           # @param case_sensitive_sort [true, false]
           #   Optional.
           #
@@ -612,7 +627,8 @@ module Google
           #   Optional.
           #
           #   A list of expressions specifies histogram requests against matching
-          #   profiles for {Google::Cloud::Talent::V4beta1::SearchProfilesRequest SearchProfilesRequest}.
+          #   profiles for
+          #   {Google::Cloud::Talent::V4beta1::SearchProfilesRequest SearchProfilesRequest}.
           #
           #   The expression syntax looks like a function definition with optional
           #   parameters.
@@ -665,13 +681,19 @@ module Google
           #   * experience_in_months: experience in months. 0 means 0 month to 1 month
           #     (exclusive).
           #   * application_date: The application date specifies application start dates.
-          #     See {Google::Cloud::Talent::V4beta1::ApplicationDateFilter ApplicationDateFilter} for more details.
+          #     See
+          #     {Google::Cloud::Talent::V4beta1::ApplicationDateFilter ApplicationDateFilter}
+          #     for more details.
           #   * application_outcome_notes: The application outcome reason specifies the
           #     reasons behind the outcome of the job application.
-          #     See {Google::Cloud::Talent::V4beta1::ApplicationOutcomeNotesFilter ApplicationOutcomeNotesFilter} for more details.
+          #     See
+          #     {Google::Cloud::Talent::V4beta1::ApplicationOutcomeNotesFilter ApplicationOutcomeNotesFilter}
+          #     for more details.
           #   * application_job_title: The application job title specifies the job
           #     applied for in the application.
-          #     See {Google::Cloud::Talent::V4beta1::ApplicationJobFilter ApplicationJobFilter} for more details.
+          #     See
+          #     {Google::Cloud::Talent::V4beta1::ApplicationJobFilter ApplicationJobFilter}
+          #     for more details.
           #   * hirable_status: Hirable status specifies the profile's hirable status.
           #   * string_custom_attribute: String custom attributes. Values can be accessed
           #     via square bracket notation like string_custom_attribute["key1"].
