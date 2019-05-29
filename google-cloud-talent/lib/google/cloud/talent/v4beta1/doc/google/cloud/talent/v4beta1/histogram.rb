@@ -25,13 +25,18 @@ module Google
         #     An expression specifies a histogram request against matching resources
         #     (for example, jobs, profiles) for searches.
         #
-        #     See {Google::Cloud::Talent::V4beta1::SearchJobsRequest#histogram_queries SearchJobsRequest#histogram_queries} and
-        #     {Google::Cloud::Talent::V4beta1::SearchProfilesRequest#histogram_queries SearchProfilesRequest#histogram_queries} for details about syntax.
+        #     See
+        #     {Google::Cloud::Talent::V4beta1::SearchJobsRequest#histogram_queries SearchJobsRequest#histogram_queries}
+        #     and
+        #     {Google::Cloud::Talent::V4beta1::SearchProfilesRequest#histogram_queries SearchProfilesRequest#histogram_queries}
+        #     for details about syntax.
         class HistogramQuery; end
 
         # Output only.
         #
-        # Histogram result that matches {HistogramSpec} specified in searches.
+        # Histogram result that matches
+        # {Google::Cloud::Talent::V4beta1::HistogramQuery HistogramQuery} specified in
+        # searches.
         # @!attribute [rw] histogram_query
         #   @return [String]
         #     Requested histogram expression.
@@ -41,6 +46,7 @@ module Google
         #     number of matching entries with corresponding value.
         #
         #     The key format is:
+        #
         #     * (for string histogram) string values stored in the field.
         #     * (for named numeric bucket) name specified in `bucket()` function, like
         #       for `bucket(0, MAX, "non-negative")`, the key will be `non-negative`.

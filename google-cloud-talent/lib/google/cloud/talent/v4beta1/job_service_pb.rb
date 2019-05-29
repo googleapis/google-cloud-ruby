@@ -5,6 +5,7 @@
 require 'google/protobuf'
 
 require 'google/api/annotations_pb'
+require 'google/cloud/talent/v4beta1/batch_pb'
 require 'google/cloud/talent/v4beta1/common_pb'
 require 'google/cloud/talent/v4beta1/filters_pb'
 require 'google/cloud/talent/v4beta1/histogram_pb'
@@ -106,6 +107,15 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :job_location, :message, 1, "google.cloud.talent.v4beta1.Location"
     optional :travel_duration, :message, 2, "google.protobuf.Duration"
   end
+  add_message "google.cloud.talent.v4beta1.BatchCreateJobsRequest" do
+    optional :parent, :string, 1
+    repeated :jobs, :message, 2, "google.cloud.talent.v4beta1.Job"
+  end
+  add_message "google.cloud.talent.v4beta1.BatchUpdateJobsRequest" do
+    optional :parent, :string, 1
+    repeated :jobs, :message, 2, "google.cloud.talent.v4beta1.Job"
+    optional :update_mask, :message, 3, "google.protobuf.FieldMask"
+  end
   add_enum "google.cloud.talent.v4beta1.JobView" do
     value :JOB_VIEW_UNSPECIFIED, 0
     value :JOB_VIEW_ID_ONLY, 1
@@ -134,6 +144,8 @@ module Google
         SearchJobsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4beta1.SearchJobsResponse").msgclass
         SearchJobsResponse::MatchingJob = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4beta1.SearchJobsResponse.MatchingJob").msgclass
         SearchJobsResponse::CommuteInfo = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4beta1.SearchJobsResponse.CommuteInfo").msgclass
+        BatchCreateJobsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4beta1.BatchCreateJobsRequest").msgclass
+        BatchUpdateJobsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4beta1.BatchUpdateJobsRequest").msgclass
         JobView = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4beta1.JobView").enummodule
       end
     end
