@@ -1,5 +1,9 @@
 # Release History
 
+### 0.33.1 / 2019-05-29
+
+* Document "v2" product categories
+
 ### 0.33.0 / 2019-05-02
 
 * Add ImageAnnotatorClient#batch_annotate_files
