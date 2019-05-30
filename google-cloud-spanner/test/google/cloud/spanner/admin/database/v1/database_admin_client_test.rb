@@ -129,7 +129,7 @@ describe Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient do
           client = Google::Cloud::Spanner::Admin::Database.new(version: :v1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.list_databases(formatted_parent)
           end
 
@@ -248,7 +248,7 @@ describe Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient do
           client = Google::Cloud::Spanner::Admin::Database.new(version: :v1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.create_database(formatted_parent, create_statement)
           end
 
@@ -322,7 +322,7 @@ describe Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient do
           client = Google::Cloud::Spanner::Admin::Database.new(version: :v1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.get_database(formatted_name)
           end
 
@@ -440,7 +440,7 @@ describe Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient do
           client = Google::Cloud::Spanner::Admin::Database.new(version: :v1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.update_database_ddl(formatted_database, statements)
           end
 
@@ -509,7 +509,7 @@ describe Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient do
           client = Google::Cloud::Spanner::Admin::Database.new(version: :v1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.drop_database(formatted_database)
           end
 
@@ -582,7 +582,7 @@ describe Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient do
           client = Google::Cloud::Spanner::Admin::Database.new(version: :v1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.get_database_ddl(formatted_database)
           end
 
@@ -661,7 +661,7 @@ describe Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient do
           client = Google::Cloud::Spanner::Admin::Database.new(version: :v1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.set_iam_policy(formatted_resource, policy)
           end
 
@@ -736,7 +736,7 @@ describe Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient do
           client = Google::Cloud::Spanner::Admin::Database.new(version: :v1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.get_iam_policy(formatted_resource)
           end
 
@@ -813,7 +813,7 @@ describe Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient do
           client = Google::Cloud::Spanner::Admin::Database.new(version: :v1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.test_iam_permissions(formatted_resource, permissions)
           end
 

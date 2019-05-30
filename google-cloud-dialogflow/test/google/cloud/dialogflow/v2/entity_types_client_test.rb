@@ -129,7 +129,7 @@ describe Google::Cloud::Dialogflow::V2::EntityTypesClient do
           client = Google::Cloud::Dialogflow::EntityTypes.new(version: :v2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2 do
             client.list_entity_types(formatted_parent)
           end
 
@@ -204,7 +204,7 @@ describe Google::Cloud::Dialogflow::V2::EntityTypesClient do
           client = Google::Cloud::Dialogflow::EntityTypes.new(version: :v2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2 do
             client.get_entity_type(formatted_name)
           end
 
@@ -283,7 +283,7 @@ describe Google::Cloud::Dialogflow::V2::EntityTypesClient do
           client = Google::Cloud::Dialogflow::EntityTypes.new(version: :v2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2 do
             client.create_entity_type(formatted_parent, entity_type)
           end
 
@@ -358,7 +358,7 @@ describe Google::Cloud::Dialogflow::V2::EntityTypesClient do
           client = Google::Cloud::Dialogflow::EntityTypes.new(version: :v2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2 do
             client.update_entity_type(entity_type)
           end
 
@@ -427,7 +427,7 @@ describe Google::Cloud::Dialogflow::V2::EntityTypesClient do
           client = Google::Cloud::Dialogflow::EntityTypes.new(version: :v2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2 do
             client.delete_entity_type(formatted_name)
           end
 
@@ -539,7 +539,7 @@ describe Google::Cloud::Dialogflow::V2::EntityTypesClient do
           client = Google::Cloud::Dialogflow::EntityTypes.new(version: :v2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2 do
             client.batch_update_entity_types(formatted_parent)
           end
 
@@ -657,7 +657,7 @@ describe Google::Cloud::Dialogflow::V2::EntityTypesClient do
           client = Google::Cloud::Dialogflow::EntityTypes.new(version: :v2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2 do
             client.batch_delete_entity_types(formatted_parent, entity_type_names)
           end
 
@@ -784,7 +784,7 @@ describe Google::Cloud::Dialogflow::V2::EntityTypesClient do
           client = Google::Cloud::Dialogflow::EntityTypes.new(version: :v2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2 do
             client.batch_create_entities(formatted_parent, entities)
           end
 
@@ -911,7 +911,7 @@ describe Google::Cloud::Dialogflow::V2::EntityTypesClient do
           client = Google::Cloud::Dialogflow::EntityTypes.new(version: :v2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2 do
             client.batch_update_entities(formatted_parent, entities)
           end
 
@@ -1029,7 +1029,7 @@ describe Google::Cloud::Dialogflow::V2::EntityTypesClient do
           client = Google::Cloud::Dialogflow::EntityTypes.new(version: :v2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2 do
             client.batch_delete_entities(formatted_parent, entity_values)
           end
 

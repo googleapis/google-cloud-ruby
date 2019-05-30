@@ -128,7 +128,7 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
           client = Google::Cloud::Tasks.new(version: :v2beta2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2beta2 do
             client.list_queues(formatted_parent)
           end
 
@@ -202,7 +202,7 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
           client = Google::Cloud::Tasks.new(version: :v2beta2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2beta2 do
             client.get_queue(formatted_name)
           end
 
@@ -280,7 +280,7 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
           client = Google::Cloud::Tasks.new(version: :v2beta2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2beta2 do
             client.create_queue(formatted_parent, queue)
           end
 
@@ -354,7 +354,7 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
           client = Google::Cloud::Tasks.new(version: :v2beta2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2beta2 do
             client.update_queue(queue)
           end
 
@@ -423,7 +423,7 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
           client = Google::Cloud::Tasks.new(version: :v2beta2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2beta2 do
             client.delete_queue(formatted_name)
           end
 
@@ -497,7 +497,7 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
           client = Google::Cloud::Tasks.new(version: :v2beta2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2beta2 do
             client.purge_queue(formatted_name)
           end
 
@@ -571,7 +571,7 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
           client = Google::Cloud::Tasks.new(version: :v2beta2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2beta2 do
             client.pause_queue(formatted_name)
           end
 
@@ -645,7 +645,7 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
           client = Google::Cloud::Tasks.new(version: :v2beta2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2beta2 do
             client.resume_queue(formatted_name)
           end
 
@@ -720,7 +720,7 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
           client = Google::Cloud::Tasks.new(version: :v2beta2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2beta2 do
             client.get_iam_policy(formatted_resource)
           end
 
@@ -799,7 +799,7 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
           client = Google::Cloud::Tasks.new(version: :v2beta2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2beta2 do
             client.set_iam_policy(formatted_resource, policy)
           end
 
@@ -876,7 +876,7 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
           client = Google::Cloud::Tasks.new(version: :v2beta2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2beta2 do
             client.test_iam_permissions(formatted_resource, permissions)
           end
 
@@ -948,7 +948,7 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
           client = Google::Cloud::Tasks.new(version: :v2beta2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2beta2 do
             client.list_tasks(formatted_parent)
           end
 
@@ -1022,7 +1022,7 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
           client = Google::Cloud::Tasks.new(version: :v2beta2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2beta2 do
             client.get_task(formatted_name)
           end
 
@@ -1100,7 +1100,7 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
           client = Google::Cloud::Tasks.new(version: :v2beta2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2beta2 do
             client.create_task(formatted_parent, task)
           end
 
@@ -1169,7 +1169,7 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
           client = Google::Cloud::Tasks.new(version: :v2beta2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2beta2 do
             client.delete_task(formatted_name)
           end
 
@@ -1246,7 +1246,7 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
           client = Google::Cloud::Tasks.new(version: :v2beta2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2beta2 do
             client.lease_tasks(formatted_parent, lease_duration)
           end
 
@@ -1319,7 +1319,7 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
           client = Google::Cloud::Tasks.new(version: :v2beta2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2beta2 do
             client.acknowledge_task(formatted_name, schedule_time)
           end
 
@@ -1409,7 +1409,7 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
           client = Google::Cloud::Tasks.new(version: :v2beta2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2beta2 do
             client.renew_lease(
               formatted_name,
               schedule_time,
@@ -1491,7 +1491,7 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
           client = Google::Cloud::Tasks.new(version: :v2beta2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2beta2 do
             client.cancel_lease(formatted_name, schedule_time)
           end
 
@@ -1565,7 +1565,7 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
           client = Google::Cloud::Tasks.new(version: :v2beta2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2beta2 do
             client.run_task(formatted_name)
           end
 

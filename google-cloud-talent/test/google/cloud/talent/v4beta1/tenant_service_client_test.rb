@@ -135,7 +135,7 @@ describe Google::Cloud::Talent::V4beta1::TenantServiceClient do
           client = Google::Cloud::Talent::TenantService.new(version: :v4beta1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v4beta1 do
             client.create_tenant(formatted_parent, tenant)
           end
 
@@ -210,7 +210,7 @@ describe Google::Cloud::Talent::V4beta1::TenantServiceClient do
           client = Google::Cloud::Talent::TenantService.new(version: :v4beta1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v4beta1 do
             client.get_tenant(formatted_name)
           end
 
@@ -285,7 +285,7 @@ describe Google::Cloud::Talent::V4beta1::TenantServiceClient do
           client = Google::Cloud::Talent::TenantService.new(version: :v4beta1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v4beta1 do
             client.update_tenant(tenant)
           end
 
@@ -354,7 +354,7 @@ describe Google::Cloud::Talent::V4beta1::TenantServiceClient do
           client = Google::Cloud::Talent::TenantService.new(version: :v4beta1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v4beta1 do
             client.delete_tenant(formatted_name)
           end
 
@@ -426,7 +426,7 @@ describe Google::Cloud::Talent::V4beta1::TenantServiceClient do
           client = Google::Cloud::Talent::TenantService.new(version: :v4beta1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v4beta1 do
             client.list_tenants(formatted_parent)
           end
 

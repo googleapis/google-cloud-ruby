@@ -133,7 +133,7 @@ describe Google::Cloud::Monitoring::V3::UptimeCheckServiceClient do
           client = Google::Cloud::Monitoring::UptimeCheck.new(version: :v3)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v3 do
             client.list_uptime_check_configs(formatted_parent)
           end
 
@@ -213,7 +213,7 @@ describe Google::Cloud::Monitoring::V3::UptimeCheckServiceClient do
           client = Google::Cloud::Monitoring::UptimeCheck.new(version: :v3)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v3 do
             client.get_uptime_check_config(formatted_name)
           end
 
@@ -297,7 +297,7 @@ describe Google::Cloud::Monitoring::V3::UptimeCheckServiceClient do
           client = Google::Cloud::Monitoring::UptimeCheck.new(version: :v3)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v3 do
             client.create_uptime_check_config(formatted_parent, uptime_check_config)
           end
 
@@ -377,7 +377,7 @@ describe Google::Cloud::Monitoring::V3::UptimeCheckServiceClient do
           client = Google::Cloud::Monitoring::UptimeCheck.new(version: :v3)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v3 do
             client.update_uptime_check_config(uptime_check_config)
           end
 
@@ -446,7 +446,7 @@ describe Google::Cloud::Monitoring::V3::UptimeCheckServiceClient do
           client = Google::Cloud::Monitoring::UptimeCheck.new(version: :v3)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v3 do
             client.delete_uptime_check_config(formatted_name)
           end
 
@@ -508,7 +508,7 @@ describe Google::Cloud::Monitoring::V3::UptimeCheckServiceClient do
           client = Google::Cloud::Monitoring::UptimeCheck.new(version: :v3)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v3 do
             client.list_uptime_check_ips
           end
 

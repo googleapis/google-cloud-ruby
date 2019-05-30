@@ -135,7 +135,7 @@ describe Google::Cloud::Dialogflow::V2::SessionsClient do
           client = Google::Cloud::Dialogflow::Sessions.new(version: :v2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2 do
             client.detect_intent(formatted_session, query_input)
           end
 
@@ -212,7 +212,7 @@ describe Google::Cloud::Dialogflow::V2::SessionsClient do
           client = Google::Cloud::Dialogflow::Sessions.new(version: :v2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2 do
             client.streaming_detect_intent([request])
           end
 

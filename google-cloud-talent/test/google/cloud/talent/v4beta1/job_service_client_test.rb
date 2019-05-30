@@ -159,7 +159,7 @@ describe Google::Cloud::Talent::V4beta1::JobServiceClient do
           client = Google::Cloud::Talent::JobService.new(version: :v4beta1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v4beta1 do
             client.create_job(formatted_parent, job)
           end
 
@@ -257,7 +257,7 @@ describe Google::Cloud::Talent::V4beta1::JobServiceClient do
           client = Google::Cloud::Talent::JobService.new(version: :v4beta1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v4beta1 do
             client.get_job(formatted_name)
           end
 
@@ -355,7 +355,7 @@ describe Google::Cloud::Talent::V4beta1::JobServiceClient do
           client = Google::Cloud::Talent::JobService.new(version: :v4beta1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v4beta1 do
             client.update_job(job)
           end
 
@@ -424,7 +424,7 @@ describe Google::Cloud::Talent::V4beta1::JobServiceClient do
           client = Google::Cloud::Talent::JobService.new(version: :v4beta1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v4beta1 do
             client.delete_job(formatted_name)
           end
 
@@ -500,7 +500,7 @@ describe Google::Cloud::Talent::V4beta1::JobServiceClient do
           client = Google::Cloud::Talent::JobService.new(version: :v4beta1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v4beta1 do
             client.list_jobs(formatted_parent, filter)
           end
 
@@ -573,7 +573,7 @@ describe Google::Cloud::Talent::V4beta1::JobServiceClient do
           client = Google::Cloud::Talent::JobService.new(version: :v4beta1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v4beta1 do
             client.batch_delete_jobs(formatted_parent, filter)
           end
 
@@ -658,7 +658,7 @@ describe Google::Cloud::Talent::V4beta1::JobServiceClient do
           client = Google::Cloud::Talent::JobService.new(version: :v4beta1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v4beta1 do
             client.search_jobs(formatted_parent, request_metadata)
           end
 
@@ -743,7 +743,7 @@ describe Google::Cloud::Talent::V4beta1::JobServiceClient do
           client = Google::Cloud::Talent::JobService.new(version: :v4beta1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v4beta1 do
             client.search_jobs_for_alert(formatted_parent, request_metadata)
           end
 
@@ -870,7 +870,7 @@ describe Google::Cloud::Talent::V4beta1::JobServiceClient do
           client = Google::Cloud::Talent::JobService.new(version: :v4beta1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v4beta1 do
             client.batch_create_jobs(formatted_parent, jobs)
           end
 
@@ -997,7 +997,7 @@ describe Google::Cloud::Talent::V4beta1::JobServiceClient do
           client = Google::Cloud::Talent::JobService.new(version: :v4beta1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v4beta1 do
             client.batch_update_jobs(formatted_parent, jobs)
           end
 

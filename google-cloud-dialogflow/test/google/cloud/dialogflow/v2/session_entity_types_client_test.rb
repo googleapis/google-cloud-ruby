@@ -128,7 +128,7 @@ describe Google::Cloud::Dialogflow::V2::SessionEntityTypesClient do
           client = Google::Cloud::Dialogflow::SessionEntityTypes.new(version: :v2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2 do
             client.list_session_entity_types(formatted_parent)
           end
 
@@ -202,7 +202,7 @@ describe Google::Cloud::Dialogflow::V2::SessionEntityTypesClient do
           client = Google::Cloud::Dialogflow::SessionEntityTypes.new(version: :v2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2 do
             client.get_session_entity_type(formatted_name)
           end
 
@@ -280,7 +280,7 @@ describe Google::Cloud::Dialogflow::V2::SessionEntityTypesClient do
           client = Google::Cloud::Dialogflow::SessionEntityTypes.new(version: :v2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2 do
             client.create_session_entity_type(formatted_parent, session_entity_type)
           end
 
@@ -354,7 +354,7 @@ describe Google::Cloud::Dialogflow::V2::SessionEntityTypesClient do
           client = Google::Cloud::Dialogflow::SessionEntityTypes.new(version: :v2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2 do
             client.update_session_entity_type(session_entity_type)
           end
 
@@ -423,7 +423,7 @@ describe Google::Cloud::Dialogflow::V2::SessionEntityTypesClient do
           client = Google::Cloud::Dialogflow::SessionEntityTypes.new(version: :v2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2 do
             client.delete_session_entity_type(formatted_name)
           end
 

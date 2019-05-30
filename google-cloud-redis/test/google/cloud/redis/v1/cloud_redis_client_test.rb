@@ -129,7 +129,7 @@ describe Google::Cloud::Redis::V1::CloudRedisClient do
           client = Google::Cloud::Redis.new(version: :v1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.list_instances(formatted_parent)
           end
 
@@ -227,7 +227,7 @@ describe Google::Cloud::Redis::V1::CloudRedisClient do
           client = Google::Cloud::Redis.new(version: :v1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.get_instance(formatted_name)
           end
 
@@ -390,7 +390,7 @@ describe Google::Cloud::Redis::V1::CloudRedisClient do
           client = Google::Cloud::Redis.new(version: :v1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.create_instance(
               formatted_parent,
               instance_id,
@@ -552,7 +552,7 @@ describe Google::Cloud::Redis::V1::CloudRedisClient do
           client = Google::Cloud::Redis.new(version: :v1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.update_instance(update_mask, instance)
           end
 
@@ -664,7 +664,7 @@ describe Google::Cloud::Redis::V1::CloudRedisClient do
           client = Google::Cloud::Redis.new(version: :v1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.delete_instance(formatted_name)
           end
 
@@ -807,7 +807,7 @@ describe Google::Cloud::Redis::V1::CloudRedisClient do
           client = Google::Cloud::Redis.new(version: :v1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.failover_instance(formatted_name, data_protection_mode)
           end
 

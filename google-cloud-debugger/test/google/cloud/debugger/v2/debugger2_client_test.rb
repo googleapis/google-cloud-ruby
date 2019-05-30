@@ -145,7 +145,7 @@ describe Google::Cloud::Debugger::V2::Debugger2Client do
           client = Google::Cloud::Debugger::V2::Debugger2.new
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2 do
             client.set_breakpoint(
               debuggee_id,
               breakpoint,
@@ -238,7 +238,7 @@ describe Google::Cloud::Debugger::V2::Debugger2Client do
           client = Google::Cloud::Debugger::V2::Debugger2.new
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2 do
             client.get_breakpoint(
               debuggee_id,
               breakpoint_id,
@@ -327,7 +327,7 @@ describe Google::Cloud::Debugger::V2::Debugger2Client do
           client = Google::Cloud::Debugger::V2::Debugger2.new
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2 do
             client.delete_breakpoint(
               debuggee_id,
               breakpoint_id,
@@ -409,7 +409,7 @@ describe Google::Cloud::Debugger::V2::Debugger2Client do
           client = Google::Cloud::Debugger::V2::Debugger2.new
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2 do
             client.list_breakpoints(debuggee_id, client_version)
           end
 
@@ -486,7 +486,7 @@ describe Google::Cloud::Debugger::V2::Debugger2Client do
           client = Google::Cloud::Debugger::V2::Debugger2.new
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2 do
             client.list_debuggees(project, client_version)
           end
 

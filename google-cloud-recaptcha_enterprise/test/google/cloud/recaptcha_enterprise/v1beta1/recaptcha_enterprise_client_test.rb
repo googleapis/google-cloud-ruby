@@ -135,7 +135,7 @@ describe Google::Cloud::RecaptchaEnterprise::V1beta1::RecaptchaEnterpriseClient 
           client = Google::Cloud::RecaptchaEnterprise.new(version: :v1beta1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1beta1 do
             client.create_assessment(formatted_parent, assessment)
           end
 
@@ -212,7 +212,7 @@ describe Google::Cloud::RecaptchaEnterprise::V1beta1::RecaptchaEnterpriseClient 
           client = Google::Cloud::RecaptchaEnterprise.new(version: :v1beta1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1beta1 do
             client.annotate_assessment(formatted_name, annotation)
           end
 

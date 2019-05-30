@@ -134,7 +134,7 @@ describe Google::Cloud::Kms::V1::KeyManagementServiceClient do
           client = Google::Cloud::Kms.new(version: :v1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.list_key_rings(formatted_parent)
           end
 
@@ -211,7 +211,7 @@ describe Google::Cloud::Kms::V1::KeyManagementServiceClient do
           client = Google::Cloud::Kms.new(version: :v1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.list_crypto_keys(formatted_parent)
           end
 
@@ -288,7 +288,7 @@ describe Google::Cloud::Kms::V1::KeyManagementServiceClient do
           client = Google::Cloud::Kms.new(version: :v1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.list_crypto_key_versions(formatted_parent)
           end
 
@@ -362,7 +362,7 @@ describe Google::Cloud::Kms::V1::KeyManagementServiceClient do
           client = Google::Cloud::Kms.new(version: :v1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.get_key_ring(formatted_name)
           end
 
@@ -436,7 +436,7 @@ describe Google::Cloud::Kms::V1::KeyManagementServiceClient do
           client = Google::Cloud::Kms.new(version: :v1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.get_crypto_key(formatted_name)
           end
 
@@ -510,7 +510,7 @@ describe Google::Cloud::Kms::V1::KeyManagementServiceClient do
           client = Google::Cloud::Kms.new(version: :v1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.get_crypto_key_version(formatted_name)
           end
 
@@ -600,7 +600,7 @@ describe Google::Cloud::Kms::V1::KeyManagementServiceClient do
           client = Google::Cloud::Kms.new(version: :v1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.create_key_ring(
               formatted_parent,
               key_ring_id,
@@ -712,7 +712,7 @@ describe Google::Cloud::Kms::V1::KeyManagementServiceClient do
           client = Google::Cloud::Kms.new(version: :v1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.create_crypto_key(
               formatted_parent,
               crypto_key_id,
@@ -794,7 +794,7 @@ describe Google::Cloud::Kms::V1::KeyManagementServiceClient do
           client = Google::Cloud::Kms.new(version: :v1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.create_crypto_key_version(formatted_parent, crypto_key_version)
           end
 
@@ -872,7 +872,7 @@ describe Google::Cloud::Kms::V1::KeyManagementServiceClient do
           client = Google::Cloud::Kms.new(version: :v1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.update_crypto_key(crypto_key, update_mask)
           end
 
@@ -950,7 +950,7 @@ describe Google::Cloud::Kms::V1::KeyManagementServiceClient do
           client = Google::Cloud::Kms.new(version: :v1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.update_crypto_key_version(crypto_key_version, update_mask)
           end
 
@@ -1029,7 +1029,7 @@ describe Google::Cloud::Kms::V1::KeyManagementServiceClient do
           client = Google::Cloud::Kms.new(version: :v1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.encrypt(formatted_name, plaintext)
           end
 
@@ -1107,7 +1107,7 @@ describe Google::Cloud::Kms::V1::KeyManagementServiceClient do
           client = Google::Cloud::Kms.new(version: :v1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.decrypt(formatted_name, ciphertext)
           end
 
@@ -1185,7 +1185,7 @@ describe Google::Cloud::Kms::V1::KeyManagementServiceClient do
           client = Google::Cloud::Kms.new(version: :v1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.update_crypto_key_primary_version(formatted_name, crypto_key_version_id)
           end
 
@@ -1259,7 +1259,7 @@ describe Google::Cloud::Kms::V1::KeyManagementServiceClient do
           client = Google::Cloud::Kms.new(version: :v1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.destroy_crypto_key_version(formatted_name)
           end
 
@@ -1333,7 +1333,7 @@ describe Google::Cloud::Kms::V1::KeyManagementServiceClient do
           client = Google::Cloud::Kms.new(version: :v1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.restore_crypto_key_version(formatted_name)
           end
 
@@ -1407,7 +1407,7 @@ describe Google::Cloud::Kms::V1::KeyManagementServiceClient do
           client = Google::Cloud::Kms.new(version: :v1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.get_public_key(formatted_name)
           end
 
@@ -1485,7 +1485,7 @@ describe Google::Cloud::Kms::V1::KeyManagementServiceClient do
           client = Google::Cloud::Kms.new(version: :v1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.asymmetric_decrypt(formatted_name, ciphertext)
           end
 
@@ -1563,7 +1563,7 @@ describe Google::Cloud::Kms::V1::KeyManagementServiceClient do
           client = Google::Cloud::Kms.new(version: :v1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.asymmetric_sign(formatted_name, digest)
           end
 
@@ -1642,7 +1642,7 @@ describe Google::Cloud::Kms::V1::KeyManagementServiceClient do
           client = Google::Cloud::Kms.new(version: :v1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.set_iam_policy(formatted_resource, policy)
           end
 
@@ -1717,7 +1717,7 @@ describe Google::Cloud::Kms::V1::KeyManagementServiceClient do
           client = Google::Cloud::Kms.new(version: :v1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.get_iam_policy(formatted_resource)
           end
 
@@ -1794,7 +1794,7 @@ describe Google::Cloud::Kms::V1::KeyManagementServiceClient do
           client = Google::Cloud::Kms.new(version: :v1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.test_iam_permissions(formatted_resource, permissions)
           end
 

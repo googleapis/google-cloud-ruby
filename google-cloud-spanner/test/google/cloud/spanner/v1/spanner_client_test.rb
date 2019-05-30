@@ -130,7 +130,7 @@ describe Google::Cloud::Spanner::V1::SpannerClient do
           client = Google::Cloud::Spanner::V1::SpannerClient.new
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.create_session(formatted_database)
           end
 
@@ -204,7 +204,7 @@ describe Google::Cloud::Spanner::V1::SpannerClient do
           client = Google::Cloud::Spanner::V1::SpannerClient.new
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.get_session(formatted_name)
           end
 
@@ -276,7 +276,7 @@ describe Google::Cloud::Spanner::V1::SpannerClient do
           client = Google::Cloud::Spanner::V1::SpannerClient.new
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.list_sessions(formatted_database)
           end
 
@@ -345,7 +345,7 @@ describe Google::Cloud::Spanner::V1::SpannerClient do
           client = Google::Cloud::Spanner::V1::SpannerClient.new
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.delete_session(formatted_name)
           end
 
@@ -422,7 +422,7 @@ describe Google::Cloud::Spanner::V1::SpannerClient do
           client = Google::Cloud::Spanner::V1::SpannerClient.new
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.execute_sql(formatted_session, sql)
           end
 
@@ -495,7 +495,7 @@ describe Google::Cloud::Spanner::V1::SpannerClient do
           client = Google::Cloud::Spanner::V1::SpannerClient.new
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.execute_streaming_sql(formatted_session, sql)
           end
 
@@ -596,7 +596,7 @@ describe Google::Cloud::Spanner::V1::SpannerClient do
           client = Google::Cloud::Spanner::V1::SpannerClient.new
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.execute_batch_dml(
               formatted_session,
               transaction,
@@ -696,7 +696,7 @@ describe Google::Cloud::Spanner::V1::SpannerClient do
           client = Google::Cloud::Spanner::V1::SpannerClient.new
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.read(
               formatted_session,
               table,
@@ -787,7 +787,7 @@ describe Google::Cloud::Spanner::V1::SpannerClient do
           client = Google::Cloud::Spanner::V1::SpannerClient.new
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.streaming_read(
               formatted_session,
               table,
@@ -870,7 +870,7 @@ describe Google::Cloud::Spanner::V1::SpannerClient do
           client = Google::Cloud::Spanner::V1::SpannerClient.new
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.begin_transaction(formatted_session, options_)
           end
 
@@ -953,7 +953,7 @@ describe Google::Cloud::Spanner::V1::SpannerClient do
           client = Google::Cloud::Spanner::V1::SpannerClient.new
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.commit(formatted_session, mutations)
           end
 
@@ -1026,7 +1026,7 @@ describe Google::Cloud::Spanner::V1::SpannerClient do
           client = Google::Cloud::Spanner::V1::SpannerClient.new
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.rollback(formatted_session, transaction_id)
           end
 
@@ -1103,7 +1103,7 @@ describe Google::Cloud::Spanner::V1::SpannerClient do
           client = Google::Cloud::Spanner::V1::SpannerClient.new
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.partition_query(formatted_session, sql)
           end
 
@@ -1192,7 +1192,7 @@ describe Google::Cloud::Spanner::V1::SpannerClient do
           client = Google::Cloud::Spanner::V1::SpannerClient.new
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.partition_read(
               formatted_session,
               table,
