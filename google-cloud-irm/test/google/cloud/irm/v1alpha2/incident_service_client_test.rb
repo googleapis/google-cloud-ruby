@@ -142,7 +142,7 @@ describe Google::Cloud::Irm::V1alpha2::IncidentServiceClient do
           client = Google::Cloud::Irm.new(version: :v1alpha2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1alpha2 do
             client.create_incident(incident, formatted_parent)
           end
 
@@ -224,7 +224,7 @@ describe Google::Cloud::Irm::V1alpha2::IncidentServiceClient do
           client = Google::Cloud::Irm.new(version: :v1alpha2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1alpha2 do
             client.get_incident(formatted_name)
           end
 
@@ -296,7 +296,7 @@ describe Google::Cloud::Irm::V1alpha2::IncidentServiceClient do
           client = Google::Cloud::Irm.new(version: :v1alpha2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1alpha2 do
             client.search_incidents(formatted_parent)
           end
 
@@ -378,7 +378,7 @@ describe Google::Cloud::Irm::V1alpha2::IncidentServiceClient do
           client = Google::Cloud::Irm.new(version: :v1alpha2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1alpha2 do
             client.update_incident(incident)
           end
 
@@ -450,7 +450,7 @@ describe Google::Cloud::Irm::V1alpha2::IncidentServiceClient do
           client = Google::Cloud::Irm.new(version: :v1alpha2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1alpha2 do
             client.search_similar_incidents(formatted_name)
           end
 
@@ -529,7 +529,7 @@ describe Google::Cloud::Irm::V1alpha2::IncidentServiceClient do
           client = Google::Cloud::Irm.new(version: :v1alpha2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1alpha2 do
             client.create_annotation(formatted_parent, annotation)
           end
 
@@ -601,7 +601,7 @@ describe Google::Cloud::Irm::V1alpha2::IncidentServiceClient do
           client = Google::Cloud::Irm.new(version: :v1alpha2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1alpha2 do
             client.list_annotations(formatted_parent)
           end
 
@@ -680,7 +680,7 @@ describe Google::Cloud::Irm::V1alpha2::IncidentServiceClient do
           client = Google::Cloud::Irm.new(version: :v1alpha2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1alpha2 do
             client.create_tag(formatted_parent, tag)
           end
 
@@ -749,7 +749,7 @@ describe Google::Cloud::Irm::V1alpha2::IncidentServiceClient do
           client = Google::Cloud::Irm.new(version: :v1alpha2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1alpha2 do
             client.delete_tag(formatted_name)
           end
 
@@ -821,7 +821,7 @@ describe Google::Cloud::Irm::V1alpha2::IncidentServiceClient do
           client = Google::Cloud::Irm.new(version: :v1alpha2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1alpha2 do
             client.list_tags(formatted_parent)
           end
 
@@ -911,7 +911,7 @@ describe Google::Cloud::Irm::V1alpha2::IncidentServiceClient do
           client = Google::Cloud::Irm.new(version: :v1alpha2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1alpha2 do
             client.create_signal(formatted_parent, signal)
           end
 
@@ -983,7 +983,7 @@ describe Google::Cloud::Irm::V1alpha2::IncidentServiceClient do
           client = Google::Cloud::Irm.new(version: :v1alpha2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1alpha2 do
             client.search_signals(formatted_parent)
           end
 
@@ -1069,7 +1069,7 @@ describe Google::Cloud::Irm::V1alpha2::IncidentServiceClient do
           client = Google::Cloud::Irm.new(version: :v1alpha2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1alpha2 do
             client.get_signal(formatted_name)
           end
 
@@ -1155,7 +1155,7 @@ describe Google::Cloud::Irm::V1alpha2::IncidentServiceClient do
           client = Google::Cloud::Irm.new(version: :v1alpha2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1alpha2 do
             client.update_signal(signal)
           end
 
@@ -1228,7 +1228,7 @@ describe Google::Cloud::Irm::V1alpha2::IncidentServiceClient do
           client = Google::Cloud::Irm.new(version: :v1alpha2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1alpha2 do
             client.escalate_incident(incident)
           end
 
@@ -1314,7 +1314,7 @@ describe Google::Cloud::Irm::V1alpha2::IncidentServiceClient do
           client = Google::Cloud::Irm.new(version: :v1alpha2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1alpha2 do
             client.create_artifact(formatted_parent, artifact)
           end
 
@@ -1386,7 +1386,7 @@ describe Google::Cloud::Irm::V1alpha2::IncidentServiceClient do
           client = Google::Cloud::Irm.new(version: :v1alpha2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1alpha2 do
             client.list_artifacts(formatted_parent)
           end
 
@@ -1468,7 +1468,7 @@ describe Google::Cloud::Irm::V1alpha2::IncidentServiceClient do
           client = Google::Cloud::Irm.new(version: :v1alpha2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1alpha2 do
             client.update_artifact(artifact)
           end
 
@@ -1537,7 +1537,7 @@ describe Google::Cloud::Irm::V1alpha2::IncidentServiceClient do
           client = Google::Cloud::Irm.new(version: :v1alpha2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1alpha2 do
             client.delete_artifact(formatted_name)
           end
 
@@ -1628,7 +1628,7 @@ describe Google::Cloud::Irm::V1alpha2::IncidentServiceClient do
           client = Google::Cloud::Irm.new(version: :v1alpha2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1alpha2 do
             client.send_shift_handoff(
               formatted_parent,
               recipients,
@@ -1711,7 +1711,7 @@ describe Google::Cloud::Irm::V1alpha2::IncidentServiceClient do
           client = Google::Cloud::Irm.new(version: :v1alpha2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1alpha2 do
             client.create_subscription(formatted_parent, subscription)
           end
 
@@ -1786,7 +1786,7 @@ describe Google::Cloud::Irm::V1alpha2::IncidentServiceClient do
           client = Google::Cloud::Irm.new(version: :v1alpha2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1alpha2 do
             client.update_subscription(subscription)
           end
 
@@ -1858,7 +1858,7 @@ describe Google::Cloud::Irm::V1alpha2::IncidentServiceClient do
           client = Google::Cloud::Irm.new(version: :v1alpha2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1alpha2 do
             client.list_subscriptions(formatted_parent)
           end
 
@@ -1927,7 +1927,7 @@ describe Google::Cloud::Irm::V1alpha2::IncidentServiceClient do
           client = Google::Cloud::Irm.new(version: :v1alpha2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1alpha2 do
             client.delete_subscription(formatted_name)
           end
 
@@ -2006,7 +2006,7 @@ describe Google::Cloud::Irm::V1alpha2::IncidentServiceClient do
           client = Google::Cloud::Irm.new(version: :v1alpha2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1alpha2 do
             client.create_incident_role_assignment(formatted_parent, incident_role_assignment)
           end
 
@@ -2075,7 +2075,7 @@ describe Google::Cloud::Irm::V1alpha2::IncidentServiceClient do
           client = Google::Cloud::Irm.new(version: :v1alpha2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1alpha2 do
             client.delete_incident_role_assignment(formatted_name)
           end
 
@@ -2147,7 +2147,7 @@ describe Google::Cloud::Irm::V1alpha2::IncidentServiceClient do
           client = Google::Cloud::Irm.new(version: :v1alpha2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1alpha2 do
             client.list_incident_role_assignments(formatted_parent)
           end
 
@@ -2226,7 +2226,7 @@ describe Google::Cloud::Irm::V1alpha2::IncidentServiceClient do
           client = Google::Cloud::Irm.new(version: :v1alpha2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1alpha2 do
             client.request_incident_role_handover(formatted_name, new_assignee)
           end
 
@@ -2305,7 +2305,7 @@ describe Google::Cloud::Irm::V1alpha2::IncidentServiceClient do
           client = Google::Cloud::Irm.new(version: :v1alpha2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1alpha2 do
             client.confirm_incident_role_handover(formatted_name, new_assignee)
           end
 
@@ -2384,7 +2384,7 @@ describe Google::Cloud::Irm::V1alpha2::IncidentServiceClient do
           client = Google::Cloud::Irm.new(version: :v1alpha2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1alpha2 do
             client.force_incident_role_handover(formatted_name, new_assignee)
           end
 
@@ -2463,7 +2463,7 @@ describe Google::Cloud::Irm::V1alpha2::IncidentServiceClient do
           client = Google::Cloud::Irm.new(version: :v1alpha2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1alpha2 do
             client.cancel_incident_role_handover(formatted_name, new_assignee)
           end
 

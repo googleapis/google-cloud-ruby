@@ -175,7 +175,7 @@ describe Google::Cloud::Asset::V1beta1::AssetServiceClient do
           client = Google::Cloud::Asset.new(version: :v1beta1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1beta1 do
             client.export_assets(formatted_parent, output_config)
           end
 
@@ -264,7 +264,7 @@ describe Google::Cloud::Asset::V1beta1::AssetServiceClient do
           client = Google::Cloud::Asset.new(version: :v1beta1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1beta1 do
             client.batch_get_assets_history(
               formatted_parent,
               content_type,

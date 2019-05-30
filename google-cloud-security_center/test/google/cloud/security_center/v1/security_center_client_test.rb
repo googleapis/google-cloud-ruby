@@ -141,7 +141,7 @@ describe Google::Cloud::SecurityCenter::V1::SecurityCenterClient do
           client = Google::Cloud::SecurityCenter.new(version: :v1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.create_source(formatted_parent, source)
           end
 
@@ -241,7 +241,7 @@ describe Google::Cloud::SecurityCenter::V1::SecurityCenterClient do
           client = Google::Cloud::SecurityCenter.new(version: :v1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.create_finding(
               formatted_parent,
               finding_id,
@@ -320,7 +320,7 @@ describe Google::Cloud::SecurityCenter::V1::SecurityCenterClient do
           client = Google::Cloud::SecurityCenter.new(version: :v1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.get_iam_policy(formatted_resource)
           end
 
@@ -395,7 +395,7 @@ describe Google::Cloud::SecurityCenter::V1::SecurityCenterClient do
           client = Google::Cloud::SecurityCenter.new(version: :v1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.get_organization_settings(formatted_name)
           end
 
@@ -475,7 +475,7 @@ describe Google::Cloud::SecurityCenter::V1::SecurityCenterClient do
           client = Google::Cloud::SecurityCenter.new(version: :v1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.get_source(formatted_name)
           end
 
@@ -556,7 +556,7 @@ describe Google::Cloud::SecurityCenter::V1::SecurityCenterClient do
           client = Google::Cloud::SecurityCenter.new(version: :v1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.group_assets(formatted_parent, group_by)
           end
 
@@ -637,7 +637,7 @@ describe Google::Cloud::SecurityCenter::V1::SecurityCenterClient do
           client = Google::Cloud::SecurityCenter.new(version: :v1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.group_findings(formatted_parent, group_by)
           end
 
@@ -714,7 +714,7 @@ describe Google::Cloud::SecurityCenter::V1::SecurityCenterClient do
           client = Google::Cloud::SecurityCenter.new(version: :v1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.list_assets(formatted_parent)
           end
 
@@ -791,7 +791,7 @@ describe Google::Cloud::SecurityCenter::V1::SecurityCenterClient do
           client = Google::Cloud::SecurityCenter.new(version: :v1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.list_findings(formatted_parent)
           end
 
@@ -863,7 +863,7 @@ describe Google::Cloud::SecurityCenter::V1::SecurityCenterClient do
           client = Google::Cloud::SecurityCenter.new(version: :v1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.list_sources(formatted_parent)
           end
 
@@ -975,7 +975,7 @@ describe Google::Cloud::SecurityCenter::V1::SecurityCenterClient do
           client = Google::Cloud::SecurityCenter.new(version: :v1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.run_asset_discovery(formatted_parent)
           end
 
@@ -1075,7 +1075,7 @@ describe Google::Cloud::SecurityCenter::V1::SecurityCenterClient do
           client = Google::Cloud::SecurityCenter.new(version: :v1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.set_finding_state(
               formatted_name,
               state,
@@ -1158,7 +1158,7 @@ describe Google::Cloud::SecurityCenter::V1::SecurityCenterClient do
           client = Google::Cloud::SecurityCenter.new(version: :v1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.set_iam_policy(formatted_resource, policy)
           end
 
@@ -1235,7 +1235,7 @@ describe Google::Cloud::SecurityCenter::V1::SecurityCenterClient do
           client = Google::Cloud::SecurityCenter.new(version: :v1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.test_iam_permissions(formatted_resource, permissions)
           end
 
@@ -1319,7 +1319,7 @@ describe Google::Cloud::SecurityCenter::V1::SecurityCenterClient do
           client = Google::Cloud::SecurityCenter.new(version: :v1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.update_finding(finding)
           end
 
@@ -1394,7 +1394,7 @@ describe Google::Cloud::SecurityCenter::V1::SecurityCenterClient do
           client = Google::Cloud::SecurityCenter.new(version: :v1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.update_organization_settings(organization_settings)
           end
 
@@ -1474,7 +1474,7 @@ describe Google::Cloud::SecurityCenter::V1::SecurityCenterClient do
           client = Google::Cloud::SecurityCenter.new(version: :v1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.update_source(source)
           end
 
@@ -1548,7 +1548,7 @@ describe Google::Cloud::SecurityCenter::V1::SecurityCenterClient do
           client = Google::Cloud::SecurityCenter.new(version: :v1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.update_security_marks(security_marks)
           end
 

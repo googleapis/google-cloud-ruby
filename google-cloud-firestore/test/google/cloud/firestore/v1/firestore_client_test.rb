@@ -130,7 +130,7 @@ describe Google::Cloud::Firestore::V1::FirestoreClient do
           client = Google::Cloud::Firestore::V1.new
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.get_document(formatted_name)
           end
 
@@ -206,7 +206,7 @@ describe Google::Cloud::Firestore::V1::FirestoreClient do
           client = Google::Cloud::Firestore::V1.new
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.list_documents(formatted_parent, collection_id)
           end
 
@@ -302,7 +302,7 @@ describe Google::Cloud::Firestore::V1::FirestoreClient do
           client = Google::Cloud::Firestore::V1.new
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.create_document(
               formatted_parent,
               collection_id,
@@ -385,7 +385,7 @@ describe Google::Cloud::Firestore::V1::FirestoreClient do
           client = Google::Cloud::Firestore::V1.new
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.update_document(document, update_mask)
           end
 
@@ -454,7 +454,7 @@ describe Google::Cloud::Firestore::V1::FirestoreClient do
           client = Google::Cloud::Firestore::V1.new
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.delete_document(formatted_name)
           end
 
@@ -527,7 +527,7 @@ describe Google::Cloud::Firestore::V1::FirestoreClient do
           client = Google::Cloud::Firestore::V1.new
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.batch_get_documents(formatted_database, documents)
           end
 
@@ -601,7 +601,7 @@ describe Google::Cloud::Firestore::V1::FirestoreClient do
           client = Google::Cloud::Firestore::V1.new
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.begin_transaction(formatted_database)
           end
 
@@ -684,7 +684,7 @@ describe Google::Cloud::Firestore::V1::FirestoreClient do
           client = Google::Cloud::Firestore::V1.new
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.commit(formatted_database, writes)
           end
 
@@ -757,7 +757,7 @@ describe Google::Cloud::Firestore::V1::FirestoreClient do
           client = Google::Cloud::Firestore::V1.new
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.rollback(formatted_database, transaction)
           end
 
@@ -826,7 +826,7 @@ describe Google::Cloud::Firestore::V1::FirestoreClient do
           client = Google::Cloud::Firestore::V1.new
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.run_query(formatted_parent)
           end
 
@@ -899,7 +899,7 @@ describe Google::Cloud::Firestore::V1::FirestoreClient do
           client = Google::Cloud::Firestore::V1.new
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.write([request])
           end
 
@@ -970,7 +970,7 @@ describe Google::Cloud::Firestore::V1::FirestoreClient do
           client = Google::Cloud::Firestore::V1.new
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.listen([request])
           end
 
@@ -1042,7 +1042,7 @@ describe Google::Cloud::Firestore::V1::FirestoreClient do
           client = Google::Cloud::Firestore::V1.new
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.list_collection_ids(formatted_parent)
           end
 

@@ -133,7 +133,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
           client = Google::Cloud::Container.new(version: :v1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.list_clusters(project_id, zone)
           end
 
@@ -269,7 +269,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
           client = Google::Cloud::Container.new(version: :v1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.get_cluster(
               project_id,
               zone,
@@ -381,7 +381,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
           client = Google::Cloud::Container.new(version: :v1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.create_cluster(
               project_id,
               zone,
@@ -499,7 +499,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
           client = Google::Cloud::Container.new(version: :v1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.update_cluster(
               project_id,
               zone,
@@ -630,7 +630,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
           client = Google::Cloud::Container.new(version: :v1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.update_node_pool(
               project_id,
               zone,
@@ -757,7 +757,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
           client = Google::Cloud::Container.new(version: :v1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.set_node_pool_autoscaling(
               project_id,
               zone,
@@ -877,7 +877,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
           client = Google::Cloud::Container.new(version: :v1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.set_logging_service(
               project_id,
               zone,
@@ -996,7 +996,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
           client = Google::Cloud::Container.new(version: :v1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.set_monitoring_service(
               project_id,
               zone,
@@ -1115,7 +1115,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
           client = Google::Cloud::Container.new(version: :v1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.set_addons_config(
               project_id,
               zone,
@@ -1234,7 +1234,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
           client = Google::Cloud::Container.new(version: :v1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.set_locations(
               project_id,
               zone,
@@ -1353,7 +1353,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
           client = Google::Cloud::Container.new(version: :v1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.update_master(
               project_id,
               zone,
@@ -1478,7 +1478,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
           client = Google::Cloud::Container.new(version: :v1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.set_master_auth(
               project_id,
               zone,
@@ -1592,7 +1592,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
           client = Google::Cloud::Container.new(version: :v1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.delete_cluster(
               project_id,
               zone,
@@ -1673,7 +1673,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
           client = Google::Cloud::Container.new(version: :v1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.list_operations(project_id, zone)
           end
 
@@ -1781,7 +1781,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
           client = Google::Cloud::Container.new(version: :v1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.get_operation(
               project_id,
               zone,
@@ -1870,7 +1870,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
           client = Google::Cloud::Container.new(version: :v1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.cancel_operation(
               project_id,
               zone,
@@ -1953,7 +1953,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
           client = Google::Cloud::Container.new(version: :v1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.get_server_config(project_id, zone)
           end
 
@@ -2042,7 +2042,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
           client = Google::Cloud::Container.new(version: :v1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.list_node_pools(
               project_id,
               zone,
@@ -2152,7 +2152,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
           client = Google::Cloud::Container.new(version: :v1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.get_node_pool(
               project_id,
               zone,
@@ -2271,7 +2271,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
           client = Google::Cloud::Container.new(version: :v1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.create_node_pool(
               project_id,
               zone,
@@ -2390,7 +2390,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
           client = Google::Cloud::Container.new(version: :v1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.delete_node_pool(
               project_id,
               zone,
@@ -2509,7 +2509,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
           client = Google::Cloud::Container.new(version: :v1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.rollback_node_pool_upgrade(
               project_id,
               zone,
@@ -2634,7 +2634,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
           client = Google::Cloud::Container.new(version: :v1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.set_node_pool_management(
               project_id,
               zone,
@@ -2760,7 +2760,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
           client = Google::Cloud::Container.new(version: :v1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.set_labels(
               project_id,
               zone,
@@ -2880,7 +2880,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
           client = Google::Cloud::Container.new(version: :v1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.set_legacy_abac(
               project_id,
               zone,
@@ -2993,7 +2993,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
           client = Google::Cloud::Container.new(version: :v1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.start_ip_rotation(
               project_id,
               zone,
@@ -3105,7 +3105,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
           client = Google::Cloud::Container.new(version: :v1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.complete_ip_rotation(
               project_id,
               zone,
@@ -3229,7 +3229,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
           client = Google::Cloud::Container.new(version: :v1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.set_node_pool_size(
               project_id,
               zone,
@@ -3349,7 +3349,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
           client = Google::Cloud::Container.new(version: :v1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.set_network_policy(
               project_id,
               zone,
@@ -3468,7 +3468,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
           client = Google::Cloud::Container.new(version: :v1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.set_maintenance_policy(
               project_id,
               zone,

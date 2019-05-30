@@ -143,3 +143,11 @@ s.replace(
     'package_version = (.+)',
     'package_version = Google::Cloud::Bigquery::DataTransfer::VERSION'
 )
+
+# Exception tests have to check for both custom errors and retry wrapper errors
+for version in ['v1']:
+    s.replace(
+        f'test/google/cloud/bigquery/data_transfer/{version}/*_client_test.rb',
+        'err = assert_raises Google::Gax::GaxError do',
+        f'err = assert_raises Google::Gax::GaxError, CustomTestError_{version} do'
+    )

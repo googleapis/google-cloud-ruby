@@ -128,7 +128,7 @@ describe Google::Cloud::Scheduler::V1::CloudSchedulerClient do
           client = Google::Cloud::Scheduler.new(version: :v1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.list_jobs(formatted_parent)
           end
 
@@ -210,7 +210,7 @@ describe Google::Cloud::Scheduler::V1::CloudSchedulerClient do
           client = Google::Cloud::Scheduler.new(version: :v1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.get_job(formatted_name)
           end
 
@@ -296,7 +296,7 @@ describe Google::Cloud::Scheduler::V1::CloudSchedulerClient do
           client = Google::Cloud::Scheduler.new(version: :v1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.create_job(formatted_parent, job)
           end
 
@@ -382,7 +382,7 @@ describe Google::Cloud::Scheduler::V1::CloudSchedulerClient do
           client = Google::Cloud::Scheduler.new(version: :v1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.update_job(job, update_mask)
           end
 
@@ -451,7 +451,7 @@ describe Google::Cloud::Scheduler::V1::CloudSchedulerClient do
           client = Google::Cloud::Scheduler.new(version: :v1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.delete_job(formatted_name)
           end
 
@@ -533,7 +533,7 @@ describe Google::Cloud::Scheduler::V1::CloudSchedulerClient do
           client = Google::Cloud::Scheduler.new(version: :v1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.pause_job(formatted_name)
           end
 
@@ -615,7 +615,7 @@ describe Google::Cloud::Scheduler::V1::CloudSchedulerClient do
           client = Google::Cloud::Scheduler.new(version: :v1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.resume_job(formatted_name)
           end
 
@@ -697,7 +697,7 @@ describe Google::Cloud::Scheduler::V1::CloudSchedulerClient do
           client = Google::Cloud::Scheduler.new(version: :v1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.run_job(formatted_name)
           end
 

@@ -129,7 +129,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
           client = Google::Cloud::Dlp.new(version: :v2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2 do
             client.inspect_content(formatted_parent)
           end
 
@@ -204,7 +204,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
           client = Google::Cloud::Dlp.new(version: :v2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2 do
             client.redact_image(formatted_parent)
           end
 
@@ -277,7 +277,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
           client = Google::Cloud::Dlp.new(version: :v2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2 do
             client.deidentify_content(formatted_parent)
           end
 
@@ -350,7 +350,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
           client = Google::Cloud::Dlp.new(version: :v2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2 do
             client.reidentify_content(formatted_parent)
           end
 
@@ -413,7 +413,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
           client = Google::Cloud::Dlp.new(version: :v2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2 do
             client.list_info_types
           end
 
@@ -493,7 +493,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
           client = Google::Cloud::Dlp.new(version: :v2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2 do
             client.create_inspect_template(formatted_parent)
           end
 
@@ -573,7 +573,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
           client = Google::Cloud::Dlp.new(version: :v2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2 do
             client.update_inspect_template(formatted_name)
           end
 
@@ -643,7 +643,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
           client = Google::Cloud::Dlp.new(version: :v2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2 do
             client.get_inspect_template
           end
 
@@ -715,7 +715,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
           client = Google::Cloud::Dlp.new(version: :v2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2 do
             client.list_inspect_templates(formatted_parent)
           end
 
@@ -784,7 +784,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
           client = Google::Cloud::Dlp.new(version: :v2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2 do
             client.delete_inspect_template(formatted_name)
           end
 
@@ -864,7 +864,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
           client = Google::Cloud::Dlp.new(version: :v2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2 do
             client.create_deidentify_template(formatted_parent)
           end
 
@@ -944,7 +944,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
           client = Google::Cloud::Dlp.new(version: :v2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2 do
             client.update_deidentify_template(formatted_name)
           end
 
@@ -1024,7 +1024,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
           client = Google::Cloud::Dlp.new(version: :v2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2 do
             client.get_deidentify_template(formatted_name)
           end
 
@@ -1096,7 +1096,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
           client = Google::Cloud::Dlp.new(version: :v2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2 do
             client.list_deidentify_templates(formatted_parent)
           end
 
@@ -1165,7 +1165,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
           client = Google::Cloud::Dlp.new(version: :v2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2 do
             client.delete_deidentify_template(formatted_name)
           end
 
@@ -1240,7 +1240,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
           client = Google::Cloud::Dlp.new(version: :v2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2 do
             client.create_dlp_job(formatted_parent)
           end
 
@@ -1312,7 +1312,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
           client = Google::Cloud::Dlp.new(version: :v2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2 do
             client.list_dlp_jobs(formatted_parent)
           end
 
@@ -1387,7 +1387,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
           client = Google::Cloud::Dlp.new(version: :v2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2 do
             client.get_dlp_job(formatted_name)
           end
 
@@ -1456,7 +1456,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
           client = Google::Cloud::Dlp.new(version: :v2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2 do
             client.delete_dlp_job(formatted_name)
           end
 
@@ -1525,7 +1525,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
           client = Google::Cloud::Dlp.new(version: :v2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2 do
             client.cancel_dlp_job(formatted_name)
           end
 
@@ -1597,7 +1597,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
           client = Google::Cloud::Dlp.new(version: :v2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2 do
             client.list_job_triggers(formatted_parent)
           end
 
@@ -1677,7 +1677,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
           client = Google::Cloud::Dlp.new(version: :v2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2 do
             client.get_job_trigger(formatted_name)
           end
 
@@ -1746,7 +1746,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
           client = Google::Cloud::Dlp.new(version: :v2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2 do
             client.delete_job_trigger(name)
           end
 
@@ -1826,7 +1826,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
           client = Google::Cloud::Dlp.new(version: :v2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2 do
             client.update_job_trigger(formatted_name)
           end
 
@@ -1906,7 +1906,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
           client = Google::Cloud::Dlp.new(version: :v2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2 do
             client.create_job_trigger(formatted_parent)
           end
 
@@ -1980,7 +1980,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
           client = Google::Cloud::Dlp.new(version: :v2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2 do
             client.create_stored_info_type(formatted_parent)
           end
 
@@ -2054,7 +2054,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
           client = Google::Cloud::Dlp.new(version: :v2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2 do
             client.update_stored_info_type(formatted_name)
           end
 
@@ -2128,7 +2128,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
           client = Google::Cloud::Dlp.new(version: :v2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2 do
             client.get_stored_info_type(formatted_name)
           end
 
@@ -2200,7 +2200,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
           client = Google::Cloud::Dlp.new(version: :v2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2 do
             client.list_stored_info_types(formatted_parent)
           end
 
@@ -2269,7 +2269,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
           client = Google::Cloud::Dlp.new(version: :v2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2 do
             client.delete_stored_info_type(formatted_name)
           end
 

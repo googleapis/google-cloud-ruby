@@ -150,7 +150,7 @@ describe Google::Cloud::Speech::V1::SpeechClient do
           client = Google::Cloud::Speech.new(version: :v1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.recognize(config, audio)
           end
 
@@ -292,7 +292,7 @@ describe Google::Cloud::Speech::V1::SpeechClient do
           client = Google::Cloud::Speech.new(version: :v1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.long_running_recognize(config, audio)
           end
 

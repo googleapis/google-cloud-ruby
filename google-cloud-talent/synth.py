@@ -138,3 +138,11 @@ s.replace(
 
 # Generate the helper methods
 call(f'bundle update && bundle exec rake generate_partials TALENT_SERVICES={",".join(services)}', shell=True)
+
+# Exception tests have to check for both custom errors and retry wrapper errors
+for version in ['v4beta1']:
+    s.replace(
+        f'test/google/cloud/talent/{version}/*_client_test.rb',
+        'err = assert_raises Google::Gax::GaxError do',
+        f'err = assert_raises Google::Gax::GaxError, CustomTestError_{version} do'
+    )

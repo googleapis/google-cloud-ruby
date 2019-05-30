@@ -109,3 +109,11 @@ s.replace(
     'README.md\n',
     'README.md\nAUTHENTICATION.md\nLICENSE\n'
 )
+
+# Exception tests have to check for both custom errors and retry wrapper errors
+for version in ['v3']:
+    s.replace(
+        f'test/google/cloud/monitoring/{version}/*_client_test.rb',
+        'err = assert_raises Google::Gax::GaxError do',
+        f'err = assert_raises Google::Gax::GaxError, CustomTestError_{version} do'
+    )

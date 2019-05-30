@@ -128,7 +128,7 @@ describe Google::Cloud::Dialogflow::V2::ContextsClient do
           client = Google::Cloud::Dialogflow::Contexts.new(version: :v2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2 do
             client.list_contexts(formatted_parent)
           end
 
@@ -203,7 +203,7 @@ describe Google::Cloud::Dialogflow::V2::ContextsClient do
           client = Google::Cloud::Dialogflow::Contexts.new(version: :v2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2 do
             client.get_context(formatted_name)
           end
 
@@ -282,7 +282,7 @@ describe Google::Cloud::Dialogflow::V2::ContextsClient do
           client = Google::Cloud::Dialogflow::Contexts.new(version: :v2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2 do
             client.create_context(formatted_parent, context)
           end
 
@@ -357,7 +357,7 @@ describe Google::Cloud::Dialogflow::V2::ContextsClient do
           client = Google::Cloud::Dialogflow::Contexts.new(version: :v2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2 do
             client.update_context(context)
           end
 
@@ -426,7 +426,7 @@ describe Google::Cloud::Dialogflow::V2::ContextsClient do
           client = Google::Cloud::Dialogflow::Contexts.new(version: :v2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2 do
             client.delete_context(formatted_name)
           end
 
@@ -495,7 +495,7 @@ describe Google::Cloud::Dialogflow::V2::ContextsClient do
           client = Google::Cloud::Dialogflow::Contexts.new(version: :v2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2 do
             client.delete_all_contexts(formatted_parent)
           end
 

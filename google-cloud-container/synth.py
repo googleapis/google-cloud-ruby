@@ -138,3 +138,11 @@ for version in ['v1', 'v1beta1']:
         'Gem.loaded_specs\[.*\]\.version\.version',
         'Google::Cloud::Container::VERSION'
     )
+
+# Exception tests have to check for both custom errors and retry wrapper errors
+for version in ['v1', 'v1beta1']:
+    s.replace(
+        f'test/google/cloud/container/{version}/*_client_test.rb',
+        'err = assert_raises Google::Gax::GaxError do',
+        f'err = assert_raises Google::Gax::GaxError, CustomTestError_{version} do'
+    )

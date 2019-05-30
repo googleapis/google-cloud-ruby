@@ -148,7 +148,7 @@ describe Google::Cloud::Talent::V4beta1::ApplicationServiceClient do
           client = Google::Cloud::Talent::ApplicationService.new(version: :v4beta1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v4beta1 do
             client.create_application(formatted_parent, application)
           end
 
@@ -236,7 +236,7 @@ describe Google::Cloud::Talent::V4beta1::ApplicationServiceClient do
           client = Google::Cloud::Talent::ApplicationService.new(version: :v4beta1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v4beta1 do
             client.get_application(formatted_name)
           end
 
@@ -324,7 +324,7 @@ describe Google::Cloud::Talent::V4beta1::ApplicationServiceClient do
           client = Google::Cloud::Talent::ApplicationService.new(version: :v4beta1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v4beta1 do
             client.update_application(application)
           end
 
@@ -393,7 +393,7 @@ describe Google::Cloud::Talent::V4beta1::ApplicationServiceClient do
           client = Google::Cloud::Talent::ApplicationService.new(version: :v4beta1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v4beta1 do
             client.delete_application(formatted_name)
           end
 
@@ -465,7 +465,7 @@ describe Google::Cloud::Talent::V4beta1::ApplicationServiceClient do
           client = Google::Cloud::Talent::ApplicationService.new(version: :v4beta1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v4beta1 do
             client.list_applications(formatted_parent)
           end
 

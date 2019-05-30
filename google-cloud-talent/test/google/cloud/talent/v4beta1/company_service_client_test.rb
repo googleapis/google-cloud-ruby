@@ -154,7 +154,7 @@ describe Google::Cloud::Talent::V4beta1::CompanyServiceClient do
           client = Google::Cloud::Talent::CompanyService.new(version: :v4beta1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v4beta1 do
             client.create_company(formatted_parent, company)
           end
 
@@ -248,7 +248,7 @@ describe Google::Cloud::Talent::V4beta1::CompanyServiceClient do
           client = Google::Cloud::Talent::CompanyService.new(version: :v4beta1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v4beta1 do
             client.get_company(formatted_name)
           end
 
@@ -342,7 +342,7 @@ describe Google::Cloud::Talent::V4beta1::CompanyServiceClient do
           client = Google::Cloud::Talent::CompanyService.new(version: :v4beta1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v4beta1 do
             client.update_company(company)
           end
 
@@ -411,7 +411,7 @@ describe Google::Cloud::Talent::V4beta1::CompanyServiceClient do
           client = Google::Cloud::Talent::CompanyService.new(version: :v4beta1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v4beta1 do
             client.delete_company(formatted_name)
           end
 
@@ -483,7 +483,7 @@ describe Google::Cloud::Talent::V4beta1::CompanyServiceClient do
           client = Google::Cloud::Talent::CompanyService.new(version: :v4beta1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v4beta1 do
             client.list_companies(formatted_parent)
           end
 

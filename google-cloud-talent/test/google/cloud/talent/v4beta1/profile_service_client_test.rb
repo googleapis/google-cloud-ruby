@@ -128,7 +128,7 @@ describe Google::Cloud::Talent::V4beta1::ProfileServiceClient do
           client = Google::Cloud::Talent::ProfileService.new(version: :v4beta1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v4beta1 do
             client.list_profiles(formatted_parent)
           end
 
@@ -220,7 +220,7 @@ describe Google::Cloud::Talent::V4beta1::ProfileServiceClient do
           client = Google::Cloud::Talent::ProfileService.new(version: :v4beta1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v4beta1 do
             client.create_profile(formatted_parent, profile)
           end
 
@@ -308,7 +308,7 @@ describe Google::Cloud::Talent::V4beta1::ProfileServiceClient do
           client = Google::Cloud::Talent::ProfileService.new(version: :v4beta1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v4beta1 do
             client.get_profile(formatted_name)
           end
 
@@ -396,7 +396,7 @@ describe Google::Cloud::Talent::V4beta1::ProfileServiceClient do
           client = Google::Cloud::Talent::ProfileService.new(version: :v4beta1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v4beta1 do
             client.update_profile(profile)
           end
 
@@ -465,7 +465,7 @@ describe Google::Cloud::Talent::V4beta1::ProfileServiceClient do
           client = Google::Cloud::Talent::ProfileService.new(version: :v4beta1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v4beta1 do
             client.delete_profile(formatted_name)
           end
 
@@ -546,7 +546,7 @@ describe Google::Cloud::Talent::V4beta1::ProfileServiceClient do
           client = Google::Cloud::Talent::ProfileService.new(version: :v4beta1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v4beta1 do
             client.search_profiles(formatted_parent, request_metadata)
           end
 
