@@ -133,7 +133,7 @@ describe Google::Cloud::PhishingProtection::V1beta1::PhishingProtectionClient do
           client = Google::Cloud::PhishingProtection.new(version: :v1beta1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1beta1 do
             client.report_phishing(formatted_parent, uri)
           end
 

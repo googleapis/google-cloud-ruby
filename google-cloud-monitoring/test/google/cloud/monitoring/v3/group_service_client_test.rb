@@ -128,7 +128,7 @@ describe Google::Cloud::Monitoring::V3::GroupServiceClient do
           client = Google::Cloud::Monitoring::Group.new(version: :v3)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v3 do
             client.list_groups(formatted_name)
           end
 
@@ -212,7 +212,7 @@ describe Google::Cloud::Monitoring::V3::GroupServiceClient do
           client = Google::Cloud::Monitoring::Group.new(version: :v3)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v3 do
             client.get_group(formatted_name)
           end
 
@@ -300,7 +300,7 @@ describe Google::Cloud::Monitoring::V3::GroupServiceClient do
           client = Google::Cloud::Monitoring::Group.new(version: :v3)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v3 do
             client.create_group(formatted_name, group)
           end
 
@@ -384,7 +384,7 @@ describe Google::Cloud::Monitoring::V3::GroupServiceClient do
           client = Google::Cloud::Monitoring::Group.new(version: :v3)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v3 do
             client.update_group(group)
           end
 
@@ -453,7 +453,7 @@ describe Google::Cloud::Monitoring::V3::GroupServiceClient do
           client = Google::Cloud::Monitoring::Group.new(version: :v3)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v3 do
             client.delete_group(formatted_name)
           end
 
@@ -530,7 +530,7 @@ describe Google::Cloud::Monitoring::V3::GroupServiceClient do
           client = Google::Cloud::Monitoring::Group.new(version: :v3)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v3 do
             client.list_group_members(formatted_name)
           end
 

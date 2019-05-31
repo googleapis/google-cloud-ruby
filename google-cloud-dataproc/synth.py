@@ -46,6 +46,15 @@ s.copy(v1beta2 / 'lib/google/cloud/dataproc/v1beta2.rb')
 s.copy(v1beta2 / 'acceptance/google/cloud/dataproc/v1beta2')
 s.copy(v1beta2 / 'test/google/cloud/dataproc/v1beta2')
 
+# Use v1beta2 version of dataproc.rb because it includes services not found in
+# v1. Need to change the default version back to v1.
+s.copy(v1beta2 / 'lib/google/cloud/dataproc.rb')
+s.replace(
+    'lib/google/cloud/dataproc.rb',
+    ':v1beta2',
+    ':v1'
+)
+
 # Copy common templates
 templates = gcp.CommonTemplates().ruby_library()
 s.copy(templates)
@@ -100,21 +109,6 @@ s.replace(
     'gem.add_development_dependency "rubocop", "~> 0.64.0"'
 )
 
-s.replace(
-    'lib/google/cloud/dataproc.rb',
-    'WorkflowTemplate\\.new',
-    'WorkflowTemplateService.new'
-)
-
-s.replace(
-    [
-        'lib/google/cloud/dataproc/v*/workflow_template_service_client.rb',
-        'test/google/cloud/dataproc/v*/workflow_template_service_client_test.rb'
-    ],
-    'WorkflowTemplate\\.new\\(version:',
-    'WorkflowTemplateService.new(version:'
-)
-
 # https://github.com/googleapis/gapic-generator/issues/2492
 s.replace(
     [
@@ -123,6 +117,40 @@ s.replace(
     ],
     'module WorkflowTemplate\n',
     'module WorkflowTemplateService\n'
+)
+s.replace(
+    'lib/google/cloud/dataproc.rb',
+    'WorkflowTemplate\\.new',
+    'WorkflowTemplateService.new'
+)
+s.replace(
+    [
+        'lib/google/cloud/dataproc/v*/workflow_template_service_client.rb',
+        'test/google/cloud/dataproc/v*/workflow_template_service_client_test.rb'
+    ],
+    'WorkflowTemplate\\.new\\(version:',
+    'WorkflowTemplateService.new(version:'
+)
+s.replace(
+    [
+        'lib/google/cloud/dataproc.rb',
+        'lib/google/cloud/dataproc/v*.rb'
+    ],
+    'module AutoscalingPolicy\n',
+    'module AutoscalingPolicyService\n'
+)
+s.replace(
+    'lib/google/cloud/dataproc.rb',
+    'AutoscalingPolicy\\.new',
+    'AutoscalingPolicyService.new'
+)
+s.replace(
+    [
+        'lib/google/cloud/dataproc/v*/autoscaling_policy_service_client.rb',
+        'test/google/cloud/dataproc/v*/autoscaling_policy_service_client_test.rb'
+    ],
+    'AutoscalingPolicy\\.new\\(version:',
+    'AutoscalingPolicyService.new(version:'
 )
 
 # https://github.com/googleapis/gapic-generator/issues/2232

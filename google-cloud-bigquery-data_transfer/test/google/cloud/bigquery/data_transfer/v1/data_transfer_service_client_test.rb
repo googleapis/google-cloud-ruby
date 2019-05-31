@@ -154,7 +154,7 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
           client = Google::Cloud::Bigquery::DataTransfer.new(version: :v1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.get_data_source(formatted_name)
           end
 
@@ -226,7 +226,7 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
           client = Google::Cloud::Bigquery::DataTransfer.new(version: :v1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.list_data_sources(formatted_parent)
           end
 
@@ -322,7 +322,7 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
           client = Google::Cloud::Bigquery::DataTransfer.new(version: :v1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.create_transfer_config(formatted_parent, transfer_config)
           end
 
@@ -418,7 +418,7 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
           client = Google::Cloud::Bigquery::DataTransfer.new(version: :v1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.update_transfer_config(transfer_config, update_mask)
           end
 
@@ -487,7 +487,7 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
           client = Google::Cloud::Bigquery::DataTransfer.new(version: :v1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.delete_transfer_config(formatted_name)
           end
 
@@ -579,7 +579,7 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
           client = Google::Cloud::Bigquery::DataTransfer.new(version: :v1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.get_transfer_config(formatted_name)
           end
 
@@ -651,7 +651,7 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
           client = Google::Cloud::Bigquery::DataTransfer.new(version: :v1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.list_transfer_configs(formatted_parent)
           end
 
@@ -740,7 +740,7 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
           client = Google::Cloud::Bigquery::DataTransfer.new(version: :v1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.schedule_transfer_runs(
               formatted_parent,
               start_time,
@@ -828,7 +828,7 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
           client = Google::Cloud::Bigquery::DataTransfer.new(version: :v1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.get_transfer_run(formatted_name)
           end
 
@@ -897,7 +897,7 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
           client = Google::Cloud::Bigquery::DataTransfer.new(version: :v1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.delete_transfer_run(formatted_name)
           end
 
@@ -969,7 +969,7 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
           client = Google::Cloud::Bigquery::DataTransfer.new(version: :v1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.list_transfer_runs(formatted_parent)
           end
 
@@ -1041,7 +1041,7 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
           client = Google::Cloud::Bigquery::DataTransfer.new(version: :v1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.list_transfer_logs(formatted_parent)
           end
 
@@ -1115,7 +1115,7 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
           client = Google::Cloud::Bigquery::DataTransfer.new(version: :v1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.check_valid_creds(formatted_name)
           end
 

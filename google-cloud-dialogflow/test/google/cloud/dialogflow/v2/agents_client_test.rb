@@ -147,7 +147,7 @@ describe Google::Cloud::Dialogflow::V2::AgentsClient do
           client = Google::Cloud::Dialogflow::Agents.new(version: :v2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2 do
             client.get_agent(formatted_parent)
           end
 
@@ -219,7 +219,7 @@ describe Google::Cloud::Dialogflow::V2::AgentsClient do
           client = Google::Cloud::Dialogflow::Agents.new(version: :v2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2 do
             client.search_agents(formatted_parent)
           end
 
@@ -331,7 +331,7 @@ describe Google::Cloud::Dialogflow::V2::AgentsClient do
           client = Google::Cloud::Dialogflow::Agents.new(version: :v2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2 do
             client.train_agent(formatted_parent)
           end
 
@@ -444,7 +444,7 @@ describe Google::Cloud::Dialogflow::V2::AgentsClient do
           client = Google::Cloud::Dialogflow::Agents.new(version: :v2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2 do
             client.export_agent(formatted_parent)
           end
 
@@ -556,7 +556,7 @@ describe Google::Cloud::Dialogflow::V2::AgentsClient do
           client = Google::Cloud::Dialogflow::Agents.new(version: :v2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2 do
             client.import_agent(formatted_parent)
           end
 
@@ -668,7 +668,7 @@ describe Google::Cloud::Dialogflow::V2::AgentsClient do
           client = Google::Cloud::Dialogflow::Agents.new(version: :v2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2 do
             client.restore_agent(formatted_parent)
           end
 

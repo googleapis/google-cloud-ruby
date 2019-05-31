@@ -21,6 +21,7 @@ require "google/cloud/talent/v4beta1/event_service_client"
 require "google/cloud/talent/v4beta1/job_service_client"
 require "google/cloud/talent/v4beta1/profile_service_client"
 require "google/cloud/talent/v4beta1/tenant_service_client"
+require "google/cloud/talent/v4beta1/batch_pb"
 
 module Google
   module Cloud

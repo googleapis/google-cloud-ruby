@@ -145,7 +145,7 @@ describe Google::Cloud::Talent::V4beta1::CompletionClient do
           client = Google::Cloud::Talent::Completion.new(version: :v4beta1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v4beta1 do
             client.complete_query(
               formatted_parent,
               query,

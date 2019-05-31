@@ -140,7 +140,7 @@ describe Google::Cloud::Talent::V4beta1::EventServiceClient do
           client = Google::Cloud::Talent::Event.new(version: :v4beta1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v4beta1 do
             client.create_client_event(formatted_parent, client_event)
           end
 

@@ -5,7 +5,6 @@
 require 'google/protobuf'
 
 require 'google/api/annotations_pb'
-require 'google/api/resource_pb'
 require 'google/cloud/dialogflow/v2/audio_config_pb'
 require 'google/cloud/dialogflow/v2/context_pb'
 require 'google/cloud/dialogflow/v2/intent_pb'

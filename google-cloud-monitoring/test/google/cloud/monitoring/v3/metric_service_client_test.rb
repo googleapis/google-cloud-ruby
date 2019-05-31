@@ -128,7 +128,7 @@ describe Google::Cloud::Monitoring::V3::MetricServiceClient do
           client = Google::Cloud::Monitoring::Metric.new(version: :v3)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v3 do
             client.list_monitored_resource_descriptors(formatted_name)
           end
 
@@ -210,7 +210,7 @@ describe Google::Cloud::Monitoring::V3::MetricServiceClient do
           client = Google::Cloud::Monitoring::Metric.new(version: :v3)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v3 do
             client.get_monitored_resource_descriptor(formatted_name)
           end
 
@@ -282,7 +282,7 @@ describe Google::Cloud::Monitoring::V3::MetricServiceClient do
           client = Google::Cloud::Monitoring::Metric.new(version: :v3)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v3 do
             client.list_metric_descriptors(formatted_name)
           end
 
@@ -366,7 +366,7 @@ describe Google::Cloud::Monitoring::V3::MetricServiceClient do
           client = Google::Cloud::Monitoring::Metric.new(version: :v3)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v3 do
             client.get_metric_descriptor(formatted_name)
           end
 
@@ -454,7 +454,7 @@ describe Google::Cloud::Monitoring::V3::MetricServiceClient do
           client = Google::Cloud::Monitoring::Metric.new(version: :v3)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v3 do
             client.create_metric_descriptor(formatted_name, metric_descriptor)
           end
 
@@ -523,7 +523,7 @@ describe Google::Cloud::Monitoring::V3::MetricServiceClient do
           client = Google::Cloud::Monitoring::Metric.new(version: :v3)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v3 do
             client.delete_metric_descriptor(formatted_name)
           end
 
@@ -612,7 +612,7 @@ describe Google::Cloud::Monitoring::V3::MetricServiceClient do
           client = Google::Cloud::Monitoring::Metric.new(version: :v3)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v3 do
             client.list_time_series(
               formatted_name,
               filter,
@@ -696,7 +696,7 @@ describe Google::Cloud::Monitoring::V3::MetricServiceClient do
           client = Google::Cloud::Monitoring::Metric.new(version: :v3)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v3 do
             client.create_time_series(formatted_name, time_series)
           end
 

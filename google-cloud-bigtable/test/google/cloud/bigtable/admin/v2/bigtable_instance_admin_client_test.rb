@@ -199,7 +199,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
           client = Google::Cloud::Bigtable::Admin::BigtableInstanceAdmin.new(version: :v2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2 do
             client.create_instance(
               formatted_parent,
               instance_id,
@@ -279,7 +279,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
           client = Google::Cloud::Bigtable::Admin::BigtableInstanceAdmin.new(version: :v2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2 do
             client.get_instance(formatted_name)
           end
 
@@ -353,7 +353,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
           client = Google::Cloud::Bigtable::Admin::BigtableInstanceAdmin.new(version: :v2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2 do
             client.list_instances(formatted_parent)
           end
 
@@ -450,7 +450,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
           client = Google::Cloud::Bigtable::Admin::BigtableInstanceAdmin.new(version: :v2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2 do
             client.update_instance(
               formatted_name,
               display_name,
@@ -575,7 +575,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
           client = Google::Cloud::Bigtable::Admin::BigtableInstanceAdmin.new(version: :v2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2 do
             client.partial_update_instance(instance, update_mask)
           end
 
@@ -644,7 +644,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
           client = Google::Cloud::Bigtable::Admin::BigtableInstanceAdmin.new(version: :v2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2 do
             client.delete_instance(formatted_name)
           end
 
@@ -783,7 +783,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
           client = Google::Cloud::Bigtable::Admin::BigtableInstanceAdmin.new(version: :v2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2 do
             client.create_cluster(
               formatted_parent,
               cluster_id,
@@ -867,7 +867,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
           client = Google::Cloud::Bigtable::Admin::BigtableInstanceAdmin.new(version: :v2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2 do
             client.get_cluster(formatted_name)
           end
 
@@ -941,7 +941,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
           client = Google::Cloud::Bigtable::Admin::BigtableInstanceAdmin.new(version: :v2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2 do
             client.list_clusters(formatted_parent)
           end
 
@@ -1066,7 +1066,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
           client = Google::Cloud::Bigtable::Admin::BigtableInstanceAdmin.new(version: :v2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2 do
             client.update_cluster(formatted_name, serve_nodes)
           end
 
@@ -1135,7 +1135,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
           client = Google::Cloud::Bigtable::Admin::BigtableInstanceAdmin.new(version: :v2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2 do
             client.delete_cluster(formatted_name)
           end
 
@@ -1231,7 +1231,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
           client = Google::Cloud::Bigtable::Admin::BigtableInstanceAdmin.new(version: :v2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2 do
             client.create_app_profile(
               formatted_parent,
               app_profile_id,
@@ -1315,7 +1315,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
           client = Google::Cloud::Bigtable::Admin::BigtableInstanceAdmin.new(version: :v2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2 do
             client.get_app_profile(formatted_name)
           end
 
@@ -1387,7 +1387,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
           client = Google::Cloud::Bigtable::Admin::BigtableInstanceAdmin.new(version: :v2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2 do
             client.list_app_profiles(formatted_parent)
           end
 
@@ -1512,7 +1512,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
           client = Google::Cloud::Bigtable::Admin::BigtableInstanceAdmin.new(version: :v2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2 do
             client.update_app_profile(app_profile, update_mask)
           end
 
@@ -1585,7 +1585,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
           client = Google::Cloud::Bigtable::Admin::BigtableInstanceAdmin.new(version: :v2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2 do
             client.delete_app_profile(formatted_name, ignore_warnings)
           end
 
@@ -1660,7 +1660,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
           client = Google::Cloud::Bigtable::Admin::BigtableInstanceAdmin.new(version: :v2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2 do
             client.get_iam_policy(formatted_resource)
           end
 
@@ -1739,7 +1739,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
           client = Google::Cloud::Bigtable::Admin::BigtableInstanceAdmin.new(version: :v2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2 do
             client.set_iam_policy(formatted_resource, policy)
           end
 
@@ -1816,7 +1816,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
           client = Google::Cloud::Bigtable::Admin::BigtableInstanceAdmin.new(version: :v2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2 do
             client.test_iam_permissions(formatted_resource, permissions)
           end
 

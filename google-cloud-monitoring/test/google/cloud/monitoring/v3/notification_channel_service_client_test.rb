@@ -128,7 +128,7 @@ describe Google::Cloud::Monitoring::V3::NotificationChannelServiceClient do
           client = Google::Cloud::Monitoring::NotificationChannel.new(version: :v3)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v3 do
             client.list_notification_channel_descriptors(formatted_name)
           end
 
@@ -210,7 +210,7 @@ describe Google::Cloud::Monitoring::V3::NotificationChannelServiceClient do
           client = Google::Cloud::Monitoring::NotificationChannel.new(version: :v3)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v3 do
             client.get_notification_channel_descriptor(formatted_name)
           end
 
@@ -282,7 +282,7 @@ describe Google::Cloud::Monitoring::V3::NotificationChannelServiceClient do
           client = Google::Cloud::Monitoring::NotificationChannel.new(version: :v3)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v3 do
             client.list_notification_channels(formatted_name)
           end
 
@@ -364,7 +364,7 @@ describe Google::Cloud::Monitoring::V3::NotificationChannelServiceClient do
           client = Google::Cloud::Monitoring::NotificationChannel.new(version: :v3)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v3 do
             client.get_notification_channel(formatted_name)
           end
 
@@ -450,7 +450,7 @@ describe Google::Cloud::Monitoring::V3::NotificationChannelServiceClient do
           client = Google::Cloud::Monitoring::NotificationChannel.new(version: :v3)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v3 do
             client.create_notification_channel(formatted_name, notification_channel)
           end
 
@@ -532,7 +532,7 @@ describe Google::Cloud::Monitoring::V3::NotificationChannelServiceClient do
           client = Google::Cloud::Monitoring::NotificationChannel.new(version: :v3)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v3 do
             client.update_notification_channel(notification_channel)
           end
 
@@ -601,7 +601,7 @@ describe Google::Cloud::Monitoring::V3::NotificationChannelServiceClient do
           client = Google::Cloud::Monitoring::NotificationChannel.new(version: :v3)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v3 do
             client.delete_notification_channel(formatted_name)
           end
 

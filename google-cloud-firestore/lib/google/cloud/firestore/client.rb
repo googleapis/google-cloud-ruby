@@ -140,6 +140,46 @@ module Google
         alias collection col
 
         ##
+        # Creates and returns a new Query that includes all documents in the
+        # database that are contained in a collection or subcollection with the
+        # given collection_id.
+        #
+        # @param [String] collection_id Identifies the collections to query
+        #   over. Every collection or subcollection with this ID as the last
+        #   segment of its path will be included. Cannot contain a slash (`/`).
+        #
+        # @return [Query] The created Query.
+        #
+        # @example
+        #   require "google/cloud/firestore"
+        #
+        #   firestore = Google::Cloud::Firestore.new
+        #
+        #   # Get the cities collection group query
+        #   query = firestore.col_group "cities"
+        #
+        #   query.get do |city|
+        #     puts "#{city.document_id} has #{city[:population]} residents."
+        #   end
+        #
+        def col_group collection_id
+          if collection_id.include? "/"
+            raise ArgumentError, "Invalid collection_id: '#{collection_id}', " \
+              "must not contain '/'."
+          end
+          query = Google::Firestore::V1::StructuredQuery.new(
+            from: [
+              Google::Firestore::V1::StructuredQuery::CollectionSelector.new(
+                collection_id: collection_id, all_descendants: true
+              )
+            ]
+          )
+
+          Query.start query, service.documents_path, self
+        end
+        alias collection_group col_group
+
+        ##
         # Retrieves a document reference.
         #
         # @param [String] document_path A string representing the path of the

@@ -20,6 +20,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.cloud.talent.v4beta1.JobEvent" do
     optional :type, :enum, 1, "google.cloud.talent.v4beta1.JobEvent.JobEventType"
     repeated :jobs, :string, 2
+    optional :profile, :string, 3
   end
   add_enum "google.cloud.talent.v4beta1.JobEvent.JobEventType" do
     value :JOB_EVENT_TYPE_UNSPECIFIED, 0
@@ -38,7 +39,6 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     value :HIRED, 13
     value :SENT_CV, 14
     value :INTERVIEW_GRANTED, 15
-    value :NOT_INTERESTED, 16
   end
   add_message "google.cloud.talent.v4beta1.ProfileEvent" do
     optional :type, :enum, 1, "google.cloud.talent.v4beta1.ProfileEvent.ProfileEventType"

@@ -124,7 +124,7 @@ describe Google::Cloud::Bigtable::V2::BigtableClient do
           client = Google::Cloud::Bigtable::V2.new
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2 do
             client.read_rows(formatted_table_name)
           end
 
@@ -193,7 +193,7 @@ describe Google::Cloud::Bigtable::V2::BigtableClient do
           client = Google::Cloud::Bigtable::V2.new
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2 do
             client.sample_row_keys(formatted_table_name)
           end
 
@@ -288,7 +288,7 @@ describe Google::Cloud::Bigtable::V2::BigtableClient do
           client = Google::Cloud::Bigtable::V2.new
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2 do
             client.mutate_row(
               formatted_table_name,
               row_key,
@@ -369,7 +369,7 @@ describe Google::Cloud::Bigtable::V2::BigtableClient do
           client = Google::Cloud::Bigtable::V2.new
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2 do
             client.mutate_rows(formatted_table_name, entries)
           end
 
@@ -447,7 +447,7 @@ describe Google::Cloud::Bigtable::V2::BigtableClient do
           client = Google::Cloud::Bigtable::V2.new
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2 do
             client.check_and_mutate_row(formatted_table_name, row_key)
           end
 
@@ -542,7 +542,7 @@ describe Google::Cloud::Bigtable::V2::BigtableClient do
           client = Google::Cloud::Bigtable::V2.new
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2 do
             client.read_modify_write_row(
               formatted_table_name,
               row_key,

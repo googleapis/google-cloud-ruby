@@ -20,6 +20,7 @@ require "google/gax"
 require "google/cloud/talent"
 require "google/cloud/talent/v4beta1/job_service_client"
 require "google/cloud/talent/v4beta1/job_service_services_pb"
+require "google/longrunning/operations_pb"
 
 class CustomTestError_v4beta1 < StandardError; end
 
@@ -158,7 +159,7 @@ describe Google::Cloud::Talent::V4beta1::JobServiceClient do
           client = Google::Cloud::Talent::JobService.new(version: :v4beta1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v4beta1 do
             client.create_job(formatted_parent, job)
           end
 
@@ -256,7 +257,7 @@ describe Google::Cloud::Talent::V4beta1::JobServiceClient do
           client = Google::Cloud::Talent::JobService.new(version: :v4beta1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v4beta1 do
             client.get_job(formatted_name)
           end
 
@@ -354,7 +355,7 @@ describe Google::Cloud::Talent::V4beta1::JobServiceClient do
           client = Google::Cloud::Talent::JobService.new(version: :v4beta1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v4beta1 do
             client.update_job(job)
           end
 
@@ -423,7 +424,7 @@ describe Google::Cloud::Talent::V4beta1::JobServiceClient do
           client = Google::Cloud::Talent::JobService.new(version: :v4beta1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v4beta1 do
             client.delete_job(formatted_name)
           end
 
@@ -499,7 +500,7 @@ describe Google::Cloud::Talent::V4beta1::JobServiceClient do
           client = Google::Cloud::Talent::JobService.new(version: :v4beta1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v4beta1 do
             client.list_jobs(formatted_parent, filter)
           end
 
@@ -572,7 +573,7 @@ describe Google::Cloud::Talent::V4beta1::JobServiceClient do
           client = Google::Cloud::Talent::JobService.new(version: :v4beta1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v4beta1 do
             client.batch_delete_jobs(formatted_parent, filter)
           end
 
@@ -657,7 +658,7 @@ describe Google::Cloud::Talent::V4beta1::JobServiceClient do
           client = Google::Cloud::Talent::JobService.new(version: :v4beta1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v4beta1 do
             client.search_jobs(formatted_parent, request_metadata)
           end
 
@@ -742,8 +743,262 @@ describe Google::Cloud::Talent::V4beta1::JobServiceClient do
           client = Google::Cloud::Talent::JobService.new(version: :v4beta1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v4beta1 do
             client.search_jobs_for_alert(formatted_parent, request_metadata)
+          end
+
+          # Verify the GaxError wrapped the custom error that was raised.
+          assert_match(custom_error.message, err.message)
+        end
+      end
+    end
+  end
+
+  describe 'batch_create_jobs' do
+    custom_error = CustomTestError_v4beta1.new "Custom test error for Google::Cloud::Talent::V4beta1::JobServiceClient#batch_create_jobs."
+
+    it 'invokes batch_create_jobs without error' do
+      # Create request parameters
+      formatted_parent = Google::Cloud::Talent::V4beta1::JobServiceClient.tenant_path("[PROJECT]", "[TENANT]")
+      jobs = []
+
+      # Create expected grpc response
+      expected_response = {}
+      expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Talent::V4beta1::JobOperationResult)
+      result = Google::Protobuf::Any.new
+      result.pack(expected_response)
+      operation = Google::Longrunning::Operation.new(
+        name: 'operations/batch_create_jobs_test',
+        done: true,
+        response: result
+      )
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Cloud::Talent::V4beta1::BatchCreateJobsRequest, request)
+        assert_equal(formatted_parent, request.parent)
+        jobs = jobs.map do |req|
+          Google::Gax::to_proto(req, Google::Cloud::Talent::V4beta1::Job)
+        end
+        assert_equal(jobs, request.jobs)
+        OpenStruct.new(execute: operation)
+      end
+      mock_stub = MockGrpcClientStub_v4beta1.new(:batch_create_jobs, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockJobServiceCredentials_v4beta1.new("batch_create_jobs")
+
+      Google::Cloud::Talent::V4beta1::JobService::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Talent::V4beta1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Talent::JobService.new(version: :v4beta1)
+
+          # Call method
+          response = client.batch_create_jobs(formatted_parent, jobs)
+
+          # Verify the response
+          assert_equal(expected_response, response.response)
+        end
+      end
+    end
+
+    it 'invokes batch_create_jobs and returns an operation error.' do
+      # Create request parameters
+      formatted_parent = Google::Cloud::Talent::V4beta1::JobServiceClient.tenant_path("[PROJECT]", "[TENANT]")
+      jobs = []
+
+      # Create expected grpc response
+      operation_error = Google::Rpc::Status.new(
+        message: 'Operation error for Google::Cloud::Talent::V4beta1::JobServiceClient#batch_create_jobs.'
+      )
+      operation = Google::Longrunning::Operation.new(
+        name: 'operations/batch_create_jobs_test',
+        done: true,
+        error: operation_error
+      )
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Cloud::Talent::V4beta1::BatchCreateJobsRequest, request)
+        assert_equal(formatted_parent, request.parent)
+        jobs = jobs.map do |req|
+          Google::Gax::to_proto(req, Google::Cloud::Talent::V4beta1::Job)
+        end
+        assert_equal(jobs, request.jobs)
+        OpenStruct.new(execute: operation)
+      end
+      mock_stub = MockGrpcClientStub_v4beta1.new(:batch_create_jobs, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockJobServiceCredentials_v4beta1.new("batch_create_jobs")
+
+      Google::Cloud::Talent::V4beta1::JobService::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Talent::V4beta1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Talent::JobService.new(version: :v4beta1)
+
+          # Call method
+          response = client.batch_create_jobs(formatted_parent, jobs)
+
+          # Verify the response
+          assert(response.error?)
+          assert_equal(operation_error, response.error)
+        end
+      end
+    end
+
+    it 'invokes batch_create_jobs with error' do
+      # Create request parameters
+      formatted_parent = Google::Cloud::Talent::V4beta1::JobServiceClient.tenant_path("[PROJECT]", "[TENANT]")
+      jobs = []
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Cloud::Talent::V4beta1::BatchCreateJobsRequest, request)
+        assert_equal(formatted_parent, request.parent)
+        jobs = jobs.map do |req|
+          Google::Gax::to_proto(req, Google::Cloud::Talent::V4beta1::Job)
+        end
+        assert_equal(jobs, request.jobs)
+        raise custom_error
+      end
+      mock_stub = MockGrpcClientStub_v4beta1.new(:batch_create_jobs, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockJobServiceCredentials_v4beta1.new("batch_create_jobs")
+
+      Google::Cloud::Talent::V4beta1::JobService::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Talent::V4beta1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Talent::JobService.new(version: :v4beta1)
+
+          # Call method
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v4beta1 do
+            client.batch_create_jobs(formatted_parent, jobs)
+          end
+
+          # Verify the GaxError wrapped the custom error that was raised.
+          assert_match(custom_error.message, err.message)
+        end
+      end
+    end
+  end
+
+  describe 'batch_update_jobs' do
+    custom_error = CustomTestError_v4beta1.new "Custom test error for Google::Cloud::Talent::V4beta1::JobServiceClient#batch_update_jobs."
+
+    it 'invokes batch_update_jobs without error' do
+      # Create request parameters
+      formatted_parent = Google::Cloud::Talent::V4beta1::JobServiceClient.tenant_path("[PROJECT]", "[TENANT]")
+      jobs = []
+
+      # Create expected grpc response
+      expected_response = {}
+      expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Talent::V4beta1::JobOperationResult)
+      result = Google::Protobuf::Any.new
+      result.pack(expected_response)
+      operation = Google::Longrunning::Operation.new(
+        name: 'operations/batch_update_jobs_test',
+        done: true,
+        response: result
+      )
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Cloud::Talent::V4beta1::BatchUpdateJobsRequest, request)
+        assert_equal(formatted_parent, request.parent)
+        jobs = jobs.map do |req|
+          Google::Gax::to_proto(req, Google::Cloud::Talent::V4beta1::Job)
+        end
+        assert_equal(jobs, request.jobs)
+        OpenStruct.new(execute: operation)
+      end
+      mock_stub = MockGrpcClientStub_v4beta1.new(:batch_update_jobs, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockJobServiceCredentials_v4beta1.new("batch_update_jobs")
+
+      Google::Cloud::Talent::V4beta1::JobService::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Talent::V4beta1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Talent::JobService.new(version: :v4beta1)
+
+          # Call method
+          response = client.batch_update_jobs(formatted_parent, jobs)
+
+          # Verify the response
+          assert_equal(expected_response, response.response)
+        end
+      end
+    end
+
+    it 'invokes batch_update_jobs and returns an operation error.' do
+      # Create request parameters
+      formatted_parent = Google::Cloud::Talent::V4beta1::JobServiceClient.tenant_path("[PROJECT]", "[TENANT]")
+      jobs = []
+
+      # Create expected grpc response
+      operation_error = Google::Rpc::Status.new(
+        message: 'Operation error for Google::Cloud::Talent::V4beta1::JobServiceClient#batch_update_jobs.'
+      )
+      operation = Google::Longrunning::Operation.new(
+        name: 'operations/batch_update_jobs_test',
+        done: true,
+        error: operation_error
+      )
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Cloud::Talent::V4beta1::BatchUpdateJobsRequest, request)
+        assert_equal(formatted_parent, request.parent)
+        jobs = jobs.map do |req|
+          Google::Gax::to_proto(req, Google::Cloud::Talent::V4beta1::Job)
+        end
+        assert_equal(jobs, request.jobs)
+        OpenStruct.new(execute: operation)
+      end
+      mock_stub = MockGrpcClientStub_v4beta1.new(:batch_update_jobs, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockJobServiceCredentials_v4beta1.new("batch_update_jobs")
+
+      Google::Cloud::Talent::V4beta1::JobService::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Talent::V4beta1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Talent::JobService.new(version: :v4beta1)
+
+          # Call method
+          response = client.batch_update_jobs(formatted_parent, jobs)
+
+          # Verify the response
+          assert(response.error?)
+          assert_equal(operation_error, response.error)
+        end
+      end
+    end
+
+    it 'invokes batch_update_jobs with error' do
+      # Create request parameters
+      formatted_parent = Google::Cloud::Talent::V4beta1::JobServiceClient.tenant_path("[PROJECT]", "[TENANT]")
+      jobs = []
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Cloud::Talent::V4beta1::BatchUpdateJobsRequest, request)
+        assert_equal(formatted_parent, request.parent)
+        jobs = jobs.map do |req|
+          Google::Gax::to_proto(req, Google::Cloud::Talent::V4beta1::Job)
+        end
+        assert_equal(jobs, request.jobs)
+        raise custom_error
+      end
+      mock_stub = MockGrpcClientStub_v4beta1.new(:batch_update_jobs, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockJobServiceCredentials_v4beta1.new("batch_update_jobs")
+
+      Google::Cloud::Talent::V4beta1::JobService::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Talent::V4beta1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Talent::JobService.new(version: :v4beta1)
+
+          # Call method
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v4beta1 do
+            client.batch_update_jobs(formatted_parent, jobs)
           end
 
           # Verify the GaxError wrapped the custom error that was raised.

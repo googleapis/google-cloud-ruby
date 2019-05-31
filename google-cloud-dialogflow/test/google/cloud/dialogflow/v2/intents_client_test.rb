@@ -129,7 +129,7 @@ describe Google::Cloud::Dialogflow::V2::IntentsClient do
           client = Google::Cloud::Dialogflow::Intents.new(version: :v2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2 do
             client.list_intents(formatted_parent)
           end
 
@@ -221,7 +221,7 @@ describe Google::Cloud::Dialogflow::V2::IntentsClient do
           client = Google::Cloud::Dialogflow::Intents.new(version: :v2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2 do
             client.get_intent(formatted_name)
           end
 
@@ -317,7 +317,7 @@ describe Google::Cloud::Dialogflow::V2::IntentsClient do
           client = Google::Cloud::Dialogflow::Intents.new(version: :v2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2 do
             client.create_intent(formatted_parent, intent)
           end
 
@@ -413,7 +413,7 @@ describe Google::Cloud::Dialogflow::V2::IntentsClient do
           client = Google::Cloud::Dialogflow::Intents.new(version: :v2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2 do
             client.update_intent(intent, language_code)
           end
 
@@ -482,7 +482,7 @@ describe Google::Cloud::Dialogflow::V2::IntentsClient do
           client = Google::Cloud::Dialogflow::Intents.new(version: :v2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2 do
             client.delete_intent(formatted_name)
           end
 
@@ -600,7 +600,7 @@ describe Google::Cloud::Dialogflow::V2::IntentsClient do
           client = Google::Cloud::Dialogflow::Intents.new(version: :v2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2 do
             client.batch_update_intents(formatted_parent, language_code)
           end
 
@@ -727,7 +727,7 @@ describe Google::Cloud::Dialogflow::V2::IntentsClient do
           client = Google::Cloud::Dialogflow::Intents.new(version: :v2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2 do
             client.batch_delete_intents(formatted_parent, intents)
           end
 

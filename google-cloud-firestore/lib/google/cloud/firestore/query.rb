@@ -63,7 +63,7 @@ module Google
         attr_accessor :parent_path
 
         ##
-        # @private The Google::Firestore::V1::Query object.
+        # @private The Google::Firestore::V1::StructuredQuery object.
         attr_accessor :query
 
         ##

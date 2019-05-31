@@ -113,3 +113,11 @@ s.replace(
     'Gem.loaded_specs\[.*\]\.version\.version',
     'Google::Cloud::Debugger::VERSION'
 )
+
+# Exception tests have to check for both custom errors and retry wrapper errors
+for version in ['v2']:
+    s.replace(
+        f'test/google/cloud/debugger/{version}/*_client_test.rb',
+        'err = assert_raises Google::Gax::GaxError do',
+        f'err = assert_raises Google::Gax::GaxError, CustomTestError_{version} do'
+    )

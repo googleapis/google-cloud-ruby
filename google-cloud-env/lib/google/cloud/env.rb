@@ -65,6 +65,15 @@ module Google
       # @private URL path for metadata server root.
       METADATA_ROOT_PATH = "/".freeze
 
+      # @private
+      METADATA_FAILURE_EXCEPTIONS = [
+        Faraday::TimeoutError,
+        Faraday::ConnectionFailed,
+        Errno::EHOSTDOWN,
+        Errno::ETIMEDOUT,
+        Timeout::Error
+      ].freeze
+
       ##
       # Create a new instance of the environment information.
       # Most client should not need to call this directly. Obtain a singleton
@@ -72,15 +81,36 @@ module Google
       # is provided for internal testing and allows mocking of the data.
       #
       # @param [Hash] env Mock environment variables.
+      # @param [Hash,false] metadata_cache The metadata cache. You may pass
+      #     a prepopuated cache, an empty cache (the default) or `false` to
+      #     disable the cache completely.
+      # @param [Numeric] request_timeout Timeout for each http request.
+      #     Defaults to 0.1.
+      # @param [Integer] retry_count Number of times to retry http requests.
+      #     Defaults to 1. Note that retry remains in effect even if a custom
+      #     `connection` is provided.
+      # @param [Numeric] retry_interval Time between retries in seconds.
+      #     Defaults to 0.1.
+      # @param [Numeric] retry_backoff_factor Multiplier applied to the retry
+      #     interval on each retry. Defaults to 1.5.
+      # @param [Numeric] retry_max_interval Maximum time between retries in
+      #     seconds. Defaults to 0.5.
       # @param [Faraday::Connection] connection Faraday connection to use.
-      # @param [Hash] metadata_cache Mock cache.
+      #     If specified, overrides the `request_timeout` setting.
       #
-      def initialize env: nil, connection: nil, metadata_cache: nil
+      def initialize env: nil, connection: nil, metadata_cache: nil,
+                     request_timeout: 0.1, retry_count: 2, retry_interval: 0.1,
+                     retry_backoff_factor: 1.5, retry_max_interval: 0.5
+        @disable_metadata_cache = metadata_cache == false
         @metadata_cache = metadata_cache || {}
         @env = env || ::ENV
+        @retry_count = retry_count
+        @retry_interval = retry_interval
+        @retry_backoff_factor = retry_backoff_factor
+        @retry_max_interval = retry_max_interval
         @connection = connection ||
                       ::Faraday.new(url: METADATA_HOST,
-                                    request: { timeout: 0.1 })
+                                    request: { timeout: request_timeout })
       end
 
       ##
@@ -318,17 +348,14 @@ module Google
       # @return [Boolean]
       #
       def metadata?
-        unless metadata_cache.include? METADATA_ROOT_PATH
-          begin
-            resp = connection.get METADATA_ROOT_PATH
-            metadata_cache[METADATA_ROOT_PATH] = \
-              resp.status == 200 && resp.headers["Metadata-Flavor"] == "Google"
-          rescue ::Faraday::TimeoutError, ::Faraday::ConnectionFailed,
-                 Errno::EHOSTDOWN
-            metadata_cache[METADATA_ROOT_PATH] = false
+        path = METADATA_ROOT_PATH
+        if @disable_metadata_cache || !metadata_cache.include?(path)
+          metadata_cache[path] = retry_or_fail_with false do
+            resp = connection.get path
+            resp.status == 200 && resp.headers["Metadata-Flavor"] == "Google"
           end
         end
-        metadata_cache[METADATA_ROOT_PATH]
+        metadata_cache[path]
       end
 
       ##
@@ -342,16 +369,15 @@ module Google
       # @return [String,nil]
       #
       def lookup_metadata type, entry
+        return nil unless metadata?
+
         path = "#{METADATA_PATH_BASE}/#{type}/#{entry}"
-        if !metadata_cache.include?(path) && metadata?
-          begin
+        if @disable_metadata_cache || !metadata_cache.include?(path)
+          metadata_cache[path] = retry_or_fail_with nil do
             resp = connection.get path do |req|
               req.headers = { "Metadata-Flavor" => "Google" }
             end
-            metadata_cache[path] = resp.status == 200 ? resp.body.strip : nil
-          rescue ::Faraday::TimeoutError, ::Faraday::ConnectionFailed,
-                 Errno::EHOSTDOWN
-            metadata_cache[path] = nil
+            resp.status == 200 ? resp.body.strip : nil
           end
         end
         metadata_cache[path]
@@ -371,6 +397,25 @@ module Google
       attr_reader :connection
       attr_reader :env
       attr_reader :metadata_cache
+
+      def retry_or_fail_with error_result
+        retries_remaining = @retry_count
+        retry_interval = @retry_interval
+        begin
+          yield
+        rescue *METADATA_FAILURE_EXCEPTIONS
+          retries_remaining -= 1
+          if retries_remaining >= 0
+            sleep retry_interval
+            retry_interval *= @retry_backoff_factor
+            if retry_interval > @retry_max_interval
+              retry_interval = @retry_max_interval
+            end
+            retry
+          end
+          error_result
+        end
+      end
     end
 
     @env = Env.new

@@ -179,3 +179,11 @@ for version in ['v1', 'v1p3beta1']:
 
 # Generate the helper methods
 call('bundle update && bundle exec rake generate_partials', shell=True)
+
+# Exception tests have to check for both custom errors and retry wrapper errors
+for version in ['v1', 'v1p3beta1']:
+    s.replace(
+        f'test/google/cloud/vision/{version}/*_client_test.rb',
+        'err = assert_raises Google::Gax::GaxError do',
+        f'err = assert_raises Google::Gax::GaxError, CustomTestError_{version} do'
+    )

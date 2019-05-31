@@ -839,8 +839,9 @@ module Google
           ##
           # Adds a record field to the schema. A block must be passed describing
           # the nested fields of the record. For more information about nested
-          # and repeated records, see [Preparing Data for BigQuery
-          # ](https://cloud.google.com/bigquery/preparing-data-for-bigquery).
+          # and repeated records, see [Loading denormalized, nested, and
+          # repeated data
+          # ](https://cloud.google.com/bigquery/docs/loading-data#loading_denormalized_nested_and_repeated_data).
           #
           # See {Schema#record}.
           #

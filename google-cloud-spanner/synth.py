@@ -195,3 +195,21 @@ s.replace(
     'Gem.loaded_specs\[.*\]\.version\.version',
     'Google::Cloud::Spanner::VERSION'
 )
+
+# Exception tests have to check for both custom errors and retry wrapper errors
+for version in ['v1']:
+    s.replace(
+        f'test/google/cloud/spanner/{version}/*_client_test.rb',
+        'err = assert_raises Google::Gax::GaxError do',
+        f'err = assert_raises Google::Gax::GaxError, CustomTestError_{version} do'
+    )
+    s.replace(
+        f'test/google/cloud/spanner/admin/database/{version}/*_client_test.rb',
+        'err = assert_raises Google::Gax::GaxError do',
+        f'err = assert_raises Google::Gax::GaxError, CustomTestError_{version} do'
+    )
+    s.replace(
+        f'test/google/cloud/spanner/admin/instance/{version}/*_client_test.rb',
+        'err = assert_raises Google::Gax::GaxError do',
+        f'err = assert_raises Google::Gax::GaxError, CustomTestError_{version} do'
+    )

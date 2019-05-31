@@ -129,3 +129,11 @@ s.replace(
     'Gem.loaded_specs\[.*\]\.version\.version',
     'Google::Cloud::Dialogflow::VERSION'
 )
+
+# Exception tests have to check for both custom errors and retry wrapper errors
+for version in ['v2']:
+    s.replace(
+        f'test/google/cloud/dialogflow/{version}/*_client_test.rb',
+        'err = assert_raises Google::Gax::GaxError do',
+        f'err = assert_raises Google::Gax::GaxError, CustomTestError_{version} do'
+    )

@@ -136,7 +136,7 @@ describe Google::Cloud::Vision::V1p3beta1::ImageAnnotatorClient do
           client = Google::Cloud::Vision::ImageAnnotator.new(version: :v1p3beta1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1p3beta1 do
             client.batch_annotate_images(requests)
           end
 
@@ -257,7 +257,7 @@ describe Google::Cloud::Vision::V1p3beta1::ImageAnnotatorClient do
           client = Google::Cloud::Vision::ImageAnnotator.new(version: :v1p3beta1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1p3beta1 do
             client.async_batch_annotate_files(requests)
           end
 

@@ -171,6 +171,9 @@ module Google
         #   optional. Label keys must start with a letter and each label in the
         #   list must have a different key. See [Creating and Managing
         #   Labels](https://cloud.google.com/pubsub/docs/labels).
+        # @param [String] kms_key The Cloud KMS encryption key that will be used
+        #   to protect access to messages published on this topic. Optional.
+        #   For example: `projects/a/locations/b/keyRings/c/cryptoKeys/d`
         # @param [Hash] async A hash of values to configure the topic's
         #   {AsyncPublisher} that is created when {Topic#publish_async}
         #   is called. Optional.
@@ -199,9 +202,11 @@ module Google
         #   pubsub = Google::Cloud::PubSub.new
         #   topic = pubsub.create_topic "my-topic"
         #
-        def create_topic topic_name, labels: nil, async: nil
+        def create_topic topic_name, labels: nil, kms_key: nil, async: nil
           ensure_service!
-          grpc = service.create_topic topic_name, labels: labels
+          grpc = service.create_topic topic_name,
+                                      labels:       labels,
+                                      kms_key_name: kms_key
           Topic.from_grpc grpc, service, async: async
         end
         alias new_topic create_topic

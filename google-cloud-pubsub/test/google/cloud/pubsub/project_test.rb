@@ -52,6 +52,7 @@ describe Google::Cloud::PubSub::Project, :mock_pubsub do
     paged_enum_struct response
   end
   let(:labels) { { "foo" => "bar" } }
+  let(:kms_key) { "projects/a/locations/b/keyRings/c/cryptoKeys/d" }
 
   it "knows the project identifier" do
     pubsub.project.must_equal project
@@ -62,7 +63,7 @@ describe Google::Cloud::PubSub::Project, :mock_pubsub do
 
     create_res = Google::Cloud::PubSub::V1::Topic.new topic_hash(new_topic_name)
     mock = Minitest::Mock.new
-    mock.expect :create_topic, create_res, [topic_path(new_topic_name), labels: nil, options: default_options]
+    mock.expect :create_topic, create_res, [topic_path(new_topic_name), labels: nil, kms_key_name: nil, options: default_options]
     pubsub.service.mocked_publisher = mock
 
     topic = pubsub.create_topic new_topic_name
@@ -70,6 +71,9 @@ describe Google::Cloud::PubSub::Project, :mock_pubsub do
     mock.verify
 
     topic.name.must_equal topic_path(new_topic_name)
+    topic.labels.must_be :empty?
+    topic.labels.must_be :frozen?
+    topic.kms_key.must_be :empty?
   end
 
   it "creates a topic with new_topic_alias" do
@@ -77,7 +81,7 @@ describe Google::Cloud::PubSub::Project, :mock_pubsub do
 
     create_res = Google::Cloud::PubSub::V1::Topic.new topic_hash(new_topic_name)
     mock = Minitest::Mock.new
-    mock.expect :create_topic, create_res, [topic_path(new_topic_name), labels: nil, options: default_options]
+    mock.expect :create_topic, create_res, [topic_path(new_topic_name), labels: nil, kms_key_name: nil, options: default_options]
     pubsub.service.mocked_publisher = mock
 
     topic = pubsub.new_topic new_topic_name
@@ -85,6 +89,9 @@ describe Google::Cloud::PubSub::Project, :mock_pubsub do
     mock.verify
 
     topic.name.must_equal topic_path(new_topic_name)
+    topic.labels.must_be :empty?
+    topic.labels.must_be :frozen?
+    topic.kms_key.must_be :empty?
   end
 
   it "creates a topic with labels" do
@@ -92,7 +99,7 @@ describe Google::Cloud::PubSub::Project, :mock_pubsub do
 
     create_res = Google::Cloud::PubSub::V1::Topic.new topic_hash(new_topic_name, labels: labels)
     mock = Minitest::Mock.new
-    mock.expect :create_topic, create_res, [topic_path(new_topic_name), labels: labels, options: default_options]
+    mock.expect :create_topic, create_res, [topic_path(new_topic_name), labels: labels, kms_key_name: nil, options: default_options]
     pubsub.service.mocked_publisher = mock
 
     topic = pubsub.create_topic new_topic_name, labels: labels
@@ -102,6 +109,25 @@ describe Google::Cloud::PubSub::Project, :mock_pubsub do
     topic.name.must_equal topic_path(new_topic_name)
     topic.labels.must_equal labels
     topic.labels.must_be :frozen?
+    topic.kms_key.must_be :empty?
+  end
+
+  it "creates a topic with kms_key" do
+    new_topic_name = "new-topic-#{Time.now.to_i}"
+
+    create_res = Google::Cloud::PubSub::V1::Topic.new topic_hash(new_topic_name, kms_key_name: kms_key)
+    mock = Minitest::Mock.new
+    mock.expect :create_topic, create_res, [topic_path(new_topic_name), labels: nil, kms_key_name: kms_key, options: default_options]
+    pubsub.service.mocked_publisher = mock
+
+    topic = pubsub.create_topic new_topic_name, kms_key: kms_key
+
+    mock.verify
+
+    topic.name.must_equal topic_path(new_topic_name)
+    topic.labels.must_be :empty?
+    topic.labels.must_be :frozen?
+    topic.kms_key.must_equal kms_key
   end
 
   it "gets a topic" do

@@ -133,6 +133,56 @@ module Google
         end
 
         ##
+        # The Cloud KMS encryption key that will be used to protect access
+        # to messages published on this topic.
+        # For example: `projects/a/locations/b/keyRings/c/cryptoKeys/d`
+        # The default value is `nil`, which means default encryption is used.
+        #
+        # Makes an API call to retrieve the KMS encryption key when called on a
+        # reference object. See {#reference?}.
+        #
+        # @return [String]
+        #
+        # @example
+        #   require "google/cloud/pubsub"
+        #
+        #   pubsub = Google::Cloud::PubSub.new
+        #
+        #   topic = pubsub.topic "my-topic"
+        #
+        #   topic.kms_key #=> "projects/a/locations/b/keyRings/c/cryptoKeys/d"
+        #
+        def kms_key
+          ensure_grpc!
+          @grpc.kms_key_name
+        end
+
+        ##
+        # Set the Cloud KMS encryption key that will be used to protect access
+        # to messages published on this topic.
+        # For example: `projects/a/locations/b/keyRings/c/cryptoKeys/d`
+        # The default value is `nil`, which means default encryption is used.
+        #
+        # @param [String] new_kms_key_name New Cloud KMS key name
+        #
+        # @example
+        #   require "google/cloud/pubsub"
+        #
+        #   pubsub = Google::Cloud::PubSub.new
+        #
+        #   topic = pubsub.topic "my-topic"
+        #
+        #   key_name = "projects/a/locations/b/keyRings/c/cryptoKeys/d"
+        #   topic.kms_key = key_name
+        #
+        def kms_key= new_kms_key_name
+          update_grpc = Google::Cloud::PubSub::V1::Topic.new \
+            name: name, kms_key_name: new_kms_key_name
+          @grpc = service.update_topic update_grpc, :kms_key_name
+          @resource_name = nil
+        end
+
+        ##
         # Permanently deletes the topic.
         #
         # @return [Boolean] Returns `true` if the topic was deleted.

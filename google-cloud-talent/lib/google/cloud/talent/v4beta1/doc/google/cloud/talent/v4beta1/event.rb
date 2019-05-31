@@ -24,7 +24,7 @@ module Google
         # with other calls, such as job searches, issued to the service by the client.
         # @!attribute [rw] request_id
         #   @return [String]
-        #     Required.
+        #     Optional but highly recommended.
         #
         #     A unique ID generated in the API responses. It can be found in
         #     {Google::Cloud::Talent::V4beta1::ResponseMetadata#request_id ResponseMetadata#request_id}.
@@ -60,16 +60,33 @@ module Google
         #   @return [Google::Cloud::Talent::V4beta1::JobEvent::JobEventType]
         #     Required.
         #
-        #     The type of the event (see {Google::Cloud::Talent::V4beta1::JobEvent::JobEventType JobEventType}).
+        #     The type of the event (see
+        #     {Google::Cloud::Talent::V4beta1::JobEvent::JobEventType JobEventType}).
         # @!attribute [rw] jobs
         #   @return [Array<String>]
         #     Required.
         #
-        #     The {Google::Cloud::Talent::V4beta1::Job#name job name(s)} associated with this event.
-        #     For example, if this is an {Google::Cloud::Talent::V4beta1::JobEvent::JobEventType::IMPRESSION impression} event,
-        #     this field contains the identifiers of all jobs shown to the job seeker.
-        #     If this was a {Google::Cloud::Talent::V4beta1::JobEvent::JobEventType::VIEW view} event, this field contains the
-        #     identifier of the viewed job.
+        #     The {Google::Cloud::Talent::V4beta1::Job#name job name(s)} associated with
+        #     this event. For example, if this is an
+        #     {Google::Cloud::Talent::V4beta1::JobEvent::JobEventType::IMPRESSION impression}
+        #     event, this field contains the identifiers of all jobs shown to the job
+        #     seeker. If this was a
+        #     {Google::Cloud::Talent::V4beta1::JobEvent::JobEventType::VIEW view} event, this
+        #     field contains the identifier of the viewed job.
+        #
+        #     The format is
+        #     "projects/{project_id}/tenants/{tenant_id}/jobs/{job_id}", for
+        #     example, "projects/api-test-project/tenants/foo/jobs/1234".
+        # @!attribute [rw] profile
+        #   @return [String]
+        #     Optional.
+        #
+        #     The {Google::Cloud::Talent::V4beta1::Profile#name profile name} associated
+        #     with this client event.
+        #
+        #     The format is
+        #     "projects/{project_id}/tenants/{tenant_id}/profiles/{profile_id}",
+        #     for example, "projects/api-test-project/tenants/foo/profiles/bar".
         class JobEvent
           # An enumeration of an event attributed to the behavior of the end user,
           # such as a job seeker.
@@ -107,7 +124,9 @@ module Google
             # submitted an application for a job with a single click without
             # entering information. If a job seeker performs this action, send only
             # this event to the service. Do not also send
-            # {Google::Cloud::Talent::V4beta1::JobEvent::JobEventType::APPLICATION_START JobEventType::APPLICATION_START} or {Google::Cloud::Talent::V4beta1::JobEvent::JobEventType::APPLICATION_FINISH JobEventType::APPLICATION_FINISH}
+            # {Google::Cloud::Talent::V4beta1::JobEvent::JobEventType::APPLICATION_START JobEventType::APPLICATION_START}
+            # or
+            # {Google::Cloud::Talent::V4beta1::JobEvent::JobEventType::APPLICATION_FINISH JobEventType::APPLICATION_FINISH}
             # events.
             APPLICATION_QUICK_SUBMISSION = 6
 
@@ -127,8 +146,12 @@ module Google
             # (without viewing the details of the job posting), and is redirected
             # to a different website to complete the application. If a candidate
             # performs this action, send only this event to the service. Do not also
-            # send {Google::Cloud::Talent::V4beta1::JobEvent::JobEventType::APPLICATION_START JobEventType::APPLICATION_START},
-            # {Google::Cloud::Talent::V4beta1::JobEvent::JobEventType::APPLICATION_FINISH JobEventType::APPLICATION_FINISH} or {Google::Cloud::Talent::V4beta1::JobEvent::JobEventType::VIEW JobEventType::VIEW} events.
+            # send
+            # {Google::Cloud::Talent::V4beta1::JobEvent::JobEventType::APPLICATION_START JobEventType::APPLICATION_START},
+            # {Google::Cloud::Talent::V4beta1::JobEvent::JobEventType::APPLICATION_FINISH JobEventType::APPLICATION_FINISH}
+            # or
+            # {Google::Cloud::Talent::V4beta1::JobEvent::JobEventType::VIEW JobEventType::VIEW}
+            # events.
             APPLICATION_REDIRECT_FROM_SEARCH = 9
 
             # This event should be used when a company submits an application
@@ -163,10 +186,6 @@ module Google
             # part of an application that was initiated by a search conducted through /
             # recommendation provided by the Cloud Talent Solution service.
             INTERVIEW_GRANTED = 15
-
-            # The job seeker or other entity interacting with the service showed
-            # no interest in the job.
-            NOT_INTERESTED = 16
           end
         end
 
@@ -181,16 +200,22 @@ module Google
         #   @return [Array<String>]
         #     Required.
         #
-        #     The {Google::Cloud::Talent::V4beta1::Profile#name profile name(s)} associated with this client event.
+        #     The {Google::Cloud::Talent::V4beta1::Profile#name profile name(s)} associated
+        #     with this client event.
+        #
+        #     The format is
+        #     "projects/{project_id}/tenants/{tenant_id}/profiles/{profile_id}",
+        #     for example, "projects/api-test-project/tenants/foo/profiles/bar".
         # @!attribute [rw] jobs
         #   @return [Array<String>]
         #     Optional.
         #
-        #     The job ID associated with this client event if there is one. Leave it
-        #     empty if the event isn't associated with a job.
+        #     The {Google::Cloud::Talent::V4beta1::Job#name job name(s)} associated with
+        #     this client event. Leave it empty if the event isn't associated with a job.
         #
-        #     The job ID should be consistent with the
-        #     {JobApplication#job#requisition_id} in the profile.
+        #     The format is
+        #     "projects/{project_id}/tenants/{tenant_id}/jobs/{job_id}", for
+        #     example, "projects/api-test-project/tenants/foo/jobs/1234".
         class ProfileEvent
           # The enum represents types of client events for a candidate profile.
           module ProfileEventType

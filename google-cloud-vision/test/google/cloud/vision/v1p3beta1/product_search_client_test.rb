@@ -148,7 +148,7 @@ describe Google::Cloud::Vision::V1p3beta1::ProductSearchClient do
           client = Google::Cloud::Vision::ProductSearch.new(version: :v1p3beta1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1p3beta1 do
             client.create_product_set(
               formatted_parent,
               product_set,
@@ -224,7 +224,7 @@ describe Google::Cloud::Vision::V1p3beta1::ProductSearchClient do
           client = Google::Cloud::Vision::ProductSearch.new(version: :v1p3beta1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1p3beta1 do
             client.list_product_sets(formatted_parent)
           end
 
@@ -299,7 +299,7 @@ describe Google::Cloud::Vision::V1p3beta1::ProductSearchClient do
           client = Google::Cloud::Vision::ProductSearch.new(version: :v1p3beta1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1p3beta1 do
             client.get_product_set(formatted_name)
           end
 
@@ -378,7 +378,7 @@ describe Google::Cloud::Vision::V1p3beta1::ProductSearchClient do
           client = Google::Cloud::Vision::ProductSearch.new(version: :v1p3beta1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1p3beta1 do
             client.update_product_set(product_set, update_mask)
           end
 
@@ -447,7 +447,7 @@ describe Google::Cloud::Vision::V1p3beta1::ProductSearchClient do
           client = Google::Cloud::Vision::ProductSearch.new(version: :v1p3beta1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1p3beta1 do
             client.delete_product_set(formatted_name)
           end
 
@@ -545,7 +545,7 @@ describe Google::Cloud::Vision::V1p3beta1::ProductSearchClient do
           client = Google::Cloud::Vision::ProductSearch.new(version: :v1p3beta1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1p3beta1 do
             client.create_product(
               formatted_parent,
               product,
@@ -621,7 +621,7 @@ describe Google::Cloud::Vision::V1p3beta1::ProductSearchClient do
           client = Google::Cloud::Vision::ProductSearch.new(version: :v1p3beta1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1p3beta1 do
             client.list_products(formatted_parent)
           end
 
@@ -703,7 +703,7 @@ describe Google::Cloud::Vision::V1p3beta1::ProductSearchClient do
           client = Google::Cloud::Vision::ProductSearch.new(version: :v1p3beta1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1p3beta1 do
             client.get_product(formatted_name)
           end
 
@@ -789,7 +789,7 @@ describe Google::Cloud::Vision::V1p3beta1::ProductSearchClient do
           client = Google::Cloud::Vision::ProductSearch.new(version: :v1p3beta1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1p3beta1 do
             client.update_product(product, update_mask)
           end
 
@@ -858,7 +858,7 @@ describe Google::Cloud::Vision::V1p3beta1::ProductSearchClient do
           client = Google::Cloud::Vision::ProductSearch.new(version: :v1p3beta1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1p3beta1 do
             client.delete_product(formatted_name)
           end
 
@@ -949,7 +949,7 @@ describe Google::Cloud::Vision::V1p3beta1::ProductSearchClient do
           client = Google::Cloud::Vision::ProductSearch.new(version: :v1p3beta1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1p3beta1 do
             client.create_reference_image(
               formatted_parent,
               reference_image,
@@ -1022,7 +1022,7 @@ describe Google::Cloud::Vision::V1p3beta1::ProductSearchClient do
           client = Google::Cloud::Vision::ProductSearch.new(version: :v1p3beta1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1p3beta1 do
             client.delete_reference_image(formatted_name)
           end
 
@@ -1099,7 +1099,7 @@ describe Google::Cloud::Vision::V1p3beta1::ProductSearchClient do
           client = Google::Cloud::Vision::ProductSearch.new(version: :v1p3beta1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1p3beta1 do
             client.list_reference_images(formatted_parent)
           end
 
@@ -1174,7 +1174,7 @@ describe Google::Cloud::Vision::V1p3beta1::ProductSearchClient do
           client = Google::Cloud::Vision::ProductSearch.new(version: :v1p3beta1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1p3beta1 do
             client.get_reference_image(formatted_name)
           end
 
@@ -1247,7 +1247,7 @@ describe Google::Cloud::Vision::V1p3beta1::ProductSearchClient do
           client = Google::Cloud::Vision::ProductSearch.new(version: :v1p3beta1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1p3beta1 do
             client.add_product_to_product_set(formatted_name, product)
           end
 
@@ -1320,7 +1320,7 @@ describe Google::Cloud::Vision::V1p3beta1::ProductSearchClient do
           client = Google::Cloud::Vision::ProductSearch.new(version: :v1p3beta1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1p3beta1 do
             client.remove_product_from_product_set(formatted_name, product)
           end
 
@@ -1392,7 +1392,7 @@ describe Google::Cloud::Vision::V1p3beta1::ProductSearchClient do
           client = Google::Cloud::Vision::ProductSearch.new(version: :v1p3beta1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1p3beta1 do
             client.list_products_in_product_set(formatted_name)
           end
 
@@ -1510,7 +1510,7 @@ describe Google::Cloud::Vision::V1p3beta1::ProductSearchClient do
           client = Google::Cloud::Vision::ProductSearch.new(version: :v1p3beta1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1p3beta1 do
             client.import_product_sets(formatted_parent, input_config)
           end
 
