@@ -110,5 +110,25 @@ describe Google::Cloud::PubSub::Topic, :attributes, :mock_pubsub do
 
       mock.verify
     end
+
+    describe "no MessageStoragePolicy" do
+      let(:topic_grpc) { Google::Cloud::PubSub::V1::Topic.new topic_hash(topic_name, labels: labels) }
+
+      it "accesses persistence_regions by making an API call" do
+        topic.must_be :reference?
+        topic.wont_be :resource?
+
+        mock = Minitest::Mock.new
+        mock.expect :get_topic, topic_grpc, [topic_path(topic_name), options: default_options]
+        topic.service.mocked_publisher = mock
+
+        topic.persistence_regions.must_be :empty?
+
+        topic.wont_be :reference?
+        topic.must_be :resource?
+
+        mock.verify
+      end
+    end
   end
 end
