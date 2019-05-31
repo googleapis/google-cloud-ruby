@@ -192,8 +192,8 @@ module Google
         # at the project or organization level, which will result in all publish
         # operations failing.
         #
-        # Makes an API call to retrieve the labels values when called on a
-        # reference object. See {#reference?}.
+        # Makes an API call to retrieve the list of GCP region IDs values when
+        # called on a reference object. See {#reference?}.
         #
         # @return [Array<String>]
         #
