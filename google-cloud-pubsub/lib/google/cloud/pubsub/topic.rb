@@ -183,6 +183,36 @@ module Google
         end
 
         ##
+        # The list of GCP region IDs where messages that are published to the
+        # topic may be persisted in storage.
+        #
+        # Messages published by publishers running in non-allowed GCP regions
+        # (or running outside of GCP altogether) will be routed for storage in
+        # one of the allowed regions. An empty list indicates a misconfiguration
+        # at the project or organization level, which will result in all publish
+        # operations failing.
+        #
+        # Makes an API call to retrieve the list of GCP region IDs values when
+        # called on a reference object. See {#reference?}.
+        #
+        # @return [Array<String>]
+        #
+        # @example
+        #   require "google/cloud/pubsub"
+        #
+        #   pubsub = Google::Cloud::PubSub.new
+        #
+        #   topic = pubsub.topic "my-topic"
+        #
+        #   topic.persistence_regions #=> ["us-central1", "us-central2"]
+        #
+        def persistence_regions
+          ensure_grpc!
+          return [] if @grpc.message_storage_policy.nil?
+          Array @grpc.message_storage_policy.allowed_persistence_regions
+        end
+
+        ##
         # Permanently deletes the topic.
         #
         # @return [Boolean] Returns `true` if the topic was deleted.

@@ -490,6 +490,13 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
+  doctest.before "Google::Cloud::PubSub::Topic#persistence_regions" do
+    mock_pubsub do |mock_publisher, mock_subscriber|
+      this_topic = topic_resp "my-topic", persistence_regions: ["us-central1", "us-central2"]
+      mock_publisher.expect :get_topic, this_topic, ["projects/my-project/topics/my-topic", Hash]
+    end
+  end
+
   doctest.before "Google::Cloud::PubSub::Topic#delete" do
     mock_pubsub do |mock_publisher, mock_subscriber|
       mock_publisher.expect :get_topic, topic_resp, ["projects/my-project/topics/my-topic", Hash]
@@ -629,9 +636,15 @@ def topics_hash num_topics, token = ""
   data
 end
 
-def topic_resp topic_name = "my-topic", kms_key_name: nil
-  Google::Cloud::PubSub::V1::Topic.new name: topic_path(topic_name),
-                                       kms_key_name: kms_key_name
+def topic_resp topic_name = "my-topic", kms_key_name: nil, persistence_regions: nil
+  topic = Google::Cloud::PubSub::V1::Topic.new name: topic_path(topic_name),
+                                               kms_key_name: kms_key_name
+  if persistence_regions
+    topic.message_storage_policy = Google::Cloud::PubSub::V1::MessageStoragePolicy.new(
+      allowed_persistence_regions: persistence_regions
+    )
+  end
+  topic
 end
 
 def topic_subscriptions_hash num_subs, token = nil
