@@ -19,10 +19,23 @@ describe "Transaction", :firestore_acceptance do
     rand_tx_col = firestore.col "#{root_path}/tx/#{SecureRandom.hex(4)}"
     doc_ref = rand_tx_col.doc
 
-    firestore.transaction do |tx|
+    doc_snp = firestore.transaction do |tx|
+      tx.get doc_ref
+    end
+    doc_snp.wont_be :exists?
+  end
+
+  it "returns CommitResponse when commit_response option is true" do
+    rand_tx_col = firestore.col "#{root_path}/tx/#{SecureRandom.hex(4)}"
+    doc_ref = rand_tx_col.doc
+
+    resp = firestore.transaction commit_response: true do |tx|
       doc_snp = tx.get doc_ref
       doc_snp.wont_be :exists?
     end
+
+    resp.must_be_kind_of Google::Cloud::Firestore::CommitResponse
+    resp.commit_time.must_be_kind_of Time
   end
 
   it "has get with query" do
@@ -32,21 +45,22 @@ describe "Transaction", :firestore_acceptance do
 
     query = rand_query_col.select "foo"
 
-    firestore.transaction do |tx|
-      results = tx.get query
-      results.map(&:document_id).must_equal ["doc1", "doc2"]
-      results.map { |doc| doc[:foo] }.must_equal ["a", "b"]
+    results = firestore.transaction do |tx|
+      tx.get(query).to_a # all results must be retrieved inside tx
     end
+    results.map(&:document_id).must_equal ["doc1", "doc2"]
+    results.map { |doc| doc[:foo] }.must_equal ["a", "b"]
   end
 
   it "has set method" do
     rand_tx_col = firestore.col "#{root_path}/tx/#{SecureRandom.hex(4)}"
     doc_ref = rand_tx_col.doc
 
-    firestore.transaction do |tx|
+    resp = firestore.transaction do |tx|
       tx.set doc_ref, foo: "bar"
     end
 
+    resp.must_be :nil?
     doc_ref.get[:foo].must_equal "bar"
   end
 
@@ -55,10 +69,11 @@ describe "Transaction", :firestore_acceptance do
     doc_ref = rand_tx_col.doc
     doc_ref.create foo: "bar"
 
-    firestore.transaction do |tx|
+    resp = firestore.transaction do |tx|
       tx.update doc_ref, foo: "baz"
     end
 
+    resp.must_be :nil?
     doc_ref.get[:foo].must_equal "baz"
   end
 
@@ -79,10 +94,11 @@ describe "Transaction", :firestore_acceptance do
     doc_ref = rand_tx_col.doc
     doc_ref.create({foo: "bar"})
 
-    firestore.transaction do |tx|
+    resp = firestore.transaction do |tx|
       tx.delete doc_ref
     end
 
+    resp.must_be :nil?
     doc_ref.get.wont_be :exists?
   end
 end

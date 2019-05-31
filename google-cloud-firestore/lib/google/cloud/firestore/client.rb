@@ -595,12 +595,19 @@ module Google
         #
         # @param [Integer] max_retries The maximum number of retries for
         #   transactions failed due to errors. Default is 5. Optional.
+        # @param [Integer] commit_response If true, the return value from this
+        #   method will be a `Google::Cloud::Firestore::CommitResponse` object
+        #   with a `commit_time` attribute. If omitted or false, the return
+        #   value from this method will be the return value of the provided
+        #   yield block. Default is false. Optional.
         #
         # @yield [transaction] The block for reading data and making changes.
         # @yieldparam [Transaction] transaction The transaction object for
         #   making changes.
         #
-        # @return [CommitResponse] The response from committing the changes.
+        # @return [Object, CommitResponse] The return value of the provided
+        #   yield block, or if `commit_response` is provided and true, the
+        #   `CommitResponse` object from the commit operation.
         #
         # @example
         #   require "google/cloud/firestore"
@@ -618,14 +625,16 @@ module Google
         #     tx.delete("cities/LA")
         #   end
         #
-        def transaction max_retries: nil
+        def transaction max_retries: nil, commit_response: nil
           max_retries = 5 unless max_retries.is_a? Integer
           backoff = { current: 0, delay: 1.0, max: max_retries, mod: 1.3 }
 
           transaction = Transaction.from_client self
           begin
-            yield transaction
-            transaction.commit
+            transaction_return = yield transaction
+            commit_return = transaction.commit
+            # Conditional return value, depending on truthy commit_response
+            commit_response ? commit_return : transaction_return
           rescue Google::Cloud::UnavailableError => err
             # Re-raise if retried more than the max
             raise err if backoff[:current] > backoff[:max]
