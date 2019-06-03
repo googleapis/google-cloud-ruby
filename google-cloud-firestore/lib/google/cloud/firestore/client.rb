@@ -595,11 +595,11 @@ module Google
         #
         # @param [Integer] max_retries The maximum number of retries for
         #   transactions failed due to errors. Default is 5. Optional.
-        # @param [Integer] commit_response If true, the return value from this
-        #   method will be a `Google::Cloud::Firestore::CommitResponse` object
-        #   with a `commit_time` attribute. If omitted or false, the return
+        # @param [Boolean] commit_response When `true`, the return value from
+        #   this method will be a `Google::Cloud::Firestore::CommitResponse`
+        #   object with a `commit_time` attribute. Otherwise, the return
         #   value from this method will be the return value of the provided
-        #   yield block. Default is false. Optional.
+        #   yield block. Default is `false`. Optional.
         #
         # @yield [transaction] The block for reading data and making changes.
         # @yieldparam [Transaction] transaction The transaction object for
