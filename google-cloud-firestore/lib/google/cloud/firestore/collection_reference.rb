@@ -127,6 +127,39 @@ module Google
         alias document doc
 
         ##
+        # Retrieves a list of document references for the documents in this
+        # collection.
+        #
+        # The document references returned may include references to "missing
+        # documents", i.e. document locations that have no document present but
+        # which contain subcollections with documents. Attempting to read such a
+        # document reference (e.g. via {DocumentReference#get}) will return
+        # a {DocumentSnapshot} whose `exists?` method returns false.
+        #
+        # @param [String] token A previously-returned page token representing
+        #   part of the larger set of results to view.
+        # @param [Integer] max Maximum number of results to return.
+        #
+        # @return [Array<DocumentReference>] An array of document references.
+        #
+        # @example
+        #   require "google/cloud/firestore"
+        #
+        #   firestore = Google::Cloud::Firestore.new
+        #
+        #   col = firestore.col "cities"
+        #
+        #   col.list_documents.each do |doc_ref|
+        #     puts doc_ref.document_id
+        #   end
+        #
+        def list_documents token: nil, max: nil
+          ensure_client!
+          client.list_documents \
+            parent_path, collection_id, token: token, max: max
+        end
+
+        ##
         # The document reference or database the collection reference belongs
         # to. If the collection is a root collection, it will return the client
         # object. If the collection is nested under a document, it will return
