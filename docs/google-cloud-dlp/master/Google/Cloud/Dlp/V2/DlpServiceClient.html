@@ -1295,7 +1295,6 @@ custom error handling.</p>
       <pre class="lines">
 
 
-289
 290
 291
 292
@@ -1606,10 +1605,11 @@ custom error handling.</p>
 597
 598
 599
-600</pre>
+600
+601</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 289</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 290</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span> \
     <span class='label'>credentials:</span> <span class='kw'>nil</span><span class='comma'>,</span>
@@ -1644,7 +1644,7 @@ custom error handling.</p>
     <span class='id identifier rubyid_updater_proc'>updater_proc</span> <span class='op'>=</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='period'>.</span><span class='id identifier rubyid_updater_proc'>updater_proc</span>
   <span class='kw'>end</span>
 
-  <span class='id identifier rubyid_package_version'>package_version</span> <span class='op'>=</span> <span class='const'>Gem</span><span class='period'>.</span><span class='id identifier rubyid_loaded_specs'>loaded_specs</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>google-cloud-dlp</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_version'>version</span><span class='period'>.</span><span class='id identifier rubyid_version'>version</span>
+  <span class='id identifier rubyid_package_version'>package_version</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Dlp.html" title="Google::Cloud::Dlp (module)">Dlp</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Dlp.html#VERSION-constant" title="Google::Cloud::Dlp::VERSION (constant)">VERSION</a></span></span>
 
   <span class='id identifier rubyid_google_api_client'>google_api_client</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gl-ruby/</span><span class='embexpr_beg'>#{</span><span class='const'>RUBY_VERSION</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
   <span class='id identifier rubyid_google_api_client'>google_api_client</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'> </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_lib_name'>lib_name</span><span class='embexpr_end'>}</span><span class='tstring_content'>/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_lib_version'>lib_version</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>if</span> <span class='id identifier rubyid_lib_name'>lib_name</span>
@@ -1999,15 +1999,15 @@ custom error handling.</p>
       <pre class="lines">
 
 
-158
 159
 160
 161
 162
-163</pre>
+163
+164</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 158</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 159</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_dlp_job_path'>dlp_job_path</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span> <span class='id identifier rubyid_dlp_job'>dlp_job</span>
   <span class='const'>DLP_JOB_PATH_TEMPLATE</span><span class='period'>.</span><span class='id identifier rubyid_render'>render</span><span class='lparen'>(</span>
@@ -2084,15 +2084,15 @@ custom error handling.</p>
       <pre class="lines">
 
 
-178
 179
 180
 181
 182
-183</pre>
+183
+184</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 178</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 179</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_organization_deidentify_template_path'>organization_deidentify_template_path</span> <span class='id identifier rubyid_organization'>organization</span><span class='comma'>,</span> <span class='id identifier rubyid_deidentify_template'>deidentify_template</span>
   <span class='const'>ORGANIZATION_DEIDENTIFY_TEMPLATE_PATH_TEMPLATE</span><span class='period'>.</span><span class='id identifier rubyid_render'>render</span><span class='lparen'>(</span>
@@ -2169,15 +2169,15 @@ custom error handling.</p>
       <pre class="lines">
 
 
-189
 190
 191
 192
 193
-194</pre>
+194
+195</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 189</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 190</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_organization_inspect_template_path'>organization_inspect_template_path</span> <span class='id identifier rubyid_organization'>organization</span><span class='comma'>,</span> <span class='id identifier rubyid_inspect_template'>inspect_template</span>
   <span class='const'>ORGANIZATION_INSPECT_TEMPLATE_PATH_TEMPLATE</span><span class='period'>.</span><span class='id identifier rubyid_render'>render</span><span class='lparen'>(</span>
@@ -2243,14 +2243,14 @@ custom error handling.</p>
       <pre class="lines">
 
 
-168
 169
 170
 171
-172</pre>
+172
+173</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 168</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 169</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_organization_path'>organization_path</span> <span class='id identifier rubyid_organization'>organization</span>
   <span class='const'>ORGANIZATION_PATH_TEMPLATE</span><span class='period'>.</span><span class='id identifier rubyid_render'>render</span><span class='lparen'>(</span>
@@ -2326,15 +2326,15 @@ custom error handling.</p>
       <pre class="lines">
 
 
-200
 201
 202
 203
 204
-205</pre>
+205
+206</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 200</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 201</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_organization_stored_info_type_path'>organization_stored_info_type_path</span> <span class='id identifier rubyid_organization'>organization</span><span class='comma'>,</span> <span class='id identifier rubyid_stored_info_type'>stored_info_type</span>
   <span class='const'>ORGANIZATION_STORED_INFO_TYPE_PATH_TEMPLATE</span><span class='period'>.</span><span class='id identifier rubyid_render'>render</span><span class='lparen'>(</span>
@@ -2411,15 +2411,15 @@ custom error handling.</p>
       <pre class="lines">
 
 
-220
 221
 222
 223
 224
-225</pre>
+225
+226</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 220</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 221</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_project_deidentify_template_path'>project_deidentify_template_path</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span> <span class='id identifier rubyid_deidentify_template'>deidentify_template</span>
   <span class='const'>PROJECT_DEIDENTIFY_TEMPLATE_PATH_TEMPLATE</span><span class='period'>.</span><span class='id identifier rubyid_render'>render</span><span class='lparen'>(</span>
@@ -2496,15 +2496,15 @@ custom error handling.</p>
       <pre class="lines">
 
 
-231
 232
 233
 234
 235
-236</pre>
+236
+237</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 231</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 232</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_project_inspect_template_path'>project_inspect_template_path</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span> <span class='id identifier rubyid_inspect_template'>inspect_template</span>
   <span class='const'>PROJECT_INSPECT_TEMPLATE_PATH_TEMPLATE</span><span class='period'>.</span><span class='id identifier rubyid_render'>render</span><span class='lparen'>(</span>
@@ -2581,15 +2581,15 @@ custom error handling.</p>
       <pre class="lines">
 
 
-242
 243
 244
 245
 246
-247</pre>
+247
+248</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 242</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 243</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_project_job_trigger_path'>project_job_trigger_path</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span> <span class='id identifier rubyid_job_trigger'>job_trigger</span>
   <span class='const'>PROJECT_JOB_TRIGGER_PATH_TEMPLATE</span><span class='period'>.</span><span class='id identifier rubyid_render'>render</span><span class='lparen'>(</span>
@@ -2655,14 +2655,14 @@ custom error handling.</p>
       <pre class="lines">
 
 
-210
 211
 212
 213
-214</pre>
+214
+215</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 210</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 211</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_project_path'>project_path</span> <span class='id identifier rubyid_project'>project</span>
   <span class='const'>PROJECT_PATH_TEMPLATE</span><span class='period'>.</span><span class='id identifier rubyid_render'>render</span><span class='lparen'>(</span>
@@ -2738,15 +2738,15 @@ custom error handling.</p>
       <pre class="lines">
 
 
-253
 254
 255
 256
 257
-258</pre>
+258
+259</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 253</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 254</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_project_stored_info_type_path'>project_stored_info_type_path</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span> <span class='id identifier rubyid_stored_info_type'>stored_info_type</span>
   <span class='const'>PROJECT_STORED_INFO_TYPE_PATH_TEMPLATE</span><span class='period'>.</span><span class='id identifier rubyid_render'>render</span><span class='lparen'>(</span>
@@ -2905,7 +2905,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1617
 1618
 1619
 1620
@@ -2915,10 +2914,11 @@ retries, etc.</p>
 1624
 1625
 1626
-1627</pre>
+1627
+1628</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 1617</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 1618</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_cancel_dlp_job'>cancel_dlp_job</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -3120,7 +3120,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1172
 1173
 1174
 1175
@@ -3133,10 +3132,11 @@ retries, etc.</p>
 1182
 1183
 1184
-1185</pre>
+1185
+1186</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 1172</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 1173</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_deidentify_template'>create_deidentify_template</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -3358,7 +3358,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1410
 1411
 1412
 1413
@@ -3373,10 +3372,11 @@ retries, etc.</p>
 1422
 1423
 1424
-1425</pre>
+1425
+1426</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 1410</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 1411</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_dlp_job'>create_dlp_job</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -3582,7 +3582,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-943
 944
 945
 946
@@ -3595,10 +3594,11 @@ retries, etc.</p>
 953
 954
 955
-956</pre>
+956
+957</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 943</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 944</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_inspect_template'>create_inspect_template</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -3801,7 +3801,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1869
 1870
 1871
 1872
@@ -3814,10 +3813,11 @@ retries, etc.</p>
 1879
 1880
 1881
-1882</pre>
+1882
+1883</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 1869</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 1870</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_job_trigger'>create_job_trigger</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -4021,7 +4021,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1915
 1916
 1917
 1918
@@ -4034,10 +4033,11 @@ retries, etc.</p>
 1925
 1926
 1927
-1928</pre>
+1928
+1929</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 1915</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 1916</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_stored_info_type'>create_stored_info_type</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -4303,7 +4303,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-777
 778
 779
 780
@@ -4322,10 +4321,11 @@ retries, etc.</p>
 793
 794
 795
-796</pre>
+796
+797</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 777</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 778</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_deidentify_content'>deidentify_content</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -4492,7 +4492,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1362
 1363
 1364
 1365
@@ -4502,10 +4501,11 @@ retries, etc.</p>
 1369
 1370
 1371
-1372</pre>
+1372
+1373</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 1362</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 1363</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete_deidentify_template'>delete_deidentify_template</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -4663,7 +4663,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1583
 1584
 1585
 1586
@@ -4673,10 +4672,11 @@ retries, etc.</p>
 1590
 1591
 1592
-1593</pre>
+1593
+1594</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 1583</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 1584</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete_dlp_job'>delete_dlp_job</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -4833,7 +4833,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1128
 1129
 1130
 1131
@@ -4843,10 +4842,11 @@ retries, etc.</p>
 1135
 1136
 1137
-1138</pre>
+1138
+1139</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 1128</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 1129</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete_inspect_template'>delete_inspect_template</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -5004,7 +5004,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1783
 1784
 1785
 1786
@@ -5014,10 +5013,11 @@ retries, etc.</p>
 1790
 1791
 1792
-1793</pre>
+1793
+1794</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 1783</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 1784</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete_job_trigger'>delete_job_trigger</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -5175,7 +5175,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-2109
 2110
 2111
 2112
@@ -5185,10 +5184,11 @@ retries, etc.</p>
 2116
 2117
 2118
-2119</pre>
+2119
+2120</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 2109</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 2110</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete_stored_info_type'>delete_stored_info_type</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -5355,7 +5355,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1256
 1257
 1258
 1259
@@ -5364,10 +5363,11 @@ retries, etc.</p>
 1262
 1263
 1264
-1265</pre>
+1265
+1266</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 1256</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 1257</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_deidentify_template'>get_deidentify_template</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -5531,7 +5531,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1550
 1551
 1552
 1553
@@ -5540,10 +5539,11 @@ retries, etc.</p>
 1556
 1557
 1558
-1559</pre>
+1559
+1560</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 1550</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 1551</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_dlp_job'>get_dlp_job</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -5707,7 +5707,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1024
 1025
 1026
 1027
@@ -5716,10 +5715,11 @@ retries, etc.</p>
 1030
 1031
 1032
-1033</pre>
+1033
+1034</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 1024</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 1025</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_inspect_template'>get_inspect_template</span> \
     <span class='label'>name:</span> <span class='kw'>nil</span><span class='comma'>,</span>
@@ -5883,7 +5883,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1750
 1751
 1752
 1753
@@ -5892,10 +5891,11 @@ retries, etc.</p>
 1756
 1757
 1758
-1759</pre>
+1759
+1760</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 1750</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 1751</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_job_trigger'>get_job_trigger</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -6061,7 +6061,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-2002
 2003
 2004
 2005
@@ -6070,10 +6069,11 @@ retries, etc.</p>
 2008
 2009
 2010
-2011</pre>
+2011
+2012</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 2002</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 2003</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_stored_info_type'>get_stored_info_type</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -6297,7 +6297,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-646
 647
 648
 649
@@ -6312,10 +6311,11 @@ retries, etc.</p>
 658
 659
 660
-661</pre>
+661
+662</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 646</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 647</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_inspect_content'>inspect_content</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -6553,7 +6553,6 @@ object.</p>
       <pre class="lines">
 
 
-1325
 1326
 1327
 1328
@@ -6566,10 +6565,11 @@ object.</p>
 1335
 1336
 1337
-1338</pre>
+1338
+1339</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 1325</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 1326</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_deidentify_templates'>list_deidentify_templates</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -6863,7 +6863,6 @@ object.</p>
       <pre class="lines">
 
 
-1510
 1511
 1512
 1513
@@ -6880,10 +6879,11 @@ object.</p>
 1524
 1525
 1526
-1527</pre>
+1527
+1528</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 1510</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 1511</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_dlp_jobs'>list_dlp_jobs</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -7072,7 +7072,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-899
 900
 901
 902
@@ -7083,10 +7082,11 @@ retries, etc.</p>
 907
 908
 909
-910</pre>
+910
+911</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 899</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 900</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_info_types'>list_info_types</span> \
     <span class='label'>language_code:</span> <span class='kw'>nil</span><span class='comma'>,</span>
@@ -7319,7 +7319,6 @@ object.</p>
       <pre class="lines">
 
 
-1092
 1093
 1094
 1095
@@ -7332,10 +7331,11 @@ object.</p>
 1102
 1103
 1104
-1105</pre>
+1105
+1106</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 1092</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 1093</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_inspect_templates'>list_inspect_templates</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -7616,7 +7616,6 @@ object.</p>
       <pre class="lines">
 
 
-1712
 1713
 1714
 1715
@@ -7631,10 +7630,11 @@ object.</p>
 1724
 1725
 1726
-1727</pre>
+1727
+1728</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 1712</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 1713</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_job_triggers'>list_job_triggers</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -7873,7 +7873,6 @@ object.</p>
       <pre class="lines">
 
 
-2072
 2073
 2074
 2075
@@ -7886,10 +7885,11 @@ object.</p>
 2082
 2083
 2084
-2085</pre>
+2085
+2086</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 2072</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 2073</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_stored_info_types'>list_stored_info_types</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -8129,7 +8129,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-704
 705
 706
 707
@@ -8146,10 +8145,11 @@ retries, etc.</p>
 718
 719
 720
-721</pre>
+721
+722</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 704</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 705</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_redact_image'>redact_image</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -8422,7 +8422,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-853
 854
 855
 856
@@ -8441,10 +8440,11 @@ retries, etc.</p>
 869
 870
 871
-872</pre>
+872
+873</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 853</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 854</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_reidentify_content'>reidentify_content</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -8654,7 +8654,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1218
 1219
 1220
 1221
@@ -8667,10 +8666,11 @@ retries, etc.</p>
 1228
 1229
 1230
-1231</pre>
+1231
+1232</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 1218</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 1219</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update_deidentify_template'>update_deidentify_template</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -8873,7 +8873,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-988
 989
 990
 991
@@ -8886,10 +8885,11 @@ retries, etc.</p>
 998
 999
 1000
-1001</pre>
+1001
+1002</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 988</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 989</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update_inspect_template'>update_inspect_template</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -9091,7 +9091,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1824
 1825
 1826
 1827
@@ -9104,10 +9103,11 @@ retries, etc.</p>
 1834
 1835
 1836
-1837</pre>
+1837
+1838</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 1824</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 1825</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update_job_trigger'>update_job_trigger</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -9314,7 +9314,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1964
 1965
 1966
 1967
@@ -9327,10 +9326,11 @@ retries, etc.</p>
 1974
 1975
 1976
-1977</pre>
+1977
+1978</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 1964</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 1965</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update_stored_info_type'>update_stored_info_type</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
