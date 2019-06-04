@@ -604,6 +604,7 @@ module Google
 
         ##
         # @private commit the transaction
+        # @return [CommitResponse] The response from committing the changes.
         def commit
           ensure_not_closed!
 
