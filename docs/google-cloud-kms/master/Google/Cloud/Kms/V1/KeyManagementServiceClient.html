@@ -1117,7 +1117,6 @@ custom error handling.</p>
       <pre class="lines">
 
 
-221
 222
 223
 224
@@ -1378,10 +1377,11 @@ custom error handling.</p>
 479
 480
 481
-482</pre>
+482
+483</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 221</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 222</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span> \
     <span class='label'>credentials:</span> <span class='kw'>nil</span><span class='comma'>,</span>
@@ -1417,7 +1417,7 @@ custom error handling.</p>
     <span class='id identifier rubyid_updater_proc'>updater_proc</span> <span class='op'>=</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='period'>.</span><span class='id identifier rubyid_updater_proc'>updater_proc</span>
   <span class='kw'>end</span>
 
-  <span class='id identifier rubyid_package_version'>package_version</span> <span class='op'>=</span> <span class='const'>Gem</span><span class='period'>.</span><span class='id identifier rubyid_loaded_specs'>loaded_specs</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>google-cloud-kms</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_version'>version</span><span class='period'>.</span><span class='id identifier rubyid_version'>version</span>
+  <span class='id identifier rubyid_package_version'>package_version</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Kms.html" title="Google::Cloud::Kms (module)">Kms</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Kms.html#VERSION-constant" title="Google::Cloud::Kms::VERSION (constant)">VERSION</a></span></span>
 
   <span class='id identifier rubyid_google_api_client'>google_api_client</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gl-ruby/</span><span class='embexpr_beg'>#{</span><span class='const'>RUBY_VERSION</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
   <span class='id identifier rubyid_google_api_client'>google_api_client</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'> </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_lib_name'>lib_name</span><span class='embexpr_end'>}</span><span class='tstring_content'>/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_lib_version'>lib_version</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>if</span> <span class='id identifier rubyid_lib_name'>lib_name</span>
@@ -1743,17 +1743,17 @@ custom error handling.</p>
       <pre class="lines">
 
 
-127
 128
 129
 130
 131
 132
 133
-134</pre>
+134
+135</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 127</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 128</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_crypto_key_path'>crypto_key_path</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span> <span class='id identifier rubyid_location'>location</span><span class='comma'>,</span> <span class='id identifier rubyid_key_ring'>key_ring</span><span class='comma'>,</span> <span class='id identifier rubyid_crypto_key'>crypto_key</span>
   <span class='const'>CRYPTO_KEY_PATH_TEMPLATE</span><span class='period'>.</span><span class='id identifier rubyid_render'>render</span><span class='lparen'>(</span>
@@ -1854,17 +1854,17 @@ custom error handling.</p>
       <pre class="lines">
 
 
-142
 143
 144
 145
 146
 147
 148
-149</pre>
+149
+150</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 142</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 143</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_crypto_key_path_path'>crypto_key_path_path</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span> <span class='id identifier rubyid_location'>location</span><span class='comma'>,</span> <span class='id identifier rubyid_key_ring'>key_ring</span><span class='comma'>,</span> <span class='id identifier rubyid_crypto_key_path'>crypto_key_path</span>
   <span class='const'>CRYPTO_KEY_PATH_PATH_TEMPLATE</span><span class='period'>.</span><span class='id identifier rubyid_render'>render</span><span class='lparen'>(</span>
@@ -1976,7 +1976,6 @@ custom error handling.</p>
       <pre class="lines">
 
 
-158
 159
 160
 161
@@ -1984,10 +1983,11 @@ custom error handling.</p>
 163
 164
 165
-166</pre>
+166
+167</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 158</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 159</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_crypto_key_version_path'>crypto_key_version_path</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span> <span class='id identifier rubyid_location'>location</span><span class='comma'>,</span> <span class='id identifier rubyid_key_ring'>key_ring</span><span class='comma'>,</span> <span class='id identifier rubyid_crypto_key'>crypto_key</span><span class='comma'>,</span> <span class='id identifier rubyid_crypto_key_version'>crypto_key_version</span>
   <span class='const'>CRYPTO_KEY_VERSION_PATH_TEMPLATE</span><span class='period'>.</span><span class='id identifier rubyid_render'>render</span><span class='lparen'>(</span>
@@ -2078,16 +2078,16 @@ custom error handling.</p>
       <pre class="lines">
 
 
-173
 174
 175
 176
 177
 178
-179</pre>
+179
+180</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 173</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 174</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_key_ring_path'>key_ring_path</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span> <span class='id identifier rubyid_location'>location</span><span class='comma'>,</span> <span class='id identifier rubyid_key_ring'>key_ring</span>
   <span class='const'>KEY_RING_PATH_TEMPLATE</span><span class='period'>.</span><span class='id identifier rubyid_render'>render</span><span class='lparen'>(</span>
@@ -2165,15 +2165,15 @@ custom error handling.</p>
       <pre class="lines">
 
 
-185
 186
 187
 188
 189
-190</pre>
+190
+191</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 185</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 186</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_location_path'>location_path</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span> <span class='id identifier rubyid_location'>location</span>
   <span class='const'>LOCATION_PATH_TEMPLATE</span><span class='period'>.</span><span class='id identifier rubyid_render'>render</span><span class='lparen'>(</span>
@@ -2363,7 +2363,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1324
 1325
 1326
 1327
@@ -2374,10 +2373,11 @@ retries, etc.</p>
 1332
 1333
 1334
-1335</pre>
+1335
+1336</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 1324</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 1325</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_asymmetric_decrypt'>asymmetric_decrypt</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -2569,7 +2569,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1371
 1372
 1373
 1374
@@ -2580,10 +2579,11 @@ retries, etc.</p>
 1379
 1380
 1381
-1382</pre>
+1382
+1383</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 1371</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 1372</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_asymmetric_sign'>asymmetric_sign</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -2797,7 +2797,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-850
 851
 852
 853
@@ -2810,10 +2809,11 @@ retries, etc.</p>
 860
 861
 862
-863</pre>
+863
+864</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 850</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 851</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_crypto_key'>create_crypto_key</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -3007,7 +3007,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-899
 900
 901
 902
@@ -3018,10 +3017,11 @@ retries, etc.</p>
 907
 908
 909
-910</pre>
+910
+911</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 899</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 900</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_crypto_key_version'>create_crypto_key_version</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -3227,7 +3227,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-792
 793
 794
 795
@@ -3240,10 +3239,11 @@ retries, etc.</p>
 802
 803
 804
-805</pre>
+805
+806</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 792</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 793</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_key_ring'>create_key_ring</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -3763,7 +3763,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1111
 1112
 1113
 1114
@@ -3776,10 +3775,11 @@ retries, etc.</p>
 1121
 1122
 1123
-1124</pre>
+1124
+1125</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 1111</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 1112</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_decrypt'>decrypt</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -3963,7 +3963,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1206
 1207
 1208
 1209
@@ -3972,10 +3971,11 @@ retries, etc.</p>
 1212
 1213
 1214
-1215</pre>
+1215
+1216</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 1206</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 1207</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_destroy_crypto_key_version'>destroy_crypto_key_version</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -4197,7 +4197,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1063
 1064
 1065
 1066
@@ -4210,10 +4209,11 @@ retries, etc.</p>
 1073
 1074
 1075
-1076</pre>
+1076
+1077</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 1063</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 1064</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_encrypt'>encrypt</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -4382,7 +4382,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-714
 715
 716
 717
@@ -4391,10 +4390,11 @@ retries, etc.</p>
 720
 721
 722
-723</pre>
+723
+724</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 714</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 715</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_crypto_key'>get_crypto_key</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -4558,7 +4558,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-746
 747
 748
 749
@@ -4567,10 +4566,11 @@ retries, etc.</p>
 752
 753
 754
-755</pre>
+755
+756</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 746</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 747</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_crypto_key_version'>get_crypto_key_version</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -4735,7 +4735,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1450
 1451
 1452
 1453
@@ -4744,10 +4743,11 @@ retries, etc.</p>
 1456
 1457
 1458
-1459</pre>
+1459
+1460</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 1450</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 1451</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_iam_policy'>get_iam_policy</span> \
     <span class='id identifier rubyid_resource'>resource</span><span class='comma'>,</span>
@@ -4910,7 +4910,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-681
 682
 683
 684
@@ -4919,10 +4918,11 @@ retries, etc.</p>
 687
 688
 689
-690</pre>
+690
+691</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 681</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 682</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_key_ring'>get_key_ring</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -5090,7 +5090,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1281
 1282
 1283
 1284
@@ -5099,10 +5098,11 @@ retries, etc.</p>
 1287
 1288
 1289
-1290</pre>
+1290
+1291</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 1281</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 1282</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_public_key'>get_public_key</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -5409,7 +5409,6 @@ object.</p>
       <pre class="lines">
 
 
-646
 647
 648
 649
@@ -5422,10 +5421,11 @@ object.</p>
 656
 657
 658
-659</pre>
+659
+660</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 646</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 647</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_crypto_key_versions'>list_crypto_key_versions</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -5645,7 +5645,6 @@ object.</p>
       <pre class="lines">
 
 
-586
 587
 588
 589
@@ -5658,10 +5657,11 @@ object.</p>
 596
 597
 598
-599</pre>
+599
+600</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 586</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 587</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_crypto_keys'>list_crypto_keys</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -5867,7 +5867,6 @@ object.</p>
       <pre class="lines">
 
 
-529
 530
 531
 532
@@ -5878,10 +5877,11 @@ object.</p>
 537
 538
 539
-540</pre>
+540
+541</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 529</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 530</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_key_rings'>list_key_rings</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -6133,7 +6133,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1245
 1246
 1247
 1248
@@ -6142,10 +6141,11 @@ retries, etc.</p>
 1251
 1252
 1253
-1254</pre>
+1254
+1255</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 1245</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 1246</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_restore_crypto_key_version'>restore_crypto_key_version</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -6332,7 +6332,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1415
 1416
 1417
 1418
@@ -6343,10 +6342,11 @@ retries, etc.</p>
 1423
 1424
 1425
-1426</pre>
+1426
+1427</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 1415</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 1416</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_set_iam_policy'>set_iam_policy</span> \
     <span class='id identifier rubyid_resource'>resource</span><span class='comma'>,</span>
@@ -6538,7 +6538,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1495
 1496
 1497
 1498
@@ -6549,10 +6548,11 @@ retries, etc.</p>
 1503
 1504
 1505
-1506</pre>
+1506
+1507</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 1495</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 1496</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_test_iam_permissions'>test_iam_permissions</span> \
     <span class='id identifier rubyid_resource'>resource</span><span class='comma'>,</span>
@@ -6740,7 +6740,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-942
 943
 944
 945
@@ -6751,10 +6750,11 @@ retries, etc.</p>
 950
 951
 952
-953</pre>
+953
+954</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 942</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 943</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update_crypto_key'>update_crypto_key</span> \
     <span class='id identifier rubyid_crypto_key'>crypto_key</span><span class='comma'>,</span>
@@ -6942,7 +6942,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1156
 1157
 1158
 1159
@@ -6953,10 +6952,11 @@ retries, etc.</p>
 1164
 1165
 1166
-1167</pre>
+1167
+1168</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 1156</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 1157</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update_crypto_key_primary_version'>update_crypto_key_primary_version</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -7156,7 +7156,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-997
 998
 999
 1000
@@ -7167,10 +7166,11 @@ retries, etc.</p>
 1005
 1006
 1007
-1008</pre>
+1008
+1009</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 997</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 998</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update_crypto_key_version'>update_crypto_key_version</span> \
     <span class='id identifier rubyid_crypto_key_version'>crypto_key_version</span><span class='comma'>,</span>
