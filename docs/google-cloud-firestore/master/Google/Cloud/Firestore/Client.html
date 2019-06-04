@@ -499,7 +499,7 @@ collections and documents in the Firestore database.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#transaction-instance_method" title="#transaction (instance method)">#<strong>transaction</strong>(max_retries: nil) {|transaction| ... } &#x21d2; CommitResponse </a>
+      <a href="#transaction-instance_method" title="#transaction (instance method)">#<strong>transaction</strong>(max_retries: nil, commit_response: nil) {|transaction| ... } &#x21d2; Object, CommitResponse </a>
     
 
     
@@ -2390,7 +2390,7 @@ using a <span class='object_link'><a href="FieldPath.html" title="Google::Cloud:
       <div class="method_details ">
   <h3 class="signature " id="transaction-instance_method">
   
-    #<strong>transaction</strong>(max_retries: nil) {|transaction| ... } &#x21d2; <tt><span class='object_link'><a href="CommitResponse.html" title="Google::Cloud::Firestore::CommitResponse (class)">CommitResponse</a></span></tt> 
+    #<strong>transaction</strong>(max_retries: nil, commit_response: nil) {|transaction| ... } &#x21d2; <tt>Object</tt>, <tt><span class='object_link'><a href="CommitResponse.html" title="Google::Cloud::Firestore::CommitResponse (class)">CommitResponse</a></span></tt> 
   
 
   
@@ -2449,6 +2449,25 @@ transactions failed due to errors. Default is 5. Optional.</p>
       
     </li>
   
+    <li>
+      
+        <span class='name'>commit_response</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>When <code>true</code>, the return value from
+this method will be a <code>Google::Cloud::Firestore::CommitResponse</code>
+object with a <code>commit_time</code> attribute. Otherwise, the return
+value from this method will be the return value of the provided
+yield block. Default is <code>false</code>. Optional.</p>
+</div>
+      
+    </li>
+  
 </ul>
 
 <p class="tag_title">Yields:</p>
@@ -2494,12 +2513,14 @@ making changes.</p>
     <li>
       
       
-        <span class='type'>(<tt><span class='object_link'><a href="CommitResponse.html" title="Google::Cloud::Firestore::CommitResponse (class)">CommitResponse</a></span></tt>)</span>
+        <span class='type'>(<tt>Object</tt>, <tt><span class='object_link'><a href="CommitResponse.html" title="Google::Cloud::Firestore::CommitResponse (class)">CommitResponse</a></span></tt>)</span>
       
       
       
         &mdash;
-        <div class='inline'><p>The response from committing the changes.</p>
+        <div class='inline'><p>The return value of the provided
+yield block, or if <code>commit_response</code> is provided and true, the
+<code>CommitResponse</code> object from the commit operation.</p>
 </div>
       
     </li>
@@ -2519,13 +2540,6 @@ making changes.</p>
       <pre class="lines">
 
 
-621
-622
-623
-624
-625
-626
-627
 628
 629
 630
@@ -2555,19 +2569,30 @@ making changes.</p>
 654
 655
 656
-657</pre>
+657
+658
+659
+660
+661
+662
+663
+664
+665
+666</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/client.rb', line 621</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/client.rb', line 628</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_transaction'>transaction</span> <span class='label'>max_retries:</span> <span class='kw'>nil</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_transaction'>transaction</span> <span class='label'>max_retries:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>commit_response:</span> <span class='kw'>nil</span>
   <span class='id identifier rubyid_max_retries'>max_retries</span> <span class='op'>=</span> <span class='int'>5</span> <span class='kw'>unless</span> <span class='id identifier rubyid_max_retries'>max_retries</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span> <span class='const'>Integer</span>
   <span class='id identifier rubyid_backoff'>backoff</span> <span class='op'>=</span> <span class='lbrace'>{</span> <span class='label'>current:</span> <span class='int'>0</span><span class='comma'>,</span> <span class='label'>delay:</span> <span class='float'>1.0</span><span class='comma'>,</span> <span class='label'>max:</span> <span class='id identifier rubyid_max_retries'>max_retries</span><span class='comma'>,</span> <span class='label'>mod:</span> <span class='float'>1.3</span> <span class='rbrace'>}</span>
 
   <span class='id identifier rubyid_transaction'>transaction</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Transaction.html" title="Google::Cloud::Firestore::Transaction (class)">Transaction</a></span></span><span class='period'>.</span><span class='id identifier rubyid_from_client'>from_client</span> <span class='kw'>self</span>
   <span class='kw'>begin</span>
-    <span class='kw'>yield</span> <span class='id identifier rubyid_transaction'>transaction</span>
-    <span class='id identifier rubyid_transaction'>transaction</span><span class='period'>.</span><span class='id identifier rubyid_commit'>commit</span>
+    <span class='id identifier rubyid_transaction_return'>transaction_return</span> <span class='op'>=</span> <span class='kw'>yield</span> <span class='id identifier rubyid_transaction'>transaction</span>
+    <span class='id identifier rubyid_commit_return'>commit_return</span> <span class='op'>=</span> <span class='id identifier rubyid_transaction'>transaction</span><span class='period'>.</span><span class='id identifier rubyid_commit'>commit</span>
+    <span class='comment'># Conditional return value, depending on truthy commit_response
+</span>    <span class='id identifier rubyid_commit_response'>commit_response</span> <span class='op'>?</span> <span class='id identifier rubyid_commit_return'>commit_return</span> <span class='op'>:</span> <span class='id identifier rubyid_transaction_return'>transaction_return</span>
   <span class='kw'>rescue</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'>UnavailableError</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_err'>err</span>
     <span class='comment'># Re-raise if retried more than the max
 </span>    <span class='id identifier rubyid_raise'>raise</span> <span class='id identifier rubyid_err'>err</span> <span class='kw'>if</span> <span class='id identifier rubyid_backoff'>backoff</span><span class='lbracket'>[</span><span class='symbol'>:current</span><span class='rbracket'>]</span> <span class='op'>&gt;</span> <span class='id identifier rubyid_backoff'>backoff</span><span class='lbracket'>[</span><span class='symbol'>:max</span><span class='rbracket'>]</span>
