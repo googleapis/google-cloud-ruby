@@ -169,7 +169,7 @@ describe Google::Cloud::VideoIntelligence::V1p2beta1::VideoIntelligenceServiceCl
           client = Google::Cloud::VideoIntelligence.new(version: :v1p2beta1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1p2beta1 do
             client.annotate_video(input_uri: input_uri, features: features)
           end
 
