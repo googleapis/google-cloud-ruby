@@ -569,7 +569,6 @@ custom error handling.</p>
       <pre class="lines">
 
 
-153
 154
 155
 156
@@ -691,10 +690,11 @@ custom error handling.</p>
 272
 273
 274
-275</pre>
+275
+276</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/contexts_client.rb', line 153</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/contexts_client.rb', line 154</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span> \
     <span class='label'>credentials:</span> <span class='kw'>nil</span><span class='comma'>,</span>
@@ -729,7 +729,7 @@ custom error handling.</p>
     <span class='id identifier rubyid_updater_proc'>updater_proc</span> <span class='op'>=</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='period'>.</span><span class='id identifier rubyid_updater_proc'>updater_proc</span>
   <span class='kw'>end</span>
 
-  <span class='id identifier rubyid_package_version'>package_version</span> <span class='op'>=</span> <span class='const'>Gem</span><span class='period'>.</span><span class='id identifier rubyid_loaded_specs'>loaded_specs</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>google-cloud-dialogflow</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_version'>version</span><span class='period'>.</span><span class='id identifier rubyid_version'>version</span>
+  <span class='id identifier rubyid_package_version'>package_version</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Dialogflow.html" title="Google::Cloud::Dialogflow (module)">Dialogflow</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Dialogflow.html#VERSION-constant" title="Google::Cloud::Dialogflow::VERSION (constant)">VERSION</a></span></span>
 
   <span class='id identifier rubyid_google_api_client'>google_api_client</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gl-ruby/</span><span class='embexpr_beg'>#{</span><span class='const'>RUBY_VERSION</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
   <span class='id identifier rubyid_google_api_client'>google_api_client</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'> </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_lib_name'>lib_name</span><span class='embexpr_end'>}</span><span class='tstring_content'>/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_lib_version'>lib_version</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>if</span> <span class='id identifier rubyid_lib_name'>lib_name</span>
@@ -906,16 +906,16 @@ custom error handling.</p>
       <pre class="lines">
 
 
-105
 106
 107
 108
 109
 110
-111</pre>
+111
+112</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/contexts_client.rb', line 105</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/contexts_client.rb', line 106</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_context_path'>context_path</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span> <span class='id identifier rubyid_session'>session</span><span class='comma'>,</span> <span class='id identifier rubyid_context'>context</span>
   <span class='const'>CONTEXT_PATH_TEMPLATE</span><span class='period'>.</span><span class='id identifier rubyid_render'>render</span><span class='lparen'>(</span>
@@ -993,15 +993,15 @@ custom error handling.</p>
       <pre class="lines">
 
 
-117
 118
 119
 120
 121
-122</pre>
+122
+123</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/contexts_client.rb', line 117</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/contexts_client.rb', line 118</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_session_path'>session_path</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span> <span class='id identifier rubyid_session'>session</span>
   <span class='const'>SESSION_PATH_TEMPLATE</span><span class='period'>.</span><span class='id identifier rubyid_render'>render</span><span class='lparen'>(</span>
@@ -1188,7 +1188,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-394
 395
 396
 397
@@ -1199,10 +1198,11 @@ retries, etc.</p>
 402
 403
 404
-405</pre>
+405
+406</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/contexts_client.rb', line 394</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/contexts_client.rb', line 395</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_context'>create_context</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -1358,7 +1358,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-497
 498
 499
 500
@@ -1368,10 +1367,11 @@ retries, etc.</p>
 504
 505
 506
-507</pre>
+507
+508</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/contexts_client.rb', line 497</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/contexts_client.rb', line 498</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete_all_contexts'>delete_all_contexts</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -1526,7 +1526,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-466
 467
 468
 469
@@ -1536,10 +1535,11 @@ retries, etc.</p>
 473
 474
 475
-476</pre>
+476
+477</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/contexts_client.rb', line 466</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/contexts_client.rb', line 467</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete_context'>delete_context</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -1703,7 +1703,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-354
 355
 356
 357
@@ -1712,10 +1711,11 @@ retries, etc.</p>
 360
 361
 362
-363</pre>
+363
+364</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/contexts_client.rb', line 354</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/contexts_client.rb', line 355</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_context'>get_context</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -1916,7 +1916,6 @@ object.</p>
       <pre class="lines">
 
 
-321
 322
 323
 324
@@ -1927,10 +1926,11 @@ object.</p>
 329
 330
 331
-332</pre>
+332
+333</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/contexts_client.rb', line 321</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/contexts_client.rb', line 322</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_contexts'>list_contexts</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -2115,7 +2115,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-434
 435
 436
 437
@@ -2126,10 +2125,11 @@ retries, etc.</p>
 442
 443
 444
-445</pre>
+445
+446</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/contexts_client.rb', line 434</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/contexts_client.rb', line 435</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update_context'>update_context</span> \
     <span class='id identifier rubyid_context'>context</span><span class='comma'>,</span>
