@@ -27,13 +27,15 @@ gapic = gcp.GAPICGenerator()
 
 v1_library = gapic.ruby_library(
     'speech', 'v1',
-    artman_output_name='google-cloud-ruby/google-cloud-speech'
+    artman_output_name='google-cloud-ruby/google-cloud-speech',
+    generator_args=['--dev_samples']
 )
 s.copy(v1_library / 'acceptance')
 s.copy(v1_library / 'lib/google/cloud/speech/v1.rb')
 s.copy(v1_library / 'lib/google/cloud/speech/v1')
 s.copy(v1_library / 'test/google/cloud/speech/v1')
 s.copy(v1_library / 'lib/google/cloud/speech.rb')
+s.copy(v1_library / 'samples')
 s.copy(v1_library / 'README.md')
 s.copy(v1_library / 'LICENSE')
 s.copy(v1_library / '.gitignore')
@@ -46,12 +48,14 @@ s.copy(templates)
 
 v1p1beta1_library = gapic.ruby_library(
     'speech', 'v1p1beta1',
-    artman_output_name='google-cloud-ruby/google-cloud-speech'
+    artman_output_name='google-cloud-ruby/google-cloud-speech',
+    generator_args=['--dev_samples']
 )
 s.copy(v1p1beta1_library / 'acceptance')
 s.copy(v1p1beta1_library / 'lib/google/cloud/speech/v1p1beta1.rb')
 s.copy(v1p1beta1_library / 'lib/google/cloud/speech/v1p1beta1')
 s.copy(v1p1beta1_library / 'test/google/cloud/speech/v1p1beta1')
+s.copy(v1p1beta1_library / 'samples')
 
 # PERMANENT: Install partial gapics
 s.replace(
