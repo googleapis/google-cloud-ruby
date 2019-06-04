@@ -739,7 +739,6 @@ custom error handling.</p>
       <pre class="lines">
 
 
-143
 144
 145
 146
@@ -925,10 +924,11 @@ custom error handling.</p>
 326
 327
 328
-329</pre>
+329
+330</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/spanner_client.rb', line 143</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/spanner_client.rb', line 144</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span> \
     <span class='label'>credentials:</span> <span class='kw'>nil</span><span class='comma'>,</span>
@@ -963,7 +963,7 @@ custom error handling.</p>
     <span class='id identifier rubyid_updater_proc'>updater_proc</span> <span class='op'>=</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='period'>.</span><span class='id identifier rubyid_updater_proc'>updater_proc</span>
   <span class='kw'>end</span>
 
-  <span class='id identifier rubyid_package_version'>package_version</span> <span class='op'>=</span> <span class='const'>Gem</span><span class='period'>.</span><span class='id identifier rubyid_loaded_specs'>loaded_specs</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>google-cloud-spanner</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_version'>version</span><span class='period'>.</span><span class='id identifier rubyid_version'>version</span>
+  <span class='id identifier rubyid_package_version'>package_version</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Spanner.html" title="Google::Cloud::Spanner (module)">Spanner</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Spanner.html#VERSION-constant" title="Google::Cloud::Spanner::VERSION (constant)">VERSION</a></span></span>
 
   <span class='id identifier rubyid_google_api_client'>google_api_client</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gl-ruby/</span><span class='embexpr_beg'>#{</span><span class='const'>RUBY_VERSION</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
   <span class='id identifier rubyid_google_api_client'>google_api_client</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'> </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_lib_name'>lib_name</span><span class='embexpr_end'>}</span><span class='tstring_content'>/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_lib_version'>lib_version</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>if</span> <span class='id identifier rubyid_lib_name'>lib_name</span>
@@ -1204,16 +1204,16 @@ custom error handling.</p>
       <pre class="lines">
 
 
-91
 92
 93
 94
 95
 96
-97</pre>
+97
+98</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/spanner_client.rb', line 91</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/spanner_client.rb', line 92</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_database_path'>database_path</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span> <span class='id identifier rubyid_instance'>instance</span><span class='comma'>,</span> <span class='id identifier rubyid_database'>database</span>
   <span class='const'>DATABASE_PATH_TEMPLATE</span><span class='period'>.</span><span class='id identifier rubyid_render'>render</span><span class='lparen'>(</span>
@@ -1313,17 +1313,17 @@ custom error handling.</p>
       <pre class="lines">
 
 
-105
 106
 107
 108
 109
 110
 111
-112</pre>
+112
+113</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/spanner_client.rb', line 105</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/spanner_client.rb', line 106</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_session_path'>session_path</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span> <span class='id identifier rubyid_instance'>instance</span><span class='comma'>,</span> <span class='id identifier rubyid_database'>database</span><span class='comma'>,</span> <span class='id identifier rubyid_session'>session</span>
   <span class='const'>SESSION_PATH_TEMPLATE</span><span class='period'>.</span><span class='id identifier rubyid_render'>render</span><span class='lparen'>(</span>
@@ -1513,7 +1513,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1130
 1131
 1132
 1133
@@ -1524,10 +1523,11 @@ retries, etc.</p>
 1138
 1139
 1140
-1141</pre>
+1141
+1142</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/spanner_client.rb', line 1130</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/spanner_client.rb', line 1131</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_begin_transaction'>begin_transaction</span> \
     <span class='id identifier rubyid_session'>session</span><span class='comma'>,</span>
@@ -1760,7 +1760,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1192
 1193
 1194
 1195
@@ -1775,10 +1774,11 @@ retries, etc.</p>
 1204
 1205
 1206
-1207</pre>
+1207
+1208</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/spanner_client.rb', line 1192</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/spanner_client.rb', line 1193</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_commit'>commit</span> \
     <span class='id identifier rubyid_session'>session</span><span class='comma'>,</span>
@@ -1981,7 +1981,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-374
 375
 376
 377
@@ -1992,10 +1991,11 @@ retries, etc.</p>
 382
 383
 384
-385</pre>
+385
+386</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/spanner_client.rb', line 374</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/spanner_client.rb', line 375</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_session'>create_session</span> \
     <span class='id identifier rubyid_database'>database</span><span class='comma'>,</span>
@@ -2152,7 +2152,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-506
 507
 508
 509
@@ -2162,10 +2161,11 @@ retries, etc.</p>
 513
 514
 515
-516</pre>
+516
+517</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/spanner_client.rb', line 506</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/spanner_client.rb', line 507</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete_session'>delete_session</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -2414,7 +2414,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-852
 853
 854
 855
@@ -2429,10 +2428,11 @@ retries, etc.</p>
 864
 865
 866
-867</pre>
+867
+868</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/spanner_client.rb', line 852</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/spanner_client.rb', line 853</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_execute_batch_dml'>execute_batch_dml</span> \
     <span class='id identifier rubyid_session'>session</span><span class='comma'>,</span>
@@ -2796,7 +2796,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-629
 630
 631
 632
@@ -2821,10 +2820,11 @@ retries, etc.</p>
 651
 652
 653
-654</pre>
+654
+655</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/spanner_client.rb', line 629</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/spanner_client.rb', line 630</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_execute_sql'>execute_sql</span> \
     <span class='id identifier rubyid_session'>session</span><span class='comma'>,</span>
@@ -3153,7 +3153,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-760
 761
 762
 763
@@ -3177,10 +3176,11 @@ retries, etc.</p>
 781
 782
 783
-784</pre>
+784
+785</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/spanner_client.rb', line 760</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/spanner_client.rb', line 761</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_execute_streaming_sql'>execute_streaming_sql</span> \
     <span class='id identifier rubyid_session'>session</span><span class='comma'>,</span>
@@ -3359,7 +3359,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-408
 409
 410
 411
@@ -3368,10 +3367,11 @@ retries, etc.</p>
 414
 415
 416
-417</pre>
+417
+418</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/spanner_client.rb', line 408</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/spanner_client.rb', line 409</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_session'>get_session</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -3602,7 +3602,6 @@ object.</p>
       <pre class="lines">
 
 
-471
 472
 473
 474
@@ -3615,10 +3614,11 @@ object.</p>
 481
 482
 483
-484</pre>
+484
+485</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/spanner_client.rb', line 471</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/spanner_client.rb', line 472</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_sessions'>list_sessions</span> \
     <span class='id identifier rubyid_database'>database</span><span class='comma'>,</span>
@@ -3913,7 +3913,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1337
 1338
 1339
 1340
@@ -3932,10 +3931,11 @@ retries, etc.</p>
 1353
 1354
 1355
-1356</pre>
+1356
+1357</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/spanner_client.rb', line 1337</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/spanner_client.rb', line 1338</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_partition_query'>partition_query</span> \
     <span class='id identifier rubyid_session'>session</span><span class='comma'>,</span>
@@ -4238,7 +4238,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1430
 1431
 1432
 1433
@@ -4259,10 +4258,11 @@ retries, etc.</p>
 1448
 1449
 1450
-1451</pre>
+1451
+1452</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/spanner_client.rb', line 1430</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/spanner_client.rb', line 1431</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_partition_read'>partition_read</span> \
     <span class='id identifier rubyid_session'>session</span><span class='comma'>,</span>
@@ -4614,7 +4614,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-962
 963
 964
 965
@@ -4639,10 +4638,11 @@ retries, etc.</p>
 984
 985
 986
-987</pre>
+987
+988</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/spanner_client.rb', line 962</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/spanner_client.rb', line 963</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_read'>read</span> \
     <span class='id identifier rubyid_session'>session</span><span class='comma'>,</span>
@@ -4837,7 +4837,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1240
 1241
 1242
 1243
@@ -4849,10 +4848,11 @@ retries, etc.</p>
 1249
 1250
 1251
-1252</pre>
+1252
+1253</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/spanner_client.rb', line 1240</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/spanner_client.rb', line 1241</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_rollback'>rollback</span> \
     <span class='id identifier rubyid_session'>session</span><span class='comma'>,</span>
@@ -5149,7 +5149,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1074
 1075
 1076
 1077
@@ -5173,10 +5172,11 @@ retries, etc.</p>
 1095
 1096
 1097
-1098</pre>
+1098
+1099</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/spanner_client.rb', line 1074</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/spanner_client.rb', line 1075</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_streaming_read'>streaming_read</span> \
     <span class='id identifier rubyid_session'>session</span><span class='comma'>,</span>
