@@ -577,7 +577,6 @@ custom error handling.</p>
       <pre class="lines">
 
 
-132
 133
 134
 135
@@ -691,10 +690,11 @@ custom error handling.</p>
 243
 244
 245
-246</pre>
+246
+247</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/tenant_service_client.rb', line 132</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/tenant_service_client.rb', line 133</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span> \
     <span class='label'>credentials:</span> <span class='kw'>nil</span><span class='comma'>,</span>
@@ -729,7 +729,7 @@ custom error handling.</p>
     <span class='id identifier rubyid_updater_proc'>updater_proc</span> <span class='op'>=</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='period'>.</span><span class='id identifier rubyid_updater_proc'>updater_proc</span>
   <span class='kw'>end</span>
 
-  <span class='id identifier rubyid_package_version'>package_version</span> <span class='op'>=</span> <span class='const'>Gem</span><span class='period'>.</span><span class='id identifier rubyid_loaded_specs'>loaded_specs</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>google-cloud-talent</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_version'>version</span><span class='period'>.</span><span class='id identifier rubyid_version'>version</span>
+  <span class='id identifier rubyid_package_version'>package_version</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Talent.html" title="Google::Cloud::Talent (module)">Talent</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Talent.html#VERSION-constant" title="Google::Cloud::Talent::VERSION (constant)">VERSION</a></span></span>
 
   <span class='id identifier rubyid_google_api_client'>google_api_client</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gl-ruby/</span><span class='embexpr_beg'>#{</span><span class='const'>RUBY_VERSION</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
   <span class='id identifier rubyid_google_api_client'>google_api_client</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'> </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_lib_name'>lib_name</span><span class='embexpr_end'>}</span><span class='tstring_content'>/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_lib_version'>lib_version</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>if</span> <span class='id identifier rubyid_lib_name'>lib_name</span>
@@ -876,14 +876,14 @@ custom error handling.</p>
       <pre class="lines">
 
 
-86
 87
 88
 89
-90</pre>
+90
+91</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/tenant_service_client.rb', line 86</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/tenant_service_client.rb', line 87</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_project_path'>project_path</span> <span class='id identifier rubyid_project'>project</span>
   <span class='const'>PROJECT_PATH_TEMPLATE</span><span class='period'>.</span><span class='id identifier rubyid_render'>render</span><span class='lparen'>(</span>
@@ -959,15 +959,15 @@ custom error handling.</p>
       <pre class="lines">
 
 
-96
 97
 98
 99
 100
-101</pre>
+101
+102</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/tenant_service_client.rb', line 96</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/tenant_service_client.rb', line 97</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_tenant_path'>tenant_path</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span> <span class='id identifier rubyid_tenant'>tenant</span>
   <span class='const'>TENANT_PATH_TEMPLATE</span><span class='period'>.</span><span class='id identifier rubyid_render'>render</span><span class='lparen'>(</span>
@@ -1158,7 +1158,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-283
 284
 285
 286
@@ -1169,10 +1168,11 @@ retries, etc.</p>
 291
 292
 293
-294</pre>
+294
+295</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/tenant_service_client.rb', line 283</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/tenant_service_client.rb', line 284</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_tenant'>create_tenant</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -1332,7 +1332,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-403
 404
 405
 406
@@ -1342,10 +1341,11 @@ retries, etc.</p>
 410
 411
 412
-413</pre>
+413
+414</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/tenant_service_client.rb', line 403</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/tenant_service_client.rb', line 404</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete_tenant'>delete_tenant</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -1513,7 +1513,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-320
 321
 322
 323
@@ -1522,10 +1521,11 @@ retries, etc.</p>
 326
 327
 328
-329</pre>
+329
+330</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/tenant_service_client.rb', line 320</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/tenant_service_client.rb', line 321</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_tenant'>get_tenant</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -1730,7 +1730,6 @@ object.</p>
       <pre class="lines">
 
 
-461
 462
 463
 464
@@ -1741,10 +1740,11 @@ object.</p>
 469
 470
 471
-472</pre>
+472
+473</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/tenant_service_client.rb', line 461</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/tenant_service_client.rb', line 462</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_tenants'>list_tenants</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -2085,7 +2085,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-367
 368
 369
 370
@@ -2096,10 +2095,11 @@ retries, etc.</p>
 375
 376
 377
-378</pre>
+378
+379</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/tenant_service_client.rb', line 367</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/tenant_service_client.rb', line 368</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update_tenant'>update_tenant</span> \
     <span class='id identifier rubyid_tenant'>tenant</span><span class='comma'>,</span>
