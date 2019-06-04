@@ -119,7 +119,7 @@ describe Google::Cloud::TextToSpeech::V1::TextToSpeechClient do
           client = Google::Cloud::TextToSpeech.new(version: :v1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.list_voices
           end
 
@@ -209,7 +209,7 @@ describe Google::Cloud::TextToSpeech::V1::TextToSpeechClient do
           client = Google::Cloud::TextToSpeech.new(version: :v1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.synthesize_speech(
               input,
               voice,
