@@ -601,7 +601,6 @@ custom error handling.</p>
       <pre class="lines">
 
 
-156
 157
 158
 159
@@ -731,10 +730,11 @@ custom error handling.</p>
 283
 284
 285
-286</pre>
+286
+287</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/notification_channel_service_client.rb', line 156</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/notification_channel_service_client.rb', line 157</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span> \
     <span class='label'>credentials:</span> <span class='kw'>nil</span><span class='comma'>,</span>
@@ -769,7 +769,7 @@ custom error handling.</p>
     <span class='id identifier rubyid_updater_proc'>updater_proc</span> <span class='op'>=</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='period'>.</span><span class='id identifier rubyid_updater_proc'>updater_proc</span>
   <span class='kw'>end</span>
 
-  <span class='id identifier rubyid_package_version'>package_version</span> <span class='op'>=</span> <span class='const'>Gem</span><span class='period'>.</span><span class='id identifier rubyid_loaded_specs'>loaded_specs</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>google-cloud-monitoring</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_version'>version</span><span class='period'>.</span><span class='id identifier rubyid_version'>version</span>
+  <span class='id identifier rubyid_package_version'>package_version</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Monitoring.html" title="Google::Cloud::Monitoring (module)">Monitoring</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Monitoring.html#VERSION-constant" title="Google::Cloud::Monitoring::VERSION (constant)">VERSION</a></span></span>
 
   <span class='id identifier rubyid_google_api_client'>google_api_client</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gl-ruby/</span><span class='embexpr_beg'>#{</span><span class='const'>RUBY_VERSION</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
   <span class='id identifier rubyid_google_api_client'>google_api_client</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'> </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_lib_name'>lib_name</span><span class='embexpr_end'>}</span><span class='tstring_content'>/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_lib_version'>lib_version</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>if</span> <span class='id identifier rubyid_lib_name'>lib_name</span>
@@ -943,15 +943,15 @@ custom error handling.</p>
       <pre class="lines">
 
 
-111
 112
 113
 114
 115
-116</pre>
+116
+117</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/notification_channel_service_client.rb', line 111</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/notification_channel_service_client.rb', line 112</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_notification_channel_descriptor_path'>notification_channel_descriptor_path</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span> <span class='id identifier rubyid_channel_descriptor'>channel_descriptor</span>
   <span class='const'>NOTIFICATION_CHANNEL_DESCRIPTOR_PATH_TEMPLATE</span><span class='period'>.</span><span class='id identifier rubyid_render'>render</span><span class='lparen'>(</span>
@@ -1028,15 +1028,15 @@ custom error handling.</p>
       <pre class="lines">
 
 
-100
 101
 102
 103
 104
-105</pre>
+105
+106</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/notification_channel_service_client.rb', line 100</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/notification_channel_service_client.rb', line 101</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_notification_channel_path'>notification_channel_path</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span> <span class='id identifier rubyid_notification_channel'>notification_channel</span>
   <span class='const'>NOTIFICATION_CHANNEL_PATH_TEMPLATE</span><span class='period'>.</span><span class='id identifier rubyid_render'>render</span><span class='lparen'>(</span>
@@ -1102,14 +1102,14 @@ custom error handling.</p>
       <pre class="lines">
 
 
-121
 122
 123
 124
-125</pre>
+125
+126</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/notification_channel_service_client.rb', line 121</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/notification_channel_service_client.rb', line 122</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_project_path'>project_path</span> <span class='id identifier rubyid_project'>project</span>
   <span class='const'>PROJECT_PATH_TEMPLATE</span><span class='period'>.</span><span class='id identifier rubyid_render'>render</span><span class='lparen'>(</span>
@@ -1301,7 +1301,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-531
 532
 533
 534
@@ -1312,10 +1311,11 @@ retries, etc.</p>
 539
 540
 541
-542</pre>
+542
+543</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/notification_channel_service_client.rb', line 531</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/notification_channel_service_client.rb', line 532</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_notification_channel'>create_notification_channel</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -1489,7 +1489,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-612
 613
 614
 615
@@ -1501,10 +1500,11 @@ retries, etc.</p>
 621
 622
 623
-624</pre>
+624
+625</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/notification_channel_service_client.rb', line 612</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/notification_channel_service_client.rb', line 613</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete_notification_channel'>delete_notification_channel</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -1674,7 +1674,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-486
 487
 488
 489
@@ -1683,10 +1682,11 @@ retries, etc.</p>
 492
 493
 494
-495</pre>
+495
+496</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/notification_channel_service_client.rb', line 486</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/notification_channel_service_client.rb', line 487</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_notification_channel'>get_notification_channel</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -1850,7 +1850,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-374
 375
 376
 377
@@ -1859,10 +1858,11 @@ retries, etc.</p>
 380
 381
 382
-383</pre>
+383
+384</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/notification_channel_service_client.rb', line 374</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/notification_channel_service_client.rb', line 375</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_notification_channel_descriptor'>get_notification_channel_descriptor</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -2072,7 +2072,6 @@ object.</p>
       <pre class="lines">
 
 
-340
 341
 342
 343
@@ -2083,10 +2082,11 @@ object.</p>
 348
 349
 350
-351</pre>
+351
+352</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/notification_channel_service_client.rb', line 340</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/notification_channel_service_client.rb', line 341</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_notification_channel_descriptors'>list_notification_channel_descriptors</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -2333,7 +2333,6 @@ object.</p>
       <pre class="lines">
 
 
-445
 446
 447
 448
@@ -2348,10 +2347,11 @@ object.</p>
 457
 458
 459
-460</pre>
+460
+461</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/notification_channel_service_client.rb', line 445</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/notification_channel_service_client.rb', line 446</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_notification_channels'>list_notification_channels</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -2544,7 +2544,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-575
 576
 577
 578
@@ -2555,10 +2554,11 @@ retries, etc.</p>
 583
 584
 585
-586</pre>
+586
+587</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/notification_channel_service_client.rb', line 575</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/notification_channel_service_client.rb', line 576</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update_notification_channel'>update_notification_channel</span> \
     <span class='id identifier rubyid_notification_channel'>notification_channel</span><span class='comma'>,</span>

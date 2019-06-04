@@ -624,7 +624,6 @@ custom error handling.</p>
       <pre class="lines">
 
 
-160
 161
 162
 163
@@ -762,10 +761,11 @@ custom error handling.</p>
 295
 296
 297
-298</pre>
+298
+299</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/metric_service_client.rb', line 160</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/metric_service_client.rb', line 161</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span> \
     <span class='label'>credentials:</span> <span class='kw'>nil</span><span class='comma'>,</span>
@@ -800,7 +800,7 @@ custom error handling.</p>
     <span class='id identifier rubyid_updater_proc'>updater_proc</span> <span class='op'>=</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='period'>.</span><span class='id identifier rubyid_updater_proc'>updater_proc</span>
   <span class='kw'>end</span>
 
-  <span class='id identifier rubyid_package_version'>package_version</span> <span class='op'>=</span> <span class='const'>Gem</span><span class='period'>.</span><span class='id identifier rubyid_loaded_specs'>loaded_specs</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>google-cloud-monitoring</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_version'>version</span><span class='period'>.</span><span class='id identifier rubyid_version'>version</span>
+  <span class='id identifier rubyid_package_version'>package_version</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Monitoring.html" title="Google::Cloud::Monitoring (module)">Monitoring</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Monitoring.html#VERSION-constant" title="Google::Cloud::Monitoring::VERSION (constant)">VERSION</a></span></span>
 
   <span class='id identifier rubyid_google_api_client'>google_api_client</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gl-ruby/</span><span class='embexpr_beg'>#{</span><span class='const'>RUBY_VERSION</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
   <span class='id identifier rubyid_google_api_client'>google_api_client</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'> </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_lib_name'>lib_name</span><span class='embexpr_end'>}</span><span class='tstring_content'>/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_lib_version'>lib_version</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>if</span> <span class='id identifier rubyid_lib_name'>lib_name</span>
@@ -982,15 +982,15 @@ custom error handling.</p>
       <pre class="lines">
 
 
-104
 105
 106
 107
 108
-109</pre>
+109
+110</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/metric_service_client.rb', line 104</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/metric_service_client.rb', line 105</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_metric_descriptor_path'>metric_descriptor_path</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span> <span class='id identifier rubyid_metric_descriptor'>metric_descriptor</span>
   <span class='const'>METRIC_DESCRIPTOR_PATH_TEMPLATE</span><span class='period'>.</span><span class='id identifier rubyid_render'>render</span><span class='lparen'>(</span>
@@ -1067,15 +1067,15 @@ custom error handling.</p>
       <pre class="lines">
 
 
-115
 116
 117
 118
 119
-120</pre>
+120
+121</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/metric_service_client.rb', line 115</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/metric_service_client.rb', line 116</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_monitored_resource_descriptor_path'>monitored_resource_descriptor_path</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span> <span class='id identifier rubyid_monitored_resource_descriptor'>monitored_resource_descriptor</span>
   <span class='const'>MONITORED_RESOURCE_DESCRIPTOR_PATH_TEMPLATE</span><span class='period'>.</span><span class='id identifier rubyid_render'>render</span><span class='lparen'>(</span>
@@ -1141,14 +1141,14 @@ custom error handling.</p>
       <pre class="lines">
 
 
-125
 126
 127
 128
-129</pre>
+129
+130</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/metric_service_client.rb', line 125</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/metric_service_client.rb', line 126</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_project_path'>project_path</span> <span class='id identifier rubyid_project'>project</span>
   <span class='const'>PROJECT_PATH_TEMPLATE</span><span class='period'>.</span><span class='id identifier rubyid_render'>render</span><span class='lparen'>(</span>
@@ -1335,7 +1335,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-533
 534
 535
 536
@@ -1346,10 +1345,11 @@ retries, etc.</p>
 541
 542
 543
-544</pre>
+544
+545</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/metric_service_client.rb', line 533</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/metric_service_client.rb', line 534</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_metric_descriptor'>create_metric_descriptor</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -1532,7 +1532,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-713
 714
 715
 716
@@ -1544,10 +1543,11 @@ retries, etc.</p>
 722
 723
 724
-725</pre>
+725
+726</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/metric_service_client.rb', line 713</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/metric_service_client.rb', line 714</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_time_series'>create_time_series</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -1707,7 +1707,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-568
 569
 570
 571
@@ -1717,10 +1716,11 @@ retries, etc.</p>
 575
 576
 577
-578</pre>
+578
+579</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/metric_service_client.rb', line 568</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/metric_service_client.rb', line 569</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete_metric_descriptor'>delete_metric_descriptor</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -1887,7 +1887,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-492
 493
 494
 495
@@ -1896,10 +1895,11 @@ retries, etc.</p>
 498
 499
 500
-501</pre>
+501
+502</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/metric_service_client.rb', line 492</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/metric_service_client.rb', line 493</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_metric_descriptor'>get_metric_descriptor</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -2065,7 +2065,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-391
 392
 393
 394
@@ -2074,10 +2073,11 @@ retries, etc.</p>
 397
 398
 399
-400</pre>
+400
+401</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/metric_service_client.rb', line 391</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/metric_service_client.rb', line 392</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_monitored_resource_descriptor'>get_monitored_resource_descriptor</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -2302,7 +2302,6 @@ object.</p>
       <pre class="lines">
 
 
-454
 455
 456
 457
@@ -2315,10 +2314,11 @@ object.</p>
 464
 465
 466
-467</pre>
+467
+468</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/metric_service_client.rb', line 454</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/metric_service_client.rb', line 455</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_metric_descriptors'>list_metric_descriptors</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -2546,7 +2546,6 @@ object.</p>
       <pre class="lines">
 
 
-353
 354
 355
 356
@@ -2559,10 +2558,11 @@ object.</p>
 363
 364
 365
-366</pre>
+366
+367</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/metric_service_client.rb', line 353</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/metric_service_client.rb', line 354</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_monitored_resource_descriptors'>list_monitored_resource_descriptors</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -2868,7 +2868,6 @@ object.</p>
       <pre class="lines">
 
 
-657
 658
 659
 660
@@ -2889,10 +2888,11 @@ object.</p>
 675
 676
 677
-678</pre>
+678
+679</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/metric_service_client.rb', line 657</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/metric_service_client.rb', line 658</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_time_series'>list_time_series</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>

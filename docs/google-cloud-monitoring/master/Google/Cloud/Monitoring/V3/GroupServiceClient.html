@@ -565,7 +565,6 @@ custom error handling.</p>
       <pre class="lines">
 
 
-149
 150
 151
 152
@@ -687,10 +686,11 @@ custom error handling.</p>
 268
 269
 270
-271</pre>
+271
+272</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/group_service_client.rb', line 149</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/group_service_client.rb', line 150</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span> \
     <span class='label'>credentials:</span> <span class='kw'>nil</span><span class='comma'>,</span>
@@ -725,7 +725,7 @@ custom error handling.</p>
     <span class='id identifier rubyid_updater_proc'>updater_proc</span> <span class='op'>=</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='period'>.</span><span class='id identifier rubyid_updater_proc'>updater_proc</span>
   <span class='kw'>end</span>
 
-  <span class='id identifier rubyid_package_version'>package_version</span> <span class='op'>=</span> <span class='const'>Gem</span><span class='period'>.</span><span class='id identifier rubyid_loaded_specs'>loaded_specs</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>google-cloud-monitoring</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_version'>version</span><span class='period'>.</span><span class='id identifier rubyid_version'>version</span>
+  <span class='id identifier rubyid_package_version'>package_version</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Monitoring.html" title="Google::Cloud::Monitoring (module)">Monitoring</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Monitoring.html#VERSION-constant" title="Google::Cloud::Monitoring::VERSION (constant)">VERSION</a></span></span>
 
   <span class='id identifier rubyid_google_api_client'>google_api_client</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gl-ruby/</span><span class='embexpr_beg'>#{</span><span class='const'>RUBY_VERSION</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
   <span class='id identifier rubyid_google_api_client'>google_api_client</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'> </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_lib_name'>lib_name</span><span class='embexpr_end'>}</span><span class='tstring_content'>/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_lib_version'>lib_version</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>if</span> <span class='id identifier rubyid_lib_name'>lib_name</span>
@@ -891,15 +891,15 @@ custom error handling.</p>
       <pre class="lines">
 
 
-104
 105
 106
 107
 108
-109</pre>
+109
+110</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/group_service_client.rb', line 104</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/group_service_client.rb', line 105</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_group_path'>group_path</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span> <span class='id identifier rubyid_group'>group</span>
   <span class='const'>GROUP_PATH_TEMPLATE</span><span class='period'>.</span><span class='id identifier rubyid_render'>render</span><span class='lparen'>(</span>
@@ -965,14 +965,14 @@ custom error handling.</p>
       <pre class="lines">
 
 
-114
 115
 116
 117
-118</pre>
+118
+119</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/group_service_client.rb', line 114</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/group_service_client.rb', line 115</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_project_path'>project_path</span> <span class='id identifier rubyid_project'>project</span>
   <span class='const'>PROJECT_PATH_TEMPLATE</span><span class='period'>.</span><span class='id identifier rubyid_render'>render</span><span class='lparen'>(</span>
@@ -1172,7 +1172,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-412
 413
 414
 415
@@ -1185,10 +1184,11 @@ retries, etc.</p>
 422
 423
 424
-425</pre>
+425
+426</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/group_service_client.rb', line 412</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/group_service_client.rb', line 413</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_group'>create_group</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -1346,7 +1346,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-486
 487
 488
 489
@@ -1356,10 +1355,11 @@ retries, etc.</p>
 493
 494
 495
-496</pre>
+496
+497</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/group_service_client.rb', line 486</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/group_service_client.rb', line 487</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete_group'>delete_group</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -1523,7 +1523,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-371
 372
 373
 374
@@ -1532,10 +1531,11 @@ retries, etc.</p>
 377
 378
 379
-380</pre>
+380
+381</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/group_service_client.rb', line 371</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/group_service_client.rb', line 372</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_group'>get_group</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -1778,7 +1778,6 @@ object.</p>
       <pre class="lines">
 
 
-555
 556
 557
 558
@@ -1793,10 +1792,11 @@ object.</p>
 567
 568
 569
-570</pre>
+570
+571</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/group_service_client.rb', line 555</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/group_service_client.rb', line 556</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_group_members'>list_group_members</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -2057,7 +2057,6 @@ object.</p>
       <pre class="lines">
 
 
-332
 333
 334
 335
@@ -2074,10 +2073,11 @@ object.</p>
 346
 347
 348
-349</pre>
+349
+350</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/group_service_client.rb', line 332</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/group_service_client.rb', line 333</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_groups'>list_groups</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -2268,7 +2268,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-454
 455
 456
 457
@@ -2279,10 +2278,11 @@ retries, etc.</p>
 462
 463
 464
-465</pre>
+465
+466</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/group_service_client.rb', line 454</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/group_service_client.rb', line 455</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update_group'>update_group</span> \
     <span class='id identifier rubyid_group'>group</span><span class='comma'>,</span>
