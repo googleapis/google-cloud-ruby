@@ -107,6 +107,32 @@ js:
       <li class="public ">
   <span class="summary_signature">
     
+      <a href="#autoscaling_config-instance_method" title="#autoscaling_config (instance method)">#<strong>autoscaling_config</strong>  &#x21d2; Google::Cloud::Dataproc::V1beta2::AutoscalingConfig </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Optional.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#config_bucket-instance_method" title="#config_bucket (instance method)">#<strong>config_bucket</strong>  &#x21d2; String </a>
     
 
@@ -159,6 +185,32 @@ js:
       <li class="public ">
   <span class="summary_signature">
     
+      <a href="#endpoint_config-instance_method" title="#endpoint_config (instance method)">#<strong>endpoint_config</strong>  &#x21d2; Google::Cloud::Dataproc::V1beta2::EndpointConfig </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Optional.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#gce_cluster_config-instance_method" title="#gce_cluster_config (instance method)">#<strong>gce_cluster_config</strong>  &#x21d2; Google::Cloud::Dataproc::V1beta2::GceClusterConfig </a>
     
 
@@ -176,7 +228,7 @@ js:
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Required.</p>
+    <span class="summary_desc"><div class='inline'><p>Optional.</p>
 </div></span>
   
 </li>
@@ -289,6 +341,32 @@ js:
       <li class="public ">
   <span class="summary_signature">
     
+      <a href="#security_config-instance_method" title="#security_config (instance method)">#<strong>security_config</strong>  &#x21d2; Google::Cloud::Dataproc::V1beta2::SecurityConfig </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Optional.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#software_config-instance_method" title="#software_config (instance method)">#<strong>software_config</strong>  &#x21d2; Google::Cloud::Dataproc::V1beta2::SoftwareConfig </a>
     
 
@@ -348,9 +426,66 @@ js:
     <h2>Instance Attribute Details</h2>
     
       
-      <span id="config_bucket=-instance_method"></span>
+      <span id="autoscaling_config=-instance_method"></span>
       <div class="method_details first">
-  <h3 class="signature first" id="config_bucket-instance_method">
+  <h3 class="signature first" id="autoscaling_config-instance_method">
+  
+    #<strong>autoscaling_config</strong>  &#x21d2; <tt><span class='object_link'><a href="AutoscalingConfig.html" title="Google::Cloud::Dataproc::V1beta2::AutoscalingConfig (class)">Google::Cloud::Dataproc::V1beta2::AutoscalingConfig</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Optional. Autoscaling config for the policy associated with the cluster.
+Cluster does not autoscale if this field is unset.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="AutoscalingConfig.html" title="Google::Cloud::Dataproc::V1beta2::AutoscalingConfig (class)">Google::Cloud::Dataproc::V1beta2::AutoscalingConfig</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Optional. Autoscaling config for the policy associated with the cluster.
+Cluster does not autoscale if this field is unset.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+122</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1beta2/doc/google/cloud/dataproc/v1beta2/clusters.rb', line 122</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dataproc::V1beta2::ClusterConfig (class)">ClusterConfig</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="config_bucket=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="config_bucket-instance_method">
   
     #<strong>config_bucket</strong>  &#x21d2; <tt>String</tt> 
   
@@ -360,12 +495,15 @@ js:
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Optional. A Cloud Storage staging bucket used for sharing generated
-SSH keys and config. If you do not specify a staging bucket, Cloud
-Dataproc will determine an appropriate Cloud Storage location (US,
+    <p>Returns Optional. A Google Cloud Storage bucket used to stage job
+dependencies, config files, and job driver console output.
+If you do not specify a staging bucket, Cloud
+Dataproc will determine a Cloud Storage location (US,
 ASIA, or EU) for your cluster&#39;s staging bucket according to the Google
-Compute Engine zone where your cluster is deployed, and then it will create
-and manage this project-level, per-location bucket for you.</p>
+Compute Engine zone where your cluster is deployed, and then create
+and manage this project-level, per-location bucket (see
+<a href="/dataproc/docs/concepts/configuring-clusters/staging-bucket">Cloud Dataproc staging
+bucket</a>).</p>
 
 
   </div>
@@ -383,12 +521,15 @@ and manage this project-level, per-location bucket for you.</p>
       
       
         &mdash;
-        <div class='inline'><p>Optional. A Cloud Storage staging bucket used for sharing generated
-SSH keys and config. If you do not specify a staging bucket, Cloud
-Dataproc will determine an appropriate Cloud Storage location (US,
+        <div class='inline'><p>Optional. A Google Cloud Storage bucket used to stage job
+dependencies, config files, and job driver console output.
+If you do not specify a staging bucket, Cloud
+Dataproc will determine a Cloud Storage location (US,
 ASIA, or EU) for your cluster&#39;s staging bucket according to the Google
-Compute Engine zone where your cluster is deployed, and then it will create
-and manage this project-level, per-location bucket for you.</p>
+Compute Engine zone where your cluster is deployed, and then create
+and manage this project-level, per-location bucket (see
+<a href="/dataproc/docs/concepts/configuring-clusters/staging-bucket">Cloud Dataproc staging
+bucket</a>).</p>
 </div>
       
     </li>
@@ -401,10 +542,10 @@ and manage this project-level, per-location bucket for you.</p>
       <pre class="lines">
 
 
-109</pre>
+122</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1beta2/doc/google/cloud/dataproc/v1beta2/clusters.rb', line 109</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1beta2/doc/google/cloud/dataproc/v1beta2/clusters.rb', line 122</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dataproc::V1beta2::ClusterConfig (class)">ClusterConfig</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -456,10 +597,65 @@ and manage this project-level, per-location bucket for you.</p>
       <pre class="lines">
 
 
-109</pre>
+122</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1beta2/doc/google/cloud/dataproc/v1beta2/clusters.rb', line 109</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1beta2/doc/google/cloud/dataproc/v1beta2/clusters.rb', line 122</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dataproc::V1beta2::ClusterConfig (class)">ClusterConfig</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="endpoint_config=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="endpoint_config-instance_method">
+  
+    #<strong>endpoint_config</strong>  &#x21d2; <tt><span class='object_link'><a href="EndpointConfig.html" title="Google::Cloud::Dataproc::V1beta2::EndpointConfig (class)">Google::Cloud::Dataproc::V1beta2::EndpointConfig</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Optional. Port/endpoint configuration for this cluster</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="EndpointConfig.html" title="Google::Cloud::Dataproc::V1beta2::EndpointConfig (class)">Google::Cloud::Dataproc::V1beta2::EndpointConfig</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Optional. Port/endpoint configuration for this cluster</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+122</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1beta2/doc/google/cloud/dataproc/v1beta2/clusters.rb', line 122</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dataproc::V1beta2::ClusterConfig (class)">ClusterConfig</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -480,7 +676,7 @@ and manage this project-level, per-location bucket for you.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Required. The shared Compute Engine config settings for
+    <p>Returns Optional. The shared Compute Engine config settings for
 all instances in a cluster.</p>
 
 
@@ -499,7 +695,7 @@ all instances in a cluster.</p>
       
       
         &mdash;
-        <div class='inline'><p>Required. The shared Compute Engine config settings for
+        <div class='inline'><p>Optional. The shared Compute Engine config settings for
 all instances in a cluster.</p>
 </div>
       
@@ -513,10 +709,10 @@ all instances in a cluster.</p>
       <pre class="lines">
 
 
-109</pre>
+122</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1beta2/doc/google/cloud/dataproc/v1beta2/clusters.rb', line 109</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1beta2/doc/google/cloud/dataproc/v1beta2/clusters.rb', line 122</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dataproc::V1beta2::ClusterConfig (class)">ClusterConfig</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -594,10 +790,10 @@ fi
       <pre class="lines">
 
 
-109</pre>
+122</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1beta2/doc/google/cloud/dataproc/v1beta2/clusters.rb', line 109</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1beta2/doc/google/cloud/dataproc/v1beta2/clusters.rb', line 122</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dataproc::V1beta2::ClusterConfig (class)">ClusterConfig</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -649,10 +845,10 @@ fi
       <pre class="lines">
 
 
-109</pre>
+122</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1beta2/doc/google/cloud/dataproc/v1beta2/clusters.rb', line 109</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1beta2/doc/google/cloud/dataproc/v1beta2/clusters.rb', line 122</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dataproc::V1beta2::ClusterConfig (class)">ClusterConfig</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -706,10 +902,10 @@ the master instance in a cluster.</p>
       <pre class="lines">
 
 
-109</pre>
+122</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1beta2/doc/google/cloud/dataproc/v1beta2/clusters.rb', line 109</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1beta2/doc/google/cloud/dataproc/v1beta2/clusters.rb', line 122</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dataproc::V1beta2::ClusterConfig (class)">ClusterConfig</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -763,10 +959,65 @@ additional worker instances in a cluster.</p>
       <pre class="lines">
 
 
-109</pre>
+122</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1beta2/doc/google/cloud/dataproc/v1beta2/clusters.rb', line 109</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1beta2/doc/google/cloud/dataproc/v1beta2/clusters.rb', line 122</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dataproc::V1beta2::ClusterConfig (class)">ClusterConfig</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="security_config=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="security_config-instance_method">
+  
+    #<strong>security_config</strong>  &#x21d2; <tt><span class='object_link'><a href="SecurityConfig.html" title="Google::Cloud::Dataproc::V1beta2::SecurityConfig (class)">Google::Cloud::Dataproc::V1beta2::SecurityConfig</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Optional. Security related configuration.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="SecurityConfig.html" title="Google::Cloud::Dataproc::V1beta2::SecurityConfig (class)">Google::Cloud::Dataproc::V1beta2::SecurityConfig</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Optional. Security related configuration.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+122</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1beta2/doc/google/cloud/dataproc/v1beta2/clusters.rb', line 122</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dataproc::V1beta2::ClusterConfig (class)">ClusterConfig</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -818,10 +1069,10 @@ additional worker instances in a cluster.</p>
       <pre class="lines">
 
 
-109</pre>
+122</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1beta2/doc/google/cloud/dataproc/v1beta2/clusters.rb', line 109</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1beta2/doc/google/cloud/dataproc/v1beta2/clusters.rb', line 122</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dataproc::V1beta2::ClusterConfig (class)">ClusterConfig</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -875,10 +1126,10 @@ worker instances in a cluster.</p>
       <pre class="lines">
 
 
-109</pre>
+122</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1beta2/doc/google/cloud/dataproc/v1beta2/clusters.rb', line 109</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1beta2/doc/google/cloud/dataproc/v1beta2/clusters.rb', line 122</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dataproc::V1beta2::ClusterConfig (class)">ClusterConfig</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>

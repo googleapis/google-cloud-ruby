@@ -866,11 +866,10 @@ can also be provided.</p>
       
         &mdash;
         <div class='inline'><p>Optional. A unique id used to identify the request. If the server
-receives two
-<span class='object_link'><a href="CreateClusterRequest.html" title="Google::Cloud::Dataproc::V1beta2::CreateClusterRequest (class)">CreateClusterRequest</a></span>
-requests  with the same id, then the second request will be ignored and the
-first <span class='object_link'><a href="../../../Longrunning/Operation.html" title="Google::Longrunning::Operation (class)">Longrunning::Operation</a></span> created
-and stored in the backend is returned.</p>
+receives two <span class='object_link'><a href="CreateClusterRequest.html" title="Google::Cloud::Dataproc::V1beta2::CreateClusterRequest (class)">CreateClusterRequest</a></span> requests  with the same
+id, then the second request will be ignored and the
+first <span class='object_link'><a href="../../../Longrunning/Operation.html" title="Google::Longrunning::Operation (class)">Longrunning::Operation</a></span> created and stored in the backend
+is returned.</p>
 
 <p>It is recommended to always set this value to a
 <a href="https://en.wikipedia.org/wiki/Universally_unique_identifier">UUID</a>.</p>
@@ -936,6 +935,7 @@ retries, etc.</p>
       <pre class="lines">
 
 
+294
 295
 296
 297
@@ -957,11 +957,10 @@ retries, etc.</p>
 313
 314
 315
-316
-317</pre>
+316</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1beta2/cluster_controller_client.rb', line 295</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1beta2/cluster_controller_client.rb', line 294</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_cluster'>create_cluster</span> \
     <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span>
@@ -1130,11 +1129,10 @@ belongs to.</p>
       
         &mdash;
         <div class='inline'><p>Optional. A unique id used to identify the request. If the server
-receives two
-<span class='object_link'><a href="DeleteClusterRequest.html" title="Google::Cloud::Dataproc::V1beta2::DeleteClusterRequest (class)">DeleteClusterRequest</a></span>
-requests  with the same id, then the second request will be ignored and the
-first <span class='object_link'><a href="../../../Longrunning/Operation.html" title="Google::Longrunning::Operation (class)">Longrunning::Operation</a></span> created
-and stored in the backend is returned.</p>
+receives two <span class='object_link'><a href="DeleteClusterRequest.html" title="Google::Cloud::Dataproc::V1beta2::DeleteClusterRequest (class)">DeleteClusterRequest</a></span> requests  with the same
+id, then the second request will be ignored and the
+first <span class='object_link'><a href="../../../Longrunning/Operation.html" title="Google::Longrunning::Operation (class)">Longrunning::Operation</a></span> created and stored in the
+backend is returned.</p>
 
 <p>It is recommended to always set this value to a
 <a href="https://en.wikipedia.org/wiki/Universally_unique_identifier">UUID</a>.</p>
@@ -1200,7 +1198,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-568
 569
 570
 571
@@ -1224,10 +1221,11 @@ retries, etc.</p>
 589
 590
 591
-592</pre>
+592
+593</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1beta2/cluster_controller_client.rb', line 568</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1beta2/cluster_controller_client.rb', line 569</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete_cluster'>delete_cluster</span> \
     <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span>
@@ -1428,7 +1426,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-784
 785
 786
 787
@@ -1448,10 +1445,11 @@ retries, etc.</p>
 801
 802
 803
-804</pre>
+804
+805</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1beta2/cluster_controller_client.rb', line 784</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1beta2/cluster_controller_client.rb', line 785</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_diagnose_cluster'>diagnose_cluster</span> \
     <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span>
@@ -1663,7 +1661,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-626
 627
 628
 629
@@ -1676,10 +1673,11 @@ retries, etc.</p>
 636
 637
 638
-639</pre>
+639
+640</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1beta2/cluster_controller_client.rb', line 626</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1beta2/cluster_controller_client.rb', line 627</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_cluster'>get_cluster</span> \
     <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span>
@@ -1937,7 +1935,6 @@ object.</p>
       <pre class="lines">
 
 
-710
 711
 712
 713
@@ -1952,10 +1949,11 @@ object.</p>
 722
 723
 724
-725</pre>
+725
+726</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1beta2/cluster_controller_client.rb', line 710</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1beta2/cluster_controller_client.rb', line 711</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_clusters'>list_clusters</span> \
     <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span>
@@ -2181,6 +2179,10 @@ deletion timestamp</td>
 <td>config.lifecycle_config.idle_delete_ttl</td><td>Update Idle TTL
 duration</td>
 </tr>
+<tr>
+<td>config.autoscaling_config.policy_uri</td><td>Use, stop using, or change
+autoscaling policies</td>
+</tr>
 </table>
 
 <p>A hash of the same form as <code>Google::Protobuf::FieldMask</code>
@@ -2224,11 +2226,10 @@ can also be provided.</p>
       
         &mdash;
         <div class='inline'><p>Optional. A unique id used to identify the request. If the server
-receives two
-<span class='object_link'><a href="UpdateClusterRequest.html" title="Google::Cloud::Dataproc::V1beta2::UpdateClusterRequest (class)">UpdateClusterRequest</a></span>
-requests  with the same id, then the second request will be ignored and the
-first <span class='object_link'><a href="../../../Longrunning/Operation.html" title="Google::Longrunning::Operation (class)">Longrunning::Operation</a></span> created
-and stored in the backend is returned.</p>
+receives two <span class='object_link'><a href="UpdateClusterRequest.html" title="Google::Cloud::Dataproc::V1beta2::UpdateClusterRequest (class)">UpdateClusterRequest</a></span> requests  with the same
+id, then the second request will be ignored and the
+first <span class='object_link'><a href="../../../Longrunning/Operation.html" title="Google::Longrunning::Operation (class)">Longrunning::Operation</a></span> created and stored in the
+backend is returned.</p>
 
 <p>It is recommended to always set this value to a
 <a href="https://en.wikipedia.org/wiki/Universally_unique_identifier">UUID</a>.</p>
@@ -2294,8 +2295,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-467
-468
 469
 470
 471
@@ -2322,10 +2321,12 @@ retries, etc.</p>
 492
 493
 494
-495</pre>
+495
+496
+497</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1beta2/cluster_controller_client.rb', line 467</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1beta2/cluster_controller_client.rb', line 469</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update_cluster'>update_cluster</span> \
     <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span>

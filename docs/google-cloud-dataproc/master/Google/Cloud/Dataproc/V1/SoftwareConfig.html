@@ -133,6 +133,32 @@ js:
       <li class="public ">
   <span class="summary_signature">
     
+      <a href="#optional_components-instance_method" title="#optional_components (instance method)">#<strong>optional_components</strong>  &#x21d2; Array&lt;Google::Cloud::Dataproc::V1::Component&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The set of optional components to activate on the cluster.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#properties-instance_method" title="#properties (instance method)">#<strong>properties</strong>  &#x21d2; Hash{String =&gt; String} </a>
     
 
@@ -184,7 +210,7 @@ Versions</a>,
 such as &quot;1.2&quot; (including a subminor version, such as &quot;1.2.29&quot;), or the
 <a href="/dataproc/docs/concepts/versioning/dataproc-versions#other_versions">&quot;preview&quot;
 version</a>.
-If unspecified, it defaults to the latest version.</p>
+If unspecified, it defaults to the latest Debian version.</p>
 
 
   </div>
@@ -208,7 +234,7 @@ Versions</a>,
 such as &quot;1.2&quot; (including a subminor version, such as &quot;1.2.29&quot;), or the
 <a href="/dataproc/docs/concepts/versioning/dataproc-versions#other_versions">&quot;preview&quot;
 version</a>.
-If unspecified, it defaults to the latest version.</p>
+If unspecified, it defaults to the latest Debian version.</p>
 </div>
       
     </li>
@@ -221,10 +247,65 @@ If unspecified, it defaults to the latest version.</p>
       <pre class="lines">
 
 
-405</pre>
+411</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1/doc/google/cloud/dataproc/v1/clusters.rb', line 405</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1/doc/google/cloud/dataproc/v1/clusters.rb', line 411</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dataproc::V1::SoftwareConfig (class)">SoftwareConfig</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="optional_components=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="optional_components-instance_method">
+  
+    #<strong>optional_components</strong>  &#x21d2; <tt>Array&lt;Google::Cloud::Dataproc::V1::Component&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns The set of optional components to activate on the cluster.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;Google::Cloud::Dataproc::V1::Component&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The set of optional components to activate on the cluster.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+411</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1/doc/google/cloud/dataproc/v1/clusters.rb', line 411</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dataproc::V1::SoftwareConfig (class)">SoftwareConfig</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -247,8 +328,8 @@ If unspecified, it defaults to the latest version.</p>
   <div class="discussion">
     <p>Returns Optional. The properties to set on daemon config files.</p>
 
-<p>Property keys are specified in <code>prefix:property</code> format, such as
-<code>core:fs.defaultFS</code>. The following are supported prefixes
+<p>Property keys are specified in <code>prefix:property</code> format, for example
+<code>core:hadoop.tmp.dir</code>. The following are supported prefixes
 and their mappings:</p>
 
 <ul>
@@ -284,8 +365,8 @@ and their mappings:</p>
         &mdash;
         <div class='inline'><p>Optional. The properties to set on daemon config files.</p>
 
-<p>Property keys are specified in <code>prefix:property</code> format, such as
-<code>core:fs.defaultFS</code>. The following are supported prefixes
+<p>Property keys are specified in <code>prefix:property</code> format, for example
+<code>core:hadoop.tmp.dir</code>. The following are supported prefixes
 and their mappings:</p>
 
 <ul>
@@ -314,10 +395,10 @@ and their mappings:</p>
       <pre class="lines">
 
 
-405</pre>
+411</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1/doc/google/cloud/dataproc/v1/clusters.rb', line 405</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1/doc/google/cloud/dataproc/v1/clusters.rb', line 411</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dataproc::V1::SoftwareConfig (class)">SoftwareConfig</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
