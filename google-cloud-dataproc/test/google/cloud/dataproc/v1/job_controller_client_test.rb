@@ -152,7 +152,7 @@ describe Google::Cloud::Dataproc::V1::JobControllerClient do
           client = Google::Cloud::Dataproc::JobController.new(version: :v1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.submit_job(
               project_id,
               region,
@@ -252,7 +252,7 @@ describe Google::Cloud::Dataproc::V1::JobControllerClient do
           client = Google::Cloud::Dataproc::JobController.new(version: :v1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.get_job(
               project_id,
               region,
@@ -332,7 +332,7 @@ describe Google::Cloud::Dataproc::V1::JobControllerClient do
           client = Google::Cloud::Dataproc::JobController.new(version: :v1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.list_jobs(project_id, region)
           end
 
@@ -440,7 +440,7 @@ describe Google::Cloud::Dataproc::V1::JobControllerClient do
           client = Google::Cloud::Dataproc::JobController.new(version: :v1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.update_job(
               project_id,
               region,
@@ -542,7 +542,7 @@ describe Google::Cloud::Dataproc::V1::JobControllerClient do
           client = Google::Cloud::Dataproc::JobController.new(version: :v1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.cancel_job(
               project_id,
               region,
@@ -631,7 +631,7 @@ describe Google::Cloud::Dataproc::V1::JobControllerClient do
           client = Google::Cloud::Dataproc::JobController.new(version: :v1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.delete_job(
               project_id,
               region,

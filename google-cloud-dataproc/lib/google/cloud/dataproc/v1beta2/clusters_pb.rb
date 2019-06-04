@@ -32,6 +32,16 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :lifecycle_config, :message, 14, "google.cloud.dataproc.v1beta2.LifecycleConfig"
     repeated :initialization_actions, :message, 11, "google.cloud.dataproc.v1beta2.NodeInitializationAction"
     optional :encryption_config, :message, 15, "google.cloud.dataproc.v1beta2.EncryptionConfig"
+    optional :autoscaling_config, :message, 16, "google.cloud.dataproc.v1beta2.AutoscalingConfig"
+    optional :endpoint_config, :message, 17, "google.cloud.dataproc.v1beta2.EndpointConfig"
+    optional :security_config, :message, 18, "google.cloud.dataproc.v1beta2.SecurityConfig"
+  end
+  add_message "google.cloud.dataproc.v1beta2.EndpointConfig" do
+    map :http_ports, :string, :string, 1
+    optional :enable_http_port_access, :bool, 2
+  end
+  add_message "google.cloud.dataproc.v1beta2.AutoscalingConfig" do
+    optional :policy_uri, :string, 1
   end
   add_message "google.cloud.dataproc.v1beta2.EncryptionConfig" do
     optional :gce_pd_kms_key_name, :string, 1
@@ -45,6 +55,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     repeated :service_account_scopes, :string, 3
     repeated :tags, :string, 4
     map :metadata, :string, :string, 5
+    optional :reservation_affinity, :message, 11, "google.cloud.dataproc.v1beta2.ReservationAffinity"
   end
   add_message "google.cloud.dataproc.v1beta2.InstanceGroupConfig" do
     optional :num_instances, :int32, 1
@@ -77,6 +88,25 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :auto_delete_ttl, :message, 3, "google.protobuf.Duration"
     end
   end
+  add_message "google.cloud.dataproc.v1beta2.SecurityConfig" do
+    optional :kerberos_config, :message, 1, "google.cloud.dataproc.v1beta2.KerberosConfig"
+  end
+  add_message "google.cloud.dataproc.v1beta2.KerberosConfig" do
+    optional :enable_kerberos, :bool, 1
+    optional :root_principal_password_uri, :string, 2
+    optional :kms_key_uri, :string, 3
+    optional :keystore_uri, :string, 4
+    optional :truststore_uri, :string, 5
+    optional :keystore_password_uri, :string, 6
+    optional :key_password_uri, :string, 7
+    optional :truststore_password_uri, :string, 8
+    optional :cross_realm_trust_realm, :string, 9
+    optional :cross_realm_trust_kdc, :string, 10
+    optional :cross_realm_trust_admin_server, :string, 11
+    optional :cross_realm_trust_shared_password_uri, :string, 12
+    optional :kdc_db_key_uri, :string, 13
+    optional :tgt_lifetime_hours, :int32, 14
+  end
   add_message "google.cloud.dataproc.v1beta2.NodeInitializationAction" do
     optional :executable_file, :string, 1
     optional :execution_timeout, :message, 2, "google.protobuf.Duration"
@@ -103,6 +133,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.cloud.dataproc.v1beta2.SoftwareConfig" do
     optional :image_version, :string, 1
     map :properties, :string, :string, 2
+    repeated :optional_components, :enum, 3, "google.cloud.dataproc.v1beta2.Component"
   end
   add_message "google.cloud.dataproc.v1beta2.ClusterMetrics" do
     map :hdfs_metrics, :string, :int64, 1
@@ -154,6 +185,17 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.cloud.dataproc.v1beta2.DiagnoseClusterResults" do
     optional :output_uri, :string, 1
   end
+  add_message "google.cloud.dataproc.v1beta2.ReservationAffinity" do
+    optional :consume_reservation_type, :enum, 1, "google.cloud.dataproc.v1beta2.ReservationAffinity.Type"
+    optional :key, :string, 2
+    repeated :values, :string, 3
+  end
+  add_enum "google.cloud.dataproc.v1beta2.ReservationAffinity.Type" do
+    value :TYPE_UNSPECIFIED, 0
+    value :NO_RESERVATION, 1
+    value :ANY_RESERVATION, 2
+    value :SPECIFIC_RESERVATION, 3
+  end
 end
 
 module Google
@@ -162,6 +204,8 @@ module Google
       module V1beta2
         Cluster = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1beta2.Cluster").msgclass
         ClusterConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1beta2.ClusterConfig").msgclass
+        EndpointConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1beta2.EndpointConfig").msgclass
+        AutoscalingConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1beta2.AutoscalingConfig").msgclass
         EncryptionConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1beta2.EncryptionConfig").msgclass
         GceClusterConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1beta2.GceClusterConfig").msgclass
         InstanceGroupConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1beta2.InstanceGroupConfig").msgclass
@@ -169,6 +213,8 @@ module Google
         AcceleratorConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1beta2.AcceleratorConfig").msgclass
         DiskConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1beta2.DiskConfig").msgclass
         LifecycleConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1beta2.LifecycleConfig").msgclass
+        SecurityConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1beta2.SecurityConfig").msgclass
+        KerberosConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1beta2.KerberosConfig").msgclass
         NodeInitializationAction = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1beta2.NodeInitializationAction").msgclass
         ClusterStatus = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1beta2.ClusterStatus").msgclass
         ClusterStatus::State = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1beta2.ClusterStatus.State").enummodule
@@ -183,6 +229,8 @@ module Google
         ListClustersResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1beta2.ListClustersResponse").msgclass
         DiagnoseClusterRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1beta2.DiagnoseClusterRequest").msgclass
         DiagnoseClusterResults = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1beta2.DiagnoseClusterResults").msgclass
+        ReservationAffinity = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1beta2.ReservationAffinity").msgclass
+        ReservationAffinity::Type = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1beta2.ReservationAffinity.Type").enummodule
       end
     end
   end

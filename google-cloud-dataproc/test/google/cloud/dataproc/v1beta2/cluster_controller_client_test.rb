@@ -196,7 +196,7 @@ describe Google::Cloud::Dataproc::V1beta2::ClusterControllerClient do
           client = Google::Cloud::Dataproc::ClusterController.new(version: :v1beta2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1beta2 do
             client.create_cluster(
               project_id,
               region,
@@ -355,7 +355,7 @@ describe Google::Cloud::Dataproc::V1beta2::ClusterControllerClient do
           client = Google::Cloud::Dataproc::ClusterController.new(version: :v1beta2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1beta2 do
             client.update_cluster(
               project_id,
               region,
@@ -493,7 +493,7 @@ describe Google::Cloud::Dataproc::V1beta2::ClusterControllerClient do
           client = Google::Cloud::Dataproc::ClusterController.new(version: :v1beta2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1beta2 do
             client.delete_cluster(
               project_id,
               region,
@@ -593,7 +593,7 @@ describe Google::Cloud::Dataproc::V1beta2::ClusterControllerClient do
           client = Google::Cloud::Dataproc::ClusterController.new(version: :v1beta2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1beta2 do
             client.get_cluster(
               project_id,
               region,
@@ -673,7 +673,7 @@ describe Google::Cloud::Dataproc::V1beta2::ClusterControllerClient do
           client = Google::Cloud::Dataproc::ClusterController.new(version: :v1beta2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1beta2 do
             client.list_clusters(project_id, region)
           end
 
@@ -805,7 +805,7 @@ describe Google::Cloud::Dataproc::V1beta2::ClusterControllerClient do
           client = Google::Cloud::Dataproc::ClusterController.new(version: :v1beta2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1beta2 do
             client.diagnose_cluster(
               project_id,
               region,
