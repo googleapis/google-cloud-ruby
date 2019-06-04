@@ -464,7 +464,6 @@ custom error handling.</p>
       <pre class="lines">
 
 
-129
 130
 131
 132
@@ -553,10 +552,11 @@ custom error handling.</p>
 215
 216
 217
-218</pre>
+218
+219</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/trace/v2/trace_service_client.rb', line 129</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/trace/v2/trace_service_client.rb', line 130</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span> \
     <span class='label'>credentials:</span> <span class='kw'>nil</span><span class='comma'>,</span>
@@ -591,7 +591,7 @@ custom error handling.</p>
     <span class='id identifier rubyid_updater_proc'>updater_proc</span> <span class='op'>=</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='period'>.</span><span class='id identifier rubyid_updater_proc'>updater_proc</span>
   <span class='kw'>end</span>
 
-  <span class='id identifier rubyid_package_version'>package_version</span> <span class='op'>=</span> <span class='const'>Gem</span><span class='period'>.</span><span class='id identifier rubyid_loaded_specs'>loaded_specs</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>google-cloud-trace</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_version'>version</span><span class='period'>.</span><span class='id identifier rubyid_version'>version</span>
+  <span class='id identifier rubyid_package_version'>package_version</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Trace.html" title="Google::Cloud::Trace (module)">Trace</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Trace.html#VERSION-constant" title="Google::Cloud::Trace::VERSION (constant)">VERSION</a></span></span>
 
   <span class='id identifier rubyid_google_api_client'>google_api_client</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gl-ruby/</span><span class='embexpr_beg'>#{</span><span class='const'>RUBY_VERSION</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
   <span class='id identifier rubyid_google_api_client'>google_api_client</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'> </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_lib_name'>lib_name</span><span class='embexpr_end'>}</span><span class='tstring_content'>/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_lib_version'>lib_version</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>if</span> <span class='id identifier rubyid_lib_name'>lib_name</span>
@@ -713,14 +713,14 @@ custom error handling.</p>
       <pre class="lines">
 
 
-81
 82
 83
 84
-85</pre>
+85
+86</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/trace/v2/trace_service_client.rb', line 81</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/trace/v2/trace_service_client.rb', line 82</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_project_path'>project_path</span> <span class='id identifier rubyid_project'>project</span>
   <span class='const'>PROJECT_PATH_TEMPLATE</span><span class='period'>.</span><span class='id identifier rubyid_render'>render</span><span class='lparen'>(</span>
@@ -807,16 +807,16 @@ custom error handling.</p>
       <pre class="lines">
 
 
-92
 93
 94
 95
 96
 97
-98</pre>
+98
+99</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/trace/v2/trace_service_client.rb', line 92</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/trace/v2/trace_service_client.rb', line 93</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_span_path'>span_path</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span> <span class='id identifier rubyid_trace'>trace</span><span class='comma'>,</span> <span class='id identifier rubyid_span'>span</span>
   <span class='const'>SPAN_PATH_TEMPLATE</span><span class='period'>.</span><span class='id identifier rubyid_render'>render</span><span class='lparen'>(</span>
@@ -995,7 +995,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-250
 251
 252
 253
@@ -1007,10 +1006,11 @@ retries, etc.</p>
 259
 260
 261
-262</pre>
+262
+263</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/trace/v2/trace_service_client.rb', line 250</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/trace/v2/trace_service_client.rb', line 251</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_batch_write_spans'>batch_write_spans</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -1413,7 +1413,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-364
 365
 366
 367
@@ -1446,10 +1445,11 @@ retries, etc.</p>
 394
 395
 396
-397</pre>
+397
+398</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/trace/v2/trace_service_client.rb', line 364</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/trace/v2/trace_service_client.rb', line 365</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_span'>create_span</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
