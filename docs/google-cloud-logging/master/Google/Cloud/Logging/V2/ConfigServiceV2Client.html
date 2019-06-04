@@ -671,7 +671,6 @@ custom error handling.</p>
       <pre class="lines">
 
 
-157
 158
 159
 160
@@ -825,10 +824,11 @@ custom error handling.</p>
 308
 309
 310
-311</pre>
+311
+312</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/config_service_v2_client.rb', line 157</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/config_service_v2_client.rb', line 158</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span> \
     <span class='label'>credentials:</span> <span class='kw'>nil</span><span class='comma'>,</span>
@@ -863,7 +863,7 @@ custom error handling.</p>
     <span class='id identifier rubyid_updater_proc'>updater_proc</span> <span class='op'>=</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='period'>.</span><span class='id identifier rubyid_updater_proc'>updater_proc</span>
   <span class='kw'>end</span>
 
-  <span class='id identifier rubyid_package_version'>package_version</span> <span class='op'>=</span> <span class='const'>Gem</span><span class='period'>.</span><span class='id identifier rubyid_loaded_specs'>loaded_specs</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>google-cloud-logging</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_version'>version</span><span class='period'>.</span><span class='id identifier rubyid_version'>version</span>
+  <span class='id identifier rubyid_package_version'>package_version</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Logging.html" title="Google::Cloud::Logging (module)">Logging</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Logging.html#VERSION-constant" title="Google::Cloud::Logging::VERSION (constant)">VERSION</a></span></span>
 
   <span class='id identifier rubyid_google_api_client'>google_api_client</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gl-ruby/</span><span class='embexpr_beg'>#{</span><span class='const'>RUBY_VERSION</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
   <span class='id identifier rubyid_google_api_client'>google_api_client</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'> </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_lib_name'>lib_name</span><span class='embexpr_end'>}</span><span class='tstring_content'>/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_lib_version'>lib_version</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>if</span> <span class='id identifier rubyid_lib_name'>lib_name</span>
@@ -1061,15 +1061,15 @@ custom error handling.</p>
       <pre class="lines">
 
 
-101
 102
 103
 104
 105
-106</pre>
+106
+107</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/config_service_v2_client.rb', line 101</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/config_service_v2_client.rb', line 102</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_exclusion_path'>exclusion_path</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span> <span class='id identifier rubyid_exclusion'>exclusion</span>
   <span class='const'>EXCLUSION_PATH_TEMPLATE</span><span class='period'>.</span><span class='id identifier rubyid_render'>render</span><span class='lparen'>(</span>
@@ -1135,14 +1135,14 @@ custom error handling.</p>
       <pre class="lines">
 
 
-111
 112
 113
 114
-115</pre>
+115
+116</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/config_service_v2_client.rb', line 111</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/config_service_v2_client.rb', line 112</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_project_path'>project_path</span> <span class='id identifier rubyid_project'>project</span>
   <span class='const'>PROJECT_PATH_TEMPLATE</span><span class='period'>.</span><span class='id identifier rubyid_render'>render</span><span class='lparen'>(</span>
@@ -1218,15 +1218,15 @@ custom error handling.</p>
       <pre class="lines">
 
 
-121
 122
 123
 124
 125
-126</pre>
+126
+127</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/config_service_v2_client.rb', line 121</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/config_service_v2_client.rb', line 122</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_sink_path'>sink_path</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span> <span class='id identifier rubyid_sink'>sink</span>
   <span class='const'>SINK_PATH_TEMPLATE</span><span class='period'>.</span><span class='id identifier rubyid_render'>render</span><span class='lparen'>(</span>
@@ -1421,7 +1421,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-732
 733
 734
 735
@@ -1432,10 +1431,11 @@ retries, etc.</p>
 740
 741
 742
-743</pre>
+743
+744</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/config_service_v2_client.rb', line 732</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/config_service_v2_client.rb', line 733</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_exclusion'>create_exclusion</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -1657,7 +1657,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-461
 462
 463
 464
@@ -1670,10 +1669,11 @@ retries, etc.</p>
 471
 472
 473
-474</pre>
+474
+475</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/config_service_v2_client.rb', line 461</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/config_service_v2_client.rb', line 462</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_sink'>create_sink</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -1838,7 +1838,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-833
 834
 835
 836
@@ -1848,10 +1847,11 @@ retries, etc.</p>
 840
 841
 842
-843</pre>
+843
+844</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/config_service_v2_client.rb', line 833</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/config_service_v2_client.rb', line 834</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete_exclusion'>delete_exclusion</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -2015,7 +2015,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-588
 589
 590
 591
@@ -2025,10 +2024,11 @@ retries, etc.</p>
 595
 596
 597
-598</pre>
+598
+599</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/config_service_v2_client.rb', line 588</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/config_service_v2_client.rb', line 589</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete_sink'>delete_sink</span> \
     <span class='id identifier rubyid_sink_name'>sink_name</span><span class='comma'>,</span>
@@ -2199,7 +2199,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-685
 686
 687
 688
@@ -2208,10 +2207,11 @@ retries, etc.</p>
 691
 692
 693
-694</pre>
+694
+695</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/config_service_v2_client.rb', line 685</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/config_service_v2_client.rb', line 686</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_exclusion'>get_exclusion</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -2381,7 +2381,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-400
 401
 402
 403
@@ -2390,10 +2389,11 @@ retries, etc.</p>
 406
 407
 408
-409</pre>
+409
+410</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/config_service_v2_client.rb', line 400</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/config_service_v2_client.rb', line 401</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_sink'>get_sink</span> \
     <span class='id identifier rubyid_sink_name'>sink_name</span><span class='comma'>,</span>
@@ -2599,7 +2599,6 @@ object.</p>
       <pre class="lines">
 
 
-646
 647
 648
 649
@@ -2610,10 +2609,11 @@ object.</p>
 654
 655
 656
-657</pre>
+657
+658</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/config_service_v2_client.rb', line 646</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/config_service_v2_client.rb', line 647</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_exclusions'>list_exclusions</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -2821,7 +2821,6 @@ object.</p>
       <pre class="lines">
 
 
-361
 362
 363
 364
@@ -2832,10 +2831,11 @@ object.</p>
 369
 370
 371
-372</pre>
+372
+373</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/config_service_v2_client.rb', line 361</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/config_service_v2_client.rb', line 362</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_sinks'>list_sinks</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -3055,7 +3055,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-793
 794
 795
 796
@@ -3068,10 +3067,11 @@ retries, etc.</p>
 803
 804
 805
-806</pre>
+806
+807</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/config_service_v2_client.rb', line 793</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/config_service_v2_client.rb', line 794</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update_exclusion'>update_exclusion</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -3328,7 +3328,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-544
 545
 546
 547
@@ -3343,10 +3342,11 @@ retries, etc.</p>
 556
 557
 558
-559</pre>
+559
+560</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/config_service_v2_client.rb', line 544</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/config_service_v2_client.rb', line 545</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update_sink'>update_sink</span> \
     <span class='id identifier rubyid_sink_name'>sink_name</span><span class='comma'>,</span>

@@ -532,7 +532,6 @@ custom error handling.</p>
       <pre class="lines">
 
 
-135
 136
 137
 138
@@ -646,10 +645,11 @@ custom error handling.</p>
 246
 247
 248
-249</pre>
+249
+250</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/metrics_service_v2_client.rb', line 135</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/metrics_service_v2_client.rb', line 136</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span> \
     <span class='label'>credentials:</span> <span class='kw'>nil</span><span class='comma'>,</span>
@@ -684,7 +684,7 @@ custom error handling.</p>
     <span class='id identifier rubyid_updater_proc'>updater_proc</span> <span class='op'>=</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='period'>.</span><span class='id identifier rubyid_updater_proc'>updater_proc</span>
   <span class='kw'>end</span>
 
-  <span class='id identifier rubyid_package_version'>package_version</span> <span class='op'>=</span> <span class='const'>Gem</span><span class='period'>.</span><span class='id identifier rubyid_loaded_specs'>loaded_specs</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>google-cloud-logging</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_version'>version</span><span class='period'>.</span><span class='id identifier rubyid_version'>version</span>
+  <span class='id identifier rubyid_package_version'>package_version</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Logging.html" title="Google::Cloud::Logging (module)">Logging</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Logging.html#VERSION-constant" title="Google::Cloud::Logging::VERSION (constant)">VERSION</a></span></span>
 
   <span class='id identifier rubyid_google_api_client'>google_api_client</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gl-ruby/</span><span class='embexpr_beg'>#{</span><span class='const'>RUBY_VERSION</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
   <span class='id identifier rubyid_google_api_client'>google_api_client</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'> </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_lib_name'>lib_name</span><span class='embexpr_end'>}</span><span class='tstring_content'>/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_lib_version'>lib_version</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>if</span> <span class='id identifier rubyid_lib_name'>lib_name</span>
@@ -842,15 +842,15 @@ custom error handling.</p>
       <pre class="lines">
 
 
-90
 91
 92
 93
 94
-95</pre>
+95
+96</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/metrics_service_v2_client.rb', line 90</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/metrics_service_v2_client.rb', line 91</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_metric_path'>metric_path</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span> <span class='id identifier rubyid_metric'>metric</span>
   <span class='const'>METRIC_PATH_TEMPLATE</span><span class='period'>.</span><span class='id identifier rubyid_render'>render</span><span class='lparen'>(</span>
@@ -916,14 +916,14 @@ custom error handling.</p>
       <pre class="lines">
 
 
-100
 101
 102
 103
-104</pre>
+104
+105</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/metrics_service_v2_client.rb', line 100</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/metrics_service_v2_client.rb', line 101</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_project_path'>project_path</span> <span class='id identifier rubyid_project'>project</span>
   <span class='const'>PROJECT_PATH_TEMPLATE</span><span class='period'>.</span><span class='id identifier rubyid_render'>render</span><span class='lparen'>(</span>
@@ -1112,7 +1112,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-372
 373
 374
 375
@@ -1123,10 +1122,11 @@ retries, etc.</p>
 380
 381
 382
-383</pre>
+383
+384</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/metrics_service_v2_client.rb', line 372</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/metrics_service_v2_client.rb', line 373</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_log_metric'>create_log_metric</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -1284,7 +1284,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-450
 451
 452
 453
@@ -1294,10 +1293,11 @@ retries, etc.</p>
 457
 458
 459
-460</pre>
+460
+461</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/metrics_service_v2_client.rb', line 450</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/metrics_service_v2_client.rb', line 451</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete_log_metric'>delete_log_metric</span> \
     <span class='id identifier rubyid_metric_name'>metric_name</span><span class='comma'>,</span>
@@ -1463,7 +1463,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-330
 331
 332
 333
@@ -1472,10 +1471,11 @@ retries, etc.</p>
 336
 337
 338
-339</pre>
+339
+340</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/metrics_service_v2_client.rb', line 330</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/metrics_service_v2_client.rb', line 331</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_log_metric'>get_log_metric</span> \
     <span class='id identifier rubyid_metric_name'>metric_name</span><span class='comma'>,</span>
@@ -1678,7 +1678,6 @@ object.</p>
       <pre class="lines">
 
 
-296
 297
 298
 299
@@ -1689,10 +1688,11 @@ object.</p>
 304
 305
 306
-307</pre>
+307
+308</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/metrics_service_v2_client.rb', line 296</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/metrics_service_v2_client.rb', line 297</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_log_metrics'>list_log_metrics</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -1883,7 +1883,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-417
 418
 419
 420
@@ -1894,10 +1893,11 @@ retries, etc.</p>
 425
 426
 427
-428</pre>
+428
+429</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/metrics_service_v2_client.rb', line 417</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/metrics_service_v2_client.rb', line 418</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update_log_metric'>update_log_metric</span> \
     <span class='id identifier rubyid_metric_name'>metric_name</span><span class='comma'>,</span>
