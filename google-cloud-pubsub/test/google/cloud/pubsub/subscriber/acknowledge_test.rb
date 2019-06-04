@@ -67,12 +67,26 @@ describe Google::Cloud::PubSub::Subscriber, :acknowledge, :mock_pubsub do
         stream_ack_deadline_seconds: 60
       )]
     ]
-    stub.acknowledge_requests.must_equal [
-      [sub_path, ["ack-id-123456789"]]
-    ]
-    stub.modify_ack_deadline_requests.must_equal [
-      [sub_path, ["ack-id-123456789"], 60]
-    ]
+
+    # pusher thread pool may deliver out of order, which stinks...
+    ack_msg_ids = []
+    stub.acknowledge_requests.each do |ack_sub_path, msg_ids|
+      assert_equal ack_sub_path, sub_path
+      ack_msg_ids += msg_ids
+    end
+    ack_msg_ids.sort.must_equal ["ack-id-123456789"]
+
+    # pusher thread pool may deliver out of order, which stinks...
+    mod_ack_hash = {}
+    stub.modify_ack_deadline_requests.each do |ack_sub_path, msg_ids, deadline|
+      assert_equal ack_sub_path, sub_path
+      if mod_ack_hash.key? deadline
+        mod_ack_hash[deadline] += msg_ids
+      else
+        mod_ack_hash[deadline] = msg_ids
+      end
+    end
+    mod_ack_hash[60].sort.must_equal ["ack-id-123456789"]
   end
 
   it "can acknowledge multiple messages" do
@@ -109,11 +123,25 @@ describe Google::Cloud::PubSub::Subscriber, :acknowledge, :mock_pubsub do
         stream_ack_deadline_seconds: 60
       )]
     ]
-    stub.acknowledge_requests.must_equal [
-      [sub_path, ["ack-id-1111", "ack-id-1112", "ack-id-1113"]]
-    ]
-    stub.modify_ack_deadline_requests.must_equal [
-      [sub_path, ["ack-id-1111", "ack-id-1112", "ack-id-1113"], 60]
-    ]
+
+    # pusher thread pool may deliver out of order, which stinks...
+    ack_msg_ids = []
+    stub.acknowledge_requests.each do |ack_sub_path, msg_ids|
+      assert_equal ack_sub_path, sub_path
+      ack_msg_ids += msg_ids
+    end
+    ack_msg_ids.sort.must_equal ["ack-id-1111", "ack-id-1112", "ack-id-1113"]
+
+    # pusher thread pool may deliver out of order, which stinks...
+    mod_ack_hash = {}
+    stub.modify_ack_deadline_requests.each do |ack_sub_path, msg_ids, deadline|
+      assert_equal ack_sub_path, sub_path
+      if mod_ack_hash.key? deadline
+        mod_ack_hash[deadline] += msg_ids
+      else
+        mod_ack_hash[deadline] = msg_ids
+      end
+    end
+    mod_ack_hash[60].sort.must_equal ["ack-id-1111", "ack-id-1112", "ack-id-1113"]
   end
 end
