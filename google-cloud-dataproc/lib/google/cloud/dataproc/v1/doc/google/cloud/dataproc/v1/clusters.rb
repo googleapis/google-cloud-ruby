@@ -60,15 +60,18 @@ module Google
         # The cluster config.
         # @!attribute [rw] config_bucket
         #   @return [String]
-        #     Optional. A Cloud Storage staging bucket used for sharing generated
-        #     SSH keys and config. If you do not specify a staging bucket, Cloud
-        #     Dataproc will determine an appropriate Cloud Storage location (US,
+        #     Optional. A Google Cloud Storage bucket used to stage job
+        #     dependencies, config files, and job driver console output.
+        #     If you do not specify a staging bucket, Cloud
+        #     Dataproc will determine a Cloud Storage location (US,
         #     ASIA, or EU) for your cluster's staging bucket according to the Google
-        #     Compute Engine zone where your cluster is deployed, and then it will create
-        #     and manage this project-level, per-location bucket for you.
+        #     Compute Engine zone where your cluster is deployed, and then create
+        #     and manage this project-level, per-location bucket (see
+        #     [Cloud Dataproc staging
+        #     bucket](/dataproc/docs/concepts/configuring-clusters/staging-bucket)).
         # @!attribute [rw] gce_cluster_config
         #   @return [Google::Cloud::Dataproc::V1::GceClusterConfig]
-        #     Required. The shared Compute Engine config settings for
+        #     Optional. The shared Compute Engine config settings for
         #     all instances in a cluster.
         # @!attribute [rw] master_config
         #   @return [Google::Cloud::Dataproc::V1::InstanceGroupConfig]
@@ -147,8 +150,8 @@ module Google
         #
         #     A full URL, partial URI, or short name are valid. Examples:
         #
-        #     * `https://www.googleapis.com/compute/v1/projects/[project_id]/regions/us-east1/sub0`
-        #     * `projects/[project_id]/regions/us-east1/sub0`
+        #     * `https://www.googleapis.com/compute/v1/projects/[project_id]/regions/us-east1/subnetworks/sub0`
+        #     * `projects/[project_id]/regions/us-east1/subnetworks/sub0`
         #     * `sub0`
         # @!attribute [rw] internal_ip_only
         #   @return [true, false]
@@ -381,13 +384,13 @@ module Google
         #     such as "1.2" (including a subminor version, such as "1.2.29"), or the
         #     ["preview"
         #     version](/dataproc/docs/concepts/versioning/dataproc-versions#other_versions).
-        #     If unspecified, it defaults to the latest version.
+        #     If unspecified, it defaults to the latest Debian version.
         # @!attribute [rw] properties
         #   @return [Hash{String => String}]
         #     Optional. The properties to set on daemon config files.
         #
-        #     Property keys are specified in `prefix:property` format, such as
-        #     `core:fs.defaultFS`. The following are supported prefixes
+        #     Property keys are specified in `prefix:property` format, for example
+        #     `core:hadoop.tmp.dir`. The following are supported prefixes
         #     and their mappings:
         #
         #     * capacity-scheduler: `capacity-scheduler.xml`
@@ -402,6 +405,9 @@ module Google
         #
         #     For more information, see
         #     [Cluster properties](https://cloud.google.com/dataproc/docs/concepts/cluster-properties).
+        # @!attribute [rw] optional_components
+        #   @return [Array<Google::Cloud::Dataproc::V1::Component>]
+        #     The set of optional components to activate on the cluster.
         class SoftwareConfig; end
 
         # Contains cluster daemon metrics, such as HDFS and YARN stats.
@@ -430,11 +436,10 @@ module Google
         # @!attribute [rw] request_id
         #   @return [String]
         #     Optional. A unique id used to identify the request. If the server
-        #     receives two
-        #     {Google::Cloud::Dataproc::V1::CreateClusterRequest CreateClusterRequest}
-        #     requests  with the same id, then the second request will be ignored and the
-        #     first {Google::Longrunning::Operation} created
-        #     and stored in the backend is returned.
+        #     receives two {Google::Cloud::Dataproc::V1::CreateClusterRequest CreateClusterRequest} requests  with the same
+        #     id, then the second request will be ignored and the
+        #     first {Google::Longrunning::Operation} created and stored in the backend
+        #     is returned.
         #
         #     It is recommended to always set this value to a
         #     [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier).
@@ -519,11 +524,10 @@ module Google
         # @!attribute [rw] request_id
         #   @return [String]
         #     Optional. A unique id used to identify the request. If the server
-        #     receives two
-        #     {Google::Cloud::Dataproc::V1::UpdateClusterRequest UpdateClusterRequest}
-        #     requests  with the same id, then the second request will be ignored and the
-        #     first {Google::Longrunning::Operation} created
-        #     and stored in the backend is returned.
+        #     receives two {Google::Cloud::Dataproc::V1::UpdateClusterRequest UpdateClusterRequest} requests  with the same
+        #     id, then the second request will be ignored and the
+        #     first {Google::Longrunning::Operation} created and stored in the
+        #     backend is returned.
         #
         #     It is recommended to always set this value to a
         #     [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier).
@@ -550,11 +554,10 @@ module Google
         # @!attribute [rw] request_id
         #   @return [String]
         #     Optional. A unique id used to identify the request. If the server
-        #     receives two
-        #     {Google::Cloud::Dataproc::V1::DeleteClusterRequest DeleteClusterRequest}
-        #     requests  with the same id, then the second request will be ignored and the
-        #     first {Google::Longrunning::Operation} created
-        #     and stored in the backend is returned.
+        #     receives two {Google::Cloud::Dataproc::V1::DeleteClusterRequest DeleteClusterRequest} requests  with the same
+        #     id, then the second request will be ignored and the
+        #     first {Google::Longrunning::Operation} created and stored in the
+        #     backend is returned.
         #
         #     It is recommended to always set this value to a
         #     [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier).
