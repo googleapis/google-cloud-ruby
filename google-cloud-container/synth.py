@@ -130,8 +130,8 @@ s.replace(
 for version in ['v1', 'v1beta1']:
     s.replace(
         f'lib/google/cloud/container/{version}/cluster_manager_client.rb',
-        f'require "google/cloud/container/{version}/credentials"',
-        f'require "google/cloud/container/{version}/credentials"\nrequire "google/cloud/container/version"'
+        f'(require \".*credentials\"\n)\n',
+        f'\\1require "google/cloud/container/version"\n\n'
     )
     s.replace(
         f'lib/google/cloud/container/{version}/cluster_manager_client.rb',

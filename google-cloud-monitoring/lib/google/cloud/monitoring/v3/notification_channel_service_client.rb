@@ -27,6 +27,7 @@ require "google/gax"
 
 require "google/monitoring/v3/notification_service_pb"
 require "google/cloud/monitoring/v3/credentials"
+require "google/cloud/monitoring/version"
 
 module Google
   module Cloud
@@ -186,7 +187,7 @@ module Google
               updater_proc = credentials.updater_proc
             end
 
-            package_version = Gem.loaded_specs['google-cloud-monitoring'].version.version
+            package_version = Google::Cloud::Monitoring::VERSION
 
             google_api_client = "gl-ruby/#{RUBY_VERSION}"
             google_api_client << " #{lib_name}/#{lib_version}" if lib_name

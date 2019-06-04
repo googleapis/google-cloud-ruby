@@ -155,3 +155,26 @@ s.replace(
     'README.md\n',
     'README.md\nAUTHENTICATION.md\nLICENSE\n'
 )
+
+# https://github.com/googleapis/google-cloud-ruby/issues/3058
+s.replace(
+    'google-cloud-video_intelligence.gemspec',
+    '\nGem::Specification.new do',
+    'require File.expand_path("../lib/google/cloud/video_intelligence/version", __FILE__)\n\nGem::Specification.new do'
+)
+s.replace(
+    'google-cloud-video_intelligence.gemspec',
+    '(gem.version\s+=\s+).\d+.\d+.\d.*$',
+    '\\1Google::Cloud::VideoIntelligence::VERSION'
+)
+for version in ['v1', 'v1beta1', 'v1beta2', 'v1p1beta1', 'v1p2beta1']:
+    s.replace(
+        f'lib/google/cloud/video_intelligence/{version}/*_client.rb',
+        f'(require \".*credentials\"\n)\n',
+        f'\\1require "google/cloud/video_intelligence/version"\n\n'
+    )
+    s.replace(
+        f'lib/google/cloud/video_intelligence/{version}/*_client.rb',
+        'Gem.loaded_specs\[.*\]\.version\.version',
+        'Google::Cloud::VideoIntelligence::VERSION'
+    )

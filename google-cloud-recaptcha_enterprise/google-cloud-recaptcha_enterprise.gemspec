@@ -1,9 +1,10 @@
 # -*- ruby -*-
 # encoding: utf-8
+require File.expand_path("../lib/google/cloud/recaptcha_enterprise/version", __FILE__)
 
 Gem::Specification.new do |gem|
   gem.name          = "google-cloud-recaptcha_enterprise"
-  gem.version       = "0.1.0"
+  gem.version       = Google::Cloud::RecaptchaEnterprise::VERSION
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"

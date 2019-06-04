@@ -1,9 +1,10 @@
 # -*- ruby -*-
 # encoding: utf-8
+require File.expand_path("../lib/google/cloud/monitoring/version", __FILE__)
 
 Gem::Specification.new do |gem|
   gem.name          = "google-cloud-monitoring"
-  gem.version       = "0.29.4"
+  gem.version       = Google::Cloud::Monitoring::VERSION
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"

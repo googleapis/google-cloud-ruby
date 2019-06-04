@@ -153,6 +153,29 @@ s.replace(
     'README.md\nAUTHENTICATION.md\nLICENSE\n'
 )
 
+# https://github.com/googleapis/google-cloud-ruby/issues/3058
+s.replace(
+    'google-cloud-tasks.gemspec',
+    '\nGem::Specification.new do',
+    'require File.expand_path("../lib/google/cloud/tasks/version", __FILE__)\n\nGem::Specification.new do'
+)
+s.replace(
+    'google-cloud-tasks.gemspec',
+    '(gem.version\s+=\s+).\d+.\d+.\d.*$',
+    '\\1Google::Cloud::Tasks::VERSION'
+)
+for version in ['v2', 'v2beta2', 'v2beta3']:
+    s.replace(
+        f'lib/google/cloud/tasks/{version}/*_client.rb',
+        f'(require \".*credentials\"\n)\n',
+        f'\\1require "google/cloud/tasks/version"\n\n'
+    )
+    s.replace(
+        f'lib/google/cloud/tasks/{version}/*_client.rb',
+        'Gem.loaded_specs\[.*\]\.version\.version',
+        'Google::Cloud::Tasks::VERSION'
+    )
+
 # Generate the helper methods
 call('bundle update && bundle exec rake generate_partials', shell=True)
 

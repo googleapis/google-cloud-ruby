@@ -1,9 +1,10 @@
 # -*- ruby -*-
 # encoding: utf-8
+require File.expand_path("../lib/google/cloud/security_center/version", __FILE__)
 
 Gem::Specification.new do |gem|
   gem.name          = "google-cloud-security_center"
-  gem.version       = "0.2.0"
+  gem.version       = Google::Cloud::SecurityCenter::VERSION
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"

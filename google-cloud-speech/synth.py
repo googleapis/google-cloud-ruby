@@ -188,6 +188,29 @@ s.replace(
     'gem.add_development_dependency "rubocop", "~> 0.64.0"'
 )
 
+# https://github.com/googleapis/google-cloud-ruby/issues/3058
+s.replace(
+    'google-cloud-speech.gemspec',
+    '\nGem::Specification.new do',
+    'require File.expand_path("../lib/google/cloud/speech/version", __FILE__)\n\nGem::Specification.new do'
+)
+s.replace(
+    'google-cloud-speech.gemspec',
+    '(gem.version\s+=\s+).\d+.\d+.\d.*$',
+    '\\1Google::Cloud::Speech::VERSION'
+)
+for version in ['v1', 'v1p1beta1']:
+    s.replace(
+        f'lib/google/cloud/speech/{version}/*_client.rb',
+        f'(require \".*credentials\"\n)\n',
+        f'\\1require "google/cloud/speech/version"\n\n'
+    )
+    s.replace(
+        f'lib/google/cloud/speech/{version}/*_client.rb',
+        'Gem.loaded_specs\[.*\]\.version\.version',
+        'Google::Cloud::Speech::VERSION'
+    )
+
 # Exception tests have to check for both custom errors and retry wrapper errors
 for version in ['v1', 'v1p1beta1']:
     s.replace(

@@ -29,6 +29,7 @@ require "google/longrunning/operations_client"
 
 require "google/cloud/talent/v4beta1/job_service_pb"
 require "google/cloud/talent/v4beta1/credentials"
+require "google/cloud/talent/version"
 
 module Google
   module Cloud
@@ -208,7 +209,7 @@ module Google
               updater_proc = credentials.updater_proc
             end
 
-            package_version = Gem.loaded_specs['google-cloud-talent'].version.version
+            package_version = Google::Cloud::Talent::VERSION
 
             google_api_client = "gl-ruby/#{RUBY_VERSION}"
             google_api_client << " #{lib_name}/#{lib_version}" if lib_name

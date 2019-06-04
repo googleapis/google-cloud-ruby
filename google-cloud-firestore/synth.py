@@ -112,6 +112,19 @@ s.replace(
     'https://googleapis.github.io/google-cloud-ruby'
 )
 
+# https://github.com/googleapis/google-cloud-ruby/issues/3058
+for version in ['v1', 'v1beta1']:
+    s.replace(
+        f'lib/google/cloud/firestore/{version}/*_client.rb',
+        f'(require \".*credentials\"\n)\n',
+        f'\\1require "google/cloud/firestore/version"\n\n'
+    )
+    s.replace(
+        f'lib/google/cloud/firestore/{version}/*_client.rb',
+        'Gem.loaded_specs\[.*\]\.version\.version',
+        'Google::Cloud::Firestore::VERSION'
+    )
+
 # Exception tests have to check for both custom errors and retry wrapper errors
 for version in ['v1', 'v1beta1']:
     s.replace(

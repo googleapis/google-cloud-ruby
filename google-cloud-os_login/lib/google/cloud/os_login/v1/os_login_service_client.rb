@@ -27,6 +27,7 @@ require "google/gax"
 
 require "google/cloud/oslogin/v1/oslogin_pb"
 require "google/cloud/os_login/v1/credentials"
+require "google/cloud/os_login/version"
 
 module Google
   module Cloud
@@ -175,7 +176,7 @@ module Google
               updater_proc = credentials.updater_proc
             end
 
-            package_version = Gem.loaded_specs['google-cloud-os_login'].version.version
+            package_version = Google::Cloud::OsLogin::VERSION
 
             google_api_client = "gl-ruby/#{RUBY_VERSION}"
             google_api_client << " #{lib_name}/#{lib_version}" if lib_name

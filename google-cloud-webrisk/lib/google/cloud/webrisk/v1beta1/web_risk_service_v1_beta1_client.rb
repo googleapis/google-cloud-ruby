@@ -27,6 +27,7 @@ require "google/gax"
 
 require "google/cloud/webrisk/v1beta1/webrisk_pb"
 require "google/cloud/webrisk/v1beta1/credentials"
+require "google/cloud/webrisk/version"
 
 module Google
   module Cloud
@@ -121,7 +122,7 @@ module Google
               updater_proc = credentials.updater_proc
             end
 
-            package_version = Gem.loaded_specs['google-cloud-webrisk'].version.version
+            package_version = Google::Cloud::Webrisk::VERSION
 
             google_api_client = "gl-ruby/#{RUBY_VERSION}"
             google_api_client << " #{lib_name}/#{lib_version}" if lib_name

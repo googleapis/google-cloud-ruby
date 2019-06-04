@@ -105,8 +105,8 @@ s.replace(
 # https://github.com/googleapis/google-cloud-ruby/issues/3058
 s.replace(
     'lib/google/cloud/debugger/v2/*_client.rb',
-    'require "google/cloud/debugger/v2/credentials"',
-    'require "google/cloud/debugger/v2/credentials"\nrequire "google/cloud/debugger/version"'
+    '(require \".*credentials\"\n)\n',
+    '\\1require "google/cloud/debugger/version"\n\n'
 )
 s.replace(
     'lib/google/cloud/debugger/v2/*_client.rb',

@@ -134,14 +134,14 @@ s.replace(
     '\\1Google::Cloud::Bigquery::DataTransfer::VERSION'
 )
 s.replace(
-    f'lib/google/cloud/bigquery/data_transfer/v1/data_transfer_service_client.rb',
-    f'require "google/cloud/bigquery/data_transfer/v1/credentials"',
-    f'require "google/cloud/bigquery/data_transfer/v1/credentials"\nrequire "google/cloud/bigquery/data_transfer/version"'
+    'lib/google/cloud/bigquery/data_transfer/v1/data_transfer_service_client.rb',
+    '(require \".*credentials\"\n)\n',
+    '\\1require "google/cloud/bigquery/data_transfer/version"\n\n'
 )
 s.replace(
-    f'lib/google/cloud/bigquery/data_transfer/v1/data_transfer_service_client.rb',
-    'package_version = (.+)',
-    'package_version = Google::Cloud::Bigquery::DataTransfer::VERSION'
+    'lib/google/cloud/bigquery/data_transfer/v1/data_transfer_service_client.rb',
+    'Gem.loaded_specs\[.*\]\.version\.version',
+    'Google::Cloud::Bigquery::DataTransfer::VERSION'
 )
 
 # Exception tests have to check for both custom errors and retry wrapper errors

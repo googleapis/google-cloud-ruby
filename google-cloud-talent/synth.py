@@ -136,6 +136,28 @@ s.replace(
     'README.md\nAUTHENTICATION.md\nLICENSE\n'
 )
 
+# https://github.com/googleapis/google-cloud-ruby/issues/3058
+s.replace(
+    'google-cloud-talent.gemspec',
+    '\nGem::Specification.new do',
+    'require File.expand_path("../lib/google/cloud/talent/version", __FILE__)\n\nGem::Specification.new do'
+)
+s.replace(
+    'google-cloud-talent.gemspec',
+    '(gem.version\s+=\s+).\d+.\d+.\d.*$',
+    '\\1Google::Cloud::Talent::VERSION'
+)
+s.replace(
+    'lib/google/cloud/talent/v4beta1/*_client.rb',
+    '(require \".*credentials\"\n)\n',
+    '\\1require "google/cloud/talent/version"\n\n'
+)
+s.replace(
+    'lib/google/cloud/talent/v4beta1/*_client.rb',
+    'Gem.loaded_specs\[.*\]\.version\.version',
+    'Google::Cloud::Talent::VERSION'
+)
+
 # Generate the helper methods
 call(f'bundle update && bundle exec rake generate_partials TALENT_SERVICES={",".join(services)}', shell=True)
 

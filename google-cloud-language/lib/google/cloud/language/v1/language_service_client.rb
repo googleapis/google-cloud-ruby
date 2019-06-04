@@ -27,6 +27,7 @@ require "google/gax"
 
 require "google/cloud/language/v1/language_service_pb"
 require "google/cloud/language/v1/credentials"
+require "google/cloud/language/version"
 
 module Google
   module Cloud
@@ -122,7 +123,7 @@ module Google
               updater_proc = credentials.updater_proc
             end
 
-            package_version = Gem.loaded_specs['google-cloud-language'].version.version
+            package_version = Google::Cloud::Language::VERSION
 
             google_api_client = "gl-ruby/#{RUBY_VERSION}"
             google_api_client << " #{lib_name}/#{lib_version}" if lib_name

@@ -175,6 +175,28 @@ s.replace(
     'README.md\nAUTHENTICATION.md\nLICENSE\n'
 )
 
+# https://github.com/googleapis/google-cloud-ruby/issues/3058
+s.replace(
+    'google-cloud-phishing_protection.gemspec',
+    '\nGem::Specification.new do',
+    'require File.expand_path("../lib/google/cloud/phishing_protection/version", __FILE__)\n\nGem::Specification.new do'
+)
+s.replace(
+    'google-cloud-phishing_protection.gemspec',
+    '(gem.version\s+=\s+).\d+.\d+.\d.*$',
+    '\\1Google::Cloud::PhishingProtection::VERSION'
+)
+s.replace(
+    'lib/google/cloud/phishing_protection/v1beta1/*_client.rb',
+    '(require \".*credentials\"\n)\n',
+    '\\1require "google/cloud/phishing_protection/version"\n\n'
+)
+s.replace(
+    'lib/google/cloud/phishing_protection/v1beta1/*_client.rb',
+    'Gem.loaded_specs\[.*\]\.version\.version',
+    'Google::Cloud::PhishingProtection::VERSION'
+)
+
 # Generate the helper methods
 call('bundle update && bundle exec rake generate_partials', shell=True)
 
