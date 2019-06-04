@@ -52,7 +52,10 @@ module Google
         #     Optional. The version of Redis software.
         #     If not provided, latest supported version will be used. Updating the
         #     version will perform an upgrade/downgrade to the new version. Currently,
-        #     the supported values are `REDIS_3_2` for Redis 3.2.
+        #     the supported values are:
+        #
+        #     * `REDIS_4_0` for Redis 4.0 compatibility (default)
+        #       * `REDIS_3_2` for Redis 3.2 compatibility
         # @!attribute [rw] reserved_ip_range
         #   @return [String]
         #     Optional. The CIDR range of internal addresses that are reserved for this
@@ -89,8 +92,16 @@ module Google
         #     http://redis.io/topics/config. Currently, the only supported parameters
         #     are:
         #
+        #      Redis 3.2 and above:
+        #
         #     * maxmemory-policy
         #       * notify-keyspace-events
+        #
+        #       Redis 4.0 and above:
+        #
+        #     * activedefrag
+        #       * lfu-log-factor
+        #     * lfu-decay-time
         # @!attribute [rw] tier
         #   @return [Google::Cloud::Redis::V1::Instance::Tier]
         #     Required. The service tier of the instance.
@@ -103,6 +114,13 @@ module Google
         #     [network](https://cloud.google.com/compute/docs/networks-and-firewalls#networks) to which the
         #     instance is connected. If left unspecified, the `default` network
         #     will be used.
+        # @!attribute [rw] persistence_iam_identity
+        #   @return [String]
+        #     Output only. Cloud IAM identity used by import / export operations to
+        #     transfer data to/from Cloud Storage. Format is
+        #     "serviceAccount:<service_account_email>". The value may change over time
+        #     for a given instance so should be checked before each import/export
+        #     operation.
         class Instance
           # Represents the different states of a Redis instance.
           module State
@@ -129,6 +147,9 @@ module Google
             # Maintenance is being performed on this Redis instance.
             MAINTENANCE = 6
 
+            # Redis instance is importing data (availability may be affected).
+            IMPORTING = 8
+
             # Redis instance is failing over (availability may be affected).
             FAILING_OVER = 9
           end
@@ -151,7 +172,7 @@ module Google
         #   @return [String]
         #     Required. The resource name of the instance location using the form:
         #         `projects/{project_id}/locations/{location_id}`
-        #     where `location_id` refers to a GCP region
+        #     where `location_id` refers to a GCP region.
         # @!attribute [rw] page_size
         #   @return [Integer]
         #     The maximum number of items to return.
@@ -194,7 +215,7 @@ module Google
         #   @return [String]
         #     Required. Redis instance resource name using the form:
         #         `projects/{project_id}/locations/{location_id}/instances/{instance_id}`
-        #     where `location_id` refers to a GCP region
+        #     where `location_id` refers to a GCP region.
         class GetInstanceRequest; end
 
         # Request for {Google::Cloud::Redis::V1::CloudRedis::CreateInstance CreateInstance}.
@@ -202,7 +223,7 @@ module Google
         #   @return [String]
         #     Required. The resource name of the instance location using the form:
         #         `projects/{project_id}/locations/{location_id}`
-        #     where `location_id` refers to a GCP region
+        #     where `location_id` refers to a GCP region.
         # @!attribute [rw] instance_id
         #   @return [String]
         #     Required. The logical name of the Redis instance in the customer project
@@ -240,21 +261,70 @@ module Google
         #   @return [String]
         #     Required. Redis instance resource name using the form:
         #         `projects/{project_id}/locations/{location_id}/instances/{instance_id}`
-        #     where `location_id` refers to a GCP region
+        #     where `location_id` refers to a GCP region.
         class DeleteInstanceRequest; end
+
+        # The Cloud Storage location for the input content
+        # @!attribute [rw] uri
+        #   @return [String]
+        #     Required. Source data URI. (e.g. 'gs://my_bucket/my_object').
+        class GcsSource; end
+
+        # The input content
+        # @!attribute [rw] gcs_source
+        #   @return [Google::Cloud::Redis::V1::GcsSource]
+        #     Google Cloud Storage location where input content is located.
+        class InputConfig; end
+
+        # Request for {Google::Cloud::Redis::V1::CloudRedis::ImportInstance Import}.
+        # @!attribute [rw] name
+        #   @return [String]
+        #     Required. Redis instance resource name using the form:
+        #         `projects/{project_id}/locations/{location_id}/instances/{instance_id}`
+        #     where `location_id` refers to a GCP region.
+        # @!attribute [rw] input_config
+        #   @return [Google::Cloud::Redis::V1::InputConfig]
+        #     Required. Specify data to be imported.
+        class ImportInstanceRequest; end
+
+        # The Cloud Storage location for the output content
+        # @!attribute [rw] uri
+        #   @return [String]
+        #     Required. Data destination URI (e.g.
+        #     'gs://my_bucket/my_object'). Existing files will be overwritten.
+        class GcsDestination; end
+
+        # The output content
+        # @!attribute [rw] gcs_destination
+        #   @return [Google::Cloud::Redis::V1::GcsDestination]
+        #     Google Cloud Storage destination for output content.
+        class OutputConfig; end
+
+        # Request for {Google::Cloud::Redis::V1::CloudRedis::ExportInstance Export}.
+        # @!attribute [rw] name
+        #   @return [String]
+        #     Required. Redis instance resource name using the form:
+        #         `projects/{project_id}/locations/{location_id}/instances/{instance_id}`
+        #     where `location_id` refers to a GCP region.
+        # @!attribute [rw] output_config
+        #   @return [Google::Cloud::Redis::V1::OutputConfig]
+        #     Required. Specify data to be exported.
+        class ExportInstanceRequest; end
 
         # Request for {Google::Cloud::Redis::V1::CloudRedis::FailoverInstance Failover}.
         # @!attribute [rw] name
         #   @return [String]
         #     Required. Redis instance resource name using the form:
         #         `projects/{project_id}/locations/{location_id}/instances/{instance_id}`
-        #     where `location_id` refers to a GCP region
+        #     where `location_id` refers to a GCP region.
         # @!attribute [rw] data_protection_mode
         #   @return [Google::Cloud::Redis::V1::FailoverInstanceRequest::DataProtectionMode]
         #     Optional. Available data protection modes that the user can choose. If it's
         #     unspecified, data protection mode will be LIMITED_DATA_LOSS by default.
         class FailoverInstanceRequest
           module DataProtectionMode
+            # Defaults to LIMITED_DATA_LOSS if a data protection mode is not
+            # specified.
             DATA_PROTECTION_MODE_UNSPECIFIED = 0
 
             # Instance failover will be protected with data loss control. More
