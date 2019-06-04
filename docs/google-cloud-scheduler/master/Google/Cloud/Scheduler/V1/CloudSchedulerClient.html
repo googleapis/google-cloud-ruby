@@ -692,7 +692,6 @@ custom error handling.</p>
       <pre class="lines">
 
 
-151
 152
 153
 154
@@ -830,10 +829,11 @@ custom error handling.</p>
 286
 287
 288
-289</pre>
+289
+290</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/scheduler/v1/cloud_scheduler_client.rb', line 151</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/scheduler/v1/cloud_scheduler_client.rb', line 152</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span> \
     <span class='label'>credentials:</span> <span class='kw'>nil</span><span class='comma'>,</span>
@@ -868,7 +868,7 @@ custom error handling.</p>
     <span class='id identifier rubyid_updater_proc'>updater_proc</span> <span class='op'>=</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='period'>.</span><span class='id identifier rubyid_updater_proc'>updater_proc</span>
   <span class='kw'>end</span>
 
-  <span class='id identifier rubyid_package_version'>package_version</span> <span class='op'>=</span> <span class='const'>Gem</span><span class='period'>.</span><span class='id identifier rubyid_loaded_specs'>loaded_specs</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>google-cloud-scheduler</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_version'>version</span><span class='period'>.</span><span class='id identifier rubyid_version'>version</span>
+  <span class='id identifier rubyid_package_version'>package_version</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Scheduler.html" title="Google::Cloud::Scheduler (module)">Scheduler</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Scheduler.html#VERSION-constant" title="Google::Cloud::Scheduler::VERSION (constant)">VERSION</a></span></span>
 
   <span class='id identifier rubyid_google_api_client'>google_api_client</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gl-ruby/</span><span class='embexpr_beg'>#{</span><span class='const'>RUBY_VERSION</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
   <span class='id identifier rubyid_google_api_client'>google_api_client</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'> </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_lib_name'>lib_name</span><span class='embexpr_end'>}</span><span class='tstring_content'>/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_lib_version'>lib_version</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>if</span> <span class='id identifier rubyid_lib_name'>lib_name</span>
@@ -1061,16 +1061,16 @@ custom error handling.</p>
       <pre class="lines">
 
 
-94
 95
 96
 97
 98
 99
-100</pre>
+100
+101</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/scheduler/v1/cloud_scheduler_client.rb', line 94</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/scheduler/v1/cloud_scheduler_client.rb', line 95</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_job_path'>job_path</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span> <span class='id identifier rubyid_location'>location</span><span class='comma'>,</span> <span class='id identifier rubyid_job'>job</span>
   <span class='const'>JOB_PATH_TEMPLATE</span><span class='period'>.</span><span class='id identifier rubyid_render'>render</span><span class='lparen'>(</span>
@@ -1148,15 +1148,15 @@ custom error handling.</p>
       <pre class="lines">
 
 
-106
 107
 108
 109
 110
-111</pre>
+111
+112</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/scheduler/v1/cloud_scheduler_client.rb', line 106</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/scheduler/v1/cloud_scheduler_client.rb', line 107</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_location_path'>location_path</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span> <span class='id identifier rubyid_location'>location</span>
   <span class='const'>LOCATION_PATH_TEMPLATE</span><span class='period'>.</span><span class='id identifier rubyid_render'>render</span><span class='lparen'>(</span>
@@ -1222,14 +1222,14 @@ custom error handling.</p>
       <pre class="lines">
 
 
-116
 117
 118
 119
-120</pre>
+120
+121</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/scheduler/v1/cloud_scheduler_client.rb', line 116</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/scheduler/v1/cloud_scheduler_client.rb', line 117</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_project_path'>project_path</span> <span class='id identifier rubyid_project'>project</span>
   <span class='const'>PROJECT_PATH_TEMPLATE</span><span class='period'>.</span><span class='id identifier rubyid_render'>render</span><span class='lparen'>(</span>
@@ -1421,7 +1421,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-418
 419
 420
 421
@@ -1432,10 +1431,11 @@ retries, etc.</p>
 426
 427
 428
-429</pre>
+429
+430</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/scheduler/v1/cloud_scheduler_client.rb', line 418</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/scheduler/v1/cloud_scheduler_client.rb', line 419</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_job'>create_job</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -1593,7 +1593,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-508
 509
 510
 511
@@ -1603,10 +1602,11 @@ retries, etc.</p>
 515
 516
 517
-518</pre>
+518
+519</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/scheduler/v1/cloud_scheduler_client.rb', line 508</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/scheduler/v1/cloud_scheduler_client.rb', line 509</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete_job'>delete_job</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -1772,7 +1772,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-372
 373
 374
 375
@@ -1781,10 +1780,11 @@ retries, etc.</p>
 378
 379
 380
-381</pre>
+381
+382</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/scheduler/v1/cloud_scheduler_client.rb', line 372</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/scheduler/v1/cloud_scheduler_client.rb', line 373</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_job'>get_job</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -2077,7 +2077,6 @@ object.</p>
       <pre class="lines">
 
 
-337
 338
 339
 340
@@ -2088,10 +2087,11 @@ object.</p>
 345
 346
 347
-348</pre>
+348
+349</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/scheduler/v1/cloud_scheduler_client.rb', line 337</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/scheduler/v1/cloud_scheduler_client.rb', line 338</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_jobs'>list_jobs</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -2343,7 +2343,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-548
 549
 550
 551
@@ -2352,10 +2351,11 @@ retries, etc.</p>
 554
 555
 556
-557</pre>
+557
+558</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/scheduler/v1/cloud_scheduler_client.rb', line 548</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/scheduler/v1/cloud_scheduler_client.rb', line 549</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_pause_job'>pause_job</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -2593,7 +2593,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-586
 587
 588
 589
@@ -2602,10 +2601,11 @@ retries, etc.</p>
 592
 593
 594
-595</pre>
+595
+596</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/scheduler/v1/cloud_scheduler_client.rb', line 586</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/scheduler/v1/cloud_scheduler_client.rb', line 587</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_resume_job'>resume_job</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -2773,7 +2773,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-622
 623
 624
 625
@@ -2782,10 +2781,11 @@ retries, etc.</p>
 628
 629
 630
-631</pre>
+631
+632</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/scheduler/v1/cloud_scheduler_client.rb', line 622</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/scheduler/v1/cloud_scheduler_client.rb', line 623</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_run_job'>run_job</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -2984,7 +2984,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-474
 475
 476
 477
@@ -2995,10 +2994,11 @@ retries, etc.</p>
 482
 483
 484
-485</pre>
+485
+486</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/scheduler/v1/cloud_scheduler_client.rb', line 474</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/scheduler/v1/cloud_scheduler_client.rb', line 475</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update_job'>update_job</span> \
     <span class='id identifier rubyid_job'>job</span><span class='comma'>,</span>
