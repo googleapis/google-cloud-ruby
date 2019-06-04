@@ -1,5 +1,11 @@
 # Release History
 
+### 1.1.0 / 2019-05-29
+
+* Support disabling of the metadata cache
+* Support configurable retries when querying the metadata server
+* Support configuration of the metadata request timeout
+
 ### 1.0.5 / 2018-09-20
 
 * Update documentation.
