@@ -80,6 +80,9 @@ module Google
         # @!attribute [rw] text_detection_config
         #   @return [Google::Cloud::Videointelligence::V1::TextDetectionConfig]
         #     Config for TEXT_DETECTION.
+        # @!attribute [rw] object_tracking_config
+        #   @return [Google::Cloud::Videointelligence::V1::ObjectTrackingConfig]
+        #     Config for OBJECT_TRACKING.
         class VideoContext; end
 
         # Config for LABEL_DETECTION.
@@ -98,6 +101,22 @@ module Google
         #     Model to use for label detection.
         #     Supported values: "builtin/stable" (the default if unset) and
         #     "builtin/latest".
+        # @!attribute [rw] frame_confidence_threshold
+        #   @return [Float]
+        #     The confidence threshold we perform filtering on the labels from
+        #     frame-level detection. If not set, it is set to 0.4 by default. The valid
+        #     range for this threshold is [0.1, 0.9]. Any value set outside of this
+        #     range will be clipped.
+        #     Note: for best results please follow the default threshold. We will update
+        #     the default threshold everytime when we release a new model.
+        # @!attribute [rw] video_confidence_threshold
+        #   @return [Float]
+        #     The confidence threshold we perform filtering on the labels from
+        #     video-level and shot-level detections. If not set, it is set to 0.3 by
+        #     default. The valid range for this threshold is [0.1, 0.9]. Any value set
+        #     outside of this range will be clipped.
+        #     Note: for best results please follow the default threshold. We will update
+        #     the default threshold everytime when we release a new model.
         class LabelDetectionConfig; end
 
         # Config for SHOT_CHANGE_DETECTION.
@@ -127,6 +146,14 @@ module Google
         #     Whether bounding boxes be included in the face annotation output.
         class FaceDetectionConfig; end
 
+        # Config for OBJECT_TRACKING.
+        # @!attribute [rw] model
+        #   @return [String]
+        #     Model to use for object tracking.
+        #     Supported values: "builtin/stable" (the default if unset) and
+        #     "builtin/latest".
+        class ObjectTrackingConfig; end
+
         # Config for TEXT_DETECTION.
         # @!attribute [rw] language_hints
         #   @return [Array<String>]
@@ -135,6 +162,11 @@ module Google
         #     be language code in BCP-47 format.
         #
         #     Automatic language detection is performed if no hint is provided.
+        # @!attribute [rw] model
+        #   @return [String]
+        #     Model to use for text detection.
+        #     Supported values: "builtin/stable" (the default if unset) and
+        #     "builtin/latest".
         class TextDetectionConfig; end
 
         # Video segment.
