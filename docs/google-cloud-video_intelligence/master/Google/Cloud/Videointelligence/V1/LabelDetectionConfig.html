@@ -107,6 +107,32 @@ js:
       <li class="public ">
   <span class="summary_signature">
     
+      <a href="#frame_confidence_threshold-instance_method" title="#frame_confidence_threshold (instance method)">#<strong>frame_confidence_threshold</strong>  &#x21d2; Float </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The confidence threshold we perform filtering on the labels from frame-level detection.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#label_detection_mode-instance_method" title="#label_detection_mode (instance method)">#<strong>label_detection_mode</strong>  &#x21d2; Google::Cloud::Videointelligence::V1::LabelDetectionMode </a>
     
 
@@ -182,6 +208,32 @@ js:
 </li>
 
     
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#video_confidence_threshold-instance_method" title="#video_confidence_threshold (instance method)">#<strong>video_confidence_threshold</strong>  &#x21d2; Float </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The confidence threshold we perform filtering on the labels from video-level and shot-level detections.</p>
+</div></span>
+  
+</li>
+
+    
   </ul>
 
 
@@ -192,9 +244,74 @@ js:
     <h2>Instance Attribute Details</h2>
     
       
-      <span id="label_detection_mode=-instance_method"></span>
+      <span id="frame_confidence_threshold=-instance_method"></span>
       <div class="method_details first">
-  <h3 class="signature first" id="label_detection_mode-instance_method">
+  <h3 class="signature first" id="frame_confidence_threshold-instance_method">
+  
+    #<strong>frame_confidence_threshold</strong>  &#x21d2; <tt>Float</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns The confidence threshold we perform filtering on the labels from
+frame-level detection. If not set, it is set to 0.4 by default. The valid
+range for this threshold is [0.1, 0.9]. Any value set outside of this
+range will be clipped.
+Note: for best results please follow the default threshold. We will update
+the default threshold everytime when we release a new model.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The confidence threshold we perform filtering on the labels from
+frame-level detection. If not set, it is set to 0.4 by default. The valid
+range for this threshold is [0.1, 0.9]. Any value set outside of this
+range will be clipped.
+Note: for best results please follow the default threshold. We will update
+the default threshold everytime when we release a new model.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+120</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/video_intelligence/v1/doc/google/cloud/videointelligence/v1/video_intelligence.rb', line 120</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Videointelligence::V1::LabelDetectionConfig (class)">LabelDetectionConfig</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="label_detection_mode=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="label_detection_mode-instance_method">
   
     #<strong>label_detection_mode</strong>  &#x21d2; <tt><span class='object_link'><a href="LabelDetectionMode.html" title="Google::Cloud::Videointelligence::V1::LabelDetectionMode (module)">Google::Cloud::Videointelligence::V1::LabelDetectionMode</a></span></tt> 
   
@@ -239,10 +356,10 @@ If unspecified, defaults to <code>SHOT_MODE</code>.</p>
       <pre class="lines">
 
 
-101</pre>
+120</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/video_intelligence/v1/doc/google/cloud/videointelligence/v1/video_intelligence.rb', line 101</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/video_intelligence/v1/doc/google/cloud/videointelligence/v1/video_intelligence.rb', line 120</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Videointelligence::V1::LabelDetectionConfig (class)">LabelDetectionConfig</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -298,10 +415,10 @@ Supported values: &quot;builtin/stable&quot; (the default if unset) and
       <pre class="lines">
 
 
-101</pre>
+120</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/video_intelligence/v1/doc/google/cloud/videointelligence/v1/video_intelligence.rb', line 101</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/video_intelligence/v1/doc/google/cloud/videointelligence/v1/video_intelligence.rb', line 120</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Videointelligence::V1::LabelDetectionConfig (class)">LabelDetectionConfig</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -357,10 +474,75 @@ Should be used with <code>SHOT_AND_FRAME_MODE</code> enabled.</p>
       <pre class="lines">
 
 
-101</pre>
+120</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/video_intelligence/v1/doc/google/cloud/videointelligence/v1/video_intelligence.rb', line 101</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/video_intelligence/v1/doc/google/cloud/videointelligence/v1/video_intelligence.rb', line 120</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Videointelligence::V1::LabelDetectionConfig (class)">LabelDetectionConfig</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="video_confidence_threshold=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="video_confidence_threshold-instance_method">
+  
+    #<strong>video_confidence_threshold</strong>  &#x21d2; <tt>Float</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns The confidence threshold we perform filtering on the labels from
+video-level and shot-level detections. If not set, it is set to 0.3 by
+default. The valid range for this threshold is [0.1, 0.9]. Any value set
+outside of this range will be clipped.
+Note: for best results please follow the default threshold. We will update
+the default threshold everytime when we release a new model.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The confidence threshold we perform filtering on the labels from
+video-level and shot-level detections. If not set, it is set to 0.3 by
+default. The valid range for this threshold is [0.1, 0.9]. Any value set
+outside of this range will be clipped.
+Note: for best results please follow the default threshold. We will update
+the default threshold everytime when we release a new model.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+120</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/video_intelligence/v1/doc/google/cloud/videointelligence/v1/video_intelligence.rb', line 120</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Videointelligence::V1::LabelDetectionConfig (class)">LabelDetectionConfig</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
