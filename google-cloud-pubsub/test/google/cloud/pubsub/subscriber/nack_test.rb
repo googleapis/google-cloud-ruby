@@ -66,12 +66,21 @@ describe Google::Cloud::PubSub::Subscriber, :nack, :mock_pubsub do
         stream_ack_deadline_seconds: 60
       )]
     ]
+
     stub.acknowledge_requests.must_equal []
+
     # pusher thread pool may deliver out of order, which stinks...
-    stub.modify_ack_deadline_requests.sort.reverse.must_equal [
-      [sub_path, ["ack-id-123456789"], 60],
-      [sub_path, ["ack-id-123456789"], 0]
-    ]
+    mod_ack_hash = {}
+    stub.modify_ack_deadline_requests.each do |ack_sub_path, msg_ids, deadline|
+      assert_equal ack_sub_path, sub_path
+      if mod_ack_hash.key? deadline
+        mod_ack_hash[deadline] += msg_ids
+      else
+        mod_ack_hash[deadline] = msg_ids
+      end
+    end
+    mod_ack_hash[60].sort.must_equal ["ack-id-123456789"]
+    mod_ack_hash[0].sort.must_equal ["ack-id-123456789"]
   end
 
   it "can nack multiple messages" do
@@ -108,11 +117,20 @@ describe Google::Cloud::PubSub::Subscriber, :nack, :mock_pubsub do
         stream_ack_deadline_seconds: 60
       )]
     ]
+
     stub.acknowledge_requests.must_equal []
+
     # pusher thread pool may deliver out of order, which stinks...
-    stub.modify_ack_deadline_requests.sort.reverse.must_equal [
-      [sub_path, ["ack-id-1111", "ack-id-1112", "ack-id-1113"], 60],
-      [sub_path, ["ack-id-1111", "ack-id-1112", "ack-id-1113"], 0]
-    ]
+    mod_ack_hash = {}
+    stub.modify_ack_deadline_requests.each do |ack_sub_path, msg_ids, deadline|
+      assert_equal ack_sub_path, sub_path
+      if mod_ack_hash.key? deadline
+        mod_ack_hash[deadline] += msg_ids
+      else
+        mod_ack_hash[deadline] = msg_ids
+      end
+    end
+    mod_ack_hash[60].sort.must_equal ["ack-id-1111", "ack-id-1112", "ack-id-1113"]
+    mod_ack_hash[0].sort.must_equal ["ack-id-1111", "ack-id-1112", "ack-id-1113"]
   end
 end
