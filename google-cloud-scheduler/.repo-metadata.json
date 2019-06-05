@@ -1,6 +1,8 @@
 {
-  "distribution_name": "google-cloud-scheduler",
-  "module_name": "Scheduler",
-  "module_name_credentials": "Scheduler::V1",
-  "env_var_prefix": "SCHEDULER"
+    "name": "cloudscheduler",
+    "language": "ruby",
+    "distribution_name": "google-cloud-scheduler",
+    "module_name": "Scheduler",
+    "module_name_credentials": "Scheduler::V1",
+    "env_var_prefix": "SCHEDULER"
 }

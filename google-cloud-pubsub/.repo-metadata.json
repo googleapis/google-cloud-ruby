@@ -1,0 +1,5 @@
+{
+    "name": "pubsub",
+    "language": "ruby",
+    "distribution_name": "google-cloud-pubsub"
+}

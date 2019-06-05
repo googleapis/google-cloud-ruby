@@ -1,6 +1,8 @@
 {
-  "distribution_name": "google-cloud-dialogflow",
-  "module_name": "Dialogflow",
-  "module_name_credentials": "Dialogflow::V2",
-  "env_var_prefix": "DIALOGFLOW"
+    "name": "dialogflow",
+    "language": "ruby",
+    "distribution_name": "google-cloud-dialogflow",
+    "module_name": "Dialogflow",
+    "module_name_credentials": "Dialogflow::V2",
+    "env_var_prefix": "DIALOGFLOW"
 }

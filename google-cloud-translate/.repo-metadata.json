@@ -1,0 +1,5 @@
+{
+    "name": "translate",
+    "language": "ruby",
+    "distribution_name": "google-cloud-translate"
+}
