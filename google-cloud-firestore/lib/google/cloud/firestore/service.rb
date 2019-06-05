@@ -41,7 +41,11 @@ module Google
 
         def channel
           require "grpc"
-          GRPC::Core::Channel.new host, nil, chan_creds
+          GRPC::Core::Channel.new host, chan_args, chan_creds
+        end
+
+        def chan_args
+          { "grpc.service_config_disable_resolution" => 1 }
         end
 
         def chan_creds
