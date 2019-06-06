@@ -134,7 +134,7 @@ describe Google::Cloud::Webrisk::V1beta1::WebRiskServiceV1Beta1Client do
           client = Google::Cloud::Webrisk.new(version: :v1beta1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1beta1 do
             client.compute_threat_list_diff(threat_type, constraints)
           end
 
@@ -211,7 +211,7 @@ describe Google::Cloud::Webrisk::V1beta1::WebRiskServiceV1Beta1Client do
           client = Google::Cloud::Webrisk.new(version: :v1beta1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1beta1 do
             client.search_uris(uri, threat_types)
           end
 
@@ -274,7 +274,7 @@ describe Google::Cloud::Webrisk::V1beta1::WebRiskServiceV1Beta1Client do
           client = Google::Cloud::Webrisk.new(version: :v1beta1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1beta1 do
             client.search_hashes
           end
 
