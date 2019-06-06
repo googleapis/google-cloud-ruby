@@ -1,8 +1,8 @@
 {
-    "name": "cloudtasks",
-    "language": "ruby",
-    "distribution_name": "google-cloud-tasks",
-    "module_name": "Tasks",
-    "module_name_credentials": "Tasks::V2",
-    "env_var_prefix": "TASKS"
+  "name": "cloudtasks",
+  "language": "ruby",
+  "distribution_name": "google-cloud-tasks",
+  "module_name": "Tasks",
+  "module_name_credentials": "Tasks::V2",
+  "env_var_prefix": "TASKS"
 }

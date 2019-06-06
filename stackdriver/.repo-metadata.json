@@ -1,5 +1,5 @@
 {
-    "name": "stackdriver",
-    "language": "ruby",
-    "distribution_name": "stackdriver"
+  "name": "stackdriver",
+  "language": "ruby",
+  "distribution_name": "stackdriver"
 }

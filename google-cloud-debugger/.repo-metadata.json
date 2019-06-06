@@ -1,5 +1,5 @@
 {
-    "name": "clouddebugger",
-    "language": "ruby",
-    "distribution_name": "google-cloud-debugger"
+  "name": "clouddebugger",
+  "language": "ruby",
+  "distribution_name": "google-cloud-debugger"
 }

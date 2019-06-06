@@ -815,4 +815,16 @@ def extract_args args, *keys
   vals.length > 1 ? vals : vals.first
 end
 
+task :what do
+  gems.each do |gem|
+    filename = "#{gem}/.repo-metadata.json"
+    if File.file? filename
+      puts filename
+      content = File.read filename
+      content.gsub! "    ", "  "
+      File.write filename, content
+    end
+  end
+end
+
 task :default => :test

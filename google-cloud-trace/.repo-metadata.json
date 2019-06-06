@@ -1,5 +1,5 @@
 {
-    "name": "cloudtrace",
-    "language": "ruby",
-    "distribution_name": "google-cloud-trace"
+  "name": "cloudtrace",
+  "language": "ruby",
+  "distribution_name": "google-cloud-trace"
 }
