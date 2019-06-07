@@ -1950,7 +1950,10 @@ module Google
           #   @return [Google::Privacy::Dlp::V2::OutputStorageConfig]
           class SaveFindings; end
 
-          # Publish the results of a DlpJob to a pub sub channel.
+          # Publish a message into given Pub/Sub topic when DlpJob has completed. The
+          # message contains a single field, `DlpJobName`, which is equal to the
+          # finished job's
+          # [`DlpJob.name`](https://cloud.google.com/dlp/docs/reference/rest/v2/projects.dlpJobs#DlpJob).
           # Compatible with: Inspect, Risk
           # @!attribute [rw] topic
           #   @return [String]
@@ -2210,8 +2213,7 @@ module Google
         #     template.
         # @!attribute [rw] actions
         #   @return [Array<Google::Privacy::Dlp::V2::Action>]
-        #     Actions to execute at the completion of the job. Are executed in the order
-        #     provided.
+        #     Actions to execute at the completion of the job.
         class InspectJobConfig; end
 
         # Combines all of the information about a DLP job.
@@ -2291,8 +2293,12 @@ module Google
         #       * `state` - PENDING|RUNNING|CANCELED|FINISHED|FAILED
         #         * `inspected_storage` - DATASTORE|CLOUD_STORAGE|BIGQUERY
         #         * `trigger_name` - The resource name of the trigger that created job.
+        #         * 'end_time` - Corresponds to time the job finished.
+        #         * 'start_time` - Corresponds to time the job finished.
         #       * Supported fields for risk analysis jobs:
         #         * `state` - RUNNING|CANCELED|FINISHED|FAILED
+        #         * 'end_time` - Corresponds to time the job finished.
+        #         * 'start_time` - Corresponds to time the job finished.
         #       * The operator must be `=` or `!=`.
         #
         #       Examples:
@@ -2300,6 +2306,7 @@ module Google
         #     * inspected_storage = cloud_storage AND state = done
         #     * inspected_storage = cloud_storage OR inspected_storage = bigquery
         #     * inspected_storage = cloud_storage AND (state = done OR state = canceled)
+        #     * end_time > \"2017-12-12T00:00:00+00:00\"
         #
         #     The length of this field should be no more than 500 characters.
         # @!attribute [rw] page_size
@@ -2456,6 +2463,12 @@ module Google
         #     Field in a BigQuery table where each cell represents a dictionary phrase.
         class LargeCustomDictionaryConfig; end
 
+        # Summary statistics of a custom dictionary.
+        # @!attribute [rw] approx_num_phrases
+        #   @return [Integer]
+        #     Approximate number of distinct phrases in the dictionary.
+        class LargeCustomDictionaryStats; end
+
         # Configuration for a StoredInfoType.
         # @!attribute [rw] display_name
         #   @return [String]
@@ -2467,6 +2480,12 @@ module Google
         #   @return [Google::Privacy::Dlp::V2::LargeCustomDictionaryConfig]
         #     StoredInfoType where findings are defined by a dictionary of phrases.
         class StoredInfoTypeConfig; end
+
+        # Statistics for a StoredInfoType.
+        # @!attribute [rw] large_custom_dictionary
+        #   @return [Google::Privacy::Dlp::V2::LargeCustomDictionaryStats]
+        #     StoredInfoType where findings are defined by a dictionary of phrases.
+        class StoredInfoTypeStats; end
 
         # Version of a StoredInfoType, including the configuration used to build it,
         # create timestamp, and current state.
@@ -2494,6 +2513,9 @@ module Google
         #     use the UpdateStoredInfoType API method to create another version of the
         #     storedInfoType to continue using it, reusing the same `config` if it was
         #     not the source of the error.
+        # @!attribute [rw] stats
+        #   @return [Google::Privacy::Dlp::V2::StoredInfoTypeStats]
+        #     Statistics about this storedInfoType version.
         class StoredInfoTypeVersion; end
 
         # StoredInfoType resource message that contains information about the current
