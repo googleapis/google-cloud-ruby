@@ -269,9 +269,17 @@ module Google
                 {'instance.name' => request.instance.name}
               end
             )
-            @delete_instance = Google::Gax.create_api_call(
-              @cloud_redis_stub.method(:delete_instance),
-              defaults["delete_instance"],
+            @import_instance = Google::Gax.create_api_call(
+              @cloud_redis_stub.method(:import_instance),
+              defaults["import_instance"],
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
+            )
+            @export_instance = Google::Gax.create_api_call(
+              @cloud_redis_stub.method(:export_instance),
+              defaults["export_instance"],
               exception_transformer: exception_transformer,
               params_extractor: proc do |request|
                 {'name' => request.name}
@@ -280,6 +288,14 @@ module Google
             @failover_instance = Google::Gax.create_api_call(
               @cloud_redis_stub.method(:failover_instance),
               defaults["failover_instance"],
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
+            )
+            @delete_instance = Google::Gax.create_api_call(
+              @cloud_redis_stub.method(:delete_instance),
+              defaults["delete_instance"],
               exception_transformer: exception_transformer,
               params_extractor: proc do |request|
                 {'name' => request.name}
@@ -301,7 +317,7 @@ module Google
           # @param parent [String]
           #   Required. The resource name of the instance location using the form:
           #       `projects/{project_id}/locations/{location_id}`
-          #   where `location_id` refers to a GCP region
+          #   where `location_id` refers to a GCP region.
           # @param page_size [Integer]
           #   The maximum number of resources contained in the underlying API
           #   response. If page streaming is performed per-resource, this
@@ -357,7 +373,7 @@ module Google
           # @param name [String]
           #   Required. Redis instance resource name using the form:
           #       `projects/{project_id}/locations/{location_id}/instances/{instance_id}`
-          #   where `location_id` refers to a GCP region
+          #   where `location_id` refers to a GCP region.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -400,7 +416,7 @@ module Google
           # @param parent [String]
           #   Required. The resource name of the instance location using the form:
           #       `projects/{project_id}/locations/{location_id}`
-          #   where `location_id` refers to a GCP region
+          #   where `location_id` refers to a GCP region.
           # @param instance_id [String]
           #   Required. The logical name of the Redis instance in the customer project
           #   with the following restrictions:
@@ -564,13 +580,23 @@ module Google
             operation
           end
 
-          # Deletes a specific Redis instance.  Instance stops serving and data is
-          # deleted.
+          # Import a Redis RDB snapshot file from Cloud Storage into a Redis instance.
+          #
+          # Redis may stop serving during this operation. Instance state will be
+          # IMPORTING for entire operation. When complete, the instance will contain
+          # only data from the imported file.
+          #
+          # The returned operation is automatically deleted after a few hours, so
+          # there is no need to call DeleteOperation.
           #
           # @param name [String]
           #   Required. Redis instance resource name using the form:
           #       `projects/{project_id}/locations/{location_id}/instances/{instance_id}`
-          #   where `location_id` refers to a GCP region
+          #   where `location_id` refers to a GCP region.
+          # @param input_config [Google::Cloud::Redis::V1beta1::InputConfig | Hash]
+          #   Required. Specify data to be imported.
+          #   A hash of the same form as `Google::Cloud::Redis::V1beta1::InputConfig`
+          #   can also be provided.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -582,8 +608,11 @@ module Google
           #   cloud_redis_client = Google::Cloud::Redis.new(version: :v1beta1)
           #   formatted_name = Google::Cloud::Redis::V1beta1::CloudRedisClient.instance_path("[PROJECT]", "[LOCATION]", "[INSTANCE]")
           #
+          #   # TODO: Initialize `input_config`:
+          #   input_config = {}
+          #
           #   # Register a callback during the method call.
-          #   operation = cloud_redis_client.delete_instance(formatted_name) do |op|
+          #   operation = cloud_redis_client.import_instance(formatted_name, input_config) do |op|
           #     raise op.results.message if op.error?
           #     op_results = op.results
           #     # Process the results.
@@ -609,17 +638,19 @@ module Google
           #   # completion.
           #   operation.wait_until_done!
 
-          def delete_instance \
+          def import_instance \
               name,
+              input_config,
               options: nil
             req = {
-              name: name
+              name: name,
+              input_config: input_config
             }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Cloud::Redis::V1beta1::DeleteInstanceRequest)
+            req = Google::Gax::to_proto(req, Google::Cloud::Redis::V1beta1::ImportInstanceRequest)
             operation = Google::Gax::Operation.new(
-              @delete_instance.call(req, options),
+              @import_instance.call(req, options),
               @operations_client,
-              Google::Protobuf::Empty,
+              Google::Cloud::Redis::V1beta1::Instance,
               Google::Protobuf::Any,
               call_options: options
             )
@@ -627,13 +658,89 @@ module Google
             operation
           end
 
-          # Failover the master role to current replica node against a specific
-          # STANDARD tier redis instance.
+          # Export Redis instance data into a Redis RDB format file in Cloud Storage.
+          #
+          # Redis will continue serving during this operation.
+          #
+          # The returned operation is automatically deleted after a few hours, so
+          # there is no need to call DeleteOperation.
           #
           # @param name [String]
           #   Required. Redis instance resource name using the form:
           #       `projects/{project_id}/locations/{location_id}/instances/{instance_id}`
-          #   where `location_id` refers to a GCP region
+          #   where `location_id` refers to a GCP region.
+          # @param output_config [Google::Cloud::Redis::V1beta1::OutputConfig | Hash]
+          #   Required. Specify data to be exported.
+          #   A hash of the same form as `Google::Cloud::Redis::V1beta1::OutputConfig`
+          #   can also be provided.
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @return [Google::Gax::Operation]
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/redis"
+          #
+          #   cloud_redis_client = Google::Cloud::Redis.new(version: :v1beta1)
+          #   formatted_name = Google::Cloud::Redis::V1beta1::CloudRedisClient.instance_path("[PROJECT]", "[LOCATION]", "[INSTANCE]")
+          #
+          #   # TODO: Initialize `output_config`:
+          #   output_config = {}
+          #
+          #   # Register a callback during the method call.
+          #   operation = cloud_redis_client.export_instance(formatted_name, output_config) do |op|
+          #     raise op.results.message if op.error?
+          #     op_results = op.results
+          #     # Process the results.
+          #
+          #     metadata = op.metadata
+          #     # Process the metadata.
+          #   end
+          #
+          #   # Or use the return value to register a callback.
+          #   operation.on_done do |op|
+          #     raise op.results.message if op.error?
+          #     op_results = op.results
+          #     # Process the results.
+          #
+          #     metadata = op.metadata
+          #     # Process the metadata.
+          #   end
+          #
+          #   # Manually reload the operation.
+          #   operation.reload!
+          #
+          #   # Or block until the operation completes, triggering callbacks on
+          #   # completion.
+          #   operation.wait_until_done!
+
+          def export_instance \
+              name,
+              output_config,
+              options: nil
+            req = {
+              name: name,
+              output_config: output_config
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Cloud::Redis::V1beta1::ExportInstanceRequest)
+            operation = Google::Gax::Operation.new(
+              @export_instance.call(req, options),
+              @operations_client,
+              Google::Cloud::Redis::V1beta1::Instance,
+              Google::Protobuf::Any,
+              call_options: options
+            )
+            operation.on_done { |operation| yield(operation) } if block_given?
+            operation
+          end
+
+          # Initiates a failover of the master node to current replica node for a
+          # specific STANDARD tier Cloud Memorystore for Redis instance.
+          #
+          # @param name [String]
+          #   Required. Redis instance resource name using the form:
+          #       `projects/{project_id}/locations/{location_id}/instances/{instance_id}`
+          #   where `location_id` refers to a GCP region.
           # @param data_protection_mode [Google::Cloud::Redis::V1beta1::FailoverInstanceRequest::DataProtectionMode]
           #   Optional. Available data protection modes that the user can choose. If it's
           #   unspecified, data protection mode will be LIMITED_DATA_LOSS by default.
@@ -691,6 +798,69 @@ module Google
               @failover_instance.call(req, options),
               @operations_client,
               Google::Cloud::Redis::V1beta1::Instance,
+              Google::Protobuf::Any,
+              call_options: options
+            )
+            operation.on_done { |operation| yield(operation) } if block_given?
+            operation
+          end
+
+          # Deletes a specific Redis instance.  Instance stops serving and data is
+          # deleted.
+          #
+          # @param name [String]
+          #   Required. Redis instance resource name using the form:
+          #       `projects/{project_id}/locations/{location_id}/instances/{instance_id}`
+          #   where `location_id` refers to a GCP region.
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @return [Google::Gax::Operation]
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/redis"
+          #
+          #   cloud_redis_client = Google::Cloud::Redis.new(version: :v1beta1)
+          #   formatted_name = Google::Cloud::Redis::V1beta1::CloudRedisClient.instance_path("[PROJECT]", "[LOCATION]", "[INSTANCE]")
+          #
+          #   # Register a callback during the method call.
+          #   operation = cloud_redis_client.delete_instance(formatted_name) do |op|
+          #     raise op.results.message if op.error?
+          #     op_results = op.results
+          #     # Process the results.
+          #
+          #     metadata = op.metadata
+          #     # Process the metadata.
+          #   end
+          #
+          #   # Or use the return value to register a callback.
+          #   operation.on_done do |op|
+          #     raise op.results.message if op.error?
+          #     op_results = op.results
+          #     # Process the results.
+          #
+          #     metadata = op.metadata
+          #     # Process the metadata.
+          #   end
+          #
+          #   # Manually reload the operation.
+          #   operation.reload!
+          #
+          #   # Or block until the operation completes, triggering callbacks on
+          #   # completion.
+          #   operation.wait_until_done!
+
+          def delete_instance \
+              name,
+              options: nil
+            req = {
+              name: name
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Cloud::Redis::V1beta1::DeleteInstanceRequest)
+            operation = Google::Gax::Operation.new(
+              @delete_instance.call(req, options),
+              @operations_client,
+              Google::Protobuf::Empty,
               Google::Protobuf::Any,
               call_options: options
             )
