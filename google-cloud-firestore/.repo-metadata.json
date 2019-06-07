@@ -1,5 +1,5 @@
 {
-        "name": "firestore",
-        "language": "ruby",
-        "distribution_name": "google-cloud-firestore"
+    "name": "firestore",
+    "language": "ruby",
+    "distribution_name": "google-cloud-firestore"
 }

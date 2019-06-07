@@ -1,5 +1,5 @@
 {
-        "name": "clouderrorreporting",
-        "language": "ruby",
-        "distribution_name": "google-cloud-error_reporting"
+    "name": "clouderrorreporting",
+    "language": "ruby",
+    "distribution_name": "google-cloud-error_reporting"
 }

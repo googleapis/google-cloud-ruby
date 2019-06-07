@@ -1,5 +1,5 @@
 {
-        "name": "datastore",
-        "language": "ruby",
-        "distribution_name": "google-cloud-datastore"
+    "name": "datastore",
+    "language": "ruby",
+    "distribution_name": "google-cloud-datastore"
 }

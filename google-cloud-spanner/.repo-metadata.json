@@ -1,5 +1,5 @@
 {
-        "name": "spanner",
-        "language": "ruby",
-        "distribution_name": "google-cloud-spanner"
+    "name": "spanner",
+    "language": "ruby",
+    "distribution_name": "google-cloud-spanner"
 }
