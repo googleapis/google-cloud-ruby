@@ -9,6 +9,11 @@ require 'google/protobuf/struct_pb'
 require 'google/protobuf/timestamp_pb'
 require 'google/rpc/status_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
+  add_message "google.cloud.bigquery.datatransfer.v1.ScheduleOptions" do
+    optional :disable_auto_scheduling, :bool, 3
+    optional :start_time, :message, 1, "google.protobuf.Timestamp"
+    optional :end_time, :message, 2, "google.protobuf.Timestamp"
+  end
   add_message "google.cloud.bigquery.datatransfer.v1.TransferConfig" do
     optional :name, :string, 1
     optional :destination_dataset_id, :string, 2
@@ -16,6 +21,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :data_source_id, :string, 5
     optional :params, :message, 9, "google.protobuf.Struct"
     optional :schedule, :string, 7
+    optional :schedule_options, :message, 24, "google.cloud.bigquery.datatransfer.v1.ScheduleOptions"
     optional :data_refresh_window_days, :int32, 12
     optional :disabled, :bool, 13
     optional :update_time, :message, 4, "google.protobuf.Timestamp"
@@ -23,9 +29,12 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :state, :enum, 10, "google.cloud.bigquery.datatransfer.v1.TransferState"
     optional :user_id, :int64, 11
     optional :dataset_region, :string, 14
+    optional :partner_token, :string, 22
+    optional :partner_connection_info, :message, 23, "google.protobuf.Struct"
   end
   add_message "google.cloud.bigquery.datatransfer.v1.TransferRun" do
     optional :name, :string, 1
+    map :labels, :string, :string, 22
     optional :schedule_time, :message, 3, "google.protobuf.Timestamp"
     optional :run_time, :message, 10, "google.protobuf.Timestamp"
     optional :error_status, :message, 21, "google.rpc.Status"
@@ -38,6 +47,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :state, :enum, 8, "google.cloud.bigquery.datatransfer.v1.TransferState"
     optional :user_id, :int64, 11
     optional :schedule, :string, 12
+    optional :partner_token, :string, 28
   end
   add_message "google.cloud.bigquery.datatransfer.v1.TransferMessage" do
     optional :message_time, :message, 1, "google.protobuf.Timestamp"
@@ -49,6 +59,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     value :INFO, 1
     value :WARNING, 2
     value :ERROR, 3
+    value :DEBUG, 4
   end
   add_enum "google.cloud.bigquery.datatransfer.v1.TransferType" do
     value :TRANSFER_TYPE_UNSPECIFIED, 0
@@ -70,6 +81,7 @@ module Google
     module Bigquery
       module Datatransfer
         module V1
+          ScheduleOptions = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.datatransfer.v1.ScheduleOptions").msgclass
           TransferConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.datatransfer.v1.TransferConfig").msgclass
           TransferRun = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.datatransfer.v1.TransferRun").msgclass
           TransferMessage = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.datatransfer.v1.TransferMessage").msgclass

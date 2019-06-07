@@ -41,7 +41,7 @@ module Google
           #     Is parameter required.
           # @!attribute [rw] repeated
           #   @return [true, false]
-          #     Can parameter have multiple values.
+          #     Deprecated. This field has no effect.
           # @!attribute [rw] validation_regex
           #   @return [String]
           #     Regular expression which can be used for parameter validation.
@@ -56,7 +56,7 @@ module Google
           #     For integer and double values specifies maxminum allowed value.
           # @!attribute [rw] fields
           #   @return [Array<Google::Cloud::Bigquery::Datatransfer::V1::DataSourceParameter>]
-          #     When parameter is a record, describes child fields.
+          #     Deprecated. This field has no effect.
           # @!attribute [rw] validation_description
           #   @return [String]
           #     Description of the requirements for this field, in case the user input does
@@ -69,8 +69,7 @@ module Google
           #     Cannot be changed after initial creation.
           # @!attribute [rw] recurse
           #   @return [true, false]
-          #     If set to true, schema should be taken from the parent with the same
-          #     parameter_id. Only applicable when parameter type is RECORD.
+          #     Deprecated. This field has no effect.
           class DataSourceParameter
             # Parameter type.
             module Type
@@ -90,7 +89,7 @@ module Google
               # Boolean parameter.
               BOOLEAN = 4
 
-              # Record parameter.
+              # Deprecated. This field has no effect.
               RECORD = 5
 
               # Page ID for a Google+ Page.
@@ -115,24 +114,21 @@ module Google
           # @!attribute [rw] client_id
           #   @return [String]
           #     Data source client id which should be used to receive refresh token.
-          #     When not supplied, no offline credentials are populated for data transfer.
           # @!attribute [rw] scopes
           #   @return [Array<String>]
-          #     Api auth scopes for which refresh token needs to be obtained. Only valid
-          #     when `client_id` is specified. Ignored otherwise. These are scopes needed
-          #     by a data source to prepare data and ingest them into BigQuery,
-          #     e.g., https://www.googleapis.com/auth/bigquery
+          #     Api auth scopes for which refresh token needs to be obtained. These are
+          #     scopes needed by a data source to prepare data and ingest them into
+          #     BigQuery, e.g., https://www.googleapis.com/auth/bigquery
           # @!attribute [rw] transfer_type
           #   @return [Google::Cloud::Bigquery::Datatransfer::V1::TransferType]
           #     Deprecated. This field has no effect.
           # @!attribute [rw] supports_multiple_transfers
           #   @return [true, false]
-          #     Indicates whether the data source supports multiple transfers
-          #     to different BigQuery targets.
+          #     Deprecated. This field has no effect.
           # @!attribute [rw] update_deadline_seconds
           #   @return [Integer]
           #     The number of seconds to wait for an update from the data source
-          #     before BigQuery marks the transfer as failed.
+          #     before the Data Transfer Service marks the transfer as FAILED.
           # @!attribute [rw] default_schedule
           #   @return [String]
           #     Default data transfer schedule.
@@ -171,6 +167,12 @@ module Google
           # @!attribute [rw] minimum_schedule_interval
           #   @return [Google::Protobuf::Duration]
           #     The minimum interval for scheduler to schedule runs.
+          # @!attribute [rw] partner_legal_name
+          #   @return [String]
+          #     Partner's legal name of this data source
+          # @!attribute [rw] redirect_url
+          #   @return [String]
+          #     Redirect URL to complete transfer config setup for 3rd party data sources.
           class DataSource
             # The type of authorization needed for this data source.
             module AuthorizationType
@@ -248,7 +250,7 @@ module Google
           # @!attribute [rw] parent
           #   @return [String]
           #     The BigQuery project id where the transfer configuration should be created.
-          #     Must be in the format /projects/\\{project_id}/locations/\\{location_id}
+          #     Must be in the format projects/\\{project_id}/locations/\\{location_id}
           #     If specified location and location of the destination bigquery dataset
           #     do not match - the request will fail.
           # @!attribute [rw] transfer_config
@@ -272,6 +274,14 @@ module Google
           #       urn:ietf:wg:oauth:2.0:oob means that authorization code should be
           #       returned in the title bar of the browser, with the page text prompting
           #       the user to copy the code and paste it in the application.
+          # @!attribute [rw] version_info
+          #   @return [String]
+          #     Optional version info. If users want to find a very recent access token,
+          #     that is, immediately after approving access, users have to set the
+          #     version_info claim in the token request. To obtain the version_info, users
+          #     must use the “none+gsession” response type. which be return a
+          #     version_info back in the authorization response which be be put in a JWT
+          #     claim in the token request.
           class CreateTransferConfigRequest; end
 
           # A request to update a transfer configuration. To update the user id of the
@@ -300,6 +310,14 @@ module Google
           # @!attribute [rw] update_mask
           #   @return [Google::Protobuf::FieldMask]
           #     Required list of fields to be updated in this request.
+          # @!attribute [rw] version_info
+          #   @return [String]
+          #     Optional version info. If users want to find a very recent access token,
+          #     that is, immediately after approving access, users have to set the
+          #     version_info claim in the token request. To obtain the version_info, users
+          #     must use the “none+gsession” response type. which be return a
+          #     version_info back in the authorization response which be be put in a JWT
+          #     claim in the token request.
           class UpdateTransferConfigRequest; end
 
           # A request to get data transfer information.
@@ -466,6 +484,9 @@ module Google
           #   @return [String]
           #     Transfer configuration name in the form:
           #     `projects/{project_id}/transferConfigs/{config_id}`.
+          # @!attribute [rw] labels
+          #   @return [Hash{String => String}]
+          #     User labels to add to the scheduled runs.
           # @!attribute [rw] start_time
           #   @return [Google::Protobuf::Timestamp]
           #     Start time of the range of transfer runs. For example,
@@ -481,6 +502,70 @@ module Google
           #   @return [Array<Google::Cloud::Bigquery::Datatransfer::V1::TransferRun>]
           #     The transfer runs that were scheduled.
           class ScheduleTransferRunsResponse; end
+
+          # A request to start manual transfer runs.
+          # @!attribute [rw] parent
+          #   @return [String]
+          #     Transfer configuration name in the form:
+          #     `projects/{project_id}/transferConfigs/{config_id}`.
+          # @!attribute [rw] labels
+          #   @return [Hash{String => String}]
+          #     User labels to add to the backfilled runs.
+          # @!attribute [rw] requested_time_range
+          #   @return [Google::Cloud::Bigquery::Datatransfer::V1::StartManualTransferRunsRequest::TimeRange]
+          #     Time range for the transfer runs that should be started.
+          # @!attribute [rw] requested_run_time
+          #   @return [Google::Protobuf::Timestamp]
+          #     Specific run_time for a transfer run to be started. The
+          #     requested_run_time must not be in the future.
+          class StartManualTransferRunsRequest
+            # A specification for a time range, this will request transfer runs with
+            # run_time between start_time (inclusive) and end_time (exclusive).
+            # @!attribute [rw] start_time
+            #   @return [Google::Protobuf::Timestamp]
+            #     Start time of the range of transfer runs. For example,
+            #     `"2017-05-25T00:00:00+00:00"`. The start_time must be strictly less than
+            #     the end_time. Creates transfer runs where run_time is in the range betwen
+            #     start_time (inclusive) and end_time (exlusive).
+            # @!attribute [rw] end_time
+            #   @return [Google::Protobuf::Timestamp]
+            #     End time of the range of transfer runs. For example,
+            #     `"2017-05-30T00:00:00+00:00"`. The end_time must not be in the future.
+            #     Creates transfer runs where run_time is in the range betwen start_time
+            #     (inclusive) and end_time (exlusive).
+            class TimeRange; end
+          end
+
+          # A response to start manual transfer runs.
+          # @!attribute [rw] runs
+          #   @return [Array<Google::Cloud::Bigquery::Datatransfer::V1::TransferRun>]
+          #     The transfer runs that were created.
+          class StartManualTransferRunsResponse; end
+
+          # A request to enable data transfer service for a project.
+          # @!attribute [rw] name
+          #   @return [String]
+          #     The name of the project resource in the form:
+          #     `projects/{project_id}`
+          class EnableDataTransferServiceRequest; end
+
+          # A request to determine whether data transfer is enabled for the project.
+          # @!attribute [rw] name
+          #   @return [String]
+          #     The name of the project resource in the form:
+          #     `projects/{project_id}`
+          class IsDataTransferServiceEnabledRequest; end
+
+          # A response to indicate whether data transfer service is enabled
+          # for the project.
+          # @!attribute [rw] enabled
+          #   @return [true, false]
+          #     Indicates whether the data transfer service is enabled for the project.
+          # @!attribute [rw] reason
+          #   @return [String]
+          #     A string that contains additional information about why the service is
+          #     deemed not enabled. This is only available when `enable` is false.
+          class IsDataTransferServiceEnabledResponse; end
         end
       end
     end

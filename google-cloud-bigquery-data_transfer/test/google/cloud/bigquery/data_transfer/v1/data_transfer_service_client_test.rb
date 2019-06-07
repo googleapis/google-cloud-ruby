@@ -87,6 +87,8 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
       help_url = "helpUrl-789431439"
       default_data_refresh_window_days = 1804935157
       manual_runs_disabled = true
+      partner_legal_name = "partnerLegalName-1307326424"
+      redirect_url = "redirectUrl951230092"
       expected_response = {
         name: name_2,
         data_source_id: data_source_id,
@@ -99,7 +101,9 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
         supports_custom_schedule: supports_custom_schedule,
         help_url: help_url,
         default_data_refresh_window_days: default_data_refresh_window_days,
-        manual_runs_disabled: manual_runs_disabled
+        manual_runs_disabled: manual_runs_disabled,
+        partner_legal_name: partner_legal_name,
+        redirect_url: redirect_url
       }
       expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Bigquery::Datatransfer::V1::DataSource)
 
@@ -255,6 +259,7 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
       disabled = true
       user_id = 147132913
       dataset_region = "datasetRegion959248539"
+      partner_token = "partnerToken725173186"
       expected_response = {
         name: name,
         destination_dataset_id: destination_dataset_id,
@@ -264,7 +269,8 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
         data_refresh_window_days: data_refresh_window_days,
         disabled: disabled,
         user_id: user_id,
-        dataset_region: dataset_region
+        dataset_region: dataset_region,
+        partner_token: partner_token
       }
       expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Bigquery::Datatransfer::V1::TransferConfig)
 
@@ -351,6 +357,7 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
       disabled = true
       user_id = 147132913
       dataset_region = "datasetRegion959248539"
+      partner_token = "partnerToken725173186"
       expected_response = {
         name: name,
         destination_dataset_id: destination_dataset_id,
@@ -360,7 +367,8 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
         data_refresh_window_days: data_refresh_window_days,
         disabled: disabled,
         user_id: user_id,
-        dataset_region: dataset_region
+        dataset_region: dataset_region,
+        partner_token: partner_token
       }
       expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Bigquery::Datatransfer::V1::TransferConfig)
 
@@ -515,6 +523,7 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
       disabled = true
       user_id = 147132913
       dataset_region = "datasetRegion959248539"
+      partner_token = "partnerToken725173186"
       expected_response = {
         name: name_2,
         destination_dataset_id: destination_dataset_id,
@@ -524,7 +533,8 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
         data_refresh_window_days: data_refresh_window_days,
         disabled: disabled,
         user_id: user_id,
-        dataset_region: dataset_region
+        dataset_region: dataset_region,
+        partner_token: partner_token
       }
       expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Bigquery::Datatransfer::V1::TransferConfig)
 
@@ -768,12 +778,14 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
       data_source_id = "dataSourceId-1015796374"
       user_id = 147132913
       schedule = "schedule-697920873"
+      partner_token = "partnerToken725173186"
       expected_response = {
         name: name_2,
         destination_dataset_id: destination_dataset_id,
         data_source_id: data_source_id,
         user_id: user_id,
-        schedule: schedule
+        schedule: schedule,
+        partner_token: partner_token
       }
       expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Bigquery::Datatransfer::V1::TransferRun)
 
@@ -1117,6 +1129,194 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
           # Call method
           err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.check_valid_creds(formatted_name)
+          end
+
+          # Verify the GaxError wrapped the custom error that was raised.
+          assert_match(custom_error.message, err.message)
+        end
+      end
+    end
+  end
+
+  describe 'start_manual_transfer_runs' do
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient#start_manual_transfer_runs."
+
+    it 'invokes start_manual_transfer_runs without error' do
+      # Create expected grpc response
+      expected_response = {}
+      expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Bigquery::Datatransfer::V1::StartManualTransferRunsResponse)
+
+      # Mock Grpc layer
+      mock_method = proc do
+        OpenStruct.new(execute: expected_response)
+      end
+      mock_stub = MockGrpcClientStub_v1.new(:start_manual_transfer_runs, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockDataTransferServiceCredentials_v1.new("start_manual_transfer_runs")
+
+      Google::Cloud::Bigquery::Datatransfer::V1::DataTransferService::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Bigquery::DataTransfer::V1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Bigquery::DataTransfer.new(version: :v1)
+
+          # Call method
+          response = client.start_manual_transfer_runs
+
+          # Verify the response
+          assert_equal(expected_response, response)
+
+          # Call method with block
+          client.start_manual_transfer_runs do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
+        end
+      end
+    end
+
+    it 'invokes start_manual_transfer_runs with error' do
+      # Mock Grpc layer
+      mock_method = proc do
+        raise custom_error
+      end
+      mock_stub = MockGrpcClientStub_v1.new(:start_manual_transfer_runs, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockDataTransferServiceCredentials_v1.new("start_manual_transfer_runs")
+
+      Google::Cloud::Bigquery::Datatransfer::V1::DataTransferService::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Bigquery::DataTransfer::V1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Bigquery::DataTransfer.new(version: :v1)
+
+          # Call method
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
+            client.start_manual_transfer_runs
+          end
+
+          # Verify the GaxError wrapped the custom error that was raised.
+          assert_match(custom_error.message, err.message)
+        end
+      end
+    end
+  end
+
+  describe 'enable_data_transfer_service' do
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient#enable_data_transfer_service."
+
+    it 'invokes enable_data_transfer_service without error' do
+
+      # Mock Grpc layer
+      mock_method = proc do
+        OpenStruct.new(execute: nil)
+      end
+      mock_stub = MockGrpcClientStub_v1.new(:enable_data_transfer_service, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockDataTransferServiceCredentials_v1.new("enable_data_transfer_service")
+
+      Google::Cloud::Bigquery::Datatransfer::V1::DataTransferService::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Bigquery::DataTransfer::V1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Bigquery::DataTransfer.new(version: :v1)
+
+          # Call method
+          response = client.enable_data_transfer_service
+
+          # Verify the response
+          assert_nil(response)
+
+          # Call method with block
+          client.enable_data_transfer_service do |response, operation|
+            # Verify the response
+            assert_nil(response)
+            refute_nil(operation)
+          end
+        end
+      end
+    end
+
+    it 'invokes enable_data_transfer_service with error' do
+      # Mock Grpc layer
+      mock_method = proc do
+        raise custom_error
+      end
+      mock_stub = MockGrpcClientStub_v1.new(:enable_data_transfer_service, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockDataTransferServiceCredentials_v1.new("enable_data_transfer_service")
+
+      Google::Cloud::Bigquery::Datatransfer::V1::DataTransferService::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Bigquery::DataTransfer::V1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Bigquery::DataTransfer.new(version: :v1)
+
+          # Call method
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
+            client.enable_data_transfer_service
+          end
+
+          # Verify the GaxError wrapped the custom error that was raised.
+          assert_match(custom_error.message, err.message)
+        end
+      end
+    end
+  end
+
+  describe 'is_data_transfer_service_enabled' do
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient#is_data_transfer_service_enabled."
+
+    it 'invokes is_data_transfer_service_enabled without error' do
+      # Create expected grpc response
+      enabled = false
+      reason = "reason-934964668"
+      expected_response = { enabled: enabled, reason: reason }
+      expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Bigquery::Datatransfer::V1::IsDataTransferServiceEnabledResponse)
+
+      # Mock Grpc layer
+      mock_method = proc do
+        OpenStruct.new(execute: expected_response)
+      end
+      mock_stub = MockGrpcClientStub_v1.new(:is_data_transfer_service_enabled, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockDataTransferServiceCredentials_v1.new("is_data_transfer_service_enabled")
+
+      Google::Cloud::Bigquery::Datatransfer::V1::DataTransferService::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Bigquery::DataTransfer::V1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Bigquery::DataTransfer.new(version: :v1)
+
+          # Call method
+          response = client.is_data_transfer_service_enabled
+
+          # Verify the response
+          assert_equal(expected_response, response)
+
+          # Call method with block
+          client.is_data_transfer_service_enabled do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
+        end
+      end
+    end
+
+    it 'invokes is_data_transfer_service_enabled with error' do
+      # Mock Grpc layer
+      mock_method = proc do
+        raise custom_error
+      end
+      mock_stub = MockGrpcClientStub_v1.new(:is_data_transfer_service_enabled, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockDataTransferServiceCredentials_v1.new("is_data_transfer_service_enabled")
+
+      Google::Cloud::Bigquery::Datatransfer::V1::DataTransferService::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Bigquery::DataTransfer::V1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Bigquery::DataTransfer.new(version: :v1)
+
+          # Call method
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
+            client.is_data_transfer_service_enabled
           end
 
           # Verify the GaxError wrapped the custom error that was raised.
