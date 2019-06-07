@@ -297,8 +297,12 @@ sequence of restrictions implicitly uses <code>AND</code>.</li>
 <li><code>state</code> - PENDING|RUNNING|CANCELED|FINISHED|FAILED</li>
 <li><code>inspected_storage</code> - DATASTORE|CLOUD_STORAGE|BIGQUERY</li>
 <li><code>trigger_name</code> - The resource name of the trigger that created job.</li>
+<li>&#39;end_time` - Corresponds to time the job finished.</li>
+<li>&#39;start_time` - Corresponds to time the job finished.</li>
 <li>Supported fields for risk analysis jobs:</li>
 <li><code>state</code> - RUNNING|CANCELED|FINISHED|FAILED</li>
+<li>&#39;end_time` - Corresponds to time the job finished.</li>
+<li>&#39;start_time` - Corresponds to time the job finished.</li>
 <li>The operator must be <code>=</code> or <code>!=</code>.</li>
 </ul></li>
 </ul>
@@ -309,6 +313,7 @@ sequence of restrictions implicitly uses <code>AND</code>.</li>
 <li>inspected_storage = cloud_storage AND state = done</li>
 <li>inspected_storage = cloud_storage OR inspected_storage = bigquery</li>
 <li>inspected_storage = cloud_storage AND (state = done OR state = canceled)</li>
+<li>end_time &gt; \&quot;2017-12-12T00:00:00+00:00\&quot;</li>
 </ul>
 
 <p>The length of this field should be no more than 500 characters.</p>
@@ -344,8 +349,12 @@ sequence of restrictions implicitly uses <code>AND</code>.</li>
 <li><code>state</code> - PENDING|RUNNING|CANCELED|FINISHED|FAILED</li>
 <li><code>inspected_storage</code> - DATASTORE|CLOUD_STORAGE|BIGQUERY</li>
 <li><code>trigger_name</code> - The resource name of the trigger that created job.</li>
+<li>&#39;end_time` - Corresponds to time the job finished.</li>
+<li>&#39;start_time` - Corresponds to time the job finished.</li>
 <li>Supported fields for risk analysis jobs:</li>
 <li><code>state</code> - RUNNING|CANCELED|FINISHED|FAILED</li>
+<li>&#39;end_time` - Corresponds to time the job finished.</li>
+<li>&#39;start_time` - Corresponds to time the job finished.</li>
 <li>The operator must be <code>=</code> or <code>!=</code>.</li>
 </ul></li>
 </ul>
@@ -356,6 +365,7 @@ sequence of restrictions implicitly uses <code>AND</code>.</li>
 <li>inspected_storage = cloud_storage AND state = done</li>
 <li>inspected_storage = cloud_storage OR inspected_storage = bigquery</li>
 <li>inspected_storage = cloud_storage AND (state = done OR state = canceled)</li>
+<li>end_time &gt; \&quot;2017-12-12T00:00:00+00:00\&quot;</li>
 </ul>
 
 <p>The length of this field should be no more than 500 characters.</p>
@@ -371,10 +381,10 @@ sequence of restrictions implicitly uses <code>AND</code>.</li>
       <pre class="lines">
 
 
-2329</pre>
+2336</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/dlp.rb', line 2329</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/dlp.rb', line 2336</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Privacy::Dlp::V2::ListDlpJobsRequest (class)">ListDlpJobsRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -454,10 +464,10 @@ insignificant.</p>
       <pre class="lines">
 
 
-2329</pre>
+2336</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/dlp.rb', line 2329</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/dlp.rb', line 2336</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Privacy::Dlp::V2::ListDlpJobsRequest (class)">ListDlpJobsRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -509,10 +519,10 @@ insignificant.</p>
       <pre class="lines">
 
 
-2329</pre>
+2336</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/dlp.rb', line 2329</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/dlp.rb', line 2336</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Privacy::Dlp::V2::ListDlpJobsRequest (class)">ListDlpJobsRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -564,10 +574,10 @@ insignificant.</p>
       <pre class="lines">
 
 
-2329</pre>
+2336</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/dlp.rb', line 2329</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/dlp.rb', line 2336</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Privacy::Dlp::V2::ListDlpJobsRequest (class)">ListDlpJobsRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -619,10 +629,10 @@ insignificant.</p>
       <pre class="lines">
 
 
-2329</pre>
+2336</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/dlp.rb', line 2329</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/dlp.rb', line 2336</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Privacy::Dlp::V2::ListDlpJobsRequest (class)">ListDlpJobsRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -674,10 +684,10 @@ insignificant.</p>
       <pre class="lines">
 
 
-2329</pre>
+2336</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/dlp.rb', line 2329</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/dlp.rb', line 2336</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Privacy::Dlp::V2::ListDlpJobsRequest (class)">ListDlpJobsRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>

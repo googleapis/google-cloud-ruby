@@ -1,6 +1,6 @@
 ---
 layout: yard_main
-title: "Class: Google::Privacy::Dlp::V2::ListStoredInfoTypesResponse - Cloud"
+title: "Class: Google::Privacy::Dlp::V2::StoredInfoTypeStats - Cloud"
 css: 
   - /docs/css/style.css
   - /docs/css/common.css
@@ -10,7 +10,7 @@ js:
   - /js/yard-main.js
 ---
 <script type="text/javascript" charset="utf-8">
-  pathId = "Google::Privacy::Dlp::V2::ListStoredInfoTypesResponse";
+  pathId = "Google::Privacy::Dlp::V2::StoredInfoTypeStats";
   relpath = '../../../../';
 </script>
 
@@ -24,10 +24,10 @@ js:
   <div id="header">
     <div id="menu">
   
-    <a href="../../../../_index.html">Index (L)</a> &raquo;
+    <a href="../../../../_index.html">Index (S)</a> &raquo;
     <span class='title'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../../Privacy.html" title="Google::Privacy (module)">Privacy</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../Dlp.html" title="Google::Privacy::Dlp (module)">Dlp</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../V2.html" title="Google::Privacy::Dlp::V2 (module)">V2</a></span></span>
      &raquo; 
-    <span class="title">ListStoredInfoTypesResponse</span>
+    <span class="title">StoredInfoTypeStats</span>
   
 </div>
 
@@ -47,7 +47,7 @@ js:
     <div class="clear"></div>
   </div>
 
-  <div id="content"><h1>Class: Google::Privacy::Dlp::V2::ListStoredInfoTypesResponse
+  <div id="content"><h1>Class: Google::Privacy::Dlp::V2::StoredInfoTypeStats
   
   
   
@@ -62,7 +62,7 @@ js:
         <ul class="fullTree">
           <li>Object</li>
           
-            <li class="next">Google::Privacy::Dlp::V2::ListStoredInfoTypesResponse</li>
+            <li class="next">Google::Privacy::Dlp::V2::StoredInfoTypeStats</li>
           
         </ul>
         <a href="#" class="inheritanceTree">show all</a>
@@ -89,7 +89,7 @@ js:
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>Response message for ListStoredInfoTypes.</p>
+    <p>Statistics for a StoredInfoType.</p>
 
 
   </div>
@@ -107,7 +107,7 @@ js:
       <li class="public ">
   <span class="summary_signature">
     
-      <a href="#next_page_token-instance_method" title="#next_page_token (instance method)">#<strong>next_page_token</strong>  &#x21d2; String </a>
+      <a href="#large_custom_dictionary-instance_method" title="#large_custom_dictionary (instance method)">#<strong>large_custom_dictionary</strong>  &#x21d2; Google::Privacy::Dlp::V2::LargeCustomDictionaryStats </a>
     
 
     
@@ -124,33 +124,7 @@ js:
   
 
   
-    <span class="summary_desc"><div class='inline'><p>If the next page is available then the next page token to be used in following ListStoredInfoTypes request.</p>
-</div></span>
-  
-</li>
-
-    
-      <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#stored_info_types-instance_method" title="#stored_info_types (instance method)">#<strong>stored_info_types</strong>  &#x21d2; Array&lt;Google::Privacy::Dlp::V2::StoredInfoType&gt; </a>
-    
-
-    
-  </span>
-  
-  
-  
-    
-    
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'><p>List of storedInfoTypes, up to page_size in ListStoredInfoTypesRequest.</p>
+    <span class="summary_desc"><div class='inline'><p>StoredInfoType where findings are defined by a dictionary of phrases.</p>
 </div></span>
   
 </li>
@@ -166,11 +140,11 @@ js:
     <h2>Instance Attribute Details</h2>
     
       
-      <span id="next_page_token=-instance_method"></span>
+      <span id="large_custom_dictionary=-instance_method"></span>
       <div class="method_details first">
-  <h3 class="signature first" id="next_page_token-instance_method">
+  <h3 class="signature first" id="large_custom_dictionary-instance_method">
   
-    #<strong>next_page_token</strong>  &#x21d2; <tt>String</tt> 
+    #<strong>large_custom_dictionary</strong>  &#x21d2; <tt><span class='object_link'><a href="LargeCustomDictionaryStats.html" title="Google::Privacy::Dlp::V2::LargeCustomDictionaryStats (class)">Google::Privacy::Dlp::V2::LargeCustomDictionaryStats</a></span></tt> 
   
 
   
@@ -178,8 +152,7 @@ js:
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns If the next page is available then the next page token to be used
-in following ListStoredInfoTypes request.</p>
+    <p>Returns StoredInfoType where findings are defined by a dictionary of phrases.</p>
 
 
   </div>
@@ -192,13 +165,12 @@ in following ListStoredInfoTypes request.</p>
     <li>
       
       
-        <span class='type'>(<tt>String</tt>)</span>
+        <span class='type'>(<tt><span class='object_link'><a href="LargeCustomDictionaryStats.html" title="Google::Privacy::Dlp::V2::LargeCustomDictionaryStats (class)">Google::Privacy::Dlp::V2::LargeCustomDictionaryStats</a></span></tt>)</span>
       
       
       
         &mdash;
-        <div class='inline'><p>If the next page is available then the next page token to be used
-in following ListStoredInfoTypes request.</p>
+        <div class='inline'><p>StoredInfoType where findings are defined by a dictionary of phrases.</p>
 </div>
       
     </li>
@@ -211,67 +183,12 @@ in following ListStoredInfoTypes request.</p>
       <pre class="lines">
 
 
-2614</pre>
+2488</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/dlp.rb', line 2614</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/dlp.rb', line 2488</span>
 
-<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Privacy::Dlp::V2::ListStoredInfoTypesResponse (class)">ListStoredInfoTypesResponse</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-      
-      <span id="stored_info_types=-instance_method"></span>
-      <div class="method_details ">
-  <h3 class="signature " id="stored_info_types-instance_method">
-  
-    #<strong>stored_info_types</strong>  &#x21d2; <tt>Array&lt;<span class='object_link'><a href="StoredInfoType.html" title="Google::Privacy::Dlp::V2::StoredInfoType (class)">Google::Privacy::Dlp::V2::StoredInfoType</a></span>&gt;</tt> 
-  
-
-  
-
-  
-</h3><div class="docstring">
-  <div class="discussion">
-    <p>Returns List of storedInfoTypes, up to page_size in ListStoredInfoTypesRequest.</p>
-
-
-  </div>
-</div>
-<div class="tags">
-  
-<p class="tag_title">Returns:</p>
-<ul class="return">
-  
-    <li>
-      
-      
-        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="StoredInfoType.html" title="Google::Privacy::Dlp::V2::StoredInfoType (class)">Google::Privacy::Dlp::V2::StoredInfoType</a></span>&gt;</tt>)</span>
-      
-      
-      
-        &mdash;
-        <div class='inline'><p>List of storedInfoTypes, up to page_size in ListStoredInfoTypesRequest.</p>
-</div>
-      
-    </li>
-  
-</ul>
-
-</div><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-2614</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/dlp.rb', line 2614</span>
-
-<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Privacy::Dlp::V2::ListStoredInfoTypesResponse (class)">ListStoredInfoTypesResponse</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Privacy::Dlp::V2::StoredInfoTypeStats (class)">StoredInfoTypeStats</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>

@@ -89,7 +89,10 @@ js:
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>Publish the results of a DlpJob to a pub sub channel.
+    <p>Publish a message into given Pub/Sub topic when DlpJob has completed. The
+message contains a single field, <code>DlpJobName</code>, which is equal to the
+finished job&#39;s
+<a href="https://cloud.google.com/dlp/docs/reference/rest/v2/projects.dlpJobs#DlpJob"><code>DlpJob.name</code></a>.
 Compatible with: Inspect, Risk</p>
 
 
@@ -190,10 +193,10 @@ Format is projects/{project}/topics/{topic}.</p>
       <pre class="lines">
 
 
-1961</pre>
+1964</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/dlp.rb', line 1961</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/dlp.rb', line 1964</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Privacy::Dlp::V2::Action::PublishToPubSub (class)">PublishToPubSub</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
