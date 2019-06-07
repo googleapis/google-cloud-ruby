@@ -255,7 +255,6 @@ module Google
           rescue StandardError => e
             synchronize do
               @subscriber.error! e
-              start_streaming! unless @stopped
             end
 
             retry
