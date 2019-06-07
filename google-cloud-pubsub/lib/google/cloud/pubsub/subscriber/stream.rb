@@ -255,9 +255,7 @@ module Google
           rescue RestartStream
             retry
           rescue StandardError => e
-            synchronize do
-              @subscriber.error! e
-            end
+            @subscriber.error! e
 
             retry
           end
