@@ -1,8 +1,8 @@
 {
-  "name": "language",
-  "language": "ruby",
-  "distribution_name": "google-cloud-language",
-  "module_name": "Language",
-  "module_name_credentials": "Language::V1",
-  "env_var_prefix": "LANGUAGE"
+    "name": "language",
+    "language": "ruby",
+    "distribution_name": "google-cloud-language",
+    "module_name": "Language",
+    "module_name_credentials": "Language::V1",
+    "env_var_prefix": "LANGUAGE"
 }

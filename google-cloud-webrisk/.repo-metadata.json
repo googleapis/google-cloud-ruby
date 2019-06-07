@@ -1,8 +1,8 @@
 {
-  "name": "webrisk",
-  "language": "ruby",
-  "distribution_name": "google-cloud-webrisk",
-  "module_name": "Webrisk",
-  "module_name_credentials": "Webrisk::V1beta1",
-  "env_var_prefix": "WEBRISK"
+    "name": "webrisk",
+    "language": "ruby",
+    "distribution_name": "google-cloud-webrisk",
+    "module_name": "Webrisk",
+    "module_name_credentials": "Webrisk::V1beta1",
+    "env_var_prefix": "WEBRISK"
 }

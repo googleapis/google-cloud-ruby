@@ -1,5 +1,5 @@
 {
-  "name": "bigtable",
-  "language": "ruby",
-  "distribution_name": "google-cloud-bigtable"
+    "name": "bigtable",
+    "language": "ruby",
+    "distribution_name": "google-cloud-bigtable"
 }

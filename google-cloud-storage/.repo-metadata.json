@@ -1,5 +1,5 @@
 {
-  "name": "storage",
-  "language": "ruby",
-  "distribution_name": "google-cloud-storage"
+    "name": "storage",
+    "language": "ruby",
+    "distribution_name": "google-cloud-storage"
 }
