@@ -181,8 +181,13 @@ module Google
           # rubocop:disable all
 
           def background_run
-            # Don't allow a stream to restart if already stopped
-            return if @stopped
+            synchronize do
+              # Don't allow a stream to restart if already stopped
+              return if @stopped
+
+              @stopped = false
+              @paused  = false
+            end
 
             # signal to the previous queue to shut down
             old_queue = []
@@ -193,9 +198,6 @@ module Google
             @request_queue.push initial_input_request
             old_queue.each { |obj| @request_queue.push obj }
             enum = @subscriber.service.streaming_pull @request_queue.each
-
-            @stopped = nil
-            @paused  = nil
 
             loop do
               synchronize do
@@ -281,9 +283,6 @@ module Google
             # dies because it was stopped, or because of an unhandled error that
             # could not be recovered from, so be it.
             return if @background_thread
-
-            @stopped = false
-            @paused  = false
 
             # create new background thread to handle new enumerator
             @background_thread = Thread.new { background_run }
