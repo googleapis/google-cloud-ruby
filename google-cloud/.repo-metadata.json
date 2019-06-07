@@ -1,5 +1,5 @@
 {
-    "name": "google-cloud",
-    "language": "ruby",
-    "distribution_name": "google-cloud"
+        "name": "google-cloud",
+        "language": "ruby",
+        "distribution_name": "google-cloud"
 }

@@ -1,8 +1,8 @@
 {
-    "name": "dataproc",
-    "language": "ruby",
-    "distribution_name": "google-cloud-dataproc",
-    "module_name": "Dataproc",
-    "module_name_credentials": "Dataproc::V1",
-    "env_var_prefix": "DATAPROC"
+        "name": "dataproc",
+        "language": "ruby",
+        "distribution_name": "google-cloud-dataproc",
+        "module_name": "Dataproc",
+        "module_name_credentials": "Dataproc::V1",
+        "env_var_prefix": "DATAPROC"
 }

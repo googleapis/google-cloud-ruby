@@ -1,8 +1,8 @@
 {
-    "name": "cloudasset",
-    "language": "ruby",
-    "distribution_name": "google-cloud-asset",
-    "module_name": "Asset",
-    "module_name_credentials": "Asset::V1",
-    "env_var_prefix": "ASSET"
+        "name": "cloudasset",
+        "language": "ruby",
+        "distribution_name": "google-cloud-asset",
+        "module_name": "Asset",
+        "module_name_credentials": "Asset::V1",
+        "env_var_prefix": "ASSET"
 }

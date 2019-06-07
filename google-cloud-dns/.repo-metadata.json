@@ -1,5 +1,5 @@
 {
-    "name": "dns",
-    "language": "ruby",
-    "distribution_name": "google-cloud-dns"
+        "name": "dns",
+        "language": "ruby",
+        "distribution_name": "google-cloud-dns"
 }

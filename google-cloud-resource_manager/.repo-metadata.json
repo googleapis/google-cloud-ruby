@@ -1,5 +1,5 @@
 {
-    "name": "resourcemanager",
-    "language": "ruby",
-    "distribution_name": "google-cloud-resource_manager"
+        "name": "resourcemanager",
+        "language": "ruby",
+        "distribution_name": "google-cloud-resource_manager"
 }

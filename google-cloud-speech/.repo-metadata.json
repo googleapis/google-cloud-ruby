@@ -1,8 +1,8 @@
 {
-    "name": "speech",
-    "language": "ruby",
-    "distribution_name": "google-cloud-speech",
-    "module_name": "Speech",
-    "module_name_credentials": "Speech::V1",
-    "env_var_prefix": "SPEECH"
+        "name": "speech",
+        "language": "ruby",
+        "distribution_name": "google-cloud-speech",
+        "module_name": "Speech",
+        "module_name_credentials": "Speech::V1",
+        "env_var_prefix": "SPEECH"
 }
