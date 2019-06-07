@@ -221,27 +221,31 @@ unspecified, data protection mode will be LIMITED_DATA_LOSS by default.</p>
       <pre class="lines">
 
 
-256
-257
-258
-259
-260
-261
-262
-263
-264
-265
-266
-267
-268
-269</pre>
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/redis/v1/doc/google/cloud/redis/v1/cloud_redis.rb', line 256</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/redis/v1/doc/google/cloud/redis/v1/cloud_redis.rb', line 324</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Redis::V1::FailoverInstanceRequest (class)">FailoverInstanceRequest</a></span></span>
   <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="FailoverInstanceRequest/DataProtectionMode.html" title="Google::Cloud::Redis::V1::FailoverInstanceRequest::DataProtectionMode (module)">DataProtectionMode</a></span></span>
-    <span class='const'>DATA_PROTECTION_MODE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+    <span class='comment'># Defaults to LIMITED_DATA_LOSS if a data protection mode is not
+</span>    <span class='comment'># specified.
+</span>    <span class='const'>DATA_PROTECTION_MODE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
 
     <span class='comment'># Instance failover will be protected with data loss control. More
 </span>    <span class='comment'># specifically, the failover will only be performed if the current
@@ -273,7 +277,7 @@ unspecified, data protection mode will be LIMITED_DATA_LOSS by default.</p>
   <div class="discussion">
     <p>Returns Required. Redis instance resource name using the form:
     <code>projects/{project_id}/locations/{location_id}/instances/{instance_id}</code>
-where <code>location_id</code> refers to a GCP region</p>
+where <code>location_id</code> refers to a GCP region.</p>
 
 
   </div>
@@ -293,7 +297,7 @@ where <code>location_id</code> refers to a GCP region</p>
         &mdash;
         <div class='inline'><p>Required. Redis instance resource name using the form:
     <code>projects/{project_id}/locations/{location_id}/instances/{instance_id}</code>
-where <code>location_id</code> refers to a GCP region</p>
+where <code>location_id</code> refers to a GCP region.</p>
 </div>
       
     </li>
@@ -306,27 +310,31 @@ where <code>location_id</code> refers to a GCP region</p>
       <pre class="lines">
 
 
-256
-257
-258
-259
-260
-261
-262
-263
-264
-265
-266
-267
-268
-269</pre>
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/redis/v1/doc/google/cloud/redis/v1/cloud_redis.rb', line 256</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/redis/v1/doc/google/cloud/redis/v1/cloud_redis.rb', line 324</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Redis::V1::FailoverInstanceRequest (class)">FailoverInstanceRequest</a></span></span>
   <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="FailoverInstanceRequest/DataProtectionMode.html" title="Google::Cloud::Redis::V1::FailoverInstanceRequest::DataProtectionMode (module)">DataProtectionMode</a></span></span>
-    <span class='const'>DATA_PROTECTION_MODE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+    <span class='comment'># Defaults to LIMITED_DATA_LOSS if a data protection mode is not
+</span>    <span class='comment'># specified.
+</span>    <span class='const'>DATA_PROTECTION_MODE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
 
     <span class='comment'># Instance failover will be protected with data loss control. More
 </span>    <span class='comment'># specifically, the failover will only be performed if the current

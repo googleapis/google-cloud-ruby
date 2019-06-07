@@ -377,6 +377,32 @@ js:
       <li class="public ">
   <span class="summary_signature">
     
+      <a href="#persistence_iam_identity-instance_method" title="#persistence_iam_identity (instance method)">#<strong>persistence_iam_identity</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Output only.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#port-instance_method" title="#port (instance method)">#<strong>port</strong>  &#x21d2; Integer </a>
     
 
@@ -613,24 +639,6 @@ must be a different zone from the one provided in [location_id].</p>
       <pre class="lines">
 
 
-106
-107
-108
-109
-110
-111
-112
-113
-114
-115
-116
-117
-118
-119
-120
-121
-122
-123
 124
 125
 126
@@ -654,10 +662,31 @@ must be a different zone from the one provided in [location_id].</p>
 144
 145
 146
-147</pre>
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/redis/v1/doc/google/cloud/redis/v1/cloud_redis.rb', line 106</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/redis/v1/doc/google/cloud/redis/v1/cloud_redis.rb', line 124</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Redis::V1::Instance (class)">Instance</a></span></span>
   <span class='comment'># Represents the different states of a Redis instance.
@@ -684,6 +713,9 @@ must be a different zone from the one provided in [location_id].</p>
 
     <span class='comment'># Maintenance is being performed on this Redis instance.
 </span>    <span class='const'>MAINTENANCE</span> <span class='op'>=</span> <span class='int'>6</span>
+
+    <span class='comment'># Redis instance is importing data (availability may be affected).
+</span>    <span class='const'>IMPORTING</span> <span class='op'>=</span> <span class='int'>8</span>
 
     <span class='comment'># Redis instance is failing over (availability may be affected).
 </span>    <span class='const'>FAILING_OVER</span> <span class='op'>=</span> <span class='int'>9</span>
@@ -756,24 +788,6 @@ will be used.</p>
       <pre class="lines">
 
 
-106
-107
-108
-109
-110
-111
-112
-113
-114
-115
-116
-117
-118
-119
-120
-121
-122
-123
 124
 125
 126
@@ -797,10 +811,31 @@ will be used.</p>
 144
 145
 146
-147</pre>
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/redis/v1/doc/google/cloud/redis/v1/cloud_redis.rb', line 106</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/redis/v1/doc/google/cloud/redis/v1/cloud_redis.rb', line 124</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Redis::V1::Instance (class)">Instance</a></span></span>
   <span class='comment'># Represents the different states of a Redis instance.
@@ -827,6 +862,9 @@ will be used.</p>
 
     <span class='comment'># Maintenance is being performed on this Redis instance.
 </span>    <span class='const'>MAINTENANCE</span> <span class='op'>=</span> <span class='int'>6</span>
+
+    <span class='comment'># Redis instance is importing data (availability may be affected).
+</span>    <span class='const'>IMPORTING</span> <span class='op'>=</span> <span class='int'>8</span>
 
     <span class='comment'># Redis instance is failing over (availability may be affected).
 </span>    <span class='const'>FAILING_OVER</span> <span class='op'>=</span> <span class='int'>9</span>
@@ -893,24 +931,6 @@ will be used.</p>
       <pre class="lines">
 
 
-106
-107
-108
-109
-110
-111
-112
-113
-114
-115
-116
-117
-118
-119
-120
-121
-122
-123
 124
 125
 126
@@ -934,10 +954,31 @@ will be used.</p>
 144
 145
 146
-147</pre>
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/redis/v1/doc/google/cloud/redis/v1/cloud_redis.rb', line 106</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/redis/v1/doc/google/cloud/redis/v1/cloud_redis.rb', line 124</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Redis::V1::Instance (class)">Instance</a></span></span>
   <span class='comment'># Represents the different states of a Redis instance.
@@ -964,6 +1005,9 @@ will be used.</p>
 
     <span class='comment'># Maintenance is being performed on this Redis instance.
 </span>    <span class='const'>MAINTENANCE</span> <span class='op'>=</span> <span class='int'>6</span>
+
+    <span class='comment'># Redis instance is importing data (availability may be affected).
+</span>    <span class='const'>IMPORTING</span> <span class='op'>=</span> <span class='int'>8</span>
 
     <span class='comment'># Redis instance is failing over (availability may be affected).
 </span>    <span class='const'>FAILING_OVER</span> <span class='op'>=</span> <span class='int'>9</span>
@@ -1038,24 +1082,6 @@ change after a failover event.</p>
       <pre class="lines">
 
 
-106
-107
-108
-109
-110
-111
-112
-113
-114
-115
-116
-117
-118
-119
-120
-121
-122
-123
 124
 125
 126
@@ -1079,10 +1105,31 @@ change after a failover event.</p>
 144
 145
 146
-147</pre>
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/redis/v1/doc/google/cloud/redis/v1/cloud_redis.rb', line 106</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/redis/v1/doc/google/cloud/redis/v1/cloud_redis.rb', line 124</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Redis::V1::Instance (class)">Instance</a></span></span>
   <span class='comment'># Represents the different states of a Redis instance.
@@ -1109,6 +1156,9 @@ change after a failover event.</p>
 
     <span class='comment'># Maintenance is being performed on this Redis instance.
 </span>    <span class='const'>MAINTENANCE</span> <span class='op'>=</span> <span class='int'>6</span>
+
+    <span class='comment'># Redis instance is importing data (availability may be affected).
+</span>    <span class='const'>IMPORTING</span> <span class='op'>=</span> <span class='int'>8</span>
 
     <span class='comment'># Redis instance is failing over (availability may be affected).
 </span>    <span class='const'>FAILING_OVER</span> <span class='op'>=</span> <span class='int'>9</span>
@@ -1175,24 +1225,6 @@ change after a failover event.</p>
       <pre class="lines">
 
 
-106
-107
-108
-109
-110
-111
-112
-113
-114
-115
-116
-117
-118
-119
-120
-121
-122
-123
 124
 125
 126
@@ -1216,10 +1248,31 @@ change after a failover event.</p>
 144
 145
 146
-147</pre>
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/redis/v1/doc/google/cloud/redis/v1/cloud_redis.rb', line 106</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/redis/v1/doc/google/cloud/redis/v1/cloud_redis.rb', line 124</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Redis::V1::Instance (class)">Instance</a></span></span>
   <span class='comment'># Represents the different states of a Redis instance.
@@ -1246,6 +1299,9 @@ change after a failover event.</p>
 
     <span class='comment'># Maintenance is being performed on this Redis instance.
 </span>    <span class='const'>MAINTENANCE</span> <span class='op'>=</span> <span class='int'>6</span>
+
+    <span class='comment'># Redis instance is importing data (availability may be affected).
+</span>    <span class='const'>IMPORTING</span> <span class='op'>=</span> <span class='int'>8</span>
 
     <span class='comment'># Redis instance is failing over (availability may be affected).
 </span>    <span class='const'>FAILING_OVER</span> <span class='op'>=</span> <span class='int'>9</span>
@@ -1314,24 +1370,6 @@ clients to connect to the service.</p>
       <pre class="lines">
 
 
-106
-107
-108
-109
-110
-111
-112
-113
-114
-115
-116
-117
-118
-119
-120
-121
-122
-123
 124
 125
 126
@@ -1355,10 +1393,31 @@ clients to connect to the service.</p>
 144
 145
 146
-147</pre>
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/redis/v1/doc/google/cloud/redis/v1/cloud_redis.rb', line 106</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/redis/v1/doc/google/cloud/redis/v1/cloud_redis.rb', line 124</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Redis::V1::Instance (class)">Instance</a></span></span>
   <span class='comment'># Represents the different states of a Redis instance.
@@ -1385,6 +1444,9 @@ clients to connect to the service.</p>
 
     <span class='comment'># Maintenance is being performed on this Redis instance.
 </span>    <span class='const'>MAINTENANCE</span> <span class='op'>=</span> <span class='int'>6</span>
+
+    <span class='comment'># Redis instance is importing data (availability may be affected).
+</span>    <span class='const'>IMPORTING</span> <span class='op'>=</span> <span class='int'>8</span>
 
     <span class='comment'># Redis instance is failing over (availability may be affected).
 </span>    <span class='const'>FAILING_OVER</span> <span class='op'>=</span> <span class='int'>9</span>
@@ -1451,24 +1513,6 @@ clients to connect to the service.</p>
       <pre class="lines">
 
 
-106
-107
-108
-109
-110
-111
-112
-113
-114
-115
-116
-117
-118
-119
-120
-121
-122
-123
 124
 125
 126
@@ -1492,10 +1536,31 @@ clients to connect to the service.</p>
 144
 145
 146
-147</pre>
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/redis/v1/doc/google/cloud/redis/v1/cloud_redis.rb', line 106</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/redis/v1/doc/google/cloud/redis/v1/cloud_redis.rb', line 124</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Redis::V1::Instance (class)">Instance</a></span></span>
   <span class='comment'># Represents the different states of a Redis instance.
@@ -1522,6 +1587,9 @@ clients to connect to the service.</p>
 
     <span class='comment'># Maintenance is being performed on this Redis instance.
 </span>    <span class='const'>MAINTENANCE</span> <span class='op'>=</span> <span class='int'>6</span>
+
+    <span class='comment'># Redis instance is importing data (availability may be affected).
+</span>    <span class='const'>IMPORTING</span> <span class='op'>=</span> <span class='int'>8</span>
 
     <span class='comment'># Redis instance is failing over (availability may be affected).
 </span>    <span class='const'>FAILING_OVER</span> <span class='op'>=</span> <span class='int'>9</span>
@@ -1596,24 +1664,6 @@ different from [location_id].</p>
       <pre class="lines">
 
 
-106
-107
-108
-109
-110
-111
-112
-113
-114
-115
-116
-117
-118
-119
-120
-121
-122
-123
 124
 125
 126
@@ -1637,10 +1687,31 @@ different from [location_id].</p>
 144
 145
 146
-147</pre>
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/redis/v1/doc/google/cloud/redis/v1/cloud_redis.rb', line 106</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/redis/v1/doc/google/cloud/redis/v1/cloud_redis.rb', line 124</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Redis::V1::Instance (class)">Instance</a></span></span>
   <span class='comment'># Represents the different states of a Redis instance.
@@ -1667,6 +1738,9 @@ different from [location_id].</p>
 
     <span class='comment'># Maintenance is being performed on this Redis instance.
 </span>    <span class='const'>MAINTENANCE</span> <span class='op'>=</span> <span class='int'>6</span>
+
+    <span class='comment'># Redis instance is importing data (availability may be affected).
+</span>    <span class='const'>IMPORTING</span> <span class='op'>=</span> <span class='int'>8</span>
 
     <span class='comment'># Redis instance is failing over (availability may be affected).
 </span>    <span class='const'>FAILING_OVER</span> <span class='op'>=</span> <span class='int'>9</span>
@@ -1733,24 +1807,6 @@ different from [location_id].</p>
       <pre class="lines">
 
 
-106
-107
-108
-109
-110
-111
-112
-113
-114
-115
-116
-117
-118
-119
-120
-121
-122
-123
 124
 125
 126
@@ -1774,10 +1830,31 @@ different from [location_id].</p>
 144
 145
 146
-147</pre>
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/redis/v1/doc/google/cloud/redis/v1/cloud_redis.rb', line 106</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/redis/v1/doc/google/cloud/redis/v1/cloud_redis.rb', line 124</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Redis::V1::Instance (class)">Instance</a></span></span>
   <span class='comment'># Represents the different states of a Redis instance.
@@ -1804,6 +1881,9 @@ different from [location_id].</p>
 
     <span class='comment'># Maintenance is being performed on this Redis instance.
 </span>    <span class='const'>MAINTENANCE</span> <span class='op'>=</span> <span class='int'>6</span>
+
+    <span class='comment'># Redis instance is importing data (availability may be affected).
+</span>    <span class='const'>IMPORTING</span> <span class='op'>=</span> <span class='int'>8</span>
 
     <span class='comment'># Redis instance is failing over (availability may be affected).
 </span>    <span class='const'>FAILING_OVER</span> <span class='op'>=</span> <span class='int'>9</span>
@@ -1886,24 +1966,6 @@ should be provisioned in. Refer to [location_id] and
       <pre class="lines">
 
 
-106
-107
-108
-109
-110
-111
-112
-113
-114
-115
-116
-117
-118
-119
-120
-121
-122
-123
 124
 125
 126
@@ -1927,10 +1989,31 @@ should be provisioned in. Refer to [location_id] and
 144
 145
 146
-147</pre>
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/redis/v1/doc/google/cloud/redis/v1/cloud_redis.rb', line 106</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/redis/v1/doc/google/cloud/redis/v1/cloud_redis.rb', line 124</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Redis::V1::Instance (class)">Instance</a></span></span>
   <span class='comment'># Represents the different states of a Redis instance.
@@ -1957,6 +2040,160 @@ should be provisioned in. Refer to [location_id] and
 
     <span class='comment'># Maintenance is being performed on this Redis instance.
 </span>    <span class='const'>MAINTENANCE</span> <span class='op'>=</span> <span class='int'>6</span>
+
+    <span class='comment'># Redis instance is importing data (availability may be affected).
+</span>    <span class='const'>IMPORTING</span> <span class='op'>=</span> <span class='int'>8</span>
+
+    <span class='comment'># Redis instance is failing over (availability may be affected).
+</span>    <span class='const'>FAILING_OVER</span> <span class='op'>=</span> <span class='int'>9</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># Available service tiers to choose from
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Instance/Tier.html" title="Google::Cloud::Redis::V1::Instance::Tier (module)">Tier</a></span></span>
+    <span class='comment'># Not set.
+</span>    <span class='const'>TIER_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># BASIC tier: standalone instance
+</span>    <span class='const'>BASIC</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># STANDARD_HA tier: highly available primary/replica instances
+</span>    <span class='const'>STANDARD_HA</span> <span class='op'>=</span> <span class='int'>3</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="persistence_iam_identity=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="persistence_iam_identity-instance_method">
+  
+    #<strong>persistence_iam_identity</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Output only. Cloud IAM identity used by import / export operations to
+transfer data to/from Cloud Storage. Format is
+&quot;serviceAccount:<service_account_email>&quot;. The value may change over time
+for a given instance so should be checked before each import/export
+operation.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Output only. Cloud IAM identity used by import / export operations to
+transfer data to/from Cloud Storage. Format is
+&quot;serviceAccount:<service_account_email>&quot;. The value may change over time
+for a given instance so should be checked before each import/export
+operation.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/redis/v1/doc/google/cloud/redis/v1/cloud_redis.rb', line 124</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Redis::V1::Instance (class)">Instance</a></span></span>
+  <span class='comment'># Represents the different states of a Redis instance.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Instance/State.html" title="Google::Cloud::Redis::V1::Instance::State (module)">State</a></span></span>
+    <span class='comment'># Not set.
+</span>    <span class='const'>STATE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Redis instance is being created.
+</span>    <span class='const'>CREATING</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># Redis instance has been created and is fully usable.
+</span>    <span class='const'>READY</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># Redis instance configuration is being updated. Certain kinds of updates
+</span>    <span class='comment'># may cause the instance to become unusable while the update is in
+</span>    <span class='comment'># progress.
+</span>    <span class='const'>UPDATING</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># Redis instance is being deleted.
+</span>    <span class='const'>DELETING</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># Redis instance is being repaired and may be unusable.
+</span>    <span class='const'>REPAIRING</span> <span class='op'>=</span> <span class='int'>5</span>
+
+    <span class='comment'># Maintenance is being performed on this Redis instance.
+</span>    <span class='const'>MAINTENANCE</span> <span class='op'>=</span> <span class='int'>6</span>
+
+    <span class='comment'># Redis instance is importing data (availability may be affected).
+</span>    <span class='const'>IMPORTING</span> <span class='op'>=</span> <span class='int'>8</span>
 
     <span class='comment'># Redis instance is failing over (availability may be affected).
 </span>    <span class='const'>FAILING_OVER</span> <span class='op'>=</span> <span class='int'>9</span>
@@ -2023,24 +2260,6 @@ should be provisioned in. Refer to [location_id] and
       <pre class="lines">
 
 
-106
-107
-108
-109
-110
-111
-112
-113
-114
-115
-116
-117
-118
-119
-120
-121
-122
-123
 124
 125
 126
@@ -2064,10 +2283,31 @@ should be provisioned in. Refer to [location_id] and
 144
 145
 146
-147</pre>
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/redis/v1/doc/google/cloud/redis/v1/cloud_redis.rb', line 106</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/redis/v1/doc/google/cloud/redis/v1/cloud_redis.rb', line 124</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Redis::V1::Instance (class)">Instance</a></span></span>
   <span class='comment'># Represents the different states of a Redis instance.
@@ -2094,6 +2334,9 @@ should be provisioned in. Refer to [location_id] and
 
     <span class='comment'># Maintenance is being performed on this Redis instance.
 </span>    <span class='const'>MAINTENANCE</span> <span class='op'>=</span> <span class='int'>6</span>
+
+    <span class='comment'># Redis instance is importing data (availability may be affected).
+</span>    <span class='const'>IMPORTING</span> <span class='op'>=</span> <span class='int'>8</span>
 
     <span class='comment'># Redis instance is failing over (availability may be affected).
 </span>    <span class='const'>FAILING_OVER</span> <span class='op'>=</span> <span class='int'>9</span>
@@ -2133,12 +2376,25 @@ should be provisioned in. Refer to [location_id] and
 <a href="http://redis.io/topics/config">http://redis.io/topics/config</a>. Currently, the only supported parameters
 are:</p>
 
+<p>Redis 3.2 and above:</p>
+
 <ul>
 <li>maxmemory-policy
 
 <ul>
 <li>notify-keyspace-events</li>
 </ul></li>
+</ul>
+
+<p>Redis 4.0 and above:</p>
+
+<ul>
+<li>activedefrag
+
+<ul>
+<li>lfu-log-factor</li>
+</ul></li>
+<li>lfu-decay-time</li>
 </ul>
 
 
@@ -2161,12 +2417,25 @@ are:</p>
 <a href="http://redis.io/topics/config">http://redis.io/topics/config</a>. Currently, the only supported parameters
 are:</p>
 
+<p>Redis 3.2 and above:</p>
+
 <ul>
 <li>maxmemory-policy
 
 <ul>
 <li>notify-keyspace-events</li>
 </ul></li>
+</ul>
+
+<p>Redis 4.0 and above:</p>
+
+<ul>
+<li>activedefrag
+
+<ul>
+<li>lfu-log-factor</li>
+</ul></li>
+<li>lfu-decay-time</li>
 </ul>
 </div>
       
@@ -2180,24 +2449,6 @@ are:</p>
       <pre class="lines">
 
 
-106
-107
-108
-109
-110
-111
-112
-113
-114
-115
-116
-117
-118
-119
-120
-121
-122
-123
 124
 125
 126
@@ -2221,10 +2472,31 @@ are:</p>
 144
 145
 146
-147</pre>
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/redis/v1/doc/google/cloud/redis/v1/cloud_redis.rb', line 106</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/redis/v1/doc/google/cloud/redis/v1/cloud_redis.rb', line 124</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Redis::V1::Instance (class)">Instance</a></span></span>
   <span class='comment'># Represents the different states of a Redis instance.
@@ -2251,6 +2523,9 @@ are:</p>
 
     <span class='comment'># Maintenance is being performed on this Redis instance.
 </span>    <span class='const'>MAINTENANCE</span> <span class='op'>=</span> <span class='int'>6</span>
+
+    <span class='comment'># Redis instance is importing data (availability may be affected).
+</span>    <span class='const'>IMPORTING</span> <span class='op'>=</span> <span class='int'>8</span>
 
     <span class='comment'># Redis instance is failing over (availability may be affected).
 </span>    <span class='const'>FAILING_OVER</span> <span class='op'>=</span> <span class='int'>9</span>
@@ -2289,7 +2564,15 @@ are:</p>
     <p>Returns Optional. The version of Redis software.
 If not provided, latest supported version will be used. Updating the
 version will perform an upgrade/downgrade to the new version. Currently,
-the supported values are <code>REDIS_3_2</code> for Redis 3.2.</p>
+the supported values are:</p>
+
+<ul>
+<li><code>REDIS_4_0</code> for Redis 4.0 compatibility (default)
+
+<ul>
+<li><code>REDIS_3_2</code> for Redis 3.2 compatibility</li>
+</ul></li>
+</ul>
 
 
   </div>
@@ -2310,7 +2593,15 @@ the supported values are <code>REDIS_3_2</code> for Redis 3.2.</p>
         <div class='inline'><p>Optional. The version of Redis software.
 If not provided, latest supported version will be used. Updating the
 version will perform an upgrade/downgrade to the new version. Currently,
-the supported values are <code>REDIS_3_2</code> for Redis 3.2.</p>
+the supported values are:</p>
+
+<ul>
+<li><code>REDIS_4_0</code> for Redis 4.0 compatibility (default)
+
+<ul>
+<li><code>REDIS_3_2</code> for Redis 3.2 compatibility</li>
+</ul></li>
+</ul>
 </div>
       
     </li>
@@ -2323,24 +2614,6 @@ the supported values are <code>REDIS_3_2</code> for Redis 3.2.</p>
       <pre class="lines">
 
 
-106
-107
-108
-109
-110
-111
-112
-113
-114
-115
-116
-117
-118
-119
-120
-121
-122
-123
 124
 125
 126
@@ -2364,10 +2637,31 @@ the supported values are <code>REDIS_3_2</code> for Redis 3.2.</p>
 144
 145
 146
-147</pre>
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/redis/v1/doc/google/cloud/redis/v1/cloud_redis.rb', line 106</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/redis/v1/doc/google/cloud/redis/v1/cloud_redis.rb', line 124</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Redis::V1::Instance (class)">Instance</a></span></span>
   <span class='comment'># Represents the different states of a Redis instance.
@@ -2394,6 +2688,9 @@ the supported values are <code>REDIS_3_2</code> for Redis 3.2.</p>
 
     <span class='comment'># Maintenance is being performed on this Redis instance.
 </span>    <span class='const'>MAINTENANCE</span> <span class='op'>=</span> <span class='int'>6</span>
+
+    <span class='comment'># Redis instance is importing data (availability may be affected).
+</span>    <span class='const'>IMPORTING</span> <span class='op'>=</span> <span class='int'>8</span>
 
     <span class='comment'># Redis instance is failing over (availability may be affected).
 </span>    <span class='const'>FAILING_OVER</span> <span class='op'>=</span> <span class='int'>9</span>
@@ -2466,24 +2763,6 @@ and non-overlapping with existing subnets in an authorized network.</p>
       <pre class="lines">
 
 
-106
-107
-108
-109
-110
-111
-112
-113
-114
-115
-116
-117
-118
-119
-120
-121
-122
-123
 124
 125
 126
@@ -2507,10 +2786,31 @@ and non-overlapping with existing subnets in an authorized network.</p>
 144
 145
 146
-147</pre>
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/redis/v1/doc/google/cloud/redis/v1/cloud_redis.rb', line 106</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/redis/v1/doc/google/cloud/redis/v1/cloud_redis.rb', line 124</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Redis::V1::Instance (class)">Instance</a></span></span>
   <span class='comment'># Represents the different states of a Redis instance.
@@ -2537,6 +2837,9 @@ and non-overlapping with existing subnets in an authorized network.</p>
 
     <span class='comment'># Maintenance is being performed on this Redis instance.
 </span>    <span class='const'>MAINTENANCE</span> <span class='op'>=</span> <span class='int'>6</span>
+
+    <span class='comment'># Redis instance is importing data (availability may be affected).
+</span>    <span class='const'>IMPORTING</span> <span class='op'>=</span> <span class='int'>8</span>
 
     <span class='comment'># Redis instance is failing over (availability may be affected).
 </span>    <span class='const'>FAILING_OVER</span> <span class='op'>=</span> <span class='int'>9</span>
@@ -2603,24 +2906,6 @@ and non-overlapping with existing subnets in an authorized network.</p>
       <pre class="lines">
 
 
-106
-107
-108
-109
-110
-111
-112
-113
-114
-115
-116
-117
-118
-119
-120
-121
-122
-123
 124
 125
 126
@@ -2644,10 +2929,31 @@ and non-overlapping with existing subnets in an authorized network.</p>
 144
 145
 146
-147</pre>
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/redis/v1/doc/google/cloud/redis/v1/cloud_redis.rb', line 106</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/redis/v1/doc/google/cloud/redis/v1/cloud_redis.rb', line 124</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Redis::V1::Instance (class)">Instance</a></span></span>
   <span class='comment'># Represents the different states of a Redis instance.
@@ -2674,6 +2980,9 @@ and non-overlapping with existing subnets in an authorized network.</p>
 
     <span class='comment'># Maintenance is being performed on this Redis instance.
 </span>    <span class='const'>MAINTENANCE</span> <span class='op'>=</span> <span class='int'>6</span>
+
+    <span class='comment'># Redis instance is importing data (availability may be affected).
+</span>    <span class='const'>IMPORTING</span> <span class='op'>=</span> <span class='int'>8</span>
 
     <span class='comment'># Redis instance is failing over (availability may be affected).
 </span>    <span class='const'>FAILING_OVER</span> <span class='op'>=</span> <span class='int'>9</span>
@@ -2742,24 +3051,6 @@ instance, if available.</p>
       <pre class="lines">
 
 
-106
-107
-108
-109
-110
-111
-112
-113
-114
-115
-116
-117
-118
-119
-120
-121
-122
-123
 124
 125
 126
@@ -2783,10 +3074,31 @@ instance, if available.</p>
 144
 145
 146
-147</pre>
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/redis/v1/doc/google/cloud/redis/v1/cloud_redis.rb', line 106</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/redis/v1/doc/google/cloud/redis/v1/cloud_redis.rb', line 124</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Redis::V1::Instance (class)">Instance</a></span></span>
   <span class='comment'># Represents the different states of a Redis instance.
@@ -2813,6 +3125,9 @@ instance, if available.</p>
 
     <span class='comment'># Maintenance is being performed on this Redis instance.
 </span>    <span class='const'>MAINTENANCE</span> <span class='op'>=</span> <span class='int'>6</span>
+
+    <span class='comment'># Redis instance is importing data (availability may be affected).
+</span>    <span class='const'>IMPORTING</span> <span class='op'>=</span> <span class='int'>8</span>
 
     <span class='comment'># Redis instance is failing over (availability may be affected).
 </span>    <span class='const'>FAILING_OVER</span> <span class='op'>=</span> <span class='int'>9</span>
@@ -2879,24 +3194,6 @@ instance, if available.</p>
       <pre class="lines">
 
 
-106
-107
-108
-109
-110
-111
-112
-113
-114
-115
-116
-117
-118
-119
-120
-121
-122
-123
 124
 125
 126
@@ -2920,10 +3217,31 @@ instance, if available.</p>
 144
 145
 146
-147</pre>
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/redis/v1/doc/google/cloud/redis/v1/cloud_redis.rb', line 106</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/redis/v1/doc/google/cloud/redis/v1/cloud_redis.rb', line 124</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Redis::V1::Instance (class)">Instance</a></span></span>
   <span class='comment'># Represents the different states of a Redis instance.
@@ -2950,6 +3268,9 @@ instance, if available.</p>
 
     <span class='comment'># Maintenance is being performed on this Redis instance.
 </span>    <span class='const'>MAINTENANCE</span> <span class='op'>=</span> <span class='int'>6</span>
+
+    <span class='comment'># Redis instance is importing data (availability may be affected).
+</span>    <span class='const'>IMPORTING</span> <span class='op'>=</span> <span class='int'>8</span>
 
     <span class='comment'># Redis instance is failing over (availability may be affected).
 </span>    <span class='const'>FAILING_OVER</span> <span class='op'>=</span> <span class='int'>9</span>

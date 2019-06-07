@@ -315,6 +315,29 @@ this service.</p>
         <li class="public ">
   <span class="summary_signature">
     
+      <a href="#export_instance-instance_method" title="#export_instance (instance method)">#<strong>export_instance</strong>(name, output_config, options: nil)  &#x21d2; Google::Gax::Operation </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Export Redis instance data into a Redis RDB format file in Cloud Storage.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#failover_instance-instance_method" title="#failover_instance (instance method)">#<strong>failover_instance</strong>(name, data_protection_mode, options: nil)  &#x21d2; Google::Gax::Operation </a>
     
 
@@ -329,7 +352,7 @@ this service.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Failover the master role to current replica node against a specific STANDARD tier redis instance.</p>
+    <span class="summary_desc"><div class='inline'><p>Initiates a failover of the master node to current replica node for a specific STANDARD tier Cloud Memorystore for Redis instance.</p>
 </div></span>
   
 </li>
@@ -353,6 +376,29 @@ this service.</p>
 
   
     <span class="summary_desc"><div class='inline'><p>Gets the details of a specific Redis instance.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#import_instance-instance_method" title="#import_instance (instance method)">#<strong>import_instance</strong>(name, input_config, options: nil)  &#x21d2; Google::Gax::Operation </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Import a Redis RDB snapshot file from Cloud Storage into a Redis instance.</p>
 </div></span>
   
 </li>
@@ -702,7 +748,23 @@ custom error handling.</p>
 285
 286
 287
-288</pre>
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/google/cloud/redis/v1beta1/cloud_redis_client.rb', line 157</span>
@@ -822,9 +884,17 @@ custom error handling.</p>
       <span class='lbrace'>{</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>instance.name</span><span class='tstring_end'>&#39;</span></span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_request'>request</span><span class='period'>.</span><span class='id identifier rubyid_instance'>instance</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span><span class='rbrace'>}</span>
     <span class='kw'>end</span>
   <span class='rparen'>)</span>
-  <span class='ivar'>@delete_instance</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
-    <span class='ivar'>@cloud_redis_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:delete_instance</span><span class='rparen'>)</span><span class='comma'>,</span>
-    <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>delete_instance</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
+  <span class='ivar'>@import_instance</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
+    <span class='ivar'>@cloud_redis_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:import_instance</span><span class='rparen'>)</span><span class='comma'>,</span>
+    <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>import_instance</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
+    <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span><span class='comma'>,</span>
+    <span class='label'>params_extractor:</span> <span class='id identifier rubyid_proc'>proc</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_request'>request</span><span class='op'>|</span>
+      <span class='lbrace'>{</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>name</span><span class='tstring_end'>&#39;</span></span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_request'>request</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span><span class='rbrace'>}</span>
+    <span class='kw'>end</span>
+  <span class='rparen'>)</span>
+  <span class='ivar'>@export_instance</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
+    <span class='ivar'>@cloud_redis_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:export_instance</span><span class='rparen'>)</span><span class='comma'>,</span>
+    <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>export_instance</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
     <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span><span class='comma'>,</span>
     <span class='label'>params_extractor:</span> <span class='id identifier rubyid_proc'>proc</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_request'>request</span><span class='op'>|</span>
       <span class='lbrace'>{</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>name</span><span class='tstring_end'>&#39;</span></span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_request'>request</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span><span class='rbrace'>}</span>
@@ -833,6 +903,14 @@ custom error handling.</p>
   <span class='ivar'>@failover_instance</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
     <span class='ivar'>@cloud_redis_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:failover_instance</span><span class='rparen'>)</span><span class='comma'>,</span>
     <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>failover_instance</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
+    <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span><span class='comma'>,</span>
+    <span class='label'>params_extractor:</span> <span class='id identifier rubyid_proc'>proc</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_request'>request</span><span class='op'>|</span>
+      <span class='lbrace'>{</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>name</span><span class='tstring_end'>&#39;</span></span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_request'>request</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span><span class='rbrace'>}</span>
+    <span class='kw'>end</span>
+  <span class='rparen'>)</span>
+  <span class='ivar'>@delete_instance</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
+    <span class='ivar'>@cloud_redis_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:delete_instance</span><span class='rparen'>)</span><span class='comma'>,</span>
+    <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>delete_instance</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
     <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span><span class='comma'>,</span>
     <span class='label'>params_extractor:</span> <span class='id identifier rubyid_proc'>proc</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_request'>request</span><span class='op'>|</span>
       <span class='lbrace'>{</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>name</span><span class='tstring_end'>&#39;</span></span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_request'>request</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span><span class='rbrace'>}</span>
@@ -1125,7 +1203,7 @@ is no need to call DeleteOperation.</p>
         &mdash;
         <div class='inline'><p>Required. The resource name of the instance location using the form:
     <code>projects/{project_id}/locations/{location_id}</code>
-where <code>location_id</code> refers to a GCP region</p>
+where <code>location_id</code> refers to a GCP region.</p>
 </div>
       
     </li>
@@ -1226,30 +1304,30 @@ retries, etc.</p>
       <pre class="lines">
 
 
-459
-460
-461
-462
-463
-464
-465
-466
-467
-468
-469
-470
-471
-472
-473
-474
 475
 476
 477
 478
-479</pre>
+479
+480
+481
+482
+483
+484
+485
+486
+487
+488
+489
+490
+491
+492
+493
+494
+495</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/redis/v1beta1/cloud_redis_client.rb', line 459</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/redis/v1beta1/cloud_redis_client.rb', line 475</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_instance'>create_instance</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -1348,7 +1426,7 @@ deleted.</p>
         &mdash;
         <div class='inline'><p>Required. Redis instance resource name using the form:
     <code>projects/{project_id}/locations/{location_id}/instances/{instance_id}</code>
-where <code>location_id</code> refers to a GCP region</p>
+where <code>location_id</code> refers to a GCP region.</p>
 </div>
       
     </li>
@@ -1408,26 +1486,26 @@ retries, etc.</p>
       <pre class="lines">
 
 
-612
-613
-614
-615
-616
-617
-618
-619
-620
-621
-622
-623
-624
-625
-626
-627
-628</pre>
+853
+854
+855
+856
+857
+858
+859
+860
+861
+862
+863
+864
+865
+866
+867
+868
+869</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/redis/v1beta1/cloud_redis_client.rb', line 612</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/redis/v1beta1/cloud_redis_client.rb', line 853</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete_instance'>delete_instance</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -1452,6 +1530,208 @@ retries, etc.</p>
 </div>
     
       <div class="method_details ">
+  <h3 class="signature " id="export_instance-instance_method">
+  
+    #<strong>export_instance</strong>(name, output_config, options: nil)  &#x21d2; <tt>Google::Gax::Operation</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Export Redis instance data into a Redis RDB format file in Cloud Storage.</p>
+
+<p>Redis will continue serving during this operation.</p>
+
+<p>The returned operation is automatically deleted after a few hours, so
+there is no need to call DeleteOperation.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/redis</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_cloud_redis_client'>cloud_redis_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Redis.html" title="Google::Cloud::Redis (module)">Redis</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Redis.html#new-class_method" title="Google::Cloud::Redis.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v1beta1</span><span class='rparen'>)</span>
+<span class='id identifier rubyid_formatted_name'>formatted_name</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Redis.html" title="Google::Cloud::Redis (module)">Redis</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1beta1.html" title="Google::Cloud::Redis::V1beta1 (module)">V1beta1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Redis::V1beta1::CloudRedisClient (class)">CloudRedisClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_instance_path'><span class='object_link'><a href="#instance_path-class_method" title="Google::Cloud::Redis::V1beta1::CloudRedisClient.instance_path (method)">instance_path</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[PROJECT]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[LOCATION]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[INSTANCE]</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+
+<span class='comment'># TODO: Initialize `output_config`:
+</span><span class='id identifier rubyid_output_config'>output_config</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
+
+<span class='comment'># Register a callback during the method call.
+</span><span class='id identifier rubyid_operation'>operation</span> <span class='op'>=</span> <span class='id identifier rubyid_cloud_redis_client'>cloud_redis_client</span><span class='period'>.</span><span class='id identifier rubyid_export_instance'>export_instance</span><span class='lparen'>(</span><span class='id identifier rubyid_formatted_name'>formatted_name</span><span class='comma'>,</span> <span class='id identifier rubyid_output_config'>output_config</span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_op'>op</span><span class='op'>|</span>
+  <span class='id identifier rubyid_raise'>raise</span> <span class='id identifier rubyid_op'>op</span><span class='period'>.</span><span class='id identifier rubyid_results'>results</span><span class='period'>.</span><span class='id identifier rubyid_message'>message</span> <span class='kw'>if</span> <span class='id identifier rubyid_op'>op</span><span class='period'>.</span><span class='id identifier rubyid_error?'>error?</span>
+  <span class='id identifier rubyid_op_results'>op_results</span> <span class='op'>=</span> <span class='id identifier rubyid_op'>op</span><span class='period'>.</span><span class='id identifier rubyid_results'>results</span>
+  <span class='comment'># Process the results.
+</span>
+  <span class='id identifier rubyid_metadata'>metadata</span> <span class='op'>=</span> <span class='id identifier rubyid_op'>op</span><span class='period'>.</span><span class='id identifier rubyid_metadata'>metadata</span>
+  <span class='comment'># Process the metadata.
+</span><span class='kw'>end</span>
+
+<span class='comment'># Or use the return value to register a callback.
+</span><span class='id identifier rubyid_operation'>operation</span><span class='period'>.</span><span class='id identifier rubyid_on_done'>on_done</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_op'>op</span><span class='op'>|</span>
+  <span class='id identifier rubyid_raise'>raise</span> <span class='id identifier rubyid_op'>op</span><span class='period'>.</span><span class='id identifier rubyid_results'>results</span><span class='period'>.</span><span class='id identifier rubyid_message'>message</span> <span class='kw'>if</span> <span class='id identifier rubyid_op'>op</span><span class='period'>.</span><span class='id identifier rubyid_error?'>error?</span>
+  <span class='id identifier rubyid_op_results'>op_results</span> <span class='op'>=</span> <span class='id identifier rubyid_op'>op</span><span class='period'>.</span><span class='id identifier rubyid_results'>results</span>
+  <span class='comment'># Process the results.
+</span>
+  <span class='id identifier rubyid_metadata'>metadata</span> <span class='op'>=</span> <span class='id identifier rubyid_op'>op</span><span class='period'>.</span><span class='id identifier rubyid_metadata'>metadata</span>
+  <span class='comment'># Process the metadata.
+</span><span class='kw'>end</span>
+
+<span class='comment'># Manually reload the operation.
+</span><span class='id identifier rubyid_operation'>operation</span><span class='period'>.</span><span class='id identifier rubyid_reload!'>reload!</span>
+
+<span class='comment'># Or block until the operation completes, triggering callbacks on
+</span><span class='comment'># completion.
+</span><span class='id identifier rubyid_operation'>operation</span><span class='period'>.</span><span class='id identifier rubyid_wait_until_done!'>wait_until_done!</span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Required. Redis instance resource name using the form:
+    <code>projects/{project_id}/locations/{location_id}/instances/{instance_id}</code>
+where <code>location_id</code> refers to a GCP region.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>output_config</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="OutputConfig.html" title="Google::Cloud::Redis::V1beta1::OutputConfig (class)">Google::Cloud::Redis::V1beta1::OutputConfig</a></span> | Hash</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Required. Specify data to be exported.
+A hash of the same form as <code>Google::Cloud::Redis::V1beta1::OutputConfig</code>
+can also be provided.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>options</span>
+      
+      
+        <span class='type'>(<tt>Google::Gax::CallOptions</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Overrides the default settings for this call, e.g, timeout,
+retries, etc.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Google::Gax::Operation</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Raises:</p>
+<ul class="raise">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Google::Gax::GaxError</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>if the RPC is aborted.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+717
+718
+719
+720
+721
+722
+723
+724
+725
+726
+727
+728
+729
+730
+731
+732
+733
+734
+735</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/redis/v1beta1/cloud_redis_client.rb', line 717</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_export_instance'>export_instance</span> \
+    <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
+    <span class='id identifier rubyid_output_config'>output_config</span><span class='comma'>,</span>
+    <span class='label'>options:</span> <span class='kw'>nil</span>
+  <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='lbrace'>{</span>
+    <span class='label'>name:</span> <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
+    <span class='label'>output_config:</span> <span class='id identifier rubyid_output_config'>output_config</span>
+  <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span>
+  <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='id identifier rubyid_to_proto'>to_proto</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Redis.html" title="Google::Cloud::Redis (module)">Redis</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1beta1.html" title="Google::Cloud::Redis::V1beta1 (module)">V1beta1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="ExportInstanceRequest.html" title="Google::Cloud::Redis::V1beta1::ExportInstanceRequest (class)">ExportInstanceRequest</a></span></span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_operation'>operation</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='const'>Operation</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span>
+    <span class='ivar'>@export_instance</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='rparen'>)</span><span class='comma'>,</span>
+    <span class='ivar'>@operations_client</span><span class='comma'>,</span>
+    <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Redis.html" title="Google::Cloud::Redis (module)">Redis</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1beta1.html" title="Google::Cloud::Redis::V1beta1 (module)">V1beta1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Instance.html" title="Google::Cloud::Redis::V1beta1::Instance (class)">Instance</a></span></span><span class='comma'>,</span>
+    <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Protobuf.html" title="Google::Protobuf (module)">Protobuf</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Protobuf/Any.html" title="Google::Protobuf::Any (class)">Any</a></span></span><span class='comma'>,</span>
+    <span class='label'>call_options:</span> <span class='id identifier rubyid_options'>options</span>
+  <span class='rparen'>)</span>
+  <span class='id identifier rubyid_operation'>operation</span><span class='period'>.</span><span class='id identifier rubyid_on_done'>on_done</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_operation'>operation</span><span class='op'>|</span> <span class='kw'>yield</span><span class='lparen'>(</span><span class='id identifier rubyid_operation'>operation</span><span class='rparen'>)</span> <span class='rbrace'>}</span> <span class='kw'>if</span> <span class='id identifier rubyid_block_given?'>block_given?</span>
+  <span class='id identifier rubyid_operation'>operation</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
   <h3 class="signature " id="failover_instance-instance_method">
   
     #<strong>failover_instance</strong>(name, data_protection_mode, options: nil)  &#x21d2; <tt>Google::Gax::Operation</tt> 
@@ -1462,8 +1742,8 @@ retries, etc.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Failover the master role to current replica node against a specific
-STANDARD tier redis instance.</p>
+    <p>Initiates a failover of the master node to current replica node for a
+specific STANDARD tier Cloud Memorystore for Redis instance.</p>
 
 
   </div>
@@ -1525,7 +1805,7 @@ STANDARD tier redis instance.</p>
         &mdash;
         <div class='inline'><p>Required. Redis instance resource name using the form:
     <code>projects/{project_id}/locations/{location_id}/instances/{instance_id}</code>
-where <code>location_id</code> refers to a GCP region</p>
+where <code>location_id</code> refers to a GCP region.</p>
 </div>
       
     </li>
@@ -1601,28 +1881,28 @@ retries, etc.</p>
       <pre class="lines">
 
 
-681
-682
-683
-684
-685
-686
-687
-688
-689
-690
-691
-692
-693
-694
-695
-696
-697
-698
-699</pre>
+788
+789
+790
+791
+792
+793
+794
+795
+796
+797
+798
+799
+800
+801
+802
+803
+804
+805
+806</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/redis/v1beta1/cloud_redis_client.rb', line 681</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/redis/v1beta1/cloud_redis_client.rb', line 788</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_failover_instance'>failover_instance</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -1692,7 +1972,7 @@ retries, etc.</p>
         &mdash;
         <div class='inline'><p>Required. Redis instance resource name using the form:
     <code>projects/{project_id}/locations/{location_id}/instances/{instance_id}</code>
-where <code>location_id</code> refers to a GCP region</p>
+where <code>location_id</code> refers to a GCP region.</p>
 </div>
       
     </li>
@@ -1795,19 +2075,19 @@ retries, etc.</p>
       <pre class="lines">
 
 
-376
-377
-378
-379
-380
-381
-382
-383
-384
-385</pre>
+392
+393
+394
+395
+396
+397
+398
+399
+400
+401</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/redis/v1beta1/cloud_redis_client.rb', line 376</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/redis/v1beta1/cloud_redis_client.rb', line 392</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_instance'>get_instance</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -1818,6 +2098,210 @@ retries, etc.</p>
   <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span>
   <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='id identifier rubyid_to_proto'>to_proto</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Redis.html" title="Google::Cloud::Redis (module)">Redis</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1beta1.html" title="Google::Cloud::Redis::V1beta1 (module)">V1beta1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="GetInstanceRequest.html" title="Google::Cloud::Redis::V1beta1::GetInstanceRequest (class)">GetInstanceRequest</a></span></span><span class='rparen'>)</span>
   <span class='ivar'>@get_instance</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="import_instance-instance_method">
+  
+    #<strong>import_instance</strong>(name, input_config, options: nil)  &#x21d2; <tt>Google::Gax::Operation</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Import a Redis RDB snapshot file from Cloud Storage into a Redis instance.</p>
+
+<p>Redis may stop serving during this operation. Instance state will be
+IMPORTING for entire operation. When complete, the instance will contain
+only data from the imported file.</p>
+
+<p>The returned operation is automatically deleted after a few hours, so
+there is no need to call DeleteOperation.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/redis</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_cloud_redis_client'>cloud_redis_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Redis.html" title="Google::Cloud::Redis (module)">Redis</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Redis.html#new-class_method" title="Google::Cloud::Redis.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v1beta1</span><span class='rparen'>)</span>
+<span class='id identifier rubyid_formatted_name'>formatted_name</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Redis.html" title="Google::Cloud::Redis (module)">Redis</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1beta1.html" title="Google::Cloud::Redis::V1beta1 (module)">V1beta1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Redis::V1beta1::CloudRedisClient (class)">CloudRedisClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_instance_path'><span class='object_link'><a href="#instance_path-class_method" title="Google::Cloud::Redis::V1beta1::CloudRedisClient.instance_path (method)">instance_path</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[PROJECT]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[LOCATION]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[INSTANCE]</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+
+<span class='comment'># TODO: Initialize `input_config`:
+</span><span class='id identifier rubyid_input_config'>input_config</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
+
+<span class='comment'># Register a callback during the method call.
+</span><span class='id identifier rubyid_operation'>operation</span> <span class='op'>=</span> <span class='id identifier rubyid_cloud_redis_client'>cloud_redis_client</span><span class='period'>.</span><span class='id identifier rubyid_import_instance'>import_instance</span><span class='lparen'>(</span><span class='id identifier rubyid_formatted_name'>formatted_name</span><span class='comma'>,</span> <span class='id identifier rubyid_input_config'>input_config</span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_op'>op</span><span class='op'>|</span>
+  <span class='id identifier rubyid_raise'>raise</span> <span class='id identifier rubyid_op'>op</span><span class='period'>.</span><span class='id identifier rubyid_results'>results</span><span class='period'>.</span><span class='id identifier rubyid_message'>message</span> <span class='kw'>if</span> <span class='id identifier rubyid_op'>op</span><span class='period'>.</span><span class='id identifier rubyid_error?'>error?</span>
+  <span class='id identifier rubyid_op_results'>op_results</span> <span class='op'>=</span> <span class='id identifier rubyid_op'>op</span><span class='period'>.</span><span class='id identifier rubyid_results'>results</span>
+  <span class='comment'># Process the results.
+</span>
+  <span class='id identifier rubyid_metadata'>metadata</span> <span class='op'>=</span> <span class='id identifier rubyid_op'>op</span><span class='period'>.</span><span class='id identifier rubyid_metadata'>metadata</span>
+  <span class='comment'># Process the metadata.
+</span><span class='kw'>end</span>
+
+<span class='comment'># Or use the return value to register a callback.
+</span><span class='id identifier rubyid_operation'>operation</span><span class='period'>.</span><span class='id identifier rubyid_on_done'>on_done</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_op'>op</span><span class='op'>|</span>
+  <span class='id identifier rubyid_raise'>raise</span> <span class='id identifier rubyid_op'>op</span><span class='period'>.</span><span class='id identifier rubyid_results'>results</span><span class='period'>.</span><span class='id identifier rubyid_message'>message</span> <span class='kw'>if</span> <span class='id identifier rubyid_op'>op</span><span class='period'>.</span><span class='id identifier rubyid_error?'>error?</span>
+  <span class='id identifier rubyid_op_results'>op_results</span> <span class='op'>=</span> <span class='id identifier rubyid_op'>op</span><span class='period'>.</span><span class='id identifier rubyid_results'>results</span>
+  <span class='comment'># Process the results.
+</span>
+  <span class='id identifier rubyid_metadata'>metadata</span> <span class='op'>=</span> <span class='id identifier rubyid_op'>op</span><span class='period'>.</span><span class='id identifier rubyid_metadata'>metadata</span>
+  <span class='comment'># Process the metadata.
+</span><span class='kw'>end</span>
+
+<span class='comment'># Manually reload the operation.
+</span><span class='id identifier rubyid_operation'>operation</span><span class='period'>.</span><span class='id identifier rubyid_reload!'>reload!</span>
+
+<span class='comment'># Or block until the operation completes, triggering callbacks on
+</span><span class='comment'># completion.
+</span><span class='id identifier rubyid_operation'>operation</span><span class='period'>.</span><span class='id identifier rubyid_wait_until_done!'>wait_until_done!</span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Required. Redis instance resource name using the form:
+    <code>projects/{project_id}/locations/{location_id}/instances/{instance_id}</code>
+where <code>location_id</code> refers to a GCP region.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>input_config</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="InputConfig.html" title="Google::Cloud::Redis::V1beta1::InputConfig (class)">Google::Cloud::Redis::V1beta1::InputConfig</a></span> | Hash</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Required. Specify data to be imported.
+A hash of the same form as <code>Google::Cloud::Redis::V1beta1::InputConfig</code>
+can also be provided.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>options</span>
+      
+      
+        <span class='type'>(<tt>Google::Gax::CallOptions</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Overrides the default settings for this call, e.g, timeout,
+retries, etc.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Google::Gax::Operation</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Raises:</p>
+<ul class="raise">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Google::Gax::GaxError</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>if the RPC is aborted.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+641
+642
+643
+644
+645
+646
+647
+648
+649
+650
+651
+652
+653
+654
+655
+656
+657
+658
+659</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/redis/v1beta1/cloud_redis_client.rb', line 641</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_import_instance'>import_instance</span> \
+    <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
+    <span class='id identifier rubyid_input_config'>input_config</span><span class='comma'>,</span>
+    <span class='label'>options:</span> <span class='kw'>nil</span>
+  <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='lbrace'>{</span>
+    <span class='label'>name:</span> <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
+    <span class='label'>input_config:</span> <span class='id identifier rubyid_input_config'>input_config</span>
+  <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span>
+  <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='id identifier rubyid_to_proto'>to_proto</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Redis.html" title="Google::Cloud::Redis (module)">Redis</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1beta1.html" title="Google::Cloud::Redis::V1beta1 (module)">V1beta1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="ImportInstanceRequest.html" title="Google::Cloud::Redis::V1beta1::ImportInstanceRequest (class)">ImportInstanceRequest</a></span></span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_operation'>operation</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='const'>Operation</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span>
+    <span class='ivar'>@import_instance</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='rparen'>)</span><span class='comma'>,</span>
+    <span class='ivar'>@operations_client</span><span class='comma'>,</span>
+    <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Redis.html" title="Google::Cloud::Redis (module)">Redis</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1beta1.html" title="Google::Cloud::Redis::V1beta1 (module)">V1beta1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Instance.html" title="Google::Cloud::Redis::V1beta1::Instance (class)">Instance</a></span></span><span class='comma'>,</span>
+    <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Protobuf.html" title="Google::Protobuf (module)">Protobuf</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Protobuf/Any.html" title="Google::Protobuf::Any (class)">Any</a></span></span><span class='comma'>,</span>
+    <span class='label'>call_options:</span> <span class='id identifier rubyid_options'>options</span>
+  <span class='rparen'>)</span>
+  <span class='id identifier rubyid_operation'>operation</span><span class='period'>.</span><span class='id identifier rubyid_on_done'>on_done</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_operation'>operation</span><span class='op'>|</span> <span class='kw'>yield</span><span class='lparen'>(</span><span class='id identifier rubyid_operation'>operation</span><span class='rparen'>)</span> <span class='rbrace'>}</span> <span class='kw'>if</span> <span class='id identifier rubyid_block_given?'>block_given?</span>
+  <span class='id identifier rubyid_operation'>operation</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -1890,7 +2374,7 @@ available to the project are queried, and the results are aggregated.</p>
         &mdash;
         <div class='inline'><p>Required. The resource name of the instance location using the form:
     <code>projects/{project_id}/locations/{location_id}</code>
-where <code>location_id</code> refers to a GCP region</p>
+where <code>location_id</code> refers to a GCP region.</p>
 </div>
       
     </li>
@@ -2019,21 +2503,21 @@ object.</p>
       <pre class="lines">
 
 
-342
-343
-344
-345
-346
-347
-348
-349
-350
-351
-352
-353</pre>
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/redis/v1beta1/cloud_redis_client.rb', line 342</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/redis/v1beta1/cloud_redis_client.rb', line 358</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_instances'>list_instances</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -2225,28 +2709,28 @@ retries, etc.</p>
       <pre class="lines">
 
 
-547
-548
-549
-550
-551
-552
-553
-554
-555
-556
-557
-558
-559
-560
-561
-562
 563
 564
-565</pre>
+565
+566
+567
+568
+569
+570
+571
+572
+573
+574
+575
+576
+577
+578
+579
+580
+581</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/redis/v1beta1/cloud_redis_client.rb', line 547</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/redis/v1beta1/cloud_redis_client.rb', line 563</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update_instance'>update_instance</span> \
     <span class='id identifier rubyid_update_mask'>update_mask</span><span class='comma'>,</span>
