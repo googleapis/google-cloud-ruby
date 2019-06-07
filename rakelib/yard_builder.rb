@@ -264,8 +264,7 @@ class YardBuilder
   def clone_branch branch, dir
     # Creates a shallow clone
     puts "cloning #{branch} to #{dir}"
-    # `git clone --quiet --branch=#{branch} --depth=1 --single-branch #{git_repository} #{dir} > /dev/null`
-    `git clone --quiet --branch=#{branch} --depth=1 --single-branch #{git_repository} #{dir}`
+    `git clone --quiet --branch=#{branch} --depth=1 --single-branch #{git_repository} #{dir} > /dev/null`
   end
 
   def git_repository
@@ -294,10 +293,10 @@ class YardBuilder
       Dir.chdir repo do
         if ENV["GH_OAUTH_TOKEN"]
           `git pull -q --rebase #{git_repository} gh-pages`
-          # `git push -q #{git_repository} gh-pages`
+          `git push -q #{git_repository} gh-pages`
         else
           `git pull -q --rebase origin gh-pages`
-          # `git push -q origin gh-pages`
+          `git push -q origin gh-pages`
         end
       end
     end
