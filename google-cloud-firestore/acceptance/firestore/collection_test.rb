@@ -41,4 +41,18 @@ describe "Collection", :firestore_acceptance do
 
     doc_snp[:foo].must_equal "hello world"
   end
+
+  it "lists its documents" do
+    rand_col = firestore.col "#{root_path}/query/#{SecureRandom.hex(4)}"
+    rand_col.add({foo: "bar"})
+    rand_col.add({bar: "foo"})
+    docs = rand_col.list_documents
+
+    docs.must_be_kind_of Array
+    docs.size.must_be :>, 1
+    docs.first.must_be_kind_of Google::Cloud::Firestore::DocumentReference
+
+    docs_max_1 = rand_col.list_documents max: 1
+    docs_max_1.size.must_equal 1
+  end
 end

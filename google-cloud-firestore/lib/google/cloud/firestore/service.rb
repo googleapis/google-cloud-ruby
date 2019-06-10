@@ -85,6 +85,26 @@ module Google
           end
         end
 
+        ##
+        # Returns a list of DocumentReferences that are directly nested under
+        # the given collection. Fetches all documents from the server, but
+        # provides an empty field mask to avoid unnecessary data transfer. Sets
+        # the showMissing flag to true to support full document traversal. If
+        # there are too many documents, recommendation will be not to call this
+        # method.
+        def list_documents parent, collection_id, token: nil, max: nil
+          mask = { field_paths: [] }
+          call_options = nil
+          call_options = Google::Gax::CallOptions.new page_token: token if token
+          execute do
+            paged_enum = firestore.list_documents \
+              parent, collection_id, mask: mask, show_missing: true,
+                                     page_size: max, options: call_options
+
+            paged_enum.page.response
+          end
+        end
+
         def list_collections parent, transaction: nil
           list_args = {}
           if transaction.is_a? String

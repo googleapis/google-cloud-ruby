@@ -667,6 +667,14 @@ module Google
 
         # @!endgroup
 
+        # @private
+        def list_documents parent, collection_id, token: nil, max: nil
+          ensure_service!
+          grpc = service.list_documents \
+            parent, collection_id, token: token, max: max
+          DocumentReference::List.from_grpc grpc, service, parent, collection_id
+        end
+
         protected
 
         ##

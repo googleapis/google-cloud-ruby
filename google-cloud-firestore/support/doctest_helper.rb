@@ -323,6 +323,12 @@ YARD::Doctest.configure do |doctest|
   doctest.skip "Google::Cloud::Firestore::CollectionReference#get_documents"
   doctest.skip "Google::Cloud::Firestore::CollectionReference#find"
 
+  doctest.before "Google::Cloud::Firestore::CollectionReference#list_documents" do
+    mock_firestore do |mock|
+      mock.expect :list_documents, documents_resp, list_documents_args
+    end
+  end
+
   doctest.before "Google::Cloud::Firestore::DocumentReference#cols" do
     mock_firestore do |mock|
       mock.expect :list_collection_ids, list_collection_resp, list_collection_args
@@ -362,6 +368,12 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
+  doctest.before "Google::Cloud::Firestore::DocumentReference::List" do
+    mock_firestore do |mock|
+      mock.expect :list_documents, documents_resp, list_documents_args
+    end
+  end
+
   doctest.before "Google::Cloud::Firestore::DocumentSnapshot" do
     mock_firestore do |mock|
       mock.expect :batch_get_documents, batch_get_resp, batch_get_args
@@ -395,6 +407,11 @@ YARD::Doctest.configure do |doctest|
 end
 
 # Fixture helpers
+
+def paged_enum_struct response
+  OpenStruct.new page: OpenStruct.new(response: response)
+end
+
 def commit_args
   [String, Array, Hash]
 end
@@ -427,12 +444,8 @@ def run_query_resp_obj doc, data
   Google::Firestore::V1::RunQueryResponse.new(
     transaction: "tx123",
     read_time: Google::Cloud::Firestore::Convert.time_to_timestamp(Time.now),
-    document: Google::Firestore::V1::Document.new(
-      name: "projects/my-project-id/databases/(default)/documents/#{doc}",
-      fields: Google::Cloud::Firestore::Convert.hash_to_fields(data),
-      create_time: Google::Cloud::Firestore::Convert.time_to_timestamp(Time.now),
-      update_time: Google::Cloud::Firestore::Convert.time_to_timestamp(Time.now)
-    ))
+    document: document_gapi(doc: doc, fields: Google::Cloud::Firestore::Convert.hash_to_fields(data))
+  )
 end
 
 def run_query_args
@@ -474,14 +487,35 @@ end
 def batch_get_resp_obj doc, data
   Google::Firestore::V1::BatchGetDocumentsResponse.new(
     read_time: Google::Cloud::Firestore::Convert.time_to_timestamp(Time.now),
-    found: Google::Firestore::V1::Document.new(
-      name: "projects/my-project-id/databases/(default)/documents/#{doc}",
-      fields: Google::Cloud::Firestore::Convert.hash_to_fields(data),
-      create_time: Google::Cloud::Firestore::Convert.time_to_timestamp(Time.now),
-      update_time: Google::Cloud::Firestore::Convert.time_to_timestamp(Time.now)
-    ))
+    found: document_gapi(doc: doc, fields: Google::Cloud::Firestore::Convert.hash_to_fields(data))
+  )
 end
 
 def batch_get_args
   [String, Array, Hash]
+end
+
+def list_documents_args
+  [
+    "projects/my-project-id/databases/(default)/documents",
+    "cities",
+    { mask: {field_paths: []}, show_missing: true, page_size: nil, options: nil }
+  ]
+end
+
+def document_gapi doc: "my-document", fields: {}
+  Google::Firestore::V1::Document.new(
+    name: "projects/my-project-id/databases/(default)/documents/#{doc}",
+    fields: fields,
+    create_time: Google::Cloud::Firestore::Convert.time_to_timestamp(Time.now),
+    update_time: Google::Cloud::Firestore::Convert.time_to_timestamp(Time.now)
+  )
+end
+
+def documents_resp token: nil
+  response = Google::Firestore::V1::ListDocumentsResponse.new(
+    documents: [document_gapi]
+  )
+  response.next_page_token = token if token
+  paged_enum_struct response
 end
