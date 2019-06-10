@@ -266,13 +266,15 @@ module Google
           def perform_callback_async rec_msg
             return unless callback_thread_pool.running?
 
-            Concurrent::Future.new executor: callback_thread_pool do
+            Concurrent::Promises.future_on(
+              callback_thread_pool, @subscriber, rec_msg
+            ) do |sub, msg|
               begin
-                @subscriber.callback.call rec_msg
+                sub.callback.call msg
               rescue StandardError => callback_error
-                @subscriber.error! callback_error
+                sub.error! callback_error
               end
-            end.execute
+            end
           end
 
           def start_streaming!

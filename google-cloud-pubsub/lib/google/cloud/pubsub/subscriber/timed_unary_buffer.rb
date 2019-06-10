@@ -205,13 +205,13 @@ module Google
           end
 
           def add_future pool
-            Concurrent::Future.new executor: pool do
+            Concurrent::Promises.future_on pool do
               begin
                 yield
               rescue StandardError => error
                 error! error
               end
-            end.execute
+            end
           end
         end
       end

@@ -235,33 +235,39 @@ module Google
         def publish_batch_async topic_name, batch
           return unless @publish_thread_pool.running?
 
-          Concurrent::Future.new executor: @publish_thread_pool do
-            begin
-              grpc = @service.publish topic_name, batch.messages
-              batch.items.zip Array(grpc.message_ids) do |item, id|
-                next unless item.callback
+          Concurrent::Promises.future_on(
+            @publish_thread_pool, topic_name, batch
+          ) do |t_name, btch|
+            publish_batch_sync t_name, btch
+          end
+        end
 
-                item.msg.message_id = id
-                publish_result = PublishResult.from_grpc item.msg
-                execute_callback_async item.callback, publish_result
-              end
-            rescue StandardError => e
-              batch.items.each do |item|
-                next unless item.callback
+        def publish_batch_sync topic_name, batch
+          grpc = @service.publish topic_name, batch.messages
+          batch.items.zip Array(grpc.message_ids) do |item, id|
+            next unless item.callback
 
-                publish_result = PublishResult.from_error item.msg, e
-                execute_callback_async item.callback, publish_result
-              end
-            end
-          end.execute
+            item.msg.message_id = id
+            publish_result = PublishResult.from_grpc item.msg
+            execute_callback_async item.callback, publish_result
+          end
+        rescue StandardError => e
+          batch.items.each do |item|
+            next unless item.callback
+
+            publish_result = PublishResult.from_error item.msg, e
+            execute_callback_async item.callback, publish_result
+          end
         end
 
         def execute_callback_async callback, publish_result
           return unless @callback_thread_pool.running?
 
-          Concurrent::Future.new executor: @callback_thread_pool do
-            callback.call publish_result
-          end.execute
+          Concurrent::Promises.future_on(
+            @callback_thread_pool, callback, publish_result
+          ) do |cback, p_result|
+            cback.call p_result
+          end
         end
 
         def create_pubsub_message data, attributes
