@@ -163,6 +163,29 @@ document references, and querying for documents (See <span class='object_link'><
         <li class="public ">
   <span class="summary_signature">
     
+      <a href="#list_documents-instance_method" title="#list_documents (instance method)">#<strong>list_documents</strong>(token: nil, max: nil)  &#x21d2; Array&lt;DocumentReference&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieves a list of document references for the documents in this collection.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#parent-instance_method" title="#parent (instance method)">#<strong>parent</strong>  &#x21d2; Client, DocumentReference </a>
     
 
@@ -394,13 +417,13 @@ document references, and querying for documents (See <span class='object_link'><
       <pre class="lines">
 
 
-207
-208
-209
-210</pre>
+240
+241
+242
+243</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/collection_reference.rb', line 207</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/collection_reference.rb', line 240</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_add'>add</span> <span class='id identifier rubyid_data'>data</span> <span class='op'>=</span> <span class='kw'>nil</span>
   <span class='id identifier rubyid_data'>data</span> <span class='op'>||=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
@@ -654,6 +677,125 @@ generated. Optional.</p>
 </div>
     
       <div class="method_details ">
+  <h3 class="signature " id="list_documents-instance_method">
+  
+    #<strong>list_documents</strong>(token: nil, max: nil)  &#x21d2; <tt>Array&lt;<span class='object_link'><a href="DocumentReference.html" title="Google::Cloud::Firestore::DocumentReference (class)">DocumentReference</a></span>&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieves a list of document references for the documents in this
+collection.</p>
+
+<p>The document references returned may include references to &quot;missing
+documents&quot;, i.e. document locations that have no document present but
+which contain subcollections with documents. Attempting to read such a
+document reference (e.g. via <span class='object_link'><a href="DocumentReference.html#get-instance_method" title="Google::Cloud::Firestore::DocumentReference#get (method)">DocumentReference#get</a></span>) will return
+a <span class='object_link'><a href="DocumentSnapshot.html" title="Google::Cloud::Firestore::DocumentSnapshot (class)">DocumentSnapshot</a></span> whose <code>exists?</code> method returns false.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/firestore</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_firestore'>firestore</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Firestore.html" title="Google::Cloud::Firestore (module)">Firestore</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Firestore.html#new-class_method" title="Google::Cloud::Firestore.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_col'>col</span> <span class='op'>=</span> <span class='id identifier rubyid_firestore'>firestore</span><span class='period'>.</span><span class='id identifier rubyid_col'>col</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>cities</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_col'>col</span><span class='period'>.</span><span class='id identifier rubyid_list_documents'>list_documents</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_doc_ref'>doc_ref</span><span class='op'>|</span>
+  <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_doc_ref'>doc_ref</span><span class='period'>.</span><span class='id identifier rubyid_document_id'>document_id</span>
+<span class='kw'>end</span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>token</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A previously-returned page token representing
+part of the larger set of results to view.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>max</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Maximum number of results to return.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="DocumentReference.html" title="Google::Cloud::Firestore::DocumentReference (class)">DocumentReference</a></span>&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>An array of document references.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+156
+157
+158
+159
+160</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/collection_reference.rb', line 156</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_list_documents'>list_documents</span> <span class='label'>token:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>max:</span> <span class='kw'>nil</span>
+  <span class='id identifier rubyid_ensure_client!'>ensure_client!</span>
+  <span class='id identifier rubyid_client'>client</span><span class='period'>.</span><span class='id identifier rubyid_list_documents'>list_documents</span> \
+    <span class='id identifier rubyid_parent_path'>parent_path</span><span class='comma'>,</span> <span class='id identifier rubyid_collection_id'>collection_id</span><span class='comma'>,</span> <span class='label'>token:</span> <span class='id identifier rubyid_token'>token</span><span class='comma'>,</span> <span class='label'>max:</span> <span class='id identifier rubyid_max'>max</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
   <h3 class="signature " id="parent-instance_method">
   
     #<strong>parent</strong>  &#x21d2; <tt><span class='object_link'><a href="Client.html" title="Google::Cloud::Firestore::Client (class)">Client</a></span></tt>, <tt><span class='object_link'><a href="DocumentReference.html" title="Google::Cloud::Firestore::DocumentReference (class)">DocumentReference</a></span></tt> 
@@ -731,15 +873,15 @@ the document reference object.</p>
       <pre class="lines">
 
 
-159
-160
-161
-162
-163
-164</pre>
+192
+193
+194
+195
+196
+197</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/collection_reference.rb', line 159</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/collection_reference.rb', line 192</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_parent'>parent</span>
   <span class='kw'>if</span> <span class='id identifier rubyid_collection_path'>collection_path</span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/</span><span class='tstring_end'>&quot;</span></span>
