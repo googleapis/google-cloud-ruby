@@ -187,7 +187,8 @@ module Google
           end
 
           def with_threadpool
-            pool = Concurrent::FixedThreadPool.new @subscriber.push_threads
+            pool = Concurrent::CachedThreadPool.new \
+              max_threads: @subscriber.push_threads
 
             yield pool
 
@@ -204,13 +205,13 @@ module Google
           end
 
           def add_future pool
-            Concurrent::Future.new executor: pool do
+            Concurrent::Promises.future_on pool do
               begin
                 yield
               rescue StandardError => error
                 error! error
               end
-            end.execute
+            end
           end
         end
       end

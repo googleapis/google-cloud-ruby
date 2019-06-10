@@ -48,8 +48,8 @@ module Google
             @pause_cond = new_cond
 
             @inventory = Inventory.new self, @subscriber.stream_inventory
-            @callback_thread_pool = Concurrent::FixedThreadPool.new \
-              @subscriber.callback_threads
+            @callback_thread_pool = Concurrent::CachedThreadPool.new \
+              max_threads: @subscriber.callback_threads
 
             @stream_keepalive_task = Concurrent::TimerTask.new(
               execution_interval: 30
@@ -266,13 +266,15 @@ module Google
           def perform_callback_async rec_msg
             return unless callback_thread_pool.running?
 
-            Concurrent::Future.new executor: callback_thread_pool do
+            Concurrent::Promises.future_on(
+              callback_thread_pool, @subscriber, rec_msg
+            ) do |sub, msg|
               begin
-                @subscriber.callback.call rec_msg
+                sub.callback.call msg
               rescue StandardError => callback_error
-                @subscriber.error! callback_error
+                sub.error! callback_error
               end
-            end.execute
+            end
           end
 
           def start_streaming!
