@@ -187,7 +187,8 @@ module Google
           end
 
           def with_threadpool
-            pool = Concurrent::FixedThreadPool.new @subscriber.push_threads
+            pool = Concurrent::CachedThreadPool.new \
+              max_threads: @subscriber.push_threads
 
             yield pool
 
