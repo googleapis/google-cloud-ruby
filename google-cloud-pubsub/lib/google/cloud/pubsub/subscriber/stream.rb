@@ -267,12 +267,14 @@ module Google
             return unless callback_thread_pool.running?
 
             Concurrent::Promises.future_on(
-              callback_thread_pool, @subscriber, rec_msg
-            ) do |sub, msg|
+              callback_thread_pool, @subscriber, @inventory, rec_msg
+            ) do |sub, inv, msg|
               begin
                 sub.callback.call msg
               rescue StandardError => callback_error
                 sub.error! callback_error
+              ensure
+                inv.remove msg.ack_id
               end
             end
           end
