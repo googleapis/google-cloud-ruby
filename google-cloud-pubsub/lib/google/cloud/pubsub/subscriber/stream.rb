@@ -246,7 +246,7 @@ module Google
             raise RestartStream unless synchronize { @stopped }
 
             # We must be stopped, tell the stream to quit.
-            @request_queue.push self
+            stop
           rescue GRPC::Cancelled, GRPC::DeadlineExceeded, GRPC::Internal,
                  GRPC::ResourceExhausted, GRPC::Unauthenticated,
                  GRPC::Unavailable, GRPC::Core::CallError
