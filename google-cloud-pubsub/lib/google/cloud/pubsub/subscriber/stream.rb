@@ -187,16 +187,18 @@ module Google
 
               @stopped = false
               @paused  = false
+
+              # signal to the previous queue to shut down
+              old_queue = []
+              old_queue = @request_queue.quit_and_dump_queue if @request_queue
+
+              # Always create a new request queue
+              @request_queue = EnumeratorQueue.new self
+              @request_queue.push initial_input_request
+              old_queue.each { |obj| @request_queue.push obj }
             end
 
-            # signal to the previous queue to shut down
-            old_queue = []
-            old_queue = @request_queue.quit_and_dump_queue if @request_queue
-
-            # Always create a new request queue and enum
-            @request_queue = EnumeratorQueue.new self
-            @request_queue.push initial_input_request
-            old_queue.each { |obj| @request_queue.push obj }
+            # Call the StreamingPull API to get the response enumerator
             enum = @subscriber.service.streaming_pull @request_queue.each
 
             loop do
