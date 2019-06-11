@@ -1,5 +1,12 @@
 # Release History
 
+### 0.29.5 / 2019-06-11
+
+* Add documentation for MetricDescriptor#launch_stage and
+  MonitoredResourceDescriptor#launch_stage
+* Deprecate MetricDescriptor:: MetricDescriptorMetadata#launch_stage
+* Add VERSION constant
+
 ### 0.29.4 / 2019-04-29
 
 * Add AUTHENTICATION.md guide.
