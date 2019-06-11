@@ -1,5 +1,10 @@
 # Release History
 
+### 0.60.0 / 2019-06-11
+
+* Update google-cloud-scheduler dependency to 1.0
+* Update google-cloud-tasks dependency to 1.0
+
 ### 0.59.0 / 2019-05-02
 
 * Add google-cloud-security_center.
