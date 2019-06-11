@@ -1,0 +1,5 @@
+{
+    "name": "bigquery",
+    "language": "ruby",
+    "distribution_name": "google-cloud-bigquery"
+}
