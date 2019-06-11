@@ -1,5 +1,10 @@
 # Release History
 
+### 0.4.1 / 2019-06-11
+
+* Enable grpc.service_config_disable_resolution
+* Add VERSION constant
+
 ### 0.4.0 / 2019-05-21
 
 * Add Google::Cloud::Bigtable::VERSION
