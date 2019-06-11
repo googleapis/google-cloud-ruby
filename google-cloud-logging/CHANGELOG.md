@@ -1,5 +1,12 @@
 # Release History
 
+### 1.6.4 / 2019-06-11
+
+* Add documentation for MetricDescriptor#launch_stage and
+  MonitoredResourceDescriptor#launch_stage.
+* Deprecate MetricDescriptor:: MetricDescriptorMetadata#launch_stage
+* Use VERSION constant in GAPIC client
+
 ### 1.6.3 / 2019-04-29
 
 * Add AUTHENTICATION.md guide.
