@@ -1,5 +1,9 @@
 # Release History
 
+### 0.3.1 / 2019-06-11
+
+* Add VERSION constant
+
 ### 0.3.0 / 2019-04-29
 
 * Add V1beta1 client.
