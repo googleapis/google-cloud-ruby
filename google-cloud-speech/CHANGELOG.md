@@ -1,5 +1,13 @@
 # Release History
 
+### 0.35.0 / 2019-06-11
+
+* Update documentation for SpeechContext phrases
+* Add RecognitionConfig#metadata (RecognitionMetadata)
+* Add StreamingRecognitionResult#result_end_time
+* Add StreamingRecognitionResult#language_code
+* Add VERSION constant
+
 ### 0.34.1 / 2019-04-29
 
 * Add AUTHENTICATION.md guide.
