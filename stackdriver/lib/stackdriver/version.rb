@@ -14,5 +14,5 @@
 
 
 module Stackdriver
-  VERSION = "0.15.3".freeze
+  VERSION = "1.1.1".freeze
 end
