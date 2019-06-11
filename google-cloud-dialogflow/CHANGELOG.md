@@ -1,5 +1,12 @@
 # Release History
 
+### 0.4.0 / 2019-06-12
+
+* Add SpeechModelVariant
+* Add InputAudioConfig#model_variant
+* Add Intent::Message::Platform::GOOGLE_HANGOUTS
+* Add VERSION constant
+
 ### 0.3.0 / 2019-04-29
 
 * Client changes:
