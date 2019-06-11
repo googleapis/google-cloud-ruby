@@ -1,5 +1,10 @@
 # Release History
 
+### 0.33.5 / 2019-06-11
+
+* Google::Cloud::Env provides additional configuration options including retries and cache control
+* Add VERSION constant
+
 ### 0.33.4 / 2019-04-29
 
 * Add AUTHENTICATION.md guide.
