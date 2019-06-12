@@ -1,5 +1,9 @@
 # Release History
 
+### 1.11.2 / 2019-06-11
+
+* Update "Loading data" link
+
 ### 1.11.1 / 2019-05-21
 
 * Declare explicit dependency on mime-types
