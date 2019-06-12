@@ -1,5 +1,9 @@
 # Release History
 
+### 0.31.5 / 2019-06-11
+
+* Use VERSION constant in GAPIC client
+
 ### 0.31.4 / 2019-04-29
 
 * Add AUTHENTICATION.md guide.
