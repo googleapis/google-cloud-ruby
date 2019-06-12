@@ -181,21 +181,25 @@ module Google
           # rubocop:disable all
 
           def background_run
-            # Don't allow a stream to restart if already stopped
-            return if @stopped
+            synchronize do
+              # Don't allow a stream to restart if already stopped
+              return if @stopped
 
-            # signal to the previous queue to shut down
-            old_queue = []
-            old_queue = @request_queue.quit_and_dump_queue if @request_queue
+              @stopped = false
+              @paused  = false
 
-            # Always create a new request queue and enum
-            @request_queue = EnumeratorQueue.new self
-            @request_queue.push initial_input_request
-            old_queue.each { |obj| @request_queue.push obj }
+              # signal to the previous queue to shut down
+              old_queue = []
+              old_queue = @request_queue.quit_and_dump_queue if @request_queue
+
+              # Always create a new request queue
+              @request_queue = EnumeratorQueue.new self
+              @request_queue.push initial_input_request
+              old_queue.each { |obj| @request_queue.push obj }
+            end
+
+            # Call the StreamingPull API to get the response enumerator
             enum = @subscriber.service.streaming_pull @request_queue.each
-
-            @stopped = nil
-            @paused  = nil
 
             loop do
               synchronize do
@@ -242,7 +246,7 @@ module Google
             raise RestartStream unless synchronize { @stopped }
 
             # We must be stopped, tell the stream to quit.
-            @request_queue.push self
+            stop
           rescue GRPC::Cancelled, GRPC::DeadlineExceeded, GRPC::Internal,
                  GRPC::ResourceExhausted, GRPC::Unauthenticated,
                  GRPC::Unavailable, GRPC::Core::CallError
@@ -253,10 +257,7 @@ module Google
           rescue RestartStream
             retry
           rescue StandardError => e
-            synchronize do
-              @subscriber.error! e
-              start_streaming! unless @stopped
-            end
+            @subscriber.error! e
 
             retry
           end
@@ -284,9 +285,6 @@ module Google
             # dies because it was stopped, or because of an unhandled error that
             # could not be recovered from, so be it.
             return if @background_thread
-
-            @stopped = false
-            @paused  = false
 
             # create new background thread to handle new enumerator
             @background_thread = Thread.new { background_run }
