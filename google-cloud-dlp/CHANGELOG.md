@@ -1,5 +1,11 @@
 # Release History
 
+### 0.10.0 / 2019-06-11
+
+* Add StoredInfoTypeVersion#stats (StoredInfoTypeStats)
+* Document start_time and end_time in filters
+* Add VERSION constant
+
 ### 0.9.1 / 2019-04-29
 
 * Add AUTHENTICATION.md guide.
