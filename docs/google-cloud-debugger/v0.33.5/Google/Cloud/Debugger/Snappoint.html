@@ -1,0 +1,356 @@
+---
+layout: yard_main
+title: "Class: Google::Cloud::Debugger::Snappoint - Stackdriver"
+css: 
+  - /docs/css/style.css
+  - /docs/css/common.css
+  - /css/yard-main.css
+js: 
+  - /docs/js/app.js
+  - /js/yard-main.js
+---
+<script type="text/javascript" charset="utf-8">
+  pathId = "Google::Cloud::Debugger::Snappoint";
+  relpath = '../../../';
+</script>
+
+
+<div class="nav_wrap">
+  <iframe id="nav" src="../../../class_list.html?1"></iframe>
+  <div id="resizer"></div>
+</div>
+
+<div id="main" tabindex="-1">
+  <div id="header">
+    <div id="menu">
+  
+    <a href="../../../_index.html">Index (S)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../Debugger.html" title="Google::Cloud::Debugger (module)">Debugger</a></span></span>
+     &raquo; 
+    <span class="title">Snappoint</span>
+  
+</div>
+
+    <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../../../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+    <div class="clear"></div>
+  </div>
+
+  <div id="content"><h1>Class: Google::Cloud::Debugger::Snappoint
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName"><span class='object_link'><a href="Breakpoint.html" title="Google::Cloud::Debugger::Breakpoint (class)">Breakpoint</a></span></span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next"><span class='object_link'><a href="Breakpoint.html" title="Google::Cloud::Debugger::Breakpoint (class)">Breakpoint</a></span></li>
+          
+            <li class="next">Google::Cloud::Debugger::Snappoint</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/google/cloud/debugger/snappoint.rb</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <h1>Snappoint</h1>
+
+<p>A kind of <span class='object_link'><a href="Breakpoint.html" title="Google::Cloud::Debugger::Breakpoint (class)">Breakpoint</a></span> that can be evaluated
+to capture the state of the program at time of evaluation. This is
+essentially a <span class='object_link'><a href="Breakpoint.html" title="Google::Cloud::Debugger::Breakpoint (class)">Breakpoint</a></span> with action attrubte
+set to <code>:CAPTURE</code></p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+  
+    <h2>
+      Constant Summary
+      <small><a href="#" class="constants_summary_toggle">collapse</a></small>
+    </h2>
+
+    <dl class="constants">
+      
+        <dt id="STACK_EVAL_DEPTH-constant" class="">STACK_EVAL_DEPTH =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Max number of top stacks to collect local variables information</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>5</span></pre></dd>
+      
+        <dt id="MAX_PAYLOAD_SIZE-constant" class="">MAX_PAYLOAD_SIZE =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Max size of payload a Snappoint collects</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>32768</span></pre></dd>
+      
+    </dl>
+  
+
+
+
+
+
+
+  <h2>Instance Attribute Summary</h2>
+  
+  <h3 class="inherited">Attributes inherited from <span class='object_link'><a href="Breakpoint.html" title="Google::Cloud::Debugger::Breakpoint (class)">Breakpoint</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="Breakpoint.html#action-instance_method" title="Google::Cloud::Debugger::Breakpoint#action (method)">#action</a></span>, <span class='object_link'><a href="Breakpoint.html#app_root-instance_method" title="Google::Cloud::Debugger::Breakpoint#app_root (method)">#app_root</a></span>, <span class='object_link'><a href="Breakpoint.html#condition-instance_method" title="Google::Cloud::Debugger::Breakpoint#condition (method)">#condition</a></span>, <span class='object_link'><a href="Breakpoint.html#create_time-instance_method" title="Google::Cloud::Debugger::Breakpoint#create_time (method)">#create_time</a></span>, <span class='object_link'><a href="Breakpoint.html#evaluated_expressions-instance_method" title="Google::Cloud::Debugger::Breakpoint#evaluated_expressions (method)">#evaluated_expressions</a></span>, <span class='object_link'><a href="Breakpoint.html#evaluated_log_message-instance_method" title="Google::Cloud::Debugger::Breakpoint#evaluated_log_message (method)">#evaluated_log_message</a></span>, <span class='object_link'><a href="Breakpoint.html#expressions-instance_method" title="Google::Cloud::Debugger::Breakpoint#expressions (method)">#expressions</a></span>, <span class='object_link'><a href="Breakpoint.html#final_time-instance_method" title="Google::Cloud::Debugger::Breakpoint#final_time (method)">#final_time</a></span>, <span class='object_link'><a href="Breakpoint.html#id-instance_method" title="Google::Cloud::Debugger::Breakpoint#id (method)">#id</a></span>, <span class='object_link'><a href="Breakpoint.html#is_final_state-instance_method" title="Google::Cloud::Debugger::Breakpoint#is_final_state (method)">#is_final_state</a></span>, <span class='object_link'><a href="Breakpoint.html#labels-instance_method" title="Google::Cloud::Debugger::Breakpoint#labels (method)">#labels</a></span>, <span class='object_link'><a href="Breakpoint.html#location-instance_method" title="Google::Cloud::Debugger::Breakpoint#location (method)">#location</a></span>, <span class='object_link'><a href="Breakpoint.html#log_level-instance_method" title="Google::Cloud::Debugger::Breakpoint#log_level (method)">#log_level</a></span>, <span class='object_link'><a href="Breakpoint.html#log_message_format-instance_method" title="Google::Cloud::Debugger::Breakpoint#log_message_format (method)">#log_message_format</a></span>, <span class='object_link'><a href="Breakpoint.html#stack_frames-instance_method" title="Google::Cloud::Debugger::Breakpoint#stack_frames (method)">#stack_frames</a></span>, <span class='object_link'><a href="Breakpoint.html#status-instance_method" title="Google::Cloud::Debugger::Breakpoint#status (method)">#status</a></span>, <span class='object_link'><a href="Breakpoint.html#user_email-instance_method" title="Google::Cloud::Debugger::Breakpoint#user_email (method)">#user_email</a></span>, <span class='object_link'><a href="Breakpoint.html#variable_table-instance_method" title="Google::Cloud::Debugger::Breakpoint#variable_table (method)">#variable_table</a></span></p>
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#evaluate-instance_method" title="#evaluate (instance method)">#<strong>evaluate</strong>(call_stack_bindings)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Evaluate the breakpoint unless it&#39;s already marked as completed.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods inherited from <span class='object_link'><a href="Breakpoint.html" title="Google::Cloud::Debugger::Breakpoint (class)">Breakpoint</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="Breakpoint.html#check_condition-instance_method" title="Google::Cloud::Debugger::Breakpoint#check_condition (method)">#check_condition</a></span>, <span class='object_link'><a href="Breakpoint.html#complete-instance_method" title="Google::Cloud::Debugger::Breakpoint#complete (method)">#complete</a></span>, <span class='object_link'><a href="Breakpoint.html#complete%3F-instance_method" title="Google::Cloud::Debugger::Breakpoint#complete? (method)">#complete?</a></span>, <span class='object_link'><a href="Breakpoint.html#eql%3F-instance_method" title="Google::Cloud::Debugger::Breakpoint#eql? (method)">#eql?</a></span>, <span class='object_link'><a href="Breakpoint.html#full_path-instance_method" title="Google::Cloud::Debugger::Breakpoint#full_path (method)">#full_path</a></span>, <span class='object_link'><a href="Breakpoint.html#line-instance_method" title="Google::Cloud::Debugger::Breakpoint#line (method)">#line</a></span>, <span class='object_link'><a href="Breakpoint.html#path-instance_method" title="Google::Cloud::Debugger::Breakpoint#path (method)">#path</a></span>, <span class='object_link'><a href="Breakpoint.html#set_error_state-instance_method" title="Google::Cloud::Debugger::Breakpoint#set_error_state (method)">#set_error_state</a></span>, <span class='object_link'><a href="Breakpoint.html#valid%3F-instance_method" title="Google::Cloud::Debugger::Breakpoint#valid? (method)">#valid?</a></span></p>
+
+  
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="evaluate-instance_method">
+  
+    #<strong>evaluate</strong>(call_stack_bindings)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Evaluate the breakpoint unless it&#39;s already marked as completed.
+Store evaluted expressions and stack frame variables in
+@evaluated_expressions, @stack_frames. Mark breakpoint complete if
+successfully evaluated.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>call_stack_bindings</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;Binding&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>An array of Ruby Binding
+objects, from the call stack that leads to the triggering of the
+breakpoints.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>True if evaluated successfully; false otherwise.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger/snappoint.rb', line 78</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_evaluate'>evaluate</span> <span class='id identifier rubyid_call_stack_bindings'>call_stack_bindings</span>
+  <span class='id identifier rubyid_synchronize'>synchronize</span> <span class='kw'>do</span>
+    <span class='id identifier rubyid_top_binding'>top_binding</span> <span class='op'>=</span> <span class='id identifier rubyid_call_stack_bindings'>call_stack_bindings</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span>
+
+    <span class='kw'>return</span> <span class='kw'>false</span> <span class='kw'>if</span> <span class='id identifier rubyid_complete?'>complete?</span> <span class='op'>||</span> <span class='op'>!</span><span class='id identifier rubyid_check_condition'>check_condition</span><span class='lparen'>(</span><span class='id identifier rubyid_top_binding'>top_binding</span><span class='rparen'>)</span>
+
+    <span class='kw'>begin</span>
+      <span class='id identifier rubyid_eval_expressions'>eval_expressions</span> <span class='id identifier rubyid_top_binding'>top_binding</span>
+      <span class='id identifier rubyid_eval_call_stack'>eval_call_stack</span> <span class='id identifier rubyid_call_stack_bindings'>call_stack_bindings</span>
+
+      <span class='id identifier rubyid_complete'>complete</span>
+    <span class='kw'>rescue</span> <span class='const'>StandardError</span>
+      <span class='kw'>return</span> <span class='kw'>false</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+
+  <span class='kw'>true</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+  <div id="footer">
+  <ul class="footer-links">
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby" title="Google Cloud on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> GitHub
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues" title="Google Cloud issues on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> Issues
+      </a>
+    </li>
+    <li>
+      <a href="http://stackoverflow.com/questions/tagged/google-cloud-ruby" title="Google Cloud on StackOverflow">
+      <img src="/google-cloud-ruby/img/icon-link-stackoverflow.svg" alt="StackOverflow icon"> StackOverflow
+    </a>
+    </li>
+    <li>
+      <a href="http://rubygems.org/gems/google-cloud" title="Google Cloud on RubyGems">
+        <img src="/google-cloud-ruby/img/icon-link-package-manager.svg" alt="RubyGems icon"> RubyGems
+      </a>
+    </li>
+  </ul>
+
+  <p>
+    Documentation generated by <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool">yard</a>.
+  </p>
+</div>
+
+</div>
