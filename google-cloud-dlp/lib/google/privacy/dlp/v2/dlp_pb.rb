@@ -5,7 +5,7 @@
 require 'google/protobuf'
 
 require 'google/api/annotations_pb'
-require 'google/api/resource_pb'
+require 'google/api/client_pb'
 require 'google/privacy/dlp/v2/storage_pb'
 require 'google/protobuf/duration_pb'
 require 'google/protobuf/empty_pb'
@@ -826,6 +826,9 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :big_query_field, :message, 3, "google.privacy.dlp.v2.BigQueryField"
     end
   end
+  add_message "google.privacy.dlp.v2.LargeCustomDictionaryStats" do
+    optional :approx_num_phrases, :int64, 1
+  end
   add_message "google.privacy.dlp.v2.StoredInfoTypeConfig" do
     optional :display_name, :string, 1
     optional :description, :string, 2
@@ -833,11 +836,17 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :large_custom_dictionary, :message, 3, "google.privacy.dlp.v2.LargeCustomDictionaryConfig"
     end
   end
+  add_message "google.privacy.dlp.v2.StoredInfoTypeStats" do
+    oneof :type do
+      optional :large_custom_dictionary, :message, 1, "google.privacy.dlp.v2.LargeCustomDictionaryStats"
+    end
+  end
   add_message "google.privacy.dlp.v2.StoredInfoTypeVersion" do
     optional :config, :message, 1, "google.privacy.dlp.v2.StoredInfoTypeConfig"
     optional :create_time, :message, 2, "google.protobuf.Timestamp"
     optional :state, :enum, 3, "google.privacy.dlp.v2.StoredInfoTypeState"
     repeated :errors, :message, 4, "google.privacy.dlp.v2.Error"
+    optional :stats, :message, 5, "google.privacy.dlp.v2.StoredInfoTypeStats"
   end
   add_message "google.privacy.dlp.v2.StoredInfoType" do
     optional :name, :string, 1
@@ -1067,7 +1076,9 @@ module Google
         ListDeidentifyTemplatesResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.ListDeidentifyTemplatesResponse").msgclass
         DeleteDeidentifyTemplateRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.DeleteDeidentifyTemplateRequest").msgclass
         LargeCustomDictionaryConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.LargeCustomDictionaryConfig").msgclass
+        LargeCustomDictionaryStats = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.LargeCustomDictionaryStats").msgclass
         StoredInfoTypeConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.StoredInfoTypeConfig").msgclass
+        StoredInfoTypeStats = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.StoredInfoTypeStats").msgclass
         StoredInfoTypeVersion = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.StoredInfoTypeVersion").msgclass
         StoredInfoType = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.StoredInfoType").msgclass
         CreateStoredInfoTypeRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.CreateStoredInfoTypeRequest").msgclass

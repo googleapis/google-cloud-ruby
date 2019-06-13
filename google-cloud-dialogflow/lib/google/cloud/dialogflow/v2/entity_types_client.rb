@@ -29,6 +29,7 @@ require "google/longrunning/operations_client"
 
 require "google/cloud/dialogflow/v2/entity_type_pb"
 require "google/cloud/dialogflow/v2/credentials"
+require "google/cloud/dialogflow/version"
 
 module Google
   module Cloud
@@ -205,7 +206,7 @@ module Google
               updater_proc = credentials.updater_proc
             end
 
-            package_version = Gem.loaded_specs['google-cloud-dialogflow'].version.version
+            package_version = Google::Cloud::Dialogflow::VERSION
 
             google_api_client = "gl-ruby/#{RUBY_VERSION}"
             google_api_client << " #{lib_name}/#{lib_version}" if lib_name

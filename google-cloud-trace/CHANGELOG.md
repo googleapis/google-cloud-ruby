@@ -1,5 +1,10 @@
 # Release History
 
+### 0.34.3 / 2019-06-11
+
+* Accept Numeric in Google::Cloud::Trace::Utils.time_to_grpc
+* Add VERSION constant
+
 ### 0.34.2 / 2019-04-29
 
 * Add AUTHENTICATION.md guide.

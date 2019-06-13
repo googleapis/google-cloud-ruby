@@ -28,6 +28,7 @@ require "google/gax"
 require "google/iam/v1/iam_policy_pb"
 require "google/pubsub/v1/pubsub_pb"
 require "google/cloud/pubsub/v1/credentials"
+require "google/cloud/pubsub/version"
 
 module Google
   module Cloud
@@ -206,7 +207,7 @@ module Google
               updater_proc = credentials.updater_proc
             end
 
-            package_version = Gem.loaded_specs['google-cloud-pubsub'].version.version
+            package_version = Google::Cloud::PubSub::VERSION
 
             google_api_client = "gl-ruby/#{RUBY_VERSION}"
             google_api_client << " #{lib_name}/#{lib_version}" if lib_name

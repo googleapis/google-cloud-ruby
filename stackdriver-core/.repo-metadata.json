@@ -1,0 +1,5 @@
+{
+    "name": "stackdrivercore",
+    "language": "ruby",
+    "distribution_name": "stackdriver-core"
+}

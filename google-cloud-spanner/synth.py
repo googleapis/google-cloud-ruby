@@ -164,6 +164,38 @@ s.replace(
     'https://googleapis.github.io/google-cloud-ruby'
 )
 
+# https://github.com/googleapis/google-cloud-ruby/issues/3058
+s.replace(
+    'lib/google/cloud/spanner/admin/database/v1/*_admin_client.rb',
+    '(require \".*credentials\"\n)\n',
+    '\\1require "google/cloud/spanner/version"\n\n'
+)
+s.replace(
+    'lib/google/cloud/spanner/admin/database/v1/*_admin_client.rb',
+    'Gem.loaded_specs\[.*\]\.version\.version',
+    'Google::Cloud::Spanner::VERSION'
+)
+s.replace(
+    'lib/google/cloud/spanner/admin/instance/v1/*_admin_client.rb',
+    '(require \".*credentials\"\n)\n',
+    '\\1require "google/cloud/spanner/version"\n\n'
+)
+s.replace(
+    'lib/google/cloud/spanner/admin/instance/v1/*_admin_client.rb',
+    'Gem.loaded_specs\[.*\]\.version\.version',
+    'Google::Cloud::Spanner::VERSION'
+)
+s.replace(
+    'lib/google/cloud/spanner/v1/spanner_client.rb',
+    '(require \".*credentials\"\n)\n',
+    '\\1require "google/cloud/spanner/version"\n\n'
+)
+s.replace(
+    'lib/google/cloud/spanner/v1/spanner_client.rb',
+    'Gem.loaded_specs\[.*\]\.version\.version',
+    'Google::Cloud::Spanner::VERSION'
+)
+
 # Exception tests have to check for both custom errors and retry wrapper errors
 for version in ['v1']:
     s.replace(

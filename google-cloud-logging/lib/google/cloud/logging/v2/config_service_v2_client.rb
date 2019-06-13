@@ -27,6 +27,7 @@ require "google/gax"
 
 require "google/logging/v2/logging_config_pb"
 require "google/cloud/logging/v2/credentials"
+require "google/cloud/logging/version"
 
 module Google
   module Cloud
@@ -187,7 +188,7 @@ module Google
               updater_proc = credentials.updater_proc
             end
 
-            package_version = Gem.loaded_specs['google-cloud-logging'].version.version
+            package_version = Google::Cloud::Logging::VERSION
 
             google_api_client = "gl-ruby/#{RUBY_VERSION}"
             google_api_client << " #{lib_name}/#{lib_version}" if lib_name

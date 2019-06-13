@@ -190,7 +190,7 @@ describe Google::Cloud::Firestore::Client, :transaction, :mock_firestore do
     firestore_mock.expect :begin_transaction, begin_tx_resp, [database_path, options_: transaction_opt, options: default_options]
     firestore_mock.expect :commit, write_commit_resp, [database_path, create_writes, transaction: transaction_id, options: default_options]
 
-    resp = firestore.transaction do |tx|
+    resp = firestore.transaction commit_response: true do |tx|
       tx.create(document_path, { name: "Mike" })
     end
 
@@ -203,7 +203,7 @@ describe Google::Cloud::Firestore::Client, :transaction, :mock_firestore do
     firestore_mock.expect :commit, write_commit_resp, [database_path, create_writes, transaction: transaction_id, options: default_options]
 
     doc = firestore.doc document_path
-    resp = firestore.transaction do |tx|
+    resp = firestore.transaction commit_response: true do |tx|
       tx.create(doc, { name: "Mike" })
     end
 
@@ -224,7 +224,7 @@ describe Google::Cloud::Firestore::Client, :transaction, :mock_firestore do
     firestore_mock.expect :begin_transaction, begin_tx_resp, [database_path, options_: transaction_opt, options: default_options]
     firestore_mock.expect :commit, write_commit_resp, [database_path, set_writes, transaction: transaction_id, options: default_options]
 
-    resp = firestore.transaction do |tx|
+    resp = firestore.transaction commit_response: true do |tx|
       tx.set(document_path, { name: "Mike" })
     end
 
@@ -237,7 +237,7 @@ describe Google::Cloud::Firestore::Client, :transaction, :mock_firestore do
     firestore_mock.expect :commit, write_commit_resp, [database_path, set_writes, transaction: transaction_id, options: default_options]
 
     doc = firestore.doc document_path
-    resp = firestore.transaction do |tx|
+    resp = firestore.transaction commit_response: true do |tx|
       tx.set(doc, { name: "Mike" })
     end
 
@@ -258,7 +258,7 @@ describe Google::Cloud::Firestore::Client, :transaction, :mock_firestore do
     firestore_mock.expect :begin_transaction, begin_tx_resp, [database_path, options_: transaction_opt, options: default_options]
     firestore_mock.expect :commit, write_commit_resp, [database_path, update_writes, transaction: transaction_id, options: default_options]
 
-    resp = firestore.transaction do |tx|
+    resp = firestore.transaction commit_response: true do |tx|
       tx.update(document_path, { name: "Mike" })
     end
 
@@ -271,7 +271,7 @@ describe Google::Cloud::Firestore::Client, :transaction, :mock_firestore do
     firestore_mock.expect :commit, write_commit_resp, [database_path, update_writes, transaction: transaction_id, options: default_options]
 
     doc = firestore.doc document_path
-    resp = firestore.transaction do |tx|
+    resp = firestore.transaction commit_response: true do |tx|
       tx.update(doc, { name: "Mike" })
     end
 
@@ -292,7 +292,7 @@ describe Google::Cloud::Firestore::Client, :transaction, :mock_firestore do
     firestore_mock.expect :begin_transaction, begin_tx_resp, [database_path, options_: transaction_opt, options: default_options]
     firestore_mock.expect :commit, write_commit_resp, [database_path, delete_writes, transaction: transaction_id, options: default_options]
 
-    resp = firestore.transaction do |tx|
+    resp = firestore.transaction commit_response: true do |tx|
       tx.delete document_path
     end
 
@@ -305,7 +305,7 @@ describe Google::Cloud::Firestore::Client, :transaction, :mock_firestore do
     firestore_mock.expect :commit, write_commit_resp, [database_path, delete_writes, transaction: transaction_id, options: default_options]
 
     doc = firestore.doc document_path
-    resp = firestore.transaction do |tx|
+    resp = firestore.transaction commit_response: true do |tx|
       tx.delete doc
     end
 
@@ -313,11 +313,29 @@ describe Google::Cloud::Firestore::Client, :transaction, :mock_firestore do
     resp.commit_time.must_equal commit_time
   end
 
-  it "returns nil when no work is done in the transaction" do
+  it "returns nil when the transaction is empty and commit_response is false or nil" do
     resp = firestore.transaction do |tx|
       # no op
     end
 
+    resp.must_be :nil?
+  end
+
+  it "returns the user-provided return value from the transaction when commit_response is false or nil" do
+    resp = firestore.transaction do |tx|
+      # no op
+      "my-return-value"
+    end
+
+    resp.must_equal "my-return-value"
+  end
+
+  it "returns commit_time nil when no work is done in the transaction with commit_response: true" do
+    resp = firestore.transaction commit_response: true do |tx|
+      "my-return-value"
+    end
+
+    resp.must_be_kind_of Google::Cloud::Firestore::CommitResponse
     resp.commit_time.must_be :nil?
   end
 
@@ -326,7 +344,7 @@ describe Google::Cloud::Firestore::Client, :transaction, :mock_firestore do
     firestore_mock.expect :begin_transaction, begin_tx_resp, [database_path, options_: transaction_opt, options: default_options]
     firestore_mock.expect :commit, write_commit_resp, [database_path, all_writes, transaction: transaction_id, options: default_options]
 
-    resp = firestore.transaction do |tx|
+    resp = firestore.transaction commit_response: true do |tx|
       tx.create(document_path, { name: "Mike" })
       tx.set(document_path, { name: "Mike" })
       tx.update(document_path, { name: "Mike" })
@@ -345,7 +363,7 @@ describe Google::Cloud::Firestore::Client, :transaction, :mock_firestore do
     doc_ref = firestore.doc document_path
     doc_ref.must_be_kind_of Google::Cloud::Firestore::DocumentReference
 
-    resp = firestore.transaction do |tx|
+    resp = firestore.transaction commit_response: true do |tx|
       tx.create(doc_ref, { name: "Mike" })
       tx.set(doc_ref, { name: "Mike" })
       tx.update(doc_ref, { name: "Mike" })
@@ -362,7 +380,7 @@ describe Google::Cloud::Firestore::Client, :transaction, :mock_firestore do
 
     outside_transaction_obj = nil
 
-    resp = firestore.transaction do |tx|
+    resp = firestore.transaction commit_response: true do |tx|
       tx.wont_be :closed?
       tx.firestore.must_equal firestore
 

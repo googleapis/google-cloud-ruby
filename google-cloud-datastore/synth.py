@@ -54,8 +54,8 @@ s.replace(
 # https://github.com/googleapis/google-cloud-ruby/issues/3058
 s.replace(
     'lib/google/cloud/datastore/v1/*_client.rb',
-    'require "google/cloud/datastore/v1/credentials"',
-    'require "google/cloud/datastore/v1/credentials"\nrequire "google/cloud/datastore/version"'
+    '(require \".*credentials\"\n)\n',
+    '\\1require "google/cloud/datastore/version"\n\n'
 )
 s.replace(
     'lib/google/cloud/datastore/v1/*_client.rb',

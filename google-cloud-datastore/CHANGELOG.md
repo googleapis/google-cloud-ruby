@@ -1,5 +1,10 @@
 # Release History
 
+### 1.5.3 / 2019-06-12
+
+* Enable grpc.service_config_disable_resolution
+* Use VERSION constant in GAPIC client
+
 ### 1.5.2 / 2019-04-29
 
 * Add AUTHENTICATION.md guide.

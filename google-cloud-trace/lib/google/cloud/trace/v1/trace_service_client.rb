@@ -27,6 +27,7 @@ require "google/gax"
 
 require "google/devtools/cloudtrace/v1/trace_pb"
 require "google/cloud/trace/v1/credentials"
+require "google/cloud/trace/version"
 
 module Google
   module Cloud
@@ -135,7 +136,7 @@ module Google
               updater_proc = credentials.updater_proc
             end
 
-            package_version = Gem.loaded_specs['google-cloud-trace'].version.version
+            package_version = Google::Cloud::Trace::VERSION
 
             google_api_client = "gl-ruby/#{RUBY_VERSION}"
             google_api_client << " #{lib_name}/#{lib_version}" if lib_name

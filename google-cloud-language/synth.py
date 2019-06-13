@@ -130,3 +130,26 @@ s.replace(
     'README.md\n',
     'README.md\nAUTHENTICATION.md\nLICENSE\n'
 )
+
+# https://github.com/googleapis/google-cloud-ruby/issues/3058
+s.replace(
+    'google-cloud-language.gemspec',
+    '\nGem::Specification.new do',
+    'require File.expand_path("../lib/google/cloud/language/version", __FILE__)\n\nGem::Specification.new do'
+)
+s.replace(
+    'google-cloud-language.gemspec',
+    '(gem.version\s+=\s+).\d+.\d+.\d.*$',
+    '\\1Google::Cloud::Language::VERSION'
+)
+for version in ['v1', 'v1beta2']:
+    s.replace(
+        f'lib/google/cloud/language/{version}/*_client.rb',
+        f'(require \".*credentials\"\n)\n',
+        f'\\1require "google/cloud/language/version"\n\n'
+    )
+    s.replace(
+        f'lib/google/cloud/language/{version}/*_client.rb',
+        'Gem.loaded_specs\[.*\]\.version\.version',
+        'Google::Cloud::Language::VERSION'
+    )

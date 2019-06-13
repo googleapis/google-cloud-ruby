@@ -79,8 +79,24 @@ module Google
             # in the response field. The returned operation is automatically deleted
             # after a few hours, so there is no need to call DeleteOperation.
             rpc :UpdateInstance, UpdateInstanceRequest, Google::Longrunning::Operation
-            # Failover the master role to current replica node against a specific
-            # STANDARD tier redis instance.
+            # Import a Redis RDB snapshot file from Cloud Storage into a Redis instance.
+            #
+            # Redis may stop serving during this operation. Instance state will be
+            # IMPORTING for entire operation. When complete, the instance will contain
+            # only data from the imported file.
+            #
+            # The returned operation is automatically deleted after a few hours, so
+            # there is no need to call DeleteOperation.
+            rpc :ImportInstance, ImportInstanceRequest, Google::Longrunning::Operation
+            # Export Redis instance data into a Redis RDB format file in Cloud Storage.
+            #
+            # Redis will continue serving during this operation.
+            #
+            # The returned operation is automatically deleted after a few hours, so
+            # there is no need to call DeleteOperation.
+            rpc :ExportInstance, ExportInstanceRequest, Google::Longrunning::Operation
+            # Initiates a failover of the master node to current replica node for a
+            # specific STANDARD tier Cloud Memorystore for Redis instance.
             rpc :FailoverInstance, FailoverInstanceRequest, Google::Longrunning::Operation
             # Deletes a specific Redis instance.  Instance stops serving and data is
             # deleted.

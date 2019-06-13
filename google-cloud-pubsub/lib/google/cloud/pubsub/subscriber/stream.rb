@@ -48,8 +48,8 @@ module Google
             @pause_cond = new_cond
 
             @inventory = Inventory.new self, @subscriber.stream_inventory
-            @callback_thread_pool = Concurrent::FixedThreadPool.new \
-              @subscriber.callback_threads
+            @callback_thread_pool = Concurrent::CachedThreadPool.new \
+              max_threads: @subscriber.callback_threads
 
             @stream_keepalive_task = Concurrent::TimerTask.new(
               execution_interval: 30
@@ -181,21 +181,25 @@ module Google
           # rubocop:disable all
 
           def background_run
-            # Don't allow a stream to restart if already stopped
-            return if @stopped
+            synchronize do
+              # Don't allow a stream to restart if already stopped
+              return if @stopped
 
-            # signal to the previous queue to shut down
-            old_queue = []
-            old_queue = @request_queue.quit_and_dump_queue if @request_queue
+              @stopped = false
+              @paused  = false
 
-            # Always create a new request queue and enum
-            @request_queue = EnumeratorQueue.new self
-            @request_queue.push initial_input_request
-            old_queue.each { |obj| @request_queue.push obj }
+              # signal to the previous queue to shut down
+              old_queue = []
+              old_queue = @request_queue.quit_and_dump_queue if @request_queue
+
+              # Always create a new request queue
+              @request_queue = EnumeratorQueue.new self
+              @request_queue.push initial_input_request
+              old_queue.each { |obj| @request_queue.push obj }
+            end
+
+            # Call the StreamingPull API to get the response enumerator
             enum = @subscriber.service.streaming_pull @request_queue.each
-
-            @stopped = nil
-            @paused  = nil
 
             loop do
               synchronize do
@@ -242,7 +246,7 @@ module Google
             raise RestartStream unless synchronize { @stopped }
 
             # We must be stopped, tell the stream to quit.
-            @request_queue.push self
+            stop
           rescue GRPC::Cancelled, GRPC::DeadlineExceeded, GRPC::Internal,
                  GRPC::ResourceExhausted, GRPC::Unauthenticated,
                  GRPC::Unavailable, GRPC::Core::CallError
@@ -253,10 +257,7 @@ module Google
           rescue RestartStream
             retry
           rescue StandardError => e
-            synchronize do
-              @subscriber.error! e
-              start_streaming! unless @stopped
-            end
+            @subscriber.error! e
 
             retry
           end
@@ -266,13 +267,17 @@ module Google
           def perform_callback_async rec_msg
             return unless callback_thread_pool.running?
 
-            Concurrent::Future.new executor: callback_thread_pool do
+            Concurrent::Promises.future_on(
+              callback_thread_pool, @subscriber, @inventory, rec_msg
+            ) do |sub, inv, msg|
               begin
-                @subscriber.callback.call rec_msg
+                sub.callback.call msg
               rescue StandardError => callback_error
-                @subscriber.error! callback_error
+                sub.error! callback_error
+              ensure
+                inv.remove msg.ack_id
               end
-            end.execute
+            end
           end
 
           def start_streaming!
@@ -280,9 +285,6 @@ module Google
             # dies because it was stopped, or because of an unhandled error that
             # could not be recovered from, so be it.
             return if @background_thread
-
-            @stopped = false
-            @paused  = false
 
             # create new background thread to handle new enumerator
             @background_thread = Thread.new { background_run }

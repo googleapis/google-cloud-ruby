@@ -151,6 +151,28 @@ s.replace(
     'README.md\nAUTHENTICATION.md\nLICENSE\n'
 )
 
+# https://github.com/googleapis/google-cloud-ruby/issues/3058
+s.replace(
+    'google-cloud-kms.gemspec',
+    '\nGem::Specification.new do',
+    'require File.expand_path("../lib/google/cloud/kms/version", __FILE__)\n\nGem::Specification.new do'
+)
+s.replace(
+    'google-cloud-kms.gemspec',
+    '(gem.version\s+=\s+).\d+.\d+.\d.*$',
+    '\\1Google::Cloud::Kms::VERSION'
+)
+s.replace(
+    'lib/google/cloud/kms/v1/*_client.rb',
+    '(require \".*credentials\"\n)\n',
+    '\\1require "google/cloud/kms/version"\n\n'
+)
+s.replace(
+    'lib/google/cloud/kms/v1/*_client.rb',
+    'Gem.loaded_specs\[.*\]\.version\.version',
+    'Google::Cloud::Kms::VERSION'
+)
+
 # Generate the helper methods
 call('bundle update && bundle exec rake generate_partials', shell=True)
 

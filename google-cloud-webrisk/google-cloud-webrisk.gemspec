@@ -1,9 +1,10 @@
 # -*- ruby -*-
 # encoding: utf-8
+require File.expand_path("../lib/google/cloud/webrisk/version", __FILE__)
 
 Gem::Specification.new do |gem|
   gem.name          = "google-cloud-webrisk"
-  gem.version       = "0.1.1"
+  gem.version       = Google::Cloud::Webrisk::VERSION
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"

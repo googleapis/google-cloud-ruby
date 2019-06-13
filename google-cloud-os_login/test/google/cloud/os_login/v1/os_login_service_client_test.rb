@@ -125,7 +125,7 @@ describe Google::Cloud::OsLogin::V1::OsLoginServiceClient do
           client = Google::Cloud::OsLogin.new(version: :v1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.delete_posix_account(formatted_name)
           end
 
@@ -194,7 +194,7 @@ describe Google::Cloud::OsLogin::V1::OsLoginServiceClient do
           client = Google::Cloud::OsLogin.new(version: :v1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.delete_ssh_public_key(formatted_name)
           end
 
@@ -269,7 +269,7 @@ describe Google::Cloud::OsLogin::V1::OsLoginServiceClient do
           client = Google::Cloud::OsLogin.new(version: :v1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.get_login_profile(formatted_name)
           end
 
@@ -349,7 +349,7 @@ describe Google::Cloud::OsLogin::V1::OsLoginServiceClient do
           client = Google::Cloud::OsLogin.new(version: :v1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.get_ssh_public_key(formatted_name)
           end
 
@@ -426,7 +426,7 @@ describe Google::Cloud::OsLogin::V1::OsLoginServiceClient do
           client = Google::Cloud::OsLogin.new(version: :v1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.import_ssh_public_key(formatted_parent, ssh_public_key)
           end
 
@@ -510,7 +510,7 @@ describe Google::Cloud::OsLogin::V1::OsLoginServiceClient do
           client = Google::Cloud::OsLogin.new(version: :v1)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.update_ssh_public_key(formatted_name, ssh_public_key)
           end
 

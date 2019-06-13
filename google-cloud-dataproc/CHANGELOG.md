@@ -1,5 +1,22 @@
 # Release History
 
+### 0.4.0 / 2019-06-11
+
+* Add AutoscalingPolicyServiceClient
+  * AutoscalingPolicyServiceClient#create_autoscaling_policy
+  * AutoscalingPolicyServiceClient#update_autoscaling_policy
+  * AutoscalingPolicyServiceClient#get_autoscaling_policy
+  * AutoscalingPolicyServiceClient#list_autoscaling_policies
+  * AutoscalingPolicyServiceClient#delete_autoscaling_policy
+  * Add ClusterConfig attributes:
+    * Add ClusterConfig#autoscaling_config (AutoscalingConfig)
+    * Add ClusterConfig#endpoint_config (EndpointConfig)
+    * Add ClusterConfig#security_config (SecurityConfig)
+  * Add GceClusterConfig#reservation_affinity (ReservationAffinity)
+  * Add SoftwareConfig#optional_components (Component)
+  * Add Job#spark_r_job (SparkRJob)
+* Add VERSION constant
+
 ### 0.3.1 / 2019-04-29
 
 * Add AUTHENTICATION.md guide.

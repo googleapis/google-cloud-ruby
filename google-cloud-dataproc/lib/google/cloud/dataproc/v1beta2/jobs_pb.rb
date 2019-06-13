@@ -91,6 +91,14 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :query_list, :message, 2, "google.cloud.dataproc.v1beta2.QueryList"
     end
   end
+  add_message "google.cloud.dataproc.v1beta2.SparkRJob" do
+    optional :main_r_file_uri, :string, 1
+    repeated :args, :string, 2
+    repeated :file_uris, :string, 3
+    repeated :archive_uris, :string, 4
+    map :properties, :string, :string, 5
+    optional :logging_config, :message, 6, "google.cloud.dataproc.v1beta2.LoggingConfig"
+  end
   add_message "google.cloud.dataproc.v1beta2.JobPlacement" do
     optional :cluster_name, :string, 1
     optional :cluster_uuid, :string, 2
@@ -158,6 +166,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :pyspark_job, :message, 5, "google.cloud.dataproc.v1beta2.PySparkJob"
       optional :hive_job, :message, 6, "google.cloud.dataproc.v1beta2.HiveJob"
       optional :pig_job, :message, 7, "google.cloud.dataproc.v1beta2.PigJob"
+      optional :spark_r_job, :message, 21, "google.cloud.dataproc.v1beta2.SparkRJob"
       optional :spark_sql_job, :message, 12, "google.cloud.dataproc.v1beta2.SparkSqlJob"
     end
   end
@@ -225,6 +234,7 @@ module Google
         HiveJob = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1beta2.HiveJob").msgclass
         SparkSqlJob = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1beta2.SparkSqlJob").msgclass
         PigJob = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1beta2.PigJob").msgclass
+        SparkRJob = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1beta2.SparkRJob").msgclass
         JobPlacement = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1beta2.JobPlacement").msgclass
         JobStatus = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1beta2.JobStatus").msgclass
         JobStatus::State = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1beta2.JobStatus.State").enummodule

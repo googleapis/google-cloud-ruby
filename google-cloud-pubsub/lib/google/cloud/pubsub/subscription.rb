@@ -501,8 +501,12 @@ module Google
         end
 
         ##
-        # Create a {Subscriber} object that receives  and processes messages
-        # using the code provided in the callback.
+        # Create a {Subscriber} object that receives and processes messages
+        # using the code provided in the callback. Messages passed to the
+        # callback should acknowledge ({ReceivedMessage#acknowledge!}) or reject
+        # ({ReceivedMessage#reject!}) the message. If no action is taken, the
+        # message will be removed from the subscriber and made available for
+        # redelivery after the callback is completed.
         #
         # @param [Numeric] deadline The default number of seconds the stream
         #   will hold received messages before modifying the message's ack

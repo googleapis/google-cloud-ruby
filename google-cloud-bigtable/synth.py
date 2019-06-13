@@ -137,8 +137,8 @@ s.replace(
 # https://github.com/googleapis/google-cloud-ruby/issues/3058
 s.replace(
     'lib/google/cloud/bigtable/admin/v2/bigtable_*_admin_client.rb',
-    'require "google/cloud/bigtable/admin/v2/credentials"',
-    'require "google/cloud/bigtable/admin/v2/credentials"\nrequire "google/cloud/bigtable/version"'
+    '(require \".*credentials\"\n)\n',
+    '\\1require "google/cloud/bigtable/version"\n\n'
 )
 s.replace(
     'lib/google/cloud/bigtable/admin/v2/bigtable_*_admin_client.rb',
@@ -147,8 +147,8 @@ s.replace(
 )
 s.replace(
     'lib/google/cloud/bigtable/v2/bigtable_client.rb',
-    'require "google/cloud/bigtable/v2/credentials"',
-    'require "google/cloud/bigtable/v2/credentials"\nrequire "google/cloud/bigtable/version"'
+    '(require \".*credentials\"\n)\n',
+    '\\1require "google/cloud/bigtable/version"\n\n'
 )
 s.replace(
     'lib/google/cloud/bigtable/v2/bigtable_client.rb',

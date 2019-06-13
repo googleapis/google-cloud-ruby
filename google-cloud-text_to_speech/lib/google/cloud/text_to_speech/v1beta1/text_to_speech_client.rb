@@ -27,6 +27,7 @@ require "google/gax"
 
 require "google/cloud/texttospeech/v1beta1/cloud_tts_pb"
 require "google/cloud/text_to_speech/v1beta1/credentials"
+require "google/cloud/text_to_speech/version"
 
 module Google
   module Cloud
@@ -120,7 +121,7 @@ module Google
               updater_proc = credentials.updater_proc
             end
 
-            package_version = Gem.loaded_specs['google-cloud-text_to_speech'].version.version
+            package_version = Google::Cloud::TextToSpeech::VERSION
 
             google_api_client = "gl-ruby/#{RUBY_VERSION}"
             google_api_client << " #{lib_name}/#{lib_version}" if lib_name

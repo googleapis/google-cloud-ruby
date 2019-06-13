@@ -50,23 +50,6 @@ describe Google::Cloud::PubSub, :pubsub do
       topics.each do |topic|
         topic.must_be_kind_of Google::Cloud::PubSub::Topic
       end
-      topics.token.must_be :nil?
-    end
-
-    it "should return a token if there are more results" do
-      topic_count = pubsub.topics.all.count
-      topics = pubsub.topics max: (topic_count - 1)
-      topics.count.must_equal (topic_count - 1)
-      topics.each do |topic|
-        topic.must_be_kind_of Google::Cloud::PubSub::Topic
-      end
-      topics.token.wont_be :nil?
-
-      # retrieve the next list of topics
-      next_topics = pubsub.topics token: topics.token
-      next_topics.count.must_equal 1
-      next_topics.first.must_be_kind_of Google::Cloud::PubSub::Topic
-      next_topics.token.must_be :nil?
     end
 
     it "should be created, updated and deleted" do
@@ -120,23 +103,6 @@ describe Google::Cloud::PubSub, :pubsub do
         # subscriptions on project are objects...
         subscription.must_be_kind_of Google::Cloud::PubSub::Subscription
       end
-      subscriptions.token.must_be :nil?
-    end
-
-    it "should return a token if there are more results" do
-      sub_count = pubsub.subscriptions.all.count
-      subscriptions = pubsub.subscriptions max: (sub_count - 1)
-      subscriptions.count.must_equal (sub_count - 1)
-      subscriptions.each do |subscription|
-        subscription.must_be_kind_of Google::Cloud::PubSub::Subscription
-      end
-      subscriptions.token.wont_be :nil?
-
-      # retrieve the next list of subscriptions
-      next_subs = pubsub.subscriptions token: subscriptions.token
-      next_subs.count.must_equal 1
-      next_subs.first.must_be_kind_of Google::Cloud::PubSub::Subscription
-      next_subs.token.must_be :nil?
     end
   end
 
@@ -155,28 +121,12 @@ describe Google::Cloud::PubSub, :pubsub do
     end
 
     it "should list all subscriptions registered to the topic" do
-      subscriptions = topic.subscriptions
+      subscriptions = topic.subscriptions.all
       subscriptions.count.must_equal subs.count
       subscriptions.each do |subscription|
         # subscriptions on topic are strings...
         subscription.must_be_kind_of Google::Cloud::PubSub::Subscription
       end
-      subscriptions.token.must_be :nil?
-    end
-
-    it "should return a token if there are more results" do
-      subscriptions = topic.subscriptions max: (subs.count - 1)
-      subscriptions.count.must_equal (subs.count - 1)
-      subscriptions.each do |subscription|
-        subscription.must_be_kind_of Google::Cloud::PubSub::Subscription
-      end
-      subscriptions.token.wont_be :nil?
-
-      # retrieve the next list of subscriptions
-      next_subs = topic.subscriptions token: subscriptions.token
-      next_subs.count.must_equal 1
-      next_subs.first.must_be_kind_of Google::Cloud::PubSub::Subscription
-      next_subs.token.must_be :nil?
     end
 
     it "should allow creation of a subscription with options" do
@@ -362,28 +312,11 @@ describe Google::Cloud::PubSub, :pubsub do
     end
 
     it "should list all snapshots registered to the project" do
-      snapshots = pubsub.snapshots
+      snapshots = pubsub.snapshots.all
       snapshots.each do |snapshot|
         # snapshots on project are objects...
         snapshot.must_be_kind_of Google::Cloud::PubSub::Snapshot
       end
-      snapshots.token.must_be :nil?
-    end
-
-    it "should return a token if there are more results" do
-      sub_count = pubsub.snapshots.count
-      snapshots = pubsub.snapshots max: (sub_count - 1)
-      snapshots.count.must_equal (sub_count - 1)
-      snapshots.each do |snapshot|
-        snapshot.must_be_kind_of Google::Cloud::PubSub::Snapshot
-      end
-      snapshots.token.wont_be :nil?
-
-      # retrieve the next list of snapshots
-      next_subs = pubsub.snapshots token: snapshots.token
-      next_subs.count.must_equal 1
-      next_subs.first.must_be_kind_of Google::Cloud::PubSub::Snapshot
-      next_subs.token.must_be :nil?
     end
   end
 end

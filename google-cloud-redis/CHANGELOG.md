@@ -1,5 +1,13 @@
 # Release History
 
+### 0.4.0 / 2019-06-11
+
+* Add #import_instance and #export_instance
+* Add Instance#persistence_iam_identity
+* Add Instance::State::IMPORTING
+* Update documentation to REDIS_4_0 for Instance#redis_version
+* Add VERSION constant
+
 ### 0.3.0 / 2019-04-29
 
 * Add Instance#persistence_iam_identity attribute.

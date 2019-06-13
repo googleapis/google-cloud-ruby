@@ -110,6 +110,28 @@ s.replace(
     'README.md\nAUTHENTICATION.md\nLICENSE\n'
 )
 
+# https://github.com/googleapis/google-cloud-ruby/issues/3058
+s.replace(
+    'google-cloud-dlp.gemspec',
+    '\nGem::Specification.new do',
+    'require File.expand_path("../lib/google/cloud/dlp/version", __FILE__)\n\nGem::Specification.new do'
+)
+s.replace(
+    'google-cloud-dlp.gemspec',
+    '(gem.version\s+=\s+).\d+.\d+.\d.*$',
+    '\\1Google::Cloud::Dlp::VERSION'
+)
+s.replace(
+    'lib/google/cloud/dlp/v2/*_client.rb',
+    '(require \".*credentials\"\n)\n',
+    '\\1require "google/cloud/dlp/version"\n\n'
+)
+s.replace(
+    'lib/google/cloud/dlp/v2/*_client.rb',
+    'Gem.loaded_specs\[.*\]\.version\.version',
+    'Google::Cloud::Dlp::VERSION'
+)
+
 # Exception tests have to check for both custom errors and retry wrapper errors
 for version in ['v2']:
     s.replace(

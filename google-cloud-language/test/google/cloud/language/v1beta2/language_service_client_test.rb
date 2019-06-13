@@ -130,7 +130,7 @@ describe Google::Cloud::Language::V1beta2::LanguageServiceClient do
           client = Google::Cloud::Language.new(version: :v1beta2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1beta2 do
             client.analyze_sentiment(document)
           end
 
@@ -204,7 +204,7 @@ describe Google::Cloud::Language::V1beta2::LanguageServiceClient do
           client = Google::Cloud::Language.new(version: :v1beta2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1beta2 do
             client.analyze_entities(document)
           end
 
@@ -278,7 +278,7 @@ describe Google::Cloud::Language::V1beta2::LanguageServiceClient do
           client = Google::Cloud::Language.new(version: :v1beta2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1beta2 do
             client.analyze_entity_sentiment(document)
           end
 
@@ -352,7 +352,7 @@ describe Google::Cloud::Language::V1beta2::LanguageServiceClient do
           client = Google::Cloud::Language.new(version: :v1beta2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1beta2 do
             client.analyze_syntax(document)
           end
 
@@ -425,7 +425,7 @@ describe Google::Cloud::Language::V1beta2::LanguageServiceClient do
           client = Google::Cloud::Language.new(version: :v1beta2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1beta2 do
             client.classify_text(document)
           end
 
@@ -503,7 +503,7 @@ describe Google::Cloud::Language::V1beta2::LanguageServiceClient do
           client = Google::Cloud::Language.new(version: :v1beta2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1beta2 do
             client.annotate_text(document, features)
           end
 

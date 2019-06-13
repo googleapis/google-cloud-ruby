@@ -141,7 +141,7 @@ describe Google::Cloud::Dataproc::V1beta2::WorkflowTemplateServiceClient do
           client = Google::Cloud::Dataproc::WorkflowTemplateService.new(version: :v1beta2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1beta2 do
             client.create_workflow_template(formatted_parent, template)
           end
 
@@ -221,7 +221,7 @@ describe Google::Cloud::Dataproc::V1beta2::WorkflowTemplateServiceClient do
           client = Google::Cloud::Dataproc::WorkflowTemplateService.new(version: :v1beta2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1beta2 do
             client.get_workflow_template(formatted_name)
           end
 
@@ -333,7 +333,7 @@ describe Google::Cloud::Dataproc::V1beta2::WorkflowTemplateServiceClient do
           client = Google::Cloud::Dataproc::WorkflowTemplateService.new(version: :v1beta2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1beta2 do
             client.instantiate_workflow_template(formatted_name)
           end
 
@@ -451,7 +451,7 @@ describe Google::Cloud::Dataproc::V1beta2::WorkflowTemplateServiceClient do
           client = Google::Cloud::Dataproc::WorkflowTemplateService.new(version: :v1beta2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1beta2 do
             client.instantiate_inline_workflow_template(formatted_parent, template)
           end
 
@@ -531,7 +531,7 @@ describe Google::Cloud::Dataproc::V1beta2::WorkflowTemplateServiceClient do
           client = Google::Cloud::Dataproc::WorkflowTemplateService.new(version: :v1beta2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1beta2 do
             client.update_workflow_template(template)
           end
 
@@ -603,7 +603,7 @@ describe Google::Cloud::Dataproc::V1beta2::WorkflowTemplateServiceClient do
           client = Google::Cloud::Dataproc::WorkflowTemplateService.new(version: :v1beta2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1beta2 do
             client.list_workflow_templates(formatted_parent)
           end
 
@@ -672,7 +672,7 @@ describe Google::Cloud::Dataproc::V1beta2::WorkflowTemplateServiceClient do
           client = Google::Cloud::Dataproc::WorkflowTemplateService.new(version: :v1beta2)
 
           # Call method
-          err = assert_raises Google::Gax::GaxError do
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1beta2 do
             client.delete_workflow_template(formatted_name)
           end
 

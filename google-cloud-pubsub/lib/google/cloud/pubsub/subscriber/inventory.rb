@@ -40,7 +40,8 @@ module Google
           end
 
           def add *ack_ids
-            ack_ids.flatten!.compact!
+            ack_ids.flatten!
+            ack_ids.compact!
             return if ack_ids.empty?
 
             synchronize do
@@ -50,7 +51,8 @@ module Google
           end
 
           def remove *ack_ids
-            ack_ids.flatten!.compact!
+            ack_ids.flatten!
+            ack_ids.compact!
             return if ack_ids.empty?
 
             synchronize do

@@ -1,5 +1,9 @@
 # Release History
 
+### 1.0.1 / 2019-06-11
+
+* Add VERSION constant
+
 ### 1.0.0 / 2019-05-24
 
 * GA release
