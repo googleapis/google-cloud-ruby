@@ -14,15 +14,19 @@
 
 # DO NOT EDIT! This is a generated sample ("Request",  "speech_transcribe_sync")
 
+# sample-metadata
+#   title: Transcribe Audio File (Local File)
+#   description: Transcribe a short audio file using synchronous speech recognition
+#   bundle exec ruby samples/v1/speech_transcribe_sync.rb [--local_file_path "resources/brooklyn_bridge.raw"]
+
 require "google/cloud/speech"
 
 # [START speech_transcribe_sync]
 
- # Transcribe a short audio file using synchronous speech recognition
- #
- # @param local_file_path {String} Path to local audio file, e.g. /path/audio.wav
-def sample_recognize(local_file_path)
-  # [START speech_transcribe_sync_core]
+# Transcribe a short audio file using synchronous speech recognition
+#
+# @param local_file_path {String} Path to local audio file, e.g. /path/audio.wav
+def sample_recognize local_file_path
   # Instantiate a client
   speech_client = Google::Cloud::Speech.new version: :v1
 
@@ -51,15 +55,13 @@ def sample_recognize(local_file_path)
     alternative = result.alternatives[0]
     puts "Transcript: #{alternative.transcript}"
   end
-
-  # [END speech_transcribe_sync_core]
 end
 # [END speech_transcribe_sync]
 
 
 require "optparse"
 
-if $0 == __FILE__
+if $PROGRAM_NAME == __FILE__
 
   local_file_path = "resources/brooklyn_bridge.raw"
 

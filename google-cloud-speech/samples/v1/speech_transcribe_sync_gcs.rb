@@ -14,15 +14,20 @@
 
 # DO NOT EDIT! This is a generated sample ("Request",  "speech_transcribe_sync_gcs")
 
+# sample-metadata
+#   title: Transcript Audio File (Cloud Storage)
+#   description: Transcribe short audio file from Cloud Storage using synchronous speech recognition
+
+#   bundle exec ruby samples/v1/speech_transcribe_sync_gcs.rb [--storage_uri "gs://cloud-samples-data/speech/brooklyn_bridge.raw"]
+
 require "google/cloud/speech"
 
 # [START speech_transcribe_sync_gcs]
 
- # Transcribe short audio file from Cloud Storage using synchronous speech recognition
- #
- # @param storage_uri {String} URI for audio file in Cloud Storage, e.g. gs://[BUCKET]/[FILE]
-def sample_recognize(storage_uri)
-  # [START speech_transcribe_sync_gcs_core]
+# Transcribe short audio file from Cloud Storage using synchronous speech recognition
+#
+# @param storage_uri {String} URI for audio file in Cloud Storage, e.g. gs://[BUCKET]/[FILE]
+def sample_recognize storage_uri
   # Instantiate a client
   speech_client = Google::Cloud::Speech.new version: :v1
 
@@ -50,15 +55,13 @@ def sample_recognize(storage_uri)
     alternative = result.alternatives[0]
     puts "Transcript: #{alternative.transcript}"
   end
-
-  # [END speech_transcribe_sync_gcs_core]
 end
 # [END speech_transcribe_sync_gcs]
 
 
 require "optparse"
 
-if $0 == __FILE__
+if $PROGRAM_NAME == __FILE__
 
   storage_uri = "gs://cloud-samples-data/speech/brooklyn_bridge.raw"
 

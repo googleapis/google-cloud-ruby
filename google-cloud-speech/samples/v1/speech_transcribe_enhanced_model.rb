@@ -14,15 +14,19 @@
 
 # DO NOT EDIT! This is a generated sample ("Request",  "speech_transcribe_enhanced_model")
 
+# sample-metadata
+#   title: Using Enhanced Models (Local File)
+#   description: Transcribe a short audio file using an enhanced model
+#   bundle exec ruby samples/v1/speech_transcribe_enhanced_model.rb [--local_file_path "resources/hello.wav"]
+
 require "google/cloud/speech"
 
 # [START speech_transcribe_enhanced_model]
 
- # Transcribe a short audio file using an enhanced model
- #
- # @param local_file_path {String} Path to local audio file, e.g. /path/audio.wav
-def sample_recognize(local_file_path)
-  # [START speech_transcribe_enhanced_model_core]
+# Transcribe a short audio file using an enhanced model
+#
+# @param local_file_path {String} Path to local audio file, e.g. /path/audio.wav
+def sample_recognize local_file_path
   # Instantiate a client
   speech_client = Google::Cloud::Speech.new version: :v1
 
@@ -53,15 +57,13 @@ def sample_recognize(local_file_path)
     alternative = result.alternatives[0]
     puts "Transcript: #{alternative.transcript}"
   end
-
-  # [END speech_transcribe_enhanced_model_core]
 end
 # [END speech_transcribe_enhanced_model]
 
 
 require "optparse"
 
-if $0 == __FILE__
+if $PROGRAM_NAME == __FILE__
 
   local_file_path = "resources/hello.wav"
 

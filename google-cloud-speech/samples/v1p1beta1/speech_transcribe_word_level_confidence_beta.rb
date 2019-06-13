@@ -14,15 +14,20 @@
 
 # DO NOT EDIT! This is a generated sample ("Request",  "speech_transcribe_word_level_confidence_beta")
 
+# sample-metadata
+#   title: Enabling word-level confidence (Local File) (Beta)
+#   description: Print confidence level for individual words in a transcription of a short audio file
+
+#   bundle exec ruby samples/v1p1beta1/speech_transcribe_word_level_confidence_beta.rb [--local_file_path "resources/brooklyn_bridge.flac"]
+
 require "google/cloud/speech"
 
 # [START speech_transcribe_word_level_confidence_beta]
 
- # Print confidence level for individual words in a transcription of a short audio file
- #
- # @param local_file_path {String} Path to local audio file, e.g. /path/audio.wav
-def sample_recognize(local_file_path)
-  # [START speech_transcribe_word_level_confidence_beta_core]
+# Print confidence level for individual words in a transcription of a short audio file
+#
+# @param local_file_path {String} Path to local audio file, e.g. /path/audio.wav
+def sample_recognize local_file_path
   # Instantiate a client
   speech_client = Google::Cloud::Speech.new version: :v1p1beta1
 
@@ -49,15 +54,13 @@ def sample_recognize(local_file_path)
     puts "Word: #{word.word}"
     puts "Confidence: #{word.confidence}"
   end
-
-  # [END speech_transcribe_word_level_confidence_beta_core]
 end
 # [END speech_transcribe_word_level_confidence_beta]
 
 
 require "optparse"
 
-if $0 == __FILE__
+if $PROGRAM_NAME == __FILE__
 
   local_file_path = "resources/brooklyn_bridge.flac"
 

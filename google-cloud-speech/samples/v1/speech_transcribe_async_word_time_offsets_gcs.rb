@@ -14,15 +14,20 @@
 
 # DO NOT EDIT! This is a generated sample ("LongRunningRequestAsync",  "speech_transcribe_async_word_time_offsets_gcs")
 
+# sample-metadata
+#   title: Getting word timestamps (Cloud Storage) (LRO)
+#   description: Print start and end time of each word spoken in audio file from Cloud Storage
+
+#   bundle exec ruby samples/v1/speech_transcribe_async_word_time_offsets_gcs.rb [--storage_uri "gs://cloud-samples-data/speech/brooklyn_bridge.flac"]
+
 require "google/cloud/speech"
 
 # [START speech_transcribe_async_word_time_offsets_gcs]
 
- # Print start and end time of each word spoken in audio file from Cloud Storage
- #
- # @param storage_uri {String} URI for audio file in Cloud Storage, e.g. gs://[BUCKET]/[FILE]
-def sample_long_running_recognize(storage_uri)
-  # [START speech_transcribe_async_word_time_offsets_gcs_core]
+# Print start and end time of each word spoken in audio file from Cloud Storage
+#
+# @param storage_uri {String} URI for audio file in Cloud Storage, e.g. gs://[BUCKET]/[FILE]
+def sample_long_running_recognize storage_uri
   # Instantiate a client
   speech_client = Google::Cloud::Speech.new version: :v1
 
@@ -58,15 +63,13 @@ def sample_long_running_recognize(storage_uri)
     puts "Start time: #{word.start_time.seconds} seconds #{word.start_time.nanos} nanos"
     puts "End time: #{word.end_time.seconds} seconds #{word.end_time.nanos} nanos"
   end
-
-  # [END speech_transcribe_async_word_time_offsets_gcs_core]
 end
 # [END speech_transcribe_async_word_time_offsets_gcs]
 
 
 require "optparse"
 
-if $0 == __FILE__
+if $PROGRAM_NAME == __FILE__
 
   storage_uri = "gs://cloud-samples-data/speech/brooklyn_bridge.flac"
 

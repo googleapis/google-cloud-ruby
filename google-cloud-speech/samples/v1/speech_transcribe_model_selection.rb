@@ -14,18 +14,22 @@
 
 # DO NOT EDIT! This is a generated sample ("Request",  "speech_transcribe_model_selection")
 
+# sample-metadata
+#   title: Selecting a Transcription Model (Local File)
+#   description: Transcribe a short audio file using a specified transcription model
+#   bundle exec ruby samples/v1/speech_transcribe_model_selection.rb [--local_file_path "resources/hello.wav"] [--model "phone_call"]
+
 require "google/cloud/speech"
 
 # [START speech_transcribe_model_selection]
 
- # Transcribe a short audio file using a specified transcription model
- #
- # @param local_file_path {String} Path to local audio file, e.g. /path/audio.wav
- # @param model {String} The transcription model to use, e.g. video, phone_call, default
- # For a list of available transcription models, see:
- # https://cloud.google.com/speech-to-text/docs/transcription-model#transcription_models
-def sample_recognize(local_file_path, model)
-  # [START speech_transcribe_model_selection_core]
+# Transcribe a short audio file using a specified transcription model
+#
+# @param local_file_path {String} Path to local audio file, e.g. /path/audio.wav
+# @param model {String} The transcription model to use, e.g. video, phone_call, default
+# For a list of available transcription models, see:
+# https://cloud.google.com/speech-to-text/docs/transcription-model#transcription_models
+def sample_recognize local_file_path, model
   # Instantiate a client
   speech_client = Google::Cloud::Speech.new version: :v1
 
@@ -44,15 +48,13 @@ def sample_recognize(local_file_path, model)
     alternative = result.alternatives[0]
     puts "Transcript: #{alternative.transcript}"
   end
-
-  # [END speech_transcribe_model_selection_core]
 end
 # [END speech_transcribe_model_selection]
 
 
 require "optparse"
 
-if $0 == __FILE__
+if $PROGRAM_NAME == __FILE__
 
   local_file_path = "resources/hello.wav"
   model = "phone_call"

@@ -14,15 +14,20 @@
 
 # DO NOT EDIT! This is a generated sample ("Request",  "speech_transcribe_multilanguage_beta")
 
+# sample-metadata
+#   title: Detecting language spoken automatically (Local File) (Beta)
+#   description: Transcribe a short audio file with language detected from a list of possible languages
+
+#   bundle exec ruby samples/v1p1beta1/speech_transcribe_multilanguage_beta.rb [--local_file_path "resources/brooklyn_bridge.flac"]
+
 require "google/cloud/speech"
 
 # [START speech_transcribe_multilanguage_beta]
 
- # Transcribe a short audio file with language detected from a list of possible languages
- #
- # @param local_file_path {String} Path to local audio file, e.g. /path/audio.wav
-def sample_recognize(local_file_path)
-  # [START speech_transcribe_multilanguage_beta_core]
+# Transcribe a short audio file with language detected from a list of possible languages
+#
+# @param local_file_path {String} Path to local audio file, e.g. /path/audio.wav
+def sample_recognize local_file_path
   # Instantiate a client
   speech_client = Google::Cloud::Speech.new version: :v1p1beta1
 
@@ -48,15 +53,13 @@ def sample_recognize(local_file_path)
     alternative = result.alternatives[0]
     puts "Transcript: #{alternative.transcript}"
   end
-
-  # [END speech_transcribe_multilanguage_beta_core]
 end
 # [END speech_transcribe_multilanguage_beta]
 
 
 require "optparse"
 
-if $0 == __FILE__
+if $PROGRAM_NAME == __FILE__
 
   local_file_path = "resources/brooklyn_bridge.flac"
 

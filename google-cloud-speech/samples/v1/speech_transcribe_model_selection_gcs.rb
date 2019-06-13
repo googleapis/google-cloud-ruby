@@ -14,18 +14,23 @@
 
 # DO NOT EDIT! This is a generated sample ("Request",  "speech_transcribe_model_selection_gcs")
 
+# sample-metadata
+#   title: Selecting a Transcription Model (Cloud Storage)
+#   description: Transcribe a short audio file from Cloud Storage using a specified transcription model
+
+#   bundle exec ruby samples/v1/speech_transcribe_model_selection_gcs.rb [--storage_uri "gs://cloud-samples-data/speech/hello.wav"] [--model "phone_call"]
+
 require "google/cloud/speech"
 
 # [START speech_transcribe_model_selection_gcs]
 
- # Transcribe a short audio file from Cloud Storage using a specified transcription model
- #
- # @param storage_uri {String} URI for audio file in Cloud Storage, e.g. gs://[BUCKET]/[FILE]
- # @param model {String} The transcription model to use, e.g. video, phone_call, default
- # For a list of available transcription models, see:
- # https://cloud.google.com/speech-to-text/docs/transcription-model#transcription_models
-def sample_recognize(storage_uri, model)
-  # [START speech_transcribe_model_selection_gcs_core]
+# Transcribe a short audio file from Cloud Storage using a specified transcription model
+#
+# @param storage_uri {String} URI for audio file in Cloud Storage, e.g. gs://[BUCKET]/[FILE]
+# @param model {String} The transcription model to use, e.g. video, phone_call, default
+# For a list of available transcription models, see:
+# https://cloud.google.com/speech-to-text/docs/transcription-model#transcription_models
+def sample_recognize storage_uri, model
   # Instantiate a client
   speech_client = Google::Cloud::Speech.new version: :v1
 
@@ -43,15 +48,13 @@ def sample_recognize(storage_uri, model)
     alternative = result.alternatives[0]
     puts "Transcript: #{alternative.transcript}"
   end
-
-  # [END speech_transcribe_model_selection_gcs_core]
 end
 # [END speech_transcribe_model_selection_gcs]
 
 
 require "optparse"
 
-if $0 == __FILE__
+if $PROGRAM_NAME == __FILE__
 
   storage_uri = "gs://cloud-samples-data/speech/hello.wav"
   model = "phone_call"

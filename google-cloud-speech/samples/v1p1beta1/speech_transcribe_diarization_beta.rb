@@ -14,16 +14,22 @@
 
 # DO NOT EDIT! This is a generated sample ("LongRunningRequestAsync",  "speech_transcribe_diarization_beta")
 
+# sample-metadata
+#   title: Separating different speakers (Local File) (LRO) (Beta)
+#   description: Print confidence level for individual words in a transcription of a short audio file
+Separating different speakers in an audio file recording
+
+#   bundle exec ruby samples/v1p1beta1/speech_transcribe_diarization_beta.rb [--local_file_path "resources/commercial_mono.wav"]
+
 require "google/cloud/speech"
 
 # [START speech_transcribe_diarization_beta]
 
- # Print confidence level for individual words in a transcription of a short audio file
- # Separating different speakers in an audio file recording
- #
- # @param local_file_path {String} Path to local audio file, e.g. /path/audio.wav
-def sample_long_running_recognize(local_file_path)
-  # [START speech_transcribe_diarization_beta_core]
+# Print confidence level for individual words in a transcription of a short audio file
+# Separating different speakers in an audio file recording
+#
+# @param local_file_path {String} Path to local audio file, e.g. /path/audio.wav
+def sample_long_running_recognize local_file_path
   # Instantiate a client
   speech_client = Google::Cloud::Speech.new version: :v1p1beta1
 
@@ -66,15 +72,13 @@ def sample_long_running_recognize(local_file_path)
       puts "Speaker tag: #{word.speaker_tag}"
     end
   end
-
-  # [END speech_transcribe_diarization_beta_core]
 end
 # [END speech_transcribe_diarization_beta]
 
 
 require "optparse"
 
-if $0 == __FILE__
+if $PROGRAM_NAME == __FILE__
 
   local_file_path = "resources/commercial_mono.wav"
 
