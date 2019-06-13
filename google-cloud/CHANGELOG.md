@@ -1,12 +1,11 @@
 # Release History
 
-### 0.59.0 / 2019-05-02
+### 0.60.0 / 2019-06-11
 
-* Add google-cloud-security_center.
-* Add google-cloud-phishing_protection.
-* Add google-cloud-recaptcha_enterprise.
+* Update google-cloud-scheduler dependency to 1.0
+* Update google-cloud-tasks dependency to 1.0
 
-### 0.59.0 / 2019-04-29
+### 0.59.0 / 2019-05-09
 
 * Add google-cloud-security_center.
 * Add google-cloud-phishing_protection.
