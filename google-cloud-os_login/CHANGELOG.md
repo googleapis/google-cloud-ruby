@@ -1,5 +1,9 @@
 # Release History
 
+### 0.2.5 / 2019-06-11
+
+* Add VERSION constant
+
 ### 0.2.4 / 2019-04-29
 
 * Add AUTHENTICATION.md guide.
