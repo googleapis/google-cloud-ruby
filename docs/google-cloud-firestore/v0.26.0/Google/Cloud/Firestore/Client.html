@@ -1,0 +1,2663 @@
+---
+layout: yard_main
+title: "Class: Google::Cloud::Firestore::Client - Google"
+css: 
+  - /docs/css/style.css
+  - /docs/css/common.css
+  - /css/yard-main.css
+js: 
+  - /docs/js/app.js
+  - /js/yard-main.js
+---
+<script type="text/javascript" charset="utf-8">
+  pathId = "Google::Cloud::Firestore::Client";
+  relpath = '../../../';
+</script>
+
+
+<div class="nav_wrap">
+  <iframe id="nav" src="../../../class_list.html?1"></iframe>
+  <div id="resizer"></div>
+</div>
+
+<div id="main" tabindex="-1">
+  <div id="header">
+    <div id="menu">
+  
+    <a href="../../../_index.html">Index (C)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../Firestore.html" title="Google::Cloud::Firestore (module)">Firestore</a></span></span>
+     &raquo; 
+    <span class="title">Client</span>
+  
+</div>
+
+    <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../../../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+    <div class="clear"></div>
+  </div>
+
+  <div id="content"><h1>Class: Google::Cloud::Firestore::Client
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Google::Cloud::Firestore::Client</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/google/cloud/firestore/client.rb</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <h1>Client</h1>
+
+<p>The Cloud Firestore Client used is to access and manipulate the
+collections and documents in the Firestore database.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/firestore</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_firestore'>firestore</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Firestore.html" title="Google::Cloud::Firestore (module)">Firestore</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Firestore.html#new-class_method" title="Google::Cloud::Firestore.new (method)">new</a></span></span>
+
+<span class='comment'># Get a document reference
+</span><span class='id identifier rubyid_nyc_ref'>nyc_ref</span> <span class='op'>=</span> <span class='id identifier rubyid_firestore'>firestore</span><span class='period'>.</span><span class='id identifier rubyid_doc'>doc</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>cities/NYC</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_firestore'>firestore</span><span class='period'>.</span><span class='id identifier rubyid_batch'>batch</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_b'>b</span><span class='op'>|</span>
+  <span class='id identifier rubyid_b'>b</span><span class='period'>.</span><span class='id identifier rubyid_update'>update</span><span class='lparen'>(</span><span class='id identifier rubyid_nyc_ref'>nyc_ref</span><span class='comma'>,</span> <span class='lbrace'>{</span> <span class='label'>name:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>New York City</span><span class='tstring_end'>&quot;</span></span> <span class='rbrace'>}</span><span class='rparen'>)</span>
+<span class='kw'>end</span></code></pre>
+    
+  </div>
+
+
+</div>
+
+
+
+
+
+
+  
+    <h2>
+      Access
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#col-instance_method" title="#col (instance method)">#<strong>col</strong>(collection_path)  &#x21d2; CollectionReference </a>
+    
+
+    
+      (also: #collection)
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieves a collection.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#col_group-instance_method" title="#col_group (instance method)">#<strong>col_group</strong>(collection_id)  &#x21d2; Query </a>
+    
+
+    
+      (also: #collection_group)
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Creates and returns a new Query that includes all documents in the database that are contained in a collection or subcollection with the given collection_id.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#cols-instance_method" title="#cols (instance method)">#<strong>cols</strong> {|collections| ... } &#x21d2; Enumerator&lt;CollectionReference&gt; </a>
+    
+
+    
+      (also: #collections, #list_collections)
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieves a list of collections.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#doc-instance_method" title="#doc (instance method)">#<strong>doc</strong>(document_path)  &#x21d2; DocumentReference </a>
+    
+
+    
+      (also: #document)
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieves a document reference.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#document_id-instance_method" title="#document_id (instance method)">#<strong>document_id</strong>  &#x21d2; FieldPath </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Creates a field path object representing the sentinel ID of a document.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#field_array_delete-instance_method" title="#field_array_delete (instance method)">#<strong>field_array_delete</strong>(*values)  &#x21d2; FieldValue </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Creates a sentinel value to indicate the removal of the given values with an array.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#field_array_union-instance_method" title="#field_array_union (instance method)">#<strong>field_array_union</strong>(*values)  &#x21d2; FieldValue </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Creates a sentinel value to indicate the union of the given values with an array.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#field_delete-instance_method" title="#field_delete (instance method)">#<strong>field_delete</strong>  &#x21d2; FieldValue </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Creates a field value object representing the deletion of a field in document data.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#field_increment-instance_method" title="#field_increment (instance method)">#<strong>field_increment</strong>(value)  &#x21d2; FieldValue </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Creates a sentinel value to indicate the addition the given value to the field&#39;s current value.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#field_maximum-instance_method" title="#field_maximum (instance method)">#<strong>field_maximum</strong>(value)  &#x21d2; FieldValue </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Creates a sentinel value to indicate the setting the field to the maximum of its current value and the given value.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#field_minimum-instance_method" title="#field_minimum (instance method)">#<strong>field_minimum</strong>(value)  &#x21d2; FieldValue </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Creates a sentinel value to indicate the setting the field to the minimum of its current value and the given value.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#field_path-instance_method" title="#field_path (instance method)">#<strong>field_path</strong>(*fields)  &#x21d2; FieldPath </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Creates a field path object representing a nested field for document data.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#field_server_time-instance_method" title="#field_server_time (instance method)">#<strong>field_server_time</strong>  &#x21d2; FieldValue </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Creates a field value object representing set a field&#39;s value to the server timestamp when accessing the document data.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_all-instance_method" title="#get_all (instance method)">#<strong>get_all</strong>(*docs, field_mask: nil) {|documents| ... } &#x21d2; Enumerator&lt;DocumentSnapshot&gt; </a>
+    
+
+    
+      (also: #get_docs, #get_documents, #find)
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieves a list of document snapshots.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+    <h2>
+      Operations
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#batch-instance_method" title="#batch (instance method)">#<strong>batch</strong> {|batch| ... } &#x21d2; CommitResponse </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Perform multiple changes at the same time.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#transaction-instance_method" title="#transaction (instance method)">#<strong>transaction</strong>(max_retries: nil, commit_response: nil) {|transaction| ... } &#x21d2; Object, CommitResponse </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Create a transaction to perform multiple reads and writes that are executed atomically at a single logical point in time in a database.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#database_id-instance_method" title="#database_id (instance method)">#<strong>database_id</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The database identifier for the Cloud Firestore database.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#project_id-instance_method" title="#project_id (instance method)">#<strong>project_id</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The project identifier for the Cloud Firestore database.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="batch-instance_method">
+  
+    #<strong>batch</strong> {|batch| ... } &#x21d2; <tt><span class='object_link'><a href="CommitResponse.html" title="Google::Cloud::Firestore::CommitResponse (class)">CommitResponse</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Perform multiple changes at the same time.</p>
+
+<p>All changes are accumulated in memory until the block completes.
+Unlike transactions, batches don&#39;t lock on document reads, should only
+fail if users provide preconditions, and are not automatically
+retried. See <span class='object_link'><a href="Batch.html" title="Google::Cloud::Firestore::Batch (class)">Batch</a></span>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/firestore</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_firestore'>firestore</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Firestore.html" title="Google::Cloud::Firestore (module)">Firestore</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Firestore.html#new-class_method" title="Google::Cloud::Firestore.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_firestore'>firestore</span><span class='period'>.</span><span class='id identifier rubyid_batch'>batch</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_b'>b</span><span class='op'>|</span>
+  <span class='comment'># Set the data for NYC
+</span>  <span class='id identifier rubyid_b'>b</span><span class='period'>.</span><span class='id identifier rubyid_set'>set</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>cities/NYC</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='lbrace'>{</span> <span class='label'>name:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>New York City</span><span class='tstring_end'>&quot;</span></span> <span class='rbrace'>}</span><span class='rparen'>)</span>
+
+  <span class='comment'># Update the population for SF
+</span>  <span class='id identifier rubyid_b'>b</span><span class='period'>.</span><span class='id identifier rubyid_update'>update</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>cities/SF</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='lbrace'>{</span> <span class='label'>population:</span> <span class='int'>1000000</span> <span class='rbrace'>}</span><span class='rparen'>)</span>
+
+  <span class='comment'># Delete LA
+</span>  <span class='id identifier rubyid_b'>b</span><span class='period'>.</span><span class='id identifier rubyid_delete'>delete</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>cities/LA</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+<span class='kw'>end</span></code></pre>
+    
+  </div>
+
+<p class="tag_title">Yields:</p>
+<ul class="yield">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="#batch-instance_method" title="Google::Cloud::Firestore::Client#batch (method)">batch</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The block for reading data and making changes.</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Yield Parameters:</p>
+<ul class="yieldparam">
+  
+    <li>
+      
+        <span class='name'>batch</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Batch.html" title="Google::Cloud::Firestore::Batch (class)">Batch</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The write batch object for making changes.</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="CommitResponse.html" title="Google::Cloud::Firestore::CommitResponse (class)">CommitResponse</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The response from committing the changes.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><a href="https://firebase.google.com/docs/firestore/manage-data/transactions" target="_parent" title="Transactions and Batched Writes">Transactions and Batched Writes</a></li>
+    
+  </ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+579
+580
+581
+582
+583</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/client.rb', line 579</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_batch'>batch</span>
+  <span class='id identifier rubyid_batch'>batch</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Batch.html" title="Google::Cloud::Firestore::Batch (class)">Batch</a></span></span><span class='period'>.</span><span class='id identifier rubyid_from_client'>from_client</span> <span class='kw'>self</span>
+  <span class='kw'>yield</span> <span class='id identifier rubyid_batch'>batch</span>
+  <span class='id identifier rubyid_batch'>batch</span><span class='period'>.</span><span class='id identifier rubyid_commit'>commit</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="col-instance_method">
+  
+    #<strong>col</strong>(collection_path)  &#x21d2; <tt><span class='object_link'><a href="CollectionReference.html" title="Google::Cloud::Firestore::CollectionReference (class)">CollectionReference</a></span></tt> 
+  
+
+  
+    <span class="aliases">Also known as:
+    <span class="names"><span id='collection-instance_method'>collection</span></span>
+    </span>
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieves a collection.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/firestore</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_firestore'>firestore</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Firestore.html" title="Google::Cloud::Firestore (module)">Firestore</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Firestore.html#new-class_method" title="Google::Cloud::Firestore.new (method)">new</a></span></span>
+
+<span class='comment'># Get the cities collection
+</span><span class='id identifier rubyid_cities_col'>cities_col</span> <span class='op'>=</span> <span class='id identifier rubyid_firestore'>firestore</span><span class='period'>.</span><span class='id identifier rubyid_col'>col</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>cities</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='comment'># Get the document for NYC
+</span><span class='id identifier rubyid_nyc_ref'>nyc_ref</span> <span class='op'>=</span> <span class='id identifier rubyid_cities_col'>cities_col</span><span class='period'>.</span><span class='id identifier rubyid_doc'>doc</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>NYC</span><span class='tstring_end'>&quot;</span></span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>collection_path</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A string representing the path of the
+collection, relative to the document root of the database.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="CollectionReference.html" title="Google::Cloud::Firestore::CollectionReference (class)">CollectionReference</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A collection.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+132
+133
+134
+135
+136
+137
+138
+139</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/client.rb', line 132</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_col'>col</span> <span class='id identifier rubyid_collection_path'>collection_path</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_collection_path'>collection_path</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='period'>.</span><span class='id identifier rubyid_split'>split</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_count'>count</span><span class='period'>.</span><span class='id identifier rubyid_even?'>even?</span>
+    <span class='id identifier rubyid_raise'>raise</span> <span class='const'>ArgumentError</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>collection_path must refer to a collection.</span><span class='tstring_end'>&quot;</span></span>
+  <span class='kw'>end</span>
+
+  <span class='const'><span class='object_link'><a href="CollectionReference.html" title="Google::Cloud::Firestore::CollectionReference (class)">CollectionReference</a></span></span><span class='period'>.</span><span class='id identifier rubyid_from_path'>from_path</span> \
+    <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_path'>path</span><span class='embexpr_end'>}</span><span class='tstring_content'>/documents/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_collection_path'>collection_path</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='kw'>self</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="col_group-instance_method">
+  
+    #<strong>col_group</strong>(collection_id)  &#x21d2; <tt><span class='object_link'><a href="Query.html" title="Google::Cloud::Firestore::Query (class)">Query</a></span></tt> 
+  
+
+  
+    <span class="aliases">Also known as:
+    <span class="names"><span id='collection_group-instance_method'>collection_group</span></span>
+    </span>
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Creates and returns a new Query that includes all documents in the
+database that are contained in a collection or subcollection with the
+given collection_id.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/firestore</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_firestore'>firestore</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Firestore.html" title="Google::Cloud::Firestore (module)">Firestore</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Firestore.html#new-class_method" title="Google::Cloud::Firestore.new (method)">new</a></span></span>
+
+<span class='comment'># Get the cities collection group query
+</span><span class='id identifier rubyid_query'>query</span> <span class='op'>=</span> <span class='id identifier rubyid_firestore'>firestore</span><span class='period'>.</span><span class='id identifier rubyid_col_group'>col_group</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>cities</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_query'>query</span><span class='period'>.</span><span class='id identifier rubyid_get'>get</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_city'>city</span><span class='op'>|</span>
+  <span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_city'>city</span><span class='period'>.</span><span class='id identifier rubyid_document_id'>document_id</span><span class='embexpr_end'>}</span><span class='tstring_content'> has </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_city'>city</span><span class='lbracket'>[</span><span class='symbol'>:population</span><span class='rbracket'>]</span><span class='embexpr_end'>}</span><span class='tstring_content'> residents.</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>collection_id</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Identifies the collections to query
+over. Every collection or subcollection with this ID as the last
+segment of its path will be included. Cannot contain a slash (<code>/</code>).</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Query.html" title="Google::Cloud::Firestore::Query (class)">Query</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The created Query.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/client.rb', line 165</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_col_group'>col_group</span> <span class='id identifier rubyid_collection_id'>collection_id</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_collection_id'>collection_id</span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/</span><span class='tstring_end'>&quot;</span></span>
+    <span class='id identifier rubyid_raise'>raise</span> <span class='const'>ArgumentError</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Invalid collection_id: &#39;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_collection_id'>collection_id</span><span class='embexpr_end'>}</span><span class='tstring_content'>&#39;, </span><span class='tstring_end'>&quot;</span></span> \
+      <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>must not contain &#39;/&#39;.</span><span class='tstring_end'>&quot;</span></span>
+  <span class='kw'>end</span>
+  <span class='id identifier rubyid_query'>query</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Firestore.html" title="Google::Firestore (module)">Firestore</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Firestore/V1.html" title="Google::Firestore::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Firestore/V1/StructuredQuery.html" title="Google::Firestore::V1::StructuredQuery (class)">StructuredQuery</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span>
+    <span class='label'>from:</span> <span class='lbracket'>[</span>
+      <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Firestore.html" title="Google::Firestore (module)">Firestore</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Firestore/V1.html" title="Google::Firestore::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Firestore/V1/StructuredQuery.html" title="Google::Firestore::V1::StructuredQuery (class)">StructuredQuery</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Firestore/V1/StructuredQuery/CollectionSelector.html" title="Google::Firestore::V1::StructuredQuery::CollectionSelector (class)">CollectionSelector</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span>
+        <span class='label'>collection_id:</span> <span class='id identifier rubyid_collection_id'>collection_id</span><span class='comma'>,</span> <span class='label'>all_descendants:</span> <span class='kw'>true</span>
+      <span class='rparen'>)</span>
+    <span class='rbracket'>]</span>
+  <span class='rparen'>)</span>
+
+  <span class='const'><span class='object_link'><a href="Query.html" title="Google::Cloud::Firestore::Query (class)">Query</a></span></span><span class='period'>.</span><span class='id identifier rubyid_start'>start</span> <span class='id identifier rubyid_query'>query</span><span class='comma'>,</span> <span class='id identifier rubyid_service'>service</span><span class='period'>.</span><span class='id identifier rubyid_documents_path'>documents_path</span><span class='comma'>,</span> <span class='kw'>self</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="cols-instance_method">
+  
+    #<strong>cols</strong> {|collections| ... } &#x21d2; <tt>Enumerator&lt;<span class='object_link'><a href="CollectionReference.html" title="Google::Cloud::Firestore::CollectionReference (class)">CollectionReference</a></span>&gt;</tt> 
+  
+
+  
+    <span class="aliases">Also known as:
+    <span class="names"><span id='collections-instance_method'>collections</span>, <span id='list_collections-instance_method'>list_collections</span></span>
+    </span>
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieves a list of collections.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/firestore</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_firestore'>firestore</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Firestore.html" title="Google::Cloud::Firestore (module)">Firestore</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Firestore.html#new-class_method" title="Google::Cloud::Firestore.new (method)">new</a></span></span>
+
+<span class='comment'># Get the root collections
+</span><span class='id identifier rubyid_firestore'>firestore</span><span class='period'>.</span><span class='id identifier rubyid_cols'>cols</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_col'>col</span><span class='op'>|</span>
+  <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_col'>col</span><span class='period'>.</span><span class='id identifier rubyid_collection_id'>collection_id</span>
+<span class='kw'>end</span></code></pre>
+    
+  </div>
+
+<p class="tag_title">Yields:</p>
+<ul class="yield">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="#collections-instance_method" title="Google::Cloud::Firestore::Client#collections (method)">collections</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The block for accessing the collections.</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Yield Parameters:</p>
+<ul class="yieldparam">
+  
+    <li>
+      
+        <span class='name'>collection</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="CollectionReference.html" title="Google::Cloud::Firestore::CollectionReference (class)">CollectionReference</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A collection.</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Enumerator&lt;<span class='object_link'><a href="CollectionReference.html" title="Google::Cloud::Firestore::CollectionReference (class)">CollectionReference</a></span>&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>collection list.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+102
+103
+104
+105
+106
+107
+108
+109</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/client.rb', line 102</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_cols'>cols</span>
+  <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
+
+  <span class='kw'>return</span> <span class='id identifier rubyid_enum_for'>enum_for</span> <span class='symbol'>:cols</span> <span class='kw'>unless</span> <span class='id identifier rubyid_block_given?'>block_given?</span>
+
+  <span class='id identifier rubyid_collection_ids'>collection_ids</span> <span class='op'>=</span> <span class='id identifier rubyid_service'>service</span><span class='period'>.</span><span class='id identifier rubyid_list_collections'>list_collections</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_path'>path</span><span class='embexpr_end'>}</span><span class='tstring_content'>/documents</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_collection_ids'>collection_ids</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_collection_id'>collection_id</span><span class='op'>|</span> <span class='kw'>yield</span> <span class='id identifier rubyid_col'>col</span> <span class='id identifier rubyid_collection_id'>collection_id</span> <span class='rbrace'>}</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="database_id-instance_method">
+  
+    #<strong>database_id</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The database identifier for the Cloud Firestore database.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>database identifier.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+70
+71
+72</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/client.rb', line 70</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_database_id'>database_id</span>
+  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>(default)</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="doc-instance_method">
+  
+    #<strong>doc</strong>(document_path)  &#x21d2; <tt><span class='object_link'><a href="DocumentReference.html" title="Google::Cloud::Firestore::DocumentReference (class)">DocumentReference</a></span></tt> 
+  
+
+  
+    <span class="aliases">Also known as:
+    <span class="names"><span id='document-instance_method'>document</span></span>
+    </span>
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieves a document reference.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/firestore</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_firestore'>firestore</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Firestore.html" title="Google::Cloud::Firestore (module)">Firestore</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Firestore.html#new-class_method" title="Google::Cloud::Firestore.new (method)">new</a></span></span>
+
+<span class='comment'># Get a document
+</span><span class='id identifier rubyid_nyc_ref'>nyc_ref</span> <span class='op'>=</span> <span class='id identifier rubyid_firestore'>firestore</span><span class='period'>.</span><span class='id identifier rubyid_doc'>doc</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>cities/NYC</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_nyc_ref'>nyc_ref</span><span class='period'>.</span><span class='id identifier rubyid_document_id'>document_id</span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>document_path</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A string representing the path of the
+document, relative to the document root of the database.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="DocumentReference.html" title="Google::Cloud::Firestore::DocumentReference (class)">DocumentReference</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A document.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+200
+201
+202
+203
+204
+205
+206
+207
+208</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/client.rb', line 200</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_doc'>doc</span> <span class='id identifier rubyid_document_path'>document_path</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_document_path'>document_path</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='period'>.</span><span class='id identifier rubyid_split'>split</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_count'>count</span><span class='period'>.</span><span class='id identifier rubyid_odd?'>odd?</span>
+    <span class='id identifier rubyid_raise'>raise</span> <span class='const'>ArgumentError</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>document_path must refer to a document.</span><span class='tstring_end'>&quot;</span></span>
+  <span class='kw'>end</span>
+
+  <span class='id identifier rubyid_doc_path'>doc_path</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_path'>path</span><span class='embexpr_end'>}</span><span class='tstring_content'>/documents/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_document_path'>document_path</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
+
+  <span class='const'><span class='object_link'><a href="DocumentReference.html" title="Google::Cloud::Firestore::DocumentReference (class)">DocumentReference</a></span></span><span class='period'>.</span><span class='id identifier rubyid_from_path'>from_path</span> <span class='id identifier rubyid_doc_path'>doc_path</span><span class='comma'>,</span> <span class='kw'>self</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="document_id-instance_method">
+  
+    #<strong>document_id</strong>  &#x21d2; <tt><span class='object_link'><a href="FieldPath.html" title="Google::Cloud::Firestore::FieldPath (class)">FieldPath</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Creates a field path object representing the sentinel ID of a
+document. It can be used in queries to sort or filter by the document
+ID. See <span class='object_link'><a href="FieldPath.html#document_id-class_method" title="Google::Cloud::Firestore::FieldPath.document_id (method)">FieldPath.document_id</a></span>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/firestore</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_firestore'>firestore</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Firestore.html" title="Google::Cloud::Firestore (module)">Firestore</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Firestore.html#new-class_method" title="Google::Cloud::Firestore.new (method)">new</a></span></span>
+
+<span class='comment'># Get a collection reference
+</span><span class='id identifier rubyid_cities_col'>cities_col</span> <span class='op'>=</span> <span class='id identifier rubyid_firestore'>firestore</span><span class='period'>.</span><span class='id identifier rubyid_col'>col</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>cities</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='comment'># Create a query
+</span><span class='id identifier rubyid_query'>query</span> <span class='op'>=</span> <span class='id identifier rubyid_cities_col'>cities_col</span><span class='period'>.</span><span class='id identifier rubyid_order'>order</span><span class='lparen'>(</span><span class='id identifier rubyid_firestore'>firestore</span><span class='period'>.</span><span class='id identifier rubyid_document_id'>document_id</span><span class='rparen'>)</span>
+                  <span class='period'>.</span><span class='id identifier rubyid_start_at'>start_at</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>NYC</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+
+<span class='id identifier rubyid_query'>query</span><span class='period'>.</span><span class='id identifier rubyid_get'>get</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_city'>city</span><span class='op'>|</span>
+  <span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_city'>city</span><span class='period'>.</span><span class='id identifier rubyid_document_id'>document_id</span><span class='embexpr_end'>}</span><span class='tstring_content'> has </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_city'>city</span><span class='lbracket'>[</span><span class='symbol'>:population</span><span class='rbracket'>]</span><span class='embexpr_end'>}</span><span class='tstring_content'> residents.</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span></code></pre>
+    
+  </div>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="FieldPath.html" title="Google::Cloud::Firestore::FieldPath (class)">FieldPath</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The field path object.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+308
+309
+310</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/client.rb', line 308</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_document_id'>document_id</span>
+  <span class='const'><span class='object_link'><a href="FieldPath.html" title="Google::Cloud::Firestore::FieldPath (class)">FieldPath</a></span></span><span class='period'>.</span><span class='id identifier rubyid_document_id'><span class='object_link'><a href="FieldPath.html#document_id-class_method" title="Google::Cloud::Firestore::FieldPath.document_id (method)">document_id</a></span></span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="field_array_delete-instance_method">
+  
+    #<strong>field_array_delete</strong>(*values)  &#x21d2; <tt><span class='object_link'><a href="FieldValue.html" title="Google::Cloud::Firestore::FieldValue (class)">FieldValue</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Creates a sentinel value to indicate the removal of the given values
+with an array.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/firestore</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_firestore'>firestore</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Firestore.html" title="Google::Cloud::Firestore (module)">Firestore</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Firestore.html#new-class_method" title="Google::Cloud::Firestore.new (method)">new</a></span></span>
+
+<span class='comment'># Get a document reference
+</span><span class='id identifier rubyid_nyc_ref'>nyc_ref</span> <span class='op'>=</span> <span class='id identifier rubyid_firestore'>firestore</span><span class='period'>.</span><span class='id identifier rubyid_doc'>doc</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>cities/NYC</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_array_delete'>array_delete</span> <span class='op'>=</span> <span class='id identifier rubyid_firestore'>firestore</span><span class='period'>.</span><span class='id identifier rubyid_field_array_delete'>field_array_delete</span> <span class='int'>7</span><span class='comma'>,</span> <span class='int'>8</span><span class='comma'>,</span> <span class='int'>9</span>
+
+<span class='id identifier rubyid_nyc_ref'>nyc_ref</span><span class='period'>.</span><span class='id identifier rubyid_update'>update</span><span class='lparen'>(</span><span class='lbrace'>{</span> <span class='label'>name:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>New York City</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+                 <span class='label'>lucky_numbers:</span> <span class='id identifier rubyid_array_delete'>array_delete</span> <span class='rbrace'>}</span><span class='rparen'>)</span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>values</span>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The values to remove from the array. Required.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="FieldValue.html" title="Google::Cloud::Firestore::FieldValue (class)">FieldValue</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The array delete field value object.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+424
+425
+426</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/client.rb', line 424</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_field_array_delete'>field_array_delete</span> <span class='op'>*</span><span class='id identifier rubyid_values'>values</span>
+  <span class='const'><span class='object_link'><a href="FieldValue.html" title="Google::Cloud::Firestore::FieldValue (class)">FieldValue</a></span></span><span class='period'>.</span><span class='id identifier rubyid_array_delete'><span class='object_link'><a href="FieldValue.html#array_delete-class_method" title="Google::Cloud::Firestore::FieldValue.array_delete (method)">array_delete</a></span></span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_values'>values</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="field_array_union-instance_method">
+  
+    #<strong>field_array_union</strong>(*values)  &#x21d2; <tt><span class='object_link'><a href="FieldValue.html" title="Google::Cloud::Firestore::FieldValue (class)">FieldValue</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Creates a sentinel value to indicate the union of the given values
+with an array.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/firestore</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_firestore'>firestore</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Firestore.html" title="Google::Cloud::Firestore (module)">Firestore</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Firestore.html#new-class_method" title="Google::Cloud::Firestore.new (method)">new</a></span></span>
+
+<span class='comment'># Get a document reference
+</span><span class='id identifier rubyid_nyc_ref'>nyc_ref</span> <span class='op'>=</span> <span class='id identifier rubyid_firestore'>firestore</span><span class='period'>.</span><span class='id identifier rubyid_doc'>doc</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>cities/NYC</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_array_union'>array_union</span> <span class='op'>=</span> <span class='id identifier rubyid_firestore'>firestore</span><span class='period'>.</span><span class='id identifier rubyid_field_array_union'>field_array_union</span> <span class='int'>1</span><span class='comma'>,</span> <span class='int'>2</span><span class='comma'>,</span> <span class='int'>3</span>
+
+<span class='id identifier rubyid_nyc_ref'>nyc_ref</span><span class='period'>.</span><span class='id identifier rubyid_update'>update</span><span class='lparen'>(</span><span class='lbrace'>{</span> <span class='label'>name:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>New York City</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+                 <span class='label'>lucky_numbers:</span> <span class='id identifier rubyid_array_union'>array_union</span> <span class='rbrace'>}</span><span class='rparen'>)</span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>values</span>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The values to add to the array. Required.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="FieldValue.html" title="Google::Cloud::Firestore::FieldValue (class)">FieldValue</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The array union field value object.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+399
+400
+401</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/client.rb', line 399</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_field_array_union'>field_array_union</span> <span class='op'>*</span><span class='id identifier rubyid_values'>values</span>
+  <span class='const'><span class='object_link'><a href="FieldValue.html" title="Google::Cloud::Firestore::FieldValue (class)">FieldValue</a></span></span><span class='period'>.</span><span class='id identifier rubyid_array_union'><span class='object_link'><a href="FieldValue.html#array_union-class_method" title="Google::Cloud::Firestore::FieldValue.array_union (method)">array_union</a></span></span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_values'>values</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="field_delete-instance_method">
+  
+    #<strong>field_delete</strong>  &#x21d2; <tt><span class='object_link'><a href="FieldValue.html" title="Google::Cloud::Firestore::FieldValue (class)">FieldValue</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Creates a field value object representing the deletion of a field in
+document data.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/firestore</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_firestore'>firestore</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Firestore.html" title="Google::Cloud::Firestore (module)">Firestore</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Firestore.html#new-class_method" title="Google::Cloud::Firestore.new (method)">new</a></span></span>
+
+<span class='comment'># Get a document reference
+</span><span class='id identifier rubyid_nyc_ref'>nyc_ref</span> <span class='op'>=</span> <span class='id identifier rubyid_firestore'>firestore</span><span class='period'>.</span><span class='id identifier rubyid_doc'>doc</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>cities/NYC</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_nyc_ref'>nyc_ref</span><span class='period'>.</span><span class='id identifier rubyid_update'>update</span><span class='lparen'>(</span><span class='lbrace'>{</span> <span class='label'>name:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>New York City</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+                 <span class='label'>trash:</span> <span class='id identifier rubyid_firestore'>firestore</span><span class='period'>.</span><span class='id identifier rubyid_field_delete'>field_delete</span> <span class='rbrace'>}</span><span class='rparen'>)</span></code></pre>
+    
+  </div>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="FieldValue.html" title="Google::Cloud::Firestore::FieldValue (class)">FieldValue</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The delete field value object.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+353
+354
+355</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/client.rb', line 353</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_field_delete'>field_delete</span>
+  <span class='const'><span class='object_link'><a href="FieldValue.html" title="Google::Cloud::Firestore::FieldValue (class)">FieldValue</a></span></span><span class='period'>.</span><span class='id identifier rubyid_delete'><span class='object_link'><a href="FieldValue.html#delete-class_method" title="Google::Cloud::Firestore::FieldValue.delete (method)">delete</a></span></span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="field_increment-instance_method">
+  
+    #<strong>field_increment</strong>(value)  &#x21d2; <tt><span class='object_link'><a href="FieldValue.html" title="Google::Cloud::Firestore::FieldValue (class)">FieldValue</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Creates a sentinel value to indicate the addition the given value to
+the field&#39;s current value.</p>
+
+<p>If the field&#39;s current value is not an integer or a double value
+(Numeric), or if the field does not yet exist, the transformation will
+set the field to the given value. If either of the given value or the
+current field value are doubles, both values will be interpreted as
+doubles. Double arithmetic and representation of double values follow
+IEEE 754 semantics. If there is positive/negative integer overflow,
+the field is resolved to the largest magnitude positive/negative
+integer.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/firestore</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_firestore'>firestore</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Firestore.html" title="Google::Cloud::Firestore (module)">Firestore</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Firestore.html#new-class_method" title="Google::Cloud::Firestore.new (method)">new</a></span></span>
+
+<span class='comment'># Get a document reference
+</span><span class='id identifier rubyid_nyc_ref'>nyc_ref</span> <span class='op'>=</span> <span class='id identifier rubyid_firestore'>firestore</span><span class='period'>.</span><span class='id identifier rubyid_doc'>doc</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>cities/NYC</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='comment'># Set the population to increment by 1.
+</span><span class='id identifier rubyid_increment_value'>increment_value</span> <span class='op'>=</span> <span class='id identifier rubyid_firestore'>firestore</span><span class='period'>.</span><span class='id identifier rubyid_field_increment'>field_increment</span> <span class='int'>1</span>
+
+<span class='id identifier rubyid_nyc_ref'>nyc_ref</span><span class='period'>.</span><span class='id identifier rubyid_update'>update</span><span class='lparen'>(</span><span class='lbrace'>{</span> <span class='label'>name:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>New York City</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+                 <span class='label'>population:</span> <span class='id identifier rubyid_increment_value'>increment_value</span> <span class='rbrace'>}</span><span class='rparen'>)</span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>value</span>
+      
+      
+        <span class='type'>(<tt>Numeric</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The value to add to the given value. Required.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="FieldValue.html" title="Google::Cloud::Firestore::FieldValue (class)">FieldValue</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The increment field value object.</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Raises:</p>
+<ul class="raise">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>ArgumentError</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>if the value is not a Numeric.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+461
+462
+463</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/client.rb', line 461</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_field_increment'>field_increment</span> <span class='id identifier rubyid_value'>value</span>
+  <span class='const'><span class='object_link'><a href="FieldValue.html" title="Google::Cloud::Firestore::FieldValue (class)">FieldValue</a></span></span><span class='period'>.</span><span class='id identifier rubyid_increment'><span class='object_link'><a href="FieldValue.html#increment-class_method" title="Google::Cloud::Firestore::FieldValue.increment (method)">increment</a></span></span> <span class='id identifier rubyid_value'>value</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="field_maximum-instance_method">
+  
+    #<strong>field_maximum</strong>(value)  &#x21d2; <tt><span class='object_link'><a href="FieldValue.html" title="Google::Cloud::Firestore::FieldValue (class)">FieldValue</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Creates a sentinel value to indicate the setting the field to the
+maximum of its current value and the given value.</p>
+
+<p>If the field is not an integer or double (Numeric), or if the field
+does not yet exist, the transformation will set the field to the given
+value. If a maximum operation is applied where the field and the input
+value are of mixed types (that is - one is an integer and one is a
+double) the field takes on the type of the larger operand. If the
+operands are equivalent (e.g. 3 and 3.0), the field does not change.
+0, 0.0, and -0.0 are all zero. The maximum of a zero stored value and
+zero input value is always the stored value. The maximum of any
+numeric value x and NaN is NaN.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/firestore</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_firestore'>firestore</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Firestore.html" title="Google::Cloud::Firestore (module)">Firestore</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Firestore.html#new-class_method" title="Google::Cloud::Firestore.new (method)">new</a></span></span>
+
+<span class='comment'># Get a document reference
+</span><span class='id identifier rubyid_nyc_ref'>nyc_ref</span> <span class='op'>=</span> <span class='id identifier rubyid_firestore'>firestore</span><span class='period'>.</span><span class='id identifier rubyid_doc'>doc</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>cities/NYC</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='comment'># Set the population to be at maximum 4,000,000.
+</span><span class='id identifier rubyid_maximum_value'>maximum_value</span> <span class='op'>=</span> <span class='id identifier rubyid_firestore'>firestore</span><span class='period'>.</span><span class='id identifier rubyid_field_maximum'>field_maximum</span> <span class='int'>4000000</span>
+
+<span class='id identifier rubyid_nyc_ref'>nyc_ref</span><span class='period'>.</span><span class='id identifier rubyid_update'>update</span><span class='lparen'>(</span><span class='lbrace'>{</span> <span class='label'>name:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>New York City</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+                 <span class='label'>population:</span> <span class='id identifier rubyid_maximum_value'>maximum_value</span> <span class='rbrace'>}</span><span class='rparen'>)</span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>value</span>
+      
+      
+        <span class='type'>(<tt>Numeric</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The value to compare against the given value to
+calculate the maximum value to set. Required.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="FieldValue.html" title="Google::Cloud::Firestore::FieldValue (class)">FieldValue</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The maximum field value object.</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Raises:</p>
+<ul class="raise">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>ArgumentError</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>if the value is not a Numeric.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+500
+501
+502</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/client.rb', line 500</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_field_maximum'>field_maximum</span> <span class='id identifier rubyid_value'>value</span>
+  <span class='const'><span class='object_link'><a href="FieldValue.html" title="Google::Cloud::Firestore::FieldValue (class)">FieldValue</a></span></span><span class='period'>.</span><span class='id identifier rubyid_maximum'><span class='object_link'><a href="FieldValue.html#maximum-class_method" title="Google::Cloud::Firestore::FieldValue.maximum (method)">maximum</a></span></span> <span class='id identifier rubyid_value'>value</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="field_minimum-instance_method">
+  
+    #<strong>field_minimum</strong>(value)  &#x21d2; <tt><span class='object_link'><a href="FieldValue.html" title="Google::Cloud::Firestore::FieldValue (class)">FieldValue</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Creates a sentinel value to indicate the setting the field to the
+minimum of its current value and the given value.</p>
+
+<p>If the field is not an integer or double (Numeric), or if the field
+does not yet exist, the transformation will set the field to the input
+value. If a minimum operation is applied where the field and the input
+value are of mixed types (that is - one is an integer and one is a
+double) the field takes on the type of the smaller operand. If the
+operands are equivalent (e.g. 3 and 3.0), the field does not change.
+0, 0.0, and -0.0 are all zero. The minimum of a zero stored value and
+zero input value is always the stored value. The minimum of any
+numeric value x and NaN is NaN.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/firestore</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_firestore'>firestore</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Firestore.html" title="Google::Cloud::Firestore (module)">Firestore</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Firestore.html#new-class_method" title="Google::Cloud::Firestore.new (method)">new</a></span></span>
+
+<span class='comment'># Get a document reference
+</span><span class='id identifier rubyid_nyc_ref'>nyc_ref</span> <span class='op'>=</span> <span class='id identifier rubyid_firestore'>firestore</span><span class='period'>.</span><span class='id identifier rubyid_doc'>doc</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>cities/NYC</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='comment'># Set the population to be at minimum 1,000,000.
+</span><span class='id identifier rubyid_minimum_value'>minimum_value</span> <span class='op'>=</span> <span class='id identifier rubyid_firestore'>firestore</span><span class='period'>.</span><span class='id identifier rubyid_field_minimum'>field_minimum</span> <span class='int'>1000000</span>
+
+<span class='id identifier rubyid_nyc_ref'>nyc_ref</span><span class='period'>.</span><span class='id identifier rubyid_update'>update</span><span class='lparen'>(</span><span class='lbrace'>{</span> <span class='label'>name:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>New York City</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+                 <span class='label'>population:</span> <span class='id identifier rubyid_minimum_value'>minimum_value</span> <span class='rbrace'>}</span><span class='rparen'>)</span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>value</span>
+      
+      
+        <span class='type'>(<tt>Numeric</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The value to compare against the given value to
+calculate the minimum value to set. Required.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="FieldValue.html" title="Google::Cloud::Firestore::FieldValue (class)">FieldValue</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The minimum field value object.</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Raises:</p>
+<ul class="raise">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>ArgumentError</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>if the value is not a Numeric.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+539
+540
+541</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/client.rb', line 539</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_field_minimum'>field_minimum</span> <span class='id identifier rubyid_value'>value</span>
+  <span class='const'><span class='object_link'><a href="FieldValue.html" title="Google::Cloud::Firestore::FieldValue (class)">FieldValue</a></span></span><span class='period'>.</span><span class='id identifier rubyid_minimum'><span class='object_link'><a href="FieldValue.html#minimum-class_method" title="Google::Cloud::Firestore::FieldValue.minimum (method)">minimum</a></span></span> <span class='id identifier rubyid_value'>value</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="field_path-instance_method">
+  
+    #<strong>field_path</strong>(*fields)  &#x21d2; <tt><span class='object_link'><a href="FieldPath.html" title="Google::Cloud::Firestore::FieldPath (class)">FieldPath</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Creates a field path object representing a nested field for
+document data.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/firestore</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_firestore'>firestore</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Firestore.html" title="Google::Cloud::Firestore (module)">Firestore</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Firestore.html#new-class_method" title="Google::Cloud::Firestore.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_user_snap'>user_snap</span> <span class='op'>=</span> <span class='id identifier rubyid_firestore'>firestore</span><span class='period'>.</span><span class='id identifier rubyid_doc'>doc</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>users/frank</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_get'>get</span>
+
+<span class='id identifier rubyid_nested_field_path'>nested_field_path</span> <span class='op'>=</span> <span class='id identifier rubyid_firestore'>firestore</span><span class='period'>.</span><span class='id identifier rubyid_field_path'>field_path</span> <span class='symbol'>:favorites</span><span class='comma'>,</span> <span class='symbol'>:food</span>
+<span class='id identifier rubyid_user_snap'>user_snap</span><span class='period'>.</span><span class='id identifier rubyid_get'>get</span><span class='lparen'>(</span><span class='id identifier rubyid_nested_field_path'>nested_field_path</span><span class='rparen'>)</span> <span class='comment'>#=&gt; &quot;Pizza&quot;</span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>fields</span>
+      
+      
+        <span class='type'>(<tt>String</tt>, <tt>Symbol</tt>, <tt>Array&lt;String|Symbol&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>One or more
+strings representing the path of the data to select. Each field must
+be provided separately.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="FieldPath.html" title="Google::Cloud::Firestore::FieldPath (class)">FieldPath</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The field path object.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+332
+333
+334</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/client.rb', line 332</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_field_path'>field_path</span> <span class='op'>*</span><span class='id identifier rubyid_fields'>fields</span>
+  <span class='const'><span class='object_link'><a href="FieldPath.html" title="Google::Cloud::Firestore::FieldPath (class)">FieldPath</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Firestore.html#new-class_method" title="Google::Cloud::Firestore.new (method)">new</a></span></span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_fields'>fields</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="field_server_time-instance_method">
+  
+    #<strong>field_server_time</strong>  &#x21d2; <tt><span class='object_link'><a href="FieldValue.html" title="Google::Cloud::Firestore::FieldValue (class)">FieldValue</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Creates a field value object representing set a field&#39;s value to
+the server timestamp when accessing the document data.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/firestore</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_firestore'>firestore</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Firestore.html" title="Google::Cloud::Firestore (module)">Firestore</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Firestore.html#new-class_method" title="Google::Cloud::Firestore.new (method)">new</a></span></span>
+
+<span class='comment'># Get a document reference
+</span><span class='id identifier rubyid_nyc_ref'>nyc_ref</span> <span class='op'>=</span> <span class='id identifier rubyid_firestore'>firestore</span><span class='period'>.</span><span class='id identifier rubyid_doc'>doc</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>cities/NYC</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_nyc_ref'>nyc_ref</span><span class='period'>.</span><span class='id identifier rubyid_update'>update</span><span class='lparen'>(</span><span class='lbrace'>{</span> <span class='label'>name:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>New York City</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+                 <span class='label'>updated_at:</span> <span class='id identifier rubyid_firestore'>firestore</span><span class='period'>.</span><span class='id identifier rubyid_field_server_time'>field_server_time</span> <span class='rbrace'>}</span><span class='rparen'>)</span></code></pre>
+    
+  </div>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="FieldValue.html" title="Google::Cloud::Firestore::FieldValue (class)">FieldValue</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The server time field value object.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+374
+375
+376</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/client.rb', line 374</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_field_server_time'>field_server_time</span>
+  <span class='const'><span class='object_link'><a href="FieldValue.html" title="Google::Cloud::Firestore::FieldValue (class)">FieldValue</a></span></span><span class='period'>.</span><span class='id identifier rubyid_server_time'><span class='object_link'><a href="FieldValue.html#server_time-class_method" title="Google::Cloud::Firestore::FieldValue.server_time (method)">server_time</a></span></span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_all-instance_method">
+  
+    #<strong>get_all</strong>(*docs, field_mask: nil) {|documents| ... } &#x21d2; <tt>Enumerator&lt;<span class='object_link'><a href="DocumentSnapshot.html" title="Google::Cloud::Firestore::DocumentSnapshot (class)">DocumentSnapshot</a></span>&gt;</tt> 
+  
+
+  
+    <span class="aliases">Also known as:
+    <span class="names"><span id='get_docs-instance_method'>get_docs</span>, <span id='get_documents-instance_method'>get_documents</span>, <span id='find-instance_method'>find</span></span>
+    </span>
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieves a list of document snapshots.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/firestore</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_firestore'>firestore</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Firestore.html" title="Google::Cloud::Firestore (module)">Firestore</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Firestore.html#new-class_method" title="Google::Cloud::Firestore.new (method)">new</a></span></span>
+
+<span class='comment'># Get and print city documents
+</span><span class='id identifier rubyid_cities'>cities</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>cities/NYC</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>cities/SF</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>cities/LA</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span>
+<span class='id identifier rubyid_firestore'>firestore</span><span class='period'>.</span><span class='id identifier rubyid_get_all'>get_all</span><span class='lparen'>(</span><span class='id identifier rubyid_cities'>cities</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_city'>city</span><span class='op'>|</span>
+  <span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_city'>city</span><span class='period'>.</span><span class='id identifier rubyid_document_id'>document_id</span><span class='embexpr_end'>}</span><span class='tstring_content'> has </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_city'>city</span><span class='lbracket'>[</span><span class='symbol'>:population</span><span class='rbracket'>]</span><span class='embexpr_end'>}</span><span class='tstring_content'> residents.</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span></code></pre>
+    
+      
+        <p class="example_title"><div class='inline'><p>Get docs using a field mask:</p>
+</div></p>
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/firestore</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_firestore'>firestore</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Firestore.html" title="Google::Cloud::Firestore (module)">Firestore</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Firestore.html#new-class_method" title="Google::Cloud::Firestore.new (method)">new</a></span></span>
+
+<span class='comment'># Get and print city documents
+</span><span class='id identifier rubyid_cities'>cities</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>cities/NYC</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>cities/SF</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>cities/LA</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span>
+<span class='id identifier rubyid_firestore'>firestore</span><span class='period'>.</span><span class='id identifier rubyid_get_all'>get_all</span><span class='lparen'>(</span><span class='id identifier rubyid_cities'>cities</span><span class='comma'>,</span> <span class='label'>field_mask:</span> <span class='lbracket'>[</span><span class='symbol'>:population</span><span class='rbracket'>]</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_city'>city</span><span class='op'>|</span>
+  <span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_city'>city</span><span class='period'>.</span><span class='id identifier rubyid_document_id'>document_id</span><span class='embexpr_end'>}</span><span class='tstring_content'> has </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_city'>city</span><span class='lbracket'>[</span><span class='symbol'>:population</span><span class='rbracket'>]</span><span class='embexpr_end'>}</span><span class='tstring_content'> residents.</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>docs</span>
+      
+      
+        <span class='type'>(<tt>String</tt>, <tt><span class='object_link'><a href="DocumentReference.html" title="Google::Cloud::Firestore::DocumentReference (class)">DocumentReference</a></span></tt>, <tt>Array&lt;String|<span class='object_link'><a href="DocumentReference.html" title="Google::Cloud::Firestore::DocumentReference (class)">DocumentReference</a></span>&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>One or more strings representing the path of the document, or
+document reference objects.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>field_mask</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;String|<span class='object_link'><a href="FieldPath.html" title="Google::Cloud::Firestore::FieldPath (class)">FieldPath</a></span>&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>One or more field path
+values, representing the fields of the document to be returned. If a
+document has a field that is not present in this mask, that field
+will not be returned in the response. All fields are returned when
+the mask is not set.</p>
+
+<p>A field path can either be a <span class='object_link'><a href="FieldPath.html" title="Google::Cloud::Firestore::FieldPath (class)">FieldPath</a></span> object, or a dotted string
+representing the nested fields. In other words the string represents
+individual fields joined by &quot;.&quot;. Fields containing <code>~</code>, <code>*</code>, <code>/</code>,
+<code>[</code>, <code>]</code>, and <code>.</code> cannot be in a dotted string, and should provided
+using a <span class='object_link'><a href="FieldPath.html" title="Google::Cloud::Firestore::FieldPath (class)">FieldPath</a></span> object instead. (See <span class='object_link'><a href="#field_path-instance_method" title="Google::Cloud::Firestore::Client#field_path (method)">#field_path</a></span>.)</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Yields:</p>
+<ul class="yield">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>documents</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The block for accessing the document snapshots.</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Yield Parameters:</p>
+<ul class="yieldparam">
+  
+    <li>
+      
+        <span class='name'>document</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="DocumentSnapshot.html" title="Google::Cloud::Firestore::DocumentSnapshot (class)">DocumentSnapshot</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A document snapshot.</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Enumerator&lt;<span class='object_link'><a href="DocumentSnapshot.html" title="Google::Cloud::Firestore::DocumentSnapshot (class)">DocumentSnapshot</a></span>&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>document snapshots list.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/client.rb', line 256</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_get_all'>get_all</span> <span class='op'>*</span><span class='id identifier rubyid_docs'>docs</span><span class='comma'>,</span> <span class='label'>field_mask:</span> <span class='kw'>nil</span>
+  <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
+
+  <span class='kw'>unless</span> <span class='id identifier rubyid_block_given?'>block_given?</span>
+    <span class='kw'>return</span> <span class='id identifier rubyid_enum_for'>enum_for</span> <span class='symbol'>:get_all</span><span class='comma'>,</span> <span class='id identifier rubyid_docs'>docs</span><span class='comma'>,</span> <span class='label'>field_mask:</span> <span class='id identifier rubyid_field_mask'>field_mask</span>
+  <span class='kw'>end</span>
+
+  <span class='id identifier rubyid_doc_paths'>doc_paths</span> <span class='op'>=</span> <span class='const'>Array</span><span class='lparen'>(</span><span class='id identifier rubyid_docs'>docs</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_flatten'>flatten</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_doc_path'>doc_path</span><span class='op'>|</span>
+    <span class='id identifier rubyid_coalesce_doc_path_argument'>coalesce_doc_path_argument</span> <span class='id identifier rubyid_doc_path'>doc_path</span>
+  <span class='kw'>end</span>
+  <span class='id identifier rubyid_mask'>mask</span> <span class='op'>=</span> <span class='const'>Array</span><span class='lparen'>(</span><span class='id identifier rubyid_field_mask'>field_mask</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_field_path'>field_path</span><span class='op'>|</span>
+    <span class='kw'>if</span> <span class='id identifier rubyid_field_path'>field_path</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span> <span class='const'><span class='object_link'><a href="FieldPath.html" title="Google::Cloud::Firestore::FieldPath (class)">FieldPath</a></span></span>
+      <span class='id identifier rubyid_field_path'>field_path</span><span class='period'>.</span><span class='id identifier rubyid_formatted_string'>formatted_string</span>
+    <span class='kw'>else</span>
+      <span class='const'><span class='object_link'><a href="FieldPath.html" title="Google::Cloud::Firestore::FieldPath (class)">FieldPath</a></span></span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span><span class='lparen'>(</span><span class='id identifier rubyid_field_path'>field_path</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_formatted_string'>formatted_string</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+  <span class='id identifier rubyid_mask'>mask</span> <span class='op'>=</span> <span class='kw'>nil</span> <span class='kw'>if</span> <span class='id identifier rubyid_mask'>mask</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
+
+  <span class='id identifier rubyid_results'>results</span> <span class='op'>=</span> <span class='id identifier rubyid_service'>service</span><span class='period'>.</span><span class='id identifier rubyid_get_documents'>get_documents</span> <span class='id identifier rubyid_doc_paths'>doc_paths</span><span class='comma'>,</span> <span class='label'>mask:</span> <span class='id identifier rubyid_mask'>mask</span>
+  <span class='id identifier rubyid_results'>results</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_result'>result</span><span class='op'>|</span>
+    <span class='kw'>next</span> <span class='kw'>if</span> <span class='id identifier rubyid_result'>result</span><span class='period'>.</span><span class='id identifier rubyid_result'>result</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+    <span class='kw'>yield</span> <span class='const'><span class='object_link'><a href="DocumentSnapshot.html" title="Google::Cloud::Firestore::DocumentSnapshot (class)">DocumentSnapshot</a></span></span><span class='period'>.</span><span class='id identifier rubyid_from_batch_result'>from_batch_result</span> <span class='id identifier rubyid_result'>result</span><span class='comma'>,</span> <span class='kw'>self</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="project_id-instance_method">
+  
+    #<strong>project_id</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The project identifier for the Cloud Firestore database.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>project identifier.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+62
+63
+64</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/client.rb', line 62</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_project_id'>project_id</span>
+  <span class='id identifier rubyid_service'>service</span><span class='period'>.</span><span class='id identifier rubyid_project'>project</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="transaction-instance_method">
+  
+    #<strong>transaction</strong>(max_retries: nil, commit_response: nil) {|transaction| ... } &#x21d2; <tt>Object</tt>, <tt><span class='object_link'><a href="CommitResponse.html" title="Google::Cloud::Firestore::CommitResponse (class)">CommitResponse</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Create a transaction to perform multiple reads and writes that are
+executed atomically at a single logical point in time in a database.</p>
+
+<p>All changes are accumulated in memory until the block completes.
+Transactions will be automatically retried when documents change
+before the transaction is committed. See <span class='object_link'><a href="Transaction.html" title="Google::Cloud::Firestore::Transaction (class)">Transaction</a></span>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/firestore</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_firestore'>firestore</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Firestore.html" title="Google::Cloud::Firestore (module)">Firestore</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Firestore.html#new-class_method" title="Google::Cloud::Firestore.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_firestore'>firestore</span><span class='period'>.</span><span class='id identifier rubyid_transaction'>transaction</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_tx'>tx</span><span class='op'>|</span>
+  <span class='comment'># Set the data for NYC
+</span>  <span class='id identifier rubyid_tx'>tx</span><span class='period'>.</span><span class='id identifier rubyid_set'>set</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>cities/NYC</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='lbrace'>{</span> <span class='label'>name:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>New York City</span><span class='tstring_end'>&quot;</span></span> <span class='rbrace'>}</span><span class='rparen'>)</span>
+
+  <span class='comment'># Update the population for SF
+</span>  <span class='id identifier rubyid_tx'>tx</span><span class='period'>.</span><span class='id identifier rubyid_update'>update</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>cities/SF</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='lbrace'>{</span> <span class='label'>population:</span> <span class='int'>1000000</span> <span class='rbrace'>}</span><span class='rparen'>)</span>
+
+  <span class='comment'># Delete LA
+</span>  <span class='id identifier rubyid_tx'>tx</span><span class='period'>.</span><span class='id identifier rubyid_delete'>delete</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>cities/LA</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+<span class='kw'>end</span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>max_retries</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The maximum number of retries for
+transactions failed due to errors. Default is 5. Optional.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>commit_response</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>When <code>true</code>, the return value from
+this method will be a <code>Google::Cloud::Firestore::CommitResponse</code>
+object with a <code>commit_time</code> attribute. Otherwise, the return
+value from this method will be the return value of the provided
+yield block. Default is <code>false</code>. Optional.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Yields:</p>
+<ul class="yield">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="#transaction-instance_method" title="Google::Cloud::Firestore::Client#transaction (method)">transaction</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The block for reading data and making changes.</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Yield Parameters:</p>
+<ul class="yieldparam">
+  
+    <li>
+      
+        <span class='name'>transaction</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Transaction.html" title="Google::Cloud::Firestore::Transaction (class)">Transaction</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The transaction object for
+making changes.</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Object</tt>, <tt><span class='object_link'><a href="CommitResponse.html" title="Google::Cloud::Firestore::CommitResponse (class)">CommitResponse</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The return value of the provided
+yield block, or if <code>commit_response</code> is provided and true, the
+<code>CommitResponse</code> object from the commit operation.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><a href="https://firebase.google.com/docs/firestore/manage-data/transactions" target="_parent" title="Transactions and Batched Writes">Transactions and Batched Writes</a></li>
+    
+  </ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+628
+629
+630
+631
+632
+633
+634
+635
+636
+637
+638
+639
+640
+641
+642
+643
+644
+645
+646
+647
+648
+649
+650
+651
+652
+653
+654
+655
+656
+657
+658
+659
+660
+661
+662
+663
+664
+665
+666</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/client.rb', line 628</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_transaction'>transaction</span> <span class='label'>max_retries:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>commit_response:</span> <span class='kw'>nil</span>
+  <span class='id identifier rubyid_max_retries'>max_retries</span> <span class='op'>=</span> <span class='int'>5</span> <span class='kw'>unless</span> <span class='id identifier rubyid_max_retries'>max_retries</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span> <span class='const'>Integer</span>
+  <span class='id identifier rubyid_backoff'>backoff</span> <span class='op'>=</span> <span class='lbrace'>{</span> <span class='label'>current:</span> <span class='int'>0</span><span class='comma'>,</span> <span class='label'>delay:</span> <span class='float'>1.0</span><span class='comma'>,</span> <span class='label'>max:</span> <span class='id identifier rubyid_max_retries'>max_retries</span><span class='comma'>,</span> <span class='label'>mod:</span> <span class='float'>1.3</span> <span class='rbrace'>}</span>
+
+  <span class='id identifier rubyid_transaction'>transaction</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Transaction.html" title="Google::Cloud::Firestore::Transaction (class)">Transaction</a></span></span><span class='period'>.</span><span class='id identifier rubyid_from_client'>from_client</span> <span class='kw'>self</span>
+  <span class='kw'>begin</span>
+    <span class='id identifier rubyid_transaction_return'>transaction_return</span> <span class='op'>=</span> <span class='kw'>yield</span> <span class='id identifier rubyid_transaction'>transaction</span>
+    <span class='id identifier rubyid_commit_return'>commit_return</span> <span class='op'>=</span> <span class='id identifier rubyid_transaction'>transaction</span><span class='period'>.</span><span class='id identifier rubyid_commit'>commit</span>
+    <span class='comment'># Conditional return value, depending on truthy commit_response
+</span>    <span class='id identifier rubyid_commit_response'>commit_response</span> <span class='op'>?</span> <span class='id identifier rubyid_commit_return'>commit_return</span> <span class='op'>:</span> <span class='id identifier rubyid_transaction_return'>transaction_return</span>
+  <span class='kw'>rescue</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'>UnavailableError</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_err'>err</span>
+    <span class='comment'># Re-raise if retried more than the max
+</span>    <span class='id identifier rubyid_raise'>raise</span> <span class='id identifier rubyid_err'>err</span> <span class='kw'>if</span> <span class='id identifier rubyid_backoff'>backoff</span><span class='lbracket'>[</span><span class='symbol'>:current</span><span class='rbracket'>]</span> <span class='op'>&gt;</span> <span class='id identifier rubyid_backoff'>backoff</span><span class='lbracket'>[</span><span class='symbol'>:max</span><span class='rbracket'>]</span>
+
+    <span class='comment'># Sleep with incremental backoff before restarting
+</span>    <span class='id identifier rubyid_sleep'>sleep</span> <span class='id identifier rubyid_backoff'>backoff</span><span class='lbracket'>[</span><span class='symbol'>:delay</span><span class='rbracket'>]</span>
+
+    <span class='comment'># Update increment backoff delay and retry counter
+</span>    <span class='id identifier rubyid_backoff'>backoff</span><span class='lbracket'>[</span><span class='symbol'>:delay</span><span class='rbracket'>]</span> <span class='op'>*=</span> <span class='id identifier rubyid_backoff'>backoff</span><span class='lbracket'>[</span><span class='symbol'>:mod</span><span class='rbracket'>]</span>
+    <span class='id identifier rubyid_backoff'>backoff</span><span class='lbracket'>[</span><span class='symbol'>:current</span><span class='rbracket'>]</span> <span class='op'>+=</span> <span class='int'>1</span>
+
+    <span class='comment'># Create new transaction and retry
+</span>    <span class='id identifier rubyid_transaction'>transaction</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Transaction.html" title="Google::Cloud::Firestore::Transaction (class)">Transaction</a></span></span><span class='period'>.</span><span class='id identifier rubyid_from_client'>from_client</span> \
+      <span class='kw'>self</span><span class='comma'>,</span> <span class='label'>previous_transaction:</span> <span class='id identifier rubyid_transaction'>transaction</span><span class='period'>.</span><span class='id identifier rubyid_transaction_id'>transaction_id</span>
+    <span class='kw'>retry</span>
+  <span class='kw'>rescue</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'>InvalidArgumentError</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_err'>err</span>
+    <span class='comment'># Return if a previous call was retried but ultimately succeeded
+</span>    <span class='kw'>return</span> <span class='kw'>nil</span> <span class='kw'>if</span> <span class='id identifier rubyid_backoff'>backoff</span><span class='lbracket'>[</span><span class='symbol'>:current</span><span class='rbracket'>]</span> <span class='op'>&gt;</span> <span class='int'>0</span>
+
+    <span class='comment'># Re-raise error.
+</span>    <span class='id identifier rubyid_raise'>raise</span> <span class='id identifier rubyid_err'>err</span>
+  <span class='kw'>rescue</span> <span class='const'>StandardError</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_err'>err</span>
+    <span class='comment'># Rollback transaction when handling unexpected error
+</span>    <span class='id identifier rubyid_transaction'>transaction</span><span class='period'>.</span><span class='id identifier rubyid_rollback'>rollback</span> <span class='kw'>rescue</span> <span class='kw'>nil</span>
+
+    <span class='comment'># Re-raise error.
+</span>    <span class='id identifier rubyid_raise'>raise</span> <span class='id identifier rubyid_err'>err</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+  <div id="footer">
+  <ul class="footer-links">
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby" title="Google Cloud on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> GitHub
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues" title="Google Cloud issues on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> Issues
+      </a>
+    </li>
+    <li>
+      <a href="http://stackoverflow.com/questions/tagged/google-cloud-ruby" title="Google Cloud on StackOverflow">
+      <img src="/google-cloud-ruby/img/icon-link-stackoverflow.svg" alt="StackOverflow icon"> StackOverflow
+    </a>
+    </li>
+    <li>
+      <a href="http://rubygems.org/gems/google-cloud" title="Google Cloud on RubyGems">
+        <img src="/google-cloud-ruby/img/icon-link-package-manager.svg" alt="RubyGems icon"> RubyGems
+      </a>
+    </li>
+  </ul>
+
+  <p>
+    Documentation generated by <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool">yard</a>.
+  </p>
+</div>
+
+</div>
