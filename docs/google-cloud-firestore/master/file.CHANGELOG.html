@@ -47,6 +47,20 @@ js:
 
   <div id="content"><div id='filecontents'><h1>Release History</h1>
 
+<h3>0.26.0 / 2019-06-13</h3>
+
+<p>BREAKING CHANGE: The default return value of Client#transaction has been
+changed to the return value of the yielded block. Pass commit_response: true
+for the previous default behavior of returning the CommitResponse.</p>
+
+<ul>
+<li>Add commit_response to Client#transaction</li>
+<li>Add Collection Group queries</li>
+<li>Add CollectionReference#list_documents</li>
+<li>Enable grpc.service_config_disable_resolution</li>
+<li>Use VERSION constant in GAPIC client</li>
+</ul>
+
 <h3>0.25.1 / 2019-04-29</h3>
 
 <ul>
