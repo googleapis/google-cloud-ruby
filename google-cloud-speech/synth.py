@@ -28,7 +28,7 @@ gapic = gcp.GAPICGenerator()
 v1_library = gapic.ruby_library(
     'speech', 'v1',
     artman_output_name='google-cloud-ruby/google-cloud-speech',
-    generator_args=['--dev_samples']
+    include_samples=True
 )
 s.copy(v1_library / 'acceptance')
 s.copy(v1_library / 'lib/google/cloud/speech/v1.rb')
@@ -49,7 +49,7 @@ s.copy(templates)
 v1p1beta1_library = gapic.ruby_library(
     'speech', 'v1p1beta1',
     artman_output_name='google-cloud-ruby/google-cloud-speech',
-    generator_args=['--dev_samples']
+    include_samples=True
 )
 s.copy(v1p1beta1_library / 'acceptance')
 s.copy(v1p1beta1_library / 'lib/google/cloud/speech/v1p1beta1.rb')
