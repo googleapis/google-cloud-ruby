@@ -131,6 +131,7 @@ google-cloud-core:
 - v0.21.0
 - v0.20.1
 google-cloud-dataproc:
+- v0.4.0
 - v0.3.0
 - v0.2.2
 - v0.2.1
