@@ -1,5 +1,10 @@
 # Release History
 
+### 1.0.2 / 2019-06-11
+
+* Update IAM Policy documentation.
+* Add VERSION constant.
+
 ### 1.0.1 / 2019-04-29
 
 * Update RPC retry configuration.
