@@ -1,5 +1,15 @@
 # Release History
 
+### 1.9.2 / 2019-06-13
+
+* Update IAM:
+  * Deprecate Policy#version
+  * Add Binding#condition
+  * Add Google::Type::Expr
+  * Update documentation
+* Update retry configuration
+* Use VERSION constant in GAPIC client
+
 ### 1.9.1 / 2019-04-30
 
 * Fix Spanner session limit bug.
