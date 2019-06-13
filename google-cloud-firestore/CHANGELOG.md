@@ -1,5 +1,17 @@
 # Release History
 
+### 0.26.0 / 2019-06-13
+
+BREAKING CHANGE: The default return value of Client#transaction has been
+changed to the return value of the yielded block. Pass commit_response: true
+for the previous default behavior of returning the CommitResponse.
+
+* Add commit_response to Client#transaction
+* Add Collection Group queries
+* Add CollectionReference#list_documents
+* Enable grpc.service_config_disable_resolution
+* Use VERSION constant in GAPIC client
+
 ### 0.25.1 / 2019-04-29
 
 * Add AUTHENTICATION.md guide.
