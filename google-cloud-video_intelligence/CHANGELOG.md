@@ -1,5 +1,14 @@
 # Release History
 
+### 1.2.0 / 2019-06-14
+
+* Add VideoContext#object_tracking_config (ObjectTrackingConfig)
+* Add TextDetectionConfig#model
+* Add LabelDetectionConfig#frame_confidence_threshold
+* Add LabelDetectionConfig#video_confidence_threshold
+* Update code example documentation
+* Add VERSION constant
+
 ### 1.1.5 / 2019-04-29
 
 * Add AUTHENTICATION.md guide.
