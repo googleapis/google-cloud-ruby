@@ -1,5 +1,9 @@
 # Release History
 
+### 0.15.4 / 2019-06-13
+
+* Fix Logging example in INSTRUMENTATION_CONFIGURATION.md
+
 ### 0.15.3 / 2018-09-20
 
 * Update documentation.
