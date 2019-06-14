@@ -73,7 +73,7 @@ describe Google::Cloud::VideoIntelligence::V1beta1::VideoIntelligenceServiceClie
 
     it 'invokes annotate_video without error' do
       # Create request parameters
-      input_uri = "gs://demomaker/cat.mp4"
+      input_uri = "gs://cloud-samples-data/video/cat.mp4"
       features_element = :LABEL_DETECTION
       features = [features_element]
 
@@ -115,7 +115,7 @@ describe Google::Cloud::VideoIntelligence::V1beta1::VideoIntelligenceServiceClie
 
     it 'invokes annotate_video and returns an operation error.' do
       # Create request parameters
-      input_uri = "gs://demomaker/cat.mp4"
+      input_uri = "gs://cloud-samples-data/video/cat.mp4"
       features_element = :LABEL_DETECTION
       features = [features_element]
 
@@ -157,7 +157,7 @@ describe Google::Cloud::VideoIntelligence::V1beta1::VideoIntelligenceServiceClie
 
     it 'invokes annotate_video with error' do
       # Create request parameters
-      input_uri = "gs://demomaker/cat.mp4"
+      input_uri = "gs://cloud-samples-data/video/cat.mp4"
       features_element = :LABEL_DETECTION
       features = [features_element]
 
