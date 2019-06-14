@@ -85,7 +85,15 @@ module Google
           elsif field.type == "INTEGER"
             Integer value[:v]
           elsif field.type == "FLOAT"
-            Float value[:v]
+            if value[:v] == "Infinity"
+              Float::INFINITY
+            elsif value[:v] == "-Infinity"
+              -Float::INFINITY
+            elsif value[:v] == "NaN"
+              Float::NAN
+            else
+              Float value[:v]
+            end
           elsif field.type == "NUMERIC"
             BigDecimal value[:v]
           elsif field.type == "BOOLEAN"

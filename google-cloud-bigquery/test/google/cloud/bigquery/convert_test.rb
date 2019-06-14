@@ -26,4 +26,26 @@ describe Google::Cloud::Bigquery::Convert do
     t.to_i.must_equal 3
     t.to_f.must_equal 3.333
   end
+
+  describe :format_value do
+    it "converts all floats correctly" do
+      float_type = Google::Apis::BigqueryV2::TableFieldSchema.new(type: "FLOAT")
+
+      f = Google::Cloud::Bigquery::Convert.format_value({ v: "3.333" }, float_type)
+      f.must_be_kind_of ::Float
+      f.must_equal 3.333
+
+      f = Google::Cloud::Bigquery::Convert.format_value({ v: "Infinity" }, float_type)
+      f.must_be_kind_of ::Float
+      f.must_equal Float::INFINITY
+
+      f = Google::Cloud::Bigquery::Convert.format_value({ v: "-Infinity" }, float_type)
+      f.must_be_kind_of ::Float
+      f.must_equal -Float::INFINITY
+
+      f = Google::Cloud::Bigquery::Convert.format_value({ v: "NaN" }, float_type)
+      f.must_be_kind_of ::Float
+      f.must_be :nan?
+    end
+  end
 end
