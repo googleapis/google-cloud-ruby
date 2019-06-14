@@ -359,6 +359,14 @@ module Google
                   {'name' => request.name}
                 end
               )
+              @start_manual_transfer_runs = Google::Gax.create_api_call(
+                @data_transfer_service_stub.method(:start_manual_transfer_runs),
+                defaults["start_manual_transfer_runs"],
+                exception_transformer: exception_transformer,
+                params_extractor: proc do |request|
+                  {'parent' => request.parent}
+                end
+              )
             end
 
             # Service calls
@@ -455,7 +463,7 @@ module Google
             #
             # @param parent [String]
             #   The BigQuery project id where the transfer configuration should be created.
-            #   Must be in the format /projects/\\{project_id}/locations/\\{location_id}
+            #   Must be in the format projects/\\{project_id}/locations/\\{location_id}
             #   If specified location and location of the destination bigquery dataset
             #   do not match - the request will fail.
             # @param transfer_config [Google::Cloud::Bigquery::Datatransfer::V1::TransferConfig | Hash]
@@ -479,6 +487,13 @@ module Google
             #     urn:ietf:wg:oauth:2.0:oob means that authorization code should be
             #     returned in the title bar of the browser, with the page text prompting
             #     the user to copy the code and paste it in the application.
+            # @param version_info [String]
+            #   Optional version info. If users want to find a very recent access token,
+            #   that is, immediately after approving access, users have to set the
+            #   version_info claim in the token request. To obtain the version_info, users
+            #   must use the "none+gsession" response type. which be return a
+            #   version_info back in the authorization response which be be put in a JWT
+            #   claim in the token request.
             # @param options [Google::Gax::CallOptions]
             #   Overrides the default settings for this call, e.g, timeout,
             #   retries, etc.
@@ -501,12 +516,14 @@ module Google
                 parent,
                 transfer_config,
                 authorization_code: nil,
+                version_info: nil,
                 options: nil,
                 &block
               req = {
                 parent: parent,
                 transfer_config: transfer_config,
-                authorization_code: authorization_code
+                authorization_code: authorization_code,
+                version_info: version_info
               }.delete_if { |_, v| v.nil? }
               req = Google::Gax::to_proto(req, Google::Cloud::Bigquery::Datatransfer::V1::CreateTransferConfigRequest)
               @create_transfer_config.call(req, options, &block)
@@ -540,6 +557,13 @@ module Google
             #     urn:ietf:wg:oauth:2.0:oob means that authorization code should be
             #     returned in the title bar of the browser, with the page text prompting
             #     the user to copy the code and paste it in the application.
+            # @param version_info [String]
+            #   Optional version info. If users want to find a very recent access token,
+            #   that is, immediately after approving access, users have to set the
+            #   version_info claim in the token request. To obtain the version_info, users
+            #   must use the "none+gsession" response type. which be return a
+            #   version_info back in the authorization response which be be put in a JWT
+            #   claim in the token request.
             # @param options [Google::Gax::CallOptions]
             #   Overrides the default settings for this call, e.g, timeout,
             #   retries, etc.
@@ -564,12 +588,14 @@ module Google
                 transfer_config,
                 update_mask,
                 authorization_code: nil,
+                version_info: nil,
                 options: nil,
                 &block
               req = {
                 transfer_config: transfer_config,
                 update_mask: update_mask,
-                authorization_code: authorization_code
+                authorization_code: authorization_code,
+                version_info: version_info
               }.delete_if { |_, v| v.nil? }
               req = Google::Gax::to_proto(req, Google::Cloud::Bigquery::Datatransfer::V1::UpdateTransferConfigRequest)
               @update_transfer_config.call(req, options, &block)
@@ -701,6 +727,7 @@ module Google
             # For each date - or whatever granularity the data source supports - in the
             # range, one transfer run is created.
             # Note that runs are created per UTC time in the time range.
+            # DEPRECATED: use StartManualTransferRuns instead.
             #
             # @param parent [String]
             #   Transfer configuration name in the form:
@@ -971,6 +998,52 @@ module Google
               }.delete_if { |_, v| v.nil? }
               req = Google::Gax::to_proto(req, Google::Cloud::Bigquery::Datatransfer::V1::CheckValidCredsRequest)
               @check_valid_creds.call(req, options, &block)
+            end
+
+            # Start manual transfer runs to be executed now with schedule_time equal to
+            # current time. The transfer runs can be created for a time range where the
+            # run_time is between start_time (inclusive) and end_time (exclusive), or for
+            # a specific run_time.
+            #
+            # @param parent [String]
+            #   Transfer configuration name in the form:
+            #   `projects/{project_id}/transferConfigs/{config_id}`.
+            # @param requested_time_range [Google::Cloud::Bigquery::Datatransfer::V1::StartManualTransferRunsRequest::TimeRange | Hash]
+            #   Time range for the transfer runs that should be started.
+            #   A hash of the same form as `Google::Cloud::Bigquery::Datatransfer::V1::StartManualTransferRunsRequest::TimeRange`
+            #   can also be provided.
+            # @param requested_run_time [Google::Protobuf::Timestamp | Hash]
+            #   Specific run_time for a transfer run to be started. The
+            #   requested_run_time must not be in the future.
+            #   A hash of the same form as `Google::Protobuf::Timestamp`
+            #   can also be provided.
+            # @param options [Google::Gax::CallOptions]
+            #   Overrides the default settings for this call, e.g, timeout,
+            #   retries, etc.
+            # @yield [result, operation] Access the result along with the RPC operation
+            # @yieldparam result [Google::Cloud::Bigquery::Datatransfer::V1::StartManualTransferRunsResponse]
+            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @return [Google::Cloud::Bigquery::Datatransfer::V1::StartManualTransferRunsResponse]
+            # @raise [Google::Gax::GaxError] if the RPC is aborted.
+            # @example
+            #   require "google/cloud/bigquery/data_transfer"
+            #
+            #   data_transfer_client = Google::Cloud::Bigquery::DataTransfer.new(version: :v1)
+            #   response = data_transfer_client.start_manual_transfer_runs
+
+            def start_manual_transfer_runs \
+                parent: nil,
+                requested_time_range: nil,
+                requested_run_time: nil,
+                options: nil,
+                &block
+              req = {
+                parent: parent,
+                requested_time_range: requested_time_range,
+                requested_run_time: requested_run_time
+              }.delete_if { |_, v| v.nil? }
+              req = Google::Gax::to_proto(req, Google::Cloud::Bigquery::Datatransfer::V1::StartManualTransferRunsRequest)
+              @start_manual_transfer_runs.call(req, options, &block)
             end
           end
         end
