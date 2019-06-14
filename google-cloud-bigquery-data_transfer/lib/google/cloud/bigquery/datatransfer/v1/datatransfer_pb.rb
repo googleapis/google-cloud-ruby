@@ -11,6 +11,7 @@ require 'google/protobuf/empty_pb'
 require 'google/protobuf/field_mask_pb'
 require 'google/protobuf/timestamp_pb'
 require 'google/protobuf/wrappers_pb'
+require 'google/api/client_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.cloud.bigquery.datatransfer.v1.DataSourceParameter" do
     optional :param_id, :string, 1
@@ -28,6 +29,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :validation_help_url, :string, 13
     optional :immutable, :bool, 14
     optional :recurse, :bool, 15
+    optional :deprecated, :bool, 20
   end
   add_enum "google.cloud.bigquery.datatransfer.v1.DataSourceParameter.Type" do
     value :TYPE_UNSPECIFIED, 0
@@ -84,11 +86,13 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :parent, :string, 1
     optional :transfer_config, :message, 2, "google.cloud.bigquery.datatransfer.v1.TransferConfig"
     optional :authorization_code, :string, 3
+    optional :version_info, :string, 5
   end
   add_message "google.cloud.bigquery.datatransfer.v1.UpdateTransferConfigRequest" do
     optional :transfer_config, :message, 1, "google.cloud.bigquery.datatransfer.v1.TransferConfig"
     optional :authorization_code, :string, 3
     optional :update_mask, :message, 4, "google.protobuf.FieldMask"
+    optional :version_info, :string, 5
   end
   add_message "google.cloud.bigquery.datatransfer.v1.GetTransferConfigRequest" do
     optional :name, :string, 1
@@ -151,6 +155,20 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.cloud.bigquery.datatransfer.v1.ScheduleTransferRunsResponse" do
     repeated :runs, :message, 1, "google.cloud.bigquery.datatransfer.v1.TransferRun"
   end
+  add_message "google.cloud.bigquery.datatransfer.v1.StartManualTransferRunsRequest" do
+    optional :parent, :string, 1
+    oneof :time do
+      optional :requested_time_range, :message, 3, "google.cloud.bigquery.datatransfer.v1.StartManualTransferRunsRequest.TimeRange"
+      optional :requested_run_time, :message, 4, "google.protobuf.Timestamp"
+    end
+  end
+  add_message "google.cloud.bigquery.datatransfer.v1.StartManualTransferRunsRequest.TimeRange" do
+    optional :start_time, :message, 1, "google.protobuf.Timestamp"
+    optional :end_time, :message, 2, "google.protobuf.Timestamp"
+  end
+  add_message "google.cloud.bigquery.datatransfer.v1.StartManualTransferRunsResponse" do
+    repeated :runs, :message, 1, "google.cloud.bigquery.datatransfer.v1.TransferRun"
+  end
 end
 
 module Google
@@ -183,6 +201,9 @@ module Google
           CheckValidCredsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.datatransfer.v1.CheckValidCredsResponse").msgclass
           ScheduleTransferRunsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.datatransfer.v1.ScheduleTransferRunsRequest").msgclass
           ScheduleTransferRunsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.datatransfer.v1.ScheduleTransferRunsResponse").msgclass
+          StartManualTransferRunsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.datatransfer.v1.StartManualTransferRunsRequest").msgclass
+          StartManualTransferRunsRequest::TimeRange = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.datatransfer.v1.StartManualTransferRunsRequest.TimeRange").msgclass
+          StartManualTransferRunsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.datatransfer.v1.StartManualTransferRunsResponse").msgclass
         end
       end
     end

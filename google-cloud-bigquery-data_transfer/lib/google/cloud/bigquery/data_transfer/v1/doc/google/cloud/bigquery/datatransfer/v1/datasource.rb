@@ -14,13 +14,12 @@
 
 
 module Google
-  module Protobuf
-    # Wrapper message for `double`.
-    #
-    # The JSON representation for `DoubleValue` is JSON number.
-    # @!attribute [rw] value
-    #   @return [Float]
-    #     The double value.
-    class DoubleValue; end
+  module Cloud
+    module Bigquery
+      module Datatransfer
+        module V1
+        end
+      end
+    end
   end
 end

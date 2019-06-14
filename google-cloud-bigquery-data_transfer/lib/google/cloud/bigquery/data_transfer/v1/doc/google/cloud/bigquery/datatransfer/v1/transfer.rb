@@ -18,6 +18,28 @@ module Google
     module Bigquery
       module Datatransfer
         module V1
+          # Options customizing the data transfer schedule.
+          # @!attribute [rw] disable_auto_scheduling
+          #   @return [true, false]
+          #     If true, automatic scheduling of data transfer runs for this configuration
+          #     will be disabled. The runs can be started on ad-hoc basis using
+          #     StartManualTransferRuns API. When automatic scheduling is disabled, the
+          #     TransferConfig.schedule field will be ignored.
+          # @!attribute [rw] start_time
+          #   @return [Google::Protobuf::Timestamp]
+          #     Specifies time to start scheduling transfer runs. The first run will be
+          #     scheduled at or after the start time according to a recurrence pattern
+          #     defined in the schedule string. The start time can be changed at any
+          #     moment. The time when a data transfer can be trigerred manually is not
+          #     limited by this option.
+          # @!attribute [rw] end_time
+          #   @return [Google::Protobuf::Timestamp]
+          #     Defines time to stop scheduling transfer runs. A transfer run cannot be
+          #     scheduled at or after the end time. The end time can be changed at any
+          #     moment. The time when a data transfer can be trigerred manually is not
+          #     limited by this option.
+          class ScheduleOptions; end
+
           # Represents a data transfer configuration. A transfer configuration
           # contains all metadata needed to perform a data transfer. For example,
           # `destination_dataset_id` specifies where data should be stored.
@@ -27,11 +49,12 @@ module Google
           # @!attribute [rw] name
           #   @return [String]
           #     The resource name of the transfer config.
-          #     Transfer config names have the form
-          #     `projects/{project_id}/transferConfigs/{config_id}`.
-          #     Where `config_id` is usually a uuid, even though it is not
-          #     guaranteed or required. The name is ignored when creating a transfer
-          #     config.
+          #     Transfer config names have the form of
+          #     `projects/{project_id}/locations/{region}/transferConfigs/{config_id}`.
+          #     The name is automatically generated based on the config_id specified in
+          #     CreateTransferConfigRequest along with project_id and region. If config_id
+          #     is not provided, usually a uuid, even though it is not guaranteed or
+          #     required, will be generated for config_id.
           # @!attribute [rw] destination_dataset_id
           #   @return [String]
           #     The BigQuery target dataset id.
@@ -58,6 +81,9 @@ module Google
           #     See more explanation about the format here:
           #     https://cloud.google.com/appengine/docs/flexible/python/scheduling-jobs-with-cron-yaml#the_schedule_format
           #     NOTE: the granularity should be at least 8 hours, or less frequent.
+          # @!attribute [rw] schedule_options
+          #   @return [Google::Cloud::Bigquery::Datatransfer::V1::ScheduleOptions]
+          #     Options customizing the data transfer schedule.
           # @!attribute [rw] data_refresh_window_days
           #   @return [Integer]
           #     The number of days to look back to automatically refresh the data.
@@ -81,11 +107,7 @@ module Google
           #     Output only. State of the most recently updated transfer run.
           # @!attribute [rw] user_id
           #   @return [Integer]
-          #     Output only. Unique ID of the user on whose behalf transfer is done.
-          #     Applicable only to data sources that do not support service accounts.
-          #     When set to 0, the data source service account credentials are used.
-          #     May be negative. Note, that this identifier is not stable.
-          #     It may change over time even for the same user.
+          #     Deprecated. Unique ID of the user on whose behalf transfer is done.
           # @!attribute [rw] dataset_region
           #   @return [String]
           #     Output only. Region in which BigQuery dataset is located.
@@ -103,8 +125,8 @@ module Google
           #     Minimum time after which a transfer run can be started.
           # @!attribute [rw] run_time
           #   @return [Google::Protobuf::Timestamp]
-          #     For batch transfer runs, specifies the date and time that
-          #     data should be ingested.
+          #     For batch transfer runs, specifies the date and time of the data should be
+          #     ingested.
           # @!attribute [rw] error_status
           #   @return [Google::Rpc::Status]
           #     Status of the transfer run.
@@ -133,18 +155,14 @@ module Google
           #     Data transfer run state. Ignored for input requests.
           # @!attribute [rw] user_id
           #   @return [Integer]
-          #     Output only. Unique ID of the user on whose behalf transfer is done.
-          #     Applicable only to data sources that do not support service accounts.
-          #     When set to 0, the data source service account credentials are used.
-          #     May be negative. Note, that this identifier is not stable.
-          #     It may change over time even for the same user.
+          #     Deprecated. Unique ID of the user on whose behalf transfer is done.
           # @!attribute [rw] schedule
           #   @return [String]
           #     Output only. Describes the schedule of this transfer run if it was
           #     created as part of a regular schedule. For batch transfer runs that are
           #     scheduled manually, this is empty.
           #     NOTE: the system might choose to delay the schedule depending on the
-          #     current load, so `schedule_time` doesn't always matches this.
+          #     current load, so `schedule_time` doesn't always match this.
           class TransferRun; end
 
           # Represents a user facing message for a particular data transfer run.
@@ -186,7 +204,7 @@ module Google
             # Data transfer is in progress.
             RUNNING = 3
 
-            # Data transfer completed successsfully.
+            # Data transfer completed successfully.
             SUCCEEDED = 4
 
             # Data transfer failed.
