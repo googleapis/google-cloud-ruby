@@ -525,7 +525,7 @@ render UI and request proper OAuth tokens.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Indicates whether the data source supports multiple transfers to different BigQuery targets.</p>
+    <span class="summary_desc"><div class='inline'><p>Deprecated.</p>
 </div></span>
   
 </li>
@@ -577,7 +577,7 @@ render UI and request proper OAuth tokens.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>The number of seconds to wait for an update from the data source before BigQuery marks the transfer as failed.</p>
+    <span class="summary_desc"><div class='inline'><p>The number of seconds to wait for an update from the data source before the Data Transfer Service marks the transfer as FAILED.</p>
 </div></span>
   
 </li>
@@ -720,8 +720,7 @@ render UI and request proper OAuth tokens.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Data source client id which should be used to receive refresh token.
-When not supplied, no offline credentials are populated for data transfer.</p>
+    <p>Returns Data source client id which should be used to receive refresh token.</p>
 
 
   </div>
@@ -739,8 +738,7 @@ When not supplied, no offline credentials are populated for data transfer.</p>
       
       
         &mdash;
-        <div class='inline'><p>Data source client id which should be used to receive refresh token.
-When not supplied, no offline credentials are populated for data transfer.</p>
+        <div class='inline'><p>Data source client id which should be used to receive refresh token.</p>
 </div>
       
     </li>
@@ -2120,10 +2118,9 @@ for the data source.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Api auth scopes for which refresh token needs to be obtained. Only valid
-when <code>client_id</code> is specified. Ignored otherwise. These are scopes needed
-by a data source to prepare data and ingest them into BigQuery,
-e.g., <a href="https://www.googleapis.com/auth/bigquery">https://www.googleapis.com/auth/bigquery</a></p>
+    <p>Returns Api auth scopes for which refresh token needs to be obtained. These are
+scopes needed by a data source to prepare data and ingest them into
+BigQuery, e.g., <a href="https://www.googleapis.com/auth/bigquery">https://www.googleapis.com/auth/bigquery</a></p>
 
 
   </div>
@@ -2141,10 +2138,9 @@ e.g., <a href="https://www.googleapis.com/auth/bigquery">https://www.googleapis.
       
       
         &mdash;
-        <div class='inline'><p>Api auth scopes for which refresh token needs to be obtained. Only valid
-when <code>client_id</code> is specified. Ignored otherwise. These are scopes needed
-by a data source to prepare data and ingest them into BigQuery,
-e.g., <a href="https://www.googleapis.com/auth/bigquery">https://www.googleapis.com/auth/bigquery</a></p>
+        <div class='inline'><p>Api auth scopes for which refresh token needs to be obtained. These are
+scopes needed by a data source to prepare data and ingest them into
+BigQuery, e.g., <a href="https://www.googleapis.com/auth/bigquery">https://www.googleapis.com/auth/bigquery</a></p>
 </div>
       
     </li>
@@ -2360,8 +2356,7 @@ When set to <code>true</code>, user can override default schedule.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Indicates whether the data source supports multiple transfers
-to different BigQuery targets.</p>
+    <p>Returns Deprecated. This field has no effect.</p>
 
 
   </div>
@@ -2379,8 +2374,7 @@ to different BigQuery targets.</p>
       
       
         &mdash;
-        <div class='inline'><p>Indicates whether the data source supports multiple transfers
-to different BigQuery targets.</p>
+        <div class='inline'><p>Deprecated. This field has no effect.</p>
 </div>
       
     </li>
@@ -2593,7 +2587,7 @@ to different BigQuery targets.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns The number of seconds to wait for an update from the data source
-before BigQuery marks the transfer as failed.</p>
+before the Data Transfer Service marks the transfer as FAILED.</p>
 
 
   </div>
@@ -2612,7 +2606,7 @@ before BigQuery marks the transfer as failed.</p>
       
         &mdash;
         <div class='inline'><p>The number of seconds to wait for an update from the data source
-before BigQuery marks the transfer as failed.</p>
+before the Data Transfer Service marks the transfer as FAILED.</p>
 </div>
       
     </li>

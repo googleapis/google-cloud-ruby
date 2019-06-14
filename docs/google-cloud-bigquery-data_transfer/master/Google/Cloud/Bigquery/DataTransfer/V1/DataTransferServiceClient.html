@@ -321,7 +321,7 @@ this service.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#create_transfer_config-instance_method" title="#create_transfer_config (instance method)">#<strong>create_transfer_config</strong>(parent, transfer_config, authorization_code: nil, options: nil) {|result, operation| ... } &#x21d2; Google::Cloud::Bigquery::Datatransfer::V1::TransferConfig </a>
+      <a href="#create_transfer_config-instance_method" title="#create_transfer_config (instance method)">#<strong>create_transfer_config</strong>(parent, transfer_config, authorization_code: nil, version_info: nil, options: nil) {|result, operation| ... } &#x21d2; Google::Cloud::Bigquery::Datatransfer::V1::TransferConfig </a>
     
 
     
@@ -599,7 +599,30 @@ this service.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#update_transfer_config-instance_method" title="#update_transfer_config (instance method)">#<strong>update_transfer_config</strong>(transfer_config, update_mask, authorization_code: nil, options: nil) {|result, operation| ... } &#x21d2; Google::Cloud::Bigquery::Datatransfer::V1::TransferConfig </a>
+      <a href="#start_manual_transfer_runs-instance_method" title="#start_manual_transfer_runs (instance method)">#<strong>start_manual_transfer_runs</strong>(parent: nil, requested_time_range: nil, requested_run_time: nil, options: nil) {|result, operation| ... } &#x21d2; Google::Cloud::Bigquery::Datatransfer::V1::StartManualTransferRunsResponse </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Start manual transfer runs to be executed now with schedule_time equal to current time.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#update_transfer_config-instance_method" title="#update_transfer_config (instance method)">#<strong>update_transfer_config</strong>(transfer_config, update_mask, authorization_code: nil, version_info: nil, options: nil) {|result, operation| ... } &#x21d2; Google::Cloud::Bigquery::Datatransfer::V1::TransferConfig </a>
     
 
     
@@ -939,7 +962,15 @@ custom error handling.</p>
 359
 360
 361
-362</pre>
+362
+363
+364
+365
+366
+367
+368
+369
+370</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/data_transfer/v1/data_transfer_service_client.rb', line 184</span>
@@ -1120,6 +1151,14 @@ custom error handling.</p>
     <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span><span class='comma'>,</span>
     <span class='label'>params_extractor:</span> <span class='id identifier rubyid_proc'>proc</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_request'>request</span><span class='op'>|</span>
       <span class='lbrace'>{</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>name</span><span class='tstring_end'>&#39;</span></span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_request'>request</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span><span class='rbrace'>}</span>
+    <span class='kw'>end</span>
+  <span class='rparen'>)</span>
+  <span class='ivar'>@start_manual_transfer_runs</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
+    <span class='ivar'>@data_transfer_service_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:start_manual_transfer_runs</span><span class='rparen'>)</span><span class='comma'>,</span>
+    <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>start_manual_transfer_runs</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
+    <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span><span class='comma'>,</span>
+    <span class='label'>params_extractor:</span> <span class='id identifier rubyid_proc'>proc</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_request'>request</span><span class='op'>|</span>
+      <span class='lbrace'>{</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>parent</span><span class='tstring_end'>&#39;</span></span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_request'>request</span><span class='period'>.</span><span class='id identifier rubyid_parent'>parent</span><span class='rbrace'>}</span>
     <span class='kw'>end</span>
   <span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
@@ -1632,19 +1671,19 @@ retries, etc.</p>
       <pre class="lines">
 
 
-965
-966
-967
-968
-969
-970
-971
-972
-973
-974</pre>
+992
+993
+994
+995
+996
+997
+998
+999
+1000
+1001</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/data_transfer/v1/data_transfer_service_client.rb', line 965</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/data_transfer/v1/data_transfer_service_client.rb', line 992</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_check_valid_creds'>check_valid_creds</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -1664,7 +1703,7 @@ retries, etc.</p>
       <div class="method_details ">
   <h3 class="signature " id="create_transfer_config-instance_method">
   
-    #<strong>create_transfer_config</strong>(parent, transfer_config, authorization_code: nil, options: nil) {|result, operation| ... } &#x21d2; <tt><span class='object_link'><a href="../../Datatransfer/V1/TransferConfig.html" title="Google::Cloud::Bigquery::Datatransfer::V1::TransferConfig (class)">Google::Cloud::Bigquery::Datatransfer::V1::TransferConfig</a></span></tt> 
+    #<strong>create_transfer_config</strong>(parent, transfer_config, authorization_code: nil, version_info: nil, options: nil) {|result, operation| ... } &#x21d2; <tt><span class='object_link'><a href="../../Datatransfer/V1/TransferConfig.html" title="Google::Cloud::Bigquery::Datatransfer::V1::TransferConfig (class)">Google::Cloud::Bigquery::Datatransfer::V1::TransferConfig</a></span></tt> 
   
 
   
@@ -1707,7 +1746,7 @@ retries, etc.</p>
       
         &mdash;
         <div class='inline'><p>The BigQuery project id where the transfer configuration should be created.
-Must be in the format /projects/{project_id}/locations/{location_id}
+Must be in the format projects/{project_id}/locations/{location_id}
 If specified location and location of the destination bigquery dataset
 do not match - the request will fail.</p>
 </div>
@@ -1759,6 +1798,26 @@ urn:ietf:wg:oauth:2.0:oob means that authorization code should be
 returned in the title bar of the browser, with the page text prompting
 the user to copy the code and paste it in the application.</li>
 </ul>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>version_info</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Optional version info. If users want to find a very recent access token,
+that is, immediately after approving access, users have to set the
+version_info claim in the token request. To obtain the version_info, users
+must use the &quot;none+gsession&quot; response type. which be return a
+version_info back in the authorization response which be be put in a JWT
+claim in the token request.</p>
 </div>
       
     </li>
@@ -1861,34 +1920,38 @@ retries, etc.</p>
       <pre class="lines">
 
 
-500
-501
-502
-503
-504
-505
-506
-507
-508
-509
-510
-511
-512
-513</pre>
+515
+516
+517
+518
+519
+520
+521
+522
+523
+524
+525
+526
+527
+528
+529
+530</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/data_transfer/v1/data_transfer_service_client.rb', line 500</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/data_transfer/v1/data_transfer_service_client.rb', line 515</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_transfer_config'>create_transfer_config</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
     <span class='id identifier rubyid_transfer_config'>transfer_config</span><span class='comma'>,</span>
     <span class='label'>authorization_code:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+    <span class='label'>version_info:</span> <span class='kw'>nil</span><span class='comma'>,</span>
     <span class='label'>options:</span> <span class='kw'>nil</span><span class='comma'>,</span>
     <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
   <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='lbrace'>{</span>
     <span class='label'>parent:</span> <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
     <span class='label'>transfer_config:</span> <span class='id identifier rubyid_transfer_config'>transfer_config</span><span class='comma'>,</span>
-    <span class='label'>authorization_code:</span> <span class='id identifier rubyid_authorization_code'>authorization_code</span>
+    <span class='label'>authorization_code:</span> <span class='id identifier rubyid_authorization_code'>authorization_code</span><span class='comma'>,</span>
+    <span class='label'>version_info:</span> <span class='id identifier rubyid_version_info'>version_info</span>
   <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span>
   <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='id identifier rubyid_to_proto'>to_proto</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Bigquery.html" title="Google::Cloud::Bigquery (module)">Bigquery</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Datatransfer.html" title="Google::Cloud::Bigquery::Datatransfer (module)">Datatransfer</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Datatransfer/V1.html" title="Google::Cloud::Bigquery::Datatransfer::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Datatransfer/V1/CreateTransferConfigRequest.html" title="Google::Cloud::Bigquery::Datatransfer::V1::CreateTransferConfigRequest (class)">CreateTransferConfigRequest</a></span></span><span class='rparen'>)</span>
   <span class='ivar'>@create_transfer_config</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
@@ -2036,20 +2099,20 @@ retries, etc.</p>
       <pre class="lines">
 
 
-598
-599
-600
-601
-602
-603
-604
-605
-606
-607
-608</pre>
+624
+625
+626
+627
+628
+629
+630
+631
+632
+633
+634</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/data_transfer/v1/data_transfer_service_client.rb', line 598</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/data_transfer/v1/data_transfer_service_client.rb', line 624</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete_transfer_config'>delete_transfer_config</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -2204,20 +2267,20 @@ retries, etc.</p>
       <pre class="lines">
 
 
-804
-805
-806
-807
-808
-809
-810
-811
-812
-813
-814</pre>
+831
+832
+833
+834
+835
+836
+837
+838
+839
+840
+841</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/data_transfer/v1/data_transfer_service_client.rb', line 804</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/data_transfer/v1/data_transfer_service_client.rb', line 831</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete_transfer_run'>delete_transfer_run</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -2382,19 +2445,19 @@ retries, etc.</p>
       <pre class="lines">
 
 
-387
-388
-389
-390
-391
-392
-393
-394
 395
-396</pre>
+396
+397
+398
+399
+400
+401
+402
+403
+404</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/data_transfer/v1/data_transfer_service_client.rb', line 387</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/data_transfer/v1/data_transfer_service_client.rb', line 395</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_data_source'>get_data_source</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -2557,19 +2620,19 @@ retries, etc.</p>
       <pre class="lines">
 
 
-630
-631
-632
-633
-634
-635
-636
-637
-638
-639</pre>
+656
+657
+658
+659
+660
+661
+662
+663
+664
+665</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/data_transfer/v1/data_transfer_service_client.rb', line 630</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/data_transfer/v1/data_transfer_service_client.rb', line 656</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_transfer_config'>get_transfer_config</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -2732,19 +2795,19 @@ retries, etc.</p>
       <pre class="lines">
 
 
-774
-775
-776
-777
-778
-779
-780
-781
-782
-783</pre>
+801
+802
+803
+804
+805
+806
+807
+808
+809
+810</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/data_transfer/v1/data_transfer_service_client.rb', line 774</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/data_transfer/v1/data_transfer_service_client.rb', line 801</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_transfer_run'>get_transfer_run</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -2946,21 +3009,21 @@ object.</p>
       <pre class="lines">
 
 
-441
-442
-443
-444
-445
-446
-447
-448
 449
 450
 451
-452</pre>
+452
+453
+454
+455
+456
+457
+458
+459
+460</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/data_transfer/v1/data_transfer_service_client.rb', line 441</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/data_transfer/v1/data_transfer_service_client.rb', line 449</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_data_sources'>list_data_sources</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -3178,23 +3241,23 @@ object.</p>
       <pre class="lines">
 
 
-685
-686
-687
-688
-689
-690
-691
-692
-693
-694
-695
-696
-697
-698</pre>
+711
+712
+713
+714
+715
+716
+717
+718
+719
+720
+721
+722
+723
+724</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/data_transfer/v1/data_transfer_service_client.rb', line 685</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/data_transfer/v1/data_transfer_service_client.rb', line 711</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_transfer_configs'>list_transfer_configs</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -3415,23 +3478,23 @@ object.</p>
       <pre class="lines">
 
 
-925
-926
-927
-928
-929
-930
-931
-932
-933
-934
-935
-936
-937
-938</pre>
+952
+953
+954
+955
+956
+957
+958
+959
+960
+961
+962
+963
+964
+965</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/data_transfer/v1/data_transfer_service_client.rb', line 925</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/data_transfer/v1/data_transfer_service_client.rb', line 952</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_transfer_logs'>list_transfer_logs</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -3667,25 +3730,25 @@ object.</p>
       <pre class="lines">
 
 
-863
-864
-865
-866
-867
-868
-869
-870
-871
-872
-873
-874
-875
-876
-877
-878</pre>
+890
+891
+892
+893
+894
+895
+896
+897
+898
+899
+900
+901
+902
+903
+904
+905</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/data_transfer/v1/data_transfer_service_client.rb', line 863</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/data_transfer/v1/data_transfer_service_client.rb', line 890</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_transfer_runs'>list_transfer_runs</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -3722,7 +3785,8 @@ object.</p>
     <p>Creates transfer runs for a time range [start_time, end_time].
 For each date - or whatever granularity the data source supports - in the
 range, one transfer run is created.
-Note that runs are created per UTC time in the time range.</p>
+Note that runs are created per UTC time in the time range.
+DEPRECATED: use StartManualTransferRuns instead.</p>
 
 
   </div>
@@ -3899,23 +3963,23 @@ retries, etc.</p>
       <pre class="lines">
 
 
-739
-740
-741
-742
-743
-744
-745
-746
-747
-748
-749
-750
-751
-752</pre>
+766
+767
+768
+769
+770
+771
+772
+773
+774
+775
+776
+777
+778
+779</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/data_transfer/v1/data_transfer_service_client.rb', line 739</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/data_transfer/v1/data_transfer_service_client.rb', line 766</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_schedule_transfer_runs'>schedule_transfer_runs</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -3937,9 +4001,229 @@ retries, etc.</p>
 </div>
     
       <div class="method_details ">
+  <h3 class="signature " id="start_manual_transfer_runs-instance_method">
+  
+    #<strong>start_manual_transfer_runs</strong>(parent: nil, requested_time_range: nil, requested_run_time: nil, options: nil) {|result, operation| ... } &#x21d2; <tt><span class='object_link'><a href="../../Datatransfer/V1/StartManualTransferRunsResponse.html" title="Google::Cloud::Bigquery::Datatransfer::V1::StartManualTransferRunsResponse (class)">Google::Cloud::Bigquery::Datatransfer::V1::StartManualTransferRunsResponse</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Start manual transfer runs to be executed now with schedule_time equal to
+current time. The transfer runs can be created for a time range where the
+run_time is between start_time (inclusive) and end_time (exclusive), or for
+a specific run_time.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/bigquery/data_transfer</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_data_transfer_client'>data_transfer_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Bigquery.html" title="Google::Cloud::Bigquery (module)">Bigquery</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../DataTransfer.html" title="Google::Cloud::Bigquery::DataTransfer (module)">DataTransfer</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../DataTransfer.html#new-class_method" title="Google::Cloud::Bigquery::DataTransfer.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v1</span><span class='rparen'>)</span>
+<span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_data_transfer_client'>data_transfer_client</span><span class='period'>.</span><span class='id identifier rubyid_start_manual_transfer_runs'>start_manual_transfer_runs</span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>parent</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Transfer configuration name in the form:
+<code>projects/{project_id}/transferConfigs/{config_id}</code>.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>requested_time_range</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../Datatransfer/V1/StartManualTransferRunsRequest/TimeRange.html" title="Google::Cloud::Bigquery::Datatransfer::V1::StartManualTransferRunsRequest::TimeRange (class)">Google::Cloud::Bigquery::Datatransfer::V1::StartManualTransferRunsRequest::TimeRange</a></span> | Hash</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Time range for the transfer runs that should be started.
+A hash of the same form as <code>Google::Cloud::Bigquery::Datatransfer::V1::StartManualTransferRunsRequest::TimeRange</code>
+can also be provided.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>requested_run_time</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../../../Protobuf/Timestamp.html" title="Google::Protobuf::Timestamp (class)">Google::Protobuf::Timestamp</a></span> | Hash</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Specific run_time for a transfer run to be started. The
+requested_run_time must not be in the future.
+A hash of the same form as <code>Google::Protobuf::Timestamp</code>
+can also be provided.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>options</span>
+      
+      
+        <span class='type'>(<tt>Google::Gax::CallOptions</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Overrides the default settings for this call, e.g, timeout,
+retries, etc.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Yields:</p>
+<ul class="yield">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>result</tt>, <tt>operation</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Access the result along with the RPC operation</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Yield Parameters:</p>
+<ul class="yieldparam">
+  
+    <li>
+      
+        <span class='name'>result</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../Datatransfer/V1/StartManualTransferRunsResponse.html" title="Google::Cloud::Bigquery::Datatransfer::V1::StartManualTransferRunsResponse (class)">Google::Cloud::Bigquery::Datatransfer::V1::StartManualTransferRunsResponse</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>operation</span>
+      
+      
+        <span class='type'>(<tt>GRPC::ActiveCall::Operation</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../Datatransfer/V1/StartManualTransferRunsResponse.html" title="Google::Cloud::Bigquery::Datatransfer::V1::StartManualTransferRunsResponse (class)">Google::Cloud::Bigquery::Datatransfer::V1::StartManualTransferRunsResponse</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Raises:</p>
+<ul class="raise">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Google::Gax::GaxError</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>if the RPC is aborted.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+1034
+1035
+1036
+1037
+1038
+1039
+1040
+1041
+1042
+1043
+1044
+1045
+1046
+1047</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/data_transfer/v1/data_transfer_service_client.rb', line 1034</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_start_manual_transfer_runs'>start_manual_transfer_runs</span> \
+    <span class='label'>parent:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+    <span class='label'>requested_time_range:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+    <span class='label'>requested_run_time:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+    <span class='label'>options:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+    <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
+  <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='lbrace'>{</span>
+    <span class='label'>parent:</span> <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
+    <span class='label'>requested_time_range:</span> <span class='id identifier rubyid_requested_time_range'>requested_time_range</span><span class='comma'>,</span>
+    <span class='label'>requested_run_time:</span> <span class='id identifier rubyid_requested_run_time'>requested_run_time</span>
+  <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span>
+  <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='id identifier rubyid_to_proto'>to_proto</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Bigquery.html" title="Google::Cloud::Bigquery (module)">Bigquery</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Datatransfer.html" title="Google::Cloud::Bigquery::Datatransfer (module)">Datatransfer</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Datatransfer/V1.html" title="Google::Cloud::Bigquery::Datatransfer::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Datatransfer/V1/StartManualTransferRunsRequest.html" title="Google::Cloud::Bigquery::Datatransfer::V1::StartManualTransferRunsRequest (class)">StartManualTransferRunsRequest</a></span></span><span class='rparen'>)</span>
+  <span class='ivar'>@start_manual_transfer_runs</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
   <h3 class="signature " id="update_transfer_config-instance_method">
   
-    #<strong>update_transfer_config</strong>(transfer_config, update_mask, authorization_code: nil, options: nil) {|result, operation| ... } &#x21d2; <tt><span class='object_link'><a href="../../Datatransfer/V1/TransferConfig.html" title="Google::Cloud::Bigquery::Datatransfer::V1::TransferConfig (class)">Google::Cloud::Bigquery::Datatransfer::V1::TransferConfig</a></span></tt> 
+    #<strong>update_transfer_config</strong>(transfer_config, update_mask, authorization_code: nil, version_info: nil, options: nil) {|result, operation| ... } &#x21d2; <tt><span class='object_link'><a href="../../Datatransfer/V1/TransferConfig.html" title="Google::Cloud::Bigquery::Datatransfer::V1::TransferConfig (class)">Google::Cloud::Bigquery::Datatransfer::V1::TransferConfig</a></span></tt> 
   
 
   
@@ -4042,6 +4326,26 @@ the user to copy the code and paste it in the application.</li>
   
     <li>
       
+        <span class='name'>version_info</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Optional version info. If users want to find a very recent access token,
+that is, immediately after approving access, users have to set the
+version_info claim in the token request. To obtain the version_info, users
+must use the &quot;none+gsession&quot; response type. which be return a
+version_info back in the authorization response which be be put in a JWT
+claim in the token request.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
         <span class='name'>options</span>
       
       
@@ -4138,34 +4442,38 @@ retries, etc.</p>
       <pre class="lines">
 
 
-563
-564
-565
-566
-567
-568
-569
-570
-571
-572
-573
-574
-575
-576</pre>
+587
+588
+589
+590
+591
+592
+593
+594
+595
+596
+597
+598
+599
+600
+601
+602</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/data_transfer/v1/data_transfer_service_client.rb', line 563</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/data_transfer/v1/data_transfer_service_client.rb', line 587</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update_transfer_config'>update_transfer_config</span> \
     <span class='id identifier rubyid_transfer_config'>transfer_config</span><span class='comma'>,</span>
     <span class='id identifier rubyid_update_mask'>update_mask</span><span class='comma'>,</span>
     <span class='label'>authorization_code:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+    <span class='label'>version_info:</span> <span class='kw'>nil</span><span class='comma'>,</span>
     <span class='label'>options:</span> <span class='kw'>nil</span><span class='comma'>,</span>
     <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
   <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='lbrace'>{</span>
     <span class='label'>transfer_config:</span> <span class='id identifier rubyid_transfer_config'>transfer_config</span><span class='comma'>,</span>
     <span class='label'>update_mask:</span> <span class='id identifier rubyid_update_mask'>update_mask</span><span class='comma'>,</span>
-    <span class='label'>authorization_code:</span> <span class='id identifier rubyid_authorization_code'>authorization_code</span>
+    <span class='label'>authorization_code:</span> <span class='id identifier rubyid_authorization_code'>authorization_code</span><span class='comma'>,</span>
+    <span class='label'>version_info:</span> <span class='id identifier rubyid_version_info'>version_info</span>
   <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span>
   <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='id identifier rubyid_to_proto'>to_proto</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Bigquery.html" title="Google::Cloud::Bigquery (module)">Bigquery</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Datatransfer.html" title="Google::Cloud::Bigquery::Datatransfer (module)">Datatransfer</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Datatransfer/V1.html" title="Google::Cloud::Bigquery::Datatransfer::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Datatransfer/V1/UpdateTransferConfigRequest.html" title="Google::Cloud::Bigquery::Datatransfer::V1::UpdateTransferConfigRequest (class)">UpdateTransferConfigRequest</a></span></span><span class='rparen'>)</span>
   <span class='ivar'>@update_transfer_config</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>

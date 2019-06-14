@@ -148,6 +148,32 @@ or custom data source specific forms.</p>
       <li class="public ">
   <span class="summary_signature">
     
+      <a href="#deprecated-instance_method" title="#deprecated (instance method)">#<strong>deprecated</strong>  &#x21d2; true, false </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>If true, it should not be used in new transfers, and it should not be visible to users.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#description-instance_method" title="#description (instance method)">#<strong>description</strong>  &#x21d2; String </a>
     
 
@@ -217,7 +243,7 @@ or custom data source specific forms.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>When parameter is a record, describes child fields.</p>
+    <span class="summary_desc"><div class='inline'><p>Deprecated.</p>
 </div></span>
   
 </li>
@@ -347,7 +373,7 @@ or custom data source specific forms.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>If set to true, schema should be taken from the parent with the same parameter_id.</p>
+    <span class="summary_desc"><div class='inline'><p>Deprecated.</p>
 </div></span>
   
 </li>
@@ -373,7 +399,7 @@ or custom data source specific forms.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Can parameter have multiple values.</p>
+    <span class="summary_desc"><div class='inline'><p>Deprecated.</p>
 </div></span>
   
 </li>
@@ -562,9 +588,6 @@ or custom data source specific forms.</p>
       <pre class="lines">
 
 
-74
-75
-76
 77
 78
 79
@@ -587,10 +610,13 @@ or custom data source specific forms.</p>
 96
 97
 98
-99</pre>
+99
+100
+101
+102</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/data_transfer/v1/doc/google/cloud/bigquery/datatransfer/v1/datatransfer.rb', line 74</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/data_transfer/v1/doc/google/cloud/bigquery/datatransfer/v1/datatransfer.rb', line 77</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Bigquery::Datatransfer::V1::DataSourceParameter (class)">DataSourceParameter</a></span></span>
   <span class='comment'># Parameter type.
@@ -611,7 +637,114 @@ or custom data source specific forms.</p>
     <span class='comment'># Boolean parameter.
 </span>    <span class='const'>BOOLEAN</span> <span class='op'>=</span> <span class='int'>4</span>
 
-    <span class='comment'># Record parameter.
+    <span class='comment'># Deprecated. This field has no effect.
+</span>    <span class='const'>RECORD</span> <span class='op'>=</span> <span class='int'>5</span>
+
+    <span class='comment'># Page ID for a Google+ Page.
+</span>    <span class='const'>PLUS_PAGE</span> <span class='op'>=</span> <span class='int'>6</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="deprecated=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="deprecated-instance_method">
+  
+    #<strong>deprecated</strong>  &#x21d2; <tt>true</tt>, <tt>false</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns If true, it should not be used in new transfers, and it should not be
+visible to users.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>true</tt>, <tt>false</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>If true, it should not be used in new transfers, and it should not be
+visible to users.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/data_transfer/v1/doc/google/cloud/bigquery/datatransfer/v1/datatransfer.rb', line 77</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Bigquery::Datatransfer::V1::DataSourceParameter (class)">DataSourceParameter</a></span></span>
+  <span class='comment'># Parameter type.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="DataSourceParameter/Type.html" title="Google::Cloud::Bigquery::Datatransfer::V1::DataSourceParameter::Type (module)">Type</a></span></span>
+    <span class='comment'># Type unspecified.
+</span>    <span class='const'>TYPE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># String parameter.
+</span>    <span class='const'>STRING</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># Integer parameter (64-bits).
+</span>    <span class='comment'># Will be serialized to json as string.
+</span>    <span class='const'>INTEGER</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># Double precision floating point parameter.
+</span>    <span class='const'>DOUBLE</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># Boolean parameter.
+</span>    <span class='const'>BOOLEAN</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># Deprecated. This field has no effect.
 </span>    <span class='const'>RECORD</span> <span class='op'>=</span> <span class='int'>5</span>
 
     <span class='comment'># Page ID for a Google+ Page.
@@ -667,9 +800,6 @@ or custom data source specific forms.</p>
       <pre class="lines">
 
 
-74
-75
-76
 77
 78
 79
@@ -692,10 +822,13 @@ or custom data source specific forms.</p>
 96
 97
 98
-99</pre>
+99
+100
+101
+102</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/data_transfer/v1/doc/google/cloud/bigquery/datatransfer/v1/datatransfer.rb', line 74</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/data_transfer/v1/doc/google/cloud/bigquery/datatransfer/v1/datatransfer.rb', line 77</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Bigquery::Datatransfer::V1::DataSourceParameter (class)">DataSourceParameter</a></span></span>
   <span class='comment'># Parameter type.
@@ -716,7 +849,7 @@ or custom data source specific forms.</p>
     <span class='comment'># Boolean parameter.
 </span>    <span class='const'>BOOLEAN</span> <span class='op'>=</span> <span class='int'>4</span>
 
-    <span class='comment'># Record parameter.
+    <span class='comment'># Deprecated. This field has no effect.
 </span>    <span class='const'>RECORD</span> <span class='op'>=</span> <span class='int'>5</span>
 
     <span class='comment'># Page ID for a Google+ Page.
@@ -772,9 +905,6 @@ or custom data source specific forms.</p>
       <pre class="lines">
 
 
-74
-75
-76
 77
 78
 79
@@ -797,10 +927,13 @@ or custom data source specific forms.</p>
 96
 97
 98
-99</pre>
+99
+100
+101
+102</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/data_transfer/v1/doc/google/cloud/bigquery/datatransfer/v1/datatransfer.rb', line 74</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/data_transfer/v1/doc/google/cloud/bigquery/datatransfer/v1/datatransfer.rb', line 77</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Bigquery::Datatransfer::V1::DataSourceParameter (class)">DataSourceParameter</a></span></span>
   <span class='comment'># Parameter type.
@@ -821,7 +954,7 @@ or custom data source specific forms.</p>
     <span class='comment'># Boolean parameter.
 </span>    <span class='const'>BOOLEAN</span> <span class='op'>=</span> <span class='int'>4</span>
 
-    <span class='comment'># Record parameter.
+    <span class='comment'># Deprecated. This field has no effect.
 </span>    <span class='const'>RECORD</span> <span class='op'>=</span> <span class='int'>5</span>
 
     <span class='comment'># Page ID for a Google+ Page.
@@ -846,7 +979,7 @@ or custom data source specific forms.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns When parameter is a record, describes child fields.</p>
+    <p>Returns Deprecated. This field has no effect.</p>
 
 
   </div>
@@ -864,7 +997,7 @@ or custom data source specific forms.</p>
       
       
         &mdash;
-        <div class='inline'><p>When parameter is a record, describes child fields.</p>
+        <div class='inline'><p>Deprecated. This field has no effect.</p>
 </div>
       
     </li>
@@ -877,9 +1010,6 @@ or custom data source specific forms.</p>
       <pre class="lines">
 
 
-74
-75
-76
 77
 78
 79
@@ -902,10 +1032,13 @@ or custom data source specific forms.</p>
 96
 97
 98
-99</pre>
+99
+100
+101
+102</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/data_transfer/v1/doc/google/cloud/bigquery/datatransfer/v1/datatransfer.rb', line 74</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/data_transfer/v1/doc/google/cloud/bigquery/datatransfer/v1/datatransfer.rb', line 77</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Bigquery::Datatransfer::V1::DataSourceParameter (class)">DataSourceParameter</a></span></span>
   <span class='comment'># Parameter type.
@@ -926,7 +1059,7 @@ or custom data source specific forms.</p>
     <span class='comment'># Boolean parameter.
 </span>    <span class='const'>BOOLEAN</span> <span class='op'>=</span> <span class='int'>4</span>
 
-    <span class='comment'># Record parameter.
+    <span class='comment'># Deprecated. This field has no effect.
 </span>    <span class='const'>RECORD</span> <span class='op'>=</span> <span class='int'>5</span>
 
     <span class='comment'># Page ID for a Google+ Page.
@@ -982,9 +1115,6 @@ or custom data source specific forms.</p>
       <pre class="lines">
 
 
-74
-75
-76
 77
 78
 79
@@ -1007,10 +1137,13 @@ or custom data source specific forms.</p>
 96
 97
 98
-99</pre>
+99
+100
+101
+102</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/data_transfer/v1/doc/google/cloud/bigquery/datatransfer/v1/datatransfer.rb', line 74</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/data_transfer/v1/doc/google/cloud/bigquery/datatransfer/v1/datatransfer.rb', line 77</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Bigquery::Datatransfer::V1::DataSourceParameter (class)">DataSourceParameter</a></span></span>
   <span class='comment'># Parameter type.
@@ -1031,7 +1164,7 @@ or custom data source specific forms.</p>
     <span class='comment'># Boolean parameter.
 </span>    <span class='const'>BOOLEAN</span> <span class='op'>=</span> <span class='int'>4</span>
 
-    <span class='comment'># Record parameter.
+    <span class='comment'># Deprecated. This field has no effect.
 </span>    <span class='const'>RECORD</span> <span class='op'>=</span> <span class='int'>5</span>
 
     <span class='comment'># Page ID for a Google+ Page.
@@ -1087,9 +1220,6 @@ or custom data source specific forms.</p>
       <pre class="lines">
 
 
-74
-75
-76
 77
 78
 79
@@ -1112,10 +1242,13 @@ or custom data source specific forms.</p>
 96
 97
 98
-99</pre>
+99
+100
+101
+102</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/data_transfer/v1/doc/google/cloud/bigquery/datatransfer/v1/datatransfer.rb', line 74</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/data_transfer/v1/doc/google/cloud/bigquery/datatransfer/v1/datatransfer.rb', line 77</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Bigquery::Datatransfer::V1::DataSourceParameter (class)">DataSourceParameter</a></span></span>
   <span class='comment'># Parameter type.
@@ -1136,7 +1269,7 @@ or custom data source specific forms.</p>
     <span class='comment'># Boolean parameter.
 </span>    <span class='const'>BOOLEAN</span> <span class='op'>=</span> <span class='int'>4</span>
 
-    <span class='comment'># Record parameter.
+    <span class='comment'># Deprecated. This field has no effect.
 </span>    <span class='const'>RECORD</span> <span class='op'>=</span> <span class='int'>5</span>
 
     <span class='comment'># Page ID for a Google+ Page.
@@ -1192,9 +1325,6 @@ or custom data source specific forms.</p>
       <pre class="lines">
 
 
-74
-75
-76
 77
 78
 79
@@ -1217,10 +1347,13 @@ or custom data source specific forms.</p>
 96
 97
 98
-99</pre>
+99
+100
+101
+102</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/data_transfer/v1/doc/google/cloud/bigquery/datatransfer/v1/datatransfer.rb', line 74</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/data_transfer/v1/doc/google/cloud/bigquery/datatransfer/v1/datatransfer.rb', line 77</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Bigquery::Datatransfer::V1::DataSourceParameter (class)">DataSourceParameter</a></span></span>
   <span class='comment'># Parameter type.
@@ -1241,7 +1374,7 @@ or custom data source specific forms.</p>
     <span class='comment'># Boolean parameter.
 </span>    <span class='const'>BOOLEAN</span> <span class='op'>=</span> <span class='int'>4</span>
 
-    <span class='comment'># Record parameter.
+    <span class='comment'># Deprecated. This field has no effect.
 </span>    <span class='const'>RECORD</span> <span class='op'>=</span> <span class='int'>5</span>
 
     <span class='comment'># Page ID for a Google+ Page.
@@ -1297,9 +1430,6 @@ or custom data source specific forms.</p>
       <pre class="lines">
 
 
-74
-75
-76
 77
 78
 79
@@ -1322,10 +1452,13 @@ or custom data source specific forms.</p>
 96
 97
 98
-99</pre>
+99
+100
+101
+102</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/data_transfer/v1/doc/google/cloud/bigquery/datatransfer/v1/datatransfer.rb', line 74</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/data_transfer/v1/doc/google/cloud/bigquery/datatransfer/v1/datatransfer.rb', line 77</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Bigquery::Datatransfer::V1::DataSourceParameter (class)">DataSourceParameter</a></span></span>
   <span class='comment'># Parameter type.
@@ -1346,7 +1479,7 @@ or custom data source specific forms.</p>
     <span class='comment'># Boolean parameter.
 </span>    <span class='const'>BOOLEAN</span> <span class='op'>=</span> <span class='int'>4</span>
 
-    <span class='comment'># Record parameter.
+    <span class='comment'># Deprecated. This field has no effect.
 </span>    <span class='const'>RECORD</span> <span class='op'>=</span> <span class='int'>5</span>
 
     <span class='comment'># Page ID for a Google+ Page.
@@ -1371,8 +1504,7 @@ or custom data source specific forms.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns If set to true, schema should be taken from the parent with the same
-parameter_id. Only applicable when parameter type is RECORD.</p>
+    <p>Returns Deprecated. This field has no effect.</p>
 
 
   </div>
@@ -1390,8 +1522,7 @@ parameter_id. Only applicable when parameter type is RECORD.</p>
       
       
         &mdash;
-        <div class='inline'><p>If set to true, schema should be taken from the parent with the same
-parameter_id. Only applicable when parameter type is RECORD.</p>
+        <div class='inline'><p>Deprecated. This field has no effect.</p>
 </div>
       
     </li>
@@ -1404,9 +1535,6 @@ parameter_id. Only applicable when parameter type is RECORD.</p>
       <pre class="lines">
 
 
-74
-75
-76
 77
 78
 79
@@ -1429,10 +1557,13 @@ parameter_id. Only applicable when parameter type is RECORD.</p>
 96
 97
 98
-99</pre>
+99
+100
+101
+102</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/data_transfer/v1/doc/google/cloud/bigquery/datatransfer/v1/datatransfer.rb', line 74</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/data_transfer/v1/doc/google/cloud/bigquery/datatransfer/v1/datatransfer.rb', line 77</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Bigquery::Datatransfer::V1::DataSourceParameter (class)">DataSourceParameter</a></span></span>
   <span class='comment'># Parameter type.
@@ -1453,7 +1584,7 @@ parameter_id. Only applicable when parameter type is RECORD.</p>
     <span class='comment'># Boolean parameter.
 </span>    <span class='const'>BOOLEAN</span> <span class='op'>=</span> <span class='int'>4</span>
 
-    <span class='comment'># Record parameter.
+    <span class='comment'># Deprecated. This field has no effect.
 </span>    <span class='const'>RECORD</span> <span class='op'>=</span> <span class='int'>5</span>
 
     <span class='comment'># Page ID for a Google+ Page.
@@ -1478,7 +1609,7 @@ parameter_id. Only applicable when parameter type is RECORD.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Can parameter have multiple values.</p>
+    <p>Returns Deprecated. This field has no effect.</p>
 
 
   </div>
@@ -1496,7 +1627,7 @@ parameter_id. Only applicable when parameter type is RECORD.</p>
       
       
         &mdash;
-        <div class='inline'><p>Can parameter have multiple values.</p>
+        <div class='inline'><p>Deprecated. This field has no effect.</p>
 </div>
       
     </li>
@@ -1509,9 +1640,6 @@ parameter_id. Only applicable when parameter type is RECORD.</p>
       <pre class="lines">
 
 
-74
-75
-76
 77
 78
 79
@@ -1534,10 +1662,13 @@ parameter_id. Only applicable when parameter type is RECORD.</p>
 96
 97
 98
-99</pre>
+99
+100
+101
+102</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/data_transfer/v1/doc/google/cloud/bigquery/datatransfer/v1/datatransfer.rb', line 74</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/data_transfer/v1/doc/google/cloud/bigquery/datatransfer/v1/datatransfer.rb', line 77</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Bigquery::Datatransfer::V1::DataSourceParameter (class)">DataSourceParameter</a></span></span>
   <span class='comment'># Parameter type.
@@ -1558,7 +1689,7 @@ parameter_id. Only applicable when parameter type is RECORD.</p>
     <span class='comment'># Boolean parameter.
 </span>    <span class='const'>BOOLEAN</span> <span class='op'>=</span> <span class='int'>4</span>
 
-    <span class='comment'># Record parameter.
+    <span class='comment'># Deprecated. This field has no effect.
 </span>    <span class='const'>RECORD</span> <span class='op'>=</span> <span class='int'>5</span>
 
     <span class='comment'># Page ID for a Google+ Page.
@@ -1614,9 +1745,6 @@ parameter_id. Only applicable when parameter type is RECORD.</p>
       <pre class="lines">
 
 
-74
-75
-76
 77
 78
 79
@@ -1639,10 +1767,13 @@ parameter_id. Only applicable when parameter type is RECORD.</p>
 96
 97
 98
-99</pre>
+99
+100
+101
+102</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/data_transfer/v1/doc/google/cloud/bigquery/datatransfer/v1/datatransfer.rb', line 74</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/data_transfer/v1/doc/google/cloud/bigquery/datatransfer/v1/datatransfer.rb', line 77</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Bigquery::Datatransfer::V1::DataSourceParameter (class)">DataSourceParameter</a></span></span>
   <span class='comment'># Parameter type.
@@ -1663,7 +1794,7 @@ parameter_id. Only applicable when parameter type is RECORD.</p>
     <span class='comment'># Boolean parameter.
 </span>    <span class='const'>BOOLEAN</span> <span class='op'>=</span> <span class='int'>4</span>
 
-    <span class='comment'># Record parameter.
+    <span class='comment'># Deprecated. This field has no effect.
 </span>    <span class='const'>RECORD</span> <span class='op'>=</span> <span class='int'>5</span>
 
     <span class='comment'># Page ID for a Google+ Page.
@@ -1719,9 +1850,6 @@ parameter_id. Only applicable when parameter type is RECORD.</p>
       <pre class="lines">
 
 
-74
-75
-76
 77
 78
 79
@@ -1744,10 +1872,13 @@ parameter_id. Only applicable when parameter type is RECORD.</p>
 96
 97
 98
-99</pre>
+99
+100
+101
+102</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/data_transfer/v1/doc/google/cloud/bigquery/datatransfer/v1/datatransfer.rb', line 74</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/data_transfer/v1/doc/google/cloud/bigquery/datatransfer/v1/datatransfer.rb', line 77</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Bigquery::Datatransfer::V1::DataSourceParameter (class)">DataSourceParameter</a></span></span>
   <span class='comment'># Parameter type.
@@ -1768,7 +1899,7 @@ parameter_id. Only applicable when parameter type is RECORD.</p>
     <span class='comment'># Boolean parameter.
 </span>    <span class='const'>BOOLEAN</span> <span class='op'>=</span> <span class='int'>4</span>
 
-    <span class='comment'># Record parameter.
+    <span class='comment'># Deprecated. This field has no effect.
 </span>    <span class='const'>RECORD</span> <span class='op'>=</span> <span class='int'>5</span>
 
     <span class='comment'># Page ID for a Google+ Page.
@@ -1826,9 +1957,6 @@ not fulfill the regex pattern or min/max values.</p>
       <pre class="lines">
 
 
-74
-75
-76
 77
 78
 79
@@ -1851,10 +1979,13 @@ not fulfill the regex pattern or min/max values.</p>
 96
 97
 98
-99</pre>
+99
+100
+101
+102</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/data_transfer/v1/doc/google/cloud/bigquery/datatransfer/v1/datatransfer.rb', line 74</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/data_transfer/v1/doc/google/cloud/bigquery/datatransfer/v1/datatransfer.rb', line 77</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Bigquery::Datatransfer::V1::DataSourceParameter (class)">DataSourceParameter</a></span></span>
   <span class='comment'># Parameter type.
@@ -1875,7 +2006,7 @@ not fulfill the regex pattern or min/max values.</p>
     <span class='comment'># Boolean parameter.
 </span>    <span class='const'>BOOLEAN</span> <span class='op'>=</span> <span class='int'>4</span>
 
-    <span class='comment'># Record parameter.
+    <span class='comment'># Deprecated. This field has no effect.
 </span>    <span class='const'>RECORD</span> <span class='op'>=</span> <span class='int'>5</span>
 
     <span class='comment'># Page ID for a Google+ Page.
@@ -1931,9 +2062,6 @@ not fulfill the regex pattern or min/max values.</p>
       <pre class="lines">
 
 
-74
-75
-76
 77
 78
 79
@@ -1956,10 +2084,13 @@ not fulfill the regex pattern or min/max values.</p>
 96
 97
 98
-99</pre>
+99
+100
+101
+102</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/data_transfer/v1/doc/google/cloud/bigquery/datatransfer/v1/datatransfer.rb', line 74</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/data_transfer/v1/doc/google/cloud/bigquery/datatransfer/v1/datatransfer.rb', line 77</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Bigquery::Datatransfer::V1::DataSourceParameter (class)">DataSourceParameter</a></span></span>
   <span class='comment'># Parameter type.
@@ -1980,7 +2111,7 @@ not fulfill the regex pattern or min/max values.</p>
     <span class='comment'># Boolean parameter.
 </span>    <span class='const'>BOOLEAN</span> <span class='op'>=</span> <span class='int'>4</span>
 
-    <span class='comment'># Record parameter.
+    <span class='comment'># Deprecated. This field has no effect.
 </span>    <span class='const'>RECORD</span> <span class='op'>=</span> <span class='int'>5</span>
 
     <span class='comment'># Page ID for a Google+ Page.
@@ -2036,9 +2167,6 @@ not fulfill the regex pattern or min/max values.</p>
       <pre class="lines">
 
 
-74
-75
-76
 77
 78
 79
@@ -2061,10 +2189,13 @@ not fulfill the regex pattern or min/max values.</p>
 96
 97
 98
-99</pre>
+99
+100
+101
+102</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/data_transfer/v1/doc/google/cloud/bigquery/datatransfer/v1/datatransfer.rb', line 74</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/data_transfer/v1/doc/google/cloud/bigquery/datatransfer/v1/datatransfer.rb', line 77</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Bigquery::Datatransfer::V1::DataSourceParameter (class)">DataSourceParameter</a></span></span>
   <span class='comment'># Parameter type.
@@ -2085,7 +2216,7 @@ not fulfill the regex pattern or min/max values.</p>
     <span class='comment'># Boolean parameter.
 </span>    <span class='const'>BOOLEAN</span> <span class='op'>=</span> <span class='int'>4</span>
 
-    <span class='comment'># Record parameter.
+    <span class='comment'># Deprecated. This field has no effect.
 </span>    <span class='const'>RECORD</span> <span class='op'>=</span> <span class='int'>5</span>
 
     <span class='comment'># Page ID for a Google+ Page.

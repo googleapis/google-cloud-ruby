@@ -109,7 +109,7 @@ steps:</p>
 <pre class="code rb"><code class="rb">require &quot;google/cloud/bigquery/data_transfer&quot;
 
 data_transfer_client = Google::Cloud::Bigquery::DataTransfer.new
-formatted_parent = Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient.project_path(project_id)
+formatted_parent = Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient.location_path(project_id, &quot;us-central1&quot;)
 
 # Iterate over all results.
 data_transfer_client.list_data_sources(formatted_parent).each do |element|
