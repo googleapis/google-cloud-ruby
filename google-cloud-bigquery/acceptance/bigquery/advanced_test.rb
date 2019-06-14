@@ -97,6 +97,18 @@ describe Google::Cloud::Bigquery, :advanced, :bigquery do
     empty_table.delete
   end
 
+  it "converts all floats correctly" do
+    rows = bigquery.query "SELECT CAST('NaN' as FLOAT64) as not_a_number, CAST('+inf' as FLOAT64) as positive_infinity, CAST('-inf' as FLOAT64) as negative_infinity"
+
+    rows.class.must_equal Google::Cloud::Bigquery::Data
+    rows.count.must_equal 1
+    row = rows.first
+
+    assert_predicate row[:not_a_number], :nan? # assert_equal won't work with Float::NAN
+    assert_equal  Float::INFINITY, row[:positive_infinity]
+    assert_equal -Float::INFINITY, row[:negative_infinity]
+  end
+
   def assert_rows_equal returned_row, example_row
     returned_row[:id].must_equal example_row[:id]
     returned_row[:name].must_equal example_row[:name]
