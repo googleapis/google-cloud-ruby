@@ -108,6 +108,7 @@ google-cloud-bigtable:
 - v0.1.1
 - v0.1.0
 google-cloud-container:
+- v0.4.2
 - v0.4.1
 - v0.4.0
 - v0.3.0
