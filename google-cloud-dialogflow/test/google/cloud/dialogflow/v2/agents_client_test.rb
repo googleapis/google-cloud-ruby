@@ -678,4 +678,144 @@ describe Google::Cloud::Dialogflow::V2::AgentsClient do
       end
     end
   end
+
+  describe 'set_agent' do
+    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Dialogflow::V2::AgentsClient#set_agent."
+
+    it 'invokes set_agent without error' do
+      # Create expected grpc response
+      parent = "parent-995424086"
+      display_name = "displayName1615086568"
+      default_language_code = "defaultLanguageCode856575222"
+      time_zone = "timeZone36848094"
+      description = "description-1724546052"
+      avatar_uri = "avatarUri-402824826"
+      enable_logging = false
+      classification_threshold = 1.11581064E8
+      expected_response = {
+        parent: parent,
+        display_name: display_name,
+        default_language_code: default_language_code,
+        time_zone: time_zone,
+        description: description,
+        avatar_uri: avatar_uri,
+        enable_logging: enable_logging,
+        classification_threshold: classification_threshold
+      }
+      expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Dialogflow::V2::Agent)
+
+      # Mock Grpc layer
+      mock_method = proc do
+        OpenStruct.new(execute: expected_response)
+      end
+      mock_stub = MockGrpcClientStub_v2.new(:set_agent, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockAgentsCredentials_v2.new("set_agent")
+
+      Google::Cloud::Dialogflow::V2::Agents::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Dialogflow::Agents.new(version: :v2)
+
+          # Call method
+          response = client.set_agent
+
+          # Verify the response
+          assert_equal(expected_response, response)
+
+          # Call method with block
+          client.set_agent do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
+        end
+      end
+    end
+
+    it 'invokes set_agent with error' do
+      # Mock Grpc layer
+      mock_method = proc do
+        raise custom_error
+      end
+      mock_stub = MockGrpcClientStub_v2.new(:set_agent, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockAgentsCredentials_v2.new("set_agent")
+
+      Google::Cloud::Dialogflow::V2::Agents::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Dialogflow::Agents.new(version: :v2)
+
+          # Call method
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2 do
+            client.set_agent
+          end
+
+          # Verify the GaxError wrapped the custom error that was raised.
+          assert_match(custom_error.message, err.message)
+        end
+      end
+    end
+  end
+
+  describe 'delete_agent' do
+    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Dialogflow::V2::AgentsClient#delete_agent."
+
+    it 'invokes delete_agent without error' do
+
+      # Mock Grpc layer
+      mock_method = proc do
+        OpenStruct.new(execute: nil)
+      end
+      mock_stub = MockGrpcClientStub_v2.new(:delete_agent, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockAgentsCredentials_v2.new("delete_agent")
+
+      Google::Cloud::Dialogflow::V2::Agents::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Dialogflow::Agents.new(version: :v2)
+
+          # Call method
+          response = client.delete_agent
+
+          # Verify the response
+          assert_nil(response)
+
+          # Call method with block
+          client.delete_agent do |response, operation|
+            # Verify the response
+            assert_nil(response)
+            refute_nil(operation)
+          end
+        end
+      end
+    end
+
+    it 'invokes delete_agent with error' do
+      # Mock Grpc layer
+      mock_method = proc do
+        raise custom_error
+      end
+      mock_stub = MockGrpcClientStub_v2.new(:delete_agent, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockAgentsCredentials_v2.new("delete_agent")
+
+      Google::Cloud::Dialogflow::V2::Agents::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Dialogflow::Agents.new(version: :v2)
+
+          # Call method
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2 do
+            client.delete_agent
+          end
+
+          # Verify the GaxError wrapped the custom error that was raised.
+          assert_match(custom_error.message, err.message)
+        end
+      end
+    end
+  end
 end

@@ -103,7 +103,7 @@ module Google
           # You can create an agent using both Dialogflow Standard Edition and
           # Dialogflow Enterprise Edition. For details, see
           # [Dialogflow
-          # Editions](https://cloud.google.com/dialogflow-enterprise/docs/editions).
+          # Editions](https://cloud.google.com/dialogflow/docs/editions).
           #
           # You can save your agent for backup or versioning by exporting the agent by
           # using the {Google::Cloud::Dialogflow::V2::Agents::ExportAgent ExportAgent} method. You can import a saved
@@ -111,13 +111,13 @@ module Google
           #
           # Dialogflow provides several
           # [prebuilt
-          # agents](https://cloud.google.com/dialogflow-enterprise/docs/agents-prebuilt)
+          # agents](https://cloud.google.com/dialogflow/docs/agents-prebuilt)
           # for common conversation scenarios such as determining a date and time,
           # converting currency, and so on.
           #
           # For more information about agents, see the
           # [Dialogflow
-          # documentation](https://cloud.google.com/dialogflow-enterprise/docs/agents-overview).
+          # documentation](https://cloud.google.com/dialogflow/docs/agents-overview).
           #
           # @param credentials [Google::Auth::Credentials, String, Hash, GRPC::Core::Channel, GRPC::Core::ChannelCredentials, Proc]
           #   Provides the means for authenticating requests made by the client. This parameter can
@@ -190,7 +190,7 @@ module Google
           #
           # For more information about contexts, see the
           # [Dialogflow
-          # documentation](https://cloud.google.com/dialogflow-enterprise/docs/contexts-overview).
+          # documentation](https://cloud.google.com/dialogflow/docs/contexts-overview).
           #
           # @param credentials [Google::Auth::Credentials, String, Hash, GRPC::Core::Channel, GRPC::Core::ChannelCredentials, Proc]
           #   Provides the means for authenticating requests made by the client. This parameter can
@@ -273,7 +273,7 @@ module Google
           #
           # For more information about entity types, see the
           # [Dialogflow
-          # documentation](https://cloud.google.com/dialogflow-enterprise/docs/entities-overview).
+          # documentation](https://cloud.google.com/dialogflow/docs/entities-overview).
           #
           # @param credentials [Google::Auth::Credentials, String, Hash, GRPC::Core::Channel, GRPC::Core::ChannelCredentials, Proc]
           #   Provides the means for authenticating requests made by the client. This parameter can
@@ -360,7 +360,7 @@ module Google
           #
           # For more information about intents, see the
           # [Dialogflow
-          # documentation](https://cloud.google.com/dialogflow-enterprise/docs/intents-overview).
+          # documentation](https://cloud.google.com/dialogflow/docs/intents-overview).
           #
           # @param credentials [Google::Auth::Credentials, String, Hash, GRPC::Core::Channel, GRPC::Core::ChannelCredentials, Proc]
           #   Provides the means for authenticating requests made by the client. This parameter can
@@ -428,7 +428,7 @@ module Google
           #
           # For more information about entity types, see the
           # [Dialogflow
-          # documentation](https://cloud.google.com/dialogflow-enterprise/docs/entities-overview).
+          # documentation](https://cloud.google.com/dialogflow/docs/entities-overview).
           #
           # @param credentials [Google::Auth::Credentials, String, Hash, GRPC::Core::Channel, GRPC::Core::ChannelCredentials, Proc]
           #   Provides the means for authenticating requests made by the client. This parameter can

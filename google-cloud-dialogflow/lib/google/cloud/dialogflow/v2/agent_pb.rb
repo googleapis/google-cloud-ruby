@@ -9,6 +9,7 @@ require 'google/longrunning/operations_pb'
 require 'google/protobuf/empty_pb'
 require 'google/protobuf/field_mask_pb'
 require 'google/protobuf/struct_pb'
+require 'google/api/client_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.cloud.dialogflow.v2.Agent" do
     optional :parent, :string, 1
@@ -21,13 +22,34 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :enable_logging, :bool, 8
     optional :match_mode, :enum, 9, "google.cloud.dialogflow.v2.Agent.MatchMode"
     optional :classification_threshold, :float, 10
+    optional :api_version, :enum, 14, "google.cloud.dialogflow.v2.Agent.ApiVersion"
+    optional :tier, :enum, 15, "google.cloud.dialogflow.v2.Agent.Tier"
   end
   add_enum "google.cloud.dialogflow.v2.Agent.MatchMode" do
     value :MATCH_MODE_UNSPECIFIED, 0
     value :MATCH_MODE_HYBRID, 1
     value :MATCH_MODE_ML_ONLY, 2
   end
+  add_enum "google.cloud.dialogflow.v2.Agent.ApiVersion" do
+    value :API_VERSION_UNSPECIFIED, 0
+    value :API_VERSION_V1, 1
+    value :API_VERSION_V2, 2
+    value :API_VERSION_V2_BETA_1, 3
+  end
+  add_enum "google.cloud.dialogflow.v2.Agent.Tier" do
+    value :TIER_UNSPECIFIED, 0
+    value :TIER_STANDARD, 1
+    value :TIER_ENTERPRISE, 2
+    value :TIER_ENTERPRISE_PLUS, 3
+  end
   add_message "google.cloud.dialogflow.v2.GetAgentRequest" do
+    optional :parent, :string, 1
+  end
+  add_message "google.cloud.dialogflow.v2.SetAgentRequest" do
+    optional :agent, :message, 1, "google.cloud.dialogflow.v2.Agent"
+    optional :update_mask, :message, 2, "google.protobuf.FieldMask"
+  end
+  add_message "google.cloud.dialogflow.v2.DeleteAgentRequest" do
     optional :parent, :string, 1
   end
   add_message "google.cloud.dialogflow.v2.SearchAgentsRequest" do
@@ -74,7 +96,11 @@ module Google
       module V2
         Agent = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.Agent").msgclass
         Agent::MatchMode = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.Agent.MatchMode").enummodule
+        Agent::ApiVersion = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.Agent.ApiVersion").enummodule
+        Agent::Tier = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.Agent.Tier").enummodule
         GetAgentRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.GetAgentRequest").msgclass
+        SetAgentRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.SetAgentRequest").msgclass
+        DeleteAgentRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.DeleteAgentRequest").msgclass
         SearchAgentsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.SearchAgentsRequest").msgclass
         SearchAgentsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.SearchAgentsResponse").msgclass
         TrainAgentRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.TrainAgentRequest").msgclass

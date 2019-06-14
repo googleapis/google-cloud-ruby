@@ -50,7 +50,7 @@ module Google
         #
         # For more information about contexts, see the
         # [Dialogflow
-        # documentation](https://cloud.google.com/dialogflow-enterprise/docs/contexts-overview).
+        # documentation](https://cloud.google.com/dialogflow/docs/contexts-overview).
         #
         # @!attribute [r] contexts_stub
         #   @return [Google::Cloud::Dialogflow::V2::Contexts::Stub]

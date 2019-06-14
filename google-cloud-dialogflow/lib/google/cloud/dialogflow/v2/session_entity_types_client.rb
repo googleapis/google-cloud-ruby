@@ -45,7 +45,7 @@ module Google
         #
         # For more information about entity types, see the
         # [Dialogflow
-        # documentation](https://cloud.google.com/dialogflow-enterprise/docs/entities-overview).
+        # documentation](https://cloud.google.com/dialogflow/docs/entities-overview).
         #
         # @!attribute [r] session_entity_types_stub
         #   @return [Google::Cloud::Dialogflow::V2::SessionEntityTypes::Stub]

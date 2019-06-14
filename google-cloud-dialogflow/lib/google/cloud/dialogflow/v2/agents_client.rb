@@ -48,7 +48,7 @@ module Google
         # You can create an agent using both Dialogflow Standard Edition and
         # Dialogflow Enterprise Edition. For details, see
         # [Dialogflow
-        # Editions](https://cloud.google.com/dialogflow-enterprise/docs/editions).
+        # Editions](https://cloud.google.com/dialogflow/docs/editions).
         #
         # You can save your agent for backup or versioning by exporting the agent by
         # using the {Google::Cloud::Dialogflow::V2::Agents::ExportAgent ExportAgent} method. You can import a saved
@@ -56,13 +56,13 @@ module Google
         #
         # Dialogflow provides several
         # [prebuilt
-        # agents](https://cloud.google.com/dialogflow-enterprise/docs/agents-prebuilt)
+        # agents](https://cloud.google.com/dialogflow/docs/agents-prebuilt)
         # for common conversation scenarios such as determining a date and time,
         # converting currency, and so on.
         #
         # For more information about agents, see the
         # [Dialogflow
-        # documentation](https://cloud.google.com/dialogflow-enterprise/docs/agents-overview).
+        # documentation](https://cloud.google.com/dialogflow/docs/agents-overview).
         #
         # @!attribute [r] agents_stub
         #   @return [Google::Cloud::Dialogflow::V2::Agents::Stub]
@@ -273,6 +273,22 @@ module Google
             @restore_agent = Google::Gax.create_api_call(
               @agents_stub.method(:restore_agent),
               defaults["restore_agent"],
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
+            )
+            @set_agent = Google::Gax.create_api_call(
+              @agents_stub.method(:set_agent),
+              defaults["set_agent"],
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'agent.parent' => request.agent.parent}
+              end
+            )
+            @delete_agent = Google::Gax.create_api_call(
+              @agents_stub.method(:delete_agent),
+              defaults["delete_agent"],
               exception_transformer: exception_transformer,
               params_extractor: proc do |request|
                 {'parent' => request.parent}
@@ -683,6 +699,73 @@ module Google
             )
             operation.on_done { |operation| yield(operation) } if block_given?
             operation
+          end
+
+          # Creates/updates the specified agent.
+          #
+          # @param agent [Google::Cloud::Dialogflow::V2::Agent | Hash]
+          #   Required. The agent to update.
+          #   A hash of the same form as `Google::Cloud::Dialogflow::V2::Agent`
+          #   can also be provided.
+          # @param update_mask [Google::Protobuf::FieldMask | Hash]
+          #   Optional. The mask to control which fields get updated.
+          #   A hash of the same form as `Google::Protobuf::FieldMask`
+          #   can also be provided.
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Cloud::Dialogflow::V2::Agent]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
+          # @return [Google::Cloud::Dialogflow::V2::Agent]
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/dialogflow"
+          #
+          #   agents_client = Google::Cloud::Dialogflow::Agents.new(version: :v2)
+          #   response = agents_client.set_agent
+
+          def set_agent \
+              agent: nil,
+              update_mask: nil,
+              options: nil,
+              &block
+            req = {
+              agent: agent,
+              update_mask: update_mask
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Cloud::Dialogflow::V2::SetAgentRequest)
+            @set_agent.call(req, options, &block)
+          end
+
+          # Deletes the specified agent.
+          #
+          # @param parent [String]
+          #   Required. The project that the agent to delete is associated with.
+          #   Format: `projects/<Project ID>`.
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result []
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/dialogflow"
+          #
+          #   agents_client = Google::Cloud::Dialogflow::Agents.new(version: :v2)
+          #   agents_client.delete_agent
+
+          def delete_agent \
+              parent: nil,
+              options: nil,
+              &block
+            req = {
+              parent: parent
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Cloud::Dialogflow::V2::DeleteAgentRequest)
+            @delete_agent.call(req, options, &block)
+            nil
           end
         end
       end
