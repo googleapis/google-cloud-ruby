@@ -47,6 +47,16 @@
             self.class.crypto_key_version_path project, location, key_ring, crypto_key, crypto_key_version
           end
           
+          # Alias for Google::Cloud::Kms::V1::KeyManagementServiceClient.import_job_path.
+          # @param project [String]
+          # @param location [String]
+          # @param key_ring [String]
+          # @param import_job [String]
+          # @return [String]
+          def import_job_path project, location, key_ring, import_job
+            self.class.import_job_path project, location, key_ring, import_job
+          end
+          
           # Alias for Google::Cloud::Kms::V1::KeyManagementServiceClient.key_ring_path.
           # @param project [String]
           # @param location [String]

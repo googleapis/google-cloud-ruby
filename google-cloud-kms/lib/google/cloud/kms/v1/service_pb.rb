@@ -7,25 +7,37 @@ require 'google/protobuf'
 require 'google/api/annotations_pb'
 require 'google/cloud/kms/v1/resources_pb'
 require 'google/protobuf/field_mask_pb'
-require 'google/protobuf/struct_pb'
-require 'google/protobuf/wrappers_pb'
+require 'google/api/client_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.cloud.kms.v1.ListKeyRingsRequest" do
     optional :parent, :string, 1
     optional :page_size, :int32, 2
     optional :page_token, :string, 3
+    optional :filter, :string, 4
+    optional :order_by, :string, 5
   end
   add_message "google.cloud.kms.v1.ListCryptoKeysRequest" do
     optional :parent, :string, 1
     optional :page_size, :int32, 2
     optional :page_token, :string, 3
     optional :version_view, :enum, 4, "google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionView"
+    optional :filter, :string, 5
+    optional :order_by, :string, 6
   end
   add_message "google.cloud.kms.v1.ListCryptoKeyVersionsRequest" do
     optional :parent, :string, 1
     optional :page_size, :int32, 2
     optional :page_token, :string, 3
     optional :view, :enum, 4, "google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionView"
+    optional :filter, :string, 5
+    optional :order_by, :string, 6
+  end
+  add_message "google.cloud.kms.v1.ListImportJobsRequest" do
+    optional :parent, :string, 1
+    optional :page_size, :int32, 2
+    optional :page_token, :string, 3
+    optional :filter, :string, 4
+    optional :order_by, :string, 5
   end
   add_message "google.cloud.kms.v1.ListKeyRingsResponse" do
     repeated :key_rings, :message, 1, "google.cloud.kms.v1.KeyRing"
@@ -42,6 +54,11 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :next_page_token, :string, 2
     optional :total_size, :int32, 3
   end
+  add_message "google.cloud.kms.v1.ListImportJobsResponse" do
+    repeated :import_jobs, :message, 1, "google.cloud.kms.v1.ImportJob"
+    optional :next_page_token, :string, 2
+    optional :total_size, :int32, 3
+  end
   add_message "google.cloud.kms.v1.GetKeyRingRequest" do
     optional :name, :string, 1
   end
@@ -54,6 +71,9 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.cloud.kms.v1.GetPublicKeyRequest" do
     optional :name, :string, 1
   end
+  add_message "google.cloud.kms.v1.GetImportJobRequest" do
+    optional :name, :string, 1
+  end
   add_message "google.cloud.kms.v1.CreateKeyRingRequest" do
     optional :parent, :string, 1
     optional :key_ring_id, :string, 2
@@ -63,10 +83,24 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :parent, :string, 1
     optional :crypto_key_id, :string, 2
     optional :crypto_key, :message, 3, "google.cloud.kms.v1.CryptoKey"
+    optional :skip_initial_version_creation, :bool, 5
   end
   add_message "google.cloud.kms.v1.CreateCryptoKeyVersionRequest" do
     optional :parent, :string, 1
     optional :crypto_key_version, :message, 2, "google.cloud.kms.v1.CryptoKeyVersion"
+  end
+  add_message "google.cloud.kms.v1.ImportCryptoKeyVersionRequest" do
+    optional :parent, :string, 1
+    optional :algorithm, :enum, 2, "google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionAlgorithm"
+    optional :import_job, :string, 4
+    oneof :wrapped_key_material do
+      optional :rsa_aes_wrapped_key, :bytes, 5
+    end
+  end
+  add_message "google.cloud.kms.v1.CreateImportJobRequest" do
+    optional :parent, :string, 1
+    optional :import_job_id, :string, 2
+    optional :import_job, :message, 3, "google.cloud.kms.v1.ImportJob"
   end
   add_message "google.cloud.kms.v1.UpdateCryptoKeyRequest" do
     optional :crypto_key, :message, 1, "google.cloud.kms.v1.CryptoKey"
@@ -136,16 +170,21 @@ module Google
         ListKeyRingsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.kms.v1.ListKeyRingsRequest").msgclass
         ListCryptoKeysRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.kms.v1.ListCryptoKeysRequest").msgclass
         ListCryptoKeyVersionsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.kms.v1.ListCryptoKeyVersionsRequest").msgclass
+        ListImportJobsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.kms.v1.ListImportJobsRequest").msgclass
         ListKeyRingsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.kms.v1.ListKeyRingsResponse").msgclass
         ListCryptoKeysResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.kms.v1.ListCryptoKeysResponse").msgclass
         ListCryptoKeyVersionsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.kms.v1.ListCryptoKeyVersionsResponse").msgclass
+        ListImportJobsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.kms.v1.ListImportJobsResponse").msgclass
         GetKeyRingRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.kms.v1.GetKeyRingRequest").msgclass
         GetCryptoKeyRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.kms.v1.GetCryptoKeyRequest").msgclass
         GetCryptoKeyVersionRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.kms.v1.GetCryptoKeyVersionRequest").msgclass
         GetPublicKeyRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.kms.v1.GetPublicKeyRequest").msgclass
+        GetImportJobRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.kms.v1.GetImportJobRequest").msgclass
         CreateKeyRingRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.kms.v1.CreateKeyRingRequest").msgclass
         CreateCryptoKeyRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.kms.v1.CreateCryptoKeyRequest").msgclass
         CreateCryptoKeyVersionRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.kms.v1.CreateCryptoKeyVersionRequest").msgclass
+        ImportCryptoKeyVersionRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.kms.v1.ImportCryptoKeyVersionRequest").msgclass
+        CreateImportJobRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.kms.v1.CreateImportJobRequest").msgclass
         UpdateCryptoKeyRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.kms.v1.UpdateCryptoKeyRequest").msgclass
         UpdateCryptoKeyVersionRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.kms.v1.UpdateCryptoKeyVersionRequest").msgclass
         EncryptRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.kms.v1.EncryptRequest").msgclass
