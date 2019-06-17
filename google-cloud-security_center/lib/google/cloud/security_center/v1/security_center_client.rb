@@ -28,6 +28,7 @@ require "google/gax/operation"
 require "google/longrunning/operations_client"
 
 require "google/cloud/security_center/v1/securitycenter_service_pb"
+require "google/cloud/security_center/v1/run_asset_discovery_response_pb"
 require "google/cloud/security_center/v1/credentials"
 require "google/cloud/security_center/version"
 

@@ -174,3 +174,11 @@ for version in ['v1']:
         'err = assert_raises Google::Gax::GaxError do',
         f'err = assert_raises Google::Gax::GaxError, CustomTestError_{version} do'
     )
+
+# Deal with weirdness where RunAssetDiscoveryResponse is defined in a separate
+# file that doesn't get required properly.
+s.replace(
+    'lib/google/cloud/security_center/v1/security_center_client.rb',
+    '\nrequire "google/cloud/security_center/v1/securitycenter_service_pb"\n',
+    '\nrequire "google/cloud/security_center/v1/securitycenter_service_pb"\nrequire "google/cloud/security_center/v1/run_asset_discovery_response_pb"\n'
+)
