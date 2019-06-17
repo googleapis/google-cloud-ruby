@@ -5,7 +5,6 @@
 * Add Topic#persistence_regions
 * Subscriber changes
   * Fix potential inventory bug
-    * It is possible 
   * Messages are removed after callback
     * This change prevents the Subscriber inventory from filling up
       when messages are never acked or nacked in the user callback.
