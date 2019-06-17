@@ -19,7 +19,7 @@
 
 
 require 'grpc'
-require 'google/cloud/container_analysis/v1/container_analysis_pb'
+require 'google/devtools/containeranalysis/v1/containeranalysis_pb'
 
 module Google::Cloud::ContainerAnalysis::V1
   module ContainerAnalysisService

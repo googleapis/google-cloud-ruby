@@ -30,10 +30,6 @@ v1_library = gapic.ruby_library(
     config_path='/google/devtools/containeranalysis/artman_containeranalysis_v1.yaml'
 )
 
-os.rename(v1_library / 'lib/google/devtools/containeranalysis/v1/containeranalysis_pb.rb',
-          v1_library / 'lib/google/cloud/container_analysis/v1/container_analysis_pb.rb')
-os.rename(v1_library / 'lib/google/devtools/containeranalysis/v1/containeranalysis_services_pb.rb',
-          v1_library / 'lib/google/cloud/container_analysis/v1/container_analysis_services_pb.rb')
 s.copy(v1_library / 'lib')
 s.copy(v1_library / 'test')
 s.copy(v1_library / 'README.md')
@@ -48,7 +44,7 @@ s.copy(templates)
 
 # Hack grpc service class name and location
 s.replace(
-    'lib/google/cloud/container_analysis/v1/container_analysis_services_pb.rb',
+    'lib/google/devtools/containeranalysis/v1/containeranalysis_services_pb.rb',
     '  module ContainerAnalysis\n',
     '  module ContainerAnalysisService\n'
 )
@@ -59,15 +55,6 @@ s.replace(
     ],
     'Google::Devtools::Containeranalysis::V1::ContainerAnalysis::',
     'Google::Cloud::ContainerAnalysis::V1::ContainerAnalysisService::'
-)
-s.replace(
-    [
-        'lib/google/cloud/container_analysis/v1/container_analysis_client.rb',
-        'lib/google/cloud/container_analysis/v1/container_analysis_services_pb.rb',
-        'test/google/cloud/container_analysis/v1/container_analysis_client_test.rb'
-    ],
-    'google/devtools/containeranalysis/v1/containeranalysis_',
-    'google/cloud/container_analysis/v1/container_analysis_'
 )
 
 # Credentials env vars

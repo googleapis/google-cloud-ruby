@@ -25,7 +25,7 @@ require "pathname"
 
 require "google/gax"
 
-require "google/cloud/container_analysis/v1/container_analysis_pb"
+require "google/devtools/containeranalysis/v1/containeranalysis_pb"
 require "google/cloud/container_analysis/v1/credentials"
 require "google/cloud/container_analysis/version"
 
@@ -130,7 +130,7 @@ module Google
             # the gRPC module only when it's required.
             # See https://github.com/googleapis/toolkit/issues/446
             require "google/gax/grpc"
-            require "google/cloud/container_analysis/v1/container_analysis_services_pb"
+            require "google/devtools/containeranalysis/v1/containeranalysis_services_pb"
 
             credentials ||= Google::Cloud::ContainerAnalysis::V1::Credentials.default
 

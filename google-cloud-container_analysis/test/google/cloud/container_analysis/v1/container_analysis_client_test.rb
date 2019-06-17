@@ -19,7 +19,7 @@ require "google/gax"
 
 require "google/cloud/container_analysis"
 require "google/cloud/container_analysis/v1/container_analysis_client"
-require "google/cloud/container_analysis/v1/container_analysis_services_pb"
+require "google/devtools/containeranalysis/v1/containeranalysis_services_pb"
 
 class CustomTestError_v1 < StandardError; end
 
