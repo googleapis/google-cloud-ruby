@@ -17,7 +17,7 @@ steps:
 
 ### Installation
 ```
-$ gem install grafeas
+$ gem install grafeas-client
 ```
 
 ### Next Steps

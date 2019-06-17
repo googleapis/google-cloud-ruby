@@ -59,6 +59,15 @@ s.replace(
     'Container Analysis API',
     'the Grafeas API'
 )
+s.replace(
+    [
+        'README.md',
+        'lib/grafeas.rb',
+        'lib/grafeas/v1.rb'
+    ],
+    'gem install grafeas\n',
+    'gem install grafeas-client\n'
+)
 
 # Hack AUTHENTICATION.md to fix nonstandard name.
 s.replace(
