@@ -70,6 +70,10 @@ module Google
               "page_token",
               "next_page_token",
               "key_rings"),
+            "list_import_jobs" => Google::Gax::PageDescriptor.new(
+              "page_token",
+              "next_page_token",
+              "import_jobs"),
             "list_crypto_keys" => Google::Gax::PageDescriptor.new(
               "page_token",
               "next_page_token",
@@ -85,7 +89,8 @@ module Google
           # The scopes needed to make gRPC calls to all of the methods defined in
           # this service.
           ALL_SCOPES = [
-            "https://www.googleapis.com/auth/cloud-platform"
+            "https://www.googleapis.com/auth/cloud-platform",
+            "https://www.googleapis.com/auth/cloudkms"
           ].freeze
 
 
@@ -106,6 +111,12 @@ module Google
           )
 
           private_constant :CRYPTO_KEY_VERSION_PATH_TEMPLATE
+
+          IMPORT_JOB_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+            "projects/{project}/locations/{location}/keyRings/{key_ring}/importJobs/{import_job}"
+          )
+
+          private_constant :IMPORT_JOB_PATH_TEMPLATE
 
           KEY_RING_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
             "projects/{project}/locations/{location}/keyRings/{key_ring}"
@@ -163,6 +174,21 @@ module Google
               :"key_ring" => key_ring,
               :"crypto_key" => crypto_key,
               :"crypto_key_version" => crypto_key_version
+            )
+          end
+
+          # Returns a fully-qualified import_job resource name string.
+          # @param project [String]
+          # @param location [String]
+          # @param key_ring [String]
+          # @param import_job [String]
+          # @return [String]
+          def self.import_job_path project, location, key_ring, import_job
+            IMPORT_JOB_PATH_TEMPLATE.render(
+              :"project" => project,
+              :"location" => location,
+              :"key_ring" => key_ring,
+              :"import_job" => import_job
             )
           end
 
@@ -312,6 +338,14 @@ module Google
                 {'parent' => request.parent}
               end
             )
+            @list_import_jobs = Google::Gax.create_api_call(
+              @key_management_service_stub.method(:list_import_jobs),
+              defaults["list_import_jobs"],
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
+            )
             @list_crypto_keys = Google::Gax.create_api_call(
               @key_management_service_stub.method(:list_crypto_keys),
               defaults["list_crypto_keys"],
@@ -331,6 +365,14 @@ module Google
             @get_key_ring = Google::Gax.create_api_call(
               @key_management_service_stub.method(:get_key_ring),
               defaults["get_key_ring"],
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
+            )
+            @get_import_job = Google::Gax.create_api_call(
+              @key_management_service_stub.method(:get_import_job),
+              defaults["get_import_job"],
               exception_transformer: exception_transformer,
               params_extractor: proc do |request|
                 {'name' => request.name}
@@ -360,6 +402,14 @@ module Google
                 {'parent' => request.parent}
               end
             )
+            @create_import_job = Google::Gax.create_api_call(
+              @key_management_service_stub.method(:create_import_job),
+              defaults["create_import_job"],
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
+            )
             @create_crypto_key = Google::Gax.create_api_call(
               @key_management_service_stub.method(:create_crypto_key),
               defaults["create_crypto_key"],
@@ -371,6 +421,14 @@ module Google
             @create_crypto_key_version = Google::Gax.create_api_call(
               @key_management_service_stub.method(:create_crypto_key_version),
               defaults["create_crypto_key_version"],
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
+            )
+            @import_crypto_key_version = Google::Gax.create_api_call(
+              @key_management_service_stub.method(:import_crypto_key_version),
+              defaults["import_crypto_key_version"],
               exception_transformer: exception_transformer,
               params_extractor: proc do |request|
                 {'parent' => request.parent}
@@ -488,14 +546,18 @@ module Google
           #
           # @param parent [String]
           #   Required. The resource name of the location associated with the
-          #   {Google::Cloud::Kms::V1::KeyRing KeyRings}, in the format
-          #   `projects/*/locations/*`.
+          #   {Google::Cloud::Kms::V1::KeyRing KeyRings}, in the format `projects/*/locations/*`.
           # @param page_size [Integer]
           #   The maximum number of resources contained in the underlying API
           #   response. If page streaming is performed per-resource, this
           #   parameter does not affect the return value. If page streaming is
           #   performed per-page, this determines the maximum number of
           #   resources in a page.
+          # @param filter [String]
+          #   Optional. Only include resources that match the filter in the response.
+          # @param order_by [String]
+          #   Optional. Specify how the results should be sorted. If not specified, the
+          #   results will be sorted in the default order.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -530,21 +592,89 @@ module Google
           def list_key_rings \
               parent,
               page_size: nil,
+              filter: nil,
+              order_by: nil,
               options: nil,
               &block
             req = {
               parent: parent,
-              page_size: page_size
+              page_size: page_size,
+              filter: filter,
+              order_by: order_by
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Cloud::Kms::V1::ListKeyRingsRequest)
             @list_key_rings.call(req, options, &block)
           end
 
+          # Lists {Google::Cloud::Kms::V1::ImportJob ImportJobs}.
+          #
+          # @param parent [String]
+          #   Required. The resource name of the {Google::Cloud::Kms::V1::KeyRing KeyRing} to list, in the format
+          #   `projects/*/locations/*/keyRings/*`.
+          # @param page_size [Integer]
+          #   The maximum number of resources contained in the underlying API
+          #   response. If page streaming is performed per-resource, this
+          #   parameter does not affect the return value. If page streaming is
+          #   performed per-page, this determines the maximum number of
+          #   resources in a page.
+          # @param filter [String]
+          #   Optional. Only include resources that match the filter in the response.
+          # @param order_by [String]
+          #   Optional. Specify how the results should be sorted. If not specified, the
+          #   results will be sorted in the default order.
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Gax::PagedEnumerable<Google::Cloud::Kms::V1::ImportJob>]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
+          # @return [Google::Gax::PagedEnumerable<Google::Cloud::Kms::V1::ImportJob>]
+          #   An enumerable of Google::Cloud::Kms::V1::ImportJob instances.
+          #   See Google::Gax::PagedEnumerable documentation for other
+          #   operations such as per-page iteration or access to the response
+          #   object.
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/kms"
+          #
+          #   key_management_client = Google::Cloud::Kms.new(version: :v1)
+          #   formatted_parent = Google::Cloud::Kms::V1::KeyManagementServiceClient.key_ring_path("[PROJECT]", "[LOCATION]", "[KEY_RING]")
+          #
+          #   # Iterate over all results.
+          #   key_management_client.list_import_jobs(formatted_parent).each do |element|
+          #     # Process element.
+          #   end
+          #
+          #   # Or iterate over results one page at a time.
+          #   key_management_client.list_import_jobs(formatted_parent).each_page do |page|
+          #     # Process each page at a time.
+          #     page.each do |element|
+          #       # Process element.
+          #     end
+          #   end
+
+          def list_import_jobs \
+              parent,
+              page_size: nil,
+              filter: nil,
+              order_by: nil,
+              options: nil,
+              &block
+            req = {
+              parent: parent,
+              page_size: page_size,
+              filter: filter,
+              order_by: order_by
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Cloud::Kms::V1::ListImportJobsRequest)
+            @list_import_jobs.call(req, options, &block)
+          end
+
           # Lists {Google::Cloud::Kms::V1::CryptoKey CryptoKeys}.
           #
           # @param parent [String]
-          #   Required. The resource name of the {Google::Cloud::Kms::V1::KeyRing KeyRing}
-          #   to list, in the format `projects/*/locations/*/keyRings/*`.
+          #   Required. The resource name of the {Google::Cloud::Kms::V1::KeyRing KeyRing} to list, in the format
+          #   `projects/*/locations/*/keyRings/*`.
           # @param page_size [Integer]
           #   The maximum number of resources contained in the underlying API
           #   response. If page streaming is performed per-resource, this
@@ -553,6 +683,11 @@ module Google
           #   resources in a page.
           # @param version_view [Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionView]
           #   The fields of the primary version to include in the response.
+          # @param filter [String]
+          #   Optional. Only include resources that match the filter in the response.
+          # @param order_by [String]
+          #   Optional. Specify how the results should be sorted. If not specified, the
+          #   results will be sorted in the default order.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -588,12 +723,16 @@ module Google
               parent,
               page_size: nil,
               version_view: nil,
+              filter: nil,
+              order_by: nil,
               options: nil,
               &block
             req = {
               parent: parent,
               page_size: page_size,
-              version_view: version_view
+              version_view: version_view,
+              filter: filter,
+              order_by: order_by
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Cloud::Kms::V1::ListCryptoKeysRequest)
             @list_crypto_keys.call(req, options, &block)
@@ -602,8 +741,7 @@ module Google
           # Lists {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersions}.
           #
           # @param parent [String]
-          #   Required. The resource name of the
-          #   {Google::Cloud::Kms::V1::CryptoKey CryptoKey} to list, in the format
+          #   Required. The resource name of the {Google::Cloud::Kms::V1::CryptoKey CryptoKey} to list, in the format
           #   `projects/*/locations/*/keyRings/*/cryptoKeys/*`.
           # @param page_size [Integer]
           #   The maximum number of resources contained in the underlying API
@@ -613,6 +751,11 @@ module Google
           #   resources in a page.
           # @param view [Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionView]
           #   The fields to include in the response.
+          # @param filter [String]
+          #   Optional. Only include resources that match the filter in the response.
+          # @param order_by [String]
+          #   Optional. Specify how the results should be sorted. If not specified, the
+          #   results will be sorted in the default order.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -648,12 +791,16 @@ module Google
               parent,
               page_size: nil,
               view: nil,
+              filter: nil,
+              order_by: nil,
               options: nil,
               &block
             req = {
               parent: parent,
               page_size: page_size,
-              view: view
+              view: view,
+              filter: filter,
+              order_by: order_by
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Cloud::Kms::V1::ListCryptoKeyVersionsRequest)
             @list_crypto_key_versions.call(req, options, &block)
@@ -662,8 +809,7 @@ module Google
           # Returns metadata for a given {Google::Cloud::Kms::V1::KeyRing KeyRing}.
           #
           # @param name [String]
-          #   The {Google::Cloud::Kms::V1::KeyRing#name name} of the
-          #   {Google::Cloud::Kms::V1::KeyRing KeyRing} to get.
+          #   The {Google::Cloud::Kms::V1::KeyRing#name name} of the {Google::Cloud::Kms::V1::KeyRing KeyRing} to get.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -690,13 +836,41 @@ module Google
             @get_key_ring.call(req, options, &block)
           end
 
-          # Returns metadata for a given {Google::Cloud::Kms::V1::CryptoKey CryptoKey}, as
-          # well as its {Google::Cloud::Kms::V1::CryptoKey#primary primary}
-          # {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}.
+          # Returns metadata for a given {Google::Cloud::Kms::V1::ImportJob ImportJob}.
           #
           # @param name [String]
-          #   The {Google::Cloud::Kms::V1::CryptoKey#name name} of the
-          #   {Google::Cloud::Kms::V1::CryptoKey CryptoKey} to get.
+          #   The {Google::Cloud::Kms::V1::ImportJob#name name} of the {Google::Cloud::Kms::V1::ImportJob ImportJob} to get.
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Cloud::Kms::V1::ImportJob]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
+          # @return [Google::Cloud::Kms::V1::ImportJob]
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/kms"
+          #
+          #   key_management_client = Google::Cloud::Kms.new(version: :v1)
+          #   formatted_name = Google::Cloud::Kms::V1::KeyManagementServiceClient.import_job_path("[PROJECT]", "[LOCATION]", "[KEY_RING]", "[IMPORT_JOB]")
+          #   response = key_management_client.get_import_job(formatted_name)
+
+          def get_import_job \
+              name,
+              options: nil,
+              &block
+            req = {
+              name: name
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Cloud::Kms::V1::GetImportJobRequest)
+            @get_import_job.call(req, options, &block)
+          end
+
+          # Returns metadata for a given {Google::Cloud::Kms::V1::CryptoKey CryptoKey}, as well as its
+          # {Google::Cloud::Kms::V1::CryptoKey#primary primary} {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}.
+          #
+          # @param name [String]
+          #   The {Google::Cloud::Kms::V1::CryptoKey#name name} of the {Google::Cloud::Kms::V1::CryptoKey CryptoKey} to get.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -723,12 +897,10 @@ module Google
             @get_crypto_key.call(req, options, &block)
           end
 
-          # Returns metadata for a given
-          # {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}.
+          # Returns metadata for a given {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}.
           #
           # @param name [String]
-          #   The {Google::Cloud::Kms::V1::CryptoKeyVersion#name name} of the
-          #   {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} to get.
+          #   The {Google::Cloud::Kms::V1::CryptoKeyVersion#name name} of the {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} to get.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -755,13 +927,11 @@ module Google
             @get_crypto_key_version.call(req, options, &block)
           end
 
-          # Create a new {Google::Cloud::Kms::V1::KeyRing KeyRing} in a given Project and
-          # Location.
+          # Create a new {Google::Cloud::Kms::V1::KeyRing KeyRing} in a given Project and Location.
           #
           # @param parent [String]
           #   Required. The resource name of the location associated with the
-          #   {Google::Cloud::Kms::V1::KeyRing KeyRings}, in the format
-          #   `projects/*/locations/*`.
+          #   {Google::Cloud::Kms::V1::KeyRing KeyRings}, in the format `projects/*/locations/*`.
           # @param key_ring_id [String]
           #   Required. It must be unique within a location and match the regular
           #   expression `[a-zA-Z0-9_-]{1,63}`
@@ -805,16 +975,63 @@ module Google
             @create_key_ring.call(req, options, &block)
           end
 
-          # Create a new {Google::Cloud::Kms::V1::CryptoKey CryptoKey} within a
-          # {Google::Cloud::Kms::V1::KeyRing KeyRing}.
+          # Create a new {Google::Cloud::Kms::V1::ImportJob ImportJob} within a {Google::Cloud::Kms::V1::KeyRing KeyRing}.
+          #
+          # {Google::Cloud::Kms::V1::ImportJob#import_method ImportJob#import_method} is required.
+          #
+          # @param parent [String]
+          #   Required. The {Google::Cloud::Kms::V1::KeyRing#name name} of the {Google::Cloud::Kms::V1::KeyRing KeyRing} associated with the
+          #   {Google::Cloud::Kms::V1::ImportJob ImportJobs}.
+          # @param import_job_id [String]
+          #   Required. It must be unique within a KeyRing and match the regular
+          #   expression `[a-zA-Z0-9_-]{1,63}`
+          # @param import_job [Google::Cloud::Kms::V1::ImportJob | Hash]
+          #   Required. An {Google::Cloud::Kms::V1::ImportJob ImportJob} with initial field values.
+          #   A hash of the same form as `Google::Cloud::Kms::V1::ImportJob`
+          #   can also be provided.
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Cloud::Kms::V1::ImportJob]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
+          # @return [Google::Cloud::Kms::V1::ImportJob]
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/kms"
+          #
+          #   key_management_client = Google::Cloud::Kms.new(version: :v1)
+          #   formatted_parent = Google::Cloud::Kms::V1::KeyManagementServiceClient.key_ring_path("[PROJECT]", "[LOCATION]", "[KEY_RING]")
+          #   import_job_id = "my-import-job"
+          #   import_method = :RSA_OAEP_3072_SHA1_AES_256
+          #   protection_level = :HSM
+          #   import_job = { import_method: import_method, protection_level: protection_level }
+          #   response = key_management_client.create_import_job(formatted_parent, import_job_id, import_job)
+
+          def create_import_job \
+              parent,
+              import_job_id,
+              import_job,
+              options: nil,
+              &block
+            req = {
+              parent: parent,
+              import_job_id: import_job_id,
+              import_job: import_job
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Cloud::Kms::V1::CreateImportJobRequest)
+            @create_import_job.call(req, options, &block)
+          end
+
+          # Create a new {Google::Cloud::Kms::V1::CryptoKey CryptoKey} within a {Google::Cloud::Kms::V1::KeyRing KeyRing}.
           #
           # {Google::Cloud::Kms::V1::CryptoKey#purpose CryptoKey#purpose} and
           # {Google::Cloud::Kms::V1::CryptoKeyVersionTemplate#algorithm CryptoKey#version_template#algorithm}
           # are required.
           #
           # @param parent [String]
-          #   Required. The {Google::Cloud::Kms::V1::KeyRing#name name} of the KeyRing
-          #   associated with the {Google::Cloud::Kms::V1::CryptoKey CryptoKeys}.
+          #   Required. The {Google::Cloud::Kms::V1::KeyRing#name name} of the KeyRing associated with the
+          #   {Google::Cloud::Kms::V1::CryptoKey CryptoKeys}.
           # @param crypto_key_id [String]
           #   Required. It must be unique within a KeyRing and match the regular
           #   expression `[a-zA-Z0-9_-]{1,63}`
@@ -822,6 +1039,12 @@ module Google
           #   A {Google::Cloud::Kms::V1::CryptoKey CryptoKey} with initial field values.
           #   A hash of the same form as `Google::Cloud::Kms::V1::CryptoKey`
           #   can also be provided.
+          # @param skip_initial_version_creation [true, false]
+          #   If set to true, the request will create a {Google::Cloud::Kms::V1::CryptoKey CryptoKey} without any
+          #   {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersions}. You must manually call
+          #   {Google::Cloud::Kms::V1::KeyManagementService::CreateCryptoKeyVersion CreateCryptoKeyVersion} or
+          #   {Google::Cloud::Kms::V1::KeyManagementService::ImportCryptoKeyVersion ImportCryptoKeyVersion}
+          #   before you can use this {Google::Cloud::Kms::V1::CryptoKey CryptoKey}.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -852,31 +1075,30 @@ module Google
               parent,
               crypto_key_id,
               crypto_key,
+              skip_initial_version_creation: nil,
               options: nil,
               &block
             req = {
               parent: parent,
               crypto_key_id: crypto_key_id,
-              crypto_key: crypto_key
+              crypto_key: crypto_key,
+              skip_initial_version_creation: skip_initial_version_creation
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Cloud::Kms::V1::CreateCryptoKeyRequest)
             @create_crypto_key.call(req, options, &block)
           end
 
-          # Create a new {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} in a
-          # {Google::Cloud::Kms::V1::CryptoKey CryptoKey}.
+          # Create a new {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} in a {Google::Cloud::Kms::V1::CryptoKey CryptoKey}.
           #
           # The server will assign the next sequential id. If unset,
           # {Google::Cloud::Kms::V1::CryptoKeyVersion#state state} will be set to
           # {Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::ENABLED ENABLED}.
           #
           # @param parent [String]
-          #   Required. The {Google::Cloud::Kms::V1::CryptoKey#name name} of the
-          #   {Google::Cloud::Kms::V1::CryptoKey CryptoKey} associated with the
-          #   {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersions}.
+          #   Required. The {Google::Cloud::Kms::V1::CryptoKey#name name} of the {Google::Cloud::Kms::V1::CryptoKey CryptoKey} associated with
+          #   the {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersions}.
           # @param crypto_key_version [Google::Cloud::Kms::V1::CryptoKeyVersion | Hash]
-          #   A {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} with initial
-          #   field values.
+          #   A {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} with initial field values.
           #   A hash of the same form as `Google::Cloud::Kms::V1::CryptoKeyVersion`
           #   can also be provided.
           # @param options [Google::Gax::CallOptions]
@@ -908,6 +1130,80 @@ module Google
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Cloud::Kms::V1::CreateCryptoKeyVersionRequest)
             @create_crypto_key_version.call(req, options, &block)
+          end
+
+          # Imports a new {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} into an existing {Google::Cloud::Kms::V1::CryptoKey CryptoKey} using the
+          # wrapped key material provided in the request.
+          #
+          # The version ID will be assigned the next sequential id within the
+          # {Google::Cloud::Kms::V1::CryptoKey CryptoKey}.
+          #
+          # @param parent [String]
+          #   Required. The {Google::Cloud::Kms::V1::CryptoKey#name name} of the {Google::Cloud::Kms::V1::CryptoKey CryptoKey} to
+          #   be imported into.
+          # @param algorithm [Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionAlgorithm]
+          #   Required. The {Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionAlgorithm algorithm} of
+          #   the key being imported. This does not need to match the
+          #   {Google::Cloud::Kms::V1::CryptoKey#version_template version_template} of the {Google::Cloud::Kms::V1::CryptoKey CryptoKey} this
+          #   version imports into.
+          # @param import_job [String]
+          #   Required. The {Google::Cloud::Kms::V1::ImportJob#name name} of the {Google::Cloud::Kms::V1::ImportJob ImportJob} that was used to
+          #   wrap this key material.
+          # @param rsa_aes_wrapped_key [String]
+          #   Wrapped key material produced with
+          #   {Google::Cloud::Kms::V1::ImportJob::ImportMethod::RSA_OAEP_3072_SHA1_AES_256 RSA_OAEP_3072_SHA1_AES_256}
+          #   or
+          #   {Google::Cloud::Kms::V1::ImportJob::ImportMethod::RSA_OAEP_4096_SHA1_AES_256 RSA_OAEP_4096_SHA1_AES_256}.
+          #
+          #   This field contains the concatenation of two wrapped keys:
+          #   <ol>
+          #     <li>An ephemeral AES-256 wrapping key wrapped with the
+          #         {Google::Cloud::Kms::V1::ImportJob#public_key public_key} using RSAES-OAEP with SHA-1,
+          #         MGF1 with SHA-1, and an empty label.
+          #     </li>
+          #     <li>The key to be imported, wrapped with the ephemeral AES-256 key
+          #         using AES-KWP (RFC 5649).
+          #     </li>
+          #   </ol>
+          #
+          #   This format is the same as the format produced by PKCS#11 mechanism
+          #   CKM_RSA_AES_KEY_WRAP.
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Cloud::Kms::V1::CryptoKeyVersion]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
+          # @return [Google::Cloud::Kms::V1::CryptoKeyVersion]
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/kms"
+          #
+          #   key_management_client = Google::Cloud::Kms.new(version: :v1)
+          #   formatted_parent = Google::Cloud::Kms::V1::KeyManagementServiceClient.crypto_key_path("[PROJECT]", "[LOCATION]", "[KEY_RING]", "[CRYPTO_KEY]")
+          #
+          #   # TODO: Initialize `algorithm`:
+          #   algorithm = :CRYPTO_KEY_VERSION_ALGORITHM_UNSPECIFIED
+          #
+          #   # TODO: Initialize `import_job`:
+          #   import_job = ''
+          #   response = key_management_client.import_crypto_key_version(formatted_parent, algorithm, import_job)
+
+          def import_crypto_key_version \
+              parent,
+              algorithm,
+              import_job,
+              rsa_aes_wrapped_key: nil,
+              options: nil,
+              &block
+            req = {
+              parent: parent,
+              algorithm: algorithm,
+              import_job: import_job,
+              rsa_aes_wrapped_key: rsa_aes_wrapped_key
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Cloud::Kms::V1::ImportCryptoKeyVersionRequest)
+            @import_crypto_key_version.call(req, options, &block)
           end
 
           # Update a {Google::Cloud::Kms::V1::CryptoKey CryptoKey}.
@@ -953,22 +1249,16 @@ module Google
             @update_crypto_key.call(req, options, &block)
           end
 
-          # Update a {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}'s
-          # metadata.
+          # Update a {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}'s metadata.
           #
           # {Google::Cloud::Kms::V1::CryptoKeyVersion#state state} may be changed between
-          # {Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::ENABLED ENABLED}
-          # and
-          # {Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::DISABLED DISABLED}
-          # using this method. See
-          # {Google::Cloud::Kms::V1::KeyManagementService::DestroyCryptoKeyVersion DestroyCryptoKeyVersion}
-          # and
-          # {Google::Cloud::Kms::V1::KeyManagementService::RestoreCryptoKeyVersion RestoreCryptoKeyVersion}
-          # to move between other states.
+          # {Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::ENABLED ENABLED} and
+          # {Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::DISABLED DISABLED} using this
+          # method. See {Google::Cloud::Kms::V1::KeyManagementService::DestroyCryptoKeyVersion DestroyCryptoKeyVersion} and {Google::Cloud::Kms::V1::KeyManagementService::RestoreCryptoKeyVersion RestoreCryptoKeyVersion} to
+          # move between other states.
           #
           # @param crypto_key_version [Google::Cloud::Kms::V1::CryptoKeyVersion | Hash]
-          #   {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} with updated
-          #   values.
+          #   {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} with updated values.
           #   A hash of the same form as `Google::Cloud::Kms::V1::CryptoKeyVersion`
           #   can also be provided.
           # @param update_mask [Google::Protobuf::FieldMask | Hash]
@@ -1008,41 +1298,35 @@ module Google
             @update_crypto_key_version.call(req, options, &block)
           end
 
-          # Encrypts data, so that it can only be recovered by a call to
-          # {Google::Cloud::Kms::V1::KeyManagementService::Decrypt Decrypt}. The
-          # {Google::Cloud::Kms::V1::CryptoKey#purpose CryptoKey#purpose} must be
+          # Encrypts data, so that it can only be recovered by a call to {Google::Cloud::Kms::V1::KeyManagementService::Decrypt Decrypt}.
+          # The {Google::Cloud::Kms::V1::CryptoKey#purpose CryptoKey#purpose} must be
           # {Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose::ENCRYPT_DECRYPT ENCRYPT_DECRYPT}.
           #
           # @param name [String]
-          #   Required. The resource name of the
-          #   {Google::Cloud::Kms::V1::CryptoKey CryptoKey} or
-          #   {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} to use for
-          #   encryption.
+          #   Required. The resource name of the {Google::Cloud::Kms::V1::CryptoKey CryptoKey} or {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}
+          #   to use for encryption.
           #
-          #   If a {Google::Cloud::Kms::V1::CryptoKey CryptoKey} is specified, the server
-          #   will use its {Google::Cloud::Kms::V1::CryptoKey#primary primary version}.
+          #   If a {Google::Cloud::Kms::V1::CryptoKey CryptoKey} is specified, the server will use its
+          #   {Google::Cloud::Kms::V1::CryptoKey#primary primary version}.
           # @param plaintext [String]
           #   Required. The data to encrypt. Must be no larger than 64KiB.
           #
           #   The maximum size depends on the key version's
-          #   {Google::Cloud::Kms::V1::CryptoKeyVersionTemplate#protection_level protection_level}.
-          #   For {Google::Cloud::Kms::V1::ProtectionLevel::SOFTWARE SOFTWARE} keys, the
-          #   plaintext must be no larger than 64KiB. For
-          #   {Google::Cloud::Kms::V1::ProtectionLevel::HSM HSM} keys, the combined length of
-          #   the plaintext and additional_authenticated_data fields must be no larger
-          #   than 8KiB.
+          #   {Google::Cloud::Kms::V1::CryptoKeyVersionTemplate#protection_level protection_level}. For
+          #   {Google::Cloud::Kms::V1::ProtectionLevel::SOFTWARE SOFTWARE} keys, the plaintext must be no larger
+          #   than 64KiB. For {Google::Cloud::Kms::V1::ProtectionLevel::HSM HSM} keys, the combined length of the
+          #   plaintext and additional_authenticated_data fields must be no larger than
+          #   8KiB.
           # @param additional_authenticated_data [String]
           #   Optional data that, if specified, must also be provided during decryption
-          #   through
-          #   {Google::Cloud::Kms::V1::DecryptRequest#additional_authenticated_data DecryptRequest#additional_authenticated_data}.
+          #   through {Google::Cloud::Kms::V1::DecryptRequest#additional_authenticated_data DecryptRequest#additional_authenticated_data}.
           #
           #   The maximum size depends on the key version's
-          #   {Google::Cloud::Kms::V1::CryptoKeyVersionTemplate#protection_level protection_level}.
-          #   For {Google::Cloud::Kms::V1::ProtectionLevel::SOFTWARE SOFTWARE} keys, the AAD
-          #   must be no larger than 64KiB. For
-          #   {Google::Cloud::Kms::V1::ProtectionLevel::HSM HSM} keys, the combined length of
-          #   the plaintext and additional_authenticated_data fields must be no larger
-          #   than 8KiB.
+          #   {Google::Cloud::Kms::V1::CryptoKeyVersionTemplate#protection_level protection_level}. For
+          #   {Google::Cloud::Kms::V1::ProtectionLevel::SOFTWARE SOFTWARE} keys, the AAD must be no larger than
+          #   64KiB. For {Google::Cloud::Kms::V1::ProtectionLevel::HSM HSM} keys, the combined length of the
+          #   plaintext and additional_authenticated_data fields must be no larger than
+          #   8KiB.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -1076,15 +1360,12 @@ module Google
             @encrypt.call(req, options, &block)
           end
 
-          # Decrypts data that was protected by
-          # {Google::Cloud::Kms::V1::KeyManagementService::Encrypt Encrypt}. The
-          # {Google::Cloud::Kms::V1::CryptoKey#purpose CryptoKey#purpose} must be
-          # {Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose::ENCRYPT_DECRYPT ENCRYPT_DECRYPT}.
+          # Decrypts data that was protected by {Google::Cloud::Kms::V1::KeyManagementService::Encrypt Encrypt}. The {Google::Cloud::Kms::V1::CryptoKey#purpose CryptoKey#purpose}
+          # must be {Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose::ENCRYPT_DECRYPT ENCRYPT_DECRYPT}.
           #
           # @param name [String]
-          #   Required. The resource name of the
-          #   {Google::Cloud::Kms::V1::CryptoKey CryptoKey} to use for decryption. The
-          #   server will choose the appropriate version.
+          #   Required. The resource name of the {Google::Cloud::Kms::V1::CryptoKey CryptoKey} to use for decryption.
+          #   The server will choose the appropriate version.
           # @param ciphertext [String]
           #   Required. The encrypted data originally returned in
           #   {Google::Cloud::Kms::V1::EncryptResponse#ciphertext EncryptResponse#ciphertext}.
@@ -1124,18 +1405,14 @@ module Google
             @decrypt.call(req, options, &block)
           end
 
-          # Update the version of a {Google::Cloud::Kms::V1::CryptoKey CryptoKey} that
-          # will be used in
-          # {Google::Cloud::Kms::V1::KeyManagementService::Encrypt Encrypt}.
+          # Update the version of a {Google::Cloud::Kms::V1::CryptoKey CryptoKey} that will be used in {Google::Cloud::Kms::V1::KeyManagementService::Encrypt Encrypt}.
           #
           # Returns an error if called on an asymmetric key.
           #
           # @param name [String]
-          #   The resource name of the {Google::Cloud::Kms::V1::CryptoKey CryptoKey} to
-          #   update.
+          #   The resource name of the {Google::Cloud::Kms::V1::CryptoKey CryptoKey} to update.
           # @param crypto_key_version_id [String]
-          #   The id of the child
-          #   {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} to use as primary.
+          #   The id of the child {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} to use as primary.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -1167,28 +1444,21 @@ module Google
             @update_crypto_key_primary_version.call(req, options, &block)
           end
 
-          # Schedule a {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} for
-          # destruction.
+          # Schedule a {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} for destruction.
           #
-          # Upon calling this method,
-          # {Google::Cloud::Kms::V1::CryptoKeyVersion#state CryptoKeyVersion#state} will
-          # be set to
+          # Upon calling this method, {Google::Cloud::Kms::V1::CryptoKeyVersion#state CryptoKeyVersion#state} will be set to
           # {Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::DESTROY_SCHEDULED DESTROY_SCHEDULED}
-          # and {Google::Cloud::Kms::V1::CryptoKeyVersion#destroy_time destroy_time} will
-          # be set to a time 24 hours in the future, at which point the
-          # {Google::Cloud::Kms::V1::CryptoKeyVersion#state state} will be changed to
-          # {Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::DESTROYED DESTROYED},
-          # and the key material will be irrevocably destroyed.
+          # and {Google::Cloud::Kms::V1::CryptoKeyVersion#destroy_time destroy_time} will be set to a time 24
+          # hours in the future, at which point the {Google::Cloud::Kms::V1::CryptoKeyVersion#state state}
+          # will be changed to
+          # {Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::DESTROYED DESTROYED}, and the key
+          # material will be irrevocably destroyed.
           #
-          # Before the
-          # {Google::Cloud::Kms::V1::CryptoKeyVersion#destroy_time destroy_time} is
-          # reached,
-          # {Google::Cloud::Kms::V1::KeyManagementService::RestoreCryptoKeyVersion RestoreCryptoKeyVersion}
-          # may be called to reverse the process.
+          # Before the {Google::Cloud::Kms::V1::CryptoKeyVersion#destroy_time destroy_time} is reached,
+          # {Google::Cloud::Kms::V1::KeyManagementService::RestoreCryptoKeyVersion RestoreCryptoKeyVersion} may be called to reverse the process.
           #
           # @param name [String]
-          #   The resource name of the
-          #   {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} to destroy.
+          #   The resource name of the {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} to destroy.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -1219,15 +1489,12 @@ module Google
           # {Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::DESTROY_SCHEDULED DESTROY_SCHEDULED}
           # state.
           #
-          # Upon restoration of the CryptoKeyVersion,
-          # {Google::Cloud::Kms::V1::CryptoKeyVersion#state state} will be set to
-          # {Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::DISABLED DISABLED},
-          # and {Google::Cloud::Kms::V1::CryptoKeyVersion#destroy_time destroy_time} will
-          # be cleared.
+          # Upon restoration of the CryptoKeyVersion, {Google::Cloud::Kms::V1::CryptoKeyVersion#state state}
+          # will be set to {Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::DISABLED DISABLED},
+          # and {Google::Cloud::Kms::V1::CryptoKeyVersion#destroy_time destroy_time} will be cleared.
           #
           # @param name [String]
-          #   The resource name of the
-          #   {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} to restore.
+          #   The resource name of the {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} to restore.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -1254,16 +1521,14 @@ module Google
             @restore_crypto_key_version.call(req, options, &block)
           end
 
-          # Returns the public key for the given
-          # {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}. The
+          # Returns the public key for the given {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}. The
           # {Google::Cloud::Kms::V1::CryptoKey#purpose CryptoKey#purpose} must be
-          # {Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose::ASYMMETRIC_SIGN ASYMMETRIC_SIGN}
-          # or
+          # {Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose::ASYMMETRIC_SIGN ASYMMETRIC_SIGN} or
           # {Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose::ASYMMETRIC_DECRYPT ASYMMETRIC_DECRYPT}.
           #
           # @param name [String]
-          #   The {Google::Cloud::Kms::V1::CryptoKeyVersion#name name} of the
-          #   {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} public key to get.
+          #   The {Google::Cloud::Kms::V1::CryptoKeyVersion#name name} of the {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} public key to
+          #   get.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -1291,19 +1556,15 @@ module Google
           end
 
           # Decrypts data that was encrypted with a public key retrieved from
-          # {Google::Cloud::Kms::V1::KeyManagementService::GetPublicKey GetPublicKey}
-          # corresponding to a {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}
-          # with {Google::Cloud::Kms::V1::CryptoKey#purpose CryptoKey#purpose}
-          # ASYMMETRIC_DECRYPT.
+          # {Google::Cloud::Kms::V1::KeyManagementService::GetPublicKey GetPublicKey} corresponding to a {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} with
+          # {Google::Cloud::Kms::V1::CryptoKey#purpose CryptoKey#purpose} ASYMMETRIC_DECRYPT.
           #
           # @param name [String]
-          #   Required. The resource name of the
-          #   {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} to use for
+          #   Required. The resource name of the {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} to use for
           #   decryption.
           # @param ciphertext [String]
-          #   Required. The data encrypted with the named
-          #   {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}'s public key using
-          #   OAEP.
+          #   Required. The data encrypted with the named {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}'s public
+          #   key using OAEP.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -1335,16 +1596,12 @@ module Google
             @asymmetric_decrypt.call(req, options, &block)
           end
 
-          # Signs data using a {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}
-          # with {Google::Cloud::Kms::V1::CryptoKey#purpose CryptoKey#purpose}
+          # Signs data using a {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} with {Google::Cloud::Kms::V1::CryptoKey#purpose CryptoKey#purpose}
           # ASYMMETRIC_SIGN, producing a signature that can be verified with the public
-          # key retrieved from
-          # {Google::Cloud::Kms::V1::KeyManagementService::GetPublicKey GetPublicKey}.
+          # key retrieved from {Google::Cloud::Kms::V1::KeyManagementService::GetPublicKey GetPublicKey}.
           #
           # @param name [String]
-          #   Required. The resource name of the
-          #   {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} to use for
-          #   signing.
+          #   Required. The resource name of the {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} to use for signing.
           # @param digest [Google::Cloud::Kms::V1::Digest | Hash]
           #   Required. The digest of the data to sign. The digest must be produced with
           #   the same digest algorithm as specified by the key version's
@@ -1382,8 +1639,8 @@ module Google
             @asymmetric_sign.call(req, options, &block)
           end
 
-          # Sets the access control policy on the specified resource. Replaces any
-          # existing policy.
+          # Sets the access control policy on the specified resource. Replaces
+          # any existing policy.
           #
           # @param resource [String]
           #   REQUIRED: The resource for which the policy is being specified.
@@ -1426,9 +1683,8 @@ module Google
             @set_iam_policy.call(req, options, &block)
           end
 
-          # Gets the access control policy for a resource.
-          # Returns an empty policy if the resource exists and does not have a policy
-          # set.
+          # Gets the access control policy for a resource. Returns an empty policy
+          # if the resource exists and does not have a policy set.
           #
           # @param resource [String]
           #   REQUIRED: The resource for which the policy is being requested.
@@ -1459,13 +1715,13 @@ module Google
             @get_iam_policy.call(req, options, &block)
           end
 
-          # Returns permissions that a caller has on the specified resource.
-          # If the resource does not exist, this will return an empty set of
+          # Returns permissions that a caller has on the specified resource. If the
+          # resource does not exist, this will return an empty set of
           # permissions, not a NOT_FOUND error.
           #
-          # Note: This operation is designed to be used for building permission-aware
-          # UIs and command-line tools, not for authorization checking. This operation
-          # may "fail open" without warning.
+          # Note: This operation is designed to be used for building
+          # permission-aware UIs and command-line tools, not for authorization
+          # checking. This operation may "fail open" without warning.
           #
           # @param resource [String]
           #   REQUIRED: The resource for which the policy detail is being requested.

@@ -145,6 +145,83 @@ describe Google::Cloud::Kms::V1::KeyManagementServiceClient do
     end
   end
 
+  describe 'list_import_jobs' do
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Kms::V1::KeyManagementServiceClient#list_import_jobs."
+
+    it 'invokes list_import_jobs without error' do
+      # Create request parameters
+      formatted_parent = Google::Cloud::Kms::V1::KeyManagementServiceClient.key_ring_path("[PROJECT]", "[LOCATION]", "[KEY_RING]")
+
+      # Create expected grpc response
+      next_page_token = ""
+      total_size = 705419236
+      import_jobs_element = {}
+      import_jobs = [import_jobs_element]
+      expected_response = {
+        next_page_token: next_page_token,
+        total_size: total_size,
+        import_jobs: import_jobs
+      }
+      expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Kms::V1::ListImportJobsResponse)
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Cloud::Kms::V1::ListImportJobsRequest, request)
+        assert_equal(formatted_parent, request.parent)
+        OpenStruct.new(execute: expected_response)
+      end
+      mock_stub = MockGrpcClientStub_v1.new(:list_import_jobs, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockKeyManagementServiceCredentials_v1.new("list_import_jobs")
+
+      Google::Cloud::Kms::V1::KeyManagementService::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Kms::V1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Kms.new(version: :v1)
+
+          # Call method
+          response = client.list_import_jobs(formatted_parent)
+
+          # Verify the response
+          assert(response.instance_of?(Google::Gax::PagedEnumerable))
+          assert_equal(expected_response, response.page.response)
+          assert_nil(response.next_page)
+          assert_equal(expected_response.import_jobs.to_a, response.to_a)
+        end
+      end
+    end
+
+    it 'invokes list_import_jobs with error' do
+      # Create request parameters
+      formatted_parent = Google::Cloud::Kms::V1::KeyManagementServiceClient.key_ring_path("[PROJECT]", "[LOCATION]", "[KEY_RING]")
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Cloud::Kms::V1::ListImportJobsRequest, request)
+        assert_equal(formatted_parent, request.parent)
+        raise custom_error
+      end
+      mock_stub = MockGrpcClientStub_v1.new(:list_import_jobs, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockKeyManagementServiceCredentials_v1.new("list_import_jobs")
+
+      Google::Cloud::Kms::V1::KeyManagementService::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Kms::V1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Kms.new(version: :v1)
+
+          # Call method
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
+            client.list_import_jobs(formatted_parent)
+          end
+
+          # Verify the GaxError wrapped the custom error that was raised.
+          assert_match(custom_error.message, err.message)
+        end
+      end
+    end
+  end
+
   describe 'list_crypto_keys' do
     custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Kms::V1::KeyManagementServiceClient#list_crypto_keys."
 
@@ -373,6 +450,80 @@ describe Google::Cloud::Kms::V1::KeyManagementServiceClient do
     end
   end
 
+  describe 'get_import_job' do
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Kms::V1::KeyManagementServiceClient#get_import_job."
+
+    it 'invokes get_import_job without error' do
+      # Create request parameters
+      formatted_name = Google::Cloud::Kms::V1::KeyManagementServiceClient.import_job_path("[PROJECT]", "[LOCATION]", "[KEY_RING]", "[IMPORT_JOB]")
+
+      # Create expected grpc response
+      name_2 = "name2-1052831874"
+      expected_response = { name: name_2 }
+      expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Kms::V1::ImportJob)
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Cloud::Kms::V1::GetImportJobRequest, request)
+        assert_equal(formatted_name, request.name)
+        OpenStruct.new(execute: expected_response)
+      end
+      mock_stub = MockGrpcClientStub_v1.new(:get_import_job, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockKeyManagementServiceCredentials_v1.new("get_import_job")
+
+      Google::Cloud::Kms::V1::KeyManagementService::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Kms::V1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Kms.new(version: :v1)
+
+          # Call method
+          response = client.get_import_job(formatted_name)
+
+          # Verify the response
+          assert_equal(expected_response, response)
+
+          # Call method with block
+          client.get_import_job(formatted_name) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
+        end
+      end
+    end
+
+    it 'invokes get_import_job with error' do
+      # Create request parameters
+      formatted_name = Google::Cloud::Kms::V1::KeyManagementServiceClient.import_job_path("[PROJECT]", "[LOCATION]", "[KEY_RING]", "[IMPORT_JOB]")
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Cloud::Kms::V1::GetImportJobRequest, request)
+        assert_equal(formatted_name, request.name)
+        raise custom_error
+      end
+      mock_stub = MockGrpcClientStub_v1.new(:get_import_job, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockKeyManagementServiceCredentials_v1.new("get_import_job")
+
+      Google::Cloud::Kms::V1::KeyManagementService::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Kms::V1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Kms.new(version: :v1)
+
+          # Call method
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
+            client.get_import_job(formatted_name)
+          end
+
+          # Verify the GaxError wrapped the custom error that was raised.
+          assert_match(custom_error.message, err.message)
+        end
+      end
+    end
+  end
+
   describe 'get_crypto_key' do
     custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Kms::V1::KeyManagementServiceClient#get_crypto_key."
 
@@ -456,7 +607,13 @@ describe Google::Cloud::Kms::V1::KeyManagementServiceClient do
 
       # Create expected grpc response
       name_2 = "name2-1052831874"
-      expected_response = { name: name_2 }
+      import_job = "importJob2125587491"
+      import_failure_reason = "importFailureReason-494073229"
+      expected_response = {
+        name: name_2,
+        import_job: import_job,
+        import_failure_reason: import_failure_reason
+      }
       expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Kms::V1::CryptoKeyVersion)
 
       # Mock Grpc layer
@@ -615,6 +772,104 @@ describe Google::Cloud::Kms::V1::KeyManagementServiceClient do
     end
   end
 
+  describe 'create_import_job' do
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Kms::V1::KeyManagementServiceClient#create_import_job."
+
+    it 'invokes create_import_job without error' do
+      # Create request parameters
+      formatted_parent = Google::Cloud::Kms::V1::KeyManagementServiceClient.key_ring_path("[PROJECT]", "[LOCATION]", "[KEY_RING]")
+      import_job_id = "my-import-job"
+      import_method = :RSA_OAEP_3072_SHA1_AES_256
+      protection_level = :HSM
+      import_job = { import_method: import_method, protection_level: protection_level }
+
+      # Create expected grpc response
+      name = "name3373707"
+      expected_response = { name: name }
+      expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Kms::V1::ImportJob)
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Cloud::Kms::V1::CreateImportJobRequest, request)
+        assert_equal(formatted_parent, request.parent)
+        assert_equal(import_job_id, request.import_job_id)
+        assert_equal(Google::Gax::to_proto(import_job, Google::Cloud::Kms::V1::ImportJob), request.import_job)
+        OpenStruct.new(execute: expected_response)
+      end
+      mock_stub = MockGrpcClientStub_v1.new(:create_import_job, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockKeyManagementServiceCredentials_v1.new("create_import_job")
+
+      Google::Cloud::Kms::V1::KeyManagementService::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Kms::V1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Kms.new(version: :v1)
+
+          # Call method
+          response = client.create_import_job(
+            formatted_parent,
+            import_job_id,
+            import_job
+          )
+
+          # Verify the response
+          assert_equal(expected_response, response)
+
+          # Call method with block
+          client.create_import_job(
+            formatted_parent,
+            import_job_id,
+            import_job
+          ) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
+        end
+      end
+    end
+
+    it 'invokes create_import_job with error' do
+      # Create request parameters
+      formatted_parent = Google::Cloud::Kms::V1::KeyManagementServiceClient.key_ring_path("[PROJECT]", "[LOCATION]", "[KEY_RING]")
+      import_job_id = "my-import-job"
+      import_method = :RSA_OAEP_3072_SHA1_AES_256
+      protection_level = :HSM
+      import_job = { import_method: import_method, protection_level: protection_level }
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Cloud::Kms::V1::CreateImportJobRequest, request)
+        assert_equal(formatted_parent, request.parent)
+        assert_equal(import_job_id, request.import_job_id)
+        assert_equal(Google::Gax::to_proto(import_job, Google::Cloud::Kms::V1::ImportJob), request.import_job)
+        raise custom_error
+      end
+      mock_stub = MockGrpcClientStub_v1.new(:create_import_job, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockKeyManagementServiceCredentials_v1.new("create_import_job")
+
+      Google::Cloud::Kms::V1::KeyManagementService::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Kms::V1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Kms.new(version: :v1)
+
+          # Call method
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
+            client.create_import_job(
+              formatted_parent,
+              import_job_id,
+              import_job
+            )
+          end
+
+          # Verify the GaxError wrapped the custom error that was raised.
+          assert_match(custom_error.message, err.message)
+        end
+      end
+    end
+  end
+
   describe 'create_crypto_key' do
     custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Kms::V1::KeyManagementServiceClient#create_crypto_key."
 
@@ -737,7 +992,13 @@ describe Google::Cloud::Kms::V1::KeyManagementServiceClient do
 
       # Create expected grpc response
       name = "name3373707"
-      expected_response = { name: name }
+      import_job = "importJob2125587491"
+      import_failure_reason = "importFailureReason-494073229"
+      expected_response = {
+        name: name,
+        import_job: import_job,
+        import_failure_reason: import_failure_reason
+      }
       expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Kms::V1::CryptoKeyVersion)
 
       # Mock Grpc layer
@@ -796,6 +1057,106 @@ describe Google::Cloud::Kms::V1::KeyManagementServiceClient do
           # Call method
           err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.create_crypto_key_version(formatted_parent, crypto_key_version)
+          end
+
+          # Verify the GaxError wrapped the custom error that was raised.
+          assert_match(custom_error.message, err.message)
+        end
+      end
+    end
+  end
+
+  describe 'import_crypto_key_version' do
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Kms::V1::KeyManagementServiceClient#import_crypto_key_version."
+
+    it 'invokes import_crypto_key_version without error' do
+      # Create request parameters
+      formatted_parent = Google::Cloud::Kms::V1::KeyManagementServiceClient.crypto_key_path("[PROJECT]", "[LOCATION]", "[KEY_RING]", "[CRYPTO_KEY]")
+      algorithm = :CRYPTO_KEY_VERSION_ALGORITHM_UNSPECIFIED
+      import_job = ''
+
+      # Create expected grpc response
+      name = "name3373707"
+      import_job_2 = "importJob2-1714851050"
+      import_failure_reason = "importFailureReason-494073229"
+      expected_response = {
+        name: name,
+        import_job: import_job_2,
+        import_failure_reason: import_failure_reason
+      }
+      expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Kms::V1::CryptoKeyVersion)
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Cloud::Kms::V1::ImportCryptoKeyVersionRequest, request)
+        assert_equal(formatted_parent, request.parent)
+        assert_equal(algorithm, request.algorithm)
+        assert_equal(import_job, request.import_job)
+        OpenStruct.new(execute: expected_response)
+      end
+      mock_stub = MockGrpcClientStub_v1.new(:import_crypto_key_version, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockKeyManagementServiceCredentials_v1.new("import_crypto_key_version")
+
+      Google::Cloud::Kms::V1::KeyManagementService::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Kms::V1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Kms.new(version: :v1)
+
+          # Call method
+          response = client.import_crypto_key_version(
+            formatted_parent,
+            algorithm,
+            import_job
+          )
+
+          # Verify the response
+          assert_equal(expected_response, response)
+
+          # Call method with block
+          client.import_crypto_key_version(
+            formatted_parent,
+            algorithm,
+            import_job
+          ) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
+        end
+      end
+    end
+
+    it 'invokes import_crypto_key_version with error' do
+      # Create request parameters
+      formatted_parent = Google::Cloud::Kms::V1::KeyManagementServiceClient.crypto_key_path("[PROJECT]", "[LOCATION]", "[KEY_RING]", "[CRYPTO_KEY]")
+      algorithm = :CRYPTO_KEY_VERSION_ALGORITHM_UNSPECIFIED
+      import_job = ''
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Cloud::Kms::V1::ImportCryptoKeyVersionRequest, request)
+        assert_equal(formatted_parent, request.parent)
+        assert_equal(algorithm, request.algorithm)
+        assert_equal(import_job, request.import_job)
+        raise custom_error
+      end
+      mock_stub = MockGrpcClientStub_v1.new(:import_crypto_key_version, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockKeyManagementServiceCredentials_v1.new("import_crypto_key_version")
+
+      Google::Cloud::Kms::V1::KeyManagementService::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Kms::V1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Kms.new(version: :v1)
+
+          # Call method
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
+            client.import_crypto_key_version(
+              formatted_parent,
+              algorithm,
+              import_job
+            )
           end
 
           # Verify the GaxError wrapped the custom error that was raised.
@@ -893,7 +1254,13 @@ describe Google::Cloud::Kms::V1::KeyManagementServiceClient do
 
       # Create expected grpc response
       name = "name3373707"
-      expected_response = { name: name }
+      import_job = "importJob2125587491"
+      import_failure_reason = "importFailureReason-494073229"
+      expected_response = {
+        name: name,
+        import_job: import_job,
+        import_failure_reason: import_failure_reason
+      }
       expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Kms::V1::CryptoKeyVersion)
 
       # Mock Grpc layer
@@ -1205,7 +1572,13 @@ describe Google::Cloud::Kms::V1::KeyManagementServiceClient do
 
       # Create expected grpc response
       name_2 = "name2-1052831874"
-      expected_response = { name: name_2 }
+      import_job = "importJob2125587491"
+      import_failure_reason = "importFailureReason-494073229"
+      expected_response = {
+        name: name_2,
+        import_job: import_job,
+        import_failure_reason: import_failure_reason
+      }
       expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Kms::V1::CryptoKeyVersion)
 
       # Mock Grpc layer
@@ -1279,7 +1652,13 @@ describe Google::Cloud::Kms::V1::KeyManagementServiceClient do
 
       # Create expected grpc response
       name_2 = "name2-1052831874"
-      expected_response = { name: name_2 }
+      import_job = "importJob2125587491"
+      import_failure_reason = "importFailureReason-494073229"
+      expected_response = {
+        name: name_2,
+        import_job: import_job,
+        import_failure_reason: import_failure_reason
+      }
       expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Kms::V1::CryptoKeyVersion)
 
       # Mock Grpc layer

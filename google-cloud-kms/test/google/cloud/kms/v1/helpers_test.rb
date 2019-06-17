@@ -76,6 +76,19 @@ describe Google::Cloud::Kms::V1::KeyManagementServiceClient do
     end
   end
 
+  describe "the import_job_path instance method" do
+    it "correctly calls Google::Cloud::Kms::V1::KeyManagementServiceClient.import_job_path" do
+      Google::Cloud::Kms::V1::Credentials.stub(:default, mock_credentials) do
+        parameters = Google::Cloud::Kms::V1::KeyManagementServiceClient.method("import_job_path").parameters.map { |arg| arg.last.to_s }
+        client = Google::Cloud::Kms.new version: :v1
+        assert_equal(
+          client.import_job_path(*parameters),
+          Google::Cloud::Kms::V1::KeyManagementServiceClient.import_job_path(*parameters)
+        )
+      end
+    end
+  end
+
   describe "the key_ring_path instance method" do
     it "correctly calls Google::Cloud::Kms::V1::KeyManagementServiceClient.key_ring_path" do
       Google::Cloud::Kms::V1::Credentials.stub(:default, mock_credentials) do

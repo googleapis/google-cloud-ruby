@@ -53,6 +53,9 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :generate_time, :message, 11, "google.protobuf.Timestamp"
     optional :destroy_time, :message, 5, "google.protobuf.Timestamp"
     optional :destroy_event_time, :message, 6, "google.protobuf.Timestamp"
+    optional :import_job, :string, 14
+    optional :import_time, :message, 15, "google.protobuf.Timestamp"
+    optional :import_failure_reason, :string, 16
   end
   add_enum "google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionAlgorithm" do
     value :CRYPTO_KEY_VERSION_ALGORITHM_UNSPECIFIED, 0
@@ -60,12 +63,15 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     value :RSA_SIGN_PSS_2048_SHA256, 2
     value :RSA_SIGN_PSS_3072_SHA256, 3
     value :RSA_SIGN_PSS_4096_SHA256, 4
+    value :RSA_SIGN_PSS_4096_SHA512, 15
     value :RSA_SIGN_PKCS1_2048_SHA256, 5
     value :RSA_SIGN_PKCS1_3072_SHA256, 6
     value :RSA_SIGN_PKCS1_4096_SHA256, 7
+    value :RSA_SIGN_PKCS1_4096_SHA512, 16
     value :RSA_DECRYPT_OAEP_2048_SHA256, 8
     value :RSA_DECRYPT_OAEP_3072_SHA256, 9
     value :RSA_DECRYPT_OAEP_4096_SHA256, 10
+    value :RSA_DECRYPT_OAEP_4096_SHA512, 17
     value :EC_SIGN_P256_SHA256, 12
     value :EC_SIGN_P384_SHA384, 13
   end
@@ -76,6 +82,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     value :DISABLED, 2
     value :DESTROYED, 3
     value :DESTROY_SCHEDULED, 4
+    value :PENDING_IMPORT, 6
+    value :IMPORT_FAILED, 7
   end
   add_enum "google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionView" do
     value :CRYPTO_KEY_VERSION_VIEW_UNSPECIFIED, 0
@@ -84,6 +92,32 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.cloud.kms.v1.PublicKey" do
     optional :pem, :string, 1
     optional :algorithm, :enum, 2, "google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionAlgorithm"
+  end
+  add_message "google.cloud.kms.v1.ImportJob" do
+    optional :name, :string, 1
+    optional :import_method, :enum, 2, "google.cloud.kms.v1.ImportJob.ImportMethod"
+    optional :protection_level, :enum, 9, "google.cloud.kms.v1.ProtectionLevel"
+    optional :create_time, :message, 3, "google.protobuf.Timestamp"
+    optional :generate_time, :message, 4, "google.protobuf.Timestamp"
+    optional :expire_time, :message, 5, "google.protobuf.Timestamp"
+    optional :expire_event_time, :message, 10, "google.protobuf.Timestamp"
+    optional :state, :enum, 6, "google.cloud.kms.v1.ImportJob.ImportJobState"
+    optional :public_key, :message, 7, "google.cloud.kms.v1.ImportJob.WrappingPublicKey"
+    optional :attestation, :message, 8, "google.cloud.kms.v1.KeyOperationAttestation"
+  end
+  add_message "google.cloud.kms.v1.ImportJob.WrappingPublicKey" do
+    optional :pem, :string, 1
+  end
+  add_enum "google.cloud.kms.v1.ImportJob.ImportMethod" do
+    value :IMPORT_METHOD_UNSPECIFIED, 0
+    value :RSA_OAEP_3072_SHA1_AES_256, 1
+    value :RSA_OAEP_4096_SHA1_AES_256, 2
+  end
+  add_enum "google.cloud.kms.v1.ImportJob.ImportJobState" do
+    value :IMPORT_JOB_STATE_UNSPECIFIED, 0
+    value :PENDING_GENERATION, 1
+    value :ACTIVE, 2
+    value :EXPIRED, 3
   end
   add_enum "google.cloud.kms.v1.ProtectionLevel" do
     value :PROTECTION_LEVEL_UNSPECIFIED, 0
@@ -107,6 +141,10 @@ module Google
         CryptoKeyVersion::CryptoKeyVersionState = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionState").enummodule
         CryptoKeyVersion::CryptoKeyVersionView = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionView").enummodule
         PublicKey = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.kms.v1.PublicKey").msgclass
+        ImportJob = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.kms.v1.ImportJob").msgclass
+        ImportJob::WrappingPublicKey = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.kms.v1.ImportJob.WrappingPublicKey").msgclass
+        ImportJob::ImportMethod = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.kms.v1.ImportJob.ImportMethod").enummodule
+        ImportJob::ImportJobState = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.kms.v1.ImportJob.ImportJobState").enummodule
         ProtectionLevel = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.kms.v1.ProtectionLevel").enummodule
       end
     end

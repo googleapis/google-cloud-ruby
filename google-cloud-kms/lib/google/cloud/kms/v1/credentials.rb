@@ -21,7 +21,8 @@ module Google
       module V1
         class Credentials < Google::Auth::Credentials
           SCOPE = [
-            "https://www.googleapis.com/auth/cloud-platform"
+            "https://www.googleapis.com/auth/cloud-platform",
+            "https://www.googleapis.com/auth/cloudkms"
           ].freeze
           PATH_ENV_VARS = %w(KMS_CREDENTIALS
                              KMS_KEYFILE
