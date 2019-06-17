@@ -1,0 +1,15 @@
+AllCops:
+  Exclude:
+    - "grafeas-client.gemspec"
+    - "lib/**/*"
+    - "Rakefile"
+    - "test/**/*"
+    - "acceptance/**/*"
+
+Documentation:
+  Enabled: false
+
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
+Style/MethodDefParentheses:
+  EnforcedStyle: require_no_parentheses

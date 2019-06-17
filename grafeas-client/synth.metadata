@@ -1,0 +1,39 @@
+{
+  "updateTime": "2019-06-17T04:16:20.361670Z",
+  "sources": [
+    {
+      "generator": {
+        "name": "artman",
+        "version": "0.26.0",
+        "dockerImage": "googleapis/artman@sha256:6db0735b0d3beec5b887153a2a7c7411fc7bb53f73f6f389a822096bd14a3a15"
+      }
+    },
+    {
+      "git": {
+        "name": "googleapis",
+        "remote": "https://github.com/googleapis/googleapis.git",
+        "sha": "7b58b37559f6a5337c4c564518e9573d742df225",
+        "internalRef": "253322136"
+      }
+    },
+    {
+      "template": {
+        "name": "ruby_library",
+        "origin": "synthtool.gcp",
+        "version": "2019.5.2"
+      }
+    }
+  ],
+  "destinations": [
+    {
+      "client": {
+        "source": "googleapis",
+        "apiName": "grafeas",
+        "apiVersion": "v1",
+        "language": "ruby",
+        "generator": "gapic",
+        "config": "grafeas/artman_grafeas_v1.yaml"
+      }
+    }
+  ]
+}
