@@ -89,8 +89,7 @@ js:
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>Request message for
-KeyManagementService::Encrypt.</p>
+    <p>Request message for KeyManagementService::Encrypt.</p>
 
 
   </div>
@@ -206,16 +205,14 @@ KeyManagementService::Encrypt.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns Optional data that, if specified, must also be provided during decryption
-through
-<span class='object_link'><a href="DecryptRequest.html#additional_authenticated_data-instance_method" title="Google::Cloud::Kms::V1::DecryptRequest#additional_authenticated_data (method)">DecryptRequest#additional_authenticated_data</a></span>.</p>
+through <span class='object_link'><a href="DecryptRequest.html#additional_authenticated_data-instance_method" title="Google::Cloud::Kms::V1::DecryptRequest#additional_authenticated_data (method)">DecryptRequest#additional_authenticated_data</a></span>.</p>
 
 <p>The maximum size depends on the key version&#39;s
-<span class='object_link'><a href="CryptoKeyVersionTemplate.html#protection_level-instance_method" title="Google::Cloud::Kms::V1::CryptoKeyVersionTemplate#protection_level (method)">protection_level</a></span>.
-For <span class='object_link'><a href="ProtectionLevel.html#SOFTWARE-constant" title="Google::Cloud::Kms::V1::ProtectionLevel::SOFTWARE (constant)">SOFTWARE</a></span> keys, the AAD
-must be no larger than 64KiB. For
-<span class='object_link'><a href="ProtectionLevel.html#HSM-constant" title="Google::Cloud::Kms::V1::ProtectionLevel::HSM (constant)">HSM</a></span> keys, the combined length of
-the plaintext and additional_authenticated_data fields must be no larger
-than 8KiB.</p>
+<span class='object_link'><a href="CryptoKeyVersionTemplate.html#protection_level-instance_method" title="Google::Cloud::Kms::V1::CryptoKeyVersionTemplate#protection_level (method)">protection_level</a></span>. For
+<span class='object_link'><a href="ProtectionLevel.html#SOFTWARE-constant" title="Google::Cloud::Kms::V1::ProtectionLevel::SOFTWARE (constant)">SOFTWARE</a></span> keys, the AAD must be no larger than
+64KiB. For <span class='object_link'><a href="ProtectionLevel.html#HSM-constant" title="Google::Cloud::Kms::V1::ProtectionLevel::HSM (constant)">HSM</a></span> keys, the combined length of the
+plaintext and additional_authenticated_data fields must be no larger than
+8KiB.</p>
 
 
   </div>
@@ -234,16 +231,14 @@ than 8KiB.</p>
       
         &mdash;
         <div class='inline'><p>Optional data that, if specified, must also be provided during decryption
-through
-<span class='object_link'><a href="DecryptRequest.html#additional_authenticated_data-instance_method" title="Google::Cloud::Kms::V1::DecryptRequest#additional_authenticated_data (method)">DecryptRequest#additional_authenticated_data</a></span>.</p>
+through <span class='object_link'><a href="DecryptRequest.html#additional_authenticated_data-instance_method" title="Google::Cloud::Kms::V1::DecryptRequest#additional_authenticated_data (method)">DecryptRequest#additional_authenticated_data</a></span>.</p>
 
 <p>The maximum size depends on the key version&#39;s
-<span class='object_link'><a href="CryptoKeyVersionTemplate.html#protection_level-instance_method" title="Google::Cloud::Kms::V1::CryptoKeyVersionTemplate#protection_level (method)">protection_level</a></span>.
-For <span class='object_link'><a href="ProtectionLevel.html#SOFTWARE-constant" title="Google::Cloud::Kms::V1::ProtectionLevel::SOFTWARE (constant)">SOFTWARE</a></span> keys, the AAD
-must be no larger than 64KiB. For
-<span class='object_link'><a href="ProtectionLevel.html#HSM-constant" title="Google::Cloud::Kms::V1::ProtectionLevel::HSM (constant)">HSM</a></span> keys, the combined length of
-the plaintext and additional_authenticated_data fields must be no larger
-than 8KiB.</p>
+<span class='object_link'><a href="CryptoKeyVersionTemplate.html#protection_level-instance_method" title="Google::Cloud::Kms::V1::CryptoKeyVersionTemplate#protection_level (method)">protection_level</a></span>. For
+<span class='object_link'><a href="ProtectionLevel.html#SOFTWARE-constant" title="Google::Cloud::Kms::V1::ProtectionLevel::SOFTWARE (constant)">SOFTWARE</a></span> keys, the AAD must be no larger than
+64KiB. For <span class='object_link'><a href="ProtectionLevel.html#HSM-constant" title="Google::Cloud::Kms::V1::ProtectionLevel::HSM (constant)">HSM</a></span> keys, the combined length of the
+plaintext and additional_authenticated_data fields must be no larger than
+8KiB.</p>
 </div>
       
     </li>
@@ -256,10 +251,10 @@ than 8KiB.</p>
       <pre class="lines">
 
 
-271</pre>
+351</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/doc/google/cloud/kms/v1/service.rb', line 271</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/doc/google/cloud/kms/v1/service.rb', line 351</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Kms::V1::EncryptRequest (class)">EncryptRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -280,13 +275,11 @@ than 8KiB.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Required. The resource name of the
-<span class='object_link'><a href="CryptoKey.html" title="Google::Cloud::Kms::V1::CryptoKey (class)">CryptoKey</a></span> or
-<span class='object_link'><a href="CryptoKeyVersion.html" title="Google::Cloud::Kms::V1::CryptoKeyVersion (class)">CryptoKeyVersion</a></span> to use for
-encryption.</p>
+    <p>Returns Required. The resource name of the <span class='object_link'><a href="CryptoKey.html" title="Google::Cloud::Kms::V1::CryptoKey (class)">CryptoKey</a></span> or <span class='object_link'><a href="CryptoKeyVersion.html" title="Google::Cloud::Kms::V1::CryptoKeyVersion (class)">CryptoKeyVersion</a></span>
+to use for encryption.</p>
 
-<p>If a <span class='object_link'><a href="CryptoKey.html" title="Google::Cloud::Kms::V1::CryptoKey (class)">CryptoKey</a></span> is specified, the server
-will use its <span class='object_link'><a href="CryptoKey.html#primary-instance_method" title="Google::Cloud::Kms::V1::CryptoKey#primary (method)">primary version</a></span>.</p>
+<p>If a <span class='object_link'><a href="CryptoKey.html" title="Google::Cloud::Kms::V1::CryptoKey (class)">CryptoKey</a></span> is specified, the server will use its
+<span class='object_link'><a href="CryptoKey.html#primary-instance_method" title="Google::Cloud::Kms::V1::CryptoKey#primary (method)">primary version</a></span>.</p>
 
 
   </div>
@@ -304,13 +297,11 @@ will use its <span class='object_link'><a href="CryptoKey.html#primary-instance_
       
       
         &mdash;
-        <div class='inline'><p>Required. The resource name of the
-<span class='object_link'><a href="CryptoKey.html" title="Google::Cloud::Kms::V1::CryptoKey (class)">CryptoKey</a></span> or
-<span class='object_link'><a href="CryptoKeyVersion.html" title="Google::Cloud::Kms::V1::CryptoKeyVersion (class)">CryptoKeyVersion</a></span> to use for
-encryption.</p>
+        <div class='inline'><p>Required. The resource name of the <span class='object_link'><a href="CryptoKey.html" title="Google::Cloud::Kms::V1::CryptoKey (class)">CryptoKey</a></span> or <span class='object_link'><a href="CryptoKeyVersion.html" title="Google::Cloud::Kms::V1::CryptoKeyVersion (class)">CryptoKeyVersion</a></span>
+to use for encryption.</p>
 
-<p>If a <span class='object_link'><a href="CryptoKey.html" title="Google::Cloud::Kms::V1::CryptoKey (class)">CryptoKey</a></span> is specified, the server
-will use its <span class='object_link'><a href="CryptoKey.html#primary-instance_method" title="Google::Cloud::Kms::V1::CryptoKey#primary (method)">primary version</a></span>.</p>
+<p>If a <span class='object_link'><a href="CryptoKey.html" title="Google::Cloud::Kms::V1::CryptoKey (class)">CryptoKey</a></span> is specified, the server will use its
+<span class='object_link'><a href="CryptoKey.html#primary-instance_method" title="Google::Cloud::Kms::V1::CryptoKey#primary (method)">primary version</a></span>.</p>
 </div>
       
     </li>
@@ -323,10 +314,10 @@ will use its <span class='object_link'><a href="CryptoKey.html#primary-instance_
       <pre class="lines">
 
 
-271</pre>
+351</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/doc/google/cloud/kms/v1/service.rb', line 271</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/doc/google/cloud/kms/v1/service.rb', line 351</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Kms::V1::EncryptRequest (class)">EncryptRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -350,12 +341,11 @@ will use its <span class='object_link'><a href="CryptoKey.html#primary-instance_
     <p>Returns Required. The data to encrypt. Must be no larger than 64KiB.</p>
 
 <p>The maximum size depends on the key version&#39;s
-<span class='object_link'><a href="CryptoKeyVersionTemplate.html#protection_level-instance_method" title="Google::Cloud::Kms::V1::CryptoKeyVersionTemplate#protection_level (method)">protection_level</a></span>.
-For <span class='object_link'><a href="ProtectionLevel.html#SOFTWARE-constant" title="Google::Cloud::Kms::V1::ProtectionLevel::SOFTWARE (constant)">SOFTWARE</a></span> keys, the
-plaintext must be no larger than 64KiB. For
-<span class='object_link'><a href="ProtectionLevel.html#HSM-constant" title="Google::Cloud::Kms::V1::ProtectionLevel::HSM (constant)">HSM</a></span> keys, the combined length of
-the plaintext and additional_authenticated_data fields must be no larger
-than 8KiB.</p>
+<span class='object_link'><a href="CryptoKeyVersionTemplate.html#protection_level-instance_method" title="Google::Cloud::Kms::V1::CryptoKeyVersionTemplate#protection_level (method)">protection_level</a></span>. For
+<span class='object_link'><a href="ProtectionLevel.html#SOFTWARE-constant" title="Google::Cloud::Kms::V1::ProtectionLevel::SOFTWARE (constant)">SOFTWARE</a></span> keys, the plaintext must be no larger
+than 64KiB. For <span class='object_link'><a href="ProtectionLevel.html#HSM-constant" title="Google::Cloud::Kms::V1::ProtectionLevel::HSM (constant)">HSM</a></span> keys, the combined length of the
+plaintext and additional_authenticated_data fields must be no larger than
+8KiB.</p>
 
 
   </div>
@@ -376,12 +366,11 @@ than 8KiB.</p>
         <div class='inline'><p>Required. The data to encrypt. Must be no larger than 64KiB.</p>
 
 <p>The maximum size depends on the key version&#39;s
-<span class='object_link'><a href="CryptoKeyVersionTemplate.html#protection_level-instance_method" title="Google::Cloud::Kms::V1::CryptoKeyVersionTemplate#protection_level (method)">protection_level</a></span>.
-For <span class='object_link'><a href="ProtectionLevel.html#SOFTWARE-constant" title="Google::Cloud::Kms::V1::ProtectionLevel::SOFTWARE (constant)">SOFTWARE</a></span> keys, the
-plaintext must be no larger than 64KiB. For
-<span class='object_link'><a href="ProtectionLevel.html#HSM-constant" title="Google::Cloud::Kms::V1::ProtectionLevel::HSM (constant)">HSM</a></span> keys, the combined length of
-the plaintext and additional_authenticated_data fields must be no larger
-than 8KiB.</p>
+<span class='object_link'><a href="CryptoKeyVersionTemplate.html#protection_level-instance_method" title="Google::Cloud::Kms::V1::CryptoKeyVersionTemplate#protection_level (method)">protection_level</a></span>. For
+<span class='object_link'><a href="ProtectionLevel.html#SOFTWARE-constant" title="Google::Cloud::Kms::V1::ProtectionLevel::SOFTWARE (constant)">SOFTWARE</a></span> keys, the plaintext must be no larger
+than 64KiB. For <span class='object_link'><a href="ProtectionLevel.html#HSM-constant" title="Google::Cloud::Kms::V1::ProtectionLevel::HSM (constant)">HSM</a></span> keys, the combined length of the
+plaintext and additional_authenticated_data fields must be no larger than
+8KiB.</p>
 </div>
       
     </li>
@@ -394,10 +383,10 @@ than 8KiB.</p>
       <pre class="lines">
 
 
-271</pre>
+351</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/doc/google/cloud/kms/v1/service.rb', line 271</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/doc/google/cloud/kms/v1/service.rb', line 351</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Kms::V1::EncryptRequest (class)">EncryptRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>

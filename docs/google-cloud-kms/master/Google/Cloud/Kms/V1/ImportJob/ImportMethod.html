@@ -1,6 +1,6 @@
 ---
 layout: yard_main
-title: "Module: Google::Cloud::Kms::V1::KeyOperationAttestation::AttestationFormat - Cloud"
+title: "Module: Google::Cloud::Kms::V1::ImportJob::ImportMethod - Cloud"
 css: 
   - /docs/css/style.css
   - /docs/css/common.css
@@ -10,7 +10,7 @@ js:
   - /js/yard-main.js
 ---
 <script type="text/javascript" charset="utf-8">
-  pathId = "Google::Cloud::Kms::V1::KeyOperationAttestation::AttestationFormat";
+  pathId = "Google::Cloud::Kms::V1::ImportJob::ImportMethod";
   relpath = '../../../../../';
 </script>
 
@@ -24,10 +24,10 @@ js:
   <div id="header">
     <div id="menu">
   
-    <a href="../../../../../_index.html">Index (A)</a> &raquo;
-    <span class='title'><span class='object_link'><a href="../../../../../Google.html" title="Google (module)">Google</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../../Kms.html" title="Google::Cloud::Kms (module)">Kms</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../V1.html" title="Google::Cloud::Kms::V1 (module)">V1</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../KeyOperationAttestation.html" title="Google::Cloud::Kms::V1::KeyOperationAttestation (class)">KeyOperationAttestation</a></span></span>
+    <a href="../../../../../_index.html">Index (I)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../../../../Google.html" title="Google (module)">Google</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../../Kms.html" title="Google::Cloud::Kms (module)">Kms</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../V1.html" title="Google::Cloud::Kms::V1 (module)">V1</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../ImportJob.html" title="Google::Cloud::Kms::V1::ImportJob (class)">ImportJob</a></span></span>
      &raquo; 
-    <span class="title">AttestationFormat</span>
+    <span class="title">ImportMethod</span>
   
 </div>
 
@@ -47,7 +47,7 @@ js:
     <div class="clear"></div>
   </div>
 
-  <div id="content"><h1>Module: Google::Cloud::Kms::V1::KeyOperationAttestation::AttestationFormat
+  <div id="content"><h1>Module: Google::Cloud::Kms::V1::ImportJob::ImportMethod
   
   
   
@@ -73,7 +73,8 @@ js:
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>Attestation formats provided by the HSM.</p>
+    <p><span class='object_link'><a href="" title="Google::Cloud::Kms::V1::ImportJob::ImportMethod (module)">ImportMethod</a></span> describes the key wrapping method chosen for this
+<span class='object_link'><a href="../ImportJob.html" title="Google::Cloud::Kms::V1::ImportJob (class)">ImportJob</a></span>.</p>
 
 
   </div>
@@ -90,7 +91,7 @@ js:
 
     <dl class="constants">
       
-        <dt id="ATTESTATION_FORMAT_UNSPECIFIED-constant" class="">ATTESTATION_FORMAT_UNSPECIFIED =
+        <dt id="IMPORT_METHOD_UNSPECIFIED-constant" class="">IMPORT_METHOD_UNSPECIFIED =
           <div class="docstring">
   <div class="discussion">
     <p>Not specified.</p>
@@ -105,11 +106,15 @@ js:
         </dt>
         <dd><pre class="code"><span class='int'>0</span></pre></dd>
       
-        <dt id="CAVIUM_V1_COMPRESSED-constant" class="">CAVIUM_V1_COMPRESSED =
+        <dt id="RSA_OAEP_3072_SHA1_AES_256-constant" class="">RSA_OAEP_3072_SHA1_AES_256 =
           <div class="docstring">
   <div class="discussion">
-    <p>Cavium HSM attestation compressed with gzip. Note that this format is
-defined by Cavium and subject to change at any time.</p>
+    <p>This ImportMethod represents the CKM_RSA_AES_KEY_WRAP key wrapping
+scheme defined in the PKCS #11 standard. In summary, this involves
+wrapping the raw key with an ephemeral AES key, and wrapping the
+ephemeral AES key with a 3072 bit RSA key. For more details, see
+<a href="http://docs.oasis-open.org/pkcs11/pkcs11-curr/v2.40/cos01/pkcs11-curr-v2.40-cos01.html#_Toc408226908">RSA AES key wrap
+mechanism</a>.</p>
 
 
   </div>
@@ -119,13 +124,17 @@ defined by Cavium and subject to change at any time.</p>
 
 </div>
         </dt>
-        <dd><pre class="code"><span class='int'>3</span></pre></dd>
+        <dd><pre class="code"><span class='int'>1</span></pre></dd>
       
-        <dt id="CAVIUM_V2_COMPRESSED-constant" class="">CAVIUM_V2_COMPRESSED =
+        <dt id="RSA_OAEP_4096_SHA1_AES_256-constant" class="">RSA_OAEP_4096_SHA1_AES_256 =
           <div class="docstring">
   <div class="discussion">
-    <p>Cavium HSM attestation V2 compressed with gzip. This is a new format
-introduced in Cavium&#39;s version 3.2-08.</p>
+    <p>This ImportMethod represents the CKM_RSA_AES_KEY_WRAP key wrapping
+scheme defined in the PKCS #11 standard. In summary, this involves
+wrapping the raw key with an ephemeral AES key, and wrapping the
+ephemeral AES key with a 4096 bit RSA key. For more details, see
+<a href="http://docs.oasis-open.org/pkcs11/pkcs11-curr/v2.40/cos01/pkcs11-curr-v2.40-cos01.html#_Toc408226908">RSA AES key wrap
+mechanism</a>.</p>
 
 
   </div>
@@ -135,7 +144,7 @@ introduced in Cavium&#39;s version 3.2-08.</p>
 
 </div>
         </dt>
-        <dd><pre class="code"><span class='int'>4</span></pre></dd>
+        <dd><pre class="code"><span class='int'>2</span></pre></dd>
       
     </dl>
   

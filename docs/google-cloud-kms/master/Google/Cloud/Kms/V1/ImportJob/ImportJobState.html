@@ -1,6 +1,6 @@
 ---
 layout: yard_main
-title: "Module: Google::Cloud::Kms::V1::KeyOperationAttestation::AttestationFormat - Cloud"
+title: "Module: Google::Cloud::Kms::V1::ImportJob::ImportJobState - Cloud"
 css: 
   - /docs/css/style.css
   - /docs/css/common.css
@@ -10,7 +10,7 @@ js:
   - /js/yard-main.js
 ---
 <script type="text/javascript" charset="utf-8">
-  pathId = "Google::Cloud::Kms::V1::KeyOperationAttestation::AttestationFormat";
+  pathId = "Google::Cloud::Kms::V1::ImportJob::ImportJobState";
   relpath = '../../../../../';
 </script>
 
@@ -24,10 +24,10 @@ js:
   <div id="header">
     <div id="menu">
   
-    <a href="../../../../../_index.html">Index (A)</a> &raquo;
-    <span class='title'><span class='object_link'><a href="../../../../../Google.html" title="Google (module)">Google</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../../Kms.html" title="Google::Cloud::Kms (module)">Kms</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../V1.html" title="Google::Cloud::Kms::V1 (module)">V1</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../KeyOperationAttestation.html" title="Google::Cloud::Kms::V1::KeyOperationAttestation (class)">KeyOperationAttestation</a></span></span>
+    <a href="../../../../../_index.html">Index (I)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../../../../Google.html" title="Google (module)">Google</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../../Kms.html" title="Google::Cloud::Kms (module)">Kms</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../V1.html" title="Google::Cloud::Kms::V1 (module)">V1</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../ImportJob.html" title="Google::Cloud::Kms::V1::ImportJob (class)">ImportJob</a></span></span>
      &raquo; 
-    <span class="title">AttestationFormat</span>
+    <span class="title">ImportJobState</span>
   
 </div>
 
@@ -47,7 +47,7 @@ js:
     <div class="clear"></div>
   </div>
 
-  <div id="content"><h1>Module: Google::Cloud::Kms::V1::KeyOperationAttestation::AttestationFormat
+  <div id="content"><h1>Module: Google::Cloud::Kms::V1::ImportJob::ImportJobState
   
   
   
@@ -73,7 +73,7 @@ js:
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>Attestation formats provided by the HSM.</p>
+    <p>The state of the <span class='object_link'><a href="../ImportJob.html" title="Google::Cloud::Kms::V1::ImportJob (class)">ImportJob</a></span>, indicating if it can be used.</p>
 
 
   </div>
@@ -90,7 +90,7 @@ js:
 
     <dl class="constants">
       
-        <dt id="ATTESTATION_FORMAT_UNSPECIFIED-constant" class="">ATTESTATION_FORMAT_UNSPECIFIED =
+        <dt id="IMPORT_JOB_STATE_UNSPECIFIED-constant" class="">IMPORT_JOB_STATE_UNSPECIFIED =
           <div class="docstring">
   <div class="discussion">
     <p>Not specified.</p>
@@ -105,11 +105,45 @@ js:
         </dt>
         <dd><pre class="code"><span class='int'>0</span></pre></dd>
       
-        <dt id="CAVIUM_V1_COMPRESSED-constant" class="">CAVIUM_V1_COMPRESSED =
+        <dt id="PENDING_GENERATION-constant" class="">PENDING_GENERATION =
           <div class="docstring">
   <div class="discussion">
-    <p>Cavium HSM attestation compressed with gzip. Note that this format is
-defined by Cavium and subject to change at any time.</p>
+    <p>The wrapping key for this job is still being generated. It may not be
+used. Cloud KMS will automatically mark this job as
+<span class='object_link'><a href="#ACTIVE-constant" title="Google::Cloud::Kms::V1::ImportJob::ImportJobState::ACTIVE (constant)">ACTIVE</a></span> as soon as the wrapping key is generated.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>1</span></pre></dd>
+      
+        <dt id="ACTIVE-constant" class="">ACTIVE =
+          <div class="docstring">
+  <div class="discussion">
+    <p>This job may be used in
+CreateCryptoKey and
+CreateCryptoKeyVersion
+requests.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>2</span></pre></dd>
+      
+        <dt id="EXPIRED-constant" class="">EXPIRED =
+          <div class="docstring">
+  <div class="discussion">
+    <p>This job can no longer be used and may not leave this state once entered.</p>
 
 
   </div>
@@ -120,22 +154,6 @@ defined by Cavium and subject to change at any time.</p>
 </div>
         </dt>
         <dd><pre class="code"><span class='int'>3</span></pre></dd>
-      
-        <dt id="CAVIUM_V2_COMPRESSED-constant" class="">CAVIUM_V2_COMPRESSED =
-          <div class="docstring">
-  <div class="discussion">
-    <p>Cavium HSM attestation V2 compressed with gzip. This is a new format
-introduced in Cavium&#39;s version 3.2-08.</p>
-
-
-  </div>
-</div>
-<div class="tags">
-  
-
-</div>
-        </dt>
-        <dd><pre class="code"><span class='int'>4</span></pre></dd>
       
     </dl>
   

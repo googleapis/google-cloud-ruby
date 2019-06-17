@@ -89,12 +89,10 @@ js:
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>A <span class='object_link'><a href="" title="Google::Cloud::Kms::V1::CryptoKeyVersionTemplate (class)">CryptoKeyVersionTemplate</a></span>
-specifies the properties to use when creating a new
-<span class='object_link'><a href="CryptoKeyVersion.html" title="Google::Cloud::Kms::V1::CryptoKeyVersion (class)">CryptoKeyVersion</a></span>, either manually
-with
-CreateCryptoKeyVersion
-or automatically as a result of auto-rotation.</p>
+    <p>A <span class='object_link'><a href="" title="Google::Cloud::Kms::V1::CryptoKeyVersionTemplate (class)">CryptoKeyVersionTemplate</a></span> specifies the properties to use when creating
+a new <span class='object_link'><a href="CryptoKeyVersion.html" title="Google::Cloud::Kms::V1::CryptoKeyVersion (class)">CryptoKeyVersion</a></span>, either manually with
+CreateCryptoKeyVersion or
+automatically as a result of auto-rotation.</p>
 
 
   </div>
@@ -183,15 +181,11 @@ or automatically as a result of auto-rotation.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Required.
-<span class='object_link'><a href="CryptoKeyVersion/CryptoKeyVersionAlgorithm.html" title="Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionAlgorithm (module)">Algorithm</a></span>
-to use when creating a
-<span class='object_link'><a href="CryptoKeyVersion.html" title="Google::Cloud::Kms::V1::CryptoKeyVersion (class)">CryptoKeyVersion</a></span> based on this
-template.</p>
+    <p>Returns Required. <span class='object_link'><a href="CryptoKeyVersion/CryptoKeyVersionAlgorithm.html" title="Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionAlgorithm (module)">Algorithm</a></span> to use
+when creating a <span class='object_link'><a href="CryptoKeyVersion.html" title="Google::Cloud::Kms::V1::CryptoKeyVersion (class)">CryptoKeyVersion</a></span> based on this template.</p>
 
 <p>For backwards compatibility, GOOGLE_SYMMETRIC_ENCRYPTION is implied if both
-this field is omitted and
-<span class='object_link'><a href="CryptoKey.html#purpose-instance_method" title="Google::Cloud::Kms::V1::CryptoKey#purpose (method)">CryptoKey#purpose</a></span> is
+this field is omitted and <span class='object_link'><a href="CryptoKey.html#purpose-instance_method" title="Google::Cloud::Kms::V1::CryptoKey#purpose (method)">CryptoKey#purpose</a></span> is
 <span class='object_link'><a href="CryptoKey/CryptoKeyPurpose.html#ENCRYPT_DECRYPT-constant" title="Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose::ENCRYPT_DECRYPT (constant)">ENCRYPT_DECRYPT</a></span>.</p>
 
 
@@ -210,15 +204,11 @@ this field is omitted and
       
       
         &mdash;
-        <div class='inline'><p>Required.
-<span class='object_link'><a href="CryptoKeyVersion/CryptoKeyVersionAlgorithm.html" title="Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionAlgorithm (module)">Algorithm</a></span>
-to use when creating a
-<span class='object_link'><a href="CryptoKeyVersion.html" title="Google::Cloud::Kms::V1::CryptoKeyVersion (class)">CryptoKeyVersion</a></span> based on this
-template.</p>
+        <div class='inline'><p>Required. <span class='object_link'><a href="CryptoKeyVersion/CryptoKeyVersionAlgorithm.html" title="Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionAlgorithm (module)">Algorithm</a></span> to use
+when creating a <span class='object_link'><a href="CryptoKeyVersion.html" title="Google::Cloud::Kms::V1::CryptoKeyVersion (class)">CryptoKeyVersion</a></span> based on this template.</p>
 
 <p>For backwards compatibility, GOOGLE_SYMMETRIC_ENCRYPTION is implied if both
-this field is omitted and
-<span class='object_link'><a href="CryptoKey.html#purpose-instance_method" title="Google::Cloud::Kms::V1::CryptoKey#purpose (method)">CryptoKey#purpose</a></span> is
+this field is omitted and <span class='object_link'><a href="CryptoKey.html#purpose-instance_method" title="Google::Cloud::Kms::V1::CryptoKey#purpose (method)">CryptoKey#purpose</a></span> is
 <span class='object_link'><a href="CryptoKey/CryptoKeyPurpose.html#ENCRYPT_DECRYPT-constant" title="Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose::ENCRYPT_DECRYPT (constant)">ENCRYPT_DECRYPT</a></span>.</p>
 </div>
       
@@ -232,10 +222,10 @@ this field is omitted and
       <pre class="lines">
 
 
-164</pre>
+134</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/doc/google/cloud/kms/v1/resources.rb', line 164</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/doc/google/cloud/kms/v1/resources.rb', line 134</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Kms::V1::CryptoKeyVersionTemplate (class)">CryptoKeyVersionTemplate</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -256,10 +246,8 @@ this field is omitted and
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns <span class='object_link'><a href="ProtectionLevel.html" title="Google::Cloud::Kms::V1::ProtectionLevel (module)">ProtectionLevel</a></span> to use when creating
-a <span class='object_link'><a href="CryptoKeyVersion.html" title="Google::Cloud::Kms::V1::CryptoKeyVersion (class)">CryptoKeyVersion</a></span> based on this
-template. Immutable. Defaults to
-<span class='object_link'><a href="ProtectionLevel.html#SOFTWARE-constant" title="Google::Cloud::Kms::V1::ProtectionLevel::SOFTWARE (constant)">SOFTWARE</a></span>.</p>
+    <p>Returns <span class='object_link'><a href="ProtectionLevel.html" title="Google::Cloud::Kms::V1::ProtectionLevel (module)">ProtectionLevel</a></span> to use when creating a <span class='object_link'><a href="CryptoKeyVersion.html" title="Google::Cloud::Kms::V1::CryptoKeyVersion (class)">CryptoKeyVersion</a></span> based on
+this template. Immutable. Defaults to <span class='object_link'><a href="ProtectionLevel.html#SOFTWARE-constant" title="Google::Cloud::Kms::V1::ProtectionLevel::SOFTWARE (constant)">SOFTWARE</a></span>.</p>
 
 
   </div>
@@ -277,10 +265,8 @@ template. Immutable. Defaults to
       
       
         &mdash;
-        <div class='inline'><p><span class='object_link'><a href="ProtectionLevel.html" title="Google::Cloud::Kms::V1::ProtectionLevel (module)">ProtectionLevel</a></span> to use when creating
-a <span class='object_link'><a href="CryptoKeyVersion.html" title="Google::Cloud::Kms::V1::CryptoKeyVersion (class)">CryptoKeyVersion</a></span> based on this
-template. Immutable. Defaults to
-<span class='object_link'><a href="ProtectionLevel.html#SOFTWARE-constant" title="Google::Cloud::Kms::V1::ProtectionLevel::SOFTWARE (constant)">SOFTWARE</a></span>.</p>
+        <div class='inline'><p><span class='object_link'><a href="ProtectionLevel.html" title="Google::Cloud::Kms::V1::ProtectionLevel (module)">ProtectionLevel</a></span> to use when creating a <span class='object_link'><a href="CryptoKeyVersion.html" title="Google::Cloud::Kms::V1::CryptoKeyVersion (class)">CryptoKeyVersion</a></span> based on
+this template. Immutable. Defaults to <span class='object_link'><a href="ProtectionLevel.html#SOFTWARE-constant" title="Google::Cloud::Kms::V1::ProtectionLevel::SOFTWARE (constant)">SOFTWARE</a></span>.</p>
 </div>
       
     </li>
@@ -293,10 +279,10 @@ template. Immutable. Defaults to
       <pre class="lines">
 
 
-164</pre>
+134</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/doc/google/cloud/kms/v1/resources.rb', line 164</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/doc/google/cloud/kms/v1/resources.rb', line 134</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Kms::V1::CryptoKeyVersionTemplate (class)">CryptoKeyVersionTemplate</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>

@@ -89,7 +89,8 @@ js:
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>Contains an HSM-generated attestation about a key operation.</p>
+    <p>Contains an HSM-generated attestation about a key operation. For more
+information, see <a href="https://cloud.google.com/kms/docs/attest-key">Verifying attestations</a>.</p>
 
 
   </div>
@@ -221,35 +222,37 @@ operation was performed.</p>
       <pre class="lines">
 
 
-174
-175
-176
-177
-178
-179
-180
-181
-182
-183
-184
-185
-186
-187</pre>
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/doc/google/cloud/kms/v1/resources.rb', line 174</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/doc/google/cloud/kms/v1/resources.rb', line 146</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Kms::V1::KeyOperationAttestation (class)">KeyOperationAttestation</a></span></span>
-  <span class='comment'># Attestion formats provided by the HSM.
+  <span class='comment'># Attestation formats provided by the HSM.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="KeyOperationAttestation/AttestationFormat.html" title="Google::Cloud::Kms::V1::KeyOperationAttestation::AttestationFormat (module)">AttestationFormat</a></span></span>
-    <span class='const'>ATTESTATION_FORMAT_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+    <span class='comment'># Not specified.
+</span>    <span class='const'>ATTESTATION_FORMAT_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
 
     <span class='comment'># Cavium HSM attestation compressed with gzip. Note that this format is
 </span>    <span class='comment'># defined by Cavium and subject to change at any time.
 </span>    <span class='const'>CAVIUM_V1_COMPRESSED</span> <span class='op'>=</span> <span class='int'>3</span>
 
     <span class='comment'># Cavium HSM attestation V2 compressed with gzip. This is a new format
-</span>    <span class='comment'># Introduced in Cavium&#39;s version 3.2-08
+</span>    <span class='comment'># introduced in Cavium&#39;s version 3.2-08.
 </span>    <span class='const'>CAVIUM_V2_COMPRESSED</span> <span class='op'>=</span> <span class='int'>4</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
@@ -302,35 +305,37 @@ operation was performed.</p>
       <pre class="lines">
 
 
-174
-175
-176
-177
-178
-179
-180
-181
-182
-183
-184
-185
-186
-187</pre>
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/doc/google/cloud/kms/v1/resources.rb', line 174</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/doc/google/cloud/kms/v1/resources.rb', line 146</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Kms::V1::KeyOperationAttestation (class)">KeyOperationAttestation</a></span></span>
-  <span class='comment'># Attestion formats provided by the HSM.
+  <span class='comment'># Attestation formats provided by the HSM.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="KeyOperationAttestation/AttestationFormat.html" title="Google::Cloud::Kms::V1::KeyOperationAttestation::AttestationFormat (module)">AttestationFormat</a></span></span>
-    <span class='const'>ATTESTATION_FORMAT_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+    <span class='comment'># Not specified.
+</span>    <span class='const'>ATTESTATION_FORMAT_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
 
     <span class='comment'># Cavium HSM attestation compressed with gzip. Note that this format is
 </span>    <span class='comment'># defined by Cavium and subject to change at any time.
 </span>    <span class='const'>CAVIUM_V1_COMPRESSED</span> <span class='op'>=</span> <span class='int'>3</span>
 
     <span class='comment'># Cavium HSM attestation V2 compressed with gzip. This is a new format
-</span>    <span class='comment'># Introduced in Cavium&#39;s version 3.2-08
+</span>    <span class='comment'># introduced in Cavium&#39;s version 3.2-08.
 </span>    <span class='const'>CAVIUM_V2_COMPRESSED</span> <span class='op'>=</span> <span class='int'>4</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>

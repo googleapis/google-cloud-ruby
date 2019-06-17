@@ -73,8 +73,7 @@ js:
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>The state of a <span class='object_link'><a href="../CryptoKeyVersion.html" title="Google::Cloud::Kms::V1::CryptoKeyVersion (class)">CryptoKeyVersion</a></span>,
-indicating if it can be used.</p>
+    <p>The state of a <span class='object_link'><a href="../CryptoKeyVersion.html" title="Google::Cloud::Kms::V1::CryptoKeyVersion (class)">CryptoKeyVersion</a></span>, indicating if it can be used.</p>
 
 
   </div>
@@ -111,9 +110,7 @@ indicating if it can be used.</p>
   <div class="discussion">
     <p>This version is still being generated. It may not be used, enabled,
 disabled, or destroyed yet. Cloud KMS will automatically mark this
-version
-<span class='object_link'><a href="#ENABLED-constant" title="Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::ENABLED (constant)">ENABLED</a></span>
-as soon as the version is ready.</p>
+version <span class='object_link'><a href="#ENABLED-constant" title="Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::ENABLED (constant)">ENABLED</a></span> as soon as the version is ready.</p>
 
 
   </div>
@@ -144,9 +141,7 @@ as soon as the version is ready.</p>
           <div class="docstring">
   <div class="discussion">
     <p>This version may not be used, but the key material is still available,
-and the version can be placed back into the
-<span class='object_link'><a href="#ENABLED-constant" title="Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::ENABLED (constant)">ENABLED</a></span>
-state.</p>
+and the version can be placed back into the <span class='object_link'><a href="#ENABLED-constant" title="Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::ENABLED (constant)">ENABLED</a></span> state.</p>
 
 
   </div>
@@ -180,9 +175,7 @@ A version may not leave this state once entered.</p>
     <p>This version is scheduled for destruction, and will be destroyed soon.
 Call
 RestoreCryptoKeyVersion
-to put it back into the
-<span class='object_link'><a href="#DISABLED-constant" title="Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::DISABLED (constant)">DISABLED</a></span>
-state.</p>
+to put it back into the <span class='object_link'><a href="#DISABLED-constant" title="Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::DISABLED (constant)">DISABLED</a></span> state.</p>
 
 
   </div>
@@ -193,6 +186,41 @@ state.</p>
 </div>
         </dt>
         <dd><pre class="code"><span class='int'>4</span></pre></dd>
+      
+        <dt id="PENDING_IMPORT-constant" class="">PENDING_IMPORT =
+          <div class="docstring">
+  <div class="discussion">
+    <p>This version is still being imported. It may not be used, enabled,
+disabled, or destroyed yet. Cloud KMS will automatically mark this
+version <span class='object_link'><a href="#ENABLED-constant" title="Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::ENABLED (constant)">ENABLED</a></span> as soon as the version is ready.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>6</span></pre></dd>
+      
+        <dt id="IMPORT_FAILED-constant" class="">IMPORT_FAILED =
+          <div class="docstring">
+  <div class="discussion">
+    <p>This version was not imported successfully. It may not be used, enabled,
+disabled, or destroyed. The submitted key material has been discarded.
+Additional details can be found in
+<span class='object_link'><a href="../CryptoKeyVersion.html#import_failure_reason-instance_method" title="Google::Cloud::Kms::V1::CryptoKeyVersion#import_failure_reason (method)">CryptoKeyVersion#import_failure_reason</a></span>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>7</span></pre></dd>
       
     </dl>
   

@@ -73,18 +73,15 @@ js:
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>The algorithm of the
-<span class='object_link'><a href="../CryptoKeyVersion.html" title="Google::Cloud::Kms::V1::CryptoKeyVersion (class)">CryptoKeyVersion</a></span>, indicating what
+    <p>The algorithm of the <span class='object_link'><a href="../CryptoKeyVersion.html" title="Google::Cloud::Kms::V1::CryptoKeyVersion (class)">CryptoKeyVersion</a></span>, indicating what
 parameters must be used for each cryptographic operation.</p>
 
 <p>The
 <span class='object_link'><a href="#GOOGLE_SYMMETRIC_ENCRYPTION-constant" title="Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionAlgorithm::GOOGLE_SYMMETRIC_ENCRYPTION (constant)">GOOGLE_SYMMETRIC_ENCRYPTION</a></span>
-algorithm is usable with
-<span class='object_link'><a href="../CryptoKey.html#purpose-instance_method" title="Google::Cloud::Kms::V1::CryptoKey#purpose (method)">CryptoKey#purpose</a></span>
+algorithm is usable with <span class='object_link'><a href="../CryptoKey.html#purpose-instance_method" title="Google::Cloud::Kms::V1::CryptoKey#purpose (method)">CryptoKey#purpose</a></span>
 <span class='object_link'><a href="../CryptoKey/CryptoKeyPurpose.html#ENCRYPT_DECRYPT-constant" title="Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose::ENCRYPT_DECRYPT (constant)">ENCRYPT_DECRYPT</a></span>.</p>
 
-<p>Algorithms beginning with &quot;RSA_SIGN_&quot; are usable with
-<span class='object_link'><a href="../CryptoKey.html#purpose-instance_method" title="Google::Cloud::Kms::V1::CryptoKey#purpose (method)">CryptoKey#purpose</a></span>
+<p>Algorithms beginning with &quot;RSA_SIGN_&quot; are usable with <span class='object_link'><a href="../CryptoKey.html#purpose-instance_method" title="Google::Cloud::Kms::V1::CryptoKey#purpose (method)">CryptoKey#purpose</a></span>
 <span class='object_link'><a href="../CryptoKey/CryptoKeyPurpose.html#ASYMMETRIC_SIGN-constant" title="Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose::ASYMMETRIC_SIGN (constant)">ASYMMETRIC_SIGN</a></span>.</p>
 
 <p>The fields in the name after &quot;RSA_SIGN_&quot; correspond to the following
@@ -102,12 +99,13 @@ will use PSS with a salt length of 256 bits or 32 bytes.</p>
 <p>The fields in the name after &quot;RSA_DECRYPT_&quot; correspond to the following
 parameters: padding algorithm, modulus bit length, and digest algorithm.</p>
 
-<p>Algorithms beginning with &quot;EC_SIGN_&quot; are usable with
-<span class='object_link'><a href="../CryptoKey.html#purpose-instance_method" title="Google::Cloud::Kms::V1::CryptoKey#purpose (method)">CryptoKey#purpose</a></span>
+<p>Algorithms beginning with &quot;EC_SIGN_&quot; are usable with <span class='object_link'><a href="../CryptoKey.html#purpose-instance_method" title="Google::Cloud::Kms::V1::CryptoKey#purpose (method)">CryptoKey#purpose</a></span>
 <span class='object_link'><a href="../CryptoKey/CryptoKeyPurpose.html#ASYMMETRIC_SIGN-constant" title="Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose::ASYMMETRIC_SIGN (constant)">ASYMMETRIC_SIGN</a></span>.</p>
 
 <p>The fields in the name after &quot;EC_SIGN_&quot; correspond to the following
 parameters: elliptic curve, digest algorithm.</p>
+
+<p>For more information, see <a href="https://cloud.google.com/kms/docs/algorithms">Key purposes and algorithms</a>.</p>
 
 
   </div>
@@ -199,6 +197,21 @@ parameters: elliptic curve, digest algorithm.</p>
         </dt>
         <dd><pre class="code"><span class='int'>4</span></pre></dd>
       
+        <dt id="RSA_SIGN_PSS_4096_SHA512-constant" class="">RSA_SIGN_PSS_4096_SHA512 =
+          <div class="docstring">
+  <div class="discussion">
+    <p>RSASSA-PSS 4096 bit key with a SHA512 digest.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>15</span></pre></dd>
+      
         <dt id="RSA_SIGN_PKCS1_2048_SHA256-constant" class="">RSA_SIGN_PKCS1_2048_SHA256 =
           <div class="docstring">
   <div class="discussion">
@@ -244,6 +257,21 @@ parameters: elliptic curve, digest algorithm.</p>
         </dt>
         <dd><pre class="code"><span class='int'>7</span></pre></dd>
       
+        <dt id="RSA_SIGN_PKCS1_4096_SHA512-constant" class="">RSA_SIGN_PKCS1_4096_SHA512 =
+          <div class="docstring">
+  <div class="discussion">
+    <p>RSASSA-PKCS1-v1_5 with a 4096 bit key and a SHA512 digest.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>16</span></pre></dd>
+      
         <dt id="RSA_DECRYPT_OAEP_2048_SHA256-constant" class="">RSA_DECRYPT_OAEP_2048_SHA256 =
           <div class="docstring">
   <div class="discussion">
@@ -288,6 +316,21 @@ parameters: elliptic curve, digest algorithm.</p>
 </div>
         </dt>
         <dd><pre class="code"><span class='int'>10</span></pre></dd>
+      
+        <dt id="RSA_DECRYPT_OAEP_4096_SHA512-constant" class="">RSA_DECRYPT_OAEP_4096_SHA512 =
+          <div class="docstring">
+  <div class="discussion">
+    <p>RSAES-OAEP 4096 bit key with a SHA512 digest.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>17</span></pre></dd>
       
         <dt id="EC_SIGN_P256_SHA256-constant" class="">EC_SIGN_P256_SHA256 =
           <div class="docstring">
