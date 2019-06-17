@@ -83,8 +83,8 @@ task :acceptance, :project, :keyfile do |t, args|
   end
   # clear any env var already set
   require "google/cloud/security_center/v1/credentials"
-  (Google::Cloud::VideoIntelligence::V1::Credentials::PATH_ENV_VARS +
-   Google::Cloud::VideoIntelligence::V1::Credentials::JSON_ENV_VARS).each do |path|
+  (Google::Cloud::SecurityCenter::V1::Credentials::PATH_ENV_VARS +
+   Google::Cloud::SecurityCenter::V1::Credentials::JSON_ENV_VARS).each do |path|
     ENV[path] = nil
   end
   # always overwrite when running tests
