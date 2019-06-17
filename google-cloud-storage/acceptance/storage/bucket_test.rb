@@ -152,7 +152,7 @@ describe Google::Cloud::Storage::Bucket, :storage do
     bucket.lifecycle.last.action.must_equal "SetStorageClass"
     bucket.lifecycle.last.storage_class.must_equal "NEARLINE"
     bucket.lifecycle.last.age.must_equal 10
-    bucket.lifecycle.last.created_before.must_equal "2013-01-15"
+    bucket.lifecycle.last.created_before.must_equal Date.parse("2013-01-15")
     bucket.lifecycle.last.is_live.must_equal true
     bucket.lifecycle.last.matches_storage_class.must_equal ["MULTI_REGIONAL"]
     bucket.lifecycle.last.num_newer_versions.must_equal 3
@@ -175,7 +175,7 @@ describe Google::Cloud::Storage::Bucket, :storage do
     bucket.lifecycle.last.action.must_equal "SetStorageClass"
     bucket.lifecycle.last.storage_class.must_equal "COLDLINE"
     bucket.lifecycle.last.age.must_equal 20
-    bucket.lifecycle.last.created_before.must_equal "2013-01-20"
+    bucket.lifecycle.last.created_before.must_equal Date.parse("2013-01-20")
     bucket.lifecycle.last.is_live.must_equal false
     bucket.lifecycle.last.matches_storage_class.must_equal ["NEARLINE"]
     bucket.lifecycle.last.num_newer_versions.must_equal 4
