@@ -1,5 +1,22 @@
 # Release History
 
+### 0.37.0 / 2019-06-17
+
+* Add Topic#persistence_regions
+* Subscriber changes
+  * Fix potential inventory bug
+    * It is possible 
+  * Messages are removed after callback
+    * This change prevents the Subscriber inventory from filling up
+      when messages are never acked or nacked in the user callback.
+      This might happen due to an error in the user callback code.
+      Removing a message from the inventory will cause the message to
+      be redelivered and reprocessed.
+  * Update concurrency implementation
+    * Use concurrent-ruby Promises framework.
+* Update network configuration
+* Enable grpc.service_config_disable_resolution
+
 ### 0.36.0 / 2019-05-21
 
 * Add Topic#kms_key
