@@ -1,0 +1,8 @@
+{
+  "name": "containeranalysis",
+  "language": "ruby",
+  "distribution_name": "google-cloud-container_analysis",
+  "module_name": "ContainerAnalysis",
+  "module_name_credentials": "ContainerAnalysis::V1",
+  "env_var_prefix": "CONTAINER_ANALYSIS"
+}
