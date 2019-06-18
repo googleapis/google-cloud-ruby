@@ -163,6 +163,8 @@ module Google
             IMAGE_SVG = 4
 
             TEXT_UTF8 = 5
+
+            AVRO = 11
           end
         end
 
