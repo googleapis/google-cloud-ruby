@@ -47,6 +47,27 @@ js:
 
   <div id="content"><div id='filecontents'><h1>Release History</h1>
 
+<h3>0.37.0 / 2019-06-17</h3>
+
+<ul>
+<li>Add Topic#persistence_regions</li>
+<li>Subscriber changes
+
+<ul>
+<li>Fix potential inventory bug</li>
+<li>Messages are removed after callback</li>
+<li>This change prevents the Subscriber inventory from filling up
+when messages are never acked or nacked in the user callback.
+This might happen due to an error in the user callback code.
+Removing a message from the inventory will cause the message to
+be redelivered and reprocessed.</li>
+<li>Update concurrency implementation</li>
+<li>Use concurrent-ruby Promises framework.</li>
+</ul></li>
+<li>Update network configuration</li>
+<li>Enable grpc.service_config_disable_resolution</li>
+</ul>
+
 <h3>0.36.0 / 2019-05-21</h3>
 
 <ul>
