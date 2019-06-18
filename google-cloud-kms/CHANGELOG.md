@@ -1,5 +1,30 @@
 # Release History
 
+### 1.1.0 / 2019-06-17
+
+* KeyManagementServiceClient  changes:
+  * Added methods
+    * create_import_job
+    * get_import_job
+    * list_import_jobs
+    * import_crypto_key_version
+  * Argument changes
+    * Add filter and order_by arguments to:
+      * list_key_rings
+      * list_crypto_keys
+      * list_crypto_key_versions
+    * Add skip_initial_version_creation argument to create_crypto_key
+* CryptoKeyVersion changes:
+  * Add CryptoKeyVersionAlgorithm constants:
+    * RSA_SIGN_PSS_4096_SHA512
+    * RSA_SIGN_PKCS1_4096_SHA512
+    * RSA_DECRYPT_OAEP_4096_SHA512
+  * Add CryptoKeyVersionState constants:
+    * PENDING_IMPORT
+    * IMPORT_FAILED
+* Add import_job_path helper method
+* Update documentation
+
 ### 1.0.2 / 2019-06-11
 
 * Update IAM Policy documentation.
