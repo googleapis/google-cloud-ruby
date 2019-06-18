@@ -54,6 +54,37 @@ module Google
 
             duration.seconds + (duration.nanos / 1000000000.0)
           end
+
+          def pubsub_message data, attributes, ordering_key, extra_attrs
+            # TODO: allow data to be a Message object,
+            # then ensure attributes and ordering_key are nil
+            if data.is_a?(::Hash) && (attributes.nil? || attributes.empty?)
+              attributes = data.merge extra_attrs
+              data = nil
+            else
+              attributes = Hash(attributes).merge extra_attrs
+            end
+            # Convert IO-ish objects to strings
+            if data.respond_to?(:read) && data.respond_to?(:rewind)
+              data.rewind
+              data = data.read
+            end
+            # Convert data to encoded byte array to match the protobuf defn
+            data_bytes = \
+              String(data).dup.force_encoding(Encoding::ASCII_8BIT).freeze
+
+            # Convert attributes to strings to match the protobuf definition
+            attributes = Hash[attributes.map { |k, v| [String(k), String(v)] }]
+
+            # Ordering Key must always be a string
+            ordering_key = String(ordering_key).freeze
+
+            Google::Cloud::PubSub::V1::PubsubMessage.new(
+              data:         data_bytes,
+              attributes:   attributes,
+              ordering_key: ordering_key
+            )
+          end
         end
 
         extend ClassMethods

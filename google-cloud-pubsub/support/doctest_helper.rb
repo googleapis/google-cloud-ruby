@@ -429,6 +429,19 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
+  doctest.before "Google::Cloud::PubSub::Subscription#listen@Ordered messages are supported using ordering_key:" do
+    mock_pubsub do |mock_publisher, mock_subscriber|
+      ordered_subscription_resp = subscription_resp "my-ordered-topic-sub"
+      ordered_subscription_resp.enable_message_ordering = true
+      mock_subscriber.expect :get_subscription, ordered_subscription_resp, ["projects/my-project/subscriptions/my-ordered-topic-sub", Hash]
+      mock_subscriber.expect :streaming_pull, [OpenStruct.new(received_messages: [Google::Cloud::PubSub::V1::ReceivedMessage.new(ack_id: "2", message: pubsub_message)])].to_enum, [Enumerator, Hash]
+      mock_subscriber.expect :streaming_pull, [].to_enum, [Enumerator, Hash]
+      mock_subscriber.expect :streaming_pull, [].to_enum, [Enumerator, Hash]
+      mock_subscriber.expect :streaming_pull, [].to_enum, [Enumerator, Hash]
+      mock_subscriber.expect :acknowledge, nil, ["projects/my-project/subscriptions/my-ordered-topic-sub", ["2"], Hash]
+    end
+  end
+
   ##
   # Subscription::PushConfig
 
@@ -554,6 +567,13 @@ YARD::Doctest.configure do |doctest|
         pubsub_message("task 3 completed", { "foo" => "bif" })
       ]
       mock_publisher.expect :publish, OpenStruct.new(message_ids: ["1", "2", "3"]), ["projects/my-project/topics/my-topic", messages, Hash]
+    end
+  end
+
+  doctest.before "Google::Cloud::PubSub::Topic#publish_async@Ordered messages are supported using ordering_key:" do
+    mock_pubsub do |mock_publisher, mock_subscriber|
+      mock_publisher.expect :get_topic, topic_resp, ["projects/my-project/topics/my-ordered-topic", Hash]
+      mock_publisher.expect :publish, OpenStruct.new(message_ids: ["1"]), ["projects/my-project/topics/my-ordered-topic", [pubsub_message("task completed")], Hash]
     end
   end
 

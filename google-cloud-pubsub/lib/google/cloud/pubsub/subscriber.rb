@@ -50,6 +50,8 @@ module Google
       # @attr_reader [Numeric] deadline The default number of seconds the stream
       #   will hold received messages before modifying the message's ack
       #   deadline. The minimum is 10, the maximum is 600. Default is 60.
+      # @attr_reader [Boolean] message_ordering Whether message ordering has
+      #   been enabled.
       # @attr_reader [Integer] streams The number of concurrent streams to open
       #   to pull messages from the subscription. Default is 4.
       # @attr_reader [Integer] inventory The number of received messages to be
@@ -65,7 +67,8 @@ module Google
         include MonitorMixin
 
         attr_reader :subscription_name, :callback, :deadline, :streams,
-                    :inventory, :callback_threads, :push_threads
+                    :inventory, :message_ordering, :callback_threads,
+                    :push_threads
 
         ##
         # @private Implementation attributes.
@@ -74,14 +77,16 @@ module Google
 
         ##
         # @private Create an empty {Subscriber} object.
-        def initialize subscription_name, callback, deadline: nil, streams: nil,
-                       inventory: nil, threads: {}, service: nil
+        def initialize subscription_name, callback, deadline: nil,
+                       message_ordering: nil, streams: nil, inventory: nil,
+                       threads: {}, service: nil
           @callback = callback
           @error_callbacks = []
           @subscription_name = subscription_name
           @deadline = deadline || 60
           @streams = streams || 4
           @inventory = inventory || 1000
+          @message_ordering = message_ordering
           @callback_threads = (threads[:callback] || 8).to_i
           @push_threads = (threads[:push] || 4).to_i
 
@@ -292,8 +297,7 @@ module Google
         ##
         # @private
         def to_s
-          "(subscription: #{subscription_name}, " \
-            "streams: [#{stream_pool.map(&:to_s).join(', ')}])"
+          "(subscription: #{subscription_name}, streams: [#{stream_pool.map(&:to_s).join(', ')}])"
         end
 
         ##

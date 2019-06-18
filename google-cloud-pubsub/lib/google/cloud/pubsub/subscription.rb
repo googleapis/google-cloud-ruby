@@ -361,6 +361,27 @@ module Google
         end
 
         ##
+        # Whether message ordering has been enabled. When enabled, messages
+        # published with the same `ordering_key` will be delivered in the order
+        # they were published. When disabled, messages may be delivered in any
+        # order.
+        #
+        # @note At the time of this release, ordering keys are not yet publicly
+        #   enabled and requires special project enablements.
+        #
+        # See {Topic#publish_async}, {#listen}, and {Message#ordering_key}.
+        #
+        # Makes an API call to retrieve the retain_acked value when called on a
+        # reference object. See {#reference?}.
+        #
+        # @return [Boolean]
+        #
+        def message_ordering?
+          ensure_grpc!
+          @grpc.enable_message_ordering
+        end
+
+        ##
         # Determines whether the subscription exists in the Pub/Sub service.
         #
         # Makes an API call to determine whether the subscription resource
@@ -508,13 +529,40 @@ module Google
         # message will be removed from the subscriber and made available for
         # redelivery after the callback is completed.
         #
+        # Google Cloud Pub/Sub ordering keys provide the ability to ensure
+        # related messages are sent to subscribers in the order in which they
+        # were published. Messages can be tagged with an ordering key, a string
+        # that identifies related messages for which publish order should be
+        # respected. The service guarantees that, for a given ordering key and
+        # publisher, messages are sent to subscribers in the order in which they
+        # were published. Ordering does not require sacrificing high throughput
+        # or scalability, as the service automatically distributes messages for
+        # different ordering keys across subscribers.
+        #
+        # To use ordering keys, the subscription must be created with message
+        # ordering enabled (See {Topic#subscribe} and {#message_ordering?})
+        # before calling {#listen}. When enabled, the subscriber will deliver
+        # messages with the same `ordering_key` in the order they were
+        # published.
+        #
+        # @note At the time of this release, ordering keys are not yet publicly
+        #   enabled and requires special project enablements.
+        #
         # @param [Numeric] deadline The default number of seconds the stream
         #   will hold received messages before modifying the message's ack
         #   deadline. The minimum is 10, the maximum is 600. Default is
         #   {#deadline}. Optional.
         #
-        #   Makes an API call to retrieve the deadline value when called on a
-        #   reference object. See {#reference?}.
+        #   When using a reference object an API call will be made to retrieve
+        #   the default deadline value for the subscription when this argument
+        #   is not provided. See {#reference?}.
+        # @param [Boolean] message_ordering Whether message ordering has been
+        #   enabled. The value provided must match the value set on the Pub/Sub
+        #   service. See {#message_ordering?}. Optional.
+        #
+        #   When using a reference object an API call will be made to retrieve
+        #   the default message_ordering value for the subscription when this
+        #   argument is not provided. See {#reference?}.
         # @param [Integer] streams The number of concurrent streams to open to
         #   pull messages from the subscription. Default is 4. Optional.
         # @param [Integer] inventory The number of received messages to be
@@ -571,14 +619,39 @@ module Google
         #   # Start background threads that will call block passed to listen.
         #   subscriber.start
         #
-        def listen deadline: nil, streams: nil, inventory: nil, threads: {},
-                   &block
+        #   # Shut down the subscriber when ready to stop receiving messages.
+        #   subscriber.stop.wait!
+        #
+        # @example Ordered messages are supported using ordering_key:
+        #   require "google/cloud/pubsub"
+        #
+        #   pubsub = Google::Cloud::PubSub.new
+        #
+        #   sub = pubsub.subscription "my-ordered-topic-sub"
+        #   sub.message_ordering? #=> true
+        #
+        #   subscriber = sub.listen do |received_message|
+        #     # messsages with the same ordering_key are received
+        #     # in the order in which they were published.
+        #     received_message.acknowledge!
+        #   end
+        #
+        #   # Start background threads that will call block passed to listen.
+        #   subscriber.start
+        #
+        #   # Shut down the subscriber when ready to stop receiving messages.
+        #   subscriber.stop.wait!
+        #
+        def listen deadline: nil, message_ordering: nil, streams: nil,
+                   inventory: nil, threads: {}, &block
           ensure_service!
           deadline ||= self.deadline
+          message_ordering = message_ordering? if message_ordering.nil?
 
           Subscriber.new name, block, deadline: deadline, streams: streams,
-                                      inventory: inventory, threads: threads,
-                                      service: service
+                                      inventory: inventory,
+                                      message_ordering: message_ordering,
+                                      threads: threads, service: service
         end
 
         ##

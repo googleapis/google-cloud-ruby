@@ -240,6 +240,7 @@ module Google
           retain_acked = options[:retain_acked]
           mrd = Convert.number_to_duration options[:retention]
           labels = options[:labels]
+          message_ordering = options[:message_ordering]
 
           execute do
             subscriber.create_subscription \
@@ -249,6 +250,7 @@ module Google
               retain_acked_messages:      retain_acked,
               message_retention_duration: mrd,
               labels:                     labels,
+              enable_message_ordering:    message_ordering,
               options:                    default_options
           end
         end
@@ -472,7 +474,7 @@ module Google
         end
 
         def inspect
-          "#<#{self.class.name} #{@project}>"
+          "#<#{self.class.name} (#{@project})>"
         end
 
         protected

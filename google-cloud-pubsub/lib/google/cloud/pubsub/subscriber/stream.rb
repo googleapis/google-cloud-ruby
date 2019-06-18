@@ -13,6 +13,7 @@
 # limitations under the License.
 
 
+require "google/cloud/pubsub/subscriber/sequencer"
 require "google/cloud/pubsub/subscriber/enumerator_queue"
 require "google/cloud/pubsub/subscriber/inventory"
 require "google/cloud/pubsub/service"
@@ -34,8 +35,16 @@ module Google
           attr_reader :callback_thread_pool
 
           ##
-          # Subscriber attributes.
+          # @private Subscriber attributes.
           attr_reader :subscriber
+
+          ##
+          # @private Inventory.
+          attr_reader :inventory
+
+          ##
+          # @private Sequencer.
+          attr_reader :sequencer
 
           ##
           # @private Create an empty Subscriber::Stream object.
@@ -48,6 +57,11 @@ module Google
             @pause_cond = new_cond
 
             @inventory = Inventory.new self, @subscriber.stream_inventory
+
+            if subscriber.message_ordering
+              @sequencer = Sequencer.new(&method(:perform_callback_async))
+            end
+
             @callback_thread_pool = Concurrent::ThreadPoolExecutor.new \
               max_threads: @subscriber.callback_threads
 
@@ -107,6 +121,10 @@ module Google
             synchronize { @paused }
           end
 
+          def running?
+            !stopped?
+          end
+
           def wait! timeout = nil
             # Wait for all queued callbacks to be processed.
             @callback_thread_pool.wait_for_termination timeout
@@ -162,10 +180,6 @@ module Google
             synchronize { @request_queue.push request }
           end
 
-          def inventory
-            synchronize { @inventory }
-          end
-
           ##
           # @private
           def renew_lease!
@@ -182,8 +196,8 @@ module Google
 
           # @private
           def to_s
-            "(inventory: #{@inventory.count}, " \
-              "status: #{status}, thread: #{thread_status})"
+            seq_str = "sequenced: #{sequencer}, " if sequencer
+            "(inventory: #{@inventory.count}, #{seq_str}status: #{status}, thread: #{thread_status})"
           end
 
           # @private
@@ -237,6 +251,7 @@ module Google
                 # Create a list of all the received ack_id values
                 received_ack_ids = response.received_messages.map(&:ack_id)
 
+                # Use synchronize so both changes happen atomically
                 synchronize do
                   # Create receipt of received messages reception
                   @subscriber.buffer.modify_ack_deadline @subscriber.deadline,
@@ -248,10 +263,8 @@ module Google
 
                 response.received_messages.each do |rec_msg_grpc|
                   rec_msg = ReceivedMessage.from_grpc(rec_msg_grpc, self)
-                  synchronize do
-                    # Call user provided code for received message
-                    perform_callback_async rec_msg
-                  end
+                  # No need to synchronize the callback future
+                  register_callback rec_msg
                 end
                 synchronize { pause_streaming! }
               rescue StopIteration
@@ -282,18 +295,35 @@ module Google
 
           # rubocop:enable all
 
+          def register_callback rec_msg
+            if @sequencer
+              # Add the message to the sequencer to invoke the callback.
+              @sequencer.add rec_msg
+            else
+              # Call user provided code for received message
+              perform_callback_async rec_msg
+            end
+          end
+
           def perform_callback_async rec_msg
             return unless callback_thread_pool.running?
 
             Concurrent::Promises.future_on(
-              callback_thread_pool, self, rec_msg
-            ) do |stream, msg|
+              callback_thread_pool, rec_msg, &method(:perform_callback_sync)
+            )
+          end
+
+          def perform_callback_sync rec_msg
+            @subscriber.callback.call rec_msg unless stopped?
+          rescue StandardError => callback_error
+            @subscriber.error! callback_error
+          ensure
+            release rec_msg
+            if @sequencer && running?
               begin
-                stream.subscriber.callback.call msg unless stream.stopped?
-              rescue StandardError => callback_error
-                stream.subscriber.error! callback_error
-              ensure
-                stream.release msg
+                @sequencer.next rec_msg
+              rescue OrderedMessageDeliveryError => delivery_error
+                @subscriber.error! delivery_error
               end
             end
           end
