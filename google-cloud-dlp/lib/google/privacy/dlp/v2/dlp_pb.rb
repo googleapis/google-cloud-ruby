@@ -68,6 +68,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     value :IMAGE_PNG, 3
     value :IMAGE_SVG, 4
     value :TEXT_UTF8, 5
+    value :AVRO, 11
   end
   add_message "google.privacy.dlp.v2.ContentItem" do
     oneof :data_item do

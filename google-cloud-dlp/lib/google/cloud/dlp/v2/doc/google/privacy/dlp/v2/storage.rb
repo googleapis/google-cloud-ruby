@@ -588,6 +588,10 @@ module Google
           #   bmp, gif, jpg, jpeg, jpe, png.
           # bytes_limit_per_file has no effect on image files.
           IMAGE = 3
+
+          # Included file extensions:
+          #   avro
+          AVRO = 7
         end
 
         # Categorization of results based on how likely they are to represent a match,
