@@ -25,7 +25,7 @@ module Google::Cloud::ContainerAnalysis::V1
   module ContainerAnalysisService
     # Retrieves analysis results of Cloud components such as Docker container
     # images. The Container Analysis API is an implementation of the
-    # [Grafeas](grafeas.io) API.
+    # [Grafeas](https://grafeas.io) API.
     #
     # Analysis results are stored as a series of occurrences. An `Occurrence`
     # contains information about a specific analysis instance on a resource. An
