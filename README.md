@@ -1004,7 +1004,7 @@ input = {text: "Hello, world!"}
 voice = {language_code: "en-US"}
 audio_config = {audio_encoding: Google::Cloud::Texttospeech::V1::AudioEncoding::MP3}
 response = text_to_speech_client.synthesize_speech input, voice, audio_config
-File.open "hello.mp3", "w" do |file|
+File.open "hello.mp3", "wb" do |file|
   file.write response.audio_content
 end
 ```
