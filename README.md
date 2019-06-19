@@ -996,6 +996,8 @@ $ gem install google-cloud-text_to_speech
 #### Preview
 
 ```rb
+require "google/cloud/text_to_speech"
+
 text_to_speech_client = Google::Cloud::TextToSpeech.new
 text = "test"
 input = { text: text }
