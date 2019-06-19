@@ -996,17 +996,14 @@ $ gem install google-cloud-text_to_speech
 #### Preview
 
 ```rb
-require "google/cloud/text_to_speech/v1"
-
-text_to_speech_client = Google::Cloud::TextToSpeech::V1.new
-
-input = {text: "Hello, world!"}
-voice = {language_code: "en-US"}
-audio_config = {audio_encoding: Google::Cloud::Texttospeech::V1::AudioEncoding::MP3}
-response = text_to_speech_client.synthesize_speech input, voice, audio_config
-File.open "hello.mp3", "wb" do |file|
-  file.write response.audio_content
-end
+text_to_speech_client = Google::Cloud::TextToSpeech.new
+text = "test"
+input = { text: text }
+language_code = "en-US"
+voice = { language_code: language_code }
+audio_encoding = :MP3
+audio_config = { audio_encoding: audio_encoding }
+response = text_to_speech_client.synthesize_speech(input, voice, audio_config)
 ```
 
 ### Cloud Translation API (GA)
