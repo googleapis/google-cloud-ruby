@@ -2,5 +2,5 @@ source "https://rubygems.org"
 
 gemspec
 
-gem "rake", "~> 12.0"
 gem "grafeas-client", path: "../grafeas-client"
+gem "rake", "~> 12.0"
