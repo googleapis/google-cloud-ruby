@@ -1,5 +1,9 @@
 # Release History
 
+### 1.2.0 / 2019-06-19
+
+* Support separate timeout for connecting to the metadata server vs the entire request
+
 ### 1.1.0 / 2019-05-29
 
 * Support disabling of the metadata cache
