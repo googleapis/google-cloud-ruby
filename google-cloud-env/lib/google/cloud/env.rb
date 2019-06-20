@@ -78,14 +78,17 @@ module Google
       # Create a new instance of the environment information.
       # Most client should not need to call this directly. Obtain a singleton
       # instance of the information from `Google::Cloud.env`. This constructor
-      # is provided for internal testing and allows mocking of the data.
+      # is provided to allow customization of the timeout/retry settings, as
+      # well as mocking for testing.
       #
       # @param [Hash] env Mock environment variables.
       # @param [Hash,false] metadata_cache The metadata cache. You may pass
       #     a prepopuated cache, an empty cache (the default) or `false` to
       #     disable the cache completely.
-      # @param [Numeric] request_timeout Timeout for each http request.
+      # @param [Numeric] open_timeout Timeout for opening http connections.
       #     Defaults to 0.1.
+      # @param [Numeric] request_timeout Timeout for entire http requests.
+      #     Defaults to 1.0.
       # @param [Integer] retry_count Number of times to retry http requests.
       #     Defaults to 1. Note that retry remains in effect even if a custom
       #     `connection` is provided.
@@ -96,10 +99,12 @@ module Google
       # @param [Numeric] retry_max_interval Maximum time between retries in
       #     seconds. Defaults to 0.5.
       # @param [Faraday::Connection] connection Faraday connection to use.
-      #     If specified, overrides the `request_timeout` setting.
+      #     If specified, overrides the `request_timeout` and `open_timeout`
+      #     settings.
       #
       def initialize env: nil, connection: nil, metadata_cache: nil,
-                     request_timeout: 0.1, retry_count: 2, retry_interval: 0.1,
+                     open_timeout: 0.1, request_timeout: 1.0,
+                     retry_count: 2, retry_interval: 0.1,
                      retry_backoff_factor: 1.5, retry_max_interval: 0.5
         @disable_metadata_cache = metadata_cache == false
         @metadata_cache = metadata_cache || {}
@@ -108,9 +113,9 @@ module Google
         @retry_interval = retry_interval
         @retry_backoff_factor = retry_backoff_factor
         @retry_max_interval = retry_max_interval
+        request_opts = { timeout: request_timeout, open_timeout: open_timeout }
         @connection = connection ||
-                      ::Faraday.new(url: METADATA_HOST,
-                                    request: { timeout: request_timeout })
+                      ::Faraday.new(url: METADATA_HOST, request: request_opts)
       end
 
       ##
