@@ -13,6 +13,7 @@
 # limitations under the License.
 
 
+require "grafeas"
 require "google/gax"
 require "pathname"
 

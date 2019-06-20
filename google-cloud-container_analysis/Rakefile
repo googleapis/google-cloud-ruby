@@ -17,6 +17,8 @@ require "bundler/gem_tasks"
 require "rubocop/rake_task"
 RuboCop::RakeTask.new
 
+require "rake/testtask"
+
 desc "Run tests."
 task :test do
   $LOAD_PATH.unshift "lib", "test"
@@ -39,16 +41,74 @@ namespace :test do
   end
 end
 
+desc "Runs the smoke tests."
+task :smoke_test do
+  if ENV["CONTAINER_ANALYSIS_TEST_PROJECT"].nil?
+    fail "The CONTAINER_ANALYSIS_TEST_PROJECT environment variable must be set. "\
+      "e.g CONTAINER_ANALYSIS_TEST_PROJECT=test123 rake smoke_test"
+  end
+
+  Rake::Task["smoke_test:run"].invoke
+end
+
+namespace :smoke_test do
+  desc "Runs smoke tests with coverage."
+  task :coverage do
+    require "simplecov"
+    SimpleCov.start do
+      command_name "google-cloud-container_analysis"
+      track_files "lib/**/*.rb"
+      add_filter "test/"
+    end
+
+    Rake::Task[:smoke_test].invoke
+  end
+
+  Rake::TestTask.new :run do |t|
+    t.test_files = FileList["acceptance/**/*smoke_test.rb"]
+    t.warning = false
+  end
+end
+
 # Acceptance tests
 desc "Run the google-cloud-container_analysis acceptance tests."
 task :acceptance, :project, :keyfile do |t, args|
+  project = args[:project]
+  project ||= ENV["CONTAINER_ANALYSIS_TEST_PROJECT"] || ENV["GCLOUD_TEST_PROJECT"]
+  keyfile = args[:keyfile]
+  keyfile ||= ENV["CONTAINER_ANALYSIS_TEST_KEYFILE"] || ENV["GCLOUD_TEST_KEYFILE"]
+  if keyfile
+    keyfile = File.read keyfile
+  else
+    keyfile ||= ENV["CONTAINER_ANALYSIS_TEST_KEYFILE_JSON"] || ENV["GCLOUD_TEST_KEYFILE_JSON"]
+  end
+  if project.nil? || keyfile.nil?
+    fail "You must provide a project and keyfile. e.g. rake acceptance[test123, /path/to/keyfile.json] or CONTAINER_ANALYSIS_TEST_PROJECT=test123 CONTAINER_ANALYSIS_TEST_KEYFILE=/path/to/keyfile.json rake acceptance"
+  end
+  # clear any env var already set
+  require "grafeas/v1/credentials"
+  (Grafeas::V1::Credentials::PATH_ENV_VARS +
+   Grafeas::V1::Credentials::JSON_ENV_VARS).each do |path|
+    ENV[path] = nil
+  end
+  # always overwrite when running tests
+  ENV["CONTAINER_ANALYSIS_PROJECT"] = project
+  ENV["CONTAINER_ANALYSIS_KEYFILE"] = nil
+  ENV["CONTAINER_ANALYSIS_KEYFILE_JSON"] = keyfile
+  ENV["GRAFEAS_PROJECT"] = project
+  ENV["GRAFEAS_KEYFILE"] = nil
+  ENV["GRAFEAS_KEYFILE_JSON"] = keyfile
+
+  # Required for smoke tests
+  ENV["CONTAINER_ANALYSIS_TEST_PROJECT"] = project
+  ENV["GRAFEAS_TEST_PROJECT"] = project
 
   Rake::Task["acceptance:run"].invoke
 end
 
 namespace :acceptance do
   task :run do
-    puts "The google-cloud-container_analysis gem does not have acceptance tests."
+    Rake::Task[:smoke_test].invoke
   end
 
   desc "Run acceptance tests with coverage."

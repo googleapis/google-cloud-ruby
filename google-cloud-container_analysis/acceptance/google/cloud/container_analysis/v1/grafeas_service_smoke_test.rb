@@ -12,5 +12,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+require "minitest/autorun"
+require "minitest/spec"
 
 require "google/cloud/container_analysis"
+
+describe "GrafeasService V1 smoke test" do
+  it "runs one smoke test with list_occurrences" do
+    client = Grafeas.new(version: :v1)
+    parent = Grafeas::V1::GrafeasClient.project_path(ENV["CONTAINER_ANALYSIS_PROJECT"])
+    results = client.list_occurrences(parent, page_size: 2)
+    page = results.page
+    assert(page.to_a.size > 0)
+  end
+end
