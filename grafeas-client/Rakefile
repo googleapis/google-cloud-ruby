@@ -83,7 +83,7 @@ task :acceptance, :project, :keyfile do |t, args|
     keyfile ||= ENV["GRAFEAS_TEST_KEYFILE_JSON"] || ENV["GCLOUD_TEST_KEYFILE_JSON"]
   end
   if project.nil? || keyfile.nil?
-    fail "You must provide a project and keyfile. e.g. rake acceptance[test123, /path/to/keyfile.json] or VIDEO_INTELLIGENCE_TEST_PROJECT=test123 VIDEO_INTELLIGENCE_TEST_KEYFILE=/path/to/keyfile.json rake acceptance"
+    fail "You must provide a project and keyfile. e.g. rake acceptance[test123, /path/to/keyfile.json] or GRAFEAS_TEST_PROJECT=test123 GRAFEAS_TEST_KEYFILE=/path/to/keyfile.json rake acceptance"
   end
   # clear any env var already set
   require "grafeas/v1/credentials"
