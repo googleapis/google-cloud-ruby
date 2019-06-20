@@ -39,6 +39,7 @@ This client supports the following Google Cloud Platform services at a
 This client supports the following Google Cloud Platform services at an
 [Alpha](#versioning) quality level:
 
+* [Container Analysis](#container-analysis-alpha) (Alpha)
 * [Container Engine](#container-engine-alpha) (Alpha)
 * [Cloud Dataproc](#cloud-dataproc-alpha) (Alpha)
 * [Data Loss Prevention](#data-loss-prevention-alpha) (Alpha)
@@ -318,6 +319,31 @@ change = zone.update do |tx|
   end
 end
 
+```
+
+### Container Analysis (Alpha)
+
+- [google-cloud-container_analysis README](google-cloud-container_analysis/README.md)
+- [google-cloud-container_analysis API documentation](https://googleapis.github.io/google-cloud-ruby/docs/google-cloud-container_analysis/latest)
+- [google-cloud-container_analysis on RubyGems](https://rubygems.org/gems/google-cloud-container_analysis)
+- [Container Analysis documentation](https://cloud.google.com/container-registry/docs/container-analysis/)
+
+#### Quick Start
+
+```sh
+$ gem install google-cloud-container_analysis
+```
+
+#### Preview
+
+```ruby
+require "google/cloud/container_analysis"
+
+grafeas_client = Grafeas.new
+parent = Grafeas::V1::GrafeasClient.project_path my_project_id
+results = grafeas_client.list_occurrences(parent).each do |occurrence|
+  # do something with occurrence
+end
 ```
 
 ### Container Engine (Alpha)
