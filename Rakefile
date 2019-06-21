@@ -5,7 +5,7 @@ require "erb"
 require "fileutils"
 require "timeout"
 
-KOKORO_RUBY_VERSIONS = ["2.3.8", "2.4.5", "2.5.5", "2.6.2"]
+KOKORO_RUBY_VERSIONS = ["2.3.8", "2.4.5", "2.5.5", "2.6.3"]
 
 task :bundleupdate do
   valid_gems.each do |gem|
@@ -622,16 +622,19 @@ namespace :kokoro do
 
   desc "Runs post-build logic on kokoro."
   task :post do
+    require_relative "rakelib/devsite_builder.rb"
+
     Rake::Task["kokoro:load_env_vars"].invoke
+    DevsiteBuilder.new(__dir__).build_master
     Rake::Task["docs:build_master"].invoke
     Rake::Task["test:codecov"].invoke
   end
 
   task :load_env_vars do
-    service_account = "#{ENV["KOKORO_GFILE_DIR"]}/service-account.json"
+    service_account = "#{ENV['KOKORO_GFILE_DIR']}/service-account.json"
     ENV["GOOGLE_APPLICATION_CREDENTIALS"] = service_account
-    filename = "#{ENV["KOKORO_GFILE_DIR"]}/env_vars.json"
-    env_vars = JSON.parse(File.read(filename))
+    filename = "#{ENV['KOKORO_GFILE_DIR']}/env_vars.json"
+    env_vars = JSON.parse File.read(filename)
     env_vars.each { |k, v| ENV[k] = v }
   end
 
@@ -668,45 +671,47 @@ task :synthtool do
 end
 
 def run_command_with_timeout command, timeout
-  job = Process.spawn(command)
+  job = Process.spawn command
   begin
-    Timeout.timeout(timeout) do
-      Process.wait(job)
+    Timeout.timeout timeout do
+      Process.wait job
     end
     return $?.exitstatus
   rescue Timeout::Error
     header_2 "TIMEOUT - #{timeout / 60} minute limit exceeded."
-    Process.kill('TERM', job)
+    Process.kill "TERM", job
   end
   1
 end
 
 def generate_kokoro_configs
   gems.each do |gem|
-    name = gem.split('google-cloud-').last
+    name = gem.split("google-cloud-").last
     [:linux, :windows, :osx].each do |os_version|
       [:presubmit, :continuous, :nightly].each do |build_type|
         # Generate build
         file_path = "./.kokoro/#{build_type}/#{os_version}/#{name}.cfg"
-        File.open(file_path, "w") do |f|
-          config = ERB.new(File.read("./.kokoro/templates/#{os_version}.cfg.erb"))
-          f.write(config.result(binding))
+        File.open file_path, "w" do |f|
+          config = ERB.new File.read("./.kokoro/templates/#{os_version}.cfg.erb")
+          f.write config.result(binding)
         end
       end
     end
     file_path = "./.kokoro/release/#{name}.cfg"
-    File.open(file_path, "w") do |f|
-      config = ERB.new(File.read("./.kokoro/templates/release.cfg.erb"))
-      f.write(config.result(binding))
+    File.open file_path, "w" do |f|
+      config = ERB.new File.read("./.kokoro/templates/release.cfg.erb")
+      f.write config.result(binding)
     end
   end
 
   # generate post-build config
   gem = "post"
   os_version = :linux
-  File.open("./.kokoro/continuous/linux/#{gem}.cfg", "w") do |f|
-    config = ERB.new(File.read("./.kokoro/templates/linux.cfg.erb"))
-    f.write(config.result(binding))
+  File.open "./.kokoro/continuous/linux/#{gem}.cfg", "w" do |f|
+    base = ERB.new File.read("./.kokoro/templates/linux.cfg.erb")
+    base = base.result binding
+    config = ERB.new File.read("./.kokoro/templates/post.cfg.erb")
+    f.write config.result(binding)
   end
 end
 
