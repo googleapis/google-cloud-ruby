@@ -28,6 +28,7 @@ module Google
             @subscriber = subscriber
             @max_bytes = max_bytes
             @interval = interval
+            @mutex = Mutex.new
 
             # Using a Hash ensures there is only one entry for each ack_id in
             # the buffer. Adding an entry again will overwrite the previous
@@ -53,8 +54,10 @@ module Google
           def modify_ack_deadline deadline, ack_ids
             return if ack_ids.empty?
 
-            ack_ids.each do |ack_id|
-              @register[ack_id] = deadline
+            @mutex.synchronize do
+              ack_ids.each do |ack_id|
+                @register[ack_id] = deadline
+              end
             end
 
             true
@@ -63,9 +66,11 @@ module Google
           def renew_lease deadline, ack_ids
             return if ack_ids.empty?
 
-            ack_ids.each do |ack_id|
-              # Do not overwrite pending actions when renewing leased messages.
-              @register[ack_id] ||= deadline
+            @mutex.synchronize do
+              ack_ids.each do |ack_id|
+                # Don't overwrite pending actions when renewing leased messages.
+                @register[ack_id] ||= deadline
+              end
             end
 
             true
@@ -120,10 +125,13 @@ module Google
           private
 
           def flush_requests!
-            return {} if @register.empty?
-
-            prev_reg = @register
-            @register = Concurrent::Map.new
+            prev_reg =
+              @mutex.synchronize do
+                return {} if @register.empty?
+                reg = @register
+                @register = Concurrent::Map.new
+                reg
+              end
 
             groups = prev_reg.each_pair.group_by { |_ack_id, delay| delay }
             req_hash = Hash[groups.map { |k, v| [k, v.map(&:first)] }]
