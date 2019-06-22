@@ -14,6 +14,7 @@
 
 
 require "concurrent"
+require "monitor"
 
 module Google
   module Cloud
@@ -22,9 +23,13 @@ module Google
         ##
         # @private
         class TimedUnaryBuffer
+          include MonitorMixin
+
           attr_reader :max_bytes, :interval
 
           def initialize subscriber, max_bytes: 10000000, interval: 1.0
+            super() # to init MonitorMixin
+
             @subscriber = subscriber
             @max_bytes = max_bytes
             @interval = interval
@@ -42,9 +47,11 @@ module Google
           def acknowledge ack_ids
             return if ack_ids.empty?
 
-            ack_ids.each do |ack_id|
-              # ack has no deadline set, use :ack indicate it is an ack
-              @register[ack_id] = :ack
+            synchronize do
+              ack_ids.each do |ack_id|
+                # ack has no deadline set, use :ack indicate it is an ack
+                @register[ack_id] = :ack
+              end
             end
 
             true
@@ -53,8 +60,10 @@ module Google
           def modify_ack_deadline deadline, ack_ids
             return if ack_ids.empty?
 
-            ack_ids.each do |ack_id|
-              @register[ack_id] = deadline
+            synchronize do
+              ack_ids.each do |ack_id|
+                @register[ack_id] = deadline
+              end
             end
 
             true
@@ -63,9 +72,11 @@ module Google
           def renew_lease deadline, ack_ids
             return if ack_ids.empty?
 
-            ack_ids.each do |ack_id|
-              # Do not overwrite pending actions when renewing leased messages.
-              @register[ack_id] ||= deadline
+            synchronize do
+              ack_ids.each do |ack_id|
+                # Don't overwrite pending actions when renewing leased messages.
+                @register[ack_id] ||= deadline
+              end
             end
 
             true
@@ -120,10 +131,13 @@ module Google
           private
 
           def flush_requests!
-            return {} if @register.empty?
-
-            prev_reg = @register
-            @register = Concurrent::Map.new
+            prev_reg =
+              synchronize do
+                return {} if @register.empty?
+                reg = @register
+                @register = Concurrent::Map.new
+                reg
+              end
 
             groups = prev_reg.each_pair.group_by { |_ack_id, delay| delay }
             req_hash = Hash[groups.map { |k, v| [k, v.map(&:first)] }]
