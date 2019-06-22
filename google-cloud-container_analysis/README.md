@@ -20,6 +20,17 @@ steps:
 $ gem install google-cloud-container_analysis
 ```
 
+### Preview
+```ruby
+require "google/cloud/container_analysis"
+
+grafeas_client = Grafeas.new
+parent = Grafeas::V1::GrafeasClient.project_path "my-project"
+results = grafeas_client.list_occurrences(parent).each do |occurrence|
+  # do something with occurrence
+end
+```
+
 ### Next Steps
 - Read the [Client Library Documentation][] for Container Analysis API
   to see other available methods on the client.

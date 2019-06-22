@@ -32,7 +32,6 @@ v1_library = gapic.ruby_library(
 
 s.copy(v1_library / 'lib')
 s.copy(v1_library / 'test')
-s.copy(v1_library / 'README.md')
 s.copy(v1_library / 'LICENSE')
 s.copy(v1_library / '.gitignore')
 s.copy(v1_library / '.yardopts')
