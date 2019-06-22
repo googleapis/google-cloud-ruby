@@ -22,7 +22,7 @@ function set_failed_status {
 source ~/.rvm/scripts/rvm
 rvm get head --auto-dotfiles
 
-versions=(2.3.8 2.4.5 2.5.5 2.6.2)
+versions=(2.3.8 2.4.5 2.5.5 2.6.3)
 rvm_versions=$(rvm list rubies)
 
 if [ "$JOB_TYPE" = "presubmit" ]; then

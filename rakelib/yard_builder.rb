@@ -288,16 +288,16 @@ class YardBuilder
         cmd "git commit -m '#{message}'"
       end
     end
+  end
 
-    def push_changes repo
-      Dir.chdir repo do
-        if ENV["GH_OAUTH_TOKEN"]
-          `git pull -q --rebase #{git_repository} gh-pages`
-          `git push -q #{git_repository} gh-pages`
-        else
-          `git pull -q --rebase origin gh-pages`
-          `git push -q origin gh-pages`
-        end
+  def push_changes repo
+    Dir.chdir repo do
+      if ENV["GH_OAUTH_TOKEN"]
+        `git pull -q --rebase #{git_repository} gh-pages`
+        `git push -q #{git_repository} gh-pages`
+      else
+        `git pull -q --rebase origin gh-pages`
+        `git push -q origin gh-pages`
       end
     end
   end
