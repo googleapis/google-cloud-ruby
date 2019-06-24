@@ -1,0 +1,19 @@
+AllCops:
+  TargetRubyVersion: 2.2
+  Exclude:
+    - "google-cloud-automl.gemspec"
+    - "lib/google/**/*"
+    - "Rakefile"
+    - "test/**/*"
+    - "acceptance/**/*"
+
+Documentation:
+  Enabled: false
+
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
+Style/MethodDefParentheses:
+  EnforcedStyle: require_no_parentheses
+Naming/FileName:
+  Exclude:
+    - "lib/google-cloud-automl.rb"

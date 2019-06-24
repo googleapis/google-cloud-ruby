@@ -1,0 +1,39 @@
+{
+  "updateTime": "2019-06-26T23:38:35.129454Z",
+  "sources": [
+    {
+      "generator": {
+        "name": "artman",
+        "version": "0.29.1",
+        "dockerImage": "googleapis/artman@sha256:b2a73f4dda03ef8fcaa973e3ba26d0cf34091f6c22c70add663af325931aef4d"
+      }
+    },
+    {
+      "git": {
+        "name": "googleapis",
+        "remote": "https://github.com/googleapis/googleapis.git",
+        "sha": "90e28b2117ec0411e66b522446f3e34f529d42a8",
+        "internalRef": "255267334"
+      }
+    },
+    {
+      "template": {
+        "name": "ruby_library",
+        "origin": "synthtool.gcp",
+        "version": "2019.5.2"
+      }
+    }
+  ],
+  "destinations": [
+    {
+      "client": {
+        "source": "googleapis",
+        "apiName": "automl",
+        "apiVersion": "v1",
+        "language": "ruby",
+        "generator": "gapic",
+        "config": "google/cloud/automl/artman_automl_v1beta1.yaml"
+      }
+    }
+  ]
+}
