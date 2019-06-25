@@ -166,7 +166,7 @@ module Google
         # Updates the state of the HMAC key to `ACTIVE`.
         #
         # @return [Google::Cloud::Storage::HmacKey] Returns the HMAC key for
-        #   chaining.
+        #   method chaining.
         #
         # @example
         #   require "google/cloud/storage"
@@ -196,7 +196,7 @@ module Google
         # Updates the state of the HMAC key to `INACTIVE`.
         #
         # @return [Google::Cloud::Storage::HmacKey] Returns the HMAC key for
-        #   chaining.
+        #   method chaining.
         #
         # @example
         #   require "google/cloud/storage"
@@ -230,7 +230,7 @@ module Google
         # conditions. See {Google::Cloud#storage} to control this behavior.
         #
         # @return [Google::Cloud::Storage::HmacKey] Returns the HMAC key for
-        #   chaining.
+        #   method chaining.
         #
         # @example
         #   require "google/cloud/storage"
