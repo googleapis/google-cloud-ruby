@@ -41,12 +41,22 @@ class DevsiteBuilder < YardBuilder
       cmd "yard --verbose #{cmds.join ' '}"
       docs_dir = gh_pages_repo_dir + "docs"
     end
-
     fix_gem_docs gem, gh_pages_repo_dir
     Dir.chdir output_dir do
       cmd "python3 -m docuploader create-metadata #{fields.join ' '}"
     end
     push_changes output_dir
+  end
+
+  def publish_tag tag
+    return if case_insensitive_check!
+
+    gem, version = split_tag tag
+    add_release gem, version
+    build_docs_for_tag tag
+    ensure_gem_latest_dir gem
+    ensure_gem_index_file gem
+    commit_changes gh_pages_dir, "Add #{gem} documentation for #{version} release"
   end
 
   def ensure_gem_index_file gem

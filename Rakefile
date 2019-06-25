@@ -605,6 +605,8 @@ namespace :kokoro do
   end
 
   task :release do
+    require_relative "rakelib/devsite_builder.rb"
+
     version = "0.1.0"
     header_2 ENV["JOB_TYPE"]
     Dir.chdir ENV["PACKAGE"] do
@@ -617,7 +619,9 @@ namespace :kokoro do
       end
     end
     Rake::Task["kokoro:load_env_vars"].invoke
-    Rake::Task["release"].invoke "#{ENV["PACKAGE"]}/v#{version}"
+    tag = "#{ENV["PACKAGE"]}/v#{version}"
+    DevsiteBuilder.new(__dir__).publish_tag tag
+    Rake::Task["release"].invoke tag
   end
 
   desc "Runs post-build logic on kokoro."
