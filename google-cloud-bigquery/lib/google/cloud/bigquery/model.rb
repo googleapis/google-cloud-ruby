@@ -16,6 +16,7 @@
 require "google/cloud/errors"
 require "google/cloud/bigquery/service"
 require "google/cloud/bigquery/model/list"
+require "google/cloud/bigquery/standard_sql"
 require "google/cloud/bigquery/convert"
 require "google/apis/bigquery_v2"
 
@@ -366,38 +367,32 @@ module Google
         end
 
         ##
-        # The input feature columns that were used to train this model as a Ruby
-        # Hash The hash keys are the column names, and the hash values are the
-        # column types.
+        # The input feature columns that were used to train this model.
         #
-        # The hash keys are the column names, the hash values are the column
-        # types.
-        #
-        # @return [Array<Hash>]
+        # @return [Array<StandardSql::Field>]
         #
         # @!group Attributes
         #
         def feature_columns
           ensure_full_data!
-          Array @gapi_json[:featureColumns]
+          Array(@gapi_json[:featureColumns]).map do |field_gapi_json|
+            StandardSql::Field.from_gapi_json field_gapi_json
+          end
         end
 
         ##
-        # The label columns that were used to train this model as a Ruby Hash.
-        # The output of the model will have a "predicted_" prefix to these
-        # columns. The hash keys are the column names, and the hash values are
-        # the column types.
+        # The label columns that were used to train this model. The output of
+        # the model will have a "predicted_" prefix to these columns.
         #
-        # The hash keys are the column names, the hash values are the column
-        # types.
-        #
-        # @return [Array<Hash>]
+        # @return [Array<StandardSql::Field>]
         #
         # @!group Attributes
         #
         def label_columns
           ensure_full_data!
-          Array @gapi_json[:labelColumns]
+          Array(@gapi_json[:labelColumns]).map do |field_gapi_json|
+            StandardSql::Field.from_gapi_json field_gapi_json
+          end
         end
 
         ##
