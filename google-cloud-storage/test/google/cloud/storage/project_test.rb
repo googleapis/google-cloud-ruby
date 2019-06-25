@@ -22,7 +22,7 @@ describe Google::Cloud::Storage::Project, :mock_storage do
   let(:bucket_url_root) { "https://www.googleapis.com/storage/v1" }
   let(:bucket_url) { "#{bucket_url_root}/b/#{bucket_name}" }
   let(:bucket_location) { "EU" }
-  let(:bucket_location_type) { "MULTI_REGION" }
+  let(:bucket_location_type) { "multi-region" }
   let(:bucket_storage_class) { "DURABLE_REDUCED_AVAILABILITY" }
   let(:bucket_logging_bucket) { "bucket-name-logging" }
   let(:bucket_logging_prefix) { "AccessLog" }
@@ -426,7 +426,7 @@ describe Google::Cloud::Storage::Project, :mock_storage do
     buckets.size.must_equal num_buckets
     bucket = buckets.first
     bucket.must_be_kind_of Google::Cloud::Storage::Bucket
-    bucket.location_type.must_equal "MULTI_REGION"
+    bucket.location_type.must_equal "multi-region"
   end
 
   it "lists buckets with find_buckets alias" do

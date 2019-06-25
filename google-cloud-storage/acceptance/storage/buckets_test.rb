@@ -32,12 +32,12 @@ describe "Storage", :buckets, :storage do
     first_buckets.next?.must_equal true
     first_buckets.each do |b|
       b.must_be_kind_of Google::Cloud::Storage::Bucket
-      b.location_type.must_equal "MULTI_REGION"
+      b.location_type.must_equal "multi-region"
     end
     second_buckets = first_buckets.next
     second_buckets.each do |b|
       b.must_be_kind_of Google::Cloud::Storage::Bucket
-      b.location_type.must_equal "MULTI_REGION"
+      b.location_type.must_equal "multi-region"
     end
   end
 

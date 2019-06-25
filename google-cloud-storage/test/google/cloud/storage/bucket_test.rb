@@ -30,7 +30,7 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
                          "responseHeader" => ["X-My-Custom-Header"] }] }
   let(:bucket_lifecycle) { {"rule" => [{"action" => {"storageClass" => "NEARLINE","type" => "SetStorageClass"},"condition" => {"age" => 32}}]} }
   let(:bucket_location) { "US" }
-  let(:bucket_location_type) { "MULTI_REGION" }
+  let(:bucket_location_type) { "multi-region" }
   let(:bucket_logging_bucket) { "bucket-name-logging" }
   let(:bucket_logging_prefix) { "AccessLog" }
   let(:bucket_storage_class) { "STANDARD" }

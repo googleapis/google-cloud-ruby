@@ -50,7 +50,7 @@ class MockStorage < Minitest::Spec
     url_root="https://www.googleapis.com/storage/v1", location="US",
     storage_class="STANDARD", versioning=nil, logging_bucket=nil,
     logging_prefix=nil, website_main=nil, website_404=nil, cors=[], requester_pays=nil,
-    lifecycle=nil, location_type="MULTI_REGION")
+    lifecycle=nil, location_type="multi-region")
     versioning_config = { "enabled" => versioning } if versioning
     { "kind" => "storage#bucket",
       "id" => name,

@@ -146,7 +146,7 @@ describe Google::Cloud::Storage::Bucket, :update, :mock_storage do
 
     bucket.logging_bucket.must_equal bucket_logging_bucket
     bucket.logging_prefix.must_equal bucket_logging_prefix
-    bucket.location_type.must_equal "MULTI_REGION"
+    bucket.location_type.must_equal "multi-region"
 
     mock.verify
   end
