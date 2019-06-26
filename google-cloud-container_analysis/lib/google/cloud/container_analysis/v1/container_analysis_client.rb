@@ -19,6 +19,7 @@
 # For the short term, the refresh process will only be runnable by Google
 # engineers.
 
+
 require "json"
 require "pathname"
 

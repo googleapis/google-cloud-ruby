@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+
 require "google/cloud/container_analysis/v1/container_analysis_client"
 
 module Google
