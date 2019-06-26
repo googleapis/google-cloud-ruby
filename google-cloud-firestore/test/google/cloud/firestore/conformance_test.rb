@@ -13,7 +13,7 @@
 # limitations under the License.
 
 require "helper.rb"
-require_relative "../../../../conformance/test-definition_pb"
+require_relative "../../../../conformance/v1/proto/google/cloud/conformance/firestore/v1/tests_pb.rb"
 
 ##
 # This suite of unit tests is dynamically generated from the contents of
@@ -79,8 +79,8 @@ class ConformanceTest < MockFirestore
 end
 
 class ConformanceCreate < ConformanceTest
-  def self.build_test_for description, test, index
-    define_method("test_#{index}: #{description}") do
+  def self.build_test_for description, test, file_path
+    define_method("test_#{file_path}: #{description}") do
       if test.is_error
         expect do
           run_conformance_proto test
@@ -102,8 +102,8 @@ class ConformanceCreate < ConformanceTest
 end
 
 class ConformanceSet < ConformanceTest
-  def self.build_test_for description, test, index
-    define_method("test_#{index}: #{description}") do
+  def self.build_test_for description, test, file_path
+    define_method("test_#{file_path}: #{description}") do
       if test.is_error
         expect do
           run_conformance_proto test
@@ -132,8 +132,8 @@ class ConformanceSet < ConformanceTest
 end
 
 class ConformanceUpdate < ConformanceTest
-  def self.build_test_for description, test, index
-    define_method("test_#{index}: #{description}") do
+  def self.build_test_for description, test, file_path
+    define_method("test_#{file_path}: #{description}") do
       if test.precondition && test.precondition.exists
         fail "The ruby implementation does not allow exists on update"
       end
@@ -162,8 +162,8 @@ class ConformanceUpdate < ConformanceTest
 end
 
 class ConformanceUpdatePaths < ConformanceTest
-  def self.build_test_for description, test, index
-    define_method("test_#{index}: #{description}") do
+  def self.build_test_for description, test, file_path
+    define_method("test_#{file_path}: #{description}") do
       if test.precondition && test.precondition.exists
         fail "The ruby implementation does not allow exists on update"
       end
@@ -205,8 +205,8 @@ class ConformanceUpdatePaths < ConformanceTest
 end
 
 class ConformanceDelete < ConformanceTest
-  def self.build_test_for description, test, index
-    define_method("test_#{index}: #{description}") do
+  def self.build_test_for description, test, file_path
+    define_method("test_#{file_path}: #{description}") do
       doc_ref = doc_ref_from_path test.doc_ref_path
       opts = {}
       if test.precondition && test.precondition.exists
@@ -229,8 +229,8 @@ class ConformanceDelete < ConformanceTest
 end
 
 class ConformanceQuery < ConformanceTest
-  def self.build_test_for description, test, index
-    define_method("test_#{index}: #{description}") do
+  def self.build_test_for description, test, file_path
+    define_method("test_#{file_path}: #{description}") do
       if test.is_error
         expect do
           build_query test, get_collection_reference(test.coll_path)
@@ -291,8 +291,8 @@ class ConformanceQuery < ConformanceTest
 end
 
 class ConformanceListen < ConformanceTest
-  def self.build_test_for description, test, index
-    define_method("test_#{index}: #{description}") do
+  def self.build_test_for description, test, file_path
+    define_method("test_#{file_path}: #{description}") do
       # slice responses into groups ending on RESET
       sliced_responses = test.responses.slice_when do |before_response, _after_response|
         before_response.response_type == :target_change &&
@@ -332,35 +332,35 @@ class ConformanceListen < ConformanceTest
   end
 end
 
-proto_file = File.expand_path "../../../../conformance/test-suite.binproto", __dir__
-proto_contents = File.read proto_file, mode: "rb"
-test_suite = Tests::TestSuite.decode proto_contents
+Dir.glob("conformance/v1/*.json").each do |file_path|
+  test_file = Google::Cloud::Conformance::Firestore::V1::TestFile.decode_json File.read(file_path)
+  test_file.tests.each do |wrapper|
+    case wrapper.test
+      when :get
+        next # Google::Firestore::V1::GetDocumentRequest is not used.                                                                  x
+      when :create
+        ConformanceCreate.build_test_for wrapper.description, wrapper.create, file_path
+      when :set
+        ConformanceSet.build_test_for wrapper.description, wrapper.set, file_path
+      when :update
+        # The ruby implementation does not allow exists on update, so skip
+        next if wrapper.update.precondition && wrapper.update.precondition.exists
 
-test_suite.tests.each_with_index do |wrapper, index|
-  case wrapper.test
-    when :get
-      next # Google::Firestore::V1::GetDocumentRequest is not used.
-    when :create
-      ConformanceCreate.build_test_for wrapper.description, wrapper.create, index
-    when :set
-      ConformanceSet.build_test_for wrapper.description, wrapper.set, index
-    when :update
-      # The ruby implementation does not allow exists on update, so skip
-      next if wrapper.update.precondition && wrapper.update.precondition.exists
+        ConformanceUpdate.build_test_for wrapper.description, wrapper.update, file_path
+      when :update_paths
+        # The ruby implementation does not allow exists on update, so skip
+        next if wrapper.update_paths.precondition && wrapper.update_paths.precondition.exists
 
-      ConformanceUpdate.build_test_for wrapper.description, wrapper.update, index
-    when :update_paths
-      # The ruby implementation does not allow exists on update, so skip
-      next if wrapper.update_paths.precondition && wrapper.update_paths.precondition.exists
-
-      ConformanceUpdatePaths.build_test_for wrapper.description, wrapper.update_paths, index
-    when :delete
-      ConformanceDelete.build_test_for wrapper.description, wrapper.delete, index
-    when :query
-      ConformanceQuery.build_test_for wrapper.description, wrapper.query, index
-    when :listen
-      ConformanceListen.build_test_for wrapper.description, wrapper.listen, index
-    else
-      raise "Unexpected test: #{wrapper.inspect}"
+        ConformanceUpdatePaths.build_test_for wrapper.description, wrapper.update_paths, file_path
+      when :delete
+        ConformanceDelete.build_test_for wrapper.description, wrapper.delete, file_path
+      when :query
+        ConformanceQuery.build_test_for wrapper.description, wrapper.query, file_path
+      when :listen
+        ConformanceListen.build_test_for wrapper.description, wrapper.listen, file_path
+      else
+        raise "Unexpected test: #{wrapper.inspect}"
+    end
   end
 end
+

@@ -8,7 +8,7 @@ AllCops:
     - "support/**/*"
     - "Rakefile"
     - "acceptance/**/*"
-    - "conformance/*"
+    - "conformance/**/*"
     - "test/**/*"
   TargetRubyVersion: 2.2
 
