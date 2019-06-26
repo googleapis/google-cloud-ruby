@@ -149,13 +149,9 @@ rescue => e
 def clean_up_hmac_keys proj = $storage
   puts "Cleaning up HMAC keys after tests for #{proj.project}."
   proj.hmac_keys.each do |hmac_key|
-    begin
-      hmac_key = proj.hmac_key hmac_key.access_id # reload to avoid error: Etag does not match expected value.
-      hmac_key.inactive! if hmac_key.active?
-      safe_gcs_execute { hmac_key.delete! }
-    rescue => e
-      puts "Error while cleaning up HMAC key id: #{hmac_key.id}\n\n#{e}\n#{e.backtrace}"
-    end
+    sleep 5
+    safe_gcs_execute { hmac_key.inactive! }
+    safe_gcs_execute { hmac_key.delete! }
   end
 rescue => e
   puts "Error while cleaning up HMAC keys after tests.\n\n#{e}"
