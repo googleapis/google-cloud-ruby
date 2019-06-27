@@ -10,11 +10,19 @@ var wasRedirected = false;
 var redirectMap = {{ site.data.devsite_redirects | jsonify }};
 Object.keys(redirectMap).forEach(key => {
     // Redirect to devsite for all gem docs.
-    // Leave for TOC until devsite has something similar;
-    if (currentUrl.indexOf(key) !== -1) {
-        var newURL = "https://googleapis.dev/ruby/" + redirectMap[key];
-        newURL += window.location.href.split(key).slice(-1)[0];
-        window.location.href = newURL;
+    // Leave for TOC until devsite has something similar.
+    if (currentUrl.replace("google-cloud-ruby", "").indexOf(key) !== -1) {
+        var newUrl = "https://googleapis.dev/ruby/" + redirectMap[key];
+        var pathname =  window.location.href.split(key).slice(-1)[0];
+
+        // Add "/latest" to URL if there is no version.
+        var regex = /[^/]/;
+        if (!regex.test(pathname)) {
+            pathname = "/latest";
+        }
+        newUrl += pathname;
+
+        window.location.href = newUrl;
         wasRedirected = true;
         return;
     }

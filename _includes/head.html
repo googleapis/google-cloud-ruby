@@ -12,9 +12,12 @@
   <script type="text/javascript" charset="utf-8" src="{{ "/js/plugins.js" | prepend: site.baseurl }}"></script>
   <script type="text/javascript" charset="utf-8" src="{{ "/js/main.js" | prepend: site.baseurl }}"></script>
   <script type="text/javascript" charset="utf-8" src="{{ "/js/vendor/modernizr-2.6.2.min.js" | prepend: site.baseurl }}"></script>
+  <script type="text/javascript" charset="utf-8" src="{{ "/js/vendor/jsondoc-forwarder-0.3.0.js" | prepend: site.baseurl }}"></script>
+  <script type="text/javascript" charset="utf-8" src="{{ "/js/jsondoc-forwarder-init-0.1.0.js" | prepend: site.baseurl }}"></script>
   {% for javascript in page.js %}
   <script type="text/javascript" charset="utf-8" src="{{ javascript | prepend: site.baseurl }}"></script>{% endfor %}
   <link href="//fonts.googleapis.com/css?family=Droid+Sans+Mono|Roboto:300,400,700,700italic,400italic|Open+Sans:300" rel="stylesheet" type="text/css">
   <link rel="shortcut icon" href="//cloud.google.com/images/gcp-favicon.ico">
+
   {% if page.target %}<base id="base_target" target="{{ page.target }}" />{% endif %}
 </head>
