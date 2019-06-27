@@ -1,0 +1,530 @@
+---
+layout: yard_main
+title: "Class: Google::Cloud::AutoML::V1beta1::BatchPredictInputConfig - Cloud"
+css: 
+  - /docs/css/style.css
+  - /docs/css/common.css
+  - /css/yard-main.css
+js: 
+  - /docs/js/app.js
+  - /js/yard-main.js
+---
+<script type="text/javascript" charset="utf-8">
+  pathId = "Google::Cloud::AutoML::V1beta1::BatchPredictInputConfig";
+  relpath = '../../../../';
+</script>
+
+
+<div class="nav_wrap">
+  <iframe id="nav" src="../../../../class_list.html?1"></iframe>
+  <div id="resizer"></div>
+</div>
+
+<div id="main" tabindex="-1">
+  <div id="header">
+    <div id="menu">
+  
+    <a href="../../../../_index.html">Index (B)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../AutoML.html" title="Google::Cloud::AutoML (module)">AutoML</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../V1beta1.html" title="Google::Cloud::AutoML::V1beta1 (module)">V1beta1</a></span></span>
+     &raquo; 
+    <span class="title">BatchPredictInputConfig</span>
+  
+</div>
+
+    <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../../../../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+    <div class="clear"></div>
+  </div>
+
+  <div id="content"><h1>Class: Google::Cloud::AutoML::V1beta1::BatchPredictInputConfig
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Google::Cloud::AutoML::V1beta1::BatchPredictInputConfig</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/google/cloud/automl/v1beta1/doc/google/cloud/automl/v1beta1/io.rb</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>Input configuration for BatchPredict Action.</p>
+
+<p>The format of input depends on the ML problem of the model used for
+prediction. As input source the
+<span class='object_link'><a href="InputConfig.html#gcs_source-instance_method" title="Google::Cloud::AutoML::V1beta1::InputConfig#gcs_source (method)">gcs_source</a></span>
+is expected, unless specified otherwise.</p>
+
+<p>The formats are represented in EBNF with commas being literal and with
+non-terminal symbols defined near the end of this comment. The formats
+are:</p>
+
+<ul>
+<li><p>For Video Classification:
+CSV file(s) with each line in format:
+GCS_FILE_PATH,TIME_SEGMENT_START,TIME_SEGMENT_END
+GCS_FILE_PATH leads to video of up to 50GB in size and up to 3h
+duration. Supported extensions: .MOV, .MPEG4, .MP4, .AVI.
+TIME_SEGMENT_START and TIME_SEGMENT_END must be within the
+length of the video, and end has to be after the start.
+Three sample rows:
+gs://folder/video1.mp4,10,40
+gs://folder/video1.mp4,20,60
+gs://folder/vid2.mov,0,inf</p></li>
+<li><p>For Video Object Tracking:
+CSV file(s) with each line in format:
+GCS_FILE_PATH,TIME_SEGMENT_START,TIME_SEGMENT_END
+GCS_FILE_PATH leads to video of up to 50GB in size and up to 3h
+duration. Supported extensions: .MOV, .MPEG4, .MP4, .AVI.
+TIME_SEGMENT_START and TIME_SEGMENT_END must be within the
+length of the video, and end has to be after the start.
+Three sample rows:
+gs://folder/video1.mp4,10,240
+gs://folder/video1.mp4,300,360
+gs://folder/vid2.mov,0,inf</p></li>
+<li><p>For Text Extraction
+.JSONL (i.e. JSON Lines) file(s) which either provide text in-line or
+as documents (for a single BatchPredict call only one of the these
+formats may be used).
+The in-line .JSONL file(s) contain per line a proto that
+wraps a temporary user-assigned TextSnippet ID (string up to 2000
+characters long) called &quot;id&quot;, a TextSnippet proto (in
+json representation) and zero or more TextFeature protos. Any given
+text snippet content must have 30,000 characters or less, and also
+be UTF-8 NFC encoded (ASCII already is). The IDs provided should be
+unique.
+The document .JSONL file(s) contain, per line, a proto that wraps a
+Document proto with input_config set. Only PDF documents are
+supported now, and each document must be up to 2MB large.
+Any given .JSONL file must be 100MB or smaller, and no more than 20
+files may be given.
+Sample in-line JSON Lines file (presented here with artificial line
+breaks, but the only actual line break is denoted by \n):
+{
+&quot;id&quot;: &quot;my_first_id&quot;,
+&quot;text_snippet&quot;: { &quot;content&quot;: &quot;dog car cat&quot;},
+&quot;text_features&quot;: [
+{
+&quot;text_segment&quot;: 4, &quot;end_offset&quot;: 6,
+&quot;structural_type&quot;: PARAGRAPH,
+&quot;bounding_poly&quot;: {
+&quot;normalized_vertices&quot;: [
+0.1, &quot;y&quot;: 0.1,
+0.1, &quot;y&quot;: 0.3,
+0.3, &quot;y&quot;: 0.3,
+0.3, &quot;y&quot;: 0.1,
+]
+},
+}
+],
+}\n
+{
+&quot;id&quot;: &quot;2&quot;,
+&quot;text_snippet&quot;: {
+&quot;content&quot;: &quot;An elaborate content&quot;,
+&quot;mime_type&quot;: &quot;text/plain&quot;
+}
+}
+Sample document JSON Lines file (presented here with artificial line
+breaks, but the only actual line break is denoted by \n).:
+{
+&quot;document&quot;: {
+&quot;input_config&quot;: {
+&quot;gcs_source&quot;: { &quot;input_uris&quot;: [ &quot;gs://folder/document1.pdf&quot; ]
+}
+}
+}
+}\n
+{
+&quot;document&quot;: {
+&quot;input_config&quot;: {
+&quot;gcs_source&quot;: { &quot;input_uris&quot;: [ &quot;gs://folder/document2.pdf&quot; ]
+}
+}
+}
+}</p></li>
+<li><p>For Tables:
+Either
+<span class='object_link'><a href="InputConfig.html#gcs_source-instance_method" title="Google::Cloud::AutoML::V1beta1::InputConfig#gcs_source (method)">gcs_source</a></span> or</p></li>
+</ul>
+
+<p><span class='object_link'><a href="InputConfig.html#bigquery_source-instance_method" title="Google::Cloud::AutoML::V1beta1::InputConfig#bigquery_source (method)">bigquery_source</a></span>.
+        GCS case:
+          CSV file(s), each by itself 10GB or smaller and total size must be
+          100GB or smaller, where first file must have a header containing
+          column names. If the first row of a subsequent file is the same as
+          the header, then it is also treated as a header. All other rows
+          contain values for the corresponding columns. For all
+          CLASSIFICATION and REGRESSION</p>
+
+<p>prediction_type-s:
+            The column names must contain the model&#39;s</p>
+
+<p><span class='object_link'><a href="TablesModelMetadata.html#input_feature_column_specs-instance_method" title="Google::Cloud::AutoML::V1beta1::TablesModelMetadata#input_feature_column_specs (method)">input_feature_column_specs&#39;</a></span></p>
+
+<p><span class='object_link'><a href="ColumnSpec.html#display_name-instance_method" title="Google::Cloud::AutoML::V1beta1::ColumnSpec#display_name (method)">display_name-s</a></span>
+            (order doesn&#39;t matter). The columns corresponding to the model&#39;s
+            input feature column specs must contain values compatible with
+            the column spec&#39;s data types. Prediction on all the rows, i.e.
+            the CSV lines, will be attempted. First three sample rows of a
+            CSV file:
+            &quot;First Name&quot;,&quot;Last Name&quot;,&quot;Dob&quot;,&quot;Addresses&quot;</p>
+
+<p>&quot;John&quot;,&quot;Doe&quot;,&quot;1968-01-22&quot;,&quot;[&quot;status&quot;:&quot;current&quot;,&quot;address&quot;:&quot;123_First_Avenue&quot;,&quot;city&quot;:&quot;Seattle&quot;,&quot;state&quot;:&quot;WA&quot;,&quot;zip&quot;:&quot;11111&quot;,&quot;numberOfYears&quot;:&quot;1&quot;,&quot;status&quot;:&quot;previous&quot;,&quot;address&quot;:&quot;456_Main_Street&quot;,&quot;city&quot;:&quot;Portland&quot;,&quot;state&quot;:&quot;OR&quot;,&quot;zip&quot;:&quot;22222&quot;,&quot;numberOfYears&quot;:&quot;5&quot;]&quot;</p>
+
+<p>&quot;Jane&quot;,&quot;Doe&quot;,&quot;1980-10-16&quot;,&quot;[&quot;status&quot;:&quot;current&quot;,&quot;address&quot;:&quot;789_Any_Avenue&quot;,&quot;city&quot;:&quot;Albany&quot;,&quot;state&quot;:&quot;NY&quot;,&quot;zip&quot;:&quot;33333&quot;,&quot;numberOfYears&quot;:&quot;2&quot;,&quot;status&quot;:&quot;previous&quot;,&quot;address&quot;:&quot;321_Main_Street&quot;,&quot;city&quot;:&quot;Hoboken&quot;,&quot;state&quot;:&quot;NJ&quot;,&quot;zip&quot;:&quot;44444&quot;,&quot;numberOfYears&quot;:&quot;3&quot;]}
+          For FORECASTING</p>
+
+<p>prediction_type:
+            The column names must contain the union of the model&#39;s</p>
+
+<p><span class='object_link'><a href="TablesModelMetadata.html#input_feature_column_specs-instance_method" title="Google::Cloud::AutoML::V1beta1::TablesModelMetadata#input_feature_column_specs (method)">input_feature_column_specs&#39;</a></span></p>
+
+<p><span class='object_link'><a href="ColumnSpec.html#display_name-instance_method" title="Google::Cloud::AutoML::V1beta1::ColumnSpec#display_name (method)">display_name-s</a></span>
+            and</p>
+
+<p><span class='object_link'><a href="TablesModelMetadata.html#target_column_spec-instance_method" title="Google::Cloud::AutoML::V1beta1::TablesModelMetadata#target_column_spec (method)">target_column_specs&#39;</a></span></p>
+
+<p><span class='object_link'><a href="ColumnSpec.html#display_name-instance_method" title="Google::Cloud::AutoML::V1beta1::ColumnSpec#display_name (method)">display_name</a></span>
+            (order doesn&#39;t matter), with values compatible with these column
+            specs data types, except as specified below.
+            The input rows must contain not only the to-be-predicted rows
+            but also the historical data rows, even if they would be
+            identical as the ones on which the model has been trained.
+            The historical rows must have non-NULL target column
+            values. The to-be-predicted rows must have NULL values in the
+            target column and all columns having</p>
+
+<p>TIME_SERIES_AVAILABLE_PAST_ONLY
+            type, regardless if these columns are
+            <span class='object_link'><a href="DataType.html#nullable-instance_method" title="Google::Cloud::AutoML::V1beta1::DataType#nullable (method)">nullable</a></span>.
+            Prediction only on the to-be-predicted rows will be attempted.
+            First four sample rows of a CSV file:</p>
+
+<p>&quot;Year&quot;,&quot;City&quot;,&quot;OlympicsThatYear&quot;,&quot;Population&quot;,&quot;WaterUsedGigaGallons&quot;
+            &quot;2000&quot;,&quot;NYC&quot;,&quot;true&quot;,&quot;8008278&quot;,&quot;452.7&quot;
+            &quot;2001&quot;,&quot;NYC&quot;,&quot;false&quot;,&quot;8024963&quot;,&quot;432.2&quot;
+            &quot;2002&quot;,&quot;NYC&quot;,&quot;true&quot;,&quot;&quot;,&quot;&quot;
+        BigQuery case:
+          An URI of a BigQuery table. The user data size of the BigQuery
+          table must be 100GB or smaller.
+          For all CLASSIFICATION and REGRESSION</p>
+
+<p>prediction_type-s:
+            The column names must contain the model&#39;s</p>
+
+<p><span class='object_link'><a href="TablesModelMetadata.html#input_feature_column_specs-instance_method" title="Google::Cloud::AutoML::V1beta1::TablesModelMetadata#input_feature_column_specs (method)">input_feature_column_specs&#39;</a></span></p>
+
+<p><span class='object_link'><a href="ColumnSpec.html#display_name-instance_method" title="Google::Cloud::AutoML::V1beta1::ColumnSpec#display_name (method)">display_name-s</a></span>
+            (order doesn&#39;t matter). The columns corresponding to the model&#39;s
+            input feature column specs must contain values compatible with
+            the column spec&#39;s data types. Prediction on all the rows of the
+            table will be attempted.
+          For FORECASTING</p>
+
+<p>prediction_type:
+            The column names must contain the union of the model&#39;s</p>
+
+<p><span class='object_link'><a href="TablesModelMetadata.html#input_feature_column_specs-instance_method" title="Google::Cloud::AutoML::V1beta1::TablesModelMetadata#input_feature_column_specs (method)">input_feature_column_specs&#39;</a></span></p>
+
+<p><span class='object_link'><a href="ColumnSpec.html#display_name-instance_method" title="Google::Cloud::AutoML::V1beta1::ColumnSpec#display_name (method)">display_name-s</a></span>
+            and</p>
+
+<p><span class='object_link'><a href="TablesModelMetadata.html#target_column_spec-instance_method" title="Google::Cloud::AutoML::V1beta1::TablesModelMetadata#target_column_spec (method)">target_column_specs&#39;</a></span></p>
+
+<p><span class='object_link'><a href="ColumnSpec.html#display_name-instance_method" title="Google::Cloud::AutoML::V1beta1::ColumnSpec#display_name (method)">display_name</a></span>
+            (order doesn&#39;t matter), with values compatible with these column
+            specs data types, except as specified below.
+            The table&#39;s rows must contain not only the to-be-predicted rows
+            but also the historical data rows, even if they would be
+            identical as the ones on which the model has been trained.
+            The historical rows must have non-NULL target column values.
+            The to-be-predicted rows must have NULL values in the
+            target column and all columns having</p>
+
+<p>TIME_SERIES_AVAILABLE_PAST_ONLY
+            type, regardless if these columns are
+            <span class='object_link'><a href="DataType.html#nullable-instance_method" title="Google::Cloud::AutoML::V1beta1::DataType#nullable (method)">nullable</a></span>.
+            Prediction only on the to-be-predicted rows will be attempted.</p>
+
+<p>Definitions:
+ GCS_FILE_PATH = A path to file on GCS, e.g. &quot;gs://folder/video.avi&quot;.
+ TIME_SEGMENT_START = TIME_OFFSET
+                      Expresses a beginning, inclusive, of a time segment
+                      within an
+                      example that has a time dimension (e.g. video).
+ TIME_SEGMENT_END = TIME_OFFSET
+                    Expresses an end, exclusive, of a time segment within
+                    an example that has a time dimension (e.g. video).
+ TIME_OFFSET = A number of seconds as measured from the start of an
+               example (e.g. video). Fractions are allowed, up to a
+               microsecond precision. &quot;inf&quot; is allowed and it means the end
+               of the example.</p>
+
+<p>Errors:
+ If any of the provided CSV files can&#39;t be parsed or if more than certain
+ percent of CSV rows cannot be processed then the operation fails and
+ prediction does not happen. Regardless of overall success or failure the
+ per-row failures, up to a certain count cap, will be listed in
+ Operation.metadata.partial_failures.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+
+
+
+  <h2>Instance Attribute Summary <small><a href="#" class="summary_toggle">collapse</a></small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#bigquery_source-instance_method" title="#bigquery_source (instance method)">#<strong>bigquery_source</strong>  &#x21d2; Google::Cloud::AutoML::V1beta1::BigQuerySource </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The BigQuery location for the input content.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#gcs_source-instance_method" title="#gcs_source (instance method)">#<strong>gcs_source</strong>  &#x21d2; Google::Cloud::AutoML::V1beta1::GcsSource </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The Google Cloud Storage location for the input content.</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+
+
+
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id="bigquery_source=-instance_method"></span>
+      <div class="method_details first">
+  <h3 class="signature first" id="bigquery_source-instance_method">
+  
+    #<strong>bigquery_source</strong>  &#x21d2; <tt><span class='object_link'><a href="BigQuerySource.html" title="Google::Cloud::AutoML::V1beta1::BigQuerySource (class)">Google::Cloud::AutoML::V1beta1::BigQuerySource</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns The BigQuery location for the input content.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="BigQuerySource.html" title="Google::Cloud::AutoML::V1beta1::BigQuerySource (class)">Google::Cloud::AutoML::V1beta1::BigQuerySource</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The BigQuery location for the input content.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+580</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/automl/v1beta1/doc/google/cloud/automl/v1beta1/io.rb', line 580</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::AutoML::V1beta1::BatchPredictInputConfig (class)">BatchPredictInputConfig</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="gcs_source=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="gcs_source-instance_method">
+  
+    #<strong>gcs_source</strong>  &#x21d2; <tt><span class='object_link'><a href="GcsSource.html" title="Google::Cloud::AutoML::V1beta1::GcsSource (class)">Google::Cloud::AutoML::V1beta1::GcsSource</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns The Google Cloud Storage location for the input content.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="GcsSource.html" title="Google::Cloud::AutoML::V1beta1::GcsSource (class)">Google::Cloud::AutoML::V1beta1::GcsSource</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The Google Cloud Storage location for the input content.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+580</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/automl/v1beta1/doc/google/cloud/automl/v1beta1/io.rb', line 580</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::AutoML::V1beta1::BatchPredictInputConfig (class)">BatchPredictInputConfig</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+</div>
+
+  <div id="footer">
+  <ul class="footer-links">
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby" title="Google Cloud on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> GitHub
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues" title="Google Cloud issues on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> Issues
+      </a>
+    </li>
+    <li>
+      <a href="http://stackoverflow.com/questions/tagged/google-cloud-ruby" title="Google Cloud on StackOverflow">
+      <img src="/google-cloud-ruby/img/icon-link-stackoverflow.svg" alt="StackOverflow icon"> StackOverflow
+    </a>
+    </li>
+    <li>
+      <a href="http://rubygems.org/gems/google-cloud" title="Google Cloud on RubyGems">
+        <img src="/google-cloud-ruby/img/icon-link-package-manager.svg" alt="RubyGems icon"> RubyGems
+      </a>
+    </li>
+  </ul>
+
+  <p>
+    Documentation generated by <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool">yard</a>.
+  </p>
+</div>
+
+</div>

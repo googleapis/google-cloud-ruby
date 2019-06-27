@@ -1,0 +1,1200 @@
+---
+layout: yard_main
+title: "Class: Google::Cloud::AutoML::V1beta1::ModelEvaluation - Cloud"
+css: 
+  - /docs/css/style.css
+  - /docs/css/common.css
+  - /css/yard-main.css
+js: 
+  - /docs/js/app.js
+  - /js/yard-main.js
+---
+<script type="text/javascript" charset="utf-8">
+  pathId = "Google::Cloud::AutoML::V1beta1::ModelEvaluation";
+  relpath = '../../../../';
+</script>
+
+
+<div class="nav_wrap">
+  <iframe id="nav" src="../../../../class_list.html?1"></iframe>
+  <div id="resizer"></div>
+</div>
+
+<div id="main" tabindex="-1">
+  <div id="header">
+    <div id="menu">
+  
+    <a href="../../../../_index.html">Index (M)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../AutoML.html" title="Google::Cloud::AutoML (module)">AutoML</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../V1beta1.html" title="Google::Cloud::AutoML::V1beta1 (module)">V1beta1</a></span></span>
+     &raquo; 
+    <span class="title">ModelEvaluation</span>
+  
+</div>
+
+    <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../../../../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+    <div class="clear"></div>
+  </div>
+
+  <div id="content"><h1>Class: Google::Cloud::AutoML::V1beta1::ModelEvaluation
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Google::Cloud::AutoML::V1beta1::ModelEvaluation</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/google/cloud/automl/v1beta1/doc/google/cloud/automl/v1beta1/model_evaluation.rb</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>Evaluation results of a model.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+
+
+
+  <h2>Instance Attribute Summary <small><a href="#" class="summary_toggle">collapse</a></small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#annotation_spec_id-instance_method" title="#annotation_spec_id (instance method)">#<strong>annotation_spec_id</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Output only.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#classification_evaluation_metrics-instance_method" title="#classification_evaluation_metrics (instance method)">#<strong>classification_evaluation_metrics</strong>  &#x21d2; Google::Cloud::AutoML::V1beta1::ClassificationEvaluationMetrics </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Model evaluation metrics for image, text, video and tables classification.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#create_time-instance_method" title="#create_time (instance method)">#<strong>create_time</strong>  &#x21d2; Google::Protobuf::Timestamp </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Output only.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#display_name-instance_method" title="#display_name (instance method)">#<strong>display_name</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Output only.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#evaluated_example_count-instance_method" title="#evaluated_example_count (instance method)">#<strong>evaluated_example_count</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Output only.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#image_object_detection_evaluation_metrics-instance_method" title="#image_object_detection_evaluation_metrics (instance method)">#<strong>image_object_detection_evaluation_metrics</strong>  &#x21d2; Google::Cloud::AutoML::V1beta1::ImageObjectDetectionEvaluationMetrics </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Model evaluation metrics for image object detection.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#name-instance_method" title="#name (instance method)">#<strong>name</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Output only.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#regression_evaluation_metrics-instance_method" title="#regression_evaluation_metrics (instance method)">#<strong>regression_evaluation_metrics</strong>  &#x21d2; Google::Cloud::AutoML::V1beta1::RegressionEvaluationMetrics </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Model evaluation metrics for Tables regression.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#text_extraction_evaluation_metrics-instance_method" title="#text_extraction_evaluation_metrics (instance method)">#<strong>text_extraction_evaluation_metrics</strong>  &#x21d2; Google::Cloud::AutoML::V1beta1::TextExtractionEvaluationMetrics </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Evaluation metrics for text extraction models.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#text_sentiment_evaluation_metrics-instance_method" title="#text_sentiment_evaluation_metrics (instance method)">#<strong>text_sentiment_evaluation_metrics</strong>  &#x21d2; Google::Cloud::AutoML::V1beta1::TextSentimentEvaluationMetrics </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Evaluation metrics for text sentiment models.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#translation_evaluation_metrics-instance_method" title="#translation_evaluation_metrics (instance method)">#<strong>translation_evaluation_metrics</strong>  &#x21d2; Google::Cloud::AutoML::V1beta1::TranslationEvaluationMetrics </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Model evaluation metrics for translation.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#video_object_tracking_evaluation_metrics-instance_method" title="#video_object_tracking_evaluation_metrics (instance method)">#<strong>video_object_tracking_evaluation_metrics</strong>  &#x21d2; Google::Cloud::AutoML::V1beta1::VideoObjectTrackingEvaluationMetrics </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Model evaluation metrics for video object tracking.</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+
+
+
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id="annotation_spec_id=-instance_method"></span>
+      <div class="method_details first">
+  <h3 class="signature first" id="annotation_spec_id-instance_method">
+  
+    #<strong>annotation_spec_id</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Output only.
+The ID of the annotation spec that the model evaluation applies to. The
+The ID is empty for the overall model evaluation.
+For Tables annotation specs in the dataset do not exist and this ID is
+always not set, but for CLASSIFICATION</p>
+
+<p>prediction_type-s
+the
+<span class='object_link'><a href="#display_name-instance_method" title="Google::Cloud::AutoML::V1beta1::ModelEvaluation#display_name (method)">display_name</a></span>
+field is used.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Output only.
+The ID of the annotation spec that the model evaluation applies to. The
+The ID is empty for the overall model evaluation.
+For Tables annotation specs in the dataset do not exist and this ID is
+always not set, but for CLASSIFICATION</p>
+
+<p>prediction_type-s
+the
+<span class='object_link'><a href="#display_name-instance_method" title="Google::Cloud::AutoML::V1beta1::ModelEvaluation#display_name (method)">display_name</a></span>
+field is used.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+96</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/automl/v1beta1/doc/google/cloud/automl/v1beta1/model_evaluation.rb', line 96</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::AutoML::V1beta1::ModelEvaluation (class)">ModelEvaluation</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="classification_evaluation_metrics=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="classification_evaluation_metrics-instance_method">
+  
+    #<strong>classification_evaluation_metrics</strong>  &#x21d2; <tt><span class='object_link'><a href="ClassificationEvaluationMetrics.html" title="Google::Cloud::AutoML::V1beta1::ClassificationEvaluationMetrics (class)">Google::Cloud::AutoML::V1beta1::ClassificationEvaluationMetrics</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Model evaluation metrics for image, text, video and tables
+classification.
+Tables problem is considered a classification when the target column
+is CATEGORY DataType.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="ClassificationEvaluationMetrics.html" title="Google::Cloud::AutoML::V1beta1::ClassificationEvaluationMetrics (class)">Google::Cloud::AutoML::V1beta1::ClassificationEvaluationMetrics</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Model evaluation metrics for image, text, video and tables
+classification.
+Tables problem is considered a classification when the target column
+is CATEGORY DataType.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+96</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/automl/v1beta1/doc/google/cloud/automl/v1beta1/model_evaluation.rb', line 96</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::AutoML::V1beta1::ModelEvaluation (class)">ModelEvaluation</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="create_time=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="create_time-instance_method">
+  
+    #<strong>create_time</strong>  &#x21d2; <tt><span class='object_link'><a href="../../../Protobuf/Timestamp.html" title="Google::Protobuf::Timestamp (class)">Google::Protobuf::Timestamp</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Output only.
+Timestamp when this model evaluation was created.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../../Protobuf/Timestamp.html" title="Google::Protobuf::Timestamp (class)">Google::Protobuf::Timestamp</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Output only.
+Timestamp when this model evaluation was created.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+96</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/automl/v1beta1/doc/google/cloud/automl/v1beta1/model_evaluation.rb', line 96</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::AutoML::V1beta1::ModelEvaluation (class)">ModelEvaluation</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="display_name=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="display_name-instance_method">
+  
+    #<strong>display_name</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Output only. The value of
+display_name at
+the moment when the model was trained. Because this field returns a value
+at model training time, for different models trained from the same dataset,
+the values may differ, since display names could had been changed between
+the two model&#39;s trainings.
+For Tables CLASSIFICATION</p>
+
+<p>prediction_type-s
+distinct values of the target column at the moment of the model evaluation
+are populated here.
+The display_name is empty for the overall model evaluation.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Output only. The value of
+display_name at
+the moment when the model was trained. Because this field returns a value
+at model training time, for different models trained from the same dataset,
+the values may differ, since display names could had been changed between
+the two model&#39;s trainings.
+For Tables CLASSIFICATION</p>
+
+<p>prediction_type-s
+distinct values of the target column at the moment of the model evaluation
+are populated here.
+The display_name is empty for the overall model evaluation.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+96</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/automl/v1beta1/doc/google/cloud/automl/v1beta1/model_evaluation.rb', line 96</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::AutoML::V1beta1::ModelEvaluation (class)">ModelEvaluation</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="evaluated_example_count=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="evaluated_example_count-instance_method">
+  
+    #<strong>evaluated_example_count</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Output only.
+The number of examples used for model evaluation, i.e. for
+which ground truth from time of model creation is compared against the
+predicted annotations created by the model.
+For overall ModelEvaluation (i.e. with annotation_spec_id not set) this is
+the total number of all examples used for evaluation.
+Otherwise, this is the count of examples that according to the ground
+truth were annotated by the</p>
+
+<p><span class='object_link'><a href="#annotation_spec_id-instance_method" title="Google::Cloud::AutoML::V1beta1::ModelEvaluation#annotation_spec_id (method)">annotation_spec_id</a></span>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Output only.
+The number of examples used for model evaluation, i.e. for
+which ground truth from time of model creation is compared against the
+predicted annotations created by the model.
+For overall ModelEvaluation (i.e. with annotation_spec_id not set) this is
+the total number of all examples used for evaluation.
+Otherwise, this is the count of examples that according to the ground
+truth were annotated by the</p>
+
+<p><span class='object_link'><a href="#annotation_spec_id-instance_method" title="Google::Cloud::AutoML::V1beta1::ModelEvaluation#annotation_spec_id (method)">annotation_spec_id</a></span>.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+96</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/automl/v1beta1/doc/google/cloud/automl/v1beta1/model_evaluation.rb', line 96</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::AutoML::V1beta1::ModelEvaluation (class)">ModelEvaluation</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="image_object_detection_evaluation_metrics=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="image_object_detection_evaluation_metrics-instance_method">
+  
+    #<strong>image_object_detection_evaluation_metrics</strong>  &#x21d2; <tt><span class='object_link'><a href="ImageObjectDetectionEvaluationMetrics.html" title="Google::Cloud::AutoML::V1beta1::ImageObjectDetectionEvaluationMetrics (class)">Google::Cloud::AutoML::V1beta1::ImageObjectDetectionEvaluationMetrics</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Model evaluation metrics for image object detection.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="ImageObjectDetectionEvaluationMetrics.html" title="Google::Cloud::AutoML::V1beta1::ImageObjectDetectionEvaluationMetrics (class)">Google::Cloud::AutoML::V1beta1::ImageObjectDetectionEvaluationMetrics</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Model evaluation metrics for image object detection.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+96</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/automl/v1beta1/doc/google/cloud/automl/v1beta1/model_evaluation.rb', line 96</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::AutoML::V1beta1::ModelEvaluation (class)">ModelEvaluation</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="name=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="name-instance_method">
+  
+    #<strong>name</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Output only.
+Resource name of the model evaluation.
+Format:</p>
+
+<p><code>projects/{project_id}/locations/{location_id}/models/{model_id}/modelEvaluations/{model_evaluation_id}</code></p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Output only.
+Resource name of the model evaluation.
+Format:</p>
+
+<p><code>projects/{project_id}/locations/{location_id}/models/{model_id}/modelEvaluations/{model_evaluation_id}</code></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+96</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/automl/v1beta1/doc/google/cloud/automl/v1beta1/model_evaluation.rb', line 96</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::AutoML::V1beta1::ModelEvaluation (class)">ModelEvaluation</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="regression_evaluation_metrics=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="regression_evaluation_metrics-instance_method">
+  
+    #<strong>regression_evaluation_metrics</strong>  &#x21d2; <tt><span class='object_link'><a href="RegressionEvaluationMetrics.html" title="Google::Cloud::AutoML::V1beta1::RegressionEvaluationMetrics (class)">Google::Cloud::AutoML::V1beta1::RegressionEvaluationMetrics</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Model evaluation metrics for Tables regression.
+Tables problem is considered a regression when the target column
+has FLOAT64 DataType.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="RegressionEvaluationMetrics.html" title="Google::Cloud::AutoML::V1beta1::RegressionEvaluationMetrics (class)">Google::Cloud::AutoML::V1beta1::RegressionEvaluationMetrics</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Model evaluation metrics for Tables regression.
+Tables problem is considered a regression when the target column
+has FLOAT64 DataType.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+96</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/automl/v1beta1/doc/google/cloud/automl/v1beta1/model_evaluation.rb', line 96</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::AutoML::V1beta1::ModelEvaluation (class)">ModelEvaluation</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="text_extraction_evaluation_metrics=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="text_extraction_evaluation_metrics-instance_method">
+  
+    #<strong>text_extraction_evaluation_metrics</strong>  &#x21d2; <tt><span class='object_link'><a href="TextExtractionEvaluationMetrics.html" title="Google::Cloud::AutoML::V1beta1::TextExtractionEvaluationMetrics (class)">Google::Cloud::AutoML::V1beta1::TextExtractionEvaluationMetrics</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Evaluation metrics for text extraction models.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TextExtractionEvaluationMetrics.html" title="Google::Cloud::AutoML::V1beta1::TextExtractionEvaluationMetrics (class)">Google::Cloud::AutoML::V1beta1::TextExtractionEvaluationMetrics</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Evaluation metrics for text extraction models.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+96</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/automl/v1beta1/doc/google/cloud/automl/v1beta1/model_evaluation.rb', line 96</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::AutoML::V1beta1::ModelEvaluation (class)">ModelEvaluation</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="text_sentiment_evaluation_metrics=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="text_sentiment_evaluation_metrics-instance_method">
+  
+    #<strong>text_sentiment_evaluation_metrics</strong>  &#x21d2; <tt><span class='object_link'><a href="TextSentimentEvaluationMetrics.html" title="Google::Cloud::AutoML::V1beta1::TextSentimentEvaluationMetrics (class)">Google::Cloud::AutoML::V1beta1::TextSentimentEvaluationMetrics</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Evaluation metrics for text sentiment models.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TextSentimentEvaluationMetrics.html" title="Google::Cloud::AutoML::V1beta1::TextSentimentEvaluationMetrics (class)">Google::Cloud::AutoML::V1beta1::TextSentimentEvaluationMetrics</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Evaluation metrics for text sentiment models.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+96</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/automl/v1beta1/doc/google/cloud/automl/v1beta1/model_evaluation.rb', line 96</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::AutoML::V1beta1::ModelEvaluation (class)">ModelEvaluation</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="translation_evaluation_metrics=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="translation_evaluation_metrics-instance_method">
+  
+    #<strong>translation_evaluation_metrics</strong>  &#x21d2; <tt><span class='object_link'><a href="TranslationEvaluationMetrics.html" title="Google::Cloud::AutoML::V1beta1::TranslationEvaluationMetrics (class)">Google::Cloud::AutoML::V1beta1::TranslationEvaluationMetrics</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Model evaluation metrics for translation.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TranslationEvaluationMetrics.html" title="Google::Cloud::AutoML::V1beta1::TranslationEvaluationMetrics (class)">Google::Cloud::AutoML::V1beta1::TranslationEvaluationMetrics</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Model evaluation metrics for translation.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+96</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/automl/v1beta1/doc/google/cloud/automl/v1beta1/model_evaluation.rb', line 96</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::AutoML::V1beta1::ModelEvaluation (class)">ModelEvaluation</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="video_object_tracking_evaluation_metrics=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="video_object_tracking_evaluation_metrics-instance_method">
+  
+    #<strong>video_object_tracking_evaluation_metrics</strong>  &#x21d2; <tt><span class='object_link'><a href="VideoObjectTrackingEvaluationMetrics.html" title="Google::Cloud::AutoML::V1beta1::VideoObjectTrackingEvaluationMetrics (class)">Google::Cloud::AutoML::V1beta1::VideoObjectTrackingEvaluationMetrics</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Model evaluation metrics for video object tracking.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="VideoObjectTrackingEvaluationMetrics.html" title="Google::Cloud::AutoML::V1beta1::VideoObjectTrackingEvaluationMetrics (class)">Google::Cloud::AutoML::V1beta1::VideoObjectTrackingEvaluationMetrics</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Model evaluation metrics for video object tracking.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+96</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/automl/v1beta1/doc/google/cloud/automl/v1beta1/model_evaluation.rb', line 96</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::AutoML::V1beta1::ModelEvaluation (class)">ModelEvaluation</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+</div>
+
+  <div id="footer">
+  <ul class="footer-links">
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby" title="Google Cloud on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> GitHub
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues" title="Google Cloud issues on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> Issues
+      </a>
+    </li>
+    <li>
+      <a href="http://stackoverflow.com/questions/tagged/google-cloud-ruby" title="Google Cloud on StackOverflow">
+      <img src="/google-cloud-ruby/img/icon-link-stackoverflow.svg" alt="StackOverflow icon"> StackOverflow
+    </a>
+    </li>
+    <li>
+      <a href="http://rubygems.org/gems/google-cloud" title="Google Cloud on RubyGems">
+        <img src="/google-cloud-ruby/img/icon-link-package-manager.svg" alt="RubyGems icon"> RubyGems
+      </a>
+    </li>
+  </ul>
+
+  <p>
+    Documentation generated by <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool">yard</a>.
+  </p>
+</div>
+
+</div>

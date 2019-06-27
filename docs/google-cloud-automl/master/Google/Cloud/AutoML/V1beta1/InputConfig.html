@@ -1,0 +1,733 @@
+---
+layout: yard_main
+title: "Class: Google::Cloud::AutoML::V1beta1::InputConfig - Cloud"
+css: 
+  - /docs/css/style.css
+  - /docs/css/common.css
+  - /css/yard-main.css
+js: 
+  - /docs/js/app.js
+  - /js/yard-main.js
+---
+<script type="text/javascript" charset="utf-8">
+  pathId = "Google::Cloud::AutoML::V1beta1::InputConfig";
+  relpath = '../../../../';
+</script>
+
+
+<div class="nav_wrap">
+  <iframe id="nav" src="../../../../class_list.html?1"></iframe>
+  <div id="resizer"></div>
+</div>
+
+<div id="main" tabindex="-1">
+  <div id="header">
+    <div id="menu">
+  
+    <a href="../../../../_index.html">Index (I)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../AutoML.html" title="Google::Cloud::AutoML (module)">AutoML</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../V1beta1.html" title="Google::Cloud::AutoML::V1beta1 (module)">V1beta1</a></span></span>
+     &raquo; 
+    <span class="title">InputConfig</span>
+  
+</div>
+
+    <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../../../../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+    <div class="clear"></div>
+  </div>
+
+  <div id="content"><h1>Class: Google::Cloud::AutoML::V1beta1::InputConfig
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Google::Cloud::AutoML::V1beta1::InputConfig</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/google/cloud/automl/v1beta1/doc/google/cloud/automl/v1beta1/io.rb</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>Input configuration for ImportData Action.</p>
+
+<p>The format of input depends on dataset_metadata the Dataset into which
+the import is happening has. As input source the
+<span class='object_link'><a href="#gcs_source-instance_method" title="Google::Cloud::AutoML::V1beta1::InputConfig#gcs_source (method)">gcs_source</a></span>
+is expected, unless specified otherwise. Additionally any input .CSV file
+by itself must be 100MB or smaller, unless specified otherwise.
+If an &quot;example&quot; file (i.e. image, video etc.) with identical content
+(even if it had different GCS_FILE_PATH) is mentioned multiple times, then
+its label, bounding boxes etc. are appended. The same file should be always
+provided with the same ML_USE and GCS_FILE_PATH, if it is not then
+these values are nondeterministically selected from the given ones.</p>
+
+<p>The formats are represented in EBNF with commas being literal and with
+non-terminal symbols defined near the end of this comment. The formats are:</p>
+
+<ul>
+<li><p>For Image Classification:
+CSV file(s) with each line in format:
+ML_USE,GCS_FILE_PATH,LABEL,LABEL,...
+GCS_FILE_PATH leads to image of up to 30MB in size. Supported
+extensions: .JPEG, .GIF, .PNG, .WEBP, .BMP, .TIFF, .ICO
+For MULTICLASS classification type, at most one LABEL is allowed
+per image. If an image has not yet been labeled, then it should be
+mentioned just once with no LABEL.
+Some sample rows:
+TRAIN,gs://folder/image1.jpg,daisy
+TEST,gs://folder/image2.jpg,dandelion,tulip,rose
+UNASSIGNED,gs://folder/image3.jpg,daisy
+UNASSIGNED,gs://folder/image4.jpg</p></li>
+<li><p>For Image Object Detection:
+CSV file(s) with each line in format:
+ML_USE,GCS_FILE_PATH,(LABEL,BOUNDING_BOX | ,,,,,,,)
+GCS_FILE_PATH leads to image of up to 30MB in size. Supported
+extensions: .JPEG, .GIF, .PNG.
+Each image is assumed to be exhaustively labeled. The minimum
+allowed BOUNDING_BOX edge length is 0.01, and no more than 500
+BOUNDING_BOX-es per image are allowed (one BOUNDING_BOX is defined
+per line). If an image has not yet been labeled, then it should be
+mentioned just once with no LABEL and the &quot;,,,,,,,&quot; in place of the
+BOUNDING_BOX.
+Four sample rows:
+TRAIN,gs://folder/image1.png,car,0.1,0.1,,,0.3,0.3,,
+TRAIN,gs://folder/image1.png,bike,.7,.6,,,.8,.9,,
+UNASSIGNED,gs://folder/im2.png,car,0.1,0.1,0.2,0.1,0.2,0.3,0.1,0.3
+TEST,gs://folder/im3.png,,,,,,,,,</p></li>
+<li><p>For Video Classification:
+CSV file(s) with each line in format:
+ML_USE,GCS_FILE_PATH
+where ML_USE VALIDATE value should not be used. The GCS_FILE_PATH
+should lead to another .csv file which describes examples that have
+given ML_USE, using the following row format:
+GCS_FILE_PATH,(LABEL,TIME_SEGMENT_START,TIME_SEGMENT_END | ,,)
+Here GCS_FILE_PATH leads to a video of up to 50GB in size and up
+to 3h duration. Supported extensions: .MOV, .MPEG4, .MP4, .AVI.
+TIME_SEGMENT_START and TIME_SEGMENT_END must be within the
+length of the video, and end has to be after the start. Any segment
+of a video which has one or more labels on it, is considered a
+hard negative for all other labels. Any segment with no labels on
+it is considered to be unknown. If a whole video is unknown, then
+it shuold be mentioned just once with &quot;,,&quot; in place of LABEL,
+TIME_SEGMENT_START,TIME_SEGMENT_END.
+Sample top level CSV file:
+TRAIN,gs://folder/train_videos.csv
+TEST,gs://folder/test_videos.csv
+UNASSIGNED,gs://folder/other_videos.csv
+Sample rows of a CSV file for a particular ML_USE:
+gs://folder/video1.avi,car,120,180.000021
+gs://folder/video1.avi,bike,150,180.000021
+gs://folder/vid2.avi,car,0,60.5
+gs://folder/vid3.avi,,,</p></li>
+<li><p>For Video Object Tracking:
+CSV file(s) with each line in format:
+ML_USE,GCS_FILE_PATH
+where ML_USE VALIDATE value should not be used. The GCS_FILE_PATH
+should lead to another .csv file which describes examples that have
+given ML_USE, using one of the following row format:
+GCS_FILE_PATH,LABEL,[INSTANCE_ID],TIMESTAMP,BOUNDING_BOX
+or
+GCS_FILE_PATH,,,,,,,,,,
+Here GCS_FILE_PATH leads to a video of up to 50GB in size and up
+to 3h duration. Supported extensions: .MOV, .MPEG4, .MP4, .AVI.
+Providing INSTANCE_IDs can help to obtain a better model. When
+a specific labeled entity leaves the video frame, and shows up
+afterwards it is not required, albeit preferable, that the same
+INSTANCE_ID is given to it.
+TIMESTAMP must be within the length of the video, the
+BOUNDING_BOX is assumed to be drawn on the closest video&#39;s frame
+to the TIMESTAMP. Any mentioned by the TIMESTAMP frame is expected
+to be exhaustively labeled and no more than 500 BOUNDING_BOX-es per
+frame are allowed. If a whole video is unknown, then it should be
+mentioned just once with &quot;,,,,,,,,,,&quot; in place of LABEL,
+[INSTANCE_ID],TIMESTAMP,BOUNDING_BOX.
+Sample top level CSV file:
+TRAIN,gs://folder/train_videos.csv
+TEST,gs://folder/test_videos.csv
+UNASSIGNED,gs://folder/other_videos.csv
+Seven sample rows of a CSV file for a particular ML_USE:
+gs://folder/video1.avi,car,1,12.10,0.8,0.8,0.9,0.8,0.9,0.9,0.8,0.9
+gs://folder/video1.avi,car,1,12.90,0.4,0.8,0.5,0.8,0.5,0.9,0.4,0.9
+gs://folder/video1.avi,car,2,12.10,.4,.2,.5,.2,.5,.3,.4,.3
+gs://folder/video1.avi,car,2,12.90,.8,.2,,,.9,.3,,
+gs://folder/video1.avi,bike,,12.50,.45,.45,,,.55,.55,,
+gs://folder/video2.avi,car,1,0,.1,.9,,,.9,.1,,
+gs://folder/video2.avi,,,,,,,,,,,</p></li>
+<li><p>For Text Extraction:
+CSV file(s) with each line in format:
+ML_USE,GCS_FILE_PATH
+GCS_FILE_PATH leads to a .JSONL (i.e. JSON Lines) file which either
+imports text in-line or as documents.
+The in-line .JSONL file contains, per line, a proto that wraps a
+TextSnippet proto (in json representation) followed by one or
+more AnnotationPayload protos (called annotations), which have
+display_name and text_extraction detail populated.
+The given text is expected to be annotated exhaustively, e.g. if
+you look for animals and text contains &quot;dolphin&quot; that is not
+labeled, then &quot;dolphin&quot; will be assumed to not be an animal. Any
+given text snippet content must have 30,000 characters or less,
+and also be UTF-8 NFC encoded (ASCII already is).           The document .JSONL file contains, per line, a proto that wraps a
+Document proto with input_config set. Only PDF documents are
+supported now, and each document may be up to 2MB large.
+Currently annotations on documents cannot be specified at import.
+Any given .JSONL file must be 100MB or smaller.
+Three sample CSV rows:
+TRAIN,gs://folder/file1.jsonl
+VALIDATE,gs://folder/file2.jsonl
+TEST,gs://folder/file3.jsonl
+Sample in-line JSON Lines file for entity extraction (presented here
+with artificial line breaks, but the only actual line break is
+denoted by \n).:
+{
+&quot;text_snippet&quot;: {
+&quot;content&quot;: &quot;dog car cat&quot;
+}             &quot;annotations&quot;: [
+{
+&quot;display_name&quot;: &quot;animal&quot;,
+&quot;text_extraction&quot;: {
+&quot;text_segment&quot;: 0, &quot;end_offset&quot;: 3
+}
+},
+{
+&quot;display_name&quot;: &quot;vehicle&quot;,
+&quot;text_extraction&quot;: {
+&quot;text_segment&quot;: 4, &quot;end_offset&quot;: 7
+}
+},
+{
+&quot;display_name&quot;: &quot;animal&quot;,
+&quot;text_extraction&quot;: {
+&quot;text_segment&quot;: 8, &quot;end_offset&quot;: 11
+}
+},
+],
+}\n
+{
+&quot;text_snippet&quot;: {
+&quot;content&quot;: &quot;This dog is good.&quot;
+},
+&quot;annotations&quot;: [
+{
+&quot;display_name&quot;: &quot;animal&quot;,
+&quot;text_extraction&quot;: {
+&quot;text_segment&quot;: 5, &quot;end_offset&quot;: 8
+}
+}
+]
+}
+Sample document JSON Lines file (presented here with artificial line
+breaks, but the only actual line break is denoted by \n).:
+{
+&quot;document&quot;: {
+&quot;input_config&quot;: {
+&quot;gcs_source&quot;: { &quot;input_uris&quot;: [ &quot;gs://folder/document1.pdf&quot; ]
+}
+}
+}
+}\n
+{
+&quot;document&quot;: {
+&quot;input_config&quot;: {
+&quot;gcs_source&quot;: { &quot;input_uris&quot;: [ &quot;gs://folder/document2.pdf&quot; ]
+}
+}
+}
+}</p></li>
+<li><p>For Text Classification:
+CSV file(s) with each line in format:
+ML_USE,(TEXT_SNIPPET | GCS_FILE_PATH),LABEL,LABEL,...
+TEXT_SNIPPET and GCS_FILE_PATH are distinguished by a pattern. If
+the column content is a valid gcs file path, i.e. prefixed by
+&quot;gs://&quot;, it will be treated as a GCS_FILE_PATH, else if the content
+is enclosed within double quotes (&quot;&quot;), it will
+be treated as a TEXT_SNIPPET. In the GCS_FILE_PATH case, the path
+must lead to a .txt file with UTF-8 encoding, e.g.
+&quot;gs://folder/content.txt&quot;, and the content in it will be extracted
+as a text snippet. In TEXT_SNIPPET case, the column content
+excluding quotes will be treated as to be imported text snippet. In
+both cases, the text snippet/file size must be within 128kB.
+Maximum 100 unique labels are allowed per CSV row.
+Four sample rows:
+TRAIN,&quot;They have bad food and very rude&quot;,RudeService,BadFood
+TRAIN,gs://folder/content.txt,SlowService
+TEST,&quot;Typically always bad service there.&quot;,RudeService
+VALIDATE,&quot;Stomach ache to go.&quot;,BadFood</p></li>
+<li><p>For Text Sentiment:
+CSV file(s) with each line in format:
+ML_USE,(TEXT_SNIPPET | GCS_FILE_PATH),SENTIMENT
+TEXT_SNIPPET and GCS_FILE_PATH are distinguished by a pattern. If
+the column content is a valid gcs file path, i.e. prefixed by
+&quot;gs://&quot;, it will be treated as a GCS_FILE_PATH, otherwise it will
+be treated as a TEXT_SNIPPET. In the GCS_FILE_PATH case, the path
+must lead to a .txt file with UTF-8 encoding, e.g.
+&quot;gs://folder/content.txt&quot;, and the content in it will be extracted
+as a text snippet. In TEXT_SNIPPET case, the column content itself
+will be treated as to be imported text snippet. In both cases, the
+text snippet must be up to 500 characters long.
+Four sample rows:
+TRAIN,&quot;@freewrytin God is way too good for Claritin&quot;,2
+TRAIN,&quot;I need Claritin so bad&quot;,3
+TEST,&quot;Thank god for Claritin.&quot;,4
+VALIDATE,gs://folder/content.txt,2</p>
+
+<ul>
+<li>For Tables:
+Either
+<span class='object_link'><a href="#gcs_source-instance_method" title="Google::Cloud::AutoML::V1beta1::InputConfig#gcs_source (method)">gcs_source</a></span> or</li>
+</ul></li>
+</ul>
+
+<p><span class='object_link'><a href="#bigquery_source-instance_method" title="Google::Cloud::AutoML::V1beta1::InputConfig#bigquery_source (method)">bigquery_source</a></span>
+  can be used. All inputs will be concatenated into a single</p>
+
+<p>primary_table
+        For gcs_source:
+          CSV file(s), where the first row of the first file is the header,
+          containing unique column names. If the first row of a subsequent
+          file is the same as the header, then it is also treated as a
+          header. All other rows contain values for the corresponding
+          columns.
+          Each .CSV file by itself must be 10GB or smaller, and their total
+          size must be 100GB or smaller.
+          First three sample rows of a CSV file:
+          &quot;Id&quot;,&quot;First Name&quot;,&quot;Last Name&quot;,&quot;Dob&quot;,&quot;Addresses&quot;</p>
+
+<p>&quot;1&quot;,&quot;John&quot;,&quot;Doe&quot;,&quot;1968-01-22&quot;,&quot;[&quot;status&quot;:&quot;current&quot;,&quot;address&quot;:&quot;123_First_Avenue&quot;,&quot;city&quot;:&quot;Seattle&quot;,&quot;state&quot;:&quot;WA&quot;,&quot;zip&quot;:&quot;11111&quot;,&quot;numberOfYears&quot;:&quot;1&quot;,&quot;status&quot;:&quot;previous&quot;,&quot;address&quot;:&quot;456_Main_Street&quot;,&quot;city&quot;:&quot;Portland&quot;,&quot;state&quot;:&quot;OR&quot;,&quot;zip&quot;:&quot;22222&quot;,&quot;numberOfYears&quot;:&quot;5&quot;]&quot;</p>
+
+<p>&quot;2&quot;,&quot;Jane&quot;,&quot;Doe&quot;,&quot;1980-10-16&quot;,&quot;[&quot;status&quot;:&quot;current&quot;,&quot;address&quot;:&quot;789_Any_Avenue&quot;,&quot;city&quot;:&quot;Albany&quot;,&quot;state&quot;:&quot;NY&quot;,&quot;zip&quot;:&quot;33333&quot;,&quot;numberOfYears&quot;:&quot;2&quot;,&quot;status&quot;:&quot;previous&quot;,&quot;address&quot;:&quot;321_Main_Street&quot;,&quot;city&quot;:&quot;Hoboken&quot;,&quot;state&quot;:&quot;NJ&quot;,&quot;zip&quot;:&quot;44444&quot;,&quot;numberOfYears&quot;:&quot;3&quot;]}
+        For bigquery_source:
+          An URI of a BigQuery table. The user data size of the BigQuery
+          table must be 100GB or smaller.
+        An imported table must have between 2 and 1,000 columns, inclusive,
+        and between 1000 and 100,000,000 rows, inclusive. There are at most 5
+        import data running in parallel.</p>
+
+<p>Definitions:
+ ML_USE = &quot;TRAIN&quot; | &quot;VALIDATE&quot; | &quot;TEST&quot; | &quot;UNASSIGNED&quot;
+          Describes how the given example (file) should be used for model
+          training. &quot;UNASSIGNED&quot; can be used when user has no preference.
+ GCS_FILE_PATH = A path to file on GCS, e.g. &quot;gs://folder/image1.png&quot;.
+ LABEL = A display name of an object on an image, video etc., e.g. &quot;dog&quot;.
+         Must be up to 32 characters long and can consist only of ASCII
+         Latin letters A-Z and a-z, underscores(_), and ASCII digits 0-9.
+         For each label an AnnotationSpec is created which display_name
+         becomes the label; AnnotationSpecs are given back in predictions.
+ INSTANCE_ID = A positive integer that identifies a specific instance of a
+               labeled entity on an example. Used e.g. to track two cars on
+               a video while being able to tell apart which one is which.
+ BOUNDING_BOX = VERTEX,VERTEX,VERTEX,VERTEX | VERTEX,,,VERTEX,,
+                A rectangle parallel to the frame of the example (image,
+                video). If 4 vertices are given they are connected by edges
+                in the order provided, if 2 are given they are recognized
+                as diagonally opposite vertices of the rectangle.
+ VERTEX = COORDINATE,COORDINATE
+          First coordinate is horizontal (x), the second is vertical (y).
+ COORDINATE = A float in 0 to 1 range, relative to total length of
+              image or video in given dimension. For fractions the
+              leading non-decimal 0 can be omitted (i.e. 0.3 = .3).
+              Point 0,0 is in top left.
+ TIME_SEGMENT_START = TIME_OFFSET
+                      Expresses a beginning, inclusive, of a time segment
+                      within an example that has a time dimension
+                      (e.g. video).
+ TIME_SEGMENT_END = TIME_OFFSET
+                    Expresses an end, exclusive, of a time segment within
+                    an example that has a time dimension (e.g. video).
+ TIME_OFFSET = A number of seconds as measured from the start of an
+               example (e.g. video). Fractions are allowed, up to a
+               microsecond precision. &quot;inf&quot; is allowed, and it means the end
+               of the example.
+ TEXT_SNIPPET = A content of a text snippet, UTF-8 encoded, enclosed within
+                double quotes (&quot;&quot;).
+ SENTIMENT = An integer between 0 and
+             Dataset.text_sentiment_dataset_metadata.sentiment_max
+             (inclusive). Describes the ordinal of the sentiment - higher
+             value means a more positive sentiment. All the values are
+             completely relative, i.e. neither 0 needs to mean a negative or
+             neutral sentiment nor sentiment_max needs to mean a positive one</p>
+
+<ul>
+<li>it is just required that 0 is the least positive sentiment
+in the data, and sentiment_max is the  most positive one.
+The SENTIMENT shouldn&#39;t be confused with &quot;score&quot; or &quot;magnitude&quot;
+from the previous Natural Language Sentiment Analysis API.
+All SENTIMENT values between 0 and sentiment_max must be
+represented in the imported data. On prediction the same 0 to
+sentiment_max range will be used. The difference between
+neighboring sentiment values needs not to be uniform, e.g. 1 and
+2 may be similar whereas the difference between 2 and 3 may be
+huge.</li>
+</ul>
+
+<p>Errors:
+ If any of the provided CSV files can&#39;t be parsed or if more than certain
+ percent of CSV rows cannot be processed then the operation fails and
+ nothing is imported. Regardless of overall success or failure the per-row
+ failures, up to a certain count cap, will be listed in
+ Operation.metadata.partial_failures.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+
+
+
+  <h2>Instance Attribute Summary <small><a href="#" class="summary_toggle">collapse</a></small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#bigquery_source-instance_method" title="#bigquery_source (instance method)">#<strong>bigquery_source</strong>  &#x21d2; Google::Cloud::AutoML::V1beta1::BigQuerySource </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The BigQuery location for the input content.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#gcs_source-instance_method" title="#gcs_source (instance method)">#<strong>gcs_source</strong>  &#x21d2; Google::Cloud::AutoML::V1beta1::GcsSource </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The Google Cloud Storage location for the input content.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#params-instance_method" title="#params (instance method)">#<strong>params</strong>  &#x21d2; Hash{String =&gt; String} </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Additional domain-specific parameters describing the semantic of the imported data, any string must be up to 25000 characters long.</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+
+
+
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id="bigquery_source=-instance_method"></span>
+      <div class="method_details first">
+  <h3 class="signature first" id="bigquery_source-instance_method">
+  
+    #<strong>bigquery_source</strong>  &#x21d2; <tt><span class='object_link'><a href="BigQuerySource.html" title="Google::Cloud::AutoML::V1beta1::BigQuerySource (class)">Google::Cloud::AutoML::V1beta1::BigQuerySource</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns The BigQuery location for the input content.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="BigQuerySource.html" title="Google::Cloud::AutoML::V1beta1::BigQuerySource (class)">Google::Cloud::AutoML::V1beta1::BigQuerySource</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The BigQuery location for the input content.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+354</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/automl/v1beta1/doc/google/cloud/automl/v1beta1/io.rb', line 354</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::AutoML::V1beta1::InputConfig (class)">InputConfig</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="gcs_source=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="gcs_source-instance_method">
+  
+    #<strong>gcs_source</strong>  &#x21d2; <tt><span class='object_link'><a href="GcsSource.html" title="Google::Cloud::AutoML::V1beta1::GcsSource (class)">Google::Cloud::AutoML::V1beta1::GcsSource</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns The Google Cloud Storage location for the input content.
+In ImportData, the gcs_source points to a csv with structure described in
+the comment.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="GcsSource.html" title="Google::Cloud::AutoML::V1beta1::GcsSource (class)">Google::Cloud::AutoML::V1beta1::GcsSource</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The Google Cloud Storage location for the input content.
+In ImportData, the gcs_source points to a csv with structure described in
+the comment.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+354</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/automl/v1beta1/doc/google/cloud/automl/v1beta1/io.rb', line 354</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::AutoML::V1beta1::InputConfig (class)">InputConfig</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="params=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="params-instance_method">
+  
+    #<strong>params</strong>  &#x21d2; <tt>Hash{String =&gt; String}</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Additional domain-specific parameters describing the semantic of the
+imported data, any string must be up to 25000
+characters long.</p>
+
+<ul>
+<li>For Tables:
+<code>schema_inference_version</code> - (integer) Required. The version of the
+algorithm that should be used for the initial inference of the
+schema (columns&#39; DataTypes) of the table the data is being imported
+into. Allowed values: &quot;1&quot;.</li>
+</ul>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Hash{String =&gt; String}</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Additional domain-specific parameters describing the semantic of the
+imported data, any string must be up to 25000
+characters long.</p>
+
+<ul>
+<li>For Tables:
+<code>schema_inference_version</code> - (integer) Required. The version of the
+algorithm that should be used for the initial inference of the
+schema (columns&#39; DataTypes) of the table the data is being imported
+into. Allowed values: &quot;1&quot;.</li>
+</ul>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+354</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/automl/v1beta1/doc/google/cloud/automl/v1beta1/io.rb', line 354</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::AutoML::V1beta1::InputConfig (class)">InputConfig</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+</div>
+
+  <div id="footer">
+  <ul class="footer-links">
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby" title="Google Cloud on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> GitHub
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues" title="Google Cloud issues on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> Issues
+      </a>
+    </li>
+    <li>
+      <a href="http://stackoverflow.com/questions/tagged/google-cloud-ruby" title="Google Cloud on StackOverflow">
+      <img src="/google-cloud-ruby/img/icon-link-stackoverflow.svg" alt="StackOverflow icon"> StackOverflow
+    </a>
+    </li>
+    <li>
+      <a href="http://rubygems.org/gems/google-cloud" title="Google Cloud on RubyGems">
+        <img src="/google-cloud-ruby/img/icon-link-package-manager.svg" alt="RubyGems icon"> RubyGems
+      </a>
+    </li>
+  </ul>
+
+  <p>
+    Documentation generated by <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool">yard</a>.
+  </p>
+</div>
+
+</div>
