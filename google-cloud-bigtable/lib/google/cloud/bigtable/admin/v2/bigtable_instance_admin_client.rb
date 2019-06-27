@@ -226,6 +226,7 @@ module Google
                 timeout: timeout,
                 lib_name: lib_name,
                 lib_version: lib_version,
+                metadata: metadata,
               )
 
               if credentials.is_a?(String) || credentials.is_a?(Hash)
