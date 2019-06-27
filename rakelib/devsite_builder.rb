@@ -3,6 +3,7 @@ require_relative "gem_version_doc.rb"
 require_relative "repo_metadata.rb"
 
 class DevsiteBuilder < YardBuilder
+  attr_reader :redirects
 
   def initialize master_dir = "."
     @master_dir = Pathname.new master_dir
@@ -22,7 +23,7 @@ class DevsiteBuilder < YardBuilder
     end
   end
 
-  def build_gem_docs input_dir, output_dir, gem = nil, version = 'master'
+  def build_gem_docs input_dir, output_dir, gem = nil, version = "master"
     gem ||= File.basename input_dir
     gem_metadata = @metadata[gem]
     gem_metadata["version"] = version
@@ -66,9 +67,11 @@ class DevsiteBuilder < YardBuilder
 
   def collect_metadata
     @metadata = {}
+    @redirects = {}
     determine_gems.each do |gem|
       source = "#{master_dir + gem}/.repo-metadata.json"
       @metadata[gem] = RepoMetadata.from_source source
+      @redirects[@metadata[gem]["distribution-name"]] = @metadata[gem]["name"]
     end
   end
 end

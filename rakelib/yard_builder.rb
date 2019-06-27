@@ -10,10 +10,11 @@ class YardBuilder
     @master_dir = Pathname.new master_dir
   end
 
-  def build_master
+  def build_master redirects = nil
     return if case_insensitive_check!
 
     git_ref = current_git_commit master_dir
+    update_redirects redirects
     determine_gems(master_dir).each do |gem|
       build_gem_docs gem, "master", master_dir, gh_pages_dir
       ensure_gem_latest_dir gem
@@ -175,6 +176,13 @@ class YardBuilder
       [gem, versions]
     end
     File.write releases_file, YAML.dump(Hash[sorted_data_pairs])
+  end
+
+  def update_redirects redirects
+    return unless redirects
+
+    require "yaml"
+    File.write "#{gh_pages_dir + '_data' + 'devsite_redirects.yaml'}", YAML.dump(redirects)
   end
 
   def current_git_commit path = "."

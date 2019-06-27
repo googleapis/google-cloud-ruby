@@ -29,7 +29,7 @@ class GemVersionDoc < RepoDocCommon
 
     puts "cd #{@output_dir} [google-cloud-trace fixes]"
     Dir.chdir @output_dir do
-      Dir.glob(File.join("**","*.html")).each do |file_path|
+      Dir.glob(File.join("**", "*.html")).each do |file_path|
         file_contents = File.read file_path
         file_contents.gsub! "{% dynamic print site_values.console_name %}",
                             "Google Cloud Platform Console"
