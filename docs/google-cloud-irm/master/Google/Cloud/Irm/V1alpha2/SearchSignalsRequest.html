@@ -202,7 +202,7 @@ js:
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Query to specify which signals should be returned.</p>
+    <span class="summary_desc"><div class='inline'><p>An expression that defines which signals to return.</p>
 </div></span>
   
 </li>
@@ -261,10 +261,10 @@ js:
       <pre class="lines">
 
 
-174</pre>
+231</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/irm/v1alpha2/doc/google/cloud/irm/v1alpha2/incidents_service.rb', line 174</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/irm/v1alpha2/doc/google/cloud/irm/v1alpha2/incidents_service.rb', line 231</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Irm::V1alpha2::SearchSignalsRequest (class)">SearchSignalsRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -320,10 +320,10 @@ original query (may return an error or unexpected data otherwise).</p>
       <pre class="lines">
 
 
-174</pre>
+231</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/irm/v1alpha2/doc/google/cloud/irm/v1alpha2/incidents_service.rb', line 174</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/irm/v1alpha2/doc/google/cloud/irm/v1alpha2/incidents_service.rb', line 231</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Irm::V1alpha2::SearchSignalsRequest (class)">SearchSignalsRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -377,10 +377,10 @@ incidents belong to.</p>
       <pre class="lines">
 
 
-174</pre>
+231</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/irm/v1alpha2/doc/google/cloud/irm/v1alpha2/incidents_service.rb', line 174</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/irm/v1alpha2/doc/google/cloud/irm/v1alpha2/incidents_service.rb', line 231</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Irm::V1alpha2::SearchSignalsRequest (class)">SearchSignalsRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -401,7 +401,70 @@ incidents belong to.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Query to specify which signals should be returned.</p>
+    <p>Returns An expression that defines which signals to return.</p>
+
+<p>Search atoms can be used to match certain specific fields.  Otherwise,
+plain text will match text fields in the signal.</p>
+
+<p>Search atoms:</p>
+
+<ul>
+<li><code>start</code> - (timestamp) The time the signal was created.</li>
+<li><code>title</code> - The title of the signal.</li>
+<li><code>signal_state</code> - <code>open</code> or <code>closed</code>. State of the signal.
+(e.g., <code>signal_state:open</code>)</li>
+</ul>
+
+<p>Timestamp formats:</p>
+
+<ul>
+<li>yyyy-MM-dd - an absolute date, treated as a calendar-day-wide window.
+In other words, the &quot;&lt;&quot; operator will match dates before that date, the
+&quot;&gt;&quot; operator will match dates after that date, and the &quot;:&quot; operator will
+match the entire day.</li>
+<li>yyyy-MM-ddTHH:mm - Same as above, but with minute resolution.</li>
+<li>yyyy-MM-ddTHH:mm:ss - Same as above, but with second resolution.</li>
+<li>Nd (e.g. 7d) - a relative number of days ago, treated as a moment in time
+(as opposed to a day-wide span) a multiple of 24 hours ago (as opposed to
+calendar days).  In the case of daylight savings time, it will apply the
+current timezone to both ends of the range.  Note that exact matching
+(e.g. <code>start:7d</code>) is unlikely to be useful because that would only match
+signals created precisely at a particular instant in time.</li>
+</ul>
+
+<p>The absolute timestamp formats (everything starting with a year) can
+optionally be followed with a UTC offset in +/-hh:mm format.  Also, the &#39;T&#39;
+separating dates and times can optionally be replaced with a space. Note
+that any timestamp containing a space or colon will need to be quoted.</p>
+
+<p>Examples:</p>
+
+<ul>
+<li><code>foo</code> - matches signals containing the word &quot;foo&quot;</li>
+<li><code>&quot;foo bar&quot;</code> - matches signals containing the phrase &quot;foo bar&quot;</li>
+<li><code>foo bar</code> or <code>foo AND bar</code> - matches signals containing the words
+&quot;foo&quot; and &quot;bar&quot;</li>
+<li><code>foo -bar</code> or <code>foo AND NOT bar</code> - matches signals containing the
+word
+&quot;foo&quot; but not the word &quot;bar&quot;</li>
+<li><code>foo OR bar</code> - matches signals containing the word &quot;foo&quot; or the
+word &quot;bar&quot;</li>
+<li><code>start&gt;2018-11-28</code> - matches signals which started after November
+11, 2018.</li>
+<li><code>start&lt;=2018-11-28</code> - matches signals which started on or before
+November 11, 2018.</li>
+<li><code>start:2018-11-28</code> - matches signals which started on November 11,
+2018.</li>
+<li><code>start&gt;&quot;2018-11-28 01:02:03+04:00&quot;</code> - matches signals which started
+after November 11, 2018 at 1:02:03 AM according to the UTC+04 time
+zone.</li>
+<li><code>start&gt;7d</code> - matches signals which started after the point in time
+7*24 hours ago</li>
+<li><code>start&gt;180d</code> - similar to 7d, but likely to cross the daylight savings
+time boundary, so the end time will be 1 hour different from &quot;now.&quot;</li>
+<li><code>foo AND start&gt;90d AND stage&lt;resolved</code> - unresolved signals from
+the past 90 days containing the word &quot;foo&quot;</li>
+</ul>
 
 
   </div>
@@ -419,7 +482,70 @@ incidents belong to.</p>
       
       
         &mdash;
-        <div class='inline'><p>Query to specify which signals should be returned.</p>
+        <div class='inline'><p>An expression that defines which signals to return.</p>
+
+<p>Search atoms can be used to match certain specific fields.  Otherwise,
+plain text will match text fields in the signal.</p>
+
+<p>Search atoms:</p>
+
+<ul>
+<li><code>start</code> - (timestamp) The time the signal was created.</li>
+<li><code>title</code> - The title of the signal.</li>
+<li><code>signal_state</code> - <code>open</code> or <code>closed</code>. State of the signal.
+(e.g., <code>signal_state:open</code>)</li>
+</ul>
+
+<p>Timestamp formats:</p>
+
+<ul>
+<li>yyyy-MM-dd - an absolute date, treated as a calendar-day-wide window.
+In other words, the &quot;&lt;&quot; operator will match dates before that date, the
+&quot;&gt;&quot; operator will match dates after that date, and the &quot;:&quot; operator will
+match the entire day.</li>
+<li>yyyy-MM-ddTHH:mm - Same as above, but with minute resolution.</li>
+<li>yyyy-MM-ddTHH:mm:ss - Same as above, but with second resolution.</li>
+<li>Nd (e.g. 7d) - a relative number of days ago, treated as a moment in time
+(as opposed to a day-wide span) a multiple of 24 hours ago (as opposed to
+calendar days).  In the case of daylight savings time, it will apply the
+current timezone to both ends of the range.  Note that exact matching
+(e.g. <code>start:7d</code>) is unlikely to be useful because that would only match
+signals created precisely at a particular instant in time.</li>
+</ul>
+
+<p>The absolute timestamp formats (everything starting with a year) can
+optionally be followed with a UTC offset in +/-hh:mm format.  Also, the &#39;T&#39;
+separating dates and times can optionally be replaced with a space. Note
+that any timestamp containing a space or colon will need to be quoted.</p>
+
+<p>Examples:</p>
+
+<ul>
+<li><code>foo</code> - matches signals containing the word &quot;foo&quot;</li>
+<li><code>&quot;foo bar&quot;</code> - matches signals containing the phrase &quot;foo bar&quot;</li>
+<li><code>foo bar</code> or <code>foo AND bar</code> - matches signals containing the words
+&quot;foo&quot; and &quot;bar&quot;</li>
+<li><code>foo -bar</code> or <code>foo AND NOT bar</code> - matches signals containing the
+word
+&quot;foo&quot; but not the word &quot;bar&quot;</li>
+<li><code>foo OR bar</code> - matches signals containing the word &quot;foo&quot; or the
+word &quot;bar&quot;</li>
+<li><code>start&gt;2018-11-28</code> - matches signals which started after November
+11, 2018.</li>
+<li><code>start&lt;=2018-11-28</code> - matches signals which started on or before
+November 11, 2018.</li>
+<li><code>start:2018-11-28</code> - matches signals which started on November 11,
+2018.</li>
+<li><code>start&gt;&quot;2018-11-28 01:02:03+04:00&quot;</code> - matches signals which started
+after November 11, 2018 at 1:02:03 AM according to the UTC+04 time
+zone.</li>
+<li><code>start&gt;7d</code> - matches signals which started after the point in time
+7*24 hours ago</li>
+<li><code>start&gt;180d</code> - similar to 7d, but likely to cross the daylight savings
+time boundary, so the end time will be 1 hour different from &quot;now.&quot;</li>
+<li><code>foo AND start&gt;90d AND stage&lt;resolved</code> - unresolved signals from
+the past 90 days containing the word &quot;foo&quot;</li>
+</ul>
 </div>
       
     </li>
@@ -432,10 +558,10 @@ incidents belong to.</p>
       <pre class="lines">
 
 
-174</pre>
+231</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/irm/v1alpha2/doc/google/cloud/irm/v1alpha2/incidents_service.rb', line 174</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/irm/v1alpha2/doc/google/cloud/irm/v1alpha2/incidents_service.rb', line 231</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Irm::V1alpha2::SearchSignalsRequest (class)">SearchSignalsRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>

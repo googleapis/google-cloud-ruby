@@ -1,6 +1,6 @@
 ---
 layout: yard_main
-title: "Class: Google::Cloud::Irm::V1alpha2::ListIncidentRoleAssignmentsResponse - Stackdriver"
+title: "Class: Google::Cloud::Irm::V1alpha2::LookupSignalRequest - Stackdriver"
 css: 
   - /docs/css/style.css
   - /docs/css/common.css
@@ -10,7 +10,7 @@ js:
   - /js/yard-main.js
 ---
 <script type="text/javascript" charset="utf-8">
-  pathId = "Google::Cloud::Irm::V1alpha2::ListIncidentRoleAssignmentsResponse";
+  pathId = "Google::Cloud::Irm::V1alpha2::LookupSignalRequest";
   relpath = '../../../../';
 </script>
 
@@ -27,7 +27,7 @@ js:
     <a href="../../../../_index.html">Index (L)</a> &raquo;
     <span class='title'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../Irm.html" title="Google::Cloud::Irm (module)">Irm</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../V1alpha2.html" title="Google::Cloud::Irm::V1alpha2 (module)">V1alpha2</a></span></span>
      &raquo; 
-    <span class="title">ListIncidentRoleAssignmentsResponse</span>
+    <span class="title">LookupSignalRequest</span>
   
 </div>
 
@@ -47,7 +47,7 @@ js:
     <div class="clear"></div>
   </div>
 
-  <div id="content"><h1>Class: Google::Cloud::Irm::V1alpha2::ListIncidentRoleAssignmentsResponse
+  <div id="content"><h1>Class: Google::Cloud::Irm::V1alpha2::LookupSignalRequest
   
   
   
@@ -62,7 +62,7 @@ js:
         <ul class="fullTree">
           <li>Object</li>
           
-            <li class="next">Google::Cloud::Irm::V1alpha2::ListIncidentRoleAssignmentsResponse</li>
+            <li class="next">Google::Cloud::Irm::V1alpha2::LookupSignalRequest</li>
           
         </ul>
         <a href="#" class="inheritanceTree">show all</a>
@@ -89,7 +89,7 @@ js:
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>Response for the ListIncidentRoleAssignments method.</p>
+    <p>Request for the LookupSignal method.</p>
 
 
   </div>
@@ -107,7 +107,7 @@ js:
       <li class="public ">
   <span class="summary_signature">
     
-      <a href="#incident_role_assignments-instance_method" title="#incident_role_assignments (instance method)">#<strong>incident_role_assignments</strong>  &#x21d2; Array&lt;Google::Cloud::Irm::V1alpha2::IncidentRoleAssignment&gt; </a>
+      <a href="#cscc_finding-instance_method" title="#cscc_finding (instance method)">#<strong>cscc_finding</strong>  &#x21d2; String </a>
     
 
     
@@ -124,7 +124,7 @@ js:
   
 
   
-    <span class="summary_desc"><div class='inline'><p>List of assignments.</p>
+    <span class="summary_desc"><div class='inline'><p>Full resource name of the CSCC finding id this signal refers to (e.g. &quot;organizations/abc/sources/123/findings/xyz&quot;).</p>
 </div></span>
   
 </li>
@@ -133,7 +133,7 @@ js:
       <li class="public ">
   <span class="summary_signature">
     
-      <a href="#next_page_token-instance_method" title="#next_page_token (instance method)">#<strong>next_page_token</strong>  &#x21d2; String </a>
+      <a href="#stackdriver_notification_id-instance_method" title="#stackdriver_notification_id (instance method)">#<strong>stackdriver_notification_id</strong>  &#x21d2; String </a>
     
 
     
@@ -150,7 +150,7 @@ js:
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Page token to fetch the next set of assignments.</p>
+    <span class="summary_desc"><div class='inline'><p>The ID from the Stackdriver Alerting notification.</p>
 </div></span>
   
 </li>
@@ -166,66 +166,11 @@ js:
     <h2>Instance Attribute Details</h2>
     
       
-      <span id="incident_role_assignments=-instance_method"></span>
+      <span id="cscc_finding=-instance_method"></span>
       <div class="method_details first">
-  <h3 class="signature first" id="incident_role_assignments-instance_method">
+  <h3 class="signature first" id="cscc_finding-instance_method">
   
-    #<strong>incident_role_assignments</strong>  &#x21d2; <tt>Array&lt;<span class='object_link'><a href="IncidentRoleAssignment.html" title="Google::Cloud::Irm::V1alpha2::IncidentRoleAssignment (class)">Google::Cloud::Irm::V1alpha2::IncidentRoleAssignment</a></span>&gt;</tt> 
-  
-
-  
-
-  
-</h3><div class="docstring">
-  <div class="discussion">
-    <p>Returns List of assignments.</p>
-
-
-  </div>
-</div>
-<div class="tags">
-  
-<p class="tag_title">Returns:</p>
-<ul class="return">
-  
-    <li>
-      
-      
-        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="IncidentRoleAssignment.html" title="Google::Cloud::Irm::V1alpha2::IncidentRoleAssignment (class)">Google::Cloud::Irm::V1alpha2::IncidentRoleAssignment</a></span>&gt;</tt>)</span>
-      
-      
-      
-        &mdash;
-        <div class='inline'><p>List of assignments.</p>
-</div>
-      
-    </li>
-  
-</ul>
-
-</div><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-570</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/irm/v1alpha2/doc/google/cloud/irm/v1alpha2/incidents_service.rb', line 570</span>
-
-<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Irm::V1alpha2::ListIncidentRoleAssignmentsResponse (class)">ListIncidentRoleAssignmentsResponse</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-      
-      <span id="next_page_token=-instance_method"></span>
-      <div class="method_details ">
-  <h3 class="signature " id="next_page_token-instance_method">
-  
-    #<strong>next_page_token</strong>  &#x21d2; <tt>String</tt> 
+    #<strong>cscc_finding</strong>  &#x21d2; <tt>String</tt> 
   
 
   
@@ -233,7 +178,8 @@ js:
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Page token to fetch the next set of assignments.</p>
+    <p>Returns Full resource name of the CSCC finding id this signal refers to (e.g.
+&quot;organizations/abc/sources/123/findings/xyz&quot;)</p>
 
 
   </div>
@@ -251,7 +197,8 @@ js:
       
       
         &mdash;
-        <div class='inline'><p>Page token to fetch the next set of assignments.</p>
+        <div class='inline'><p>Full resource name of the CSCC finding id this signal refers to (e.g.
+&quot;organizations/abc/sources/123/findings/xyz&quot;)</p>
 </div>
       
     </li>
@@ -264,12 +211,67 @@ js:
       <pre class="lines">
 
 
-570</pre>
+257</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/irm/v1alpha2/doc/google/cloud/irm/v1alpha2/incidents_service.rb', line 570</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/irm/v1alpha2/doc/google/cloud/irm/v1alpha2/incidents_service.rb', line 257</span>
 
-<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Irm::V1alpha2::ListIncidentRoleAssignmentsResponse (class)">ListIncidentRoleAssignmentsResponse</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Irm::V1alpha2::LookupSignalRequest (class)">LookupSignalRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="stackdriver_notification_id=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="stackdriver_notification_id-instance_method">
+  
+    #<strong>stackdriver_notification_id</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns The ID from the Stackdriver Alerting notification.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The ID from the Stackdriver Alerting notification.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+257</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/irm/v1alpha2/doc/google/cloud/irm/v1alpha2/incidents_service.rb', line 257</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Irm::V1alpha2::LookupSignalRequest (class)">LookupSignalRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>

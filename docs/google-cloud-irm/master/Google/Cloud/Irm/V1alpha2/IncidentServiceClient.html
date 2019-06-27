@@ -989,6 +989,29 @@ this service.</p>
         <li class="public ">
   <span class="summary_signature">
     
+      <a href="#lookup_signal-instance_method" title="#lookup_signal (instance method)">#<strong>lookup_signal</strong>(cscc_finding: nil, stackdriver_notification_id: nil, options: nil) {|result, operation| ... } &#x21d2; Google::Cloud::Irm::V1alpha2::Signal </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Finds a signal by other unique IDs.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#project_path-instance_method" title="#project_path (instance method)">#<strong>project_path</strong>(project)  &#x21d2; String </a>
     
 
@@ -1772,7 +1795,12 @@ custom error handling.</p>
 591
 592
 593
-594</pre>
+594
+595
+596
+597
+598
+599</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/google/cloud/irm/v1alpha2/incident_service_client.rb', line 272</span>
@@ -1954,6 +1982,11 @@ custom error handling.</p>
     <span class='label'>params_extractor:</span> <span class='id identifier rubyid_proc'>proc</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_request'>request</span><span class='op'>|</span>
       <span class='lbrace'>{</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>name</span><span class='tstring_end'>&#39;</span></span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_request'>request</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span><span class='rbrace'>}</span>
     <span class='kw'>end</span>
+  <span class='rparen'>)</span>
+  <span class='ivar'>@lookup_signal</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
+    <span class='ivar'>@incident_service_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:lookup_signal</span><span class='rparen'>)</span><span class='comma'>,</span>
+    <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>lookup_signal</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
+    <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span>
   <span class='rparen'>)</span>
   <span class='ivar'>@update_signal</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
     <span class='ivar'>@incident_service_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:update_signal</span><span class='rparen'>)</span><span class='comma'>,</span>
@@ -3199,21 +3232,21 @@ retries, etc.</p>
       <pre class="lines">
 
 
-2033
-2034
-2035
-2036
-2037
-2038
-2039
-2040
-2041
-2042
-2043
-2044</pre>
+2129
+2130
+2131
+2132
+2133
+2134
+2135
+2136
+2137
+2138
+2139
+2140</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/irm/v1alpha2/incident_service_client.rb', line 2033</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/irm/v1alpha2/incident_service_client.rb', line 2129</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_cancel_incident_role_handover'>cancel_incident_role_handover</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -3401,21 +3434,21 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1947
-1948
-1949
-1950
-1951
-1952
-1953
-1954
-1955
-1956
-1957
-1958</pre>
+2043
+2044
+2045
+2046
+2047
+2048
+2049
+2050
+2051
+2052
+2053
+2054</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/irm/v1alpha2/incident_service_client.rb', line 1947</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/irm/v1alpha2/incident_service_client.rb', line 2043</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_confirm_incident_role_handover'>confirm_incident_role_handover</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -3601,21 +3634,21 @@ retries, etc.</p>
       <pre class="lines">
 
 
-913
-914
-915
-916
-917
 918
 919
 920
 921
 922
 923
-924</pre>
+924
+925
+926
+927
+928
+929</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/irm/v1alpha2/incident_service_client.rb', line 913</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/irm/v1alpha2/incident_service_client.rb', line 918</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_annotation'>create_annotation</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -3800,21 +3833,21 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1372
-1373
-1374
-1375
-1376
-1377
-1378
-1379
-1380
-1381
-1382
-1383</pre>
+1468
+1469
+1470
+1471
+1472
+1473
+1474
+1475
+1476
+1477
+1478
+1479</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/irm/v1alpha2/incident_service_client.rb', line 1372</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/irm/v1alpha2/incident_service_client.rb', line 1468</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_artifact'>create_artifact</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -4001,21 +4034,21 @@ retries, etc.</p>
       <pre class="lines">
 
 
-627
-628
-629
-630
-631
 632
 633
 634
 635
 636
 637
-638</pre>
+638
+639
+640
+641
+642
+643</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/irm/v1alpha2/incident_service_client.rb', line 627</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/irm/v1alpha2/incident_service_client.rb', line 632</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_incident'>create_incident</span> \
     <span class='id identifier rubyid_incident'>incident</span><span class='comma'>,</span>
@@ -4204,21 +4237,21 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1778
-1779
-1780
-1781
-1782
-1783
-1784
-1785
-1786
-1787
-1788
-1789</pre>
+1874
+1875
+1876
+1877
+1878
+1879
+1880
+1881
+1882
+1883
+1884
+1885</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/irm/v1alpha2/incident_service_client.rb', line 1778</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/irm/v1alpha2/incident_service_client.rb', line 1874</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_incident_role_assignment'>create_incident_role_assignment</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -4403,21 +4436,21 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1134
-1135
-1136
-1137
-1138
 1139
 1140
 1141
 1142
 1143
 1144
-1145</pre>
+1145
+1146
+1147
+1148
+1149
+1150</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/irm/v1alpha2/incident_service_client.rb', line 1134</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/irm/v1alpha2/incident_service_client.rb', line 1139</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_signal'>create_signal</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -4605,21 +4638,21 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1609
-1610
-1611
-1612
-1613
-1614
-1615
-1616
-1617
-1618
-1619
-1620</pre>
+1705
+1706
+1707
+1708
+1709
+1710
+1711
+1712
+1713
+1714
+1715
+1716</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/irm/v1alpha2/incident_service_client.rb', line 1609</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/irm/v1alpha2/incident_service_client.rb', line 1705</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_subscription'>create_subscription</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -4804,21 +4837,21 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1009
-1010
-1011
-1012
-1013
 1014
 1015
 1016
 1017
 1018
 1019
-1020</pre>
+1020
+1021
+1022
+1023
+1024
+1025</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/irm/v1alpha2/incident_service_client.rb', line 1009</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/irm/v1alpha2/incident_service_client.rb', line 1014</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_tag'>create_tag</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -4973,20 +5006,20 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1498
-1499
-1500
-1501
-1502
-1503
-1504
-1505
-1506
-1507
-1508</pre>
+1594
+1595
+1596
+1597
+1598
+1599
+1600
+1601
+1602
+1603
+1604</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/irm/v1alpha2/incident_service_client.rb', line 1498</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/irm/v1alpha2/incident_service_client.rb', line 1594</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete_artifact'>delete_artifact</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -5140,20 +5173,20 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1809
-1810
-1811
-1812
-1813
-1814
-1815
-1816
-1817
-1818
-1819</pre>
+1905
+1906
+1907
+1908
+1909
+1910
+1911
+1912
+1913
+1914
+1915</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/irm/v1alpha2/incident_service_client.rb', line 1809</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/irm/v1alpha2/incident_service_client.rb', line 1905</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete_incident_role_assignment'>delete_incident_role_assignment</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -5307,20 +5340,20 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1735
-1736
-1737
-1738
-1739
-1740
-1741
-1742
-1743
-1744
-1745</pre>
+1831
+1832
+1833
+1834
+1835
+1836
+1837
+1838
+1839
+1840
+1841</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/irm/v1alpha2/incident_service_client.rb', line 1735</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/irm/v1alpha2/incident_service_client.rb', line 1831</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete_subscription'>delete_subscription</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -5474,20 +5507,20 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1040
-1041
-1042
-1043
-1044
 1045
 1046
 1047
 1048
 1049
-1050</pre>
+1050
+1051
+1052
+1053
+1054
+1055</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/irm/v1alpha2/incident_service_client.rb', line 1040</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/irm/v1alpha2/incident_service_client.rb', line 1045</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete_tag'>delete_tag</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -5741,29 +5774,29 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1324
-1325
-1326
-1327
-1328
-1329
-1330
-1331
-1332
-1333
-1334
-1335
-1336
-1337
-1338
-1339
-1340
-1341
-1342
-1343</pre>
+1420
+1421
+1422
+1423
+1424
+1425
+1426
+1427
+1428
+1429
+1430
+1431
+1432
+1433
+1434
+1435
+1436
+1437
+1438
+1439</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/irm/v1alpha2/incident_service_client.rb', line 1324</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/irm/v1alpha2/incident_service_client.rb', line 1420</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_escalate_incident'>escalate_incident</span> \
     <span class='id identifier rubyid_incident'>incident</span><span class='comma'>,</span>
@@ -5959,21 +5992,21 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1990
-1991
-1992
-1993
-1994
-1995
-1996
-1997
-1998
-1999
-2000
-2001</pre>
+2086
+2087
+2088
+2089
+2090
+2091
+2092
+2093
+2094
+2095
+2096
+2097</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/irm/v1alpha2/incident_service_client.rb', line 1990</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/irm/v1alpha2/incident_service_client.rb', line 2086</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_force_incident_role_handover'>force_incident_role_handover</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -6138,19 +6171,19 @@ retries, etc.</p>
       <pre class="lines">
 
 
-660
-661
-662
-663
-664
 665
 666
 667
 668
-669</pre>
+669
+670
+671
+672
+673
+674</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/irm/v1alpha2/incident_service_client.rb', line 660</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/irm/v1alpha2/incident_service_client.rb', line 665</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_incident'>get_incident</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -6313,19 +6346,19 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1227
-1228
-1229
-1230
-1231
-1232
-1233
-1234
-1235
-1236</pre>
+1289
+1290
+1291
+1292
+1293
+1294
+1295
+1296
+1297
+1298</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/irm/v1alpha2/incident_service_client.rb', line 1227</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/irm/v1alpha2/incident_service_client.rb', line 1289</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_signal'>get_signal</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -6606,21 +6639,21 @@ object.</p>
       <pre class="lines">
 
 
-969
-970
-971
-972
-973
 974
 975
 976
 977
 978
 979
-980</pre>
+980
+981
+982
+983
+984
+985</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/irm/v1alpha2/incident_service_client.rb', line 969</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/irm/v1alpha2/incident_service_client.rb', line 974</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_annotations'>list_annotations</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -6823,21 +6856,21 @@ object.</p>
       <pre class="lines">
 
 
-1427
-1428
-1429
-1430
-1431
-1432
-1433
-1434
-1435
-1436
-1437
-1438</pre>
+1523
+1524
+1525
+1526
+1527
+1528
+1529
+1530
+1531
+1532
+1533
+1534</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/irm/v1alpha2/incident_service_client.rb', line 1427</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/irm/v1alpha2/incident_service_client.rb', line 1523</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_artifacts'>list_artifacts</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -7040,21 +7073,21 @@ object.</p>
       <pre class="lines">
 
 
-1863
-1864
-1865
-1866
-1867
-1868
-1869
-1870
-1871
-1872
-1873
-1874</pre>
+1959
+1960
+1961
+1962
+1963
+1964
+1965
+1966
+1967
+1968
+1969
+1970</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/irm/v1alpha2/incident_service_client.rb', line 1863</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/irm/v1alpha2/incident_service_client.rb', line 1959</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_incident_role_assignments'>list_incident_role_assignments</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -7257,21 +7290,21 @@ object.</p>
       <pre class="lines">
 
 
-1704
-1705
-1706
-1707
-1708
-1709
-1710
-1711
-1712
-1713
-1714
-1715</pre>
+1800
+1801
+1802
+1803
+1804
+1805
+1806
+1807
+1808
+1809
+1810
+1811</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/irm/v1alpha2/incident_service_client.rb', line 1704</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/irm/v1alpha2/incident_service_client.rb', line 1800</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_subscriptions'>list_subscriptions</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -7474,21 +7507,21 @@ object.</p>
       <pre class="lines">
 
 
-1094
-1095
-1096
-1097
-1098
 1099
 1100
 1101
 1102
 1103
 1104
-1105</pre>
+1105
+1106
+1107
+1108
+1109
+1110</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/irm/v1alpha2/incident_service_client.rb', line 1094</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/irm/v1alpha2/incident_service_client.rb', line 1099</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_tags'>list_tags</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -7501,6 +7534,199 @@ object.</p>
   <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span>
   <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='id identifier rubyid_to_proto'>to_proto</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Irm.html" title="Google::Cloud::Irm (module)">Irm</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1alpha2.html" title="Google::Cloud::Irm::V1alpha2 (module)">V1alpha2</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="ListTagsRequest.html" title="Google::Cloud::Irm::V1alpha2::ListTagsRequest (class)">ListTagsRequest</a></span></span><span class='rparen'>)</span>
   <span class='ivar'>@list_tags</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="lookup_signal-instance_method">
+  
+    #<strong>lookup_signal</strong>(cscc_finding: nil, stackdriver_notification_id: nil, options: nil) {|result, operation| ... } &#x21d2; <tt><span class='object_link'><a href="Signal.html" title="Google::Cloud::Irm::V1alpha2::Signal (class)">Google::Cloud::Irm::V1alpha2::Signal</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Finds a signal by other unique IDs.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/irm</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_incident_client'>incident_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Irm.html" title="Google::Cloud::Irm (module)">Irm</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Irm.html#new-class_method" title="Google::Cloud::Irm.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v1alpha2</span><span class='rparen'>)</span>
+<span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_incident_client'>incident_client</span><span class='period'>.</span><span class='id identifier rubyid_lookup_signal'>lookup_signal</span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>cscc_finding</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Full resource name of the CSCC finding id this signal refers to (e.g.
+&quot;organizations/abc/sources/123/findings/xyz&quot;)</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>stackdriver_notification_id</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The ID from the Stackdriver Alerting notification.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>options</span>
+      
+      
+        <span class='type'>(<tt>Google::Gax::CallOptions</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Overrides the default settings for this call, e.g, timeout,
+retries, etc.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Yields:</p>
+<ul class="yield">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>result</tt>, <tt>operation</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Access the result along with the RPC operation</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Yield Parameters:</p>
+<ul class="yieldparam">
+  
+    <li>
+      
+        <span class='name'>result</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Signal.html" title="Google::Cloud::Irm::V1alpha2::Signal (class)">Google::Cloud::Irm::V1alpha2::Signal</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>operation</span>
+      
+      
+        <span class='type'>(<tt>GRPC::ActiveCall::Operation</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Signal.html" title="Google::Cloud::Irm::V1alpha2::Signal (class)">Google::Cloud::Irm::V1alpha2::Signal</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Raises:</p>
+<ul class="raise">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Google::Gax::GaxError</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>if the RPC is aborted.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+1321
+1322
+1323
+1324
+1325
+1326
+1327
+1328
+1329
+1330
+1331
+1332</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/irm/v1alpha2/incident_service_client.rb', line 1321</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_lookup_signal'>lookup_signal</span> \
+    <span class='label'>cscc_finding:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+    <span class='label'>stackdriver_notification_id:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+    <span class='label'>options:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+    <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
+  <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='lbrace'>{</span>
+    <span class='label'>cscc_finding:</span> <span class='id identifier rubyid_cscc_finding'>cscc_finding</span><span class='comma'>,</span>
+    <span class='label'>stackdriver_notification_id:</span> <span class='id identifier rubyid_stackdriver_notification_id'>stackdriver_notification_id</span>
+  <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span>
+  <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='id identifier rubyid_to_proto'>to_proto</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Irm.html" title="Google::Cloud::Irm (module)">Irm</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1alpha2.html" title="Google::Cloud::Irm::V1alpha2 (module)">V1alpha2</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="LookupSignalRequest.html" title="Google::Cloud::Irm::V1alpha2::LookupSignalRequest (class)">LookupSignalRequest</a></span></span><span class='rparen'>)</span>
+  <span class='ivar'>@lookup_signal</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -7742,21 +7968,21 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1904
-1905
-1906
-1907
-1908
-1909
-1910
-1911
-1912
-1913
-1914
-1915</pre>
+2000
+2001
+2002
+2003
+2004
+2005
+2006
+2007
+2008
+2009
+2010
+2011</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/irm/v1alpha2/incident_service_client.rb', line 1904</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/irm/v1alpha2/incident_service_client.rb', line 2000</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_request_incident_role_handover'>request_incident_role_handover</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -8144,11 +8370,6 @@ object.</p>
       <pre class="lines">
 
 
-771
-772
-773
-774
-775
 776
 777
 778
@@ -8159,10 +8380,15 @@ object.</p>
 783
 784
 785
-786</pre>
+786
+787
+788
+789
+790
+791</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/irm/v1alpha2/incident_service_client.rb', line 771</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/irm/v1alpha2/incident_service_client.rb', line 776</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_search_incidents'>search_incidents</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -8256,7 +8482,70 @@ incidents belong to.</p>
       
       
         &mdash;
-        <div class='inline'><p>Query to specify which signals should be returned.</p>
+        <div class='inline'><p>An expression that defines which signals to return.</p>
+
+<p>Search atoms can be used to match certain specific fields.  Otherwise,
+plain text will match text fields in the signal.</p>
+
+<p>Search atoms:</p>
+
+<ul>
+<li><code>start</code> - (timestamp) The time the signal was created.</li>
+<li><code>title</code> - The title of the signal.</li>
+<li><code>signal_state</code> - <code>open</code> or <code>closed</code>. State of the signal.
+(e.g., <code>signal_state:open</code>)</li>
+</ul>
+
+<p>Timestamp formats:</p>
+
+<ul>
+<li>yyyy-MM-dd - an absolute date, treated as a calendar-day-wide window.
+In other words, the &quot;&lt;&quot; operator will match dates before that date, the
+&quot;&gt;&quot; operator will match dates after that date, and the &quot;:&quot; operator will
+match the entire day.</li>
+<li>yyyy-MM-ddTHH:mm - Same as above, but with minute resolution.</li>
+<li>yyyy-MM-ddTHH:mm:ss - Same as above, but with second resolution.</li>
+<li>Nd (e.g. 7d) - a relative number of days ago, treated as a moment in time
+(as opposed to a day-wide span) a multiple of 24 hours ago (as opposed to
+calendar days).  In the case of daylight savings time, it will apply the
+current timezone to both ends of the range.  Note that exact matching
+(e.g. <code>start:7d</code>) is unlikely to be useful because that would only match
+signals created precisely at a particular instant in time.</li>
+</ul>
+
+<p>The absolute timestamp formats (everything starting with a year) can
+optionally be followed with a UTC offset in +/-hh:mm format.  Also, the &#39;T&#39;
+separating dates and times can optionally be replaced with a space. Note
+that any timestamp containing a space or colon will need to be quoted.</p>
+
+<p>Examples:</p>
+
+<ul>
+<li><code>foo</code> - matches signals containing the word &quot;foo&quot;</li>
+<li><code>&quot;foo bar&quot;</code> - matches signals containing the phrase &quot;foo bar&quot;</li>
+<li><code>foo bar</code> or <code>foo AND bar</code> - matches signals containing the words
+&quot;foo&quot; and &quot;bar&quot;</li>
+<li><code>foo -bar</code> or <code>foo AND NOT bar</code> - matches signals containing the
+word
+&quot;foo&quot; but not the word &quot;bar&quot;</li>
+<li><code>foo OR bar</code> - matches signals containing the word &quot;foo&quot; or the
+word &quot;bar&quot;</li>
+<li><code>start&gt;2018-11-28</code> - matches signals which started after November
+11, 2018.</li>
+<li><code>start&lt;=2018-11-28</code> - matches signals which started on or before
+November 11, 2018.</li>
+<li><code>start:2018-11-28</code> - matches signals which started on November 11,
+2018.</li>
+<li><code>start&gt;&quot;2018-11-28 01:02:03+04:00&quot;</code> - matches signals which started
+after November 11, 2018 at 1:02:03 AM according to the UTC+04 time
+zone.</li>
+<li><code>start&gt;7d</code> - matches signals which started after the point in time
+7*24 hours ago</li>
+<li><code>start&gt;180d</code> - similar to 7d, but likely to cross the daylight savings
+time boundary, so the end time will be 1 hour different from &quot;now.&quot;</li>
+<li><code>foo AND start&gt;90d AND stage&lt;resolved</code> - unresolved signals from
+the past 90 days containing the word &quot;foo&quot;</li>
+</ul>
 </div>
       
     </li>
@@ -8385,23 +8674,23 @@ object.</p>
       <pre class="lines">
 
 
-1192
-1193
-1194
-1195
-1196
-1197
-1198
-1199
-1200
-1201
-1202
-1203
-1204
-1205</pre>
+1254
+1255
+1256
+1257
+1258
+1259
+1260
+1261
+1262
+1263
+1264
+1265
+1266
+1267</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/irm/v1alpha2/incident_service_client.rb', line 1192</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/irm/v1alpha2/incident_service_client.rb', line 1254</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_search_signals'>search_signals</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -8608,21 +8897,21 @@ object.</p>
       <pre class="lines">
 
 
-872
-873
-874
-875
-876
 877
 878
 879
 880
 881
 882
-883</pre>
+883
+884
+885
+886
+887
+888</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/irm/v1alpha2/incident_service_client.rb', line 872</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/irm/v1alpha2/incident_service_client.rb', line 877</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_search_similar_incidents'>search_similar_incidents</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -8902,33 +9191,33 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1554
-1555
-1556
-1557
-1558
-1559
-1560
-1561
-1562
-1563
-1564
-1565
-1566
-1567
-1568
-1569
-1570
-1571
-1572
-1573
-1574
-1575
-1576
-1577</pre>
+1650
+1651
+1652
+1653
+1654
+1655
+1656
+1657
+1658
+1659
+1660
+1661
+1662
+1663
+1664
+1665
+1666
+1667
+1668
+1669
+1670
+1671
+1672
+1673</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/irm/v1alpha2/incident_service_client.rb', line 1554</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/irm/v1alpha2/incident_service_client.rb', line 1650</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_send_shift_handoff'>send_shift_handoff</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -9384,21 +9673,21 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1467
-1468
-1469
-1470
-1471
-1472
-1473
-1474
-1475
-1476
-1477
-1478</pre>
+1563
+1564
+1565
+1566
+1567
+1568
+1569
+1570
+1571
+1572
+1573
+1574</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/irm/v1alpha2/incident_service_client.rb', line 1467</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/irm/v1alpha2/incident_service_client.rb', line 1563</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update_artifact'>update_artifact</span> \
     <span class='id identifier rubyid_artifact'>artifact</span><span class='comma'>,</span>
@@ -9583,21 +9872,21 @@ retries, etc.</p>
       <pre class="lines">
 
 
-815
-816
-817
-818
-819
 820
 821
 822
 823
 824
 825
-826</pre>
+826
+827
+828
+829
+830
+831</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/irm/v1alpha2/incident_service_client.rb', line 815</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/irm/v1alpha2/incident_service_client.rb', line 820</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update_incident'>update_incident</span> \
     <span class='id identifier rubyid_incident'>incident</span><span class='comma'>,</span>
@@ -9783,21 +10072,21 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1266
-1267
-1268
-1269
-1270
-1271
-1272
-1273
-1274
-1275
-1276
-1277</pre>
+1362
+1363
+1364
+1365
+1366
+1367
+1368
+1369
+1370
+1371
+1372
+1373</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/irm/v1alpha2/incident_service_client.rb', line 1266</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/irm/v1alpha2/incident_service_client.rb', line 1362</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update_signal'>update_signal</span> \
     <span class='id identifier rubyid_signal'>signal</span><span class='comma'>,</span>
@@ -9982,21 +10271,21 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1649
-1650
-1651
-1652
-1653
-1654
-1655
-1656
-1657
-1658
-1659
-1660</pre>
+1745
+1746
+1747
+1748
+1749
+1750
+1751
+1752
+1753
+1754
+1755
+1756</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/irm/v1alpha2/incident_service_client.rb', line 1649</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/irm/v1alpha2/incident_service_client.rb', line 1745</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update_subscription'>update_subscription</span> \
     <span class='id identifier rubyid_subscription'>subscription</span><span class='comma'>,</span>
