@@ -5,6 +5,7 @@
 require 'google/protobuf'
 
 require 'google/api/annotations_pb'
+require 'google/api/client_pb'
 require 'google/cloud/irm/v1alpha2/incidents_pb'
 require 'google/protobuf/empty_pb'
 require 'google/protobuf/field_mask_pb'
@@ -78,6 +79,12 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   end
   add_message "google.cloud.irm.v1alpha2.GetSignalRequest" do
     optional :name, :string, 1
+  end
+  add_message "google.cloud.irm.v1alpha2.LookupSignalRequest" do
+    oneof :alternate_id do
+      optional :cscc_finding, :string, 2
+      optional :stackdriver_notification_id, :string, 3
+    end
   end
   add_message "google.cloud.irm.v1alpha2.UpdateSignalRequest" do
     optional :signal, :message, 1, "google.cloud.irm.v1alpha2.Signal"
@@ -221,6 +228,7 @@ module Google
         SearchSignalsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.irm.v1alpha2.SearchSignalsRequest").msgclass
         SearchSignalsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.irm.v1alpha2.SearchSignalsResponse").msgclass
         GetSignalRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.irm.v1alpha2.GetSignalRequest").msgclass
+        LookupSignalRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.irm.v1alpha2.LookupSignalRequest").msgclass
         UpdateSignalRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.irm.v1alpha2.UpdateSignalRequest").msgclass
         SearchIncidentsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.irm.v1alpha2.SearchIncidentsRequest").msgclass
         SearchIncidentsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.irm.v1alpha2.SearchIncidentsResponse").msgclass
