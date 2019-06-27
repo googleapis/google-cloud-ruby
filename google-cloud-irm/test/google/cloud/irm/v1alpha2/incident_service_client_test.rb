@@ -472,7 +472,12 @@ describe Google::Cloud::Irm::V1alpha2::IncidentServiceClient do
       # Create expected grpc response
       name = "name3373707"
       content = "content951530617"
-      expected_response = { name: name, content: content }
+      content_type = "contentType831846208"
+      expected_response = {
+        name: name,
+        content: content,
+        content_type: content_type
+      }
       expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Irm::V1alpha2::Annotation)
 
       # Mock Grpc layer
@@ -1071,6 +1076,82 @@ describe Google::Cloud::Irm::V1alpha2::IncidentServiceClient do
           # Call method
           err = assert_raises Google::Gax::GaxError, CustomTestError_v1alpha2 do
             client.get_signal(formatted_name)
+          end
+
+          # Verify the GaxError wrapped the custom error that was raised.
+          assert_match(custom_error.message, err.message)
+        end
+      end
+    end
+  end
+
+  describe 'lookup_signal' do
+    custom_error = CustomTestError_v1alpha2.new "Custom test error for Google::Cloud::Irm::V1alpha2::IncidentServiceClient#lookup_signal."
+
+    it 'invokes lookup_signal without error' do
+      # Create expected grpc response
+      name = "name3373707"
+      etag = "etag3123477"
+      incident = "incident86983890"
+      title = "title110371416"
+      content_type = "contentType831846208"
+      content = "content951530617"
+      expected_response = {
+        name: name,
+        etag: etag,
+        incident: incident,
+        title: title,
+        content_type: content_type,
+        content: content
+      }
+      expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Irm::V1alpha2::Signal)
+
+      # Mock Grpc layer
+      mock_method = proc do
+        OpenStruct.new(execute: expected_response)
+      end
+      mock_stub = MockGrpcClientStub_v1alpha2.new(:lookup_signal, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockIncidentServiceCredentials_v1alpha2.new("lookup_signal")
+
+      Google::Cloud::Irm::V1alpha2::IncidentService::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Irm::V1alpha2::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Irm.new(version: :v1alpha2)
+
+          # Call method
+          response = client.lookup_signal
+
+          # Verify the response
+          assert_equal(expected_response, response)
+
+          # Call method with block
+          client.lookup_signal do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
+        end
+      end
+    end
+
+    it 'invokes lookup_signal with error' do
+      # Mock Grpc layer
+      mock_method = proc do
+        raise custom_error
+      end
+      mock_stub = MockGrpcClientStub_v1alpha2.new(:lookup_signal, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockIncidentServiceCredentials_v1alpha2.new("lookup_signal")
+
+      Google::Cloud::Irm::V1alpha2::IncidentService::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Irm::V1alpha2::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Irm.new(version: :v1alpha2)
+
+          # Call method
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1alpha2 do
+            client.lookup_signal
           end
 
           # Verify the GaxError wrapped the custom error that was raised.

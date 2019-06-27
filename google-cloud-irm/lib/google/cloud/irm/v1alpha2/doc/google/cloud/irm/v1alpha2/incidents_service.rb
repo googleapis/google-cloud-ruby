@@ -162,7 +162,64 @@ module Google
         #     incidents belong to.
         # @!attribute [rw] query
         #   @return [String]
-        #     Query to specify which signals should be returned.
+        #     An expression that defines which signals to return.
+        #
+        #     Search atoms can be used to match certain specific fields.  Otherwise,
+        #     plain text will match text fields in the signal.
+        #
+        #     Search atoms:
+        #
+        #     * `start` - (timestamp) The time the signal was created.
+        #     * `title` - The title of the signal.
+        #     * `signal_state` - `open` or `closed`. State of the signal.
+        #       (e.g., `signal_state:open`)
+        #
+        #     Timestamp formats:
+        #
+        #     * yyyy-MM-dd - an absolute date, treated as a calendar-day-wide window.
+        #       In other words, the "<" operator will match dates before that date, the
+        #       ">" operator will match dates after that date, and the ":" operator will
+        #       match the entire day.
+        #     * yyyy-MM-ddTHH:mm - Same as above, but with minute resolution.
+        #     * yyyy-MM-ddTHH:mm:ss - Same as above, but with second resolution.
+        #     * Nd (e.g. 7d) - a relative number of days ago, treated as a moment in time
+        #       (as opposed to a day-wide span) a multiple of 24 hours ago (as opposed to
+        #       calendar days).  In the case of daylight savings time, it will apply the
+        #       current timezone to both ends of the range.  Note that exact matching
+        #       (e.g. `start:7d`) is unlikely to be useful because that would only match
+        #       signals created precisely at a particular instant in time.
+        #
+        #     The absolute timestamp formats (everything starting with a year) can
+        #     optionally be followed with a UTC offset in +/-hh:mm format.  Also, the 'T'
+        #     separating dates and times can optionally be replaced with a space. Note
+        #     that any timestamp containing a space or colon will need to be quoted.
+        #
+        #     Examples:
+        #
+        #     * `foo` - matches signals containing the word "foo"
+        #     * `"foo bar"` - matches signals containing the phrase "foo bar"
+        #     * `foo bar` or `foo AND bar` - matches signals containing the words
+        #       "foo" and "bar"
+        #     * `foo -bar` or `foo AND NOT bar` - matches signals containing the
+        #       word
+        #       "foo" but not the word "bar"
+        #     * `foo OR bar` - matches signals containing the word "foo" or the
+        #       word "bar"
+        #     * `start>2018-11-28` - matches signals which started after November
+        #       11, 2018.
+        #     * `start<=2018-11-28` - matches signals which started on or before
+        #       November 11, 2018.
+        #     * `start:2018-11-28` - matches signals which started on November 11,
+        #       2018.
+        #     * `start>"2018-11-28 01:02:03+04:00"` - matches signals which started
+        #       after November 11, 2018 at 1:02:03 AM according to the UTC+04 time
+        #       zone.
+        #     * `start>7d` - matches signals which started after the point in time
+        #       7*24 hours ago
+        #     * `start>180d` - similar to 7d, but likely to cross the daylight savings
+        #       time boundary, so the end time will be 1 hour different from "now."
+        #     * `foo AND start>90d AND stage<resolved` - unresolved signals from
+        #       the past 90 days containing the word "foo"
         # @!attribute [rw] page_size
         #   @return [Integer]
         #     Maximum number of `signals` to return in the response.
@@ -188,6 +245,16 @@ module Google
         #     Resource name of the Signal resource, for example,
         #     "projects/{project_id}/signals/{signal_id}".
         class GetSignalRequest; end
+
+        # Request for the LookupSignal method.
+        # @!attribute [rw] cscc_finding
+        #   @return [String]
+        #     Full resource name of the CSCC finding id this signal refers to (e.g.
+        #     "organizations/abc/sources/123/findings/xyz")
+        # @!attribute [rw] stackdriver_notification_id
+        #   @return [String]
+        #     The ID from the Stackdriver Alerting notification.
+        class LookupSignalRequest; end
 
         # Request for the UpdateSignal method.
         # @!attribute [rw] signal

@@ -447,6 +447,11 @@ module Google
                 {'name' => request.name}
               end
             )
+            @lookup_signal = Google::Gax.create_api_call(
+              @incident_service_stub.method(:lookup_signal),
+              defaults["lookup_signal"],
+              exception_transformer: exception_transformer
+            )
             @update_signal = Google::Gax.create_api_call(
               @incident_service_stub.method(:update_signal),
               defaults["update_signal"],
@@ -1151,7 +1156,64 @@ module Google
           #   The resource name of the hosting Stackdriver project which requested
           #   incidents belong to.
           # @param query [String]
-          #   Query to specify which signals should be returned.
+          #   An expression that defines which signals to return.
+          #
+          #   Search atoms can be used to match certain specific fields.  Otherwise,
+          #   plain text will match text fields in the signal.
+          #
+          #   Search atoms:
+          #
+          #   * `start` - (timestamp) The time the signal was created.
+          #   * `title` - The title of the signal.
+          #   * `signal_state` - `open` or `closed`. State of the signal.
+          #     (e.g., `signal_state:open`)
+          #
+          #   Timestamp formats:
+          #
+          #   * yyyy-MM-dd - an absolute date, treated as a calendar-day-wide window.
+          #     In other words, the "<" operator will match dates before that date, the
+          #     ">" operator will match dates after that date, and the ":" operator will
+          #     match the entire day.
+          #   * yyyy-MM-ddTHH:mm - Same as above, but with minute resolution.
+          #   * yyyy-MM-ddTHH:mm:ss - Same as above, but with second resolution.
+          #   * Nd (e.g. 7d) - a relative number of days ago, treated as a moment in time
+          #     (as opposed to a day-wide span) a multiple of 24 hours ago (as opposed to
+          #     calendar days).  In the case of daylight savings time, it will apply the
+          #     current timezone to both ends of the range.  Note that exact matching
+          #     (e.g. `start:7d`) is unlikely to be useful because that would only match
+          #     signals created precisely at a particular instant in time.
+          #
+          #   The absolute timestamp formats (everything starting with a year) can
+          #   optionally be followed with a UTC offset in +/-hh:mm format.  Also, the 'T'
+          #   separating dates and times can optionally be replaced with a space. Note
+          #   that any timestamp containing a space or colon will need to be quoted.
+          #
+          #   Examples:
+          #
+          #   * `foo` - matches signals containing the word "foo"
+          #   * `"foo bar"` - matches signals containing the phrase "foo bar"
+          #   * `foo bar` or `foo AND bar` - matches signals containing the words
+          #     "foo" and "bar"
+          #   * `foo -bar` or `foo AND NOT bar` - matches signals containing the
+          #     word
+          #     "foo" but not the word "bar"
+          #   * `foo OR bar` - matches signals containing the word "foo" or the
+          #     word "bar"
+          #   * `start>2018-11-28` - matches signals which started after November
+          #     11, 2018.
+          #   * `start<=2018-11-28` - matches signals which started on or before
+          #     November 11, 2018.
+          #   * `start:2018-11-28` - matches signals which started on November 11,
+          #     2018.
+          #   * `start>"2018-11-28 01:02:03+04:00"` - matches signals which started
+          #     after November 11, 2018 at 1:02:03 AM according to the UTC+04 time
+          #     zone.
+          #   * `start>7d` - matches signals which started after the point in time
+          #     7*24 hours ago
+          #   * `start>180d` - similar to 7d, but likely to cross the daylight savings
+          #     time boundary, so the end time will be 1 hour different from "now."
+          #   * `foo AND start>90d AND stage<resolved` - unresolved signals from
+          #     the past 90 days containing the word "foo"
           # @param page_size [Integer]
           #   The maximum number of resources contained in the underlying API
           #   response. If page streaming is performed per-resource, this
@@ -1233,6 +1295,40 @@ module Google
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Cloud::Irm::V1alpha2::GetSignalRequest)
             @get_signal.call(req, options, &block)
+          end
+
+          # Finds a signal by other unique IDs.
+          #
+          # @param cscc_finding [String]
+          #   Full resource name of the CSCC finding id this signal refers to (e.g.
+          #   "organizations/abc/sources/123/findings/xyz")
+          # @param stackdriver_notification_id [String]
+          #   The ID from the Stackdriver Alerting notification.
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Cloud::Irm::V1alpha2::Signal]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
+          # @return [Google::Cloud::Irm::V1alpha2::Signal]
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/irm"
+          #
+          #   incident_client = Google::Cloud::Irm.new(version: :v1alpha2)
+          #   response = incident_client.lookup_signal
+
+          def lookup_signal \
+              cscc_finding: nil,
+              stackdriver_notification_id: nil,
+              options: nil,
+              &block
+            req = {
+              cscc_finding: cscc_finding,
+              stackdriver_notification_id: stackdriver_notification_id
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Cloud::Irm::V1alpha2::LookupSignalRequest)
+            @lookup_signal.call(req, options, &block)
           end
 
           # Updates an existing signal (for example, to assign/unassign it to an

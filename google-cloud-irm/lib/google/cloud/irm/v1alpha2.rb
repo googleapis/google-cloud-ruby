@@ -15,7 +15,6 @@
 
 require "google/cloud/irm/v1alpha2/incident_service_client"
 require "google/cloud/irm/v1alpha2/helpers"
-require "google/cloud/irm/v1alpha2/incidents_pb"
 
 module Google
   module Cloud

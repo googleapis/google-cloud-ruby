@@ -67,7 +67,10 @@ module Google
         #     Immutable.
         # @!attribute [rw] content_type
         #   @return [String]
-        #     Content type string, for example, 'text/plain' or'text/html'.
+        #     Content type string. 'text/plain' is currently the only supported content
+        #     type for Signals created via the API. Signals created by Stackdriver
+        #     Alerting support 'text/html' as well. Immutable for Signals created by
+        #     Stackdriver Alerting.
         # @!attribute [rw] content
         #   @return [String]
         #     Full message of the signal.
@@ -118,6 +121,10 @@ module Google
         # @!attribute [rw] content
         #   @return [String]
         #     Content of the annotation. Immutable.
+        # @!attribute [rw] content_type
+        #   @return [String]
+        #     Content type of the annotation, for example, 'text/plain'
+        #     or 'text/markdown'. Immutable.
         class Annotation; end
 
         # A tag by a user.
@@ -134,7 +141,7 @@ module Google
         # an author and a last updated timestamp.
         # @!attribute [rw] content_type
         #   @return [String]
-        #     Content type string, for example, 'text/plain' or 'text/html'.
+        #     Content type string, for example, 'text/plain' or 'text/markdown'.
         # @!attribute [rw] content
         #   @return [String]
         #     Textual content of the synopsis. It can be plain text or markdown as

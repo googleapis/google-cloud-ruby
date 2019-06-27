@@ -5,8 +5,6 @@
 require 'google/protobuf'
 
 require 'google/api/annotations_pb'
-require 'google/monitoring/v3/metric_service_pb'
-require 'google/protobuf/duration_pb'
 require 'google/protobuf/timestamp_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.cloud.irm.v1alpha2.User" do
@@ -45,6 +43,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :author, :message, 2, "google.cloud.irm.v1alpha2.User"
     optional :create_time, :message, 3, "google.protobuf.Timestamp"
     optional :content, :string, 4
+    optional :content_type, :string, 5
   end
   add_message "google.cloud.irm.v1alpha2.Tag" do
     optional :name, :string, 1
