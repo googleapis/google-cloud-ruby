@@ -1,5 +1,10 @@
 # Release History
 
+### 1.9.3 / 2019-06-27
+
+* Update network configuration for some initial_retry_delay_millis
+  and timeout_millis settings
+
 ### 1.9.2 / 2019-06-13
 
 * Update IAM:
