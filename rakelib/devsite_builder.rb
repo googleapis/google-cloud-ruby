@@ -3,7 +3,6 @@ require_relative "gem_version_doc.rb"
 require_relative "repo_metadata.rb"
 
 class DevsiteBuilder < YardBuilder
-
   def initialize master_dir = "."
     @master_dir = Pathname.new master_dir
     collect_metadata
@@ -22,7 +21,7 @@ class DevsiteBuilder < YardBuilder
     end
   end
 
-  def build_gem_docs input_dir, output_dir, gem = nil, version = 'master'
+  def build_gem_docs input_dir, output_dir, gem = nil, version = "master"
     gem ||= File.basename input_dir
     gem_metadata = @metadata[gem]
     gem_metadata["version"] = version
@@ -48,8 +47,7 @@ class DevsiteBuilder < YardBuilder
       versions.each do |version|
         build_docs_for_tag "#{gem}/#{version}"
       end
-      build_gem_docs master_dir, gh_pages_dir, gem
-      puts "Rebuild all #{gem} documentation (all tags and master)"
+      puts "Rebuild all #{gem} documentation (all tags)"
     end
   end
 
