@@ -4,10 +4,7 @@ require_relative "repo_doc_common.rb"
 class RepoMetadata < RepoDocCommon
   def initialize data
     @data = data
-
-    # Required until distribution_name is changed to distribution-name
-    @data.transform_keys! { |k| k.sub "_", "-" }
-    @data.delete_if { |k, _| !allowed_fields.include? k }
+    normalize_data!
   end
 
   def allowed_fields
@@ -22,6 +19,13 @@ class RepoMetadata < RepoDocCommon
     Dir.chdir output_directory do
       cmd "python3 -m docuploader create-metadata #{fields.join ' '}"
     end
+  end
+
+  def normalize_data!
+    # Required until distribution_name is changed to distribution-name
+    @data.transform_keys! { |k| k.sub "_", "-" }
+    @data["name"] = @data["distribution-name"]
+    @data.delete_if { |k, _| !allowed_fields.include? k }
   end
 
   def [] key
