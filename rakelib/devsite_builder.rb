@@ -24,7 +24,9 @@ class DevsiteBuilder < YardBuilder
     gem ||= File.basename input_dir
     gem_metadata = @metadata[gem]
     gem_metadata["version"] = version
-    GemVersionDoc.new input_dir, output_dir, gem_metadata
+    docs = GemVersionDoc.new input_dir, output_dir, gem_metadata
+    docs.build
+    docs
   end
 
   def publish_tag tag
@@ -57,7 +59,7 @@ class DevsiteBuilder < YardBuilder
       input_dir = "#{tag_repo + gem}"
       output_dir = "#{gh_pages_dir + 'docs' + gem + version}"
       docs = build_gem_docs input_dir, output_dir, gem, version
-      docs.publish
+      docs.upload
     end
   end
 
