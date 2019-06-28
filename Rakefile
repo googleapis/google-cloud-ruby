@@ -630,8 +630,8 @@ namespace :kokoro do
 
     Rake::Task["kokoro:load_env_vars"].invoke
 
-    # Temporary
-    DevsiteBuilder.new(__dir__).rebuild_all
+    # Temporary, change to build_master
+    DevsiteBuilder.new(__dir__).republish_all
     Rake::Task["docs:build_master"].invoke
 
     Rake::Task["test:codecov"].invoke

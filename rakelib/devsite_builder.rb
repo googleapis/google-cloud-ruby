@@ -16,7 +16,6 @@ class DevsiteBuilder < YardBuilder
       input_dir = "#{master_dir + gem}"
       output_dir = "#{gh_pages_dir + 'docs' + gem + 'master'}"
       build_gem_docs input_dir, output_dir
-      ensure_gem_latest_dir gem
       puts "Build #{gem} documentation for commit #{git_ref}"
     end
   end
@@ -25,8 +24,7 @@ class DevsiteBuilder < YardBuilder
     gem ||= File.basename input_dir
     gem_metadata = @metadata[gem]
     gem_metadata["version"] = version
-    docs = GemVersionDoc.new input_dir, output_dir, gem_metadata
-    docs.publish
+    GemVersionDoc.new input_dir, output_dir, gem_metadata
   end
 
   def publish_tag tag
@@ -34,31 +32,32 @@ class DevsiteBuilder < YardBuilder
 
     gem, version = split_tag tag
     add_release gem, version
-    build_docs_for_tag tag
+    publish_docs_for_tag tag
     ensure_gem_latest_dir gem
     puts "Add #{gem} documentation for #{version} release"
   end
 
-  def rebuild_all
+  def republish_all
     return if case_insensitive_check!
 
     current_git_commit master_dir
     load_releases.each do |gem, versions|
       versions.each do |version|
-        build_docs_for_tag "#{gem}/#{version}"
+        publish_docs_for_tag "#{gem}/#{version}"
       end
-      puts "Rebuild all #{gem} documentation (all tags)"
+      puts "Republished all #{gem} documentation (all tags)"
     end
   end
 
   private
 
-  def build_docs_for_tag tag
+  def publish_docs_for_tag tag
     gem, version = split_tag tag
     checkout_branch tag do |tag_repo|
       input_dir = "#{tag_repo + gem}"
       output_dir = "#{gh_pages_dir + 'docs' + gem + version}"
-      build_gem_docs input_dir, output_dir, gem, version
+      docs = build_gem_docs input_dir, output_dir, gem, version
+      docs.publish
     end
   end
 
