@@ -80,6 +80,51 @@ s.replace(
 
       ### Next Steps\n"""))
 
+# Support for service_address
+s.replace(
+    [
+        'lib/google/cloud/kms.rb',
+        'lib/google/cloud/kms/v*.rb',
+        'lib/google/cloud/kms/v*/*_client.rb'
+    ],
+    '\n(\\s+)#(\\s+)@param exception_transformer',
+    '\n\\1#\\2@param service_address [String]\n' +
+        '\\1#\\2  Override for the service hostname, or `nil` to leave as the default.\n' +
+        '\\1#\\2@param service_port [Integer]\n' +
+        '\\1#\\2  Override for the service port, or `nil` to leave as the default.\n' +
+        '\\1#\\2@param exception_transformer'
+)
+s.replace(
+    [
+        'lib/google/cloud/kms/v*.rb',
+        'lib/google/cloud/kms/v*/*_client.rb'
+    ],
+    '\n(\\s+)metadata: nil,\n\\s+exception_transformer: nil,\n',
+    '\n\\1metadata: nil,\n\\1service_address: nil,\n\\1service_port: nil,\n\\1exception_transformer: nil,\n'
+)
+s.replace(
+    [
+        'lib/google/cloud/kms/v*.rb',
+        'lib/google/cloud/kms/v*/*_client.rb'
+    ],
+    ',\n(\\s+)lib_name: lib_name,\n\\s+lib_version: lib_version',
+    ',\n\\1lib_name: lib_name,\n\\1service_address: service_address,\n\\1service_port: service_port,\n\\1lib_version: lib_version'
+)
+s.replace(
+    'lib/google/cloud/kms/v*/*_client.rb',
+    'service_path = self\\.class::SERVICE_ADDRESS',
+    'service_path = service_address || self.class::SERVICE_ADDRESS'
+)
+s.replace(
+    'lib/google/cloud/kms/v*/*_client.rb',
+    'port = self\\.class::DEFAULT_SERVICE_PORT',
+    'port = service_port || self.class::DEFAULT_SERVICE_PORT'
+)
+s.replace(
+    'google-cloud-kms.gemspec',
+    '\n  gem\\.add_dependency "google-gax", "~> 1\\.[\\d\\.]+"\n',
+    '\n  gem.add_dependency "google-gax", "~> 1.7"\n')
+
 # https://github.com/googleapis/gapic-generator/issues/2242
 def escape_braces(match):
     expr = re.compile('^([^`]*(`[^`]*`[^`]*)*)([^`#\\$\\\\])\\{([\\w,]+)\\}')
@@ -175,11 +220,3 @@ s.replace(
 
 # Generate the helper methods
 call('bundle update && bundle exec rake generate_partials', shell=True)
-
-# Exception tests have to check for both custom errors and retry wrapper errors
-for version in ['v1']:
-    s.replace(
-        f'test/google/cloud/kms/{version}/*_client_test.rb',
-        'err = assert_raises Google::Gax::GaxError do',
-        f'err = assert_raises Google::Gax::GaxError, CustomTestError_{version} do'
-    )
