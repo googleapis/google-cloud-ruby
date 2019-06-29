@@ -60,7 +60,7 @@ namespace :test do
           header "RUNNING TESTS FOR #{gem}"
           run_task_if_exists "test"
         end
-      end
+      end unless gem == "google-cloud-dialogflow"
     end
   end
 

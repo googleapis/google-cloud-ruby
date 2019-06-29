@@ -51,8 +51,6 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :horizontal_pod_autoscaling, :message, 2, "google.container.v1beta1.HorizontalPodAutoscaling"
     optional :kubernetes_dashboard, :message, 3, "google.container.v1beta1.KubernetesDashboard"
     optional :network_policy_config, :message, 4, "google.container.v1beta1.NetworkPolicyConfig"
-    optional :istio_config, :message, 5, "google.container.v1beta1.IstioConfig"
-    optional :cloud_run_config, :message, 7, "google.container.v1beta1.CloudRunConfig"
   end
   add_message "google.container.v1beta1.HttpLoadBalancing" do
     optional :disabled, :bool, 1
@@ -72,17 +70,6 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :master_ipv4_cidr_block, :string, 3
     optional :private_endpoint, :string, 4
     optional :public_endpoint, :string, 5
-  end
-  add_message "google.container.v1beta1.IstioConfig" do
-    optional :disabled, :bool, 1
-    optional :auth, :enum, 2, "google.container.v1beta1.IstioConfig.IstioAuthMode"
-  end
-  add_enum "google.container.v1beta1.IstioConfig.IstioAuthMode" do
-    value :AUTH_NONE, 0
-    value :AUTH_MUTUAL_TLS, 1
-  end
-  add_message "google.container.v1beta1.CloudRunConfig" do
-    optional :disabled, :bool, 1
   end
   add_message "google.container.v1beta1.MasterAuthorizedNetworksConfig" do
     optional :enabled, :bool, 1
@@ -153,9 +140,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :private_cluster, :bool, 28
     optional :master_ipv4_cidr_block, :string, 29
     optional :default_max_pods_constraint, :message, 30, "google.container.v1beta1.MaxPodsConstraint"
-    optional :resource_usage_export_config, :message, 33, "google.container.v1beta1.ResourceUsageExportConfig"
     optional :private_cluster_config, :message, 37, "google.container.v1beta1.PrivateClusterConfig"
-    optional :vertical_pod_autoscaling, :message, 39, "google.container.v1beta1.VerticalPodAutoscaling"
     optional :self_link, :string, 100
     optional :zone, :string, 101
     optional :endpoint, :string, 102
@@ -197,8 +182,6 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :desired_cluster_autoscaling, :message, 15, "google.container.v1beta1.ClusterAutoscaling"
     optional :desired_binary_authorization, :message, 16, "google.container.v1beta1.BinaryAuthorization"
     optional :desired_logging_service, :string, 19
-    optional :desired_resource_usage_export_config, :message, 21, "google.container.v1beta1.ResourceUsageExportConfig"
-    optional :desired_vertical_pod_autoscaling, :message, 22, "google.container.v1beta1.VerticalPodAutoscaling"
     optional :desired_master_version, :string, 100
   end
   add_message "google.container.v1beta1.Operation" do
@@ -581,8 +564,6 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     value :UNKNOWN, 0
     value :GCE_STOCKOUT, 1
     value :GKE_SERVICE_ACCOUNT_DELETED, 2
-    value :GCE_QUOTA_EXCEEDED, 3
-    value :SET_BY_OPERATOR, 4
   end
   add_message "google.container.v1beta1.NetworkConfig" do
     optional :network, :string, 1
@@ -617,18 +598,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     repeated :secondary_ip_ranges, :message, 4, "google.container.v1beta1.UsableSubnetworkSecondaryRange"
     optional :status_message, :string, 5
   end
-  add_message "google.container.v1beta1.VerticalPodAutoscaling" do
-    optional :enabled, :bool, 1
-  end
   add_message "google.container.v1beta1.MaxPodsConstraint" do
     optional :max_pods_per_node, :int64, 1
-  end
-  add_message "google.container.v1beta1.ResourceUsageExportConfig" do
-    optional :bigquery_destination, :message, 1, "google.container.v1beta1.ResourceUsageExportConfig.BigQueryDestination"
-    optional :enable_network_egress_metering, :bool, 2
-  end
-  add_message "google.container.v1beta1.ResourceUsageExportConfig.BigQueryDestination" do
-    optional :dataset_id, :string, 1
   end
 end
 
@@ -646,9 +617,6 @@ module Google
       KubernetesDashboard = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1beta1.KubernetesDashboard").msgclass
       NetworkPolicyConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1beta1.NetworkPolicyConfig").msgclass
       PrivateClusterConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1beta1.PrivateClusterConfig").msgclass
-      IstioConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1beta1.IstioConfig").msgclass
-      IstioConfig::IstioAuthMode = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1beta1.IstioConfig.IstioAuthMode").enummodule
-      CloudRunConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1beta1.CloudRunConfig").msgclass
       MasterAuthorizedNetworksConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1beta1.MasterAuthorizedNetworksConfig").msgclass
       MasterAuthorizedNetworksConfig::CidrBlock = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1beta1.MasterAuthorizedNetworksConfig.CidrBlock").msgclass
       LegacyAbac = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1beta1.LegacyAbac").msgclass
@@ -725,10 +693,7 @@ module Google
       UsableSubnetworkSecondaryRange = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1beta1.UsableSubnetworkSecondaryRange").msgclass
       UsableSubnetworkSecondaryRange::Status = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1beta1.UsableSubnetworkSecondaryRange.Status").enummodule
       UsableSubnetwork = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1beta1.UsableSubnetwork").msgclass
-      VerticalPodAutoscaling = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1beta1.VerticalPodAutoscaling").msgclass
       MaxPodsConstraint = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1beta1.MaxPodsConstraint").msgclass
-      ResourceUsageExportConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1beta1.ResourceUsageExportConfig").msgclass
-      ResourceUsageExportConfig::BigQueryDestination = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1beta1.ResourceUsageExportConfig.BigQueryDestination").msgclass
     end
   end
 end

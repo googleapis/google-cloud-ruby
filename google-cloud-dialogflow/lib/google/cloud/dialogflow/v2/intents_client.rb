@@ -66,7 +66,7 @@ module Google
         #
         # For more information about intents, see the
         # [Dialogflow
-        # documentation](https://cloud.google.com/dialogflow-enterprise/docs/intents-overview).
+        # documentation](https://cloud.google.com/dialogflow/docs/intents-overview).
         #
         # @!attribute [r] intents_stub
         #   @return [Google::Cloud::Dialogflow::V2::Intents::Stub]
@@ -182,6 +182,10 @@ module Google
           #   The default timeout, in seconds, for calls made through this client.
           # @param metadata [Hash]
           #   Default metadata to be sent with each request. This can be overridden on a per call basis.
+          # @param service_address [String]
+          #   Override for the service hostname, or `nil` to leave as the default.
+          # @param service_port [Integer]
+          #   Override for the service port, or `nil` to leave as the default.
           # @param exception_transformer [Proc]
           #   An optional proc that intercepts any exceptions raised during an API call to inject
           #   custom error handling.
@@ -191,6 +195,8 @@ module Google
               client_config: {},
               timeout: DEFAULT_TIMEOUT,
               metadata: nil,
+              service_address: nil,
+              service_port: nil,
               exception_transformer: nil,
               lib_name: nil,
               lib_version: ""
@@ -208,7 +214,10 @@ module Google
               client_config: client_config,
               timeout: timeout,
               lib_name: lib_name,
+              service_address: service_address,
+              service_port: service_port,
               lib_version: lib_version,
+              metadata: metadata,
             )
 
             if credentials.is_a?(String) || credentials.is_a?(Hash)
@@ -254,8 +263,8 @@ module Google
             end
 
             # Allow overriding the service path/port in subclasses.
-            service_path = self.class::SERVICE_ADDRESS
-            port = self.class::DEFAULT_SERVICE_PORT
+            service_path = service_address || self.class::SERVICE_ADDRESS
+            port = service_port || self.class::DEFAULT_SERVICE_PORT
             interceptors = self.class::GRPC_INTERCEPTORS
             @intents_stub = Google::Gax::Grpc.create_stub(
               service_path,
@@ -337,7 +346,7 @@ module Google
           #   Optional. The language to list training phrases, parameters and rich
           #   messages for. If not specified, the agent's default language is used.
           #   [Many
-          #   languages](https://cloud.google.com/dialogflow-enterprise/docs/reference/language)
+          #   languages](https://cloud.google.com/dialogflow/docs/reference/language)
           #   are supported. Note: languages must be enabled in the agent before they can
           #   be used.
           # @param intent_view [Google::Cloud::Dialogflow::V2::IntentView]
@@ -405,7 +414,7 @@ module Google
           #   Optional. The language to retrieve training phrases, parameters and rich
           #   messages for. If not specified, the agent's default language is used.
           #   [Many
-          #   languages](https://cloud.google.com/dialogflow-enterprise/docs/reference/language)
+          #   languages](https://cloud.google.com/dialogflow/docs/reference/language)
           #   are supported. Note: languages must be enabled in the agent before they can
           #   be used.
           # @param intent_view [Google::Cloud::Dialogflow::V2::IntentView]
@@ -453,7 +462,7 @@ module Google
           #   Optional. The language of training phrases, parameters and rich messages
           #   defined in `intent`. If not specified, the agent's default language is
           #   used. [Many
-          #   languages](https://cloud.google.com/dialogflow-enterprise/docs/reference/language)
+          #   languages](https://cloud.google.com/dialogflow/docs/reference/language)
           #   are supported. Note: languages must be enabled in the agent before they can
           #   be used.
           # @param intent_view [Google::Cloud::Dialogflow::V2::IntentView]
@@ -503,7 +512,7 @@ module Google
           #   Optional. The language of training phrases, parameters and rich messages
           #   defined in `intent`. If not specified, the agent's default language is
           #   used. [Many
-          #   languages](https://cloud.google.com/dialogflow-enterprise/docs/reference/language)
+          #   languages](https://cloud.google.com/dialogflow/docs/reference/language)
           #   are supported. Note: languages must be enabled in the agent before they can
           #   be used.
           # @param update_mask [Google::Protobuf::FieldMask | Hash]
@@ -592,7 +601,7 @@ module Google
           #   Optional. The language of training phrases, parameters and rich messages
           #   defined in `intents`. If not specified, the agent's default language is
           #   used. [Many
-          #   languages](https://cloud.google.com/dialogflow-enterprise/docs/reference/language)
+          #   languages](https://cloud.google.com/dialogflow/docs/reference/language)
           #   are supported. Note: languages must be enabled in the agent before they can
           #   be used.
           # @param intent_batch_uri [String]

@@ -217,7 +217,7 @@ module Google
           # @!attribute [rw] prompts
           #   @return [Array<String>]
           #     Optional. The collection of prompts that the agent can present to the
-          #     user in order to collect value for the parameter.
+          #     user in order to collect a value for the parameter.
           # @!attribute [rw] is_list
           #   @return [true, false]
           #     Optional. Indicates whether the parameter represents a list of values.
@@ -580,7 +580,7 @@ module Google
         #     Optional. The language to list training phrases, parameters and rich
         #     messages for. If not specified, the agent's default language is used.
         #     [Many
-        #     languages](https://cloud.google.com/dialogflow-enterprise/docs/reference/language)
+        #     languages](https://cloud.google.com/dialogflow/docs/reference/language)
         #     are supported. Note: languages must be enabled in the agent before they can
         #     be used.
         # @!attribute [rw] intent_view
@@ -616,7 +616,7 @@ module Google
         #     Optional. The language to retrieve training phrases, parameters and rich
         #     messages for. If not specified, the agent's default language is used.
         #     [Many
-        #     languages](https://cloud.google.com/dialogflow-enterprise/docs/reference/language)
+        #     languages](https://cloud.google.com/dialogflow/docs/reference/language)
         #     are supported. Note: languages must be enabled in the agent before they can
         #     be used.
         # @!attribute [rw] intent_view
@@ -637,7 +637,7 @@ module Google
         #     Optional. The language of training phrases, parameters and rich messages
         #     defined in `intent`. If not specified, the agent's default language is
         #     used. [Many
-        #     languages](https://cloud.google.com/dialogflow-enterprise/docs/reference/language)
+        #     languages](https://cloud.google.com/dialogflow/docs/reference/language)
         #     are supported. Note: languages must be enabled in the agent before they can
         #     be used.
         # @!attribute [rw] intent_view
@@ -654,7 +654,7 @@ module Google
         #     Optional. The language of training phrases, parameters and rich messages
         #     defined in `intent`. If not specified, the agent's default language is
         #     used. [Many
-        #     languages](https://cloud.google.com/dialogflow-enterprise/docs/reference/language)
+        #     languages](https://cloud.google.com/dialogflow/docs/reference/language)
         #     are supported. Note: languages must be enabled in the agent before they can
         #     be used.
         # @!attribute [rw] update_mask
@@ -691,7 +691,7 @@ module Google
         #     Optional. The language of training phrases, parameters and rich messages
         #     defined in `intents`. If not specified, the agent's default language is
         #     used. [Many
-        #     languages](https://cloud.google.com/dialogflow-enterprise/docs/reference/language)
+        #     languages](https://cloud.google.com/dialogflow/docs/reference/language)
         #     are supported. Note: languages must be enabled in the agent before they can
         #     be used.
         # @!attribute [rw] update_mask

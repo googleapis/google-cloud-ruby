@@ -108,6 +108,10 @@ module Google
         #   The default timeout, in seconds, for calls made through this client.
         # @param metadata [Hash]
         #   Default metadata to be sent with each request. This can be overridden on a per call basis.
+        # @param service_address [String]
+        #   Override for the service hostname, or `nil` to leave as the default.
+        # @param service_port [Integer]
+        #   Override for the service port, or `nil` to leave as the default.
         # @param exception_transformer [Proc]
         #   An optional proc that intercepts any exceptions raised during an API call to inject
         #   custom error handling.
@@ -117,6 +121,8 @@ module Google
             client_config: nil,
             timeout: nil,
             metadata: nil,
+            service_address: nil,
+            service_port: nil,
             exception_transformer: nil,
             lib_name: nil,
             lib_version: nil
@@ -128,6 +134,8 @@ module Google
             metadata: metadata,
             exception_transformer: exception_transformer,
             lib_name: lib_name,
+            service_address: service_address,
+            service_port: service_port,
             lib_version: lib_version
           }.select { |_, v| v != nil }
           Google::Cloud::PhishingProtection::V1beta1::PhishingProtectionClient.new(**kwargs)

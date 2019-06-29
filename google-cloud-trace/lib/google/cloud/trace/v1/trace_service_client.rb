@@ -100,6 +100,10 @@ module Google
           #   The default timeout, in seconds, for calls made through this client.
           # @param metadata [Hash]
           #   Default metadata to be sent with each request. This can be overridden on a per call basis.
+          # @param service_address [String]
+          #   Override for the service hostname, or `nil` to leave as the default.
+          # @param service_port [Integer]
+          #   Override for the service port, or `nil` to leave as the default.
           # @param exception_transformer [Proc]
           #   An optional proc that intercepts any exceptions raised during an API call to inject
           #   custom error handling.
@@ -109,6 +113,8 @@ module Google
               client_config: {},
               timeout: DEFAULT_TIMEOUT,
               metadata: nil,
+              service_address: nil,
+              service_port: nil,
               exception_transformer: nil,
               lib_name: nil,
               lib_version: ""
@@ -163,8 +169,8 @@ module Google
             end
 
             # Allow overriding the service path/port in subclasses.
-            service_path = self.class::SERVICE_ADDRESS
-            port = self.class::DEFAULT_SERVICE_PORT
+            service_path = service_address || self.class::SERVICE_ADDRESS
+            port = service_port || self.class::DEFAULT_SERVICE_PORT
             interceptors = self.class::GRPC_INTERCEPTORS
             @trace_service_stub = Google::Gax::Grpc.create_stub(
               service_path,
