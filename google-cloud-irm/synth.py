@@ -29,7 +29,6 @@ v1alpha2 = gapic.ruby_library(
     artman_output_name='google-cloud-ruby/google-cloud-irm',
     config_path='artman_irm_v1alpha2.yaml'
 )
-s.copy(v1alpha2 / 'acceptance')
 s.copy(v1alpha2 / 'lib')
 s.copy(v1alpha2 / 'test')
 s.copy(v1alpha2 / 'README.md')
@@ -41,6 +40,51 @@ s.copy(v1alpha2 / 'google-cloud-irm.gemspec', merge=ruby.merge_gemspec)
 # Copy common templates
 templates = gcp.CommonTemplates().ruby_library()
 s.copy(templates)
+
+# Support for service_address
+s.replace(
+    [
+        'lib/google/cloud/irm.rb',
+        'lib/google/cloud/irm/v*.rb',
+        'lib/google/cloud/irm/v*/*_client.rb'
+    ],
+    '\n(\\s+)#(\\s+)@param exception_transformer',
+    '\n\\1#\\2@param service_address [String]\n' +
+        '\\1#\\2  Override for the service hostname, or `nil` to leave as the default.\n' +
+        '\\1#\\2@param service_port [Integer]\n' +
+        '\\1#\\2  Override for the service port, or `nil` to leave as the default.\n' +
+        '\\1#\\2@param exception_transformer'
+)
+s.replace(
+    [
+        'lib/google/cloud/irm/v*.rb',
+        'lib/google/cloud/irm/v*/*_client.rb'
+    ],
+    '\n(\\s+)metadata: nil,\n\\s+exception_transformer: nil,\n',
+    '\n\\1metadata: nil,\n\\1service_address: nil,\n\\1service_port: nil,\n\\1exception_transformer: nil,\n'
+)
+s.replace(
+    [
+        'lib/google/cloud/irm/v*.rb',
+        'lib/google/cloud/irm/v*/*_client.rb'
+    ],
+    ',\n(\\s+)lib_name: lib_name,\n\\s+lib_version: lib_version',
+    ',\n\\1lib_name: lib_name,\n\\1service_address: service_address,\n\\1service_port: service_port,\n\\1lib_version: lib_version'
+)
+s.replace(
+    'lib/google/cloud/irm/v*/*_client.rb',
+    'service_path = self\\.class::SERVICE_ADDRESS',
+    'service_path = service_address || self.class::SERVICE_ADDRESS'
+)
+s.replace(
+    'lib/google/cloud/irm/v*/*_client.rb',
+    'port = self\\.class::DEFAULT_SERVICE_PORT',
+    'port = service_port || self.class::DEFAULT_SERVICE_PORT'
+)
+s.replace(
+    'google-cloud-irm.gemspec',
+    '\n  gem\\.add_dependency "google-gax", "~> 1\\.[\\d\\.]+"\n',
+    '\n  gem.add_dependency "google-gax", "~> 1.7"\n')
 
 # https://github.com/googleapis/gapic-generator/issues/2243
 s.replace(
@@ -124,11 +168,3 @@ s.replace(
 
 # Generate the helper methods
 call('bundle update && bundle exec rake generate_partials', shell=True)
-
-# Exception tests have to check for both custom errors and retry wrapper errors
-for version in ['v1alpha2']:
-    s.replace(
-        f'test/google/cloud/irm/{version}/*_client_test.rb',
-        'err = assert_raises Google::Gax::GaxError do',
-        f'err = assert_raises Google::Gax::GaxError, CustomTestError_{version} do'
-    )

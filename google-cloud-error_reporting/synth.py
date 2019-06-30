@@ -34,6 +34,32 @@ s.copy(v1beta1_library / 'lib/google/devtools/clouderrorreporting/v1beta1')
 # Omitting lib/google/cloud/error_reporting/v1beta1.rb for now because we are
 # not exposing the low-level API.
 
+# Support for service_address
+s.replace(
+    'lib/google/cloud/error_reporting/v*/*_client.rb',
+    '\n(\\s+)#(\\s+)@param exception_transformer',
+    '\n\\1#\\2@param service_address [String]\n' +
+        '\\1#\\2  Override for the service hostname, or `nil` to leave as the default.\n' +
+        '\\1#\\2@param service_port [Integer]\n' +
+        '\\1#\\2  Override for the service port, or `nil` to leave as the default.\n' +
+        '\\1#\\2@param exception_transformer'
+)
+s.replace(
+    'lib/google/cloud/error_reporting/v*/*_client.rb',
+    '\n(\\s+)metadata: nil,\n\\s+exception_transformer: nil,\n',
+    '\n\\1metadata: nil,\n\\1service_address: nil,\n\\1service_port: nil,\n\\1exception_transformer: nil,\n'
+)
+s.replace(
+    'lib/google/cloud/error_reporting/v*/*_client.rb',
+    'service_path = self\\.class::SERVICE_ADDRESS',
+    'service_path = service_address || self.class::SERVICE_ADDRESS'
+)
+s.replace(
+    'lib/google/cloud/error_reporting/v*/*_client.rb',
+    'port = self\\.class::DEFAULT_SERVICE_PORT',
+    'port = service_port || self.class::DEFAULT_SERVICE_PORT'
+)
+
 # https://github.com/googleapis/gapic-generator/issues/2242
 def escape_braces(match):
     expr = re.compile('^([^`]*(`[^`]*`[^`]*)*)([^`#\\$\\\\])\\{([\\w,]+)\\}')
