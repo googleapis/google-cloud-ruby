@@ -321,7 +321,7 @@ this service.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(credentials: nil, scopes: ALL_SCOPES, client_config: {}, timeout: DEFAULT_TIMEOUT, metadata: nil, exception_transformer: nil, lib_name: nil, lib_version: &quot;&quot;)  &#x21d2; TenantServiceClient </a>
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(credentials: nil, scopes: ALL_SCOPES, client_config: {}, timeout: DEFAULT_TIMEOUT, metadata: nil, service_address: nil, service_port: nil, exception_transformer: nil, lib_name: nil, lib_version: &quot;&quot;)  &#x21d2; TenantServiceClient </a>
     
 
     
@@ -444,7 +444,7 @@ this service.</p>
     <div class="method_details first">
   <h3 class="signature first" id="initialize-instance_method">
   
-    #<strong>initialize</strong>(credentials: nil, scopes: ALL_SCOPES, client_config: {}, timeout: DEFAULT_TIMEOUT, metadata: nil, exception_transformer: nil, lib_name: nil, lib_version: &quot;&quot;)  &#x21d2; <tt><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::TenantServiceClient (class)">TenantServiceClient</a></span></tt> 
+    #<strong>initialize</strong>(credentials: nil, scopes: ALL_SCOPES, client_config: {}, timeout: DEFAULT_TIMEOUT, metadata: nil, service_address: nil, service_port: nil, exception_transformer: nil, lib_name: nil, lib_version: &quot;&quot;)  &#x21d2; <tt><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::TenantServiceClient (class)">TenantServiceClient</a></span></tt> 
   
 
   
@@ -554,6 +554,36 @@ or the specified config is missing data points.</p>
   
     <li>
       
+        <span class='name'>service_address</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Override for the service hostname, or <code>nil</code> to leave as the default.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>service_port</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Override for the service port, or <code>nil</code> to leave as the default.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
         <span class='name'>exception_transformer</span>
       
       
@@ -577,10 +607,6 @@ custom error handling.</p>
       <pre class="lines">
 
 
-133
-134
-135
-136
 137
 138
 139
@@ -691,10 +717,16 @@ custom error handling.</p>
 244
 245
 246
-247</pre>
+247
+248
+249
+250
+251
+252
+253</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/tenant_service_client.rb', line 133</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/tenant_service_client.rb', line 137</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span> \
     <span class='label'>credentials:</span> <span class='kw'>nil</span><span class='comma'>,</span>
@@ -702,6 +734,8 @@ custom error handling.</p>
     <span class='label'>client_config:</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='comma'>,</span>
     <span class='label'>timeout:</span> <span class='const'><span class='object_link'><a href="#DEFAULT_TIMEOUT-constant" title="Google::Cloud::Talent::V4beta1::TenantServiceClient::DEFAULT_TIMEOUT (constant)">DEFAULT_TIMEOUT</a></span></span><span class='comma'>,</span>
     <span class='label'>metadata:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+    <span class='label'>service_address:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+    <span class='label'>service_port:</span> <span class='kw'>nil</span><span class='comma'>,</span>
     <span class='label'>exception_transformer:</span> <span class='kw'>nil</span><span class='comma'>,</span>
     <span class='label'>lib_name:</span> <span class='kw'>nil</span><span class='comma'>,</span>
     <span class='label'>lib_version:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span>
@@ -756,8 +790,8 @@ custom error handling.</p>
   <span class='kw'>end</span>
 
   <span class='comment'># Allow overriding the service path/port in subclasses.
-</span>  <span class='id identifier rubyid_service_path'>service_path</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='op'>::</span><span class='const'>SERVICE_ADDRESS</span>
-  <span class='id identifier rubyid_port'>port</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='op'>::</span><span class='const'>DEFAULT_SERVICE_PORT</span>
+</span>  <span class='id identifier rubyid_service_path'>service_path</span> <span class='op'>=</span> <span class='id identifier rubyid_service_address'>service_address</span> <span class='op'>||</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='op'>::</span><span class='const'>SERVICE_ADDRESS</span>
+  <span class='id identifier rubyid_port'>port</span> <span class='op'>=</span> <span class='id identifier rubyid_service_port'>service_port</span> <span class='op'>||</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='op'>::</span><span class='const'>DEFAULT_SERVICE_PORT</span>
   <span class='id identifier rubyid_interceptors'>interceptors</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='op'>::</span><span class='const'>GRPC_INTERCEPTORS</span>
   <span class='ivar'>@tenant_service_stub</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='const'>Grpc</span><span class='period'>.</span><span class='id identifier rubyid_create_stub'>create_stub</span><span class='lparen'>(</span>
     <span class='id identifier rubyid_service_path'>service_path</span><span class='comma'>,</span>
@@ -1158,21 +1192,21 @@ retries, etc.</p>
       <pre class="lines">
 
 
-284
-285
-286
-287
-288
-289
 290
 291
 292
 293
 294
-295</pre>
+295
+296
+297
+298
+299
+300
+301</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/tenant_service_client.rb', line 284</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/tenant_service_client.rb', line 290</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_tenant'>create_tenant</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -1332,20 +1366,20 @@ retries, etc.</p>
       <pre class="lines">
 
 
-404
-405
-406
-407
-408
-409
 410
 411
 412
 413
-414</pre>
+414
+415
+416
+417
+418
+419
+420</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/tenant_service_client.rb', line 404</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/tenant_service_client.rb', line 410</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete_tenant'>delete_tenant</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -1513,19 +1547,19 @@ retries, etc.</p>
       <pre class="lines">
 
 
-321
-322
-323
-324
-325
-326
 327
 328
 329
-330</pre>
+330
+331
+332
+333
+334
+335
+336</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/tenant_service_client.rb', line 321</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/tenant_service_client.rb', line 327</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_tenant'>get_tenant</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -1730,21 +1764,21 @@ object.</p>
       <pre class="lines">
 
 
-462
-463
-464
-465
-466
-467
 468
 469
 470
 471
 472
-473</pre>
+473
+474
+475
+476
+477
+478
+479</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/tenant_service_client.rb', line 462</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/tenant_service_client.rb', line 468</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_tenants'>list_tenants</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -2085,21 +2119,21 @@ retries, etc.</p>
       <pre class="lines">
 
 
-368
-369
-370
-371
-372
-373
 374
 375
 376
 377
 378
-379</pre>
+379
+380
+381
+382
+383
+384
+385</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/tenant_service_client.rb', line 368</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/tenant_service_client.rb', line 374</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update_tenant'>update_tenant</span> \
     <span class='id identifier rubyid_tenant'>tenant</span><span class='comma'>,</span>
