@@ -424,7 +424,7 @@ this service.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(credentials: nil, scopes: ALL_SCOPES, client_config: {}, timeout: DEFAULT_TIMEOUT, metadata: nil, exception_transformer: nil, lib_name: nil, lib_version: &quot;&quot;)  &#x21d2; ClusterManagerClient </a>
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(credentials: nil, scopes: ALL_SCOPES, client_config: {}, timeout: DEFAULT_TIMEOUT, metadata: nil, service_address: nil, service_port: nil, exception_transformer: nil, lib_name: nil, lib_version: &quot;&quot;)  &#x21d2; ClusterManagerClient </a>
     
 
     
@@ -961,7 +961,7 @@ this service.</p>
     <div class="method_details first">
   <h3 class="signature first" id="initialize-instance_method">
   
-    #<strong>initialize</strong>(credentials: nil, scopes: ALL_SCOPES, client_config: {}, timeout: DEFAULT_TIMEOUT, metadata: nil, exception_transformer: nil, lib_name: nil, lib_version: &quot;&quot;)  &#x21d2; <tt><span class='object_link'><a href="" title="Google::Cloud::Container::V1beta1::ClusterManagerClient (class)">ClusterManagerClient</a></span></tt> 
+    #<strong>initialize</strong>(credentials: nil, scopes: ALL_SCOPES, client_config: {}, timeout: DEFAULT_TIMEOUT, metadata: nil, service_address: nil, service_port: nil, exception_transformer: nil, lib_name: nil, lib_version: &quot;&quot;)  &#x21d2; <tt><span class='object_link'><a href="" title="Google::Cloud::Container::V1beta1::ClusterManagerClient (class)">ClusterManagerClient</a></span></tt> 
   
 
   
@@ -1071,6 +1071,36 @@ or the specified config is missing data points.</p>
   
     <li>
       
+        <span class='name'>service_address</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Override for the service hostname, or <code>nil</code> to leave as the default.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>service_port</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Override for the service port, or <code>nil</code> to leave as the default.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
         <span class='name'>exception_transformer</span>
       
       
@@ -1094,10 +1124,6 @@ custom error handling.</p>
       <pre class="lines">
 
 
-100
-101
-102
-103
 104
 105
 106
@@ -1424,10 +1450,16 @@ custom error handling.</p>
 427
 428
 429
-430</pre>
+430
+431
+432
+433
+434
+435
+436</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1beta1/cluster_manager_client.rb', line 100</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1beta1/cluster_manager_client.rb', line 104</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span> \
     <span class='label'>credentials:</span> <span class='kw'>nil</span><span class='comma'>,</span>
@@ -1435,6 +1467,8 @@ custom error handling.</p>
     <span class='label'>client_config:</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='comma'>,</span>
     <span class='label'>timeout:</span> <span class='const'><span class='object_link'><a href="#DEFAULT_TIMEOUT-constant" title="Google::Cloud::Container::V1beta1::ClusterManagerClient::DEFAULT_TIMEOUT (constant)">DEFAULT_TIMEOUT</a></span></span><span class='comma'>,</span>
     <span class='label'>metadata:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+    <span class='label'>service_address:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+    <span class='label'>service_port:</span> <span class='kw'>nil</span><span class='comma'>,</span>
     <span class='label'>exception_transformer:</span> <span class='kw'>nil</span><span class='comma'>,</span>
     <span class='label'>lib_name:</span> <span class='kw'>nil</span><span class='comma'>,</span>
     <span class='label'>lib_version:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span>
@@ -1489,8 +1523,8 @@ custom error handling.</p>
   <span class='kw'>end</span>
 
   <span class='comment'># Allow overriding the service path/port in subclasses.
-</span>  <span class='id identifier rubyid_service_path'>service_path</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='op'>::</span><span class='const'>SERVICE_ADDRESS</span>
-  <span class='id identifier rubyid_port'>port</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='op'>::</span><span class='const'>DEFAULT_SERVICE_PORT</span>
+</span>  <span class='id identifier rubyid_service_path'>service_path</span> <span class='op'>=</span> <span class='id identifier rubyid_service_address'>service_address</span> <span class='op'>||</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='op'>::</span><span class='const'>SERVICE_ADDRESS</span>
+  <span class='id identifier rubyid_port'>port</span> <span class='op'>=</span> <span class='id identifier rubyid_service_port'>service_port</span> <span class='op'>||</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='op'>::</span><span class='const'>DEFAULT_SERVICE_PORT</span>
   <span class='id identifier rubyid_interceptors'>interceptors</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='op'>::</span><span class='const'>GRPC_INTERCEPTORS</span>
   <span class='ivar'>@cluster_manager_stub</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='const'>Grpc</span><span class='period'>.</span><span class='id identifier rubyid_create_stub'>create_stub</span><span class='lparen'>(</span>
     <span class='id identifier rubyid_service_path'>service_path</span><span class='comma'>,</span>
@@ -1967,12 +2001,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1475
-1476
-1477
-1478
-1479
-1480
 1481
 1482
 1483
@@ -1983,10 +2011,16 @@ retries, etc.</p>
 1488
 1489
 1490
-1491</pre>
+1491
+1492
+1493
+1494
+1495
+1496
+1497</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1beta1/cluster_manager_client.rb', line 1475</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1beta1/cluster_manager_client.rb', line 1481</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_cancel_operation'>cancel_operation</span> \
     <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span>
@@ -2215,12 +2249,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-2180
-2181
-2182
-2183
-2184
-2185
 2186
 2187
 2188
@@ -2230,10 +2258,16 @@ retries, etc.</p>
 2192
 2193
 2194
-2195</pre>
+2195
+2196
+2197
+2198
+2199
+2200
+2201</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1beta1/cluster_manager_client.rb', line 2180</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1beta1/cluster_manager_client.rb', line 2186</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_complete_ip_rotation'>complete_ip_rotation</span> \
     <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span>
@@ -2475,12 +2509,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-596
-597
-598
-599
-600
-601
 602
 603
 604
@@ -2490,10 +2518,16 @@ retries, etc.</p>
 608
 609
 610
-611</pre>
+611
+612
+613
+614
+615
+616
+617</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1beta1/cluster_manager_client.rb', line 596</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1beta1/cluster_manager_client.rb', line 602</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_cluster'>create_cluster</span> \
     <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span>
@@ -2742,12 +2776,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1712
-1713
-1714
-1715
-1716
-1717
 1718
 1719
 1720
@@ -2759,10 +2787,16 @@ retries, etc.</p>
 1726
 1727
 1728
-1729</pre>
+1729
+1730
+1731
+1732
+1733
+1734
+1735</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1beta1/cluster_manager_client.rb', line 1712</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1beta1/cluster_manager_client.rb', line 1718</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_node_pool'>create_node_pool</span> \
     <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span>
@@ -3000,12 +3034,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1314
-1315
-1316
-1317
-1318
-1319
 1320
 1321
 1322
@@ -3015,10 +3043,16 @@ retries, etc.</p>
 1326
 1327
 1328
-1329</pre>
+1329
+1330
+1331
+1332
+1333
+1334
+1335</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1beta1/cluster_manager_client.rb', line 1314</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1beta1/cluster_manager_client.rb', line 1320</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete_cluster'>delete_cluster</span> \
     <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span>
@@ -3266,12 +3300,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1778
-1779
-1780
-1781
-1782
-1783
 1784
 1785
 1786
@@ -3283,10 +3311,16 @@ retries, etc.</p>
 1792
 1793
 1794
-1795</pre>
+1795
+1796
+1797
+1798
+1799
+1800
+1801</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1beta1/cluster_manager_client.rb', line 1778</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1beta1/cluster_manager_client.rb', line 1784</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete_node_pool'>delete_node_pool</span> \
     <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span>
@@ -3516,12 +3550,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-525
-526
-527
-528
-529
-530
 531
 532
 533
@@ -3531,10 +3559,16 @@ retries, etc.</p>
 537
 538
 539
-540</pre>
+540
+541
+542
+543
+544
+545
+546</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1beta1/cluster_manager_client.rb', line 525</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1beta1/cluster_manager_client.rb', line 531</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_cluster'>get_cluster</span> \
     <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span>
@@ -3782,12 +3816,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1645
-1646
-1647
-1648
-1649
-1650
 1651
 1652
 1653
@@ -3799,10 +3827,16 @@ retries, etc.</p>
 1659
 1660
 1661
-1662</pre>
+1662
+1663
+1664
+1665
+1666
+1667
+1668</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1beta1/cluster_manager_client.rb', line 1645</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1beta1/cluster_manager_client.rb', line 1651</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_node_pool'>get_node_pool</span> \
     <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span>
@@ -4032,12 +4066,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1420
-1421
-1422
-1423
-1424
-1425
 1426
 1427
 1428
@@ -4047,10 +4075,16 @@ retries, etc.</p>
 1432
 1433
 1434
-1435</pre>
+1435
+1436
+1437
+1438
+1439
+1440
+1441</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1beta1/cluster_manager_client.rb', line 1420</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1beta1/cluster_manager_client.rb', line 1426</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_operation'>get_operation</span> \
     <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span>
@@ -4258,12 +4292,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1526
-1527
-1528
-1529
-1530
-1531
 1532
 1533
 1534
@@ -4271,10 +4299,16 @@ retries, etc.</p>
 1536
 1537
 1538
-1539</pre>
+1539
+1540
+1541
+1542
+1543
+1544
+1545</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1beta1/cluster_manager_client.rb', line 1526</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1beta1/cluster_manager_client.rb', line 1532</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_server_config'>get_server_config</span> \
     <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span>
@@ -4483,12 +4517,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-470
-471
-472
-473
-474
-475
 476
 477
 478
@@ -4496,10 +4524,16 @@ retries, etc.</p>
 480
 481
 482
-483</pre>
+483
+484
+485
+486
+487
+488
+489</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1beta1/cluster_manager_client.rb', line 470</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1beta1/cluster_manager_client.rb', line 476</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_clusters'>list_clusters</span> \
     <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span>
@@ -4668,19 +4702,19 @@ retries, etc.</p>
       <pre class="lines">
 
 
-2487
-2488
-2489
-2490
-2491
-2492
 2493
 2494
 2495
-2496</pre>
+2496
+2497
+2498
+2499
+2500
+2501
+2502</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1beta1/cluster_manager_client.rb', line 2487</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1beta1/cluster_manager_client.rb', line 2493</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_locations'>list_locations</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -4902,12 +4936,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1581
-1582
-1583
-1584
-1585
-1586
 1587
 1588
 1589
@@ -4917,10 +4945,16 @@ retries, etc.</p>
 1593
 1594
 1595
-1596</pre>
+1596
+1597
+1598
+1599
+1600
+1601
+1602</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1beta1/cluster_manager_client.rb', line 1581</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1beta1/cluster_manager_client.rb', line 1587</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_node_pools'>list_node_pools</span> \
     <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span>
@@ -5129,12 +5163,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1365
-1366
-1367
-1368
-1369
-1370
 1371
 1372
 1373
@@ -5142,10 +5170,16 @@ retries, etc.</p>
 1375
 1376
 1377
-1378</pre>
+1378
+1379
+1380
+1381
+1382
+1383
+1384</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1beta1/cluster_manager_client.rb', line 1365</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1beta1/cluster_manager_client.rb', line 1371</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_operations'>list_operations</span> \
     <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span>
@@ -5370,12 +5404,6 @@ object.</p>
       <pre class="lines">
 
 
-2450
-2451
-2452
-2453
-2454
-2455
 2456
 2457
 2458
@@ -5383,10 +5411,16 @@ object.</p>
 2460
 2461
 2462
-2463</pre>
+2463
+2464
+2465
+2466
+2467
+2468
+2469</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1beta1/cluster_manager_client.rb', line 2450</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1beta1/cluster_manager_client.rb', line 2456</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_usable_subnetworks'>list_usable_subnetworks</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -5633,12 +5667,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1845
-1846
-1847
-1848
-1849
-1850
 1851
 1852
 1853
@@ -5650,10 +5678,16 @@ retries, etc.</p>
 1859
 1860
 1861
-1862</pre>
+1862
+1863
+1864
+1865
+1866
+1867
+1868</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1beta1/cluster_manager_client.rb', line 1845</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1beta1/cluster_manager_client.rb', line 1851</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_rollback_node_pool_upgrade'>rollback_node_pool_upgrade</span> \
     <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span>
@@ -5904,12 +5938,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1028
-1029
-1030
-1031
-1032
-1033
 1034
 1035
 1036
@@ -5921,10 +5949,16 @@ retries, etc.</p>
 1042
 1043
 1044
-1045</pre>
+1045
+1046
+1047
+1048
+1049
+1050
+1051</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1beta1/cluster_manager_client.rb', line 1028</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1beta1/cluster_manager_client.rb', line 1034</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_set_addons_config'>set_addons_config</span> \
     <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span>
@@ -6195,12 +6229,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1994
-1995
-1996
-1997
-1998
-1999
 2000
 2001
 2002
@@ -6214,10 +6242,16 @@ retries, etc.</p>
 2010
 2011
 2012
-2013</pre>
+2013
+2014
+2015
+2016
+2017
+2018
+2019</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1beta1/cluster_manager_client.rb', line 1994</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1beta1/cluster_manager_client.rb', line 2000</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_set_labels'>set_labels</span> \
     <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span>
@@ -6467,12 +6501,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-2060
-2061
-2062
-2063
-2064
-2065
 2066
 2067
 2068
@@ -6484,10 +6512,16 @@ retries, etc.</p>
 2074
 2075
 2076
-2077</pre>
+2077
+2078
+2079
+2080
+2081
+2082
+2083</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1beta1/cluster_manager_client.rb', line 2060</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1beta1/cluster_manager_client.rb', line 2066</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_set_legacy_abac'>set_legacy_abac</span> \
     <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span>
@@ -6741,12 +6775,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1098
-1099
-1100
-1101
-1102
-1103
 1104
 1105
 1106
@@ -6758,10 +6786,16 @@ retries, etc.</p>
 1112
 1113
 1114
-1115</pre>
+1115
+1116
+1117
+1118
+1119
+1120
+1121</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1beta1/cluster_manager_client.rb', line 1098</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1beta1/cluster_manager_client.rb', line 1104</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_set_locations'>set_locations</span> \
     <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span>
@@ -7015,12 +7049,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-893
-894
-895
-896
-897
-898
 899
 900
 901
@@ -7032,10 +7060,16 @@ retries, etc.</p>
 907
 908
 909
-910</pre>
+910
+911
+912
+913
+914
+915
+916</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1beta1/cluster_manager_client.rb', line 893</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1beta1/cluster_manager_client.rb', line 899</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_set_logging_service'>set_logging_service</span> \
     <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span>
@@ -7284,12 +7318,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-2382
-2383
-2384
-2385
-2386
-2387
 2388
 2389
 2390
@@ -7301,10 +7329,16 @@ retries, etc.</p>
 2396
 2397
 2398
-2399</pre>
+2399
+2400
+2401
+2402
+2403
+2404
+2405</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1beta1/cluster_manager_client.rb', line 2382</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1beta1/cluster_manager_client.rb', line 2388</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_set_maintenance_policy'>set_maintenance_policy</span> \
     <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span>
@@ -7575,12 +7609,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1245
-1246
-1247
-1248
-1249
-1250
 1251
 1252
 1253
@@ -7594,10 +7622,16 @@ retries, etc.</p>
 1261
 1262
 1263
-1264</pre>
+1264
+1265
+1266
+1267
+1268
+1269
+1270</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1beta1/cluster_manager_client.rb', line 1245</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1beta1/cluster_manager_client.rb', line 1251</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_set_master_auth'>set_master_auth</span> \
     <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span>
@@ -7853,12 +7887,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-961
-962
-963
-964
-965
-966
 967
 968
 969
@@ -7870,10 +7898,16 @@ retries, etc.</p>
 975
 976
 977
-978</pre>
+978
+979
+980
+981
+982
+983
+984</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1beta1/cluster_manager_client.rb', line 961</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1beta1/cluster_manager_client.rb', line 967</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_set_monitoring_service'>set_monitoring_service</span> \
     <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span>
@@ -8123,12 +8157,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-2317
-2318
-2319
-2320
-2321
-2322
 2323
 2324
 2325
@@ -8140,10 +8168,16 @@ retries, etc.</p>
 2331
 2332
 2333
-2334</pre>
+2334
+2335
+2336
+2337
+2338
+2339
+2340</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1beta1/cluster_manager_client.rb', line 2317</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1beta1/cluster_manager_client.rb', line 2323</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_set_network_policy'>set_network_policy</span> \
     <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span>
@@ -8413,12 +8447,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-823
-824
-825
-826
-827
-828
 829
 830
 831
@@ -8432,10 +8460,16 @@ retries, etc.</p>
 839
 840
 841
-842</pre>
+842
+843
+844
+845
+846
+847
+848</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1beta1/cluster_manager_client.rb', line 823</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1beta1/cluster_manager_client.rb', line 829</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_set_node_pool_autoscaling'>set_node_pool_autoscaling</span> \
     <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span>
@@ -8707,12 +8741,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1918
-1919
-1920
-1921
-1922
-1923
 1924
 1925
 1926
@@ -8726,10 +8754,16 @@ retries, etc.</p>
 1934
 1935
 1936
-1937</pre>
+1937
+1938
+1939
+1940
+1941
+1942
+1943</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1beta1/cluster_manager_client.rb', line 1918</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1beta1/cluster_manager_client.rb', line 1924</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_set_node_pool_management'>set_node_pool_management</span> \
     <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span>
@@ -8999,12 +9033,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-2249
-2250
-2251
-2252
-2253
-2254
 2255
 2256
 2257
@@ -9018,10 +9046,16 @@ retries, etc.</p>
 2265
 2266
 2267
-2268</pre>
+2268
+2269
+2270
+2271
+2272
+2273
+2274</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1beta1/cluster_manager_client.rb', line 2249</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1beta1/cluster_manager_client.rb', line 2255</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_set_node_pool_size'>set_node_pool_size</span> \
     <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span>
@@ -9268,12 +9302,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-2121
-2122
-2123
-2124
-2125
-2126
 2127
 2128
 2129
@@ -9285,10 +9313,16 @@ retries, etc.</p>
 2135
 2136
 2137
-2138</pre>
+2138
+2139
+2140
+2141
+2142
+2143
+2144</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1beta1/cluster_manager_client.rb', line 2121</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1beta1/cluster_manager_client.rb', line 2127</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_start_ip_rotation'>start_ip_rotation</span> \
     <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span>
@@ -9538,12 +9572,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-660
-661
-662
-663
-664
-665
 666
 667
 668
@@ -9555,10 +9583,16 @@ retries, etc.</p>
 674
 675
 676
-677</pre>
+677
+678
+679
+680
+681
+682
+683</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1beta1/cluster_manager_client.rb', line 660</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1beta1/cluster_manager_client.rb', line 666</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update_cluster'>update_cluster</span> \
     <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span>
@@ -9817,12 +9851,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1171
-1172
-1173
-1174
-1175
-1176
 1177
 1178
 1179
@@ -9834,10 +9862,16 @@ retries, etc.</p>
 1185
 1186
 1187
-1188</pre>
+1188
+1189
+1190
+1191
+1192
+1193
+1194</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1beta1/cluster_manager_client.rb', line 1171</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1beta1/cluster_manager_client.rb', line 1177</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update_master'>update_master</span> \
     <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span>
@@ -10135,12 +10169,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-746
-747
-748
-749
-750
-751
 752
 753
 754
@@ -10156,10 +10184,16 @@ retries, etc.</p>
 764
 765
 766
-767</pre>
+767
+768
+769
+770
+771
+772
+773</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1beta1/cluster_manager_client.rb', line 746</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1beta1/cluster_manager_client.rb', line 752</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update_node_pool'>update_node_pool</span> \
     <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span>
