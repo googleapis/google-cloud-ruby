@@ -459,7 +459,7 @@ this service.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(credentials: nil, scopes: ALL_SCOPES, client_config: {}, timeout: DEFAULT_TIMEOUT, metadata: nil, exception_transformer: nil, lib_name: nil, lib_version: &quot;&quot;)  &#x21d2; DataTransferServiceClient </a>
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(credentials: nil, scopes: ALL_SCOPES, client_config: {}, timeout: DEFAULT_TIMEOUT, metadata: nil, service_address: nil, service_port: nil, exception_transformer: nil, lib_name: nil, lib_version: &quot;&quot;)  &#x21d2; DataTransferServiceClient </a>
     
 
     
@@ -651,7 +651,7 @@ this service.</p>
     <div class="method_details first">
   <h3 class="signature first" id="initialize-instance_method">
   
-    #<strong>initialize</strong>(credentials: nil, scopes: ALL_SCOPES, client_config: {}, timeout: DEFAULT_TIMEOUT, metadata: nil, exception_transformer: nil, lib_name: nil, lib_version: &quot;&quot;)  &#x21d2; <tt><span class='object_link'><a href="" title="Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient (class)">DataTransferServiceClient</a></span></tt> 
+    #<strong>initialize</strong>(credentials: nil, scopes: ALL_SCOPES, client_config: {}, timeout: DEFAULT_TIMEOUT, metadata: nil, service_address: nil, service_port: nil, exception_transformer: nil, lib_name: nil, lib_version: &quot;&quot;)  &#x21d2; <tt><span class='object_link'><a href="" title="Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient (class)">DataTransferServiceClient</a></span></tt> 
   
 
   
@@ -761,6 +761,36 @@ or the specified config is missing data points.</p>
   
     <li>
       
+        <span class='name'>service_address</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Override for the service hostname, or <code>nil</code> to leave as the default.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>service_port</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Override for the service port, or <code>nil</code> to leave as the default.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
         <span class='name'>exception_transformer</span>
       
       
@@ -784,10 +814,6 @@ custom error handling.</p>
       <pre class="lines">
 
 
-184
-185
-186
-187
 188
 189
 190
@@ -970,10 +996,16 @@ custom error handling.</p>
 367
 368
 369
-370</pre>
+370
+371
+372
+373
+374
+375
+376</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/data_transfer/v1/data_transfer_service_client.rb', line 184</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/data_transfer/v1/data_transfer_service_client.rb', line 188</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span> \
     <span class='label'>credentials:</span> <span class='kw'>nil</span><span class='comma'>,</span>
@@ -981,6 +1013,8 @@ custom error handling.</p>
     <span class='label'>client_config:</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='comma'>,</span>
     <span class='label'>timeout:</span> <span class='const'><span class='object_link'><a href="#DEFAULT_TIMEOUT-constant" title="Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient::DEFAULT_TIMEOUT (constant)">DEFAULT_TIMEOUT</a></span></span><span class='comma'>,</span>
     <span class='label'>metadata:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+    <span class='label'>service_address:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+    <span class='label'>service_port:</span> <span class='kw'>nil</span><span class='comma'>,</span>
     <span class='label'>exception_transformer:</span> <span class='kw'>nil</span><span class='comma'>,</span>
     <span class='label'>lib_name:</span> <span class='kw'>nil</span><span class='comma'>,</span>
     <span class='label'>lib_version:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span>
@@ -1035,8 +1069,8 @@ custom error handling.</p>
   <span class='kw'>end</span>
 
   <span class='comment'># Allow overriding the service path/port in subclasses.
-</span>  <span class='id identifier rubyid_service_path'>service_path</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='op'>::</span><span class='const'>SERVICE_ADDRESS</span>
-  <span class='id identifier rubyid_port'>port</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='op'>::</span><span class='const'>DEFAULT_SERVICE_PORT</span>
+</span>  <span class='id identifier rubyid_service_path'>service_path</span> <span class='op'>=</span> <span class='id identifier rubyid_service_address'>service_address</span> <span class='op'>||</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='op'>::</span><span class='const'>SERVICE_ADDRESS</span>
+  <span class='id identifier rubyid_port'>port</span> <span class='op'>=</span> <span class='id identifier rubyid_service_port'>service_port</span> <span class='op'>||</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='op'>::</span><span class='const'>DEFAULT_SERVICE_PORT</span>
   <span class='id identifier rubyid_interceptors'>interceptors</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='op'>::</span><span class='const'>GRPC_INTERCEPTORS</span>
   <span class='ivar'>@data_transfer_service_stub</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='const'>Grpc</span><span class='period'>.</span><span class='id identifier rubyid_create_stub'>create_stub</span><span class='lparen'>(</span>
     <span class='id identifier rubyid_service_path'>service_path</span><span class='comma'>,</span>
@@ -1671,19 +1705,19 @@ retries, etc.</p>
       <pre class="lines">
 
 
-992
-993
-994
-995
-996
-997
 998
 999
 1000
-1001</pre>
+1001
+1002
+1003
+1004
+1005
+1006
+1007</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/data_transfer/v1/data_transfer_service_client.rb', line 992</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/data_transfer/v1/data_transfer_service_client.rb', line 998</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_check_valid_creds'>check_valid_creds</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -1920,12 +1954,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-515
-516
-517
-518
-519
-520
 521
 522
 523
@@ -1935,10 +1963,16 @@ retries, etc.</p>
 527
 528
 529
-530</pre>
+530
+531
+532
+533
+534
+535
+536</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/data_transfer/v1/data_transfer_service_client.rb', line 515</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/data_transfer/v1/data_transfer_service_client.rb', line 521</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_transfer_config'>create_transfer_config</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -2099,20 +2133,20 @@ retries, etc.</p>
       <pre class="lines">
 
 
-624
-625
-626
-627
-628
-629
 630
 631
 632
 633
-634</pre>
+634
+635
+636
+637
+638
+639
+640</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/data_transfer/v1/data_transfer_service_client.rb', line 624</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/data_transfer/v1/data_transfer_service_client.rb', line 630</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete_transfer_config'>delete_transfer_config</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -2267,20 +2301,20 @@ retries, etc.</p>
       <pre class="lines">
 
 
-831
-832
-833
-834
-835
-836
 837
 838
 839
 840
-841</pre>
+841
+842
+843
+844
+845
+846
+847</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/data_transfer/v1/data_transfer_service_client.rb', line 831</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/data_transfer/v1/data_transfer_service_client.rb', line 837</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete_transfer_run'>delete_transfer_run</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -2445,19 +2479,19 @@ retries, etc.</p>
       <pre class="lines">
 
 
-395
-396
-397
-398
-399
-400
 401
 402
 403
-404</pre>
+404
+405
+406
+407
+408
+409
+410</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/data_transfer/v1/data_transfer_service_client.rb', line 395</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/data_transfer/v1/data_transfer_service_client.rb', line 401</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_data_source'>get_data_source</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -2620,19 +2654,19 @@ retries, etc.</p>
       <pre class="lines">
 
 
-656
-657
-658
-659
-660
-661
 662
 663
 664
-665</pre>
+665
+666
+667
+668
+669
+670
+671</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/data_transfer/v1/data_transfer_service_client.rb', line 656</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/data_transfer/v1/data_transfer_service_client.rb', line 662</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_transfer_config'>get_transfer_config</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -2795,19 +2829,19 @@ retries, etc.</p>
       <pre class="lines">
 
 
-801
-802
-803
-804
-805
-806
 807
 808
 809
-810</pre>
+810
+811
+812
+813
+814
+815
+816</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/data_transfer/v1/data_transfer_service_client.rb', line 801</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/data_transfer/v1/data_transfer_service_client.rb', line 807</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_transfer_run'>get_transfer_run</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -3009,21 +3043,21 @@ object.</p>
       <pre class="lines">
 
 
-449
-450
-451
-452
-453
-454
 455
 456
 457
 458
 459
-460</pre>
+460
+461
+462
+463
+464
+465
+466</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/data_transfer/v1/data_transfer_service_client.rb', line 449</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/data_transfer/v1/data_transfer_service_client.rb', line 455</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_data_sources'>list_data_sources</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -3241,12 +3275,6 @@ object.</p>
       <pre class="lines">
 
 
-711
-712
-713
-714
-715
-716
 717
 718
 719
@@ -3254,10 +3282,16 @@ object.</p>
 721
 722
 723
-724</pre>
+724
+725
+726
+727
+728
+729
+730</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/data_transfer/v1/data_transfer_service_client.rb', line 711</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/data_transfer/v1/data_transfer_service_client.rb', line 717</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_transfer_configs'>list_transfer_configs</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -3478,12 +3512,6 @@ object.</p>
       <pre class="lines">
 
 
-952
-953
-954
-955
-956
-957
 958
 959
 960
@@ -3491,10 +3519,16 @@ object.</p>
 962
 963
 964
-965</pre>
+965
+966
+967
+968
+969
+970
+971</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/data_transfer/v1/data_transfer_service_client.rb', line 952</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/data_transfer/v1/data_transfer_service_client.rb', line 958</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_transfer_logs'>list_transfer_logs</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -3730,12 +3764,6 @@ object.</p>
       <pre class="lines">
 
 
-890
-891
-892
-893
-894
-895
 896
 897
 898
@@ -3745,10 +3773,16 @@ object.</p>
 902
 903
 904
-905</pre>
+905
+906
+907
+908
+909
+910
+911</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/data_transfer/v1/data_transfer_service_client.rb', line 890</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/data_transfer/v1/data_transfer_service_client.rb', line 896</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_transfer_runs'>list_transfer_runs</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -3963,12 +3997,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-766
-767
-768
-769
-770
-771
 772
 773
 774
@@ -3976,10 +4004,16 @@ retries, etc.</p>
 776
 777
 778
-779</pre>
+779
+780
+781
+782
+783
+784
+785</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/data_transfer/v1/data_transfer_service_client.rb', line 766</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/data_transfer/v1/data_transfer_service_client.rb', line 772</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_schedule_transfer_runs'>schedule_transfer_runs</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -4183,12 +4217,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1034
-1035
-1036
-1037
-1038
-1039
 1040
 1041
 1042
@@ -4196,10 +4224,16 @@ retries, etc.</p>
 1044
 1045
 1046
-1047</pre>
+1047
+1048
+1049
+1050
+1051
+1052
+1053</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/data_transfer/v1/data_transfer_service_client.rb', line 1034</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/data_transfer/v1/data_transfer_service_client.rb', line 1040</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_start_manual_transfer_runs'>start_manual_transfer_runs</span> \
     <span class='label'>parent:</span> <span class='kw'>nil</span><span class='comma'>,</span>
@@ -4442,12 +4476,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-587
-588
-589
-590
-591
-592
 593
 594
 595
@@ -4457,10 +4485,16 @@ retries, etc.</p>
 599
 600
 601
-602</pre>
+602
+603
+604
+605
+606
+607
+608</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/data_transfer/v1/data_transfer_service_client.rb', line 587</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/data_transfer/v1/data_transfer_service_client.rb', line 593</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update_transfer_config'>update_transfer_config</span> \
     <span class='id identifier rubyid_transfer_config'>transfer_config</span><span class='comma'>,</span>
