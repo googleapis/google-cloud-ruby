@@ -53,6 +53,9 @@ module Google
           # @private
           attr_reader :container_analysis_stub
 
+          # @return [Grafeas::V1::GrafeasClient] a client for the Grafeas service
+          attr_reader :grafeas_client
+
           # The default address of the service.
           SERVICE_ADDRESS = "containeranalysis.googleapis.com".freeze
 
@@ -139,6 +142,11 @@ module Google
             require "google/devtools/containeranalysis/v1/containeranalysis_services_pb"
 
             credentials ||= Google::Cloud::ContainerAnalysis::V1::Credentials.default
+
+            @grafeas_client = ::Grafeas.new(
+              credentials: credentials, scopes: scopes, client_config: client_config,
+              timeout: timeout, lib_name: lib_name, lib_version: lib_version,
+              service_address: service_address, service_port: service_port, metadata: metadata)
 
             if credentials.is_a?(String) || credentials.is_a?(Hash)
               updater_proc = Google::Cloud::ContainerAnalysis::V1::Credentials.new(credentials).updater_proc
