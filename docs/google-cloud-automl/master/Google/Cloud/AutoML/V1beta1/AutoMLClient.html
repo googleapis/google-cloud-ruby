@@ -732,7 +732,7 @@ this service.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(credentials: nil, scopes: ALL_SCOPES, client_config: {}, timeout: DEFAULT_TIMEOUT, metadata: nil, exception_transformer: nil, lib_name: nil, lib_version: &quot;&quot;)  &#x21d2; AutoMLClient </a>
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(credentials: nil, scopes: ALL_SCOPES, client_config: {}, timeout: DEFAULT_TIMEOUT, metadata: nil, service_address: nil, service_port: nil, exception_transformer: nil, lib_name: nil, lib_version: &quot;&quot;)  &#x21d2; AutoMLClient </a>
     
 
     
@@ -970,7 +970,7 @@ this service.</p>
     <div class="method_details first">
   <h3 class="signature first" id="initialize-instance_method">
   
-    #<strong>initialize</strong>(credentials: nil, scopes: ALL_SCOPES, client_config: {}, timeout: DEFAULT_TIMEOUT, metadata: nil, exception_transformer: nil, lib_name: nil, lib_version: &quot;&quot;)  &#x21d2; <tt><span class='object_link'><a href="" title="Google::Cloud::AutoML::V1beta1::AutoMLClient (class)">AutoMLClient</a></span></tt> 
+    #<strong>initialize</strong>(credentials: nil, scopes: ALL_SCOPES, client_config: {}, timeout: DEFAULT_TIMEOUT, metadata: nil, service_address: nil, service_port: nil, exception_transformer: nil, lib_name: nil, lib_version: &quot;&quot;)  &#x21d2; <tt><span class='object_link'><a href="" title="Google::Cloud::AutoML::V1beta1::AutoMLClient (class)">AutoMLClient</a></span></tt> 
   
 
   
@@ -1080,6 +1080,36 @@ or the specified config is missing data points.</p>
   
     <li>
       
+        <span class='name'>service_address</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Override for the service hostname, or <code>nil</code> to leave as the default.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>service_port</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Override for the service port, or <code>nil</code> to leave as the default.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
         <span class='name'>exception_transformer</span>
       
       
@@ -1103,10 +1133,6 @@ custom error handling.</p>
       <pre class="lines">
 
 
-276
-277
-278
-279
 280
 281
 282
@@ -1379,10 +1405,18 @@ custom error handling.</p>
 549
 550
 551
-552</pre>
+552
+553
+554
+555
+556
+557
+558
+559
+560</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/automl/v1beta1/automl_client.rb', line 276</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/automl/v1beta1/automl_client.rb', line 280</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span> \
     <span class='label'>credentials:</span> <span class='kw'>nil</span><span class='comma'>,</span>
@@ -1390,6 +1424,8 @@ custom error handling.</p>
     <span class='label'>client_config:</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='comma'>,</span>
     <span class='label'>timeout:</span> <span class='const'><span class='object_link'><a href="#DEFAULT_TIMEOUT-constant" title="Google::Cloud::AutoML::V1beta1::AutoMLClient::DEFAULT_TIMEOUT (constant)">DEFAULT_TIMEOUT</a></span></span><span class='comma'>,</span>
     <span class='label'>metadata:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+    <span class='label'>service_address:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+    <span class='label'>service_port:</span> <span class='kw'>nil</span><span class='comma'>,</span>
     <span class='label'>exception_transformer:</span> <span class='kw'>nil</span><span class='comma'>,</span>
     <span class='label'>lib_name:</span> <span class='kw'>nil</span><span class='comma'>,</span>
     <span class='label'>lib_version:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span>
@@ -1407,6 +1443,8 @@ custom error handling.</p>
     <span class='label'>client_config:</span> <span class='id identifier rubyid_client_config'>client_config</span><span class='comma'>,</span>
     <span class='label'>timeout:</span> <span class='id identifier rubyid_timeout'>timeout</span><span class='comma'>,</span>
     <span class='label'>lib_name:</span> <span class='id identifier rubyid_lib_name'>lib_name</span><span class='comma'>,</span>
+    <span class='label'>service_address:</span> <span class='id identifier rubyid_service_address'>service_address</span><span class='comma'>,</span>
+    <span class='label'>service_port:</span> <span class='id identifier rubyid_service_port'>service_port</span><span class='comma'>,</span>
     <span class='label'>lib_version:</span> <span class='id identifier rubyid_lib_version'>lib_version</span><span class='comma'>,</span>
     <span class='label'>metadata:</span> <span class='id identifier rubyid_metadata'>metadata</span><span class='comma'>,</span>
   <span class='rparen'>)</span>
@@ -1454,8 +1492,8 @@ custom error handling.</p>
   <span class='kw'>end</span>
 
   <span class='comment'># Allow overriding the service path/port in subclasses.
-</span>  <span class='id identifier rubyid_service_path'>service_path</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='op'>::</span><span class='const'>SERVICE_ADDRESS</span>
-  <span class='id identifier rubyid_port'>port</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='op'>::</span><span class='const'>DEFAULT_SERVICE_PORT</span>
+</span>  <span class='id identifier rubyid_service_path'>service_path</span> <span class='op'>=</span> <span class='id identifier rubyid_service_address'>service_address</span> <span class='op'>||</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='op'>::</span><span class='const'>SERVICE_ADDRESS</span>
+  <span class='id identifier rubyid_port'>port</span> <span class='op'>=</span> <span class='id identifier rubyid_service_port'>service_port</span> <span class='op'>||</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='op'>::</span><span class='const'>DEFAULT_SERVICE_PORT</span>
   <span class='id identifier rubyid_interceptors'>interceptors</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='op'>::</span><span class='const'>GRPC_INTERCEPTORS</span>
   <span class='ivar'>@automl_stub</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='const'>Grpc</span><span class='period'>.</span><span class='id identifier rubyid_create_stub'>create_stub</span><span class='lparen'>(</span>
     <span class='id identifier rubyid_service_path'>service_path</span><span class='comma'>,</span>
@@ -2582,21 +2620,21 @@ retries, etc.</p>
       <pre class="lines">
 
 
-582
-583
-584
-585
-586
-587
-588
-589
 590
 591
 592
-593</pre>
+593
+594
+595
+596
+597
+598
+599
+600
+601</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/automl/v1beta1/automl_client.rb', line 582</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/automl/v1beta1/automl_client.rb', line 590</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_dataset'>create_dataset</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -2767,14 +2805,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1001
-1002
-1003
-1004
-1005
-1006
-1007
-1008
 1009
 1010
 1011
@@ -2785,10 +2815,18 @@ retries, etc.</p>
 1016
 1017
 1018
-1019</pre>
+1019
+1020
+1021
+1022
+1023
+1024
+1025
+1026
+1027</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/automl/v1beta1/automl_client.rb', line 1001</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/automl/v1beta1/automl_client.rb', line 1009</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_model'>create_model</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -2946,14 +2984,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-780
-781
-782
-783
-784
-785
-786
-787
 788
 789
 790
@@ -2962,10 +2992,18 @@ retries, etc.</p>
 793
 794
 795
-796</pre>
+796
+797
+798
+799
+800
+801
+802
+803
+804</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/automl/v1beta1/automl_client.rb', line 780</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/automl/v1beta1/automl_client.rb', line 788</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete_dataset'>delete_dataset</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -3121,14 +3159,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1163
-1164
-1165
-1166
-1167
-1168
-1169
-1170
 1171
 1172
 1173
@@ -3137,10 +3167,18 @@ retries, etc.</p>
 1176
 1177
 1178
-1179</pre>
+1179
+1180
+1181
+1182
+1183
+1184
+1185
+1186
+1187</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/automl/v1beta1/automl_client.rb', line 1163</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/automl/v1beta1/automl_client.rb', line 1171</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete_model'>delete_model</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -3320,14 +3358,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1238
-1239
-1240
-1241
-1242
-1243
-1244
-1245
 1246
 1247
 1248
@@ -3338,10 +3368,18 @@ retries, etc.</p>
 1253
 1254
 1255
-1256</pre>
+1256
+1257
+1258
+1259
+1260
+1261
+1262
+1263
+1264</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/automl/v1beta1/automl_client.rb', line 1238</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/automl/v1beta1/automl_client.rb', line 1246</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_deploy_model'>deploy_model</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -3517,14 +3555,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-928
-929
-930
-931
-932
-933
-934
-935
 936
 937
 938
@@ -3535,10 +3565,18 @@ retries, etc.</p>
 943
 944
 945
-946</pre>
+946
+947
+948
+949
+950
+951
+952
+953
+954</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/automl/v1beta1/automl_client.rb', line 928</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/automl/v1beta1/automl_client.rb', line 936</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_export_data'>export_data</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -3726,14 +3764,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1493
-1494
-1495
-1496
-1497
-1498
-1499
-1500
 1501
 1502
 1503
@@ -3744,10 +3774,18 @@ retries, etc.</p>
 1508
 1509
 1510
-1511</pre>
+1511
+1512
+1513
+1514
+1515
+1516
+1517
+1518
+1519</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/automl/v1beta1/automl_client.rb', line 1493</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/automl/v1beta1/automl_client.rb', line 1501</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_export_evaluated_examples'>export_evaluated_examples</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -3928,14 +3966,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1410
-1411
-1412
-1413
-1414
-1415
-1416
-1417
 1418
 1419
 1420
@@ -3946,10 +3976,18 @@ retries, etc.</p>
 1425
 1426
 1427
-1428</pre>
+1428
+1429
+1430
+1431
+1432
+1433
+1434
+1435
+1436</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/automl/v1beta1/automl_client.rb', line 1410</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/automl/v1beta1/automl_client.rb', line 1418</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_export_model'>export_model</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -4120,19 +4158,19 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1602
-1603
-1604
-1605
-1606
-1607
-1608
-1609
 1610
-1611</pre>
+1611
+1612
+1613
+1614
+1615
+1616
+1617
+1618
+1619</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/automl/v1beta1/automl_client.rb', line 1602</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/automl/v1beta1/automl_client.rb', line 1610</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_annotation_spec'>get_annotation_spec</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -4311,21 +4349,21 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1781
-1782
-1783
-1784
-1785
-1786
-1787
-1788
 1789
 1790
 1791
-1792</pre>
+1792
+1793
+1794
+1795
+1796
+1797
+1798
+1799
+1800</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/automl/v1beta1/automl_client.rb', line 1781</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/automl/v1beta1/automl_client.rb', line 1789</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_column_spec'>get_column_spec</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -4489,19 +4527,19 @@ retries, etc.</p>
       <pre class="lines">
 
 
-659
-660
-661
-662
-663
-664
-665
-666
 667
-668</pre>
+668
+669
+670
+671
+672
+673
+674
+675
+676</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/automl/v1beta1/automl_client.rb', line 659</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/automl/v1beta1/automl_client.rb', line 667</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_dataset'>get_dataset</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -4663,19 +4701,19 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1040
-1041
-1042
-1043
-1044
-1045
-1046
-1047
 1048
-1049</pre>
+1049
+1050
+1051
+1052
+1053
+1054
+1055
+1056
+1057</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/automl/v1beta1/automl_client.rb', line 1040</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/automl/v1beta1/automl_client.rb', line 1048</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_model'>get_model</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -4837,19 +4875,19 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1343
-1344
-1345
-1346
-1347
-1348
-1349
-1350
 1351
-1352</pre>
+1352
+1353
+1354
+1355
+1356
+1357
+1358
+1359
+1360</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/automl/v1beta1/automl_client.rb', line 1343</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/automl/v1beta1/automl_client.rb', line 1351</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_model_evaluation'>get_model_evaluation</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -5028,21 +5066,21 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1636
-1637
-1638
-1639
-1640
-1641
-1642
-1643
 1644
 1645
 1646
-1647</pre>
+1647
+1648
+1649
+1650
+1651
+1652
+1653
+1654
+1655</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/automl/v1beta1/automl_client.rb', line 1636</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/automl/v1beta1/automl_client.rb', line 1644</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_table_spec'>get_table_spec</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -5222,14 +5260,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-857
-858
-859
-860
-861
-862
-863
-864
 865
 866
 867
@@ -5240,10 +5270,18 @@ retries, etc.</p>
 872
 873
 874
-875</pre>
+875
+876
+877
+878
+879
+880
+881
+882
+883</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/automl/v1beta1/automl_client.rb', line 857</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/automl/v1beta1/automl_client.rb', line 865</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_import_data'>import_data</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -5484,14 +5522,6 @@ object.</p>
       <pre class="lines">
 
 
-1841
-1842
-1843
-1844
-1845
-1846
-1847
-1848
 1849
 1850
 1851
@@ -5499,10 +5529,18 @@ object.</p>
 1853
 1854
 1855
-1856</pre>
+1856
+1857
+1858
+1859
+1860
+1861
+1862
+1863
+1864</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/automl/v1beta1/automl_client.rb', line 1841</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/automl/v1beta1/automl_client.rb', line 1849</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_column_specs'>list_column_specs</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -5733,23 +5771,23 @@ object.</p>
       <pre class="lines">
 
 
-719
-720
-721
-722
-723
-724
-725
-726
 727
 728
 729
 730
 731
-732</pre>
+732
+733
+734
+735
+736
+737
+738
+739
+740</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/automl/v1beta1/automl_client.rb', line 719</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/automl/v1beta1/automl_client.rb', line 727</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_datasets'>list_datasets</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -5987,23 +6025,23 @@ object.</p>
       <pre class="lines">
 
 
-1568
-1569
-1570
-1571
-1572
-1573
-1574
-1575
 1576
 1577
 1578
 1579
 1580
-1581</pre>
+1581
+1582
+1583
+1584
+1585
+1586
+1587
+1588
+1589</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/automl/v1beta1/automl_client.rb', line 1568</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/automl/v1beta1/automl_client.rb', line 1576</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_model_evaluations'>list_model_evaluations</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -6234,23 +6272,23 @@ object.</p>
       <pre class="lines">
 
 
-1102
-1103
-1104
-1105
-1106
-1107
-1108
-1109
 1110
 1111
 1112
 1113
 1114
-1115</pre>
+1115
+1116
+1117
+1118
+1119
+1120
+1121
+1122
+1123</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/automl/v1beta1/automl_client.rb', line 1102</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/automl/v1beta1/automl_client.rb', line 1110</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_models'>list_models</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -6486,14 +6524,6 @@ object.</p>
       <pre class="lines">
 
 
-1696
-1697
-1698
-1699
-1700
-1701
-1702
-1703
 1704
 1705
 1706
@@ -6501,10 +6531,18 @@ object.</p>
 1708
 1709
 1710
-1711</pre>
+1711
+1712
+1713
+1714
+1715
+1716
+1717
+1718
+1719</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/automl/v1beta1/automl_client.rb', line 1696</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/automl/v1beta1/automl_client.rb', line 1704</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_table_specs'>list_table_specs</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -6661,14 +6699,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1306
-1307
-1308
-1309
-1310
-1311
-1312
-1313
 1314
 1315
 1316
@@ -6677,10 +6707,18 @@ retries, etc.</p>
 1319
 1320
 1321
-1322</pre>
+1322
+1323
+1324
+1325
+1326
+1327
+1328
+1329
+1330</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/automl/v1beta1/automl_client.rb', line 1306</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/automl/v1beta1/automl_client.rb', line 1314</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_undeploy_model'>undeploy_model</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -6875,21 +6913,21 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1890
-1891
-1892
-1893
-1894
-1895
-1896
-1897
 1898
 1899
 1900
-1901</pre>
+1901
+1902
+1903
+1904
+1905
+1906
+1907
+1908
+1909</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/automl/v1beta1/automl_client.rb', line 1890</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/automl/v1beta1/automl_client.rb', line 1898</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update_column_spec'>update_column_spec</span> \
     <span class='id identifier rubyid_column_spec'>column_spec</span><span class='comma'>,</span>
@@ -7079,21 +7117,21 @@ retries, etc.</p>
       <pre class="lines">
 
 
-627
-628
-629
-630
-631
-632
-633
-634
 635
 636
 637
-638</pre>
+638
+639
+640
+641
+642
+643
+644
+645
+646</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/automl/v1beta1/automl_client.rb', line 627</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/automl/v1beta1/automl_client.rb', line 635</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update_dataset'>update_dataset</span> \
     <span class='id identifier rubyid_dataset'>dataset</span><span class='comma'>,</span>
@@ -7283,21 +7321,21 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1745
-1746
-1747
-1748
-1749
-1750
-1751
-1752
 1753
 1754
 1755
-1756</pre>
+1756
+1757
+1758
+1759
+1760
+1761
+1762
+1763
+1764</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/automl/v1beta1/automl_client.rb', line 1745</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/automl/v1beta1/automl_client.rb', line 1753</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update_table_spec'>update_table_spec</span> \
     <span class='id identifier rubyid_table_spec'>table_spec</span><span class='comma'>,</span>
