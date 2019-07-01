@@ -327,7 +327,7 @@ this service.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(credentials: nil, scopes: ALL_SCOPES, client_config: {}, timeout: DEFAULT_TIMEOUT, metadata: nil, exception_transformer: nil, lib_name: nil, lib_version: &quot;&quot;)  &#x21d2; UptimeCheckServiceClient </a>
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(credentials: nil, scopes: ALL_SCOPES, client_config: {}, timeout: DEFAULT_TIMEOUT, metadata: nil, service_address: nil, service_port: nil, exception_transformer: nil, lib_name: nil, lib_version: &quot;&quot;)  &#x21d2; UptimeCheckServiceClient </a>
     
 
     
@@ -427,7 +427,7 @@ this service.</p>
     <div class="method_details first">
   <h3 class="signature first" id="initialize-instance_method">
   
-    #<strong>initialize</strong>(credentials: nil, scopes: ALL_SCOPES, client_config: {}, timeout: DEFAULT_TIMEOUT, metadata: nil, exception_transformer: nil, lib_name: nil, lib_version: &quot;&quot;)  &#x21d2; <tt><span class='object_link'><a href="" title="Google::Cloud::Monitoring::V3::UptimeCheckServiceClient (class)">UptimeCheckServiceClient</a></span></tt> 
+    #<strong>initialize</strong>(credentials: nil, scopes: ALL_SCOPES, client_config: {}, timeout: DEFAULT_TIMEOUT, metadata: nil, service_address: nil, service_port: nil, exception_transformer: nil, lib_name: nil, lib_version: &quot;&quot;)  &#x21d2; <tt><span class='object_link'><a href="" title="Google::Cloud::Monitoring::V3::UptimeCheckServiceClient (class)">UptimeCheckServiceClient</a></span></tt> 
   
 
   
@@ -537,6 +537,36 @@ or the specified config is missing data points.</p>
   
     <li>
       
+        <span class='name'>service_address</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Override for the service hostname, or <code>nil</code> to leave as the default.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>service_port</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Override for the service port, or <code>nil</code> to leave as the default.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
         <span class='name'>exception_transformer</span>
       
       
@@ -560,10 +590,6 @@ custom error handling.</p>
       <pre class="lines">
 
 
-146
-147
-148
-149
 150
 151
 152
@@ -679,10 +705,16 @@ custom error handling.</p>
 262
 263
 264
-265</pre>
+265
+266
+267
+268
+269
+270
+271</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/uptime_check_service_client.rb', line 146</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/uptime_check_service_client.rb', line 150</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span> \
     <span class='label'>credentials:</span> <span class='kw'>nil</span><span class='comma'>,</span>
@@ -690,6 +722,8 @@ custom error handling.</p>
     <span class='label'>client_config:</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='comma'>,</span>
     <span class='label'>timeout:</span> <span class='const'><span class='object_link'><a href="#DEFAULT_TIMEOUT-constant" title="Google::Cloud::Monitoring::V3::UptimeCheckServiceClient::DEFAULT_TIMEOUT (constant)">DEFAULT_TIMEOUT</a></span></span><span class='comma'>,</span>
     <span class='label'>metadata:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+    <span class='label'>service_address:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+    <span class='label'>service_port:</span> <span class='kw'>nil</span><span class='comma'>,</span>
     <span class='label'>exception_transformer:</span> <span class='kw'>nil</span><span class='comma'>,</span>
     <span class='label'>lib_name:</span> <span class='kw'>nil</span><span class='comma'>,</span>
     <span class='label'>lib_version:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span>
@@ -744,8 +778,8 @@ custom error handling.</p>
   <span class='kw'>end</span>
 
   <span class='comment'># Allow overriding the service path/port in subclasses.
-</span>  <span class='id identifier rubyid_service_path'>service_path</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='op'>::</span><span class='const'>SERVICE_ADDRESS</span>
-  <span class='id identifier rubyid_port'>port</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='op'>::</span><span class='const'>DEFAULT_SERVICE_PORT</span>
+</span>  <span class='id identifier rubyid_service_path'>service_path</span> <span class='op'>=</span> <span class='id identifier rubyid_service_address'>service_address</span> <span class='op'>||</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='op'>::</span><span class='const'>SERVICE_ADDRESS</span>
+  <span class='id identifier rubyid_port'>port</span> <span class='op'>=</span> <span class='id identifier rubyid_service_port'>service_port</span> <span class='op'>||</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='op'>::</span><span class='const'>DEFAULT_SERVICE_PORT</span>
   <span class='id identifier rubyid_interceptors'>interceptors</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='op'>::</span><span class='const'>GRPC_INTERCEPTORS</span>
   <span class='ivar'>@uptime_check_service_stub</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='const'>Grpc</span><span class='period'>.</span><span class='id identifier rubyid_create_stub'>create_stub</span><span class='lparen'>(</span>
     <span class='id identifier rubyid_service_path'>service_path</span><span class='comma'>,</span>
@@ -1145,21 +1179,21 @@ retries, etc.</p>
       <pre class="lines">
 
 
-383
-384
-385
-386
-387
-388
 389
 390
 391
 392
 393
-394</pre>
+394
+395
+396
+397
+398
+399
+400</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/uptime_check_service_client.rb', line 383</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/uptime_check_service_client.rb', line 389</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_uptime_check_config'>create_uptime_check_config</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -1317,20 +1351,20 @@ retries, etc.</p>
       <pre class="lines">
 
 
-473
-474
-475
-476
-477
-478
 479
 480
 481
 482
-483</pre>
+483
+484
+485
+486
+487
+488
+489</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/uptime_check_service_client.rb', line 473</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/uptime_check_service_client.rb', line 479</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete_uptime_check_config'>delete_uptime_check_config</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -1494,19 +1528,19 @@ retries, etc.</p>
       <pre class="lines">
 
 
-345
-346
-347
-348
-349
-350
 351
 352
 353
-354</pre>
+354
+355
+356
+357
+358
+359
+360</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/uptime_check_service_client.rb', line 345</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/uptime_check_service_client.rb', line 351</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_uptime_check_config'>get_uptime_check_config</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -1708,21 +1742,21 @@ object.</p>
       <pre class="lines">
 
 
-312
-313
-314
-315
-316
-317
 318
 319
 320
 321
 322
-323</pre>
+323
+324
+325
+326
+327
+328
+329</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/uptime_check_service_client.rb', line 312</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/uptime_check_service_client.rb', line 318</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_uptime_check_configs'>list_uptime_check_configs</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -1908,19 +1942,19 @@ object.</p>
       <pre class="lines">
 
 
-523
-524
-525
-526
-527
-528
 529
 530
 531
-532</pre>
+532
+533
+534
+535
+536
+537
+538</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/uptime_check_service_client.rb', line 523</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/uptime_check_service_client.rb', line 529</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_uptime_check_ips'>list_uptime_check_ips</span> \
     <span class='label'>page_size:</span> <span class='kw'>nil</span><span class='comma'>,</span>
@@ -2119,21 +2153,21 @@ retries, etc.</p>
       <pre class="lines">
 
 
-439
-440
-441
-442
-443
-444
 445
 446
 447
 448
 449
-450</pre>
+450
+451
+452
+453
+454
+455
+456</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/uptime_check_service_client.rb', line 439</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/uptime_check_service_client.rb', line 445</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update_uptime_check_config'>update_uptime_check_config</span> \
     <span class='id identifier rubyid_uptime_check_config'>uptime_check_config</span><span class='comma'>,</span>
