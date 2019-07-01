@@ -459,7 +459,7 @@ this service.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(credentials: nil, scopes: ALL_SCOPES, client_config: {}, timeout: DEFAULT_TIMEOUT, metadata: nil, exception_transformer: nil, lib_name: nil, lib_version: &quot;&quot;)  &#x21d2; CloudTasksClient </a>
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(credentials: nil, scopes: ALL_SCOPES, client_config: {}, timeout: DEFAULT_TIMEOUT, metadata: nil, service_address: nil, service_port: nil, exception_transformer: nil, lib_name: nil, lib_version: &quot;&quot;)  &#x21d2; CloudTasksClient </a>
     
 
     
@@ -789,7 +789,7 @@ this service.</p>
     <div class="method_details first">
   <h3 class="signature first" id="initialize-instance_method">
   
-    #<strong>initialize</strong>(credentials: nil, scopes: ALL_SCOPES, client_config: {}, timeout: DEFAULT_TIMEOUT, metadata: nil, exception_transformer: nil, lib_name: nil, lib_version: &quot;&quot;)  &#x21d2; <tt><span class='object_link'><a href="" title="Google::Cloud::Tasks::V2::CloudTasksClient (class)">CloudTasksClient</a></span></tt> 
+    #<strong>initialize</strong>(credentials: nil, scopes: ALL_SCOPES, client_config: {}, timeout: DEFAULT_TIMEOUT, metadata: nil, service_address: nil, service_port: nil, exception_transformer: nil, lib_name: nil, lib_version: &quot;&quot;)  &#x21d2; <tt><span class='object_link'><a href="" title="Google::Cloud::Tasks::V2::CloudTasksClient (class)">CloudTasksClient</a></span></tt> 
   
 
   
@@ -899,6 +899,36 @@ or the specified config is missing data points.</p>
   
     <li>
       
+        <span class='name'>service_address</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Override for the service hostname, or <code>nil</code> to leave as the default.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>service_port</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Override for the service port, or <code>nil</code> to leave as the default.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
         <span class='name'>exception_transformer</span>
       
       
@@ -922,10 +952,6 @@ custom error handling.</p>
       <pre class="lines">
 
 
-177
-178
-179
-180
 181
 182
 183
@@ -1124,10 +1150,16 @@ custom error handling.</p>
 376
 377
 378
-379</pre>
+379
+380
+381
+382
+383
+384
+385</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2/cloud_tasks_client.rb', line 177</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2/cloud_tasks_client.rb', line 181</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span> \
     <span class='label'>credentials:</span> <span class='kw'>nil</span><span class='comma'>,</span>
@@ -1135,6 +1167,8 @@ custom error handling.</p>
     <span class='label'>client_config:</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='comma'>,</span>
     <span class='label'>timeout:</span> <span class='const'><span class='object_link'><a href="#DEFAULT_TIMEOUT-constant" title="Google::Cloud::Tasks::V2::CloudTasksClient::DEFAULT_TIMEOUT (constant)">DEFAULT_TIMEOUT</a></span></span><span class='comma'>,</span>
     <span class='label'>metadata:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+    <span class='label'>service_address:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+    <span class='label'>service_port:</span> <span class='kw'>nil</span><span class='comma'>,</span>
     <span class='label'>exception_transformer:</span> <span class='kw'>nil</span><span class='comma'>,</span>
     <span class='label'>lib_name:</span> <span class='kw'>nil</span><span class='comma'>,</span>
     <span class='label'>lib_version:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span>
@@ -1189,8 +1223,8 @@ custom error handling.</p>
   <span class='kw'>end</span>
 
   <span class='comment'># Allow overriding the service path/port in subclasses.
-</span>  <span class='id identifier rubyid_service_path'>service_path</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='op'>::</span><span class='const'>SERVICE_ADDRESS</span>
-  <span class='id identifier rubyid_port'>port</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='op'>::</span><span class='const'>DEFAULT_SERVICE_PORT</span>
+</span>  <span class='id identifier rubyid_service_path'>service_path</span> <span class='op'>=</span> <span class='id identifier rubyid_service_address'>service_address</span> <span class='op'>||</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='op'>::</span><span class='const'>SERVICE_ADDRESS</span>
+  <span class='id identifier rubyid_port'>port</span> <span class='op'>=</span> <span class='id identifier rubyid_service_port'>service_port</span> <span class='op'>||</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='op'>::</span><span class='const'>DEFAULT_SERVICE_PORT</span>
   <span class='id identifier rubyid_interceptors'>interceptors</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='op'>::</span><span class='const'>GRPC_INTERCEPTORS</span>
   <span class='ivar'>@cloud_tasks_stub</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='const'>Grpc</span><span class='period'>.</span><span class='id identifier rubyid_create_stub'>create_stub</span><span class='lparen'>(</span>
     <span class='id identifier rubyid_service_path'>service_path</span><span class='comma'>,</span>
@@ -1903,21 +1937,21 @@ retries, etc.</p>
       <pre class="lines">
 
 
-537
-538
-539
-540
-541
-542
 543
 544
 545
 546
 547
-548</pre>
+548
+549
+550
+551
+552
+553
+554</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2/cloud_tasks_client.rb', line 537</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2/cloud_tasks_client.rb', line 543</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_queue'>create_queue</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -2172,12 +2206,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1130
-1131
-1132
-1133
-1134
-1135
 1136
 1137
 1138
@@ -2185,10 +2213,16 @@ retries, etc.</p>
 1140
 1141
 1142
-1143</pre>
+1143
+1144
+1145
+1146
+1147
+1148
+1149</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2/cloud_tasks_client.rb', line 1130</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2/cloud_tasks_client.rb', line 1136</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_task'>create_task</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -2360,20 +2394,20 @@ retries, etc.</p>
       <pre class="lines">
 
 
-647
-648
-649
-650
-651
-652
 653
 654
 655
 656
-657</pre>
+657
+658
+659
+660
+661
+662
+663</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2/cloud_tasks_client.rb', line 647</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2/cloud_tasks_client.rb', line 653</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete_queue'>delete_queue</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -2534,20 +2568,20 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1170
-1171
-1172
-1173
-1174
-1175
 1176
 1177
 1178
 1179
-1180</pre>
+1180
+1181
+1182
+1183
+1184
+1185
+1186</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2/cloud_tasks_client.rb', line 1170</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2/cloud_tasks_client.rb', line 1176</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete_task'>delete_task</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -2721,19 +2755,19 @@ retries, etc.</p>
       <pre class="lines">
 
 
-809
-810
-811
-812
-813
-814
 815
 816
 817
-818</pre>
+818
+819
+820
+821
+822
+823
+824</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2/cloud_tasks_client.rb', line 809</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2/cloud_tasks_client.rb', line 815</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_iam_policy'>get_iam_policy</span> \
     <span class='id identifier rubyid_resource'>resource</span><span class='comma'>,</span>
@@ -2898,19 +2932,19 @@ retries, etc.</p>
       <pre class="lines">
 
 
-478
-479
-480
-481
-482
-483
 484
 485
 486
-487</pre>
+487
+488
+489
+490
+491
+492
+493</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2/cloud_tasks_client.rb', line 478</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2/cloud_tasks_client.rb', line 484</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_queue'>get_queue</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -3101,21 +3135,21 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1035
-1036
-1037
-1038
-1039
-1040
 1041
 1042
 1043
 1044
 1045
-1046</pre>
+1046
+1047
+1048
+1049
+1050
+1051
+1052</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2/cloud_tasks_client.rb', line 1035</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2/cloud_tasks_client.rb', line 1041</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_task'>get_task</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -3347,12 +3381,6 @@ object.</p>
       <pre class="lines">
 
 
-441
-442
-443
-444
-445
-446
 447
 448
 449
@@ -3360,10 +3388,16 @@ object.</p>
 451
 452
 453
-454</pre>
+454
+455
+456
+457
+458
+459
+460</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2/cloud_tasks_client.rb', line 441</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2/cloud_tasks_client.rb', line 447</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_queues'>list_queues</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -3604,12 +3638,6 @@ object.</p>
       <pre class="lines">
 
 
-985
-986
-987
-988
-989
-990
 991
 992
 993
@@ -3617,10 +3645,16 @@ object.</p>
 995
 996
 997
-998</pre>
+998
+999
+1000
+1001
+1002
+1003
+1004</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2/cloud_tasks_client.rb', line 985</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2/cloud_tasks_client.rb', line 991</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_tasks'>list_tasks</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -3874,19 +3908,19 @@ retries, etc.</p>
       <pre class="lines">
 
 
-725
-726
-727
-728
-729
-730
 731
 732
 733
-734</pre>
+734
+735
+736
+737
+738
+739
+740</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2/cloud_tasks_client.rb', line 725</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2/cloud_tasks_client.rb', line 731</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_pause_queue'>pause_queue</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -4124,19 +4158,19 @@ retries, etc.</p>
       <pre class="lines">
 
 
-686
-687
-688
-689
-690
-691
 692
 693
 694
-695</pre>
+695
+696
+697
+698
+699
+700
+701</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2/cloud_tasks_client.rb', line 686</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2/cloud_tasks_client.rb', line 692</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_purge_queue'>purge_queue</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -4403,19 +4437,19 @@ retries, etc.</p>
       <pre class="lines">
 
 
-770
-771
-772
-773
-774
-775
 776
 777
 778
-779</pre>
+779
+780
+781
+782
+783
+784
+785</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2/cloud_tasks_client.rb', line 770</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2/cloud_tasks_client.rb', line 776</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_resume_queue'>resume_queue</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -4629,21 +4663,21 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1240
-1241
-1242
-1243
-1244
-1245
 1246
 1247
 1248
 1249
 1250
-1251</pre>
+1251
+1252
+1253
+1254
+1255
+1256
+1257</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2/cloud_tasks_client.rb', line 1240</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2/cloud_tasks_client.rb', line 1246</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_run_task'>run_task</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -4843,21 +4877,21 @@ retries, etc.</p>
       <pre class="lines">
 
 
-860
-861
-862
-863
-864
-865
 866
 867
 868
 869
 870
-871</pre>
+871
+872
+873
+874
+875
+876
+877</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2/cloud_tasks_client.rb', line 860</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2/cloud_tasks_client.rb', line 866</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_set_iam_policy'>set_iam_policy</span> \
     <span class='id identifier rubyid_resource'>resource</span><span class='comma'>,</span>
@@ -5150,21 +5184,21 @@ retries, etc.</p>
       <pre class="lines">
 
 
-907
-908
-909
-910
-911
-912
 913
 914
 915
 916
 917
-918</pre>
+918
+919
+920
+921
+922
+923
+924</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2/cloud_tasks_client.rb', line 907</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2/cloud_tasks_client.rb', line 913</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_test_iam_permissions'>test_iam_permissions</span> \
     <span class='id identifier rubyid_resource'>resource</span><span class='comma'>,</span>
@@ -5373,21 +5407,21 @@ retries, etc.</p>
       <pre class="lines">
 
 
-601
-602
-603
-604
-605
-606
 607
 608
 609
 610
 611
-612</pre>
+612
+613
+614
+615
+616
+617
+618</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2/cloud_tasks_client.rb', line 601</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2/cloud_tasks_client.rb', line 607</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update_queue'>update_queue</span> \
     <span class='id identifier rubyid_queue'>queue</span><span class='comma'>,</span>
