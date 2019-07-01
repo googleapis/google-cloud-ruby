@@ -322,7 +322,7 @@ this service.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(credentials: nil, scopes: ALL_SCOPES, client_config: {}, timeout: DEFAULT_TIMEOUT, metadata: nil, exception_transformer: nil, lib_name: nil, lib_version: &quot;&quot;)  &#x21d2; MetricsServiceV2Client </a>
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(credentials: nil, scopes: ALL_SCOPES, client_config: {}, timeout: DEFAULT_TIMEOUT, metadata: nil, service_address: nil, service_port: nil, exception_transformer: nil, lib_name: nil, lib_version: &quot;&quot;)  &#x21d2; MetricsServiceV2Client </a>
     
 
     
@@ -399,7 +399,7 @@ this service.</p>
     <div class="method_details first">
   <h3 class="signature first" id="initialize-instance_method">
   
-    #<strong>initialize</strong>(credentials: nil, scopes: ALL_SCOPES, client_config: {}, timeout: DEFAULT_TIMEOUT, metadata: nil, exception_transformer: nil, lib_name: nil, lib_version: &quot;&quot;)  &#x21d2; <tt><span class='object_link'><a href="" title="Google::Cloud::Logging::V2::MetricsServiceV2Client (class)">MetricsServiceV2Client</a></span></tt> 
+    #<strong>initialize</strong>(credentials: nil, scopes: ALL_SCOPES, client_config: {}, timeout: DEFAULT_TIMEOUT, metadata: nil, service_address: nil, service_port: nil, exception_transformer: nil, lib_name: nil, lib_version: &quot;&quot;)  &#x21d2; <tt><span class='object_link'><a href="" title="Google::Cloud::Logging::V2::MetricsServiceV2Client (class)">MetricsServiceV2Client</a></span></tt> 
   
 
   
@@ -509,6 +509,36 @@ or the specified config is missing data points.</p>
   
     <li>
       
+        <span class='name'>service_address</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Override for the service hostname, or <code>nil</code> to leave as the default.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>service_port</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Override for the service port, or <code>nil</code> to leave as the default.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
         <span class='name'>exception_transformer</span>
       
       
@@ -532,10 +562,6 @@ custom error handling.</p>
       <pre class="lines">
 
 
-136
-137
-138
-139
 140
 141
 142
@@ -646,10 +672,16 @@ custom error handling.</p>
 247
 248
 249
-250</pre>
+250
+251
+252
+253
+254
+255
+256</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/metrics_service_v2_client.rb', line 136</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/metrics_service_v2_client.rb', line 140</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span> \
     <span class='label'>credentials:</span> <span class='kw'>nil</span><span class='comma'>,</span>
@@ -657,6 +689,8 @@ custom error handling.</p>
     <span class='label'>client_config:</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='comma'>,</span>
     <span class='label'>timeout:</span> <span class='const'><span class='object_link'><a href="#DEFAULT_TIMEOUT-constant" title="Google::Cloud::Logging::V2::MetricsServiceV2Client::DEFAULT_TIMEOUT (constant)">DEFAULT_TIMEOUT</a></span></span><span class='comma'>,</span>
     <span class='label'>metadata:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+    <span class='label'>service_address:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+    <span class='label'>service_port:</span> <span class='kw'>nil</span><span class='comma'>,</span>
     <span class='label'>exception_transformer:</span> <span class='kw'>nil</span><span class='comma'>,</span>
     <span class='label'>lib_name:</span> <span class='kw'>nil</span><span class='comma'>,</span>
     <span class='label'>lib_version:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span>
@@ -711,8 +745,8 @@ custom error handling.</p>
   <span class='kw'>end</span>
 
   <span class='comment'># Allow overriding the service path/port in subclasses.
-</span>  <span class='id identifier rubyid_service_path'>service_path</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='op'>::</span><span class='const'>SERVICE_ADDRESS</span>
-  <span class='id identifier rubyid_port'>port</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='op'>::</span><span class='const'>DEFAULT_SERVICE_PORT</span>
+</span>  <span class='id identifier rubyid_service_path'>service_path</span> <span class='op'>=</span> <span class='id identifier rubyid_service_address'>service_address</span> <span class='op'>||</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='op'>::</span><span class='const'>SERVICE_ADDRESS</span>
+  <span class='id identifier rubyid_port'>port</span> <span class='op'>=</span> <span class='id identifier rubyid_service_port'>service_port</span> <span class='op'>||</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='op'>::</span><span class='const'>DEFAULT_SERVICE_PORT</span>
   <span class='id identifier rubyid_interceptors'>interceptors</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='op'>::</span><span class='const'>GRPC_INTERCEPTORS</span>
   <span class='ivar'>@metrics_service_v2_stub</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='const'>Grpc</span><span class='period'>.</span><span class='id identifier rubyid_create_stub'>create_stub</span><span class='lparen'>(</span>
     <span class='id identifier rubyid_service_path'>service_path</span><span class='comma'>,</span>
@@ -1112,21 +1146,21 @@ retries, etc.</p>
       <pre class="lines">
 
 
-373
-374
-375
-376
-377
-378
 379
 380
 381
 382
 383
-384</pre>
+384
+385
+386
+387
+388
+389
+390</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/metrics_service_v2_client.rb', line 373</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/metrics_service_v2_client.rb', line 379</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_log_metric'>create_log_metric</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -1284,20 +1318,20 @@ retries, etc.</p>
       <pre class="lines">
 
 
-451
-452
-453
-454
-455
-456
 457
 458
 459
 460
-461</pre>
+461
+462
+463
+464
+465
+466
+467</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/metrics_service_v2_client.rb', line 451</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/metrics_service_v2_client.rb', line 457</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete_log_metric'>delete_log_metric</span> \
     <span class='id identifier rubyid_metric_name'>metric_name</span><span class='comma'>,</span>
@@ -1463,19 +1497,19 @@ retries, etc.</p>
       <pre class="lines">
 
 
-331
-332
-333
-334
-335
-336
 337
 338
 339
-340</pre>
+340
+341
+342
+343
+344
+345
+346</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/metrics_service_v2_client.rb', line 331</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/metrics_service_v2_client.rb', line 337</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_log_metric'>get_log_metric</span> \
     <span class='id identifier rubyid_metric_name'>metric_name</span><span class='comma'>,</span>
@@ -1678,21 +1712,21 @@ object.</p>
       <pre class="lines">
 
 
-297
-298
-299
-300
-301
-302
 303
 304
 305
 306
 307
-308</pre>
+308
+309
+310
+311
+312
+313
+314</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/metrics_service_v2_client.rb', line 297</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/metrics_service_v2_client.rb', line 303</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_log_metrics'>list_log_metrics</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -1883,21 +1917,21 @@ retries, etc.</p>
       <pre class="lines">
 
 
-418
-419
-420
-421
-422
-423
 424
 425
 426
 427
 428
-429</pre>
+429
+430
+431
+432
+433
+434
+435</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/metrics_service_v2_client.rb', line 418</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/metrics_service_v2_client.rb', line 424</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update_log_metric'>update_log_metric</span> \
     <span class='id identifier rubyid_metric_name'>metric_name</span><span class='comma'>,</span>
