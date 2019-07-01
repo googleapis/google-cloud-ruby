@@ -99,7 +99,7 @@ js:
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#new-class_method" title="new (class method)">.<strong>new</strong>(credentials: nil, scopes: nil, client_config: nil, timeout: nil, metadata: nil, exception_transformer: nil, lib_name: nil, lib_version: nil)  &#x21d2; Object </a>
+      <a href="#new-class_method" title="new (class method)">.<strong>new</strong>(credentials: nil, scopes: nil, client_config: nil, timeout: nil, metadata: nil, service_address: nil, service_port: nil, exception_transformer: nil, lib_name: nil, lib_version: nil)  &#x21d2; Object </a>
     
 
     
@@ -131,7 +131,7 @@ js:
       <div class="method_details first">
   <h3 class="signature first" id="new-class_method">
   
-    .<strong>new</strong>(credentials: nil, scopes: nil, client_config: nil, timeout: nil, metadata: nil, exception_transformer: nil, lib_name: nil, lib_version: nil)  &#x21d2; <tt>Object</tt> 
+    .<strong>new</strong>(credentials: nil, scopes: nil, client_config: nil, timeout: nil, metadata: nil, service_address: nil, service_port: nil, exception_transformer: nil, lib_name: nil, lib_version: nil)  &#x21d2; <tt>Object</tt> 
   
 
   
@@ -243,6 +243,36 @@ or the specified config is missing data points.</p>
   
     <li>
       
+        <span class='name'>service_address</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Override for the service hostname, or <code>nil</code> to leave as the default.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>service_port</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Override for the service port, or <code>nil</code> to leave as the default.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
         <span class='name'>exception_transformer</span>
       
       
@@ -266,10 +296,6 @@ custom error handling.</p>
       <pre class="lines">
 
 
-120
-121
-122
-123
 124
 125
 126
@@ -286,10 +312,18 @@ custom error handling.</p>
 137
 138
 139
-140</pre>
+140
+141
+142
+143
+144
+145
+146
+147
+148</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/admin/v2.rb', line 120</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/admin/v2.rb', line 124</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span> \
     <span class='label'>credentials:</span> <span class='kw'>nil</span><span class='comma'>,</span>
@@ -297,6 +331,8 @@ custom error handling.</p>
     <span class='label'>client_config:</span> <span class='kw'>nil</span><span class='comma'>,</span>
     <span class='label'>timeout:</span> <span class='kw'>nil</span><span class='comma'>,</span>
     <span class='label'>metadata:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+    <span class='label'>service_address:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+    <span class='label'>service_port:</span> <span class='kw'>nil</span><span class='comma'>,</span>
     <span class='label'>exception_transformer:</span> <span class='kw'>nil</span><span class='comma'>,</span>
     <span class='label'>lib_name:</span> <span class='kw'>nil</span><span class='comma'>,</span>
     <span class='label'>lib_version:</span> <span class='kw'>nil</span>
@@ -308,6 +344,8 @@ custom error handling.</p>
     <span class='label'>metadata:</span> <span class='id identifier rubyid_metadata'>metadata</span><span class='comma'>,</span>
     <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span><span class='comma'>,</span>
     <span class='label'>lib_name:</span> <span class='id identifier rubyid_lib_name'>lib_name</span><span class='comma'>,</span>
+    <span class='label'>service_address:</span> <span class='id identifier rubyid_service_address'>service_address</span><span class='comma'>,</span>
+    <span class='label'>service_port:</span> <span class='id identifier rubyid_service_port'>service_port</span><span class='comma'>,</span>
     <span class='label'>lib_version:</span> <span class='id identifier rubyid_lib_version'>lib_version</span>
   <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_select'>select</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span> <span class='op'>!=</span> <span class='kw'>nil</span> <span class='rbrace'>}</span>
   <span class='const'><span class='object_link'><a href="../../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Bigtable.html" title="Google::Cloud::Bigtable (module)">Bigtable</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Admin.html" title="Google::Cloud::Bigtable::Admin (module)">Admin</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V2.html" title="Google::Cloud::Bigtable::Admin::V2 (module)">V2</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="BigtableInstanceAdminClient.html" title="Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient (class)">BigtableInstanceAdminClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="BigtableInstanceAdminClient.html#initialize-instance_method" title="Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='rparen'>)</span>
