@@ -459,7 +459,7 @@ this service.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(credentials: nil, scopes: ALL_SCOPES, client_config: {}, timeout: DEFAULT_TIMEOUT, metadata: nil, exception_transformer: nil, lib_name: nil, lib_version: &quot;&quot;)  &#x21d2; SubscriberClient </a>
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(credentials: nil, scopes: ALL_SCOPES, client_config: {}, timeout: DEFAULT_TIMEOUT, metadata: nil, service_address: nil, service_port: nil, exception_transformer: nil, lib_name: nil, lib_version: &quot;&quot;)  &#x21d2; SubscriberClient </a>
     
 
     
@@ -743,7 +743,7 @@ this service.</p>
     <div class="method_details first">
   <h3 class="signature first" id="initialize-instance_method">
   
-    #<strong>initialize</strong>(credentials: nil, scopes: ALL_SCOPES, client_config: {}, timeout: DEFAULT_TIMEOUT, metadata: nil, exception_transformer: nil, lib_name: nil, lib_version: &quot;&quot;)  &#x21d2; <tt><span class='object_link'><a href="" title="Google::Cloud::PubSub::V1::SubscriberClient (class)">SubscriberClient</a></span></tt> 
+    #<strong>initialize</strong>(credentials: nil, scopes: ALL_SCOPES, client_config: {}, timeout: DEFAULT_TIMEOUT, metadata: nil, service_address: nil, service_port: nil, exception_transformer: nil, lib_name: nil, lib_version: &quot;&quot;)  &#x21d2; <tt><span class='object_link'><a href="" title="Google::Cloud::PubSub::V1::SubscriberClient (class)">SubscriberClient</a></span></tt> 
   
 
   
@@ -853,6 +853,36 @@ or the specified config is missing data points.</p>
   
     <li>
       
+        <span class='name'>service_address</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Override for the service hostname, or <code>nil</code> to leave as the default.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>service_port</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Override for the service port, or <code>nil</code> to leave as the default.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
         <span class='name'>exception_transformer</span>
       
       
@@ -876,10 +906,6 @@ custom error handling.</p>
       <pre class="lines">
 
 
-176
-177
-178
-179
 180
 181
 182
@@ -1102,10 +1128,16 @@ custom error handling.</p>
 399
 400
 401
-402</pre>
+402
+403
+404
+405
+406
+407
+408</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/subscriber_client.rb', line 176</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/subscriber_client.rb', line 180</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span> \
     <span class='label'>credentials:</span> <span class='kw'>nil</span><span class='comma'>,</span>
@@ -1113,6 +1145,8 @@ custom error handling.</p>
     <span class='label'>client_config:</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='comma'>,</span>
     <span class='label'>timeout:</span> <span class='const'><span class='object_link'><a href="#DEFAULT_TIMEOUT-constant" title="Google::Cloud::PubSub::V1::SubscriberClient::DEFAULT_TIMEOUT (constant)">DEFAULT_TIMEOUT</a></span></span><span class='comma'>,</span>
     <span class='label'>metadata:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+    <span class='label'>service_address:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+    <span class='label'>service_port:</span> <span class='kw'>nil</span><span class='comma'>,</span>
     <span class='label'>exception_transformer:</span> <span class='kw'>nil</span><span class='comma'>,</span>
     <span class='label'>lib_name:</span> <span class='kw'>nil</span><span class='comma'>,</span>
     <span class='label'>lib_version:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span>
@@ -1168,8 +1202,8 @@ custom error handling.</p>
   <span class='kw'>end</span>
 
   <span class='comment'># Allow overriding the service path/port in subclasses.
-</span>  <span class='id identifier rubyid_service_path'>service_path</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='op'>::</span><span class='const'>SERVICE_ADDRESS</span>
-  <span class='id identifier rubyid_port'>port</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='op'>::</span><span class='const'>DEFAULT_SERVICE_PORT</span>
+</span>  <span class='id identifier rubyid_service_path'>service_path</span> <span class='op'>=</span> <span class='id identifier rubyid_service_address'>service_address</span> <span class='op'>||</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='op'>::</span><span class='const'>SERVICE_ADDRESS</span>
+  <span class='id identifier rubyid_port'>port</span> <span class='op'>=</span> <span class='id identifier rubyid_service_port'>service_port</span> <span class='op'>||</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='op'>::</span><span class='const'>DEFAULT_SERVICE_PORT</span>
   <span class='id identifier rubyid_interceptors'>interceptors</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='op'>::</span><span class='const'>GRPC_INTERCEPTORS</span>
   <span class='ivar'>@iam_policy_stub</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='const'>Grpc</span><span class='period'>.</span><span class='id identifier rubyid_create_stub'>create_stub</span><span class='lparen'>(</span>
     <span class='id identifier rubyid_service_path'>service_path</span><span class='comma'>,</span>
@@ -1841,22 +1875,22 @@ retries, etc.</p>
       <pre class="lines">
 
 
-791
-792
-793
-794
-795
-796
 797
 798
 799
 800
 801
 802
-803</pre>
+803
+804
+805
+806
+807
+808
+809</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/subscriber_client.rb', line 791</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/subscriber_client.rb', line 797</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_acknowledge'>acknowledge</span> \
     <span class='id identifier rubyid_subscription'>subscription</span><span class='comma'>,</span>
@@ -2084,12 +2118,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1063
-1064
-1065
-1066
-1067
-1068
 1069
 1070
 1071
@@ -2097,10 +2125,16 @@ retries, etc.</p>
 1073
 1074
 1075
-1076</pre>
+1076
+1077
+1078
+1079
+1080
+1081
+1082</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/subscriber_client.rb', line 1063</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/subscriber_client.rb', line 1069</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_snapshot'>create_snapshot</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -2457,12 +2491,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-512
-513
-514
-515
-516
-517
 518
 519
 520
@@ -2482,10 +2510,16 @@ retries, etc.</p>
 534
 535
 536
-537</pre>
+537
+538
+539
+540
+541
+542
+543</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/subscriber_client.rb', line 512</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/subscriber_client.rb', line 518</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_subscription'>create_subscription</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -2664,20 +2698,20 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1155
-1156
-1157
-1158
-1159
-1160
 1161
 1162
 1163
 1164
-1165</pre>
+1165
+1166
+1167
+1168
+1169
+1170
+1171</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/subscriber_client.rb', line 1155</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/subscriber_client.rb', line 1161</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete_snapshot'>delete_snapshot</span> \
     <span class='id identifier rubyid_snapshot'>snapshot</span><span class='comma'>,</span>
@@ -2836,20 +2870,20 @@ retries, etc.</p>
       <pre class="lines">
 
 
-692
-693
-694
-695
-696
-697
 698
 699
 700
 701
-702</pre>
+702
+703
+704
+705
+706
+707
+708</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/subscriber_client.rb', line 692</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/subscriber_client.rb', line 698</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete_subscription'>delete_subscription</span> \
     <span class='id identifier rubyid_subscription'>subscription</span><span class='comma'>,</span>
@@ -3015,19 +3049,19 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1292
-1293
-1294
-1295
-1296
-1297
 1298
 1299
 1300
-1301</pre>
+1301
+1302
+1303
+1304
+1305
+1306
+1307</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/subscriber_client.rb', line 1292</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/subscriber_client.rb', line 1298</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_iam_policy'>get_iam_policy</span> \
     <span class='id identifier rubyid_resource'>resource</span><span class='comma'>,</span>
@@ -3190,19 +3224,19 @@ retries, etc.</p>
       <pre class="lines">
 
 
-559
-560
-561
-562
-563
-564
 565
 566
 567
-568</pre>
+568
+569
+570
+571
+572
+573
+574</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/subscriber_client.rb', line 559</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/subscriber_client.rb', line 565</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_subscription'>get_subscription</span> \
     <span class='id identifier rubyid_subscription'>subscription</span><span class='comma'>,</span>
@@ -3408,21 +3442,21 @@ object.</p>
       <pre class="lines">
 
 
-994
-995
-996
-997
-998
-999
 1000
 1001
 1002
 1003
 1004
-1005</pre>
+1005
+1006
+1007
+1008
+1009
+1010
+1011</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/subscriber_client.rb', line 994</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/subscriber_client.rb', line 1000</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_snapshots'>list_snapshots</span> \
     <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span>
@@ -3625,21 +3659,21 @@ object.</p>
       <pre class="lines">
 
 
-656
-657
-658
-659
-660
-661
 662
 663
 664
 665
 666
-667</pre>
+667
+668
+669
+670
+671
+672
+673</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/subscriber_client.rb', line 656</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/subscriber_client.rb', line 662</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_subscriptions'>list_subscriptions</span> \
     <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span>
@@ -3842,12 +3876,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-744
-745
-746
-747
-748
-749
 750
 751
 752
@@ -3856,10 +3884,16 @@ retries, etc.</p>
 755
 756
 757
-758</pre>
+758
+759
+760
+761
+762
+763
+764</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/subscriber_client.rb', line 744</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/subscriber_client.rb', line 750</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_modify_ack_deadline'>modify_ack_deadline</span> \
     <span class='id identifier rubyid_subscription'>subscription</span><span class='comma'>,</span>
@@ -4048,22 +4082,22 @@ retries, etc.</p>
       <pre class="lines">
 
 
-933
-934
-935
-936
-937
-938
 939
 940
 941
 942
 943
 944
-945</pre>
+945
+946
+947
+948
+949
+950
+951</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/subscriber_client.rb', line 933</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/subscriber_client.rb', line 939</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_modify_push_config'>modify_push_config</span> \
     <span class='id identifier rubyid_subscription'>subscription</span><span class='comma'>,</span>
@@ -4268,12 +4302,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-838
-839
-840
-841
-842
-843
 844
 845
 846
@@ -4281,10 +4309,16 @@ retries, etc.</p>
 848
 849
 850
-851</pre>
+851
+852
+853
+854
+855
+856
+857</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/subscriber_client.rb', line 838</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/subscriber_client.rb', line 844</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_pull'>pull</span> \
     <span class='id identifier rubyid_subscription'>subscription</span><span class='comma'>,</span>
@@ -4501,12 +4535,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1211
-1212
-1213
-1214
-1215
-1216
 1217
 1218
 1219
@@ -4514,10 +4542,16 @@ retries, etc.</p>
 1221
 1222
 1223
-1224</pre>
+1224
+1225
+1226
+1227
+1228
+1229
+1230</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/subscriber_client.rb', line 1211</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/subscriber_client.rb', line 1217</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_seek'>seek</span> \
     <span class='id identifier rubyid_subscription'>subscription</span><span class='comma'>,</span>
@@ -4708,21 +4742,21 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1257
-1258
-1259
-1260
-1261
-1262
 1263
 1264
 1265
 1266
 1267
-1268</pre>
+1268
+1269
+1270
+1271
+1272
+1273
+1274</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/subscriber_client.rb', line 1257</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/subscriber_client.rb', line 1263</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_set_iam_policy'>set_iam_policy</span> \
     <span class='id identifier rubyid_resource'>resource</span><span class='comma'>,</span>
@@ -4869,15 +4903,15 @@ retries, etc.</p>
       <pre class="lines">
 
 
-890
-891
-892
-893
-894
-895</pre>
+896
+897
+898
+899
+900
+901</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/subscriber_client.rb', line 890</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/subscriber_client.rb', line 896</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_streaming_pull'>streaming_pull</span> <span class='id identifier rubyid_reqs'>reqs</span><span class='comma'>,</span> <span class='label'>options:</span> <span class='kw'>nil</span>
   <span class='id identifier rubyid_request_protos'>request_protos</span> <span class='op'>=</span> <span class='id identifier rubyid_reqs'>reqs</span><span class='period'>.</span><span class='id identifier rubyid_lazy'>lazy</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_req'>req</span><span class='op'>|</span>
@@ -5063,21 +5097,21 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1337
-1338
-1339
-1340
-1341
-1342
 1343
 1344
 1345
 1346
 1347
-1348</pre>
+1348
+1349
+1350
+1351
+1352
+1353
+1354</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/subscriber_client.rb', line 1337</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/subscriber_client.rb', line 1343</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_test_iam_permissions'>test_iam_permissions</span> \
     <span class='id identifier rubyid_resource'>resource</span><span class='comma'>,</span>
@@ -5271,21 +5305,21 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1114
-1115
-1116
-1117
-1118
-1119
 1120
 1121
 1122
 1123
 1124
-1125</pre>
+1125
+1126
+1127
+1128
+1129
+1130
+1131</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/subscriber_client.rb', line 1114</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/subscriber_client.rb', line 1120</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update_snapshot'>update_snapshot</span> \
     <span class='id identifier rubyid_snapshot'>snapshot</span><span class='comma'>,</span>
@@ -5474,21 +5508,21 @@ retries, etc.</p>
       <pre class="lines">
 
 
-601
-602
-603
-604
-605
-606
 607
 608
 609
 610
 611
-612</pre>
+612
+613
+614
+615
+616
+617
+618</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/subscriber_client.rb', line 601</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/subscriber_client.rb', line 607</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update_subscription'>update_subscription</span> \
     <span class='id identifier rubyid_subscription'>subscription</span><span class='comma'>,</span>
