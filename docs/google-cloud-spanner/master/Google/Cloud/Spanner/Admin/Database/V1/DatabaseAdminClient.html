@@ -780,7 +780,8 @@ custom error handling.</p>
 302
 303
 304
-305</pre>
+305
+306</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/admin/database/v1/database_admin_client.rb', line 150</span>
@@ -809,6 +810,7 @@ custom error handling.</p>
     <span class='label'>timeout:</span> <span class='id identifier rubyid_timeout'>timeout</span><span class='comma'>,</span>
     <span class='label'>lib_name:</span> <span class='id identifier rubyid_lib_name'>lib_name</span><span class='comma'>,</span>
     <span class='label'>lib_version:</span> <span class='id identifier rubyid_lib_version'>lib_version</span><span class='comma'>,</span>
+    <span class='label'>metadata:</span> <span class='id identifier rubyid_metadata'>metadata</span><span class='comma'>,</span>
   <span class='rparen'>)</span>
 
   <span class='kw'>if</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>String</span><span class='rparen'>)</span> <span class='op'>||</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>Hash</span><span class='rparen'>)</span>
@@ -1318,7 +1320,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-428
 429
 430
 431
@@ -1338,10 +1339,11 @@ retries, etc.</p>
 445
 446
 447
-448</pre>
+448
+449</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/admin/database/v1/database_admin_client.rb', line 428</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/admin/database/v1/database_admin_client.rb', line 429</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_database'>create_database</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -1505,7 +1507,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-597
 598
 599
 600
@@ -1515,10 +1516,11 @@ retries, etc.</p>
 604
 605
 606
-607</pre>
+607
+608</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/admin/database/v1/database_admin_client.rb', line 597</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/admin/database/v1/database_admin_client.rb', line 598</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_drop_database'>drop_database</span> \
     <span class='id identifier rubyid_database'>database</span><span class='comma'>,</span>
@@ -1682,7 +1684,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-470
 471
 472
 473
@@ -1691,10 +1692,11 @@ retries, etc.</p>
 476
 477
 478
-479</pre>
+479
+480</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/admin/database/v1/database_admin_client.rb', line 470</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/admin/database/v1/database_admin_client.rb', line 471</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_database'>get_database</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -1858,7 +1860,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-630
 631
 632
 633
@@ -1867,10 +1868,11 @@ retries, etc.</p>
 636
 637
 638
-639</pre>
+639
+640</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/admin/database/v1/database_admin_client.rb', line 630</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/admin/database/v1/database_admin_client.rb', line 631</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_database_ddl'>get_database_ddl</span> \
     <span class='id identifier rubyid_database'>database</span><span class='comma'>,</span>
@@ -2037,7 +2039,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-712
 713
 714
 715
@@ -2046,10 +2047,11 @@ retries, etc.</p>
 718
 719
 720
-721</pre>
+721
+722</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/admin/database/v1/database_admin_client.rb', line 712</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/admin/database/v1/database_admin_client.rb', line 713</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_iam_policy'>get_iam_policy</span> \
     <span class='id identifier rubyid_resource'>resource</span><span class='comma'>,</span>
@@ -2250,7 +2252,6 @@ object.</p>
       <pre class="lines">
 
 
-351
 352
 353
 354
@@ -2261,10 +2262,11 @@ object.</p>
 359
 360
 361
-362</pre>
+362
+363</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/admin/database/v1/database_admin_client.rb', line 351</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/admin/database/v1/database_admin_client.rb', line 352</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_databases'>list_databases</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -2456,7 +2458,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-675
 676
 677
 678
@@ -2467,10 +2468,11 @@ retries, etc.</p>
 683
 684
 685
-686</pre>
+686
+687</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/admin/database/v1/database_admin_client.rb', line 675</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/admin/database/v1/database_admin_client.rb', line 676</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_set_iam_policy'>set_iam_policy</span> \
     <span class='id identifier rubyid_resource'>resource</span><span class='comma'>,</span>
@@ -2661,7 +2663,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-756
 757
 758
 759
@@ -2672,10 +2673,11 @@ retries, etc.</p>
 764
 765
 766
-767</pre>
+767
+768</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/admin/database/v1/database_admin_client.rb', line 756</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/admin/database/v1/database_admin_client.rb', line 757</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_test_iam_permissions'>test_iam_permissions</span> \
     <span class='id identifier rubyid_resource'>resource</span><span class='comma'>,</span>
@@ -2882,7 +2884,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-557
 558
 559
 560
@@ -2902,10 +2903,11 @@ retries, etc.</p>
 574
 575
 576
-577</pre>
+577
+578</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/admin/database/v1/database_admin_client.rb', line 557</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/admin/database/v1/database_admin_client.rb', line 558</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update_database_ddl'>update_database_ddl</span> \
     <span class='id identifier rubyid_database'>database</span><span class='comma'>,</span>
