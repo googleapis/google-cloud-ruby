@@ -130,6 +130,10 @@ module Google
       #     The default timeout, in seconds, for calls made through this client.
       #   @param metadata [Hash]
       #     Default metadata to be sent with each request. This can be overridden on a per call basis.
+      #   @param service_address [String]
+      #     Override for the service hostname, or `nil` to leave as the default.
+      #   @param service_port [Integer]
+      #     Override for the service port, or `nil` to leave as the default.
       #   @param exception_transformer [Proc]
       #     An optional proc that intercepts any exceptions raised during an API call to inject
       #     custom error handling.
