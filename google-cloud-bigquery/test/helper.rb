@@ -389,6 +389,75 @@ class MockBigquery < Minitest::Spec
     }
   end
 
+  def random_model_full_hash dataset, id, name: nil, description: nil
+    hash = random_model_partial_hash dataset, id
+
+    name ||= "Model Name"
+    description ||= "Model description"
+
+    hash.merge({
+      etag: "etag123456789",
+      friendlyName: name,
+      description: description,
+      expirationTime: time_millis,
+      location: "US",
+      featureColumns: [{name: "f1", type: {typeKind: "STRING"}}],
+      labelColumns: [{name: "predicted_label", type: {typeKind: "FLOAT64"}}],
+      trainingRuns: [{
+        evaluationMetrics: {
+          regressionMetrics: {
+            meanAbsoluteError: 0.58,
+            meanSquaredError: 0.628,
+            meanSquaredLogError: 0.035,
+            medianAbsoluteError: 0.04,
+            rSquared: 0.225
+          }
+        },
+        results: [{
+          durationMs: 2531,
+          index: 0,
+          learnRate: 0.4,
+          trainingLoss: 0.628
+        }],
+        startTime: Time.now.utc.iso8601,
+        trainingOptions: {
+          earlyStop: true,
+          l1Regularization: 0,
+          l2Regularization: 0,
+          learnRate: 0.4,
+          learnRateStrategy: "CONSTANT",
+          lossType: "MEAN_SQUARED_LOSS",
+          maxIterations: 1,
+          minRelativeProgress: 0.01,
+          optimizationStrategy: "BATCH_GRADIENT_DESCENT",
+          warmStart: false
+        }
+      }]
+    })
+  end
+
+  def random_model_partial_hash dataset, id
+    # modelReference, modelType, creationTime, lastModifiedTime and labels.
+    {
+      modelReference: {
+        projectId: project,
+        datasetId: dataset,
+        modelId: id
+      },
+      modelType: "KMEANS",
+      creationTime: time_millis,
+      lastModifiedTime: time_millis,
+      labels: { foo: "bar" }
+    }
+  end
+
+  def list_models_gapi_json dataset_id, count = 2, token = nil
+    models = count.times.map { random_model_partial_hash(dataset_id, "model_#{rand(1000)}") }
+    hash = { "models" => models }
+    hash["nextPageToken"] = token unless token.nil?
+    hash.to_json
+  end
+
   def random_job_hash id = "job_9876543210", state = "running", location: "US"
     hash = {
       "kind" => "bigquery#job",

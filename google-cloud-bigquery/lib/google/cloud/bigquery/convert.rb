@@ -378,9 +378,19 @@ module Google
         #   is nil.
         def self.millis_to_time time_millis
           return nil unless time_millis
-          time_millis = Integer time_millis
-          time_secs = time_millis / 1000.0
-          ::Time.at time_secs
+          ::Time.at Rational(time_millis, 1000)
+        end
+
+        ##
+        # @private
+        #
+        # Converts a Ruby Time object to a primitive time value in milliseconds.
+        #
+        # @return [Integer, nil] The primitive time value in milliseconds, or
+        #   nil if the given argument is nil.
+        def self.time_to_millis time_obj
+          return nil unless time_obj
+          (time_obj.to_i * 1000) + (time_obj.nsec / 1000000)
         end
       end
 

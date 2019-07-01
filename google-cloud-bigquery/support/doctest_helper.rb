@@ -247,6 +247,28 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
+  doctest.before "Google::Cloud::Bigquery::Dataset#model" do
+    mock_bigquery do |mock|
+      mock.expect :get_dataset, dataset_full_gapi, ["my-project", "my_dataset"]
+      mock.expect :get_model, random_model_full_hash("my_dataset", "my_model").to_json, ["my-project", "my_dataset", "my_model"]
+    end
+  end
+
+  # Google::Cloud::Bigquery::Dataset#models@Retrieve all models: (See {Model::List#all})
+  doctest.before "Google::Cloud::Bigquery::Dataset#models" do
+    mock_bigquery do |mock|
+      mock.expect :get_dataset, dataset_full_gapi, ["my-project", "my_dataset"]
+      mock.expect :list_models, list_models_gapi_json("my_dataset"), ["my-project", "my_dataset", Hash]
+      mock.expect :get_model, random_model_full_hash("my_dataset", "my_model").to_json, [String, String, String]
+      mock.expect :get_model, random_model_full_hash("my_dataset", "my_model").to_json, [String, String, String]
+      mock.expect :get_model, random_model_full_hash("my_dataset", "my_model").to_json, [String, String, String]
+      mock.expect :get_model, random_model_full_hash("my_dataset", "my_model").to_json, [String, String, String]
+      mock.expect :get_model, random_model_full_hash("my_dataset", "my_model").to_json, [String, String, String]
+      mock.expect :get_model, random_model_full_hash("my_dataset", "my_model").to_json, [String, String, String]
+      mock.expect :get_model, random_model_full_hash("my_dataset", "my_model").to_json, [String, String, String]
+    end
+  end
+
   doctest.before "Google::Cloud::Bigquery::Dataset#labels" do
     mock_bigquery do |mock|
       mock.expect :get_dataset, dataset_full_gapi, ["my-project", "my_dataset"]
@@ -475,6 +497,32 @@ YARD::Doctest.configure do |doctest|
   doctest.before "Google::Cloud::Bigquery::Job::List" do
     mock_bigquery do |mock|
       mock.expect :list_jobs, list_jobs_gapi, ["my-project", Hash]
+    end
+  end
+
+  doctest.before "Google::Cloud::Bigquery::Model" do
+    mock_bigquery do |mock|
+      mock.expect :get_dataset, dataset_full_gapi, [String, String]
+      mock.expect :get_model, random_model_full_hash("my_dataset", "my_model").to_json, [String, String, String]
+      mock.expect :get_model, random_model_full_hash("my_dataset", "my_model").to_json, [String, String, String]
+      mock.expect :get_model, random_model_full_hash("my_dataset", "my_model").to_json, [String, String, String]
+      mock.expect :get_model, random_model_full_hash("my_dataset", "my_model").to_json, [String, String, String]
+      mock.expect :get_model, random_model_full_hash("my_dataset", "my_model").to_json, [String, String, String]
+      mock.expect :list_models, list_models_gapi_json("my_dataset"), [String, String, Hash]
+      mock.expect :patch_model, random_model_full_hash("my_dataset", "my_model").to_json, [String, String, String, Object, Hash]
+      mock.expect :delete_model, random_model_full_hash("my_dataset", "my_model").to_json, [String, String, String]
+    end
+  end
+
+  doctest.before "Google::Cloud::Bigquery::Model::List" do
+    mock_bigquery do |mock|
+      mock.expect :get_dataset, dataset_full_gapi, [String, String]
+      mock.expect :get_model, random_model_full_hash("my_dataset", "my_model").to_json, [String, String, String]
+      mock.expect :get_model, random_model_full_hash("my_dataset", "my_model").to_json, [String, String, String]
+      mock.expect :get_model, random_model_full_hash("my_dataset", "my_model").to_json, [String, String, String]
+      mock.expect :get_model, random_model_full_hash("my_dataset", "my_model").to_json, [String, String, String]
+      mock.expect :get_model, random_model_full_hash("my_dataset", "my_model").to_json, [String, String, String]
+      mock.expect :list_models, list_models_gapi_json("my_dataset"), [String, String, Hash]
     end
   end
 
@@ -1097,6 +1145,75 @@ def list_tables_gapi project = "my-project", dataset = "my_dataset", count = 2, 
           "totalItems" => (total || count)}
   hash["nextPageToken"] = token unless token.nil?
   Google::Apis::BigqueryV2::TableList.from_json hash.to_json
+end
+
+def random_model_full_hash dataset, id, name: nil, description: nil
+  hash = random_model_partial_hash dataset, id
+
+  name ||= "Model Name"
+  description ||= "Model description"
+
+  hash.merge({
+    etag: "etag123456789",
+    friendlyName: name,
+    description: description,
+    expirationTime: time_millis,
+    location: "US",
+    featureColumns: [{name: "f1", type: {typeKind: "STRING"}}],
+    labelColumns: [{name: "predicted_label", type: {typeKind: "FLOAT64"}}],
+    trainingRuns: [{
+      evaluationMetrics: {
+        regressionMetrics: {
+          meanAbsoluteError: 0.58,
+          meanSquaredError: 0.628,
+          meanSquaredLogError: 0.035,
+          medianAbsoluteError: 0.04,
+          rSquared: 0.225
+        }
+      },
+      results: [{
+        durationMs: 2531,
+        index: 0,
+        learnRate: 0.4,
+        trainingLoss: 0.628
+      }],
+      startTime: Time.now.utc.iso8601,
+      trainingOptions: {
+        earlyStop: true,
+        l1Regularization: 0,
+        l2Regularization: 0,
+        learnRate: 0.4,
+        learnRateStrategy: "CONSTANT",
+        lossType: "MEAN_SQUARED_LOSS",
+        maxIterations: 1,
+        minRelativeProgress: 0.01,
+        optimizationStrategy: "BATCH_GRADIENT_DESCENT",
+        warmStart: false
+      }
+    }]
+  })
+end
+
+def random_model_partial_hash dataset, id
+  # modelReference, modelType, creationTime, lastModifiedTime and labels.
+  {
+    modelReference: {
+      projectId: "my-project",
+      datasetId: dataset,
+      modelId: id
+    },
+    modelType: "KMEANS",
+    creationTime: time_millis,
+    lastModifiedTime: time_millis,
+    labels: { foo: "bar" }
+  }
+end
+
+def list_models_gapi_json dataset_id, count = 2, token = nil
+  models = count.times.map { random_model_partial_hash(dataset_id, "model_#{rand(1000)}") }
+  hash = { "models" => models }
+  hash["nextPageToken"] = token unless token.nil?
+  hash.to_json
 end
 
 def table_data_hash token: "token1234567890"
