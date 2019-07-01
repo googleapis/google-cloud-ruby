@@ -105,6 +105,8 @@ module Google
             client_config: client_config,
             timeout: timeout,
             lib_name: lib_name,
+            service_address: service_address,
+            service_port: service_port,
             lib_version: lib_version
           }.select { |_, v| v != nil }
           Google::Cloud::Trace::V2::TraceServiceClient.new(**kwargs)
