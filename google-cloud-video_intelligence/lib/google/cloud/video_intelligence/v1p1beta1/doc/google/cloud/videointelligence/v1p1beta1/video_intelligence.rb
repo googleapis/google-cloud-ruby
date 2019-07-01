@@ -15,7 +15,7 @@
 
 module Google
   module Cloud
-    module Videointelligence
+    module VideoIntelligence
       module V1p1beta1
         # Video annotation request.
         # @!attribute [rw] input_uri
@@ -36,10 +36,10 @@ module Google
         #     If unset, the input video(s) should be specified via `input_uri`.
         #     If set, `input_uri` should be unset.
         # @!attribute [rw] features
-        #   @return [Array<Google::Cloud::Videointelligence::V1p1beta1::Feature>]
+        #   @return [Array<Google::Cloud::VideoIntelligence::V1p1beta1::Feature>]
         #     Requested video annotation features.
         # @!attribute [rw] video_context
-        #   @return [Google::Cloud::Videointelligence::V1p1beta1::VideoContext]
+        #   @return [Google::Cloud::VideoIntelligence::V1p1beta1::VideoContext]
         #     Additional video context and/or feature-specific parameters.
         # @!attribute [rw] output_uri
         #   @return [String]
@@ -58,27 +58,27 @@ module Google
 
         # Video context and/or feature-specific parameters.
         # @!attribute [rw] segments
-        #   @return [Array<Google::Cloud::Videointelligence::V1p1beta1::VideoSegment>]
+        #   @return [Array<Google::Cloud::VideoIntelligence::V1p1beta1::VideoSegment>]
         #     Video segments to annotate. The segments may overlap and are not required
         #     to be contiguous or span the whole video. If unspecified, each video is
         #     treated as a single segment.
         # @!attribute [rw] label_detection_config
-        #   @return [Google::Cloud::Videointelligence::V1p1beta1::LabelDetectionConfig]
+        #   @return [Google::Cloud::VideoIntelligence::V1p1beta1::LabelDetectionConfig]
         #     Config for LABEL_DETECTION.
         # @!attribute [rw] shot_change_detection_config
-        #   @return [Google::Cloud::Videointelligence::V1p1beta1::ShotChangeDetectionConfig]
+        #   @return [Google::Cloud::VideoIntelligence::V1p1beta1::ShotChangeDetectionConfig]
         #     Config for SHOT_CHANGE_DETECTION.
         # @!attribute [rw] explicit_content_detection_config
-        #   @return [Google::Cloud::Videointelligence::V1p1beta1::ExplicitContentDetectionConfig]
+        #   @return [Google::Cloud::VideoIntelligence::V1p1beta1::ExplicitContentDetectionConfig]
         #     Config for EXPLICIT_CONTENT_DETECTION.
         # @!attribute [rw] speech_transcription_config
-        #   @return [Google::Cloud::Videointelligence::V1p1beta1::SpeechTranscriptionConfig]
+        #   @return [Google::Cloud::VideoIntelligence::V1p1beta1::SpeechTranscriptionConfig]
         #     Config for SPEECH_TRANSCRIPTION.
         class VideoContext; end
 
         # Config for LABEL_DETECTION.
         # @!attribute [rw] label_detection_mode
-        #   @return [Google::Cloud::Videointelligence::V1p1beta1::LabelDetectionMode]
+        #   @return [Google::Cloud::VideoIntelligence::V1p1beta1::LabelDetectionMode]
         #     What labels should be detected with LABEL_DETECTION, in addition to
         #     video-level labels or segment-level labels.
         #     If unspecified, defaults to `SHOT_MODE`.
@@ -123,7 +123,7 @@ module Google
 
         # Video segment level annotation results for label detection.
         # @!attribute [rw] segment
-        #   @return [Google::Cloud::Videointelligence::V1p1beta1::VideoSegment]
+        #   @return [Google::Cloud::VideoIntelligence::V1p1beta1::VideoSegment]
         #     Video segment where a label was detected.
         # @!attribute [rw] confidence
         #   @return [Float]
@@ -156,19 +156,19 @@ module Google
 
         # Label annotation.
         # @!attribute [rw] entity
-        #   @return [Google::Cloud::Videointelligence::V1p1beta1::Entity]
+        #   @return [Google::Cloud::VideoIntelligence::V1p1beta1::Entity]
         #     Detected entity.
         # @!attribute [rw] category_entities
-        #   @return [Array<Google::Cloud::Videointelligence::V1p1beta1::Entity>]
+        #   @return [Array<Google::Cloud::VideoIntelligence::V1p1beta1::Entity>]
         #     Common categories for the detected entity.
         #     E.g. when the label is `Terrier` the category is likely `dog`. And in some
         #     cases there might be more than one categories e.g. `Terrier` could also be
         #     a `pet`.
         # @!attribute [rw] segments
-        #   @return [Array<Google::Cloud::Videointelligence::V1p1beta1::LabelSegment>]
+        #   @return [Array<Google::Cloud::VideoIntelligence::V1p1beta1::LabelSegment>]
         #     All video segments where a label was detected.
         # @!attribute [rw] frames
-        #   @return [Array<Google::Cloud::Videointelligence::V1p1beta1::LabelFrame>]
+        #   @return [Array<Google::Cloud::VideoIntelligence::V1p1beta1::LabelFrame>]
         #     All video frames where a label was detected.
         class LabelAnnotation; end
 
@@ -178,7 +178,7 @@ module Google
         #     Time-offset, relative to the beginning of the video, corresponding to the
         #     video frame for this location.
         # @!attribute [rw] pornography_likelihood
-        #   @return [Google::Cloud::Videointelligence::V1p1beta1::Likelihood]
+        #   @return [Google::Cloud::VideoIntelligence::V1p1beta1::Likelihood]
         #     Likelihood of the pornography content..
         class ExplicitContentFrame; end
 
@@ -186,7 +186,7 @@ module Google
         # If no explicit content has been detected in a frame, no annotations are
         # present for that frame.
         # @!attribute [rw] frames
-        #   @return [Array<Google::Cloud::Videointelligence::V1p1beta1::ExplicitContentFrame>]
+        #   @return [Array<Google::Cloud::VideoIntelligence::V1p1beta1::ExplicitContentFrame>]
         #     All video frames where explicit content was detected.
         class ExplicitContentAnnotation; end
 
@@ -196,25 +196,25 @@ module Google
         #     Output only. Video file location in
         #     [Google Cloud Storage](https://cloud.google.com/storage/).
         # @!attribute [rw] segment_label_annotations
-        #   @return [Array<Google::Cloud::Videointelligence::V1p1beta1::LabelAnnotation>]
+        #   @return [Array<Google::Cloud::VideoIntelligence::V1p1beta1::LabelAnnotation>]
         #     Label annotations on video level or user specified segment level.
         #     There is exactly one element for each unique label.
         # @!attribute [rw] shot_label_annotations
-        #   @return [Array<Google::Cloud::Videointelligence::V1p1beta1::LabelAnnotation>]
+        #   @return [Array<Google::Cloud::VideoIntelligence::V1p1beta1::LabelAnnotation>]
         #     Label annotations on shot level.
         #     There is exactly one element for each unique label.
         # @!attribute [rw] frame_label_annotations
-        #   @return [Array<Google::Cloud::Videointelligence::V1p1beta1::LabelAnnotation>]
+        #   @return [Array<Google::Cloud::VideoIntelligence::V1p1beta1::LabelAnnotation>]
         #     Label annotations on frame level.
         #     There is exactly one element for each unique label.
         # @!attribute [rw] shot_annotations
-        #   @return [Array<Google::Cloud::Videointelligence::V1p1beta1::VideoSegment>]
+        #   @return [Array<Google::Cloud::VideoIntelligence::V1p1beta1::VideoSegment>]
         #     Shot annotations. Each shot is represented as a video segment.
         # @!attribute [rw] explicit_annotation
-        #   @return [Google::Cloud::Videointelligence::V1p1beta1::ExplicitContentAnnotation]
+        #   @return [Google::Cloud::VideoIntelligence::V1p1beta1::ExplicitContentAnnotation]
         #     Explicit content annotation.
         # @!attribute [rw] speech_transcriptions
-        #   @return [Array<Google::Cloud::Videointelligence::V1p1beta1::SpeechTranscription>]
+        #   @return [Array<Google::Cloud::VideoIntelligence::V1p1beta1::SpeechTranscription>]
         #     Speech transcription.
         # @!attribute [rw] error
         #   @return [Google::Rpc::Status]
@@ -226,7 +226,7 @@ module Google
         # field of the `Operation` returned by the `GetOperation`
         # call of the `google::longrunning::Operations` service.
         # @!attribute [rw] annotation_results
-        #   @return [Array<Google::Cloud::Videointelligence::V1p1beta1::VideoAnnotationResults>]
+        #   @return [Array<Google::Cloud::VideoIntelligence::V1p1beta1::VideoAnnotationResults>]
         #     Annotation results for all videos specified in `AnnotateVideoRequest`.
         class AnnotateVideoResponse; end
 
@@ -251,7 +251,7 @@ module Google
         # field of the `Operation` returned by the `GetOperation`
         # call of the `google::longrunning::Operations` service.
         # @!attribute [rw] annotation_progress
-        #   @return [Array<Google::Cloud::Videointelligence::V1p1beta1::VideoAnnotationProgress>]
+        #   @return [Array<Google::Cloud::VideoIntelligence::V1p1beta1::VideoAnnotationProgress>]
         #     Progress metadata for all videos specified in `AnnotateVideoRequest`.
         class AnnotateVideoProgress; end
 
@@ -277,7 +277,7 @@ module Google
         #     with asterisks, e.g. "f***". If set to `false` or omitted, profanities
         #     won't be filtered out.
         # @!attribute [rw] speech_contexts
-        #   @return [Array<Google::Cloud::Videointelligence::V1p1beta1::SpeechContext>]
+        #   @return [Array<Google::Cloud::VideoIntelligence::V1p1beta1::SpeechContext>]
         #     *Optional* A means to provide context to assist the speech recognition.
         # @!attribute [rw] enable_automatic_punctuation
         #   @return [true, false]
@@ -307,7 +307,7 @@ module Google
 
         # A speech recognition result corresponding to a portion of the audio.
         # @!attribute [rw] alternatives
-        #   @return [Array<Google::Cloud::Videointelligence::V1p1beta1::SpeechRecognitionAlternative>]
+        #   @return [Array<Google::Cloud::VideoIntelligence::V1p1beta1::SpeechRecognitionAlternative>]
         #     Output only. May contain one or more recognition hypotheses (up to the
         #     maximum specified in `max_alternatives`).
         #     These alternatives are ordered in terms of accuracy, with the top (first)
@@ -327,7 +327,7 @@ module Google
         #     `confidence` field as it is not guaranteed to be accurate or consistent.
         #     The default of 0.0 is a sentinel value indicating `confidence` was not set.
         # @!attribute [rw] words
-        #   @return [Array<Google::Cloud::Videointelligence::V1p1beta1::WordInfo>]
+        #   @return [Array<Google::Cloud::VideoIntelligence::V1p1beta1::WordInfo>]
         #     Output only. A list of word-specific information for each recognized word.
         class SpeechRecognitionAlternative; end
 

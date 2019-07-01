@@ -223,3 +223,21 @@ for version in ['v1', 'v1beta1', 'v1beta2', 'v1p1beta1', 'v1p2beta1']:
         'Gem.loaded_specs\[.*\]\.version\.version',
         'Google::Cloud::VideoIntelligence::VERSION'
     )
+
+# https://github.com/googleapis/gapic-generator/issues/2525
+s.replace(
+    'lib/google/cloud/video_intelligence/v*/**/*.rb',
+    'Google::Cloud::Videointelligence',
+    'Google::Cloud::VideoIntelligence')
+s.replace(
+    'lib/google/cloud/video_intelligence/v*/doc/google/cloud/videointelligence/**/*.rb',
+    '\n    module Videointelligence\n',
+    '\n    module VideoIntelligence\n'
+)
+
+# https://github.com/protocolbuffers/protobuf/issues/5584
+s.replace(
+    'lib/google/cloud/videointelligence/v*/*_pb.rb',
+    '\nmodule Google::Cloud::VideoIntelligence::V(\\w+)\n',
+    '\nmodule Google\n  module Cloud\n    module VideoIntelligence\n    end\n    Videointelligence = VideoIntelligence unless const_defined? :Videointelligence\n  end\nend\nmodule Google::Cloud::VideoIntelligence::V\\1\n',
+)
