@@ -333,7 +333,7 @@ this service.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(credentials: nil, scopes: ALL_SCOPES, client_config: {}, timeout: DEFAULT_TIMEOUT, metadata: nil, exception_transformer: nil, lib_name: nil, lib_version: &quot;&quot;)  &#x21d2; LanguageServiceClient </a>
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(credentials: nil, scopes: ALL_SCOPES, client_config: {}, timeout: DEFAULT_TIMEOUT, metadata: nil, service_address: nil, service_port: nil, exception_transformer: nil, lib_name: nil, lib_version: &quot;&quot;)  &#x21d2; LanguageServiceClient </a>
     
 
     
@@ -364,7 +364,7 @@ this service.</p>
     <div class="method_details first">
   <h3 class="signature first" id="initialize-instance_method">
   
-    #<strong>initialize</strong>(credentials: nil, scopes: ALL_SCOPES, client_config: {}, timeout: DEFAULT_TIMEOUT, metadata: nil, exception_transformer: nil, lib_name: nil, lib_version: &quot;&quot;)  &#x21d2; <tt><span class='object_link'><a href="" title="Google::Cloud::Language::V1beta2::LanguageServiceClient (class)">LanguageServiceClient</a></span></tt> 
+    #<strong>initialize</strong>(credentials: nil, scopes: ALL_SCOPES, client_config: {}, timeout: DEFAULT_TIMEOUT, metadata: nil, service_address: nil, service_port: nil, exception_transformer: nil, lib_name: nil, lib_version: &quot;&quot;)  &#x21d2; <tt><span class='object_link'><a href="" title="Google::Cloud::Language::V1beta2::LanguageServiceClient (class)">LanguageServiceClient</a></span></tt> 
   
 
   
@@ -474,6 +474,36 @@ or the specified config is missing data points.</p>
   
     <li>
       
+        <span class='name'>service_address</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Override for the service hostname, or <code>nil</code> to leave as the default.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>service_port</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Override for the service port, or <code>nil</code> to leave as the default.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
         <span class='name'>exception_transformer</span>
       
       
@@ -497,10 +527,6 @@ custom error handling.</p>
       <pre class="lines">
 
 
-92
-93
-94
-95
 96
 97
 98
@@ -600,10 +626,16 @@ custom error handling.</p>
 192
 193
 194
-195</pre>
+195
+196
+197
+198
+199
+200
+201</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/language/v1beta2/language_service_client.rb', line 92</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/language/v1beta2/language_service_client.rb', line 96</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span> \
     <span class='label'>credentials:</span> <span class='kw'>nil</span><span class='comma'>,</span>
@@ -611,6 +643,8 @@ custom error handling.</p>
     <span class='label'>client_config:</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='comma'>,</span>
     <span class='label'>timeout:</span> <span class='const'><span class='object_link'><a href="#DEFAULT_TIMEOUT-constant" title="Google::Cloud::Language::V1beta2::LanguageServiceClient::DEFAULT_TIMEOUT (constant)">DEFAULT_TIMEOUT</a></span></span><span class='comma'>,</span>
     <span class='label'>metadata:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+    <span class='label'>service_address:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+    <span class='label'>service_port:</span> <span class='kw'>nil</span><span class='comma'>,</span>
     <span class='label'>exception_transformer:</span> <span class='kw'>nil</span><span class='comma'>,</span>
     <span class='label'>lib_name:</span> <span class='kw'>nil</span><span class='comma'>,</span>
     <span class='label'>lib_version:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span>
@@ -664,8 +698,8 @@ custom error handling.</p>
   <span class='kw'>end</span>
 
   <span class='comment'># Allow overriding the service path/port in subclasses.
-</span>  <span class='id identifier rubyid_service_path'>service_path</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='op'>::</span><span class='const'>SERVICE_ADDRESS</span>
-  <span class='id identifier rubyid_port'>port</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='op'>::</span><span class='const'>DEFAULT_SERVICE_PORT</span>
+</span>  <span class='id identifier rubyid_service_path'>service_path</span> <span class='op'>=</span> <span class='id identifier rubyid_service_address'>service_address</span> <span class='op'>||</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='op'>::</span><span class='const'>SERVICE_ADDRESS</span>
+  <span class='id identifier rubyid_port'>port</span> <span class='op'>=</span> <span class='id identifier rubyid_service_port'>service_port</span> <span class='op'>||</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='op'>::</span><span class='const'>DEFAULT_SERVICE_PORT</span>
   <span class='id identifier rubyid_interceptors'>interceptors</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='op'>::</span><span class='const'>GRPC_INTERCEPTORS</span>
   <span class='ivar'>@language_service_stub</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='const'>Grpc</span><span class='period'>.</span><span class='id identifier rubyid_create_stub'>create_stub</span><span class='lparen'>(</span>
     <span class='id identifier rubyid_service_path'>service_path</span><span class='comma'>,</span>
@@ -887,21 +921,21 @@ retries, etc.</p>
       <pre class="lines">
 
 
-265
-266
-267
-268
-269
-270
 271
 272
 273
 274
 275
-276</pre>
+276
+277
+278
+279
+280
+281
+282</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/language/v1beta2/language_service_client.rb', line 265</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/language/v1beta2/language_service_client.rb', line 271</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_analyze_entities'>analyze_entities</span> \
     <span class='id identifier rubyid_document'>document</span><span class='comma'>,</span>
@@ -1087,21 +1121,21 @@ retries, etc.</p>
       <pre class="lines">
 
 
-306
-307
-308
-309
-310
-311
 312
 313
 314
 315
 316
-317</pre>
+317
+318
+319
+320
+321
+322
+323</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/language/v1beta2/language_service_client.rb', line 306</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/language/v1beta2/language_service_client.rb', line 312</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_analyze_entity_sentiment'>analyze_entity_sentiment</span> \
     <span class='id identifier rubyid_document'>document</span><span class='comma'>,</span>
@@ -1285,21 +1319,21 @@ retries, etc.</p>
       <pre class="lines">
 
 
-225
-226
-227
-228
-229
-230
 231
 232
 233
 234
 235
-236</pre>
+236
+237
+238
+239
+240
+241
+242</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/language/v1beta2/language_service_client.rb', line 225</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/language/v1beta2/language_service_client.rb', line 231</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_analyze_sentiment'>analyze_sentiment</span> \
     <span class='id identifier rubyid_document'>document</span><span class='comma'>,</span>
@@ -1484,21 +1518,21 @@ retries, etc.</p>
       <pre class="lines">
 
 
-346
-347
-348
-349
-350
-351
 352
 353
 354
 355
 356
-357</pre>
+357
+358
+359
+360
+361
+362
+363</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/language/v1beta2/language_service_client.rb', line 346</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/language/v1beta2/language_service_client.rb', line 352</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_analyze_syntax'>analyze_syntax</span> \
     <span class='id identifier rubyid_document'>document</span><span class='comma'>,</span>
@@ -1702,12 +1736,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-426
-427
-428
-429
-430
-431
 432
 433
 434
@@ -1715,10 +1743,16 @@ retries, etc.</p>
 436
 437
 438
-439</pre>
+439
+440
+441
+442
+443
+444
+445</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/language/v1beta2/language_service_client.rb', line 426</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/language/v1beta2/language_service_client.rb', line 432</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_annotate_text'>annotate_text</span> \
     <span class='id identifier rubyid_document'>document</span><span class='comma'>,</span>
@@ -1888,19 +1922,19 @@ retries, etc.</p>
       <pre class="lines">
 
 
-382
-383
-384
-385
-386
-387
 388
 389
 390
-391</pre>
+391
+392
+393
+394
+395
+396
+397</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/language/v1beta2/language_service_client.rb', line 382</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/language/v1beta2/language_service_client.rb', line 388</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_classify_text'>classify_text</span> \
     <span class='id identifier rubyid_document'>document</span><span class='comma'>,</span>
