@@ -152,39 +152,33 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   end
 end
 
-module Google
-  module Cloud
-    module Videointelligence
-      module V1p2beta1
-        AnnotateVideoRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1p2beta1.AnnotateVideoRequest").msgclass
-        VideoContext = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1p2beta1.VideoContext").msgclass
-        LabelDetectionConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1p2beta1.LabelDetectionConfig").msgclass
-        ShotChangeDetectionConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1p2beta1.ShotChangeDetectionConfig").msgclass
-        ExplicitContentDetectionConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1p2beta1.ExplicitContentDetectionConfig").msgclass
-        TextDetectionConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1p2beta1.TextDetectionConfig").msgclass
-        VideoSegment = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1p2beta1.VideoSegment").msgclass
-        LabelSegment = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1p2beta1.LabelSegment").msgclass
-        LabelFrame = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1p2beta1.LabelFrame").msgclass
-        Entity = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1p2beta1.Entity").msgclass
-        LabelAnnotation = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1p2beta1.LabelAnnotation").msgclass
-        ExplicitContentFrame = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1p2beta1.ExplicitContentFrame").msgclass
-        ExplicitContentAnnotation = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1p2beta1.ExplicitContentAnnotation").msgclass
-        NormalizedBoundingBox = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1p2beta1.NormalizedBoundingBox").msgclass
-        VideoAnnotationResults = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1p2beta1.VideoAnnotationResults").msgclass
-        AnnotateVideoResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1p2beta1.AnnotateVideoResponse").msgclass
-        VideoAnnotationProgress = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1p2beta1.VideoAnnotationProgress").msgclass
-        AnnotateVideoProgress = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1p2beta1.AnnotateVideoProgress").msgclass
-        NormalizedVertex = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1p2beta1.NormalizedVertex").msgclass
-        NormalizedBoundingPoly = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1p2beta1.NormalizedBoundingPoly").msgclass
-        TextSegment = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1p2beta1.TextSegment").msgclass
-        TextFrame = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1p2beta1.TextFrame").msgclass
-        TextAnnotation = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1p2beta1.TextAnnotation").msgclass
-        ObjectTrackingFrame = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1p2beta1.ObjectTrackingFrame").msgclass
-        ObjectTrackingAnnotation = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1p2beta1.ObjectTrackingAnnotation").msgclass
-        Feature = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1p2beta1.Feature").enummodule
-        LabelDetectionMode = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1p2beta1.LabelDetectionMode").enummodule
-        Likelihood = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1p2beta1.Likelihood").enummodule
-      end
-    end
-  end
+module Google::Cloud::VideoIntelligence::V1p2beta1
+  AnnotateVideoRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1p2beta1.AnnotateVideoRequest").msgclass
+  VideoContext = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1p2beta1.VideoContext").msgclass
+  LabelDetectionConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1p2beta1.LabelDetectionConfig").msgclass
+  ShotChangeDetectionConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1p2beta1.ShotChangeDetectionConfig").msgclass
+  ExplicitContentDetectionConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1p2beta1.ExplicitContentDetectionConfig").msgclass
+  TextDetectionConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1p2beta1.TextDetectionConfig").msgclass
+  VideoSegment = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1p2beta1.VideoSegment").msgclass
+  LabelSegment = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1p2beta1.LabelSegment").msgclass
+  LabelFrame = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1p2beta1.LabelFrame").msgclass
+  Entity = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1p2beta1.Entity").msgclass
+  LabelAnnotation = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1p2beta1.LabelAnnotation").msgclass
+  ExplicitContentFrame = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1p2beta1.ExplicitContentFrame").msgclass
+  ExplicitContentAnnotation = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1p2beta1.ExplicitContentAnnotation").msgclass
+  NormalizedBoundingBox = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1p2beta1.NormalizedBoundingBox").msgclass
+  VideoAnnotationResults = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1p2beta1.VideoAnnotationResults").msgclass
+  AnnotateVideoResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1p2beta1.AnnotateVideoResponse").msgclass
+  VideoAnnotationProgress = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1p2beta1.VideoAnnotationProgress").msgclass
+  AnnotateVideoProgress = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1p2beta1.AnnotateVideoProgress").msgclass
+  NormalizedVertex = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1p2beta1.NormalizedVertex").msgclass
+  NormalizedBoundingPoly = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1p2beta1.NormalizedBoundingPoly").msgclass
+  TextSegment = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1p2beta1.TextSegment").msgclass
+  TextFrame = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1p2beta1.TextFrame").msgclass
+  TextAnnotation = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1p2beta1.TextAnnotation").msgclass
+  ObjectTrackingFrame = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1p2beta1.ObjectTrackingFrame").msgclass
+  ObjectTrackingAnnotation = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1p2beta1.ObjectTrackingAnnotation").msgclass
+  Feature = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1p2beta1.Feature").enummodule
+  LabelDetectionMode = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1p2beta1.LabelDetectionMode").enummodule
+  Likelihood = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1p2beta1.Likelihood").enummodule
 end
