@@ -537,7 +537,7 @@ this service.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#get_iam_policy-instance_method" title="#get_iam_policy (instance method)">#<strong>get_iam_policy</strong>(resource, options: nil) {|result, operation| ... } &#x21d2; Google::Iam::V1::Policy </a>
+      <a href="#get_iam_policy-instance_method" title="#get_iam_policy (instance method)">#<strong>get_iam_policy</strong>(resource, options_: nil, options: nil) {|result, operation| ... } &#x21d2; Google::Iam::V1::Policy </a>
     
 
     
@@ -3112,7 +3112,7 @@ retries, etc.</p>
       <div class="method_details ">
   <h3 class="signature " id="get_iam_policy-instance_method">
   
-    #<strong>get_iam_policy</strong>(resource, options: nil) {|result, operation| ... } &#x21d2; <tt><span class='object_link'><a href="../../../Iam/V1/Policy.html" title="Google::Iam::V1::Policy (class)">Google::Iam::V1::Policy</a></span></tt> 
+    #<strong>get_iam_policy</strong>(resource, options_: nil, options: nil) {|result, operation| ... } &#x21d2; <tt><span class='object_link'><a href="../../../Iam/V1/Policy.html" title="Google::Iam::V1::Policy (class)">Google::Iam::V1::Policy</a></span></tt> 
   
 
   
@@ -3153,6 +3153,24 @@ retries, etc.</p>
         &mdash;
         <div class='inline'><p>REQUIRED: The resource for which the policy is being requested.
 See the operation documentation for the appropriate value for this field.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>options_</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../../Iam/V1/GetPolicyOptions.html" title="Google::Iam::V1::GetPolicyOptions (class)">Google::Iam::V1::GetPolicyOptions</a></span> | Hash</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>OPTIONAL: A <code>GetPolicyOptions</code> object for specifying options to
+<code>GetIamPolicy</code>. This field is only used by Cloud IAM.
+A hash of the same form as <code>Google::Iam::V1::GetPolicyOptions</code>
+can also be provided.</p>
 </div>
       
     </li>
@@ -3255,26 +3273,30 @@ retries, etc.</p>
       <pre class="lines">
 
 
-609
-610
-611
-612
-613
 614
 615
 616
 617
-618</pre>
+618
+619
+620
+621
+622
+623
+624
+625</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/security_center/v1/security_center_client.rb', line 609</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/security_center/v1/security_center_client.rb', line 614</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_iam_policy'>get_iam_policy</span> \
     <span class='id identifier rubyid_resource'>resource</span><span class='comma'>,</span>
+    <span class='label'>options_:</span> <span class='kw'>nil</span><span class='comma'>,</span>
     <span class='label'>options:</span> <span class='kw'>nil</span><span class='comma'>,</span>
     <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
   <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='lbrace'>{</span>
-    <span class='label'>resource:</span> <span class='id identifier rubyid_resource'>resource</span>
+    <span class='label'>resource:</span> <span class='id identifier rubyid_resource'>resource</span><span class='comma'>,</span>
+    <span class='label'>options:</span> <span class='id identifier rubyid_options_'>options_</span>
   <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span>
   <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='id identifier rubyid_to_proto'>to_proto</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Iam.html" title="Google::Iam (module)">Iam</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Iam/V1.html" title="Google::Iam::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Iam/V1/GetIamPolicyRequest.html" title="Google::Iam::V1::GetIamPolicyRequest (class)">GetIamPolicyRequest</a></span></span><span class='rparen'>)</span>
   <span class='ivar'>@get_iam_policy</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
@@ -3430,19 +3452,19 @@ retries, etc.</p>
       <pre class="lines">
 
 
-640
-641
-642
-643
-644
-645
-646
 647
 648
-649</pre>
+649
+650
+651
+652
+653
+654
+655
+656</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/security_center/v1/security_center_client.rb', line 640</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/security_center/v1/security_center_client.rb', line 647</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_organization_settings'>get_organization_settings</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -3605,19 +3627,19 @@ retries, etc.</p>
       <pre class="lines">
 
 
-671
-672
-673
-674
-675
-676
-677
 678
 679
-680</pre>
+680
+681
+682
+683
+684
+685
+686
+687</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/security_center/v1/security_center_client.rb', line 671</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/security_center/v1/security_center_client.rb', line 678</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_source'>get_source</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -3979,13 +4001,6 @@ object.</p>
       <pre class="lines">
 
 
-821
-822
-823
-824
-825
-826
-827
 828
 829
 830
@@ -3998,10 +4013,17 @@ object.</p>
 837
 838
 839
-840</pre>
+840
+841
+842
+843
+844
+845
+846
+847</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/security_center/v1/security_center_client.rb', line 821</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/security_center/v1/security_center_client.rb', line 828</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_group_assets'>group_assets</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -4376,13 +4398,6 @@ object.</p>
       <pre class="lines">
 
 
-981
-982
-983
-984
-985
-986
-987
 988
 989
 990
@@ -4395,10 +4410,17 @@ object.</p>
 997
 998
 999
-1000</pre>
+1000
+1001
+1002
+1003
+1004
+1005
+1006
+1007</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/security_center/v1/security_center_client.rb', line 981</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/security_center/v1/security_center_client.rb', line 988</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_group_findings'>group_findings</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -4783,13 +4805,6 @@ object.</p>
       <pre class="lines">
 
 
-1145
-1146
-1147
-1148
-1149
-1150
-1151
 1152
 1153
 1154
@@ -4804,10 +4819,17 @@ object.</p>
 1163
 1164
 1165
-1166</pre>
+1166
+1167
+1168
+1169
+1170
+1171
+1172
+1173</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/security_center/v1/security_center_client.rb', line 1145</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/security_center/v1/security_center_client.rb', line 1152</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_assets'>list_assets</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -5198,13 +5220,6 @@ object.</p>
       <pre class="lines">
 
 
-1312
-1313
-1314
-1315
-1316
-1317
-1318
 1319
 1320
 1321
@@ -5219,10 +5234,17 @@ object.</p>
 1330
 1331
 1332
-1333</pre>
+1333
+1334
+1335
+1336
+1337
+1338
+1339
+1340</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/security_center/v1/security_center_client.rb', line 1312</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/security_center/v1/security_center_client.rb', line 1319</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_findings'>list_findings</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -5435,21 +5457,21 @@ object.</p>
       <pre class="lines">
 
 
-1377
-1378
-1379
-1380
-1381
-1382
-1383
 1384
 1385
 1386
 1387
-1388</pre>
+1388
+1389
+1390
+1391
+1392
+1393
+1394
+1395</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/security_center/v1/security_center_client.rb', line 1377</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/security_center/v1/security_center_client.rb', line 1384</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_sources'>list_sources</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -5806,13 +5828,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1438
-1439
-1440
-1441
-1442
-1443
-1444
 1445
 1446
 1447
@@ -5822,10 +5837,17 @@ retries, etc.</p>
 1451
 1452
 1453
-1454</pre>
+1454
+1455
+1456
+1457
+1458
+1459
+1460
+1461</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/security_center/v1/security_center_client.rb', line 1438</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/security_center/v1/security_center_client.rb', line 1445</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_run_asset_discovery'>run_asset_discovery</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -6035,23 +6057,23 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1490
-1491
-1492
-1493
-1494
-1495
-1496
 1497
 1498
 1499
 1500
 1501
 1502
-1503</pre>
+1503
+1504
+1505
+1506
+1507
+1508
+1509
+1510</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/security_center/v1/security_center_client.rb', line 1490</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/security_center/v1/security_center_client.rb', line 1497</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_set_finding_state'>set_finding_state</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -6241,21 +6263,21 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1535
-1536
-1537
-1538
-1539
-1540
-1541
 1542
 1543
 1544
 1545
-1546</pre>
+1546
+1547
+1548
+1549
+1550
+1551
+1552
+1553</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/security_center/v1/security_center_client.rb', line 1535</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/security_center/v1/security_center_client.rb', line 1542</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_set_iam_policy'>set_iam_policy</span> \
     <span class='id identifier rubyid_resource'>resource</span><span class='comma'>,</span>
@@ -6520,21 +6542,21 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1576
-1577
-1578
-1579
-1580
-1581
-1582
 1583
 1584
 1585
 1586
-1587</pre>
+1587
+1588
+1589
+1590
+1591
+1592
+1593
+1594</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/security_center/v1/security_center_client.rb', line 1576</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/security_center/v1/security_center_client.rb', line 1583</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_test_iam_permissions'>test_iam_permissions</span> \
     <span class='id identifier rubyid_resource'>resource</span><span class='comma'>,</span>
@@ -6731,21 +6753,21 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1628
-1629
-1630
-1631
-1632
-1633
-1634
 1635
 1636
 1637
 1638
-1639</pre>
+1639
+1640
+1641
+1642
+1643
+1644
+1645
+1646</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/security_center/v1/security_center_client.rb', line 1628</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/security_center/v1/security_center_client.rb', line 1635</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update_finding'>update_finding</span> \
     <span class='id identifier rubyid_finding'>finding</span><span class='comma'>,</span>
@@ -6932,21 +6954,21 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1670
-1671
-1672
-1673
-1674
-1675
-1676
 1677
 1678
 1679
 1680
-1681</pre>
+1681
+1682
+1683
+1684
+1685
+1686
+1687
+1688</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/security_center/v1/security_center_client.rb', line 1670</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/security_center/v1/security_center_client.rb', line 1677</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update_organization_settings'>update_organization_settings</span> \
     <span class='id identifier rubyid_organization_settings'>organization_settings</span><span class='comma'>,</span>
@@ -7154,23 +7176,23 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1762
-1763
-1764
-1765
-1766
-1767
-1768
 1769
 1770
 1771
 1772
 1773
 1774
-1775</pre>
+1775
+1776
+1777
+1778
+1779
+1780
+1781
+1782</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/security_center/v1/security_center_client.rb', line 1762</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/security_center/v1/security_center_client.rb', line 1769</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update_security_marks'>update_security_marks</span> \
     <span class='id identifier rubyid_security_marks'>security_marks</span><span class='comma'>,</span>
@@ -7359,21 +7381,21 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1712
-1713
-1714
-1715
-1716
-1717
-1718
 1719
 1720
 1721
 1722
-1723</pre>
+1723
+1724
+1725
+1726
+1727
+1728
+1729
+1730</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/security_center/v1/security_center_client.rb', line 1712</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/security_center/v1/security_center_client.rb', line 1719</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update_source'>update_source</span> \
     <span class='id identifier rubyid_source'>source</span><span class='comma'>,</span>
