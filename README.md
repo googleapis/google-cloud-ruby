@@ -339,7 +339,8 @@ $ gem install google-cloud-container_analysis
 ```ruby
 require "google/cloud/container_analysis"
 
-grafeas_client = Grafeas.new
+container_analysis_client = Google::Cloud::ContainerAnalysis.new
+grafeas_client = container_analysis_client.grafeas_client
 parent = Grafeas::V1::GrafeasClient.project_path "my-project"
 results = grafeas_client.list_occurrences(parent).each do |occurrence|
   # do something with occurrence

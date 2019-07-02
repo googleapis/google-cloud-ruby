@@ -109,6 +109,18 @@ s.replace(
     '\n\nrequire "grafeas"\nrequire "google/gax"\n'
 )
 
+# Expose the grafeas client as an attribute of the container_analysis client
+s.replace(
+    'lib/google/cloud/container_analysis/v*/*_client.rb',
+    '\n\n(\\s+)(credentials \\|\\|= \\S+)\n',
+    '\n\n\\1\\2\n\n\\1@grafeas_client = ::Grafeas.new(\n\\1  credentials: credentials, scopes: scopes, client_config: client_config,\n\\1  timeout: timeout, lib_name: lib_name, lib_version: lib_version,\n\\1  service_address: service_address, service_port: service_port, metadata: metadata)\n'
+)
+s.replace(
+    'lib/google/cloud/container_analysis/v*/*_client.rb',
+    '\n(\\s+)attr_reader :container_analysis_stub\n',
+    '\n\\1attr_reader :container_analysis_stub\n\n\\1# @return [Grafeas::V1::GrafeasClient] a client for the Grafeas service\n\\1attr_reader :grafeas_client\n'
+)
+
 # Credentials env vars
 s.replace(
     'lib/**/credentials.rb',

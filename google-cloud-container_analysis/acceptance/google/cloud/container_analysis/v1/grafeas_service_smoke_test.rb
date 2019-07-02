@@ -19,7 +19,8 @@ require "google/cloud/container_analysis"
 
 describe "GrafeasService V1 smoke test" do
   it "runs one smoke test with list_occurrences" do
-    client = Grafeas.new(version: :v1)
+    ca_client = Google::Cloud::ContainerAnalysis.new
+    client = ca_client.grafeas_client
     parent = Grafeas::V1::GrafeasClient.project_path(ENV["CONTAINER_ANALYSIS_PROJECT"])
     results = client.list_occurrences(parent, page_size: 2)
     page = results.page
