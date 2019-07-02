@@ -192,6 +192,39 @@ this service.</p>
 
 
 
+  <h2>Instance Attribute Summary <small><a href="#" class="summary_toggle">collapse</a></small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#grafeas_client-instance_method" title="#grafeas_client (instance method)">#<strong>grafeas_client</strong>  &#x21d2; Grafeas::V1::GrafeasClient </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>A client for the Grafeas service.</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
 
 
 
@@ -501,9 +534,6 @@ custom error handling.</p>
       <pre class="lines">
 
 
-124
-125
-126
 127
 128
 129
@@ -600,10 +630,18 @@ custom error handling.</p>
 220
 221
 222
-223</pre>
+223
+224
+225
+226
+227
+228
+229
+230
+231</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/container_analysis/v1/container_analysis_client.rb', line 124</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container_analysis/v1/container_analysis_client.rb', line 127</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span> \
     <span class='label'>credentials:</span> <span class='kw'>nil</span><span class='comma'>,</span>
@@ -623,6 +661,11 @@ custom error handling.</p>
   <span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/devtools/containeranalysis/v1/containeranalysis_services_pb</span><span class='tstring_end'>&quot;</span></span>
 
   <span class='id identifier rubyid_credentials'>credentials</span> <span class='op'>||=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../ContainerAnalysis.html" title="Google::Cloud::ContainerAnalysis (module)">ContainerAnalysis</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1.html" title="Google::Cloud::ContainerAnalysis::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Credentials.html" title="Google::Cloud::ContainerAnalysis::V1::Credentials (class)">Credentials</a></span></span><span class='period'>.</span><span class='id identifier rubyid_default'>default</span>
+
+  <span class='ivar'>@grafeas_client</span> <span class='op'>=</span> <span class='op'>::</span><span class='const'>Grafeas</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span>
+    <span class='label'>credentials:</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='comma'>,</span> <span class='label'>scopes:</span> <span class='id identifier rubyid_scopes'>scopes</span><span class='comma'>,</span> <span class='label'>client_config:</span> <span class='id identifier rubyid_client_config'>client_config</span><span class='comma'>,</span>
+    <span class='label'>timeout:</span> <span class='id identifier rubyid_timeout'>timeout</span><span class='comma'>,</span> <span class='label'>lib_name:</span> <span class='id identifier rubyid_lib_name'>lib_name</span><span class='comma'>,</span> <span class='label'>lib_version:</span> <span class='id identifier rubyid_lib_version'>lib_version</span><span class='comma'>,</span>
+    <span class='label'>service_address:</span> <span class='id identifier rubyid_service_address'>service_address</span><span class='comma'>,</span> <span class='label'>service_port:</span> <span class='id identifier rubyid_service_port'>service_port</span><span class='comma'>,</span> <span class='label'>metadata:</span> <span class='id identifier rubyid_metadata'>metadata</span><span class='rparen'>)</span>
 
   <span class='kw'>if</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>String</span><span class='rparen'>)</span> <span class='op'>||</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>Hash</span><span class='rparen'>)</span>
     <span class='id identifier rubyid_updater_proc'>updater_proc</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../ContainerAnalysis.html" title="Google::Cloud::ContainerAnalysis (module)">ContainerAnalysis</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1.html" title="Google::Cloud::ContainerAnalysis::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Credentials.html" title="Google::Cloud::ContainerAnalysis::V1::Credentials (class)">Credentials</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../V1.html#new-class_method" title="Google::Cloud::ContainerAnalysis::V1.new (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_credentials'>credentials</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_updater_proc'>updater_proc</span>
@@ -712,6 +755,70 @@ custom error handling.</p>
   
 </div>
 
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id=""></span>
+      <div class="method_details first">
+  <h3 class="signature first" id="grafeas_client-instance_method">
+  
+    #<strong>grafeas_client</strong>  &#x21d2; <tt>Grafeas::V1::GrafeasClient</tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns a client for the Grafeas service</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Grafeas::V1::GrafeasClient</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a client for the Grafeas service</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+57
+58
+59</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container_analysis/v1/container_analysis_client.rb', line 57</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_grafeas_client'>grafeas_client</span>
+  <span class='ivar'>@grafeas_client</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
 
   <div id="class_method_details" class="method_details_list">
     <h2>Class Method Details</h2>
@@ -781,15 +888,15 @@ custom error handling.</p>
       <pre class="lines">
 
 
-84
-85
-86
 87
 88
-89</pre>
+89
+90
+91
+92</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/container_analysis/v1/container_analysis_client.rb', line 84</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container_analysis/v1/container_analysis_client.rb', line 87</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_note_path'>note_path</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span> <span class='id identifier rubyid_note'>note</span>
   <span class='const'>NOTE_PATH_TEMPLATE</span><span class='period'>.</span><span class='id identifier rubyid_render'>render</span><span class='lparen'>(</span>
@@ -979,21 +1086,21 @@ retries, etc.</p>
       <pre class="lines">
 
 
-309
-310
-311
-312
-313
-314
-315
-316
 317
 318
 319
-320</pre>
+320
+321
+322
+323
+324
+325
+326
+327
+328</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/container_analysis/v1/container_analysis_client.rb', line 309</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container_analysis/v1/container_analysis_client.rb', line 317</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_iam_policy'>get_iam_policy</span> \
     <span class='id identifier rubyid_resource'>resource</span><span class='comma'>,</span>
@@ -1188,21 +1295,21 @@ retries, etc.</p>
       <pre class="lines">
 
 
-264
-265
-266
-267
-268
-269
-270
-271
 272
 273
 274
-275</pre>
+275
+276
+277
+278
+279
+280
+281
+282
+283</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/container_analysis/v1/container_analysis_client.rb', line 264</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container_analysis/v1/container_analysis_client.rb', line 272</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_set_iam_policy'>set_iam_policy</span> \
     <span class='id identifier rubyid_resource'>resource</span><span class='comma'>,</span>
@@ -1394,21 +1501,21 @@ retries, etc.</p>
       <pre class="lines">
 
 
-356
-357
-358
-359
-360
-361
-362
-363
 364
 365
 366
-367</pre>
+367
+368
+369
+370
+371
+372
+373
+374
+375</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/container_analysis/v1/container_analysis_client.rb', line 356</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container_analysis/v1/container_analysis_client.rb', line 364</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_test_iam_permissions'>test_iam_permissions</span> \
     <span class='id identifier rubyid_resource'>resource</span><span class='comma'>,</span>
