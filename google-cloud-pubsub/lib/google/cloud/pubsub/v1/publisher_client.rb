@@ -704,6 +704,11 @@ module Google
           # @param resource [String]
           #   REQUIRED: The resource for which the policy is being requested.
           #   See the operation documentation for the appropriate value for this field.
+          # @param options_ [Google::Iam::V1::GetPolicyOptions | Hash]
+          #   OPTIONAL: A `GetPolicyOptions` object for specifying options to
+          #   `GetIamPolicy`. This field is only used by Cloud IAM.
+          #   A hash of the same form as `Google::Iam::V1::GetPolicyOptions`
+          #   can also be provided.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -721,10 +726,12 @@ module Google
 
           def get_iam_policy \
               resource,
+              options_: nil,
               options: nil,
               &block
             req = {
-              resource: resource
+              resource: resource,
+              options: options_
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Iam::V1::GetIamPolicyRequest)
             @get_iam_policy.call(req, options, &block)
