@@ -243,9 +243,8 @@ different groups.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Required.</p>
-
-<p>Client side tenant identifier, used to uniquely identify the tenant.</p>
+    <p>Returns Required. Client side tenant identifier, used to uniquely identify the
+tenant.</p>
 
 <p>The maximum number of allowed characters is 255.</p>
 
@@ -265,9 +264,8 @@ different groups.</p>
       
       
         &mdash;
-        <div class='inline'><p>Required.</p>
-
-<p>Client side tenant identifier, used to uniquely identify the tenant.</p>
+        <div class='inline'><p>Required. Client side tenant identifier, used to uniquely identify the
+tenant.</p>
 
 <p>The maximum number of allowed characters is 255.</p>
 </div>
@@ -282,6 +280,8 @@ different groups.</p>
       <pre class="lines">
 
 
+56
+57
 58
 59
 60
@@ -294,12 +294,10 @@ different groups.</p>
 67
 68
 69
-70
-71
-72</pre>
+70</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/tenant.rb', line 58</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/tenant.rb', line 56</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::Tenant (class)">Tenant</a></span></span>
   <span class='comment'># Enum that represents how user data owned by the tenant is used.
@@ -334,11 +332,10 @@ different groups.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Optional.</p>
-
-<p>A list of keys of filterable <span class='object_link'><a href="Profile.html#custom_attributes-instance_method" title="Google::Cloud::Talent::V4beta1::Profile#custom_attributes (method)">Profile#custom_attributes</a></span>, whose
-corresponding <code>string_values</code> are used in keyword searches. Profiles with
-<code>string_values</code> under these specified field keys are returned if any
+    <p>Returns Optional. A list of keys of filterable
+<span class='object_link'><a href="Profile.html#custom_attributes-instance_method" title="Google::Cloud::Talent::V4beta1::Profile#custom_attributes (method)">Profile#custom_attributes</a></span>,
+whose corresponding <code>string_values</code> are used in keyword searches. Profiles
+with <code>string_values</code> under these specified field keys are returned if any
 of the values match the search keyword. Custom field values with
 parenthesis, brackets and special symbols are not searchable as-is,
 and must be surrounded by quotes.</p>
@@ -359,11 +356,10 @@ and must be surrounded by quotes.</p>
       
       
         &mdash;
-        <div class='inline'><p>Optional.</p>
-
-<p>A list of keys of filterable <span class='object_link'><a href="Profile.html#custom_attributes-instance_method" title="Google::Cloud::Talent::V4beta1::Profile#custom_attributes (method)">Profile#custom_attributes</a></span>, whose
-corresponding <code>string_values</code> are used in keyword searches. Profiles with
-<code>string_values</code> under these specified field keys are returned if any
+        <div class='inline'><p>Optional. A list of keys of filterable
+<span class='object_link'><a href="Profile.html#custom_attributes-instance_method" title="Google::Cloud::Talent::V4beta1::Profile#custom_attributes (method)">Profile#custom_attributes</a></span>,
+whose corresponding <code>string_values</code> are used in keyword searches. Profiles
+with <code>string_values</code> under these specified field keys are returned if any
 of the values match the search keyword. Custom field values with
 parenthesis, brackets and special symbols are not searchable as-is,
 and must be surrounded by quotes.</p>
@@ -379,6 +375,8 @@ and must be surrounded by quotes.</p>
       <pre class="lines">
 
 
+56
+57
 58
 59
 60
@@ -391,12 +389,10 @@ and must be surrounded by quotes.</p>
 67
 68
 69
-70
-71
-72</pre>
+70</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/tenant.rb', line 58</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/tenant.rb', line 56</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::Tenant (class)">Tenant</a></span></span>
   <span class='comment'># Enum that represents how user data owned by the tenant is used.
@@ -474,6 +470,8 @@ tenant is created.</p>
       <pre class="lines">
 
 
+56
+57
 58
 59
 60
@@ -486,12 +484,10 @@ tenant is created.</p>
 67
 68
 69
-70
-71
-72</pre>
+70</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/tenant.rb', line 58</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/tenant.rb', line 56</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::Tenant (class)">Tenant</a></span></span>
   <span class='comment'># Enum that represents how user data owned by the tenant is used.
@@ -526,12 +522,12 @@ tenant is created.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Optional.</p>
+    <p>Returns Optional. Indicates whether data owned by this tenant may be used to
+provide product improvements across other tenants.</p>
 
-<p>Indicates whether data owned by this tenant may be used to provide product
-improvements across other tenants.</p>
-
-<p>Defaults behavior is <span class='object_link'><a href="Tenant/DataUsageType.html#ISOLATED-constant" title="Google::Cloud::Talent::V4beta1::Tenant::DataUsageType::ISOLATED (constant)">DataUsageType::ISOLATED</a></span> if it&#39;s unset.</p>
+<p>Defaults behavior is
+<span class='object_link'><a href="Tenant/DataUsageType.html#ISOLATED-constant" title="Google::Cloud::Talent::V4beta1::Tenant::DataUsageType::ISOLATED (constant)">DataUsageType::ISOLATED</a></span>
+if it&#39;s unset.</p>
 
 
   </div>
@@ -549,12 +545,12 @@ improvements across other tenants.</p>
       
       
         &mdash;
-        <div class='inline'><p>Optional.</p>
+        <div class='inline'><p>Optional. Indicates whether data owned by this tenant may be used to
+provide product improvements across other tenants.</p>
 
-<p>Indicates whether data owned by this tenant may be used to provide product
-improvements across other tenants.</p>
-
-<p>Defaults behavior is <span class='object_link'><a href="Tenant/DataUsageType.html#ISOLATED-constant" title="Google::Cloud::Talent::V4beta1::Tenant::DataUsageType::ISOLATED (constant)">DataUsageType::ISOLATED</a></span> if it&#39;s unset.</p>
+<p>Defaults behavior is
+<span class='object_link'><a href="Tenant/DataUsageType.html#ISOLATED-constant" title="Google::Cloud::Talent::V4beta1::Tenant::DataUsageType::ISOLATED (constant)">DataUsageType::ISOLATED</a></span>
+if it&#39;s unset.</p>
 </div>
       
     </li>
@@ -567,6 +563,8 @@ improvements across other tenants.</p>
       <pre class="lines">
 
 
+56
+57
 58
 59
 60
@@ -579,12 +577,10 @@ improvements across other tenants.</p>
 67
 68
 69
-70
-71
-72</pre>
+70</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/tenant.rb', line 58</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/tenant.rb', line 56</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::Tenant (class)">Tenant</a></span></span>
   <span class='comment'># Enum that represents how user data owned by the tenant is used.

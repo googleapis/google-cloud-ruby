@@ -1490,9 +1490,7 @@ custom error handling.</p>
       
       
         &mdash;
-        <div class='inline'><p>Required.</p>
-
-<p>The resource name of the tenant under which the job is created.</p>
+        <div class='inline'><p>Required. The resource name of the tenant under which the job is created.</p>
 
 <p>The format is &quot;projects/project_id/tenants/tenant_id&quot;, for example,
 &quot;projects/api-test-project/tenant/foo&quot;.</p>
@@ -1513,9 +1511,7 @@ example, &quot;projects/api-test-project&quot;.</p>
       
       
         &mdash;
-        <div class='inline'><p>Required.</p>
-
-<p>The jobs to be created.
+        <div class='inline'><p>Required. The jobs to be created.
 A hash of the same form as <code>Google::Cloud::Talent::V4beta1::Job</code>
 can also be provided.</p>
 </div>
@@ -1577,28 +1573,28 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1490
-1491
-1492
-1493
-1494
-1495
-1496
-1497
-1498
-1499
-1500
-1501
-1502
-1503
-1504
-1505
-1506
-1507
-1508</pre>
+1426
+1427
+1428
+1429
+1430
+1431
+1432
+1433
+1434
+1435
+1436
+1437
+1438
+1439
+1440
+1441
+1442
+1443
+1444</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/job_service_client.rb', line 1490</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/job_service_client.rb', line 1426</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_batch_create_jobs'>batch_create_jobs</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -1669,9 +1665,7 @@ retries, etc.</p>
       
       
         &mdash;
-        <div class='inline'><p>Required.</p>
-
-<p>The resource name of the tenant under which the job is created.</p>
+        <div class='inline'><p>Required. The resource name of the tenant under which the job is created.</p>
 
 <p>The format is &quot;projects/project_id/tenants/tenant_id&quot;, for example,
 &quot;projects/api-test-project/tenant/foo&quot;.</p>
@@ -1692,9 +1686,7 @@ example, &quot;projects/api-test-project&quot;.</p>
       
       
         &mdash;
-        <div class='inline'><p>Required.</p>
-
-<p>The filter string specifies the jobs to be deleted.</p>
+        <div class='inline'><p>Required. The filter string specifies the jobs to be deleted.</p>
 
 <p>Supported operator: =, AND</p>
 
@@ -1800,22 +1792,22 @@ retries, etc.</p>
       <pre class="lines">
 
 
-674
-675
-676
-677
-678
-679
-680
-681
-682
-683
-684
-685
-686</pre>
+654
+655
+656
+657
+658
+659
+660
+661
+662
+663
+664
+665
+666</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/job_service_client.rb', line 674</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/job_service_client.rb', line 654</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_batch_delete_jobs'>batch_delete_jobs</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -1906,9 +1898,7 @@ retries, etc.</p>
       
       
         &mdash;
-        <div class='inline'><p>Required.</p>
-
-<p>The resource name of the tenant under which the job is created.</p>
+        <div class='inline'><p>Required. The resource name of the tenant under which the job is created.</p>
 
 <p>The format is &quot;projects/project_id/tenants/tenant_id&quot;, for example,
 &quot;projects/api-test-project/tenant/foo&quot;.</p>
@@ -1929,9 +1919,7 @@ example, &quot;projects/api-test-project&quot;.</p>
       
       
         &mdash;
-        <div class='inline'><p>Required.</p>
-
-<p>The jobs to be updated.
+        <div class='inline'><p>Required. The jobs to be updated.
 A hash of the same form as <code>Google::Cloud::Talent::V4beta1::Job</code>
 can also be provided.</p>
 </div>
@@ -2027,30 +2015,30 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1590
-1591
-1592
-1593
-1594
-1595
-1596
-1597
-1598
-1599
-1600
-1601
-1602
-1603
-1604
-1605
-1606
-1607
-1608
-1609
-1610</pre>
+1522
+1523
+1524
+1525
+1526
+1527
+1528
+1529
+1530
+1531
+1532
+1533
+1534
+1535
+1536
+1537
+1538
+1539
+1540
+1541
+1542</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/job_service_client.rb', line 1590</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/job_service_client.rb', line 1522</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_batch_update_jobs'>batch_update_jobs</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -2216,9 +2204,7 @@ up to 5 minutes.</p>
       
       
         &mdash;
-        <div class='inline'><p>Required.</p>
-
-<p>The resource name of the tenant under which the job is created.</p>
+        <div class='inline'><p>Required. The resource name of the tenant under which the job is created.</p>
 
 <p>The format is &quot;projects/project_id/tenants/tenant_id&quot;, for example,
 &quot;projects/api-test-project/tenant/foo&quot;.</p>
@@ -2239,9 +2225,7 @@ example, &quot;projects/api-test-project&quot;.</p>
       
       
         &mdash;
-        <div class='inline'><p>Required.</p>
-
-<p>The Job to be created.
+        <div class='inline'><p>Required. The Job to be created.
 A hash of the same form as <code>Google::Cloud::Talent::V4beta1::Job</code>
 can also be provided.</p>
 </div>
@@ -2346,6 +2330,10 @@ retries, etc.</p>
       <pre class="lines">
 
 
+381
+382
+383
+384
 385
 386
 387
@@ -2353,14 +2341,10 @@ retries, etc.</p>
 389
 390
 391
-392
-393
-394
-395
-396</pre>
+392</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/job_service_client.rb', line 385</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/job_service_client.rb', line 381</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_job'>create_job</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -2424,9 +2408,7 @@ up to 5 minutes.</p>
       
       
         &mdash;
-        <div class='inline'><p>Required.</p>
-
-<p>The resource name of the job to be deleted.</p>
+        <div class='inline'><p>Required. The resource name of the job to be deleted.</p>
 
 <p>The format is
 &quot;projects/project_id/tenants/tenant_id/jobs/job_id&quot;, for
@@ -2527,20 +2509,20 @@ retries, etc.</p>
       <pre class="lines">
 
 
-522
-523
-524
-525
-526
-527
-528
-529
-530
-531
-532</pre>
+512
+513
+514
+515
+516
+517
+518
+519
+520
+521
+522</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/job_service_client.rb', line 522</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/job_service_client.rb', line 512</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete_job'>delete_job</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -2601,9 +2583,7 @@ within the last 90 days.</p>
       
       
         &mdash;
-        <div class='inline'><p>Required.</p>
-
-<p>The resource name of the job to retrieve.</p>
+        <div class='inline'><p>Required. The resource name of the job to retrieve.</p>
 
 <p>The format is
 &quot;projects/project_id/tenants/tenant_id/jobs/job_id&quot;, for
@@ -2713,19 +2693,19 @@ retries, etc.</p>
       <pre class="lines">
 
 
+421
+422
+423
+424
+425
+426
 427
 428
 429
-430
-431
-432
-433
-434
-435
-436</pre>
+430</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/job_service_client.rb', line 427</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/job_service_client.rb', line 421</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_job'>get_job</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -2889,9 +2869,7 @@ retries, etc.</p>
       
       
         &mdash;
-        <div class='inline'><p>Required.</p>
-
-<p>The resource name of the tenant under which the job is created.</p>
+        <div class='inline'><p>Required. The resource name of the tenant under which the job is created.</p>
 
 <p>The format is &quot;projects/project_id/tenants/tenant_id&quot;, for example,
 &quot;projects/api-test-project/tenant/foo&quot;.</p>
@@ -2912,9 +2890,7 @@ example, &quot;projects/api-test-project&quot;.</p>
       
       
         &mdash;
-        <div class='inline'><p>Required.</p>
-
-<p>The filter string specifies the jobs to be enumerated.</p>
+        <div class='inline'><p>Required. The filter string specifies the jobs to be enumerated.</p>
 
 <p>Supported operator: =, AND</p>
 
@@ -2969,9 +2945,7 @@ resources in a page.</p>
       
       
         &mdash;
-        <div class='inline'><p>Optional.</p>
-
-<p>The desired job attributes returned for jobs in the
+        <div class='inline'><p>Optional. The desired job attributes returned for jobs in the
 search response. Defaults to
 <span class='object_link'><a href="JobView.html#JOB_VIEW_FULL-constant" title="Google::Cloud::Talent::V4beta1::JobView::JOB_VIEW_FULL (constant)">JobView::JOB_VIEW_FULL</a></span>
 if no value is specified.</p>
@@ -3084,25 +3058,25 @@ object.</p>
       <pre class="lines">
 
 
-614
-615
-616
-617
-618
-619
-620
-621
-622
-623
-624
-625
-626
-627
-628
-629</pre>
+598
+599
+600
+601
+602
+603
+604
+605
+606
+607
+608
+609
+610
+611
+612
+613</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/job_service_client.rb', line 614</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/job_service_client.rb', line 598</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_jobs'>list_jobs</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -3188,9 +3162,7 @@ search against.</p>
       
       
         &mdash;
-        <div class='inline'><p>Required.</p>
-
-<p>The resource name of the tenant to search within.</p>
+        <div class='inline'><p>Required. The resource name of the tenant to search within.</p>
 
 <p>The format is &quot;projects/project_id/tenants/tenant_id&quot;, for example,
 &quot;projects/api-test-project/tenant/foo&quot;.</p>
@@ -3211,11 +3183,9 @@ example, &quot;projects/api-test-project&quot;.</p>
       
       
         &mdash;
-        <div class='inline'><p>Required.</p>
-
-<p>The meta information collected about the job searcher, used to improve the
-search quality of the service.. The identifiers, (such as <code>user_id</code>) are
-provided by users, and must be unique and consistent.
+        <div class='inline'><p>Required. The meta information collected about the job searcher, used to
+improve the search quality of the service. The identifiers (such as
+<code>user_id</code>) are provided by users, and must be unique and consistent.
 A hash of the same form as <code>Google::Cloud::Talent::V4beta1::RequestMetadata</code>
 can also be provided.</p>
 </div>
@@ -3232,9 +3202,7 @@ can also be provided.</p>
       
       
         &mdash;
-        <div class='inline'><p>Optional.</p>
-
-<p>Mode of a search.</p>
+        <div class='inline'><p>Optional. Mode of a search.</p>
 
 <p>Defaults to
 <span class='object_link'><a href="SearchJobsRequest/SearchMode.html#JOB_SEARCH-constant" title="Google::Cloud::Talent::V4beta1::SearchJobsRequest::SearchMode::JOB_SEARCH (constant)">SearchMode::JOB_SEARCH</a></span>.</p>
@@ -3252,9 +3220,8 @@ can also be provided.</p>
       
       
         &mdash;
-        <div class='inline'><p>Optional.</p>
-
-<p>Query used to search against jobs, such as keyword, location filters, etc.
+        <div class='inline'><p>Optional. Query used to search against jobs, such as keyword, location
+filters, etc.
 A hash of the same form as <code>Google::Cloud::Talent::V4beta1::JobQuery</code>
 can also be provided.</p>
 </div>
@@ -3271,11 +3238,9 @@ can also be provided.</p>
       
       
         &mdash;
-        <div class='inline'><p>Optional.</p>
-
-<p>Controls whether to broaden the search when it produces sparse results.
-Broadened queries append results to the end of the matching results
-list.</p>
+        <div class='inline'><p>Optional. Controls whether to broaden the search when it produces sparse
+results. Broadened queries append results to the end of the matching
+results list.</p>
 
 <p>Defaults to false.</p>
 </div>
@@ -3292,10 +3257,8 @@ list.</p>
       
       
         &mdash;
-        <div class='inline'><p>Optional.</p>
-
-<p>Controls if the search job request requires the return of a precise
-count of the first 300 results. Setting this to <code>true</code> ensures
+        <div class='inline'><p>Optional. Controls if the search job request requires the return of a
+precise count of the first 300 results. Setting this to <code>true</code> ensures
 consistency in the number of results per page. Best practice is to set this
 value to true if a client allows users to jump directly to a
 non-sequential search results page.</p>
@@ -3317,9 +3280,8 @@ non-sequential search results page.</p>
       
       
         &mdash;
-        <div class='inline'><p>Optional.</p>
-
-<p>An expression specifies a histogram request against matching jobs.</p>
+        <div class='inline'><p>Optional. An expression specifies a histogram request against matching
+jobs.</p>
 
 <p>Expression syntax is an aggregation function call with histogram facets and
 other options.</p>
@@ -3455,10 +3417,8 @@ can also be provided.</li>
       
       
         &mdash;
-        <div class='inline'><p>Optional.</p>
-
-<p>The desired job attributes returned for jobs in the search response.
-Defaults to
+        <div class='inline'><p>Optional. The desired job attributes returned for jobs in the search
+response. Defaults to
 <span class='object_link'><a href="JobView.html#JOB_VIEW_SMALL-constant" title="Google::Cloud::Talent::V4beta1::JobView::JOB_VIEW_SMALL (constant)">JobView::JOB_VIEW_SMALL</a></span>
 if no value is specified.</p>
 </div>
@@ -3475,10 +3435,8 @@ if no value is specified.</p>
       
       
         &mdash;
-        <div class='inline'><p>Optional.</p>
-
-<p>An integer that specifies the current offset (that is, starting result
-location, amongst the jobs deemed by the API as relevant) in search
+        <div class='inline'><p>Optional. An integer that specifies the current offset (that is, starting
+result location, amongst the jobs deemed by the API as relevant) in search
 results. This field is only considered if
 <span class='object_link'><a href="SearchJobsRequest.html#page_token-instance_method" title="Google::Cloud::Talent::V4beta1::SearchJobsRequest#page_token (method)">page_token</a></span> is
 unset.</p>
@@ -3520,60 +3478,62 @@ resources in a page.</p>
       
       
         &mdash;
-        <div class='inline'><p>Optional.</p>
-
-<p>The criteria determining how search results are sorted. Default is
-&quot;relevance desc&quot;.</p>
+        <div class='inline'><p>Optional. The criteria determining how search results are sorted. Default
+is
+<code>&quot;relevance desc&quot;</code>.</p>
 
 <p>Supported options are:</p>
 
 <ul>
-<li>&quot;relevance desc&quot;: By relevance descending, as determined by the API
+<li><code>&quot;relevance desc&quot;</code>: By relevance descending, as determined by the API
 algorithms. Relevance thresholding of query results is only available
 with this ordering.</li>
-<li>&quot;posting<code>_</code>publish<code>_</code>time desc&quot;: By
+<li><code>&quot;posting_publish_time desc&quot;</code>: By
 <span class='object_link'><a href="Job.html#posting_publish_time-instance_method" title="Google::Cloud::Talent::V4beta1::Job#posting_publish_time (method)">Job#posting_publish_time</a></span>
 descending.</li>
-<li>&quot;posting<code>_</code>update<code>_</code>time desc&quot;: By
+<li><code>&quot;posting_update_time desc&quot;</code>: By
 <span class='object_link'><a href="Job.html#posting_update_time-instance_method" title="Google::Cloud::Talent::V4beta1::Job#posting_update_time (method)">Job#posting_update_time</a></span>
 descending.</li>
-<li>&quot;title&quot;: By <span class='object_link'><a href="Job.html#title-instance_method" title="Google::Cloud::Talent::V4beta1::Job#title (method)">Job#title</a></span> ascending.</li>
-<li>&quot;title desc&quot;: By <span class='object_link'><a href="Job.html#title-instance_method" title="Google::Cloud::Talent::V4beta1::Job#title (method)">Job#title</a></span>
+<li><code>&quot;title&quot;</code>: By <span class='object_link'><a href="Job.html#title-instance_method" title="Google::Cloud::Talent::V4beta1::Job#title (method)">Job#title</a></span>
+ascending.</li>
+<li><code>&quot;title desc&quot;</code>: By <span class='object_link'><a href="Job.html#title-instance_method" title="Google::Cloud::Talent::V4beta1::Job#title (method)">Job#title</a></span>
 descending.</li>
-<li>&quot;annualized<code>_</code>base<code>_</code>compensation&quot;: By job&#39;s
+<li><code>&quot;annualized_base_compensation&quot;</code>: By job&#39;s
 <span class='object_link'><a href="CompensationInfo.html#annualized_base_compensation_range-instance_method" title="Google::Cloud::Talent::V4beta1::CompensationInfo#annualized_base_compensation_range (method)">CompensationInfo#annualized_base_compensation_range</a></span>
 ascending. Jobs whose annualized base compensation is unspecified are put
 at the end of search results.</li>
-<li>&quot;annualized<code>_</code>base<code>_</code>compensation desc&quot;: By job&#39;s
+<li><code>&quot;annualized_base_compensation desc&quot;</code>: By job&#39;s
 <span class='object_link'><a href="CompensationInfo.html#annualized_base_compensation_range-instance_method" title="Google::Cloud::Talent::V4beta1::CompensationInfo#annualized_base_compensation_range (method)">CompensationInfo#annualized_base_compensation_range</a></span>
 descending. Jobs whose annualized base compensation is unspecified are
 put at the end of search results.</li>
-<li>&quot;annualized<code>_</code>total<code>_</code>compensation&quot;: By job&#39;s
+<li><code>&quot;annualized_total_compensation&quot;</code>: By job&#39;s
 <span class='object_link'><a href="CompensationInfo.html#annualized_total_compensation_range-instance_method" title="Google::Cloud::Talent::V4beta1::CompensationInfo#annualized_total_compensation_range (method)">CompensationInfo#annualized_total_compensation_range</a></span>
 ascending. Jobs whose annualized base compensation is unspecified are put
 at the end of search results.</li>
-<li>&quot;annualized<code>_</code>total<code>_</code>compensation desc&quot;: By job&#39;s
+<li><code>&quot;annualized_total_compensation desc&quot;</code>: By job&#39;s
 <span class='object_link'><a href="CompensationInfo.html#annualized_total_compensation_range-instance_method" title="Google::Cloud::Talent::V4beta1::CompensationInfo#annualized_total_compensation_range (method)">CompensationInfo#annualized_total_compensation_range</a></span>
 descending. Jobs whose annualized base compensation is unspecified are
 put at the end of search results.</li>
-<li>&quot;custom<code>_</code>ranking desc&quot;: By the relevance score adjusted to the
+<li><code>&quot;custom_ranking desc&quot;</code>: By the relevance score adjusted to the
 <span class='object_link'><a href="SearchJobsRequest/CustomRankingInfo.html#ranking_expression-instance_method" title="Google::Cloud::Talent::V4beta1::SearchJobsRequest::CustomRankingInfo#ranking_expression (method)">SearchJobsRequest::CustomRankingInfo#ranking_expression</a></span>
 with weight factor assigned by
 <span class='object_link'><a href="SearchJobsRequest/CustomRankingInfo.html#importance_level-instance_method" title="Google::Cloud::Talent::V4beta1::SearchJobsRequest::CustomRankingInfo#importance_level (method)">SearchJobsRequest::CustomRankingInfo#importance_level</a></span>
 in descending order.</li>
-<li>&quot;location<code>_</code>distance&quot;: By the distance between the location on jobs and
-locations specified in the
-<span class='object_link'><a href="JobQuery.html#location_filters-instance_method" title="Google::Cloud::Talent::V4beta1::JobQuery#location_filters (method)">JobQuery#location_filters</a></span>.
-When this order is selected, the
-<span class='object_link'><a href="JobQuery.html#location_filters-instance_method" title="Google::Cloud::Talent::V4beta1::JobQuery#location_filters (method)">JobQuery#location_filters</a></span>
-must not be empty. When a job has multiple locations, the location
-closest to one of the locations specified in the location filter will be
-used to calculate location distance. Distance is calculated by the
-distance between two lat/long coordinates, with a precision of 10e-4
-degrees (11.3 meters). Jobs that don&#39;t have locations specified will be
-ranked below jobs having locations. Diversification strategy is still
-applied unless explicitly disabled in
-<span class='object_link'><a href="SearchJobsRequest.html#diversification_level-instance_method" title="Google::Cloud::Talent::V4beta1::SearchJobsRequest#diversification_level (method)">SearchJobsRequest#diversification_level</a></span>.</li>
+<li>Location sorting: Use the special syntax to order jobs by distance:<br>
+<code>&quot;distance_from(&#39;Hawaii&#39;)&quot;</code>: Order by distance from Hawaii.<br>
+<code>&quot;distance_from(19.89, 155.5)&quot;</code>: Order by distance from a coordinate.<br>
+<code>&quot;distance_from(&#39;Hawaii&#39;), distance_from(&#39;Puerto Rico&#39;)&quot;</code>: Order by
+multiple locations. See details below.<br>
+<code>&quot;distance_from(&#39;Hawaii&#39;), distance_from(19.89, 155.5)&quot;</code>: Order by
+multiple locations. See details below.<br>
+The string can have a maximum of 256 characters. When multiple distance
+centers are provided, a job that is close to any of the distance centers
+would have a high rank. When a job has multiple locations, the job
+location closest to one of the distance centers will be used. Jobs that
+don&#39;t have locations will be ranked at the bottom. Distance is calculated
+with a precision of 11.3 meters (37.4 feet). Diversification strategy is
+still applied unless explicitly disabled in
+<span class='object_link'><a href="SearchJobsRequest.html#diversification_level-instance_method" title="Google::Cloud::Talent::V4beta1::SearchJobsRequest#diversification_level (method)">diversification_level</a></span>.</li>
 </ul>
 </div>
       
@@ -3589,10 +3549,8 @@ applied unless explicitly disabled in
       
       
         &mdash;
-        <div class='inline'><p>Optional.</p>
-
-<p>Controls whether highly similar jobs are returned next to each other in
-the search results. Jobs are identified as highly similar based on
+        <div class='inline'><p>Optional. Controls whether highly similar jobs are returned next to each
+other in the search results. Jobs are identified as highly similar based on
 their titles, job categories, and locations. Highly similar results are
 clustered so that only one representative job of the cluster is
 displayed to the job seeker higher up in the results, with the other jobs
@@ -3615,10 +3573,8 @@ if no value is specified.</p>
       
       
         &mdash;
-        <div class='inline'><p>Optional.</p>
-
-<p>Controls over how job documents get ranked on top of existing relevance
-score (determined by API algorithm).
+        <div class='inline'><p>Optional. Controls over how job documents get ranked on top of existing
+relevance score (determined by API algorithm).
 A hash of the same form as <code>Google::Cloud::Talent::V4beta1::SearchJobsRequest::CustomRankingInfo</code>
 can also be provided.</p>
 </div>
@@ -3635,9 +3591,7 @@ can also be provided.</p>
       
       
         &mdash;
-        <div class='inline'><p>Optional.</p>
-
-<p>Controls whether to disable exact keyword match on
+        <div class='inline'><p>Optional. Controls whether to disable exact keyword match on
 <span class='object_link'><a href="Job.html#title-instance_method" title="Google::Cloud::Talent::V4beta1::Job#title (method)">Job#title</a></span>,
 <span class='object_link'><a href="Job.html#description-instance_method" title="Google::Cloud::Talent::V4beta1::Job#description (method)">Job#description</a></span>,
 <span class='object_link'><a href="Job.html#company_display_name-instance_method" title="Google::Cloud::Talent::V4beta1::Job#company_display_name (method)">Job#company_display_name</a></span>,
@@ -3770,45 +3724,45 @@ object.</p>
       <pre class="lines">
 
 
-1020
-1021
-1022
-1023
-1024
-1025
-1026
-1027
-1028
-1029
-1030
-1031
-1032
-1033
-1034
-1035
-1036
-1037
-1038
-1039
-1040
-1041
-1042
-1043
-1044
-1045
-1046
-1047
-1048
-1049
-1050
-1051
-1052
-1053
-1054
-1055</pre>
+980
+981
+982
+983
+984
+985
+986
+987
+988
+989
+990
+991
+992
+993
+994
+995
+996
+997
+998
+999
+1000
+1001
+1002
+1003
+1004
+1005
+1006
+1007
+1008
+1009
+1010
+1011
+1012
+1013
+1014
+1015</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/job_service_client.rb', line 1020</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/job_service_client.rb', line 980</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_search_jobs'>search_jobs</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -3919,9 +3873,7 @@ against.</p>
       
       
         &mdash;
-        <div class='inline'><p>Required.</p>
-
-<p>The resource name of the tenant to search within.</p>
+        <div class='inline'><p>Required. The resource name of the tenant to search within.</p>
 
 <p>The format is &quot;projects/project_id/tenants/tenant_id&quot;, for example,
 &quot;projects/api-test-project/tenant/foo&quot;.</p>
@@ -3942,11 +3894,9 @@ example, &quot;projects/api-test-project&quot;.</p>
       
       
         &mdash;
-        <div class='inline'><p>Required.</p>
-
-<p>The meta information collected about the job searcher, used to improve the
-search quality of the service.. The identifiers, (such as <code>user_id</code>) are
-provided by users, and must be unique and consistent.
+        <div class='inline'><p>Required. The meta information collected about the job searcher, used to
+improve the search quality of the service. The identifiers (such as
+<code>user_id</code>) are provided by users, and must be unique and consistent.
 A hash of the same form as <code>Google::Cloud::Talent::V4beta1::RequestMetadata</code>
 can also be provided.</p>
 </div>
@@ -3963,9 +3913,7 @@ can also be provided.</p>
       
       
         &mdash;
-        <div class='inline'><p>Optional.</p>
-
-<p>Mode of a search.</p>
+        <div class='inline'><p>Optional. Mode of a search.</p>
 
 <p>Defaults to
 <span class='object_link'><a href="SearchJobsRequest/SearchMode.html#JOB_SEARCH-constant" title="Google::Cloud::Talent::V4beta1::SearchJobsRequest::SearchMode::JOB_SEARCH (constant)">SearchMode::JOB_SEARCH</a></span>.</p>
@@ -3983,9 +3931,8 @@ can also be provided.</p>
       
       
         &mdash;
-        <div class='inline'><p>Optional.</p>
-
-<p>Query used to search against jobs, such as keyword, location filters, etc.
+        <div class='inline'><p>Optional. Query used to search against jobs, such as keyword, location
+filters, etc.
 A hash of the same form as <code>Google::Cloud::Talent::V4beta1::JobQuery</code>
 can also be provided.</p>
 </div>
@@ -4002,11 +3949,9 @@ can also be provided.</p>
       
       
         &mdash;
-        <div class='inline'><p>Optional.</p>
-
-<p>Controls whether to broaden the search when it produces sparse results.
-Broadened queries append results to the end of the matching results
-list.</p>
+        <div class='inline'><p>Optional. Controls whether to broaden the search when it produces sparse
+results. Broadened queries append results to the end of the matching
+results list.</p>
 
 <p>Defaults to false.</p>
 </div>
@@ -4023,10 +3968,8 @@ list.</p>
       
       
         &mdash;
-        <div class='inline'><p>Optional.</p>
-
-<p>Controls if the search job request requires the return of a precise
-count of the first 300 results. Setting this to <code>true</code> ensures
+        <div class='inline'><p>Optional. Controls if the search job request requires the return of a
+precise count of the first 300 results. Setting this to <code>true</code> ensures
 consistency in the number of results per page. Best practice is to set this
 value to true if a client allows users to jump directly to a
 non-sequential search results page.</p>
@@ -4048,9 +3991,8 @@ non-sequential search results page.</p>
       
       
         &mdash;
-        <div class='inline'><p>Optional.</p>
-
-<p>An expression specifies a histogram request against matching jobs.</p>
+        <div class='inline'><p>Optional. An expression specifies a histogram request against matching
+jobs.</p>
 
 <p>Expression syntax is an aggregation function call with histogram facets and
 other options.</p>
@@ -4186,10 +4128,8 @@ can also be provided.</li>
       
       
         &mdash;
-        <div class='inline'><p>Optional.</p>
-
-<p>The desired job attributes returned for jobs in the search response.
-Defaults to
+        <div class='inline'><p>Optional. The desired job attributes returned for jobs in the search
+response. Defaults to
 <span class='object_link'><a href="JobView.html#JOB_VIEW_SMALL-constant" title="Google::Cloud::Talent::V4beta1::JobView::JOB_VIEW_SMALL (constant)">JobView::JOB_VIEW_SMALL</a></span>
 if no value is specified.</p>
 </div>
@@ -4206,10 +4146,8 @@ if no value is specified.</p>
       
       
         &mdash;
-        <div class='inline'><p>Optional.</p>
-
-<p>An integer that specifies the current offset (that is, starting result
-location, amongst the jobs deemed by the API as relevant) in search
+        <div class='inline'><p>Optional. An integer that specifies the current offset (that is, starting
+result location, amongst the jobs deemed by the API as relevant) in search
 results. This field is only considered if
 <span class='object_link'><a href="SearchJobsRequest.html#page_token-instance_method" title="Google::Cloud::Talent::V4beta1::SearchJobsRequest#page_token (method)">page_token</a></span> is
 unset.</p>
@@ -4251,60 +4189,62 @@ resources in a page.</p>
       
       
         &mdash;
-        <div class='inline'><p>Optional.</p>
-
-<p>The criteria determining how search results are sorted. Default is
-&quot;relevance desc&quot;.</p>
+        <div class='inline'><p>Optional. The criteria determining how search results are sorted. Default
+is
+<code>&quot;relevance desc&quot;</code>.</p>
 
 <p>Supported options are:</p>
 
 <ul>
-<li>&quot;relevance desc&quot;: By relevance descending, as determined by the API
+<li><code>&quot;relevance desc&quot;</code>: By relevance descending, as determined by the API
 algorithms. Relevance thresholding of query results is only available
 with this ordering.</li>
-<li>&quot;posting<code>_</code>publish<code>_</code>time desc&quot;: By
+<li><code>&quot;posting_publish_time desc&quot;</code>: By
 <span class='object_link'><a href="Job.html#posting_publish_time-instance_method" title="Google::Cloud::Talent::V4beta1::Job#posting_publish_time (method)">Job#posting_publish_time</a></span>
 descending.</li>
-<li>&quot;posting<code>_</code>update<code>_</code>time desc&quot;: By
+<li><code>&quot;posting_update_time desc&quot;</code>: By
 <span class='object_link'><a href="Job.html#posting_update_time-instance_method" title="Google::Cloud::Talent::V4beta1::Job#posting_update_time (method)">Job#posting_update_time</a></span>
 descending.</li>
-<li>&quot;title&quot;: By <span class='object_link'><a href="Job.html#title-instance_method" title="Google::Cloud::Talent::V4beta1::Job#title (method)">Job#title</a></span> ascending.</li>
-<li>&quot;title desc&quot;: By <span class='object_link'><a href="Job.html#title-instance_method" title="Google::Cloud::Talent::V4beta1::Job#title (method)">Job#title</a></span>
+<li><code>&quot;title&quot;</code>: By <span class='object_link'><a href="Job.html#title-instance_method" title="Google::Cloud::Talent::V4beta1::Job#title (method)">Job#title</a></span>
+ascending.</li>
+<li><code>&quot;title desc&quot;</code>: By <span class='object_link'><a href="Job.html#title-instance_method" title="Google::Cloud::Talent::V4beta1::Job#title (method)">Job#title</a></span>
 descending.</li>
-<li>&quot;annualized<code>_</code>base<code>_</code>compensation&quot;: By job&#39;s
+<li><code>&quot;annualized_base_compensation&quot;</code>: By job&#39;s
 <span class='object_link'><a href="CompensationInfo.html#annualized_base_compensation_range-instance_method" title="Google::Cloud::Talent::V4beta1::CompensationInfo#annualized_base_compensation_range (method)">CompensationInfo#annualized_base_compensation_range</a></span>
 ascending. Jobs whose annualized base compensation is unspecified are put
 at the end of search results.</li>
-<li>&quot;annualized<code>_</code>base<code>_</code>compensation desc&quot;: By job&#39;s
+<li><code>&quot;annualized_base_compensation desc&quot;</code>: By job&#39;s
 <span class='object_link'><a href="CompensationInfo.html#annualized_base_compensation_range-instance_method" title="Google::Cloud::Talent::V4beta1::CompensationInfo#annualized_base_compensation_range (method)">CompensationInfo#annualized_base_compensation_range</a></span>
 descending. Jobs whose annualized base compensation is unspecified are
 put at the end of search results.</li>
-<li>&quot;annualized<code>_</code>total<code>_</code>compensation&quot;: By job&#39;s
+<li><code>&quot;annualized_total_compensation&quot;</code>: By job&#39;s
 <span class='object_link'><a href="CompensationInfo.html#annualized_total_compensation_range-instance_method" title="Google::Cloud::Talent::V4beta1::CompensationInfo#annualized_total_compensation_range (method)">CompensationInfo#annualized_total_compensation_range</a></span>
 ascending. Jobs whose annualized base compensation is unspecified are put
 at the end of search results.</li>
-<li>&quot;annualized<code>_</code>total<code>_</code>compensation desc&quot;: By job&#39;s
+<li><code>&quot;annualized_total_compensation desc&quot;</code>: By job&#39;s
 <span class='object_link'><a href="CompensationInfo.html#annualized_total_compensation_range-instance_method" title="Google::Cloud::Talent::V4beta1::CompensationInfo#annualized_total_compensation_range (method)">CompensationInfo#annualized_total_compensation_range</a></span>
 descending. Jobs whose annualized base compensation is unspecified are
 put at the end of search results.</li>
-<li>&quot;custom<code>_</code>ranking desc&quot;: By the relevance score adjusted to the
+<li><code>&quot;custom_ranking desc&quot;</code>: By the relevance score adjusted to the
 <span class='object_link'><a href="SearchJobsRequest/CustomRankingInfo.html#ranking_expression-instance_method" title="Google::Cloud::Talent::V4beta1::SearchJobsRequest::CustomRankingInfo#ranking_expression (method)">SearchJobsRequest::CustomRankingInfo#ranking_expression</a></span>
 with weight factor assigned by
 <span class='object_link'><a href="SearchJobsRequest/CustomRankingInfo.html#importance_level-instance_method" title="Google::Cloud::Talent::V4beta1::SearchJobsRequest::CustomRankingInfo#importance_level (method)">SearchJobsRequest::CustomRankingInfo#importance_level</a></span>
 in descending order.</li>
-<li>&quot;location<code>_</code>distance&quot;: By the distance between the location on jobs and
-locations specified in the
-<span class='object_link'><a href="JobQuery.html#location_filters-instance_method" title="Google::Cloud::Talent::V4beta1::JobQuery#location_filters (method)">JobQuery#location_filters</a></span>.
-When this order is selected, the
-<span class='object_link'><a href="JobQuery.html#location_filters-instance_method" title="Google::Cloud::Talent::V4beta1::JobQuery#location_filters (method)">JobQuery#location_filters</a></span>
-must not be empty. When a job has multiple locations, the location
-closest to one of the locations specified in the location filter will be
-used to calculate location distance. Distance is calculated by the
-distance between two lat/long coordinates, with a precision of 10e-4
-degrees (11.3 meters). Jobs that don&#39;t have locations specified will be
-ranked below jobs having locations. Diversification strategy is still
-applied unless explicitly disabled in
-<span class='object_link'><a href="SearchJobsRequest.html#diversification_level-instance_method" title="Google::Cloud::Talent::V4beta1::SearchJobsRequest#diversification_level (method)">SearchJobsRequest#diversification_level</a></span>.</li>
+<li>Location sorting: Use the special syntax to order jobs by distance:<br>
+<code>&quot;distance_from(&#39;Hawaii&#39;)&quot;</code>: Order by distance from Hawaii.<br>
+<code>&quot;distance_from(19.89, 155.5)&quot;</code>: Order by distance from a coordinate.<br>
+<code>&quot;distance_from(&#39;Hawaii&#39;), distance_from(&#39;Puerto Rico&#39;)&quot;</code>: Order by
+multiple locations. See details below.<br>
+<code>&quot;distance_from(&#39;Hawaii&#39;), distance_from(19.89, 155.5)&quot;</code>: Order by
+multiple locations. See details below.<br>
+The string can have a maximum of 256 characters. When multiple distance
+centers are provided, a job that is close to any of the distance centers
+would have a high rank. When a job has multiple locations, the job
+location closest to one of the distance centers will be used. Jobs that
+don&#39;t have locations will be ranked at the bottom. Distance is calculated
+with a precision of 11.3 meters (37.4 feet). Diversification strategy is
+still applied unless explicitly disabled in
+<span class='object_link'><a href="SearchJobsRequest.html#diversification_level-instance_method" title="Google::Cloud::Talent::V4beta1::SearchJobsRequest#diversification_level (method)">diversification_level</a></span>.</li>
 </ul>
 </div>
       
@@ -4320,10 +4260,8 @@ applied unless explicitly disabled in
       
       
         &mdash;
-        <div class='inline'><p>Optional.</p>
-
-<p>Controls whether highly similar jobs are returned next to each other in
-the search results. Jobs are identified as highly similar based on
+        <div class='inline'><p>Optional. Controls whether highly similar jobs are returned next to each
+other in the search results. Jobs are identified as highly similar based on
 their titles, job categories, and locations. Highly similar results are
 clustered so that only one representative job of the cluster is
 displayed to the job seeker higher up in the results, with the other jobs
@@ -4346,10 +4284,8 @@ if no value is specified.</p>
       
       
         &mdash;
-        <div class='inline'><p>Optional.</p>
-
-<p>Controls over how job documents get ranked on top of existing relevance
-score (determined by API algorithm).
+        <div class='inline'><p>Optional. Controls over how job documents get ranked on top of existing
+relevance score (determined by API algorithm).
 A hash of the same form as <code>Google::Cloud::Talent::V4beta1::SearchJobsRequest::CustomRankingInfo</code>
 can also be provided.</p>
 </div>
@@ -4366,9 +4302,7 @@ can also be provided.</p>
       
       
         &mdash;
-        <div class='inline'><p>Optional.</p>
-
-<p>Controls whether to disable exact keyword match on
+        <div class='inline'><p>Optional. Controls whether to disable exact keyword match on
 <span class='object_link'><a href="Job.html#title-instance_method" title="Google::Cloud::Talent::V4beta1::Job#title (method)">Job#title</a></span>,
 <span class='object_link'><a href="Job.html#description-instance_method" title="Google::Cloud::Talent::V4beta1::Job#description (method)">Job#description</a></span>,
 <span class='object_link'><a href="Job.html#company_display_name-instance_method" title="Google::Cloud::Talent::V4beta1::Job#company_display_name (method)">Job#company_display_name</a></span>,
@@ -4501,45 +4435,45 @@ object.</p>
       <pre class="lines">
 
 
-1394
-1395
-1396
-1397
-1398
-1399
-1400
-1401
-1402
-1403
-1404
-1405
-1406
-1407
-1408
-1409
-1410
-1411
-1412
-1413
-1414
-1415
-1416
-1417
-1418
-1419
-1420
-1421
-1422
-1423
-1424
-1425
-1426
-1427
-1428
-1429</pre>
+1334
+1335
+1336
+1337
+1338
+1339
+1340
+1341
+1342
+1343
+1344
+1345
+1346
+1347
+1348
+1349
+1350
+1351
+1352
+1353
+1354
+1355
+1356
+1357
+1358
+1359
+1360
+1361
+1362
+1363
+1364
+1365
+1366
+1367
+1368
+1369</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/job_service_client.rb', line 1394</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/job_service_client.rb', line 1334</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_search_jobs_for_alert'>search_jobs_for_alert</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -4708,9 +4642,7 @@ seconds, but it may take up to 5 minutes.</p>
       
       
         &mdash;
-        <div class='inline'><p>Required.</p>
-
-<p>The Job to be updated.
+        <div class='inline'><p>Required. The Job to be updated.
 A hash of the same form as <code>Google::Cloud::Talent::V4beta1::Job</code>
 can also be provided.</p>
 </div>
@@ -4841,21 +4773,21 @@ retries, etc.</p>
       <pre class="lines">
 
 
+471
+472
+473
+474
+475
+476
+477
+478
 479
 480
 481
-482
-483
-484
-485
-486
-487
-488
-489
-490</pre>
+482</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/job_service_client.rb', line 479</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/job_service_client.rb', line 471</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update_job'>update_job</span> \
     <span class='id identifier rubyid_job'>job</span><span class='comma'>,</span>

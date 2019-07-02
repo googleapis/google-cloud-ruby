@@ -1065,9 +1065,7 @@ custom error handling.</p>
       
       
         &mdash;
-        <div class='inline'><p>Required.</p>
-
-<p>Resource name of the project under which the tenant is created.</p>
+        <div class='inline'><p>Required. Resource name of the project under which the tenant is created.</p>
 
 <p>The format is &quot;projects/project_id&quot;, for example,
 &quot;projects/api-test-project&quot;.</p>
@@ -1085,9 +1083,7 @@ custom error handling.</p>
       
       
         &mdash;
-        <div class='inline'><p>Required.</p>
-
-<p>The tenant to be created.
+        <div class='inline'><p>Required. The tenant to be created.
 A hash of the same form as <code>Google::Cloud::Talent::V4beta1::Tenant</code>
 can also be provided.</p>
 </div>
@@ -1192,6 +1188,10 @@ retries, etc.</p>
       <pre class="lines">
 
 
+286
+287
+288
+289
 290
 291
 292
@@ -1199,14 +1199,10 @@ retries, etc.</p>
 294
 295
 296
-297
-298
-299
-300
-301</pre>
+297</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/tenant_service_client.rb', line 290</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/tenant_service_client.rb', line 286</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_tenant'>create_tenant</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -1267,9 +1263,7 @@ retries, etc.</p>
       
       
         &mdash;
-        <div class='inline'><p>Required.</p>
-
-<p>The resource name of the tenant to be deleted.</p>
+        <div class='inline'><p>Required. The resource name of the tenant to be deleted.</p>
 
 <p>The format is &quot;projects/project_id/tenants/tenant_id&quot;, for example,
 &quot;projects/api-test-project/tenants/foo&quot;.</p>
@@ -1366,20 +1360,20 @@ retries, etc.</p>
       <pre class="lines">
 
 
+405
+406
+407
+408
+409
 410
 411
 412
 413
 414
-415
-416
-417
-418
-419
-420</pre>
+415</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/tenant_service_client.rb', line 410</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/tenant_service_client.rb', line 405</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete_tenant'>delete_tenant</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -1439,9 +1433,7 @@ retries, etc.</p>
       
       
         &mdash;
-        <div class='inline'><p>Required.</p>
-
-<p>The resource name of the tenant to be retrieved.</p>
+        <div class='inline'><p>Required. The resource name of the tenant to be retrieved.</p>
 
 <p>The format is &quot;projects/project_id/tenants/tenant_id&quot;, for example,
 &quot;projects/api-test-project/tenants/foo&quot;.</p>
@@ -1547,19 +1539,19 @@ retries, etc.</p>
       <pre class="lines">
 
 
+321
+322
+323
+324
+325
+326
 327
 328
 329
-330
-331
-332
-333
-334
-335
-336</pre>
+330</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/tenant_service_client.rb', line 327</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/tenant_service_client.rb', line 321</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_tenant'>get_tenant</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -1630,9 +1622,7 @@ retries, etc.</p>
       
       
         &mdash;
-        <div class='inline'><p>Required.</p>
-
-<p>Resource name of the project under which the tenant is created.</p>
+        <div class='inline'><p>Required. Resource name of the project under which the tenant is created.</p>
 
 <p>The format is &quot;projects/project_id&quot;, for example,
 &quot;projects/api-test-project&quot;.</p>
@@ -1764,21 +1754,21 @@ object.</p>
       <pre class="lines">
 
 
+461
+462
+463
+464
+465
+466
+467
 468
 469
 470
 471
-472
-473
-474
-475
-476
-477
-478
-479</pre>
+472</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/tenant_service_client.rb', line 468</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/tenant_service_client.rb', line 461</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_tenants'>list_tenants</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -1988,9 +1978,8 @@ object.</p>
       
       
         &mdash;
-        <div class='inline'><p>Required.</p>
-
-<p>The tenant resource to replace the current resource in the system.
+        <div class='inline'><p>Required. The tenant resource to replace the current resource in the
+system.
 A hash of the same form as <code>Google::Cloud::Talent::V4beta1::Tenant</code>
 can also be provided.</p>
 </div>
@@ -2010,11 +1999,15 @@ can also be provided.</p>
         <div class='inline'><p>Optional but strongly recommended for the best service
 experience.</p>
 
-<p>If <span class='object_link'><a href="UpdateTenantRequest.html#update_mask-instance_method" title="Google::Cloud::Talent::V4beta1::UpdateTenantRequest#update_mask (method)">update_mask</a></span> is provided, only the specified fields in
-<span class='object_link'><a href="UpdateTenantRequest.html#tenant-instance_method" title="Google::Cloud::Talent::V4beta1::UpdateTenantRequest#tenant (method)">tenant</a></span> are updated. Otherwise all the fields are updated.</p>
+<p>If
+<span class='object_link'><a href="UpdateTenantRequest.html#update_mask-instance_method" title="Google::Cloud::Talent::V4beta1::UpdateTenantRequest#update_mask (method)">update_mask</a></span>
+is provided, only the specified fields in
+<span class='object_link'><a href="UpdateTenantRequest.html#tenant-instance_method" title="Google::Cloud::Talent::V4beta1::UpdateTenantRequest#tenant (method)">tenant</a></span> are
+updated. Otherwise all the fields are updated.</p>
 
 <p>A field mask to specify the tenant fields to be updated. Only
-top level fields of <span class='object_link'><a href="Tenant.html" title="Google::Cloud::Talent::V4beta1::Tenant (class)">Tenant</a></span> are supported.
+top level fields of <span class='object_link'><a href="Tenant.html" title="Google::Cloud::Talent::V4beta1::Tenant (class)">Tenant</a></span> are
+supported.
 A hash of the same form as <code>Google::Protobuf::FieldMask</code>
 can also be provided.</p>
 </div>
@@ -2119,6 +2112,9 @@ retries, etc.</p>
       <pre class="lines">
 
 
+371
+372
+373
 374
 375
 376
@@ -2127,13 +2123,10 @@ retries, etc.</p>
 379
 380
 381
-382
-383
-384
-385</pre>
+382</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/tenant_service_client.rb', line 374</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/tenant_service_client.rb', line 371</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update_tenant'>update_tenant</span> \
     <span class='id identifier rubyid_tenant'>tenant</span><span class='comma'>,</span>

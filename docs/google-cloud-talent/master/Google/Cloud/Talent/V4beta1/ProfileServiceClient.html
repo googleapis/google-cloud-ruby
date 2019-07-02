@@ -393,7 +393,7 @@ this service.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#search_profiles-instance_method" title="#search_profiles (instance method)">#<strong>search_profiles</strong>(parent, request_metadata, profile_query: nil, page_size: nil, offset: nil, disable_spell_check: nil, order_by: nil, case_sensitive_sort: nil, histogram_queries: nil, options: nil) {|result, operation| ... } &#x21d2; Google::Gax::PagedEnumerable&lt;Google::Cloud::Talent::V4beta1::SummarizedProfile&gt; </a>
+      <a href="#search_profiles-instance_method" title="#search_profiles (instance method)">#<strong>search_profiles</strong>(parent, request_metadata, profile_query: nil, page_size: nil, offset: nil, disable_spell_check: nil, order_by: nil, case_sensitive_sort: nil, histogram_queries: nil, result_set_id: nil, options: nil) {|result, operation| ... } &#x21d2; Google::Gax::PagedEnumerable&lt;Google::Cloud::Talent::V4beta1::SummarizedProfile&gt; </a>
     
 
     
@@ -1131,9 +1131,7 @@ custom error handling.</p>
       
       
         &mdash;
-        <div class='inline'><p>Required.</p>
-
-<p>The name of the tenant this profile belongs to.</p>
+        <div class='inline'><p>Required. The name of the tenant this profile belongs to.</p>
 
 <p>The format is &quot;projects/project_id/tenants/tenant_id&quot;, for example,
 &quot;projects/api-test-project/tenants/foo&quot;.</p>
@@ -1151,9 +1149,7 @@ custom error handling.</p>
       
       
         &mdash;
-        <div class='inline'><p>Required.</p>
-
-<p>The profile to be created.
+        <div class='inline'><p>Required. The profile to be created.
 A hash of the same form as <code>Google::Cloud::Talent::V4beta1::Profile</code>
 can also be provided.</p>
 </div>
@@ -1258,21 +1254,21 @@ retries, etc.</p>
       <pre class="lines">
 
 
+372
+373
+374
+375
+376
+377
+378
 379
 380
 381
 382
-383
-384
-385
-386
-387
-388
-389
-390</pre>
+383</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/profile_service_client.rb', line 379</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/profile_service_client.rb', line 372</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_profile'>create_profile</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -1335,9 +1331,7 @@ associated.</p>
       
       
         &mdash;
-        <div class='inline'><p>Required.</p>
-
-<p>Resource name of the profile to be deleted.</p>
+        <div class='inline'><p>Required. Resource name of the profile to be deleted.</p>
 
 <p>The format is
 &quot;projects/project_id/tenants/tenant_id/profiles/profile_id&quot;,
@@ -1435,20 +1429,20 @@ retries, etc.</p>
       <pre class="lines">
 
 
-526
-527
-528
-529
-530
-531
-532
-533
-534
-535
-536</pre>
+511
+512
+513
+514
+515
+516
+517
+518
+519
+520
+521</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/profile_service_client.rb', line 526</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/profile_service_client.rb', line 511</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete_profile'>delete_profile</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -1508,9 +1502,7 @@ retries, etc.</p>
       
       
         &mdash;
-        <div class='inline'><p>Required.</p>
-
-<p>Resource name of the profile to get.</p>
+        <div class='inline'><p>Required. Resource name of the profile to get.</p>
 
 <p>The format is
 &quot;projects/project_id/tenants/tenant_id/profiles/profile_id&quot;,
@@ -1617,19 +1609,19 @@ retries, etc.</p>
       <pre class="lines">
 
 
-417
-418
-419
-420
-421
-422
-423
-424
-425
-426</pre>
+408
+409
+410
+411
+412
+413
+414
+415
+416
+417</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/profile_service_client.rb', line 417</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/profile_service_client.rb', line 408</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_profile'>get_profile</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -1700,9 +1692,8 @@ retries, etc.</p>
       
       
         &mdash;
-        <div class='inline'><p>Required.</p>
-
-<p>The resource name of the tenant under which the job is created.</p>
+        <div class='inline'><p>Required. The resource name of the tenant under which the profile is
+created.</p>
 
 <p>The format is &quot;projects/project_id/tenants/tenant_id&quot;, for example,
 &quot;projects/api-test-project/tenants/foo&quot;.</p>
@@ -1739,10 +1730,8 @@ resources in a page.</p>
       
       
         &mdash;
-        <div class='inline'><p>Optional.</p>
-
-<p>A field mask to specify the profile fields to be listed in response.
-All fields are listed if it is unset.</p>
+        <div class='inline'><p>Optional. A field mask to specify the profile fields to be listed in
+response. All fields are listed if it is unset.</p>
 
 <p>Valid values are:</p>
 
@@ -1860,6 +1849,9 @@ object.</p>
       <pre class="lines">
 
 
+328
+329
+330
 331
 332
 333
@@ -1870,13 +1862,10 @@ object.</p>
 338
 339
 340
-341
-342
-343
-344</pre>
+341</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/profile_service_client.rb', line 331</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/profile_service_client.rb', line 328</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_profiles'>list_profiles</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -1990,7 +1979,7 @@ object.</p>
       <div class="method_details ">
   <h3 class="signature " id="search_profiles-instance_method">
   
-    #<strong>search_profiles</strong>(parent, request_metadata, profile_query: nil, page_size: nil, offset: nil, disable_spell_check: nil, order_by: nil, case_sensitive_sort: nil, histogram_queries: nil, options: nil) {|result, operation| ... } &#x21d2; <tt>Google::Gax::PagedEnumerable&lt;<span class='object_link'><a href="SummarizedProfile.html" title="Google::Cloud::Talent::V4beta1::SummarizedProfile (class)">Google::Cloud::Talent::V4beta1::SummarizedProfile</a></span>&gt;</tt> 
+    #<strong>search_profiles</strong>(parent, request_metadata, profile_query: nil, page_size: nil, offset: nil, disable_spell_check: nil, order_by: nil, case_sensitive_sort: nil, histogram_queries: nil, result_set_id: nil, options: nil) {|result, operation| ... } &#x21d2; <tt>Google::Gax::PagedEnumerable&lt;<span class='object_link'><a href="SummarizedProfile.html" title="Google::Cloud::Talent::V4beta1::SummarizedProfile (class)">Google::Cloud::Talent::V4beta1::SummarizedProfile</a></span>&gt;</tt> 
   
 
   
@@ -2051,9 +2040,7 @@ for more information.</p>
       
       
         &mdash;
-        <div class='inline'><p>Required.</p>
-
-<p>The resource name of the tenant to search within.</p>
+        <div class='inline'><p>Required. The resource name of the tenant to search within.</p>
 
 <p>The format is &quot;projects/project_id/tenants/tenant_id&quot;, for example,
 &quot;projects/api-test-project/tenants/foo&quot;.</p>
@@ -2071,11 +2058,9 @@ for more information.</p>
       
       
         &mdash;
-        <div class='inline'><p>Required.</p>
-
-<p>The meta information collected about the profile search user. This is used
-to improve the search quality of the service. These values are provided by
-users, and must be precise and consistent.
+        <div class='inline'><p>Required. The meta information collected about the profile search user.
+This is used to improve the search quality of the service. These values are
+provided by users, and must be precise and consistent.
 A hash of the same form as <code>Google::Cloud::Talent::V4beta1::RequestMetadata</code>
 can also be provided.</p>
 </div>
@@ -2092,9 +2077,7 @@ can also be provided.</p>
       
       
         &mdash;
-        <div class='inline'><p>Optional.</p>
-
-<p>Search query to execute. See
+        <div class='inline'><p>Optional. Search query to execute. See
 <span class='object_link'><a href="ProfileQuery.html" title="Google::Cloud::Talent::V4beta1::ProfileQuery (class)">ProfileQuery</a></span> for more details.
 A hash of the same form as <code>Google::Cloud::Talent::V4beta1::ProfileQuery</code>
 can also be provided.</p>
@@ -2131,10 +2114,8 @@ resources in a page.</p>
       
       
         &mdash;
-        <div class='inline'><p>Optional.</p>
-
-<p>An integer that specifies the current offset (that is, starting result) in
-search results. This field is only considered if
+        <div class='inline'><p>Optional. An integer that specifies the current offset (that is, starting
+result) in search results. This field is only considered if
 <span class='object_link'><a href="SearchProfilesRequest.html#page_token-instance_method" title="Google::Cloud::Talent::V4beta1::SearchProfilesRequest#page_token (method)">page_token</a></span>
 is unset.</p>
 
@@ -2157,9 +2138,7 @@ pageSize = 10 and offset = 10 means to search from the second page.</p>
       
       
         &mdash;
-        <div class='inline'><p>Optional.</p>
-
-<p>This flag controls the spell-check feature. If <code>false</code>, the
+        <div class='inline'><p>Optional. This flag controls the spell-check feature. If <code>false</code>, the
 service attempts to correct a misspelled query.</p>
 
 <p>For example, &quot;enginee&quot; is corrected to &quot;engineer&quot;.</p>
@@ -2177,9 +2156,7 @@ service attempts to correct a misspelled query.</p>
       
       
         &mdash;
-        <div class='inline'><p>Optional.</p>
-
-<p>The criteria that determines how search results are sorted.
+        <div class='inline'><p>Optional. The criteria that determines how search results are sorted.
 Defaults is &quot;relevance desc&quot; if no value is specified.</p>
 
 <p>Supported options are:</p>
@@ -2224,11 +2201,9 @@ in ascending order.</li>
       
       
         &mdash;
-        <div class='inline'><p>Optional.</p>
-
-<p>When sort by field is based on alphabetical order, sort values case
-sensitively (based on ASCII) when the value is set to true. Default value
-is case in-sensitive sort (false).</p>
+        <div class='inline'><p>Optional. When sort by field is based on alphabetical order, sort values
+case sensitively (based on ASCII) when the value is set to true. Default
+value is case in-sensitive sort (false).</p>
 </div>
       
     </li>
@@ -2243,10 +2218,8 @@ is case in-sensitive sort (false).</p>
       
       
         &mdash;
-        <div class='inline'><p>Optional.</p>
-
-<p>A list of expressions specifies histogram requests against matching
-profiles for
+        <div class='inline'><p>Optional. A list of expressions specifies histogram requests against
+matching profiles for
 <span class='object_link'><a href="SearchProfilesRequest.html" title="Google::Cloud::Talent::V4beta1::SearchProfilesRequest (class)">SearchProfilesRequest</a></span>.</p>
 
 <p>The expression syntax looks like a function definition with optional
@@ -2339,6 +2312,46 @@ bucket(12, 36, &quot;1-3 years&quot;), bucket(36, MAX, &quot;3+ years&quot;)])</
 A hash of the same form as <code>Google::Cloud::Talent::V4beta1::HistogramQuery</code>
 can also be provided.</li>
 </ul>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>result_set_id</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Optional. An id that uniquely identifies the result set of a
+SearchProfiles call.  The id should be retrieved from the
+<span class='object_link'><a href="SearchProfilesResponse.html" title="Google::Cloud::Talent::V4beta1::SearchProfilesResponse (class)">SearchProfilesResponse</a></span>
+message returned from a previous invocation of SearchProfiles.</p>
+
+<p>A result set is an ordered list of search results.</p>
+
+<p>If this field is not set, a new result set is computed based on the
+<span class='object_link'><a href="SearchProfilesRequest.html#profile_query-instance_method" title="Google::Cloud::Talent::V4beta1::SearchProfilesRequest#profile_query (method)">profile_query</a></span>.
+A new
+<span class='object_link'><a href="SearchProfilesRequest.html#result_set_id-instance_method" title="Google::Cloud::Talent::V4beta1::SearchProfilesRequest#result_set_id (method)">result_set_id</a></span>
+is returned as a handle to access this result set.</p>
+
+<p>If this field is set, the service will ignore the resource and
+<span class='object_link'><a href="SearchProfilesRequest.html#profile_query-instance_method" title="Google::Cloud::Talent::V4beta1::SearchProfilesRequest#profile_query (method)">profile_query</a></span>
+values, and simply retrieve a page of results from the corresponding result
+set.  In this case, one and only one of [page_token] or [offset] must be
+set.</p>
+
+<p>A typical use case is to invoke
+<span class='object_link'><a href="SearchProfilesRequest.html" title="Google::Cloud::Talent::V4beta1::SearchProfilesRequest (class)">SearchProfilesRequest</a></span>
+without this field, then use the resulting
+<span class='object_link'><a href="SearchProfilesRequest.html#result_set_id-instance_method" title="Google::Cloud::Talent::V4beta1::SearchProfilesRequest#result_set_id (method)">result_set_id</a></span>
+in
+<span class='object_link'><a href="SearchProfilesResponse.html" title="Google::Cloud::Talent::V4beta1::SearchProfilesResponse (class)">SearchProfilesResponse</a></span>
+to page through the results.</p>
 </div>
       
     </li>
@@ -2448,6 +2461,10 @@ object.</p>
       <pre class="lines">
 
 
+750
+751
+752
+753
 754
 755
 756
@@ -2471,12 +2488,10 @@ object.</p>
 774
 775
 776
-777
-778
-779</pre>
+777</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/profile_service_client.rb', line 754</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/profile_service_client.rb', line 750</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_search_profiles'>search_profiles</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -2488,6 +2503,7 @@ object.</p>
     <span class='label'>order_by:</span> <span class='kw'>nil</span><span class='comma'>,</span>
     <span class='label'>case_sensitive_sort:</span> <span class='kw'>nil</span><span class='comma'>,</span>
     <span class='label'>histogram_queries:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+    <span class='label'>result_set_id:</span> <span class='kw'>nil</span><span class='comma'>,</span>
     <span class='label'>options:</span> <span class='kw'>nil</span><span class='comma'>,</span>
     <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
   <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='lbrace'>{</span>
@@ -2499,7 +2515,8 @@ object.</p>
     <span class='label'>disable_spell_check:</span> <span class='id identifier rubyid_disable_spell_check'>disable_spell_check</span><span class='comma'>,</span>
     <span class='label'>order_by:</span> <span class='id identifier rubyid_order_by'>order_by</span><span class='comma'>,</span>
     <span class='label'>case_sensitive_sort:</span> <span class='id identifier rubyid_case_sensitive_sort'>case_sensitive_sort</span><span class='comma'>,</span>
-    <span class='label'>histogram_queries:</span> <span class='id identifier rubyid_histogram_queries'>histogram_queries</span>
+    <span class='label'>histogram_queries:</span> <span class='id identifier rubyid_histogram_queries'>histogram_queries</span><span class='comma'>,</span>
+    <span class='label'>result_set_id:</span> <span class='id identifier rubyid_result_set_id'>result_set_id</span>
   <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span>
   <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='id identifier rubyid_to_proto'>to_proto</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Talent.html" title="Google::Cloud::Talent (module)">Talent</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V4beta1.html" title="Google::Cloud::Talent::V4beta1 (module)">V4beta1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="SearchProfilesRequest.html" title="Google::Cloud::Talent::V4beta1::SearchProfilesRequest (class)">SearchProfilesRequest</a></span></span><span class='rparen'>)</span>
   <span class='ivar'>@search_profiles</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
@@ -2632,9 +2649,7 @@ object.</p>
       
       
         &mdash;
-        <div class='inline'><p>Required.</p>
-
-<p>Profile to be updated.
+        <div class='inline'><p>Required. Profile to be updated.
 A hash of the same form as <code>Google::Cloud::Talent::V4beta1::Profile</code>
 can also be provided.</p>
 </div>
@@ -2651,38 +2666,36 @@ can also be provided.</p>
       
       
         &mdash;
-        <div class='inline'><p>Optional.</p>
-
-<p>A field mask to specify the profile fields to update.</p>
+        <div class='inline'><p>Optional. A field mask to specify the profile fields to update.</p>
 
 <p>A full update is performed if it is unset.</p>
 
 <p>Valid values are:</p>
 
 <ul>
-<li>externalId</li>
+<li>external_id</li>
 <li>source</li>
 <li>uri</li>
-<li>isHirable</li>
-<li>createTime</li>
-<li>updateTime</li>
-<li>resumeHrxml</li>
-<li>personNames</li>
+<li>is_hirable</li>
+<li>create_time</li>
+<li>update_time</li>
+<li>resume</li>
+<li>person_names</li>
 <li>addresses</li>
-<li>emailAddresses</li>
-<li>phoneNumbers</li>
-<li>personalUris</li>
-<li>additionalContactInfo</li>
-<li>employmentRecords</li>
-<li>educationRecords</li>
+<li>email_addresses</li>
+<li>phone_numbers</li>
+<li>personal_uris</li>
+<li>additional_contact_info</li>
+<li>employment_records</li>
+<li>education_records</li>
 <li>skills</li>
 <li>projects</li>
 <li>publications</li>
 <li>patents</li>
 <li>certifications</li>
-<li>recruitingNotes</li>
-<li>customAttributes</li>
-<li>groupId
+<li>recruiting_notes</li>
+<li>custom_attributes</li>
+<li>group_id
 A hash of the same form as <code>Google::Protobuf::FieldMask</code>
 can also be provided.</li>
 </ul>
@@ -2788,21 +2801,21 @@ retries, etc.</p>
       <pre class="lines">
 
 
-487
-488
-489
-490
-491
-492
-493
-494
-495
-496
-497
-498</pre>
+474
+475
+476
+477
+478
+479
+480
+481
+482
+483
+484
+485</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/profile_service_client.rb', line 487</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/profile_service_client.rb', line 474</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update_profile'>update_profile</span> \
     <span class='id identifier rubyid_profile'>profile</span><span class='comma'>,</span>

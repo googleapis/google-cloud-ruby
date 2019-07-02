@@ -990,6 +990,40 @@ search experience.</p>
       <pre class="lines">
 
 
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
 331
 332
 333
@@ -1023,71 +1057,23 @@ search experience.</p>
 361
 362
 363
-364
-365
-366
-367
-368
-369
-370
-371
-372
-373
-374
-375
-376
-377
-378
-379
-380
-381
-382
-383
-384
-385
-386
-387
-388
-389
-390
-391
-392
-393
-394
-395
-396
-397
-398
-399
-400
-401
-402
-403
-404
-405
-406
-407
-408</pre>
+364</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job.rb', line 331</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job.rb', line 297</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::Job (class)">Job</a></span></span>
   <span class='comment'># Application related details of a job posting.
 </span>  <span class='comment'># @!attribute [rw] emails
 </span>  <span class='comment'>#   @return [Array&lt;String&gt;]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Use this field to specify email address(es) to which resumes or
+</span>  <span class='comment'>#     Optional. Use this field to specify email address(es) to which resumes or
 </span>  <span class='comment'>#     applications can be sent.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     The maximum number of allowed characters for each entry is 255.
 </span>  <span class='comment'># @!attribute [rw] instruction
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Use this field to provide instructions, such as &quot;Mail your application
-</span>  <span class='comment'>#     to ...&quot;, that a candidate can follow to apply for the job.
+</span>  <span class='comment'>#     Optional. Use this field to provide instructions, such as &quot;Mail your
+</span>  <span class='comment'>#     application to ...&quot;, that a candidate can follow to apply for the job.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     This field accepts and sanitizes HTML input, and also accepts
 </span>  <span class='comment'>#     bold, italic, ordered list, and unordered list markup tags.
@@ -1095,10 +1081,8 @@ search experience.</p>
 </span>  <span class='comment'>#     The maximum number of allowed characters is 3,000.
 </span>  <span class='comment'># @!attribute [rw] uris
 </span>  <span class='comment'>#   @return [Array&lt;String&gt;]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Use this URI field to direct an applicant to a website, for example to
-</span>  <span class='comment'>#     link to an online application form.
+</span>  <span class='comment'>#     Optional. Use this URI field to direct an applicant to a website, for
+</span>  <span class='comment'>#     example to link to an online application form.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     The maximum number of allowed characters for each entry is 2,000.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Job/ApplicationInfo.html" title="Google::Cloud::Talent::V4beta1::Job::ApplicationInfo (class)">ApplicationInfo</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
@@ -1127,15 +1111,11 @@ search experience.</p>
 </span>  <span class='comment'># Options for job processing.
 </span>  <span class='comment'># @!attribute [rw] disable_street_address_resolution
 </span>  <span class='comment'>#   @return [true, false]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     If set to `true`, the service does not attempt to resolve a
+</span>  <span class='comment'>#     Optional. If set to `true`, the service does not attempt to resolve a
 </span>  <span class='comment'>#     more precise address for the job.
 </span>  <span class='comment'># @!attribute [rw] html_sanitization
 </span>  <span class='comment'>#   @return [Google::Cloud::Talent::V4beta1::HtmlSanitization]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Option for job HTML content sanitization. Applied fields are:
+</span>  <span class='comment'>#     Optional. Option for job HTML content sanitization. Applied fields are:
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     * description
 </span>  <span class='comment'>#     * applicationInfo.instruction
@@ -1168,9 +1148,7 @@ search experience.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Optional.</p>
-
-<p>Job application information.</p>
+    <p>Returns Optional. Job application information.</p>
 
 
   </div>
@@ -1188,9 +1166,7 @@ search experience.</p>
       
       
         &mdash;
-        <div class='inline'><p>Optional.</p>
-
-<p>Job application information.</p>
+        <div class='inline'><p>Optional. Job application information.</p>
 </div>
       
     </li>
@@ -1203,6 +1179,40 @@ search experience.</p>
       <pre class="lines">
 
 
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
 331
 332
 333
@@ -1236,71 +1246,23 @@ search experience.</p>
 361
 362
 363
-364
-365
-366
-367
-368
-369
-370
-371
-372
-373
-374
-375
-376
-377
-378
-379
-380
-381
-382
-383
-384
-385
-386
-387
-388
-389
-390
-391
-392
-393
-394
-395
-396
-397
-398
-399
-400
-401
-402
-403
-404
-405
-406
-407
-408</pre>
+364</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job.rb', line 331</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job.rb', line 297</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::Job (class)">Job</a></span></span>
   <span class='comment'># Application related details of a job posting.
 </span>  <span class='comment'># @!attribute [rw] emails
 </span>  <span class='comment'>#   @return [Array&lt;String&gt;]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Use this field to specify email address(es) to which resumes or
+</span>  <span class='comment'>#     Optional. Use this field to specify email address(es) to which resumes or
 </span>  <span class='comment'>#     applications can be sent.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     The maximum number of allowed characters for each entry is 255.
 </span>  <span class='comment'># @!attribute [rw] instruction
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Use this field to provide instructions, such as &quot;Mail your application
-</span>  <span class='comment'>#     to ...&quot;, that a candidate can follow to apply for the job.
+</span>  <span class='comment'>#     Optional. Use this field to provide instructions, such as &quot;Mail your
+</span>  <span class='comment'>#     application to ...&quot;, that a candidate can follow to apply for the job.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     This field accepts and sanitizes HTML input, and also accepts
 </span>  <span class='comment'>#     bold, italic, ordered list, and unordered list markup tags.
@@ -1308,10 +1270,8 @@ search experience.</p>
 </span>  <span class='comment'>#     The maximum number of allowed characters is 3,000.
 </span>  <span class='comment'># @!attribute [rw] uris
 </span>  <span class='comment'>#   @return [Array&lt;String&gt;]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Use this URI field to direct an applicant to a website, for example to
-</span>  <span class='comment'>#     link to an online application form.
+</span>  <span class='comment'>#     Optional. Use this URI field to direct an applicant to a website, for
+</span>  <span class='comment'>#     example to link to an online application form.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     The maximum number of allowed characters for each entry is 2,000.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Job/ApplicationInfo.html" title="Google::Cloud::Talent::V4beta1::Job::ApplicationInfo (class)">ApplicationInfo</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
@@ -1340,15 +1300,11 @@ search experience.</p>
 </span>  <span class='comment'># Options for job processing.
 </span>  <span class='comment'># @!attribute [rw] disable_street_address_resolution
 </span>  <span class='comment'>#   @return [true, false]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     If set to `true`, the service does not attempt to resolve a
+</span>  <span class='comment'>#     Optional. If set to `true`, the service does not attempt to resolve a
 </span>  <span class='comment'>#     more precise address for the job.
 </span>  <span class='comment'># @!attribute [rw] html_sanitization
 </span>  <span class='comment'>#   @return [Google::Cloud::Talent::V4beta1::HtmlSanitization]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Option for job HTML content sanitization. Applied fields are:
+</span>  <span class='comment'>#     Optional. Option for job HTML content sanitization. Applied fields are:
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     * description
 </span>  <span class='comment'>#     * applicationInfo.instruction
@@ -1381,9 +1337,7 @@ search experience.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Required.</p>
-
-<p>The resource name of the company listing the job.</p>
+    <p>Returns Required. The resource name of the company listing the job.</p>
 
 <p>The format is
 &quot;projects/project_id/tenants/tenant_id/companies/company_id&quot;, for
@@ -1408,9 +1362,7 @@ example, &quot;projects/api-test-project/companies/bar&quot;.</p>
       
       
         &mdash;
-        <div class='inline'><p>Required.</p>
-
-<p>The resource name of the company listing the job.</p>
+        <div class='inline'><p>Required. The resource name of the company listing the job.</p>
 
 <p>The format is
 &quot;projects/project_id/tenants/tenant_id/companies/company_id&quot;, for
@@ -1430,6 +1382,40 @@ example, &quot;projects/api-test-project/companies/bar&quot;.</p>
       <pre class="lines">
 
 
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
 331
 332
 333
@@ -1463,71 +1449,23 @@ example, &quot;projects/api-test-project/companies/bar&quot;.</p>
 361
 362
 363
-364
-365
-366
-367
-368
-369
-370
-371
-372
-373
-374
-375
-376
-377
-378
-379
-380
-381
-382
-383
-384
-385
-386
-387
-388
-389
-390
-391
-392
-393
-394
-395
-396
-397
-398
-399
-400
-401
-402
-403
-404
-405
-406
-407
-408</pre>
+364</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job.rb', line 331</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job.rb', line 297</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::Job (class)">Job</a></span></span>
   <span class='comment'># Application related details of a job posting.
 </span>  <span class='comment'># @!attribute [rw] emails
 </span>  <span class='comment'>#   @return [Array&lt;String&gt;]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Use this field to specify email address(es) to which resumes or
+</span>  <span class='comment'>#     Optional. Use this field to specify email address(es) to which resumes or
 </span>  <span class='comment'>#     applications can be sent.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     The maximum number of allowed characters for each entry is 255.
 </span>  <span class='comment'># @!attribute [rw] instruction
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Use this field to provide instructions, such as &quot;Mail your application
-</span>  <span class='comment'>#     to ...&quot;, that a candidate can follow to apply for the job.
+</span>  <span class='comment'>#     Optional. Use this field to provide instructions, such as &quot;Mail your
+</span>  <span class='comment'>#     application to ...&quot;, that a candidate can follow to apply for the job.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     This field accepts and sanitizes HTML input, and also accepts
 </span>  <span class='comment'>#     bold, italic, ordered list, and unordered list markup tags.
@@ -1535,10 +1473,8 @@ example, &quot;projects/api-test-project/companies/bar&quot;.</p>
 </span>  <span class='comment'>#     The maximum number of allowed characters is 3,000.
 </span>  <span class='comment'># @!attribute [rw] uris
 </span>  <span class='comment'>#   @return [Array&lt;String&gt;]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Use this URI field to direct an applicant to a website, for example to
-</span>  <span class='comment'>#     link to an online application form.
+</span>  <span class='comment'>#     Optional. Use this URI field to direct an applicant to a website, for
+</span>  <span class='comment'>#     example to link to an online application form.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     The maximum number of allowed characters for each entry is 2,000.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Job/ApplicationInfo.html" title="Google::Cloud::Talent::V4beta1::Job::ApplicationInfo (class)">ApplicationInfo</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
@@ -1567,15 +1503,11 @@ example, &quot;projects/api-test-project/companies/bar&quot;.</p>
 </span>  <span class='comment'># Options for job processing.
 </span>  <span class='comment'># @!attribute [rw] disable_street_address_resolution
 </span>  <span class='comment'>#   @return [true, false]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     If set to `true`, the service does not attempt to resolve a
+</span>  <span class='comment'>#     Optional. If set to `true`, the service does not attempt to resolve a
 </span>  <span class='comment'>#     more precise address for the job.
 </span>  <span class='comment'># @!attribute [rw] html_sanitization
 </span>  <span class='comment'>#   @return [Google::Cloud::Talent::V4beta1::HtmlSanitization]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Option for job HTML content sanitization. Applied fields are:
+</span>  <span class='comment'>#     Optional. Option for job HTML content sanitization. Applied fields are:
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     * description
 </span>  <span class='comment'>#     * applicationInfo.instruction
@@ -1639,6 +1571,40 @@ example, &quot;projects/api-test-project/companies/bar&quot;.</p>
       <pre class="lines">
 
 
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
 331
 332
 333
@@ -1672,71 +1638,23 @@ example, &quot;projects/api-test-project/companies/bar&quot;.</p>
 361
 362
 363
-364
-365
-366
-367
-368
-369
-370
-371
-372
-373
-374
-375
-376
-377
-378
-379
-380
-381
-382
-383
-384
-385
-386
-387
-388
-389
-390
-391
-392
-393
-394
-395
-396
-397
-398
-399
-400
-401
-402
-403
-404
-405
-406
-407
-408</pre>
+364</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job.rb', line 331</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job.rb', line 297</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::Job (class)">Job</a></span></span>
   <span class='comment'># Application related details of a job posting.
 </span>  <span class='comment'># @!attribute [rw] emails
 </span>  <span class='comment'>#   @return [Array&lt;String&gt;]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Use this field to specify email address(es) to which resumes or
+</span>  <span class='comment'>#     Optional. Use this field to specify email address(es) to which resumes or
 </span>  <span class='comment'>#     applications can be sent.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     The maximum number of allowed characters for each entry is 255.
 </span>  <span class='comment'># @!attribute [rw] instruction
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Use this field to provide instructions, such as &quot;Mail your application
-</span>  <span class='comment'>#     to ...&quot;, that a candidate can follow to apply for the job.
+</span>  <span class='comment'>#     Optional. Use this field to provide instructions, such as &quot;Mail your
+</span>  <span class='comment'>#     application to ...&quot;, that a candidate can follow to apply for the job.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     This field accepts and sanitizes HTML input, and also accepts
 </span>  <span class='comment'>#     bold, italic, ordered list, and unordered list markup tags.
@@ -1744,10 +1662,8 @@ example, &quot;projects/api-test-project/companies/bar&quot;.</p>
 </span>  <span class='comment'>#     The maximum number of allowed characters is 3,000.
 </span>  <span class='comment'># @!attribute [rw] uris
 </span>  <span class='comment'>#   @return [Array&lt;String&gt;]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Use this URI field to direct an applicant to a website, for example to
-</span>  <span class='comment'>#     link to an online application form.
+</span>  <span class='comment'>#     Optional. Use this URI field to direct an applicant to a website, for
+</span>  <span class='comment'>#     example to link to an online application form.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     The maximum number of allowed characters for each entry is 2,000.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Job/ApplicationInfo.html" title="Google::Cloud::Talent::V4beta1::Job::ApplicationInfo (class)">ApplicationInfo</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
@@ -1776,15 +1692,11 @@ example, &quot;projects/api-test-project/companies/bar&quot;.</p>
 </span>  <span class='comment'># Options for job processing.
 </span>  <span class='comment'># @!attribute [rw] disable_street_address_resolution
 </span>  <span class='comment'>#   @return [true, false]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     If set to `true`, the service does not attempt to resolve a
+</span>  <span class='comment'>#     Optional. If set to `true`, the service does not attempt to resolve a
 </span>  <span class='comment'>#     more precise address for the job.
 </span>  <span class='comment'># @!attribute [rw] html_sanitization
 </span>  <span class='comment'>#   @return [Google::Cloud::Talent::V4beta1::HtmlSanitization]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Option for job HTML content sanitization. Applied fields are:
+</span>  <span class='comment'>#     Optional. Option for job HTML content sanitization. Applied fields are:
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     * description
 </span>  <span class='comment'>#     * applicationInfo.instruction
@@ -1817,10 +1729,8 @@ example, &quot;projects/api-test-project/companies/bar&quot;.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Optional.</p>
-
-<p>Job compensation information (a.k.a. &quot;pay rate&quot;) i.e., the compensation
-that will paid to the employee.</p>
+    <p>Returns Optional. Job compensation information (a.k.a. &quot;pay rate&quot;) i.e., the
+compensation that will paid to the employee.</p>
 
 
   </div>
@@ -1838,10 +1748,8 @@ that will paid to the employee.</p>
       
       
         &mdash;
-        <div class='inline'><p>Optional.</p>
-
-<p>Job compensation information (a.k.a. &quot;pay rate&quot;) i.e., the compensation
-that will paid to the employee.</p>
+        <div class='inline'><p>Optional. Job compensation information (a.k.a. &quot;pay rate&quot;) i.e., the
+compensation that will paid to the employee.</p>
 </div>
       
     </li>
@@ -1854,6 +1762,40 @@ that will paid to the employee.</p>
       <pre class="lines">
 
 
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
 331
 332
 333
@@ -1887,71 +1829,23 @@ that will paid to the employee.</p>
 361
 362
 363
-364
-365
-366
-367
-368
-369
-370
-371
-372
-373
-374
-375
-376
-377
-378
-379
-380
-381
-382
-383
-384
-385
-386
-387
-388
-389
-390
-391
-392
-393
-394
-395
-396
-397
-398
-399
-400
-401
-402
-403
-404
-405
-406
-407
-408</pre>
+364</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job.rb', line 331</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job.rb', line 297</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::Job (class)">Job</a></span></span>
   <span class='comment'># Application related details of a job posting.
 </span>  <span class='comment'># @!attribute [rw] emails
 </span>  <span class='comment'>#   @return [Array&lt;String&gt;]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Use this field to specify email address(es) to which resumes or
+</span>  <span class='comment'>#     Optional. Use this field to specify email address(es) to which resumes or
 </span>  <span class='comment'>#     applications can be sent.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     The maximum number of allowed characters for each entry is 255.
 </span>  <span class='comment'># @!attribute [rw] instruction
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Use this field to provide instructions, such as &quot;Mail your application
-</span>  <span class='comment'>#     to ...&quot;, that a candidate can follow to apply for the job.
+</span>  <span class='comment'>#     Optional. Use this field to provide instructions, such as &quot;Mail your
+</span>  <span class='comment'>#     application to ...&quot;, that a candidate can follow to apply for the job.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     This field accepts and sanitizes HTML input, and also accepts
 </span>  <span class='comment'>#     bold, italic, ordered list, and unordered list markup tags.
@@ -1959,10 +1853,8 @@ that will paid to the employee.</p>
 </span>  <span class='comment'>#     The maximum number of allowed characters is 3,000.
 </span>  <span class='comment'># @!attribute [rw] uris
 </span>  <span class='comment'>#   @return [Array&lt;String&gt;]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Use this URI field to direct an applicant to a website, for example to
-</span>  <span class='comment'>#     link to an online application form.
+</span>  <span class='comment'>#     Optional. Use this URI field to direct an applicant to a website, for
+</span>  <span class='comment'>#     example to link to an online application form.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     The maximum number of allowed characters for each entry is 2,000.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Job/ApplicationInfo.html" title="Google::Cloud::Talent::V4beta1::Job::ApplicationInfo (class)">ApplicationInfo</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
@@ -1991,15 +1883,11 @@ that will paid to the employee.</p>
 </span>  <span class='comment'># Options for job processing.
 </span>  <span class='comment'># @!attribute [rw] disable_street_address_resolution
 </span>  <span class='comment'>#   @return [true, false]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     If set to `true`, the service does not attempt to resolve a
+</span>  <span class='comment'>#     Optional. If set to `true`, the service does not attempt to resolve a
 </span>  <span class='comment'>#     more precise address for the job.
 </span>  <span class='comment'># @!attribute [rw] html_sanitization
 </span>  <span class='comment'>#   @return [Google::Cloud::Talent::V4beta1::HtmlSanitization]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Option for job HTML content sanitization. Applied fields are:
+</span>  <span class='comment'>#     Optional. Option for job HTML content sanitization. Applied fields are:
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     * description
 </span>  <span class='comment'>#     * applicationInfo.instruction
@@ -2032,10 +1920,8 @@ that will paid to the employee.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Optional.</p>
-
-<p>A map of fields to hold both filterable and non-filterable custom job
-attributes that are not covered by the provided structured fields.</p>
+    <p>Returns Optional. A map of fields to hold both filterable and non-filterable custom
+job attributes that are not covered by the provided structured fields.</p>
 
 <p>The keys of the map are strings up to 64 bytes and must match the
 pattern: [a-zA-Z][a-zA-Z0-9_]*. For example, key0LikeThis or
@@ -2063,10 +1949,8 @@ is 50KB.</p>
       
       
         &mdash;
-        <div class='inline'><p>Optional.</p>
-
-<p>A map of fields to hold both filterable and non-filterable custom job
-attributes that are not covered by the provided structured fields.</p>
+        <div class='inline'><p>Optional. A map of fields to hold both filterable and non-filterable custom
+job attributes that are not covered by the provided structured fields.</p>
 
 <p>The keys of the map are strings up to 64 bytes and must match the
 pattern: [a-zA-Z][a-zA-Z0-9_]*. For example, key0LikeThis or
@@ -2089,6 +1973,40 @@ is 50KB.</p>
       <pre class="lines">
 
 
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
 331
 332
 333
@@ -2122,71 +2040,23 @@ is 50KB.</p>
 361
 362
 363
-364
-365
-366
-367
-368
-369
-370
-371
-372
-373
-374
-375
-376
-377
-378
-379
-380
-381
-382
-383
-384
-385
-386
-387
-388
-389
-390
-391
-392
-393
-394
-395
-396
-397
-398
-399
-400
-401
-402
-403
-404
-405
-406
-407
-408</pre>
+364</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job.rb', line 331</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job.rb', line 297</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::Job (class)">Job</a></span></span>
   <span class='comment'># Application related details of a job posting.
 </span>  <span class='comment'># @!attribute [rw] emails
 </span>  <span class='comment'>#   @return [Array&lt;String&gt;]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Use this field to specify email address(es) to which resumes or
+</span>  <span class='comment'>#     Optional. Use this field to specify email address(es) to which resumes or
 </span>  <span class='comment'>#     applications can be sent.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     The maximum number of allowed characters for each entry is 255.
 </span>  <span class='comment'># @!attribute [rw] instruction
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Use this field to provide instructions, such as &quot;Mail your application
-</span>  <span class='comment'>#     to ...&quot;, that a candidate can follow to apply for the job.
+</span>  <span class='comment'>#     Optional. Use this field to provide instructions, such as &quot;Mail your
+</span>  <span class='comment'>#     application to ...&quot;, that a candidate can follow to apply for the job.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     This field accepts and sanitizes HTML input, and also accepts
 </span>  <span class='comment'>#     bold, italic, ordered list, and unordered list markup tags.
@@ -2194,10 +2064,8 @@ is 50KB.</p>
 </span>  <span class='comment'>#     The maximum number of allowed characters is 3,000.
 </span>  <span class='comment'># @!attribute [rw] uris
 </span>  <span class='comment'>#   @return [Array&lt;String&gt;]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Use this URI field to direct an applicant to a website, for example to
-</span>  <span class='comment'>#     link to an online application form.
+</span>  <span class='comment'>#     Optional. Use this URI field to direct an applicant to a website, for
+</span>  <span class='comment'>#     example to link to an online application form.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     The maximum number of allowed characters for each entry is 2,000.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Job/ApplicationInfo.html" title="Google::Cloud::Talent::V4beta1::Job::ApplicationInfo (class)">ApplicationInfo</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
@@ -2226,15 +2094,11 @@ is 50KB.</p>
 </span>  <span class='comment'># Options for job processing.
 </span>  <span class='comment'># @!attribute [rw] disable_street_address_resolution
 </span>  <span class='comment'>#   @return [true, false]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     If set to `true`, the service does not attempt to resolve a
+</span>  <span class='comment'>#     Optional. If set to `true`, the service does not attempt to resolve a
 </span>  <span class='comment'>#     more precise address for the job.
 </span>  <span class='comment'># @!attribute [rw] html_sanitization
 </span>  <span class='comment'>#   @return [Google::Cloud::Talent::V4beta1::HtmlSanitization]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Option for job HTML content sanitization. Applied fields are:
+</span>  <span class='comment'>#     Optional. Option for job HTML content sanitization. Applied fields are:
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     * description
 </span>  <span class='comment'>#     * applicationInfo.instruction
@@ -2267,9 +2131,8 @@ is 50KB.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Optional.</p>
-
-<p>The desired education degrees for the job, such as Bachelors, Masters.</p>
+    <p>Returns Optional. The desired education degrees for the job, such as Bachelors,
+Masters.</p>
 
 
   </div>
@@ -2287,9 +2150,8 @@ is 50KB.</p>
       
       
         &mdash;
-        <div class='inline'><p>Optional.</p>
-
-<p>The desired education degrees for the job, such as Bachelors, Masters.</p>
+        <div class='inline'><p>Optional. The desired education degrees for the job, such as Bachelors,
+Masters.</p>
 </div>
       
     </li>
@@ -2302,6 +2164,40 @@ is 50KB.</p>
       <pre class="lines">
 
 
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
 331
 332
 333
@@ -2335,71 +2231,23 @@ is 50KB.</p>
 361
 362
 363
-364
-365
-366
-367
-368
-369
-370
-371
-372
-373
-374
-375
-376
-377
-378
-379
-380
-381
-382
-383
-384
-385
-386
-387
-388
-389
-390
-391
-392
-393
-394
-395
-396
-397
-398
-399
-400
-401
-402
-403
-404
-405
-406
-407
-408</pre>
+364</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job.rb', line 331</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job.rb', line 297</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::Job (class)">Job</a></span></span>
   <span class='comment'># Application related details of a job posting.
 </span>  <span class='comment'># @!attribute [rw] emails
 </span>  <span class='comment'>#   @return [Array&lt;String&gt;]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Use this field to specify email address(es) to which resumes or
+</span>  <span class='comment'>#     Optional. Use this field to specify email address(es) to which resumes or
 </span>  <span class='comment'>#     applications can be sent.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     The maximum number of allowed characters for each entry is 255.
 </span>  <span class='comment'># @!attribute [rw] instruction
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Use this field to provide instructions, such as &quot;Mail your application
-</span>  <span class='comment'>#     to ...&quot;, that a candidate can follow to apply for the job.
+</span>  <span class='comment'>#     Optional. Use this field to provide instructions, such as &quot;Mail your
+</span>  <span class='comment'>#     application to ...&quot;, that a candidate can follow to apply for the job.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     This field accepts and sanitizes HTML input, and also accepts
 </span>  <span class='comment'>#     bold, italic, ordered list, and unordered list markup tags.
@@ -2407,10 +2255,8 @@ is 50KB.</p>
 </span>  <span class='comment'>#     The maximum number of allowed characters is 3,000.
 </span>  <span class='comment'># @!attribute [rw] uris
 </span>  <span class='comment'>#   @return [Array&lt;String&gt;]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Use this URI field to direct an applicant to a website, for example to
-</span>  <span class='comment'>#     link to an online application form.
+</span>  <span class='comment'>#     Optional. Use this URI field to direct an applicant to a website, for
+</span>  <span class='comment'>#     example to link to an online application form.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     The maximum number of allowed characters for each entry is 2,000.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Job/ApplicationInfo.html" title="Google::Cloud::Talent::V4beta1::Job::ApplicationInfo (class)">ApplicationInfo</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
@@ -2439,15 +2285,11 @@ is 50KB.</p>
 </span>  <span class='comment'># Options for job processing.
 </span>  <span class='comment'># @!attribute [rw] disable_street_address_resolution
 </span>  <span class='comment'>#   @return [true, false]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     If set to `true`, the service does not attempt to resolve a
+</span>  <span class='comment'>#     Optional. If set to `true`, the service does not attempt to resolve a
 </span>  <span class='comment'>#     more precise address for the job.
 </span>  <span class='comment'># @!attribute [rw] html_sanitization
 </span>  <span class='comment'>#   @return [Google::Cloud::Talent::V4beta1::HtmlSanitization]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Option for job HTML content sanitization. Applied fields are:
+</span>  <span class='comment'>#     Optional. Option for job HTML content sanitization. Applied fields are:
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     * description
 </span>  <span class='comment'>#     * applicationInfo.instruction
@@ -2480,10 +2322,8 @@ is 50KB.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Optional.</p>
-
-<p>The department or functional area within the company with the open
-position.</p>
+    <p>Returns Optional. The department or functional area within the company with the
+open position.</p>
 
 <p>The maximum number of allowed characters is 255.</p>
 
@@ -2503,10 +2343,8 @@ position.</p>
       
       
         &mdash;
-        <div class='inline'><p>Optional.</p>
-
-<p>The department or functional area within the company with the open
-position.</p>
+        <div class='inline'><p>Optional. The department or functional area within the company with the
+open position.</p>
 
 <p>The maximum number of allowed characters is 255.</p>
 </div>
@@ -2521,6 +2359,40 @@ position.</p>
       <pre class="lines">
 
 
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
 331
 332
 333
@@ -2554,71 +2426,23 @@ position.</p>
 361
 362
 363
-364
-365
-366
-367
-368
-369
-370
-371
-372
-373
-374
-375
-376
-377
-378
-379
-380
-381
-382
-383
-384
-385
-386
-387
-388
-389
-390
-391
-392
-393
-394
-395
-396
-397
-398
-399
-400
-401
-402
-403
-404
-405
-406
-407
-408</pre>
+364</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job.rb', line 331</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job.rb', line 297</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::Job (class)">Job</a></span></span>
   <span class='comment'># Application related details of a job posting.
 </span>  <span class='comment'># @!attribute [rw] emails
 </span>  <span class='comment'>#   @return [Array&lt;String&gt;]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Use this field to specify email address(es) to which resumes or
+</span>  <span class='comment'>#     Optional. Use this field to specify email address(es) to which resumes or
 </span>  <span class='comment'>#     applications can be sent.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     The maximum number of allowed characters for each entry is 255.
 </span>  <span class='comment'># @!attribute [rw] instruction
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Use this field to provide instructions, such as &quot;Mail your application
-</span>  <span class='comment'>#     to ...&quot;, that a candidate can follow to apply for the job.
+</span>  <span class='comment'>#     Optional. Use this field to provide instructions, such as &quot;Mail your
+</span>  <span class='comment'>#     application to ...&quot;, that a candidate can follow to apply for the job.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     This field accepts and sanitizes HTML input, and also accepts
 </span>  <span class='comment'>#     bold, italic, ordered list, and unordered list markup tags.
@@ -2626,10 +2450,8 @@ position.</p>
 </span>  <span class='comment'>#     The maximum number of allowed characters is 3,000.
 </span>  <span class='comment'># @!attribute [rw] uris
 </span>  <span class='comment'>#   @return [Array&lt;String&gt;]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Use this URI field to direct an applicant to a website, for example to
-</span>  <span class='comment'>#     link to an online application form.
+</span>  <span class='comment'>#     Optional. Use this URI field to direct an applicant to a website, for
+</span>  <span class='comment'>#     example to link to an online application form.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     The maximum number of allowed characters for each entry is 2,000.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Job/ApplicationInfo.html" title="Google::Cloud::Talent::V4beta1::Job::ApplicationInfo (class)">ApplicationInfo</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
@@ -2658,15 +2480,11 @@ position.</p>
 </span>  <span class='comment'># Options for job processing.
 </span>  <span class='comment'># @!attribute [rw] disable_street_address_resolution
 </span>  <span class='comment'>#   @return [true, false]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     If set to `true`, the service does not attempt to resolve a
+</span>  <span class='comment'>#     Optional. If set to `true`, the service does not attempt to resolve a
 </span>  <span class='comment'>#     more precise address for the job.
 </span>  <span class='comment'># @!attribute [rw] html_sanitization
 </span>  <span class='comment'>#   @return [Google::Cloud::Talent::V4beta1::HtmlSanitization]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Option for job HTML content sanitization. Applied fields are:
+</span>  <span class='comment'>#     Optional. Option for job HTML content sanitization. Applied fields are:
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     * description
 </span>  <span class='comment'>#     * applicationInfo.instruction
@@ -2730,6 +2548,40 @@ position.</p>
       <pre class="lines">
 
 
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
 331
 332
 333
@@ -2763,71 +2615,23 @@ position.</p>
 361
 362
 363
-364
-365
-366
-367
-368
-369
-370
-371
-372
-373
-374
-375
-376
-377
-378
-379
-380
-381
-382
-383
-384
-385
-386
-387
-388
-389
-390
-391
-392
-393
-394
-395
-396
-397
-398
-399
-400
-401
-402
-403
-404
-405
-406
-407
-408</pre>
+364</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job.rb', line 331</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job.rb', line 297</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::Job (class)">Job</a></span></span>
   <span class='comment'># Application related details of a job posting.
 </span>  <span class='comment'># @!attribute [rw] emails
 </span>  <span class='comment'>#   @return [Array&lt;String&gt;]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Use this field to specify email address(es) to which resumes or
+</span>  <span class='comment'>#     Optional. Use this field to specify email address(es) to which resumes or
 </span>  <span class='comment'>#     applications can be sent.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     The maximum number of allowed characters for each entry is 255.
 </span>  <span class='comment'># @!attribute [rw] instruction
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Use this field to provide instructions, such as &quot;Mail your application
-</span>  <span class='comment'>#     to ...&quot;, that a candidate can follow to apply for the job.
+</span>  <span class='comment'>#     Optional. Use this field to provide instructions, such as &quot;Mail your
+</span>  <span class='comment'>#     application to ...&quot;, that a candidate can follow to apply for the job.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     This field accepts and sanitizes HTML input, and also accepts
 </span>  <span class='comment'>#     bold, italic, ordered list, and unordered list markup tags.
@@ -2835,10 +2639,8 @@ position.</p>
 </span>  <span class='comment'>#     The maximum number of allowed characters is 3,000.
 </span>  <span class='comment'># @!attribute [rw] uris
 </span>  <span class='comment'>#   @return [Array&lt;String&gt;]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Use this URI field to direct an applicant to a website, for example to
-</span>  <span class='comment'>#     link to an online application form.
+</span>  <span class='comment'>#     Optional. Use this URI field to direct an applicant to a website, for
+</span>  <span class='comment'>#     example to link to an online application form.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     The maximum number of allowed characters for each entry is 2,000.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Job/ApplicationInfo.html" title="Google::Cloud::Talent::V4beta1::Job::ApplicationInfo (class)">ApplicationInfo</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
@@ -2867,15 +2669,11 @@ position.</p>
 </span>  <span class='comment'># Options for job processing.
 </span>  <span class='comment'># @!attribute [rw] disable_street_address_resolution
 </span>  <span class='comment'>#   @return [true, false]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     If set to `true`, the service does not attempt to resolve a
+</span>  <span class='comment'>#     Optional. If set to `true`, the service does not attempt to resolve a
 </span>  <span class='comment'>#     more precise address for the job.
 </span>  <span class='comment'># @!attribute [rw] html_sanitization
 </span>  <span class='comment'>#   @return [Google::Cloud::Talent::V4beta1::HtmlSanitization]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Option for job HTML content sanitization. Applied fields are:
+</span>  <span class='comment'>#     Optional. Option for job HTML content sanitization. Applied fields are:
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     * description
 </span>  <span class='comment'>#     * applicationInfo.instruction
@@ -2908,11 +2706,9 @@ position.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Required.</p>
-
-<p>The description of the job, which typically includes a multi-paragraph
-description of the company and related information. Separate fields are
-provided on the job object for
+    <p>Returns Required. The description of the job, which typically includes a
+multi-paragraph description of the company and related information.
+Separate fields are provided on the job object for
 <span class='object_link'><a href="#responsibilities-instance_method" title="Google::Cloud::Talent::V4beta1::Job#responsibilities (method)">responsibilities</a></span>,
 <span class='object_link'><a href="#qualifications-instance_method" title="Google::Cloud::Talent::V4beta1::Job#qualifications (method)">qualifications</a></span>, and other
 job characteristics. Use of these separate job fields is recommended.</p>
@@ -2938,11 +2734,9 @@ bold, italic, ordered list, and unordered list markup tags.</p>
       
       
         &mdash;
-        <div class='inline'><p>Required.</p>
-
-<p>The description of the job, which typically includes a multi-paragraph
-description of the company and related information. Separate fields are
-provided on the job object for
+        <div class='inline'><p>Required. The description of the job, which typically includes a
+multi-paragraph description of the company and related information.
+Separate fields are provided on the job object for
 <span class='object_link'><a href="#responsibilities-instance_method" title="Google::Cloud::Talent::V4beta1::Job#responsibilities (method)">responsibilities</a></span>,
 <span class='object_link'><a href="#qualifications-instance_method" title="Google::Cloud::Talent::V4beta1::Job#qualifications (method)">qualifications</a></span>, and other
 job characteristics. Use of these separate job fields is recommended.</p>
@@ -2963,6 +2757,40 @@ bold, italic, ordered list, and unordered list markup tags.</p>
       <pre class="lines">
 
 
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
 331
 332
 333
@@ -2996,71 +2824,23 @@ bold, italic, ordered list, and unordered list markup tags.</p>
 361
 362
 363
-364
-365
-366
-367
-368
-369
-370
-371
-372
-373
-374
-375
-376
-377
-378
-379
-380
-381
-382
-383
-384
-385
-386
-387
-388
-389
-390
-391
-392
-393
-394
-395
-396
-397
-398
-399
-400
-401
-402
-403
-404
-405
-406
-407
-408</pre>
+364</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job.rb', line 331</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job.rb', line 297</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::Job (class)">Job</a></span></span>
   <span class='comment'># Application related details of a job posting.
 </span>  <span class='comment'># @!attribute [rw] emails
 </span>  <span class='comment'>#   @return [Array&lt;String&gt;]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Use this field to specify email address(es) to which resumes or
+</span>  <span class='comment'>#     Optional. Use this field to specify email address(es) to which resumes or
 </span>  <span class='comment'>#     applications can be sent.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     The maximum number of allowed characters for each entry is 255.
 </span>  <span class='comment'># @!attribute [rw] instruction
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Use this field to provide instructions, such as &quot;Mail your application
-</span>  <span class='comment'>#     to ...&quot;, that a candidate can follow to apply for the job.
+</span>  <span class='comment'>#     Optional. Use this field to provide instructions, such as &quot;Mail your
+</span>  <span class='comment'>#     application to ...&quot;, that a candidate can follow to apply for the job.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     This field accepts and sanitizes HTML input, and also accepts
 </span>  <span class='comment'>#     bold, italic, ordered list, and unordered list markup tags.
@@ -3068,10 +2848,8 @@ bold, italic, ordered list, and unordered list markup tags.</p>
 </span>  <span class='comment'>#     The maximum number of allowed characters is 3,000.
 </span>  <span class='comment'># @!attribute [rw] uris
 </span>  <span class='comment'>#   @return [Array&lt;String&gt;]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Use this URI field to direct an applicant to a website, for example to
-</span>  <span class='comment'>#     link to an online application form.
+</span>  <span class='comment'>#     Optional. Use this URI field to direct an applicant to a website, for
+</span>  <span class='comment'>#     example to link to an online application form.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     The maximum number of allowed characters for each entry is 2,000.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Job/ApplicationInfo.html" title="Google::Cloud::Talent::V4beta1::Job::ApplicationInfo (class)">ApplicationInfo</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
@@ -3100,15 +2878,11 @@ bold, italic, ordered list, and unordered list markup tags.</p>
 </span>  <span class='comment'># Options for job processing.
 </span>  <span class='comment'># @!attribute [rw] disable_street_address_resolution
 </span>  <span class='comment'>#   @return [true, false]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     If set to `true`, the service does not attempt to resolve a
+</span>  <span class='comment'>#     Optional. If set to `true`, the service does not attempt to resolve a
 </span>  <span class='comment'>#     more precise address for the job.
 </span>  <span class='comment'># @!attribute [rw] html_sanitization
 </span>  <span class='comment'>#   @return [Google::Cloud::Talent::V4beta1::HtmlSanitization]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Option for job HTML content sanitization. Applied fields are:
+</span>  <span class='comment'>#     Optional. Option for job HTML content sanitization. Applied fields are:
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     * description
 </span>  <span class='comment'>#     * applicationInfo.instruction
@@ -3141,9 +2915,7 @@ bold, italic, ordered list, and unordered list markup tags.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Optional.</p>
-
-<p>The employment type(s) of a job, for example,
+    <p>Returns Optional. The employment type(s) of a job, for example,
 <span class='object_link'><a href="EmploymentType.html#FULL_TIME-constant" title="Google::Cloud::Talent::V4beta1::EmploymentType::FULL_TIME (constant)">full time</a></span> or
 <span class='object_link'><a href="EmploymentType.html#PART_TIME-constant" title="Google::Cloud::Talent::V4beta1::EmploymentType::PART_TIME (constant)">part time</a></span>.</p>
 
@@ -3163,9 +2935,7 @@ bold, italic, ordered list, and unordered list markup tags.</p>
       
       
         &mdash;
-        <div class='inline'><p>Optional.</p>
-
-<p>The employment type(s) of a job, for example,
+        <div class='inline'><p>Optional. The employment type(s) of a job, for example,
 <span class='object_link'><a href="EmploymentType.html#FULL_TIME-constant" title="Google::Cloud::Talent::V4beta1::EmploymentType::FULL_TIME (constant)">full time</a></span> or
 <span class='object_link'><a href="EmploymentType.html#PART_TIME-constant" title="Google::Cloud::Talent::V4beta1::EmploymentType::PART_TIME (constant)">part time</a></span>.</p>
 </div>
@@ -3180,6 +2950,40 @@ bold, italic, ordered list, and unordered list markup tags.</p>
       <pre class="lines">
 
 
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
 331
 332
 333
@@ -3213,71 +3017,23 @@ bold, italic, ordered list, and unordered list markup tags.</p>
 361
 362
 363
-364
-365
-366
-367
-368
-369
-370
-371
-372
-373
-374
-375
-376
-377
-378
-379
-380
-381
-382
-383
-384
-385
-386
-387
-388
-389
-390
-391
-392
-393
-394
-395
-396
-397
-398
-399
-400
-401
-402
-403
-404
-405
-406
-407
-408</pre>
+364</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job.rb', line 331</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job.rb', line 297</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::Job (class)">Job</a></span></span>
   <span class='comment'># Application related details of a job posting.
 </span>  <span class='comment'># @!attribute [rw] emails
 </span>  <span class='comment'>#   @return [Array&lt;String&gt;]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Use this field to specify email address(es) to which resumes or
+</span>  <span class='comment'>#     Optional. Use this field to specify email address(es) to which resumes or
 </span>  <span class='comment'>#     applications can be sent.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     The maximum number of allowed characters for each entry is 255.
 </span>  <span class='comment'># @!attribute [rw] instruction
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Use this field to provide instructions, such as &quot;Mail your application
-</span>  <span class='comment'>#     to ...&quot;, that a candidate can follow to apply for the job.
+</span>  <span class='comment'>#     Optional. Use this field to provide instructions, such as &quot;Mail your
+</span>  <span class='comment'>#     application to ...&quot;, that a candidate can follow to apply for the job.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     This field accepts and sanitizes HTML input, and also accepts
 </span>  <span class='comment'>#     bold, italic, ordered list, and unordered list markup tags.
@@ -3285,10 +3041,8 @@ bold, italic, ordered list, and unordered list markup tags.</p>
 </span>  <span class='comment'>#     The maximum number of allowed characters is 3,000.
 </span>  <span class='comment'># @!attribute [rw] uris
 </span>  <span class='comment'>#   @return [Array&lt;String&gt;]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Use this URI field to direct an applicant to a website, for example to
-</span>  <span class='comment'>#     link to an online application form.
+</span>  <span class='comment'>#     Optional. Use this URI field to direct an applicant to a website, for
+</span>  <span class='comment'>#     example to link to an online application form.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     The maximum number of allowed characters for each entry is 2,000.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Job/ApplicationInfo.html" title="Google::Cloud::Talent::V4beta1::Job::ApplicationInfo (class)">ApplicationInfo</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
@@ -3317,15 +3071,11 @@ bold, italic, ordered list, and unordered list markup tags.</p>
 </span>  <span class='comment'># Options for job processing.
 </span>  <span class='comment'># @!attribute [rw] disable_street_address_resolution
 </span>  <span class='comment'>#   @return [true, false]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     If set to `true`, the service does not attempt to resolve a
+</span>  <span class='comment'>#     Optional. If set to `true`, the service does not attempt to resolve a
 </span>  <span class='comment'>#     more precise address for the job.
 </span>  <span class='comment'># @!attribute [rw] html_sanitization
 </span>  <span class='comment'>#   @return [Google::Cloud::Talent::V4beta1::HtmlSanitization]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Option for job HTML content sanitization. Applied fields are:
+</span>  <span class='comment'>#     Optional. Option for job HTML content sanitization. Applied fields are:
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     * description
 </span>  <span class='comment'>#     * applicationInfo.instruction
@@ -3358,9 +3108,7 @@ bold, italic, ordered list, and unordered list markup tags.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Optional.</p>
-
-<p>A description of bonus, commission, and other compensation
+    <p>Returns Optional. A description of bonus, commission, and other compensation
 incentives associated with the job not including salary or pay.</p>
 
 <p>The maximum number of allowed characters is 10,000.</p>
@@ -3381,9 +3129,7 @@ incentives associated with the job not including salary or pay.</p>
       
       
         &mdash;
-        <div class='inline'><p>Optional.</p>
-
-<p>A description of bonus, commission, and other compensation
+        <div class='inline'><p>Optional. A description of bonus, commission, and other compensation
 incentives associated with the job not including salary or pay.</p>
 
 <p>The maximum number of allowed characters is 10,000.</p>
@@ -3399,6 +3145,40 @@ incentives associated with the job not including salary or pay.</p>
       <pre class="lines">
 
 
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
 331
 332
 333
@@ -3432,71 +3212,23 @@ incentives associated with the job not including salary or pay.</p>
 361
 362
 363
-364
-365
-366
-367
-368
-369
-370
-371
-372
-373
-374
-375
-376
-377
-378
-379
-380
-381
-382
-383
-384
-385
-386
-387
-388
-389
-390
-391
-392
-393
-394
-395
-396
-397
-398
-399
-400
-401
-402
-403
-404
-405
-406
-407
-408</pre>
+364</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job.rb', line 331</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job.rb', line 297</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::Job (class)">Job</a></span></span>
   <span class='comment'># Application related details of a job posting.
 </span>  <span class='comment'># @!attribute [rw] emails
 </span>  <span class='comment'>#   @return [Array&lt;String&gt;]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Use this field to specify email address(es) to which resumes or
+</span>  <span class='comment'>#     Optional. Use this field to specify email address(es) to which resumes or
 </span>  <span class='comment'>#     applications can be sent.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     The maximum number of allowed characters for each entry is 255.
 </span>  <span class='comment'># @!attribute [rw] instruction
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Use this field to provide instructions, such as &quot;Mail your application
-</span>  <span class='comment'>#     to ...&quot;, that a candidate can follow to apply for the job.
+</span>  <span class='comment'>#     Optional. Use this field to provide instructions, such as &quot;Mail your
+</span>  <span class='comment'>#     application to ...&quot;, that a candidate can follow to apply for the job.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     This field accepts and sanitizes HTML input, and also accepts
 </span>  <span class='comment'>#     bold, italic, ordered list, and unordered list markup tags.
@@ -3504,10 +3236,8 @@ incentives associated with the job not including salary or pay.</p>
 </span>  <span class='comment'>#     The maximum number of allowed characters is 3,000.
 </span>  <span class='comment'># @!attribute [rw] uris
 </span>  <span class='comment'>#   @return [Array&lt;String&gt;]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Use this URI field to direct an applicant to a website, for example to
-</span>  <span class='comment'>#     link to an online application form.
+</span>  <span class='comment'>#     Optional. Use this URI field to direct an applicant to a website, for
+</span>  <span class='comment'>#     example to link to an online application form.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     The maximum number of allowed characters for each entry is 2,000.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Job/ApplicationInfo.html" title="Google::Cloud::Talent::V4beta1::Job::ApplicationInfo (class)">ApplicationInfo</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
@@ -3536,15 +3266,11 @@ incentives associated with the job not including salary or pay.</p>
 </span>  <span class='comment'># Options for job processing.
 </span>  <span class='comment'># @!attribute [rw] disable_street_address_resolution
 </span>  <span class='comment'>#   @return [true, false]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     If set to `true`, the service does not attempt to resolve a
+</span>  <span class='comment'>#     Optional. If set to `true`, the service does not attempt to resolve a
 </span>  <span class='comment'>#     more precise address for the job.
 </span>  <span class='comment'># @!attribute [rw] html_sanitization
 </span>  <span class='comment'>#   @return [Google::Cloud::Talent::V4beta1::HtmlSanitization]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Option for job HTML content sanitization. Applied fields are:
+</span>  <span class='comment'>#     Optional. Option for job HTML content sanitization. Applied fields are:
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     * description
 </span>  <span class='comment'>#     * applicationInfo.instruction
@@ -3577,9 +3303,7 @@ incentives associated with the job not including salary or pay.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Optional.</p>
-
-<p>The benefits included with the job.</p>
+    <p>Returns Optional. The benefits included with the job.</p>
 
 
   </div>
@@ -3597,9 +3321,7 @@ incentives associated with the job not including salary or pay.</p>
       
       
         &mdash;
-        <div class='inline'><p>Optional.</p>
-
-<p>The benefits included with the job.</p>
+        <div class='inline'><p>Optional. The benefits included with the job.</p>
 </div>
       
     </li>
@@ -3612,6 +3334,40 @@ incentives associated with the job not including salary or pay.</p>
       <pre class="lines">
 
 
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
 331
 332
 333
@@ -3645,71 +3401,23 @@ incentives associated with the job not including salary or pay.</p>
 361
 362
 363
-364
-365
-366
-367
-368
-369
-370
-371
-372
-373
-374
-375
-376
-377
-378
-379
-380
-381
-382
-383
-384
-385
-386
-387
-388
-389
-390
-391
-392
-393
-394
-395
-396
-397
-398
-399
-400
-401
-402
-403
-404
-405
-406
-407
-408</pre>
+364</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job.rb', line 331</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job.rb', line 297</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::Job (class)">Job</a></span></span>
   <span class='comment'># Application related details of a job posting.
 </span>  <span class='comment'># @!attribute [rw] emails
 </span>  <span class='comment'>#   @return [Array&lt;String&gt;]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Use this field to specify email address(es) to which resumes or
+</span>  <span class='comment'>#     Optional. Use this field to specify email address(es) to which resumes or
 </span>  <span class='comment'>#     applications can be sent.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     The maximum number of allowed characters for each entry is 255.
 </span>  <span class='comment'># @!attribute [rw] instruction
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Use this field to provide instructions, such as &quot;Mail your application
-</span>  <span class='comment'>#     to ...&quot;, that a candidate can follow to apply for the job.
+</span>  <span class='comment'>#     Optional. Use this field to provide instructions, such as &quot;Mail your
+</span>  <span class='comment'>#     application to ...&quot;, that a candidate can follow to apply for the job.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     This field accepts and sanitizes HTML input, and also accepts
 </span>  <span class='comment'>#     bold, italic, ordered list, and unordered list markup tags.
@@ -3717,10 +3425,8 @@ incentives associated with the job not including salary or pay.</p>
 </span>  <span class='comment'>#     The maximum number of allowed characters is 3,000.
 </span>  <span class='comment'># @!attribute [rw] uris
 </span>  <span class='comment'>#   @return [Array&lt;String&gt;]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Use this URI field to direct an applicant to a website, for example to
-</span>  <span class='comment'>#     link to an online application form.
+</span>  <span class='comment'>#     Optional. Use this URI field to direct an applicant to a website, for
+</span>  <span class='comment'>#     example to link to an online application form.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     The maximum number of allowed characters for each entry is 2,000.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Job/ApplicationInfo.html" title="Google::Cloud::Talent::V4beta1::Job::ApplicationInfo (class)">ApplicationInfo</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
@@ -3749,15 +3455,11 @@ incentives associated with the job not including salary or pay.</p>
 </span>  <span class='comment'># Options for job processing.
 </span>  <span class='comment'># @!attribute [rw] disable_street_address_resolution
 </span>  <span class='comment'>#   @return [true, false]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     If set to `true`, the service does not attempt to resolve a
+</span>  <span class='comment'>#     Optional. If set to `true`, the service does not attempt to resolve a
 </span>  <span class='comment'>#     more precise address for the job.
 </span>  <span class='comment'># @!attribute [rw] html_sanitization
 </span>  <span class='comment'>#   @return [Google::Cloud::Talent::V4beta1::HtmlSanitization]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Option for job HTML content sanitization. Applied fields are:
+</span>  <span class='comment'>#     Optional. Option for job HTML content sanitization. Applied fields are:
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     * description
 </span>  <span class='comment'>#     * applicationInfo.instruction
@@ -3790,10 +3492,8 @@ incentives associated with the job not including salary or pay.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Optional.</p>
-
-<p>The end timestamp of the job. Typically this field is used for contracting
-engagements. Invalid timestamps are ignored.</p>
+    <p>Returns Optional. The end timestamp of the job. Typically this field is used for
+contracting engagements. Invalid timestamps are ignored.</p>
 
 
   </div>
@@ -3811,10 +3511,8 @@ engagements. Invalid timestamps are ignored.</p>
       
       
         &mdash;
-        <div class='inline'><p>Optional.</p>
-
-<p>The end timestamp of the job. Typically this field is used for contracting
-engagements. Invalid timestamps are ignored.</p>
+        <div class='inline'><p>Optional. The end timestamp of the job. Typically this field is used for
+contracting engagements. Invalid timestamps are ignored.</p>
 </div>
       
     </li>
@@ -3827,6 +3525,40 @@ engagements. Invalid timestamps are ignored.</p>
       <pre class="lines">
 
 
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
 331
 332
 333
@@ -3860,71 +3592,23 @@ engagements. Invalid timestamps are ignored.</p>
 361
 362
 363
-364
-365
-366
-367
-368
-369
-370
-371
-372
-373
-374
-375
-376
-377
-378
-379
-380
-381
-382
-383
-384
-385
-386
-387
-388
-389
-390
-391
-392
-393
-394
-395
-396
-397
-398
-399
-400
-401
-402
-403
-404
-405
-406
-407
-408</pre>
+364</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job.rb', line 331</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job.rb', line 297</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::Job (class)">Job</a></span></span>
   <span class='comment'># Application related details of a job posting.
 </span>  <span class='comment'># @!attribute [rw] emails
 </span>  <span class='comment'>#   @return [Array&lt;String&gt;]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Use this field to specify email address(es) to which resumes or
+</span>  <span class='comment'>#     Optional. Use this field to specify email address(es) to which resumes or
 </span>  <span class='comment'>#     applications can be sent.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     The maximum number of allowed characters for each entry is 255.
 </span>  <span class='comment'># @!attribute [rw] instruction
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Use this field to provide instructions, such as &quot;Mail your application
-</span>  <span class='comment'>#     to ...&quot;, that a candidate can follow to apply for the job.
+</span>  <span class='comment'>#     Optional. Use this field to provide instructions, such as &quot;Mail your
+</span>  <span class='comment'>#     application to ...&quot;, that a candidate can follow to apply for the job.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     This field accepts and sanitizes HTML input, and also accepts
 </span>  <span class='comment'>#     bold, italic, ordered list, and unordered list markup tags.
@@ -3932,10 +3616,8 @@ engagements. Invalid timestamps are ignored.</p>
 </span>  <span class='comment'>#     The maximum number of allowed characters is 3,000.
 </span>  <span class='comment'># @!attribute [rw] uris
 </span>  <span class='comment'>#   @return [Array&lt;String&gt;]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Use this URI field to direct an applicant to a website, for example to
-</span>  <span class='comment'>#     link to an online application form.
+</span>  <span class='comment'>#     Optional. Use this URI field to direct an applicant to a website, for
+</span>  <span class='comment'>#     example to link to an online application form.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     The maximum number of allowed characters for each entry is 2,000.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Job/ApplicationInfo.html" title="Google::Cloud::Talent::V4beta1::Job::ApplicationInfo (class)">ApplicationInfo</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
@@ -3964,15 +3646,11 @@ engagements. Invalid timestamps are ignored.</p>
 </span>  <span class='comment'># Options for job processing.
 </span>  <span class='comment'># @!attribute [rw] disable_street_address_resolution
 </span>  <span class='comment'>#   @return [true, false]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     If set to `true`, the service does not attempt to resolve a
+</span>  <span class='comment'>#     Optional. If set to `true`, the service does not attempt to resolve a
 </span>  <span class='comment'>#     more precise address for the job.
 </span>  <span class='comment'># @!attribute [rw] html_sanitization
 </span>  <span class='comment'>#   @return [Google::Cloud::Talent::V4beta1::HtmlSanitization]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Option for job HTML content sanitization. Applied fields are:
+</span>  <span class='comment'>#     Optional. Option for job HTML content sanitization. Applied fields are:
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     * description
 </span>  <span class='comment'>#     * applicationInfo.instruction
@@ -4005,9 +3683,8 @@ engagements. Invalid timestamps are ignored.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Optional.</p>
-
-<p>The experience level associated with the job, such as &quot;Entry Level&quot;.</p>
+    <p>Returns Optional. The experience level associated with the job, such as &quot;Entry
+Level&quot;.</p>
 
 
   </div>
@@ -4025,9 +3702,8 @@ engagements. Invalid timestamps are ignored.</p>
       
       
         &mdash;
-        <div class='inline'><p>Optional.</p>
-
-<p>The experience level associated with the job, such as &quot;Entry Level&quot;.</p>
+        <div class='inline'><p>Optional. The experience level associated with the job, such as &quot;Entry
+Level&quot;.</p>
 </div>
       
     </li>
@@ -4040,6 +3716,40 @@ engagements. Invalid timestamps are ignored.</p>
       <pre class="lines">
 
 
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
 331
 332
 333
@@ -4073,71 +3783,23 @@ engagements. Invalid timestamps are ignored.</p>
 361
 362
 363
-364
-365
-366
-367
-368
-369
-370
-371
-372
-373
-374
-375
-376
-377
-378
-379
-380
-381
-382
-383
-384
-385
-386
-387
-388
-389
-390
-391
-392
-393
-394
-395
-396
-397
-398
-399
-400
-401
-402
-403
-404
-405
-406
-407
-408</pre>
+364</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job.rb', line 331</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job.rb', line 297</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::Job (class)">Job</a></span></span>
   <span class='comment'># Application related details of a job posting.
 </span>  <span class='comment'># @!attribute [rw] emails
 </span>  <span class='comment'>#   @return [Array&lt;String&gt;]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Use this field to specify email address(es) to which resumes or
+</span>  <span class='comment'>#     Optional. Use this field to specify email address(es) to which resumes or
 </span>  <span class='comment'>#     applications can be sent.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     The maximum number of allowed characters for each entry is 255.
 </span>  <span class='comment'># @!attribute [rw] instruction
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Use this field to provide instructions, such as &quot;Mail your application
-</span>  <span class='comment'>#     to ...&quot;, that a candidate can follow to apply for the job.
+</span>  <span class='comment'>#     Optional. Use this field to provide instructions, such as &quot;Mail your
+</span>  <span class='comment'>#     application to ...&quot;, that a candidate can follow to apply for the job.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     This field accepts and sanitizes HTML input, and also accepts
 </span>  <span class='comment'>#     bold, italic, ordered list, and unordered list markup tags.
@@ -4145,10 +3807,8 @@ engagements. Invalid timestamps are ignored.</p>
 </span>  <span class='comment'>#     The maximum number of allowed characters is 3,000.
 </span>  <span class='comment'># @!attribute [rw] uris
 </span>  <span class='comment'>#   @return [Array&lt;String&gt;]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Use this URI field to direct an applicant to a website, for example to
-</span>  <span class='comment'>#     link to an online application form.
+</span>  <span class='comment'>#     Optional. Use this URI field to direct an applicant to a website, for
+</span>  <span class='comment'>#     example to link to an online application form.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     The maximum number of allowed characters for each entry is 2,000.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Job/ApplicationInfo.html" title="Google::Cloud::Talent::V4beta1::Job::ApplicationInfo (class)">ApplicationInfo</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
@@ -4177,15 +3837,11 @@ engagements. Invalid timestamps are ignored.</p>
 </span>  <span class='comment'># Options for job processing.
 </span>  <span class='comment'># @!attribute [rw] disable_street_address_resolution
 </span>  <span class='comment'>#   @return [true, false]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     If set to `true`, the service does not attempt to resolve a
+</span>  <span class='comment'>#     Optional. If set to `true`, the service does not attempt to resolve a
 </span>  <span class='comment'>#     more precise address for the job.
 </span>  <span class='comment'># @!attribute [rw] html_sanitization
 </span>  <span class='comment'>#   @return [Google::Cloud::Talent::V4beta1::HtmlSanitization]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Option for job HTML content sanitization. Applied fields are:
+</span>  <span class='comment'>#     Optional. Option for job HTML content sanitization. Applied fields are:
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     * description
 </span>  <span class='comment'>#     * applicationInfo.instruction
@@ -4218,10 +3874,8 @@ engagements. Invalid timestamps are ignored.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Optional.</p>
-
-<p>The start timestamp of the job in UTC time zone. Typically this field
-is used for contracting engagements. Invalid timestamps are ignored.</p>
+    <p>Returns Optional. The start timestamp of the job in UTC time zone. Typically this
+field is used for contracting engagements. Invalid timestamps are ignored.</p>
 
 
   </div>
@@ -4239,10 +3893,8 @@ is used for contracting engagements. Invalid timestamps are ignored.</p>
       
       
         &mdash;
-        <div class='inline'><p>Optional.</p>
-
-<p>The start timestamp of the job in UTC time zone. Typically this field
-is used for contracting engagements. Invalid timestamps are ignored.</p>
+        <div class='inline'><p>Optional. The start timestamp of the job in UTC time zone. Typically this
+field is used for contracting engagements. Invalid timestamps are ignored.</p>
 </div>
       
     </li>
@@ -4255,6 +3907,40 @@ is used for contracting engagements. Invalid timestamps are ignored.</p>
       <pre class="lines">
 
 
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
 331
 332
 333
@@ -4288,71 +3974,23 @@ is used for contracting engagements. Invalid timestamps are ignored.</p>
 361
 362
 363
-364
-365
-366
-367
-368
-369
-370
-371
-372
-373
-374
-375
-376
-377
-378
-379
-380
-381
-382
-383
-384
-385
-386
-387
-388
-389
-390
-391
-392
-393
-394
-395
-396
-397
-398
-399
-400
-401
-402
-403
-404
-405
-406
-407
-408</pre>
+364</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job.rb', line 331</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job.rb', line 297</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::Job (class)">Job</a></span></span>
   <span class='comment'># Application related details of a job posting.
 </span>  <span class='comment'># @!attribute [rw] emails
 </span>  <span class='comment'>#   @return [Array&lt;String&gt;]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Use this field to specify email address(es) to which resumes or
+</span>  <span class='comment'>#     Optional. Use this field to specify email address(es) to which resumes or
 </span>  <span class='comment'>#     applications can be sent.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     The maximum number of allowed characters for each entry is 255.
 </span>  <span class='comment'># @!attribute [rw] instruction
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Use this field to provide instructions, such as &quot;Mail your application
-</span>  <span class='comment'>#     to ...&quot;, that a candidate can follow to apply for the job.
+</span>  <span class='comment'>#     Optional. Use this field to provide instructions, such as &quot;Mail your
+</span>  <span class='comment'>#     application to ...&quot;, that a candidate can follow to apply for the job.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     This field accepts and sanitizes HTML input, and also accepts
 </span>  <span class='comment'>#     bold, italic, ordered list, and unordered list markup tags.
@@ -4360,10 +3998,8 @@ is used for contracting engagements. Invalid timestamps are ignored.</p>
 </span>  <span class='comment'>#     The maximum number of allowed characters is 3,000.
 </span>  <span class='comment'># @!attribute [rw] uris
 </span>  <span class='comment'>#   @return [Array&lt;String&gt;]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Use this URI field to direct an applicant to a website, for example to
-</span>  <span class='comment'>#     link to an online application form.
+</span>  <span class='comment'>#     Optional. Use this URI field to direct an applicant to a website, for
+</span>  <span class='comment'>#     example to link to an online application form.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     The maximum number of allowed characters for each entry is 2,000.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Job/ApplicationInfo.html" title="Google::Cloud::Talent::V4beta1::Job::ApplicationInfo (class)">ApplicationInfo</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
@@ -4392,15 +4028,11 @@ is used for contracting engagements. Invalid timestamps are ignored.</p>
 </span>  <span class='comment'># Options for job processing.
 </span>  <span class='comment'># @!attribute [rw] disable_street_address_resolution
 </span>  <span class='comment'>#   @return [true, false]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     If set to `true`, the service does not attempt to resolve a
+</span>  <span class='comment'>#     Optional. If set to `true`, the service does not attempt to resolve a
 </span>  <span class='comment'>#     more precise address for the job.
 </span>  <span class='comment'># @!attribute [rw] html_sanitization
 </span>  <span class='comment'>#   @return [Google::Cloud::Talent::V4beta1::HtmlSanitization]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Option for job HTML content sanitization. Applied fields are:
+</span>  <span class='comment'>#     Optional. Option for job HTML content sanitization. Applied fields are:
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     * description
 </span>  <span class='comment'>#     * applicationInfo.instruction
@@ -4433,9 +4065,7 @@ is used for contracting engagements. Invalid timestamps are ignored.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Optional.</p>
-
-<p>The language of the posting. This field is distinct from
+    <p>Returns Optional. The language of the posting. This field is distinct from
 any requirements for fluency that are associated with the job.</p>
 
 <p>Language codes must be in BCP-47 format, such as &quot;en-US&quot; or &quot;sr-Latn&quot;.
@@ -4465,9 +4095,7 @@ otherwise defaults to &#39;en_US&#39;.</p>
       
       
         &mdash;
-        <div class='inline'><p>Optional.</p>
-
-<p>The language of the posting. This field is distinct from
+        <div class='inline'><p>Optional. The language of the posting. This field is distinct from
 any requirements for fluency that are associated with the job.</p>
 
 <p>Language codes must be in BCP-47 format, such as &quot;en-US&quot; or &quot;sr-Latn&quot;.
@@ -4492,6 +4120,40 @@ otherwise defaults to &#39;en_US&#39;.</p>
       <pre class="lines">
 
 
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
 331
 332
 333
@@ -4525,71 +4187,23 @@ otherwise defaults to &#39;en_US&#39;.</p>
 361
 362
 363
-364
-365
-366
-367
-368
-369
-370
-371
-372
-373
-374
-375
-376
-377
-378
-379
-380
-381
-382
-383
-384
-385
-386
-387
-388
-389
-390
-391
-392
-393
-394
-395
-396
-397
-398
-399
-400
-401
-402
-403
-404
-405
-406
-407
-408</pre>
+364</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job.rb', line 331</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job.rb', line 297</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::Job (class)">Job</a></span></span>
   <span class='comment'># Application related details of a job posting.
 </span>  <span class='comment'># @!attribute [rw] emails
 </span>  <span class='comment'>#   @return [Array&lt;String&gt;]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Use this field to specify email address(es) to which resumes or
+</span>  <span class='comment'>#     Optional. Use this field to specify email address(es) to which resumes or
 </span>  <span class='comment'>#     applications can be sent.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     The maximum number of allowed characters for each entry is 255.
 </span>  <span class='comment'># @!attribute [rw] instruction
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Use this field to provide instructions, such as &quot;Mail your application
-</span>  <span class='comment'>#     to ...&quot;, that a candidate can follow to apply for the job.
+</span>  <span class='comment'>#     Optional. Use this field to provide instructions, such as &quot;Mail your
+</span>  <span class='comment'>#     application to ...&quot;, that a candidate can follow to apply for the job.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     This field accepts and sanitizes HTML input, and also accepts
 </span>  <span class='comment'>#     bold, italic, ordered list, and unordered list markup tags.
@@ -4597,10 +4211,8 @@ otherwise defaults to &#39;en_US&#39;.</p>
 </span>  <span class='comment'>#     The maximum number of allowed characters is 3,000.
 </span>  <span class='comment'># @!attribute [rw] uris
 </span>  <span class='comment'>#   @return [Array&lt;String&gt;]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Use this URI field to direct an applicant to a website, for example to
-</span>  <span class='comment'>#     link to an online application form.
+</span>  <span class='comment'>#     Optional. Use this URI field to direct an applicant to a website, for
+</span>  <span class='comment'>#     example to link to an online application form.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     The maximum number of allowed characters for each entry is 2,000.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Job/ApplicationInfo.html" title="Google::Cloud::Talent::V4beta1::Job::ApplicationInfo (class)">ApplicationInfo</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
@@ -4629,15 +4241,11 @@ otherwise defaults to &#39;en_US&#39;.</p>
 </span>  <span class='comment'># Options for job processing.
 </span>  <span class='comment'># @!attribute [rw] disable_street_address_resolution
 </span>  <span class='comment'>#   @return [true, false]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     If set to `true`, the service does not attempt to resolve a
+</span>  <span class='comment'>#     Optional. If set to `true`, the service does not attempt to resolve a
 </span>  <span class='comment'>#     more precise address for the job.
 </span>  <span class='comment'># @!attribute [rw] html_sanitization
 </span>  <span class='comment'>#   @return [Google::Cloud::Talent::V4beta1::HtmlSanitization]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Option for job HTML content sanitization. Applied fields are:
+</span>  <span class='comment'>#     Optional. Option for job HTML content sanitization. Applied fields are:
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     * description
 </span>  <span class='comment'>#     * applicationInfo.instruction
@@ -4729,6 +4337,40 @@ value is unique.</p>
       <pre class="lines">
 
 
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
 331
 332
 333
@@ -4762,71 +4404,23 @@ value is unique.</p>
 361
 362
 363
-364
-365
-366
-367
-368
-369
-370
-371
-372
-373
-374
-375
-376
-377
-378
-379
-380
-381
-382
-383
-384
-385
-386
-387
-388
-389
-390
-391
-392
-393
-394
-395
-396
-397
-398
-399
-400
-401
-402
-403
-404
-405
-406
-407
-408</pre>
+364</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job.rb', line 331</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job.rb', line 297</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::Job (class)">Job</a></span></span>
   <span class='comment'># Application related details of a job posting.
 </span>  <span class='comment'># @!attribute [rw] emails
 </span>  <span class='comment'>#   @return [Array&lt;String&gt;]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Use this field to specify email address(es) to which resumes or
+</span>  <span class='comment'>#     Optional. Use this field to specify email address(es) to which resumes or
 </span>  <span class='comment'>#     applications can be sent.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     The maximum number of allowed characters for each entry is 255.
 </span>  <span class='comment'># @!attribute [rw] instruction
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Use this field to provide instructions, such as &quot;Mail your application
-</span>  <span class='comment'>#     to ...&quot;, that a candidate can follow to apply for the job.
+</span>  <span class='comment'>#     Optional. Use this field to provide instructions, such as &quot;Mail your
+</span>  <span class='comment'>#     application to ...&quot;, that a candidate can follow to apply for the job.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     This field accepts and sanitizes HTML input, and also accepts
 </span>  <span class='comment'>#     bold, italic, ordered list, and unordered list markup tags.
@@ -4834,10 +4428,8 @@ value is unique.</p>
 </span>  <span class='comment'>#     The maximum number of allowed characters is 3,000.
 </span>  <span class='comment'># @!attribute [rw] uris
 </span>  <span class='comment'>#   @return [Array&lt;String&gt;]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Use this URI field to direct an applicant to a website, for example to
-</span>  <span class='comment'>#     link to an online application form.
+</span>  <span class='comment'>#     Optional. Use this URI field to direct an applicant to a website, for
+</span>  <span class='comment'>#     example to link to an online application form.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     The maximum number of allowed characters for each entry is 2,000.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Job/ApplicationInfo.html" title="Google::Cloud::Talent::V4beta1::Job::ApplicationInfo (class)">ApplicationInfo</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
@@ -4866,15 +4458,11 @@ value is unique.</p>
 </span>  <span class='comment'># Options for job processing.
 </span>  <span class='comment'># @!attribute [rw] disable_street_address_resolution
 </span>  <span class='comment'>#   @return [true, false]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     If set to `true`, the service does not attempt to resolve a
+</span>  <span class='comment'>#     Optional. If set to `true`, the service does not attempt to resolve a
 </span>  <span class='comment'>#     more precise address for the job.
 </span>  <span class='comment'># @!attribute [rw] html_sanitization
 </span>  <span class='comment'>#   @return [Google::Cloud::Talent::V4beta1::HtmlSanitization]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Option for job HTML content sanitization. Applied fields are:
+</span>  <span class='comment'>#     Optional. Option for job HTML content sanitization. Applied fields are:
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     * description
 </span>  <span class='comment'>#     * applicationInfo.instruction
@@ -4938,6 +4526,40 @@ value is unique.</p>
       <pre class="lines">
 
 
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
 331
 332
 333
@@ -4971,71 +4593,23 @@ value is unique.</p>
 361
 362
 363
-364
-365
-366
-367
-368
-369
-370
-371
-372
-373
-374
-375
-376
-377
-378
-379
-380
-381
-382
-383
-384
-385
-386
-387
-388
-389
-390
-391
-392
-393
-394
-395
-396
-397
-398
-399
-400
-401
-402
-403
-404
-405
-406
-407
-408</pre>
+364</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job.rb', line 331</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job.rb', line 297</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::Job (class)">Job</a></span></span>
   <span class='comment'># Application related details of a job posting.
 </span>  <span class='comment'># @!attribute [rw] emails
 </span>  <span class='comment'>#   @return [Array&lt;String&gt;]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Use this field to specify email address(es) to which resumes or
+</span>  <span class='comment'>#     Optional. Use this field to specify email address(es) to which resumes or
 </span>  <span class='comment'>#     applications can be sent.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     The maximum number of allowed characters for each entry is 255.
 </span>  <span class='comment'># @!attribute [rw] instruction
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Use this field to provide instructions, such as &quot;Mail your application
-</span>  <span class='comment'>#     to ...&quot;, that a candidate can follow to apply for the job.
+</span>  <span class='comment'>#     Optional. Use this field to provide instructions, such as &quot;Mail your
+</span>  <span class='comment'>#     application to ...&quot;, that a candidate can follow to apply for the job.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     This field accepts and sanitizes HTML input, and also accepts
 </span>  <span class='comment'>#     bold, italic, ordered list, and unordered list markup tags.
@@ -5043,10 +4617,8 @@ value is unique.</p>
 </span>  <span class='comment'>#     The maximum number of allowed characters is 3,000.
 </span>  <span class='comment'># @!attribute [rw] uris
 </span>  <span class='comment'>#   @return [Array&lt;String&gt;]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Use this URI field to direct an applicant to a website, for example to
-</span>  <span class='comment'>#     link to an online application form.
+</span>  <span class='comment'>#     Optional. Use this URI field to direct an applicant to a website, for
+</span>  <span class='comment'>#     example to link to an online application form.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     The maximum number of allowed characters for each entry is 2,000.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Job/ApplicationInfo.html" title="Google::Cloud::Talent::V4beta1::Job::ApplicationInfo (class)">ApplicationInfo</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
@@ -5075,15 +4647,11 @@ value is unique.</p>
 </span>  <span class='comment'># Options for job processing.
 </span>  <span class='comment'># @!attribute [rw] disable_street_address_resolution
 </span>  <span class='comment'>#   @return [true, false]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     If set to `true`, the service does not attempt to resolve a
+</span>  <span class='comment'>#     Optional. If set to `true`, the service does not attempt to resolve a
 </span>  <span class='comment'>#     more precise address for the job.
 </span>  <span class='comment'># @!attribute [rw] html_sanitization
 </span>  <span class='comment'>#   @return [Google::Cloud::Talent::V4beta1::HtmlSanitization]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Option for job HTML content sanitization. Applied fields are:
+</span>  <span class='comment'>#     Optional. Option for job HTML content sanitization. Applied fields are:
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     * description
 </span>  <span class='comment'>#     * applicationInfo.instruction
@@ -5121,12 +4689,13 @@ experience.</p>
 
 <p>The expiration timestamp of the job. After this timestamp, the
 job is marked as expired, and it no longer appears in search results. The
-expired job can&#39;t be deleted or listed by the
-DeleteJob and
-ListJobs APIs, but it
-can be retrieved with the
+expired job can&#39;t be listed by the
+ListJobs API, but it can
+be retrieved with the
 GetJob API or updated with
-the UpdateJob API. An
+the UpdateJob API or
+deleted with the
+DeleteJob API. An
 expired job can be updated and opened again by using a future expiration
 timestamp. Updating an expired job fails if there is another existing open
 job with same <span class='object_link'><a href="#company-instance_method" title="Google::Cloud::Talent::V4beta1::Job#company (method)">company</a></span>,
@@ -5134,15 +4703,24 @@ job with same <span class='object_link'><a href="#company-instance_method" title
 <span class='object_link'><a href="#requisition_id-instance_method" title="Google::Cloud::Talent::V4beta1::Job#requisition_id (method)">requisition_id</a></span>.</p>
 
 <p>The expired jobs are retained in our system for 90 days. However, the
-overall expired job count cannot exceed 3 times the maximum of open jobs
-count over the past week, otherwise jobs with earlier expire time are
-cleaned first. Expired jobs are no longer accessible after they are cleaned
+overall expired job count cannot exceed 3 times the maximum number of
+open jobs over previous 7 days. If this threshold is exceeded,
+expired jobs are cleaned out in order of earliest expire time.
+Expired jobs are no longer accessible after they are cleaned
 out.</p>
 
 <p>Invalid timestamps are ignored, and treated as expire time not provided.</p>
 
-<p>Timestamp before the instant request is made is considered valid, the job
-will be treated as expired immediately.</p>
+<p>If the timestamp is before the instant request is made, the job
+is treated as expired immediately on creation. This kind of job can
+not be updated. And when creating a job with past timestamp, the
+<span class='object_link'><a href="#posting_publish_time-instance_method" title="Google::Cloud::Talent::V4beta1::Job#posting_publish_time (method)">posting_publish_time</a></span>
+must be set before
+<span class='object_link'><a href="#posting_expire_time-instance_method" title="Google::Cloud::Talent::V4beta1::Job#posting_expire_time (method)">posting_expire_time</a></span>.
+The purpose of this feature is to allow other objects, such as
+<span class='object_link'><a href="Application.html" title="Google::Cloud::Talent::V4beta1::Application (class)">Application</a></span>, to refer a job that
+didn&#39;t exist in the system prior to becoming expired. If you want to modify
+a job that was expired on creation, delete it and create a new one.</p>
 
 <p>If this value isn&#39;t provided at the time of job creation or is invalid,
 the job posting expires after 30 days from the job&#39;s creation time. For
@@ -5179,12 +4757,13 @@ experience.</p>
 
 <p>The expiration timestamp of the job. After this timestamp, the
 job is marked as expired, and it no longer appears in search results. The
-expired job can&#39;t be deleted or listed by the
-DeleteJob and
-ListJobs APIs, but it
-can be retrieved with the
+expired job can&#39;t be listed by the
+ListJobs API, but it can
+be retrieved with the
 GetJob API or updated with
-the UpdateJob API. An
+the UpdateJob API or
+deleted with the
+DeleteJob API. An
 expired job can be updated and opened again by using a future expiration
 timestamp. Updating an expired job fails if there is another existing open
 job with same <span class='object_link'><a href="#company-instance_method" title="Google::Cloud::Talent::V4beta1::Job#company (method)">company</a></span>,
@@ -5192,15 +4771,24 @@ job with same <span class='object_link'><a href="#company-instance_method" title
 <span class='object_link'><a href="#requisition_id-instance_method" title="Google::Cloud::Talent::V4beta1::Job#requisition_id (method)">requisition_id</a></span>.</p>
 
 <p>The expired jobs are retained in our system for 90 days. However, the
-overall expired job count cannot exceed 3 times the maximum of open jobs
-count over the past week, otherwise jobs with earlier expire time are
-cleaned first. Expired jobs are no longer accessible after they are cleaned
+overall expired job count cannot exceed 3 times the maximum number of
+open jobs over previous 7 days. If this threshold is exceeded,
+expired jobs are cleaned out in order of earliest expire time.
+Expired jobs are no longer accessible after they are cleaned
 out.</p>
 
 <p>Invalid timestamps are ignored, and treated as expire time not provided.</p>
 
-<p>Timestamp before the instant request is made is considered valid, the job
-will be treated as expired immediately.</p>
+<p>If the timestamp is before the instant request is made, the job
+is treated as expired immediately on creation. This kind of job can
+not be updated. And when creating a job with past timestamp, the
+<span class='object_link'><a href="#posting_publish_time-instance_method" title="Google::Cloud::Talent::V4beta1::Job#posting_publish_time (method)">posting_publish_time</a></span>
+must be set before
+<span class='object_link'><a href="#posting_expire_time-instance_method" title="Google::Cloud::Talent::V4beta1::Job#posting_expire_time (method)">posting_expire_time</a></span>.
+The purpose of this feature is to allow other objects, such as
+<span class='object_link'><a href="Application.html" title="Google::Cloud::Talent::V4beta1::Application (class)">Application</a></span>, to refer a job that
+didn&#39;t exist in the system prior to becoming expired. If you want to modify
+a job that was expired on creation, delete it and create a new one.</p>
 
 <p>If this value isn&#39;t provided at the time of job creation or is invalid,
 the job posting expires after 30 days from the job&#39;s creation time. For
@@ -5227,6 +4815,40 @@ date isn&#39;t updated.</p>
       <pre class="lines">
 
 
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
 331
 332
 333
@@ -5260,71 +4882,23 @@ date isn&#39;t updated.</p>
 361
 362
 363
-364
-365
-366
-367
-368
-369
-370
-371
-372
-373
-374
-375
-376
-377
-378
-379
-380
-381
-382
-383
-384
-385
-386
-387
-388
-389
-390
-391
-392
-393
-394
-395
-396
-397
-398
-399
-400
-401
-402
-403
-404
-405
-406
-407
-408</pre>
+364</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job.rb', line 331</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job.rb', line 297</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::Job (class)">Job</a></span></span>
   <span class='comment'># Application related details of a job posting.
 </span>  <span class='comment'># @!attribute [rw] emails
 </span>  <span class='comment'>#   @return [Array&lt;String&gt;]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Use this field to specify email address(es) to which resumes or
+</span>  <span class='comment'>#     Optional. Use this field to specify email address(es) to which resumes or
 </span>  <span class='comment'>#     applications can be sent.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     The maximum number of allowed characters for each entry is 255.
 </span>  <span class='comment'># @!attribute [rw] instruction
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Use this field to provide instructions, such as &quot;Mail your application
-</span>  <span class='comment'>#     to ...&quot;, that a candidate can follow to apply for the job.
+</span>  <span class='comment'>#     Optional. Use this field to provide instructions, such as &quot;Mail your
+</span>  <span class='comment'>#     application to ...&quot;, that a candidate can follow to apply for the job.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     This field accepts and sanitizes HTML input, and also accepts
 </span>  <span class='comment'>#     bold, italic, ordered list, and unordered list markup tags.
@@ -5332,10 +4906,8 @@ date isn&#39;t updated.</p>
 </span>  <span class='comment'>#     The maximum number of allowed characters is 3,000.
 </span>  <span class='comment'># @!attribute [rw] uris
 </span>  <span class='comment'>#   @return [Array&lt;String&gt;]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Use this URI field to direct an applicant to a website, for example to
-</span>  <span class='comment'>#     link to an online application form.
+</span>  <span class='comment'>#     Optional. Use this URI field to direct an applicant to a website, for
+</span>  <span class='comment'>#     example to link to an online application form.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     The maximum number of allowed characters for each entry is 2,000.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Job/ApplicationInfo.html" title="Google::Cloud::Talent::V4beta1::Job::ApplicationInfo (class)">ApplicationInfo</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
@@ -5364,15 +4936,11 @@ date isn&#39;t updated.</p>
 </span>  <span class='comment'># Options for job processing.
 </span>  <span class='comment'># @!attribute [rw] disable_street_address_resolution
 </span>  <span class='comment'>#   @return [true, false]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     If set to `true`, the service does not attempt to resolve a
+</span>  <span class='comment'>#     Optional. If set to `true`, the service does not attempt to resolve a
 </span>  <span class='comment'>#     more precise address for the job.
 </span>  <span class='comment'># @!attribute [rw] html_sanitization
 </span>  <span class='comment'>#   @return [Google::Cloud::Talent::V4beta1::HtmlSanitization]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Option for job HTML content sanitization. Applied fields are:
+</span>  <span class='comment'>#     Optional. Option for job HTML content sanitization. Applied fields are:
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     * description
 </span>  <span class='comment'>#     * applicationInfo.instruction
@@ -5405,11 +4973,9 @@ date isn&#39;t updated.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Optional.</p>
-
-<p>The timestamp this job posting was most recently published. The default
-value is the time the request arrives at the server. Invalid timestamps are
-ignored.</p>
+    <p>Returns Optional. The timestamp this job posting was most recently published. The
+default value is the time the request arrives at the server. Invalid
+timestamps are ignored.</p>
 
 
   </div>
@@ -5427,11 +4993,9 @@ ignored.</p>
       
       
         &mdash;
-        <div class='inline'><p>Optional.</p>
-
-<p>The timestamp this job posting was most recently published. The default
-value is the time the request arrives at the server. Invalid timestamps are
-ignored.</p>
+        <div class='inline'><p>Optional. The timestamp this job posting was most recently published. The
+default value is the time the request arrives at the server. Invalid
+timestamps are ignored.</p>
 </div>
       
     </li>
@@ -5444,6 +5008,40 @@ ignored.</p>
       <pre class="lines">
 
 
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
 331
 332
 333
@@ -5477,71 +5075,23 @@ ignored.</p>
 361
 362
 363
-364
-365
-366
-367
-368
-369
-370
-371
-372
-373
-374
-375
-376
-377
-378
-379
-380
-381
-382
-383
-384
-385
-386
-387
-388
-389
-390
-391
-392
-393
-394
-395
-396
-397
-398
-399
-400
-401
-402
-403
-404
-405
-406
-407
-408</pre>
+364</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job.rb', line 331</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job.rb', line 297</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::Job (class)">Job</a></span></span>
   <span class='comment'># Application related details of a job posting.
 </span>  <span class='comment'># @!attribute [rw] emails
 </span>  <span class='comment'>#   @return [Array&lt;String&gt;]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Use this field to specify email address(es) to which resumes or
+</span>  <span class='comment'>#     Optional. Use this field to specify email address(es) to which resumes or
 </span>  <span class='comment'>#     applications can be sent.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     The maximum number of allowed characters for each entry is 255.
 </span>  <span class='comment'># @!attribute [rw] instruction
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Use this field to provide instructions, such as &quot;Mail your application
-</span>  <span class='comment'>#     to ...&quot;, that a candidate can follow to apply for the job.
+</span>  <span class='comment'>#     Optional. Use this field to provide instructions, such as &quot;Mail your
+</span>  <span class='comment'>#     application to ...&quot;, that a candidate can follow to apply for the job.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     This field accepts and sanitizes HTML input, and also accepts
 </span>  <span class='comment'>#     bold, italic, ordered list, and unordered list markup tags.
@@ -5549,10 +5099,8 @@ ignored.</p>
 </span>  <span class='comment'>#     The maximum number of allowed characters is 3,000.
 </span>  <span class='comment'># @!attribute [rw] uris
 </span>  <span class='comment'>#   @return [Array&lt;String&gt;]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Use this URI field to direct an applicant to a website, for example to
-</span>  <span class='comment'>#     link to an online application form.
+</span>  <span class='comment'>#     Optional. Use this URI field to direct an applicant to a website, for
+</span>  <span class='comment'>#     example to link to an online application form.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     The maximum number of allowed characters for each entry is 2,000.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Job/ApplicationInfo.html" title="Google::Cloud::Talent::V4beta1::Job::ApplicationInfo (class)">ApplicationInfo</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
@@ -5581,15 +5129,11 @@ ignored.</p>
 </span>  <span class='comment'># Options for job processing.
 </span>  <span class='comment'># @!attribute [rw] disable_street_address_resolution
 </span>  <span class='comment'>#   @return [true, false]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     If set to `true`, the service does not attempt to resolve a
+</span>  <span class='comment'>#     Optional. If set to `true`, the service does not attempt to resolve a
 </span>  <span class='comment'>#     more precise address for the job.
 </span>  <span class='comment'># @!attribute [rw] html_sanitization
 </span>  <span class='comment'>#   @return [Google::Cloud::Talent::V4beta1::HtmlSanitization]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Option for job HTML content sanitization. Applied fields are:
+</span>  <span class='comment'>#     Optional. Option for job HTML content sanitization. Applied fields are:
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     * description
 </span>  <span class='comment'>#     * applicationInfo.instruction
@@ -5622,14 +5166,12 @@ ignored.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Optional.</p>
-
-<p>The job <span class='object_link'><a href="PostingRegion.html" title="Google::Cloud::Talent::V4beta1::PostingRegion (module)">PostingRegion</a></span> (for
-example, state, country) throughout which the job is available. If this
-field is set, a
-<span class='object_link'><a href="LocationFilter.html" title="Google::Cloud::Talent::V4beta1::LocationFilter (class)">LocationFilter</a></span> in a search
-query within the job region finds this job posting if an exact location
-match isn&#39;t specified. If this field is set to
+    <p>Returns Optional. The job
+<span class='object_link'><a href="PostingRegion.html" title="Google::Cloud::Talent::V4beta1::PostingRegion (module)">PostingRegion</a></span> (for example,
+state, country) throughout which the job is available. If this field is
+set, a <span class='object_link'><a href="LocationFilter.html" title="Google::Cloud::Talent::V4beta1::LocationFilter (class)">LocationFilter</a></span> in a
+search query within the job region finds this job posting if an exact
+location match isn&#39;t specified. If this field is set to
 <span class='object_link'><a href="PostingRegion.html#NATION-constant" title="Google::Cloud::Talent::V4beta1::PostingRegion::NATION (constant)">PostingRegion::NATION</a></span> or
 <span class='object_link'><a href="PostingRegion.html#ADMINISTRATIVE_AREA-constant" title="Google::Cloud::Talent::V4beta1::PostingRegion::ADMINISTRATIVE_AREA (constant)">PostingRegion::ADMINISTRATIVE_AREA</a></span>,
 setting job <span class='object_link'><a href="#addresses-instance_method" title="Google::Cloud::Talent::V4beta1::Job#addresses (method)">Job#addresses</a></span> to
@@ -5651,14 +5193,12 @@ the same location level as this field is strongly recommended.</p>
       
       
         &mdash;
-        <div class='inline'><p>Optional.</p>
-
-<p>The job <span class='object_link'><a href="PostingRegion.html" title="Google::Cloud::Talent::V4beta1::PostingRegion (module)">PostingRegion</a></span> (for
-example, state, country) throughout which the job is available. If this
-field is set, a
-<span class='object_link'><a href="LocationFilter.html" title="Google::Cloud::Talent::V4beta1::LocationFilter (class)">LocationFilter</a></span> in a search
-query within the job region finds this job posting if an exact location
-match isn&#39;t specified. If this field is set to
+        <div class='inline'><p>Optional. The job
+<span class='object_link'><a href="PostingRegion.html" title="Google::Cloud::Talent::V4beta1::PostingRegion (module)">PostingRegion</a></span> (for example,
+state, country) throughout which the job is available. If this field is
+set, a <span class='object_link'><a href="LocationFilter.html" title="Google::Cloud::Talent::V4beta1::LocationFilter (class)">LocationFilter</a></span> in a
+search query within the job region finds this job posting if an exact
+location match isn&#39;t specified. If this field is set to
 <span class='object_link'><a href="PostingRegion.html#NATION-constant" title="Google::Cloud::Talent::V4beta1::PostingRegion::NATION (constant)">PostingRegion::NATION</a></span> or
 <span class='object_link'><a href="PostingRegion.html#ADMINISTRATIVE_AREA-constant" title="Google::Cloud::Talent::V4beta1::PostingRegion::ADMINISTRATIVE_AREA (constant)">PostingRegion::ADMINISTRATIVE_AREA</a></span>,
 setting job <span class='object_link'><a href="#addresses-instance_method" title="Google::Cloud::Talent::V4beta1::Job#addresses (method)">Job#addresses</a></span> to
@@ -5675,6 +5215,40 @@ the same location level as this field is strongly recommended.</p>
       <pre class="lines">
 
 
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
 331
 332
 333
@@ -5708,71 +5282,23 @@ the same location level as this field is strongly recommended.</p>
 361
 362
 363
-364
-365
-366
-367
-368
-369
-370
-371
-372
-373
-374
-375
-376
-377
-378
-379
-380
-381
-382
-383
-384
-385
-386
-387
-388
-389
-390
-391
-392
-393
-394
-395
-396
-397
-398
-399
-400
-401
-402
-403
-404
-405
-406
-407
-408</pre>
+364</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job.rb', line 331</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job.rb', line 297</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::Job (class)">Job</a></span></span>
   <span class='comment'># Application related details of a job posting.
 </span>  <span class='comment'># @!attribute [rw] emails
 </span>  <span class='comment'>#   @return [Array&lt;String&gt;]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Use this field to specify email address(es) to which resumes or
+</span>  <span class='comment'>#     Optional. Use this field to specify email address(es) to which resumes or
 </span>  <span class='comment'>#     applications can be sent.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     The maximum number of allowed characters for each entry is 255.
 </span>  <span class='comment'># @!attribute [rw] instruction
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Use this field to provide instructions, such as &quot;Mail your application
-</span>  <span class='comment'>#     to ...&quot;, that a candidate can follow to apply for the job.
+</span>  <span class='comment'>#     Optional. Use this field to provide instructions, such as &quot;Mail your
+</span>  <span class='comment'>#     application to ...&quot;, that a candidate can follow to apply for the job.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     This field accepts and sanitizes HTML input, and also accepts
 </span>  <span class='comment'>#     bold, italic, ordered list, and unordered list markup tags.
@@ -5780,10 +5306,8 @@ the same location level as this field is strongly recommended.</p>
 </span>  <span class='comment'>#     The maximum number of allowed characters is 3,000.
 </span>  <span class='comment'># @!attribute [rw] uris
 </span>  <span class='comment'>#   @return [Array&lt;String&gt;]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Use this URI field to direct an applicant to a website, for example to
-</span>  <span class='comment'>#     link to an online application form.
+</span>  <span class='comment'>#     Optional. Use this URI field to direct an applicant to a website, for
+</span>  <span class='comment'>#     example to link to an online application form.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     The maximum number of allowed characters for each entry is 2,000.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Job/ApplicationInfo.html" title="Google::Cloud::Talent::V4beta1::Job::ApplicationInfo (class)">ApplicationInfo</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
@@ -5812,15 +5336,11 @@ the same location level as this field is strongly recommended.</p>
 </span>  <span class='comment'># Options for job processing.
 </span>  <span class='comment'># @!attribute [rw] disable_street_address_resolution
 </span>  <span class='comment'>#   @return [true, false]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     If set to `true`, the service does not attempt to resolve a
+</span>  <span class='comment'>#     Optional. If set to `true`, the service does not attempt to resolve a
 </span>  <span class='comment'>#     more precise address for the job.
 </span>  <span class='comment'># @!attribute [rw] html_sanitization
 </span>  <span class='comment'>#   @return [Google::Cloud::Talent::V4beta1::HtmlSanitization]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Option for job HTML content sanitization. Applied fields are:
+</span>  <span class='comment'>#     Optional. Option for job HTML content sanitization. Applied fields are:
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     * description
 </span>  <span class='comment'>#     * applicationInfo.instruction
@@ -5884,6 +5404,40 @@ the same location level as this field is strongly recommended.</p>
       <pre class="lines">
 
 
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
 331
 332
 333
@@ -5917,71 +5471,23 @@ the same location level as this field is strongly recommended.</p>
 361
 362
 363
-364
-365
-366
-367
-368
-369
-370
-371
-372
-373
-374
-375
-376
-377
-378
-379
-380
-381
-382
-383
-384
-385
-386
-387
-388
-389
-390
-391
-392
-393
-394
-395
-396
-397
-398
-399
-400
-401
-402
-403
-404
-405
-406
-407
-408</pre>
+364</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job.rb', line 331</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job.rb', line 297</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::Job (class)">Job</a></span></span>
   <span class='comment'># Application related details of a job posting.
 </span>  <span class='comment'># @!attribute [rw] emails
 </span>  <span class='comment'>#   @return [Array&lt;String&gt;]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Use this field to specify email address(es) to which resumes or
+</span>  <span class='comment'>#     Optional. Use this field to specify email address(es) to which resumes or
 </span>  <span class='comment'>#     applications can be sent.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     The maximum number of allowed characters for each entry is 255.
 </span>  <span class='comment'># @!attribute [rw] instruction
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Use this field to provide instructions, such as &quot;Mail your application
-</span>  <span class='comment'>#     to ...&quot;, that a candidate can follow to apply for the job.
+</span>  <span class='comment'>#     Optional. Use this field to provide instructions, such as &quot;Mail your
+</span>  <span class='comment'>#     application to ...&quot;, that a candidate can follow to apply for the job.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     This field accepts and sanitizes HTML input, and also accepts
 </span>  <span class='comment'>#     bold, italic, ordered list, and unordered list markup tags.
@@ -5989,10 +5495,8 @@ the same location level as this field is strongly recommended.</p>
 </span>  <span class='comment'>#     The maximum number of allowed characters is 3,000.
 </span>  <span class='comment'># @!attribute [rw] uris
 </span>  <span class='comment'>#   @return [Array&lt;String&gt;]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Use this URI field to direct an applicant to a website, for example to
-</span>  <span class='comment'>#     link to an online application form.
+</span>  <span class='comment'>#     Optional. Use this URI field to direct an applicant to a website, for
+</span>  <span class='comment'>#     example to link to an online application form.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     The maximum number of allowed characters for each entry is 2,000.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Job/ApplicationInfo.html" title="Google::Cloud::Talent::V4beta1::Job::ApplicationInfo (class)">ApplicationInfo</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
@@ -6021,15 +5525,11 @@ the same location level as this field is strongly recommended.</p>
 </span>  <span class='comment'># Options for job processing.
 </span>  <span class='comment'># @!attribute [rw] disable_street_address_resolution
 </span>  <span class='comment'>#   @return [true, false]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     If set to `true`, the service does not attempt to resolve a
+</span>  <span class='comment'>#     Optional. If set to `true`, the service does not attempt to resolve a
 </span>  <span class='comment'>#     more precise address for the job.
 </span>  <span class='comment'># @!attribute [rw] html_sanitization
 </span>  <span class='comment'>#   @return [Google::Cloud::Talent::V4beta1::HtmlSanitization]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Option for job HTML content sanitization. Applied fields are:
+</span>  <span class='comment'>#     Optional. Option for job HTML content sanitization. Applied fields are:
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     * description
 </span>  <span class='comment'>#     * applicationInfo.instruction
@@ -6062,9 +5562,7 @@ the same location level as this field is strongly recommended.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Optional.</p>
-
-<p>Options for job processing.</p>
+    <p>Returns Optional. Options for job processing.</p>
 
 
   </div>
@@ -6082,9 +5580,7 @@ the same location level as this field is strongly recommended.</p>
       
       
         &mdash;
-        <div class='inline'><p>Optional.</p>
-
-<p>Options for job processing.</p>
+        <div class='inline'><p>Optional. Options for job processing.</p>
 </div>
       
     </li>
@@ -6097,6 +5593,40 @@ the same location level as this field is strongly recommended.</p>
       <pre class="lines">
 
 
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
 331
 332
 333
@@ -6130,71 +5660,23 @@ the same location level as this field is strongly recommended.</p>
 361
 362
 363
-364
-365
-366
-367
-368
-369
-370
-371
-372
-373
-374
-375
-376
-377
-378
-379
-380
-381
-382
-383
-384
-385
-386
-387
-388
-389
-390
-391
-392
-393
-394
-395
-396
-397
-398
-399
-400
-401
-402
-403
-404
-405
-406
-407
-408</pre>
+364</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job.rb', line 331</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job.rb', line 297</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::Job (class)">Job</a></span></span>
   <span class='comment'># Application related details of a job posting.
 </span>  <span class='comment'># @!attribute [rw] emails
 </span>  <span class='comment'>#   @return [Array&lt;String&gt;]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Use this field to specify email address(es) to which resumes or
+</span>  <span class='comment'>#     Optional. Use this field to specify email address(es) to which resumes or
 </span>  <span class='comment'>#     applications can be sent.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     The maximum number of allowed characters for each entry is 255.
 </span>  <span class='comment'># @!attribute [rw] instruction
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Use this field to provide instructions, such as &quot;Mail your application
-</span>  <span class='comment'>#     to ...&quot;, that a candidate can follow to apply for the job.
+</span>  <span class='comment'>#     Optional. Use this field to provide instructions, such as &quot;Mail your
+</span>  <span class='comment'>#     application to ...&quot;, that a candidate can follow to apply for the job.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     This field accepts and sanitizes HTML input, and also accepts
 </span>  <span class='comment'>#     bold, italic, ordered list, and unordered list markup tags.
@@ -6202,10 +5684,8 @@ the same location level as this field is strongly recommended.</p>
 </span>  <span class='comment'>#     The maximum number of allowed characters is 3,000.
 </span>  <span class='comment'># @!attribute [rw] uris
 </span>  <span class='comment'>#   @return [Array&lt;String&gt;]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Use this URI field to direct an applicant to a website, for example to
-</span>  <span class='comment'>#     link to an online application form.
+</span>  <span class='comment'>#     Optional. Use this URI field to direct an applicant to a website, for
+</span>  <span class='comment'>#     example to link to an online application form.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     The maximum number of allowed characters for each entry is 2,000.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Job/ApplicationInfo.html" title="Google::Cloud::Talent::V4beta1::Job::ApplicationInfo (class)">ApplicationInfo</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
@@ -6234,15 +5714,11 @@ the same location level as this field is strongly recommended.</p>
 </span>  <span class='comment'># Options for job processing.
 </span>  <span class='comment'># @!attribute [rw] disable_street_address_resolution
 </span>  <span class='comment'>#   @return [true, false]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     If set to `true`, the service does not attempt to resolve a
+</span>  <span class='comment'>#     Optional. If set to `true`, the service does not attempt to resolve a
 </span>  <span class='comment'>#     more precise address for the job.
 </span>  <span class='comment'># @!attribute [rw] html_sanitization
 </span>  <span class='comment'>#   @return [Google::Cloud::Talent::V4beta1::HtmlSanitization]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Option for job HTML content sanitization. Applied fields are:
+</span>  <span class='comment'>#     Optional. Option for job HTML content sanitization. Applied fields are:
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     * description
 </span>  <span class='comment'>#     * applicationInfo.instruction
@@ -6275,9 +5751,7 @@ the same location level as this field is strongly recommended.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Optional.</p>
-
-<p>A promotion value of the job, as determined by the client.
+    <p>Returns Optional. A promotion value of the job, as determined by the client.
 The value determines the sort order of the jobs returned when searching for
 jobs using the featured jobs search call, with higher promotional values
 being returned first and ties being resolved by relevance sort. Only the
@@ -6301,9 +5775,7 @@ jobs with a promotionValue &gt;0 are returned in a FEATURED_JOB_SEARCH.</p>
       
       
         &mdash;
-        <div class='inline'><p>Optional.</p>
-
-<p>A promotion value of the job, as determined by the client.
+        <div class='inline'><p>Optional. A promotion value of the job, as determined by the client.
 The value determines the sort order of the jobs returned when searching for
 jobs using the featured jobs search call, with higher promotional values
 being returned first and ties being resolved by relevance sort. Only the
@@ -6322,6 +5794,40 @@ jobs with a promotionValue &gt;0 are returned in a FEATURED_JOB_SEARCH.</p>
       <pre class="lines">
 
 
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
 331
 332
 333
@@ -6355,71 +5861,23 @@ jobs with a promotionValue &gt;0 are returned in a FEATURED_JOB_SEARCH.</p>
 361
 362
 363
-364
-365
-366
-367
-368
-369
-370
-371
-372
-373
-374
-375
-376
-377
-378
-379
-380
-381
-382
-383
-384
-385
-386
-387
-388
-389
-390
-391
-392
-393
-394
-395
-396
-397
-398
-399
-400
-401
-402
-403
-404
-405
-406
-407
-408</pre>
+364</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job.rb', line 331</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job.rb', line 297</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::Job (class)">Job</a></span></span>
   <span class='comment'># Application related details of a job posting.
 </span>  <span class='comment'># @!attribute [rw] emails
 </span>  <span class='comment'>#   @return [Array&lt;String&gt;]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Use this field to specify email address(es) to which resumes or
+</span>  <span class='comment'>#     Optional. Use this field to specify email address(es) to which resumes or
 </span>  <span class='comment'>#     applications can be sent.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     The maximum number of allowed characters for each entry is 255.
 </span>  <span class='comment'># @!attribute [rw] instruction
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Use this field to provide instructions, such as &quot;Mail your application
-</span>  <span class='comment'>#     to ...&quot;, that a candidate can follow to apply for the job.
+</span>  <span class='comment'>#     Optional. Use this field to provide instructions, such as &quot;Mail your
+</span>  <span class='comment'>#     application to ...&quot;, that a candidate can follow to apply for the job.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     This field accepts and sanitizes HTML input, and also accepts
 </span>  <span class='comment'>#     bold, italic, ordered list, and unordered list markup tags.
@@ -6427,10 +5885,8 @@ jobs with a promotionValue &gt;0 are returned in a FEATURED_JOB_SEARCH.</p>
 </span>  <span class='comment'>#     The maximum number of allowed characters is 3,000.
 </span>  <span class='comment'># @!attribute [rw] uris
 </span>  <span class='comment'>#   @return [Array&lt;String&gt;]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Use this URI field to direct an applicant to a website, for example to
-</span>  <span class='comment'>#     link to an online application form.
+</span>  <span class='comment'>#     Optional. Use this URI field to direct an applicant to a website, for
+</span>  <span class='comment'>#     example to link to an online application form.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     The maximum number of allowed characters for each entry is 2,000.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Job/ApplicationInfo.html" title="Google::Cloud::Talent::V4beta1::Job::ApplicationInfo (class)">ApplicationInfo</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
@@ -6459,15 +5915,11 @@ jobs with a promotionValue &gt;0 are returned in a FEATURED_JOB_SEARCH.</p>
 </span>  <span class='comment'># Options for job processing.
 </span>  <span class='comment'># @!attribute [rw] disable_street_address_resolution
 </span>  <span class='comment'>#   @return [true, false]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     If set to `true`, the service does not attempt to resolve a
+</span>  <span class='comment'>#     Optional. If set to `true`, the service does not attempt to resolve a
 </span>  <span class='comment'>#     more precise address for the job.
 </span>  <span class='comment'># @!attribute [rw] html_sanitization
 </span>  <span class='comment'>#   @return [Google::Cloud::Talent::V4beta1::HtmlSanitization]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Option for job HTML content sanitization. Applied fields are:
+</span>  <span class='comment'>#     Optional. Option for job HTML content sanitization. Applied fields are:
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     * description
 </span>  <span class='comment'>#     * applicationInfo.instruction
@@ -6500,9 +5952,7 @@ jobs with a promotionValue &gt;0 are returned in a FEATURED_JOB_SEARCH.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Optional.</p>
-
-<p>A description of the qualifications required to perform the
+    <p>Returns Optional. A description of the qualifications required to perform the
 job. The use of this field is recommended
 as an alternative to using the more general
 <span class='object_link'><a href="#description-instance_method" title="Google::Cloud::Talent::V4beta1::Job#description (method)">description</a></span> field.</p>
@@ -6528,9 +5978,7 @@ bold, italic, ordered list, and unordered list markup tags.</p>
       
       
         &mdash;
-        <div class='inline'><p>Optional.</p>
-
-<p>A description of the qualifications required to perform the
+        <div class='inline'><p>Optional. A description of the qualifications required to perform the
 job. The use of this field is recommended
 as an alternative to using the more general
 <span class='object_link'><a href="#description-instance_method" title="Google::Cloud::Talent::V4beta1::Job#description (method)">description</a></span> field.</p>
@@ -6551,6 +5999,40 @@ bold, italic, ordered list, and unordered list markup tags.</p>
       <pre class="lines">
 
 
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
 331
 332
 333
@@ -6584,71 +6066,23 @@ bold, italic, ordered list, and unordered list markup tags.</p>
 361
 362
 363
-364
-365
-366
-367
-368
-369
-370
-371
-372
-373
-374
-375
-376
-377
-378
-379
-380
-381
-382
-383
-384
-385
-386
-387
-388
-389
-390
-391
-392
-393
-394
-395
-396
-397
-398
-399
-400
-401
-402
-403
-404
-405
-406
-407
-408</pre>
+364</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job.rb', line 331</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job.rb', line 297</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::Job (class)">Job</a></span></span>
   <span class='comment'># Application related details of a job posting.
 </span>  <span class='comment'># @!attribute [rw] emails
 </span>  <span class='comment'>#   @return [Array&lt;String&gt;]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Use this field to specify email address(es) to which resumes or
+</span>  <span class='comment'>#     Optional. Use this field to specify email address(es) to which resumes or
 </span>  <span class='comment'>#     applications can be sent.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     The maximum number of allowed characters for each entry is 255.
 </span>  <span class='comment'># @!attribute [rw] instruction
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Use this field to provide instructions, such as &quot;Mail your application
-</span>  <span class='comment'>#     to ...&quot;, that a candidate can follow to apply for the job.
+</span>  <span class='comment'>#     Optional. Use this field to provide instructions, such as &quot;Mail your
+</span>  <span class='comment'>#     application to ...&quot;, that a candidate can follow to apply for the job.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     This field accepts and sanitizes HTML input, and also accepts
 </span>  <span class='comment'>#     bold, italic, ordered list, and unordered list markup tags.
@@ -6656,10 +6090,8 @@ bold, italic, ordered list, and unordered list markup tags.</p>
 </span>  <span class='comment'>#     The maximum number of allowed characters is 3,000.
 </span>  <span class='comment'># @!attribute [rw] uris
 </span>  <span class='comment'>#   @return [Array&lt;String&gt;]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Use this URI field to direct an applicant to a website, for example to
-</span>  <span class='comment'>#     link to an online application form.
+</span>  <span class='comment'>#     Optional. Use this URI field to direct an applicant to a website, for
+</span>  <span class='comment'>#     example to link to an online application form.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     The maximum number of allowed characters for each entry is 2,000.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Job/ApplicationInfo.html" title="Google::Cloud::Talent::V4beta1::Job::ApplicationInfo (class)">ApplicationInfo</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
@@ -6688,15 +6120,11 @@ bold, italic, ordered list, and unordered list markup tags.</p>
 </span>  <span class='comment'># Options for job processing.
 </span>  <span class='comment'># @!attribute [rw] disable_street_address_resolution
 </span>  <span class='comment'>#   @return [true, false]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     If set to `true`, the service does not attempt to resolve a
+</span>  <span class='comment'>#     Optional. If set to `true`, the service does not attempt to resolve a
 </span>  <span class='comment'>#     more precise address for the job.
 </span>  <span class='comment'># @!attribute [rw] html_sanitization
 </span>  <span class='comment'>#   @return [Google::Cloud::Talent::V4beta1::HtmlSanitization]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Option for job HTML content sanitization. Applied fields are:
+</span>  <span class='comment'>#     Optional. Option for job HTML content sanitization. Applied fields are:
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     * description
 </span>  <span class='comment'>#     * applicationInfo.instruction
@@ -6729,12 +6157,10 @@ bold, italic, ordered list, and unordered list markup tags.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Required.</p>
-
-<p>The requisition ID, also referred to as the posting ID, is assigned by the
-client to identify a job. This field is intended to be used by clients
-for client identification and tracking of postings. A job isn&#39;t allowed
-to be created if there is another job with the same
+    <p>Returns Required. The requisition ID, also referred to as the posting ID, is
+assigned by the client to identify a job. This field is intended to be used
+by clients for client identification and tracking of postings. A job isn&#39;t
+allowed to be created if there is another job with the same
 <span class='object_link'><a href="#name-instance_method" title="Google::Cloud::Talent::V4beta1::Job#name (method)">company</a></span>,
 <span class='object_link'><a href="#language_code-instance_method" title="Google::Cloud::Talent::V4beta1::Job#language_code (method)">language_code</a></span> and
 <span class='object_link'><a href="#requisition_id-instance_method" title="Google::Cloud::Talent::V4beta1::Job#requisition_id (method)">requisition_id</a></span>.</p>
@@ -6757,12 +6183,10 @@ to be created if there is another job with the same
       
       
         &mdash;
-        <div class='inline'><p>Required.</p>
-
-<p>The requisition ID, also referred to as the posting ID, is assigned by the
-client to identify a job. This field is intended to be used by clients
-for client identification and tracking of postings. A job isn&#39;t allowed
-to be created if there is another job with the same
+        <div class='inline'><p>Required. The requisition ID, also referred to as the posting ID, is
+assigned by the client to identify a job. This field is intended to be used
+by clients for client identification and tracking of postings. A job isn&#39;t
+allowed to be created if there is another job with the same
 <span class='object_link'><a href="#name-instance_method" title="Google::Cloud::Talent::V4beta1::Job#name (method)">company</a></span>,
 <span class='object_link'><a href="#language_code-instance_method" title="Google::Cloud::Talent::V4beta1::Job#language_code (method)">language_code</a></span> and
 <span class='object_link'><a href="#requisition_id-instance_method" title="Google::Cloud::Talent::V4beta1::Job#requisition_id (method)">requisition_id</a></span>.</p>
@@ -6780,6 +6204,40 @@ to be created if there is another job with the same
       <pre class="lines">
 
 
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
 331
 332
 333
@@ -6813,71 +6271,23 @@ to be created if there is another job with the same
 361
 362
 363
-364
-365
-366
-367
-368
-369
-370
-371
-372
-373
-374
-375
-376
-377
-378
-379
-380
-381
-382
-383
-384
-385
-386
-387
-388
-389
-390
-391
-392
-393
-394
-395
-396
-397
-398
-399
-400
-401
-402
-403
-404
-405
-406
-407
-408</pre>
+364</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job.rb', line 331</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job.rb', line 297</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::Job (class)">Job</a></span></span>
   <span class='comment'># Application related details of a job posting.
 </span>  <span class='comment'># @!attribute [rw] emails
 </span>  <span class='comment'>#   @return [Array&lt;String&gt;]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Use this field to specify email address(es) to which resumes or
+</span>  <span class='comment'>#     Optional. Use this field to specify email address(es) to which resumes or
 </span>  <span class='comment'>#     applications can be sent.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     The maximum number of allowed characters for each entry is 255.
 </span>  <span class='comment'># @!attribute [rw] instruction
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Use this field to provide instructions, such as &quot;Mail your application
-</span>  <span class='comment'>#     to ...&quot;, that a candidate can follow to apply for the job.
+</span>  <span class='comment'>#     Optional. Use this field to provide instructions, such as &quot;Mail your
+</span>  <span class='comment'>#     application to ...&quot;, that a candidate can follow to apply for the job.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     This field accepts and sanitizes HTML input, and also accepts
 </span>  <span class='comment'>#     bold, italic, ordered list, and unordered list markup tags.
@@ -6885,10 +6295,8 @@ to be created if there is another job with the same
 </span>  <span class='comment'>#     The maximum number of allowed characters is 3,000.
 </span>  <span class='comment'># @!attribute [rw] uris
 </span>  <span class='comment'>#   @return [Array&lt;String&gt;]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Use this URI field to direct an applicant to a website, for example to
-</span>  <span class='comment'>#     link to an online application form.
+</span>  <span class='comment'>#     Optional. Use this URI field to direct an applicant to a website, for
+</span>  <span class='comment'>#     example to link to an online application form.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     The maximum number of allowed characters for each entry is 2,000.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Job/ApplicationInfo.html" title="Google::Cloud::Talent::V4beta1::Job::ApplicationInfo (class)">ApplicationInfo</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
@@ -6917,15 +6325,11 @@ to be created if there is another job with the same
 </span>  <span class='comment'># Options for job processing.
 </span>  <span class='comment'># @!attribute [rw] disable_street_address_resolution
 </span>  <span class='comment'>#   @return [true, false]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     If set to `true`, the service does not attempt to resolve a
+</span>  <span class='comment'>#     Optional. If set to `true`, the service does not attempt to resolve a
 </span>  <span class='comment'>#     more precise address for the job.
 </span>  <span class='comment'># @!attribute [rw] html_sanitization
 </span>  <span class='comment'>#   @return [Google::Cloud::Talent::V4beta1::HtmlSanitization]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Option for job HTML content sanitization. Applied fields are:
+</span>  <span class='comment'>#     Optional. Option for job HTML content sanitization. Applied fields are:
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     * description
 </span>  <span class='comment'>#     * applicationInfo.instruction
@@ -6958,9 +6362,7 @@ to be created if there is another job with the same
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Optional.</p>
-
-<p>A description of job responsibilities. The use of this field is
+    <p>Returns Optional. A description of job responsibilities. The use of this field is
 recommended as an alternative to using the more general
 <span class='object_link'><a href="#description-instance_method" title="Google::Cloud::Talent::V4beta1::Job#description (method)">description</a></span> field.</p>
 
@@ -6985,9 +6387,7 @@ bold, italic, ordered list, and unordered list markup tags.</p>
       
       
         &mdash;
-        <div class='inline'><p>Optional.</p>
-
-<p>A description of job responsibilities. The use of this field is
+        <div class='inline'><p>Optional. A description of job responsibilities. The use of this field is
 recommended as an alternative to using the more general
 <span class='object_link'><a href="#description-instance_method" title="Google::Cloud::Talent::V4beta1::Job#description (method)">description</a></span> field.</p>
 
@@ -7007,6 +6407,40 @@ bold, italic, ordered list, and unordered list markup tags.</p>
       <pre class="lines">
 
 
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
 331
 332
 333
@@ -7040,71 +6474,23 @@ bold, italic, ordered list, and unordered list markup tags.</p>
 361
 362
 363
-364
-365
-366
-367
-368
-369
-370
-371
-372
-373
-374
-375
-376
-377
-378
-379
-380
-381
-382
-383
-384
-385
-386
-387
-388
-389
-390
-391
-392
-393
-394
-395
-396
-397
-398
-399
-400
-401
-402
-403
-404
-405
-406
-407
-408</pre>
+364</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job.rb', line 331</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job.rb', line 297</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::Job (class)">Job</a></span></span>
   <span class='comment'># Application related details of a job posting.
 </span>  <span class='comment'># @!attribute [rw] emails
 </span>  <span class='comment'>#   @return [Array&lt;String&gt;]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Use this field to specify email address(es) to which resumes or
+</span>  <span class='comment'>#     Optional. Use this field to specify email address(es) to which resumes or
 </span>  <span class='comment'>#     applications can be sent.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     The maximum number of allowed characters for each entry is 255.
 </span>  <span class='comment'># @!attribute [rw] instruction
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Use this field to provide instructions, such as &quot;Mail your application
-</span>  <span class='comment'>#     to ...&quot;, that a candidate can follow to apply for the job.
+</span>  <span class='comment'>#     Optional. Use this field to provide instructions, such as &quot;Mail your
+</span>  <span class='comment'>#     application to ...&quot;, that a candidate can follow to apply for the job.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     This field accepts and sanitizes HTML input, and also accepts
 </span>  <span class='comment'>#     bold, italic, ordered list, and unordered list markup tags.
@@ -7112,10 +6498,8 @@ bold, italic, ordered list, and unordered list markup tags.</p>
 </span>  <span class='comment'>#     The maximum number of allowed characters is 3,000.
 </span>  <span class='comment'># @!attribute [rw] uris
 </span>  <span class='comment'>#   @return [Array&lt;String&gt;]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Use this URI field to direct an applicant to a website, for example to
-</span>  <span class='comment'>#     link to an online application form.
+</span>  <span class='comment'>#     Optional. Use this URI field to direct an applicant to a website, for
+</span>  <span class='comment'>#     example to link to an online application form.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     The maximum number of allowed characters for each entry is 2,000.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Job/ApplicationInfo.html" title="Google::Cloud::Talent::V4beta1::Job::ApplicationInfo (class)">ApplicationInfo</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
@@ -7144,15 +6528,11 @@ bold, italic, ordered list, and unordered list markup tags.</p>
 </span>  <span class='comment'># Options for job processing.
 </span>  <span class='comment'># @!attribute [rw] disable_street_address_resolution
 </span>  <span class='comment'>#   @return [true, false]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     If set to `true`, the service does not attempt to resolve a
+</span>  <span class='comment'>#     Optional. If set to `true`, the service does not attempt to resolve a
 </span>  <span class='comment'>#     more precise address for the job.
 </span>  <span class='comment'># @!attribute [rw] html_sanitization
 </span>  <span class='comment'>#   @return [Google::Cloud::Talent::V4beta1::HtmlSanitization]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Option for job HTML content sanitization. Applied fields are:
+</span>  <span class='comment'>#     Optional. Option for job HTML content sanitization. Applied fields are:
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     * description
 </span>  <span class='comment'>#     * applicationInfo.instruction
@@ -7185,9 +6565,7 @@ bold, italic, ordered list, and unordered list markup tags.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Required.</p>
-
-<p>The title of the job, such as &quot;Software Engineer&quot;</p>
+    <p>Returns Required. The title of the job, such as &quot;Software Engineer&quot;</p>
 
 <p>The maximum number of allowed characters is 500.</p>
 
@@ -7207,9 +6585,7 @@ bold, italic, ordered list, and unordered list markup tags.</p>
       
       
         &mdash;
-        <div class='inline'><p>Required.</p>
-
-<p>The title of the job, such as &quot;Software Engineer&quot;</p>
+        <div class='inline'><p>Required. The title of the job, such as &quot;Software Engineer&quot;</p>
 
 <p>The maximum number of allowed characters is 500.</p>
 </div>
@@ -7224,6 +6600,40 @@ bold, italic, ordered list, and unordered list markup tags.</p>
       <pre class="lines">
 
 
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
 331
 332
 333
@@ -7257,71 +6667,23 @@ bold, italic, ordered list, and unordered list markup tags.</p>
 361
 362
 363
-364
-365
-366
-367
-368
-369
-370
-371
-372
-373
-374
-375
-376
-377
-378
-379
-380
-381
-382
-383
-384
-385
-386
-387
-388
-389
-390
-391
-392
-393
-394
-395
-396
-397
-398
-399
-400
-401
-402
-403
-404
-405
-406
-407
-408</pre>
+364</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job.rb', line 331</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job.rb', line 297</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::Job (class)">Job</a></span></span>
   <span class='comment'># Application related details of a job posting.
 </span>  <span class='comment'># @!attribute [rw] emails
 </span>  <span class='comment'>#   @return [Array&lt;String&gt;]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Use this field to specify email address(es) to which resumes or
+</span>  <span class='comment'>#     Optional. Use this field to specify email address(es) to which resumes or
 </span>  <span class='comment'>#     applications can be sent.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     The maximum number of allowed characters for each entry is 255.
 </span>  <span class='comment'># @!attribute [rw] instruction
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Use this field to provide instructions, such as &quot;Mail your application
-</span>  <span class='comment'>#     to ...&quot;, that a candidate can follow to apply for the job.
+</span>  <span class='comment'>#     Optional. Use this field to provide instructions, such as &quot;Mail your
+</span>  <span class='comment'>#     application to ...&quot;, that a candidate can follow to apply for the job.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     This field accepts and sanitizes HTML input, and also accepts
 </span>  <span class='comment'>#     bold, italic, ordered list, and unordered list markup tags.
@@ -7329,10 +6691,8 @@ bold, italic, ordered list, and unordered list markup tags.</p>
 </span>  <span class='comment'>#     The maximum number of allowed characters is 3,000.
 </span>  <span class='comment'># @!attribute [rw] uris
 </span>  <span class='comment'>#   @return [Array&lt;String&gt;]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Use this URI field to direct an applicant to a website, for example to
-</span>  <span class='comment'>#     link to an online application form.
+</span>  <span class='comment'>#     Optional. Use this URI field to direct an applicant to a website, for
+</span>  <span class='comment'>#     example to link to an online application form.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     The maximum number of allowed characters for each entry is 2,000.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Job/ApplicationInfo.html" title="Google::Cloud::Talent::V4beta1::Job::ApplicationInfo (class)">ApplicationInfo</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
@@ -7361,15 +6721,11 @@ bold, italic, ordered list, and unordered list markup tags.</p>
 </span>  <span class='comment'># Options for job processing.
 </span>  <span class='comment'># @!attribute [rw] disable_street_address_resolution
 </span>  <span class='comment'>#   @return [true, false]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     If set to `true`, the service does not attempt to resolve a
+</span>  <span class='comment'>#     Optional. If set to `true`, the service does not attempt to resolve a
 </span>  <span class='comment'>#     more precise address for the job.
 </span>  <span class='comment'># @!attribute [rw] html_sanitization
 </span>  <span class='comment'>#   @return [Google::Cloud::Talent::V4beta1::HtmlSanitization]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Option for job HTML content sanitization. Applied fields are:
+</span>  <span class='comment'>#     Optional. Option for job HTML content sanitization. Applied fields are:
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     * description
 </span>  <span class='comment'>#     * applicationInfo.instruction
@@ -7402,9 +6758,7 @@ bold, italic, ordered list, and unordered list markup tags.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Optional.</p>
-
-<p>The visibility of the job.</p>
+    <p>Returns Optional. The visibility of the job.</p>
 
 <p>Defaults to
 <span class='object_link'><a href="Visibility.html#ACCOUNT_ONLY-constant" title="Google::Cloud::Talent::V4beta1::Visibility::ACCOUNT_ONLY (constant)">Visibility::ACCOUNT_ONLY</a></span>
@@ -7426,9 +6780,7 @@ if not specified.</p>
       
       
         &mdash;
-        <div class='inline'><p>Optional.</p>
-
-<p>The visibility of the job.</p>
+        <div class='inline'><p>Optional. The visibility of the job.</p>
 
 <p>Defaults to
 <span class='object_link'><a href="Visibility.html#ACCOUNT_ONLY-constant" title="Google::Cloud::Talent::V4beta1::Visibility::ACCOUNT_ONLY (constant)">Visibility::ACCOUNT_ONLY</a></span>
@@ -7445,6 +6797,40 @@ if not specified.</p>
       <pre class="lines">
 
 
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
 331
 332
 333
@@ -7478,71 +6864,23 @@ if not specified.</p>
 361
 362
 363
-364
-365
-366
-367
-368
-369
-370
-371
-372
-373
-374
-375
-376
-377
-378
-379
-380
-381
-382
-383
-384
-385
-386
-387
-388
-389
-390
-391
-392
-393
-394
-395
-396
-397
-398
-399
-400
-401
-402
-403
-404
-405
-406
-407
-408</pre>
+364</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job.rb', line 331</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job.rb', line 297</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::Job (class)">Job</a></span></span>
   <span class='comment'># Application related details of a job posting.
 </span>  <span class='comment'># @!attribute [rw] emails
 </span>  <span class='comment'>#   @return [Array&lt;String&gt;]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Use this field to specify email address(es) to which resumes or
+</span>  <span class='comment'>#     Optional. Use this field to specify email address(es) to which resumes or
 </span>  <span class='comment'>#     applications can be sent.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     The maximum number of allowed characters for each entry is 255.
 </span>  <span class='comment'># @!attribute [rw] instruction
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Use this field to provide instructions, such as &quot;Mail your application
-</span>  <span class='comment'>#     to ...&quot;, that a candidate can follow to apply for the job.
+</span>  <span class='comment'>#     Optional. Use this field to provide instructions, such as &quot;Mail your
+</span>  <span class='comment'>#     application to ...&quot;, that a candidate can follow to apply for the job.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     This field accepts and sanitizes HTML input, and also accepts
 </span>  <span class='comment'>#     bold, italic, ordered list, and unordered list markup tags.
@@ -7550,10 +6888,8 @@ if not specified.</p>
 </span>  <span class='comment'>#     The maximum number of allowed characters is 3,000.
 </span>  <span class='comment'># @!attribute [rw] uris
 </span>  <span class='comment'>#   @return [Array&lt;String&gt;]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Use this URI field to direct an applicant to a website, for example to
-</span>  <span class='comment'>#     link to an online application form.
+</span>  <span class='comment'>#     Optional. Use this URI field to direct an applicant to a website, for
+</span>  <span class='comment'>#     example to link to an online application form.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     The maximum number of allowed characters for each entry is 2,000.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Job/ApplicationInfo.html" title="Google::Cloud::Talent::V4beta1::Job::ApplicationInfo (class)">ApplicationInfo</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
@@ -7582,15 +6918,11 @@ if not specified.</p>
 </span>  <span class='comment'># Options for job processing.
 </span>  <span class='comment'># @!attribute [rw] disable_street_address_resolution
 </span>  <span class='comment'>#   @return [true, false]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     If set to `true`, the service does not attempt to resolve a
+</span>  <span class='comment'>#     Optional. If set to `true`, the service does not attempt to resolve a
 </span>  <span class='comment'>#     more precise address for the job.
 </span>  <span class='comment'># @!attribute [rw] html_sanitization
 </span>  <span class='comment'>#   @return [Google::Cloud::Talent::V4beta1::HtmlSanitization]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Option for job HTML content sanitization. Applied fields are:
+</span>  <span class='comment'>#     Optional. Option for job HTML content sanitization. Applied fields are:
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     * description
 </span>  <span class='comment'>#     * applicationInfo.instruction

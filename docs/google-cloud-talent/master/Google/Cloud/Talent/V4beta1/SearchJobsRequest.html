@@ -530,10 +530,8 @@ js:
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Optional.</p>
-
-<p>Controls over how job documents get ranked on top of existing relevance
-score (determined by API algorithm).</p>
+    <p>Returns Optional. Controls over how job documents get ranked on top of existing
+relevance score (determined by API algorithm).</p>
 
 
   </div>
@@ -551,10 +549,8 @@ score (determined by API algorithm).</p>
       
       
         &mdash;
-        <div class='inline'><p>Optional.</p>
-
-<p>Controls over how job documents get ranked on top of existing relevance
-score (determined by API algorithm).</p>
+        <div class='inline'><p>Optional. Controls over how job documents get ranked on top of existing
+relevance score (determined by API algorithm).</p>
 </div>
       
     </li>
@@ -567,6 +563,54 @@ score (determined by API algorithm).</p>
       <pre class="lines">
 
 
+469
+470
+471
+472
+473
+474
+475
+476
+477
+478
+479
+480
+481
+482
+483
+484
+485
+486
+487
+488
+489
+490
+491
+492
+493
+494
+495
+496
+497
+498
+499
+500
+501
+502
+503
+504
+505
+506
+507
+508
+509
+510
+511
+512
+513
+514
+515
+516
 517
 518
 519
@@ -628,61 +672,10 @@ score (determined by API algorithm).</p>
 575
 576
 577
-578
-579
-580
-581
-582
-583
-584
-585
-586
-587
-588
-589
-590
-591
-592
-593
-594
-595
-596
-597
-598
-599
-600
-601
-602
-603
-604
-605
-606
-607
-608
-609
-610
-611
-612
-613
-614
-615
-616
-617
-618
-619
-620
-621
-622
-623
-624
-625
-626
-627
-628
-629</pre>
+578</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job_service.rb', line 517</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job_service.rb', line 469</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::SearchJobsRequest (class)">SearchJobsRequest</a></span></span>
   <span class='comment'># Input only.
@@ -691,20 +684,17 @@ score (determined by API algorithm).</p>
 </span>  <span class='comment'># {Google::Cloud::Talent::V4beta1::SearchJobsRequest SearchJobsRequest}.
 </span>  <span class='comment'># @!attribute [rw] importance_level
 </span>  <span class='comment'>#   @return [Google::Cloud::Talent::V4beta1::SearchJobsRequest::CustomRankingInfo::ImportanceLevel]
-</span>  <span class='comment'>#     Required.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Controls over how important the score of
+</span>  <span class='comment'>#     Required. Controls over how important the score of
 </span>  <span class='comment'>#     {Google::Cloud::Talent::V4beta1::SearchJobsRequest::CustomRankingInfo#ranking_expression CustomRankingInfo#ranking_expression}
 </span>  <span class='comment'>#     gets applied to job&#39;s final ranking position.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     An error is thrown if not specified.
 </span>  <span class='comment'># @!attribute [rw] ranking_expression
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Required.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Controls over how job documents get ranked on top of existing relevance
-</span>  <span class='comment'>#     score (determined by API algorithm). The product of ranking expression
-</span>  <span class='comment'>#     and relevance score is used to determine job&#39;s final ranking position.
+</span>  <span class='comment'>#     Required. Controls over how job documents get ranked on top of existing
+</span>  <span class='comment'>#     relevance score (determined by API algorithm). The product of ranking
+</span>  <span class='comment'>#     expression and relevance score is used to determine job&#39;s final ranking
+</span>  <span class='comment'>#     position.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     The syntax for this expression is a subset of Google SQL syntax.
 </span>  <span class='comment'>#
@@ -815,9 +805,7 @@ score (determined by API algorithm).</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Optional.</p>
-
-<p>Controls whether to disable exact keyword match on
+    <p>Returns Optional. Controls whether to disable exact keyword match on
 <span class='object_link'><a href="Job.html#title-instance_method" title="Google::Cloud::Talent::V4beta1::Job#title (method)">Job#title</a></span>,
 <span class='object_link'><a href="Job.html#description-instance_method" title="Google::Cloud::Talent::V4beta1::Job#description (method)">Job#description</a></span>,
 <span class='object_link'><a href="Job.html#company_display_name-instance_method" title="Google::Cloud::Talent::V4beta1::Job#company_display_name (method)">Job#company_display_name</a></span>,
@@ -858,9 +846,7 @@ requests.</p>
       
       
         &mdash;
-        <div class='inline'><p>Optional.</p>
-
-<p>Controls whether to disable exact keyword match on
+        <div class='inline'><p>Optional. Controls whether to disable exact keyword match on
 <span class='object_link'><a href="Job.html#title-instance_method" title="Google::Cloud::Talent::V4beta1::Job#title (method)">Job#title</a></span>,
 <span class='object_link'><a href="Job.html#description-instance_method" title="Google::Cloud::Talent::V4beta1::Job#description (method)">Job#description</a></span>,
 <span class='object_link'><a href="Job.html#company_display_name-instance_method" title="Google::Cloud::Talent::V4beta1::Job#company_display_name (method)">Job#company_display_name</a></span>,
@@ -896,6 +882,54 @@ requests.</p>
       <pre class="lines">
 
 
+469
+470
+471
+472
+473
+474
+475
+476
+477
+478
+479
+480
+481
+482
+483
+484
+485
+486
+487
+488
+489
+490
+491
+492
+493
+494
+495
+496
+497
+498
+499
+500
+501
+502
+503
+504
+505
+506
+507
+508
+509
+510
+511
+512
+513
+514
+515
+516
 517
 518
 519
@@ -957,61 +991,10 @@ requests.</p>
 575
 576
 577
-578
-579
-580
-581
-582
-583
-584
-585
-586
-587
-588
-589
-590
-591
-592
-593
-594
-595
-596
-597
-598
-599
-600
-601
-602
-603
-604
-605
-606
-607
-608
-609
-610
-611
-612
-613
-614
-615
-616
-617
-618
-619
-620
-621
-622
-623
-624
-625
-626
-627
-628
-629</pre>
+578</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job_service.rb', line 517</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job_service.rb', line 469</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::SearchJobsRequest (class)">SearchJobsRequest</a></span></span>
   <span class='comment'># Input only.
@@ -1020,20 +1003,17 @@ requests.</p>
 </span>  <span class='comment'># {Google::Cloud::Talent::V4beta1::SearchJobsRequest SearchJobsRequest}.
 </span>  <span class='comment'># @!attribute [rw] importance_level
 </span>  <span class='comment'>#   @return [Google::Cloud::Talent::V4beta1::SearchJobsRequest::CustomRankingInfo::ImportanceLevel]
-</span>  <span class='comment'>#     Required.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Controls over how important the score of
+</span>  <span class='comment'>#     Required. Controls over how important the score of
 </span>  <span class='comment'>#     {Google::Cloud::Talent::V4beta1::SearchJobsRequest::CustomRankingInfo#ranking_expression CustomRankingInfo#ranking_expression}
 </span>  <span class='comment'>#     gets applied to job&#39;s final ranking position.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     An error is thrown if not specified.
 </span>  <span class='comment'># @!attribute [rw] ranking_expression
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Required.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Controls over how job documents get ranked on top of existing relevance
-</span>  <span class='comment'>#     score (determined by API algorithm). The product of ranking expression
-</span>  <span class='comment'>#     and relevance score is used to determine job&#39;s final ranking position.
+</span>  <span class='comment'>#     Required. Controls over how job documents get ranked on top of existing
+</span>  <span class='comment'>#     relevance score (determined by API algorithm). The product of ranking
+</span>  <span class='comment'>#     expression and relevance score is used to determine job&#39;s final ranking
+</span>  <span class='comment'>#     position.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     The syntax for this expression is a subset of Google SQL syntax.
 </span>  <span class='comment'>#
@@ -1144,10 +1124,8 @@ requests.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Optional.</p>
-
-<p>Controls whether highly similar jobs are returned next to each other in
-the search results. Jobs are identified as highly similar based on
+    <p>Returns Optional. Controls whether highly similar jobs are returned next to each
+other in the search results. Jobs are identified as highly similar based on
 their titles, job categories, and locations. Highly similar results are
 clustered so that only one representative job of the cluster is
 displayed to the job seeker higher up in the results, with the other jobs
@@ -1173,10 +1151,8 @@ if no value is specified.</p>
       
       
         &mdash;
-        <div class='inline'><p>Optional.</p>
-
-<p>Controls whether highly similar jobs are returned next to each other in
-the search results. Jobs are identified as highly similar based on
+        <div class='inline'><p>Optional. Controls whether highly similar jobs are returned next to each
+other in the search results. Jobs are identified as highly similar based on
 their titles, job categories, and locations. Highly similar results are
 clustered so that only one representative job of the cluster is
 displayed to the job seeker higher up in the results, with the other jobs
@@ -1197,6 +1173,54 @@ if no value is specified.</p>
       <pre class="lines">
 
 
+469
+470
+471
+472
+473
+474
+475
+476
+477
+478
+479
+480
+481
+482
+483
+484
+485
+486
+487
+488
+489
+490
+491
+492
+493
+494
+495
+496
+497
+498
+499
+500
+501
+502
+503
+504
+505
+506
+507
+508
+509
+510
+511
+512
+513
+514
+515
+516
 517
 518
 519
@@ -1258,61 +1282,10 @@ if no value is specified.</p>
 575
 576
 577
-578
-579
-580
-581
-582
-583
-584
-585
-586
-587
-588
-589
-590
-591
-592
-593
-594
-595
-596
-597
-598
-599
-600
-601
-602
-603
-604
-605
-606
-607
-608
-609
-610
-611
-612
-613
-614
-615
-616
-617
-618
-619
-620
-621
-622
-623
-624
-625
-626
-627
-628
-629</pre>
+578</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job_service.rb', line 517</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job_service.rb', line 469</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::SearchJobsRequest (class)">SearchJobsRequest</a></span></span>
   <span class='comment'># Input only.
@@ -1321,20 +1294,17 @@ if no value is specified.</p>
 </span>  <span class='comment'># {Google::Cloud::Talent::V4beta1::SearchJobsRequest SearchJobsRequest}.
 </span>  <span class='comment'># @!attribute [rw] importance_level
 </span>  <span class='comment'>#   @return [Google::Cloud::Talent::V4beta1::SearchJobsRequest::CustomRankingInfo::ImportanceLevel]
-</span>  <span class='comment'>#     Required.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Controls over how important the score of
+</span>  <span class='comment'>#     Required. Controls over how important the score of
 </span>  <span class='comment'>#     {Google::Cloud::Talent::V4beta1::SearchJobsRequest::CustomRankingInfo#ranking_expression CustomRankingInfo#ranking_expression}
 </span>  <span class='comment'>#     gets applied to job&#39;s final ranking position.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     An error is thrown if not specified.
 </span>  <span class='comment'># @!attribute [rw] ranking_expression
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Required.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Controls over how job documents get ranked on top of existing relevance
-</span>  <span class='comment'>#     score (determined by API algorithm). The product of ranking expression
-</span>  <span class='comment'>#     and relevance score is used to determine job&#39;s final ranking position.
+</span>  <span class='comment'>#     Required. Controls over how job documents get ranked on top of existing
+</span>  <span class='comment'>#     relevance score (determined by API algorithm). The product of ranking
+</span>  <span class='comment'>#     expression and relevance score is used to determine job&#39;s final ranking
+</span>  <span class='comment'>#     position.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     The syntax for this expression is a subset of Google SQL syntax.
 </span>  <span class='comment'>#
@@ -1445,11 +1415,9 @@ if no value is specified.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Optional.</p>
-
-<p>Controls whether to broaden the search when it produces sparse results.
-Broadened queries append results to the end of the matching results
-list.</p>
+    <p>Returns Optional. Controls whether to broaden the search when it produces sparse
+results. Broadened queries append results to the end of the matching
+results list.</p>
 
 <p>Defaults to false.</p>
 
@@ -1469,11 +1437,9 @@ list.</p>
       
       
         &mdash;
-        <div class='inline'><p>Optional.</p>
-
-<p>Controls whether to broaden the search when it produces sparse results.
-Broadened queries append results to the end of the matching results
-list.</p>
+        <div class='inline'><p>Optional. Controls whether to broaden the search when it produces sparse
+results. Broadened queries append results to the end of the matching
+results list.</p>
 
 <p>Defaults to false.</p>
 </div>
@@ -1488,6 +1454,54 @@ list.</p>
       <pre class="lines">
 
 
+469
+470
+471
+472
+473
+474
+475
+476
+477
+478
+479
+480
+481
+482
+483
+484
+485
+486
+487
+488
+489
+490
+491
+492
+493
+494
+495
+496
+497
+498
+499
+500
+501
+502
+503
+504
+505
+506
+507
+508
+509
+510
+511
+512
+513
+514
+515
+516
 517
 518
 519
@@ -1549,61 +1563,10 @@ list.</p>
 575
 576
 577
-578
-579
-580
-581
-582
-583
-584
-585
-586
-587
-588
-589
-590
-591
-592
-593
-594
-595
-596
-597
-598
-599
-600
-601
-602
-603
-604
-605
-606
-607
-608
-609
-610
-611
-612
-613
-614
-615
-616
-617
-618
-619
-620
-621
-622
-623
-624
-625
-626
-627
-628
-629</pre>
+578</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job_service.rb', line 517</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job_service.rb', line 469</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::SearchJobsRequest (class)">SearchJobsRequest</a></span></span>
   <span class='comment'># Input only.
@@ -1612,20 +1575,17 @@ list.</p>
 </span>  <span class='comment'># {Google::Cloud::Talent::V4beta1::SearchJobsRequest SearchJobsRequest}.
 </span>  <span class='comment'># @!attribute [rw] importance_level
 </span>  <span class='comment'>#   @return [Google::Cloud::Talent::V4beta1::SearchJobsRequest::CustomRankingInfo::ImportanceLevel]
-</span>  <span class='comment'>#     Required.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Controls over how important the score of
+</span>  <span class='comment'>#     Required. Controls over how important the score of
 </span>  <span class='comment'>#     {Google::Cloud::Talent::V4beta1::SearchJobsRequest::CustomRankingInfo#ranking_expression CustomRankingInfo#ranking_expression}
 </span>  <span class='comment'>#     gets applied to job&#39;s final ranking position.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     An error is thrown if not specified.
 </span>  <span class='comment'># @!attribute [rw] ranking_expression
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Required.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Controls over how job documents get ranked on top of existing relevance
-</span>  <span class='comment'>#     score (determined by API algorithm). The product of ranking expression
-</span>  <span class='comment'>#     and relevance score is used to determine job&#39;s final ranking position.
+</span>  <span class='comment'>#     Required. Controls over how job documents get ranked on top of existing
+</span>  <span class='comment'>#     relevance score (determined by API algorithm). The product of ranking
+</span>  <span class='comment'>#     expression and relevance score is used to determine job&#39;s final ranking
+</span>  <span class='comment'>#     position.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     The syntax for this expression is a subset of Google SQL syntax.
 </span>  <span class='comment'>#
@@ -1736,9 +1696,8 @@ list.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Optional.</p>
-
-<p>An expression specifies a histogram request against matching jobs.</p>
+    <p>Returns Optional. An expression specifies a histogram request against matching
+jobs.</p>
 
 <p>Expression syntax is an aggregation function call with histogram facets and
 other options.</p>
@@ -1875,9 +1834,8 @@ bucket(100000, MAX)])</code></li>
       
       
         &mdash;
-        <div class='inline'><p>Optional.</p>
-
-<p>An expression specifies a histogram request against matching jobs.</p>
+        <div class='inline'><p>Optional. An expression specifies a histogram request against matching
+jobs.</p>
 
 <p>Expression syntax is an aggregation function call with histogram facets and
 other options.</p>
@@ -2009,6 +1967,54 @@ bucket(100000, MAX)])</code></li>
       <pre class="lines">
 
 
+469
+470
+471
+472
+473
+474
+475
+476
+477
+478
+479
+480
+481
+482
+483
+484
+485
+486
+487
+488
+489
+490
+491
+492
+493
+494
+495
+496
+497
+498
+499
+500
+501
+502
+503
+504
+505
+506
+507
+508
+509
+510
+511
+512
+513
+514
+515
+516
 517
 518
 519
@@ -2070,61 +2076,10 @@ bucket(100000, MAX)])</code></li>
 575
 576
 577
-578
-579
-580
-581
-582
-583
-584
-585
-586
-587
-588
-589
-590
-591
-592
-593
-594
-595
-596
-597
-598
-599
-600
-601
-602
-603
-604
-605
-606
-607
-608
-609
-610
-611
-612
-613
-614
-615
-616
-617
-618
-619
-620
-621
-622
-623
-624
-625
-626
-627
-628
-629</pre>
+578</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job_service.rb', line 517</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job_service.rb', line 469</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::SearchJobsRequest (class)">SearchJobsRequest</a></span></span>
   <span class='comment'># Input only.
@@ -2133,20 +2088,17 @@ bucket(100000, MAX)])</code></li>
 </span>  <span class='comment'># {Google::Cloud::Talent::V4beta1::SearchJobsRequest SearchJobsRequest}.
 </span>  <span class='comment'># @!attribute [rw] importance_level
 </span>  <span class='comment'>#   @return [Google::Cloud::Talent::V4beta1::SearchJobsRequest::CustomRankingInfo::ImportanceLevel]
-</span>  <span class='comment'>#     Required.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Controls over how important the score of
+</span>  <span class='comment'>#     Required. Controls over how important the score of
 </span>  <span class='comment'>#     {Google::Cloud::Talent::V4beta1::SearchJobsRequest::CustomRankingInfo#ranking_expression CustomRankingInfo#ranking_expression}
 </span>  <span class='comment'>#     gets applied to job&#39;s final ranking position.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     An error is thrown if not specified.
 </span>  <span class='comment'># @!attribute [rw] ranking_expression
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Required.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Controls over how job documents get ranked on top of existing relevance
-</span>  <span class='comment'>#     score (determined by API algorithm). The product of ranking expression
-</span>  <span class='comment'>#     and relevance score is used to determine job&#39;s final ranking position.
+</span>  <span class='comment'>#     Required. Controls over how job documents get ranked on top of existing
+</span>  <span class='comment'>#     relevance score (determined by API algorithm). The product of ranking
+</span>  <span class='comment'>#     expression and relevance score is used to determine job&#39;s final ranking
+</span>  <span class='comment'>#     position.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     The syntax for this expression is a subset of Google SQL syntax.
 </span>  <span class='comment'>#
@@ -2257,9 +2209,8 @@ bucket(100000, MAX)])</code></li>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Optional.</p>
-
-<p>Query used to search against jobs, such as keyword, location filters, etc.</p>
+    <p>Returns Optional. Query used to search against jobs, such as keyword, location
+filters, etc.</p>
 
 
   </div>
@@ -2277,9 +2228,8 @@ bucket(100000, MAX)])</code></li>
       
       
         &mdash;
-        <div class='inline'><p>Optional.</p>
-
-<p>Query used to search against jobs, such as keyword, location filters, etc.</p>
+        <div class='inline'><p>Optional. Query used to search against jobs, such as keyword, location
+filters, etc.</p>
 </div>
       
     </li>
@@ -2292,6 +2242,54 @@ bucket(100000, MAX)])</code></li>
       <pre class="lines">
 
 
+469
+470
+471
+472
+473
+474
+475
+476
+477
+478
+479
+480
+481
+482
+483
+484
+485
+486
+487
+488
+489
+490
+491
+492
+493
+494
+495
+496
+497
+498
+499
+500
+501
+502
+503
+504
+505
+506
+507
+508
+509
+510
+511
+512
+513
+514
+515
+516
 517
 518
 519
@@ -2353,61 +2351,10 @@ bucket(100000, MAX)])</code></li>
 575
 576
 577
-578
-579
-580
-581
-582
-583
-584
-585
-586
-587
-588
-589
-590
-591
-592
-593
-594
-595
-596
-597
-598
-599
-600
-601
-602
-603
-604
-605
-606
-607
-608
-609
-610
-611
-612
-613
-614
-615
-616
-617
-618
-619
-620
-621
-622
-623
-624
-625
-626
-627
-628
-629</pre>
+578</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job_service.rb', line 517</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job_service.rb', line 469</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::SearchJobsRequest (class)">SearchJobsRequest</a></span></span>
   <span class='comment'># Input only.
@@ -2416,20 +2363,17 @@ bucket(100000, MAX)])</code></li>
 </span>  <span class='comment'># {Google::Cloud::Talent::V4beta1::SearchJobsRequest SearchJobsRequest}.
 </span>  <span class='comment'># @!attribute [rw] importance_level
 </span>  <span class='comment'>#   @return [Google::Cloud::Talent::V4beta1::SearchJobsRequest::CustomRankingInfo::ImportanceLevel]
-</span>  <span class='comment'>#     Required.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Controls over how important the score of
+</span>  <span class='comment'>#     Required. Controls over how important the score of
 </span>  <span class='comment'>#     {Google::Cloud::Talent::V4beta1::SearchJobsRequest::CustomRankingInfo#ranking_expression CustomRankingInfo#ranking_expression}
 </span>  <span class='comment'>#     gets applied to job&#39;s final ranking position.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     An error is thrown if not specified.
 </span>  <span class='comment'># @!attribute [rw] ranking_expression
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Required.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Controls over how job documents get ranked on top of existing relevance
-</span>  <span class='comment'>#     score (determined by API algorithm). The product of ranking expression
-</span>  <span class='comment'>#     and relevance score is used to determine job&#39;s final ranking position.
+</span>  <span class='comment'>#     Required. Controls over how job documents get ranked on top of existing
+</span>  <span class='comment'>#     relevance score (determined by API algorithm). The product of ranking
+</span>  <span class='comment'>#     expression and relevance score is used to determine job&#39;s final ranking
+</span>  <span class='comment'>#     position.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     The syntax for this expression is a subset of Google SQL syntax.
 </span>  <span class='comment'>#
@@ -2540,10 +2484,8 @@ bucket(100000, MAX)])</code></li>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Optional.</p>
-
-<p>The desired job attributes returned for jobs in the search response.
-Defaults to
+    <p>Returns Optional. The desired job attributes returned for jobs in the search
+response. Defaults to
 <span class='object_link'><a href="JobView.html#JOB_VIEW_SMALL-constant" title="Google::Cloud::Talent::V4beta1::JobView::JOB_VIEW_SMALL (constant)">JobView::JOB_VIEW_SMALL</a></span>
 if no value is specified.</p>
 
@@ -2563,10 +2505,8 @@ if no value is specified.</p>
       
       
         &mdash;
-        <div class='inline'><p>Optional.</p>
-
-<p>The desired job attributes returned for jobs in the search response.
-Defaults to
+        <div class='inline'><p>Optional. The desired job attributes returned for jobs in the search
+response. Defaults to
 <span class='object_link'><a href="JobView.html#JOB_VIEW_SMALL-constant" title="Google::Cloud::Talent::V4beta1::JobView::JOB_VIEW_SMALL (constant)">JobView::JOB_VIEW_SMALL</a></span>
 if no value is specified.</p>
 </div>
@@ -2581,6 +2521,54 @@ if no value is specified.</p>
       <pre class="lines">
 
 
+469
+470
+471
+472
+473
+474
+475
+476
+477
+478
+479
+480
+481
+482
+483
+484
+485
+486
+487
+488
+489
+490
+491
+492
+493
+494
+495
+496
+497
+498
+499
+500
+501
+502
+503
+504
+505
+506
+507
+508
+509
+510
+511
+512
+513
+514
+515
+516
 517
 518
 519
@@ -2642,61 +2630,10 @@ if no value is specified.</p>
 575
 576
 577
-578
-579
-580
-581
-582
-583
-584
-585
-586
-587
-588
-589
-590
-591
-592
-593
-594
-595
-596
-597
-598
-599
-600
-601
-602
-603
-604
-605
-606
-607
-608
-609
-610
-611
-612
-613
-614
-615
-616
-617
-618
-619
-620
-621
-622
-623
-624
-625
-626
-627
-628
-629</pre>
+578</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job_service.rb', line 517</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job_service.rb', line 469</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::SearchJobsRequest (class)">SearchJobsRequest</a></span></span>
   <span class='comment'># Input only.
@@ -2705,20 +2642,17 @@ if no value is specified.</p>
 </span>  <span class='comment'># {Google::Cloud::Talent::V4beta1::SearchJobsRequest SearchJobsRequest}.
 </span>  <span class='comment'># @!attribute [rw] importance_level
 </span>  <span class='comment'>#   @return [Google::Cloud::Talent::V4beta1::SearchJobsRequest::CustomRankingInfo::ImportanceLevel]
-</span>  <span class='comment'>#     Required.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Controls over how important the score of
+</span>  <span class='comment'>#     Required. Controls over how important the score of
 </span>  <span class='comment'>#     {Google::Cloud::Talent::V4beta1::SearchJobsRequest::CustomRankingInfo#ranking_expression CustomRankingInfo#ranking_expression}
 </span>  <span class='comment'>#     gets applied to job&#39;s final ranking position.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     An error is thrown if not specified.
 </span>  <span class='comment'># @!attribute [rw] ranking_expression
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Required.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Controls over how job documents get ranked on top of existing relevance
-</span>  <span class='comment'>#     score (determined by API algorithm). The product of ranking expression
-</span>  <span class='comment'>#     and relevance score is used to determine job&#39;s final ranking position.
+</span>  <span class='comment'>#     Required. Controls over how job documents get ranked on top of existing
+</span>  <span class='comment'>#     relevance score (determined by API algorithm). The product of ranking
+</span>  <span class='comment'>#     expression and relevance score is used to determine job&#39;s final ranking
+</span>  <span class='comment'>#     position.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     The syntax for this expression is a subset of Google SQL syntax.
 </span>  <span class='comment'>#
@@ -2829,10 +2763,8 @@ if no value is specified.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Optional.</p>
-
-<p>An integer that specifies the current offset (that is, starting result
-location, amongst the jobs deemed by the API as relevant) in search
+    <p>Returns Optional. An integer that specifies the current offset (that is, starting
+result location, amongst the jobs deemed by the API as relevant) in search
 results. This field is only considered if
 <span class='object_link'><a href="#page_token-instance_method" title="Google::Cloud::Talent::V4beta1::SearchJobsRequest#page_token (method)">page_token</a></span> is
 unset.</p>
@@ -2858,10 +2790,8 @@ from the second page).</p>
       
       
         &mdash;
-        <div class='inline'><p>Optional.</p>
-
-<p>An integer that specifies the current offset (that is, starting result
-location, amongst the jobs deemed by the API as relevant) in search
+        <div class='inline'><p>Optional. An integer that specifies the current offset (that is, starting
+result location, amongst the jobs deemed by the API as relevant) in search
 results. This field is only considered if
 <span class='object_link'><a href="#page_token-instance_method" title="Google::Cloud::Talent::V4beta1::SearchJobsRequest#page_token (method)">page_token</a></span> is
 unset.</p>
@@ -2882,6 +2812,54 @@ from the second page).</p>
       <pre class="lines">
 
 
+469
+470
+471
+472
+473
+474
+475
+476
+477
+478
+479
+480
+481
+482
+483
+484
+485
+486
+487
+488
+489
+490
+491
+492
+493
+494
+495
+496
+497
+498
+499
+500
+501
+502
+503
+504
+505
+506
+507
+508
+509
+510
+511
+512
+513
+514
+515
+516
 517
 518
 519
@@ -2943,61 +2921,10 @@ from the second page).</p>
 575
 576
 577
-578
-579
-580
-581
-582
-583
-584
-585
-586
-587
-588
-589
-590
-591
-592
-593
-594
-595
-596
-597
-598
-599
-600
-601
-602
-603
-604
-605
-606
-607
-608
-609
-610
-611
-612
-613
-614
-615
-616
-617
-618
-619
-620
-621
-622
-623
-624
-625
-626
-627
-628
-629</pre>
+578</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job_service.rb', line 517</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job_service.rb', line 469</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::SearchJobsRequest (class)">SearchJobsRequest</a></span></span>
   <span class='comment'># Input only.
@@ -3006,20 +2933,17 @@ from the second page).</p>
 </span>  <span class='comment'># {Google::Cloud::Talent::V4beta1::SearchJobsRequest SearchJobsRequest}.
 </span>  <span class='comment'># @!attribute [rw] importance_level
 </span>  <span class='comment'>#   @return [Google::Cloud::Talent::V4beta1::SearchJobsRequest::CustomRankingInfo::ImportanceLevel]
-</span>  <span class='comment'>#     Required.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Controls over how important the score of
+</span>  <span class='comment'>#     Required. Controls over how important the score of
 </span>  <span class='comment'>#     {Google::Cloud::Talent::V4beta1::SearchJobsRequest::CustomRankingInfo#ranking_expression CustomRankingInfo#ranking_expression}
 </span>  <span class='comment'>#     gets applied to job&#39;s final ranking position.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     An error is thrown if not specified.
 </span>  <span class='comment'># @!attribute [rw] ranking_expression
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Required.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Controls over how job documents get ranked on top of existing relevance
-</span>  <span class='comment'>#     score (determined by API algorithm). The product of ranking expression
-</span>  <span class='comment'>#     and relevance score is used to determine job&#39;s final ranking position.
+</span>  <span class='comment'>#     Required. Controls over how job documents get ranked on top of existing
+</span>  <span class='comment'>#     relevance score (determined by API algorithm). The product of ranking
+</span>  <span class='comment'>#     expression and relevance score is used to determine job&#39;s final ranking
+</span>  <span class='comment'>#     position.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     The syntax for this expression is a subset of Google SQL syntax.
 </span>  <span class='comment'>#
@@ -3130,60 +3054,62 @@ from the second page).</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Optional.</p>
-
-<p>The criteria determining how search results are sorted. Default is
-&quot;relevance desc&quot;.</p>
+    <p>Returns Optional. The criteria determining how search results are sorted. Default
+is
+<code>&quot;relevance desc&quot;</code>.</p>
 
 <p>Supported options are:</p>
 
 <ul>
-<li>&quot;relevance desc&quot;: By relevance descending, as determined by the API
+<li><code>&quot;relevance desc&quot;</code>: By relevance descending, as determined by the API
 algorithms. Relevance thresholding of query results is only available
 with this ordering.</li>
-<li>&quot;posting<code>_</code>publish<code>_</code>time desc&quot;: By
+<li><code>&quot;posting_publish_time desc&quot;</code>: By
 <span class='object_link'><a href="Job.html#posting_publish_time-instance_method" title="Google::Cloud::Talent::V4beta1::Job#posting_publish_time (method)">Job#posting_publish_time</a></span>
 descending.</li>
-<li>&quot;posting<code>_</code>update<code>_</code>time desc&quot;: By
+<li><code>&quot;posting_update_time desc&quot;</code>: By
 <span class='object_link'><a href="Job.html#posting_update_time-instance_method" title="Google::Cloud::Talent::V4beta1::Job#posting_update_time (method)">Job#posting_update_time</a></span>
 descending.</li>
-<li>&quot;title&quot;: By <span class='object_link'><a href="Job.html#title-instance_method" title="Google::Cloud::Talent::V4beta1::Job#title (method)">Job#title</a></span> ascending.</li>
-<li>&quot;title desc&quot;: By <span class='object_link'><a href="Job.html#title-instance_method" title="Google::Cloud::Talent::V4beta1::Job#title (method)">Job#title</a></span>
+<li><code>&quot;title&quot;</code>: By <span class='object_link'><a href="Job.html#title-instance_method" title="Google::Cloud::Talent::V4beta1::Job#title (method)">Job#title</a></span>
+ascending.</li>
+<li><code>&quot;title desc&quot;</code>: By <span class='object_link'><a href="Job.html#title-instance_method" title="Google::Cloud::Talent::V4beta1::Job#title (method)">Job#title</a></span>
 descending.</li>
-<li>&quot;annualized<code>_</code>base<code>_</code>compensation&quot;: By job&#39;s
+<li><code>&quot;annualized_base_compensation&quot;</code>: By job&#39;s
 <span class='object_link'><a href="CompensationInfo.html#annualized_base_compensation_range-instance_method" title="Google::Cloud::Talent::V4beta1::CompensationInfo#annualized_base_compensation_range (method)">CompensationInfo#annualized_base_compensation_range</a></span>
 ascending. Jobs whose annualized base compensation is unspecified are put
 at the end of search results.</li>
-<li>&quot;annualized<code>_</code>base<code>_</code>compensation desc&quot;: By job&#39;s
+<li><code>&quot;annualized_base_compensation desc&quot;</code>: By job&#39;s
 <span class='object_link'><a href="CompensationInfo.html#annualized_base_compensation_range-instance_method" title="Google::Cloud::Talent::V4beta1::CompensationInfo#annualized_base_compensation_range (method)">CompensationInfo#annualized_base_compensation_range</a></span>
 descending. Jobs whose annualized base compensation is unspecified are
 put at the end of search results.</li>
-<li>&quot;annualized<code>_</code>total<code>_</code>compensation&quot;: By job&#39;s
+<li><code>&quot;annualized_total_compensation&quot;</code>: By job&#39;s
 <span class='object_link'><a href="CompensationInfo.html#annualized_total_compensation_range-instance_method" title="Google::Cloud::Talent::V4beta1::CompensationInfo#annualized_total_compensation_range (method)">CompensationInfo#annualized_total_compensation_range</a></span>
 ascending. Jobs whose annualized base compensation is unspecified are put
 at the end of search results.</li>
-<li>&quot;annualized<code>_</code>total<code>_</code>compensation desc&quot;: By job&#39;s
+<li><code>&quot;annualized_total_compensation desc&quot;</code>: By job&#39;s
 <span class='object_link'><a href="CompensationInfo.html#annualized_total_compensation_range-instance_method" title="Google::Cloud::Talent::V4beta1::CompensationInfo#annualized_total_compensation_range (method)">CompensationInfo#annualized_total_compensation_range</a></span>
 descending. Jobs whose annualized base compensation is unspecified are
 put at the end of search results.</li>
-<li>&quot;custom<code>_</code>ranking desc&quot;: By the relevance score adjusted to the
+<li><code>&quot;custom_ranking desc&quot;</code>: By the relevance score adjusted to the
 <span class='object_link'><a href="SearchJobsRequest/CustomRankingInfo.html#ranking_expression-instance_method" title="Google::Cloud::Talent::V4beta1::SearchJobsRequest::CustomRankingInfo#ranking_expression (method)">SearchJobsRequest::CustomRankingInfo#ranking_expression</a></span>
 with weight factor assigned by
 <span class='object_link'><a href="SearchJobsRequest/CustomRankingInfo.html#importance_level-instance_method" title="Google::Cloud::Talent::V4beta1::SearchJobsRequest::CustomRankingInfo#importance_level (method)">SearchJobsRequest::CustomRankingInfo#importance_level</a></span>
 in descending order.</li>
-<li>&quot;location<code>_</code>distance&quot;: By the distance between the location on jobs and
-locations specified in the
-<span class='object_link'><a href="JobQuery.html#location_filters-instance_method" title="Google::Cloud::Talent::V4beta1::JobQuery#location_filters (method)">JobQuery#location_filters</a></span>.
-When this order is selected, the
-<span class='object_link'><a href="JobQuery.html#location_filters-instance_method" title="Google::Cloud::Talent::V4beta1::JobQuery#location_filters (method)">JobQuery#location_filters</a></span>
-must not be empty. When a job has multiple locations, the location
-closest to one of the locations specified in the location filter will be
-used to calculate location distance. Distance is calculated by the
-distance between two lat/long coordinates, with a precision of 10e-4
-degrees (11.3 meters). Jobs that don&#39;t have locations specified will be
-ranked below jobs having locations. Diversification strategy is still
-applied unless explicitly disabled in
-<span class='object_link'><a href="#diversification_level-instance_method" title="Google::Cloud::Talent::V4beta1::SearchJobsRequest#diversification_level (method)">SearchJobsRequest#diversification_level</a></span>.</li>
+<li>Location sorting: Use the special syntax to order jobs by distance:<br>
+<code>&quot;distance_from(&#39;Hawaii&#39;)&quot;</code>: Order by distance from Hawaii.<br>
+<code>&quot;distance_from(19.89, 155.5)&quot;</code>: Order by distance from a coordinate.<br>
+<code>&quot;distance_from(&#39;Hawaii&#39;), distance_from(&#39;Puerto Rico&#39;)&quot;</code>: Order by
+multiple locations. See details below.<br>
+<code>&quot;distance_from(&#39;Hawaii&#39;), distance_from(19.89, 155.5)&quot;</code>: Order by
+multiple locations. See details below.<br>
+The string can have a maximum of 256 characters. When multiple distance
+centers are provided, a job that is close to any of the distance centers
+would have a high rank. When a job has multiple locations, the job
+location closest to one of the distance centers will be used. Jobs that
+don&#39;t have locations will be ranked at the bottom. Distance is calculated
+with a precision of 11.3 meters (37.4 feet). Diversification strategy is
+still applied unless explicitly disabled in
+<span class='object_link'><a href="#diversification_level-instance_method" title="Google::Cloud::Talent::V4beta1::SearchJobsRequest#diversification_level (method)">diversification_level</a></span>.</li>
 </ul>
 
 
@@ -3202,60 +3128,62 @@ applied unless explicitly disabled in
       
       
         &mdash;
-        <div class='inline'><p>Optional.</p>
-
-<p>The criteria determining how search results are sorted. Default is
-&quot;relevance desc&quot;.</p>
+        <div class='inline'><p>Optional. The criteria determining how search results are sorted. Default
+is
+<code>&quot;relevance desc&quot;</code>.</p>
 
 <p>Supported options are:</p>
 
 <ul>
-<li>&quot;relevance desc&quot;: By relevance descending, as determined by the API
+<li><code>&quot;relevance desc&quot;</code>: By relevance descending, as determined by the API
 algorithms. Relevance thresholding of query results is only available
 with this ordering.</li>
-<li>&quot;posting<code>_</code>publish<code>_</code>time desc&quot;: By
+<li><code>&quot;posting_publish_time desc&quot;</code>: By
 <span class='object_link'><a href="Job.html#posting_publish_time-instance_method" title="Google::Cloud::Talent::V4beta1::Job#posting_publish_time (method)">Job#posting_publish_time</a></span>
 descending.</li>
-<li>&quot;posting<code>_</code>update<code>_</code>time desc&quot;: By
+<li><code>&quot;posting_update_time desc&quot;</code>: By
 <span class='object_link'><a href="Job.html#posting_update_time-instance_method" title="Google::Cloud::Talent::V4beta1::Job#posting_update_time (method)">Job#posting_update_time</a></span>
 descending.</li>
-<li>&quot;title&quot;: By <span class='object_link'><a href="Job.html#title-instance_method" title="Google::Cloud::Talent::V4beta1::Job#title (method)">Job#title</a></span> ascending.</li>
-<li>&quot;title desc&quot;: By <span class='object_link'><a href="Job.html#title-instance_method" title="Google::Cloud::Talent::V4beta1::Job#title (method)">Job#title</a></span>
+<li><code>&quot;title&quot;</code>: By <span class='object_link'><a href="Job.html#title-instance_method" title="Google::Cloud::Talent::V4beta1::Job#title (method)">Job#title</a></span>
+ascending.</li>
+<li><code>&quot;title desc&quot;</code>: By <span class='object_link'><a href="Job.html#title-instance_method" title="Google::Cloud::Talent::V4beta1::Job#title (method)">Job#title</a></span>
 descending.</li>
-<li>&quot;annualized<code>_</code>base<code>_</code>compensation&quot;: By job&#39;s
+<li><code>&quot;annualized_base_compensation&quot;</code>: By job&#39;s
 <span class='object_link'><a href="CompensationInfo.html#annualized_base_compensation_range-instance_method" title="Google::Cloud::Talent::V4beta1::CompensationInfo#annualized_base_compensation_range (method)">CompensationInfo#annualized_base_compensation_range</a></span>
 ascending. Jobs whose annualized base compensation is unspecified are put
 at the end of search results.</li>
-<li>&quot;annualized<code>_</code>base<code>_</code>compensation desc&quot;: By job&#39;s
+<li><code>&quot;annualized_base_compensation desc&quot;</code>: By job&#39;s
 <span class='object_link'><a href="CompensationInfo.html#annualized_base_compensation_range-instance_method" title="Google::Cloud::Talent::V4beta1::CompensationInfo#annualized_base_compensation_range (method)">CompensationInfo#annualized_base_compensation_range</a></span>
 descending. Jobs whose annualized base compensation is unspecified are
 put at the end of search results.</li>
-<li>&quot;annualized<code>_</code>total<code>_</code>compensation&quot;: By job&#39;s
+<li><code>&quot;annualized_total_compensation&quot;</code>: By job&#39;s
 <span class='object_link'><a href="CompensationInfo.html#annualized_total_compensation_range-instance_method" title="Google::Cloud::Talent::V4beta1::CompensationInfo#annualized_total_compensation_range (method)">CompensationInfo#annualized_total_compensation_range</a></span>
 ascending. Jobs whose annualized base compensation is unspecified are put
 at the end of search results.</li>
-<li>&quot;annualized<code>_</code>total<code>_</code>compensation desc&quot;: By job&#39;s
+<li><code>&quot;annualized_total_compensation desc&quot;</code>: By job&#39;s
 <span class='object_link'><a href="CompensationInfo.html#annualized_total_compensation_range-instance_method" title="Google::Cloud::Talent::V4beta1::CompensationInfo#annualized_total_compensation_range (method)">CompensationInfo#annualized_total_compensation_range</a></span>
 descending. Jobs whose annualized base compensation is unspecified are
 put at the end of search results.</li>
-<li>&quot;custom<code>_</code>ranking desc&quot;: By the relevance score adjusted to the
+<li><code>&quot;custom_ranking desc&quot;</code>: By the relevance score adjusted to the
 <span class='object_link'><a href="SearchJobsRequest/CustomRankingInfo.html#ranking_expression-instance_method" title="Google::Cloud::Talent::V4beta1::SearchJobsRequest::CustomRankingInfo#ranking_expression (method)">SearchJobsRequest::CustomRankingInfo#ranking_expression</a></span>
 with weight factor assigned by
 <span class='object_link'><a href="SearchJobsRequest/CustomRankingInfo.html#importance_level-instance_method" title="Google::Cloud::Talent::V4beta1::SearchJobsRequest::CustomRankingInfo#importance_level (method)">SearchJobsRequest::CustomRankingInfo#importance_level</a></span>
 in descending order.</li>
-<li>&quot;location<code>_</code>distance&quot;: By the distance between the location on jobs and
-locations specified in the
-<span class='object_link'><a href="JobQuery.html#location_filters-instance_method" title="Google::Cloud::Talent::V4beta1::JobQuery#location_filters (method)">JobQuery#location_filters</a></span>.
-When this order is selected, the
-<span class='object_link'><a href="JobQuery.html#location_filters-instance_method" title="Google::Cloud::Talent::V4beta1::JobQuery#location_filters (method)">JobQuery#location_filters</a></span>
-must not be empty. When a job has multiple locations, the location
-closest to one of the locations specified in the location filter will be
-used to calculate location distance. Distance is calculated by the
-distance between two lat/long coordinates, with a precision of 10e-4
-degrees (11.3 meters). Jobs that don&#39;t have locations specified will be
-ranked below jobs having locations. Diversification strategy is still
-applied unless explicitly disabled in
-<span class='object_link'><a href="#diversification_level-instance_method" title="Google::Cloud::Talent::V4beta1::SearchJobsRequest#diversification_level (method)">SearchJobsRequest#diversification_level</a></span>.</li>
+<li>Location sorting: Use the special syntax to order jobs by distance:<br>
+<code>&quot;distance_from(&#39;Hawaii&#39;)&quot;</code>: Order by distance from Hawaii.<br>
+<code>&quot;distance_from(19.89, 155.5)&quot;</code>: Order by distance from a coordinate.<br>
+<code>&quot;distance_from(&#39;Hawaii&#39;), distance_from(&#39;Puerto Rico&#39;)&quot;</code>: Order by
+multiple locations. See details below.<br>
+<code>&quot;distance_from(&#39;Hawaii&#39;), distance_from(19.89, 155.5)&quot;</code>: Order by
+multiple locations. See details below.<br>
+The string can have a maximum of 256 characters. When multiple distance
+centers are provided, a job that is close to any of the distance centers
+would have a high rank. When a job has multiple locations, the job
+location closest to one of the distance centers will be used. Jobs that
+don&#39;t have locations will be ranked at the bottom. Distance is calculated
+with a precision of 11.3 meters (37.4 feet). Diversification strategy is
+still applied unless explicitly disabled in
+<span class='object_link'><a href="#diversification_level-instance_method" title="Google::Cloud::Talent::V4beta1::SearchJobsRequest#diversification_level (method)">diversification_level</a></span>.</li>
 </ul>
 </div>
       
@@ -3269,6 +3197,54 @@ applied unless explicitly disabled in
       <pre class="lines">
 
 
+469
+470
+471
+472
+473
+474
+475
+476
+477
+478
+479
+480
+481
+482
+483
+484
+485
+486
+487
+488
+489
+490
+491
+492
+493
+494
+495
+496
+497
+498
+499
+500
+501
+502
+503
+504
+505
+506
+507
+508
+509
+510
+511
+512
+513
+514
+515
+516
 517
 518
 519
@@ -3330,61 +3306,10 @@ applied unless explicitly disabled in
 575
 576
 577
-578
-579
-580
-581
-582
-583
-584
-585
-586
-587
-588
-589
-590
-591
-592
-593
-594
-595
-596
-597
-598
-599
-600
-601
-602
-603
-604
-605
-606
-607
-608
-609
-610
-611
-612
-613
-614
-615
-616
-617
-618
-619
-620
-621
-622
-623
-624
-625
-626
-627
-628
-629</pre>
+578</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job_service.rb', line 517</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job_service.rb', line 469</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::SearchJobsRequest (class)">SearchJobsRequest</a></span></span>
   <span class='comment'># Input only.
@@ -3393,20 +3318,17 @@ applied unless explicitly disabled in
 </span>  <span class='comment'># {Google::Cloud::Talent::V4beta1::SearchJobsRequest SearchJobsRequest}.
 </span>  <span class='comment'># @!attribute [rw] importance_level
 </span>  <span class='comment'>#   @return [Google::Cloud::Talent::V4beta1::SearchJobsRequest::CustomRankingInfo::ImportanceLevel]
-</span>  <span class='comment'>#     Required.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Controls over how important the score of
+</span>  <span class='comment'>#     Required. Controls over how important the score of
 </span>  <span class='comment'>#     {Google::Cloud::Talent::V4beta1::SearchJobsRequest::CustomRankingInfo#ranking_expression CustomRankingInfo#ranking_expression}
 </span>  <span class='comment'>#     gets applied to job&#39;s final ranking position.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     An error is thrown if not specified.
 </span>  <span class='comment'># @!attribute [rw] ranking_expression
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Required.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Controls over how job documents get ranked on top of existing relevance
-</span>  <span class='comment'>#     score (determined by API algorithm). The product of ranking expression
-</span>  <span class='comment'>#     and relevance score is used to determine job&#39;s final ranking position.
+</span>  <span class='comment'>#     Required. Controls over how job documents get ranked on top of existing
+</span>  <span class='comment'>#     relevance score (determined by API algorithm). The product of ranking
+</span>  <span class='comment'>#     expression and relevance score is used to determine job&#39;s final ranking
+</span>  <span class='comment'>#     position.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     The syntax for this expression is a subset of Google SQL syntax.
 </span>  <span class='comment'>#
@@ -3517,9 +3439,7 @@ applied unless explicitly disabled in
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Optional.</p>
-
-<p>A limit on the number of jobs returned in the search results.
+    <p>Returns Optional. A limit on the number of jobs returned in the search results.
 Increasing this value above the default value of 10 can increase search
 response time. The value can be between 1 and 100.</p>
 
@@ -3539,9 +3459,7 @@ response time. The value can be between 1 and 100.</p>
       
       
         &mdash;
-        <div class='inline'><p>Optional.</p>
-
-<p>A limit on the number of jobs returned in the search results.
+        <div class='inline'><p>Optional. A limit on the number of jobs returned in the search results.
 Increasing this value above the default value of 10 can increase search
 response time. The value can be between 1 and 100.</p>
 </div>
@@ -3556,6 +3474,54 @@ response time. The value can be between 1 and 100.</p>
       <pre class="lines">
 
 
+469
+470
+471
+472
+473
+474
+475
+476
+477
+478
+479
+480
+481
+482
+483
+484
+485
+486
+487
+488
+489
+490
+491
+492
+493
+494
+495
+496
+497
+498
+499
+500
+501
+502
+503
+504
+505
+506
+507
+508
+509
+510
+511
+512
+513
+514
+515
+516
 517
 518
 519
@@ -3617,61 +3583,10 @@ response time. The value can be between 1 and 100.</p>
 575
 576
 577
-578
-579
-580
-581
-582
-583
-584
-585
-586
-587
-588
-589
-590
-591
-592
-593
-594
-595
-596
-597
-598
-599
-600
-601
-602
-603
-604
-605
-606
-607
-608
-609
-610
-611
-612
-613
-614
-615
-616
-617
-618
-619
-620
-621
-622
-623
-624
-625
-626
-627
-628
-629</pre>
+578</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job_service.rb', line 517</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job_service.rb', line 469</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::SearchJobsRequest (class)">SearchJobsRequest</a></span></span>
   <span class='comment'># Input only.
@@ -3680,20 +3595,17 @@ response time. The value can be between 1 and 100.</p>
 </span>  <span class='comment'># {Google::Cloud::Talent::V4beta1::SearchJobsRequest SearchJobsRequest}.
 </span>  <span class='comment'># @!attribute [rw] importance_level
 </span>  <span class='comment'>#   @return [Google::Cloud::Talent::V4beta1::SearchJobsRequest::CustomRankingInfo::ImportanceLevel]
-</span>  <span class='comment'>#     Required.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Controls over how important the score of
+</span>  <span class='comment'>#     Required. Controls over how important the score of
 </span>  <span class='comment'>#     {Google::Cloud::Talent::V4beta1::SearchJobsRequest::CustomRankingInfo#ranking_expression CustomRankingInfo#ranking_expression}
 </span>  <span class='comment'>#     gets applied to job&#39;s final ranking position.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     An error is thrown if not specified.
 </span>  <span class='comment'># @!attribute [rw] ranking_expression
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Required.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Controls over how job documents get ranked on top of existing relevance
-</span>  <span class='comment'>#     score (determined by API algorithm). The product of ranking expression
-</span>  <span class='comment'>#     and relevance score is used to determine job&#39;s final ranking position.
+</span>  <span class='comment'>#     Required. Controls over how job documents get ranked on top of existing
+</span>  <span class='comment'>#     relevance score (determined by API algorithm). The product of ranking
+</span>  <span class='comment'>#     expression and relevance score is used to determine job&#39;s final ranking
+</span>  <span class='comment'>#     position.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     The syntax for this expression is a subset of Google SQL syntax.
 </span>  <span class='comment'>#
@@ -3804,9 +3716,7 @@ response time. The value can be between 1 and 100.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Optional.</p>
-
-<p>The token specifying the current offset within
+    <p>Returns Optional. The token specifying the current offset within
 search results. See
 <span class='object_link'><a href="SearchJobsResponse.html#next_page_token-instance_method" title="Google::Cloud::Talent::V4beta1::SearchJobsResponse#next_page_token (method)">SearchJobsResponse#next_page_token</a></span>
 for an explanation of how to obtain the next set of query results.</p>
@@ -3827,9 +3737,7 @@ for an explanation of how to obtain the next set of query results.</p>
       
       
         &mdash;
-        <div class='inline'><p>Optional.</p>
-
-<p>The token specifying the current offset within
+        <div class='inline'><p>Optional. The token specifying the current offset within
 search results. See
 <span class='object_link'><a href="SearchJobsResponse.html#next_page_token-instance_method" title="Google::Cloud::Talent::V4beta1::SearchJobsResponse#next_page_token (method)">SearchJobsResponse#next_page_token</a></span>
 for an explanation of how to obtain the next set of query results.</p>
@@ -3845,6 +3753,54 @@ for an explanation of how to obtain the next set of query results.</p>
       <pre class="lines">
 
 
+469
+470
+471
+472
+473
+474
+475
+476
+477
+478
+479
+480
+481
+482
+483
+484
+485
+486
+487
+488
+489
+490
+491
+492
+493
+494
+495
+496
+497
+498
+499
+500
+501
+502
+503
+504
+505
+506
+507
+508
+509
+510
+511
+512
+513
+514
+515
+516
 517
 518
 519
@@ -3906,61 +3862,10 @@ for an explanation of how to obtain the next set of query results.</p>
 575
 576
 577
-578
-579
-580
-581
-582
-583
-584
-585
-586
-587
-588
-589
-590
-591
-592
-593
-594
-595
-596
-597
-598
-599
-600
-601
-602
-603
-604
-605
-606
-607
-608
-609
-610
-611
-612
-613
-614
-615
-616
-617
-618
-619
-620
-621
-622
-623
-624
-625
-626
-627
-628
-629</pre>
+578</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job_service.rb', line 517</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job_service.rb', line 469</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::SearchJobsRequest (class)">SearchJobsRequest</a></span></span>
   <span class='comment'># Input only.
@@ -3969,20 +3874,17 @@ for an explanation of how to obtain the next set of query results.</p>
 </span>  <span class='comment'># {Google::Cloud::Talent::V4beta1::SearchJobsRequest SearchJobsRequest}.
 </span>  <span class='comment'># @!attribute [rw] importance_level
 </span>  <span class='comment'>#   @return [Google::Cloud::Talent::V4beta1::SearchJobsRequest::CustomRankingInfo::ImportanceLevel]
-</span>  <span class='comment'>#     Required.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Controls over how important the score of
+</span>  <span class='comment'>#     Required. Controls over how important the score of
 </span>  <span class='comment'>#     {Google::Cloud::Talent::V4beta1::SearchJobsRequest::CustomRankingInfo#ranking_expression CustomRankingInfo#ranking_expression}
 </span>  <span class='comment'>#     gets applied to job&#39;s final ranking position.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     An error is thrown if not specified.
 </span>  <span class='comment'># @!attribute [rw] ranking_expression
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Required.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Controls over how job documents get ranked on top of existing relevance
-</span>  <span class='comment'>#     score (determined by API algorithm). The product of ranking expression
-</span>  <span class='comment'>#     and relevance score is used to determine job&#39;s final ranking position.
+</span>  <span class='comment'>#     Required. Controls over how job documents get ranked on top of existing
+</span>  <span class='comment'>#     relevance score (determined by API algorithm). The product of ranking
+</span>  <span class='comment'>#     expression and relevance score is used to determine job&#39;s final ranking
+</span>  <span class='comment'>#     position.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     The syntax for this expression is a subset of Google SQL syntax.
 </span>  <span class='comment'>#
@@ -4093,9 +3995,7 @@ for an explanation of how to obtain the next set of query results.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Required.</p>
-
-<p>The resource name of the tenant to search within.</p>
+    <p>Returns Required. The resource name of the tenant to search within.</p>
 
 <p>The format is &quot;projects/project_id/tenants/tenant_id&quot;, for example,
 &quot;projects/api-test-project/tenant/foo&quot;.</p>
@@ -4119,9 +4019,7 @@ example, &quot;projects/api-test-project&quot;.</p>
       
       
         &mdash;
-        <div class='inline'><p>Required.</p>
-
-<p>The resource name of the tenant to search within.</p>
+        <div class='inline'><p>Required. The resource name of the tenant to search within.</p>
 
 <p>The format is &quot;projects/project_id/tenants/tenant_id&quot;, for example,
 &quot;projects/api-test-project/tenant/foo&quot;.</p>
@@ -4140,6 +4038,54 @@ example, &quot;projects/api-test-project&quot;.</p>
       <pre class="lines">
 
 
+469
+470
+471
+472
+473
+474
+475
+476
+477
+478
+479
+480
+481
+482
+483
+484
+485
+486
+487
+488
+489
+490
+491
+492
+493
+494
+495
+496
+497
+498
+499
+500
+501
+502
+503
+504
+505
+506
+507
+508
+509
+510
+511
+512
+513
+514
+515
+516
 517
 518
 519
@@ -4201,61 +4147,10 @@ example, &quot;projects/api-test-project&quot;.</p>
 575
 576
 577
-578
-579
-580
-581
-582
-583
-584
-585
-586
-587
-588
-589
-590
-591
-592
-593
-594
-595
-596
-597
-598
-599
-600
-601
-602
-603
-604
-605
-606
-607
-608
-609
-610
-611
-612
-613
-614
-615
-616
-617
-618
-619
-620
-621
-622
-623
-624
-625
-626
-627
-628
-629</pre>
+578</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job_service.rb', line 517</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job_service.rb', line 469</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::SearchJobsRequest (class)">SearchJobsRequest</a></span></span>
   <span class='comment'># Input only.
@@ -4264,20 +4159,17 @@ example, &quot;projects/api-test-project&quot;.</p>
 </span>  <span class='comment'># {Google::Cloud::Talent::V4beta1::SearchJobsRequest SearchJobsRequest}.
 </span>  <span class='comment'># @!attribute [rw] importance_level
 </span>  <span class='comment'>#   @return [Google::Cloud::Talent::V4beta1::SearchJobsRequest::CustomRankingInfo::ImportanceLevel]
-</span>  <span class='comment'>#     Required.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Controls over how important the score of
+</span>  <span class='comment'>#     Required. Controls over how important the score of
 </span>  <span class='comment'>#     {Google::Cloud::Talent::V4beta1::SearchJobsRequest::CustomRankingInfo#ranking_expression CustomRankingInfo#ranking_expression}
 </span>  <span class='comment'>#     gets applied to job&#39;s final ranking position.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     An error is thrown if not specified.
 </span>  <span class='comment'># @!attribute [rw] ranking_expression
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Required.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Controls over how job documents get ranked on top of existing relevance
-</span>  <span class='comment'>#     score (determined by API algorithm). The product of ranking expression
-</span>  <span class='comment'>#     and relevance score is used to determine job&#39;s final ranking position.
+</span>  <span class='comment'>#     Required. Controls over how job documents get ranked on top of existing
+</span>  <span class='comment'>#     relevance score (determined by API algorithm). The product of ranking
+</span>  <span class='comment'>#     expression and relevance score is used to determine job&#39;s final ranking
+</span>  <span class='comment'>#     position.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     The syntax for this expression is a subset of Google SQL syntax.
 </span>  <span class='comment'>#
@@ -4388,11 +4280,9 @@ example, &quot;projects/api-test-project&quot;.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Required.</p>
-
-<p>The meta information collected about the job searcher, used to improve the
-search quality of the service.. The identifiers, (such as <code>user_id</code>) are
-provided by users, and must be unique and consistent.</p>
+    <p>Returns Required. The meta information collected about the job searcher, used to
+improve the search quality of the service. The identifiers (such as
+<code>user_id</code>) are provided by users, and must be unique and consistent.</p>
 
 
   </div>
@@ -4410,11 +4300,9 @@ provided by users, and must be unique and consistent.</p>
       
       
         &mdash;
-        <div class='inline'><p>Required.</p>
-
-<p>The meta information collected about the job searcher, used to improve the
-search quality of the service.. The identifiers, (such as <code>user_id</code>) are
-provided by users, and must be unique and consistent.</p>
+        <div class='inline'><p>Required. The meta information collected about the job searcher, used to
+improve the search quality of the service. The identifiers (such as
+<code>user_id</code>) are provided by users, and must be unique and consistent.</p>
 </div>
       
     </li>
@@ -4427,6 +4315,54 @@ provided by users, and must be unique and consistent.</p>
       <pre class="lines">
 
 
+469
+470
+471
+472
+473
+474
+475
+476
+477
+478
+479
+480
+481
+482
+483
+484
+485
+486
+487
+488
+489
+490
+491
+492
+493
+494
+495
+496
+497
+498
+499
+500
+501
+502
+503
+504
+505
+506
+507
+508
+509
+510
+511
+512
+513
+514
+515
+516
 517
 518
 519
@@ -4488,61 +4424,10 @@ provided by users, and must be unique and consistent.</p>
 575
 576
 577
-578
-579
-580
-581
-582
-583
-584
-585
-586
-587
-588
-589
-590
-591
-592
-593
-594
-595
-596
-597
-598
-599
-600
-601
-602
-603
-604
-605
-606
-607
-608
-609
-610
-611
-612
-613
-614
-615
-616
-617
-618
-619
-620
-621
-622
-623
-624
-625
-626
-627
-628
-629</pre>
+578</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job_service.rb', line 517</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job_service.rb', line 469</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::SearchJobsRequest (class)">SearchJobsRequest</a></span></span>
   <span class='comment'># Input only.
@@ -4551,20 +4436,17 @@ provided by users, and must be unique and consistent.</p>
 </span>  <span class='comment'># {Google::Cloud::Talent::V4beta1::SearchJobsRequest SearchJobsRequest}.
 </span>  <span class='comment'># @!attribute [rw] importance_level
 </span>  <span class='comment'>#   @return [Google::Cloud::Talent::V4beta1::SearchJobsRequest::CustomRankingInfo::ImportanceLevel]
-</span>  <span class='comment'>#     Required.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Controls over how important the score of
+</span>  <span class='comment'>#     Required. Controls over how important the score of
 </span>  <span class='comment'>#     {Google::Cloud::Talent::V4beta1::SearchJobsRequest::CustomRankingInfo#ranking_expression CustomRankingInfo#ranking_expression}
 </span>  <span class='comment'>#     gets applied to job&#39;s final ranking position.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     An error is thrown if not specified.
 </span>  <span class='comment'># @!attribute [rw] ranking_expression
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Required.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Controls over how job documents get ranked on top of existing relevance
-</span>  <span class='comment'>#     score (determined by API algorithm). The product of ranking expression
-</span>  <span class='comment'>#     and relevance score is used to determine job&#39;s final ranking position.
+</span>  <span class='comment'>#     Required. Controls over how job documents get ranked on top of existing
+</span>  <span class='comment'>#     relevance score (determined by API algorithm). The product of ranking
+</span>  <span class='comment'>#     expression and relevance score is used to determine job&#39;s final ranking
+</span>  <span class='comment'>#     position.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     The syntax for this expression is a subset of Google SQL syntax.
 </span>  <span class='comment'>#
@@ -4675,10 +4557,8 @@ provided by users, and must be unique and consistent.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Optional.</p>
-
-<p>Controls if the search job request requires the return of a precise
-count of the first 300 results. Setting this to <code>true</code> ensures
+    <p>Returns Optional. Controls if the search job request requires the return of a
+precise count of the first 300 results. Setting this to <code>true</code> ensures
 consistency in the number of results per page. Best practice is to set this
 value to true if a client allows users to jump directly to a
 non-sequential search results page.</p>
@@ -4703,10 +4583,8 @@ non-sequential search results page.</p>
       
       
         &mdash;
-        <div class='inline'><p>Optional.</p>
-
-<p>Controls if the search job request requires the return of a precise
-count of the first 300 results. Setting this to <code>true</code> ensures
+        <div class='inline'><p>Optional. Controls if the search job request requires the return of a
+precise count of the first 300 results. Setting this to <code>true</code> ensures
 consistency in the number of results per page. Best practice is to set this
 value to true if a client allows users to jump directly to a
 non-sequential search results page.</p>
@@ -4726,6 +4604,54 @@ non-sequential search results page.</p>
       <pre class="lines">
 
 
+469
+470
+471
+472
+473
+474
+475
+476
+477
+478
+479
+480
+481
+482
+483
+484
+485
+486
+487
+488
+489
+490
+491
+492
+493
+494
+495
+496
+497
+498
+499
+500
+501
+502
+503
+504
+505
+506
+507
+508
+509
+510
+511
+512
+513
+514
+515
+516
 517
 518
 519
@@ -4787,61 +4713,10 @@ non-sequential search results page.</p>
 575
 576
 577
-578
-579
-580
-581
-582
-583
-584
-585
-586
-587
-588
-589
-590
-591
-592
-593
-594
-595
-596
-597
-598
-599
-600
-601
-602
-603
-604
-605
-606
-607
-608
-609
-610
-611
-612
-613
-614
-615
-616
-617
-618
-619
-620
-621
-622
-623
-624
-625
-626
-627
-628
-629</pre>
+578</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job_service.rb', line 517</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job_service.rb', line 469</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::SearchJobsRequest (class)">SearchJobsRequest</a></span></span>
   <span class='comment'># Input only.
@@ -4850,20 +4725,17 @@ non-sequential search results page.</p>
 </span>  <span class='comment'># {Google::Cloud::Talent::V4beta1::SearchJobsRequest SearchJobsRequest}.
 </span>  <span class='comment'># @!attribute [rw] importance_level
 </span>  <span class='comment'>#   @return [Google::Cloud::Talent::V4beta1::SearchJobsRequest::CustomRankingInfo::ImportanceLevel]
-</span>  <span class='comment'>#     Required.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Controls over how important the score of
+</span>  <span class='comment'>#     Required. Controls over how important the score of
 </span>  <span class='comment'>#     {Google::Cloud::Talent::V4beta1::SearchJobsRequest::CustomRankingInfo#ranking_expression CustomRankingInfo#ranking_expression}
 </span>  <span class='comment'>#     gets applied to job&#39;s final ranking position.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     An error is thrown if not specified.
 </span>  <span class='comment'># @!attribute [rw] ranking_expression
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Required.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Controls over how job documents get ranked on top of existing relevance
-</span>  <span class='comment'>#     score (determined by API algorithm). The product of ranking expression
-</span>  <span class='comment'>#     and relevance score is used to determine job&#39;s final ranking position.
+</span>  <span class='comment'>#     Required. Controls over how job documents get ranked on top of existing
+</span>  <span class='comment'>#     relevance score (determined by API algorithm). The product of ranking
+</span>  <span class='comment'>#     expression and relevance score is used to determine job&#39;s final ranking
+</span>  <span class='comment'>#     position.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     The syntax for this expression is a subset of Google SQL syntax.
 </span>  <span class='comment'>#
@@ -4974,9 +4846,7 @@ non-sequential search results page.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Optional.</p>
-
-<p>Mode of a search.</p>
+    <p>Returns Optional. Mode of a search.</p>
 
 <p>Defaults to
 <span class='object_link'><a href="SearchJobsRequest/SearchMode.html#JOB_SEARCH-constant" title="Google::Cloud::Talent::V4beta1::SearchJobsRequest::SearchMode::JOB_SEARCH (constant)">SearchMode::JOB_SEARCH</a></span>.</p>
@@ -4997,9 +4867,7 @@ non-sequential search results page.</p>
       
       
         &mdash;
-        <div class='inline'><p>Optional.</p>
-
-<p>Mode of a search.</p>
+        <div class='inline'><p>Optional. Mode of a search.</p>
 
 <p>Defaults to
 <span class='object_link'><a href="SearchJobsRequest/SearchMode.html#JOB_SEARCH-constant" title="Google::Cloud::Talent::V4beta1::SearchJobsRequest::SearchMode::JOB_SEARCH (constant)">SearchMode::JOB_SEARCH</a></span>.</p>
@@ -5015,6 +4883,54 @@ non-sequential search results page.</p>
       <pre class="lines">
 
 
+469
+470
+471
+472
+473
+474
+475
+476
+477
+478
+479
+480
+481
+482
+483
+484
+485
+486
+487
+488
+489
+490
+491
+492
+493
+494
+495
+496
+497
+498
+499
+500
+501
+502
+503
+504
+505
+506
+507
+508
+509
+510
+511
+512
+513
+514
+515
+516
 517
 518
 519
@@ -5076,61 +4992,10 @@ non-sequential search results page.</p>
 575
 576
 577
-578
-579
-580
-581
-582
-583
-584
-585
-586
-587
-588
-589
-590
-591
-592
-593
-594
-595
-596
-597
-598
-599
-600
-601
-602
-603
-604
-605
-606
-607
-608
-609
-610
-611
-612
-613
-614
-615
-616
-617
-618
-619
-620
-621
-622
-623
-624
-625
-626
-627
-628
-629</pre>
+578</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job_service.rb', line 517</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job_service.rb', line 469</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::SearchJobsRequest (class)">SearchJobsRequest</a></span></span>
   <span class='comment'># Input only.
@@ -5139,20 +5004,17 @@ non-sequential search results page.</p>
 </span>  <span class='comment'># {Google::Cloud::Talent::V4beta1::SearchJobsRequest SearchJobsRequest}.
 </span>  <span class='comment'># @!attribute [rw] importance_level
 </span>  <span class='comment'>#   @return [Google::Cloud::Talent::V4beta1::SearchJobsRequest::CustomRankingInfo::ImportanceLevel]
-</span>  <span class='comment'>#     Required.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Controls over how important the score of
+</span>  <span class='comment'>#     Required. Controls over how important the score of
 </span>  <span class='comment'>#     {Google::Cloud::Talent::V4beta1::SearchJobsRequest::CustomRankingInfo#ranking_expression CustomRankingInfo#ranking_expression}
 </span>  <span class='comment'>#     gets applied to job&#39;s final ranking position.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     An error is thrown if not specified.
 </span>  <span class='comment'># @!attribute [rw] ranking_expression
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Required.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Controls over how job documents get ranked on top of existing relevance
-</span>  <span class='comment'>#     score (determined by API algorithm). The product of ranking expression
-</span>  <span class='comment'>#     and relevance score is used to determine job&#39;s final ranking position.
+</span>  <span class='comment'>#     Required. Controls over how job documents get ranked on top of existing
+</span>  <span class='comment'>#     relevance score (determined by API algorithm). The product of ranking
+</span>  <span class='comment'>#     expression and relevance score is used to determine job&#39;s final ranking
+</span>  <span class='comment'>#     position.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     The syntax for this expression is a subset of Google SQL syntax.
 </span>  <span class='comment'>#

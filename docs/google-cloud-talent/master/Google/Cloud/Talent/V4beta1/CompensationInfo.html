@@ -263,6 +263,18 @@ for explanation on compensation annualization.</p>
       <pre class="lines">
 
 
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
 315
 316
 317
@@ -403,39 +415,10 @@ for explanation on compensation annualization.</p>
 452
 453
 454
-455
-456
-457
-458
-459
-460
-461
-462
-463
-464
-465
-466
-467
-468
-469
-470
-471
-472
-473
-474
-475
-476
-477
-478
-479
-480
-481
-482
-483
-484</pre>
+455</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/common.rb', line 315</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/common.rb', line 303</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::CompensationInfo (class)">CompensationInfo</a></span></span>
   <span class='comment'># A compensation entry that represents one component of compensation, such
@@ -456,42 +439,30 @@ for explanation on compensation annualization.</p>
 </span>  <span class='comment'>#   {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#expected_units_per_year expected_units_per_year}.
 </span>  <span class='comment'># @!attribute [rw] type
 </span>  <span class='comment'>#   @return [Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationType]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Compensation type.
+</span>  <span class='comment'>#     Optional. Compensation type.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     Default is
 </span>  <span class='comment'>#     {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationType::COMPENSATION_TYPE_UNSPECIFIED CompensationType::COMPENSATION_TYPE_UNSPECIFIED}.
 </span>  <span class='comment'># @!attribute [rw] unit
 </span>  <span class='comment'>#   @return [Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationUnit]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Frequency of the specified amount.
+</span>  <span class='comment'>#     Optional. Frequency of the specified amount.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     Default is
 </span>  <span class='comment'>#     {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationUnit::COMPENSATION_UNIT_UNSPECIFIED CompensationUnit::COMPENSATION_UNIT_UNSPECIFIED}.
 </span>  <span class='comment'># @!attribute [rw] amount
 </span>  <span class='comment'>#   @return [Google::Type::Money]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Compensation amount.
+</span>  <span class='comment'>#     Optional. Compensation amount.
 </span>  <span class='comment'># @!attribute [rw] range
 </span>  <span class='comment'>#   @return [Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationRange]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Compensation range.
+</span>  <span class='comment'>#     Optional. Compensation range.
 </span>  <span class='comment'># @!attribute [rw] description
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Compensation description.  For example, could
+</span>  <span class='comment'>#     Optional. Compensation description.  For example, could
 </span>  <span class='comment'>#     indicate equity terms or provide additional context to an estimated
 </span>  <span class='comment'>#     bonus.
 </span>  <span class='comment'># @!attribute [rw] expected_units_per_year
 </span>  <span class='comment'>#   @return [Google::Protobuf::DoubleValue]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Expected number of units paid each year. If not specified, when
+</span>  <span class='comment'>#     Optional. Expected number of units paid each year. If not specified, when
 </span>  <span class='comment'>#     {Google::Cloud::Talent::V4beta1::Job#employment_types Job#employment_types}
 </span>  <span class='comment'>#     is FULLTIME, a default value is inferred based on
 </span>  <span class='comment'>#     {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#unit unit}.
@@ -506,19 +477,14 @@ for explanation on compensation annualization.</p>
   <span class='comment'># Compensation range.
 </span>  <span class='comment'># @!attribute [rw] max_compensation
 </span>  <span class='comment'>#   @return [Google::Type::Money]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     The maximum amount of compensation. If left empty, the value is set
-</span>  <span class='comment'>#     to a maximal compensation value and the currency code is set to
-</span>  <span class='comment'>#     match the {Google::Type::Money#currency_code currency code} of
-</span>  <span class='comment'>#     min_compensation.
+</span>  <span class='comment'>#     Optional. The maximum amount of compensation. If left empty, the value is
+</span>  <span class='comment'>#     set to a maximal compensation value and the currency code is set to match
+</span>  <span class='comment'>#     the {Google::Type::Money#currency_code currency code} of min_compensation.
 </span>  <span class='comment'># @!attribute [rw] min_compensation
 </span>  <span class='comment'>#   @return [Google::Type::Money]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     The minimum amount of compensation. If left empty, the value is set
-</span>  <span class='comment'>#     to zero and the currency code is set to match the
-</span>  <span class='comment'>#     {Google::Type::Money#currency_code currency code} of max_compensation.
+</span>  <span class='comment'>#     Optional. The minimum amount of compensation. If left empty, the value is
+</span>  <span class='comment'>#     set to zero and the currency code is set to match the [currency
+</span>  <span class='comment'>#     code][google.type.Money.currency_code] of max_compensation.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="CompensationInfo/CompensationRange.html" title="Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationRange (class)">CompensationRange</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
   <span class='comment'># The type of compensation.
@@ -672,6 +638,18 @@ for explanation on compensation annualization.</p>
       <pre class="lines">
 
 
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
 315
 316
 317
@@ -812,39 +790,10 @@ for explanation on compensation annualization.</p>
 452
 453
 454
-455
-456
-457
-458
-459
-460
-461
-462
-463
-464
-465
-466
-467
-468
-469
-470
-471
-472
-473
-474
-475
-476
-477
-478
-479
-480
-481
-482
-483
-484</pre>
+455</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/common.rb', line 315</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/common.rb', line 303</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::CompensationInfo (class)">CompensationInfo</a></span></span>
   <span class='comment'># A compensation entry that represents one component of compensation, such
@@ -865,42 +814,30 @@ for explanation on compensation annualization.</p>
 </span>  <span class='comment'>#   {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#expected_units_per_year expected_units_per_year}.
 </span>  <span class='comment'># @!attribute [rw] type
 </span>  <span class='comment'>#   @return [Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationType]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Compensation type.
+</span>  <span class='comment'>#     Optional. Compensation type.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     Default is
 </span>  <span class='comment'>#     {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationType::COMPENSATION_TYPE_UNSPECIFIED CompensationType::COMPENSATION_TYPE_UNSPECIFIED}.
 </span>  <span class='comment'># @!attribute [rw] unit
 </span>  <span class='comment'>#   @return [Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationUnit]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Frequency of the specified amount.
+</span>  <span class='comment'>#     Optional. Frequency of the specified amount.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     Default is
 </span>  <span class='comment'>#     {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationUnit::COMPENSATION_UNIT_UNSPECIFIED CompensationUnit::COMPENSATION_UNIT_UNSPECIFIED}.
 </span>  <span class='comment'># @!attribute [rw] amount
 </span>  <span class='comment'>#   @return [Google::Type::Money]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Compensation amount.
+</span>  <span class='comment'>#     Optional. Compensation amount.
 </span>  <span class='comment'># @!attribute [rw] range
 </span>  <span class='comment'>#   @return [Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationRange]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Compensation range.
+</span>  <span class='comment'>#     Optional. Compensation range.
 </span>  <span class='comment'># @!attribute [rw] description
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Compensation description.  For example, could
+</span>  <span class='comment'>#     Optional. Compensation description.  For example, could
 </span>  <span class='comment'>#     indicate equity terms or provide additional context to an estimated
 </span>  <span class='comment'>#     bonus.
 </span>  <span class='comment'># @!attribute [rw] expected_units_per_year
 </span>  <span class='comment'>#   @return [Google::Protobuf::DoubleValue]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Expected number of units paid each year. If not specified, when
+</span>  <span class='comment'>#     Optional. Expected number of units paid each year. If not specified, when
 </span>  <span class='comment'>#     {Google::Cloud::Talent::V4beta1::Job#employment_types Job#employment_types}
 </span>  <span class='comment'>#     is FULLTIME, a default value is inferred based on
 </span>  <span class='comment'>#     {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#unit unit}.
@@ -915,19 +852,14 @@ for explanation on compensation annualization.</p>
   <span class='comment'># Compensation range.
 </span>  <span class='comment'># @!attribute [rw] max_compensation
 </span>  <span class='comment'>#   @return [Google::Type::Money]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     The maximum amount of compensation. If left empty, the value is set
-</span>  <span class='comment'>#     to a maximal compensation value and the currency code is set to
-</span>  <span class='comment'>#     match the {Google::Type::Money#currency_code currency code} of
-</span>  <span class='comment'>#     min_compensation.
+</span>  <span class='comment'>#     Optional. The maximum amount of compensation. If left empty, the value is
+</span>  <span class='comment'>#     set to a maximal compensation value and the currency code is set to match
+</span>  <span class='comment'>#     the {Google::Type::Money#currency_code currency code} of min_compensation.
 </span>  <span class='comment'># @!attribute [rw] min_compensation
 </span>  <span class='comment'>#   @return [Google::Type::Money]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     The minimum amount of compensation. If left empty, the value is set
-</span>  <span class='comment'>#     to zero and the currency code is set to match the
-</span>  <span class='comment'>#     {Google::Type::Money#currency_code currency code} of max_compensation.
+</span>  <span class='comment'>#     Optional. The minimum amount of compensation. If left empty, the value is
+</span>  <span class='comment'>#     set to zero and the currency code is set to match the [currency
+</span>  <span class='comment'>#     code][google.type.Money.currency_code] of max_compensation.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="CompensationInfo/CompensationRange.html" title="Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationRange (class)">CompensationRange</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
   <span class='comment'># The type of compensation.
@@ -1034,9 +966,7 @@ for explanation on compensation annualization.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Optional.</p>
-
-<p>Job compensation information.</p>
+    <p>Returns Optional. Job compensation information.</p>
 
 <p>At most one entry can be of type
 <span class='object_link'><a href="CompensationInfo/CompensationType.html#BASE-constant" title="Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationType::BASE (constant)">CompensationInfo::CompensationType::BASE</a></span>,
@@ -1058,9 +988,7 @@ which is referred as <strong>base compensation entry</strong> for the job.</p>
       
       
         &mdash;
-        <div class='inline'><p>Optional.</p>
-
-<p>Job compensation information.</p>
+        <div class='inline'><p>Optional. Job compensation information.</p>
 
 <p>At most one entry can be of type
 <span class='object_link'><a href="CompensationInfo/CompensationType.html#BASE-constant" title="Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationType::BASE (constant)">CompensationInfo::CompensationType::BASE</a></span>,
@@ -1077,6 +1005,18 @@ which is referred as <strong>base compensation entry</strong> for the job.</p>
       <pre class="lines">
 
 
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
 315
 316
 317
@@ -1217,39 +1157,10 @@ which is referred as <strong>base compensation entry</strong> for the job.</p>
 452
 453
 454
-455
-456
-457
-458
-459
-460
-461
-462
-463
-464
-465
-466
-467
-468
-469
-470
-471
-472
-473
-474
-475
-476
-477
-478
-479
-480
-481
-482
-483
-484</pre>
+455</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/common.rb', line 315</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/common.rb', line 303</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::CompensationInfo (class)">CompensationInfo</a></span></span>
   <span class='comment'># A compensation entry that represents one component of compensation, such
@@ -1270,42 +1181,30 @@ which is referred as <strong>base compensation entry</strong> for the job.</p>
 </span>  <span class='comment'>#   {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#expected_units_per_year expected_units_per_year}.
 </span>  <span class='comment'># @!attribute [rw] type
 </span>  <span class='comment'>#   @return [Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationType]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Compensation type.
+</span>  <span class='comment'>#     Optional. Compensation type.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     Default is
 </span>  <span class='comment'>#     {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationType::COMPENSATION_TYPE_UNSPECIFIED CompensationType::COMPENSATION_TYPE_UNSPECIFIED}.
 </span>  <span class='comment'># @!attribute [rw] unit
 </span>  <span class='comment'>#   @return [Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationUnit]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Frequency of the specified amount.
+</span>  <span class='comment'>#     Optional. Frequency of the specified amount.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     Default is
 </span>  <span class='comment'>#     {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationUnit::COMPENSATION_UNIT_UNSPECIFIED CompensationUnit::COMPENSATION_UNIT_UNSPECIFIED}.
 </span>  <span class='comment'># @!attribute [rw] amount
 </span>  <span class='comment'>#   @return [Google::Type::Money]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Compensation amount.
+</span>  <span class='comment'>#     Optional. Compensation amount.
 </span>  <span class='comment'># @!attribute [rw] range
 </span>  <span class='comment'>#   @return [Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationRange]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Compensation range.
+</span>  <span class='comment'>#     Optional. Compensation range.
 </span>  <span class='comment'># @!attribute [rw] description
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Compensation description.  For example, could
+</span>  <span class='comment'>#     Optional. Compensation description.  For example, could
 </span>  <span class='comment'>#     indicate equity terms or provide additional context to an estimated
 </span>  <span class='comment'>#     bonus.
 </span>  <span class='comment'># @!attribute [rw] expected_units_per_year
 </span>  <span class='comment'>#   @return [Google::Protobuf::DoubleValue]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Expected number of units paid each year. If not specified, when
+</span>  <span class='comment'>#     Optional. Expected number of units paid each year. If not specified, when
 </span>  <span class='comment'>#     {Google::Cloud::Talent::V4beta1::Job#employment_types Job#employment_types}
 </span>  <span class='comment'>#     is FULLTIME, a default value is inferred based on
 </span>  <span class='comment'>#     {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#unit unit}.
@@ -1320,19 +1219,14 @@ which is referred as <strong>base compensation entry</strong> for the job.</p>
   <span class='comment'># Compensation range.
 </span>  <span class='comment'># @!attribute [rw] max_compensation
 </span>  <span class='comment'>#   @return [Google::Type::Money]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     The maximum amount of compensation. If left empty, the value is set
-</span>  <span class='comment'>#     to a maximal compensation value and the currency code is set to
-</span>  <span class='comment'>#     match the {Google::Type::Money#currency_code currency code} of
-</span>  <span class='comment'>#     min_compensation.
+</span>  <span class='comment'>#     Optional. The maximum amount of compensation. If left empty, the value is
+</span>  <span class='comment'>#     set to a maximal compensation value and the currency code is set to match
+</span>  <span class='comment'>#     the {Google::Type::Money#currency_code currency code} of min_compensation.
 </span>  <span class='comment'># @!attribute [rw] min_compensation
 </span>  <span class='comment'>#   @return [Google::Type::Money]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     The minimum amount of compensation. If left empty, the value is set
-</span>  <span class='comment'>#     to zero and the currency code is set to match the
-</span>  <span class='comment'>#     {Google::Type::Money#currency_code currency code} of max_compensation.
+</span>  <span class='comment'>#     Optional. The minimum amount of compensation. If left empty, the value is
+</span>  <span class='comment'>#     set to zero and the currency code is set to match the [currency
+</span>  <span class='comment'>#     code][google.type.Money.currency_code] of max_compensation.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="CompensationInfo/CompensationRange.html" title="Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationRange (class)">CompensationRange</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
   <span class='comment'># The type of compensation.

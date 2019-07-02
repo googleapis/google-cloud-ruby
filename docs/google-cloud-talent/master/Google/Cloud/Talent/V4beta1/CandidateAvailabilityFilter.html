@@ -1,6 +1,6 @@
 ---
 layout: yard_main
-title: "Class: Google::Cloud::Talent::V4beta1::Interview - Cloud"
+title: "Class: Google::Cloud::Talent::V4beta1::CandidateAvailabilityFilter - Cloud"
 css: 
   - /docs/css/style.css
   - /docs/css/common.css
@@ -10,7 +10,7 @@ js:
   - /js/yard-main.js
 ---
 <script type="text/javascript" charset="utf-8">
-  pathId = "Google::Cloud::Talent::V4beta1::Interview";
+  pathId = "Google::Cloud::Talent::V4beta1::CandidateAvailabilityFilter";
   relpath = '../../../../';
 </script>
 
@@ -24,10 +24,10 @@ js:
   <div id="header">
     <div id="menu">
   
-    <a href="../../../../_index.html">Index (I)</a> &raquo;
+    <a href="../../../../_index.html">Index (C)</a> &raquo;
     <span class='title'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../Talent.html" title="Google::Cloud::Talent (module)">Talent</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../V4beta1.html" title="Google::Cloud::Talent::V4beta1 (module)">V4beta1</a></span></span>
      &raquo; 
-    <span class="title">Interview</span>
+    <span class="title">CandidateAvailabilityFilter</span>
   
 </div>
 
@@ -47,7 +47,7 @@ js:
     <div class="clear"></div>
   </div>
 
-  <div id="content"><h1>Class: Google::Cloud::Talent::V4beta1::Interview
+  <div id="content"><h1>Class: Google::Cloud::Talent::V4beta1::CandidateAvailabilityFilter
   
   
   
@@ -62,7 +62,7 @@ js:
         <ul class="fullTree">
           <li>Object</li>
           
-            <li class="next">Google::Cloud::Talent::V4beta1::Interview</li>
+            <li class="next">Google::Cloud::Talent::V4beta1::CandidateAvailabilityFilter</li>
           
         </ul>
         <a href="#" class="inheritanceTree">show all</a>
@@ -82,14 +82,16 @@ js:
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/common.rb</dd>
+    <dd>lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/filters.rb</dd>
   </dl>
   
 </div>
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>Details of an interview.</p>
+    <p>Input only</p>
+
+<p>Filter on availability signals.</p>
 
 
   </div>
@@ -107,33 +109,7 @@ js:
       <li class="public ">
   <span class="summary_signature">
     
-      <a href="#outcome-instance_method" title="#outcome (instance method)">#<strong>outcome</strong>  &#x21d2; Google::Cloud::Talent::V4beta1::Outcome </a>
-    
-
-    
-  </span>
-  
-  
-  
-    
-    
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'><p>Required.</p>
-</div></span>
-  
-</li>
-
-    
-      <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#rating-instance_method" title="#rating (instance method)">#<strong>rating</strong>  &#x21d2; Google::Cloud::Talent::V4beta1::Rating </a>
+      <a href="#negated-instance_method" title="#negated (instance method)">#<strong>negated</strong>  &#x21d2; true, false </a>
     
 
     
@@ -166,11 +142,11 @@ js:
     <h2>Instance Attribute Details</h2>
     
       
-      <span id="outcome=-instance_method"></span>
+      <span id="negated=-instance_method"></span>
       <div class="method_details first">
-  <h3 class="signature first" id="outcome-instance_method">
+  <h3 class="signature first" id="negated-instance_method">
   
-    #<strong>outcome</strong>  &#x21d2; <tt><span class='object_link'><a href="Outcome.html" title="Google::Cloud::Talent::V4beta1::Outcome (module)">Google::Cloud::Talent::V4beta1::Outcome</a></span></tt> 
+    #<strong>negated</strong>  &#x21d2; <tt>true</tt>, <tt>false</tt> 
   
 
   
@@ -178,8 +154,8 @@ js:
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Required. The overall decision resulting from this interview (positive,
-negative, nuetral).</p>
+    <p>Returns Optional. It is false by default. If true, API excludes all the potential
+available profiles.</p>
 
 
   </div>
@@ -192,13 +168,13 @@ negative, nuetral).</p>
     <li>
       
       
-        <span class='type'>(<tt><span class='object_link'><a href="Outcome.html" title="Google::Cloud::Talent::V4beta1::Outcome (module)">Google::Cloud::Talent::V4beta1::Outcome</a></span></tt>)</span>
+        <span class='type'>(<tt>true</tt>, <tt>false</tt>)</span>
       
       
       
         &mdash;
-        <div class='inline'><p>Required. The overall decision resulting from this interview (positive,
-negative, nuetral).</p>
+        <div class='inline'><p>Optional. It is false by default. If true, API excludes all the potential
+available profiles.</p>
 </div>
       
     </li>
@@ -211,67 +187,12 @@ negative, nuetral).</p>
       <pre class="lines">
 
 
-518</pre>
+717</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/common.rb', line 518</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/filters.rb', line 717</span>
 
-<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::Interview (class)">Interview</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-      
-      <span id="rating=-instance_method"></span>
-      <div class="method_details ">
-  <h3 class="signature " id="rating-instance_method">
-  
-    #<strong>rating</strong>  &#x21d2; <tt><span class='object_link'><a href="Rating.html" title="Google::Cloud::Talent::V4beta1::Rating (class)">Google::Cloud::Talent::V4beta1::Rating</a></span></tt> 
-  
-
-  
-
-  
-</h3><div class="docstring">
-  <div class="discussion">
-    <p>Returns Optional. The rating on this interview.</p>
-
-
-  </div>
-</div>
-<div class="tags">
-  
-<p class="tag_title">Returns:</p>
-<ul class="return">
-  
-    <li>
-      
-      
-        <span class='type'>(<tt><span class='object_link'><a href="Rating.html" title="Google::Cloud::Talent::V4beta1::Rating (class)">Google::Cloud::Talent::V4beta1::Rating</a></span></tt>)</span>
-      
-      
-      
-        &mdash;
-        <div class='inline'><p>Optional. The rating on this interview.</p>
-</div>
-      
-    </li>
-  
-</ul>
-
-</div><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-518</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/common.rb', line 518</span>
-
-<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::Interview (class)">Interview</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::CandidateAvailabilityFilter (class)">CandidateAvailabilityFilter</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>

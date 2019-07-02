@@ -214,9 +214,8 @@ js:
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Optional.</p>
-
-<p>A string represents a person&#39;s full name. For example, &quot;Dr. John Smith&quot;.</p>
+    <p>Returns Optional. A string represents a person&#39;s full name. For example, &quot;Dr.
+John Smith&quot;.</p>
 
 <p>Number of characters allowed is 100.</p>
 
@@ -236,9 +235,8 @@ js:
       
       
         &mdash;
-        <div class='inline'><p>Optional.</p>
-
-<p>A string represents a person&#39;s full name. For example, &quot;Dr. John Smith&quot;.</p>
+        <div class='inline'><p>Optional. A string represents a person&#39;s full name. For example, &quot;Dr.
+John Smith&quot;.</p>
 
 <p>Number of characters allowed is 100.</p>
 </div>
@@ -253,75 +251,61 @@ js:
       <pre class="lines">
 
 
-294
-295
-296
-297
-298
-299
-300
-301
-302
-303
-304
-305
-306
-307
-308
-309
-310
-311
-312
-313
-314
-315
-316
-317
-318
-319
-320
-321
-322
-323
-324
-325
-326
-327
-328
-329
-330
-331
-332
-333
-334
-335
-336
-337
-338
-339
-340
-341
-342
-343
-344
-345
-346
-347
-348
-349
-350
-351</pre>
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/profile.rb', line 294</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/profile.rb', line 244</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::PersonName (class)">PersonName</a></span></span>
   <span class='comment'># Resource that represents a person&#39;s structured name.
 </span>  <span class='comment'># @!attribute [rw] given_name
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Given/first name.
+</span>  <span class='comment'>#     Optional. Given/first name.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     It&#39;s derived from
 </span>  <span class='comment'>#     {Google::Cloud::Talent::V4beta1::PersonName#formatted_name formatted_name}
@@ -330,16 +314,12 @@ js:
 </span>  <span class='comment'>#     Number of characters allowed is 100.
 </span>  <span class='comment'># @!attribute [rw] preferred_name
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Preferred given/first name or nickname.
+</span>  <span class='comment'>#     Optional. Preferred given/first name or nickname.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     Number of characters allowed is 100.
 </span>  <span class='comment'># @!attribute [rw] middle_initial
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Middle initial.
+</span>  <span class='comment'>#     Optional. Middle initial.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     It&#39;s derived from
 </span>  <span class='comment'>#     {Google::Cloud::Talent::V4beta1::PersonName#formatted_name formatted_name}
@@ -348,9 +328,7 @@ js:
 </span>  <span class='comment'>#     Number of characters allowed is 20.
 </span>  <span class='comment'># @!attribute [rw] family_name
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Family/last name.
+</span>  <span class='comment'>#     Optional. Family/last name.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     It&#39;s derived from
 </span>  <span class='comment'>#     {Google::Cloud::Talent::V4beta1::PersonName#formatted_name formatted_name}
@@ -359,16 +337,12 @@ js:
 </span>  <span class='comment'>#     Number of characters allowed is 100.
 </span>  <span class='comment'># @!attribute [rw] suffixes
 </span>  <span class='comment'>#   @return [Array&lt;String&gt;]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Suffixes.
+</span>  <span class='comment'>#     Optional. Suffixes.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     Number of characters allowed is 20.
 </span>  <span class='comment'># @!attribute [rw] prefixes
 </span>  <span class='comment'>#   @return [Array&lt;String&gt;]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Prefixes.
+</span>  <span class='comment'>#     Optional. Prefixes.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     Number of characters allowed is 20.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="PersonName/PersonStructuredName.html" title="Google::Cloud::Talent::V4beta1::PersonName::PersonStructuredName (class)">PersonStructuredName</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
@@ -391,9 +365,7 @@ js:
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Optional.</p>
-
-<p>Preferred name for the person. This field is ignored if
+    <p>Returns Optional. Preferred name for the person. This field is ignored if
 <span class='object_link'><a href="#structured_name-instance_method" title="Google::Cloud::Talent::V4beta1::PersonName#structured_name (method)">structured_name</a></span>
 is provided.</p>
 
@@ -415,9 +387,7 @@ is provided.</p>
       
       
         &mdash;
-        <div class='inline'><p>Optional.</p>
-
-<p>Preferred name for the person. This field is ignored if
+        <div class='inline'><p>Optional. Preferred name for the person. This field is ignored if
 <span class='object_link'><a href="#structured_name-instance_method" title="Google::Cloud::Talent::V4beta1::PersonName#structured_name (method)">structured_name</a></span>
 is provided.</p>
 
@@ -434,75 +404,61 @@ is provided.</p>
       <pre class="lines">
 
 
-294
-295
-296
-297
-298
-299
-300
-301
-302
-303
-304
-305
-306
-307
-308
-309
-310
-311
-312
-313
-314
-315
-316
-317
-318
-319
-320
-321
-322
-323
-324
-325
-326
-327
-328
-329
-330
-331
-332
-333
-334
-335
-336
-337
-338
-339
-340
-341
-342
-343
-344
-345
-346
-347
-348
-349
-350
-351</pre>
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/profile.rb', line 294</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/profile.rb', line 244</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::PersonName (class)">PersonName</a></span></span>
   <span class='comment'># Resource that represents a person&#39;s structured name.
 </span>  <span class='comment'># @!attribute [rw] given_name
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Given/first name.
+</span>  <span class='comment'>#     Optional. Given/first name.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     It&#39;s derived from
 </span>  <span class='comment'>#     {Google::Cloud::Talent::V4beta1::PersonName#formatted_name formatted_name}
@@ -511,16 +467,12 @@ is provided.</p>
 </span>  <span class='comment'>#     Number of characters allowed is 100.
 </span>  <span class='comment'># @!attribute [rw] preferred_name
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Preferred given/first name or nickname.
+</span>  <span class='comment'>#     Optional. Preferred given/first name or nickname.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     Number of characters allowed is 100.
 </span>  <span class='comment'># @!attribute [rw] middle_initial
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Middle initial.
+</span>  <span class='comment'>#     Optional. Middle initial.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     It&#39;s derived from
 </span>  <span class='comment'>#     {Google::Cloud::Talent::V4beta1::PersonName#formatted_name formatted_name}
@@ -529,9 +481,7 @@ is provided.</p>
 </span>  <span class='comment'>#     Number of characters allowed is 20.
 </span>  <span class='comment'># @!attribute [rw] family_name
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Family/last name.
+</span>  <span class='comment'>#     Optional. Family/last name.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     It&#39;s derived from
 </span>  <span class='comment'>#     {Google::Cloud::Talent::V4beta1::PersonName#formatted_name formatted_name}
@@ -540,16 +490,12 @@ is provided.</p>
 </span>  <span class='comment'>#     Number of characters allowed is 100.
 </span>  <span class='comment'># @!attribute [rw] suffixes
 </span>  <span class='comment'>#   @return [Array&lt;String&gt;]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Suffixes.
+</span>  <span class='comment'>#     Optional. Suffixes.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     Number of characters allowed is 20.
 </span>  <span class='comment'># @!attribute [rw] prefixes
 </span>  <span class='comment'>#   @return [Array&lt;String&gt;]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Prefixes.
+</span>  <span class='comment'>#     Optional. Prefixes.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     Number of characters allowed is 20.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="PersonName/PersonStructuredName.html" title="Google::Cloud::Talent::V4beta1::PersonName::PersonStructuredName (class)">PersonStructuredName</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
@@ -572,10 +518,8 @@ is provided.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Optional.</p>
-
-<p>A person&#39;s name in a structured way (last name, first name, suffix, and
-so on.)</p>
+    <p>Returns Optional. A person&#39;s name in a structured way (last name, first name,
+suffix, and so on.)</p>
 
 
   </div>
@@ -593,10 +537,8 @@ so on.)</p>
       
       
         &mdash;
-        <div class='inline'><p>Optional.</p>
-
-<p>A person&#39;s name in a structured way (last name, first name, suffix, and
-so on.)</p>
+        <div class='inline'><p>Optional. A person&#39;s name in a structured way (last name, first name,
+suffix, and so on.)</p>
 </div>
       
     </li>
@@ -609,75 +551,61 @@ so on.)</p>
       <pre class="lines">
 
 
-294
-295
-296
-297
-298
-299
-300
-301
-302
-303
-304
-305
-306
-307
-308
-309
-310
-311
-312
-313
-314
-315
-316
-317
-318
-319
-320
-321
-322
-323
-324
-325
-326
-327
-328
-329
-330
-331
-332
-333
-334
-335
-336
-337
-338
-339
-340
-341
-342
-343
-344
-345
-346
-347
-348
-349
-350
-351</pre>
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/profile.rb', line 294</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/profile.rb', line 244</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Talent::V4beta1::PersonName (class)">PersonName</a></span></span>
   <span class='comment'># Resource that represents a person&#39;s structured name.
 </span>  <span class='comment'># @!attribute [rw] given_name
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Given/first name.
+</span>  <span class='comment'>#     Optional. Given/first name.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     It&#39;s derived from
 </span>  <span class='comment'>#     {Google::Cloud::Talent::V4beta1::PersonName#formatted_name formatted_name}
@@ -686,16 +614,12 @@ so on.)</p>
 </span>  <span class='comment'>#     Number of characters allowed is 100.
 </span>  <span class='comment'># @!attribute [rw] preferred_name
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Preferred given/first name or nickname.
+</span>  <span class='comment'>#     Optional. Preferred given/first name or nickname.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     Number of characters allowed is 100.
 </span>  <span class='comment'># @!attribute [rw] middle_initial
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Middle initial.
+</span>  <span class='comment'>#     Optional. Middle initial.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     It&#39;s derived from
 </span>  <span class='comment'>#     {Google::Cloud::Talent::V4beta1::PersonName#formatted_name formatted_name}
@@ -704,9 +628,7 @@ so on.)</p>
 </span>  <span class='comment'>#     Number of characters allowed is 20.
 </span>  <span class='comment'># @!attribute [rw] family_name
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Family/last name.
+</span>  <span class='comment'>#     Optional. Family/last name.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     It&#39;s derived from
 </span>  <span class='comment'>#     {Google::Cloud::Talent::V4beta1::PersonName#formatted_name formatted_name}
@@ -715,16 +637,12 @@ so on.)</p>
 </span>  <span class='comment'>#     Number of characters allowed is 100.
 </span>  <span class='comment'># @!attribute [rw] suffixes
 </span>  <span class='comment'>#   @return [Array&lt;String&gt;]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Suffixes.
+</span>  <span class='comment'>#     Optional. Suffixes.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     Number of characters allowed is 20.
 </span>  <span class='comment'># @!attribute [rw] prefixes
 </span>  <span class='comment'>#   @return [Array&lt;String&gt;]
-</span>  <span class='comment'>#     Optional.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     Prefixes.
+</span>  <span class='comment'>#     Optional. Prefixes.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     Number of characters allowed is 20.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="PersonName/PersonStructuredName.html" title="Google::Cloud::Talent::V4beta1::PersonName::PersonStructuredName (class)">PersonStructuredName</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
