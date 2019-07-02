@@ -115,26 +115,27 @@ end
 
 module Google
   module Cloud
-    module Videointelligence
-      module V1beta1
-        AnnotateVideoRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1beta1.AnnotateVideoRequest").msgclass
-        VideoContext = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1beta1.VideoContext").msgclass
-        VideoSegment = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1beta1.VideoSegment").msgclass
-        LabelLocation = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1beta1.LabelLocation").msgclass
-        LabelAnnotation = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1beta1.LabelAnnotation").msgclass
-        SafeSearchAnnotation = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1beta1.SafeSearchAnnotation").msgclass
-        BoundingBox = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1beta1.BoundingBox").msgclass
-        FaceLocation = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1beta1.FaceLocation").msgclass
-        FaceAnnotation = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1beta1.FaceAnnotation").msgclass
-        VideoAnnotationResults = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1beta1.VideoAnnotationResults").msgclass
-        AnnotateVideoResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1beta1.AnnotateVideoResponse").msgclass
-        VideoAnnotationProgress = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1beta1.VideoAnnotationProgress").msgclass
-        AnnotateVideoProgress = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1beta1.AnnotateVideoProgress").msgclass
-        Feature = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1beta1.Feature").enummodule
-        LabelLevel = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1beta1.LabelLevel").enummodule
-        LabelDetectionMode = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1beta1.LabelDetectionMode").enummodule
-        Likelihood = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1beta1.Likelihood").enummodule
-      end
+    module VideoIntelligence
     end
+    Videointelligence = VideoIntelligence unless const_defined? :Videointelligence
   end
+end
+module Google::Cloud::VideoIntelligence::V1beta1
+  AnnotateVideoRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1beta1.AnnotateVideoRequest").msgclass
+  VideoContext = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1beta1.VideoContext").msgclass
+  VideoSegment = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1beta1.VideoSegment").msgclass
+  LabelLocation = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1beta1.LabelLocation").msgclass
+  LabelAnnotation = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1beta1.LabelAnnotation").msgclass
+  SafeSearchAnnotation = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1beta1.SafeSearchAnnotation").msgclass
+  BoundingBox = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1beta1.BoundingBox").msgclass
+  FaceLocation = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1beta1.FaceLocation").msgclass
+  FaceAnnotation = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1beta1.FaceAnnotation").msgclass
+  VideoAnnotationResults = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1beta1.VideoAnnotationResults").msgclass
+  AnnotateVideoResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1beta1.AnnotateVideoResponse").msgclass
+  VideoAnnotationProgress = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1beta1.VideoAnnotationProgress").msgclass
+  AnnotateVideoProgress = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1beta1.AnnotateVideoProgress").msgclass
+  Feature = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1beta1.Feature").enummodule
+  LabelLevel = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1beta1.LabelLevel").enummodule
+  LabelDetectionMode = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1beta1.LabelDetectionMode").enummodule
+  Likelihood = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1beta1.Likelihood").enummodule
 end

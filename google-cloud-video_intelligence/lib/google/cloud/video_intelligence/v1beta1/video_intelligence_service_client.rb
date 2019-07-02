@@ -38,7 +38,7 @@ module Google
         # Service that implements Google Cloud Video Intelligence API.
         #
         # @!attribute [r] video_intelligence_service_stub
-        #   @return [Google::Cloud::Videointelligence::V1beta1::VideoIntelligenceService::Stub]
+        #   @return [Google::Cloud::VideoIntelligence::V1beta1::VideoIntelligenceService::Stub]
         class VideoIntelligenceServiceClient
           # @private
           attr_reader :video_intelligence_service_stub
@@ -183,7 +183,7 @@ module Google
               updater_proc: updater_proc,
               scopes: scopes,
               interceptors: interceptors,
-              &Google::Cloud::Videointelligence::V1beta1::VideoIntelligenceService::Stub.method(:new)
+              &Google::Cloud::VideoIntelligence::V1beta1::VideoIntelligenceService::Stub.method(:new)
             )
 
             @annotate_video = Google::Gax.create_api_call(
@@ -211,14 +211,14 @@ module Google
           #   videos. Supported wildcards: '*' to match 0 or more characters;
           #   '?' to match 1 character. If unset, the input video should be embedded
           #   in the request as `input_content`. If set, `input_content` should be unset.
-          # @param features [Array<Google::Cloud::Videointelligence::V1beta1::Feature>]
+          # @param features [Array<Google::Cloud::VideoIntelligence::V1beta1::Feature>]
           #   Requested video annotation features.
           # @param input_content [String]
           #   The video data bytes. Encoding: base64. If unset, the input video(s)
           #   should be specified via `input_uri`. If set, `input_uri` should be unset.
-          # @param video_context [Google::Cloud::Videointelligence::V1beta1::VideoContext | Hash]
+          # @param video_context [Google::Cloud::VideoIntelligence::V1beta1::VideoContext | Hash]
           #   Additional video context and/or feature-specific parameters.
-          #   A hash of the same form as `Google::Cloud::Videointelligence::V1beta1::VideoContext`
+          #   A hash of the same form as `Google::Cloud::VideoIntelligence::V1beta1::VideoContext`
           #   can also be provided.
           # @param output_uri [String]
           #   Optional location where the output (in JSON format) should be stored.
@@ -287,12 +287,12 @@ module Google
               output_uri: output_uri,
               location_id: location_id
             }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Cloud::Videointelligence::V1beta1::AnnotateVideoRequest)
+            req = Google::Gax::to_proto(req, Google::Cloud::VideoIntelligence::V1beta1::AnnotateVideoRequest)
             operation = Google::Gax::Operation.new(
               @annotate_video.call(req, options),
               @operations_client,
-              Google::Cloud::Videointelligence::V1beta1::AnnotateVideoResponse,
-              Google::Cloud::Videointelligence::V1beta1::AnnotateVideoProgress,
+              Google::Cloud::VideoIntelligence::V1beta1::AnnotateVideoResponse,
+              Google::Cloud::VideoIntelligence::V1beta1::AnnotateVideoProgress,
               call_options: options
             )
             operation.on_done { |operation| yield(operation) } if block_given?

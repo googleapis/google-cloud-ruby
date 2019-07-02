@@ -15,7 +15,7 @@
 
 module Google
   module Cloud
-    module Videointelligence
+    module VideoIntelligence
       module V1beta2
         # Video annotation request.
         # @!attribute [rw] input_uri
@@ -36,10 +36,10 @@ module Google
         #     If unset, the input video(s) should be specified via `input_uri`.
         #     If set, `input_uri` should be unset.
         # @!attribute [rw] features
-        #   @return [Array<Google::Cloud::Videointelligence::V1beta2::Feature>]
+        #   @return [Array<Google::Cloud::VideoIntelligence::V1beta2::Feature>]
         #     Requested video annotation features.
         # @!attribute [rw] video_context
-        #   @return [Google::Cloud::Videointelligence::V1beta2::VideoContext]
+        #   @return [Google::Cloud::VideoIntelligence::V1beta2::VideoContext]
         #     Additional video context and/or feature-specific parameters.
         # @!attribute [rw] output_uri
         #   @return [String]
@@ -58,27 +58,27 @@ module Google
 
         # Video context and/or feature-specific parameters.
         # @!attribute [rw] segments
-        #   @return [Array<Google::Cloud::Videointelligence::V1beta2::VideoSegment>]
+        #   @return [Array<Google::Cloud::VideoIntelligence::V1beta2::VideoSegment>]
         #     Video segments to annotate. The segments may overlap and are not required
         #     to be contiguous or span the whole video. If unspecified, each video
         #     is treated as a single segment.
         # @!attribute [rw] label_detection_config
-        #   @return [Google::Cloud::Videointelligence::V1beta2::LabelDetectionConfig]
+        #   @return [Google::Cloud::VideoIntelligence::V1beta2::LabelDetectionConfig]
         #     Config for LABEL_DETECTION.
         # @!attribute [rw] shot_change_detection_config
-        #   @return [Google::Cloud::Videointelligence::V1beta2::ShotChangeDetectionConfig]
+        #   @return [Google::Cloud::VideoIntelligence::V1beta2::ShotChangeDetectionConfig]
         #     Config for SHOT_CHANGE_DETECTION.
         # @!attribute [rw] explicit_content_detection_config
-        #   @return [Google::Cloud::Videointelligence::V1beta2::ExplicitContentDetectionConfig]
+        #   @return [Google::Cloud::VideoIntelligence::V1beta2::ExplicitContentDetectionConfig]
         #     Config for EXPLICIT_CONTENT_DETECTION.
         # @!attribute [rw] face_detection_config
-        #   @return [Google::Cloud::Videointelligence::V1beta2::FaceDetectionConfig]
+        #   @return [Google::Cloud::VideoIntelligence::V1beta2::FaceDetectionConfig]
         #     Config for FACE_DETECTION.
         class VideoContext; end
 
         # Config for LABEL_DETECTION.
         # @!attribute [rw] label_detection_mode
-        #   @return [Google::Cloud::Videointelligence::V1beta2::LabelDetectionMode]
+        #   @return [Google::Cloud::VideoIntelligence::V1beta2::LabelDetectionMode]
         #     What labels should be detected with LABEL_DETECTION, in addition to
         #     video-level labels or segment-level labels.
         #     If unspecified, defaults to `SHOT_MODE`.
@@ -134,7 +134,7 @@ module Google
 
         # Video segment level annotation results for label detection.
         # @!attribute [rw] segment
-        #   @return [Google::Cloud::Videointelligence::V1beta2::VideoSegment]
+        #   @return [Google::Cloud::VideoIntelligence::V1beta2::VideoSegment]
         #     Video segment where a label was detected.
         # @!attribute [rw] confidence
         #   @return [Float]
@@ -167,19 +167,19 @@ module Google
 
         # Label annotation.
         # @!attribute [rw] entity
-        #   @return [Google::Cloud::Videointelligence::V1beta2::Entity]
+        #   @return [Google::Cloud::VideoIntelligence::V1beta2::Entity]
         #     Detected entity.
         # @!attribute [rw] category_entities
-        #   @return [Array<Google::Cloud::Videointelligence::V1beta2::Entity>]
+        #   @return [Array<Google::Cloud::VideoIntelligence::V1beta2::Entity>]
         #     Common categories for the detected entity.
         #     E.g. when the label is `Terrier` the category is likely `dog`. And in some
         #     cases there might be more than one categories e.g. `Terrier` could also be
         #     a `pet`.
         # @!attribute [rw] segments
-        #   @return [Array<Google::Cloud::Videointelligence::V1beta2::LabelSegment>]
+        #   @return [Array<Google::Cloud::VideoIntelligence::V1beta2::LabelSegment>]
         #     All video segments where a label was detected.
         # @!attribute [rw] frames
-        #   @return [Array<Google::Cloud::Videointelligence::V1beta2::LabelFrame>]
+        #   @return [Array<Google::Cloud::VideoIntelligence::V1beta2::LabelFrame>]
         #     All video frames where a label was detected.
         class LabelAnnotation; end
 
@@ -189,7 +189,7 @@ module Google
         #     Time-offset, relative to the beginning of the video, corresponding to the
         #     video frame for this location.
         # @!attribute [rw] pornography_likelihood
-        #   @return [Google::Cloud::Videointelligence::V1beta2::Likelihood]
+        #   @return [Google::Cloud::VideoIntelligence::V1beta2::Likelihood]
         #     Likelihood of the pornography content..
         class ExplicitContentFrame; end
 
@@ -197,7 +197,7 @@ module Google
         # If no explicit content has been detected in a frame, no annotations are
         # present for that frame.
         # @!attribute [rw] frames
-        #   @return [Array<Google::Cloud::Videointelligence::V1beta2::ExplicitContentFrame>]
+        #   @return [Array<Google::Cloud::VideoIntelligence::V1beta2::ExplicitContentFrame>]
         #     All video frames where explicit content was detected.
         class ExplicitContentAnnotation; end
 
@@ -220,13 +220,13 @@ module Google
 
         # Video segment level annotation results for face detection.
         # @!attribute [rw] segment
-        #   @return [Google::Cloud::Videointelligence::V1beta2::VideoSegment]
+        #   @return [Google::Cloud::VideoIntelligence::V1beta2::VideoSegment]
         #     Video segment where a face was detected.
         class FaceSegment; end
 
         # Video frame level annotation results for face detection.
         # @!attribute [rw] normalized_bounding_boxes
-        #   @return [Array<Google::Cloud::Videointelligence::V1beta2::NormalizedBoundingBox>]
+        #   @return [Array<Google::Cloud::VideoIntelligence::V1beta2::NormalizedBoundingBox>]
         #     Normalized Bounding boxes in a frame.
         #     There can be more than one boxes if the same face is detected in multiple
         #     locations within the current frame.
@@ -241,10 +241,10 @@ module Google
         #   @return [String]
         #     Thumbnail of a representative face view (in JPEG format).
         # @!attribute [rw] segments
-        #   @return [Array<Google::Cloud::Videointelligence::V1beta2::FaceSegment>]
+        #   @return [Array<Google::Cloud::VideoIntelligence::V1beta2::FaceSegment>]
         #     All video segments where a face was detected.
         # @!attribute [rw] frames
-        #   @return [Array<Google::Cloud::Videointelligence::V1beta2::FaceFrame>]
+        #   @return [Array<Google::Cloud::VideoIntelligence::V1beta2::FaceFrame>]
         #     All video frames where a face was detected.
         class FaceAnnotation; end
 
@@ -254,25 +254,25 @@ module Google
         #     Video file location in
         #     [Google Cloud Storage](https://cloud.google.com/storage/).
         # @!attribute [rw] segment_label_annotations
-        #   @return [Array<Google::Cloud::Videointelligence::V1beta2::LabelAnnotation>]
+        #   @return [Array<Google::Cloud::VideoIntelligence::V1beta2::LabelAnnotation>]
         #     Label annotations on video level or user specified segment level.
         #     There is exactly one element for each unique label.
         # @!attribute [rw] shot_label_annotations
-        #   @return [Array<Google::Cloud::Videointelligence::V1beta2::LabelAnnotation>]
+        #   @return [Array<Google::Cloud::VideoIntelligence::V1beta2::LabelAnnotation>]
         #     Label annotations on shot level.
         #     There is exactly one element for each unique label.
         # @!attribute [rw] frame_label_annotations
-        #   @return [Array<Google::Cloud::Videointelligence::V1beta2::LabelAnnotation>]
+        #   @return [Array<Google::Cloud::VideoIntelligence::V1beta2::LabelAnnotation>]
         #     Label annotations on frame level.
         #     There is exactly one element for each unique label.
         # @!attribute [rw] face_annotations
-        #   @return [Array<Google::Cloud::Videointelligence::V1beta2::FaceAnnotation>]
+        #   @return [Array<Google::Cloud::VideoIntelligence::V1beta2::FaceAnnotation>]
         #     Face annotations. There is exactly one element for each unique face.
         # @!attribute [rw] shot_annotations
-        #   @return [Array<Google::Cloud::Videointelligence::V1beta2::VideoSegment>]
+        #   @return [Array<Google::Cloud::VideoIntelligence::V1beta2::VideoSegment>]
         #     Shot annotations. Each shot is represented as a video segment.
         # @!attribute [rw] explicit_annotation
-        #   @return [Google::Cloud::Videointelligence::V1beta2::ExplicitContentAnnotation]
+        #   @return [Google::Cloud::VideoIntelligence::V1beta2::ExplicitContentAnnotation]
         #     Explicit content annotation.
         # @!attribute [rw] error
         #   @return [Google::Rpc::Status]
@@ -284,7 +284,7 @@ module Google
         # field of the `Operation` returned by the `GetOperation`
         # call of the `google::longrunning::Operations` service.
         # @!attribute [rw] annotation_results
-        #   @return [Array<Google::Cloud::Videointelligence::V1beta2::VideoAnnotationResults>]
+        #   @return [Array<Google::Cloud::VideoIntelligence::V1beta2::VideoAnnotationResults>]
         #     Annotation results for all videos specified in `AnnotateVideoRequest`.
         class AnnotateVideoResponse; end
 
@@ -309,7 +309,7 @@ module Google
         # field of the `Operation` returned by the `GetOperation`
         # call of the `google::longrunning::Operations` service.
         # @!attribute [rw] annotation_progress
-        #   @return [Array<Google::Cloud::Videointelligence::V1beta2::VideoAnnotationProgress>]
+        #   @return [Array<Google::Cloud::VideoIntelligence::V1beta2::VideoAnnotationProgress>]
         #     Progress metadata for all videos specified in `AnnotateVideoRequest`.
         class AnnotateVideoProgress; end
 
