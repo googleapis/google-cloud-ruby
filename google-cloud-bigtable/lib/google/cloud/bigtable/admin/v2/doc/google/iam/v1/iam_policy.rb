@@ -34,6 +34,10 @@ module Google
       #   @return [String]
       #     REQUIRED: The resource for which the policy is being requested.
       #     See the operation documentation for the appropriate value for this field.
+      # @!attribute [rw] options
+      #   @return [Google::Iam::V1::GetPolicyOptions]
+      #     OPTIONAL: A `GetPolicyOptions` object for specifying options to
+      #     `GetIamPolicy`. This field is only used by Cloud IAM.
       class GetIamPolicyRequest; end
 
       # Request message for `TestIamPermissions` method.
