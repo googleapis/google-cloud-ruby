@@ -152,9 +152,7 @@ module Google
         #     The maximum number of allowed characters is 255.
         # @!attribute [rw] allow_missing_ids
         #   @return [true, false]
-        #     Optional.
-        #
-        #     If set to `true`,
+        #     Optional. If set to `true`,
         #     {Google::Cloud::Talent::V4beta1::RequestMetadata#domain domain},
         #     {Google::Cloud::Talent::V4beta1::RequestMetadata#session_id session_id} and
         #     {Google::Cloud::Talent::V4beta1::RequestMetadata#user_id user_id} are
@@ -166,10 +164,8 @@ module Google
         #     service experience.
         # @!attribute [rw] device_info
         #   @return [Google::Cloud::Talent::V4beta1::DeviceInfo]
-        #     Optional.
-        #
-        #     The type of device used by the job seeker at the time of the call to the
-        #     service.
+        #     Optional. The type of device used by the job seeker at the time of the call
+        #     to the service.
         class RequestMetadata; end
 
         # Output only. Additional information returned to client, such as debugging
@@ -185,14 +181,10 @@ module Google
         # the quality of the search results across devices.
         # @!attribute [rw] device_type
         #   @return [Google::Cloud::Talent::V4beta1::DeviceInfo::DeviceType]
-        #     Optional.
-        #
-        #     Type of the device.
+        #     Optional. Type of the device.
         # @!attribute [rw] id
         #   @return [String]
-        #     Optional.
-        #
-        #     A device-specific ID. The ID must be a unique identifier that
+        #     Optional. A device-specific ID. The ID must be a unique identifier that
         #     distinguishes the device from other devices.
         class DeviceInfo
           # An enumeration describing an API access portal and exposure mechanism.
@@ -254,10 +246,8 @@ module Google
         #     supported.
         # @!attribute [rw] filterable
         #   @return [true, false]
-        #     Optional.
-        #
-        #     If the `filterable` flag is true, custom field values are searchable.
-        #     If false, values are not searchable.
+        #     Optional. If the `filterable` flag is true, custom field values are
+        #     searchable. If false, values are not searchable.
         #
         #     Default is false.
         class CustomAttribute; end
@@ -283,9 +273,7 @@ module Google
         # Job compensation details.
         # @!attribute [rw] entries
         #   @return [Array<Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry>]
-        #     Optional.
-        #
-        #     Job compensation information.
+        #     Optional. Job compensation information.
         #
         #     At most one entry can be of type
         #     {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationType::BASE CompensationInfo::CompensationType::BASE},
@@ -331,42 +319,30 @@ module Google
           #   {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#expected_units_per_year expected_units_per_year}.
           # @!attribute [rw] type
           #   @return [Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationType]
-          #     Optional.
-          #
-          #     Compensation type.
+          #     Optional. Compensation type.
           #
           #     Default is
           #     {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationType::COMPENSATION_TYPE_UNSPECIFIED CompensationType::COMPENSATION_TYPE_UNSPECIFIED}.
           # @!attribute [rw] unit
           #   @return [Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationUnit]
-          #     Optional.
-          #
-          #     Frequency of the specified amount.
+          #     Optional. Frequency of the specified amount.
           #
           #     Default is
           #     {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationUnit::COMPENSATION_UNIT_UNSPECIFIED CompensationUnit::COMPENSATION_UNIT_UNSPECIFIED}.
           # @!attribute [rw] amount
           #   @return [Google::Type::Money]
-          #     Optional.
-          #
-          #     Compensation amount.
+          #     Optional. Compensation amount.
           # @!attribute [rw] range
           #   @return [Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationRange]
-          #     Optional.
-          #
-          #     Compensation range.
+          #     Optional. Compensation range.
           # @!attribute [rw] description
           #   @return [String]
-          #     Optional.
-          #
-          #     Compensation description.  For example, could
+          #     Optional. Compensation description.  For example, could
           #     indicate equity terms or provide additional context to an estimated
           #     bonus.
           # @!attribute [rw] expected_units_per_year
           #   @return [Google::Protobuf::DoubleValue]
-          #     Optional.
-          #
-          #     Expected number of units paid each year. If not specified, when
+          #     Optional. Expected number of units paid each year. If not specified, when
           #     {Google::Cloud::Talent::V4beta1::Job#employment_types Job#employment_types}
           #     is FULLTIME, a default value is inferred based on
           #     {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#unit unit}.
@@ -381,19 +357,14 @@ module Google
           # Compensation range.
           # @!attribute [rw] max_compensation
           #   @return [Google::Type::Money]
-          #     Optional.
-          #
-          #     The maximum amount of compensation. If left empty, the value is set
-          #     to a maximal compensation value and the currency code is set to
-          #     match the {Google::Type::Money#currency_code currency code} of
-          #     min_compensation.
+          #     Optional. The maximum amount of compensation. If left empty, the value is
+          #     set to a maximal compensation value and the currency code is set to match
+          #     the {Google::Type::Money#currency_code currency code} of min_compensation.
           # @!attribute [rw] min_compensation
           #   @return [Google::Type::Money]
-          #     Optional.
-          #
-          #     The minimum amount of compensation. If left empty, the value is set
-          #     to zero and the currency code is set to match the
-          #     {Google::Type::Money#currency_code currency code} of max_compensation.
+          #     Optional. The minimum amount of compensation. If left empty, the value is
+          #     set to zero and the currency code is set to match the [currency
+          #     code][google.type.Money.currency_code] of max_compensation.
           class CompensationRange; end
 
           # The type of compensation.
@@ -486,33 +457,23 @@ module Google
         # Resource that represents a license or certification.
         # @!attribute [rw] display_name
         #   @return [String]
-        #     Optional.
-        #
-        #     Name of license or certification.
+        #     Optional. Name of license or certification.
         #
         #     Number of characters allowed is 100.
         # @!attribute [rw] acquire_date
         #   @return [Google::Type::Date]
-        #     Optional.
-        #
-        #     Acquisition date or effective date of license or certification.
+        #     Optional. Acquisition date or effective date of license or certification.
         # @!attribute [rw] expire_date
         #   @return [Google::Type::Date]
-        #     Optional.
-        #
-        #     Expiration date of license of certification.
+        #     Optional. Expiration date of license of certification.
         # @!attribute [rw] authority
         #   @return [String]
-        #     Optional.
-        #
-        #     Authority of license, such as government.
+        #     Optional. Authority of license, such as government.
         #
         #     Number of characters allowed is 100.
         # @!attribute [rw] description
         #   @return [String]
-        #     Optional.
-        #
-        #     Description of license or certification.
+        #     Optional. Description of license or certification.
         #
         #     Number of characters allowed is 100,000.
         class Certification; end
@@ -520,29 +481,21 @@ module Google
         # Resource that represents a skill of a candidate.
         # @!attribute [rw] display_name
         #   @return [String]
-        #     Optional.
-        #
-        #     Skill display name.
+        #     Optional. Skill display name.
         #
         #     For example, "Java", "Python".
         #
         #     Number of characters allowed is 100.
         # @!attribute [rw] last_used_date
         #   @return [Google::Type::Date]
-        #     Optional.
-        #
-        #     The last time this skill was used.
+        #     Optional. The last time this skill was used.
         # @!attribute [rw] level
         #   @return [Google::Cloud::Talent::V4beta1::SkillProficiencyLevel]
-        #     Optional.
-        #
-        #     Skill proficiency level which indicates how proficient the candidate is at
-        #     this skill.
+        #     Optional. Skill proficiency level which indicates how proficient the
+        #     candidate is at this skill.
         # @!attribute [rw] context
         #   @return [String]
-        #     Optional.
-        #
-        #     A paragraph describes context of this skill.
+        #     Optional. A paragraph describes context of this skill.
         #
         #     Number of characters allowed is 100,000.
         # @!attribute [rw] skill_name_snippet
@@ -557,15 +510,11 @@ module Google
         # Details of an interview.
         # @!attribute [rw] rating
         #   @return [Google::Cloud::Talent::V4beta1::Rating]
-        #     Optional.
-        #
-        #     The rating on this interview.
+        #     Optional. The rating on this interview.
         # @!attribute [rw] outcome
         #   @return [Google::Cloud::Talent::V4beta1::Outcome]
-        #     Required.
-        #
-        #     The overall decision resulting from this interview (positive, negative,
-        #     nuetral).
+        #     Required. The overall decision resulting from this interview (positive,
+        #     negative, nuetral).
         class Interview; end
 
         # The details of the score received for an assessment or interview.

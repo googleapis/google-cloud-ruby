@@ -22,9 +22,7 @@ module Google
         # Create job request.
         # @!attribute [rw] parent
         #   @return [String]
-        #     Required.
-        #
-        #     The resource name of the tenant under which the job is created.
+        #     Required. The resource name of the tenant under which the job is created.
         #
         #     The format is "projects/{project_id}/tenants/{tenant_id}", for example,
         #     "projects/api-test-project/tenant/foo".
@@ -33,9 +31,7 @@ module Google
         #     example, "projects/api-test-project".
         # @!attribute [rw] job
         #   @return [Google::Cloud::Talent::V4beta1::Job]
-        #     Required.
-        #
-        #     The Job to be created.
+        #     Required. The Job to be created.
         class CreateJobRequest; end
 
         # Input only.
@@ -43,9 +39,7 @@ module Google
         # Get job request.
         # @!attribute [rw] name
         #   @return [String]
-        #     Required.
-        #
-        #     The resource name of the job to retrieve.
+        #     Required. The resource name of the job to retrieve.
         #
         #     The format is
         #     "projects/{project_id}/tenants/{tenant_id}/jobs/{job_id}", for
@@ -60,9 +54,7 @@ module Google
         # Update job request.
         # @!attribute [rw] job
         #   @return [Google::Cloud::Talent::V4beta1::Job]
-        #     Required.
-        #
-        #     The Job to be updated.
+        #     Required. The Job to be updated.
         # @!attribute [rw] update_mask
         #   @return [Google::Protobuf::FieldMask]
         #     Optional but strongly recommended to be provided for the best service
@@ -82,9 +74,7 @@ module Google
         # Delete job request.
         # @!attribute [rw] name
         #   @return [String]
-        #     Required.
-        #
-        #     The resource name of the job to be deleted.
+        #     Required. The resource name of the job to be deleted.
         #
         #     The format is
         #     "projects/{project_id}/tenants/{tenant_id}/jobs/{job_id}", for
@@ -99,9 +89,7 @@ module Google
         # Batch delete jobs request.
         # @!attribute [rw] parent
         #   @return [String]
-        #     Required.
-        #
-        #     The resource name of the tenant under which the job is created.
+        #     Required. The resource name of the tenant under which the job is created.
         #
         #     The format is "projects/{project_id}/tenants/{tenant_id}", for example,
         #     "projects/api-test-project/tenant/foo".
@@ -110,9 +98,7 @@ module Google
         #     example, "projects/api-test-project".
         # @!attribute [rw] filter
         #   @return [String]
-        #     Required.
-        #
-        #     The filter string specifies the jobs to be deleted.
+        #     Required. The filter string specifies the jobs to be deleted.
         #
         #     Supported operator: =, AND
         #
@@ -130,9 +116,7 @@ module Google
         # List jobs request.
         # @!attribute [rw] parent
         #   @return [String]
-        #     Required.
-        #
-        #     The resource name of the tenant under which the job is created.
+        #     Required. The resource name of the tenant under which the job is created.
         #
         #     The format is "projects/{project_id}/tenants/{tenant_id}", for example,
         #     "projects/api-test-project/tenant/foo".
@@ -141,9 +125,7 @@ module Google
         #     example, "projects/api-test-project".
         # @!attribute [rw] filter
         #   @return [String]
-        #     Required.
-        #
-        #     The filter string specifies the jobs to be enumerated.
+        #     Required. The filter string specifies the jobs to be enumerated.
         #
         #     Supported operator: =, AND
         #
@@ -163,14 +145,10 @@ module Google
         #       status = "EXPIRED"
         # @!attribute [rw] page_token
         #   @return [String]
-        #     Optional.
-        #
-        #     The starting point of a query result.
+        #     Optional. The starting point of a query result.
         # @!attribute [rw] page_size
         #   @return [Integer]
-        #     Optional.
-        #
-        #     The maximum number of jobs to be returned per page of results.
+        #     Optional. The maximum number of jobs to be returned per page of results.
         #
         #     If {Google::Cloud::Talent::V4beta1::ListJobsRequest#job_view job_view} is set
         #     to
@@ -181,9 +159,7 @@ module Google
         #     Default is 100 if empty or a number < 1 is specified.
         # @!attribute [rw] job_view
         #   @return [Google::Cloud::Talent::V4beta1::JobView]
-        #     Optional.
-        #
-        #     The desired job attributes returned for jobs in the
+        #     Optional. The desired job attributes returned for jobs in the
         #     search response. Defaults to
         #     {Google::Cloud::Talent::V4beta1::JobView::JOB_VIEW_FULL JobView::JOB_VIEW_FULL}
         #     if no value is specified.
@@ -212,9 +188,7 @@ module Google
         # The Request body of the `SearchJobs` call.
         # @!attribute [rw] parent
         #   @return [String]
-        #     Required.
-        #
-        #     The resource name of the tenant to search within.
+        #     Required. The resource name of the tenant to search within.
         #
         #     The format is "projects/{project_id}/tenants/{tenant_id}", for example,
         #     "projects/api-test-project/tenant/foo".
@@ -223,39 +197,30 @@ module Google
         #     example, "projects/api-test-project".
         # @!attribute [rw] search_mode
         #   @return [Google::Cloud::Talent::V4beta1::SearchJobsRequest::SearchMode]
-        #     Optional.
-        #
-        #     Mode of a search.
+        #     Optional. Mode of a search.
         #
         #     Defaults to
         #     {Google::Cloud::Talent::V4beta1::SearchJobsRequest::SearchMode::JOB_SEARCH SearchMode::JOB_SEARCH}.
         # @!attribute [rw] request_metadata
         #   @return [Google::Cloud::Talent::V4beta1::RequestMetadata]
-        #     Required.
-        #
-        #     The meta information collected about the job searcher, used to improve the
-        #     search quality of the service.. The identifiers, (such as `user_id`) are
-        #     provided by users, and must be unique and consistent.
+        #     Required. The meta information collected about the job searcher, used to
+        #     improve the search quality of the service. The identifiers (such as
+        #     `user_id`) are provided by users, and must be unique and consistent.
         # @!attribute [rw] job_query
         #   @return [Google::Cloud::Talent::V4beta1::JobQuery]
-        #     Optional.
-        #
-        #     Query used to search against jobs, such as keyword, location filters, etc.
+        #     Optional. Query used to search against jobs, such as keyword, location
+        #     filters, etc.
         # @!attribute [rw] enable_broadening
         #   @return [true, false]
-        #     Optional.
-        #
-        #     Controls whether to broaden the search when it produces sparse results.
-        #     Broadened queries append results to the end of the matching results
-        #     list.
+        #     Optional. Controls whether to broaden the search when it produces sparse
+        #     results. Broadened queries append results to the end of the matching
+        #     results list.
         #
         #     Defaults to false.
         # @!attribute [rw] require_precise_result_size
         #   @return [true, false]
-        #     Optional.
-        #
-        #     Controls if the search job request requires the return of a precise
-        #     count of the first 300 results. Setting this to `true` ensures
+        #     Optional. Controls if the search job request requires the return of a
+        #     precise count of the first 300 results. Setting this to `true` ensures
         #     consistency in the number of results per page. Best practice is to set this
         #     value to true if a client allows users to jump directly to a
         #     non-sequential search results page.
@@ -265,9 +230,8 @@ module Google
         #     Defaults to false.
         # @!attribute [rw] histogram_queries
         #   @return [Array<Google::Cloud::Talent::V4beta1::HistogramQuery>]
-        #     Optional.
-        #
-        #     An expression specifies a histogram request against matching jobs.
+        #     Optional. An expression specifies a histogram request against matching
+        #     jobs.
         #
         #     Expression syntax is an aggregation function call with histogram facets and
         #     other options.
@@ -376,18 +340,14 @@ module Google
         #       [bucket(MIN, 0, "negative"), bucket(0, MAX, "non-negative"])`
         # @!attribute [rw] job_view
         #   @return [Google::Cloud::Talent::V4beta1::JobView]
-        #     Optional.
-        #
-        #     The desired job attributes returned for jobs in the search response.
-        #     Defaults to
+        #     Optional. The desired job attributes returned for jobs in the search
+        #     response. Defaults to
         #     {Google::Cloud::Talent::V4beta1::JobView::JOB_VIEW_SMALL JobView::JOB_VIEW_SMALL}
         #     if no value is specified.
         # @!attribute [rw] offset
         #   @return [Integer]
-        #     Optional.
-        #
-        #     An integer that specifies the current offset (that is, starting result
-        #     location, amongst the jobs deemed by the API as relevant) in search
+        #     Optional. An integer that specifies the current offset (that is, starting
+        #     result location, amongst the jobs deemed by the API as relevant) in search
         #     results. This field is only considered if
         #     {Google::Cloud::Talent::V4beta1::SearchJobsRequest#page_token page_token} is
         #     unset.
@@ -398,80 +358,76 @@ module Google
         #     from the second page).
         # @!attribute [rw] page_size
         #   @return [Integer]
-        #     Optional.
-        #
-        #     A limit on the number of jobs returned in the search results.
+        #     Optional. A limit on the number of jobs returned in the search results.
         #     Increasing this value above the default value of 10 can increase search
         #     response time. The value can be between 1 and 100.
         # @!attribute [rw] page_token
         #   @return [String]
-        #     Optional.
-        #
-        #     The token specifying the current offset within
+        #     Optional. The token specifying the current offset within
         #     search results. See
         #     {Google::Cloud::Talent::V4beta1::SearchJobsResponse#next_page_token SearchJobsResponse#next_page_token}
         #     for an explanation of how to obtain the next set of query results.
         # @!attribute [rw] order_by
         #   @return [String]
-        #     Optional.
-        #
-        #     The criteria determining how search results are sorted. Default is
-        #     "relevance desc".
+        #     Optional. The criteria determining how search results are sorted. Default
+        #     is
+        #     `"relevance desc"`.
         #
         #     Supported options are:
         #
-        #     * "relevance desc": By relevance descending, as determined by the API
+        #     * `"relevance desc"`: By relevance descending, as determined by the API
         #       algorithms. Relevance thresholding of query results is only available
         #       with this ordering.
-        #     * "posting`_`publish`_`time desc": By
+        #     * `"posting_publish_time desc"`: By
         #       {Google::Cloud::Talent::V4beta1::Job#posting_publish_time Job#posting_publish_time}
         #       descending.
-        #     * "posting`_`update`_`time desc": By
+        #     * `"posting_update_time desc"`: By
         #       {Google::Cloud::Talent::V4beta1::Job#posting_update_time Job#posting_update_time}
         #       descending.
-        #     * "title": By {Google::Cloud::Talent::V4beta1::Job#title Job#title} ascending.
-        #     * "title desc": By {Google::Cloud::Talent::V4beta1::Job#title Job#title}
+        #     * `"title"`: By {Google::Cloud::Talent::V4beta1::Job#title Job#title}
+        #       ascending.
+        #     * `"title desc"`: By {Google::Cloud::Talent::V4beta1::Job#title Job#title}
         #       descending.
-        #     * "annualized`_`base`_`compensation": By job's
+        #     * `"annualized_base_compensation"`: By job's
         #       {Google::Cloud::Talent::V4beta1::CompensationInfo#annualized_base_compensation_range CompensationInfo#annualized_base_compensation_range}
         #       ascending. Jobs whose annualized base compensation is unspecified are put
         #       at the end of search results.
-        #     * "annualized`_`base`_`compensation desc": By job's
+        #     * `"annualized_base_compensation desc"`: By job's
         #       {Google::Cloud::Talent::V4beta1::CompensationInfo#annualized_base_compensation_range CompensationInfo#annualized_base_compensation_range}
         #       descending. Jobs whose annualized base compensation is unspecified are
         #       put at the end of search results.
-        #     * "annualized`_`total`_`compensation": By job's
+        #     * `"annualized_total_compensation"`: By job's
         #       {Google::Cloud::Talent::V4beta1::CompensationInfo#annualized_total_compensation_range CompensationInfo#annualized_total_compensation_range}
         #       ascending. Jobs whose annualized base compensation is unspecified are put
         #       at the end of search results.
-        #     * "annualized`_`total`_`compensation desc": By job's
+        #     * `"annualized_total_compensation desc"`: By job's
         #       {Google::Cloud::Talent::V4beta1::CompensationInfo#annualized_total_compensation_range CompensationInfo#annualized_total_compensation_range}
         #       descending. Jobs whose annualized base compensation is unspecified are
         #       put at the end of search results.
-        #     * "custom`_`ranking desc": By the relevance score adjusted to the
+        #     * `"custom_ranking desc"`: By the relevance score adjusted to the
         #       {Google::Cloud::Talent::V4beta1::SearchJobsRequest::CustomRankingInfo#ranking_expression SearchJobsRequest::CustomRankingInfo#ranking_expression}
         #       with weight factor assigned by
         #       {Google::Cloud::Talent::V4beta1::SearchJobsRequest::CustomRankingInfo#importance_level SearchJobsRequest::CustomRankingInfo#importance_level}
         #       in descending order.
-        #     * "location`_`distance": By the distance between the location on jobs and
-        #       locations specified in the
-        #       {Google::Cloud::Talent::V4beta1::JobQuery#location_filters JobQuery#location_filters}.
-        #       When this order is selected, the
-        #       {Google::Cloud::Talent::V4beta1::JobQuery#location_filters JobQuery#location_filters}
-        #       must not be empty. When a job has multiple locations, the location
-        #       closest to one of the locations specified in the location filter will be
-        #       used to calculate location distance. Distance is calculated by the
-        #       distance between two lat/long coordinates, with a precision of 10e-4
-        #       degrees (11.3 meters). Jobs that don't have locations specified will be
-        #       ranked below jobs having locations. Diversification strategy is still
-        #       applied unless explicitly disabled in
-        #       {Google::Cloud::Talent::V4beta1::SearchJobsRequest#diversification_level SearchJobsRequest#diversification_level}.
+        #     * Location sorting: Use the special syntax to order jobs by distance:<br>
+        #       `"distance_from('Hawaii')"`: Order by distance from Hawaii.<br>
+        #       `"distance_from(19.89, 155.5)"`: Order by distance from a coordinate.<br>
+        #       `"distance_from('Hawaii'), distance_from('Puerto Rico')"`: Order by
+        #       multiple locations. See details below.<br>
+        #       `"distance_from('Hawaii'), distance_from(19.89, 155.5)"`: Order by
+        #       multiple locations. See details below.<br>
+        #       The string can have a maximum of 256 characters. When multiple distance
+        #       centers are provided, a job that is close to any of the distance centers
+        #       would have a high rank. When a job has multiple locations, the job
+        #       location closest to one of the distance centers will be used. Jobs that
+        #       don't have locations will be ranked at the bottom. Distance is calculated
+        #       with a precision of 11.3 meters (37.4 feet). Diversification strategy is
+        #       still applied unless explicitly disabled in
+        #       {Google::Cloud::Talent::V4beta1::SearchJobsRequest#diversification_level diversification_level}.
         # @!attribute [rw] diversification_level
         #   @return [Google::Cloud::Talent::V4beta1::SearchJobsRequest::DiversificationLevel]
-        #     Optional.
-        #
-        #     Controls whether highly similar jobs are returned next to each other in
-        #     the search results. Jobs are identified as highly similar based on
+        #     Optional. Controls whether highly similar jobs are returned next to each
+        #     other in the search results. Jobs are identified as highly similar based on
         #     their titles, job categories, and locations. Highly similar results are
         #     clustered so that only one representative job of the cluster is
         #     displayed to the job seeker higher up in the results, with the other jobs
@@ -482,15 +438,11 @@ module Google
         #     if no value is specified.
         # @!attribute [rw] custom_ranking_info
         #   @return [Google::Cloud::Talent::V4beta1::SearchJobsRequest::CustomRankingInfo]
-        #     Optional.
-        #
-        #     Controls over how job documents get ranked on top of existing relevance
-        #     score (determined by API algorithm).
+        #     Optional. Controls over how job documents get ranked on top of existing
+        #     relevance score (determined by API algorithm).
         # @!attribute [rw] disable_keyword_match
         #   @return [true, false]
-        #     Optional.
-        #
-        #     Controls whether to disable exact keyword match on
+        #     Optional. Controls whether to disable exact keyword match on
         #     {Google::Cloud::Talent::V4beta1::Job#title Job#title},
         #     {Google::Cloud::Talent::V4beta1::Job#description Job#description},
         #     {Google::Cloud::Talent::V4beta1::Job#company_display_name Job#company_display_name},
@@ -521,20 +473,17 @@ module Google
           # {Google::Cloud::Talent::V4beta1::SearchJobsRequest SearchJobsRequest}.
           # @!attribute [rw] importance_level
           #   @return [Google::Cloud::Talent::V4beta1::SearchJobsRequest::CustomRankingInfo::ImportanceLevel]
-          #     Required.
-          #
-          #     Controls over how important the score of
+          #     Required. Controls over how important the score of
           #     {Google::Cloud::Talent::V4beta1::SearchJobsRequest::CustomRankingInfo#ranking_expression CustomRankingInfo#ranking_expression}
           #     gets applied to job's final ranking position.
           #
           #     An error is thrown if not specified.
           # @!attribute [rw] ranking_expression
           #   @return [String]
-          #     Required.
-          #
-          #     Controls over how job documents get ranked on top of existing relevance
-          #     score (determined by API algorithm). The product of ranking expression
-          #     and relevance score is used to determine job's final ranking position.
+          #     Required. Controls over how job documents get ranked on top of existing
+          #     relevance score (determined by API algorithm). The product of ranking
+          #     expression and relevance score is used to determine job's final ranking
+          #     position.
           #
           #     The syntax for this expression is a subset of Google SQL syntax.
           #
@@ -730,9 +679,7 @@ module Google
         # Request to create a batch of jobs.
         # @!attribute [rw] parent
         #   @return [String]
-        #     Required.
-        #
-        #     The resource name of the tenant under which the job is created.
+        #     Required. The resource name of the tenant under which the job is created.
         #
         #     The format is "projects/{project_id}/tenants/{tenant_id}", for example,
         #     "projects/api-test-project/tenant/foo".
@@ -741,17 +688,13 @@ module Google
         #     example, "projects/api-test-project".
         # @!attribute [rw] jobs
         #   @return [Array<Google::Cloud::Talent::V4beta1::Job>]
-        #     Required.
-        #
-        #     The jobs to be created.
+        #     Required. The jobs to be created.
         class BatchCreateJobsRequest; end
 
         # Request to update a batch of jobs.
         # @!attribute [rw] parent
         #   @return [String]
-        #     Required.
-        #
-        #     The resource name of the tenant under which the job is created.
+        #     Required. The resource name of the tenant under which the job is created.
         #
         #     The format is "projects/{project_id}/tenants/{tenant_id}", for example,
         #     "projects/api-test-project/tenant/foo".
@@ -760,9 +703,7 @@ module Google
         #     example, "projects/api-test-project".
         # @!attribute [rw] jobs
         #   @return [Array<Google::Cloud::Talent::V4beta1::Job>]
-        #     Required.
-        #
-        #     The jobs to be updated.
+        #     Required. The jobs to be updated.
         # @!attribute [rw] update_mask
         #   @return [Google::Protobuf::FieldMask]
         #     Optional but strongly recommended to be provided for the best service

@@ -30,9 +30,7 @@ module Google
         #     "projects/api-test-project/tenants/foo/profiles/bar/applications/baz".
         # @!attribute [rw] external_id
         #   @return [String]
-        #     Required.
-        #
-        #     Client side application identifier, used to uniquely identify the
+        #     Required. Client side application identifier, used to uniquely identify the
         #     application.
         #
         #     The maximum number of allowed characters is 255.
@@ -63,57 +61,40 @@ module Google
         #     for example, "projects/api-test-project/tenants/foo/companies/bar".
         # @!attribute [rw] application_date
         #   @return [Google::Type::Date]
-        #     Optional.
-        #
-        #     The application date.
+        #     Optional. The application date.
         # @!attribute [rw] stage
         #   @return [Google::Cloud::Talent::V4beta1::Application::ApplicationStage]
-        #     Required.
-        #
-        #     What is the most recent stage of the application (that is, new, screen,
-        #     send cv, hired, finished work)?  This field is intentionally not
+        #     Required. What is the most recent stage of the application (that is, new,
+        #     screen, send cv, hired, finished work)?  This field is intentionally not
         #     comprehensive of every possible status, but instead, represents statuses
         #     that would be used to indicate to the ML models good / bad matches.
         # @!attribute [rw] state
         #   @return [Google::Cloud::Talent::V4beta1::Application::ApplicationState]
-        #     Optional.
-        #
-        #     The application state.
+        #     Optional. The application state.
         # @!attribute [rw] interviews
         #   @return [Array<Google::Cloud::Talent::V4beta1::Interview>]
-        #     Optional.
-        #
-        #     All interviews (screen, onsite, and so on) conducted as part of this
-        #     application (includes details such as user conducting the interview,
+        #     Optional. All interviews (screen, onsite, and so on) conducted as part of
+        #     this application (includes details such as user conducting the interview,
         #     timestamp, feedback, and so on).
         # @!attribute [rw] referral
         #   @return [Google::Protobuf::BoolValue]
-        #     Optional.
-        #
-        #     If the candidate is referred by a employee.
+        #     Optional. If the candidate is referred by a employee.
         # @!attribute [rw] create_time
         #   @return [Google::Protobuf::Timestamp]
-        #     Required.
-        #
-        #     Reflects the time that the application was created.
+        #     Required. Reflects the time that the application was created.
         # @!attribute [rw] update_time
         #   @return [Google::Protobuf::Timestamp]
-        #     Optional.
-        #
-        #     The last update timestamp.
+        #     Optional. The last update timestamp.
         # @!attribute [rw] outcome_notes
         #   @return [String]
-        #     Optional.
-        #
-        #     Free text reason behind the recruitement outcome (for example, reason for
-        #     withdraw / reject, reason for an unsuccessful finish, and so on).
+        #     Optional. Free text reason behind the recruitement outcome (for example,
+        #     reason for withdraw / reject, reason for an unsuccessful finish, and so
+        #     on).
         #
         #     Number of characters allowed is 100.
         # @!attribute [rw] outcome
         #   @return [Google::Cloud::Talent::V4beta1::Outcome]
-        #     Optional.
-        #
-        #     Outcome positiveness shows how positive the outcome is.
+        #     Optional. Outcome positiveness shows how positive the outcome is.
         # @!attribute [rw] is_match
         #   @return [Google::Protobuf::BoolValue]
         #     Output only. Indicates whether this job application is a match to

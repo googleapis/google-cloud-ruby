@@ -20,26 +20,21 @@ module Google
         # The Request of the CreateApplication method.
         # @!attribute [rw] parent
         #   @return [String]
-        #     Required.
-        #
-        #     Resource name of the profile under which the application is created.
+        #     Required. Resource name of the profile under which the application is
+        #     created.
         #
         #     The format is
         #     "projects/{project_id}/tenants/{tenant_id}/profiles/{profile_id}", for
         #     example, "projects/test-project/tenants/test-tenant/profiles/test-profile".
         # @!attribute [rw] application
         #   @return [Google::Cloud::Talent::V4beta1::Application]
-        #     Required.
-        #
-        #     The application to be created.
+        #     Required. The application to be created.
         class CreateApplicationRequest; end
 
         # Request for getting a application by name.
         # @!attribute [rw] name
         #   @return [String]
-        #     Required.
-        #
-        #     The resource name of the application to be retrieved.
+        #     Required. The resource name of the application to be retrieved.
         #
         #     The format is
         #     "projects/{project_id}/tenants/{tenant_id}/profiles/{profile_id}/applications/{application_id}",
@@ -50,27 +45,28 @@ module Google
         # Request for updating a specified application.
         # @!attribute [rw] application
         #   @return [Google::Cloud::Talent::V4beta1::Application]
-        #     Required.
-        #
-        #     The application resource to replace the current resource in the system.
+        #     Required. The application resource to replace the current resource in the
+        #     system.
         # @!attribute [rw] update_mask
         #   @return [Google::Protobuf::FieldMask]
         #     Optional but strongly recommended for the best service
         #     experience.
         #
-        #     If {Google::Cloud::Talent::V4beta1::UpdateApplicationRequest#update_mask update_mask} is provided, only the specified fields in
-        #     {Google::Cloud::Talent::V4beta1::UpdateApplicationRequest#application application} are updated. Otherwise all the fields are updated.
+        #     If
+        #     {Google::Cloud::Talent::V4beta1::UpdateApplicationRequest#update_mask update_mask}
+        #     is provided, only the specified fields in
+        #     {Google::Cloud::Talent::V4beta1::UpdateApplicationRequest#application application}
+        #     are updated. Otherwise all the fields are updated.
         #
         #     A field mask to specify the application fields to be updated. Only
-        #     top level fields of {Google::Cloud::Talent::V4beta1::Application Application} are supported.
+        #     top level fields of {Google::Cloud::Talent::V4beta1::Application Application}
+        #     are supported.
         class UpdateApplicationRequest; end
 
         # Request to delete a application.
         # @!attribute [rw] name
         #   @return [String]
-        #     Required.
-        #
-        #     The resource name of the application to be deleted.
+        #     Required. The resource name of the application to be deleted.
         #
         #     The format is
         #     "projects/{project_id}/tenants/{tenant_id}/profiles/{profile_id}/applications/{application_id}",
@@ -81,23 +77,18 @@ module Google
         # List applications for which the client has ACL visibility.
         # @!attribute [rw] parent
         #   @return [String]
-        #     Required.
-        #
-        #     Resource name of the profile under which the application is created.
+        #     Required. Resource name of the profile under which the application is
+        #     created.
         #
         #     The format is
         #     "projects/{project_id}/tenants/{tenant_id}/profiles/{profile_id}", for
         #     example, "projects/test-project/tenants/test-tenant/profiles/test-profile".
         # @!attribute [rw] page_token
         #   @return [String]
-        #     Optional.
-        #
-        #     The starting indicator from which to return results.
+        #     Optional. The starting indicator from which to return results.
         # @!attribute [rw] page_size
         #   @return [Integer]
-        #     Optional.
-        #
-        #     The maximum number of applications to be returned, at most 100.
+        #     Optional. The maximum number of applications to be returned, at most 100.
         #     Default is 100 if a non-positive number is provided.
         class ListApplicationsRequest; end
 

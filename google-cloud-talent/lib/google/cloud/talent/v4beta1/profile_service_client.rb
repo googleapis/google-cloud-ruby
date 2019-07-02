@@ -274,9 +274,8 @@ module Google
           # Lists profiles by filter. The order is unspecified.
           #
           # @param parent [String]
-          #   Required.
-          #
-          #   The resource name of the tenant under which the job is created.
+          #   Required. The resource name of the tenant under which the profile is
+          #   created.
           #
           #   The format is "projects/{project_id}/tenants/{tenant_id}", for example,
           #   "projects/api-test-project/tenants/foo".
@@ -287,10 +286,8 @@ module Google
           #   performed per-page, this determines the maximum number of
           #   resources in a page.
           # @param read_mask [Google::Protobuf::FieldMask | Hash]
-          #   Optional.
-          #
-          #   A field mask to specify the profile fields to be listed in response.
-          #   All fields are listed if it is unset.
+          #   Optional. A field mask to specify the profile fields to be listed in
+          #   response. All fields are listed if it is unset.
           #
           #   Valid values are:
           #
@@ -346,16 +343,12 @@ module Google
           # Creates and returns a new profile.
           #
           # @param parent [String]
-          #   Required.
-          #
-          #   The name of the tenant this profile belongs to.
+          #   Required. The name of the tenant this profile belongs to.
           #
           #   The format is "projects/{project_id}/tenants/{tenant_id}", for example,
           #   "projects/api-test-project/tenants/foo".
           # @param profile [Google::Cloud::Talent::V4beta1::Profile | Hash]
-          #   Required.
-          #
-          #   The profile to be created.
+          #   Required. The profile to be created.
           #   A hash of the same form as `Google::Cloud::Talent::V4beta1::Profile`
           #   can also be provided.
           # @param options [Google::Gax::CallOptions]
@@ -392,9 +385,7 @@ module Google
           # Gets the specified profile.
           #
           # @param name [String]
-          #   Required.
-          #
-          #   Resource name of the profile to get.
+          #   Required. Resource name of the profile to get.
           #
           #   The format is
           #   "projects/{project_id}/tenants/{tenant_id}/profiles/{profile_id}",
@@ -428,43 +419,39 @@ module Google
           # Updates the specified profile and returns the updated result.
           #
           # @param profile [Google::Cloud::Talent::V4beta1::Profile | Hash]
-          #   Required.
-          #
-          #   Profile to be updated.
+          #   Required. Profile to be updated.
           #   A hash of the same form as `Google::Cloud::Talent::V4beta1::Profile`
           #   can also be provided.
           # @param update_mask [Google::Protobuf::FieldMask | Hash]
-          #   Optional.
-          #
-          #   A field mask to specify the profile fields to update.
+          #   Optional. A field mask to specify the profile fields to update.
           #
           #   A full update is performed if it is unset.
           #
           #   Valid values are:
           #
-          #   * externalId
+          #   * external_id
           #   * source
           #   * uri
-          #   * isHirable
-          #   * createTime
-          #   * updateTime
-          #   * resumeHrxml
-          #   * personNames
+          #   * is_hirable
+          #   * create_time
+          #   * update_time
+          #   * resume
+          #   * person_names
           #   * addresses
-          #   * emailAddresses
-          #   * phoneNumbers
-          #   * personalUris
-          #   * additionalContactInfo
-          #   * employmentRecords
-          #   * educationRecords
+          #   * email_addresses
+          #   * phone_numbers
+          #   * personal_uris
+          #   * additional_contact_info
+          #   * employment_records
+          #   * education_records
           #   * skills
           #   * projects
           #   * publications
           #   * patents
           #   * certifications
-          #   * recruitingNotes
-          #   * customAttributes
-          #   * groupId
+          #   * recruiting_notes
+          #   * custom_attributes
+          #   * group_id
           #   A hash of the same form as `Google::Protobuf::FieldMask`
           #   can also be provided.
           # @param options [Google::Gax::CallOptions]
@@ -502,9 +489,7 @@ module Google
           # associated.
           #
           # @param name [String]
-          #   Required.
-          #
-          #   Resource name of the profile to be deleted.
+          #   Required. Resource name of the profile to be deleted.
           #
           #   The format is
           #   "projects/{project_id}/tenants/{tenant_id}/profiles/{profile_id}",
@@ -545,24 +530,18 @@ module Google
           # for more information.
           #
           # @param parent [String]
-          #   Required.
-          #
-          #   The resource name of the tenant to search within.
+          #   Required. The resource name of the tenant to search within.
           #
           #   The format is "projects/{project_id}/tenants/{tenant_id}", for example,
           #   "projects/api-test-project/tenants/foo".
           # @param request_metadata [Google::Cloud::Talent::V4beta1::RequestMetadata | Hash]
-          #   Required.
-          #
-          #   The meta information collected about the profile search user. This is used
-          #   to improve the search quality of the service. These values are provided by
-          #   users, and must be precise and consistent.
+          #   Required. The meta information collected about the profile search user.
+          #   This is used to improve the search quality of the service. These values are
+          #   provided by users, and must be precise and consistent.
           #   A hash of the same form as `Google::Cloud::Talent::V4beta1::RequestMetadata`
           #   can also be provided.
           # @param profile_query [Google::Cloud::Talent::V4beta1::ProfileQuery | Hash]
-          #   Optional.
-          #
-          #   Search query to execute. See
+          #   Optional. Search query to execute. See
           #   {Google::Cloud::Talent::V4beta1::ProfileQuery ProfileQuery} for more details.
           #   A hash of the same form as `Google::Cloud::Talent::V4beta1::ProfileQuery`
           #   can also be provided.
@@ -573,10 +552,8 @@ module Google
           #   performed per-page, this determines the maximum number of
           #   resources in a page.
           # @param offset [Integer]
-          #   Optional.
-          #
-          #   An integer that specifies the current offset (that is, starting result) in
-          #   search results. This field is only considered if
+          #   Optional. An integer that specifies the current offset (that is, starting
+          #   result) in search results. This field is only considered if
           #   {Google::Cloud::Talent::V4beta1::SearchProfilesRequest#page_token page_token}
           #   is unset.
           #
@@ -586,16 +563,12 @@ module Google
           #   search from the 11th profile. This can be used for pagination, for example
           #   pageSize = 10 and offset = 10 means to search from the second page.
           # @param disable_spell_check [true, false]
-          #   Optional.
-          #
-          #   This flag controls the spell-check feature. If `false`, the
+          #   Optional. This flag controls the spell-check feature. If `false`, the
           #   service attempts to correct a misspelled query.
           #
           #   For example, "enginee" is corrected to "engineer".
           # @param order_by [String]
-          #   Optional.
-          #
-          #   The criteria that determines how search results are sorted.
+          #   Optional. The criteria that determines how search results are sorted.
           #   Defaults is "relevance desc" if no value is specified.
           #
           #   Supported options are:
@@ -625,16 +598,12 @@ module Google
           #     {Google::Cloud::Talent::V4beta1::PersonName::PersonStructuredName#family_name PersonName::PersonStructuredName#family_name}
           #     in ascending order.
           # @param case_sensitive_sort [true, false]
-          #   Optional.
-          #
-          #   When sort by field is based on alphabetical order, sort values case
-          #   sensitively (based on ASCII) when the value is set to true. Default value
-          #   is case in-sensitive sort (false).
+          #   Optional. When sort by field is based on alphabetical order, sort values
+          #   case sensitively (based on ASCII) when the value is set to true. Default
+          #   value is case in-sensitive sort (false).
           # @param histogram_queries [Array<Google::Cloud::Talent::V4beta1::HistogramQuery | Hash>]
-          #   Optional.
-          #
-          #   A list of expressions specifies histogram requests against matching
-          #   profiles for
+          #   Optional. A list of expressions specifies histogram requests against
+          #   matching profiles for
           #   {Google::Cloud::Talent::V4beta1::SearchProfilesRequest SearchProfilesRequest}.
           #
           #   The expression syntax looks like a function definition with optional
@@ -717,6 +686,33 @@ module Google
           #     [bucket(MIN, 0, "negative"), bucket(0, MAX, "non-negative")])
           #   A hash of the same form as `Google::Cloud::Talent::V4beta1::HistogramQuery`
           #   can also be provided.
+          # @param result_set_id [String]
+          #   Optional. An id that uniquely identifies the result set of a
+          #   {SearchProfiles} call.  The id should be retrieved from the
+          #   {Google::Cloud::Talent::V4beta1::SearchProfilesResponse SearchProfilesResponse}
+          #   message returned from a previous invocation of {SearchProfiles}.
+          #
+          #   A result set is an ordered list of search results.
+          #
+          #   If this field is not set, a new result set is computed based on the
+          #   {Google::Cloud::Talent::V4beta1::SearchProfilesRequest#profile_query profile_query}.
+          #   A new
+          #   {Google::Cloud::Talent::V4beta1::SearchProfilesRequest#result_set_id result_set_id}
+          #   is returned as a handle to access this result set.
+          #
+          #   If this field is set, the service will ignore the resource and
+          #   {Google::Cloud::Talent::V4beta1::SearchProfilesRequest#profile_query profile_query}
+          #   values, and simply retrieve a page of results from the corresponding result
+          #   set.  In this case, one and only one of [page_token] or [offset] must be
+          #   set.
+          #
+          #   A typical use case is to invoke
+          #   {Google::Cloud::Talent::V4beta1::SearchProfilesRequest SearchProfilesRequest}
+          #   without this field, then use the resulting
+          #   {Google::Cloud::Talent::V4beta1::SearchProfilesRequest#result_set_id result_set_id}
+          #   in
+          #   {Google::Cloud::Talent::V4beta1::SearchProfilesResponse SearchProfilesResponse}
+          #   to page through the results.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -761,6 +757,7 @@ module Google
               order_by: nil,
               case_sensitive_sort: nil,
               histogram_queries: nil,
+              result_set_id: nil,
               options: nil,
               &block
             req = {
@@ -772,7 +769,8 @@ module Google
               disable_spell_check: disable_spell_check,
               order_by: order_by,
               case_sensitive_sort: case_sensitive_sort,
-              histogram_queries: histogram_queries
+              histogram_queries: histogram_queries,
+              result_set_id: result_set_id
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Cloud::Talent::V4beta1::SearchProfilesRequest)
             @search_profiles.call(req, options, &block)

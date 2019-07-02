@@ -206,9 +206,7 @@ module Google
           # about self service tools.
           #
           # @param parent [String]
-          #   Required.
-          #
-          #   Resource name of the tenant under which the event is created.
+          #   Required. Resource name of the tenant under which the event is created.
           #
           #   The format is "projects/{project_id}/tenants/{tenant_id}", for example,
           #   "projects/api-test-project/tenant/foo".
@@ -216,10 +214,8 @@ module Google
           #   Tenant id is optional and a default tenant is created if unspecified, for
           #   example, "projects/api-test-project".
           # @param client_event [Google::Cloud::Talent::V4beta1::ClientEvent | Hash]
-          #   Required.
-          #
-          #   Events issued when end user interacts with customer's application that
-          #   uses Cloud Talent Solution.
+          #   Required. Events issued when end user interacts with customer's application
+          #   that uses Cloud Talent Solution.
           #   A hash of the same form as `Google::Cloud::Talent::V4beta1::ClientEvent`
           #   can also be provided.
           # @param options [Google::Gax::CallOptions]
