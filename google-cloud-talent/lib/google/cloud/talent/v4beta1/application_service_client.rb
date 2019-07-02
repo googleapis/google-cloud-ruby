@@ -266,17 +266,14 @@ module Google
           # Creates a new application entity.
           #
           # @param parent [String]
-          #   Required.
-          #
-          #   Resource name of the profile under which the application is created.
+          #   Required. Resource name of the profile under which the application is
+          #   created.
           #
           #   The format is
           #   "projects/{project_id}/tenants/{tenant_id}/profiles/{profile_id}", for
           #   example, "projects/test-project/tenants/test-tenant/profiles/test-profile".
           # @param application [Google::Cloud::Talent::V4beta1::Application | Hash]
-          #   Required.
-          #
-          #   The application to be created.
+          #   Required. The application to be created.
           #   A hash of the same form as `Google::Cloud::Talent::V4beta1::Application`
           #   can also be provided.
           # @param options [Google::Gax::CallOptions]
@@ -313,9 +310,7 @@ module Google
           # Retrieves specified application.
           #
           # @param name [String]
-          #   Required.
-          #
-          #   The resource name of the application to be retrieved.
+          #   Required. The resource name of the application to be retrieved.
           #
           #   The format is
           #   "projects/{project_id}/tenants/{tenant_id}/profiles/{profile_id}/applications/{application_id}",
@@ -350,20 +345,23 @@ module Google
           # Updates specified application.
           #
           # @param application [Google::Cloud::Talent::V4beta1::Application | Hash]
-          #   Required.
-          #
-          #   The application resource to replace the current resource in the system.
+          #   Required. The application resource to replace the current resource in the
+          #   system.
           #   A hash of the same form as `Google::Cloud::Talent::V4beta1::Application`
           #   can also be provided.
           # @param update_mask [Google::Protobuf::FieldMask | Hash]
           #   Optional but strongly recommended for the best service
           #   experience.
           #
-          #   If {Google::Cloud::Talent::V4beta1::UpdateApplicationRequest#update_mask update_mask} is provided, only the specified fields in
-          #   {Google::Cloud::Talent::V4beta1::UpdateApplicationRequest#application application} are updated. Otherwise all the fields are updated.
+          #   If
+          #   {Google::Cloud::Talent::V4beta1::UpdateApplicationRequest#update_mask update_mask}
+          #   is provided, only the specified fields in
+          #   {Google::Cloud::Talent::V4beta1::UpdateApplicationRequest#application application}
+          #   are updated. Otherwise all the fields are updated.
           #
           #   A field mask to specify the application fields to be updated. Only
-          #   top level fields of {Google::Cloud::Talent::V4beta1::Application Application} are supported.
+          #   top level fields of {Google::Cloud::Talent::V4beta1::Application Application}
+          #   are supported.
           #   A hash of the same form as `Google::Protobuf::FieldMask`
           #   can also be provided.
           # @param options [Google::Gax::CallOptions]
@@ -399,9 +397,7 @@ module Google
           # Deletes specified application.
           #
           # @param name [String]
-          #   Required.
-          #
-          #   The resource name of the application to be deleted.
+          #   Required. The resource name of the application to be deleted.
           #
           #   The format is
           #   "projects/{project_id}/tenants/{tenant_id}/profiles/{profile_id}/applications/{application_id}",
@@ -436,9 +432,8 @@ module Google
           # Lists all applications associated with the profile.
           #
           # @param parent [String]
-          #   Required.
-          #
-          #   Resource name of the profile under which the application is created.
+          #   Required. Resource name of the profile under which the application is
+          #   created.
           #
           #   The format is
           #   "projects/{project_id}/tenants/{tenant_id}/profiles/{profile_id}", for

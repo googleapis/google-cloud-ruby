@@ -5,6 +5,7 @@
 require 'google/protobuf'
 
 require 'google/api/annotations_pb'
+require 'google/api/client_pb'
 require 'google/cloud/talent/v4beta1/common_pb'
 require 'google/cloud/talent/v4beta1/filters_pb'
 require 'google/cloud/talent/v4beta1/histogram_pb'
@@ -47,6 +48,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :order_by, :string, 8
     optional :case_sensitive_sort, :bool, 9
     repeated :histogram_queries, :message, 10, "google.cloud.talent.v4beta1.HistogramQuery"
+    optional :result_set_id, :string, 12
   end
   add_message "google.cloud.talent.v4beta1.SearchProfilesResponse" do
     optional :estimated_total_size, :int64, 1
@@ -55,6 +57,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :next_page_token, :string, 4
     repeated :histogram_query_results, :message, 5, "google.cloud.talent.v4beta1.HistogramQueryResult"
     repeated :summarized_profiles, :message, 6, "google.cloud.talent.v4beta1.SummarizedProfile"
+    optional :result_set_id, :string, 7
   end
   add_message "google.cloud.talent.v4beta1.SummarizedProfile" do
     repeated :profiles, :message, 1, "google.cloud.talent.v4beta1.Profile"

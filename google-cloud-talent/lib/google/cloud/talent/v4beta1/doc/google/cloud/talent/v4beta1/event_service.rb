@@ -20,9 +20,7 @@ module Google
         # The report event request.
         # @!attribute [rw] parent
         #   @return [String]
-        #     Required.
-        #
-        #     Resource name of the tenant under which the event is created.
+        #     Required. Resource name of the tenant under which the event is created.
         #
         #     The format is "projects/{project_id}/tenants/{tenant_id}", for example,
         #     "projects/api-test-project/tenant/foo".
@@ -31,10 +29,8 @@ module Google
         #     example, "projects/api-test-project".
         # @!attribute [rw] client_event
         #   @return [Google::Cloud::Talent::V4beta1::ClientEvent]
-        #     Required.
-        #
-        #     Events issued when end user interacts with customer's application that
-        #     uses Cloud Talent Solution.
+        #     Required. Events issued when end user interacts with customer's application
+        #     that uses Cloud Talent Solution.
         class CreateClientEventRequest; end
       end
     end

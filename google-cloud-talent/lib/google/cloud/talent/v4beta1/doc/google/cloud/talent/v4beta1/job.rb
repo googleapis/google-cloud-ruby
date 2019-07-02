@@ -40,9 +40,7 @@ module Google
         #     value is unique.
         # @!attribute [rw] company
         #   @return [String]
-        #     Required.
-        #
-        #     The resource name of the company listing the job.
+        #     Required. The resource name of the company listing the job.
         #
         #     The format is
         #     "projects/{project_id}/tenants/{tenant_id}/companies/{company_id}", for
@@ -52,12 +50,10 @@ module Google
         #     example, "projects/api-test-project/companies/bar".
         # @!attribute [rw] requisition_id
         #   @return [String]
-        #     Required.
-        #
-        #     The requisition ID, also referred to as the posting ID, is assigned by the
-        #     client to identify a job. This field is intended to be used by clients
-        #     for client identification and tracking of postings. A job isn't allowed
-        #     to be created if there is another job with the same
+        #     Required. The requisition ID, also referred to as the posting ID, is
+        #     assigned by the client to identify a job. This field is intended to be used
+        #     by clients for client identification and tracking of postings. A job isn't
+        #     allowed to be created if there is another job with the same
         #     {Google::Cloud::Talent::V4beta1::Job#name company},
         #     {Google::Cloud::Talent::V4beta1::Job#language_code language_code} and
         #     {Google::Cloud::Talent::V4beta1::Job#requisition_id requisition_id}.
@@ -65,18 +61,14 @@ module Google
         #     The maximum number of allowed characters is 255.
         # @!attribute [rw] title
         #   @return [String]
-        #     Required.
-        #
-        #     The title of the job, such as "Software Engineer"
+        #     Required. The title of the job, such as "Software Engineer"
         #
         #     The maximum number of allowed characters is 500.
         # @!attribute [rw] description
         #   @return [String]
-        #     Required.
-        #
-        #     The description of the job, which typically includes a multi-paragraph
-        #     description of the company and related information. Separate fields are
-        #     provided on the job object for
+        #     Required. The description of the job, which typically includes a
+        #     multi-paragraph description of the company and related information.
+        #     Separate fields are provided on the job object for
         #     {Google::Cloud::Talent::V4beta1::Job#responsibilities responsibilities},
         #     {Google::Cloud::Talent::V4beta1::Job#qualifications qualifications}, and other
         #     job characteristics. Use of these separate job fields is recommended.
@@ -110,26 +102,18 @@ module Google
         #     The maximum number of allowed characters is 500.
         # @!attribute [rw] application_info
         #   @return [Google::Cloud::Talent::V4beta1::Job::ApplicationInfo]
-        #     Optional.
-        #
-        #     Job application information.
+        #     Optional. Job application information.
         # @!attribute [rw] job_benefits
         #   @return [Array<Google::Cloud::Talent::V4beta1::JobBenefit>]
-        #     Optional.
-        #
-        #     The benefits included with the job.
+        #     Optional. The benefits included with the job.
         # @!attribute [rw] compensation_info
         #   @return [Google::Cloud::Talent::V4beta1::CompensationInfo]
-        #     Optional.
-        #
-        #     Job compensation information (a.k.a. "pay rate") i.e., the compensation
-        #     that will paid to the employee.
+        #     Optional. Job compensation information (a.k.a. "pay rate") i.e., the
+        #     compensation that will paid to the employee.
         # @!attribute [rw] custom_attributes
         #   @return [Hash{String => Google::Cloud::Talent::V4beta1::CustomAttribute}]
-        #     Optional.
-        #
-        #     A map of fields to hold both filterable and non-filterable custom job
-        #     attributes that are not covered by the provided structured fields.
+        #     Optional. A map of fields to hold both filterable and non-filterable custom
+        #     job attributes that are not covered by the provided structured fields.
         #
         #     The keys of the map are strings up to 64 bytes and must match the
         #     pattern: [a-zA-Z][a-zA-Z0-9_]*. For example, key0LikeThis or
@@ -142,37 +126,28 @@ module Google
         #     is 50KB.
         # @!attribute [rw] degree_types
         #   @return [Array<Google::Cloud::Talent::V4beta1::DegreeType>]
-        #     Optional.
-        #
-        #     The desired education degrees for the job, such as Bachelors, Masters.
+        #     Optional. The desired education degrees for the job, such as Bachelors,
+        #     Masters.
         # @!attribute [rw] department
         #   @return [String]
-        #     Optional.
-        #
-        #     The department or functional area within the company with the open
-        #     position.
+        #     Optional. The department or functional area within the company with the
+        #     open position.
         #
         #     The maximum number of allowed characters is 255.
         # @!attribute [rw] employment_types
         #   @return [Array<Google::Cloud::Talent::V4beta1::EmploymentType>]
-        #     Optional.
-        #
-        #     The employment type(s) of a job, for example,
+        #     Optional. The employment type(s) of a job, for example,
         #     {Google::Cloud::Talent::V4beta1::EmploymentType::FULL_TIME full time} or
         #     {Google::Cloud::Talent::V4beta1::EmploymentType::PART_TIME part time}.
         # @!attribute [rw] incentives
         #   @return [String]
-        #     Optional.
-        #
-        #     A description of bonus, commission, and other compensation
+        #     Optional. A description of bonus, commission, and other compensation
         #     incentives associated with the job not including salary or pay.
         #
         #     The maximum number of allowed characters is 10,000.
         # @!attribute [rw] language_code
         #   @return [String]
-        #     Optional.
-        #
-        #     The language of the posting. This field is distinct from
+        #     Optional. The language of the posting. This field is distinct from
         #     any requirements for fluency that are associated with the job.
         #
         #     Language codes must be in BCP-47 format, such as "en-US" or "sr-Latn".
@@ -187,14 +162,11 @@ module Google
         #     otherwise defaults to 'en_US'.
         # @!attribute [rw] job_level
         #   @return [Google::Cloud::Talent::V4beta1::JobLevel]
-        #     Optional.
-        #
-        #     The experience level associated with the job, such as "Entry Level".
+        #     Optional. The experience level associated with the job, such as "Entry
+        #     Level".
         # @!attribute [rw] promotion_value
         #   @return [Integer]
-        #     Optional.
-        #
-        #     A promotion value of the job, as determined by the client.
+        #     Optional. A promotion value of the job, as determined by the client.
         #     The value determines the sort order of the jobs returned when searching for
         #     jobs using the featured jobs search call, with higher promotional values
         #     being returned first and ties being resolved by relevance sort. Only the
@@ -203,9 +175,7 @@ module Google
         #     Default value is 0, and negative values are treated as 0.
         # @!attribute [rw] qualifications
         #   @return [String]
-        #     Optional.
-        #
-        #     A description of the qualifications required to perform the
+        #     Optional. A description of the qualifications required to perform the
         #     job. The use of this field is recommended
         #     as an alternative to using the more general
         #     {Google::Cloud::Talent::V4beta1::Job#description description} field.
@@ -216,9 +186,7 @@ module Google
         #     The maximum number of allowed characters is 10,000.
         # @!attribute [rw] responsibilities
         #   @return [String]
-        #     Optional.
-        #
-        #     A description of job responsibilities. The use of this field is
+        #     Optional. A description of job responsibilities. The use of this field is
         #     recommended as an alternative to using the more general
         #     {Google::Cloud::Talent::V4beta1::Job#description description} field.
         #
@@ -228,46 +196,36 @@ module Google
         #     The maximum number of allowed characters is 10,000.
         # @!attribute [rw] posting_region
         #   @return [Google::Cloud::Talent::V4beta1::PostingRegion]
-        #     Optional.
-        #
-        #     The job {Google::Cloud::Talent::V4beta1::PostingRegion PostingRegion} (for
-        #     example, state, country) throughout which the job is available. If this
-        #     field is set, a
-        #     {Google::Cloud::Talent::V4beta1::LocationFilter LocationFilter} in a search
-        #     query within the job region finds this job posting if an exact location
-        #     match isn't specified. If this field is set to
+        #     Optional. The job
+        #     {Google::Cloud::Talent::V4beta1::PostingRegion PostingRegion} (for example,
+        #     state, country) throughout which the job is available. If this field is
+        #     set, a {Google::Cloud::Talent::V4beta1::LocationFilter LocationFilter} in a
+        #     search query within the job region finds this job posting if an exact
+        #     location match isn't specified. If this field is set to
         #     {Google::Cloud::Talent::V4beta1::PostingRegion::NATION PostingRegion::NATION} or
         #     {Google::Cloud::Talent::V4beta1::PostingRegion::ADMINISTRATIVE_AREA PostingRegion::ADMINISTRATIVE_AREA},
         #     setting job {Google::Cloud::Talent::V4beta1::Job#addresses Job#addresses} to
         #     the same location level as this field is strongly recommended.
         # @!attribute [rw] visibility
         #   @return [Google::Cloud::Talent::V4beta1::Visibility]
-        #     Optional.
-        #
-        #     The visibility of the job.
+        #     Optional. The visibility of the job.
         #
         #     Defaults to
         #     {Google::Cloud::Talent::V4beta1::Visibility::ACCOUNT_ONLY Visibility::ACCOUNT_ONLY}
         #     if not specified.
         # @!attribute [rw] job_start_time
         #   @return [Google::Protobuf::Timestamp]
-        #     Optional.
-        #
-        #     The start timestamp of the job in UTC time zone. Typically this field
-        #     is used for contracting engagements. Invalid timestamps are ignored.
+        #     Optional. The start timestamp of the job in UTC time zone. Typically this
+        #     field is used for contracting engagements. Invalid timestamps are ignored.
         # @!attribute [rw] job_end_time
         #   @return [Google::Protobuf::Timestamp]
-        #     Optional.
-        #
-        #     The end timestamp of the job. Typically this field is used for contracting
-        #     engagements. Invalid timestamps are ignored.
+        #     Optional. The end timestamp of the job. Typically this field is used for
+        #     contracting engagements. Invalid timestamps are ignored.
         # @!attribute [rw] posting_publish_time
         #   @return [Google::Protobuf::Timestamp]
-        #     Optional.
-        #
-        #     The timestamp this job posting was most recently published. The default
-        #     value is the time the request arrives at the server. Invalid timestamps are
-        #     ignored.
+        #     Optional. The timestamp this job posting was most recently published. The
+        #     default value is the time the request arrives at the server. Invalid
+        #     timestamps are ignored.
         # @!attribute [rw] posting_expire_time
         #   @return [Google::Protobuf::Timestamp]
         #     Optional but strongly recommended for the best service
@@ -275,12 +233,13 @@ module Google
         #
         #     The expiration timestamp of the job. After this timestamp, the
         #     job is marked as expired, and it no longer appears in search results. The
-        #     expired job can't be deleted or listed by the
-        #     {Google::Cloud::Talent::V4beta1::JobService::DeleteJob DeleteJob} and
-        #     {Google::Cloud::Talent::V4beta1::JobService::ListJobs ListJobs} APIs, but it
-        #     can be retrieved with the
+        #     expired job can't be listed by the
+        #     {Google::Cloud::Talent::V4beta1::JobService::ListJobs ListJobs} API, but it can
+        #     be retrieved with the
         #     {Google::Cloud::Talent::V4beta1::JobService::GetJob GetJob} API or updated with
-        #     the {Google::Cloud::Talent::V4beta1::JobService::UpdateJob UpdateJob} API. An
+        #     the {Google::Cloud::Talent::V4beta1::JobService::UpdateJob UpdateJob} API or
+        #     deleted with the
+        #     {Google::Cloud::Talent::V4beta1::JobService::DeleteJob DeleteJob} API. An
         #     expired job can be updated and opened again by using a future expiration
         #     timestamp. Updating an expired job fails if there is another existing open
         #     job with same {Google::Cloud::Talent::V4beta1::Job#company company},
@@ -288,15 +247,24 @@ module Google
         #     {Google::Cloud::Talent::V4beta1::Job#requisition_id requisition_id}.
         #
         #     The expired jobs are retained in our system for 90 days. However, the
-        #     overall expired job count cannot exceed 3 times the maximum of open jobs
-        #     count over the past week, otherwise jobs with earlier expire time are
-        #     cleaned first. Expired jobs are no longer accessible after they are cleaned
+        #     overall expired job count cannot exceed 3 times the maximum number of
+        #     open jobs over previous 7 days. If this threshold is exceeded,
+        #     expired jobs are cleaned out in order of earliest expire time.
+        #     Expired jobs are no longer accessible after they are cleaned
         #     out.
         #
         #     Invalid timestamps are ignored, and treated as expire time not provided.
         #
-        #     Timestamp before the instant request is made is considered valid, the job
-        #     will be treated as expired immediately.
+        #     If the timestamp is before the instant request is made, the job
+        #     is treated as expired immediately on creation. This kind of job can
+        #     not be updated. And when creating a job with past timestamp, the
+        #     {Google::Cloud::Talent::V4beta1::Job#posting_publish_time posting_publish_time}
+        #     must be set before
+        #     {Google::Cloud::Talent::V4beta1::Job#posting_expire_time posting_expire_time}.
+        #     The purpose of this feature is to allow other objects, such as
+        #     {Google::Cloud::Talent::V4beta1::Application Application}, to refer a job that
+        #     didn't exist in the system prior to becoming expired. If you want to modify
+        #     a job that was expired on creation, delete it and create a new one.
         #
         #     If this value isn't provided at the time of job creation or is invalid,
         #     the job posting expires after 30 days from the job's creation time. For
@@ -325,25 +293,19 @@ module Google
         #     Output only. Derived details about the job posting.
         # @!attribute [rw] processing_options
         #   @return [Google::Cloud::Talent::V4beta1::Job::ProcessingOptions]
-        #     Optional.
-        #
-        #     Options for job processing.
+        #     Optional. Options for job processing.
         class Job
           # Application related details of a job posting.
           # @!attribute [rw] emails
           #   @return [Array<String>]
-          #     Optional.
-          #
-          #     Use this field to specify email address(es) to which resumes or
+          #     Optional. Use this field to specify email address(es) to which resumes or
           #     applications can be sent.
           #
           #     The maximum number of allowed characters for each entry is 255.
           # @!attribute [rw] instruction
           #   @return [String]
-          #     Optional.
-          #
-          #     Use this field to provide instructions, such as "Mail your application
-          #     to ...", that a candidate can follow to apply for the job.
+          #     Optional. Use this field to provide instructions, such as "Mail your
+          #     application to ...", that a candidate can follow to apply for the job.
           #
           #     This field accepts and sanitizes HTML input, and also accepts
           #     bold, italic, ordered list, and unordered list markup tags.
@@ -351,10 +313,8 @@ module Google
           #     The maximum number of allowed characters is 3,000.
           # @!attribute [rw] uris
           #   @return [Array<String>]
-          #     Optional.
-          #
-          #     Use this URI field to direct an applicant to a website, for example to
-          #     link to an online application form.
+          #     Optional. Use this URI field to direct an applicant to a website, for
+          #     example to link to an online application form.
           #
           #     The maximum number of allowed characters for each entry is 2,000.
           class ApplicationInfo; end
@@ -383,15 +343,11 @@ module Google
           # Options for job processing.
           # @!attribute [rw] disable_street_address_resolution
           #   @return [true, false]
-          #     Optional.
-          #
-          #     If set to `true`, the service does not attempt to resolve a
+          #     Optional. If set to `true`, the service does not attempt to resolve a
           #     more precise address for the job.
           # @!attribute [rw] html_sanitization
           #   @return [Google::Cloud::Talent::V4beta1::HtmlSanitization]
-          #     Optional.
-          #
-          #     Option for job HTML content sanitization. Applied fields are:
+          #     Optional. Option for job HTML content sanitization. Applied fields are:
           #
           #     * description
           #     * applicationInfo.instruction

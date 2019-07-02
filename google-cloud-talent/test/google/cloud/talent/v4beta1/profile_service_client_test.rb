@@ -487,11 +487,13 @@ describe Google::Cloud::Talent::V4beta1::ProfileServiceClient do
       # Create expected grpc response
       estimated_total_size = 1882144769
       next_page_token = ""
+      result_set_id = "resultSetId-770306950"
       summarized_profiles_element = {}
       summarized_profiles = [summarized_profiles_element]
       expected_response = {
         estimated_total_size: estimated_total_size,
         next_page_token: next_page_token,
+        result_set_id: result_set_id,
         summarized_profiles: summarized_profiles
       }
       expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Talent::V4beta1::SearchProfilesResponse)
