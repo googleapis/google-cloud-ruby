@@ -436,7 +436,7 @@ this service.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#get_iam_policy-instance_method" title="#get_iam_policy (instance method)">#<strong>get_iam_policy</strong>(resource, options: nil) {|result, operation| ... } &#x21d2; Google::Iam::V1::Policy </a>
+      <a href="#get_iam_policy-instance_method" title="#get_iam_policy (instance method)">#<strong>get_iam_policy</strong>(resource, options_: nil, options: nil) {|result, operation| ... } &#x21d2; Google::Iam::V1::Policy </a>
     
 
     
@@ -2084,22 +2084,22 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1412
-1413
-1414
-1415
-1416
-1417
-1418
 1419
 1420
 1421
 1422
 1423
-1424</pre>
+1424
+1425
+1426
+1427
+1428
+1429
+1430
+1431</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta2/cloud_tasks_client.rb', line 1412</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta2/cloud_tasks_client.rb', line 1419</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_acknowledge_task'>acknowledge_task</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -2325,23 +2325,23 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1564
-1565
-1566
-1567
-1568
-1569
-1570
 1571
 1572
 1573
 1574
 1575
 1576
-1577</pre>
+1577
+1578
+1579
+1580
+1581
+1582
+1583
+1584</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta2/cloud_tasks_client.rb', line 1564</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta2/cloud_tasks_client.rb', line 1571</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_cancel_lease'>cancel_lease</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -2824,23 +2824,23 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1181
-1182
-1183
-1184
-1185
-1186
-1187
 1188
 1189
 1190
 1191
 1192
 1193
-1194</pre>
+1194
+1195
+1196
+1197
+1198
+1199
+1200
+1201</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta2/cloud_tasks_client.rb', line 1181</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta2/cloud_tasks_client.rb', line 1188</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_task'>create_task</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -3186,20 +3186,20 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1221
-1222
-1223
-1224
-1225
-1226
-1227
 1228
 1229
 1230
-1231</pre>
+1231
+1232
+1233
+1234
+1235
+1236
+1237
+1238</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta2/cloud_tasks_client.rb', line 1221</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta2/cloud_tasks_client.rb', line 1228</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete_task'>delete_task</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -3220,7 +3220,7 @@ retries, etc.</p>
       <div class="method_details ">
   <h3 class="signature " id="get_iam_policy-instance_method">
   
-    #<strong>get_iam_policy</strong>(resource, options: nil) {|result, operation| ... } &#x21d2; <tt><span class='object_link'><a href="../../../Iam/V1/Policy.html" title="Google::Iam::V1::Policy (class)">Google::Iam::V1::Policy</a></span></tt> 
+    #<strong>get_iam_policy</strong>(resource, options_: nil, options: nil) {|result, operation| ... } &#x21d2; <tt><span class='object_link'><a href="../../../Iam/V1/Policy.html" title="Google::Iam::V1::Policy (class)">Google::Iam::V1::Policy</a></span></tt> 
   
 
   
@@ -3271,6 +3271,24 @@ resource parent:</p>
         &mdash;
         <div class='inline'><p>REQUIRED: The resource for which the policy is being requested.
 See the operation documentation for the appropriate value for this field.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>options_</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../../Iam/V1/GetPolicyOptions.html" title="Google::Iam::V1::GetPolicyOptions (class)">Google::Iam::V1::GetPolicyOptions</a></span> | Hash</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>OPTIONAL: A <code>GetPolicyOptions</code> object for specifying options to
+<code>GetIamPolicy</code>. This field is only used by Cloud IAM.
+A hash of the same form as <code>Google::Iam::V1::GetPolicyOptions</code>
+can also be provided.</p>
 </div>
       
     </li>
@@ -3373,26 +3391,30 @@ retries, etc.</p>
       <pre class="lines">
 
 
-852
-853
-854
-855
-856
 857
 858
 859
 860
-861</pre>
+861
+862
+863
+864
+865
+866
+867
+868</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta2/cloud_tasks_client.rb', line 852</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta2/cloud_tasks_client.rb', line 857</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_iam_policy'>get_iam_policy</span> \
     <span class='id identifier rubyid_resource'>resource</span><span class='comma'>,</span>
+    <span class='label'>options_:</span> <span class='kw'>nil</span><span class='comma'>,</span>
     <span class='label'>options:</span> <span class='kw'>nil</span><span class='comma'>,</span>
     <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
   <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='lbrace'>{</span>
-    <span class='label'>resource:</span> <span class='id identifier rubyid_resource'>resource</span>
+    <span class='label'>resource:</span> <span class='id identifier rubyid_resource'>resource</span><span class='comma'>,</span>
+    <span class='label'>options:</span> <span class='id identifier rubyid_options_'>options_</span>
   <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span>
   <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='id identifier rubyid_to_proto'>to_proto</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Iam.html" title="Google::Iam (module)">Iam</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Iam/V1.html" title="Google::Iam::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Iam/V1/GetIamPolicyRequest.html" title="Google::Iam::V1::GetIamPolicyRequest (class)">GetIamPolicyRequest</a></span></span><span class='rparen'>)</span>
   <span class='ivar'>@get_iam_policy</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
@@ -3754,21 +3776,21 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1081
-1082
-1083
-1084
-1085
-1086
-1087
 1088
 1089
 1090
 1091
-1092</pre>
+1092
+1093
+1094
+1095
+1096
+1097
+1098
+1099</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta2/cloud_tasks_client.rb', line 1081</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta2/cloud_tasks_client.rb', line 1088</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_task'>get_task</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -4078,13 +4100,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1346
-1347
-1348
-1349
-1350
-1351
-1352
 1353
 1354
 1355
@@ -4095,10 +4110,17 @@ retries, etc.</p>
 1360
 1361
 1362
-1363</pre>
+1363
+1364
+1365
+1366
+1367
+1368
+1369
+1370</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta2/cloud_tasks_client.rb', line 1346</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta2/cloud_tasks_client.rb', line 1353</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_lease_tasks'>lease_tasks</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -4593,23 +4615,23 @@ object.</p>
       <pre class="lines">
 
 
-1030
-1031
-1032
-1033
-1034
-1035
-1036
 1037
 1038
 1039
 1040
 1041
 1042
-1043</pre>
+1043
+1044
+1045
+1046
+1047
+1048
+1049
+1050</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta2/cloud_tasks_client.rb', line 1030</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta2/cloud_tasks_client.rb', line 1037</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_tasks'>list_tasks</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -5464,13 +5486,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1493
-1494
-1495
-1496
-1497
-1498
-1499
 1500
 1501
 1502
@@ -5479,10 +5494,17 @@ retries, etc.</p>
 1505
 1506
 1507
-1508</pre>
+1508
+1509
+1510
+1511
+1512
+1513
+1514
+1515</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta2/cloud_tasks_client.rb', line 1493</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta2/cloud_tasks_client.rb', line 1500</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_renew_lease'>renew_lease</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -5900,21 +5922,21 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1644
-1645
-1646
-1647
-1648
-1649
-1650
 1651
 1652
 1653
 1654
-1655</pre>
+1655
+1656
+1657
+1658
+1659
+1660
+1661
+1662</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta2/cloud_tasks_client.rb', line 1644</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta2/cloud_tasks_client.rb', line 1651</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_run_task'>run_task</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -6114,21 +6136,21 @@ retries, etc.</p>
       <pre class="lines">
 
 
-903
-904
-905
-906
-907
-908
-909
 910
 911
 912
 913
-914</pre>
+914
+915
+916
+917
+918
+919
+920
+921</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta2/cloud_tasks_client.rb', line 903</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta2/cloud_tasks_client.rb', line 910</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_set_iam_policy'>set_iam_policy</span> \
     <span class='id identifier rubyid_resource'>resource</span><span class='comma'>,</span>
@@ -6422,21 +6444,21 @@ retries, etc.</p>
       <pre class="lines">
 
 
-951
-952
-953
-954
-955
-956
-957
 958
 959
 960
 961
-962</pre>
+962
+963
+964
+965
+966
+967
+968
+969</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta2/cloud_tasks_client.rb', line 951</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/tasks/v2beta2/cloud_tasks_client.rb', line 958</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_test_iam_permissions'>test_iam_permissions</span> \
     <span class='id identifier rubyid_resource'>resource</span><span class='comma'>,</span>
