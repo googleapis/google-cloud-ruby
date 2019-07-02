@@ -413,7 +413,7 @@ this service.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#get_iam_policy-instance_method" title="#get_iam_policy (instance method)">#<strong>get_iam_policy</strong>(resource, options: nil) {|result, operation| ... } &#x21d2; Google::Iam::V1::Policy </a>
+      <a href="#get_iam_policy-instance_method" title="#get_iam_policy (instance method)">#<strong>get_iam_policy</strong>(resource, options_: nil, options: nil) {|result, operation| ... } &#x21d2; Google::Iam::V1::Policy </a>
     
 
     
@@ -2904,7 +2904,7 @@ retries, etc.</p>
       <div class="method_details ">
   <h3 class="signature " id="get_iam_policy-instance_method">
   
-    #<strong>get_iam_policy</strong>(resource, options: nil) {|result, operation| ... } &#x21d2; <tt>Google::Iam::V1::Policy</tt> 
+    #<strong>get_iam_policy</strong>(resource, options_: nil, options: nil) {|result, operation| ... } &#x21d2; <tt>Google::Iam::V1::Policy</tt> 
   
 
   
@@ -2947,6 +2947,24 @@ set.</p>
         &mdash;
         <div class='inline'><p>REQUIRED: The resource for which the policy is being requested.
 See the operation documentation for the appropriate value for this field.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>options_</span>
+      
+      
+        <span class='type'>(<tt>Google::Iam::V1::GetPolicyOptions | Hash</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>OPTIONAL: A <code>GetPolicyOptions</code> object for specifying options to
+<code>GetIamPolicy</code>. This field is only used by Cloud IAM.
+A hash of the same form as <code>Google::Iam::V1::GetPolicyOptions</code>
+can also be provided.</p>
 </div>
       
     </li>
@@ -3049,26 +3067,30 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1298
-1299
-1300
-1301
-1302
 1303
 1304
 1305
 1306
-1307</pre>
+1307
+1308
+1309
+1310
+1311
+1312
+1313
+1314</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/subscriber_client.rb', line 1298</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/subscriber_client.rb', line 1303</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_iam_policy'>get_iam_policy</span> \
     <span class='id identifier rubyid_resource'>resource</span><span class='comma'>,</span>
+    <span class='label'>options_:</span> <span class='kw'>nil</span><span class='comma'>,</span>
     <span class='label'>options:</span> <span class='kw'>nil</span><span class='comma'>,</span>
     <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
   <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='lbrace'>{</span>
-    <span class='label'>resource:</span> <span class='id identifier rubyid_resource'>resource</span>
+    <span class='label'>resource:</span> <span class='id identifier rubyid_resource'>resource</span><span class='comma'>,</span>
+    <span class='label'>options:</span> <span class='id identifier rubyid_options_'>options_</span>
   <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span>
   <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='id identifier rubyid_to_proto'>to_proto</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Iam.html" title="Google::Iam (module)">Iam</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Iam/V1.html" title="Google::Iam::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'>GetIamPolicyRequest</span><span class='rparen'>)</span>
   <span class='ivar'>@get_iam_policy</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
@@ -5097,21 +5119,21 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1343
-1344
-1345
-1346
-1347
-1348
-1349
 1350
 1351
 1352
 1353
-1354</pre>
+1354
+1355
+1356
+1357
+1358
+1359
+1360
+1361</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/subscriber_client.rb', line 1343</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/subscriber_client.rb', line 1350</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_test_iam_permissions'>test_iam_permissions</span> \
     <span class='id identifier rubyid_resource'>resource</span><span class='comma'>,</span>
