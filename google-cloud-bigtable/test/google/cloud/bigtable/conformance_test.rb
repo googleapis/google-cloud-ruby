@@ -41,8 +41,7 @@ class ReadRowsTest < MockBigtable
 
       table = bigtable.table(instance_id, table_id)
 
-      resp = Google::Bigtable::V2::ReadRowsResponse.new(chunks: test.chunks.to_a)
-
+      resp = Google::Bigtable::V2::ReadRowsResponse.new chunks: test.chunks.to_a
       mock.expect :read_rows, [resp], [
                               table_path(instance_id, table_id),
                               rows: Google::Bigtable::V2::RowSet.new,
@@ -51,29 +50,37 @@ class ReadRowsTest < MockBigtable
                               app_profile_id: nil
                             ]
 
-      results = test.results.to_a
-      if results.map(&:error).include? true
+      rows = table.read_rows
+      if test.results.empty? # "no data after reset"
         expect do
-          table.read_rows.to_a # to_a is needed because Enum lazily invokes read_rows
-        end.must_raise Google::Cloud::Bigtable::InvalidRowStateError
+          rows.next
+        end.must_raise StopIteration
       else
-        rows = table.read_rows.to_a  # to_a is needed because Enum lazily invokes read_rows
-        rows.map(&:key).must_equal results.map(&:row_key).uniq
+        cells = []
+        # Iterate over `results`, fetching rows and cells until each result has been used in assertions
+        test.results.each_with_index do |result|
+          if result.error
+            expect do
+              rows.next
+            end.must_raise Google::Cloud::Bigtable::InvalidRowStateError
+          else
+            if cells.empty?
+              # If cells is empty, either we are just starting, or else we have emptied `cells` from the previous row.
+              # We need to fetch a row and cells against which to test the remaining `results`
+              row = rows.next
+              row.key.must_equal result.row_key
+              # The cells in a row are in a map, but the corresponding expected
+              # results are in a simple array, so convert cells to array.
+              cells = row.cells.values.flatten
+            end
 
-        # The actual rows and cells in `rows` are nested, but the corresponding
-        # expected results are in a simple array, so flatten all cells in `rows`.
-        cells = rows.map do |row|
-          row.cells.values.flatten
-        end.flatten
-
-        cells.size.must_equal results.size
-        cells.each_with_index do |cell, index|
-          expected = results[index]
-          cell.family.must_equal expected.family_name
-          cell.qualifier.must_equal expected.qualifier
-          cell.timestamp.must_equal expected.timestamp_micros
-          cell.value.must_equal expected.value
-          cell.labels.first.must_equal expected.label unless expected.label.empty?
+            cell = cells.shift # take a cell from `cells` against which to test the current `result`
+            cell.family.must_equal result.family_name
+            cell.qualifier.must_equal result.qualifier
+            cell.timestamp.must_equal result.timestamp_micros
+            cell.value.must_equal result.value
+            cell.labels.first.must_equal result.label unless result.label.empty?
+          end
         end
       end
 
