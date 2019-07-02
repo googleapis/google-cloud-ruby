@@ -286,9 +286,16 @@ module Google
         end
 
         ##
-        # The type of the bucket location.
+        # The bucket's location type. Location type defines the geographic
+        # placement of the bucket's data and affects cost, performance, and
+        # availability. There are three possible values:
         #
-        # @return [String]
+        #  * `region` - Lowest latency within a single region
+        #  * `multi-region` - Highest availability across largest area
+        #  * `dual-region` - High availability and low latency across 2 regions
+        #
+        # @return [String] The location type code: "region", "multi-region", or
+        #   "dual-region"
         #
         def location_type
           @gapi.location_type
