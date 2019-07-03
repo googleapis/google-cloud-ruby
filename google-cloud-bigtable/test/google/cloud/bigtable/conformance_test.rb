@@ -49,7 +49,7 @@ class ReadRowsTest < MockBigtable
                               rows_limit: nil,
                               app_profile_id: nil
                             ]
-
+      no_errors_raised = true
       rows = table.read_rows
       if test.results.empty? # "no data after reset"
         expect do
@@ -58,11 +58,12 @@ class ReadRowsTest < MockBigtable
       else
         cells = []
         # Iterate over `results`, fetching rows and cells until each result has been used in assertions
-        test.results.each_with_index do |result|
+        test.results.each do |result|
           if result.error
             expect do
               rows.next
             end.must_raise Google::Cloud::Bigtable::InvalidRowStateError
+            no_errors_raised = false
           else
             if cells.empty?
               # If cells is empty, either we are just starting, or else we have emptied `cells` from the previous row.
@@ -83,6 +84,12 @@ class ReadRowsTest < MockBigtable
           end
         end
       end
+
+      # This should be the end of the Enumerator. However, if InvalidRowStateError was raised,
+      # another RPC call to read_rows will be attempted.
+      expect do
+        rows.next
+      end.must_raise StopIteration if no_errors_raised
 
       mock.verify
       # end: test method body
