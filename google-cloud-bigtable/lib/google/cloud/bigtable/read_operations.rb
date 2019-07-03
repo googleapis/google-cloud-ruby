@@ -145,7 +145,7 @@ module Google
         #   # filter = Google::Cloud::Bigtable::RowFilter.key("user-*")
         #
         #   table.read_rows(filter: filter, limit: 10).each do |row|
-        #     puts rowow
+        #     puts row
         #   end
         #
         def read_rows \

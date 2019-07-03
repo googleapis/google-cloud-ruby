@@ -12,6 +12,7 @@ AllCops:
     - "Rakefile"
     - "test/**/*"
     - "acceptance/**/*"
+    - "conformance/**/*"
     - "samples/**/*"
   TargetRubyVersion: 2.2
 
