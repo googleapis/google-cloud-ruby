@@ -109,6 +109,10 @@ module Google
           #   Override for the service hostname, or `nil` to leave as the default.
           # @param service_port [Integer]
           #   Override for the service port, or `nil` to leave as the default.
+          # @param service_address [String]
+          #   Override for the service hostname, or `nil` to leave as the default.
+          # @param service_port [Integer]
+          #   Override for the service port, or `nil` to leave as the default.
           # @param exception_transformer [Proc]
           #   An optional proc that intercepts any exceptions raised during an API call to inject
           #   custom error handling.
