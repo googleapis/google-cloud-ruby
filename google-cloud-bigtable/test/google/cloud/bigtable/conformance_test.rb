@@ -49,7 +49,6 @@ class ReadRowsTest < MockBigtable
                               rows_limit: nil,
                               app_profile_id: nil
                             ]
-      no_errors_raised = true
       rows = table.read_rows
       if test.results.empty? # "no data after reset"
         expect do
@@ -63,7 +62,6 @@ class ReadRowsTest < MockBigtable
             expect do
               rows.next
             end.must_raise Google::Cloud::Bigtable::InvalidRowStateError
-            no_errors_raised = false
           else
             if cells.empty?
               # If cells is empty, either we are just starting, or else we have emptied `cells` from the previous row.
@@ -89,7 +87,7 @@ class ReadRowsTest < MockBigtable
       # another RPC call to read_rows will be attempted.
       expect do
         rows.next
-      end.must_raise StopIteration if no_errors_raised
+      end.must_raise StopIteration unless test.results.any?(&:error)
 
       mock.verify
       # end: test method body
