@@ -1939,6 +1939,9 @@ module Google
         # @!attribute [rw] publish_summary_to_cscc
         #   @return [Google::Privacy::Dlp::V2::Action::PublishSummaryToCscc]
         #     Publish summary to Cloud Security Command Center (Alpha).
+        # @!attribute [rw] publish_findings_to_cloud_data_catalog
+        #   @return [Google::Privacy::Dlp::V2::Action::PublishFindingsToCloudDataCatalog]
+        #     Publish findings to Cloud Datahub.
         # @!attribute [rw] job_notification_emails
         #   @return [Google::Privacy::Dlp::V2::Action::JobNotificationEmails]
         #     Enable email notification to project owners and editors on job's
@@ -1976,6 +1979,18 @@ module Google
           # Only a single instance of this action can be specified.
           # Compatible with: Inspect
           class PublishSummaryToCscc; end
+
+          # Publish findings of a DlpJob to Cloud Data Catalog. Labels summarizing the
+          # results of the DlpJob will be applied to the entry for the resource scanned
+          # in Cloud Data Catalog. Any labels previously written by another DlpJob will
+          # be deleted. InfoType naming patterns are strictly enforced when using this
+          # feature. Note that the findings will be persisted in Cloud Data Catalog
+          # storage and are governed by Data Catalog service-specific policy, see
+          # https://cloud.google.com/terms/service-terms
+          # Only a single instance of this action can be specified and only allowed if
+          # all resources being scanned are BigQuery tables.
+          # Compatible with: Inspect
+          class PublishFindingsToCloudDataCatalog; end
 
           # Enable email notification to project owners and editors on jobs's
           # completion/failure.
