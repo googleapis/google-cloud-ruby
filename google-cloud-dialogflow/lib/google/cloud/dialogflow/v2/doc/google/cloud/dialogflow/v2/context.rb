@@ -35,7 +35,7 @@ module Google
         #   @return [Google::Protobuf::Struct]
         #     Optional. The collection of parameters associated with this context.
         #     Refer to [this
-        #     doc](https://cloud.google.com/dialogflow-enterprise/docs/intents-actions-parameters)
+        #     doc](https://cloud.google.com/dialogflow/docs/intents-actions-parameters)
         #     for syntax.
         class Context; end
 

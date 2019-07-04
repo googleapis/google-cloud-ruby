@@ -39,7 +39,7 @@ module Google
           # You can create an agent using both Dialogflow Standard Edition and
           # Dialogflow Enterprise Edition. For details, see
           # [Dialogflow
-          # Editions](https://cloud.google.com/dialogflow-enterprise/docs/editions).
+          # Editions](https://cloud.google.com/dialogflow/docs/editions).
           #
           # You can save your agent for backup or versioning by exporting the agent by
           # using the [ExportAgent][google.cloud.dialogflow.v2.Agents.ExportAgent] method. You can import a saved
@@ -47,13 +47,13 @@ module Google
           #
           # Dialogflow provides several
           # [prebuilt
-          # agents](https://cloud.google.com/dialogflow-enterprise/docs/agents-prebuilt)
+          # agents](https://cloud.google.com/dialogflow/docs/agents-prebuilt)
           # for common conversation scenarios such as determining a date and time,
           # converting currency, and so on.
           #
           # For more information about agents, see the
           # [Dialogflow
-          # documentation](https://cloud.google.com/dialogflow-enterprise/docs/agents-overview).
+          # documentation](https://cloud.google.com/dialogflow/docs/agents-overview).
           class Service
 
             include GRPC::GenericService
@@ -64,6 +64,10 @@ module Google
 
             # Retrieves the specified agent.
             rpc :GetAgent, GetAgentRequest, Agent
+            # Creates/updates the specified agent.
+            rpc :SetAgent, SetAgentRequest, Agent
+            # Deletes the specified agent.
+            rpc :DeleteAgent, DeleteAgentRequest, Google::Protobuf::Empty
             # Returns the list of agents.
             #
             # Since there is at most one conversational agent per project, this method is

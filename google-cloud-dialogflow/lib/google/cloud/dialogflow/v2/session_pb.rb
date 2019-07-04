@@ -9,9 +9,11 @@ require 'google/cloud/dialogflow/v2/audio_config_pb'
 require 'google/cloud/dialogflow/v2/context_pb'
 require 'google/cloud/dialogflow/v2/intent_pb'
 require 'google/cloud/dialogflow/v2/session_entity_type_pb'
+require 'google/protobuf/duration_pb'
 require 'google/protobuf/struct_pb'
 require 'google/rpc/status_pb'
 require 'google/type/latlng_pb'
+require 'google/api/client_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.cloud.dialogflow.v2.DetectIntentRequest" do
     optional :session, :string, 1

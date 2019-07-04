@@ -29,7 +29,7 @@ module Google
         #   @return [String]
         #     Required. The default language of the agent as a language tag. See
         #     [Language
-        #     Support](https://cloud.google.com/dialogflow-enterprise/docs/reference/language)
+        #     Support](https://cloud.google.com/dialogflow/docs/reference/language)
         #     for a list of the currently supported language codes. This field cannot be
         #     set by the `Update` method.
         # @!attribute [rw] supported_language_codes
@@ -50,7 +50,7 @@ module Google
         #     Optional. The URI of the agent's avatar.
         #     Avatars are used throughout the Dialogflow console and in the self-hosted
         #     [Web
-        #     Demo](https://cloud.google.com/dialogflow-enterprise/docs/integrations/web-demo)
+        #     Demo](https://cloud.google.com/dialogflow/docs/integrations/web-demo)
         #     integration.
         # @!attribute [rw] enable_logging
         #   @return [true, false]
@@ -67,7 +67,31 @@ module Google
         #     are no fallback intents defined, no intent will be triggered. The score
         #     values range from 0.0 (completely uncertain) to 1.0 (completely certain).
         #     If set to 0.0, the default of 0.3 is used.
+        # @!attribute [rw] api_version
+        #   @return [Google::Cloud::Dialogflow::V2::Agent::ApiVersion]
+        #     Optional. API version displayed in Dialogflow console. If not specified,
+        #     V2 API is assumed. Clients are free to query different service endpoints
+        #     for different API versions. However, bots connectors and webhook calls will
+        #     follow the specified API version.
+        # @!attribute [rw] tier
+        #   @return [Google::Cloud::Dialogflow::V2::Agent::Tier]
+        #     Optional. The agent tier. If not specified, TIER_STANDARD is assumed.
         class Agent
+          # API version for the agent.
+          module ApiVersion
+            # Not specified.
+            API_VERSION_UNSPECIFIED = 0
+
+            # Legacy V1 API.
+            API_VERSION_V1 = 1
+
+            # V2 API.
+            API_VERSION_V2 = 2
+
+            # V2beta1 API.
+            API_VERSION_V2_BETA_1 = 3
+          end
+
           # Match mode determines how intents are detected from user queries.
           module MatchMode
             # Not specified.
@@ -81,6 +105,21 @@ module Google
             # especially the ones using @sys.any or very large developer entities.
             MATCH_MODE_ML_ONLY = 2
           end
+
+          # Represents the agent tier.
+          module Tier
+            # Not specified. This value should never be used.
+            TIER_UNSPECIFIED = 0
+
+            # Standard tier.
+            TIER_STANDARD = 1
+
+            # Enterprise tier (Essentials).
+            TIER_ENTERPRISE = 2
+
+            # Enterprise tier (Plus).
+            TIER_ENTERPRISE_PLUS = 3
+          end
         end
 
         # The request message for {Google::Cloud::Dialogflow::V2::Agents::GetAgent Agents::GetAgent}.
@@ -89,6 +128,22 @@ module Google
         #     Required. The project that the agent to fetch is associated with.
         #     Format: `projects/<Project ID>`.
         class GetAgentRequest; end
+
+        # The request message for {Google::Cloud::Dialogflow::V2::Agents::SetAgent Agents::SetAgent}.
+        # @!attribute [rw] agent
+        #   @return [Google::Cloud::Dialogflow::V2::Agent]
+        #     Required. The agent to update.
+        # @!attribute [rw] update_mask
+        #   @return [Google::Protobuf::FieldMask]
+        #     Optional. The mask to control which fields get updated.
+        class SetAgentRequest; end
+
+        # The request message for {Google::Cloud::Dialogflow::V2::Agents::DeleteAgent Agents::DeleteAgent}.
+        # @!attribute [rw] parent
+        #   @return [String]
+        #     Required. The project that the agent to delete is associated with.
+        #     Format: `projects/<Project ID>`.
+        class DeleteAgentRequest; end
 
         # The request message for {Google::Cloud::Dialogflow::V2::Agents::SearchAgents Agents::SearchAgents}.
         # @!attribute [rw] parent
