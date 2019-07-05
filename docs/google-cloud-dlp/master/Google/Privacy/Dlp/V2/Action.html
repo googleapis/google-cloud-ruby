@@ -104,7 +104,7 @@ See <a href="https://cloud.google.com/dlp/docs/concepts-actions">https://cloud.g
     
   
     
-      <strong class="classes">Classes:</strong> <span class='object_link'><a href="Action/JobNotificationEmails.html" title="Google::Privacy::Dlp::V2::Action::JobNotificationEmails (class)">JobNotificationEmails</a></span>, <span class='object_link'><a href="Action/PublishSummaryToCscc.html" title="Google::Privacy::Dlp::V2::Action::PublishSummaryToCscc (class)">PublishSummaryToCscc</a></span>, <span class='object_link'><a href="Action/PublishToPubSub.html" title="Google::Privacy::Dlp::V2::Action::PublishToPubSub (class)">PublishToPubSub</a></span>, <span class='object_link'><a href="Action/SaveFindings.html" title="Google::Privacy::Dlp::V2::Action::SaveFindings (class)">SaveFindings</a></span>
+      <strong class="classes">Classes:</strong> <span class='object_link'><a href="Action/JobNotificationEmails.html" title="Google::Privacy::Dlp::V2::Action::JobNotificationEmails (class)">JobNotificationEmails</a></span>, <span class='object_link'><a href="Action/PublishFindingsToCloudDataCatalog.html" title="Google::Privacy::Dlp::V2::Action::PublishFindingsToCloudDataCatalog (class)">PublishFindingsToCloudDataCatalog</a></span>, <span class='object_link'><a href="Action/PublishSummaryToCscc.html" title="Google::Privacy::Dlp::V2::Action::PublishSummaryToCscc (class)">PublishSummaryToCscc</a></span>, <span class='object_link'><a href="Action/PublishToPubSub.html" title="Google::Privacy::Dlp::V2::Action::PublishToPubSub (class)">PublishToPubSub</a></span>, <span class='object_link'><a href="Action/SaveFindings.html" title="Google::Privacy::Dlp::V2::Action::SaveFindings (class)">SaveFindings</a></span>
     
   
 </p>
@@ -162,6 +162,32 @@ See <a href="https://cloud.google.com/dlp/docs/concepts-actions">https://cloud.g
 
   
     <span class="summary_desc"><div class='inline'><p>Publish a notification to a pubsub topic.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#publish_findings_to_cloud_data_catalog-instance_method" title="#publish_findings_to_cloud_data_catalog (instance method)">#<strong>publish_findings_to_cloud_data_catalog</strong>  &#x21d2; Google::Privacy::Dlp::V2::Action::PublishFindingsToCloudDataCatalog </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Publish findings to Cloud Datahub.</p>
 </div></span>
   
 </li>
@@ -274,9 +300,6 @@ completion/failure.</p>
       <pre class="lines">
 
 
-1946
-1947
-1948
 1949
 1950
 1951
@@ -311,10 +334,25 @@ completion/failure.</p>
 1980
 1981
 1982
-1983</pre>
+1983
+1984
+1985
+1986
+1987
+1988
+1989
+1990
+1991
+1992
+1993
+1994
+1995
+1996
+1997
+1998</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/dlp.rb', line 1946</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/dlp.rb', line 1949</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Privacy::Dlp::V2::Action (class)">Action</a></span></span>
   <span class='comment'># If set, the detailed findings will be persisted to the specified
@@ -349,6 +387,18 @@ completion/failure.</p>
 </span>  <span class='comment'># Only a single instance of this action can be specified.
 </span>  <span class='comment'># Compatible with: Inspect
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Action/PublishSummaryToCscc.html" title="Google::Privacy::Dlp::V2::Action::PublishSummaryToCscc (class)">PublishSummaryToCscc</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+
+  <span class='comment'># Publish findings of a DlpJob to Cloud Data Catalog. Labels summarizing the
+</span>  <span class='comment'># results of the DlpJob will be applied to the entry for the resource scanned
+</span>  <span class='comment'># in Cloud Data Catalog. Any labels previously written by another DlpJob will
+</span>  <span class='comment'># be deleted. InfoType naming patterns are strictly enforced when using this
+</span>  <span class='comment'># feature. Note that the findings will be persisted in Cloud Data Catalog
+</span>  <span class='comment'># storage and are governed by Data Catalog service-specific policy, see
+</span>  <span class='comment'># https://cloud.google.com/terms/service-terms
+</span>  <span class='comment'># Only a single instance of this action can be specified and only allowed if
+</span>  <span class='comment'># all resources being scanned are BigQuery tables.
+</span>  <span class='comment'># Compatible with: Inspect
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Action/PublishFindingsToCloudDataCatalog.html" title="Google::Privacy::Dlp::V2::Action::PublishFindingsToCloudDataCatalog (class)">PublishFindingsToCloudDataCatalog</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
   <span class='comment'># Enable email notification to project owners and editors on jobs&#39;s
 </span>  <span class='comment'># completion/failure.
@@ -403,9 +453,6 @@ completion/failure.</p>
       <pre class="lines">
 
 
-1946
-1947
-1948
 1949
 1950
 1951
@@ -440,10 +487,25 @@ completion/failure.</p>
 1980
 1981
 1982
-1983</pre>
+1983
+1984
+1985
+1986
+1987
+1988
+1989
+1990
+1991
+1992
+1993
+1994
+1995
+1996
+1997
+1998</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/dlp.rb', line 1946</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/dlp.rb', line 1949</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Privacy::Dlp::V2::Action (class)">Action</a></span></span>
   <span class='comment'># If set, the detailed findings will be persisted to the specified
@@ -478,6 +540,171 @@ completion/failure.</p>
 </span>  <span class='comment'># Only a single instance of this action can be specified.
 </span>  <span class='comment'># Compatible with: Inspect
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Action/PublishSummaryToCscc.html" title="Google::Privacy::Dlp::V2::Action::PublishSummaryToCscc (class)">PublishSummaryToCscc</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+
+  <span class='comment'># Publish findings of a DlpJob to Cloud Data Catalog. Labels summarizing the
+</span>  <span class='comment'># results of the DlpJob will be applied to the entry for the resource scanned
+</span>  <span class='comment'># in Cloud Data Catalog. Any labels previously written by another DlpJob will
+</span>  <span class='comment'># be deleted. InfoType naming patterns are strictly enforced when using this
+</span>  <span class='comment'># feature. Note that the findings will be persisted in Cloud Data Catalog
+</span>  <span class='comment'># storage and are governed by Data Catalog service-specific policy, see
+</span>  <span class='comment'># https://cloud.google.com/terms/service-terms
+</span>  <span class='comment'># Only a single instance of this action can be specified and only allowed if
+</span>  <span class='comment'># all resources being scanned are BigQuery tables.
+</span>  <span class='comment'># Compatible with: Inspect
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Action/PublishFindingsToCloudDataCatalog.html" title="Google::Privacy::Dlp::V2::Action::PublishFindingsToCloudDataCatalog (class)">PublishFindingsToCloudDataCatalog</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+
+  <span class='comment'># Enable email notification to project owners and editors on jobs&#39;s
+</span>  <span class='comment'># completion/failure.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Action/JobNotificationEmails.html" title="Google::Privacy::Dlp::V2::Action::JobNotificationEmails (class)">JobNotificationEmails</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="publish_findings_to_cloud_data_catalog=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="publish_findings_to_cloud_data_catalog-instance_method">
+  
+    #<strong>publish_findings_to_cloud_data_catalog</strong>  &#x21d2; <tt><span class='object_link'><a href="Action/PublishFindingsToCloudDataCatalog.html" title="Google::Privacy::Dlp::V2::Action::PublishFindingsToCloudDataCatalog (class)">Google::Privacy::Dlp::V2::Action::PublishFindingsToCloudDataCatalog</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Publish findings to Cloud Datahub.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Action/PublishFindingsToCloudDataCatalog.html" title="Google::Privacy::Dlp::V2::Action::PublishFindingsToCloudDataCatalog (class)">Google::Privacy::Dlp::V2::Action::PublishFindingsToCloudDataCatalog</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Publish findings to Cloud Datahub.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+1949
+1950
+1951
+1952
+1953
+1954
+1955
+1956
+1957
+1958
+1959
+1960
+1961
+1962
+1963
+1964
+1965
+1966
+1967
+1968
+1969
+1970
+1971
+1972
+1973
+1974
+1975
+1976
+1977
+1978
+1979
+1980
+1981
+1982
+1983
+1984
+1985
+1986
+1987
+1988
+1989
+1990
+1991
+1992
+1993
+1994
+1995
+1996
+1997
+1998</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/dlp.rb', line 1949</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Privacy::Dlp::V2::Action (class)">Action</a></span></span>
+  <span class='comment'># If set, the detailed findings will be persisted to the specified
+</span>  <span class='comment'># OutputStorageConfig. Only a single instance of this action can be
+</span>  <span class='comment'># specified.
+</span>  <span class='comment'># Compatible with: Inspect, Risk
+</span>  <span class='comment'># @!attribute [rw] output_config
+</span>  <span class='comment'>#   @return [Google::Privacy::Dlp::V2::OutputStorageConfig]
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Action/SaveFindings.html" title="Google::Privacy::Dlp::V2::Action::SaveFindings (class)">SaveFindings</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+
+  <span class='comment'># Publish a message into given Pub/Sub topic when DlpJob has completed. The
+</span>  <span class='comment'># message contains a single field, `DlpJobName`, which is equal to the
+</span>  <span class='comment'># finished job&#39;s
+</span>  <span class='comment'># [`DlpJob.name`](https://cloud.google.com/dlp/docs/reference/rest/v2/projects.dlpJobs#DlpJob).
+</span>  <span class='comment'># Compatible with: Inspect, Risk
+</span>  <span class='comment'># @!attribute [rw] topic
+</span>  <span class='comment'>#   @return [String]
+</span>  <span class='comment'>#     Cloud Pub/Sub topic to send notifications to. The topic must have given
+</span>  <span class='comment'>#     publishing access rights to the DLP API service account executing
+</span>  <span class='comment'>#     the long running DlpJob sending the notifications.
+</span>  <span class='comment'>#     Format is projects/\\{project}/topics/\\{topic}.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Action/PublishToPubSub.html" title="Google::Privacy::Dlp::V2::Action::PublishToPubSub (class)">PublishToPubSub</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+
+  <span class='comment'># Publish the result summary of a DlpJob to the Cloud Security
+</span>  <span class='comment'># Command Center (CSCC Alpha).
+</span>  <span class='comment'># This action is only available for projects which are parts of
+</span>  <span class='comment'># an organization and whitelisted for the alpha Cloud Security Command
+</span>  <span class='comment'># Center.
+</span>  <span class='comment'># The action will publish count of finding instances and their info types.
+</span>  <span class='comment'># The summary of findings will be persisted in CSCC and are governed by CSCC
+</span>  <span class='comment'># service-specific policy, see https://cloud.google.com/terms/service-terms
+</span>  <span class='comment'># Only a single instance of this action can be specified.
+</span>  <span class='comment'># Compatible with: Inspect
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Action/PublishSummaryToCscc.html" title="Google::Privacy::Dlp::V2::Action::PublishSummaryToCscc (class)">PublishSummaryToCscc</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+
+  <span class='comment'># Publish findings of a DlpJob to Cloud Data Catalog. Labels summarizing the
+</span>  <span class='comment'># results of the DlpJob will be applied to the entry for the resource scanned
+</span>  <span class='comment'># in Cloud Data Catalog. Any labels previously written by another DlpJob will
+</span>  <span class='comment'># be deleted. InfoType naming patterns are strictly enforced when using this
+</span>  <span class='comment'># feature. Note that the findings will be persisted in Cloud Data Catalog
+</span>  <span class='comment'># storage and are governed by Data Catalog service-specific policy, see
+</span>  <span class='comment'># https://cloud.google.com/terms/service-terms
+</span>  <span class='comment'># Only a single instance of this action can be specified and only allowed if
+</span>  <span class='comment'># all resources being scanned are BigQuery tables.
+</span>  <span class='comment'># Compatible with: Inspect
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Action/PublishFindingsToCloudDataCatalog.html" title="Google::Privacy::Dlp::V2::Action::PublishFindingsToCloudDataCatalog (class)">PublishFindingsToCloudDataCatalog</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
   <span class='comment'># Enable email notification to project owners and editors on jobs&#39;s
 </span>  <span class='comment'># completion/failure.
@@ -532,9 +759,6 @@ completion/failure.</p>
       <pre class="lines">
 
 
-1946
-1947
-1948
 1949
 1950
 1951
@@ -569,10 +793,25 @@ completion/failure.</p>
 1980
 1981
 1982
-1983</pre>
+1983
+1984
+1985
+1986
+1987
+1988
+1989
+1990
+1991
+1992
+1993
+1994
+1995
+1996
+1997
+1998</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/dlp.rb', line 1946</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/dlp.rb', line 1949</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Privacy::Dlp::V2::Action (class)">Action</a></span></span>
   <span class='comment'># If set, the detailed findings will be persisted to the specified
@@ -607,6 +846,18 @@ completion/failure.</p>
 </span>  <span class='comment'># Only a single instance of this action can be specified.
 </span>  <span class='comment'># Compatible with: Inspect
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Action/PublishSummaryToCscc.html" title="Google::Privacy::Dlp::V2::Action::PublishSummaryToCscc (class)">PublishSummaryToCscc</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+
+  <span class='comment'># Publish findings of a DlpJob to Cloud Data Catalog. Labels summarizing the
+</span>  <span class='comment'># results of the DlpJob will be applied to the entry for the resource scanned
+</span>  <span class='comment'># in Cloud Data Catalog. Any labels previously written by another DlpJob will
+</span>  <span class='comment'># be deleted. InfoType naming patterns are strictly enforced when using this
+</span>  <span class='comment'># feature. Note that the findings will be persisted in Cloud Data Catalog
+</span>  <span class='comment'># storage and are governed by Data Catalog service-specific policy, see
+</span>  <span class='comment'># https://cloud.google.com/terms/service-terms
+</span>  <span class='comment'># Only a single instance of this action can be specified and only allowed if
+</span>  <span class='comment'># all resources being scanned are BigQuery tables.
+</span>  <span class='comment'># Compatible with: Inspect
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Action/PublishFindingsToCloudDataCatalog.html" title="Google::Privacy::Dlp::V2::Action::PublishFindingsToCloudDataCatalog (class)">PublishFindingsToCloudDataCatalog</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
   <span class='comment'># Enable email notification to project owners and editors on jobs&#39;s
 </span>  <span class='comment'># completion/failure.
@@ -661,9 +912,6 @@ completion/failure.</p>
       <pre class="lines">
 
 
-1946
-1947
-1948
 1949
 1950
 1951
@@ -698,10 +946,25 @@ completion/failure.</p>
 1980
 1981
 1982
-1983</pre>
+1983
+1984
+1985
+1986
+1987
+1988
+1989
+1990
+1991
+1992
+1993
+1994
+1995
+1996
+1997
+1998</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/dlp.rb', line 1946</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/dlp.rb', line 1949</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Privacy::Dlp::V2::Action (class)">Action</a></span></span>
   <span class='comment'># If set, the detailed findings will be persisted to the specified
@@ -736,6 +999,18 @@ completion/failure.</p>
 </span>  <span class='comment'># Only a single instance of this action can be specified.
 </span>  <span class='comment'># Compatible with: Inspect
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Action/PublishSummaryToCscc.html" title="Google::Privacy::Dlp::V2::Action::PublishSummaryToCscc (class)">PublishSummaryToCscc</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+
+  <span class='comment'># Publish findings of a DlpJob to Cloud Data Catalog. Labels summarizing the
+</span>  <span class='comment'># results of the DlpJob will be applied to the entry for the resource scanned
+</span>  <span class='comment'># in Cloud Data Catalog. Any labels previously written by another DlpJob will
+</span>  <span class='comment'># be deleted. InfoType naming patterns are strictly enforced when using this
+</span>  <span class='comment'># feature. Note that the findings will be persisted in Cloud Data Catalog
+</span>  <span class='comment'># storage and are governed by Data Catalog service-specific policy, see
+</span>  <span class='comment'># https://cloud.google.com/terms/service-terms
+</span>  <span class='comment'># Only a single instance of this action can be specified and only allowed if
+</span>  <span class='comment'># all resources being scanned are BigQuery tables.
+</span>  <span class='comment'># Compatible with: Inspect
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Action/PublishFindingsToCloudDataCatalog.html" title="Google::Privacy::Dlp::V2::Action::PublishFindingsToCloudDataCatalog (class)">PublishFindingsToCloudDataCatalog</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
   <span class='comment'># Enable email notification to project owners and editors on jobs&#39;s
 </span>  <span class='comment'># completion/failure.

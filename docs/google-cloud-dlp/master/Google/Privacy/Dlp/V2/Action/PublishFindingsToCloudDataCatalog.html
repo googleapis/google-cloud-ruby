@@ -1,6 +1,6 @@
 ---
 layout: yard_main
-title: "Class: Google::Privacy::Dlp::V2::Action::PublishToPubSub - Cloud"
+title: "Class: Google::Privacy::Dlp::V2::Action::PublishFindingsToCloudDataCatalog - Cloud"
 css: 
   - /docs/css/style.css
   - /docs/css/common.css
@@ -10,7 +10,7 @@ js:
   - /js/yard-main.js
 ---
 <script type="text/javascript" charset="utf-8">
-  pathId = "Google::Privacy::Dlp::V2::Action::PublishToPubSub";
+  pathId = "Google::Privacy::Dlp::V2::Action::PublishFindingsToCloudDataCatalog";
   relpath = '../../../../../';
 </script>
 
@@ -27,7 +27,7 @@ js:
     <a href="../../../../../_index.html">Index (P)</a> &raquo;
     <span class='title'><span class='object_link'><a href="../../../../../Google.html" title="Google (module)">Google</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../../../Privacy.html" title="Google::Privacy (module)">Privacy</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../../Dlp.html" title="Google::Privacy::Dlp (module)">Dlp</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../V2.html" title="Google::Privacy::Dlp::V2 (module)">V2</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../Action.html" title="Google::Privacy::Dlp::V2::Action (class)">Action</a></span></span>
      &raquo; 
-    <span class="title">PublishToPubSub</span>
+    <span class="title">PublishFindingsToCloudDataCatalog</span>
   
 </div>
 
@@ -47,7 +47,7 @@ js:
     <div class="clear"></div>
   </div>
 
-  <div id="content"><h1>Class: Google::Privacy::Dlp::V2::Action::PublishToPubSub
+  <div id="content"><h1>Class: Google::Privacy::Dlp::V2::Action::PublishFindingsToCloudDataCatalog
   
   
   
@@ -62,7 +62,7 @@ js:
         <ul class="fullTree">
           <li>Object</li>
           
-            <li class="next">Google::Privacy::Dlp::V2::Action::PublishToPubSub</li>
+            <li class="next">Google::Privacy::Dlp::V2::Action::PublishFindingsToCloudDataCatalog</li>
           
         </ul>
         <a href="#" class="inheritanceTree">show all</a>
@@ -89,11 +89,16 @@ js:
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>Publish a message into given Pub/Sub topic when DlpJob has completed. The
-message contains a single field, <code>DlpJobName</code>, which is equal to the
-finished job&#39;s
-<a href="https://cloud.google.com/dlp/docs/reference/rest/v2/projects.dlpJobs#DlpJob"><code>DlpJob.name</code></a>.
-Compatible with: Inspect, Risk</p>
+    <p>Publish findings of a DlpJob to Cloud Data Catalog. Labels summarizing the
+results of the DlpJob will be applied to the entry for the resource scanned
+in Cloud Data Catalog. Any labels previously written by another DlpJob will
+be deleted. InfoType naming patterns are strictly enforced when using this
+feature. Note that the findings will be persisted in Cloud Data Catalog
+storage and are governed by Data Catalog service-specific policy, see
+<a href="https://cloud.google.com/terms/service-terms">https://cloud.google.com/terms/service-terms</a>
+Only a single instance of this action can be specified and only allowed if
+all resources being scanned are BigQuery tables.
+Compatible with: Inspect</p>
 
 
   </div>
@@ -105,106 +110,9 @@ Compatible with: Inspect, Risk</p>
 
 
 
-  <h2>Instance Attribute Summary <small><a href="#" class="summary_toggle">collapse</a></small></h2>
-  <ul class="summary">
-    
-      <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#topic-instance_method" title="#topic (instance method)">#<strong>topic</strong>  &#x21d2; String </a>
-    
-
-    
-  </span>
-  
-  
-  
-    
-    
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'><p>Cloud Pub/Sub topic to send notifications to.</p>
-</div></span>
-  
-</li>
-
-    
-  </ul>
 
 
 
-
-
-  <div id="instance_attr_details" class="attr_details">
-    <h2>Instance Attribute Details</h2>
-    
-      
-      <span id="topic=-instance_method"></span>
-      <div class="method_details first">
-  <h3 class="signature first" id="topic-instance_method">
-  
-    #<strong>topic</strong>  &#x21d2; <tt>String</tt> 
-  
-
-  
-
-  
-</h3><div class="docstring">
-  <div class="discussion">
-    <p>Returns Cloud Pub/Sub topic to send notifications to. The topic must have given
-publishing access rights to the DLP API service account executing
-the long running DlpJob sending the notifications.
-Format is projects/{project}/topics/{topic}.</p>
-
-
-  </div>
-</div>
-<div class="tags">
-  
-<p class="tag_title">Returns:</p>
-<ul class="return">
-  
-    <li>
-      
-      
-        <span class='type'>(<tt>String</tt>)</span>
-      
-      
-      
-        &mdash;
-        <div class='inline'><p>Cloud Pub/Sub topic to send notifications to. The topic must have given
-publishing access rights to the DLP API service account executing
-the long running DlpJob sending the notifications.
-Format is projects/{project}/topics/{topic}.</p>
-</div>
-      
-    </li>
-  
-</ul>
-
-</div><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-1969</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/dlp.rb', line 1969</span>
-
-<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Privacy::Dlp::V2::Action::PublishToPubSub (class)">PublishToPubSub</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-  </div>
 
 
 </div>

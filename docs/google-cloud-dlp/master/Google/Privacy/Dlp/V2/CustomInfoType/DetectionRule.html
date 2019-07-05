@@ -89,9 +89,10 @@ js:
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>Rule for modifying a CustomInfoType to alter behavior under certain
-circumstances, depending on the specific details of the rule. Not supported
-for the <code>surrogate_type</code> custom info type.</p>
+    <p>Deprecated; use <code>InspectionRuleSet</code> instead. Rule for modifying a
+<code>CustomInfoType</code> to alter behavior under certain circumstances, depending
+on the specific details of the rule. Not supported for the <code>surrogate_type</code>
+custom infoType.</p>
 
 
   </div>
@@ -195,7 +196,6 @@ for the <code>surrogate_type</code> custom info type.</p>
       <pre class="lines">
 
 
-149
 150
 151
 152
@@ -242,10 +242,11 @@ for the <code>surrogate_type</code> custom info type.</p>
 193
 194
 195
-196</pre>
+196
+197</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/storage.rb', line 149</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/storage.rb', line 150</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Privacy::Dlp::V2::CustomInfoType::DetectionRule (class)">DetectionRule</a></span></span>
   <span class='comment'># Message for specifying a window around a finding to apply a detection
