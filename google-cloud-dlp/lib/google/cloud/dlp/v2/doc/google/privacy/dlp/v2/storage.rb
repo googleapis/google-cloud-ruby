@@ -140,9 +140,10 @@ module Google
           # not support the use of `detection_rules`.
           class SurrogateType; end
 
-          # Rule for modifying a CustomInfoType to alter behavior under certain
-          # circumstances, depending on the specific details of the rule. Not supported
-          # for the `surrogate_type` custom info type.
+          # Deprecated; use `InspectionRuleSet` instead. Rule for modifying a
+          # `CustomInfoType` to alter behavior under certain circumstances, depending
+          # on the specific details of the rule. Not supported for the `surrogate_type`
+          # custom infoType.
           # @!attribute [rw] hotword_rule
           #   @return [Google::Privacy::Dlp::V2::CustomInfoType::DetectionRule::HotwordRule]
           #     Hotword-based detection rule.

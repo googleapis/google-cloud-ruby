@@ -5,7 +5,6 @@
 require 'google/protobuf'
 
 require 'google/api/annotations_pb'
-require 'google/api/client_pb'
 require 'google/privacy/dlp/v2/storage_pb'
 require 'google/protobuf/duration_pb'
 require 'google/protobuf/empty_pb'
@@ -15,6 +14,7 @@ require 'google/rpc/status_pb'
 require 'google/type/date_pb'
 require 'google/type/dayofweek_pb'
 require 'google/type/timeofday_pb'
+require 'google/api/client_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.privacy.dlp.v2.ExcludeInfoTypes" do
     repeated :info_types, :message, 1, "google.privacy.dlp.v2.InfoType"
@@ -668,6 +668,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :save_findings, :message, 1, "google.privacy.dlp.v2.Action.SaveFindings"
       optional :pub_sub, :message, 2, "google.privacy.dlp.v2.Action.PublishToPubSub"
       optional :publish_summary_to_cscc, :message, 3, "google.privacy.dlp.v2.Action.PublishSummaryToCscc"
+      optional :publish_findings_to_cloud_data_catalog, :message, 5, "google.privacy.dlp.v2.Action.PublishFindingsToCloudDataCatalog"
       optional :job_notification_emails, :message, 8, "google.privacy.dlp.v2.Action.JobNotificationEmails"
     end
   end
@@ -678,6 +679,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :topic, :string, 1
   end
   add_message "google.privacy.dlp.v2.Action.PublishSummaryToCscc" do
+  end
+  add_message "google.privacy.dlp.v2.Action.PublishFindingsToCloudDataCatalog" do
   end
   add_message "google.privacy.dlp.v2.Action.JobNotificationEmails" do
   end
@@ -1047,6 +1050,7 @@ module Google
         Action::SaveFindings = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.Action.SaveFindings").msgclass
         Action::PublishToPubSub = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.Action.PublishToPubSub").msgclass
         Action::PublishSummaryToCscc = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.Action.PublishSummaryToCscc").msgclass
+        Action::PublishFindingsToCloudDataCatalog = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.Action.PublishFindingsToCloudDataCatalog").msgclass
         Action::JobNotificationEmails = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.Action.JobNotificationEmails").msgclass
         CreateInspectTemplateRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.CreateInspectTemplateRequest").msgclass
         UpdateInspectTemplateRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.UpdateInspectTemplateRequest").msgclass
