@@ -7,6 +7,7 @@ require 'google/protobuf'
 require 'google/cloud/dialogflow/v2/context_pb'
 require 'google/cloud/dialogflow/v2/intent_pb'
 require 'google/cloud/dialogflow/v2/session_pb'
+require 'google/cloud/dialogflow/v2/session_entity_type_pb'
 require 'google/protobuf/struct_pb'
 require 'google/api/annotations_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do

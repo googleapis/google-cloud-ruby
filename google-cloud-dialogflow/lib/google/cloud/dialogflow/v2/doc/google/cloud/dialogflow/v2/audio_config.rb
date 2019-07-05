@@ -32,15 +32,15 @@ module Google
         #   @return [String]
         #     Required. The language of the supplied audio. Dialogflow does not do
         #     translations. See [Language
-        #     Support](https://cloud.google.com/dialogflow-enterprise/docs/reference/language)
+        #     Support](https://cloud.google.com/dialogflow/docs/reference/language)
         #     for a list of the currently supported language codes. Note that queries in
         #     the same session do not necessarily need to specify the same language.
         # @!attribute [rw] phrase_hints
         #   @return [Array<String>]
-        #     Optional. The collection of phrase hints which are used to boost accuracy
-        #     of speech recognition.
-        #     Refer to
-        #     [Cloud Speech API
+        #     Optional. A list of strings containing words and phrases that the speech
+        #     recognizer should recognize with higher likelihood.
+        #
+        #     See [the Cloud Speech
         #     documentation](https://cloud.google.com/speech-to-text/docs/basics#phrase-hints)
         #     for more details.
         # @!attribute [rw] model_variant
@@ -194,7 +194,7 @@ module Google
           # model][InputAudioConfig.model] that the caller is eligible for.
           #
           # Please see the [Dialogflow
-          # docs](https://cloud.google.com/dialogflow-enterprise/docs/data-logging) for
+          # docs](https://cloud.google.com/dialogflow/docs/data-logging) for
           # how to make your project eligible for enhanced models.
           USE_BEST_AVAILABLE = 1
 
@@ -216,7 +216,7 @@ module Google
           #
           # * If the API caller isn't eligible for enhanced models, Dialogflow returns
           #   an error. Please see the [Dialogflow
-          #   docs](https://cloud.google.com/dialogflow-enterprise/docs/data-logging)
+          #   docs](https://cloud.google.com/dialogflow/docs/data-logging)
           #   for how to make your project eligible.
           USE_ENHANCED = 3
         end
