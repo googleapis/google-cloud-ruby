@@ -115,7 +115,7 @@ represented by the <span class='object_link'><a href="SessionEntityType.html" ti
 </ul>
 
 <p>For more information about entity types, see the
-<a href="https://cloud.google.com/dialogflow-enterprise/docs/entities-overview">Dialogflow
+<a href="https://cloud.google.com/dialogflow/docs/entities-overview">Dialogflow
 documentation</a>.</p>
 
 
@@ -461,7 +461,7 @@ this service.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(credentials: nil, scopes: ALL_SCOPES, client_config: {}, timeout: DEFAULT_TIMEOUT, metadata: nil, exception_transformer: nil, lib_name: nil, lib_version: &quot;&quot;)  &#x21d2; EntityTypesClient </a>
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(credentials: nil, scopes: ALL_SCOPES, client_config: {}, timeout: DEFAULT_TIMEOUT, metadata: nil, service_address: nil, service_port: nil, exception_transformer: nil, lib_name: nil, lib_version: &quot;&quot;)  &#x21d2; EntityTypesClient </a>
     
 
     
@@ -538,7 +538,7 @@ this service.</p>
     <div class="method_details first">
   <h3 class="signature first" id="initialize-instance_method">
   
-    #<strong>initialize</strong>(credentials: nil, scopes: ALL_SCOPES, client_config: {}, timeout: DEFAULT_TIMEOUT, metadata: nil, exception_transformer: nil, lib_name: nil, lib_version: &quot;&quot;)  &#x21d2; <tt><span class='object_link'><a href="" title="Google::Cloud::Dialogflow::V2::EntityTypesClient (class)">EntityTypesClient</a></span></tt> 
+    #<strong>initialize</strong>(credentials: nil, scopes: ALL_SCOPES, client_config: {}, timeout: DEFAULT_TIMEOUT, metadata: nil, service_address: nil, service_port: nil, exception_transformer: nil, lib_name: nil, lib_version: &quot;&quot;)  &#x21d2; <tt><span class='object_link'><a href="" title="Google::Cloud::Dialogflow::V2::EntityTypesClient (class)">EntityTypesClient</a></span></tt> 
   
 
   
@@ -648,6 +648,36 @@ or the specified config is missing data points.</p>
   
     <li>
       
+        <span class='name'>service_address</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Override for the service hostname, or <code>nil</code> to leave as the default.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>service_port</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Override for the service port, or <code>nil</code> to leave as the default.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
         <span class='name'>exception_transformer</span>
       
       
@@ -671,10 +701,6 @@ custom error handling.</p>
       <pre class="lines">
 
 
-167
-168
-169
-170
 171
 172
 173
@@ -834,10 +860,19 @@ custom error handling.</p>
 327
 328
 329
-330</pre>
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/entity_types_client.rb', line 167</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/entity_types_client.rb', line 171</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span> \
     <span class='label'>credentials:</span> <span class='kw'>nil</span><span class='comma'>,</span>
@@ -845,6 +880,8 @@ custom error handling.</p>
     <span class='label'>client_config:</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='comma'>,</span>
     <span class='label'>timeout:</span> <span class='const'><span class='object_link'><a href="#DEFAULT_TIMEOUT-constant" title="Google::Cloud::Dialogflow::V2::EntityTypesClient::DEFAULT_TIMEOUT (constant)">DEFAULT_TIMEOUT</a></span></span><span class='comma'>,</span>
     <span class='label'>metadata:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+    <span class='label'>service_address:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+    <span class='label'>service_port:</span> <span class='kw'>nil</span><span class='comma'>,</span>
     <span class='label'>exception_transformer:</span> <span class='kw'>nil</span><span class='comma'>,</span>
     <span class='label'>lib_name:</span> <span class='kw'>nil</span><span class='comma'>,</span>
     <span class='label'>lib_version:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span>
@@ -862,7 +899,10 @@ custom error handling.</p>
     <span class='label'>client_config:</span> <span class='id identifier rubyid_client_config'>client_config</span><span class='comma'>,</span>
     <span class='label'>timeout:</span> <span class='id identifier rubyid_timeout'>timeout</span><span class='comma'>,</span>
     <span class='label'>lib_name:</span> <span class='id identifier rubyid_lib_name'>lib_name</span><span class='comma'>,</span>
+    <span class='label'>service_address:</span> <span class='id identifier rubyid_service_address'>service_address</span><span class='comma'>,</span>
+    <span class='label'>service_port:</span> <span class='id identifier rubyid_service_port'>service_port</span><span class='comma'>,</span>
     <span class='label'>lib_version:</span> <span class='id identifier rubyid_lib_version'>lib_version</span><span class='comma'>,</span>
+    <span class='label'>metadata:</span> <span class='id identifier rubyid_metadata'>metadata</span><span class='comma'>,</span>
   <span class='rparen'>)</span>
 
   <span class='kw'>if</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>String</span><span class='rparen'>)</span> <span class='op'>||</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>Hash</span><span class='rparen'>)</span>
@@ -908,8 +948,8 @@ custom error handling.</p>
   <span class='kw'>end</span>
 
   <span class='comment'># Allow overriding the service path/port in subclasses.
-</span>  <span class='id identifier rubyid_service_path'>service_path</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='op'>::</span><span class='const'>SERVICE_ADDRESS</span>
-  <span class='id identifier rubyid_port'>port</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='op'>::</span><span class='const'>DEFAULT_SERVICE_PORT</span>
+</span>  <span class='id identifier rubyid_service_path'>service_path</span> <span class='op'>=</span> <span class='id identifier rubyid_service_address'>service_address</span> <span class='op'>||</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='op'>::</span><span class='const'>SERVICE_ADDRESS</span>
+  <span class='id identifier rubyid_port'>port</span> <span class='op'>=</span> <span class='id identifier rubyid_service_port'>service_port</span> <span class='op'>||</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='op'>::</span><span class='const'>DEFAULT_SERVICE_PORT</span>
   <span class='id identifier rubyid_interceptors'>interceptors</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='op'>::</span><span class='const'>GRPC_INTERCEPTORS</span>
   <span class='ivar'>@entity_types_stub</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='const'>Grpc</span><span class='period'>.</span><span class='id identifier rubyid_create_stub'>create_stub</span><span class='lparen'>(</span>
     <span class='id identifier rubyid_service_path'>service_path</span><span class='comma'>,</span>
@@ -1286,7 +1326,7 @@ can also be provided.</p>
         &mdash;
         <div class='inline'><p>Optional. The language of entity synonyms defined in <code>entities</code>. If not
 specified, the agent&#39;s default language is used.
-<a href="https://cloud.google.com/dialogflow-enterprise/docs/reference/language">Many
+<a href="https://cloud.google.com/dialogflow/docs/reference/language">Many
 languages</a>
 are supported. Note: languages must be enabled in the agent before they can
 be used.</p>
@@ -1349,15 +1389,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-788
-789
-790
-791
-792
-793
-794
-795
-796
 797
 798
 799
@@ -1369,10 +1400,19 @@ retries, etc.</p>
 805
 806
 807
-808</pre>
+808
+809
+810
+811
+812
+813
+814
+815
+816
+817</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/entity_types_client.rb', line 788</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/entity_types_client.rb', line 797</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_batch_create_entities'>batch_create_entities</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -1508,7 +1548,7 @@ these are not fully-qualified names, i.e. they don&#39;t start with
         &mdash;
         <div class='inline'><p>Optional. The language of entity synonyms defined in <code>entities</code>. If not
 specified, the agent&#39;s default language is used.
-<a href="https://cloud.google.com/dialogflow-enterprise/docs/reference/language">Many
+<a href="https://cloud.google.com/dialogflow/docs/reference/language">Many
 languages</a>
 are supported. Note: languages must be enabled in the agent before they can
 be used.</p>
@@ -1571,15 +1611,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-958
-959
-960
-961
-962
-963
-964
-965
-966
 967
 968
 969
@@ -1591,10 +1622,19 @@ retries, etc.</p>
 975
 976
 977
-978</pre>
+978
+979
+980
+981
+982
+983
+984
+985
+986
+987</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/entity_types_client.rb', line 958</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/entity_types_client.rb', line 967</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_batch_delete_entities'>batch_delete_entities</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -1772,15 +1812,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-709
-710
-711
-712
-713
-714
-715
-716
-717
 718
 719
 720
@@ -1790,10 +1821,19 @@ retries, etc.</p>
 724
 725
 726
-727</pre>
+727
+728
+729
+730
+731
+732
+733
+734
+735
+736</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/entity_types_client.rb', line 709</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/entity_types_client.rb', line 718</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_batch_delete_entity_types'>batch_delete_entity_types</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -1929,7 +1969,7 @@ can also be provided.</p>
         &mdash;
         <div class='inline'><p>Optional. The language of entity synonyms defined in <code>entities</code>. If not
 specified, the agent&#39;s default language is used.
-<a href="https://cloud.google.com/dialogflow-enterprise/docs/reference/language">Many
+<a href="https://cloud.google.com/dialogflow/docs/reference/language">Many
 languages</a>
 are supported. Note: languages must be enabled in the agent before they can
 be used.</p>
@@ -2009,15 +2049,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-875
-876
-877
-878
-879
-880
-881
-882
-883
 884
 885
 886
@@ -2031,10 +2062,19 @@ retries, etc.</p>
 894
 895
 896
-897</pre>
+897
+898
+899
+900
+901
+902
+903
+904
+905
+906</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/entity_types_client.rb', line 875</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/entity_types_client.rb', line 884</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_batch_update_entities'>batch_update_entities</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -2187,7 +2227,7 @@ can also be provided.</p>
         &mdash;
         <div class='inline'><p>Optional. The language of entity synonyms defined in <code>entity_types</code>. If not
 specified, the agent&#39;s default language is used.
-<a href="https://cloud.google.com/dialogflow-enterprise/docs/reference/language">Many
+<a href="https://cloud.google.com/dialogflow/docs/reference/language">Many
 languages</a>
 are supported. Note: languages must be enabled in the agent before they can
 be used.</p>
@@ -2267,15 +2307,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-632
-633
-634
-635
-636
-637
-638
-639
-640
 641
 642
 643
@@ -2291,10 +2322,19 @@ retries, etc.</p>
 653
 654
 655
-656</pre>
+656
+657
+658
+659
+660
+661
+662
+663
+664
+665</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/entity_types_client.rb', line 632</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/entity_types_client.rb', line 641</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_batch_update_entity_types'>batch_update_entity_types</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -2406,7 +2446,7 @@ can also be provided.</p>
         &mdash;
         <div class='inline'><p>Optional. The language of entity synonyms defined in <code>entity_type</code>. If not
 specified, the agent&#39;s default language is used.
-<a href="https://cloud.google.com/dialogflow-enterprise/docs/reference/language">Many
+<a href="https://cloud.google.com/dialogflow/docs/reference/language">Many
 languages</a>
 are supported. Note: languages must be enabled in the agent before they can
 be used.</p>
@@ -2512,23 +2552,23 @@ retries, etc.</p>
       <pre class="lines">
 
 
-472
-473
-474
-475
-476
-477
-478
-479
-480
 481
 482
 483
 484
-485</pre>
+485
+486
+487
+488
+489
+490
+491
+492
+493
+494</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/entity_types_client.rb', line 472</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/entity_types_client.rb', line 481</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_entity_type'>create_entity_type</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -2686,20 +2726,20 @@ retries, etc.</p>
       <pre class="lines">
 
 
-555
-556
-557
-558
-559
-560
-561
-562
-563
 564
-565</pre>
+565
+566
+567
+568
+569
+570
+571
+572
+573
+574</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/entity_types_client.rb', line 555</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/entity_types_client.rb', line 564</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete_entity_type'>delete_entity_type</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -2777,7 +2817,7 @@ Format: <code>projects/&lt;Project ID&gt;/agent/entityTypes/&lt;EntityType ID&gt
         &mdash;
         <div class='inline'><p>Optional. The language to retrieve entity synonyms for. If not specified,
 the agent&#39;s default language is used.
-<a href="https://cloud.google.com/dialogflow-enterprise/docs/reference/language">Many
+<a href="https://cloud.google.com/dialogflow/docs/reference/language">Many
 languages</a>
 are supported. Note: languages must be enabled in the agent before they can
 be used.</p>
@@ -2883,21 +2923,21 @@ retries, etc.</p>
       <pre class="lines">
 
 
-425
-426
-427
-428
-429
-430
-431
-432
-433
 434
 435
-436</pre>
+436
+437
+438
+439
+440
+441
+442
+443
+444
+445</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/entity_types_client.rb', line 425</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/entity_types_client.rb', line 434</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_entity_type'>get_entity_type</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -2988,7 +3028,7 @@ Format: <code>projects/&lt;Project ID&gt;/agent</code>.</p>
         &mdash;
         <div class='inline'><p>Optional. The language to list entity synonyms for. If not specified,
 the agent&#39;s default language is used.
-<a href="https://cloud.google.com/dialogflow-enterprise/docs/reference/language">Many
+<a href="https://cloud.google.com/dialogflow/docs/reference/language">Many
 languages</a>
 are supported. Note: languages must be enabled in the agent before they can
 be used.</p>
@@ -3120,23 +3160,23 @@ object.</p>
       <pre class="lines">
 
 
-383
-384
-385
-386
-387
-388
-389
-390
-391
 392
 393
 394
 395
-396</pre>
+396
+397
+398
+399
+400
+401
+402
+403
+404
+405</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/entity_types_client.rb', line 383</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/entity_types_client.rb', line 392</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_entity_types'>list_entity_types</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -3220,7 +3260,7 @@ can also be provided.</p>
         &mdash;
         <div class='inline'><p>Optional. The language of entity synonyms defined in <code>entity_type</code>. If not
 specified, the agent&#39;s default language is used.
-<a href="https://cloud.google.com/dialogflow-enterprise/docs/reference/language">Many
+<a href="https://cloud.google.com/dialogflow/docs/reference/language">Many
 languages</a>
 are supported. Note: languages must be enabled in the agent before they can
 be used.</p>
@@ -3343,23 +3383,23 @@ retries, etc.</p>
       <pre class="lines">
 
 
-521
-522
-523
-524
-525
-526
-527
-528
-529
 530
 531
 532
 533
-534</pre>
+534
+535
+536
+537
+538
+539
+540
+541
+542
+543</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/entity_types_client.rb', line 521</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/entity_types_client.rb', line 530</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update_entity_type'>update_entity_type</span> \
     <span class='id identifier rubyid_entity_type'>entity_type</span><span class='comma'>,</span>

@@ -311,9 +311,6 @@ not rely on it being accurate or even set.</p>
       <pre class="lines">
 
 
-360
-361
-362
 363
 364
 365
@@ -329,10 +326,13 @@ not rely on it being accurate or even set.</p>
 375
 376
 377
-378</pre>
+378
+379
+380
+381</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/session.rb', line 360</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/session.rb', line 363</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dialogflow::V2::StreamingRecognitionResult (class)">StreamingRecognitionResult</a></span></span>
   <span class='comment'># Type of the response message.
@@ -344,12 +344,12 @@ not rely on it being accurate or even set.</p>
 </span>    <span class='const'>TRANSCRIPT</span> <span class='op'>=</span> <span class='int'>1</span>
 
     <span class='comment'># Event indicates that the server has detected the end of the user&#39;s speech
-</span>    <span class='comment'># utterance and expects no additional speech. Therefore, the server will
-</span>    <span class='comment'># not process additional audio (although it may subsequently return
-</span>    <span class='comment'># additional results). The client should stop sending additional audio
-</span>    <span class='comment'># data, half-close the gRPC connection, and wait for any additional results
-</span>    <span class='comment'># until the server closes the gRPC connection. This message is only sent if
-</span>    <span class='comment'># `single_utterance` was set to `true`, and is not used otherwise.
+</span>    <span class='comment'># utterance and expects no additional inputs.
+</span>    <span class='comment'># Therefore, the server will not process additional audio (although it may subsequently return additional results). The
+</span>    <span class='comment'># client should stop sending additional audio data, half-close the gRPC
+</span>    <span class='comment'># connection, and wait for any additional results until the server closes
+</span>    <span class='comment'># the gRPC connection. This message is only sent if `single_utterance` was
+</span>    <span class='comment'># set to `true`, and is not used otherwise.
 </span>    <span class='const'>END_OF_SINGLE_UTTERANCE</span> <span class='op'>=</span> <span class='int'>2</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
@@ -408,9 +408,6 @@ for <code>message_type</code> = <code>MESSAGE_TYPE_TRANSCRIPT</code>.</p>
       <pre class="lines">
 
 
-360
-361
-362
 363
 364
 365
@@ -426,10 +423,13 @@ for <code>message_type</code> = <code>MESSAGE_TYPE_TRANSCRIPT</code>.</p>
 375
 376
 377
-378</pre>
+378
+379
+380
+381</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/session.rb', line 360</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/session.rb', line 363</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dialogflow::V2::StreamingRecognitionResult (class)">StreamingRecognitionResult</a></span></span>
   <span class='comment'># Type of the response message.
@@ -441,12 +441,12 @@ for <code>message_type</code> = <code>MESSAGE_TYPE_TRANSCRIPT</code>.</p>
 </span>    <span class='const'>TRANSCRIPT</span> <span class='op'>=</span> <span class='int'>1</span>
 
     <span class='comment'># Event indicates that the server has detected the end of the user&#39;s speech
-</span>    <span class='comment'># utterance and expects no additional speech. Therefore, the server will
-</span>    <span class='comment'># not process additional audio (although it may subsequently return
-</span>    <span class='comment'># additional results). The client should stop sending additional audio
-</span>    <span class='comment'># data, half-close the gRPC connection, and wait for any additional results
-</span>    <span class='comment'># until the server closes the gRPC connection. This message is only sent if
-</span>    <span class='comment'># `single_utterance` was set to `true`, and is not used otherwise.
+</span>    <span class='comment'># utterance and expects no additional inputs.
+</span>    <span class='comment'># Therefore, the server will not process additional audio (although it may subsequently return additional results). The
+</span>    <span class='comment'># client should stop sending additional audio data, half-close the gRPC
+</span>    <span class='comment'># connection, and wait for any additional results until the server closes
+</span>    <span class='comment'># the gRPC connection. This message is only sent if `single_utterance` was
+</span>    <span class='comment'># set to `true`, and is not used otherwise.
 </span>    <span class='const'>END_OF_SINGLE_UTTERANCE</span> <span class='op'>=</span> <span class='int'>2</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
@@ -499,9 +499,6 @@ for <code>message_type</code> = <code>MESSAGE_TYPE_TRANSCRIPT</code>.</p>
       <pre class="lines">
 
 
-360
-361
-362
 363
 364
 365
@@ -517,10 +514,13 @@ for <code>message_type</code> = <code>MESSAGE_TYPE_TRANSCRIPT</code>.</p>
 375
 376
 377
-378</pre>
+378
+379
+380
+381</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/session.rb', line 360</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/session.rb', line 363</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dialogflow::V2::StreamingRecognitionResult (class)">StreamingRecognitionResult</a></span></span>
   <span class='comment'># Type of the response message.
@@ -532,12 +532,12 @@ for <code>message_type</code> = <code>MESSAGE_TYPE_TRANSCRIPT</code>.</p>
 </span>    <span class='const'>TRANSCRIPT</span> <span class='op'>=</span> <span class='int'>1</span>
 
     <span class='comment'># Event indicates that the server has detected the end of the user&#39;s speech
-</span>    <span class='comment'># utterance and expects no additional speech. Therefore, the server will
-</span>    <span class='comment'># not process additional audio (although it may subsequently return
-</span>    <span class='comment'># additional results). The client should stop sending additional audio
-</span>    <span class='comment'># data, half-close the gRPC connection, and wait for any additional results
-</span>    <span class='comment'># until the server closes the gRPC connection. This message is only sent if
-</span>    <span class='comment'># `single_utterance` was set to `true`, and is not used otherwise.
+</span>    <span class='comment'># utterance and expects no additional inputs.
+</span>    <span class='comment'># Therefore, the server will not process additional audio (although it may subsequently return additional results). The
+</span>    <span class='comment'># client should stop sending additional audio data, half-close the gRPC
+</span>    <span class='comment'># connection, and wait for any additional results until the server closes
+</span>    <span class='comment'># the gRPC connection. This message is only sent if `single_utterance` was
+</span>    <span class='comment'># set to `true`, and is not used otherwise.
 </span>    <span class='const'>END_OF_SINGLE_UTTERANCE</span> <span class='op'>=</span> <span class='int'>2</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
@@ -592,9 +592,6 @@ Populated if and only if <code>message_type</code> = <code>MESSAGE_TYPE_TRANSCRI
       <pre class="lines">
 
 
-360
-361
-362
 363
 364
 365
@@ -610,10 +607,13 @@ Populated if and only if <code>message_type</code> = <code>MESSAGE_TYPE_TRANSCRI
 375
 376
 377
-378</pre>
+378
+379
+380
+381</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/session.rb', line 360</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/session.rb', line 363</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dialogflow::V2::StreamingRecognitionResult (class)">StreamingRecognitionResult</a></span></span>
   <span class='comment'># Type of the response message.
@@ -625,12 +625,12 @@ Populated if and only if <code>message_type</code> = <code>MESSAGE_TYPE_TRANSCRI
 </span>    <span class='const'>TRANSCRIPT</span> <span class='op'>=</span> <span class='int'>1</span>
 
     <span class='comment'># Event indicates that the server has detected the end of the user&#39;s speech
-</span>    <span class='comment'># utterance and expects no additional speech. Therefore, the server will
-</span>    <span class='comment'># not process additional audio (although it may subsequently return
-</span>    <span class='comment'># additional results). The client should stop sending additional audio
-</span>    <span class='comment'># data, half-close the gRPC connection, and wait for any additional results
-</span>    <span class='comment'># until the server closes the gRPC connection. This message is only sent if
-</span>    <span class='comment'># `single_utterance` was set to `true`, and is not used otherwise.
+</span>    <span class='comment'># utterance and expects no additional inputs.
+</span>    <span class='comment'># Therefore, the server will not process additional audio (although it may subsequently return additional results). The
+</span>    <span class='comment'># client should stop sending additional audio data, half-close the gRPC
+</span>    <span class='comment'># connection, and wait for any additional results until the server closes
+</span>    <span class='comment'># the gRPC connection. This message is only sent if `single_utterance` was
+</span>    <span class='comment'># set to `true`, and is not used otherwise.
 </span>    <span class='const'>END_OF_SINGLE_UTTERANCE</span> <span class='op'>=</span> <span class='int'>2</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>

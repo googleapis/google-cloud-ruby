@@ -162,7 +162,7 @@ and optionally <code>webhook_status</code> if a WebHook was called.</p></li>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Instructs the speech synthesizer how to generate the output audio.</p>
+    <span class="summary_desc"><div class='inline'><p>The config used by the speech synthesizer to generate the output audio.</p>
 </div></span>
   
 </li>
@@ -294,7 +294,12 @@ and optionally <code>webhook_status</code> if a WebHook was called.</p></li>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns The audio data bytes encoded as specified in the request.</p>
+    <p>Returns The audio data bytes encoded as specified in the request.
+Note: The output audio is generated based on the values of default platform
+text responses found in the <code>query_result.fulfillment_messages</code> field. If
+multiple default text responses exist, they will be concatenated when
+generating audio. If no default platform text responses exist, the
+generated audio content will be empty.</p>
 
 
   </div>
@@ -312,7 +317,12 @@ and optionally <code>webhook_status</code> if a WebHook was called.</p></li>
       
       
         &mdash;
-        <div class='inline'><p>The audio data bytes encoded as specified in the request.</p>
+        <div class='inline'><p>The audio data bytes encoded as specified in the request.
+Note: The output audio is generated based on the values of default platform
+text responses found in the <code>query_result.fulfillment_messages</code> field. If
+multiple default text responses exist, they will be concatenated when
+generating audio. If no default platform text responses exist, the
+generated audio content will be empty.</p>
 </div>
       
     </li>
@@ -325,10 +335,10 @@ and optionally <code>webhook_status</code> if a WebHook was called.</p></li>
       <pre class="lines">
 
 
-303</pre>
+306</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/session.rb', line 303</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/session.rb', line 306</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dialogflow::V2::StreamingDetectIntentResponse (class)">StreamingDetectIntentResponse</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -349,9 +359,7 @@ and optionally <code>webhook_status</code> if a WebHook was called.</p></li>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Instructs the speech synthesizer how to generate the output audio. This
-field is populated from the agent-level speech synthesizer configuration,
-if enabled.</p>
+    <p>Returns The config used by the speech synthesizer to generate the output audio.</p>
 
 
   </div>
@@ -369,9 +377,7 @@ if enabled.</p>
       
       
         &mdash;
-        <div class='inline'><p>Instructs the speech synthesizer how to generate the output audio. This
-field is populated from the agent-level speech synthesizer configuration,
-if enabled.</p>
+        <div class='inline'><p>The config used by the speech synthesizer to generate the output audio.</p>
 </div>
       
     </li>
@@ -384,10 +390,10 @@ if enabled.</p>
       <pre class="lines">
 
 
-303</pre>
+306</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/session.rb', line 303</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/session.rb', line 306</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dialogflow::V2::StreamingDetectIntentResponse (class)">StreamingDetectIntentResponse</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -439,10 +445,10 @@ if enabled.</p>
       <pre class="lines">
 
 
-303</pre>
+306</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/session.rb', line 303</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/session.rb', line 306</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dialogflow::V2::StreamingDetectIntentResponse (class)">StreamingDetectIntentResponse</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -494,10 +500,10 @@ if enabled.</p>
       <pre class="lines">
 
 
-303</pre>
+306</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/session.rb', line 303</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/session.rb', line 306</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dialogflow::V2::StreamingDetectIntentResponse (class)">StreamingDetectIntentResponse</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -551,10 +557,10 @@ locate a response in the training example set or for reporting issues.</p>
       <pre class="lines">
 
 
-303</pre>
+306</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/session.rb', line 303</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/session.rb', line 306</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dialogflow::V2::StreamingDetectIntentResponse (class)">StreamingDetectIntentResponse</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -606,10 +612,10 @@ locate a response in the training example set or for reporting issues.</p>
       <pre class="lines">
 
 
-303</pre>
+306</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/session.rb', line 303</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/session.rb', line 306</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dialogflow::V2::StreamingDetectIntentResponse (class)">StreamingDetectIntentResponse</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>

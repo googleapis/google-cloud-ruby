@@ -101,7 +101,7 @@ js:
 <p class="children">
   
     
-      <strong class="modules">Modules:</strong> <span class='object_link'><a href="Agent/MatchMode.html" title="Google::Cloud::Dialogflow::V2::Agent::MatchMode (module)">MatchMode</a></span>
+      <strong class="modules">Modules:</strong> <span class='object_link'><a href="Agent/ApiVersion.html" title="Google::Cloud::Dialogflow::V2::Agent::ApiVersion (module)">ApiVersion</a></span>, <span class='object_link'><a href="Agent/MatchMode.html" title="Google::Cloud::Dialogflow::V2::Agent::MatchMode (module)">MatchMode</a></span>, <span class='object_link'><a href="Agent/Tier.html" title="Google::Cloud::Dialogflow::V2::Agent::Tier (module)">Tier</a></span>
     
   
     
@@ -113,6 +113,32 @@ js:
 
   <h2>Instance Attribute Summary <small><a href="#" class="summary_toggle">collapse</a></small></h2>
   <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#api_version-instance_method" title="#api_version (instance method)">#<strong>api_version</strong>  &#x21d2; Google::Cloud::Dialogflow::V2::Agent::ApiVersion </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Optional.</p>
+</div></span>
+  
+</li>
+
     
       <li class="public ">
   <span class="summary_signature">
@@ -351,6 +377,32 @@ js:
       <li class="public ">
   <span class="summary_signature">
     
+      <a href="#tier-instance_method" title="#tier (instance method)">#<strong>tier</strong>  &#x21d2; Google::Cloud::Dialogflow::V2::Agent::Tier </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Optional.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#time_zone-instance_method" title="#time_zone (instance method)">#<strong>time_zone</strong>  &#x21d2; String </a>
     
 
@@ -384,9 +436,158 @@ js:
     <h2>Instance Attribute Details</h2>
     
       
-      <span id="avatar_uri=-instance_method"></span>
+      <span id="api_version=-instance_method"></span>
       <div class="method_details first">
-  <h3 class="signature first" id="avatar_uri-instance_method">
+  <h3 class="signature first" id="api_version-instance_method">
+  
+    #<strong>api_version</strong>  &#x21d2; <tt><span class='object_link'><a href="Agent/ApiVersion.html" title="Google::Cloud::Dialogflow::V2::Agent::ApiVersion (module)">Google::Cloud::Dialogflow::V2::Agent::ApiVersion</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Optional. API version displayed in Dialogflow console. If not specified,
+V2 API is assumed. Clients are free to query different service endpoints
+for different API versions. However, bots connectors and webhook calls will
+follow the specified API version.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Agent/ApiVersion.html" title="Google::Cloud::Dialogflow::V2::Agent::ApiVersion (module)">Google::Cloud::Dialogflow::V2::Agent::ApiVersion</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Optional. API version displayed in Dialogflow console. If not specified,
+V2 API is assumed. Clients are free to query different service endpoints
+for different API versions. However, bots connectors and webhook calls will
+follow the specified API version.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/agent.rb', line 79</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dialogflow::V2::Agent (class)">Agent</a></span></span>
+  <span class='comment'># API version for the agent.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Agent/ApiVersion.html" title="Google::Cloud::Dialogflow::V2::Agent::ApiVersion (module)">ApiVersion</a></span></span>
+    <span class='comment'># Not specified.
+</span>    <span class='const'>API_VERSION_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Legacy V1 API.
+</span>    <span class='const'>API_VERSION_V1</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># V2 API.
+</span>    <span class='const'>API_VERSION_V2</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># V2beta1 API.
+</span>    <span class='const'>API_VERSION_V2_BETA_1</span> <span class='op'>=</span> <span class='int'>3</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># Match mode determines how intents are detected from user queries.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Agent/MatchMode.html" title="Google::Cloud::Dialogflow::V2::Agent::MatchMode (module)">MatchMode</a></span></span>
+    <span class='comment'># Not specified.
+</span>    <span class='const'>MATCH_MODE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Best for agents with a small number of examples in intents and/or wide
+</span>    <span class='comment'># use of templates syntax and composite entities.
+</span>    <span class='const'>MATCH_MODE_HYBRID</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># Can be used for agents with a large number of examples in intents,
+</span>    <span class='comment'># especially the ones using @sys.any or very large developer entities.
+</span>    <span class='const'>MATCH_MODE_ML_ONLY</span> <span class='op'>=</span> <span class='int'>2</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># Represents the agent tier.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Agent/Tier.html" title="Google::Cloud::Dialogflow::V2::Agent::Tier (module)">Tier</a></span></span>
+    <span class='comment'># Not specified. This value should never be used.
+</span>    <span class='const'>TIER_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Standard tier.
+</span>    <span class='const'>TIER_STANDARD</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># Enterprise tier (Essentials).
+</span>    <span class='const'>TIER_ENTERPRISE</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># Enterprise tier (Plus).
+</span>    <span class='const'>TIER_ENTERPRISE_PLUS</span> <span class='op'>=</span> <span class='int'>3</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="avatar_uri=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="avatar_uri-instance_method">
   
     #<strong>avatar_uri</strong>  &#x21d2; <tt>String</tt> 
   
@@ -398,7 +599,7 @@ js:
   <div class="discussion">
     <p>Returns Optional. The URI of the agent&#39;s avatar.
 Avatars are used throughout the Dialogflow console and in the self-hosted
-<a href="https://cloud.google.com/dialogflow-enterprise/docs/integrations/web-demo">Web
+<a href="https://cloud.google.com/dialogflow/docs/integrations/web-demo">Web
 Demo</a>
 integration.</p>
 
@@ -420,7 +621,7 @@ integration.</p>
         &mdash;
         <div class='inline'><p>Optional. The URI of the agent&#39;s avatar.
 Avatars are used throughout the Dialogflow console and in the self-hosted
-<a href="https://cloud.google.com/dialogflow-enterprise/docs/integrations/web-demo">Web
+<a href="https://cloud.google.com/dialogflow/docs/integrations/web-demo">Web
 Demo</a>
 integration.</p>
 </div>
@@ -435,26 +636,71 @@ integration.</p>
       <pre class="lines">
 
 
-70
-71
-72
-73
-74
-75
-76
-77
-78
 79
 80
 81
 82
 83
-84</pre>
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/agent.rb', line 70</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/agent.rb', line 79</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dialogflow::V2::Agent (class)">Agent</a></span></span>
+  <span class='comment'># API version for the agent.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Agent/ApiVersion.html" title="Google::Cloud::Dialogflow::V2::Agent::ApiVersion (module)">ApiVersion</a></span></span>
+    <span class='comment'># Not specified.
+</span>    <span class='const'>API_VERSION_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Legacy V1 API.
+</span>    <span class='const'>API_VERSION_V1</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># V2 API.
+</span>    <span class='const'>API_VERSION_V2</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># V2beta1 API.
+</span>    <span class='const'>API_VERSION_V2_BETA_1</span> <span class='op'>=</span> <span class='int'>3</span>
+  <span class='kw'>end</span>
+
   <span class='comment'># Match mode determines how intents are detected from user queries.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Agent/MatchMode.html" title="Google::Cloud::Dialogflow::V2::Agent::MatchMode (module)">MatchMode</a></span></span>
     <span class='comment'># Not specified.
@@ -467,6 +713,21 @@ integration.</p>
     <span class='comment'># Can be used for agents with a large number of examples in intents,
 </span>    <span class='comment'># especially the ones using @sys.any or very large developer entities.
 </span>    <span class='const'>MATCH_MODE_ML_ONLY</span> <span class='op'>=</span> <span class='int'>2</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># Represents the agent tier.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Agent/Tier.html" title="Google::Cloud::Dialogflow::V2::Agent::Tier (module)">Tier</a></span></span>
+    <span class='comment'># Not specified. This value should never be used.
+</span>    <span class='const'>TIER_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Standard tier.
+</span>    <span class='const'>TIER_STANDARD</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># Enterprise tier (Essentials).
+</span>    <span class='const'>TIER_ENTERPRISE</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># Enterprise tier (Plus).
+</span>    <span class='const'>TIER_ENTERPRISE_PLUS</span> <span class='op'>=</span> <span class='int'>3</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -530,26 +791,71 @@ If set to 0.0, the default of 0.3 is used.</p>
       <pre class="lines">
 
 
-70
-71
-72
-73
-74
-75
-76
-77
-78
 79
 80
 81
 82
 83
-84</pre>
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/agent.rb', line 70</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/agent.rb', line 79</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dialogflow::V2::Agent (class)">Agent</a></span></span>
+  <span class='comment'># API version for the agent.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Agent/ApiVersion.html" title="Google::Cloud::Dialogflow::V2::Agent::ApiVersion (module)">ApiVersion</a></span></span>
+    <span class='comment'># Not specified.
+</span>    <span class='const'>API_VERSION_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Legacy V1 API.
+</span>    <span class='const'>API_VERSION_V1</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># V2 API.
+</span>    <span class='const'>API_VERSION_V2</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># V2beta1 API.
+</span>    <span class='const'>API_VERSION_V2_BETA_1</span> <span class='op'>=</span> <span class='int'>3</span>
+  <span class='kw'>end</span>
+
   <span class='comment'># Match mode determines how intents are detected from user queries.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Agent/MatchMode.html" title="Google::Cloud::Dialogflow::V2::Agent::MatchMode (module)">MatchMode</a></span></span>
     <span class='comment'># Not specified.
@@ -562,6 +868,21 @@ If set to 0.0, the default of 0.3 is used.</p>
     <span class='comment'># Can be used for agents with a large number of examples in intents,
 </span>    <span class='comment'># especially the ones using @sys.any or very large developer entities.
 </span>    <span class='const'>MATCH_MODE_ML_ONLY</span> <span class='op'>=</span> <span class='int'>2</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># Represents the agent tier.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Agent/Tier.html" title="Google::Cloud::Dialogflow::V2::Agent::Tier (module)">Tier</a></span></span>
+    <span class='comment'># Not specified. This value should never be used.
+</span>    <span class='const'>TIER_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Standard tier.
+</span>    <span class='const'>TIER_STANDARD</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># Enterprise tier (Essentials).
+</span>    <span class='const'>TIER_ENTERPRISE</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># Enterprise tier (Plus).
+</span>    <span class='const'>TIER_ENTERPRISE_PLUS</span> <span class='op'>=</span> <span class='int'>3</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -583,7 +904,7 @@ If set to 0.0, the default of 0.3 is used.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns Required. The default language of the agent as a language tag. See
-<a href="https://cloud.google.com/dialogflow-enterprise/docs/reference/language">Language
+<a href="https://cloud.google.com/dialogflow/docs/reference/language">Language
 Support</a>
 for a list of the currently supported language codes. This field cannot be
 set by the <code>Update</code> method.</p>
@@ -605,7 +926,7 @@ set by the <code>Update</code> method.</p>
       
         &mdash;
         <div class='inline'><p>Required. The default language of the agent as a language tag. See
-<a href="https://cloud.google.com/dialogflow-enterprise/docs/reference/language">Language
+<a href="https://cloud.google.com/dialogflow/docs/reference/language">Language
 Support</a>
 for a list of the currently supported language codes. This field cannot be
 set by the <code>Update</code> method.</p>
@@ -621,26 +942,71 @@ set by the <code>Update</code> method.</p>
       <pre class="lines">
 
 
-70
-71
-72
-73
-74
-75
-76
-77
-78
 79
 80
 81
 82
 83
-84</pre>
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/agent.rb', line 70</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/agent.rb', line 79</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dialogflow::V2::Agent (class)">Agent</a></span></span>
+  <span class='comment'># API version for the agent.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Agent/ApiVersion.html" title="Google::Cloud::Dialogflow::V2::Agent::ApiVersion (module)">ApiVersion</a></span></span>
+    <span class='comment'># Not specified.
+</span>    <span class='const'>API_VERSION_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Legacy V1 API.
+</span>    <span class='const'>API_VERSION_V1</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># V2 API.
+</span>    <span class='const'>API_VERSION_V2</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># V2beta1 API.
+</span>    <span class='const'>API_VERSION_V2_BETA_1</span> <span class='op'>=</span> <span class='int'>3</span>
+  <span class='kw'>end</span>
+
   <span class='comment'># Match mode determines how intents are detected from user queries.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Agent/MatchMode.html" title="Google::Cloud::Dialogflow::V2::Agent::MatchMode (module)">MatchMode</a></span></span>
     <span class='comment'># Not specified.
@@ -653,6 +1019,21 @@ set by the <code>Update</code> method.</p>
     <span class='comment'># Can be used for agents with a large number of examples in intents,
 </span>    <span class='comment'># especially the ones using @sys.any or very large developer entities.
 </span>    <span class='const'>MATCH_MODE_ML_ONLY</span> <span class='op'>=</span> <span class='int'>2</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># Represents the agent tier.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Agent/Tier.html" title="Google::Cloud::Dialogflow::V2::Agent::Tier (module)">Tier</a></span></span>
+    <span class='comment'># Not specified. This value should never be used.
+</span>    <span class='const'>TIER_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Standard tier.
+</span>    <span class='const'>TIER_STANDARD</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># Enterprise tier (Essentials).
+</span>    <span class='const'>TIER_ENTERPRISE</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># Enterprise tier (Plus).
+</span>    <span class='const'>TIER_ENTERPRISE_PLUS</span> <span class='op'>=</span> <span class='int'>3</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -706,26 +1087,71 @@ The maximum length is 500 characters. If exceeded, the request is rejected.</p>
       <pre class="lines">
 
 
-70
-71
-72
-73
-74
-75
-76
-77
-78
 79
 80
 81
 82
 83
-84</pre>
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/agent.rb', line 70</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/agent.rb', line 79</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dialogflow::V2::Agent (class)">Agent</a></span></span>
+  <span class='comment'># API version for the agent.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Agent/ApiVersion.html" title="Google::Cloud::Dialogflow::V2::Agent::ApiVersion (module)">ApiVersion</a></span></span>
+    <span class='comment'># Not specified.
+</span>    <span class='const'>API_VERSION_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Legacy V1 API.
+</span>    <span class='const'>API_VERSION_V1</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># V2 API.
+</span>    <span class='const'>API_VERSION_V2</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># V2beta1 API.
+</span>    <span class='const'>API_VERSION_V2_BETA_1</span> <span class='op'>=</span> <span class='int'>3</span>
+  <span class='kw'>end</span>
+
   <span class='comment'># Match mode determines how intents are detected from user queries.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Agent/MatchMode.html" title="Google::Cloud::Dialogflow::V2::Agent::MatchMode (module)">MatchMode</a></span></span>
     <span class='comment'># Not specified.
@@ -738,6 +1164,21 @@ The maximum length is 500 characters. If exceeded, the request is rejected.</p>
     <span class='comment'># Can be used for agents with a large number of examples in intents,
 </span>    <span class='comment'># especially the ones using @sys.any or very large developer entities.
 </span>    <span class='const'>MATCH_MODE_ML_ONLY</span> <span class='op'>=</span> <span class='int'>2</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># Represents the agent tier.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Agent/Tier.html" title="Google::Cloud::Dialogflow::V2::Agent::Tier (module)">Tier</a></span></span>
+    <span class='comment'># Not specified. This value should never be used.
+</span>    <span class='const'>TIER_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Standard tier.
+</span>    <span class='const'>TIER_STANDARD</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># Enterprise tier (Essentials).
+</span>    <span class='const'>TIER_ENTERPRISE</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># Enterprise tier (Plus).
+</span>    <span class='const'>TIER_ENTERPRISE_PLUS</span> <span class='op'>=</span> <span class='int'>3</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -789,26 +1230,71 @@ The maximum length is 500 characters. If exceeded, the request is rejected.</p>
       <pre class="lines">
 
 
-70
-71
-72
-73
-74
-75
-76
-77
-78
 79
 80
 81
 82
 83
-84</pre>
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/agent.rb', line 70</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/agent.rb', line 79</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dialogflow::V2::Agent (class)">Agent</a></span></span>
+  <span class='comment'># API version for the agent.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Agent/ApiVersion.html" title="Google::Cloud::Dialogflow::V2::Agent::ApiVersion (module)">ApiVersion</a></span></span>
+    <span class='comment'># Not specified.
+</span>    <span class='const'>API_VERSION_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Legacy V1 API.
+</span>    <span class='const'>API_VERSION_V1</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># V2 API.
+</span>    <span class='const'>API_VERSION_V2</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># V2beta1 API.
+</span>    <span class='const'>API_VERSION_V2_BETA_1</span> <span class='op'>=</span> <span class='int'>3</span>
+  <span class='kw'>end</span>
+
   <span class='comment'># Match mode determines how intents are detected from user queries.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Agent/MatchMode.html" title="Google::Cloud::Dialogflow::V2::Agent::MatchMode (module)">MatchMode</a></span></span>
     <span class='comment'># Not specified.
@@ -821,6 +1307,21 @@ The maximum length is 500 characters. If exceeded, the request is rejected.</p>
     <span class='comment'># Can be used for agents with a large number of examples in intents,
 </span>    <span class='comment'># especially the ones using @sys.any or very large developer entities.
 </span>    <span class='const'>MATCH_MODE_ML_ONLY</span> <span class='op'>=</span> <span class='int'>2</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># Represents the agent tier.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Agent/Tier.html" title="Google::Cloud::Dialogflow::V2::Agent::Tier (module)">Tier</a></span></span>
+    <span class='comment'># Not specified. This value should never be used.
+</span>    <span class='const'>TIER_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Standard tier.
+</span>    <span class='const'>TIER_STANDARD</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># Enterprise tier (Essentials).
+</span>    <span class='const'>TIER_ENTERPRISE</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># Enterprise tier (Plus).
+</span>    <span class='const'>TIER_ENTERPRISE_PLUS</span> <span class='op'>=</span> <span class='int'>3</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -872,26 +1373,71 @@ The maximum length is 500 characters. If exceeded, the request is rejected.</p>
       <pre class="lines">
 
 
-70
-71
-72
-73
-74
-75
-76
-77
-78
 79
 80
 81
 82
 83
-84</pre>
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/agent.rb', line 70</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/agent.rb', line 79</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dialogflow::V2::Agent (class)">Agent</a></span></span>
+  <span class='comment'># API version for the agent.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Agent/ApiVersion.html" title="Google::Cloud::Dialogflow::V2::Agent::ApiVersion (module)">ApiVersion</a></span></span>
+    <span class='comment'># Not specified.
+</span>    <span class='const'>API_VERSION_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Legacy V1 API.
+</span>    <span class='const'>API_VERSION_V1</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># V2 API.
+</span>    <span class='const'>API_VERSION_V2</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># V2beta1 API.
+</span>    <span class='const'>API_VERSION_V2_BETA_1</span> <span class='op'>=</span> <span class='int'>3</span>
+  <span class='kw'>end</span>
+
   <span class='comment'># Match mode determines how intents are detected from user queries.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Agent/MatchMode.html" title="Google::Cloud::Dialogflow::V2::Agent::MatchMode (module)">MatchMode</a></span></span>
     <span class='comment'># Not specified.
@@ -904,6 +1450,21 @@ The maximum length is 500 characters. If exceeded, the request is rejected.</p>
     <span class='comment'># Can be used for agents with a large number of examples in intents,
 </span>    <span class='comment'># especially the ones using @sys.any or very large developer entities.
 </span>    <span class='const'>MATCH_MODE_ML_ONLY</span> <span class='op'>=</span> <span class='int'>2</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># Represents the agent tier.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Agent/Tier.html" title="Google::Cloud::Dialogflow::V2::Agent::Tier (module)">Tier</a></span></span>
+    <span class='comment'># Not specified. This value should never be used.
+</span>    <span class='const'>TIER_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Standard tier.
+</span>    <span class='const'>TIER_STANDARD</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># Enterprise tier (Essentials).
+</span>    <span class='const'>TIER_ENTERPRISE</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># Enterprise tier (Plus).
+</span>    <span class='const'>TIER_ENTERPRISE_PLUS</span> <span class='op'>=</span> <span class='int'>3</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -955,26 +1516,71 @@ The maximum length is 500 characters. If exceeded, the request is rejected.</p>
       <pre class="lines">
 
 
-70
-71
-72
-73
-74
-75
-76
-77
-78
 79
 80
 81
 82
 83
-84</pre>
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/agent.rb', line 70</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/agent.rb', line 79</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dialogflow::V2::Agent (class)">Agent</a></span></span>
+  <span class='comment'># API version for the agent.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Agent/ApiVersion.html" title="Google::Cloud::Dialogflow::V2::Agent::ApiVersion (module)">ApiVersion</a></span></span>
+    <span class='comment'># Not specified.
+</span>    <span class='const'>API_VERSION_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Legacy V1 API.
+</span>    <span class='const'>API_VERSION_V1</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># V2 API.
+</span>    <span class='const'>API_VERSION_V2</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># V2beta1 API.
+</span>    <span class='const'>API_VERSION_V2_BETA_1</span> <span class='op'>=</span> <span class='int'>3</span>
+  <span class='kw'>end</span>
+
   <span class='comment'># Match mode determines how intents are detected from user queries.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Agent/MatchMode.html" title="Google::Cloud::Dialogflow::V2::Agent::MatchMode (module)">MatchMode</a></span></span>
     <span class='comment'># Not specified.
@@ -987,6 +1593,21 @@ The maximum length is 500 characters. If exceeded, the request is rejected.</p>
     <span class='comment'># Can be used for agents with a large number of examples in intents,
 </span>    <span class='comment'># especially the ones using @sys.any or very large developer entities.
 </span>    <span class='const'>MATCH_MODE_ML_ONLY</span> <span class='op'>=</span> <span class='int'>2</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># Represents the agent tier.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Agent/Tier.html" title="Google::Cloud::Dialogflow::V2::Agent::Tier (module)">Tier</a></span></span>
+    <span class='comment'># Not specified. This value should never be used.
+</span>    <span class='const'>TIER_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Standard tier.
+</span>    <span class='const'>TIER_STANDARD</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># Enterprise tier (Essentials).
+</span>    <span class='const'>TIER_ENTERPRISE</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># Enterprise tier (Plus).
+</span>    <span class='const'>TIER_ENTERPRISE_PLUS</span> <span class='op'>=</span> <span class='int'>3</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -1040,26 +1661,71 @@ Format: <code>projects/&lt;Project ID&gt;</code>.</p>
       <pre class="lines">
 
 
-70
-71
-72
-73
-74
-75
-76
-77
-78
 79
 80
 81
 82
 83
-84</pre>
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/agent.rb', line 70</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/agent.rb', line 79</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dialogflow::V2::Agent (class)">Agent</a></span></span>
+  <span class='comment'># API version for the agent.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Agent/ApiVersion.html" title="Google::Cloud::Dialogflow::V2::Agent::ApiVersion (module)">ApiVersion</a></span></span>
+    <span class='comment'># Not specified.
+</span>    <span class='const'>API_VERSION_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Legacy V1 API.
+</span>    <span class='const'>API_VERSION_V1</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># V2 API.
+</span>    <span class='const'>API_VERSION_V2</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># V2beta1 API.
+</span>    <span class='const'>API_VERSION_V2_BETA_1</span> <span class='op'>=</span> <span class='int'>3</span>
+  <span class='kw'>end</span>
+
   <span class='comment'># Match mode determines how intents are detected from user queries.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Agent/MatchMode.html" title="Google::Cloud::Dialogflow::V2::Agent::MatchMode (module)">MatchMode</a></span></span>
     <span class='comment'># Not specified.
@@ -1072,6 +1738,21 @@ Format: <code>projects/&lt;Project ID&gt;</code>.</p>
     <span class='comment'># Can be used for agents with a large number of examples in intents,
 </span>    <span class='comment'># especially the ones using @sys.any or very large developer entities.
 </span>    <span class='const'>MATCH_MODE_ML_ONLY</span> <span class='op'>=</span> <span class='int'>2</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># Represents the agent tier.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Agent/Tier.html" title="Google::Cloud::Dialogflow::V2::Agent::Tier (module)">Tier</a></span></span>
+    <span class='comment'># Not specified. This value should never be used.
+</span>    <span class='const'>TIER_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Standard tier.
+</span>    <span class='const'>TIER_STANDARD</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># Enterprise tier (Essentials).
+</span>    <span class='const'>TIER_ENTERPRISE</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># Enterprise tier (Plus).
+</span>    <span class='const'>TIER_ENTERPRISE_PLUS</span> <span class='op'>=</span> <span class='int'>3</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -1125,26 +1806,71 @@ Format: <code>projects/&lt;Project ID&gt;</code>.</p>
       <pre class="lines">
 
 
-70
-71
-72
-73
-74
-75
-76
-77
-78
 79
 80
 81
 82
 83
-84</pre>
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/agent.rb', line 70</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/agent.rb', line 79</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dialogflow::V2::Agent (class)">Agent</a></span></span>
+  <span class='comment'># API version for the agent.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Agent/ApiVersion.html" title="Google::Cloud::Dialogflow::V2::Agent::ApiVersion (module)">ApiVersion</a></span></span>
+    <span class='comment'># Not specified.
+</span>    <span class='const'>API_VERSION_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Legacy V1 API.
+</span>    <span class='const'>API_VERSION_V1</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># V2 API.
+</span>    <span class='const'>API_VERSION_V2</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># V2beta1 API.
+</span>    <span class='const'>API_VERSION_V2_BETA_1</span> <span class='op'>=</span> <span class='int'>3</span>
+  <span class='kw'>end</span>
+
   <span class='comment'># Match mode determines how intents are detected from user queries.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Agent/MatchMode.html" title="Google::Cloud::Dialogflow::V2::Agent::MatchMode (module)">MatchMode</a></span></span>
     <span class='comment'># Not specified.
@@ -1157,6 +1883,164 @@ Format: <code>projects/&lt;Project ID&gt;</code>.</p>
     <span class='comment'># Can be used for agents with a large number of examples in intents,
 </span>    <span class='comment'># especially the ones using @sys.any or very large developer entities.
 </span>    <span class='const'>MATCH_MODE_ML_ONLY</span> <span class='op'>=</span> <span class='int'>2</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># Represents the agent tier.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Agent/Tier.html" title="Google::Cloud::Dialogflow::V2::Agent::Tier (module)">Tier</a></span></span>
+    <span class='comment'># Not specified. This value should never be used.
+</span>    <span class='const'>TIER_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Standard tier.
+</span>    <span class='const'>TIER_STANDARD</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># Enterprise tier (Essentials).
+</span>    <span class='const'>TIER_ENTERPRISE</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># Enterprise tier (Plus).
+</span>    <span class='const'>TIER_ENTERPRISE_PLUS</span> <span class='op'>=</span> <span class='int'>3</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="tier=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="tier-instance_method">
+  
+    #<strong>tier</strong>  &#x21d2; <tt><span class='object_link'><a href="Agent/Tier.html" title="Google::Cloud::Dialogflow::V2::Agent::Tier (module)">Google::Cloud::Dialogflow::V2::Agent::Tier</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Optional. The agent tier. If not specified, TIER_STANDARD is assumed.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Agent/Tier.html" title="Google::Cloud::Dialogflow::V2::Agent::Tier (module)">Google::Cloud::Dialogflow::V2::Agent::Tier</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Optional. The agent tier. If not specified, TIER_STANDARD is assumed.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/agent.rb', line 79</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dialogflow::V2::Agent (class)">Agent</a></span></span>
+  <span class='comment'># API version for the agent.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Agent/ApiVersion.html" title="Google::Cloud::Dialogflow::V2::Agent::ApiVersion (module)">ApiVersion</a></span></span>
+    <span class='comment'># Not specified.
+</span>    <span class='const'>API_VERSION_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Legacy V1 API.
+</span>    <span class='const'>API_VERSION_V1</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># V2 API.
+</span>    <span class='const'>API_VERSION_V2</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># V2beta1 API.
+</span>    <span class='const'>API_VERSION_V2_BETA_1</span> <span class='op'>=</span> <span class='int'>3</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># Match mode determines how intents are detected from user queries.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Agent/MatchMode.html" title="Google::Cloud::Dialogflow::V2::Agent::MatchMode (module)">MatchMode</a></span></span>
+    <span class='comment'># Not specified.
+</span>    <span class='const'>MATCH_MODE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Best for agents with a small number of examples in intents and/or wide
+</span>    <span class='comment'># use of templates syntax and composite entities.
+</span>    <span class='const'>MATCH_MODE_HYBRID</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># Can be used for agents with a large number of examples in intents,
+</span>    <span class='comment'># especially the ones using @sys.any or very large developer entities.
+</span>    <span class='const'>MATCH_MODE_ML_ONLY</span> <span class='op'>=</span> <span class='int'>2</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># Represents the agent tier.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Agent/Tier.html" title="Google::Cloud::Dialogflow::V2::Agent::Tier (module)">Tier</a></span></span>
+    <span class='comment'># Not specified. This value should never be used.
+</span>    <span class='const'>TIER_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Standard tier.
+</span>    <span class='const'>TIER_STANDARD</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># Enterprise tier (Essentials).
+</span>    <span class='const'>TIER_ENTERPRISE</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># Enterprise tier (Plus).
+</span>    <span class='const'>TIER_ENTERPRISE_PLUS</span> <span class='op'>=</span> <span class='int'>3</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -1212,26 +2096,71 @@ America/New_York, Europe/Paris.</p>
       <pre class="lines">
 
 
-70
-71
-72
-73
-74
-75
-76
-77
-78
 79
 80
 81
 82
 83
-84</pre>
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/agent.rb', line 70</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/agent.rb', line 79</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dialogflow::V2::Agent (class)">Agent</a></span></span>
+  <span class='comment'># API version for the agent.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Agent/ApiVersion.html" title="Google::Cloud::Dialogflow::V2::Agent::ApiVersion (module)">ApiVersion</a></span></span>
+    <span class='comment'># Not specified.
+</span>    <span class='const'>API_VERSION_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Legacy V1 API.
+</span>    <span class='const'>API_VERSION_V1</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># V2 API.
+</span>    <span class='const'>API_VERSION_V2</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># V2beta1 API.
+</span>    <span class='const'>API_VERSION_V2_BETA_1</span> <span class='op'>=</span> <span class='int'>3</span>
+  <span class='kw'>end</span>
+
   <span class='comment'># Match mode determines how intents are detected from user queries.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Agent/MatchMode.html" title="Google::Cloud::Dialogflow::V2::Agent::MatchMode (module)">MatchMode</a></span></span>
     <span class='comment'># Not specified.
@@ -1244,6 +2173,21 @@ America/New_York, Europe/Paris.</p>
     <span class='comment'># Can be used for agents with a large number of examples in intents,
 </span>    <span class='comment'># especially the ones using @sys.any or very large developer entities.
 </span>    <span class='const'>MATCH_MODE_ML_ONLY</span> <span class='op'>=</span> <span class='int'>2</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># Represents the agent tier.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Agent/Tier.html" title="Google::Cloud::Dialogflow::V2::Agent::Tier (module)">Tier</a></span></span>
+    <span class='comment'># Not specified. This value should never be used.
+</span>    <span class='const'>TIER_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Standard tier.
+</span>    <span class='const'>TIER_STANDARD</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># Enterprise tier (Essentials).
+</span>    <span class='const'>TIER_ENTERPRISE</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># Enterprise tier (Plus).
+</span>    <span class='const'>TIER_ENTERPRISE_PLUS</span> <span class='op'>=</span> <span class='int'>3</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>

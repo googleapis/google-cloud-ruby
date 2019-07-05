@@ -1,6 +1,6 @@
 ---
 layout: yard_main
-title: "Class: Google::Cloud::Dialogflow::V2::UpdateEntityTypeRequest - Dialogflow"
+title: "Class: Google::Cloud::Dialogflow::V2::SetAgentRequest - Dialogflow"
 css: 
   - /docs/css/style.css
   - /docs/css/common.css
@@ -10,7 +10,7 @@ js:
   - /js/yard-main.js
 ---
 <script type="text/javascript" charset="utf-8">
-  pathId = "Google::Cloud::Dialogflow::V2::UpdateEntityTypeRequest";
+  pathId = "Google::Cloud::Dialogflow::V2::SetAgentRequest";
   relpath = '../../../../';
 </script>
 
@@ -24,10 +24,10 @@ js:
   <div id="header">
     <div id="menu">
   
-    <a href="../../../../_index.html">Index (U)</a> &raquo;
+    <a href="../../../../_index.html">Index (S)</a> &raquo;
     <span class='title'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../Dialogflow.html" title="Google::Cloud::Dialogflow (module)">Dialogflow</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../V2.html" title="Google::Cloud::Dialogflow::V2 (module)">V2</a></span></span>
      &raquo; 
-    <span class="title">UpdateEntityTypeRequest</span>
+    <span class="title">SetAgentRequest</span>
   
 </div>
 
@@ -47,7 +47,7 @@ js:
     <div class="clear"></div>
   </div>
 
-  <div id="content"><h1>Class: Google::Cloud::Dialogflow::V2::UpdateEntityTypeRequest
+  <div id="content"><h1>Class: Google::Cloud::Dialogflow::V2::SetAgentRequest
   
   
   
@@ -62,7 +62,7 @@ js:
         <ul class="fullTree">
           <li>Object</li>
           
-            <li class="next">Google::Cloud::Dialogflow::V2::UpdateEntityTypeRequest</li>
+            <li class="next">Google::Cloud::Dialogflow::V2::SetAgentRequest</li>
           
         </ul>
         <a href="#" class="inheritanceTree">show all</a>
@@ -82,14 +82,14 @@ js:
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/entity_type.rb</dd>
+    <dd>lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/agent.rb</dd>
   </dl>
   
 </div>
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>The request message for EntityTypes::UpdateEntityType.</p>
+    <p>The request message for Agents::SetAgent.</p>
 
 
   </div>
@@ -107,7 +107,7 @@ js:
       <li class="public ">
   <span class="summary_signature">
     
-      <a href="#entity_type-instance_method" title="#entity_type (instance method)">#<strong>entity_type</strong>  &#x21d2; Google::Cloud::Dialogflow::V2::EntityType </a>
+      <a href="#agent-instance_method" title="#agent (instance method)">#<strong>agent</strong>  &#x21d2; Google::Cloud::Dialogflow::V2::Agent </a>
     
 
     
@@ -125,32 +125,6 @@ js:
 
   
     <span class="summary_desc"><div class='inline'><p>Required.</p>
-</div></span>
-  
-</li>
-
-    
-      <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#language_code-instance_method" title="#language_code (instance method)">#<strong>language_code</strong>  &#x21d2; String </a>
-    
-
-    
-  </span>
-  
-  
-  
-    
-    
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'><p>Optional.</p>
 </div></span>
   
 </li>
@@ -192,11 +166,11 @@ js:
     <h2>Instance Attribute Details</h2>
     
       
-      <span id="entity_type=-instance_method"></span>
+      <span id="agent=-instance_method"></span>
       <div class="method_details first">
-  <h3 class="signature first" id="entity_type-instance_method">
+  <h3 class="signature first" id="agent-instance_method">
   
-    #<strong>entity_type</strong>  &#x21d2; <tt><span class='object_link'><a href="EntityType.html" title="Google::Cloud::Dialogflow::V2::EntityType (class)">Google::Cloud::Dialogflow::V2::EntityType</a></span></tt> 
+    #<strong>agent</strong>  &#x21d2; <tt><span class='object_link'><a href="Agent.html" title="Google::Cloud::Dialogflow::V2::Agent (class)">Google::Cloud::Dialogflow::V2::Agent</a></span></tt> 
   
 
   
@@ -204,7 +178,7 @@ js:
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Required. The entity type to update.</p>
+    <p>Returns Required. The agent to update.</p>
 
 
   </div>
@@ -217,12 +191,12 @@ js:
     <li>
       
       
-        <span class='type'>(<tt><span class='object_link'><a href="EntityType.html" title="Google::Cloud::Dialogflow::V2::EntityType (class)">Google::Cloud::Dialogflow::V2::EntityType</a></span></tt>)</span>
+        <span class='type'>(<tt><span class='object_link'><a href="Agent.html" title="Google::Cloud::Dialogflow::V2::Agent (class)">Google::Cloud::Dialogflow::V2::Agent</a></span></tt>)</span>
       
       
       
         &mdash;
-        <div class='inline'><p>Required. The entity type to update.</p>
+        <div class='inline'><p>Required. The agent to update.</p>
 </div>
       
     </li>
@@ -235,77 +209,12 @@ js:
       <pre class="lines">
 
 
-178</pre>
+139</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/entity_type.rb', line 178</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/agent.rb', line 139</span>
 
-<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dialogflow::V2::UpdateEntityTypeRequest (class)">UpdateEntityTypeRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-      
-      <span id="language_code=-instance_method"></span>
-      <div class="method_details ">
-  <h3 class="signature " id="language_code-instance_method">
-  
-    #<strong>language_code</strong>  &#x21d2; <tt>String</tt> 
-  
-
-  
-
-  
-</h3><div class="docstring">
-  <div class="discussion">
-    <p>Returns Optional. The language of entity synonyms defined in <code>entity_type</code>. If not
-specified, the agent&#39;s default language is used.
-<a href="https://cloud.google.com/dialogflow/docs/reference/language">Many
-languages</a>
-are supported. Note: languages must be enabled in the agent before they can
-be used.</p>
-
-
-  </div>
-</div>
-<div class="tags">
-  
-<p class="tag_title">Returns:</p>
-<ul class="return">
-  
-    <li>
-      
-      
-        <span class='type'>(<tt>String</tt>)</span>
-      
-      
-      
-        &mdash;
-        <div class='inline'><p>Optional. The language of entity synonyms defined in <code>entity_type</code>. If not
-specified, the agent&#39;s default language is used.
-<a href="https://cloud.google.com/dialogflow/docs/reference/language">Many
-languages</a>
-are supported. Note: languages must be enabled in the agent before they can
-be used.</p>
-</div>
-      
-    </li>
-  
-</ul>
-
-</div><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-178</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/entity_type.rb', line 178</span>
-
-<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dialogflow::V2::UpdateEntityTypeRequest (class)">UpdateEntityTypeRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dialogflow::V2::SetAgentRequest (class)">SetAgentRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -355,12 +264,12 @@ be used.</p>
       <pre class="lines">
 
 
-178</pre>
+139</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/entity_type.rb', line 178</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/agent.rb', line 139</span>
 
-<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dialogflow::V2::UpdateEntityTypeRequest (class)">UpdateEntityTypeRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dialogflow::V2::SetAgentRequest (class)">SetAgentRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>

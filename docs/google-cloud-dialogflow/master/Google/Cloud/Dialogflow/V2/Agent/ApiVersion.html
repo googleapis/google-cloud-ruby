@@ -1,6 +1,6 @@
 ---
 layout: yard_main
-title: "Module: Google::Cloud::Dialogflow::V2::SpeechModelVariant - Dialogflow"
+title: "Module: Google::Cloud::Dialogflow::V2::Agent::ApiVersion - Dialogflow"
 css: 
   - /docs/css/style.css
   - /docs/css/common.css
@@ -10,13 +10,13 @@ js:
   - /js/yard-main.js
 ---
 <script type="text/javascript" charset="utf-8">
-  pathId = "Google::Cloud::Dialogflow::V2::SpeechModelVariant";
-  relpath = '../../../../';
+  pathId = "Google::Cloud::Dialogflow::V2::Agent::ApiVersion";
+  relpath = '../../../../../';
 </script>
 
 
 <div class="nav_wrap">
-  <iframe id="nav" src="../../../../class_list.html?1"></iframe>
+  <iframe id="nav" src="../../../../../class_list.html?1"></iframe>
   <div id="resizer"></div>
 </div>
 
@@ -24,17 +24,17 @@ js:
   <div id="header">
     <div id="menu">
   
-    <a href="../../../../_index.html">Index (S)</a> &raquo;
-    <span class='title'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../Dialogflow.html" title="Google::Cloud::Dialogflow (module)">Dialogflow</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../V2.html" title="Google::Cloud::Dialogflow::V2 (module)">V2</a></span></span>
+    <a href="../../../../../_index.html">Index (A)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../../../../Google.html" title="Google (module)">Google</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../../Dialogflow.html" title="Google::Cloud::Dialogflow (module)">Dialogflow</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../V2.html" title="Google::Cloud::Dialogflow::V2 (module)">V2</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../Agent.html" title="Google::Cloud::Dialogflow::V2::Agent (class)">Agent</a></span></span>
      &raquo; 
-    <span class="title">SpeechModelVariant</span>
+    <span class="title">ApiVersion</span>
   
 </div>
 
     <div id="search">
   
     <a class="full_list_link" id="class_list_link"
-        href="../../../../class_list.html">
+        href="../../../../../class_list.html">
 
         <svg width="24" height="24">
           <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
@@ -47,7 +47,7 @@ js:
     <div class="clear"></div>
   </div>
 
-  <div id="content"><h1>Module: Google::Cloud::Dialogflow::V2::SpeechModelVariant
+  <div id="content"><h1>Module: Google::Cloud::Dialogflow::V2::Agent::ApiVersion
   
   
   
@@ -66,20 +66,14 @@ js:
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/audio_config.rb</dd>
+    <dd>lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/agent.rb</dd>
   </dl>
   
 </div>
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>Variant of the specified Speech model to use.</p>
-
-<p>See the <a href="https://cloud.google.com/speech-to-text/docs/enhanced-models">Cloud Speech
-documentation</a>
-for which models have different variants. For example, the &quot;phone_call&quot; model
-has both a standard and an enhanced variant. When you use an enhanced model,
-you will generally receive higher quality results than for a standard model.</p>
+    <p>API version for the agent.</p>
 
 
   </div>
@@ -96,11 +90,10 @@ you will generally receive higher quality results than for a standard model.</p>
 
     <dl class="constants">
       
-        <dt id="SPEECH_MODEL_VARIANT_UNSPECIFIED-constant" class="">SPEECH_MODEL_VARIANT_UNSPECIFIED =
+        <dt id="API_VERSION_UNSPECIFIED-constant" class="">API_VERSION_UNSPECIFIED =
           <div class="docstring">
   <div class="discussion">
-    <p>No model variant specified. In this case Dialogflow defaults to
-USE_BEST_AVAILABLE.</p>
+    <p>Not specified.</p>
 
 
   </div>
@@ -112,15 +105,10 @@ USE_BEST_AVAILABLE.</p>
         </dt>
         <dd><pre class="code"><span class='int'>0</span></pre></dd>
       
-        <dt id="USE_BEST_AVAILABLE-constant" class="">USE_BEST_AVAILABLE =
+        <dt id="API_VERSION_V1-constant" class="">API_VERSION_V1 =
           <div class="docstring">
   <div class="discussion">
-    <p>Use the best available variant of the [Speech
-model][InputAudioConfig.model] that the caller is eligible for.</p>
-
-<p>Please see the <a href="https://cloud.google.com/dialogflow/docs/data-logging">Dialogflow
-docs</a> for
-how to make your project eligible for enhanced models.</p>
+    <p>Legacy V1 API.</p>
 
 
   </div>
@@ -132,13 +120,10 @@ how to make your project eligible for enhanced models.</p>
         </dt>
         <dd><pre class="code"><span class='int'>1</span></pre></dd>
       
-        <dt id="USE_STANDARD-constant" class="">USE_STANDARD =
+        <dt id="API_VERSION_V2-constant" class="">API_VERSION_V2 =
           <div class="docstring">
   <div class="discussion">
-    <p>Use standard model variant even if an enhanced model is available.  See the
-<a href="https://cloud.google.com/speech-to-text/docs/enhanced-models">Cloud Speech
-documentation</a>
-for details about enhanced models.</p>
+    <p>V2 API.</p>
 
 
   </div>
@@ -150,27 +135,10 @@ for details about enhanced models.</p>
         </dt>
         <dd><pre class="code"><span class='int'>2</span></pre></dd>
       
-        <dt id="USE_ENHANCED-constant" class="">USE_ENHANCED =
+        <dt id="API_VERSION_V2_BETA_1-constant" class="">API_VERSION_V2_BETA_1 =
           <div class="docstring">
   <div class="discussion">
-    <p>Use an enhanced model variant:</p>
-
-<ul>
-<li>If an enhanced variant does not exist for the given
-model and request language, Dialogflow falls
-back to the standard variant.</li>
-</ul>
-
-<p>The <a href="https://cloud.google.com/speech-to-text/docs/enhanced-models">Cloud Speech
-  documentation</a>
-  describes which models have enhanced variants.</p>
-
-<ul>
-<li>If the API caller isn&#39;t eligible for enhanced models, Dialogflow returns
-an error. Please see the <a href="https://cloud.google.com/dialogflow/docs/data-logging">Dialogflow
-docs</a>
-for how to make your project eligible.</li>
-</ul>
+    <p>V2beta1 API.</p>
 
 
   </div>
