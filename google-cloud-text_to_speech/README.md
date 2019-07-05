@@ -33,6 +33,7 @@ voice = { language_code: language_code }
 audio_encoding = :MP3
 audio_config = { audio_encoding: audio_encoding }
 response = text_to_speech_client.synthesize_speech(input, voice, audio_config)
+File.write("example.mp3", response.audio_content, mode: "wb")
 ```
 
 ### Next Steps
