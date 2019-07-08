@@ -164,3 +164,9 @@ for version in ['v1', 'v1beta1']:
         'Gem.loaded_specs\[.*\]\.version\.version',
         'Google::Cloud::TextToSpeech::VERSION'
     )
+
+s.replace(
+    'README.md',
+    'response = text_to_speech_client.synthesize_speech\(input, voice, audio_config\)\n',
+    'response = text_to_speech_client.synthesize_speech(input, voice, audio_config)\nFile.write("example.mp3", response.audio_content, mode: "wb")\n'
+)
