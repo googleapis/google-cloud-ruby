@@ -511,6 +511,36 @@ or the specified config is missing data points.</p>
   
     <li>
       
+        <span class='name'>service_address</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Override for the service hostname, or <code>nil</code> to leave as the default.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>service_port</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Override for the service port, or <code>nil</code> to leave as the default.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
         <span class='name'>exception_transformer</span>
       
       
@@ -534,10 +564,6 @@ custom error handling.</p>
       <pre class="lines">
 
 
-123
-124
-125
-126
 127
 128
 129
@@ -614,10 +640,14 @@ custom error handling.</p>
 200
 201
 202
-203</pre>
+203
+204
+205
+206
+207</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/resume_service_client.rb', line 123</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/resume_service_client.rb', line 127</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span> \
     <span class='label'>credentials:</span> <span class='kw'>nil</span><span class='comma'>,</span>
@@ -1058,10 +1088,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-293
-294
-295
-296
 297
 298
 299
@@ -1075,10 +1101,14 @@ retries, etc.</p>
 307
 308
 309
-310</pre>
+310
+311
+312
+313
+314</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/resume_service_client.rb', line 293</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/resume_service_client.rb', line 297</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_parse_resume'>parse_resume</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
