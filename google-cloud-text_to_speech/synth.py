@@ -167,6 +167,6 @@ for version in ['v1', 'v1beta1']:
 
 s.replace(
     'README.md',
-    'response = text_to_speech_client.synthesize_speech\(input, voice, audio_config\)',
-    'response = text_to_speech_client.synthesize_speech(input, voice, audio_config)\nFile.write("example.mp3", response.audio_content, mode: "wb")'
+    'response = text_to_speech_client.synthesize_speech\(input, voice, audio_config\)\n',
+    'response = text_to_speech_client.synthesize_speech(input, voice, audio_config)\nFile.write("example.mp3", response.audio_content, mode: "wb")\n'
 )
