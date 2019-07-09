@@ -1,5 +1,12 @@
 # Release History
 
+### 0.5.0 / 2019-07-08
+
+* Add AgentsClient#set_agent and AgentsClient#delete_agent 
+* Add Agent#api_version and Agent#tier
+* Update documentation and product links
+* Support overriding service host and port.
+
 ### 0.4.0 / 2019-06-12
 
 * Add SpeechModelVariant
