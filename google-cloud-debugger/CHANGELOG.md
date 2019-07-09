@@ -1,5 +1,9 @@
 # Release History
 
+### 0.33.6 / 2019-07-08
+
+* Support overriding service host and port in the low-level client.
+
 ### 0.33.5 / 2019-06-11
 
 * Google::Cloud::Env provides additional configuration options including retries and cache control
