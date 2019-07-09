@@ -1,5 +1,9 @@
 # Release History
 
+### 0.34.0 / 2019-07-08
+
+* Support overriding service host and port.
+
 ### 0.33.1 / 2019-06-11
 
 * Update product category documentation.
