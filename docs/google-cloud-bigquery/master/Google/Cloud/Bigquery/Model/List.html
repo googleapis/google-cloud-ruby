@@ -418,6 +418,7 @@ make to load all models. Default is no limit.</p>
       <pre class="lines">
 
 
+127
 128
 129
 130
@@ -432,11 +433,10 @@ make to load all models. Default is no limit.</p>
 139
 140
 141
-142
-143</pre>
+142</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/model/list.rb', line 128</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/model/list.rb', line 127</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_all'>all</span> <span class='label'>request_limit:</span> <span class='kw'>nil</span>
   <span class='id identifier rubyid_request_limit'>request_limit</span> <span class='op'>=</span> <span class='id identifier rubyid_request_limit'>request_limit</span><span class='period'>.</span><span class='id identifier rubyid_to_i'>to_i</span> <span class='kw'>if</span> <span class='id identifier rubyid_request_limit'>request_limit</span>
@@ -518,8 +518,7 @@ make to load all models. Default is no limit.</p>
 74
 75
 76
-77
-78</pre>
+77</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/model/list.rb', line 72</span>
@@ -527,8 +526,7 @@ make to load all models. Default is no limit.</p>
 <span class='kw'>def</span> <span class='kw'>next</span>
   <span class='kw'>return</span> <span class='kw'>nil</span> <span class='kw'>unless</span> <span class='id identifier rubyid_next?'>next?</span>
   <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
-  <span class='id identifier rubyid_options'>options</span> <span class='op'>=</span> <span class='lbrace'>{</span> <span class='label'>token:</span> <span class='id identifier rubyid_token'>token</span><span class='comma'>,</span> <span class='label'>max:</span> <span class='ivar'>@max</span> <span class='rbrace'>}</span>
-  <span class='id identifier rubyid_gapi'>gapi</span> <span class='op'>=</span> <span class='ivar'>@service</span><span class='period'>.</span><span class='id identifier rubyid_list_models'>list_models</span> <span class='ivar'>@dataset_id</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span>
+  <span class='id identifier rubyid_gapi'>gapi</span> <span class='op'>=</span> <span class='ivar'>@service</span><span class='period'>.</span><span class='id identifier rubyid_list_models'>list_models</span> <span class='ivar'>@dataset_id</span><span class='comma'>,</span> <span class='label'>token:</span> <span class='id identifier rubyid_token'>token</span><span class='comma'>,</span> <span class='label'>max:</span> <span class='ivar'>@max</span>
   <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_from_gapi'>from_gapi</span> <span class='id identifier rubyid_gapi'>gapi</span><span class='comma'>,</span> <span class='ivar'>@service</span><span class='comma'>,</span> <span class='ivar'>@dataset_id</span><span class='comma'>,</span> <span class='ivar'>@max</span>
 <span class='kw'>end</span></pre>
     </td>
