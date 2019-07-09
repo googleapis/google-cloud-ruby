@@ -1,5 +1,10 @@
 # Release History
 
+### 0.3.0 / 2019-07-08
+
+* Support overriding service host and port for generated clients
+* Updates to IAM
+
 ### 0.2.1 / 2019-04-29
 
 * Add AUTHENTICATION.md guide.
