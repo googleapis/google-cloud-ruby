@@ -748,8 +748,7 @@ module Google
         #
         def models token: nil, max: nil
           ensure_service!
-          options = { token: token, max: max }
-          gapi = service.list_models dataset_id, options
+          gapi = service.list_models dataset_id, token: token, max: max
           Model::List.from_gapi gapi, service, dataset_id, max
         end
 

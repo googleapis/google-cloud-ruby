@@ -241,12 +241,14 @@ module Google
         ##
         # Lists all models in the specified dataset.
         # Requires the READER dataset role.
-        def list_models dataset_id, options = {}
+        def list_models dataset_id, max: nil, token: nil
+          options = { skip_deserialization: true }
           # The list operation is considered idempotent
           execute backoff: true do
             json_txt = service.list_models @project, dataset_id,
-                                           max_results: options[:max],
-                                           page_token:  options[:token]
+                                           max_results: max,
+                                           page_token:  token,
+                                           options:     options
             JSON.parse json_txt, symbolize_names: true
           end
         end
@@ -258,7 +260,8 @@ module Google
         def get_model dataset_id, model_id
           # The get operation is considered idempotent
           execute backoff: true do
-            json_txt = service.get_model @project, dataset_id, model_id
+            json_txt = service.get_model @project, dataset_id, model_id,
+                                         options: { skip_deserialization: true }
             JSON.parse json_txt, symbolize_names: true
           end
         end
@@ -268,7 +271,7 @@ module Google
         # are provided in the submitted model resource.
         def patch_model dataset_id, model_id, patched_model_gapi, etag = nil
           patch_with_backoff = false
-          options = {}
+          options = { skip_deserialization: true }
           if etag
             options[:header] = { "If-Match" => etag }
             # The patch with etag operation is considered idempotent

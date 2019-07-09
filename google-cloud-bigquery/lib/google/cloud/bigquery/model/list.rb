@@ -72,8 +72,7 @@ module Google
           def next
             return nil unless next?
             ensure_service!
-            options = { token: token, max: @max }
-            gapi = @service.list_models @dataset_id, options
+            gapi = @service.list_models @dataset_id, token: token, max: @max
             self.class.from_gapi gapi, @service, @dataset_id, @max
           end
 
@@ -143,8 +142,7 @@ module Google
           end
 
           ##
-          # @private New Model::List from a
-          # Google::Apis::BigqueryV2::ListModelsResponse object.
+          # @private New Model::List from a response object.
           def self.from_gapi gapi_list, service, dataset_id = nil, max = nil
             models = List.new(Array(gapi_list[:models]).map do |gapi_json|
               Model.from_gapi_json gapi_json, service
