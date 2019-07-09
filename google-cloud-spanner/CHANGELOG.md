@@ -1,5 +1,10 @@
 # Release History
 
+### 1.9.4 / 2019-07-08
+
+* Add IAM GetPolicyOptions in the lower-level API.
+* Support overriding service host and port in the lower-level interface.
+
 ### 1.9.3 / 2019-06-27
 
 * Update network configuration for some initial_retry_delay_millis
