@@ -1,5 +1,11 @@
 # Release History
 
+### 0.11.0 / 2019-07-08
+
+* Add Action#publish_findings_to_cloud_data_catalog
+* Support overriding service host and port
+* Add AVRO constant to FileType and BytesType
+
 ### 0.10.0 / 2019-06-11
 
 * Add StoredInfoTypeVersion#stats (StoredInfoTypeStats)
