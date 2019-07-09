@@ -1,5 +1,11 @@
 # Release History
 
+### 0.4.2 / 2019-07-09
+
+* Add IAM GetPolicyOptions in the lower-level interface.
+* Custom metadata headers are honored by long running operations calls.
+* Support overriding service host and port in the lower-level interface.
+
 ### 0.4.1 / 2019-06-11
 
 * Enable grpc.service_config_disable_resolution
