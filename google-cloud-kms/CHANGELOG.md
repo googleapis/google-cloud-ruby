@@ -1,5 +1,10 @@
 # Release History
 
+### 1.2.0 / 2019-07-08
+
+* Add IAM GetPolicyOptions.
+* Support overriding service host and port.
+
 ### 1.1.0 / 2019-06-17
 
 * KeyManagementServiceClient  changes:
