@@ -1,5 +1,9 @@
 # Release History
 
+### 0.26.1 / 2019-07-08
+
+* Support overriding service host and port in the low-level interface.
+
 ### 0.26.0 / 2019-06-13
 
 BREAKING CHANGE: The default return value of Client#transaction has been
