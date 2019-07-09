@@ -250,7 +250,7 @@ YARD::Doctest.configure do |doctest|
   doctest.before "Google::Cloud::Bigquery::Dataset#model" do
     mock_bigquery do |mock|
       mock.expect :get_dataset, dataset_full_gapi, ["my-project", "my_dataset"]
-      mock.expect :get_model, random_model_full_hash("my_dataset", "my_model").to_json, ["my-project", "my_dataset", "my_model"]
+      mock.expect :get_model, random_model_full_hash("my_dataset", "my_model").to_json, ["my-project", "my_dataset", "my_model", Hash]
     end
   end
 
@@ -259,13 +259,13 @@ YARD::Doctest.configure do |doctest|
     mock_bigquery do |mock|
       mock.expect :get_dataset, dataset_full_gapi, ["my-project", "my_dataset"]
       mock.expect :list_models, list_models_gapi_json("my_dataset"), ["my-project", "my_dataset", Hash]
-      mock.expect :get_model, random_model_full_hash("my_dataset", "my_model").to_json, [String, String, String]
-      mock.expect :get_model, random_model_full_hash("my_dataset", "my_model").to_json, [String, String, String]
-      mock.expect :get_model, random_model_full_hash("my_dataset", "my_model").to_json, [String, String, String]
-      mock.expect :get_model, random_model_full_hash("my_dataset", "my_model").to_json, [String, String, String]
-      mock.expect :get_model, random_model_full_hash("my_dataset", "my_model").to_json, [String, String, String]
-      mock.expect :get_model, random_model_full_hash("my_dataset", "my_model").to_json, [String, String, String]
-      mock.expect :get_model, random_model_full_hash("my_dataset", "my_model").to_json, [String, String, String]
+      mock.expect :get_model, random_model_full_hash("my_dataset", "my_model").to_json, [String, String, String, Hash]
+      mock.expect :get_model, random_model_full_hash("my_dataset", "my_model").to_json, [String, String, String, Hash]
+      mock.expect :get_model, random_model_full_hash("my_dataset", "my_model").to_json, [String, String, String, Hash]
+      mock.expect :get_model, random_model_full_hash("my_dataset", "my_model").to_json, [String, String, String, Hash]
+      mock.expect :get_model, random_model_full_hash("my_dataset", "my_model").to_json, [String, String, String, Hash]
+      mock.expect :get_model, random_model_full_hash("my_dataset", "my_model").to_json, [String, String, String, Hash]
+      mock.expect :get_model, random_model_full_hash("my_dataset", "my_model").to_json, [String, String, String, Hash]
     end
   end
 
@@ -503,11 +503,11 @@ YARD::Doctest.configure do |doctest|
   doctest.before "Google::Cloud::Bigquery::Model" do
     mock_bigquery do |mock|
       mock.expect :get_dataset, dataset_full_gapi, [String, String]
-      mock.expect :get_model, random_model_full_hash("my_dataset", "my_model").to_json, [String, String, String]
-      mock.expect :get_model, random_model_full_hash("my_dataset", "my_model").to_json, [String, String, String]
-      mock.expect :get_model, random_model_full_hash("my_dataset", "my_model").to_json, [String, String, String]
-      mock.expect :get_model, random_model_full_hash("my_dataset", "my_model").to_json, [String, String, String]
-      mock.expect :get_model, random_model_full_hash("my_dataset", "my_model").to_json, [String, String, String]
+      mock.expect :get_model, random_model_full_hash("my_dataset", "my_model").to_json, [String, String, String, Hash]
+      mock.expect :get_model, random_model_full_hash("my_dataset", "my_model").to_json, [String, String, String, Hash]
+      mock.expect :get_model, random_model_full_hash("my_dataset", "my_model").to_json, [String, String, String, Hash]
+      mock.expect :get_model, random_model_full_hash("my_dataset", "my_model").to_json, [String, String, String, Hash]
+      mock.expect :get_model, random_model_full_hash("my_dataset", "my_model").to_json, [String, String, String, Hash]
       mock.expect :list_models, list_models_gapi_json("my_dataset"), [String, String, Hash]
       mock.expect :patch_model, random_model_full_hash("my_dataset", "my_model").to_json, [String, String, String, Object, Hash]
       mock.expect :delete_model, random_model_full_hash("my_dataset", "my_model").to_json, [String, String, String]
@@ -517,11 +517,11 @@ YARD::Doctest.configure do |doctest|
   doctest.before "Google::Cloud::Bigquery::Model::List" do
     mock_bigquery do |mock|
       mock.expect :get_dataset, dataset_full_gapi, [String, String]
-      mock.expect :get_model, random_model_full_hash("my_dataset", "my_model").to_json, [String, String, String]
-      mock.expect :get_model, random_model_full_hash("my_dataset", "my_model").to_json, [String, String, String]
-      mock.expect :get_model, random_model_full_hash("my_dataset", "my_model").to_json, [String, String, String]
-      mock.expect :get_model, random_model_full_hash("my_dataset", "my_model").to_json, [String, String, String]
-      mock.expect :get_model, random_model_full_hash("my_dataset", "my_model").to_json, [String, String, String]
+      mock.expect :get_model, random_model_full_hash("my_dataset", "my_model").to_json, [String, String, String, Hash]
+      mock.expect :get_model, random_model_full_hash("my_dataset", "my_model").to_json, [String, String, String, Hash]
+      mock.expect :get_model, random_model_full_hash("my_dataset", "my_model").to_json, [String, String, String, Hash]
+      mock.expect :get_model, random_model_full_hash("my_dataset", "my_model").to_json, [String, String, String, Hash]
+      mock.expect :get_model, random_model_full_hash("my_dataset", "my_model").to_json, [String, String, String, Hash]
       mock.expect :list_models, list_models_gapi_json("my_dataset"), [String, String, Hash]
     end
   end
