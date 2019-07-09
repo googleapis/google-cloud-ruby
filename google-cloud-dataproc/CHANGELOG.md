@@ -1,5 +1,10 @@
 # Release History
 
+### 0.5.0 / 2019-07-08
+
+* Custom metadata headers are honored by long running operations calls.
+* Support overriding service host and port.
+
 ### 0.4.0 / 2019-06-11
 
 * Add AutoscalingPolicyServiceClient
