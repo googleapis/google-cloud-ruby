@@ -1,5 +1,10 @@
 # Release History
 
+### 0.4.0 / 2019-07-08
+
+* Update code example in READMEs.
+* Support overriding service host and port.
+
 ### 0.3.1 / 2019-06-11
 
 * Add VERSION constant
