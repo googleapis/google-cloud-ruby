@@ -1,5 +1,9 @@
 # Release History
 
+### 0.31.6 / 2019-07-08
+
+* Support overriding service host and port in the low-level interface.
+
 ### 0.31.5 / 2019-06-11
 
 * Use VERSION constant in GAPIC client
