@@ -1,0 +1,883 @@
+---
+layout: yard_main
+title: "Class: Google::Cloud::Trace::Project - Stackdriver"
+css: 
+  - /docs/css/style.css
+  - /docs/css/common.css
+  - /css/yard-main.css
+js: 
+  - /docs/js/app.js
+  - /js/yard-main.js
+---
+<script type="text/javascript" charset="utf-8">
+  pathId = "Google::Cloud::Trace::Project";
+  relpath = '../../../';
+</script>
+
+
+<div class="nav_wrap">
+  <iframe id="nav" src="../../../class_list.html?1"></iframe>
+  <div id="resizer"></div>
+</div>
+
+<div id="main" tabindex="-1">
+  <div id="header">
+    <div id="menu">
+  
+    <a href="../../../_index.html">Index (P)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../Trace.html" title="Google::Cloud::Trace (module)">Trace</a></span></span>
+     &raquo; 
+    <span class="title">Project</span>
+  
+</div>
+
+    <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../../../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+    <div class="clear"></div>
+  </div>
+
+  <div id="content"><h1>Class: Google::Cloud::Trace::Project
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Google::Cloud::Trace::Project</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/google/cloud/trace/project.rb</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <h1>Project</h1>
+
+<p>Projects are top-level containers in Google Cloud Platform. They store
+information about billing and authorized users, and they control access
+to Stackdriver Trace resources. Each project has a friendly name and a
+unique ID. Projects can be created only in the <a href="https://console.developers.google.com">Google Developers
+Console</a>.</p>
+
+<p>This class is a client to make API calls for the project&#39;s trace data.
+Create an instance using <span class='object_link'><a href="../Trace.html#new-class_method" title="Google::Cloud::Trace.new (method)">new</a></span> or
+<span class='object_link'><a href="../../Cloud.html#trace-instance_method" title="Google::Cloud#trace (method)">Google::Cloud#trace</a></span>. You may then use the <code>get_trace</code> method to
+retrieve a trace by ID, <code>list_traces</code> to query for a set of traces,
+and <code>patch_traces</code> to update trace data. You may also use <code>new_trace</code>
+as a convenience constructor to build a
+<span class='object_link'><a href="TraceRecord.html" title="Google::Cloud::Trace::TraceRecord (class)">TraceRecord</a></span> object.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/trace</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_trace_client'>trace_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Trace.html" title="Google::Cloud::Trace (module)">Trace</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Trace.html#new-class_method" title="Google::Cloud::Trace.new (method)">new</a></span></span>
+<span class='id identifier rubyid_traces'>traces</span> <span class='op'>=</span> <span class='id identifier rubyid_trace_client'>trace_client</span><span class='period'>.</span><span class='id identifier rubyid_list_traces'>list_traces</span> <span class='const'>Time</span><span class='period'>.</span><span class='id identifier rubyid_now'>now</span> <span class='op'>-</span> <span class='int'>3600</span><span class='comma'>,</span> <span class='const'>Time</span><span class='period'>.</span><span class='id identifier rubyid_now'>now</span></code></pre>
+    
+  </div>
+
+
+</div>
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_trace-instance_method" title="#get_trace (instance method)">#<strong>get_trace</strong>(trace_id)  &#x21d2; Google::Cloud::Trace::TraceRecord<sup>?</sup> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets a single trace by its ID.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#list_traces-instance_method" title="#list_traces (instance method)">#<strong>list_traces</strong>(start_time, end_time, filter: nil, order_by: nil, view: nil, page_size: nil, page_token: nil)  &#x21d2; Google::Cloud::Trace::ResultSet </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns of a list of traces that match the specified conditions.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#new_trace-instance_method" title="#new_trace (instance method)">#<strong>new_trace</strong>(trace_context: :DEFAULT)  &#x21d2; Google::Cloud::Trace::TraceRecord </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Create a new empty trace record for this project.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#patch_traces-instance_method" title="#patch_traces (instance method)">#<strong>patch_traces</strong>(traces)  &#x21d2; Array{Google::Cloud::Trace::TraceRecord} </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Sends new traces to Stackdriver Trace or updates existing traces.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#project_id-instance_method" title="#project_id (instance method)">#<strong>project_id</strong>  &#x21d2; String </a>
+    
+
+    
+      (also: #project)
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The ID of the current project.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="get_trace-instance_method">
+  
+    #<strong>get_trace</strong>(trace_id)  &#x21d2; <tt><span class='object_link'><a href="TraceRecord.html" title="Google::Cloud::Trace::TraceRecord (class)">Google::Cloud::Trace::TraceRecord</a></span></tt><sup>?</sup> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets a single trace by its ID.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/trace</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_trace_client'>trace_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Trace.html" title="Google::Cloud::Trace (module)">Trace</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Trace.html#new-class_method" title="Google::Cloud::Trace.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_trace'>trace</span> <span class='op'>=</span> <span class='id identifier rubyid_trace_client'>trace_client</span><span class='period'>.</span><span class='id identifier rubyid_get_trace'>get_trace</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>1234567890abcdef1234567890abcdef</span><span class='tstring_end'>&quot;</span></span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>trace_id</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The ID of the trace to fetch.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TraceRecord.html" title="Google::Cloud::Trace::TraceRecord (class)">Google::Cloud::Trace::TraceRecord</a></span></tt>, <tt>nil</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The trace object, or
+<code>nil</code> if there is no accessible trace with the given ID.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+147
+148
+149
+150</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/trace/project.rb', line 147</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_get_trace'>get_trace</span> <span class='id identifier rubyid_trace_id'>trace_id</span>
+  <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
+  <span class='id identifier rubyid_service'>service</span><span class='period'>.</span><span class='id identifier rubyid_get_trace'>get_trace</span> <span class='id identifier rubyid_trace_id'>trace_id</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="list_traces-instance_method">
+  
+    #<strong>list_traces</strong>(start_time, end_time, filter: nil, order_by: nil, view: nil, page_size: nil, page_token: nil)  &#x21d2; <tt><span class='object_link'><a href="ResultSet.html" title="Google::Cloud::Trace::ResultSet (class)">Google::Cloud::Trace::ResultSet</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns of a list of traces that match the specified conditions.
+You must provide a time interval. You may optionally provide a
+filter, an ordering, a view type.
+Results are paginated, and you may specify a page size. The result
+will come with a token you can pass back to retrieve the next page.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/trace</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_trace_client'>trace_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Trace.html" title="Google::Cloud::Trace (module)">Trace</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Trace.html#new-class_method" title="Google::Cloud::Trace.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_traces'>traces</span> <span class='op'>=</span> <span class='id identifier rubyid_trace_client'>trace_client</span><span class='period'>.</span><span class='id identifier rubyid_list_traces'>list_traces</span> <span class='const'>Time</span><span class='period'>.</span><span class='id identifier rubyid_now'>now</span> <span class='op'>-</span> <span class='int'>3600</span><span class='comma'>,</span> <span class='const'>Time</span><span class='period'>.</span><span class='id identifier rubyid_now'>now</span>
+<span class='id identifier rubyid_traces'>traces</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_trace'>trace</span><span class='op'>|</span>
+  <span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Retrieved trace ID: </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_trace'>trace</span><span class='period'>.</span><span class='id identifier rubyid_trace_id'>trace_id</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>start_time</span>
+      
+      
+        <span class='type'>(<tt>Time</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The start of the time interval (inclusive).</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>end_time</span>
+      
+      
+        <span class='type'>(<tt>Time</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The end of the time interval (inclusive).</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>filter</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>An optional filter.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>order_by</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The optional sort order for returned traces.
+May be <code>trace_id</code>, <code>name</code>, <code>duration</code>, or <code>start</code>. Any sort order
+may also be reversed by appending <code>desc</code>; for example use
+<code>start desc</code> to order traces from newest to oldest.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>view</span>
+      
+      
+        <span class='type'>(<tt>Symbol</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The optional type of view. Valid values are
+<code>:MINIMAL</code>, <code>:ROOTSPAN</code>, and <code>:COMPLETE</code>. Default is <code>:MINIMAL</code>.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>page_size</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The size of each page to return. Optional;
+if omitted, the service will select a reasonable page size.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>page_token</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A token indicating the page to return.
+Each page of results includes proper token for specifying the
+following page.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="ResultSet.html" title="Google::Cloud::Trace::ResultSet (class)">Google::Cloud::Trace::ResultSet</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A page of results.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/trace/project.rb', line 185</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_list_traces'>list_traces</span> <span class='id identifier rubyid_start_time'>start_time</span><span class='comma'>,</span> <span class='id identifier rubyid_end_time'>end_time</span><span class='comma'>,</span>
+                <span class='label'>filter:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+                <span class='label'>order_by:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+                <span class='label'>view:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+                <span class='label'>page_size:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+                <span class='label'>page_token:</span> <span class='kw'>nil</span>
+  <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
+  <span class='id identifier rubyid_service'>service</span><span class='period'>.</span><span class='id identifier rubyid_list_traces'>list_traces</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span> <span class='id identifier rubyid_start_time'>start_time</span><span class='comma'>,</span> <span class='id identifier rubyid_end_time'>end_time</span><span class='comma'>,</span>
+                      <span class='label'>filter:</span> <span class='id identifier rubyid_filter'>filter</span><span class='comma'>,</span>
+                      <span class='label'>order_by:</span> <span class='id identifier rubyid_order_by'>order_by</span><span class='comma'>,</span>
+                      <span class='label'>view:</span> <span class='id identifier rubyid_view'>view</span><span class='comma'>,</span>
+                      <span class='label'>page_size:</span> <span class='id identifier rubyid_page_size'>page_size</span><span class='comma'>,</span>
+                      <span class='label'>page_token:</span> <span class='id identifier rubyid_page_token'>page_token</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="new_trace-instance_method">
+  
+    #<strong>new_trace</strong>(trace_context: :DEFAULT)  &#x21d2; <tt><span class='object_link'><a href="TraceRecord.html" title="Google::Cloud::Trace::TraceRecord (class)">Google::Cloud::Trace::TraceRecord</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Create a new empty trace record for this project. Uses the current
+thread&#39;s TraceContext by default; otherwise you may provide a
+specific TraceContext.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/trace</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_trace_client'>trace_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Trace.html" title="Google::Cloud::Trace (module)">Trace</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Trace.html#new-class_method" title="Google::Cloud::Trace.new (method)">new</a></span></span><span class='lparen'>(</span>
+  <span class='label'>project_id:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-project</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+  <span class='label'>credentials:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/path/to/keyfile.json</span><span class='tstring_end'>&quot;</span></span>
+<span class='rparen'>)</span>
+
+<span class='id identifier rubyid_trace'>trace</span> <span class='op'>=</span> <span class='id identifier rubyid_trace_client'>trace_client</span><span class='period'>.</span><span class='id identifier rubyid_new_trace'>new_trace</span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>trace_context</span>
+      
+      
+        <span class='type'>(<tt>Stackdriver::Core::TraceContext</tt>, <tt>nil</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The
+context within which to locate this trace (i.e. sets the trace ID
+and the context parent span, if present.) If the context is set
+explicitly to <code>nil</code>, a new trace with a new trace ID is created.
+If no context is provided, the current thread&#39;s context is used.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TraceRecord.html" title="Google::Cloud::Trace::TraceRecord (class)">Google::Cloud::Trace::TraceRecord</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The new trace.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+97
+98
+99
+100
+101
+102</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/trace/project.rb', line 97</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_new_trace'>new_trace</span> <span class='label'>trace_context:</span> <span class='symbol'>:DEFAULT</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_trace_context'>trace_context</span> <span class='op'>==</span> <span class='symbol'>:DEFAULT</span>
+    <span class='id identifier rubyid_trace_context'>trace_context</span> <span class='op'>=</span> <span class='const'>Stackdriver</span><span class='op'>::</span><span class='const'>Core</span><span class='op'>::</span><span class='const'>TraceContext</span><span class='period'>.</span><span class='id identifier rubyid_get'>get</span>
+  <span class='kw'>end</span>
+  <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Trace.html" title="Google::Cloud::Trace (module)">Trace</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="TraceRecord.html" title="Google::Cloud::Trace::TraceRecord (class)">TraceRecord</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Trace.html#new-class_method" title="Google::Cloud::Trace.new (method)">new</a></span></span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span> <span class='id identifier rubyid_trace_context'>trace_context</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="patch_traces-instance_method">
+  
+    #<strong>patch_traces</strong>(traces)  &#x21d2; <tt>Array{<span class='object_link'><a href="TraceRecord.html" title="Google::Cloud::Trace::TraceRecord (class)">Google::Cloud::Trace::TraceRecord</a></span>}</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Sends new traces to Stackdriver Trace or updates existing traces.
+If the ID of a trace that you send matches that of an existing trace,
+any fields in the existing trace and its spans are overwritten by the
+provided values, and any new fields provided are merged with the
+existing trace data. If the ID does not match, a new trace is created.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/trace</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_trace_client'>trace_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Trace.html" title="Google::Cloud::Trace (module)">Trace</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Trace.html#new-class_method" title="Google::Cloud::Trace.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_trace'>trace</span> <span class='op'>=</span> <span class='id identifier rubyid_trace_client'>trace_client</span><span class='period'>.</span><span class='id identifier rubyid_new_trace'>new_trace</span>
+<span class='id identifier rubyid_trace'>trace</span><span class='period'>.</span><span class='id identifier rubyid_in_span'>in_span</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>root_span</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>do</span>
+  <span class='comment'># Do stuff...
+</span><span class='kw'>end</span>
+
+<span class='id identifier rubyid_trace_client'>trace_client</span><span class='period'>.</span><span class='id identifier rubyid_patch_traces'>patch_traces</span> <span class='id identifier rubyid_trace'>trace</span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>traces</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TraceRecord.html" title="Google::Cloud::Trace::TraceRecord (class)">Google::Cloud::Trace::TraceRecord</a></span></tt>, <tt>Array{<span class='object_link'><a href="TraceRecord.html" title="Google::Cloud::Trace::TraceRecord (class)">Google::Cloud::Trace::TraceRecord</a></span>}</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Either a single
+trace object or an array of trace objects.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array{<span class='object_link'><a href="TraceRecord.html" title="Google::Cloud::Trace::TraceRecord (class)">Google::Cloud::Trace::TraceRecord</a></span>}</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The traces written.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+128
+129
+130
+131</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/trace/project.rb', line 128</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_patch_traces'>patch_traces</span> <span class='id identifier rubyid_traces'>traces</span>
+  <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
+  <span class='id identifier rubyid_service'>service</span><span class='period'>.</span><span class='id identifier rubyid_patch_traces'>patch_traces</span> <span class='id identifier rubyid_traces'>traces</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="project_id-instance_method">
+  
+    #<strong>project_id</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+    <span class="aliases">Also known as:
+    <span class="names"><span id='project-instance_method'>project</span></span>
+    </span>
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The ID of the current project.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/trace</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_trace_client'>trace_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Trace.html" title="Google::Cloud::Trace (module)">Trace</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Trace.html#new-class_method" title="Google::Cloud::Trace.new (method)">new</a></span></span><span class='lparen'>(</span>
+  <span class='label'>project_id:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-project</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+  <span class='label'>credentials:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/path/to/keyfile.json</span><span class='tstring_end'>&quot;</span></span>
+<span class='rparen'>)</span>
+
+<span class='id identifier rubyid_trace_client'>trace_client</span><span class='period'>.</span><span class='id identifier rubyid_project_id'>project_id</span> <span class='comment'>#=&gt; &quot;my-project&quot;</span></code></pre>
+    
+  </div>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the Google Cloud project ID</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+70
+71
+72</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/trace/project.rb', line 70</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_project_id'>project_id</span>
+  <span class='id identifier rubyid_service'>service</span><span class='period'>.</span><span class='id identifier rubyid_project'>project</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+  <div id="footer">
+  <ul class="footer-links">
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby" title="Google Cloud on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> GitHub
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues" title="Google Cloud issues on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> Issues
+      </a>
+    </li>
+    <li>
+      <a href="http://stackoverflow.com/questions/tagged/google-cloud-ruby" title="Google Cloud on StackOverflow">
+      <img src="/google-cloud-ruby/img/icon-link-stackoverflow.svg" alt="StackOverflow icon"> StackOverflow
+    </a>
+    </li>
+    <li>
+      <a href="http://rubygems.org/gems/google-cloud" title="Google Cloud on RubyGems">
+        <img src="/google-cloud-ruby/img/icon-link-package-manager.svg" alt="RubyGems icon"> RubyGems
+      </a>
+    </li>
+  </ul>
+
+  <p>
+    Documentation generated by <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool">yard</a>.
+  </p>
+</div>
+
+</div>
