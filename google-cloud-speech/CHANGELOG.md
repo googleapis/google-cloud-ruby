@@ -1,5 +1,10 @@
 # Release History
 
+### 0.36.0 / 2019-07-08
+
+* Update documentation.
+* Support overriding service host and port.
+
 ### 0.35.0 / 2019-06-11
 
 * Update documentation for SpeechContext phrases
