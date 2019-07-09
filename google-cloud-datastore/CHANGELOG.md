@@ -1,5 +1,9 @@
 # Release History
 
+### 1.5.4 / 2019-07-08
+
+* Support overriding service host and port for low-level API.
+
 ### 1.5.3 / 2019-06-12
 
 * Enable grpc.service_config_disable_resolution
