@@ -1,5 +1,9 @@
 # Release History
 
+### 0.30.0 / 2019-07-08
+
+* Support overriding service host and port.
+
 ### 0.29.5 / 2019-06-11
 
 * Add documentation for MetricDescriptor#launch_stage and
