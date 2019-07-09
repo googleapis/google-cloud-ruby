@@ -1,5 +1,11 @@
 # Release History
 
+### 0.3.0 / 2019-07-08
+
+* Add IAM GetPolicyOptions.
+* Support overriding service host and port.
+* Explicitly require all protobuf classes.
+
 ### 0.2.1 / 2019-06-11
 
 * Update IAM:
