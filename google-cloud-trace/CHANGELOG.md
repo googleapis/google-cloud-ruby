@@ -1,5 +1,9 @@
 # Release History
 
+### 0.34.4 / 2019-07-08
+
+* Support overriding service host and port in the low-level interface.
+
 ### 0.34.3 / 2019-06-11
 
 * Accept Numeric in Google::Cloud::Trace::Utils.time_to_grpc
