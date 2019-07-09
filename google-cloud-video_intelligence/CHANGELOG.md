@@ -1,5 +1,10 @@
 # Release History
 
+### 1.3.0 / 2019-07-08
+
+* Use canonical module capitalization for VideoIntelligence type namespace.
+* Support overriding service host and port.
+
 ### 1.2.0 / 2019-06-14
 
 * Add VideoContext#object_tracking_config (ObjectTrackingConfig)
