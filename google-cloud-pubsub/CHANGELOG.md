@@ -1,5 +1,11 @@
 # Release History
 
+### 0.38.0 / 2019-07-08
+
+* Add IAM GetPolicyOptions in the lower-level API.
+* Support overriding service host and port in the low-level interface.
+* Fixed race in TimedUnaryBuffer.
+
 ### 0.37.0 / 2019-06-17
 
 * Add Topic#persistence_regions
