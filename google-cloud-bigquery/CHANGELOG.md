@@ -1,5 +1,14 @@
 # Release History
 
+### 1.12.0 / 2019-07-09
+
+* Add BigQuery Model API
+  * Add Model
+  * Add StandardSql Field, DataType, StructType
+  * Add Dataset#model and Dataset#models
+* Correct Float value conversion
+  * Ensure that NaN, Infinity, and -Infinity are converted correctly.
+
 ### 1.11.2 / 2019-06-11
 
 * Update "Loading data" link
