@@ -77,11 +77,65 @@ module Google
           ].freeze
 
 
+          BILLING_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+            "billingAccounts/{billing_account}"
+          )
+
+          private_constant :BILLING_PATH_TEMPLATE
+
+          BILLING_EXCLUSION_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+            "billingAccounts/{billing_account}/exclusions/{exclusion}"
+          )
+
+          private_constant :BILLING_EXCLUSION_PATH_TEMPLATE
+
+          BILLING_SINK_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+            "billingAccounts/{billing_account}/sinks/{sink}"
+          )
+
+          private_constant :BILLING_SINK_PATH_TEMPLATE
+
           EXCLUSION_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
             "projects/{project}/exclusions/{exclusion}"
           )
 
           private_constant :EXCLUSION_PATH_TEMPLATE
+
+          FOLDER_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+            "folders/{folder}"
+          )
+
+          private_constant :FOLDER_PATH_TEMPLATE
+
+          FOLDER_EXCLUSION_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+            "folders/{folder}/exclusions/{exclusion}"
+          )
+
+          private_constant :FOLDER_EXCLUSION_PATH_TEMPLATE
+
+          FOLDER_SINK_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+            "folders/{folder}/sinks/{sink}"
+          )
+
+          private_constant :FOLDER_SINK_PATH_TEMPLATE
+
+          ORGANIZATION_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+            "organizations/{organization}"
+          )
+
+          private_constant :ORGANIZATION_PATH_TEMPLATE
+
+          ORGANIZATION_EXCLUSION_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+            "organizations/{organization}/exclusions/{exclusion}"
+          )
+
+          private_constant :ORGANIZATION_EXCLUSION_PATH_TEMPLATE
+
+          ORGANIZATION_SINK_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+            "organizations/{organization}/sinks/{sink}"
+          )
+
+          private_constant :ORGANIZATION_SINK_PATH_TEMPLATE
 
           PROJECT_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
             "projects/{project}"
@@ -95,6 +149,37 @@ module Google
 
           private_constant :SINK_PATH_TEMPLATE
 
+          # Returns a fully-qualified billing resource name string.
+          # @param billing_account [String]
+          # @return [String]
+          def self.billing_path billing_account
+            BILLING_PATH_TEMPLATE.render(
+              :"billing_account" => billing_account
+            )
+          end
+
+          # Returns a fully-qualified billing_exclusion resource name string.
+          # @param billing_account [String]
+          # @param exclusion [String]
+          # @return [String]
+          def self.billing_exclusion_path billing_account, exclusion
+            BILLING_EXCLUSION_PATH_TEMPLATE.render(
+              :"billing_account" => billing_account,
+              :"exclusion" => exclusion
+            )
+          end
+
+          # Returns a fully-qualified billing_sink resource name string.
+          # @param billing_account [String]
+          # @param sink [String]
+          # @return [String]
+          def self.billing_sink_path billing_account, sink
+            BILLING_SINK_PATH_TEMPLATE.render(
+              :"billing_account" => billing_account,
+              :"sink" => sink
+            )
+          end
+
           # Returns a fully-qualified exclusion resource name string.
           # @param project [String]
           # @param exclusion [String]
@@ -103,6 +188,68 @@ module Google
             EXCLUSION_PATH_TEMPLATE.render(
               :"project" => project,
               :"exclusion" => exclusion
+            )
+          end
+
+          # Returns a fully-qualified folder resource name string.
+          # @param folder [String]
+          # @return [String]
+          def self.folder_path folder
+            FOLDER_PATH_TEMPLATE.render(
+              :"folder" => folder
+            )
+          end
+
+          # Returns a fully-qualified folder_exclusion resource name string.
+          # @param folder [String]
+          # @param exclusion [String]
+          # @return [String]
+          def self.folder_exclusion_path folder, exclusion
+            FOLDER_EXCLUSION_PATH_TEMPLATE.render(
+              :"folder" => folder,
+              :"exclusion" => exclusion
+            )
+          end
+
+          # Returns a fully-qualified folder_sink resource name string.
+          # @param folder [String]
+          # @param sink [String]
+          # @return [String]
+          def self.folder_sink_path folder, sink
+            FOLDER_SINK_PATH_TEMPLATE.render(
+              :"folder" => folder,
+              :"sink" => sink
+            )
+          end
+
+          # Returns a fully-qualified organization resource name string.
+          # @param organization [String]
+          # @return [String]
+          def self.organization_path organization
+            ORGANIZATION_PATH_TEMPLATE.render(
+              :"organization" => organization
+            )
+          end
+
+          # Returns a fully-qualified organization_exclusion resource name string.
+          # @param organization [String]
+          # @param exclusion [String]
+          # @return [String]
+          def self.organization_exclusion_path organization, exclusion
+            ORGANIZATION_EXCLUSION_PATH_TEMPLATE.render(
+              :"organization" => organization,
+              :"exclusion" => exclusion
+            )
+          end
+
+          # Returns a fully-qualified organization_sink resource name string.
+          # @param organization [String]
+          # @param sink [String]
+          # @return [String]
+          def self.organization_sink_path organization, sink
+            ORGANIZATION_SINK_PATH_TEMPLATE.render(
+              :"organization" => organization,
+              :"sink" => sink
             )
           end
 
