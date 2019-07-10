@@ -92,17 +92,93 @@ module Google
           ].freeze
 
 
+          BILLING_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+            "billingAccounts/{billing_account}"
+          )
+
+          private_constant :BILLING_PATH_TEMPLATE
+
+          BILLING_LOG_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+            "billingAccounts/{billing_account}/logs/{log}"
+          )
+
+          private_constant :BILLING_LOG_PATH_TEMPLATE
+
+          FOLDER_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+            "folders/{folder}"
+          )
+
+          private_constant :FOLDER_PATH_TEMPLATE
+
+          FOLDER_LOG_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+            "folders/{folder}/logs/{log}"
+          )
+
+          private_constant :FOLDER_LOG_PATH_TEMPLATE
+
           LOG_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
             "projects/{project}/logs/{log}"
           )
 
           private_constant :LOG_PATH_TEMPLATE
 
+          ORGANIZATION_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+            "organizations/{organization}"
+          )
+
+          private_constant :ORGANIZATION_PATH_TEMPLATE
+
+          ORGANIZATION_LOG_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+            "organizations/{organization}/logs/{log}"
+          )
+
+          private_constant :ORGANIZATION_LOG_PATH_TEMPLATE
+
           PROJECT_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
             "projects/{project}"
           )
 
           private_constant :PROJECT_PATH_TEMPLATE
+
+          # Returns a fully-qualified billing resource name string.
+          # @param billing_account [String]
+          # @return [String]
+          def self.billing_path billing_account
+            BILLING_PATH_TEMPLATE.render(
+              :"billing_account" => billing_account
+            )
+          end
+
+          # Returns a fully-qualified billing_log resource name string.
+          # @param billing_account [String]
+          # @param log [String]
+          # @return [String]
+          def self.billing_log_path billing_account, log
+            BILLING_LOG_PATH_TEMPLATE.render(
+              :"billing_account" => billing_account,
+              :"log" => log
+            )
+          end
+
+          # Returns a fully-qualified folder resource name string.
+          # @param folder [String]
+          # @return [String]
+          def self.folder_path folder
+            FOLDER_PATH_TEMPLATE.render(
+              :"folder" => folder
+            )
+          end
+
+          # Returns a fully-qualified folder_log resource name string.
+          # @param folder [String]
+          # @param log [String]
+          # @return [String]
+          def self.folder_log_path folder, log
+            FOLDER_LOG_PATH_TEMPLATE.render(
+              :"folder" => folder,
+              :"log" => log
+            )
+          end
 
           # Returns a fully-qualified log resource name string.
           # @param project [String]
@@ -111,6 +187,26 @@ module Google
           def self.log_path project, log
             LOG_PATH_TEMPLATE.render(
               :"project" => project,
+              :"log" => log
+            )
+          end
+
+          # Returns a fully-qualified organization resource name string.
+          # @param organization [String]
+          # @return [String]
+          def self.organization_path organization
+            ORGANIZATION_PATH_TEMPLATE.render(
+              :"organization" => organization
+            )
+          end
+
+          # Returns a fully-qualified organization_log resource name string.
+          # @param organization [String]
+          # @param log [String]
+          # @return [String]
+          def self.organization_log_path organization, log
+            ORGANIZATION_LOG_PATH_TEMPLATE.render(
+              :"organization" => organization,
               :"log" => log
             )
           end
