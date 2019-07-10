@@ -1,5 +1,26 @@
 # Release History
 
+### 0.4.0 / 2019-07-09
+
+* Remove dead files related to resume service
+* Add candidate_availability_filter and result_set_id
+    * Add ProfileQuery#candidate_availability_filter (CandidateAvailabilityFilter)
+    * Add result_set_id argument to ProfileServiceClient#search_profiles
+    * Add SearchProfilesRequest#result_set_id
+    * Add SearchProfilesResponse#result_set_id
+    * Update documentation
+* Support overriding service host and port.
+* Update github link in the PostalAddress docs
+* Add Batch Jobs
+    * BREAKING CHANGE: Remove JobEventType::NOT_INTERESTED
+    * Add JobServiceClient#batch_create_jobs
+    * Add JobServiceClient#batch_update_jobs
+    * Add JobOperationResult and BatchOperationMetadata
+    * Add JobEvent#profile
+    * Add SkillProficiencyLevel::UNSKILLED
+* Update ProfileServiceClient#search_profiles documentation
+* Replace incorrect return type HistogramQueryResult with SummarizedProfile
+
 ### 0.3.0 / 2019-05-10
 
 This is a breaking change.
