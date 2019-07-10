@@ -46,6 +46,21 @@ module Google
             self.class.company_path project, tenant, company
           end
         
+          # Alias for Google::Cloud::Talent::V4beta1::CompanyServiceClient.company_without_tenant_path.
+          # @param project [String]
+          # @param company [String]
+          # @return [String]
+          def company_without_tenant_path project, company
+            self.class.company_without_tenant_path project, company
+          end
+        
+          # Alias for Google::Cloud::Talent::V4beta1::CompanyServiceClient.project_path.
+          # @param project [String]
+          # @return [String]
+          def project_path project
+            self.class.project_path project
+          end
+        
           # Alias for Google::Cloud::Talent::V4beta1::CompanyServiceClient.tenant_path.
           # @param project [String]
           # @param tenant [String]
@@ -65,6 +80,14 @@ module Google
             self.class.company_path project, tenant, company
           end
         
+          # Alias for Google::Cloud::Talent::V4beta1::JobServiceClient.company_without_tenant_path.
+          # @param project [String]
+          # @param company [String]
+          # @return [String]
+          def company_without_tenant_path project, company
+            self.class.company_without_tenant_path project, company
+          end
+        
           # Alias for Google::Cloud::Talent::V4beta1::JobServiceClient.job_path.
           # @param project [String]
           # @param tenant [String]
@@ -72,6 +95,21 @@ module Google
           # @return [String]
           def job_path project, tenant, jobs
             self.class.job_path project, tenant, jobs
+          end
+        
+          # Alias for Google::Cloud::Talent::V4beta1::JobServiceClient.job_without_tenant_path.
+          # @param project [String]
+          # @param jobs [String]
+          # @return [String]
+          def job_without_tenant_path project, jobs
+            self.class.job_without_tenant_path project, jobs
+          end
+        
+          # Alias for Google::Cloud::Talent::V4beta1::JobServiceClient.project_path.
+          # @param project [String]
+          # @return [String]
+          def project_path project
+            self.class.project_path project
           end
         
           # Alias for Google::Cloud::Talent::V4beta1::JobServiceClient.tenant_path.
