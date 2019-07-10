@@ -80,6 +80,12 @@ module Google
 
           private_constant :NOTE_PATH_TEMPLATE
 
+          OCCURRENCE_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+            "projects/{project}/occurrences/{occurrence}"
+          )
+
+          private_constant :OCCURRENCE_PATH_TEMPLATE
+
           # Returns a fully-qualified note resource name string.
           # @param project [String]
           # @param note [String]
@@ -88,6 +94,17 @@ module Google
             NOTE_PATH_TEMPLATE.render(
               :"project" => project,
               :"note" => note
+            )
+          end
+
+          # Returns a fully-qualified occurrence resource name string.
+          # @param project [String]
+          # @param occurrence [String]
+          # @return [String]
+          def self.occurrence_path project, occurrence
+            OCCURRENCE_PATH_TEMPLATE.render(
+              :"project" => project,
+              :"occurrence" => occurrence
             )
           end
 
