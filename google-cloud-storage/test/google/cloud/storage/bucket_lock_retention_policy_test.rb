@@ -90,6 +90,8 @@ describe Google::Cloud::Storage::Bucket, :lock_retention_policy, :mock_storage d
     bucket.lock_retention_policy!
 
     mock.verify
+
+    bucket.location_type.must_equal "multi-region"
   end
 
   it "locks its retention policy with user_project set to true" do

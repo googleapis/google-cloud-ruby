@@ -30,9 +30,15 @@ describe "Storage", :buckets, :storage do
   it "gets pages of buckets" do
     first_buckets = storage.buckets max: 2
     first_buckets.next?.must_equal true
-    first_buckets.each { |b| b.must_be_kind_of Google::Cloud::Storage::Bucket }
+    first_buckets.each do |b|
+      b.must_be_kind_of Google::Cloud::Storage::Bucket
+      b.location_type.must_equal "multi-region"
+    end
     second_buckets = first_buckets.next
-    second_buckets.each { |b| b.must_be_kind_of Google::Cloud::Storage::Bucket }
+    second_buckets.each do |b|
+      b.must_be_kind_of Google::Cloud::Storage::Bucket
+      b.location_type.must_equal "multi-region"
+    end
   end
 
   it "gets pages of buckets with user_project set to true" do

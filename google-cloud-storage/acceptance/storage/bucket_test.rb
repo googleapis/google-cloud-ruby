@@ -40,6 +40,7 @@ describe Google::Cloud::Storage::Bucket, :storage do
     one_off_bucket.website_404.must_be :nil?
     one_off_bucket.requester_pays.must_be :nil?
     one_off_bucket.labels.must_equal({})
+    one_off_bucket.location_type.must_equal "multi-region"
     one_off_bucket.user_project.must_equal true
     one_off_bucket.update do |b|
       b.storage_class = :nearline
@@ -55,6 +56,7 @@ describe Google::Cloud::Storage::Bucket, :storage do
     one_off_bucket.requester_pays.must_equal true
     # labels with symbols are not strings
     one_off_bucket.labels.must_equal({ "foo" => "bar" })
+    one_off_bucket.location_type.must_equal "multi-region"
 
     one_off_bucket_copy = storage.bucket one_off_bucket_name, user_project: true
     one_off_bucket_copy.wont_be :nil?
@@ -76,6 +78,7 @@ describe Google::Cloud::Storage::Bucket, :storage do
     bucket.created_at.must_be_kind_of DateTime
     bucket.api_url.must_equal "https://www.googleapis.com/storage/v1/b/#{bucket_name}"
     bucket.location.must_be_kind_of String
+    bucket.location_type.must_equal "multi-region"
     bucket.logging_bucket.must_be :nil?
     bucket.logging_prefix.must_be :nil?
     bucket.storage_class.must_equal "STANDARD"

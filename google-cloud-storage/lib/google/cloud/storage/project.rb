@@ -295,8 +295,8 @@ module Google
         #   Logs](https://cloud.google.com/storage/docs/access-logs).
         # @param [Symbol, String] storage_class Defines how objects in the
         #   bucket are stored and determines the SLA and the cost of storage.
-        #   Accepted values include `:multi_regional`, `:regional`, `:nearline`,
-        #   and `:coldline`, as well as the equivalent strings returned by
+        #   Accepted values include `:standard`, `:nearline`, and `:coldline`,
+        #   as well as the equivalent strings returned by
         #   {Bucket#storage_class}. For more information, see [Storage
         #   Classes](https://cloud.google.com/storage/docs/storage-classes). The
         #   default value is the Standard storage class, which is equivalent to

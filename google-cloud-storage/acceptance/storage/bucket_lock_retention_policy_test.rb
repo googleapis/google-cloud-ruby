@@ -204,6 +204,8 @@ describe Google::Cloud::Storage::Bucket, :lock_retention_policy, :storage do
     # Call to lock_retention_policy! should update bucket state
     bucket.retention_policy_locked?.must_equal true
 
+    bucket.location_type.must_equal "multi-region"
+
     err = expect do
       bucket.update do |b|
         b.retention_period = nil

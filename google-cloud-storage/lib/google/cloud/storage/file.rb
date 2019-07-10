@@ -428,8 +428,7 @@ module Google
         # Rewrites the file with a new storage class, which determines the SLA
         # and the cost of storage. Accepted values include:
         #
-        # * `:multi_regional`
-        # * `:regional`
+        # * `:standard`
         # * `:nearline`
         # * `:coldline`
         #
