@@ -84,6 +84,30 @@ module Google
             ].freeze
 
 
+            LOCATION_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+              "projects/{project}/locations/{location}"
+            )
+
+            private_constant :LOCATION_PATH_TEMPLATE
+
+            LOCATION_DATA_SOURCE_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+              "projects/{project}/locations/{location}/dataSources/{data_source}"
+            )
+
+            private_constant :LOCATION_DATA_SOURCE_PATH_TEMPLATE
+
+            LOCATION_RUN_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+              "projects/{project}/locations/{location}/transferConfigs/{transfer_config}/runs/{run}"
+            )
+
+            private_constant :LOCATION_RUN_PATH_TEMPLATE
+
+            LOCATION_TRANSFER_CONFIG_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+              "projects/{project}/locations/{location}/transferConfigs/{transfer_config}"
+            )
+
+            private_constant :LOCATION_TRANSFER_CONFIG_PATH_TEMPLATE
+
             PROJECT_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
               "projects/{project}"
             )
@@ -107,6 +131,58 @@ module Google
             )
 
             private_constant :PROJECT_TRANSFER_CONFIG_PATH_TEMPLATE
+
+            # Returns a fully-qualified location resource name string.
+            # @param project [String]
+            # @param location [String]
+            # @return [String]
+            def self.location_path project, location
+              LOCATION_PATH_TEMPLATE.render(
+                :"project" => project,
+                :"location" => location
+              )
+            end
+
+            # Returns a fully-qualified location_data_source resource name string.
+            # @param project [String]
+            # @param location [String]
+            # @param data_source [String]
+            # @return [String]
+            def self.location_data_source_path project, location, data_source
+              LOCATION_DATA_SOURCE_PATH_TEMPLATE.render(
+                :"project" => project,
+                :"location" => location,
+                :"data_source" => data_source
+              )
+            end
+
+            # Returns a fully-qualified location_run resource name string.
+            # @param project [String]
+            # @param location [String]
+            # @param transfer_config [String]
+            # @param run [String]
+            # @return [String]
+            def self.location_run_path project, location, transfer_config, run
+              LOCATION_RUN_PATH_TEMPLATE.render(
+                :"project" => project,
+                :"location" => location,
+                :"transfer_config" => transfer_config,
+                :"run" => run
+              )
+            end
+
+            # Returns a fully-qualified location_transfer_config resource name string.
+            # @param project [String]
+            # @param location [String]
+            # @param transfer_config [String]
+            # @return [String]
+            def self.location_transfer_config_path project, location, transfer_config
+              LOCATION_TRANSFER_CONFIG_PATH_TEMPLATE.render(
+                :"project" => project,
+                :"location" => location,
+                :"transfer_config" => transfer_config
+              )
+            end
 
             # Returns a fully-qualified project resource name string.
             # @param project [String]
