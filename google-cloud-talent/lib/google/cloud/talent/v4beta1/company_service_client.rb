@@ -75,6 +75,18 @@ module Google
 
           private_constant :COMPANY_PATH_TEMPLATE
 
+          COMPANY_WITHOUT_TENANT_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+            "projects/{project}/companies/{company}"
+          )
+
+          private_constant :COMPANY_WITHOUT_TENANT_PATH_TEMPLATE
+
+          PROJECT_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+            "projects/{project}"
+          )
+
+          private_constant :PROJECT_PATH_TEMPLATE
+
           TENANT_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
             "projects/{project}/tenants/{tenant}"
           )
@@ -91,6 +103,26 @@ module Google
               :"project" => project,
               :"tenant" => tenant,
               :"company" => company
+            )
+          end
+
+          # Returns a fully-qualified company_without_tenant resource name string.
+          # @param project [String]
+          # @param company [String]
+          # @return [String]
+          def self.company_without_tenant_path project, company
+            COMPANY_WITHOUT_TENANT_PATH_TEMPLATE.render(
+              :"project" => project,
+              :"company" => company
+            )
+          end
+
+          # Returns a fully-qualified project resource name string.
+          # @param project [String]
+          # @return [String]
+          def self.project_path project
+            PROJECT_PATH_TEMPLATE.render(
+              :"project" => project
             )
           end
 

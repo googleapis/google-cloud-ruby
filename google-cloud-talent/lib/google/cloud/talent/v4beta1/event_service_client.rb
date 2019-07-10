@@ -60,11 +60,26 @@ module Google
           ].freeze
 
 
+          PROJECT_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+            "projects/{project}"
+          )
+
+          private_constant :PROJECT_PATH_TEMPLATE
+
           TENANT_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
             "projects/{project}/tenants/{tenant}"
           )
 
           private_constant :TENANT_PATH_TEMPLATE
+
+          # Returns a fully-qualified project resource name string.
+          # @param project [String]
+          # @return [String]
+          def self.project_path project
+            PROJECT_PATH_TEMPLATE.render(
+              :"project" => project
+            )
+          end
 
           # Returns a fully-qualified tenant resource name string.
           # @param project [String]
