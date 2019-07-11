@@ -1,5 +1,10 @@
 # Release History
 
+### 1.19.0 / 2019-07-11
+
+* Add Bucket#location_type
+  * Remove :multi_regional and :regional from storage_class docs
+
 ### 1.18.2 / 2019-05-21
 
 * Declare explicit dependency on mime-types
