@@ -1522,12 +1522,12 @@ as many predefined lists.</p>
       <pre class="lines">
 
 
+1574
 1575
-1576
-1577</pre>
+1576</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/storage/file.rb', line 1575</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/storage/file.rb', line 1574</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_acl'>acl</span>
   <span class='ivar'>@acl</span> <span class='op'>||=</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Storage::File (class)">File</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="File/Acl.html" title="Google::Cloud::Storage::File::Acl (class)">Acl</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span> <span class='kw'>self</span>
@@ -2458,6 +2458,7 @@ to <span class='object_link'><a href="Bucket.html#create_file-instance_method" t
       <pre class="lines">
 
 
+1038
 1039
 1040
 1041
@@ -2465,11 +2466,10 @@ to <span class='object_link'><a href="Bucket.html#create_file-instance_method" t
 1043
 1044
 1045
-1046
-1047</pre>
+1046</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/storage/file.rb', line 1039</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/storage/file.rb', line 1038</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_copy'>copy</span> <span class='id identifier rubyid_dest_bucket_or_path'>dest_bucket_or_path</span><span class='comma'>,</span> <span class='id identifier rubyid_dest_path'>dest_path</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='comma'>,</span>
          <span class='label'>acl:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>generation:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>encryption_key:</span> <span class='kw'>nil</span>
@@ -2704,16 +2704,16 @@ which is the version returned by <span class='object_link'><a href="#generation-
       <pre class="lines">
 
 
+1341
 1342
 1343
 1344
 1345
 1346
-1347
-1348</pre>
+1347</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/storage/file.rb', line 1342</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/storage/file.rb', line 1341</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete'>delete</span> <span class='label'>generation:</span> <span class='kw'>nil</span>
   <span class='id identifier rubyid_generation'>generation</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_generation'>generation</span> <span class='kw'>if</span> <span class='id identifier rubyid_generation'>generation</span> <span class='op'>==</span> <span class='kw'>true</span>
@@ -3016,6 +3016,7 @@ File-like object, then that object will be returned.</p>
       <pre class="lines">
 
 
+931
 932
 933
 934
@@ -3035,11 +3036,10 @@ File-like object, then that object will be returned.</p>
 948
 949
 950
-951
-952</pre>
+951</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/storage/file.rb', line 932</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/storage/file.rb', line 931</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_download'>download</span> <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>verify:</span> <span class='symbol'>:md5</span><span class='comma'>,</span> <span class='label'>encryption_key:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>range:</span> <span class='kw'>nil</span><span class='comma'>,</span>
              <span class='label'>skip_decompress:</span> <span class='kw'>nil</span>
@@ -3280,12 +3280,12 @@ the file, otherwise <code>false</code>.</p>
       <pre class="lines">
 
 
+587
 588
-589
-590</pre>
+589</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/storage/file.rb', line 588</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/storage/file.rb', line 587</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_event_based_hold?'>event_based_hold?</span>
   <span class='op'>!</span><span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_event_based_hold'>event_based_hold</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='op'>&amp;&amp;</span> <span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_event_based_hold'>event_based_hold</span>
@@ -3333,6 +3333,7 @@ the file, otherwise <code>false</code>.</p>
       <pre class="lines">
 
 
+1630
 1631
 1632
 1633
@@ -3341,11 +3342,10 @@ the file, otherwise <code>false</code>.</p>
 1636
 1637
 1638
-1639
-1640</pre>
+1639</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/storage/file.rb', line 1631</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/storage/file.rb', line 1630</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_exists?'>exists?</span>
   <span class='comment'># Always true if we have a grpc object
@@ -3492,17 +3492,17 @@ archived object versions. (See <span class='object_link'><a href="Bucket.html#ve
       <pre class="lines">
 
 
+735
 736
 737
 738
 739
 740
 741
-742
-743</pre>
+742</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/storage/file.rb', line 736</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/storage/file.rb', line 735</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_generations'>generations</span>
   <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
@@ -4126,12 +4126,12 @@ the URL will return an error. (See <span class='object_link'><a href="File/Acl.h
       <pre class="lines">
 
 
+1381
 1382
-1383
-1384</pre>
+1383</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/storage/file.rb', line 1382</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/storage/file.rb', line 1381</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_public_url'>public_url</span> <span class='label'>protocol:</span> <span class='symbol'>:https</span>
   <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_protocol'>protocol</span><span class='embexpr_end'>}</span><span class='tstring_content'>://storage.googleapis.com/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_bucket'>bucket</span><span class='embexpr_end'>}</span><span class='tstring_content'>/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_name'>name</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
@@ -4201,13 +4201,13 @@ assigned to newly-created objects.</p>
       <pre class="lines">
 
 
+678
 679
 680
-681
-682</pre>
+681</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/storage/file.rb', line 679</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/storage/file.rb', line 678</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_release_event_based_hold!'>release_event_based_hold!</span>
   <span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_event_based_hold'>event_based_hold</span> <span class='op'>=</span> <span class='kw'>false</span>
@@ -4269,13 +4269,13 @@ default value is <code>false</code>.</p>
       <pre class="lines">
 
 
+526
 527
 528
-529
-530</pre>
+529</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/storage/file.rb', line 527</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/storage/file.rb', line 526</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_release_temporary_hold!'>release_temporary_hold!</span>
   <span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_temporary_hold'>temporary_hold</span> <span class='op'>=</span> <span class='kw'>false</span>
@@ -4379,6 +4379,7 @@ set, which is the version returned by <span class='object_link'><a href="#genera
       <pre class="lines">
 
 
+1617
 1618
 1619
 1620
@@ -4386,11 +4387,10 @@ set, which is the version returned by <span class='object_link'><a href="#genera
 1622
 1623
 1624
-1625
-1626</pre>
+1625</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/storage/file.rb', line 1618</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/storage/file.rb', line 1617</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_reload!'>reload!</span> <span class='label'>generation:</span> <span class='kw'>nil</span>
   <span class='id identifier rubyid_generation'>generation</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_generation'>generation</span> <span class='kw'>if</span> <span class='id identifier rubyid_generation'>generation</span> <span class='op'>==</span> <span class='kw'>true</span>
@@ -4463,12 +4463,12 @@ restrictions on deleting the object.</p>
       <pre class="lines">
 
 
+701
 702
-703
-704</pre>
+703</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/storage/file.rb', line 702</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/storage/file.rb', line 701</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_retention_expires_at'>retention_expires_at</span>
   <span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_retention_expiration_time'>retention_expiration_time</span>
@@ -4799,6 +4799,7 @@ if <code>new_encryption_key</code> is used.</p>
       <pre class="lines">
 
 
+1192
 1193
 1194
 1195
@@ -4825,11 +4826,10 @@ if <code>new_encryption_key</code> is used.</p>
 1216
 1217
 1218
-1219
-1220</pre>
+1219</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/storage/file.rb', line 1193</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/storage/file.rb', line 1192</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_rewrite'>rewrite</span> <span class='id identifier rubyid_dest_bucket_or_path'>dest_bucket_or_path</span><span class='comma'>,</span> <span class='id identifier rubyid_dest_path'>dest_path</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='comma'>,</span>
             <span class='label'>acl:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>generation:</span> <span class='kw'>nil</span><span class='comma'>,</span>
@@ -5026,15 +5026,15 @@ if <code>new_encryption_key</code> is used.</p>
       <pre class="lines">
 
 
+1289
 1290
 1291
 1292
 1293
-1294
-1295</pre>
+1294</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/storage/file.rb', line 1290</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/storage/file.rb', line 1289</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_rotate'>rotate</span> <span class='label'>encryption_key:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>new_encryption_key:</span> <span class='kw'>nil</span><span class='comma'>,</span>
            <span class='label'>new_kms_key:</span> <span class='kw'>nil</span>
@@ -5125,13 +5125,13 @@ have already been deleted by the user.</li>
       <pre class="lines">
 
 
+640
 641
 642
-643
-644</pre>
+643</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/storage/file.rb', line 641</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/storage/file.rb', line 640</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_set_event_based_hold!'>set_event_based_hold!</span>
   <span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_event_based_hold'>event_based_hold</span> <span class='op'>=</span> <span class='kw'>true</span>
@@ -5190,13 +5190,13 @@ default value is <code>false</code>.</p>
       <pre class="lines">
 
 
+497
 498
 499
-500
-501</pre>
+500</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/storage/file.rb', line 498</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/storage/file.rb', line 497</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_set_temporary_hold!'>set_temporary_hold!</span>
   <span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_temporary_hold'>temporary_hold</span> <span class='op'>=</span> <span class='kw'>true</span>
@@ -5284,6 +5284,7 @@ default value is <code>false</code>.</p>
       <pre class="lines">
 
 
+1503
 1504
 1505
 1506
@@ -5308,11 +5309,10 @@ default value is <code>false</code>.</p>
 1525
 1526
 1527
-1528
-1529</pre>
+1528</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/storage/file.rb', line 1504</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/storage/file.rb', line 1503</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_signed_url'>signed_url</span> <span class='label'>method:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>expires:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>content_type:</span> <span class='kw'>nil</span><span class='comma'>,</span>
                <span class='label'>content_md5:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>headers:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>issuer:</span> <span class='kw'>nil</span><span class='comma'>,</span>
@@ -5471,8 +5471,7 @@ Class</a>.</p>
 and the cost of storage. Accepted values include:</p>
 
 <ul>
-<li><code>:multi_regional</code></li>
-<li><code>:regional</code></li>
+<li><code>:standard</code></li>
 <li><code>:nearline</code></li>
 <li><code>:coldline</code></li>
 </ul>
@@ -5516,13 +5515,13 @@ The  default value is the default storage class for the bucket. See
       <pre class="lines">
 
 
+445
 446
 447
-448
-449</pre>
+448</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/storage/file.rb', line 446</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/storage/file.rb', line 445</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_storage_class='>storage_class=</span> <span class='id identifier rubyid_storage_class'>storage_class</span>
   <span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_storage_class'>storage_class</span> <span class='op'>=</span> <span class='id identifier rubyid_storage_class_for'>storage_class_for</span> <span class='id identifier rubyid_storage_class'>storage_class</span>
@@ -5597,12 +5596,12 @@ file, otherwise <code>false</code>.</p>
       <pre class="lines">
 
 
+472
 473
-474
-475</pre>
+474</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/storage/file.rb', line 473</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/storage/file.rb', line 472</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_temporary_hold?'>temporary_hold?</span>
   <span class='op'>!</span><span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_temporary_hold'>temporary_hold</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='op'>&amp;&amp;</span> <span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_temporary_hold'>temporary_hold</span>
@@ -5682,15 +5681,15 @@ the block is completely mutable and will be included in the request.</p>
       <pre class="lines">
 
 
+772
 773
 774
 775
 776
-777
-778</pre>
+777</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/storage/file.rb', line 773</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/storage/file.rb', line 772</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update'>update</span>
   <span class='id identifier rubyid_updater'>updater</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="File/Updater.html" title="Google::Cloud::Storage::File::Updater (class)">Updater</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span> <span class='id identifier rubyid_gapi'>gapi</span>
