@@ -185,6 +185,58 @@ js:
       <li class="public ">
   <span class="summary_signature">
     
+      <a href="#optimization_objective_precision_value-instance_method" title="#optimization_objective_precision_value (instance method)">#<strong>optimization_objective_precision_value</strong>  &#x21d2; Float </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Required when optimization_objective is &quot;MAXIMIZE_RECALL_AT_PRECISION&quot;.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#optimization_objective_recall_value-instance_method" title="#optimization_objective_recall_value (instance method)">#<strong>optimization_objective_recall_value</strong>  &#x21d2; Float </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Required when optimization_objective is &quot;MAXIMIZE_PRECISION_AT_RECALL&quot;.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#tables_model_column_info-instance_method" title="#tables_model_column_info (instance method)">#<strong>tables_model_column_info</strong>  &#x21d2; Array&lt;Google::Cloud::AutoML::V1beta1::TablesModelColumnInfo&gt; </a>
     
 
@@ -343,10 +395,10 @@ Tables might stop training before the entire training budget has been used.</p>
       <pre class="lines">
 
 
-173</pre>
+185</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/automl/v1beta1/doc/google/cloud/automl/v1beta1/tables.rb', line 173</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/automl/v1beta1/doc/google/cloud/automl/v1beta1/tables.rb', line 185</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::AutoML::V1beta1::TablesModelMetadata (class)">TablesModelMetadata</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -432,10 +484,10 @@ data_type - Output only.</p>
       <pre class="lines">
 
 
-173</pre>
+185</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/automl/v1beta1/doc/google/cloud/automl/v1beta1/tables.rb', line 173</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/automl/v1beta1/doc/google/cloud/automl/v1beta1/tables.rb', line 185</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::AutoML::V1beta1::TablesModelMetadata (class)">TablesModelMetadata</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -467,7 +519,11 @@ If the field is not set, a default objective function is used.</p>
   &quot;MAXIMIZE_AU_ROC&quot; (default) - Maximize the area under the receiver
                                 operating characteristic (ROC) curve.
   &quot;MINIMIZE_LOG_LOSS&quot; - Minimize log loss.
-  &quot;MAXIMIZE_AU_PRC&quot; - Maximize the area under the precision-recall curve.</p>
+  &quot;MAXIMIZE_AU_PRC&quot; - Maximize the area under the precision-recall curve.
+  &quot;MAXIMIZE_PRECISION_AT_RECALL&quot; - Maximize precision for a specified
+                                  recall value.
+  &quot;MAXIMIZE_RECALL_AT_PRECISION&quot; - Maximize recall for a specified
+                                   precision value.</p>
 
 <p>CLASSIFICATION_MULTI_CLASS :
   &quot;MINIMIZE_LOG_LOSS&quot; (default) - Minimize log loss.</p>
@@ -508,7 +564,11 @@ If the field is not set, a default objective function is used.</p>
   &quot;MAXIMIZE_AU_ROC&quot; (default) - Maximize the area under the receiver
                                 operating characteristic (ROC) curve.
   &quot;MINIMIZE_LOG_LOSS&quot; - Minimize log loss.
-  &quot;MAXIMIZE_AU_PRC&quot; - Maximize the area under the precision-recall curve.</p>
+  &quot;MAXIMIZE_AU_PRC&quot; - Maximize the area under the precision-recall curve.
+  &quot;MAXIMIZE_PRECISION_AT_RECALL&quot; - Maximize precision for a specified
+                                  recall value.
+  &quot;MAXIMIZE_RECALL_AT_PRECISION&quot; - Maximize recall for a specified
+                                   precision value.</p>
 
 <p>CLASSIFICATION_MULTI_CLASS :
   &quot;MINIMIZE_LOG_LOSS&quot; (default) - Minimize log loss.</p>
@@ -533,10 +593,124 @@ If the field is not set, a default objective function is used.</p>
       <pre class="lines">
 
 
-173</pre>
+185</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/automl/v1beta1/doc/google/cloud/automl/v1beta1/tables.rb', line 173</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/automl/v1beta1/doc/google/cloud/automl/v1beta1/tables.rb', line 185</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::AutoML::V1beta1::TablesModelMetadata (class)">TablesModelMetadata</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="optimization_objective_precision_value=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="optimization_objective_precision_value-instance_method">
+  
+    #<strong>optimization_objective_precision_value</strong>  &#x21d2; <tt>Float</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Required when optimization_objective is &quot;MAXIMIZE_RECALL_AT_PRECISION&quot;.
+Must be between 0 and 1, inclusive.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Required when optimization_objective is &quot;MAXIMIZE_RECALL_AT_PRECISION&quot;.
+Must be between 0 and 1, inclusive.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+185</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/automl/v1beta1/doc/google/cloud/automl/v1beta1/tables.rb', line 185</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::AutoML::V1beta1::TablesModelMetadata (class)">TablesModelMetadata</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="optimization_objective_recall_value=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="optimization_objective_recall_value-instance_method">
+  
+    #<strong>optimization_objective_recall_value</strong>  &#x21d2; <tt>Float</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Required when optimization_objective is &quot;MAXIMIZE_PRECISION_AT_RECALL&quot;.
+Must be between 0 and 1, inclusive.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Required when optimization_objective is &quot;MAXIMIZE_PRECISION_AT_RECALL&quot;.
+Must be between 0 and 1, inclusive.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+185</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/automl/v1beta1/doc/google/cloud/automl/v1beta1/tables.rb', line 185</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::AutoML::V1beta1::TablesModelMetadata (class)">TablesModelMetadata</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -590,10 +764,10 @@ input_feature_column_specs with respect to this particular model.</p>
       <pre class="lines">
 
 
-173</pre>
+185</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/automl/v1beta1/doc/google/cloud/automl/v1beta1/tables.rb', line 173</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/automl/v1beta1/doc/google/cloud/automl/v1beta1/tables.rb', line 185</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::AutoML::V1beta1::TablesModelMetadata (class)">TablesModelMetadata</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -661,10 +835,10 @@ data_type - Output only.</p>
       <pre class="lines">
 
 
-173</pre>
+185</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/automl/v1beta1/doc/google/cloud/automl/v1beta1/tables.rb', line 173</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/automl/v1beta1/doc/google/cloud/automl/v1beta1/tables.rb', line 185</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::AutoML::V1beta1::TablesModelMetadata (class)">TablesModelMetadata</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -742,10 +916,10 @@ inclusive.</p>
       <pre class="lines">
 
 
-173</pre>
+185</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/automl/v1beta1/doc/google/cloud/automl/v1beta1/tables.rb', line 173</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/automl/v1beta1/doc/google/cloud/automl/v1beta1/tables.rb', line 185</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::AutoML::V1beta1::TablesModelMetadata (class)">TablesModelMetadata</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -801,10 +975,10 @@ to not exceed the train budget.</p>
       <pre class="lines">
 
 
-173</pre>
+185</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/automl/v1beta1/doc/google/cloud/automl/v1beta1/tables.rb', line 173</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/automl/v1beta1/doc/google/cloud/automl/v1beta1/tables.rb', line 185</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::AutoML::V1beta1::TablesModelMetadata (class)">TablesModelMetadata</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
