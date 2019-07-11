@@ -199,6 +199,75 @@ this service.</p>
         <li class="public ">
   <span class="summary_signature">
     
+      <a href="#billing_exclusion_path-class_method" title="billing_exclusion_path (class method)">.<strong>billing_exclusion_path</strong>(billing_account, exclusion)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns a fully-qualified billing_exclusion resource name string.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#billing_path-class_method" title="billing_path (class method)">.<strong>billing_path</strong>(billing_account)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns a fully-qualified billing resource name string.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#billing_sink_path-class_method" title="billing_sink_path (class method)">.<strong>billing_sink_path</strong>(billing_account, sink)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns a fully-qualified billing_sink resource name string.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#exclusion_path-class_method" title="exclusion_path (class method)">.<strong>exclusion_path</strong>(project, exclusion)  &#x21d2; String </a>
     
 
@@ -214,6 +283,144 @@ this service.</p>
 
   
     <span class="summary_desc"><div class='inline'><p>Returns a fully-qualified exclusion resource name string.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#folder_exclusion_path-class_method" title="folder_exclusion_path (class method)">.<strong>folder_exclusion_path</strong>(folder, exclusion)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns a fully-qualified folder_exclusion resource name string.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#folder_path-class_method" title="folder_path (class method)">.<strong>folder_path</strong>(folder)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns a fully-qualified folder resource name string.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#folder_sink_path-class_method" title="folder_sink_path (class method)">.<strong>folder_sink_path</strong>(folder, sink)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns a fully-qualified folder_sink resource name string.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#organization_exclusion_path-class_method" title="organization_exclusion_path (class method)">.<strong>organization_exclusion_path</strong>(organization, exclusion)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns a fully-qualified organization_exclusion resource name string.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#organization_path-class_method" title="organization_path (class method)">.<strong>organization_path</strong>(organization)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns a fully-qualified organization resource name string.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#organization_sink_path-class_method" title="organization_sink_path (class method)">.<strong>organization_sink_path</strong>(organization, sink)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns a fully-qualified organization_sink resource name string.</p>
 </div></span>
   
 </li>
@@ -701,153 +908,6 @@ custom error handling.</p>
       <pre class="lines">
 
 
-162
-163
-164
-165
-166
-167
-168
-169
-170
-171
-172
-173
-174
-175
-176
-177
-178
-179
-180
-181
-182
-183
-184
-185
-186
-187
-188
-189
-190
-191
-192
-193
-194
-195
-196
-197
-198
-199
-200
-201
-202
-203
-204
-205
-206
-207
-208
-209
-210
-211
-212
-213
-214
-215
-216
-217
-218
-219
-220
-221
-222
-223
-224
-225
-226
-227
-228
-229
-230
-231
-232
-233
-234
-235
-236
-237
-238
-239
-240
-241
-242
-243
-244
-245
-246
-247
-248
-249
-250
-251
-252
-253
-254
-255
-256
-257
-258
-259
-260
-261
-262
-263
-264
-265
-266
-267
-268
-269
-270
-271
-272
-273
-274
-275
-276
-277
-278
-279
-280
-281
-282
-283
-284
-285
-286
-287
-288
-289
-290
-291
-292
-293
-294
-295
-296
-297
-298
-299
-300
-301
-302
-303
-304
-305
-306
-307
-308
 309
 310
 311
@@ -857,10 +917,157 @@ custom error handling.</p>
 315
 316
 317
-318</pre>
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376
+377
+378
+379
+380
+381
+382
+383
+384
+385
+386
+387
+388
+389
+390
+391
+392
+393
+394
+395
+396
+397
+398
+399
+400
+401
+402
+403
+404
+405
+406
+407
+408
+409
+410
+411
+412
+413
+414
+415
+416
+417
+418
+419
+420
+421
+422
+423
+424
+425
+426
+427
+428
+429
+430
+431
+432
+433
+434
+435
+436
+437
+438
+439
+440
+441
+442
+443
+444
+445
+446
+447
+448
+449
+450
+451
+452
+453
+454
+455
+456
+457
+458
+459
+460
+461
+462
+463
+464
+465</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/config_service_v2_client.rb', line 162</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/config_service_v2_client.rb', line 309</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span> \
     <span class='label'>credentials:</span> <span class='kw'>nil</span><span class='comma'>,</span>
@@ -1032,7 +1239,249 @@ custom error handling.</p>
 
     
       <div class="method_details first">
-  <h3 class="signature first" id="exclusion_path-class_method">
+  <h3 class="signature first" id="billing_exclusion_path-class_method">
+  
+    .<strong>billing_exclusion_path</strong>(billing_account, exclusion)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns a fully-qualified billing_exclusion resource name string.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>billing_account</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>exclusion</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+165
+166
+167
+168
+169
+170</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/config_service_v2_client.rb', line 165</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_billing_exclusion_path'>billing_exclusion_path</span> <span class='id identifier rubyid_billing_account'>billing_account</span><span class='comma'>,</span> <span class='id identifier rubyid_exclusion'>exclusion</span>
+  <span class='const'>BILLING_EXCLUSION_PATH_TEMPLATE</span><span class='period'>.</span><span class='id identifier rubyid_render'>render</span><span class='lparen'>(</span>
+    <span class='symbol'>:&quot;billing_account&quot;</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_billing_account'>billing_account</span><span class='comma'>,</span>
+    <span class='symbol'>:&quot;exclusion&quot;</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_exclusion'>exclusion</span>
+  <span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="billing_path-class_method">
+  
+    .<strong>billing_path</strong>(billing_account)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns a fully-qualified billing resource name string.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>billing_account</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+155
+156
+157
+158
+159</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/config_service_v2_client.rb', line 155</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_billing_path'>billing_path</span> <span class='id identifier rubyid_billing_account'>billing_account</span>
+  <span class='const'>BILLING_PATH_TEMPLATE</span><span class='period'>.</span><span class='id identifier rubyid_render'>render</span><span class='lparen'>(</span>
+    <span class='symbol'>:&quot;billing_account&quot;</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_billing_account'>billing_account</span>
+  <span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="billing_sink_path-class_method">
+  
+    .<strong>billing_sink_path</strong>(billing_account, sink)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns a fully-qualified billing_sink resource name string.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>billing_account</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>sink</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+176
+177
+178
+179
+180
+181</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/config_service_v2_client.rb', line 176</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_billing_sink_path'>billing_sink_path</span> <span class='id identifier rubyid_billing_account'>billing_account</span><span class='comma'>,</span> <span class='id identifier rubyid_sink'>sink</span>
+  <span class='const'>BILLING_SINK_PATH_TEMPLATE</span><span class='period'>.</span><span class='id identifier rubyid_render'>render</span><span class='lparen'>(</span>
+    <span class='symbol'>:&quot;billing_account&quot;</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_billing_account'>billing_account</span><span class='comma'>,</span>
+    <span class='symbol'>:&quot;sink&quot;</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_sink'>sink</span>
+  <span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="exclusion_path-class_method">
   
     .<strong>exclusion_path</strong>(project, exclusion)  &#x21d2; <tt>String</tt> 
   
@@ -1095,20 +1544,504 @@ custom error handling.</p>
       <pre class="lines">
 
 
-102
-103
-104
-105
-106
-107</pre>
+187
+188
+189
+190
+191
+192</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/config_service_v2_client.rb', line 102</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/config_service_v2_client.rb', line 187</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_exclusion_path'>exclusion_path</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span> <span class='id identifier rubyid_exclusion'>exclusion</span>
   <span class='const'>EXCLUSION_PATH_TEMPLATE</span><span class='period'>.</span><span class='id identifier rubyid_render'>render</span><span class='lparen'>(</span>
     <span class='symbol'>:&quot;project&quot;</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span>
     <span class='symbol'>:&quot;exclusion&quot;</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_exclusion'>exclusion</span>
+  <span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="folder_exclusion_path-class_method">
+  
+    .<strong>folder_exclusion_path</strong>(folder, exclusion)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns a fully-qualified folder_exclusion resource name string.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>folder</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>exclusion</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+207
+208
+209
+210
+211
+212</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/config_service_v2_client.rb', line 207</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_folder_exclusion_path'>folder_exclusion_path</span> <span class='id identifier rubyid_folder'>folder</span><span class='comma'>,</span> <span class='id identifier rubyid_exclusion'>exclusion</span>
+  <span class='const'>FOLDER_EXCLUSION_PATH_TEMPLATE</span><span class='period'>.</span><span class='id identifier rubyid_render'>render</span><span class='lparen'>(</span>
+    <span class='symbol'>:&quot;folder&quot;</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_folder'>folder</span><span class='comma'>,</span>
+    <span class='symbol'>:&quot;exclusion&quot;</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_exclusion'>exclusion</span>
+  <span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="folder_path-class_method">
+  
+    .<strong>folder_path</strong>(folder)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns a fully-qualified folder resource name string.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>folder</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+197
+198
+199
+200
+201</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/config_service_v2_client.rb', line 197</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_folder_path'>folder_path</span> <span class='id identifier rubyid_folder'>folder</span>
+  <span class='const'>FOLDER_PATH_TEMPLATE</span><span class='period'>.</span><span class='id identifier rubyid_render'>render</span><span class='lparen'>(</span>
+    <span class='symbol'>:&quot;folder&quot;</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_folder'>folder</span>
+  <span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="folder_sink_path-class_method">
+  
+    .<strong>folder_sink_path</strong>(folder, sink)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns a fully-qualified folder_sink resource name string.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>folder</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>sink</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+218
+219
+220
+221
+222
+223</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/config_service_v2_client.rb', line 218</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_folder_sink_path'>folder_sink_path</span> <span class='id identifier rubyid_folder'>folder</span><span class='comma'>,</span> <span class='id identifier rubyid_sink'>sink</span>
+  <span class='const'>FOLDER_SINK_PATH_TEMPLATE</span><span class='period'>.</span><span class='id identifier rubyid_render'>render</span><span class='lparen'>(</span>
+    <span class='symbol'>:&quot;folder&quot;</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_folder'>folder</span><span class='comma'>,</span>
+    <span class='symbol'>:&quot;sink&quot;</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_sink'>sink</span>
+  <span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="organization_exclusion_path-class_method">
+  
+    .<strong>organization_exclusion_path</strong>(organization, exclusion)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns a fully-qualified organization_exclusion resource name string.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>organization</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>exclusion</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+238
+239
+240
+241
+242
+243</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/config_service_v2_client.rb', line 238</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_organization_exclusion_path'>organization_exclusion_path</span> <span class='id identifier rubyid_organization'>organization</span><span class='comma'>,</span> <span class='id identifier rubyid_exclusion'>exclusion</span>
+  <span class='const'>ORGANIZATION_EXCLUSION_PATH_TEMPLATE</span><span class='period'>.</span><span class='id identifier rubyid_render'>render</span><span class='lparen'>(</span>
+    <span class='symbol'>:&quot;organization&quot;</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_organization'>organization</span><span class='comma'>,</span>
+    <span class='symbol'>:&quot;exclusion&quot;</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_exclusion'>exclusion</span>
+  <span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="organization_path-class_method">
+  
+    .<strong>organization_path</strong>(organization)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns a fully-qualified organization resource name string.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>organization</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+228
+229
+230
+231
+232</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/config_service_v2_client.rb', line 228</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_organization_path'>organization_path</span> <span class='id identifier rubyid_organization'>organization</span>
+  <span class='const'>ORGANIZATION_PATH_TEMPLATE</span><span class='period'>.</span><span class='id identifier rubyid_render'>render</span><span class='lparen'>(</span>
+    <span class='symbol'>:&quot;organization&quot;</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_organization'>organization</span>
+  <span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="organization_sink_path-class_method">
+  
+    .<strong>organization_sink_path</strong>(organization, sink)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns a fully-qualified organization_sink resource name string.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>organization</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>sink</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+249
+250
+251
+252
+253
+254</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/config_service_v2_client.rb', line 249</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_organization_sink_path'>organization_sink_path</span> <span class='id identifier rubyid_organization'>organization</span><span class='comma'>,</span> <span class='id identifier rubyid_sink'>sink</span>
+  <span class='const'>ORGANIZATION_SINK_PATH_TEMPLATE</span><span class='period'>.</span><span class='id identifier rubyid_render'>render</span><span class='lparen'>(</span>
+    <span class='symbol'>:&quot;organization&quot;</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_organization'>organization</span><span class='comma'>,</span>
+    <span class='symbol'>:&quot;sink&quot;</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_sink'>sink</span>
   <span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -1169,14 +2102,14 @@ custom error handling.</p>
       <pre class="lines">
 
 
-112
-113
-114
-115
-116</pre>
+259
+260
+261
+262
+263</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/config_service_v2_client.rb', line 112</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/config_service_v2_client.rb', line 259</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_project_path'>project_path</span> <span class='id identifier rubyid_project'>project</span>
   <span class='const'>PROJECT_PATH_TEMPLATE</span><span class='period'>.</span><span class='id identifier rubyid_render'>render</span><span class='lparen'>(</span>
@@ -1252,15 +2185,15 @@ custom error handling.</p>
       <pre class="lines">
 
 
-122
-123
-124
-125
-126
-127</pre>
+269
+270
+271
+272
+273
+274</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/config_service_v2_client.rb', line 122</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/config_service_v2_client.rb', line 269</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_sink_path'>sink_path</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span> <span class='id identifier rubyid_sink'>sink</span>
   <span class='const'>SINK_PATH_TEMPLATE</span><span class='period'>.</span><span class='id identifier rubyid_render'>render</span><span class='lparen'>(</span>
@@ -1455,21 +2388,21 @@ retries, etc.</p>
       <pre class="lines">
 
 
-739
-740
-741
-742
-743
-744
-745
-746
-747
-748
-749
-750</pre>
+886
+887
+888
+889
+890
+891
+892
+893
+894
+895
+896
+897</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/config_service_v2_client.rb', line 739</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/config_service_v2_client.rb', line 886</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_exclusion'>create_exclusion</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -1691,23 +2624,23 @@ retries, etc.</p>
       <pre class="lines">
 
 
-468
-469
-470
-471
-472
-473
-474
-475
-476
-477
-478
-479
-480
-481</pre>
+615
+616
+617
+618
+619
+620
+621
+622
+623
+624
+625
+626
+627
+628</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/config_service_v2_client.rb', line 468</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/config_service_v2_client.rb', line 615</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_sink'>create_sink</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -1872,20 +2805,20 @@ retries, etc.</p>
       <pre class="lines">
 
 
-840
-841
-842
-843
-844
-845
-846
-847
-848
-849
-850</pre>
+987
+988
+989
+990
+991
+992
+993
+994
+995
+996
+997</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/config_service_v2_client.rb', line 840</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/config_service_v2_client.rb', line 987</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete_exclusion'>delete_exclusion</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -2049,20 +2982,20 @@ retries, etc.</p>
       <pre class="lines">
 
 
-595
-596
-597
-598
-599
-600
-601
-602
-603
-604
-605</pre>
+742
+743
+744
+745
+746
+747
+748
+749
+750
+751
+752</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/config_service_v2_client.rb', line 595</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/config_service_v2_client.rb', line 742</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete_sink'>delete_sink</span> \
     <span class='id identifier rubyid_sink_name'>sink_name</span><span class='comma'>,</span>
@@ -2233,19 +3166,19 @@ retries, etc.</p>
       <pre class="lines">
 
 
-692
-693
-694
-695
-696
-697
-698
-699
-700
-701</pre>
+839
+840
+841
+842
+843
+844
+845
+846
+847
+848</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/config_service_v2_client.rb', line 692</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/config_service_v2_client.rb', line 839</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_exclusion'>get_exclusion</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -2415,19 +3348,19 @@ retries, etc.</p>
       <pre class="lines">
 
 
-407
-408
-409
-410
-411
-412
-413
-414
-415
-416</pre>
+554
+555
+556
+557
+558
+559
+560
+561
+562
+563</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/config_service_v2_client.rb', line 407</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/config_service_v2_client.rb', line 554</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_sink'>get_sink</span> \
     <span class='id identifier rubyid_sink_name'>sink_name</span><span class='comma'>,</span>
@@ -2633,21 +3566,21 @@ object.</p>
       <pre class="lines">
 
 
-653
-654
-655
-656
-657
-658
-659
-660
-661
-662
-663
-664</pre>
+800
+801
+802
+803
+804
+805
+806
+807
+808
+809
+810
+811</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/config_service_v2_client.rb', line 653</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/config_service_v2_client.rb', line 800</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_exclusions'>list_exclusions</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -2855,21 +3788,21 @@ object.</p>
       <pre class="lines">
 
 
-368
-369
-370
-371
-372
-373
-374
-375
-376
-377
-378
-379</pre>
+515
+516
+517
+518
+519
+520
+521
+522
+523
+524
+525
+526</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/config_service_v2_client.rb', line 368</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/config_service_v2_client.rb', line 515</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_sinks'>list_sinks</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -3089,23 +4022,23 @@ retries, etc.</p>
       <pre class="lines">
 
 
-800
-801
-802
-803
-804
-805
-806
-807
-808
-809
-810
-811
-812
-813</pre>
+947
+948
+949
+950
+951
+952
+953
+954
+955
+956
+957
+958
+959
+960</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/config_service_v2_client.rb', line 800</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/config_service_v2_client.rb', line 947</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update_exclusion'>update_exclusion</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -3362,25 +4295,25 @@ retries, etc.</p>
       <pre class="lines">
 
 
-551
-552
-553
-554
-555
-556
-557
-558
-559
-560
-561
-562
-563
-564
-565
-566</pre>
+698
+699
+700
+701
+702
+703
+704
+705
+706
+707
+708
+709
+710
+711
+712
+713</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/config_service_v2_client.rb', line 551</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/config_service_v2_client.rb', line 698</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update_sink'>update_sink</span> \
     <span class='id identifier rubyid_sink_name'>sink_name</span><span class='comma'>,</span>
