@@ -195,6 +195,29 @@ this service.</p>
         <li class="public ">
   <span class="summary_signature">
     
+      <a href="#project_path-class_method" title="project_path (class method)">.<strong>project_path</strong>(project)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns a fully-qualified project resource name string.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#tenant_path-class_method" title="tenant_path (class method)">.<strong>tenant_path</strong>(project, tenant)  &#x21d2; String </a>
     
 
@@ -444,21 +467,6 @@ custom error handling.</p>
       <pre class="lines">
 
 
-113
-114
-115
-116
-117
-118
-119
-120
-121
-122
-123
-124
-125
-126
-127
 128
 129
 130
@@ -527,10 +535,25 @@ custom error handling.</p>
 193
 194
 195
-196</pre>
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/event_service_client.rb', line 113</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/event_service_client.rb', line 128</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span> \
     <span class='label'>credentials:</span> <span class='kw'>nil</span><span class='comma'>,</span>
@@ -629,7 +652,79 @@ custom error handling.</p>
 
     
       <div class="method_details first">
-  <h3 class="signature first" id="tenant_path-class_method">
+  <h3 class="signature first" id="project_path-class_method">
+  
+    .<strong>project_path</strong>(project)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns a fully-qualified project resource name string.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>project</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+78
+79
+80
+81
+82</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/event_service_client.rb', line 78</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_project_path'>project_path</span> <span class='id identifier rubyid_project'>project</span>
+  <span class='const'>PROJECT_PATH_TEMPLATE</span><span class='period'>.</span><span class='id identifier rubyid_render'>render</span><span class='lparen'>(</span>
+    <span class='symbol'>:&quot;project&quot;</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_project'>project</span>
+  <span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="tenant_path-class_method">
   
     .<strong>tenant_path</strong>(project, tenant)  &#x21d2; <tt>String</tt> 
   
@@ -692,15 +787,15 @@ custom error handling.</p>
       <pre class="lines">
 
 
-73
-74
-75
-76
-77
-78</pre>
+88
+89
+90
+91
+92
+93</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/event_service_client.rb', line 73</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/event_service_client.rb', line 88</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_tenant_path'>tenant_path</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span> <span class='id identifier rubyid_tenant'>tenant</span>
   <span class='const'>TENANT_PATH_TEMPLATE</span><span class='period'>.</span><span class='id identifier rubyid_render'>render</span><span class='lparen'>(</span>
@@ -897,21 +992,21 @@ retries, etc.</p>
       <pre class="lines">
 
 
-239
-240
-241
-242
-243
-244
-245
-246
-247
-248
-249
-250</pre>
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/event_service_client.rb', line 239</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/event_service_client.rb', line 254</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_client_event'>create_client_event</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>

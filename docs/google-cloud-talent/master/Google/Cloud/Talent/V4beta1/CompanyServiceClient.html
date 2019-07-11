@@ -220,6 +220,52 @@ this service.</p>
         <li class="public ">
   <span class="summary_signature">
     
+      <a href="#company_without_tenant_path-class_method" title="company_without_tenant_path (class method)">.<strong>company_without_tenant_path</strong>(project, company)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns a fully-qualified company_without_tenant resource name string.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#project_path-class_method" title="project_path (class method)">.<strong>project_path</strong>(project)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns a fully-qualified project resource name string.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#tenant_path-class_method" title="tenant_path (class method)">.<strong>tenant_path</strong>(project, tenant)  &#x21d2; String </a>
     
 
@@ -267,6 +313,29 @@ this service.</p>
 
   
     <span class="summary_desc"><div class='inline'><p>Alias for Google::Cloud::Talent::V4beta1::CompanyServiceClient.company_path.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#company_without_tenant_path-instance_method" title="#company_without_tenant_path (instance method)">#<strong>company_without_tenant_path</strong>(project, company)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Alias for Google::Cloud::Talent::V4beta1::CompanyServiceClient.company_without_tenant_path.</p>
 </div></span>
   
 </li>
@@ -384,6 +453,29 @@ this service.</p>
 
   
     <span class="summary_desc"><div class='inline'><p>Lists all companies associated with the project.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#project_path-instance_method" title="#project_path (instance method)">#<strong>project_path</strong>(project)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Alias for Google::Cloud::Talent::V4beta1::CompanyServiceClient.project_path.</p>
 </div></span>
   
 </li>
@@ -607,38 +699,6 @@ custom error handling.</p>
       <pre class="lines">
 
 
-141
-142
-143
-144
-145
-146
-147
-148
-149
-150
-151
-152
-153
-154
-155
-156
-157
-158
-159
-160
-161
-162
-163
-164
-165
-166
-167
-168
-169
-170
-171
-172
 173
 174
 175
@@ -723,10 +783,42 @@ custom error handling.</p>
 254
 255
 256
-257</pre>
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/company_service_client.rb', line 141</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/company_service_client.rb', line 173</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span> \
     <span class='label'>credentials:</span> <span class='kw'>nil</span><span class='comma'>,</span>
@@ -932,22 +1024,179 @@ custom error handling.</p>
       <pre class="lines">
 
 
-89
-90
-91
-92
-93
-94
-95</pre>
+101
+102
+103
+104
+105
+106
+107</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/company_service_client.rb', line 89</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/company_service_client.rb', line 101</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_company_path'>company_path</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span> <span class='id identifier rubyid_tenant'>tenant</span><span class='comma'>,</span> <span class='id identifier rubyid_company'>company</span>
   <span class='const'>COMPANY_PATH_TEMPLATE</span><span class='period'>.</span><span class='id identifier rubyid_render'>render</span><span class='lparen'>(</span>
     <span class='symbol'>:&quot;project&quot;</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span>
     <span class='symbol'>:&quot;tenant&quot;</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_tenant'>tenant</span><span class='comma'>,</span>
     <span class='symbol'>:&quot;company&quot;</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_company'>company</span>
+  <span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="company_without_tenant_path-class_method">
+  
+    .<strong>company_without_tenant_path</strong>(project, company)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns a fully-qualified company_without_tenant resource name string.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>project</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>company</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+113
+114
+115
+116
+117
+118</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/company_service_client.rb', line 113</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_company_without_tenant_path'>company_without_tenant_path</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span> <span class='id identifier rubyid_company'>company</span>
+  <span class='const'>COMPANY_WITHOUT_TENANT_PATH_TEMPLATE</span><span class='period'>.</span><span class='id identifier rubyid_render'>render</span><span class='lparen'>(</span>
+    <span class='symbol'>:&quot;project&quot;</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span>
+    <span class='symbol'>:&quot;company&quot;</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_company'>company</span>
+  <span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="project_path-class_method">
+  
+    .<strong>project_path</strong>(project)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns a fully-qualified project resource name string.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>project</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+123
+124
+125
+126
+127</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/company_service_client.rb', line 123</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_project_path'>project_path</span> <span class='id identifier rubyid_project'>project</span>
+  <span class='const'>PROJECT_PATH_TEMPLATE</span><span class='period'>.</span><span class='id identifier rubyid_render'>render</span><span class='lparen'>(</span>
+    <span class='symbol'>:&quot;project&quot;</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_project'>project</span>
   <span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -1019,15 +1268,15 @@ custom error handling.</p>
       <pre class="lines">
 
 
-101
-102
-103
-104
-105
-106</pre>
+133
+134
+135
+136
+137
+138</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/company_service_client.rb', line 101</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/company_service_client.rb', line 133</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_tenant_path'>tenant_path</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span> <span class='id identifier rubyid_tenant'>tenant</span>
   <span class='const'>TENANT_PATH_TEMPLATE</span><span class='period'>.</span><span class='id identifier rubyid_render'>render</span><span class='lparen'>(</span>
@@ -1130,6 +1379,85 @@ custom error handling.</p>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_company_path'>company_path</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span> <span class='id identifier rubyid_tenant'>tenant</span><span class='comma'>,</span> <span class='id identifier rubyid_company'>company</span>
   <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_company_path'>company_path</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span> <span class='id identifier rubyid_tenant'>tenant</span><span class='comma'>,</span> <span class='id identifier rubyid_company'>company</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="company_without_tenant_path-instance_method">
+  
+    #<strong>company_without_tenant_path</strong>(project, company)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Alias for Google::Cloud::Talent::V4beta1::CompanyServiceClient.company_without_tenant_path.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>project</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>company</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+53
+54
+55</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/helpers.rb', line 53</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_company_without_tenant_path'>company_without_tenant_path</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span> <span class='id identifier rubyid_company'>company</span>
+  <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_company_without_tenant_path'>company_without_tenant_path</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span> <span class='id identifier rubyid_company'>company</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -1307,21 +1635,21 @@ retries, etc.</p>
       <pre class="lines">
 
 
-293
-294
-295
-296
-297
-298
-299
-300
-301
-302
-303
-304</pre>
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/company_service_client.rb', line 293</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/company_service_client.rb', line 325</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_company'>create_company</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -1484,20 +1812,20 @@ retries, etc.</p>
       <pre class="lines">
 
 
-421
-422
-423
-424
-425
-426
-427
-428
-429
-430
-431</pre>
+453
+454
+455
+456
+457
+458
+459
+460
+461
+462
+463</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/company_service_client.rb', line 421</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/company_service_client.rb', line 453</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete_company'>delete_company</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -1667,19 +1995,19 @@ retries, etc.</p>
       <pre class="lines">
 
 
-332
-333
-334
-335
-336
-337
-338
-339
-340
-341</pre>
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/company_service_client.rb', line 332</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/company_service_client.rb', line 364</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_company'>get_company</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -1906,23 +2234,23 @@ object.</p>
       <pre class="lines">
 
 
-488
-489
-490
-491
-492
-493
-494
-495
-496
-497
-498
-499
-500
-501</pre>
+520
+521
+522
+523
+524
+525
+526
+527
+528
+529
+530
+531
+532
+533</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/company_service_client.rb', line 488</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/company_service_client.rb', line 520</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_companies'>list_companies</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -1937,6 +2265,74 @@ object.</p>
   <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span>
   <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='id identifier rubyid_to_proto'>to_proto</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Talent.html" title="Google::Cloud::Talent (module)">Talent</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V4beta1.html" title="Google::Cloud::Talent::V4beta1 (module)">V4beta1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="ListCompaniesRequest.html" title="Google::Cloud::Talent::V4beta1::ListCompaniesRequest (class)">ListCompaniesRequest</a></span></span><span class='rparen'>)</span>
   <span class='ivar'>@list_companies</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="project_path-instance_method">
+  
+    #<strong>project_path</strong>(project)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Alias for Google::Cloud::Talent::V4beta1::CompanyServiceClient.project_path.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>project</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+60
+61
+62</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/helpers.rb', line 60</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_project_path'>project_path</span> <span class='id identifier rubyid_project'>project</span>
+  <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_project_path'>project_path</span> <span class='id identifier rubyid_project'>project</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -2007,12 +2403,12 @@ object.</p>
       <pre class="lines">
 
 
-53
-54
-55</pre>
+68
+69
+70</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/helpers.rb', line 53</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/helpers.rb', line 68</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_tenant_path'>tenant_path</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span> <span class='id identifier rubyid_tenant'>tenant</span>
   <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_tenant_path'>tenant_path</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span> <span class='id identifier rubyid_tenant'>tenant</span>
@@ -2200,21 +2596,21 @@ retries, etc.</p>
       <pre class="lines">
 
 
-382
-383
-384
-385
-386
-387
-388
-389
-390
-391
-392
-393</pre>
+414
+415
+416
+417
+418
+419
+420
+421
+422
+423
+424
+425</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/company_service_client.rb', line 382</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/company_service_client.rb', line 414</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update_company'>update_company</span> \
     <span class='id identifier rubyid_company'>company</span><span class='comma'>,</span>
