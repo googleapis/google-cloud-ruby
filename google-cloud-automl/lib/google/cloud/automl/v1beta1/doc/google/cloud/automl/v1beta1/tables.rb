@@ -127,6 +127,10 @@ module Google
         #                                     operating characteristic (ROC) curve.
         #       "MINIMIZE_LOG_LOSS" - Minimize log loss.
         #       "MAXIMIZE_AU_PRC" - Maximize the area under the precision-recall curve.
+        #       "MAXIMIZE_PRECISION_AT_RECALL" - Maximize precision for a specified
+        #                                       recall value.
+        #       "MAXIMIZE_RECALL_AT_PRECISION" - Maximize recall for a specified
+        #                                        precision value.
         #
         #     CLASSIFICATION_MULTI_CLASS :
         #       "MINIMIZE_LOG_LOSS" (default) - Minimize log loss.
@@ -140,6 +144,14 @@ module Google
         #     FORECASTING:
         #       "MINIMIZE_RMSE" (default) - Minimize root-mean-squared error (RMSE).
         #       "MINIMIZE_MAE" - Minimize mean-absolute error (MAE).
+        # @!attribute [rw] optimization_objective_recall_value
+        #   @return [Float]
+        #     Required when optimization_objective is "MAXIMIZE_PRECISION_AT_RECALL".
+        #     Must be between 0 and 1, inclusive.
+        # @!attribute [rw] optimization_objective_precision_value
+        #   @return [Float]
+        #     Required when optimization_objective is "MAXIMIZE_RECALL_AT_PRECISION".
+        #     Must be between 0 and 1, inclusive.
         # @!attribute [rw] tables_model_column_info
         #   @return [Array<Google::Cloud::AutoML::V1beta1::TablesModelColumnInfo>]
         #     Output only. Auxiliary information for each of the
