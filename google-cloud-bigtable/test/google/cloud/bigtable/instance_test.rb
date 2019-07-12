@@ -53,13 +53,13 @@ describe Google::Cloud::Bigtable::Instance, :mock_bigtable do
 
     it "set labels using hash" do
       instance.labels = { "env" => "test1" }
-      instance.labels.must_equal({"env" => "test1"})
+      instance.labels.to_h.must_equal({"env" => "test1"})
 
       instance.labels = { :env => "test2" }
-      instance.labels.must_equal({"env" => "test2"})
+      instance.labels.to_h.must_equal({"env" => "test2"})
 
       instance.labels = { data: "users", appprofile: 12345 }
-      instance.labels.must_equal({ "data" => "users", "appprofile" => "12345" })
+      instance.labels.to_h.must_equal({ "data" => "users", "appprofile" => "12345" })
     end
 
     it "clear lables if labels value is nil" do

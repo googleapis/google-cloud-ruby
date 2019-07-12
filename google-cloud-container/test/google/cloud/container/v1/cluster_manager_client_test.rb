@@ -2691,7 +2691,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
         assert_equal(project_id, request.project_id)
         assert_equal(zone, request.zone)
         assert_equal(cluster_id, request.cluster_id)
-        assert_equal(resource_labels, request.resource_labels)
+        assert_equal(resource_labels, request.resource_labels.to_h)
         assert_equal(label_fingerprint, request.label_fingerprint)
         OpenStruct.new(execute: expected_response)
       end
@@ -2746,7 +2746,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
         assert_equal(project_id, request.project_id)
         assert_equal(zone, request.zone)
         assert_equal(cluster_id, request.cluster_id)
-        assert_equal(resource_labels, request.resource_labels)
+        assert_equal(resource_labels, request.resource_labels.to_h)
         assert_equal(label_fingerprint, request.label_fingerprint)
         raise custom_error
       end
