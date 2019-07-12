@@ -1,5 +1,9 @@
 # Release History
 
+### 0.4.3 / 2019-07-12
+
+* Update #to_hash to #to_h for compatibility with google-protobuf >= 3.9.0
+
 ### 0.4.2 / 2019-07-09
 
 * Add IAM GetPolicyOptions in the lower-level interface.
