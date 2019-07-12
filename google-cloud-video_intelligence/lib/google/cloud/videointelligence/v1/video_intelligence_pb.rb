@@ -9,6 +9,7 @@ require 'google/longrunning/operations_pb'
 require 'google/protobuf/duration_pb'
 require 'google/protobuf/timestamp_pb'
 require 'google/rpc/status_pb'
+require 'google/api/client_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.cloud.videointelligence.v1.AnnotateVideoRequest" do
     optional :input_uri, :string, 1
@@ -23,7 +24,6 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :label_detection_config, :message, 2, "google.cloud.videointelligence.v1.LabelDetectionConfig"
     optional :shot_change_detection_config, :message, 3, "google.cloud.videointelligence.v1.ShotChangeDetectionConfig"
     optional :explicit_content_detection_config, :message, 4, "google.cloud.videointelligence.v1.ExplicitContentDetectionConfig"
-    optional :face_detection_config, :message, 5, "google.cloud.videointelligence.v1.FaceDetectionConfig"
     optional :speech_transcription_config, :message, 6, "google.cloud.videointelligence.v1.SpeechTranscriptionConfig"
     optional :text_detection_config, :message, 8, "google.cloud.videointelligence.v1.TextDetectionConfig"
     optional :object_tracking_config, :message, 13, "google.cloud.videointelligence.v1.ObjectTrackingConfig"
@@ -38,14 +38,10 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.cloud.videointelligence.v1.ShotChangeDetectionConfig" do
     optional :model, :string, 1
   end
-  add_message "google.cloud.videointelligence.v1.ExplicitContentDetectionConfig" do
-    optional :model, :string, 1
-  end
-  add_message "google.cloud.videointelligence.v1.FaceDetectionConfig" do
-    optional :model, :string, 1
-    optional :include_bounding_boxes, :bool, 2
-  end
   add_message "google.cloud.videointelligence.v1.ObjectTrackingConfig" do
+    optional :model, :string, 1
+  end
+  add_message "google.cloud.videointelligence.v1.ExplicitContentDetectionConfig" do
     optional :model, :string, 1
   end
   add_message "google.cloud.videointelligence.v1.TextDetectionConfig" do
@@ -88,24 +84,11 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :right, :float, 3
     optional :bottom, :float, 4
   end
-  add_message "google.cloud.videointelligence.v1.FaceSegment" do
-    optional :segment, :message, 1, "google.cloud.videointelligence.v1.VideoSegment"
-  end
-  add_message "google.cloud.videointelligence.v1.FaceFrame" do
-    repeated :normalized_bounding_boxes, :message, 1, "google.cloud.videointelligence.v1.NormalizedBoundingBox"
-    optional :time_offset, :message, 2, "google.protobuf.Duration"
-  end
-  add_message "google.cloud.videointelligence.v1.FaceAnnotation" do
-    optional :thumbnail, :bytes, 1
-    repeated :segments, :message, 2, "google.cloud.videointelligence.v1.FaceSegment"
-    repeated :frames, :message, 3, "google.cloud.videointelligence.v1.FaceFrame"
-  end
   add_message "google.cloud.videointelligence.v1.VideoAnnotationResults" do
     optional :input_uri, :string, 1
     repeated :segment_label_annotations, :message, 2, "google.cloud.videointelligence.v1.LabelAnnotation"
     repeated :shot_label_annotations, :message, 3, "google.cloud.videointelligence.v1.LabelAnnotation"
     repeated :frame_label_annotations, :message, 4, "google.cloud.videointelligence.v1.LabelAnnotation"
-    repeated :face_annotations, :message, 5, "google.cloud.videointelligence.v1.FaceAnnotation"
     repeated :shot_annotations, :message, 6, "google.cloud.videointelligence.v1.VideoSegment"
     optional :explicit_annotation, :message, 7, "google.cloud.videointelligence.v1.ExplicitContentAnnotation"
     repeated :speech_transcriptions, :message, 11, "google.cloud.videointelligence.v1.SpeechTranscription"
@@ -121,6 +104,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :progress_percent, :int32, 2
     optional :start_time, :message, 3, "google.protobuf.Timestamp"
     optional :update_time, :message, 4, "google.protobuf.Timestamp"
+    optional :feature, :enum, 5, "google.cloud.videointelligence.v1.Feature"
+    optional :segment, :message, 6, "google.cloud.videointelligence.v1.VideoSegment"
   end
   add_message "google.cloud.videointelligence.v1.AnnotateVideoProgress" do
     repeated :annotation_progress, :message, 1, "google.cloud.videointelligence.v1.VideoAnnotationProgress"
@@ -193,7 +178,6 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     value :LABEL_DETECTION, 1
     value :SHOT_CHANGE_DETECTION, 2
     value :EXPLICIT_CONTENT_DETECTION, 3
-    value :FACE_DETECTION, 4
     value :SPEECH_TRANSCRIPTION, 6
     value :TEXT_DETECTION, 7
     value :OBJECT_TRACKING, 9
@@ -226,9 +210,8 @@ module Google::Cloud::VideoIntelligence::V1
   VideoContext = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1.VideoContext").msgclass
   LabelDetectionConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1.LabelDetectionConfig").msgclass
   ShotChangeDetectionConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1.ShotChangeDetectionConfig").msgclass
-  ExplicitContentDetectionConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1.ExplicitContentDetectionConfig").msgclass
-  FaceDetectionConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1.FaceDetectionConfig").msgclass
   ObjectTrackingConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1.ObjectTrackingConfig").msgclass
+  ExplicitContentDetectionConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1.ExplicitContentDetectionConfig").msgclass
   TextDetectionConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1.TextDetectionConfig").msgclass
   VideoSegment = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1.VideoSegment").msgclass
   LabelSegment = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1.LabelSegment").msgclass
@@ -238,9 +221,6 @@ module Google::Cloud::VideoIntelligence::V1
   ExplicitContentFrame = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1.ExplicitContentFrame").msgclass
   ExplicitContentAnnotation = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1.ExplicitContentAnnotation").msgclass
   NormalizedBoundingBox = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1.NormalizedBoundingBox").msgclass
-  FaceSegment = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1.FaceSegment").msgclass
-  FaceFrame = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1.FaceFrame").msgclass
-  FaceAnnotation = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1.FaceAnnotation").msgclass
   VideoAnnotationResults = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1.VideoAnnotationResults").msgclass
   AnnotateVideoResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1.AnnotateVideoResponse").msgclass
   VideoAnnotationProgress = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1.VideoAnnotationProgress").msgclass

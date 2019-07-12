@@ -24,10 +24,10 @@ module Google
         #     [Google Cloud Storage](https://cloud.google.com/storage/) URIs are
         #     supported, which must be specified in the following format:
         #     `gs://bucket-id/object-id` (other URI formats return
-        #     {Google::Rpc::Code::INVALID_ARGUMENT}). For
-        #     more information, see [Request URIs](https://cloud.google.com/storage/docs/reference-uris). A video
-        #     URI may include wildcards in `object-id`, and thus identify multiple
-        #     videos. Supported wildcards: '*' to match 0 or more characters;
+        #     {Google::Rpc::Code::INVALID_ARGUMENT}). For more information, see
+        #     [Request URIs](https://cloud.google.com/storage/docs/reference-uris).
+        #     A video URI may include wildcards in `object-id`, and thus identify
+        #     multiple videos. Supported wildcards: '*' to match 0 or more characters;
         #     '?' to match 1 character. If unset, the input video should be embedded
         #     in the request as `input_content`. If set, `input_content` should be unset.
         # @!attribute [rw] input_content
@@ -47,8 +47,8 @@ module Google
         #     Currently, only [Google Cloud Storage](https://cloud.google.com/storage/)
         #     URIs are supported, which must be specified in the following format:
         #     `gs://bucket-id/object-id` (other URI formats return
-        #     {Google::Rpc::Code::INVALID_ARGUMENT}). For
-        #     more information, see [Request URIs](https://cloud.google.com/storage/docs/reference-uris).
+        #     {Google::Rpc::Code::INVALID_ARGUMENT}). For more information, see
+        #     [Request URIs](https://cloud.google.com/storage/docs/reference-uris).
         # @!attribute [rw] location_id
         #   @return [String]
         #     Optional cloud region where annotation should take place. Supported cloud
@@ -71,9 +71,6 @@ module Google
         # @!attribute [rw] explicit_content_detection_config
         #   @return [Google::Cloud::VideoIntelligence::V1::ExplicitContentDetectionConfig]
         #     Config for EXPLICIT_CONTENT_DETECTION.
-        # @!attribute [rw] face_detection_config
-        #   @return [Google::Cloud::VideoIntelligence::V1::FaceDetectionConfig]
-        #     Config for FACE_DETECTION.
         # @!attribute [rw] speech_transcription_config
         #   @return [Google::Cloud::VideoIntelligence::V1::SpeechTranscriptionConfig]
         #     Config for SPEECH_TRANSCRIPTION.
@@ -127,25 +124,6 @@ module Google
         #     "builtin/latest".
         class ShotChangeDetectionConfig; end
 
-        # Config for EXPLICIT_CONTENT_DETECTION.
-        # @!attribute [rw] model
-        #   @return [String]
-        #     Model to use for explicit content detection.
-        #     Supported values: "builtin/stable" (the default if unset) and
-        #     "builtin/latest".
-        class ExplicitContentDetectionConfig; end
-
-        # Config for FACE_DETECTION.
-        # @!attribute [rw] model
-        #   @return [String]
-        #     Model to use for face detection.
-        #     Supported values: "builtin/stable" (the default if unset) and
-        #     "builtin/latest".
-        # @!attribute [rw] include_bounding_boxes
-        #   @return [true, false]
-        #     Whether bounding boxes be included in the face annotation output.
-        class FaceDetectionConfig; end
-
         # Config for OBJECT_TRACKING.
         # @!attribute [rw] model
         #   @return [String]
@@ -153,6 +131,14 @@ module Google
         #     Supported values: "builtin/stable" (the default if unset) and
         #     "builtin/latest".
         class ObjectTrackingConfig; end
+
+        # Config for EXPLICIT_CONTENT_DETECTION.
+        # @!attribute [rw] model
+        #   @return [String]
+        #     Model to use for explicit content detection.
+        #     Supported values: "builtin/stable" (the default if unset) and
+        #     "builtin/latest".
+        class ExplicitContentDetectionConfig; end
 
         # Config for TEXT_DETECTION.
         # @!attribute [rw] language_hints
@@ -266,36 +252,6 @@ module Google
         #     Bottom Y coordinate.
         class NormalizedBoundingBox; end
 
-        # Video segment level annotation results for face detection.
-        # @!attribute [rw] segment
-        #   @return [Google::Cloud::VideoIntelligence::V1::VideoSegment]
-        #     Video segment where a face was detected.
-        class FaceSegment; end
-
-        # Video frame level annotation results for face detection.
-        # @!attribute [rw] normalized_bounding_boxes
-        #   @return [Array<Google::Cloud::VideoIntelligence::V1::NormalizedBoundingBox>]
-        #     Normalized Bounding boxes in a frame.
-        #     There can be more than one boxes if the same face is detected in multiple
-        #     locations within the current frame.
-        # @!attribute [rw] time_offset
-        #   @return [Google::Protobuf::Duration]
-        #     Time-offset, relative to the beginning of the video,
-        #     corresponding to the video frame for this location.
-        class FaceFrame; end
-
-        # Face annotation.
-        # @!attribute [rw] thumbnail
-        #   @return [String]
-        #     Thumbnail of a representative face view (in JPEG format).
-        # @!attribute [rw] segments
-        #   @return [Array<Google::Cloud::VideoIntelligence::V1::FaceSegment>]
-        #     All video segments where a face was detected.
-        # @!attribute [rw] frames
-        #   @return [Array<Google::Cloud::VideoIntelligence::V1::FaceFrame>]
-        #     All video frames where a face was detected.
-        class FaceAnnotation; end
-
         # Annotation results for a single video.
         # @!attribute [rw] input_uri
         #   @return [String]
@@ -303,19 +259,16 @@ module Google
         #     [Google Cloud Storage](https://cloud.google.com/storage/).
         # @!attribute [rw] segment_label_annotations
         #   @return [Array<Google::Cloud::VideoIntelligence::V1::LabelAnnotation>]
-        #     Label annotations on video level or user specified segment level.
+        #     Topical label annotations on video level or user specified segment level.
         #     There is exactly one element for each unique label.
         # @!attribute [rw] shot_label_annotations
         #   @return [Array<Google::Cloud::VideoIntelligence::V1::LabelAnnotation>]
-        #     Label annotations on shot level.
+        #     Topical label annotations on shot level.
         #     There is exactly one element for each unique label.
         # @!attribute [rw] frame_label_annotations
         #   @return [Array<Google::Cloud::VideoIntelligence::V1::LabelAnnotation>]
         #     Label annotations on frame level.
         #     There is exactly one element for each unique label.
-        # @!attribute [rw] face_annotations
-        #   @return [Array<Google::Cloud::VideoIntelligence::V1::FaceAnnotation>]
-        #     Face annotations. There is exactly one element for each unique face.
         # @!attribute [rw] shot_annotations
         #   @return [Array<Google::Cloud::VideoIntelligence::V1::VideoSegment>]
         #     Shot annotations. Each shot is represented as a video segment.
@@ -362,6 +315,14 @@ module Google
         # @!attribute [rw] update_time
         #   @return [Google::Protobuf::Timestamp]
         #     Time of the most recent update.
+        # @!attribute [rw] feature
+        #   @return [Google::Cloud::VideoIntelligence::V1::Feature]
+        #     Specifies which feature is being tracked if the request contains more than
+        #     one features.
+        # @!attribute [rw] segment
+        #   @return [Google::Cloud::VideoIntelligence::V1::VideoSegment]
+        #     Specifies which segment is being tracked if the request contains more than
+        #     one segments.
         class VideoAnnotationProgress; end
 
         # Video annotation progress. Included in the `metadata`
@@ -463,15 +424,17 @@ module Google
         #     Transcript text representing the words that the user spoke.
         # @!attribute [rw] confidence
         #   @return [Float]
-        #     The confidence estimate between 0.0 and 1.0. A higher number
+        #     Output only. The confidence estimate between 0.0 and 1.0. A higher number
         #     indicates an estimated greater likelihood that the recognized words are
-        #     correct. This field is typically provided only for the top hypothesis, and
-        #     only for `is_final=true` results. Clients should not rely on the
-        #     `confidence` field as it is not guaranteed to be accurate or consistent.
+        #     correct. This field is set only for the top alternative.
+        #     This field is not guaranteed to be accurate and users should not rely on it
+        #     to be always provided.
         #     The default of 0.0 is a sentinel value indicating `confidence` was not set.
         # @!attribute [rw] words
         #   @return [Array<Google::Cloud::VideoIntelligence::V1::WordInfo>]
-        #     A list of word-specific information for each recognized word.
+        #     Output only. A list of word-specific information for each recognized word.
+        #     Note: When `enable_speaker_diarization` is true, you will see all the words
+        #     from the beginning of the audio.
         class SpeechRecognitionAlternative; end
 
         # Word-specific information for recognized words. Word information is only
@@ -626,9 +589,6 @@ module Google
 
           # Explicit content detection.
           EXPLICIT_CONTENT_DETECTION = 3
-
-          # Human face detection and tracking.
-          FACE_DETECTION = 4
 
           # Speech transcription.
           SPEECH_TRANSCRIPTION = 6
