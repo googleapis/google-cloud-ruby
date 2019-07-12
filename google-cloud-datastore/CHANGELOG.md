@@ -1,5 +1,9 @@
 # Release History
 
+### 1.5.5 / 2019-07-12
+
+* Update #to_hash to #to_h for compatibility with google-protobuf >= 3.9.0
+
 ### 1.5.4 / 2019-07-08
 
 * Support overriding service host and port for low-level API.
