@@ -407,7 +407,8 @@ describe Google::Cloud::Spanner::BatchSnapshot, :partition_query, :mock_spanner 
       else
         partition.execute.params.must_equal params
       end
-      partition.execute.param_types.must_equal types.to_h
+      types_hash = Hash[Hash(types).map { |key, value| [key, value.to_h] }]
+      partition.execute.param_types.to_h.must_equal types_hash
 
       partition.read.must_be_nil
     end

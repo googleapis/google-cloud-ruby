@@ -245,7 +245,7 @@ module Google
         # @raise [Google::Cloud::Bigtable::InvalidRowStateError]
         #
         def raise_if condition, message
-          raise InvalidRowStateError.new(message, chunk.to_hash) if condition
+          raise InvalidRowStateError.new(message, chunk.to_h) if condition
         end
       end
     end

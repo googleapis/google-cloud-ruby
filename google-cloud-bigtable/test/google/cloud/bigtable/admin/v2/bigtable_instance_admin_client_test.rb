@@ -97,7 +97,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
         assert_equal(formatted_parent, request.parent)
         assert_equal(instance_id, request.instance_id)
         assert_equal(Google::Gax::to_proto(instance, Google::Bigtable::Admin::V2::Instance), request.instance)
-        assert_equal(clusters, request.clusters)
+        assert_equal(clusters, request.clusters.to_h)
         OpenStruct.new(execute: operation)
       end
       mock_stub = MockGrpcClientStub_v2.new(:create_instance, mock_method)
@@ -146,7 +146,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
         assert_equal(formatted_parent, request.parent)
         assert_equal(instance_id, request.instance_id)
         assert_equal(Google::Gax::to_proto(instance, Google::Bigtable::Admin::V2::Instance), request.instance)
-        assert_equal(clusters, request.clusters)
+        assert_equal(clusters, request.clusters.to_h)
         OpenStruct.new(execute: operation)
       end
       mock_stub = MockGrpcClientStub_v2.new(:create_instance, mock_method)
@@ -186,7 +186,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
         assert_equal(formatted_parent, request.parent)
         assert_equal(instance_id, request.instance_id)
         assert_equal(Google::Gax::to_proto(instance, Google::Bigtable::Admin::V2::Instance), request.instance)
-        assert_equal(clusters, request.clusters)
+        assert_equal(clusters, request.clusters.to_h)
         raise custom_error
       end
       mock_stub = MockGrpcClientStub_v2.new(:create_instance, mock_method)
@@ -386,7 +386,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
         assert_equal(formatted_name, request.name)
         assert_equal(display_name, request.display_name)
         assert_equal(type, request.type)
-        assert_equal(labels, request.labels)
+        assert_equal(labels, request.labels.to_h)
         OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub_v2.new(:update_instance, mock_method)
@@ -437,7 +437,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
         assert_equal(formatted_name, request.name)
         assert_equal(display_name, request.display_name)
         assert_equal(type, request.type)
-        assert_equal(labels, request.labels)
+        assert_equal(labels, request.labels.to_h)
         raise custom_error
       end
       mock_stub = MockGrpcClientStub_v2.new(:update_instance, mock_method)
@@ -455,7 +455,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
               formatted_name,
               display_name,
               type,
-              labels
+              labels.to_h
             )
           end
 

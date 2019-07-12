@@ -75,7 +75,7 @@ module Google
               Google::Cloud::Firestore::DocumentReference.from_path \
                 value.reference_value, client
             when :geo_point_value
-              value.geo_point_value.to_hash
+              value.geo_point_value.to_h
             when :array_value
               value.array_value.values.map { |v| value_to_raw v, client }
             when :map_value

@@ -100,7 +100,7 @@ module Google
             return Time.at grpc_value.timestamp_value.seconds,
                            grpc_value.timestamp_value.nanos/1000.0
           elsif grpc_value.value_type == :geo_point_value
-            return grpc_value.geo_point_value.to_hash
+            return grpc_value.geo_point_value.to_h
           elsif grpc_value.value_type == :blob_value
             return StringIO.new(
               grpc_value.blob_value.dup.force_encoding("ASCII-8BIT"))
