@@ -962,7 +962,7 @@ describe Grafeas::V1::GrafeasClient do
       mock_method = proc do |request|
         assert_instance_of(Grafeas::V1::BatchCreateNotesRequest, request)
         assert_equal(formatted_parent, request.parent)
-        assert_equal(notes, request.notes.to_h)
+        assert_equal(notes, request.notes)
         OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub_v1.new(:batch_create_notes, mock_method)
@@ -999,7 +999,7 @@ describe Grafeas::V1::GrafeasClient do
       mock_method = proc do |request|
         assert_instance_of(Grafeas::V1::BatchCreateNotesRequest, request)
         assert_equal(formatted_parent, request.parent)
-        assert_equal(notes, request.notes.to_h)
+        assert_equal(notes, request.notes)
         raise custom_error
       end
       mock_stub = MockGrpcClientStub_v1.new(:batch_create_notes, mock_method)
