@@ -332,7 +332,7 @@ class ConformanceListen < ConformanceTest
   end
 end
 
-Dir.glob("conformance/v1/*.json").each do |file_path|
+Dir.glob("#{__dir__}/../../../../conformance/v1/*.json").each do |file_path|
   test_file = Google::Cloud::Conformance::Firestore::V1::TestFile.decode_json File.read(file_path)
   test_file.tests.each do |wrapper|
     case wrapper.test

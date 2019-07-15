@@ -95,7 +95,7 @@ class ReadRowsTest < MockBigtable
   end
 end
 
-file_path = "conformance/v2/readrows.json"
+file_path = File.expand_path "../../../../conformance/v2/readrows.json", __dir__
 test_file = Google::Cloud::Conformance::Bigtable::V2::TestFile.decode_json File.read(file_path)
 test_file.read_rows_tests.each_with_index do |test, index|
   ReadRowsTest.build_test_for test, index
