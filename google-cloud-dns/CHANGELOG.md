@@ -1,5 +1,9 @@
 # Release History
 
+### 0.30.1 / 2019-07-15
+
+* Ensure use of a sufficiently recent REST client with the correct endpoint.
+
 ### 0.30.0 / 2019-02-01
 
 * Make use of Credentials#project_id
