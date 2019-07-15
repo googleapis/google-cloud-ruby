@@ -164,3 +164,7 @@ for version in ['v1', 'v1beta1']:
         'Gem.loaded_specs\[.*\]\.version\.version',
         'Google::Cloud::Firestore::VERSION'
     )
+s.replace(
+    'lib/google/cloud/firestore/v1beta1.rb',
+    '\[Beta\]',
+    '[GA]')
