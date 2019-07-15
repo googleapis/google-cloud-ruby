@@ -1,5 +1,9 @@
 # Release History
 
+### 1.0.0 / 2019-07-15
+
+* Bump release level to GA.
+
 ### 0.26.2 / 2019-07-12
 
 * Update #to_hash to #to_h for compatibility with google-protobuf >= 3.9.0
