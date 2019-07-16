@@ -141,6 +141,13 @@ s.replace(
     '\n  gem\\.add_dependency "google-gax", "~> 1\\.[\\d\\.]+"\n',
     '\n  gem.add_dependency "google-gax", "~> 1.7"\n')
 
+# Fix for tests that assume protos implement to_hash
+s.replace(
+    'test/grafeas/v1/grafeas_client_test.rb',
+    'assert_equal\\(notes, request\\.notes\\)',
+    'assert_equal(notes, request.notes.to_h)'
+)
+
 # https://github.com/googleapis/gapic-generator/issues/2196
 s.replace(
     [
