@@ -1,0 +1,944 @@
+---
+layout: yard_main
+title: "Class: Google::Firestore::V1beta1::Target - Google"
+css: 
+  - /docs/css/style.css
+  - /docs/css/common.css
+  - /css/yard-main.css
+js: 
+  - /docs/js/app.js
+  - /js/yard-main.js
+---
+<script type="text/javascript" charset="utf-8">
+  pathId = "Google::Firestore::V1beta1::Target";
+  relpath = '../../../';
+</script>
+
+
+<div class="nav_wrap">
+  <iframe id="nav" src="../../../class_list.html?1"></iframe>
+  <div id="resizer"></div>
+</div>
+
+<div id="main" tabindex="-1">
+  <div id="header">
+    <div id="menu">
+  
+    <a href="../../../_index.html">Index (T)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../Firestore.html" title="Google::Firestore (module)">Firestore</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../V1beta1.html" title="Google::Firestore::V1beta1 (module)">V1beta1</a></span></span>
+     &raquo; 
+    <span class="title">Target</span>
+  
+</div>
+
+    <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../../../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+    <div class="clear"></div>
+  </div>
+
+  <div id="content"><h1>Class: Google::Firestore::V1beta1::Target
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Google::Firestore::V1beta1::Target</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/google/cloud/firestore/v1beta1/doc/google/firestore/v1beta1/firestore.rb</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>A specification of a set of documents to listen to.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><h2>Defined Under Namespace</h2>
+<p class="children">
+  
+    
+  
+    
+      <strong class="classes">Classes:</strong> <span class='object_link'><a href="Target/DocumentsTarget.html" title="Google::Firestore::V1beta1::Target::DocumentsTarget (class)">DocumentsTarget</a></span>, <span class='object_link'><a href="Target/QueryTarget.html" title="Google::Firestore::V1beta1::Target::QueryTarget (class)">QueryTarget</a></span>
+    
+  
+</p>
+
+
+
+
+  <h2>Instance Attribute Summary <small><a href="#" class="summary_toggle">collapse</a></small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#documents-instance_method" title="#documents (instance method)">#<strong>documents</strong>  &#x21d2; Google::Firestore::V1beta1::Target::DocumentsTarget </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>A target specified by a set of document names.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#once-instance_method" title="#once (instance method)">#<strong>once</strong>  &#x21d2; true, false </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>If the target should be removed once it is current and consistent.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#query-instance_method" title="#query (instance method)">#<strong>query</strong>  &#x21d2; Google::Firestore::V1beta1::Target::QueryTarget </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>A target specified by a query.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#read_time-instance_method" title="#read_time (instance method)">#<strong>read_time</strong>  &#x21d2; Google::Protobuf::Timestamp </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Start listening after a specific <code>read_time</code>.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#resume_token-instance_method" title="#resume_token (instance method)">#<strong>resume_token</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>A resume token from a prior <span class='object_link'><a href="TargetChange.html" title="Google::Firestore::V1beta1::TargetChange (class)">TargetChange</a></span> for an identical target.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#target_id-instance_method" title="#target_id (instance method)">#<strong>target_id</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>A client provided target ID.</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+
+
+
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id="documents=-instance_method"></span>
+      <div class="method_details first">
+  <h3 class="signature first" id="documents-instance_method">
+  
+    #<strong>documents</strong>  &#x21d2; <tt><span class='object_link'><a href="Target/DocumentsTarget.html" title="Google::Firestore::V1beta1::Target::DocumentsTarget (class)">Google::Firestore::V1beta1::Target::DocumentsTarget</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns A target specified by a set of document names.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Target/DocumentsTarget.html" title="Google::Firestore::V1beta1::Target::DocumentsTarget (class)">Google::Firestore::V1beta1::Target::DocumentsTarget</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A target specified by a set of document names.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+456
+457
+458
+459
+460
+461
+462
+463
+464
+465
+466
+467
+468
+469
+470
+471
+472
+473
+474
+475
+476
+477
+478
+479</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/v1beta1/doc/google/firestore/v1beta1/firestore.rb', line 456</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Firestore::V1beta1::Target (class)">Target</a></span></span>
+  <span class='comment'># A target specified by a set of documents names.
+</span>  <span class='comment'># @!attribute [rw] documents
+</span>  <span class='comment'>#   @return [Array&lt;String&gt;]
+</span>  <span class='comment'>#     The names of the documents to retrieve. In the format:
+</span>  <span class='comment'>#     `projects/{project_id}/databases/{database_id}/documents/{document_path}`.
+</span>  <span class='comment'>#     The request will fail if any of the document is not a child resource of
+</span>  <span class='comment'>#     the given `database`. Duplicate names will be elided.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Target/DocumentsTarget.html" title="Google::Firestore::V1beta1::Target::DocumentsTarget (class)">DocumentsTarget</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+
+  <span class='comment'># A target specified by a query.
+</span>  <span class='comment'># @!attribute [rw] parent
+</span>  <span class='comment'>#   @return [String]
+</span>  <span class='comment'>#     The parent resource name. In the format:
+</span>  <span class='comment'>#     `projects/{project_id}/databases/{database_id}/documents` or
+</span>  <span class='comment'>#     `projects/{project_id}/databases/{database_id}/documents/{document_path}`.
+</span>  <span class='comment'>#     For example:
+</span>  <span class='comment'>#     `projects/my-project/databases/my-database/documents` or
+</span>  <span class='comment'>#     `projects/my-project/databases/my-database/documents/chatrooms/my-chatroom`
+</span>  <span class='comment'># @!attribute [rw] structured_query
+</span>  <span class='comment'>#   @return [Google::Firestore::V1beta1::StructuredQuery]
+</span>  <span class='comment'>#     A structured query.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Target/QueryTarget.html" title="Google::Firestore::V1beta1::Target::QueryTarget (class)">QueryTarget</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="once=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="once-instance_method">
+  
+    #<strong>once</strong>  &#x21d2; <tt>true</tt>, <tt>false</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns If the target should be removed once it is current and consistent.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>true</tt>, <tt>false</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>If the target should be removed once it is current and consistent.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+456
+457
+458
+459
+460
+461
+462
+463
+464
+465
+466
+467
+468
+469
+470
+471
+472
+473
+474
+475
+476
+477
+478
+479</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/v1beta1/doc/google/firestore/v1beta1/firestore.rb', line 456</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Firestore::V1beta1::Target (class)">Target</a></span></span>
+  <span class='comment'># A target specified by a set of documents names.
+</span>  <span class='comment'># @!attribute [rw] documents
+</span>  <span class='comment'>#   @return [Array&lt;String&gt;]
+</span>  <span class='comment'>#     The names of the documents to retrieve. In the format:
+</span>  <span class='comment'>#     `projects/{project_id}/databases/{database_id}/documents/{document_path}`.
+</span>  <span class='comment'>#     The request will fail if any of the document is not a child resource of
+</span>  <span class='comment'>#     the given `database`. Duplicate names will be elided.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Target/DocumentsTarget.html" title="Google::Firestore::V1beta1::Target::DocumentsTarget (class)">DocumentsTarget</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+
+  <span class='comment'># A target specified by a query.
+</span>  <span class='comment'># @!attribute [rw] parent
+</span>  <span class='comment'>#   @return [String]
+</span>  <span class='comment'>#     The parent resource name. In the format:
+</span>  <span class='comment'>#     `projects/{project_id}/databases/{database_id}/documents` or
+</span>  <span class='comment'>#     `projects/{project_id}/databases/{database_id}/documents/{document_path}`.
+</span>  <span class='comment'>#     For example:
+</span>  <span class='comment'>#     `projects/my-project/databases/my-database/documents` or
+</span>  <span class='comment'>#     `projects/my-project/databases/my-database/documents/chatrooms/my-chatroom`
+</span>  <span class='comment'># @!attribute [rw] structured_query
+</span>  <span class='comment'>#   @return [Google::Firestore::V1beta1::StructuredQuery]
+</span>  <span class='comment'>#     A structured query.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Target/QueryTarget.html" title="Google::Firestore::V1beta1::Target::QueryTarget (class)">QueryTarget</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="query=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="query-instance_method">
+  
+    #<strong>query</strong>  &#x21d2; <tt><span class='object_link'><a href="Target/QueryTarget.html" title="Google::Firestore::V1beta1::Target::QueryTarget (class)">Google::Firestore::V1beta1::Target::QueryTarget</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns A target specified by a query.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Target/QueryTarget.html" title="Google::Firestore::V1beta1::Target::QueryTarget (class)">Google::Firestore::V1beta1::Target::QueryTarget</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A target specified by a query.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+456
+457
+458
+459
+460
+461
+462
+463
+464
+465
+466
+467
+468
+469
+470
+471
+472
+473
+474
+475
+476
+477
+478
+479</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/v1beta1/doc/google/firestore/v1beta1/firestore.rb', line 456</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Firestore::V1beta1::Target (class)">Target</a></span></span>
+  <span class='comment'># A target specified by a set of documents names.
+</span>  <span class='comment'># @!attribute [rw] documents
+</span>  <span class='comment'>#   @return [Array&lt;String&gt;]
+</span>  <span class='comment'>#     The names of the documents to retrieve. In the format:
+</span>  <span class='comment'>#     `projects/{project_id}/databases/{database_id}/documents/{document_path}`.
+</span>  <span class='comment'>#     The request will fail if any of the document is not a child resource of
+</span>  <span class='comment'>#     the given `database`. Duplicate names will be elided.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Target/DocumentsTarget.html" title="Google::Firestore::V1beta1::Target::DocumentsTarget (class)">DocumentsTarget</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+
+  <span class='comment'># A target specified by a query.
+</span>  <span class='comment'># @!attribute [rw] parent
+</span>  <span class='comment'>#   @return [String]
+</span>  <span class='comment'>#     The parent resource name. In the format:
+</span>  <span class='comment'>#     `projects/{project_id}/databases/{database_id}/documents` or
+</span>  <span class='comment'>#     `projects/{project_id}/databases/{database_id}/documents/{document_path}`.
+</span>  <span class='comment'>#     For example:
+</span>  <span class='comment'>#     `projects/my-project/databases/my-database/documents` or
+</span>  <span class='comment'>#     `projects/my-project/databases/my-database/documents/chatrooms/my-chatroom`
+</span>  <span class='comment'># @!attribute [rw] structured_query
+</span>  <span class='comment'>#   @return [Google::Firestore::V1beta1::StructuredQuery]
+</span>  <span class='comment'>#     A structured query.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Target/QueryTarget.html" title="Google::Firestore::V1beta1::Target::QueryTarget (class)">QueryTarget</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="read_time=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="read_time-instance_method">
+  
+    #<strong>read_time</strong>  &#x21d2; <tt><span class='object_link'><a href="../../Protobuf/Timestamp.html" title="Google::Protobuf::Timestamp (class)">Google::Protobuf::Timestamp</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Start listening after a specific <code>read_time</code>.</p>
+
+<p>The client must know the state of matching documents at this time.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../Protobuf/Timestamp.html" title="Google::Protobuf::Timestamp (class)">Google::Protobuf::Timestamp</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Start listening after a specific <code>read_time</code>.</p>
+
+<p>The client must know the state of matching documents at this time.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+456
+457
+458
+459
+460
+461
+462
+463
+464
+465
+466
+467
+468
+469
+470
+471
+472
+473
+474
+475
+476
+477
+478
+479</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/v1beta1/doc/google/firestore/v1beta1/firestore.rb', line 456</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Firestore::V1beta1::Target (class)">Target</a></span></span>
+  <span class='comment'># A target specified by a set of documents names.
+</span>  <span class='comment'># @!attribute [rw] documents
+</span>  <span class='comment'>#   @return [Array&lt;String&gt;]
+</span>  <span class='comment'>#     The names of the documents to retrieve. In the format:
+</span>  <span class='comment'>#     `projects/{project_id}/databases/{database_id}/documents/{document_path}`.
+</span>  <span class='comment'>#     The request will fail if any of the document is not a child resource of
+</span>  <span class='comment'>#     the given `database`. Duplicate names will be elided.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Target/DocumentsTarget.html" title="Google::Firestore::V1beta1::Target::DocumentsTarget (class)">DocumentsTarget</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+
+  <span class='comment'># A target specified by a query.
+</span>  <span class='comment'># @!attribute [rw] parent
+</span>  <span class='comment'>#   @return [String]
+</span>  <span class='comment'>#     The parent resource name. In the format:
+</span>  <span class='comment'>#     `projects/{project_id}/databases/{database_id}/documents` or
+</span>  <span class='comment'>#     `projects/{project_id}/databases/{database_id}/documents/{document_path}`.
+</span>  <span class='comment'>#     For example:
+</span>  <span class='comment'>#     `projects/my-project/databases/my-database/documents` or
+</span>  <span class='comment'>#     `projects/my-project/databases/my-database/documents/chatrooms/my-chatroom`
+</span>  <span class='comment'># @!attribute [rw] structured_query
+</span>  <span class='comment'>#   @return [Google::Firestore::V1beta1::StructuredQuery]
+</span>  <span class='comment'>#     A structured query.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Target/QueryTarget.html" title="Google::Firestore::V1beta1::Target::QueryTarget (class)">QueryTarget</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="resume_token=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="resume_token-instance_method">
+  
+    #<strong>resume_token</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns A resume token from a prior <span class='object_link'><a href="TargetChange.html" title="Google::Firestore::V1beta1::TargetChange (class)">TargetChange</a></span> for an identical target.</p>
+
+<p>Using a resume token with a different target is unsupported and may fail.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A resume token from a prior <span class='object_link'><a href="TargetChange.html" title="Google::Firestore::V1beta1::TargetChange (class)">TargetChange</a></span> for an identical target.</p>
+
+<p>Using a resume token with a different target is unsupported and may fail.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+456
+457
+458
+459
+460
+461
+462
+463
+464
+465
+466
+467
+468
+469
+470
+471
+472
+473
+474
+475
+476
+477
+478
+479</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/v1beta1/doc/google/firestore/v1beta1/firestore.rb', line 456</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Firestore::V1beta1::Target (class)">Target</a></span></span>
+  <span class='comment'># A target specified by a set of documents names.
+</span>  <span class='comment'># @!attribute [rw] documents
+</span>  <span class='comment'>#   @return [Array&lt;String&gt;]
+</span>  <span class='comment'>#     The names of the documents to retrieve. In the format:
+</span>  <span class='comment'>#     `projects/{project_id}/databases/{database_id}/documents/{document_path}`.
+</span>  <span class='comment'>#     The request will fail if any of the document is not a child resource of
+</span>  <span class='comment'>#     the given `database`. Duplicate names will be elided.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Target/DocumentsTarget.html" title="Google::Firestore::V1beta1::Target::DocumentsTarget (class)">DocumentsTarget</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+
+  <span class='comment'># A target specified by a query.
+</span>  <span class='comment'># @!attribute [rw] parent
+</span>  <span class='comment'>#   @return [String]
+</span>  <span class='comment'>#     The parent resource name. In the format:
+</span>  <span class='comment'>#     `projects/{project_id}/databases/{database_id}/documents` or
+</span>  <span class='comment'>#     `projects/{project_id}/databases/{database_id}/documents/{document_path}`.
+</span>  <span class='comment'>#     For example:
+</span>  <span class='comment'>#     `projects/my-project/databases/my-database/documents` or
+</span>  <span class='comment'>#     `projects/my-project/databases/my-database/documents/chatrooms/my-chatroom`
+</span>  <span class='comment'># @!attribute [rw] structured_query
+</span>  <span class='comment'>#   @return [Google::Firestore::V1beta1::StructuredQuery]
+</span>  <span class='comment'>#     A structured query.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Target/QueryTarget.html" title="Google::Firestore::V1beta1::Target::QueryTarget (class)">QueryTarget</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="target_id=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="target_id-instance_method">
+  
+    #<strong>target_id</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns A client provided target ID.</p>
+
+<p>If not set, the server will assign an ID for the target.</p>
+
+<p>Used for resuming a target without changing IDs. The IDs can either be
+client-assigned or be server-assigned in a previous stream. All targets
+with client provided IDs must be added before adding a target that needs
+a server-assigned id.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A client provided target ID.</p>
+
+<p>If not set, the server will assign an ID for the target.</p>
+
+<p>Used for resuming a target without changing IDs. The IDs can either be
+client-assigned or be server-assigned in a previous stream. All targets
+with client provided IDs must be added before adding a target that needs
+a server-assigned id.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+456
+457
+458
+459
+460
+461
+462
+463
+464
+465
+466
+467
+468
+469
+470
+471
+472
+473
+474
+475
+476
+477
+478
+479</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/v1beta1/doc/google/firestore/v1beta1/firestore.rb', line 456</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Firestore::V1beta1::Target (class)">Target</a></span></span>
+  <span class='comment'># A target specified by a set of documents names.
+</span>  <span class='comment'># @!attribute [rw] documents
+</span>  <span class='comment'>#   @return [Array&lt;String&gt;]
+</span>  <span class='comment'>#     The names of the documents to retrieve. In the format:
+</span>  <span class='comment'>#     `projects/{project_id}/databases/{database_id}/documents/{document_path}`.
+</span>  <span class='comment'>#     The request will fail if any of the document is not a child resource of
+</span>  <span class='comment'>#     the given `database`. Duplicate names will be elided.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Target/DocumentsTarget.html" title="Google::Firestore::V1beta1::Target::DocumentsTarget (class)">DocumentsTarget</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+
+  <span class='comment'># A target specified by a query.
+</span>  <span class='comment'># @!attribute [rw] parent
+</span>  <span class='comment'>#   @return [String]
+</span>  <span class='comment'>#     The parent resource name. In the format:
+</span>  <span class='comment'>#     `projects/{project_id}/databases/{database_id}/documents` or
+</span>  <span class='comment'>#     `projects/{project_id}/databases/{database_id}/documents/{document_path}`.
+</span>  <span class='comment'>#     For example:
+</span>  <span class='comment'>#     `projects/my-project/databases/my-database/documents` or
+</span>  <span class='comment'>#     `projects/my-project/databases/my-database/documents/chatrooms/my-chatroom`
+</span>  <span class='comment'># @!attribute [rw] structured_query
+</span>  <span class='comment'>#   @return [Google::Firestore::V1beta1::StructuredQuery]
+</span>  <span class='comment'>#     A structured query.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Target/QueryTarget.html" title="Google::Firestore::V1beta1::Target::QueryTarget (class)">QueryTarget</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+</div>
+
+  <div id="footer">
+  <ul class="footer-links">
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby" title="Google Cloud on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> GitHub
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues" title="Google Cloud issues on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> Issues
+      </a>
+    </li>
+    <li>
+      <a href="http://stackoverflow.com/questions/tagged/google-cloud-ruby" title="Google Cloud on StackOverflow">
+      <img src="/google-cloud-ruby/img/icon-link-stackoverflow.svg" alt="StackOverflow icon"> StackOverflow
+    </a>
+    </li>
+    <li>
+      <a href="http://rubygems.org/gems/google-cloud" title="Google Cloud on RubyGems">
+        <img src="/google-cloud-ruby/img/icon-link-package-manager.svg" alt="RubyGems icon"> RubyGems
+      </a>
+    </li>
+  </ul>
+
+  <p>
+    Documentation generated by <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool">yard</a>.
+  </p>
+</div>
+
+</div>
