@@ -16,6 +16,7 @@ Availability (GA)](#versioning) quality level:
 
 * [BigQuery](#bigquery-ga) (GA)
 * [Cloud Datastore](#cloud-datastore-ga) (GA)
+* [Cloud Firestore](#cloud-firestore-ga) (GA)
 * [Cloud Key Management Service](#cloud-key-management-service-ga) (GA)
 * [Stackdriver Logging](#stackdriver-logging-ga) (GA)
 * [Cloud Spanner API](#cloud-spanner-api-ga) (GA)
@@ -31,7 +32,6 @@ This client supports the following Google Cloud Platform services at a
 * [Cloud Bigtable](#cloud-bigtable-beta) (Beta)
 * [Stackdriver Debugger](#stackdriver-debugger-beta) (Beta)
 * [Stackdriver Error Reporting](#stackdriver-error-reporting-beta) (Beta)
-* [Cloud Firestore](#cloud-firestore-beta) (Beta)
 * [Cloud Pub/Sub](#cloud-pubsub-beta) (Beta)
 * [Stackdriver Monitoring API](#stackdriver-monitoring-api-beta) (Beta)
 * [Stackdriver Trace](#stackdriver-trace-beta) (Beta)
@@ -474,7 +474,7 @@ rescue => exception
 end
 ```
 
-### Cloud Firestore (Beta)
+### Cloud Firestore (GA)
 
 - [google-cloud-firestore README](google-cloud-firestore/README.md)
 - [google-cloud-firestore API documentation](https://googleapis.github.io/google-cloud-ruby/docs/google-cloud-firestore/latest)

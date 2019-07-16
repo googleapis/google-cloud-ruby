@@ -30,7 +30,7 @@ Gem::Specification.new do |gem|
   gem.add_dependency "google-cloud-dlp", "~> 0.4"
   gem.add_dependency "google-cloud-dns", "~> 0.28"
   gem.add_dependency "google-cloud-error_reporting", "~> 0.30"
-  gem.add_dependency "google-cloud-firestore", "~> 0.21"
+  gem.add_dependency "google-cloud-firestore", "~> 1.0"
   gem.add_dependency "google-cloud-kms", "~> 1.0"
   gem.add_dependency "google-cloud-language", "~> 0.30"
   gem.add_dependency "google-cloud-logging", "~> 1.5"
