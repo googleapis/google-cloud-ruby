@@ -13,6 +13,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :language_code, :string, 3
     repeated :phrase_hints, :string, 4
     optional :model_variant, :enum, 10, "google.cloud.dialogflow.v2.SpeechModelVariant"
+    optional :single_utterance, :bool, 8
   end
   add_message "google.cloud.dialogflow.v2.VoiceSelectionParams" do
     optional :name, :string, 1

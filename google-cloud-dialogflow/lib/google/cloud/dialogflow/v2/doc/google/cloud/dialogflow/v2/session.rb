@@ -200,6 +200,10 @@ module Google
         #   @return [Float]
         #     The intent detection confidence. Values range from 0.0
         #     (completely uncertain) to 1.0 (completely certain).
+        #     This value is for informational purpose only and is only used to
+        #     help match the best intent within the classification threshold.
+        #     This value may change for the same end-user expression at any time due to a
+        #     model retraining or change in implementation.
         #     If there are `multiple knowledge_answers` messages, this value is set to
         #     the greatest `knowledgeAnswers.match_confidence` value in the list.
         # @!attribute [rw] diagnostic_info
@@ -219,7 +223,7 @@ module Google
         # Multiple request messages should be sent in order:
         #
         # 1.  The first message must contain `session`, `query_input` plus optionally
-        #     `query_params` and/or `single_utterance`. The message must not contain `input_audio`.
+        #     `query_params`. The message must not contain `input_audio`.
         #
         # 2.  If `query_input` was set to a streaming input audio config,
         #     all subsequent messages must contain only `input_audio`.
@@ -247,13 +251,13 @@ module Google
         #     3.  an event that specifies which intent to trigger.
         # @!attribute [rw] single_utterance
         #   @return [true, false]
-        #     Optional. If `false` (default), recognition does not cease until the
-        #     client closes the stream.
-        #     If `true`, the recognizer will detect a single spoken utterance in input
-        #     audio. Recognition ceases when it detects the audio's voice has
-        #     stopped or paused. In this case, once a detected intent is received, the
-        #     client should close the stream and start a new request with a new stream as
-        #     needed.
+        #     DEPRECATED. Please use {Google::Cloud::Dialogflow::V2::InputAudioConfig#single_utterance InputAudioConfig#single_utterance} instead.
+        #     Optional. If `false` (default), recognition does not cease until
+        #     the client closes the stream. If `true`, the recognizer will detect a
+        #     single spoken utterance in input audio. Recognition ceases when it detects
+        #     the audio's voice has stopped or paused. In this case, once a detected
+        #     intent is received, the client should close the stream and start a new
+        #     request with a new stream as needed.
         #     This setting is ignored when `query_input` is a piece of text or an event.
         # @!attribute [rw] output_audio_config
         #   @return [Google::Cloud::Dialogflow::V2::OutputAudioConfig]
@@ -324,7 +328,7 @@ module Google
         #
         # 6.  transcript: " that is"
         #
-        # 7.  message_type: `MESSAGE_TYPE_END_OF_SINGLE_UTTERANCE`
+        # 7.  message_type: `END_OF_SINGLE_UTTERANCE`
         #
         # 8.  transcript: " that is the question"
         #     is_final: true
@@ -335,22 +339,22 @@ module Google
         #
         # In each response we populate:
         #
-        # * for `MESSAGE_TYPE_TRANSCRIPT`: `transcript` and possibly `is_final`.
+        # * for `TRANSCRIPT`: `transcript` and possibly `is_final`.
         #
-        # * for `MESSAGE_TYPE_END_OF_SINGLE_UTTERANCE`: only `message_type`.
+        # * for `END_OF_SINGLE_UTTERANCE`: only `message_type`.
         # @!attribute [rw] message_type
         #   @return [Google::Cloud::Dialogflow::V2::StreamingRecognitionResult::MessageType]
         #     Type of the result message.
         # @!attribute [rw] transcript
         #   @return [String]
         #     Transcript text representing the words that the user spoke.
-        #     Populated if and only if `message_type` = `MESSAGE_TYPE_TRANSCRIPT`.
+        #     Populated if and only if `message_type` = `TRANSCRIPT`.
         # @!attribute [rw] is_final
         #   @return [true, false]
         #     If `false`, the `StreamingRecognitionResult` represents an
         #     interim result that may change. If `true`, the recognizer will not return
         #     any further hypotheses about this piece of the audio. May only be populated
-        #     for `message_type` = `MESSAGE_TYPE_TRANSCRIPT`.
+        #     for `message_type` = `TRANSCRIPT`.
         # @!attribute [rw] confidence
         #   @return [Float]
         #     The Speech confidence between 0.0 and 1.0 for the current portion of audio.
