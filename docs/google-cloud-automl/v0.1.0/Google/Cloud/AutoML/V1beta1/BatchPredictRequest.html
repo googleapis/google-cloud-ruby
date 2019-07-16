@@ -1,0 +1,558 @@
+---
+layout: yard_main
+title: "Class: Google::Cloud::AutoML::V1beta1::BatchPredictRequest - Cloud"
+css: 
+  - /docs/css/style.css
+  - /docs/css/common.css
+  - /css/yard-main.css
+js: 
+  - /docs/js/app.js
+  - /js/yard-main.js
+---
+<script type="text/javascript" charset="utf-8">
+  pathId = "Google::Cloud::AutoML::V1beta1::BatchPredictRequest";
+  relpath = '../../../../';
+</script>
+
+
+<div class="nav_wrap">
+  <iframe id="nav" src="../../../../class_list.html?1"></iframe>
+  <div id="resizer"></div>
+</div>
+
+<div id="main" tabindex="-1">
+  <div id="header">
+    <div id="menu">
+  
+    <a href="../../../../_index.html">Index (B)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../AutoML.html" title="Google::Cloud::AutoML (module)">AutoML</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../V1beta1.html" title="Google::Cloud::AutoML::V1beta1 (module)">V1beta1</a></span></span>
+     &raquo; 
+    <span class="title">BatchPredictRequest</span>
+  
+</div>
+
+    <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../../../../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+    <div class="clear"></div>
+  </div>
+
+  <div id="content"><h1>Class: Google::Cloud::AutoML::V1beta1::BatchPredictRequest
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Google::Cloud::AutoML::V1beta1::BatchPredictRequest</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/google/cloud/automl/v1beta1/doc/google/cloud/automl/v1beta1/prediction_service.rb</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>Request message for PredictionService::BatchPredict.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+
+
+
+  <h2>Instance Attribute Summary <small><a href="#" class="summary_toggle">collapse</a></small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#input_config-instance_method" title="#input_config (instance method)">#<strong>input_config</strong>  &#x21d2; Google::Cloud::AutoML::V1beta1::BatchPredictInputConfig </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Required.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#name-instance_method" title="#name (instance method)">#<strong>name</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Name of the model requested to serve the batch prediction.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#output_config-instance_method" title="#output_config (instance method)">#<strong>output_config</strong>  &#x21d2; Google::Cloud::AutoML::V1beta1::BatchPredictOutputConfig </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Required.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#params-instance_method" title="#params (instance method)">#<strong>params</strong>  &#x21d2; Hash{String =&gt; String} </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Additional domain-specific parameters for the predictions, any string must be up to 25000 characters long.</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+
+
+
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id="input_config=-instance_method"></span>
+      <div class="method_details first">
+  <h3 class="signature first" id="input_config-instance_method">
+  
+    #<strong>input_config</strong>  &#x21d2; <tt><span class='object_link'><a href="BatchPredictInputConfig.html" title="Google::Cloud::AutoML::V1beta1::BatchPredictInputConfig (class)">Google::Cloud::AutoML::V1beta1::BatchPredictInputConfig</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Required. The input configuration for batch prediction.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="BatchPredictInputConfig.html" title="Google::Cloud::AutoML::V1beta1::BatchPredictInputConfig (class)">Google::Cloud::AutoML::V1beta1::BatchPredictInputConfig</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Required. The input configuration for batch prediction.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+127</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/automl/v1beta1/doc/google/cloud/automl/v1beta1/prediction_service.rb', line 127</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::AutoML::V1beta1::BatchPredictRequest (class)">BatchPredictRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="name=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="name-instance_method">
+  
+    #<strong>name</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Name of the model requested to serve the batch prediction.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Name of the model requested to serve the batch prediction.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+127</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/automl/v1beta1/doc/google/cloud/automl/v1beta1/prediction_service.rb', line 127</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::AutoML::V1beta1::BatchPredictRequest (class)">BatchPredictRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="output_config=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="output_config-instance_method">
+  
+    #<strong>output_config</strong>  &#x21d2; <tt><span class='object_link'><a href="BatchPredictOutputConfig.html" title="Google::Cloud::AutoML::V1beta1::BatchPredictOutputConfig (class)">Google::Cloud::AutoML::V1beta1::BatchPredictOutputConfig</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Required. The Configuration specifying where output predictions should
+be written.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="BatchPredictOutputConfig.html" title="Google::Cloud::AutoML::V1beta1::BatchPredictOutputConfig (class)">Google::Cloud::AutoML::V1beta1::BatchPredictOutputConfig</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Required. The Configuration specifying where output predictions should
+be written.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+127</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/automl/v1beta1/doc/google/cloud/automl/v1beta1/prediction_service.rb', line 127</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::AutoML::V1beta1::BatchPredictRequest (class)">BatchPredictRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="params=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="params-instance_method">
+  
+    #<strong>params</strong>  &#x21d2; <tt>Hash{String =&gt; String}</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Additional domain-specific parameters for the predictions, any string must
+be up to 25000 characters long.</p>
+
+<ul>
+<li><p>For Video Classification :
+<code>score_threshold</code> - (float) A value from 0.0 to 1.0. When the model
+makes predictions for a video, it will only produce results that
+have at least this confidence score. The default is 0.5.
+<code>segment_classification</code> - (boolean) Set to true to request
+segment-level classification. AutoML Video Intelligence returns
+labels and their confidence scores for the entire segment of the
+video that user specified in the request configuration.
+The default is &quot;true&quot;.
+<code>shot_classification</code> - (boolean) Set to true to request shot-level
+classification. AutoML Video Intelligence determines the boundaries
+for each camera shot in the entire segment of the video that user
+specified in the request configuration. AutoML Video Intelligence
+then returns labels and their confidence scores for each detected
+shot, along with the start and end time of the shot.
+WARNING: Model evaluation is not done for this classification type,
+the quality of it depends on training data, but there are no metrics
+provided to describe that quality. The default is &quot;false&quot;.
+<code>1s_interval_classification</code> - (boolean) Set to true to request
+classification for a video at one-second intervals. AutoML Video
+Intelligence returns labels and their confidence scores for each
+second of the entire segment of the video that user specified in the
+request configuration.
+WARNING: Model evaluation is not done for this classification
+type, the quality of it depends on training data, but there are no
+metrics provided to describe that quality. The default is
+&quot;false&quot;.</p></li>
+<li><p>For Video Object Tracking:
+<code>score_threshold</code> - (float) When Model detects objects on video frames,
+it will only produce bounding boxes which have at least this
+confidence score. Value in 0 to 1 range, default is 0.5.
+<code>max_bounding_box_count</code> - (int64) No more than this number of bounding
+boxes will be returned per frame. Default is 100, the requested
+value may be limited by server.
+<code>min_bounding_box_size</code> - (float) Only bounding boxes with shortest edge
+at least that long as a relative value of video frame size will be
+returned. Value in 0 to 1 range. Default is 0.</p></li>
+</ul>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Hash{String =&gt; String}</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Additional domain-specific parameters for the predictions, any string must
+be up to 25000 characters long.</p>
+
+<ul>
+<li><p>For Video Classification :
+<code>score_threshold</code> - (float) A value from 0.0 to 1.0. When the model
+makes predictions for a video, it will only produce results that
+have at least this confidence score. The default is 0.5.
+<code>segment_classification</code> - (boolean) Set to true to request
+segment-level classification. AutoML Video Intelligence returns
+labels and their confidence scores for the entire segment of the
+video that user specified in the request configuration.
+The default is &quot;true&quot;.
+<code>shot_classification</code> - (boolean) Set to true to request shot-level
+classification. AutoML Video Intelligence determines the boundaries
+for each camera shot in the entire segment of the video that user
+specified in the request configuration. AutoML Video Intelligence
+then returns labels and their confidence scores for each detected
+shot, along with the start and end time of the shot.
+WARNING: Model evaluation is not done for this classification type,
+the quality of it depends on training data, but there are no metrics
+provided to describe that quality. The default is &quot;false&quot;.
+<code>1s_interval_classification</code> - (boolean) Set to true to request
+classification for a video at one-second intervals. AutoML Video
+Intelligence returns labels and their confidence scores for each
+second of the entire segment of the video that user specified in the
+request configuration.
+WARNING: Model evaluation is not done for this classification
+type, the quality of it depends on training data, but there are no
+metrics provided to describe that quality. The default is
+&quot;false&quot;.</p></li>
+<li><p>For Video Object Tracking:
+<code>score_threshold</code> - (float) When Model detects objects on video frames,
+it will only produce bounding boxes which have at least this
+confidence score. Value in 0 to 1 range, default is 0.5.
+<code>max_bounding_box_count</code> - (int64) No more than this number of bounding
+boxes will be returned per frame. Default is 100, the requested
+value may be limited by server.
+<code>min_bounding_box_size</code> - (float) Only bounding boxes with shortest edge
+at least that long as a relative value of video frame size will be
+returned. Value in 0 to 1 range. Default is 0.</p></li>
+</ul>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+127</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/automl/v1beta1/doc/google/cloud/automl/v1beta1/prediction_service.rb', line 127</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::AutoML::V1beta1::BatchPredictRequest (class)">BatchPredictRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+</div>
+
+  <div id="footer">
+  <ul class="footer-links">
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby" title="Google Cloud on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> GitHub
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues" title="Google Cloud issues on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> Issues
+      </a>
+    </li>
+    <li>
+      <a href="http://stackoverflow.com/questions/tagged/google-cloud-ruby" title="Google Cloud on StackOverflow">
+      <img src="/google-cloud-ruby/img/icon-link-stackoverflow.svg" alt="StackOverflow icon"> StackOverflow
+    </a>
+    </li>
+    <li>
+      <a href="http://rubygems.org/gems/google-cloud" title="Google Cloud on RubyGems">
+        <img src="/google-cloud-ruby/img/icon-link-package-manager.svg" alt="RubyGems icon"> RubyGems
+      </a>
+    </li>
+  </ul>
+
+  <p>
+    Documentation generated by <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool">yard</a>.
+  </p>
+</div>
+
+</div>

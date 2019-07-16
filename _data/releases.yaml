@@ -61,6 +61,8 @@ google-cloud-asset:
 - v0.2.0
 - v0.1.2
 - v0.1.1
+google-cloud-automl:
+- v0.1.0
 google-cloud-bigquery:
 - v1.12.0
 - v1.11.2
