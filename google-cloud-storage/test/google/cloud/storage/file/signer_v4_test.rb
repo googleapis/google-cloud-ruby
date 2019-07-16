@@ -47,7 +47,7 @@ class SignerV4Test < MockStorage
   end
 end
 
-tests = SignerV4Test.load_json "../../../../data/signer_v4_test_data.json"
+tests = SignerV4Test.load_json "#{__dir__}/../../../../data/signer_v4_test_data.json"
 tests.each_with_index do |test, index|
   SignerV4Test.build_test_for test, index
 end
