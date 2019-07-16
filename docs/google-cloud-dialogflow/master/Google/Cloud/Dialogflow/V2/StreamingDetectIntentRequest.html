@@ -96,7 +96,7 @@ js:
 
 <ol>
 <li><p>The first message must contain <code>session</code>, <code>query_input</code> plus optionally
-<code>query_params</code> and/or <code>single_utterance</code>. The message must not contain <code>input_audio</code>.</p></li>
+<code>query_params</code>. The message must not contain <code>input_audio</code>.</p></li>
 <li><p>If <code>query_input</code> was set to a streaming input audio config,
 all subsequent messages must contain only <code>input_audio</code>.
 Otherwise, finish the request stream.</p></li>
@@ -265,7 +265,7 @@ Otherwise, finish the request stream.</p></li>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Optional.</p>
+    <span class="summary_desc"><div class='inline'><p>DEPRECATED.</p>
 </div></span>
   
 </li>
@@ -328,10 +328,10 @@ over all streaming messages must not exceed 1 minute.</p>
       <pre class="lines">
 
 
-268</pre>
+272</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/session.rb', line 268</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/session.rb', line 272</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dialogflow::V2::StreamingDetectIntentRequest (class)">StreamingDetectIntentRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -387,10 +387,10 @@ configured, no output audio is generated.</p>
       <pre class="lines">
 
 
-268</pre>
+272</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/session.rb', line 268</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/session.rb', line 272</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dialogflow::V2::StreamingDetectIntentRequest (class)">StreamingDetectIntentRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -456,10 +456,10 @@ the speech audio,</p></li>
       <pre class="lines">
 
 
-268</pre>
+272</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/session.rb', line 268</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/session.rb', line 272</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dialogflow::V2::StreamingDetectIntentRequest (class)">StreamingDetectIntentRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -511,10 +511,10 @@ the speech audio,</p></li>
       <pre class="lines">
 
 
-268</pre>
+272</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/session.rb', line 268</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/session.rb', line 272</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dialogflow::V2::StreamingDetectIntentRequest (class)">StreamingDetectIntentRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -576,10 +576,10 @@ ID must not exceed 36 characters.</p>
       <pre class="lines">
 
 
-268</pre>
+272</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/session.rb', line 268</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/session.rb', line 272</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dialogflow::V2::StreamingDetectIntentRequest (class)">StreamingDetectIntentRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -600,13 +600,13 @@ ID must not exceed 36 characters.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Optional. If <code>false</code> (default), recognition does not cease until the
-client closes the stream.
-If <code>true</code>, the recognizer will detect a single spoken utterance in input
-audio. Recognition ceases when it detects the audio&#39;s voice has
-stopped or paused. In this case, once a detected intent is received, the
-client should close the stream and start a new request with a new stream as
-needed.
+    <p>Returns DEPRECATED. Please use <span class='object_link'><a href="InputAudioConfig.html#single_utterance-instance_method" title="Google::Cloud::Dialogflow::V2::InputAudioConfig#single_utterance (method)">InputAudioConfig#single_utterance</a></span> instead.
+Optional. If <code>false</code> (default), recognition does not cease until
+the client closes the stream. If <code>true</code>, the recognizer will detect a
+single spoken utterance in input audio. Recognition ceases when it detects
+the audio&#39;s voice has stopped or paused. In this case, once a detected
+intent is received, the client should close the stream and start a new
+request with a new stream as needed.
 This setting is ignored when <code>query_input</code> is a piece of text or an event.</p>
 
 
@@ -625,13 +625,13 @@ This setting is ignored when <code>query_input</code> is a piece of text or an e
       
       
         &mdash;
-        <div class='inline'><p>Optional. If <code>false</code> (default), recognition does not cease until the
-client closes the stream.
-If <code>true</code>, the recognizer will detect a single spoken utterance in input
-audio. Recognition ceases when it detects the audio&#39;s voice has
-stopped or paused. In this case, once a detected intent is received, the
-client should close the stream and start a new request with a new stream as
-needed.
+        <div class='inline'><p>DEPRECATED. Please use <span class='object_link'><a href="InputAudioConfig.html#single_utterance-instance_method" title="Google::Cloud::Dialogflow::V2::InputAudioConfig#single_utterance (method)">InputAudioConfig#single_utterance</a></span> instead.
+Optional. If <code>false</code> (default), recognition does not cease until
+the client closes the stream. If <code>true</code>, the recognizer will detect a
+single spoken utterance in input audio. Recognition ceases when it detects
+the audio&#39;s voice has stopped or paused. In this case, once a detected
+intent is received, the client should close the stream and start a new
+request with a new stream as needed.
 This setting is ignored when <code>query_input</code> is a piece of text or an event.</p>
 </div>
       
@@ -645,10 +645,10 @@ This setting is ignored when <code>query_input</code> is a piece of text or an e
       <pre class="lines">
 
 
-268</pre>
+272</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/session.rb', line 268</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/session.rb', line 272</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dialogflow::V2::StreamingDetectIntentRequest (class)">StreamingDetectIntentRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>

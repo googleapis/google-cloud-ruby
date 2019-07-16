@@ -103,7 +103,7 @@ of the single requested utterance.</p>
 is_final: true</p></li>
 <li><p>transcript: &quot; that&#39;s&quot;</p></li>
 <li><p>transcript: &quot; that is&quot;</p></li>
-<li><p>message_type: <code>MESSAGE_TYPE_END_OF_SINGLE_UTTERANCE</code></p></li>
+<li><p>message_type: <code>END_OF_SINGLE_UTTERANCE</code></p></li>
 <li><p>transcript: &quot; that is the question&quot;
 is_final: true</p></li>
 </ol>
@@ -115,8 +115,8 @@ or not to be that is the question&quot;.</p>
 <p>In each response we populate:</p>
 
 <ul>
-<li><p>for <code>MESSAGE_TYPE_TRANSCRIPT</code>: <code>transcript</code> and possibly <code>is_final</code>.</p></li>
-<li><p>for <code>MESSAGE_TYPE_END_OF_SINGLE_UTTERANCE</code>: only <code>message_type</code>.</p></li>
+<li><p>for <code>TRANSCRIPT</code>: <code>transcript</code> and possibly <code>is_final</code>.</p></li>
+<li><p>for <code>END_OF_SINGLE_UTTERANCE</code>: only <code>message_type</code>.</p></li>
 </ul>
 
 
@@ -311,10 +311,6 @@ not rely on it being accurate or even set.</p>
       <pre class="lines">
 
 
-363
-364
-365
-366
 367
 368
 369
@@ -329,10 +325,14 @@ not rely on it being accurate or even set.</p>
 378
 379
 380
-381</pre>
+381
+382
+383
+384
+385</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/session.rb', line 363</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/session.rb', line 367</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dialogflow::V2::StreamingRecognitionResult (class)">StreamingRecognitionResult</a></span></span>
   <span class='comment'># Type of the response message.
@@ -374,7 +374,7 @@ not rely on it being accurate or even set.</p>
     <p>Returns If <code>false</code>, the <code>StreamingRecognitionResult</code> represents an
 interim result that may change. If <code>true</code>, the recognizer will not return
 any further hypotheses about this piece of the audio. May only be populated
-for <code>message_type</code> = <code>MESSAGE_TYPE_TRANSCRIPT</code>.</p>
+for <code>message_type</code> = <code>TRANSCRIPT</code>.</p>
 
 
   </div>
@@ -395,7 +395,7 @@ for <code>message_type</code> = <code>MESSAGE_TYPE_TRANSCRIPT</code>.</p>
         <div class='inline'><p>If <code>false</code>, the <code>StreamingRecognitionResult</code> represents an
 interim result that may change. If <code>true</code>, the recognizer will not return
 any further hypotheses about this piece of the audio. May only be populated
-for <code>message_type</code> = <code>MESSAGE_TYPE_TRANSCRIPT</code>.</p>
+for <code>message_type</code> = <code>TRANSCRIPT</code>.</p>
 </div>
       
     </li>
@@ -408,10 +408,6 @@ for <code>message_type</code> = <code>MESSAGE_TYPE_TRANSCRIPT</code>.</p>
       <pre class="lines">
 
 
-363
-364
-365
-366
 367
 368
 369
@@ -426,10 +422,14 @@ for <code>message_type</code> = <code>MESSAGE_TYPE_TRANSCRIPT</code>.</p>
 378
 379
 380
-381</pre>
+381
+382
+383
+384
+385</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/session.rb', line 363</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/session.rb', line 367</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dialogflow::V2::StreamingRecognitionResult (class)">StreamingRecognitionResult</a></span></span>
   <span class='comment'># Type of the response message.
@@ -499,10 +499,6 @@ for <code>message_type</code> = <code>MESSAGE_TYPE_TRANSCRIPT</code>.</p>
       <pre class="lines">
 
 
-363
-364
-365
-366
 367
 368
 369
@@ -517,10 +513,14 @@ for <code>message_type</code> = <code>MESSAGE_TYPE_TRANSCRIPT</code>.</p>
 378
 379
 380
-381</pre>
+381
+382
+383
+384
+385</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/session.rb', line 363</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/session.rb', line 367</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dialogflow::V2::StreamingRecognitionResult (class)">StreamingRecognitionResult</a></span></span>
   <span class='comment'># Type of the response message.
@@ -560,7 +560,7 @@ for <code>message_type</code> = <code>MESSAGE_TYPE_TRANSCRIPT</code>.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns Transcript text representing the words that the user spoke.
-Populated if and only if <code>message_type</code> = <code>MESSAGE_TYPE_TRANSCRIPT</code>.</p>
+Populated if and only if <code>message_type</code> = <code>TRANSCRIPT</code>.</p>
 
 
   </div>
@@ -579,7 +579,7 @@ Populated if and only if <code>message_type</code> = <code>MESSAGE_TYPE_TRANSCRI
       
         &mdash;
         <div class='inline'><p>Transcript text representing the words that the user spoke.
-Populated if and only if <code>message_type</code> = <code>MESSAGE_TYPE_TRANSCRIPT</code>.</p>
+Populated if and only if <code>message_type</code> = <code>TRANSCRIPT</code>.</p>
 </div>
       
     </li>
@@ -592,10 +592,6 @@ Populated if and only if <code>message_type</code> = <code>MESSAGE_TYPE_TRANSCRI
       <pre class="lines">
 
 
-363
-364
-365
-366
 367
 368
 369
@@ -610,10 +606,14 @@ Populated if and only if <code>message_type</code> = <code>MESSAGE_TYPE_TRANSCRI
 378
 379
 380
-381</pre>
+381
+382
+383
+384
+385</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/session.rb', line 363</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/session.rb', line 367</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dialogflow::V2::StreamingRecognitionResult (class)">StreamingRecognitionResult</a></span></span>
   <span class='comment'># Type of the response message.

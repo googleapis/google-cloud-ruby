@@ -234,6 +234,32 @@ js:
 </li>
 
     
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#single_utterance-instance_method" title="#single_utterance (instance method)">#<strong>single_utterance</strong>  &#x21d2; true, false </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Optional.</p>
+</div></span>
+  
+</li>
+
+    
   </ul>
 
 
@@ -287,10 +313,10 @@ js:
       <pre class="lines">
 
 
-49</pre>
+61</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/audio_config.rb', line 49</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/audio_config.rb', line 61</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dialogflow::V2::InputAudioConfig (class)">InputAudioConfig</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -350,10 +376,10 @@ the same session do not necessarily need to specify the same language.</p>
       <pre class="lines">
 
 
-49</pre>
+61</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/audio_config.rb', line 49</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/audio_config.rb', line 61</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dialogflow::V2::InputAudioConfig (class)">InputAudioConfig</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -405,10 +431,10 @@ the same session do not necessarily need to specify the same language.</p>
       <pre class="lines">
 
 
-49</pre>
+61</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/audio_config.rb', line 49</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/audio_config.rb', line 61</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dialogflow::V2::InputAudioConfig (class)">InputAudioConfig</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -470,10 +496,10 @@ for more details.</p>
       <pre class="lines">
 
 
-49</pre>
+61</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/audio_config.rb', line 49</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/audio_config.rb', line 61</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dialogflow::V2::InputAudioConfig (class)">InputAudioConfig</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -533,10 +559,83 @@ more details.</p>
       <pre class="lines">
 
 
-49</pre>
+61</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/audio_config.rb', line 49</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/audio_config.rb', line 61</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dialogflow::V2::InputAudioConfig (class)">InputAudioConfig</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="single_utterance=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="single_utterance-instance_method">
+  
+    #<strong>single_utterance</strong>  &#x21d2; <tt>true</tt>, <tt>false</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Optional. If <code>false</code> (default), recognition does not cease until the
+client closes the stream.
+If <code>true</code>, the recognizer will detect a single spoken utterance in input
+audio. Recognition ceases when it detects the audio&#39;s voice has
+stopped or paused. In this case, once a detected intent is received, the
+client should close the stream and start a new request with a new stream as
+needed.
+Note: This setting is relevant only for streaming methods.
+Note: When specified, InputAudioConfig.single_utterance takes precedence
+over StreamingDetectIntentRequest.single_utterance.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>true</tt>, <tt>false</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Optional. If <code>false</code> (default), recognition does not cease until the
+client closes the stream.
+If <code>true</code>, the recognizer will detect a single spoken utterance in input
+audio. Recognition ceases when it detects the audio&#39;s voice has
+stopped or paused. In this case, once a detected intent is received, the
+client should close the stream and start a new request with a new stream as
+needed.
+Note: This setting is relevant only for streaming methods.
+Note: When specified, InputAudioConfig.single_utterance takes precedence
+over StreamingDetectIntentRequest.single_utterance.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+61</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/audio_config.rb', line 61</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dialogflow::V2::InputAudioConfig (class)">InputAudioConfig</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
