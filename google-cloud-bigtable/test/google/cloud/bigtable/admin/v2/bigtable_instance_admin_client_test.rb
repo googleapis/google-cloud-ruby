@@ -455,7 +455,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
               formatted_name,
               display_name,
               type,
-              labels.to_h
+              labels
             )
           end
 
