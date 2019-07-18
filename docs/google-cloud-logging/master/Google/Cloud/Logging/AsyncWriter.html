@@ -441,17 +441,17 @@ immediately.</p>
       <pre class="lines">
 
 
+272
 273
 274
 275
 276
 277
 278
-279
-280</pre>
+279</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/async_writer.rb', line 273</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/async_writer.rb', line 272</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_flush'>flush</span>
   <span class='id identifier rubyid_synchronize'>synchronize</span> <span class='kw'>do</span>
@@ -539,12 +539,12 @@ transmitting log entries.</p>
       <pre class="lines">
 
 
+363
 364
-365
-366</pre>
+365</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/async_writer.rb', line 364</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/async_writer.rb', line 363</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_last_error'>last_error</span>
   <span class='id identifier rubyid_synchronize'>synchronize</span> <span class='lbrace'>{</span> <span class='ivar'>@last_error</span> <span class='rbrace'>}</span>
@@ -673,12 +673,12 @@ used in place of a ruby standard library logger object.</p>
       <pre class="lines">
 
 
+195
 196
-197
-198</pre>
+197</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/async_writer.rb', line 196</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/async_writer.rb', line 195</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_logger'>logger</span> <span class='id identifier rubyid_log_name'>log_name</span><span class='comma'>,</span> <span class='id identifier rubyid_resource'>resource</span><span class='comma'>,</span> <span class='id identifier rubyid_labels'>labels</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
   <span class='const'><span class='object_link'><a href="Logger.html" title="Google::Cloud::Logging::Logger (class)">Logger</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Logging.html#new-class_method" title="Google::Cloud::Logging.new (method)">new</a></span></span> <span class='kw'>self</span><span class='comma'>,</span> <span class='id identifier rubyid_log_name'>log_name</span><span class='comma'>,</span> <span class='id identifier rubyid_resource'>resource</span><span class='comma'>,</span> <span class='id identifier rubyid_labels'>labels</span>
@@ -781,14 +781,14 @@ transmitting log entries</p>
       <pre class="lines">
 
 
+330
 331
 332
 333
-334
-335</pre>
+334</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/async_writer.rb', line 331</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/async_writer.rb', line 330</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_on_error'>on_error</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
   <span class='id identifier rubyid_synchronize'>synchronize</span> <span class='kw'>do</span>
@@ -842,12 +842,12 @@ transmitting log entries</p>
       <pre class="lines">
 
 
+285
 286
-287
-288</pre>
+287</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/async_writer.rb', line 286</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/async_writer.rb', line 285</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_started?'>started?</span>
   <span class='op'>!</span><span class='id identifier rubyid_stopped?'>stopped?</span>
@@ -902,6 +902,7 @@ have been published.</p>
       <pre class="lines">
 
 
+206
 207
 208
 209
@@ -912,11 +913,10 @@ have been published.</p>
 214
 215
 216
-217
-218</pre>
+217</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/async_writer.rb', line 207</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/async_writer.rb', line 206</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_stop'>stop</span>
   <span class='id identifier rubyid_synchronize'>synchronize</span> <span class='kw'>do</span>
@@ -1023,6 +1023,7 @@ after the timeout, or <code>:forced</code> if it was forcibly killed.</p>
       <pre class="lines">
 
 
+251
 252
 253
 254
@@ -1035,11 +1036,10 @@ after the timeout, or <code>:forced</code> if it was forcibly killed.</p>
 261
 262
 263
-264
-265</pre>
+264</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/async_writer.rb', line 252</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/async_writer.rb', line 251</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_stop!'>stop!</span> <span class='id identifier rubyid_timeout'>timeout</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>force:</span> <span class='kw'>nil</span>
   <span class='kw'>return</span> <span class='symbol'>:stopped</span> <span class='kw'>if</span> <span class='id identifier rubyid_stopped?'>stopped?</span>
@@ -1102,12 +1102,12 @@ after the timeout, or <code>:forced</code> if it was forcibly killed.</p>
       <pre class="lines">
 
 
+293
 294
-295
-296</pre>
+295</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/async_writer.rb', line 294</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/async_writer.rb', line 293</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_stopped?'>stopped?</span>
   <span class='id identifier rubyid_synchronize'>synchronize</span> <span class='lbrace'>{</span> <span class='ivar'>@stopped</span> <span class='rbrace'>}</span>
@@ -1162,6 +1162,7 @@ to block until the writer is stopped.</p>
       <pre class="lines">
 
 
+226
 227
 228
 229
@@ -1170,11 +1171,10 @@ to block until the writer is stopped.</p>
 232
 233
 234
-235
-236</pre>
+235</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/async_writer.rb', line 227</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/async_writer.rb', line 226</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_wait!'>wait!</span> <span class='id identifier rubyid_timeout'>timeout</span> <span class='op'>=</span> <span class='kw'>nil</span>
   <span class='id identifier rubyid_synchronize'>synchronize</span> <span class='kw'>do</span>
@@ -1362,8 +1362,7 @@ item with the same key. See also <span class='object_link'><a href="Entry.html#l
 160
 161
 162
-163
-164</pre>
+163</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/async_writer.rb', line 132</span>
@@ -1390,9 +1389,8 @@ item with the same key. See also <span class='object_link'><a href="Entry.html#l
       <span class='ivar'>@batch</span><span class='period'>.</span><span class='id identifier rubyid_add'>add</span> <span class='id identifier rubyid_entry'>entry</span>
     <span class='kw'>end</span>
 
-    <span class='ivar'>@thread_pool</span> <span class='op'>||=</span> \
-      <span class='const'>Concurrent</span><span class='op'>::</span><span class='const'>CachedThreadPool</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span> <span class='label'>max_threads:</span> <span class='ivar'>@threads</span><span class='comma'>,</span>
-                                       <span class='label'>max_queue:</span>   <span class='ivar'>@max_queue</span>
+    <span class='ivar'>@thread_pool</span> <span class='op'>||=</span> <span class='const'>Concurrent</span><span class='op'>::</span><span class='const'>ThreadPoolExecutor</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span> \
+      <span class='label'>max_threads:</span> <span class='ivar'>@threads</span><span class='comma'>,</span> <span class='label'>max_queue:</span> <span class='ivar'>@max_queue</span>
     <span class='ivar'>@thread</span> <span class='op'>||=</span> <span class='const'>Thread</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span> <span class='lbrace'>{</span> <span class='id identifier rubyid_run_background'>run_background</span> <span class='rbrace'>}</span>
 
     <span class='id identifier rubyid_publish_batch!'>publish_batch!</span> <span class='kw'>if</span> <span class='ivar'>@batch</span><span class='period'>.</span><span class='id identifier rubyid_ready?'>ready?</span>
