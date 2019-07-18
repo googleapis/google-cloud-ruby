@@ -48,7 +48,7 @@ module Google
             @pause_cond = new_cond
 
             @inventory = Inventory.new self, @subscriber.stream_inventory
-            @callback_thread_pool = Concurrent::CachedThreadPool.new \
+            @callback_thread_pool = Concurrent::ThreadPoolExecutor.new \
               max_threads: @subscriber.callback_threads
 
             @stream_keepalive_task = Concurrent::TimerTask.new(
