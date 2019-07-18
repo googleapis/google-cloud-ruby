@@ -86,7 +86,8 @@ module Google
 
             @batch = nil
 
-            @thread_pool = Concurrent::FixedThreadPool.new @threads
+            @thread_pool = Concurrent::ThreadPoolExecutor.new \
+              max_threads: @threads
 
             @cond = new_cond
 

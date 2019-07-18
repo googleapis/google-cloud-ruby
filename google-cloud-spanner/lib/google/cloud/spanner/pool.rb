@@ -200,7 +200,8 @@ module Google
 
         def init
           # init the thread pool
-          @thread_pool = Concurrent::FixedThreadPool.new @threads
+          @thread_pool = Concurrent::ThreadPoolExecutor.new \
+            max_threads: @threads
           # init the queues
           @new_sessions_in_process = 0
           @all_sessions = []
