@@ -91,7 +91,7 @@ recommended during development.
 
 General instructions, environment variables, and configuration options are
 covered in the general [Authentication
-guide](https://googleapis.github.io/google-cloud-ruby/docs/authentication)
+guide](./google-cloud/AUTHENTICATION.md)
 for the `google-cloud` umbrella package. Specific instructions and environment
 variables for each individual service are linked from the README documents
 listed below for each service.
@@ -102,7 +102,7 @@ The preview examples below demonstrate how to provide the **Project ID** and
 ### Cloud Asset API (Beta)
 
 - [google-cloud-asset README](google-cloud-asset/README.md)
-- [google-cloud-asset API documentation](https://googleapis.github.io/google-cloud-ruby/docs/google-cloud-asset/latest)
+- [google-cloud-asset API documentation](https://googleapis.dev/ruby/google-cloud-asset/latest)
 - [google-cloud-asset on RubyGems](https://rubygems.org/gems/google-cloud-asset/)
 
 #### Quick Start
@@ -114,7 +114,7 @@ $ gem install google-cloud-asset
 ### BigQuery (GA)
 
 - [google-cloud-bigquery README](google-cloud-bigquery/README.md)
-- [google-cloud-bigquery API documentation](https://googleapis.github.io/google-cloud-ruby/docs/google-cloud-bigquery/latest)
+- [google-cloud-bigquery API documentation](https://googleapis.dev/ruby/google-cloud-bigquery/latest)
 - [google-cloud-bigquery on RubyGems](https://rubygems.org/gems/google-cloud-bigquery)
 - [Google BigQuery documentation](https://cloud.google.com/bigquery/docs)
 
@@ -156,7 +156,7 @@ end
 ### BigQuery Data Transfer API (Beta)
 
 - [google-bigquery-data_transfer README](google-cloud-bigquery-data_transfer/README.md)
-- [google-bigquery-data_transfer API documentation](https://googleapis.github.io/google-cloud-ruby/docs/google-cloud-bigquery-data_transfer/latest)
+- [google-bigquery-data_transfer API documentation](https://googleapis.dev/ruby/google-cloud-bigquery-data_transfer/latest)
 - [google-bigquery-data_transfer on RubyGems](https://rubygems.org/gems/google-cloud-bigquery-data_transfer/)
 - [Google BigQuery Data Transfer documentation](https://cloud.google.com/bigquery/transfer/)
 
@@ -191,7 +191,7 @@ end
 ### Cloud Bigtable (Beta)
 
 - [google-cloud-bigtable README](google-cloud-bigtable/README.md)
-- [google-cloud-bigtable API documentation](https://googleapis.github.io/google-cloud-ruby/docs/google-cloud-bigtable/latest)
+- [google-cloud-bigtable API documentation](https://googleapis.dev/ruby/google-cloud-bigtable/latest)
 - [google-cloud-bigtable on RubyGems](https://rubygems.org/gems/google-cloud-bigtable)
 - [Cloud Bigtable documentation](https://cloud.google.com/bigtable/docs)
 
@@ -224,7 +224,7 @@ table.mutate_row(entry)
 ### Cloud Datastore (GA)
 
 - [google-cloud-datastore README](google-cloud-datastore/README.md)
-- [google-cloud-datastore API documentation](https://googleapis.github.io/google-cloud-ruby/docs/google-cloud-datastore/latest)
+- [google-cloud-datastore API documentation](https://googleapis.dev/ruby/google-cloud-datastore/latest)
 - [google-cloud-datastore on RubyGems](https://rubygems.org/gems/google-cloud-datastore)
 - [Google Cloud Datastore documentation](https://cloud.google.com/datastore/docs)
 
@@ -266,7 +266,7 @@ tasks = datastore.run query
 ### Stackdriver Debugger (Beta)
 
 - [google-cloud-debugger README](google-cloud-debugger/README.md)
-- [google-cloud-debugger instrumentation documentation](https://googleapis.github.io/google-cloud-ruby/docs/google-cloud-debugger/latest/file.INSTRUMENTATION)
+- [google-cloud-debugger instrumentation documentation](./google-cloud-debugger/INSTRUMENTATION.md)
 - [google-cloud-debugger on RubyGems](https://rubygems.org/gems/google-cloud-debugger)
 - [Stackdriver Debugger documentation](https://cloud.google.com/debugger/docs)
 
@@ -288,7 +288,7 @@ debugger.start
 ### Cloud DNS (Alpha)
 
 - [google-cloud-dns README](google-cloud-dns/README.md)
-- [google-cloud-dns API documentation](https://googleapis.github.io/google-cloud-ruby/docs/google-cloud-dns/latest)
+- [google-cloud-dns API documentation](https://googleapis.dev/ruby/google-cloud-dns/latest)
 - [google-cloud-dns on RubyGems](https://rubygems.org/gems/google-cloud-dns)
 - [Google Cloud DNS documentation](https://cloud.google.com/dns/docs)
 
@@ -324,7 +324,7 @@ end
 ### Container Analysis (Alpha)
 
 - [google-cloud-container_analysis README](google-cloud-container_analysis/README.md)
-- [google-cloud-container_analysis API documentation](https://googleapis.github.io/google-cloud-ruby/docs/google-cloud-container_analysis/latest)
+- [google-cloud-container_analysis API documentation](https://googleapis.dev/ruby/google-cloud-container_analysis/latest)
 - [google-cloud-container_analysis on RubyGems](https://rubygems.org/gems/google-cloud-container_analysis)
 - [Container Analysis documentation](https://cloud.google.com/container-registry/docs/container-analysis/)
 
@@ -350,7 +350,7 @@ end
 ### Container Engine (Alpha)
 
 - [google-cloud-container README](google-cloud-container/README.md)
-- [google-cloud-container API documentation](https://googleapis.github.io/google-cloud-ruby/docs/google-cloud-container/latest)
+- [google-cloud-container API documentation](https://googleapis.dev/ruby/google-cloud-container/latest)
 - [google-cloud-container on RubyGems](https://rubygems.org/gems/google-cloud-container)
 - [Container Engine documentation](https://cloud.google.com/kubernetes-engine/docs/)
 
@@ -374,7 +374,7 @@ response = cluster_manager_client.list_clusters(project_id_2, zone)
 ### Cloud Dataproc (Alpha)
 
 - [google-cloud-dataproc README](google-cloud-dataproc/README.md)
-- [google-cloud-dataproc API documentation](https://googleapis.github.io/google-cloud-ruby/docs/google-cloud-dataproc/latest)
+- [google-cloud-dataproc API documentation](https://googleapis.dev/ruby/google-cloud-dataproc/latest)
 - [google-cloud-dataproc on RubyGems](https://rubygems.org/gems/google-cloud-dataproc)
 - [Google Cloud Dataproc documentation](https://cloud.google.com/dataproc/docs)
 
@@ -410,7 +410,7 @@ end
 ### Data Loss Prevention (Alpha)
 
 - [google-cloud-dlp README](google-cloud-dlp/README.md)
-- [google-cloud-dlp API documentation](https://googleapis.github.io/google-cloud-ruby/docs/google-cloud-dlp/latest)
+- [google-cloud-dlp API documentation](https://googleapis.dev/ruby/google-cloud-dlp/latest)
 - [google-cloud-dlp on RubyGems](https://rubygems.org/gems/google-cloud-dlp)
 - [Data Loss Prevention documentation](https://cloud.google.com/dlp/docs)
 
@@ -438,7 +438,7 @@ response = dlp_service_client.inspect_content(inspect_config, items)
 ### Dialogflow API (Alpha)
 
 - [google-cloud-dialogflow README](google-cloud-dialogflow/README.md)
-- [google-cloud-dialogflow API documentation](https://googleapis.github.io/google-cloud-ruby/docs/google-cloud-dialogflow/latest)
+- [google-cloud-dialogflow API documentation](https://googleapis.dev/ruby/google-cloud-dialogflow/latest)
 - [google-cloud-dialogflow on RubyGems](https://rubygems.org/gems/google-cloud-dialogflow)
 - [Dialogflow API documentation](https://cloud.google.com/dialogflow-enterprise/docs/)
 
@@ -451,7 +451,7 @@ $ gem install google-cloud-dialogflow
 ### Stackdriver Error Reporting (Beta)
 
 - [google-cloud-error_reporting README](google-cloud-error_reporting/README.md)
-- [google-cloud-error_reporting instrumentation documentation](https://googleapis.github.io/google-cloud-ruby/docs/google-cloud-error_reporting/latest/file.INSTRUMENTATION)
+- [google-cloud-error_reporting instrumentation documentation](./google-cloud-error_reporting/INSTRUMENTATION.md)
 - [google-cloud-error_reporting on RubyGems](https://rubygems.org/gems/google-cloud-error_reporting)
 - [Stackdriver Error Reporting documentation](https://cloud.google.com/error-reporting/docs)
 
@@ -477,7 +477,7 @@ end
 ### Cloud Firestore (GA)
 
 - [google-cloud-firestore README](google-cloud-firestore/README.md)
-- [google-cloud-firestore API documentation](https://googleapis.github.io/google-cloud-ruby/docs/google-cloud-firestore/latest)
+- [google-cloud-firestore API documentation](https://googleapis.dev/ruby/google-cloud-firestore/latest)
 - [google-cloud-firestore on RubyGems](https://rubygems.org/gems/google-cloud-firestore)
 - [Google Cloud Firestore documentation](https://cloud.google.com/firestore/docs)
 
@@ -513,7 +513,7 @@ end
 ### Cloud Key Management Service (GA)
 
 - [google-cloud-kms README](google-cloud-kms/README.md)
-- [google-cloud-kms API documentation](https://googleapis.github.io/google-cloud-ruby/docs/google-cloud-kms/latest)
+- [google-cloud-kms API documentation](https://googleapis.dev/ruby/google-cloud-kms/latest)
 - [google-cloud-kms on RubyGems](https://rubygems.org/gems/google-cloud-kms)
 - [Google Cloud KMS documentation](https://cloud.google.com/kms/docs/)
 
@@ -547,7 +547,7 @@ end
 ### Stackdriver Logging (GA)
 
 - [google-cloud-logging README](google-cloud-logging/README.md)
-- [google-cloud-logging API documentation](https://googleapis.github.io/google-cloud-ruby/docs/google-cloud-logging/latest)
+- [google-cloud-logging API documentation](https://googleapis.dev/ruby/google-cloud-logging/latest)
 - [google-cloud-logging on RubyGems](https://rubygems.org/gems/google-cloud-logging)
 - [Stackdriver Logging documentation](https://cloud.google.com/logging/docs/)
 
@@ -586,7 +586,7 @@ logging.write_entries entry
 ### Cloud Natural Language API (Alpha)
 
 - [google-cloud-language README](google-cloud-language/README.md)
-- [google-cloud-language API documentation](https://googleapis.github.io/google-cloud-ruby/docs/google-cloud-language/latest)
+- [google-cloud-language API documentation](https://googleapis.dev/ruby/google-cloud-language/latest)
 - [google-cloud-language on RubyGems](https://rubygems.org/gems/google-cloud-language)
 - [Google Cloud Natural Language API documentation](https://cloud.google.com/natural-language/docs)
 
@@ -620,7 +620,7 @@ annotation.tokens.count #=> 13
 ### Cloud OS Login (Alpha)
 
 - [google-cloud-os_login README](google-cloud-os_login/README.md)
-- [google-cloud-os_login API documentation](https://googleapis.github.io/google-cloud-ruby/docs/google-cloud-os_login/latest)
+- [google-cloud-os_login API documentation](https://googleapis.dev/ruby/google-cloud-os_login/latest)
 - [google-cloud-os_login on RubyGems](https://rubygems.org/gems/google-cloud-os_login)
 - [Google Cloud DNS documentation](https://cloud.google.com/compute/docs/oslogin/rest/)
 
@@ -633,7 +633,7 @@ $ gem install google-cloud-os_login
 ### Phishing Protection (Alpha)
 
 - [google-cloud-phishing_protection README](google-cloud-phishing_protection/README.md)
-- [google-cloud-phishing_protection API documentation](https://googleapis.github.io/google-cloud-ruby/docs/google-cloud-phishing_protection/latest)
+- [google-cloud-phishing_protection API documentation](https://googleapis.dev/ruby/google-cloud-phishing_protection/latest)
 - [google-cloud-phishing_protection on RubyGems](https://rubygems.org/gems/google-cloud-phishing_protection)
 - [Phishing Protection documentation](https://cloud.google.com/phishing-protection/docs/)
 
@@ -646,7 +646,7 @@ $ gem install google-cloud-phishing_protection
 ### Cloud Pub/Sub (Beta)
 
 - [google-cloud-pubsub README](google-cloud-pubsub/README.md)
-- [google-cloud-pubsub API documentation](https://googleapis.github.io/google-cloud-ruby/docs/google-cloud-pubsub/latest)
+- [google-cloud-pubsub API documentation](https://googleapis.dev/ruby/google-cloud-pubsub/latest)
 - [google-cloud-pubsub on RubyGems](https://rubygems.org/gems/google-cloud-pubsub)
 - [Google Cloud Pub/Sub documentation](https://cloud.google.com/pubsub/docs)
 
@@ -691,7 +691,7 @@ subscriber.stop.wait!
 ### Recaptcha Enterprise (Alpha)
 
 - [google-cloud-recaptcha_enterprise README](google-cloud-recaptcha_enterprise/README.md)
-- [google-cloud-recaptcha_enterprise API documentation](https://googleapis.github.io/google-cloud-ruby/docs/google-cloud-recaptcha_enterprise/latest)
+- [google-cloud-recaptcha_enterprise API documentation](https://googleapis.dev/ruby/google-cloud-recaptcha_enterprise/latest)
 - [google-cloud-recaptcha_enterprise on RubyGems](https://rubygems.org/gems/google-cloud-recaptcha_enterprise)
 - [Recaptcha Enterprise documentation](https://cloud.google.com/recaptcha-enterprise/docs/)
 
@@ -704,7 +704,7 @@ $ gem install google-cloud-recaptcha_enterprise
 ### Cloud Redis API (Alpha)
 
 - [google-cloud-redis README](google-cloud-redis/README.md)
-- [google-cloud-redis API documentation](https://googleapis.github.io/google-cloud-ruby/docs/google-cloud-redis/latest)
+- [google-cloud-redis API documentation](https://googleapis.dev/ruby/google-cloud-redis/latest)
 - [google-cloud-redis on RubyGems](https://rubygems.org/gems/google-cloud-redis)
 - [Cloud Redis API documentation](https://cloud.google.com/memorystore/docs/redis/)
 
@@ -718,7 +718,7 @@ $ gem install google-cloud-redis
 ### Cloud Resource Manager (Alpha)
 
 - [google-cloud-resource_manager README](google-cloud-resource_manager/README.md)
-- [google-cloud-resource_manager API documentation](https://googleapis.github.io/google-cloud-ruby/docs/google-cloud-resource_manager/latest)
+- [google-cloud-resource_manager API documentation](https://googleapis.dev/ruby/google-cloud-resource_manager/latest)
 - [google-cloud-resource_manager on RubyGems](https://rubygems.org/gems/google-cloud-resource_manager)
 - [Google Cloud Resource Manager documentation](https://cloud.google.com/resource-manager/)
 
@@ -753,7 +753,7 @@ projects = resource_manager.projects filter: "labels.env:production"
 ### Stackdriver Trace (Beta)
 
 - [google-cloud-trace README](google-cloud-trace/README.md)
-- [google-cloud-trace instrumentation documentation](https://googleapis.github.io/google-cloud-ruby/docs/google-cloud-trace/latest/file.INSTRUMENTATION)
+- [google-cloud-trace instrumentation documentation](./google-cloud-trace/INSTRUMENTATION.md)
 - [google-cloud-trace on RubyGems](https://rubygems.org/gems/google-cloud-trace)
 - [Stackdriver Trace documentation](https://cloud.google.com/trace/docs/)
 
@@ -779,7 +779,7 @@ end
 ### Cloud Spanner API (GA)
 
 - [google-cloud-spanner README](google-cloud-spanner/README.md)
-- [google-cloud-spanner API documentation](https://googleapis.github.io/google-cloud-ruby/docs/google-cloud-spanner/latest)
+- [google-cloud-spanner API documentation](https://googleapis.dev/ruby/google-cloud-spanner/latest)
 - [google-cloud-spanner on RubyGems](https://rubygems.org/gems/google-cloud-spanner)
 - [Google Cloud Speech API documentation](https://cloud.google.com/spanner/docs)
 
@@ -810,7 +810,7 @@ end
 ### Cloud Speech API (Alpha)
 
 - [google-cloud-speech README](google-cloud-speech/README.md)
-- [google-cloud-speech API documentation](https://googleapis.github.io/google-cloud-ruby/docs/google-cloud-speech/latest)
+- [google-cloud-speech API documentation](https://googleapis.dev/ruby/google-cloud-speech/latest)
 - [google-cloud-speech on RubyGems](https://rubygems.org/gems/google-cloud-speech)
 - [Google Cloud Speech API documentation](https://cloud.google.com/speech/docs)
 
@@ -848,7 +848,7 @@ steps:
 1. [Select or create a Cloud Platform project.](https://console.cloud.google.com/project)
 2. [Enable billing for your project.](https://cloud.google.com/billing/docs/how-to/modify-project#enable_billing_for_a_project)
 3. [Enable the Cloud Scheduler API.](https://console.cloud.google.com/apis/library/cloudscheduler.googleapis.com)
-4. [Setup Authentication.](https://googleapis.github.io/google-cloud-ruby/#/docs/google-cloud/master/guides/authentication)
+4. [Setup Authentication.](./google-cloud-scheduler/AUTHENTICATION.md)
 
 ### Installation
 ```
@@ -863,14 +863,14 @@ $ gem install google-cloud-scheduler
 - View this [repository's main README](https://github.com/googleapis/google-cloud-ruby/blob/master/README.md)
   to see the full list of Cloud APIs that we cover.
 
-[Client Library Documentation]: https://googleapis.github.io/google-cloud-ruby/#/docs/google-cloud-scheduler/latest/google/cloud/scheduler/v1beta1
+[Client Library Documentation]: https://googleapis.dev/ruby/google-cloud-scheduler/latest
 [Product Documentation]: https://cloud.google.com/cloudscheduler
 
 ## Enabling Logging
 
 To enable logging for this library, set the logger for the underlying [gRPC](https://github.com/grpc/grpc/tree/master/src/ruby) library.
 The logger that you set may be a Ruby stdlib [`Logger`](https://ruby-doc.org/stdlib-2.5.0/libdoc/logger/rdoc/Logger.html) as shown below,
-or a [`Google::Cloud::Logging::Logger`](https://googleapis.github.io/google-cloud-ruby/#/docs/google-cloud-logging/latest/google/cloud/logging/logger)
+or a [`Google::Cloud::Logging::Logger`](https://googleapis.dev/ruby/google-cloud-logging/latest)
 that will write logs to [Stackdriver Logging](https://cloud.google.com/logging/). See [grpc/logconfig.rb](https://github.com/grpc/grpc/blob/master/src/ruby/lib/grpc/logconfig.rb)
 and the gRPC [spec_helper.rb](https://github.com/grpc/grpc/blob/master/src/ruby/spec/spec_helper.rb) for additional information.
 
@@ -895,7 +895,7 @@ end
 ### Cloud Security Center API (Alpha)
 
 - [google-cloud-security_center README](google-cloud-security_center/README.md)
-- [google-cloud-security_center API documentation](https://googleapis.github.io/google-cloud-ruby/docs/google-cloud-security_center/latest)
+- [google-cloud-security_center API documentation](https://googleapis.dev/ruby/google-cloud-security_center/latest)
 - [google-cloud-security_center on RubyGems](https://rubygems.org/gems/google-cloud-security_center)
 - [Google Cloud Security Center API documentation](https://cloud.google.com/security-command-center/docs)
 
@@ -908,7 +908,7 @@ $ gem install google-cloud-security_center
 ### Cloud Storage (GA)
 
 - [google-cloud-storage README](google-cloud-storage/README.md)
-- [google-cloud-storage API documentation](https://googleapis.github.io/google-cloud-ruby/docs/google-cloud-storage/latest)
+- [google-cloud-storage API documentation](https://googleapis.dev/ruby/google-cloud-storage/latest)
 - [google-cloud-storage on RubyGems](https://rubygems.org/gems/google-cloud-storage)
 - [Google Cloud Storage documentation](https://cloud.google.com/storage/docs)
 
@@ -943,7 +943,7 @@ file.copy backup, file.name
 ### Cloud Talent Solutions API (Alpha)
 
 - [google-cloud-talent README](google-cloud-talent/README.md)
-- [google-cloud-talent API documentation](https://googleapis.github.io/google-cloud-ruby/docs/google-cloud-talent/latest)
+- [google-cloud-talent API documentation](https://googleapis.dev/ruby/google-cloud-talent/latest)
 - [google-cloud-talent on RubyGems](https://rubygems.org/gems/google-cloud-talent/)
 - [Google Cloud Talent Solutions documentation](https://cloud.google.com/talent-solution/docs)
 
@@ -981,7 +981,7 @@ $ gem install google-cloud-talent
 ### Cloud Tasks API (Alpha)
 
 - [google-cloud-tasks README](google-cloud-tasks/README.md)
-- [google-cloud-tasks API documentation](https://googleapis.github.io/google-cloud-ruby/docs/google-cloud-tasks/latest)
+- [google-cloud-tasks API documentation](https://googleapis.dev/ruby/google-cloud-tasks/latest)
 - [google-cloud-tasks on RubyGems](https://rubygems.org/gems/google-cloud-tasks/)
 
 #### Quick Start
@@ -1039,7 +1039,7 @@ File.write("example.mp3", response.audio_content, mode: "wb")
 ### Cloud Translation API (GA)
 
 - [google-cloud-translate README](google-cloud-translate/README.md)
-- [google-cloud-translate API documentation](https://googleapis.github.io/google-cloud-ruby/docs/google-cloud-translate/latest)
+- [google-cloud-translate API documentation](https://googleapis.dev/ruby/google-cloud-translate/latest)
 - [google-cloud-translate on RubyGems](https://rubygems.org/gems/google-cloud-translate)
 - [Google Cloud Translation API documentation](https://cloud.google.com/translation/docs)
 
@@ -1069,7 +1069,7 @@ translation.text #=> "Salve mundi!"
 ### Cloud Vision API (Alpha)
 
 - [google-cloud-vision README](google-cloud-vision/README.md)
-- [google-cloud-vision API documentation](https://googleapis.github.io/google-cloud-ruby/docs/google-cloud-vision/latest)
+- [google-cloud-vision API documentation](https://googleapis.dev/ruby/google-cloud-vision/latest)
 - [google-cloud-vision on RubyGems](https://rubygems.org/gems/google-cloud-vision)
 - [Google Cloud Vision API documentation](https://cloud.google.com/vision/docs)
 
@@ -1099,7 +1099,7 @@ response = image_annotator_client.batch_annotate_images(requests)
 ### Stackdriver Monitoring API (Beta)
 
 - [google-cloud-monitoring README](google-cloud-monitoring/README.md)
-- [google-cloud-monitoring API documentation](https://googleapis.github.io/google-cloud-ruby/docs/google-cloud-monitoring/latest)
+- [google-cloud-monitoring API documentation](https://googleapis.dev/ruby/google-cloud-monitoring/latest)
 - [google-cloud-monitoring on RubyGems](https://rubygems.org/gems/google-cloud-monitoring)
 - [Google Cloud Monitoring API documentation](https://cloud.google.com/monitoring/docs)
 
@@ -1135,7 +1135,7 @@ $ gem install google-cloud-monitoring
 ### Cloud Video Intelligence API (GA)
 
 - [google-cloud-video_intelligence README](google-cloud-video_intelligence/README.md)
-- [google-cloud-video_intelligence API documentation](https://googleapis.github.io/google-cloud-ruby/docs/google-cloud-video_intelligence/latest)
+- [google-cloud-video_intelligence API documentation](https://googleapis.dev/ruby/google-cloud-video_intelligence/latest)
 - [google-cloud-video_intelligence on RubyGems](https://rubygems.org/gems/google-cloud-video_intelligence)
 - [Google Cloud Video Intelligence API documentation](https://cloud.google.com/video-intelligence/docs)
 

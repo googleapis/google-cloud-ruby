@@ -212,5 +212,28 @@ for version in ['v2', 'v2beta2', 'v2beta3']:
         'Google::Cloud::Tasks::VERSION'
     )
 
+# Fix links for devsite migration
+for file in ['lib/**/*.rb', '*.md']:
+    s.replace(
+        file,
+        'https://googleapis.github.io/google-cloud-ruby/#/docs/google-cloud-logging/latest/google/cloud/logging/logger',
+        'https://googleapis.dev/ruby/google-cloud-logging/latest'
+    )
+s.replace(
+    '*.md',
+    'https://googleapis.github.io/google-cloud-ruby/#/docs/.*/authentication',
+    './AUTHENTICATION.md'
+)
+s.replace(
+    'lib/**/*.rb',
+    'https://googleapis.github.io/google-cloud-ruby/#/docs/.*/authentication',
+    'https://googleapis.dev/ruby/google-cloud-tasks/latest/file.AUTHENTICATION.html'
+)
+s.replace(
+    'README.md',
+    'github.io/google-cloud-ruby/#/docs/google-cloud-tasks/latest/.*$',
+    'dev/ruby/google-cloud-tasks/latest'
+)
+
 # Generate the helper methods
 call('bundle update && bundle exec rake generate_partials', shell=True)

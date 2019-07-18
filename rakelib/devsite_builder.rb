@@ -16,7 +16,7 @@ class DevsiteBuilder < YardBuilder
       input_dir = "#{master_dir + gem}"
       output_dir = "#{gh_pages_dir + 'docs' + gem + 'master'}"
       build_gem_docs input_dir, output_dir
-      puts "Build #{gem} documentation for commit #{git_ref}"
+      puts "Built #{gem} documentation for commit #{git_ref}"
     end
   end
 
@@ -35,8 +35,17 @@ class DevsiteBuilder < YardBuilder
     gem, version = split_tag tag
     add_release gem, version
     publish_docs_for_tag tag
-    ensure_gem_latest_dir gem
-    puts "Add #{gem} documentation for #{version} release"
+    puts "Added #{gem} documentation for #{version} release"
+  end
+
+  def rebuild_tag *tags
+    return if case_insensitive_check!
+
+    tags.flatten.each do |tag|
+      gem, version = split_tag tag
+      publish_docs_for_tag tag
+      puts "Rebuilt #{gem} documentation for #{version} version"
+    end
   end
 
   def republish_all

@@ -164,7 +164,15 @@ for version in ['v1', 'v1beta1']:
         'Gem.loaded_specs\[.*\]\.version\.version',
         'Google::Cloud::Firestore::VERSION'
     )
+
+# Fix links for devsite migration
 s.replace(
-    'lib/google/cloud/firestore/v1beta1.rb',
-    '\[Beta\]',
-    '[GA]')
+    'lib/**/*.rb',
+    'https://googleapis.github.io/google-cloud-ruby/#/docs/google-cloud-logging/latest/google/cloud/logging/logger',
+    'https://googleapis.dev/ruby/google-cloud-logging/latest'
+)
+s.replace(
+    'lib/**/*.rb',
+    'https://googleapis.github.io/google-cloud-ruby/#/docs/.*/authentication',
+    'https://googleapis.dev/ruby/google-cloud-firestore/latest/file.AUTHENTICATION.html'
+)

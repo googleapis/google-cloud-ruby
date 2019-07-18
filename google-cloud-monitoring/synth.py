@@ -172,3 +172,26 @@ s.replace(
     'Gem.loaded_specs\[.*\]\.version\.version',
     'Google::Cloud::Monitoring::VERSION'
 )
+
+# Fix links for devsite migration
+for file in ['lib/**/*.rb', '*.md']:
+    s.replace(
+        file,
+        'https://googleapis.github.io/google-cloud-ruby/#/docs/google-cloud-logging/latest/google/cloud/logging/logger',
+        'https://googleapis.dev/ruby/google-cloud-logging/latest'
+    )
+s.replace(
+    '*.md',
+    'https://googleapis.github.io/google-cloud-ruby/#/docs/.*/authentication',
+    './AUTHENTICATION.md'
+)
+s.replace(
+    'lib/**/*.rb',
+    'https://googleapis.github.io/google-cloud-ruby/#/docs/.*/authentication',
+    'https://googleapis.dev/ruby/google-cloud-monitoring/latest/file.AUTHENTICATION.html'
+)
+s.replace(
+    'README.md',
+    'github.io/google-cloud-ruby/#/docs/google-cloud-monitoring/latest/.*$',
+    'dev/ruby/google-cloud-monitoring/latest'
+)

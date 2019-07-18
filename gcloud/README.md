@@ -9,7 +9,7 @@ repository](https://github.com/googleapis/google-cloud-ruby) for more
 information about using the `google-cloud` umbrella gem and the individual
 service gems.
 
-- [gcloud API documentation](https://googleapis.github.io/google-cloud-ruby/docs/gcloud/latest)
+- [gcloud API documentation](https://googleapis.dev/ruby/docs/gcloud/latest)
 - [gcloud on RubyGems](https://rubygems.org/gems/gcloud)
 
 ## Quick Start
@@ -21,7 +21,7 @@ $ gem install gcloud
 ## Authentication
 
 Instructions and configuration options are covered in the [Authentication
-Guide](https://googleapis.github.io/google-cloud-ruby/docs/gcloud/latest/file.AUTHENTICATION).
+Guide](./AUTHENTICATION.md).
 
 ## Example
 
@@ -60,18 +60,18 @@ change at any time and the public API should not be considered stable.
 Contributions to this library are always welcome and highly encouraged.
 
 See the [Contributing
-Guide](https://googleapis.github.io/google-cloud-ruby/docs/gcloud/latest/file.CONTRIBUTING)
+Guide](./CONTRIBUTING.md)
 for more information on how to get started.
 
 Please note that this project is released with a Contributor Code of Conduct. By
 participating in this project you agree to abide by its terms. See [Code of
-Conduct](https://googleapis.github.io/google-cloud-ruby/docs/gcloud/latest/file.CODE_OF_CONDUCT)
+Conduct](./CODE_OF_CONDUCT.md)
 for more information.
 
 ## License
 
 This library is licensed under Apache 2.0. Full license text is available in
-[LICENSE](https://googleapis.github.io/google-cloud-ruby/docs/gcloud/latest/file.LICENSE).
+[LICENSE](./LICENSE.md).
 
 ## Support
 

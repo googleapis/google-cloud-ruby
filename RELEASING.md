@@ -108,7 +108,7 @@ green, you may create a release as follows:
 
 1. Verify the [GitHub release summary](https://github.com/googleapis/google-cloud-ruby/releases), making sure that it fits the format of other releases, mirrors the changelog, is tagged to the appropriate commit hash, and is for the correct version.
 
-1. Verify that the new version is displayed on the [google-cloud-ruby gh-pages doc site](https://http://googleapis.github.io/google-cloud-ruby/docs/). Or, to save time when releasing many gems at once, check out the gh-pages branch and pull repeatedly to confirm that it has received the new docs.
+1. Verify that the new version is displayed on the [google-cloud-ruby gh-pages doc site](https://googleapis.dev/ruby/#{gem_name}/latest). Or, to save time when releasing many gems at once, check out the gh-pages branch and pull repeatedly to confirm that it has received the new docs.
 
    If the gh-pages branch has not been updated, [inspect the Kokoro build logs](#checking-the-status-of-kokoro-builds) to confirm that the rake `post` task succeeded.
 

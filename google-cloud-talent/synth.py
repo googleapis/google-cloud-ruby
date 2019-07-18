@@ -202,5 +202,28 @@ s.replace(
     'Google::Cloud::Talent::VERSION'
 )
 
+# Fix links for devsite migration
+for file in ['lib/**/*.rb', '*.md']:
+    s.replace(
+        file,
+        'https://googleapis.github.io/google-cloud-ruby/#/docs/google-cloud-logging/latest/google/cloud/logging/logger',
+        'https://googleapis.dev/ruby/google-cloud-logging/latest'
+    )
+s.replace(
+    '*.md',
+    'https://googleapis.github.io/google-cloud-ruby/#/docs/.*/authentication',
+    './AUTHENTICATION.md'
+)
+s.replace(
+    'lib/**/*.rb',
+    'https://googleapis.github.io/google-cloud-ruby/#/docs/.*/authentication',
+    'https://googleapis.dev/ruby/google-cloud-talent/latest/file.AUTHENTICATION.html'
+)
+s.replace(
+    'README.md',
+    'github.io/google-cloud-ruby/#/docs/google-cloud-talent/latest/.*$',
+    'dev/ruby/google-cloud-talent/latest'
+)
+
 # Generate the helper methods
 call(f'bundle update && bundle exec rake generate_partials TALENT_SERVICES={",".join(services)}', shell=True)

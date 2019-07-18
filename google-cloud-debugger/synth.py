@@ -153,3 +153,15 @@ s.replace(
     'Gem.loaded_specs\[.*\]\.version\.version',
     'Google::Cloud::Debugger::VERSION'
 )
+
+# Fix links for devsite migration
+s.replace(
+    'lib/**/*.rb',
+    'https://googleapis.github.io/google-cloud-ruby/#/docs/.*/authentication',
+    'https://googleapis.dev/ruby/google-cloud-debugger/latest/file.AUTHENTICATION.html'
+)
+s.replace(
+    'lib/**/*.rb',
+    'https://googleapis.github.io/google-cloud-ruby/#/docs/google-cloud-logging/latest/google/cloud/logging/logger',
+    'https://googleapis.dev/ruby/google-cloud-logging/latest'
+)
