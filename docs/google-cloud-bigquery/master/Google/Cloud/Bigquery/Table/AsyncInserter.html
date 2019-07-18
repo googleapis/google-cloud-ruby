@@ -711,17 +711,17 @@ rows. Default is 4.</p>
       <pre class="lines">
 
 
-185
 186
 187
 188
 189
 190
 191
-192</pre>
+192
+193</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/table/async_inserter.rb', line 185</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/table/async_inserter.rb', line 186</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_flush'>flush</span>
   <span class='id identifier rubyid_synchronize'>synchronize</span> <span class='kw'>do</span>
@@ -803,7 +803,6 @@ to each row before the request is sent.</p>
       <pre class="lines">
 
 
-111
 112
 113
 114
@@ -833,10 +832,11 @@ to each row before the request is sent.</p>
 138
 139
 140
-141</pre>
+141
+142</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/table/async_inserter.rb', line 111</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/table/async_inserter.rb', line 112</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_insert'>insert</span> <span class='id identifier rubyid_rows'>rows</span><span class='comma'>,</span> <span class='label'>insert_ids:</span> <span class='kw'>nil</span>
   <span class='kw'>return</span> <span class='kw'>nil</span> <span class='kw'>if</span> <span class='id identifier rubyid_rows'>rows</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
@@ -916,12 +916,12 @@ to each row before the request is sent.</p>
       <pre class="lines">
 
 
-199
 200
-201</pre>
+201
+202</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/table/async_inserter.rb', line 199</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/table/async_inserter.rb', line 200</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_started?'>started?</span>
   <span class='op'>!</span><span class='id identifier rubyid_stopped?'>stopped?</span>
@@ -976,7 +976,6 @@ have been inserted.</p>
       <pre class="lines">
 
 
-151
 152
 153
 154
@@ -986,10 +985,11 @@ have been inserted.</p>
 158
 159
 160
-161</pre>
+161
+162</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/table/async_inserter.rb', line 151</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/table/async_inserter.rb', line 152</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_stop'>stop</span>
   <span class='id identifier rubyid_synchronize'>synchronize</span> <span class='kw'>do</span>
@@ -1049,12 +1049,12 @@ have been inserted.</p>
       <pre class="lines">
 
 
-208
 209
-210</pre>
+210
+211</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/table/async_inserter.rb', line 208</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/table/async_inserter.rb', line 209</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_stopped?'>stopped?</span>
   <span class='id identifier rubyid_synchronize'>synchronize</span> <span class='lbrace'>{</span> <span class='ivar'>@stopped</span> <span class='rbrace'>}</span>
@@ -1109,17 +1109,17 @@ call <span class='object_link'><a href="#wait!-instance_method" title="Google::C
       <pre class="lines">
 
 
-171
 172
 173
 174
 175
 176
 177
-178</pre>
+178
+179</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/table/async_inserter.rb', line 171</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/table/async_inserter.rb', line 172</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_wait!'>wait!</span> <span class='id identifier rubyid_timeout'>timeout</span> <span class='op'>=</span> <span class='kw'>nil</span>
   <span class='id identifier rubyid_synchronize'>synchronize</span> <span class='kw'>do</span>
