@@ -78,8 +78,8 @@ module Google
           @max_queue = max_queue
           @threads   = threads
 
-          @thread_pool = Concurrent::CachedThreadPool.new max_threads: @threads,
-                                                          max_queue: @max_queue
+          @thread_pool = Concurrent::ThreadPoolExecutor.new \
+            max_threads: @threads, max_queue: @max_queue
 
           @error_callbacks = []
 

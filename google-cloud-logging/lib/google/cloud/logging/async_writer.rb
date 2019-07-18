@@ -151,9 +151,8 @@ module Google
               @batch.add entry
             end
 
-            @thread_pool ||= \
-              Concurrent::CachedThreadPool.new max_threads: @threads,
-                                               max_queue:   @max_queue
+            @thread_pool ||= Concurrent::ThreadPoolExecutor.new \
+              max_threads: @threads, max_queue: @max_queue
             @thread ||= Thread.new { run_background }
 
             publish_batch! if @batch.ready?
