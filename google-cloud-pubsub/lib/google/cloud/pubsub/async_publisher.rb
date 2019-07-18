@@ -193,9 +193,9 @@ module Google
 
         def init_resources!
           @first_published_at   ||= Time.now
-          @publish_thread_pool  ||= Concurrent::CachedThreadPool.new \
+          @publish_thread_pool  ||= Concurrent::ThreadPoolExecutor.new \
             max_threads: @publish_threads
-          @callback_thread_pool ||= Concurrent::CachedThreadPool.new \
+          @callback_thread_pool ||= Concurrent::ThreadPoolExecutor.new \
             max_threads: @callback_threads
           @thread ||= Thread.new { run_background }
         end
