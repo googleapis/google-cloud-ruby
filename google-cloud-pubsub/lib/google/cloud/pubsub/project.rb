@@ -174,6 +174,9 @@ module Google
         # @param [String] kms_key The Cloud KMS encryption key that will be used
         #   to protect access to messages published on this topic. Optional.
         #   For example: `projects/a/locations/b/keyRings/c/cryptoKeys/d`
+        # @param [Array<String>] persistence_regions The list of GCP region IDs
+        #   where messages that are published to the topic may be persisted in
+        #   storage. Optional.
         # @param [Hash] async A hash of values to configure the topic's
         #   {AsyncPublisher} that is created when {Topic#publish_async}
         #   is called. Optional.
@@ -202,11 +205,13 @@ module Google
         #   pubsub = Google::Cloud::PubSub.new
         #   topic = pubsub.create_topic "my-topic"
         #
-        def create_topic topic_name, labels: nil, kms_key: nil, async: nil
+        def create_topic topic_name, labels: nil, kms_key: nil,
+                         persistence_regions: nil, async: nil
           ensure_service!
           grpc = service.create_topic topic_name,
-                                      labels:       labels,
-                                      kms_key_name: kms_key
+                                      labels:              labels,
+                                      kms_key_name:        kms_key,
+                                      persistence_regions: persistence_regions
           Topic.from_grpc grpc, service, async: async
         end
         alias new_topic create_topic

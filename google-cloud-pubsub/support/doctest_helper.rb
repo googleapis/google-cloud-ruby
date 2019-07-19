@@ -497,6 +497,14 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
+  doctest.before "Google::Cloud::PubSub::Topic#persistence_regions=" do
+    mock_pubsub do |mock_publisher, mock_subscriber|
+      this_topic = topic_resp "my-topic", persistence_regions: ["us-central1", "us-central2"]
+      mock_publisher.expect :get_topic, topic_resp, ["projects/my-project/topics/my-topic", Hash]
+      mock_publisher.expect :update_topic, this_topic, [this_topic, Google::Protobuf::FieldMask.new(paths: ["message_storage_policy"]), Hash]
+    end
+  end
+
   doctest.before "Google::Cloud::PubSub::Topic#delete" do
     mock_pubsub do |mock_publisher, mock_subscriber|
       mock_publisher.expect :get_topic, topic_resp, ["projects/my-project/topics/my-topic", Hash]
