@@ -9,20 +9,16 @@ layout: default
 
   {% for gem in site.data.releases %}
     {% for release in gem[1] limit:1 %}
-      <h2><a href="/google-cloud-ruby/docs/{{ gem[0] }}">{{ gem[0] }} <small>(latest: {{ release }})</small></a></h2>
+      <h2><a href="https://googleapis.dev/ruby/{{ gem[0] }}/latest">{{ gem[0] }} <small>(latest: {{ release }})</small></a></h2>
     {% endfor %}
 
     <ul class="v-list">
       {% for release in gem[1] %}
         <li>
-          <a href="/google-cloud-ruby/docs/{{ gem[0] }}/{{ release }}">{{ release }}</a>
+          <a href="https://googleapis.dev/ruby/{{ gem[0] }}/{{ release }}">{{ release }}</a>
           <em><a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby/releases/tag/{{ gem[0] }}/{{ release }}">{Release notes}</a></em>
         </li>
       {% endfor %}
-      <li>
-        <a href="/google-cloud-ruby/docs/{{ gem[0] }}/master">master</a>
-        <em>(Active development)</em>
-      </li>
     </ul>
   {% endfor %}
 
@@ -32,7 +28,7 @@ layout: default
   <ul class="external-links">
     {% for gem in site.data.releases %}
       <li>
-        <a href="/google-cloud-ruby/docs/{{ gem[0] }}">{{ gem[0] }}</a>
+        <a href="https://googleapis.dev/ruby/{{ gem[0] }}/latest">{{ gem[0] }}</a>
       </li>
     {% endfor %}
   </ul>
