@@ -30,7 +30,7 @@ function set_failed_status {
 
 if [ "$PACKAGE" = "post" ]; then
     export DOCS_CREDENTIALS=${KOKORO_KEYSTORE_DIR}/73713_docuploader_service_account
-    python3 -m pip install gcp-docuploader
+    npm install -g linkinator
     (bundle update && bundle exec rake kokoro:post) || set_failed_status
 elif [ "$JOB_TYPE" = "nightly" ]; then
     for version in "${versions[@]}"; do
