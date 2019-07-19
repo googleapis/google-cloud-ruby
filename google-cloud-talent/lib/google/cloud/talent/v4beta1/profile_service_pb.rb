@@ -49,6 +49,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :case_sensitive_sort, :bool, 9
     repeated :histogram_queries, :message, 10, "google.cloud.talent.v4beta1.HistogramQuery"
     optional :result_set_id, :string, 12
+    optional :strict_keywords_search, :bool, 13
   end
   add_message "google.cloud.talent.v4beta1.SearchProfilesResponse" do
     optional :estimated_total_size, :int64, 1

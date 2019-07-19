@@ -299,9 +299,11 @@ module Google
         # @!attribute [rw] result_set_id
         #   @return [String]
         #     Optional. An id that uniquely identifies the result set of a
-        #     {SearchProfiles} call.  The id should be retrieved from the
+        #     {Google::Cloud::Talent::V4beta1::ProfileService::SearchProfiles SearchProfiles}
+        #     call. The id should be retrieved from the
         #     {Google::Cloud::Talent::V4beta1::SearchProfilesResponse SearchProfilesResponse}
-        #     message returned from a previous invocation of {SearchProfiles}.
+        #     message returned from a previous invocation of
+        #     {Google::Cloud::Talent::V4beta1::ProfileService::SearchProfiles SearchProfiles}.
         #
         #     A result set is an ordered list of search results.
         #
@@ -314,8 +316,10 @@ module Google
         #     If this field is set, the service will ignore the resource and
         #     {Google::Cloud::Talent::V4beta1::SearchProfilesRequest#profile_query profile_query}
         #     values, and simply retrieve a page of results from the corresponding result
-        #     set.  In this case, one and only one of [page_token] or [offset] must be
-        #     set.
+        #     set.  In this case, one and only one of
+        #     {Google::Cloud::Talent::V4beta1::SearchProfilesRequest#page_token page_token}
+        #     or {Google::Cloud::Talent::V4beta1::SearchProfilesRequest#offset offset} must
+        #     be set.
         #
         #     A typical use case is to invoke
         #     {Google::Cloud::Talent::V4beta1::SearchProfilesRequest SearchProfilesRequest}
@@ -324,6 +328,21 @@ module Google
         #     in
         #     {Google::Cloud::Talent::V4beta1::SearchProfilesResponse SearchProfilesResponse}
         #     to page through the results.
+        # @!attribute [rw] strict_keywords_search
+        #   @return [true, false]
+        #     Optional. This flag is used to indicate whether the service will attempt to
+        #     understand synonyms and terms related to the search query or treat the
+        #     query "as is" when it generates a set of results. By default this flag is
+        #     set to false, thus allowing expanded results to also be returned. For
+        #     example a search for "software engineer" might also return candidates who
+        #     have experience in jobs similar to software engineer positions. By setting
+        #     this flag to true, the service will only attempt to deliver candidates has
+        #     software engineer in his/her global fields by treating "software engineer"
+        #     as a keyword.
+        #
+        #     It is recommended to provide a feature in the UI (such as a checkbox) to
+        #     allow recruiters to set this flag to true if they intend to search for
+        #     longer boolean strings.
         class SearchProfilesRequest; end
 
         # Response of SearchProfiles method.
