@@ -34,6 +34,8 @@ class DevsiteBuilder < YardBuilder
 
     gem, version = split_tag tag
     add_release gem, version
+    commit_changes gh_pages_dir, "Add #{gem}: #{version}"
+    push_changes gh_pages_dir
     publish_docs_for_tag tag
     puts "Added #{gem} documentation for #{version} release"
   end
