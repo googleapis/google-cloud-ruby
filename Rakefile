@@ -227,8 +227,8 @@ namespace :docs do
   end
 
   desc "Builds documentation for all tags and current branch (assumes master)"
-  task :rebuild_all do
-    DevsiteBuilder.new(__dir__).rebuild_all
+  task :republish_all do
+    DevsiteBuilder.new(__dir__).republish_all
   end
 end
 
@@ -592,13 +592,8 @@ namespace :kokoro do
 
   desc "Runs post-build logic on kokoro."
   task :post do
-    require_relative "rakelib/devsite_builder.rb"
-
     Rake::Task["kokoro:load_env_vars"].invoke
-
-    DevsiteBuilder.new(__dir__).republish_all
-    Rake::Task["docs:build_master"].invoke
-
+    Rake::Task["docs:republish_all"].invoke
     Rake::Task["test:codecov"].invoke
   end
 
