@@ -592,7 +592,14 @@ namespace :kokoro do
 
   desc "Runs post-build logic on kokoro."
   task :post do
-    puts "Linkinator will run here"
+    require_relative "rakelib/devsite_builder.rb"
+
+    Rake::Task["kokoro:load_env_vars"].invoke
+
+    DevsiteBuilder.new(__dir__).republish_all
+    Rake::Task["docs:build_master"].invoke
+
+    Rake::Task["test:codecov"].invoke
   end
 
   task :nightly do
