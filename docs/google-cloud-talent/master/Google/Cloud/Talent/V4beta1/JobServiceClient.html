@@ -2331,9 +2331,10 @@ top level fields of <span class='object_link'><a href="Job.html" title="Google::
 <p>If
 <span class='object_link'><a href="BatchUpdateJobsRequest.html#update_mask-instance_method" title="Google::Cloud::Talent::V4beta1::BatchUpdateJobsRequest#update_mask (method)">update_mask</a></span>
 is provided, The <span class='object_link'><a href="Job.html" title="Google::Cloud::Talent::V4beta1::Job (class)">Job</a></span> inside
-JobResult will only contains fields that is updated, plus the Id of the
-Job. Otherwise,  <span class='object_link'><a href="Job.html" title="Google::Cloud::Talent::V4beta1::Job (class)">Job</a></span> will include all
-fields, which can yield a very large response.
+JobResult
+will only contains fields that is updated, plus the Id of the Job.
+Otherwise,  <span class='object_link'><a href="Job.html" title="Google::Cloud::Talent::V4beta1::Job (class)">Job</a></span> will include all fields,
+which can yield a very large response.
 A hash of the same form as <code>Google::Protobuf::FieldMask</code>
 can also be provided.</p>
 </div>
@@ -2395,7 +2396,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1571
 1572
 1573
 1574
@@ -2415,10 +2415,11 @@ retries, etc.</p>
 1588
 1589
 1590
-1591</pre>
+1591
+1592</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/job_service_client.rb', line 1571</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/job_service_client.rb', line 1572</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_batch_update_jobs'>batch_update_jobs</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>

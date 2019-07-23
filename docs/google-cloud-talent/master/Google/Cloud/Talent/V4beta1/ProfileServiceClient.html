@@ -393,7 +393,7 @@ this service.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#search_profiles-instance_method" title="#search_profiles (instance method)">#<strong>search_profiles</strong>(parent, request_metadata, profile_query: nil, page_size: nil, offset: nil, disable_spell_check: nil, order_by: nil, case_sensitive_sort: nil, histogram_queries: nil, result_set_id: nil, options: nil) {|result, operation| ... } &#x21d2; Google::Gax::PagedEnumerable&lt;Google::Cloud::Talent::V4beta1::SummarizedProfile&gt; </a>
+      <a href="#search_profiles-instance_method" title="#search_profiles (instance method)">#<strong>search_profiles</strong>(parent, request_metadata, profile_query: nil, page_size: nil, offset: nil, disable_spell_check: nil, order_by: nil, case_sensitive_sort: nil, histogram_queries: nil, result_set_id: nil, strict_keywords_search: nil, options: nil) {|result, operation| ... } &#x21d2; Google::Gax::PagedEnumerable&lt;Google::Cloud::Talent::V4beta1::SummarizedProfile&gt; </a>
     
 
     
@@ -1979,7 +1979,7 @@ object.</p>
       <div class="method_details ">
   <h3 class="signature " id="search_profiles-instance_method">
   
-    #<strong>search_profiles</strong>(parent, request_metadata, profile_query: nil, page_size: nil, offset: nil, disable_spell_check: nil, order_by: nil, case_sensitive_sort: nil, histogram_queries: nil, result_set_id: nil, options: nil) {|result, operation| ... } &#x21d2; <tt>Google::Gax::PagedEnumerable&lt;<span class='object_link'><a href="SummarizedProfile.html" title="Google::Cloud::Talent::V4beta1::SummarizedProfile (class)">Google::Cloud::Talent::V4beta1::SummarizedProfile</a></span>&gt;</tt> 
+    #<strong>search_profiles</strong>(parent, request_metadata, profile_query: nil, page_size: nil, offset: nil, disable_spell_check: nil, order_by: nil, case_sensitive_sort: nil, histogram_queries: nil, result_set_id: nil, strict_keywords_search: nil, options: nil) {|result, operation| ... } &#x21d2; <tt>Google::Gax::PagedEnumerable&lt;<span class='object_link'><a href="SummarizedProfile.html" title="Google::Cloud::Talent::V4beta1::SummarizedProfile (class)">Google::Cloud::Talent::V4beta1::SummarizedProfile</a></span>&gt;</tt> 
   
 
   
@@ -2327,9 +2327,11 @@ can also be provided.</li>
       
         &mdash;
         <div class='inline'><p>Optional. An id that uniquely identifies the result set of a
-SearchProfiles call.  The id should be retrieved from the
+SearchProfiles
+call. The id should be retrieved from the
 <span class='object_link'><a href="SearchProfilesResponse.html" title="Google::Cloud::Talent::V4beta1::SearchProfilesResponse (class)">SearchProfilesResponse</a></span>
-message returned from a previous invocation of SearchProfiles.</p>
+message returned from a previous invocation of
+SearchProfiles.</p>
 
 <p>A result set is an ordered list of search results.</p>
 
@@ -2342,8 +2344,10 @@ is returned as a handle to access this result set.</p>
 <p>If this field is set, the service will ignore the resource and
 <span class='object_link'><a href="SearchProfilesRequest.html#profile_query-instance_method" title="Google::Cloud::Talent::V4beta1::SearchProfilesRequest#profile_query (method)">profile_query</a></span>
 values, and simply retrieve a page of results from the corresponding result
-set.  In this case, one and only one of [page_token] or [offset] must be
-set.</p>
+set.  In this case, one and only one of
+<span class='object_link'><a href="SearchProfilesRequest.html#page_token-instance_method" title="Google::Cloud::Talent::V4beta1::SearchProfilesRequest#page_token (method)">page_token</a></span>
+or <span class='object_link'><a href="SearchProfilesRequest.html#offset-instance_method" title="Google::Cloud::Talent::V4beta1::SearchProfilesRequest#offset (method)">offset</a></span> must
+be set.</p>
 
 <p>A typical use case is to invoke
 <span class='object_link'><a href="SearchProfilesRequest.html" title="Google::Cloud::Talent::V4beta1::SearchProfilesRequest (class)">SearchProfilesRequest</a></span>
@@ -2352,6 +2356,33 @@ without this field, then use the resulting
 in
 <span class='object_link'><a href="SearchProfilesResponse.html" title="Google::Cloud::Talent::V4beta1::SearchProfilesResponse (class)">SearchProfilesResponse</a></span>
 to page through the results.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>strict_keywords_search</span>
+      
+      
+        <span class='type'>(<tt>true</tt>, <tt>false</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Optional. This flag is used to indicate whether the service will attempt to
+understand synonyms and terms related to the search query or treat the
+query &quot;as is&quot; when it generates a set of results. By default this flag is
+set to false, thus allowing expanded results to also be returned. For
+example a search for &quot;software engineer&quot; might also return candidates who
+have experience in jobs similar to software engineer positions. By setting
+this flag to true, the service will only attempt to deliver candidates has
+software engineer in his/her global fields by treating &quot;software engineer&quot;
+as a keyword.</p>
+
+<p>It is recommended to provide a feature in the UI (such as a checkbox) to
+allow recruiters to set this flag to true if they intend to search for
+longer boolean strings.</p>
 </div>
       
     </li>
@@ -2461,24 +2492,6 @@ object.</p>
       <pre class="lines">
 
 
-750
-751
-752
-753
-754
-755
-756
-757
-758
-759
-760
-761
-762
-763
-764
-765
-766
-767
 768
 769
 770
@@ -2488,10 +2501,30 @@ object.</p>
 774
 775
 776
-777</pre>
+777
+778
+779
+780
+781
+782
+783
+784
+785
+786
+787
+788
+789
+790
+791
+792
+793
+794
+795
+796
+797</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/profile_service_client.rb', line 750</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/talent/v4beta1/profile_service_client.rb', line 768</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_search_profiles'>search_profiles</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -2504,6 +2537,7 @@ object.</p>
     <span class='label'>case_sensitive_sort:</span> <span class='kw'>nil</span><span class='comma'>,</span>
     <span class='label'>histogram_queries:</span> <span class='kw'>nil</span><span class='comma'>,</span>
     <span class='label'>result_set_id:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+    <span class='label'>strict_keywords_search:</span> <span class='kw'>nil</span><span class='comma'>,</span>
     <span class='label'>options:</span> <span class='kw'>nil</span><span class='comma'>,</span>
     <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
   <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='lbrace'>{</span>
@@ -2516,7 +2550,8 @@ object.</p>
     <span class='label'>order_by:</span> <span class='id identifier rubyid_order_by'>order_by</span><span class='comma'>,</span>
     <span class='label'>case_sensitive_sort:</span> <span class='id identifier rubyid_case_sensitive_sort'>case_sensitive_sort</span><span class='comma'>,</span>
     <span class='label'>histogram_queries:</span> <span class='id identifier rubyid_histogram_queries'>histogram_queries</span><span class='comma'>,</span>
-    <span class='label'>result_set_id:</span> <span class='id identifier rubyid_result_set_id'>result_set_id</span>
+    <span class='label'>result_set_id:</span> <span class='id identifier rubyid_result_set_id'>result_set_id</span><span class='comma'>,</span>
+    <span class='label'>strict_keywords_search:</span> <span class='id identifier rubyid_strict_keywords_search'>strict_keywords_search</span>
   <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span>
   <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='id identifier rubyid_to_proto'>to_proto</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Talent.html" title="Google::Cloud::Talent (module)">Talent</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V4beta1.html" title="Google::Cloud::Talent::V4beta1 (module)">V4beta1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="SearchProfilesRequest.html" title="Google::Cloud::Talent::V4beta1::SearchProfilesRequest (class)">SearchProfilesRequest</a></span></span><span class='rparen'>)</span>
   <span class='ivar'>@search_profiles</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
