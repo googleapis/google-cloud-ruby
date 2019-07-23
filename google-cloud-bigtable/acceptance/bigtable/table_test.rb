@@ -78,7 +78,7 @@ describe "Instance Tables", :bigtable do
 
     table = bigtable.create_table(instance_id, table_id) do |cfs|
       cfs.add("cf1", Google::Cloud::Bigtable::GcRule.max_versions(1))
-      cfs.add("cf2", Google::Cloud::Bigtable::GcRule.max_versions(1))
+      cfs.add("cf2") # default service value for GcRule
     end
 
     modifications = []

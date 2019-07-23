@@ -35,10 +35,33 @@ describe "Table ColumnFamily", :bigtable do
 
     cf.must_be_kind_of Google::Cloud::Bigtable::ColumnFamily
     cf.name.must_equal "cfcreate"
+    cf.gc_rule.wont_be :nil?
     cf.gc_rule.max_versions.must_equal 1
 
     table.reload!
-    table.column_families.find{|cf| cf.name == "cfcreate"}.wont_be :nil?
+    cf = table.column_families.find{|cf| cf.name == "cfcreate"}
+    cf.wont_be :nil?
+
+    cf.must_be_kind_of Google::Cloud::Bigtable::ColumnFamily
+    cf.name.must_equal "cfcreate"
+    cf.gc_rule.max_versions.must_equal 1
+  end
+
+  it "create column family without gc_rule" do
+    gc_rule = Google::Cloud::Bigtable::GcRule.max_versions(1)
+    cf = table.column_family("cfcreate").create
+
+    cf.must_be_kind_of Google::Cloud::Bigtable::ColumnFamily
+    cf.name.must_equal "cfcreate"
+    cf.gc_rule.must_be :nil?
+
+    table.reload!
+    cf = table.column_families.find{|cf| cf.name == "cfcreate"}
+    cf.wont_be :nil?
+
+    cf.must_be_kind_of Google::Cloud::Bigtable::ColumnFamily
+    cf.name.must_equal "cfcreate"
+    cf.gc_rule.must_be :nil?
   end
 
   it "update column family" do
@@ -51,6 +74,19 @@ describe "Table ColumnFamily", :bigtable do
     table.reload!
     cf = table.column_families.find{|cf| cf.name == "cf1"}
     cf.gc_rule.max_age.must_equal 300
+  end
+
+  it "update column family without gc_rule" do
+    cf = table.column_families.find{|cf| cf.name == "cf1"}
+    cf.gc_rule.wont_be :nil?
+    cf.gc_rule = nil
+    updated_cf = cf.save
+    updated_cf.must_be_kind_of Google::Cloud::Bigtable::ColumnFamily
+    updated_cf.gc_rule.must_be :nil?
+
+    table.reload!
+    cf = table.column_families.find{|cf| cf.name == "cf1"}
+    cf.gc_rule.must_be :nil?
   end
 
   it "delete column family" do

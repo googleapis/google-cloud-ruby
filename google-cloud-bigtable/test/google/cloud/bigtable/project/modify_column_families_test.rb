@@ -31,7 +31,7 @@ describe Google::Cloud::Bigtable::Project, :modify_column_families, :mock_bigtab
 
     column_families = Google::Cloud::Bigtable::Table::ColumnFamilyMap.new.tap do |cfs|
       cfs.add('cf1', Google::Cloud::Bigtable::GcRule.max_age(300))
-      cfs.add('cf2', Google::Cloud::Bigtable::GcRule.max_versions(3))
+      cfs.add('cf2') # service default GcRule
     end
     cluster_states = clusters_state_grpc(num: 1)
     res_table = Google::Bigtable::Admin::V2::Table.new(
@@ -60,9 +60,8 @@ describe Google::Cloud::Bigtable::Project, :modify_column_families, :mock_bigtab
     table.granularity.must_equal :MILLIS
   
     table.column_families.map(&:name).sort.must_equal column_families.keys
-    table.column_families.each do |cf|
-      cf.gc_rule.to_grpc.must_equal column_families[cf.name].gc_rule
-    end
+    table.column_families[0].gc_rule.to_grpc.must_equal Google::Cloud::Bigtable::GcRule.max_age(300).to_grpc
+    table.column_families[1].gc_rule.must_be :nil?
   end
 
   it "modify single column family in table" do

@@ -93,6 +93,38 @@ describe Google::Cloud::Bigtable::ColumnFamily, :create, :mock_bigtable do
     mock.verify
   end
 
+  it "create column family with nil gc_rule" do
+    new_cf_name = "new-cf"
+
+    get_res = Google::Bigtable::Admin::V2::Table.new(
+      name: table_path(instance_id, table_id),
+      column_families: {
+        new_cf_name => Google::Bigtable::Admin::V2::ColumnFamily.new
+      }
+    )
+    modifications = [
+      Google::Bigtable::Admin::V2::ModifyColumnFamiliesRequest::Modification.new(
+        id: new_cf_name,
+        create: Google::Bigtable::Admin::V2::ColumnFamily.new
+      )
+    ]
+
+    mock = Minitest::Mock.new
+    mock.expect :modify_column_families, get_res, [
+                                         table_path(instance_id, table_id),
+                                         modifications
+                                       ]
+    bigtable.service.mocked_tables = mock
+
+    column_family = table.column_family(new_cf_name)
+    column_family.must_be_kind_of Google::Cloud::Bigtable::ColumnFamily
+
+    created_column = column_family.create
+    created_column.must_be_kind_of Google::Cloud::Bigtable::ColumnFamily
+
+    mock.verify
+  end
+
   it "update column family" do
     cf_name = "cf"
     cf_grpc = Google::Bigtable::Admin::V2::ColumnFamily.new(
@@ -137,7 +169,51 @@ describe Google::Cloud::Bigtable::ColumnFamily, :create, :mock_bigtable do
     mock.verify
   end
 
-  it "delelte column family" do
+  it "update column family with nil gc_rule" do
+    cf_name = "cf"
+    cf_grpc = Google::Bigtable::Admin::V2::ColumnFamily.new(
+      gc_rule: Google::Bigtable::Admin::V2::GcRule.new(max_num_versions: 3)
+    )
+    column_family = Google::Cloud::Bigtable::ColumnFamily.from_grpc(
+      cf_grpc,
+      bigtable.service,
+      name: cf_name,
+      instance_id: instance_id,
+      table_id: table_id
+    )
+
+    get_res = Google::Bigtable::Admin::V2::Table.new(
+      name: table_path(instance_id, table_id),
+      column_families: {
+        cf_name => Google::Bigtable::Admin::V2::ColumnFamily.new(
+          gc_rule: nil
+        )
+      }
+    )
+    modifications = [
+      Google::Bigtable::Admin::V2::ModifyColumnFamiliesRequest::Modification.new(
+        id: cf_name,
+        update: Google::Bigtable::Admin::V2::ColumnFamily.new(
+          gc_rule: nil
+        )
+      )
+    ]
+
+    mock = Minitest::Mock.new
+    mock.expect :modify_column_families, get_res, [
+                                         table_path(instance_id, table_id),
+                                         modifications
+                                       ]
+    bigtable.service.mocked_tables = mock
+
+    column_family.gc_rule = nil
+    updated_cf = column_family.save
+    updated_cf.must_be_kind_of Google::Cloud::Bigtable::ColumnFamily
+
+    mock.verify
+  end
+
+  it "delete column family" do
     cf_name = "cf"
     cf_grpc = Google::Bigtable::Admin::V2::ColumnFamily.new(
       gc_rule: Google::Bigtable::Admin::V2::GcRule.new(max_num_versions: 3)
