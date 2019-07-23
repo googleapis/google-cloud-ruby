@@ -24,8 +24,7 @@ describe Google::Cloud::Storage::Project, :storage do
   end
 
   it "should create a new HMAC key" do
-    service_account_email = "542339357638-cr0dserr2evg7sv1meghqeu703274f3h@developer.gserviceaccount.com"
-
+    service_account_email = storage.service.credentials.client.issuer
     # Create key.
     hmac_key = storage.create_hmac_key service_account_email
 
