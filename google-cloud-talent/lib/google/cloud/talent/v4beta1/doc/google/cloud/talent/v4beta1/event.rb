@@ -263,7 +263,8 @@ module Google
             # a CTS API request's result set, the
             # {Google::Cloud::Talent::V4beta1::ClientEvent#request_id ClientEvent#request_id}
             # should be populated.  If the VIEW happens for some other reason, the
-            # [requestId] should not be populated.
+            # {Google::Cloud::Talent::V4beta1::ClientEvent#request_id request_id} should
+            # not be populated.
             #
             # This event requires a valid recruiter and one valid ID in profiles.
             #

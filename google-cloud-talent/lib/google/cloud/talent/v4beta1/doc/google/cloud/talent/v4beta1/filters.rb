@@ -122,7 +122,7 @@ module Google
         #     Boolean expressions (AND/OR/NOT) are supported up to 3 levels of
         #     nesting (for example, "((A AND B AND C) OR NOT D) AND E"), a maximum of 100
         #     comparisons or functions are allowed in the expression. The expression
-        #     must be < 3000 bytes in length.
+        #     must be < 6000 bytes in length.
         #
         #     Sample Query:
         #     `(LOWER(driving_license)="class \"a\"" OR EMPTY(driving_license)) AND
@@ -328,6 +328,14 @@ module Google
         #     based on an aggregated set of signals.  Specifically, the intent is NOT to
         #     indicate the candidate's potential qualification / interest / close ability
         #     for a specific job.
+        # @!attribute [rw] person_name_filters
+        #   @return [Array<Google::Cloud::Talent::V4beta1::PersonNameFilter>]
+        #     Optional. Person name filter specifies person name of profiles to match on.
+        #
+        #     If multiple person name filters are specified, profiles that match any
+        #     person name filters are retrieved.
+        #
+        #     For example, search for profiles of candidates with name "John Smith".
         class ProfileQuery; end
 
         # Input only.
@@ -715,6 +723,19 @@ module Google
         #     Optional. It is false by default. If true, API excludes all the potential
         #     available profiles.
         class CandidateAvailabilityFilter; end
+
+        # Input only.
+        #
+        # Filter on person name.
+        # @!attribute [rw] person_name
+        #   @return [String]
+        #     Required. The person name. For example, "John Smith".
+        #
+        #     Can be any combination of {PersonName#structured_name#given_name},
+        #     {PersonName#structured_name#middle_initial},
+        #     {PersonName#structured_name#family_name}, and
+        #     {Google::Cloud::Talent::V4beta1::PersonName#formatted_name PersonName#formatted_name}.
+        class PersonNameFilter; end
       end
     end
   end

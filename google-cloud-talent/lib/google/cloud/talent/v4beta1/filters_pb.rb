@@ -46,6 +46,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     repeated :application_job_filters, :message, 13, "google.cloud.talent.v4beta1.ApplicationJobFilter"
     optional :custom_attribute_filter, :string, 15
     optional :candidate_availability_filter, :message, 16, "google.cloud.talent.v4beta1.CandidateAvailabilityFilter"
+    repeated :person_name_filters, :message, 17, "google.cloud.talent.v4beta1.PersonNameFilter"
   end
   add_message "google.cloud.talent.v4beta1.LocationFilter" do
     optional :address, :string, 1
@@ -143,6 +144,9 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.cloud.talent.v4beta1.CandidateAvailabilityFilter" do
     optional :negated, :bool, 1
   end
+  add_message "google.cloud.talent.v4beta1.PersonNameFilter" do
+    optional :person_name, :string, 1
+  end
 end
 
 module Google
@@ -169,6 +173,7 @@ module Google
         TimeFilter = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4beta1.TimeFilter").msgclass
         TimeFilter::TimeField = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4beta1.TimeFilter.TimeField").enummodule
         CandidateAvailabilityFilter = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4beta1.CandidateAvailabilityFilter").msgclass
+        PersonNameFilter = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4beta1.PersonNameFilter").msgclass
       end
     end
   end
