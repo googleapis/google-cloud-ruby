@@ -590,18 +590,18 @@ namespace :kokoro do
     broken_devsite_links = Hash.new { |h, k| h[k] = [] }
     markdown_files = Dir.glob "**/*.md"
     markdown_files.each do |file|
-      out, err, st = Open3.capture3 "linkinator #{github_base}#{file} --skip '^(?!https://github.com/googleapis/google-cloud-ruby)'"
+      out, _err, _st = Open3.capture3 "linkinator #{github_base}#{file} --skip '^(?!(\\Wruby.*google|.*google.*\\Wruby))'"
       puts out
       checked_links = out.split "\n"
       checked_links.select! { |link| link =~ /\[\d+\]/ && !link.include?("[200]") }
-      broken_markdown_links[file] += checked_links
+      broken_markdown_links[file] += checked_links unless checked_links.empty?
     end
     gems.each do |gem|
-      out, err, st = Open3.capture3 "linkinator #{devsite_base}#{gem}/latest --recurse --skip https:.*github.*"
+      out, _err, _st = Open3.capture3 "linkinator #{devsite_base}#{gem}/latest --recurse --skip https:.*github.*"
       puts out
       checked_links = out.split "\n"
       checked_links.select! { |link| link =~ /\[\d+\]/ && !link.include?("[200]") }
-      broken_devsite_links[gem] += checked_links
+      broken_devsite_links[gem] += checked_links unless checked_links.empty?
     end
     success = broken_markdown_links.keys.empty? && broken_devsite_links.keys.empty?
     broken_markdown_links.each do |file, links|
