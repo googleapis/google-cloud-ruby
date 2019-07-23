@@ -49,6 +49,6 @@ end
 
 file_path = File.expand_path "../../../../../conformance/v1/v4_signatures.json", __dir__
 test_file = Google::Cloud::Conformance::Storage::V1::TestFile.decode_json File.read(file_path)
-test_file.signing_v4_tests.each do |test, index|
+test_file.signing_v4_tests.each_with_index do |test, index|
   SignerV4Test.build_test_for test, index
 end
