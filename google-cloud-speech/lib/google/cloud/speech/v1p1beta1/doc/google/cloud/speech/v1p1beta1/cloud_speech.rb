@@ -202,6 +202,16 @@ module Google
         #     If set, specifies the estimated number of speakers in the conversation.
         #     If not set, defaults to '2'.
         #     Ignored unless enable_speaker_diarization is set to true."
+        # @!attribute [rw] diarization_config
+        #   @return [Google::Cloud::Speech::V1p1beta1::SpeakerDiarizationConfig]
+        #     *Optional* Config to enable speaker diarization and set additional
+        #     parameters to make diarization better suited for your application.
+        #     Note: When this is enabled, we send all the words from the beginning of the
+        #     audio for the top alternative in every consecutive STREAMING responses.
+        #     This is done in order to improve our speaker tags as our models learn to
+        #     identify the speakers in the conversation over time.
+        #     For non-streaming requests, the diarization results will be provided only
+        #     in the top alternative of the FINAL SpeechRecognitionResult.
         # @!attribute [rw] metadata
         #   @return [Google::Cloud::Speech::V1p1beta1::RecognitionMetadata]
         #     *Optional* Metadata regarding this request.
@@ -321,6 +331,25 @@ module Google
             MP3 = 8
           end
         end
+
+        # @!attribute [rw] enable_speaker_diarization
+        #   @return [true, false]
+        #     *Optional* If 'true', enables speaker detection for each recognized word in
+        #     the top alternative of the recognition result using a speaker_tag provided
+        #     in the WordInfo.
+        # @!attribute [rw] min_speaker_count
+        #   @return [Integer]
+        #     *Optional* Only used if diarization_speaker_count is not set.
+        #     Minimum number of speakers in the conversation. This range gives you more
+        #     flexibility by allowing the system to automatically determine the correct
+        #     number of speakers. If not set, the default value is 2.
+        # @!attribute [rw] max_speaker_count
+        #   @return [Integer]
+        #     *Optional* Only used if diarization_speaker_count is not set.
+        #     Maximum number of speakers in the conversation. This range gives you more
+        #     flexibility by allowing the system to automatically determine the correct
+        #     number of speakers. If not set, the default value is 6.
+        class SpeakerDiarizationConfig; end
 
         # Description of audio data to be recognized.
         # @!attribute [rw] interaction_type
