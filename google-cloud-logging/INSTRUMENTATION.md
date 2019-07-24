@@ -16,7 +16,7 @@ if you want to run on a non Google Cloud environment or you want to customize
 the default behavior.
 
 See the 
-[Configuration Guide](../stackdriver/INSTRUMENTATION_CONFIGURATION.md)
+[Configuration Guide](https://googleapis.dev/ruby/stackdriver/latest/file.INSTRUMENTATION_CONFIGURATION.html)
 for full configuration parameters.
 
 ## Using instrumentation with Ruby on Rails

@@ -26,7 +26,7 @@ you want to run on a non Google Cloud environment or you want to customize  the
 default behavior.
 
 See the [Configuration
-Guide](../stackdriver/INSTRUMENTATION_CONFIGURATION)
+Guide](https://googleapis.dev/ruby/stackdriver/INSTRUMENTATION_CONFIGURATION/latest)
 for full configuration parameters.
 
 ## Rack Middleware and Railtie
@@ -48,7 +48,7 @@ require "google/cloud/error_reporting/rails"
 ```
 
 Alternatively, check out the
-[stackdriver](../stackdriver/README.md
+[stackdriver](https://googleapis.dev/ruby/stackdriver/latest/file.README.html
 gem, which enables this Railtie by default.
 
 ### Rack Integration

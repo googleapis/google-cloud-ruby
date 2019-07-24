@@ -7,18 +7,18 @@ your application.
 
 Specifically, this gem is a convenience package that loads the following gems:
 
-- [google-cloud-debugger](../google-cloud-debugger/README.md
-- [google-cloud-error_reporting](../google-cloud-error_reporting/README.md
-- [google-cloud-logging](../google-cloud-logging/README.md
-- [google-cloud-trace](../google-cloud-trace/README.md
+- [google-cloud-debugger](https://googleapis.dev/ruby/google-cloud-debugger/latest
+- [google-cloud-error_reporting](https://googleapis.dev/ruby/google-cloud-error_reporting/latest
+- [google-cloud-logging](https://googleapis.dev/ruby/google-cloud-logging/latest
+- [google-cloud-trace](https://googleapis.dev/ruby/google-cloud-trace/latest
 
 On top of that, stackdriver gem automatically activates the following
 instrumentation features:
 
-- [google-cloud-debugger instrumentation](../google-cloud-debugger/INSTRUMENTATION.md
-- [google-cloud-error_reporting strumentation](../google-cloud-error_reporting/INSTRUMENTATION.md
-- [google-cloud-logging instrumentation](../google-cloud-logging/INSTRUMENTATION.md
-- [google-cloud-trace instrumentation](../google-cloud-trace/INSTRUMENTATION.md
+- [google-cloud-debugger instrumentation](https://googleapis.dev/ruby/google-cloud-debugger/latest/file.INSTRUMENTATION.html
+- [google-cloud-error_reporting strumentation](https://googleapis.dev/ruby/google-cloud-error_reporting/latest/file.INSTRUMENTATION.html
+- [google-cloud-logging instrumentation](https://googleapis.dev/ruby/google-cloud-logging/latest/file.INSTRUMENTATION.html
+- [google-cloud-trace instrumentation](https://googleapis.dev/ruby/google-cloud-trace/latest/file.INSTRUMENTATION.html
 
 ## Usage
 

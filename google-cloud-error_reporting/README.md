@@ -8,7 +8,7 @@ occurrences, affected user count, first and last seen dates and a cleaned
 exception stack trace. Opt-in to receive email and mobile alerts on new errors.
 
 - [google-cloud-error_reporting API documentation](https://googleapis.dev/ruby/google-cloud-error_reporting/latest)
-- [google-cloud-error_reporting instrumentation documentation](./INSTRUMENTATION.md)
+- [google-cloud-error_reporting instrumentation documentation](https://googleapis.dev/ruby/google-cloud-error_reporting/latest/file.INSTRUMENTATION.html)
 - [google-cloud-error_reporting on RubyGems](https://rubygems.org/gems/google-cloud-error_reporting)
 - [Stackdriver ErrorReporting documentation](https://cloud.google.com/error-reporting/docs/)
 
@@ -35,7 +35,7 @@ $ bundle install
 ```
 
 Alternatively, check out the
-[`stackdriver`](../stackdriver/README.md
+[`stackdriver`](https://googleapis.dev/ruby/stackdriver/latest/file.README.html
 gem that includes the `google-cloud-error_reporting` gem.
 
 ## Enable Stackdriver Error Reporting API
@@ -92,7 +92,7 @@ end
 
 You can customize the behavior of the Stackdriver Error Reporting library for
 Ruby. See the [configuration
-guide](../stackdriver/INSTRUMENTATION_CONFIGURATION)
+guide](https://googleapis.dev/ruby/stackdriver/INSTRUMENTATION_CONFIGURATION/latest)
 for a list of possible configuration options.
 
 ## Running on Google Cloud Platform
@@ -177,7 +177,7 @@ end
 This library also supports the other authentication methods provided by the
 `google-cloud-ruby` suite. Instructions and configuration options are covered in
 the [Authentication
-Guide](./AUTHENTCATION.md).
+Guide](https://googleapis.dev/ruby/google-cloud-error_reporting/latest/file.AUTHENTCATION.html).
 
 ## Enabling Logging
 
@@ -235,18 +235,18 @@ change at any time and the public API should not be considered stable.
 Contributions to this library are always welcome and highly encouraged.
 
 See the [Contributing
-Guide](./CONTRIBUTING.md)
+Guide](https://googleapis.dev/ruby/google-cloud-error_reporting/latest/file.CONTRIBUTING.html)
 for more information on how to get started.
 
 Please note that this project is released with a Contributor Code of Conduct. By
 participating in this project you agree to abide by its terms. See [Code of
-Conduct](./CODE_OF_CONDUCT.md)
+Conduct](https://googleapis.dev/ruby/google-cloud-error_reporting/latest/file.CODE_OF_CONDUCT.html)
 for more information.
 
 ## License
 
 This library is licensed under Apache 2.0. Full license text is available in
-[LICENSE](./LICENSE.md).
+[LICENSE](https://googleapis.dev/ruby/google-cloud-error_reporting/latest/file.LICENSE.html).
 
 ## Support
 

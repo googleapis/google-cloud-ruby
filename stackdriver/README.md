@@ -8,14 +8,14 @@ application.
 Specifically, this gem is a convenience package that loads and automatically
 activates the instrumentation features of the following gems:
 
-*   [google-cloud-debugger](../google-cloud-debugger) which enables remote
+*   [google-cloud-debugger](https://googleapis.dev/ruby/google-cloud-debugger/latest) which enables remote
     debugging using [Stackdriver Debugger](https://cloud.google.com/debugger/)
-*   [google-cloud-error_reporting](../google-cloud-error_reporting) which
+*   [google-cloud-error_reporting](https://googleapis.dev/ruby/google-cloud-error_reporting/latest) which
     reports unhandled exceptions and other errors to
     [Stackdriver Error Reporting](https://cloud.google.com/error-reporting/)
-*   [google-cloud-logging](../google-cloud-logging) which collects application
+*   [google-cloud-logging](https://googleapis.dev/ruby/google-cloud-logging/latest) which collects application
     logs in [Stackdriver logging](https://cloud.google.com/logging/)
-*   [google-cloud-trace](../google-cloud-trace) which reports distributed
+*   [google-cloud-trace](https://googleapis.dev/ruby/google-cloud-trace/latest) which reports distributed
     latency traces to [Stackdriver Trace](https://cloud.google.com/trace/)
 
 ## Quick Start
@@ -126,12 +126,12 @@ and the public API should not be considered stable.
 Contributions to this library are always welcome and highly encouraged.
 
 See the [Contributing
-Guide](./CONTRIBUTING.md)
+Guide](https://googleapis.dev/ruby/stackdriver/latest/file.CONTRIBUTING.html)
 for more information on how to get started.
 
 Please note that this project is released with a Contributor Code of Conduct. By
 participating in this project you agree to abide by its terms. See [Code of
-Conduct](./CODE_OF_CONDUCT.md)
+Conduct](https://googleapis.dev/ruby/stackdriver/latest/file.CODE_OF_CONDUCT.html)
 for more information.
 
 ## License

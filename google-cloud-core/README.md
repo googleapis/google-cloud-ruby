@@ -30,18 +30,18 @@ change at any time and the public API should not be considered stable.
 Contributions to this library are always welcome and highly encouraged.
 
 See the [Contributing
-Guide](./CONTRIBUTING.md)
+Guide](https://googleapis.dev/ruby/google-cloud-core/latest/file.CONTRIBUTING.html)
 for more information on how to get started.
 
 Please note that this project is released with a Contributor Code of Conduct. By
 participating in this project you agree to abide by its terms. See [Code of
-Conduct](./CODE_OF_CONDUCT.md)
+Conduct](https://googleapis.dev/ruby/google-cloud-core/latest/file.CODE_OF_CONDUCT.html)
 for more information.
 
 ## License
 
 This library is licensed under Apache 2.0. Full license text is available in
-[LICENSE](./LICENSE.md).
+[LICENSE](https://googleapis.dev/ruby/google-cloud-core/latest/file.LICENSE.html).
 
 ## Support
 

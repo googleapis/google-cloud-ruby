@@ -22,7 +22,7 @@ Add the `google-cloud-debugger` gem to your Gemfile:
 gem "google-cloud-debugger"
 ```
 
-Alternatively, consider installing the [`stackdriver`](../stackdriver) gem. It
+Alternatively, consider installing the [`stackdriver`](https://googleapis.dev/ruby/stackdriver/latest) gem. It
 includes the `google-cloud-debugger` gem as a dependency, and automatically
 initializes it for some application frameworks.
 
@@ -175,7 +175,7 @@ Google::Cloud::Debugger.new(project_id: "your-project-id",
 
 This library also supports the other authentication methods provided by the
 `google-cloud-ruby` suite. Instructions and configuration options are covered
-in the [Authentication Guide](./AUTHENTICATION.md).
+in the [Authentication Guide](https://googleapis.dev/ruby/google-cloud-debugger/latest/file.AUTHENTICATION.html).
 
 ### Using the Debugger
 
@@ -219,7 +219,7 @@ agent.
 You can customize the behavior of the Stackdriver Debugger agent. This includes
 setting the Google Cloud project and authentication, and customizing the
 behavior of the debugger itself, such as side effect protection and data
-size limits. See [agent configuration](../stackdriver/INSTRUMENTATION_CONFIGURATION.md)
+size limits. See [agent configuration](https://googleapis.dev/ruby/stackdriver/latest/file.INSTRUMENTATION_CONFIGURATION.html)
 for a list of possible configuration options.
 
 ## Enabling Logging
@@ -264,18 +264,18 @@ and the public API should not be considered stable.
 Contributions to this library are always welcome and highly encouraged.
 
 See the [Contributing
-Guide](./CONTRIBUTING.md)
+Guide](https://googleapis.dev/ruby/google-cloud-debugger/latest/file.CONTRIBUTING.html)
 for more information on how to get started.
 
 Please note that this project is released with a Contributor Code of Conduct. By
 participating in this project you agree to abide by its terms. See [Code of
-Conduct](./CODE_OF_CONDUCT.md)
+Conduct](https://googleapis.dev/ruby/google-cloud-debugger/latest/file.CODE_OF_CONDUCT.html)
 for more information.
 
 ## License
 
 This library is licensed under Apache 2.0. Full license text is available in
-[LICENSE](./LICENSE.md).
+[LICENSE](https://googleapis.dev/ruby/google-cloud-debugger/latest/file.LICENSE.html).
 
 ## Support
 

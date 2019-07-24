@@ -11,7 +11,7 @@ steps:
 
 1. [Select or create a Cloud Platform project.](https://console.cloud.google.com/project)
 2. [Enable the Google Cloud Firestore API.](https://console.cloud.google.com/apis/api/firestore)
-3. [Setup Authentication.](./AUTHENTICATION.md)
+3. [Setup Authentication.](https://googleapis.dev/ruby/google-cloud-firestore/latest/file.AUTHENTICATION.html)
 
 ### Installation
 ```

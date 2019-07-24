@@ -14,7 +14,7 @@ steps:
 1. [Select or create a Cloud Platform project.](https://console.cloud.google.com/project)
 2. [Enable billing for your project.](https://cloud.google.com/billing/docs/how-to/modify-project#enable_billing_for_a_project)
 3. [Enable the Cloud Natural Language API.](https://console.cloud.google.com/apis/library/language.googleapis.com)
-4. [Setup Authentication.](./AUTHENTICATION.md)
+4. [Setup Authentication.](https://googleapis.dev/ruby/google-cloud-language/latest/file.AUTHENTICATION.html)
 
 ### Installation
 ```

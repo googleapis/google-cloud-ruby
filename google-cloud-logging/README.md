@@ -28,7 +28,7 @@ gem "google-cloud-logging"
 $ bundle install
 ```
 
-Alternatively, check out the [`stackdriver`](../stackdriver) gem that includes
+Alternatively, check out the [`stackdriver`](https://googleapis.dev/ruby/stackdriver/latest) gem that includes
 the `google-cloud-logging` gem.
 
 ## Logging using client library
@@ -112,7 +112,7 @@ logger.
 ### Configuring the framework integration
 
 You can customize the behavior of the Stackdriver Logging framework integration
-for Ruby. See the [configuration guide](../stackdriver/INSTRUMENTATION_CONFIGURATION.md) for a
+for Ruby. See the [configuration guide](https://googleapis.dev/ruby/stackdriver/latest/file.INSTRUMENTATION_CONFIGURATION.html) for a
 list of possible configuration options.
 
 ## Authentication
@@ -153,7 +153,7 @@ end
 ```
 
 See the [Authentication
-Guide](./AUTHENTICATION.md).
+Guide](https://googleapis.dev/ruby/google-cloud-logging/latest/file.AUTHENTICATION.html).
 for more ways to authenticate the client library.
 
 ## Enabling Logging
@@ -198,18 +198,18 @@ This library follows [Semantic Versioning](http://semver.org/).
 Contributions to this library are always welcome and highly encouraged.
 
 See the [Contributing
-Guide](./CONTRIBUTING.md)
+Guide](https://googleapis.dev/ruby/google-cloud-logging/latest/file.CONTRIBUTING.html)
 for more information on how to get started.
 
 Please note that this project is released with a Contributor Code of Conduct. By
 participating in this project you agree to abide by its terms. See [Code of
-Conduct](./CODE_OF_CONDUCT.md)
+Conduct](https://googleapis.dev/ruby/google-cloud-logging/latest/file.CODE_OF_CONDUCT.html)
 for more information.
 
 ## License
 
 This library is licensed under Apache 2.0. Full license text is available in
-[LICENSE](./LICENSE.md).
+[LICENSE](https://googleapis.dev/ruby/google-cloud-logging/latest/file.LICENSE.html).
 
 ## Support
 

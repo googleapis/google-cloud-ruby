@@ -16,7 +16,7 @@ $ gem install google-cloud-bigquery
 
 This library uses Service Account credentials to connect to Google Cloud services. When running on Compute Engine the credentials will be discovered automatically. When running on other environments the Service Account credentials can be specified by providing the path to the JSON file, or the JSON itself, in environment variables.
 
-Instructions and configuration options are covered in the [Authentication Guide](./AUTHENTICATION.md).
+Instructions and configuration options are covered in the [Authentication Guide](https://googleapis.dev/ruby/google-cloud-bigquery/latest/file.AUTHENTICATION.html).
 
 ## Example
 
@@ -88,18 +88,18 @@ change at any time and the public API should not be considered stable.
 Contributions to this library are always welcome and highly encouraged.
 
 See the [Contributing
-Guide](./CONTRIBUTING.md)
+Guide](https://googleapis.dev/ruby/google-cloud-bigquery/latest/file.CONTRIBUTING.html)
 for more information on how to get started.
 
 Please note that this project is released with a Contributor Code of Conduct. By
 participating in this project you agree to abide by its terms. See [Code of
-Conduct](./CODE_OF_CONDUCT.md)
+Conduct](https://googleapis.dev/ruby/google-cloud-bigquery/latest/file.CODE_OF_CONDUCT.html)
 for more information.
 
 ## License
 
 This library is licensed under Apache 2.0. Full license text is available in
-[LICENSE](./LICENSE.md).
+[LICENSE](https://googleapis.dev/ruby/google-cloud-bigquery/latest/file.LICENSE.html).
 
 ## Support
 
@@ -109,4 +109,4 @@ hesitate to [ask
 questions](http://stackoverflow.com/questions/tagged/google-cloud-platform+ruby)
 about the client or APIs on [StackOverflow](http://stackoverflow.com). For more
 see the [Troubleshooting
-guide](./TROUBLESHOOTING.md)
+guide](https://googleapis.dev/ruby/google-cloud-bigquery/latest/file.TROUBLESHOOTING.html)
