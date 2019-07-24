@@ -108,7 +108,7 @@ green, you may create a release as follows:
 
 1. Verify the [GitHub release summary](https://github.com/googleapis/google-cloud-ruby/releases), making sure that it fits the format of other releases, mirrors the changelog, is tagged to the appropriate commit hash, and is for the correct version.
 
-1. Verify that the new version is displayed on the [google-cloud-ruby doc site](https://googleapis.dev/ruby/#{gem_name}/latest). The docs are published from the staging bucket every 15 minutes, so it may a few minutes to update.
+1. Verify that the new version is displayed on the google-cloud-ruby doc site at googleapis.dev/ruby/#{gem_name}/latest. The docs are published from the staging bucket every 15 minutes, so it may a few minutes to update.
 
    If it's been 30 minutes and the docs have not updated, [inspect the Kokoro build logs](#checking-the-status-of-kokoro-builds) to confirm that the rake `release` task succeeded.
 
