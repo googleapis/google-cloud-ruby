@@ -29,6 +29,7 @@ function set_failed_status {
 }
 
 if [ "$PACKAGE" = "post" ]; then
+    npm install -g linkinator
     (bundle update && bundle exec rake kokoro:post) || set_failed_status
 elif [ "$JOB_TYPE" = "nightly" ]; then
     for version in "${versions[@]}"; do
