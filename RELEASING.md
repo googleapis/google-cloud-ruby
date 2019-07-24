@@ -89,9 +89,9 @@ green, you may create a release as follows:
 
     1. Releasetool will then ask you if your change is considered major, minor, or patch. This project uses [semantic versioning](http://semver.org).
 
-    1. Releasetool will then create and switch to a branch called "release-#{gem-name}-v#{version}", make all the necessary changes to the changelog and gem version, and open a [pull request](https://github.com/googleapis/google-cloud-ruby/pulls).
+    1. Releasetool will then create and switch to a branch called `release-#{gem-name}-v#{version}`, make all the necessary changes to the changelog and gem version, and open a [pull request](https://github.com/googleapis/google-cloud-ruby/pulls).
 
-1. Review the PR created by releasetool in the previous step, apply the appropriate label (i.e. "api: #{gem_name}"), and request a review from googleapis/yoshi-ruby.
+1. Review the PR created by releasetool in the previous step, apply the appropriate label (i.e. `api: #{gem_name}`), and request a review from googleapis/yoshi-ruby.
 
 1. Repeat steps 3 through 12 if you are releasing multiple gems.
 
@@ -108,9 +108,9 @@ green, you may create a release as follows:
 
 1. Verify the [GitHub release summary](https://github.com/googleapis/google-cloud-ruby/releases), making sure that it fits the format of other releases, mirrors the changelog, is tagged to the appropriate commit hash, and is for the correct version.
 
-1. Verify that the new version is displayed on the [google-cloud-ruby gh-pages doc site](https://http://googleapis.github.io/google-cloud-ruby/docs/). Or, to save time when releasing many gems at once, check out the gh-pages branch and pull repeatedly to confirm that it has received the new docs.
+1. Verify that the new version is displayed on the google-cloud-ruby doc site at `googleapis.dev/ruby/#{gem_name}/latest`. The docs are published from the staging bucket every 15 minutes, so it may a few minutes to update.
 
-   If the gh-pages branch has not been updated, [inspect the Kokoro build logs](#checking-the-status-of-kokoro-builds) to confirm that the rake `post` task succeeded.
+   If it's been 30 minutes and the docs have not updated, [inspect the Kokoro build logs](#checking-the-status-of-kokoro-builds) to confirm that the rake `release` task succeeded.
 
 1. Verify that the correct version of the gem was published on [rubygems](https://rubygems.org/).
 
@@ -141,11 +141,11 @@ for the `google-cloud` gem.
 
 1. A modal will appear with the list of Kokoro builds. The build titled "Kokoro CI" can be ignored. To learn more about why a build failed or what it was testing for click "details" next to the build.
 
-1. The "details" link will take you to a page on https://source.cloud.google.com/. On the "TARGETS" tab, there will be a link to the logs. It will look like "cloud-devrel/client-libraries/google-cloud-ruby/#{job_type}-#{operating_system}". Click the link.
+1. The "details" link will take you to a page on https://source.cloud.google.com/. On the "TARGETS" tab, there will be a link to the logs. It will look like `cloud-devrel/client-libraries/google-cloud-ruby/#{job_type}-#{operating_system}`. Click the link.
 
 1. The next page will have a list of all the tasks carried out under the selected operating system. The top half will be a list of tasks and the links to their respective logs, the bottom half will be a list of tasks and their status (SUCCEEDED/FAILED). To learn more about why a task failed, clink the corresponding link on the top half of the screen.
 
-1. You will be greeted with a screen similar to the one in step 4. The link to your task should look like "cloud-devrel/client-libraries/google-cloud-ruby/#{job_type}/#{operating_system}/#{task_name}". Click it.
+1. You will be greeted with a screen similar to the one in step 4. The link to your task should look like `cloud-devrel/client-libraries/google-cloud-ruby/#{job_type}/#{operating_system}/#{task_name}`. Click it.
 
 1. The "TARGET LOG" tab should be pre-selected, and will contain the complete logs. Examine the logs to determine what went wrong. Before taking the steps below, check to see if the issue appears on [the list of known issues](https://github.com/googleapis/google-cloud-ruby/wiki/Known-Issues#kokoro-build-failures). If you see the error there, and you are confident that your release is unrelated, no further steps are necessary.
 
@@ -164,11 +164,11 @@ for the `google-cloud` gem.
 ## Writing a GitHub release summary manually
 1. [Draft a new GitHub release summary](https://github.com/googleapis/google-cloud-ruby/releases/new).
 
-1. Add a tag. The tag should be of the format "#{gem_name}/v#{version_number}".
+1. Add a tag. The tag should be of the format `#{gem_name}/v#{version_number}`.
 
 1. To the right of the tag and "@" symbol, there will be a dropdown with "Target: master. Click the dropdown, select the "Recent Commits" tab, and find and select the commit that was your merged PR.
 
-1. Add a title in the format "Release #{gem_name} #{version_number}".
+1. Add a title in the format `Release #{gem_name} #{version_number}`.
 
 1. Copy the content of the most recent update in the gem's `CHANGELOG.md` into the textarea with placeholder text "Describe this release".
 

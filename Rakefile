@@ -206,29 +206,29 @@ task :rubocop, :bundleupdate do |t, args|
   end
 end
 
-require_relative "rakelib/yard_builder.rb"
+require_relative "rakelib/devsite_builder.rb"
 
 namespace :docs do
   desc "Builds documentation for all gems on current branch (assumes master)"
   task :build_master do
-    YardBuilder.new(__dir__).build_master
+    DevsiteBuilder.new(__dir__).build_master
   end
 
   desc "Add release and builds documentation for a tag"
   task :publish_tag, [:tag] do |t, args|
     tag = extract_args args, :tag
-    YardBuilder.new(__dir__).publish_tag(tag)
+    DevsiteBuilder.new(__dir__).publish_tag(tag)
   end
 
   desc "Rebuilds documentation for a tag"
   task :rebuild_tag, [:tag] do |t, args|
     tag = extract_args args, :tag
-    YardBuilder.new(__dir__).rebuild_tag(tag)
+    DevsiteBuilder.new(__dir__).rebuild_tag(tag)
   end
 
   desc "Builds documentation for all tags and current branch (assumes master)"
-  task :rebuild_all do
-    YardBuilder.new(__dir__).rebuild_all
+  task :republish_all do
+    DevsiteBuilder.new(__dir__).republish_all
   end
 end
 
@@ -627,16 +627,14 @@ namespace :kokoro do
   end
 
   task :release do
-    require_relative "rakelib/devsite_builder.rb"
-
     version = "0.1.0"
     run_ci do
       version = `bundle exec gem list`
                 .split("\n").select { |line| line.include? ENV["PACKAGE"] }
                 .first.split("(").last.split(")").first
     end
-    tag = "#{ENV['PACKAGE']}/v#{version}"
-    DevsiteBuilder.new(__dir__).publish_tag tag
+    Rake::Task["kokoro:load_env_vars"].invoke
+    tag = "#{ENV["PACKAGE"]}/v#{version}"
     Rake::Task["release"].invoke tag
   end
 

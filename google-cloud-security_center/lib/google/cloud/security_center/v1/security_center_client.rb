@@ -736,8 +736,20 @@ module Google
           #
           #   The following field and operator combinations are supported:
           #   name | '='
-          #   update_time | '>', '<', '>=', '<=', '='
-          #   create_time | '>', '<', '>=', '<=', '='
+          #   update_time | '=', '>', '<', '>=', '<='
+          #
+          #     Usage: This should be milliseconds since epoch or an RFC3339 string.
+          #     Examples:
+          #       "update_time = \"2019-06-10T16:07:18-07:00\""
+          #       "update_time = 1560208038000"
+          #
+          #   create_time |  '=', '>', '<', '>=', '<='
+          #
+          #     Usage: This should be milliseconds since epoch or an RFC3339 string.
+          #     Examples:
+          #       "create_time = \"2019-06-10T16:07:18-07:00\""
+          #       "create_time = 1560208038000"
+          #
           #   iam_policy.policy_blob | '=', ':'
           #   resource_properties | '=', ':', '>', '<', '>=', '<='
           #   security_marks | '=', ':'
@@ -904,7 +916,13 @@ module Google
           #   state | '=', ':'
           #   category | '=', ':'
           #   external_uri | '=', ':'
-          #   event_time | `>`, `<`, `>=`, `<=`
+          #   event_time | `=`, `>`, `<`, `>=`, `<=`
+          #
+          #     Usage: This should be milliseconds since epoch or an RFC3339 string.
+          #     Examples:
+          #       "event_time = \"2019-06-10T16:07:18-07:00\""
+          #       "event_time = 1560208038000"
+          #
           #   security_marks | '=', ':'
           #   source_properties | '=', ':', `>`, `<`, `>=`, `<=`
           #
@@ -1040,7 +1058,20 @@ module Google
           #
           #   The following are the allowed field and operator combinations:
           #   name | `=`
-          #   update_time | `>`, `<`, `>=`, `<=`
+          #   update_time | `=`, `>`, `<`, `>=`, `<=`
+          #
+          #     Usage: This should be milliseconds since epoch or an RFC3339 string.
+          #     Examples:
+          #       "update_time = \"2019-06-10T16:07:18-07:00\""
+          #       "update_time = 1560208038000"
+          #
+          #   create_time | `=`, `>`, `<`, `>=`, `<=`
+          #
+          #     Usage: This should be milliseconds since epoch or an RFC3339 string.
+          #     Examples:
+          #       "create_time = \"2019-06-10T16:07:18-07:00\""
+          #       "create_time = 1560208038000"
+          #
           #   iam_policy.policy_blob | '=', ':'
           #   resource_properties | '=', ':', `>`, `<`, `>=`, `<=`
           #   security_marks | '=', ':'
@@ -1214,7 +1245,13 @@ module Google
           #   state | '=', ':'
           #   category | '=', ':'
           #   external_uri | '=', ':'
-          #   event_time | `>`, `<`, `>=`, `<=`
+          #   event_time | `=`, `>`, `<`, `>=`, `<=`
+          #
+          #     Usage: This should be milliseconds since epoch or an RFC3339 string.
+          #     Examples:
+          #       "event_time = \"2019-06-10T16:07:18-07:00\""
+          #       "event_time = 1560208038000"
+          #
           #   security_marks | '=', ':'
           #   source_properties | '=', ':', `>`, `<`, `>=`, `<=`
           #

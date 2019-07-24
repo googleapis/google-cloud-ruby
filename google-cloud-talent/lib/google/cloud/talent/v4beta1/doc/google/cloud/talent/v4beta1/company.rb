@@ -35,7 +35,7 @@ module Google
         #     example, "projects/api-test-project/companies/bar".
         # @!attribute [rw] display_name
         #   @return [String]
-        #     Required. The display name of the company, for example, "Google, LLC".
+        #     Required. The display name of the company, for example, "Google LLC".
         # @!attribute [rw] external_id
         #   @return [String]
         #     Required. Client side company identifier, used to uniquely identify the

@@ -8,8 +8,8 @@ Stackdriver Trace automatically analyzes all of your application's traces to
 generate in-depth latency reports to surface performance degradations, and can
 capture traces from all of your VMs, containers, or Google App Engine projects.
 
-- [google-cloud-trace API documentation](https://googleapis.github.io/google-cloud-ruby/docs/google-cloud-trace/latest)
-- [google-cloud-trace instrumentation documentation](https://googleapis.github.io/google-cloud-ruby/docs/google-cloud-trace/latest/file.INSTRUMENTATION)
+- [google-cloud-trace API documentation](https://googleapis.dev/ruby/google-cloud-trace/latest)
+- [google-cloud-trace instrumentation documentation](https://googleapis.dev/ruby/google-cloud-trace/latest/file.INSTRUMENTATION.html)
 - [google-cloud-trace on RubyGems](https://rubygems.org/gems/google-cloud-trace)
 - [Stackdriver Trace documentation](https://cloud.google.com/trace/docs/)
 
@@ -35,7 +35,7 @@ gem "google-cloud-trace"
 $ bundle install
 ```
 
-Alternatively, check out the [`stackdriver`](../stackdriver) gem that includes
+Alternatively, check out the [`stackdriver`](https://googleapis.dev/ruby/stackdriver/latest) gem that includes
 the `google-cloud-trace` gem.
 
 ## Enable Stackdriver Trace API
@@ -94,7 +94,7 @@ end
 ### Configuring the library
 
 You can customize the behavior of the Stackdriver Trace library for Ruby. See
-the [configuration guide](../stackdriver/INSTRUMENTATION_CONFIGURATION.md) for a list of
+the [configuration guide](https://googleapis.dev/ruby/stackdriver/latest/file.INSTRUMENTATION_CONFIGURATION.html) for a list of
 possible configuration options.
 
 ## Running on Google Cloud Platform
@@ -181,11 +181,11 @@ end
 
 This library also supports the other authentication methods provided by the
 `google-cloud-ruby` suite. Instructions and configuration options are covered
-in the [Authentication Guide](https://googleapis.github.io/google-cloud-ruby/docs/google-cloud-trace/latest/file.AUTHENTICATION).
+in the [Authentication Guide](https://googleapis.dev/ruby/google-cloud-trace/latest/file.AUTHENTICATION.html).
 
 ## Enabling Logging
 
-To enable logging for this library, set the logger for the underlying [gRPC](https://github.com/grpc/grpc/tree/master/src/ruby) library. The logger that you set may be a Ruby stdlib [`Logger`](https://ruby-doc.org/stdlib-2.5.0/libdoc/logger/rdoc/Logger.html) as shown below, or a [`Google::Cloud::Logging::Logger`](https://googleapis.github.io/google-cloud-ruby/docs/google-cloud-logging/latest/Google/Cloud/Logging/Logger) that will write logs to [Stackdriver Logging](https://cloud.google.com/logging/). See [grpc/logconfig.rb](https://github.com/grpc/grpc/blob/master/src/ruby/lib/grpc/logconfig.rb) and the gRPC [spec_helper.rb](https://github.com/grpc/grpc/blob/master/src/ruby/spec/spec_helper.rb) for additional information.
+To enable logging for this library, set the logger for the underlying [gRPC](https://github.com/grpc/grpc/tree/master/src/ruby) library. The logger that you set may be a Ruby stdlib [`Logger`](https://ruby-doc.org/stdlib-2.5.0/libdoc/logger/rdoc/Logger.html) as shown below, or a [`Google::Cloud::Logging::Logger`](https://googleapis.dev/ruby/google-cloud-logging/latest) that will write logs to [Stackdriver Logging](https://cloud.google.com/logging/). See [grpc/logconfig.rb](https://github.com/grpc/grpc/blob/master/src/ruby/lib/grpc/logconfig.rb) and the gRPC [spec_helper.rb](https://github.com/grpc/grpc/blob/master/src/ruby/spec/spec_helper.rb) for additional information.
 
 Configuring a Ruby stdlib logger:
 
@@ -228,18 +228,18 @@ change at any time and the public API should not be considered stable.
 Contributions to this library are always welcome and highly encouraged.
 
 See the [Contributing
-Guide](https://googleapis.github.io/google-cloud-ruby/docs/google-cloud-trace/latest/file.CONTRIBUTING)
+Guide](https://googleapis.dev/ruby/google-cloud-trace/latest/file.CONTRIBUTING.html)
 for more information on how to get started.
 
 Please note that this project is released with a Contributor Code of Conduct. By
 participating in this project you agree to abide by its terms. See [Code of
-Conduct](https://googleapis.github.io/google-cloud-ruby/docs/google-cloud-trace/latest/file.CODE_OF_CONDUCT)
+Conduct](https://googleapis.dev/ruby/google-cloud-trace/latest/file.CODE_OF_CONDUCT.html)
 for more information.
 
 ## License
 
 This library is licensed under Apache 2.0. Full license text is available in
-[LICENSE](https://googleapis.github.io/google-cloud-ruby/docs/google-cloud-trace/latest/file.LICENSE).
+[LICENSE](https://googleapis.dev/ruby/google-cloud-trace/latest/file.LICENSE.html).
 
 ## Support
 

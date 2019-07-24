@@ -55,4 +55,17 @@ class GemVersionDoc < RepoDocCommon
     build
     upload
   end
+
+  def fix_relative_links
+    Dir.chdir @input_dir do
+      files = Dir.glob("**/*.md")
+      files.each do |file|
+        content = File.read file
+        content.gsub! %r{\.\./(.*)/(.*).md}, "https://googleapis.dev/ruby/\\1/latest/file.\\2.html"
+        content.gsub! %r{\./(.*).md}, "https://googleapis.dev/ruby/#{@input_dir.split('/').last}/latest/file.\\1.html"
+        content.gsub! %r{\.\./(.*)\)}, "https://googleapis.dev/ruby/\\1/latest)"
+        File.write file, content
+      end
+    end
+  end
 end

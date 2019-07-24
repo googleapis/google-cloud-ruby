@@ -1522,9 +1522,10 @@ module Google
           #   If
           #   {Google::Cloud::Talent::V4beta1::BatchUpdateJobsRequest#update_mask update_mask}
           #   is provided, The {Google::Cloud::Talent::V4beta1::Job Job} inside
-          #   {JobResult} will only contains fields that is updated, plus the Id of the
-          #   Job. Otherwise,  {Google::Cloud::Talent::V4beta1::Job Job} will include all
-          #   fields, which can yield a very large response.
+          #   {Google::Cloud::Talent::V4beta1::JobOperationResult::JobResult JobResult}
+          #   will only contains fields that is updated, plus the Id of the Job.
+          #   Otherwise,  {Google::Cloud::Talent::V4beta1::Job Job} will include all fields,
+          #   which can yield a very large response.
           #   A hash of the same form as `Google::Protobuf::FieldMask`
           #   can also be provided.
           # @param options [Google::Gax::CallOptions]

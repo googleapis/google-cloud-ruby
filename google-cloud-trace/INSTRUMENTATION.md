@@ -16,7 +16,7 @@ you want to run on a non Google Cloud environment or you want to customize  the
 default behavior.
 
 See the [Configuration
-Guide](https://googleapis.github.io/google-cloud-ruby/docs/stackdriver/latest/file.INSTRUMENTATION_CONFIGURATION)
+Guide](https://googleapis.dev/ruby/stackdriver/INSTRUMENTATION_CONFIGURATION/latest)
 for full configuration parameters.
 
 ## Rails Integration
@@ -29,7 +29,7 @@ require "google/cloud/trace/rails"
 ```
 
 Alternatively, check out the
-[stackdriver](https://googleapis.github.io/google-cloud-ruby/#/docs/stackdriver)
+[stackdriver](https://googleapis.dev/ruby/stackdriver/latest/file.README.html)
 gem, which enables this Railtie by default.
 
 ## Rack Integration

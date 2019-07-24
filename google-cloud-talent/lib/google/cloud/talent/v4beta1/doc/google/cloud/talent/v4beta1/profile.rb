@@ -114,6 +114,8 @@ module Google
         #       {Google::Cloud::Talent::V4beta1::EmploymentRecord#is_current EmploymentRecord#is_current}
         #       for the current employment if possible. If not, it's inferred from user
         #       inputs.
+        #
+        #     The limitation for max number of employment records is 50.
         # @!attribute [rw] education_records
         #   @return [Array<Google::Cloud::Talent::V4beta1::EducationRecord>]
         #     Optional. The education history record of the candidate. It's highly
@@ -128,19 +130,27 @@ module Google
         #       {Google::Cloud::Talent::V4beta1::EducationRecord#is_current EducationRecord#is_current}
         #       for the current education if possible. If not, it's inferred from user
         #       inputs.
+        #
+        #     The limitation for max number of education records is 10.
         # @!attribute [rw] skills
         #   @return [Array<Google::Cloud::Talent::V4beta1::Skill>]
         #     Optional. The skill set of the candidate. It's highly recommended to
         #     provide as much information as possible to help improve the search quality.
+        #
+        #     The limitation for max number of skills is 100.
         # @!attribute [rw] activities
         #   @return [Array<Google::Cloud::Talent::V4beta1::Activity>]
         #     Optional. The individual or collaborative activities which the candidate
         #     has participated in, for example, open-source projects, class assignments
         #     that aren't listed in
         #     {Google::Cloud::Talent::V4beta1::Profile#employment_records employment_records}.
+        #
+        #     The limitation for max number of activities is 50.
         # @!attribute [rw] publications
         #   @return [Array<Google::Cloud::Talent::V4beta1::Publication>]
         #     Optional. The publications published by the candidate.
+        #
+        #     The limitation for max number of publications is 50.
         # @!attribute [rw] patents
         #   @return [Array<Google::Cloud::Talent::V4beta1::Patent>]
         #     Optional. The patents acquired by the candidate.
@@ -585,9 +595,13 @@ module Google
         #     Optional. A list of team members involved in this activity.
         #
         #     Number of characters allowed is 100.
+        #
+        #     The limitation for max number of team members is 50.
         # @!attribute [rw] skills_used
         #   @return [Array<Google::Cloud::Talent::V4beta1::Skill>]
         #     Optional. A list of skills used in this activity.
+        #
+        #     The limitation for max number of skills used is 50.
         # @!attribute [rw] activity_name_snippet
         #   @return [String]
         #     Output only. Activity name snippet shows how the

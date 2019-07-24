@@ -23,7 +23,7 @@
 ## Before you begin
 
 Before running the samples, make sure you've followed the steps in the
-[Before you begin section](../README.md#before-you-begin) of the client
+[Before you begin section](https://github.com/googleapis/google-cloud-ruby/tree/master/google-cloud-bigtable/samples#before-you-begin) of the client
 library's README.
 
 ## Samples
