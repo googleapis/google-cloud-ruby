@@ -201,7 +201,7 @@ for file in ['lib/**/*.rb', '*.md']:
 s.replace(
     '*.md',
     'https://googleapis.github.io/google-cloud-ruby/#/docs/.*/authentication',
-    './AUTHENTICATION.md'
+    'https://googleapis.dev/ruby/google-cloud-container/latest/file.AUTHENTICATION.html'
 )
 s.replace(
     'lib/**/*.rb',
