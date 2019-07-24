@@ -36,6 +36,3 @@ Here are the environment variables (in the order they are checked) for credentia
 
 1. `GOOGLE_CLOUD_KEYFILE` - Path to JSON file
 2. `GOOGLE_CLOUD_KEYFILE_JSON` - JSON contents
-
-
-
