@@ -2,7 +2,7 @@
 
 [Stackdriver Logging](https://cloud.google.com/logging/) ([docs](https://cloud.google.com/logging/docs/)) allows you to store, search, analyze, monitor, and alert on log data and events from Google Cloud Platform and Amazon Web Services (AWS). It supports ingestion of any custom log data from any source. Stackdriver Logging is a fully-managed service that performs at scale and can ingest application and system log data from thousands of VMs. Even better, you can analyze all that log data in real-time.
 
-- [google-cloud-logging API documentation](https://googleapis.github.io/google-cloud-ruby/docs/google-cloud-logging/latest)
+- [google-cloud-logging API documentation](https://googleapis.dev/ruby/google-cloud-logging/latest)
 - [google-cloud-logging on RubyGems](https://rubygems.org/gems/google-cloud-logging)
 - [Stackdriver Logging documentation](https://cloud.google.com/logging/docs/)
 
@@ -28,7 +28,7 @@ gem "google-cloud-logging"
 $ bundle install
 ```
 
-Alternatively, check out the [`stackdriver`](../stackdriver) gem that includes
+Alternatively, check out the [`stackdriver`](https://googleapis.dev/ruby/stackdriver/latest) gem that includes
 the `google-cloud-logging` gem.
 
 ## Logging using client library
@@ -112,7 +112,7 @@ logger.
 ### Configuring the framework integration
 
 You can customize the behavior of the Stackdriver Logging framework integration
-for Ruby. See the [configuration guide](../stackdriver/INSTRUMENTATION_CONFIGURATION.md) for a
+for Ruby. See the [configuration guide](https://googleapis.dev/ruby/stackdriver/latest/file.INSTRUMENTATION_CONFIGURATION.html) for a
 list of possible configuration options.
 
 ## Authentication
@@ -153,12 +153,12 @@ end
 ```
 
 See the [Authentication
-Guide](https://googleapis.github.io/google-cloud-ruby/docs/google-cloud-logging/latest/file.AUTHENTICATION).
+Guide](https://googleapis.dev/ruby/google-cloud-logging/latest/file.AUTHENTICATION.html).
 for more ways to authenticate the client library.
 
 ## Enabling Logging
 
-To enable logging for this library, set the logger for the underlying [gRPC](https://github.com/grpc/grpc/tree/master/src/ruby) library. The logger that you set may be a Ruby stdlib [`Logger`](https://ruby-doc.org/stdlib-2.5.0/libdoc/logger/rdoc/Logger.html) as shown below, or a [`Google::Cloud::Logging::Logger`](https://googleapis.github.io/google-cloud-ruby/docs/google-cloud-logging/latest/Google/Cloud/Logging/Logger) that will write logs to [Stackdriver Logging](https://cloud.google.com/logging/). See [grpc/logconfig.rb](https://github.com/grpc/grpc/blob/master/src/ruby/lib/grpc/logconfig.rb) and the gRPC [spec_helper.rb](https://github.com/grpc/grpc/blob/master/src/ruby/spec/spec_helper.rb) for additional information.
+To enable logging for this library, set the logger for the underlying [gRPC](https://github.com/grpc/grpc/tree/master/src/ruby) library. The logger that you set may be a Ruby stdlib [`Logger`](https://ruby-doc.org/stdlib-2.5.0/libdoc/logger/rdoc/Logger.html) as shown below, or a [`Google::Cloud::Logging::Logger`](https://googleapis.dev/ruby/google-cloud-logging/latest) that will write logs to [Stackdriver Logging](https://cloud.google.com/logging/). See [grpc/logconfig.rb](https://github.com/grpc/grpc/blob/master/src/ruby/lib/grpc/logconfig.rb) and the gRPC [spec_helper.rb](https://github.com/grpc/grpc/blob/master/src/ruby/spec/spec_helper.rb) for additional information.
 
 Configuring a Ruby stdlib logger:
 
@@ -198,18 +198,18 @@ This library follows [Semantic Versioning](http://semver.org/).
 Contributions to this library are always welcome and highly encouraged.
 
 See the [Contributing
-Guide](https://googleapis.github.io/google-cloud-ruby/docs/google-cloud-logging/latest/file.CONTRIBUTING)
+Guide](https://googleapis.dev/ruby/google-cloud-logging/latest/file.CONTRIBUTING.html)
 for more information on how to get started.
 
 Please note that this project is released with a Contributor Code of Conduct. By
 participating in this project you agree to abide by its terms. See [Code of
-Conduct](https://googleapis.github.io/google-cloud-ruby/docs/google-cloud-logging/latest/file.CODE_OF_CONDUCT)
+Conduct](https://googleapis.dev/ruby/google-cloud-logging/latest/file.CODE_OF_CONDUCT.html)
 for more information.
 
 ## License
 
 This library is licensed under Apache 2.0. Full license text is available in
-[LICENSE](https://googleapis.github.io/google-cloud-ruby/docs/google-cloud-logging/latest/file.LICENSE).
+[LICENSE](https://googleapis.dev/ruby/google-cloud-logging/latest/file.LICENSE.html).
 
 ## Support
 

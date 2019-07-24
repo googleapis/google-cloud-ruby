@@ -25,8 +25,7 @@ module Google
         # | [DataTransferServiceClient][] | The Google BigQuery Data Transfer Service API enables BigQuery users to configure the transfer of their data from other Google Products into BigQuery. |
         # | [Data Types][] | Data types for Google::Cloud::Bigquery::DataTransfer::V1 |
         #
-        # [DataTransferServiceClient]: https://googleapis.github.io/google-cloud-ruby/#/docs/google-cloud-bigquery-data_transfer/latest/google/cloud/bigquery/datatransfer/v1/datatransferserviceclient
-        # [Data Types]: https://googleapis.github.io/google-cloud-ruby/#/docs/google-cloud-bigquery-data_transfer/latest/google/cloud/bigquery/datatransfer/v1/datatypes
+        # [DataTransferServiceClient]: https://googleapis.dev/ruby/google-cloud-bigquery-data_transfer/latest/Google/Cloud/Bigquery/DataTransfer/V1/DataTransferServiceClient.html
         #
         module V1
           # Represents a data source parameter with validation rules, so that

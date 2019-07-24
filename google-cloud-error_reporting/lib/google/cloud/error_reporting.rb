@@ -136,7 +136,7 @@ module Google
       #   ErrorReporting.
       #
       # See the [Configuration
-      # Guide](https://googleapis.github.io/google-cloud-ruby/docs/stackdriver/latest/file.INSTRUMENTATION_CONFIGURATION)
+      # Guide](https://googleapis.dev/ruby/stackdriver/latest/file.INSTRUMENTATION_CONFIGURATION.html)
       # for full configuration parameters.
       #
       # @example
