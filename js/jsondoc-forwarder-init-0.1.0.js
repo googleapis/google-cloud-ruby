@@ -8,7 +8,7 @@ var currentUrl = forwardUrl ? forwardUrl : window.location.href;
 
 var newUrl = getDevsiteUrl(currentUrl);
 
-if (noEndSlash(newUrl) !=== noEndSlash(window.location.href)) {
+if (noEndSlash(newUrl) !== noEndSlash(window.location.href)) {
     window.location.href = newUrl;
 }
 
