@@ -176,3 +176,10 @@ s.replace(
     'https://googleapis.github.io/google-cloud-ruby/#/docs/.*/authentication',
     'https://googleapis.dev/ruby/google-cloud-firestore/latest/file.AUTHENTICATION.html'
 )
+
+# Update Beta link title for GA
+s.replace(
+    'lib/google/cloud/firestore/v1beta1.rb',
+    '# Ruby Client for Google Cloud Firestore API \(\[Beta\]\(https:\/\/github\.com\/googleapis\/google-cloud-ruby#versioning\)\)',
+    '# Ruby Client for Google Cloud Firestore API ([GA](https://github.com/googleapis/google-cloud-ruby#versioning))'
+)
