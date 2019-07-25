@@ -36,7 +36,7 @@ module Google
       # 1. [Select or create a Cloud Platform project.](https://console.cloud.google.com/project)
       # 2. [Enable billing for your project.](https://cloud.google.com/billing/docs/how-to/modify-project#enable_billing_for_a_project)
       # 3. [Enable the BigQuery Data Transfer API.](https://console.cloud.google.com/apis/library/bigquerydatatransfer.googleapis.com)
-      # 4. [Setup Authentication.](https://googleapis.dev/ruby/google-cloud-bigquery-data_transfer/file.AUTHENTICATION.html)
+      # 4. [Setup Authentication.](https://googleapis.dev/ruby/google-cloud-bigquery-data_transfer/latest/file.AUTHENTICATION.html)
       #
       # ### Installation
       # ```
