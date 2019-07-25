@@ -77,8 +77,8 @@ describe "Instance Tables", :bigtable do
     table_id = "test-table-#{random_str}"
 
     table = bigtable.create_table(instance_id, table_id) do |cfs|
-      cfs.add("cf1", Google::Cloud::Bigtable::GcRule.max_versions(1))
-      cfs.add("cf2") # default service value for GcRule
+      cfs.add("cf1") # default service value for GcRule
+      cfs.add("cf2", Google::Cloud::Bigtable::GcRule.max_versions(1))
     end
 
     modifications = []
@@ -87,10 +87,10 @@ describe "Instance Tables", :bigtable do
     )
 
     modifications << Google::Cloud::Bigtable::ColumnFamily.update_modification(
-      "cf1", Google::Cloud::Bigtable::GcRule.max_versions(5)
+      "cf2", Google::Cloud::Bigtable::GcRule.max_versions(5)
     )
 
-    modifications << Google::Cloud::Bigtable::ColumnFamily.drop_modification("cf2")
+    modifications << Google::Cloud::Bigtable::ColumnFamily.drop_modification("cf1")
 
     updated_table = table.modify_column_families(modifications)
     updated_table.must_be_kind_of Google::Cloud::Bigtable::Table
@@ -100,10 +100,10 @@ describe "Instance Tables", :bigtable do
     cf3.must_be_kind_of Google::Cloud::Bigtable::ColumnFamily
     cf3.gc_rule.max_age.must_equal 600
 
-    cf1 = column_families.find{|c| c.name == "cf1"}
-    cf1.gc_rule.max_versions.must_equal 5
+    cf2 = column_families.find{|c| c.name == "cf2"}
+    cf2.gc_rule.max_versions.must_equal 5
 
-    column_families.find{|c| c.name == "cf2"}.must_be :nil?
+    column_families.find{|c| c.name == "cf1"}.must_be :nil?
 
     table.delete
   end
