@@ -25,6 +25,8 @@ describe Google::Cloud::PubSub::Topic, :update, :mock_pubsub do
   end
   let(:kms_key_name) { "projects/a/locations/b/keyRings/c/cryptoKeys/d" }
   let(:new_kms_key_name) { "projects/d/locations/c/keyRings/b/cryptoKeys/a" }
+  let(:persistence_regions) { ["us-west1", "us-west2"] }
+  let(:new_persistence_regions) { ["us-central1", "us-central2"] }
   let(:topic_grpc) { Google::Cloud::PubSub::V1::Topic.new topic_hash(topic_name, labels: labels) }
   let(:topic) { Google::Cloud::PubSub::Topic.from_grpc topic_grpc, pubsub.service }
 
@@ -127,6 +129,72 @@ describe Google::Cloud::PubSub::Topic, :update, :mock_pubsub do
     mock.verify
 
     topic.kms_key.must_be :empty?
+  end
+
+  it "updates persistence_regions" do
+    topic_grpc.message_storage_policy = Google::Cloud::PubSub::V1::MessageStoragePolicy.new(
+      allowed_persistence_regions: persistence_regions
+    )
+    topic.persistence_regions.must_equal persistence_regions
+
+    update_grpc = Google::Cloud::PubSub::V1::Topic.new(
+      name: topic_path(topic_name),
+      message_storage_policy: { allowed_persistence_regions: new_persistence_regions }
+    )
+    update_mask = Google::Protobuf::FieldMask.new paths: ["message_storage_policy"]
+    mock = Minitest::Mock.new
+    mock.expect :update_topic, update_grpc, [update_grpc, update_mask, options: default_options]
+    topic.service.mocked_publisher = mock
+
+    topic.persistence_regions = new_persistence_regions
+
+    mock.verify
+
+    topic.persistence_regions.must_equal new_persistence_regions
+  end
+
+  it "updates persistence_regions to empty array" do
+    topic_grpc.message_storage_policy = Google::Cloud::PubSub::V1::MessageStoragePolicy.new(
+      allowed_persistence_regions: persistence_regions
+    )
+    topic.persistence_regions.must_equal persistence_regions
+
+    update_grpc = Google::Cloud::PubSub::V1::Topic.new(
+      name: topic_path(topic_name),
+      message_storage_policy: { allowed_persistence_regions: [] }
+    )
+    update_mask = Google::Protobuf::FieldMask.new paths: ["message_storage_policy"]
+    mock = Minitest::Mock.new
+    mock.expect :update_topic, update_grpc, [update_grpc, update_mask, options: default_options]
+    topic.service.mocked_publisher = mock
+
+    topic.persistence_regions = []
+
+    mock.verify
+
+    topic.persistence_regions.must_be :empty?
+  end
+
+  it "updates persistence_regions to nil" do
+    topic_grpc.message_storage_policy = Google::Cloud::PubSub::V1::MessageStoragePolicy.new(
+      allowed_persistence_regions: persistence_regions
+    )
+    topic.persistence_regions.must_equal persistence_regions
+
+    update_grpc = Google::Cloud::PubSub::V1::Topic.new(
+      name: topic_path(topic_name),
+      message_storage_policy: { allowed_persistence_regions: [] }
+    )
+    update_mask = Google::Protobuf::FieldMask.new paths: ["message_storage_policy"]
+    mock = Minitest::Mock.new
+    mock.expect :update_topic, update_grpc, [update_grpc, update_mask, options: default_options]
+    topic.service.mocked_publisher = mock
+
+    topic.persistence_regions = nil
+
+    mock.verify
+
+    topic.persistence_regions.must_be :empty?
   end
 
   describe :reference do

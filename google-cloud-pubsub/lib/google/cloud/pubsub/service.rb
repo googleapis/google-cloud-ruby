@@ -126,12 +126,21 @@ module Google
 
         ##
         # Creates the given topic with the given name.
-        def create_topic topic_name, labels: nil, kms_key_name: nil, options: {}
+        def create_topic topic_name, labels: nil, kms_key_name: nil,
+                         persistence_regions: nil, options: {}
+          if persistence_regions
+            message_storage_policy = {
+              allowed_persistence_regions: Array(persistence_regions)
+            }
+          end
+
           execute do
-            publisher.create_topic topic_path(topic_name, options),
-                                   labels:       labels,
-                                   kms_key_name: kms_key_name,
-                                   options:      default_options
+            publisher.create_topic \
+              topic_path(topic_name, options),
+              labels:                 labels,
+              kms_key_name:           kms_key_name,
+              message_storage_policy: message_storage_policy,
+              options:                default_options
           end
         end
 

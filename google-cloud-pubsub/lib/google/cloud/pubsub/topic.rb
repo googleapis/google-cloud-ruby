@@ -213,6 +213,30 @@ module Google
         end
 
         ##
+        # Sets the list of GCP region IDs where messages that are published to
+        # the topic may be persisted in storage.
+        #
+        # @param [Array<String>] new_persistence_regions
+        #
+        # @example
+        #   require "google/cloud/pubsub"
+        #
+        #   pubsub = Google::Cloud::PubSub.new
+        #
+        #   topic = pubsub.topic "my-topic"
+        #
+        #   topic.persistence_regions = ["us-central1", "us-central2"]
+        #
+        def persistence_regions= new_persistence_regions
+          update_grpc = Google::Cloud::PubSub::V1::Topic.new \
+            name: name, message_storage_policy: {
+              allowed_persistence_regions: Array(new_persistence_regions)
+            }
+          @grpc = service.update_topic update_grpc, :message_storage_policy
+          @resource_name = nil
+        end
+
+        ##
         # Permanently deletes the topic.
         #
         # @return [Boolean] Returns `true` if the topic was deleted.

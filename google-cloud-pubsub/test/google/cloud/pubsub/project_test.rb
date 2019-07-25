@@ -53,6 +53,7 @@ describe Google::Cloud::PubSub::Project, :mock_pubsub do
   end
   let(:labels) { { "foo" => "bar" } }
   let(:kms_key) { "projects/a/locations/b/keyRings/c/cryptoKeys/d" }
+  let(:persistence_regions) { ["us-west1", "us-west2"] }
 
   it "knows the project identifier" do
     pubsub.project.must_equal project
@@ -63,7 +64,7 @@ describe Google::Cloud::PubSub::Project, :mock_pubsub do
 
     create_res = Google::Cloud::PubSub::V1::Topic.new topic_hash(new_topic_name)
     mock = Minitest::Mock.new
-    mock.expect :create_topic, create_res, [topic_path(new_topic_name), labels: nil, kms_key_name: nil, options: default_options]
+    mock.expect :create_topic, create_res, [topic_path(new_topic_name), labels: nil, kms_key_name: nil, message_storage_policy: nil, options: default_options]
     pubsub.service.mocked_publisher = mock
 
     topic = pubsub.create_topic new_topic_name
@@ -74,6 +75,7 @@ describe Google::Cloud::PubSub::Project, :mock_pubsub do
     topic.labels.must_be :empty?
     topic.labels.must_be :frozen?
     topic.kms_key.must_be :empty?
+    topic.persistence_regions.must_be :empty?
   end
 
   it "creates a topic with new_topic_alias" do
@@ -81,7 +83,7 @@ describe Google::Cloud::PubSub::Project, :mock_pubsub do
 
     create_res = Google::Cloud::PubSub::V1::Topic.new topic_hash(new_topic_name)
     mock = Minitest::Mock.new
-    mock.expect :create_topic, create_res, [topic_path(new_topic_name), labels: nil, kms_key_name: nil, options: default_options]
+    mock.expect :create_topic, create_res, [topic_path(new_topic_name), labels: nil, kms_key_name: nil, message_storage_policy: nil, options: default_options]
     pubsub.service.mocked_publisher = mock
 
     topic = pubsub.new_topic new_topic_name
@@ -92,6 +94,7 @@ describe Google::Cloud::PubSub::Project, :mock_pubsub do
     topic.labels.must_be :empty?
     topic.labels.must_be :frozen?
     topic.kms_key.must_be :empty?
+    topic.persistence_regions.must_be :empty?
   end
 
   it "creates a topic with labels" do
@@ -99,7 +102,7 @@ describe Google::Cloud::PubSub::Project, :mock_pubsub do
 
     create_res = Google::Cloud::PubSub::V1::Topic.new topic_hash(new_topic_name, labels: labels)
     mock = Minitest::Mock.new
-    mock.expect :create_topic, create_res, [topic_path(new_topic_name), labels: labels, kms_key_name: nil, options: default_options]
+    mock.expect :create_topic, create_res, [topic_path(new_topic_name), labels: labels, kms_key_name: nil, message_storage_policy: nil, options: default_options]
     pubsub.service.mocked_publisher = mock
 
     topic = pubsub.create_topic new_topic_name, labels: labels
@@ -110,6 +113,7 @@ describe Google::Cloud::PubSub::Project, :mock_pubsub do
     topic.labels.must_equal labels
     topic.labels.must_be :frozen?
     topic.kms_key.must_be :empty?
+    topic.persistence_regions.must_be :empty?
   end
 
   it "creates a topic with kms_key" do
@@ -117,7 +121,7 @@ describe Google::Cloud::PubSub::Project, :mock_pubsub do
 
     create_res = Google::Cloud::PubSub::V1::Topic.new topic_hash(new_topic_name, kms_key_name: kms_key)
     mock = Minitest::Mock.new
-    mock.expect :create_topic, create_res, [topic_path(new_topic_name), labels: nil, kms_key_name: kms_key, options: default_options]
+    mock.expect :create_topic, create_res, [topic_path(new_topic_name), labels: nil, kms_key_name: kms_key, message_storage_policy: nil, options: default_options]
     pubsub.service.mocked_publisher = mock
 
     topic = pubsub.create_topic new_topic_name, kms_key: kms_key
@@ -128,6 +132,26 @@ describe Google::Cloud::PubSub::Project, :mock_pubsub do
     topic.labels.must_be :empty?
     topic.labels.must_be :frozen?
     topic.kms_key.must_equal kms_key
+    topic.persistence_regions.must_be :empty?
+  end
+
+  it "creates a topic with persistence_regions" do
+    new_topic_name = "new-topic-#{Time.now.to_i}"
+
+    create_res = Google::Cloud::PubSub::V1::Topic.new topic_hash(new_topic_name, persistence_regions: persistence_regions)
+    mock = Minitest::Mock.new
+    mock.expect :create_topic, create_res, [topic_path(new_topic_name), labels: nil, kms_key_name: nil, message_storage_policy: { allowed_persistence_regions: persistence_regions }, options: default_options]
+    pubsub.service.mocked_publisher = mock
+
+    topic = pubsub.create_topic new_topic_name, persistence_regions: persistence_regions
+
+    mock.verify
+
+    topic.name.must_equal topic_path(new_topic_name)
+    topic.labels.must_be :empty?
+    topic.labels.must_be :frozen?
+    topic.kms_key.must_be :empty?
+    topic.persistence_regions.must_equal persistence_regions
   end
 
   it "gets a topic" do
