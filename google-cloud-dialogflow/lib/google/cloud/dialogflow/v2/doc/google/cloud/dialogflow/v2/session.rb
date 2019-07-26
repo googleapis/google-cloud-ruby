@@ -195,7 +195,7 @@ module Google
         #   @return [Google::Cloud::Dialogflow::V2::Intent]
         #     The intent that matched the conversational query. Some, not
         #     all fields are filled in this message, including but not limited to:
-        #     `name`, `display_name` and `webhook_state`.
+        #     `name`, `display_name`, `end_interaction` and `is_fallback`.
         # @!attribute [rw] intent_detection_confidence
         #   @return [Float]
         #     The intent detection confidence. Values range from 0.0
