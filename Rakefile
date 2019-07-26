@@ -590,20 +590,24 @@ namespace :kokoro do
     broken_devsite_links = Hash.new { |h, k| h[k] = [] }
     markdown_files = Dir.glob "**/*.md"
     markdown_files.each do |file|
-      out, _err, _st = Open3.capture3 "linkinator #{github_base}#{file} --skip '^(?!(\\Wruby.*google|.*google.*\\Wruby|.*cloud\\.google\\.com))'"
+      out, err, st = Open3.capture3 "npx linkinator #{github_base}#{file} --skip '^(?!(\\Wruby.*google|.*google.*\\Wruby|.*cloud\\.google\\.com))'"
       puts out
+      exit_status = [exit_status, st.to_i].max
+      puts err unless st.to_i.zero? 
       checked_links = out.split "\n"
       checked_links.select! { |link| link =~ /\[\d+\]/ && !link.include?("[200]") }
       broken_markdown_links[file] += checked_links unless checked_links.empty?
     end
     gems.each do |gem|
-      out, _err, _st = Open3.capture3 "linkinator #{devsite_base}#{gem}/latest --recurse --skip https:.*github.*"
+      out, err, st = Open3.capture3 "npx linkinator #{devsite_base}#{gem}/latest --recurse --skip https:.*github.*"
       puts out
+      exit_status = [exit_status, st.to_i].max
+      puts err unless st.to_i.zero?
       checked_links = out.split "\n"
       checked_links.select! { |link| link =~ /\[\d+\]/ && !link.include?("[200]") }
       broken_devsite_links[gem] += checked_links unless checked_links.empty?
     end
-    success = broken_markdown_links.keys.empty? && broken_devsite_links.keys.empty?
+    success = broken_markdown_links.keys.empty? && broken_devsite_links.keys.empty? ? 0 : 1
     broken_markdown_links.each do |file, links|
       puts "#{file} contains the following broken links:"
       links.each { |link| puts "  #{link}" }
@@ -615,7 +619,7 @@ namespace :kokoro do
       puts ""
     end
 
-    exit 2 unless success
+    exit [exit_status, success].max
   end
 
   task :nightly do
