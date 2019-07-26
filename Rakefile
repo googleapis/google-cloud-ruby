@@ -555,7 +555,6 @@ namespace :kokoro do
 
   task :presubmit do
     run_ci do
-      Rake::Task["kokoro:windows_acceptance_fix"].invoke
       exit_status = run_command_with_timeout "bundle exec rake ci", 1800
     end
     exit [exit_status, verify_in_gemfile(ENV["PACKAGE"])].max
@@ -570,7 +569,6 @@ namespace :kokoro do
       else
         header "Gem Unchanged - Skipping Acceptance"
       end
-      Rake::Task["kokoro:windows_acceptance_fix"].invoke
       command = "bundle exec rake ci"
       command += ":acceptance" if updated
       exit_status = run_command_with_timeout command, 3600
@@ -625,7 +623,6 @@ namespace :kokoro do
 
   task :nightly do
     run_ci do
-      Rake::Task["kokoro:windows_acceptance_fix"].invoke
       exit_status = run_command_with_timeout "bundle exec rake ci:acceptance", 3600
     end
     exit [exit_status, verify_in_gemfile(ENV["PACKAGE"])].max
@@ -677,6 +674,7 @@ namespace :kokoro do
       Bundler.with_clean_env do
         sh "bundle update"
         Rake::Task["kokoro:load_env_vars"].invoke
+        Rake::Task["kokoro:windows_acceptance_fix"].invoke
         yield
       end
     end
