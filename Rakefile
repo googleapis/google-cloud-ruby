@@ -584,7 +584,8 @@ namespace :kokoro do
 
     header "Using Ruby - #{RUBY_VERSION}"
     header_2 ENV["JOB_TYPE"]
-    github_base = "https://github.com/googleapis/google-cloud-ruby/blob/master/"
+    git_commit = ENV["KOKORO_GITHUB_COMMIT"] || "master"
+    github_base = "https://github.com/googleapis/google-cloud-ruby/tree/#{git_commit}/"
     devsite_base = "https://googleapis.dev/ruby/"
     broken_markdown_links = Hash.new { |h, k| h[k] = [] }
     broken_devsite_links = Hash.new { |h, k| h[k] = [] }
