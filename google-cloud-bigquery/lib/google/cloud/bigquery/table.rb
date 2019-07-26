@@ -326,6 +326,52 @@ module Google
         end
 
         ###
+        # Whether queries over this table require a partition filter that can be
+        # used for partition elimination to be specified. See [Partitioned
+        # Tables](https://cloud.google.com/bigquery/docs/partitioned-tables).
+        #
+        # @return [Boolean, nil] `true` when a partition filter will be
+        #   required, `false` otherwise, or `nil` if the object is a reference
+        #   (see {#reference?}).
+        #
+        # @!group Attributes
+        #
+        def require_partition_filter
+          return nil if reference?
+          ensure_full_data!
+          @gapi.require_partition_filter
+        end
+
+        ##
+        # Sets whether queries over this table require a partition filter. See
+        # [Partitioned
+        # Tables](https://cloud.google.com/bigquery/docs/partitioned-tables).
+        #
+        # If the table is not a full resource representation (see
+        # {#resource_full?}), the full representation will be retrieved before
+        # the update to comply with ETag-based optimistic concurrency control.
+        #
+        # @param [Boolean] new_require Whether queries over this table require a
+        #   partition filter.
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #   table = dataset.create_table "my_table" do |table|
+        #     table.require_partition_filter = true
+        #   end
+        #
+        # @!group Attributes
+        #
+        def require_partition_filter= new_require
+          reload! unless resource_full?
+          @gapi.require_partition_filter = new_require
+          patch_gapi! :require_partition_filter
+        end
+
+        ###
         # Checks if the table is clustered.
         #
         # @see https://cloud.google.com/bigquery/docs/clustered-tables

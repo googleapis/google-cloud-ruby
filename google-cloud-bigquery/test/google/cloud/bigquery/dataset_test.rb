@@ -226,6 +226,26 @@ describe Google::Cloud::Bigquery::Dataset, :mock_bigquery do
     table.clustering_fields.must_equal clustering_fields
   end
 
+  it "creates a table with require_partition_filter in a block" do
+    mock = Minitest::Mock.new
+    insert_table = Google::Apis::BigqueryV2::Table.new(
+      table_reference: Google::Apis::BigqueryV2::TableReference.new(
+        project_id: project, dataset_id: dataset_id, table_id: table_id),
+      require_partition_filter: true)
+    mock.expect :insert_table, insert_table, [project, dataset_id, insert_table]
+    dataset.service.mocked_service = mock
+
+    table = dataset.create_table table_id do |t|
+      t.require_partition_filter = true
+    end
+
+    mock.verify
+
+    table.must_be_kind_of Google::Cloud::Bigquery::Table
+    table.table_id.must_equal table_id
+    table.require_partition_filter.must_equal true
+  end
+
   it "creates a table with a schema inline" do
     mock = Minitest::Mock.new
     insert_table = Google::Apis::BigqueryV2::Table.new(

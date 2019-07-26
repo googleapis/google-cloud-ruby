@@ -49,6 +49,7 @@ describe Google::Cloud::Bigquery::Table, :mock_bigquery do
     table.location.must_equal location_code
     table.labels.must_equal labels
     table.labels.must_be :frozen?
+    table.require_partition_filter.must_equal true
   end
 
   it "knows its fully-qualified ID" do
