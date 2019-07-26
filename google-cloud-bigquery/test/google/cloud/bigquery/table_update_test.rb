@@ -45,6 +45,7 @@ describe Google::Cloud::Bigquery::Table, :update, :mock_bigquery do
     table.time_partitioning_type.must_be_nil
     table.time_partitioning_field.must_be_nil
     table.time_partitioning_expiration.must_be_nil
+    table.require_partition_filter.must_equal true
     table.clustering_fields.must_be_nil
 
     table.name = new_table_name
@@ -55,6 +56,7 @@ describe Google::Cloud::Bigquery::Table, :update, :mock_bigquery do
     table.time_partitioning_type.must_be_nil
     table.time_partitioning_field.must_be_nil
     table.time_partitioning_expiration.must_be_nil
+    table.require_partition_filter.must_equal true
     table.clustering_fields.must_be_nil
 
     mock.verify
@@ -77,6 +79,7 @@ describe Google::Cloud::Bigquery::Table, :update, :mock_bigquery do
     table.time_partitioning_type.must_be_nil
     table.time_partitioning_field.must_be_nil
     table.time_partitioning_expiration.must_be_nil
+    table.require_partition_filter.must_equal true
 
     table.description = new_description
 
@@ -86,6 +89,7 @@ describe Google::Cloud::Bigquery::Table, :update, :mock_bigquery do
     table.time_partitioning_type.must_be_nil
     table.time_partitioning_field.must_be_nil
     table.time_partitioning_expiration.must_be_nil
+    table.require_partition_filter.must_equal true
 
     mock.verify
   end
@@ -111,6 +115,7 @@ describe Google::Cloud::Bigquery::Table, :update, :mock_bigquery do
     table.time_partitioning_type.must_be_nil
     table.time_partitioning_field.must_be_nil
     table.time_partitioning_expiration.must_be_nil
+    table.require_partition_filter.must_equal true
 
     table.time_partitioning_type = type
 
@@ -119,6 +124,7 @@ describe Google::Cloud::Bigquery::Table, :update, :mock_bigquery do
     table.schema.fields.count.must_equal schema.fields.count
     table.time_partitioning_type.must_equal type
     table.time_partitioning_expiration.must_be_nil
+    table.require_partition_filter.must_equal true
 
     mock.verify
   end
@@ -144,6 +150,7 @@ describe Google::Cloud::Bigquery::Table, :update, :mock_bigquery do
     table.time_partitioning_type.must_be_nil
     table.time_partitioning_field.must_be_nil
     table.time_partitioning_expiration.must_be_nil
+    table.require_partition_filter.must_equal true
 
     table.time_partitioning_field = field
 
@@ -153,6 +160,7 @@ describe Google::Cloud::Bigquery::Table, :update, :mock_bigquery do
     table.time_partitioning_type.must_be_nil
     table.time_partitioning_field.must_equal field
     table.time_partitioning_expiration.must_be_nil
+    table.require_partition_filter.must_equal true
 
     mock.verify
   end
@@ -179,6 +187,7 @@ describe Google::Cloud::Bigquery::Table, :update, :mock_bigquery do
     table.time_partitioning_type.must_be_nil
     table.time_partitioning_field.must_be_nil
     table.time_partitioning_expiration.must_be_nil
+    table.require_partition_filter.must_equal true
 
     table.time_partitioning_expiration = expiration
 
@@ -188,6 +197,38 @@ describe Google::Cloud::Bigquery::Table, :update, :mock_bigquery do
     table.time_partitioning_type.must_be_nil
     table.time_partitioning_field.must_be_nil
     table.time_partitioning_expiration.must_equal expiration
+    table.require_partition_filter.must_equal true
+
+    mock.verify
+  end
+
+  it "updates require_partition_filter" do
+    mock = Minitest::Mock.new
+    table_hash = random_table_hash dataset_id, table_id, table_name, description
+    table_hash["requirePartitionFilter"] = false
+    request_table_gapi = Google::Apis::BigqueryV2::Table.new require_partition_filter: false, etag: etag
+    mock.expect :patch_table, return_table(table_hash),
+      [project, dataset_id, table_id, request_table_gapi, {options: {header: {"If-Match" => etag}}}]
+    mock.expect :get_table, return_table(table_hash), [project, dataset_id, table_id]
+    table.service.mocked_service = mock
+
+    table.name.must_equal table_name
+    table.description.must_equal description
+    table.schema.fields.count.must_equal schema.fields.count
+    table.time_partitioning_type.must_be_nil
+    table.time_partitioning_field.must_be_nil
+    table.time_partitioning_expiration.must_be_nil
+    table.require_partition_filter.must_equal true
+
+    table.require_partition_filter = false
+
+    table.name.must_equal table_name
+    table.description.must_equal description
+    table.schema.fields.count.must_equal schema.fields.count
+    table.time_partitioning_type.must_be_nil
+    table.time_partitioning_field.must_be_nil
+    table.time_partitioning_expiration.must_be_nil
+    table.require_partition_filter.must_equal false
 
     mock.verify
   end
