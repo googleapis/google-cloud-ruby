@@ -32,7 +32,7 @@ module Google
           #
           # @param family [String] Column family name
           # @param qualifier [String] Column cell qualifier name
-          # @param timestamp [Integer] Timestamp in micro seconds
+          # @param timestamp [Integer] Timestamp in microseconds
           # @param value [String] Cell value
           # @param labels [Array<String>] List of label array
 

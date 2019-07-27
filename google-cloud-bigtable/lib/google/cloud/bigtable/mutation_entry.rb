@@ -79,12 +79,15 @@ module Google
         #   Can be any byte string, including an empty string.
         # @param value [String, Integer] Cell value data.
         #   The value to be written into the specified cell.
-        # @param timestamp [Time, Integer] Timestamp value.
+        # @param timestamp [Integer] Timestamp value in microseconds.
         #   The timestamp of the cell into which new data should be written.
         #   Use -1 for current Bigtable server time.
         #   Otherwise, the client should set this value itself, noting that the
         #   default value is a timestamp of zero if the field is left unspecified.
-        #   Values must match the granularity of the table (micros or millis, for example).
+        #   Values are in microseconds but must match the granularity of the
+        #   table. Therefore, if {Table#granularity} is `MILLIS` (the default),
+        #   the given value must be a multiple of 1000 (millisecond
+        #   granularity). For example: `1564257960168000`.
         # @return [MutationEntry]  `self` object of entry for chaining.
         #
         # @example
@@ -128,10 +131,18 @@ module Google
         # @param qualifier [String] Column qualifier name.
         #   The qualifier of the column from which cells should be deleted.
         #   Can be any byte string, including an empty string.
-        # @param timestamp_from [Integer] Timestamp lower boundary. Optional.
-        #   The range of timestamps from which cells should be deleted.
-        # @param timestamp_to [Integer] Timestamp upper boundary. Optional.
-        #   The range of timestamps from which cells should be deleted.
+        # @param timestamp_from [Integer] Timestamp lower boundary in
+        #   microseconds. Optional. Begins the range of timestamps from which
+        #   cells should be deleted. Values are in microseconds but must match
+        #   the granularity of the table. Therefore, if {Table#granularity} is
+        #   `MILLIS` (the default), the given value must be a multiple of 1000
+        #   (millisecond granularity). For example: `1564257960168000`.
+        # @param timestamp_to [Integer] Timestamp upper boundary in
+        #   microseconds. Optional. Ends the range of timestamps from which
+        #   cells should be deleted. Values are in microseconds but must match
+        #   the granularity of the table. Therefore, if {Table#granularity} is
+        #   `MILLIS` (the default), the given value must be a multiple of 1000
+        #   (millisecond granularity). For example: `1564257960168000`.
         # @return [MutationEntry] `self` object of entry for chaining.
         #
         # @example Without timestamp range
