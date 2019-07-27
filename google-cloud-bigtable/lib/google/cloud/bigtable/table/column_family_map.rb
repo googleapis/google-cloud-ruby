@@ -37,8 +37,9 @@ module Google
           # Adds a column family.
           #
           # @param name [String] Column family name
-          # @param gc_rule [Google::Cloud::Bigtable::GcRule, nil] A garbage
-          #   collection rule, or `nil` for the service default value.
+          # @param gc_rule [Google::Cloud::Bigtable::GcRule] The garbage
+          #   collection rule to be used for the column family. Optional. The
+          #   service default value will be used when not specified.
           # @example
           #  column_families = Google::Cloud::Bigtable::Instance::ColumnFamilyMap.new
           #
