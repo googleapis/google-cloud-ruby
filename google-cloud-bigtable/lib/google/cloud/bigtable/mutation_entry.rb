@@ -31,13 +31,14 @@ module Google
       #
       # @example
       #   entry = Google::Cloud::Bigtable::MutationEntry.new("user-1")
+      #   timestamp_micros = (Time.now.to_f * 1000000).round(-3)
       #   entry.set_cell(
-      #     "cf1", "fiel01", "XYZ", timestamp: Time.now.to_i * 1000
+      #     "cf1", "fiel01", "XYZ", timestamp: timestamp_micros
       #   ).delete_cells(
       #     "cf2",
       #     "field02",
-      #     timestamp_from: (Time.now.to_i - 1800) * 1000,
-      #     timestamp_to: (Time.now.to_i * 1000)
+      #     timestamp_from: timestamp_micros - 5000000,
+      #     timestamp_to: timestamp_micros
       #   ).delete_from_family("cf3").delete_from_row
       #
       # @example Using table
@@ -47,8 +48,9 @@ module Google
       #   table = bigtable.table("my-instance", "my-table")
       #
       #   entry = table.new_mutation_entry("user-1")
+      #   timestamp_micros = (Time.now.to_f * 1000000).round(-3)
       #   entry.set_cell(
-      #     "cf1", "fiel01", "XYZ", timestamp: Time.now.to_i * 1000
+      #     "cf1", "fiel01", "XYZ", timestamp: timestamp_micros
       #   )
       #
       class MutationEntry
@@ -79,12 +81,15 @@ module Google
         #   Can be any byte string, including an empty string.
         # @param value [String, Integer] Cell value data.
         #   The value to be written into the specified cell.
-        # @param timestamp [Time, Integer] Timestamp value.
+        # @param timestamp [Integer] Timestamp value in microseconds.
         #   The timestamp of the cell into which new data should be written.
         #   Use -1 for current Bigtable server time.
         #   Otherwise, the client should set this value itself, noting that the
         #   default value is a timestamp of zero if the field is left unspecified.
-        #   Values must match the granularity of the table (micros or millis, for example).
+        #   Values are in microseconds but must match the granularity of the
+        #   table. Therefore, if {Table#granularity} is `MILLIS` (the default),
+        #   the given value must be a multiple of 1000 (millisecond
+        #   granularity). For example: `1564257960168000`.
         # @return [MutationEntry]  `self` object of entry for chaining.
         #
         # @example
@@ -97,7 +102,7 @@ module Google
         #     "cf-1",
         #     "field-1",
         #     "XYZ",
-        #     timestamp: Time.now.to_i * 1000 # Time stamp in millis seconds.
+        #     timestamp: (Time.now.to_f * 1000000).round(-3) # microseconds
         #   )
         #
         def set_cell family, qualifier, value, timestamp: nil
@@ -128,10 +133,18 @@ module Google
         # @param qualifier [String] Column qualifier name.
         #   The qualifier of the column from which cells should be deleted.
         #   Can be any byte string, including an empty string.
-        # @param timestamp_from [Integer] Timestamp lower boundary. Optional.
-        #   The range of timestamps from which cells should be deleted.
-        # @param timestamp_to [Integer] Timestamp upper boundary. Optional.
-        #   The range of timestamps from which cells should be deleted.
+        # @param timestamp_from [Integer] Timestamp lower boundary in
+        #   microseconds. Optional. Begins the range of timestamps from which
+        #   cells should be deleted. Values are in microseconds but must match
+        #   the granularity of the table. Therefore, if {Table#granularity} is
+        #   `MILLIS` (the default), the given value must be a multiple of 1000
+        #   (millisecond granularity). For example: `1564257960168000`.
+        # @param timestamp_to [Integer] Timestamp upper boundary in
+        #   microseconds. Optional. Ends the range of timestamps from which
+        #   cells should be deleted. Values are in microseconds but must match
+        #   the granularity of the table. Therefore, if {Table#granularity} is
+        #   `MILLIS` (the default), the given value must be a multiple of 1000
+        #   (millisecond granularity). For example: `1564257960168000`.
         # @return [MutationEntry] `self` object of entry for chaining.
         #
         # @example Without timestamp range
@@ -140,18 +153,20 @@ module Google
         #
         # @example With timestamp range
         #   entry = Google::Cloud::Bigtable::MutationEntry.new("user-1")
+        #   timestamp_micros = (Time.now.to_f * 1000000).round(-3)
         #   entry.delete_cells(
         #     "cf1",
         #     "field-1",
-        #     timestamp_from: (Time.now.to_i - 1800) * 1000,
-        #     timestamp_to: (Time.now.to_i * 1000)
+        #     timestamp_from: timestamp_micros - 5000000,
+        #     timestamp_to: timestamp_micros
         #   )
         # @example With timestamp range with lower boundary only
         #   entry = Google::Cloud::Bigtable::MutationEntry.new("user-1")
+        #   timestamp_micros = (Time.now.to_f * 1000000).round(-3)
         #   entry.delete_cells(
         #     "cf1",
         #     "field-1",
-        #     timestamp_from: (Time.now.to_i - 1800) * 1000
+        #     timestamp_from: timestamp_micros - 5000000
         #   )
         #
         def delete_cells \

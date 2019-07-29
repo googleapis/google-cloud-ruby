@@ -43,11 +43,11 @@ describe "DataClient Mutate Row", :bigtable do
     table.read_row(row_key).must_be :nil?
   end
 
-  it "set cell with timestamp and delete cells with timestamp range" do
+  it "set cell with timestamp and delete cells with integer timestamp range" do
     postfix = random_str
     row_key = "setcell-#{postfix}"
     qualifier = "mutate-row-#{postfix}"
-    timestamp = (Time.now.to_i * 1000).floor
+    timestamp = (Time.now.to_f * 1000000).round(-3)
 
     # Set cell
     entry = table.new_mutation_entry(row_key)
@@ -72,6 +72,89 @@ describe "DataClient Mutate Row", :bigtable do
     table.mutate_row(entry)
     row = table.read_row(row_key)
     row.cells[family].select{|v| v.qualifier == qualifier}.length.must_equal 1
+  end
+
+  it "raises when set_cell with incorrect Time timestamp" do
+    postfix = random_str
+    row_key = "setcell-#{postfix}"
+    qualifier = "mutate-row-#{postfix}"
+
+    table.granularity.must_equal :MILLIS
+
+    # Set cell
+    entry = table.new_mutation_entry(row_key)
+    err = expect do
+      entry.set_cell(
+        family, qualifier, "mutatetest value #{postfix}", timestamp: Time.now
+      )
+    end.must_raise Google::Protobuf::TypeError
+    err.message.must_match "Expected number type for integral field 'timestamp_micros' (given Time)."
+  end
+
+  it "raises when set_cell with incorrect microsecond integer timestamp" do
+    postfix = random_str
+    row_key = "setcell-#{postfix}"
+    qualifier = "mutate-row-#{postfix}"
+    timestamp_micros = (Time.now.to_f * 1000000).round
+    timestamp_micros += 1 if (timestamp_micros % 10).zero?
+
+    table.granularity.must_equal :MILLIS
+
+    # Set cell
+    entry = table.new_mutation_entry(row_key)
+    entry.set_cell(
+      family, qualifier, "mutatetest value #{postfix}", timestamp: timestamp_micros
+    )
+    err = expect do
+      table.mutate_row(entry)
+    end.must_raise Google::Gax::RetryError
+    err.message.must_match /Timestamp granularity mismatch. Expected a multiple of 1000 \(millisecond granularity\), but got #{timestamp_micros}/
+  end
+
+  it "raises when set_cell with incorrect millisecond integer timestamp" do
+    postfix = random_str
+    row_key = "setcell-#{postfix}"
+    qualifier = "mutate-row-#{postfix}"
+    timestamp_millis = (Time.now.to_f * 1000).to_i
+    timestamp_millis += 1 if (timestamp_millis % 10).zero?
+
+    table.granularity.must_equal :MILLIS
+
+    # Set cell
+    entry = table.new_mutation_entry(row_key)
+    entry.set_cell(
+      family, qualifier, "mutatetest value #{postfix}", timestamp: timestamp_millis
+    )
+    err = expect do
+      table.mutate_row(entry)
+    end.must_raise Google::Gax::RetryError
+    err.message.must_match /Timestamp granularity mismatch. Expected a multiple of 1000 \(millisecond granularity\), but got #{timestamp_millis}/
+  end
+
+  it "set_cell with correct microseconds rounded to milliseconds integer timestamp" do
+    postfix = random_str
+    row_key = "setcell-#{postfix}"
+    qualifier = "mutate-row-#{postfix}"
+    timestamp_micros = (Time.now.to_f * 1000000).round(-3)
+
+    table.granularity.must_equal :MILLIS
+
+    # Set cell
+    entry = table.new_mutation_entry(row_key)
+    entry.set_cell(
+      family, qualifier, "mutatetest value #{postfix}", timestamp: timestamp_micros
+    )
+
+    table.mutate_row(entry).must_equal true
+    row = table.read_row(row_key)
+    cells = row.cells[family].select{|v| v.qualifier == qualifier}
+    cells.length.must_equal 1
+    cells.first.timestamp.must_equal timestamp_micros
+
+    # Delete cell
+    entry = table.new_mutation_entry(row_key)
+    entry.delete_cells family, qualifier
+    table.mutate_row(entry)
   end
 
   it "delete all cells from specified column family" do

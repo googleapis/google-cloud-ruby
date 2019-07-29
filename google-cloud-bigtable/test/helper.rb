@@ -222,6 +222,11 @@ class MockBigtable < Minitest::Spec
   def paged_enum_struct response
     OpenStruct.new(page: OpenStruct.new(response: response))
   end
+
+# A microseconds integer rounded to the nearest millisecond. For example: `1564257960168000`.
+  def timestamp_micros
+    (Time.now.to_f * 1000000).round(-3)
+  end
 end
 
 class MockPagedEnumerable
