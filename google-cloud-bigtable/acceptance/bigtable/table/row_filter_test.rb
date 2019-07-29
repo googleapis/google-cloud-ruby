@@ -112,7 +112,7 @@ describe "DataClient Read Rows Filters", :bigtable do
   end
 
   it "timestamp range filter" do
-    timestamp_micros = (Time.now.to_f * 1000).to_i * 1000
+    timestamp_micros = (Time.now.to_f * 1000000).round(-3)
     entry = table.new_mutation_entry("timestamp-#{random_str}")
     entry.set_cell(family, "timestamp", "timestamp range test", timestamp: timestamp_micros)
     table.mutate_row(entry)

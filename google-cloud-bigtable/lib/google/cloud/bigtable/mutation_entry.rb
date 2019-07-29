@@ -31,7 +31,7 @@ module Google
       #
       # @example
       #   entry = Google::Cloud::Bigtable::MutationEntry.new("user-1")
-      #   timestamp_micros = (Time.now.to_f * 1000).to_i * 1000
+      #   timestamp_micros = (Time.now.to_f * 1000000).round(-3)
       #   entry.set_cell(
       #     "cf1", "fiel01", "XYZ", timestamp: timestamp_micros
       #   ).delete_cells(
@@ -48,7 +48,7 @@ module Google
       #   table = bigtable.table("my-instance", "my-table")
       #
       #   entry = table.new_mutation_entry("user-1")
-      #   timestamp_micros = (Time.now.to_f * 1000).to_i * 1000
+      #   timestamp_micros = (Time.now.to_f * 1000000).round(-3)
       #   entry.set_cell(
       #     "cf1", "fiel01", "XYZ", timestamp: timestamp_micros
       #   )
@@ -102,7 +102,7 @@ module Google
         #     "cf-1",
         #     "field-1",
         #     "XYZ",
-        #     timestamp: (Time.now.to_f * 1000).to_i * 1000 # microseconds
+        #     timestamp: (Time.now.to_f * 1000000).round(-3) # microseconds
         #   )
         #
         def set_cell family, qualifier, value, timestamp: nil
@@ -153,7 +153,7 @@ module Google
         #
         # @example With timestamp range
         #   entry = Google::Cloud::Bigtable::MutationEntry.new("user-1")
-        #   timestamp_micros = (Time.now.to_f * 1000).to_i * 1000
+        #   timestamp_micros = (Time.now.to_f * 1000000).round(-3)
         #   entry.delete_cells(
         #     "cf1",
         #     "field-1",
@@ -162,7 +162,7 @@ module Google
         #   )
         # @example With timestamp range with lower boundary only
         #   entry = Google::Cloud::Bigtable::MutationEntry.new("user-1")
-        #   timestamp_micros = (Time.now.to_f * 1000).to_i * 1000
+        #   timestamp_micros = (Time.now.to_f * 1000000).round(-3)
         #   entry.delete_cells(
         #     "cf1",
         #     "field-1",

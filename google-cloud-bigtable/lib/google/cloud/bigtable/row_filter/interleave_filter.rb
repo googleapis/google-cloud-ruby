@@ -465,7 +465,7 @@ module Google
           #
           # @example
           #
-          #   timestamp_micros = (Time.now.to_f * 1000).to_i * 1000
+          #   timestamp_micros = (Time.now.to_f * 1000000).round(-3)
           #   from = timestamp_micros - 300000000
           #   to = timestamp_micros
           #

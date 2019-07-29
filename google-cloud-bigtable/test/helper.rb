@@ -225,7 +225,7 @@ class MockBigtable < Minitest::Spec
 
 # A microseconds integer rounded to the nearest millisecond. For example: `1564257960168000`.
   def timestamp_micros
-    (Time.now.to_f * 1000).to_i * 1000
+    (Time.now.to_f * 1000000).round(-3)
   end
 end
 
