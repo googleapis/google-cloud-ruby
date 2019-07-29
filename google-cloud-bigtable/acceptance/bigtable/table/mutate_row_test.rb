@@ -95,8 +95,8 @@ describe "DataClient Mutate Row", :bigtable do
     postfix = random_str
     row_key = "setcell-#{postfix}"
     qualifier = "mutate-row-#{postfix}"
-    t = Time.now
-    timestamp_micros = t.to_i * 1000000 + t.usec
+    timestamp_micros = (Time.now.to_f * 1000000).round
+    timestamp_micros += 1 if (timestamp_micros % 10).zero?
 
     table.granularity.must_equal :MILLIS
 
@@ -115,8 +115,8 @@ describe "DataClient Mutate Row", :bigtable do
     postfix = random_str
     row_key = "setcell-#{postfix}"
     qualifier = "mutate-row-#{postfix}"
-    t = Time.now
     timestamp_millis = (Time.now.to_f * 1000).to_i
+    timestamp_millis += 1 if (timestamp_millis % 10).zero?
 
     table.granularity.must_equal :MILLIS
 
