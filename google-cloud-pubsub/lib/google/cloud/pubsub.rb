@@ -111,6 +111,7 @@ module Google
         PubSub::Project.new(
           PubSub::Service.new(
             project_id, credentials, timeout:       timeout,
+                                     host:          configure.endpoint,
                                      client_config: client_config
           )
         )
@@ -136,6 +137,8 @@ module Google
       # * `timeout` - (Integer) Default timeout to use in requests.
       # * `client_config` - (Hash) A hash of values to override the default
       #   behavior of the API client.
+      # * `endpoint` - (String) Override of the endpoint host name, or `nil`
+      #   to use the default endpoint.
       # * `emulator_host` - (String) Host name of the emulator. Defaults to
       #   `ENV["PUBSUB_EMULATOR_HOST"]`
       # * `on_error` - (Proc) A Proc to be run when an error is encountered
