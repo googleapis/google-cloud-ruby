@@ -22,7 +22,7 @@ describe Google::Cloud::Bigtable::Table, :read_rows, :mock_bigtable do
   let(:family) {  "cf" }
   let(:qualifier) {  "field1" }
   let(:cell_value) { "xyz" }
-  let(:timestamp) { Time.now.to_i * 1000 }
+  let(:timestamp) { timestamp_micros }
 
   it "read rows" do
     mock = Minitest::Mock.new

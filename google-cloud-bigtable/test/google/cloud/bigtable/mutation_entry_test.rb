@@ -59,7 +59,7 @@ describe Google::Cloud::Bigtable::MutationEntry, :mutation_entry, :mock_bigtable
     end
 
     it "add set cell mutation with timestamp" do
-      timestamp = Time.now.to_i * 1000
+      timestamp = timestamp_micros
       entry = Google::Cloud::Bigtable::MutationEntry.new(row_key)
       entry.set_cell(family, qualifier, cell_value, timestamp: timestamp)
       entry.mutations.length.must_equal 1
@@ -112,7 +112,7 @@ describe Google::Cloud::Bigtable::MutationEntry, :mutation_entry, :mock_bigtable
     end
 
     it "add delete cells mutation with from timestamp" do
-      timestamp_from = Time.now.to_i * 1000
+      timestamp_from = timestamp_micros
 
       entry = Google::Cloud::Bigtable::MutationEntry.new(row_key)
       entry.delete_cells(family, qualifier, timestamp_from: timestamp_from)
@@ -130,7 +130,7 @@ describe Google::Cloud::Bigtable::MutationEntry, :mutation_entry, :mock_bigtable
     end
 
     it "add delete cells mutation with to timestamp range" do
-      timestamp_to = Time.now.to_i * 1000
+      timestamp_to = timestamp_micros
 
       entry = Google::Cloud::Bigtable::MutationEntry.new(row_key)
       entry.delete_cells(family, qualifier, timestamp_to: timestamp_to)
@@ -148,8 +148,8 @@ describe Google::Cloud::Bigtable::MutationEntry, :mutation_entry, :mock_bigtable
     end
 
     it "add delete cells mutation with timestamp range" do
-      timestamp_from = Time.now.to_i * 1000
-      timestamp_to = Time.now.to_i * 1000 + 1000
+      timestamp_from = timestamp_micros
+      timestamp_to = timestamp_micros + 1000000
 
       entry = Google::Cloud::Bigtable::MutationEntry.new(row_key)
       entry.delete_cells(family, qualifier, timestamp_from: timestamp_from, timestamp_to: timestamp_to)

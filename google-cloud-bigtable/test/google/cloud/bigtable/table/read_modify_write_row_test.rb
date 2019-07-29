@@ -21,7 +21,7 @@ describe Google::Cloud::Bigtable::Table, :read_modify_write_row, :mock_bigtable 
   let(:instance_id) { "test-instance" }
   let(:table_id) { "test-table" }
   let(:family_name) { "cf" }
-  let(:timestamp_micros) { 1527625039663 }
+  let(:timestamp) { 1564257960168000 }
   let(:labels) { ["test-labels"] }
   let(:qualifier) { "field01" }
   let(:cell_value) { "xyz" }
@@ -37,7 +37,7 @@ describe Google::Cloud::Bigtable::Table, :read_modify_write_row, :mock_bigtable 
 
     row_key = "user-1"
 
-    cell = { value: cell_value, timestamp_micros: timestamp_micros, labels: labels }
+    cell = { value: cell_value, timestamp_micros: timestamp, labels: labels }
     column = {
       qualifier: qualifier,
       cells: [cell]
@@ -71,7 +71,7 @@ describe Google::Cloud::Bigtable::Table, :read_modify_write_row, :mock_bigtable 
     cell.value.must_equal cell_value
     cell.family.must_equal family_name
     cell.qualifier.must_equal qualifier
-    cell.timestamp.must_equal timestamp_micros
+    cell.timestamp.must_equal timestamp
     cell.labels.must_equal labels
   end
 

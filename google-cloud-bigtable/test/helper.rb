@@ -259,3 +259,8 @@ def read_rows_acceptance_test_data
 
   tests
 end
+
+# A microseconds integer rounded to the nearest millisecond. For example: `1564257960168000`.
+def timestamp_micros
+  (Time.now.to_f * 1000).to_i * 1000
+end

@@ -117,8 +117,8 @@ describe Google::Cloud::Bigtable::RowFilter, :row_filter, :mock_bigtable do
 
   describe "timestamp_range" do
     it "create timestamp_range filter" do
-      from = (Time.now.to_i - 300) * 1000
-      to = Time.now.to_i * 1000
+      from = timestamp_micros - 3000000
+      to = timestamp_micros
 
       filter = Google::Cloud::Bigtable::RowFilter.timestamp_range(from: from, to: to)
 
@@ -131,7 +131,7 @@ describe Google::Cloud::Bigtable::RowFilter, :row_filter, :mock_bigtable do
     end
 
     it "create timestamp_range filter with only from range" do
-      from = (Time.now.to_i - 300) * 1000
+      from = timestamp_micros - 3000000
       filter = Google::Cloud::Bigtable::RowFilter.timestamp_range(from: from)
 
       filter.must_be_kind_of Google::Cloud::Bigtable::RowFilter::SimpleFilter
@@ -143,7 +143,7 @@ describe Google::Cloud::Bigtable::RowFilter, :row_filter, :mock_bigtable do
     end
 
     it "create timestamp_range filter with only to range" do
-      to = Time.now.to_i * 1000
+      to = timestamp_micros
       filter = Google::Cloud::Bigtable::RowFilter.timestamp_range(to: to)
 
       filter.must_be_kind_of Google::Cloud::Bigtable::RowFilter::SimpleFilter

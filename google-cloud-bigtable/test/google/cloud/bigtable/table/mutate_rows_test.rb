@@ -25,7 +25,7 @@ describe Google::Cloud::Bigtable::Table, :mutate_rows, :mock_bigtable do
   let(:family) {  "cf" }
   let(:qualifier) {  "field1" }
   let(:cell_value) { "xyz" }
-  let(:timestamp) { Time.now.to_i * 1000 }
+  let(:timestamp) { timestamp_micros }
   let(:mutation_gprc) {
     Google::Bigtable::V2::Mutation.new(set_cell: {
       family_name: family, column_qualifier: qualifier, value: cell_value, timestamp_micros: timestamp
@@ -42,7 +42,7 @@ describe Google::Cloud::Bigtable::Table, :mutate_rows, :mock_bigtable do
       mutation = Google::Bigtable::V2::Mutation.new(set_cell: {
         family_name: "cf#{i}",
         column_qualifier: "field01",
-        timestamp_micros: Time.now.to_i * 1000,
+        timestamp_micros: timestamp_micros,
         value: "XYZ-#{i}"
       })
       Google::Bigtable::V2::MutateRowsRequest::Entry.new(
