@@ -97,7 +97,7 @@ describe Google::Cloud do
         scope.must_be :nil?
         "pubsub-credentials"
       }
-      stubbed_service = ->(project, credentials, timeout: nil, client_config: nil) {
+      stubbed_service = ->(project, credentials, timeout: nil, host: nil, client_config: nil) {
         project.must_equal "project-id"
         credentials.must_equal "pubsub-credentials"
         client_config.must_be :nil?
@@ -158,7 +158,7 @@ describe Google::Cloud do
         scope.must_be :nil?
         "pubsub-credentials"
       }
-      stubbed_service = ->(project, credentials, timeout: nil, client_config: nil) {
+      stubbed_service = ->(project, credentials, timeout: nil, host: nil, client_config: nil) {
         project.must_equal "project-id"
         credentials.must_equal "pubsub-credentials"
         timeout.must_be :nil?
@@ -189,7 +189,7 @@ describe Google::Cloud do
         scope.must_be :nil?
         "pubsub-credentials"
       }
-      stubbed_service = ->(project, credentials, timeout: nil, client_config: nil) {
+      stubbed_service = ->(project, credentials, timeout: nil, host: nil, client_config: nil) {
         project.must_equal "project-id"
         credentials.must_equal "pubsub-credentials"
         timeout.must_be :nil?
@@ -255,7 +255,7 @@ describe Google::Cloud do
         scope.must_be :nil?
         OpenStruct.new project_id: "project-id"
       }
-      stubbed_service = ->(project, credentials, timeout: nil, client_config: nil) {
+      stubbed_service = ->(project, credentials, timeout: nil, host: nil, client_config: nil) {
         project.must_equal "project-id"
         credentials.must_be_kind_of OpenStruct
         credentials.project_id.must_equal "project-id"
@@ -303,7 +303,7 @@ describe Google::Cloud do
         scope.must_be :nil?
         "pubsub-credentials"
       }
-      stubbed_service = ->(project, credentials, timeout: nil, client_config: nil) {
+      stubbed_service = ->(project, credentials, timeout: nil, host: nil, client_config: nil) {
         project.must_equal "project-id"
         credentials.must_equal "pubsub-credentials"
         timeout.must_be :nil?
@@ -340,7 +340,7 @@ describe Google::Cloud do
         scope.must_be :nil?
         "pubsub-credentials"
       }
-      stubbed_service = ->(project, credentials, timeout: nil, client_config: nil) {
+      stubbed_service = ->(project, credentials, timeout: nil, host: nil, client_config: nil) {
         project.must_equal "project-id"
         credentials.must_equal "pubsub-credentials"
         timeout.must_be :nil?
@@ -377,7 +377,7 @@ describe Google::Cloud do
         scope.must_be :nil?
         "pubsub-credentials"
       }
-      stubbed_service = ->(project, credentials, timeout: nil, client_config: nil) {
+      stubbed_service = ->(project, credentials, timeout: nil, host: nil, client_config: nil) {
         project.must_equal "project-id"
         credentials.must_equal "pubsub-credentials"
         timeout.must_equal 42
@@ -416,7 +416,7 @@ describe Google::Cloud do
         scope.must_be :nil?
         "pubsub-credentials"
       }
-      stubbed_service = ->(project, credentials, timeout: nil, client_config: nil) {
+      stubbed_service = ->(project, credentials, timeout: nil, host: nil, client_config: nil) {
         project.must_equal "project-id"
         credentials.must_equal "pubsub-credentials"
         timeout.must_equal 42

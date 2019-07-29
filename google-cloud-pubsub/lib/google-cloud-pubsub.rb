@@ -143,4 +143,5 @@ Google::Cloud.configure.add_config! :pubsub do |config|
   config.add_field! :emulator_host, default_emulator,
                     match: String, allow_nil: true
   config.add_field! :on_error, nil, match: Proc
+  config.add_field! :endpoint, nil, match: String
 end
