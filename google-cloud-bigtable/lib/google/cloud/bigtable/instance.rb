@@ -486,7 +486,7 @@ module Google
         #     "cf-1",
         #     "field-1",
         #     "XYZ",
-        #     timestamp: Time.now.to_i * 1000 # Time stamp in milli seconds.
+        #     timestamp: (Time.now.to_f * 1000).to_i * 1000 # microseconds
         #   ).delete_cells("cf2", "field02")
         #
         #   table.mutate_row(entry)
