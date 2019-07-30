@@ -34,7 +34,7 @@ module Google
       #
       #   # Create
       #   gc_rule = Google::Cloud::Bigtable::GcRule.max_versions(5)
-      #   column_family = table.column_families.create("cf1", gc_rule: gc_rule)
+      #   column_family = table.column_families.add("cf1", gc_rule)
       #
       #   # Update
       #   column_family = table.column_families.find_by_name("cf2")
@@ -74,10 +74,11 @@ module Google
 
         # Set Column Family garbage collection rules
         #
-        # @param rule [Google::Cloud::Bigtable::GcRule]
+        # @param rule [Google::Cloud::Bigtable::GcRule, nil] the new rule, or
+        #   `nil` for the service default value.
         #
         def gc_rule= rule
-          @grpc.gc_rule = rule.to_grpc
+          @grpc.gc_rule = rule.nil? ? nil : rule.to_grpc
         end
 
         # Get garbage collection rule
@@ -151,7 +152,9 @@ module Google
         # Create gPRC instance to create column family modification
         #
         # @param name [String] Column family name
-        # @param gc_rule [Google::Cloud::Bigtable::GcRule] GC Rule
+        # @param gc_rule [Google::Cloud::Bigtable::GcRule] The garbage
+        #   collection rule to be used for the column family. Optional. The
+        #   service default value will be used when not specified.
         # @return [Google::Bigtable::Admin::V2::ModifyColumnFamiliesRequest::Modification]
         #
         # @example
@@ -168,7 +171,9 @@ module Google
         # Create update column family modification gPRC instance
         #
         # @param name [String] Column family name
-        # @param gc_rule [Google::Cloud::Bigtable::GcRule] GC Rule
+        # @param gc_rule [Google::Cloud::Bigtable::GcRule] The garbage
+        #   collection rule to be used for the column family. Optional. The
+        #   service default value will be used when not specified.
         # @return [Google::Bigtable::Admin::V2::ModifyColumnFamiliesRequest::Modification]
         #
         # @example
@@ -227,8 +232,9 @@ module Google
         # @param type [Symbol] Type of modification.
         #   Valid values are `:create`, `:update`, `drop`
         # @param family_name [String] Column family name
-        # @param gc_rule [Google::Cloud::Bigtable::GcRule]
-        #   Required for only create and update modification type.
+        # @param gc_rule [Google::Cloud::Bigtable::GcRule] The garbage
+        #   collection rule to be used for the column family. Optional. The
+        #   service default value will be used when not specified.
         # @return [Google::Bigtable::Admin::V2::ModifyColumnFamiliesRequest::Modification]
         #
         def self.column_modification_grpc type, family_name, gc_rule = nil
@@ -237,9 +243,9 @@ module Google
           attrs[type] = if type == :drop
                           true
                         else
-                          Google::Bigtable::Admin::V2::ColumnFamily.new(
-                            gc_rule: gc_rule.to_grpc
-                          )
+                          cf = Google::Bigtable::Admin::V2::ColumnFamily.new
+                          cf.gc_rule = gc_rule.to_grpc if gc_rule
+                          cf
                         end
 
           Google::Bigtable::Admin::V2::ModifyColumnFamiliesRequest:: \

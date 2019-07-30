@@ -18,7 +18,7 @@
 require "helper"
 
 describe Google::Cloud::Bigtable::Table::ColumnFamilyMap, :mock_bigtable do
-  it "add column family to map" do
+  it "adds a column family" do
     cfs_map = Google::Cloud::Bigtable::Table::ColumnFamilyMap.new
     cfs_map.must_be :empty?
 
@@ -31,5 +31,18 @@ describe Google::Cloud::Bigtable::Table::ColumnFamilyMap, :mock_bigtable do
     cfs_map.must_be_kind_of Google::Bigtable::Admin::V2::ColumnFamily
     cfs_map.gc_rule.must_be_kind_of Google::Bigtable::Admin::V2::GcRule
     cfs_map.gc_rule.must_equal gc_rule.to_grpc
+  end
+
+  it "adds a column family without gc_rule" do
+    cfs_map = Google::Cloud::Bigtable::Table::ColumnFamilyMap.new
+    cfs_map.must_be :empty?
+
+    cf_name = "new-cf"
+    cfs_map.add(cf_name)
+
+    cfs_map.length.must_equal 1
+    cfs_map = cfs_map[cf_name]
+    cfs_map.must_be_kind_of Google::Bigtable::Admin::V2::ColumnFamily
+    cfs_map.gc_rule.must_be :nil?
   end
 end

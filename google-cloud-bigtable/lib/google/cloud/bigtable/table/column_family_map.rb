@@ -37,7 +37,9 @@ module Google
           # Adds a column family.
           #
           # @param name [String] Column family name
-          # @param gc_rule [Google::Bigtable::GcRule] GC Rule
+          # @param gc_rule [Google::Cloud::Bigtable::GcRule] The garbage
+          #   collection rule to be used for the column family. Optional. The
+          #   service default value will be used when not specified.
           # @example
           #  column_families = Google::Cloud::Bigtable::Instance::ColumnFamilyMap.new
           #
@@ -47,10 +49,10 @@ module Google
           #  gc_rule = Google::Cloud::Bigtable::GcRule.max_age(1800)
           #  column_families.add('cf2', gc_rule)
 
-          def add name, gc_rule
-            self[name] = Google::Bigtable::Admin::V2::ColumnFamily.new(
-              gc_rule: gc_rule.to_grpc
-            )
+          def add name, gc_rule = nil
+            cf = Google::Bigtable::Admin::V2::ColumnFamily.new
+            cf.gc_rule = gc_rule.to_grpc if gc_rule
+            self[name] = cf
           end
 
           # Removes a column family from the map.

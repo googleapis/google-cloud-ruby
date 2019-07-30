@@ -238,8 +238,9 @@ module Google
         # update, or delete operations.
         #
         # @param name [String] Name of the column family
-        # @param gc_rule [Google::Cloud::Bigtable::GcRule] Optional.
-        #   Required for create and update operations.
+        # @param gc_rule [Google::Cloud::Bigtable::GcRule] The garbage
+        #   collection rule to be used for the column family. Optional. The
+        #   service default value will be used when not specified.
         #
         # @example Create column family
         #   require "google/cloud/bigtable"
