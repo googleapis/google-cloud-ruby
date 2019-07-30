@@ -71,9 +71,9 @@ module Google
           def next
             return nil unless next?
             ensure_service!
-            options = { all: @hidden, token: token, max: @max, filter: @filter }
-            gapi = @service.list_jobs options
-            self.class.from_gapi gapi, @service, @hidden, @max, @filter
+            next_options = @options.merge token: token
+            next_gapi = @service.list_jobs next_options
+            self.class.from_gapi next_gapi, @service, next_options
           end
 
           ##
@@ -141,17 +141,14 @@ module Google
           ##
           # @private New Job::List from a Google API Client
           # Google::Apis::BigqueryV2::JobList object.
-          def self.from_gapi gapi_list, service, hidden = nil, max = nil,
-                             filter = nil
+          def self.from_gapi gapi_list, service, options = {}
             jobs = List.new(Array(gapi_list.jobs).map do |gapi_object|
               Job.from_gapi gapi_object, service
             end)
-            jobs.instance_variable_set :@token,   gapi_list.next_page_token
-            jobs.instance_variable_set :@etag,    gapi_list.etag
-            jobs.instance_variable_set :@service, service
-            jobs.instance_variable_set :@hidden,  hidden
-            jobs.instance_variable_set :@max,     max
-            jobs.instance_variable_set :@filter,  filter
+            jobs.instance_variable_set :@token,    gapi_list.next_page_token
+            jobs.instance_variable_set :@etag,     gapi_list.etag
+            jobs.instance_variable_set :@service,  service
+            jobs.instance_variable_set :@options,  options
             jobs
           end
 

@@ -1024,11 +1024,17 @@ module Google
         # Retrieves the list of jobs belonging to the project.
         #
         # @param [Boolean] all Whether to display jobs owned by all users in the
-        #   project. The default is `false`.
+        #   project. The default is `false`. Optional.
         # @param [String] token A previously-returned page token representing
-        #   part of the larger set of results to view.
-        # @param [Integer] max Maximum number of jobs to return.
-        # @param [String] filter A filter for job state.
+        #   part of the larger set of results to view. Optional.
+        # @param [Integer] max Maximum number of jobs to return. Optional.
+        # @param [String] filter A filter for job state. Optional.
+        # @param [Time] min_created_at Min value for {Job#created_at}. When
+        #   provided, only jobs created after or at this time are returned.
+        #   Optional.
+        # @param [Time] max_created_at Max value for {Job#created_at}. When
+        #   provided, only jobs created before or at this time are returned.
+        #   Optional.
         #
         #   Acceptable values are:
         #
@@ -1059,6 +1065,20 @@ module Google
         #     # process job
         #   end
         #
+        # @example Retrieve only jobs created within provided times:
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #
+        #   two_days_ago = Time.now - 60*60*24*2
+        #   three_days_ago = Time.now - 60*60*24*3
+        #
+        #   jobs = bigquery.jobs min_created_at: three_days_ago,
+        #                        max_created_at: two_days_ago
+        #   jobs.each do |job|
+        #     # process job
+        #   end
+        #
         # @example Retrieve all jobs: (See {Job::List#all})
         #   require "google/cloud/bigquery"
         #
@@ -1069,11 +1089,15 @@ module Google
         #     # process job
         #   end
         #
-        def jobs all: nil, token: nil, max: nil, filter: nil
+        def jobs all: nil, token: nil, max: nil, filter: nil,
+                 min_created_at: nil, max_created_at: nil
           ensure_service!
-          options = { all: all, token: token, max: max, filter: filter }
+          options = {
+            all: all, token: token, max: max, filter: filter,
+            min_created_at: min_created_at, max_created_at: max_created_at
+          }
           gapi = service.list_jobs options
-          Job::List.from_gapi gapi, service, all, max, filter
+          Job::List.from_gapi gapi, service, options
         end
 
         ##
