@@ -297,11 +297,15 @@ module Google
         # been granted the READER job role.
         def list_jobs options = {}
           # The list operation is considered idempotent
+          min_creation_time = Convert.time_to_millis options[:min_created_at]
+          max_creation_time = Convert.time_to_millis options[:max_created_at]
           execute backoff: true do
             service.list_jobs \
               @project, all_users: options[:all], max_results: options[:max],
                         page_token: options[:token], projection: "full",
-                        state_filter: options[:filter]
+                        state_filter: options[:filter],
+                        min_creation_time: min_creation_time,
+                        max_creation_time: max_creation_time
           end
         end
 
