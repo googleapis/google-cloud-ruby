@@ -1,6 +1,6 @@
 # Release History
 
-### 1.9.5 / 2019-07-30
+### 1.9.5 / 2019-07-31
 
 * Reduce thread usage at startup
   * Allocate threads in pool as needed, not all up front
