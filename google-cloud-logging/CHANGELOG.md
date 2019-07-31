@@ -1,6 +1,6 @@
 # Release History
 
-### 1.6.6 / 2019-07-30
+### 1.6.6 / 2019-07-31
 
 * Fix max threads setting in thread pools
   * Thread pools once again limit the number of threads allocated.
