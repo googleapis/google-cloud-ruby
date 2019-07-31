@@ -28,12 +28,21 @@ function getDevsiteUrl(url) {
         return newUrl;
     }
     var tail = noEndSlash(url.split(version + "/").slice(-1)[0]);
+
+    return noEndSlash(newUrl + "/" + fixExtension(tail));
+};
+
+function fixExtension(tail) {
+    var words = noEndSlash(tail).split("/");
+    var lastWord = words[words.length - 1];
     if (tail.match(/file\.\w+/) && !tail.endsWith(".html")) {
         tail = tail.replace(".md", "");
-        tail += ".html"
+        tail += ".html";
+    } else if (!tail.endsWith(".html") && (lastWord[0] === lastWord[0].toUpperCase())) {
+        tail += ".html";
     }
-    return noEndSlash(newUrl + "/" + tail);
-};
+    return tail;
+}
 
 function findGem(url) {
     if (url.split("docs/").length > 1) {
