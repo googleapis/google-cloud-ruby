@@ -1,5 +1,13 @@
 # Release History
 
+### 1.13.0 / 2019-07-31
+
+* Add Table#require_partition_filter
+* List jobs using min and max created_at
+* Reduce thread usage at startup
+  * Allocate threads in pool as needed, not all up front
+* Update documentation links
+
 ### 1.12.0 / 2019-07-10
 
 * Add BigQuery Model API
@@ -34,7 +42,7 @@
 * Add copy and extract methods to Project
   * Add Project#extract and Project#extract_job
   * Add Project#copy and Project#copy_job
-  * Deprecate dryrun param in Table#copy_job, Table#extract_job and 
+  * Deprecate dryrun param in Table#copy_job, Table#extract_job and
     Table#load_job
 * Fix memoization in Dataset#exists? and Table#exists?
   * Add force param to Dataset#exists? and Table#exists?
