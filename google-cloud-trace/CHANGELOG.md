@@ -1,5 +1,11 @@
 # Release History
 
+### 0.34.5 / 2019-07-30
+
+* Fix max threads setting in thread pools
+  * Thread pools once again limit the number of threads allocated.
+* Update documentation links
+
 ### 0.34.4 / 2019-07-08
 
 * Support overriding service host and port in the low-level interface.
