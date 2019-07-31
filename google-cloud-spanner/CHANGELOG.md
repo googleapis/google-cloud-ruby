@@ -1,5 +1,11 @@
 # Release History
 
+### 1.9.5 / 2019-07-31
+
+* Reduce thread usage at startup
+  * Allocate threads in pool as needed, not all up front
+* Update documentation links
+
 ### 1.9.4 / 2019-07-08
 
 * Add IAM GetPolicyOptions in the lower-level API.
