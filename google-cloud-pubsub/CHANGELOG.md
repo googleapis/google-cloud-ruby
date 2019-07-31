@@ -1,5 +1,15 @@
 # Release History
 
+### 0.38.0 / 2019-07-30
+
+* Allow Service endpoint to be configured
+  * Google::Cloud::PubSub.configure.endpoint
+* Fix max threads setting in thread pools
+  * Thread pools once again limit the number of threads allocated.
+* Reduce thread usage at startup
+  * Allocate threads in pool as needed, not all up front
+* Update documentation links
+
 ### 0.37.1 / 2019-07-09
 
 * Add IAM GetPolicyOptions in the lower-level interface.
