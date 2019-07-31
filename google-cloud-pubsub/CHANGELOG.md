@@ -2,6 +2,9 @@
 
 ### 0.38.0 / 2019-07-31
 
+* Allow persistence_regions to be set
+  * Support setting persistence_regions on topic creation
+    and topic update.
 * Allow Service endpoint to be configured
   * Google::Cloud::PubSub.configure.endpoint
 * Fix max threads setting in thread pools
