@@ -1,6 +1,6 @@
 # Release History
 
-### 0.38.0 / 2019-07-30
+### 0.38.0 / 2019-07-31
 
 * Allow Service endpoint to be configured
   * Google::Cloud::PubSub.configure.endpoint
