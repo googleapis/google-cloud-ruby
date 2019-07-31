@@ -46,6 +46,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :enable_automatic_punctuation, :bool, 11
     optional :enable_speaker_diarization, :bool, 16
     optional :diarization_speaker_count, :int32, 17
+    optional :diarization_config, :message, 19, "google.cloud.speech.v1p1beta1.SpeakerDiarizationConfig"
     optional :metadata, :message, 9, "google.cloud.speech.v1p1beta1.RecognitionMetadata"
     optional :model, :string, 13
     optional :use_enhanced, :bool, 14
@@ -60,6 +61,11 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     value :OGG_OPUS, 6
     value :SPEEX_WITH_HEADER_BYTE, 7
     value :MP3, 8
+  end
+  add_message "google.cloud.speech.v1p1beta1.SpeakerDiarizationConfig" do
+    optional :enable_speaker_diarization, :bool, 1
+    optional :min_speaker_count, :int32, 2
+    optional :max_speaker_count, :int32, 3
   end
   add_message "google.cloud.speech.v1p1beta1.RecognitionMetadata" do
     optional :interaction_type, :enum, 1, "google.cloud.speech.v1p1beta1.RecognitionMetadata.InteractionType"
@@ -170,6 +176,7 @@ module Google
         StreamingRecognitionConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.speech.v1p1beta1.StreamingRecognitionConfig").msgclass
         RecognitionConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.speech.v1p1beta1.RecognitionConfig").msgclass
         RecognitionConfig::AudioEncoding = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.speech.v1p1beta1.RecognitionConfig.AudioEncoding").enummodule
+        SpeakerDiarizationConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.speech.v1p1beta1.SpeakerDiarizationConfig").msgclass
         RecognitionMetadata = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.speech.v1p1beta1.RecognitionMetadata").msgclass
         RecognitionMetadata::InteractionType = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.speech.v1p1beta1.RecognitionMetadata.InteractionType").enummodule
         RecognitionMetadata::MicrophoneDistance = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.speech.v1p1beta1.RecognitionMetadata.MicrophoneDistance").enummodule
