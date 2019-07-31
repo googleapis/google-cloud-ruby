@@ -1,5 +1,13 @@
 # Release History
 
+### 1.13.0 / 2019-07-30
+
+* Add Table#require_partition_filter
+* List jobs using min and max created_at
+* Reduce thread usage at startup
+  * Allocate threads in pool as needed, not all up front
+* Update documentation links
+
 ### 1.12.0 / 2019-07-10
 
 * Add BigQuery Model API
