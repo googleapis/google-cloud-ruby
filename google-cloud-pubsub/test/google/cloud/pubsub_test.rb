@@ -102,6 +102,7 @@ describe Google::Cloud do
         credentials.must_equal "pubsub-credentials"
         client_config.must_be :nil?
         timeout.must_be :nil?
+        host.must_be :nil?
         OpenStruct.new project: project
       }
 
@@ -162,6 +163,7 @@ describe Google::Cloud do
         project.must_equal "project-id"
         credentials.must_equal "pubsub-credentials"
         timeout.must_be :nil?
+        host.must_be :nil?
         client_config.must_be :nil?
         OpenStruct.new project: project
       }
@@ -193,6 +195,7 @@ describe Google::Cloud do
         project.must_equal "project-id"
         credentials.must_equal "pubsub-credentials"
         timeout.must_be :nil?
+        host.must_be :nil?
         client_config.must_be :nil?
         OpenStruct.new project: project
       }
@@ -232,6 +235,34 @@ describe Google::Cloud do
       end
     end
 
+    it "allows endpoint to be set" do
+      endpoint = "localhost:4567"
+
+      stubbed_service = ->(project, credentials, timeout: nil, host: nil, client_config: nil) {
+        project.must_equal "project-id"
+        credentials.must_equal default_credentials
+        timeout.must_be :nil?
+        host.must_equal endpoint
+        client_config.must_be :nil?
+        OpenStruct.new project: project, credentials: credentials
+      }
+
+      # Clear all environment variables
+      ENV.stub :[], nil do
+        # Get project_id from Google Compute Engine
+        Google::Cloud.stub :env, OpenStruct.new(project_id: "project-id") do
+          Google::Cloud::PubSub::Credentials.stub :default, default_credentials do
+            Google::Cloud::PubSub::Service.stub :new, stubbed_service do
+              pubsub = Google::Cloud::PubSub.new endpoint: endpoint
+              pubsub.must_be_kind_of Google::Cloud::PubSub::Project
+              pubsub.project.must_equal "project-id"
+              pubsub.service.credentials.must_equal default_credentials
+            end
+          end
+        end
+      end
+    end
+
     it "allows emulator_host to be set" do
       emulator_host = "localhost:4567"
       # Clear all environment variables
@@ -260,6 +291,7 @@ describe Google::Cloud do
         credentials.must_be_kind_of OpenStruct
         credentials.project_id.must_equal "project-id"
         timeout.must_be :nil?
+        host.must_be :nil?
         client_config.must_be :nil?
         OpenStruct.new project: project
       }
@@ -307,6 +339,7 @@ describe Google::Cloud do
         project.must_equal "project-id"
         credentials.must_equal "pubsub-credentials"
         timeout.must_be :nil?
+        host.must_be :nil?
         client_config.must_be :nil?
         OpenStruct.new project: project
       }
@@ -344,6 +377,7 @@ describe Google::Cloud do
         project.must_equal "project-id"
         credentials.must_equal "pubsub-credentials"
         timeout.must_be :nil?
+        host.must_be :nil?
         client_config.must_be :nil?
         OpenStruct.new project: project
       }

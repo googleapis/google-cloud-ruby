@@ -59,6 +59,8 @@ module Google
       # @param [Integer] timeout Default timeout to use in requests. Optional.
       # @param [Hash] client_config A hash of values to override the default
       #   behavior of the API client. Optional.
+      # @param [String] endpoint Override of the endpoint host name. Optional.
+      #   If the param is nil, uses the default endpoint.
       # @param [String] emulator_host Pub/Sub emulator host. Optional.
       #   If the param is nil, uses the value of the `emulator_host` config.
       # @param [String] project Alias for the `project_id` argument. Deprecated.
@@ -70,18 +72,19 @@ module Google
       # @example
       #   require "google/cloud/pubsub"
       #
-      #   pubsub = Google::Cloud.pubsub
+      #   pubsub = Google::Cloud::PubSub.new
       #
       #   topic = pubsub.topic "my-topic"
       #   topic.publish "task completed"
       #
       def self.new project_id: nil, credentials: nil, scope: nil, timeout: nil,
-                   client_config: nil, emulator_host: nil, project: nil,
-                   keyfile: nil
+                   client_config: nil, endpoint: nil, emulator_host: nil,
+                   project: nil, keyfile: nil
         project_id    ||= (project || default_project_id)
         scope         ||= configure.scope
         timeout       ||= configure.timeout
         client_config ||= configure.client_config
+        endpoint      ||= configure.endpoint
         emulator_host ||= configure.emulator_host
 
         if emulator_host
@@ -111,7 +114,7 @@ module Google
         PubSub::Project.new(
           PubSub::Service.new(
             project_id, credentials, timeout:       timeout,
-                                     host:          configure.endpoint,
+                                     host:          endpoint,
                                      client_config: client_config
           )
         )
