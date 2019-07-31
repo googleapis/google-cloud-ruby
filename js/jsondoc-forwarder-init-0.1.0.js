@@ -6,6 +6,7 @@ var forwardUrl = forwarder.resolve(window.location.href);
 
 var currentUrl = forwardUrl ? forwardUrl : window.location.href;
 
+var gemData = {{ site.data.jsondoc_types | jsonify }};
 var newUrl = getDevsiteUrl(currentUrl);
 
 if (noEndSlash(newUrl) !== noEndSlash(window.location.href)) {
