@@ -16,7 +16,7 @@
 module Google
   module Cloud
     module ErrorReporting
-      VERSION = "0.31.6".freeze
+      VERSION = "0.31.7".freeze
     end
   end
 end
