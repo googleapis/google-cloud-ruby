@@ -5,6 +5,7 @@
 require 'google/protobuf'
 
 require 'google/api/annotations_pb'
+require 'google/api/client_pb'
 require 'google/longrunning/operations_pb'
 require 'google/protobuf/duration_pb'
 require 'google/protobuf/timestamp_pb'
@@ -102,6 +103,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   end
   add_message "google.cloud.videointelligence.v1.VideoAnnotationResults" do
     optional :input_uri, :string, 1
+    optional :segment, :message, 10, "google.cloud.videointelligence.v1.VideoSegment"
     repeated :segment_label_annotations, :message, 2, "google.cloud.videointelligence.v1.LabelAnnotation"
     repeated :shot_label_annotations, :message, 3, "google.cloud.videointelligence.v1.LabelAnnotation"
     repeated :frame_label_annotations, :message, 4, "google.cloud.videointelligence.v1.LabelAnnotation"
@@ -121,6 +123,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :progress_percent, :int32, 2
     optional :start_time, :message, 3, "google.protobuf.Timestamp"
     optional :update_time, :message, 4, "google.protobuf.Timestamp"
+    optional :feature, :enum, 5, "google.cloud.videointelligence.v1.Feature"
+    optional :segment, :message, 6, "google.cloud.videointelligence.v1.VideoSegment"
   end
   add_message "google.cloud.videointelligence.v1.AnnotateVideoProgress" do
     repeated :annotation_progress, :message, 1, "google.cloud.videointelligence.v1.VideoAnnotationProgress"
