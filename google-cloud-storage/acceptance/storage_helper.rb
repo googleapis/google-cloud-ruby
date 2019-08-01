@@ -144,23 +144,10 @@ def clean_up_storage_buckets proj = $storage, names = $bucket_names, user_projec
 rescue => e
   puts "Error while cleaning up storage buckets after tests.\n\n#{e}"
   raise e
-  end
-
-def clean_up_hmac_keys proj = $storage
-  puts "Cleaning up HMAC keys after tests for #{proj.project}."
-  proj.hmac_keys.each do |hmac_key|
-    sleep 5
-    safe_gcs_execute { hmac_key.inactive! }
-    safe_gcs_execute { hmac_key.delete! }
-  end
-rescue => e
-  puts "Error while cleaning up HMAC keys after tests.\n\n#{e}"
-  raise e
 end
 
 Minitest.after_run do
   clean_up_storage_buckets
-  clean_up_hmac_keys
   if $storage_2
     clean_up_storage_buckets $storage_2, $bucket_names_2, user_project: true
   else
