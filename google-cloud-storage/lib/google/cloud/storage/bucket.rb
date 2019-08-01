@@ -371,8 +371,8 @@ module Google
         # bucket are stored and determines the SLA and the cost of storage.
         # Accepted values include `:standard`, `:nearline`, and `:coldline`, as
         # well as the equivalent strings returned by {Bucket#storage_class}.
-        # `:multi_regional` and `:regional` are accepted as legacy storage classes.
-        # For more information, see [Storage
+        # `:multi_regional` and `:regional` are accepted as legacy storage
+        # classes. For more information, see [Storage
         # Classes](https://cloud.google.com/storage/docs/storage-classes).
         #
         # @param [Symbol, String] new_storage_class Storage class of the bucket.
