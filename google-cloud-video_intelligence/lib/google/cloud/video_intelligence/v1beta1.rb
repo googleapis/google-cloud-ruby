@@ -26,7 +26,9 @@ module Google
       # # Ruby Client for Google Cloud Video Intelligence API ([GA](https://github.com/googleapis/google-cloud-ruby#versioning))
       #
       # [Google Cloud Video Intelligence API][Product Documentation]:
-      # Google Cloud Video Intelligence API.
+      # Detects objects, explicit content, and scene changes in videos. It also
+      # specifies the region for annotation and transcribes speech to text.
+      # Supports both asynchronous API and streaming API.
       # - [Product Documentation][]
       #
       # ## Quick Start

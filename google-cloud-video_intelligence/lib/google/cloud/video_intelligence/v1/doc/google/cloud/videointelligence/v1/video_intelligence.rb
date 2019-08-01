@@ -301,13 +301,16 @@ module Google
         #   @return [String]
         #     Video file location in
         #     [Google Cloud Storage](https://cloud.google.com/storage/).
+        # @!attribute [rw] segment
+        #   @return [Google::Cloud::VideoIntelligence::V1::VideoSegment]
+        #     Video segment on which the annotation is run.
         # @!attribute [rw] segment_label_annotations
         #   @return [Array<Google::Cloud::VideoIntelligence::V1::LabelAnnotation>]
-        #     Label annotations on video level or user specified segment level.
+        #     Topical label annotations on video level or user specified segment level.
         #     There is exactly one element for each unique label.
         # @!attribute [rw] shot_label_annotations
         #   @return [Array<Google::Cloud::VideoIntelligence::V1::LabelAnnotation>]
-        #     Label annotations on shot level.
+        #     Topical label annotations on shot level.
         #     There is exactly one element for each unique label.
         # @!attribute [rw] frame_label_annotations
         #   @return [Array<Google::Cloud::VideoIntelligence::V1::LabelAnnotation>]
@@ -362,6 +365,14 @@ module Google
         # @!attribute [rw] update_time
         #   @return [Google::Protobuf::Timestamp]
         #     Time of the most recent update.
+        # @!attribute [rw] feature
+        #   @return [Google::Cloud::VideoIntelligence::V1::Feature]
+        #     Specifies which feature is being tracked if the request contains more than
+        #     one features.
+        # @!attribute [rw] segment
+        #   @return [Google::Cloud::VideoIntelligence::V1::VideoSegment]
+        #     Specifies which segment is being tracked if the request contains more than
+        #     one segments.
         class VideoAnnotationProgress; end
 
         # Video annotation progress. Included in the `metadata`
@@ -463,15 +474,17 @@ module Google
         #     Transcript text representing the words that the user spoke.
         # @!attribute [rw] confidence
         #   @return [Float]
-        #     The confidence estimate between 0.0 and 1.0. A higher number
+        #     Output only. The confidence estimate between 0.0 and 1.0. A higher number
         #     indicates an estimated greater likelihood that the recognized words are
-        #     correct. This field is typically provided only for the top hypothesis, and
-        #     only for `is_final=true` results. Clients should not rely on the
-        #     `confidence` field as it is not guaranteed to be accurate or consistent.
+        #     correct. This field is set only for the top alternative.
+        #     This field is not guaranteed to be accurate and users should not rely on it
+        #     to be always provided.
         #     The default of 0.0 is a sentinel value indicating `confidence` was not set.
         # @!attribute [rw] words
         #   @return [Array<Google::Cloud::VideoIntelligence::V1::WordInfo>]
-        #     A list of word-specific information for each recognized word.
+        #     Output only. A list of word-specific information for each recognized word.
+        #     Note: When `enable_speaker_diarization` is true, you will see all the words
+        #     from the beginning of the audio.
         class SpeechRecognitionAlternative; end
 
         # Word-specific information for recognized words. Word information is only
