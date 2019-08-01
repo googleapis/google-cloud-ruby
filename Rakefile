@@ -5,7 +5,7 @@ require "erb"
 require "fileutils"
 require "timeout"
 
-KOKORO_RUBY_VERSIONS = ["2.3.8", "2.4.5", "2.5.5", "2.6.3"]
+KOKORO_RUBY_VERSIONS = ["2.3.8", "2.4.5", "2.5.5", "2.6.3"].freeze
 
 task :bundleupdate do
   valid_gems.each do |gem|
@@ -332,10 +332,10 @@ task :release, :tag do |t, args|
       puts "Successfully built and pushed #{package} for version #{version}"
     rescue => e
       gem_was_published = false
-      puts "Error while releasing #{package} version #{version}: #{e.message}"
+      raise "Error while releasing #{package} version #{version}: #{e.message}"
     end
   else
-    fail "Cannot build #{package} for version #{version}"
+    raise "Cannot build #{package} for version #{version}"
   end
 
   if gem_was_published
@@ -606,7 +606,7 @@ namespace :kokoro do
       checked_links.select! { |link| link =~ /\[\d+\]/ && !link.include?("[200]") }
       broken_devsite_links[gem] += checked_links unless checked_links.empty?
     end
-    success = broken_markdown_links.keys.empty? && broken_devsite_links.keys.empty? ? 0 : 1
+    exit_status = 1 unless (broken_devsite_links.empty? && broken_markdown_links.emtpy?)
     broken_markdown_links.each do |file, links|
       puts "#{file} contains the following broken links:"
       links.each { |link| puts "  #{link}" }
@@ -618,7 +618,7 @@ namespace :kokoro do
       puts ""
     end
 
-    exit [exit_status, success].max
+    exit exit_status
   end
 
   task :nightly do
@@ -636,7 +636,7 @@ namespace :kokoro do
                 .first.split("(").last.split(")").first
     end
     Rake::Task["kokoro:load_env_vars"].invoke
-    tag = "#{ENV["PACKAGE"]}/v#{version}"
+    tag = "#{ENV['PACKAGE']}/v#{version}"
     Rake::Task["release"].invoke tag
   end
 
