@@ -357,8 +357,9 @@ module Google
         ##
         # The bucket's storage class. This defines how objects in the bucket are
         # stored and determines the SLA and the cost of storage. Values include
-        # `NEARLINE`, `COLDLINE`, and `DURABLE_REDUCED_AVAILABILITY`. `REGIONAL`
-        # and `MULTI_REGIONAL` are supported as legacy storage classes.
+        # `STANDARD`, `NEARLINE`, and `COLDLINE`. `REGIONAL`,`MULTI_REGIONAL`,
+        # and `DURABLE_REDUCED_AVAILABILITY` are supported as legacy storage
+        # classes.
         #
         # @return [String]
         #
@@ -371,8 +372,9 @@ module Google
         # bucket are stored and determines the SLA and the cost of storage.
         # Accepted values include `:standard`, `:nearline`, and `:coldline`, as
         # well as the equivalent strings returned by {Bucket#storage_class}.
-        # `:multi_regional` and `:regional` are accepted as legacy storage
-        # classes. For more information, see [Storage
+        # `:multi_regional`, `:regional`, and  `durable_reduced_availability`
+        # are accepted as legacy storage classes. For more information, see
+        # [Storage
         # Classes](https://cloud.google.com/storage/docs/storage-classes).
         #
         # @param [Symbol, String] new_storage_class Storage class of the bucket.
@@ -1138,8 +1140,9 @@ module Google
         #   Determines how the file is stored and determines the SLA and the
         #   cost of storage. Accepted values include `:standard`, `:nearline`,
         #   and `:coldline`, as well as the equivalent strings returned by
-        #   {#storage_class}. `:multi_regional` and `:regional` are accepted
-        #   as legacy storage classes. For more information, see [Storage
+        #   {#storage_class}. `:multi_regional`, `:regional`, and
+        #   `durable_reduced_availability` are accepted legacy storage classes.
+        #   For more information, see [Storage
         #   Classes](https://cloud.google.com/storage/docs/storage-classes)
         #   and [Per-Object Storage
         #   Class](https://cloud.google.com/storage/docs/per-object-storage-class).
