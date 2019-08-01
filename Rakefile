@@ -545,6 +545,7 @@ end
 
 namespace :kokoro do
   exit_status = 0
+
   desc "Generate configs for kokoro"
   task :build, :publish do |t, args|
     should_publish = ["p", "publish"].include?(args[:publish])
@@ -635,25 +636,33 @@ namespace :kokoro do
                 .split("\n").select { |line| line.include? ENV["PACKAGE"] }
                 .first.split("(").last.split(")").first
     end
-    Rake::Task["kokoro:load_env_vars"].invoke
+    load_env_vars
+    if ENV["RUBYGEMS_API_TOKEN"].nil? || ENV["RUBYGEMS_API_TOKEN"].empty?
+      raise "RUBYGEMS_API_TOKEN must be set"
+    end
     tag = "#{ENV['PACKAGE']}/v#{version}"
     Rake::Task["release"].invoke tag
   end
 
-  task :load_env_vars do
+  def load_env_vars
     service_account = "#{ENV['KOKORO_GFILE_DIR']}/service-account.json"
+    raise "#{service_account} is not a file" unless File.file? service_account
     ENV["GOOGLE_APPLICATION_CREDENTIALS"] = service_account
     filename = "#{ENV['KOKORO_GFILE_DIR']}/env_vars.json"
+    raise "#{filename} is not a file" unless File.file? filename
     env_vars = JSON.parse File.read(filename)
     env_vars.each { |k, v| ENV[k] = v }
   end
 
-  task :windows_acceptance_fix do
-    if ENV["OS"] == "windows"
-      FileUtils.mkdir_p "acceptance"
-      if File.file? "acceptance/data"
-        FileUtils.rm_f "acceptance/data"
-        sh "call mklink /j acceptance\\data ..\\acceptance\\data"
+  def run_ci
+    header "Using Ruby - #{RUBY_VERSION}"
+    header_2 ENV["JOB_TYPE"]
+    Dir.chdir ENV["PACKAGE"] do
+      Bundler.with_clean_env do
+        sh "bundle update"
+        load_env_vars
+        windows_acceptance_fix
+        yield
       end
     end
   end
@@ -667,15 +676,12 @@ namespace :kokoro do
     end
   end
 
-  def run_ci
-    header "Using Ruby - #{RUBY_VERSION}"
-    header_2 ENV["JOB_TYPE"]
-    Dir.chdir ENV["PACKAGE"] do
-      Bundler.with_clean_env do
-        sh "bundle update"
-        Rake::Task["kokoro:load_env_vars"].invoke
-        Rake::Task["kokoro:windows_acceptance_fix"].invoke
-        yield
+  def windows_acceptance_fix
+    if ENV["OS"] == "windows"
+      FileUtils.mkdir_p "acceptance"
+      if File.file? "acceptance/data"
+        FileUtils.rm_f "acceptance/data"
+        sh "call mklink /j acceptance\\data ..\\acceptance\\data"
       end
     end
   end
