@@ -644,6 +644,11 @@ namespace :kokoro do
     Rake::Task["release"].invoke tag
   end
 
+  task :republish do
+    load_env_vars
+    Rake::Task["docs:republish_all"].invoke
+  end
+
   def load_env_vars
     service_account = "#{ENV['KOKORO_GFILE_DIR']}/service-account.json"
     raise "#{service_account} is not a file" unless File.file? service_account
@@ -740,6 +745,14 @@ def generate_kokoro_configs
     base = ERB.new File.read("./.kokoro/templates/linux.cfg.erb")
     base = base.result binding
     config = ERB.new File.read("./.kokoro/templates/post.cfg.erb")
+    f.write config.result(binding)
+  end
+
+  # generate republish config
+  gem = "republish"
+  os_version = :linux
+  File.open "./.kokoro/release/#{gem}.cfg", "w" do |f|
+    config = ERB.new File.read("./.kokoro/templates/release.cfg.erb")
     f.write config.result(binding)
   end
 end
