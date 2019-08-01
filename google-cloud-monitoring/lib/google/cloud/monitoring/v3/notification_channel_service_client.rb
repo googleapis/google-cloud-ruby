@@ -290,6 +290,30 @@ module Google
                 {'name' => request.name}
               end
             )
+            @send_notification_channel_verification_code = Google::Gax.create_api_call(
+              @notification_channel_service_stub.method(:send_notification_channel_verification_code),
+              defaults["send_notification_channel_verification_code"],
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
+            )
+            @get_notification_channel_verification_code = Google::Gax.create_api_call(
+              @notification_channel_service_stub.method(:get_notification_channel_verification_code),
+              defaults["get_notification_channel_verification_code"],
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
+            )
+            @verify_notification_channel = Google::Gax.create_api_call(
+              @notification_channel_service_stub.method(:verify_notification_channel),
+              defaults["verify_notification_channel"],
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
+            )
           end
 
           # Service calls
@@ -628,6 +652,148 @@ module Google
             req = Google::Gax::to_proto(req, Google::Monitoring::V3::DeleteNotificationChannelRequest)
             @delete_notification_channel.call(req, options, &block)
             nil
+          end
+
+          # Causes a verification code to be delivered to the channel. The code
+          # can then be supplied in `VerifyNotificationChannel` to verify the channel.
+          #
+          # @param name [String]
+          #   The notification channel to which to send a verification code.
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result []
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/monitoring"
+          #
+          #   notification_channel_client = Google::Cloud::Monitoring::NotificationChannel.new(version: :v3)
+          #   formatted_name = Google::Cloud::Monitoring::V3::NotificationChannelServiceClient.notification_channel_path("[PROJECT]", "[NOTIFICATION_CHANNEL]")
+          #   notification_channel_client.send_notification_channel_verification_code(formatted_name)
+
+          def send_notification_channel_verification_code \
+              name,
+              options: nil,
+              &block
+            req = {
+              name: name
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Monitoring::V3::SendNotificationChannelVerificationCodeRequest)
+            @send_notification_channel_verification_code.call(req, options, &block)
+            nil
+          end
+
+          # Requests a verification code for an already verified channel that can then
+          # be used in a call to VerifyNotificationChannel() on a different channel
+          # with an equivalent identity in the same or in a different project. This
+          # makes it possible to copy a channel between projects without requiring
+          # manual reverification of the channel. If the channel is not in the
+          # verified state, this method will fail (in other words, this may only be
+          # used if the SendNotificationChannelVerificationCode and
+          # VerifyNotificationChannel paths have already been used to put the given
+          # channel into the verified state).
+          #
+          # There is no guarantee that the verification codes returned by this method
+          # will be of a similar structure or form as the ones that are delivered
+          # to the channel via SendNotificationChannelVerificationCode; while
+          # VerifyNotificationChannel() will recognize both the codes delivered via
+          # SendNotificationChannelVerificationCode() and returned from
+          # GetNotificationChannelVerificationCode(), it is typically the case that
+          # the verification codes delivered via
+          # SendNotificationChannelVerificationCode() will be shorter and also
+          # have a shorter expiration (e.g. codes such as "G-123456") whereas
+          # GetVerificationCode() will typically return a much longer, websafe base
+          # 64 encoded string that has a longer expiration time.
+          #
+          # @param name [String]
+          #   The notification channel for which a verification code is to be generated
+          #   and retrieved. This must name a channel that is already verified; if
+          #   the specified channel is not verified, the request will fail.
+          # @param expire_time [Google::Protobuf::Timestamp | Hash]
+          #   The desired expiration time. If specified, the API will guarantee that
+          #   the returned code will not be valid after the specified timestamp;
+          #   however, the API cannot guarantee that the returned code will be
+          #   valid for at least as long as the requested time (the API puts an upper
+          #   bound on the amount of time for which a code may be valid). If omitted,
+          #   a default expiration will be used, which may be less than the max
+          #   permissible expiration (so specifying an expiration may extend the
+          #   code's lifetime over omitting an expiration, even though the API does
+          #   impose an upper limit on the maximum expiration that is permitted).
+          #   A hash of the same form as `Google::Protobuf::Timestamp`
+          #   can also be provided.
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Monitoring::V3::GetNotificationChannelVerificationCodeResponse]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
+          # @return [Google::Monitoring::V3::GetNotificationChannelVerificationCodeResponse]
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/monitoring"
+          #
+          #   notification_channel_client = Google::Cloud::Monitoring::NotificationChannel.new(version: :v3)
+          #   formatted_name = Google::Cloud::Monitoring::V3::NotificationChannelServiceClient.notification_channel_path("[PROJECT]", "[NOTIFICATION_CHANNEL]")
+          #   response = notification_channel_client.get_notification_channel_verification_code(formatted_name)
+
+          def get_notification_channel_verification_code \
+              name,
+              expire_time: nil,
+              options: nil,
+              &block
+            req = {
+              name: name,
+              expire_time: expire_time
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Monitoring::V3::GetNotificationChannelVerificationCodeRequest)
+            @get_notification_channel_verification_code.call(req, options, &block)
+          end
+
+          # Verifies a `NotificationChannel` by proving receipt of the code
+          # delivered to the channel as a result of calling
+          # `SendNotificationChannelVerificationCode`.
+          #
+          # @param name [String]
+          #   The notification channel to verify.
+          # @param code [String]
+          #   The verification code that was delivered to the channel as
+          #   a result of invoking the `SendNotificationChannelVerificationCode` API
+          #   method or that was retrieved from a verified channel via
+          #   `GetNotificationChannelVerificationCode`. For example, one might have
+          #   "G-123456" or "TKNZGhhd2EyN3I1MnRnMjRv" (in general, one is only
+          #   guaranteed that the code is valid UTF-8; one should not
+          #   make any assumptions regarding the structure or format of the code).
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Monitoring::V3::NotificationChannel]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
+          # @return [Google::Monitoring::V3::NotificationChannel]
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/monitoring"
+          #
+          #   notification_channel_client = Google::Cloud::Monitoring::NotificationChannel.new(version: :v3)
+          #   formatted_name = Google::Cloud::Monitoring::V3::NotificationChannelServiceClient.notification_channel_path("[PROJECT]", "[NOTIFICATION_CHANNEL]")
+          #
+          #   # TODO: Initialize `code`:
+          #   code = ''
+          #   response = notification_channel_client.verify_notification_channel(formatted_name, code)
+
+          def verify_notification_channel \
+              name,
+              code,
+              options: nil,
+              &block
+            req = {
+              name: name,
+              code: code
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Monitoring::V3::VerifyNotificationChannelRequest)
+            @verify_notification_channel.call(req, options, &block)
           end
         end
       end

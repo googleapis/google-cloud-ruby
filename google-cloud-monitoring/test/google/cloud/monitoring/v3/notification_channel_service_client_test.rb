@@ -611,4 +611,233 @@ describe Google::Cloud::Monitoring::V3::NotificationChannelServiceClient do
       end
     end
   end
+
+  describe 'send_notification_channel_verification_code' do
+    custom_error = CustomTestError_v3.new "Custom test error for Google::Cloud::Monitoring::V3::NotificationChannelServiceClient#send_notification_channel_verification_code."
+
+    it 'invokes send_notification_channel_verification_code without error' do
+      # Create request parameters
+      formatted_name = Google::Cloud::Monitoring::V3::NotificationChannelServiceClient.notification_channel_path("[PROJECT]", "[NOTIFICATION_CHANNEL]")
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Monitoring::V3::SendNotificationChannelVerificationCodeRequest, request)
+        assert_equal(formatted_name, request.name)
+        OpenStruct.new(execute: nil)
+      end
+      mock_stub = MockGrpcClientStub_v3.new(:send_notification_channel_verification_code, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockNotificationChannelServiceCredentials_v3.new("send_notification_channel_verification_code")
+
+      Google::Monitoring::V3::NotificationChannelService::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Monitoring::NotificationChannel.new(version: :v3)
+
+          # Call method
+          response = client.send_notification_channel_verification_code(formatted_name)
+
+          # Verify the response
+          assert_nil(response)
+
+          # Call method with block
+          client.send_notification_channel_verification_code(formatted_name) do |response, operation|
+            # Verify the response
+            assert_nil(response)
+            refute_nil(operation)
+          end
+        end
+      end
+    end
+
+    it 'invokes send_notification_channel_verification_code with error' do
+      # Create request parameters
+      formatted_name = Google::Cloud::Monitoring::V3::NotificationChannelServiceClient.notification_channel_path("[PROJECT]", "[NOTIFICATION_CHANNEL]")
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Monitoring::V3::SendNotificationChannelVerificationCodeRequest, request)
+        assert_equal(formatted_name, request.name)
+        raise custom_error
+      end
+      mock_stub = MockGrpcClientStub_v3.new(:send_notification_channel_verification_code, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockNotificationChannelServiceCredentials_v3.new("send_notification_channel_verification_code")
+
+      Google::Monitoring::V3::NotificationChannelService::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Monitoring::NotificationChannel.new(version: :v3)
+
+          # Call method
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v3 do
+            client.send_notification_channel_verification_code(formatted_name)
+          end
+
+          # Verify the GaxError wrapped the custom error that was raised.
+          assert_match(custom_error.message, err.message)
+        end
+      end
+    end
+  end
+
+  describe 'get_notification_channel_verification_code' do
+    custom_error = CustomTestError_v3.new "Custom test error for Google::Cloud::Monitoring::V3::NotificationChannelServiceClient#get_notification_channel_verification_code."
+
+    it 'invokes get_notification_channel_verification_code without error' do
+      # Create request parameters
+      formatted_name = Google::Cloud::Monitoring::V3::NotificationChannelServiceClient.notification_channel_path("[PROJECT]", "[NOTIFICATION_CHANNEL]")
+
+      # Create expected grpc response
+      code = "code3059181"
+      expected_response = { code: code }
+      expected_response = Google::Gax::to_proto(expected_response, Google::Monitoring::V3::GetNotificationChannelVerificationCodeResponse)
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Monitoring::V3::GetNotificationChannelVerificationCodeRequest, request)
+        assert_equal(formatted_name, request.name)
+        OpenStruct.new(execute: expected_response)
+      end
+      mock_stub = MockGrpcClientStub_v3.new(:get_notification_channel_verification_code, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockNotificationChannelServiceCredentials_v3.new("get_notification_channel_verification_code")
+
+      Google::Monitoring::V3::NotificationChannelService::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Monitoring::NotificationChannel.new(version: :v3)
+
+          # Call method
+          response = client.get_notification_channel_verification_code(formatted_name)
+
+          # Verify the response
+          assert_equal(expected_response, response)
+
+          # Call method with block
+          client.get_notification_channel_verification_code(formatted_name) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
+        end
+      end
+    end
+
+    it 'invokes get_notification_channel_verification_code with error' do
+      # Create request parameters
+      formatted_name = Google::Cloud::Monitoring::V3::NotificationChannelServiceClient.notification_channel_path("[PROJECT]", "[NOTIFICATION_CHANNEL]")
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Monitoring::V3::GetNotificationChannelVerificationCodeRequest, request)
+        assert_equal(formatted_name, request.name)
+        raise custom_error
+      end
+      mock_stub = MockGrpcClientStub_v3.new(:get_notification_channel_verification_code, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockNotificationChannelServiceCredentials_v3.new("get_notification_channel_verification_code")
+
+      Google::Monitoring::V3::NotificationChannelService::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Monitoring::NotificationChannel.new(version: :v3)
+
+          # Call method
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v3 do
+            client.get_notification_channel_verification_code(formatted_name)
+          end
+
+          # Verify the GaxError wrapped the custom error that was raised.
+          assert_match(custom_error.message, err.message)
+        end
+      end
+    end
+  end
+
+  describe 'verify_notification_channel' do
+    custom_error = CustomTestError_v3.new "Custom test error for Google::Cloud::Monitoring::V3::NotificationChannelServiceClient#verify_notification_channel."
+
+    it 'invokes verify_notification_channel without error' do
+      # Create request parameters
+      formatted_name = Google::Cloud::Monitoring::V3::NotificationChannelServiceClient.notification_channel_path("[PROJECT]", "[NOTIFICATION_CHANNEL]")
+      code = ''
+
+      # Create expected grpc response
+      type = "type3575610"
+      name_2 = "name2-1052831874"
+      display_name = "displayName1615086568"
+      description = "description-1724546052"
+      expected_response = {
+        type: type,
+        name: name_2,
+        display_name: display_name,
+        description: description
+      }
+      expected_response = Google::Gax::to_proto(expected_response, Google::Monitoring::V3::NotificationChannel)
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Monitoring::V3::VerifyNotificationChannelRequest, request)
+        assert_equal(formatted_name, request.name)
+        assert_equal(code, request.code)
+        OpenStruct.new(execute: expected_response)
+      end
+      mock_stub = MockGrpcClientStub_v3.new(:verify_notification_channel, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockNotificationChannelServiceCredentials_v3.new("verify_notification_channel")
+
+      Google::Monitoring::V3::NotificationChannelService::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Monitoring::NotificationChannel.new(version: :v3)
+
+          # Call method
+          response = client.verify_notification_channel(formatted_name, code)
+
+          # Verify the response
+          assert_equal(expected_response, response)
+
+          # Call method with block
+          client.verify_notification_channel(formatted_name, code) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
+        end
+      end
+    end
+
+    it 'invokes verify_notification_channel with error' do
+      # Create request parameters
+      formatted_name = Google::Cloud::Monitoring::V3::NotificationChannelServiceClient.notification_channel_path("[PROJECT]", "[NOTIFICATION_CHANNEL]")
+      code = ''
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Monitoring::V3::VerifyNotificationChannelRequest, request)
+        assert_equal(formatted_name, request.name)
+        assert_equal(code, request.code)
+        raise custom_error
+      end
+      mock_stub = MockGrpcClientStub_v3.new(:verify_notification_channel, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockNotificationChannelServiceCredentials_v3.new("verify_notification_channel")
+
+      Google::Monitoring::V3::NotificationChannelService::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Monitoring::NotificationChannel.new(version: :v3)
+
+          # Call method
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v3 do
+            client.verify_notification_channel(formatted_name, code)
+          end
+
+          # Verify the GaxError wrapped the custom error that was raised.
+          assert_match(custom_error.message, err.message)
+        end
+      end
+    end
+  end
 end
