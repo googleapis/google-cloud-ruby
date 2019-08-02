@@ -1,0 +1,21 @@
+{
+  "name": "devsite-forwarder",
+  "version": "1.0.0",
+  "description": "",
+  "main": "devsite-forwarder.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha",
+    "fix": "npx prettier --write **/*.js && npx prettier --write *.js"
+  },
+  "author": "TheRoyalTnetennba",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "fs": "0.0.1-security",
+    "mocha": "^6.2.0",
+    "prettier": "1.18.2",
+    "yaml": "^1.6.0"
+  }
+}
