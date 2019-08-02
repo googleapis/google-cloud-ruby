@@ -480,7 +480,7 @@ module Google
         end
 
         def mime_type_for file
-          mime_type = MiniMime.lookup_by_filename(Pathname(file).to_path)
+          mime_type = MiniMime.lookup_by_filename Pathname(file).to_path
           return nil if mime_type.nil?
           mime_type.content_type
         rescue StandardError
