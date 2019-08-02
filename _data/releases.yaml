@@ -64,6 +64,7 @@ google-cloud-asset:
 google-cloud-automl:
 - v0.1.0
 google-cloud-bigquery:
+- v1.13.0
 - v1.12.0
 - v1.11.2
 - v1.11.1
@@ -174,6 +175,7 @@ google-cloud-datastore:
 - v0.20.1
 - v0.20.0
 google-cloud-debugger:
+- v0.33.7
 - v0.33.6
 - v0.33.5
 - v0.33.4
@@ -249,6 +251,7 @@ google-cloud-env:
 - v1.0.1
 - v1.0.0
 google-cloud-error_reporting:
+- v0.31.7
 - v0.31.6
 - v0.31.5
 - v0.31.4
@@ -329,6 +332,7 @@ google-cloud-language:
 - v0.20.1
 - v0.20.0
 google-cloud-logging:
+- v1.6.6
 - v1.6.5
 - v1.6.4
 - v1.6.3
@@ -396,6 +400,7 @@ google-cloud-phishing_protection:
 - v0.1.1
 - v0.1.0
 google-cloud-pubsub:
+- v0.38.0
 - v0.37.1
 - v0.37.0
 - v0.36.0
@@ -471,6 +476,7 @@ google-cloud-security_center:
 - v0.1.1
 - v0.1.0
 google-cloud-spanner:
+- v1.9.5
 - v1.9.4
 - v1.9.3
 - v1.9.2
@@ -586,6 +592,7 @@ google-cloud-text_to_speech:
 - v0.1.1
 - v0.1.0
 google-cloud-trace:
+- v0.34.5
 - v0.34.4
 - v0.34.3
 - v0.34.2
