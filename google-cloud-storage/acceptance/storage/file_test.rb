@@ -88,6 +88,40 @@ describe Google::Cloud::Storage::File, :storage do
     uploaded.delete
   end
 
+  it "should upload, replace and download a previous generation of a file" do
+    bucket.versioning = true unless bucket.versioning?
+    filename = "generation_file.txt"
+    uploaded_1 = bucket.create_file StringIO.new("generation 1"), filename
+    generation_1 = uploaded_1.generation
+    uploaded_1.reload!
+    uploaded_1.generation.must_equal generation_1
+
+    uploaded_2 = bucket.create_file StringIO.new("generation 2"), filename
+    generation_2 = uploaded_2.generation
+    generation_2.wont_equal generation_1
+
+    uploaded_1.reload! generation: true
+    uploaded_1.generation.must_equal generation_1
+    uploaded_2.reload!
+    uploaded_2.generation.must_equal generation_2
+    uploaded_1.reload!
+    uploaded_1.generation.must_equal generation_2
+
+    Tempfile.open ["generation_file", ".txt"] do |tmpfile|
+      downloaded = bucket.file(filename).download tmpfile
+      File.read(downloaded.path).must_equal "generation 2"
+    end
+
+    Tempfile.open ["generation_file", ".txt"] do |tmpfile|
+      downloaded =  bucket.file(filename, generation: generation_1).download tmpfile
+      File.read(downloaded.path).must_equal "generation 1"
+    end
+
+    uploaded_2.delete generation: generation_1
+    uploaded_2.delete generation: generation_2
+    bucket.versioning = false
+  end
+
   it "should upload and delete a file with strange filename" do
     original = File.new files[:logo][:path]
     uploaded = bucket.create_file original, "#{[101, 769].pack("U*")}.png",
@@ -123,6 +157,9 @@ describe Google::Cloud::Storage::File, :storage do
 
     bucket.file("CRUDLogo.png").wont_be :nil?
 
+    generation = uploaded.generation
+    generation.must_be_kind_of Integer
+
     uploaded.created_at.must_be_kind_of DateTime
     uploaded.api_url.must_be_kind_of String
     uploaded.media_url.must_be_kind_of String
@@ -141,6 +178,7 @@ describe Google::Cloud::Storage::File, :storage do
 
     uploaded.metadata.must_be_kind_of Hash
     uploaded.metadata.must_be :empty?
+    uploaded.metageneration.must_equal 1
 
     uploaded.update do |f|
       f.cache_control = "private, max-age=0, no-cache"
@@ -172,8 +210,11 @@ describe Google::Cloud::Storage::File, :storage do
     uploaded.metadata.frozen?.must_equal true
     uploaded.metadata["player"].must_equal "Alice"
     uploaded.metadata["score"].must_equal "101"
+    uploaded.metageneration.must_equal 2
 
     uploaded.reload!
+
+    uploaded.generation.must_equal generation
 
     uploaded.created_at.must_be_kind_of DateTime
     uploaded.api_url.must_be_kind_of String
