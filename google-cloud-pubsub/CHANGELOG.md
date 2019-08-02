@@ -1,5 +1,9 @@
 # Release History
 
+### 0.38.1 / 2019-08-02
+
+* Add endpoint argument to constructor
+
 ### 0.38.0 / 2019-07-31
 
 * Allow persistence_regions to be set
