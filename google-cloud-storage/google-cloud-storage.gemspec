@@ -23,7 +23,7 @@ Gem::Specification.new do |gem|
   gem.add_dependency "googleauth", ">= 0.6.2", "< 0.10.0"
   gem.add_dependency "digest-crc", "~> 0.4"
   gem.add_dependency "addressable", "~> 2.5"
-  gem.add_dependency "mime-types", "~> 3.0"
+  gem.add_dependency "mini_mime", "~> 1.0"
 
   gem.add_development_dependency "minitest", "~> 5.10"
   gem.add_development_dependency "minitest-autotest", "~> 1.0"

@@ -16,7 +16,7 @@
 require "google/cloud/storage/version"
 require "google/apis/storage_v1"
 require "digest"
-require "mime/types"
+require "mini_mime"
 require "pathname"
 
 module Google
@@ -455,7 +455,9 @@ module Google
         # Retrieves the mime-type for a file path.
         # An empty string is returned if no mime-type can be found.
         def mime_type_for path
-          MIME::Types.of(path).first.to_s
+          mime_type = MiniMime.lookup_by_filename path
+          return "" if mime_type.nil?
+          mime_type.content_type
         end
 
         # @private

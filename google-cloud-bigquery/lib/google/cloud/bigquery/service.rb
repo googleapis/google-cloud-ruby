@@ -19,7 +19,7 @@ require "google/cloud/errors"
 require "google/apis/bigquery_v2"
 require "pathname"
 require "securerandom"
-require "mime/types"
+require "mini_mime"
 require "date"
 
 module Google
@@ -480,9 +480,9 @@ module Google
         end
 
         def mime_type_for file
-          mime_type = MIME::Types.of(Pathname(file).to_path).first.to_s
-          return nil if mime_type.empty?
-          mime_type
+          mime_type = MiniMime.lookup_by_filename Pathname(file).to_path
+          return nil if mime_type.nil?
+          mime_type.content_type
         rescue StandardError
           nil
         end
