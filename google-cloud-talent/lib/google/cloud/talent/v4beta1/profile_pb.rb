@@ -5,10 +5,9 @@
 require 'google/protobuf'
 
 require 'google/api/annotations_pb'
+require 'google/api/field_behavior_pb'
 require 'google/cloud/talent/v4beta1/common_pb'
-require 'google/cloud/talent/v4beta1/job_pb'
 require 'google/protobuf/duration_pb'
-require 'google/protobuf/field_mask_pb'
 require 'google/protobuf/timestamp_pb'
 require 'google/protobuf/wrappers_pb'
 require 'google/type/date_pb'
@@ -42,6 +41,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     map :custom_attributes, :string, :message, 26, "google.cloud.talent.v4beta1.CustomAttribute"
     optional :processed, :bool, 27
     optional :keyword_snippet, :string, 28
+    repeated :derived_addresses, :message, 64, "google.cloud.talent.v4beta1.Location"
   end
   add_message "google.cloud.talent.v4beta1.Resume" do
     optional :structured_resume, :string, 1

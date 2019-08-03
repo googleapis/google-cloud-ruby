@@ -180,7 +180,26 @@ module Google
         # @!attribute [rw] location_filters
         #   @return [Array<Google::Cloud::Talent::V4beta1::LocationFilter>]
         #     Optional. The location filter specifies geo-regions containing the profiles
-        #     to search against.
+        #     to search against. It filters against all of a profile's
+        #     {Google::Cloud::Talent::V4beta1::Profile#addresses Profile#addresses} where
+        #     {Google::Cloud::Talent::V4beta1::Address#usage Address#usage} is PERSONAL and
+        #     {Google::Cloud::Talent::V4beta1::Address#current Address#current} is true. If
+        #     no such address exists, a fallback logic is applied in an attempt to
+        #     determine the profile's primary address.
+        #
+        #     The fallback logic selects an address from a profile's
+        #     {Google::Cloud::Talent::V4beta1::Profile#addresses Profile#addresses} in the
+        #     following order of priority:
+        #     1. {Google::Cloud::Talent::V4beta1::Address#usage Address#usage} is PERSONAL
+        #     and {Google::Cloud::Talent::V4beta1::Address#current Address#current} is false
+        #     or not set.
+        #     2. {Google::Cloud::Talent::V4beta1::Address#usage Address#usage} is
+        #     CONTACT_INFO_USAGE_UNSPECIFIED and
+        #     {Google::Cloud::Talent::V4beta1::Address#current Address#current} is true.
+        #     3. {Google::Cloud::Talent::V4beta1::Address#usage Address#usage} is
+        #     CONTACT_INFO_USAGE_UNSPECIFIED and
+        #     {Google::Cloud::Talent::V4beta1::Address#current Address#current} is false or
+        #     not set.
         #
         #     If a location filter isn't specified, profiles fitting the other search
         #     criteria are retrieved regardless of where they're located.

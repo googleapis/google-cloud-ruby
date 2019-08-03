@@ -81,7 +81,34 @@ module Google
         #     Currently only one person name is supported.
         # @!attribute [rw] addresses
         #   @return [Array<Google::Cloud::Talent::V4beta1::Address>]
-        #     Optional. The candidate's postal addresses.
+        #     Optional. The candidate's postal addresses. It's highly recommended to
+        #     input this information as accurately as possible to help improve search
+        #     quality. Here are some recommendations:
+        #
+        #     * Provide {Google::Cloud::Talent::V4beta1::Address#usage Address#usage} if
+        #       possible, especially if the address is PERSONAL. During a search only
+        #       personal addresses are considered. If there is no such address, all
+        #       addresses with unspecified usage are assumed to be personal.
+        #     * Provide {Google::Cloud::Talent::V4beta1::Address#current Address#current}
+        #       for the current address if possible. During a search, only current
+        #       addresses are considered. If there is no such address, all addresses are
+        #       assumed to be current.
+        #
+        #     When displaying a candidate's addresses, it is sometimes desirable to limit
+        #     the number of addresses shown. In these cases we recommend that you display
+        #     the addresses in the following order of priority:
+        #     1. {Google::Cloud::Talent::V4beta1::Address#usage Address#usage} is PERSONAL
+        #     and {Google::Cloud::Talent::V4beta1::Address#current Address#current} is true.
+        #     2. {Google::Cloud::Talent::V4beta1::Address#usage Address#usage} is PERSONAL
+        #     and {Google::Cloud::Talent::V4beta1::Address#current Address#current} is false
+        #     or not set.
+        #     3. {Google::Cloud::Talent::V4beta1::Address#usage Address#usage} is
+        #     CONTACT_INFO_USAGE_UNSPECIFIED and
+        #     {Google::Cloud::Talent::V4beta1::Address#current Address#current} is true.
+        #     4. {Google::Cloud::Talent::V4beta1::Address#usage Address#usage} is
+        #     CONTACT_INFO_USAGE_UNSPECIFIED and
+        #     {Google::Cloud::Talent::V4beta1::Address#current Address#current} is false or
+        #     not set.
         # @!attribute [rw] email_addresses
         #   @return [Array<Google::Cloud::Talent::V4beta1::Email>]
         #     Optional. The candidate's email addresses.
@@ -115,7 +142,7 @@ module Google
         #       for the current employment if possible. If not, it's inferred from user
         #       inputs.
         #
-        #     The limitation for max number of employment records is 50.
+        #     The limitation for max number of employment records is 100.
         # @!attribute [rw] education_records
         #   @return [Array<Google::Cloud::Talent::V4beta1::EducationRecord>]
         #     Optional. The education history record of the candidate. It's highly
@@ -131,13 +158,13 @@ module Google
         #       for the current education if possible. If not, it's inferred from user
         #       inputs.
         #
-        #     The limitation for max number of education records is 10.
+        #     The limitation for max number of education records is 100.
         # @!attribute [rw] skills
         #   @return [Array<Google::Cloud::Talent::V4beta1::Skill>]
         #     Optional. The skill set of the candidate. It's highly recommended to
         #     provide as much information as possible to help improve the search quality.
         #
-        #     The limitation for max number of skills is 100.
+        #     The limitation for max number of skills is 500.
         # @!attribute [rw] activities
         #   @return [Array<Google::Cloud::Talent::V4beta1::Activity>]
         #     Optional. The individual or collaborative activities which the candidate
@@ -194,6 +221,15 @@ module Google
         #     Output only. Keyword snippet shows how the search result is related to a
         #     search query.  This is only returned in
         #     {Google::Cloud::Talent::V4beta1::SearchProfilesResponse SearchProfilesResponse}.
+        # @!attribute [rw] derived_addresses
+        #   @return [Array<Google::Cloud::Talent::V4beta1::Location>]
+        #     Output only. Derived locations of the profile, resolved from
+        #     {Google::Cloud::Talent::V4beta1::Profile#addresses Profile#addresses}.
+        #
+        #     {Google::Cloud::Talent::V4beta1::Profile#derived_addresses derived_addresses}
+        #     are exactly matched to
+        #     {Google::Cloud::Talent::V4beta1::Profile#addresses Profile#addresses} in the
+        #     same order.
         class Profile; end
 
         # Resource that represents a resume.
@@ -203,16 +239,14 @@ module Google
         #     {Google::Cloud::Talent::V4beta1::Resume#resume_type resume_type} is
         #     {Google::Cloud::Talent::V4beta1::Resume::ResumeType::HRXML HRXML}. For example,
         #     the API parses this field and creates a profile with all structured fields
-        #     populated, for example.
+        #     populated.
         #     {Google::Cloud::Talent::V4beta1::EmploymentRecord EmploymentRecord},
         #     {Google::Cloud::Talent::V4beta1::EducationRecord EducationRecord}, and so on.
         #     An error is thrown if this field cannot be parsed.
         #
-        #     If this field is provided during profile creation or update,
-        #     any other structured data provided in the profile is ignored. The
-        #     API populates these fields by parsing this field. Note that the use of the
-        #     functionality offered by this field to extract data from resumes is an
-        #     Alpha feature and as such is not covered by any SLA.
+        #     Note that the use of the functionality offered by this field to extract
+        #     data from resumes is an Alpha feature and as such is not covered by any
+        #     SLA.
         # @!attribute [rw] resume_type
         #   @return [Google::Cloud::Talent::V4beta1::Resume::ResumeType]
         #     Optional. The format of
@@ -437,7 +471,7 @@ module Google
         #
         #     For example, "Google", "Alphabet", and so on.
         #
-        #     Number of characters allowed is 100.
+        #     Number of characters allowed is 250.
         # @!attribute [rw] division_name
         #   @return [String]
         #     Optional. The division name of the employment.
@@ -454,7 +488,7 @@ module Google
         #
         #     For example, "Software Engineer", "Data Scientist", and so on.
         #
-        #     Number of characters allowed is 100.
+        #     Number of characters allowed is 250.
         # @!attribute [rw] job_description
         #   @return [String]
         #     Optional. The description of job content.
@@ -508,7 +542,7 @@ module Google
         #
         #     For example, "Stanford University", "UC Berkeley", and so on.
         #
-        #     Number of characters allowed is 100.
+        #     Number of characters allowed is 250.
         # @!attribute [rw] address
         #   @return [Google::Cloud::Talent::V4beta1::Address]
         #     Optional. The physical address of the education institution.

@@ -5,10 +5,7 @@
 require 'google/protobuf'
 
 require 'google/api/annotations_pb'
-require 'google/cloud/talent/v4beta1/application_pb'
 require 'google/cloud/talent/v4beta1/common_pb'
-require 'google/cloud/talent/v4beta1/job_pb'
-require 'google/cloud/talent/v4beta1/profile_pb'
 require 'google/protobuf/duration_pb'
 require 'google/protobuf/timestamp_pb'
 require 'google/protobuf/wrappers_pb'
