@@ -340,12 +340,9 @@ module Google
           #   See <a href="https://cloud.google.com/pubsub/docs/labels"> Creating and
           #   managing labels</a>.
           # @param message_storage_policy [Google::Cloud::PubSub::V1::MessageStoragePolicy | Hash]
-          #   Policy constraining how messages published to the topic may be stored. It
-          #   is determined when the topic is created based on the policy configured at
-          #   the project level. It must not be set by the caller in the request to
-          #   CreateTopic or to UpdateTopic. This field will be populated in the
-          #   responses for GetTopic, CreateTopic, and UpdateTopic: if not present in the
-          #   response, then no constraints are in effect.
+          #   Policy constraining the set of Google Cloud Platform regions where messages
+          #   published to the topic may be stored. If not present, then no constraints
+          #   are in effect.
           #   A hash of the same form as `Google::Cloud::PubSub::V1::MessageStoragePolicy`
           #   can also be provided.
           # @param kms_key_name [String]
@@ -353,9 +350,6 @@ module Google
           #   to messages published on this topic.
           #
           #   The expected format is `projects/*/locations/*/keyRings/*/cryptoKeys/*`.
-          #   <b>EXPERIMENTAL:</b> This feature is part of a closed alpha release. This
-          #   API might be changed in backward-incompatible ways and is not recommended
-          #   for production use. It is not subject to any SLA or deprecation policy.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
