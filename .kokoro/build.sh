@@ -46,6 +46,7 @@ elif [ "$JOB_TYPE" = "release" ]; then
     export DOCS_CREDENTIALS=${KOKORO_KEYSTORE_DIR}/73713_docuploader_service_account
     git fetch --depth=10000
     python3 -m pip install git+https://github.com/googleapis/releasetool
+    python3 -m pip install gcp-docuploader
     python3 -m releasetool publish-reporter-script > /tmp/publisher-script; source /tmp/publisher-script
     if [ "$PACKAGE" = "republish" ]; then
         (bundle update && bundle exec rake kokoro:republish) || set_failed_status
