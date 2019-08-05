@@ -44,8 +44,8 @@ class GemVersionDoc < RepoDocCommon
     Dir.chdir @output_dir do
       opts = [
         "--credentials #{ENV['DOCS_CREDENTIALS']}",
-        "--staging-bucket #{ENV['STAGING_BUCKET']}",
-        "--metadata-file ./docs.metadata"
+        "--staging-bucket #{ENV.fetch 'STAGING_BUCKET', 'docs-staging'}",
+        "--metadata-file=./docs.metadata"
       ]
       cmd "python3 -m docuploader upload . #{opts.join ' '}"
     end
