@@ -937,8 +937,8 @@ module Google
           end
           file, resp =
             service.download_file bucket, name, path,
-                                  key: encryption_key, range: range,
-                                  user_project: user_project
+                                  generation: generation, key: encryption_key,
+                                  range: range, user_project: user_project
           # FIX: downloading with encryption key will return nil
           file ||= ::File.new path
           verify = :none if range

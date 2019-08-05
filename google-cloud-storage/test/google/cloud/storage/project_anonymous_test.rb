@@ -109,7 +109,7 @@ describe Google::Cloud::Storage::Project, :anonymous, :mock_storage do
       mock.expect :get_object, find_file_gapi(bucket_name, file_name),
         [bucket_name, file_name, generation: nil, user_project: nil, options: {}]
       mock.expect :get_object_with_response, [tmpfile, download_http_resp],
-        [bucket_name, file_name, download_dest: tmpfile, generation: nil, user_project: nil, options: {}]
+        [bucket_name, file_name, download_dest: tmpfile, generation: 1234567890, user_project: nil, options: {}]
 
       anonymous_storage.service.mocked_service = mock
 
