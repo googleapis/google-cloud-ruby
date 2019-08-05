@@ -43,7 +43,8 @@ class GemVersionDoc < RepoDocCommon
   def upload
     Dir.chdir @output_dir do
       opts = [
-        "--staging-bucket #{ENV.fetch 'STAGING_BUCKET', 'docs-staging'}",
+        "--credentials=#{ENV['KOKORO_KEYSTORE_DIR']}/73713_docuploader_service_account",
+        "--staging-bucket=#{ENV.fetch 'STAGING_BUCKET', 'docs-staging'}",
         "--metadata-file=./docs.metadata"
       ]
       cmd "python3 -m docuploader upload . #{opts.join ' '}"
