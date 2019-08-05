@@ -43,7 +43,6 @@ class GemVersionDoc < RepoDocCommon
   def upload
     Dir.chdir @output_dir do
       opts = [
-        "--credentials #{ENV['DOCS_CREDENTIALS']}",
         "--staging-bucket #{ENV.fetch 'STAGING_BUCKET', 'docs-staging'}",
         "--metadata-file=./docs.metadata"
       ]
