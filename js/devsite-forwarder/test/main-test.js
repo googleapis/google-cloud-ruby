@@ -43,7 +43,9 @@ describe("DevsiteForwarder", function() {
         ghBase: ghBase,
         ghBaseAlt: ghBase,
         [ghBase + logger + anchor]: devBase + logger + ".html" + anchor,
-        [ghBase + assetAuth + capAnchor]: devBase + assetAuth + capAnchor
+        [ghBase + assetAuth + capAnchor]: devBase + assetAuth + capAnchor,
+        'http:googleapis.github.io/google-cloud-ruby/#/docs/google-cloud-pubsub/latest/google/cloud/pubsub':
+        'http:googleapis.dev/ruby/google-cloud-pubsub/latest/google/cloud/pubsub'
       });
       for (var i = 0; i < urls.length; i++) {
         assert.equal(this.forwarder.getDevsiteUrl(urls[i][0]), urls[i][1]);
