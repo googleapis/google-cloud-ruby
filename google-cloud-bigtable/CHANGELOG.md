@@ -1,5 +1,10 @@
 # Release History
 
+### 0.5.0 / 2019-08-05
+
+* Accept nil gc_rule arguments for column_family create/update
+* Update documentation
+
 ### 0.4.3 / 2019-07-12
 
 * Update #to_hash to #to_h for compatibility with google-protobuf >= 3.9.0
