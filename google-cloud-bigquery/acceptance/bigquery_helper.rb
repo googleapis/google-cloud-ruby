@@ -123,6 +123,14 @@ module Acceptance
       "kitten-test-data-#{SecureRandom.hex}.json"
     end
 
+    def assert_data data
+      assert_equal Google::Cloud::Bigquery::Data, data.class
+      refute_nil data.kind
+      refute_nil data.etag
+      refute_nil data.total
+      refute_nil data.count
+    end
+
     # Add spec DSL
     extend Minitest::Spec::DSL
 

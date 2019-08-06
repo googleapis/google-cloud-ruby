@@ -334,18 +334,7 @@ describe Google::Cloud::Bigquery::Dataset, :bigquery do
     insert_response.insert_errors.must_be :empty?
     insert_response.error_rows.must_be :empty?
 
-    data = table_with_schema.data max: 1
-    data.class.must_equal Google::Cloud::Bigquery::Data
-    data.kind.wont_be :nil?
-    data.etag.wont_be :nil?
-    data.total.wont_be :nil?
-    data.count.wont_be :nil?
-    data.all(request_limit: 2).each do |row|
-      row.must_be_kind_of Hash
-      [:id, :breed, :name, :dob].each { |k| row.keys.must_include k }
-    end
-    more_data = data.next
-    more_data.wont_be :nil?
+    assert_data table_with_schema.data(max: 1)
   end
 
   it "insert skip invalid rows and return insert errors" do
@@ -387,18 +376,7 @@ describe Google::Cloud::Bigquery::Dataset, :bigquery do
     table = dataset.table table_with_schema_id
     table.wont_be_nil
 
-    data = table.data max: 1
-    data.class.must_equal Google::Cloud::Bigquery::Data
-    data.kind.wont_be :nil?
-    data.etag.wont_be :nil?
-    data.total.wont_be :nil?
-    data.count.wont_be :nil?
-    data.all(request_limit: 2).each do |row|
-      row.must_be_kind_of Hash
-      [:id, :breed, :name, :dob].each { |k| row.keys.must_include k }
-    end
-    more_data = data.next
-    more_data.wont_be :nil?
+    assert_data table.data(max: 1)
   end
 
   it "inserts rows with insert_ids option" do
@@ -408,18 +386,7 @@ describe Google::Cloud::Bigquery::Dataset, :bigquery do
     insert_response.insert_errors.must_be :empty?
     insert_response.error_rows.must_be :empty?
 
-    data = table_with_schema.data max: 1
-    data.class.must_equal Google::Cloud::Bigquery::Data
-    data.kind.wont_be :nil?
-    data.etag.wont_be :nil?
-    data.total.wont_be :nil?
-    data.count.wont_be :nil?
-    data.all(request_limit: 2).each do |row|
-      row.must_be_kind_of Hash
-      [:id, :breed, :name, :dob].each { |k| row.keys.must_include k }
-    end
-    more_data = data.next
-    more_data.wont_be :nil?
+    assert_data table_with_schema.data(max: 1)
   end
 
   it "creates missing table while inserts rows with autocreate option" do
@@ -440,17 +407,6 @@ describe Google::Cloud::Bigquery::Dataset, :bigquery do
     table = dataset.table new_table_id
     table.wont_be_nil
 
-    data = table.data max: 1
-    data.class.must_equal Google::Cloud::Bigquery::Data
-    data.kind.wont_be :nil?
-    data.etag.wont_be :nil?
-    data.total.wont_be :nil?
-    data.count.wont_be :nil?
-    data.all(request_limit: 2).each do |row|
-      row.must_be_kind_of Hash
-      [:id, :breed, :name, :dob].each { |k| row.keys.must_include k }
-    end
-    more_data = data.next
-    more_data.wont_be :nil?
+    assert_data table.data(max: 1)
   end
 end
