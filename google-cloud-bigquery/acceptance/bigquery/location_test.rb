@@ -75,18 +75,7 @@ describe Google::Cloud::Bigquery, :location, :bigquery do
     query_job.data.class.must_equal Google::Cloud::Bigquery::Data
     query_job.data.total.wont_be :nil?
 
-    data = table.data max: 1
-    data.class.must_equal Google::Cloud::Bigquery::Data
-    data.kind.wont_be :nil?
-    data.etag.wont_be :nil?
-    data.total.wont_be :nil?
-    data.count.wont_be :nil?
-    data.all(request_limit: 2).each do |row|
-      row.must_be_kind_of Hash
-      [:id, :breed, :name, :dob].each { |k| row.keys.must_include k }
-    end
-    more_data = data.next
-    more_data.wont_be :nil?
+    assert_data table.data(max: 1)
 
     data = dataset.query query
 

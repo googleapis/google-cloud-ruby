@@ -189,16 +189,7 @@ describe Google::Cloud::Bigquery::Table, :reference, :bigquery do
     query_job.done?.must_equal true
     query_job.data.total.wont_be_nil
 
-    data = table.data max: 1
-    data.class.must_equal Google::Cloud::Bigquery::Data
-    data.total.wont_be :nil?
-    data.count.wont_be :nil?
-    data.all(request_limit: 2).each do |row|
-      row.must_be_kind_of Hash
-      [:id, :breed, :name, :dob].each { |k| row.keys.must_include k }
-    end
-    more_data = data.next
-    more_data.wont_be :nil?
+    assert_data table.data(max: 1)
   end
 
   it "inserts rows asynchronously and gets its data" do
@@ -226,18 +217,7 @@ describe Google::Cloud::Bigquery::Table, :reference, :bigquery do
     query_job.done?.must_equal true
     query_job.data.total.wont_be :nil?
 
-    data = table.data max: 1
-    data.class.must_equal Google::Cloud::Bigquery::Data
-    data.kind.wont_be :nil?
-    data.etag.wont_be :nil?
-    data.total.wont_be :nil?
-    data.count.wont_be :nil?
-    data.all(request_limit: 2).each do |row|
-      row.must_be_kind_of Hash
-      [:id, :breed, :name, :dob].each { |k| row.keys.must_include k }
-    end
-    more_data = data.next
-    more_data.wont_be :nil?
+    assert_data table.data(max: 1)
   end
 
   it "imports data from a local file with load_job" do
