@@ -140,7 +140,6 @@ describe Google::Cloud::Bigquery, :bigquery do
     rows.total.must_equal 100
 
     # @gapi.statistics.query
-    job.cache_hit?.must_equal true
     job.bytes_processed.must_equal 0
     job.query_plan.must_be :nil?
     # Sometimes values are nil in the returned job, so currently comment out unreliable expectations

@@ -498,7 +498,6 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
     query_job.large_results?.must_equal false
     query_job.cache?.must_equal true
     query_job.flatten?.must_equal true
-    query_job.cache_hit?.must_equal false
     query_job.bytes_processed.wont_be :nil?
     query_job.destination.wont_be :nil?
     query_job.data.class.must_equal Google::Cloud::Bigquery::Data
@@ -622,7 +621,6 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
     query_job.large_results?.must_equal false
     query_job.cache?.must_equal true
     query_job.flatten?.must_equal true
-    query_job.cache_hit?.must_equal false
     query_job.bytes_processed.wont_be :nil?
     query_job.destination.wont_be :nil?
     query_job.data.class.must_equal Google::Cloud::Bigquery::Data
