@@ -35,7 +35,6 @@ describe "Spanner Client", :snapshot, :spanner do
     db.snapshot do |snp|
       snp.transaction_id.wont_be :nil?
       snp.timestamp.wont_be :nil?
-      snp.timestamp.must_be_close_to Time.now, 60
 
       results = snp.execute_sql "SELECT * FROM accounts"
     end
@@ -52,7 +51,6 @@ describe "Spanner Client", :snapshot, :spanner do
     db.snapshot do |snp|
       snp.transaction_id.wont_be :nil?
       snp.timestamp.wont_be :nil?
-      snp.timestamp.must_be_close_to Time.now, 60
 
       results = snp.read "accounts", columns
     end
@@ -69,7 +67,6 @@ describe "Spanner Client", :snapshot, :spanner do
     db.snapshot strong: true do |snp|
       snp.transaction_id.wont_be :nil?
       snp.timestamp.wont_be :nil?
-      snp.timestamp.must_be_close_to Time.now, 60
 
       results = snp.execute_sql "SELECT * FROM accounts"
     end
@@ -86,7 +83,6 @@ describe "Spanner Client", :snapshot, :spanner do
     db.snapshot strong: true do |snp|
       snp.transaction_id.wont_be :nil?
       snp.timestamp.wont_be :nil?
-      snp.timestamp.must_be_close_to Time.now, 60
 
       results = snp.read "accounts", columns
     end
@@ -103,7 +99,6 @@ describe "Spanner Client", :snapshot, :spanner do
     db.snapshot timestamp: @setup_timestamp do |snp|
       snp.transaction_id.wont_be :nil?
       snp.timestamp.wont_be :nil?
-      snp.timestamp.must_be_close_to Time.now, 60
 
       results = snp.execute_sql "SELECT * FROM accounts"
     end
@@ -120,7 +115,6 @@ describe "Spanner Client", :snapshot, :spanner do
     db.snapshot timestamp: @setup_timestamp do |snp|
       snp.transaction_id.wont_be :nil?
       snp.timestamp.wont_be :nil?
-      snp.timestamp.must_be_close_to Time.now, 60
 
       results = snp.read "accounts", columns
     end
@@ -137,7 +131,6 @@ describe "Spanner Client", :snapshot, :spanner do
     db.snapshot staleness: 0.0001 do |snp|
       snp.transaction_id.wont_be :nil?
       snp.timestamp.wont_be :nil?
-      snp.timestamp.must_be_close_to Time.now, 60
 
       results = snp.execute_sql "SELECT * FROM accounts"
     end
@@ -154,7 +147,6 @@ describe "Spanner Client", :snapshot, :spanner do
     db.snapshot staleness: 0.0001 do |snp|
       snp.transaction_id.wont_be :nil?
       snp.timestamp.wont_be :nil?
-      snp.timestamp.must_be_close_to Time.now, 60
 
       results = snp.read "accounts", columns
     end
@@ -174,7 +166,6 @@ describe "Spanner Client", :snapshot, :spanner do
     db.snapshot strong: true do |snp|
       snp.transaction_id.wont_be :nil?
       snp.timestamp.wont_be :nil?
-      snp.timestamp.must_be_close_to Time.now, 60
 
       results = snp.read "accounts", [:account_id, :username], keys: sample_row[:account_id]
       # verify we got the row we were expecting
@@ -197,7 +188,6 @@ describe "Spanner Client", :snapshot, :spanner do
     db.snapshot strong: true do |snp|
       snp.transaction_id.wont_be :nil?
       snp.timestamp.wont_be :nil?
-      snp.timestamp.must_be_close_to Time.now, 60
 
       results = snp.execute_sql "SELECT account_id, username FROM accounts WHERE account_id = @id", params: { id: sample_row[:account_id] }
       # verify we got the row we were expecting
@@ -220,7 +210,6 @@ describe "Spanner Client", :snapshot, :spanner do
     db.snapshot timestamp: @setup_timestamp do |snp|
       snp.transaction_id.wont_be :nil?
       snp.timestamp.wont_be :nil?
-      snp.timestamp.must_be_close_to Time.now, 60
 
       results = snp.read "accounts", [:account_id, :username], keys: sample_row[:account_id]
       # verify we got the row we were expecting
@@ -243,7 +232,6 @@ describe "Spanner Client", :snapshot, :spanner do
     db.snapshot timestamp: @setup_timestamp do |snp|
       snp.transaction_id.wont_be :nil?
       snp.timestamp.wont_be :nil?
-      snp.timestamp.must_be_close_to Time.now, 60
 
       results = snp.execute_sql "SELECT account_id, username FROM accounts WHERE account_id = @id", params: { id: sample_row[:account_id] }
       # verify we got the row we were expecting
@@ -266,7 +254,6 @@ describe "Spanner Client", :snapshot, :spanner do
     db.snapshot staleness: 0.01 do |snp|
       snp.transaction_id.wont_be :nil?
       snp.timestamp.wont_be :nil?
-      snp.timestamp.must_be_close_to Time.now, 60
 
       results = snp.read "accounts", [:account_id, :username], keys: sample_row[:account_id]
       # verify we got the row we were expecting
@@ -289,7 +276,6 @@ describe "Spanner Client", :snapshot, :spanner do
     db.snapshot staleness: 0.01 do |snp|
       snp.transaction_id.wont_be :nil?
       snp.timestamp.wont_be :nil?
-      snp.timestamp.must_be_close_to Time.now, 60
 
       results = snp.execute_sql "SELECT account_id, username FROM accounts WHERE account_id = @id", params: { id: sample_row[:account_id] }
       # verify we got the row we were expecting
