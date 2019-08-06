@@ -165,13 +165,11 @@ describe Google::Cloud do
       # Clear all environment variables
       ENV.stub :[], nil do
         Google::Cloud.stub :env, OpenStruct.new(project_id: "project-id") do
-          Google::Cloud::Bigquery::Credentials.stub :new, default_credentials do
-            Google::Cloud::Bigquery::Service.stub :new, stubbed_service do
-              bigquery = Google::Cloud::Bigquery.new endpoint: "bigquery-endpoint2.example.com"
-              bigquery.must_be_kind_of Google::Cloud::Bigquery::Project
-              bigquery.project.must_equal "project-id"
-              bigquery.service.must_be_kind_of OpenStruct
-            end
+          Google::Cloud::Bigquery::Service.stub :new, stubbed_service do
+            bigquery = Google::Cloud::Bigquery.new credentials: default_credentials, endpoint: "bigquery-endpoint2.example.com"
+            bigquery.must_be_kind_of Google::Cloud::Bigquery::Project
+            bigquery.project.must_equal "project-id"
+            bigquery.service.must_be_kind_of OpenStruct
           end
         end
       end
