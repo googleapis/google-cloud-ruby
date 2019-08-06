@@ -51,6 +51,8 @@ module Google
       # @param [Integer] retries Number of times to retry requests on server
       #   error. The default value is `5`. Optional.
       # @param [Integer] timeout Default timeout to use in requests. Optional.
+      # @param [String] endpoint Override of the endpoint host name. Optional.
+      #   If the param is nil, uses the default endpoint.
       # @param [String] project Alias for the `project_id` argument. Deprecated.
       # @param [String] keyfile Alias for the `credentials` argument.
       #   Deprecated.
@@ -65,26 +67,24 @@ module Google
       #   table = dataset.table "my_table"
       #
       def self.new project_id: nil, credentials: nil, scope: nil, retries: nil,
-                   timeout: nil, project: nil, keyfile: nil
-        project_id  ||= (project || default_project_id)
+                   timeout: nil, endpoint: nil, project: nil, keyfile: nil
         scope       ||= configure.scope
         retries     ||= configure.retries
         timeout     ||= configure.timeout
+        endpoint    ||= configure.endpoint
         credentials ||= (keyfile || default_credentials(scope: scope))
 
         unless credentials.is_a? Google::Auth::Credentials
           credentials = Bigquery::Credentials.new credentials, scope: scope
         end
 
-        if credentials.respond_to? :project_id
-          project_id ||= credentials.project_id
-        end
-        project_id = project_id.to_s # Always cast to a string
+        project_id = resolve_project_id(project_id || project, credentials)
         raise ArgumentError, "project_id is missing" if project_id.empty?
 
         Bigquery::Project.new(
           Bigquery::Service.new(
-            project_id, credentials, retries: retries, timeout: timeout
+            project_id, credentials,
+            retries: retries, timeout: timeout, endpoint: endpoint
           )
         )
       end
@@ -100,6 +100,8 @@ module Google
       #   the keyfile as a String, the contents of the keyfile as a Hash, or a
       #   Google::Auth::Credentials object. (See {Bigquery::Credentials}) (The
       #   parameter `keyfile` is considered deprecated, but may also be used.)
+      # * `endpoint` - (String) Override of the endpoint host name, or `nil`
+      #   to use the default endpoint.
       # * `scope` - (String, Array<String>) The OAuth 2.0 scopes controlling
       #   the set of resources and operations that the connection can access.
       # * `retries` - (Integer) Number of times to retry requests on server
@@ -113,6 +115,16 @@ module Google
         yield Google::Cloud.configure.bigquery if block_given?
 
         Google::Cloud.configure.bigquery
+      end
+
+      ##
+      # @private Resolve project.
+      def self.resolve_project_id given_project, credentials
+        project_id = given_project || default_project_id
+        if credentials.respond_to? :project_id
+          project_id ||= credentials.project_id
+        end
+        project_id.to_s # Always cast to a string
       end
 
       ##

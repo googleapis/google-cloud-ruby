@@ -43,6 +43,8 @@ module Google
     # @param [Integer] retries Number of times to retry requests on server
     #   error. The default value is `5`. Optional.
     # @param [Integer] timeout Default request timeout in seconds. Optional.
+    # @param [String] endpoint Override of the endpoint host name. Optional.
+    #   If the param is nil, uses the default endpoint.
     #
     # @return [Google::Cloud::Bigquery::Project]
     #
@@ -64,10 +66,12 @@ module Google
     #   platform_scope = "https://www.googleapis.com/auth/cloud-platform"
     #   bigquery = gcloud.bigquery scope: platform_scope
     #
-    def bigquery scope: nil, retries: nil, timeout: nil
-      Google::Cloud.bigquery @project, @keyfile, scope:   scope,
-                                                 retries: (retries || @retries),
-                                                 timeout: (timeout || @timeout)
+    def bigquery scope: nil, retries: nil, timeout: nil, endpoint: nil
+      Google::Cloud.bigquery @project, @keyfile,
+                             scope:    scope,
+                             retries:  (retries || @retries),
+                             timeout:  (timeout || @timeout),
+                             endpoint: endpoint
     end
 
     ##
@@ -93,6 +97,8 @@ module Google
     # @param [Integer] retries Number of times to retry requests on server
     #   error. The default value is `5`. Optional.
     # @param [Integer] timeout Default timeout to use in requests. Optional.
+    # @param [String] endpoint Override of the endpoint host name. Optional.
+    #   If the param is nil, uses the default endpoint.
     #
     # @return [Google::Cloud::Bigquery::Project]
     #
@@ -104,12 +110,12 @@ module Google
     #   table = dataset.table "my_table"
     #
     def self.bigquery project_id = nil, credentials = nil, scope: nil,
-                      retries: nil, timeout: nil
+                      retries: nil, timeout: nil, endpoint: nil
       require "google/cloud/bigquery"
       Google::Cloud::Bigquery.new project_id: project_id,
                                   credentials: credentials,
                                   scope: scope, retries: retries,
-                                  timeout: timeout
+                                  timeout: timeout, endpoint: endpoint
     end
   end
 end
@@ -135,4 +141,5 @@ Google::Cloud.configure.add_config! :bigquery do |config|
   config.add_field! :scope, nil, match: [String, Array]
   config.add_field! :retries, nil, match: Integer
   config.add_field! :timeout, nil, match: Integer
+  config.add_field! :endpoint, nil, match: String
 end
