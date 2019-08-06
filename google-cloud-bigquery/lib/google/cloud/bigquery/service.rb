@@ -39,15 +39,17 @@ module Google
         attr_accessor :credentials
 
         # @private
-        attr_reader :retries, :timeout
+        attr_reader :retries, :timeout, :host
 
         ##
         # Creates a new Service instance.
-        def initialize project, credentials, retries: nil, timeout: nil
+        def initialize project, credentials,
+                       retries: nil, timeout: nil, host: nil
           @project = project
           @credentials = credentials
           @retries = retries
           @timeout = timeout
+          @host = host
         end
 
         def service
@@ -65,6 +67,7 @@ module Google
             service.request_options.header["x-goog-api-client"] = \
               "gl-ruby/#{RUBY_VERSION} gccl/#{Google::Cloud::Bigquery::VERSION}"
             service.authorization = @credentials.client
+            service.root_url = host if host
             service
           end
         end
