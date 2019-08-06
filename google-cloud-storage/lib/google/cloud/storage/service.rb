@@ -454,10 +454,11 @@ module Google
         ##
         # Creates a new HMAC key for the specified service account.
         # Returns Google::Apis::StorageV1::HmacKey.
-        def create_hmac_key service_account_email, user_project: nil
+        def create_hmac_key service_account_email, project_id: nil,
+                            user_project: nil
           execute do
             service.create_project_hmac_key \
-              @project, service_account_email,
+              (project_id || @project), service_account_email,
               user_project: user_project(user_project)
           end
         end
@@ -475,10 +476,10 @@ module Google
         ##
         # Retrieves an HMAC key's metadata.
         # Returns Google::Apis::StorageV1::HmacKeyMetadata.
-        def get_hmac_key access_id, user_project: nil
+        def get_hmac_key access_id, project_id: nil, user_project: nil
           execute do
             service.get_project_hmac_key \
-              @project, access_id,
+              (project_id || @project), access_id,
               user_project: user_project(user_project)
           end
         end
@@ -487,13 +488,15 @@ module Google
         # Retrieves a list of HMAC key metadata matching the criteria.
         # Returns Google::Apis::StorageV1::HmacKeysMetadata.
         def list_hmac_keys max: nil, token: nil, service_account_email: nil,
-                           show_deleted_keys: nil, user_project: nil
+                           project_id: nil, show_deleted_keys: nil,
+                           user_project: nil
           execute do
             service.list_project_hmac_keys \
-              @project, max_results: max, page_token: token,
-                        service_account_email: service_account_email,
-                        show_deleted_keys: show_deleted_keys,
-                        user_project: user_project(user_project)
+              (project_id || @project),
+              max_results: max, page_token: token,
+              service_account_email: service_account_email,
+              show_deleted_keys: show_deleted_keys,
+              user_project: user_project(user_project)
           end
         end
 

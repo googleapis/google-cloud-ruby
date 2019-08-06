@@ -390,7 +390,10 @@ module Google
         #
         # @param [String] service_account_email The email address of the service
         #   account. Used to create the HMAC key.
-        #
+        # @param [String] project_id The project ID associated with
+        #   `service_account_email`, if `service_account_email` belongs to a
+        #   project other than the currently authenticated project. Optional. If
+        #   not provided, the project ID for the current project will be used.
         # @param [String] user_project If this parameter is set to a project ID
         #   other than the current project, and that project is authorized for
         #   the currently authenticated service account, transit costs will be
@@ -398,8 +401,10 @@ module Google
         #
         # @return [Google::Cloud::Storage::HmacKey]
         #
-        def create_hmac_key service_account_email, user_project: nil
+        def create_hmac_key service_account_email, project_id: nil,
+                            user_project: nil
           gapi = service.create_hmac_key service_account_email,
+                                         project_id: project_id,
                                          user_project: user_project
           HmacKey.from_gapi gapi, service, user_project: user_project
         end
@@ -408,6 +413,11 @@ module Google
         # Retrieves an HMAC key's metadata; the key's secret is not included in
         # the representation.
         #
+        # @param [String] project_id The project ID associated with the
+        #   `service_account_email` used to create the HMAC key, if the
+        #   service account email belongs to a project other than the
+        #   currently authenticated project. Optional. If not provided, the
+        #   project ID for current project will be used.
         # @param [String] user_project If this parameter is set to a project ID
         #   other than the current project, and that project is authorized for
         #   the currently authenticated service account, transit costs will be
@@ -415,8 +425,9 @@ module Google
         #
         # @return [Google::Cloud::Storage::HmacKey]
         #
-        def hmac_key access_id, user_project: nil
-          gapi = service.get_hmac_key access_id, user_project: user_project
+        def hmac_key access_id, project_id: nil, user_project: nil
+          gapi = service.get_hmac_key \
+            access_id, project_id: project_id, user_project: user_project
           HmacKey.from_gapi_metadata gapi, service, user_project: user_project
         end
 
@@ -426,6 +437,11 @@ module Google
         #
         # @param [String] service_account_email
         #   If present, only keys for the given service account are returned.
+        # @param [String] project_id The project ID associated with the
+        #   `service_account_email` used to create the HMAC keys, if the
+        #   service account email belongs to a project other than the
+        #   currently authenticated project. Optional. If not provided, the
+        #   project ID for current project will be used.
         # @param [Boolean] show_deleted_keys
         #   Whether to include keys in the `DELETED` state. The default value is
         #   false.
@@ -439,12 +455,14 @@ module Google
         #
         # @return [Google::Cloud::Storage::HmacKey]
         #
-        def hmac_keys service_account_email: nil, show_deleted_keys: nil,
-                      token: nil, max: nil, user_project: nil
+        def hmac_keys service_account_email: nil, project_id: nil,
+                      show_deleted_keys: nil, token: nil, max: nil,
+                      user_project: nil
           gapi = service.list_hmac_keys \
             max: max, token: token,
             service_account_email: service_account_email,
-            show_deleted_keys: show_deleted_keys, user_project: user_project
+            project_id: project_id, show_deleted_keys: show_deleted_keys,
+            user_project: user_project
 
           HmacKey::List.from_gapi \
             gapi, service,
