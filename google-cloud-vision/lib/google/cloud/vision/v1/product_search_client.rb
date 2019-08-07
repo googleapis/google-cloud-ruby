@@ -444,6 +444,14 @@ module Google
                 {'parent' => request.parent}
               end
             )
+            @purge_products = Google::Gax.create_api_call(
+              @product_search_stub.method(:purge_products),
+              defaults["purge_products"],
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
+            )
           end
 
           # Service calls
@@ -1370,6 +1378,107 @@ module Google
               @import_product_sets.call(req, options),
               @operations_client,
               Google::Cloud::Vision::V1::ImportProductSetsResponse,
+              Google::Cloud::Vision::V1::BatchOperationMetadata,
+              call_options: options
+            )
+            operation.on_done { |operation| yield(operation) } if block_given?
+            operation
+          end
+
+          # Asynchronous API to delete all Products in a ProductSet or all Products
+          # that are in no ProductSet.
+          #
+          # If a Product is a member of the specified ProductSet in addition to other
+          # ProductSets, the Product will still be deleted.
+          #
+          # It is recommended to not delete the specified ProductSet until after this
+          # operation has completed. It is also recommended to not add any of the
+          # Products involved in the batch delete to a new ProductSet while this
+          # operation is running because those Products may still end up deleted.
+          #
+          # It's not possible to undo the PurgeProducts operation. Therefore, it is
+          # recommended to keep the csv files used in ImportProductSets (if that was
+          # how you originally built the Product Set) before starting PurgeProducts, in
+          # case you need to re-import the data after deletion.
+          #
+          # If the plan is to purge all of the Products from a ProductSet and then
+          # re-use the empty ProductSet to re-import new Products into the empty
+          # ProductSet, you must wait until the PurgeProducts operation has finished
+          # for that ProductSet.
+          #
+          # The {Google::Longrunning::Operation} API can be
+          # used to keep track of the progress and results of the request.
+          # `Operation.metadata` contains `BatchOperationMetadata`. (progress)
+          #
+          # @param parent [String]
+          #   The project and location in which the Products should be deleted.
+          #
+          #   Format is `projects/PROJECT_ID/locations/LOC_ID`.
+          # @param product_set_purge_config [Google::Cloud::Vision::V1::ProductSetPurgeConfig | Hash]
+          #   Specify which ProductSet contains the Products to be deleted.
+          #   A hash of the same form as `Google::Cloud::Vision::V1::ProductSetPurgeConfig`
+          #   can also be provided.
+          # @param delete_orphan_products [true, false]
+          #   If delete_orphan_products is true, all Products that are not in any
+          #   ProductSet will be deleted.
+          # @param force [true, false]
+          #   The default value is false. Override this value to true to actually perform
+          #   the purge.
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @return [Google::Gax::Operation]
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/vision"
+          #
+          #   product_search_client = Google::Cloud::Vision::ProductSearch.new(version: :v1)
+          #   formatted_parent = Google::Cloud::Vision::V1::ProductSearchClient.location_path("[PROJECT]", "[LOCATION]")
+          #
+          #   # Register a callback during the method call.
+          #   operation = product_search_client.purge_products(formatted_parent) do |op|
+          #     raise op.results.message if op.error?
+          #     op_results = op.results
+          #     # Process the results.
+          #
+          #     metadata = op.metadata
+          #     # Process the metadata.
+          #   end
+          #
+          #   # Or use the return value to register a callback.
+          #   operation.on_done do |op|
+          #     raise op.results.message if op.error?
+          #     op_results = op.results
+          #     # Process the results.
+          #
+          #     metadata = op.metadata
+          #     # Process the metadata.
+          #   end
+          #
+          #   # Manually reload the operation.
+          #   operation.reload!
+          #
+          #   # Or block until the operation completes, triggering callbacks on
+          #   # completion.
+          #   operation.wait_until_done!
+
+          def purge_products \
+              parent,
+              product_set_purge_config: nil,
+              delete_orphan_products: nil,
+              force: nil,
+              options: nil
+            req = {
+              parent: parent,
+              product_set_purge_config: product_set_purge_config,
+              delete_orphan_products: delete_orphan_products,
+              force: force
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Cloud::Vision::V1::PurgeProductsRequest)
+            operation = Google::Gax::Operation.new(
+              @purge_products.call(req, options),
+              @operations_client,
+              Google::Protobuf::Empty,
               Google::Cloud::Vision::V1::BatchOperationMetadata,
               call_options: options
             )

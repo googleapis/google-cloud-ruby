@@ -192,22 +192,34 @@ module Google
             @batch_annotate_images = Google::Gax.create_api_call(
               @image_annotator_stub.method(:batch_annotate_images),
               defaults["batch_annotate_images"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
             )
             @batch_annotate_files = Google::Gax.create_api_call(
               @image_annotator_stub.method(:batch_annotate_files),
               defaults["batch_annotate_files"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
             )
             @async_batch_annotate_images = Google::Gax.create_api_call(
               @image_annotator_stub.method(:async_batch_annotate_images),
               defaults["async_batch_annotate_images"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
             )
             @async_batch_annotate_files = Google::Gax.create_api_call(
               @image_annotator_stub.method(:async_batch_annotate_files),
               defaults["async_batch_annotate_files"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
             )
           end
 
@@ -219,6 +231,19 @@ module Google
           #   Individual image annotation requests for this batch.
           #   A hash of the same form as `Google::Cloud::Vision::V1::AnnotateImageRequest`
           #   can also be provided.
+          # @param parent [String]
+          #   Optional. Target project and location to make a call.
+          #
+          #   Format: `projects/{project-id}/locations/{location-id}`.
+          #
+          #   If no parent is specified, a region will be chosen automatically.
+          #
+          #   Supported location-ids:
+          #       `us`: USA country only,
+          #       `asia`: East asia areas, like Japan, Taiwan,
+          #       `eu`: The European Union.
+          #
+          #   Example: `projects/project-A/locations/eu`.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -238,10 +263,12 @@ module Google
 
           def batch_annotate_images \
               requests,
+              parent: nil,
               options: nil,
               &block
             req = {
-              requests: requests
+              requests: requests,
+              parent: parent
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Cloud::Vision::V1::BatchAnnotateImagesRequest)
             @batch_annotate_images.call(req, options, &block)
@@ -260,6 +287,19 @@ module Google
           #   AnnotateFileRequest in BatchAnnotateFilesRequest.
           #   A hash of the same form as `Google::Cloud::Vision::V1::AnnotateFileRequest`
           #   can also be provided.
+          # @param parent [String]
+          #   Optional. Target project and location to make a call.
+          #
+          #   Format: `projects/{project-id}/locations/{location-id}`.
+          #
+          #   If no parent is specified, a region will be chosen automatically.
+          #
+          #   Supported location-ids:
+          #       `us`: USA country only,
+          #       `asia`: East asia areas, like Japan, Taiwan,
+          #       `eu`: The European Union.
+          #
+          #   Example: `projects/project-A/locations/eu`.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -279,10 +319,12 @@ module Google
 
           def batch_annotate_files \
               requests,
+              parent: nil,
               options: nil,
               &block
             req = {
-              requests: requests
+              requests: requests,
+              parent: parent
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Cloud::Vision::V1::BatchAnnotateFilesRequest)
             @batch_annotate_files.call(req, options, &block)
@@ -306,6 +348,19 @@ module Google
           #   Required. The desired output location and metadata (e.g. format).
           #   A hash of the same form as `Google::Cloud::Vision::V1::OutputConfig`
           #   can also be provided.
+          # @param parent [String]
+          #   Optional. Target project and location to make a call.
+          #
+          #   Format: `projects/{project-id}/locations/{location-id}`.
+          #
+          #   If no parent is specified, a region will be chosen automatically.
+          #
+          #   Supported location-ids:
+          #       `us`: USA country only,
+          #       `asia`: East asia areas, like Japan, Taiwan,
+          #       `eu`: The European Union.
+          #
+          #   Example: `projects/project-A/locations/eu`.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -352,10 +407,12 @@ module Google
           def async_batch_annotate_images \
               requests,
               output_config,
+              parent: nil,
               options: nil
             req = {
               requests: requests,
-              output_config: output_config
+              output_config: output_config,
+              parent: parent
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Cloud::Vision::V1::AsyncBatchAnnotateImagesRequest)
             operation = Google::Gax::Operation.new(
@@ -380,6 +437,19 @@ module Google
           #   Individual async file annotation requests for this batch.
           #   A hash of the same form as `Google::Cloud::Vision::V1::AsyncAnnotateFileRequest`
           #   can also be provided.
+          # @param parent [String]
+          #   Optional. Target project and location to make a call.
+          #
+          #   Format: `projects/{project-id}/locations/{location-id}`.
+          #
+          #   If no parent is specified, a region will be chosen automatically.
+          #
+          #   Supported location-ids:
+          #       `us`: USA country only,
+          #       `asia`: East asia areas, like Japan, Taiwan,
+          #       `eu`: The European Union.
+          #
+          #   Example: `projects/project-A/locations/eu`.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -422,9 +492,11 @@ module Google
 
           def async_batch_annotate_files \
               requests,
+              parent: nil,
               options: nil
             req = {
-              requests: requests
+              requests: requests,
+              parent: parent
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Cloud::Vision::V1::AsyncBatchAnnotateFilesRequest)
             operation = Google::Gax::Operation.new(

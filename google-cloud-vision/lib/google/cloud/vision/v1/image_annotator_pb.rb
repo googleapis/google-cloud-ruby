@@ -5,6 +5,7 @@
 require 'google/protobuf'
 
 require 'google/api/annotations_pb'
+require 'google/api/client_pb'
 require 'google/cloud/vision/v1/geometry_pb'
 require 'google/cloud/vision/v1/product_search_pb'
 require 'google/cloud/vision/v1/text_annotation_pb'
@@ -200,9 +201,11 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :input_config, :message, 1, "google.cloud.vision.v1.InputConfig"
     repeated :responses, :message, 2, "google.cloud.vision.v1.AnnotateImageResponse"
     optional :total_pages, :int32, 3
+    optional :error, :message, 4, "google.rpc.Status"
   end
   add_message "google.cloud.vision.v1.BatchAnnotateImagesRequest" do
     repeated :requests, :message, 1, "google.cloud.vision.v1.AnnotateImageRequest"
+    optional :parent, :string, 4
   end
   add_message "google.cloud.vision.v1.BatchAnnotateImagesResponse" do
     repeated :responses, :message, 1, "google.cloud.vision.v1.AnnotateImageResponse"
@@ -215,6 +218,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   end
   add_message "google.cloud.vision.v1.BatchAnnotateFilesRequest" do
     repeated :requests, :message, 1, "google.cloud.vision.v1.AnnotateFileRequest"
+    optional :parent, :string, 3
   end
   add_message "google.cloud.vision.v1.BatchAnnotateFilesResponse" do
     repeated :responses, :message, 1, "google.cloud.vision.v1.AnnotateFileResponse"
@@ -231,12 +235,14 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.cloud.vision.v1.AsyncBatchAnnotateImagesRequest" do
     repeated :requests, :message, 1, "google.cloud.vision.v1.AnnotateImageRequest"
     optional :output_config, :message, 2, "google.cloud.vision.v1.OutputConfig"
+    optional :parent, :string, 4
   end
   add_message "google.cloud.vision.v1.AsyncBatchAnnotateImagesResponse" do
     optional :output_config, :message, 1, "google.cloud.vision.v1.OutputConfig"
   end
   add_message "google.cloud.vision.v1.AsyncBatchAnnotateFilesRequest" do
     repeated :requests, :message, 1, "google.cloud.vision.v1.AsyncAnnotateFileRequest"
+    optional :parent, :string, 4
   end
   add_message "google.cloud.vision.v1.AsyncBatchAnnotateFilesResponse" do
     repeated :responses, :message, 1, "google.cloud.vision.v1.AsyncAnnotateFileResponse"
