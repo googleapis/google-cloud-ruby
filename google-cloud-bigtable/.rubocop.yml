@@ -3,8 +3,6 @@ AllCops:
     - "google-cloud-bigtable.gemspec"
     - "lib/google-cloud-bigtable.rb"
     - "lib/google/bigtable/**/*"
-    - "lib/google/cloud/bigtable.rb"
-    - "lib/google/cloud/bigtable/credentials.rb"
     - "lib/google/cloud/bigtable/admin.rb"
     - "lib/google/cloud/bigtable/admin/**/*"
     - "lib/google/cloud/bigtable/v2.rb"
