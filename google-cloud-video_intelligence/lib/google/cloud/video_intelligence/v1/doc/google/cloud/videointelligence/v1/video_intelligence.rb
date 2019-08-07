@@ -308,10 +308,20 @@ module Google
         #   @return [Array<Google::Cloud::VideoIntelligence::V1::LabelAnnotation>]
         #     Topical label annotations on video level or user specified segment level.
         #     There is exactly one element for each unique label.
+        # @!attribute [rw] segment_presence_label_annotations
+        #   @return [Array<Google::Cloud::VideoIntelligence::V1::LabelAnnotation>]
+        #     Presence label annotations on video level or user specified segment level.
+        #     There is exactly one element for each unique label. This will eventually
+        #     get publicly exposed and the restriction will be removed.
         # @!attribute [rw] shot_label_annotations
         #   @return [Array<Google::Cloud::VideoIntelligence::V1::LabelAnnotation>]
         #     Topical label annotations on shot level.
         #     There is exactly one element for each unique label.
+        # @!attribute [rw] shot_presence_label_annotations
+        #   @return [Array<Google::Cloud::VideoIntelligence::V1::LabelAnnotation>]
+        #     Presence label annotations on shot level. There is exactly one element for
+        #     each unique label. This will eventually get publicly exposed and the
+        #     restriction will be removed.
         # @!attribute [rw] frame_label_annotations
         #   @return [Array<Google::Cloud::VideoIntelligence::V1::LabelAnnotation>]
         #     Label annotations on frame level.
