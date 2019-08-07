@@ -5,6 +5,7 @@
 require 'google/protobuf'
 
 require 'google/api/annotations_pb'
+require 'google/api/client_pb'
 require 'google/cloud/vision/v1/geometry_pb'
 require 'google/longrunning/operations_pb'
 require 'google/protobuf/empty_pb'
@@ -148,6 +149,17 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     value :FAILED, 3
     value :CANCELLED, 4
   end
+  add_message "google.cloud.vision.v1.ProductSetPurgeConfig" do
+    optional :product_set_id, :string, 1
+  end
+  add_message "google.cloud.vision.v1.PurgeProductsRequest" do
+    optional :parent, :string, 1
+    optional :force, :bool, 4
+    oneof :target do
+      optional :product_set_purge_config, :message, 2, "google.cloud.vision.v1.ProductSetPurgeConfig"
+      optional :delete_orphan_products, :bool, 3
+    end
+  end
 end
 
 module Google
@@ -185,6 +197,8 @@ module Google
         ImportProductSetsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vision.v1.ImportProductSetsResponse").msgclass
         BatchOperationMetadata = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vision.v1.BatchOperationMetadata").msgclass
         BatchOperationMetadata::State = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vision.v1.BatchOperationMetadata.State").enummodule
+        ProductSetPurgeConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vision.v1.ProductSetPurgeConfig").msgclass
+        PurgeProductsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vision.v1.PurgeProductsRequest").msgclass
       end
     end
   end

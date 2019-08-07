@@ -25,9 +25,16 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :score, :float, 2
     optional :image, :string, 3
   end
+  add_message "google.cloud.vision.v1.ProductSearchResults.ObjectAnnotation" do
+    optional :mid, :string, 1
+    optional :language_code, :string, 2
+    optional :name, :string, 3
+    optional :score, :float, 4
+  end
   add_message "google.cloud.vision.v1.ProductSearchResults.GroupedResult" do
     optional :bounding_poly, :message, 1, "google.cloud.vision.v1.BoundingPoly"
     repeated :results, :message, 2, "google.cloud.vision.v1.ProductSearchResults.Result"
+    repeated :object_annotations, :message, 3, "google.cloud.vision.v1.ProductSearchResults.ObjectAnnotation"
   end
 end
 
@@ -38,6 +45,7 @@ module Google
         ProductSearchParams = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vision.v1.ProductSearchParams").msgclass
         ProductSearchResults = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vision.v1.ProductSearchResults").msgclass
         ProductSearchResults::Result = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vision.v1.ProductSearchResults.Result").msgclass
+        ProductSearchResults::ObjectAnnotation = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vision.v1.ProductSearchResults.ObjectAnnotation").msgclass
         ProductSearchResults::GroupedResult = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vision.v1.ProductSearchResults.GroupedResult").msgclass
       end
     end

@@ -80,6 +80,23 @@ module Google
           #     to the query.
           class Result; end
 
+          # Prediction for what the object in the bounding box is.
+          # @!attribute [rw] mid
+          #   @return [String]
+          #     Object ID that should align with EntityAnnotation mid.
+          # @!attribute [rw] language_code
+          #   @return [String]
+          #     The BCP-47 language code, such as "en-US" or "sr-Latn". For more
+          #     information, see
+          #     http://www.unicode.org/reports/tr35/#Unicode_locale_identifier.
+          # @!attribute [rw] name
+          #   @return [String]
+          #     Object name, expressed in its `language_code` language.
+          # @!attribute [rw] score
+          #   @return [Float]
+          #     Score of the result. Range [0, 1].
+          class ObjectAnnotation; end
+
           # Information about the products similar to a single product in a query
           # image.
           # @!attribute [rw] bounding_poly
@@ -88,6 +105,9 @@ module Google
           # @!attribute [rw] results
           #   @return [Array<Google::Cloud::Vision::V1::ProductSearchResults::Result>]
           #     List of results, one for each product match.
+          # @!attribute [rw] object_annotations
+          #   @return [Array<Google::Cloud::Vision::V1::ProductSearchResults::ObjectAnnotation>]
+          #     List of generic predictions for the object in the bounding box.
           class GroupedResult; end
         end
       end

@@ -600,16 +600,35 @@ module Google
         #     Information about the file for which this response is generated.
         # @!attribute [rw] responses
         #   @return [Array<Google::Cloud::Vision::V1::AnnotateImageResponse>]
-        #     Individual responses to images found within the file.
+        #     Individual responses to images found within the file. This field will be
+        #     empty if the `error` field is set.
         # @!attribute [rw] total_pages
         #   @return [Integer]
         #     This field gives the total number of pages in the file.
+        # @!attribute [rw] error
+        #   @return [Google::Rpc::Status]
+        #     If set, represents the error message for the failed request. The
+        #     `responses` field will not be set in this case.
         class AnnotateFileResponse; end
 
         # Multiple image annotation requests are batched into a single service call.
         # @!attribute [rw] requests
         #   @return [Array<Google::Cloud::Vision::V1::AnnotateImageRequest>]
         #     Individual image annotation requests for this batch.
+        # @!attribute [rw] parent
+        #   @return [String]
+        #     Optional. Target project and location to make a call.
+        #
+        #     Format: `projects/{project-id}/locations/{location-id}`.
+        #
+        #     If no parent is specified, a region will be chosen automatically.
+        #
+        #     Supported location-ids:
+        #         `us`: USA country only,
+        #         `asia`: East asia areas, like Japan, Taiwan,
+        #         `eu`: The European Union.
+        #
+        #     Example: `projects/project-A/locations/eu`.
         class BatchAnnotateImagesRequest; end
 
         # Response to a batch image annotation request.
@@ -651,6 +670,20 @@ module Google
         #   @return [Array<Google::Cloud::Vision::V1::AnnotateFileRequest>]
         #     The list of file annotation requests. Right now we support only one
         #     AnnotateFileRequest in BatchAnnotateFilesRequest.
+        # @!attribute [rw] parent
+        #   @return [String]
+        #     Optional. Target project and location to make a call.
+        #
+        #     Format: `projects/{project-id}/locations/{location-id}`.
+        #
+        #     If no parent is specified, a region will be chosen automatically.
+        #
+        #     Supported location-ids:
+        #         `us`: USA country only,
+        #         `asia`: East asia areas, like Japan, Taiwan,
+        #         `eu`: The European Union.
+        #
+        #     Example: `projects/project-A/locations/eu`.
         class BatchAnnotateFilesRequest; end
 
         # A list of file annotation responses.
@@ -688,6 +721,20 @@ module Google
         # @!attribute [rw] output_config
         #   @return [Google::Cloud::Vision::V1::OutputConfig]
         #     Required. The desired output location and metadata (e.g. format).
+        # @!attribute [rw] parent
+        #   @return [String]
+        #     Optional. Target project and location to make a call.
+        #
+        #     Format: `projects/{project-id}/locations/{location-id}`.
+        #
+        #     If no parent is specified, a region will be chosen automatically.
+        #
+        #     Supported location-ids:
+        #         `us`: USA country only,
+        #         `asia`: East asia areas, like Japan, Taiwan,
+        #         `eu`: The European Union.
+        #
+        #     Example: `projects/project-A/locations/eu`.
         class AsyncBatchAnnotateImagesRequest; end
 
         # Response to an async batch image annotation request.
@@ -701,6 +748,20 @@ module Google
         # @!attribute [rw] requests
         #   @return [Array<Google::Cloud::Vision::V1::AsyncAnnotateFileRequest>]
         #     Individual async file annotation requests for this batch.
+        # @!attribute [rw] parent
+        #   @return [String]
+        #     Optional. Target project and location to make a call.
+        #
+        #     Format: `projects/{project-id}/locations/{location-id}`.
+        #
+        #     If no parent is specified, a region will be chosen automatically.
+        #
+        #     Supported location-ids:
+        #         `us`: USA country only,
+        #         `asia`: East asia areas, like Japan, Taiwan,
+        #         `eu`: The European Union.
+        #
+        #     Example: `projects/project-A/locations/eu`.
         class AsyncBatchAnnotateFilesRequest; end
 
         # Response to an async batch file annotation request.
@@ -817,19 +878,19 @@ module Google
           # Unknown likelihood.
           UNKNOWN = 0
 
-          # It is very unlikely that the image belongs to the specified vertical.
+          # It is very unlikely.
           VERY_UNLIKELY = 1
 
-          # It is unlikely that the image belongs to the specified vertical.
+          # It is unlikely.
           UNLIKELY = 2
 
-          # It is possible that the image belongs to the specified vertical.
+          # It is possible.
           POSSIBLE = 3
 
-          # It is likely that the image belongs to the specified vertical.
+          # It is likely.
           LIKELY = 4
 
-          # It is very likely that the image belongs to the specified vertical.
+          # It is very likely.
           VERY_LIKELY = 5
         end
       end

@@ -1464,4 +1464,116 @@ describe Google::Cloud::Vision::V1::ProductSearchClient do
       end
     end
   end
+
+  describe 'purge_products' do
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Vision::V1::ProductSearchClient#purge_products."
+
+    it 'invokes purge_products without error' do
+      # Create request parameters
+      formatted_parent = Google::Cloud::Vision::V1::ProductSearchClient.location_path("[PROJECT]", "[LOCATION]")
+
+      # Create expected grpc response
+      expected_response = {}
+      expected_response = Google::Gax::to_proto(expected_response, Google::Protobuf::Empty)
+      result = Google::Protobuf::Any.new
+      result.pack(expected_response)
+      operation = Google::Longrunning::Operation.new(
+        name: 'operations/purge_products_test',
+        done: true,
+        response: result
+      )
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Cloud::Vision::V1::PurgeProductsRequest, request)
+        assert_equal(formatted_parent, request.parent)
+        OpenStruct.new(execute: operation)
+      end
+      mock_stub = MockGrpcClientStub_v1.new(:purge_products, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockProductSearchCredentials_v1.new("purge_products")
+
+      Google::Cloud::Vision::V1::ProductSearch::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Vision::ProductSearch.new(version: :v1)
+
+          # Call method
+          response = client.purge_products(formatted_parent)
+
+          # Verify the response
+          assert_equal(expected_response, response.response)
+        end
+      end
+    end
+
+    it 'invokes purge_products and returns an operation error.' do
+      # Create request parameters
+      formatted_parent = Google::Cloud::Vision::V1::ProductSearchClient.location_path("[PROJECT]", "[LOCATION]")
+
+      # Create expected grpc response
+      operation_error = Google::Rpc::Status.new(
+        message: 'Operation error for Google::Cloud::Vision::V1::ProductSearchClient#purge_products.'
+      )
+      operation = Google::Longrunning::Operation.new(
+        name: 'operations/purge_products_test',
+        done: true,
+        error: operation_error
+      )
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Cloud::Vision::V1::PurgeProductsRequest, request)
+        assert_equal(formatted_parent, request.parent)
+        OpenStruct.new(execute: operation)
+      end
+      mock_stub = MockGrpcClientStub_v1.new(:purge_products, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockProductSearchCredentials_v1.new("purge_products")
+
+      Google::Cloud::Vision::V1::ProductSearch::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Vision::ProductSearch.new(version: :v1)
+
+          # Call method
+          response = client.purge_products(formatted_parent)
+
+          # Verify the response
+          assert(response.error?)
+          assert_equal(operation_error, response.error)
+        end
+      end
+    end
+
+    it 'invokes purge_products with error' do
+      # Create request parameters
+      formatted_parent = Google::Cloud::Vision::V1::ProductSearchClient.location_path("[PROJECT]", "[LOCATION]")
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Cloud::Vision::V1::PurgeProductsRequest, request)
+        assert_equal(formatted_parent, request.parent)
+        raise custom_error
+      end
+      mock_stub = MockGrpcClientStub_v1.new(:purge_products, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockProductSearchCredentials_v1.new("purge_products")
+
+      Google::Cloud::Vision::V1::ProductSearch::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Vision::ProductSearch.new(version: :v1)
+
+          # Call method
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
+            client.purge_products(formatted_parent)
+          end
+
+          # Verify the GaxError wrapped the custom error that was raised.
+          assert_match(custom_error.message, err.message)
+        end
+      end
+    end
+  end
 end
