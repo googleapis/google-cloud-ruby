@@ -465,10 +465,10 @@ module Google
 
         ##
         # Deletes an HMAC key. Key must be in the INACTIVE state.
-        def delete_hmac_key access_id, user_project: nil
+        def delete_hmac_key access_id, project_id: nil, user_project: nil
           execute do
             service.delete_project_hmac_key \
-              @project, access_id,
+              (project_id || @project), access_id,
               user_project: user_project(user_project)
           end
         end
@@ -505,10 +505,10 @@ module Google
         # for valid states.
         # Returns Google::Apis::StorageV1::HmacKeyMetadata.
         def update_hmac_key access_id, hmac_key_metadata_object,
-                            user_project: nil
+                            project_id: nil, user_project: nil
           execute do
             service.update_project_hmac_key \
-              @project, access_id, hmac_key_metadata_object,
+              (project_id || @project), access_id, hmac_key_metadata_object,
               user_project: user_project(user_project)
           end
         end

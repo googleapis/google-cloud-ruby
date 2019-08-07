@@ -17,6 +17,7 @@ require "helper"
 describe Google::Cloud::Storage::HmacKey, :mock_storage do
   let(:access_id) { "my-access-id" }
   let(:service_account_email) { "my_service_account@gs-project-accounts.iam.gserviceaccount.com" }
+  let(:other_project_id) { "my-other-project" }
   let(:hmac_key_metadata_gapi) do
     Google::Apis::StorageV1::HmacKeyMetadata.new(
       access_id: access_id,
@@ -75,6 +76,19 @@ describe Google::Cloud::Storage::HmacKey, :mock_storage do
     mock.verify
   end
 
+  it "can delete itself with a different project_id" do
+    hmac_key.gapi.project_id = other_project_id
+
+    mock = Minitest::Mock.new
+    mock.expect :delete_project_hmac_key, hmac_key_metadata_gapi, [other_project_id, access_id, { user_project: nil }]
+    mock.expect :get_project_hmac_key, hmac_key_metadata_gapi, [other_project_id, access_id, { user_project: nil }]
+    hmac_key.service.mocked_service = mock
+
+    hmac_key.delete!
+
+    mock.verify
+  end
+
   it "can delete itself with user_project set to true" do
     mock = Minitest::Mock.new
     mock.expect :delete_project_hmac_key, hmac_key_metadata_gapi, [project, access_id, { user_project: "test" }]
@@ -91,6 +105,20 @@ describe Google::Cloud::Storage::HmacKey, :mock_storage do
     update_gapi = hmac_key_metadata_gapi.dup
     update_gapi.state = "ACTIVE"
     mock.expect :update_project_hmac_key, hmac_key_metadata_gapi, [project, access_id, update_gapi, { user_project: nil }]
+    hmac_key.service.mocked_service = mock
+
+    hmac_key.active!
+
+    mock.verify
+  end
+
+  it "can update its state to ACTIVE with a different project_id" do
+    hmac_key.gapi.project_id = other_project_id
+
+    mock = Minitest::Mock.new
+    update_gapi = hmac_key_metadata_gapi.dup
+    update_gapi.state = "ACTIVE"
+    mock.expect :update_project_hmac_key, hmac_key_metadata_gapi, [other_project_id, access_id, update_gapi, { user_project: nil }]
     hmac_key.service.mocked_service = mock
 
     hmac_key.active!
@@ -137,6 +165,18 @@ describe Google::Cloud::Storage::HmacKey, :mock_storage do
   it "can reload itself" do
     mock = Minitest::Mock.new
     mock.expect :get_project_hmac_key, hmac_key_metadata_gapi, [project, access_id, { user_project: nil }]
+    hmac_key.service.mocked_service = mock
+
+    hmac_key.reload!
+
+    mock.verify
+  end
+
+  it "can reload itself with a different project_id" do
+    hmac_key.gapi.project_id = other_project_id
+
+    mock = Minitest::Mock.new
+    mock.expect :get_project_hmac_key, hmac_key_metadata_gapi, [other_project_id, access_id, { user_project: nil }]
     hmac_key.service.mocked_service = mock
 
     hmac_key.reload!

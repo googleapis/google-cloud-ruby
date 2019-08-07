@@ -63,7 +63,7 @@ module Google
         attr_reader :secret
 
         ##
-        # @private Creates a Notification object.
+        # @private Creates an HmacKey object.
         def initialize
           @bucket = nil
           @service = nil
@@ -226,7 +226,7 @@ module Google
         # Deletes the HMAC key, and loads the new state of the HMAC key,
         # which will be `DELETED`.
         #
-        # The API call to delete the notification may be retried under certain
+        # The API call to delete the HMAC key may be retried under certain
         # conditions. See {Google::Cloud#storage} to control this behavior.
         #
         # @return [Google::Cloud::Storage::HmacKey] Returns the HMAC key for
@@ -244,8 +244,10 @@ module Google
         def delete!
           ensure_service!
           @service.delete_hmac_key access_id,
+                                   project_id: project_id,
                                    user_project: @user_project
-          @gapi = @service.get_hmac_key access_id, user_project: @user_project
+          @gapi = @service.get_hmac_key access_id, project_id: project_id,
+                                                   user_project: @user_project
           self
         end
         alias delete delete!
@@ -255,7 +257,8 @@ module Google
         #
         def reload!
           ensure_service!
-          @gapi = service.get_hmac_key access_id, user_project: user_project
+          @gapi = service.get_hmac_key access_id, project_id: project_id,
+                                                  user_project: user_project
           self
         end
         alias refresh! reload!
@@ -303,6 +306,7 @@ module Google
           put_gapi = @gapi.dup
           put_gapi.state = new_state
           @gapi = service.update_hmac_key access_id, put_gapi,
+                                          project_id: project_id,
                                           user_project: @user_project
           self
         end
