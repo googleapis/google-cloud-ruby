@@ -46,6 +46,8 @@ module Google
       #   should already be composed with a `GRPC::Core::CallCredentials` object.
       #   `Proc` will be used as an updater_proc for the gRPC channel. The proc transforms the
       #   metadata for requests, generally, to give OAuth credentials.
+      # @param [String] endpoint Override of the endpoint host name. Optional.
+      #   If the param is nil, uses the default endpoint.
       # @param [String] emulator_host Bigtable emulator host. Optional.
       #   If the parameter is nil, uses the value of the `emulator_host` config.
       # @param scope [Array<String>]
@@ -74,29 +76,27 @@ module Google
           emulator_host: nil,
           scope: nil,
           client_config: nil,
+          endpoint: nil,
           timeout: nil
         project_id    ||= default_project_id
         scope         ||= configure.scope
         timeout       ||= configure.timeout
         client_config ||= configure.client_config
         emulator_host ||= configure.emulator_host
+        endpoint      ||= configure.endpoint
 
         if emulator_host
           return new_with_emulator project_id, emulator_host, timeout,
                                    client_config
         end
 
-        credentials ||= default_credentials scope: scope
-        unless credentials.is_a? Google::Auth::Credentials
-          credentials = Bigtable::Credentials.new credentials, scope: scope
-        end
-
+        credentials = resolve_credentials credentials, scope
         project_id = resolve_project_id project_id, credentials
         raise ArgumentError, "project_id is missing" if project_id.empty?
 
         service = Bigtable::Service.new(
           project_id, credentials,
-          timeout: timeout, client_config: client_config
+          host: endpoint, timeout: timeout, client_config: client_config
         )
         Bigtable::Project.new(service)
       end
@@ -117,6 +117,8 @@ module Google
       # * `timeout` - (Integer) Default timeout to use in requests.
       # * `client_config` - (Hash) A hash of values to override the default
       #   behavior of the API client.
+      # * `endpoint` - (String) Override of the endpoint host name, or `nil`
+      #   to use the default endpoint.
       #
       # @return [Google::Cloud::Config] The configuration object the
       #   Google::Cloud::Bigtable library uses.
@@ -142,6 +144,17 @@ module Google
             client_config: client_config
           )
         )
+      end
+
+      # @private
+      # Resolve credentials
+      #
+      def self.resolve_credentials given_credentials, scope
+        credentials = given_credentials || default_credentials(scope: scope)
+        unless credentials.is_a? Google::Auth::Credentials
+          credentials = Bigtable::Credentials.new credentials, scope: scope
+        end
+        credentials
       end
 
       # @private
