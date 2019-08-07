@@ -30,7 +30,9 @@ module Google
         #     for example, "projects/api-test-project/tenants/foo/profiles/bar".
         # @!attribute [rw] external_id
         #   @return [String]
-        #     Optional. Profile's id in client system if available.
+        #     Optional. Profile's id in client system if available. This value is not
+        #     required to be unique to each profile. However, providing unique values
+        #     makes it easier to specify individual profiles when filing support tickets.
         #
         #     The maximum number of bytes allowed is 100.
         # @!attribute [rw] source

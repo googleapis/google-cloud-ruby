@@ -4,9 +4,6 @@
 
 require 'google/protobuf'
 
-require 'google/api/annotations_pb'
-require 'google/protobuf/timestamp_pb'
-require 'google/protobuf/wrappers_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.cloud.talent.v4beta1.Tenant" do
     optional :name, :string, 1
