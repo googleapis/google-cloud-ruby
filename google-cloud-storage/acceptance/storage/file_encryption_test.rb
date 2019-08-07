@@ -117,7 +117,7 @@ describe Google::Cloud::Storage::File, :storage do
       rewritten2.size.must_equal uploaded.size
 
       Tempfile.open ["abc", ".txt"] do |tmpfile|
-        downloaded = uploaded.download tmpfile.path, encryption_key: encryption_key_2
+        downloaded = rewritten2.download tmpfile.path, encryption_key: encryption_key_2
         downloaded.size.must_equal uploaded.size
       end
 
@@ -128,7 +128,7 @@ describe Google::Cloud::Storage::File, :storage do
       rewritten4.size.must_equal uploaded.size
 
       Tempfile.open ["abc", ".txt"] do |tmpfile|
-        downloaded = uploaded.download tmpfile.path
+        downloaded = rewritten4.download tmpfile.path
         downloaded.size.must_equal uploaded.size
       end
 
