@@ -67,7 +67,7 @@ module Google
       #   require "google/cloud/bigtable"
       #
       #   client = Google::Cloud::Bigtable.new
-
+      #
       def self.new \
           project_id: nil,
           credentials: nil,
@@ -82,34 +82,21 @@ module Google
         emulator_host ||= configure.emulator_host
 
         if emulator_host
-          project_id = project_id.to_s # Always cast to a string
-          raise ArgumentError, "project_id is missing" if project_id.empty?
-
-          return Bigtable::Project.new(
-            Bigtable::Service.new(
-              project_id, :this_channel_is_insecure,
-              host: emulator_host, timeout: timeout,
-              client_config: client_config
-            )
-          )
+          return new_with_emulator project_id, emulator_host, timeout,
+                                   client_config
         end
 
-        credentials ||= default_credentials(scope: scope)
+        credentials ||= default_credentials scope: scope
         unless credentials.is_a? Google::Auth::Credentials
           credentials = Bigtable::Credentials.new credentials, scope: scope
         end
 
-        if credentials.respond_to? :project_id
-          project_id ||= credentials.project_id
-        end
-        project_id = project_id.to_s # Always cast to a string
+        project_id = resolve_project_id project_id, credentials
         raise ArgumentError, "project_id is missing" if project_id.empty?
 
         service = Bigtable::Service.new(
-          project_id,
-          credentials,
-          timeout: timeout,
-          client_config: client_config
+          project_id, credentials,
+          timeout: timeout, client_config: client_config
         )
         Bigtable::Project.new(service)
       end
@@ -133,56 +120,58 @@ module Google
       #
       # @return [Google::Cloud::Config] The configuration object the
       #   Google::Cloud::Bigtable library uses.
-
+      #
       def self.configure
         yield Google::Cloud.configure.bigtable if block_given?
 
         Google::Cloud.configure.bigtable
       end
 
-      # Configure the Google Cloud Bigtable library.
+      # @private
+      # New client given an emulator host.
       #
-      # The following Bigtable configuration parameters are supported:
-      #
-      # * `project_id` - (String) Identifier for a Bigtable project. (The
-      #   parameter `project` is considered deprecated, but may also be used.)
-      # * `credentials` - (String, Hash, Google::Auth::Credentials,
-      #    GRPC::Core::Channel, GRPC::Core::ChannelCredentials) The path to
-      #   the keyfile as a String, the contents of the keyfile as a Hash, or a
-      #   Google::Auth::Credentials object. (See {Bigtable::Credentials}) (The
-      #   parameter `keyfile` is considered deprecated, but may also be used.)
-      # * `scope` - (String, Array<String>) The OAuth 2.0 scopes controlling
-      #   the set of resources and operations that the connection can access.
-      # * `timeout` - (Integer) Default timeout to use in requests.
-      # * `client_config` - (Hash) A hash of values to override the default
-      #   behavior of the API client.
-      #
-      # @return [Google::Cloud::Config] The configuration object the
-      #   Google::Cloud::Bigtable library uses.
+      def self.new_with_emulator project_id, emulator_host, timeout,
+                                 client_config
+        project_id = project_id.to_s # Always cast to a string
+        raise ArgumentError, "project_id is missing" if project_id.empty?
 
-      def self.configure
-        yield Google::Cloud.configure.bigtable if block_given?
-
-        Google::Cloud.configure.bigtable
+        Bigtable::Project.new(
+          Bigtable::Service.new(
+            project_id, :this_channel_is_insecure,
+            host: emulator_host, timeout: timeout,
+            client_config: client_config
+          )
+        )
       end
 
-     # @private
-     # Default project.
+      # @private
+      # Resolve project.
+      #
+      def self.resolve_project_id given_project_id, credentials
+        project_id = given_project_id || default_project_id
+        if credentials.respond_to? :project_id
+          project_id ||= credentials.project_id
+        end
+        project_id.to_s # Always cast to a string
+      end
 
-     def self.default_project_id
-       Google::Cloud.configure.bigtable.project_id ||
-         Google::Cloud.configure.project_id ||
-         Google::Cloud.env.project_id
-     end
+      # @private
+      # Default project.
+      #
+      def self.default_project_id
+        Google::Cloud.configure.bigtable.project_id ||
+          Google::Cloud.configure.project_id ||
+          Google::Cloud.env.project_id
+      end
 
-     # @private
-     # Default credentials.
-
-     def self.default_credentials scope: nil
-       Google::Cloud.configure.bigtable.credentials ||
-         Google::Cloud.configure.credentials ||
-         Bigtable::Credentials.default(scope: scope)
-     end
+      # @private
+      # Default credentials.
+      #
+      def self.default_credentials scope: nil
+        Google::Cloud.configure.bigtable.credentials ||
+          Google::Cloud.configure.credentials ||
+          Bigtable::Credentials.default(scope: scope)
+      end
     end
   end
 end
