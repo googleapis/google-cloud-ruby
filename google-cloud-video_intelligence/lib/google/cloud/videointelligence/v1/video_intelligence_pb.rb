@@ -105,7 +105,9 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :input_uri, :string, 1
     optional :segment, :message, 10, "google.cloud.videointelligence.v1.VideoSegment"
     repeated :segment_label_annotations, :message, 2, "google.cloud.videointelligence.v1.LabelAnnotation"
+    repeated :segment_presence_label_annotations, :message, 23, "google.cloud.videointelligence.v1.LabelAnnotation"
     repeated :shot_label_annotations, :message, 3, "google.cloud.videointelligence.v1.LabelAnnotation"
+    repeated :shot_presence_label_annotations, :message, 24, "google.cloud.videointelligence.v1.LabelAnnotation"
     repeated :frame_label_annotations, :message, 4, "google.cloud.videointelligence.v1.LabelAnnotation"
     repeated :face_annotations, :message, 5, "google.cloud.videointelligence.v1.FaceAnnotation"
     repeated :shot_annotations, :message, 6, "google.cloud.videointelligence.v1.VideoSegment"
