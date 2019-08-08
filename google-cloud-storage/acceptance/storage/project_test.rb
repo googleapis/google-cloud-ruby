@@ -22,7 +22,7 @@ describe Google::Cloud::Storage::Project, :storage do
     # https://stackoverflow.com/questions/22993545/ruby-email-validation-with-regex
     email.must_match /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
   end
-  focus
+
   it "should create a new HMAC key" do
     hmac_key = nil
     begin
