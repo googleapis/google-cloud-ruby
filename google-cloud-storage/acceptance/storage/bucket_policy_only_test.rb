@@ -38,6 +38,7 @@ describe Google::Cloud::Storage::Bucket, :policy_only, :storage do
   end
 
   it "sets policy_only true and is unable to modify file ACL rules" do
+    skip "Removed due to consistent failure in GCS. @frankyn will notify when fixed."
     refute bucket.policy_only?
     bucket.policy_only_locked_at.must_be :nil?
     file = bucket.create_file local_file, "ReaderTest.png"
@@ -53,6 +54,7 @@ describe Google::Cloud::Storage::Bucket, :policy_only, :storage do
   end
 
   it "sets policy_only true and is unable to get the file" do
+    skip "Removed due to consistent failure in GCS. @frankyn will notify when fixed."
     refute bucket.policy_only?
     file = bucket.create_file local_file, "ReaderTest.png"
 
@@ -68,6 +70,7 @@ describe Google::Cloud::Storage::Bucket, :policy_only, :storage do
   end
 
   it "sets policy_only true and is unable to modify bucket ACL rules" do
+    skip "Removed due to consistent failure in GCS. @frankyn will notify when fixed."
     refute bucket.policy_only?
     bucket.policy_only = true
     assert bucket.policy_only?
@@ -78,6 +81,7 @@ describe Google::Cloud::Storage::Bucket, :policy_only, :storage do
   end
 
   it "sets policy_only true and is unable to modify default ACL rules" do
+    skip "Removed due to consistent failure in GCS. @frankyn will notify when fixed."
     refute bucket.policy_only?
     bucket.policy_only = true
     assert bucket.policy_only?
@@ -102,6 +106,7 @@ describe Google::Cloud::Storage::Bucket, :policy_only, :storage do
   end
 
   it "sets policy_only true and default object acl and object acls are preserved" do
+    skip "Removed due to consistent failure in GCS. @frankyn will notify when fixed."
     bucket.default_acl.public!
     bucket.default_acl.readers.must_equal ["allUsers"]
     file_default_acl = bucket.create_file StringIO.new("default_acl"), "default_acl.txt"
