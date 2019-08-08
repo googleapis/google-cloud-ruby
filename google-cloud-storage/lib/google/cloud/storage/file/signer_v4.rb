@@ -122,9 +122,10 @@ module Google
           def canonical_and_signed_headers headers
             # Headers needs to be in alpha order.
             canonical_headers = headers || {}
-            canonical_headers = Hash[canonical_headers.map do |k, v|
-                                       [k.downcase, v.strip.gsub(/\s+/, " ")]
-                                     end]
+            headers_arr = canonical_headers.map do |k, v|
+              [k.downcase, v.strip.gsub(/[^\S\t]+/, " ").gsub(/\t+/, "\t")]
+            end
+            canonical_headers = Hash[headers_arr]
             canonical_headers["host"] = "storage.googleapis.com"
 
             canonical_headers = canonical_headers.sort_by do |k, _|

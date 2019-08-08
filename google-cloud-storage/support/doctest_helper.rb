@@ -158,6 +158,7 @@ YARD::Doctest.configure do |doctest|
   doctest.skip "Google::Cloud::Storage::Bucket#new_notification"
   doctest.skip "Google::Cloud::Storage::Bucket#find_notification"
   doctest.skip "Google::Cloud::Storage::Bucket#find_notifications"
+  doctest.skip "Google::Cloud::Storage::HmacKey#delete"
   doctest.skip "Google::Cloud::Storage::Project#find_bucket"
   doctest.skip "Google::Cloud::Storage::Project#find_buckets"
 
@@ -1009,6 +1010,47 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
+  # HmacKey
+
+  doctest.before "Google::Cloud::Storage::HmacKey" do
+    mock_storage do |mock|
+      mock.expect :create_project_hmac_key, hmac_key_gapi, ["my-project", "my_account@developer.gserviceaccount.com", Hash]
+      mock.expect :get_project_hmac_key, hmac_key_metadata_gapi, ["my-project", "my-access-id", Hash]
+      mock.expect :update_project_hmac_key, hmac_key_metadata_gapi, ["my-project", "my-access-id", Google::Apis::StorageV1::HmacKeyMetadata, Hash]
+      mock.expect :delete_project_hmac_key, hmac_key_metadata_gapi, ["my-project", "my-access-id", Hash]
+      mock.expect :get_project_hmac_key, hmac_key_metadata_gapi, ["my-project", "my-access-id", Hash]
+    end
+  end
+
+  doctest.before "Google::Cloud::Storage::HmacKey#active!" do
+    mock_storage do |mock|
+      mock.expect :list_project_hmac_keys, hmac_keys_metadata_gapi, ["my-project", Hash]
+      mock.expect :update_project_hmac_key, hmac_key_metadata_gapi, ["my-project", "my-access-id", Google::Apis::StorageV1::HmacKeyMetadata, Hash]
+    end
+  end
+
+  doctest.before "Google::Cloud::Storage::HmacKey#inactive!" do
+    mock_storage do |mock|
+      mock.expect :list_project_hmac_keys, hmac_keys_metadata_gapi, ["my-project", Hash]
+      mock.expect :update_project_hmac_key, hmac_key_metadata_gapi, ["my-project", "my-access-id", Google::Apis::StorageV1::HmacKeyMetadata, Hash]
+    end
+  end
+
+  doctest.before "Google::Cloud::Storage::HmacKey#delete!" do
+    mock_storage do |mock|
+      mock.expect :list_project_hmac_keys, hmac_keys_metadata_gapi, ["my-project", Hash]
+      mock.expect :update_project_hmac_key, hmac_key_metadata_gapi, ["my-project", "my-access-id", Google::Apis::StorageV1::HmacKeyMetadata, Hash]
+      mock.expect :delete_project_hmac_key, hmac_key_metadata_gapi, ["my-project", "my-access-id", Hash]
+      mock.expect :get_project_hmac_key, hmac_key_metadata_gapi, ["my-project", "my-access-id", Hash]
+    end
+  end
+
+  doctest.before "Google::Cloud::Storage::HmacKey::List" do
+    mock_storage do |mock|
+      mock.expect :list_project_hmac_keys, hmac_keys_metadata_gapi, ["my-project", Hash]
+    end
+  end
+
   # Notification
 
   doctest.before "Google::Cloud::Storage::Notification" do
@@ -1380,6 +1422,25 @@ def random_file_acl_hash bucket_name, file_name
     }
    ]
   }
+end
+
+def hmac_key_metadata_gapi
+  Google::Apis::StorageV1::HmacKeyMetadata.new(
+    access_id: "my-access-id"
+  )
+end
+
+def hmac_key_gapi
+  Google::Apis::StorageV1::HmacKey.new(
+    secret: "0123456789012345678901234567890123456789",
+    metadata: hmac_key_metadata_gapi
+  )
+end
+
+def hmac_keys_metadata_gapi
+  Google::Apis::StorageV1::HmacKeysMetadata.new(
+    items: [hmac_key_metadata_gapi]
+  )
 end
 
 def policy_gapi

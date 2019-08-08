@@ -14,40 +14,41 @@
 
 require "helper"
 require "json"
+require_relative "../../../../../conformance/v1/proto/google/cloud/conformance/storage/v1/tests_pb.rb"
 
 class SignerV4Test < MockStorage
   def setup
-    account = self.class.load_json "../../../../data/signer_v4_test_account.json"
+    account_file_path = File.expand_path "../../../../../conformance/v1/test_service_account.not-a-test.json", __dir__
+    account = JSON.parse File.read(account_file_path)
     credentials.issuer = account["client_email"]
     credentials.signing_key = OpenSSL::PKey::RSA.new account["private_key"]
   end
 
-  def self.load_json rel_path
-    json_file = File.expand_path rel_path, __dir__
-    json_contents = File.read json_file
-    JSON.parse json_contents
-  end
-
   def self.build_test_for test, index
-    define_method("test_#{index}: #{test["description"]}") do
+    define_method("test_#{index}: #{test.description}") do
       # start: test method body
-      signer = Google::Cloud::Storage::File::SignerV4.new test["bucket"],
-                                                          test["object"],
+      signer = Google::Cloud::Storage::File::SignerV4.new test.bucket,
+                                                          test.object,
                                                           storage.service
-      Time.stub :now, Time.parse(test["timestamp"]) do
+      Time.stub :now, SignerV4Test.timestamp_to_time(test.timestamp) do
         # method under test
         signed_url = signer.signed_url method: test["method"],
-                                       expires: test["expiration"].to_i,
-                                       headers: test["headers"]
+                                       expires: test.expiration,
+                                       headers: test.headers
 
-        signed_url.must_equal test["expectedUrl"]
+        signed_url.must_equal test.expectedUrl
       end
       # end: test method body
     end
   end
+
+  def self.timestamp_to_time timestamp
+    ::Time.at(timestamp.nanos * 10**-9 + timestamp.seconds)
+  end
 end
 
-tests = SignerV4Test.load_json "#{__dir__}/../../../../data/signer_v4_test_data.json"
-tests.each_with_index do |test, index|
+file_path = File.expand_path "../../../../../conformance/v1/v4_signatures.json", __dir__
+test_file = Google::Cloud::Conformance::Storage::V1::TestFile.decode_json File.read(file_path)
+test_file.signing_v4_tests.each_with_index do |test, index|
   SignerV4Test.build_test_for test, index
 end

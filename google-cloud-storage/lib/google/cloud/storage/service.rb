@@ -452,6 +452,68 @@ module Google
         end
 
         ##
+        # Creates a new HMAC key for the specified service account.
+        # Returns Google::Apis::StorageV1::HmacKey.
+        def create_hmac_key service_account_email, project_id: nil,
+                            user_project: nil
+          execute do
+            service.create_project_hmac_key \
+              (project_id || @project), service_account_email,
+              user_project: user_project(user_project)
+          end
+        end
+
+        ##
+        # Deletes an HMAC key. Key must be in the INACTIVE state.
+        def delete_hmac_key access_id, project_id: nil, user_project: nil
+          execute do
+            service.delete_project_hmac_key \
+              (project_id || @project), access_id,
+              user_project: user_project(user_project)
+          end
+        end
+
+        ##
+        # Retrieves an HMAC key's metadata.
+        # Returns Google::Apis::StorageV1::HmacKeyMetadata.
+        def get_hmac_key access_id, project_id: nil, user_project: nil
+          execute do
+            service.get_project_hmac_key \
+              (project_id || @project), access_id,
+              user_project: user_project(user_project)
+          end
+        end
+
+        ##
+        # Retrieves a list of HMAC key metadata matching the criteria.
+        # Returns Google::Apis::StorageV1::HmacKeysMetadata.
+        def list_hmac_keys max: nil, token: nil, service_account_email: nil,
+                           project_id: nil, show_deleted_keys: nil,
+                           user_project: nil
+          execute do
+            service.list_project_hmac_keys \
+              (project_id || @project),
+              max_results: max, page_token: token,
+              service_account_email: service_account_email,
+              show_deleted_keys: show_deleted_keys,
+              user_project: user_project(user_project)
+          end
+        end
+
+        ##
+        # Updates the state of an HMAC key. See the HMAC Key resource descriptor
+        # for valid states.
+        # Returns Google::Apis::StorageV1::HmacKeyMetadata.
+        def update_hmac_key access_id, hmac_key_metadata_object,
+                            project_id: nil, user_project: nil
+          execute do
+            service.update_project_hmac_key \
+              (project_id || @project), access_id, hmac_key_metadata_object,
+              user_project: user_project(user_project)
+          end
+        end
+
+        ##
         # Retrieves the mime-type for a file path.
         # An empty string is returned if no mime-type can be found.
         def mime_type_for path
