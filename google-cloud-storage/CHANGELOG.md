@@ -1,5 +1,12 @@
 # Release History
 
+### 1.20.0 / 2019-08-08
+
+* Add HmacKey
+  * Add Project#create_hmac_key, Project#hmac_key, and Project#hmac_keys.
+* Update documentation listings of current and legacy storage classes.
+* Fix File#download to use generation from current File object.
+
 ### 1.19.0 / 2019-07-11
 
 * Add Bucket#location_type
