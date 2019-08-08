@@ -1,5 +1,12 @@
 # Release History
 
+## 0.35.0 (2019-08-08)
+
+
+### Features
+
+* **vision:** Add parent to BatchAnnotate and add PurgeProducts ([97a326d](https://www.github.com/googleapis/google-cloud-ruby/commit/97a326d))
+
 ### 0.34.0 / 2019-07-08
 
 * Support overriding service host and port.
