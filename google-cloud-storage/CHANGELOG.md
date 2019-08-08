@@ -1,5 +1,22 @@
 # Release History
 
+## [1.20.0](https://www.github.com/googleapis/google-cloud-ruby/compare/1.19.0...v1.20.0) (2019-08-08)
+
+
+### Bug Fixes
+
+* **storage:** Specify current file generation within File#download ([84800dc](https://www.github.com/googleapis/google-cloud-ruby/commit/84800dc)), closes [#3733](https://www.github.com/googleapis/google-cloud-ruby/issues/3733) [#3734](https://www.github.com/googleapis/google-cloud-ruby/issues/3734)
+
+
+### Features
+
+* **storage:** Add HmacKey ([fe22147](https://www.github.com/googleapis/google-cloud-ruby/commit/fe22147)), closes [#3281](https://www.github.com/googleapis/google-cloud-ruby/issues/3281) [#3400](https://www.github.com/googleapis/google-cloud-ruby/issues/3400)
+
+
+### Performance Improvements
+
+* Use MiniMime to detect content types ([32cbf03](https://www.github.com/googleapis/google-cloud-ruby/commit/32cbf03)), closes [#3408](https://www.github.com/googleapis/google-cloud-ruby/issues/3408)
+
 ### 1.20.0 / 2019-08-08
 
 * Add HmacKey
