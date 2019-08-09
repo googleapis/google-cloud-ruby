@@ -19,7 +19,7 @@ describe Google::Cloud do
   describe "#datastore" do
     it "calls out to Google::Cloud.datastore" do
       gcloud = Google::Cloud.new
-      stubbed_datastore = ->(project, keyfile, scope: nil, timeout: nil, client_config: nil) {
+      stubbed_datastore = ->(project, keyfile, scope: nil, timeout: nil, host: nil, client_config: nil) {
         project.must_be :nil?
         keyfile.must_be :nil?
         scope.must_be :nil?
@@ -35,7 +35,7 @@ describe Google::Cloud do
 
     it "passes project and keyfile to Google::Cloud.datastore" do
       gcloud = Google::Cloud.new "project-id", "keyfile-path"
-      stubbed_datastore = ->(project, keyfile, scope: nil, timeout: nil, client_config: nil) {
+      stubbed_datastore = ->(project, keyfile, scope: nil, timeout: nil, host: nil, client_config: nil) {
         project.must_equal "project-id"
         keyfile.must_equal "keyfile-path"
         scope.must_be :nil?
@@ -51,7 +51,7 @@ describe Google::Cloud do
 
     it "passes project and keyfile and options to Google::Cloud.datastore" do
       gcloud = Google::Cloud.new "project-id", "keyfile-path"
-      stubbed_datastore = ->(project, keyfile, scope: nil, timeout: nil, client_config: nil) {
+      stubbed_datastore = ->(project, keyfile, scope: nil, timeout: nil, host: nil, client_config: nil) {
         project.must_equal "project-id"
         keyfile.must_equal "keyfile-path"
         scope.must_equal "http://example.com/scope"
@@ -97,7 +97,7 @@ describe Google::Cloud do
         scope.must_be :nil?
         "datastore-credentials"
       }
-      stubbed_service = ->(project, credentials, timeout: nil, client_config: nil) {
+      stubbed_service = ->(project, credentials, timeout: nil, host: nil, client_config: nil) {
         project.must_equal "project-id"
         credentials.must_equal "datastore-credentials"
         timeout.must_be :nil?
@@ -158,7 +158,7 @@ describe Google::Cloud do
         scope.must_be :nil?
         "datastore-credentials"
       }
-      stubbed_service = ->(project, credentials, timeout: nil, client_config: nil) {
+      stubbed_service = ->(project, credentials, timeout: nil, host: nil, client_config: nil) {
         project.must_equal "project-id"
         credentials.must_equal "datastore-credentials"
         timeout.must_be :nil?
@@ -189,7 +189,7 @@ describe Google::Cloud do
         scope.must_be :nil?
         "datastore-credentials"
       }
-      stubbed_service = ->(project, credentials, timeout: nil, client_config: nil) {
+      stubbed_service = ->(project, credentials, timeout: nil, host: nil, client_config: nil) {
         project.must_equal "project-id"
         credentials.must_equal "datastore-credentials"
         timeout.must_be :nil?
@@ -210,6 +210,28 @@ describe Google::Cloud do
               end
             end
           end
+        end
+      end
+    end
+
+    it "uses provided endpoint" do
+      endpoint = "datastore-endpoint2.example.com"
+      stubbed_service = ->(project, credentials, timeout: nil, host: nil, client_config: nil) {
+        project.must_equal "project-id"
+        credentials.must_equal default_credentials
+        timeout.must_be :nil?
+        host.must_equal endpoint
+        client_config.must_be :nil?
+        OpenStruct.new project: project
+      }
+
+      # Clear all environment variables
+      ENV.stub :[], nil do
+        Google::Cloud::Datastore::Service.stub :new, stubbed_service do
+          datastore = Google::Cloud::Datastore.new project: "project-id", credentials: default_credentials, endpoint: endpoint
+          datastore.must_be_kind_of Google::Cloud::Datastore::Dataset
+          datastore.project.must_equal "project-id"
+          datastore.service.must_be_kind_of OpenStruct
         end
       end
     end
@@ -255,7 +277,7 @@ describe Google::Cloud do
         scope.must_be :nil?
         OpenStruct.new project_id: "project-id"
       }
-      stubbed_service = ->(project, credentials, timeout: nil, client_config: nil) {
+      stubbed_service = ->(project, credentials, timeout: nil, host: nil, client_config: nil) {
         project.must_equal "project-id"
         credentials.must_be_kind_of OpenStruct
         credentials.project_id.must_equal "project-id"
@@ -303,7 +325,7 @@ describe Google::Cloud do
         scope.must_be :nil?
         "datastore-credentials"
       }
-      stubbed_service = ->(project, credentials, timeout: nil, client_config: nil) {
+      stubbed_service = ->(project, credentials, timeout: nil, host: nil, client_config: nil) {
         project.must_equal "project-id"
         credentials.must_equal "datastore-credentials"
         timeout.must_be :nil?
@@ -340,7 +362,7 @@ describe Google::Cloud do
         scope.must_be :nil?
         "datastore-credentials"
       }
-      stubbed_service = ->(project, credentials, timeout: nil, client_config: nil) {
+      stubbed_service = ->(project, credentials, timeout: nil, host: nil, client_config: nil) {
         project.must_equal "project-id"
         credentials.must_equal "datastore-credentials"
         timeout.must_be :nil?
@@ -377,7 +399,7 @@ describe Google::Cloud do
         scope.must_be :nil?
         "datastore-credentials"
       }
-      stubbed_service = ->(project, credentials, timeout: nil, client_config: nil) {
+      stubbed_service = ->(project, credentials, timeout: nil, host: nil, client_config: nil) {
         project.must_equal "project-id"
         credentials.must_equal "datastore-credentials"
         timeout.must_equal 42
@@ -416,7 +438,7 @@ describe Google::Cloud do
         scope.must_be :nil?
         "datastore-credentials"
       }
-      stubbed_service = ->(project, credentials, timeout: nil, client_config: nil) {
+      stubbed_service = ->(project, credentials, timeout: nil, host: nil, client_config: nil) {
         project.must_equal "project-id"
         credentials.must_equal "datastore-credentials"
         timeout.must_equal 42
@@ -432,6 +454,43 @@ describe Google::Cloud do
           config.credentials = "path/to/keyfile.json"
           config.timeout = 42
           config.client_config = datastore_client_config
+        end
+
+        File.stub :file?, true, ["path/to/keyfile.json"] do
+          File.stub :read, found_credentials, ["path/to/keyfile.json"] do
+            Google::Cloud::Datastore::Credentials.stub :new, stubbed_credentials do
+              Google::Cloud::Datastore::Service.stub :new, stubbed_service do
+                datastore = Google::Cloud::Datastore.new
+                datastore.must_be_kind_of Google::Cloud::Datastore::Dataset
+                datastore.project.must_equal "project-id"
+                datastore.service.must_be_kind_of OpenStruct
+              end
+            end
+          end
+        end
+      end
+    end
+
+    it "uses datastore config for endpoint" do
+      stubbed_credentials = ->(keyfile, scope: nil) {
+        keyfile.must_equal "path/to/keyfile.json"
+        scope.must_be :nil?
+        "datastore-credentials"
+      }
+      stubbed_service = ->(project, credentials, timeout: nil, host: nil, client_config: nil) {
+        project.must_equal "project-id"
+        credentials.must_equal "datastore-credentials"
+        host.must_equal "datastore-endpoint2.example.com"
+        OpenStruct.new project: project
+      }
+
+      # Clear all environment variables
+      ENV.stub :[], nil do
+        # Set new configuration
+        Google::Cloud::Datastore.configure do |config|
+          config.project = "project-id"
+          config.keyfile = "path/to/keyfile.json"
+          config.endpoint = "datastore-endpoint2.example.com"
         end
 
         File.stub :file?, true, ["path/to/keyfile.json"] do
