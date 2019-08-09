@@ -24,6 +24,7 @@ describe Google::Cloud do
         keyfile.must_be :nil?
         scope.must_be :nil?
         timeout.must_be :nil?
+        host.must_be :nil?
         client_config.must_be :nil?
         "datastore-dataset-object-empty"
       }
@@ -40,6 +41,7 @@ describe Google::Cloud do
         keyfile.must_equal "keyfile-path"
         scope.must_be :nil?
         timeout.must_be :nil?
+        host.must_be :nil?
         client_config.must_be :nil?
         "datastore-dataset-object"
       }
@@ -56,6 +58,7 @@ describe Google::Cloud do
         keyfile.must_equal "keyfile-path"
         scope.must_equal "http://example.com/scope"
         timeout.must_equal 60
+        host.must_be :nil?
         client_config.must_equal({ "gax" => "options" })
         "datastore-dataset-object-scoped"
       }
@@ -101,6 +104,7 @@ describe Google::Cloud do
         project.must_equal "project-id"
         credentials.must_equal "datastore-credentials"
         timeout.must_be :nil?
+        host.must_be :nil?
         client_config.must_be :nil?
         OpenStruct.new project: project
       }
@@ -162,6 +166,7 @@ describe Google::Cloud do
         project.must_equal "project-id"
         credentials.must_equal "datastore-credentials"
         timeout.must_be :nil?
+        host.must_be :nil?
         client_config.must_be :nil?
         OpenStruct.new project: project
       }
@@ -193,6 +198,7 @@ describe Google::Cloud do
         project.must_equal "project-id"
         credentials.must_equal "datastore-credentials"
         timeout.must_be :nil?
+        host.must_be :nil?
         client_config.must_be :nil?
         OpenStruct.new project: project
       }
@@ -282,6 +288,7 @@ describe Google::Cloud do
         credentials.must_be_kind_of OpenStruct
         credentials.project_id.must_equal "project-id"
         timeout.must_be :nil?
+        host.must_be :nil?
         client_config.must_be :nil?
         OpenStruct.new project: project
       }
@@ -329,6 +336,7 @@ describe Google::Cloud do
         project.must_equal "project-id"
         credentials.must_equal "datastore-credentials"
         timeout.must_be :nil?
+        host.must_be :nil?
         client_config.must_be :nil?
         OpenStruct.new project: project
       }
@@ -366,6 +374,7 @@ describe Google::Cloud do
         project.must_equal "project-id"
         credentials.must_equal "datastore-credentials"
         timeout.must_be :nil?
+        host.must_be :nil?
         client_config.must_be :nil?
         OpenStruct.new project: project
       }
@@ -403,6 +412,7 @@ describe Google::Cloud do
         project.must_equal "project-id"
         credentials.must_equal "datastore-credentials"
         timeout.must_equal 42
+        host.must_be :nil?
         client_config.must_equal datastore_client_config
         OpenStruct.new project: project
       }
@@ -442,6 +452,7 @@ describe Google::Cloud do
         project.must_equal "project-id"
         credentials.must_equal "datastore-credentials"
         timeout.must_equal 42
+        host.must_be :nil?
         client_config.must_equal datastore_client_config
         OpenStruct.new project: project
       }
@@ -480,7 +491,9 @@ describe Google::Cloud do
       stubbed_service = ->(project, credentials, timeout: nil, host: nil, client_config: nil) {
         project.must_equal "project-id"
         credentials.must_equal "datastore-credentials"
+        timeout.must_be :nil?
         host.must_equal "datastore-endpoint2.example.com"
+        client_config.must_be :nil?
         OpenStruct.new project: project
       }
 
