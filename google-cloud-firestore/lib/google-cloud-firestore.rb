@@ -134,4 +134,5 @@ Google::Cloud.configure.add_config! :firestore do |config|
   config.add_field! :client_config, nil, match: Hash
   config.add_field! :emulator_host, default_emulator,
                     match: String, allow_nil: true
+  config.add_field! :endpoint, nil, match: String
 end
