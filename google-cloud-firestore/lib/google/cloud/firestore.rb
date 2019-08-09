@@ -80,7 +80,7 @@ module Google
         scope         ||= configure.scope
         timeout       ||= configure.timeout
         client_config ||= configure.client_config
-        endpoint ||= configure.endpoint
+        endpoint      ||= configure.endpoint
         emulator_host ||= configure.emulator_host
 
         if emulator_host
