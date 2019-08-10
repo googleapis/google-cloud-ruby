@@ -45,6 +45,10 @@ module Google
         # @!attribute [rw] row_count
         #   @return [Integer]
         #     Output only. The number of rows (i.e. examples) in the table.
+        # @!attribute [rw] valid_row_count
+        #   @return [Integer]
+        #     Output only. The number of valid rows (i.e. without values that don't match
+        #     DataType-s of their columns).
         # @!attribute [rw] column_count
         #   @return [Integer]
         #     Output only. The number of columns of the table. That is, the number of

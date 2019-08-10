@@ -28,6 +28,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     map :params, :string, :string, 5
   end
   add_message "google.cloud.automl.v1beta1.BatchPredictResult" do
+    map :metadata, :string, :string, 1
   end
 end
 

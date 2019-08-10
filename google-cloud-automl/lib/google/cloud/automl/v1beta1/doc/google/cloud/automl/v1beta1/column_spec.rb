@@ -44,12 +44,7 @@ module Google
         #     for the timestamp at which these stats were last updated.
         # @!attribute [rw] top_correlated_columns
         #   @return [Array<Google::Cloud::AutoML::V1beta1::ColumnSpec::CorrelatedColumn>]
-        #     Output only. Top 10 most correlated with this column columns of the table,
-        #     ordered by
-        #     {Google::Cloud::AutoML::V1beta1::CorrelationStats#cramers_v cramers_v} metric.
-        #     This field may be stale, see the ancestor's
-        #     Dataset.tables_dataset_metadata.stats_update_time field
-        #     for the timestamp at which these stats were last updated.
+        #     Deprecated.
         # @!attribute [rw] etag
         #   @return [String]
         #     Used to perform consistent read-modify-write updates. If not set, a blind

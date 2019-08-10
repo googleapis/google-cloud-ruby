@@ -52,6 +52,8 @@ module Google::Cloud::AutoML::V1beta1
       #            up to 5MB. Not available for FORECASTING
       #
       # [prediction_type][google.cloud.automl.v1beta1.TablesModelMetadata.prediction_type].
+      # * Text Sentiment - TextSnippet, content up 500 characters, UTF-8
+      #                     encoded.
       rpc :Predict, PredictRequest, PredictResponse
       # Perform a batch prediction. Unlike the online [Predict][google.cloud.automl.v1beta1.PredictionService.Predict], batch
       # prediction result won't be immediately available in the response. Instead,
@@ -60,9 +62,10 @@ module Google::Cloud::AutoML::V1beta1
       # method. Once the operation is done, [BatchPredictResult][google.cloud.automl.v1beta1.BatchPredictResult] is returned in
       # the [response][google.longrunning.Operation.response] field.
       # Available for following ML problems:
+      # * Image Classification
+      # * Image Object Detection
       # * Video Classification
-      # * Video Object Tracking
-      # * Text Extraction
+      # * Video Object Tracking * Text Extraction
       # * Tables
       rpc :BatchPredict, BatchPredictRequest, Google::Longrunning::Operation
     end

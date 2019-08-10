@@ -47,8 +47,7 @@ module Google
         #     Metadata for text sentiment models.
         # @!attribute [rw] name
         #   @return [String]
-        #     Output only.
-        #     Resource name of the model.
+        #     Output only. Resource name of the model.
         #     Format: `projects/{project_id}/locations/{location_id}/models/{model_id}`
         # @!attribute [rw] display_name
         #   @return [String]
@@ -58,17 +57,14 @@ module Google
         #     (_), and ASCII digits 0-9. It must start with a letter.
         # @!attribute [rw] dataset_id
         #   @return [String]
-        #     Required.
-        #     The resource ID of the dataset used to create the model. The dataset must
+        #     Required. The resource ID of the dataset used to create the model. The dataset must
         #     come from the same ancestor project and location.
         # @!attribute [rw] create_time
         #   @return [Google::Protobuf::Timestamp]
-        #     Output only.
-        #     Timestamp when the model training finished  and can be used for prediction.
+        #     Output only. Timestamp when the model training finished  and can be used for prediction.
         # @!attribute [rw] update_time
         #   @return [Google::Protobuf::Timestamp]
-        #     Output only.
-        #     Timestamp when this model was last updated.
+        #     Output only. Timestamp when this model was last updated.
         # @!attribute [rw] deployment_state
         #   @return [Google::Cloud::AutoML::V1beta1::Model::DeploymentState]
         #     Output only. Deployment state of the model. A model can only serve

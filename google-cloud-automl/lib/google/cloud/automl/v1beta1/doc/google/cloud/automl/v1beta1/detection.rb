@@ -20,20 +20,17 @@ module Google
         # Annotation details for image object detection.
         # @!attribute [rw] bounding_box
         #   @return [Google::Cloud::AutoML::V1beta1::BoundingPoly]
-        #     Output only.
-        #     The rectangle representing the object location.
+        #     Output only. The rectangle representing the object location.
         # @!attribute [rw] score
         #   @return [Float]
-        #     Output only.
-        #     The confidence that this annotation is positive for the parent example,
+        #     Output only. The confidence that this annotation is positive for the parent example,
         #     value in [0, 1], higher means higher positivity confidence.
         class ImageObjectDetectionAnnotation; end
 
         # Annotation details for video object tracking.
         # @!attribute [rw] instance_id
         #   @return [String]
-        #     Optional.
-        #     The instance of the object, expressed as a positive integer. Used to tell
+        #     Optional. The instance of the object, expressed as a positive integer. Used to tell
         #     apart objects of the same type (i.e. AnnotationSpec) when multiple are
         #     present on a single example.
         #     NOTE: Instance ID prediction quality is not a part of model evaluation and
@@ -50,8 +47,7 @@ module Google
         #     at the time_offset of the video).
         # @!attribute [rw] score
         #   @return [Float]
-        #     Output only.
-        #     The confidence that this annotation is positive for the video at
+        #     Output only. The confidence that this annotation is positive for the video at
         #     the time_offset, value in [0, 1], higher means higher positivity
         #     confidence. For annotations created by the user the score is 1. When
         #     user approves an annotation, the original float score is kept (and not

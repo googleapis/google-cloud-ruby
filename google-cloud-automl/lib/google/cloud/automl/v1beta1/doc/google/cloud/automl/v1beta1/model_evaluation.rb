@@ -46,15 +46,13 @@ module Google
         #     Evaluation metrics for text extraction models.
         # @!attribute [rw] name
         #   @return [String]
-        #     Output only.
-        #     Resource name of the model evaluation.
+        #     Output only. Resource name of the model evaluation.
         #     Format:
         #
         #     `projects/{project_id}/locations/{location_id}/models/{model_id}/modelEvaluations/{model_evaluation_id}`
         # @!attribute [rw] annotation_spec_id
         #   @return [String]
-        #     Output only.
-        #     The ID of the annotation spec that the model evaluation applies to. The
+        #     Output only. The ID of the annotation spec that the model evaluation applies to. The
         #     The ID is empty for the overall model evaluation.
         #     For Tables annotation specs in the dataset do not exist and this ID is
         #     always not set, but for CLASSIFICATION
@@ -66,7 +64,7 @@ module Google
         # @!attribute [rw] display_name
         #   @return [String]
         #     Output only. The value of
-        #     {Google::Cloud::AutoML::V1beta1::AnnotationSpec#dispay_name display_name} at
+        #     {Google::Cloud::AutoML::V1beta1::AnnotationSpec#display_name display_name} at
         #     the moment when the model was trained. Because this field returns a value
         #     at model training time, for different models trained from the same dataset,
         #     the values may differ, since display names could had been changed between
@@ -79,12 +77,10 @@ module Google
         #     The display_name is empty for the overall model evaluation.
         # @!attribute [rw] create_time
         #   @return [Google::Protobuf::Timestamp]
-        #     Output only.
-        #     Timestamp when this model evaluation was created.
+        #     Output only. Timestamp when this model evaluation was created.
         # @!attribute [rw] evaluated_example_count
         #   @return [Integer]
-        #     Output only.
-        #     The number of examples used for model evaluation, i.e. for
+        #     Output only. The number of examples used for model evaluation, i.e. for
         #     which ground truth from time of model creation is compared against the
         #     predicted annotations created by the model.
         #     For overall ModelEvaluation (i.e. with annotation_spec_id not set) this is
