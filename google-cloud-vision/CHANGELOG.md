@@ -1,11 +1,26 @@
 # Release History
 
-## 0.35.0 (2019-08-08)
+## 0.35.0 (2019-08-12)
 
-
-### Features
-
-* **vision:** Add parent to BatchAnnotate and add PurgeProducts ([97a326d](https://www.github.com/googleapis/google-cloud-ruby/commit/97a326d))
+* Add parent to BatchAnnotate and add PurgeProducts
+  * ImageAnnotatorClient changes:
+    * Add parent argument to the following:
+      * ImageAnnotatorClient#batch_annotate_images
+      * ImageAnnotatorClient#batch_annotate_files
+      * ImageAnnotatorClient#async_batch_annotate_images
+      * ImageAnnotatorClient#async_batch_annotate_files
+    * Request/Response object changes:
+      * Add BatchAnnotateImagesRequest#parent
+      * Add BatchAnnotateFilesRequest#parent
+      * Add AsyncBatchAnnotateImagesRequest#parent
+      * Add AsyncBatchAnnotateFilesRequest#parent
+      * Add AnnotateFileResponse#error
+  * ProductSearchClient changes:
+    * Add ProductSearchClient#purge_products
+    * Add PurgeProductsRequest
+    * Add ProductSetPurgeConfig
+    * Add GroupedResult#object_annotations (ObjectAnnotation)
+  * Update documentation
 
 ### 0.34.0 / 2019-07-08
 
