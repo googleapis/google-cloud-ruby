@@ -356,7 +356,9 @@ module Google
         path = METADATA_ROOT_PATH
         if @disable_metadata_cache || !metadata_cache.include?(path)
           metadata_cache[path] = retry_or_fail_with false do
-            resp = connection.get path
+            resp = connection.get path do |req|
+              req.headers = { "Metadata-Flavor" => "Google" }
+            end
             resp.status == 200 && resp.headers["Metadata-Flavor"] == "Google"
           end
         end
