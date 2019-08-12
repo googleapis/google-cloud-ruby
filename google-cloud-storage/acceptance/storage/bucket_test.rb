@@ -82,7 +82,7 @@ describe Google::Cloud::Storage::Bucket, :storage do
     bucket.logging_bucket.must_be :nil?
     bucket.logging_prefix.must_be :nil?
     bucket.storage_class.must_equal "STANDARD"
-    bucket.versioning?.must_be :nil?
+    bucket.versioning?.wont_equal true
     bucket.website_main.must_be :nil?
     bucket.website_404.must_be :nil?
     bucket.requester_pays.must_be :nil?
