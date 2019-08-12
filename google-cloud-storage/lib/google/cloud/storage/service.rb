@@ -38,7 +38,8 @@ module Google
 
         ##
         # Creates a new Service instance.
-        def initialize project, credentials, retries: nil, timeout: nil
+        def initialize project, credentials,
+                       retries: nil, timeout: nil, host: nil
           @project = project
           @credentials = credentials
           @service = API::StorageService.new
@@ -55,6 +56,7 @@ module Google
             "gl-ruby/#{RUBY_VERSION} gccl/#{Google::Cloud::Storage::VERSION}"
           @service.request_options.header["Accept-Encoding"] = "gzip"
           @service.authorization = @credentials.client if @credentials
+          @service.root_url = host if host
         end
 
         def service
