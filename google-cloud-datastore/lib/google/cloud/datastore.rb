@@ -72,6 +72,8 @@ module Google
       # @param [Integer] timeout Default timeout to use in requests. Optional.
       # @param [Hash] client_config A hash of values to override the default
       #   behavior of the API client. See Google::Gax::CallSettings. Optional.
+      # @param [String] endpoint Override of the endpoint host name. Optional.
+      #   If the param is nil, uses the default endpoint.
       # @param [String] emulator_host Datastore emulator host. Optional.
       #   If the param is nil, uses the value of the `emulator_host` config.
       # @param [String] project Alias for the `project_id` argument. Deprecated.
@@ -98,12 +100,13 @@ module Google
       #   datastore.save task
       #
       def self.new project_id: nil, credentials: nil, scope: nil, timeout: nil,
-                   client_config: nil, emulator_host: nil, project: nil,
-                   keyfile: nil
+                   client_config: nil, endpoint: nil, emulator_host: nil,
+                   project: nil, keyfile: nil
         project_id    ||= (project || default_project_id)
         scope         ||= configure.scope
         timeout       ||= configure.timeout
         client_config ||= configure.client_config
+        endpoint      ||= configure.endpoint
         emulator_host ||= configure.emulator_host
 
         if emulator_host
@@ -133,7 +136,7 @@ module Google
         Datastore::Dataset.new(
           Datastore::Service.new(
             project_id, credentials,
-            timeout: timeout, client_config: client_config
+            host: endpoint, timeout: timeout, client_config: client_config
           )
         )
       end
@@ -157,6 +160,8 @@ module Google
       # * `timeout` - (Integer) Default timeout to use in requests.
       # * `client_config` - (Hash) A hash of values to override the default
       #   behavior of the API client.
+      # * `endpoint` - (String) Override of the endpoint host name, or `nil`
+      #   to use the default endpoint.
       # * `emulator_host` - (String) Host name of the emulator. Defaults to
       #   `ENV["DATASTORE_EMULATOR_HOST"]`
       #
