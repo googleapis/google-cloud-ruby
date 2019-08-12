@@ -167,6 +167,15 @@ module Google
           #
           #     {Google::Cloud::AutoML::V1beta1::TablesModelMetadata#prediction_type prediction_type}
           #     only list of {Annotation_spec_display_name-s} is populated.
+          # @!attribute [rw] display_name
+          #   @return [Array<String>]
+          #     Output only. Display name of the annotation specs used in the confusion
+          #     matrix, as they were at the moment of the evaluation. For Tables
+          #     CLASSIFICATION
+          #
+          #     {Google::Cloud::AutoML::V1beta1::TablesModelMetadata#prediction_type prediction_type-s},
+          #     distinct values of the target column at the moment of the model
+          #     evaluation are populated here.
           # @!attribute [rw] row
           #   @return [Array<Google::Cloud::AutoML::V1beta1::ClassificationEvaluationMetrics::ConfusionMatrix::Row>]
           #     Output only. Rows in the confusion matrix. The number of rows is equal to

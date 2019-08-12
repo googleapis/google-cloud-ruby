@@ -11,6 +11,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :name, :string, 1
     optional :time_column_spec_id, :string, 2
     optional :row_count, :int64, 3
+    optional :valid_row_count, :int64, 4
     optional :column_count, :int64, 7
     repeated :input_configs, :message, 5, "google.cloud.automl.v1beta1.InputConfig"
     optional :etag, :string, 6

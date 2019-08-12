@@ -73,12 +73,7 @@ module Google
         #     The dataset which replaces the resource on the server.
         # @!attribute [rw] update_mask
         #   @return [Google::Protobuf::FieldMask]
-        #     The update mask applies to the resource. For the `FieldMask` definition,
-        #     see
-        #
-        #     https:
-        #     //developers.google.com/protocol-buffers
-        #     // /docs/reference/google.protobuf#fieldmask
+        #     The update mask applies to the resource.
         class UpdateDatasetRequest; end
 
         # Request message for {Google::Cloud::AutoML::V1beta1::AutoML::DeleteDataset AutoML::DeleteDataset}.
@@ -160,12 +155,7 @@ module Google
         #     The table spec which replaces the resource on the server.
         # @!attribute [rw] update_mask
         #   @return [Google::Protobuf::FieldMask]
-        #     The update mask applies to the resource. For the `FieldMask` definition,
-        #     see
-        #
-        #     https:
-        #     //developers.google.com/protocol-buffers
-        #     // /docs/reference/google.protobuf#fieldmask
+        #     The update mask applies to the resource.
         class UpdateTableSpecRequest; end
 
         # Request message for {Google::Cloud::AutoML::V1beta1::AutoML::GetColumnSpec AutoML::GetColumnSpec}.
@@ -215,12 +205,7 @@ module Google
         #     The column spec which replaces the resource on the server.
         # @!attribute [rw] update_mask
         #   @return [Google::Protobuf::FieldMask]
-        #     The update mask applies to the resource. For the `FieldMask` definition,
-        #     see
-        #
-        #     https:
-        #     //developers.google.com/protocol-buffers
-        #     // /docs/reference/google.protobuf#fieldmask
+        #     The update mask applies to the resource.
         class UpdateColumnSpecRequest; end
 
         # Request message for {Google::Cloud::AutoML::V1beta1::AutoML::CreateModel AutoML::CreateModel}.

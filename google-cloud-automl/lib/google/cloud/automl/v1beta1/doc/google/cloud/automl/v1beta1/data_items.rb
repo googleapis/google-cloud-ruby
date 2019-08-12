@@ -39,9 +39,9 @@ module Google
         #     characters long.
         # @!attribute [rw] mime_type
         #   @return [String]
-        #     The format of the source text. Currently the only two allowed values are
-        #     "text/html" and "text/plain". If left blank the format is automatically
-        #     determined from the type of the uploaded content.
+        #     Optional. The format of {Google::Cloud::AutoML::V1beta1::TextSnippet#content content}. Currently the only two allowed
+        #     values are "text/html" and "text/plain". If left blank, the format is
+        #     automatically determined from the type of the uploaded {Google::Cloud::AutoML::V1beta1::TextSnippet#content content}.
         # @!attribute [rw] content_uri
         #   @return [String]
         #     Output only. HTTP URI where you can download the content.
@@ -56,9 +56,9 @@ module Google
         # A representation of a row in a relational table.
         # @!attribute [rw] column_spec_ids
         #   @return [Array<String>]
-        #     Input Only.
         #     The resource IDs of the column specs describing the columns of the row.
-        #     If set must contain, but possibly in a different order, all input feature
+        #     If set must contain, but possibly in a different order, all input
+        #     feature
         #
         #     {Google::Cloud::AutoML::V1beta1::TablesModelMetadata#input_feature_column_specs column_spec_ids}
         #     of the Model this row is being passed to.
@@ -66,9 +66,9 @@ module Google
         #     field is set.
         # @!attribute [rw] values
         #   @return [Array<Google::Protobuf::Value>]
-        #     Input Only.
-        #     The values of the row cells, given in the same order as the
-        #     column_spec_ids, or, if not set, then in the same order as input feature
+        #     Required. The values of the row cells, given in the same order as the
+        #     column_spec_ids, or, if not set, then in the same order as input
+        #     feature
         #
         #     {Google::Cloud::AutoML::V1beta1::TablesModelMetadata#input_feature_column_specs column_specs}
         #     of the Model this row is being passed to.

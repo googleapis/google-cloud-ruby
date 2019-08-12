@@ -30,10 +30,6 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :train_budget_milli_node_hours, :int64, 6
     optional :train_cost_milli_node_hours, :int64, 7
     optional :disable_early_stopping, :bool, 12
-    oneof :additional_optimization_objective_config do
-      optional :optimization_objective_recall_value, :float, 17
-      optional :optimization_objective_precision_value, :float, 18
-    end
   end
   add_message "google.cloud.automl.v1beta1.TablesAnnotation" do
     optional :score, :float, 1

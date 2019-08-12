@@ -607,12 +607,7 @@ module Google
           #   A hash of the same form as `Google::Cloud::AutoML::V1beta1::Dataset`
           #   can also be provided.
           # @param update_mask [Google::Protobuf::FieldMask | Hash]
-          #   The update mask applies to the resource. For the `FieldMask` definition,
-          #   see
-          #
-          #   https:
-          #   //developers.google.com/protocol-buffers
-          #   // /docs/reference/google.protobuf#fieldmask
+          #   The update mask applies to the resource.
           #   A hash of the same form as `Google::Protobuf::FieldMask`
           #   can also be provided.
           # @param options [Google::Gax::CallOptions]
@@ -1193,8 +1188,7 @@ module Google
           # {Google::Cloud::AutoML::V1beta1::ImageObjectDetectionModelDeploymentMetadata#node_number node_number})
           #  will reset the deployment state without pausing the model's availability.
           #
-          # Only applicable for Text Classification, Image Object Detection and Tables;
-          # all other domains manage deployment automatically.
+          # Only applicable for Text Classification, Image Object Detection and Tables; all other domains manage deployment automatically.
           #
           # Returns an empty response in the
           # {Google::Longrunning::Operation#response response} field when it completes.
@@ -1725,12 +1719,7 @@ module Google
           #   A hash of the same form as `Google::Cloud::AutoML::V1beta1::TableSpec`
           #   can also be provided.
           # @param update_mask [Google::Protobuf::FieldMask | Hash]
-          #   The update mask applies to the resource. For the `FieldMask` definition,
-          #   see
-          #
-          #   https:
-          #   //developers.google.com/protocol-buffers
-          #   // /docs/reference/google.protobuf#fieldmask
+          #   The update mask applies to the resource.
           #   A hash of the same form as `Google::Protobuf::FieldMask`
           #   can also be provided.
           # @param options [Google::Gax::CallOptions]
@@ -1870,12 +1859,7 @@ module Google
           #   A hash of the same form as `Google::Cloud::AutoML::V1beta1::ColumnSpec`
           #   can also be provided.
           # @param update_mask [Google::Protobuf::FieldMask | Hash]
-          #   The update mask applies to the resource. For the `FieldMask` definition,
-          #   see
-          #
-          #   https:
-          #   //developers.google.com/protocol-buffers
-          #   // /docs/reference/google.protobuf#fieldmask
+          #   The update mask applies to the resource.
           #   A hash of the same form as `Google::Protobuf::FieldMask`
           #   can also be provided.
           # @param options [Google::Gax::CallOptions]

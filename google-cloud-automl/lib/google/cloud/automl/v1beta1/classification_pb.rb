@@ -42,6 +42,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   end
   add_message "google.cloud.automl.v1beta1.ClassificationEvaluationMetrics.ConfusionMatrix" do
     repeated :annotation_spec_id, :string, 1
+    repeated :display_name, :string, 3
     repeated :row, :message, 2, "google.cloud.automl.v1beta1.ClassificationEvaluationMetrics.ConfusionMatrix.Row"
   end
   add_message "google.cloud.automl.v1beta1.ClassificationEvaluationMetrics.ConfusionMatrix.Row" do
