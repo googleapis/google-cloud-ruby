@@ -18,11 +18,12 @@ describe Google::Cloud do
   describe "#firestore" do
     it "calls out to Google::Cloud.firestore" do
       gcloud = Google::Cloud.new
-      stubbed_firestore = ->(project, keyfile, scope: nil, timeout: nil, client_config: nil) {
+      stubbed_firestore = ->(project, keyfile, scope: nil, timeout: nil, host: nil, client_config: nil) {
         project.must_be :nil?
         keyfile.must_be :nil?
         scope.must_be :nil?
         timeout.must_be :nil?
+        host.must_be :nil?
         client_config.must_be :nil?
         "firestore-project-object-empty"
       }
@@ -34,11 +35,12 @@ describe Google::Cloud do
 
     it "passes project and keyfile to Google::Cloud.firestore" do
       gcloud = Google::Cloud.new "project-id", "keyfile-path"
-      stubbed_firestore = ->(project, keyfile, scope: nil, timeout: nil, client_config: nil) {
+      stubbed_firestore = ->(project, keyfile, scope: nil, timeout: nil, host: nil, client_config: nil) {
         project.must_equal "project-id"
         keyfile.must_equal "keyfile-path"
         scope.must_be :nil?
         timeout.must_be :nil?
+        host.must_be :nil?
         client_config.must_be :nil?
         "firestore-project-object"
       }
@@ -50,11 +52,12 @@ describe Google::Cloud do
 
     it "passes project and keyfile and options to Google::Cloud.firestore" do
       gcloud = Google::Cloud.new "project-id", "keyfile-path"
-      stubbed_firestore = ->(project, keyfile, scope: nil, timeout: nil, client_config: nil) {
+      stubbed_firestore = ->(project, keyfile, scope: nil, timeout: nil, host: nil, client_config: nil) {
         project.must_equal "project-id"
         keyfile.must_equal "keyfile-path"
         scope.must_equal "http://example.com/scope"
         timeout.must_equal 60
+        host.must_be :nil?
         client_config.must_equal({ "gax" => "options" })
         "firestore-project-object-scoped"
       }
@@ -97,10 +100,11 @@ describe Google::Cloud do
         scope.must_be :nil?
         "firestore-credentials"
       }
-      stubbed_service = ->(project, credentials, timeout: nil, client_config: nil) {
+      stubbed_service = ->(project, credentials, timeout: nil, host: nil, client_config: nil) {
         project.must_equal "project-id"
         credentials.must_equal "firestore-credentials"
         timeout.must_be :nil?
+        host.must_be :nil?
         client_config.must_be :nil?
         OpenStruct.new project: project
       }
@@ -156,10 +160,11 @@ describe Google::Cloud do
         scope.must_be :nil?
         "firestore-credentials"
       }
-      stubbed_service = ->(project, credentials, timeout: nil, client_config: nil) {
+      stubbed_service = ->(project, credentials, timeout: nil, host: nil, client_config: nil) {
         project.must_equal "project-id"
         credentials.must_equal "firestore-credentials"
         timeout.must_be :nil?
+        host.must_be :nil?
         client_config.must_be :nil?
         OpenStruct.new project: project
       }
@@ -188,10 +193,11 @@ describe Google::Cloud do
         scope.must_be :nil?
         "firestore-credentials"
       }
-      stubbed_service = ->(project, credentials, timeout: nil, client_config: nil) {
+      stubbed_service = ->(project, credentials, timeout: nil, host: nil, client_config: nil) {
         project.must_equal "project-id"
         credentials.must_equal "firestore-credentials"
         timeout.must_be :nil?
+        host.must_be :nil?
         client_config.must_be :nil?
         OpenStruct.new project: project
       }
@@ -210,6 +216,29 @@ describe Google::Cloud do
               end
             end
           end
+        end
+      end
+    end
+
+    it "uses provided endpoint" do
+      endpoint = "firestore-endpoint2.example.com"
+      stubbed_service = ->(project, credentials, timeout: nil, host: nil, client_config: nil) {
+        project.must_equal "project-id"
+        credentials.must_equal default_credentials
+        timeout.must_be :nil?
+        host.must_equal endpoint
+        client_config.must_be :nil?
+        OpenStruct.new project: project
+      }
+
+      # Clear all environment variables
+      ENV.stub :[], nil do
+        Google::Cloud::Firestore::Service.stub :new, stubbed_service do
+          firestore = Google::Cloud::Firestore.new project: "project-id", credentials: default_credentials, endpoint: endpoint
+          firestore.must_be_kind_of Google::Cloud::Firestore::Client
+          firestore.project_id.must_equal "project-id"
+          firestore.database_id.must_equal "(default)"
+          firestore.service.must_be_kind_of OpenStruct
         end
       end
     end
@@ -255,11 +284,12 @@ describe Google::Cloud do
         scope.must_be :nil?
         OpenStruct.new project_id: "project-id"
       }
-      stubbed_service = ->(project, credentials, timeout: nil, client_config: nil) {
+      stubbed_service = ->(project, credentials, timeout: nil, host: nil, client_config: nil) {
         project.must_equal "project-id"
         credentials.must_be_kind_of OpenStruct
         credentials.project_id.must_equal "project-id"
         timeout.must_be :nil?
+        host.must_be :nil?
         client_config.must_be :nil?
         OpenStruct.new project: project
       }
@@ -304,10 +334,11 @@ describe Google::Cloud do
         scope.must_be :nil?
         "firestore-credentials"
       }
-      stubbed_service = ->(project, credentials, timeout: nil, client_config: nil) {
+      stubbed_service = ->(project, credentials, timeout: nil, host: nil, client_config: nil) {
         project.must_equal "project-id"
         credentials.must_equal "firestore-credentials"
         timeout.must_be :nil?
+        host.must_be :nil?
         client_config.must_be :nil?
         OpenStruct.new project: project
       }
@@ -341,10 +372,11 @@ describe Google::Cloud do
         scope.must_be :nil?
         "firestore-credentials"
       }
-      stubbed_service = ->(project, credentials, timeout: nil, client_config: nil) {
+      stubbed_service = ->(project, credentials, timeout: nil, host: nil, client_config: nil) {
         project.must_equal "project-id"
         credentials.must_equal "firestore-credentials"
         timeout.must_be :nil?
+        host.must_be :nil?
         client_config.must_be :nil?
         OpenStruct.new project: project
       }
@@ -378,10 +410,11 @@ describe Google::Cloud do
         scope.must_be :nil?
         "firestore-credentials"
       }
-      stubbed_service = ->(project, credentials, timeout: nil, client_config: nil) {
+      stubbed_service = ->(project, credentials, timeout: nil, host: nil, client_config: nil) {
         project.must_equal "project-id"
         credentials.must_equal "firestore-credentials"
         timeout.must_equal 42
+        host.must_be :nil?
         client_config.must_equal firestore_client_config
         OpenStruct.new project: project
       }
@@ -417,10 +450,11 @@ describe Google::Cloud do
         scope.must_be :nil?
         "firestore-credentials"
       }
-      stubbed_service = ->(project, credentials, timeout: nil, client_config: nil) {
+      stubbed_service = ->(project, credentials, timeout: nil, host: nil, client_config: nil) {
         project.must_equal "project-id"
         credentials.must_equal "firestore-credentials"
         timeout.must_equal 42
+        host.must_be :nil?
         client_config.must_equal firestore_client_config
         OpenStruct.new project: project
       }
@@ -433,6 +467,45 @@ describe Google::Cloud do
           config.credentials = "path/to/keyfile.json"
           config.timeout = 42
           config.client_config = firestore_client_config
+        end
+
+        File.stub :file?, true, ["path/to/keyfile.json"] do
+          File.stub :read, found_credentials, ["path/to/keyfile.json"] do
+            Google::Cloud::Firestore::Credentials.stub :new, stubbed_credentials do
+              Google::Cloud::Firestore::Service.stub :new, stubbed_service do
+                firestore = Google::Cloud::Firestore.new
+                firestore.must_be_kind_of Google::Cloud::Firestore::Client
+                firestore.project_id.must_equal "project-id"
+                firestore.service.must_be_kind_of OpenStruct
+              end
+            end
+          end
+        end
+      end
+    end
+
+    it "uses firestore config for endpoint" do
+      stubbed_credentials = ->(keyfile, scope: nil) {
+        keyfile.must_equal "path/to/keyfile.json"
+        scope.must_be :nil?
+        "firestore-credentials"
+      }
+      stubbed_service = ->(project, credentials, timeout: nil, host: nil, client_config: nil) {
+        project.must_equal "project-id"
+        credentials.must_equal "firestore-credentials"
+        timeout.must_be :nil?
+        host.must_equal "firestore-endpoint2.example.com"
+        client_config.must_be :nil?
+        OpenStruct.new project: project
+      }
+
+      # Clear all environment variables
+      ENV.stub :[], nil do
+        # Set new configuration
+        Google::Cloud::Firestore.configure do |config|
+          config.project_id = "project-id"
+          config.credentials = "path/to/keyfile.json"
+          config.endpoint = "firestore-endpoint2.example.com"
         end
 
         File.stub :file?, true, ["path/to/keyfile.json"] do
