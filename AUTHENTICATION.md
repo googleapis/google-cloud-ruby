@@ -29,7 +29,6 @@ listed below for each service.
 ## Creating a Service Account
 
 Google Cloud requires a **Project ID** and **Service Account Credentials** to
-connect to the APIs. You will use the **Project ID** and **JSON key file** to
 connect to most services.
 
 If you are not running this client within [Google Cloud Platform
