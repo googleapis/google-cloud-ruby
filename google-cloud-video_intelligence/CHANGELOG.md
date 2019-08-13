@@ -1,5 +1,16 @@
 # Release History
 
+### 1.4.0 / 2019-08-13
+
+* Add VideoAnnotationResults fields
+  * Add VideoAnnotationResults#segment_presence_label_annotations
+  * Add VideoAnnotationResults#shot_presence_label_annotations
+* Add segment and feature
+  * Add VideoAnnotationResults#segment
+  * Add VideoAnnotationProgress#feature
+  * Add VideoAnnotationProgress#segment
+* Update documentation
+
 ### 1.3.0 / 2019-07-08
 
 * Use canonical module capitalization for VideoIntelligence type namespace.
