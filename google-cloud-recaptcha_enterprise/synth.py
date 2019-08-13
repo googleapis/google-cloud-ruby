@@ -251,7 +251,7 @@ s.replace(
 )
 
 s.replace(
-    'READEME.md',
+    'README.md',
     'https://cloud.google.com/recaptchaenterprise',
     'https://cloud.google.com/recaptcha-enterprise'
 )
