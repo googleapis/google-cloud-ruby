@@ -3,7 +3,6 @@
 Idiomatic Ruby client for [Google Cloud Platform](https://cloud.google.com/)
 services.
 
-[![CircleCI Build Status](https://circleci.com/gh/googleapis/google-cloud-ruby.svg?&style=shield)](https://circleci.com/gh/googleapis/google-cloud-ruby)
 [![Coverage Status](https://codecov.io/gh/googleapis/google-cloud-ruby/branch/master/graph/badge.svg)](https://codecov.io/gh/googleapis/google-cloud-ruby)
 [![Gem Version](https://badge.fury.io/rb/google-cloud.svg)](http://badge.fury.io/rb/google-cloud)
 
@@ -864,7 +863,7 @@ $ gem install google-cloud-scheduler
   to see the full list of Cloud APIs that we cover.
 
 [Client Library Documentation]: https://googleapis.dev/ruby/google-cloud-scheduler/latest
-[Product Documentation]: https://cloud.google.com/cloudscheduler
+[Product Documentation]: https://cloud.google.com/scheduler
 
 ## Enabling Logging
 

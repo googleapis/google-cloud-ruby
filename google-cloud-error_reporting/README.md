@@ -35,7 +35,7 @@ $ bundle install
 ```
 
 Alternatively, check out the
-[`stackdriver`](https://googleapis.dev/ruby/stackdriver/latest/file.README.html
+[`stackdriver`](https://googleapis.dev/ruby/stackdriver)
 gem that includes the `google-cloud-error_reporting` gem.
 
 ## Enable Stackdriver Error Reporting API
@@ -92,7 +92,7 @@ end
 
 You can customize the behavior of the Stackdriver Error Reporting library for
 Ruby. See the [configuration
-guide](https://googleapis.dev/ruby/stackdriver/INSTRUMENTATION_CONFIGURATION/latest)
+guide](https://googleapis.dev/ruby/stackdriver/latest/file.INSTRUMENTATION_CONFIGURATION.html)
 for a list of possible configuration options.
 
 ## Running on Google Cloud Platform

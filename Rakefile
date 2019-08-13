@@ -599,7 +599,7 @@ namespace :kokoro do
       broken_markdown_links[file] += checked_links unless checked_links.empty?
     end
     gems.each do |gem|
-      out, err, st = Open3.capture3 "npx linkinator #{devsite_base}#{gem}/latest --recurse --skip https:.*github.*"
+      out, err, st = Open3.capture3 "npx linkinator #{devsite_base}#{gem}/latest/ --recurse --skip https:.*github.*"
       puts out
       exit_status = [exit_status, st.to_i].max
       puts err unless st.to_i.zero?

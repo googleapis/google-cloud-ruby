@@ -256,5 +256,11 @@ s.replace(
     'dev/ruby/google-cloud-phishing_protection/latest'
 )
 
+s.replace(
+    'README.md',
+    'https://cloud.google.com/phishingprotection',
+    'https://cloud.google.com/phishing-protection'
+)
+
 # Generate the helper methods
 call('bundle update && bundle exec rake generate_partials', shell=True)
