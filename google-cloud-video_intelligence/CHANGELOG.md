@@ -1,6 +1,6 @@
 # Release History
 
-### 1.4.0 / 2019-08-12
+### 1.4.0 / 2019-08-13
 
 * Add VideoAnnotationResults fields
   * Add VideoAnnotationResults#segment_presence_label_annotations
