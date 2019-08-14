@@ -28,7 +28,7 @@ $ gem install google-cloud-recaptcha_enterprise
   to see the full list of Cloud APIs that we cover.
 
 [Client Library Documentation]: https://googleapis.dev/ruby/google-cloud-recaptcha_enterprise/latest
-[Product Documentation]: https://cloud.google.com/recaptchaenterprise
+[Product Documentation]: https://cloud.google.com/recaptcha-enterprise
 
 ## Enabling Logging
 
