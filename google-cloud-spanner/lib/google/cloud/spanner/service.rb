@@ -20,6 +20,7 @@ require "google/cloud/spanner/v1"
 require "google/cloud/spanner/admin/instance/v1"
 require "google/cloud/spanner/admin/database/v1"
 require "google/cloud/spanner/convert"
+require "uri"
 
 module Google
   module Cloud
@@ -418,14 +419,12 @@ module Google
 
         def service_address
           return nil if host.nil?
-          host.split(":").first
+          URI.parse("//#{host}").host
         end
 
         def service_port
           return nil if host.nil?
-          port = host.split(":")[1]
-          return nil if port.nil?
-          port.to_i
+          URI.parse("//#{host}").port
         end
 
         def default_options_from_session session_name
