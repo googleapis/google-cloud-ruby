@@ -132,4 +132,5 @@ Google::Cloud.configure.add_config! :spanner do |config|
   config.add_field! :scope, nil, match: [String, Array]
   config.add_field! :timeout, nil, match: Integer
   config.add_field! :client_config, nil, match: Hash
+  config.add_field! :endpoint, nil, match: String
 end
