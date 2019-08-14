@@ -28,7 +28,7 @@ $ gem install google-cloud-phishing_protection
   to see the full list of Cloud APIs that we cover.
 
 [Client Library Documentation]: https://googleapis.dev/ruby/google-cloud-phishing_protection/latest
-[Product Documentation]: https://cloud.google.com/phishingprotection
+[Product Documentation]: https://cloud.google.com/phishing-protection
 
 ## Enabling Logging
 
