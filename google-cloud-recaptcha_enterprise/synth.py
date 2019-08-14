@@ -250,5 +250,11 @@ s.replace(
     'dev/ruby/google-cloud-recaptcha_enterprise/latest'
 )
 
+s.replace(
+    'README.md',
+    'https://cloud.google.com/recaptchaenterprise',
+    'https://cloud.google.com/recaptcha-enterprise'
+)
+
 # Generate the helper methods
 call('bundle update && bundle exec rake generate_partials', shell=True)

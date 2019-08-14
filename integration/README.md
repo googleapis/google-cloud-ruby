@@ -44,7 +44,7 @@ $ rake integration:gae
 ```
 This rake task automates the Google App Engine deployment by deploying the google-cloud-ruby libraries with sample applications using the `gcloud app deploy` shell command. Each of the sample applications contains an app.yaml.example file that defines specific deployment procedure for that application. For example, the [Rails 5 app.yaml.example](rails5_app/app.yaml.example) file defines a custom entrypoint that allows bundler to install the sample application's dependencies and launch the application.
 
-After a successful deployment, each google-cloud-ruby libraries can then run its integration tests against the deployed sample application. For example, the [google-cloud-logging tests](google-cloud-logging/integration/) send HTTP requests to redefined routes on the sample application to trigger logs being generated. Then it's able to verify the result logs through Cloud SDK. 
+After a successful deployment, each google-cloud-ruby libraries can then run its integration tests against the deployed sample application. For example, the [google-cloud-logging tests](../google-cloud-logging/integration/) send HTTP requests to redefined routes on the sample application to trigger logs being generated. Then it's able to verify the result logs through Cloud SDK. 
 
 ### Integration tests on Google Container Engine
 To run the integration tests on Google Container Engine:

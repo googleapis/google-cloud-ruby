@@ -11,10 +11,9 @@
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-
 - [Before you begin](#before-you-begin)
 - [Samples](#samples)
-  - [Hello World](#hello-world)
+  - [Quickstart](#quickstart)
   - [Instances](#instances)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
@@ -57,11 +56,6 @@ Expected output similar to:
       ]}
    @key="row-1">
 ```
-
-### Hello World
-
-View the [Hello World][hello_world_directory] sample to see a basic usage of
-the Bigtable client library.
 
 ### Instances
 
@@ -123,10 +117,9 @@ Examples:
 
 For more information, see https://cloud.google.com/bigtable/docs
 ```
+
 [instances_0_docs]: https://cloud.google.com/bigtable/docs/
 [instances_0_code]: instances.rb
-
-[hello_world_directory]: hello-world
 
 [shell_img]: //gstatic.com/cloudssh/images/open-btn.png
 [shell_link]: https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-ruby&page=editor&open_in_editor=google-cloud-bigtable/samples/README.md

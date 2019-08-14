@@ -202,5 +202,11 @@ s.replace(
     'dev/ruby/google-cloud-scheduler/latest'
 )
 
+s.replace(
+    ['lib/**/*.rb', 'README.md'],
+    'https://cloud.google.com/cloudscheduler',
+    'https://cloud.google.com/scheduler'
+)
+
 # Generate the helper methods
 call('bundle update && bundle exec rake generate_partials', shell=True)

@@ -231,5 +231,11 @@ s.replace(
     'dev/ruby/google-cloud-asset/latest'
 )
 
+s.replace(
+    ['lib/**/*.rb', 'README.md'],
+    'https://cloud.google.com/asset',
+    'https://cloud.google.com/resource-manager'
+)
+
 # Generate the helper methods
 call('bundle update && bundle exec rake generate', shell=True)
