@@ -59,6 +59,8 @@ module Google
       # @param [Integer] timeout Default timeout to use in requests. Optional.
       # @param [Hash] client_config A hash of values to override the default
       #   behavior of the API client. Optional.
+      # @param [String] endpoint Override of the endpoint host name. Optional.
+      #   If the param is nil, uses the default endpoint.
       # @param [String] project Alias for the `project_id` argument. Deprecated.
       # @param [String] keyfile Alias for the `credentials` argument.
       #   Deprecated.
@@ -71,11 +73,12 @@ module Google
       #   spanner = Google::Cloud::Spanner.new
       #
       def self.new project_id: nil, credentials: nil, scope: nil, timeout: nil,
-                   client_config: nil, project: nil, keyfile: nil
+                   client_config: nil, endpoint: nil, project: nil, keyfile: nil
         project_id    ||= (project || default_project_id)
         scope         ||= configure.scope
         timeout       ||= configure.timeout
         client_config ||= configure.client_config
+        endpoint      ||= configure.endpoint
         credentials   ||= (keyfile || default_credentials(scope: scope))
 
         unless credentials.is_a? Google::Auth::Credentials
@@ -90,8 +93,8 @@ module Google
 
         Spanner::Project.new(
           Spanner::Service.new(
-            project_id, credentials, timeout: timeout,
-                                     client_config: client_config
+            project_id, credentials,
+            host: endpoint, timeout: timeout, client_config: client_config
           )
         )
       end
@@ -112,6 +115,8 @@ module Google
       # * `timeout` - (Integer) Default timeout to use in requests.
       # * `client_config` - (Hash) A hash of values to override the default
       #   behavior of the API client.
+      # * `endpoint` - (String) Override of the endpoint host name, or `nil`
+      #   to use the default endpoint.
       #
       # @return [Google::Cloud::Config] The configuration object the
       #   Google::Cloud::Spanner library uses.

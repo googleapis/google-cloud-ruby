@@ -20,6 +20,7 @@ require "google/cloud/spanner/v1"
 require "google/cloud/spanner/admin/instance/v1"
 require "google/cloud/spanner/admin/database/v1"
 require "google/cloud/spanner/convert"
+require "uri"
 
 module Google
   module Cloud
@@ -28,13 +29,15 @@ module Google
       # @private Represents the gRPC Spanner service, including all the API
       # methods.
       class Service
-        attr_accessor :project, :credentials, :timeout, :client_config
+        attr_accessor :project, :credentials, :timeout, :client_config, :host
 
         ##
         # Creates a new Service instance.
-        def initialize project, credentials, timeout: nil, client_config: nil
+        def initialize project, credentials, host: nil, timeout: nil,
+                       client_config: nil
           @project = project
           @credentials = credentials
+          @host = host || V1::SpannerClient::SERVICE_ADDRESS
           @timeout = timeout
           @client_config = client_config || {}
         end
@@ -46,6 +49,8 @@ module Google
               credentials: credentials,
               timeout: timeout,
               client_config: client_config,
+              service_address: service_address,
+              service_port: service_port,
               lib_name: "gccl",
               lib_version: Google::Cloud::Spanner::VERSION
             )
@@ -59,6 +64,8 @@ module Google
               credentials: credentials,
               timeout: timeout,
               client_config: client_config,
+              service_address: service_address,
+              service_port: service_port,
               lib_name: "gccl",
               lib_version: Google::Cloud::Spanner::VERSION
             )
@@ -72,6 +79,8 @@ module Google
               credentials: credentials,
               timeout: timeout,
               client_config: client_config,
+              service_address: service_address,
+              service_port: service_port,
               lib_name: "gccl",
               lib_version: Google::Cloud::Spanner::VERSION
             )
@@ -407,6 +416,16 @@ module Google
         end
 
         protected
+
+        def service_address
+          return nil if host.nil?
+          URI.parse("//#{host}").host
+        end
+
+        def service_port
+          return nil if host.nil?
+          URI.parse("//#{host}").port
+        end
 
         def default_options_from_session session_name
           default_prefix = session_name.split("/sessions/").first
