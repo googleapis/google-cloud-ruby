@@ -28,7 +28,7 @@ $ gem install google-cloud-scheduler
   to see the full list of Cloud APIs that we cover.
 
 [Client Library Documentation]: https://googleapis.dev/ruby/google-cloud-scheduler/latest
-[Product Documentation]: https://cloud.google.com/cloudscheduler
+[Product Documentation]: https://cloud.google.com/scheduler
 
 ## Enabling Logging
 

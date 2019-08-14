@@ -47,7 +47,7 @@ module Google
     # - View this [repository's main README](https://github.com/googleapis/google-cloud-ruby/blob/master/README.md)
     #   to see the full list of Cloud APIs that we cover.
     #
-    # [Product Documentation]: https://cloud.google.com/cloudscheduler
+    # [Product Documentation]: https://cloud.google.com/scheduler
     #
     # ## Enabling Logging
     #
