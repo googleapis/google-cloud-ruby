@@ -1,9 +1,5 @@
 require "bundler/setup"
-require "open3"
-require "json"
-require "erb"
 require "fileutils"
-require "timeout"
 
 KOKORO_RUBY_VERSIONS = ["2.3.8", "2.4.5", "2.5.5", "2.6.3"].freeze
 
@@ -206,7 +202,7 @@ task :rubocop, :bundleupdate do |t, args|
   end
 end
 
-require_relative "rakelib/devsite_builder.rb"
+require_relative "rakelib/devsite/devsite_builder.rb"
 
 namespace :docs do
   desc "Builds documentation for all gems on current branch (assumes master)"
@@ -544,151 +540,52 @@ task :compile do
 end
 
 namespace :kokoro do
-  exit_status = 0
+  require_relative "rakelib/kokoro/kokoro.rb"
+
+  @kokoro = nil
 
   desc "Generate configs for kokoro"
   task :build, :publish do |t, args|
-    should_publish = ["p", "publish"].include?(args[:publish])
-    generate_kokoro_configs
-    generate_dockerfiles should_publish
-    update_supported_ruby_versions
+    kokoro.build
+    kokoro.publish if ["p", "publish"].include?(args[:publish])
   end
 
   task :presubmit do
-    run_ci do
-      exit_status = run_command_with_timeout "bundle exec rake ci", 1800
-    end
-    exit [exit_status, verify_in_gemfile(ENV["PACKAGE"])].max
+    kokoro.presubmit
+    exit kokoro.exit_status
   end
 
   task :continuous do
-    updated = updated_gems.include? ENV["PACKAGE"]
-    updated_gems.each { |gem| header_2 "#{gem} has been updated" }
-    run_ci do
-      if updated
-        header "Gem Updated - Running Acceptance"
-      else
-        header "Gem Unchanged - Skipping Acceptance"
-      end
-      command = "bundle exec rake ci"
-      command += ":acceptance" if updated
-      exit_status = run_command_with_timeout command, 3600
-    end
-    exit [exit_status, verify_in_gemfile(ENV["PACKAGE"])].max
+    kokoro.continuous
+    exit kokoro.exit_status
   end
 
   desc "Runs post-build logic on kokoro."
   task :post do
-    require "open3"
-
-    header "Using Ruby - #{RUBY_VERSION}"
-    header_2 ENV["JOB_TYPE"]
-    git_commit = ENV["KOKORO_GITHUB_COMMIT"] || "master"
-    github_base = "https://github.com/googleapis/google-cloud-ruby/tree/#{git_commit}/"
-    devsite_base = "https://googleapis.dev/ruby/"
-    broken_markdown_links = Hash.new { |h, k| h[k] = [] }
-    broken_devsite_links = Hash.new { |h, k| h[k] = [] }
-    markdown_files = Dir.glob "**/*.md"
-    markdown_files.each do |file|
-      out, err, st = Open3.capture3 "npx linkinator #{github_base}#{file} --skip '^(?!(\\Wruby.*google|.*google.*\\Wruby|.*cloud\\.google\\.com))'"
-      puts out
-      exit_status = [exit_status, st.to_i].max
-      puts err unless st.to_i.zero? 
-      checked_links = out.split "\n"
-      checked_links.select! { |link| link =~ /\[\d+\]/ && !link.include?("[200]") }
-      broken_markdown_links[file] += checked_links unless checked_links.empty?
-    end
-    gems.each do |gem|
-      out, err, st = Open3.capture3 "npx linkinator #{devsite_base}#{gem}/latest/ --recurse --skip https:.*github.*"
-      puts out
-      exit_status = [exit_status, st.to_i].max
-      puts err unless st.to_i.zero?
-      checked_links = out.split "\n"
-      checked_links.select! { |link| link =~ /\[\d+\]/ && !link.include?("[200]") }
-      broken_devsite_links[gem] += checked_links unless checked_links.empty?
-    end
-    exit_status = 1 unless (broken_devsite_links.empty? && broken_markdown_links.emtpy?)
-    broken_markdown_links.each do |file, links|
-      puts "#{file} contains the following broken links:"
-      links.each { |link| puts "  #{link}" }
-      puts ""
-    end
-    broken_devsite_links.each do |url, links|
-      puts "#{url} contains the following broken links:"
-      links.each { |link| puts "  #{link}" }
-      puts ""
-    end
-
-    exit exit_status
+    kokoro.post
+    exit kokoro.exit_status
   end
 
   task :nightly do
-    run_ci do
-      exit_status = run_command_with_timeout "bundle exec rake ci:acceptance", 3600
-    end
-    exit [exit_status, verify_in_gemfile(ENV["PACKAGE"])].max
+    kokoro.nightly
+    exit kokoro.exit_status
   end
 
   task :release do
-    version = "0.1.0"
-    run_ci do
-      version = `bundle exec gem list`
-                .split("\n").select { |line| line.include? ENV["PACKAGE"] }
-                .first.split("(").last.split(")").first
-    end
-    load_env_vars
-    if ENV["RUBYGEMS_API_TOKEN"].nil? || ENV["RUBYGEMS_API_TOKEN"].empty?
-      raise "RUBYGEMS_API_TOKEN must be set"
-    end
-    tag = "#{ENV['PACKAGE']}/v#{version}"
-    Rake::Task["release"].invoke tag
+    kokoro.release
+    Rake::Task["release"].invoke kokoro.tag
   end
 
   task :republish do
-    load_env_vars
+    kokoro.load_env_vars
     Rake::Task["docs:republish_all"].invoke
   end
 
-  def load_env_vars
-    service_account = "#{ENV['KOKORO_GFILE_DIR']}/service-account.json"
-    raise "#{service_account} is not a file" unless File.file? service_account
-    ENV["GOOGLE_APPLICATION_CREDENTIALS"] = service_account
-    filename = "#{ENV['KOKORO_GFILE_DIR']}/env_vars.json"
-    raise "#{filename} is not a file" unless File.file? filename
-    env_vars = JSON.parse File.read(filename)
-    env_vars.each { |k, v| ENV[k] = v }
-  end
-
-  def run_ci
-    header "Using Ruby - #{RUBY_VERSION}"
-    header_2 ENV["JOB_TYPE"]
-    Dir.chdir ENV["PACKAGE"] do
-      Bundler.with_clean_env do
-        sh "bundle update"
-        load_env_vars
-        windows_acceptance_fix
-        yield
-      end
-    end
-  end
-
-  def verify_in_gemfile gem
-    if Bundler.environment.gems.map(&:name).include? gem
-      0
-    else
-      header_2 "#{gem} does not appear in the top-level Gemfile. Please add it."
-      1
-    end
-  end
-
-  def windows_acceptance_fix
-    if ENV["OS"] == "windows"
-      FileUtils.mkdir_p "acceptance"
-      if File.file? "acceptance/data"
-        FileUtils.rm_f "acceptance/data"
-        sh "call mklink /j acceptance\\data ..\\acceptance\\data"
-      end
-    end
+  def kokoro
+    @kokoro ||= Kokoro.new KOKORO_RUBY_VERSIONS, 
+                           gems,
+                           updated_gems,
+                           package: ENV.fetch("PACKAGE", nil)
   end
 end
 
@@ -704,91 +601,18 @@ task :synthtool do
   end
 end
 
-def run_command_with_timeout command, timeout
-  job = Process.spawn command
-  begin
-    Timeout.timeout timeout do
-      Process.wait job
-    end
-    return $?.exitstatus
-  rescue Timeout::Error
-    header_2 "TIMEOUT - #{timeout / 60} minute limit exceeded."
-    Process.kill "TERM", job
-  end
-  1
-end
-
-def generate_kokoro_configs
-  gems.each do |gem|
-    name = gem.split("google-cloud-").last
-    [:linux, :windows, :osx].each do |os_version|
-      [:presubmit, :continuous, :nightly].each do |build_type|
-        # Generate build
-        file_path = "./.kokoro/#{build_type}/#{os_version}/#{name}.cfg"
-        File.open file_path, "w" do |f|
-          config = ERB.new File.read("./.kokoro/templates/#{os_version}.cfg.erb")
-          f.write config.result(binding)
-        end
-      end
-    end
-    file_path = "./.kokoro/release/#{name}.cfg"
-    File.open file_path, "w" do |f|
-      config = ERB.new File.read("./.kokoro/templates/release.cfg.erb")
-      f.write config.result(binding)
-    end
-  end
-
-  # generate post-build config
-  gem = "post"
-  os_version = :linux
-  File.open "./.kokoro/continuous/linux/#{gem}.cfg", "w" do |f|
-    base = ERB.new File.read("./.kokoro/templates/linux.cfg.erb")
-    base = base.result binding
-    config = ERB.new File.read("./.kokoro/templates/post.cfg.erb")
-    f.write config.result(binding)
-  end
-
-  # generate republish config
-  gem = "republish"
-  os_version = :linux
-  File.open "./.kokoro/release/#{gem}.cfg", "w" do |f|
-    config = ERB.new File.read("./.kokoro/templates/release.cfg.erb")
-    f.write config.result(binding)
-  end
-end
-
-def generate_dockerfiles publish = false
-  ruby_versions = KOKORO_RUBY_VERSIONS
-  ["autosynth", "multi", "release"].each do |docker_image|
-    File.open "./.kokoro/docker/#{docker_image}/Dockerfile", "w" do |f|
-      docker_file = ERB.new File.read("./.kokoro/templates/#{docker_image}.Dockerfile.erb")
-      f.write docker_file.result(binding)
-    end
-    next unless publish
-    Dir.chdir "./.kokoro/docker/#{docker_image}" do
-      image_tag = "gcr.io/cloud-devrel-kokoro-resources/yoshi-ruby/#{docker_image}"
-      `docker build -t #{image_tag} .`
-      `docker push #{image_tag}`
-    end
-  end
-  File.open "./.kokoro/osx.sh", "w" do |f|
-    docker_file = ERB.new File.read("./.kokoro/templates/osx.sh.erb")
-    f.write docker_file.result(binding)
-  end
-end
-
 def update_supported_ruby_versions
   readme_text = ""
-  File.open "./README.md", "r+" do |f|
+  File.open "./README.md", "r+" do |f| 
     readme_text = f.read
   end
+
   earliest_ruby = KOKORO_RUBY_VERSIONS.first.split(".")[0...-1].join(".")
   ruby_version_text = "These libraries are currently supported on Ruby "
-  new_content = readme_text.gsub(
-    /#{ruby_version_text}(.*)\+/,
-    "#{ruby_version_text}#{earliest_ruby}+"
-  )
-  File.open "./README.md", "w" do |f|
+  new_content = readme_text.gsub /#{ruby_version_text}(.*)\+/,
+                                 "#{ruby_version_text}#{earliest_ruby}+"
+
+  File.open "./README.md", "w" do |f| 
     f.write new_content
   end
 end
