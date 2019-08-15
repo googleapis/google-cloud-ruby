@@ -28,7 +28,7 @@ $ gem install google-cloud-asset
   to see the full list of Cloud APIs that we cover.
 
 [Client Library Documentation]: https://googleapis.dev/ruby/google-cloud-asset/latest
-[Product Documentation]: https://cloud.google.com/asset
+[Product Documentation]: https://cloud.google.com/resource-manager
 
 ## Enabling Logging
 
