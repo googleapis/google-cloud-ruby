@@ -50,11 +50,9 @@ class KokoroBuilder < Command
                     "./.kokoro/release/#{name}.cfg",
                     gem: gem
     end
-    gem = "post"
-    base = ERB.new File.read("./.kokoro/templates/linux.cfg.erb")
-    from_template "./.kokoro/templates/post.cfg.erb",
+    from_template "./.kokoro/templates/linux.cfg.erb",
                   "./.kokoro/continuous/linux/post.cfg",
-                  base: base.result(binding)
+                  gem: "post"
     from_template "./.kokoro/templates/release.cfg.erb",
                   "./.kokoro/release/republish.cfg",
                   gem: "republish"
