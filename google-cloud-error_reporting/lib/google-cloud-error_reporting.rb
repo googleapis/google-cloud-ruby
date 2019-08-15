@@ -158,6 +158,7 @@ Google::Cloud.configure.add_config! :error_reporting do |config|
   config.add_field! :scope, nil, match: [String, Array]
   config.add_field! :timeout, nil, match: Integer
   config.add_field! :client_config, nil, match: Hash
+  config.add_field! :endpoint, nil, match: String
   config.add_field! :service_name, default_service,
                     match: String, allow_nil: true
   config.add_field! :service_version, default_version,

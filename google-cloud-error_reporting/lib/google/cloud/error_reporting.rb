@@ -62,6 +62,8 @@ module Google
       # @param [Integer] timeout Default timeout to use in requests. Optional.
       # @param [Hash] client_config A hash of values to override the default
       #   behavior of the API client. Optional.
+      # @param [String] endpoint Override of the endpoint host name. Optional.
+      #   If the param is nil, uses the default endpoint.
       # @param [String] project Alias for the `project_id` argument. Deprecated.
       # @param [String] keyfile Alias for the `credentials` argument.
       #   Deprecated.
@@ -75,29 +77,22 @@ module Google
       #   # ...
       #
       def self.new project_id: nil, credentials: nil, scope: nil, timeout: nil,
-                   client_config: nil, project: nil, keyfile: nil
+                   client_config: nil, endpoint: nil, project: nil, keyfile: nil
         project_id    ||= project
         project_id    ||= ErrorReporting::Project.default_project_id
         scope         ||= configure.scope
         timeout       ||= configure.timeout
         client_config ||= configure.client_config
+        endpoint      ||= configure.endpoint
         credentials   ||= (keyfile || default_credentials(scope: scope))
 
-        unless credentials.is_a? Google::Auth::Credentials
-          credentials = ErrorReporting::Credentials.new credentials,
-                                                        scope: scope
-        end
-
-        if credentials.respond_to? :project_id
-          project_id ||= credentials.project_id
-        end
-        project_id = project_id.to_s
-        raise ArgumentError, "project_id is missing" if project_id.empty?
+        credentials = resolve_credentials credentials, scope
+        project_id = resolve_project_id project_id, credentials
 
         ErrorReporting::Project.new(
           ErrorReporting::Service.new(
-            project_id, credentials, timeout: timeout,
-                                     client_config: client_config
+            project_id, credentials,
+            host: endpoint, timeout: timeout, client_config: client_config
           )
         )
       end
@@ -123,6 +118,8 @@ module Google
       # * `timeout` - (Integer) Default timeout to use in requests.
       # * `client_config` - (Hash) A hash of values to override the default
       #   behavior of the API client.
+      # * `endpoint` - (String) Override of the endpoint host name, or `nil`
+      #   to use the default endpoint.
       # * `service_name` - (String) Name for the application.
       # * `service_version` - (String) Version identifier for the application.
       # * `ignore_classes` - (Array<Exception>) Array of exception types that
@@ -229,6 +226,31 @@ module Google
 
         default_client.report error_event
       end
+
+      ##
+      # @private Resolve credentials
+      def self.resolve_credentials credentials, scope
+        unless credentials.is_a? Google::Auth::Credentials
+          credentials = ErrorReporting::Credentials.new credentials,
+                                                        scope: scope
+        end
+        credentials
+      end
+
+      private_class_method :resolve_credentials
+
+      ##
+      # @private Resolve project.
+      def self.resolve_project_id project_id, credentials
+        if credentials.respond_to? :project_id
+          project_id ||= credentials.project_id
+        end
+        project_id = project_id.to_s
+        raise ArgumentError, "project_id is missing" if project_id.empty?
+        project_id
+      end
+
+      private_class_method :resolve_project_id
 
       ##
       # @private Create a private client to
