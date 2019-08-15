@@ -843,10 +843,14 @@ module Google
         #   puts bucket.policy_only_locked_at
         #
         def policy_only= new_policy_only
-          @gapi.iam_configuration ||= API::Bucket::IamConfiguration.new \
-            bucket_policy_only: \
-              API::Bucket::IamConfiguration::BucketPolicyOnly.new
+          @gapi.iam_configuration ||= API::Bucket::IamConfiguration.new
+          @gapi.iam_configuration.bucket_policy_only ||= \
+            API::Bucket::IamConfiguration::BucketPolicyOnly.new
+          @gapi.iam_configuration.uniform_bucket_level_access ||= \
+            API::Bucket::IamConfiguration::UniformBucketLevelAccess.new
           @gapi.iam_configuration.bucket_policy_only.enabled = new_policy_only
+          @gapi.iam_configuration.uniform_bucket_level_access.enabled = \
+            new_policy_only
           patch_gapi! :iam_configuration
         end
 
