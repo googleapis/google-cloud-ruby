@@ -1,5 +1,11 @@
 # Release History
 
+### 1.21.0 / 2019-08-15
+
+#### Features
+
+* Update documentation
+
 ### 1.20.0 / 2019-08-08
 
 * Add HmacKey
