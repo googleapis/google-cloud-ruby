@@ -176,6 +176,7 @@ Google::Cloud.configure.add_config! :debugger do |config|
   config.add_field! :scope, nil, match: [String, Array]
   config.add_field! :timeout, nil, match: Integer
   config.add_field! :client_config, nil, match: Hash
+  config.add_field! :endpoint, nil, match: String
   config.add_field! :allow_mutating_methods, false
   config.add_field! :evaluation_time_limit, 0.05, match: Numeric
   config.add_field! :on_error, nil, match: Proc
