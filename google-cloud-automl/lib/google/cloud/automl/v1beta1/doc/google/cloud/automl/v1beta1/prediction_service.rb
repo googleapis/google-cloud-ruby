@@ -17,7 +17,8 @@ module Google
   module Cloud
     module AutoML
       module V1beta1
-        # Request message for {Google::Cloud::AutoML::V1beta1::PredictionService::Predict PredictionService::Predict}.
+        # Request message for
+        # {Google::Cloud::AutoML::V1beta1::PredictionService::Predict PredictionService::Predict}.
         # @!attribute [rw] name
         #   @return [String]
         #     Name of the model requested to serve the prediction.
@@ -53,11 +54,19 @@ module Google
         #            The default is false.
         class PredictRequest; end
 
-        # Response message for {Google::Cloud::AutoML::V1beta1::PredictionService::Predict PredictionService::Predict}.
+        # Response message for
+        # {Google::Cloud::AutoML::V1beta1::PredictionService::Predict PredictionService::Predict}.
         # @!attribute [rw] payload
         #   @return [Array<Google::Cloud::AutoML::V1beta1::AnnotationPayload>]
         #     Prediction result.
         #     Translation and Text Sentiment will return precisely one payload.
+        # @!attribute [rw] preprocessed_input
+        #   @return [Google::Cloud::AutoML::V1beta1::ExamplePayload]
+        #     The preprocessed example that AutoML actually makes prediction on.
+        #     Empty if AutoML does not preprocess the input example.
+        #     * For Text Extraction:
+        #       If the input is a .pdf file, the OCR'ed text will be provided in
+        #       {Google::Cloud::AutoML::V1beta1::Document#document_text document_text}.
         # @!attribute [rw] metadata
         #   @return [Hash{String => String}]
         #     Additional domain-specific prediction response metadata.
@@ -77,7 +86,8 @@ module Google
         #       from the previous Natural Language Sentiment Analysis API.
         class PredictResponse; end
 
-        # Request message for {Google::Cloud::AutoML::V1beta1::PredictionService::BatchPredict PredictionService::BatchPredict}.
+        # Request message for
+        # {Google::Cloud::AutoML::V1beta1::PredictionService::BatchPredict PredictionService::BatchPredict}.
         # @!attribute [rw] name
         #   @return [String]
         #     Name of the model requested to serve the batch prediction.
@@ -156,7 +166,8 @@ module Google
 
         # Result of the Batch Predict. This message is returned in
         # {Google::Longrunning::Operation#response response} of the operation returned
-        # by the {Google::Cloud::AutoML::V1beta1::PredictionService::BatchPredict PredictionService::BatchPredict}.
+        # by the
+        # {Google::Cloud::AutoML::V1beta1::PredictionService::BatchPredict PredictionService::BatchPredict}.
         # @!attribute [rw] metadata
         #   @return [Hash{String => String}]
         #     Additional domain-specific prediction response metadata.

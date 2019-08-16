@@ -312,12 +312,14 @@ module Google
             @predict.call(req, options, &block)
           end
 
-          # Perform a batch prediction. Unlike the online {Google::Cloud::AutoML::V1beta1::PredictionService::Predict Predict}, batch
+          # Perform a batch prediction. Unlike the online
+          # {Google::Cloud::AutoML::V1beta1::PredictionService::Predict Predict}, batch
           # prediction result won't be immediately available in the response. Instead,
           # a long running operation object is returned. User can poll the operation
           # result via {Google::Longrunning::Operations::GetOperation GetOperation}
-          # method. Once the operation is done, {Google::Cloud::AutoML::V1beta1::BatchPredictResult BatchPredictResult} is returned in
-          # the {Google::Longrunning::Operation#response response} field.
+          # method. Once the operation is done,
+          # {Google::Cloud::AutoML::V1beta1::BatchPredictResult BatchPredictResult} is
+          # returned in the {Google::Longrunning::Operation#response response} field.
           # Available for following ML problems:
           # * Image Classification
           # * Image Object Detection

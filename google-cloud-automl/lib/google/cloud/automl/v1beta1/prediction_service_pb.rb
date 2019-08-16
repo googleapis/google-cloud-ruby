@@ -5,12 +5,12 @@
 require 'google/protobuf'
 
 require 'google/api/annotations_pb'
+require 'google/api/client_pb'
 require 'google/cloud/automl/v1beta1/annotation_payload_pb'
 require 'google/cloud/automl/v1beta1/data_items_pb'
 require 'google/cloud/automl/v1beta1/io_pb'
 require 'google/cloud/automl/v1beta1/operations_pb'
 require 'google/longrunning/operations_pb'
-require 'google/api/client_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.cloud.automl.v1beta1.PredictRequest" do
     optional :name, :string, 1
@@ -19,6 +19,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   end
   add_message "google.cloud.automl.v1beta1.PredictResponse" do
     repeated :payload, :message, 1, "google.cloud.automl.v1beta1.AnnotationPayload"
+    optional :preprocessed_input, :message, 3, "google.cloud.automl.v1beta1.ExamplePayload"
     map :metadata, :string, :string, 2
   end
   add_message "google.cloud.automl.v1beta1.BatchPredictRequest" do
