@@ -1,5 +1,17 @@
 # Release History
 
+### 1.21.0 / 2019-08-16
+
+#### Features
+
+* Support overriding of service endpoint
+* Update documentation
+
+#### Bug Fixes
+
+* Fix Bucket Policy Only service bug temporarily
+  * Set UniformBucketLevelAccess to same value as BucketPolicyOnly
+
 ### 1.20.0 / 2019-08-08
 
 * Add HmacKey
