@@ -36,6 +36,10 @@ module Google
           # favorites, preferences, playlists, and so on. You can redefine a session
           # entity type at the session level.
           #
+          # Session entity methods do not work with Google Assistant integration.
+          # Contact Dialogflow support if you need to use session entities
+          # with Google Assistant integration.
+          #
           # For more information about entity types, see the
           # [Dialogflow
           # documentation](https://cloud.google.com/dialogflow/docs/entities-overview).
@@ -48,17 +52,37 @@ module Google
             self.service_name = 'google.cloud.dialogflow.v2.SessionEntityTypes'
 
             # Returns the list of all session entity types in the specified session.
+            #
+            # This method doesn't work with Google Assistant integration.
+            # Contact Dialogflow support if you need to use session entities
+            # with Google Assistant integration.
             rpc :ListSessionEntityTypes, ListSessionEntityTypesRequest, ListSessionEntityTypesResponse
             # Retrieves the specified session entity type.
+            #
+            # This method doesn't work with Google Assistant integration.
+            # Contact Dialogflow support if you need to use session entities
+            # with Google Assistant integration.
             rpc :GetSessionEntityType, GetSessionEntityTypeRequest, SessionEntityType
             # Creates a session entity type.
             #
             # If the specified session entity type already exists, overrides the session
             # entity type.
+            #
+            # This method doesn't work with Google Assistant integration.
+            # Contact Dialogflow support if you need to use session entities
+            # with Google Assistant integration.
             rpc :CreateSessionEntityType, CreateSessionEntityTypeRequest, SessionEntityType
             # Updates the specified session entity type.
+            #
+            # This method doesn't work with Google Assistant integration.
+            # Contact Dialogflow support if you need to use session entities
+            # with Google Assistant integration.
             rpc :UpdateSessionEntityType, UpdateSessionEntityTypeRequest, SessionEntityType
             # Deletes the specified session entity type.
+            #
+            # This method doesn't work with Google Assistant integration.
+            # Contact Dialogflow support if you need to use session entities
+            # with Google Assistant integration.
             rpc :DeleteSessionEntityType, DeleteSessionEntityTypeRequest, Google::Protobuf::Empty
           end
 

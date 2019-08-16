@@ -425,6 +425,10 @@ module Google
         # favorites, preferences, playlists, and so on. You can redefine a session
         # entity type at the session level.
         #
+        # Session entity methods do not work with Google Assistant integration.
+        # Contact Dialogflow support if you need to use session entities
+        # with Google Assistant integration.
+        #
         # For more information about entity types, see the
         # [Dialogflow
         # documentation](https://cloud.google.com/dialogflow/docs/entities-overview).

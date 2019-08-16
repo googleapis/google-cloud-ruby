@@ -43,6 +43,10 @@ module Google
         # favorites, preferences, playlists, and so on. You can redefine a session
         # entity type at the session level.
         #
+        # Session entity methods do not work with Google Assistant integration.
+        # Contact Dialogflow support if you need to use session entities
+        # with Google Assistant integration.
+        #
         # For more information about entity types, see the
         # [Dialogflow
         # documentation](https://cloud.google.com/dialogflow/docs/entities-overview).
@@ -272,6 +276,10 @@ module Google
 
           # Returns the list of all session entity types in the specified session.
           #
+          # This method doesn't work with Google Assistant integration.
+          # Contact Dialogflow support if you need to use session entities
+          # with Google Assistant integration.
+          #
           # @param parent [String]
           #   Required. The session to list all session entity types from.
           #   Format: `projects/<Project ID>/agent/sessions/<Session ID>`.
@@ -327,6 +335,10 @@ module Google
 
           # Retrieves the specified session entity type.
           #
+          # This method doesn't work with Google Assistant integration.
+          # Contact Dialogflow support if you need to use session entities
+          # with Google Assistant integration.
+          #
           # @param name [String]
           #   Required. The name of the session entity type. Format:
           #   `projects/<Project ID>/agent/sessions/<Session ID>/entityTypes/<Entity Type
@@ -361,6 +373,10 @@ module Google
           #
           # If the specified session entity type already exists, overrides the session
           # entity type.
+          #
+          # This method doesn't work with Google Assistant integration.
+          # Contact Dialogflow support if you need to use session entities
+          # with Google Assistant integration.
           #
           # @param parent [String]
           #   Required. The session to create a session entity type for.
@@ -401,6 +417,10 @@ module Google
           end
 
           # Updates the specified session entity type.
+          #
+          # This method doesn't work with Google Assistant integration.
+          # Contact Dialogflow support if you need to use session entities
+          # with Google Assistant integration.
           #
           # @param session_entity_type [Google::Cloud::Dialogflow::V2::SessionEntityType | Hash]
           #   Required. The entity type to update. Format:
@@ -443,6 +463,10 @@ module Google
           end
 
           # Deletes the specified session entity type.
+          #
+          # This method doesn't work with Google Assistant integration.
+          # Contact Dialogflow support if you need to use session entities
+          # with Google Assistant integration.
           #
           # @param name [String]
           #   Required. The name of the entity type to delete. Format:
