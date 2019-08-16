@@ -574,6 +574,15 @@ namespace :kokoro do
     Rake::Task["release"].invoke kokoro.tag
   end
 
+  task :release_please, :gem, :token do |t, args|
+    gem = args[:gem] || ENV["PACKAGE"]
+    if args[:gem] && args[:gem] == "all"
+      kokoro.release_please_all args[:token]
+    else
+      kokoro.release_please args[:gem], args[:token]
+    end
+  end
+
   task :republish do
     kokoro.load_env_vars
     Rake::Task["docs:republish_all"].invoke
@@ -583,7 +592,7 @@ namespace :kokoro do
     @kokoro ||= Kokoro.new KOKORO_RUBY_VERSIONS, 
                            gems,
                            updated_gems,
-                           package: ENV.fetch("PACKAGE", nil)
+                           gem: ENV["PACKAGE"]
   end
 end
 

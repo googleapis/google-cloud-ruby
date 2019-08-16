@@ -6,9 +6,9 @@ class KokoroBuilder < Command
   attr_reader :ruby_versions, :gems
 
   def initialize ruby_versions, gems
-    @ruby_versions = ruby_versions
-    @gems = gems
-    @dockerfiles = ["autosynth", "multi", "release"]
+    @ruby_versions         = ruby_versions
+    @gems                  = gems
+    @dockerfiles           = ["autosynth", "multi", "release"]
     @dependent_dockerfiles = ["multi-node"]
   end
 

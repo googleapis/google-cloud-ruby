@@ -9,16 +9,16 @@ require_relative "kokoro_builder.rb"
 class Kokoro < Command
   attr_reader :tag
 
-  def initialize ruby_versions, gems, updated_gems, package: nil
+  def initialize ruby_versions, gems, updated_gems, gem: nil
     @ruby_versions = ruby_versions
-    @gems = gems
-    @updated_gems = updated_gems
-    @package = package
+    @gems          = gems
+    @updated_gems  = updated_gems
+    @gem           = gem
 
     @builder = KokoroBuilder.new ruby_versions, gems
-    @failed = false
-    @tag = nil
-    @updated = @updated_gems.include? @package
+    @failed  = false
+    @tag     = nil
+    @updated = @updated_gems.include? @gem
   end
 
   def build
@@ -72,17 +72,11 @@ class Kokoro < Command
   end
 
   def release
-    version = "0.1.0"
-    run_ci do
-      version = `bundle exec gem list`
-                  .split("\n").select { |line| line.include? @package }
-                  .first.split("(").last.split(")").first
-    end
     load_env_vars
     if ENV["RUBYGEMS_API_TOKEN"].nil? || ENV["RUBYGEMS_API_TOKEN"].empty?
       raise "RUBYGEMS_API_TOKEN must be set"
     end
-    @tag = "#{@package}/v#{version}"
+    @tag = "#{@gem}/v#{version}"
   end
 
   def exit_status
@@ -121,10 +115,10 @@ class Kokoro < Command
     puts "\n#{token * 3} #{str} #{token * 3}\n"
   end
 
-  def job_info
+  def job_info gem = nil
     header "Using Ruby - #{RUBY_VERSION}"
     header_2 "Job Type: #{ENV['JOB_TYPE']}"
-    header_2 "Package: #{@package}"
+    header_2 "Package: #{gem || @gem}"
     puts ""
   end
 
@@ -146,33 +140,55 @@ class Kokoro < Command
     end
   end
 
-  def release_please
+  def release_please gem = nil, token = nil
+    gem     ||= @gem
+    token   ||= "#{ENV['KOKORO_KEYSTORE_DIR']}/73713_yoshi-automation-github-key"
     opts = {
-      "package-name" => @package,
-      "release-type" => "ruby-yoshi",
-      "repo-url"     => "googleapis/google-cloud-ruby",
-      "token"        => "#{ENV['KOKORO_KEYSTORE_DIR']}/73713_yoshi-automation-github-key"
+      "package-name"         => gem,
+      "last-package-version" => version(gem),
+      "release-type"         => "ruby-yoshi",
+      "repo-url"             => "googleapis/google-cloud-ruby",
+      "token"                => token
     }.to_a.map { |a| "--#{a[0]}=#{a[1]}" }.join(" ")
+    header_2 "Running release-please for #{gem}, since #{version(gem)}"
     run "npx release-please release-pr #{opts}"
   end
 
-  def run_ci
-    job_info
-    Dir.chdir @package do
+  def release_please_all token = nil
+    @gems.each do |gem|
+      release_please gem, token
+    end
+  end
+
+  def run_ci gem = nil, local = false
+    gem ||= @gem
+    job_info gem
+    Dir.chdir gem do
       Bundler.with_clean_env do
         run "bundle update"
-        load_env_vars
-        windows_acceptance_fix
+        load_env_vars unless local
+        windows_acceptance_fix unless local
         yield
       end
     end
-    verify_in_gemfile
+    verify_in_gemfile unless local
   end
 
   def verify_in_gemfile
-    return if Bundler.environment.gems.map(&:name).include? @package
-    header_2 "#{@package} does not appear in the top-level Gemfile. Please add it."
+    return if Bundler.environment.gems.map(&:name).include? @gem
+    header_2 "#{@gem} does not appear in the top-level Gemfile. Please add it."
     @failed = true
+  end
+
+  def version gem = nil
+    version = "0.1.0"
+    gem     ||= @gem
+    run_ci gem, true do
+      version = `bundle exec gem list`
+                  .split("\n").select { |line| line.include? gem }
+                  .first.split("(").last.split(")").first
+    end
+    version
   end
 
   def windows_acceptance_fix
