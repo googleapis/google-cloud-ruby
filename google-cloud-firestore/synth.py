@@ -43,6 +43,17 @@ s.copy(v1beta1_library / 'lib/google/cloud/firestore/v1beta1.rb')
 s.copy(v1beta1_library / 'lib/google/firestore/v1beta1')
 s.copy(v1beta1_library / 'test/google/cloud/firestore/v1beta1')
 
+admin_v1_library = gapic.ruby_library(
+    'firestore-admin', 'v1',
+    config_path='/google/firestore/admin/artman_firestore_v1.yaml',
+    artman_output_name='google-cloud-ruby/google-cloud-firestore_admin'
+)
+s.copy(admin_v1_library / 'lib/google/cloud/firestore/admin.rb')
+s.copy(admin_v1_library / 'lib/google/cloud/firestore/admin/v1')
+s.copy(admin_v1_library / 'lib/google/cloud/firestore/admin/v1.rb')
+s.copy(admin_v1_library / 'lib/google/firestore/admin/v1')
+s.copy(admin_v1_library / 'test/google/cloud/firestore/admin/v1')
+
 # PERMANENT: Handwritten layer owns Firestore.new so low-level clients need to
 # use Firestore::V1beta1.new instead of Firestore.new(version: :v1beta1).
 # Update the examples and tests.
@@ -74,12 +85,28 @@ s.replace(
     ],
     'Google::Cloud::Firestore\\.new\\(version: :v1\\)',
     'Google::Cloud::Firestore::V1.new')
+s.replace(
+    [
+      'lib/google/cloud/firestore/v1/firestore_admin_client.rb',
+      'test/google/cloud/firestore/v1/firestore_admin_client_test.rb'
+    ],
+    'require "google/cloud/firestore"',
+    'require "google/cloud/firestore/v1"')
+s.replace(
+    [
+      'lib/google/cloud/firestore/v1/firestore_admin_client.rb',
+      'test/google/cloud/firestore/v1/firestore_admin_client_test.rb'
+    ],
+    'Google::Cloud::Firestore\\.new\\(version: :v1\\)',
+    'Google::Cloud::Firestore::V1::FirestoreAdminClient.new')
 
 # Support for service_address
 s.replace(
     [
         'lib/google/cloud/firestore/v*.rb',
-        'lib/google/cloud/firestore/v*/*_client.rb'
+        'lib/google/cloud/firestore/v*/*_client.rb',
+        'lib/google/cloud/firestore/admin/v*.rb',
+        'lib/google/cloud/firestore/admin/v*/*_client.rb'
     ],
     '\n(\\s+)#(\\s+)@param exception_transformer',
     '\n\\1#\\2@param service_address [String]\n' +
@@ -91,7 +118,9 @@ s.replace(
 s.replace(
     [
         'lib/google/cloud/firestore/v*.rb',
-        'lib/google/cloud/firestore/v*/*_client.rb'
+        'lib/google/cloud/firestore/v*/*_client.rb',
+        'lib/google/cloud/firestore/admin/v*.rb',
+        'lib/google/cloud/firestore/admin/v*/*_client.rb'
     ],
     '\n(\\s+)metadata: nil,\n\\s+exception_transformer: nil,\n',
     '\n\\1metadata: nil,\n\\1service_address: nil,\n\\1service_port: nil,\n\\1exception_transformer: nil,\n'
@@ -99,18 +128,26 @@ s.replace(
 s.replace(
     [
         'lib/google/cloud/firestore/v*.rb',
-        'lib/google/cloud/firestore/v*/*_client.rb'
+        'lib/google/cloud/firestore/v*/*_client.rb',
+        'lib/google/cloud/firestore/admin/v*.rb',
+        'lib/google/cloud/firestore/admin/v*/*_client.rb'
     ],
     ',\n(\\s+)lib_name: lib_name,\n\\s+lib_version: lib_version',
     ',\n\\1lib_name: lib_name,\n\\1service_address: service_address,\n\\1service_port: service_port,\n\\1lib_version: lib_version'
 )
 s.replace(
-    'lib/google/cloud/firestore/v*/*_client.rb',
+    [
+        'lib/google/cloud/firestore/v*/*_client.rb',
+        'lib/google/cloud/firestore/admin/v*/*_client.rb'
+    ],
     'service_path = self\\.class::SERVICE_ADDRESS',
     'service_path = service_address || self.class::SERVICE_ADDRESS'
 )
 s.replace(
-    'lib/google/cloud/firestore/v*/*_client.rb',
+    [
+        'lib/google/cloud/firestore/v*/*_client.rb',
+        'lib/google/cloud/firestore/admin/v*/*_client.rb'
+    ],
     'port = self\\.class::DEFAULT_SERVICE_PORT',
     'port = service_port || self.class::DEFAULT_SERVICE_PORT'
 )
@@ -124,13 +161,19 @@ def escape_braces(match):
         if count == 0:
             return content
 s.replace(
-    'lib/google/cloud/firestore/v1*/**/*.rb',
+    [
+        'lib/google/cloud/firestore/v1*/**/*.rb',
+        'lib/google/cloud/firestore/admin/v1*/**/*.rb'
+    ],
     '\n\\s+#[^\n]*[^\n#\\$\\\\]\\{[\\w,]+\\}',
     escape_braces)
 
 # https://github.com/googleapis/gapic-generator/issues/2243
 s.replace(
-    'lib/google/cloud/firestore/v1*/*_client.rb',
+    [
+        'lib/google/cloud/firestore/v1*/*_client.rb',
+        'lib/google/cloud/firestore/admin/v1*/*_client.rb'
+    ],
     '(\n\\s+class \\w+Client\n)(\\s+)(attr_reader :\\w+_stub)',
     '\\1\\2# @private\n\\2\\3')
 
@@ -153,7 +196,7 @@ s.replace(
 )
 
 # https://github.com/googleapis/google-cloud-ruby/issues/3058
-for version in ['v1', 'v1beta1']:
+for version in ['v1', 'v1beta1', 'admin/v1']:
     s.replace(
         f'lib/google/cloud/firestore/{version}/*_client.rb',
         f'(require \".*credentials\"\n)\n',
