@@ -137,6 +137,7 @@ Google::Cloud.configure.add_config! :trace do |config|
   config.add_field! :scope, nil, match: [String, Array]
   config.add_field! :timeout, nil, match: Integer
   config.add_field! :client_config, nil, match: Hash
+  config.add_field! :endpoint, nil, match: String
   config.add_field! :capture_stack, nil, enum: [true, false]
   config.add_field! :sampler, nil
   config.add_field! :span_id_generator, nil, match: Proc

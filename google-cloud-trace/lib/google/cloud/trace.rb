@@ -68,6 +68,10 @@ module Google
       #   * `https://www.googleapis.com/auth/cloud-platform`
       #
       # @param [Integer] timeout Default timeout to use in requests. Optional.
+      # @param [Hash] client_config A hash of values to override the default
+      #   behavior of the API client. Optional.
+      # @param [String] endpoint Override of the endpoint host name. Optional.
+      #   If the param is nil, uses the default endpoint.
       # @param [String] project Alias for the `project_id` argument. Deprecated.
       # @param [String] keyfile Alias for the `credentials` argument.
       #   Deprecated.
@@ -85,17 +89,15 @@ module Google
       #   end
       #
       def self.new project_id: nil, credentials: nil, scope: nil, timeout: nil,
-                   client_config: nil, project: nil, keyfile: nil
+                   client_config: nil, endpoint: nil, project: nil, keyfile: nil
         project_id    ||= (project || default_project_id)
         scope         ||= configure.scope
         timeout       ||= configure.timeout
         client_config ||= configure.client_config
+        endpoint      ||= configure.endpoint
         credentials   ||= (keyfile || default_credentials(scope: scope))
 
-        unless credentials.is_a? Google::Auth::Credentials
-          credentials = Trace::Credentials.new credentials, scope: scope
-        end
-
+        credentials = resolve_credentials credentials, scope
         if credentials.respond_to? :project_id
           project_id ||= credentials.project_id
         end
@@ -104,8 +106,8 @@ module Google
 
         Trace::Project.new(
           Trace::Service.new(
-            project_id, credentials, timeout: timeout,
-                                     client_config: client_config
+            project_id, credentials,
+            host: endpoint, timeout: timeout, client_config: client_config
           )
         )
       end
@@ -128,6 +130,8 @@ module Google
       # * `timeout` - (Integer) Default timeout to use in requests.
       # * `client_config` - (Hash) A hash of values to override the default
       #   behavior of the API client.
+      # * `endpoint` - (String) Override of the endpoint host name, or `nil`
+      #   to use the default endpoint.
       # * `capture_stack` - (Boolean) Whether to capture stack traces for each
       #   span. Default: `false`
       # * `sampler` - (Proc) A sampler Proc makes the decision whether to record
@@ -171,6 +175,15 @@ module Google
         Google::Cloud.configure.trace.credentials ||
           Google::Cloud.configure.credentials ||
           Trace::Credentials.default(scope: scope)
+      end
+
+      ##
+      # @private Resolve credentials
+      def self.resolve_credentials credentials, scope
+        unless credentials.is_a? Google::Auth::Credentials
+          credentials = Trace::Credentials.new credentials, scope: scope
+        end
+        credentials
       end
 
       ##
