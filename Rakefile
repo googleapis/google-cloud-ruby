@@ -542,8 +542,6 @@ end
 namespace :kokoro do
   require_relative "rakelib/kokoro/kokoro.rb"
 
-  @kokoro = nil
-
   desc "Generate configs for kokoro"
   task :build, :publish do |t, args|
     kokoro.build
