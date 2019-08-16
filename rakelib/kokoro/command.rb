@@ -26,7 +26,7 @@ class Command
     end
   end
 
-  def run_command_with_timeout
+  def run_command_with_timeout command, timeout
     job = Process.spawn command
     begin
       Timeout.timeout timeout do
