@@ -575,7 +575,6 @@ namespace :kokoro do
   end
 
   task :release_please, :gem, :token do |t, args|
-    gem = args[:gem] || ENV["PACKAGE"]
     if args[:gem] && args[:gem] == "all"
       kokoro.release_please_all args[:token]
     else
