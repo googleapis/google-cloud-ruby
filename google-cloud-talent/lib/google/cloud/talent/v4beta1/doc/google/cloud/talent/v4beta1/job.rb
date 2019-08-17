@@ -208,7 +208,9 @@ module Google
         #     the same location level as this field is strongly recommended.
         # @!attribute [rw] visibility
         #   @return [Google::Cloud::Talent::V4beta1::Visibility]
-        #     Optional. The visibility of the job.
+        #     Deprecated. The job is only visible to the owner.
+        #
+        #     The visibility of the job.
         #
         #     Defaults to
         #     {Google::Cloud::Talent::V4beta1::Visibility::ACCOUNT_ONLY Visibility::ACCOUNT_ONLY}

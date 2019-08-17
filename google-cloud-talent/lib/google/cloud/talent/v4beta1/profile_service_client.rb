@@ -594,11 +594,11 @@ module Google
           #
           #   * "relevance desc": By descending relevance, as determined by the API
           #     algorithms.
-          #   * "update_time desc": Sort by
+          #   * "update_date desc": Sort by
           #     {Google::Cloud::Talent::V4beta1::Profile#update_time Profile#update_time} in
           #     descending order
           #     (recently updated profiles first).
-          #   * "create_time desc": Sort by
+          #   * "create_date desc": Sort by
           #     {Google::Cloud::Talent::V4beta1::Profile#create_time Profile#create_time} in
           #     descending order
           #     (recently created profiles first).

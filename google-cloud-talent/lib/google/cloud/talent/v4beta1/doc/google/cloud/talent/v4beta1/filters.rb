@@ -208,7 +208,43 @@ module Google
         #     {Google::Cloud::Talent::V4beta1::LocationFilter#negated LocationFilter#negated}
         #     is specified, the result doesn't contain profiles from that location.
         #
-        #     For example, search for profiles with addresses in "New York City".
+        #     If
+        #     {Google::Cloud::Talent::V4beta1::LocationFilter#address LocationFilter#address}
+        #     is provided, the
+        #     {Google::Cloud::Talent::V4beta1::Location::LocationType LocationType}, center
+        #     point (latitude and longitude), and radius are automatically detected by
+        #     the Google Maps Geocoding API and included as well. If
+        #     {Google::Cloud::Talent::V4beta1::LocationFilter#address LocationFilter#address}
+        #     is not recognized as a location, the filter falls back to keyword search.
+        #
+        #     If the detected
+        #     {Google::Cloud::Talent::V4beta1::Location::LocationType LocationType} is
+        #     {Google::Cloud::Talent::V4beta1::Location::LocationType::SUB_ADMINISTRATIVE_AREA LocationType::SUB_ADMINISTRATIVE_AREA},
+        #     {Google::Cloud::Talent::V4beta1::Location::LocationType::ADMINISTRATIVE_AREA LocationType::ADMINISTRATIVE_AREA},
+        #     or
+        #     {Google::Cloud::Talent::V4beta1::Location::LocationType::COUNTRY LocationType::COUNTRY},
+        #     or location is recognized but a radius can not be determined by the
+        #     geo-coder, the filter is performed against the detected location name
+        #     (using exact text matching). Otherwise, the filter is performed against the
+        #     detected center point and a radius. The largest value from among the
+        #     following options is automatically set as the radius value:
+        #     1. 10 miles.
+        #     2. Detected location radius +
+        #     {Google::Cloud::Talent::V4beta1::LocationFilter#distance_in_miles LocationFilter#distance_in_miles}.
+        #     3. If the detected
+        #     {Google::Cloud::Talent::V4beta1::Location::LocationType LocationType} is one of
+        #     {Google::Cloud::Talent::V4beta1::Location::LocationType::SUB_LOCALITY LocationType::SUB_LOCALITY},
+        #     {Google::Cloud::Talent::V4beta1::Location::LocationType::SUB_LOCALITY_2 LocationType::SUB_LOCALITY_2},
+        #     {Google::Cloud::Talent::V4beta1::Location::LocationType::NEIGHBORHOOD LocationType::NEIGHBORHOOD},
+        #     {Google::Cloud::Talent::V4beta1::Location::LocationType::POSTAL_CODE LocationType::POSTAL_CODE},
+        #     or
+        #     {Google::Cloud::Talent::V4beta1::Location::LocationType::STREET_ADDRESS LocationType::STREET_ADDRESS},
+        #     the following two values are calculated and the larger of the two is
+        #     compared to #1 and #2, above:
+        #     * Calculated radius of the city (from the city center) that contains the
+        #       geo-coded location.
+        #       * Distance from the city center (of the city containing the geo-coded
+        #         location) to the detected location center + 0.5 miles.
         # @!attribute [rw] job_title_filters
         #   @return [Array<Google::Cloud::Talent::V4beta1::JobTitleFilter>]
         #     Optional. Job title filter specifies job titles of profiles to match on.
@@ -379,13 +415,13 @@ module Google
         #     Note that this filter is not applicable for Profile Search related queries.
         # @!attribute [rw] lat_lng
         #   @return [Google::Type::LatLng]
-        #     Optional. The latitude and longitude of the geographic center from which to
-        #     search. This field's ignored if `address` is provided.
+        #     Optional. The latitude and longitude of the geographic center to search
+        #     from. This field is ignored if `address` is provided.
         # @!attribute [rw] distance_in_miles
         #   @return [Float]
         #     Optional. The distance_in_miles is applied when the location being searched
-        #     for is identified as a city or smaller. When the location being searched
-        #     for is a state or larger, this field is ignored.
+        #     for is identified as a city or smaller. This field is ignored if the
+        #     location being searched for is a state or larger.
         # @!attribute [rw] telecommute_preference
         #   @return [Google::Cloud::Talent::V4beta1::LocationFilter::TelecommutePreference]
         #     Optional. Allows the client to return jobs without a
@@ -407,6 +443,8 @@ module Google
         #     such as "Mountain View" or "telecommuting" jobs. However, when used in
         #     combination with other location filters, telecommuting jobs can be
         #     treated as less relevant than other jobs in the search response.
+        #
+        #     This field is only used for job search requests.
         # @!attribute [rw] negated
         #   @return [true, false]
         #     Optional. Whether to apply negation to the filter so profiles matching the
@@ -414,7 +452,7 @@ module Google
         #
         #     Currently only supported in profile search.
         class LocationFilter
-          # Specify whether including telecommute jobs.
+          # Specify whether to include telecommute jobs.
           module TelecommutePreference
             # Default value if the telecommute preference isn't specified.
             TELECOMMUTE_PREFERENCE_UNSPECIFIED = 0

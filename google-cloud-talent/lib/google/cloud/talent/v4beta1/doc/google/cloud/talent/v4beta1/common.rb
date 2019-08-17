@@ -968,6 +968,8 @@ module Google
           EXPERT = 5
         end
 
+        # Deprecated. All resources are only visible to the owner.
+        #
         # An enum that represents who has view access to the resource.
         module Visibility
           # Default value.
