@@ -17,6 +17,7 @@ require "google/cloud/errors"
 require "google/cloud/trace/version"
 require "google/cloud/trace/v1"
 require "google/gax/errors"
+require "uri"
 
 module Google
   module Cloud
@@ -27,29 +28,17 @@ module Google
       # @private
       #
       class Service
-        ##
-        # @private
-        attr_accessor :project
-
-        ##
-        # @private
-        attr_accessor :credentials
-
-        ##
-        # @private
-        attr_accessor :timeout
-
-        ##
-        # @private
-        attr_accessor :client_config
+        attr_accessor :project, :credentials, :timeout, :client_config, :host
 
         ##
         # Creates a new Service instance.
-        def initialize project, credentials, timeout: nil, client_config: nil
+        def initialize project, credentials, timeout: nil, client_config: nil,
+                       host: nil
           @project = project
           @credentials = credentials
           @timeout = timeout
           @client_config = client_config || {}
+          @host = host || V1::TraceServiceClient::SERVICE_ADDRESS
         end
 
         def lowlevel_client
@@ -65,6 +54,8 @@ module Google
                 credentials: credentials,
                 timeout: timeout,
                 client_config: client_config,
+                service_address: service_address,
+                service_port: service_port,
                 lib_name: "gccl",
                 lib_version: Google::Cloud::Trace::VERSION
               )
@@ -142,6 +133,16 @@ module Google
         end
 
         protected
+
+        def service_address
+          return nil if host.nil?
+          URI.parse("//#{host}").host
+        end
+
+        def service_port
+          return nil if host.nil?
+          URI.parse("//#{host}").port
+        end
 
         def execute
           yield
