@@ -27,16 +27,13 @@ class Command
   end
 
   def run_command_with_timeout command, timeout
-    job = Process.spawn command
     begin
       Timeout.timeout timeout do
-        Process.wait job
+        run_command command
       end
-      return $?.exitstatus
     rescue Timeout::Error
       header_2 "TIMEOUT - #{timeout / 60} minute limit exceeded."
-      Process.kill "TERM", job
+      @failed = true
     end
-    @failed = true
   end
 end

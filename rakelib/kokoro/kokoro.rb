@@ -40,7 +40,7 @@ class Kokoro < Command
       if @updated
         header "Gem Updated - Running Acceptance"
         run "bundle exec rake ci:acceptance", 3600
-        release_please
+        release_please if ENV.fetch("OS", "") == "linux"
       else
         header "Gem Unchanged - Skipping Acceptance"
         run "bundle exec rake ci", 3600
