@@ -149,6 +149,7 @@ Google::Cloud.configure.add_config! :logging do |config|
   config.add_field! :scope, nil, match: [String, Array]
   config.add_field! :timeout, nil, match: Integer
   config.add_field! :client_config, nil, match: Hash
+  config.add_field! :endpoint, nil, match: String
   config.add_field! :log_name, nil, match: String
   config.add_field! :log_name_map, nil, match: Hash
   config.add_field! :labels, nil, match: Hash
