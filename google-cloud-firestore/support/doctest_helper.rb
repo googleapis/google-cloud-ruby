@@ -103,6 +103,7 @@ YARD::Doctest.configure do |doctest|
   # Current mocking does not support testing GAPIC layer. (Auth failures occur.)
   doctest.skip "Google::Cloud::Firestore::V1::FirestoreClient"
   doctest.skip "Google::Cloud::Firestore::V1beta1::FirestoreClient"
+  doctest.skip "Google::Cloud::Firestore::Admin::V1::FirestoreAdminClient"
 
   doctest.before "Google::Cloud#firestore" do
     mock_firestore
