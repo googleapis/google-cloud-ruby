@@ -1,5 +1,11 @@
 # Release History
 
+### 1.4.0 / 2019-08-20
+
+#### Features
+
+* Update documentation
+
 ### 1.3.0 / 2019-01-31
 
 * Add on_error configuration.
