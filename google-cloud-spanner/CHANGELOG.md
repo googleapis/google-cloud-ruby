@@ -1,5 +1,16 @@
 # Release History
 
+### 1.10.0 / 2019-08-20
+
+#### Bug Fixes
+
+* Low-level admin clients now honor service_address and service_port
+
+#### Features
+
+* Update documentation
+* Support overriding of service endpoint
+
 ### 1.9.5 / 2019-07-31
 
 * Reduce thread usage at startup
