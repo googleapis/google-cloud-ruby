@@ -1,5 +1,11 @@
 # Release History
 
+### 0.32.0 / 2019-08-20
+
+#### Features
+
+* Update documentation
+
 ### 0.31.0 / 2019-02-12
 
 * Add parent resoure to `Project`:
