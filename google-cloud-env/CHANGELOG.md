@@ -1,5 +1,15 @@
 # Release History
 
+### 1.3.0 / 2019-08-20
+
+#### Bug Fixes
+
+* Send Metadata-Flavor header when testing the metadata server root
+
+#### Features
+
+* Update documentation
+
 ### 1.2.0 / 2019-06-19
 
 * Support separate timeout for connecting to the metadata server vs the entire request
