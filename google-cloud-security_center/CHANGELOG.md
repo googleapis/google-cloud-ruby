@@ -1,5 +1,11 @@
 # Release History
 
+### 0.4.0 / 2019-08-20
+
+#### Features
+
+* Update documentation
+
 ### 0.3.0 / 2019-07-08
 
 * Add IAM GetPolicyOptions.
@@ -29,4 +35,3 @@
 ### 0.1.0 / 2019-04-25
 
 * Initial release.
-
