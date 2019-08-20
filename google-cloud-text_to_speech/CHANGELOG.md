@@ -1,5 +1,11 @@
 # Release History
 
+### 0.5.0 / 2019-08-20
+
+#### Features
+
+* Update documentation
+
 ### 0.4.0 / 2019-07-08
 
 * Update code example in READMEs.
