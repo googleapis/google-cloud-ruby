@@ -1,0 +1,15 @@
+{
+    "bundler": {
+        "enabled": true
+    },
+    "extends": [
+        "config:base"
+    ],
+    "packageRules": [
+        {
+            "languages": [
+                "ruby"
+            ]
+        }
+    ]
+}
