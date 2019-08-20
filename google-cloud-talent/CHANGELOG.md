@@ -1,5 +1,18 @@
 # Release History
 
+### 0.5.0 / 2019-08-20
+
+#### Features
+
+* Update documentation
+* Add path helpers
+  * Add company_without_tenant_path, job_without_tenant_path, and project_path.
+* Add Profile#derived_addresses
+
+#### Performance Improvements
+
+* Update timeout_millis in client configs
+
 ### 0.4.0 / 2019-07-09
 
 * Remove dead files related to resume service
