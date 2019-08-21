@@ -1,5 +1,11 @@
 # Release History
 
+### 0.38.2 / 2019-08-21
+
+#### Bug Fixes
+
+* Update documentation
+
 ### 0.38.1 / 2019-08-02
 
 * Add endpoint argument to constructor
