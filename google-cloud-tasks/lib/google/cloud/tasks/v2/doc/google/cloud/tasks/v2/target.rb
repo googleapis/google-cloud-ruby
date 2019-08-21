@@ -45,11 +45,10 @@ module Google
         # The {Google::Cloud::Tasks::V2::AppEngineRouting AppEngineRouting} used to construct the URL that the task is
         # delivered to can be set at the queue-level or task-level:
         #
-        # * If set,
-        #   {Google::Cloud::Tasks::V2::AppEngineHttpQueue#app_engine_routing_override app_engine_routing_override}
-        #   is used for all tasks in the queue, no matter what the setting
-        #   is for the
-        #   {Google::Cloud::Tasks::V2::AppEngineHttpRequest#app_engine_routing task-level app_engine_routing}.
+        # * If [app_engine_routing_override is set on the
+        #   queue][Queue.app_engine_routing_override], this value is used for all
+        #   tasks in the queue, no matter what the setting is for the [task-level
+        #   app_engine_routing][AppEngineHttpRequest.app_engine_routing].
         #
         #
         # The `url` that the task will be sent to is:
@@ -72,7 +71,7 @@ module Google
         # the app's handler returns a non-2xx response code or Cloud Tasks does
         # not receive response before the {Google::Cloud::Tasks::V2::Task#dispatch_deadline deadline}. Failed
         # tasks will be retried according to the
-        # {Queue::RetryConfig retry configuration}. `503` (Service Unavailable) is
+        # {Google::Cloud::Tasks::V2::Queue#retry_config retry configuration}. `503` (Service Unavailable) is
         # considered an App Engine system error instead of an application error and
         # will cause Cloud Tasks' traffic congestion control to temporarily throttle
         # the queue's dispatches. Unlike other types of task targets, a `429` (Too Many
@@ -95,10 +94,10 @@ module Google
         #   @return [Google::Cloud::Tasks::V2::AppEngineRouting]
         #     Task-level setting for App Engine routing.
         #
-        #     If set,
-        #     {Google::Cloud::Tasks::V2::AppEngineHttpQueue#app_engine_routing_override app_engine_routing_override}
-        #     is used for all tasks in the queue, no matter what the setting is for the
-        #     {Google::Cloud::Tasks::V2::AppEngineHttpRequest#app_engine_routing task-level app_engine_routing}.
+        #     * If [app_engine_routing_override is set on the
+        #       queue][Queue.app_engine_routing_override], this value is used for all
+        #       tasks in the queue, no matter what the setting is for the [task-level
+        #       app_engine_routing][AppEngineHttpRequest.app_engine_routing].
         # @!attribute [rw] relative_uri
         #   @return [String]
         #     The relative URI.
@@ -173,6 +172,13 @@ module Google
         # routing](https://cloud.google.com/appengine/docs/standard/python/how-requests-are-routed),
         # and [App Engine Flex request
         # routing](https://cloud.google.com/appengine/docs/flexible/python/how-requests-are-routed).
+        #
+        # Using {Google::Cloud::Tasks::V2::AppEngineRouting AppEngineRouting} requires
+        # [`appengine.applications.get`](https://cloud.google.com/appengine/docs/admin-api/access-control)
+        # Google IAM permission for the project
+        # and the following scope:
+        #
+        # `https://www.googleapis.com/auth/cloud-platform`
         # @!attribute [rw] service
         #   @return [String]
         #     App service.

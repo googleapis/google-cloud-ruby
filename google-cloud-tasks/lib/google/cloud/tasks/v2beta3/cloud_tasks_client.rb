@@ -391,9 +391,7 @@ module Google
           # Queues are returned in lexicographical order.
           #
           # @param parent [String]
-          #   Required.
-          #
-          #   The location name.
+          #   Required. The location name.
           #   For example: `projects/PROJECT_ID/locations/LOCATION_ID`
           # @param filter [String]
           #   `filter` can be used to specify a subset of queues. Any {Google::Cloud::Tasks::V2beta3::Queue Queue}
@@ -462,9 +460,7 @@ module Google
           # Gets a queue.
           #
           # @param name [String]
-          #   Required.
-          #
-          #   The resource name of the queue. For example:
+          #   Required. The resource name of the queue. For example:
           #   `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID`
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
@@ -506,18 +502,14 @@ module Google
           # this method.
           #
           # @param parent [String]
-          #   Required.
-          #
-          #   The location name in which the queue will be created.
+          #   Required. The location name in which the queue will be created.
           #   For example: `projects/PROJECT_ID/locations/LOCATION_ID`
           #
           #   The list of allowed locations can be obtained by calling Cloud
           #   Tasks' implementation of
           #   {Google::Cloud::Location::Locations::ListLocations ListLocations}.
           # @param queue [Google::Cloud::Tasks::V2beta3::Queue | Hash]
-          #   Required.
-          #
-          #   The queue to create.
+          #   Required. The queue to create.
           #
           #   {Google::Cloud::Tasks::V2beta3::Queue#name Queue's name} cannot be the same as an existing queue.
           #   A hash of the same form as `Google::Cloud::Tasks::V2beta3::Queue`
@@ -570,9 +562,7 @@ module Google
           # this method.
           #
           # @param queue [Google::Cloud::Tasks::V2beta3::Queue | Hash]
-          #   Required.
-          #
-          #   The queue to create or update.
+          #   Required. The queue to create or update.
           #
           #   The queue's {Google::Cloud::Tasks::V2beta3::Queue#name name} must be specified.
           #
@@ -632,9 +622,7 @@ module Google
           # this method.
           #
           # @param name [String]
-          #   Required.
-          #
-          #   The queue name. For example:
+          #   Required. The queue name. For example:
           #   `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID`
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
@@ -670,9 +658,7 @@ module Google
           # might be dispatched before the purge takes effect. A purge is irreversible.
           #
           # @param name [String]
-          #   Required.
-          #
-          #   The queue name. For example:
+          #   Required. The queue name. For example:
           #   `projects/PROJECT_ID/location/LOCATION_ID/queues/QUEUE_ID`
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
@@ -709,9 +695,7 @@ module Google
           # {Google::Cloud::Tasks::V2beta3::Queue#state state} is {Google::Cloud::Tasks::V2beta3::Queue::State::PAUSED PAUSED}.
           #
           # @param name [String]
-          #   Required.
-          #
-          #   The queue name. For example:
+          #   Required. The queue name. For example:
           #   `projects/PROJECT_ID/location/LOCATION_ID/queues/QUEUE_ID`
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
@@ -754,9 +738,7 @@ module Google
           # Risks](https://cloud.google.com/tasks/docs/manage-cloud-task-scaling).
           #
           # @param name [String]
-          #   Required.
-          #
-          #   The queue name. For example:
+          #   Required. The queue name. For example:
           #   `projects/PROJECT_ID/location/LOCATION_ID/queues/QUEUE_ID`
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
@@ -941,9 +923,7 @@ module Google
           # time.
           #
           # @param parent [String]
-          #   Required.
-          #
-          #   The queue name. For example:
+          #   Required. The queue name. For example:
           #   `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID`
           # @param response_view [Google::Cloud::Tasks::V2beta3::Task::View]
           #   The response_view specifies which subset of the {Google::Cloud::Tasks::V2beta3::Task Task} will be
@@ -1013,9 +993,7 @@ module Google
           # Gets a task.
           #
           # @param name [String]
-          #   Required.
-          #
-          #   The task name. For example:
+          #   Required. The task name. For example:
           #   `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID`
           # @param response_view [Google::Cloud::Tasks::V2beta3::Task::View]
           #   The response_view specifies which subset of the {Google::Cloud::Tasks::V2beta3::Task Task} will be
@@ -1065,16 +1043,12 @@ module Google
           # * The maximum task size is 100KB.
           #
           # @param parent [String]
-          #   Required.
-          #
-          #   The queue name. For example:
+          #   Required. The queue name. For example:
           #   `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID`
           #
           #   The queue must already exist.
           # @param task [Google::Cloud::Tasks::V2beta3::Task | Hash]
-          #   Required.
-          #
-          #   The task to add.
+          #   Required. The task to add.
           #
           #   Task names have the following format:
           #   `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID`.
@@ -1162,9 +1136,7 @@ module Google
           # failed.
           #
           # @param name [String]
-          #   Required.
-          #
-          #   The task name. For example:
+          #   Required. The task name. For example:
           #   `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID`
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
@@ -1218,9 +1190,7 @@ module Google
           # task that has already succeeded or permanently failed.
           #
           # @param name [String]
-          #   Required.
-          #
-          #   The task name. For example:
+          #   Required. The task name. For example:
           #   `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID`
           # @param response_view [Google::Cloud::Tasks::V2beta3::Task::View]
           #   The response_view specifies which subset of the {Google::Cloud::Tasks::V2beta3::Task Task} will be

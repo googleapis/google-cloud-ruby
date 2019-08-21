@@ -165,8 +165,7 @@ module Google
         #     If unspecified when the queue is created, Cloud Tasks will pick the
         #     default.
         #
-        #     * For {Google::Cloud::Tasks::V2::AppEngineHttpQueue App Engine queues}, the maximum allowed value
-        #       is 500.
+        #     * The maximum allowed value is 500.
         #
         #
         #     This field has the same meaning as
@@ -195,7 +194,7 @@ module Google
         #     value of
         #     {Google::Cloud::Tasks::V2::RateLimits#max_dispatches_per_second max_dispatches_per_second}.
         #
-        #     For App Engine queues that were created or updated using
+        #     For queues that were created or updated using
         #     `queue.yaml/xml`, `max_burst_size` is equal to
         #     [bucket_size](https://cloud.google.com/appengine/docs/standard/python/config/queueref#bucket_size).
         #     Since `max_burst_size` is output only, if

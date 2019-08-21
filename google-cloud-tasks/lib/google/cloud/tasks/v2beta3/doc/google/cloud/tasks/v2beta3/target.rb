@@ -25,8 +25,8 @@ module Google
         # any other HTTP response code is returned or no response is received, the
         # task will be retried according to the following:
         #
-        # * User-specified throttling: {Queue::RetryConfig retry configuration},
-        #   {Queue::RateLimits rate limits}, and the {Google::Cloud::Tasks::V2beta3::Queue#state queue's state}.
+        # * User-specified throttling: {Google::Cloud::Tasks::V2beta3::Queue#retry_config retry configuration},
+        #   {Google::Cloud::Tasks::V2beta3::Queue#rate_limits rate limits}, and the {Google::Cloud::Tasks::V2beta3::Queue#state queue's state}.
         #
         # * System throttling: To prevent the worker from overloading, Cloud Tasks may
         #   temporarily reduce the queue's effective rate. User-specified settings
@@ -34,8 +34,8 @@ module Google
         #
         #  System throttling happens because:
         #
-        # * Cloud Tasks backoffs on all errors. Normally the backoff specified in
-        #   {Queue::RateLimits rate limits} will be used. But if the worker returns
+        # * Cloud Tasks backs off on all errors. Normally the backoff specified in
+        #   {Google::Cloud::Tasks::V2beta3::Queue#rate_limits rate limits} will be used. But if the worker returns
         #   `429` (Too Many Requests), `503` (Service Unavailable), or the rate of
         #   errors is high, Cloud Tasks will use a higher backoff rate. The retry
         #   specified in the `Retry-After` HTTP response header is considered.
@@ -195,7 +195,7 @@ module Google
         # the app's handler returns a non-2xx response code or Cloud Tasks does
         # not receive response before the {Google::Cloud::Tasks::V2beta3::Task#dispatch_deadline deadline}. Failed
         # tasks will be retried according to the
-        # {Queue::RetryConfig retry configuration}. `503` (Service Unavailable) is
+        # {Google::Cloud::Tasks::V2beta3::Queue#retry_config retry configuration}. `503` (Service Unavailable) is
         # considered an App Engine system error instead of an application error and
         # will cause Cloud Tasks' traffic congestion control to temporarily throttle
         # the queue's dispatches. Unlike other types of task targets, a `429` (Too Many
