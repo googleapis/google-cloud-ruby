@@ -1,5 +1,12 @@
 # Release History
 
+### 0.5.1 / 2019-08-21
+
+#### Bug Fixes
+
+* Update #to_hash to #to_h to fix for protobuf 3.9.0
+* Update documentation
+
 ### 0.5.0 / 2019-07-08
 
 * Support overriding service host and port
