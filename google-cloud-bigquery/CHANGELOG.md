@@ -1,5 +1,16 @@
 # Release History
 
+### 1.14.0 / 2019-08-21
+
+#### Features
+
+* Update documentation
+* Support overriding of service endpoint
+
+#### Performance Improvements
+
+* Use MiniMime to detect content types
+
 ### 1.13.0 / 2019-07-31
 
 * Add Table#require_partition_filter
