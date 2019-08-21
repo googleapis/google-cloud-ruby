@@ -1,5 +1,15 @@
 # Release History
 
+### 0.31.0 / 2019-08-21
+
+#### Features
+
+* Update documentation
+* Add NotificationChannel verification
+  * Add NotificationChannelServiceClient#send_notification_channel_verification_code
+  * Add NotificationChannelServiceClient#get_notification_channel_verification_code
+  * Add NotificationChannelServiceClient#verify_notification_channel
+
 ### 0.30.0 / 2019-07-08
 
 * Support overriding service host and port.
