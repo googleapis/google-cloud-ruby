@@ -1,5 +1,15 @@
 # Release History
 
+### 0.37.0 / 2019-08-21
+
+#### Features
+
+* Update documentationblerg
+* Add RecognitionConfig#diarization_config
+  * Add RecognitionConfig#diarization_config
+  * Add SpeakerDiarizationConfig
+  * Update documentation
+
 ### 0.36.0 / 2019-07-08
 
 * Update documentation.
