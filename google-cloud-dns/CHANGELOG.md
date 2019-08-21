@@ -1,5 +1,11 @@
 # Release History
 
+### 0.30.2 / 2019-08-21
+
+#### Bug Fixes
+
+* Update documentationblerg
+
 ### 0.30.1 / 2019-07-15
 
 * Ensure use of a sufficiently recent REST client with the correct endpoint.
