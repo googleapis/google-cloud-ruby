@@ -1,5 +1,15 @@
 # Release History
 
+### 1.2.1 / 2019-08-21
+
+#### Bug Fixes
+
+* Update documentationblerg
+
+#### Performance Improvements
+
+* Update network configuration for many RPCs to retryable
+
 ### 1.2.0 / 2019-07-08
 
 * Add IAM GetPolicyOptions.
