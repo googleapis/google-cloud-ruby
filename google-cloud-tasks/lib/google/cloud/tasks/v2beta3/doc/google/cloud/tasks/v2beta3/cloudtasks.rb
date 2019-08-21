@@ -20,9 +20,7 @@ module Google
         # Request message for {Google::Cloud::Tasks::V2beta3::CloudTasks::ListQueues ListQueues}.
         # @!attribute [rw] parent
         #   @return [String]
-        #     Required.
-        #
-        #     The location name.
+        #     Required. The location name.
         #     For example: `projects/PROJECT_ID/locations/LOCATION_ID`
         # @!attribute [rw] filter
         #   @return [String]
@@ -78,18 +76,14 @@ module Google
         # Request message for {Google::Cloud::Tasks::V2beta3::CloudTasks::GetQueue GetQueue}.
         # @!attribute [rw] name
         #   @return [String]
-        #     Required.
-        #
-        #     The resource name of the queue. For example:
+        #     Required. The resource name of the queue. For example:
         #     `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID`
         class GetQueueRequest; end
 
         # Request message for {Google::Cloud::Tasks::V2beta3::CloudTasks::CreateQueue CreateQueue}.
         # @!attribute [rw] parent
         #   @return [String]
-        #     Required.
-        #
-        #     The location name in which the queue will be created.
+        #     Required. The location name in which the queue will be created.
         #     For example: `projects/PROJECT_ID/locations/LOCATION_ID`
         #
         #     The list of allowed locations can be obtained by calling Cloud
@@ -97,9 +91,7 @@ module Google
         #     {Google::Cloud::Location::Locations::ListLocations ListLocations}.
         # @!attribute [rw] queue
         #   @return [Google::Cloud::Tasks::V2beta3::Queue]
-        #     Required.
-        #
-        #     The queue to create.
+        #     Required. The queue to create.
         #
         #     {Google::Cloud::Tasks::V2beta3::Queue#name Queue's name} cannot be the same as an existing queue.
         class CreateQueueRequest; end
@@ -107,9 +99,7 @@ module Google
         # Request message for {Google::Cloud::Tasks::V2beta3::CloudTasks::UpdateQueue UpdateQueue}.
         # @!attribute [rw] queue
         #   @return [Google::Cloud::Tasks::V2beta3::Queue]
-        #     Required.
-        #
-        #     The queue to create or update.
+        #     Required. The queue to create or update.
         #
         #     The queue's {Google::Cloud::Tasks::V2beta3::Queue#name name} must be specified.
         #
@@ -126,45 +116,35 @@ module Google
         # Request message for {Google::Cloud::Tasks::V2beta3::CloudTasks::DeleteQueue DeleteQueue}.
         # @!attribute [rw] name
         #   @return [String]
-        #     Required.
-        #
-        #     The queue name. For example:
+        #     Required. The queue name. For example:
         #     `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID`
         class DeleteQueueRequest; end
 
         # Request message for {Google::Cloud::Tasks::V2beta3::CloudTasks::PurgeQueue PurgeQueue}.
         # @!attribute [rw] name
         #   @return [String]
-        #     Required.
-        #
-        #     The queue name. For example:
+        #     Required. The queue name. For example:
         #     `projects/PROJECT_ID/location/LOCATION_ID/queues/QUEUE_ID`
         class PurgeQueueRequest; end
 
         # Request message for {Google::Cloud::Tasks::V2beta3::CloudTasks::PauseQueue PauseQueue}.
         # @!attribute [rw] name
         #   @return [String]
-        #     Required.
-        #
-        #     The queue name. For example:
+        #     Required. The queue name. For example:
         #     `projects/PROJECT_ID/location/LOCATION_ID/queues/QUEUE_ID`
         class PauseQueueRequest; end
 
         # Request message for {Google::Cloud::Tasks::V2beta3::CloudTasks::ResumeQueue ResumeQueue}.
         # @!attribute [rw] name
         #   @return [String]
-        #     Required.
-        #
-        #     The queue name. For example:
+        #     Required. The queue name. For example:
         #     `projects/PROJECT_ID/location/LOCATION_ID/queues/QUEUE_ID`
         class ResumeQueueRequest; end
 
         # Request message for listing tasks using {Google::Cloud::Tasks::V2beta3::CloudTasks::ListTasks ListTasks}.
         # @!attribute [rw] parent
         #   @return [String]
-        #     Required.
-        #
-        #     The queue name. For example:
+        #     Required. The queue name. For example:
         #     `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID`
         # @!attribute [rw] response_view
         #   @return [Google::Cloud::Tasks::V2beta3::Task::View]
@@ -221,9 +201,7 @@ module Google
         # Request message for getting a task using {Google::Cloud::Tasks::V2beta3::CloudTasks::GetTask GetTask}.
         # @!attribute [rw] name
         #   @return [String]
-        #     Required.
-        #
-        #     The task name. For example:
+        #     Required. The task name. For example:
         #     `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID`
         # @!attribute [rw] response_view
         #   @return [Google::Cloud::Tasks::V2beta3::Task::View]
@@ -244,17 +222,13 @@ module Google
         # Request message for {Google::Cloud::Tasks::V2beta3::CloudTasks::CreateTask CreateTask}.
         # @!attribute [rw] parent
         #   @return [String]
-        #     Required.
-        #
-        #     The queue name. For example:
+        #     Required. The queue name. For example:
         #     `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID`
         #
         #     The queue must already exist.
         # @!attribute [rw] task
         #   @return [Google::Cloud::Tasks::V2beta3::Task]
-        #     Required.
-        #
-        #     The task to add.
+        #     Required. The task to add.
         #
         #     Task names have the following format:
         #     `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID`.
@@ -307,9 +281,7 @@ module Google
         # {Google::Cloud::Tasks::V2beta3::CloudTasks::DeleteTask DeleteTask}.
         # @!attribute [rw] name
         #   @return [String]
-        #     Required.
-        #
-        #     The task name. For example:
+        #     Required. The task name. For example:
         #     `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID`
         class DeleteTaskRequest; end
 
@@ -317,9 +289,7 @@ module Google
         # {Google::Cloud::Tasks::V2beta3::CloudTasks::RunTask RunTask}.
         # @!attribute [rw] name
         #   @return [String]
-        #     Required.
-        #
-        #     The task name. For example:
+        #     Required. The task name. For example:
         #     `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID`
         # @!attribute [rw] response_view
         #   @return [Google::Cloud::Tasks::V2beta3::Task::View]

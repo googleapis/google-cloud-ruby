@@ -47,9 +47,7 @@ module Google
         #     An App Engine task is a task that has {Google::Cloud::Tasks::V2::AppEngineHttpRequest AppEngineHttpRequest} set.
         # @!attribute [rw] schedule_time
         #   @return [Google::Protobuf::Timestamp]
-        #     The time when the task is scheduled to be attempted.
-        #
-        #     For App Engine queues, this is when the task will be attempted or retried.
+        #     The time when the task is scheduled to be attempted or retried.
         #
         #     `schedule_time` will be truncated to the nearest microsecond.
         # @!attribute [rw] create_time
