@@ -1,5 +1,12 @@
 # Release History
 
+### 1.6.0 / 2019-08-21
+
+#### Features
+
+* Update documentation
+* Support overriding of service endpoint
+
 ### 1.5.5 / 2019-07-12
 
 * Update #to_hash to #to_h for compatibility with google-protobuf >= 3.9.0
