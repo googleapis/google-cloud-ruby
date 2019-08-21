@@ -1,5 +1,11 @@
 # Release History
 
+### 1.1.1 / 2019-08-21
+
+#### Bug Fixes
+
+* Update documentationblerg
+
 ### 1.1.0 / 2019-07-08
 
 * Support overriding service host and port.
