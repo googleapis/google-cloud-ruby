@@ -1,5 +1,11 @@
 # Release History
 
+### 0.60.1 / 2019-08-21
+
+#### Bug Fixes
+
+* Update documentation
+
 ### 0.60.0 / 2019-06-11
 
 * Update google-cloud-scheduler dependency to 1.0
