@@ -499,6 +499,20 @@ module Google
           #   value for `expiration_policy.ttl` is 1 day.
           #   A hash of the same form as `Google::Cloud::PubSub::V1::ExpirationPolicy`
           #   can also be provided.
+          # @param dead_letter_policy [Google::Cloud::PubSub::V1::DeadLetterPolicy | Hash]
+          #   A policy that specifies the conditions for dead lettering messages in
+          #   this subscription. If dead_letter_policy is not set, dead lettering
+          #   is disabled.
+          #
+          #   The Cloud Pub/Sub service account associated with this subscriptions's
+          #   parent project (i.e.,
+          #   service-\\{project_number}@gcp-sa-pubsub.iam.gserviceaccount.com) must have
+          #   permission to Acknowledge() messages on this subscription.
+          #   <b>EXPERIMENTAL:</b> This feature is part of a closed alpha release. This
+          #   API might be changed in backward-incompatible ways and is not recommended
+          #   for production use. It is not subject to any SLA or deprecation policy.
+          #   A hash of the same form as `Google::Cloud::PubSub::V1::DeadLetterPolicy`
+          #   can also be provided.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -525,6 +539,7 @@ module Google
               labels: nil,
               enable_message_ordering: nil,
               expiration_policy: nil,
+              dead_letter_policy: nil,
               options: nil,
               &block
             req = {
@@ -536,7 +551,8 @@ module Google
               message_retention_duration: message_retention_duration,
               labels: labels,
               enable_message_ordering: enable_message_ordering,
-              expiration_policy: expiration_policy
+              expiration_policy: expiration_policy,
+              dead_letter_policy: dead_letter_policy
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Cloud::PubSub::V1::Subscription)
             @create_subscription.call(req, options, &block)
@@ -816,8 +832,9 @@ module Google
           #   The subscription from which messages should be pulled.
           #   Format is `projects/{project}/subscriptions/{sub}`.
           # @param max_messages [Integer]
-          #   The maximum number of messages returned for this request. The Pub/Sub
-          #   system may return fewer than the number specified.
+          #   The maximum number of messages to return for this request. Must be a
+          #   positive integer. The Pub/Sub system may return fewer than the number
+          #   specified.
           # @param return_immediately [true, false]
           #   If this field set to true, the system will respond immediately even if
           #   it there are no messages available to return in the `Pull` response.
