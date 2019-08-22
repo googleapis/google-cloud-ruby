@@ -204,7 +204,7 @@ module Grafeas
           updater_proc = credentials.updater_proc
         end
 
-        package_version = Grafeas::VERSION
+        package_version = Grafeas::Client::VERSION
 
         google_api_client = "gl-ruby/#{RUBY_VERSION}"
         google_api_client << " #{lib_name}/#{lib_version}" if lib_name

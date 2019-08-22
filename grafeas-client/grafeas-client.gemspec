@@ -4,7 +4,7 @@ require File.expand_path("../lib/grafeas/client/version", __FILE__)
 
 Gem::Specification.new do |gem|
   gem.name          = "grafeas-client"
-  gem.version       = Grafeas::VERSION
+  gem.version       = Grafeas::Client::VERSION
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"

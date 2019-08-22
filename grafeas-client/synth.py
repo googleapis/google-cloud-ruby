@@ -228,7 +228,7 @@ s.replace(
 s.replace(
     'grafeas-client.gemspec',
     '(gem.version\s+=\s+).\d+.\d+.\d.*$',
-    '\\1Grafeas::VERSION'
+    '\\1Grafeas::Client::VERSION'
 )
 s.replace(
     'lib/grafeas/v1/*_client.rb',
@@ -238,7 +238,7 @@ s.replace(
 s.replace(
     'lib/grafeas/v1/*_client.rb',
     'Gem.loaded_specs\[.*\]\.version\.version',
-    'Grafeas::VERSION'
+    'Grafeas::Client::VERSION'
 )
 
 # Fix links for devsite migration
