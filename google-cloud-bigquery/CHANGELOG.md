@@ -4,12 +4,15 @@
 
 #### Features
 
-* Update documentation
 * Support overriding of service endpoint
 
 #### Performance Improvements
 
 * Use MiniMime to detect content types
+
+#### Documentation
+
+* Update documentation
 
 ### 1.13.0 / 2019-07-31
 
