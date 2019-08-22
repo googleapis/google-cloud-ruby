@@ -14,5 +14,8 @@
 
 
 module Grafeas
-  VERSION = "0.2.1".freeze
+  module Client
+    VERSION = "0.2.1".freeze
+  end
+  VERSION = Client::VERSION
 end

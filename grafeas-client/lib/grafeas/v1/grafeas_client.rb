@@ -27,7 +27,7 @@ require "google/gax"
 
 require "grafeas/v1/grafeas_pb"
 require "grafeas/v1/credentials"
-require "grafeas/version"
+require "grafeas/client/version"
 
 module Grafeas
   module V1

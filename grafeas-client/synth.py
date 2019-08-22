@@ -223,7 +223,7 @@ s.replace(
 s.replace(
     'grafeas-client.gemspec',
     '\nGem::Specification.new do',
-    'require File.expand_path("../lib/grafeas/version", __FILE__)\n\nGem::Specification.new do'
+    'require File.expand_path("../lib/grafeas/client/version", __FILE__)\n\nGem::Specification.new do'
 )
 s.replace(
     'grafeas-client.gemspec',
@@ -233,7 +233,7 @@ s.replace(
 s.replace(
     'lib/grafeas/v1/*_client.rb',
     '(require \".*credentials\"\n)\n',
-    '\\1require "grafeas/version"\n\n'
+    '\\1require "grafeas/client/version"\n\n'
 )
 s.replace(
     'lib/grafeas/v1/*_client.rb',

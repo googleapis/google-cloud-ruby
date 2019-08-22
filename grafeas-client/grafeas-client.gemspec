@@ -1,6 +1,6 @@
 # -*- ruby -*-
 # encoding: utf-8
-require File.expand_path("../lib/grafeas/version", __FILE__)
+require File.expand_path("../lib/grafeas/client/version", __FILE__)
 
 Gem::Specification.new do |gem|
   gem.name          = "grafeas-client"
