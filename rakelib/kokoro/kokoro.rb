@@ -51,21 +51,22 @@ class Kokoro < Command
   def nightly
     run_ci do
       run "bundle exec rake ci:acceptance", 3600
+      release_please if ENV.fetch("OS", "") == "linux"
     end
   end
 
   def post
     job_info
-    git_commit = ENV["KOKORO_GITHUB_COMMIT"] || "master"
+    git_commit = ENV.fetch "KOKORO_GITHUB_COMMIT", "master"
 
     markdown_files = Dir.glob "**/*.md"
     broken_markdown_links = check_links markdown_files,
-                            "https://github.com/googleapis/google-cloud-ruby/tree/#{git_commit}/",
-                            " --skip '^(?!(\\Wruby.*google|.*google.*\\Wruby|.*cloud\\.google\\.com))'"
+                                        "https://github.com/googleapis/google-cloud-ruby/tree/#{git_commit}/",
+                                        " --skip '^(?!(\\Wruby.*google|.*google.*\\Wruby|.*cloud\\.google\\.com))'"
 
     broken_devsite_links = check_links @gems,
-                           "https://googleapis.dev/ruby/",
-                           "/latest/ --recurse --skip https:.*github.*"
+                                       "https://googleapis.dev/ruby/",
+                                       "/latest/ --recurse --skip https:.*github.*"
 
     puts_broken_links broken_markdown_links
     puts_broken_links broken_devsite_links
@@ -73,9 +74,7 @@ class Kokoro < Command
 
   def release
     load_env_vars
-    if ENV["RUBYGEMS_API_TOKEN"].nil? || ENV["RUBYGEMS_API_TOKEN"].empty?
-      raise "RUBYGEMS_API_TOKEN must be set"
-    end
+    raise "RUBYGEMS_API_TOKEN must be set" if ENV["RUBYGEMS_API_TOKEN"].nil? || ENV["RUBYGEMS_API_TOKEN"].empty?
     @tag = "#{@gem}/v#{version}"
   end
 
@@ -95,7 +94,7 @@ class Kokoro < Command
       checked_links = out.split "\n"
       checked_links.select! { |link| link =~ /\[\d+\]/ && !link.include?("[200]") }
       unless checked_links.empty?
-        @failed = true 
+        @failed = true
         broken_links[location] += checked_links
       end
     end
@@ -110,7 +109,7 @@ class Kokoro < Command
     puts token * line_length
     puts ""
   end
-  
+
   def header_2 str, token = "#"
     puts "\n#{token * 3} #{str} #{token * 3}\n"
   end
@@ -141,8 +140,8 @@ class Kokoro < Command
   end
 
   def release_please gem = nil, token = nil
-    gem     ||= @gem
-    token   ||= "#{ENV['KOKORO_KEYSTORE_DIR']}/73713_yoshi-automation-github-key"
+    gem ||= @gem
+    token ||= "#{ENV['KOKORO_KEYSTORE_DIR']}/73713_yoshi-automation-github-key"
     opts = {
       "package-name"         => gem,
       "last-package-version" => version(gem),
@@ -150,7 +149,7 @@ class Kokoro < Command
       "repo-url"             => "googleapis/google-cloud-ruby",
       "token"                => token
     }.to_a.map { |a| "--#{a[0]}=#{a[1]}" }.join(" ")
-    header_2 "Running release-please for #{gem}, since #{version(gem)}"
+    header_2 "Running release-please for #{gem}, since #{version gem}"
     run "npx release-please release-pr #{opts}"
   end
 
@@ -182,11 +181,11 @@ class Kokoro < Command
 
   def version gem = nil
     version = "0.1.0"
-    gem     ||= @gem
+    gem ||= @gem
     run_ci gem, true do
       version = `bundle exec gem list`
-                  .split("\n").select { |line| line.include? gem }
-                  .first.split("(").last.split(")").first
+                .split("\n").select { |line| line.include? gem }
+                .first.split("(").last.split(")").first
     end
     version
   end

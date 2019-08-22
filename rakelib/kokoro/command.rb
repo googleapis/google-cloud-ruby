@@ -27,13 +27,11 @@ class Command
   end
 
   def run_command_with_timeout command, timeout
-    begin
-      Timeout.timeout timeout do
-        run_command command
-      end
-    rescue Timeout::Error
-      header_2 "TIMEOUT - #{timeout / 60} minute limit exceeded."
-      @failed = true
+    Timeout.timeout timeout do
+      run_command command
     end
+  rescue Timeout::Error
+    header_2 "TIMEOUT - #{timeout / 60} minute limit exceeded."
+    @failed = true
   end
 end
