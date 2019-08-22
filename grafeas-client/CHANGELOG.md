@@ -1,10 +1,6 @@
 # Release History
 ### 0.2.1 / 2019-08-22
 
-#### Bug Fixes
-
-* Update #to_hash to #to_h to fix for protobuf 3.9.0
-
 #### Documentation
 
 * Update documentation
