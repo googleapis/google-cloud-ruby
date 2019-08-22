@@ -5,8 +5,7 @@
 #### Features
 
 * Add RecognitionConfig#diarization_config
-  * Add RecognitionConfig#diarization_config
-  * Add SpeakerDiarizationConfig
+* Add SpeakerDiarizationConfig
 
 #### Documentation
 
