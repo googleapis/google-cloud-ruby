@@ -1,4 +1,5 @@
 # Release History
+
 ### 0.2.1 / 2019-08-22
 
 #### Documentation
