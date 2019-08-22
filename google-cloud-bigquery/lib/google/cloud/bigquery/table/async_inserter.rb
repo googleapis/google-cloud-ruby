@@ -101,11 +101,11 @@ module Google
           # See {Google::Cloud::Bigquery::Table#insert_async}.
           #
           # Because BigQuery's streaming API is designed for high insertion
-          # rates, modifications to the underlying table metadata exhibit are
-          # eventually consistent when interacting with the streaming system. In
-          # most cases metadata changes are propagated within minutes, but
-          # during this period API responses may reflect the inconsistent state
-          # of the table.
+          # rates, modifications to the underlying table metadata are eventually
+          # consistent when interacting with the streaming system. In most cases
+          # metadata changes are propagated within minutes, but during this
+          # period API responses may reflect the inconsistent state of the
+          # table.
           #
           # @see https://cloud.google.com/bigquery/streaming-data-into-bigquery
           #   Streaming Data Into BigQuery

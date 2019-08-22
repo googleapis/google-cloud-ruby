@@ -1954,7 +1954,7 @@ module Google
         # query results.
         #
         # Because BigQuery's streaming API is designed for high insertion rates,
-        # modifications to the underlying table metadata exhibit are eventually
+        # modifications to the underlying table metadata are eventually
         # consistent when interacting with the streaming system. In most cases
         # metadata changes are propagated within minutes, but during this period
         # API responses may reflect the inconsistent state of the table.
