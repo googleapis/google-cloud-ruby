@@ -18,6 +18,9 @@
   * Add Document::Layout
   * Add DocumentDimensions
 * Deprecate ColumnSpec#top_correlated_columns
+
+#### Documentation
+
 * Update documentation
 
 ### 0.1.0 / 2019-07-15
