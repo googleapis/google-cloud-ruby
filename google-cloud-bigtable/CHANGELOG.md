@@ -4,8 +4,11 @@
 
 #### Features
 
-* Update documentation
 * Support overriding of the service endpoint
+
+#### Documentation
+
+* Update documentation
 
 ### 0.5.0 / 2019-08-05
 
