@@ -7,7 +7,6 @@
 * Add RecognitionConfig#diarization_config
   * Add RecognitionConfig#diarization_config
   * Add SpeakerDiarizationConfig
-  * Update documentation
 
 #### Documentation
 
