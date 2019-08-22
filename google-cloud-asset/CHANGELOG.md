@@ -1,5 +1,11 @@
 # Release History
 
+### 0.3.1 / 2019-08-22
+
+#### Documentation
+
+* Update documentation
+
 ### 0.3.0 / 2019-07-08
 
 * Support overriding service host and port for generated clients
