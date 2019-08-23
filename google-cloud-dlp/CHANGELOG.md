@@ -1,5 +1,11 @@
 # Release History
 
+### 0.11.1 / 2019-08-23
+
+#### Documentation
+
+* Update documentation
+
 ### 0.11.0 / 2019-07-08
 
 * Add Action#publish_findings_to_cloud_data_catalog
