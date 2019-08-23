@@ -141,6 +141,79 @@ describe Google::Cloud::Spanner::V1::SpannerClient do
     end
   end
 
+  describe 'batch_create_sessions' do
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Spanner::V1::SpannerClient#batch_create_sessions."
+
+    it 'invokes batch_create_sessions without error' do
+      # Create request parameters
+      formatted_database = Google::Cloud::Spanner::V1::SpannerClient.database_path("[PROJECT]", "[INSTANCE]", "[DATABASE]")
+
+      # Create expected grpc response
+      expected_response = {}
+      expected_response = Google::Gax::to_proto(expected_response, Google::Spanner::V1::BatchCreateSessionsResponse)
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Spanner::V1::BatchCreateSessionsRequest, request)
+        assert_equal(formatted_database, request.database)
+        OpenStruct.new(execute: expected_response)
+      end
+      mock_stub = MockGrpcClientStub_v1.new(:batch_create_sessions, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockSpannerCredentials_v1.new("batch_create_sessions")
+
+      Google::Spanner::V1::Spanner::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Spanner::V1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Spanner::V1::SpannerClient.new
+
+          # Call method
+          response = client.batch_create_sessions(formatted_database)
+
+          # Verify the response
+          assert_equal(expected_response, response)
+
+          # Call method with block
+          client.batch_create_sessions(formatted_database) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
+        end
+      end
+    end
+
+    it 'invokes batch_create_sessions with error' do
+      # Create request parameters
+      formatted_database = Google::Cloud::Spanner::V1::SpannerClient.database_path("[PROJECT]", "[INSTANCE]", "[DATABASE]")
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Spanner::V1::BatchCreateSessionsRequest, request)
+        assert_equal(formatted_database, request.database)
+        raise custom_error
+      end
+      mock_stub = MockGrpcClientStub_v1.new(:batch_create_sessions, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockSpannerCredentials_v1.new("batch_create_sessions")
+
+      Google::Spanner::V1::Spanner::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Spanner::V1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Spanner::V1::SpannerClient.new
+
+          # Call method
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
+            client.batch_create_sessions(formatted_database)
+          end
+
+          # Verify the GaxError wrapped the custom error that was raised.
+          assert_match(custom_error.message, err.message)
+        end
+      end
+    end
+  end
+
   describe 'get_session' do
     custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Spanner::V1::SpannerClient#get_session."
 

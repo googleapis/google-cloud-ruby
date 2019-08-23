@@ -229,6 +229,14 @@ module Google
                 {'database' => request.database}
               end
             )
+            @batch_create_sessions = Google::Gax.create_api_call(
+              @spanner_stub.method(:batch_create_sessions),
+              defaults["batch_create_sessions"],
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'database' => request.database}
+              end
+            )
             @get_session = Google::Gax.create_api_call(
               @spanner_stub.method(:get_session),
               defaults["get_session"],
@@ -391,6 +399,54 @@ module Google
             @create_session.call(req, options, &block)
           end
 
+          # Creates multiple new sessions.
+          #
+          # This API can be used to initialize a session cache on the clients.
+          # See https://goo.gl/TgSFN2 for best practices on session cache management.
+          #
+          # @param database [String]
+          #   Required. The database in which the new sessions are created.
+          # @param session_template [Google::Spanner::V1::Session | Hash]
+          #   Parameters to be applied to each created session.
+          #   A hash of the same form as `Google::Spanner::V1::Session`
+          #   can also be provided.
+          # @param session_count [Integer]
+          #   Required. The number of sessions to be created in this batch call.
+          #   The API may return fewer than the requested number of sessions. If a
+          #   specific number of sessions are desired, the client can make additional
+          #   calls to BatchCreateSessions (adjusting
+          #   {Google::Spanner::V1::BatchCreateSessionsRequest#session_count session_count}
+          #   as necessary).
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Spanner::V1::BatchCreateSessionsResponse]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
+          # @return [Google::Spanner::V1::BatchCreateSessionsResponse]
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/spanner/v1"
+          #
+          #   spanner_client = Google::Cloud::Spanner::V1::SpannerClient.new
+          #   formatted_database = Google::Cloud::Spanner::V1::SpannerClient.database_path("[PROJECT]", "[INSTANCE]", "[DATABASE]")
+          #   response = spanner_client.batch_create_sessions(formatted_database)
+
+          def batch_create_sessions \
+              database,
+              session_template: nil,
+              session_count: nil,
+              options: nil,
+              &block
+            req = {
+              database: database,
+              session_template: session_template,
+              session_count: session_count
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Spanner::V1::BatchCreateSessionsRequest)
+            @batch_create_sessions.call(req, options, &block)
+          end
+
           # Gets a session. Returns `NOT_FOUND` if the session does not exist.
           # This is mainly useful for determining whether a session is still
           # alive.
@@ -541,9 +597,6 @@ module Google
           # @param sql [String]
           #   Required. The SQL string.
           # @param transaction [Google::Spanner::V1::TransactionSelector | Hash]
-          #   The transaction to use. If none is provided, the default is a
-          #   temporary read-only transaction with strong concurrency.
-          #
           #   The transaction to use.
           #
           #   For queries, if none is provided, the default is a temporary read-only
@@ -671,9 +724,6 @@ module Google
           # @param sql [String]
           #   Required. The SQL string.
           # @param transaction [Google::Spanner::V1::TransactionSelector | Hash]
-          #   The transaction to use. If none is provided, the default is a
-          #   temporary read-only transaction with strong concurrency.
-          #
           #   The transaction to use.
           #
           #   For queries, if none is provided, the default is a temporary read-only
@@ -796,8 +846,9 @@ module Google
           #
           # Statements are executed in order, sequentially.
           # {Spanner::ExecuteBatchDmlResponse ExecuteBatchDmlResponse} will contain a
-          # {Google::Spanner::V1::ResultSet ResultSet} for each DML statement that has successfully executed. If a
-          # statement fails, its error status will be returned as part of the
+          # {Google::Spanner::V1::ResultSet ResultSet} for each DML statement that has
+          # successfully executed. If a statement fails, its error status will be
+          # returned as part of the
           # {Spanner::ExecuteBatchDmlResponse ExecuteBatchDmlResponse}. Execution will
           # stop at the first failed statement; the remaining statements will not run.
           #

@@ -25,6 +25,31 @@ module Google
       #     The session to create.
       class CreateSessionRequest; end
 
+      # The request for
+      # {Google::Spanner::V1::Spanner::BatchCreateSessions BatchCreateSessions}.
+      # @!attribute [rw] database
+      #   @return [String]
+      #     Required. The database in which the new sessions are created.
+      # @!attribute [rw] session_template
+      #   @return [Google::Spanner::V1::Session]
+      #     Parameters to be applied to each created session.
+      # @!attribute [rw] session_count
+      #   @return [Integer]
+      #     Required. The number of sessions to be created in this batch call.
+      #     The API may return fewer than the requested number of sessions. If a
+      #     specific number of sessions are desired, the client can make additional
+      #     calls to BatchCreateSessions (adjusting
+      #     {Google::Spanner::V1::BatchCreateSessionsRequest#session_count session_count}
+      #     as necessary).
+      class BatchCreateSessionsRequest; end
+
+      # The response for
+      # {Google::Spanner::V1::Spanner::BatchCreateSessions BatchCreateSessions}.
+      # @!attribute [rw] session
+      #   @return [Array<Google::Spanner::V1::Session>]
+      #     The freshly created sessions.
+      class BatchCreateSessionsResponse; end
+
       # A session in the Cloud Spanner API.
       # @!attribute [rw] name
       #   @return [String]
@@ -108,9 +133,6 @@ module Google
       #     Required. The session in which the SQL query should be performed.
       # @!attribute [rw] transaction
       #   @return [Google::Spanner::V1::TransactionSelector]
-      #     The transaction to use. If none is provided, the default is a
-      #     temporary read-only transaction with strong concurrency.
-      #
       #     The transaction to use.
       #
       #     For queries, if none is provided, the default is a temporary read-only
@@ -249,7 +271,9 @@ module Google
         #   @return [Hash{String => Google::Spanner::V1::Type}]
         #     It is not always possible for Cloud Spanner to infer the right SQL type
         #     from a JSON value.  For example, values of type `BYTES` and values
-        #     of type `STRING` both appear in {Google::Spanner::V1::ExecuteBatchDmlRequest::Statement#params params} as JSON strings.
+        #     of type `STRING` both appear in
+        #     {Google::Spanner::V1::ExecuteBatchDmlRequest::Statement#params params} as
+        #     JSON strings.
         #
         #     In these cases, `param_types` can be used to specify the exact
         #     SQL type for some or all of the SQL statement parameters. See the
@@ -258,11 +282,13 @@ module Google
         class Statement; end
       end
 
-      # The response for {Google::Spanner::V1::Spanner::ExecuteBatchDml ExecuteBatchDml}. Contains a list
-      # of {Google::Spanner::V1::ResultSet ResultSet}, one for each DML statement that has successfully executed.
-      # If a statement fails, the error is returned as part of the response payload.
-      # Clients can determine whether all DML statements have run successfully, or if
-      # a statement failed, using one of the following approaches:
+      # The response for
+      # {Google::Spanner::V1::Spanner::ExecuteBatchDml ExecuteBatchDml}. Contains a list
+      # of {Google::Spanner::V1::ResultSet ResultSet}, one for each DML statement that
+      # has successfully executed. If a statement fails, the error is returned as
+      # part of the response payload. Clients can determine whether all DML
+      # statements have run successfully, or if a statement failed, using one of the
+      # following approaches:
       #
       #   1. Check if 'status' field is OkStatus.
       #   2. Check if result_sets_size() equals the number of statements in
@@ -280,9 +306,11 @@ module Google
       # @!attribute [rw] result_sets
       #   @return [Array<Google::Spanner::V1::ResultSet>]
       #     ResultSets, one for each statement in the request that ran successfully, in
-      #     the same order as the statements in the request. Each {Google::Spanner::V1::ResultSet ResultSet} will
-      #     not contain any rows. The {Google::Spanner::V1::ResultSetStats ResultSetStats} in each {Google::Spanner::V1::ResultSet ResultSet} will
-      #     contain the number of rows modified by the statement.
+      #     the same order as the statements in the request. Each
+      #     {Google::Spanner::V1::ResultSet ResultSet} will not contain any rows. The
+      #     {Google::Spanner::V1::ResultSetStats ResultSetStats} in each
+      #     {Google::Spanner::V1::ResultSet ResultSet} will contain the number of rows
+      #     modified by the statement.
       #
       #     Only the first ResultSet in the response contains a valid
       #     {Google::Spanner::V1::ResultSetMetadata ResultSetMetadata}.
