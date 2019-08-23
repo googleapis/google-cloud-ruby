@@ -1,5 +1,11 @@
 # Release History
 
+### 1.3.1 / 2019-08-23
+
+#### Documentation
+
+* Update documentation
+
 ### 1.3.0 / 2019-02-01
 
 * Make use of Credentials#project_id
