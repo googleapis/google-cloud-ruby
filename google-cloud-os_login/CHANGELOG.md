@@ -1,8 +1,8 @@
 # Release History
 
-### 0.3.1 / 2019-08-21
+### 0.3.1 / 2019-08-23
 
-#### Bug Fixes
+#### Documentation
 
 * Update documentation
 
