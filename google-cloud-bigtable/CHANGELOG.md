@@ -1,5 +1,15 @@
 # Release History
 
+### 0.6.0 / 2019-08-23
+
+#### Features
+
+* Support overriding of the service endpoint
+
+#### Documentation
+
+* Update documentation
+
 ### 0.5.0 / 2019-08-05
 
 * Accept nil gc_rule arguments for column_family create/update
