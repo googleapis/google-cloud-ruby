@@ -1,5 +1,15 @@
 # Release History
 
+### 0.6.0 / 2019-08-23
+
+#### Features
+
+* Add InputAudioConfig#single_utterance
+
+#### Documentation
+
+* Update documentation
+
 ### 0.5.0 / 2019-07-08
 
 * Add AgentsClient#set_agent and AgentsClient#delete_agent 
