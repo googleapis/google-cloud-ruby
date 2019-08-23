@@ -1,5 +1,16 @@
 # Release History
 
+### 1.1.0 / 2019-08-23
+
+#### Features
+
+* Support overriding of service endpoint
+* Add low-level client for the admin API
+
+#### Documentation
+
+* Update documentation
+
 ### 1.0.0 / 2019-07-15
 
 * Bump release level to GA.
