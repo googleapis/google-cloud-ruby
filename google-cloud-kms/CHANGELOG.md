@@ -1,14 +1,14 @@
 # Release History
 
-### 1.2.1 / 2019-08-21
-
-#### Bug Fixes
-
-* Update documentation
+### 1.2.1 / 2019-08-23
 
 #### Performance Improvements
 
 * Update network configuration for many RPCs to retryable
+
+#### Documentation
+
+* Update documentation
 
 ### 1.2.0 / 2019-07-08
 
