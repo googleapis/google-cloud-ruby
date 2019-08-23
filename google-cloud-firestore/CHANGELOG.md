@@ -1,12 +1,15 @@
 # Release History
 
-### 1.1.0 / 2019-08-21
+### 1.1.0 / 2019-08-23
 
 #### Features
 
-* Update documentation
-* Add low-level client for the admin API
 * Support overriding of service endpoint
+* Add low-level client for the admin API
+
+#### Documentation
+
+* Update documentation
 
 ### 1.0.0 / 2019-07-15
 
