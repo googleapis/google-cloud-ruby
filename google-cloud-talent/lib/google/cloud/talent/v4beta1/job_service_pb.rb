@@ -6,7 +6,6 @@ require 'google/protobuf'
 
 require 'google/api/annotations_pb'
 require 'google/api/client_pb'
-require 'google/cloud/talent/v4beta1/batch_pb'
 require 'google/cloud/talent/v4beta1/common_pb'
 require 'google/cloud/talent/v4beta1/filters_pb'
 require 'google/cloud/talent/v4beta1/histogram_pb'
@@ -16,6 +15,7 @@ require 'google/protobuf/any_pb'
 require 'google/protobuf/duration_pb'
 require 'google/protobuf/empty_pb'
 require 'google/protobuf/field_mask_pb'
+require 'google/rpc/status_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.cloud.talent.v4beta1.CreateJobRequest" do
     optional :parent, :string, 1
@@ -118,6 +118,13 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     repeated :jobs, :message, 2, "google.cloud.talent.v4beta1.Job"
     optional :update_mask, :message, 3, "google.protobuf.FieldMask"
   end
+  add_message "google.cloud.talent.v4beta1.JobOperationResult" do
+    repeated :job_results, :message, 1, "google.cloud.talent.v4beta1.JobOperationResult.JobResult"
+  end
+  add_message "google.cloud.talent.v4beta1.JobOperationResult.JobResult" do
+    optional :job, :message, 1, "google.cloud.talent.v4beta1.Job"
+    optional :status, :message, 2, "google.rpc.Status"
+  end
   add_enum "google.cloud.talent.v4beta1.JobView" do
     value :JOB_VIEW_UNSPECIFIED, 0
     value :JOB_VIEW_ID_ONLY, 1
@@ -148,6 +155,8 @@ module Google
         SearchJobsResponse::CommuteInfo = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4beta1.SearchJobsResponse.CommuteInfo").msgclass
         BatchCreateJobsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4beta1.BatchCreateJobsRequest").msgclass
         BatchUpdateJobsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4beta1.BatchUpdateJobsRequest").msgclass
+        JobOperationResult = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4beta1.JobOperationResult").msgclass
+        JobOperationResult::JobResult = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4beta1.JobOperationResult.JobResult").msgclass
         JobView = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4beta1.JobView").enummodule
       end
     end

@@ -133,6 +133,25 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :max, :double, 3
     optional :interval, :double, 4
   end
+  add_message "google.cloud.talent.v4beta1.BatchOperationMetadata" do
+    optional :state, :enum, 1, "google.cloud.talent.v4beta1.BatchOperationMetadata.State"
+    optional :state_description, :string, 2
+    optional :success_count, :int32, 3
+    optional :failure_count, :int32, 4
+    optional :total_count, :int32, 5
+    optional :create_time, :message, 6, "google.protobuf.Timestamp"
+    optional :update_time, :message, 7, "google.protobuf.Timestamp"
+    optional :end_time, :message, 8, "google.protobuf.Timestamp"
+  end
+  add_enum "google.cloud.talent.v4beta1.BatchOperationMetadata.State" do
+    value :STATE_UNSPECIFIED, 0
+    value :INITIALIZING, 1
+    value :PROCESSING, 2
+    value :SUCCEEDED, 3
+    value :FAILED, 4
+    value :CANCELLING, 5
+    value :CANCELLED, 6
+  end
   add_enum "google.cloud.talent.v4beta1.CompanySize" do
     value :COMPANY_SIZE_UNSPECIFIED, 0
     value :MINI, 1
@@ -292,6 +311,8 @@ module Google
         Skill = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4beta1.Skill").msgclass
         Interview = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4beta1.Interview").msgclass
         Rating = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4beta1.Rating").msgclass
+        BatchOperationMetadata = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4beta1.BatchOperationMetadata").msgclass
+        BatchOperationMetadata::State = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4beta1.BatchOperationMetadata.State").enummodule
         CompanySize = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4beta1.CompanySize").enummodule
         JobBenefit = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4beta1.JobBenefit").enummodule
         DegreeType = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4beta1.DegreeType").enummodule

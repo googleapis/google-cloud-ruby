@@ -727,6 +727,39 @@ module Google
         #     which can yield a very large response.
         class BatchUpdateJobsRequest; end
 
+        # Output only.
+        #
+        # The result of
+        # {Google::Cloud::Talent::V4beta1::JobService::BatchCreateJobs JobService::BatchCreateJobs}
+        # or
+        # {Google::Cloud::Talent::V4beta1::JobService::BatchUpdateJobs JobService::BatchUpdateJobs}
+        # APIs. It's used to replace
+        # {Google::Longrunning::Operation#response}
+        # in case of success.
+        # @!attribute [rw] job_results
+        #   @return [Array<Google::Cloud::Talent::V4beta1::JobOperationResult::JobResult>]
+        #     List of job mutation results from a batch mutate operation. It can change
+        #     until operation status is FINISHED, FAILED or CANCELLED.
+        class JobOperationResult
+          # Mutation result of a job.
+          # @!attribute [rw] job
+          #   @return [Google::Cloud::Talent::V4beta1::Job]
+          #     Here {Google::Cloud::Talent::V4beta1::Job Job} only contains basic
+          #     information including {Google::Cloud::Talent::V4beta1::Job#name name},
+          #     {Google::Cloud::Talent::V4beta1::Job#company company},
+          #     {Google::Cloud::Talent::V4beta1::Job#language_code language_code} and
+          #     {Google::Cloud::Talent::V4beta1::Job#requisition_id requisition_id}, use
+          #     getJob method to retrieve detailed information of the created/updated
+          #     job.
+          # @!attribute [rw] status
+          #   @return [Google::Rpc::Status]
+          #     The status of the job processed. This field is populated if the
+          #     processing of the
+          #     {Google::Cloud::Talent::V4beta1::JobOperationResult::JobResult#job job}
+          #     fails.
+          class JobResult; end
+        end
+
         # An enum that specifies the job attributes that are returned in the
         # {Google::Cloud::Talent::V4beta1::SearchJobsResponse::MatchingJob#job MatchingJob#job}
         # or {Google::Cloud::Talent::V4beta1::ListJobsResponse#jobs ListJobsResponse#jobs}
