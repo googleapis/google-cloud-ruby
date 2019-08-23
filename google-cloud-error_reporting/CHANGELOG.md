@@ -1,5 +1,15 @@
 # Release History
 
+### 0.32.0 / 2019-08-23
+
+#### Features
+
+* Support overriding of service endpoint
+
+#### Documentation
+
+* Update documentation
+
 ### 0.31.7 / 2019-07-31
 
 * Fix max threads setting in thread pools
