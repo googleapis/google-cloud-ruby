@@ -465,6 +465,7 @@ google-cloud-resource_manager:
 - v0.20.1
 - v0.20.0
 google-cloud-scheduler:
+- v1.1.1
 - v1.1.0
 - v1.0.1
 - v1.0.0
