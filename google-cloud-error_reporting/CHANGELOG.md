@@ -4,7 +4,6 @@
 
 #### Features
 
-* Update documentation
 * Support overriding of service endpoint
 
 #### Documentation
