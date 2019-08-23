@@ -1,11 +1,14 @@
 # Release History
 
-### 0.6.0 / 2019-08-21
+### 0.6.0 / 2019-08-23
 
 #### Features
 
-* Update documentation
 * Add InputAudioConfig#single_utterance
+
+#### Documentation
+
+* Update documentation
 
 ### 0.5.0 / 2019-07-08
 
