@@ -19,6 +19,14 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :database, :string, 1
     optional :session, :message, 2, "google.spanner.v1.Session"
   end
+  add_message "google.spanner.v1.BatchCreateSessionsRequest" do
+    optional :database, :string, 1
+    optional :session_template, :message, 2, "google.spanner.v1.Session"
+    optional :session_count, :int32, 3
+  end
+  add_message "google.spanner.v1.BatchCreateSessionsResponse" do
+    repeated :session, :message, 1, "google.spanner.v1.Session"
+  end
   add_message "google.spanner.v1.Session" do
     optional :name, :string, 1
     map :labels, :string, :string, 2
@@ -136,6 +144,8 @@ module Google
   module Spanner
     module V1
       CreateSessionRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.CreateSessionRequest").msgclass
+      BatchCreateSessionsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.BatchCreateSessionsRequest").msgclass
+      BatchCreateSessionsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.BatchCreateSessionsResponse").msgclass
       Session = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.Session").msgclass
       GetSessionRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.GetSessionRequest").msgclass
       ListSessionsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.ListSessionsRequest").msgclass
