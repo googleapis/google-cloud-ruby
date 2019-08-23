@@ -1,5 +1,11 @@
 # Release History
 
+### 0.5.1 / 2019-08-23
+
+#### Documentation
+
+* Update documentation
+
 ### 0.5.0 / 2019-07-08
 
 * Custom metadata headers are honored by long running operations calls.
