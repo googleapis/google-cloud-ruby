@@ -15,6 +15,6 @@
 
 module Stackdriver
   module Core
-    VERSION = "1.3.3".freeze
+    VERSION = "1.3.4".freeze
   end
 end
