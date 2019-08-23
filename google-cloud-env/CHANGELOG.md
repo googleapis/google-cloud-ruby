@@ -1,11 +1,14 @@
 # Release History
 
-### 1.2.1 / 2019-08-21
+### 1.2.1 / 2019-08-23
 
 #### Bug Fixes
 
-* Update documentation
 * Send Metadata-Flavor header when testing the metadata server root
+
+#### Documentation
+
+* Update documentation
 
 ### 1.2.0 / 2019-06-19
 
