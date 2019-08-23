@@ -334,6 +334,7 @@ google-cloud-language:
 - v0.20.1
 - v0.20.0
 google-cloud-logging:
+- v1.7.0
 - v1.6.6
 - v1.6.5
 - v1.6.4
