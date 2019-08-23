@@ -1,12 +1,9 @@
 # Release History
 
-### 0.3.0 / 2019-08-21
+### 0.3.0 / 2019-08-23
 
 #### Features
 
-* Update documentation
-* Add location path helpers
-* Add service_address and service_port to client constructor
 * Add StartManualTransferRuns
   * DataTransferServiceClient changes:
     * Add DataTransferServiceClient#start_manual_transfer_runs
@@ -23,6 +20,12 @@
     * Deprecate TransferConfig#user_id
   * TransferRun changes:
     * Deprecate TransferRun#user_id
+* Add location path helpers
+* Add service_address and service_port to client constructor
+
+#### Documentation
+
+* Update documentation
 
 ### 0.2.5 / 2019-06-11
 
