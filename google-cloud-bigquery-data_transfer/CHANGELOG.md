@@ -1,5 +1,32 @@
 # Release History
 
+### 0.3.0 / 2019-08-23
+
+#### Features
+
+* Add StartManualTransferRuns
+  * DataTransferServiceClient changes:
+    * Add DataTransferServiceClient#start_manual_transfer_runs
+    * Deprecate DataTransferServiceClient#schedule_transfer_runs
+    * Add version_info argument to DataTransferServiceClient#create_transfer_config
+    * Add version_info argument to DataTransferServiceClient#update_transfer_config
+  * DataSourceParameter changes:
+    * Add DataSourceParameter#deprecated attribute
+    * Deprecate DataSourceParameter#repeated attribute
+    * Deprecate DataSourceParameter#fields attribute
+    * Deprecate DataSourceParameter::Type::RECORD value
+  * TransferConfig changes:
+    * Deprecate TransferConfig#schedule_options
+    * Deprecate TransferConfig#user_id
+  * TransferRun changes:
+    * Deprecate TransferRun#user_id
+* Add location path helpers
+* Add service_address and service_port to client constructor
+
+#### Documentation
+
+* Update documentation
+
 ### 0.2.5 / 2019-06-11
 
 * Add VERSION constant

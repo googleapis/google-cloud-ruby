@@ -17,7 +17,7 @@ module Google
   module Cloud
     module Bigquery
       module DataTransfer
-        VERSION = "0.2.5".freeze
+        VERSION = "0.3.0".freeze
       end
     end
   end
