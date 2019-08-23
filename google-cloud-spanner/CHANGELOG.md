@@ -1,5 +1,23 @@
 # Release History
 
+### 1.10.0 / 2019-08-23
+
+#### Features
+
+* Add Batch Create Sessions to low-level API
+  * Add SpannerClient#batch_create_sessions
+  * Add BatchCreateSessionsRequest
+  * Add BatchCreateSessionsResponse
+* Support overriding of service endpoint
+
+#### Bug Fixes
+
+* Low-level admin clients now honor service_address and service_port
+
+#### Documentation
+
+* Update documentation
+
 ### 1.9.5 / 2019-07-31
 
 * Reduce thread usage at startup
