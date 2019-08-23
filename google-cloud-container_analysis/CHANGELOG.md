@@ -1,10 +1,14 @@
 # Release History
-### 0.3.0 / 2019-08-21
+
+### 0.3.0 / 2019-08-23
 
 #### Features
 
-* Update documentation
 * Add occurrence_path helper
+
+#### Documentation
+
+* Update documentation
 
 ### 0.2.0 / 2019-07-08
 
