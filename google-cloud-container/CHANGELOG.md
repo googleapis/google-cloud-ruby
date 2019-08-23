@@ -1,6 +1,6 @@
 # Release History
 
-### 0.5.1 / 2019-08-21
+### 0.5.1 / 2019-08-23
 
 #### Documentation
 
