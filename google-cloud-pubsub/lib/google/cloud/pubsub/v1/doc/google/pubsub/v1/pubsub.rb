@@ -291,7 +291,53 @@ module Google
       #     operations on the subscription. If `expiration_policy` is not set, a
       #     *default policy* with `ttl` of 31 days will be used. The minimum allowed
       #     value for `expiration_policy.ttl` is 1 day.
+      # @!attribute [rw] dead_letter_policy
+      #   @return [Google::Cloud::PubSub::V1::DeadLetterPolicy]
+      #     A policy that specifies the conditions for dead lettering messages in
+      #     this subscription. If dead_letter_policy is not set, dead lettering
+      #     is disabled.
+      #
+      #     The Cloud Pub/Sub service account associated with this subscriptions's
+      #     parent project (i.e.,
+      #     service-\\{project_number}@gcp-sa-pubsub.iam.gserviceaccount.com) must have
+      #     permission to Acknowledge() messages on this subscription.
+      #     <b>EXPERIMENTAL:</b> This feature is part of a closed alpha release. This
+      #     API might be changed in backward-incompatible ways and is not recommended
+      #     for production use. It is not subject to any SLA or deprecation policy.
       class Subscription; end
+
+      # Dead lettering is done on a best effort basis. The same message might be
+      # dead lettered multiple times.
+      #
+      # If validation on any of the fields fails at subscription creation/updation,
+      # the create/update subscription request will fail.
+      # @!attribute [rw] dead_letter_topic
+      #   @return [String]
+      #     The name of the topic to which dead letter messages should be published.
+      #     Format is `projects/{project}/topics/{topic}`.The Cloud Pub/Sub service
+      #     account associated with the enclosing subscription's parent project (i.e.,
+      #     service-\\{project_number}@gcp-sa-pubsub.iam.gserviceaccount.com) must have
+      #     permission to Publish() to this topic.
+      #
+      #     The operation will fail if the topic does not exist.
+      #     Users should ensure that there is a subscription attached to this topic
+      #     since messages published to a topic with no subscriptions are lost.
+      # @!attribute [rw] max_delivery_attempts
+      #   @return [Integer]
+      #     The maximum number of delivery attempts for any message. The value must be
+      #     between 5 and 100.
+      #
+      #     The number of delivery attempts is defined as 1 + (the sum of number of
+      #     NACKs and number of times the acknowledgement deadline has been exceeded
+      #     for the message).
+      #
+      #     A NACK is any call to ModifyAckDeadline with a 0 deadline. Note that
+      #     client libraries may automatically extend ack_deadlines.
+      #
+      #     This field will be honored on a best effort basis.
+      #
+      #     If this parameter is 0, a default value of 5 is used.
+      class DeadLetterPolicy; end
 
       # A policy that specifies the conditions for resource expiration (i.e.,
       # automatic resource deletion).
@@ -446,8 +492,9 @@ module Google
       #     least one message is available, rather than returning no messages.
       # @!attribute [rw] max_messages
       #   @return [Integer]
-      #     The maximum number of messages returned for this request. The Pub/Sub
-      #     system may return fewer than the number specified.
+      #     The maximum number of messages to return for this request. Must be a
+      #     positive integer. The Pub/Sub system may return fewer than the number
+      #     specified.
       class PullRequest; end
 
       # Response for the `Pull` method.

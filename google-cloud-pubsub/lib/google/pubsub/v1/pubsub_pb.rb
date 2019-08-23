@@ -81,6 +81,11 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     map :labels, :string, :string, 9
     optional :enable_message_ordering, :bool, 10
     optional :expiration_policy, :message, 11, "google.pubsub.v1.ExpirationPolicy"
+    optional :dead_letter_policy, :message, 13, "google.pubsub.v1.DeadLetterPolicy"
+  end
+  add_message "google.pubsub.v1.DeadLetterPolicy" do
+    optional :dead_letter_topic, :string, 1
+    optional :max_delivery_attempts, :int32, 2
   end
   add_message "google.pubsub.v1.ExpirationPolicy" do
     optional :ttl, :message, 1, "google.protobuf.Duration"
@@ -214,6 +219,7 @@ module Google::Cloud::PubSub::V1
   ListTopicSnapshotsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.ListTopicSnapshotsResponse").msgclass
   DeleteTopicRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.DeleteTopicRequest").msgclass
   Subscription = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.Subscription").msgclass
+  DeadLetterPolicy = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.DeadLetterPolicy").msgclass
   ExpirationPolicy = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.ExpirationPolicy").msgclass
   PushConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.PushConfig").msgclass
   PushConfig::OidcToken = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.PushConfig.OidcToken").msgclass
