@@ -1,5 +1,17 @@
 # Release History
 
+### 0.39.0 / 2019-08-23
+
+#### Features
+
+* Add Dead Letter Policy to low-level API
+  * Add Google::Cloud::PubSub::V1::Subscription#dead_letter_policy
+  * Add Google::Cloud::PubSub::V1::DeadLetterPolicy class
+
+#### Documentation
+
+* Update documentation
+
 ### 0.38.1 / 2019-08-02
 
 * Add endpoint argument to constructor
