@@ -104,6 +104,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.pubsub.v1.ReceivedMessage" do
     optional :ack_id, :string, 1
     optional :message, :message, 2, "google.pubsub.v1.PubsubMessage"
+    optional :delivery_attempt, :int32, 3
   end
   add_message "google.pubsub.v1.GetSubscriptionRequest" do
     optional :subscription, :string, 1
