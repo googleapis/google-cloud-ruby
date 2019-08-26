@@ -588,7 +588,7 @@ namespace :kokoro do
   end
 
   def kokoro
-    @kokoro ||= Kokoro.new KOKORO_RUBY_VERSIONS, 
+    @kokoro ||= Kokoro.new KOKORO_RUBY_VERSIONS,
                            gems,
                            updated_gems,
                            gem: ENV["PACKAGE"]

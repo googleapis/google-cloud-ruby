@@ -25,8 +25,24 @@ function cleanup() {
 
 cd $REPO_DIR
 
-if [[ $(git log --format=%B -n 1 $KOKORO_GIT_COMMIT) = *"[ci skip]"* && $JOB_TYPE = "presubmit" ]]; then
-    echo "[ci skip] found. Exiting"
+versions=($RUBY_VERSIONS)
+
+if [[ $JOB_TYPE = "presubmit" ]]; then
+    COMMIT_MESSAGE=$(git log --format=%B -n 1 $KOKORO_GIT_COMMIT)
+    if [[ $COMMIT_MESSAGE = *"[ci skip]"* || $COMMIT_MESSAGE = *"[skip ci]"* ]]; then
+        echo "[ci skip] found. Exiting"
+    else
+        if [[ $OS = "windows" ]]; then
+            python "${KOKORO_GFILE_DIR}/${TRAMPOLINE_SCRIPT}"
+        else
+            for version in "${versions[@]}"; do
+                (
+                    python3 "${KOKORO_GFILE_DIR}/${TRAMPOLINE_SCRIPT} $version"
+                ) &
+            done
+            wait
+        fi
+    fi
 else
     if [[ $OS = "windows" ]]; then
         python "${KOKORO_GFILE_DIR}/${TRAMPOLINE_SCRIPT}"
