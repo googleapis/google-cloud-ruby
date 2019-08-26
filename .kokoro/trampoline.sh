@@ -25,7 +25,7 @@ function cleanup() {
 
 cd $REPO_DIR
 
-versions=($RUBY_VERSIONS)
+versions=("2.3.8" "2.4.5" "2.5.5" "2.6.3")
 
 if [[ $JOB_TYPE = "presubmit" ]]; then
     COMMIT_MESSAGE=$(git log --format=%B -n 1 $KOKORO_GIT_COMMIT)
