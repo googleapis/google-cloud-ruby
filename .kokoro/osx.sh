@@ -25,15 +25,20 @@ rvm get head --auto-dotfiles
 versions=(2.3.8 2.4.5 2.5.5 2.6.3)
 rvm_versions=$(rvm list rubies)
 
-if [ "$JOB_TYPE" = "presubmit" ]; then
-    version=${versions[2]}
-    if [[ $rvm_versions != *$version* ]]; then
-      rvm install $version
+if [[ $JOB_TYPE = "presubmit" ]]; then
+    COMMIT_MESSAGE=$(git log --format=%B -n 1 $KOKORO_GIT_COMMIT)
+    if [[ $COMMIT_MESSAGE = *"[ci skip]"* || $COMMIT_MESSAGE = *"[skip ci]"* ]]; then
+        echo "[ci skip] found. Exiting"
+    else
+        version=${versions[2]}
+        if [[ $rvm_versions != *$version* ]]; then
+          rvm install $version
+        fi
+        rvm use $version@global --default
+        gem update --system
+        bundle update
+        bundle exec rake kokoro:presubmit || set_failed_status
     fi
-    rvm use $version@global --default
-    gem update --system
-    bundle update
-    bundle exec rake kokoro:presubmit || set_failed_status
 else
     for version in "${versions[@]}"; do
         if [[ $rvm_versions != *$version* ]]; then

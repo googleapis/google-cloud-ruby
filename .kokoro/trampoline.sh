@@ -27,26 +27,37 @@ cd $REPO_DIR
 
 versions=(2.3.8 2.4.5 2.5.5 2.6.3)
 
+# Capture failures
+EXIT_STATUS=0 # everything passed
+function set_failed_status {
+    EXIT_STATUS=1
+}
+
+STARTTIME=$(date +%s)
+
 if [[ $JOB_TYPE = "presubmit" ]]; then
     COMMIT_MESSAGE=$(git log --format=%B -n 1 $KOKORO_GIT_COMMIT)
     if [[ $COMMIT_MESSAGE = *"[ci skip]"* || $COMMIT_MESSAGE = *"[skip ci]"* ]]; then
         echo "[ci skip] found. Exiting"
+    elif [[ $OS = "windows" ]]; then
+            python "${KOKORO_GFILE_DIR}/${TRAMPOLINE_SCRIPT}" || set_failed_status()
     else
-        if [[ $OS = "windows" ]]; then
-            python "${KOKORO_GFILE_DIR}/${TRAMPOLINE_SCRIPT}"
-        else
-            for version in "${versions[@]}"; do
-                (
-                    python3 "${KOKORO_GFILE_DIR}/${TRAMPOLINE_SCRIPT}" $version
-                ) &
-            done
-            wait
-        fi
+        for version in "${versions[@]}"; do
+            (
+                python3 "${KOKORO_GFILE_DIR}/${TRAMPOLINE_SCRIPT}" $version || set_failed_status()
+            ) &
+        done
+        wait
     fi
 else
     if [[ $OS = "windows" ]]; then
-        python "${KOKORO_GFILE_DIR}/${TRAMPOLINE_SCRIPT}"
+        python "${KOKORO_GFILE_DIR}/${TRAMPOLINE_SCRIPT}" || set_failed_status()
     else
-        python3 "${KOKORO_GFILE_DIR}/${TRAMPOLINE_SCRIPT}"
+        python3 "${KOKORO_GFILE_DIR}/${TRAMPOLINE_SCRIPT}" || set_failed_status()
     fi
 fi
+
+ENDTIME=$(date +%s)
+echo "Tests took a total of $(($ENDTIME - $STARTTIME)) seconds"
+
+exit $EXIT_STATUS
