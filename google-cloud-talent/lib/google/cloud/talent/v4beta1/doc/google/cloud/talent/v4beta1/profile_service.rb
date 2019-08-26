@@ -91,6 +91,7 @@ module Google
         #     A full update is performed if it is unset.
         #
         #     Valid values are:
+        #
         #     * external_id
         #     * source
         #     * uri

@@ -180,26 +180,44 @@ module Google
         # @!attribute [rw] location_filters
         #   @return [Array<Google::Cloud::Talent::V4beta1::LocationFilter>]
         #     Optional. The location filter specifies geo-regions containing the profiles
-        #     to search against. It filters against all of a profile's
+        #     to search against.
+        #
+        #     One of
+        #     {Google::Cloud::Talent::V4beta1::LocationFilter#address LocationFilter#address}
+        #     or
+        #     {Google::Cloud::Talent::V4beta1::LocationFilter#lat_lng LocationFilter#lat_lng}
+        #     must be provided or an error is thrown. If both
+        #     {Google::Cloud::Talent::V4beta1::LocationFilter#address LocationFilter#address}
+        #     and
+        #     {Google::Cloud::Talent::V4beta1::LocationFilter#lat_lng LocationFilter#lat_lng}
+        #     are provided, an error is thrown.
+        #
+        #     The following logic is used to determine which locations in
+        #     the profile to filter against:
+        #     1. All of the profile's geocoded
         #     {Google::Cloud::Talent::V4beta1::Profile#addresses Profile#addresses} where
         #     {Google::Cloud::Talent::V4beta1::Address#usage Address#usage} is PERSONAL and
-        #     {Google::Cloud::Talent::V4beta1::Address#current Address#current} is true. If
-        #     no such address exists, a fallback logic is applied in an attempt to
-        #     determine the profile's primary address.
-        #
-        #     The fallback logic selects an address from a profile's
-        #     {Google::Cloud::Talent::V4beta1::Profile#addresses Profile#addresses} in the
-        #     following order of priority:
-        #     1. {Google::Cloud::Talent::V4beta1::Address#usage Address#usage} is PERSONAL
-        #     and {Google::Cloud::Talent::V4beta1::Address#current Address#current} is false
-        #     or not set.
-        #     2. {Google::Cloud::Talent::V4beta1::Address#usage Address#usage} is
+        #     {Google::Cloud::Talent::V4beta1::Address#current Address#current} is true.
+        #     2. If the above set of locations is empty, all of the profile's geocoded
+        #     {Google::Cloud::Talent::V4beta1::Profile#addresses Profile#addresses} where
+        #     {Google::Cloud::Talent::V4beta1::Address#usage Address#usage} is
         #     CONTACT_INFO_USAGE_UNSPECIFIED and
         #     {Google::Cloud::Talent::V4beta1::Address#current Address#current} is true.
-        #     3. {Google::Cloud::Talent::V4beta1::Address#usage Address#usage} is
+        #     3. If the above set of locations is empty, all of the profile's geocoded
+        #     {Google::Cloud::Talent::V4beta1::Profile#addresses Profile#addresses} where
+        #     {Google::Cloud::Talent::V4beta1::Address#usage Address#usage} is PERSONAL or
         #     CONTACT_INFO_USAGE_UNSPECIFIED and
-        #     {Google::Cloud::Talent::V4beta1::Address#current Address#current} is false or
-        #     not set.
+        #     {Google::Cloud::Talent::V4beta1::Address#current Address#current} is not set.
+        #
+        #     This means that any profiles without any
+        #     {Google::Cloud::Talent::V4beta1::Profile#addresses Profile#addresses} that
+        #     match any of the above criteria will not be included in a search with
+        #     location filter. Furthermore, any
+        #     {Google::Cloud::Talent::V4beta1::Profile#addresses Profile#addresses} where
+        #     {Google::Cloud::Talent::V4beta1::Address#usage Address#usage} is WORK or
+        #     SCHOOL or where
+        #     {Google::Cloud::Talent::V4beta1::Address#current Address#current} is false are
+        #     not considered for location filter.
         #
         #     If a location filter isn't specified, profiles fitting the other search
         #     criteria are retrieved regardless of where they're located.
@@ -215,7 +233,7 @@ module Google
         #     point (latitude and longitude), and radius are automatically detected by
         #     the Google Maps Geocoding API and included as well. If
         #     {Google::Cloud::Talent::V4beta1::LocationFilter#address LocationFilter#address}
-        #     is not recognized as a location, the filter falls back to keyword search.
+        #     cannot be geocoded, the filter falls back to keyword search.
         #
         #     If the detected
         #     {Google::Cloud::Talent::V4beta1::Location::LocationType LocationType} is
@@ -223,28 +241,43 @@ module Google
         #     {Google::Cloud::Talent::V4beta1::Location::LocationType::ADMINISTRATIVE_AREA LocationType::ADMINISTRATIVE_AREA},
         #     or
         #     {Google::Cloud::Talent::V4beta1::Location::LocationType::COUNTRY LocationType::COUNTRY},
-        #     or location is recognized but a radius can not be determined by the
-        #     geo-coder, the filter is performed against the detected location name
-        #     (using exact text matching). Otherwise, the filter is performed against the
-        #     detected center point and a radius. The largest value from among the
-        #     following options is automatically set as the radius value:
-        #     1. 10 miles.
-        #     2. Detected location radius +
+        #     the filter is performed against the detected location name (using exact
+        #     text matching). Otherwise, the filter is performed against the detected
+        #     center point and a radius of detected location radius +
         #     {Google::Cloud::Talent::V4beta1::LocationFilter#distance_in_miles LocationFilter#distance_in_miles}.
-        #     3. If the detected
-        #     {Google::Cloud::Talent::V4beta1::Location::LocationType LocationType} is one of
-        #     {Google::Cloud::Talent::V4beta1::Location::LocationType::SUB_LOCALITY LocationType::SUB_LOCALITY},
-        #     {Google::Cloud::Talent::V4beta1::Location::LocationType::SUB_LOCALITY_2 LocationType::SUB_LOCALITY_2},
-        #     {Google::Cloud::Talent::V4beta1::Location::LocationType::NEIGHBORHOOD LocationType::NEIGHBORHOOD},
-        #     {Google::Cloud::Talent::V4beta1::Location::LocationType::POSTAL_CODE LocationType::POSTAL_CODE},
-        #     or
-        #     {Google::Cloud::Talent::V4beta1::Location::LocationType::STREET_ADDRESS LocationType::STREET_ADDRESS},
-        #     the following two values are calculated and the larger of the two is
-        #     compared to #1 and #2, above:
-        #     * Calculated radius of the city (from the city center) that contains the
-        #       geo-coded location.
-        #       * Distance from the city center (of the city containing the geo-coded
-        #         location) to the detected location center + 0.5 miles.
+        #
+        #     If
+        #     {Google::Cloud::Talent::V4beta1::LocationFilter#address LocationFilter#address}
+        #     is provided,
+        #     {Google::Cloud::Talent::V4beta1::LocationFilter#distance_in_miles LocationFilter#distance_in_miles}
+        #     is the additional radius on top of the radius of the location geocoded from
+        #     {Google::Cloud::Talent::V4beta1::LocationFilter#address LocationFilter#address}.
+        #     If
+        #     {Google::Cloud::Talent::V4beta1::LocationFilter#lat_lng LocationFilter#lat_lng}
+        #     is provided,
+        #     {Google::Cloud::Talent::V4beta1::LocationFilter#distance_in_miles LocationFilter#distance_in_miles}
+        #     is the only radius that is used.
+        #
+        #     {Google::Cloud::Talent::V4beta1::LocationFilter#distance_in_miles LocationFilter#distance_in_miles}
+        #     is 10 by default. Note that the value of
+        #     {Google::Cloud::Talent::V4beta1::LocationFilter#distance_in_miles LocationFilter#distance_in_miles}
+        #     is 0 if it is unset, so the server does not differentiate
+        #     {Google::Cloud::Talent::V4beta1::LocationFilter#distance_in_miles LocationFilter#distance_in_miles}
+        #     that is explicitly set to 0 and
+        #     {Google::Cloud::Talent::V4beta1::LocationFilter#distance_in_miles LocationFilter#distance_in_miles}
+        #     that is not set. Which means that if
+        #     {Google::Cloud::Talent::V4beta1::LocationFilter#distance_in_miles LocationFilter#distance_in_miles}
+        #     is explicitly set to 0, the server will use the default value of
+        #     {Google::Cloud::Talent::V4beta1::LocationFilter#distance_in_miles LocationFilter#distance_in_miles}
+        #     which is 10. To work around this and effectively set
+        #     {Google::Cloud::Talent::V4beta1::LocationFilter#distance_in_miles LocationFilter#distance_in_miles}
+        #     to 0, we recommend setting
+        #     {Google::Cloud::Talent::V4beta1::LocationFilter#distance_in_miles LocationFilter#distance_in_miles}
+        #     to a very small decimal number (such as 0.00001).
+        #
+        #     If
+        #     {Google::Cloud::Talent::V4beta1::LocationFilter#distance_in_miles LocationFilter#distance_in_miles}
+        #     is negative, an error is thrown.
         # @!attribute [rw] job_title_filters
         #   @return [Array<Google::Cloud::Talent::V4beta1::JobTitleFilter>]
         #     Optional. Job title filter specifies job titles of profiles to match on.

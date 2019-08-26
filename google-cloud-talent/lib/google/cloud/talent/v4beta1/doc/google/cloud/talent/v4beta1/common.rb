@@ -533,6 +533,70 @@ module Google
         #     min = 1 indicates that the score can be 1, 2, 3, 4, or 5)
         class Rating; end
 
+        # Output only.
+        #
+        # Metadata used for long running operations returned by CTS batch APIs.
+        # It's used to replace
+        # {Google::Longrunning::Operation#metadata}.
+        # @!attribute [rw] state
+        #   @return [Google::Cloud::Talent::V4beta1::BatchOperationMetadata::State]
+        #     The state of a long running operation.
+        # @!attribute [rw] state_description
+        #   @return [String]
+        #     More detailed information about operation state.
+        # @!attribute [rw] success_count
+        #   @return [Integer]
+        #     Count of successful item(s) inside an operation.
+        # @!attribute [rw] failure_count
+        #   @return [Integer]
+        #     Count of failed item(s) inside an operation.
+        # @!attribute [rw] total_count
+        #   @return [Integer]
+        #     Count of total item(s) inside an operation.
+        # @!attribute [rw] create_time
+        #   @return [Google::Protobuf::Timestamp]
+        #     The time when the batch operation is created.
+        # @!attribute [rw] update_time
+        #   @return [Google::Protobuf::Timestamp]
+        #     The time when the batch operation status is updated. The metadata and the
+        #     {Google::Cloud::Talent::V4beta1::BatchOperationMetadata#update_time update_time}
+        #     is refreshed every minute otherwise cached data is returned.
+        # @!attribute [rw] end_time
+        #   @return [Google::Protobuf::Timestamp]
+        #     The time when the batch operation is finished and
+        #     {Google::Longrunning::Operation#done} is
+        #     set to `true`.
+        class BatchOperationMetadata
+          module State
+            # Default value.
+            STATE_UNSPECIFIED = 0
+
+            # The batch operation is being prepared for processing.
+            INITIALIZING = 1
+
+            # The batch operation is actively being processed.
+            PROCESSING = 2
+
+            # The batch operation is processed, and at least one item has been
+            # successfully processed.
+            SUCCEEDED = 3
+
+            # The batch operation is done and no item has been successfully processed.
+            FAILED = 4
+
+            # The batch operation is in the process of cancelling after
+            # {Google::Longrunning::Operations::CancelOperation}
+            # is called.
+            CANCELLING = 5
+
+            # The batch operation is done after
+            # {Google::Longrunning::Operations::CancelOperation}
+            # is called. Any items processed before cancelling are returned in the
+            # response.
+            CANCELLED = 6
+          end
+        end
+
         # Method for commute.
         module CommuteMethod
           # Commute method isn't specified.
