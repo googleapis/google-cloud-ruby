@@ -15,10 +15,11 @@ class Kokoro < Command
     @updated_gems  = updated_gems
     @gem           = gem
 
-    @builder = KokoroBuilder.new ruby_versions, gems
-    @failed  = false
-    @tag     = nil
-    @updated = @updated_gems.include? @gem
+    @builder        = KokoroBuilder.new ruby_versions, gems
+    @failed         = false
+    @tag            = nil
+    @updated        = @updated_gems.include? @gem
+    @should_release = ENV.fetch("OS", "") == "linux" && RUBY_VERSION == @ruby_versions.sort.last
   end
 
   def build
@@ -40,19 +41,19 @@ class Kokoro < Command
       if @updated
         header "Gem Updated - Running Acceptance"
         run "bundle exec rake ci:acceptance", 3600
-        release_please if ENV.fetch("OS", "") == "linux"
       else
         header "Gem Unchanged - Skipping Acceptance"
         run "bundle exec rake ci", 3600
       end
     end
+    release_please if @should_release && @updated
   end
 
   def nightly
     run_ci do
       run "bundle exec rake ci:acceptance", 3600
-      release_please if ENV.fetch("OS", "") == "linux"
     end
+    release_please if @should_release
   end
 
   def post
