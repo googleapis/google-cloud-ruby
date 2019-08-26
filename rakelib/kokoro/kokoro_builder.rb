@@ -58,6 +58,8 @@ class KokoroBuilder < Command
                   gem: "republish"
     from_template "./.kokoro/templates/osx.sh.erb",
                   "./.kokoro/osx.sh"
+    from_template "./.kokoro/templates/trampoline.sh.erb",
+                  "./.kokoro/trampoline.sh"
   end
 
   def generate_dockerfiles

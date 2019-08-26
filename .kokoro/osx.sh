@@ -25,9 +25,7 @@ rvm get head --auto-dotfiles
 versions=(2.3.8 2.4.5 2.5.5 2.6.3)
 rvm_versions=$(rvm list rubies)
 
-if [[ $(git log --format=%B -n 1 $KOKORO_GIT_COMMIT) == *"[ci skip]"* && $JOB_TYPE = "presubmit" ]]; then
-    echo "[ci skip] found. Exiting"
-elif [ "$JOB_TYPE" = "presubmit" ]; then
+if [ "$JOB_TYPE" = "presubmit" ]; then
     version=${versions[2]}
     if [[ $rvm_versions != *$version* ]]; then
       rvm install $version
