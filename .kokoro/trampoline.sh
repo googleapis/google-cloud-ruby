@@ -40,20 +40,20 @@ if [[ $JOB_TYPE = "presubmit" ]]; then
     if [[ $COMMIT_MESSAGE = *"[ci skip]"* || $COMMIT_MESSAGE = *"[skip ci]"* ]]; then
         echo "[ci skip] found. Exiting"
     elif [[ $OS = "windows" ]]; then
-            python "${KOKORO_GFILE_DIR}/${TRAMPOLINE_SCRIPT}" || set_failed_status()
+            python "${KOKORO_GFILE_DIR}/${TRAMPOLINE_SCRIPT}" || set_failed_status
     else
         for version in "${versions[@]}"; do
             (
-                python3 "${KOKORO_GFILE_DIR}/${TRAMPOLINE_SCRIPT}" $version || set_failed_status()
+                python3 "${KOKORO_GFILE_DIR}/${TRAMPOLINE_SCRIPT}" $version || set_failed_status
             ) &
         done
         wait
     fi
 else
     if [[ $OS = "windows" ]]; then
-        python "${KOKORO_GFILE_DIR}/${TRAMPOLINE_SCRIPT}" || set_failed_status()
+        python "${KOKORO_GFILE_DIR}/${TRAMPOLINE_SCRIPT}" || set_failed_status
     else
-        python3 "${KOKORO_GFILE_DIR}/${TRAMPOLINE_SCRIPT}" || set_failed_status()
+        python3 "${KOKORO_GFILE_DIR}/${TRAMPOLINE_SCRIPT}" || set_failed_status
     fi
 fi
 
