@@ -16,16 +16,21 @@ set -eo pipefail
 # Always run the cleanup script, regardless of the success of bouncing into
 # the container.
 function cleanup() {
-    chmod +x ${KOKORO_GFILE_DIR}/trampoline_cleanup.sh
-    ${KOKORO_GFILE_DIR}/trampoline_cleanup.sh
-    echo "cleanup";
+    if [[ $OS = "linux" ]]; then
+        chmod +x ${KOKORO_GFILE_DIR}/trampoline_cleanup.sh
+        ${KOKORO_GFILE_DIR}/trampoline_cleanup.sh
+        echo "cleanup"
+    fi
 }
-trap cleanup EXIT
 
 cd $REPO_DIR
 
 if [[ $(git log --format=%B -n 1 $KOKORO_GIT_COMMIT) = *"[ci skip]"* && $JOB_TYPE = "presubmit" ]]; then
     echo "[ci skip] found. Exiting"
 else
-    python3 "${KOKORO_GFILE_DIR}/trampoline_v1.py"
+    if [[ $OS = "windows" ]]; then
+        python "${KOKORO_GFILE_DIR}/${TRAMPOLINE_SCRIPT}"
+    else
+        python3 "${KOKORO_GFILE_DIR}/${TRAMPOLINE_SCRIPT}"
+    fi
 fi
