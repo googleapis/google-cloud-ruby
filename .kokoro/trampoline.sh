@@ -23,7 +23,7 @@ function cleanup() {
     fi
 }
 
-cd $REPO_DIR
+pushd $REPO_DIR
 
 versions=(2.3.8 2.4.5 2.5.5 2.6.3)
 
@@ -42,6 +42,7 @@ if [[ $JOB_TYPE = "presubmit" ]]; then
     elif [[ $OS = "windows" ]]; then
             python "${KOKORO_GFILE_DIR}/${TRAMPOLINE_SCRIPT}" || set_failed_status
     else
+        popd
         for version in "${versions[@]}"; do
             (
                 python3 "${KOKORO_GFILE_DIR}/${TRAMPOLINE_SCRIPT}" $version || set_failed_status
@@ -53,6 +54,7 @@ else
     if [[ $OS = "windows" ]]; then
         python "${KOKORO_GFILE_DIR}/${TRAMPOLINE_SCRIPT}" || set_failed_status
     else
+        popd
         python3 "${KOKORO_GFILE_DIR}/${TRAMPOLINE_SCRIPT}" || set_failed_status
     fi
 fi
