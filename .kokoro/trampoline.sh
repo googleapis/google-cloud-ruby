@@ -27,12 +27,6 @@ cd $REPO_DIR
 
 versions=(2.3.8 2.4.5 2.5.5 2.6.3)
 
-# Capture failures
-EXIT_STATUS=0 # everything passed
-function set_failed_status {
-    EXIT_STATUS=1
-}
-
 STARTTIME=$(date +%s)
 
 if [[ $JOB_TYPE = "presubmit" ]]; then
@@ -40,24 +34,17 @@ if [[ $JOB_TYPE = "presubmit" ]]; then
     if [[ $COMMIT_MESSAGE = *"[ci skip]"* || $COMMIT_MESSAGE = *"[skip ci]"* ]]; then
         echo "[ci skip] found. Exiting"
     elif [[ $OS = "windows" ]]; then
-            python "${KOKORO_GFILE_DIR}/${TRAMPOLINE_SCRIPT}" || set_failed_status
+            python "${KOKORO_GFILE_DIR}/${TRAMPOLINE_SCRIPT}"
     else
-        for version in "${versions[@]}"; do
-            (
-                python3 "${KOKORO_GFILE_DIR}/${TRAMPOLINE_SCRIPT}" $version || set_failed_status
-            ) &
-        done
-        wait
+        python3 "${KOKORO_GFILE_DIR}/${TRAMPOLINE_SCRIPT}" $version
     fi
 else
     if [[ $OS = "windows" ]]; then
-        python "${KOKORO_GFILE_DIR}/${TRAMPOLINE_SCRIPT}" || set_failed_status
+        python "${KOKORO_GFILE_DIR}/${TRAMPOLINE_SCRIPT}"
     else
-        python3 "${KOKORO_GFILE_DIR}/${TRAMPOLINE_SCRIPT}" || set_failed_status
+        python3 "${KOKORO_GFILE_DIR}/${TRAMPOLINE_SCRIPT}"
     fi
 fi
 
 ENDTIME=$(date +%s)
 echo "Tests took a total of $(($ENDTIME - $STARTTIME)) seconds"
-
-exit $EXIT_STATUS

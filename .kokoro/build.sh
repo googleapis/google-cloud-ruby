@@ -54,8 +54,10 @@ elif [ "$JOB_TYPE" = "release" ]; then
         (bundle update && bundle exec rake kokoro:release) || set_failed_status
     fi
 else
-    rbenv global $KOKORO_RUBY
-    (bundle update && bundle exec rake kokoro:presubmit) || set_failed_status
+    for version in "${versions[@]}"; do
+        rbenv global "$version"
+        (bundle update && bundle exec rake kokoro:presubmit) || set_failed_status
+    done
 fi
 
 exit $EXIT_STATUS
