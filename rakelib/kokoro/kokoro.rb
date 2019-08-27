@@ -31,8 +31,10 @@ class Kokoro < Command
   end
 
   def presubmit
-    run_ci do
-      run "bundle exec rake ci", 1800
+    gems.each do |gem|
+      run_ci gem do
+        run "bundle exec rake ci", 1800
+      end
     end
   end
 
@@ -171,12 +173,13 @@ class Kokoro < Command
         yield
       end
     end
-    verify_in_gemfile unless local
+    verify_in_gemfile gem unless local
   end
 
-  def verify_in_gemfile
-    return if Bundler.environment.gems.map(&:name).include? @gem
-    header_2 "#{@gem} does not appear in the top-level Gemfile. Please add it."
+  def verify_in_gemfile gem = nil
+    gem ||= @gem
+    return if Bundler.environment.gems.map(&:name).include? gem
+    header_2 "#{gem} does not appear in the top-level Gemfile. Please add it."
     @failed = true
   end
 
