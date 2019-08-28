@@ -1953,8 +1953,17 @@ module Google
         # the need to complete a load operation before the data can appear in
         # query results.
         #
+        # Because BigQuery's streaming API is designed for high insertion rates,
+        # modifications to the underlying table metadata are eventually
+        # consistent when interacting with the streaming system. In most cases
+        # metadata changes are propagated within minutes, but during this period
+        # API responses may reflect the inconsistent state of the table.
+        #
         # @see https://cloud.google.com/bigquery/streaming-data-into-bigquery
         #   Streaming Data Into BigQuery
+        #
+        # @see https://cloud.google.com/bigquery/troubleshooting-errors#metadata-errors-for-streaming-inserts
+        #   BigQuery Troubleshooting: Metadata errors for streaming inserts
         #
         # @param [String] table_id The ID of the destination table.
         # @param [Hash, Array<Hash>] rows A hash object or array of hash objects
