@@ -27,13 +27,15 @@ gapic = gcp.GAPICGenerator()
 
 v1_library = gapic.ruby_library(
     'language', 'v1',
-    artman_output_name='google-cloud-ruby/google-cloud-language'
+    artman_output_name='google-cloud-ruby/google-cloud-language',
+    include_samples=True
 )
 s.copy(v1_library / 'acceptance')
 s.copy(v1_library / 'lib/google/cloud/language/v1')
 s.copy(v1_library / 'lib/google/cloud/language/v1.rb')
 s.copy(v1_library / 'lib/google/cloud/language/v1')
 s.copy(v1_library / 'lib/google/cloud/language.rb')
+s.copy(v1_library / 'samples')
 s.copy(v1_library / 'test/google/cloud/language/v1')
 s.copy(v1_library / 'README.md')
 s.copy(v1_library / 'LICENSE')
@@ -43,11 +45,13 @@ s.copy(v1_library / 'google-cloud-language.gemspec', merge=ruby.merge_gemspec)
 
 v1beta2_library = gapic.ruby_library(
     'language', 'v1beta2',
-    artman_output_name='google-cloud-ruby/google-cloud-language'
+    artman_output_name='google-cloud-ruby/google-cloud-language',
+    include_samples=True
 )
 s.copy(v1beta2_library / 'lib/google/cloud/language/v1beta2')
 s.copy(v1beta2_library / 'lib/google/cloud/language/v1beta2.rb')
 s.copy(v1beta2_library / 'lib/google/cloud/language/v1beta2')
+s.copy(v1beta2_library / 'samples')
 s.copy(v1beta2_library / 'test/google/cloud/language/v1beta2')
 
 # Copy common templates
