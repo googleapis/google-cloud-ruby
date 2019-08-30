@@ -1,0 +1,38 @@
+type: manifest/samples
+schema_version: 3
+base: &common
+  env: 'ruby'
+  bin: 'bundle exec ruby'
+  chdir: '{@manifest_dir}/../..'
+  basepath: '.'
+samples:
+- <<: *common
+  path: '{basepath}/v1/speech_transcribe_async.rb'
+  sample: 'speech_transcribe_async'
+- <<: *common
+  path: '{basepath}/v1/speech_transcribe_async_gcs.rb'
+  sample: 'speech_transcribe_async_gcs'
+- <<: *common
+  path: '{basepath}/v1/speech_transcribe_async_word_time_offsets_gcs.rb'
+  sample: 'speech_transcribe_async_word_time_offsets_gcs'
+- <<: *common
+  path: '{basepath}/v1/speech_transcribe_enhanced_model.rb'
+  sample: 'speech_transcribe_enhanced_model'
+- <<: *common
+  path: '{basepath}/v1/speech_transcribe_model_selection.rb'
+  sample: 'speech_transcribe_model_selection'
+- <<: *common
+  path: '{basepath}/v1/speech_transcribe_model_selection_gcs.rb'
+  sample: 'speech_transcribe_model_selection_gcs'
+- <<: *common
+  path: '{basepath}/v1/speech_transcribe_multichannel.rb'
+  sample: 'speech_transcribe_multichannel'
+- <<: *common
+  path: '{basepath}/v1/speech_transcribe_multichannel_gcs.rb'
+  sample: 'speech_transcribe_multichannel_gcs'
+- <<: *common
+  path: '{basepath}/v1/speech_transcribe_sync.rb'
+  sample: 'speech_transcribe_sync'
+- <<: *common
+  path: '{basepath}/v1/speech_transcribe_sync_gcs.rb'
+  sample: 'speech_transcribe_sync_gcs'
