@@ -1,0 +1,38 @@
+type: manifest/samples
+schema_version: 3
+base: &common
+  env: 'ruby'
+  bin: 'bundle exec ruby'
+  chdir: '{@manifest_dir}/../..'
+  basepath: '.'
+samples:
+- <<: *common
+  path: '{basepath}/v1/language_classify_gcs.rb'
+  sample: 'language_classify_gcs'
+- <<: *common
+  path: '{basepath}/v1/language_classify_text.rb'
+  sample: 'language_classify_text'
+- <<: *common
+  path: '{basepath}/v1/language_entities_gcs.rb'
+  sample: 'language_entities_gcs'
+- <<: *common
+  path: '{basepath}/v1/language_entities_text.rb'
+  sample: 'language_entities_text'
+- <<: *common
+  path: '{basepath}/v1/language_entity_sentiment_gcs.rb'
+  sample: 'language_entity_sentiment_gcs'
+- <<: *common
+  path: '{basepath}/v1/language_entity_sentiment_text.rb'
+  sample: 'language_entity_sentiment_text'
+- <<: *common
+  path: '{basepath}/v1/language_sentiment_gcs.rb'
+  sample: 'language_sentiment_gcs'
+- <<: *common
+  path: '{basepath}/v1/language_sentiment_text.rb'
+  sample: 'language_sentiment_text'
+- <<: *common
+  path: '{basepath}/v1/language_syntax_gcs.rb'
+  sample: 'language_syntax_gcs'
+- <<: *common
+  path: '{basepath}/v1/language_syntax_text.rb'
+  sample: 'language_syntax_text'
