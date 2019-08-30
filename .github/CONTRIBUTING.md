@@ -168,6 +168,21 @@ To run the integration tests:
 $ rake integration
 ```
 
+### Generated Sample Tests
+
+The google-cloud-ruby generated sample tests verify code sample correctness by running samples using the live service API and asserting expected output. Generated sample tests use the [sample-tester](https://github.com/googleapis/sample-tester) utility.
+
+To run the generated sample tests for a package:
+```sh
+$ cd <package-name>
+$ sample-tester
+```
+
+Generated sample test project and credentials are provided via environment variables:
+```sh
+$ export GOOGLE_APPLICATION_CREDENTIALS='/path/to/keyfile.json'
+$ export PROJECT_ID='[Google Cloud Project ID]'
+```
 
 ## Coding Style
 
