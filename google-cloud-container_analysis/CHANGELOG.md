@@ -1,5 +1,13 @@
 # Release History
 
+### 0.3.1 / 2019-09-04
+
+#### Documentation
+
+* Update IAM documentation
+  * Update GetPolicyOption#requested_policy_version docs
+  * Un-deprecate Policy#version
+
 ### 0.3.0 / 2019-08-23
 
 #### Features
