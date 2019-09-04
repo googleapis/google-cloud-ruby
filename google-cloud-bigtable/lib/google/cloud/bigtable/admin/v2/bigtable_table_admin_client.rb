@@ -361,6 +361,30 @@ module Google
                   {'name' => request.name}
                 end
               )
+              @get_iam_policy = Google::Gax.create_api_call(
+                @bigtable_table_admin_stub.method(:get_iam_policy),
+                defaults["get_iam_policy"],
+                exception_transformer: exception_transformer,
+                params_extractor: proc do |request|
+                  {'resource' => request.resource}
+                end
+              )
+              @set_iam_policy = Google::Gax.create_api_call(
+                @bigtable_table_admin_stub.method(:set_iam_policy),
+                defaults["set_iam_policy"],
+                exception_transformer: exception_transformer,
+                params_extractor: proc do |request|
+                  {'resource' => request.resource}
+                end
+              )
+              @test_iam_permissions = Google::Gax.create_api_call(
+                @bigtable_table_admin_stub.method(:test_iam_permissions),
+                defaults["test_iam_permissions"],
+                exception_transformer: exception_transformer,
+                params_extractor: proc do |request|
+                  {'resource' => request.resource}
+                end
+              )
               @snapshot_table = Google::Gax.create_api_call(
                 @bigtable_table_admin_stub.method(:snapshot_table),
                 defaults["snapshot_table"],
@@ -844,6 +868,130 @@ module Google
               }.delete_if { |_, v| v.nil? }
               req = Google::Gax::to_proto(req, Google::Bigtable::Admin::V2::CheckConsistencyRequest)
               @check_consistency.call(req, options, &block)
+            end
+
+            # Gets the access control policy for an instance resource. Returns an empty
+            # policy if an table exists but does not have a policy set.
+            #
+            # @param resource [String]
+            #   REQUIRED: The resource for which the policy is being requested.
+            #   See the operation documentation for the appropriate value for this field.
+            # @param options_ [Google::Iam::V1::GetPolicyOptions | Hash]
+            #   OPTIONAL: A `GetPolicyOptions` object for specifying options to
+            #   `GetIamPolicy`. This field is only used by Cloud IAM.
+            #   A hash of the same form as `Google::Iam::V1::GetPolicyOptions`
+            #   can also be provided.
+            # @param options [Google::Gax::CallOptions]
+            #   Overrides the default settings for this call, e.g, timeout,
+            #   retries, etc.
+            # @yield [result, operation] Access the result along with the RPC operation
+            # @yieldparam result [Google::Iam::V1::Policy]
+            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @return [Google::Iam::V1::Policy]
+            # @raise [Google::Gax::GaxError] if the RPC is aborted.
+            # @example
+            #   require "google/cloud/bigtable/admin"
+            #
+            #   bigtable_table_admin_client = Google::Cloud::Bigtable::Admin::BigtableTableAdmin.new(version: :v2)
+            #   formatted_resource = Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient.table_path("[PROJECT]", "[INSTANCE]", "[TABLE]")
+            #   response = bigtable_table_admin_client.get_iam_policy(formatted_resource)
+
+            def get_iam_policy \
+                resource,
+                options_: nil,
+                options: nil,
+                &block
+              req = {
+                resource: resource,
+                options: options_
+              }.delete_if { |_, v| v.nil? }
+              req = Google::Gax::to_proto(req, Google::Iam::V1::GetIamPolicyRequest)
+              @get_iam_policy.call(req, options, &block)
+            end
+
+            # Sets the access control policy on a table resource. Replaces any existing
+            # policy.
+            #
+            # @param resource [String]
+            #   REQUIRED: The resource for which the policy is being specified.
+            #   See the operation documentation for the appropriate value for this field.
+            # @param policy [Google::Iam::V1::Policy | Hash]
+            #   REQUIRED: The complete policy to be applied to the `resource`. The size of
+            #   the policy is limited to a few 10s of KB. An empty policy is a
+            #   valid policy but certain Cloud Platform services (such as Projects)
+            #   might reject them.
+            #   A hash of the same form as `Google::Iam::V1::Policy`
+            #   can also be provided.
+            # @param options [Google::Gax::CallOptions]
+            #   Overrides the default settings for this call, e.g, timeout,
+            #   retries, etc.
+            # @yield [result, operation] Access the result along with the RPC operation
+            # @yieldparam result [Google::Iam::V1::Policy]
+            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @return [Google::Iam::V1::Policy]
+            # @raise [Google::Gax::GaxError] if the RPC is aborted.
+            # @example
+            #   require "google/cloud/bigtable/admin"
+            #
+            #   bigtable_table_admin_client = Google::Cloud::Bigtable::Admin::BigtableTableAdmin.new(version: :v2)
+            #   formatted_resource = Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient.table_path("[PROJECT]", "[INSTANCE]", "[TABLE]")
+            #
+            #   # TODO: Initialize `policy`:
+            #   policy = {}
+            #   response = bigtable_table_admin_client.set_iam_policy(formatted_resource, policy)
+
+            def set_iam_policy \
+                resource,
+                policy,
+                options: nil,
+                &block
+              req = {
+                resource: resource,
+                policy: policy
+              }.delete_if { |_, v| v.nil? }
+              req = Google::Gax::to_proto(req, Google::Iam::V1::SetIamPolicyRequest)
+              @set_iam_policy.call(req, options, &block)
+            end
+
+            # Returns permissions that the caller has on the specified table resource.
+            #
+            # @param resource [String]
+            #   REQUIRED: The resource for which the policy detail is being requested.
+            #   See the operation documentation for the appropriate value for this field.
+            # @param permissions [Array<String>]
+            #   The set of permissions to check for the `resource`. Permissions with
+            #   wildcards (such as '*' or 'storage.*') are not allowed. For more
+            #   information see
+            #   [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
+            # @param options [Google::Gax::CallOptions]
+            #   Overrides the default settings for this call, e.g, timeout,
+            #   retries, etc.
+            # @yield [result, operation] Access the result along with the RPC operation
+            # @yieldparam result [Google::Iam::V1::TestIamPermissionsResponse]
+            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @return [Google::Iam::V1::TestIamPermissionsResponse]
+            # @raise [Google::Gax::GaxError] if the RPC is aborted.
+            # @example
+            #   require "google/cloud/bigtable/admin"
+            #
+            #   bigtable_table_admin_client = Google::Cloud::Bigtable::Admin::BigtableTableAdmin.new(version: :v2)
+            #   formatted_resource = Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient.table_path("[PROJECT]", "[INSTANCE]", "[TABLE]")
+            #
+            #   # TODO: Initialize `permissions`:
+            #   permissions = []
+            #   response = bigtable_table_admin_client.test_iam_permissions(formatted_resource, permissions)
+
+            def test_iam_permissions \
+                resource,
+                permissions,
+                options: nil,
+                &block
+              req = {
+                resource: resource,
+                permissions: permissions
+              }.delete_if { |_, v| v.nil? }
+              req = Google::Gax::to_proto(req, Google::Iam::V1::TestIamPermissionsRequest)
+              @test_iam_permissions.call(req, options, &block)
             end
 
             # Creates a new snapshot in the specified cluster from the specified

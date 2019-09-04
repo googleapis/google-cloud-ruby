@@ -6,6 +6,8 @@ require 'google/protobuf'
 
 require 'google/api/annotations_pb'
 require 'google/bigtable/admin/v2/table_pb'
+require 'google/iam/v1/iam_policy_pb'
+require 'google/iam/v1/policy_pb'
 require 'google/longrunning/operations_pb'
 require 'google/protobuf/duration_pb'
 require 'google/protobuf/empty_pb'
