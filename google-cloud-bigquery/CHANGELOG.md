@@ -1,5 +1,14 @@
 # Release History
 
+### 1.14.1 / 2019-09-04
+
+#### Documentation
+
+* Add note about streaming insert issues
+  * Acknowledge tradeoffs when inserting rows soon after
+    table metadata has been changed.
+  * Add link to BigQuery Troubleshooting guide.
+
 ### 1.14.0 / 2019-08-23
 
 #### Features
