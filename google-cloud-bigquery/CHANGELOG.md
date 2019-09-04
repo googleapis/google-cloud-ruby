@@ -1,5 +1,11 @@
 # Release History
 
+### 1.14.1 / 2019-09-04
+
+#### Documentation
+
+* Update documentation
+
 ### 1.14.0 / 2019-08-23
 
 #### Features
