@@ -1,5 +1,12 @@
 # Release History
 
+### 0.40.0 / 2019-09-04
+
+#### Features
+
+* Add ReceivedMessage#delivery_attempt
+  * Experimental, part of Dead Letter Policy
+
 ### 0.39.0 / 2019-08-23
 
 #### Features
