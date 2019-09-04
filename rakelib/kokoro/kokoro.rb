@@ -64,11 +64,11 @@ class Kokoro < Command
 
     markdown_files = Dir.glob "**/*.md"
     broken_markdown_links = check_links markdown_files,
-                                        "https://github.com/googleapis/google-cloud-ruby/tree/#{git_commit}/",
+                                        "https://github.com/googleapis/google-cloud-ruby/tree/#{git_commit}",
                                         " --skip '^(?!(\\Wruby.*google|.*google.*\\Wruby|.*cloud\\.google\\.com))'"
 
     broken_devsite_links = check_links @gems,
-                                       "https://googleapis.dev/ruby/",
+                                       "https://googleapis.dev/ruby",
                                        "/latest/ --recurse --skip https:.*github.*"
 
     puts_broken_links broken_markdown_links
