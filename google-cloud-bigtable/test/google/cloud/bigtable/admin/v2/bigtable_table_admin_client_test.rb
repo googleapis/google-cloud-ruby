@@ -819,6 +819,237 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient do
     end
   end
 
+  describe 'get_iam_policy' do
+    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient#get_iam_policy."
+
+    it 'invokes get_iam_policy without error' do
+      # Create request parameters
+      formatted_resource = Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient.table_path("[PROJECT]", "[INSTANCE]", "[TABLE]")
+
+      # Create expected grpc response
+      version = 351608024
+      etag = "21"
+      expected_response = { version: version, etag: etag }
+      expected_response = Google::Gax::to_proto(expected_response, Google::Iam::V1::Policy)
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Iam::V1::GetIamPolicyRequest, request)
+        assert_equal(formatted_resource, request.resource)
+        OpenStruct.new(execute: expected_response)
+      end
+      mock_stub = MockGrpcClientStub_v2.new(:get_iam_policy, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockBigtableTableAdminCredentials_v2.new("get_iam_policy")
+
+      Google::Bigtable::Admin::V2::BigtableTableAdmin::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Bigtable::Admin::BigtableTableAdmin.new(version: :v2)
+
+          # Call method
+          response = client.get_iam_policy(formatted_resource)
+
+          # Verify the response
+          assert_equal(expected_response, response)
+
+          # Call method with block
+          client.get_iam_policy(formatted_resource) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
+        end
+      end
+    end
+
+    it 'invokes get_iam_policy with error' do
+      # Create request parameters
+      formatted_resource = Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient.table_path("[PROJECT]", "[INSTANCE]", "[TABLE]")
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Iam::V1::GetIamPolicyRequest, request)
+        assert_equal(formatted_resource, request.resource)
+        raise custom_error
+      end
+      mock_stub = MockGrpcClientStub_v2.new(:get_iam_policy, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockBigtableTableAdminCredentials_v2.new("get_iam_policy")
+
+      Google::Bigtable::Admin::V2::BigtableTableAdmin::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Bigtable::Admin::BigtableTableAdmin.new(version: :v2)
+
+          # Call method
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2 do
+            client.get_iam_policy(formatted_resource)
+          end
+
+          # Verify the GaxError wrapped the custom error that was raised.
+          assert_match(custom_error.message, err.message)
+        end
+      end
+    end
+  end
+
+  describe 'set_iam_policy' do
+    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient#set_iam_policy."
+
+    it 'invokes set_iam_policy without error' do
+      # Create request parameters
+      formatted_resource = Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient.table_path("[PROJECT]", "[INSTANCE]", "[TABLE]")
+      policy = {}
+
+      # Create expected grpc response
+      version = 351608024
+      etag = "21"
+      expected_response = { version: version, etag: etag }
+      expected_response = Google::Gax::to_proto(expected_response, Google::Iam::V1::Policy)
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Iam::V1::SetIamPolicyRequest, request)
+        assert_equal(formatted_resource, request.resource)
+        assert_equal(Google::Gax::to_proto(policy, Google::Iam::V1::Policy), request.policy)
+        OpenStruct.new(execute: expected_response)
+      end
+      mock_stub = MockGrpcClientStub_v2.new(:set_iam_policy, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockBigtableTableAdminCredentials_v2.new("set_iam_policy")
+
+      Google::Bigtable::Admin::V2::BigtableTableAdmin::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Bigtable::Admin::BigtableTableAdmin.new(version: :v2)
+
+          # Call method
+          response = client.set_iam_policy(formatted_resource, policy)
+
+          # Verify the response
+          assert_equal(expected_response, response)
+
+          # Call method with block
+          client.set_iam_policy(formatted_resource, policy) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
+        end
+      end
+    end
+
+    it 'invokes set_iam_policy with error' do
+      # Create request parameters
+      formatted_resource = Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient.table_path("[PROJECT]", "[INSTANCE]", "[TABLE]")
+      policy = {}
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Iam::V1::SetIamPolicyRequest, request)
+        assert_equal(formatted_resource, request.resource)
+        assert_equal(Google::Gax::to_proto(policy, Google::Iam::V1::Policy), request.policy)
+        raise custom_error
+      end
+      mock_stub = MockGrpcClientStub_v2.new(:set_iam_policy, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockBigtableTableAdminCredentials_v2.new("set_iam_policy")
+
+      Google::Bigtable::Admin::V2::BigtableTableAdmin::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Bigtable::Admin::BigtableTableAdmin.new(version: :v2)
+
+          # Call method
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2 do
+            client.set_iam_policy(formatted_resource, policy)
+          end
+
+          # Verify the GaxError wrapped the custom error that was raised.
+          assert_match(custom_error.message, err.message)
+        end
+      end
+    end
+  end
+
+  describe 'test_iam_permissions' do
+    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient#test_iam_permissions."
+
+    it 'invokes test_iam_permissions without error' do
+      # Create request parameters
+      formatted_resource = Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient.table_path("[PROJECT]", "[INSTANCE]", "[TABLE]")
+      permissions = []
+
+      # Create expected grpc response
+      expected_response = {}
+      expected_response = Google::Gax::to_proto(expected_response, Google::Iam::V1::TestIamPermissionsResponse)
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Iam::V1::TestIamPermissionsRequest, request)
+        assert_equal(formatted_resource, request.resource)
+        assert_equal(permissions, request.permissions)
+        OpenStruct.new(execute: expected_response)
+      end
+      mock_stub = MockGrpcClientStub_v2.new(:test_iam_permissions, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockBigtableTableAdminCredentials_v2.new("test_iam_permissions")
+
+      Google::Bigtable::Admin::V2::BigtableTableAdmin::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Bigtable::Admin::BigtableTableAdmin.new(version: :v2)
+
+          # Call method
+          response = client.test_iam_permissions(formatted_resource, permissions)
+
+          # Verify the response
+          assert_equal(expected_response, response)
+
+          # Call method with block
+          client.test_iam_permissions(formatted_resource, permissions) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
+        end
+      end
+    end
+
+    it 'invokes test_iam_permissions with error' do
+      # Create request parameters
+      formatted_resource = Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient.table_path("[PROJECT]", "[INSTANCE]", "[TABLE]")
+      permissions = []
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Iam::V1::TestIamPermissionsRequest, request)
+        assert_equal(formatted_resource, request.resource)
+        assert_equal(permissions, request.permissions)
+        raise custom_error
+      end
+      mock_stub = MockGrpcClientStub_v2.new(:test_iam_permissions, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockBigtableTableAdminCredentials_v2.new("test_iam_permissions")
+
+      Google::Bigtable::Admin::V2::BigtableTableAdmin::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Bigtable::Admin::BigtableTableAdmin.new(version: :v2)
+
+          # Call method
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2 do
+            client.test_iam_permissions(formatted_resource, permissions)
+          end
+
+          # Verify the GaxError wrapped the custom error that was raised.
+          assert_match(custom_error.message, err.message)
+        end
+      end
+    end
+  end
+
   describe 'snapshot_table' do
     custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient#snapshot_table."
 
