@@ -4,7 +4,9 @@
 
 #### Documentation
 
-* Update documentation
+* Update low-level IAM documentation
+  * Update GetPolicyOption#requested_policy_version docs
+  * Un-deprecate Policy#version
 
 ### 1.10.0 / 2019-08-23
 
