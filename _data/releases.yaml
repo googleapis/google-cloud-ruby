@@ -500,6 +500,7 @@ google-cloud-security_center:
 - v0.1.1
 - v0.1.0
 google-cloud-spanner:
+- v1.10.1
 - v1.10.0
 - v1.9.5
 - v1.9.4
