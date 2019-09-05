@@ -2,9 +2,18 @@
 
 ### 0.6.1 / 2019-09-05
 
+#### Features
+	
+* Add IAM to low-level API client
+  * Add BigtableTableAdminClient#get_iam_policy
+  * Add BigtableTableAdminClient#set_iam_policy
+  * Add BigtableTableAdminClient#test_iam_permissions
+
 #### Documentation
 
-* Update documentation
+* Update low-level IAM documentation
+  * Update GetPolicyOption#requested_policy_version docs
+  * Un-deprecate Policy#version
 
 ### 0.6.0 / 2019-08-23
 
