@@ -1,11 +1,11 @@
 # Stackdriver Trace Instrumentation
 
-Then google-cloud-trace gem provides a Rack Middleware class that integrates
+The `google-cloud-trace` gem provides a Rack Middleware class that integrates
 with Rack-based application frameworks, such as Rails and Sinatra. When
 installed, the middleware collects performance traces of requests and, subject
 to sampling constraints, submits them to the Stackdriver Trace service.
 
-Additionally, the google-cloud-trace gem provides a Railtie class that
+Additionally, the `google-cloud-trace` gem provides a Railtie class that
 automatically enables the Rack Middleware in Rails applications when used.
 
 ## Configuration
