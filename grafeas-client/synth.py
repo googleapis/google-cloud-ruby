@@ -223,22 +223,22 @@ s.replace(
 s.replace(
     'grafeas-client.gemspec',
     '\nGem::Specification.new do',
-    'require File.expand_path("../lib/grafeas/version", __FILE__)\n\nGem::Specification.new do'
+    'require File.expand_path("../lib/grafeas/client/version", __FILE__)\n\nGem::Specification.new do'
 )
 s.replace(
     'grafeas-client.gemspec',
     '(gem.version\s+=\s+).\d+.\d+.\d.*$',
-    '\\1Grafeas::VERSION'
+    '\\1Grafeas::Client::VERSION'
 )
 s.replace(
     'lib/grafeas/v1/*_client.rb',
     '(require \".*credentials\"\n)\n',
-    '\\1require "grafeas/version"\n\n'
+    '\\1require "grafeas/client/version"\n\n'
 )
 s.replace(
     'lib/grafeas/v1/*_client.rb',
     'Gem.loaded_specs\[.*\]\.version\.version',
-    'Grafeas::VERSION'
+    'Grafeas::Client::VERSION'
 )
 
 # Fix links for devsite migration
