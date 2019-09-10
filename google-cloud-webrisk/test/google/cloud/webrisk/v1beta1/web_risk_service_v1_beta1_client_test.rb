@@ -226,12 +226,17 @@ describe Google::Cloud::Webrisk::V1beta1::WebRiskServiceV1Beta1Client do
     custom_error = CustomTestError_v1beta1.new "Custom test error for Google::Cloud::Webrisk::V1beta1::WebRiskServiceV1Beta1Client#search_hashes."
 
     it 'invokes search_hashes without error' do
+      # Create request parameters
+      threat_types = []
+
       # Create expected grpc response
       expected_response = {}
       expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Webrisk::V1beta1::SearchHashesResponse)
 
       # Mock Grpc layer
-      mock_method = proc do
+      mock_method = proc do |request|
+        assert_instance_of(Google::Cloud::Webrisk::V1beta1::SearchHashesRequest, request)
+        assert_equal(threat_types, request.threat_types)
         OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub_v1beta1.new(:search_hashes, mock_method)
@@ -244,13 +249,13 @@ describe Google::Cloud::Webrisk::V1beta1::WebRiskServiceV1Beta1Client do
           client = Google::Cloud::Webrisk.new(version: :v1beta1)
 
           # Call method
-          response = client.search_hashes
+          response = client.search_hashes(threat_types)
 
           # Verify the response
           assert_equal(expected_response, response)
 
           # Call method with block
-          client.search_hashes do |response, operation|
+          client.search_hashes(threat_types) do |response, operation|
             # Verify the response
             assert_equal(expected_response, response)
             refute_nil(operation)
@@ -260,8 +265,13 @@ describe Google::Cloud::Webrisk::V1beta1::WebRiskServiceV1Beta1Client do
     end
 
     it 'invokes search_hashes with error' do
+      # Create request parameters
+      threat_types = []
+
       # Mock Grpc layer
-      mock_method = proc do
+      mock_method = proc do |request|
+        assert_instance_of(Google::Cloud::Webrisk::V1beta1::SearchHashesRequest, request)
+        assert_equal(threat_types, request.threat_types)
         raise custom_error
       end
       mock_stub = MockGrpcClientStub_v1beta1.new(:search_hashes, mock_method)
@@ -275,7 +285,7 @@ describe Google::Cloud::Webrisk::V1beta1::WebRiskServiceV1Beta1Client do
 
           # Call method
           err = assert_raises Google::Gax::GaxError, CustomTestError_v1beta1 do
-            client.search_hashes
+            client.search_hashes(threat_types)
           end
 
           # Verify the GaxError wrapped the custom error that was raised.
