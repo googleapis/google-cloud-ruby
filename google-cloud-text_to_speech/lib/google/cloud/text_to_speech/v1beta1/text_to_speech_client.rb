@@ -181,11 +181,10 @@ module Google
 
           # Service calls
 
-          # Returns a list of {Google::Cloud::Texttospeech::V1beta1::Voice Voice}
-          # supported for synthesis.
+          # Returns a list of Voice supported for synthesis.
           #
           # @param language_code [String]
-          #   Optional (but recommended)
+          #   Optional. Recommended.
           #   [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt) language tag. If
           #   specified, the ListVoices call will only return voices that can be used to
           #   synthesize this language_code. E.g. when specifying "en-NZ", you will get
