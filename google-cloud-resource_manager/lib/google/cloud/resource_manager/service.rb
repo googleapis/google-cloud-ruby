@@ -33,7 +33,7 @@ module Google
 
         ##
         # Creates a new Service instance.
-        def initialize credentials, retries: nil, timeout: nil
+        def initialize credentials, retries: nil, timeout: nil, host: nil
           @credentials = credentials
           @service = API::CloudResourceManagerService.new
           @service.client_options.application_name = \
@@ -49,6 +49,7 @@ module Google
             "gl-ruby/#{RUBY_VERSION} " \
             "gccl/#{Google::Cloud::ResourceManager::VERSION}"
           @service.authorization = @credentials.client
+          @service.root_url = host if host
         end
 
         def service

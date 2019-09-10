@@ -19,11 +19,12 @@ describe Google::Cloud do
   describe "#resource_manager" do
     it "calls out to Google::Cloud.resource_manager" do
       gcloud = Google::Cloud.new
-      stubbed_resource_manager = ->(keyfile, scope: nil, retries: nil, timeout: nil) {
+      stubbed_resource_manager = ->(keyfile, scope: nil, retries: nil, timeout: nil, host: nil) {
         keyfile.must_be :nil?
         scope.must_be :nil?
         retries.must_be :nil?
         timeout.must_be :nil?
+        host.must_be :nil?
         "resource_manager-manager-object-empty"
       }
       Google::Cloud.stub :resource_manager, stubbed_resource_manager do
@@ -34,11 +35,12 @@ describe Google::Cloud do
 
     it "passes project and keyfile to Google::Cloud.resource_manager" do
       gcloud = Google::Cloud.new "project-id", "keyfile-path"
-      stubbed_resource_manager = ->(keyfile, scope: nil, retries: nil, timeout: nil) {
+      stubbed_resource_manager = ->(keyfile, scope: nil, retries: nil, timeout: nil, host: nil) {
         keyfile.must_equal "keyfile-path"
         scope.must_be :nil?
         retries.must_be :nil?
         timeout.must_be :nil?
+        host.must_be :nil?
         "resource_manager-manager-object"
       }
       Google::Cloud.stub :resource_manager, stubbed_resource_manager do
@@ -49,11 +51,12 @@ describe Google::Cloud do
 
     it "passes project and keyfile and options to Google::Cloud.resource_manager" do
       gcloud = Google::Cloud.new "project-id", "keyfile-path"
-      stubbed_resource_manager = ->(keyfile, scope: nil, retries: nil, timeout: nil) {
+      stubbed_resource_manager = ->(keyfile, scope: nil, retries: nil, timeout: nil, host: nil) {
         keyfile.must_equal "keyfile-path"
         scope.must_equal "http://example.com/scope"
         retries.must_equal 5
         timeout.must_equal 60
+        host.must_be :nil?
         "resource_manager-manager-object-scoped"
       }
       Google::Cloud.stub :resource_manager, stubbed_resource_manager do
@@ -90,10 +93,11 @@ describe Google::Cloud do
         scope.must_be :nil?
         "resource_manager-credentials"
       }
-      stubbed_service = ->(credentials, retries: nil, timeout: nil) {
+      stubbed_service = ->(credentials, retries: nil, timeout: nil, host: nil) {
         credentials.must_equal "resource_manager-credentials"
         retries.must_be :nil?
         timeout.must_be :nil?
+        host.must_be :nil?
         "resource-manager-service"
       }
 
@@ -141,10 +145,11 @@ describe Google::Cloud do
         scope.must_be :nil?
         "resource_manager-credentials"
       }
-      stubbed_service = ->(credentials, retries: nil, timeout: nil) {
+      stubbed_service = ->(credentials, retries: nil, timeout: nil, host: nil) {
         credentials.must_equal "resource_manager-credentials"
         retries.must_be :nil?
         timeout.must_be :nil?
+        host.must_be :nil?
         "resource-manager-service"
       }
 
@@ -170,10 +175,11 @@ describe Google::Cloud do
         scope.must_be :nil?
         "resource_manager-credentials"
       }
-      stubbed_service = ->(credentials, retries: nil, timeout: nil) {
+      stubbed_service = ->(credentials, retries: nil, timeout: nil, host: nil) {
         credentials.must_equal "resource_manager-credentials"
         retries.must_be :nil?
         timeout.must_be :nil?
+        host.must_be :nil?
         "resource-manager-service"
       }
 
@@ -188,6 +194,27 @@ describe Google::Cloud do
                 resource_manager.service.must_equal "resource-manager-service"
               end
             end
+          end
+        end
+      end
+    end
+
+    it "uses provided endpoint" do
+      stubbed_service = ->(credentials, retries: nil, timeout: nil, host: nil) {
+        credentials.must_equal default_credentials
+        retries.must_be :nil?
+        timeout.must_be :nil?
+        host.must_equal "rm-endpoint2.example.com"
+        "resource-manager-service"
+      }
+
+      # Clear all environment variables
+      ENV.stub :[], nil do
+        Google::Cloud::ResourceManager::Credentials.stub :new, default_credentials do
+          Google::Cloud::ResourceManager::Service.stub :new, stubbed_service do
+            resource_manager = Google::Cloud::ResourceManager.new endpoint: "rm-endpoint2.example.com"
+            resource_manager.must_be_kind_of Google::Cloud::ResourceManager::Manager
+            resource_manager.service.must_equal "resource-manager-service"
           end
         end
       end
@@ -207,10 +234,11 @@ describe Google::Cloud do
         scope.must_be :nil?
         "resource_manager-credentials"
       }
-      stubbed_service = ->(credentials, retries: nil, timeout: nil) {
+      stubbed_service = ->(credentials, retries: nil, timeout: nil, host: nil) {
         credentials.must_equal "resource_manager-credentials"
         retries.must_be :nil?
         timeout.must_be :nil?
+        host.must_be :nil?
         "resource-manager-service"
       }
 
@@ -242,10 +270,11 @@ describe Google::Cloud do
         scope.must_be :nil?
         "resource_manager-credentials"
       }
-      stubbed_service = ->(credentials, retries: nil, timeout: nil) {
+      stubbed_service = ->(credentials, retries: nil, timeout: nil, host: nil) {
         credentials.must_equal "resource_manager-credentials"
         retries.must_be :nil?
         timeout.must_be :nil?
+        host.must_be :nil?
         "resource-manager-service"
       }
 
@@ -277,10 +306,11 @@ describe Google::Cloud do
         scope.must_be :nil?
         "resource_manager-credentials"
       }
-      stubbed_service = ->(credentials, retries: nil, timeout: nil) {
+      stubbed_service = ->(credentials, retries: nil, timeout: nil, host: nil) {
         credentials.must_equal "resource_manager-credentials"
         retries.must_equal 3
         timeout.must_equal 42
+        host.must_be :nil?
         "resource-manager-service"
       }
 
@@ -313,10 +343,11 @@ describe Google::Cloud do
         scope.must_be :nil?
         "resource_manager-credentials"
       }
-      stubbed_service = ->(credentials, retries: nil, timeout: nil) {
+      stubbed_service = ->(credentials, retries: nil, timeout: nil, host: nil) {
         credentials.must_equal "resource_manager-credentials"
         retries.must_equal 3
         timeout.must_equal 42
+        host.must_be :nil?
         "resource-manager-service"
       }
 
@@ -327,6 +358,44 @@ describe Google::Cloud do
           config.credentials = "path/to/keyfile.json"
           config.retries = 3
           config.timeout = 42
+        end
+
+        File.stub :file?, true, ["path/to/keyfile.json"] do
+          File.stub :read, found_credentials, ["path/to/keyfile.json"] do
+            Google::Cloud::ResourceManager::Credentials.stub :new, stubbed_credentials do
+              Google::Cloud::ResourceManager::Service.stub :new, stubbed_service do
+                resource_manager = Google::Cloud::ResourceManager.new
+                resource_manager.must_be_kind_of Google::Cloud::ResourceManager::Manager
+                resource_manager.service.must_equal "resource-manager-service"
+              end
+            end
+          end
+        end
+      end
+    end
+
+    it "uses resource_manager config for endpoint" do
+      stubbed_credentials = ->(keyfile, scope: nil) {
+        keyfile.must_equal "path/to/keyfile.json"
+        scope.must_be :nil?
+        "resource_manager-credentials"
+      }
+      stubbed_service = ->(credentials, retries: nil, timeout: nil, host: nil) {
+        credentials.must_equal "resource_manager-credentials"
+        retries.must_equal 3
+        timeout.must_equal 42
+        host.must_equal "rm-endpoint2.example.com"
+        "resource-manager-service"
+      }
+
+      # Clear all environment variables
+      ENV.stub :[], nil do
+        # Set new configurations
+        Google::Cloud::ResourceManager.configure do |config|
+          config.credentials = "path/to/keyfile.json"
+          config.retries = 3
+          config.timeout = 42
+          config.endpoint = "rm-endpoint2.example.com"
         end
 
         File.stub :file?, true, ["path/to/keyfile.json"] do
