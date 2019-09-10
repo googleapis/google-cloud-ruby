@@ -50,6 +50,8 @@ module Google
       # @param [Integer] retries Number of times to retry requests on server
       #   error. The default value is `3`. Optional.
       # @param [Integer] timeout Default timeout to use in requests. Optional.
+      # @param [String] endpoint Override of the endpoint host name. Optional.
+      #   If the param is nil, uses the default endpoint.
       # @param [String] keyfile Alias for the `credentials` argument.
       #   Deprecated.
       #
@@ -64,10 +66,11 @@ module Google
       #   end
       #
       def self.new credentials: nil, scope: nil, retries: nil, timeout: nil,
-                   keyfile: nil
+                   endpoint: nil, keyfile: nil
         scope ||= configure.scope
         retries ||= configure.retries
         timeout ||= configure.timeout
+        endpoint ||= configure.endpoint
         credentials ||= keyfile
         credentials ||= default_credentials scope: scope
         unless credentials.is_a? Google::Auth::Credentials
@@ -77,7 +80,7 @@ module Google
 
         ResourceManager::Manager.new(
           ResourceManager::Service.new(
-            credentials, retries: retries, timeout: timeout
+            credentials, retries: retries, timeout: timeout, host: endpoint
           )
         )
       end
