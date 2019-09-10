@@ -56,6 +56,8 @@ module Google
       # @param [Integer] retries Number of times to retry requests on server
       #   error. The default value is `3`. Optional.
       # @param [Integer] timeout Default timeout to use in requests. Optional.
+      # @param [String] endpoint Override of the endpoint host name. Optional.
+      #   If the param is nil, uses the default endpoint.
       # @param [String] project Alias for the `project_id` argument. Deprecated.
       # @param [String] keyfile Alias for the `credentials` argument.
       #   Deprecated.
@@ -73,26 +75,24 @@ module Google
       #   zone = dns.zone "example-com"
       #
       def self.new project_id: nil, credentials: nil, scope: nil, retries: nil,
-                   timeout: nil, project: nil, keyfile: nil
-        project_id  ||= (project || default_project_id)
+                   timeout: nil, endpoint: nil, project: nil, keyfile: nil
         scope       ||= configure.scope
         retries     ||= configure.retries
         timeout     ||= configure.timeout
+        endpoint    ||= configure.endpoint
         credentials ||= (keyfile || default_credentials(scope: scope))
 
         unless credentials.is_a? Google::Auth::Credentials
           credentials = Dns::Credentials.new credentials, scope: scope
         end
 
-        if credentials.respond_to? :project_id
-          project_id ||= credentials.project_id
-        end
-        project_id = project_id.to_s # Always cast to a string
+        project_id = resolve_project_id(project_id || project, credentials)
         raise ArgumentError, "project_id is missing" if project_id.empty?
 
         Dns::Project.new(
           Dns::Service.new(
-            project_id, credentials, retries: retries, timeout: timeout
+            project_id, credentials,
+            retries: retries, timeout: timeout, host: endpoint
           )
         )
       end
@@ -113,6 +113,8 @@ module Google
       # * `retries` - (Integer) Number of times to retry requests on server
       #   error.
       # * `timeout` - (Integer) Default timeout to use in requests.
+      # * `endpoint` - (String) Override of the endpoint host name, or `nil`
+      #   to use the default endpoint.
       #
       # @return [Google::Cloud::Config] The configuration object the
       #   Google::Cloud::Dns library uses.
@@ -137,6 +139,16 @@ module Google
         Google::Cloud.configure.dns.credentials ||
           Google::Cloud.configure.credentials ||
           Dns::Credentials.default(scope: scope)
+      end
+
+      ##
+      # @private Resolve project.
+      def self.resolve_project_id given_project, credentials
+        project_id = given_project || default_project_id
+        if credentials.respond_to? :project_id
+          project_id ||= credentials.project_id
+        end
+        project_id.to_s # Always cast to a string
       end
     end
   end

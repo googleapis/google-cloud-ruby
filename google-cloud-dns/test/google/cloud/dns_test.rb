@@ -19,12 +19,13 @@ describe Google::Cloud do
   describe "#dns" do
     it "calls out to Google::Cloud.dns" do
       gcloud = Google::Cloud.new
-      stubbed_dns = ->(project, keyfile, scope: nil, retries: nil, timeout: nil) {
+      stubbed_dns = ->(project, keyfile, scope: nil, retries: nil, timeout: nil, host: nil) {
         project.must_be :nil?
         keyfile.must_be :nil?
         scope.must_be :nil?
         retries.must_be :nil?
         timeout.must_be :nil?
+        host.must_be :nil?
         "dns-project-object-empty"
       }
       Google::Cloud.stub :dns, stubbed_dns do
@@ -35,12 +36,13 @@ describe Google::Cloud do
 
     it "passes project and keyfile to Google::Cloud.dns" do
       gcloud = Google::Cloud.new "project-id", "keyfile-path"
-      stubbed_dns = ->(project, keyfile, scope: nil, retries: nil, timeout: nil) {
+      stubbed_dns = ->(project, keyfile, scope: nil, retries: nil, timeout: nil, host: nil) {
         project.must_equal "project-id"
         keyfile.must_equal "keyfile-path"
         scope.must_be :nil?
         retries.must_be :nil?
         timeout.must_be :nil?
+        host.must_be :nil?
         "dns-project-object"
       }
       Google::Cloud.stub :dns, stubbed_dns do
@@ -51,12 +53,13 @@ describe Google::Cloud do
 
     it "passes project and keyfile and options to Google::Cloud.dns" do
       gcloud = Google::Cloud.new "project-id", "keyfile-path"
-      stubbed_dns = ->(project, keyfile, scope: nil, retries: nil, timeout: nil) {
+      stubbed_dns = ->(project, keyfile, scope: nil, retries: nil, timeout: nil, host: nil) {
         project.must_equal "project-id"
         keyfile.must_equal "keyfile-path"
         scope.must_equal "http://example.com/scope"
         retries.must_equal 5
         timeout.must_equal 60
+        host.must_be :nil?
         "dns-project-object-scoped"
       }
       Google::Cloud.stub :dns, stubbed_dns do
@@ -97,11 +100,12 @@ describe Google::Cloud do
         scope.must_be :nil?
         "dns-credentials"
       }
-      stubbed_service = ->(project, credentials, retries: nil, timeout: nil) {
+      stubbed_service = ->(project, credentials, retries: nil, timeout: nil, host: nil) {
         project.must_equal "project-id"
         credentials.must_equal "dns-credentials"
         retries.must_be :nil?
         timeout.must_be :nil?
+        host.must_be :nil?
         OpenStruct.new project: project
       }
 
@@ -154,11 +158,12 @@ describe Google::Cloud do
         scope.must_be :nil?
         "dns-credentials"
       }
-      stubbed_service = ->(project, credentials, retries: nil, timeout: nil) {
+      stubbed_service = ->(project, credentials, retries: nil, timeout: nil, host: nil) {
         project.must_equal "project-id"
         credentials.must_equal "dns-credentials"
         retries.must_be :nil?
         timeout.must_be :nil?
+        host.must_be :nil?
         OpenStruct.new project: project
       }
 
@@ -185,11 +190,12 @@ describe Google::Cloud do
         scope.must_be :nil?
         "dns-credentials"
       }
-      stubbed_service = ->(project, credentials, retries: nil, timeout: nil) {
+      stubbed_service = ->(project, credentials, retries: nil, timeout: nil, host: nil) {
         project.must_equal "project-id"
         credentials.must_equal "dns-credentials"
         retries.must_be :nil?
         timeout.must_be :nil?
+        host.must_be :nil?
         OpenStruct.new project: project
       }
 
@@ -216,12 +222,13 @@ describe Google::Cloud do
         scope.must_be :nil?
         OpenStruct.new project_id: "project-id"
       }
-      stubbed_service = ->(project, credentials, retries: nil, timeout: nil) {
+      stubbed_service = ->(project, credentials, retries: nil, timeout: nil, host: nil) {
         project.must_equal "project-id"
         credentials.must_be_kind_of OpenStruct
         credentials.project_id.must_equal "project-id"
         retries.must_be :nil?
         timeout.must_be :nil?
+        host.must_be :nil?
         OpenStruct.new project: project
       }
       empty_env = OpenStruct.new
@@ -244,6 +251,29 @@ describe Google::Cloud do
         end
       end
     end
+
+    it "uses provided endpoint" do
+      stubbed_service = ->(project, credentials, retries: nil, timeout: nil, host: nil) {
+        project.must_equal "project-id"
+        credentials.must_equal default_credentials
+        retries.must_be :nil?
+        timeout.must_be :nil?
+        host.must_equal "dns-endpoint2.example.com"
+        OpenStruct.new project: project
+      }
+
+      # Clear all environment variables
+      ENV.stub :[], nil do
+        Google::Cloud.stub :env, OpenStruct.new(project_id: "project-id") do
+          Google::Cloud::Dns::Service.stub :new, stubbed_service do
+            dns = Google::Cloud::Dns.new credentials: default_credentials, endpoint: "dns-endpoint2.example.com"
+            dns.must_be_kind_of Google::Cloud::Dns::Project
+            dns.project.must_equal "project-id"
+            dns.service.must_be_kind_of OpenStruct
+          end
+        end
+      end
+    end
   end
 
   describe "Dns.configure" do
@@ -259,11 +289,12 @@ describe Google::Cloud do
         scope.must_be :nil?
         "dns-credentials"
       }
-      stubbed_service = ->(project, credentials, retries: nil, timeout: nil) {
+      stubbed_service = ->(project, credentials, retries: nil, timeout: nil, host: nil) {
         project.must_equal "project-id"
         credentials.must_equal "dns-credentials"
         retries.must_be :nil?
         timeout.must_be :nil?
+        host.must_be :nil?
         OpenStruct.new project: project
       }
 
@@ -296,11 +327,12 @@ describe Google::Cloud do
         scope.must_be :nil?
         "dns-credentials"
       }
-      stubbed_service = ->(project, credentials, retries: nil, timeout: nil) {
+      stubbed_service = ->(project, credentials, retries: nil, timeout: nil, host: nil) {
         project.must_equal "project-id"
         credentials.must_equal "dns-credentials"
         retries.must_be :nil?
         timeout.must_be :nil?
+        host.must_be :nil?
         OpenStruct.new project: project
       }
 
@@ -333,11 +365,12 @@ describe Google::Cloud do
         scope.must_be :nil?
         "dns-credentials"
       }
-      stubbed_service = ->(project, credentials, retries: nil, timeout: nil) {
+      stubbed_service = ->(project, credentials, retries: nil, timeout: nil, host: nil) {
         project.must_equal "project-id"
         credentials.must_equal "dns-credentials"
         retries.must_equal 3
         timeout.must_equal 42
+        host.must_be :nil?
         OpenStruct.new project: project
       }
 
@@ -372,11 +405,12 @@ describe Google::Cloud do
         scope.must_be :nil?
         "dns-credentials"
       }
-      stubbed_service = ->(project, credentials, retries: nil, timeout: nil) {
+      stubbed_service = ->(project, credentials, retries: nil, timeout: nil, host: nil) {
         project.must_equal "project-id"
         credentials.must_equal "dns-credentials"
         retries.must_equal 3
         timeout.must_equal 42
+        host.must_be :nil?
         OpenStruct.new project: project
       }
 
@@ -388,6 +422,47 @@ describe Google::Cloud do
           config.credentials = "path/to/keyfile.json"
           config.retries = 3
           config.timeout = 42
+        end
+
+        File.stub :file?, true, ["path/to/keyfile.json"] do
+          File.stub :read, found_credentials, ["path/to/keyfile.json"] do
+            Google::Cloud::Dns::Credentials.stub :new, stubbed_credentials do
+              Google::Cloud::Dns::Service.stub :new, stubbed_service do
+                dns = Google::Cloud::Dns.new
+                dns.must_be_kind_of Google::Cloud::Dns::Project
+                dns.project.must_equal "project-id"
+                dns.service.must_be_kind_of OpenStruct
+              end
+            end
+          end
+        end
+      end
+    end
+
+    it "uses dns config for endpoint" do
+      stubbed_credentials = ->(keyfile, scope: nil) {
+        keyfile.must_equal "path/to/keyfile.json"
+        scope.must_be :nil?
+        "dns-credentials"
+      }
+      stubbed_service = ->(project, credentials, retries: nil, timeout: nil, host: nil) {
+        project.must_equal "project-id"
+        credentials.must_equal "dns-credentials"
+        retries.must_equal 3
+        timeout.must_equal 42
+        host.must_equal "dns-endpoint2.example.com"
+        OpenStruct.new project: project
+      }
+
+      # Clear all environment variables
+      ENV.stub :[], nil do
+        # Set new configurations
+        Google::Cloud::Dns.configure do |config|
+          config.project_id = "project-id"
+          config.credentials = "path/to/keyfile.json"
+          config.retries = 3
+          config.timeout = 42
+          config.endpoint = "dns-endpoint2.example.com"
         end
 
         File.stub :file?, true, ["path/to/keyfile.json"] do
