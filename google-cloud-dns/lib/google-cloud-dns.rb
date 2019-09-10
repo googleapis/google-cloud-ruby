@@ -132,4 +132,5 @@ Google::Cloud.configure.add_config! :dns do |config|
   config.add_field! :scope, nil, match: [String, Array]
   config.add_field! :retries, nil, match: Integer
   config.add_field! :timeout, nil, match: Integer
+  config.add_field! :endpoint, nil, match: String
 end

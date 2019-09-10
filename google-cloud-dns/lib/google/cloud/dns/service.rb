@@ -33,7 +33,8 @@ module Google
 
         ##
         # Creates a new Service instance.
-        def initialize project, credentials, retries: nil, timeout: nil
+        def initialize project, credentials,
+                       retries: nil, timeout: nil, host: nil
           @project = project
           @credentials = credentials
           @service = API::DnsService.new
@@ -48,6 +49,7 @@ module Google
           @service.request_options.header["x-goog-api-client"] = \
             "gl-ruby/#{RUBY_VERSION} gccl/#{Google::Cloud::Dns::VERSION}"
           @service.authorization = @credentials.client
+          @service.root_url = host if host
         end
 
         def service
