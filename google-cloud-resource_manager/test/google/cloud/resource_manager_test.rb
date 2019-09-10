@@ -210,12 +210,10 @@ describe Google::Cloud do
 
       # Clear all environment variables
       ENV.stub :[], nil do
-        Google::Cloud::ResourceManager::Credentials.stub :new, default_credentials do
-          Google::Cloud::ResourceManager::Service.stub :new, stubbed_service do
-            resource_manager = Google::Cloud::ResourceManager.new endpoint: "rm-endpoint2.example.com"
-            resource_manager.must_be_kind_of Google::Cloud::ResourceManager::Manager
-            resource_manager.service.must_equal "resource-manager-service"
-          end
+        Google::Cloud::ResourceManager::Service.stub :new, stubbed_service do
+          resource_manager = Google::Cloud::ResourceManager.new credentials: default_credentials, endpoint: "rm-endpoint2.example.com"
+          resource_manager.must_be_kind_of Google::Cloud::ResourceManager::Manager
+          resource_manager.service.must_equal "resource-manager-service"
         end
       end
     end
