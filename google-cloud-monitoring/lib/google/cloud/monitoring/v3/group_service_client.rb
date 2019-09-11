@@ -476,6 +476,10 @@ module Google
           # @param name [String]
           #   The group to delete. The format is
           #   `"projects/{project_id_or_number}/groups/{group_id}"`.
+          # @param recursive [true, false]
+          #   If this field is true, then the request means to delete a group with all
+          #   its descendants. Otherwise, the request means to delete a group only when
+          #   it has no descendants. The default value is false.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -492,10 +496,12 @@ module Google
 
           def delete_group \
               name,
+              recursive: nil,
               options: nil,
               &block
             req = {
-              name: name
+              name: name,
+              recursive: recursive
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Monitoring::V3::DeleteGroupRequest)
             @delete_group.call(req, options, &block)

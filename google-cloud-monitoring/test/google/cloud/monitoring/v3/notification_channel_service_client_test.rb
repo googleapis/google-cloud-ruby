@@ -144,7 +144,7 @@ describe Google::Cloud::Monitoring::V3::NotificationChannelServiceClient do
 
     it 'invokes get_notification_channel_descriptor without error' do
       # Create request parameters
-      formatted_name = Google::Cloud::Monitoring::V3::NotificationChannelServiceClient.notification_channel_descriptor_path("[PROJECT]", "[CHANNEL_DESCRIPTOR]")
+      formatted_name = Google::Cloud::Monitoring::V3::NotificationChannelServiceClient.notification_channel_descriptor_path("[PROJECT]", "[NOTIFICATION_CHANNEL_DESCRIPTOR]")
 
       # Create expected grpc response
       name_2 = "name2-1052831874"
@@ -192,7 +192,7 @@ describe Google::Cloud::Monitoring::V3::NotificationChannelServiceClient do
 
     it 'invokes get_notification_channel_descriptor with error' do
       # Create request parameters
-      formatted_name = Google::Cloud::Monitoring::V3::NotificationChannelServiceClient.notification_channel_descriptor_path("[PROJECT]", "[CHANNEL_DESCRIPTOR]")
+      formatted_name = Google::Cloud::Monitoring::V3::NotificationChannelServiceClient.notification_channel_descriptor_path("[PROJECT]", "[NOTIFICATION_CHANNEL_DESCRIPTOR]")
 
       # Mock Grpc layer
       mock_method = proc do |request|

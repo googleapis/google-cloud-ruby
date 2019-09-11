@@ -4,11 +4,11 @@
 
 require 'google/protobuf'
 
-require 'google/api/annotations_pb'
 require 'google/monitoring/v3/common_pb'
 require 'google/monitoring/v3/mutation_record_pb'
 require 'google/protobuf/duration_pb'
 require 'google/protobuf/wrappers_pb'
+require 'google/rpc/status_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.monitoring.v3.AlertPolicy" do
     optional :name, :string, 1
@@ -18,6 +18,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     repeated :conditions, :message, 12, "google.monitoring.v3.AlertPolicy.Condition"
     optional :combiner, :enum, 6, "google.monitoring.v3.AlertPolicy.ConditionCombinerType"
     optional :enabled, :message, 17, "google.protobuf.BoolValue"
+    optional :validity, :message, 18, "google.rpc.Status"
     repeated :notification_channels, :string, 14
     optional :creation_record, :message, 10, "google.monitoring.v3.MutationRecord"
     optional :mutation_record, :message, 11, "google.monitoring.v3.MutationRecord"

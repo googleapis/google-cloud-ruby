@@ -83,7 +83,7 @@ module Google
           private_constant :NOTIFICATION_CHANNEL_PATH_TEMPLATE
 
           NOTIFICATION_CHANNEL_DESCRIPTOR_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
-            "projects/{project}/notificationChannelDescriptors/{channel_descriptor}"
+            "projects/{project}/notificationChannelDescriptors/{notification_channel_descriptor}"
           )
 
           private_constant :NOTIFICATION_CHANNEL_DESCRIPTOR_PATH_TEMPLATE
@@ -107,12 +107,12 @@ module Google
 
           # Returns a fully-qualified notification_channel_descriptor resource name string.
           # @param project [String]
-          # @param channel_descriptor [String]
+          # @param notification_channel_descriptor [String]
           # @return [String]
-          def self.notification_channel_descriptor_path project, channel_descriptor
+          def self.notification_channel_descriptor_path project, notification_channel_descriptor
             NOTIFICATION_CHANNEL_DESCRIPTOR_PATH_TEMPLATE.render(
               :"project" => project,
-              :"channel_descriptor" => channel_descriptor
+              :"notification_channel_descriptor" => notification_channel_descriptor
             )
           end
 
@@ -399,7 +399,7 @@ module Google
           #   require "google/cloud/monitoring"
           #
           #   notification_channel_client = Google::Cloud::Monitoring::NotificationChannel.new(version: :v3)
-          #   formatted_name = Google::Cloud::Monitoring::V3::NotificationChannelServiceClient.notification_channel_descriptor_path("[PROJECT]", "[CHANNEL_DESCRIPTOR]")
+          #   formatted_name = Google::Cloud::Monitoring::V3::NotificationChannelServiceClient.notification_channel_descriptor_path("[PROJECT]", "[NOTIFICATION_CHANNEL_DESCRIPTOR]")
           #   response = notification_channel_client.get_notification_channel_descriptor(formatted_name)
 
           def get_notification_channel_descriptor \
