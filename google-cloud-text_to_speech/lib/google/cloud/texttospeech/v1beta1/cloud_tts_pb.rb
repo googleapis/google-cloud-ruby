@@ -5,6 +5,8 @@
 require 'google/protobuf'
 
 require 'google/api/annotations_pb'
+require 'google/api/client_pb'
+require 'google/api/field_behavior_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.cloud.texttospeech.v1beta1.ListVoicesRequest" do
     optional :language_code, :string, 1
