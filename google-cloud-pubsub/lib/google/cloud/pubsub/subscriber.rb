@@ -123,10 +123,12 @@ module Google
         end
 
         ##
-        # Begins the process of stopping the subscriber. Unhandled received
-        # messages will be processed, but no new messages will be pulled from
-        # the subscription. Use {#wait!} to block until the subscriber is fully
-        # stopped and all received messages have been processed.
+        # Immediately stops the subscriber. No new messages will be pulled from
+        # the subscription. All actions taken on received messages that have not
+        # yet been sent to the API will be sent to the API. All received but
+        # unprocessed messages will be released back to the API and redelivered.
+        # Use {#wait!} to block until the subscriber is fully stopped and all
+        # received messages have been processed or released.
         #
         # @return [Subscriber] returns self so calls can be chained.
         def stop
@@ -147,9 +149,11 @@ module Google
 
         ##
         # Blocks until the subscriber is fully stopped and all received messages
-        # have been handled. Does not stop the subscriber. To stop the
-        # subscriber, first call {#stop} and then call {#wait!} to block until
-        # the subscriber is stopped.
+        # have been processed or released.
+        #
+        # Does not stop the subscriber. To stop the subscriber, first call
+        # {#stop} and then call {#wait!} to block until the subscriber is
+        # stopped.
         #
         # @return [Subscriber] returns self so calls can be chained.
         def wait!
