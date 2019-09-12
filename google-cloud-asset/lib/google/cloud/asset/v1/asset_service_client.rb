@@ -66,21 +66,6 @@ module Google
             self::GRPC_INTERCEPTORS = AssetServiceClient::GRPC_INTERCEPTORS
           end
 
-          PROJECT_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
-            "projects/{project}"
-          )
-
-          private_constant :PROJECT_PATH_TEMPLATE
-
-          # Returns a fully-qualified project resource name string.
-          # @param project [String]
-          # @return [String]
-          def self.project_path project
-            PROJECT_PATH_TEMPLATE.render(
-              :"project" => project
-            )
-          end
-
           # @param credentials [Google::Auth::Credentials, String, Hash, GRPC::Core::Channel, GRPC::Core::ChannelCredentials, Proc]
           #   Provides the means for authenticating requests made by the client. This parameter can
           #   be many types.
@@ -246,8 +231,8 @@ module Google
           #   can also be provided.
           # @param asset_types [Array<String>]
           #   A list of asset types of which to take a snapshot for. For example:
-          #   "compute.googleapis.com/Disk". If specified, only matching assets will be returned.
-          #   See [Introduction to Cloud Asset
+          #   "compute.googleapis.com/Disk". If specified, only matching assets will be
+          #   returned. See [Introduction to Cloud Asset
           #   Inventory](https://cloud.google.com/resource-manager/docs/cloud-asset-inventory/overview)
           #   for all supported asset types.
           # @param content_type [Google::Cloud::Asset::V1::ContentType]
@@ -350,7 +335,8 @@ module Google
           #   `//compute.googleapis.com/projects/my_project_123/zones/zone1/instances/instance1`.
           #   See [Resource
           #   Names](https://cloud.google.com/apis/design/resource_names#full_resource_name)
-          #   and [Resource Name Format](https://cloud.google.com/resource-manager/docs/cloud-asset-inventory/resource-name-format)
+          #   and [Resource Name
+          #   Format](https://cloud.google.com/resource-manager/docs/cloud-asset-inventory/resource-name-format)
           #   for more info.
           #
           #   The request becomes a no-op if the asset name list is empty, and the max

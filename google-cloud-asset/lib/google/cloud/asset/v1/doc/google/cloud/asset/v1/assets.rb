@@ -59,6 +59,17 @@ module Google
         #   @return [Google::Iam::V1::Policy]
         #     Representation of the actual Cloud IAM policy set on a cloud resource. For
         #     each resource, there must be at most one Cloud IAM policy set on it.
+        # @!attribute [rw] org_policy
+        #   @return [Array<Google::Cloud::Orgpolicy::V1::Policy>]
+        #     Representation of the Cloud Organization Policy set on an asset. For each
+        #     asset, there could be multiple Organization policies with different
+        #     constraints.
+        # @!attribute [rw] access_policy
+        #   @return [Google::Identity::Accesscontextmanager::V1::AccessPolicy]
+        # @!attribute [rw] access_level
+        #   @return [Google::Identity::Accesscontextmanager::V1::AccessLevel]
+        # @!attribute [rw] service_perimeter
+        #   @return [Google::Identity::Accesscontextmanager::V1::ServicePerimeter]
         class Asset; end
 
         # Representation of a cloud resource.

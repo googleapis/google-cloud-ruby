@@ -4,11 +4,15 @@
 
 require 'google/protobuf'
 
-require 'google/api/annotations_pb'
+require 'google/cloud/orgpolicy/v1/orgpolicy_pb'
 require 'google/iam/v1/policy_pb'
+require 'google/identity/accesscontextmanager/v1/access_level_pb'
+require 'google/identity/accesscontextmanager/v1/access_policy_pb'
+require 'google/identity/accesscontextmanager/v1/service_perimeter_pb'
 require 'google/protobuf/any_pb'
 require 'google/protobuf/struct_pb'
 require 'google/protobuf/timestamp_pb'
+require 'google/api/annotations_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.cloud.asset.v1.TemporalAsset" do
     optional :window, :message, 1, "google.cloud.asset.v1.TimeWindow"
@@ -24,6 +28,12 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :asset_type, :string, 2
     optional :resource, :message, 3, "google.cloud.asset.v1.Resource"
     optional :iam_policy, :message, 4, "google.iam.v1.Policy"
+    repeated :org_policy, :message, 6, "google.cloud.orgpolicy.v1.Policy"
+    oneof :access_context_policy do
+      optional :access_policy, :message, 7, "google.identity.accesscontextmanager.v1.AccessPolicy"
+      optional :access_level, :message, 8, "google.identity.accesscontextmanager.v1.AccessLevel"
+      optional :service_perimeter, :message, 9, "google.identity.accesscontextmanager.v1.ServicePerimeter"
+    end
   end
   add_message "google.cloud.asset.v1.Resource" do
     optional :version, :string, 1
