@@ -36,8 +36,6 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     repeated :publications, :message, 21, "google.cloud.talent.v4beta1.Publication"
     repeated :patents, :message, 22, "google.cloud.talent.v4beta1.Patent"
     repeated :certifications, :message, 23, "google.cloud.talent.v4beta1.Certification"
-    repeated :applications, :string, 47
-    repeated :assignments, :string, 48
     map :custom_attributes, :string, :message, 26, "google.cloud.talent.v4beta1.CustomAttribute"
     optional :processed, :bool, 27
     optional :keyword_snippet, :string, 28

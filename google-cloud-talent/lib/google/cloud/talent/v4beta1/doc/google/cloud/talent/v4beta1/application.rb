@@ -25,9 +25,8 @@ module Google
         #     Resource name assigned to an application by the API.
         #
         #     The format is
-        #     "projects/{project_id}/tenants/{tenant_id}/profiles/{profile_id}/applications/{application_id}",
-        #     for example,
-        #     "projects/api-test-project/tenants/foo/profiles/bar/applications/baz".
+        #     "projects/{project_id}/tenants/{tenant_id}/profiles/{profile_id}/applications/{application_id}".
+        #     For example, "projects/foo/tenants/bar/profiles/baz/applications/qux".
         # @!attribute [rw] external_id
         #   @return [String]
         #     Required. Client side application identifier, used to uniquely identify the
@@ -39,8 +38,8 @@ module Google
         #     Output only. Resource name of the candidate of this application.
         #
         #     The format is
-        #     "projects/{project_id}/tenants/{tenant_id}/profiles/{profile_id}",
-        #     for example, "projects/api-test-project/tenants/foo/profiles/bar".
+        #     "projects/{project_id}/tenants/{tenant_id}/profiles/{profile_id}".
+        #     For example, "projects/foo/tenants/bar/profiles/baz".
         # @!attribute [rw] job
         #   @return [String]
         #     One of either a job or a company is required.
@@ -48,8 +47,8 @@ module Google
         #     Resource name of the job which the candidate applied for.
         #
         #     The format is
-        #     "projects/{project_id}/tenants/{tenant_id}/jobs/{job_id}",
-        #     for example, "projects/api-test-project/tenants/foo/jobs/bar".
+        #     "projects/{project_id}/tenants/{tenant_id}/jobs/{job_id}". For example,
+        #     "projects/foo/tenants/bar/jobs/baz".
         # @!attribute [rw] company
         #   @return [String]
         #     One of either a job or a company is required.
@@ -57,11 +56,11 @@ module Google
         #     Resource name of the company which the candidate applied for.
         #
         #     The format is
-        #     "projects/{project_id}/tenants/{tenant_id}/companies/{company_id}",
-        #     for example, "projects/api-test-project/tenants/foo/companies/bar".
+        #     "projects/{project_id}/tenants/{tenant_id}/companies/{company_id}".
+        #     For example, "projects/foo/tenants/bar/companies/baz".
         # @!attribute [rw] application_date
         #   @return [Google::Type::Date]
-        #     Optional. The application date.
+        #     The application date.
         # @!attribute [rw] stage
         #   @return [Google::Cloud::Talent::V4beta1::Application::ApplicationStage]
         #     Required. What is the most recent stage of the application (that is, new,
@@ -70,31 +69,30 @@ module Google
         #     that would be used to indicate to the ML models good / bad matches.
         # @!attribute [rw] state
         #   @return [Google::Cloud::Talent::V4beta1::Application::ApplicationState]
-        #     Optional. The application state.
+        #     The application state.
         # @!attribute [rw] interviews
         #   @return [Array<Google::Cloud::Talent::V4beta1::Interview>]
-        #     Optional. All interviews (screen, onsite, and so on) conducted as part of
-        #     this application (includes details such as user conducting the interview,
+        #     All interviews (screen, onsite, and so on) conducted as part of this
+        #     application (includes details such as user conducting the interview,
         #     timestamp, feedback, and so on).
         # @!attribute [rw] referral
         #   @return [Google::Protobuf::BoolValue]
-        #     Optional. If the candidate is referred by a employee.
+        #     If the candidate is referred by a employee.
         # @!attribute [rw] create_time
         #   @return [Google::Protobuf::Timestamp]
         #     Required. Reflects the time that the application was created.
         # @!attribute [rw] update_time
         #   @return [Google::Protobuf::Timestamp]
-        #     Optional. The last update timestamp.
+        #     The last update timestamp.
         # @!attribute [rw] outcome_notes
         #   @return [String]
-        #     Optional. Free text reason behind the recruitement outcome (for example,
-        #     reason for withdraw / reject, reason for an unsuccessful finish, and so
-        #     on).
+        #     Free text reason behind the recruitement outcome (for example, reason for
+        #     withdraw / reject, reason for an unsuccessful finish, and so on).
         #
         #     Number of characters allowed is 100.
         # @!attribute [rw] outcome
         #   @return [Google::Cloud::Talent::V4beta1::Outcome]
-        #     Optional. Outcome positiveness shows how positive the outcome is.
+        #     Outcome positiveness shows how positive the outcome is.
         # @!attribute [rw] is_match
         #   @return [Google::Protobuf::BoolValue]
         #     Output only. Indicates whether this job application is a match to

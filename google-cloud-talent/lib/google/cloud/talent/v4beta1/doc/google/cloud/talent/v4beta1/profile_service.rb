@@ -23,25 +23,43 @@ module Google
         #     Required. The resource name of the tenant under which the profile is
         #     created.
         #
-        #     The format is "projects/{project_id}/tenants/{tenant_id}", for example,
-        #     "projects/api-test-project/tenants/foo".
+        #     The format is "projects/{project_id}/tenants/{tenant_id}". For example,
+        #     "projects/foo/tenants/bar".
+        # @!attribute [rw] filter
+        #   @return [String]
+        #     The filter string specifies the profiles to be enumerated.
+        #
+        #     Supported operator: =, AND
+        #
+        #     The field(s) eligible for filtering are:
+        #
+        #     * `externalId`
+        #     * `groupId`
+        #
+        #     externalId and groupId cannot be specified at the same time. If both
+        #     externalId and groupId are provided, the API will return a bad request
+        #     error.
+        #
+        #     Sample Query:
+        #
+        #     * externalId = "externalId-1"
+        #     * groupId = "groupId-1"
         # @!attribute [rw] page_token
         #   @return [String]
-        #     Optional. The token that specifies the current offset (that is, starting
-        #     result).
+        #     The token that specifies the current offset (that is, starting result).
         #
         #     Please set the value to
         #     {Google::Cloud::Talent::V4beta1::ListProfilesResponse#next_page_token ListProfilesResponse#next_page_token}
         #     to continue the list.
         # @!attribute [rw] page_size
         #   @return [Integer]
-        #     Optional. The maximum number of profiles to be returned, at most 100.
+        #     The maximum number of profiles to be returned, at most 100.
         #
         #     Default is 100 unless a positive number smaller than 100 is specified.
         # @!attribute [rw] read_mask
         #   @return [Google::Protobuf::FieldMask]
-        #     Optional. A field mask to specify the profile fields to be listed in
-        #     response. All fields are listed if it is unset.
+        #     A field mask to specify the profile fields to be listed in response.
+        #     All fields are listed if it is unset.
         #
         #     Valid values are:
         #
@@ -63,8 +81,8 @@ module Google
         #   @return [String]
         #     Required. The name of the tenant this profile belongs to.
         #
-        #     The format is "projects/{project_id}/tenants/{tenant_id}", for example,
-        #     "projects/api-test-project/tenants/foo".
+        #     The format is "projects/{project_id}/tenants/{tenant_id}". For example,
+        #     "projects/foo/tenants/bar".
         # @!attribute [rw] profile
         #   @return [Google::Cloud::Talent::V4beta1::Profile]
         #     Required. The profile to be created.
@@ -76,8 +94,8 @@ module Google
         #     Required. Resource name of the profile to get.
         #
         #     The format is
-        #     "projects/{project_id}/tenants/{tenant_id}/profiles/{profile_id}",
-        #     for example, "projects/api-test-project/tenants/foo/profiles/bar".
+        #     "projects/{project_id}/tenants/{tenant_id}/profiles/{profile_id}". For
+        #     example, "projects/foo/tenants/bar/profiles/baz".
         class GetProfileRequest; end
 
         # Update profile request
@@ -86,7 +104,7 @@ module Google
         #     Required. Profile to be updated.
         # @!attribute [rw] update_mask
         #   @return [Google::Protobuf::FieldMask]
-        #     Optional. A field mask to specify the profile fields to update.
+        #     A field mask to specify the profile fields to update.
         #
         #     A full update is performed if it is unset.
         #
@@ -143,8 +161,8 @@ module Google
         #     Required. Resource name of the profile to be deleted.
         #
         #     The format is
-        #     "projects/{project_id}/tenants/{tenant_id}/profiles/{profile_id}",
-        #     for example, "projects/api-test-project/tenants/foo/profiles/bar".
+        #     "projects/{project_id}/tenants/{tenant_id}/profiles/{profile_id}". For
+        #     example, "projects/foo/tenants/bar/profiles/baz".
         class DeleteProfileRequest; end
 
         # The request body of the `SearchProfiles` call.
@@ -152,8 +170,8 @@ module Google
         #   @return [String]
         #     Required. The resource name of the tenant to search within.
         #
-        #     The format is "projects/{project_id}/tenants/{tenant_id}", for example,
-        #     "projects/api-test-project/tenants/foo".
+        #     The format is "projects/{project_id}/tenants/{tenant_id}". For example,
+        #     "projects/foo/tenants/bar".
         # @!attribute [rw] request_metadata
         #   @return [Google::Cloud::Talent::V4beta1::RequestMetadata]
         #     Required. The meta information collected about the profile search user.
@@ -161,27 +179,27 @@ module Google
         #     provided by users, and must be precise and consistent.
         # @!attribute [rw] profile_query
         #   @return [Google::Cloud::Talent::V4beta1::ProfileQuery]
-        #     Optional. Search query to execute. See
+        #     Search query to execute. See
         #     {Google::Cloud::Talent::V4beta1::ProfileQuery ProfileQuery} for more details.
         # @!attribute [rw] page_size
         #   @return [Integer]
-        #     Optional. A limit on the number of profiles returned in the search results.
+        #     A limit on the number of profiles returned in the search results.
         #     A value above the default value 10 can increase search response time.
         #
         #     The maximum value allowed is 100. Otherwise an error is thrown.
         # @!attribute [rw] page_token
         #   @return [String]
-        #     Optional. The pageToken, similar to offset enables users of the API to
-        #     paginate through the search results. To retrieve the first page of results,
-        #     set the pageToken to empty. The search response includes a
+        #     The pageToken, similar to offset enables users of the API to paginate
+        #     through the search results. To retrieve the first page of results, set the
+        #     pageToken to empty. The search response includes a
         #     {Google::Cloud::Talent::V4beta1::SearchProfilesResponse#next_page_token nextPageToken}
         #     field that can be used to populate the pageToken field for the next page of
         #     results. Using pageToken instead of offset increases the performance of the
         #     API, especially compared to larger offset values.
         # @!attribute [rw] offset
         #   @return [Integer]
-        #     Optional. An integer that specifies the current offset (that is, starting
-        #     result) in search results. This field is only considered if
+        #     An integer that specifies the current offset (that is, starting result) in
+        #     search results. This field is only considered if
         #     {Google::Cloud::Talent::V4beta1::SearchProfilesRequest#page_token page_token}
         #     is unset.
         #
@@ -192,13 +210,13 @@ module Google
         #     pageSize = 10 and offset = 10 means to search from the second page.
         # @!attribute [rw] disable_spell_check
         #   @return [true, false]
-        #     Optional. This flag controls the spell-check feature. If `false`, the
+        #     This flag controls the spell-check feature. If `false`, the
         #     service attempts to correct a misspelled query.
         #
         #     For example, "enginee" is corrected to "engineer".
         # @!attribute [rw] order_by
         #   @return [String]
-        #     Optional. The criteria that determines how search results are sorted.
+        #     The criteria that determines how search results are sorted.
         #     Defaults is "relevance desc" if no value is specified.
         #
         #     Supported options are:
@@ -229,17 +247,16 @@ module Google
         #       in ascending order.
         # @!attribute [rw] case_sensitive_sort
         #   @return [true, false]
-        #     Optional. When sort by field is based on alphabetical order, sort values
-        #     case sensitively (based on ASCII) when the value is set to true. Default
-        #     value is case in-sensitive sort (false).
+        #     When sort by field is based on alphabetical order, sort values case
+        #     sensitively (based on ASCII) when the value is set to true. Default value
+        #     is case in-sensitive sort (false).
         # @!attribute [rw] histogram_queries
         #   @return [Array<Google::Cloud::Talent::V4beta1::HistogramQuery>]
-        #     Optional. A list of expressions specifies histogram requests against
-        #     matching profiles for
+        #     A list of expressions specifies histogram requests against matching
+        #     profiles for
         #     {Google::Cloud::Talent::V4beta1::SearchProfilesRequest SearchProfilesRequest}.
         #
-        #     The expression syntax looks like a function definition with optional
-        #     parameters.
+        #     The expression syntax looks like a function definition with parameters.
         #
         #     Function syntax: function_name(histogram_facet[, list of buckets])
         #
@@ -318,7 +335,7 @@ module Google
         #       [bucket(MIN, 0, "negative"), bucket(0, MAX, "non-negative")])
         # @!attribute [rw] result_set_id
         #   @return [String]
-        #     Optional. An id that uniquely identifies the result set of a
+        #     An id that uniquely identifies the result set of a
         #     {Google::Cloud::Talent::V4beta1::ProfileService::SearchProfiles SearchProfiles}
         #     call. The id should be retrieved from the
         #     {Google::Cloud::Talent::V4beta1::SearchProfilesResponse SearchProfilesResponse}
@@ -350,7 +367,7 @@ module Google
         #     to page through the results.
         # @!attribute [rw] strict_keywords_search
         #   @return [true, false]
-        #     Optional. This flag is used to indicate whether the service will attempt to
+        #     This flag is used to indicate whether the service will attempt to
         #     understand synonyms and terms related to the search query or treat the
         #     query "as is" when it generates a set of results. By default this flag is
         #     set to false, thus allowing expanded results to also be returned. For
@@ -397,8 +414,6 @@ module Google
         #     call for consistent results.
         class SearchProfilesResponse; end
 
-        # Output only.
-        #
         # Profile entry with metadata inside
         # {Google::Cloud::Talent::V4beta1::SearchProfilesResponse SearchProfilesResponse}.
         # @!attribute [rw] profiles

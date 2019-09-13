@@ -29,10 +29,10 @@ module Google
         #
         #     The format is
         #     "projects/{project_id}/tenants/{tenant_id}/companies/{company_id}", for
-        #     example, "projects/api-test-project/tenants/foo/companies/bar".
+        #     example, "projects/foo/tenants/bar/companies/baz".
         #
-        #     Tenant id is optional and the default tenant is used if unspecified, for
-        #     example, "projects/api-test-project/companies/bar".
+        #     If tenant id is unspecified, the default tenant is used. For
+        #     example, "projects/foo/companies/bar".
         # @!attribute [rw] display_name
         #   @return [String]
         #     Required. The display name of the company, for example, "Google LLC".
@@ -44,43 +44,43 @@ module Google
         #     The maximum number of allowed characters is 255.
         # @!attribute [rw] size
         #   @return [Google::Cloud::Talent::V4beta1::CompanySize]
-        #     Optional. The employer's company size.
+        #     The employer's company size.
         # @!attribute [rw] headquarters_address
         #   @return [String]
-        #     Optional. The street address of the company's main headquarters, which may
-        #     be different from the job location. The service attempts to geolocate the
-        #     provided address, and populates a more specific location wherever possible
-        #     in
+        #     The street address of the company's main headquarters, which may be
+        #     different from the job location. The service attempts
+        #     to geolocate the provided address, and populates a more specific
+        #     location wherever possible in
         #     {Google::Cloud::Talent::V4beta1::Company::DerivedInfo#headquarters_location DerivedInfo#headquarters_location}.
         # @!attribute [rw] hiring_agency
         #   @return [true, false]
-        #     Optional. Set to true if it is the hiring agency that post jobs for other
+        #     Set to true if it is the hiring agency that post jobs for other
         #     employers.
         #
         #     Defaults to false if not provided.
         # @!attribute [rw] eeo_text
         #   @return [String]
-        #     Optional. Equal Employment Opportunity legal disclaimer text to be
+        #     Equal Employment Opportunity legal disclaimer text to be
         #     associated with all jobs, and typically to be displayed in all
         #     roles.
         #
         #     The maximum number of allowed characters is 500.
         # @!attribute [rw] website_uri
         #   @return [String]
-        #     Optional. The URI representing the company's primary web site or home page,
+        #     The URI representing the company's primary web site or home page,
         #     for example, "https://www.google.com".
         #
         #     The maximum number of allowed characters is 255.
         # @!attribute [rw] career_site_uri
         #   @return [String]
-        #     Optional. The URI to employer's career site or careers page on the
-        #     employer's web site, for example, "https://careers.google.com".
+        #     The URI to employer's career site or careers page on the employer's web
+        #     site, for example, "https://careers.google.com".
         # @!attribute [rw] image_uri
         #   @return [String]
-        #     Optional. A URI that hosts the employer's company logo.
+        #     A URI that hosts the employer's company logo.
         # @!attribute [rw] keyword_searchable_job_custom_attributes
         #   @return [Array<String>]
-        #     Optional. A list of keys of filterable
+        #     A list of keys of filterable
         #     {Google::Cloud::Talent::V4beta1::Job#custom_attributes Job#custom_attributes},
         #     whose corresponding `string_values` are used in keyword searches. Jobs with
         #     `string_values` under these specified field keys are returned if any

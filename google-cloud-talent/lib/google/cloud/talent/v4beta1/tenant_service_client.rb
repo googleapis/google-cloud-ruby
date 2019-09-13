@@ -260,7 +260,7 @@ module Google
           #   Required. Resource name of the project under which the tenant is created.
           #
           #   The format is "projects/{project_id}", for example,
-          #   "projects/api-test-project".
+          #   "projects/foo".
           # @param tenant [Google::Cloud::Talent::V4beta1::Tenant | Hash]
           #   Required. The tenant to be created.
           #   A hash of the same form as `Google::Cloud::Talent::V4beta1::Tenant`
@@ -302,7 +302,7 @@ module Google
           #   Required. The resource name of the tenant to be retrieved.
           #
           #   The format is "projects/{project_id}/tenants/{tenant_id}", for example,
-          #   "projects/api-test-project/tenants/foo".
+          #   "projects/foo/tenants/bar".
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -337,8 +337,7 @@ module Google
           #   A hash of the same form as `Google::Cloud::Talent::V4beta1::Tenant`
           #   can also be provided.
           # @param update_mask [Google::Protobuf::FieldMask | Hash]
-          #   Optional but strongly recommended for the best service
-          #   experience.
+          #   Strongly recommended for the best service experience.
           #
           #   If
           #   {Google::Cloud::Talent::V4beta1::UpdateTenantRequest#update_mask update_mask}
@@ -387,7 +386,7 @@ module Google
           #   Required. The resource name of the tenant to be deleted.
           #
           #   The format is "projects/{project_id}/tenants/{tenant_id}", for example,
-          #   "projects/api-test-project/tenants/foo".
+          #   "projects/foo/tenants/bar".
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -420,7 +419,7 @@ module Google
           #   Required. Resource name of the project under which the tenant is created.
           #
           #   The format is "projects/{project_id}", for example,
-          #   "projects/api-test-project".
+          #   "projects/foo".
           # @param page_size [Integer]
           #   The maximum number of resources contained in the underlying API
           #   response. If page streaming is performed per-resource, this
