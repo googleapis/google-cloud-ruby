@@ -109,7 +109,7 @@ module Google
 
           def wait!
             # Wait for all queued callbacks to be processed.
-            @callback_thread_pool.wait_for_termination
+            @callback_thread_pool.wait_for_termination 60
 
             self
           end
