@@ -267,8 +267,8 @@ module Google
         #     3.  an event that specifies which intent to trigger.
         # @!attribute [rw] single_utterance
         #   @return [true, false]
-        #     DEPRECATED. Please use {Google::Cloud::Dialogflow::V2::InputAudioConfig#single_utterance InputAudioConfig#single_utterance} instead.
-        #     Optional. If `false` (default), recognition does not cease until
+        #     Optional. Please use {Google::Cloud::Dialogflow::V2::InputAudioConfig#single_utterance InputAudioConfig#single_utterance} instead.
+        #     If `false` (default), recognition does not cease until
         #     the client closes the stream. If `true`, the recognizer will detect a
         #     single spoken utterance in input audio. Recognition ceases when it detects
         #     the audio's voice has stopped or paused. In this case, once a detected

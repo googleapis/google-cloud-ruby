@@ -150,7 +150,12 @@ describe Google::Cloud::Dialogflow::V2::EntityTypesClient do
       # Create expected grpc response
       name_2 = "name2-1052831874"
       display_name = "displayName1615086568"
-      expected_response = { name: name_2, display_name: display_name }
+      enable_fuzzy_extraction = true
+      expected_response = {
+        name: name_2,
+        display_name: display_name,
+        enable_fuzzy_extraction: enable_fuzzy_extraction
+      }
       expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Dialogflow::V2::EntityType)
 
       # Mock Grpc layer
@@ -226,7 +231,12 @@ describe Google::Cloud::Dialogflow::V2::EntityTypesClient do
       # Create expected grpc response
       name = "name3373707"
       display_name = "displayName1615086568"
-      expected_response = { name: name, display_name: display_name }
+      enable_fuzzy_extraction = true
+      expected_response = {
+        name: name,
+        display_name: display_name,
+        enable_fuzzy_extraction: enable_fuzzy_extraction
+      }
       expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Dialogflow::V2::EntityType)
 
       # Mock Grpc layer
@@ -304,7 +314,12 @@ describe Google::Cloud::Dialogflow::V2::EntityTypesClient do
       # Create expected grpc response
       name = "name3373707"
       display_name = "displayName1615086568"
-      expected_response = { name: name, display_name: display_name }
+      enable_fuzzy_extraction = true
+      expected_response = {
+        name: name,
+        display_name: display_name,
+        enable_fuzzy_extraction: enable_fuzzy_extraction
+      }
       expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Dialogflow::V2::EntityType)
 
       # Mock Grpc layer

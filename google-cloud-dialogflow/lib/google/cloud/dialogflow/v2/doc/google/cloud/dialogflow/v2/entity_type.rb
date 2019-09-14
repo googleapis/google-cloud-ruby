@@ -39,6 +39,9 @@ module Google
         # @!attribute [rw] entities
         #   @return [Array<Google::Cloud::Dialogflow::V2::EntityType::Entity>]
         #     Optional. The collection of entity entries associated with the entity type.
+        # @!attribute [rw] enable_fuzzy_extraction
+        #   @return [true, false]
+        #     Optional. Enables fuzzy entity extraction during classification.
         class EntityType
           # An **entity entry** for an associated entity type.
           # @!attribute [rw] value
@@ -91,6 +94,10 @@ module Google
             # values. However, list entity types can contain references to other entity
             # types (with or without aliases).
             KIND_LIST = 2
+
+            # Regexp entity types allow to specify regular expressions in entries
+            # values.
+            KIND_REGEXP = 3
           end
         end
 
