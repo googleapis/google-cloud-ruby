@@ -88,8 +88,9 @@ module Google
               @pause_cond.broadcast
 
               # Now that the reception thread is stopped, immediately stop the
-              # callback thread pool and purge all pending callbacks.
-              @callback_thread_pool.kill
+              # callback thread pool. All queued callbacks will see the stream
+              # is stopped and perform a noop.
+              @callback_thread_pool.shutdown
 
               # Once all the callbacks are stopped, we can stop the inventory.
               @inventory.stop
@@ -107,6 +108,9 @@ module Google
           end
 
           def wait!
+            # Wait for all queued callbacks to be processed.
+            @callback_thread_pool.wait_for_termination 60
+
             self
           end
 
@@ -268,14 +272,14 @@ module Google
             return unless callback_thread_pool.running?
 
             Concurrent::Promises.future_on(
-              callback_thread_pool, @subscriber, @inventory, rec_msg
-            ) do |sub, inv, msg|
+              callback_thread_pool, self, rec_msg
+            ) do |stream, msg|
               begin
-                sub.callback.call msg
+                stream.subscriber.callback.call msg unless stream.stopped?
               rescue StandardError => callback_error
-                sub.error! callback_error
+                stream.subscriber.error! callback_error
               ensure
-                inv.remove msg.ack_id
+                stream.inventory.remove msg.ack_id
               end
             end
           end
