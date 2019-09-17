@@ -1,5 +1,17 @@
 # Release History
 
+### 0.39.2 / 2019-09-17
+
+#### Bug Fixes
+
+* Do not interrupt Subscriber callbacks when stopping
+  * Allow in-process callbacks to complete when a Subscriber is stopped.
+
+#### Documentation
+
+* Update Subscriber stop and wait documentation
+  * Update Subscriber#stop and Subscriber#wait! method
+
 ### 0.39.1 / 2019-09-04
 
 #### Features
