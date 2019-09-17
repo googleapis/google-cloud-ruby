@@ -157,6 +157,20 @@ module Google
         end
 
         ##
+        # If `#avro?` (`#format` is set to `"AVRO"`), this flag indicates
+        # whether to enable extracting applicable column types (such as
+        # `TIMESTAMP`) to their corresponding AVRO logical types
+        # (`timestamp-micros`), instead of only using their raw types
+        # (`avro-long`).
+        #
+        # @return [Boolean] `true` when applicable column types will use their
+        #   corresponding AVRO logical types, `false` otherwise.
+        #
+        def use_avro_logical_types?
+          @gapi.configuration.extract.use_avro_logical_types
+        end
+
+        ##
         # Yielded to a block to accumulate changes for an API request.
         class Updater < ExtractJob
           ##
@@ -175,11 +189,8 @@ module Google
             storage_urls = Array(storage_files).map do |url|
               url.respond_to?(:to_gs_url) ? url.to_gs_url : url
             end
-            dest_format = options[:format]
-            if dest_format.nil?
-              dest_format = Convert.derive_source_format storage_urls.first
-            end
-            req = Google::Apis::BigqueryV2::Job.new(
+            options[:format] ||= Convert.derive_source_format storage_urls.first
+            job = Google::Apis::BigqueryV2::Job.new(
               job_reference: job_ref,
               configuration: Google::Apis::BigqueryV2::JobConfiguration.new(
                 extract: Google::Apis::BigqueryV2::JobConfigurationExtract.new(
@@ -190,12 +201,24 @@ module Google
               )
             )
 
-            updater = ExtractJob::Updater.new req
+            from_job_and_options job, options
+          end
+
+          ##
+          # @private Create an Updater from a Job and options hash.
+          #
+          # @return [Google::Cloud::Bigquery::ExtractJob::Updater] A job
+          #   configuration object for setting query options.
+          def self.from_job_and_options request, options = {}
+            updater = ExtractJob::Updater.new request
             updater.compression = options[:compression]
             updater.delimiter = options[:delimiter]
-            updater.format = dest_format
+            updater.format = options[:format]
             updater.header = options[:header]
             updater.labels = options[:labels] if options[:labels]
+            unless options[:use_avro_logical_types].nil?
+              updater.use_avro_logical_types = options[:use_avro_logical_types]
+            end
             updater
           end
 
@@ -298,6 +321,22 @@ module Google
           #
           def labels= value
             @gapi.configuration.update! labels: value
+          end
+
+          ##
+          # Indicate whether to enable extracting applicable column types (such
+          # as `TIMESTAMP`) to their corresponding AVRO logical types
+          # (`timestamp-micros`), instead of only using their raw types
+          # (`avro-long`).
+          #
+          # Only used when `#format` is set to `"AVRO"` (`#avro?`).
+          #
+          # @param [Boolean] value Whether applicable column types will use
+          #   their corresponding AVRO logical types.
+          #
+          # @!group Attributes
+          def use_avro_logical_types= value
+            @gapi.configuration.extract.use_avro_logical_types = value
           end
 
           ##
