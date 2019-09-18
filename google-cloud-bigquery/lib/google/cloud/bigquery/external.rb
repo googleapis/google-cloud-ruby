@@ -1224,6 +1224,52 @@ module Google
             frozen_check!
             @gapi.google_sheets_options.skip_leading_rows = row_count
           end
+
+          ##
+          # Range of a sheet to query from. Only used when non-empty. Typical
+          # format: `{sheet_name}!{top_left_cell_id}:{bottom_right_cell_id}`.
+          #
+          # @return [Integer]
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #
+          #   sheets_url = "https://docs.google.com/spreadsheets/d/1234567980"
+          #   sheets_table = bigquery.external sheets_url do |sheets|
+          #     sheets.range = "sheet1!A1:B20"
+          #   end
+          #
+          #   sheets_table.range #=> "sheet1!A1:B20"
+          #
+          def range
+            @gapi.google_sheets_options.range
+          end
+
+          ##
+          # Set the range of a sheet to query from. Only used when non-empty.
+          # Typical format:
+          # `{sheet_name}!{top_left_cell_id}:{bottom_right_cell_id}`.
+          #
+          # @param [Integer] new_range New range value
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #
+          #   sheets_url = "https://docs.google.com/spreadsheets/d/1234567980"
+          #   sheets_table = bigquery.external sheets_url do |sheets|
+          #     sheets.range = "sheet1!A1:B20"
+          #   end
+          #
+          #   sheets_table.range #=> "sheet1!A1:B20"
+          #
+          def range= new_range
+            frozen_check!
+            @gapi.google_sheets_options.range = new_range
+          end
         end
 
         ##
