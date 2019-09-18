@@ -1229,7 +1229,7 @@ module Google
           # Range of a sheet to query from. Only used when non-empty. Typical
           # format: `{sheet_name}!{top_left_cell_id}:{bottom_right_cell_id}`.
           #
-          # @return [Integer]
+          # @return [String] Range of a sheet to query from.
           #
           # @example
           #   require "google/cloud/bigquery"
@@ -1252,7 +1252,7 @@ module Google
           # Typical format:
           # `{sheet_name}!{top_left_cell_id}:{bottom_right_cell_id}`.
           #
-          # @param [Integer] new_range New range value
+          # @param [String] new_range New range of a sheet to query from.
           #
           # @example
           #   require "google/cloud/bigquery"
