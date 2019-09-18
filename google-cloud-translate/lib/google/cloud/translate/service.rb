@@ -17,6 +17,7 @@ require "google/cloud/errors"
 require "google/cloud/translate/credentials"
 require "google/cloud/translate/version"
 require "faraday"
+require "uri"
 
 module Google
   module Cloud
@@ -34,12 +35,13 @@ module Google
         ##
         # Creates a new Service instance.
         def initialize project, credentials, retries: nil, timeout: nil,
-                       key: nil
+                       key: nil, host: nil
           @project = project
           @credentials = credentials
           @retries = retries
           @timeout = timeout
           @key = key
+          @host = host || API_URL
         end
 
         ##
@@ -101,7 +103,7 @@ module Google
         # The HTTP object that makes calls to API.
         # This must be a Faraday object.
         def http
-          @http ||= Faraday.new url: API_URL, request: {
+          @http ||= Faraday.new url: @host, request: {
             open_timeout: @timeout, timeout: @timeout
           }.delete_if { |_k, v| v.nil? }
         end

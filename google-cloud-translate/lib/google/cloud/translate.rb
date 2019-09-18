@@ -68,6 +68,8 @@ module Google
       # @param [Integer] retries Number of times to retry requests on server
       #   error. The default value is `3`. Optional.
       # @param [Integer] timeout Default timeout to use in requests. Optional.
+      # @param [String] endpoint Override of the endpoint host name. Optional.
+      #   If the param is nil, uses the default endpoint.
       # @param [String] project Alias for the `project_id` argument. Deprecated.
       # @param [String] keyfile Alias for the `credentials` argument.
       #   Deprecated.
@@ -106,34 +108,40 @@ module Google
       #   translation.text #=> "Salve mundi!"
       #
       def self.new project_id: nil, credentials: nil, key: nil, scope: nil,
-                   retries: nil, timeout: nil, project: nil, keyfile: nil
+                   retries: nil, timeout: nil, endpoint: nil, project: nil,
+                   keyfile: nil
         project_id ||= (project || default_project_id)
         key        ||= configure.key
+        retries    ||= configure.retries
+        timeout    ||= configure.timeout
+        endpoint   ||= configure.endpoint
 
         if key
           return Google::Cloud::Translate::Api.new(
             Google::Cloud::Translate::Service.new(
-              project_id.to_s, nil, retries: retries, timeout: timeout, key: key
+              project_id.to_s, nil,
+              retries: retries, timeout: timeout, key: key, host: endpoint
             )
           )
         end
 
         scope       ||= configure.scope
-        retries     ||= configure.retries
-        timeout     ||= configure.timeout
         credentials ||= keyfile || default_credentials(scope: scope)
 
         unless credentials.is_a? Google::Auth::Credentials
           credentials = Translate::Credentials.new credentials, scope: scope
         end
 
-        project_id ||= credentials.project_id if credentials.respond_to? :project_id
-        project_id = project_id.to_s # Always cast to a string
+        # project_id ||= credentials&.project_id
+        # project_id ||= credentials.project_id if credentials.respond_to? :project_id
+        # project_id = project_id.to_s # Always cast to a string
+        project_id = resolve_project_id project_id, credentials
         raise ArgumentError, "project_id is missing" if project_id.empty?
 
         Translate::Api.new(
           Translate::Service.new(
-            project_id, credentials, retries: retries, timeout: timeout
+            project_id, credentials,
+            retries: retries, timeout: timeout, host: endpoint
           )
         )
       end
@@ -154,6 +162,8 @@ module Google
       # * `retries` - (Integer) Number of times to retry requests on server
       #   error.
       # * `timeout` - (Integer) Default timeout to use in requests.
+      # * `endpoint` - (String) Override of the endpoint host name, or `nil`
+      #   to use the default endpoint.
       #
       # @return [Google::Cloud::Config] The configuration object the
       #   Google::Cloud::Translate library uses.
@@ -178,6 +188,16 @@ module Google
         Google::Cloud.configure.translate.credentials ||
           Google::Cloud.configure.credentials ||
           Translate::Credentials.default(scope: scope)
+      end
+
+      ##
+      # @private Resolve project.
+      def self.resolve_project_id project_id, credentials
+        # Always cast to a string
+        return project_id.to_s unless credentials.respond_to? :project_id
+
+        # Always cast to a string
+        project_id || credentials.project_id.to_s
       end
     end
   end
