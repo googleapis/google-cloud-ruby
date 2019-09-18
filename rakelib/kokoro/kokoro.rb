@@ -31,7 +31,7 @@ class Kokoro < Command
   end
 
   def presubmit
-    gems.each do |gem|
+    @updated_gems.each do |gem|
       run_ci gem do
         run "bundle exec rake ci", 1800
       end
