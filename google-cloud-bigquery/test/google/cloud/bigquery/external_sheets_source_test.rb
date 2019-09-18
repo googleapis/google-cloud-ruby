@@ -61,4 +61,26 @@ describe Google::Cloud::Bigquery::External::SheetsSource do
 
     table.to_gapi.to_h.must_equal table_gapi.to_h
   end
+
+  it "sets range" do
+    table = Google::Cloud::Bigquery::External::SheetsSource.new.tap do |e|
+      e.gapi.source_uris = ["https://docs.google.com/spreadsheets/d/1234567980"]
+      e.gapi.source_format = "GOOGLE_SHEETS"
+    end
+    table_gapi = Google::Apis::BigqueryV2::ExternalDataConfiguration.new(
+      source_uris: ["https://docs.google.com/spreadsheets/d/1234567980"],
+      source_format: "GOOGLE_SHEETS",
+      google_sheets_options: Google::Apis::BigqueryV2::GoogleSheetsOptions.new(
+        range: "sheet1!A1:B20"
+      )
+    )
+
+    table.range.must_be :nil?
+
+    table.range = "sheet1!A1:B20"
+
+    table.range.must_equal "sheet1!A1:B20"
+
+    table.to_gapi.to_h.must_equal table_gapi.to_h
+  end
 end
