@@ -132,9 +132,6 @@ module Google
           credentials = Translate::Credentials.new credentials, scope: scope
         end
 
-        # project_id ||= credentials&.project_id
-        # project_id ||= credentials.project_id if credentials.respond_to? :project_id
-        # project_id = project_id.to_s # Always cast to a string
         project_id = resolve_project_id project_id, credentials
         raise ArgumentError, "project_id is missing" if project_id.empty?
 
