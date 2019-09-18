@@ -300,9 +300,7 @@ module Google
         #   as well as the equivalent strings returned by
         #   {Bucket#storage_class}. For more information, see [Storage
         #   Classes](https://cloud.google.com/storage/docs/storage-classes). The
-        #   default value is the Standard storage class, which is equivalent to
-        #   `:multi_regional` or `:regional` depending on the bucket's location
-        #   settings.
+        #   default value is the `:standard` storage class.
         # @param [Boolean] versioning Whether [Object
         #   Versioning](https://cloud.google.com/storage/docs/object-versioning)
         #   is to be enabled for the bucket. The default value is `false`.

@@ -38,7 +38,7 @@ describe Google::Cloud::Storage::Bucket, :update, :mock_storage do
                                        age: 32,
                                        created_before: bucket_lifecycle_created_before,
                                        is_live: true,
-                                       matches_storage_class: ["MULTI_REGIONAL"],
+                                       matches_storage_class: ["STANDARD"],
                                        num_newer_versions: 3)
   end
   let(:bucket_lifecycle_hash) { JSON.parse bucket_lifecycle_gapi.to_json }
@@ -497,7 +497,7 @@ describe Google::Cloud::Storage::Bucket, :update, :mock_storage do
                                      age: 32,
                                      created_before: bucket_lifecycle_created_before,
                                      is_live: true,
-                                     matches_storage_class: ["MULTI_REGIONAL"],
+                                     matches_storage_class: ["STANDARD"],
                                      num_newer_versions: 3
       end
 
@@ -510,7 +510,7 @@ describe Google::Cloud::Storage::Bucket, :update, :mock_storage do
       rule.age.must_equal 32
       rule.created_before.must_equal bucket_lifecycle_created_before
       rule.is_live.must_equal true
-      rule.matches_storage_class.must_equal ["MULTI_REGIONAL"]
+      rule.matches_storage_class.must_equal ["STANDARD"]
       rule.num_newer_versions.must_equal 3
     end
 
@@ -530,7 +530,7 @@ describe Google::Cloud::Storage::Bucket, :update, :mock_storage do
                               age: 32,
                               created_before: bucket_lifecycle_created_before,
                               is_live: true,
-                              matches_storage_class: ["MULTI_REGIONAL"],
+                              matches_storage_class: ["STANDARD"],
                               num_newer_versions: 3),
           lifecycle_rule_gapi("Delete", age: 40, is_live: false)
         )
@@ -588,11 +588,11 @@ describe Google::Cloud::Storage::Bucket, :update, :mock_storage do
                                 age: 32,
                                 created_before: bucket_lifecycle_created_before,
                                 is_live: true,
-                                matches_storage_class: ["MULTI_REGIONAL"],
+                                matches_storage_class: ["STANDARD"],
                                 num_newer_versions: 3),
               lifecycle_rule_gapi("Delete", age: 40, is_live: false),
               lifecycle_rule_gapi("Delete", is_live: false, num_newer_versions: 8),
-              lifecycle_rule_gapi("SetStorageClass", storage_class: "COLDLINE", created_before: "2013-01-15", matches_storage_class: ["MULTI_REGIONAL", "REGIONAL"])
+              lifecycle_rule_gapi("SetStorageClass", storage_class: "COLDLINE", created_before: "2013-01-15", matches_storage_class: ["STANDARD", "NEARLINE"])
           )
       )
       returned_bucket_gapi = Google::Apis::StorageV1::Bucket.from_json \
@@ -606,7 +606,7 @@ describe Google::Cloud::Storage::Bucket, :update, :mock_storage do
       bucket_with_cors.update do |b|
         b.lifecycle.add_delete_rule age: 40, is_live: false
         b.lifecycle.add_delete_rule is_live: false, num_newer_versions: 8
-        b.lifecycle.add_set_storage_class_rule "COLDLINE", created_before: "2013-01-15", matches_storage_class: ["MULTI_REGIONAL", "REGIONAL"]
+        b.lifecycle.add_set_storage_class_rule "COLDLINE", created_before: "2013-01-15", matches_storage_class: ["STANDARD", "NEARLINE"]
       end
 
       mock.verify
@@ -621,7 +621,7 @@ describe Google::Cloud::Storage::Bucket, :update, :mock_storage do
                                 age: 32,
                                 created_before: bucket_lifecycle_created_before,
                                 is_live: true,
-                                matches_storage_class: ["MULTI_REGIONAL"],
+                                matches_storage_class: ["STANDARD"],
                                 num_newer_versions: 3),
               lifecycle_rule_gapi("Delete", age: 40, is_live: false)
           )
@@ -635,14 +635,14 @@ describe Google::Cloud::Storage::Bucket, :update, :mock_storage do
       bucket_with_cors.lifecycle.must_be :frozen?
       bucket_with_cors.lifecycle.class.must_equal Google::Cloud::Storage::Bucket::Lifecycle
       bucket_with_cors.lifecycle do |l|
-        l.add_set_storage_class_rule :coldline, created_before: "2013-01-15", matches_storage_class: [:MULTI_REGIONAL, :regional]  # alias: set_storage_class
+        l.add_set_storage_class_rule :coldline, created_before: "2013-01-15", matches_storage_class: [:STANDARD, :nearline]  # alias: set_storage_class
         l.add_delete_rule age: 40, is_live: false
         l.add_delete_rule is_live: false, num_newer_versions: 8
 
         # Remove the last Lifecycle rule from the array
         l.pop
         # Remove all existing rules that match predicate
-        l.delete_if { |r| r.matches_storage_class.include? "REGIONAL" }
+        l.delete_if { |r| r.matches_storage_class.include? "NEARLINE" }
       end
 
       mock.verify
