@@ -52,6 +52,7 @@ describe Google::Cloud::Bigquery::ExtractJob, :mock_bigquery do
     job.wont_be :avro?
     job.delimiter.must_equal ","
     job.must_be :print_header?
+    job.must_be :use_avro_logical_types?
   end
 
   it "knows its extract config" do
@@ -89,7 +90,8 @@ describe Google::Cloud::Bigquery::ExtractJob, :mock_bigquery do
       "compression" => "GZIP",
       "destinationFormat" => "NEWLINE_DELIMITED_JSON",
       "fieldDelimiter" => ",",
-      "printHeader" => true
+      "printHeader" => true,
+      "useAvroLogicalTypes" => true
     }
     hash["statistics"]["extract"] = {
       "destinationUriFileCounts" => [123]

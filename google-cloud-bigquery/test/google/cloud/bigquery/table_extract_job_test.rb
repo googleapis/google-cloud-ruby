@@ -167,6 +167,24 @@ describe Google::Cloud::Bigquery::Table, :extract_job, :mock_bigquery do
     job.must_be_kind_of Google::Cloud::Bigquery::ExtractJob
   end
 
+  it "can extract itself and determine the avro format with options" do
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+    job_gapi = extract_job_gapi(table, extract_file)
+    job_gapi.configuration.extract.destination_format = "AVRO"
+    job_gapi.configuration.extract.destination_uris = [job_gapi.configuration.extract.destination_uris.first + ".avro"]
+    job_gapi.configuration.extract.use_avro_logical_types = true
+
+    mock.expect :insert_job, job_gapi, [project, job_gapi]
+
+    job = table.extract_job "#{extract_url}.avro" do |j|
+      j.use_avro_logical_types = true
+    end
+    mock.verify
+
+    job.must_be_kind_of Google::Cloud::Bigquery::ExtractJob
+  end
+
   it "can extract itself and specify the avro format" do
     mock = Minitest::Mock.new
     bigquery.service.mocked_service = mock
@@ -176,6 +194,24 @@ describe Google::Cloud::Bigquery::Table, :extract_job, :mock_bigquery do
     mock.expect :insert_job, job_gapi, [project, job_gapi]
 
     job = table.extract_job extract_url, format: :avro
+    mock.verify
+
+    job.must_be_kind_of Google::Cloud::Bigquery::ExtractJob
+  end
+
+  it "can extract itself and specify the avro format with options" do
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+    job_gapi = extract_job_gapi(table, extract_file)
+    job_gapi.configuration.extract.destination_format = "AVRO"
+    job_gapi.configuration.extract.use_avro_logical_types = true
+
+    mock.expect :insert_job, job_gapi, [project, job_gapi]
+
+    job = table.extract_job extract_url do |j|
+      j.format = :avro
+      j.use_avro_logical_types = true
+    end
     mock.verify
 
     job.must_be_kind_of Google::Cloud::Bigquery::ExtractJob
