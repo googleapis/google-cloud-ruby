@@ -1287,6 +1287,20 @@ module Google
           Session.from_grpc grpc, @project.service
         end
 
+        ##
+        # @private
+        # Creates a batch of new session objects of size `session_count`.
+        def batch_create_new_sessions session_count
+          ensure_service!
+          resp = @project.service.batch_create_sessions \
+            Admin::Database::V1::DatabaseAdminClient.database_path(
+              project_id, instance_id, database_id
+            ),
+            session_count,
+            labels: @session_labels
+          resp.session.map { |grpc| Session.from_grpc grpc, @project.service }
+        end
+
         # @private
         def to_s
           "(project_id: #{project_id}, instance_id: #{instance_id}, " \

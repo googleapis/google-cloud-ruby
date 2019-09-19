@@ -204,21 +204,20 @@ module Google
             max_threads: @threads
           # init the queues
           @new_sessions_in_process = 0
-          @all_sessions = []
-          @session_queue = []
           @transaction_queue = []
           # init the keepalive task
           create_keepalive_task!
           # init session queue
+          @all_sessions = []
+          @all_sessions = @client.batch_create_new_sessions @min if @min > 0
+          sessions = @all_sessions.dup
           num_transactions = (@min * @write_ratio).round
-          num_sessions = @min.to_i - num_transactions
-          num_sessions.times.each do
-            future { checkin_session new_session! }
-          end
+          pending_transactions = sessions.shift num_transactions
           # init transaction queue
-          num_transactions.times.each do
-            future { checkin_transaction new_transaction! }
+          pending_transactions.each do |transaction|
+            future { checkin_transaction transaction.create_transaction }
           end
+          @session_queue = sessions
         end
 
         def shutdown
