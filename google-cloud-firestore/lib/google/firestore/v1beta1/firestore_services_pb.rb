@@ -25,6 +25,8 @@ module Google
   module Firestore
     module V1beta1
       module Firestore
+        # Specification of the Firestore API.
+        #
         # The Cloud Firestore service.
         #
         # This service exposes several types of comparable timestamps:

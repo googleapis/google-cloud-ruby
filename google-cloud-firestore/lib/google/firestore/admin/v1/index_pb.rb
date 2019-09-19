@@ -31,6 +31,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   add_enum "google.firestore.admin.v1.Index.QueryScope" do
     value :QUERY_SCOPE_UNSPECIFIED, 0
     value :COLLECTION, 1
+    value :COLLECTION_GROUP, 2
   end
   add_enum "google.firestore.admin.v1.Index.State" do
     value :STATE_UNSPECIFIED, 0
