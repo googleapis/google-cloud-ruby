@@ -161,15 +161,10 @@ module Google
             # Test if a field is equal to NaN.
             IS_NAN = 2
 
-            # Test if an exprestion evaluates to Null.
+            # Test if an expression evaluates to Null.
             IS_NULL = 3
           end
         end
-
-        # A reference to a field, such as `max(messages.time) as max_time`.
-        # @!attribute [rw] field_path
-        #   @return [String]
-        class FieldReference; end
 
         # An order on a field.
         # @!attribute [rw] field
@@ -179,6 +174,11 @@ module Google
         #   @return [Google::Firestore::V1::StructuredQuery::Direction]
         #     The direction to order by. Defaults to `ASCENDING`.
         class Order; end
+
+        # A reference to a field, such as `max(messages.time) as max_time`.
+        # @!attribute [rw] field_path
+        #   @return [String]
+        class FieldReference; end
 
         # The projection of document's fields to return.
         # @!attribute [rw] fields

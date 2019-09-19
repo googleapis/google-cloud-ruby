@@ -442,14 +442,8 @@ module Google
       #     The client must know the state of matching documents at this time.
       # @!attribute [rw] target_id
       #   @return [Integer]
-      #     A client provided target ID.
-      #
-      #     If not set, the server will assign an ID for the target.
-      #
-      #     Used for resuming a target without changing IDs. The IDs can either be
-      #     client-assigned or be server-assigned in a previous stream. All targets
-      #     with client provided IDs must be added before adding a target that needs
-      #     a server-assigned id.
+      #     The target ID that identifies the target on the stream. Must be a positive
+      #     number and non-zero.
       # @!attribute [rw] once
       #   @return [true, false]
       #     If the target should be removed once it is current and consistent.
@@ -488,11 +482,7 @@ module Google
       #
       #     If empty, the change applies to all targets.
       #
-      #     For `target_change_type=ADD`, the order of the target IDs matches the order
-      #     of the requests to add the targets. This allows clients to unambiguously
-      #     associate server-assigned target IDs with added targets.
-      #
-      #     For other states, the order of the target IDs is not defined.
+      #     The order of the target IDs is not defined.
       # @!attribute [rw] cause
       #   @return [Google::Rpc::Status]
       #     The error that resulted in this change, if applicable.

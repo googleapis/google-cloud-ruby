@@ -62,14 +62,12 @@ module Google
           #     The indexes supported for this field.
           # @!attribute [rw] uses_ancestor_config
           #   @return [true, false]
-          #     Output only.
-          #     When true, the `Field`'s index configuration is set from the
+          #     Output only. When true, the `Field`'s index configuration is set from the
           #     configuration specified by the `ancestor_field`.
           #     When false, the `Field`'s index configuration is defined explicitly.
           # @!attribute [rw] ancestor_field
           #   @return [String]
-          #     Output only.
-          #     Specifies the resource name of the `Field` from which this field's
+          #     Output only. Specifies the resource name of the `Field` from which this field's
           #     index configuration is set (when `uses_ancestor_config` is true),
           #     or from which it *would* be set if this field had no index configuration
           #     (when `uses_ancestor_config` is false).

@@ -21,8 +21,7 @@ module Google
         # documents in a database.
         # @!attribute [rw] name
         #   @return [String]
-        #     Output only.
-        #     A server defined name for this index.
+        #     Output only. A server defined name for this index.
         #     The form of this name for composite indexes will be:
         #     `projects/{project_id}/databases/{database_id}/collectionGroups/{collection_id}/indexes/{composite_index_id}`
         #     For single field indexes, this field will be empty.
@@ -50,8 +49,7 @@ module Google
         #     field path equal to the field path of the associated field.
         # @!attribute [rw] state
         #   @return [Google::Firestore::Admin::V1::Index::State]
-        #     Output only.
-        #     The serving state of the index.
+        #     Output only. The serving state of the index.
         class Index
           # A field in an index.
           # The field_path describes which field is indexed, the value_mode describes
@@ -101,6 +99,11 @@ module Google
             # against a collection that is the child of a specific document, specified
             # at query time, and that has the collection id specified by the index.
             COLLECTION = 1
+
+            # Indexes with a collection group query scope specified allow queries
+            # against all collections that has the collection id specified by the
+            # index.
+            COLLECTION_GROUP = 2
           end
 
           # The state of an index. During index creation, an index will be in the

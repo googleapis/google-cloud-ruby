@@ -145,15 +145,6 @@ module Google
           end
         end
 
-        # The projection of document's fields to return.
-        # @!attribute [rw] fields
-        #   @return [Array<Google::Firestore::V1beta1::StructuredQuery::FieldReference>]
-        #     The fields to return.
-        #
-        #     If empty, all fields are returned. To only return the name
-        #     of the document, use `['__name__']`.
-        class Projection; end
-
         # A filter with a single operand.
         # @!attribute [rw] op
         #   @return [Google::Firestore::V1beta1::StructuredQuery::UnaryFilter::Operator]
@@ -170,7 +161,7 @@ module Google
             # Test if a field is equal to NaN.
             IS_NAN = 2
 
-            # Test if an exprestion evaluates to Null.
+            # Test if an expression evaluates to Null.
             IS_NULL = 3
           end
         end
@@ -188,6 +179,15 @@ module Google
         # @!attribute [rw] field_path
         #   @return [String]
         class FieldReference; end
+
+        # The projection of document's fields to return.
+        # @!attribute [rw] fields
+        #   @return [Array<Google::Firestore::V1beta1::StructuredQuery::FieldReference>]
+        #     The fields to return.
+        #
+        #     If empty, all fields are returned. To only return the name
+        #     of the document, use `['__name__']`.
+        class Projection; end
 
         # A sort direction.
         module Direction
