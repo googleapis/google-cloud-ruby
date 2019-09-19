@@ -254,6 +254,32 @@ describe Google::Cloud::Bigquery::Table, :update, :mock_bigquery do
     mock.verify
   end
 
+  it "updates its encryption" do
+    kms_key = "path/to/encryption_key_name"
+
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+    table_hash = random_table_hash dataset_id, table_id, table_name, description
+    table_hash["encryptionConfiguration"] = { kmsKeyName: kms_key }
+    request_table_gapi = Google::Apis::BigqueryV2::Table.new encryption_configuration: Google::Apis::BigqueryV2::EncryptionConfiguration.new(kms_key_name: kms_key), etag: etag
+    mock.expect :patch_table, return_table(table_hash),
+      [project, dataset_id, table_id, request_table_gapi, {options: {header: {"If-Match" => etag}}}]
+    mock.expect :get_table, return_table(table_hash), [project, dataset_id, table_id]
+    table.service.mocked_service = mock
+
+    table.encryption.must_be :nil?
+
+    encrypt_config = bigquery.encryption kms_key: kms_key
+
+    table.encryption = encrypt_config
+
+    table.encryption.must_be_kind_of Google::Cloud::Bigquery::EncryptionConfiguration
+    table.encryption.kms_key.must_equal kms_key
+    table.encryption.must_be :frozen?
+
+    mock.verify
+  end
+
   def return_table table_hash
     Google::Apis::BigqueryV2::Table.from_json(table_hash.to_json)
   end

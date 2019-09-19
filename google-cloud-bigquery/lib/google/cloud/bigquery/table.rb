@@ -906,7 +906,6 @@ module Google
         # {#resource_full?}), the full representation will be retrieved before
         # the update to comply with ETag-based optimistic concurrency control.
         #
-        #
         # @see https://cloud.google.com/bigquery/docs/customer-managed-encryption
         #   Protecting Data with Cloud KMS Keys
         #

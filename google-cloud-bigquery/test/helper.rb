@@ -390,13 +390,13 @@ class MockBigquery < Minitest::Spec
     }
   end
 
-  def random_model_full_hash dataset, id, name: nil, description: nil
+  def random_model_full_hash dataset, id, name: nil, description: nil, kms_key: nil
     hash = random_model_partial_hash dataset, id
 
     name ||= "Model Name"
     description ||= "Model description"
 
-    hash.merge({
+    hash.merge!({
       etag: "etag123456789",
       friendlyName: name,
       description: description,
@@ -435,6 +435,14 @@ class MockBigquery < Minitest::Spec
         }
       }]
     })
+
+    if kms_key
+      hash[:encryptionConfiguration] = {
+        kmsKeyName: kms_key
+      }
+    end
+
+    hash
   end
 
   def random_model_partial_hash dataset, id

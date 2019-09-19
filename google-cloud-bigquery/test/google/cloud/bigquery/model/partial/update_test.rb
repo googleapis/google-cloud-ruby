@@ -126,4 +126,31 @@ describe Google::Cloud::Bigquery::Model, :partial, :update, :mock_bigquery do
 
     model.expires_at.must_be_nil
   end
+
+  it "updates its encryption" do
+    kms_key = "path/to/encryption_key_name"
+
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+    model_hash = random_model_full_hash dataset, model_id, name: model_name, description: description
+    model_hash["encryptionConfiguration"] = { kmsKeyName: kms_key }
+    patched_model_gapi = Google::Apis::BigqueryV2::Model.new model_reference: model.model_ref, encryption_configuration: Google::Apis::BigqueryV2::EncryptionConfiguration.new(kms_key_name: kms_key)
+    mock.expect :get_model, random_model_full_hash(dataset, model_id).to_json, [project, dataset, model_id, options: { skip_deserialization: true }]
+    mock.expect :patch_model, model_hash.to_json,
+      [project, dataset, model_id, patched_model_gapi, options: { skip_deserialization: true, header: { "If-Match" => etag } }]
+    mock.expect :get_model, model_hash.to_json, [project, dataset, model_id, options: { skip_deserialization: true }]
+    model.service.mocked_service = mock
+
+    model.encryption.must_be :nil?
+
+    encrypt_config = bigquery.encryption kms_key: kms_key
+
+    model.encryption = encrypt_config
+
+    mock.verify
+
+    model.encryption.must_be_kind_of Google::Cloud::Bigquery::EncryptionConfiguration
+    model.encryption.kms_key.must_equal kms_key
+    model.encryption.must_be :frozen?
+  end
 end

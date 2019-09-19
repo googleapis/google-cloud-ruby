@@ -26,7 +26,8 @@ describe Google::Cloud::Bigquery::Model, :resource, :attributes, :mock_bigquery 
   let(:etag) { "etag123456789" }
   let(:location_code) { "US" }
   let(:labels) { { foo: "bar" } }
-  let(:model_hash) { random_model_full_hash dataset, model_id, name: model_name, description: description }
+  let(:kms_key) { "path/to/encryption_key_name" }
+  let(:model_hash) { random_model_full_hash dataset, model_id, name: model_name, description: description, kms_key: kms_key }
   let(:model) { Google::Cloud::Bigquery::Model.from_gapi_json model_hash, bigquery.service }
 
   it "knows its attributes" do
@@ -52,6 +53,10 @@ describe Google::Cloud::Bigquery::Model, :resource, :attributes, :mock_bigquery 
     model.etag.must_equal etag
     model.location.must_equal location_code
     model.expires_at.must_be_close_to ::Time.now, 1
+
+    model.encryption.must_be_kind_of Google::Cloud::Bigquery::EncryptionConfiguration
+    model.encryption.kms_key.must_equal kms_key
+    model.encryption.must_be :frozen?
   end
 
   it "handles nil for optional expires_at" do

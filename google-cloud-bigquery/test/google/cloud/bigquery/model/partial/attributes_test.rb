@@ -47,6 +47,8 @@ describe Google::Cloud::Bigquery::Model, :partial, :attributes, :mock_bigquery d
     model.modified_at.must_be_close_to ::Time.now, 1
     model.labels.must_equal labels
     model.labels.must_be :frozen?
+
+    model.encryption.must_be_nil
   end
 
   it "gets full data for name" do
