@@ -367,6 +367,82 @@ module Google
         end
 
         ##
+        # The {EncryptionConfiguration} object that represents the custom
+        # encryption method used to protect this model. If not set, default
+        # encryption is used.
+        #
+        # Present only if this model is using custom encryption.
+        #
+        # @see https://cloud.google.com/bigquery/docs/customer-managed-encryption
+        #   Protecting Data with Cloud KMS Keys
+        #
+        # @return [EncryptionConfiguration, nil] The encryption configuration.
+        #
+        #   @!group Attributes
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #   model = dataset.model "my_model"
+        #
+        #   encrypt_config = model.encryption
+        #
+        # @!group Attributes
+        #
+        def encryption
+          return nil if reference?
+          return nil if @gapi_json[:encryptionConfiguration].nil?
+          # We have to create a gapic object from the hash because that is what
+          # EncryptionConfiguration is expecing.
+          json_cmek = @gapi_json[:encryptionConfiguration].to_json
+          gapi_cmek = \
+            Google::Apis::BigqueryV2::EncryptionConfiguration.from_json(
+              json_cmek
+            )
+          EncryptionConfiguration.from_gapi(gapi_cmek).freeze
+        end
+
+        ##
+        # Set the {EncryptionConfiguration} object that represents the custom
+        # encryption method used to protect this model. If not set, default
+        # encryption is used.
+        #
+        # Present only if this model is using custom encryption.
+        #
+        # If the model is not a full resource representation (see
+        # {#resource_full?}), the full representation will be retrieved before
+        # the update to comply with ETag-based optimistic concurrency control.
+        #
+        # @see https://cloud.google.com/bigquery/docs/customer-managed-encryption
+        #   Protecting Data with Cloud KMS Keys
+        #
+        # @param [EncryptionConfiguration] value The new encryption config.
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #   model = dataset.model "my_model"
+        #
+        #   key_name = "projects/a/locations/b/keyRings/c/cryptoKeys/d"
+        #   encrypt_config = bigquery.encryption kms_key: key_name
+        #
+        #   model.encryption = encrypt_config
+        #
+        # @!group Attributes
+        #
+        def encryption= value
+          ensure_full_data!
+          # We have to create a hash from the gapic object's JSON because that
+          # is what Model is expecing.
+          json_cmek = JSON.parse value.to_gapi.to_json, symbolize_names: true
+          patch_gapi! encryptionConfiguration: json_cmek
+        end
+
+        ##
         # The input feature columns that were used to train this model.
         #
         # @return [Array<StandardSql::Field>]

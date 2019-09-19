@@ -51,5 +51,7 @@ describe Google::Cloud::Bigquery::Model, :reference, :attributes, :mock_bigquery
     model.etag.must_be_nil
     model.location.must_be_nil
     model.expires_at.must_be_nil
+
+    model.encryption.must_be_nil
   end
 end
