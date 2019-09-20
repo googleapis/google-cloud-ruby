@@ -65,9 +65,11 @@ module Google
             loop do
               raise ClientClosedError if @closed
 
-              read_session = session_queue.shift
+              # Use LIFO to ensure sessions are used from backend caches, which
+              # will reduce the read / write latencies on user requests.
+              read_session = session_queue.pop # LIFO
               return read_session if read_session
-              write_transaction = transaction_queue.shift
+              write_transaction = transaction_queue.pop # LIFO
               return write_transaction.session if write_transaction
 
               if can_allocate_more_sessions?
@@ -117,9 +119,9 @@ module Google
             loop do
               raise ClientClosedError if @closed
 
-              write_transaction = transaction_queue.shift
+              write_transaction = transaction_queue.pop # LIFO
               return write_transaction if write_transaction
-              read_session = session_queue.shift
+              read_session = session_queue.pop
               if read_session
                 action = read_session
                 break
