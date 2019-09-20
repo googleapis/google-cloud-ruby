@@ -541,8 +541,7 @@ module Google
           #   Required. The project that the agent to export is associated with.
           #   Format: `projects/<Project ID>`.
           # @param agent_uri [String]
-          #   Optional. The
-          #   [Google Cloud Storage](https://cloud.google.com/storage/docs/)
+          #   Required. The [Google Cloud Storage](https://cloud.google.com/storage/docs/)
           #   URI to export the agent to.
           #   The format of this URI must be `gs://<bucket-name>/<object-name>`.
           #   If left unspecified, the serialized agent is returned inline.
@@ -623,13 +622,12 @@ module Google
           #
           #   Example for how to import an agent via the command line:
           #   <pre>curl \
-          #     'https://dialogflow.googleapis.com/v2/projects/&lt;project_name&gt;/agent:import\
+          #     'https://dialogflow.googleapis.com/v2/projects/&lt;project_id&gt;/agent:import'\
           #      -X POST \
-          #      -H 'Authorization: Bearer '$(gcloud auth application-default
-          #      print-access-token) \
+          #      -H 'Authorization: Bearer'\
+          #      $(gcloud auth application-default print-access-token) \
           #      -H 'Accept: application/json' \
           #      -H 'Content-Type: application/json' \
-          #      --compressed \
           #      --data-binary "{
           #         'agentContent': '$(cat &lt;agent zip file&gt; | base64 -w 0)'
           #      }"</pre>
@@ -711,13 +709,12 @@ module Google
           #
           #   Example for how to restore an agent via the command line:
           #   <pre>curl \
-          #     'https://dialogflow.googleapis.com/v2/projects/&lt;project_name&gt;/agent:restore\
+          #     'https://dialogflow.googleapis.com/v2/projects/&lt;project_id&gt;/agent:restore'\
           #      -X POST \
-          #      -H 'Authorization: Bearer '$(gcloud auth application-default
-          #      print-access-token) \
+          #      -H 'Authorization: Bearer' \
+          #      $(gcloud auth application-default print-access-token) \
           #      -H 'Accept: application/json' \
           #      -H 'Content-Type: application/json' \
-          #      --compressed \
           #      --data-binary "{
           #          'agentContent': '$(cat &lt;agent zip file&gt; | base64 -w 0)'
           #      }"</pre>

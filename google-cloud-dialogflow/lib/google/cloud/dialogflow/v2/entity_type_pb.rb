@@ -5,10 +5,12 @@
 require 'google/protobuf'
 
 require 'google/api/annotations_pb'
+require 'google/api/client_pb'
+require 'google/api/field_behavior_pb'
+require 'google/api/resource_pb'
 require 'google/longrunning/operations_pb'
 require 'google/protobuf/empty_pb'
 require 'google/protobuf/field_mask_pb'
-require 'google/api/client_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.cloud.dialogflow.v2.EntityType" do
     optional :name, :string, 1
@@ -16,6 +18,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :kind, :enum, 3, "google.cloud.dialogflow.v2.EntityType.Kind"
     optional :auto_expansion_mode, :enum, 4, "google.cloud.dialogflow.v2.EntityType.AutoExpansionMode"
     repeated :entities, :message, 6, "google.cloud.dialogflow.v2.EntityType.Entity"
+    optional :enable_fuzzy_extraction, :bool, 7
   end
   add_message "google.cloud.dialogflow.v2.EntityType.Entity" do
     optional :value, :string, 1
@@ -25,6 +28,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     value :KIND_UNSPECIFIED, 0
     value :KIND_MAP, 1
     value :KIND_LIST, 2
+    value :KIND_REGEXP, 3
   end
   add_enum "google.cloud.dialogflow.v2.EntityType.AutoExpansionMode" do
     value :AUTO_EXPANSION_MODE_UNSPECIFIED, 0

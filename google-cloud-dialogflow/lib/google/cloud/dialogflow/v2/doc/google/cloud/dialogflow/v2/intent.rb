@@ -302,7 +302,7 @@ module Google
             #   @return [Array<Google::Cloud::Dialogflow::V2::Intent::Message::Card::Button>]
             #     Optional. The collection of card buttons.
             class Card
-              # Optional. Contains information about a button.
+              # Contains information about a button.
               # @!attribute [rw] text
               #   @return [String]
               #     Optional. The text to show on the button.
