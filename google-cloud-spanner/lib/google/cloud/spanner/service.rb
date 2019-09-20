@@ -263,6 +263,7 @@ module Google
           opts = default_options_from_session database_name
           session = Google::Spanner::V1::Session.new labels: labels if labels
           execute do
+            # The response may have fewer sessions than requested in the RPC.
             service.batch_create_sessions database_name,
                                           session_template: session,
                                           session_count: session_count,

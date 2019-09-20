@@ -210,8 +210,7 @@ module Google
           # init the keepalive task
           create_keepalive_task!
           # init session queue
-          @all_sessions = []
-          @all_sessions = @client.batch_create_new_sessions @min if @min > 0
+          @all_sessions = @client.batch_create_new_sessions @min
           sessions = @all_sessions.dup
           num_transactions = (@min * @write_ratio).round
           pending_transactions = sessions.shift num_transactions

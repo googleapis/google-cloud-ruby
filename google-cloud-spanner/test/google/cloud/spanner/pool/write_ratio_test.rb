@@ -55,6 +55,34 @@ describe Google::Cloud::Spanner::Pool, :write_ratio, :mock_spanner do
     mock.verify
   end
 
+  it "calls batch_create_sessions until min number of sessions are returned" do
+    mock = Minitest::Mock.new
+    sessions = Google::Spanner::V1::BatchCreateSessionsResponse.new(
+      session: [
+        Google::Spanner::V1::Session.new(name: session_path(instance_id, database_id, "session-001")),
+      ]
+    )
+    sessions_2 = Google::Spanner::V1::BatchCreateSessionsResponse.new(
+      session: [
+        Google::Spanner::V1::Session.new(name: session_path(instance_id, database_id, "session-002")),
+      ]
+    )
+    mock.expect :batch_create_sessions, sessions, [database_path(instance_id, database_id), session_template: nil, session_count: 2, options: default_options]
+    mock.expect :batch_create_sessions, sessions_2, [database_path(instance_id, database_id), session_template: nil, session_count: 1, options: default_options]
+    mock.expect :begin_transaction, Google::Spanner::V1::Transaction.new(id: "tx-002-01"), [String, tx_opts, options: default_options]
+    spanner.service.mocked_service = mock
+
+    pool = Google::Cloud::Spanner::Pool.new client, min: 2, write_ratio: 0.5
+
+    shutdown_pool! pool
+
+    pool.all_sessions.size.must_equal 2
+    pool.session_queue.size.must_equal 1
+    pool.transaction_queue.size.must_equal 1
+
+    mock.verify
+  end
+
   it "creates five sessions and three transactions" do
     mock = Minitest::Mock.new
     sessions = Google::Spanner::V1::BatchCreateSessionsResponse.new(

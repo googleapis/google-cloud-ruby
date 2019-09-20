@@ -1289,8 +1289,23 @@ module Google
 
         ##
         # @private
-        # Creates a batch of new session objects of size `session_count`.
-        def batch_create_new_sessions session_count
+        # Creates a batch of new session objects of size `total`.
+        # Makes multiple RPCs if necessary. Returns empty array if total is 0.
+        def batch_create_new_sessions total
+          sessions = []
+          remaining = total
+          while remaining > 0
+            sessions += batch_create_sessions remaining
+            remaining = total - sessions.count
+          end
+          sessions
+        end
+
+        ##
+        # @private
+        # The response may have fewer sessions than requested in the RPC.
+        #
+        def batch_create_sessions session_count
           ensure_service!
           resp = @project.service.batch_create_sessions \
             Admin::Database::V1::DatabaseAdminClient.database_path(
