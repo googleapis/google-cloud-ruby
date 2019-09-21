@@ -418,6 +418,30 @@ module Google
         #     include (but is not limited to) skimpy or sheer clothing, strategically
         #     covered nudity, lewd or provocative poses, or close-ups of sensitive
         #     body areas.
+        # @!attribute [rw] adult_confidence
+        #   @return [Float]
+        #     Confidence of adult_score. Range [0, 1]. 0 means not confident, 1 means
+        #     very confident.
+        # @!attribute [rw] spoof_confidence
+        #   @return [Float]
+        #     Confidence of spoof_score. Range [0, 1]. 0 means not confident, 1 means
+        #     very confident.
+        # @!attribute [rw] medical_confidence
+        #   @return [Float]
+        #     Confidence of medical_score. Range [0, 1]. 0 means not confident, 1 means
+        #     very confident.
+        # @!attribute [rw] violence_confidence
+        #   @return [Float]
+        #     Confidence of violence_score. Range [0, 1]. 0 means not confident, 1 means
+        #     very confident.
+        # @!attribute [rw] racy_confidence
+        #   @return [Float]
+        #     Confidence of racy_score. Range [0, 1]. 0 means not confident, 1 means very
+        #     confident.
+        # @!attribute [rw] nsfw_confidence
+        #   @return [Float]
+        #     Confidence of nsfw_score. Range [0, 1]. 0 means not confident, 1 means very
+        #     confident.
         class SafeSearchAnnotation; end
 
         # Rectangle determined by min and max `LatLng` pairs.
@@ -593,28 +617,10 @@ module Google
         #     comes from.
         class AnnotateImageResponse; end
 
-        # Response to a single file annotation request. A file may contain one or more
-        # images, which individually have their own responses.
-        # @!attribute [rw] input_config
-        #   @return [Google::Cloud::Vision::V1::InputConfig]
-        #     Information about the file for which this response is generated.
-        # @!attribute [rw] responses
-        #   @return [Array<Google::Cloud::Vision::V1::AnnotateImageResponse>]
-        #     Individual responses to images found within the file. This field will be
-        #     empty if the `error` field is set.
-        # @!attribute [rw] total_pages
-        #   @return [Integer]
-        #     This field gives the total number of pages in the file.
-        # @!attribute [rw] error
-        #   @return [Google::Rpc::Status]
-        #     If set, represents the error message for the failed request. The
-        #     `responses` field will not be set in this case.
-        class AnnotateFileResponse; end
-
         # Multiple image annotation requests are batched into a single service call.
         # @!attribute [rw] requests
         #   @return [Array<Google::Cloud::Vision::V1::AnnotateImageRequest>]
-        #     Individual image annotation requests for this batch.
+        #     Required. Individual image annotation requests for this batch.
         # @!attribute [rw] parent
         #   @return [String]
         #     Optional. Target project and location to make a call.
@@ -665,10 +671,28 @@ module Google
         #     for the first 5 pages of the file.
         class AnnotateFileRequest; end
 
+        # Response to a single file annotation request. A file may contain one or more
+        # images, which individually have their own responses.
+        # @!attribute [rw] input_config
+        #   @return [Google::Cloud::Vision::V1::InputConfig]
+        #     Information about the file for which this response is generated.
+        # @!attribute [rw] responses
+        #   @return [Array<Google::Cloud::Vision::V1::AnnotateImageResponse>]
+        #     Individual responses to images found within the file. This field will be
+        #     empty if the `error` field is set.
+        # @!attribute [rw] total_pages
+        #   @return [Integer]
+        #     This field gives the total number of pages in the file.
+        # @!attribute [rw] error
+        #   @return [Google::Rpc::Status]
+        #     If set, represents the error message for the failed request. The
+        #     `responses` field will not be set in this case.
+        class AnnotateFileResponse; end
+
         # A list of requests to annotate files using the BatchAnnotateFiles API.
         # @!attribute [rw] requests
         #   @return [Array<Google::Cloud::Vision::V1::AnnotateFileRequest>]
-        #     The list of file annotation requests. Right now we support only one
+        #     Required. The list of file annotation requests. Right now we support only one
         #     AnnotateFileRequest in BatchAnnotateFilesRequest.
         # @!attribute [rw] parent
         #   @return [String]
@@ -717,7 +741,7 @@ module Google
         # Request for async image annotation for a list of images.
         # @!attribute [rw] requests
         #   @return [Array<Google::Cloud::Vision::V1::AnnotateImageRequest>]
-        #     Individual image annotation requests for this batch.
+        #     Required. Individual image annotation requests for this batch.
         # @!attribute [rw] output_config
         #   @return [Google::Cloud::Vision::V1::OutputConfig]
         #     Required. The desired output location and metadata (e.g. format).
@@ -747,7 +771,7 @@ module Google
         # call.
         # @!attribute [rw] requests
         #   @return [Array<Google::Cloud::Vision::V1::AsyncAnnotateFileRequest>]
-        #     Individual async file annotation requests for this batch.
+        #     Required. Individual async file annotation requests for this batch.
         # @!attribute [rw] parent
         #   @return [String]
         #     Optional. Target project and location to make a call.

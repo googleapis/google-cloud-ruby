@@ -36,12 +36,10 @@ module Google
         #     characters long.
         # @!attribute [rw] product_category
         #   @return [String]
-        #     The category for the product identified by the reference image. This should
+        #     Immutable. The category for the product identified by the reference image. This should
         #     be either "homegoods-v2", "apparel-v2", "toys-v2", "packagedgoods-v1", or
         #     "general-v1" The legacy categories "homegoods", "apparel", and "toys" are
         #     still supported, but these should not be used for new products.
-        #
-        #     This field is immutable.
         # @!attribute [rw] product_labels
         #   @return [Array<Google::Cloud::Vision::V1::Product::KeyValue>]
         #     Key-value pairs that can be attached to a product. At query time,
@@ -114,15 +112,13 @@ module Google
         #     This field is ignored when creating a reference image.
         # @!attribute [rw] uri
         #   @return [String]
-        #     The Google Cloud Storage URI of the reference image.
+        #     Required. The Google Cloud Storage URI of the reference image.
         #
         #     The URI must start with `gs://`.
-        #
-        #     Required.
         # @!attribute [rw] bounding_polys
         #   @return [Array<Google::Cloud::Vision::V1::BoundingPoly>]
-        #     Bounding polygons around the areas of interest in the reference image.
-        #     Optional. If this field is empty, the system will try to detect regions of
+        #     Optional. Bounding polygons around the areas of interest in the reference image.
+        #     If this field is empty, the system will try to detect regions of
         #     interest. At most 10 bounding polygons will be used.
         #
         #     The provided shape is converted into a non-rotated rectangle. Once
@@ -134,13 +130,13 @@ module Google
         # Request message for the `CreateProduct` method.
         # @!attribute [rw] parent
         #   @return [String]
-        #     The project in which the Product should be created.
+        #     Required. The project in which the Product should be created.
         #
         #     Format is
         #     `projects/PROJECT_ID/locations/LOC_ID`.
         # @!attribute [rw] product
         #   @return [Google::Cloud::Vision::V1::Product]
-        #     The product to create.
+        #     Required. The product to create.
         # @!attribute [rw] product_id
         #   @return [String]
         #     A user-supplied resource id for this Product. If set, the server will
@@ -152,7 +148,7 @@ module Google
         # Request message for the `ListProducts` method.
         # @!attribute [rw] parent
         #   @return [String]
-        #     The project OR ProductSet from which Products should be listed.
+        #     Required. The project OR ProductSet from which Products should be listed.
         #
         #     Format:
         #     `projects/PROJECT_ID/locations/LOC_ID`
@@ -177,7 +173,7 @@ module Google
         # Request message for the `GetProduct` method.
         # @!attribute [rw] name
         #   @return [String]
-        #     Resource name of the Product to get.
+        #     Required. Resource name of the Product to get.
         #
         #     Format is:
         #     `projects/PROJECT_ID/locations/LOC_ID/products/PRODUCT_ID`
@@ -186,7 +182,7 @@ module Google
         # Request message for the `UpdateProduct` method.
         # @!attribute [rw] product
         #   @return [Google::Cloud::Vision::V1::Product]
-        #     The Product resource which replaces the one on the server.
+        #     Required. The Product resource which replaces the one on the server.
         #     product.name is immutable.
         # @!attribute [rw] update_mask
         #   @return [Google::Protobuf::FieldMask]
@@ -200,7 +196,7 @@ module Google
         # Request message for the `DeleteProduct` method.
         # @!attribute [rw] name
         #   @return [String]
-        #     Resource name of product to delete.
+        #     Required. Resource name of product to delete.
         #
         #     Format is:
         #     `projects/PROJECT_ID/locations/LOC_ID/products/PRODUCT_ID`
@@ -209,12 +205,12 @@ module Google
         # Request message for the `CreateProductSet` method.
         # @!attribute [rw] parent
         #   @return [String]
-        #     The project in which the ProductSet should be created.
+        #     Required. The project in which the ProductSet should be created.
         #
         #     Format is `projects/PROJECT_ID/locations/LOC_ID`.
         # @!attribute [rw] product_set
         #   @return [Google::Cloud::Vision::V1::ProductSet]
-        #     The ProductSet to create.
+        #     Required. The ProductSet to create.
         # @!attribute [rw] product_set_id
         #   @return [String]
         #     A user-supplied resource id for this ProductSet. If set, the server will
@@ -226,7 +222,7 @@ module Google
         # Request message for the `ListProductSets` method.
         # @!attribute [rw] parent
         #   @return [String]
-        #     The project from which ProductSets should be listed.
+        #     Required. The project from which ProductSets should be listed.
         #
         #     Format is `projects/PROJECT_ID/locations/LOC_ID`.
         # @!attribute [rw] page_size
@@ -250,7 +246,7 @@ module Google
         # Request message for the `GetProductSet` method.
         # @!attribute [rw] name
         #   @return [String]
-        #     Resource name of the ProductSet to get.
+        #     Required. Resource name of the ProductSet to get.
         #
         #     Format is:
         #     `projects/PROJECT_ID/locations/LOG_ID/productSets/PRODUCT_SET_ID`
@@ -259,7 +255,7 @@ module Google
         # Request message for the `UpdateProductSet` method.
         # @!attribute [rw] product_set
         #   @return [Google::Cloud::Vision::V1::ProductSet]
-        #     The ProductSet resource which replaces the one on the server.
+        #     Required. The ProductSet resource which replaces the one on the server.
         # @!attribute [rw] update_mask
         #   @return [Google::Protobuf::FieldMask]
         #     The {Google::Protobuf::FieldMask FieldMask} that specifies which fields to
@@ -271,7 +267,7 @@ module Google
         # Request message for the `DeleteProductSet` method.
         # @!attribute [rw] name
         #   @return [String]
-        #     Resource name of the ProductSet to delete.
+        #     Required. Resource name of the ProductSet to delete.
         #
         #     Format is:
         #     `projects/PROJECT_ID/locations/LOC_ID/productSets/PRODUCT_SET_ID`
@@ -280,13 +276,13 @@ module Google
         # Request message for the `CreateReferenceImage` method.
         # @!attribute [rw] parent
         #   @return [String]
-        #     Resource name of the product in which to create the reference image.
+        #     Required. Resource name of the product in which to create the reference image.
         #
         #     Format is
         #     `projects/PROJECT_ID/locations/LOC_ID/products/PRODUCT_ID`.
         # @!attribute [rw] reference_image
         #   @return [Google::Cloud::Vision::V1::ReferenceImage]
-        #     The reference image to create.
+        #     Required. The reference image to create.
         #     If an image ID is specified, it is ignored.
         # @!attribute [rw] reference_image_id
         #   @return [String]
@@ -299,7 +295,7 @@ module Google
         # Request message for the `ListReferenceImages` method.
         # @!attribute [rw] parent
         #   @return [String]
-        #     Resource name of the product containing the reference images.
+        #     Required. Resource name of the product containing the reference images.
         #
         #     Format is
         #     `projects/PROJECT_ID/locations/LOC_ID/products/PRODUCT_ID`.
@@ -329,7 +325,7 @@ module Google
         # Request message for the `GetReferenceImage` method.
         # @!attribute [rw] name
         #   @return [String]
-        #     The resource name of the ReferenceImage to get.
+        #     Required. The resource name of the ReferenceImage to get.
         #
         #     Format is:
         #
@@ -339,7 +335,7 @@ module Google
         # Request message for the `DeleteReferenceImage` method.
         # @!attribute [rw] name
         #   @return [String]
-        #     The resource name of the reference image to delete.
+        #     Required. The resource name of the reference image to delete.
         #
         #     Format is:
         #
@@ -349,13 +345,13 @@ module Google
         # Request message for the `AddProductToProductSet` method.
         # @!attribute [rw] name
         #   @return [String]
-        #     The resource name for the ProductSet to modify.
+        #     Required. The resource name for the ProductSet to modify.
         #
         #     Format is:
         #     `projects/PROJECT_ID/locations/LOC_ID/productSets/PRODUCT_SET_ID`
         # @!attribute [rw] product
         #   @return [String]
-        #     The resource name for the Product to be added to this ProductSet.
+        #     Required. The resource name for the Product to be added to this ProductSet.
         #
         #     Format is:
         #     `projects/PROJECT_ID/locations/LOC_ID/products/PRODUCT_ID`
@@ -364,13 +360,13 @@ module Google
         # Request message for the `RemoveProductFromProductSet` method.
         # @!attribute [rw] name
         #   @return [String]
-        #     The resource name for the ProductSet to modify.
+        #     Required. The resource name for the ProductSet to modify.
         #
         #     Format is:
         #     `projects/PROJECT_ID/locations/LOC_ID/productSets/PRODUCT_SET_ID`
         # @!attribute [rw] product
         #   @return [String]
-        #     The resource name for the Product to be removed from this ProductSet.
+        #     Required. The resource name for the Product to be removed from this ProductSet.
         #
         #     Format is:
         #     `projects/PROJECT_ID/locations/LOC_ID/products/PRODUCT_ID`
@@ -379,7 +375,7 @@ module Google
         # Request message for the `ListProductsInProductSet` method.
         # @!attribute [rw] name
         #   @return [String]
-        #     The ProductSet resource for which to retrieve Products.
+        #     Required. The ProductSet resource for which to retrieve Products.
         #
         #     Format is:
         #     `projects/PROJECT_ID/locations/LOC_ID/productSets/PRODUCT_SET_ID`
@@ -430,17 +426,15 @@ module Google
         #     `product-display-name` column refers to
         #     {Google::Cloud::Vision::V1::Product#display_name display_name}, the
         #     `product-category` column refers to
-        #     {Google::Cloud::Vision::V1::Product#product_category product_category}, and
-        #     the `labels` column refers to
-        #     {Google::Cloud::Vision::V1::Product#product_labels product_labels}.
+        #     {Google::Cloud::Vision::V1::Product#product_category product_category}, and the
+        #     `labels` column refers to {Google::Cloud::Vision::V1::Product#product_labels product_labels}.
         #
         #     The `image-id` column is optional but must be unique if provided. If it is
         #     empty, the system will automatically assign a unique id to the image.
         #
         #     The `product-display-name` column is optional. If it is empty, the system
-        #     sets the {Google::Cloud::Vision::V1::Product#display_name display_name} field
-        #     for the product to a space (" "). You can update the `display_name` later
-        #     by using the API.
+        #     sets the {Google::Cloud::Vision::V1::Product#display_name display_name} field for the product to a
+        #     space (" "). You can update the `display_name` later by using the API.
         #
         #     If a `Product` with the specified `product-id` already exists, then the
         #     system ignores the `product-display-name`, `product-category`, and `labels`
@@ -480,21 +474,19 @@ module Google
         # Request message for the `ImportProductSets` method.
         # @!attribute [rw] parent
         #   @return [String]
-        #     The project in which the ProductSets should be imported.
+        #     Required. The project in which the ProductSets should be imported.
         #
         #     Format is `projects/PROJECT_ID/locations/LOC_ID`.
         # @!attribute [rw] input_config
         #   @return [Google::Cloud::Vision::V1::ImportProductSetsInputConfig]
-        #     The input content for the list of requests.
+        #     Required. The input content for the list of requests.
         class ImportProductSetsRequest; end
 
         # Response message for the `ImportProductSets` method.
         #
         # This message is returned by the
-        # {Google::Longrunning::Operations::GetOperation}
-        # method in the returned
-        # {Google::Longrunning::Operation#response}
-        # field.
+        # {Google::Longrunning::Operations::GetOperation} method in the returned
+        # {Google::Longrunning::Operation#response} field.
         # @!attribute [rw] reference_images
         #   @return [Array<Google::Cloud::Vision::V1::ReferenceImage>]
         #     The list of reference_images that are imported successfully.
@@ -521,8 +513,7 @@ module Google
         # @!attribute [rw] end_time
         #   @return [Google::Protobuf::Timestamp]
         #     The time when the batch request is finished and
-        #     {Google::Longrunning::Operation#done} is
-        #     set to true.
+        #     {Google::Longrunning::Operation#done} is set to true.
         class BatchOperationMetadata
           # Enumerates the possible states that the batch request can be in.
           module State
@@ -564,7 +555,7 @@ module Google
         #     ProductSet will be deleted.
         # @!attribute [rw] parent
         #   @return [String]
-        #     The project and location in which the Products should be deleted.
+        #     Required. The project and location in which the Products should be deleted.
         #
         #     Format is `projects/PROJECT_ID/locations/LOC_ID`.
         # @!attribute [rw] force
