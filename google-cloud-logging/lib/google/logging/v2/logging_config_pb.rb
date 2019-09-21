@@ -4,10 +4,12 @@
 
 require 'google/protobuf'
 
-require 'google/api/annotations_pb'
+require 'google/protobuf/duration_pb'
 require 'google/protobuf/empty_pb'
 require 'google/protobuf/field_mask_pb'
 require 'google/protobuf/timestamp_pb'
+require 'google/api/annotations_pb'
+require 'google/api/client_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.logging.v2.LogSink" do
     optional :name, :string, 1
@@ -16,13 +18,19 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :output_version_format, :enum, 6, "google.logging.v2.LogSink.VersionFormat"
     optional :writer_identity, :string, 8
     optional :include_children, :bool, 9
-    optional :start_time, :message, 10, "google.protobuf.Timestamp"
-    optional :end_time, :message, 11, "google.protobuf.Timestamp"
+    optional :create_time, :message, 13, "google.protobuf.Timestamp"
+    optional :update_time, :message, 14, "google.protobuf.Timestamp"
+    oneof :options do
+      optional :bigquery_options, :message, 12, "google.logging.v2.BigQueryOptions"
+    end
   end
   add_enum "google.logging.v2.LogSink.VersionFormat" do
     value :VERSION_FORMAT_UNSPECIFIED, 0
     value :V2, 1
     value :V1, 2
+  end
+  add_message "google.logging.v2.BigQueryOptions" do
+    optional :use_partitioned_tables, :bool, 1
   end
   add_message "google.logging.v2.ListSinksRequest" do
     optional :parent, :string, 1
@@ -55,6 +63,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :description, :string, 2
     optional :filter, :string, 3
     optional :disabled, :bool, 4
+    optional :create_time, :message, 5, "google.protobuf.Timestamp"
+    optional :update_time, :message, 6, "google.protobuf.Timestamp"
   end
   add_message "google.logging.v2.ListExclusionsRequest" do
     optional :parent, :string, 1
@@ -87,6 +97,7 @@ module Google
     module V2
       LogSink = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.LogSink").msgclass
       LogSink::VersionFormat = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.LogSink.VersionFormat").enummodule
+      BigQueryOptions = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.BigQueryOptions").msgclass
       ListSinksRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.ListSinksRequest").msgclass
       ListSinksResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.ListSinksResponse").msgclass
       GetSinkRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.GetSinkRequest").msgclass

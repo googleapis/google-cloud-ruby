@@ -4,13 +4,14 @@
 
 require 'google/protobuf'
 
-require 'google/api/annotations_pb'
 require 'google/api/monitored_resource_pb'
 require 'google/logging/type/http_request_pb'
 require 'google/logging/type/log_severity_pb'
 require 'google/protobuf/any_pb'
 require 'google/protobuf/struct_pb'
 require 'google/protobuf/timestamp_pb'
+require 'google/rpc/status_pb'
+require 'google/api/annotations_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.logging.v2.LogEntry" do
     optional :log_name, :string, 12

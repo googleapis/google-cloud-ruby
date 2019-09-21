@@ -4,12 +4,13 @@
 
 require 'google/protobuf'
 
-require 'google/api/annotations_pb'
 require 'google/api/distribution_pb'
 require 'google/api/metric_pb'
 require 'google/protobuf/empty_pb'
 require 'google/protobuf/field_mask_pb'
 require 'google/protobuf/timestamp_pb'
+require 'google/api/annotations_pb'
+require 'google/api/client_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.logging.v2.LogMetric" do
     optional :name, :string, 1
@@ -19,6 +20,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :value_extractor, :string, 6
     map :label_extractors, :string, :string, 7
     optional :bucket_options, :message, 8, "google.api.Distribution.BucketOptions"
+    optional :create_time, :message, 9, "google.protobuf.Timestamp"
+    optional :update_time, :message, 10, "google.protobuf.Timestamp"
     optional :version, :enum, 4, "google.logging.v2.LogMetric.ApiVersion"
   end
   add_enum "google.logging.v2.LogMetric.ApiVersion" do
