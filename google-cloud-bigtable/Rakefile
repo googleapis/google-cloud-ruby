@@ -153,7 +153,7 @@ end
 
 desc "Run yard-doctest example tests."
 task :doctest do
-  puts "The google-cloud-bigtable gem does not have doctest tests."
+  sh "bundle exec yard config load_plugins true && bundle exec yard doctest"
 end
 
 desc "Run the CI build"

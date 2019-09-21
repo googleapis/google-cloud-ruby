@@ -89,6 +89,7 @@ module Google
         # @return [Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient]
 
         def instances
+          return mocked_instances if mocked_instances
           @instances ||= begin
             instances_channel = channel(
               Admin::V2::BigtableInstanceAdminClient::SERVICE_ADDRESS
@@ -102,12 +103,14 @@ module Google
             )
           end
         end
+        attr_accessor :mocked_instances
 
         # Creates or returns an instance of a table admin client.
         #
         # @return [Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient]
 
         def tables
+          return mocked_tables if mocked_tables
           @tables ||= begin
             tables_channel = channel(
               Admin::V2::BigtableTableAdminClient::SERVICE_ADDRESS
@@ -121,12 +124,14 @@ module Google
             )
           end
         end
+        attr_accessor :mocked_tables
 
         # Creates an instance of a data client.
         #
         # @return [Google::Cloud::Bigtable::V2::BigtableClient]
 
         def client
+          return mocked_client if mocked_client
           @client ||= \
             V2::BigtableClient.new(
               credentials: channel(V2::BigtableClient::SERVICE_ADDRESS),
@@ -136,6 +141,7 @@ module Google
               lib_version: Google::Cloud::Bigtable::VERSION
             )
         end
+        attr_accessor :mocked_client
 
         def insecure?
           credentials == :this_channel_is_insecure

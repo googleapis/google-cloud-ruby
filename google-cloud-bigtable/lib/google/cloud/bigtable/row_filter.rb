@@ -166,7 +166,7 @@ module Google
         #   chain.strip_value
         #
         #   # OR
-        #   chain.key("user-*).strip_value
+        #   chain.key("user-*").strip_value
         #
         # @example Create complex chain filter.
         #
@@ -176,7 +176,7 @@ module Google
         #   chain_1.label("users").qualifier("name").cells_per_row(5)
         #
         #   # Add to main chain filter
-        #   chain.chain(chain_1).value("xyz*).key("user-*")
+        #   chain.chain(chain_1).value("xyz*").key("user-*")
         #
         def self.chain
           ChainFilter.new
@@ -224,7 +224,7 @@ module Google
         #   interleave.sink
         #
         #   # OR
-        #   interleave.key("user-*).sink
+        #   interleave.key("user-*").sink
         #
         # @example Create complex interleave filter.
         #
@@ -234,7 +234,7 @@ module Google
         #   chain_1.label("users").qualifier("name").cells_per_row(5)
         #
         #   # Add to main chain filter
-        #   interleave.chain(chain_1).value("xyz*).key("user-*")
+        #   interleave.chain(chain_1).value("xyz*").key("user-*")
         #
         def self.interleave
           InterleaveFilter.new
