@@ -23,12 +23,12 @@ module Google
         # It is used to create an instance.
         # @example Add column family with name and garbage collection rule
         #
-        #  column_families = Google::Cloud::Bigtable::Instance::ColumnFamilyMap.new
+        #  column_families = Google::Cloud::Bigtable::Table::ColumnFamilyMap.new
         #
-        #  column_families.add('cf1', Google::Cloud::Bigtable::GcRule.max_versions(3))
+        #  column_families.add("cf1", Google::Cloud::Bigtable::GcRule.max_versions(3))
         #
         class ColumnFamilyMap < DelegateClass(::Hash)
-          # @private
+          ##
           # Create a new ColumnFamilyMap.
           def initialize value = {}
             super(value)
@@ -41,13 +41,13 @@ module Google
           #   collection rule to be used for the column family. Optional. The
           #   service default value will be used when not specified.
           # @example
-          #  column_families = Google::Cloud::Bigtable::Instance::ColumnFamilyMap.new
+          #  column_families = Google::Cloud::Bigtable::Table::ColumnFamilyMap.new
           #
           #  gc_rule_1 = Google::Cloud::Bigtable::GcRule.max_versions(3)
-          #  column_families.add('cf1', gc_rule_1)
+          #  column_families.add("cf1", gc_rule_1)
           #
           #  gc_rule = Google::Cloud::Bigtable::GcRule.max_age(1800)
-          #  column_families.add('cf2', gc_rule)
+          #  column_families.add("cf2", gc_rule)
 
           def add name, gc_rule = nil
             cf = Google::Bigtable::Admin::V2::ColumnFamily.new

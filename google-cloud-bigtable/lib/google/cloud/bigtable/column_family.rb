@@ -161,7 +161,7 @@ module Google
         #   require "google/cloud/bigtable"
         #
         #   Google::Cloud::Bigtable::ColumnFamily.create_modification(
-        #     "cf1", Google::Cloud::Bigtable::GcRule.max_age(600))
+        #     "cf1", Google::Cloud::Bigtable::GcRule.max_age(600)
         #   )
         #
         def self.create_modification name, gc_rule
@@ -180,7 +180,7 @@ module Google
         #   require "google/cloud/bigtable"
         #
         #   Google::Cloud::Bigtable::ColumnFamily.update_modification(
-        #     "cf1", Google::Cloud::Bigtable::GcRule.max_age(600))
+        #     "cf1", Google::Cloud::Bigtable::GcRule.max_age(600)
         #   )
         #
         def self.update_modification name, gc_rule

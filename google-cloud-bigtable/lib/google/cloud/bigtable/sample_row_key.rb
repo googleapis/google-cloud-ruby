@@ -37,7 +37,7 @@ module Google
       #   `offset_bytes` fields.
       #
       # @example
-      #   require "google/cloud"
+      #   require "google/cloud/bigtable"
       #
       #   bigtable = Google::Cloud::Bigtable.new
       #

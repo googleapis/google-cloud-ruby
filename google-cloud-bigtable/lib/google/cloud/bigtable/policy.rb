@@ -101,7 +101,7 @@ module Google
         #   `"user:owner@example.com"`.
         #
         # @example
-        #   require "google/cloud/Bigtable"
+        #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
         #   instance = bigtable.instance "my-instance"
@@ -124,7 +124,7 @@ module Google
         # @return [Array<String>] The members strings, or an empty array.
         #
         # @example
-        #   require "google/cloud/Bigtable"
+        #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
         #   instance = bigtable.instance "my-instance"

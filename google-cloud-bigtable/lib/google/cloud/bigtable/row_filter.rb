@@ -559,13 +559,21 @@ module Google
         # @return [Google::Cloud::Bigtable::RowFilter::SimpleFilter]
         #
         # @example Start to end range
+        #   require "google/cloud/bigtable"
         #
-        #   range = Google::Cloud::Bigtable::ValueRange.from("abc").to("xyz")
+        #   bigtable = Google::Cloud::Bigtable.new
+        #   table = bigtable.table("my-instance", "my-table")
+        #
+        #   range = table.new_value_range.from("value-001", inclusive: false)
         #   filter = Google::Cloud::Bigtable::RowFilter.value_range(range)
         #
         # @example Start exlusive to infinite end range
+        #   require "google/cloud/bigtable"
         #
-        #   range = Google::Cloud::Bigtable::ValueRange.from("abc", inclusive: false)
+        #   bigtable = Google::Cloud::Bigtable.new
+        #   table = bigtable.table("my-instance", "my-table")
+        #
+        #   range = table.new_value_range.from("value-001", inclusive: false)
         #   filter = Google::Cloud::Bigtable::RowFilter.value_range(range)
         #
         def self.value_range range
@@ -580,8 +588,9 @@ module Google
         # @return [Google::Cloud::Bigtable::RowFilter::SimpleFilter]
         #
         # @example
+        #   require "google/cloud/bigtable"
         #
-        #   range = Google::Cloud::Bigtable::ColumnRange.new(cf).from("field0").to("field5")
+        #   range = Google::Cloud::Bigtable::ColumnRange.new("cf").from("field0").to("field5")
         #
         #   filter = Google::Cloud::Bigtable::RowFilter.column_range(range)
         #

@@ -187,7 +187,7 @@ module Google
         #
         #   bigtable = Google::Cloud::Bigtable.new
         #
-        #   instance = bigtable.table("my-instance", "my-table")
+        #   table = bigtable.table("my-instance", "my-table")
         #   table.delete
         #
         def delete
@@ -247,7 +247,7 @@ module Google
         #
         #   bigtable = Google::Cloud::Bigtable.new
         #
-        #   table = bigtable.table("my-instance", my-table)
+        #   table = bigtable.table("my-instance", "my-table")
         #
         #   # OR get table from Instance object.
         #   instance = bigtable.instance("my-instance")
@@ -316,7 +316,7 @@ module Google
         #
         #   modifications = []
         #   modifications << Google::Cloud::Bigtable::ColumnFamily.create_modification(
-        #     "cf1", Google::Cloud::Bigtable::GcRule.max_age(600))
+        #     "cf1", Google::Cloud::Bigtable::GcRule.max_age(600)
         #   )
         #
         #   modifications << Google::Cloud::Bigtable::ColumnFamily.update_modification(
@@ -585,7 +585,7 @@ module Google
         #   table = bigtable.table("my-instance", "my-table")
         #
         #   # Delete rows using row key prefix.
-        #   table.drop_row_range("user-100")
+        #   table.drop_row_range(row_key_prefix: "user-100")
         #
         #   # Delete all data With timeout
         #   table.drop_row_range(delete_all_data: true, timeout: 120) # 120 seconds.

@@ -157,7 +157,7 @@ module Google
         #   app_profile = instance.app_profile("my-app-profile")
         #
         #   routing_policy = Google::Cloud::Bigtable::AppProfile.single_cluster_routing(
-        #     "my-instance-cluster-1"
+        #     "my-instance-cluster-1",
         #     allow_transactional_writes: true
         #   )
         #   app_profile.routing_policy = routing_policy
@@ -223,7 +223,9 @@ module Google
         #
         #   bigtable = Google::Cloud::Bigtable.new
         #
-        #   app_profile = bigtable.app_profile("my-app-profile")
+        #   instance = bigtable.instance("my-instance")
+        #
+        #   app_profile = instance.app_profile("my-app-profile")
         #
         #   app_profile.description = "User data instance app profile"
         #   app_profile.routing_policy = \

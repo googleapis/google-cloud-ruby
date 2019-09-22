@@ -71,7 +71,7 @@ module Google
           #
           #   job = bigtable.create_instance(
           #     "my-instance",
-          #     "Instance for user data",
+          #     display_name: "Instance for user data",
           #     type: :DEVELOPMENT,
           #     labels: { "env" => "dev"}
           #   ) do |clusters|
