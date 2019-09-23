@@ -46,8 +46,9 @@ def mock_bigtable
     service.mocked_client = Minitest::Mock.new
     service.mocked_instances = Minitest::Mock.new
     service.mocked_tables = Minitest::Mock.new
+    mocked_job = Minitest::Mock.new
     if block_given?
-      yield service.mocked_client, service.mocked_instances, service.mocked_tables
+      yield service.mocked_client, service.mocked_instances, service.mocked_tables, mocked_job
     end
     bigtable
   end
@@ -85,9 +86,147 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
-  #doctest.skip "Google::Cloud::Bigtable::Credentials" # occasionally getting "This code example is not yet mocked"
+  # AppProfile
 
-  # Instance
+  doctest.before "Google::Cloud::Bigtable::AppProfile" do
+    mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
+      mocked_instances.expect :get_instance, instance_resp, ["projects/my-project/instances/my-instance"]
+      mocked_instances.expect :get_app_profile, app_profile_resp, ["projects/my-project/instances/my-instance/appProfiles/my-app-profile"]
+      mocked_instances.expect :update_app_profile, mocked_job, [Google::Bigtable::Admin::V2::AppProfile, Google::Protobuf::FieldMask, Hash]
+      mocked_job.expect :wait_until_done!, nil, []
+      mocked_instances.expect :delete_app_profile, nil, ["projects/my-project/instances/my-instance/appProfiles/my-app-profile", false]
+
+    end
+  end
+
+  doctest.before "Google::Cloud::Bigtable::AppProfile#delete" do
+    mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
+      mocked_instances.expect :get_instance, instance_resp, ["projects/my-project/instances/my-instance"]
+      mocked_instances.expect :get_app_profile, app_profile_resp, ["projects/my-project/instances/my-instance/appProfiles/my-app-profile"]
+      mocked_instances.expect :delete_app_profile, nil, ["projects/my-project/instances/my-instance/appProfiles/my-app-profile", true]
+      mocked_instances.expect :delete_app_profile, nil, ["projects/my-project/instances/my-instance/appProfiles/my-app-profile", false]
+    end
+  end
+
+  doctest.before "Google::Cloud::Bigtable::AppProfile#save@Update" do
+    mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
+      mocked_instances.expect :get_instance, instance_resp, ["projects/my-project/instances/my-instance"]
+      mocked_instances.expect :get_app_profile, app_profile_resp, ["projects/my-project/instances/my-instance/appProfiles/my-app-profile"]
+      mocked_instances.expect :update_app_profile, mocked_job, [Google::Bigtable::Admin::V2::AppProfile, Google::Protobuf::FieldMask, Hash]
+      mocked_job.expect :wait_until_done!, nil, []
+      mocked_job.expect :error?, true, []
+      mocked_job.expect :error?, true, []
+      mocked_job.expect :error, nil, []
+    end
+  end
+
+  doctest.before "Google::Cloud::Bigtable::AppProfile#save@Update with single cluster routing" do
+    mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
+      mocked_instances.expect :get_instance, instance_resp, ["projects/my-project/instances/my-instance"]
+      mocked_instances.expect :get_app_profile, app_profile_resp, ["projects/my-project/instances/my-instance/appProfiles/my-app-profile"]
+      mocked_instances.expect :update_app_profile, mocked_job, [Google::Bigtable::Admin::V2::AppProfile, Google::Protobuf::FieldMask, Hash]
+      mocked_job.expect :done?, false, []
+      mocked_job.expect :reload!, nil, []
+      mocked_job.expect :done?, true, []
+      mocked_job.expect :error?, true, []
+      mocked_job.expect :error?, true, []
+      mocked_job.expect :error, nil, []
+    end
+  end
+
+  # Google::Cloud::Bigtable::AppProfile#routing_policy=
+  # Google::Cloud::Bigtable::AppProfile#routing_policy=
+  # Google::Cloud::Bigtable::AppProfile#delete
+  # Google::Cloud::Bigtable::AppProfile.multi_cluster_routing
+  # Google::Cloud::Bigtable::AppProfile.single_cluster_routing
+  # Google::Cloud::Bigtable::AppProfile::Job
+  # Google::Cloud::Bigtable::AppProfile::Job#app_profile
+  # Google::Cloud::Bigtable::AppProfile::List#next?
+  # Google::Cloud::Bigtable::AppProfile::List#next
+  # Google::Cloud::Bigtable::AppProfile::List#all
+  # Google::Cloud::Bigtable::AppProfile::List#all
+  # Google::Cloud::Bigtable::Cluster
+  # Google::Cloud::Bigtable::Cluster::Job
+  # Google::Cloud::Bigtable::Cluster::Job#cluster
+  # Google::Cloud::Bigtable::Cluster::List#next?
+  # Google::Cloud::Bigtable::Cluster::List#next
+  # Google::Cloud::Bigtable::Cluster::List#all
+  # Google::Cloud::Bigtable::Cluster::List#all
+  # Google::Cloud::Bigtable::Cluster#save
+  # Google::Cloud::Bigtable::Cluster#update
+  # Google::Cloud::Bigtable::Cluster#delete
+  # Google::Cloud::Bigtable::ColumnFamily
+  # Google::Cloud::Bigtable::ColumnFamily#create
+  # Google::Cloud::Bigtable::ColumnFamily#save
+  # Google::Cloud::Bigtable::ColumnFamily#delete
+  # Google::Cloud::Bigtable::ColumnFamily.create_modification
+  # Google::Cloud::Bigtable::ColumnFamily.update_modification
+  # Google::Cloud::Bigtable::ColumnFamily.drop_modification
+  # Google::Cloud::Bigtable::ColumnRange
+  # Google::Cloud::Bigtable::ColumnRange#from
+  # Google::Cloud::Bigtable::ColumnRange#from
+  # Google::Cloud::Bigtable::ColumnRange#to
+  # Google::Cloud::Bigtable::ColumnRange#to
+  # Google::Cloud::Bigtable::ColumnRange#between
+  # Google::Cloud::Bigtable::ColumnRange#of
+  # Google::Cloud::Bigtable::GcRule
+  # Google::Cloud::Bigtable::GcRule
+  # Google::Cloud::Bigtable::GcRule
+  # Google::Cloud::Bigtable::GcRule
+  # Google::Cloud::Bigtable::Instance
+  # Google::Cloud::Bigtable::Instance#save
+  # Google::Cloud::Bigtable::Instance#delete
+  # Google::Cloud::Bigtable::Instance#clusters
+  # Google::Cloud::Bigtable::Instance#cluster
+  # Google::Cloud::Bigtable::Instance#create_cluster
+  # Google::Cloud::Bigtable::Instance#tables
+  # Google::Cloud::Bigtable::Instance#table
+  # Google::Cloud::Bigtable::Instance#table
+  # Google::Cloud::Bigtable::Instance#create_table
+  # Google::Cloud::Bigtable::Instance#create_table
+  # Google::Cloud::Bigtable::Instance#create_app_profile
+  # Google::Cloud::Bigtable::Instance#create_app_profile
+  # Google::Cloud::Bigtable::Instance#create_app_profile
+  # Google::Cloud::Bigtable::Instance#app_profile
+  # Google::Cloud::Bigtable::Instance#app_profiles
+  # Google::Cloud::Bigtable::Instance#policy
+  # Google::Cloud::Bigtable::Instance#policy
+  # Google::Cloud::Bigtable::Instance#update_policy
+  # Google::Cloud::Bigtable::Instance#test_iam_permissions
+  # Google::Cloud::Bigtable::Instance::ClusterMap
+  # Google::Cloud::Bigtable::Instance::Job
+  # Google::Cloud::Bigtable::Instance::Job#instance
+  # Google::Cloud::Bigtable::Instance::List#next?
+  # Google::Cloud::Bigtable::Instance::List#next
+  # Google::Cloud::Bigtable::Instance::List#all
+  # Google::Cloud::Bigtable::Instance::List#all
+  # Google::Cloud::Bigtable::MutationEntry
+  # Google::Cloud::Bigtable::MutationEntry
+  # Google::Cloud::Bigtable::MutationEntry#set_cell
+  # Google::Cloud::Bigtable::MutationEntry#set_cell
+  # Google::Cloud::Bigtable::MutationEntry#delete_cells
+  # Google::Cloud::Bigtable::MutationEntry#delete_cells
+  # Google::Cloud::Bigtable::MutationEntry#delete_cells
+  # Google::Cloud::Bigtable::MutationEntry#delete_from_family
+  # Google::Cloud::Bigtable::MutationEntry#delete_from_row
+  # Google::Cloud::Bigtable::MutationOperations#mutate_row
+  # Google::Cloud::Bigtable::MutationOperations#mutate_row
+  # Google::Cloud::Bigtable::MutationOperations#mutate_rows
+  # Google::Cloud::Bigtable::MutationOperations#read_modify_write_row
+  # Google::Cloud::Bigtable::MutationOperations#read_modify_write_row
+  # Google::Cloud::Bigtable::MutationOperations#check_and_mutate_row
+  # Google::Cloud::Bigtable::MutationOperations#sample_row_keys
+  # Google::Cloud::Bigtable::MutationOperations#new_mutation_entry
+  # Google::Cloud::Bigtable::MutationOperations#new_read_modify_write_rule
+  # Google::Cloud::Bigtable::MutationOperations#new_read_modify_write_rule
+  # Google::Cloud::Bigtable::Policy
+  # Google::Cloud::Bigtable::Policy#add
+  # Google::Cloud::Bigtable::Policy#remove
+  # Google::Cloud::Bigtable::Policy#role
+  # Google::Cloud::Bigtable::Project
+  # Google::Cloud::Bigtable::Project#project_id
+  # Google::Cloud::Bigtable::Project#instances
+  # Google::Cloud::Bigtable::Project#instance
 
   doctest.before "Google::Cloud::Bigtable::Project#instance" do
     mock_bigtable do |mock, mocked_instances, mocked_tables|
@@ -100,33 +239,6 @@ YARD::Doctest.configure do |doctest|
       mocked_instances.expect :list_instances, instances_resp, ["projects/my-project", { page_token: nil }]
     end
   end
-
-  # Google::Cloud::Bigtable::ColumnFamily
-  # Google::Cloud::Bigtable::ColumnFamily#create
-  # Google::Cloud::Bigtable::ColumnFamily#save
-  #
-  # Google::Cloud::Bigtable::ColumnFamily#delete
-  # Google::Cloud::Bigtable::ColumnFamily.create_modification
-  # Google::Cloud::Bigtable::ColumnFamily.update_modification
-  # Google::Cloud::Bigtable::ColumnFamily.drop_modification
-  # Google::Cloud::Bigtable::Cluster
-  # Google::Cloud::Bigtable::Cluster::Job
-  # Google::Cloud::Bigtable::Cluster::Job#cluster
-  # Google::Cloud::Bigtable::Cluster::List#next?
-  # Google::Cloud::Bigtable::Cluster::List#next
-  # Google::Cloud::Bigtable::Cluster::List#all
-  # Google::Cloud::Bigtable::Cluster::List#all
-  # Google::Cloud::Bigtable::ColumnRange
-  # Google::Cloud::Bigtable::ColumnRange#from
-  # Google::Cloud::Bigtable::ColumnRange#from
-  # Google::Cloud::Bigtable::ColumnRange#to
-  # Google::Cloud::Bigtable::ColumnRange#to
-  # Google::Cloud::Bigtable::ColumnRange#between
-  # Google::Cloud::Bigtable::ColumnRange#of
-  # Google::Cloud::Bigtable::Project
-  # Google::Cloud::Bigtable::Project#project_id
-  # Google::Cloud::Bigtable::Project#instances
-  # Google::Cloud::Bigtable::Project#instance
   # Google::Cloud::Bigtable::Project#create_instance
   # Google::Cloud::Bigtable::Project#create_instance
   # Google::Cloud::Bigtable::Project#clusters
@@ -140,30 +252,10 @@ YARD::Doctest.configure do |doctest|
   # Google::Cloud::Bigtable::Project#create_table
   # Google::Cloud::Bigtable::Project#delete_table
   # Google::Cloud::Bigtable::Project#modify_column_families
-  # Google::Cloud::Bigtable::Table
-  # Google::Cloud::Bigtable::Table#delete
-  # Google::Cloud::Bigtable::Table#exists?
-  # Google::Cloud::Bigtable::Table#exists?
-  # Google::Cloud::Bigtable::Table#column_family
-  # Google::Cloud::Bigtable::Table#column_family
-  # Google::Cloud::Bigtable::Table#column_family
-  # Google::Cloud::Bigtable::Table#modify_column_families
-  # Google::Cloud::Bigtable::Table#generate_consistency_token
-  # Google::Cloud::Bigtable::Table#check_consistency
-  # Google::Cloud::Bigtable::Table#wait_for_replication
-  # Google::Cloud::Bigtable::Table#delete_all_rows
-  # Google::Cloud::Bigtable::Table#delete_rows_by_prefix
-  # Google::Cloud::Bigtable::Table#drop_row_range
-  # Google::Cloud::Bigtable::MutationOperations#mutate_row
-  # Google::Cloud::Bigtable::MutationOperations#mutate_row
-  # Google::Cloud::Bigtable::MutationOperations#mutate_rows
-  # Google::Cloud::Bigtable::MutationOperations#read_modify_write_row
-  # Google::Cloud::Bigtable::MutationOperations#read_modify_write_row
-  # Google::Cloud::Bigtable::MutationOperations#check_and_mutate_row
-  # Google::Cloud::Bigtable::MutationOperations#sample_row_keys
-  # Google::Cloud::Bigtable::MutationOperations#new_mutation_entry
-  # Google::Cloud::Bigtable::MutationOperations#new_read_modify_write_rule
-  # Google::Cloud::Bigtable::MutationOperations#new_read_modify_write_rule
+  # Google::Cloud::Bigtable::ReadModifyWriteRule
+  # Google::Cloud::Bigtable::ReadModifyWriteRule
+  # Google::Cloud::Bigtable::ReadModifyWriteRule.append
+  # Google::Cloud::Bigtable::ReadModifyWriteRule.increment
   # Google::Cloud::Bigtable::ReadOperations#sample_row_keys
   # Google::Cloud::Bigtable::ReadOperations#read_rows
   # Google::Cloud::Bigtable::ReadOperations#read_rows
@@ -180,6 +272,28 @@ YARD::Doctest.configure do |doctest|
   # Google::Cloud::Bigtable::ReadOperations#new_row_range
   # Google::Cloud::Bigtable::ReadOperations#filter
   # Google::Cloud::Bigtable::RowFilter
+  # Google::Cloud::Bigtable::RowFilter.chain
+  # Google::Cloud::Bigtable::RowFilter.chain
+  # Google::Cloud::Bigtable::RowFilter.interleave
+  # Google::Cloud::Bigtable::RowFilter.interleave
+  # Google::Cloud::Bigtable::RowFilter.condition
+  # Google::Cloud::Bigtable::RowFilter.pass
+  # Google::Cloud::Bigtable::RowFilter.block
+  # Google::Cloud::Bigtable::RowFilter.sink
+  # Google::Cloud::Bigtable::RowFilter.strip_value
+  # Google::Cloud::Bigtable::RowFilter.key
+  # Google::Cloud::Bigtable::RowFilter.sample
+  # Google::Cloud::Bigtable::RowFilter.family
+  # Google::Cloud::Bigtable::RowFilter.qualifier
+  # Google::Cloud::Bigtable::RowFilter.value
+  # Google::Cloud::Bigtable::RowFilter.label
+  # Google::Cloud::Bigtable::RowFilter.cells_per_row_offset
+  # Google::Cloud::Bigtable::RowFilter.cells_per_row
+  # Google::Cloud::Bigtable::RowFilter.cells_per_column
+  # Google::Cloud::Bigtable::RowFilter.timestamp_range
+  # Google::Cloud::Bigtable::RowFilter.value_range
+  # Google::Cloud::Bigtable::RowFilter.value_range
+  # Google::Cloud::Bigtable::RowFilter.column_range
   # Google::Cloud::Bigtable::RowFilter::ChainFilter
   # Google::Cloud::Bigtable::RowFilter::ChainFilter#chain
   # Google::Cloud::Bigtable::RowFilter::ChainFilter#interleave
@@ -228,55 +342,6 @@ YARD::Doctest.configure do |doctest|
   # Google::Cloud::Bigtable::RowFilter::InterleaveFilter#value_range
   # Google::Cloud::Bigtable::RowFilter::InterleaveFilter#column_range
   # Google::Cloud::Bigtable::RowFilter::InterleaveFilter#length
-  # Google::Cloud::Bigtable::RowFilter.chain
-  # Google::Cloud::Bigtable::RowFilter.chain
-  # Google::Cloud::Bigtable::RowFilter.interleave
-  # Google::Cloud::Bigtable::RowFilter.interleave
-  # Google::Cloud::Bigtable::RowFilter.condition
-  # Google::Cloud::Bigtable::RowFilter.pass
-  # Google::Cloud::Bigtable::RowFilter.block
-  # Google::Cloud::Bigtable::RowFilter.sink
-  # Google::Cloud::Bigtable::RowFilter.strip_value
-  # Google::Cloud::Bigtable::RowFilter.key
-  # Google::Cloud::Bigtable::RowFilter.sample
-  # Google::Cloud::Bigtable::RowFilter.family
-  # Google::Cloud::Bigtable::RowFilter.qualifier
-  # Google::Cloud::Bigtable::RowFilter.value
-  # Google::Cloud::Bigtable::RowFilter.label
-  # Google::Cloud::Bigtable::RowFilter.cells_per_row_offset
-  # Google::Cloud::Bigtable::RowFilter.cells_per_row
-  # Google::Cloud::Bigtable::RowFilter.cells_per_column
-  # Google::Cloud::Bigtable::RowFilter.timestamp_range
-  # Google::Cloud::Bigtable::RowFilter.value_range
-  # Google::Cloud::Bigtable::RowFilter.value_range
-  # Google::Cloud::Bigtable::RowFilter.column_range
-  # Google::Cloud::Bigtable::Cluster#save
-  # Google::Cloud::Bigtable::Cluster#update
-  # Google::Cloud::Bigtable::Cluster#delete
-  # Google::Cloud::Bigtable::ValueRange
-  # Google::Cloud::Bigtable::ValueRange#from
-  # Google::Cloud::Bigtable::ValueRange#from
-  # Google::Cloud::Bigtable::ValueRange#to
-  # Google::Cloud::Bigtable::ValueRange#to
-  # Google::Cloud::Bigtable::ValueRange#between
-  # Google::Cloud::Bigtable::ValueRange#of
-  # Google::Cloud::Bigtable::ReadModifyWriteRule
-  # Google::Cloud::Bigtable::ReadModifyWriteRule
-  # Google::Cloud::Bigtable::ReadModifyWriteRule.append
-  # Google::Cloud::Bigtable::ReadModifyWriteRule.increment
-  # Google::Cloud::Bigtable::Policy
-  # Google::Cloud::Bigtable::Policy#add
-  # Google::Cloud::Bigtable::Policy#remove
-  # Google::Cloud::Bigtable::Policy#role
-  # Google::Cloud::Bigtable::MutationEntry
-  # Google::Cloud::Bigtable::MutationEntry
-  # Google::Cloud::Bigtable::MutationEntry#set_cell
-  # Google::Cloud::Bigtable::MutationEntry#set_cell
-  # Google::Cloud::Bigtable::MutationEntry#delete_cells
-  # Google::Cloud::Bigtable::MutationEntry#delete_cells
-  # Google::Cloud::Bigtable::MutationEntry#delete_cells
-  # Google::Cloud::Bigtable::MutationEntry#delete_from_family
-  # Google::Cloud::Bigtable::MutationEntry#delete_from_row
   # Google::Cloud::Bigtable::RowRange
   # Google::Cloud::Bigtable::RowRange#from
   # Google::Cloud::Bigtable::RowRange#from
@@ -284,60 +349,34 @@ YARD::Doctest.configure do |doctest|
   # Google::Cloud::Bigtable::RowRange#to
   # Google::Cloud::Bigtable::RowRange#between
   # Google::Cloud::Bigtable::RowRange#of
+  # Google::Cloud::Bigtable::SampleRowKey
+  # Google::Cloud::Bigtable::Table
+  # Google::Cloud::Bigtable::Table#delete
+  # Google::Cloud::Bigtable::Table#exists?
+  # Google::Cloud::Bigtable::Table#exists?
+  # Google::Cloud::Bigtable::Table#column_family
+  # Google::Cloud::Bigtable::Table#column_family
+  # Google::Cloud::Bigtable::Table#column_family
+  # Google::Cloud::Bigtable::Table#modify_column_families
+  # Google::Cloud::Bigtable::Table#generate_consistency_token
+  # Google::Cloud::Bigtable::Table#check_consistency
+  # Google::Cloud::Bigtable::Table#wait_for_replication
+  # Google::Cloud::Bigtable::Table#delete_all_rows
+  # Google::Cloud::Bigtable::Table#delete_rows_by_prefix
+  # Google::Cloud::Bigtable::Table#drop_row_range
   # Google::Cloud::Bigtable::Table::ColumnFamilyMap
   # Google::Cloud::Bigtable::Table::ColumnFamilyMap#add
   # Google::Cloud::Bigtable::Table::List#next?
   # Google::Cloud::Bigtable::Table::List#next
   # Google::Cloud::Bigtable::Table::List#all
   # Google::Cloud::Bigtable::Table::List#all
-  # Google::Cloud::Bigtable::Instance
-  # Google::Cloud::Bigtable::Instance::ClusterMap
-  # Google::Cloud::Bigtable::Instance::Job
-  # Google::Cloud::Bigtable::Instance::Job#instance
-  # Google::Cloud::Bigtable::Instance::List#next?
-  # Google::Cloud::Bigtable::Instance::List#next
-  # Google::Cloud::Bigtable::Instance::List#all
-  # Google::Cloud::Bigtable::Instance::List#all
-  # Google::Cloud::Bigtable::AppProfile
-  # Google::Cloud::Bigtable::AppProfile#routing_policy=
-  # Google::Cloud::Bigtable::AppProfile#routing_policy=
-  # Google::Cloud::Bigtable::AppProfile#delete
-  # Google::Cloud::Bigtable::AppProfile#save
-  # Google::Cloud::Bigtable::AppProfile#save
-  # Google::Cloud::Bigtable::AppProfile.multi_cluster_routing
-  # Google::Cloud::Bigtable::AppProfile.single_cluster_routing
-  # Google::Cloud::Bigtable::SampleRowKey
-  # Google::Cloud::Bigtable::AppProfile::Job
-  # Google::Cloud::Bigtable::AppProfile::Job#app_profile
-  # Google::Cloud::Bigtable::AppProfile::List#next?
-  # Google::Cloud::Bigtable::AppProfile::List#next
-  # Google::Cloud::Bigtable::AppProfile::List#all
-  # Google::Cloud::Bigtable::AppProfile::List#all
-  # Google::Cloud::Bigtable::Instance#save
-  #
-  # Google::Cloud::Bigtable::Instance#delete
-  # Google::Cloud::Bigtable::Instance#clusters
-  # Google::Cloud::Bigtable::Instance#cluster
-  # Google::Cloud::Bigtable::Instance#create_cluster
-  # Google::Cloud::Bigtable::Instance#tables
-  # Google::Cloud::Bigtable::Instance#table
-  # Google::Cloud::Bigtable::Instance#table
-  # Google::Cloud::Bigtable::Instance#create_table
-  # Google::Cloud::Bigtable::Instance#create_table
-  # Google::Cloud::Bigtable::Instance#create_app_profile
-  # Google::Cloud::Bigtable::Instance#create_app_profile
-  # Google::Cloud::Bigtable::Instance#create_app_profile
-  # Google::Cloud::Bigtable::Instance#app_profile
-  # Google::Cloud::Bigtable::Instance#app_profiles
-  # Google::Cloud::Bigtable::Instance#policy
-  # Google::Cloud::Bigtable::Instance#policy
-  # Google::Cloud::Bigtable::Instance#update_policy
-  #
-  # Google::Cloud::Bigtable::Instance#test_iam_permissions
-  # Google::Cloud::Bigtable::GcRule
-  # Google::Cloud::Bigtable::GcRule
-  # Google::Cloud::Bigtable::GcRule
-  # Google::Cloud::Bigtable::GcRule
+  # Google::Cloud::Bigtable::ValueRange
+  # Google::Cloud::Bigtable::ValueRange#from
+  # Google::Cloud::Bigtable::ValueRange#from
+  # Google::Cloud::Bigtable::ValueRange#to
+  # Google::Cloud::Bigtable::ValueRange#to
+  # Google::Cloud::Bigtable::ValueRange#between
+  # Google::Cloud::Bigtable::ValueRange#of
 
 end
 
@@ -347,10 +386,62 @@ end
 def project
   "my-project"
 end
+alias project_id project
+
+def project_path
+  Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient.project_path(project_id)
+end
+
+def instance_path instance_id
+  Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient.instance_path(
+    project_id,
+    instance_id
+  )
+end
+
+def cluster_path instance_id, cluster_id
+  Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient.cluster_path(
+    project_id,
+    instance_id,
+    cluster_id
+  )
+end
+
+def location_path location
+  Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient.location_path(
+    project_id,
+    location
+  )
+end
+
+def table_path instance_id, table_id
+  Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient.table_path(
+    project_id,
+    instance_id,
+    table_id
+  )
+end
+
+def snapshot_path instance_id, cluster_id, snapshot_id
+  Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient.snapshot_path(
+    project_id,
+    instance_id,
+    cluster_id,
+    snapshot_id
+  )
+end
+
+def app_profile_path instance_id, app_profile_id
+  Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient.app_profile_path(
+    project_id,
+    instance_id,
+    app_profile_id
+  )
+end
 
 def instance_hash name: nil, display_name: nil, state: nil, type: nil, labels: {}
   {
-    name: name,
+    name: name && instance_path(name),
     display_name: display_name,
     state: state,
     type: type,
@@ -374,8 +465,8 @@ end
 def instance_resp
   get_res = Google::Bigtable::Admin::V2::Instance.new(
     instance_hash(
-      name: "found-instance",
-      display_name: "Test instance",
+      name: "my-instance",
+      display_name: "My instance",
       state: :READY,
       type: :PRODUCTION
     )
@@ -387,4 +478,34 @@ def instances_resp token: nil
   h[:next_page_token] = token if token
   response = Google::Bigtable::Admin::V2::ListInstancesResponse.new h
   #paged_enum_struct response
+end
+
+def app_profile_resp
+  Google::Bigtable::Admin::V2::AppProfile.new(
+    name: "projects/my-project/instances/my-instance/appProfiles/my-app-profile"
+  )
+end
+
+def job_grpc done: false
+  Google::Longrunning::Operation.new(
+    name: nil,
+    metadata: Google::Protobuf::Any.new(
+      type_url: "type.googleapis.com/google.bigtable.admin.v2.UpdateClusterMetadata",
+      value: Google::Bigtable::Admin::V2::UpdateClusterMetadata.new.to_proto
+    ),
+    done: done,
+    response: Google::Protobuf::Any.new(
+      type_url: "type.googleapis.com/google.bigtable.admin.v2.AppProfile",
+      value: nil
+    )
+  )
+end
+
+def app_profile_update_job_resp mock, done: false
+  Google::Gax::Operation.new(
+    job_grpc(done: done),
+    mock,
+    Google::Bigtable::Admin::V2::AppProfile,
+    Google::Bigtable::Admin::V2::UpdateAppProfileMetadata
+  )
 end
