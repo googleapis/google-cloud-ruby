@@ -228,7 +228,7 @@ module Google
           # Run image detection and annotation for a batch of images.
           #
           # @param requests [Array<Google::Cloud::Vision::V1::AnnotateImageRequest | Hash>]
-          #   Individual image annotation requests for this batch.
+          #   Required. Individual image annotation requests for this batch.
           #   A hash of the same form as `Google::Cloud::Vision::V1::AnnotateImageRequest`
           #   can also be provided.
           # @param parent [String]
@@ -283,7 +283,7 @@ module Google
           # extracted.
           #
           # @param requests [Array<Google::Cloud::Vision::V1::AnnotateFileRequest | Hash>]
-          #   The list of file annotation requests. Right now we support only one
+          #   Required. The list of file annotation requests. Right now we support only one
           #   AnnotateFileRequest in BatchAnnotateFilesRequest.
           #   A hash of the same form as `Google::Cloud::Vision::V1::AnnotateFileRequest`
           #   can also be provided.
@@ -341,7 +341,7 @@ module Google
           # GCS bucket, each json file containing BatchAnnotateImagesResponse proto.
           #
           # @param requests [Array<Google::Cloud::Vision::V1::AnnotateImageRequest | Hash>]
-          #   Individual image annotation requests for this batch.
+          #   Required. Individual image annotation requests for this batch.
           #   A hash of the same form as `Google::Cloud::Vision::V1::AnnotateImageRequest`
           #   can also be provided.
           # @param output_config [Google::Cloud::Vision::V1::OutputConfig | Hash]
@@ -434,7 +434,7 @@ module Google
           # `Operation.response` contains `AsyncBatchAnnotateFilesResponse` (results).
           #
           # @param requests [Array<Google::Cloud::Vision::V1::AsyncAnnotateFileRequest | Hash>]
-          #   Individual async file annotation requests for this batch.
+          #   Required. Individual async file annotation requests for this batch.
           #   A hash of the same form as `Google::Cloud::Vision::V1::AsyncAnnotateFileRequest`
           #   can also be provided.
           # @param parent [String]

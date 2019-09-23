@@ -6,6 +6,7 @@ require 'google/protobuf'
 
 require 'google/api/annotations_pb'
 require 'google/api/client_pb'
+require 'google/api/field_behavior_pb'
 require 'google/cloud/vision/v1/geometry_pb'
 require 'google/cloud/vision/v1/product_search_pb'
 require 'google/cloud/vision/v1/text_annotation_pb'
@@ -135,6 +136,12 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :medical, :enum, 3, "google.cloud.vision.v1.Likelihood"
     optional :violence, :enum, 4, "google.cloud.vision.v1.Likelihood"
     optional :racy, :enum, 9, "google.cloud.vision.v1.Likelihood"
+    optional :adult_confidence, :float, 16
+    optional :spoof_confidence, :float, 18
+    optional :medical_confidence, :float, 20
+    optional :violence_confidence, :float, 22
+    optional :racy_confidence, :float, 24
+    optional :nsfw_confidence, :float, 26
   end
   add_message "google.cloud.vision.v1.LatLongRect" do
     optional :min_lat_lng, :message, 1, "google.type.LatLng"
@@ -197,12 +204,6 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :error, :message, 9, "google.rpc.Status"
     optional :context, :message, 21, "google.cloud.vision.v1.ImageAnnotationContext"
   end
-  add_message "google.cloud.vision.v1.AnnotateFileResponse" do
-    optional :input_config, :message, 1, "google.cloud.vision.v1.InputConfig"
-    repeated :responses, :message, 2, "google.cloud.vision.v1.AnnotateImageResponse"
-    optional :total_pages, :int32, 3
-    optional :error, :message, 4, "google.rpc.Status"
-  end
   add_message "google.cloud.vision.v1.BatchAnnotateImagesRequest" do
     repeated :requests, :message, 1, "google.cloud.vision.v1.AnnotateImageRequest"
     optional :parent, :string, 4
@@ -215,6 +216,12 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     repeated :features, :message, 2, "google.cloud.vision.v1.Feature"
     optional :image_context, :message, 3, "google.cloud.vision.v1.ImageContext"
     repeated :pages, :int32, 4
+  end
+  add_message "google.cloud.vision.v1.AnnotateFileResponse" do
+    optional :input_config, :message, 1, "google.cloud.vision.v1.InputConfig"
+    repeated :responses, :message, 2, "google.cloud.vision.v1.AnnotateImageResponse"
+    optional :total_pages, :int32, 3
+    optional :error, :message, 4, "google.rpc.Status"
   end
   add_message "google.cloud.vision.v1.BatchAnnotateFilesRequest" do
     repeated :requests, :message, 1, "google.cloud.vision.v1.AnnotateFileRequest"
@@ -312,10 +319,10 @@ module Google
         AnnotateImageRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vision.v1.AnnotateImageRequest").msgclass
         ImageAnnotationContext = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vision.v1.ImageAnnotationContext").msgclass
         AnnotateImageResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vision.v1.AnnotateImageResponse").msgclass
-        AnnotateFileResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vision.v1.AnnotateFileResponse").msgclass
         BatchAnnotateImagesRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vision.v1.BatchAnnotateImagesRequest").msgclass
         BatchAnnotateImagesResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vision.v1.BatchAnnotateImagesResponse").msgclass
         AnnotateFileRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vision.v1.AnnotateFileRequest").msgclass
+        AnnotateFileResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vision.v1.AnnotateFileResponse").msgclass
         BatchAnnotateFilesRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vision.v1.BatchAnnotateFilesRequest").msgclass
         BatchAnnotateFilesResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vision.v1.BatchAnnotateFilesResponse").msgclass
         AsyncAnnotateFileRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vision.v1.AsyncAnnotateFileRequest").msgclass
