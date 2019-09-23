@@ -1,5 +1,11 @@
 # Release History
 
+### 0.35.1 / 2019-09-23
+
+#### Documentation
+
+* Update product category documentation
+
 ## 0.35.0 (2019-08-12)
 
 * Add parent to BatchAnnotate and add PurgeProducts
