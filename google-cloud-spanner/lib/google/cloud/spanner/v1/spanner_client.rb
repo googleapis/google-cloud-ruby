@@ -406,10 +406,6 @@ module Google
           #
           # @param database [String]
           #   Required. The database in which the new sessions are created.
-          # @param session_template [Google::Spanner::V1::Session | Hash]
-          #   Parameters to be applied to each created session.
-          #   A hash of the same form as `Google::Spanner::V1::Session`
-          #   can also be provided.
           # @param session_count [Integer]
           #   Required. The number of sessions to be created in this batch call.
           #   The API may return fewer than the requested number of sessions. If a
@@ -417,6 +413,10 @@ module Google
           #   calls to BatchCreateSessions (adjusting
           #   {Google::Spanner::V1::BatchCreateSessionsRequest#session_count session_count}
           #   as necessary).
+          # @param session_template [Google::Spanner::V1::Session | Hash]
+          #   Parameters to be applied to each created session.
+          #   A hash of the same form as `Google::Spanner::V1::Session`
+          #   can also be provided.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -430,18 +430,21 @@ module Google
           #
           #   spanner_client = Google::Cloud::Spanner::V1::SpannerClient.new
           #   formatted_database = Google::Cloud::Spanner::V1::SpannerClient.database_path("[PROJECT]", "[INSTANCE]", "[DATABASE]")
-          #   response = spanner_client.batch_create_sessions(formatted_database)
+          #
+          #   # TODO: Initialize `session_count`:
+          #   session_count = 0
+          #   response = spanner_client.batch_create_sessions(formatted_database, session_count)
 
           def batch_create_sessions \
               database,
+              session_count,
               session_template: nil,
-              session_count: nil,
               options: nil,
               &block
             req = {
               database: database,
-              session_template: session_template,
-              session_count: session_count
+              session_count: session_count,
+              session_template: session_template
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Spanner::V1::BatchCreateSessionsRequest)
             @batch_create_sessions.call(req, options, &block)
