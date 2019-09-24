@@ -116,6 +116,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :name, :string, 1
     oneof :model_deployment_metadata do
       optional :image_object_detection_model_deployment_metadata, :message, 2, "google.cloud.automl.v1beta1.ImageObjectDetectionModelDeploymentMetadata"
+      optional :image_classification_model_deployment_metadata, :message, 4, "google.cloud.automl.v1beta1.ImageClassificationModelDeploymentMetadata"
     end
   end
   add_message "google.cloud.automl.v1beta1.UndeployModelRequest" do

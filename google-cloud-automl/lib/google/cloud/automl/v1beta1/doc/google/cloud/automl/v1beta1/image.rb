@@ -54,34 +54,38 @@ module Google
         #       This is the default value.
         #     * `mobile-low-latency-1` - A model that, in addition to providing
         #       prediction via AutoML API, can also be exported (see
-        #       {Google::Cloud::AutoML::V1beta1::AutoML::ExportModel AutoML::ExportModel}) and used on a mobile or edge device
-        #       with TensorFlow afterwards. Expected to have low latency, but
-        #       may have lower prediction quality than other models.
+        #       {Google::Cloud::AutoML::V1beta1::AutoML::ExportModel AutoML::ExportModel})
+        #       and used on a mobile or edge device with TensorFlow
+        #       afterwards. Expected to have low latency, but may have lower
+        #       prediction quality than other models.
         #     * `mobile-versatile-1` - A model that, in addition to providing
         #       prediction via AutoML API, can also be exported (see
-        #       {Google::Cloud::AutoML::V1beta1::AutoML::ExportModel AutoML::ExportModel}) and used on a mobile or edge device
-        #       with TensorFlow afterwards.
+        #       {Google::Cloud::AutoML::V1beta1::AutoML::ExportModel AutoML::ExportModel})
+        #       and used on a mobile or edge device with TensorFlow
+        #       afterwards.
         #     * `mobile-high-accuracy-1` - A model that, in addition to providing
         #       prediction via AutoML API, can also be exported (see
-        #       {Google::Cloud::AutoML::V1beta1::AutoML::ExportModel AutoML::ExportModel}) and used on a mobile or edge device
-        #       with TensorFlow afterwards.  Expected to have a higher
-        #       latency, but should also have a higher prediction quality
-        #       than other models.
+        #       {Google::Cloud::AutoML::V1beta1::AutoML::ExportModel AutoML::ExportModel})
+        #       and used on a mobile or edge device with TensorFlow
+        #       afterwards.  Expected to have a higher latency, but should
+        #       also have a higher prediction quality than other models.
         #     * `mobile-core-ml-low-latency-1` - A model that, in addition to providing
         #       prediction via AutoML API, can also be exported (see
-        #       {Google::Cloud::AutoML::V1beta1::AutoML::ExportModel AutoML::ExportModel}) and used on a mobile device with Core
-        #       ML afterwards. Expected to have low latency, but may have
-        #       lower prediction quality than other models.
+        #       {Google::Cloud::AutoML::V1beta1::AutoML::ExportModel AutoML::ExportModel})
+        #       and used on a mobile device with Core ML afterwards. Expected
+        #       to have low latency, but may have lower prediction quality
+        #       than other models.
         #     * `mobile-core-ml-versatile-1` - A model that, in addition to providing
         #       prediction via AutoML API, can also be exported (see
-        #       {Google::Cloud::AutoML::V1beta1::AutoML::ExportModel AutoML::ExportModel}) and used on a mobile device with Core
-        #       ML afterwards.
+        #       {Google::Cloud::AutoML::V1beta1::AutoML::ExportModel AutoML::ExportModel})
+        #       and used on a mobile device with Core ML afterwards.
         #     * `mobile-core-ml-high-accuracy-1` - A model that, in addition to
         #       providing prediction via AutoML API, can also be exported
-        #       (see {Google::Cloud::AutoML::V1beta1::AutoML::ExportModel AutoML::ExportModel}) and used on a mobile device with
-        #       Core ML afterwards.  Expected to have a higher latency, but
-        #       should also have a higher prediction quality than other
-        #       models.
+        #       (see
+        #       {Google::Cloud::AutoML::V1beta1::AutoML::ExportModel AutoML::ExportModel})
+        #       and used on a mobile device with Core ML afterwards. Expected
+        #       to have a higher latency, but should also have a higher
+        #       prediction quality than other models.
         class ImageClassificationModelMetadata; end
 
         # Model metadata specific to image object detection.
@@ -131,6 +135,16 @@ module Google
         #     milli node hours, i.e. 1,000 value in this field means 1 node hour.
         #     Guaranteed to not exceed the train budget.
         class ImageObjectDetectionModelMetadata; end
+
+        # Model deployment metadata specific to Image Classification.
+        # @!attribute [rw] node_count
+        #   @return [Integer]
+        #     Input only. The number of nodes to deploy the model on. A node is an
+        #     abstraction of a machine resource, which can handle online prediction QPS
+        #     as given in the model's
+        #     {Google::Cloud::AutoML::V1p1beta::ImageClassificationModelMetadata#node_qps node_qps}.
+        #     Must be between 1 and 100, inclusive on both ends.
+        class ImageClassificationModelDeploymentMetadata; end
 
         # Model deployment metadata specific to Image Object Detection.
         # @!attribute [rw] node_count

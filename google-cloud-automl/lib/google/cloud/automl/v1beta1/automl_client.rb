@@ -1199,6 +1199,10 @@ module Google
           #   Model deployment metadata specific to Image Object Detection.
           #   A hash of the same form as `Google::Cloud::AutoML::V1beta1::ImageObjectDetectionModelDeploymentMetadata`
           #   can also be provided.
+          # @param image_classification_model_deployment_metadata [Google::Cloud::AutoML::V1beta1::ImageClassificationModelDeploymentMetadata | Hash]
+          #   Model deployment metadata specific to Image Classification.
+          #   A hash of the same form as `Google::Cloud::AutoML::V1beta1::ImageClassificationModelDeploymentMetadata`
+          #   can also be provided.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -1240,10 +1244,12 @@ module Google
           def deploy_model \
               name,
               image_object_detection_model_deployment_metadata: nil,
+              image_classification_model_deployment_metadata: nil,
               options: nil
             req = {
               name: name,
-              image_object_detection_model_deployment_metadata: image_object_detection_model_deployment_metadata
+              image_object_detection_model_deployment_metadata: image_object_detection_model_deployment_metadata,
+              image_classification_model_deployment_metadata: image_classification_model_deployment_metadata
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Cloud::AutoML::V1beta1::DeployModelRequest)
             operation = Google::Gax::Operation.new(
