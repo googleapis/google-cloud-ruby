@@ -135,7 +135,7 @@ module Google
               synchronize do
                 return {} if @register.empty?
                 reg = @register
-                @register = Concurrent::Map.new
+                @register = {}
                 reg
               end
 
