@@ -65,11 +65,11 @@ $samples_public_table = ENV["GCLOUD_TEST_SAMPLES_PUBLIC_TABLE"] || "bigquery-pub
 # These keys are public, but access may be restricted when tests are run from a
 # VPC project.
 $kms_key = ENV["GCLOUD_TEST_KMS_KEY"] || (
-  "projects/cloud-samples-tests/locations/us-central1" +
+  "projects/cloud-samples-tests/locations/us" +
   "/keyRings/test/cryptoKeys/test")
 
 $kms_key_2 = ENV["GCLOUD_TEST_KMS_KEY_2"] || (
-  "projects/cloud-samples-tests/locations/us-central1" +
+  "projects/cloud-samples-tests/locations/us" +
   "/keyRings/test/cryptoKeys/otherkey")
 
 module Acceptance
