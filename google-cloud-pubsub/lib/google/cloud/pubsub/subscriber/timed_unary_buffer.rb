@@ -27,7 +27,7 @@ module Google
 
           attr_reader :max_bytes, :interval
 
-          def initialize subscriber, max_bytes: 10000000, interval: 1.0
+          def initialize subscriber, max_bytes: 500000, interval: 1.0
             super() # to init MonitorMixin
 
             @subscriber = subscriber
