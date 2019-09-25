@@ -52,7 +52,7 @@ module Google
         #   rule.action #=> "SetStorageClass"
         #   rule.storage_class #=> "COLDLINE"
         #   rule.age #=> 10
-        #   rule.matches_storage_class #=> ["MULTI_REGIONAL", "REGIONAL"]
+        #   rule.matches_storage_class #=> ["STANDARD", "NEARLINE"]
         #
         # @example Updating the bucket's lifecycle management rules in a block.
         #   require "google/cloud/storage"
@@ -110,10 +110,11 @@ module Google
           #   is `false`, it matches archived files.
           # @param [String,Symbol,Array<String,Symbol>] matches_storage_class
           #   Files having any of the storage classes specified by this
-          #   condition will be matched. Values include `MULTI_REGIONAL`,
-          #   `REGIONAL`, `NEARLINE`, `COLDLINE`, `STANDARD`, and
-          #   `DURABLE_REDUCED_AVAILABILITY`. Arguments will be converted from
-          #   symbols and lower-case to upper-case strings.
+          #   condition will be matched. Values include `STANDARD`, `NEARLINE`,
+          #   and `COLDLINE`. `REGIONAL`,`MULTI_REGIONAL`, and
+          #   `DURABLE_REDUCED_AVAILABILITY` are supported as legacy storage
+          #   classes. Arguments will be converted from symbols and lower-case
+          #   to upper-case strings.
           # @param [Integer] num_newer_versions Relevant only for versioned
           #   files. If the value is N, this condition is satisfied when there
           #   are at least N versions (including the live version) newer than
@@ -160,10 +161,11 @@ module Google
           #   is `false`, it matches archived files.
           # @param [String,Symbol,Array<String,Symbol>] matches_storage_class
           #   Files having any of the storage classes specified by this
-          #   condition will be matched. Values include `MULTI_REGIONAL`,
-          #   `REGIONAL`, `NEARLINE`, `COLDLINE`, `STANDARD`, and
-          #   `DURABLE_REDUCED_AVAILABILITY`. Arguments will be converted from
-          #   symbols and lower-case to upper-case strings.
+          #   condition will be matched. Values include `STANDARD`, `NEARLINE`,
+          #   and `COLDLINE`. `REGIONAL`,`MULTI_REGIONAL`, and
+          #   `DURABLE_REDUCED_AVAILABILITY` are supported as legacy storage
+          #   classes. Arguments will be converted from symbols and lower-case
+          #   to upper-case strings.
           # @param [Integer] num_newer_versions Relevant only for versioned
           #   files. If the value is N, this condition is satisfied when there
           #   are at least N versions (including the live version) newer than
@@ -238,8 +240,9 @@ module Google
           #   is `false`, it matches archived files.
           # @attr [Array<String>] matches_storage_class Files having any of the
           #   storage classes specified by this condition will be matched.
-          #   Values include `MULTI_REGIONAL`, `REGIONAL`, `NEARLINE`,
-          #   `COLDLINE`, `STANDARD`, and `DURABLE_REDUCED_AVAILABILITY`.
+          #   Values include `STANDARD`, `NEARLINE`, and `COLDLINE`. `REGIONAL`,
+          #   `MULTI_REGIONAL`, and `DURABLE_REDUCED_AVAILABILITY` are supported
+          #   as legacy storage classes.
           # @attr [Integer] num_newer_versions Relevant only for versioned
           #   files. If the value is N, this condition is satisfied when there
           #   are at least N versions (including the live version) newer than
@@ -256,7 +259,7 @@ module Google
           #   rule.action #=> "SetStorageClass"
           #   rule.storage_class #=> "COLDLINE"
           #   rule.age #=> 10
-          #   rule.matches_storage_class #=> ["MULTI_REGIONAL", "REGIONAL"]
+          #   rule.matches_storage_class #=> ["STANDARD", "NEARLINE"]
           #
           # @example Updating the bucket's lifecycle rules in a block.
           #   require "google/cloud/storage"

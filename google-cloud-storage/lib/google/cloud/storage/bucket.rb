@@ -234,7 +234,7 @@ module Google
         #   rule.action #=> "SetStorageClass"
         #   rule.storage_class #=> "COLDLINE"
         #   rule.age #=> 10
-        #   rule.matches_storage_class #=> ["MULTI_REGIONAL", "REGIONAL"]
+        #   rule.matches_storage_class #=> ["STANDARD", "NEARLINE"]
         #
         # @example Updating the bucket's lifecycle management rules in a block.
         #   require "google/cloud/storage"

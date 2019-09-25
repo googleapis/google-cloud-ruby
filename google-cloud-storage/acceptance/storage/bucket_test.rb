@@ -145,7 +145,7 @@ describe Google::Cloud::Storage::Bucket, :storage do
                                    age: 10,
                                    created_before: Date.parse("2013-01-15"), # string in RFC 3339 date format also ok
                                    is_live: true,
-                                   matches_storage_class: ["MULTI_REGIONAL"],
+                                   matches_storage_class: ["STANDARD"],
                                    num_newer_versions: 3
 
     end
@@ -157,7 +157,7 @@ describe Google::Cloud::Storage::Bucket, :storage do
     bucket.lifecycle.last.age.must_equal 10
     bucket.lifecycle.last.created_before.must_equal Date.parse("2013-01-15")
     bucket.lifecycle.last.is_live.must_equal true
-    bucket.lifecycle.last.matches_storage_class.must_equal ["MULTI_REGIONAL"]
+    bucket.lifecycle.last.matches_storage_class.must_equal ["STANDARD"]
     bucket.lifecycle.last.num_newer_versions.must_equal 3
 
     bucket.reload!

@@ -1221,7 +1221,7 @@ def lifecycle_hash
         },
         "condition" => {
           "age" => 10,
-          "matchesStorageClass" => ["MULTI_REGIONAL", "REGIONAL"]
+          "matchesStorageClass" => ["STANDARD", "NEARLINE"]
         }
       },
       {

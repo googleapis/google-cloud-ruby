@@ -521,7 +521,7 @@ describe Google::Cloud::Storage::Bucket, :update, :lazy, :mock_storage do
           lifecycle: lifecycle_gapi(
               lifecycle_rule_gapi("Delete", age: 40, is_live: false),
               lifecycle_rule_gapi("Delete", is_live: false, num_newer_versions: 8),
-              lifecycle_rule_gapi("SetStorageClass", storage_class: "COLDLINE", created_before: "2013-01-15", matches_storage_class: ["MULTI_REGIONAL", "REGIONAL"])
+              lifecycle_rule_gapi("SetStorageClass", storage_class: "COLDLINE", created_before: "2013-01-15", matches_storage_class: ["STANDARD", "NEARLINE"])
           )
       )
       returned_bucket_gapi = Google::Apis::StorageV1::Bucket.from_json \
@@ -535,7 +535,7 @@ describe Google::Cloud::Storage::Bucket, :update, :lazy, :mock_storage do
       bucket.update do |b|
         b.lifecycle.add_delete_rule age: 40, is_live: false
         b.lifecycle.add_delete_rule is_live: false, num_newer_versions: 8
-        b.lifecycle.add_set_storage_class_rule "COLDLINE", created_before: "2013-01-15", matches_storage_class: ["MULTI_REGIONAL", "REGIONAL"]
+        b.lifecycle.add_set_storage_class_rule "COLDLINE", created_before: "2013-01-15", matches_storage_class: ["STANDARD", "NEARLINE"]
       end
 
       mock.verify
@@ -557,14 +557,14 @@ describe Google::Cloud::Storage::Bucket, :update, :lazy, :mock_storage do
       bucket.lifecycle.must_be :frozen?
       bucket.lifecycle.class.must_equal Google::Cloud::Storage::Bucket::Lifecycle
       bucket.lifecycle do |l|
-        l.add_set_storage_class_rule "COLDLINE", created_before: "2013-01-15", matches_storage_class: ["MULTI_REGIONAL", "REGIONAL"]
+        l.add_set_storage_class_rule "COLDLINE", created_before: "2013-01-15", matches_storage_class: ["STANDARD", "NEARLINE"]
         l.add_delete_rule age: 40, is_live: false
         l.add_delete_rule is_live: false, num_newer_versions: 8
 
         # Remove the last Lifecycle rule from the array
         l.pop
         # Remove all existing rules that match predicate
-        l.delete_if { |r| r.matches_storage_class.include? "MULTI_REGIONAL" }
+        l.delete_if { |r| r.matches_storage_class.include? "STANDARD" }
       end
 
       mock.verify
