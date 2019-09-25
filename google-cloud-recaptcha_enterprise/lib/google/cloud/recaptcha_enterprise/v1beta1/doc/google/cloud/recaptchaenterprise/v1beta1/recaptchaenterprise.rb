@@ -24,7 +24,7 @@ module Google
         #     in the format "projects/\\{project_number}".
         # @!attribute [rw] assessment
         #   @return [Google::Cloud::Recaptchaenterprise::V1beta1::Assessment]
-        #     The asessment details.
+        #     Required. The assessment details.
         class CreateAssessmentRequest; end
 
         # The request message to annotate an Assessment.
@@ -34,7 +34,7 @@ module Google
         #     "projects/\\{project_number}/assessments/\\{assessment_id}".
         # @!attribute [rw] annotation
         #   @return [Google::Cloud::Recaptchaenterprise::V1beta1::AnnotateAssessmentRequest::Annotation]
-        #     The annotation that will be assigned to the Event.
+        #     Required. The annotation that will be assigned to the Event.
         class AnnotateAssessmentRequest
           # Enum that reprensents the types of annotations.
           module Annotation
@@ -78,48 +78,52 @@ module Google
             # Default unspecified type.
             CLASSIFICATION_REASON_UNSPECIFIED = 0
 
-            # The event appeared to be automated.
+            # Interactions matched the behavior of an automated agent.
             AUTOMATION = 1
 
-            # The event was not made from the proper context on the real site.
+            # The event originated from an illegitimate environment.
             UNEXPECTED_ENVIRONMENT = 2
 
-            # Browsing behavior leading up to the event was generated was out of the
-            # ordinary.
+            # Traffic volume from the event source is higher than normal.
+            TOO_MUCH_TRAFFIC = 3
+
+            # Interactions with the site were significantly different than expected
+            # patterns.
             UNEXPECTED_USAGE_PATTERNS = 4
 
             # Too little traffic has been received from this site thus far to generate
             # quality risk analysis.
-            PROVISIONAL_RISK_ANALYSIS = 5
+            LOW_CONFIDENCE_SCORE = 5
           end
         end
 
         # @!attribute [rw] token
         #   @return [String]
-        #     The user response token provided by the reCAPTCHA client-side integration
+        #     Required. The user response token provided by the reCAPTCHA client-side integration
         #     on your site.
         # @!attribute [rw] site_key
         #   @return [String]
-        #     The site key that was used to invoke reCAPTCHA on your site and generate
+        #     Required. The site key that was used to invoke reCAPTCHA on your site and generate
         #     the token.
         class Event; end
 
         # @!attribute [rw] valid
         #   @return [true, false]
-        #     Output only. Whether the provided user response token is valid.
+        #     Whether the provided user response token is valid.
         # @!attribute [rw] invalid_reason
         #   @return [Google::Cloud::Recaptchaenterprise::V1beta1::TokenProperties::InvalidReason]
-        #     Output only. Reason associated with the response when valid = false.
+        #     Reason associated with the response when valid = false.
         # @!attribute [rw] create_time
         #   @return [Google::Protobuf::Timestamp]
-        #     Output only. The timestamp corresponding to the generation of the token.
+        #     The timestamp corresponding to the generation of the token.
         # @!attribute [rw] hostname
         #   @return [String]
-        #     Output only. The hostname of the page on which the token was generated.
+        #     The hostname of the page on which the token was generated.
         # @!attribute [rw] action
         #   @return [String]
-        #     Output only. Action name provided at token generation.
+        #     Action name provided at token generation.
         class TokenProperties
+          # LINT.IfChange
           # Enum that represents the types of invalid token reasons.
           module InvalidReason
             # Default unspecified type.
@@ -137,7 +141,7 @@ module Google
             # The user verification had already been seen.
             DUPE = 4
 
-            # The user verification token did not match the provided site secret.
+            # The user verification token did not match the provided site key.
             # This may be a configuration error (e.g. development keys used in
             # production) or end users trying to use verification tokens from other
             # sites.
