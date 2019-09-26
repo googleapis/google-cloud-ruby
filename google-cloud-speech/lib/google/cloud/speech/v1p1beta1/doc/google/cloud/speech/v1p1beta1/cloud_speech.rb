@@ -20,29 +20,29 @@ module Google
         # The top-level message sent by the client for the `Recognize` method.
         # @!attribute [rw] config
         #   @return [Google::Cloud::Speech::V1p1beta1::RecognitionConfig]
-        #     *Required* Provides information to the recognizer that specifies how to
+        #     Required. Provides information to the recognizer that specifies how to
         #     process the request.
         # @!attribute [rw] audio
         #   @return [Google::Cloud::Speech::V1p1beta1::RecognitionAudio]
-        #     *Required* The audio data to be recognized.
+        #     Required. The audio data to be recognized.
         class RecognizeRequest; end
 
         # The top-level message sent by the client for the `LongRunningRecognize`
         # method.
         # @!attribute [rw] config
         #   @return [Google::Cloud::Speech::V1p1beta1::RecognitionConfig]
-        #     *Required* Provides information to the recognizer that specifies how to
+        #     Required. Provides information to the recognizer that specifies how to
         #     process the request.
         # @!attribute [rw] audio
         #   @return [Google::Cloud::Speech::V1p1beta1::RecognitionAudio]
-        #     *Required* The audio data to be recognized.
+        #     Required. The audio data to be recognized.
         class LongRunningRecognizeRequest; end
 
         # The top-level message sent by the client for the `StreamingRecognize` method.
         # Multiple `StreamingRecognizeRequest` messages are sent. The first message
-        # must contain a `streaming_config` message and must not contain `audio` data.
-        # All subsequent messages must contain `audio` data and must not contain a
-        # `streaming_config` message.
+        # must contain a `streaming_config` message and must not contain
+        # `audio_content`. All subsequent messages must contain `audio_content` and
+        # must not contain a `streaming_config` message.
         # @!attribute [rw] streaming_config
         #   @return [Google::Cloud::Speech::V1p1beta1::StreamingRecognitionConfig]
         #     Provides information to the recognizer that specifies how to process the
@@ -55,7 +55,7 @@ module Google
         #     `StreamingRecognizeRequest` message must not contain `audio_content` data
         #     and all subsequent `StreamingRecognizeRequest` messages must contain
         #     `audio_content` data. The audio bytes must be encoded as specified in
-        #     `RecognitionConfig`. Note: as with all bytes fields, protobuffers use a
+        #     `RecognitionConfig`. Note: as with all bytes fields, proto buffers use a
         #     pure binary representation (not base64). See
         #     [content limits](https://cloud.google.com/speech-to-text/quotas#content).
         class StreamingRecognizeRequest; end
@@ -64,11 +64,11 @@ module Google
         # request.
         # @!attribute [rw] config
         #   @return [Google::Cloud::Speech::V1p1beta1::RecognitionConfig]
-        #     *Required* Provides information to the recognizer that specifies how to
+        #     Required. Provides information to the recognizer that specifies how to
         #     process the request.
         # @!attribute [rw] single_utterance
         #   @return [true, false]
-        #     *Optional* If `false` or omitted, the recognizer will perform continuous
+        #     If `false` or omitted, the recognizer will perform continuous
         #     recognition (continuing to wait for and process audio even if the user
         #     pauses speaking) until the client closes the input stream (gRPC API) or
         #     until the maximum time limit has been reached. May return multiple
@@ -81,7 +81,7 @@ module Google
         #     `true`.
         # @!attribute [rw] interim_results
         #   @return [true, false]
-        #     *Optional* If `true`, interim results (tentative hypotheses) may be
+        #     If `true`, interim results (tentative hypotheses) may be
         #     returned as they become available (these interim results are indicated with
         #     the `is_final=false` flag).
         #     If `false` or omitted, only `is_final=true` result(s) are returned.
@@ -93,8 +93,7 @@ module Google
         #   @return [Google::Cloud::Speech::V1p1beta1::RecognitionConfig::AudioEncoding]
         #     Encoding of audio data sent in all `RecognitionAudio` messages.
         #     This field is optional for `FLAC` and `WAV` audio files and required
-        #     for all other audio formats. For details, see
-        #     {Google::Cloud::Speech::V1p1beta1::RecognitionConfig::AudioEncoding AudioEncoding}.
+        #     for all other audio formats. For details, see {Google::Cloud::Speech::V1p1beta1::RecognitionConfig::AudioEncoding AudioEncoding}.
         # @!attribute [rw] sample_rate_hertz
         #   @return [Integer]
         #     Sample rate in Hertz of the audio data sent in all
@@ -102,12 +101,11 @@ module Google
         #     16000 is optimal. For best results, set the sampling rate of the audio
         #     source to 16000 Hz. If that's not possible, use the native sample rate of
         #     the audio source (instead of re-sampling).
-        #     This field is optional for `FLAC` and `WAV` audio files and required
-        #     for all other audio formats. For details, see
-        #     {Google::Cloud::Speech::V1p1beta1::RecognitionConfig::AudioEncoding AudioEncoding}.
+        #     This field is optional for FLAC and WAV audio files, but is
+        #     required for all other audio formats. For details, see {Google::Cloud::Speech::V1p1beta1::RecognitionConfig::AudioEncoding AudioEncoding}.
         # @!attribute [rw] audio_channel_count
         #   @return [Integer]
-        #     *Optional* The number of channels in the input audio data.
+        #     The number of channels in the input audio data.
         #     ONLY set this for MULTI-CHANNEL recognition.
         #     Valid values for LINEAR16 and FLAC are `1`-`8`.
         #     Valid values for OGG_OPUS are '1'-'254'.
@@ -118,7 +116,7 @@ module Google
         #     `enable_separate_recognition_per_channel` to 'true'.
         # @!attribute [rw] enable_separate_recognition_per_channel
         #   @return [true, false]
-        #     This needs to be set to ‘true’ explicitly and `audio_channel_count` > 1
+        #     This needs to be set to `true` explicitly and `audio_channel_count` > 1
         #     to get each channel recognized separately. The recognition result will
         #     contain a `channel_tag` field to state which channel that result belongs
         #     to. If this is not true, we will only recognize the first channel. The
@@ -126,28 +124,29 @@ module Google
         #     `audio_channel_count` multiplied by the length of the audio.
         # @!attribute [rw] language_code
         #   @return [String]
-        #     *Required* The language of the supplied audio as a
+        #     Required. The language of the supplied audio as a
         #     [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt) language tag.
         #     Example: "en-US".
-        #     See [Language Support](https://cloud.google.com/speech-to-text/docs/languages)
-        #     for a list of the currently supported language codes.
+        #     See [Language
+        #     Support](https://cloud.google.com/speech-to-text/docs/languages) for a list
+        #     of the currently supported language codes.
         # @!attribute [rw] alternative_language_codes
         #   @return [Array<String>]
-        #     *Optional* A list of up to 3 additional
+        #     A list of up to 3 additional
         #     [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt) language tags,
         #     listing possible alternative languages of the supplied audio.
-        #     See [Language Support](https://cloud.google.com/speech-to-text/docs/languages)
-        #     for a list of the currently supported language codes.
-        #     If alternative languages are listed, recognition result will contain
-        #     recognition in the most likely language detected including the main
-        #     language_code. The recognition result will include the language tag
-        #     of the language detected in the audio.
-        #     Note: This feature is only supported for Voice Command and Voice Search
-        #     use cases and performance may vary for other use cases (e.g., phone call
+        #     See [Language
+        #     Support](https://cloud.google.com/speech-to-text/docs/languages) for a list
+        #     of the currently supported language codes. If alternative languages are
+        #     listed, recognition result will contain recognition in the most likely
+        #     language detected including the main language_code. The recognition result
+        #     will include the language tag of the language detected in the audio. Note:
+        #     This feature is only supported for Voice Command and Voice Search use cases
+        #     and performance may vary for other use cases (e.g., phone call
         #     transcription).
         # @!attribute [rw] max_alternatives
         #   @return [Integer]
-        #     *Optional* Maximum number of recognition hypotheses to be returned.
+        #     Maximum number of recognition hypotheses to be returned.
         #     Specifically, the maximum number of `SpeechRecognitionAlternative` messages
         #     within each `SpeechRecognitionResult`.
         #     The server may return fewer than `max_alternatives`.
@@ -155,30 +154,31 @@ module Google
         #     one. If omitted, will return a maximum of one.
         # @!attribute [rw] profanity_filter
         #   @return [true, false]
-        #     *Optional* If set to `true`, the server will attempt to filter out
+        #     If set to `true`, the server will attempt to filter out
         #     profanities, replacing all but the initial character in each filtered word
         #     with asterisks, e.g. "f***". If set to `false` or omitted, profanities
         #     won't be filtered out.
         # @!attribute [rw] speech_contexts
         #   @return [Array<Google::Cloud::Speech::V1p1beta1::SpeechContext>]
-        #     *Optional* array of
-        #     {Google::Cloud::Speech::V1p1beta1::SpeechContext SpeechContext}. A means to
-        #     provide context to assist the speech recognition. For more information, see
-        #     [Phrase Hints](https://cloud.google.com/speech-to-text/docs/basics#phrase-hints).
+        #     Array of {Google::Cloud::Speech::V1p1beta1::SpeechContext SpeechContext}.
+        #     A means to provide context to assist the speech recognition. For more
+        #     information, see
+        #     [speech
+        #     adaptation](https://cloud.google.com/speech-to-text/docs/context-strength).
         # @!attribute [rw] enable_word_time_offsets
         #   @return [true, false]
-        #     *Optional* If `true`, the top result includes a list of words and
+        #     If `true`, the top result includes a list of words and
         #     the start and end time offsets (timestamps) for those words. If
         #     `false`, no word-level time offset information is returned. The default is
         #     `false`.
         # @!attribute [rw] enable_word_confidence
         #   @return [true, false]
-        #     *Optional* If `true`, the top result includes a list of words and the
+        #     If `true`, the top result includes a list of words and the
         #     confidence for those words. If `false`, no word-level confidence
         #     information is returned. The default is `false`.
         # @!attribute [rw] enable_automatic_punctuation
         #   @return [true, false]
-        #     *Optional* If 'true', adds punctuation to recognition result hypotheses.
+        #     If 'true', adds punctuation to recognition result hypotheses.
         #     This feature is only available in select languages. Setting this for
         #     requests in other languages has no effect at all.
         #     The default 'false' value does not add punctuation to result hypotheses.
@@ -187,19 +187,18 @@ module Google
         #     premium feature.
         # @!attribute [rw] enable_speaker_diarization
         #   @return [true, false]
-        #     *Optional* If 'true', enables speaker detection for each recognized word in
+        #     If 'true', enables speaker detection for each recognized word in
         #     the top alternative of the recognition result using a speaker_tag provided
         #     in the WordInfo.
         #     Note: Use diarization_config instead.
         # @!attribute [rw] diarization_speaker_count
         #   @return [Integer]
-        #     *Optional*
         #     If set, specifies the estimated number of speakers in the conversation.
         #     Defaults to '2'. Ignored unless enable_speaker_diarization is set to true.
         #     Note: Use diarization_config instead.
         # @!attribute [rw] diarization_config
         #   @return [Google::Cloud::Speech::V1p1beta1::SpeakerDiarizationConfig]
-        #     *Optional* Config to enable speaker diarization and set additional
+        #     Config to enable speaker diarization and set additional
         #     parameters to make diarization better suited for your application.
         #     Note: When this is enabled, we send all the words from the beginning of the
         #     audio for the top alternative in every consecutive STREAMING responses.
@@ -209,10 +208,10 @@ module Google
         #     in the top alternative of the FINAL SpeechRecognitionResult.
         # @!attribute [rw] metadata
         #   @return [Google::Cloud::Speech::V1p1beta1::RecognitionMetadata]
-        #     *Optional* Metadata regarding this request.
+        #     Metadata regarding this request.
         # @!attribute [rw] model
         #   @return [String]
-        #     *Optional* Which model to select for the given request. Select the model
+        #     Which model to select for the given request. Select the model
         #     best suited to your domain to get best results. If a model is not
         #     explicitly specified, then we auto-select a model based on the parameters
         #     in the RecognitionConfig.
@@ -246,7 +245,7 @@ module Google
         #     </table>
         # @!attribute [rw] use_enhanced
         #   @return [true, false]
-        #     *Optional* Set to true to use an enhanced model for speech recognition.
+        #     Set to true to use an enhanced model for speech recognition.
         #     If `use_enhanced` is set to true and the `model` field is not set, then
         #     an appropriate enhanced model is chosen if an enhanced model exists for
         #     the audio.
@@ -257,13 +256,15 @@ module Google
         class RecognitionConfig
           # The encoding of the audio data sent in the request.
           #
-          # All encodings support only 1 channel (mono) audio.
+          # All encodings support only 1 channel (mono) audio, unless the
+          # `audio_channel_count` and `enable_separate_recognition_per_channel` fields
+          # are set.
           #
           # For best results, the audio source should be captured and transmitted using
           # a lossless encoding (`FLAC` or `LINEAR16`). The accuracy of the speech
           # recognition can be reduced if lossy codecs are used to capture or transmit
           # audio, particularly if background noise is present. Lossy codecs include
-          # `MULAW`, `AMR`, `AMR_WB`, `OGG_OPUS`, and `SPEEX_WITH_HEADER_BYTE`.
+          # `MULAW`, `AMR`, `AMR_WB`, `OGG_OPUS`, `SPEEX_WITH_HEADER_BYTE`, and `MP3`.
           #
           # The `FLAC` and `WAV` audio file formats include a header that describes the
           # included audio content. You can request recognition for `WAV` files that
@@ -274,8 +275,7 @@ module Google
           # an `AudioEncoding` when you send  send `FLAC` or `WAV` audio, the
           # encoding configuration must match the encoding described in the audio
           # header; otherwise the request returns an
-          # {Google::Rpc::Code::INVALID_ARGUMENT} error
-          # code.
+          # {Google::Rpc::Code::INVALID_ARGUMENT} error code.
           module AudioEncoding
             # Not specified.
             ENCODING_UNSPECIFIED = 0
@@ -327,21 +327,19 @@ module Google
           end
         end
 
-        # *Optional* Config to enable speaker diarization.
+        # Config to enable speaker diarization.
         # @!attribute [rw] enable_speaker_diarization
         #   @return [true, false]
-        #     *Optional* If 'true', enables speaker detection for each recognized word in
+        #     If 'true', enables speaker detection for each recognized word in
         #     the top alternative of the recognition result using a speaker_tag provided
         #     in the WordInfo.
         # @!attribute [rw] min_speaker_count
         #   @return [Integer]
-        #     *Optional*
         #     Minimum number of speakers in the conversation. This range gives you more
         #     flexibility by allowing the system to automatically determine the correct
         #     number of speakers. If not set, the default value is 2.
         # @!attribute [rw] max_speaker_count
         #   @return [Integer]
-        #     *Optional*
         #     Maximum number of speakers in the conversation. This range gives you more
         #     flexibility by allowing the system to automatically determine the correct
         #     number of speakers. If not set, the default value is 6.
@@ -482,7 +480,7 @@ module Google
         # in the results.
         # @!attribute [rw] phrases
         #   @return [Array<String>]
-        #     *Optional* A list of strings containing words and phrases "hints" so that
+        #     A list of strings containing words and phrases "hints" so that
         #     the speech recognition is more likely to recognize them. This can be used
         #     to improve the accuracy for specific words and phrases, for example, if
         #     specific commands are typically spoken by the user. This can also be used
@@ -508,12 +506,12 @@ module Google
 
         # Contains audio data in the encoding specified in the `RecognitionConfig`.
         # Either `content` or `uri` must be supplied. Supplying both or neither
-        # returns {Google::Rpc::Code::INVALID_ARGUMENT}.
-        # See [content limits](https://cloud.google.com/speech-to-text/quotas#content).
+        # returns {Google::Rpc::Code::INVALID_ARGUMENT}. See
+        # [content limits](https://cloud.google.com/speech-to-text/quotas#content).
         # @!attribute [rw] content
         #   @return [String]
         #     The audio data bytes encoded as specified in
-        #     `RecognitionConfig`. Note: as with all bytes fields, protobuffers use a
+        #     `RecognitionConfig`. Note: as with all bytes fields, proto buffers use a
         #     pure binary representation, whereas JSON representations use base64.
         # @!attribute [rw] uri
         #   @return [String]
@@ -522,9 +520,8 @@ module Google
         #     Currently, only Google Cloud Storage URIs are
         #     supported, which must be specified in the following format:
         #     `gs://bucket_name/object_name` (other URI formats return
-        #     {Google::Rpc::Code::INVALID_ARGUMENT}).
-        #     For more information, see [Request
-        #     URIs](https://cloud.google.com/storage/docs/reference-uris).
+        #     {Google::Rpc::Code::INVALID_ARGUMENT}). For more information, see
+        #     [Request URIs](https://cloud.google.com/storage/docs/reference-uris).
         class RecognitionAudio; end
 
         # The only message returned to the client by the `Recognize` method. It
@@ -532,7 +529,7 @@ module Google
         # messages.
         # @!attribute [rw] results
         #   @return [Array<Google::Cloud::Speech::V1p1beta1::SpeechRecognitionResult>]
-        #     Output only. Sequential list of transcription results corresponding to
+        #     Sequential list of transcription results corresponding to
         #     sequential portions of audio.
         class RecognizeResponse; end
 
@@ -543,7 +540,7 @@ module Google
         # service.
         # @!attribute [rw] results
         #   @return [Array<Google::Cloud::Speech::V1p1beta1::SpeechRecognitionResult>]
-        #     Output only. Sequential list of transcription results corresponding to
+        #     Sequential list of transcription results corresponding to
         #     sequential portions of audio.
         class LongRunningRecognizeResponse; end
 
@@ -613,17 +610,17 @@ module Google
         #   one or more (repeated) `results`.
         # @!attribute [rw] error
         #   @return [Google::Rpc::Status]
-        #     Output only. If set, returns a {Google::Rpc::Status}
-        #     message that specifies the error for the operation.
+        #     If set, returns a {Google::Rpc::Status} message that
+        #     specifies the error for the operation.
         # @!attribute [rw] results
         #   @return [Array<Google::Cloud::Speech::V1p1beta1::StreamingRecognitionResult>]
-        #     Output only. This repeated list contains zero or more results that
+        #     This repeated list contains zero or more results that
         #     correspond to consecutive portions of the audio currently being processed.
         #     It contains zero or one `is_final=true` result (the newly settled portion),
         #     followed by zero or more `is_final=false` results (the interim results).
         # @!attribute [rw] speech_event_type
         #   @return [Google::Cloud::Speech::V1p1beta1::StreamingRecognizeResponse::SpeechEventType]
-        #     Output only. Indicates the type of speech event.
+        #     Indicates the type of speech event.
         class StreamingRecognizeResponse
           # Indicates the type of speech event.
           module SpeechEventType
@@ -645,27 +642,27 @@ module Google
         # that is currently being processed.
         # @!attribute [rw] alternatives
         #   @return [Array<Google::Cloud::Speech::V1p1beta1::SpeechRecognitionAlternative>]
-        #     Output only. May contain one or more recognition hypotheses (up to the
+        #     May contain one or more recognition hypotheses (up to the
         #     maximum specified in `max_alternatives`).
         #     These alternatives are ordered in terms of accuracy, with the top (first)
         #     alternative being the most probable, as ranked by the recognizer.
         # @!attribute [rw] is_final
         #   @return [true, false]
-        #     Output only. If `false`, this `StreamingRecognitionResult` represents an
+        #     If `false`, this `StreamingRecognitionResult` represents an
         #     interim result that may change. If `true`, this is the final time the
         #     speech service will return this particular `StreamingRecognitionResult`,
         #     the recognizer will not return any further hypotheses for this portion of
         #     the transcript and corresponding audio.
         # @!attribute [rw] stability
         #   @return [Float]
-        #     Output only. An estimate of the likelihood that the recognizer will not
+        #     An estimate of the likelihood that the recognizer will not
         #     change its guess about this interim result. Values range from 0.0
         #     (completely unstable) to 1.0 (completely stable).
         #     This field is only provided for interim results (`is_final=false`).
         #     The default of 0.0 is a sentinel value indicating `stability` was not set.
         # @!attribute [rw] result_end_time
         #   @return [Google::Protobuf::Duration]
-        #     Output only. Time offset of the end of this result relative to the
+        #     Time offset of the end of this result relative to the
         #     beginning of the audio.
         # @!attribute [rw] channel_tag
         #   @return [Integer]
@@ -674,16 +671,15 @@ module Google
         #     For audio_channel_count = N, its output values can range from '1' to 'N'.
         # @!attribute [rw] language_code
         #   @return [String]
-        #     Output only. The
-        #     [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt) language tag of the
-        #     language in this result. This language code was detected to have the most
-        #     likelihood of being spoken in the audio.
+        #     The [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt) language tag
+        #     of the language in this result. This language code was detected to have
+        #     the most likelihood of being spoken in the audio.
         class StreamingRecognitionResult; end
 
         # A speech recognition result corresponding to a portion of the audio.
         # @!attribute [rw] alternatives
         #   @return [Array<Google::Cloud::Speech::V1p1beta1::SpeechRecognitionAlternative>]
-        #     Output only. May contain one or more recognition hypotheses (up to the
+        #     May contain one or more recognition hypotheses (up to the
         #     maximum specified in `max_alternatives`).
         #     These alternatives are ordered in terms of accuracy, with the top (first)
         #     alternative being the most probable, as ranked by the recognizer.
@@ -694,19 +690,18 @@ module Google
         #     For audio_channel_count = N, its output values can range from '1' to 'N'.
         # @!attribute [rw] language_code
         #   @return [String]
-        #     Output only. The
-        #     [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt) language tag of the
-        #     language in this result. This language code was detected to have the most
-        #     likelihood of being spoken in the audio.
+        #     The [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt) language tag
+        #     of the language in this result. This language code was detected to have
+        #     the most likelihood of being spoken in the audio.
         class SpeechRecognitionResult; end
 
         # Alternative hypotheses (a.k.a. n-best list).
         # @!attribute [rw] transcript
         #   @return [String]
-        #     Output only. Transcript text representing the words that the user spoke.
+        #     Transcript text representing the words that the user spoke.
         # @!attribute [rw] confidence
         #   @return [Float]
-        #     Output only. The confidence estimate between 0.0 and 1.0. A higher number
+        #     The confidence estimate between 0.0 and 1.0. A higher number
         #     indicates an estimated greater likelihood that the recognized words are
         #     correct. This field is set only for the top alternative of a non-streaming
         #     result or, of a streaming result where `is_final=true`.
@@ -715,7 +710,7 @@ module Google
         #     The default of 0.0 is a sentinel value indicating `confidence` was not set.
         # @!attribute [rw] words
         #   @return [Array<Google::Cloud::Speech::V1p1beta1::WordInfo>]
-        #     Output only. A list of word-specific information for each recognized word.
+        #     A list of word-specific information for each recognized word.
         #     Note: When `enable_speaker_diarization` is true, you will see all the words
         #     from the beginning of the audio.
         class SpeechRecognitionAlternative; end
@@ -723,7 +718,7 @@ module Google
         # Word-specific information for recognized words.
         # @!attribute [rw] start_time
         #   @return [Google::Protobuf::Duration]
-        #     Output only. Time offset relative to the beginning of the audio,
+        #     Time offset relative to the beginning of the audio,
         #     and corresponding to the start of the spoken word.
         #     This field is only set if `enable_word_time_offsets=true` and only
         #     in the top hypothesis.
@@ -731,7 +726,7 @@ module Google
         #     vary.
         # @!attribute [rw] end_time
         #   @return [Google::Protobuf::Duration]
-        #     Output only. Time offset relative to the beginning of the audio,
+        #     Time offset relative to the beginning of the audio,
         #     and corresponding to the end of the spoken word.
         #     This field is only set if `enable_word_time_offsets=true` and only
         #     in the top hypothesis.
@@ -739,10 +734,10 @@ module Google
         #     vary.
         # @!attribute [rw] word
         #   @return [String]
-        #     Output only. The word corresponding to this set of information.
+        #     The word corresponding to this set of information.
         # @!attribute [rw] confidence
         #   @return [Float]
-        #     Output only. The confidence estimate between 0.0 and 1.0. A higher number
+        #     The confidence estimate between 0.0 and 1.0. A higher number
         #     indicates an estimated greater likelihood that the recognized words are
         #     correct. This field is set only for the top alternative of a non-streaming
         #     result or, of a streaming result where `is_final=true`.
@@ -751,7 +746,7 @@ module Google
         #     The default of 0.0 is a sentinel value indicating `confidence` was not set.
         # @!attribute [rw] speaker_tag
         #   @return [Integer]
-        #     Output only. A distinct integer value is assigned for every speaker within
+        #     A distinct integer value is assigned for every speaker within
         #     the audio. This field specifies which one of those speakers was detected to
         #     have spoken this word. Value ranges from '1' to diarization_speaker_count.
         #     speaker_tag is set if enable_speaker_diarization = 'true' and only in the

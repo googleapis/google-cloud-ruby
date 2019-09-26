@@ -209,12 +209,12 @@ module Google
           # has been sent and processed.
           #
           # @param config [Google::Cloud::Speech::V1::RecognitionConfig | Hash]
-          #   *Required* Provides information to the recognizer that specifies how to
+          #   Required. Provides information to the recognizer that specifies how to
           #   process the request.
           #   A hash of the same form as `Google::Cloud::Speech::V1::RecognitionConfig`
           #   can also be provided.
           # @param audio [Google::Cloud::Speech::V1::RecognitionAudio | Hash]
-          #   *Required* The audio data to be recognized.
+          #   Required. The audio data to be recognized.
           #   A hash of the same form as `Google::Cloud::Speech::V1::RecognitionAudio`
           #   can also be provided.
           # @param options [Google::Gax::CallOptions]
@@ -258,14 +258,16 @@ module Google
           # google.longrunning.Operations interface. Returns either an
           # `Operation.error` or an `Operation.response` which contains
           # a `LongRunningRecognizeResponse` message.
+          # For more information on asynchronous speech recognition, see the
+          # [how-to](https://cloud.google.com/speech-to-text/docs/async-recognize).
           #
           # @param config [Google::Cloud::Speech::V1::RecognitionConfig | Hash]
-          #   *Required* Provides information to the recognizer that specifies how to
+          #   Required. Provides information to the recognizer that specifies how to
           #   process the request.
           #   A hash of the same form as `Google::Cloud::Speech::V1::RecognitionConfig`
           #   can also be provided.
           # @param audio [Google::Cloud::Speech::V1::RecognitionAudio | Hash]
-          #   *Required* The audio data to be recognized.
+          #   Required. The audio data to be recognized.
           #   A hash of the same form as `Google::Cloud::Speech::V1::RecognitionAudio`
           #   can also be provided.
           # @param options [Google::Gax::CallOptions]
