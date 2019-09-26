@@ -12,7 +12,7 @@ gem "simplecov", "~> 0.16"
 gem "codecov", "~> 0.1", require: false
 gem "yard", "~> 0.9"
 gem "yard-doctest", "~> 0.1.13"
-gem "gems", "~> 0.8"
+gem "gems", "~> 1.2.0"
 gem "actionpack", "~> 4.0"
 gem "railties", "~> 4.0"
 gem "rack", ">= 0.1"
