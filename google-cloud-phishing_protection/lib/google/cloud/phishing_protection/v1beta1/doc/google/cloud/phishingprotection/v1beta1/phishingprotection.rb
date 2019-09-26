@@ -24,7 +24,7 @@ module Google
         #     in the format "projects/\\{project_number}".
         # @!attribute [rw] uri
         #   @return [String]
-        #     The URI that is being reported for phishing content to be analyzed.
+        #     Required. The URI that is being reported for phishing content to be analyzed.
         class ReportPhishingRequest; end
 
         # The ReportPhishing (empty) response message.
