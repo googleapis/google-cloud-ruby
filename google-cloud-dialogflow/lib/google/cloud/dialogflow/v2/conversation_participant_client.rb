@@ -135,7 +135,7 @@ module Google
 
           def streaming_analyze_content reqs, options: nil
             request_protos = reqs.lazy.map do |req|
-              Google::Gax::to_proto(req, Google::Cloud::Dialogflow::V2::StreamingDetectIntentRequest)
+              Google::Gax::to_proto(req, Google::Cloud::Dialogflow::V2::StreamingAnalyzeContentRequest)
             end
             @streaming_analyze_content.call(request_protos, options)
           end
