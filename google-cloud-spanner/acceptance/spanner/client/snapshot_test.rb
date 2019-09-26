@@ -290,6 +290,111 @@ describe "Spanner Client", :snapshot, :spanner do
     end
   end
 
+  it "multiuse snapshot reads are consistent even when delete happen" do
+    keys = default_account_rows.map{|row| row[:account_id] }
+
+    db.snapshot do |snp|
+      snp.transaction_id.wont_be :nil?
+      snp.timestamp.wont_be :nil?
+
+      results = snp.read "accounts", [:account_id, :username], keys: keys
+      results.must_be_kind_of Google::Cloud::Spanner::Results
+
+      rows = results.rows.to_a
+      rows.zip(default_account_rows).each do |expected, actual|
+        expected[:account_id].must_equal actual[:account_id]
+        expected[:username].must_equal actual[:username]
+      end
+
+      # outside of the snapshot, delete rows
+      db.delete "accounts", keys
+
+      # read rows and from snaphot and verify rows got from the snapshot
+      results2 = snp.read "accounts", [:account_id, :username], keys: keys
+      results2.must_be_kind_of Google::Cloud::Spanner::Results
+      rows2 = results.rows.to_a
+      rows2.zip(default_account_rows).each do |expected, actual|
+        expected[:account_id].must_equal actual[:account_id]
+        expected[:username].must_equal actual[:username]
+      end
+    end
+
+    # outside of snapshot check all rows are deleted
+    rows3 = db.execute_sql("SELECT * FROM accounts").rows.to_a
+    rows3.count.must_equal 0
+  end
+
+  it "multiuse snapshot reads with read timestamp are consistent even when delete happen" do
+    keys = default_account_rows.map{|row| row[:account_id] }
+
+    db.snapshot read_timestamp: @setup_timestamp do |snp|
+      snp.transaction_id.wont_be :nil?
+      snp.timestamp.wont_be :nil?
+
+      results = snp.read "accounts", [:account_id, :username], keys: keys
+      results.must_be_kind_of Google::Cloud::Spanner::Results
+
+      rows = results.rows.to_a
+      rows.zip(default_account_rows).each do |expected, actual|
+        expected[:account_id].must_equal actual[:account_id]
+        expected[:username].must_equal actual[:username]
+      end
+
+      # outside of the snapshot, delete rows
+      db.delete "accounts", keys
+
+      # read rows and from snaphot and verify rows got from the snapshot
+      results2 = snp.read "accounts", [:account_id, :username], keys: keys
+      results2.must_be_kind_of Google::Cloud::Spanner::Results
+      rows2 = results.rows.to_a
+      rows2.zip(default_account_rows).each do |expected, actual|
+        expected[:account_id].must_equal actual[:account_id]
+        expected[:username].must_equal actual[:username]
+      end
+    end
+
+    # outside of snapshot check all rows are deleted
+    rows3 = db.execute_sql("SELECT * FROM accounts").rows.to_a
+    rows3.count.must_equal 0
+  end
+
+  it "multiuse snapshot reads with exact staleness are consistent even when delete happen" do
+    keys = default_account_rows.map{|row| row[:account_id] }
+
+    sleep 1
+    delta = 0.001
+
+    db.snapshot exact_staleness: delta do |snp|
+      snp.transaction_id.wont_be :nil?
+      snp.timestamp.wont_be :nil?
+
+      results = snp.read "accounts", [:account_id, :username], keys: keys
+      results.must_be_kind_of Google::Cloud::Spanner::Results
+
+      rows = results.rows.to_a
+      rows.zip(default_account_rows).each do |expected, actual|
+        expected[:account_id].must_equal actual[:account_id]
+        expected[:username].must_equal actual[:username]
+      end
+
+      # outside of the snapshot, delete rows
+      db.delete "accounts", keys
+
+      # read rows and from snaphot and verify rows got from the snapshot
+      results2 = snp.read "accounts", [:account_id, :username], keys: keys
+      results2.must_be_kind_of Google::Cloud::Spanner::Results
+      rows2 = results.rows.to_a
+      rows2.zip(default_account_rows).each do |expected, actual|
+        expected[:account_id].must_equal actual[:account_id]
+        expected[:username].must_equal actual[:username]
+      end
+    end
+
+    # outside of snapshot check all rows are deleted
+    rows3 = db.execute_sql("SELECT * FROM accounts").rows.to_a
+    rows3.count.must_equal 0
+  end
+
   def assert_accounts_equal expected, actual
     if actual[:account_id].nil?
       expected[:account_id].must_be :nil?
