@@ -163,6 +163,22 @@ module Google
         end
 
         ##
+        # Stop this publisher and block until the publisher is fully stopped,
+        # all pending messages have been published, and all callbacks have
+        # completed, or until `timeout` seconds have passed.
+        #
+        # The same as calling {#stop} and {#wait!}.
+        #
+        # @param [Number, nil] timeout The number of seconds to block until the
+        #   publisher is fully stopped. Default will block indefinitely.
+        #
+        # @return [AsyncPublisher] returns self so calls can be chained.
+        def stop! timeout = nil
+          stop
+          wait! timeout
+        end
+
+        ##
         # Forces all messages in the current batch to be published
         # immediately.
         #
