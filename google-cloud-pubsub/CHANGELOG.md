@@ -1,5 +1,13 @@
 # Release History
 
+### 0.39.3 / 2019-09-27
+
+#### Bug Fixes
+
+* Fix Subscriber#wait! behavior
+  * Fix an issue where the Subscriber#wait! would block
+    * This was introduced in the previous release, 0.39.2.
+
 ### 0.39.2 / 2019-09-17
 
 #### Bug Fixes
