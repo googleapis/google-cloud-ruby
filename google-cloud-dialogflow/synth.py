@@ -26,7 +26,7 @@ gapic = gcp.GAPICGenerator()
 
 v2_library = gapic.ruby_library(
     'dialogflow', 'v2',
-    config_path='/google/cloud/dialogflow/artman_dialogflow_v2.yaml',
+    config_path='/google/cloud/dialogflow/v2/artman_dialogflow_v2.yaml',
     artman_output_name='google-cloud-ruby/google-cloud-dialogflow'
 )
 s.copy(v2_library / 'lib')
