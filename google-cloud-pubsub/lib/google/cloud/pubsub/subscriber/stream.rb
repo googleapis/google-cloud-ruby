@@ -107,9 +107,9 @@ module Google
             synchronize { @paused }
           end
 
-          def wait!
+          def wait! timeout = nil
             # Wait for all queued callbacks to be processed.
-            @callback_thread_pool.wait_for_termination
+            @callback_thread_pool.wait_for_termination timeout
 
             self
           end

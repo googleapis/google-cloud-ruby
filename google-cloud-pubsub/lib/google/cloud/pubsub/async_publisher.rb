@@ -136,10 +136,15 @@ module Google
         end
 
         ##
-        # Blocks until the publisher is fully stopped, all pending messages
-        # have been published, and all callbacks have completed. Does not stop
-        # the publisher. To stop the publisher, first call {#stop} and then
-        # call {#wait!} to block until the publisher is stopped.
+        # Blocks until the publisher is fully stopped, all pending messages have
+        # been published, and all callbacks have completed, or until `timeout`
+        # seconds have passed.
+        #
+        # Does not stop the publisher. To stop the publisher, first call {#stop}
+        # and then call {#wait!} to block until the publisher is stopped
+        #
+        # @param [Number, nil] timeout The number of seconds to block until the
+        #   publisher is fully stopped. Default will block indefinitely.
         #
         # @return [AsyncPublisher] returns self so calls can be chained.
         def wait! timeout = nil

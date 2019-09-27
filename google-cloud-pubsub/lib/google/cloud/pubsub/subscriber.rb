@@ -149,17 +149,21 @@ module Google
 
         ##
         # Blocks until the subscriber is fully stopped and all received messages
-        # have been processed or released.
+        # have been processed or released, or until `timeout` seconds have
+        # passed.
         #
         # Does not stop the subscriber. To stop the subscriber, first call
         # {#stop} and then call {#wait!} to block until the subscriber is
         # stopped.
         #
+        # @param [Number, nil] timeout The number of seconds to block until the
+        #   subscriber is fully stopped. Default will block indefinitely.
+        #
         # @return [Subscriber] returns self so calls can be chained.
-        def wait!
+        def wait! timeout = nil
           wait_pool = synchronize do
             @stream_pool.map do |stream|
-              Thread.new { stream.wait! }
+              Thread.new { stream.wait! timeout }
             end
           end
           wait_pool.map(&:join)
