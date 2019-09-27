@@ -875,8 +875,8 @@ module Google
 
         ##
         # The {EncryptionConfiguration} object that represents the custom
-        # encryption method used to protect the table. If not set, default
-        # encryption is used.
+        # encryption method used to protect the table. If not set,
+        # {Dataset#default_encryption} is used.
         #
         # Present only if the table is using custom encryption.
         #
@@ -897,8 +897,8 @@ module Google
 
         ##
         # Set the {EncryptionConfiguration} object that represents the custom
-        # encryption method used to protect the table. If not set, default
-        # encryption is used.
+        # encryption method used to protect the table. If not set,
+        # {Dataset#default_encryption} is used.
         #
         # Present only if the table is using custom encryption.
         #

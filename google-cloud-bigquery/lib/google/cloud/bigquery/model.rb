@@ -368,8 +368,8 @@ module Google
 
         ##
         # The {EncryptionConfiguration} object that represents the custom
-        # encryption method used to protect this model. If not set, default
-        # encryption is used.
+        # encryption method used to protect this model. If not set,
+        # {Dataset#default_encryption} is used.
         #
         # Present only if this model is using custom encryption.
         #
@@ -406,8 +406,8 @@ module Google
 
         ##
         # Set the {EncryptionConfiguration} object that represents the custom
-        # encryption method used to protect this model. If not set, default
-        # encryption is used.
+        # encryption method used to protect this model. If not set,
+        # {Dataset#default_encryption} is used.
         #
         # Present only if this model is using custom encryption.
         #

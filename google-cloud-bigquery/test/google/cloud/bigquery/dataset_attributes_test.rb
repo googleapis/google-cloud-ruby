@@ -52,6 +52,18 @@ describe Google::Cloud::Bigquery::Dataset, :attributes, :mock_bigquery do
     mock.verify
   end
 
+  it "gets full data for default_encryption" do
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+    mock.expect :get_dataset, dataset_full_gapi, [project, dataset_id]
+
+    dataset.default_encryption.must_be_nil
+
+    # A second call to attribute does not make a second HTTP API call
+    dataset.default_encryption.must_be_nil
+    mock.verify
+  end
+
   def self.attr_test attr, val
     define_method "test_#{attr}" do
       mock = Minitest::Mock.new
