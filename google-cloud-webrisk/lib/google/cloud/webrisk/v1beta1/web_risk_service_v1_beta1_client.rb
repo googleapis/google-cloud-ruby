@@ -278,11 +278,11 @@ module Google
           # so the client must query this method to determine if there is a full
           # hash match of a threat.
           #
+          # @param threat_types [Array<Google::Cloud::Webrisk::V1beta1::ThreatType>]
+          #   Required. The ThreatLists to search in.
           # @param hash_prefix [String]
           #   A hash prefix, consisting of the most significant 4-32 bytes of a SHA256
           #   hash. For JSON requests, this field is base64-encoded.
-          # @param threat_types [Array<Google::Cloud::Webrisk::V1beta1::ThreatType>]
-          #   Required. The ThreatLists to search in.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -295,16 +295,19 @@ module Google
           #   require "google/cloud/webrisk"
           #
           #   web_risk_service_v1_beta1_client = Google::Cloud::Webrisk.new(version: :v1beta1)
-          #   response = web_risk_service_v1_beta1_client.search_hashes
+          #
+          #   # TODO: Initialize `threat_types`:
+          #   threat_types = []
+          #   response = web_risk_service_v1_beta1_client.search_hashes(threat_types)
 
           def search_hashes \
+              threat_types,
               hash_prefix: nil,
-              threat_types: nil,
               options: nil,
               &block
             req = {
-              hash_prefix: hash_prefix,
-              threat_types: threat_types
+              threat_types: threat_types,
+              hash_prefix: hash_prefix
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Cloud::Webrisk::V1beta1::SearchHashesRequest)
             @search_hashes.call(req, options, &block)
