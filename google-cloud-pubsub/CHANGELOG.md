@@ -6,7 +6,16 @@
 
 * Fix Subscriber#wait! behavior
   * Fix an issue where the Subscriber#wait! would block
-    * This was introduced in the previous release, 0.39.2.
+    for only 60 seconds, and not indefinitely.
+  * This was introduced in the previous release, 0.39.2.
+
+#### Configuration Changes
+
+* Update Subscriber acknowledge and modify_ack_deadline configuration
+  * The acknowledge and modify_ack_deadline RPCs have a lower size
+    limit than the other RPCs. Requests larger than 524288 bytes will
+    raise invalid argument errors.
+* Update low-level client network configuration
 
 ### 0.39.2 / 2019-09-17
 
