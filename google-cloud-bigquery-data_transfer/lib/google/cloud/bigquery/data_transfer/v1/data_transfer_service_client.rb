@@ -457,7 +457,7 @@ module Google
             # which can be used for UI rendering.
             #
             # @param name [String]
-            #   The field will contain name of the resource requested, for example:
+            #   Required. The field will contain name of the resource requested, for example:
             #   `projects/{project_id}/dataSources/{data_source_id}`
             # @param options [Google::Gax::CallOptions]
             #   Overrides the default settings for this call, e.g, timeout,
@@ -489,7 +489,7 @@ module Google
             # which can be used for UI rendering.
             #
             # @param parent [String]
-            #   The BigQuery project id for which data sources should be returned.
+            #   Required. The BigQuery project id for which data sources should be returned.
             #   Must be in the form: `projects/{project_id}`
             # @param page_size [Integer]
             #   The maximum number of resources contained in the underlying API
@@ -544,12 +544,12 @@ module Google
             # Creates a new data transfer configuration.
             #
             # @param parent [String]
-            #   The BigQuery project id where the transfer configuration should be created.
+            #   Required. The BigQuery project id where the transfer configuration should be created.
             #   Must be in the format projects/\\{project_id}/locations/\\{location_id}
             #   If specified location and location of the destination bigquery dataset
             #   do not match - the request will fail.
             # @param transfer_config [Google::Cloud::Bigquery::Datatransfer::V1::TransferConfig | Hash]
-            #   Data transfer configuration to create.
+            #   Required. Data transfer configuration to create.
             #   A hash of the same form as `Google::Cloud::Bigquery::Datatransfer::V1::TransferConfig`
             #   can also be provided.
             # @param authorization_code [String]
@@ -615,11 +615,11 @@ module Google
             # All fields must be set, even if they are not updated.
             #
             # @param transfer_config [Google::Cloud::Bigquery::Datatransfer::V1::TransferConfig | Hash]
-            #   Data transfer configuration to create.
+            #   Required. Data transfer configuration to create.
             #   A hash of the same form as `Google::Cloud::Bigquery::Datatransfer::V1::TransferConfig`
             #   can also be provided.
             # @param update_mask [Google::Protobuf::FieldMask | Hash]
-            #   Required list of fields to be updated in this request.
+            #   Required. Required list of fields to be updated in this request.
             #   A hash of the same form as `Google::Protobuf::FieldMask`
             #   can also be provided.
             # @param authorization_code [String]
@@ -687,7 +687,7 @@ module Google
             # including any associated transfer runs and logs.
             #
             # @param name [String]
-            #   The field will contain name of the resource requested, for example:
+            #   Required. The field will contain name of the resource requested, for example:
             #   `projects/{project_id}/transferConfigs/{config_id}`
             # @param options [Google::Gax::CallOptions]
             #   Overrides the default settings for this call, e.g, timeout,
@@ -718,7 +718,7 @@ module Google
             # Returns information about a data transfer config.
             #
             # @param name [String]
-            #   The field will contain name of the resource requested, for example:
+            #   Required. The field will contain name of the resource requested, for example:
             #   `projects/{project_id}/transferConfigs/{config_id}`
             # @param options [Google::Gax::CallOptions]
             #   Overrides the default settings for this call, e.g, timeout,
@@ -749,7 +749,7 @@ module Google
             # Returns information about all data transfers in the project.
             #
             # @param parent [String]
-            #   The BigQuery project id for which data sources
+            #   Required. The BigQuery project id for which data sources
             #   should be returned: `projects/{project_id}`.
             # @param data_source_ids [Array<String>]
             #   When specified, only configurations of requested data sources are returned.
@@ -812,15 +812,15 @@ module Google
             # DEPRECATED: use StartManualTransferRuns instead.
             #
             # @param parent [String]
-            #   Transfer configuration name in the form:
+            #   Required. Transfer configuration name in the form:
             #   `projects/{project_id}/transferConfigs/{config_id}`.
             # @param start_time [Google::Protobuf::Timestamp | Hash]
-            #   Start time of the range of transfer runs. For example,
+            #   Required. Start time of the range of transfer runs. For example,
             #   `"2017-05-25T00:00:00+00:00"`.
             #   A hash of the same form as `Google::Protobuf::Timestamp`
             #   can also be provided.
             # @param end_time [Google::Protobuf::Timestamp | Hash]
-            #   End time of the range of transfer runs. For example,
+            #   Required. End time of the range of transfer runs. For example,
             #   `"2017-05-30T00:00:00+00:00"`.
             #   A hash of the same form as `Google::Protobuf::Timestamp`
             #   can also be provided.
@@ -863,7 +863,7 @@ module Google
             # Returns information about the particular transfer run.
             #
             # @param name [String]
-            #   The field will contain name of the resource requested, for example:
+            #   Required. The field will contain name of the resource requested, for example:
             #   `projects/{project_id}/transferConfigs/{config_id}/runs/{run_id}`
             # @param options [Google::Gax::CallOptions]
             #   Overrides the default settings for this call, e.g, timeout,
@@ -894,7 +894,7 @@ module Google
             # Deletes the specified transfer run.
             #
             # @param name [String]
-            #   The field will contain name of the resource requested, for example:
+            #   Required. The field will contain name of the resource requested, for example:
             #   `projects/{project_id}/transferConfigs/{config_id}/runs/{run_id}`
             # @param options [Google::Gax::CallOptions]
             #   Overrides the default settings for this call, e.g, timeout,
@@ -925,7 +925,7 @@ module Google
             # Returns information about running and completed jobs.
             #
             # @param parent [String]
-            #   Name of transfer configuration for which transfer runs should be retrieved.
+            #   Required. Name of transfer configuration for which transfer runs should be retrieved.
             #   Format of transfer configuration resource name is:
             #   `projects/{project_id}/transferConfigs/{config_id}`.
             # @param states [Array<Google::Cloud::Bigquery::Datatransfer::V1::TransferState>]
@@ -989,7 +989,7 @@ module Google
             # Returns user facing log messages for the data transfer run.
             #
             # @param parent [String]
-            #   Transfer run name in the form:
+            #   Required. Transfer run name in the form:
             #   `projects/{project_id}/transferConfigs/{config_Id}/runs/{run_id}`.
             # @param page_size [Integer]
             #   The maximum number of resources contained in the underlying API
@@ -1054,7 +1054,7 @@ module Google
             # create a transfer config.
             #
             # @param name [String]
-            #   The data source in the form:
+            #   Required. The data source in the form:
             #   `projects/{project_id}/dataSources/{data_source_id}`
             # @param options [Google::Gax::CallOptions]
             #   Overrides the default settings for this call, e.g, timeout,

@@ -206,14 +206,14 @@ module Google
           # A request to get data source info.
           # @!attribute [rw] name
           #   @return [String]
-          #     The field will contain name of the resource requested, for example:
+          #     Required. The field will contain name of the resource requested, for example:
           #     `projects/{project_id}/dataSources/{data_source_id}`
           class GetDataSourceRequest; end
 
           # Request to list supported data sources and their data transfer settings.
           # @!attribute [rw] parent
           #   @return [String]
-          #     The BigQuery project id for which data sources should be returned.
+          #     Required. The BigQuery project id for which data sources should be returned.
           #     Must be in the form: `projects/{project_id}`
           # @!attribute [rw] page_token
           #   @return [String]
@@ -247,13 +247,13 @@ module Google
           # with the calling user.
           # @!attribute [rw] parent
           #   @return [String]
-          #     The BigQuery project id where the transfer configuration should be created.
+          #     Required. The BigQuery project id where the transfer configuration should be created.
           #     Must be in the format projects/\\{project_id}/locations/\\{location_id}
           #     If specified location and location of the destination bigquery dataset
           #     do not match - the request will fail.
           # @!attribute [rw] transfer_config
           #   @return [Google::Cloud::Bigquery::Datatransfer::V1::TransferConfig]
-          #     Data transfer configuration to create.
+          #     Required. Data transfer configuration to create.
           # @!attribute [rw] authorization_code
           #   @return [String]
           #     Optional OAuth2 authorization code to use with this transfer configuration.
@@ -286,7 +286,7 @@ module Google
           # transfer configuration, an authorization code needs to be provided.
           # @!attribute [rw] transfer_config
           #   @return [Google::Cloud::Bigquery::Datatransfer::V1::TransferConfig]
-          #     Data transfer configuration to create.
+          #     Required. Data transfer configuration to create.
           # @!attribute [rw] authorization_code
           #   @return [String]
           #     Optional OAuth2 authorization code to use with this transfer configuration.
@@ -307,7 +307,7 @@ module Google
           #       the user to copy the code and paste it in the application.
           # @!attribute [rw] update_mask
           #   @return [Google::Protobuf::FieldMask]
-          #     Required list of fields to be updated in this request.
+          #     Required. Required list of fields to be updated in this request.
           # @!attribute [rw] version_info
           #   @return [String]
           #     Optional version info. If users want to find a very recent access token,
@@ -321,7 +321,7 @@ module Google
           # A request to get data transfer information.
           # @!attribute [rw] name
           #   @return [String]
-          #     The field will contain name of the resource requested, for example:
+          #     Required. The field will contain name of the resource requested, for example:
           #     `projects/{project_id}/transferConfigs/{config_id}`
           class GetTransferConfigRequest; end
 
@@ -329,28 +329,28 @@ module Google
           # and log messages will be deleted as well.
           # @!attribute [rw] name
           #   @return [String]
-          #     The field will contain name of the resource requested, for example:
+          #     Required. The field will contain name of the resource requested, for example:
           #     `projects/{project_id}/transferConfigs/{config_id}`
           class DeleteTransferConfigRequest; end
 
           # A request to get data transfer run information.
           # @!attribute [rw] name
           #   @return [String]
-          #     The field will contain name of the resource requested, for example:
+          #     Required. The field will contain name of the resource requested, for example:
           #     `projects/{project_id}/transferConfigs/{config_id}/runs/{run_id}`
           class GetTransferRunRequest; end
 
           # A request to delete data transfer run information.
           # @!attribute [rw] name
           #   @return [String]
-          #     The field will contain name of the resource requested, for example:
+          #     Required. The field will contain name of the resource requested, for example:
           #     `projects/{project_id}/transferConfigs/{config_id}/runs/{run_id}`
           class DeleteTransferRunRequest; end
 
           # A request to list data transfers configured for a BigQuery project.
           # @!attribute [rw] parent
           #   @return [String]
-          #     The BigQuery project id for which data sources
+          #     Required. The BigQuery project id for which data sources
           #     should be returned: `projects/{project_id}`.
           # @!attribute [rw] data_source_ids
           #   @return [Array<String>]
@@ -384,7 +384,7 @@ module Google
           # all scheduled transfer runs.
           # @!attribute [rw] parent
           #   @return [String]
-          #     Name of transfer configuration for which transfer runs should be retrieved.
+          #     Required. Name of transfer configuration for which transfer runs should be retrieved.
           #     Format of transfer configuration resource name is:
           #     `projects/{project_id}/transferConfigs/{config_id}`.
           # @!attribute [rw] states
@@ -429,7 +429,7 @@ module Google
           # A request to get user facing log messages associated with data transfer run.
           # @!attribute [rw] parent
           #   @return [String]
-          #     Transfer run name in the form:
+          #     Required. Transfer run name in the form:
           #     `projects/{project_id}/transferConfigs/{config_Id}/runs/{run_id}`.
           # @!attribute [rw] page_token
           #   @return [String]
@@ -467,7 +467,7 @@ module Google
           # already valid merely based on the user id.
           # @!attribute [rw] name
           #   @return [String]
-          #     The data source in the form:
+          #     Required. The data source in the form:
           #     `projects/{project_id}/dataSources/{data_source_id}`
           class CheckValidCredsRequest; end
 
@@ -480,15 +480,15 @@ module Google
           # A request to schedule transfer runs for a time range.
           # @!attribute [rw] parent
           #   @return [String]
-          #     Transfer configuration name in the form:
+          #     Required. Transfer configuration name in the form:
           #     `projects/{project_id}/transferConfigs/{config_id}`.
           # @!attribute [rw] start_time
           #   @return [Google::Protobuf::Timestamp]
-          #     Start time of the range of transfer runs. For example,
+          #     Required. Start time of the range of transfer runs. For example,
           #     `"2017-05-25T00:00:00+00:00"`.
           # @!attribute [rw] end_time
           #   @return [Google::Protobuf::Timestamp]
-          #     End time of the range of transfer runs. For example,
+          #     Required. End time of the range of transfer runs. For example,
           #     `"2017-05-30T00:00:00+00:00"`.
           class ScheduleTransferRunsRequest; end
 

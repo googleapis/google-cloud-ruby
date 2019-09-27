@@ -25,8 +25,8 @@ module Google
         # # Ruby Client for BigQuery Data Transfer API ([Beta](https://github.com/googleapis/google-cloud-ruby#versioning))
         #
         # [BigQuery Data Transfer API][Product Documentation]:
-        # Transfers data from partner SaaS applications to Google BigQuery on a
-        # scheduled, managed basis.
+        # Schedule queries or transfer external data from SaaS applications to Google
+        # BigQuery on a regular basis.
         # - [Product Documentation][]
         #
         # ## Quick Start
