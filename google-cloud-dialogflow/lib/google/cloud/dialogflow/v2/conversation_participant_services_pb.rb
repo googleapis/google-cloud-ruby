@@ -1,5 +1,5 @@
 require 'grpc'
-require 'google/cloud/dialogflow/v2/entity_type_pb'
+require 'google/cloud/dialogflow/v2/conversation_participant_pb'
 
 module Google
   module Cloud

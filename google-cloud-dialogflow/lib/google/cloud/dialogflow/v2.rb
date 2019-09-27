@@ -24,8 +24,8 @@ require "google/cloud/dialogflow/v2/entity_type_pb"
 require "google/cloud/dialogflow/v2/intent_pb"
 require "google/cloud/dialogflow/v2/webhook_pb"
 
-require "google/cloud/dialogflow/v2/conversation_prarticipant_pb"
-require "google/cloud/dialogflow/v2/conversation_prarticipants_client"
+require "google/cloud/dialogflow/v2/conversation_participant_pb"
+require "google/cloud/dialogflow/v2/conversation_participants_client"
 
 
 module Google
@@ -90,8 +90,6 @@ module Google
       # ```
       #
       module V2
-        # rubocop:enable LineLength
-
         module Agents
           ##
           # Agents are best described as Natural Language Understanding (NLU) modules
@@ -558,7 +556,7 @@ module Google
           end
         end
 
-        def ConversationParticipants
+        module ConversationParticipants
           def self.new \
               credentials: nil,
               scopes: nil,
@@ -582,7 +580,7 @@ module Google
               service_port: service_port,
               lib_version: lib_version
             }.select { |_, v| v != nil }
-            Google::Cloud::Dialogflow::V2::SessionsClient.new(**kwargs)
+            Google::Cloud::Dialogflow::V2::ConversationParticipantsClient.new(**kwargs)
           end
         end
       end
