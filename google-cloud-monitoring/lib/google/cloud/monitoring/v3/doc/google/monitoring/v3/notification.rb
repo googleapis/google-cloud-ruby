@@ -58,9 +58,7 @@ module Google
       # @!attribute [rw] type
       #   @return [String]
       #     The type of the notification channel. This field matches the
-      #     value of the
-      #     {Google::Monitoring::V3::NotificationChannelDescriptor#type NotificationChannelDescriptor#type}
-      #     field.
+      #     value of the {Google::Monitoring::V3::NotificationChannelDescriptor#type NotificationChannelDescriptor#type} field.
       # @!attribute [rw] name
       #   @return [String]
       #     The full REST resource name for this channel. The syntax is:
@@ -78,13 +76,13 @@ module Google
       #   @return [String]
       #     An optional human-readable description of this notification channel. This
       #     description may provide additional details, beyond the display
-      #     name, for the channel. This may not exceeed 1024 Unicode characters.
+      #     name, for the channel. This may not exceed 1024 Unicode characters.
       # @!attribute [rw] labels
       #   @return [Hash{String => String}]
       #     Configuration fields that define the channel and its behavior. The
       #     permissible and required labels are specified in the
-      #     {Google::Monitoring::V3::NotificationChannelDescriptor#labels NotificationChannelDescriptor#labels}
-      #     of the `NotificationChannelDescriptor` corresponding to the `type` field.
+      #     {Google::Monitoring::V3::NotificationChannelDescriptor#labels NotificationChannelDescriptor#labels} of the
+      #     `NotificationChannelDescriptor` corresponding to the `type` field.
       # @!attribute [rw] user_labels
       #   @return [Hash{String => String}]
       #     User-supplied key/value data that does not need to conform to
