@@ -24,6 +24,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :payload, :message, 4, "google.protobuf.Struct"
     repeated :output_contexts, :message, 5, "google.cloud.dialogflow.v2.Context"
     optional :followup_event_input, :message, 6, "google.cloud.dialogflow.v2.EventInput"
+    repeated :session_entity_types, :message, 10, "google.cloud.dialogflow.v2.SessionEntityType"
   end
   add_message "google.cloud.dialogflow.v2.OriginalDetectIntentRequest" do
     optional :source, :string, 1
