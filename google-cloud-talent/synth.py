@@ -83,10 +83,13 @@ s.replace(
     'port = self\\.class::DEFAULT_SERVICE_PORT',
     'port = service_port || self.class::DEFAULT_SERVICE_PORT'
 )
+
+# https://github.com/googleapis/gapic-generator/issues/2180
 s.replace(
     'google-cloud-talent.gemspec',
-    '\n  gem\\.add_dependency "google-gax", "~> 1\\.[\\d\\.]+"\n',
-    '\n  gem.add_dependency "google-gax", "~> 1.7"\n')
+    '\n  gem\\.add_dependency "google-gax", "~> 1\\.[\\d\\.]+"\n\n',
+    '\n  gem.add_dependency "google-gax", "~> 1.7"\n  gem.add_dependency "googleapis-common-protos", ">= 1.3.9", "< 2.0"\n\n'
+)
 
 # https://github.com/googleapis/gapic-generator/issues/2243
 s.replace(
