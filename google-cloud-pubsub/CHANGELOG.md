@@ -2,8 +2,6 @@
 
 ### 1.0.0 / 2019-09-30
 
-### 1.0.0 / 2019-09-30
-
  #### Features
 
  * Allow wait to block for specified time
