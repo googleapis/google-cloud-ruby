@@ -1,5 +1,12 @@
 # Release History
 
+### 1.21.1 / 2019-09-30
+
+#### Documentation
+
+* update storage class examples in docs and tests
+  * Replace MULTI_REGIONAL and REGIONAL with STANDARD and NEARLINE.
+
 ### 1.21.0 / 2019-08-16
 
 #### Features
