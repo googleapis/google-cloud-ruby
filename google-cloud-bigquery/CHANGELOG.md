@@ -1,5 +1,19 @@
 # Release History
 
+### 1.15.0 / 2019-09-30
+
+#### Features
+
+* Add Model encryption
+  * Add Model#encryption
+  * Add Model#encryption=
+* Add range support for Google Sheets
+  * Add External::SheetsSource#range
+  * Add External::SheetsSource#range=
+* Support use_avro_logical_types on extract jobs
+  * Add ExtractJob#use_avro_logical_types?
+  * Add ExtractJob::Updater#use_avro_logical_types=
+
 ### 1.14.1 / 2019-09-04
 
 #### Documentation
