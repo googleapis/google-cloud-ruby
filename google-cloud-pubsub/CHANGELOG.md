@@ -2,11 +2,11 @@
 
 ### 1.0.0 / 2019-09-30
 
- #### Features
+#### Features
 
- * Allow wait to block for specified time
-   * Add timeout argument to Subscriber#wait! method.
-   * Document timeout argument on AsyncPublisher#wait! method.
+* Allow wait to block for specified time
+  * Add timeout argument to Subscriber#wait! method.
+  * Document timeout argument on AsyncPublisher#wait! method.
 * Add stop! convenience method, calling both stop and wait
   * Add Subscriber#stop! method.
   * Add AsyncPublisher#stop! method.
