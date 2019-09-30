@@ -18,6 +18,7 @@ Availability (GA)](#versioning) quality level:
 * [Cloud Firestore](#cloud-firestore-ga) (GA)
 * [Cloud Key Management Service](#cloud-key-management-service-ga) (GA)
 * [Stackdriver Logging](#stackdriver-logging-ga) (GA)
+* [Cloud Pub/Sub](#cloud-pubsub-ga) (GA)
 * [Cloud Spanner API](#cloud-spanner-api-ga) (GA)
 * [Cloud Storage](#cloud-storage-ga) (GA)
 * [Cloud Translation API](#cloud-translation-api-ga) (GA)
@@ -31,7 +32,6 @@ This client supports the following Google Cloud Platform services at a
 * [Cloud Bigtable](#cloud-bigtable-beta) (Beta)
 * [Stackdriver Debugger](#stackdriver-debugger-beta) (Beta)
 * [Stackdriver Error Reporting](#stackdriver-error-reporting-beta) (Beta)
-* [Cloud Pub/Sub](#cloud-pubsub-beta) (Beta)
 * [Stackdriver Monitoring API](#stackdriver-monitoring-api-beta) (Beta)
 * [Stackdriver Trace](#stackdriver-trace-beta) (Beta)
 
@@ -642,7 +642,7 @@ $ gem install google-cloud-os_login
 $ gem install google-cloud-phishing_protection
 ```
 
-### Cloud Pub/Sub (Beta)
+### Cloud Pub/Sub (GA)
 
 - [google-cloud-pubsub README](google-cloud-pubsub/README.md)
 - [google-cloud-pubsub API documentation](https://googleapis.dev/ruby/google-cloud-pubsub/latest)

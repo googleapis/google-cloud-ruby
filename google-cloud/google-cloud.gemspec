@@ -37,7 +37,7 @@ Gem::Specification.new do |gem|
   gem.add_dependency "google-cloud-monitoring", "~> 0.28"
   gem.add_dependency "google-cloud-os_login", "~> 0.1"
   gem.add_dependency "google-cloud-phishing_protection", "~> 0.1"
-  gem.add_dependency "google-cloud-pubsub", "~> 0.30"
+  gem.add_dependency "google-cloud-pubsub", "~> 1.0"
   gem.add_dependency "google-cloud-recaptcha_enterprise", "~> 0.1"
   gem.add_dependency "google-cloud-redis", "~> 0.2"
   gem.add_dependency "google-cloud-resource_manager", "~> 0.29"
