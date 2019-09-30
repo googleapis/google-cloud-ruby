@@ -269,6 +269,9 @@ module Google
         # @!attribute [rw] image_object_detection_model_deployment_metadata
         #   @return [Google::Cloud::AutoML::V1beta1::ImageObjectDetectionModelDeploymentMetadata]
         #     Model deployment metadata specific to Image Object Detection.
+        # @!attribute [rw] image_classification_model_deployment_metadata
+        #   @return [Google::Cloud::AutoML::V1beta1::ImageClassificationModelDeploymentMetadata]
+        #     Model deployment metadata specific to Image Classification.
         # @!attribute [rw] name
         #   @return [String]
         #     Resource name of the model to deploy.
