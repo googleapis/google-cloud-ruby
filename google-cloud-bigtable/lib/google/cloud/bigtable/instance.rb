@@ -647,7 +647,7 @@ module Google
         #
         #   app_profile = instance.create_app_profile(
         #     "my-app-profile",
-        #     routing_policy: routing_policy,
+        #     routing_policy,
         #     description: "App profile for user data instance"
         #   )
         #   puts app_profile.name

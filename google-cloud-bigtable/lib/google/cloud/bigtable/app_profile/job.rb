@@ -81,11 +81,6 @@ module Google
           #
           #   job = app_profile.save
           #
-          #   job.done? #=> false
-          #   job.reload!
-          #   job.done? #=> true
-          #
-          #   # OR
           #   job.wait_until_done!
           #
           #   app_profile = job.app_profile

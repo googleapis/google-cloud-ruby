@@ -61,6 +61,7 @@ YARD::Doctest.configure do |doctest|
 
   # Skip all aliases, since tests would be exact duplicates
   doctest.skip "Google::Cloud::Bigtable::AppProfile#update"
+  doctest.skip "Google::Cloud::Bigtable::Cluster#update"
   doctest.skip "Google::Cloud::Bigtable::ColumnFamily#update"
   doctest.skip "Google::Cloud::Bigtable::Instance#update"
   doctest.skip "Google::Cloud::Bigtable::Instance#policy="
@@ -78,6 +79,7 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud::Bigtable" do
     mock_bigtable do |mock, mocked_instances, mocked_tables|
+      mocked_instances.expect :get_instance, instance_resp, ["projects/my-project/instances/my-instance"]
     end
   end
 
@@ -134,61 +136,170 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
-  # Google::Cloud::Bigtable::AppProfile#routing_policy=
-  # Google::Cloud::Bigtable::AppProfile#routing_policy=
-  # Google::Cloud::Bigtable::AppProfile#delete
-  # Google::Cloud::Bigtable::AppProfile.multi_cluster_routing
-  # Google::Cloud::Bigtable::AppProfile.single_cluster_routing
-  # Google::Cloud::Bigtable::AppProfile::Job
-  # Google::Cloud::Bigtable::AppProfile::Job#app_profile
-  # Google::Cloud::Bigtable::AppProfile::List#next?
-  # Google::Cloud::Bigtable::AppProfile::List#next
-  # Google::Cloud::Bigtable::AppProfile::List#all
-  # Google::Cloud::Bigtable::AppProfile::List#all
-  # Google::Cloud::Bigtable::Cluster
-  # Google::Cloud::Bigtable::Cluster::Job
-  # Google::Cloud::Bigtable::Cluster::Job#cluster
-  # Google::Cloud::Bigtable::Cluster::List#next?
-  # Google::Cloud::Bigtable::Cluster::List#next
-  # Google::Cloud::Bigtable::Cluster::List#all
-  # Google::Cloud::Bigtable::Cluster::List#all
-  # Google::Cloud::Bigtable::Cluster#save
-  # Google::Cloud::Bigtable::Cluster#update
-  # Google::Cloud::Bigtable::Cluster#delete
-  # Google::Cloud::Bigtable::ColumnFamily
-  # Google::Cloud::Bigtable::ColumnFamily#create
-  # Google::Cloud::Bigtable::ColumnFamily#save
-  # Google::Cloud::Bigtable::ColumnFamily#delete
-  # Google::Cloud::Bigtable::ColumnFamily.create_modification
-  # Google::Cloud::Bigtable::ColumnFamily.update_modification
-  # Google::Cloud::Bigtable::ColumnFamily.drop_modification
-  # Google::Cloud::Bigtable::ColumnRange
-  # Google::Cloud::Bigtable::ColumnRange#from
-  # Google::Cloud::Bigtable::ColumnRange#from
-  # Google::Cloud::Bigtable::ColumnRange#to
-  # Google::Cloud::Bigtable::ColumnRange#to
-  # Google::Cloud::Bigtable::ColumnRange#between
-  # Google::Cloud::Bigtable::ColumnRange#of
-  # Google::Cloud::Bigtable::GcRule
-  # Google::Cloud::Bigtable::GcRule
-  # Google::Cloud::Bigtable::GcRule
-  # Google::Cloud::Bigtable::GcRule
+  doctest.before "Google::Cloud::Bigtable::AppProfile::Job" do
+    mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
+      mocked_instances.expect :get_instance, instance_resp, ["projects/my-project/instances/my-instance"]
+      mocked_instances.expect :get_app_profile, app_profile_resp, ["projects/my-project/instances/my-instance/appProfiles/my-app-profile"]
+      mocked_instances.expect :update_app_profile, mocked_job, [Google::Bigtable::Admin::V2::AppProfile, Google::Protobuf::FieldMask, Hash]
+      mocked_job.expect :done?, false, []
+      mocked_job.expect :reload!, nil, []
+      mocked_job.expect :done?, true, []
+      mocked_job.expect :wait_until_done!, nil, []
+      mocked_job.expect :error?, true, []
+      mocked_job.expect :error?, true, []
+      mocked_job.expect :error, nil, []
+    end
+  end
+
+  doctest.before "Google::Cloud::Bigtable::AppProfile::List" do
+    mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
+      mocked_instances.expect :get_instance, instance_resp, ["projects/my-project/instances/my-instance"]
+      mocked_instances.expect :list_app_profiles, app_profiles_resp, ["projects/my-project/instances/my-instance"]
+      mocked_instances.expect :list_app_profiles, app_profiles_resp, ["projects/my-project/instances/my-instance"]
+    end
+  end
+
+  doctest.before "Google::Cloud::Bigtable::Cluster" do
+    mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
+      mocked_instances.expect :get_instance, instance_resp, ["projects/my-project/instances/my-instance"]
+      mocked_instances.expect :get_cluster, cluster_resp, ["projects/my-project/instances/my-instance/clusters/my-cluster"]
+      mocked_instances.expect :update_cluster, mocked_job, ["projects/my-project/instances/my-instance/clusters/my-cluster", "projects/my-project/locations/us-east-1b", 3]
+      mocked_instances.expect :delete_cluster, true, ["projects/my-project/instances/my-instance/clusters/my-cluster"]
+    end
+  end
+
+  doctest.before "Google::Cloud::Bigtable::Cluster#save" do
+    mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
+      mocked_instances.expect :get_instance, instance_resp, ["projects/my-project/instances/my-instance"]
+      mocked_instances.expect :get_cluster, cluster_resp, ["projects/my-project/instances/my-instance/clusters/my-cluster"]
+      mocked_instances.expect :update_cluster, mocked_job, ["projects/my-project/instances/my-instance/clusters/my-cluster", "projects/my-project/locations/us-east-1b", 3]
+      mocked_job.expect :done?, false, []
+      mocked_job.expect :wait_until_done!, nil, []
+      mocked_job.expect :done?, true, []
+      mocked_job.expect :error?, true, []
+      mocked_job.expect :error?, true, []
+      mocked_job.expect :error, nil, []
+    end
+  end
+
+  doctest.before "Google::Cloud::Bigtable::Cluster::Job" do
+    mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
+      mocked_instances.expect :get_instance, instance_resp, ["projects/my-project/instances/my-instance"]
+      mocked_instances.expect :create_cluster, mocked_job,  ["projects/my-project/instances/my-instance", "my-new-cluster", Google::Bigtable::Admin::V2::Cluster]
+      mocked_job.expect :done?, false, []
+      mocked_job.expect :reload!, nil, []
+      mocked_job.expect :done?, true, []
+      mocked_job.expect :wait_until_done!, nil, []
+      mocked_job.expect :error?, true, []
+      mocked_job.expect :error?, true, []
+      mocked_job.expect :error, nil, []
+    end
+  end
+
+  doctest.before "Google::Cloud::Bigtable::Cluster::List" do
+    mock_bigtable do |mock, mocked_instances, mocked_tables|
+      mocked_instances.expect :get_instance, instance_resp, ["projects/my-project/instances/my-instance"]
+      mocked_instances.expect :get_cluster, cluster_resp, ["projects/my-project/instances/my-instance/clusters/my-cluster"]
+      mocked_instances.expect :list_clusters, clusters_resp, ["projects/my-project/instances/-", Hash]
+    end
+  end
+
+  doctest.before "Google::Cloud::Bigtable::ColumnFamily" do
+    mock_bigtable do |mock, mocked_instances, mocked_tables|
+      mocked_instances.expect :get_instance, instance_resp, ["projects/my-project/instances/my-instance"]
+      mocked_tables.expect :get_table, table_resp, ["projects/my-project/instances/my-instance/tables/my-table", { view: :SCHEMA_VIEW }]
+      mocked_tables.expect :modify_column_families, table_resp, ["projects/my-project/instances/my-instance/tables/my-table", Array]
+    end
+  end
+
+  doctest.before "Google::Cloud::Bigtable::Instance" do
+    mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
+      mocked_instances.expect :create_instance, mocked_job, ["projects/my-project", "my-instance", Google::Bigtable::Admin::V2::Instance, Hash]
+      mocked_job.expect :done?, false, []
+      mocked_job.expect :wait_until_done!, nil, []
+      mocked_job.expect :done?, true, []
+      mocked_job.expect :error?, true, []
+      mocked_job.expect :error?, false, []
+    end
+  end
+
+  doctest.before "Google::Cloud::Bigtable::Instance#" do
+    mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
+      mocked_instances.expect :get_instance, instance_resp, ["projects/my-project/instances/my-instance"]
+    end
+  end
+
+  doctest.before "Google::Cloud::Bigtable::Instance#app_profile" do
+    mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
+      mocked_instances.expect :get_instance, instance_resp, ["projects/my-project/instances/my-instance"]
+      mocked_instances.expect :get_app_profile, app_profile_resp, ["projects/my-project/instances/my-instance/appProfiles/my-app-profile"]
+    end
+  end
+
+  doctest.before "Google::Cloud::Bigtable::Instance#app_profiles" do
+    mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
+      mocked_instances.expect :get_instance, instance_resp, ["projects/my-project/instances/my-instance"]
+      mocked_instances.expect :list_app_profiles, app_profiles_resp, ["projects/my-project/instances/my-instance"]
+    end
+  end
+
+  doctest.before "Google::Cloud::Bigtable::Instance#cluster" do
+    mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
+      mocked_instances.expect :get_instance, instance_resp, ["projects/my-project/instances/my-instance"]
+      mocked_instances.expect :get_cluster, cluster_resp, ["projects/my-project/instances/my-instance/clusters/my-instance-cluster"]
+    end
+  end
+
+  doctest.before "Google::Cloud::Bigtable::Instance#clusters" do
+    mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
+      mocked_instances.expect :get_instance, instance_resp, ["projects/my-project/instances/my-instance"]
+      mocked_instances.expect :list_clusters, clusters_resp, ["projects/my-project/instances/my-instance", Hash]
+    end
+  end
+
+  doctest.before "Google::Cloud::Bigtable::Instance#create_app_profile" do
+    mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
+      mocked_instances.expect :get_instance, instance_resp, ["projects/my-project/instances/my-instance"]
+      mocked_instances.expect :create_app_profile, app_profile_resp, ["projects/my-project/instances/my-instance", "my-app-profile", app_profile_create, Hash]
+    end
+  end
+
+  doctest.before "Google::Cloud::Bigtable::Instance#create_app_profile@Create an app profile with a single cluster routing policy" do
+    mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
+      mocked_instances.expect :get_instance, instance_resp, ["projects/my-project/instances/my-instance"]
+      mocked_instances.expect :create_app_profile, app_profile_resp, ["projects/my-project/instances/my-instance", "my-app-profile", app_profile_create(true), Hash]
+    end
+  end
+
+  doctest.before "Google::Cloud::Bigtable::Instance#create_cluster" do
+    mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
+      mocked_instances.expect :get_instance, instance_resp, ["projects/my-project/instances/my-instance"]
+      mocked_instances.expect :create_cluster, cluster_resp, ["projects/my-project/instances/my-instance/clusters/my-instance-cluster"]
+    end
+  end
+
+  doctest.before "Google::Cloud::Bigtable::Instance#save" do
+    mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
+      mocked_instances.expect :get_instance, instance_resp, ["projects/my-project/instances/my-instance"]
+      mocked_instances.expect :partial_update_instance, mocked_job, [Google::Bigtable::Admin::V2::Instance, Google::Protobuf::FieldMask]
+      mocked_job.expect :done?, false, []
+      mocked_job.expect :wait_until_done!, nil, []
+      mocked_job.expect :done?, true, []
+      mocked_job.expect :error?, true, []
+      mocked_job.expect :error?, false, []
+    end
+  end
+
+
+
   # Google::Cloud::Bigtable::Instance
-  # Google::Cloud::Bigtable::Instance#save
   # Google::Cloud::Bigtable::Instance#delete
-  # Google::Cloud::Bigtable::Instance#clusters
-  # Google::Cloud::Bigtable::Instance#cluster
   # Google::Cloud::Bigtable::Instance#create_cluster
   # Google::Cloud::Bigtable::Instance#tables
   # Google::Cloud::Bigtable::Instance#table
   # Google::Cloud::Bigtable::Instance#table
   # Google::Cloud::Bigtable::Instance#create_table
   # Google::Cloud::Bigtable::Instance#create_table
-  # Google::Cloud::Bigtable::Instance#create_app_profile
-  # Google::Cloud::Bigtable::Instance#create_app_profile
-  # Google::Cloud::Bigtable::Instance#create_app_profile
-  # Google::Cloud::Bigtable::Instance#app_profile
-  # Google::Cloud::Bigtable::Instance#app_profiles
   # Google::Cloud::Bigtable::Instance#policy
   # Google::Cloud::Bigtable::Instance#policy
   # Google::Cloud::Bigtable::Instance#update_policy
@@ -439,6 +550,102 @@ def app_profile_path instance_id, app_profile_id
   )
 end
 
+def app_profile_create single_cluster_routing = false
+  if single_cluster_routing
+    Google::Bigtable::Admin::V2::AppProfile.new(
+      description: "App profile for user data instance",
+      single_cluster_routing: Google::Bigtable::Admin::V2::AppProfile::SingleClusterRouting.new(
+        cluster_id: "my-instance-cluster-1",
+        allow_transactional_writes: true
+      )
+    )
+  else
+    Google::Bigtable::Admin::V2::AppProfile.new(
+      description: "App profile for user data instance",
+      multi_cluster_routing_use_any: Google::Bigtable::Admin::V2::AppProfile::MultiClusterRoutingUseAny.new
+    )
+ end
+end
+
+def app_profile_resp name = "my-app-profile"
+  Google::Bigtable::Admin::V2::AppProfile.new(
+    name: "projects/my-project/instances/my-instance/appProfiles/#{name}"
+  )
+end
+
+def app_profiles_resp count = 2
+  arr = Array.new(count) do |i|
+    app_profile_resp "my-app-profile-#{i}"
+  end
+  response_struct(
+    OpenStruct.new app_profiles: arr
+  )
+end
+
+def cluster_hash name: nil, nodes: nil, location: nil, storage_type: nil, state: nil
+  {
+    name: name,
+    serve_nodes: nodes,
+    location: location ? location_path(location) : nil,
+    default_storage_type: storage_type,
+    state: state
+  }.delete_if { |_, v| v.nil? }
+end
+
+def clusters_hash num: 3, start_id: 1
+  clusters = num.times.map do |i|
+    cluster_hash(
+      name: "instance-#{start_id + i}",
+      nodes: 3,
+      location: "us-east-1b",
+      storage_type: :SSD,
+      state: :READY
+    )
+  end
+
+  { clusters: clusters }
+end
+
+def cluster_resp
+  Google::Bigtable::Admin::V2::Cluster.new(
+    cluster_hash(
+      name: cluster_path("my-instance", "my-cluster"),
+      nodes: 3,
+      location: "us-east-1b",
+      storage_type: :SSD,
+      state: :READY
+    )
+  )
+end
+
+def clusters_resp
+  Google::Bigtable::Admin::V2::ListClustersResponse.new(clusters_hash)
+end
+
+def column_family_hash(max_versions: nil, max_age: nil, intersection: nil, union: nil)
+  gc_rule = {
+    max_num_versions: max_versions,
+    max_age: max_age ? { seconds: max_age} : nil,
+    intersection: intersection ?  { rules: intersection } : nil,
+    union: union ? { rules: union } : nil
+  }.delete_if { |_, v| v.nil? }
+
+  { gc_rule: gc_rule }
+end
+
+def column_families_hash num: 3, start_id: 1
+  num.times.each_with_object({}) do |i, r|
+    r["cf"] = column_family_hash(max_versions: 3)
+  end
+end
+
+def column_families_grpc num: 3, start_id: 1
+  column_families_hash(num: num, start_id: start_id)
+    .each_with_object({}) do |(k,v), r|
+    r[k] = Google::Bigtable::Admin::V2::ColumnFamily.new(v)
+  end
+end
+
 def instance_hash name: nil, display_name: nil, state: nil, type: nil, labels: {}
   {
     name: name && instance_path(name),
@@ -480,12 +687,6 @@ def instances_resp token: nil
   #paged_enum_struct response
 end
 
-def app_profile_resp
-  Google::Bigtable::Admin::V2::AppProfile.new(
-    name: "projects/my-project/instances/my-instance/appProfiles/my-app-profile"
-  )
-end
-
 def job_grpc done: false
   Google::Longrunning::Operation.new(
     name: nil,
@@ -501,11 +702,48 @@ def job_grpc done: false
   )
 end
 
-def app_profile_update_job_resp mock, done: false
-  Google::Gax::Operation.new(
-    job_grpc(done: done),
-    mock,
-    Google::Bigtable::Admin::V2::AppProfile,
-    Google::Bigtable::Admin::V2::UpdateAppProfileMetadata
+def table_hash name: nil, cluster_states: nil, column_families: nil, granularity: nil
+  {
+    name: name,
+    cluster_states: cluster_states,
+    column_families: column_families,
+    granularity: granularity
+  }.delete_if { |_, v| v.nil? }
+end
+
+def tables_hash instance_id, num: 3, start_id: 1
+  tables = num.times.map do |i|
+    table_hash(
+      name: table_path(instance_id, "my-table-#{start_id + i}"),
+      cluster_states: clusters_state_grpc,
+      column_families: column_families_grpc,
+      granularity: :MILLIS
+    )
+  end
+
+  { tables: tables }
+end
+
+def table_resp
+  Google::Bigtable::Admin::V2::Table.new(
+    table_hash(
+      name: "my-table",
+      column_families: column_families_grpc,
+      granularity: :MILLIS
+    )
   )
+end
+
+def tables_resp
+  tables_hash("my-instance", num: 3, start_id: 1)[:tables].map do |t|
+    Google::Bigtable::Admin::V2::Table.new(t)
+  end
+end
+
+def paged_enum_struct response
+  OpenStruct.new page: response_struct(response)
+end
+
+def response_struct response
+  OpenStruct.new(response: response)
 end

@@ -76,7 +76,7 @@ module Google
           #   bigtable = Google::Cloud::Bigtable.new
           #
           #   clusters = bigtable.clusters
-          #   if instances.next?
+          #   if clusters.next?
           #     next_clusters = clusters.next
           #   end
           def next
