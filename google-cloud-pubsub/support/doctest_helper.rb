@@ -49,6 +49,9 @@ module Google
         def wait! *_args
           self
         end
+        def stop! *_args
+          self
+        end
       end
     end
   end

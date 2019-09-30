@@ -172,6 +172,23 @@ module Google
         end
 
         ##
+        # Stop this subscriber and block until the subscriber is fully stopped
+        # and all received messages have been processed or released, or until
+        # `timeout` seconds have passed.
+        #
+        # The same as calling {#stop} and {#wait!}.
+        #
+        # @param [Number, nil] timeout The number of seconds to block until the
+        #   subscriber is fully stopped. Default will block indefinitely.
+        #
+        # @return [Subscriber] returns self so calls can be chained.
+        #
+        def stop! timeout = nil
+          stop
+          wait! timeout
+        end
+
+        ##
         # Whether the subscriber has been started.
         #
         # @return [boolean] `true` when started, `false` otherwise.
