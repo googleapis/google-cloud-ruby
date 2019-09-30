@@ -1,5 +1,11 @@
 # Release History
 
+### 0.62.0 / 2019-09-30
+
+#### Features
+
+* Update google-cloud-pubsub dependency to 1.0
+
 ### 0.61.0 / 2019-08-23
 
 #### Features
