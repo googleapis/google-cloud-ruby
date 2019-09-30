@@ -1,5 +1,17 @@
 # Release History
 
+### 0.40.0 / 2019-09-30
+
+#### Features
+
+* Add stop! convenience method
+  * Convenience method calls both stop and wait.
+  * Add Subscriber#stop! method.
+  * Add AsyncPublisher#stop! method.
+* Allow wait to block for specified time
+  * Add timeout argument to Subscriber#wait! method.
+  * Document timeout argument on AsyncPublisher#wait! method.
+
 ### 0.39.3 / 2019-09-27
 
 #### Bug Fixes
