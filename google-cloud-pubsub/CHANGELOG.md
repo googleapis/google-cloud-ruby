@@ -1,5 +1,13 @@
 # Release History
 
+### 0.40.0 / 2019-09-30
+
+#### Features
+
+* Allow wait to block for specified time
+  * Add timeout argument to Subscriber#wait! method.
+  * Document timeout argument on AsyncPublisher#wait! method.
+
 ### 0.39.3 / 2019-09-27
 
 #### Bug Fixes
