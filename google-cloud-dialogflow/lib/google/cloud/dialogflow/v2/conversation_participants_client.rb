@@ -13,7 +13,7 @@ module Google
       module V2
         class ConversationParticipantsClient
           # @private
-          attr_reader :sessions_stub
+          attr_reader :conversation_participants_stub
 
           # The default address of the service.
           SERVICE_ADDRESS = "dialogflow.googleapis.com".freeze
@@ -35,7 +35,7 @@ module Google
 
 
           SESSION_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
-            "projects/{project}/agent/sessions/{session}"
+            "projects/regal-thinker-251016/conversations/7xfah-ZFTqu_ZbOiCUcYiw/participants/ucR5kCn3R7u1aKOg85tbCw:streamingAnalyzeContent"
           )
 
           private_constant :SESSION_PATH_TEMPLATE
@@ -66,7 +66,7 @@ module Google
             # the gRPC module only when it's required.
             # See https://github.com/googleapis/toolkit/issues/446
             require "google/gax/grpc"
-            require "google/cloud/dialogflow/v2/session_services_pb"
+            require "google/cloud/dialogflow/v2/conversation_participant_services_pb"
 
             credentials ||= Google::Cloud::Dialogflow::V2::Credentials.default
 
@@ -97,11 +97,11 @@ module Google
             headers = { :"x-goog-api-client" => google_api_client }
             headers.merge!(metadata) unless metadata.nil?
             client_config_file = Pathname.new(__dir__).join(
-              "sessions_client_config.json"
+              "conversation_participants_client_config.json"
             )
             defaults = client_config_file.open do |f|
               Google::Gax.construct_settings(
-                "google.cloud.dialogflow.v2.Sessions",
+                "google.cloud.dialogflow.v2.ConversationParticipants",
                 JSON.parse(f.read),
                 client_config,
                 Google::Gax::Grpc::STATUS_CODE_NAMES,
@@ -115,7 +115,7 @@ module Google
             service_path = service_address || self.class::SERVICE_ADDRESS
             port = service_port || self.class::DEFAULT_SERVICE_PORT
             interceptors = self.class::GRPC_INTERCEPTORS
-            @sessions_stub = Google::Gax::Grpc.create_stub(
+            @conversation_participants_stub = Google::Gax::Grpc.create_stub(
               service_path,
               port,
               chan_creds: chan_creds,
@@ -123,11 +123,11 @@ module Google
               updater_proc: updater_proc,
               scopes: scopes,
               interceptors: interceptors,
-              &Google::Cloud::Dialogflow::V2::Sessions::Stub.method(:new)
+              &Google::Cloud::Dialogflow::V2::ConversationParticipants::Stub.method(:new)
             )
 
             @streaming_analyze_content = Google::Gax.create_api_call(
-              @sessions_stub.method(:streaming_analyze_content),
+              @conversation_participants_stub.method(:streaming_analyze_content),
               defaults["streaming_analyze_content"],
               exception_transformer: exception_transformer
             )

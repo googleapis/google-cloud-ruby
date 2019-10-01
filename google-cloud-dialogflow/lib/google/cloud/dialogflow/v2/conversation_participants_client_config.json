@@ -1,6 +1,6 @@
 {
   "interfaces": {
-    "google.cloud.dialogflow.v2.EntityTypes": {
+    "google.cloud.dialogflow.v2.ConversationParticipants": {
       "retry_codes": {
         "idempotent": [
           "DEADLINE_EXCEEDED",
