@@ -4,7 +4,8 @@
 
 require 'google/protobuf'
 
-require 'google/api/annotations_pb'
+require 'google/api/field_behavior_pb'
+require 'google/api/resource_pb'
 require 'google/protobuf/struct_pb'
 require 'google/protobuf/timestamp_pb'
 require 'google/rpc/status_pb'
@@ -16,7 +17,6 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   end
   add_message "google.cloud.bigquery.datatransfer.v1.TransferConfig" do
     optional :name, :string, 1
-    optional :destination_dataset_id, :string, 2
     optional :display_name, :string, 3
     optional :data_source_id, :string, 5
     optional :params, :message, 9, "google.protobuf.Struct"
@@ -29,6 +29,9 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :state, :enum, 10, "google.cloud.bigquery.datatransfer.v1.TransferState"
     optional :user_id, :int64, 11
     optional :dataset_region, :string, 14
+    oneof :destination do
+      optional :destination_dataset_id, :string, 2
+    end
   end
   add_message "google.cloud.bigquery.datatransfer.v1.TransferRun" do
     optional :name, :string, 1
@@ -39,11 +42,13 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :end_time, :message, 5, "google.protobuf.Timestamp"
     optional :update_time, :message, 6, "google.protobuf.Timestamp"
     optional :params, :message, 9, "google.protobuf.Struct"
-    optional :destination_dataset_id, :string, 2
     optional :data_source_id, :string, 7
     optional :state, :enum, 8, "google.cloud.bigquery.datatransfer.v1.TransferState"
     optional :user_id, :int64, 11
     optional :schedule, :string, 12
+    oneof :destination do
+      optional :destination_dataset_id, :string, 2
+    end
   end
   add_message "google.cloud.bigquery.datatransfer.v1.TransferMessage" do
     optional :message_time, :message, 1, "google.protobuf.Timestamp"
