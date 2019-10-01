@@ -87,8 +87,8 @@ module Google
       #     Log entries with timestamps that are more than the
       #     [logs retention period](https://cloud.google.com/logging/quota-policy) in the past or more than
       #     24 hours in the future will not be available when calling `entries.list`.
-      #     However, those log entries can still be exported with
-      #     [LogSinks](https://cloud.google.com/logging/docs/api/tasks/exporting-logs).
+      #     However, those log entries can still be
+      #     [exported with LogSinks](https://cloud.google.com/logging/docs/api/tasks/exporting-logs).
       #
       #     To improve throughput and to avoid exceeding the
       #     [quota limit](https://cloud.google.com/logging/quota-policy) for calls to `entries.write`,
@@ -117,9 +117,7 @@ module Google
       #   @return [Array<String>]
       #     Deprecated. Use `resource_names` instead.  One or more project identifiers
       #     or project numbers from which to retrieve log entries.  Example:
-      #     `"my-project-1A"`. If present, these project identifiers are converted to
-      #     resource name format and added to the list of resources in
-      #     `resource_names`.
+      #     `"my-project-1A"`.
       # @!attribute [rw] resource_names
       #   @return [Array<String>]
       #     Required. Names of one or more parent resources from which to
@@ -129,6 +127,7 @@ module Google
       #         "organizations/[ORGANIZATION_ID]"
       #         "billingAccounts/[BILLING_ACCOUNT_ID]"
       #         "folders/[FOLDER_ID]"
+      #
       #
       #     Projects listed in the `project_ids` field are added to this list.
       # @!attribute [rw] filter
@@ -232,8 +231,8 @@ module Google
       # @!attribute [rw] log_names
       #   @return [Array<String>]
       #     A list of log names. For example,
-      #     `"projects/my-project/syslog"` or
-      #     `"organizations/123/cloudresourcemanager.googleapis.com%2Factivity"`.
+      #     `"projects/my-project/logs/syslog"` or
+      #     `"organizations/123/logs/cloudresourcemanager.googleapis.com%2Factivity"`.
       # @!attribute [rw] next_page_token
       #   @return [String]
       #     If there might be more results than those appearing in this response, then

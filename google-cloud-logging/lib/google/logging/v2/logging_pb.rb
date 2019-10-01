@@ -4,13 +4,15 @@
 
 require 'google/protobuf'
 
-require 'google/api/annotations_pb'
 require 'google/api/monitored_resource_pb'
 require 'google/logging/v2/log_entry_pb'
+require 'google/logging/v2/logging_config_pb'
 require 'google/protobuf/duration_pb'
 require 'google/protobuf/empty_pb'
 require 'google/protobuf/timestamp_pb'
 require 'google/rpc/status_pb'
+require 'google/api/annotations_pb'
+require 'google/api/client_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.logging.v2.DeleteLogRequest" do
     optional :log_name, :string, 1
