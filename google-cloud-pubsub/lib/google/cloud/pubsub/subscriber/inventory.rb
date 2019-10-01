@@ -114,7 +114,7 @@ module Google
                 delay_gap = delay_target - Time.now
 
                 unless delay_gap.positive?
-                  delay_target = nil
+                  delay_target = calc_target
                   stream.renew_lease!
                   next
                 end
