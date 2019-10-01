@@ -4,7 +4,7 @@
 
 #### Features
 
-* search_hashes now requires the thread_types argument
+* search_hashes now requires the thread_types argument (BREAKING CHANGE)
 
 ### 0.2.1 / 2019-08-23
 
