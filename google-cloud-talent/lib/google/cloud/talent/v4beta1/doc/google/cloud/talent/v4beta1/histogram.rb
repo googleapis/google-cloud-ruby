@@ -17,8 +17,6 @@ module Google
   module Cloud
     module Talent
       module V4beta1
-        # Input Only.
-        #
         # The histogram request.
         # @!attribute [rw] histogram_query
         #   @return [String]
@@ -32,8 +30,6 @@ module Google
         #     for details about syntax.
         class HistogramQuery; end
 
-        # Output only.
-        #
         # Histogram result that matches
         # {Google::Cloud::Talent::V4beta1::HistogramQuery HistogramQuery} specified in
         # searches.

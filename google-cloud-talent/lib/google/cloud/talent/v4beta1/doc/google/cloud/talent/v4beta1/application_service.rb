@@ -24,8 +24,8 @@ module Google
         #     created.
         #
         #     The format is
-        #     "projects/{project_id}/tenants/{tenant_id}/profiles/{profile_id}", for
-        #     example, "projects/test-project/tenants/test-tenant/profiles/test-profile".
+        #     "projects/{project_id}/tenants/{tenant_id}/profiles/{profile_id}".
+        #     For example, "projects/foo/tenants/bar/profiles/baz".
         # @!attribute [rw] application
         #   @return [Google::Cloud::Talent::V4beta1::Application]
         #     Required. The application to be created.
@@ -37,9 +37,8 @@ module Google
         #     Required. The resource name of the application to be retrieved.
         #
         #     The format is
-        #     "projects/{project_id}/tenants/{tenant_id}/profiles/{profile_id}/applications/{application_id}",
-        #     for example,
-        #     "projects/test-project/tenants/test-tenant/profiles/test-profile/applications/test-application".
+        #     "projects/{project_id}/tenants/{tenant_id}/profiles/{profile_id}/applications/{application_id}".
+        #     For example, "projects/foo/tenants/bar/profiles/baz/applications/qux".
         class GetApplicationRequest; end
 
         # Request for updating a specified application.
@@ -49,8 +48,7 @@ module Google
         #     system.
         # @!attribute [rw] update_mask
         #   @return [Google::Protobuf::FieldMask]
-        #     Optional but strongly recommended for the best service
-        #     experience.
+        #     Strongly recommended for the best service experience.
         #
         #     If
         #     {Google::Cloud::Talent::V4beta1::UpdateApplicationRequest#update_mask update_mask}
@@ -69,9 +67,8 @@ module Google
         #     Required. The resource name of the application to be deleted.
         #
         #     The format is
-        #     "projects/{project_id}/tenants/{tenant_id}/profiles/{profile_id}/applications/{application_id}",
-        #     for example,
-        #     "projects/test-project/tenants/test-tenant/profiles/test-profile/applications/test-application".
+        #     "projects/{project_id}/tenants/{tenant_id}/profiles/{profile_id}/applications/{application_id}".
+        #     For example, "projects/foo/tenants/bar/profiles/baz/applications/qux".
         class DeleteApplicationRequest; end
 
         # List applications for which the client has ACL visibility.
@@ -82,18 +79,16 @@ module Google
         #
         #     The format is
         #     "projects/{project_id}/tenants/{tenant_id}/profiles/{profile_id}", for
-        #     example, "projects/test-project/tenants/test-tenant/profiles/test-profile".
+        #     example, "projects/foo/tenants/bar/profiles/baz".
         # @!attribute [rw] page_token
         #   @return [String]
-        #     Optional. The starting indicator from which to return results.
+        #     The starting indicator from which to return results.
         # @!attribute [rw] page_size
         #   @return [Integer]
-        #     Optional. The maximum number of applications to be returned, at most 100.
+        #     The maximum number of applications to be returned, at most 100.
         #     Default is 100 if a non-positive number is provided.
         class ListApplicationsRequest; end
 
-        # Output only.
-        #
         # The List applications response object.
         # @!attribute [rw] applications
         #   @return [Array<Google::Cloud::Talent::V4beta1::Application>]

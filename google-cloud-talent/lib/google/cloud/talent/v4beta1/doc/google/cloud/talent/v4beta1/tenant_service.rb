@@ -23,7 +23,7 @@ module Google
         #     Required. Resource name of the project under which the tenant is created.
         #
         #     The format is "projects/{project_id}", for example,
-        #     "projects/api-test-project".
+        #     "projects/foo".
         # @!attribute [rw] tenant
         #   @return [Google::Cloud::Talent::V4beta1::Tenant]
         #     Required. The tenant to be created.
@@ -35,7 +35,7 @@ module Google
         #     Required. The resource name of the tenant to be retrieved.
         #
         #     The format is "projects/{project_id}/tenants/{tenant_id}", for example,
-        #     "projects/api-test-project/tenants/foo".
+        #     "projects/foo/tenants/bar".
         class GetTenantRequest; end
 
         # Request for updating a specified tenant.
@@ -45,8 +45,7 @@ module Google
         #     system.
         # @!attribute [rw] update_mask
         #   @return [Google::Protobuf::FieldMask]
-        #     Optional but strongly recommended for the best service
-        #     experience.
+        #     Strongly recommended for the best service experience.
         #
         #     If
         #     {Google::Cloud::Talent::V4beta1::UpdateTenantRequest#update_mask update_mask}
@@ -65,7 +64,7 @@ module Google
         #     Required. The resource name of the tenant to be deleted.
         #
         #     The format is "projects/{project_id}/tenants/{tenant_id}", for example,
-        #     "projects/api-test-project/tenants/foo".
+        #     "projects/foo/tenants/bar".
         class DeleteTenantRequest; end
 
         # List tenants for which the client has ACL visibility.
@@ -74,18 +73,16 @@ module Google
         #     Required. Resource name of the project under which the tenant is created.
         #
         #     The format is "projects/{project_id}", for example,
-        #     "projects/api-test-project".
+        #     "projects/foo".
         # @!attribute [rw] page_token
         #   @return [String]
-        #     Optional. The starting indicator from which to return results.
+        #     The starting indicator from which to return results.
         # @!attribute [rw] page_size
         #   @return [Integer]
-        #     Optional. The maximum number of tenants to be returned, at most 100.
+        #     The maximum number of tenants to be returned, at most 100.
         #     Default is 100 if a non-positive number is provided.
         class ListTenantsRequest; end
 
-        # Output only.
-        #
         # The List tenants response object.
         # @!attribute [rw] tenants
         #   @return [Array<Google::Cloud::Talent::V4beta1::Tenant>]

@@ -17,48 +17,39 @@ module Google
   module Cloud
     module Talent
       module V4beta1
-        # Input only.
-        #
         # Create job request.
         # @!attribute [rw] parent
         #   @return [String]
         #     Required. The resource name of the tenant under which the job is created.
         #
-        #     The format is "projects/{project_id}/tenants/{tenant_id}", for example,
-        #     "projects/api-test-project/tenant/foo".
-        #
-        #     Tenant id is optional and a default tenant is created if unspecified, for
-        #     example, "projects/api-test-project".
+        #     The format is "projects/{project_id}/tenants/{tenant_id}". For example,
+        #     "projects/foo/tenant/bar". If tenant id is unspecified a default tenant
+        #     is created. For example, "projects/foo".
         # @!attribute [rw] job
         #   @return [Google::Cloud::Talent::V4beta1::Job]
         #     Required. The Job to be created.
         class CreateJobRequest; end
 
-        # Input only.
-        #
         # Get job request.
         # @!attribute [rw] name
         #   @return [String]
         #     Required. The resource name of the job to retrieve.
         #
         #     The format is
-        #     "projects/{project_id}/tenants/{tenant_id}/jobs/{job_id}", for
-        #     example, "projects/api-test-project/tenants/foo/jobs/1234".
+        #     "projects/{project_id}/tenants/{tenant_id}/jobs/{job_id}". For
+        #     example, "projects/foo/tenants/bar/jobs/baz".
         #
-        #     Tenant id is optional and the default tenant is used if unspecified, for
-        #     example, "projects/api-test-project/jobs/1234".
+        #     If tenant id is unspecified, the default tenant is used. For
+        #     example, "projects/foo/jobs/bar".
         class GetJobRequest; end
 
-        # Input only.
-        #
         # Update job request.
         # @!attribute [rw] job
         #   @return [Google::Cloud::Talent::V4beta1::Job]
         #     Required. The Job to be updated.
         # @!attribute [rw] update_mask
         #   @return [Google::Protobuf::FieldMask]
-        #     Optional but strongly recommended to be provided for the best service
-        #     experience.
+        #     Strongly recommended for the best service experience.
         #
         #     If {Google::Cloud::Talent::V4beta1::UpdateJobRequest#update_mask update_mask}
         #     is provided, only the specified fields in
@@ -69,33 +60,27 @@ module Google
         #     top level fields of {Google::Cloud::Talent::V4beta1::Job Job} are supported.
         class UpdateJobRequest; end
 
-        # Input only.
-        #
         # Delete job request.
         # @!attribute [rw] name
         #   @return [String]
         #     Required. The resource name of the job to be deleted.
         #
         #     The format is
-        #     "projects/{project_id}/tenants/{tenant_id}/jobs/{job_id}", for
-        #     example, "projects/api-test-project/tenants/foo/jobs/1234".
+        #     "projects/{project_id}/tenants/{tenant_id}/jobs/{job_id}". For
+        #     example, "projects/foo/tenants/bar/jobs/baz".
         #
-        #     Tenant id is optional and the default tenant is used if unspecified, for
-        #     example, "projects/api-test-project/jobs/1234".
+        #     If tenant id is unspecified, the default tenant is used. For
+        #     example, "projects/foo/jobs/bar".
         class DeleteJobRequest; end
 
-        # Input only.
-        #
         # Batch delete jobs request.
         # @!attribute [rw] parent
         #   @return [String]
         #     Required. The resource name of the tenant under which the job is created.
         #
-        #     The format is "projects/{project_id}/tenants/{tenant_id}", for example,
-        #     "projects/api-test-project/tenant/foo".
-        #
-        #     Tenant id is optional and the default tenant is used if unspecified, for
-        #     example, "projects/api-test-project".
+        #     The format is "projects/{project_id}/tenants/{tenant_id}". For example,
+        #     "projects/foo/tenant/bar". If tenant id is unspecified, a default tenant
+        #     is created. For example, "projects/foo".
         # @!attribute [rw] filter
         #   @return [String]
         #     Required. The filter string specifies the jobs to be deleted.
@@ -107,22 +92,18 @@ module Google
         #     * `companyName` (Required)
         #     * `requisitionId` (Required)
         #
-        #     Sample Query: companyName = "projects/api-test-project/companies/123" AND
+        #     Sample Query: companyName = "projects/foo/companies/bar" AND
         #     requisitionId = "req-1"
         class BatchDeleteJobsRequest; end
 
-        # Input only.
-        #
         # List jobs request.
         # @!attribute [rw] parent
         #   @return [String]
         #     Required. The resource name of the tenant under which the job is created.
         #
-        #     The format is "projects/{project_id}/tenants/{tenant_id}", for example,
-        #     "projects/api-test-project/tenant/foo".
-        #
-        #     Tenant id is optional and the default tenant is used if unspecified, for
-        #     example, "projects/api-test-project".
+        #     The format is "projects/{project_id}/tenants/{tenant_id}". For example,
+        #     "projects/foo/tenant/bar". If tenant id is unspecified, a default tenant
+        #     is created. For example, "projects/foo".
         # @!attribute [rw] filter
         #   @return [String]
         #     Required. The filter string specifies the jobs to be enumerated.
@@ -132,23 +113,23 @@ module Google
         #     The fields eligible for filtering are:
         #
         #     * `companyName` (Required)
-        #     * `requisitionId` (Optional)
-        #     * `status` (Optional) Available values: OPEN, EXPIRED, ALL. Defaults to
+        #     * `requisitionId`
+        #     * `status` Available values: OPEN, EXPIRED, ALL. Defaults to
         #       OPEN if no value is specified.
         #
         #     Sample Query:
         #
-        #     * companyName = "projects/api-test-project/tenants/foo/companies/bar"
-        #     * companyName = "projects/api-test-project/tenants/foo/companies/bar" AND
+        #     * companyName = "projects/foo/tenants/bar/companies/baz"
+        #     * companyName = "projects/foo/tenants/bar/companies/baz" AND
         #       requisitionId = "req-1"
-        #     * companyName = "projects/api-test-project/tenants/foo/companies/bar" AND
+        #     * companyName = "projects/foo/tenants/bar/companies/baz" AND
         #       status = "EXPIRED"
         # @!attribute [rw] page_token
         #   @return [String]
-        #     Optional. The starting point of a query result.
+        #     The starting point of a query result.
         # @!attribute [rw] page_size
         #   @return [Integer]
-        #     Optional. The maximum number of jobs to be returned per page of results.
+        #     The maximum number of jobs to be returned per page of results.
         #
         #     If {Google::Cloud::Talent::V4beta1::ListJobsRequest#job_view job_view} is set
         #     to
@@ -159,14 +140,12 @@ module Google
         #     Default is 100 if empty or a number < 1 is specified.
         # @!attribute [rw] job_view
         #   @return [Google::Cloud::Talent::V4beta1::JobView]
-        #     Optional. The desired job attributes returned for jobs in the
+        #     The desired job attributes returned for jobs in the
         #     search response. Defaults to
         #     {Google::Cloud::Talent::V4beta1::JobView::JOB_VIEW_FULL JobView::JOB_VIEW_FULL}
         #     if no value is specified.
         class ListJobsRequest; end
 
-        # Output only.
-        #
         # List jobs response.
         # @!attribute [rw] jobs
         #   @return [Array<Google::Cloud::Talent::V4beta1::Job>]
@@ -183,21 +162,17 @@ module Google
         #     tracking id.
         class ListJobsResponse; end
 
-        # Input only.
-        #
         # The Request body of the `SearchJobs` call.
         # @!attribute [rw] parent
         #   @return [String]
         #     Required. The resource name of the tenant to search within.
         #
-        #     The format is "projects/{project_id}/tenants/{tenant_id}", for example,
-        #     "projects/api-test-project/tenant/foo".
-        #
-        #     Tenant id is optional and the default tenant is used if unspecified, for
-        #     example, "projects/api-test-project".
+        #     The format is "projects/{project_id}/tenants/{tenant_id}". For example,
+        #     "projects/foo/tenant/bar". If tenant id is unspecified, a default tenant
+        #     is created. For example, "projects/foo".
         # @!attribute [rw] search_mode
         #   @return [Google::Cloud::Talent::V4beta1::SearchJobsRequest::SearchMode]
-        #     Optional. Mode of a search.
+        #     Mode of a search.
         #
         #     Defaults to
         #     {Google::Cloud::Talent::V4beta1::SearchJobsRequest::SearchMode::JOB_SEARCH SearchMode::JOB_SEARCH}.
@@ -208,19 +183,18 @@ module Google
         #     `user_id`) are provided by users, and must be unique and consistent.
         # @!attribute [rw] job_query
         #   @return [Google::Cloud::Talent::V4beta1::JobQuery]
-        #     Optional. Query used to search against jobs, such as keyword, location
-        #     filters, etc.
+        #     Query used to search against jobs, such as keyword, location filters, etc.
         # @!attribute [rw] enable_broadening
         #   @return [true, false]
-        #     Optional. Controls whether to broaden the search when it produces sparse
-        #     results. Broadened queries append results to the end of the matching
-        #     results list.
+        #     Controls whether to broaden the search when it produces sparse results.
+        #     Broadened queries append results to the end of the matching results
+        #     list.
         #
         #     Defaults to false.
         # @!attribute [rw] require_precise_result_size
         #   @return [true, false]
-        #     Optional. Controls if the search job request requires the return of a
-        #     precise count of the first 300 results. Setting this to `true` ensures
+        #     Controls if the search job request requires the return of a precise
+        #     count of the first 300 results. Setting this to `true` ensures
         #     consistency in the number of results per page. Best practice is to set this
         #     value to true if a client allows users to jump directly to a
         #     non-sequential search results page.
@@ -230,8 +204,7 @@ module Google
         #     Defaults to false.
         # @!attribute [rw] histogram_queries
         #   @return [Array<Google::Cloud::Talent::V4beta1::HistogramQuery>]
-        #     Optional. An expression specifies a histogram request against matching
-        #     jobs.
+        #     An expression specifies a histogram request against matching jobs.
         #
         #     Expression syntax is an aggregation function call with histogram facets and
         #     other options.
@@ -340,14 +313,14 @@ module Google
         #       [bucket(MIN, 0, "negative"), bucket(0, MAX, "non-negative"])`
         # @!attribute [rw] job_view
         #   @return [Google::Cloud::Talent::V4beta1::JobView]
-        #     Optional. The desired job attributes returned for jobs in the search
-        #     response. Defaults to
+        #     The desired job attributes returned for jobs in the search response.
+        #     Defaults to
         #     {Google::Cloud::Talent::V4beta1::JobView::JOB_VIEW_SMALL JobView::JOB_VIEW_SMALL}
         #     if no value is specified.
         # @!attribute [rw] offset
         #   @return [Integer]
-        #     Optional. An integer that specifies the current offset (that is, starting
-        #     result location, amongst the jobs deemed by the API as relevant) in search
+        #     An integer that specifies the current offset (that is, starting result
+        #     location, amongst the jobs deemed by the API as relevant) in search
         #     results. This field is only considered if
         #     {Google::Cloud::Talent::V4beta1::SearchJobsRequest#page_token page_token} is
         #     unset.
@@ -358,19 +331,18 @@ module Google
         #     from the second page).
         # @!attribute [rw] page_size
         #   @return [Integer]
-        #     Optional. A limit on the number of jobs returned in the search results.
+        #     A limit on the number of jobs returned in the search results.
         #     Increasing this value above the default value of 10 can increase search
         #     response time. The value can be between 1 and 100.
         # @!attribute [rw] page_token
         #   @return [String]
-        #     Optional. The token specifying the current offset within
+        #     The token specifying the current offset within
         #     search results. See
         #     {Google::Cloud::Talent::V4beta1::SearchJobsResponse#next_page_token SearchJobsResponse#next_page_token}
         #     for an explanation of how to obtain the next set of query results.
         # @!attribute [rw] order_by
         #   @return [String]
-        #     Optional. The criteria determining how search results are sorted. Default
-        #     is
+        #     The criteria determining how search results are sorted. Default is
         #     `"relevance desc"`.
         #
         #     Supported options are:
@@ -426,8 +398,8 @@ module Google
         #       {Google::Cloud::Talent::V4beta1::SearchJobsRequest#diversification_level diversification_level}.
         # @!attribute [rw] diversification_level
         #   @return [Google::Cloud::Talent::V4beta1::SearchJobsRequest::DiversificationLevel]
-        #     Optional. Controls whether highly similar jobs are returned next to each
-        #     other in the search results. Jobs are identified as highly similar based on
+        #     Controls whether highly similar jobs are returned next to each other in
+        #     the search results. Jobs are identified as highly similar based on
         #     their titles, job categories, and locations. Highly similar results are
         #     clustered so that only one representative job of the cluster is
         #     displayed to the job seeker higher up in the results, with the other jobs
@@ -438,11 +410,11 @@ module Google
         #     if no value is specified.
         # @!attribute [rw] custom_ranking_info
         #   @return [Google::Cloud::Talent::V4beta1::SearchJobsRequest::CustomRankingInfo]
-        #     Optional. Controls over how job documents get ranked on top of existing
-        #     relevance score (determined by API algorithm).
+        #     Controls over how job documents get ranked on top of existing relevance
+        #     score (determined by API algorithm).
         # @!attribute [rw] disable_keyword_match
         #   @return [true, false]
-        #     Optional. Controls whether to disable exact keyword match on
+        #     Controls whether to disable exact keyword match on
         #     {Google::Cloud::Talent::V4beta1::Job#title Job#title},
         #     {Google::Cloud::Talent::V4beta1::Job#description Job#description},
         #     {Google::Cloud::Talent::V4beta1::Job#company_display_name Job#company_display_name},
@@ -467,8 +439,6 @@ module Google
         #
         #     Defaults to false.
         class SearchJobsRequest
-          # Input only.
-          #
           # Custom ranking information for
           # {Google::Cloud::Talent::V4beta1::SearchJobsRequest SearchJobsRequest}.
           # @!attribute [rw] importance_level
@@ -561,7 +531,8 @@ module Google
           # A string-represented enumeration of the job search mode. The service
           # operate differently for different modes of service.
           module SearchMode
-            # The mode of the search method isn't specified.
+            # The mode of the search method isn't specified. The default search
+            # behavior is identical to JOB_SEARCH search behavior.
             SEARCH_MODE_UNSPECIFIED = 0
 
             # The job search matches against all jobs, and featured jobs
@@ -577,8 +548,6 @@ module Google
           end
         end
 
-        # Output only.
-        #
         # Response for SearchJob method.
         # @!attribute [rw] matching_jobs
         #   @return [Array<Google::Cloud::Talent::V4beta1::SearchJobsResponse::MatchingJob>]
@@ -629,8 +598,6 @@ module Google
         #   @return [Google::Cloud::Talent::V4beta1::SpellingCorrection]
         #     The spell checking result, and correction.
         class SearchJobsResponse
-          # Output only.
-          #
           # Job entry with metadata inside
           # {Google::Cloud::Talent::V4beta1::SearchJobsResponse SearchJobsResponse}.
           # @!attribute [rw] job
@@ -661,8 +628,6 @@ module Google
           #      {Google::Cloud::Talent::V4beta1::CommuteFilter CommuteFilter}.
           class MatchingJob; end
 
-          # Output only.
-          #
           # Commute details related to this job.
           # @!attribute [rw] job_location
           #   @return [Google::Cloud::Talent::V4beta1::Location]
@@ -681,11 +646,9 @@ module Google
         #   @return [String]
         #     Required. The resource name of the tenant under which the job is created.
         #
-        #     The format is "projects/{project_id}/tenants/{tenant_id}", for example,
-        #     "projects/api-test-project/tenant/foo".
-        #
-        #     Tenant id is optional and a default tenant is created if unspecified, for
-        #     example, "projects/api-test-project".
+        #     The format is "projects/{project_id}/tenants/{tenant_id}". For example,
+        #     "projects/foo/tenant/bar". If tenant id is unspecified, a default tenant
+        #     is created. For example, "projects/foo".
         # @!attribute [rw] jobs
         #   @return [Array<Google::Cloud::Talent::V4beta1::Job>]
         #     Required. The jobs to be created.
@@ -696,18 +659,16 @@ module Google
         #   @return [String]
         #     Required. The resource name of the tenant under which the job is created.
         #
-        #     The format is "projects/{project_id}/tenants/{tenant_id}", for example,
-        #     "projects/api-test-project/tenant/foo".
-        #
-        #     Tenant id is optional and the default tenant is used if unspecified, for
-        #     example, "projects/api-test-project".
+        #     The format is "projects/{project_id}/tenants/{tenant_id}". For example,
+        #     "projects/foo/tenant/bar". If tenant id is unspecified, a default tenant
+        #     is created. For example, "projects/foo".
         # @!attribute [rw] jobs
         #   @return [Array<Google::Cloud::Talent::V4beta1::Job>]
-        #     Required. The jobs to be updated.
+        #     The jobs to be updated.
         # @!attribute [rw] update_mask
         #   @return [Google::Protobuf::FieldMask]
-        #     Optional but strongly recommended to be provided for the best service
-        #     experience, also increase latency when checking status of batch operation.
+        #     Strongly recommended for the best service experience. Be aware that it will
+        #     also increase latency when checking the status of a batch operation.
         #
         #     If
         #     {Google::Cloud::Talent::V4beta1::BatchUpdateJobsRequest#update_mask update_mask}
@@ -727,8 +688,6 @@ module Google
         #     which can yield a very large response.
         class BatchUpdateJobsRequest; end
 
-        # Output only.
-        #
         # The result of
         # {Google::Cloud::Talent::V4beta1::JobService::BatchCreateJobs JobService::BatchCreateJobs}
         # or

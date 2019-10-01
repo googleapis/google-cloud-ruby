@@ -224,10 +224,8 @@ module Google
           #   Required. Resource name of the tenant under which the event is created.
           #
           #   The format is "projects/{project_id}/tenants/{tenant_id}", for example,
-          #   "projects/api-test-project/tenant/foo".
-          #
-          #   Tenant id is optional and a default tenant is created if unspecified, for
-          #   example, "projects/api-test-project".
+          #   "projects/foo/tenant/bar". If tenant id is unspecified, a default tenant
+          #   is created, for example, "projects/foo".
           # @param client_event [Google::Cloud::Talent::V4beta1::ClientEvent | Hash]
           #   Required. Events issued when end user interacts with customer's application
           #   that uses Cloud Talent Solution.

@@ -17,18 +17,16 @@ module Google
   module Cloud
     module Talent
       module V4beta1
-        # Input only.
-        #
         # Auto-complete parameters.
         # @!attribute [rw] parent
         #   @return [String]
         #     Required. Resource name of tenant the completion is performed within.
         #
         #     The format is "projects/{project_id}/tenants/{tenant_id}", for example,
-        #     "projects/api-test-project/tenant/foo".
+        #     "projects/foo/tenant/bar".
         #
-        #     Tenant id is optional and the default tenant is used if unspecified, for
-        #     example, "projects/api-test-project".
+        #     If tenant id is unspecified, the default tenant is used, for
+        #     example, "projects/foo".
         # @!attribute [rw] query
         #   @return [String]
         #     Required. The query used to generate suggestions.
@@ -36,7 +34,7 @@ module Google
         #     The maximum number of allowed characters is 255.
         # @!attribute [rw] language_codes
         #   @return [Array<String>]
-        #     Optional. The list of languages of the query. This is
+        #     The list of languages of the query. This is
         #     the BCP-47 language code, such as "en-US" or "sr-Latn".
         #     For more information, see
         #     [Tags for Identifying Languages](https://tools.ietf.org/html/bcp47).
@@ -69,21 +67,21 @@ module Google
         #     The maximum allowed page size is 10.
         # @!attribute [rw] company
         #   @return [String]
-        #     Optional. If provided, restricts completion to specified company.
+        #     If provided, restricts completion to specified company.
         #
         #     The format is
         #     "projects/{project_id}/tenants/{tenant_id}/companies/{company_id}", for
-        #     example, "projects/api-test-project/tenants/foo/companies/bar".
+        #     example, "projects/foo/tenants/bar/companies/baz".
         #
-        #     Tenant id is optional and the default tenant is used if unspecified, for
-        #     example, "projects/api-test-project/companies/bar".
+        #     If tenant id is unspecified, the default tenant is used, for
+        #     example, "projects/foo".
         # @!attribute [rw] scope
         #   @return [Google::Cloud::Talent::V4beta1::CompleteQueryRequest::CompletionScope]
-        #     Optional. The scope of the completion. The defaults is
+        #     The scope of the completion. The defaults is
         #     {Google::Cloud::Talent::V4beta1::CompleteQueryRequest::CompletionScope::PUBLIC CompletionScope::PUBLIC}.
         # @!attribute [rw] type
         #   @return [Google::Cloud::Talent::V4beta1::CompleteQueryRequest::CompletionType]
-        #     Optional. The completion topic. The default is
+        #     The completion topic. The default is
         #     {Google::Cloud::Talent::V4beta1::CompleteQueryRequest::CompletionType::COMBINED CompletionType::COMBINED}.
         class CompleteQueryRequest
           # Enum to specify the scope of completion.
@@ -115,8 +113,6 @@ module Google
           end
         end
 
-        # Output only.
-        #
         # Response of auto-complete query.
         # @!attribute [rw] completion_results
         #   @return [Array<Google::Cloud::Talent::V4beta1::CompleteQueryResponse::CompletionResult>]
@@ -126,8 +122,6 @@ module Google
         #     Additional information for the API invocation, such as the request
         #     tracking id.
         class CompleteQueryResponse
-          # Output only.
-          #
           # Resource that represents completion results.
           # @!attribute [rw] suggestion
           #   @return [String]
