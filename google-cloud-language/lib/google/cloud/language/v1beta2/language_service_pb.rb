@@ -5,9 +5,9 @@
 require 'google/protobuf'
 
 require 'google/api/annotations_pb'
-require 'google/longrunning/operations_pb'
+require 'google/api/client_pb'
+require 'google/api/field_behavior_pb'
 require 'google/protobuf/timestamp_pb'
-require 'google/rpc/status_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.cloud.language.v1beta2.Document" do
     optional :type, :enum, 1, "google.cloud.language.v1beta2.Document.Type"
@@ -43,6 +43,11 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     value :WORK_OF_ART, 5
     value :CONSUMER_GOOD, 6
     value :OTHER, 7
+    value :PHONE_NUMBER, 9
+    value :ADDRESS, 10
+    value :DATE, 11
+    value :NUMBER, 12
+    value :PRICE, 13
   end
   add_message "google.cloud.language.v1beta2.Token" do
     optional :text, :message, 1, "google.cloud.language.v1beta2.TextSpan"
