@@ -33,8 +33,7 @@ module Google
   module Cloud
     module Logging
       module V2
-        # Service for configuring sinks used to export log entries out of
-        # Logging.
+        # Service for configuring sinks used to route log entries.
         #
         # @!attribute [r] config_service_v2_stub
         #   @return [Google::Logging::V2::ConfigServiceV2::Stub]
@@ -562,9 +561,9 @@ module Google
             @get_sink.call(req, options, &block)
           end
 
-          # Creates a sink that exports specified log entries to a destination.  The
+          # Creates a sink that exports specified log entries to a destination. The
           # export of newly-ingested log entries begins immediately, unless the sink's
-          # `writer_identity` is not permitted to write to the destination.  A sink can
+          # `writer_identity` is not permitted to write to the destination. A sink can
           # export log entries only from the resource owning the sink.
           #
           # @param parent [String]
@@ -583,17 +582,16 @@ module Google
           #   can also be provided.
           # @param unique_writer_identity [true, false]
           #   Optional. Determines the kind of IAM identity returned as `writer_identity`
-          #   in the new sink.  If this value is omitted or set to false, and if the
+          #   in the new sink. If this value is omitted or set to false, and if the
           #   sink's parent is a project, then the value returned as `writer_identity` is
-          #   the same group or service account used by Logging before the
-          #   addition of writer identities to this API. The sink's destination must be
-          #   in the same project as the sink itself.
+          #   the same group or service account used by Logging before the addition of
+          #   writer identities to this API. The sink's destination must be in the same
+          #   project as the sink itself.
           #
           #   If this field is set to true, or if the sink is owned by a non-project
           #   resource such as an organization, then the value of `writer_identity` will
-          #   be a unique service account used only for exports from the new sink.  For
-          #   more information, see `writer_identity` in
-          #   {Google::Logging::V2::LogSink LogSink}.
+          #   be a unique service account used only for exports from the new sink. For
+          #   more information, see `writer_identity` in {Google::Logging::V2::LogSink LogSink}.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -627,8 +625,9 @@ module Google
             @create_sink.call(req, options, &block)
           end
 
-          # Updates a sink.  This method replaces the following fields in the existing
+          # Updates a sink. This method replaces the following fields in the existing
           # sink with values from the new sink: `destination`, and `filter`.
+          #
           # The updated sink might also have a new `writer_identity`; see the
           # `unique_writer_identity` field.
           #
@@ -648,9 +647,8 @@ module Google
           #   A hash of the same form as `Google::Logging::V2::LogSink`
           #   can also be provided.
           # @param unique_writer_identity [true, false]
-          #   Optional. See
-          #   [sinks.create](https://cloud.google.com/logging/docs/api/reference/rest/v2/projects.sinks/create)
-          #   for a description of this field.  When updating a sink, the effect of this
+          #   Optional. See {Google::Logging::V2::ConfigServiceV2::CreateSink sinks::create}
+          #   for a description of this field. When updating a sink, the effect of this
           #   field on the value of `writer_identity` in the updated sink depends on both
           #   the old and new values of this field:
           #
@@ -663,7 +661,7 @@ module Google
           # @param update_mask [Google::Protobuf::FieldMask | Hash]
           #   Optional. Field mask that specifies the fields in `sink` that need
           #   an update. A sink field will be overwritten if, and only if, it is
-          #   in the update mask.  `name` and output only fields cannot be updated.
+          #   in the update mask. `name` and output only fields cannot be updated.
           #
           #   An empty updateMask is temporarily treated as using the following mask
           #   for backwards compatibility purposes:
@@ -913,11 +911,10 @@ module Google
           #   A hash of the same form as `Google::Logging::V2::LogExclusion`
           #   can also be provided.
           # @param update_mask [Google::Protobuf::FieldMask | Hash]
-          #   Required. A nonempty list of fields to change in the existing exclusion.
+          #   Required. A non-empty list of fields to change in the existing exclusion.
           #   New values for the fields are taken from the corresponding fields in the
-          #   {Google::Logging::V2::LogExclusion LogExclusion} included in this request.
-          #   Fields not mentioned in `update_mask` are not changed and are ignored in
-          #   the request.
+          #   {Google::Logging::V2::LogExclusion LogExclusion} included in this request. Fields not mentioned in
+          #   `update_mask` are not changed and are ignored in the request.
           #
           #   For example, to change the filter and description of an exclusion,
           #   specify an `update_mask` of `"filter,description"`.

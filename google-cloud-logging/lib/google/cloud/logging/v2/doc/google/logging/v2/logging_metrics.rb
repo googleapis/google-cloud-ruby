@@ -16,8 +16,8 @@
 module Google
   module Logging
     module V2
-      # Describes a logs-based metric.  The value of the metric is the
-      # number of log entries that match a logs filter in a given time interval.
+      # Describes a logs-based metric. The value of the metric is the number of log
+      # entries that match a logs filter in a given time interval.
       #
       # Logs-based metric can also be used to extract values from logs and create a
       # a distribution of the values. The distribution records the statistics of the
@@ -28,21 +28,20 @@ module Google
       #     Required. The client-assigned metric identifier.
       #     Examples: `"error_count"`, `"nginx/requests"`.
       #
-      #     Metric identifiers are limited to 100 characters and can include
-      #     only the following characters: `A-Z`, `a-z`, `0-9`, and the
-      #     special characters `_-.,+!*',()%/`.  The forward-slash character
-      #     (`/`) denotes a hierarchy of name pieces, and it cannot be the
-      #     first character of the name.
+      #     Metric identifiers are limited to 100 characters and can include only the
+      #     following characters: `A-Z`, `a-z`, `0-9`, and the special characters
+      #     `_-.,+!*',()%/`. The forward-slash character (`/`) denotes a hierarchy of
+      #     name pieces, and it cannot be the first character of the name.
       #
       #     The metric identifier in this field must not be
       #     [URL-encoded](https://en.wikipedia.org/wiki/Percent-encoding).
-      #     However, when the metric identifier appears as the `[METRIC_ID]`
-      #     part of a `metric_name` API parameter, then the metric identifier
-      #     must be URL-encoded. Example:
-      #     `"projects/my-project/metrics/nginx%2Frequests"`.
+      #     However, when the metric identifier appears as the `[METRIC_ID]` part of a
+      #     `metric_name` API parameter, then the metric identifier must be
+      #     URL-encoded. Example: `"projects/my-project/metrics/nginx%2Frequests"`.
       # @!attribute [rw] description
       #   @return [String]
       #     Optional. A description of this metric, which is used in documentation.
+      #     The maximum length of the description is 8000 characters.
       # @!attribute [rw] filter
       #   @return [String]
       #     Required. An [advanced logs filter](https://cloud.google.com/logging/docs/view/advanced_filters)
@@ -117,6 +116,16 @@ module Google
       #     Optional. The `bucket_options` are required when the logs-based metric is
       #     using a DISTRIBUTION value type and it describes the bucket boundaries
       #     used to create a histogram of the extracted values.
+      # @!attribute [rw] create_time
+      #   @return [Google::Protobuf::Timestamp]
+      #     Output only. The creation timestamp of the metric.
+      #
+      #     This field may not be present for older metrics.
+      # @!attribute [rw] update_time
+      #   @return [Google::Protobuf::Timestamp]
+      #     Output only. The last update timestamp of the metric.
+      #
+      #     This field may not be present for older metrics.
       # @!attribute [rw] version
       #   @return [Google::Logging::V2::LogMetric::ApiVersion]
       #     Deprecated. The API version that created or updated this metric.
@@ -141,13 +150,13 @@ module Google
       # @!attribute [rw] page_token
       #   @return [String]
       #     Optional. If present, then retrieve the next batch of results from the
-      #     preceding call to this method.  `pageToken` must be the value of
-      #     `nextPageToken` from the previous response.  The values of other method
+      #     preceding call to this method. `pageToken` must be the value of
+      #     `nextPageToken` from the previous response. The values of other method
       #     parameters should be identical to those in the previous call.
       # @!attribute [rw] page_size
       #   @return [Integer]
       #     Optional. The maximum number of results to return from this request.
-      #     Non-positive values are ignored.  The presence of `nextPageToken` in the
+      #     Non-positive values are ignored. The presence of `nextPageToken` in the
       #     response indicates that more results might be available.
       class ListLogMetricsRequest; end
 
@@ -158,7 +167,7 @@ module Google
       # @!attribute [rw] next_page_token
       #   @return [String]
       #     If there might be more results than appear in this response, then
-      #     `nextPageToken` is included.  To get the next set of results, call this
+      #     `nextPageToken` is included. To get the next set of results, call this
       #     method again using the value of `nextPageToken` as `pageToken`.
       class ListLogMetricsResponse; end
 
