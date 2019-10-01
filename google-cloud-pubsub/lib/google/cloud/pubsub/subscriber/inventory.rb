@@ -115,8 +115,8 @@ module Google
 
                 unless delay_gap.positive?
                   delay_target = nil
-                  delay_gap = nil # wait until broadcast
                   stream.renew_lease!
+                  next
                 end
 
                 @wait_cond.wait delay_gap
