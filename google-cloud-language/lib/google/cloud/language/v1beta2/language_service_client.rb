@@ -205,7 +205,7 @@ module Google
           # Analyzes the sentiment of the provided text.
           #
           # @param document [Google::Cloud::Language::V1beta2::Document | Hash]
-          #   Input document.
+          #   Required. Input document.
           #   A hash of the same form as `Google::Cloud::Language::V1beta2::Document`
           #   can also be provided.
           # @param encoding_type [Google::Cloud::Language::V1beta2::EncodingType]
@@ -246,7 +246,7 @@ module Google
           # other properties.
           #
           # @param document [Google::Cloud::Language::V1beta2::Document | Hash]
-          #   Input document.
+          #   Required. Input document.
           #   A hash of the same form as `Google::Cloud::Language::V1beta2::Document`
           #   can also be provided.
           # @param encoding_type [Google::Cloud::Language::V1beta2::EncodingType]
@@ -281,13 +281,11 @@ module Google
             @analyze_entities.call(req, options, &block)
           end
 
-          # Finds entities, similar to
-          # {Google::Cloud::Language::V1beta2::LanguageService::AnalyzeEntities AnalyzeEntities}
-          # in the text and analyzes sentiment associated with each entity and its
-          # mentions.
+          # Finds entities, similar to {Google::Cloud::Language::V1beta2::LanguageService::AnalyzeEntities AnalyzeEntities} in the text and analyzes
+          # sentiment associated with each entity and its mentions.
           #
           # @param document [Google::Cloud::Language::V1beta2::Document | Hash]
-          #   Input document.
+          #   Required. Input document.
           #   A hash of the same form as `Google::Cloud::Language::V1beta2::Document`
           #   can also be provided.
           # @param encoding_type [Google::Cloud::Language::V1beta2::EncodingType]
@@ -327,7 +325,7 @@ module Google
           # properties.
           #
           # @param document [Google::Cloud::Language::V1beta2::Document | Hash]
-          #   Input document.
+          #   Required. Input document.
           #   A hash of the same form as `Google::Cloud::Language::V1beta2::Document`
           #   can also be provided.
           # @param encoding_type [Google::Cloud::Language::V1beta2::EncodingType]
@@ -365,7 +363,7 @@ module Google
           # Classifies a document into categories.
           #
           # @param document [Google::Cloud::Language::V1beta2::Document | Hash]
-          #   Input document.
+          #   Required. Input document.
           #   A hash of the same form as `Google::Cloud::Language::V1beta2::Document`
           #   can also be provided.
           # @param options [Google::Gax::CallOptions]
@@ -400,11 +398,11 @@ module Google
           # classification features in one call.
           #
           # @param document [Google::Cloud::Language::V1beta2::Document | Hash]
-          #   Input document.
+          #   Required. Input document.
           #   A hash of the same form as `Google::Cloud::Language::V1beta2::Document`
           #   can also be provided.
           # @param features [Google::Cloud::Language::V1beta2::AnnotateTextRequest::Features | Hash]
-          #   The enabled features.
+          #   Required. The enabled features.
           #   A hash of the same form as `Google::Cloud::Language::V1beta2::AnnotateTextRequest::Features`
           #   can also be provided.
           # @param encoding_type [Google::Cloud::Language::V1beta2::EncodingType]
