@@ -1,5 +1,14 @@
 # Release History
 
+### 0.3.0 / 2019-10-01
+
+#### Features
+
+* Update VERSION location and constant
+  * Move version.rb file so it matches the rubygems conventions.
+  * Use Grafeas::Client::VERSION as the new constant.
+  * Update previous Grafeas::VERSION constant to use the new constant.
+
 ### 0.2.1 / 2019-08-23
 
 #### Documentation
