@@ -1,5 +1,11 @@
 # Release History
 
+### 1.10.2 / 2019-10-01
+
+#### Documentation
+
+* Update IAM Policy class description and sample code
+
 ### 1.10.1 / 2019-09-04
 
 #### Documentation
