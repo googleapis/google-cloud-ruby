@@ -1,5 +1,17 @@
 # Release History
 
+### 1.0.1 / 2019-10-01
+
+#### Bug Fixes
+
+* Fix Subscriber lease issue
+  * Fix logic for renewing Subscriber lease for messages.
+    * Subscriptions with very low volume would only be renewed once.
+    * Now messages will be renewed as many times as it takes until 
+* Fix Subscriber lease timing
+  * Start the clock for the next lease renewal immediately.
+  * This help Subscriptions with a very short deadline not
+
 ### 1.0.0 / 2019-09-30
 
 #### Features
