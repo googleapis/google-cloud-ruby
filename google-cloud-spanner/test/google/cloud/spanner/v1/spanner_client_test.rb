@@ -147,6 +147,7 @@ describe Google::Cloud::Spanner::V1::SpannerClient do
     it 'invokes batch_create_sessions without error' do
       # Create request parameters
       formatted_database = Google::Cloud::Spanner::V1::SpannerClient.database_path("[PROJECT]", "[INSTANCE]", "[DATABASE]")
+      session_count = 0
 
       # Create expected grpc response
       expected_response = {}
@@ -156,6 +157,7 @@ describe Google::Cloud::Spanner::V1::SpannerClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Spanner::V1::BatchCreateSessionsRequest, request)
         assert_equal(formatted_database, request.database)
+        assert_equal(session_count, request.session_count)
         OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub_v1.new(:batch_create_sessions, mock_method)
@@ -168,13 +170,13 @@ describe Google::Cloud::Spanner::V1::SpannerClient do
           client = Google::Cloud::Spanner::V1::SpannerClient.new
 
           # Call method
-          response = client.batch_create_sessions(formatted_database)
+          response = client.batch_create_sessions(formatted_database, session_count)
 
           # Verify the response
           assert_equal(expected_response, response)
 
           # Call method with block
-          client.batch_create_sessions(formatted_database) do |response, operation|
+          client.batch_create_sessions(formatted_database, session_count) do |response, operation|
             # Verify the response
             assert_equal(expected_response, response)
             refute_nil(operation)
@@ -186,11 +188,13 @@ describe Google::Cloud::Spanner::V1::SpannerClient do
     it 'invokes batch_create_sessions with error' do
       # Create request parameters
       formatted_database = Google::Cloud::Spanner::V1::SpannerClient.database_path("[PROJECT]", "[INSTANCE]", "[DATABASE]")
+      session_count = 0
 
       # Mock Grpc layer
       mock_method = proc do |request|
         assert_instance_of(Google::Spanner::V1::BatchCreateSessionsRequest, request)
         assert_equal(formatted_database, request.database)
+        assert_equal(session_count, request.session_count)
         raise custom_error
       end
       mock_stub = MockGrpcClientStub_v1.new(:batch_create_sessions, mock_method)
@@ -204,7 +208,7 @@ describe Google::Cloud::Spanner::V1::SpannerClient do
 
           # Call method
           err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
-            client.batch_create_sessions(formatted_database)
+            client.batch_create_sessions(formatted_database, session_count)
           end
 
           # Verify the GaxError wrapped the custom error that was raised.
