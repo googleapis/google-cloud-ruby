@@ -647,7 +647,7 @@ module Google
           #   A hash of the same form as `Google::Logging::V2::LogSink`
           #   can also be provided.
           # @param unique_writer_identity [true, false]
-          #   Optional. See {Google::Logging::V2::ConfigServiceV2::CreateSink sinks::create}
+          #   Optional. See {Google::Logging::V2::ConfigServiceV2#create_sink}
           #   for a description of this field. When updating a sink, the effect of this
           #   field on the value of `writer_identity` in the updated sink depends on both
           #   the old and new values of this field:

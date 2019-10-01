@@ -126,3 +126,20 @@ s.replace(
     'Gem.loaded_specs\[.*\]\.version\.version',
     'Google::Cloud::Logging::VERSION'
 )
+
+s.replace(
+    [
+        'lib/google/cloud/logging/v2/config_service_v2_client.rb',
+        'lib/google/cloud/logging/v2/doc/google/logging/v2/logging_config.rb'
+    ],
+    '\{Google::Logging::V2::ConfigServiceV2::CreateSink sinks::create\}',
+    '{Google::Logging::V2::ConfigServiceV2#create_sink}'
+)
+s.replace(
+    [
+        'lib/google/cloud/logging/v2/config_service_v2_client.rb',
+        'lib/google/cloud/logging/v2/doc/google/logging/v2/logging_config.rb'
+    ],
+    '\{Google::Logging::V2::ConfigServiceV2::UpdateSink sinks::update\}',
+    '{Google::Logging::V2::ConfigServiceV2#update_sink}'
+)
