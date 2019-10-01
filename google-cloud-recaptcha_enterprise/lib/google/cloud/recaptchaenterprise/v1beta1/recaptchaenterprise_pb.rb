@@ -5,6 +5,9 @@
 require 'google/protobuf'
 
 require 'google/api/annotations_pb'
+require 'google/api/client_pb'
+require 'google/api/field_behavior_pb'
+require 'google/api/resource_pb'
 require 'google/protobuf/timestamp_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.cloud.recaptchaenterprise.v1beta1.CreateAssessmentRequest" do
@@ -33,8 +36,9 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     value :CLASSIFICATION_REASON_UNSPECIFIED, 0
     value :AUTOMATION, 1
     value :UNEXPECTED_ENVIRONMENT, 2
+    value :TOO_MUCH_TRAFFIC, 3
     value :UNEXPECTED_USAGE_PATTERNS, 4
-    value :PROVISIONAL_RISK_ANALYSIS, 5
+    value :LOW_CONFIDENCE_SCORE, 5
   end
   add_message "google.cloud.recaptchaenterprise.v1beta1.Event" do
     optional :token, :string, 1

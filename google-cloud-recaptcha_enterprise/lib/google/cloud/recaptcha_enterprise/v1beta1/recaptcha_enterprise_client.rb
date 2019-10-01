@@ -225,7 +225,7 @@ module Google
           #   Required. The name of the project in which the assessment will be created,
           #   in the format "projects/\\{project_number}".
           # @param assessment [Google::Cloud::Recaptchaenterprise::V1beta1::Assessment | Hash]
-          #   The asessment details.
+          #   Required. The assessment details.
           #   A hash of the same form as `Google::Cloud::Recaptchaenterprise::V1beta1::Assessment`
           #   can also be provided.
           # @param options [Google::Gax::CallOptions]
@@ -266,7 +266,7 @@ module Google
           #   Required. The resource name of the Assessment, in the format
           #   "projects/\\{project_number}/assessments/\\{assessment_id}".
           # @param annotation [Google::Cloud::Recaptchaenterprise::V1beta1::AnnotateAssessmentRequest::Annotation]
-          #   The annotation that will be assigned to the Event.
+          #   Required. The annotation that will be assigned to the Event.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
