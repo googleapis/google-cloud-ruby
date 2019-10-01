@@ -458,8 +458,8 @@ module Google
       def method_missing name, *args
         name_str = name.to_s
         super unless name_str =~ /^[a-zA-Z]\w*=?$/
-        if name_str.chomp! "="
-          self[name_str] = args.first
+        if name_str.end_with? "="
+          self[name_str[0...-1]] = args.first
         else
           self[name]
         end
