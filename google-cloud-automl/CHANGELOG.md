@@ -1,5 +1,13 @@
 # Release History
 
+### 0.3.0 / 2019-10-01
+
+#### Features
+
+* Support model deployment metadata for image classification
+  * Add image_classification_model_deployment_metadata argument to AutoMLClient#deploy_model
+  * Add ImageClassificationModelDeploymentMetadata class
+
 ### 0.2.0 / 2019-08-23
 
 #### Features
