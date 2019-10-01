@@ -1,5 +1,17 @@
 # Release History
 
+### 0.7.0 / 2019-10-01
+
+#### Features
+
+* Add EntityType#enable_fuzzy_extraction
+  * Add features
+    * Add EntityType#enable_fuzzy_extraction
+    * Add Kind::KIND_REGEXP
+  * Update documentation
+    * Mark agent_uri argument for AgentsClient#export_agent method as required.
+    * Update wording.
+
 ### 0.6.0 / 2019-08-23
 
 #### Features
