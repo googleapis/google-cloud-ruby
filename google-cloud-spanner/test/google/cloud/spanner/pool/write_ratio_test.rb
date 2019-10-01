@@ -40,7 +40,7 @@ describe Google::Cloud::Spanner::Pool, :write_ratio, :mock_spanner do
         Google::Spanner::V1::Session.new(name: session_path(instance_id, database_id, "session-002"))
       ]
     )
-    mock.expect :batch_create_sessions, sessions, [database_path(instance_id, database_id), session_template: nil, session_count: 2, options: default_options]
+    mock.expect :batch_create_sessions, sessions, [database_path(instance_id, database_id), 2, session_template: nil, options: default_options]
     mock.expect :begin_transaction, Google::Spanner::V1::Transaction.new(id: "tx-002-01"), [String, tx_opts, options: default_options]
     spanner.service.mocked_service = mock
 
@@ -67,8 +67,8 @@ describe Google::Cloud::Spanner::Pool, :write_ratio, :mock_spanner do
         Google::Spanner::V1::Session.new(name: session_path(instance_id, database_id, "session-002")),
       ]
     )
-    mock.expect :batch_create_sessions, sessions, [database_path(instance_id, database_id), session_template: nil, session_count: 2, options: default_options]
-    mock.expect :batch_create_sessions, sessions_2, [database_path(instance_id, database_id), session_template: nil, session_count: 1, options: default_options]
+    mock.expect :batch_create_sessions, sessions, [database_path(instance_id, database_id), 2, session_template: nil, options: default_options]
+    mock.expect :batch_create_sessions, sessions_2, [database_path(instance_id, database_id), 1, session_template: nil, options: default_options]
     mock.expect :begin_transaction, Google::Spanner::V1::Transaction.new(id: "tx-002-01"), [String, tx_opts, options: default_options]
     spanner.service.mocked_service = mock
 
@@ -94,7 +94,7 @@ describe Google::Cloud::Spanner::Pool, :write_ratio, :mock_spanner do
         Google::Spanner::V1::Session.new(name: session_path(instance_id, database_id, "session-005"))
       ]
     )
-    mock.expect :batch_create_sessions, sessions, [database_path(instance_id, database_id), session_template: nil, session_count: 5, options: default_options]
+    mock.expect :batch_create_sessions, sessions, [database_path(instance_id, database_id), 5, session_template: nil, options: default_options]
     mock.expect :begin_transaction, Google::Spanner::V1::Transaction.new(id: "tx-003-01"), [String, tx_opts, options: default_options]
     mock.expect :begin_transaction, Google::Spanner::V1::Transaction.new(id: "tx-004-01"), [String, tx_opts, options: default_options]
     mock.expect :begin_transaction, Google::Spanner::V1::Transaction.new(id: "tx-005-01"), [String, tx_opts, options: default_options]
@@ -125,7 +125,7 @@ describe Google::Cloud::Spanner::Pool, :write_ratio, :mock_spanner do
         Google::Spanner::V1::Session.new(name: session_path(instance_id, database_id, "session-008"))
       ]
     )
-    mock.expect :batch_create_sessions, sessions, [database_path(instance_id, database_id), session_template: nil, session_count: 8, options: default_options]
+    mock.expect :batch_create_sessions, sessions, [database_path(instance_id, database_id), 8, session_template: nil, options: default_options]
     mock.expect :begin_transaction, Google::Spanner::V1::Transaction.new(id: "tx-007-01"), [String, tx_opts, options: default_options]
     mock.expect :begin_transaction, Google::Spanner::V1::Transaction.new(id: "tx-008-01"), [String, tx_opts, options: default_options]
     spanner.service.mocked_service = mock

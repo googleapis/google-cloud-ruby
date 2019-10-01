@@ -265,8 +265,8 @@ module Google
           execute do
             # The response may have fewer sessions than requested in the RPC.
             service.batch_create_sessions database_name,
+                                          session_count,
                                           session_template: session,
-                                          session_count: session_count,
                                           options: opts
           end
         end
