@@ -22,6 +22,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :is_hirable, :message, 6, "google.protobuf.BoolValue"
     optional :create_time, :message, 7, "google.protobuf.Timestamp"
     optional :update_time, :message, 8, "google.protobuf.Timestamp"
+    optional :candidate_update_time, :message, 67, "google.protobuf.Timestamp"
+    optional :resume_update_time, :message, 68, "google.protobuf.Timestamp"
     optional :resume, :message, 53, "google.cloud.talent.v4beta1.Resume"
     repeated :person_names, :message, 11, "google.cloud.talent.v4beta1.PersonName"
     repeated :addresses, :message, 12, "google.cloud.talent.v4beta1.Address"
@@ -41,7 +43,13 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     map :custom_attributes, :string, :message, 26, "google.cloud.talent.v4beta1.CustomAttribute"
     optional :processed, :bool, 27
     optional :keyword_snippet, :string, 28
+    repeated :availability_signals, :message, 70, "google.cloud.talent.v4beta1.AvailabilitySignal"
     repeated :derived_addresses, :message, 64, "google.cloud.talent.v4beta1.Location"
+  end
+  add_message "google.cloud.talent.v4beta1.AvailabilitySignal" do
+    optional :type, :enum, 1, "google.cloud.talent.v4beta1.AvailabilitySignalType"
+    optional :last_update_time, :message, 2, "google.protobuf.Timestamp"
+    optional :filter_satisfied, :message, 3, "google.protobuf.BoolValue"
   end
   add_message "google.cloud.talent.v4beta1.Resume" do
     optional :structured_resume, :string, 1
@@ -181,6 +189,7 @@ module Google
     module Talent
       module V4beta1
         Profile = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4beta1.Profile").msgclass
+        AvailabilitySignal = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4beta1.AvailabilitySignal").msgclass
         Resume = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4beta1.Resume").msgclass
         Resume::ResumeType = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4beta1.Resume.ResumeType").enummodule
         PersonName = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4beta1.PersonName").msgclass

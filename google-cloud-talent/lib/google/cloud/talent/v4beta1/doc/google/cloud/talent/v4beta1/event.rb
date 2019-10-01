@@ -24,7 +24,7 @@ module Google
         # with other calls, such as job searches, issued to the service by the client.
         # @!attribute [rw] request_id
         #   @return [String]
-        #     Optional but highly recommended.
+        #     Strongly recommended for the best service experience.
         #
         #     A unique ID generated in the API responses. It can be found in
         #     {Google::Cloud::Talent::V4beta1::ResponseMetadata#request_id ResponseMetadata#request_id}.
@@ -44,8 +44,8 @@ module Google
         #     that implements Cloud Talent Solution.
         # @!attribute [rw] event_notes
         #   @return [String]
-        #     Optional. Notes about the event provided by recruiters or other users, for
-        #     example, feedback on why a profile was bookmarked.
+        #     Notes about the event provided by recruiters or other users, for example,
+        #     feedback on why a profile was bookmarked.
         class ClientEvent; end
 
         # An event issued when a job seeker interacts with the application that
@@ -66,15 +66,15 @@ module Google
         #
         #     The format is
         #     "projects/{project_id}/tenants/{tenant_id}/jobs/{job_id}", for
-        #     example, "projects/api-test-project/tenants/foo/jobs/1234".
+        #     example, "projects/foo/tenants/bar/jobs/baz".
         # @!attribute [rw] profile
         #   @return [String]
-        #     Optional. The {Google::Cloud::Talent::V4beta1::Profile#name profile name}
-        #     associated with this client event.
+        #     The {Google::Cloud::Talent::V4beta1::Profile#name profile name} associated
+        #     with this client event.
         #
         #     The format is
         #     "projects/{project_id}/tenants/{tenant_id}/profiles/{profile_id}",
-        #     for example, "projects/api-test-project/tenants/foo/profiles/bar".
+        #     for example, "projects/foo/tenants/bar/profiles/baz".
         class JobEvent
           # An enumeration of an event attributed to the behavior of the end user,
           # such as a job seeker.
@@ -189,16 +189,15 @@ module Google
         #
         #     The format is
         #     "projects/{project_id}/tenants/{tenant_id}/profiles/{profile_id}",
-        #     for example, "projects/api-test-project/tenants/foo/profiles/bar".
+        #     for example, "projects/foo/tenants/bar/profiles/baz".
         # @!attribute [rw] jobs
         #   @return [Array<String>]
-        #     Optional. The {Google::Cloud::Talent::V4beta1::Job#name job name(s)}
-        #     associated with this client event. Leave it empty if the event isn't
-        #     associated with a job.
+        #     The {Google::Cloud::Talent::V4beta1::Job#name job name(s)} associated with
+        #     this client event. Leave it empty if the event isn't associated with a job.
         #
         #     The format is
         #     "projects/{project_id}/tenants/{tenant_id}/jobs/{job_id}", for
-        #     example, "projects/api-test-project/tenants/foo/jobs/1234".
+        #     example, "projects/foo/tenants/bar/jobs/baz".
         class ProfileEvent
           # The enum represents types of client events for a candidate profile.
           module ProfileEventType

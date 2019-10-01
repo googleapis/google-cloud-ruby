@@ -296,10 +296,8 @@ module Google
           #   Required. Resource name of the tenant under which the company is created.
           #
           #   The format is "projects/{project_id}/tenants/{tenant_id}", for example,
-          #   "projects/api-test-project/tenant/foo".
-          #
-          #   Tenant id is optional and a default tenant is created if unspecified, for
-          #   example, "projects/api-test-project".
+          #   "projects/foo/tenant/bar". If tenant id is unspecified, a default tenant
+          #   is created, for example, "projects/foo".
           # @param company [Google::Cloud::Talent::V4beta1::Company | Hash]
           #   Required. The company to be created.
           #   A hash of the same form as `Google::Cloud::Talent::V4beta1::Company`
@@ -344,7 +342,7 @@ module Google
           #   "projects/{project_id}/tenants/{tenant_id}/companies/{company_id}", for
           #   example, "projects/api-test-project/tenants/foo/companies/bar".
           #
-          #   Tenant id is optional and the default tenant is used if unspecified, for
+          #   If tenant id is unspecified, the default tenant is used, for
           #   example, "projects/api-test-project/companies/bar".
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
@@ -380,8 +378,7 @@ module Google
           #   A hash of the same form as `Google::Cloud::Talent::V4beta1::Company`
           #   can also be provided.
           # @param update_mask [Google::Protobuf::FieldMask | Hash]
-          #   Optional but strongly recommended for the best service
-          #   experience.
+          #   Strongly recommended for the best service experience.
           #
           #   If
           #   {Google::Cloud::Talent::V4beta1::UpdateCompanyRequest#update_mask update_mask}
@@ -432,10 +429,10 @@ module Google
           #
           #   The format is
           #   "projects/{project_id}/tenants/{tenant_id}/companies/{company_id}", for
-          #   example, "projects/api-test-project/tenants/foo/companies/bar".
+          #   example, "projects/foo/tenants/bar/companies/baz".
           #
-          #   Tenant id is optional and the default tenant is used if unspecified, for
-          #   example, "projects/api-test-project/companies/bar".
+          #   If tenant id is unspecified, the default tenant is used, for
+          #   example, "projects/foo/companies/bar".
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -468,10 +465,10 @@ module Google
           #   Required. Resource name of the tenant under which the company is created.
           #
           #   The format is "projects/{project_id}/tenants/{tenant_id}", for example,
-          #   "projects/api-test-project/tenant/foo".
+          #   "projects/foo/tenant/bar".
           #
-          #   Tenant id is optional and the default tenant is used if unspecified, for
-          #   example, "projects/api-test-project".
+          #   If tenant id is unspecified, the default tenant will be used, for
+          #   example, "projects/foo".
           # @param page_size [Integer]
           #   The maximum number of resources contained in the underlying API
           #   response. If page streaming is performed per-resource, this
@@ -479,7 +476,7 @@ module Google
           #   performed per-page, this determines the maximum number of
           #   resources in a page.
           # @param require_open_jobs [true, false]
-          #   Optional. Set to true if the companies requested must have open jobs.
+          #   Set to true if the companies requested must have open jobs.
           #
           #   Defaults to false.
           #

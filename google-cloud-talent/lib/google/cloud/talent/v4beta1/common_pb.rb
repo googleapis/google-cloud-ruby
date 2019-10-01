@@ -5,6 +5,7 @@
 require 'google/protobuf'
 
 require 'google/api/annotations_pb'
+require 'google/api/field_behavior_pb'
 require 'google/protobuf/timestamp_pb'
 require 'google/protobuf/wrappers_pb'
 require 'google/type/date_pb'
@@ -287,6 +288,13 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     value :NEGATIVE, 3
     value :OUTCOME_NOT_AVAILABLE, 4
   end
+  add_enum "google.cloud.talent.v4beta1.AvailabilitySignalType" do
+    value :AVAILABILITY_SIGNAL_TYPE_UNSPECIFIED, 0
+    value :JOB_APPLICATION, 1
+    value :RESUME_UPDATE, 2
+    value :CANDIDATE_UPDATE, 3
+    value :CLIENT_SUBMISSION, 4
+  end
 end
 
 module Google
@@ -326,6 +334,7 @@ module Google
         CommuteMethod = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4beta1.CommuteMethod").enummodule
         SkillProficiencyLevel = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4beta1.SkillProficiencyLevel").enummodule
         Outcome = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4beta1.Outcome").enummodule
+        AvailabilitySignalType = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4beta1.AvailabilitySignalType").enummodule
       end
     end
   end

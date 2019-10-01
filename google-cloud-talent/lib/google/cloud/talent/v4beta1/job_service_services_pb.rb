@@ -40,6 +40,8 @@ module Google
             # Typically, the job becomes searchable within 10 seconds, but it may take
             # up to 5 minutes.
             rpc :CreateJob, CreateJobRequest, Job
+            # Begins executing a batch create jobs operation.
+            rpc :BatchCreateJobs, BatchCreateJobsRequest, Google::Longrunning::Operation
             # Retrieves the specified job, whose status is OPEN or recently EXPIRED
             # within the last 90 days.
             rpc :GetJob, GetJobRequest, Job
@@ -48,15 +50,17 @@ module Google
             # Typically, updated contents become visible in search results within 10
             # seconds, but it may take up to 5 minutes.
             rpc :UpdateJob, UpdateJobRequest, Job
+            # Begins executing a batch update jobs operation.
+            rpc :BatchUpdateJobs, BatchUpdateJobsRequest, Google::Longrunning::Operation
             # Deletes the specified job.
             #
             # Typically, the job becomes unsearchable within 10 seconds, but it may take
             # up to 5 minutes.
             rpc :DeleteJob, DeleteJobRequest, Google::Protobuf::Empty
-            # Lists jobs by filter.
-            rpc :ListJobs, ListJobsRequest, ListJobsResponse
             # Deletes a list of [Job][google.cloud.talent.v4beta1.Job]s by filter.
             rpc :BatchDeleteJobs, BatchDeleteJobsRequest, Google::Protobuf::Empty
+            # Lists jobs by filter.
+            rpc :ListJobs, ListJobsRequest, ListJobsResponse
             # Searches for jobs using the provided
             # [SearchJobsRequest][google.cloud.talent.v4beta1.SearchJobsRequest].
             #
@@ -78,10 +82,6 @@ module Google
             # the database, and only returns jobs the caller has permission to search
             # against.
             rpc :SearchJobsForAlert, SearchJobsRequest, SearchJobsResponse
-            # Begins executing a batch create jobs operation.
-            rpc :BatchCreateJobs, BatchCreateJobsRequest, Google::Longrunning::Operation
-            # Begins executing a batch update jobs operation.
-            rpc :BatchUpdateJobs, BatchUpdateJobsRequest, Google::Longrunning::Operation
           end
 
           Stub = Service.rpc_stub_class

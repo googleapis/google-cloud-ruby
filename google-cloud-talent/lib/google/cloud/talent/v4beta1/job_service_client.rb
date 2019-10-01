@@ -400,11 +400,9 @@ module Google
           # @param parent [String]
           #   Required. The resource name of the tenant under which the job is created.
           #
-          #   The format is "projects/{project_id}/tenants/{tenant_id}", for example,
-          #   "projects/api-test-project/tenant/foo".
-          #
-          #   Tenant id is optional and a default tenant is created if unspecified, for
-          #   example, "projects/api-test-project".
+          #   The format is "projects/{project_id}/tenants/{tenant_id}". For example,
+          #   "projects/foo/tenant/bar". If tenant id is unspecified a default tenant
+          #   is created. For example, "projects/foo".
           # @param job [Google::Cloud::Talent::V4beta1::Job | Hash]
           #   Required. The Job to be created.
           #   A hash of the same form as `Google::Cloud::Talent::V4beta1::Job`
@@ -447,11 +445,11 @@ module Google
           #   Required. The resource name of the job to retrieve.
           #
           #   The format is
-          #   "projects/{project_id}/tenants/{tenant_id}/jobs/{job_id}", for
-          #   example, "projects/api-test-project/tenants/foo/jobs/1234".
+          #   "projects/{project_id}/tenants/{tenant_id}/jobs/{job_id}". For
+          #   example, "projects/foo/tenants/bar/jobs/baz".
           #
-          #   Tenant id is optional and the default tenant is used if unspecified, for
-          #   example, "projects/api-test-project/jobs/1234".
+          #   If tenant id is unspecified, the default tenant is used. For
+          #   example, "projects/foo/jobs/bar".
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -488,8 +486,7 @@ module Google
           #   A hash of the same form as `Google::Cloud::Talent::V4beta1::Job`
           #   can also be provided.
           # @param update_mask [Google::Protobuf::FieldMask | Hash]
-          #   Optional but strongly recommended to be provided for the best service
-          #   experience.
+          #   Strongly recommended for the best service experience.
           #
           #   If {Google::Cloud::Talent::V4beta1::UpdateJobRequest#update_mask update_mask}
           #   is provided, only the specified fields in
@@ -539,11 +536,11 @@ module Google
           #   Required. The resource name of the job to be deleted.
           #
           #   The format is
-          #   "projects/{project_id}/tenants/{tenant_id}/jobs/{job_id}", for
-          #   example, "projects/api-test-project/tenants/foo/jobs/1234".
+          #   "projects/{project_id}/tenants/{tenant_id}/jobs/{job_id}". For
+          #   example, "projects/foo/tenants/bar/jobs/baz".
           #
-          #   Tenant id is optional and the default tenant is used if unspecified, for
-          #   example, "projects/api-test-project/jobs/1234".
+          #   If tenant id is unspecified, the default tenant is used. For
+          #   example, "projects/foo/jobs/bar".
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -575,11 +572,9 @@ module Google
           # @param parent [String]
           #   Required. The resource name of the tenant under which the job is created.
           #
-          #   The format is "projects/{project_id}/tenants/{tenant_id}", for example,
-          #   "projects/api-test-project/tenant/foo".
-          #
-          #   Tenant id is optional and the default tenant is used if unspecified, for
-          #   example, "projects/api-test-project".
+          #   The format is "projects/{project_id}/tenants/{tenant_id}". For example,
+          #   "projects/foo/tenant/bar". If tenant id is unspecified, a default tenant
+          #   is created. For example, "projects/foo".
           # @param filter [String]
           #   Required. The filter string specifies the jobs to be enumerated.
           #
@@ -588,16 +583,16 @@ module Google
           #   The fields eligible for filtering are:
           #
           #   * `companyName` (Required)
-          #   * `requisitionId` (Optional)
-          #   * `status` (Optional) Available values: OPEN, EXPIRED, ALL. Defaults to
+          #   * `requisitionId`
+          #   * `status` Available values: OPEN, EXPIRED, ALL. Defaults to
           #     OPEN if no value is specified.
           #
           #   Sample Query:
           #
-          #   * companyName = "projects/api-test-project/tenants/foo/companies/bar"
-          #   * companyName = "projects/api-test-project/tenants/foo/companies/bar" AND
+          #   * companyName = "projects/foo/tenants/bar/companies/baz"
+          #   * companyName = "projects/foo/tenants/bar/companies/baz" AND
           #     requisitionId = "req-1"
-          #   * companyName = "projects/api-test-project/tenants/foo/companies/bar" AND
+          #   * companyName = "projects/foo/tenants/bar/companies/baz" AND
           #     status = "EXPIRED"
           # @param page_size [Integer]
           #   The maximum number of resources contained in the underlying API
@@ -606,7 +601,7 @@ module Google
           #   performed per-page, this determines the maximum number of
           #   resources in a page.
           # @param job_view [Google::Cloud::Talent::V4beta1::JobView]
-          #   Optional. The desired job attributes returned for jobs in the
+          #   The desired job attributes returned for jobs in the
           #   search response. Defaults to
           #   {Google::Cloud::Talent::V4beta1::JobView::JOB_VIEW_FULL JobView::JOB_VIEW_FULL}
           #   if no value is specified.
@@ -666,11 +661,9 @@ module Google
           # @param parent [String]
           #   Required. The resource name of the tenant under which the job is created.
           #
-          #   The format is "projects/{project_id}/tenants/{tenant_id}", for example,
-          #   "projects/api-test-project/tenant/foo".
-          #
-          #   Tenant id is optional and the default tenant is used if unspecified, for
-          #   example, "projects/api-test-project".
+          #   The format is "projects/{project_id}/tenants/{tenant_id}". For example,
+          #   "projects/foo/tenant/bar". If tenant id is unspecified, a default tenant
+          #   is created. For example, "projects/foo".
           # @param filter [String]
           #   Required. The filter string specifies the jobs to be deleted.
           #
@@ -681,7 +674,7 @@ module Google
           #   * `companyName` (Required)
           #   * `requisitionId` (Required)
           #
-          #   Sample Query: companyName = "projects/api-test-project/companies/123" AND
+          #   Sample Query: companyName = "projects/foo/companies/bar" AND
           #   requisitionId = "req-1"
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
@@ -725,11 +718,9 @@ module Google
           # @param parent [String]
           #   Required. The resource name of the tenant to search within.
           #
-          #   The format is "projects/{project_id}/tenants/{tenant_id}", for example,
-          #   "projects/api-test-project/tenant/foo".
-          #
-          #   Tenant id is optional and the default tenant is used if unspecified, for
-          #   example, "projects/api-test-project".
+          #   The format is "projects/{project_id}/tenants/{tenant_id}". For example,
+          #   "projects/foo/tenant/bar". If tenant id is unspecified, a default tenant
+          #   is created. For example, "projects/foo".
           # @param request_metadata [Google::Cloud::Talent::V4beta1::RequestMetadata | Hash]
           #   Required. The meta information collected about the job searcher, used to
           #   improve the search quality of the service. The identifiers (such as
@@ -737,24 +728,23 @@ module Google
           #   A hash of the same form as `Google::Cloud::Talent::V4beta1::RequestMetadata`
           #   can also be provided.
           # @param search_mode [Google::Cloud::Talent::V4beta1::SearchJobsRequest::SearchMode]
-          #   Optional. Mode of a search.
+          #   Mode of a search.
           #
           #   Defaults to
           #   {Google::Cloud::Talent::V4beta1::SearchJobsRequest::SearchMode::JOB_SEARCH SearchMode::JOB_SEARCH}.
           # @param job_query [Google::Cloud::Talent::V4beta1::JobQuery | Hash]
-          #   Optional. Query used to search against jobs, such as keyword, location
-          #   filters, etc.
+          #   Query used to search against jobs, such as keyword, location filters, etc.
           #   A hash of the same form as `Google::Cloud::Talent::V4beta1::JobQuery`
           #   can also be provided.
           # @param enable_broadening [true, false]
-          #   Optional. Controls whether to broaden the search when it produces sparse
-          #   results. Broadened queries append results to the end of the matching
-          #   results list.
+          #   Controls whether to broaden the search when it produces sparse results.
+          #   Broadened queries append results to the end of the matching results
+          #   list.
           #
           #   Defaults to false.
           # @param require_precise_result_size [true, false]
-          #   Optional. Controls if the search job request requires the return of a
-          #   precise count of the first 300 results. Setting this to `true` ensures
+          #   Controls if the search job request requires the return of a precise
+          #   count of the first 300 results. Setting this to `true` ensures
           #   consistency in the number of results per page. Best practice is to set this
           #   value to true if a client allows users to jump directly to a
           #   non-sequential search results page.
@@ -763,8 +753,7 @@ module Google
           #
           #   Defaults to false.
           # @param histogram_queries [Array<Google::Cloud::Talent::V4beta1::HistogramQuery | Hash>]
-          #   Optional. An expression specifies a histogram request against matching
-          #   jobs.
+          #   An expression specifies a histogram request against matching jobs.
           #
           #   Expression syntax is an aggregation function call with histogram facets and
           #   other options.
@@ -874,13 +863,13 @@ module Google
           #   A hash of the same form as `Google::Cloud::Talent::V4beta1::HistogramQuery`
           #   can also be provided.
           # @param job_view [Google::Cloud::Talent::V4beta1::JobView]
-          #   Optional. The desired job attributes returned for jobs in the search
-          #   response. Defaults to
+          #   The desired job attributes returned for jobs in the search response.
+          #   Defaults to
           #   {Google::Cloud::Talent::V4beta1::JobView::JOB_VIEW_SMALL JobView::JOB_VIEW_SMALL}
           #   if no value is specified.
           # @param offset [Integer]
-          #   Optional. An integer that specifies the current offset (that is, starting
-          #   result location, amongst the jobs deemed by the API as relevant) in search
+          #   An integer that specifies the current offset (that is, starting result
+          #   location, amongst the jobs deemed by the API as relevant) in search
           #   results. This field is only considered if
           #   {Google::Cloud::Talent::V4beta1::SearchJobsRequest#page_token page_token} is
           #   unset.
@@ -896,8 +885,7 @@ module Google
           #   performed per-page, this determines the maximum number of
           #   resources in a page.
           # @param order_by [String]
-          #   Optional. The criteria determining how search results are sorted. Default
-          #   is
+          #   The criteria determining how search results are sorted. Default is
           #   `"relevance desc"`.
           #
           #   Supported options are:
@@ -952,8 +940,8 @@ module Google
           #     still applied unless explicitly disabled in
           #     {Google::Cloud::Talent::V4beta1::SearchJobsRequest#diversification_level diversification_level}.
           # @param diversification_level [Google::Cloud::Talent::V4beta1::SearchJobsRequest::DiversificationLevel]
-          #   Optional. Controls whether highly similar jobs are returned next to each
-          #   other in the search results. Jobs are identified as highly similar based on
+          #   Controls whether highly similar jobs are returned next to each other in
+          #   the search results. Jobs are identified as highly similar based on
           #   their titles, job categories, and locations. Highly similar results are
           #   clustered so that only one representative job of the cluster is
           #   displayed to the job seeker higher up in the results, with the other jobs
@@ -963,12 +951,12 @@ module Google
           #   {Google::Cloud::Talent::V4beta1::SearchJobsRequest::DiversificationLevel::SIMPLE DiversificationLevel::SIMPLE}
           #   if no value is specified.
           # @param custom_ranking_info [Google::Cloud::Talent::V4beta1::SearchJobsRequest::CustomRankingInfo | Hash]
-          #   Optional. Controls over how job documents get ranked on top of existing
-          #   relevance score (determined by API algorithm).
+          #   Controls over how job documents get ranked on top of existing relevance
+          #   score (determined by API algorithm).
           #   A hash of the same form as `Google::Cloud::Talent::V4beta1::SearchJobsRequest::CustomRankingInfo`
           #   can also be provided.
           # @param disable_keyword_match [true, false]
-          #   Optional. Controls whether to disable exact keyword match on
+          #   Controls whether to disable exact keyword match on
           #   {Google::Cloud::Talent::V4beta1::Job#title Job#title},
           #   {Google::Cloud::Talent::V4beta1::Job#description Job#description},
           #   {Google::Cloud::Talent::V4beta1::Job#company_display_name Job#company_display_name},
@@ -1079,11 +1067,9 @@ module Google
           # @param parent [String]
           #   Required. The resource name of the tenant to search within.
           #
-          #   The format is "projects/{project_id}/tenants/{tenant_id}", for example,
-          #   "projects/api-test-project/tenant/foo".
-          #
-          #   Tenant id is optional and the default tenant is used if unspecified, for
-          #   example, "projects/api-test-project".
+          #   The format is "projects/{project_id}/tenants/{tenant_id}". For example,
+          #   "projects/foo/tenant/bar". If tenant id is unspecified, a default tenant
+          #   is created. For example, "projects/foo".
           # @param request_metadata [Google::Cloud::Talent::V4beta1::RequestMetadata | Hash]
           #   Required. The meta information collected about the job searcher, used to
           #   improve the search quality of the service. The identifiers (such as
@@ -1091,24 +1077,23 @@ module Google
           #   A hash of the same form as `Google::Cloud::Talent::V4beta1::RequestMetadata`
           #   can also be provided.
           # @param search_mode [Google::Cloud::Talent::V4beta1::SearchJobsRequest::SearchMode]
-          #   Optional. Mode of a search.
+          #   Mode of a search.
           #
           #   Defaults to
           #   {Google::Cloud::Talent::V4beta1::SearchJobsRequest::SearchMode::JOB_SEARCH SearchMode::JOB_SEARCH}.
           # @param job_query [Google::Cloud::Talent::V4beta1::JobQuery | Hash]
-          #   Optional. Query used to search against jobs, such as keyword, location
-          #   filters, etc.
+          #   Query used to search against jobs, such as keyword, location filters, etc.
           #   A hash of the same form as `Google::Cloud::Talent::V4beta1::JobQuery`
           #   can also be provided.
           # @param enable_broadening [true, false]
-          #   Optional. Controls whether to broaden the search when it produces sparse
-          #   results. Broadened queries append results to the end of the matching
-          #   results list.
+          #   Controls whether to broaden the search when it produces sparse results.
+          #   Broadened queries append results to the end of the matching results
+          #   list.
           #
           #   Defaults to false.
           # @param require_precise_result_size [true, false]
-          #   Optional. Controls if the search job request requires the return of a
-          #   precise count of the first 300 results. Setting this to `true` ensures
+          #   Controls if the search job request requires the return of a precise
+          #   count of the first 300 results. Setting this to `true` ensures
           #   consistency in the number of results per page. Best practice is to set this
           #   value to true if a client allows users to jump directly to a
           #   non-sequential search results page.
@@ -1117,8 +1102,7 @@ module Google
           #
           #   Defaults to false.
           # @param histogram_queries [Array<Google::Cloud::Talent::V4beta1::HistogramQuery | Hash>]
-          #   Optional. An expression specifies a histogram request against matching
-          #   jobs.
+          #   An expression specifies a histogram request against matching jobs.
           #
           #   Expression syntax is an aggregation function call with histogram facets and
           #   other options.
@@ -1228,13 +1212,13 @@ module Google
           #   A hash of the same form as `Google::Cloud::Talent::V4beta1::HistogramQuery`
           #   can also be provided.
           # @param job_view [Google::Cloud::Talent::V4beta1::JobView]
-          #   Optional. The desired job attributes returned for jobs in the search
-          #   response. Defaults to
+          #   The desired job attributes returned for jobs in the search response.
+          #   Defaults to
           #   {Google::Cloud::Talent::V4beta1::JobView::JOB_VIEW_SMALL JobView::JOB_VIEW_SMALL}
           #   if no value is specified.
           # @param offset [Integer]
-          #   Optional. An integer that specifies the current offset (that is, starting
-          #   result location, amongst the jobs deemed by the API as relevant) in search
+          #   An integer that specifies the current offset (that is, starting result
+          #   location, amongst the jobs deemed by the API as relevant) in search
           #   results. This field is only considered if
           #   {Google::Cloud::Talent::V4beta1::SearchJobsRequest#page_token page_token} is
           #   unset.
@@ -1250,8 +1234,7 @@ module Google
           #   performed per-page, this determines the maximum number of
           #   resources in a page.
           # @param order_by [String]
-          #   Optional. The criteria determining how search results are sorted. Default
-          #   is
+          #   The criteria determining how search results are sorted. Default is
           #   `"relevance desc"`.
           #
           #   Supported options are:
@@ -1306,8 +1289,8 @@ module Google
           #     still applied unless explicitly disabled in
           #     {Google::Cloud::Talent::V4beta1::SearchJobsRequest#diversification_level diversification_level}.
           # @param diversification_level [Google::Cloud::Talent::V4beta1::SearchJobsRequest::DiversificationLevel]
-          #   Optional. Controls whether highly similar jobs are returned next to each
-          #   other in the search results. Jobs are identified as highly similar based on
+          #   Controls whether highly similar jobs are returned next to each other in
+          #   the search results. Jobs are identified as highly similar based on
           #   their titles, job categories, and locations. Highly similar results are
           #   clustered so that only one representative job of the cluster is
           #   displayed to the job seeker higher up in the results, with the other jobs
@@ -1317,12 +1300,12 @@ module Google
           #   {Google::Cloud::Talent::V4beta1::SearchJobsRequest::DiversificationLevel::SIMPLE DiversificationLevel::SIMPLE}
           #   if no value is specified.
           # @param custom_ranking_info [Google::Cloud::Talent::V4beta1::SearchJobsRequest::CustomRankingInfo | Hash]
-          #   Optional. Controls over how job documents get ranked on top of existing
-          #   relevance score (determined by API algorithm).
+          #   Controls over how job documents get ranked on top of existing relevance
+          #   score (determined by API algorithm).
           #   A hash of the same form as `Google::Cloud::Talent::V4beta1::SearchJobsRequest::CustomRankingInfo`
           #   can also be provided.
           # @param disable_keyword_match [true, false]
-          #   Optional. Controls whether to disable exact keyword match on
+          #   Controls whether to disable exact keyword match on
           #   {Google::Cloud::Talent::V4beta1::Job#title Job#title},
           #   {Google::Cloud::Talent::V4beta1::Job#description Job#description},
           #   {Google::Cloud::Talent::V4beta1::Job#company_display_name Job#company_display_name},
@@ -1422,11 +1405,9 @@ module Google
           # @param parent [String]
           #   Required. The resource name of the tenant under which the job is created.
           #
-          #   The format is "projects/{project_id}/tenants/{tenant_id}", for example,
-          #   "projects/api-test-project/tenant/foo".
-          #
-          #   Tenant id is optional and a default tenant is created if unspecified, for
-          #   example, "projects/api-test-project".
+          #   The format is "projects/{project_id}/tenants/{tenant_id}". For example,
+          #   "projects/foo/tenant/bar". If tenant id is unspecified, a default tenant
+          #   is created. For example, "projects/foo".
           # @param jobs [Array<Google::Cloud::Talent::V4beta1::Job | Hash>]
           #   Required. The jobs to be created.
           #   A hash of the same form as `Google::Cloud::Talent::V4beta1::Job`
@@ -1497,18 +1478,16 @@ module Google
           # @param parent [String]
           #   Required. The resource name of the tenant under which the job is created.
           #
-          #   The format is "projects/{project_id}/tenants/{tenant_id}", for example,
-          #   "projects/api-test-project/tenant/foo".
-          #
-          #   Tenant id is optional and the default tenant is used if unspecified, for
-          #   example, "projects/api-test-project".
+          #   The format is "projects/{project_id}/tenants/{tenant_id}". For example,
+          #   "projects/foo/tenant/bar". If tenant id is unspecified, a default tenant
+          #   is created. For example, "projects/foo".
           # @param jobs [Array<Google::Cloud::Talent::V4beta1::Job | Hash>]
-          #   Required. The jobs to be updated.
+          #   The jobs to be updated.
           #   A hash of the same form as `Google::Cloud::Talent::V4beta1::Job`
           #   can also be provided.
           # @param update_mask [Google::Protobuf::FieldMask | Hash]
-          #   Optional but strongly recommended to be provided for the best service
-          #   experience, also increase latency when checking status of batch operation.
+          #   Strongly recommended for the best service experience. Be aware that it will
+          #   also increase latency when checking the status of a batch operation.
           #
           #   If
           #   {Google::Cloud::Talent::V4beta1::BatchUpdateJobsRequest#update_mask update_mask}

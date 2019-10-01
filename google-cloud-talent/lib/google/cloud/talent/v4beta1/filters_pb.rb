@@ -5,6 +5,7 @@
 require 'google/protobuf'
 
 require 'google/api/annotations_pb'
+require 'google/api/field_behavior_pb'
 require 'google/cloud/talent/v4beta1/common_pb'
 require 'google/protobuf/duration_pb'
 require 'google/protobuf/timestamp_pb'
@@ -43,6 +44,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     repeated :application_job_filters, :message, 13, "google.cloud.talent.v4beta1.ApplicationJobFilter"
     optional :custom_attribute_filter, :string, 15
     optional :candidate_availability_filter, :message, 16, "google.cloud.talent.v4beta1.CandidateAvailabilityFilter"
+    repeated :availability_filters, :message, 18, "google.cloud.talent.v4beta1.AvailabilityFilter"
     repeated :person_name_filters, :message, 17, "google.cloud.talent.v4beta1.PersonNameFilter"
   end
   add_message "google.cloud.talent.v4beta1.LocationFilter" do
@@ -141,6 +143,11 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.cloud.talent.v4beta1.CandidateAvailabilityFilter" do
     optional :negated, :bool, 1
   end
+  add_message "google.cloud.talent.v4beta1.AvailabilityFilter" do
+    optional :signal_type, :enum, 1, "google.cloud.talent.v4beta1.AvailabilitySignalType"
+    optional :range, :message, 2, "google.cloud.talent.v4beta1.TimestampRange"
+    optional :required, :bool, 3
+  end
   add_message "google.cloud.talent.v4beta1.PersonNameFilter" do
     optional :person_name, :string, 1
   end
@@ -170,6 +177,7 @@ module Google
         TimeFilter = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4beta1.TimeFilter").msgclass
         TimeFilter::TimeField = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4beta1.TimeFilter.TimeField").enummodule
         CandidateAvailabilityFilter = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4beta1.CandidateAvailabilityFilter").msgclass
+        AvailabilityFilter = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4beta1.AvailabilityFilter").msgclass
         PersonNameFilter = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4beta1.PersonNameFilter").msgclass
       end
     end
