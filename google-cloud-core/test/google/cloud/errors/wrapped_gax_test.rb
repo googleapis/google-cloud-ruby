@@ -16,6 +16,7 @@ require "helper"
 require "google/cloud/errors"
 require "grpc/errors"
 require "google/gax/errors"
+require "google/rpc/status_pb"
 
 describe Google::Cloud::Error, :wrapped_gax do
   def debug_info

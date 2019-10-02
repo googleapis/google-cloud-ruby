@@ -56,9 +56,9 @@ module Google
       #     Output only. An IAM identity&mdash;a service account or group&mdash;under
       #     which Logging writes the exported log entries to the sink's destination.
       #     This field is set by
-      #     {Google::Logging::V2::ConfigServiceV2::CreateSink sinks::create}
+      #     {Google::Logging::V2::ConfigServiceV2#create_sink}
       #     and
-      #     {Google::Logging::V2::ConfigServiceV2::UpdateSink sinks::update}
+      #     {Google::Logging::V2::ConfigServiceV2#update_sink}
       #     based on the value of `unique_writer_identity` in those methods.
       #
       #     Until you grant this identity write-access to the destination, log entry
@@ -223,7 +223,7 @@ module Google
       #     as part of `sink_name`.
       # @!attribute [rw] unique_writer_identity
       #   @return [true, false]
-      #     Optional. See {Google::Logging::V2::ConfigServiceV2::CreateSink sinks::create}
+      #     Optional. See {Google::Logging::V2::ConfigServiceV2#create_sink}
       #     for a description of this field. When updating a sink, the effect of this
       #     field on the value of `writer_identity` in the updated sink depends on both
       #     the old and new values of this field:
