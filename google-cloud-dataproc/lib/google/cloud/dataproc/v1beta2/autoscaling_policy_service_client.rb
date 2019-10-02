@@ -261,11 +261,18 @@ module Google
           # Creates new autoscaling policy.
           #
           # @param parent [String]
-          #   Required. The "resource name" of the region, as described
-          #   in https://cloud.google.com/apis/design/resource_names of the form
-          #   `projects/{project_id}/regions/{region}`.
+          #   Required. The "resource name" of the region or location, as described
+          #   in https://cloud.google.com/apis/design/resource_names.
+          #
+          #   * For `projects.regions.autoscalingPolicies.create`, the resource name
+          #     has the following format:
+          #     `projects/{project_id}/regions/{region}`
+          #
+          #   * For `projects.locations.autoscalingPolicies.create`, the resource name
+          #     has the following format:
+          #     `projects/{project_id}/locations/{location}`
           # @param policy [Google::Cloud::Dataproc::V1beta2::AutoscalingPolicy | Hash]
-          #   The autoscaling policy to create.
+          #   Required. The autoscaling policy to create.
           #   A hash of the same form as `Google::Cloud::Dataproc::V1beta2::AutoscalingPolicy`
           #   can also be provided.
           # @param options [Google::Gax::CallOptions]
@@ -340,8 +347,15 @@ module Google
           #
           # @param name [String]
           #   Required. The "resource name" of the autoscaling policy, as described
-          #   in https://cloud.google.com/apis/design/resource_names of the form
-          #   `projects/{project_id}/regions/{region}/autoscalingPolicies/{policy_id}`.
+          #   in https://cloud.google.com/apis/design/resource_names.
+          #
+          #   * For `projects.regions.autoscalingPolicies.get`, the resource name
+          #     of the policy has the following format:
+          #     `projects/{project_id}/regions/{region}/autoscalingPolicies/{policy_id}`
+          #
+          #   * For `projects.locations.autoscalingPolicies.get`, the resource name
+          #     of the policy has the following format:
+          #     `projects/{project_id}/locations/{location}/autoscalingPolicies/{policy_id}`
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -371,9 +385,16 @@ module Google
           # Lists autoscaling policies in the project.
           #
           # @param parent [String]
-          #   Required. The "resource name" of the region, as described
-          #   in https://cloud.google.com/apis/design/resource_names of the form
-          #   `projects/{project_id}/regions/{region}`
+          #   Required. The "resource name" of the region or location, as described
+          #   in https://cloud.google.com/apis/design/resource_names.
+          #
+          #   * For `projects.regions.autoscalingPolicies.list`, the resource name
+          #     of the region has the following format:
+          #     `projects/{project_id}/regions/{region}`
+          #
+          #   * For `projects.locations.autoscalingPolicies.list`, the resource name
+          #     of the location has the following format:
+          #     `projects/{project_id}/locations/{location}`
           # @param page_size [Integer]
           #   The maximum number of resources contained in the underlying API
           #   response. If page streaming is performed per-resource, this
@@ -429,8 +450,15 @@ module Google
           #
           # @param name [String]
           #   Required. The "resource name" of the autoscaling policy, as described
-          #   in https://cloud.google.com/apis/design/resource_names of the form
-          #   `projects/{project_id}/regions/{region}/autoscalingPolicies/{policy_id}`.
+          #   in https://cloud.google.com/apis/design/resource_names.
+          #
+          #   * For `projects.regions.autoscalingPolicies.delete`, the resource name
+          #     of the policy has the following format:
+          #     `projects/{project_id}/regions/{region}/autoscalingPolicies/{policy_id}`
+          #
+          #   * For `projects.locations.autoscalingPolicies.delete`, the resource name
+          #     of the policy has the following format:
+          #     `projects/{project_id}/locations/{location}/autoscalingPolicies/{policy_id}`
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.

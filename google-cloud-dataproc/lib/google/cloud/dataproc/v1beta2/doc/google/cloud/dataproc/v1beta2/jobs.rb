@@ -107,6 +107,11 @@ module Google
 
         # A Cloud Dataproc job for running [Apache Spark](http://spark.apache.org/)
         # applications on YARN.
+        # The specification of the main method to call to drive the job.
+        # Specify either the jar file that contains the main class or the main class
+        # name. To pass both a main jar and a main class in that jar, add the jar to
+        # `CommonJob.jar_file_uris`, and then specify the main class name in
+        # `main_class`.
         # @!attribute [rw] main_jar_file_uri
         #   @return [String]
         #     The HCFS URI of the jar file that contains the main class.
@@ -433,16 +438,16 @@ module Google
         # be changed before final release.
         # @!attribute [rw] name
         #   @return [String]
-        #     Required. The application name.
+        #     Output only. The application name.
         # @!attribute [rw] state
         #   @return [Google::Cloud::Dataproc::V1beta2::YarnApplication::State]
-        #     Required. The application state.
+        #     Output only. The application state.
         # @!attribute [rw] progress
         #   @return [Float]
-        #     Required. The numerical progress of the application, from 1 to 100.
+        #     Output only. The numerical progress of the application, from 1 to 100.
         # @!attribute [rw] tracking_url
         #   @return [String]
-        #     Optional. The HTTP URL of the ApplicationMaster, HistoryServer, or
+        #     Optional. Output only. The HTTP URL of the ApplicationMaster, HistoryServer, or
         #     TimelineServer that provides application-specific information. The URL uses
         #     the internal hostname, and requires a proxy server for resolution and,
         #     possibly, access.

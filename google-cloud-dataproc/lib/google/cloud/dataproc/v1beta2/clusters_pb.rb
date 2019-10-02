@@ -5,7 +5,8 @@
 require 'google/protobuf'
 
 require 'google/api/annotations_pb'
-require 'google/cloud/dataproc/v1beta2/operations_pb'
+require 'google/api/client_pb'
+require 'google/api/field_behavior_pb'
 require 'google/cloud/dataproc/v1beta2/shared_pb'
 require 'google/longrunning/operations_pb'
 require 'google/protobuf/duration_pb'
@@ -83,6 +84,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   end
   add_message "google.cloud.dataproc.v1beta2.LifecycleConfig" do
     optional :idle_delete_ttl, :message, 1, "google.protobuf.Duration"
+    optional :idle_start_time, :message, 4, "google.protobuf.Timestamp"
     oneof :ttl do
       optional :auto_delete_time, :message, 2, "google.protobuf.Timestamp"
       optional :auto_delete_ttl, :message, 3, "google.protobuf.Duration"
@@ -106,6 +108,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :cross_realm_trust_shared_password_uri, :string, 12
     optional :kdc_db_key_uri, :string, 13
     optional :tgt_lifetime_hours, :int32, 14
+    optional :realm, :string, 15
   end
   add_message "google.cloud.dataproc.v1beta2.NodeInitializationAction" do
     optional :executable_file, :string, 1

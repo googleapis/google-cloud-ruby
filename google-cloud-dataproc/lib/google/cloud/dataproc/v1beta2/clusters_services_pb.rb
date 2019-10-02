@@ -36,19 +36,29 @@ module Google
             self.unmarshal_class_method = :decode
             self.service_name = 'google.cloud.dataproc.v1beta2.ClusterController'
 
-            # Creates a cluster in a project.
+            # Creates a cluster in a project. The returned
+            # [Operation.metadata][google.longrunning.Operation.metadata] will be
+            # [ClusterOperationMetadata](/dataproc/docs/reference/rpc/google.cloud.dataproc.v1beta2#clusteroperationmetadata).
             rpc :CreateCluster, CreateClusterRequest, Google::Longrunning::Operation
-            # Updates a cluster in a project.
+            # Updates a cluster in a project. The returned
+            # [Operation.metadata][google.longrunning.Operation.metadata] will be
+            # [ClusterOperationMetadata](/dataproc/docs/reference/rpc/google.cloud.dataproc.v1beta2#clusteroperationmetadata).
             rpc :UpdateCluster, UpdateClusterRequest, Google::Longrunning::Operation
-            # Deletes a cluster in a project.
+            # Deletes a cluster in a project. The returned
+            # [Operation.metadata][google.longrunning.Operation.metadata] will be
+            # [ClusterOperationMetadata](/dataproc/docs/reference/rpc/google.cloud.dataproc.v1beta2#clusteroperationmetadata).
             rpc :DeleteCluster, DeleteClusterRequest, Google::Longrunning::Operation
             # Gets the resource representation for a cluster in a project.
             rpc :GetCluster, GetClusterRequest, Cluster
             # Lists all regions/\\{region}/clusters in a project.
             rpc :ListClusters, ListClustersRequest, ListClustersResponse
-            # Gets cluster diagnostic information.
-            # After the operation completes, the Operation.response field
-            # contains `DiagnoseClusterOutputLocation`.
+            # Gets cluster diagnostic information. The returned
+            # [Operation.metadata][google.longrunning.Operation.metadata] will be
+            # [ClusterOperationMetadata](/dataproc/docs/reference/rpc/google.cloud.dataproc.v1beta2#clusteroperationmetadata).
+            # After the operation completes,
+            # [Operation.response][google.longrunning.Operation.response]
+            # contains
+            # [Empty](google.protobuf.Empty).
             rpc :DiagnoseCluster, DiagnoseClusterRequest, Google::Longrunning::Operation
           end
 
