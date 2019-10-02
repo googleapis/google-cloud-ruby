@@ -7,7 +7,7 @@ gem "google-cloud-env", path: "../google-cloud-env"
 gem "google-cloud-logging", path: "../google-cloud-logging"
 gem "stackdriver-core", path: "../stackdriver-core"
 
-gem "rake", "~> 12.3"
+gem "rake", "~> 13.0.0"
 
 # Pin minitest to 5.11.x to avoid warnings emitted by 5.12.
 # See https://github.com/googleapis/google-cloud-ruby/issues/4110

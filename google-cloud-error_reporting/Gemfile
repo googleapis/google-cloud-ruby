@@ -6,4 +6,4 @@ gem "google-cloud-core", path: "../google-cloud-core"
 gem "google-cloud-env", path: "../google-cloud-env"
 gem "stackdriver-core", path: "../stackdriver-core"
 
-gem "rake", "~> 12.3"
+gem "rake", "~> 13.0.0"
