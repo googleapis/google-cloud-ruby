@@ -1,5 +1,12 @@
 # Release History
 
+### 1.1.3 / 2019-10-01
+
+#### Documentation
+
+* Fix roles string in IAM Policy JSON example
+* Update IAM Policy class description and sample code
+
 ### 1.1.2 / 2019-09-04
 
 #### Documentation
