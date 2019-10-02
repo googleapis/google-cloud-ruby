@@ -19,7 +19,7 @@ module Google
       # The protocol for the `ListUptimeCheckConfigs` request.
       # @!attribute [rw] parent
       #   @return [String]
-      #     The project whose uptime check configurations are listed. The format
+      #     The project whose Uptime check configurations are listed. The format
       #       is `projects/[PROJECT_ID]`.
       # @!attribute [rw] page_size
       #   @return [Integer]
@@ -37,7 +37,7 @@ module Google
       # The protocol for the `ListUptimeCheckConfigs` response.
       # @!attribute [rw] uptime_check_configs
       #   @return [Array<Google::Monitoring::V3::UptimeCheckConfig>]
-      #     The returned uptime check configurations.
+      #     The returned Uptime check configurations.
       # @!attribute [rw] next_page_token
       #   @return [String]
       #     This field represents the pagination token to retrieve the next page of
@@ -47,41 +47,41 @@ module Google
       #     request message's page_token field).
       # @!attribute [rw] total_size
       #   @return [Integer]
-      #     The total number of uptime check configurations for the project,
+      #     The total number of Uptime check configurations for the project,
       #     irrespective of any pagination.
       class ListUptimeCheckConfigsResponse; end
 
       # The protocol for the `GetUptimeCheckConfig` request.
       # @!attribute [rw] name
       #   @return [String]
-      #     The uptime check configuration to retrieve. The format
+      #     The Uptime check configuration to retrieve. The format
       #       is `projects/[PROJECT_ID]/uptimeCheckConfigs/[UPTIME_CHECK_ID]`.
       class GetUptimeCheckConfigRequest; end
 
       # The protocol for the `CreateUptimeCheckConfig` request.
       # @!attribute [rw] parent
       #   @return [String]
-      #     The project in which to create the uptime check. The format
+      #     The project in which to create the Uptime check. The format
       #       is `projects/[PROJECT_ID]`.
       # @!attribute [rw] uptime_check_config
       #   @return [Google::Monitoring::V3::UptimeCheckConfig]
-      #     The new uptime check configuration.
+      #     The new Uptime check configuration.
       class CreateUptimeCheckConfigRequest; end
 
       # The protocol for the `UpdateUptimeCheckConfig` request.
       # @!attribute [rw] update_mask
       #   @return [Google::Protobuf::FieldMask]
-      #     Optional. If present, only the listed fields in the current uptime check
+      #     Optional. If present, only the listed fields in the current Uptime check
       #     configuration are updated with values from the new configuration. If this
       #     field is empty, then the current configuration is completely replaced with
       #     the new configuration.
       # @!attribute [rw] uptime_check_config
       #   @return [Google::Monitoring::V3::UptimeCheckConfig]
-      #     Required. If an `"updateMask"` has been specified, this field gives
-      #     the values for the set of fields mentioned in the `"updateMask"`. If an
-      #     `"updateMask"` has not been given, this uptime check configuration replaces
-      #     the current configuration. If a field is mentioned in `"updateMask"` but
-      #     the corresonding field is omitted in this partial uptime check
+      #     Required. If an `updateMask` has been specified, this field gives
+      #     the values for the set of fields mentioned in the `updateMask`. If an
+      #     `updateMask` has not been given, this Uptime check configuration replaces
+      #     the current configuration. If a field is mentioned in `updateMask` but
+      #     the corresonding field is omitted in this partial Uptime check
       #     configuration, it has the effect of deleting/clearing the field from the
       #     configuration on the server.
       #
@@ -93,7 +93,7 @@ module Google
       # The protocol for the `DeleteUptimeCheckConfig` request.
       # @!attribute [rw] name
       #   @return [String]
-      #     The uptime check configuration to delete. The format
+      #     The Uptime check configuration to delete. The format
       #       is `projects/[PROJECT_ID]/uptimeCheckConfigs/[UPTIME_CHECK_ID]`.
       class DeleteUptimeCheckConfigRequest; end
 

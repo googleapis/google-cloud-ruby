@@ -34,7 +34,7 @@ module Google
     module Monitoring
       module V3
         # The UptimeCheckService API is used to manage (list, create, delete, edit)
-        # uptime check configurations in the Stackdriver Monitoring product. An uptime
+        # Uptime check configurations in the Stackdriver Monitoring product. An Uptime
         # check is a piece of configuration that determines which resources and
         # services to monitor for availability. These configurations can also be
         # configured interactively by navigating to the [Cloud Console]
@@ -272,11 +272,11 @@ module Google
 
           # Service calls
 
-          # Lists the existing valid uptime check configurations for the project,
-          # leaving out any invalid configurations.
+          # Lists the existing valid Uptime check configurations for the project
+          # (leaving out any invalid configurations).
           #
           # @param parent [String]
-          #   The project whose uptime check configurations are listed. The format
+          #   The project whose Uptime check configurations are listed. The format
           #     is `projects/[PROJECT_ID]`.
           # @param page_size [Integer]
           #   The maximum number of resources contained in the underlying API
@@ -328,10 +328,10 @@ module Google
             @list_uptime_check_configs.call(req, options, &block)
           end
 
-          # Gets a single uptime check configuration.
+          # Gets a single Uptime check configuration.
           #
           # @param name [String]
-          #   The uptime check configuration to retrieve. The format
+          #   The Uptime check configuration to retrieve. The format
           #     is `projects/[PROJECT_ID]/uptimeCheckConfigs/[UPTIME_CHECK_ID]`.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
@@ -359,13 +359,13 @@ module Google
             @get_uptime_check_config.call(req, options, &block)
           end
 
-          # Creates a new uptime check configuration.
+          # Creates a new Uptime check configuration.
           #
           # @param parent [String]
-          #   The project in which to create the uptime check. The format
+          #   The project in which to create the Uptime check. The format
           #     is `projects/[PROJECT_ID]`.
           # @param uptime_check_config [Google::Monitoring::V3::UptimeCheckConfig | Hash]
-          #   The new uptime check configuration.
+          #   The new Uptime check configuration.
           #   A hash of the same form as `Google::Monitoring::V3::UptimeCheckConfig`
           #   can also be provided.
           # @param options [Google::Gax::CallOptions]
@@ -399,17 +399,17 @@ module Google
             @create_uptime_check_config.call(req, options, &block)
           end
 
-          # Updates an uptime check configuration. You can either replace the entire
+          # Updates an Uptime check configuration. You can either replace the entire
           # configuration with a new one or replace only certain fields in the current
-          # configuration by specifying the fields to be updated via `"updateMask"`.
+          # configuration by specifying the fields to be updated via `updateMask`.
           # Returns the updated configuration.
           #
           # @param uptime_check_config [Google::Monitoring::V3::UptimeCheckConfig | Hash]
-          #   Required. If an `"updateMask"` has been specified, this field gives
-          #   the values for the set of fields mentioned in the `"updateMask"`. If an
-          #   `"updateMask"` has not been given, this uptime check configuration replaces
-          #   the current configuration. If a field is mentioned in `"updateMask"` but
-          #   the corresonding field is omitted in this partial uptime check
+          #   Required. If an `updateMask` has been specified, this field gives
+          #   the values for the set of fields mentioned in the `updateMask`. If an
+          #   `updateMask` has not been given, this Uptime check configuration replaces
+          #   the current configuration. If a field is mentioned in `updateMask` but
+          #   the corresonding field is omitted in this partial Uptime check
           #   configuration, it has the effect of deleting/clearing the field from the
           #   configuration on the server.
           #
@@ -419,7 +419,7 @@ module Google
           #   A hash of the same form as `Google::Monitoring::V3::UptimeCheckConfig`
           #   can also be provided.
           # @param update_mask [Google::Protobuf::FieldMask | Hash]
-          #   Optional. If present, only the listed fields in the current uptime check
+          #   Optional. If present, only the listed fields in the current Uptime check
           #   configuration are updated with values from the new configuration. If this
           #   field is empty, then the current configuration is completely replaced with
           #   the new configuration.
@@ -455,12 +455,12 @@ module Google
             @update_uptime_check_config.call(req, options, &block)
           end
 
-          # Deletes an uptime check configuration. Note that this method will fail
-          # if the uptime check configuration is referenced by an alert policy or
+          # Deletes an Uptime check configuration. Note that this method will fail
+          # if the Uptime check configuration is referenced by an alert policy or
           # other dependent configs that would be rendered invalid by the deletion.
           #
           # @param name [String]
-          #   The uptime check configuration to delete. The format
+          #   The Uptime check configuration to delete. The format
           #     is `projects/[PROJECT_ID]/uptimeCheckConfigs/[UPTIME_CHECK_ID]`.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
@@ -488,7 +488,7 @@ module Google
             nil
           end
 
-          # Returns the list of IPs that checkers run from
+          # Returns the list of IP addresses that checkers run from
           #
           # @param page_size [Integer]
           #   The maximum number of resources contained in the underlying API
