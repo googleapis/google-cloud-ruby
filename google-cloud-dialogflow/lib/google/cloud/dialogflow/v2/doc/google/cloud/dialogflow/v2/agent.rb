@@ -197,18 +197,7 @@ module Google
         #     only if `agent_uri` is specified in `ExportAgentRequest`.
         # @!attribute [rw] agent_content
         #   @return [String]
-        #     The exported agent.
-        #
-        #     Example for how to export an agent to a zip file via a command line:
-        #     <pre>curl \
-        #       'https://dialogflow.googleapis.com/v2/projects/&lt;project_id&gt;/agent:export'\
-        #       -X POST \
-        #       -H 'Authorization: Bearer' \
-        #       $(gcloud auth application-default print-access-token) \
-        #       -H 'Accept: application/json'
-        #       --compressed \
-        #       | grep agentContent | sed -e 's/.*"agentContent": "\([^"]*\)".*/\1/' \
-        #       | base64 --decode > &lt;agent zip file&gt;</pre>
+        #     Zip compressed raw byte content for agent.
         class ExportAgentResponse; end
 
         # The request message for {Google::Cloud::Dialogflow::V2::Agents::ImportAgent Agents::ImportAgent}.
@@ -222,19 +211,7 @@ module Google
         #     Note: The URI must start with "gs://".
         # @!attribute [rw] agent_content
         #   @return [String]
-        #     The agent to import.
-        #
-        #     Example for how to import an agent via the command line:
-        #     <pre>curl \
-        #       'https://dialogflow.googleapis.com/v2/projects/&lt;project_id&gt;/agent:import'\
-        #        -X POST \
-        #        -H 'Authorization: Bearer'\
-        #        $(gcloud auth application-default print-access-token) \
-        #        -H 'Accept: application/json' \
-        #        -H 'Content-Type: application/json' \
-        #        --data-binary "{
-        #           'agentContent': '$(cat &lt;agent zip file&gt; | base64 -w 0)'
-        #        }"</pre>
+        #     Zip compressed raw byte content for agent.
         class ImportAgentRequest; end
 
         # The request message for {Google::Cloud::Dialogflow::V2::Agents::RestoreAgent Agents::RestoreAgent}.
@@ -248,19 +225,7 @@ module Google
         #     Note: The URI must start with "gs://".
         # @!attribute [rw] agent_content
         #   @return [String]
-        #     The agent to restore.
-        #
-        #     Example for how to restore an agent via the command line:
-        #     <pre>curl \
-        #       'https://dialogflow.googleapis.com/v2/projects/&lt;project_id&gt;/agent:restore'\
-        #        -X POST \
-        #        -H 'Authorization: Bearer' \
-        #        $(gcloud auth application-default print-access-token) \
-        #        -H 'Accept: application/json' \
-        #        -H 'Content-Type: application/json' \
-        #        --data-binary "{
-        #            'agentContent': '$(cat &lt;agent zip file&gt; | base64 -w 0)'
-        #        }"</pre>
+        #     Zip compressed raw byte content for agent.
         class RestoreAgentRequest; end
       end
     end
