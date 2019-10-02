@@ -4,13 +4,10 @@
 
 #### Features
 
-* Add EntityType#enable_fuzzy_extraction
-  * Add features
-    * Add EntityType#enable_fuzzy_extraction
-    * Add Kind::KIND_REGEXP
-  * Update documentation
-    * Mark agent_uri argument for AgentsClient#export_agent method as required.
-    * Update wording.
+* Support for fuzzy extraction
+  * Add EntityType#enable_fuzzy_extraction
+  * Add Kind::KIND_REGEXP
+* Documentation updates
 
 ### 0.6.0 / 2019-08-23
 
