@@ -1,5 +1,11 @@
 # Release History
 
+### 0.3.0 / 2019-10-01
+
+#### Cleanup
+
+* Update VERSION location and constant to match rubygems conventions.
+
 ### 0.2.1 / 2019-08-23
 
 #### Documentation
