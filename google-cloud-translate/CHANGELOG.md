@@ -1,5 +1,11 @@
 # Release History
 
+### 1.4.0 / 2019-10-01
+
+#### Features
+
+* Support overriding of service endpoint
+
 ### 1.3.1 / 2019-08-23
 
 #### Documentation
