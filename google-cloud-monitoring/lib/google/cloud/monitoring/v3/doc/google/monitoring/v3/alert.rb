@@ -71,6 +71,10 @@ module Google
       #     any assumption about the state if it has not been populated. The
       #     field should always be populated on List and Get operations, unless
       #     a field projection has been specified that strips it out.
+      # @!attribute [rw] validity
+      #   @return [Google::Rpc::Status]
+      #     Read-only description of how the alert policy is invalid. OK if the alert
+      #     policy is valid. If not OK, the alert policy will not generate incidents.
       # @!attribute [rw] notification_channels
       #   @return [Array<String>]
       #     Identifies the notification channels to which notifications should be sent

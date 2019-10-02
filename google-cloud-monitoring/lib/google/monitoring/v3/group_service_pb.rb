@@ -9,6 +9,7 @@ require 'google/api/monitored_resource_pb'
 require 'google/monitoring/v3/common_pb'
 require 'google/monitoring/v3/group_pb'
 require 'google/protobuf/empty_pb'
+require 'google/api/client_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.monitoring.v3.ListGroupsRequest" do
     optional :name, :string, 7
@@ -38,6 +39,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   end
   add_message "google.monitoring.v3.DeleteGroupRequest" do
     optional :name, :string, 3
+    optional :recursive, :bool, 4
   end
   add_message "google.monitoring.v3.ListGroupMembersRequest" do
     optional :name, :string, 7

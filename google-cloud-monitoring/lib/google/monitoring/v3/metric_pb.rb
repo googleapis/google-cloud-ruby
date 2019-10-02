@@ -4,7 +4,7 @@
 
 require 'google/protobuf'
 
-require 'google/api/annotations_pb'
+require 'google/api/distribution_pb'
 require 'google/api/label_pb'
 require 'google/api/metric_pb'
 require 'google/api/monitored_resource_pb'

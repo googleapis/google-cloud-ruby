@@ -306,8 +306,7 @@ module Google
 
           # Service calls
 
-          # Lists monitored resource descriptors that match a filter. This method does
-          # not require a Stackdriver account.
+          # Lists monitored resource descriptors that match a filter. This method does not require a Stackdriver account.
           #
           # @param name [String]
           #   The project on which to execute the request. The format is
@@ -372,8 +371,7 @@ module Google
             @list_monitored_resource_descriptors.call(req, options, &block)
           end
 
-          # Gets a single monitored resource descriptor. This method does not require a
-          # Stackdriver account.
+          # Gets a single monitored resource descriptor. This method does not require a Stackdriver account.
           #
           # @param name [String]
           #   The monitored resource descriptor to get.  The format is
@@ -406,8 +404,7 @@ module Google
             @get_monitored_resource_descriptor.call(req, options, &block)
           end
 
-          # Lists metric descriptors that match a filter. This method does not require
-          # a Stackdriver account.
+          # Lists metric descriptors that match a filter. This method does not require a Stackdriver account.
           #
           # @param name [String]
           #   The project on which to execute the request. The format is
@@ -473,8 +470,7 @@ module Google
             @list_metric_descriptors.call(req, options, &block)
           end
 
-          # Gets a single metric descriptor. This method does not require a Stackdriver
-          # account.
+          # Gets a single metric descriptor. This method does not require a Stackdriver account.
           #
           # @param name [String]
           #   The metric descriptor on which to execute the request. The format is
@@ -584,8 +580,7 @@ module Google
             nil
           end
 
-          # Lists time series that match a filter. This method does not require a
-          # Stackdriver account.
+          # Lists time series that match a filter. This method does not require a Stackdriver account.
           #
           # @param name [String]
           #   The project on which to execute the request. The format is
@@ -597,7 +592,7 @@ module Google
           #   example:
           #
           #       metric.type = "compute.googleapis.com/instance/cpu/usage_time" AND
-          #           metric.label.instance_name = "my-instance-name"
+          #           metric.labels.instance_name = "my-instance-name"
           # @param interval [Google::Monitoring::V3::TimeInterval | Hash]
           #   The time interval for which results should be returned. Only time series
           #   that contain data points in the specified interval are included
@@ -698,6 +693,8 @@ module Google
           #   point must be more recent than any other point in its time series.  Each
           #   `TimeSeries` value must fully specify a unique time series by supplying
           #   all label values for the metric and the monitored resource.
+          #
+          #   The maximum number of `TimeSeries` objects per `Create` request is 200.
           #   A hash of the same form as `Google::Monitoring::V3::TimeSeries`
           #   can also be provided.
           # @param options [Google::Gax::CallOptions]

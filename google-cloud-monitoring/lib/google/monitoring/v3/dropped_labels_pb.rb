@@ -4,7 +4,6 @@
 
 require 'google/protobuf'
 
-require 'google/api/annotations_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.monitoring.v3.DroppedLabels" do
     map :label, :string, :string, 1
