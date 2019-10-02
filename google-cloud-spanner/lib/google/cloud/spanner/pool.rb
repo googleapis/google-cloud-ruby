@@ -65,9 +65,11 @@ module Google
             loop do
               raise ClientClosedError if @closed
 
-              read_session = session_queue.shift
+              # Use LIFO to ensure sessions are used from backend caches, which
+              # will reduce the read / write latencies on user requests.
+              read_session = session_queue.pop # LIFO
               return read_session if read_session
-              write_transaction = transaction_queue.shift
+              write_transaction = transaction_queue.pop # LIFO
               return write_transaction.session if write_transaction
 
               if can_allocate_more_sessions?
@@ -117,9 +119,9 @@ module Google
             loop do
               raise ClientClosedError if @closed
 
-              write_transaction = transaction_queue.shift
+              write_transaction = transaction_queue.pop # LIFO
               return write_transaction if write_transaction
-              read_session = session_queue.shift
+              read_session = session_queue.pop
               if read_session
                 action = read_session
                 break
@@ -204,21 +206,19 @@ module Google
             max_threads: @threads
           # init the queues
           @new_sessions_in_process = 0
-          @all_sessions = []
-          @session_queue = []
           @transaction_queue = []
           # init the keepalive task
           create_keepalive_task!
           # init session queue
+          @all_sessions = @client.batch_create_new_sessions @min
+          sessions = @all_sessions.dup
           num_transactions = (@min * @write_ratio).round
-          num_sessions = @min.to_i - num_transactions
-          num_sessions.times.each do
-            future { checkin_session new_session! }
-          end
+          pending_transactions = sessions.shift num_transactions
           # init transaction queue
-          num_transactions.times.each do
-            future { checkin_transaction new_transaction! }
+          pending_transactions.each do |transaction|
+            future { checkin_transaction transaction.create_transaction }
           end
+          @session_queue = sessions
         end
 
         def shutdown

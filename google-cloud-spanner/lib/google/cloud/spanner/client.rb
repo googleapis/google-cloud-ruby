@@ -1287,6 +1287,35 @@ module Google
           Session.from_grpc grpc, @project.service
         end
 
+        ##
+        # @private
+        # Creates a batch of new session objects of size `total`.
+        # Makes multiple RPCs if necessary. Returns empty array if total is 0.
+        def batch_create_new_sessions total
+          sessions = []
+          remaining = total
+          while remaining > 0
+            sessions += batch_create_sessions remaining
+            remaining = total - sessions.count
+          end
+          sessions
+        end
+
+        ##
+        # @private
+        # The response may have fewer sessions than requested in the RPC.
+        #
+        def batch_create_sessions session_count
+          ensure_service!
+          resp = @project.service.batch_create_sessions \
+            Admin::Database::V1::DatabaseAdminClient.database_path(
+              project_id, instance_id, database_id
+            ),
+            session_count,
+            labels: @session_labels
+          resp.session.map { |grpc| Session.from_grpc grpc, @project.service }
+        end
+
         # @private
         def to_s
           "(project_id: #{project_id}, instance_id: #{instance_id}, " \

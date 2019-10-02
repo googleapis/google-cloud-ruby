@@ -259,6 +259,18 @@ module Google
           end
         end
 
+        def batch_create_sessions database_name, session_count, labels: nil
+          opts = default_options_from_session database_name
+          session = Google::Spanner::V1::Session.new labels: labels if labels
+          execute do
+            # The response may have fewer sessions than requested in the RPC.
+            service.batch_create_sessions database_name,
+                                          session_count,
+                                          session_template: session,
+                                          options: opts
+          end
+        end
+
         def delete_session session_name
           opts = default_options_from_session session_name
           execute do
