@@ -2,12 +2,9 @@
 
 ### 0.3.0 / 2019-10-01
 
-#### Features
+#### Cleanup
 
-* Update VERSION location and constant
-  * Move version.rb file so it matches the rubygems conventions.
-  * Use Grafeas::Client::VERSION as the new constant.
-  * Update previous Grafeas::VERSION constant to use the new constant.
+* Update VERSION location and constant to match rubygems conventions.
 
 ### 0.2.1 / 2019-08-23
 
