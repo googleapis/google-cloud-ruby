@@ -1,5 +1,12 @@
 # Release History
 
+### 0.6.2 / 2019-10-01
+
+#### Documentation
+
+* Fix role string in low-level IAM Policy JSON example
+* Update low-level IAM Policy class description and sample code
+
 ### 0.6.1 / 2019-09-05
 
 #### Features
