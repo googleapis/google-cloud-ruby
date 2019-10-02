@@ -4,7 +4,7 @@
 
 #### Features
 
-* Support overriding of service endpoint ([#4012](https://www.github.com/googleapis/google-cloud-ruby/issues/4012))
+* Support overriding of service endpoint
 
 ### 0.30.2 / 2019-08-23
 
