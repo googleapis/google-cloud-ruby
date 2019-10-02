@@ -1,5 +1,14 @@
 # Release History
 
+### 0.7.0 / 2019-10-01
+
+#### Features
+
+* Support for fuzzy extraction
+  * Add EntityType#enable_fuzzy_extraction
+  * Add Kind::KIND_REGEXP
+* Documentation updates
+
 ### 0.6.0 / 2019-08-23
 
 #### Features
