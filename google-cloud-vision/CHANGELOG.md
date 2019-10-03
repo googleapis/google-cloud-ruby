@@ -2,11 +2,6 @@
 
 ### 0.36.0 / 2019-10-03
 
-#### Documentation
-
-* Update list of supported product categories
-* Update product category documentation
-
 #### Features
 
 * Add confidence attributes to SafeSearchAnnotation
@@ -17,6 +12,11 @@
   * Add SafeSearchAnnotation#racy_confidence
   * Add SafeSearchAnnotation#nsfw_confidence
   * Update documentation
+
+#### Documentation
+
+* Update list of supported product categories
+* Update product category documentation
 
 ## 0.35.0 (2019-08-12)
 
