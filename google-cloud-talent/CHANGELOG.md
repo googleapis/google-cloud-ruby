@@ -1,5 +1,19 @@
 # Release History
 
+### 0.6.0 / 2019-10-03
+
+#### Features
+
+* Add support for availability filters
+  * Add filter argument to ProfileServiceClient#list_profiles
+  * Add Profile#candidate_update_time field
+  * Add Profile#resume_update_time field
+  * Add Profile#availability_signals field
+  * Add ProfileQuery#availability_filters field
+  * Add AvailabilitySignal type
+  * Add AvailabilityFilter type
+  * Update documentation
+
 ### 0.5.0 / 2019-08-22
 
 #### Features
