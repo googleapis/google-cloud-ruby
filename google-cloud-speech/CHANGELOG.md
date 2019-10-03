@@ -1,5 +1,17 @@
 # Release History
 
+### 0.38.0 / 2019-10-03
+
+#### Features
+
+* Add Speaker Diarization
+  * Add RecognitionConfig#diarization_config
+  * Add SpeakerDiarizationConfig
+
+#### Documentation
+
+* Update service name to "Speech-to-Text" and make minor formatting changes
+
 ### 0.37.0 / 2019-08-22
 
 #### Features
