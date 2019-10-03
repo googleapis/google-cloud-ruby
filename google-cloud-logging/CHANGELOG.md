@@ -1,5 +1,16 @@
 # Release History
 
+### 1.8.0 / 2019-10-03
+
+#### Features
+
+* Support additional fields of LogSink in the low-level interface
+  * Add LogSink#create_time field
+  * Add LogSink#update_time field
+  * Add LogSink#bigquery_options field
+  * Add BigQueryOptions type
+  * Update documentation
+
 ### 1.7.0 / 2019-08-23
 
 #### Features
