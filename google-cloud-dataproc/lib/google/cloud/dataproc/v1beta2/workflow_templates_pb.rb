@@ -5,6 +5,9 @@
 require 'google/protobuf'
 
 require 'google/api/annotations_pb'
+require 'google/api/client_pb'
+require 'google/api/field_behavior_pb'
+require 'google/api/resource_pb'
 require 'google/cloud/dataproc/v1beta2/clusters_pb'
 require 'google/cloud/dataproc/v1beta2/jobs_pb'
 require 'google/longrunning/operations_pb'

@@ -29,9 +29,16 @@ module Google
         #     .
         # @!attribute [rw] name
         #   @return [String]
-        #     Output only. The "resource name" of the template, as described
-        #     in https://cloud.google.com/apis/design/resource_names of the form
-        #     `projects/{project_id}/regions/{region}/workflowTemplates/{template_id}`
+        #     Output only. The resource name of the workflow template, as described
+        #     in https://cloud.google.com/apis/design/resource_names.
+        #
+        #     * For `projects.regions.workflowTemplates`, the resource name of the
+        #       template has the following format:
+        #       `projects/{project_id}/regions/{region}/workflowTemplates/{template_id}`
+        #
+        #     * For `projects.locations.workflowTemplates`, the resource name of the
+        #       template has the following format:
+        #       `projects/{project_id}/locations/{location}/workflowTemplates/{template_id}`
         # @!attribute [rw] version
         #   @return [Integer]
         #     Optional. Used to perform a consistent read-modify-write.
@@ -194,7 +201,7 @@ module Google
         # * Zone (in ClusterSelector)
         # @!attribute [rw] name
         #   @return [String]
-        #     Required.  Parameter name.
+        #     Required. Parameter name.
         #     The parameter name is used as the key, and paired with the
         #     parameter value, which are passed to the template when the template
         #     is instantiated.
@@ -282,7 +289,16 @@ module Google
         # A Cloud Dataproc workflow template resource.
         # @!attribute [rw] template
         #   @return [String]
-        #     Output only. The "resource name" of the template.
+        #     Output only. The resource name of the workflow template as described
+        #     in https://cloud.google.com/apis/design/resource_names.
+        #
+        #     * For `projects.regions.workflowTemplates`, the resource name of the
+        #       template has the following format:
+        #       `projects/{project_id}/regions/{region}/workflowTemplates/{template_id}`
+        #
+        #     * For `projects.locations.workflowTemplates`, the resource name of the
+        #       template has the following format:
+        #       `projects/{project_id}/locations/{location}/workflowTemplates/{template_id}`
         # @!attribute [rw] version
         #   @return [Integer]
         #     Output only. The version of template at the time of
@@ -392,9 +408,16 @@ module Google
         # A request to create a workflow template.
         # @!attribute [rw] parent
         #   @return [String]
-        #     Required. The "resource name" of the region, as described
-        #     in https://cloud.google.com/apis/design/resource_names of the form
-        #     `projects/{project_id}/regions/{region}`
+        #     Required. The resource name of the region or location, as described
+        #     in https://cloud.google.com/apis/design/resource_names.
+        #
+        #     * For `projects.regions.workflowTemplates,create`, the resource name of the
+        #       region has the following format:
+        #       `projects/{project_id}/regions/{region}`
+        #
+        #     * For `projects.locations.workflowTemplates.create`, the resource name of
+        #       the location has the following format:
+        #       `projects/{project_id}/locations/{location}`
         # @!attribute [rw] template
         #   @return [Google::Cloud::Dataproc::V1beta2::WorkflowTemplate]
         #     Required. The Dataproc workflow template to create.
@@ -403,13 +426,20 @@ module Google
         # A request to fetch a workflow template.
         # @!attribute [rw] name
         #   @return [String]
-        #     Required. The "resource name" of the workflow template, as described
-        #     in https://cloud.google.com/apis/design/resource_names of the form
-        #     `projects/{project_id}/regions/{region}/workflowTemplates/{template_id}`
+        #     Required. The resource name of the workflow template, as described
+        #     in https://cloud.google.com/apis/design/resource_names.
+        #
+        #     * For `projects.regions.workflowTemplates.get`, the resource name of the
+        #       template has the following format:
+        #       `projects/{project_id}/regions/{region}/workflowTemplates/{template_id}`
+        #
+        #     * For `projects.locations.workflowTemplates.get`, the resource name of the
+        #       template has the following format:
+        #       `projects/{project_id}/locations/{location}/workflowTemplates/{template_id}`
         # @!attribute [rw] version
         #   @return [Integer]
         #     Optional. The version of workflow template to retrieve. Only previously
-        #     instatiated versions can be retrieved.
+        #     instantiated versions can be retrieved.
         #
         #     If unspecified, retrieves the current version.
         class GetWorkflowTemplateRequest; end
@@ -417,9 +447,16 @@ module Google
         # A request to instantiate a workflow template.
         # @!attribute [rw] name
         #   @return [String]
-        #     Required. The "resource name" of the workflow template, as described
-        #     in https://cloud.google.com/apis/design/resource_names of the form
-        #     `projects/{project_id}/regions/{region}/workflowTemplates/{template_id}`
+        #     Required. The resource name of the workflow template, as described
+        #     in https://cloud.google.com/apis/design/resource_names.
+        #
+        #     * For `projects.regions.workflowTemplates.instantiate`, the resource name
+        #       of the template has the following format:
+        #       `projects/{project_id}/regions/{region}/workflowTemplates/{template_id}`
+        #
+        #     * For `projects.locations.workflowTemplates.instantiate`, the resource name
+        #       of the template has the following format:
+        #       `projects/{project_id}/locations/{location}/workflowTemplates/{template_id}`
         # @!attribute [rw] version
         #   @return [Integer]
         #     Optional. The version of workflow template to instantiate. If specified,
@@ -451,9 +488,16 @@ module Google
         # A request to instantiate an inline workflow template.
         # @!attribute [rw] parent
         #   @return [String]
-        #     Required. The "resource name" of the workflow template region, as described
-        #     in https://cloud.google.com/apis/design/resource_names of the form
-        #     `projects/{project_id}/regions/{region}`
+        #     Required. The resource name of the region or location, as described
+        #     in https://cloud.google.com/apis/design/resource_names.
+        #
+        #     * For `projects.regions.workflowTemplates,instantiateinline`, the resource
+        #       name of the region has the following format:
+        #       `projects/{project_id}/regions/{region}`
+        #
+        #     * For `projects.locations.workflowTemplates.instantiateinline`, the
+        #       resource name of the location has the following format:
+        #       `projects/{project_id}/locations/{location}`
         # @!attribute [rw] template
         #   @return [Google::Cloud::Dataproc::V1beta2::WorkflowTemplate]
         #     Required. The workflow template to instantiate.
@@ -484,9 +528,16 @@ module Google
         # A request to list workflow templates in a project.
         # @!attribute [rw] parent
         #   @return [String]
-        #     Required. The "resource name" of the region, as described
-        #     in https://cloud.google.com/apis/design/resource_names of the form
-        #     `projects/{project_id}/regions/{region}`
+        #     Required. The resource name of the region or location, as described
+        #     in https://cloud.google.com/apis/design/resource_names.
+        #
+        #     * For `projects.regions.workflowTemplates,list`, the resource
+        #       name of the region has the following format:
+        #       `projects/{project_id}/regions/{region}`
+        #
+        #     * For `projects.locations.workflowTemplates.list`, the
+        #       resource name of the location has the following format:
+        #       `projects/{project_id}/locations/{location}`
         # @!attribute [rw] page_size
         #   @return [Integer]
         #     Optional. The maximum number of results to return in each response.
@@ -512,9 +563,16 @@ module Google
         # Currently started workflows will remain running.
         # @!attribute [rw] name
         #   @return [String]
-        #     Required. The "resource name" of the workflow template, as described
-        #     in https://cloud.google.com/apis/design/resource_names of the form
-        #     `projects/{project_id}/regions/{region}/workflowTemplates/{template_id}`
+        #     Required. The resource name of the workflow template, as described
+        #     in https://cloud.google.com/apis/design/resource_names.
+        #
+        #     * For `projects.regions.workflowTemplates.delete`, the resource name
+        #       of the template has the following format:
+        #       `projects/{project_id}/regions/{region}/workflowTemplates/{template_id}`
+        #
+        #     * For `projects.locations.workflowTemplates.instantiate`, the resource name
+        #       of the template has the following format:
+        #       `projects/{project_id}/locations/{location}/workflowTemplates/{template_id}`
         # @!attribute [rw] version
         #   @return [Integer]
         #     Optional. The version of workflow template to delete. If specified,

@@ -242,7 +242,7 @@ module Google
         #     Optional. Reservation Affinity for consuming Zonal reservation.
         class GceClusterConfig; end
 
-        # Optional. The config settings for Compute Engine resources in
+        # The config settings for Compute Engine resources in
         # an instance group, such as a master or worker group.
         # @!attribute [rw] num_instances
         #   @return [Integer]
@@ -288,12 +288,9 @@ module Google
         #   @return [Array<Google::Cloud::Dataproc::V1beta2::AcceleratorConfig>]
         #     Optional. The Compute Engine accelerator configuration for these
         #     instances.
-        #
-        #     **Beta Feature**: This feature is still under development. It may be
-        #     changed before final release.
         # @!attribute [rw] min_cpu_platform
         #   @return [String]
-        #     Optional. Specifies the minimum cpu platform for the Instance Group.
+        #     Specifies the minimum cpu platform for the Instance Group.
         #     See [Cloud Dataproc&rarr;Minimum CPU Platform]
         #     (/dataproc/docs/concepts/compute/dataproc-min-cpu).
         class InstanceGroupConfig; end
@@ -343,7 +340,7 @@ module Google
         #     Optional. Size in GB of the boot disk (default is 500GB).
         # @!attribute [rw] num_local_ssds
         #   @return [Integer]
-        #     Optional. Number of attached SSDs, from 0 to 4 (default is 0).
+        #     Number of attached SSDs, from 0 to 4 (default is 0).
         #     If SSDs are not attached, the boot disk is used to store runtime logs and
         #     [HDFS](https://hadoop.apache.org/docs/r1.2.1/hdfs_user_guide.html) data.
         #     If one or more SSDs are attached, this runtime bulk
@@ -369,6 +366,10 @@ module Google
         #     auto-deleted at the end of this period. Valid range: **[10m, 14d]**.
         #
         #     Example: **"1d"**, to delete the cluster 1 day after its creation..
+        # @!attribute [rw] idle_start_time
+        #   @return [Google::Protobuf::Timestamp]
+        #     Output only. The time when cluster became idle (most recent job finished)
+        #     and became eligible for deletion due to idleness.
         class LifecycleConfig; end
 
         # Security related configuration, including encryption, Kerberos, etc.
@@ -440,6 +441,10 @@ module Google
         #     Optional. The lifetime of the ticket granting ticket, in hours.
         #     If not specified, or user specifies 0, then default value 10
         #     will be used.
+        # @!attribute [rw] realm
+        #   @return [String]
+        #     Optional. The name of the on-cluster Kerberos realm.
+        #     If not specified, the uppercased domain of hostnames will be the realm.
         class KerberosConfig; end
 
         # Specifies an executable to run on a fully configured node and a
@@ -738,7 +743,7 @@ module Google
         #     Required. The Cloud Dataproc region in which to handle the request.
         # @!attribute [rw] filter
         #   @return [String]
-        #     Optional. A filter constraining the clusters to list. Filters are
+        #     Optional.  A filter constraining the clusters to list. Filters are
         #     case-sensitive and have the following syntax:
         #
         #     field = value [AND [field = value]] ...

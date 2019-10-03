@@ -27,9 +27,16 @@ module Google
         #     or hyphen. Must consist of between 3 and 50 characters.
         # @!attribute [rw] name
         #   @return [String]
-        #     Output only. The "resource name" of the policy, as described
-        #     in https://cloud.google.com/apis/design/resource_names of the form
-        #     `projects/{project_id}/regions/{region}/autoscalingPolicies/{policy_id}`.
+        #     Output only. The "resource name" of the autoscaling policy, as described
+        #     in https://cloud.google.com/apis/design/resource_names.
+        #
+        #     * For `projects.regions.autoscalingPolicies`, the resource name of the
+        #       policy has the following format:
+        #       `projects/{project_id}/regions/{region}/autoscalingPolicies/{policy_id}`
+        #
+        #     * For `projects.locations.autoscalingPolicies`, the resource name of the
+        #       policy has the following format:
+        #       `projects/{project_id}/locations/{location}/autoscalingPolicies/{policy_id}`
         # @!attribute [rw] basic_algorithm
         #   @return [Google::Cloud::Dataproc::V1beta2::BasicAutoscalingAlgorithm]
         # @!attribute [rw] worker_config
@@ -140,20 +147,34 @@ module Google
         # A request to create an autoscaling policy.
         # @!attribute [rw] parent
         #   @return [String]
-        #     Required. The "resource name" of the region, as described
-        #     in https://cloud.google.com/apis/design/resource_names of the form
-        #     `projects/{project_id}/regions/{region}`.
+        #     Required. The "resource name" of the region or location, as described
+        #     in https://cloud.google.com/apis/design/resource_names.
+        #
+        #     * For `projects.regions.autoscalingPolicies.create`, the resource name
+        #       has the following format:
+        #       `projects/{project_id}/regions/{region}`
+        #
+        #     * For `projects.locations.autoscalingPolicies.create`, the resource name
+        #       has the following format:
+        #       `projects/{project_id}/locations/{location}`
         # @!attribute [rw] policy
         #   @return [Google::Cloud::Dataproc::V1beta2::AutoscalingPolicy]
-        #     The autoscaling policy to create.
+        #     Required. The autoscaling policy to create.
         class CreateAutoscalingPolicyRequest; end
 
         # A request to fetch an autoscaling policy.
         # @!attribute [rw] name
         #   @return [String]
         #     Required. The "resource name" of the autoscaling policy, as described
-        #     in https://cloud.google.com/apis/design/resource_names of the form
-        #     `projects/{project_id}/regions/{region}/autoscalingPolicies/{policy_id}`.
+        #     in https://cloud.google.com/apis/design/resource_names.
+        #
+        #     * For `projects.regions.autoscalingPolicies.get`, the resource name
+        #       of the policy has the following format:
+        #       `projects/{project_id}/regions/{region}/autoscalingPolicies/{policy_id}`
+        #
+        #     * For `projects.locations.autoscalingPolicies.get`, the resource name
+        #       of the policy has the following format:
+        #       `projects/{project_id}/locations/{location}/autoscalingPolicies/{policy_id}`
         class GetAutoscalingPolicyRequest; end
 
         # A request to update an autoscaling policy.
@@ -168,19 +189,34 @@ module Google
         # @!attribute [rw] name
         #   @return [String]
         #     Required. The "resource name" of the autoscaling policy, as described
-        #     in https://cloud.google.com/apis/design/resource_names of the form
-        #     `projects/{project_id}/regions/{region}/autoscalingPolicies/{policy_id}`.
+        #     in https://cloud.google.com/apis/design/resource_names.
+        #
+        #     * For `projects.regions.autoscalingPolicies.delete`, the resource name
+        #       of the policy has the following format:
+        #       `projects/{project_id}/regions/{region}/autoscalingPolicies/{policy_id}`
+        #
+        #     * For `projects.locations.autoscalingPolicies.delete`, the resource name
+        #       of the policy has the following format:
+        #       `projects/{project_id}/locations/{location}/autoscalingPolicies/{policy_id}`
         class DeleteAutoscalingPolicyRequest; end
 
         # A request to list autoscaling policies in a project.
         # @!attribute [rw] parent
         #   @return [String]
-        #     Required. The "resource name" of the region, as described
-        #     in https://cloud.google.com/apis/design/resource_names of the form
-        #     `projects/{project_id}/regions/{region}`
+        #     Required. The "resource name" of the region or location, as described
+        #     in https://cloud.google.com/apis/design/resource_names.
+        #
+        #     * For `projects.regions.autoscalingPolicies.list`, the resource name
+        #       of the region has the following format:
+        #       `projects/{project_id}/regions/{region}`
+        #
+        #     * For `projects.locations.autoscalingPolicies.list`, the resource name
+        #       of the location has the following format:
+        #       `projects/{project_id}/locations/{location}`
         # @!attribute [rw] page_size
         #   @return [Integer]
         #     Optional. The maximum number of results to return in each response.
+        #     Must be less than or equal to 1000. Defaults to 100.
         # @!attribute [rw] page_token
         #   @return [String]
         #     Optional. The page token, returned by a previous call, to request the
