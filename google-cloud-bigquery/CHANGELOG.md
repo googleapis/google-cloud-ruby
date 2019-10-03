@@ -1,5 +1,13 @@
 # Release History
 
+### 1.16.0 / 2019-10-03
+
+#### Features
+
+* Add Dataset default_encryption
+  * Add Dataset#default_encryption
+  * Add Dataset#default_encryption=
+
 ### 1.15.0 / 2019-09-30
 
 #### Features
