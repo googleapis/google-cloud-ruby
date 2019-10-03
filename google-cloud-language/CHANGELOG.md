@@ -1,5 +1,17 @@
 # Release History
 
+### 0.34.0 / 2019-10-03
+
+#### Features
+
+* Add support for more entity types
+  * Add Entity::Type::PHONE_NUMBER
+  * Add Entity::Type::ADDRESS
+  * Add Entity::Type::DATE
+  * Add Entity::Type::NUMBER
+  * Add Entity::Type::PRICE
+  * Update documentation
+
 ### 0.33.1 / 2019-08-23
 
 #### Documentation
