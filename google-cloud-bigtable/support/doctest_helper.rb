@@ -204,7 +204,7 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
-  doctest.skip "Google::Cloud::Bigtable::ColumnFamily" # TODO: Add update block to Table#column_families
+  doctest.skip "Google::Cloud::Bigtable::ColumnFamily" # TODO: (#4134) Add update block to Table#column_families
   # doctest.before "Google::Cloud::Bigtable::ColumnFamily" do
   #   mock_bigtable do |mock, mocked_instances, mocked_tables|
   #     mocked_instances.expect :get_instance, instance_resp, ["projects/my-project/instances/my-instance"]
@@ -513,7 +513,7 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
-  doctest.skip "Google::Cloud::Bigtable::Table#column_families" # TODO: Add update block to Table#column_families, and change return type to frozen ColumnFamilyMap.
+  doctest.skip "Google::Cloud::Bigtable::Table#column_families" # TODO: (#4134) Add update block to Table#column_families, and (#4133) change return type to frozen hash.
 
   doctest.before "Google::Cloud::Bigtable::Table#column_family" do
     mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
