@@ -1,5 +1,29 @@
 # Release History
 
+### 0.32.0 / 2019-10-03
+
+#### Features
+
+* Additions to the content matcher for uptime check
+  * Add recursive argument to GroupServiceClient#delete_group method.
+  * Add AlertPolicy#validity
+  * Remove UptimeCheckConfig#is_internal (BREAKING CHANGE)
+  * Add UptimeCheckConfig::HttpCheck#validate_ssl
+  * Add InternalChecker::State module and constants:
+      * Add InternalChecker::State::CREATING
+      * Add InternalChecker::State::RUNNING
+  * Add ContentMatcher::ContentMatcherOption module and constants:
+      * Add ContentMatcher::ContentMatcherOption::CONTAINS_STRING
+      * Add ContentMatcher::ContentMatcherOption::NOT_CONTAINS_STRING
+      * Add ContentMatcher::ContentMatcherOption::MATCHES_REGEX
+      * Add ContentMatcher::ContentMatcherOption::NOT_MATCHES_REGEX
+  * Add UptimeCheckConfig::ContentMatcher:: ContentMatcherOption module and constants:
+      * Add UptimeCheckConfig::ContentMatcher:: ContentMatcherOption::CONTAINS_STRING
+      * Add UptimeCheckConfig::ContentMatcher:: ContentMatcherOption::NOT_CONTAINS_STRING
+      * Add UptimeCheckConfig::ContentMatcher:: ContentMatcherOption::MATCHES_REGEX
+      * Add UptimeCheckConfig::ContentMatcher:: ContentMatcherOption::NOT_MATCHES_REGEX
+  * Update documentation
+
 ### 0.31.0 / 2019-08-23
 
 #### Features
