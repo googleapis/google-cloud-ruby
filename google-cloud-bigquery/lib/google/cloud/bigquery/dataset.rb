@@ -336,6 +336,77 @@ module Google
         end
 
         ##
+        # The {EncryptionConfiguration} object that represents the default
+        # encryption method for all tables and models in the dataset. Once this
+        # property is set, all newly-created partitioned tables and models in
+        # the dataset will have their encryption set to this value, unless table
+        # creation request (or query) overrides it.
+        #
+        # Present only if this dataset is using custom default encryption.
+        #
+        # @see https://cloud.google.com/bigquery/docs/customer-managed-encryption
+        #   Protecting Data with Cloud KMS Keys
+        #
+        # @return [EncryptionConfiguration, nil] The default encryption
+        #   configuration.
+        #
+        #   @!group Attributes
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #
+        #   encrypt_config = dataset.default_encryption
+        #
+        # @!group Attributes
+        #
+        def default_encryption
+          return nil if reference?
+          ensure_full_data!
+          return nil if @gapi.default_encryption_configuration.nil?
+          EncryptionConfiguration.from_gapi(
+            @gapi.default_encryption_configuration
+          ).freeze
+        end
+
+        ##
+        # Set the {EncryptionConfiguration} object that represents the default
+        # encryption method for all tables and models in the dataset. Once this
+        # property is set, all newly-created partitioned tables and models in
+        # the dataset will have their encryption set to this value, unless table
+        # creation request (or query) overrides it.
+        #
+        # If the dataset is not a full resource representation (see
+        # {#resource_full?}), the full representation will be retrieved before
+        # the update to comply with ETag-based optimistic concurrency control.
+        #
+        # @see https://cloud.google.com/bigquery/docs/customer-managed-encryption
+        #   Protecting Data with Cloud KMS Keys
+        #
+        # @param [EncryptionConfiguration] value The new encryption config.
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #
+        #   key_name = "projects/a/locations/b/keyRings/c/cryptoKeys/d"
+        #   encrypt_config = bigquery.encryption kms_key: key_name
+        #
+        #   dataset.default_encryption = encrypt_config
+        #
+        # @!group Attributes
+        #
+        def default_encryption= value
+          ensure_full_data!
+          @gapi.default_encryption_configuration = value.to_gapi
+          patch_gapi! :default_encryption_configuration
+        end
+
+        ##
         # Retrieves the access rules for a Dataset. The rules can be updated
         # when passing a block, see {Dataset::Access} for all the methods
         # available.
@@ -2181,7 +2252,7 @@ module Google
         # Load the complete representation of the dataset if it has been
         # only partially loaded by a request to the API list method.
         def ensure_full_data!
-          reload! if resource_partial?
+          reload! unless resource_full?
         end
 
         def ensure_job_succeeded! job

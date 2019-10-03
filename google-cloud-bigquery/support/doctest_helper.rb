@@ -166,6 +166,14 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
+  doctest.before "Google::Cloud::Bigquery::Dataset#default_encryption" do
+    mock_bigquery do |mock|
+      mock.expect :insert_dataset, dataset_full_gapi, ["my-project", Google::Apis::BigqueryV2::Dataset]
+      mock.expect :get_dataset, dataset_full_gapi, ["my-project", "my_dataset"]
+      mock.expect :patch_dataset, dataset_full_gapi, ["my-project", "my_dataset", Google::Apis::BigqueryV2::Dataset, Hash]
+    end
+  end
+
   # Google::Cloud::Bigquery::Dataset#access@Manage the access rules by passing a block:
   doctest.before "Google::Cloud::Bigquery::Dataset#access" do
     mock_bigquery do |mock|

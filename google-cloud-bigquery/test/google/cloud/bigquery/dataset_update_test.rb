@@ -108,4 +108,24 @@ describe Google::Cloud::Bigquery::Dataset, :update, :mock_bigquery do
     dataset.labels.must_equal new_labels
     mock.verify
   end
+
+  it "updates its encryption" do
+    kms_key = "path/to/encryption_key_name"
+
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+    updated_gapi = dataset_gapi.dup
+    updated_gapi.default_encryption_configuration = Google::Apis::BigqueryV2::EncryptionConfiguration.new kms_key_name: kms_key
+    patch_gapi = Google::Apis::BigqueryV2::Dataset.new default_encryption_configuration: updated_gapi.default_encryption_configuration, etag: dataset_gapi.etag
+    mock.expect :patch_dataset, updated_gapi, [project, dataset_id, patch_gapi, {options: {header: {"If-Match" => dataset_gapi.etag}}}]
+
+    dataset.default_encryption.must_be_nil
+
+    dataset.default_encryption = bigquery.encryption kms_key: kms_key
+
+    dataset.default_encryption.must_be_kind_of Google::Cloud::Bigquery::EncryptionConfiguration
+    dataset.default_encryption.kms_key.must_equal kms_key
+    dataset.default_encryption.must_be :frozen?
+    mock.verify
+  end
 end

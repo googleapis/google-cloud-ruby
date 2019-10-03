@@ -47,6 +47,8 @@ describe Google::Cloud::Bigquery::Dataset, :reference, :mock_bigquery do
     dataset.labels.must_be_nil
     dataset.created_at.must_be_nil
     dataset.modified_at.must_be_nil
+
+    dataset.default_encryption.must_be_nil
   end
 
   it "can test its existence" do
