@@ -204,13 +204,14 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
-  doctest.before "Google::Cloud::Bigtable::ColumnFamily" do
-    mock_bigtable do |mock, mocked_instances, mocked_tables|
-      mocked_instances.expect :get_instance, instance_resp, ["projects/my-project/instances/my-instance"]
-      mocked_tables.expect :get_table, table_resp, ["projects/my-project/instances/my-instance/tables/my-table", { view: :SCHEMA_VIEW }]
-      mocked_tables.expect :modify_column_families, table_resp, ["projects/my-project/instances/my-instance/tables/my-table", Array]
-    end
-  end
+  doctest.skip "Google::Cloud::Bigtable::ColumnFamily" # TODO: Add update block to Table#column_families
+  # doctest.before "Google::Cloud::Bigtable::ColumnFamily" do
+  #   mock_bigtable do |mock, mocked_instances, mocked_tables|
+  #     mocked_instances.expect :get_instance, instance_resp, ["projects/my-project/instances/my-instance"]
+  #     mocked_tables.expect :get_table, table_resp, ["projects/my-project/instances/my-instance/tables/my-table", { view: :SCHEMA_VIEW }]
+  #     mocked_tables.expect :modify_column_families, table_resp, ["projects/my-project/instances/my-instance/tables/my-table", Array]
+  #   end
+  # end
 
   doctest.before "Google::Cloud::Bigtable::Instance" do
     mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
@@ -274,7 +275,34 @@ YARD::Doctest.configure do |doctest|
   doctest.before "Google::Cloud::Bigtable::Instance#create_cluster" do
     mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
       mocked_instances.expect :get_instance, instance_resp, ["projects/my-project/instances/my-instance"]
-      mocked_instances.expect :create_cluster, cluster_resp, ["projects/my-project/instances/my-instance/clusters/my-instance-cluster"]
+      mocked_instances.expect :create_cluster, mocked_job, ["projects/my-project/instances/my-instance", "my-new-cluster", Google::Bigtable::Admin::V2::Cluster]
+      mocked_job.expect :done?, false, []
+      mocked_job.expect :wait_until_done!, nil, []
+      mocked_job.expect :done?, true, []
+      mocked_job.expect :error?, true, []
+      mocked_job.expect :error?, false, []
+    end
+  end
+
+  doctest.before "Google::Cloud::Bigtable::Instance#create_table" do
+    mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
+      mocked_instances.expect :get_instance, instance_resp, ["projects/my-project/instances/my-instance"]
+      mocked_tables.expect :create_table, table_resp, ["projects/my-project/instances/my-instance", "my-table", Google::Bigtable::Admin::V2::Table, Hash]
+    end
+  end
+
+  doctest.before "Google::Cloud::Bigtable::Instance#delete" do
+    mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
+      mocked_instances.expect :get_instance, instance_resp, ["projects/my-project/instances/my-instance"]
+      mocked_instances.expect :delete_instance, instance_resp, ["projects/my-project/instances/my-instance"]
+    end
+  end
+
+  doctest.before "Google::Cloud::Bigtable::Instance#policy" do
+    mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
+      mocked_instances.expect :get_instance, instance_resp, ["projects/my-project/instances/my-instance"]
+      mocked_instances.expect :get_iam_policy, policy_resp, ["projects/my-project/instances/my-instance"]
+      mocked_instances.expect :set_iam_policy, policy_resp, ["projects/my-project/instances/my-instance", Google::Iam::V1::Policy]
     end
   end
 
@@ -290,54 +318,130 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
+  doctest.before "Google::Cloud::Bigtable::Instance#table" do
+    mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
+      mocked_instances.expect :get_instance, instance_resp, ["projects/my-project/instances/my-instance"]
+      mocked_tables.expect :get_table, table_resp, ["projects/my-project/instances/my-instance/tables/my-table", Hash]
+      mocked_tables.expect :get_table, table_resp, ["projects/my-project/instances/my-instance/tables/my-table", Hash]
+      mock.expect :mutate_row, mutate_row_resp, ["projects/my-project/instances/my-instance/tables/my-table", "user-1", Array, Hash]
+    end
+  end
 
+  doctest.before "Google::Cloud::Bigtable::Instance#tables" do
+    mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
+      mocked_instances.expect :get_instance, instance_resp, ["projects/my-project/instances/my-instance"]
+      mocked_tables.expect :list_tables, tables_resp, ["projects/my-project/instances/my-instance", Hash]
+    end
+  end
 
-  # Google::Cloud::Bigtable::Instance
-  # Google::Cloud::Bigtable::Instance#delete
-  # Google::Cloud::Bigtable::Instance#create_cluster
-  # Google::Cloud::Bigtable::Instance#tables
-  # Google::Cloud::Bigtable::Instance#table
-  # Google::Cloud::Bigtable::Instance#table
-  # Google::Cloud::Bigtable::Instance#create_table
-  # Google::Cloud::Bigtable::Instance#create_table
-  # Google::Cloud::Bigtable::Instance#policy
-  # Google::Cloud::Bigtable::Instance#policy
-  # Google::Cloud::Bigtable::Instance#update_policy
-  # Google::Cloud::Bigtable::Instance#test_iam_permissions
-  # Google::Cloud::Bigtable::Instance::ClusterMap
-  # Google::Cloud::Bigtable::Instance::Job
-  # Google::Cloud::Bigtable::Instance::Job#instance
-  # Google::Cloud::Bigtable::Instance::List#next?
-  # Google::Cloud::Bigtable::Instance::List#next
-  # Google::Cloud::Bigtable::Instance::List#all
-  # Google::Cloud::Bigtable::Instance::List#all
-  # Google::Cloud::Bigtable::MutationEntry
-  # Google::Cloud::Bigtable::MutationEntry
-  # Google::Cloud::Bigtable::MutationEntry#set_cell
-  # Google::Cloud::Bigtable::MutationEntry#set_cell
-  # Google::Cloud::Bigtable::MutationEntry#delete_cells
-  # Google::Cloud::Bigtable::MutationEntry#delete_cells
-  # Google::Cloud::Bigtable::MutationEntry#delete_cells
-  # Google::Cloud::Bigtable::MutationEntry#delete_from_family
-  # Google::Cloud::Bigtable::MutationEntry#delete_from_row
-  # Google::Cloud::Bigtable::MutationOperations#mutate_row
-  # Google::Cloud::Bigtable::MutationOperations#mutate_row
-  # Google::Cloud::Bigtable::MutationOperations#mutate_rows
-  # Google::Cloud::Bigtable::MutationOperations#read_modify_write_row
-  # Google::Cloud::Bigtable::MutationOperations#read_modify_write_row
-  # Google::Cloud::Bigtable::MutationOperations#check_and_mutate_row
-  # Google::Cloud::Bigtable::MutationOperations#sample_row_keys
-  # Google::Cloud::Bigtable::MutationOperations#new_mutation_entry
-  # Google::Cloud::Bigtable::MutationOperations#new_read_modify_write_rule
-  # Google::Cloud::Bigtable::MutationOperations#new_read_modify_write_rule
-  # Google::Cloud::Bigtable::Policy
-  # Google::Cloud::Bigtable::Policy#add
-  # Google::Cloud::Bigtable::Policy#remove
-  # Google::Cloud::Bigtable::Policy#role
-  # Google::Cloud::Bigtable::Project
-  # Google::Cloud::Bigtable::Project#project_id
-  # Google::Cloud::Bigtable::Project#instances
-  # Google::Cloud::Bigtable::Project#instance
+  doctest.before "Google::Cloud::Bigtable::Instance#test_iam_permissions" do
+    mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
+      mocked_instances.expect :get_instance, instance_resp, ["projects/my-project/instances/my-instance"]
+      mocked_instances.expect :test_iam_permissions, iam_permissions_resp, ["projects/my-project/instances/my-instance", ["bigtable.instances.get", "bigtable.instances.update"]]
+    end
+  end
+
+  doctest.before "Google::Cloud::Bigtable::Instance#update_policy" do
+    mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
+      mocked_instances.expect :get_instance, instance_resp, ["projects/my-project/instances/my-instance"]
+      mocked_instances.expect :get_iam_policy, policy_resp, ["projects/my-project/instances/my-instance"]
+      mocked_instances.expect :set_iam_policy, policy_resp, ["projects/my-project/instances/my-instance", Google::Iam::V1::Policy]
+    end
+  end
+
+  doctest.before "Google::Cloud::Bigtable::Instance::Job" do
+    mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
+      mocked_instances.expect :create_instance, mocked_job, ["projects/my-project", "my-instance", Google::Bigtable::Admin::V2::Instance, Hash]
+      mocked_job.expect :done?, false, []
+      mocked_job.expect :reload!, nil, []
+      mocked_job.expect :done?, true, []
+      mocked_job.expect :wait_until_done!, nil, []
+      mocked_job.expect :done?, true, []
+      mocked_job.expect :done?, true, []
+      mocked_job.expect :error?, false, []
+      mocked_job.expect :grpc_op, OpenStruct.new(result: instance_resp), []
+    end
+  end
+
+  doctest.before "Google::Cloud::Bigtable::Instance::List" do
+    mock_bigtable do |mock, mocked_instances, mocked_tables|
+      mocked_instances.expect :list_instances, instances_resp, ["projects/my-project", { page_token: nil }]
+    end
+  end
+
+  doctest.before "Google::Cloud::Bigtable::MutationOperations" do
+    mock_bigtable do |mock, mocked_instances, mocked_tables|
+      mock.expect :mutate_row, nil, ["projects/my-project/instances/my-instance/tables/my-table", "user-1", Array, Hash]
+    end
+  end
+
+  doctest.before "Google::Cloud::Bigtable::MutationOperations#check_and_mutate_row" do
+    mock_bigtable do |mock, mocked_instances, mocked_tables|
+      mock.expect :check_and_mutate_row, OpenStruct.new(predicate_matched: true), ["projects/my-project/instances/my-instance/tables/my-table", "user01", Hash]
+    end
+  end
+
+  doctest.before "Google::Cloud::Bigtable::MutationOperations#mutate_rows" do
+    mock_bigtable do |mock, mocked_instances, mocked_tables|
+      mock.expect :mutate_rows, [], ["projects/my-project/instances/my-instance/tables/my-table", Array, Hash]
+    end
+  end
+
+  doctest.before "Google::Cloud::Bigtable::MutationOperations#read_modify_write_row" do
+    mock_bigtable do |mock, mocked_instances, mocked_tables|
+      mock.expect :read_modify_write_row, OpenStruct.new(row: OpenStruct.new(key: "123", families: [])), ["projects/my-project/instances/my-instance/tables/my-table", "user01", Array, Hash]
+    end
+  end
+
+  doctest.before "Google::Cloud::Bigtable::MutationOperations#sample_row_keys" do
+    mock_bigtable do |mock, mocked_instances, mocked_tables|
+      mock.expect :sample_row_keys, [], ["projects/my-project/instances/my-instance/tables/my-table", Hash]
+    end
+  end
+
+  doctest.before "Google::Cloud::Bigtable::Policy" do
+    mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
+      mocked_instances.expect :get_instance, instance_resp, ["projects/my-project/instances/my-instance"]
+      mocked_instances.expect :get_iam_policy, policy_resp, ["projects/my-project/instances/my-instance"]
+      mocked_instances.expect :set_iam_policy, policy_resp, ["projects/my-project/instances/my-instance", Google::Iam::V1::Policy]
+    end
+  end
+
+  doctest.before "Google::Cloud::Bigtable::Project" do
+    mock_bigtable do |mock, mocked_instances, mocked_tables|
+      mocked_instances.expect :get_instance, instance_resp, ["projects/my-project/instances/my-instance"]
+    end
+  end
+
+  doctest.before "Google::Cloud::Bigtable::Project" do
+    mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
+      mocked_instances.expect :get_instance, instance_resp, ["projects/my-project/instances/my-instance"]
+      mocked_instances.expect :list_clusters, clusters_resp, ["projects/my-project/instances/-", Hash]
+    end
+  end
+
+  doctest.before "Google::Cloud::Bigtable::Project#create_instance" do
+    mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
+      mocked_instances.expect :create_instance, mocked_job, ["projects/my-project", "my-instance", Google::Bigtable::Admin::V2::Instance, Hash]
+      mocked_job.expect :done?, false, []
+      mocked_job.expect :wait_until_done!, nil, []
+      mocked_job.expect :done?, true, []
+      mocked_job.expect :error?, true, []
+      mocked_job.expect :error?, false, []
+    end
+  end
+
+  doctest.before "Google::Cloud::Bigtable::Project#create_table" do
+    mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
+      mocked_tables.expect :create_table, table_resp, ["projects/my-project/instances/my-instance", "my-table", Google::Bigtable::Admin::V2::Table, Hash]
+    end
+  end
+
+  doctest.before "Google::Cloud::Bigtable::Project#delete_table" do
+    mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
+      mocked_tables.expect :delete_table, table_resp, ["projects/my-project/instances/my-instance/tables/my-table"]
+    end
+  end
 
   doctest.before "Google::Cloud::Bigtable::Project#instance" do
     mock_bigtable do |mock, mocked_instances, mocked_tables|
@@ -350,144 +454,148 @@ YARD::Doctest.configure do |doctest|
       mocked_instances.expect :list_instances, instances_resp, ["projects/my-project", { page_token: nil }]
     end
   end
-  # Google::Cloud::Bigtable::Project#create_instance
-  # Google::Cloud::Bigtable::Project#create_instance
-  # Google::Cloud::Bigtable::Project#clusters
-  # Google::Cloud::Bigtable::Project#tables
-  # Google::Cloud::Bigtable::Project#table
-  # Google::Cloud::Bigtable::Project#table
-  # Google::Cloud::Bigtable::Project#table
-  # Google::Cloud::Bigtable::Project#table
-  # Google::Cloud::Bigtable::Project#table
-  # Google::Cloud::Bigtable::Project#create_table
-  # Google::Cloud::Bigtable::Project#create_table
-  # Google::Cloud::Bigtable::Project#delete_table
-  # Google::Cloud::Bigtable::Project#modify_column_families
-  # Google::Cloud::Bigtable::ReadModifyWriteRule
-  # Google::Cloud::Bigtable::ReadModifyWriteRule
-  # Google::Cloud::Bigtable::ReadModifyWriteRule.append
-  # Google::Cloud::Bigtable::ReadModifyWriteRule.increment
-  # Google::Cloud::Bigtable::ReadOperations#sample_row_keys
-  # Google::Cloud::Bigtable::ReadOperations#read_rows
-  # Google::Cloud::Bigtable::ReadOperations#read_rows
-  # Google::Cloud::Bigtable::ReadOperations#read_rows
-  # Google::Cloud::Bigtable::ReadOperations#read_rows
-  # Google::Cloud::Bigtable::ReadOperations#read_rows
-  # Google::Cloud::Bigtable::ReadOperations#read_row
-  # Google::Cloud::Bigtable::ReadOperations#read_row
-  # Google::Cloud::Bigtable::ReadOperations#new_value_range
-  # Google::Cloud::Bigtable::ReadOperations#new_value_range
-  # Google::Cloud::Bigtable::ReadOperations#new_column_range
-  # Google::Cloud::Bigtable::ReadOperations#new_column_range
-  # Google::Cloud::Bigtable::ReadOperations#new_row_range
-  # Google::Cloud::Bigtable::ReadOperations#new_row_range
-  # Google::Cloud::Bigtable::ReadOperations#filter
-  # Google::Cloud::Bigtable::RowFilter
-  # Google::Cloud::Bigtable::RowFilter.chain
-  # Google::Cloud::Bigtable::RowFilter.chain
-  # Google::Cloud::Bigtable::RowFilter.interleave
-  # Google::Cloud::Bigtable::RowFilter.interleave
-  # Google::Cloud::Bigtable::RowFilter.condition
-  # Google::Cloud::Bigtable::RowFilter.pass
-  # Google::Cloud::Bigtable::RowFilter.block
-  # Google::Cloud::Bigtable::RowFilter.sink
-  # Google::Cloud::Bigtable::RowFilter.strip_value
-  # Google::Cloud::Bigtable::RowFilter.key
-  # Google::Cloud::Bigtable::RowFilter.sample
-  # Google::Cloud::Bigtable::RowFilter.family
-  # Google::Cloud::Bigtable::RowFilter.qualifier
-  # Google::Cloud::Bigtable::RowFilter.value
-  # Google::Cloud::Bigtable::RowFilter.label
-  # Google::Cloud::Bigtable::RowFilter.cells_per_row_offset
-  # Google::Cloud::Bigtable::RowFilter.cells_per_row
-  # Google::Cloud::Bigtable::RowFilter.cells_per_column
-  # Google::Cloud::Bigtable::RowFilter.timestamp_range
-  # Google::Cloud::Bigtable::RowFilter.value_range
-  # Google::Cloud::Bigtable::RowFilter.value_range
-  # Google::Cloud::Bigtable::RowFilter.column_range
-  # Google::Cloud::Bigtable::RowFilter::ChainFilter
-  # Google::Cloud::Bigtable::RowFilter::ChainFilter#chain
-  # Google::Cloud::Bigtable::RowFilter::ChainFilter#interleave
-  # Google::Cloud::Bigtable::RowFilter::ChainFilter#condition
-  # Google::Cloud::Bigtable::RowFilter::ChainFilter#pass
-  # Google::Cloud::Bigtable::RowFilter::ChainFilter#block
-  # Google::Cloud::Bigtable::RowFilter::ChainFilter#sink
-  # Google::Cloud::Bigtable::RowFilter::ChainFilter#strip_value
-  # Google::Cloud::Bigtable::RowFilter::ChainFilter#key
-  # Google::Cloud::Bigtable::RowFilter::ChainFilter#sample
-  # Google::Cloud::Bigtable::RowFilter::ChainFilter#family
-  # Google::Cloud::Bigtable::RowFilter::ChainFilter#qualifier
-  # Google::Cloud::Bigtable::RowFilter::ChainFilter#value
-  # Google::Cloud::Bigtable::RowFilter::ChainFilter#label
-  # Google::Cloud::Bigtable::RowFilter::ChainFilter#cells_per_row_offset
-  # Google::Cloud::Bigtable::RowFilter::ChainFilter#cells_per_row
-  # Google::Cloud::Bigtable::RowFilter::ChainFilter#cells_per_column
-  # Google::Cloud::Bigtable::RowFilter::ChainFilter#timestamp_range
-  # Google::Cloud::Bigtable::RowFilter::ChainFilter#value_range
-  # Google::Cloud::Bigtable::RowFilter::ChainFilter#value_range
-  # Google::Cloud::Bigtable::RowFilter::ChainFilter#column_range
-  # Google::Cloud::Bigtable::RowFilter::ChainFilter#length
-  # Google::Cloud::Bigtable::RowFilter::ConditionFilter
-  # Google::Cloud::Bigtable::RowFilter::ConditionFilter#on_match
-  # Google::Cloud::Bigtable::RowFilter::ConditionFilter#otherwise
-  # Google::Cloud::Bigtable::RowFilter::InterleaveFilter
-  # Google::Cloud::Bigtable::RowFilter::InterleaveFilter
-  # Google::Cloud::Bigtable::RowFilter::InterleaveFilter#chain
-  # Google::Cloud::Bigtable::RowFilter::InterleaveFilter#interleave
-  # Google::Cloud::Bigtable::RowFilter::InterleaveFilter#condition
-  # Google::Cloud::Bigtable::RowFilter::InterleaveFilter#pass
-  # Google::Cloud::Bigtable::RowFilter::InterleaveFilter#block
-  # Google::Cloud::Bigtable::RowFilter::InterleaveFilter#sink
-  # Google::Cloud::Bigtable::RowFilter::InterleaveFilter#strip_value
-  # Google::Cloud::Bigtable::RowFilter::InterleaveFilter#key
-  # Google::Cloud::Bigtable::RowFilter::InterleaveFilter#sample
-  # Google::Cloud::Bigtable::RowFilter::InterleaveFilter#family
-  # Google::Cloud::Bigtable::RowFilter::InterleaveFilter#qualifier
-  # Google::Cloud::Bigtable::RowFilter::InterleaveFilter#value
-  # Google::Cloud::Bigtable::RowFilter::InterleaveFilter#label
-  # Google::Cloud::Bigtable::RowFilter::InterleaveFilter#cells_per_row_offset
-  # Google::Cloud::Bigtable::RowFilter::InterleaveFilter#cells_per_row
-  # Google::Cloud::Bigtable::RowFilter::InterleaveFilter#cells_per_column
-  # Google::Cloud::Bigtable::RowFilter::InterleaveFilter#timestamp_range
-  # Google::Cloud::Bigtable::RowFilter::InterleaveFilter#value_range
-  # Google::Cloud::Bigtable::RowFilter::InterleaveFilter#value_range
-  # Google::Cloud::Bigtable::RowFilter::InterleaveFilter#column_range
-  # Google::Cloud::Bigtable::RowFilter::InterleaveFilter#length
-  # Google::Cloud::Bigtable::RowRange
-  # Google::Cloud::Bigtable::RowRange#from
-  # Google::Cloud::Bigtable::RowRange#from
-  # Google::Cloud::Bigtable::RowRange#to
-  # Google::Cloud::Bigtable::RowRange#to
-  # Google::Cloud::Bigtable::RowRange#between
-  # Google::Cloud::Bigtable::RowRange#of
-  # Google::Cloud::Bigtable::SampleRowKey
-  # Google::Cloud::Bigtable::Table
-  # Google::Cloud::Bigtable::Table#delete
-  # Google::Cloud::Bigtable::Table#exists?
-  # Google::Cloud::Bigtable::Table#exists?
-  # Google::Cloud::Bigtable::Table#column_family
-  # Google::Cloud::Bigtable::Table#column_family
-  # Google::Cloud::Bigtable::Table#column_family
-  # Google::Cloud::Bigtable::Table#modify_column_families
-  # Google::Cloud::Bigtable::Table#generate_consistency_token
-  # Google::Cloud::Bigtable::Table#check_consistency
-  # Google::Cloud::Bigtable::Table#wait_for_replication
-  # Google::Cloud::Bigtable::Table#delete_all_rows
-  # Google::Cloud::Bigtable::Table#delete_rows_by_prefix
-  # Google::Cloud::Bigtable::Table#drop_row_range
-  # Google::Cloud::Bigtable::Table::ColumnFamilyMap
-  # Google::Cloud::Bigtable::Table::ColumnFamilyMap#add
-  # Google::Cloud::Bigtable::Table::List#next?
-  # Google::Cloud::Bigtable::Table::List#next
-  # Google::Cloud::Bigtable::Table::List#all
-  # Google::Cloud::Bigtable::Table::List#all
-  # Google::Cloud::Bigtable::ValueRange
-  # Google::Cloud::Bigtable::ValueRange#from
-  # Google::Cloud::Bigtable::ValueRange#from
-  # Google::Cloud::Bigtable::ValueRange#to
-  # Google::Cloud::Bigtable::ValueRange#to
-  # Google::Cloud::Bigtable::ValueRange#between
-  # Google::Cloud::Bigtable::ValueRange#of
+
+  doctest.before "Google::Cloud::Bigtable::Project#modify_column_families" do
+    mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
+      mocked_tables.expect :modify_column_families, table_resp, ["projects/my-project/instances/my-instance/tables/my-table", Array]
+    end
+  end
+
+  doctest.before "Google::Cloud::Bigtable::Project#table" do
+    mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
+      mocked_tables.expect :get_table, table_resp, ["projects/my-project/instances/my-instance/tables/my-table", Hash]
+      mock.expect :mutate_row, nil, ["projects/my-project/instances/my-instance/tables/my-table", "user-1", Array, Hash]
+      mock.expect :read_rows, [], ["projects/my-project/instances/my-instance/tables/my-table", Hash]
+    end
+  end
+
+  doctest.before "Google::Cloud::Bigtable::Project#tables" do
+    mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
+      mocked_tables.expect :list_tables, tables_resp, ["projects/my-project/instances/my-instance", Hash]
+      mocked_tables.expect :get_table, table_resp, ["projects/my-project/instances/my-instance/tables/my-table-1", Hash]
+      mocked_tables.expect :get_table, table_resp, ["projects/my-project/instances/my-instance/tables/my-table-2", Hash]
+      mocked_tables.expect :get_table, table_resp, ["projects/my-project/instances/my-instance/tables/my-table-3", Hash]
+    end
+  end
+
+  doctest.before "Google::Cloud::Bigtable::ReadOperations" do
+    mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
+      mocked_tables.expect :get_table, table_resp, ["projects/my-project/instances/my-instance/tables/my-table", Hash]
+      mock.expect :read_rows, [], ["projects/my-project/instances/my-instance/tables/my-table", Hash]
+    end
+  end
+
+  doctest.before "Google::Cloud::Bigtable::ReadOperations#sample_row_keys" do
+    mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
+      mocked_tables.expect :get_table, table_resp, ["projects/my-project/instances/my-instance/tables/my-table", Hash]
+      mock.expect :sample_row_keys, [], ["projects/my-project/instances/my-instance/tables/my-table", Hash]
+    end
+  end
+
+  doctest.before "Google::Cloud::Bigtable::SampleRowKey" do
+    mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
+      mocked_tables.expect :get_table, table_resp, ["projects/my-project/instances/my-instance/tables/my-table", Hash]
+      mock.expect :sample_row_keys, [], ["projects/my-project/instances/my-instance/tables/my-table", Hash]
+    end
+  end
+
+  doctest.before "Google::Cloud::Bigtable::Table" do
+    mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
+      mocked_tables.expect :get_table, table_resp, ["projects/my-project/instances/my-instance/tables/my-table", Hash]
+    end
+  end
+
+  doctest.before "Google::Cloud::Bigtable::Table#check_consistency" do
+    mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
+      mocked_instances.expect :get_instance, instance_resp, ["projects/my-project/instances/my-instance"]
+      mocked_tables.expect :get_table, table_resp, ["projects/my-project/instances/my-instance/tables/my-table", Hash]
+      mocked_tables.expect :check_consistency, OpenStruct.new(consistent: true), ["projects/my-project/instances/my-instance/tables/my-table", String]
+    end
+  end
+
+  doctest.skip "Google::Cloud::Bigtable::Table#column_families" # TODO: Add update block to Table#column_families, and change return type to frozen ColumnFamilyMap.
+
+  doctest.before "Google::Cloud::Bigtable::Table#column_family" do
+    mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
+      mocked_instances.expect :get_instance, instance_resp, ["projects/my-project/instances/my-instance"]
+      mocked_tables.expect :get_table, table_resp, ["projects/my-project/instances/my-instance/tables/my-table", Hash]
+      mocked_tables.expect :modify_column_families, table_resp, ["projects/my-project/instances/my-instance/tables/my-table", Array]
+      mocked_tables.expect :modify_column_families, table_resp, ["projects/my-project/instances/my-instance/tables/my-table", Array]
+    end
+  end
+
+  doctest.before "Google::Cloud::Bigtable::Table#delete" do
+    mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
+      mocked_tables.expect :get_table, table_resp, ["projects/my-project/instances/my-instance/tables/my-table", Hash]
+      mocked_tables.expect :delete_table, table_resp, ["projects/my-project/instances/my-instance/tables/my-table"]
+    end
+  end
+
+  doctest.before "Google::Cloud::Bigtable::Table#delete_all_rows" do
+    mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
+      mocked_instances.expect :get_instance, instance_resp, ["projects/my-project/instances/my-instance"]
+      mocked_tables.expect :get_table, table_resp, ["projects/my-project/instances/my-instance/tables/my-table", Hash]
+      mocked_tables.expect :drop_row_range, nil, ["projects/my-project/instances/my-instance/tables/my-table", Hash]
+      mocked_tables.expect :drop_row_range, nil, ["projects/my-project/instances/my-instance/tables/my-table", Hash]
+    end
+  end
+
+  doctest.before "Google::Cloud::Bigtable::Table#delete_rows_by_prefix" do
+    mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
+      mocked_tables.expect :get_table, table_resp, ["projects/my-project/instances/my-instance/tables/my-table", Hash]
+      mocked_tables.expect :drop_row_range, nil, ["projects/my-project/instances/my-instance/tables/my-table", Hash]
+      mocked_tables.expect :drop_row_range, nil, ["projects/my-project/instances/my-instance/tables/my-table", Hash]
+    end
+  end
+
+  doctest.before "Google::Cloud::Bigtable::Table#drop_row_range" do
+    mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
+      mocked_tables.expect :get_table, table_resp, ["projects/my-project/instances/my-instance/tables/my-table", Hash]
+      mocked_tables.expect :drop_row_range, nil, ["projects/my-project/instances/my-instance/tables/my-table", Hash]
+      mocked_tables.expect :drop_row_range, nil, ["projects/my-project/instances/my-instance/tables/my-table", Hash]
+    end
+  end
+
+  doctest.before "Google::Cloud::Bigtable::Table#generate_consistency_token" do
+    mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
+      mocked_instances.expect :get_instance, instance_resp, ["projects/my-project/instances/my-instance"]
+      mocked_tables.expect :get_table, table_resp, ["projects/my-project/instances/my-instance/tables/my-table", Hash]
+      mocked_tables.expect :generate_consistency_token, OpenStruct.new(consistency_token: ""), ["projects/my-project/instances/my-instance/tables/my-table"]
+    end
+  end
+
+  doctest.before "Google::Cloud::Bigtable::Table#exists?" do
+    mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
+      mocked_instances.expect :get_instance, instance_resp, ["projects/my-project/instances/my-instance"]
+      mocked_tables.expect :get_table, table_resp, ["projects/my-project/instances/my-instance/tables/my-table", Hash]
+      mocked_tables.expect :check_consistency, OpenStruct.new(consistent: true), ["projects/my-project/instances/my-instance/tables/my-table", String]
+    end
+  end
+
+  doctest.before "Google::Cloud::Bigtable::Table#modify_column_families" do
+    mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
+      mocked_instances.expect :get_instance, instance_resp, ["projects/my-project/instances/my-instance"]
+      mocked_tables.expect :get_table, table_resp, ["projects/my-project/instances/my-instance/tables/my-table", Hash]
+      mocked_tables.expect :modify_column_families, table_resp, ["projects/my-project/instances/my-instance/tables/my-table", Array]
+    end
+  end
+
+  doctest.before "Google::Cloud::Bigtable::Table#wait_for_replication" do
+    mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
+      mocked_tables.expect :get_table, table_resp, ["projects/my-project/instances/my-instance/tables/my-table", Hash]
+      mocked_tables.expect :generate_consistency_token, OpenStruct.new(consistency_token: "123"), ["projects/my-project/instances/my-instance/tables/my-table"]
+      mocked_tables.expect :check_consistency, OpenStruct.new(consistent: true), ["projects/my-project/instances/my-instance/tables/my-table", "123"]
+      mocked_tables.expect :generate_consistency_token, OpenStruct.new(consistency_token: "123"), ["projects/my-project/instances/my-instance/tables/my-table"]
+      mocked_tables.expect :check_consistency, OpenStruct.new(consistent: true), ["projects/my-project/instances/my-instance/tables/my-table", "123"]
+    end
+  end
+
+  doctest.before "Google::Cloud::Bigtable::Table::List" do
+    mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
+      mocked_tables.expect :get_table, table_resp, ["projects/my-project/instances/my-instance/tables/my-table", Hash]
+      mocked_tables.expect :list_tables, tables_resp, ["projects/my-project/instances/my-instance", Hash]
+    end
+  end
 
 end
 
@@ -622,6 +730,22 @@ def clusters_resp
   Google::Bigtable::Admin::V2::ListClustersResponse.new(clusters_hash)
 end
 
+def cluster_state_hash state = nil
+  { replication_state: state }
+end
+
+def cluster_state_grpc state = nil
+  Google::Bigtable::Admin::V2::Table::ClusterState.new(
+    cluster_state_hash(state)
+  )
+end
+
+def clusters_state_grpc num: 3, start_id: 1
+  num.times.each_with_object({}) do |i, r|
+    r["cluster-#{i + start_id }"] = cluster_state_grpc(:READY)
+  end
+end
+
 def column_family_hash(max_versions: nil, max_age: nil, intersection: nil, union: nil)
   gc_rule = {
     max_num_versions: max_versions,
@@ -644,6 +768,12 @@ def column_families_grpc num: 3, start_id: 1
     .each_with_object({}) do |(k,v), r|
     r[k] = Google::Bigtable::Admin::V2::ColumnFamily.new(v)
   end
+end
+
+def iam_permissions_resp
+  OpenStruct.new(
+    permissions: ["bigtable.instances.get"]
+  )
 end
 
 def instance_hash name: nil, display_name: nil, state: nil, type: nil, labels: {}
@@ -702,6 +832,40 @@ def job_grpc done: false
   )
 end
 
+def mutate_row_resp
+  Google::Bigtable::V2::MutateRowResponse.new
+end
+
+def viewer_policy_json
+  {
+    etag: "YWJj",
+    bindings: [{
+                 role: "roles/viewer",
+                 members: [
+                   "user:viewer@example.com",
+                   "serviceAccount:1234567890@developer.gserviceaccount.com"
+                 ]
+               }]
+  }.to_json
+end
+
+def owner_policy_json
+  {
+    etag: "YWJj",
+    bindings: [{
+                 role: "roles/owner",
+                 members: [
+                   "user:owner@example.com",
+                   "serviceAccount:0987654321@developer.gserviceaccount.com"
+                 ]
+               }]
+  }.to_json
+end
+
+def policy_resp
+  Google::Iam::V1::Policy.decode_json(viewer_policy_json)
+end
+
 def table_hash name: nil, cluster_states: nil, column_families: nil, granularity: nil
   {
     name: name,
@@ -727,7 +891,7 @@ end
 def table_resp
   Google::Bigtable::Admin::V2::Table.new(
     table_hash(
-      name: "my-table",
+      name: "projects/my-project/instances/my-instance/tables/my-table",
       column_families: column_families_grpc,
       granularity: :MILLIS
     )
@@ -735,9 +899,13 @@ def table_resp
 end
 
 def tables_resp
-  tables_hash("my-instance", num: 3, start_id: 1)[:tables].map do |t|
-    Google::Bigtable::Admin::V2::Table.new(t)
-  end
+  response_struct(
+    OpenStruct.new(
+      tables: tables_hash("my-instance", num: 3, start_id: 1)[:tables].map do |t|
+        Google::Bigtable::Admin::V2::Table.new(t)
+      end
+    )
+  )
 end
 
 def paged_enum_struct response

@@ -104,7 +104,7 @@ module Google
         #   entries = []
         #   entries << table.new_mutation_entry("row-1").set_cell("cf1", "field1", "XYZ")
         #   entries << table.new_mutation_entry("row-2").set_cell("cf1", "field1", "ABC")
-        #   table.mutate_row(entries)
+        #   table.mutate_rows(entries)
         #
         def mutate_rows entries
           RowsMutator.new(self, entries).apply_mutations

@@ -186,7 +186,7 @@ module Google
         #   job.done? #=> false
         #
         #   # Reload job until completion.
-        #   job.wait_until_done
+        #   job.wait_until_done!
         #   job.done? #=> true
         #
         #   if job.error?
@@ -211,7 +211,7 @@ module Google
         #   job.done? #=> false
         #
         #   # To block until the operation completes.
-        #   job.wait_until_done
+        #   job.wait_until_done!
         #   job.done? #=> true
         #
         #   if job.error?

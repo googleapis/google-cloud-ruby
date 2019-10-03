@@ -425,12 +425,6 @@ module Google
         #     puts table.name
         #   end
         #
-        #   # Full view
-        #   instance.tables(view: :FULL).all do |table|
-        #     puts table.name
-        #     puts table.column_families
-        #   end
-        #
         def tables
           ensure_service!
           grpc = service.list_tables(instance_id)
@@ -873,7 +867,7 @@ module Google
         #
         #   instance = bigtable.instance("my-instance")
         #
-        #   permissions = bigtable.test_permissions(
+        #   permissions = instance.test_iam_permissions(
         #     "bigtable.instances.get",
         #     "bigtable.instances.update"
         #   )

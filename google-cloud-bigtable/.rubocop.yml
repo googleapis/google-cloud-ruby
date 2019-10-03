@@ -12,6 +12,7 @@ AllCops:
     - "acceptance/**/*"
     - "conformance/**/*"
     - "samples/**/*"
+    - "support/**/*"
   TargetRubyVersion: 2.2
 
 Documentation:
