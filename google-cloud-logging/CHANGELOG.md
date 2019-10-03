@@ -4,7 +4,7 @@
 
 #### Features
 
-* Support additional fields of LogSink
+* Support additional fields of LogSink in the low-level interface
   * Add LogSink#create_time field
   * Add LogSink#update_time field
   * Add LogSink#bigquery_options field
