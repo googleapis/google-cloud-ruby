@@ -10,3 +10,7 @@ if Gem::Version.new(RUBY_VERSION) < Gem::Version.new("2.1")
   gem "jwt", "~> 1.5"
   gem "kramdown", "< 1.17.0" # Error in yard with 1.17.0
 end
+
+# Pin minitest to 5.11.x to avoid warnings emitted by 5.12.
+# See https://github.com/googleapis/google-cloud-ruby/issues/4110
+gem "minitest", "~> 5.11.3"

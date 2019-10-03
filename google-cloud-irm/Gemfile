@@ -7,3 +7,7 @@ gemspec
 gem "google-cloud-monitoring", "~> 0.29"
 gem "public_suffix", "~> 2.0"
 gem "rake", "~> 12.0"
+
+# Pin minitest to 5.11.x to avoid warnings emitted by 5.12.
+# See https://github.com/googleapis/google-cloud-ruby/issues/4110
+gem "minitest", "~> 5.11.3"
