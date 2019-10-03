@@ -26,7 +26,7 @@ module Google
     module V3
       module UptimeCheckService
         # The UptimeCheckService API is used to manage (list, create, delete, edit)
-        # uptime check configurations in the Stackdriver Monitoring product. An uptime
+        # Uptime check configurations in the Stackdriver Monitoring product. An Uptime
         # check is a piece of configuration that determines which resources and
         # services to monitor for availability. These configurations can also be
         # configured interactively by navigating to the [Cloud Console]
@@ -41,23 +41,23 @@ module Google
           self.unmarshal_class_method = :decode
           self.service_name = 'google.monitoring.v3.UptimeCheckService'
 
-          # Lists the existing valid uptime check configurations for the project,
-          # leaving out any invalid configurations.
+          # Lists the existing valid Uptime check configurations for the project
+          # (leaving out any invalid configurations).
           rpc :ListUptimeCheckConfigs, ListUptimeCheckConfigsRequest, ListUptimeCheckConfigsResponse
-          # Gets a single uptime check configuration.
+          # Gets a single Uptime check configuration.
           rpc :GetUptimeCheckConfig, GetUptimeCheckConfigRequest, UptimeCheckConfig
-          # Creates a new uptime check configuration.
+          # Creates a new Uptime check configuration.
           rpc :CreateUptimeCheckConfig, CreateUptimeCheckConfigRequest, UptimeCheckConfig
-          # Updates an uptime check configuration. You can either replace the entire
+          # Updates an Uptime check configuration. You can either replace the entire
           # configuration with a new one or replace only certain fields in the current
-          # configuration by specifying the fields to be updated via `"updateMask"`.
+          # configuration by specifying the fields to be updated via `updateMask`.
           # Returns the updated configuration.
           rpc :UpdateUptimeCheckConfig, UpdateUptimeCheckConfigRequest, UptimeCheckConfig
-          # Deletes an uptime check configuration. Note that this method will fail
-          # if the uptime check configuration is referenced by an alert policy or
+          # Deletes an Uptime check configuration. Note that this method will fail
+          # if the Uptime check configuration is referenced by an alert policy or
           # other dependent configs that would be rendered invalid by the deletion.
           rpc :DeleteUptimeCheckConfig, DeleteUptimeCheckConfigRequest, Google::Protobuf::Empty
-          # Returns the list of IPs that checkers run from
+          # Returns the list of IP addresses that checkers run from
           rpc :ListUptimeCheckIps, ListUptimeCheckIpsRequest, ListUptimeCheckIpsResponse
         end
 
