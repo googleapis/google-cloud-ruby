@@ -1,5 +1,23 @@
 # Release History
 
+### 0.36.0 / 2019-10-03
+
+#### Features
+
+* Add confidence attributes to SafeSearchAnnotation
+  * Add SafeSearchAnnotation#adult_confidence
+  * Add SafeSearchAnnotation#spoof_confidence
+  * Add SafeSearchAnnotation#medical_confidence
+  * Add SafeSearchAnnotation#violence_confidence
+  * Add SafeSearchAnnotation#racy_confidence
+  * Add SafeSearchAnnotation#nsfw_confidence
+  * Update documentation
+
+#### Documentation
+
+* Update list of supported product categories
+* Update product category documentation
+
 ## 0.35.0 (2019-08-12)
 
 * Add parent to BatchAnnotate and add PurgeProducts
