@@ -1,5 +1,11 @@
 # Release History
 
+### 0.3.1 / 2019-10-03
+
+#### Documentation
+
+* Update library description and mark several fields as required
+
 ### 0.3.0 / 2019-08-23
 
 #### Features
