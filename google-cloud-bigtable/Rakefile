@@ -153,7 +153,22 @@ end
 
 desc "Run yard-doctest example tests."
 task :doctest do
-  puts "The google-cloud-bigtable gem does not have doctest tests."
+  sh "bundle exec yard config load_plugins true && bundle exec yard doctest"
+end
+
+desc "Start an interactive shell."
+task :console do
+  require "irb"
+  require "irb/completion"
+  require "pp"
+
+  $LOAD_PATH.unshift "lib"
+
+  require "google-cloud-bigtable"
+  def gcloud; @gcloud ||= Google::Cloud.new; end
+
+  ARGV.clear
+  IRB.start
 end
 
 desc "Run the CI build"

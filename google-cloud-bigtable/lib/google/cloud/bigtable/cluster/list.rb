@@ -58,7 +58,7 @@ module Google
           #
           #   bigtable = Google::Cloud::Bigtable.new
           #
-          #   clusters = bigtable.clusters("instance-id")
+          #   clusters = bigtable.clusters
           #   if clusters.next?
           #     next_clusters = clusters.next
           #   end
@@ -75,8 +75,8 @@ module Google
           #
           #   bigtable = Google::Cloud::Bigtable.new
           #
-          #   clusters = bigtable.clusters("instance-id")
-          #   if instances.next?
+          #   clusters = bigtable.clusters
+          #   if clusters.next?
           #     next_clusters = clusters.next
           #   end
           def next
@@ -114,7 +114,7 @@ module Google
           #
           #   bigtable = Google::Cloud::Bigtable.new
           #
-          #   bigtable.clusters("instance-id").all do |cluster|
+          #   bigtable.clusters.all do |cluster|
           #     puts cluster.cluster_id
           #   end
           #
@@ -123,7 +123,7 @@ module Google
           #
           #   bigtable = Google::Cloud::Bigtable.new
           #
-          #   all_cluster_ids = bigtable.clusters("instance-id").all.map do |cluster|
+          #   all_cluster_ids = bigtable.clusters.all.map do |cluster|
           #     puts cluster.instance_id
           #   end
           #

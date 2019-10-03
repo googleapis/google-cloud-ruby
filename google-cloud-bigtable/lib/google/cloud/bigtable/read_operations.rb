@@ -45,7 +45,7 @@ module Google
         #   Yield block for each processed SampleRowKey.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
         #   table = bigtable.table("my-instance", "my-table")
@@ -112,7 +112,7 @@ module Google
         #   bigtable = Google::Cloud::Bigtable.new
         #   table = bigtable.table("my-instance", "my-table")
         #
-        #   range =  table.row_range.between("user-1", "user-100")
+        #   range = table.new_row_range.between("user-1", "user-100")
         #
         #   table.read_rows(ranges: range).each do |row|
         #     puts row
@@ -226,7 +226,7 @@ module Google
         #   bigtable = Google::Cloud::Bigtable.new
         #   table = bigtable.table("my-instance", "my-table")
         #
-        #   range = table.value_range
+        #   range = table.new_value_range
         #   range.from("abc")
         #   range.to("xyz")
         #
@@ -256,7 +256,7 @@ module Google
         #   bigtable = Google::Cloud::Bigtable.new
         #   table = bigtable.table("my-instance", "my-table")
         #
-        #   range = table.column_range("test-family")
+        #   range = table.new_column_range("test-family")
         #   range.from("abc")
         #   range.to("xyz")
         #
@@ -285,7 +285,7 @@ module Google
         #   bigtable = Google::Cloud::Bigtable.new
         #   table = bigtable.table("my-instance", "my-table")
         #
-        #   range = table.row_range
+        #   range = table.new_row_range
         #   range.from("abc")
         #   range.to("xyz")
         #

@@ -34,7 +34,7 @@ module Google
         #   bigtable = Google::Cloud::Bigtable.new
         #
         #   instance = bigtable.instance("my-instance")
-        #   app_profile = bigtable.instance("my-app-profile")
+        #   app_profile = instance.app_profile("my-app-profile")
         #
         #   app_profile.description = "User data instance app profile"
         #   routing_policy = Google::Cloud::Bigtable::AppProfile.single_cluster_routing(
@@ -70,7 +70,7 @@ module Google
           #   bigtable = Google::Cloud::Bigtable.new
           #
           #   instance = bigtable.instance("my-instance")
-          #   app_profile = bigtable.instance("my-app-profile")
+          #   app_profile = instance.app_profile("my-app-profile")
           #
           #   app_profile.description = "User data instance app profile"
           #   routing_policy = Google::Cloud::Bigtable::AppProfile.single_cluster_routing(
@@ -81,11 +81,6 @@ module Google
           #
           #   job = app_profile.save
           #
-          #   job.done? #=> false
-          #   job.reload!
-          #   job.done? #=> true
-          #
-          #   # OR
           #   job.wait_until_done!
           #
           #   app_profile = job.app_profile

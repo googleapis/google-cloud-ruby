@@ -25,10 +25,10 @@ module Google
         #
         #  clusters = Google::Cloud::Bigtable::Instance::ClusterMap.new
         #
-        #  clusters.add("cluster-1", 3, location: "us-east1-b", storage_type: :SSD)
+        #  clusters.add("cluster-1", "us-east1-b", nodes: 3, storage_type: :SSD)
         #
         #  # Or
-        #  cluster.add("cluster-2", 1)
+        #  clusters.add("cluster-2", "us-east1-b")
         #
         class ClusterMap < DelegateClass(::Hash)
           # @private

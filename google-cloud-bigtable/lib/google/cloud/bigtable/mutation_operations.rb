@@ -45,18 +45,18 @@ module Google
         #   Mutation entry with row key and list of mutations.
         # @return [Boolean]
         # @example Single mutation on row.
-        #   require "google/cloud"
+        #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
         #
         #   table = bigtable.table("my-instance", "my-table")
         #
-        #   entry = table.new_mutation_entry.new("user-1")
+        #   entry = table.new_mutation_entry("user-1")
         #   entry.set_cell("cf1", "field1", "XYZ")
         #   table.mutate_row(entry)
         #
         # @example Multiple mutations on row.
-        #   require "google/cloud"
+        #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
         #
@@ -95,7 +95,7 @@ module Google
         # @return [Array<Google::Bigtable::V2::MutateRowsResponse::Entry>]
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
         #
@@ -104,7 +104,7 @@ module Google
         #   entries = []
         #   entries << table.new_mutation_entry("row-1").set_cell("cf1", "field1", "XYZ")
         #   entries << table.new_mutation_entry("row-2").set_cell("cf1", "field1", "ABC")
-        #   table.mutate_row(entries)
+        #   table.mutate_rows(entries)
         #
         def mutate_rows entries
           RowsMutator.new(self, entries).apply_mutations
@@ -263,7 +263,7 @@ module Google
         #   Yield block for each processed SampleRowKey.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
         #   table = bigtable.table("my-instance", "my-table")

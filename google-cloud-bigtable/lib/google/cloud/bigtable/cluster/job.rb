@@ -73,12 +73,6 @@ module Google
           #     storage_type: :SSD
           #   )
           #
-          #   job.done? #=> false
-          #   job.reload!
-          #   job.done? #=> true
-          #
-          #   # OR wait utill complete
-          #
           #   job.wait_until_done!
           #   cluster = job.cluster
           #

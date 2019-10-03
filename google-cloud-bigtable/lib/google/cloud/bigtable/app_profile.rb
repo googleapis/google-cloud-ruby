@@ -33,7 +33,7 @@ module Google
       #
       #   instance = bigtable.instance("my-instance")
       #
-      #   app_profile = bigtable.app_profile("my-instance", "my-app-profile")
+      #   app_profile = instance.app_profile("my-app-profile")
       #
       #   # Update
       #   app_profile.description = "User data instance app profile"
@@ -157,7 +157,7 @@ module Google
         #   app_profile = instance.app_profile("my-app-profile")
         #
         #   routing_policy = Google::Cloud::Bigtable::AppProfile.single_cluster_routing(
-        #     "my-instance-cluster-1"
+        #     "my-instance-cluster-1",
         #     allow_transactional_writes: true
         #   )
         #   app_profile.routing_policy = routing_policy
@@ -194,7 +194,8 @@ module Google
         #   bigtable = Google::Cloud::Bigtable.new
         #
         #   instance = bigtable.instance("my-instance")
-        #   app_profile = bigtable.instance("my-app-profile")
+        #
+        #   app_profile = instance.app_profile("my-app-profile")
         #
         #   app_profile.delete(ignore_warnings: true) # Ignore warnings.
         #
@@ -223,7 +224,9 @@ module Google
         #
         #   bigtable = Google::Cloud::Bigtable.new
         #
-        #   app_profile = bigtable.app_profile("my-app-profile")
+        #   instance = bigtable.instance("my-instance")
+        #
+        #   app_profile = instance.app_profile("my-app-profile")
         #
         #   app_profile.description = "User data instance app profile"
         #   app_profile.routing_policy = \
@@ -238,17 +241,13 @@ module Google
         #     app_profile = job.app_profile
         #   end
         #
-        #   # OR - Update with ignoring warnings.
-        #   job = app_profile.save(ignore_warnings: true)
-        #   job.wait_until_done!
-        #
         # @example Update with single cluster routing
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
         #
         #   instance = bigtable.instance("my-instance")
-        #   app_profile = bigtable.instance("my-app-profile")
+        #   app_profile = instance.app_profile("my-app-profile")
         #
         #   app_profile.description = "User data instance app profile"
         #   routing_policy = Google::Cloud::Bigtable::AppProfile.single_cluster_routing(
@@ -261,10 +260,6 @@ module Google
         #
         #   job.done? #=> false
         #   job.reload!
-        #   job.done? #=> false
-        #
-        #   # Reload job until completion.
-        #   job.wait_until_done!
         #   job.done? #=> true
         #
         #   if job.error?

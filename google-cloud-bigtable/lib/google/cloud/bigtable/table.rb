@@ -36,22 +36,13 @@ module Google
       #
       #   bigtable = Google::Cloud::Bigtable.new
       #
-      #   table = bigtable.table("my-instance", "my-table", perform_lookup: true)
+      #   table = bigtable.table("my-instance", "my-table")
       #
-      #   table.column_families.each do |cf|
-      #     p cf.name
-      #     p cf.gc_rule
+      #   if table.exists?
+      #     p "Table exists."
+      #   else
+      #     p "Table does not exist"
       #   end
-      #
-      #   # Get column family by name
-      #   cf1 = table.column_families.find_by_name("cf1")
-      #
-      #   # Create column family
-      #   gc_rule = Google::Cloud::Bigtable::GcRule.max_versions(3)
-      #   cf2 = table.column_families.create("cf2", gc_rule)
-      #
-      #   # Delete table
-      #   table.delete
       #
       class Table
         # @!parse extend MutationOperations
@@ -145,6 +136,25 @@ module Google
         #
         # @return [Array<Google::Bigtable::ColumnFamily>]
         #
+        # @example
+        #   require "google/cloud/bigtable"
+        #
+        #   bigtable = Google::Cloud::Bigtable.new
+        #
+        #   table = bigtable.table("my-instance", "my-table", perform_lookup: true)
+        #
+        #   table.column_families.each do |cf|
+        #     p cf.name
+        #     p cf.gc_rule
+        #   end
+        #
+        #   # Get column family by name
+        #   cf1 = table.column_families.find_by_name("cf1")
+        #
+        #   # Create column family
+        #   gc_rule = Google::Cloud::Bigtable::GcRule.max_versions(3)
+        #   cf2 = table.column_families.create("cf2", gc_rule)
+        #
         def column_families
           check_view_and_load(:SCHEMA_VIEW)
           @grpc.column_families.map do |cf_name, cf_grpc|
@@ -187,7 +197,7 @@ module Google
         #
         #   bigtable = Google::Cloud::Bigtable.new
         #
-        #   instance = bigtable.table("my-instance", "my-table")
+        #   table = bigtable.table("my-instance", "my-table")
         #   table.delete
         #
         def delete
@@ -219,7 +229,7 @@ module Google
         #   bigtable = Google::Cloud::Bigtable.new
         #
         #   instance = bigtable.instance("my-instance")
-        #   table = bigtable.table("my-table")
+        #   table = instance.table("my-table")
         #
         #   if table.exists?
         #     p "Table exists."
@@ -247,7 +257,7 @@ module Google
         #
         #   bigtable = Google::Cloud::Bigtable.new
         #
-        #   table = bigtable.table("my-instance", my-table)
+        #   table = bigtable.table("my-instance", "my-table")
         #
         #   # OR get table from Instance object.
         #   instance = bigtable.instance("my-instance")
@@ -306,7 +316,7 @@ module Google
         #   for example).
         # @return [Google::Cloud::Bigtable::Table] Table with updated column families.
         #
-        # @example Apply multiple modificationss
+        # @example Apply multiple modifications
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
@@ -316,7 +326,7 @@ module Google
         #
         #   modifications = []
         #   modifications << Google::Cloud::Bigtable::ColumnFamily.create_modification(
-        #     "cf1", Google::Cloud::Bigtable::GcRule.max_age(600))
+        #     "cf1", Google::Cloud::Bigtable::GcRule.max_age(600)
         #   )
         #
         #   modifications << Google::Cloud::Bigtable::ColumnFamily.update_modification(
@@ -331,12 +341,12 @@ module Google
         #
         #   max_age_gc_rule = Google::Cloud::Bigtable::GcRule.max_age(300)
         #   modifications << Google::Cloud::Bigtable::ColumnFamily.update_modification(
-        #     "cf4", Google::Cloud::Bigtable::GcRule.union(max_version_gc_rule)
+        #     "cf4", Google::Cloud::Bigtable::GcRule.union(max_age_gc_rule)
         #   )
         #
         #   modifications << Google::Cloud::Bigtable::ColumnFamily.drop_modification("cf5")
         #
-        #   table = bigtable.modify_column_families(modifications)
+        #   table = table.modify_column_families(modifications)
         #
         #   p table.column_families
 
@@ -487,7 +497,7 @@ module Google
         #
         #   bigtable = Google::Cloud::Bigtable.new
         #
-        #   table = bigtable.table("instance_id", "my-table", perform_lookup: true)
+        #   table = bigtable.table("my-instance", "my-table", perform_lookup: true)
         #
         #   if table.wait_for_replication
         #     puts "Replication done"
@@ -565,7 +575,7 @@ module Google
         #   table.delete_rows_by_prefix("user-100")
         #
         #   # With timeout
-        #   table.delete_all_rows("user-1", timeout: 120) # 120 seconds.
+        #   table.delete_rows_by_prefix("user-1", timeout: 120) # 120 seconds.
         #
         def delete_rows_by_prefix prefix, timeout: nil
           drop_row_range(row_key_prefix: prefix, timeout: timeout)
@@ -585,7 +595,7 @@ module Google
         #   table = bigtable.table("my-instance", "my-table")
         #
         #   # Delete rows using row key prefix.
-        #   table.drop_row_range("user-100")
+        #   table.drop_row_range(row_key_prefix: "user-100")
         #
         #   # Delete all data With timeout
         #   table.drop_row_range(delete_all_data: true, timeout: 120) # 120 seconds.

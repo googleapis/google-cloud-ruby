@@ -61,7 +61,7 @@ module Google
     # @return [Google::Cloud::Bigtable::Project]
     #
     # @example
-    #   require "google/cloud"
+    #   require "google/cloud/bigtable"
     #
     #   gcloud  = Google::Cloud.new
     #
@@ -116,7 +116,7 @@ module Google
     # @return [Google::Cloud::Bigtable::Project]
     #
     # @example
-    #   require "google/cloud"
+    #   require "google/cloud/bigtable"
     #
     #   bigtable = Google::Cloud.bigtable
 

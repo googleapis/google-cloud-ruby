@@ -42,7 +42,7 @@ module Google
       # {Google::Cloud#bigtable}.
       #
       # @example Obtaining an instance and the clusters from a project.
-      #   require "google/cloud"
+      #   require "google/cloud/bigtable"
       #
       #   bigtable = Google::Cloud::Bigtable.new
       #
@@ -67,7 +67,7 @@ module Google
         # @return [String] Project ID.
         #
         # @example
-        #   require "google/cloud"
+        #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new(
         #     project_id: "my-project",
@@ -186,7 +186,7 @@ module Google
         #   job.done? #=> false
         #
         #   # Reload job until completion.
-        #   job.wait_until_done
+        #   job.wait_until_done!
         #   job.done? #=> true
         #
         #   if job.error?
@@ -211,7 +211,7 @@ module Google
         #   job.done? #=> false
         #
         #   # To block until the operation completes.
-        #   job.wait_until_done
+        #   job.wait_until_done!
         #   job.done? #=> true
         #
         #   if job.error?
@@ -531,7 +531,7 @@ module Google
         #
         #   modifications = []
         #   modifications << Google::Cloud::Bigtable::ColumnFamily.create_modification(
-        #     "cf1", Google::Cloud::Bigtable::GcRule.max_age(600))
+        #     "cf1", Google::Cloud::Bigtable::GcRule.max_age(600)
         #   )
         #
         #   modifications << Google::Cloud::Bigtable::ColumnFamily.update_modification(
@@ -546,7 +546,7 @@ module Google
         #
         #   max_age_gc_rule = Google::Cloud::Bigtable::GcRule.max_age(300)
         #   modifications << Google::Cloud::Bigtable::ColumnFamily.update_modification(
-        #     "cf4", Google::Cloud::Bigtable::GcRule.union(max_version_gc_rule)
+        #     "cf4", Google::Cloud::Bigtable::GcRule.union(max_age_gc_rule)
         #   )
         #
         #   modifications << Google::Cloud::Bigtable::ColumnFamily.drop_modification("cf5")

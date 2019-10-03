@@ -54,7 +54,7 @@ module Google
       #  union_gc_rule = Google::Cloud::Bigtable::GcRule.union(max_age_gc_rule)
       #
       #  # Change union GC rule
-      #  gc_rule.union = Google::Cloud::Bigtable::GcRule.max_age(600)
+      #  union_gc_rule.union = [Google::Cloud::Bigtable::GcRule.max_age(600)]
       #
       # @example Create GC rule instance with intersection.
       #
@@ -62,7 +62,7 @@ module Google
       #  gc_rule = Google::Cloud::Bigtable::GcRule.intersection(max_versions_gc_rule)
       #
       #  # Change intersection GC rule
-      #  gc_rule.intersection = Google::Cloud::Bigtable::GcRule.max_age(600)
+      #  gc_rule.intersection = [Google::Cloud::Bigtable::GcRule.max_age(600)]
       #
       class GcRule
         # @private

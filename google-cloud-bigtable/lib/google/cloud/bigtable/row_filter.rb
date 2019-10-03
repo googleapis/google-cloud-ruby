@@ -166,7 +166,7 @@ module Google
         #   chain.strip_value
         #
         #   # OR
-        #   chain.key("user-*).strip_value
+        #   chain.key("user-*").strip_value
         #
         # @example Create complex chain filter.
         #
@@ -176,7 +176,7 @@ module Google
         #   chain_1.label("users").qualifier("name").cells_per_row(5)
         #
         #   # Add to main chain filter
-        #   chain.chain(chain_1).value("xyz*).key("user-*")
+        #   chain.chain(chain_1).value("xyz*").key("user-*")
         #
         def self.chain
           ChainFilter.new
@@ -224,7 +224,7 @@ module Google
         #   interleave.sink
         #
         #   # OR
-        #   interleave.key("user-*).sink
+        #   interleave.key("user-*").sink
         #
         # @example Create complex interleave filter.
         #
@@ -234,7 +234,7 @@ module Google
         #   chain_1.label("users").qualifier("name").cells_per_row(5)
         #
         #   # Add to main chain filter
-        #   interleave.chain(chain_1).value("xyz*).key("user-*")
+        #   interleave.chain(chain_1).value("xyz*").key("user-*")
         #
         def self.interleave
           InterleaveFilter.new
@@ -559,13 +559,21 @@ module Google
         # @return [Google::Cloud::Bigtable::RowFilter::SimpleFilter]
         #
         # @example Start to end range
+        #   require "google/cloud/bigtable"
         #
-        #   range = Google::Cloud::Bigtable::ValueRange.from("abc").to("xyz")
+        #   bigtable = Google::Cloud::Bigtable.new
+        #   table = bigtable.table("my-instance", "my-table")
+        #
+        #   range = table.new_value_range.from("value-001", inclusive: false)
         #   filter = Google::Cloud::Bigtable::RowFilter.value_range(range)
         #
         # @example Start exlusive to infinite end range
+        #   require "google/cloud/bigtable"
         #
-        #   range = Google::Cloud::Bigtable::ValueRange.from("abc", inclusive: false)
+        #   bigtable = Google::Cloud::Bigtable.new
+        #   table = bigtable.table("my-instance", "my-table")
+        #
+        #   range = table.new_value_range.from("value-001", inclusive: false)
         #   filter = Google::Cloud::Bigtable::RowFilter.value_range(range)
         #
         def self.value_range range
@@ -580,8 +588,9 @@ module Google
         # @return [Google::Cloud::Bigtable::RowFilter::SimpleFilter]
         #
         # @example
+        #   require "google/cloud/bigtable"
         #
-        #   range = Google::Cloud::Bigtable::ColumnRange.new(cf).from("field0").to("field5")
+        #   range = Google::Cloud::Bigtable::ColumnRange.new("cf").from("field0").to("field5")
         #
         #   filter = Google::Cloud::Bigtable::RowFilter.column_range(range)
         #

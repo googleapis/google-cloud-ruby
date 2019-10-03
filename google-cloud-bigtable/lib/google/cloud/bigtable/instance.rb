@@ -40,7 +40,7 @@ module Google
       #
       #   job = bigtable.create_instance(
       #     "my-instance",
-      #     "Instance for user data",
+      #     display_name: "Instance for user data",
       #     type: :DEVELOPMENT,
       #     labels: { "env" => "dev"}
       #   ) do |clusters|
@@ -425,12 +425,6 @@ module Google
         #     puts table.name
         #   end
         #
-        #   # Full view
-        #   instance.tables(view: :FULL).all do |table|
-        #     puts table.name
-        #     puts table.column_families
-        #   end
-        #
         def tables
           ensure_service!
           grpc = service.list_tables(instance_id)
@@ -569,7 +563,7 @@ module Google
         #
         #   instance = bigtable.instance("my-instance")
         #
-        #   table = instance.create_table(my-table") do |column_families|
+        #   table = instance.create_table("my-table") do |column_families|
         #     column_families.add('cf1', Google::Cloud::Bigtable::GcRule.max_versions(3))
         #     column_families.add('cf2', Google::Cloud::Bigtable::GcRule.max_age(100))
         #
@@ -641,13 +635,13 @@ module Google
         #   instance = bigtable.instance("my-instance")
         #
         #   routing_policy = Google::Cloud::Bigtable::AppProfile.single_cluster_routing(
-        #     "my-instance-cluster-1"
+        #     "my-instance-cluster-1",
         #     allow_transactional_writes: true
         #   )
         #
         #   app_profile = instance.create_app_profile(
         #     "my-app-profile",
-        #     routing_policy: routing_policy,
+        #     routing_policy,
         #     description: "App profile for user data instance"
         #   )
         #   puts app_profile.name
@@ -793,7 +787,7 @@ module Google
         #   policy = instance.policy
         #
         # @example Update the policy by passing a block:
-        #   require "google/cloud/spanner"
+        #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
         #   instance = bigtable.instance("my-instance")
@@ -873,7 +867,7 @@ module Google
         #
         #   instance = bigtable.instance("my-instance")
         #
-        #   permissions = bigtable.test_permissions(
+        #   permissions = instance.test_iam_permissions(
         #     "bigtable.instances.get",
         #     "bigtable.instances.update"
         #   )

@@ -94,7 +94,7 @@ module Google
           #
           #   bigtable = Google::Cloud::Bigtable.new
           #
-          #   bigtable.tables("instance-id").all do |table|
+          #   bigtable.tables("my-instance").all do |table|
           #     puts table.table_id
           #   end
           #
@@ -103,7 +103,7 @@ module Google
           #
           #   bigtable = Google::Cloud::Bigtable.new
           #
-          #   all_table_ids = bigtable.tables("instance-id").all.map do |table|
+          #   all_table_ids = bigtable.tables("my-instance").all.map do |table|
           #     puts table.table_id
           #   end
           #
