@@ -1,5 +1,11 @@
 # Release History
 
+### 0.3.3 / 2019-10-03
+
+#### Documentation
+
+* Update IAM Policy documentation
+
 ### 0.3.2 / 2019-09-04
 
 #### Documentation
