@@ -301,6 +301,7 @@ describe "Spanner Client", :snapshot, :spanner do
       results.must_be_kind_of Google::Cloud::Spanner::Results
 
       rows = results.rows.to_a
+      rows.count.must_equal default_account_rows.count
       rows.zip(default_account_rows).each do |expected, actual|
         expected[:account_id].must_equal actual[:account_id]
         expected[:username].must_equal actual[:username]
@@ -313,6 +314,7 @@ describe "Spanner Client", :snapshot, :spanner do
       results2 = snp.read "accounts", [:account_id, :username], keys: keys
       results2.must_be_kind_of Google::Cloud::Spanner::Results
       rows2 = results.rows.to_a
+      rows2.count.must_equal default_account_rows.count
       rows2.zip(default_account_rows).each do |expected, actual|
         expected[:account_id].must_equal actual[:account_id]
         expected[:username].must_equal actual[:username]
@@ -335,6 +337,7 @@ describe "Spanner Client", :snapshot, :spanner do
       results.must_be_kind_of Google::Cloud::Spanner::Results
 
       rows = results.rows.to_a
+      rows.count.must_equal default_account_rows.count
       rows.zip(default_account_rows).each do |expected, actual|
         expected[:account_id].must_equal actual[:account_id]
         expected[:username].must_equal actual[:username]
@@ -347,6 +350,7 @@ describe "Spanner Client", :snapshot, :spanner do
       results2 = snp.read "accounts", [:account_id, :username], keys: keys
       results2.must_be_kind_of Google::Cloud::Spanner::Results
       rows2 = results.rows.to_a
+      rows2.count.must_equal default_account_rows.count
       rows2.zip(default_account_rows).each do |expected, actual|
         expected[:account_id].must_equal actual[:account_id]
         expected[:username].must_equal actual[:username]
@@ -372,6 +376,7 @@ describe "Spanner Client", :snapshot, :spanner do
       results.must_be_kind_of Google::Cloud::Spanner::Results
 
       rows = results.rows.to_a
+      rows.count.must_equal default_account_rows.count
       rows.zip(default_account_rows).each do |expected, actual|
         expected[:account_id].must_equal actual[:account_id]
         expected[:username].must_equal actual[:username]
@@ -384,6 +389,7 @@ describe "Spanner Client", :snapshot, :spanner do
       results2 = snp.read "accounts", [:account_id, :username], keys: keys
       results2.must_be_kind_of Google::Cloud::Spanner::Results
       rows2 = results.rows.to_a
+      rows2.count.must_equal default_account_rows.count
       rows2.zip(default_account_rows).each do |expected, actual|
         expected[:account_id].must_equal actual[:account_id]
         expected[:username].must_equal actual[:username]
