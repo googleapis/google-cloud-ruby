@@ -1,58 +1,16 @@
-# Copyright 2019 Google LLC
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     https://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-
 require "bundler/setup"
 require "bundler/gem_tasks"
 
 require "rubocop/rake_task"
 RuboCop::RakeTask.new
 
-require "rake/testtask"
-
 desc "Run tests."
 task :test do
-  $LOAD_PATH.unshift "lib", "test"
-  Dir.glob("test/**/*test.rb")
-    .reject { |file| file.include? "smoke_test" }
-    .each { |file| require_relative file }
+  puts "The grafeas-client gem does not have tests."
 end
 
 namespace :test do
-  desc "Runs tests with coverage."
-  task :coverage do
-    require "simplecov"
-    SimpleCov.start do
-      command_name "grafeas"
-      track_files "lib/**/*.rb"
-      add_filter "test/"
-    end
-
-    Rake::Task["test"].invoke
-  end
-end
-
-desc "Runs the smoke tests."
-task :smoke_test do
-  if ENV["GRAFEAS_TEST_PROJECT"].nil?
-    fail "The GRAFEAS_TEST_PROJECT environment variable must be set. "\
-      "e.g GRAFEAS_TEST_PROJECT=test123 rake smoke_test"
-  end
-
-  Rake::Task["smoke_test:run"].invoke
-end
-
-namespace :smoke_test do
-  desc "Runs smoke tests with coverage."
+  desc "Run tests with coverage."
   task :coverage do
     require "simplecov"
     SimpleCov.start do
@@ -61,87 +19,68 @@ namespace :smoke_test do
       add_filter "test/"
     end
 
-    Rake::Task[:smoke_test].invoke
-  end
-
-  Rake::TestTask.new :run do |t|
-    t.test_files = FileList["acceptance/**/*smoke_test.rb"]
-    t.warning = false
+    Rake::Task[:test].invoke
   end
 end
 
-# Acceptance tests
-desc "Run the grafeas acceptance tests."
-task :acceptance, :project, :keyfile do |t, args|
-  project = args[:project]
-  project ||= ENV["GRAFEAS_TEST_PROJECT"] || ENV["GCLOUD_TEST_PROJECT"]
-  keyfile = args[:keyfile]
-  keyfile ||= ENV["GRAFEAS_TEST_KEYFILE"] || ENV["GCLOUD_TEST_KEYFILE"]
-  if keyfile
-    keyfile = File.read keyfile
-  else
-    keyfile ||= ENV["GRAFEAS_TEST_KEYFILE_JSON"] || ENV["GCLOUD_TEST_KEYFILE_JSON"]
-  end
-  if project.nil? || keyfile.nil?
-    fail "You must provide a project and keyfile. e.g. rake acceptance[test123, /path/to/keyfile.json] or GRAFEAS_TEST_PROJECT=test123 GRAFEAS_TEST_KEYFILE=/path/to/keyfile.json rake acceptance"
-  end
-  # clear any env var already set
-  require "grafeas/v1/credentials"
-  (Grafeas::V1::Credentials::PATH_ENV_VARS +
-   Grafeas::V1::Credentials::JSON_ENV_VARS).each do |path|
-    ENV[path] = nil
-  end
-  # always overwrite when running tests
-  ENV["GRAFEAS_PROJECT"] = project
-  ENV["GRAFEAS_KEYFILE"] = nil
-  ENV["GRAFEAS_KEYFILE_JSON"] = keyfile
-
-  # Required for smoke tests
-  ENV["GRAFEAS_TEST_PROJECT"] = project
-
-  Rake::Task["acceptance:run"].invoke
+desc "Run acceptance tests."
+task :acceptance do
+  puts "The grafeas-client gem does not have acceptance tests."
 end
 
 namespace :acceptance do
   task :run do
-    Rake::Task[:smoke_test].invoke
+    puts "This gem does not have acceptance tests."
   end
-
-  desc "Run acceptance tests with coverage."
-  task :coverage do
-  end
-
   desc "Run acceptance cleanup."
   task :cleanup do
   end
 end
 
-require "yard"
-require "yard/rake/yardoc_task"
-YARD::Rake::YardocTask.new
-
 desc "Run yard-doctest example tests."
 task :doctest do
-  puts "The grafeas gem does not have doctest tests."
+  puts "The grafeas-client gem does not have doctest tests."
+end
+
+desc "Start an interactive shell."
+task :console do
+  require "irb"
+  require "irb/completion"
+  require "pp"
+
+  $LOAD_PATH.unshift "lib"
+
+  require "grafeas-client"
+  Bundler.require # load all the gems defined in the Gemfile
+
+  ARGV.clear
+  IRB.start
+end
+
+require "yard"
+require "yard/rake/yardoc_task"
+YARD::Rake::YardocTask.new do |y|
+  y.options << "--fail-on-warning"
 end
 
 desc "Run the CI build"
 task :ci do
-  header "BUILDING grafeas"
-  header "grafeas rubocop", "*"
-  sh "bundle exec rake rubocop"
-  header "grafeas doctest", "*"
-  sh "bundle exec rake doctest"
-  header "grafeas test", "*"
-  sh "bundle exec rake test"
+  header "BUILDING grafeas-client"
+  header "grafeas-client rubocop", "*"
+  Rake::Task[:rubocop].invoke
+  header "grafeas-client yard", "*"
+  Rake::Task[:yard].invoke
+  header "grafeas-client doctest", "*"
+  Rake::Task[:doctest].invoke
+  header "grafeas-client test", "*"
+  Rake::Task[:test].invoke
 end
-
 namespace :ci do
   desc "Run the CI build, with acceptance tests."
   task :acceptance do
-    Rake::Task["ci"].invoke
-    header "grafeas acceptance", "*"
-    sh "bundle exec rake acceptance -v"
+    Rake::Task[:ci].invoke
+    header "grafeas-client acceptance", "*"
+    Rake::Task[:acceptance].invoke
   end
   task :a do
     # This is a handy shortcut to save typing
@@ -149,7 +88,7 @@ namespace :ci do
   end
 end
 
-task :default => :test
+task default: :test
 
 def header str, token = "#"
   line_length = str.length + 8

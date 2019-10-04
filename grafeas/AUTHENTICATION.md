@@ -98,7 +98,7 @@ The environment variables that grafeas checks for project ID are:
 1. `GRAFEAS_PROJECT`
 2. `GOOGLE_CLOUD_PROJECT`
 
-The environment variables that grafeas checks for credentials are configured on `Grafeas::V1::Credentials`:
+The environment variables that grafeas checks for credentials are configured on {Grafeas::V1::Credentials}:
 
 1. `GRAFEAS_CREDENTIALS` - Path to JSON file, or JSON contents
 2. `GRAFEAS_KEYFILE` - Path to JSON file, or JSON contents
