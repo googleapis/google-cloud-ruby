@@ -5,7 +5,8 @@
 require 'google/protobuf'
 
 require 'google/api/annotations_pb'
-require 'google/cloud/dataproc/v1/operations_pb'
+require 'google/api/client_pb'
+require 'google/api/field_behavior_pb'
 require 'google/cloud/dataproc/v1/shared_pb'
 require 'google/longrunning/operations_pb'
 require 'google/protobuf/duration_pb'
@@ -31,6 +32,11 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :software_config, :message, 13, "google.cloud.dataproc.v1.SoftwareConfig"
     repeated :initialization_actions, :message, 11, "google.cloud.dataproc.v1.NodeInitializationAction"
     optional :encryption_config, :message, 15, "google.cloud.dataproc.v1.EncryptionConfig"
+    optional :autoscaling_config, :message, 18, "google.cloud.dataproc.v1.AutoscalingConfig"
+    optional :security_config, :message, 16, "google.cloud.dataproc.v1.SecurityConfig"
+  end
+  add_message "google.cloud.dataproc.v1.AutoscalingConfig" do
+    optional :policy_uri, :string, 1
   end
   add_message "google.cloud.dataproc.v1.EncryptionConfig" do
     optional :gce_pd_kms_key_name, :string, 1
@@ -54,6 +60,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :is_preemptible, :bool, 6
     optional :managed_group_config, :message, 7, "google.cloud.dataproc.v1.ManagedGroupConfig"
     repeated :accelerators, :message, 8, "google.cloud.dataproc.v1.AcceleratorConfig"
+    optional :min_cpu_platform, :string, 9
   end
   add_message "google.cloud.dataproc.v1.ManagedGroupConfig" do
     optional :instance_template_name, :string, 1
@@ -90,6 +97,26 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     value :UNSPECIFIED, 0
     value :UNHEALTHY, 1
     value :STALE_STATUS, 2
+  end
+  add_message "google.cloud.dataproc.v1.SecurityConfig" do
+    optional :kerberos_config, :message, 1, "google.cloud.dataproc.v1.KerberosConfig"
+  end
+  add_message "google.cloud.dataproc.v1.KerberosConfig" do
+    optional :enable_kerberos, :bool, 1
+    optional :root_principal_password_uri, :string, 2
+    optional :kms_key_uri, :string, 3
+    optional :keystore_uri, :string, 4
+    optional :truststore_uri, :string, 5
+    optional :keystore_password_uri, :string, 6
+    optional :key_password_uri, :string, 7
+    optional :truststore_password_uri, :string, 8
+    optional :cross_realm_trust_realm, :string, 9
+    optional :cross_realm_trust_kdc, :string, 10
+    optional :cross_realm_trust_admin_server, :string, 11
+    optional :cross_realm_trust_shared_password_uri, :string, 12
+    optional :kdc_db_key_uri, :string, 13
+    optional :tgt_lifetime_hours, :int32, 14
+    optional :realm, :string, 15
   end
   add_message "google.cloud.dataproc.v1.SoftwareConfig" do
     optional :image_version, :string, 1
@@ -154,6 +181,7 @@ module Google
       module V1
         Cluster = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.Cluster").msgclass
         ClusterConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.ClusterConfig").msgclass
+        AutoscalingConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.AutoscalingConfig").msgclass
         EncryptionConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.EncryptionConfig").msgclass
         GceClusterConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.GceClusterConfig").msgclass
         InstanceGroupConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.InstanceGroupConfig").msgclass
@@ -164,6 +192,8 @@ module Google
         ClusterStatus = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.ClusterStatus").msgclass
         ClusterStatus::State = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.ClusterStatus.State").enummodule
         ClusterStatus::Substate = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.ClusterStatus.Substate").enummodule
+        SecurityConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.SecurityConfig").msgclass
+        KerberosConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.KerberosConfig").msgclass
         SoftwareConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.SoftwareConfig").msgclass
         ClusterMetrics = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.ClusterMetrics").msgclass
         CreateClusterRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.CreateClusterRequest").msgclass

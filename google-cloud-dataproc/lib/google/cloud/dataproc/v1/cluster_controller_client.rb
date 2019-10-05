@@ -231,7 +231,9 @@ module Google
 
           # Service calls
 
-          # Creates a cluster in a project.
+          # Creates a cluster in a project. The returned
+          # {Google::Longrunning::Operation#metadata Operation#metadata} will be
+          # [ClusterOperationMetadata](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#clusteroperationmetadata).
           #
           # @param project_id [String]
           #   Required. The ID of the Google Cloud Platform project that the cluster
@@ -324,7 +326,9 @@ module Google
             operation
           end
 
-          # Updates a cluster in a project.
+          # Updates a cluster in a project. The returned
+          # {Google::Longrunning::Operation#metadata Operation#metadata} will be
+          # [ClusterOperationMetadata](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#clusteroperationmetadata).
           #
           # @param project_id [String]
           #   Required. The ID of the Google Cloud Platform project the
@@ -382,6 +386,10 @@ module Google
           #    <tr>
           #    <td><strong><em>config.secondary_worker_config.num_instances</em></strong></td>
           #    <td>Resize secondary worker group</td>
+          #    </tr>
+          #    <tr>
+          #    <td>config.autoscaling_config.policy_uri</td><td>Use, stop using, or
+          #    change autoscaling policies</td>
           #    </tr>
           #    </tbody>
           #    </table>
@@ -492,7 +500,9 @@ module Google
             operation
           end
 
-          # Deletes a cluster in a project.
+          # Deletes a cluster in a project. The returned
+          # {Google::Longrunning::Operation#metadata Operation#metadata} will be
+          # [ClusterOperationMetadata](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#clusteroperationmetadata).
           #
           # @param project_id [String]
           #   Required. The ID of the Google Cloud Platform project that the cluster
@@ -721,9 +731,13 @@ module Google
             @list_clusters.call(req, options, &block)
           end
 
-          # Gets cluster diagnostic information.
-          # After the operation completes, the Operation.response field
-          # contains `DiagnoseClusterOutputLocation`.
+          # Gets cluster diagnostic information. The returned
+          # {Google::Longrunning::Operation#metadata Operation#metadata} will be
+          # [ClusterOperationMetadata](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#clusteroperationmetadata).
+          # After the operation completes,
+          # {Google::Longrunning::Operation#response Operation#response}
+          # contains
+          # [DiagnoseClusterResults](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#diagnoseclusterresults).
           #
           # @param project_id [String]
           #   Required. The ID of the Google Cloud Platform project that the cluster

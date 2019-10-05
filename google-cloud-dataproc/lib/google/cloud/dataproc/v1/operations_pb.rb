@@ -4,8 +4,9 @@
 
 require 'google/protobuf'
 
-require 'google/api/annotations_pb'
+require 'google/api/field_behavior_pb'
 require 'google/protobuf/timestamp_pb'
+require 'google/api/annotations_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.cloud.dataproc.v1.ClusterOperationStatus" do
     optional :state, :enum, 1, "google.cloud.dataproc.v1.ClusterOperationStatus.State"

@@ -295,9 +295,16 @@ module Google
           # Creates new workflow template.
           #
           # @param parent [String]
-          #   Required. The "resource name" of the region, as described
-          #   in https://cloud.google.com/apis/design/resource_names of the form
-          #   `projects/{project_id}/regions/{region}`
+          #   Required. The resource name of the region or location, as described
+          #   in https://cloud.google.com/apis/design/resource_names.
+          #
+          #   * For `projects.regions.workflowTemplates,create`, the resource name of the
+          #     region has the following format:
+          #     `projects/{project_id}/regions/{region}`
+          #
+          #   * For `projects.locations.workflowTemplates.create`, the resource name of
+          #     the location has the following format:
+          #     `projects/{project_id}/locations/{location}`
           # @param template [Google::Cloud::Dataproc::V1::WorkflowTemplate | Hash]
           #   Required. The Dataproc workflow template to create.
           #   A hash of the same form as `Google::Cloud::Dataproc::V1::WorkflowTemplate`
@@ -339,12 +346,19 @@ module Google
           # version parameter.
           #
           # @param name [String]
-          #   Required. The "resource name" of the workflow template, as described
-          #   in https://cloud.google.com/apis/design/resource_names of the form
-          #   `projects/{project_id}/regions/{region}/workflowTemplates/{template_id}`
+          #   Required. The resource name of the workflow template, as described
+          #   in https://cloud.google.com/apis/design/resource_names.
+          #
+          #   * For `projects.regions.workflowTemplates.get`, the resource name of the
+          #     template has the following format:
+          #     `projects/{project_id}/regions/{region}/workflowTemplates/{template_id}`
+          #
+          #   * For `projects.locations.workflowTemplates.get`, the resource name of the
+          #     template has the following format:
+          #     `projects/{project_id}/locations/{location}/workflowTemplates/{template_id}`
           # @param version [Integer]
           #   Optional. The version of workflow template to retrieve. Only previously
-          #   instatiated versions can be retrieved.
+          #   instantiated versions can be retrieved.
           #
           #   If unspecified, retrieves the current version.
           # @param options [Google::Gax::CallOptions]
@@ -388,16 +402,25 @@ module Google
           # clusters to be deleted.
           #
           # The {Google::Longrunning::Operation#metadata Operation#metadata} will be
-          # {Google::Cloud::Dataproc::V1::WorkflowMetadata WorkflowMetadata}.
+          # [WorkflowMetadata](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#workflowmetadata).
+          # Also see [Using
+          # WorkflowMetadata](/dataproc/docs/concepts/workflows/debugging#using_workflowmetadata).
           #
           # On successful completion,
           # {Google::Longrunning::Operation#response Operation#response} will be
           # {Google::Protobuf::Empty Empty}.
           #
           # @param name [String]
-          #   Required. The "resource name" of the workflow template, as described
-          #   in https://cloud.google.com/apis/design/resource_names of the form
-          #   `projects/{project_id}/regions/{region}/workflowTemplates/{template_id}`
+          #   Required. The resource name of the workflow template, as described
+          #   in https://cloud.google.com/apis/design/resource_names.
+          #
+          #   * For `projects.regions.workflowTemplates.instantiate`, the resource name
+          #     of the template has the following format:
+          #     `projects/{project_id}/regions/{region}/workflowTemplates/{template_id}`
+          #
+          #   * For `projects.locations.workflowTemplates.instantiate`, the resource name
+          #     of the template has the following format:
+          #     `projects/{project_id}/locations/{location}/workflowTemplates/{template_id}`
           # @param version [Integer]
           #   Optional. The version of workflow template to instantiate. If specified,
           #   the workflow will be instantiated only if the current version of
@@ -497,16 +520,25 @@ module Google
           # clusters to be deleted.
           #
           # The {Google::Longrunning::Operation#metadata Operation#metadata} will be
-          # {Google::Cloud::Dataproc::V1::WorkflowMetadata WorkflowMetadata}.
+          # [WorkflowMetadata](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#workflowmetadata).
+          # Also see [Using
+          # WorkflowMetadata](/dataproc/docs/concepts/workflows/debugging#using_workflowmetadata).
           #
           # On successful completion,
           # {Google::Longrunning::Operation#response Operation#response} will be
           # {Google::Protobuf::Empty Empty}.
           #
           # @param parent [String]
-          #   Required. The "resource name" of the workflow template region, as described
-          #   in https://cloud.google.com/apis/design/resource_names of the form
-          #   `projects/{project_id}/regions/{region}`
+          #   Required. The resource name of the region or location, as described
+          #   in https://cloud.google.com/apis/design/resource_names.
+          #
+          #   * For `projects.regions.workflowTemplates,instantiateinline`, the resource
+          #     name of the region has the following format:
+          #     `projects/{project_id}/regions/{region}`
+          #
+          #   * For `projects.locations.workflowTemplates.instantiateinline`, the
+          #     resource name of the location has the following format:
+          #     `projects/{project_id}/locations/{location}`
           # @param template [Google::Cloud::Dataproc::V1::WorkflowTemplate | Hash]
           #   Required. The workflow template to instantiate.
           #   A hash of the same form as `Google::Cloud::Dataproc::V1::WorkflowTemplate`
@@ -624,9 +656,16 @@ module Google
           # Lists workflows that match the specified filter in the request.
           #
           # @param parent [String]
-          #   Required. The "resource name" of the region, as described
-          #   in https://cloud.google.com/apis/design/resource_names of the form
-          #   `projects/{project_id}/regions/{region}`
+          #   Required. The resource name of the region or location, as described
+          #   in https://cloud.google.com/apis/design/resource_names.
+          #
+          #   * For `projects.regions.workflowTemplates,list`, the resource
+          #     name of the region has the following format:
+          #     `projects/{project_id}/regions/{region}`
+          #
+          #   * For `projects.locations.workflowTemplates.list`, the
+          #     resource name of the location has the following format:
+          #     `projects/{project_id}/locations/{location}`
           # @param page_size [Integer]
           #   The maximum number of resources contained in the underlying API
           #   response. If page streaming is performed per-resource, this
@@ -680,9 +719,16 @@ module Google
           # Deletes a workflow template. It does not cancel in-progress workflows.
           #
           # @param name [String]
-          #   Required. The "resource name" of the workflow template, as described
-          #   in https://cloud.google.com/apis/design/resource_names of the form
-          #   `projects/{project_id}/regions/{region}/workflowTemplates/{template_id}`
+          #   Required. The resource name of the workflow template, as described
+          #   in https://cloud.google.com/apis/design/resource_names.
+          #
+          #   * For `projects.regions.workflowTemplates.delete`, the resource name
+          #     of the template has the following format:
+          #     `projects/{project_id}/regions/{region}/workflowTemplates/{template_id}`
+          #
+          #   * For `projects.locations.workflowTemplates.instantiate`, the resource name
+          #     of the template has the following format:
+          #     `projects/{project_id}/locations/{location}/workflowTemplates/{template_id}`
           # @param version [Integer]
           #   Optional. The version of workflow template to delete. If specified,
           #   will only delete the template if the current server version matches

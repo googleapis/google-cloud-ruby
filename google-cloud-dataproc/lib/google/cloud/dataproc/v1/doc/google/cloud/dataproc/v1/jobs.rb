@@ -305,7 +305,7 @@ module Google
         #     Output only. A state message specifying the overall job state.
         # @!attribute [rw] details
         #   @return [String]
-        #     Output only. Optional job state details, such as an error
+        #     Optional. Output only. Job state details, such as an error
         #     description if the state is <code>ERROR</code>.
         # @!attribute [rw] state_start_time
         #   @return [Google::Protobuf::Timestamp]
