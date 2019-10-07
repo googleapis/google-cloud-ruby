@@ -313,7 +313,8 @@ describe "Spanner Client", :snapshot, :spanner do
       # read rows and from snaphot and verify rows got from the snapshot
       results2 = snp.read "accounts", [:account_id, :username], keys: keys
       results2.must_be_kind_of Google::Cloud::Spanner::Results
-      rows2 = results.rows.to_a
+      rows2 = results2.rows.to_a
+
       rows2.count.must_equal default_account_rows.count
       rows2.zip(default_account_rows).each do |expected, actual|
         expected[:account_id].must_equal actual[:account_id]
@@ -349,7 +350,7 @@ describe "Spanner Client", :snapshot, :spanner do
       # read rows and from snaphot and verify rows got from the snapshot
       results2 = snp.read "accounts", [:account_id, :username], keys: keys
       results2.must_be_kind_of Google::Cloud::Spanner::Results
-      rows2 = results.rows.to_a
+      rows2 = results2.rows.to_a
       rows2.count.must_equal default_account_rows.count
       rows2.zip(default_account_rows).each do |expected, actual|
         expected[:account_id].must_equal actual[:account_id]
@@ -388,7 +389,7 @@ describe "Spanner Client", :snapshot, :spanner do
       # read rows and from snaphot and verify rows got from the snapshot
       results2 = snp.read "accounts", [:account_id, :username], keys: keys
       results2.must_be_kind_of Google::Cloud::Spanner::Results
-      rows2 = results.rows.to_a
+      rows2 = results2.rows.to_a
       rows2.count.must_equal default_account_rows.count
       rows2.zip(default_account_rows).each do |expected, actual|
         expected[:account_id].must_equal actual[:account_id]
