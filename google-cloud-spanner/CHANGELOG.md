@@ -1,5 +1,21 @@
 # Release History
 
+### 1.11.0 / 2019-10-07
+
+#### BREAKING CHANGES (LOWER-LEVEL API ONLY)
+
+* Make the session_count argument required in the lower-level API batch_create_sessions call
+
+#### Performance Improvements
+
+* Update Pool#init to use BatchCreateSessions
+  * Update pool checkout to pop sessions for LIFO
+
+#### Documentation
+
+* Update Policy example code
+* Update IAM Policy class description and sample code
+
 ### 1.10.1 / 2019-09-04
 
 #### Documentation
