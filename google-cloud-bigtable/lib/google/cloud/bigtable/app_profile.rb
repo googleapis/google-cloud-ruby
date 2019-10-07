@@ -21,6 +21,7 @@ require "google/cloud/bigtable/app_profile/job"
 module Google
   module Cloud
     module Bigtable
+      ##
       # # AppProfile
       #
       # A configuration object describing how Cloud Bigtable should treat traffic
@@ -58,71 +59,90 @@ module Google
           @changed_fields = {}
         end
 
+        ##
         # The unique identifier for the project.
         #
         # @return [String]
+        #
         def project_id
           @grpc.name.split("/")[1]
         end
 
+        ##
         # The unique identifier for the instance.
         #
         # @return [String]
+        #
         def instance_id
           @grpc.name.split("/")[3]
         end
 
+        ##
         # The unique identifier for the app profile.
         #
         # @return [String]
+        #
         def name
           @grpc.name.split("/")[5]
         end
 
+        ##
         # The full path for the instance resource. Values are of the form
         # `projects/<project_id>/instances/<instance_id>`.
         #
         # @return [String]
+        #
         def path
           @grpc.name
         end
 
+        ##
         # Etag for optimistic concurrency control.
         #
         # @return [String]
+        #
         def etag
           @grpc.etag
         end
 
+        ##
         # Description of the AppProfile.
         #
         # @return [String]
+        #
         def description
           @grpc.description
         end
 
+        ##
         # Set description of the AppProfile.
         #
         # @param text [String] Description text
+        #
         def description= text
           @grpc.description = text
           @changed_fields["description"] = "description"
         end
 
+        ##
         # Get value of multi-cluster routing policy.
         #
         # @return [Google::Bigtable::Admin::V2::AppProfile::MultiClusterRoutingUseAny]
+        #
         def multi_cluster_routing
           @grpc.multi_cluster_routing_use_any
         end
 
+        ##
         # Get value of single cluster routing policy.
         #
         # @return [Google::Bigtable::Admin::V2::AppProfile::SingleClusterRouting]
+        #
         def single_cluster_routing
           @grpc.single_cluster_routing
         end
 
+        ##
         # Set routing policy.
         #
         # @param policy [Google::Bigtable::Admin::V2::AppProfile::SingleClusterRouting | Google::Bigtable::Admin::V2::AppProfile::MultiClusterRoutingUseAny]
@@ -173,6 +193,7 @@ module Google
           end
         end
 
+        ##
         # Get routing policy.
         #
         # @return [Google::Bigtable::Admin::V2::AppProfile::SingleClusterRouting, Google::Bigtable::Admin::V2::AppProfile::MultiClusterRoutingUseAny]
@@ -181,6 +202,7 @@ module Google
           @grpc.single_cluster_routing || @grpc.multi_cluster_routing_use_any
         end
 
+        ##
         # Delete app profile.
         #
         # @param ignore_warnings [Boolean]
@@ -212,6 +234,7 @@ module Google
           true
         end
 
+        ##
         # Update app profile.
         #
         # @param ignore_warnings [Boolean]
@@ -268,7 +291,7 @@ module Google
         #     app_profile = job.app_profile
         #     puts app_profile.name
         #   end
-
+        #
         def save ignore_warnings: false
           ensure_service!
           update_mask = Google::Protobuf::FieldMask.new(
@@ -284,15 +307,17 @@ module Google
         end
         alias update save
 
+        ##
         # Reload app profile information.
         #
         # @return [Google::Cloud::Bigtable::AppProfile]
-
+        #
         def reload!
           @grpc = service.get_app_profile(instance_id, name)
           self
         end
 
+        ##
         # Create instance of multi cluster routing policy.
         #
         # Read/write requests may be routed to any cluster in the instance and will
@@ -309,6 +334,7 @@ module Google
           Google::Bigtable::Admin::V2::AppProfile::MultiClusterRoutingUseAny.new
         end
 
+        ##
         # Create instance of single cluster routing.
         #
         # Unconditionally routes all read/write requests to a specific cluster.
@@ -333,7 +359,7 @@ module Google
         #     "my-cluster",
         #     allow_transactional_writes: true
         #   )
-
+        #
         def self.single_cluster_routing \
             cluster_id,
             allow_transactional_writes: false

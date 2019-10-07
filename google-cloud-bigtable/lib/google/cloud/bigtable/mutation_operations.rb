@@ -23,6 +23,7 @@ require "google/cloud/bigtable/read_modify_write_rule"
 module Google
   module Cloud
     module Bigtable
+      ##
       # # MutationOperations
       #
       # Collection of mutations APIs.
@@ -33,6 +34,7 @@ module Google
       #   * Check and mutate row
       #
       module MutationOperations
+        ##
         # Mutate row.
         #
         # Mutates a row atomically. Cells in the row are left
@@ -82,6 +84,7 @@ module Google
           true
         end
 
+        ##
         # Mutates multiple rows in a batch. Each individual row is mutated
         # atomically as in MutateRow, but the entire batch is not executed
         # atomically.
@@ -110,6 +113,7 @@ module Google
           RowsMutator.new(self, entries).apply_mutations
         end
 
+        ##
         # Modifies a row atomically on the server. The method reads the latest
         # existing timestamp and value from the specified columns and writes a new
         # entry based on pre-defined read/modify/write rules. The new value for the
@@ -177,6 +181,7 @@ module Google
           row
         end
 
+        ##
         # Mutates a row atomically based on the output of a predicate reader filter.
         #
         # NOTE: Condition predicate filter is not supported.
@@ -251,6 +256,7 @@ module Google
           response.predicate_matched
         end
 
+        ##
         # Read sample row keys.
         #
         # Returns a sample of row keys in the table. The returned row keys will
@@ -285,6 +291,7 @@ module Google
           end
         end
 
+        ##
         # Create an instance of mutation_entry
         #
         # @param row_key [String] Row key. Optional
@@ -306,6 +313,7 @@ module Google
           Google::Cloud::Bigtable::MutationEntry.new(row_key)
         end
 
+        ##
         # Create an instance of ReadModifyWriteRule to append or increment the value
         # of the cell qualifier.
         #

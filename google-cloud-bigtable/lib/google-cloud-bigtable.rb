@@ -26,6 +26,7 @@ require "google/cloud/config"
 
 module Google
   module Cloud
+    ##
     # Creates a new object for connecting to the Cloud Bigtable service.
     #
     # For more information on connecting to Google Cloud Platform, see the
@@ -67,7 +68,6 @@ module Google
     #
     #   bigtable = gcloud.bigtable
     #
-
     def bigtable scope: nil, timeout: nil, credentials: nil, client_config: nil
       Google::Cloud.bigtable(
         project_id: @project,
@@ -78,6 +78,7 @@ module Google
       )
     end
 
+    ##
     # Creates a Cloud Bigtable client instance for data, table admin and instance admin
     # operations.
     #
@@ -119,7 +120,7 @@ module Google
     #   require "google/cloud/bigtable"
     #
     #   bigtable = Google::Cloud.bigtable
-
+    #
     def self.bigtable \
         project_id: nil,
         credentials: nil,

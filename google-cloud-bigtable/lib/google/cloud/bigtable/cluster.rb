@@ -21,6 +21,7 @@ require "google/cloud/bigtable/cluster/job"
 module Google
   module Cloud
     module Bigtable
+      ##
       # # Cluster
       #
       # A configuration object describing how Cloud Bigtable should treat traffic
@@ -54,59 +55,74 @@ module Google
           @service = service
         end
 
+        ##
         # The unique identifier for the project.
         #
         # @return [String]
+        #
         def project_id
           @grpc.name.split("/")[1]
         end
 
+        ##
         # The unique identifier for the instance.
         #
         # @return [String]
+        #
         def instance_id
           @grpc.name.split("/")[3]
         end
 
+        ##
         # The unique identifier for the cluster.
         #
         # @return [String]
+        #
         def cluster_id
           @grpc.name.split("/")[5]
         end
 
+        ##
         # The unique name of the cluster. Value in the form
         # `projects/<project_id>/instances/<instance_id>/clusters/<cluster_id>`.
         #
         # @return [String]
+        #
         def path
           @grpc.name
         end
 
+        ##
         # The current instance state.
         # Possible values are
         # `:CREATING`, `:READY`, `:STATE_NOT_KNOWN`, `:RESIZING`, `:DISABLED`.
         #
         # @return [Symbol]
+        #
         def state
           @grpc.state
         end
 
+        ##
         # The cluster has been successfully created and is ready to serve requests.
         #
         # @return [Boolean]
+        #
         def ready?
           state == :READY
         end
 
+        ##
         # The instance is currently being created, and may be destroyed if the
         # creation process encounters an error.
         #
         # @return [Boolean]
+        #
         def creating?
           state == :CREATING
         end
 
+        ##
         # The cluster is currently being resized, and may revert to its previous
         # node count if the process encounters an error.
         # A cluster is still capable of serving requests while being resized,
@@ -114,59 +130,73 @@ module Google
         # between the starting and requested states.
         #
         # @return [Boolean]
+        #
         def resizing?
           state == :RESIZING
         end
 
+        ##
         # The cluster has no backing nodes. The data (tables) still
         # exist, but no operations can be performed on the cluster.
         #
         # @return [Boolean]
+        #
         def disabled?
           state == :DISABLED
         end
 
+        ##
         # The number of nodes allocated to this cluster.
         #
         # @return [Integer]
+        #
         def nodes
           @grpc.serve_nodes
         end
 
+        ##
         # The number of nodes allocated to this cluster. More nodes enable higher
         # throughput and more consistent performance.
         #
         # @param serve_nodes [Integer] Number of nodes
+        #
         def nodes= serve_nodes
           @grpc.serve_nodes = serve_nodes
         end
 
+        ##
         # The type of storage used by this cluster to serve its
         # parent instance's tables, unless explicitly overridden.
         # Valid values are `:SSD`(Flash (SSD) storage should be used),
         # `:HDD`(Magnetic drive (HDD) storage should be used)
         #
         # @return [Symbol]
+        #
         def storage_type
           @grpc.default_storage_type
         end
 
+        ##
         # Cluster location.
         # For example, "us-east1-b"
         #
         # @return [String]
+        #
         def location
           @grpc.location.split("/")[3]
         end
 
+        ##
         # Cluster location path in form of
         # `projects/<project_id>/locations/<zone>`
         #
         # @return [String]
+        #
         def location_path
           @grpc.location
         end
 
+        ##
         # Update cluster.
         #
         # `serve_nodes` is the only updatable field
@@ -209,15 +239,17 @@ module Google
         end
         alias update save
 
+        ##
         # Reloads cluster information.
         #
         # @return [Google::Cloud::Bigtable::Cluster]
-
+        #
         def reload!
           @grpc = service.get_cluster(instance_id, cluster_id)
           self
         end
 
+        ##
         # Permanently deletes the cluster.
         #
         # @return [Boolean] Returns `true` if the cluster was deleted.

@@ -20,6 +20,7 @@ require "google/cloud/bigtable/gc_rule"
 module Google
   module Cloud
     module Bigtable
+      ##
       # # ColumnFamily
       #
       # A set of columns within a table that share a common configuration.
@@ -72,6 +73,7 @@ module Google
           @name = name
         end
 
+        ##
         # Set Column Family garbage collection rules
         #
         # @param rule [Google::Cloud::Bigtable::GcRule, nil] the new rule, or
@@ -81,6 +83,7 @@ module Google
           @grpc.gc_rule = rule.nil? ? nil : rule.to_grpc
         end
 
+        ##
         # Get garbage collection rule
         #
         # @return [Google::Cloud::Bigtable::GcRule]
@@ -89,6 +92,7 @@ module Google
           GcRule.from_grpc(@grpc.gc_rule) if @grpc.gc_rule
         end
 
+        ##
         # Create column family
         #
         # @return [Google::Cloud::Bigtable::ColumnFamily]
@@ -109,6 +113,7 @@ module Google
           modify_column_family(self.class.create_modification(name, gc_rule))
         end
 
+        ##
         # Update column family
         #
         # @return [Google::Cloud::Bigtable::ColumnFamily]
@@ -130,6 +135,7 @@ module Google
         end
         alias update save
 
+        ##
         # Permanently delete column family from table
         #
         # @return [Boolean] Returns true if the column family was deleted.
@@ -149,6 +155,7 @@ module Google
           modify_column_family(self.class.drop_modification(name)).nil?
         end
 
+        ##
         # Create gPRC instance to create column family modification
         #
         # @param name [String] Column family name
@@ -168,6 +175,7 @@ module Google
           column_modification_grpc(:create, name, gc_rule)
         end
 
+        ##
         # Create update column family modification gPRC instance
         #
         # @param name [String] Column family name
@@ -187,6 +195,7 @@ module Google
           column_modification_grpc(:update, name, gc_rule)
         end
 
+        ##
         # Create drop column family modification gRPC instance
         #
         # @param name [String] Column family name

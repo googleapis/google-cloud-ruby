@@ -19,6 +19,7 @@ module Google
   module Cloud
     module Bigtable
       class Instance
+        ##
         # Instance::ClusterMap is a hash with cluster name and gRPC object.
         # It is used to create an instance.
         # @example Create
@@ -39,6 +40,7 @@ module Google
             super(value)
           end
 
+          ##
           # Adds a cluster to a map
           #
           # @param name [String] Cluster name
@@ -53,7 +55,7 @@ module Google
           #   *`:HDD`(Magnetic drive (HDD) storage should be used)
           #
           #   If not set then default will set to `:STORAGE_TYPE_UNSPECIFIED`
-
+          #
           def add name, location, nodes: nil, storage_type: nil
             attrs = {
               serve_nodes: nodes,

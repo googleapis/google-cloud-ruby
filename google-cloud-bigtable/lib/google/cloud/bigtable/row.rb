@@ -18,16 +18,21 @@
 module Google
   module Cloud
     module Bigtable
+      ##
       # # Row
       #
       # Row structure based on merged cells using read row state.
+      #
       class Row
+        ##
         # Cell
         #
         # Row cell built from data chunks.
+        #
         class Cell
           attr_reader :family, :qualifier, :value, :labels, :timestamp
 
+          ##
           # Creates a row cell instance.
           #
           # @param family [String] Column family name
@@ -35,7 +40,7 @@ module Google
           # @param timestamp [Integer] Timestamp in microseconds
           # @param value [String] Cell value
           # @param labels [Array<String>] List of label array
-
+          #
           def initialize family, qualifier, timestamp, value, labels = []
             @family = family
             @qualifier = qualifier
@@ -44,6 +49,7 @@ module Google
             @labels = labels
           end
 
+          ##
           # Converts timestamp to Time instance.
           #
           # @param granularity [Symbol] Optional
@@ -57,6 +63,7 @@ module Google
             Time.at(@timestamp / 1000.0)
           end
 
+          ##
           # Converts a value to an integer.
           #
           # @return [Integer]
@@ -80,12 +87,17 @@ module Google
           end
         end
 
+        ##
         # @return [String] Row key
+        #
         attr_accessor :key
 
+        ##
         # @return [Hash{String => Array<Google::Cloud::Bigtable::Row::Cell>}] Row cells
+        #
         attr_accessor :cells
 
+        ##
         # Creates a flat row object.
         #
         # @param key [String] Row key name
@@ -95,6 +107,7 @@ module Google
           @cells = Hash.new { |h, k| h[k] = [] }
         end
 
+        ##
         # List of column families names
         #
         # @return [Array<String>]

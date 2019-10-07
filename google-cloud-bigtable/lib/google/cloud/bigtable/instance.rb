@@ -24,6 +24,7 @@ require "google/cloud/bigtable/policy"
 module Google
   module Cloud
     module Bigtable
+      ##
       # # Instance
       #
       # Represents a Bigtable instance. Instances are dedicated Bigtable
@@ -72,86 +73,96 @@ module Google
           @service = service
         end
 
+        ##
         # The unique identifier for the project.
         #
         # @return [String]
-
+        #
         def project_id
           @grpc.name.split("/")[1]
         end
 
+        ##
         # The unique identifier for the instance.
         #
         # @return [String]
-
+        #
         def instance_id
           @grpc.name.split("/")[3]
         end
 
+        ##
         # The descriptive name for this instance as it appears in UIs. Must be
         # unique per project and between 4 and 30 characters long.
         #
         # @return [String]
-
+        #
         def display_name
           @grpc.display_name
         end
 
+        ##
         # Updates the descriptive name for this instance as it appears in UIs.
         # Can be changed at any time, but should be kept globally unique
         # to avoid confusion.
         #
         # @param value [String] The descriptive name for this instance.
-
+        #
         def display_name= value
           @grpc.display_name = value
         end
 
+        ##
         # The full path for the instance resource. Values are of the form
         # `projects/<project_id>/instances/<instance_id>`.
         #
         # @return [String]
-
+        #
         def path
           @grpc.name
         end
 
+        ##
         # The current instance state. Possible values are `:CREATING`,
         # `:READY`, `:STATE_NOT_KNOWN`.
         #
         # @return [Symbol]
-
+        #
         def state
           @grpc.state
         end
 
+        ##
         # The instance has been successfully created and can serve requests
         # to its tables.
         #
         # @return [Boolean]
-
+        #
         def ready?
           state == :READY
         end
 
+        ##
         # The instance is currently being created and may be destroyed if the
         # creation process encounters an error.
         #
         # @return [Boolean]
-
+        #
         def creating?
           state == :CREATING
         end
 
+        ##
         # Instance type. Possible values are `:DEVELOPMENT`, `:PRODUCTION`,
         # `:TYPE_UNSPECIFIED`
         #
         # @return [Symbol]
-
+        #
         def type
           @grpc.type
         end
 
+        ##
         # The instance is meant for development and testing purposes only; it has
         # no performance or uptime guarantees and is not covered by SLA.
         # After a development instance is created, it can be upgraded by
@@ -161,20 +172,22 @@ module Google
         # not be set.
         #
         # @return [Boolean]
-
+        #
         def development?
           type == :DEVELOPMENT
         end
 
+        ##
         # An instance meant for production use. `serve_nodes` must be set
         # on the cluster.
         #
         # @return [Boolean]
-
+        #
         def production?
           type == :PRODUCTION
         end
 
+        ##
         # Set instance type.
         #
         # Valid values are `:DEVELOPMENT`, `:PRODUCTION`.
@@ -184,11 +197,12 @@ module Google
         # development instance.
         #
         # @param instance_type [Symbol]
-
+        #
         def type= instance_type
           @grpc.type = instance_type
         end
 
+        ##
         # Get instance labels.
         #
         # Cloud Labels are a flexible and lightweight mechanism for organizing
@@ -205,15 +219,16 @@ module Google
         # * No more than 64 labels can be associated with a given resource.
         #
         # @return [Hash{String=>String}] The label keys and values in a hash.
-
+        #
         def labels
           @grpc.labels
         end
 
+        ##
         # Set the Cloud Labels.
         #
         # @param labels [Hash{String=>String}] The Cloud Labels.
-
+        #
         def labels= labels
           labels ||= {}
           @grpc.labels = Google::Protobuf::Map.new(
@@ -222,6 +237,7 @@ module Google
           )
         end
 
+        ##
         # Update instance.
         #
         # Updatable attributes are :
@@ -256,7 +272,7 @@ module Google
         #     puts instance.name
         #     puts instance.labels
         #   end
-
+        #
         def save
           ensure_service!
           update_mask = Google::Protobuf::FieldMask.new(
@@ -267,15 +283,17 @@ module Google
         end
         alias update save
 
+        ##
         # Reload instance information.
         #
         # @return [Google::Cloud::Bigtable::Instance]
-
+        #
         def reload!
           @grpc = service.get_instance(instance_id)
           self
         end
 
+        ##
         # Permanently deletes the instance from a project.
         #
         # @return [Boolean] Returns `true` if the instance was deleted.
@@ -287,13 +305,14 @@ module Google
         #
         #   instance = bigtable.instance("my-instance")
         #   instance.delete
-
+        #
         def delete
           ensure_service!
           service.delete_instance(instance_id)
           true
         end
 
+        ##
         # Lists information about clusters in an instance.
         #
         #  See to delete {Google::Cloud::Bigtable::Cluster#delete} and update
@@ -315,13 +334,14 @@ module Google
         #   instance.clusters.all do |cluster|
         #     puts cluster.cluster_id
         #   end
-
+        #
         def clusters token: nil
           ensure_service!
           grpc = service.list_clusters(instance_id, token: token)
           Cluster::List.from_grpc(grpc, service, instance_id: instance_id)
         end
 
+        ##
         # Gets cluster information.
         #
         #  See to delete {Google::Cloud::Bigtable::Cluster#delete} and update
@@ -339,7 +359,7 @@ module Google
         #
         #   cluster = instance.cluster("my-instance-cluster")
         #   puts cluster.cluster_id
-
+        #
         def cluster cluster_id
           ensure_service!
           grpc = service.get_cluster(instance_id, cluster_id)
@@ -348,6 +368,7 @@ module Google
           nil
         end
 
+        ##
         # Creates a cluster within an instance.
         #
         # @param cluster_id [String]
@@ -391,7 +412,7 @@ module Google
         #   else
         #     cluster = job.cluster
         #   end
-
+        #
         def create_cluster cluster_id, location, nodes: nil, storage_type: nil
           ensure_service!
           attrs = {
@@ -405,6 +426,7 @@ module Google
           Cluster::Job.from_grpc(grpc, service)
         end
 
+        ##
         # List all tables.
         #
         #  See to delete table {Google::Cloud::Bigtable::Table#delete} and update
@@ -431,6 +453,7 @@ module Google
           Table::List.from_grpc(grpc, service)
         end
 
+        ##
         # Get metadata information of table.
         #
         # @param view [Symbol]
@@ -504,6 +527,7 @@ module Google
           nil
         end
 
+        ##
         # Create table
         #
         # The table can be created with a full set of initial column families,
@@ -576,7 +600,7 @@ module Google
         #   end
         #
         #   puts table
-
+        #
         def create_table \
             name,
             column_families: nil,
@@ -595,6 +619,7 @@ module Google
           )
         end
 
+        ##
         # Create app profile for an instance with a routing policy.
         # Only one routing policy can applied to app profile. The policy can be
         # multi-cluster routing or single cluster routing.
@@ -678,7 +703,7 @@ module Google
         #     ignore_warnings: true
         #   )
         #   puts app_profile.name
-
+        #
         def create_app_profile \
             name,
             routing_policy,
@@ -710,6 +735,7 @@ module Google
           AppProfile.from_grpc(grpc, service)
         end
 
+        ##
         # Get app profile.
         #
         #  See to delete app_profile {Google::Cloud::Bigtable::AppProfile#delete} and update
@@ -730,7 +756,7 @@ module Google
         #   if app_profile
         #     puts app_profile.name
         #   end
-
+        #
         def app_profile app_profile_id
           ensure_service!
           grpc = service.get_app_profile(instance_id, app_profile_id)
@@ -739,6 +765,7 @@ module Google
           nil
         end
 
+        ##
         # List all app profiles
         #
         #  See to delete app_profile {Google::Cloud::Bigtable::AppProfile#delete} and update
@@ -757,13 +784,14 @@ module Google
         #   instance.app_profiles.all do |app_profile|
         #     puts app_profile.name
         #   end
-
+        #
         def app_profiles
           ensure_service!
           grpc = service.list_app_profiles(instance_id)
           AppProfile::List.from_grpc(grpc, service)
         end
 
+        ##
         # Gets the [Cloud IAM](https://cloud.google.com/iam/) access control
         # policy for this instance.
         #
@@ -795,7 +823,7 @@ module Google
         #   instance.policy do |p|
         #     p.add("roles/owner", "user:owner@example.com")
         #   end # 2 API calls
-
+        #
         def policy
           ensure_service!
           grpc = service.get_instance_policy(instance_id)
@@ -805,6 +833,7 @@ module Google
           update_policy policy
         end
 
+        ##
         # Updates the [Cloud IAM](https://cloud.google.com/iam/) access control
         # policy for this instance. The policy should be read from {#policy}.
         # See {Google::Cloud::Bigtable::Policy} for an explanation of the policy
@@ -830,7 +859,7 @@ module Google
         #   updated_policy = instance.update_policy(policy)
         #
         #   puts update_policy.roles
-
+        #
         def update_policy new_policy
           ensure_service!
           grpc = service.set_instance_policy(instance_id, new_policy.to_grpc)
@@ -838,6 +867,7 @@ module Google
         end
         alias policy= update_policy
 
+        ##
         # Tests the specified permissions against the [Cloud
         # IAM](https://cloud.google.com/iam/) access control policy.
         #
@@ -873,7 +903,7 @@ module Google
         #   )
         #   permissions.include? "bigtable.instances.get" #=> true
         #   permissions.include? "bigtable.instances.update" #=> false
-
+        #
         def test_iam_permissions *permissions
           ensure_service!
           grpc = service.test_instance_permissions(
@@ -891,7 +921,7 @@ module Google
         # @param grpc [Google::Bigtable::Admin::V2::Instance]
         # @param service [Google::Cloud::Bigtable::Service]
         # @return [Google::Cloud::Bigtable::Instance]
-
+        #
         def self.from_grpc grpc, service
           new(grpc, service)
         end
@@ -902,7 +932,7 @@ module Google
         #
         # Raise an error unless an active connection to the service is
         # available.
-
+        #
         def ensure_service!
           raise "Must have active connection to service" unless service
         end

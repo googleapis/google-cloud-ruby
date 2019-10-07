@@ -19,6 +19,7 @@ module Google
   module Cloud
     module Bigtable
       module RowFilter
+        ##
         # # ChainFilter
         #
         # A RowFilter that sends rows through several RowFilters in sequence.
@@ -40,6 +41,7 @@ module Google
             @grpc = Google::Bigtable::V2::RowFilter::Chain.new
           end
 
+          ##
           # Adds a chain filter instance.
           #
           # A Chain RowFilter that sends rows through several RowFilters in sequence.
@@ -72,6 +74,7 @@ module Google
             add(filter)
           end
 
+          ##
           # Add interleave filter.
           #
           # A RowFilter that sends each row to each of several component
@@ -125,6 +128,7 @@ module Google
             add(filter)
           end
 
+          ##
           # Adds a condition filter instance.
           #
           # A RowFilter that evaluates one of two possible RowFilters, depending on
@@ -159,6 +163,7 @@ module Google
             add(filter)
           end
 
+          ##
           # Adds a pass filter instance.
           #
           # Matches all cells, regardless of input. Functionally equivalent to
@@ -175,6 +180,7 @@ module Google
             add(RowFilter.pass)
           end
 
+          ##
           # Adds a block-all filter instance.
           #
           # Does not match any cells, regardless of input. Useful for temporarily
@@ -191,6 +197,7 @@ module Google
             add(RowFilter.block)
           end
 
+          ##
           # Adds a sink filter instance.
           #
           # Outputs all cells directly to the output of the read rather than to any parent filter.
@@ -206,6 +213,7 @@ module Google
             add(RowFilter.sink)
           end
 
+          ##
           # Adds a strip-value filter instance.
           #
           # Replaces each cell's value with an empty string.
@@ -221,6 +229,7 @@ module Google
             add(RowFilter.strip_value)
           end
 
+          ##
           # Adds a key-filter instance to match keys using a regular expression.
           #
           # Matches only cells from rows whose keys satisfy the given RE2 regex. In
@@ -246,6 +255,7 @@ module Google
             add(RowFilter.key(regex))
           end
 
+          ##
           # Adds a sample-probability filter instance.
           #
           # Matches all cells from a row with probability p, and matches no cells
@@ -264,6 +274,7 @@ module Google
             add(RowFilter.sample(probability))
           end
 
+          ##
           # Adds a family-name-match filter using a regular expression.
           #
           # Matches only cells from columns whose families satisfy the given RE2
@@ -288,6 +299,7 @@ module Google
             add(RowFilter.family(regex))
           end
 
+          ##
           # Add a column-qualifier-match filter using a regular expression.
           #
           # Matches only cells from columns whose qualifiers satisfy the given RE2
@@ -312,6 +324,7 @@ module Google
             add(RowFilter.qualifier(regex))
           end
 
+          ##
           # Adds a value-match filter using a regular expression.
           #
           # Matches only cells with values that satisfy the given regular expression.
@@ -335,6 +348,7 @@ module Google
             add(RowFilter.value(regex))
           end
 
+          ##
           # Adds a label filter instance to apply a label based on the result of read rows.
           #
           # Applies the given label to all cells in the output row. This allows
@@ -362,6 +376,7 @@ module Google
             add(RowFilter.label(value))
           end
 
+          ##
           # Adds a cell-per-row-offset filter instance to skip the first N cells.
           #
           # Skips the first N cells of each row, matching all subsequent cells.
@@ -380,6 +395,7 @@ module Google
             add(RowFilter.cells_per_row_offset(offset))
           end
 
+          ##
           # Adds a cells-per-row-limit filter instance.
           #
           # Matches only the first N cells of each row.
@@ -398,6 +414,7 @@ module Google
             add(RowFilter.cells_per_row(limit))
           end
 
+          ##
           # Adds a cells-per-column filter instance.
           #
           # Matches only the most recent N cells within each column. For example,
@@ -419,6 +436,7 @@ module Google
             add(RowFilter.cells_per_column(limit))
           end
 
+          ##
           # Adds a timestamp-range filter instance.
           #
           # Matches only cells with timestamps within the given range.
@@ -443,6 +461,7 @@ module Google
             add(RowFilter.timestamp_range(from: from, to: to))
           end
 
+          ##
           # Adds a value-range filter instance.
           #
           # Matches only cells with values that fall within the given range.
@@ -479,6 +498,7 @@ module Google
             add(RowFilter.value_range(range))
           end
 
+          ##
           # Adds a column-range filter instance.
           #
           # Matches only cells from columns within the given range.
@@ -498,6 +518,7 @@ module Google
             add(RowFilter.column_range(range))
           end
 
+          ##
           # Gets the number of filters in the chain filter.
           #
           # @return [Integer]
@@ -511,6 +532,7 @@ module Google
             @grpc.filters.length
           end
 
+          ##
           # Gets the list of filters.
           #
           # @return [Array<Google::Bigtable::V2::RowFilter>]

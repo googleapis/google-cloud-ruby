@@ -18,6 +18,7 @@
 module Google
   module Cloud
     module Bigtable
+      ##
       # # ReadModifyWriteRule
       #
       # Specifies an atomic read/modify/write operation on the latest value of the
@@ -48,6 +49,7 @@ module Google
           @grpc.column_qualifier = qualifier
         end
 
+        ##
         # Create an instance of an append-value rule.
         #
         # @param family [String]
@@ -70,6 +72,7 @@ module Google
           rule
         end
 
+        ##
         # Create an instance of an increment-amount rule.
         #
         # @param family [String]
@@ -94,6 +97,7 @@ module Google
           rule
         end
 
+        ##
         # Set append value.
         #
         # @param value [String]
@@ -104,6 +108,7 @@ module Google
           self
         end
 
+        ##
         # Set increment amount.
         #
         # @param amount [Integer]

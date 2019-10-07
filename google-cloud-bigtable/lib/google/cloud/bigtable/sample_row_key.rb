@@ -18,6 +18,7 @@
 module Google
   module Cloud
     module Bigtable
+      ##
       # # SampleRowKey
       #
       # Sample row key with byte offset.
@@ -48,9 +49,11 @@ module Google
       #   end
       #
       class SampleRowKey
+        ##
         # @return [String] Sample row key.
         attr_reader :key
 
+        ##
         # @return [Integer] Row offset in bytes.
         attr_reader :offset
 

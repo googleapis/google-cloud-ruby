@@ -16,6 +16,7 @@
 module Google
   module Cloud
     module Bigtable
+      ##
       # # RowRange
       #
       # Specifies a contiguous range of rows.
@@ -59,6 +60,7 @@ module Google
           @grpc = Google::Bigtable::V2::RowRange.new
         end
 
+        ##
         # Sets a row range with a lower bound.
         #
         # @param key [String] Row key. Required.
@@ -91,6 +93,7 @@ module Google
           self
         end
 
+        ##
         # Sets a row range with an upper bound.
         #
         # @param key [String] Row key. Required.
@@ -123,6 +126,7 @@ module Google
           self
         end
 
+        ##
         # Sets a row range with inclusive upper and lower bounds.
         #
         # @param from_key [String] Inclusive from row key. Required.
@@ -142,6 +146,7 @@ module Google
           from(from_key).to(to_key, inclusive: true)
         end
 
+        ##
         # Sets a row range with an inclusive lower bound and an exclusive upper bound.
         #
         # @param from_key [String] Inclusive from row key.
