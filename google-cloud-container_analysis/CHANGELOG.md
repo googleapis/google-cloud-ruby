@@ -2,6 +2,10 @@
 
 ### 0.3.2 / 2019-10-07
 
+#### Features
+
+* Update grafeas-client dependency to 0.3.
+
 #### Documentation
 
 * Fix role string in IAM Policy JSON example
