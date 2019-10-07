@@ -101,7 +101,7 @@ s.replace(
 s.replace(
     'google-cloud-container_analysis.gemspec',
     '\n\n  gem.add_dependency "google-gax", "~> 1\\.[\\d\\.]+"',
-    '\n\n  gem.add_dependency "grafeas-client", "~> 0.1"\n  gem.add_dependency "google-gax", "~> 1.7"',
+    '\n\n  gem.add_dependency "grafeas-client", "~> 0.3"\n  gem.add_dependency "google-gax", "~> 1.7"',
 )
 s.replace(
     'lib/google/cloud/container_analysis.rb',
