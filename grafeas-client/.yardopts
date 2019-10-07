@@ -6,5 +6,4 @@
 ./lib/**/*.rb
 -
 README.md
-AUTHENTICATION.md
 LICENSE
