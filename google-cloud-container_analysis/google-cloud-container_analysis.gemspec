@@ -21,7 +21,7 @@ Gem::Specification.new do |gem|
 
   gem.required_ruby_version = ">= 2.4"
 
-  gem.add_dependency "grafeas-client", "~> 0.3"
+  gem.add_dependency "grafeas", "~> 0.1"
   gem.add_dependency "google-gax", "~> 1.8"
   gem.add_dependency "grpc-google-iam-v1", "~> 0.6.9"
 

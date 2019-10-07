@@ -100,11 +100,11 @@ s.replace(
     'port = service_port || self.class::DEFAULT_SERVICE_PORT'
 )
 
-# Container analysis should depend on grafeas-client for now
+# Container analysis should depend on grafeas
 s.replace(
     'google-cloud-container_analysis.gemspec',
     '\n\n  gem.add_dependency "google-gax", "~> 1\\.[\\d\\.]+"',
-    '\n\n  gem.add_dependency "grafeas-client", "~> 0.3"\n  gem.add_dependency "google-gax", "~> 1.8"',
+    '\n\n  gem.add_dependency "grafeas", "~> 0.1"\n  gem.add_dependency "google-gax", "~> 1.8"',
 )
 s.replace(
     'lib/google/cloud/container_analysis.rb',
