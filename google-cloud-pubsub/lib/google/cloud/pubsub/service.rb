@@ -472,7 +472,7 @@ module Google
         end
 
         def inspect
-          "#{self.class}(#{@project})"
+          "#<#{self.class.name} #{@project}>"
         end
 
         protected

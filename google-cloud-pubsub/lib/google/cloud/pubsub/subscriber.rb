@@ -292,8 +292,8 @@ module Google
         ##
         # @private
         def to_s
-          format "(subscription: %<sub>s, streams: %<count>i)",
-                 sub: subscription_name, count: streams
+          "(subscription: #{subscription_name}, " \
+            "streams: [#{stream_pool.map(&:to_s).join(', ')}])"
         end
 
         ##
