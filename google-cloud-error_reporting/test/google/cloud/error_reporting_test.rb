@@ -130,15 +130,15 @@ describe Google::Cloud::ErrorReporting, :mock_error_reporting do
     let(:exception) { RuntimeError.new "test-exception" }
 
     before {
-      Google::Cloud::ErrorReporting.class_variable_set :@@default_client, nil
-      Google::Cloud::ErrorReporting.class_variable_get(:@@default_client).must_be_nil
+      Google::Cloud::ErrorReporting.instance_variable_set :@default_reporter, nil
+      Google::Cloud::ErrorReporting.instance_variable_get(:@default_reporter).must_be_nil
     }
 
     after {
       Google::Cloud.configure.reset!
       Google::Cloud::ErrorReporting.configure.reset!
-      Google::Cloud::ErrorReporting.class_variable_set :@@default_client, nil
-      Google::Cloud::ErrorReporting.class_variable_get(:@@default_client).must_be_nil
+      Google::Cloud::ErrorReporting.instance_variable_set :@default_reporter, nil
+      Google::Cloud::ErrorReporting.instance_variable_get(:@default_reporter).must_be_nil
     }
 
     it "doesn't call Project#report_exception if Google::Cloud.configure.use_error_reporting is false" do
@@ -146,7 +146,7 @@ describe Google::Cloud::ErrorReporting, :mock_error_reporting do
         config.use_error_reporting = false
       end
       stubbed_report = ->(_) { fail "Shouldn't be called" }
-      Google::Cloud::ErrorReporting.class_variable_set :@@default_client, error_reporting
+      Google::Cloud::ErrorReporting.instance_variable_set :@default_reporter, error_reporting
 
       error_reporting.stub :report, stubbed_report do
         Google::Cloud::ErrorReporting.report exception
@@ -160,7 +160,7 @@ describe Google::Cloud::ErrorReporting, :mock_error_reporting do
         event.service_version.must_equal "test-service-version"
       end
 
-      Google::Cloud::ErrorReporting.stub :default_client, mocked_client do
+      Google::Cloud::ErrorReporting.stub :default_reporter, mocked_client do
         Google::Cloud::ErrorReporting.report exception, service_name: "test-service-name",
                                                         service_version: "test-service-version"
       end
@@ -179,7 +179,7 @@ describe Google::Cloud::ErrorReporting, :mock_error_reporting do
         event.service_version.must_equal "test-service-version"
       end
 
-      Google::Cloud::ErrorReporting.stub :default_client, mocked_client do
+      Google::Cloud::ErrorReporting.stub :default_reporter, mocked_client do
         Google::Cloud::ErrorReporting.report exception
       end
     end
@@ -198,7 +198,7 @@ describe Google::Cloud::ErrorReporting, :mock_error_reporting do
         event.function_name.must_equal "report"
       end
 
-      Google::Cloud::ErrorReporting.stub :default_client, mocked_client do
+      Google::Cloud::ErrorReporting.stub :default_reporter, mocked_client do
         Google::Cloud::ErrorReporting.stub :caller, ["error_reporting.rb:123:in `report'"] do
           Google::Cloud::ErrorReporting.report exception
         end
@@ -206,7 +206,7 @@ describe Google::Cloud::ErrorReporting, :mock_error_reporting do
     end
   end
 
-  describe ".default_client" do
+  describe ".default_reporter" do
     after {
       Google::Cloud.configure.reset!
       Google::Cloud::ErrorReporting.configure.reset!
@@ -224,7 +224,7 @@ describe Google::Cloud::ErrorReporting, :mock_error_reporting do
       }
 
       Google::Cloud::ErrorReporting.stub :new, stubbed_new do
-        Google::Cloud::ErrorReporting.send :default_client
+        Google::Cloud::ErrorReporting.default_reporter
       end
     end
 
@@ -240,7 +240,7 @@ describe Google::Cloud::ErrorReporting, :mock_error_reporting do
       }
 
       Google::Cloud::ErrorReporting.stub :new, stubbed_new do
-        Google::Cloud::ErrorReporting.send :default_client
+        Google::Cloud::ErrorReporting.default_reporter
       end
     end
 
@@ -256,7 +256,7 @@ describe Google::Cloud::ErrorReporting, :mock_error_reporting do
       }
 
       Google::Cloud::ErrorReporting.stub :new, stubbed_new do
-        Google::Cloud::ErrorReporting.send :default_client
+        Google::Cloud::ErrorReporting.default_reporter
       end
     end
 
@@ -272,7 +272,7 @@ describe Google::Cloud::ErrorReporting, :mock_error_reporting do
       }
 
       Google::Cloud::ErrorReporting.stub :new, stubbed_new do
-        Google::Cloud::ErrorReporting.send :default_client
+        Google::Cloud::ErrorReporting.default_reporter
       end
     end
 
@@ -286,8 +286,8 @@ describe Google::Cloud::ErrorReporting, :mock_error_reporting do
 
       Google::Cloud::ErrorReporting::AsyncErrorReporter.stub :new, stubbed_async_reporter do
         Google::Cloud::ErrorReporting.stub :new, nil do
-          first_client = Google::Cloud::ErrorReporting.send :default_client
-          Google::Cloud::ErrorReporting.send(:default_client).must_equal first_client
+          first_client = Google::Cloud::ErrorReporting.default_reporter
+          Google::Cloud::ErrorReporting.default_reporter.must_equal first_client
         end
       end
     end

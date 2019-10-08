@@ -83,9 +83,12 @@ describe Google::Cloud::ErrorReporting::Middleware, :mock_error_reporting do
       end
     end
 
-    it "sets Google::Cloud::ErrorReporting\#@@default_client" do
-      middleware
-      Google::Cloud::ErrorReporting.class_variable_get(:@@default_client).object_id.must_equal error_reporting.object_id
+    it "sets Google::Cloud::ErrorReporting.default_reporter" do
+      Google::Cloud::ErrorReporting.instance_variable_set :@default_reporter, nil
+      Google::Cloud::ErrorReporting.stub :new, nil do
+        mw = Google::Cloud::ErrorReporting::Middleware.new nil, project_id: project_id
+        Google::Cloud::ErrorReporting.instance_variable_get(:@default_reporter).object_id.must_equal mw.error_reporting.object_id
+      end
     end
 
     it "sets Google::Cloud::ErrorReporting.configure" do

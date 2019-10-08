@@ -13,6 +13,7 @@
 # limitations under the License.
 
 
+require "monitor"
 require "google-cloud-error_reporting"
 require "google/cloud/error_reporting/async_error_reporter"
 require "google/cloud/error_reporting/project"
@@ -35,7 +36,8 @@ module Google
       ##
       # @private The default Google::Cloud::ErrorReporting::Project client used
       # for the Google::Cloud::ErrorReporting.report API.
-      @@default_client = nil
+      @default_reporter = nil
+      @default_reporter_mutex = Monitor.new
 
       ##
       # Creates a new object for connecting to the Stackdriver Error Reporting
@@ -224,7 +226,7 @@ module Google
 
         yield error_event if block_given?
 
-        default_client.report error_event
+        default_reporter.report error_event
       end
 
       ##
@@ -253,21 +255,31 @@ module Google
       private_class_method :resolve_project_id
 
       ##
-      # @private Create a private client to
-      def self.default_client
-        unless @@default_client
-          project_id = Project.default_project_id
-          credentials = default_credentials
-
-          @@default_client = AsyncErrorReporter.new(
-            new(project_id: project_id, credentials: credentials)
-          )
+      # Returns the global default reporter used by middleware and the
+      # {Google::Cloud::ErrorReporting.report} convenience method.
+      #
+      # If the default reporter is already defined, returns it. Otherwise, if
+      # a block is given, it is called and the result is set as the default
+      # reporter. Otherwise, if no block is given, a reporter is constructed
+      # from the default project and credentials.
+      #
+      # @return [#report]
+      #
+      def self.default_reporter &block
+        @default_reporter_mutex.synchronize do
+          @default_reporter ||=
+            if block
+              block.call
+            else
+              project_id = Project.default_project_id
+              credentials = default_credentials
+              AsyncErrorReporter.new(
+                new(project_id: project_id, credentials: credentials)
+              )
+            end
         end
-
-        @@default_client
+        @default_reporter
       end
-
-      private_class_method :default_client
 
       ##
       # @private Default credentials.
