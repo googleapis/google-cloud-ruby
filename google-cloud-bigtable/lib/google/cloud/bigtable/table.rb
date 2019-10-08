@@ -145,11 +145,13 @@ module Google
         end
 
         ##
-        # The column families configured for this table, mapped by column family ID.
-        # Column-families data only available in table view types `SCHEMA_VIEW`, `FULL`.
+        # A frozen hash containing the column families configured for this
+        # table, mapped by column family name. The column families data is only
+        # available in a table with view type `SCHEMA_VIEW` or `FULL`.
         #
         #
-        # @return [Array<Google::Bigtable::ColumnFamily>]
+        # @return [Google::Bigtable::Table::ColumnFamilyMap] A frozen
+        #   ColumnFamilyMap
         #
         # @example
         #   require "google/cloud/bigtable"
@@ -158,29 +160,21 @@ module Google
         #
         #   table = bigtable.table("my-instance", "my-table", perform_lookup: true)
         #
-        #   table.column_families.each do |cf|
-        #     p cf.name
-        #     p cf.gc_rule
+        #   table.column_families.each do |name, cf|
+        #     puts name
+        #     puts cf.gc_rule
         #   end
         #
-        #   # Get column family by name
-        #   cf1 = table.column_families.find_by_name("cf1")
-        #
-        #   # Create column family
-        #   gc_rule = Google::Cloud::Bigtable::GcRule.max_versions(3)
-        #   cf2 = table.column_families.create("cf2", gc_rule)
+        #   # Get a column family by name
+        #   cf1 = table.column_families["cf1"]
         #
         def column_families
           check_view_and_load(:SCHEMA_VIEW)
-          @grpc.column_families.map do |cf_name, cf_grpc|
-            ColumnFamily.from_grpc(
-              cf_grpc,
-              service,
-              name: cf_name,
-              instance_id: instance_id,
-              table_id: table_id
-            )
-          end
+          cfm = ColumnFamilyMap.from_grpc @grpc.column_families,
+                                          instance_id,
+                                          table_id,
+                                          service
+          cfm.freeze
         end
 
         ##
@@ -368,7 +362,7 @@ module Google
         #
         #   table = table.modify_column_families(modifications)
         #
-        #   p table.column_families
+        #   puts table.column_families.inspect
         #
         def modify_column_families modifications
           ensure_service!

@@ -58,10 +58,14 @@ describe Google::Cloud::Bigtable::Project, :modify_column_families, :mock_bigtab
     table.name.must_equal table_id
     table.path.must_equal table_path(instance_id, table_id)
     table.granularity.must_equal :MILLIS
-  
-    table.column_families.map(&:name).sort.must_equal column_families.keys
-    table.column_families[0].gc_rule.to_grpc.must_equal Google::Cloud::Bigtable::GcRule.max_age(300).to_grpc
-    table.column_families[1].gc_rule.must_be :nil?
+
+    cfm = table.column_families
+    cfm.class.must_equal Google::Cloud::Bigtable::Table::ColumnFamilyMap
+    cfm.must_be_kind_of Hash
+    cfm.must_be :frozen?
+    cfm.keys.sort.must_equal column_families.keys
+    cfm["cf1"].gc_rule.to_grpc.must_equal Google::Cloud::Bigtable::GcRule.max_age(300).to_grpc
+    cfm["cf2"].gc_rule.must_be :nil?
   end
 
   it "modify single column family in table" do
@@ -89,8 +93,8 @@ describe Google::Cloud::Bigtable::Project, :modify_column_families, :mock_bigtab
 
     mock.verify
 
-    table.column_families.map(&:name).sort.must_equal column_families.keys
-    table.column_families.each do |cf|
+    table.column_families.keys.sort.must_equal column_families.keys
+    table.column_families.each do |name, cf|
       cf.gc_rule.to_grpc.must_equal column_families[cf.name].gc_rule
     end
   end

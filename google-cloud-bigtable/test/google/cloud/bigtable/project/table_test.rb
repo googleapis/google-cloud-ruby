@@ -50,8 +50,8 @@ describe Google::Cloud::Bigtable::Project, :table, :mock_bigtable do
       cs.replication_state.must_equal :READY
     end
 
-    table.column_families.map(&:name).sort.must_equal column_families.keys
-    table.column_families.each do |cf|
+    table.column_families.keys.sort.must_equal column_families.keys
+    table.column_families.each do |name, cf|
       cf.gc_rule.to_grpc.must_equal column_families[cf.name].gc_rule
     end
   end

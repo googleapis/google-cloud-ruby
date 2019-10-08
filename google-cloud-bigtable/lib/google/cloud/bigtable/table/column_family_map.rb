@@ -20,8 +20,9 @@ module Google
     module Bigtable
       class Table
         ##
-        # Table::ColumnFamilyMap is a hash accepting string `ColumnFamily` names as keys and `GcRule` objects as values.
-        # It is used to create an instance.
+        # Table::ColumnFamilyMap is a hash accepting string column family names
+        # as keys and `ColumnFamily` objects as values.
+        # It is used to manage the column families belonging to a table.
         #
         class ColumnFamilyMap < DelegateClass(::Hash)
           # @private
@@ -52,6 +53,23 @@ module Google
           #
           def remove name
             delete(name)
+          end
+
+          def self.from_grpc grpc, instance_id, table_id, service
+            new(
+              grpc.map do |name, cf_grpc|
+                [
+                  name,
+                  ColumnFamily.from_grpc(
+                    cf_grpc,
+                    service,
+                    name: name,
+                    instance_id: instance_id,
+                    table_id: table_id
+                  )
+                ]
+              end.to_h
+            )
           end
         end
       end

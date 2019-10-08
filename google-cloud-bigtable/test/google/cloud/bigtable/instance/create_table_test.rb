@@ -93,8 +93,8 @@ describe Google::Cloud::Bigtable::Instance, :create_table, :mock_bigtable do
     table.name.must_equal table_id
     table.path.must_equal table_path(instance_id, table_id)
     table.granularity.must_equal :MILLIS
-    table.column_families.map(&:name).sort.must_equal column_families.keys
-    table.column_families.each do |cf|
+    table.column_families.keys.sort.must_equal column_families.keys
+    table.column_families.each do |name, cf|
       cf.gc_rule.to_grpc.must_equal column_families[cf.name].gc_rule
     end
     table.cluster_states.map(&:cluster_name).sort.must_equal cluster_states.keys
@@ -143,8 +143,8 @@ describe Google::Cloud::Bigtable::Instance, :create_table, :mock_bigtable do
     table.name.must_equal table_id
     table.path.must_equal table_path(instance_id, table_id)
     table.granularity.must_equal :MILLIS
-    table.column_families.map(&:name).sort.must_equal column_families.keys
-    table.column_families.each do |cf|
+    table.column_families.keys.sort.must_equal column_families.keys
+    table.column_families.each do |name, cf|
       cf.gc_rule.to_grpc.must_equal column_families[cf.name].gc_rule
     end
 

@@ -204,14 +204,14 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
-  doctest.skip "Google::Cloud::Bigtable::ColumnFamily" # TODO: (#4134) Add update block to Table#column_families
-  # doctest.before "Google::Cloud::Bigtable::ColumnFamily" do
-  #   mock_bigtable do |mock, mocked_instances, mocked_tables|
-  #     mocked_instances.expect :get_instance, instance_resp, ["projects/my-project/instances/my-instance"]
-  #     mocked_tables.expect :get_table, table_resp, ["projects/my-project/instances/my-instance/tables/my-table", { view: :SCHEMA_VIEW }]
-  #     mocked_tables.expect :modify_column_families, table_resp, ["projects/my-project/instances/my-instance/tables/my-table", Array]
-  #   end
-  # end
+  doctest.before "Google::Cloud::Bigtable::ColumnFamily" do
+    mock_bigtable do |mock, mocked_instances, mocked_tables|
+      mocked_instances.expect :get_instance, instance_resp, ["projects/my-project/instances/my-instance"]
+      mocked_tables.expect :get_table, table_resp, ["projects/my-project/instances/my-instance/tables/my-table", { view: :SCHEMA_VIEW }]
+      mocked_tables.expect :modify_column_families, table_resp, ["projects/my-project/instances/my-instance/tables/my-table", Array]
+      mocked_tables.expect :modify_column_families, table_resp, ["projects/my-project/instances/my-instance/tables/my-table", Array]
+    end
+  end
 
   doctest.before "Google::Cloud::Bigtable::Instance" do
     mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
@@ -513,7 +513,12 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
-  doctest.skip "Google::Cloud::Bigtable::Table#column_families" # TODO: (#4134) Add update block to Table#column_families, and (#4133) change return type to frozen hash.
+  doctest.before "Google::Cloud::Bigtable::Table#column_families" do
+    mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
+      mocked_instances.expect :get_instance, instance_resp, ["projects/my-project/instances/my-instance"]
+      mocked_tables.expect :get_table, table_resp, ["projects/my-project/instances/my-instance/tables/my-table", Hash]
+    end
+  end
 
   doctest.before "Google::Cloud::Bigtable::Table#column_family" do
     mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
@@ -757,14 +762,14 @@ def column_family_hash(max_versions: nil, max_age: nil, intersection: nil, union
   { gc_rule: gc_rule }
 end
 
-def column_families_hash num: 3, start_id: 1
+def column_families_hash num: 3
   num.times.each_with_object({}) do |i, r|
-    r["cf"] = column_family_hash(max_versions: 3)
+    r["cf#{i+1}"] = column_family_hash(max_versions: 3)
   end
 end
 
-def column_families_grpc num: 3, start_id: 1
-  column_families_hash(num: num, start_id: start_id)
+def column_families_grpc num: 3
+  column_families_hash(num: num)
     .each_with_object({}) do |(k,v), r|
     r[k] = Google::Bigtable::Admin::V2::ColumnFamily.new(v)
   end
