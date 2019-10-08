@@ -19,6 +19,7 @@ module Google
   module Cloud
     module Bigtable
       module RowFilter
+        ##
         #
         # # SimpleFilter
         #
@@ -30,6 +31,7 @@ module Google
             @grpc = Google::Bigtable::V2::RowFilter.new
           end
 
+          ##
           # Outputs all cells directly to the output of the read rather than to any parent filter.
           #
           # @return [Google::Cloud::Bigtable::RowFilter::SimpleFilter]
@@ -39,6 +41,7 @@ module Google
             self
           end
 
+          ##
           # Matches all cells, regardless of input. Functionally equivalent to
           # leaving `filter` unset, but included for completeness.
           #
@@ -49,6 +52,7 @@ module Google
             self
           end
 
+          ##
           # Does not match any cells, regardless of input. Useful for temporarily
           # disabling just part of a filter.
           #
@@ -59,6 +63,7 @@ module Google
             self
           end
 
+          ##
           # Replaces each cell's value with an empty string.
           #
           # @return [Google::Cloud::Bigtable::RowFilter::SimpleFilter]
@@ -68,6 +73,7 @@ module Google
             self
           end
 
+          ##
           # Matches only cells from rows whose keys satisfy the given RE2 regex. In
           # other words, passes through the entire row when the key matches, and
           # otherwise produces an empty row.
@@ -87,6 +93,7 @@ module Google
             self
           end
 
+          ##
           # Matches all cells from a row with probability p, and matches no cells
           # from the row with probability 1-p.
           #
@@ -104,6 +111,7 @@ module Google
             self
           end
 
+          ##
           # Matches only cells from columns whose families satisfy the given RE2
           # regex. For technical reasons, the regex must not contain the `:`
           # character, even if it is not being used as a literal.
@@ -119,6 +127,7 @@ module Google
             self
           end
 
+          ##
           # Matches only cells from columns whose qualifiers satisfy the given RE2
           # regex.
           # Note that, since column qualifiers can contain arbitrary bytes, the `\C`
@@ -134,6 +143,7 @@ module Google
             self
           end
 
+          ##
           # Matches only cells with values that satisfy the given regular expression.
           # Note that, since cell values can contain arbitrary bytes, the `\C` escape
           # sequence must be used if a true wildcard is desired. The `.` character
@@ -148,6 +158,7 @@ module Google
             self
           end
 
+          ##
           # Applies the given label to all cells in the output row. This allows
           # the client to determine which results were produced from which part of
           # the filter.
@@ -169,6 +180,7 @@ module Google
             self
           end
 
+          ##
           # Skips the first N cells of each row, matching all subsequent cells.
           # If duplicate cells are present, as is possible when using an interleave,
           # each copy of the cell is counted separately.
@@ -181,6 +193,7 @@ module Google
             self
           end
 
+          ##
           # Matches only the first N cells of each row.
           # If duplicate cells are present, as is possible when using an Interleave,
           # each copy of the cell is counted separately.
@@ -193,6 +206,7 @@ module Google
             self
           end
 
+          ##
           # Matches only the most recent N cells within each column. For example,
           # if N=2, this filter would match column `foo:bar` at timestamps 10 and 9,
           # skip all earlier cells in `foo:bar`, and then begin matching again in
@@ -208,6 +222,7 @@ module Google
             self
           end
 
+          ##
           # Creates a timestamp-range filter instance.
           #
           # Matches only cells with timestamps within the given range.
@@ -225,6 +240,7 @@ module Google
             self
           end
 
+          ##
           # Matches only cells with values that fall within the given range.
           #
           # See {Google::Cloud::Bigtable::ValueRange#from} and { Google::Cloud::Bigtable::ValueRange#to} for range
@@ -244,6 +260,7 @@ module Google
             self
           end
 
+          ##
           # Matches only cells from columns within the given range.
           #
           # @param range [Google::Cloud::Bigtable::ColumnRange]

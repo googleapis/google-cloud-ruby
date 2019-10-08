@@ -21,6 +21,7 @@ module Google
   module Cloud
     module Bigtable
       class Instance
+        ##
         # Instance::List is a special-case array with additional
         # values and failed_locations.
         class List < DelegateClass(::Array)
@@ -28,10 +29,12 @@ module Google
           # The gRPC Service object.
           attr_accessor :service
 
+          ##
           # If not empty, indicates that more records match
           # the request and this value should be passed to continue.
           attr_accessor :token
 
+          ##
           # Locations from which Instance information could not be retrieved,
           # due to an outage or some other transient condition.
           # Instances whose Clusters are all in one of the failed locations
@@ -46,6 +49,7 @@ module Google
             super(arr)
           end
 
+          ##
           # Whether there is a next page of instances.
           #
           # @return [Boolean]
@@ -59,10 +63,12 @@ module Google
           #   if instances.next?
           #     next_instances = instances.next
           #   end
+          #
           def next?
             !token.nil?
           end
 
+          ##
           # Retrieves the next page of instances.
           #
           # @return [Instance::List] The list of instances.
@@ -88,6 +94,7 @@ module Google
             next_list
           end
 
+          ##
           # Retrieves remaining results by repeatedly invoking {#next} until
           # {#next?} returns `false`. Calls the given block once for each
           # result, which is passed as the argument to the block.

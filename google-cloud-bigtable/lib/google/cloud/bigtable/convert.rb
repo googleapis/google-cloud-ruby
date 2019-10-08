@@ -26,10 +26,12 @@ module Google
       module Convert
         module_function
 
+        ##
         # Convert number to protobuf duration.
         #
         # @param number [Float] Seconds with nano seconds
         # @return [Google::Protobuf::Duration, nil]
+        #
         def number_to_duration number
           return unless number
 
@@ -39,10 +41,12 @@ module Google
           )
         end
 
+        ##
         # Convert protobuf durations to float.
         #
         # @param duration [Google::Protobuf::Duration, nil]
         # @return [Float, Integer, nil] Seconds with nano seconds
+        #
         def duration_to_number duration
           return unless duration
           return duration.seconds if duration.nanos.zero?
@@ -50,20 +54,24 @@ module Google
           duration.seconds + (duration.nanos / 1000000000.0)
         end
 
+        ##
         # Convert protobuf timestamp to Time object.
         #
         # @param timestamp [Google::Protobuf::Timestamp]
         # @return [Time, nil]
+        #
         def timestamp_to_time timestamp
           return unless timestamp
 
           Time.at(timestamp.seconds, timestamp.nanos / 1000.0)
         end
 
+        ##
         # Convert time to timestamp protobuf object.
         #
         # @param time [Time]
         # @return [Google::Protobuf::Timestamp, nil]
+        #
         def time_to_timestamp time
           return unless time
 

@@ -18,6 +18,7 @@
 module Google
   module Cloud
     module Bigtable
+      ##
       # # ValueRange
       #
       # Specifies a contiguous range of string values.
@@ -61,6 +62,7 @@ module Google
           @grpc = Google::Bigtable::V2::ValueRange.new
         end
 
+        ##
         # Sets the row range with the lower bound.
         #
         # @param value [String] value. Required
@@ -93,6 +95,7 @@ module Google
           self
         end
 
+        ##
         # Sets the value range with upper bound.
         #
         # @param value [String] value. Required
@@ -125,6 +128,7 @@ module Google
           self
         end
 
+        ##
         # Sets the value range with the inclusive lower and upper bound.
         #
         # @param from_value [String] Inclusive from value. Required
@@ -144,6 +148,7 @@ module Google
           from(from_value).to(to_value, inclusive: true)
         end
 
+        ##
         # Set value range with the inclusive lower and the exclusive upper bound.
         #
         # @param from_value [String] Inclusive from value

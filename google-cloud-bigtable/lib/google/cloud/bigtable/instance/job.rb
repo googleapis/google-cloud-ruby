@@ -17,6 +17,7 @@ module Google
   module Cloud
     module Bigtable
       class Instance
+        ##
         # # Job
         #
         # A resource representing the long-running, asynchronous processing of
@@ -57,8 +58,8 @@ module Google
         #     instance = job.instance
         #   end
         #
-        #
         class Job < LongrunningJob
+          ##
           # Get the instance object from operation results.
           #
           # @return [Google::Cloud::Bigtable::Instance, nil] The Instance instance, or

@@ -19,6 +19,7 @@ module Google
   module Cloud
     module Bigtable
       class Table
+        ##
         # Table::ClusterState is the state of a table's data in a particular cluster.
         class ClusterState
           attr_reader :cluster_name
@@ -31,6 +32,7 @@ module Google
             @cluster_name = cluster_name
           end
 
+          ##
           # The state of replication for the table in this cluster.
           #   Valid values are:
           #   * `:INITIALIZING` - The cluster was recently created.
@@ -43,6 +45,7 @@ module Google
             @grpc.replication_state
           end
 
+          ##
           # The cluster was recently created, and the table must finish copying
           # over pre-existing data from other clusters before it can begin
           # receiving live replication updates and serving.
@@ -52,6 +55,7 @@ module Google
             replication_state == :INITIALIZING
           end
 
+          ##
           # The table is temporarily unable to serve
           # requests from this cluster due to planned internal maintenance.
           # @return [Boolean]
@@ -60,6 +64,7 @@ module Google
             replication_state == :PLANNED_MAINTENANCE
           end
 
+          ##
           # The table is temporarily unable to serve requests from this
           # cluster due to unplanned or emergency maintenance.
           # @return [Boolean]
@@ -68,6 +73,7 @@ module Google
             replication_state == :UNPLANNED_MAINTENANCE
           end
 
+          ##
           # The table can serve requests from this cluster.
           # Depending on replication delay, reads may not immediately
           # reflect the state of the table in other clusters.

@@ -26,6 +26,7 @@ require "google/cloud/bigtable/row_filter/condition_filter"
 module Google
   module Cloud
     module Bigtable
+      ##
       # # RowFilter
       #
       # Takes a row as input and produces an alternate view of the row based on
@@ -145,6 +146,7 @@ module Google
 
         private_constant :PASS, :BLOCK, :SINK, :STRIP_VALUE
 
+        ##
         # Creates a chain filter instance.
         #
         # A chain RowFilter that sends rows through several RowFilters in sequence.
@@ -182,6 +184,7 @@ module Google
           ChainFilter.new
         end
 
+        ##
         # Creates an interleave filter.
         #
         # A RowFilter that sends each row to each of several component
@@ -240,6 +243,7 @@ module Google
           InterleaveFilter.new
         end
 
+        ##
         # Creates a condition filter instance.
         #
         # A RowFilter that evaluates one of two possible RowFilters, depending on
@@ -270,6 +274,7 @@ module Google
           ConditionFilter.new(predicate)
         end
 
+        ##
         # Creates a pass filter instance.
         #
         # Matches all cells, regardless of input. Functionally equivalent to
@@ -285,6 +290,7 @@ module Google
           PASS
         end
 
+        ##
         # Creates a block-all filter instance.
         #
         # Does not match any cells, regardless of input. Useful for temporarily
@@ -300,6 +306,7 @@ module Google
           BLOCK
         end
 
+        ##
         # Creates a sink filter instance.
         #
         # Outputs all cells directly to the output of the read rather than to any
@@ -315,6 +322,7 @@ module Google
           SINK
         end
 
+        ##
         # Creates a strip value filter instance.
         #
         # Replaces each cell's value with an empty string.
@@ -329,6 +337,7 @@ module Google
           STRIP_VALUE
         end
 
+        ##
         # Creates a key filter instance to match a row key using a regular expression.
         #
         # Matches only cells from rows whose row keys satisfy the given RE2 regex. In
@@ -353,6 +362,7 @@ module Google
           SimpleFilter.new.key(regex)
         end
 
+        ##
         # Creates a sample probability filter instance.
         #
         # Matches all cells from a row with probability p, and matches no cells
@@ -370,6 +380,7 @@ module Google
           SimpleFilter.new.sample(probability)
         end
 
+        ##
         # Creates a family name match filter using a regular expression.
         #
         # Matches only cells from columns whose families satisfy the given RE2
@@ -393,6 +404,7 @@ module Google
           SimpleFilter.new.family(regex)
         end
 
+        ##
         # Creates a column qualifier match filter using a regular expression.
         #
         # Matches only cells from columns whose qualifiers satisfy the given RE2
@@ -416,6 +428,7 @@ module Google
           SimpleFilter.new.qualifier(regex)
         end
 
+        ##
         # Creates a value match filter using a regular expression.
         #
         # Matches only cells with values that satisfy the given regular expression.
@@ -438,6 +451,7 @@ module Google
           SimpleFilter.new.value(regex)
         end
 
+        ##
         # Creates a label filter instance to apply a label based on the result of
         # read rows.
         #
@@ -465,6 +479,7 @@ module Google
           SimpleFilter.new.label(value)
         end
 
+        ##
         # Creates a cell-per-row-offset filter instance to skip first N cells.
         #
         # Skips the first N cells of each row, matching all subsequent cells.
@@ -482,6 +497,7 @@ module Google
           SimpleFilter.new.cells_per_row_offset(offset)
         end
 
+        ##
         # Create a cells-per-row limit filter instance.
         #
         # Matches only the first N cells of each row.
@@ -499,6 +515,7 @@ module Google
           SimpleFilter.new.cells_per_row(limit)
         end
 
+        ##
         # Creates cells-per-column filter instance.
         #
         # Matches only the most recent N cells within each column.
@@ -516,6 +533,7 @@ module Google
           SimpleFilter.new.cells_per_column(limit)
         end
 
+        ##
         # Creates a timestamp-range filter instance.
         #
         # Matches only cells with timestamps within the given range.
@@ -543,6 +561,7 @@ module Google
           SimpleFilter.new.timestamp_range(from, to)
         end
 
+        ##
         # Creates a value-range filter instance.
         #
         # Matches only cells with values that fall within the given range.
@@ -580,6 +599,7 @@ module Google
           SimpleFilter.new.value_range(range)
         end
 
+        ##
         # Creates a column-range filter instance.
         #
         # Matches only cells from columns within the given range.

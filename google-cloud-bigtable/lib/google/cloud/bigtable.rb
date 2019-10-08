@@ -21,11 +21,13 @@ require "google/cloud/bigtable/project"
 
 module Google
   module Cloud
+    ##
     # Cloud Bigtable
     #
     # See {file:OVERVIEW.md Bigtable Overview}.
     #
     module Bigtable
+      ##
       # Service for managing Cloud Bigtable instances and tables and for reading from and
       # writing to Bigtable tables.
       #
@@ -101,6 +103,7 @@ module Google
         Bigtable::Project.new(service)
       end
 
+      ##
       # Configure the Google Cloud Bigtable library.
       #
       # The following Bigtable configuration parameters are supported:

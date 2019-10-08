@@ -21,6 +21,7 @@ module Google
   module Cloud
     module Bigtable
       class Cluster
+        ##
         # Cluster::List is a special case Array with additional
         # values.
         class List < DelegateClass(::Array)
@@ -32,10 +33,12 @@ module Google
           # Instance ID
           attr_accessor :instance_id
 
+          ##
           # If not empty, indicates that there are more records that match
           # the request and this value should be passed to continue.
           attr_accessor :token
 
+          ##
           # Locations from which cluster information could not be retrieved,
           # due to an outage or some other transient condition.
           # Clusters from these locations may be missing from `clusters`
@@ -49,6 +52,7 @@ module Google
             super(arr)
           end
 
+          ##
           # Whether there is a next page of instances.
           #
           # @return [Boolean]
@@ -62,10 +66,12 @@ module Google
           #   if clusters.next?
           #     next_clusters = clusters.next
           #   end
+          #
           def next?
             !token.nil?
           end
 
+          ##
           # Retrieve the next page of clusters.
           #
           # @return [Cluster::List] The list of clusters.
@@ -79,6 +85,7 @@ module Google
           #   if clusters.next?
           #     next_clusters = clusters.next
           #   end
+          #
           def next
             return nil unless next?
             ensure_service!
@@ -94,6 +101,7 @@ module Google
             next_list
           end
 
+          ##
           # Retrieves remaining results by repeatedly invoking {#next} until
           # {#next?} returns `false`. Calls the given block once for each
           # result, which is passed as the argument to the block.

@@ -16,6 +16,7 @@
 module Google
   module Cloud
     module Bigtable
+      ##
       # # Policy
       #
       # Represents a Cloud IAM Policy for Bigtable instance resources.
@@ -63,6 +64,7 @@ module Google
           @roles = roles
         end
 
+        ##
         # Convenience method for adding a member to a binding on this policy.
         # See [Understanding
         # Roles](https://cloud.google.com/iam/docs/understanding-roles) for a
@@ -88,6 +90,7 @@ module Google
           role(role_name) << member
         end
 
+        ##
         # Convenience method for removing a member from a binding on this
         # policy. See [Understanding
         # Roles](https://cloud.google.com/iam/docs/understanding-roles) for a
@@ -113,6 +116,7 @@ module Google
           role(role_name).delete member
         end
 
+        ##
         # Convenience method returning the array of members bound to a role in
         # this policy. Returns an empty array if no value is present for the role in
         # {#roles}. See [Understanding

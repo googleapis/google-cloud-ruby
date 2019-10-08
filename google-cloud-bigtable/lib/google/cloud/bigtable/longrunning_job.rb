@@ -18,6 +18,7 @@
 module Google
   module Cloud
     module Bigtable
+      ##
       # # LongrunningJob
       #
       # A resource representing the long-running, asynchronous processing operation.
@@ -35,6 +36,7 @@ module Google
         # The gRPC Service object.
         attr_accessor :service
 
+        ##
         # Get result object of the operation.
         #
         # @return [Object, nil]
@@ -46,6 +48,7 @@ module Google
           @grpc.results
         end
 
+        ##
         # Checks if the processing of the instance operation is complete.
         #
         # @return [boolean] `true` when complete, `false` otherwise.
@@ -54,6 +57,7 @@ module Google
           @grpc.done?
         end
 
+        ##
         # Checks if the processing of the instance operation has errored.
         #
         # @return [boolean] `true` when errored, `false` otherwise.
@@ -74,6 +78,7 @@ module Google
           @grpc.error
         end
 
+        ##
         # Reloads the job with current data from the long-running,
         # asynchronous processing of an operation.
         #
@@ -84,6 +89,7 @@ module Google
           self
         end
 
+        ##
         # Reloads the job until the operation is complete. The delay between
         # reloads will incrementally increase.
         #

@@ -56,6 +56,7 @@ module Google
           @retry_count = 0
         end
 
+        ##
         # Read rows
         #
         # @param rows [Google::Bigtable::V2::RowSet]
@@ -72,7 +73,7 @@ module Google
         #   The default (zero) is to return all results.
         # @return [:yields: row]
         #   Array of row or yield block for each processed row.
-
+        #
         def read \
             rows: nil,
             filter: nil,
@@ -97,14 +98,16 @@ module Google
           @chunk_processor.validate_last_row_complete
         end
 
+        ##
         # Last read row key.
         #
         # @return [String]
-
+        #
         def last_key
           @chunk_processor.last_key
         end
 
+        ##
         # Calucates and returns the read rows limit and row set based on last read key.
         #
         # @param rows_limit [Integer]
@@ -116,7 +119,7 @@ module Google
         #   A hash of the same form as `Google::Bigtable::V2::RowSet`
         #   can also be provided.
         # @return [Integer, Google::Bigtable::V2::RowSet]
-
+        #
         def retry_options rows_limit, row_set
           return [rows_limit, row_set] unless last_key
 
@@ -151,15 +154,18 @@ module Google
           [rows_limit, row_set]
         end
 
+        ##
         # Checks if a read operation is retryable.
         #
         # @return [Boolean]
+        #
         def retryable?
           @retry_count < RowsReader::RETRY_LIMIT
         end
 
         private
 
+        ##
         # Checks if the start key was already read for the range.
         #
         # @param range [Google::Bigtable::V2::RowRange]
@@ -175,6 +181,7 @@ module Google
           start_key.empty? || last_key >= start_key
         end
 
+        ##
         # Checks if the end key was already read for the range.
         #
         # @param range [Google::Bigtable::V2::RowRange]

@@ -56,7 +56,7 @@ module Google
         #   See Google::Gax#construct_settings for the structure of
         #   this data. Falls back to the default config if not specified
         #   or the specified config is missing data points.
-
+        #
         def initialize project_id, credentials, host: nil, timeout: nil,
                        client_config: nil
           @project_id = project_id
@@ -84,10 +84,11 @@ module Google
             GRPC::Core::CallCredentials.new credentials.client.updater_proc
         end
 
+        ##
         # Creates or returns an instance of an instance admin client.
         #
         # @return [Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient]
-
+        #
         def instances
           return mocked_instances if mocked_instances
           @instances ||= begin
@@ -105,10 +106,11 @@ module Google
         end
         attr_accessor :mocked_instances
 
+        ##
         # Creates or returns an instance of a table admin client.
         #
         # @return [Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient]
-
+        #
         def tables
           return mocked_tables if mocked_tables
           @tables ||= begin
@@ -126,10 +128,11 @@ module Google
         end
         attr_accessor :mocked_tables
 
+        ##
         # Creates an instance of a data client.
         #
         # @return [Google::Cloud::Bigtable::V2::BigtableClient]
-
+        #
         def client
           return mocked_client if mocked_client
           @client ||= \
@@ -146,6 +149,8 @@ module Google
         def insecure?
           credentials == :this_channel_is_insecure
         end
+
+        ##
         # Creates an instance within a project.
         #
         # @param instance_id [String]
@@ -159,7 +164,7 @@ module Google
         #   +projects/myproject/instances/myinstance/clusters/mycluster+.
         #   Alternatively, provide a hash in the form of `Google::Bigtable::Admin::V2::Cluster`
         # @return [Google::Gax::Operation]
-
+        #
         def create_instance \
             instance_id,
             instance,
@@ -174,12 +179,13 @@ module Google
           end
         end
 
+        ##
         # Lists the instances in a project.
         #
         # @param token [String]
         #   The value of +next_page_token+ returned by a previous call.
         # @return [Google::Bigtable::Admin::V2::ListInstancesResponse]
-
+        #
         def list_instances token: nil
           execute do
             instances.list_instances(
@@ -189,12 +195,13 @@ module Google
           end
         end
 
+        ##
         # Gets information about an instance.
         #
         # @param instance_id [String]
         #   Unique ID of the requested instance.
         # @return [Google::Bigtable::Admin::V2::Instance]
-
+        #
         def get_instance instance_id
           execute do
             instances.get_instance(
@@ -203,6 +210,7 @@ module Google
           end
         end
 
+        ##
         # Partially updates an instance.
         #
         # @param instance [Google::Bigtable::Admin::V2::Instance | Hash]
@@ -213,18 +221,19 @@ module Google
         #   Must be explicitly set.
         #   Alternatively, provide a hash in the form of `Google::Protobuf::FieldMask`.
         # @return [Google::Gax::Operation]
-
+        #
         def partial_update_instance instance, update_mask
           execute do
             instances.partial_update_instance(instance, update_mask)
           end
         end
 
+        ##
         # Deletes an instance from a project.
         #
         # @param instance_id [String]
         #   Unique ID of the instance to be deleted.
-
+        #
         def delete_instance instance_id
           execute do
             instances.delete_instance(
@@ -233,6 +242,7 @@ module Google
           end
         end
 
+        ##
         # Creates a cluster within an instance.
         #
         # @param instance_id [String]
@@ -244,7 +254,7 @@ module Google
         #   Alternatively, provide a hash in the form of `Google::Bigtable::Admin::V2::Cluster`
         #
         # @return [Google::Gax::Operation]
-
+        #
         def create_cluster instance_id, cluster_id, cluster
           unless cluster.location == ""
             cluster.location = location_path(cluster.location)
@@ -259,6 +269,7 @@ module Google
           end
         end
 
+        ##
         # Lists information about clusters in an instance.
         #
         # @param instance_id [String]
@@ -266,7 +277,7 @@ module Google
         # @param token [String]
         #   The value of +next_page_token+ returned by a previous call.
         # @return [Google::Bigtable::Admin::V2::ListClustersResponse]
-
+        #
         def list_clusters instance_id, token: nil
           execute do
             instances.list_clusters(
@@ -276,6 +287,7 @@ module Google
           end
         end
 
+        ##
         # Gets information about a cluster.
         #
         # @param instance_id [String]
@@ -283,7 +295,7 @@ module Google
         # @param cluster_id [String]
         #   Unique ID of the requested cluster.
         # @return [Google::Bigtable::Admin::V2::Cluster]
-
+        #
         def get_cluster instance_id, cluster_id
           execute do
             instances.get_cluster(
@@ -292,6 +304,7 @@ module Google
           end
         end
 
+        ##
         # Updates a cluster within an instance.
         #
         # @param instance_id [String]
@@ -307,7 +320,7 @@ module Google
         #   The number of nodes allocated to this cluster. More nodes enable higher
         #   throughput and more consistent performance.
         # @return [Google::Gax::Operation]
-
+        #
         def update_cluster instance_id, cluster_id, location, serve_nodes
           execute do
             instances.update_cluster(
@@ -318,13 +331,14 @@ module Google
           end
         end
 
+        ##
         # Deletes a cluster from an instance.
         #
         # @param instance_id [String]
         #   Unique ID of the instance the cluster is in.
         # @param cluster_id [String]
         #    Unique ID of the cluster to be deleted.
-
+        #
         def delete_cluster instance_id, cluster_id
           execute do
             instances.delete_cluster(
@@ -333,6 +347,7 @@ module Google
           end
         end
 
+        ##
         # Creates a new table in the specified instance.
         # Optionally, creates the table with a full set of initial column families.
         #
@@ -363,7 +378,7 @@ module Google
         #   Alternatively, provide a hash in the form of
         #   `Google::Bigtable::Admin::V2::CreateTableRequest::Split`
         # @return [Google::Bigtable::Admin::V2::Table]
-
+        #
         def create_table \
             instance_id,
             table_id,
@@ -383,6 +398,7 @@ module Google
           end
         end
 
+        ##
         # Lists all tables in an instance.
         #
         # @param instance_id [String]
@@ -394,7 +410,7 @@ module Google
         #   An enumerable of Google::Bigtable::Admin::V2::Table instances.
         #   See Google::Gax::PagedEnumerable documentation for other
         #   operations such as per-page iteration or access to the response.
-
+        #
         def list_tables instance_id, view: nil
           execute do
             tables.list_tables(
@@ -404,6 +420,7 @@ module Google
           end
         end
 
+        ##
         # Gets metadata about the specified table.
         #
         # @param instance_id [String]
@@ -414,7 +431,7 @@ module Google
         #   View to be applied to the returned table's fields.
         #   Defaults to +SCHEMA_VIEW+ if unspecified.
         # @return [Google::Bigtable::Admin::V2::Table]
-
+        #
         def get_table instance_id, table_id, view: nil
           execute do
             tables.get_table(
@@ -424,13 +441,14 @@ module Google
           end
         end
 
+        ##
         # Permanently deletes a table and all of its data.
         #
         # @param instance_id [String]
         #   Unique ID of the instance the table is in.
         # @param table_id [String]
         #   Unique ID of the table to be deleted.
-
+        #
         def delete_table instance_id, table_id
           execute do
             tables.delete_table(
@@ -439,6 +457,7 @@ module Google
           end
         end
 
+        ##
         # Performs a series of column family modifications on the specified table.
         # Either all or none of the modifications will occur before this method
         # returns. Data requests received prior to completion of this method may reach a table
@@ -456,7 +475,7 @@ module Google
         #   Alternatively, provide a hash in the form of
         #    `Google::Bigtable::Admin::V2::ModifyColumnFamiliesRequest::Modification`.
         # @return [Google::Bigtable::Admin::V2::Table]
-
+        #
         def modify_column_families instance_id, table_id, modifications
           execute do
             tables.modify_column_families(
@@ -466,6 +485,7 @@ module Google
           end
         end
 
+        ##
         # Generates a consistency token for a table.
         # The consistency token can be be used in CheckConsistency to check whether
         # mutations to the table that finished before this call started have been replicated.
@@ -476,7 +496,7 @@ module Google
         # @param table_id [String]
         #   Unique ID of the table the consistency token is for.
         # @return [Google::Bigtable::Admin::V2::GenerateConsistencyTokenResponse]
-
+        #
         def generate_consistency_token instance_id, table_id
           execute do
             tables.generate_consistency_token(
@@ -485,6 +505,7 @@ module Google
           end
         end
 
+        ##
         # Checks replication consistency based on a consistency token.
         # Determines if replication has caught up, based on the conditions in the token
         # and the check request.
@@ -496,7 +517,7 @@ module Google
         # @param token [String] Consistency token
         #   The token created for the table using GenerateConsistencyToken.
         # @return [Google::Bigtable::Admin::V2::CheckConsistencyResponse]
-
+        #
         def check_consistency instance_id, table_id, token
           execute do
             tables.check_consistency(
@@ -506,6 +527,7 @@ module Google
           end
         end
 
+        ##
         # Permanently deletes a row range from a table. The request can
         # specify whether to delete all rows in a table or only rows that match a
         # particular row key prefix.
@@ -521,7 +543,7 @@ module Google
         #   If true, delete all rows in the table. Setting this to false is a no-op.
         # @param timeout [Integer]
         #   Sets the API call timeout if deadline exceeds exception.
-
+        #
         def drop_row_range \
              instance_id,
              table_id,
@@ -552,6 +574,7 @@ module Google
           end
         end
 
+        ##
         # Creates an app profile within an instance.
         #
         # @param instance_id [String]
@@ -565,7 +588,7 @@ module Google
         # @param ignore_warnings [Boolean]
         #   If true, ignore safety checks when creating the app profile.
         # @return [Google::Bigtable::Admin::V2::AppProfile]
-
+        #
         def create_app_profile \
             instance_id,
             app_profile_id,
@@ -581,6 +604,7 @@ module Google
           end
         end
 
+        ##
         # Gets information about an app profile.
         #
         # @param instance_id [String]
@@ -588,7 +612,7 @@ module Google
         # @param app_profile_id [String]
         #   Unique ID of the requested app profile.
         # @return [Google::Bigtable::Admin::V2::AppProfile]
-
+        #
         def get_app_profile instance_id, app_profile_id
           execute do
             instances.get_app_profile(
@@ -597,6 +621,7 @@ module Google
           end
         end
 
+        ##
         # Lists information about app profiles in an instance.
         #
         # @param instance_id [String]
@@ -606,6 +631,7 @@ module Google
         #   See Google::Gax::PagedEnumerable documentation for other
         #   operations such as per-page iteration or access to the response
         #   object.
+        #
         def list_app_profiles instance_id
           execute do
             instances.list_app_profiles(
@@ -614,6 +640,7 @@ module Google
           end
         end
 
+        ##
         # Updates an app profile within an instance.
         #
         # @param app_profile [Google::Bigtable::Admin::V2::AppProfile | Hash]
@@ -627,7 +654,7 @@ module Google
         # @param ignore_warnings [Boolean]
         #   If true, ignore safety checks when updating the app profile.
         # @return [Google::Longrunning::Operation]
-
+        #
         def update_app_profile app_profile, update_mask, ignore_warnings: nil
           execute do
             instances.update_app_profile(
@@ -638,6 +665,7 @@ module Google
           end
         end
 
+        ##
         # Deletes an app profile from an instance.
         #
         # @param instance_id [String]
@@ -646,7 +674,7 @@ module Google
         #   Unique ID of the app profile to be deleted.
         # @param ignore_warnings [Boolean]
         #   If true, ignore safety checks when deleting the app profile.
-
+        #
         def delete_app_profile instance_id, app_profile_id, ignore_warnings: nil
           execute do
             instances.delete_app_profile(
@@ -656,13 +684,14 @@ module Google
           end
         end
 
+        ##
         # Gets the access control policy for an instance resource. Returns an empty
         # policy if an instance exists but does not have a policy set.
         #
         # @param instance_id [String]
         #   Unique ID of the instance for which the policy is being requested.
         # @return [Google::Iam::V1::Policy]
-
+        #
         def get_instance_policy instance_id
           execute do
             instances.get_iam_policy(
@@ -671,6 +700,7 @@ module Google
           end
         end
 
+        ##
         # Sets the access control policy on an instance resource. Replaces any
         # existing policy.
         #
@@ -683,7 +713,7 @@ module Google
         #   might reject an empty policy.
         #   Alternatively, provide a hash similar to `Google::Iam::V1::Policy`.
         # @return [Google::Iam::V1::Policy]
-
+        #
         def set_instance_policy instance_id, policy
           execute do
             instances.set_iam_policy(
@@ -693,6 +723,7 @@ module Google
           end
         end
 
+        ##
         # Returns permissions that the caller has for the specified instance resource.
         #
         # @param instance_id [String]
@@ -703,7 +734,7 @@ module Google
         #   information see
         #   [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
         # @return [Google::Iam::V1::TestIamPermissionsResponse]
-
+        #
         def test_instance_permissions instance_id, permissions
           execute do
             instances.test_iam_permissions(
@@ -713,10 +744,11 @@ module Google
           end
         end
 
+        ##
         # Executes the API call and wrap errors to {Google::Cloud::Error}.
         #
         # @raise [Google::Cloud::Error]
-
+        #
         def execute
           yield
         rescue Google::Gax::GaxError => e
@@ -725,23 +757,25 @@ module Google
           raise Google::Cloud::Error.from_error(e)
         end
 
+        ##
         # Creates a formatted project path.
         #
         # @return [String]
         #   Formatted project path
         #   +projects/<project>+
-
+        #
         def project_path
           Admin::V2::BigtableInstanceAdminClient.project_path(project_id)
         end
 
+        ##
         # Creates a formatted instance path.
         #
         # @param instance_id [String]
         # @return [String]
         #   Formatted instance path
         #   +projects/<project>/instances/[a-z][a-z0-9\\-]+[a-z0-9]+.
-
+        #
         def instance_path instance_id
           Admin::V2::BigtableInstanceAdminClient.instance_path(
             project_id,
@@ -749,6 +783,7 @@ module Google
           )
         end
 
+        ##
         # Creates a formatted cluster path.
         #
         # @param instance_id [String]
@@ -756,7 +791,7 @@ module Google
         # @return [String]
         #   Formatted cluster path
         #   +projects/<project>/instances/<instance>/clusters/<cluster>+.
-
+        #
         def cluster_path instance_id, cluster_id
           Admin::V2::BigtableInstanceAdminClient.cluster_path(
             project_id,
@@ -765,6 +800,7 @@ module Google
           )
         end
 
+        ##
         # Creates a formatted location path.
         #
         # @param location [String]
@@ -772,7 +808,7 @@ module Google
         # @return [String]
         #   Formatted location path
         #   +projects/<project_id>/locations/<location>+.
-
+        #
         def location_path location
           Admin::V2::BigtableInstanceAdminClient.location_path(
             project_id,
@@ -780,13 +816,14 @@ module Google
           )
         end
 
+        ##
         # Creates a formatted table path.
         #
         # @param table_id [String]
         # @return [String]
         #   Formatted table path
         #   +projects/<project>/instances/<instance>/tables/<table>+
-
+        #
         def table_path instance_id, table_id
           Admin::V2::BigtableTableAdminClient.table_path(
             project_id,
@@ -795,6 +832,7 @@ module Google
           )
         end
 
+        ##
         # Creates a formatted snapshot path.
         #
         # @param instance_id [String]
@@ -803,7 +841,7 @@ module Google
         # @return [String]
         #   Formatted snapshot path
         #   +projects/<project>/instances/<instance>/clusters/<cluster>/snapshots/<snapshot>+
-
+        #
         def snapshot_path instance_id, cluster_id, snapshot_id
           Admin::V2::BigtableTableAdminClient.snapshot_path(
             project_id,
@@ -813,6 +851,7 @@ module Google
           )
         end
 
+        ##
         # Creates a formatted app profile path.
         #
         # @param instance_id [String]
@@ -820,7 +859,7 @@ module Google
         # @return [String]
         #   Formatted snapshot path
         #   +projects/<project>/instances/<instance>/appProfiles/<app_profile>+
-
+        #
         def app_profile_path instance_id, app_profile_id
           Admin::V2::BigtableInstanceAdminClient.app_profile_path(
             project_id,
@@ -829,9 +868,10 @@ module Google
           )
         end
 
+        ##
         # Inspects the service object.
         # @return [String]
-
+        #
         def inspect
           "#{self.class}(#{@project_id})"
         end

@@ -19,6 +19,7 @@ module Google
   module Cloud
     module Bigtable
       module RowFilter
+        ##
         # # ConditionFilter
         #
         # A RowFilter that evaluates one of two possible RowFilters, depending on
@@ -51,6 +52,7 @@ module Google
             @grpc.predicate_filter = predicate.to_grpc
           end
 
+          ##
           # Set a true filter on predicate-filter match.
           #
           # The filter to apply to the input row if `predicate_filter` returns any
@@ -72,6 +74,7 @@ module Google
             self
           end
 
+          ##
           # Set otherwise(false) filter.
           #
           # The filter to apply to the input row if `predicate_filter` does not

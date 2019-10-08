@@ -24,6 +24,7 @@ require "google/cloud/bigtable/sample_row_key"
 module Google
   module Cloud
     module Bigtable
+      ##
       # # ReadOperations
       #
       # Collection of read-rows APIs.
@@ -33,6 +34,7 @@ module Google
       #   * Read rows
       #
       module ReadOperations
+        ##
         # Reads sample row keys.
         #
         # Returns a sample of row keys in the table. The returned row keys will
@@ -67,6 +69,7 @@ module Google
           end
         end
 
+        ##
         # Reads rows.
         #
         # Streams back the contents of all requested rows in key order, optionally
@@ -185,6 +188,7 @@ module Google
           end
         end
 
+        ##
         # Reads a single row by row key.
         #
         # @param key [String] Row key. Required
@@ -216,6 +220,7 @@ module Google
           read_rows(keys: [key], filter: filter).first
         end
 
+        ##
         # Creates a new instance of ValueRange.
         #
         # @return [Google::Cloud::Bigtable::ValueRange]
@@ -245,6 +250,7 @@ module Google
           Google::Cloud::Bigtable::ValueRange.new
         end
 
+        ##
         # Get a new instance of ColumnRange.
         #
         # @param family [String] Column family name
@@ -275,6 +281,7 @@ module Google
           Google::Cloud::Bigtable::ColumnRange.new(family)
         end
 
+        ##
         # Get a new instance of RowRange.
         #
         # @return [Google::Cloud::Bigtable::RowRange]
@@ -304,6 +311,7 @@ module Google
           Google::Cloud::Bigtable::RowRange.new
         end
 
+        ##
         # Gets a row filter.
         #
         # @return [Google::Cloud::Bigtable::RowRange]
@@ -322,6 +330,7 @@ module Google
 
         private
 
+        ##
         # Builds a RowSet object from row keys and row ranges.
         #
         # @param row_keys [Array<String>]

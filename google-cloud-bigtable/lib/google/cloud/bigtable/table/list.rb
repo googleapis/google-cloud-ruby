@@ -19,8 +19,10 @@ module Google
   module Cloud
     module Bigtable
       class Table
+        ##
         # Table::List is a special-case array with additional
         # values.
+        #
         class List < DelegateClass(::Array)
           # @private
           # The gRPC Service object.
@@ -36,6 +38,7 @@ module Google
             super(arr)
           end
 
+          ##
           # Whether there is a next page of tables.
           #
           # @return [Boolean]
@@ -49,10 +52,12 @@ module Google
           #   if tables.next?
           #     next_tables = tables.next
           #   end
+          #
           def next?
             grpc.next_page?
           end
 
+          ##
           # Retrieves the next page of tables.
           #
           # @return [Table::List] The list of table instances.
@@ -66,6 +71,7 @@ module Google
           #   if tables.next?
           #     next_tables = tables.next
           #   end
+          #
           def next
             ensure_grpc!
 
@@ -74,6 +80,7 @@ module Google
             self.class.from_grpc(grpc, service)
           end
 
+          ##
           # Retrieves remaining results by repeatedly invoking {#next} until
           # {#next?} returns `false`. Calls the given block once for each
           # result, which is passed as the argument to the block.

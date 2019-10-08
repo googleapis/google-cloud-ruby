@@ -17,6 +17,7 @@ module Google
   module Cloud
     module Bigtable
       class AppProfile
+        ##
         # # Job
         #
         # A resource representing the long-running, asynchronous processing of
@@ -59,6 +60,7 @@ module Google
         #   end
         #
         class Job < LongrunningJob
+          ##
           # The instance that is the object of the operation.
           #
           # @return [Google::Cloud::Bigtable::AppProfile, nil] The app profile instance, or

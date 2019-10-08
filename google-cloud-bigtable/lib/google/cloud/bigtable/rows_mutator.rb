@@ -50,6 +50,7 @@ module Google
           @entries = entries
         end
 
+        ##
         # Applies mutations.
         #
         # @return [Array<Google::Bigtable::V2::MutateRowsResponse::Entry>]
@@ -77,6 +78,7 @@ module Google
 
         private
 
+        ##
         # Mutates rows.
         #
         # @param entries [Array<Google::Cloud::Bigtable::MutationEntry>]
@@ -97,6 +99,7 @@ module Google
           raise Google::Cloud::Error.from_error(e)
         end
 
+        ##
         # Collects failed entries, retries mutation, and updates status.
         #
         # @param statuses [Array<Google::Bigtable::V2::MutateRowsResponse::Entry>]

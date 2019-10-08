@@ -18,6 +18,7 @@
 module Google
   module Cloud
     module Bigtable
+      ##
       # # MutationEntry
       #
       # MutationEntry is a chainable structure that holds data for different
@@ -60,15 +61,18 @@ module Google
         # @return [Array<Google::Bigtable::V2::Mutation>]
         attr_accessor :mutations
 
+        ##
         # Creates a mutation entry instance.
         #
         # @param row_key [String]
+        #
         def initialize row_key = nil
           @row_key = row_key
           @mutations = []
           @retryable = true
         end
 
+        ##
         # Add SetCell mutation to list of mutations.
         #
         # A mutation that sets the value of the specified cell.
@@ -122,6 +126,7 @@ module Google
           self
         end
 
+        ##
         # Add DeleteFromColumn entry to list of mutations.
         #
         # A mutation that deletes cells from the specified column, optionally
@@ -190,6 +195,7 @@ module Google
           self
         end
 
+        ##
         # Add DeleteFromFamily to list of mutations.
         #
         # A mutation that deletes all cells from the specified column family.
@@ -210,6 +216,7 @@ module Google
           self
         end
 
+        ##
         # Add DeleteFromRow entry to list of mutations
         #
         # A Mutation which deletes all cells from the containing row.
@@ -225,6 +232,7 @@ module Google
           self
         end
 
+        ##
         # Mutation entry is retryable or not based on set_cell value.
         #
         # @return [Boolean]
@@ -233,10 +241,11 @@ module Google
           @retryable
         end
 
+        ##
         # Number of mutations
         #
         # @return [Integer]
-
+        #
         def length
           @mutations.length
         end

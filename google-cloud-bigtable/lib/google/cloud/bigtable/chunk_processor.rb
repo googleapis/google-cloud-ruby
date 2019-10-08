@@ -46,6 +46,7 @@ module Google
           reset_to_new_row
         end
 
+        ##
         # Process chunk and build full row with cells
         #
         # @param chunk [Google::Bigtable::V2::ReadRowsResponse::CellChunk]
@@ -69,6 +70,7 @@ module Google
           end
         end
 
+        ##
         # Validate row status commit or reset
         #
         # @raise [Google::Cloud::Bigtable::InvalidRowStateError]
@@ -86,6 +88,7 @@ module Google
           raise_if value, "A reset should have no data"
         end
 
+        ##
         # Validate chunk has new row state
         #
         # @raise [Google::Cloud::Bigtable::InvalidRowStateError]
@@ -105,6 +108,7 @@ module Google
           raise_if(chunk.qualifier.nil?, "A column qualifier must be set")
         end
 
+        ##
         # Validate chunk merge is in progress to build new row
         #
         # @raise [Google::Cloud::Bigtable::InvalidRowStateError]
@@ -124,6 +128,7 @@ module Google
           validate_reset_row
         end
 
+        ##
         # Process new row by setting values from current chunk.
         #
         # @return [Google::Cloud::Bigtable::Row]
@@ -142,6 +147,7 @@ module Google
           next_state!
         end
 
+        ##
         # Process chunk if row state is in progress
         #
         # @return [Google::Cloud::Bigtable::Row]
@@ -158,6 +164,7 @@ module Google
           next_state!
         end
 
+        ##
         # Process chunk if row cell state is in progress
         #
         # @return [Google::Cloud::Bigtable::Row]
@@ -170,6 +177,7 @@ module Google
           next_state!
         end
 
+        ##
         # Set next state of row.
         #
         # @return [Google::Cloud::Bigtable::Row]
@@ -224,6 +232,7 @@ module Google
           self.cur_labels = nil
         end
 
+        ##
         # Validate last row is completed
         #
         # @raise [Google::Cloud::Bigtable::InvalidRowStateError]
@@ -240,6 +249,7 @@ module Google
 
         private
 
+        ##
         # Raise error on condition failure
         #
         # @raise [Google::Cloud::Bigtable::InvalidRowStateError]

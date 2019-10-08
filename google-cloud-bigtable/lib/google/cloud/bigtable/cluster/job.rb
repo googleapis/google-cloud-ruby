@@ -17,6 +17,7 @@ module Google
   module Cloud
     module Bigtable
       class Cluster
+        ##
         # # Job
         #
         # A resource representing the long-running, asynchronous processing of
@@ -55,6 +56,7 @@ module Google
         #   end
         #
         class Job < LongrunningJob
+          ##
           # Gets the cluster object from job results
           #
           # @return [Google::Cloud::Bigtable::Cluster, nil] The cluster instance, or

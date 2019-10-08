@@ -26,6 +26,7 @@ require "google/cloud/bigtable/read_operations"
 module Google
   module Cloud
     module Bigtable
+      ##
       # # Table
       #
       # A collection of user data indexed by row, column, and timestamp.
@@ -55,7 +56,9 @@ module Google
         # The gRPC Service object.
         attr_accessor :service
 
+        ##
         # @return [String] App profile ID for request routing.
+        #
         attr_accessor :app_profile_id
 
         # @private
@@ -67,36 +70,45 @@ module Google
           @view = view || :SCHEMA_VIEW
         end
 
+        ##
         # The unique identifier for the project.
         #
         # @return [String]
+        #
         def project_id
           @grpc.name.split("/")[1]
         end
 
+        ##
         # The unique identifier for the instance.
         #
         # @return [String]
+        #
         def instance_id
           @grpc.name.split("/")[3]
         end
 
+        ##
         # The unique identifier for the table.
         #
         # @return [String]
+        #
         def name
           @grpc.name.split("/")[5]
         end
         alias table_id name
 
+        ##
         # The full path for the table resource. Values are of the form
         # `projects/<project_id>/instances/<instance_id>/table/<table_id>`.
         #
         # @return [String]
+        #
         def path
           @grpc.name
         end
 
+        ##
         # Reload table information.
         #
         # @param view [Symbol] Table view type.
@@ -109,13 +121,14 @@ module Google
         #   * `:FULL` - Populates all fields
         #
         # @return [Google::Cloud::Bigtable::Table]
-
+        #
         def reload! view: nil
           @view = view || :SCHEMA_VIEW
           @grpc = service.get_table(instance_id, name, view: view)
           self
         end
 
+        ##
         # Map from cluster ID to per-cluster table state.
         # If it could not be determined whether or not the table has data in a
         # particular cluster (for example, if its zone is unavailable), then
@@ -123,6 +136,7 @@ module Google
         # Views: `FULL`
         #
         # @return [Array<Google::Cloud::Bigtable::Table::ClusterState>]
+        #
         def cluster_states
           check_view_and_load(:REPLICATION_VIEW)
           @grpc.cluster_states.map do |name, state_grpc|
@@ -130,6 +144,7 @@ module Google
           end
         end
 
+        ##
         # The column families configured for this table, mapped by column family ID.
         # Column-families data only available in table view types `SCHEMA_VIEW`, `FULL`.
         #
@@ -168,6 +183,7 @@ module Google
           end
         end
 
+        ##
         # The granularity (e.g. `MILLIS`, `MICROS`) at which timestamps are stored in
         # this table. Timestamps not matching the granularity will be rejected.
         # If unspecified at creation time, the value will be set to `MILLIS`.
@@ -180,6 +196,7 @@ module Google
           @grpc.granularity
         end
 
+        ##
         # The table keeps data versioned at a granularity of 1 ms.
         #
         # @return [Boolean]
@@ -188,6 +205,7 @@ module Google
           granularity == :MILLIS
         end
 
+        ##
         # Permanently deletes the table from a instance.
         #
         # @return [Boolean] Returns `true` if the table was deleted.
@@ -206,6 +224,7 @@ module Google
           true
         end
 
+        ##
         # Checks to see if the table exists.
         #
         # @return [Boolean]
@@ -237,13 +256,13 @@ module Google
         #     p "Table does not exist"
         #   end
         #
-
         def exists?
           !service.get_table(instance_id, name, view: :NAME_ONLY).nil?
         rescue Google::Cloud::NotFoundError
           false
         end
 
+        ##
         # Returns a column family object that can be used to perform create,
         # update, or delete operations.
         #
@@ -303,6 +322,7 @@ module Google
           )
         end
 
+        ##
         # Applies multitple column modifications.
         # Performs a series of column family modifications on the specified table.
         # Either all or none of the modifications will occur before this method
@@ -349,7 +369,7 @@ module Google
         #   table = table.modify_column_families(modifications)
         #
         #   p table.column_families
-
+        #
         def modify_column_families modifications
           ensure_service!
           self.class.modify_column_families(
@@ -406,6 +426,7 @@ module Google
         # @yieldparam [Hash{String => Google::Cloud::Bigtable::ColumnFamily}]
         #
         # @return [Google::Cloud::Bigtable::Table]
+        #
         def self.create \
             service,
             instance_id,
@@ -430,6 +451,7 @@ module Google
           from_grpc(grpc, service)
         end
 
+        ##
         # Generates a consistency token for a table. The token can be used in
         # CheckConsistency to check whether mutations to the table that finished
         # before this call started have been replicated. The tokens will be available
@@ -453,6 +475,7 @@ module Google
           response.consistency_token
         end
 
+        ##
         # Checks replication consistency based on a consistency token. Replication is
         # considered consistent if replication has caught up based on the conditions
         # specified in the token and the check request.
@@ -479,6 +502,7 @@ module Google
           response.consistent
         end
 
+        ##
         # Wait for replication to check replication consistency.
         # Checks replication consistency by generating a consistency token and
         # making the `check_consistency` API call 5 times (by default).
@@ -537,6 +561,7 @@ module Google
           service.client
         end
 
+        ##
         # Deletes all rows.
         #
         # @param timeout [Integer] Call timeout in seconds
@@ -560,6 +585,7 @@ module Google
           drop_row_range(delete_all_data: true, timeout: timeout)
         end
 
+        ##
         # Deletes rows using row key prefix.
         #
         # @param prefix [String] Row key prefix (for example, "user")
@@ -581,6 +607,7 @@ module Google
           drop_row_range(row_key_prefix: prefix, timeout: timeout)
         end
 
+        ##
         # Drops row range by row key prefix or deletes all.
         #
         # @param row_key_prefix [String] Row key prefix (for example, "user")

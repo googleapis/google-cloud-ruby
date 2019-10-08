@@ -16,8 +16,10 @@
 module Google
   module Cloud
     module Bigtable
+      ##
       # Invalid read row state error
       class InvalidRowStateError < Google::Cloud::Error
+        ##
         # Invalid row chunk data
         attr_reader :data
 
@@ -27,6 +29,7 @@ module Google
         end
       end
 
+      ##
       # Row filter error.
       class RowFilterError < Google::Cloud::Error
       end

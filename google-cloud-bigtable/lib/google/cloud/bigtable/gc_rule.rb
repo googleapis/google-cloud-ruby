@@ -18,6 +18,7 @@
 module Google
   module Cloud
     module Bigtable
+      ##
       # # GcRule
       #
       # Rule for determining which cells to delete during garbage collection.
@@ -74,6 +75,7 @@ module Google
           @grpc = grpc || Google::Bigtable::Admin::V2::GcRule.new
         end
 
+        ##
         # Delete all cells in a column except the most recent N.
         #
         # @param versions [Integer]
@@ -82,6 +84,7 @@ module Google
           @grpc.max_num_versions = versions
         end
 
+        ##
         # Get max versions.
         #
         # @return [Integer, nil]
@@ -90,6 +93,7 @@ module Google
           @grpc.max_num_versions
         end
 
+        ##
         # Delete cells in a column older than the given age.
         # Values must be at least one millisecond, and will be truncated to
         # microsecond granularity.
@@ -100,6 +104,7 @@ module Google
           @grpc.max_age = Convert.number_to_duration(age)
         end
 
+        ##
         # Max age in seconds, if max age is set.
         #
         # @return [Integer, nil] Max age in seconds.
@@ -108,6 +113,7 @@ module Google
           @grpc.max_age.seconds if @grpc.max_age
         end
 
+        ##
         # Delete cells that would be deleted by every nested rule.
         #
         # @param rules [Array<Google::Cloud::Bigtable::GcRule>]
@@ -120,6 +126,7 @@ module Google
             )
         end
 
+        ##
         # Get intersection GC rules
         #
         # @return [Google::Bigtable::Admin::V2::GcRule::Intersection, nil]
@@ -128,6 +135,7 @@ module Google
           @grpc.intersection
         end
 
+        ##
         # Delete cells that would be deleted by any nested rule.
         #
         # @param rules [Array<Google::Cloud::Bigtable::GcRule>]
@@ -139,6 +147,7 @@ module Google
           )
         end
 
+        ##
         # Get union GC rules
         #
         # @return [Google::Bigtable::Admin::V2::GcRule::Union, nil]
@@ -147,6 +156,7 @@ module Google
           @grpc.union
         end
 
+        ##
         # Create GcRule instance with max number of versions.
         #
         # @param versions [Integer] Max number of versions
@@ -158,6 +168,7 @@ module Google
           end
         end
 
+        ##
         # Create GcRule instance with max age.
         #
         # @param age [Integer] Max age in seconds.
@@ -169,6 +180,7 @@ module Google
           end
         end
 
+        ##
         # Create union GcRule instance.
         #
         # @param rules [Google::Cloud::Bigtable::GcRule, Array<Google::Cloud::Bigtable::GcRule>]
@@ -181,6 +193,7 @@ module Google
           end
         end
 
+        ##
         # Create intersection GCRule instance.
         #
         # @param rules [Google::Cloud::Bigtable::GcRule, Array<Google::Cloud::Bigtable::GcRule>]

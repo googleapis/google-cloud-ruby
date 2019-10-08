@@ -18,6 +18,7 @@
 module Google
   module Cloud
     module Bigtable
+      ##
       # # ColumnRange
       #
       # Specifies a contiguous range of column qualifiers.
@@ -49,6 +50,7 @@ module Google
       #   table.new_column_range("cf").between("user-001", "user-100")
       #
       class ColumnRange
+        ##
         # Create qualifier range instance.
         #
         # @param family [String] Column family name.
@@ -57,6 +59,7 @@ module Google
           @grpc = Google::Bigtable::V2::ColumnRange.new(family_name: family)
         end
 
+        ##
         # Get column family name
         #
         # @return [String]
@@ -65,6 +68,7 @@ module Google
           @grpc.family_name
         end
 
+        ##
         # Set column family name
         #
         # @param name [String] Column family name
@@ -73,6 +77,7 @@ module Google
           @grpc.family_name = name
         end
 
+        ##
         # Set column range with the lower bound.
         #
         # @param qualifier [String] Column qualifier name. Required
@@ -105,6 +110,7 @@ module Google
           self
         end
 
+        ##
         # Set column range with the upper bound.
         #
         # @param qualifier [String] Column qualifier name. Required.
@@ -137,6 +143,7 @@ module Google
           self
         end
 
+        ##
         # Set column range with the inclusive upper and lower bound.
         #
         # @param from_qualifier [String] Inclusive from qualifier. Required.
@@ -155,6 +162,7 @@ module Google
           from(from_qualifier).to(to_qualifier, inclusive: true)
         end
 
+        ##
         # Set column range with the inclusive upper and the exclusive lower bound.
         #
         # @param from_qualifier [String] Inclusive from qualifier

@@ -26,6 +26,7 @@ require "google/cloud/bigtable/table"
 module Google
   module Cloud
     module Bigtable
+      ##
       # # Project
       #
       # Projects are top-level containers in Google Cloud Platform. They store
@@ -62,6 +63,7 @@ module Google
           @service = service
         end
 
+        ##
         # The identifier for the Cloud Bigtable project.
         #
         # @return [String] Project ID.
@@ -75,12 +77,13 @@ module Google
         #   )
         #
         #   bigtable.project_id #=> "my-project"
-
+        #
         def project_id
           ensure_service!
           service.project_id
         end
 
+        ##
         # Retrieves the list of Bigtable instances for the project.
         #
         # @param token [String] The `token` value returned by the last call to
@@ -98,13 +101,14 @@ module Google
         #   instances.all do |instance|
         #     puts instance.instance_id
         #   end
-
+        #
         def instances token: nil
           ensure_service!
           grpc = service.list_instances(token: token)
           Instance::List.from_grpc(grpc, service)
         end
 
+        ##
         # Get an existing Bigtable instance.
         #
         # @param instance_id [String] Existing instance id.
@@ -120,7 +124,7 @@ module Google
         #   if instance
         #     puts instance.instance_id
         #   end
-
+        #
         def instance instance_id
           ensure_service!
           grpc = service.get_instance(instance_id)
@@ -129,6 +133,7 @@ module Google
           nil
         end
 
+        ##
         # Create a Bigtable instance.
         #
         # @see https://cloud.google.com/compute/docs/regions-zones Cluster zone locations
@@ -219,7 +224,7 @@ module Google
         #   else
         #     instance = job.instance
         #   end
-
+        #
         def create_instance \
             instance_id,
             display_name: nil,
@@ -251,6 +256,7 @@ module Google
           Instance::Job.from_grpc(grpc, service)
         end
 
+        ##
         # List all clusters in project.
         #
         # @param token [String] The `token` value returned by the last call to
@@ -267,13 +273,14 @@ module Google
         #     puts cluster.cluster_id
         #     puts cluster.ready?
         #   end
-
+        #
         def clusters token: nil
           ensure_service!
           grpc = service.list_clusters("-", token: token)
           Cluster::List.from_grpc(grpc, service, instance_id: "-")
         end
 
+        ##
         # List all tables for given instance.
         #
         # @param instance_id [String] Existing instance Id.
@@ -289,15 +296,15 @@ module Google
         #     puts table.name
         #     puts table.column_families
         #   end
-
+        #
         def tables instance_id
           ensure_service!
           grpc = service.list_tables(instance_id)
           Table::List.from_grpc(grpc, service)
         end
 
+        ##
         # Get table information.
-        #
         #
         # @param instance_id [String] Existing instance Id.
         # @param table_id [String] Existing table Id.
@@ -374,7 +381,7 @@ module Google
         #   table.read_rows(limit: 5).each do |row|
         #     p row
         #   end
-
+        #
         def table \
             instance_id,
             table_id,
@@ -399,6 +406,7 @@ module Google
           nil
         end
 
+        ##
         # Creates a new table in the specified instance.
         # The table can be created with a full set of initial column families,
         # specified in the request.
@@ -468,7 +476,7 @@ module Google
         #   end
         #
         #   p table
-
+        #
         def create_table \
             instance_id,
             table_id,
@@ -488,6 +496,7 @@ module Google
           )
         end
 
+        ##
         # Permanently deletes a specified table and all of its data.
         #
         # @param instance_id [String]
@@ -508,6 +517,7 @@ module Google
           true
         end
 
+        ##
         # Performs a series of column family modifications on the specified table.
         # Either all or none of the modifications will occur before this method
         # returns, but data requests received prior to that point may see a table
@@ -554,7 +564,7 @@ module Google
         #   table = bigtable.modify_column_families("my-instance", "my-table", modifications)
         #
         #   p table.column_families
-
+        #
         def modify_column_families instance_id, table_id, modifications
           ensure_service!
           Table.modify_column_families(
