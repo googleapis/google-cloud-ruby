@@ -68,6 +68,178 @@ end
 
 describe Google::Cloud::Redis::V1::CloudRedisClient do
 
+  describe 'list_instances' do
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Redis::V1::CloudRedisClient#list_instances."
+
+    it 'invokes list_instances without error' do
+      # Create request parameters
+      formatted_parent = Google::Cloud::Redis::V1::CloudRedisClient.location_path("[PROJECT]", "[LOCATION]")
+
+      # Create expected grpc response
+      next_page_token = ""
+      instances_element = {}
+      instances = [instances_element]
+      expected_response = { next_page_token: next_page_token, instances: instances }
+      expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Redis::V1::ListInstancesResponse)
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Cloud::Redis::V1::ListInstancesRequest, request)
+        assert_equal(formatted_parent, request.parent)
+        OpenStruct.new(execute: expected_response)
+      end
+      mock_stub = MockGrpcClientStub_v1.new(:list_instances, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockCloudRedisCredentials_v1.new("list_instances")
+
+      Google::Cloud::Redis::V1::CloudRedis::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Redis::V1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Redis.new(version: :v1)
+
+          # Call method
+          response = client.list_instances(formatted_parent)
+
+          # Verify the response
+          assert(response.instance_of?(Google::Gax::PagedEnumerable))
+          assert_equal(expected_response, response.page.response)
+          assert_nil(response.next_page)
+          assert_equal(expected_response.instances.to_a, response.to_a)
+        end
+      end
+    end
+
+    it 'invokes list_instances with error' do
+      # Create request parameters
+      formatted_parent = Google::Cloud::Redis::V1::CloudRedisClient.location_path("[PROJECT]", "[LOCATION]")
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Cloud::Redis::V1::ListInstancesRequest, request)
+        assert_equal(formatted_parent, request.parent)
+        raise custom_error
+      end
+      mock_stub = MockGrpcClientStub_v1.new(:list_instances, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockCloudRedisCredentials_v1.new("list_instances")
+
+      Google::Cloud::Redis::V1::CloudRedis::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Redis::V1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Redis.new(version: :v1)
+
+          # Call method
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
+            client.list_instances(formatted_parent)
+          end
+
+          # Verify the GaxError wrapped the custom error that was raised.
+          assert_match(custom_error.message, err.message)
+        end
+      end
+    end
+  end
+
+  describe 'get_instance' do
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Redis::V1::CloudRedisClient#get_instance."
+
+    it 'invokes get_instance without error' do
+      # Create request parameters
+      formatted_name = Google::Cloud::Redis::V1::CloudRedisClient.instance_path("[PROJECT]", "[LOCATION]", "[INSTANCE]")
+
+      # Create expected grpc response
+      name_2 = "name2-1052831874"
+      display_name = "displayName1615086568"
+      location_id = "locationId552319461"
+      alternative_location_id = "alternativeLocationId-718920621"
+      redis_version = "redisVersion-685310444"
+      reserved_ip_range = "reservedIpRange-1082940580"
+      host = "host3208616"
+      port = 3446913
+      current_location_id = "currentLocationId1312712735"
+      status_message = "statusMessage-239442758"
+      memory_size_gb = 34199707
+      authorized_network = "authorizedNetwork-1733809270"
+      persistence_iam_identity = "persistenceIamIdentity1061944584"
+      expected_response = {
+        name: name_2,
+        display_name: display_name,
+        location_id: location_id,
+        alternative_location_id: alternative_location_id,
+        redis_version: redis_version,
+        reserved_ip_range: reserved_ip_range,
+        host: host,
+        port: port,
+        current_location_id: current_location_id,
+        status_message: status_message,
+        memory_size_gb: memory_size_gb,
+        authorized_network: authorized_network,
+        persistence_iam_identity: persistence_iam_identity
+      }
+      expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Redis::V1::Instance)
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Cloud::Redis::V1::GetInstanceRequest, request)
+        assert_equal(formatted_name, request.name)
+        OpenStruct.new(execute: expected_response)
+      end
+      mock_stub = MockGrpcClientStub_v1.new(:get_instance, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockCloudRedisCredentials_v1.new("get_instance")
+
+      Google::Cloud::Redis::V1::CloudRedis::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Redis::V1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Redis.new(version: :v1)
+
+          # Call method
+          response = client.get_instance(formatted_name)
+
+          # Verify the response
+          assert_equal(expected_response, response)
+
+          # Call method with block
+          client.get_instance(formatted_name) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
+        end
+      end
+    end
+
+    it 'invokes get_instance with error' do
+      # Create request parameters
+      formatted_name = Google::Cloud::Redis::V1::CloudRedisClient.instance_path("[PROJECT]", "[LOCATION]", "[INSTANCE]")
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Cloud::Redis::V1::GetInstanceRequest, request)
+        assert_equal(formatted_name, request.name)
+        raise custom_error
+      end
+      mock_stub = MockGrpcClientStub_v1.new(:get_instance, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockCloudRedisCredentials_v1.new("get_instance")
+
+      Google::Cloud::Redis::V1::CloudRedis::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Redis::V1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Redis.new(version: :v1)
+
+          # Call method
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
+            client.get_instance(formatted_name)
+          end
+
+          # Verify the GaxError wrapped the custom error that was raised.
+          assert_match(custom_error.message, err.message)
+        end
+      end
+    end
+  end
+
   describe 'create_instance' do
     custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Redis::V1::CloudRedisClient#create_instance."
 
@@ -385,178 +557,6 @@ describe Google::Cloud::Redis::V1::CloudRedisClient do
           # Call method
           err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.update_instance(update_mask, instance)
-          end
-
-          # Verify the GaxError wrapped the custom error that was raised.
-          assert_match(custom_error.message, err.message)
-        end
-      end
-    end
-  end
-
-  describe 'list_instances' do
-    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Redis::V1::CloudRedisClient#list_instances."
-
-    it 'invokes list_instances without error' do
-      # Create request parameters
-      formatted_parent = Google::Cloud::Redis::V1::CloudRedisClient.location_path("[PROJECT]", "[LOCATION]")
-
-      # Create expected grpc response
-      next_page_token = ""
-      instances_element = {}
-      instances = [instances_element]
-      expected_response = { next_page_token: next_page_token, instances: instances }
-      expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Redis::V1::ListInstancesResponse)
-
-      # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::Redis::V1::ListInstancesRequest, request)
-        assert_equal(formatted_parent, request.parent)
-        OpenStruct.new(execute: expected_response)
-      end
-      mock_stub = MockGrpcClientStub_v1.new(:list_instances, mock_method)
-
-      # Mock auth layer
-      mock_credentials = MockCloudRedisCredentials_v1.new("list_instances")
-
-      Google::Cloud::Redis::V1::CloudRedis::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Redis::V1::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Redis.new(version: :v1)
-
-          # Call method
-          response = client.list_instances(formatted_parent)
-
-          # Verify the response
-          assert(response.instance_of?(Google::Gax::PagedEnumerable))
-          assert_equal(expected_response, response.page.response)
-          assert_nil(response.next_page)
-          assert_equal(expected_response.instances.to_a, response.to_a)
-        end
-      end
-    end
-
-    it 'invokes list_instances with error' do
-      # Create request parameters
-      formatted_parent = Google::Cloud::Redis::V1::CloudRedisClient.location_path("[PROJECT]", "[LOCATION]")
-
-      # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::Redis::V1::ListInstancesRequest, request)
-        assert_equal(formatted_parent, request.parent)
-        raise custom_error
-      end
-      mock_stub = MockGrpcClientStub_v1.new(:list_instances, mock_method)
-
-      # Mock auth layer
-      mock_credentials = MockCloudRedisCredentials_v1.new("list_instances")
-
-      Google::Cloud::Redis::V1::CloudRedis::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Redis::V1::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Redis.new(version: :v1)
-
-          # Call method
-          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
-            client.list_instances(formatted_parent)
-          end
-
-          # Verify the GaxError wrapped the custom error that was raised.
-          assert_match(custom_error.message, err.message)
-        end
-      end
-    end
-  end
-
-  describe 'get_instance' do
-    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Redis::V1::CloudRedisClient#get_instance."
-
-    it 'invokes get_instance without error' do
-      # Create request parameters
-      formatted_name = Google::Cloud::Redis::V1::CloudRedisClient.instance_path("[PROJECT]", "[LOCATION]", "[INSTANCE]")
-
-      # Create expected grpc response
-      name_2 = "name2-1052831874"
-      display_name = "displayName1615086568"
-      location_id = "locationId552319461"
-      alternative_location_id = "alternativeLocationId-718920621"
-      redis_version = "redisVersion-685310444"
-      reserved_ip_range = "reservedIpRange-1082940580"
-      host = "host3208616"
-      port = 3446913
-      current_location_id = "currentLocationId1312712735"
-      status_message = "statusMessage-239442758"
-      memory_size_gb = 34199707
-      authorized_network = "authorizedNetwork-1733809270"
-      persistence_iam_identity = "persistenceIamIdentity1061944584"
-      expected_response = {
-        name: name_2,
-        display_name: display_name,
-        location_id: location_id,
-        alternative_location_id: alternative_location_id,
-        redis_version: redis_version,
-        reserved_ip_range: reserved_ip_range,
-        host: host,
-        port: port,
-        current_location_id: current_location_id,
-        status_message: status_message,
-        memory_size_gb: memory_size_gb,
-        authorized_network: authorized_network,
-        persistence_iam_identity: persistence_iam_identity
-      }
-      expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Redis::V1::Instance)
-
-      # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::Redis::V1::GetInstanceRequest, request)
-        assert_equal(formatted_name, request.name)
-        OpenStruct.new(execute: expected_response)
-      end
-      mock_stub = MockGrpcClientStub_v1.new(:get_instance, mock_method)
-
-      # Mock auth layer
-      mock_credentials = MockCloudRedisCredentials_v1.new("get_instance")
-
-      Google::Cloud::Redis::V1::CloudRedis::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Redis::V1::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Redis.new(version: :v1)
-
-          # Call method
-          response = client.get_instance(formatted_name)
-
-          # Verify the response
-          assert_equal(expected_response, response)
-
-          # Call method with block
-          client.get_instance(formatted_name) do |response, operation|
-            # Verify the response
-            assert_equal(expected_response, response)
-            refute_nil(operation)
-          end
-        end
-      end
-    end
-
-    it 'invokes get_instance with error' do
-      # Create request parameters
-      formatted_name = Google::Cloud::Redis::V1::CloudRedisClient.instance_path("[PROJECT]", "[LOCATION]", "[INSTANCE]")
-
-      # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::Redis::V1::GetInstanceRequest, request)
-        assert_equal(formatted_name, request.name)
-        raise custom_error
-      end
-      mock_stub = MockGrpcClientStub_v1.new(:get_instance, mock_method)
-
-      # Mock auth layer
-      mock_credentials = MockCloudRedisCredentials_v1.new("get_instance")
-
-      Google::Cloud::Redis::V1::CloudRedis::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Redis::V1::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Redis.new(version: :v1)
-
-          # Call method
-          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
-            client.get_instance(formatted_name)
           end
 
           # Verify the GaxError wrapped the custom error that was raised.
