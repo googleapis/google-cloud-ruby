@@ -168,8 +168,8 @@ module Google
 
           # @private
           def to_s
-            format "(inventory: %<inv>i, status: %<sts>s)",
-                   inv: inventory.count, sts: status
+            "(inventory: #{@inventory.count}, " \
+              "status: #{status}, thread: #{thread_status})"
           end
 
           # @private
@@ -342,6 +342,12 @@ module Google
           end
 
           def status
+            return "stopped" if stopped?
+            return "paused" if paused?
+            "running"
+          end
+
+          def thread_status
             return "not started" if @background_thread.nil?
 
             status = @background_thread.status
