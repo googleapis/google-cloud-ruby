@@ -123,7 +123,6 @@ module Google
             synchronize do
               @inventory.remove ack_ids
               @subscriber.buffer.acknowledge ack_ids
-              unpause_streaming!
             end
 
             true
@@ -138,10 +137,25 @@ module Google
             synchronize do
               @inventory.remove mod_ack_ids
               @subscriber.buffer.modify_ack_deadline deadline, mod_ack_ids
-              unpause_streaming!
             end
 
             true
+          end
+
+          ##
+          # @private
+          def release *messages
+            ack_ids = coerce_ack_ids messages
+            return if ack_ids.empty?
+
+            synchronize do
+              # Remove from inventory if the message was not explicitly acked or
+              # nacked in the callback
+              @inventory.remove ack_ids
+              # Check whether to unpause the stream only after the callback is
+              # completed and the thread is being reclaimed.
+              unpause_streaming!
+            end
           end
 
           def push request
@@ -279,7 +293,7 @@ module Google
               rescue StandardError => callback_error
                 stream.subscriber.error! callback_error
               ensure
-                stream.inventory.remove msg.ack_id
+                stream.release msg
               end
             end
           end
