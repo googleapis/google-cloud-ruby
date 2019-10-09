@@ -54,14 +54,12 @@ module Google
 
           @error_reporting =
             error_reporting ||
-            ErrorReporting::AsyncErrorReporter.new(
-              ErrorReporting.new(project: configuration.project_id,
-                                 credentials: configuration.credentials)
-            )
-
-          # Set module default client to reuse the same client. Update module
-          # configuration parameters.
-          ErrorReporting.class_variable_set :@@default_client, @error_reporting
+            ErrorReporting.default_reporter do
+              ErrorReporting::AsyncErrorReporter.new(
+                ErrorReporting.new(project: configuration.project_id,
+                                   credentials: configuration.credentials)
+              )
+            end
         end
 
         ##
