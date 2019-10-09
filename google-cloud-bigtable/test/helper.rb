@@ -111,14 +111,14 @@ class MockBigtable < Minitest::Spec
     { gc_rule: gc_rule }
   end
 
-  def column_families_hash num: 3, start_id: 1
+  def column_families_hash num: 3, start_id: 1, max_versions: 3
     num.times.each_with_object({}) do |i, r|
-      r["cf#{i + start_id}"] = column_family_hash(max_versions: 3)
+      r["cf#{i + start_id}"] = column_family_hash(max_versions: max_versions)
     end
   end
 
-  def column_families_grpc num: 3, start_id: 1
-    column_families_hash(num: num, start_id: start_id)
+  def column_families_grpc num: 3, start_id: 1, max_versions: 3
+    column_families_hash(num: num, start_id: start_id, max_versions: max_versions)
       .each_with_object({}) do |(k,v), r|
         r[k] = Google::Bigtable::Admin::V2::ColumnFamily.new(v)
       end

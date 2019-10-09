@@ -23,9 +23,7 @@ describe Google::Cloud::Bigtable::Project, :create_table, :mock_bigtable do
   it "creates a table" do
     mock = Minitest::Mock.new
     cluster_states = clusters_state_grpc(num: 1)
-    column_families = Google::Cloud::Bigtable::Table::ColumnFamilyMap.new.tap do |cfs|
-      cfs.add('cf1', Google::Cloud::Bigtable::GcRule.max_versions(1))
-    end
+    column_families = column_families_grpc num: 1, max_versions: 1
 
     create_res = Google::Bigtable::Admin::V2::Table.new(
       table_hash(
@@ -81,9 +79,7 @@ describe Google::Cloud::Bigtable::Project, :create_table, :mock_bigtable do
   it "creates a table with initial split keys" do
     mock = Minitest::Mock.new
     cluster_states = clusters_state_grpc(num: 1)
-    column_families = Google::Cloud::Bigtable::Table::ColumnFamilyMap.new.tap do |cfs|
-      cfs.add('cf1', Google::Cloud::Bigtable::GcRule.max_versions(1))
-    end
+    column_families = column_families_grpc num: 1, max_versions: 1
 
     create_res = Google::Bigtable::Admin::V2::Table.new(
       table_hash(

@@ -145,10 +145,9 @@ module Google
         end
 
         ##
-        # A frozen hash containing the column families configured for this
-        # table, mapped by column family name. The column families data is only
-        # available in a table with view type `SCHEMA_VIEW` or `FULL`.
-        #
+        # A frozen ColumnFamilyMap containing the column families configured for
+        # this table, mapped by column family name. The column families data is
+        # only available in a table with view type `SCHEMA_VIEW` or `FULL`.
         #
         # @return [Google::Bigtable::Table::ColumnFamilyMap] A frozen
         #   ColumnFamilyMap
@@ -171,9 +170,9 @@ module Google
         def column_families
           check_view_and_load(:SCHEMA_VIEW)
           cfm = ColumnFamilyMap.from_grpc @grpc.column_families,
+                                          service,
                                           instance_id,
-                                          table_id,
-                                          service
+                                          table_id
           cfm.freeze
         end
 
@@ -317,7 +316,7 @@ module Google
         end
 
         ##
-        # Applies multitple column modifications.
+        # Applies multiple column modifications.
         # Performs a series of column family modifications on the specified table.
         # Either all or none of the modifications will occur before this method
         # returns, but data requests received prior to that point may see a table
@@ -428,11 +427,15 @@ module Google
             column_families: nil,
             granularity: nil,
             initial_splits: nil
-          column_families ||= Table::ColumnFamilyMap.new
+          column_families ||= Table::ColumnFamilyMap.new(
+            service,
+            instance_id,
+            table_id
+          )
           yield column_families if block_given?
 
           table = Google::Bigtable::Admin::V2::Table.new({
-            column_families: column_families.to_h,
+            column_families: column_families.to_grpc,
             granularity: granularity
           }.delete_if { |_, v| v.nil? })
 

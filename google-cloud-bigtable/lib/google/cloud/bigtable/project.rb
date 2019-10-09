@@ -416,9 +416,10 @@ module Google
         # @param table_id [String]
         #   The ID by which the new table should be referred to within the
         #   instance, e.g., `foobar`.
-        # @param column_families [Hash{String => Google::Cloud::Bigtable::ColumnFamily}]
-        #   (See {Google::Cloud::Bigtable::Table::ColumnFamilyMap})
-        #   If unspecified, you may use a code block to add column families.
+        # @param column_families [Google::Cloud::Bigtable::Table::ColumnFamilyMap]
+        #   See {Google::Cloud::Bigtable::Table.column_family_map}.
+        #   A code block yielding a new `ColumnFamilyMap` may also be used with
+        #   this method.
         # @param granularity [Symbol]
         #   The granularity at which timestamps are stored in this table.
         #   Timestamps not matching the granularity will be rejected.
@@ -475,7 +476,7 @@ module Google
         #     column_families.add('cf3', gc_rule)
         #   end
         #
-        #   p table
+        #   puts table
         #
         def create_table \
             instance_id,

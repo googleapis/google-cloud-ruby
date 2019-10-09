@@ -20,15 +20,61 @@ module Google
     module Bigtable
       class Table
         ##
-        # Table::ColumnFamilyMap is a hash accepting string column family names
-        # as keys and `ColumnFamily` objects as values.
+        # Table::ColumnFamilyMap is a hash delegate that contains string column
+        # family names as keys and `ColumnFamily` objects as values.
         # It is used to manage the column families belonging to a table.
+        #
+        # @example Create a table with column families.
+        #   require "google/cloud/bigtable"
+        #
+        #   bigtable = Google::Cloud::Bigtable.new
+        #
+        #   table = bigtable.create_table("my-instance", "my-table") do |column_families|
+        #     column_families.add("cf1", Google::Cloud::Bigtable::GcRule.max_versions(5))
+        #     column_families.add("cf2", Google::Cloud::Bigtable::GcRule.max_age(600))
+        #
+        #     gc_rule = Google::Cloud::Bigtable::GcRule.union(
+        #       Google::Cloud::Bigtable::GcRule.max_age(1800),
+        #       Google::Cloud::Bigtable::GcRule.max_versions(3)
+        #     )
+        #     column_families.add("cf3", gc_rule)
+        #   end
+        #
+        #   puts table
+        #
+        # @example Inspect the column families in a table.
+        #   require "google/cloud/bigtable"
+        #
+        #   bigtable = Google::Cloud::Bigtable.new
+        #
+        #   table = bigtable.table("my-instance", "my-table", perform_lookup: true)
+        #
+        #   table.column_families.each do |name, cf|
+        #     puts name
+        #     puts cf.gc_rule
+        #   end
+        #
+        #   # Get a column family by name
+        #   cf1 = table.column_families["cf1"]
         #
         class ColumnFamilyMap < DelegateClass(::Hash)
           # @private
+          # The gRPC Service object
+          attr_reader :service
+
+          # @private
+          attr_reader :instance_id
+
+          # @private
+          attr_reader :table_id
+
+          # @private
           # Create a new ColumnFamilyMap.
-          def initialize value = {}
+          def initialize service, instance_id, table_id, value = {}
             super(value)
+            @service = service
+            @instance_id = instance_id
+            @table_id = table_id
           end
 
           ##
@@ -39,9 +85,29 @@ module Google
           #   collection rule to be used for the column family. Optional. The
           #   service default value will be used when not specified.
           #
+          # @example
+          #   require "google/cloud/bigtable"
+          #
+          #   bigtable = Google::Cloud::Bigtable.new
+          #
+          #   table = bigtable.create_table("my-instance", "my-table") do |column_families|
+          #     column_families.add('cf1', Google::Cloud::Bigtable::GcRule.max_versions(5))
+          #     column_families.add('cf2', Google::Cloud::Bigtable::GcRule.max_age(600))
+          #
+          #     gc_rule = Google::Cloud::Bigtable::GcRule.union(
+          #       Google::Cloud::Bigtable::GcRule.max_age(1800),
+          #       Google::Cloud::Bigtable::GcRule.max_versions(3)
+          #     )
+          #     column_families.add('cf3', gc_rule)
+          #   end
+          #
+          #   puts table
+          #
           def add name, gc_rule = nil
-            cf = Google::Bigtable::Admin::V2::ColumnFamily.new
-            cf.gc_rule = gc_rule.to_grpc if gc_rule
+            cf = Google::Cloud::Bigtable::ColumnFamily.new service, name: name
+            cf.instance_id = instance_id
+            cf.table_id = table_id
+            cf.gc_rule = gc_rule
             self[name] = cf
           end
 
@@ -55,8 +121,17 @@ module Google
             delete(name)
           end
 
-          def self.from_grpc grpc, instance_id, table_id, service
+          # @private
+          # @param grpc [Hash{String => Google::Bigtable::Admin::V2::ColumnFamily}]
+          #   A hash with column family names as keys, from
+          #   `Google::Bigtable::Admin::V2::Table#column_families`.
+          # @return [Google::Cloud::Bigtable::Table::ColumnFamilyMap]
+          #
+          def self.from_grpc grpc, service, instance_id, table_id
             new(
+              service,
+              instance_id,
+              table_id,
               grpc.map do |name, cf_grpc|
                 [
                   name,
@@ -70,6 +145,19 @@ module Google
                 ]
               end.to_h
             )
+          end
+
+          # @private
+          # @return [Hash{String => Google::Bigtable::Admin::V2::ColumnFamily}]
+          #   A hash with column family names as keys, for
+          #   `Google::Bigtable::Admin::V2::Table#column_families`.
+          #
+          def to_grpc
+            map do |name, cf|
+              cf_grpc = Google::Bigtable::Admin::V2::ColumnFamily.new
+              cf_grpc.gc_rule = cf.gc_rule.to_grpc if cf.gc_rule
+              [name, cf_grpc]
+            end.to_h
           end
         end
       end

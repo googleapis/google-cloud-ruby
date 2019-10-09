@@ -18,8 +18,11 @@
 require "helper"
 
 describe Google::Cloud::Bigtable::Table::ColumnFamilyMap, :mock_bigtable do
+  let(:instance_id) { "test-instance" }
+  let(:table_id) { "test-table" }
+
   it "adds a column family" do
-    cfs_map = Google::Cloud::Bigtable::Table::ColumnFamilyMap.new
+    cfs_map = Google::Cloud::Bigtable::Table::ColumnFamilyMap.new(bigtable.service, instance_id, table_id)
     cfs_map.must_be :empty?
 
     cf_name = "new-cf"
@@ -27,22 +30,22 @@ describe Google::Cloud::Bigtable::Table::ColumnFamilyMap, :mock_bigtable do
     cfs_map.add(cf_name, gc_rule)
 
     cfs_map.length.must_equal 1
-    cfs_map = cfs_map[cf_name]
-    cfs_map.must_be_kind_of Google::Bigtable::Admin::V2::ColumnFamily
-    cfs_map.gc_rule.must_be_kind_of Google::Bigtable::Admin::V2::GcRule
-    cfs_map.gc_rule.must_equal gc_rule.to_grpc
+    cf = cfs_map[cf_name]
+    cf.must_be_kind_of Google::Cloud::Bigtable::ColumnFamily
+    cf.gc_rule.must_be_kind_of Google::Cloud::Bigtable::GcRule
+    cf.gc_rule.to_grpc.must_equal gc_rule.to_grpc
   end
 
   it "adds a column family without gc_rule" do
-    cfs_map = Google::Cloud::Bigtable::Table::ColumnFamilyMap.new
+    cfs_map = Google::Cloud::Bigtable::Table::ColumnFamilyMap.new(bigtable.service, instance_id, table_id)
     cfs_map.must_be :empty?
 
     cf_name = "new-cf"
     cfs_map.add(cf_name)
 
     cfs_map.length.must_equal 1
-    cfs_map = cfs_map[cf_name]
-    cfs_map.must_be_kind_of Google::Bigtable::Admin::V2::ColumnFamily
-    cfs_map.gc_rule.must_be :nil?
+    cf = cfs_map[cf_name]
+    cf.must_be_kind_of Google::Cloud::Bigtable::ColumnFamily
+    cf.gc_rule.must_be :nil?
   end
 end

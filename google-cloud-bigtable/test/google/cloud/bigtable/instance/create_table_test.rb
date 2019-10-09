@@ -54,21 +54,19 @@ describe Google::Cloud::Bigtable::Instance, :create_table, :mock_bigtable do
   it "creates a table with column families" do
     mock = Minitest::Mock.new
     cluster_states = clusters_state_grpc(num: 1)
-    column_families = Google::Cloud::Bigtable::Table::ColumnFamilyMap.new.tap do |cfs|
-      cfs.add('cf1', Google::Cloud::Bigtable::GcRule.max_versions(1))
-    end
+    column_families = column_families_grpc num: 1, max_versions: 1
 
     create_res = Google::Bigtable::Admin::V2::Table.new(
       table_hash(
         name: table_path(instance_id, table_id),
         cluster_states: cluster_states,
-        column_families: column_families.to_h,
+        column_families: column_families,
         granularity: :MILLIS
       )
     )
 
     req_table = Google::Bigtable::Admin::V2::Table.new(
-      column_families: column_families.to_h,
+      column_families: column_families,
       granularity: :MILLIS
     )
 
@@ -104,10 +102,7 @@ describe Google::Cloud::Bigtable::Instance, :create_table, :mock_bigtable do
 
   it "creates a table with initial split keys" do
     mock = Minitest::Mock.new
-    cluster_states = clusters_state_grpc(num: 1)
-    column_families = Google::Cloud::Bigtable::Table::ColumnFamilyMap.new.tap do |cfs|
-      cfs.add('cf1', Google::Cloud::Bigtable::GcRule.max_versions(1))
-    end
+    column_families = column_families_grpc num: 1, max_versions: 1
 
     create_res = Google::Bigtable::Admin::V2::Table.new(
       table_hash(

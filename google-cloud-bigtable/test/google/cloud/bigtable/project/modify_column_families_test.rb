@@ -29,7 +29,7 @@ describe Google::Cloud::Bigtable::Project, :modify_column_families, :mock_bigtab
       "cf2", Google::Cloud::Bigtable::GcRule.max_versions(5)
     )
 
-    column_families = Google::Cloud::Bigtable::Table::ColumnFamilyMap.new.tap do |cfs|
+    column_families = Google::Cloud::Bigtable::Table::ColumnFamilyMap.new(bigtable.service, instance_id, table_id).tap do |cfs|
       cfs.add('cf1', Google::Cloud::Bigtable::GcRule.max_age(300))
       cfs.add('cf2') # service default GcRule
     end
@@ -38,7 +38,7 @@ describe Google::Cloud::Bigtable::Project, :modify_column_families, :mock_bigtab
       table_hash(
         name: table_path(instance_id, table_id),
         cluster_states: cluster_states,
-        column_families: column_families.to_h,
+        column_families: column_families.to_grpc,
         granularity: :MILLIS
       )
     )
@@ -73,13 +73,13 @@ describe Google::Cloud::Bigtable::Project, :modify_column_families, :mock_bigtab
       "cf1", Google::Cloud::Bigtable::GcRule.max_age(600)
     )
 
-    column_families = Google::Cloud::Bigtable::Table::ColumnFamilyMap.new.tap do |cfs|
+    column_families = Google::Cloud::Bigtable::Table::ColumnFamilyMap.new(bigtable.service, instance_id, table_id).tap do |cfs|
       cfs.add('cf1', Google::Cloud::Bigtable::GcRule.max_age(600))
     end
     res_table = Google::Bigtable::Admin::V2::Table.new(
       table_hash(
         name: table_path(instance_id, table_id),
-        column_families: column_families.to_h
+        column_families: column_families.to_grpc
       )
     )
 
@@ -95,7 +95,7 @@ describe Google::Cloud::Bigtable::Project, :modify_column_families, :mock_bigtab
 
     table.column_families.keys.sort.must_equal column_families.keys
     table.column_families.each do |name, cf|
-      cf.gc_rule.to_grpc.must_equal column_families[cf.name].gc_rule
+      cf.gc_rule.to_grpc.must_equal column_families[cf.name].gc_rule.to_grpc
     end
   end
 end
