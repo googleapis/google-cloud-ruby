@@ -73,6 +73,7 @@ describe Google::Cloud::ErrorReporting::Middleware, :mock_error_reporting do
     end
 
     it "creates a default async_error_reporter if not given one" do
+      Google::Cloud::ErrorReporting.instance_variable_set :@default_reporter, nil
       Google::Cloud::ErrorReporting::AsyncErrorReporter.stub :new, "A default reporter" do
         Google::Cloud::ErrorReporting.stub :new, nil do
           middleware = Google::Cloud::ErrorReporting::Middleware.new nil,
