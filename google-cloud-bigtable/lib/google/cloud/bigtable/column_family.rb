@@ -33,17 +33,13 @@ module Google
       #   instance = bigtable.instance("my-instance")
       #   table = instance.table("my-table")
       #
-      #   # Create
-      #   gc_rule = Google::Cloud::Bigtable::GcRule.max_versions(5)
-      #   column_family = table.column_families.add("cf1", gc_rule)
-      #
       #   # Update
-      #   column_family = table.column_families.find_by_name("cf2")
+      #   column_family = table.column_families["cf2"]
       #   column_family.gc_rule = Google::Cloud::Bigtable::GcRule.max_age(600)
       #   column_family.update
       #
       #   # Delete
-      #   column_family = table.column_families.find_by_name("cf3")
+      #   column_family = table.column_families["cf3"]
       #   column_family.delete
       #
       class ColumnFamily
@@ -126,7 +122,7 @@ module Google
         #   instance = bigtable.instance("my-instance")
         #   table = instance.table("my-table")
         #
-        #   column_family = table.column_families.find {|cf| cf.name == "cf" }
+        #   column_family = table.column_families["cf1"]
         #   column_family.gc_rule = Google::Cloud::Bigtable::GcRule.max_age(600)
         #   column_family.save
         #
@@ -148,7 +144,7 @@ module Google
         #   instance = bigtable.instance("my-instance")
         #   table = instance.table("my-table")
         #
-        #   column_family = table.column_families.find {|cf| cf.name == "cf" }
+        #   column_family = table.column_families["cf1"]
         #   column_family.delete
         #
         def delete
@@ -278,7 +274,7 @@ module Google
             table_id,
             modification
           )
-          table.column_families.find { |cf| cf.name == name }
+          table.column_families[name]
         end
 
         # @private

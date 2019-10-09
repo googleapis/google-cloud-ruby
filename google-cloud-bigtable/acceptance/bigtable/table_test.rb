@@ -96,14 +96,18 @@ describe "Instance Tables", :bigtable do
     updated_table.must_be_kind_of Google::Cloud::Bigtable::Table
 
     column_families = updated_table.column_families
-    cf3 = column_families.find{|c| c.name == "cf3"}
+    column_families.class.must_equal Google::Cloud::Bigtable::Table::ColumnFamilyMap
+    column_families.must_be_kind_of Hash
+    column_families.must_be :frozen?
+
+    cf3 = column_families["cf3"]
     cf3.must_be_kind_of Google::Cloud::Bigtable::ColumnFamily
     cf3.gc_rule.max_age.must_equal 600
 
-    cf2 = column_families.find{|c| c.name == "cf2"}
+    cf2 = column_families["cf2"]
     cf2.gc_rule.max_versions.must_equal 5
 
-    column_families.find{|c| c.name == "cf1"}.must_be :nil?
+    column_families["cf1"]
 
     table.delete
   end

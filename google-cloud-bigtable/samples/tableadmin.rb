@@ -133,7 +133,7 @@ def run_table_operations instance_id, table_id
   puts ""
   puts "==> Updating column family cf1 GC rule"
   # [START bigtable_update_gc_rule]
-  family = table.column_families.find { |cf| cf.name == "cf1" }
+  family = table.column_families["cf1"]
   family.gc_rule = Google::Cloud::Bigtable::GcRule.max_versions(1)
   updated_family = family.save
   p updated_family
@@ -143,14 +143,14 @@ def run_table_operations instance_id, table_id
 
   puts "==> Print updated column family cf1 GC rule"
   # [START bigtable_family_get_gc_rule]
-  family = table.column_families.find { |cf| cf.name == "cf1" }
+  family = table.column_families["cf1"]
   # [END bigtable_family_get_gc_rule]
   p family
 
   puts ""
   puts "==> Delete a column family cf2"
   # [START bigtable_delete_family]
-  family = table.column_families.find { |cf| cf.name == "cf2" }
+  family = table.column_families["cf2"]
   family.delete
   # [END bigtable_delete_family]
   puts "==> #{family.name} deleted successfully"
