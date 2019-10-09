@@ -190,15 +190,18 @@ module Google
         #
         #     The following logic is used to determine which locations in
         #     the profile to filter against:
+        #
         #     1. All of the profile's geocoded
         #     {Google::Cloud::Talent::V4beta1::Profile#addresses Profile#addresses} where
         #     {Google::Cloud::Talent::V4beta1::Address#usage Address#usage} is PERSONAL and
         #     {Google::Cloud::Talent::V4beta1::Address#current Address#current} is true.
+        #
         #     2. If the above set of locations is empty, all of the profile's geocoded
         #     {Google::Cloud::Talent::V4beta1::Profile#addresses Profile#addresses} where
         #     {Google::Cloud::Talent::V4beta1::Address#usage Address#usage} is
         #     CONTACT_INFO_USAGE_UNSPECIFIED and
         #     {Google::Cloud::Talent::V4beta1::Address#current Address#current} is true.
+        #
         #     3. If the above set of locations is empty, all of the profile's geocoded
         #     {Google::Cloud::Talent::V4beta1::Profile#addresses Profile#addresses} where
         #     {Google::Cloud::Talent::V4beta1::Address#usage Address#usage} is PERSONAL or
