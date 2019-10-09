@@ -39,8 +39,8 @@ class KokoroBuilder < Command
   def build_kokoro_configs
     gems.each do |gem|
       name = gem.split("google-cloud-").last
-      [:windows, :osx].each do |os_version|
-        [:presubmit, :continuous, :nightly].each do |build_type|
+      [:linux, :windows, :osx].each do |os_version|
+        [:continuous, :nightly].each do |build_type|
           from_template "./.kokoro/templates/#{os_version}.cfg.erb",
                         "./.kokoro/#{build_type}/#{os_version}/#{name}.cfg",
                         gem: gem
