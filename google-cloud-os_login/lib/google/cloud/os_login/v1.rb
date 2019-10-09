@@ -21,10 +21,11 @@ module Google
       # rubocop:disable LineLength
 
       ##
-      # # Ruby Client for Google Cloud OS Login API ([Alpha](https://github.com/googleapis/google-cloud-ruby#versioning))
+      # # Ruby Client for Cloud OS Login API ([Alpha](https://github.com/googleapis/google-cloud-ruby#versioning))
       #
-      # [Google Cloud OS Login API][Product Documentation]:
-      # Manages OS login configuration for Google account users.
+      # [Cloud OS Login API][Product Documentation]:
+      # You can use OS Login to manage access to your VM instances using IAM roles.
+      # For more information, read [OS Login](/compute/docs/oslogin/).
       # - [Product Documentation][]
       #
       # ## Quick Start
@@ -33,7 +34,7 @@ module Google
       #
       # 1. [Select or create a Cloud Platform project.](https://console.cloud.google.com/project)
       # 2. [Enable billing for your project.](https://cloud.google.com/billing/docs/how-to/modify-project#enable_billing_for_a_project)
-      # 3. [Enable the Google Cloud OS Login API.](https://console.cloud.google.com/apis/library/oslogin.googleapis.com)
+      # 3. [Enable the Cloud OS Login API.](https://console.cloud.google.com/apis/library/oslogin.googleapis.com)
       # 4. [Setup Authentication.](https://googleapis.dev/ruby/google-cloud-os_login/latest/file.AUTHENTICATION.html)
       #
       # ### Installation
@@ -42,7 +43,7 @@ module Google
       # ```
       #
       # ### Next Steps
-      # - Read the [Google Cloud OS Login API Product documentation][Product Documentation]
+      # - Read the [Cloud OS Login API Product documentation][Product Documentation]
       #   to learn more about the product and see How-to Guides.
       # - View this [repository's main README](https://github.com/googleapis/google-cloud-ruby/blob/master/README.md)
       #   to see the full list of Cloud APIs that we cover.

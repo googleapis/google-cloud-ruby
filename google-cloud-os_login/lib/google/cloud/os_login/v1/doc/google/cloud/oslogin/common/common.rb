@@ -46,6 +46,12 @@ module Google
         # @!attribute [rw] account_id
         #   @return [String]
         #     Output only. A POSIX account identifier.
+        # @!attribute [rw] operating_system_type
+        #   @return [Google::Cloud::Oslogin::Common::OperatingSystemType]
+        #     The operating system type where this account applies.
+        # @!attribute [rw] name
+        #   @return [String]
+        #     Output only. The canonical resource name.
         class PosixAccount; end
 
         # The SSH public key information associated with a Google account.
@@ -60,7 +66,23 @@ module Google
         # @!attribute [rw] fingerprint
         #   @return [String]
         #     Output only. The SHA-256 fingerprint of the SSH public key.
+        # @!attribute [rw] name
+        #   @return [String]
+        #     Output only. The canonical resource name.
         class SshPublicKey; end
+
+        # The operating system options for account entries.
+        module OperatingSystemType
+          # The operating system type associated with the user account information is
+          # unspecified.
+          OPERATING_SYSTEM_TYPE_UNSPECIFIED = 0
+
+          # Linux user account information.
+          LINUX = 1
+
+          # Windows user account information.
+          WINDOWS = 2
+        end
       end
     end
   end

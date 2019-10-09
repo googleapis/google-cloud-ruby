@@ -21,7 +21,7 @@ module Google
         # Google Compute Engine.
         # @!attribute [rw] name
         #   @return [String]
-        #     The primary email address that uniquely identifies the user.
+        #     Required. A unique user ID.
         # @!attribute [rw] posix_accounts
         #   @return [Array<Google::Cloud::Oslogin::Common::PosixAccount>]
         #     The list of POSIX accounts associated with the user.
@@ -37,7 +37,7 @@ module Google
         # A request message for deleting a POSIX account entry.
         # @!attribute [rw] name
         #   @return [String]
-        #     A reference to the POSIX account to update. POSIX accounts are identified
+        #     Required. A reference to the POSIX account to update. POSIX accounts are identified
         #     by the project ID they are associated with. A reference to the POSIX
         #     account is in format `users/{user}/projects/{project}`.
         class DeletePosixAccountRequest; end
@@ -45,7 +45,7 @@ module Google
         # A request message for deleting an SSH public key.
         # @!attribute [rw] name
         #   @return [String]
-        #     The fingerprint of the public key to update. Public keys are identified by
+        #     Required. The fingerprint of the public key to update. Public keys are identified by
         #     their SHA-256 fingerprint. The fingerprint of the public key is in format
         #     `users/{user}/sshPublicKeys/{fingerprint}`.
         class DeleteSshPublicKeyRequest; end
@@ -53,7 +53,13 @@ module Google
         # A request message for retrieving the login profile information for a user.
         # @!attribute [rw] name
         #   @return [String]
-        #     The unique ID for the user in format `users/{user}`.
+        #     Required. The unique ID for the user in format `users/{user}`.
+        # @!attribute [rw] project_id
+        #   @return [String]
+        #     The project ID of the Google Cloud Platform project.
+        # @!attribute [rw] system_id
+        #   @return [String]
+        #     A system ID for filtering the results of the request.
         class GetLoginProfileRequest; end
 
         # A request message for retrieving an SSH public key.
@@ -67,10 +73,10 @@ module Google
         # A request message for importing an SSH public key.
         # @!attribute [rw] parent
         #   @return [String]
-        #     The unique ID for the user in format `users/{user}`.
+        #     Required. The unique ID for the user in format `users/{user}`.
         # @!attribute [rw] ssh_public_key
         #   @return [Google::Cloud::Oslogin::Common::SshPublicKey]
-        #     The SSH public key and expiration time.
+        #     Optional. The SSH public key and expiration time.
         # @!attribute [rw] project_id
         #   @return [String]
         #     The project ID of the Google Cloud Platform project.
@@ -85,12 +91,12 @@ module Google
         # A request message for updating an SSH public key.
         # @!attribute [rw] name
         #   @return [String]
-        #     The fingerprint of the public key to update. Public keys are identified by
+        #     Required. The fingerprint of the public key to update. Public keys are identified by
         #     their SHA-256 fingerprint. The fingerprint of the public key is in format
         #     `users/{user}/sshPublicKeys/{fingerprint}`.
         # @!attribute [rw] ssh_public_key
         #   @return [Google::Cloud::Oslogin::Common::SshPublicKey]
-        #     The SSH public key and expiration time.
+        #     Required. The SSH public key and expiration time.
         # @!attribute [rw] update_mask
         #   @return [Google::Protobuf::FieldMask]
         #     Mask to control which fields get updated. Updates all if not present.

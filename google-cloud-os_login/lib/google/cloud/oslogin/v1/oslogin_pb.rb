@@ -5,6 +5,9 @@
 require 'google/protobuf'
 
 require 'google/api/annotations_pb'
+require 'google/api/client_pb'
+require 'google/api/field_behavior_pb'
+require 'google/api/resource_pb'
 require 'google/cloud/oslogin/common/common_pb'
 require 'google/protobuf/empty_pb'
 require 'google/protobuf/field_mask_pb'
@@ -23,6 +26,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   end
   add_message "google.cloud.oslogin.v1.GetLoginProfileRequest" do
     optional :name, :string, 1
+    optional :project_id, :string, 2
+    optional :system_id, :string, 3
   end
   add_message "google.cloud.oslogin.v1.GetSshPublicKeyRequest" do
     optional :name, :string, 1

@@ -4,7 +4,8 @@
 
 require 'google/protobuf'
 
-require 'google/api/annotations_pb'
+require 'google/api/field_behavior_pb'
+require 'google/api/resource_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.cloud.oslogin.common.PosixAccount" do
     optional :primary, :bool, 1
@@ -16,11 +17,19 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :gecos, :string, 7
     optional :system_id, :string, 8
     optional :account_id, :string, 9
+    optional :operating_system_type, :enum, 10, "google.cloud.oslogin.common.OperatingSystemType"
+    optional :name, :string, 11
   end
   add_message "google.cloud.oslogin.common.SshPublicKey" do
     optional :key, :string, 1
     optional :expiration_time_usec, :int64, 2
     optional :fingerprint, :string, 3
+    optional :name, :string, 4
+  end
+  add_enum "google.cloud.oslogin.common.OperatingSystemType" do
+    value :OPERATING_SYSTEM_TYPE_UNSPECIFIED, 0
+    value :LINUX, 1
+    value :WINDOWS, 2
   end
 end
 
@@ -30,6 +39,7 @@ module Google
       module Common
         PosixAccount = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.oslogin.common.PosixAccount").msgclass
         SshPublicKey = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.oslogin.common.SshPublicKey").msgclass
+        OperatingSystemType = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.oslogin.common.OperatingSystemType").enummodule
       end
     end
   end

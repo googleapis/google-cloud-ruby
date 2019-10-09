@@ -291,10 +291,12 @@ describe Google::Cloud::OsLogin::V1::OsLoginServiceClient do
       key = "key106079"
       expiration_time_usec = 2058878882
       fingerprint = "fingerprint-1375934236"
+      name_2 = "name2-1052831874"
       expected_response = {
         key: key,
         expiration_time_usec: expiration_time_usec,
-        fingerprint: fingerprint
+        fingerprint: fingerprint,
+        name: name_2
       }
       expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Oslogin::Common::SshPublicKey)
 
@@ -449,10 +451,12 @@ describe Google::Cloud::OsLogin::V1::OsLoginServiceClient do
       key = "key106079"
       expiration_time_usec = 2058878882
       fingerprint = "fingerprint-1375934236"
+      name_2 = "name2-1052831874"
       expected_response = {
         key: key,
         expiration_time_usec: expiration_time_usec,
-        fingerprint: fingerprint
+        fingerprint: fingerprint,
+        name: name_2
       }
       expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Oslogin::Common::SshPublicKey)
 
