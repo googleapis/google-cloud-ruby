@@ -294,7 +294,7 @@ module Google
         #
         #   bigtable.tables("my-instance").all do |table|
         #     puts table.name
-        #     puts table.column_families.inspect
+        #     puts table.column_families
         #   end
         #
         def tables instance_id
@@ -333,7 +333,7 @@ module Google
         #   table = bigtable.table("my-instance", "my-table", perform_lookup: true, view: :SCHEMA_VIEW)
         #   if table
         #     puts table.name
-        #     puts table.column_families.inspect
+        #     puts table.column_families
         #   end
         #
         # @example Get table object without calling get table admin api.
@@ -351,8 +351,8 @@ module Google
         #   table = bigtable.table("my-instance", "my-table", view: :FULL, perform_lookup: true)
         #   if table
         #     puts table.name
-        #     puts table.column_families.inspect
-        #     puts table.cluster_states.inspect
+        #     puts table.column_families
+        #     puts table.cluster_states
         #   end
         #
         # @example Mutate rows
@@ -563,7 +563,7 @@ module Google
         #
         #   table = bigtable.modify_column_families("my-instance", "my-table", modifications)
         #
-        #   puts table.column_families.inspect
+        #   puts table.column_families
         #
         def modify_column_families instance_id, table_id, modifications
           ensure_service!

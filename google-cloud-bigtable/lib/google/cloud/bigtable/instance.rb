@@ -485,7 +485,7 @@ module Google
         #   # Default view is full view
         #   table = instance.table("my-table", perform_lookup: true)
         #   puts table.name
-        #   puts table.column_families.inspect
+        #   puts table.column_families
         #
         #   # Name-only view
         #   table = instance.table("my-table", view: :NAME_ONLY, perform_lookup: true)

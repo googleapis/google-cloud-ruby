@@ -362,7 +362,7 @@ module Google
         #
         #   table = table.modify_column_families(modifications)
         #
-        #   puts table.column_families.inspect
+        #   puts table.column_families
         #
         def modify_column_families modifications
           ensure_service!
