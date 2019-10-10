@@ -246,22 +246,6 @@ module Google
               &Google::Cloud::Redis::V1::CloudRedis::Stub.method(:new)
             )
 
-            @create_instance = Google::Gax.create_api_call(
-              @cloud_redis_stub.method(:create_instance),
-              defaults["create_instance"],
-              exception_transformer: exception_transformer,
-              params_extractor: proc do |request|
-                {'parent' => request.parent}
-              end
-            )
-            @update_instance = Google::Gax.create_api_call(
-              @cloud_redis_stub.method(:update_instance),
-              defaults["update_instance"],
-              exception_transformer: exception_transformer,
-              params_extractor: proc do |request|
-                {'instance.name' => request.instance.name}
-              end
-            )
             @list_instances = Google::Gax.create_api_call(
               @cloud_redis_stub.method(:list_instances),
               defaults["list_instances"],
@@ -276,6 +260,22 @@ module Google
               exception_transformer: exception_transformer,
               params_extractor: proc do |request|
                 {'name' => request.name}
+              end
+            )
+            @create_instance = Google::Gax.create_api_call(
+              @cloud_redis_stub.method(:create_instance),
+              defaults["create_instance"],
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
+            )
+            @update_instance = Google::Gax.create_api_call(
+              @cloud_redis_stub.method(:update_instance),
+              defaults["update_instance"],
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'instance.name' => request.instance.name}
               end
             )
             @import_instance = Google::Gax.create_api_call(
@@ -313,6 +313,101 @@ module Google
           end
 
           # Service calls
+
+          # Lists all Redis instances owned by a project in either the specified
+          # location (region) or all locations.
+          #
+          # The location should have the following format:
+          # * `projects/{project_id}/locations/{location_id}`
+          #
+          # If `location_id` is specified as `-` (wildcard), then all regions
+          # available to the project are queried, and the results are aggregated.
+          #
+          # @param parent [String]
+          #   Required. The resource name of the instance location using the form:
+          #       `projects/{project_id}/locations/{location_id}`
+          #   where `location_id` refers to a GCP region.
+          # @param page_size [Integer]
+          #   The maximum number of resources contained in the underlying API
+          #   response. If page streaming is performed per-resource, this
+          #   parameter does not affect the return value. If page streaming is
+          #   performed per-page, this determines the maximum number of
+          #   resources in a page.
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Gax::PagedEnumerable<Google::Cloud::Redis::V1::Instance>]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
+          # @return [Google::Gax::PagedEnumerable<Google::Cloud::Redis::V1::Instance>]
+          #   An enumerable of Google::Cloud::Redis::V1::Instance instances.
+          #   See Google::Gax::PagedEnumerable documentation for other
+          #   operations such as per-page iteration or access to the response
+          #   object.
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/redis"
+          #
+          #   cloud_redis_client = Google::Cloud::Redis.new(version: :v1)
+          #   formatted_parent = Google::Cloud::Redis::V1::CloudRedisClient.location_path("[PROJECT]", "[LOCATION]")
+          #
+          #   # Iterate over all results.
+          #   cloud_redis_client.list_instances(formatted_parent).each do |element|
+          #     # Process element.
+          #   end
+          #
+          #   # Or iterate over results one page at a time.
+          #   cloud_redis_client.list_instances(formatted_parent).each_page do |page|
+          #     # Process each page at a time.
+          #     page.each do |element|
+          #       # Process element.
+          #     end
+          #   end
+
+          def list_instances \
+              parent,
+              page_size: nil,
+              options: nil,
+              &block
+            req = {
+              parent: parent,
+              page_size: page_size
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Cloud::Redis::V1::ListInstancesRequest)
+            @list_instances.call(req, options, &block)
+          end
+
+          # Gets the details of a specific Redis instance.
+          #
+          # @param name [String]
+          #   Required. Redis instance resource name using the form:
+          #       `projects/{project_id}/locations/{location_id}/instances/{instance_id}`
+          #   where `location_id` refers to a GCP region.
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Cloud::Redis::V1::Instance]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
+          # @return [Google::Cloud::Redis::V1::Instance]
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/redis"
+          #
+          #   cloud_redis_client = Google::Cloud::Redis.new(version: :v1)
+          #   formatted_name = Google::Cloud::Redis::V1::CloudRedisClient.instance_path("[PROJECT]", "[LOCATION]", "[INSTANCE]")
+          #   response = cloud_redis_client.get_instance(formatted_name)
+
+          def get_instance \
+              name,
+              options: nil,
+              &block
+            req = {
+              name: name
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Cloud::Redis::V1::GetInstanceRequest)
+            @get_instance.call(req, options, &block)
+          end
 
           # Creates a Redis instance based on the specified tier and memory size.
           #
@@ -491,101 +586,6 @@ module Google
             )
             operation.on_done { |operation| yield(operation) } if block_given?
             operation
-          end
-
-          # Lists all Redis instances owned by a project in either the specified
-          # location (region) or all locations.
-          #
-          # The location should have the following format:
-          # * `projects/{project_id}/locations/{location_id}`
-          #
-          # If `location_id` is specified as `-` (wildcard), then all regions
-          # available to the project are queried, and the results are aggregated.
-          #
-          # @param parent [String]
-          #   Required. The resource name of the instance location using the form:
-          #       `projects/{project_id}/locations/{location_id}`
-          #   where `location_id` refers to a GCP region.
-          # @param page_size [Integer]
-          #   The maximum number of resources contained in the underlying API
-          #   response. If page streaming is performed per-resource, this
-          #   parameter does not affect the return value. If page streaming is
-          #   performed per-page, this determines the maximum number of
-          #   resources in a page.
-          # @param options [Google::Gax::CallOptions]
-          #   Overrides the default settings for this call, e.g, timeout,
-          #   retries, etc.
-          # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result [Google::Gax::PagedEnumerable<Google::Cloud::Redis::V1::Instance>]
-          # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @return [Google::Gax::PagedEnumerable<Google::Cloud::Redis::V1::Instance>]
-          #   An enumerable of Google::Cloud::Redis::V1::Instance instances.
-          #   See Google::Gax::PagedEnumerable documentation for other
-          #   operations such as per-page iteration or access to the response
-          #   object.
-          # @raise [Google::Gax::GaxError] if the RPC is aborted.
-          # @example
-          #   require "google/cloud/redis"
-          #
-          #   cloud_redis_client = Google::Cloud::Redis.new(version: :v1)
-          #   formatted_parent = Google::Cloud::Redis::V1::CloudRedisClient.location_path("[PROJECT]", "[LOCATION]")
-          #
-          #   # Iterate over all results.
-          #   cloud_redis_client.list_instances(formatted_parent).each do |element|
-          #     # Process element.
-          #   end
-          #
-          #   # Or iterate over results one page at a time.
-          #   cloud_redis_client.list_instances(formatted_parent).each_page do |page|
-          #     # Process each page at a time.
-          #     page.each do |element|
-          #       # Process element.
-          #     end
-          #   end
-
-          def list_instances \
-              parent,
-              page_size: nil,
-              options: nil,
-              &block
-            req = {
-              parent: parent,
-              page_size: page_size
-            }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Cloud::Redis::V1::ListInstancesRequest)
-            @list_instances.call(req, options, &block)
-          end
-
-          # Gets the details of a specific Redis instance.
-          #
-          # @param name [String]
-          #   Required. Redis instance resource name using the form:
-          #       `projects/{project_id}/locations/{location_id}/instances/{instance_id}`
-          #   where `location_id` refers to a GCP region.
-          # @param options [Google::Gax::CallOptions]
-          #   Overrides the default settings for this call, e.g, timeout,
-          #   retries, etc.
-          # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result [Google::Cloud::Redis::V1::Instance]
-          # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @return [Google::Cloud::Redis::V1::Instance]
-          # @raise [Google::Gax::GaxError] if the RPC is aborted.
-          # @example
-          #   require "google/cloud/redis"
-          #
-          #   cloud_redis_client = Google::Cloud::Redis.new(version: :v1)
-          #   formatted_name = Google::Cloud::Redis::V1::CloudRedisClient.instance_path("[PROJECT]", "[LOCATION]", "[INSTANCE]")
-          #   response = cloud_redis_client.get_instance(formatted_name)
-
-          def get_instance \
-              name,
-              options: nil,
-              &block
-            req = {
-              name: name
-            }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Cloud::Redis::V1::GetInstanceRequest)
-            @get_instance.call(req, options, &block)
           end
 
           # Import a Redis RDB snapshot file from Cloud Storage into a Redis instance.
