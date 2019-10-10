@@ -20,14 +20,14 @@ module Google
         # Describes an API diff request.
         # @!attribute [rw] threat_type
         #   @return [Google::Cloud::Webrisk::V1beta1::ThreatType]
-        #     Required. The ThreatList to update.
+        #     The ThreatList to update.
         # @!attribute [rw] version_token
         #   @return [String]
         #     The current version token of the client for the requested list (the
         #     client version that was received from the last successful diff).
         # @!attribute [rw] constraints
         #   @return [Google::Cloud::Webrisk::V1beta1::ComputeThreatListDiffRequest::Constraints]
-        #     The constraints associated with this request.
+        #     Required. The constraints associated with this request.
         class ComputeThreatListDiffRequest
           # The constraints for this diff.
           # @!attribute [rw] max_diff_entries
@@ -48,7 +48,7 @@ module Google
 
         # @!attribute [rw] response_type
         #   @return [Google::Cloud::Webrisk::V1beta1::ComputeThreatListDiffResponse::ResponseType]
-        #     The type of response. This may indicate that an action is required by the
+        #     The type of response. This may indicate that an action must be taken by the
         #     client when the response is received.
         # @!attribute [rw] additions
         #   @return [Google::Cloud::Webrisk::V1beta1::ThreatEntryAdditions]
@@ -98,7 +98,7 @@ module Google
         # Request to check URI entries against threatLists.
         # @!attribute [rw] uri
         #   @return [String]
-        #     The URI to be checked for matches.
+        #     Required. The URI to be checked for matches.
         # @!attribute [rw] threat_types
         #   @return [Array<Google::Cloud::Webrisk::V1beta1::ThreatType>]
         #     Required. The ThreatLists to search in.

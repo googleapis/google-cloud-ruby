@@ -190,9 +190,9 @@ module Google
           # Gets the most recent threat list diffs.
           #
           # @param threat_type [Google::Cloud::Webrisk::V1beta1::ThreatType]
-          #   Required. The ThreatList to update.
+          #   The ThreatList to update.
           # @param constraints [Google::Cloud::Webrisk::V1beta1::ComputeThreatListDiffRequest::Constraints | Hash]
-          #   The constraints associated with this request.
+          #   Required. The constraints associated with this request.
           #   A hash of the same form as `Google::Cloud::Webrisk::V1beta1::ComputeThreatListDiffRequest::Constraints`
           #   can also be provided.
           # @param version_token [String]
@@ -236,7 +236,7 @@ module Google
           # This method is used to check whether a URI is on a given threatList.
           #
           # @param uri [String]
-          #   The URI to be checked for matches.
+          #   Required. The URI to be checked for matches.
           # @param threat_types [Array<Google::Cloud::Webrisk::V1beta1::ThreatType>]
           #   Required. The ThreatLists to search in.
           # @param options [Google::Gax::CallOptions]
