@@ -126,7 +126,6 @@ module Google
           #   @param exception_transformer [Proc]
           #     An optional proc that intercepts any exceptions raised during an API call to inject
           #     custom error handling.
-          #
           def self.new(*args, version: :v2, **kwargs)
             unless AVAILABLE_VERSIONS.include?(version.to_s.downcase)
               raise "The version: #{version} is not available. The available versions " \
@@ -183,7 +182,6 @@ module Google
           #   @param exception_transformer [Proc]
           #     An optional proc that intercepts any exceptions raised during an API call to inject
           #     custom error handling.
-          #
           def self.new(*args, version: :v2, **kwargs)
             unless AVAILABLE_VERSIONS.include?(version.to_s.downcase)
               raise "The version: #{version} is not available. The available versions " \
