@@ -8,6 +8,7 @@ require 'google/cloud/vision/v1/geometry_pb'
 require 'google/cloud/vision/v1/product_search_service_pb'
 require 'google/protobuf/timestamp_pb'
 require 'google/api/annotations_pb'
+require 'google/api/resource_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.cloud.vision.v1.ProductSearchParams" do
     optional :bounding_poly, :message, 9, "google.cloud.vision.v1.BoundingPoly"
