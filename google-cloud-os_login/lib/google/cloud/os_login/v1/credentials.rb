@@ -22,9 +22,7 @@ module Google
         class Credentials < Google::Auth::Credentials
           SCOPE = [
             "https://www.googleapis.com/auth/cloud-platform",
-            "https://www.googleapis.com/auth/cloud-platform.read-only",
-            "https://www.googleapis.com/auth/compute",
-            "https://www.googleapis.com/auth/compute.readonly"
+            "https://www.googleapis.com/auth/compute"
           ].freeze
           PATH_ENV_VARS = %w(OS_LOGIN_CREDENTIALS
                              OS_LOGIN_KEYFILE

@@ -8,8 +8,8 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "google-cloud-os_login is the official library for Google Cloud OS Login API."
-  gem.summary       = "API Client library for Google Cloud OS Login API"
+  gem.description   = "google-cloud-os_login is the official library for Cloud OS Login API."
+  gem.summary       = "API Client library for Cloud OS Login API"
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby/tree/master/google-cloud-os_login"
   gem.license       = "Apache-2.0"
 
