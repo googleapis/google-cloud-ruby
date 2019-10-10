@@ -6,7 +6,15 @@
 
 * Fix Subscriber state after releasing messages
   * Correctly reset the Subscriber state when releasing messages
+    after the callback either raises an error, or the callback
+    fails to call acknowledge or modify_ack_deadline on the
+    message. If a Subscriber fills it's inventory, and stops
+    pulling additional messages before all the callbacks are
+    completed (moves to a paused state) then the Subscriber
+    could become stuck in a paused state.
   * A paused Subscriber will now check whether to unpause after
+    the callback is completed, instead of when acknowledge or
+    modify_ack_deadline is called on the message.
 
 ### 1.0.1 / 2019-10-01
 
