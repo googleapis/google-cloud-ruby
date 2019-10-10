@@ -1,5 +1,13 @@
 # Release History
 
+### 1.0.2 / 2019-10-10
+
+#### Bug Fixes
+
+* Fix Subscriber state after releasing messages
+  * Correctly reset the Subscriber state when releasing messages
+  * A paused Subscriber will now check whether to unpause after
+
 ### 1.0.1 / 2019-10-01
 
 #### Bug Fixes
