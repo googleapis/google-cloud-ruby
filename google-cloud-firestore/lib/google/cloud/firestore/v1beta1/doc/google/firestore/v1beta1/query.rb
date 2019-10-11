@@ -142,6 +142,14 @@ module Google
 
             # Contains. Requires that the field is an array.
             ARRAY_CONTAINS = 7
+
+            # In. Requires that `value` is a non-empty ArrayValue with at most 10
+            # values.
+            IN = 8
+
+            # Contains any. Requires that the field is an array and
+            # `value` is a non-empty ArrayValue with at most 10 values.
+            ARRAY_CONTAINS_ANY = 9
           end
         end
 
@@ -175,11 +183,6 @@ module Google
         #     The direction to order by. Defaults to `ASCENDING`.
         class Order; end
 
-        # A reference to a field, such as `max(messages.time) as max_time`.
-        # @!attribute [rw] field_path
-        #   @return [String]
-        class FieldReference; end
-
         # The projection of document's fields to return.
         # @!attribute [rw] fields
         #   @return [Array<Google::Firestore::V1beta1::StructuredQuery::FieldReference>]
@@ -188,6 +191,11 @@ module Google
         #     If empty, all fields are returned. To only return the name
         #     of the document, use `['__name__']`.
         class Projection; end
+
+        # A reference to a field, such as `max(messages.time) as max_time`.
+        # @!attribute [rw] field_path
+        #   @return [String]
+        class FieldReference; end
 
         # A sort direction.
         module Direction
