@@ -41,15 +41,6 @@ s.copy(v1_library / '.gitignore')
 s.copy(v1_library / '.yardopts')
 s.copy(v1_library / 'google-cloud-video_intelligence.gemspec', merge=ruby.merge_gemspec)
 
-v1beta1_library = gapic.ruby_library(
-    'videointelligence', 'v1beta1',
-    artman_output_name='google-cloud-ruby/google-cloud-video_intelligence'
-)
-s.copy(v1beta1_library / 'lib/google/cloud/video_intelligence/v1beta1')
-s.copy(v1beta1_library / 'lib/google/cloud/video_intelligence/v1beta1.rb')
-s.copy(v1beta1_library / 'lib/google/cloud/videointelligence/v1beta1')
-s.copy(v1beta1_library / 'test/google/cloud/video_intelligence/v1beta1')
-
 v1p1beta1_library = gapic.ruby_library(
     'videointelligence', 'v1p1beta1',
     artman_output_name='google-cloud-ruby/google-cloud-video_intelligence'
@@ -134,7 +125,6 @@ s.replace(
       'README.md',
       'lib/google/cloud/video_intelligence.rb',
       'lib/google/cloud/video_intelligence/v1.rb',
-      'lib/google/cloud/video_intelligence/v1beta1.rb',
       'lib/google/cloud/video_intelligence/v1p1beta1.rb',
       'lib/google/cloud/video_intelligence/v1p2beta1.rb',
       'lib/google/cloud/video_intelligence/v1beta2.rb'
@@ -145,7 +135,6 @@ s.replace(
 s.replace(
     [
       'lib/google/cloud/video_intelligence/v1/video_intelligence_service_client.rb',
-      'lib/google/cloud/video_intelligence/v1beta1/video_intelligence_service_client.rb',
       'lib/google/cloud/video_intelligence/v1p1beta1/video_intelligence_service_client.rb',
       'lib/google/cloud/video_intelligence/v1p2beta1/video_intelligence_service_client.rb',
       'lib/google/cloud/video_intelligence/v1beta2/video_intelligence_service_client.rb'
@@ -212,7 +201,7 @@ s.replace(
     '(gem.version\s+=\s+).\d+.\d+.\d.*$',
     '\\1Google::Cloud::VideoIntelligence::VERSION'
 )
-for version in ['v1', 'v1beta1', 'v1beta2', 'v1p1beta1', 'v1p2beta1']:
+for version in ['v1', 'v1beta2', 'v1p1beta1', 'v1p2beta1']:
     s.replace(
         f'lib/google/cloud/video_intelligence/{version}/*_client.rb',
         f'(require \".*credentials\"\n)\n',
