@@ -1,5 +1,11 @@
 # Release History
 
+### 0.32.1 / 2019-10-10
+
+#### Bug Fixes
+
+* The ErrorReporting middleware reuses the existing default reporter instead of creating new ones every time
+
 ### 0.32.0 / 2019-08-23
 
 #### Features
