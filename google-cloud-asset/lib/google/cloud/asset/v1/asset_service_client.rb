@@ -246,9 +246,9 @@ module Google
           #   can also be provided.
           # @param asset_types [Array<String>]
           #   A list of asset types of which to take a snapshot for. For example:
-          #   "compute.googleapis.com/Disk". If specified, only matching assets will be returned.
-          #   See [Introduction to Cloud Asset
-          #   Inventory](https://cloud.google.com/resource-manager/docs/cloud-asset-inventory/overview)
+          #   "compute.googleapis.com/Disk". If specified, only matching assets will be
+          #   returned. See [Introduction to Cloud Asset
+          #   Inventory](https://cloud.google.com/resource-manager-inventory/docs/overview)
           #   for all supported asset types.
           # @param content_type [Google::Cloud::Asset::V1::ContentType]
           #   Asset content type. If not specified, no content but the asset name will be
@@ -335,7 +335,7 @@ module Google
           #   organization number (such as "organizations/123"), a project ID (such as
           #   "projects/my-project-id")", or a project number (such as "projects/12345").
           # @param content_type [Google::Cloud::Asset::V1::ContentType]
-          #   Required. The content type.
+          #   Optional. The content type.
           # @param read_time_window [Google::Cloud::Asset::V1::TimeWindow | Hash]
           #   Optional. The time window for the asset history. Both start_time and
           #   end_time are optional and if set, it must be after 2018-10-02 UTC. If
@@ -350,7 +350,8 @@ module Google
           #   `//compute.googleapis.com/projects/my_project_123/zones/zone1/instances/instance1`.
           #   See [Resource
           #   Names](https://cloud.google.com/apis/design/resource_names#full_resource_name)
-          #   and [Resource Name Format](https://cloud.google.com/resource-manager/docs/cloud-asset-inventory/resource-name-format)
+          #   and [Resource Name
+          #   Format](https://cloud.google.com/resource-manager-inventory/docs/resource-name-format)
           #   for more info.
           #
           #   The request becomes a no-op if the asset name list is empty, and the max
