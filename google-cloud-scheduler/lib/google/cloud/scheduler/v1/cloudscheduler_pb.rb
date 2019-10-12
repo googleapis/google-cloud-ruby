@@ -5,6 +5,8 @@
 require 'google/protobuf'
 
 require 'google/api/annotations_pb'
+require 'google/api/client_pb'
+require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
 require 'google/cloud/scheduler/v1/job_pb'
 require 'google/protobuf/empty_pb'
