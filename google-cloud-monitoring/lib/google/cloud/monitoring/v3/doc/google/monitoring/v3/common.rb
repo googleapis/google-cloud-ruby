@@ -40,7 +40,8 @@ module Google
       #
       # * For a `GAUGE` metric, the `startTime` value is technically optional; if
       #   no value is specified, the start time defaults to the value of the
-      #   end time, and the interval represents a single point in time. Such an
+      #   end time, and the interval represents a single point in time. If both
+      #   start and end times are specified, they must be identical. Such an
       #   interval is valid only for `GAUGE` metrics, which are point-in-time
       #   measurements.
       #

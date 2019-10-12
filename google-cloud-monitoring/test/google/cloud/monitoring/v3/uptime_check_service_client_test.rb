@@ -154,7 +154,12 @@ describe Google::Cloud::Monitoring::V3::UptimeCheckServiceClient do
       # Create expected grpc response
       name_2 = "name2-1052831874"
       display_name = "displayName1615086568"
-      expected_response = { name: name_2, display_name: display_name }
+      is_internal = true
+      expected_response = {
+        name: name_2,
+        display_name: display_name,
+        is_internal: is_internal
+      }
       expected_response = Google::Gax::to_proto(expected_response, Google::Monitoring::V3::UptimeCheckConfig)
 
       # Mock Grpc layer
@@ -230,7 +235,12 @@ describe Google::Cloud::Monitoring::V3::UptimeCheckServiceClient do
       # Create expected grpc response
       name = "name3373707"
       display_name = "displayName1615086568"
-      expected_response = { name: name, display_name: display_name }
+      is_internal = true
+      expected_response = {
+        name: name,
+        display_name: display_name,
+        is_internal: is_internal
+      }
       expected_response = Google::Gax::to_proto(expected_response, Google::Monitoring::V3::UptimeCheckConfig)
 
       # Mock Grpc layer
@@ -308,7 +318,12 @@ describe Google::Cloud::Monitoring::V3::UptimeCheckServiceClient do
       # Create expected grpc response
       name = "name3373707"
       display_name = "displayName1615086568"
-      expected_response = { name: name, display_name: display_name }
+      is_internal = true
+      expected_response = {
+        name: name,
+        display_name: display_name,
+        is_internal: is_internal
+      }
       expected_response = Google::Gax::to_proto(expected_response, Google::Monitoring::V3::UptimeCheckConfig)
 
       # Mock Grpc layer
