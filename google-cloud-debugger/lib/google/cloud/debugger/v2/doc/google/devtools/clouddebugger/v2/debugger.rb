@@ -20,14 +20,14 @@ module Google
         # Request to set a breakpoint
         # @!attribute [rw] debuggee_id
         #   @return [String]
-        #     ID of the debuggee where the breakpoint is to be set.
+        #     Required. ID of the debuggee where the breakpoint is to be set.
         # @!attribute [rw] breakpoint
         #   @return [Google::Devtools::Clouddebugger::V2::Breakpoint]
-        #     Breakpoint specification to set.
+        #     Required. Breakpoint specification to set.
         #     The field `location` of the breakpoint must be set.
         # @!attribute [rw] client_version
         #   @return [String]
-        #     The client version making the call.
+        #     Required. The client version making the call.
         #     Schema: `domain/type/version` (e.g., `google.com/intellij/v1`).
         class SetBreakpointRequest; end
 
@@ -41,13 +41,13 @@ module Google
         # Request to get breakpoint information.
         # @!attribute [rw] debuggee_id
         #   @return [String]
-        #     ID of the debuggee whose breakpoint to get.
+        #     Required. ID of the debuggee whose breakpoint to get.
         # @!attribute [rw] breakpoint_id
         #   @return [String]
-        #     ID of the breakpoint to get.
+        #     Required. ID of the breakpoint to get.
         # @!attribute [rw] client_version
         #   @return [String]
-        #     The client version making the call.
+        #     Required. The client version making the call.
         #     Schema: `domain/type/version` (e.g., `google.com/intellij/v1`).
         class GetBreakpointRequest; end
 
@@ -61,20 +61,20 @@ module Google
         # Request to delete a breakpoint.
         # @!attribute [rw] debuggee_id
         #   @return [String]
-        #     ID of the debuggee whose breakpoint to delete.
+        #     Required. ID of the debuggee whose breakpoint to delete.
         # @!attribute [rw] breakpoint_id
         #   @return [String]
-        #     ID of the breakpoint to delete.
+        #     Required. ID of the breakpoint to delete.
         # @!attribute [rw] client_version
         #   @return [String]
-        #     The client version making the call.
+        #     Required. The client version making the call.
         #     Schema: `domain/type/version` (e.g., `google.com/intellij/v1`).
         class DeleteBreakpointRequest; end
 
         # Request to list breakpoints.
         # @!attribute [rw] debuggee_id
         #   @return [String]
-        #     ID of the debuggee whose breakpoints to list.
+        #     Required. ID of the debuggee whose breakpoints to list.
         # @!attribute [rw] include_all_users
         #   @return [true, false]
         #     When set to `true`, the response includes the list of breakpoints set by
@@ -99,7 +99,7 @@ module Google
         #     should be called again with the same `wait_token`.
         # @!attribute [rw] client_version
         #   @return [String]
-        #     The client version making the call.
+        #     Required. The client version making the call.
         #     Schema: `domain/type/version` (e.g., `google.com/intellij/v1`).
         class ListBreakpointsRequest
           # Wrapper message for `Breakpoint.Action`. Defines a filter on the action
@@ -126,14 +126,14 @@ module Google
         # Request to list debuggees.
         # @!attribute [rw] project
         #   @return [String]
-        #     Project number of a Google Cloud project whose debuggees to list.
+        #     Required. Project number of a Google Cloud project whose debuggees to list.
         # @!attribute [rw] include_inactive
         #   @return [true, false]
         #     When set to `true`, the result includes all debuggees. Otherwise, the
         #     result includes only debuggees that are active.
         # @!attribute [rw] client_version
         #   @return [String]
-        #     The client version making the call.
+        #     Required. The client version making the call.
         #     Schema: `domain/type/version` (e.g., `google.com/intellij/v1`).
         class ListDebuggeesRequest; end
 

@@ -217,14 +217,14 @@ module Google
           # Sets the breakpoint to the debuggee.
           #
           # @param debuggee_id [String]
-          #   ID of the debuggee where the breakpoint is to be set.
+          #   Required. ID of the debuggee where the breakpoint is to be set.
           # @param breakpoint [Google::Devtools::Clouddebugger::V2::Breakpoint | Hash]
-          #   Breakpoint specification to set.
+          #   Required. Breakpoint specification to set.
           #   The field `location` of the breakpoint must be set.
           #   A hash of the same form as `Google::Devtools::Clouddebugger::V2::Breakpoint`
           #   can also be provided.
           # @param client_version [String]
-          #   The client version making the call.
+          #   Required. The client version making the call.
           #   Schema: `domain/type/version` (e.g., `google.com/intellij/v1`).
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
@@ -267,11 +267,11 @@ module Google
           # Gets breakpoint information.
           #
           # @param debuggee_id [String]
-          #   ID of the debuggee whose breakpoint to get.
+          #   Required. ID of the debuggee whose breakpoint to get.
           # @param breakpoint_id [String]
-          #   ID of the breakpoint to get.
+          #   Required. ID of the breakpoint to get.
           # @param client_version [String]
-          #   The client version making the call.
+          #   Required. The client version making the call.
           #   Schema: `domain/type/version` (e.g., `google.com/intellij/v1`).
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
@@ -314,11 +314,11 @@ module Google
           # Deletes the breakpoint from the debuggee.
           #
           # @param debuggee_id [String]
-          #   ID of the debuggee whose breakpoint to delete.
+          #   Required. ID of the debuggee whose breakpoint to delete.
           # @param breakpoint_id [String]
-          #   ID of the breakpoint to delete.
+          #   Required. ID of the breakpoint to delete.
           # @param client_version [String]
-          #   The client version making the call.
+          #   Required. The client version making the call.
           #   Schema: `domain/type/version` (e.g., `google.com/intellij/v1`).
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
@@ -361,9 +361,9 @@ module Google
           # Lists all breakpoints for the debuggee.
           #
           # @param debuggee_id [String]
-          #   ID of the debuggee whose breakpoints to list.
+          #   Required. ID of the debuggee whose breakpoints to list.
           # @param client_version [String]
-          #   The client version making the call.
+          #   Required. The client version making the call.
           #   Schema: `domain/type/version` (e.g., `google.com/intellij/v1`).
           # @param include_all_users [true, false]
           #   When set to `true`, the response includes the list of breakpoints set by
@@ -430,9 +430,9 @@ module Google
           # Lists all the debuggees that the user has access to.
           #
           # @param project [String]
-          #   Project number of a Google Cloud project whose debuggees to list.
+          #   Required. Project number of a Google Cloud project whose debuggees to list.
           # @param client_version [String]
-          #   The client version making the call.
+          #   Required. The client version making the call.
           #   Schema: `domain/type/version` (e.g., `google.com/intellij/v1`).
           # @param include_inactive [true, false]
           #   When set to `true`, the result includes all debuggees. Otherwise, the

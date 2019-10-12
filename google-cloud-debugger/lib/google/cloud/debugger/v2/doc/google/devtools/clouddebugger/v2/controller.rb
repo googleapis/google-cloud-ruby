@@ -20,7 +20,7 @@ module Google
         # Request to register a debuggee.
         # @!attribute [rw] debuggee
         #   @return [Google::Devtools::Clouddebugger::V2::Debuggee]
-        #     Debuggee information to register.
+        #     Required. Debuggee information to register.
         #     The fields `project`, `uniquifier`, `description` and `agent_version`
         #     of the debuggee must be set.
         class RegisterDebuggeeRequest; end
@@ -38,7 +38,7 @@ module Google
         # Request to list active breakpoints.
         # @!attribute [rw] debuggee_id
         #   @return [String]
-        #     Identifies the debuggee.
+        #     Required. Identifies the debuggee.
         # @!attribute [rw] wait_token
         #   @return [String]
         #     A token that, if specified, blocks the method call until the list
@@ -74,10 +74,10 @@ module Google
         # Request to update an active breakpoint.
         # @!attribute [rw] debuggee_id
         #   @return [String]
-        #     Identifies the debuggee being debugged.
+        #     Required. Identifies the debuggee being debugged.
         # @!attribute [rw] breakpoint
         #   @return [Google::Devtools::Clouddebugger::V2::Breakpoint]
-        #     Updated breakpoint information.
+        #     Required. Updated breakpoint information.
         #     The field `id` must be set.
         #     The agent must echo all Breakpoint specification fields in the update.
         class UpdateActiveBreakpointRequest; end

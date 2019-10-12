@@ -5,6 +5,8 @@
 require 'google/protobuf'
 
 require 'google/api/annotations_pb'
+require 'google/api/client_pb'
+require 'google/api/field_behavior_pb'
 require 'google/devtools/clouddebugger/v2/data_pb'
 require 'google/protobuf/empty_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
