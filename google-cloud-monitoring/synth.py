@@ -43,6 +43,13 @@ s.copy(v3_library / 'google-cloud-monitoring.gemspec', merge=ruby.merge_gemspec)
 templates = gcp.CommonTemplates().ruby_library()
 s.copy(templates)
 
+# Update Authentication Guide for multi-service clients
+s.replace(
+    'AUTHENTICATION.md',
+    'Google::Cloud::Monitoring.new',
+    'Google::Cloud::Monitoring::AlertPolicy.new'
+)
+
 # Support for service_address
 s.replace(
     [
