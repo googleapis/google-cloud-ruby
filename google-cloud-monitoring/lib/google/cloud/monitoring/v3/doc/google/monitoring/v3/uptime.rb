@@ -130,6 +130,12 @@ module Google
       #     If this field is specified, enough regions must be provided to include a
       #     minimum of 3 locations.  Not specifying this field will result in Uptime
       #     checks running from all available regions.
+      # @!attribute [rw] is_internal
+      #   @return [true, false]
+      #     If this is `true`, then checks are made only from the 'internal_checkers'.
+      #     If it is `false`, then checks are made only from the 'selected_regions'.
+      #     It is an error to provide 'selected_regions' when is_internal is `true`,
+      #     or to provide 'internal_checkers' when is_internal is `false`.
       # @!attribute [rw] internal_checkers
       #   @return [Array<Google::Monitoring::V3::InternalChecker>]
       #     The internal checkers that this check will egress from. If `is_internal` is

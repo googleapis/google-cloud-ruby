@@ -27,6 +27,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :timeout, :message, 8, "google.protobuf.Duration"
     repeated :content_matchers, :message, 9, "google.monitoring.v3.UptimeCheckConfig.ContentMatcher"
     repeated :selected_regions, :enum, 10, "google.monitoring.v3.UptimeCheckRegion"
+    optional :is_internal, :bool, 15
     repeated :internal_checkers, :message, 14, "google.monitoring.v3.InternalChecker"
     oneof :resource do
       optional :monitored_resource, :message, 3, "google.api.MonitoredResource"
