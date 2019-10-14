@@ -33,177 +33,31 @@ module Google
       #   instance = bigtable.instance("my-instance")
       #   table = instance.table("my-table")
       #
-      #   # Update
       #   column_family = table.column_families["cf2"]
-      #   column_family.gc_rule = Google::Cloud::Bigtable::GcRule.max_age(600)
-      #   column_family.update
-      #
-      #   # Delete
-      #   column_family = table.column_families["cf3"]
-      #   column_family.delete
+      #   puts column_family.gc_rule
       #
       class ColumnFamily
-        # @private
-        # The gRPC Service object
-        attr_accessor :service
-
-        # @private
-        attr_accessor :instance_id
-
-        # @private
-        attr_accessor :table_id
-
-        # Column family name
+        # Name of the column family
+        # @return [String]
         attr_reader :name
 
+        # The garbage collection rule to be used for the column family.
+        # Optional. The service default value will be used when not specified.
+        # @return [Google::Cloud::Bigtable::GcRule, nil]
+        attr_accessor :gc_rule
+
         # @private
-        #
-        # Create instance of ColumnFamily
-        # @param service [Google::Cloud::Bigtable::Service]
-        # @param grpc [Google::Bigtable::Admin::V2::ColumnFamily]
-        # @param name [String] Name of the column family
-        #
-        def initialize service, grpc: nil, name: nil
-          @service = service
-          @grpc = grpc || Google::Bigtable::Admin::V2::ColumnFamily.new
+        def initialize name, gc_rule: nil
           @name = name
+          @gc_rule = gc_rule
         end
 
-        ##
-        # Set Column Family garbage collection rules
-        #
-        # @param rule [Google::Cloud::Bigtable::GcRule, nil] the new rule, or
-        #   `nil` for the service default value.
-        #
-        def gc_rule= rule
-          @grpc.gc_rule = rule.nil? ? nil : rule.to_grpc
-        end
-
-        ##
-        # Get garbage collection rule
-        #
-        # @return [Google::Cloud::Bigtable::GcRule]
-        #
-        def gc_rule
-          GcRule.from_grpc(@grpc.gc_rule) if @grpc.gc_rule
-        end
-
-        ##
-        # Create column family
-        #
-        # @return [Google::Cloud::Bigtable::ColumnFamily]
-        #
-        # @example
-        #   require "google/cloud/bigtable"
-        #
-        #   bigtable = Google::Cloud::Bigtable.new
-        #
-        #   instance = bigtable.instance("my-instance")
-        #   table = instance.table("my-table")
-        #
-        #   gc_rule = Google::Cloud::Bigtable::GcRule.max_versions(3)
-        #   cf = table.column_family("cf", gc_rule)
-        #   cf.create
-        #
-        def create
-          modify_column_family(self.class.create_modification(name, gc_rule))
-        end
-
-        ##
-        # Update column family
-        #
-        # @return [Google::Cloud::Bigtable::ColumnFamily]
-        #
-        # @example
-        #   require "google/cloud/bigtable"
-        #
-        #   bigtable = Google::Cloud::Bigtable.new
-        #
-        #   instance = bigtable.instance("my-instance")
-        #   table = instance.table("my-table")
-        #
-        #   column_family = table.column_families["cf1"]
-        #   column_family.gc_rule = Google::Cloud::Bigtable::GcRule.max_age(600)
-        #   column_family.save
-        #
-        def save
-          modify_column_family(self.class.update_modification(name, gc_rule))
-        end
-        alias update save
-
-        ##
-        # Permanently delete column family from table
-        #
-        # @return [Boolean] Returns true if the column family was deleted.
-        #
-        # @example
-        #   require "google/cloud/bigtable"
-        #
-        #   bigtable = Google::Cloud::Bigtable.new
-        #
-        #   instance = bigtable.instance("my-instance")
-        #   table = instance.table("my-table")
-        #
-        #   column_family = table.column_families["cf1"]
-        #   column_family.delete
-        #
-        def delete
-          modify_column_family(self.class.drop_modification(name)).nil?
-        end
-
-        ##
-        # Create gPRC instance to create column family modification
-        #
-        # @param name [String] Column family name
-        # @param gc_rule [Google::Cloud::Bigtable::GcRule] The garbage
-        #   collection rule to be used for the column family. Optional. The
-        #   service default value will be used when not specified.
-        # @return [Google::Bigtable::Admin::V2::ModifyColumnFamiliesRequest::Modification]
-        #
-        # @example
-        #   require "google/cloud/bigtable"
-        #
-        #   Google::Cloud::Bigtable::ColumnFamily.create_modification(
-        #     "cf1", Google::Cloud::Bigtable::GcRule.max_age(600)
-        #   )
-        #
-        def self.create_modification name, gc_rule
-          column_modification_grpc(:create, name, gc_rule)
-        end
-
-        ##
-        # Create update column family modification gPRC instance
-        #
-        # @param name [String] Column family name
-        # @param gc_rule [Google::Cloud::Bigtable::GcRule] The garbage
-        #   collection rule to be used for the column family. Optional. The
-        #   service default value will be used when not specified.
-        # @return [Google::Bigtable::Admin::V2::ModifyColumnFamiliesRequest::Modification]
-        #
-        # @example
-        #   require "google/cloud/bigtable"
-        #
-        #   Google::Cloud::Bigtable::ColumnFamily.update_modification(
-        #     "cf1", Google::Cloud::Bigtable::GcRule.max_age(600)
-        #   )
-        #
-        def self.update_modification name, gc_rule
-          column_modification_grpc(:update, name, gc_rule)
-        end
-
-        ##
-        # Create drop column family modification gRPC instance
-        #
-        # @param name [String] Column family name
-        # @return [Google::Bigtable::Admin::V2::ModifyColumnFamiliesRequest::Modification]
-        #
-        # @example
-        #   require "google/cloud/bigtable"
-        #
-        #   Google::Cloud::Bigtable::ColumnFamily.drop_modification("cf1")
-        #
-        def self.drop_modification name
-          column_modification_grpc(:drop, name)
+        # @private
+        # @return [Google::Bigtable::Admin::V2::ColumnFamily]
+        def to_grpc
+          grpc = Google::Bigtable::Admin::V2::ColumnFamily.new
+          grpc.gc_rule = gc_rule.to_grpc if gc_rule
+          grpc
         end
 
         # @private
@@ -212,78 +66,13 @@ module Google
         # Google::Bigtable::Admin::V2::ColumnFamily.
         #
         # @param grpc [Google::Bigtable::Admin::V2::ColumnFamily]
-        # @param service [Google::Cloud::Bigtable::Service]
         # @param name [String] Column family name
-        # @param instance_id [String]
-        # @param table_id [String]
         # @return [Google::Cloud::Bigtable::ColumnFamily]
         #
-        def self.from_grpc \
-            grpc,
-            service,
-            name: nil,
-            instance_id: nil,
-            table_id: nil
-          new(service, grpc: grpc, name: name).tap do |cf|
-            cf.table_id = table_id
-            cf.instance_id = instance_id
+        def self.from_grpc grpc, name
+          new(name).tap do |cf|
+            cf.gc_rule = GcRule.from_grpc(grpc.gc_rule) if grpc.gc_rule
           end
-        end
-
-        # @private
-        #
-        # Create column family modification gRPC instance
-        #
-        # @param type [Symbol] Type of modification.
-        #   Valid values are `:create`, `:update`, `drop`
-        # @param family_name [String] Column family name
-        # @param gc_rule [Google::Cloud::Bigtable::GcRule] The garbage
-        #   collection rule to be used for the column family. Optional. The
-        #   service default value will be used when not specified.
-        # @return [Google::Bigtable::Admin::V2::ModifyColumnFamiliesRequest::Modification]
-        #
-        def self.column_modification_grpc type, family_name, gc_rule = nil
-          attrs = { id: family_name }
-
-          attrs[type] = if type == :drop
-                          true
-                        else
-                          cf = Google::Bigtable::Admin::V2::ColumnFamily.new
-                          cf.gc_rule = gc_rule.to_grpc if gc_rule
-                          cf
-                        end
-
-          Google::Bigtable::Admin::V2::ModifyColumnFamiliesRequest:: \
-              Modification.new(attrs)
-        end
-
-        protected
-
-        # @private
-        #
-        # Create/Update/Delete column_family
-        #
-        # @param modification [Google::Bigtable::Admin::V2::ModifyColumnFamiliesRequest::Modification]
-        # @return [Google::Cloud::Bigtable::ColumnFamily]
-        #
-        def modify_column_family modification
-          ensure_service!
-          table = Table.modify_column_families(
-            service,
-            instance_id,
-            table_id,
-            modification
-          )
-          table.column_families[name]
-        end
-
-        # @private
-        #
-        # Raise an error unless an active connection to the service is
-        # available
-        #
-        def ensure_service!
-          raise "Must have active connection to service" unless service
         end
       end
     end

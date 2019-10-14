@@ -22,7 +22,7 @@ describe Google::Cloud::Bigtable::Table::ColumnFamilyMap, :mock_bigtable do
   let(:table_id) { "test-table" }
 
   it "adds a column family" do
-    cfs_map = Google::Cloud::Bigtable::Table::ColumnFamilyMap.new(bigtable.service, instance_id, table_id)
+    cfs_map = Google::Cloud::Bigtable::Table::ColumnFamilyMap.new
     cfs_map.must_be :empty?
 
     cf_name = "new-cf"
@@ -37,7 +37,7 @@ describe Google::Cloud::Bigtable::Table::ColumnFamilyMap, :mock_bigtable do
   end
 
   it "adds a column family without gc_rule" do
-    cfs_map = Google::Cloud::Bigtable::Table::ColumnFamilyMap.new(bigtable.service, instance_id, table_id)
+    cfs_map = Google::Cloud::Bigtable::Table::ColumnFamilyMap.new
     cfs_map.must_be :empty?
 
     cf_name = "new-cf"

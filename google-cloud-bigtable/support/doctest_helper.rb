@@ -577,6 +577,7 @@ YARD::Doctest.configure do |doctest|
     mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
       mocked_instances.expect :get_instance, instance_resp, ["projects/my-project/instances/my-instance"]
       mocked_tables.expect :get_table, table_resp, ["projects/my-project/instances/my-instance/tables/my-table", Hash]
+      mocked_tables.expect :modify_column_families, table_resp, ["projects/my-project/instances/my-instance/tables/my-table", Array]
     end
   end
 
@@ -652,6 +653,14 @@ YARD::Doctest.configure do |doctest|
       mocked_tables.expect :check_consistency, OpenStruct.new(consistent: true), ["projects/my-project/instances/my-instance/tables/my-table", "123"]
       mocked_tables.expect :generate_consistency_token, OpenStruct.new(consistency_token: "123"), ["projects/my-project/instances/my-instance/tables/my-table"]
       mocked_tables.expect :check_consistency, OpenStruct.new(consistent: true), ["projects/my-project/instances/my-instance/tables/my-table", "123"]
+    end
+  end
+
+  doctest.before "Google::Cloud::Bigtable::Table::ColumnFamiliesUpdater" do
+    mock_bigtable do |mock, mocked_instances, mocked_tables|
+      mocked_instances.expect :get_instance, instance_resp, ["projects/my-project/instances/my-instance"]
+      mocked_tables.expect :get_table, table_resp, ["projects/my-project/instances/my-instance/tables/my-table", Hash]
+      mocked_tables.expect :modify_column_families, table_resp, ["projects/my-project/instances/my-instance/tables/my-table", Array]
     end
   end
 

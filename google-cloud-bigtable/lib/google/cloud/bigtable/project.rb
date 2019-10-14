@@ -518,64 +518,6 @@ module Google
           true
         end
 
-        ##
-        # Performs a series of column family modifications on the specified table.
-        # Either all or none of the modifications will occur before this method
-        # returns, but data requests received prior to that point may see a table
-        # where only some modifications have taken effect.
-        #
-        # @param instance_id [String]
-        #   The unique ID of the instance the table is in.
-        # @param table_id [String]
-        #   The unique Id of the table whose families should be modified.
-        # @param modifications [Array<Google::Bigtable::Admin::V2::ModifyColumnFamiliesRequest::Modification> | Google::Bigtable::Admin::V2::ModifyColumnFamiliesRequest::Modification]
-        #   Modifications to be atomically applied to the specified table's families.
-        #   Entries are applied in order, meaning that earlier modifications can be
-        #   masked by later ones (in the case of repeated updates to the same family,
-        #   for example).
-        # @return [Google::Cloud::Bigtable::Table] Table with updated column families.
-        #
-        # @example
-        #   require "google/cloud/bigtable"
-        #
-        #   bigtable = Google::Cloud::Bigtable.new
-        #
-        #   modifications = []
-        #   modifications << Google::Cloud::Bigtable::ColumnFamily.create_modification(
-        #     "cf1", Google::Cloud::Bigtable::GcRule.max_age(600)
-        #   )
-        #
-        #   modifications << Google::Cloud::Bigtable::ColumnFamily.update_modification(
-        #     "cf2", Google::Cloud::Bigtable::GcRule.max_versions(5)
-        #   )
-        #
-        #   gc_rule_1 = Google::Cloud::Bigtable::GcRule.max_versions(3)
-        #   gc_rule_2 = Google::Cloud::Bigtable::GcRule.max_age(600)
-        #   modifications << Google::Cloud::Bigtable::ColumnFamily.update_modification(
-        #     "cf3", Google::Cloud::Bigtable::GcRule.union(gc_rule_1, gc_rule_2)
-        #   )
-        #
-        #   max_age_gc_rule = Google::Cloud::Bigtable::GcRule.max_age(300)
-        #   modifications << Google::Cloud::Bigtable::ColumnFamily.update_modification(
-        #     "cf4", Google::Cloud::Bigtable::GcRule.union(max_age_gc_rule)
-        #   )
-        #
-        #   modifications << Google::Cloud::Bigtable::ColumnFamily.drop_modification("cf5")
-        #
-        #   table = bigtable.modify_column_families("my-instance", "my-table", modifications)
-        #
-        #   puts table.column_families
-        #
-        def modify_column_families instance_id, table_id, modifications
-          ensure_service!
-          Table.modify_column_families(
-            service,
-            instance_id,
-            table_id,
-            modifications
-          )
-        end
-
         protected
 
         # @private

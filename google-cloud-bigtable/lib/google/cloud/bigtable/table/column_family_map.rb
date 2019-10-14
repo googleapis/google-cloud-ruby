@@ -59,22 +59,9 @@ module Google
         #
         class ColumnFamilyMap < DelegateClass(::Hash)
           # @private
-          # The gRPC Service object
-          attr_reader :service
-
-          # @private
-          attr_reader :instance_id
-
-          # @private
-          attr_reader :table_id
-
-          # @private
           # Create a new ColumnFamilyMap.
-          def initialize service, instance_id, table_id, value = {}
+          def initialize value = {}
             super(value)
-            @service = service
-            @instance_id = instance_id
-            @table_id = table_id
           end
 
           ##
@@ -104,21 +91,9 @@ module Google
           #   puts table
           #
           def add name, gc_rule = nil
-            cf = Google::Cloud::Bigtable::ColumnFamily.new service, name: name
-            cf.instance_id = instance_id
-            cf.table_id = table_id
-            cf.gc_rule = gc_rule
+            cf = Google::Cloud::Bigtable::ColumnFamily.new name
+            cf.gc_rule = gc_rule if gc_rule
             self[name] = cf
-          end
-
-          ##
-          # Removes a column family from the map.
-          #
-          # @param name [String] Column family name
-          # @return [Google::Bigtable::Admin::V2::ColumnFamily]
-          #
-          def remove name
-            delete(name)
           end
 
           # @private
@@ -127,21 +102,12 @@ module Google
           #   `Google::Bigtable::Admin::V2::Table#column_families`.
           # @return [Google::Cloud::Bigtable::Table::ColumnFamilyMap]
           #
-          def self.from_grpc grpc, service, instance_id, table_id
+          def self.from_grpc grpc
             new(
-              service,
-              instance_id,
-              table_id,
               grpc.map do |name, cf_grpc|
                 [
                   name,
-                  ColumnFamily.from_grpc(
-                    cf_grpc,
-                    service,
-                    name: name,
-                    instance_id: instance_id,
-                    table_id: table_id
-                  )
+                  ColumnFamily.from_grpc(cf_grpc, name)
                 ]
               end.to_h
             )
