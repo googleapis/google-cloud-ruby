@@ -221,7 +221,7 @@ module Google
           # `debuggee_id` value changing upon re-registration.
           #
           # @param debuggee [Google::Devtools::Clouddebugger::V2::Debuggee | Hash]
-          #   Debuggee information to register.
+          #   Required. Debuggee information to register.
           #   The fields `project`, `uniquifier`, `description` and `agent_version`
           #   of the debuggee must be set.
           #   A hash of the same form as `Google::Devtools::Clouddebugger::V2::Debuggee`
@@ -269,7 +269,7 @@ module Google
           # setting those breakpoints again.
           #
           # @param debuggee_id [String]
-          #   Identifies the debuggee.
+          #   Required. Identifies the debuggee.
           # @param wait_token [String]
           #   A token that, if specified, blocks the method call until the list
           #   of active breakpoints has changed, or a server-selected timeout has
@@ -324,9 +324,9 @@ module Google
           # or snapping the location to the correct line of code.
           #
           # @param debuggee_id [String]
-          #   Identifies the debuggee being debugged.
+          #   Required. Identifies the debuggee being debugged.
           # @param breakpoint [Google::Devtools::Clouddebugger::V2::Breakpoint | Hash]
-          #   Updated breakpoint information.
+          #   Required. Updated breakpoint information.
           #   The field `id` must be set.
           #   The agent must echo all Breakpoint specification fields in the update.
           #   A hash of the same form as `Google::Devtools::Clouddebugger::V2::Breakpoint`
