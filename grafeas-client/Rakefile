@@ -30,12 +30,7 @@ end
 namespace :test do
   desc "Runs tests with coverage."
   task :coverage do
-    require "simplecov"
-    SimpleCov.start do
-      command_name "grafeas"
-      track_files "lib/**/*.rb"
-      add_filter "test/"
-    end
+    ENV["COVERAGE"] = "run"
 
     Rake::Task["test"].invoke
   end
@@ -54,12 +49,7 @@ end
 namespace :smoke_test do
   desc "Runs smoke tests with coverage."
   task :coverage do
-    require "simplecov"
-    SimpleCov.start do
-      command_name "grafeas-client"
-      track_files "lib/**/*.rb"
-      add_filter "test/"
-    end
+    ENV["COVERAGE"] = "run"
 
     Rake::Task[:smoke_test].invoke
   end
@@ -109,6 +99,9 @@ namespace :acceptance do
 
   desc "Run acceptance tests with coverage."
   task :coverage do
+    ENV["COVERAGE"] = "run"
+
+    Rake::Task[:acceptance].invoke
   end
 
   desc "Run acceptance cleanup."

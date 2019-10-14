@@ -28,12 +28,7 @@ end
 namespace :test do
   desc "Runs tests with coverage."
   task :coverage do
-    require "simplecov"
-    SimpleCov.start do
-      command_name "google-cloud-vision"
-      track_files "lib/**/*.rb"
-      add_filter "test/"
-    end
+    ENV["COVERAGE"] = "run"
 
     Rake::Task["test"].invoke
   end
@@ -49,12 +44,7 @@ end
 namespace :smoke_test do
   desc "Runs smoke tests with coverage."
   task :coverage do
-    require "simplecov"
-    SimpleCov.start do
-      command_name "google-cloud-vision"
-      track_files "lib/**/*.rb"
-      add_filter "test/"
-    end
+    ENV["COVERAGE"] = "run"
 
     Rake::Task["smoke_test"].invoke
   end
@@ -100,6 +90,9 @@ namespace :acceptance do
 
   desc "Run acceptance tests with coverage."
   task :coverage do
+    ENV["COVERAGE"] = "run"
+
+    Rake::Task["acceptance"].invoke
   end
 
   desc "Run acceptance cleanup."
@@ -153,7 +146,7 @@ task :generate_partials do
       method_name += "_detection" unless method_name.include? "detection"
       helper_hash[method_name] = feature_type
     end
-    
+
     # Prepare ProductSearch helpers
     require "google/cloud/vision/#{version}/product_search_client"
     class_methods = Google::Cloud::Vision.const_get(version.capitalize)::ProductSearchClient.methods false

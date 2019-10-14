@@ -28,12 +28,7 @@ end
 namespace :test do
   desc "Runs tests with coverage."
   task :coverage do
-    require "simplecov"
-    SimpleCov.start do
-      command_name "google-cloud-scheduler"
-      track_files "lib/**/*.rb"
-      add_filter "test/"
-    end
+    ENV["COVERAGE"] = "run"
 
     Rake::Task["test"].invoke
   end

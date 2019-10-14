@@ -27,7 +27,7 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency "autotest-suffix", "~> 1.1"
   gem.add_development_dependency "redcarpet", "~> 3.0"
   gem.add_development_dependency "rubocop", "~> 0.64.0"
-  gem.add_development_dependency "simplecov", "~> 0.9"
+  gem.add_development_dependency "simplecov", "~> 0.17"
   gem.add_development_dependency "yard", "~> 0.9"
   gem.add_development_dependency "yard-doctest", "~> 0.1.13"
 end

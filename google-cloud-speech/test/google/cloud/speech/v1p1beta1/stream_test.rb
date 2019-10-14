@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require "minitest/autorun"
+require "helper"
 
 require "google/cloud/speech/v1p1beta1"
 require "google/cloud/speech/v1p1beta1/cloud_speech_services_pb"

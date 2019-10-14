@@ -15,14 +15,7 @@ end
 namespace :test do
   desc "Run tests with coverage."
   task :coverage do
-    require "simplecov"
-    SimpleCov.start do
-      command_name "google-cloud-datastore"
-      track_files "lib/**/*.rb"
-      add_filter "test/"
-      add_filter "lib/google/datastore/"
-      add_filter "lib/google/cloud/datastore/v1/"
-    end
+    ENV["COVERAGE"] = "run"
 
     Rake::Task[:test].invoke
   end

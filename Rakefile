@@ -70,9 +70,11 @@ namespace :test do
       command_name :coverage
       track_files "lib/**/*.rb"
       add_filter "test/"
-      valid_gems_with_coverage_filters.each do |gem, filters|
-        filters.each { |filter| add_filter filter }
+      valid_gems.each do |gem|
         add_group gem, "#{gem}/lib"
+        add_filter %r{#{gem}/lib/(.*)/doc/(.*)}
+        add_filter %r{#{gem}/lib/(.*)_pb.rb}
+        add_filter "#{gem}/test/"
       end
     end
 
@@ -166,7 +168,12 @@ namespace :acceptance do
       command_name :coverage
       track_files "lib/**/*.rb"
       add_filter "acceptance/"
-      valid_gems.each { |gem| add_group gem, "#{gem}/lib" }
+      valid_gems.each do |gem|
+        add_group gem, "#{gem}/lib"
+        add_filter %r{#{gem}/lib/(.*)/doc/(.*)}
+        add_filter %r{#{gem}/lib/(.*)_pb.rb}
+        add_filter "#{gem}/acceptance/"
+      end
     end
 
     header "Running acceptance tests and coverage report"
@@ -609,7 +616,7 @@ end
 
 def update_supported_ruby_versions
   readme_text = ""
-  File.open "./README.md", "r+" do |f| 
+  File.open "./README.md", "r+" do |f|
     readme_text = f.read
   end
 
@@ -618,7 +625,7 @@ def update_supported_ruby_versions
   new_content = readme_text.gsub /#{ruby_version_text}(.*)\+/,
                                  "#{ruby_version_text}#{earliest_ruby}+"
 
-  File.open "./README.md", "w" do |f| 
+  File.open "./README.md", "w" do |f|
     f.write new_content
   end
 end
@@ -642,21 +649,6 @@ end
 
 def gapic_gems
   gems.select { |gem| File.exist? "#{gem}/synth.py" }
-end
-
-def valid_gems_with_coverage_filters
-  coverage_override = {
-    "google-cloud-datastore" => ["google-cloud-datastore/test/", "google-cloud-datastore/lib/google/datastore/", "google-cloud-datastore/lib/google/cloud/datastore/v1/"],
-    "google-cloud-language" => ["google-cloud-language/test/", "google-cloud-language/lib/google/cloud/language/v1/"],
-    "google-cloud-logging" => ["google-cloud-logging/test/", "google-cloud-logging/lib/google/logging/", "google-cloud-logging/lib/google/cloud/logging/v2/"],
-    "google-cloud-pubsub" => ["google-cloud-pubsub/test/", "google-cloud-pubsub/lib/google/pubsub/", "google-cloud-pubsub/lib/google/cloud/pubsub/v1/"],
-    "google-cloud-spanner" => ["google-cloud-spanner/test/", "google-cloud-spanner/lib/google/spanner/", "google-cloud-spanner/lib/google/cloud/spanner/v1/", "google-cloud-spanner/lib/google/cloud/spanner/admin/instance/v1/", "google-cloud-spanner/lib/google/cloud/spanner/admin/database/v1/"],
-    "google-cloud-speech" => ["google-cloud-speech/test/", "google-cloud-speech/lib/google/cloud/speech/v1/"],
-    "google-cloud-vision" => ["google-cloud-vision/test/", "google-cloud-vision/lib/google/cloud/vision/v1/"]
-  }
-
-  coverage = Hash[valid_gems.map { |gem| [gem, ["#{gem}/test/"]] }]
-  coverage.merge coverage_override
 end
 
 def header str, token = "#"

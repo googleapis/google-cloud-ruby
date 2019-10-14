@@ -15,14 +15,7 @@ end
 namespace :test do
   desc "Run tests with coverage."
   task :coverage do
-    require "simplecov"
-    SimpleCov.start do
-      command_name "google-cloud-logging"
-      track_files "lib/**/*.rb"
-      add_filter "test/"
-      add_filter "lib/google/logging/"
-      add_filter "lib/google/cloud/logging/v2/"
-    end
+    ENV["COVERAGE"] = "run"
 
     Rake::Task[:test].invoke
   end
@@ -59,12 +52,7 @@ end
 namespace :acceptance do
   desc "Run acceptance tests with coverage."
   task :coverage, :project, :keyfile do |t, args|
-    require "simplecov"
-    SimpleCov.start do
-      command_name "google-cloud-logging"
-      track_files "lib/**/*.rb"
-      add_filter "acceptance/"
-    end
+    ENV["COVERAGE"] = "run"
 
     Rake::Task[:acceptance].invoke
   end
