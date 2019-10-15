@@ -187,6 +187,11 @@ module Google
               &Google::Devtools::Clouddebugger::V2::Controller2::Stub.method(:new)
             )
 
+            @update_active_breakpoint = Google::Gax.create_api_call(
+              @controller2_stub.method(:update_active_breakpoint),
+              defaults["update_active_breakpoint"],
+              exception_transformer: exception_transformer
+            )
             @register_debuggee = Google::Gax.create_api_call(
               @controller2_stub.method(:register_debuggee),
               defaults["register_debuggee"],
@@ -200,14 +205,59 @@ module Google
                 {'debuggee_id' => request.debuggee_id}
               end
             )
-            @update_active_breakpoint = Google::Gax.create_api_call(
-              @controller2_stub.method(:update_active_breakpoint),
-              defaults["update_active_breakpoint"],
-              exception_transformer: exception_transformer
-            )
           end
 
           # Service calls
+
+          # Updates the breakpoint state or mutable fields.
+          # The entire Breakpoint message must be sent back to the controller service.
+          #
+          # Updates to active breakpoint fields are only allowed if the new value
+          # does not change the breakpoint specification. Updates to the `location`,
+          # `condition` and `expressions` fields should not alter the breakpoint
+          # semantics. These may only make changes such as canonicalizing a value
+          # or snapping the location to the correct line of code.
+          #
+          # @param debuggee_id [String]
+          #   Required. Identifies the debuggee being debugged.
+          # @param breakpoint [Google::Devtools::Clouddebugger::V2::Breakpoint | Hash]
+          #   Required. Updated breakpoint information.
+          #   The field `id` must be set.
+          #   The agent must echo all Breakpoint specification fields in the update.
+          #   A hash of the same form as `Google::Devtools::Clouddebugger::V2::Breakpoint`
+          #   can also be provided.
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Devtools::Clouddebugger::V2::UpdateActiveBreakpointResponse]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
+          # @return [Google::Devtools::Clouddebugger::V2::UpdateActiveBreakpointResponse]
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/debugger/v2"
+          #
+          #   controller2_client = Google::Cloud::Debugger::V2::Controller2.new
+          #
+          #   # TODO: Initialize `debuggee_id`:
+          #   debuggee_id = ''
+          #
+          #   # TODO: Initialize `breakpoint`:
+          #   breakpoint = {}
+          #   response = controller2_client.update_active_breakpoint(debuggee_id, breakpoint)
+
+          def update_active_breakpoint \
+              debuggee_id,
+              breakpoint,
+              options: nil,
+              &block
+            req = {
+              debuggee_id: debuggee_id,
+              breakpoint: breakpoint
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Devtools::Clouddebugger::V2::UpdateActiveBreakpointRequest)
+            @update_active_breakpoint.call(req, options, &block)
+          end
 
           # Registers the debuggee with the controller service.
           #
@@ -312,56 +362,6 @@ module Google
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Devtools::Clouddebugger::V2::ListActiveBreakpointsRequest)
             @list_active_breakpoints.call(req, options, &block)
-          end
-
-          # Updates the breakpoint state or mutable fields.
-          # The entire Breakpoint message must be sent back to the controller service.
-          #
-          # Updates to active breakpoint fields are only allowed if the new value
-          # does not change the breakpoint specification. Updates to the `location`,
-          # `condition` and `expressions` fields should not alter the breakpoint
-          # semantics. These may only make changes such as canonicalizing a value
-          # or snapping the location to the correct line of code.
-          #
-          # @param debuggee_id [String]
-          #   Required. Identifies the debuggee being debugged.
-          # @param breakpoint [Google::Devtools::Clouddebugger::V2::Breakpoint | Hash]
-          #   Required. Updated breakpoint information.
-          #   The field `id` must be set.
-          #   The agent must echo all Breakpoint specification fields in the update.
-          #   A hash of the same form as `Google::Devtools::Clouddebugger::V2::Breakpoint`
-          #   can also be provided.
-          # @param options [Google::Gax::CallOptions]
-          #   Overrides the default settings for this call, e.g, timeout,
-          #   retries, etc.
-          # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result [Google::Devtools::Clouddebugger::V2::UpdateActiveBreakpointResponse]
-          # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @return [Google::Devtools::Clouddebugger::V2::UpdateActiveBreakpointResponse]
-          # @raise [Google::Gax::GaxError] if the RPC is aborted.
-          # @example
-          #   require "google/cloud/debugger/v2"
-          #
-          #   controller2_client = Google::Cloud::Debugger::V2::Controller2.new
-          #
-          #   # TODO: Initialize `debuggee_id`:
-          #   debuggee_id = ''
-          #
-          #   # TODO: Initialize `breakpoint`:
-          #   breakpoint = {}
-          #   response = controller2_client.update_active_breakpoint(debuggee_id, breakpoint)
-
-          def update_active_breakpoint \
-              debuggee_id,
-              breakpoint,
-              options: nil,
-              &block
-            req = {
-              debuggee_id: debuggee_id,
-              breakpoint: breakpoint
-            }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Devtools::Clouddebugger::V2::UpdateActiveBreakpointRequest)
-            @update_active_breakpoint.call(req, options, &block)
           end
         end
       end

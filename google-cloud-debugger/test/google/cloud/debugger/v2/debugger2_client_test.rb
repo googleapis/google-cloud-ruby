@@ -67,6 +67,95 @@ end
 
 describe Google::Cloud::Debugger::V2::Debugger2Client do
 
+  describe 'delete_breakpoint' do
+    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Debugger::V2::Debugger2Client#delete_breakpoint."
+
+    it 'invokes delete_breakpoint without error' do
+      # Create request parameters
+      debuggee_id = ''
+      breakpoint_id = ''
+      client_version = ''
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Devtools::Clouddebugger::V2::DeleteBreakpointRequest, request)
+        assert_equal(debuggee_id, request.debuggee_id)
+        assert_equal(breakpoint_id, request.breakpoint_id)
+        assert_equal(client_version, request.client_version)
+        OpenStruct.new(execute: nil)
+      end
+      mock_stub = MockGrpcClientStub_v2.new(:delete_breakpoint, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockDebugger2Credentials_v2.new("delete_breakpoint")
+
+      Google::Devtools::Clouddebugger::V2::Debugger2::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Debugger::V2::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Debugger::V2::Debugger2.new
+
+          # Call method
+          response = client.delete_breakpoint(
+            debuggee_id,
+            breakpoint_id,
+            client_version
+          )
+
+          # Verify the response
+          assert_nil(response)
+
+          # Call method with block
+          client.delete_breakpoint(
+            debuggee_id,
+            breakpoint_id,
+            client_version
+          ) do |response, operation|
+            # Verify the response
+            assert_nil(response)
+            refute_nil(operation)
+          end
+        end
+      end
+    end
+
+    it 'invokes delete_breakpoint with error' do
+      # Create request parameters
+      debuggee_id = ''
+      breakpoint_id = ''
+      client_version = ''
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Devtools::Clouddebugger::V2::DeleteBreakpointRequest, request)
+        assert_equal(debuggee_id, request.debuggee_id)
+        assert_equal(breakpoint_id, request.breakpoint_id)
+        assert_equal(client_version, request.client_version)
+        raise custom_error
+      end
+      mock_stub = MockGrpcClientStub_v2.new(:delete_breakpoint, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockDebugger2Credentials_v2.new("delete_breakpoint")
+
+      Google::Devtools::Clouddebugger::V2::Debugger2::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Debugger::V2::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Debugger::V2::Debugger2.new
+
+          # Call method
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2 do
+            client.delete_breakpoint(
+              debuggee_id,
+              breakpoint_id,
+              client_version
+            )
+          end
+
+          # Verify the GaxError wrapped the custom error that was raised.
+          assert_match(custom_error.message, err.message)
+        end
+      end
+    end
+  end
+
   describe 'set_breakpoint' do
     custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Debugger::V2::Debugger2Client#set_breakpoint."
 
@@ -240,95 +329,6 @@ describe Google::Cloud::Debugger::V2::Debugger2Client do
           # Call method
           err = assert_raises Google::Gax::GaxError, CustomTestError_v2 do
             client.get_breakpoint(
-              debuggee_id,
-              breakpoint_id,
-              client_version
-            )
-          end
-
-          # Verify the GaxError wrapped the custom error that was raised.
-          assert_match(custom_error.message, err.message)
-        end
-      end
-    end
-  end
-
-  describe 'delete_breakpoint' do
-    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Debugger::V2::Debugger2Client#delete_breakpoint."
-
-    it 'invokes delete_breakpoint without error' do
-      # Create request parameters
-      debuggee_id = ''
-      breakpoint_id = ''
-      client_version = ''
-
-      # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Devtools::Clouddebugger::V2::DeleteBreakpointRequest, request)
-        assert_equal(debuggee_id, request.debuggee_id)
-        assert_equal(breakpoint_id, request.breakpoint_id)
-        assert_equal(client_version, request.client_version)
-        OpenStruct.new(execute: nil)
-      end
-      mock_stub = MockGrpcClientStub_v2.new(:delete_breakpoint, mock_method)
-
-      # Mock auth layer
-      mock_credentials = MockDebugger2Credentials_v2.new("delete_breakpoint")
-
-      Google::Devtools::Clouddebugger::V2::Debugger2::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Debugger::V2::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Debugger::V2::Debugger2.new
-
-          # Call method
-          response = client.delete_breakpoint(
-            debuggee_id,
-            breakpoint_id,
-            client_version
-          )
-
-          # Verify the response
-          assert_nil(response)
-
-          # Call method with block
-          client.delete_breakpoint(
-            debuggee_id,
-            breakpoint_id,
-            client_version
-          ) do |response, operation|
-            # Verify the response
-            assert_nil(response)
-            refute_nil(operation)
-          end
-        end
-      end
-    end
-
-    it 'invokes delete_breakpoint with error' do
-      # Create request parameters
-      debuggee_id = ''
-      breakpoint_id = ''
-      client_version = ''
-
-      # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Devtools::Clouddebugger::V2::DeleteBreakpointRequest, request)
-        assert_equal(debuggee_id, request.debuggee_id)
-        assert_equal(breakpoint_id, request.breakpoint_id)
-        assert_equal(client_version, request.client_version)
-        raise custom_error
-      end
-      mock_stub = MockGrpcClientStub_v2.new(:delete_breakpoint, mock_method)
-
-      # Mock auth layer
-      mock_credentials = MockDebugger2Credentials_v2.new("delete_breakpoint")
-
-      Google::Devtools::Clouddebugger::V2::Debugger2::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Debugger::V2::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Debugger::V2::Debugger2.new
-
-          # Call method
-          err = assert_raises Google::Gax::GaxError, CustomTestError_v2 do
-            client.delete_breakpoint(
               debuggee_id,
               breakpoint_id,
               client_version
