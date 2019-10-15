@@ -1,5 +1,11 @@
 # Release History
 
+### 1.3.2 / 2019-10-14
+
+#### Bug Fixes
+
+* Update Google::Cloud::Config#method_missing to be compatible with Ruby 2.7
+
 ### 1.3.1 / 2019-08-23
 
 #### Documentation
