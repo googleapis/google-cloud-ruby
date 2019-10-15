@@ -59,6 +59,7 @@ google-cloud:
 - v0.20.1
 - v0.20.0
 google-cloud-asset:
+- v0.4.0
 - v0.3.3
 - v0.3.0
 - v0.2.1
