@@ -1,5 +1,15 @@
 # Release History
 
+### 0.8.0 / 2019-10-15
+
+#### Features
+
+* WebhookResponse includes the session_entity_types field
+
+#### Performance Improvements
+
+* Update timeouts for detect_indent
+
 ### 0.7.0 / 2019-10-01
 
 #### Features
