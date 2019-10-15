@@ -4,8 +4,7 @@
 
 #### Bug Fixes
 
-* Ruby 2.7 compatibility
-  * Update Cloud::Config#method_missing to be compatible with
+* Update Google::Cloud::Config#method_missing to be compatible with Ruby 2.7
 
 ### 1.3.1 / 2019-08-23
 
