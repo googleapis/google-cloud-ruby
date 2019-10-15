@@ -45,8 +45,8 @@ RUN git clone https://github.com/rbenv/ruby-build.git "$(rbenv root)"/plugins/ru
 # Install ruby
 ENV RUBY_CONFIGURE_OPTS --disable-install-doc
 RUN echo 'gem: --no-rdoc --no-ri' >> /.gemrc
-RUN rbenv install 2.5.5 && rbenv global 2.5.5 \
-    && gem install bundler --version 1.17.3 && gem install rake
+RUN rbenv install 2.6.5 && rbenv global 2.6.5 \
+    && gem install bundler:1.17.3 bundler:2.0.2 rake
 
 # Install pyenv
 RUN git clone https://github.com/pyenv/pyenv.git ~/.pyenv
@@ -60,8 +60,8 @@ RUN echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> .bashrc
 RUN echo -e 'if command -v pyenv 1>/dev/null 2>&1; then\n  eval "$(pyenv init -)"\nfi' >> ~/.bashrc
 
 # Install python
-RUN pyenv install 3.6.1
-RUN pyenv global 3.6.1
+RUN pyenv install 3.6.9
+RUN pyenv global 3.6.9
 
 # Install nodenv
 RUN git clone https://github.com/nodenv/nodenv.git ~/.nodenv
@@ -76,8 +76,8 @@ RUN mkdir -p "$(nodenv root)"/plugins
 RUN git clone https://github.com/nodenv/node-build.git "$(nodenv root)"/plugins/node-build
 
 # Install nodejs
-RUN nodenv install 10.13.0
-RUN nodenv global 10.13.0
+RUN nodenv install 10.16.3
+RUN nodenv global 10.16.3
 
 # Install docker
 RUN curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -

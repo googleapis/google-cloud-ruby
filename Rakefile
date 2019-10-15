@@ -1,7 +1,7 @@
 require "bundler/setup"
 require "fileutils"
 
-KOKORO_RUBY_VERSIONS = ["2.3.8", "2.4.5", "2.5.5", "2.6.3"].freeze
+KOKORO_RUBY_VERSIONS = ["2.4.9", "2.5.7", "2.6.5"].freeze
 
 task :bundleupdate do
   valid_gems.each do |gem|
