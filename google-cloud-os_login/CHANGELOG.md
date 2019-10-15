@@ -1,5 +1,19 @@
 # Release History
 
+### 0.4.0 / 2019-10-15
+
+#### Features
+
+* Add project_id and system_id arguments to OsLoginServiceClient#get_login_profile
+* Add Common::PosixAccount#operating_system_type (Common::OperatingSystemType)
+* Add Common::PosixAccount#name
+
+#### Documentation and cleanup
+
+* Update access scopes list
+* Update documentation
+* Update product name to include Cloud
+
 ### 0.3.1 / 2019-08-23
 
 #### Documentation
