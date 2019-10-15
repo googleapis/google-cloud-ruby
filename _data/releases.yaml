@@ -144,6 +144,7 @@ google-cloud-container_analysis:
 - v0.3.0
 - v0.1.0
 google-cloud-core:
+- v1.3.2
 - v1.3.0
 - v1.2.7
 - v1.2.6
