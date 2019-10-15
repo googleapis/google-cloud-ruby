@@ -5,13 +5,12 @@
 #### Features
 
 * Add OutputConfig#bigquery_destination
-  * Add OutputConfig#bigquery_destination (BigQueryDestination)
-  * Add ContentType constants
-    * Add ContentType::ORG_POLICY
-    * Add ContentType::ACCESS_POLICY
-  * Update documentation.
-    * Document some fields as required.
-    * Update some documented URLs.
+* Add ContentType::ORG_POLICY and ContentType::ACCESS_POLICY constants
+
+#### Documentation
+
+* Document some fields as required.
+* Update some documented URLs.
 
 ### 0.3.3 / 2019-10-03
 
