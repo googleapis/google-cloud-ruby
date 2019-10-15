@@ -25,7 +25,7 @@ function cleanup() {
 
 cd $REPO_DIR
 
-versions=(2.3.8 2.4.5 2.5.5 2.6.3)
+versions=(2.4.9 2.5.7 2.6.5)
 
 STARTTIME=$(date +%s)
 
@@ -34,7 +34,7 @@ if [[ $JOB_TYPE = "presubmit" ]]; then
     if [[ $COMMIT_MESSAGE = *"[ci skip]"* || $COMMIT_MESSAGE = *"[skip ci]"* ]]; then
         echo "[ci skip] found. Exiting"
     elif [[ $OS = "windows" ]]; then
-            python "${KOKORO_GFILE_DIR}/${TRAMPOLINE_SCRIPT}"
+        python "${KOKORO_GFILE_DIR}/${TRAMPOLINE_SCRIPT}"
     else
         python3 "${KOKORO_GFILE_DIR}/${TRAMPOLINE_SCRIPT}" $version
     fi

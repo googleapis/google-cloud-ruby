@@ -30,7 +30,7 @@ if [[ $JOB_TYPE = "presubmit" ]]; then
     if [[ $COMMIT_MESSAGE = *"[ci skip]"* || $COMMIT_MESSAGE = *"[skip ci]"* ]]; then
         echo "[ci skip] found. Exiting"
     else
-        version=${versions[<%= ruby_versions.size - 2 %>]}
+        version=${versions[<%= ruby_versions.size - 1 %>]}
         if [[ $rvm_versions != *$version* ]]; then
           rvm install $version
         fi
