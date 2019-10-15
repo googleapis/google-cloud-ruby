@@ -1,5 +1,11 @@
 # Release History
 
+### 0.6.1 / 2019-10-15
+
+#### Documentation
+
+* Update documentation (no visible changes)
+
 ### 0.6.0 / 2019-10-03
 
 #### Features
