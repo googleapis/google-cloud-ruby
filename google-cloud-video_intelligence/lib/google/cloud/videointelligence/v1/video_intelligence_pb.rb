@@ -6,6 +6,7 @@ require 'google/protobuf'
 
 require 'google/api/annotations_pb'
 require 'google/api/client_pb'
+require 'google/api/field_behavior_pb'
 require 'google/longrunning/operations_pb'
 require 'google/protobuf/duration_pb'
 require 'google/protobuf/timestamp_pb'
@@ -39,14 +40,14 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.cloud.videointelligence.v1.ShotChangeDetectionConfig" do
     optional :model, :string, 1
   end
-  add_message "google.cloud.videointelligence.v1.ExplicitContentDetectionConfig" do
+  add_message "google.cloud.videointelligence.v1.ObjectTrackingConfig" do
     optional :model, :string, 1
   end
   add_message "google.cloud.videointelligence.v1.FaceDetectionConfig" do
     optional :model, :string, 1
     optional :include_bounding_boxes, :bool, 2
   end
-  add_message "google.cloud.videointelligence.v1.ObjectTrackingConfig" do
+  add_message "google.cloud.videointelligence.v1.ExplicitContentDetectionConfig" do
     optional :model, :string, 1
   end
   add_message "google.cloud.videointelligence.v1.TextDetectionConfig" do
@@ -232,9 +233,9 @@ module Google::Cloud::VideoIntelligence::V1
   VideoContext = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1.VideoContext").msgclass
   LabelDetectionConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1.LabelDetectionConfig").msgclass
   ShotChangeDetectionConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1.ShotChangeDetectionConfig").msgclass
-  ExplicitContentDetectionConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1.ExplicitContentDetectionConfig").msgclass
-  FaceDetectionConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1.FaceDetectionConfig").msgclass
   ObjectTrackingConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1.ObjectTrackingConfig").msgclass
+  FaceDetectionConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1.FaceDetectionConfig").msgclass
+  ExplicitContentDetectionConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1.ExplicitContentDetectionConfig").msgclass
   TextDetectionConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1.TextDetectionConfig").msgclass
   VideoSegment = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1.VideoSegment").msgclass
   LabelSegment = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1.LabelSegment").msgclass
