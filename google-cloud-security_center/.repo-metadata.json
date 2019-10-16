@@ -1,8 +1,5 @@
 {
     "name": "securitycenter",
     "language": "ruby",
-    "distribution_name": "google-cloud-security_center",
-    "module_name": "SecurityCenter",
-    "module_name_credentials": "SecurityCenter::V1",
-    "env_var_prefix": "SECURITY_CENTER"
+    "distribution_name": "google-cloud-security_center"
 }
