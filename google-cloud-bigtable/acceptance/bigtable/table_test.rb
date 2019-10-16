@@ -86,7 +86,6 @@ describe "Instance Tables", :bigtable do
     end
 
     column_families = table.column_families
-    column_families.class.must_equal Google::Cloud::Bigtable::Table::ColumnFamilyMap
     column_families.must_be_kind_of Hash
     column_families.must_be :frozen?
     column_families.count.must_equal 3

@@ -146,10 +146,10 @@ module Google
         end
 
         ##
-        # Returns a frozen ColumnFamilyMap containing the column families
-        # configured for this table, mapped by column family name. Reloads the
-        # table if necessary to retrieve the column families data, since it is
-        # only available in a table with view type `SCHEMA_VIEW` or `FULL`.
+        # Returns a frozen hash containing the column families configured for
+        # the table, mapped by column family name. Reloads the table if
+        # necessary to retrieve the column families data, since it is only
+        # available in a table with view type `SCHEMA_VIEW` or `FULL`.
         #
         # Also accepts a block for making modifications to the table's column
         # families. After the modifications are completed, the table will be
@@ -168,8 +168,8 @@ module Google
         #   modifications can be masked by later ones (in the case of repeated
         #   updates to the same family, for example).
         #
-        # @return [Google::Bigtable::Table::ColumnFamilyMap] A frozen
-        #   ColumnFamilyMap
+        # @return [Hash{String => ColumnFamily}] A frozen hash containing the
+        #   column families for the table, mapped by column family name.
         #
         # @example
         #   require "google/cloud/bigtable"
@@ -219,7 +219,12 @@ module Google
               updater.modifications
             )
           end
-          ColumnFamilyMap.from_grpc(@grpc.column_families).freeze
+          @grpc.column_families.map do |name, cf_grpc|
+            [
+              name,
+              ColumnFamily.from_grpc(cf_grpc, name)
+            ]
+          end.to_h.freeze
         end
 
         ##

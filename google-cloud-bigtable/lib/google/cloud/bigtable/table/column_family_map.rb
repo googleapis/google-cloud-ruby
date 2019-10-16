@@ -97,23 +97,6 @@ module Google
           end
 
           # @private
-          # @param grpc [Hash{String => Google::Bigtable::Admin::V2::ColumnFamily}]
-          #   A hash with column family names as keys, from
-          #   `Google::Bigtable::Admin::V2::Table#column_families`.
-          # @return [Google::Cloud::Bigtable::Table::ColumnFamilyMap]
-          #
-          def self.from_grpc grpc
-            new(
-              grpc.map do |name, cf_grpc|
-                [
-                  name,
-                  ColumnFamily.from_grpc(cf_grpc, name)
-                ]
-              end.to_h
-            )
-          end
-
-          # @private
           # @return [Hash{String => Google::Bigtable::Admin::V2::ColumnFamily}]
           #   A hash with column family names as keys, for
           #   `Google::Bigtable::Admin::V2::Table#column_families`.
