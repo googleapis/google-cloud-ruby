@@ -22,7 +22,7 @@ describe Google::Cloud::Bigtable::AppProfile, :save, :mock_bigtable do
     Google::Bigtable::Admin::V2::AppProfile.new(
       name: app_profile_path(instance_id, app_profile_id),
       description: "Test instance app profile",
-      multi_cluster_routing_use_any: Google::Cloud::Bigtable::AppProfile.multi_cluster_routing
+      multi_cluster_routing_use_any: multi_cluster_routing_grpc
     )
   }
   let(:app_profile) {

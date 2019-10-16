@@ -140,6 +140,10 @@ class MockBigtable < Minitest::Spec
     end
   end
 
+  def multi_cluster_routing_grpc
+    Google::Bigtable::Admin::V2::AppProfile::MultiClusterRoutingUseAny.new
+  end
+
   def table_hash name: nil, cluster_states: nil, column_families: nil, granularity: nil
     {
       name: name,

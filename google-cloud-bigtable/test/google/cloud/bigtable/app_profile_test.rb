@@ -21,11 +21,11 @@ describe Google::Cloud::Bigtable::AppProfile, :mock_bigtable do
 
   it "knows the identifiers" do
     description = "Test instance app profile"
-    routing_policy = Google::Cloud::Bigtable::AppProfile.multi_cluster_routing
+    routing_policy_grpc = multi_cluster_routing_grpc
     app_profile_grpc = Google::Bigtable::Admin::V2::AppProfile.new(
       name: app_profile_path(instance_id, app_profile_id),
       description: description,
-      multi_cluster_routing_use_any: routing_policy
+      multi_cluster_routing_use_any: routing_policy_grpc
     )
 
     app_profile = Google::Cloud::Bigtable::AppProfile.from_grpc(app_profile_grpc, bigtable.service)
@@ -36,8 +36,8 @@ describe Google::Cloud::Bigtable::AppProfile, :mock_bigtable do
     app_profile.name.must_equal app_profile_id
     app_profile.path.must_equal app_profile_path(instance_id, app_profile_id)
     app_profile.description.must_equal description
-    app_profile.multi_cluster_routing.must_equal routing_policy
-    app_profile.routing_policy.must_equal routing_policy
+    app_profile.multi_cluster_routing.to_grpc.must_equal routing_policy_grpc
+    app_profile.routing_policy.to_grpc.must_equal routing_policy_grpc
     app_profile.single_cluster_routing.must_be :nil?
   end
 
@@ -52,8 +52,8 @@ describe Google::Cloud::Bigtable::AppProfile, :mock_bigtable do
     routing_policy = Google::Cloud::Bigtable::AppProfile.multi_cluster_routing
     app_profile.routing_policy = routing_policy
 
-    app_profile.routing_policy.must_be_kind_of Google::Bigtable::Admin::V2::AppProfile::MultiClusterRoutingUseAny
-    app_profile.routing_policy.must_equal routing_policy
+    app_profile.routing_policy.must_be_kind_of Google::Cloud::Bigtable::MultiClusterRoutingUseAny
+    app_profile.routing_policy.to_grpc.must_equal routing_policy.to_grpc
   end
 
   it "set single_cluster_routing policy" do
@@ -70,7 +70,7 @@ describe Google::Cloud::Bigtable::AppProfile, :mock_bigtable do
     )
     app_profile.routing_policy = routing_policy
 
-    app_profile.routing_policy.must_be_kind_of Google::Bigtable::Admin::V2::AppProfile::SingleClusterRouting
-    app_profile.routing_policy.must_equal routing_policy
+    app_profile.routing_policy.must_be_kind_of Google::Cloud::Bigtable::SingleClusterRouting
+    app_profile.routing_policy.to_grpc.must_equal routing_policy.to_grpc
   end
 end

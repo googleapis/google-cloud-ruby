@@ -20,6 +20,7 @@ require "google/cloud/bigtable/instance/list"
 require "google/cloud/bigtable/instance/cluster_map"
 require "google/cloud/bigtable/app_profile"
 require "google/cloud/bigtable/policy"
+require "google/cloud/bigtable/routing_policy"
 
 module Google
   module Cloud
@@ -625,19 +626,21 @@ module Google
         # multi-cluster routing or single cluster routing.
         #
         # @param name [String] Unique Id of the app profile
-        # @param routing_policy [Google::Bigtable::Admin::V2::AppProfile::SingleClusterRouting | Google::Bigtable::Admin::V2::AppProfile::MultiClusterRoutingUseAny]
-        #   The routing policy for all read/write requests that use this app profile.
-        #   A value must be explicitly set.
+        # @param routing_policy [Google::Cloud::Bigtable::RoutingPolicy]
+        #   The routing policy for all read/write requests that use this app
+        #   profile. A value must be explicitly set.
         #
         #   Routing Policies:
-        #   * `multi_cluster_routing` - Read/write requests may be routed to any
-        #     cluster in the instance and will fail over to another cluster in the event
-        #     of transient errors or delays. Choosing this option sacrifices
-        #     read-your-writes consistency to improve availability.
-        #   * `single_cluster_routing` - Unconditionally routes all read/write requests
-        #     to a specific cluster. This option preserves read-your-writes consistency
-        #     but does not improve availability.
-        #     Value contains `cluster_id` and optional field `allow_transactional_writes`.
+        #   * {Google::Cloud::Bigtable::MultiClusterRoutingUseAny} - Read/write
+        #     requests may be routed to any cluster in the instance and will
+        #     fail over to another cluster in the event of transient errors or
+        #     delays. Choosing this option sacrifices read-your-writes
+        #     consistency to improve availability.
+        #   * {Google::Cloud::Bigtable::SingleClusterRouting} - Unconditionally
+        #     routes all read/write requests to a specific cluster. This option
+        #     preserves read-your-writes consistency but does not improve
+        #     availability. Value contains `cluster_id` and optional field
+        #     `allow_transactional_writes`.
         # @param description [String] Description of the use case for this app profile
         # @param etag [String]
         #   Strongly validated etag for optimistic concurrency control. Preserve the
@@ -711,12 +714,13 @@ module Google
             etag: nil,
             ignore_warnings: false
           ensure_service!
-
-          if routing_policy.is_a?(Google::Bigtable::Admin::V2::AppProfile:: \
-              MultiClusterRoutingUseAny)
-            multi_cluster_routing = routing_policy
+          routing_policy_grpc = routing_policy.to_grpc
+          if routing_policy_grpc.is_a?(
+            Google::Bigtable::Admin::V2::AppProfile::MultiClusterRoutingUseAny
+          )
+            multi_cluster_routing = routing_policy_grpc
           else
-            single_cluster_routing = routing_policy
+            single_cluster_routing = routing_policy_grpc
           end
 
           app_profile_attrs = {

@@ -17,6 +17,7 @@
 
 require "google/cloud/bigtable/app_profile/list"
 require "google/cloud/bigtable/app_profile/job"
+require "google/cloud/bigtable/routing_policy"
 
 module Google
   module Cloud
@@ -125,39 +126,48 @@ module Google
         end
 
         ##
-        # Get value of multi-cluster routing policy.
+        # Gets the multi-cluster routing policy, if present.
         #
-        # @return [Google::Bigtable::Admin::V2::AppProfile::MultiClusterRoutingUseAny]
+        # @return [Google::Cloud::Bigtable::MultiClusterRoutingUseAny, nil]
         #
         def multi_cluster_routing
-          @grpc.multi_cluster_routing_use_any
+          return nil unless @grpc.multi_cluster_routing_use_any
+
+          Google::Cloud::Bigtable::MultiClusterRoutingUseAny.new
         end
 
         ##
-        # Get value of single cluster routing policy.
+        # Gets the single cluster routing policy, if present.
         #
-        # @return [Google::Bigtable::Admin::V2::AppProfile::SingleClusterRouting]
+        # @return [Google::Cloud::Bigtable::SingleClusterRouting, nil]
         #
         def single_cluster_routing
-          @grpc.single_cluster_routing
+          return nil unless @grpc.single_cluster_routing
+
+          Google::Cloud::Bigtable::SingleClusterRouting.new(
+            @grpc.single_cluster_routing.cluster_id,
+            @grpc.single_cluster_routing.allow_transactional_writes
+          )
         end
 
         ##
-        # Set routing policy.
+        # Sets the routing policy for the app profile.
         #
-        # @param policy [Google::Bigtable::Admin::V2::AppProfile::SingleClusterRouting | Google::Bigtable::Admin::V2::AppProfile::MultiClusterRoutingUseAny]
-        #   The routing policy for all read/write requests that use this app profile.
-        #   A value must be explicitly set.
+        # @param policy [Google::Cloud::Bigtable::RoutingPolicy]
+        #   The routing policy for all read/write requests that use this app
+        #   profile. A value must be explicitly set.
         #
         #   Routing Policies:
-        #   * `multi_cluster_routing` - Read/write requests may be routed to any
-        #     cluster in the instance and will fail over to another cluster in the event
-        #     of transient errors or delays. Choosing this option sacrifices
-        #     read-your-writes consistency to improve availability.
-        #   * `single_cluster_routing` - Unconditionally routes all read/write requests
-        #     to a specific cluster. This option preserves read-your-writes consistency
-        #     but does not improve availability.
-        #     The value contains `cluster_id` and optional field `allow_transactional_writes`.
+        #   * {Google::Cloud::Bigtable::MultiClusterRoutingUseAny} - Read/write
+        #     requests may be routed to any cluster in the instance and will
+        #     fail over to another cluster in the event of transient errors or
+        #     delays. Choosing this option sacrifices read-your-writes
+        #     consistency to improve availability.
+        #   * {Google::Cloud::Bigtable::SingleClusterRouting} - Unconditionally
+        #     routes all read/write requests to a specific cluster. This option
+        #     preserves read-your-writes consistency but does not improve
+        #     availability. Value contains `cluster_id` and optional field
+        #     `allow_transactional_writes`.
         #
         # @example Set multi cluster routing policy
         #   require "google/cloud/bigtable"
@@ -183,23 +193,54 @@ module Google
         #   app_profile.routing_policy = routing_policy
         #
         def routing_policy= policy
-          if policy.is_a?(Google::Bigtable::Admin::V2::AppProfile:: \
-              SingleClusterRouting)
-            @grpc.single_cluster_routing = policy
+          routing_policy_grpc = policy.to_grpc
+          if routing_policy_grpc.is_a?(
+            Google::Bigtable::Admin::V2::AppProfile::SingleClusterRouting
+          )
+            @grpc.single_cluster_routing = routing_policy_grpc
             @changed_fields["routing_policy"] = "single_cluster_routing"
           else
-            @grpc.multi_cluster_routing_use_any = policy
+            @grpc.multi_cluster_routing_use_any = routing_policy_grpc
             @changed_fields["routing_policy"] = "multi_cluster_routing_use_any"
           end
         end
 
         ##
-        # Get routing policy.
+        # Gets the routing policy for all read/write requests that use the app
+        # profile.
         #
-        # @return [Google::Bigtable::Admin::V2::AppProfile::SingleClusterRouting, Google::Bigtable::Admin::V2::AppProfile::MultiClusterRoutingUseAny]
+        # Routing Policies:
+        # * {Google::Cloud::Bigtable::MultiClusterRoutingUseAny} - Read/write
+        #   requests may be routed to any cluster in the instance and will
+        #   fail over to another cluster in the event of transient errors or
+        #   delays. Choosing this option sacrifices read-your-writes
+        #   consistency to improve availability.
+        # * {Google::Cloud::Bigtable::SingleClusterRouting} - Unconditionally
+        #   routes all read/write requests to a specific cluster. This option
+        #   preserves read-your-writes consistency but does not improve
+        #   availability. Value contains `cluster_id` and optional field
+        #   `allow_transactional_writes`.
+        #
+        # @return [Google::Cloud::Bigtable::RoutingPolicy]
+        #
+        # @example
+        #   require "google/cloud/bigtable"
+        #
+        #   bigtable = Google::Cloud::Bigtable.new
+        #
+        #   instance = bigtable.instance("my-instance")
+        #
+        #   routing_policy = Google::Cloud::Bigtable::AppProfile.multi_cluster_routing
+        #
+        #   app_profile = instance.create_app_profile(
+        #     "my-app-profile",
+        #     routing_policy,
+        #     description: "App profile for user data instance"
+        #   )
+        #   puts app_profile.routing_policy
         #
         def routing_policy
-          @grpc.single_cluster_routing || @grpc.multi_cluster_routing_use_any
+          single_cluster_routing || multi_cluster_routing
         end
 
         ##
@@ -318,28 +359,41 @@ module Google
         end
 
         ##
-        # Create instance of multi cluster routing policy.
+        # Creates an instance of the multi cluster routing policy.
         #
-        # Read/write requests may be routed to any cluster in the instance and will
-        # fail over to another cluster in the event of transient errors or delays.
-        # Choosing this option sacrifices read-your-writes consistency to improve
-        # availability.
-        # @return [Google::Bigtable::Admin::V2::AppProfile::MultiClusterRoutingUseAny]
+        # Read/write requests may be routed to any cluster in the instance and
+        # will fail over to another cluster in the event of transient errors or
+        # delays. Choosing this option sacrifices read-your-writes consistency
+        # to improve availability.
         #
-        # @example Create instance of multi cluster routing
+        # @return [Google::Cloud::Bigtable::MultiClusterRoutingUseAny]
         #
-        #   Google::Cloud::Bigtable::AppProfile.multi_cluster_routing
+        # @example
+        #   require "google/cloud/bigtable"
+        #
+        #   bigtable = Google::Cloud::Bigtable.new
+        #
+        #   instance = bigtable.instance("my-instance")
+        #
+        #   routing_policy = Google::Cloud::Bigtable::AppProfile.multi_cluster_routing
+        #
+        #   app_profile = instance.create_app_profile(
+        #     "my-app-profile",
+        #     routing_policy,
+        #     description: "App profile for user data instance"
+        #   )
+        #   puts app_profile.routing_policy
         #
         def self.multi_cluster_routing
-          Google::Bigtable::Admin::V2::AppProfile::MultiClusterRoutingUseAny.new
+          Google::Cloud::Bigtable::MultiClusterRoutingUseAny.new
         end
 
         ##
-        # Create instance of single cluster routing.
+        # Creates an instance of the single cluster routing policy.
         #
         # Unconditionally routes all read/write requests to a specific cluster.
-        # This option preserves read-your-writes consistency but does not improve
-        # availability.
+        # This option preserves read-your-writes consistency but does not
+        # improve availability.
         #
         # @param cluster_id [String]
         #   The cluster to which read/write requests should be routed.
@@ -348,24 +402,33 @@ module Google
         #   allowed by this app profile. It is unsafe to send these requests to
         #   the same table/row/column in multiple clusters.
         #   Default value is false.
-        # @return [Google::Bigtable::Admin::V2::AppProfile::SingleClusterRouting]
+        # @return [Google::Cloud::Bigtable::SingleClusterRouting]
         #
-        # @example Create instance of single cluster routing
+        # @example
+        #   require "google/cloud/bigtable"
         #
-        #   Google::Cloud::Bigtable::AppProfile.single_cluster_routing("my-cluster")
+        #   bigtable = Google::Cloud::Bigtable.new
         #
-        #   # With allowed transactional writes
-        #   Google::Cloud::Bigtable::AppProfile.single_cluster_routing(
-        #     "my-cluster",
+        #   instance = bigtable.instance("my-instance")
+        #
+        #   routing_policy = Google::Cloud::Bigtable::AppProfile.single_cluster_routing(
+        #     "my-instance-cluster-1",
         #     allow_transactional_writes: true
         #   )
+        #
+        #   app_profile = instance.create_app_profile(
+        #     "my-app-profile",
+        #     routing_policy,
+        #     description: "App profile for user data instance"
+        #   )
+        #   puts app_profile.routing_policy
         #
         def self.single_cluster_routing \
             cluster_id,
             allow_transactional_writes: false
-          Google::Bigtable::Admin::V2::AppProfile::SingleClusterRouting.new(
-            cluster_id: cluster_id,
-            allow_transactional_writes: allow_transactional_writes
+          Google::Cloud::Bigtable::SingleClusterRouting.new(
+            cluster_id,
+            allow_transactional_writes
           )
         end
 

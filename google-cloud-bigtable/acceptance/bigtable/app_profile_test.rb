@@ -36,6 +36,7 @@ describe "Instance AppProfiles", :bigtable do
   it "create multi cluster routing app profile and delete" do
     app_profile_id = "multi-cluster-#{Time.now.to_i}"
     routing_policy = Google::Cloud::Bigtable::AppProfile.multi_cluster_routing
+    routing_policy.must_be_instance_of Google::Cloud::Bigtable::MultiClusterRoutingUseAny
 
     app_profile = instance.create_app_profile(
       app_profile_id,
@@ -45,7 +46,8 @@ describe "Instance AppProfiles", :bigtable do
     )
 
     app_profile.must_be_kind_of Google::Cloud::Bigtable::AppProfile
-    app_profile.multi_cluster_routing.wont_be :nil?
+    app_profile.single_cluster_routing.must_be :nil?
+    app_profile.multi_cluster_routing.must_be_instance_of Google::Cloud::Bigtable::MultiClusterRoutingUseAny
 
     app_profile = instance.app_profile(app_profile_id)
     app_profile.must_be_kind_of Google::Cloud::Bigtable::AppProfile
@@ -60,6 +62,9 @@ describe "Instance AppProfiles", :bigtable do
       bigtable_cluster_id,
       allow_transactional_writes: true
     )
+    routing_policy.must_be_instance_of Google::Cloud::Bigtable::SingleClusterRouting
+    routing_policy.cluster_id.must_equal bigtable_cluster_id
+    routing_policy.allow_transactional_writes.must_equal true
 
     app_profile = instance.create_app_profile(
       app_profile_id,
@@ -68,7 +73,10 @@ describe "Instance AppProfiles", :bigtable do
       ignore_warnings: true
     )
     app_profile.must_be_kind_of Google::Cloud::Bigtable::AppProfile
-    app_profile.single_cluster_routing.wont_be :nil?
+    app_profile.multi_cluster_routing.must_be :nil?
+    app_profile.single_cluster_routing.must_be_instance_of Google::Cloud::Bigtable::SingleClusterRouting
+    app_profile.single_cluster_routing.cluster_id.must_equal bigtable_cluster_id
+    app_profile.single_cluster_routing.allow_transactional_writes.must_equal true
 
     app_profile = instance.app_profile(app_profile_id)
     app_profile.must_be_kind_of Google::Cloud::Bigtable::AppProfile
@@ -91,7 +99,8 @@ describe "Instance AppProfiles", :bigtable do
       ignore_warnings: true
     )
     app_profile.must_be_kind_of Google::Cloud::Bigtable::AppProfile
-    app_profile.single_cluster_routing.wont_be :nil?
+    app_profile.multi_cluster_routing.must_be :nil?
+    app_profile.single_cluster_routing.must_be_instance_of Google::Cloud::Bigtable::SingleClusterRouting
 
     app_profile.routing_policy = Google::Cloud::Bigtable::AppProfile.multi_cluster_routing
     job = app_profile.save(ignore_warnings: true)
@@ -100,7 +109,7 @@ describe "Instance AppProfiles", :bigtable do
 
     app_profile.reload!
     app_profile.single_cluster_routing.must_be :nil?
-    app_profile.multi_cluster_routing.wont_be :nil?
+    app_profile.multi_cluster_routing.must_be_instance_of Google::Cloud::Bigtable::MultiClusterRoutingUseAny
 
     app_profile.delete(ignore_warnings: true)
     instance.app_profile(app_profile_id).must_be :nil?

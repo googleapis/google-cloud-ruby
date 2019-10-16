@@ -97,7 +97,6 @@ YARD::Doctest.configure do |doctest|
       mocked_instances.expect :update_app_profile, mocked_job, [Google::Bigtable::Admin::V2::AppProfile, Google::Protobuf::FieldMask, Hash]
       mocked_job.expect :wait_until_done!, nil, []
       mocked_instances.expect :delete_app_profile, nil, ["projects/my-project/instances/my-instance/appProfiles/my-app-profile", false]
-
     end
   end
 
@@ -107,6 +106,34 @@ YARD::Doctest.configure do |doctest|
       mocked_instances.expect :get_app_profile, app_profile_resp, ["projects/my-project/instances/my-instance/appProfiles/my-app-profile"]
       mocked_instances.expect :delete_app_profile, nil, ["projects/my-project/instances/my-instance/appProfiles/my-app-profile", true]
       mocked_instances.expect :delete_app_profile, nil, ["projects/my-project/instances/my-instance/appProfiles/my-app-profile", false]
+    end
+  end
+
+  doctest.before "Google::Cloud::Bigtable::AppProfile.multi_cluster_routing" do
+    mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
+      mocked_instances.expect :get_instance, instance_resp, ["projects/my-project/instances/my-instance"]
+      mocked_instances.expect :create_app_profile, app_profile_resp, ["projects/my-project/instances/my-instance", "my-app-profile", app_profile_create, Hash]
+    end
+  end
+
+  doctest.before "Google::Cloud::Bigtable::AppProfile#routing_policy" do
+    mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
+      mocked_instances.expect :get_instance, instance_resp, ["projects/my-project/instances/my-instance"]
+      mocked_instances.expect :create_app_profile, app_profile_resp, ["projects/my-project/instances/my-instance", "my-app-profile", app_profile_create, Hash]
+    end
+  end
+
+  doctest.before "Google::Cloud::Bigtable::AppProfile#routing_policy=" do
+    mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
+      mocked_instances.expect :get_instance, instance_resp, ["projects/my-project/instances/my-instance"]
+      mocked_instances.expect :get_app_profile, app_profile_resp, ["projects/my-project/instances/my-instance/appProfiles/my-app-profile"]
+    end
+  end
+
+  doctest.before "Google::Cloud::Bigtable::AppProfile.single_cluster_routing" do
+    mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
+      mocked_instances.expect :get_instance, instance_resp, ["projects/my-project/instances/my-instance"]
+      mocked_instances.expect :create_app_profile, app_profile_resp, ["projects/my-project/instances/my-instance", "my-app-profile", Google::Bigtable::Admin::V2::AppProfile, Hash]
     end
   end
 
@@ -369,6 +396,13 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
+  doctest.before "Google::Cloud::Bigtable::MultiClusterRoutingUseAny" do
+    mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
+      mocked_instances.expect :get_instance, instance_resp, ["projects/my-project/instances/my-instance"]
+      mocked_instances.expect :create_app_profile, app_profile_resp, ["projects/my-project/instances/my-instance", "my-app-profile", app_profile_create, Hash]
+    end
+  end
+
   doctest.before "Google::Cloud::Bigtable::MutationOperations" do
     mock_bigtable do |mock, mocked_instances, mocked_tables|
       mock.expect :mutate_row, nil, ["projects/my-project/instances/my-instance/tables/my-table", "user-1", Array, Hash]
@@ -498,6 +532,13 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
+  doctest.before "Google::Cloud::Bigtable::RoutingPolicy" do
+    mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
+      mocked_instances.expect :get_instance, instance_resp, ["projects/my-project/instances/my-instance"]
+      mocked_instances.expect :create_app_profile, app_profile_resp, ["projects/my-project/instances/my-instance", "my-app-profile", Google::Bigtable::Admin::V2::AppProfile, Hash]
+    end
+  end
+
   doctest.before "Google::Cloud::Bigtable::SampleRowKey" do
     mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
       mocked_tables.expect :get_table, table_resp, ["projects/my-project/instances/my-instance/tables/my-table", Hash]
@@ -508,6 +549,13 @@ YARD::Doctest.configure do |doctest|
   doctest.before "Google::Cloud::Bigtable::Status" do
     mock_bigtable do |mock, mocked_instances, mocked_tables|
       mock.expect :mutate_rows, [], ["projects/my-project/instances/my-instance/tables/my-table", Array, Hash]
+    end
+  end
+
+  doctest.before "Google::Cloud::Bigtable::SingleClusterRouting" do
+    mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
+      mocked_instances.expect :get_instance, instance_resp, ["projects/my-project/instances/my-instance"]
+      mocked_instances.expect :create_app_profile, app_profile_resp, ["projects/my-project/instances/my-instance", "my-app-profile", Google::Bigtable::Admin::V2::AppProfile, Hash]
     end
   end
 
