@@ -41,6 +41,13 @@ s.copy(v2_library / 'google-cloud-dialogflow.gemspec', merge=ruby.merge_gemspec)
 templates = gcp.CommonTemplates().ruby_library()
 s.copy(templates)
 
+# Update Authentication Guide for multi-service clients
+s.replace(
+    'AUTHENTICATION.md',
+    'Google::Cloud::Dialogflow.new',
+    'Google::Cloud::Dialogflow::Agents.new'
+)
+
 # Support for service_address
 s.replace(
     [

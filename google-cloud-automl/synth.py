@@ -93,6 +93,13 @@ s.replace(
     'google.cloud.automl.v1beta1.AutoMl'
 )
 
+# Update Authentication Guide for multi-service clients
+s.replace(
+    'AUTHENTICATION.md',
+    'Google::Cloud::AutoML.new',
+    'Google::Cloud::AutoML::AutoML.new'
+)
+
 # Support for service_address
 s.replace(
     [

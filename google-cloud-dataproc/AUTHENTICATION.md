@@ -26,7 +26,7 @@ export DATAPROC_CREDENTIALS=/path/to/json`
 ```ruby
 require "google/cloud/dataproc"
 
-client = Google::Cloud::Dataproc.new
+client = Google::Cloud::Dataproc::AutoscalingPolicyService.new
 ```
 
 ## Project and Credential Lookup
@@ -112,7 +112,7 @@ require "google/cloud/dataproc"
 ENV["DATAPROC_PROJECT"]     = "my-project-id"
 ENV["DATAPROC_CREDENTIALS"] = "path/to/keyfile.json"
 
-client = Google::Cloud::Dataproc.new
+client = Google::Cloud::Dataproc::AutoscalingPolicyService.new
 ```
 
 ### Configuration
@@ -127,7 +127,7 @@ Google::Cloud::Dataproc.configure do |config|
   config.credentials = "path/to/keyfile.json"
 end
 
-client = Google::Cloud::Dataproc.new
+client = Google::Cloud::Dataproc::AutoscalingPolicyService.new
 ```
 
 ### Cloud SDK

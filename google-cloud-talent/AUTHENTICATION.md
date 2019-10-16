@@ -26,7 +26,7 @@ export TALENT_CREDENTIALS=/path/to/json`
 ```ruby
 require "google/cloud/talent"
 
-client = Google::Cloud::Talent.new
+client = Google::Cloud::Talent::ApplicationService.new
 ```
 
 ## Project and Credential Lookup
@@ -112,7 +112,7 @@ require "google/cloud/talent"
 ENV["TALENT_PROJECT"]     = "my-project-id"
 ENV["TALENT_CREDENTIALS"] = "path/to/keyfile.json"
 
-client = Google::Cloud::Talent.new
+client = Google::Cloud::Talent::ApplicationService.new
 ```
 
 ### Configuration
@@ -127,7 +127,7 @@ Google::Cloud::Talent.configure do |config|
   config.credentials = "path/to/keyfile.json"
 end
 
-client = Google::Cloud::Talent.new
+client = Google::Cloud::Talent::ApplicationService.new
 ```
 
 ### Cloud SDK

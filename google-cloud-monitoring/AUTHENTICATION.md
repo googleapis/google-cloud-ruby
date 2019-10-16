@@ -26,7 +26,7 @@ export MONITORING_CREDENTIALS=/path/to/json`
 ```ruby
 require "google/cloud/monitoring"
 
-client = Google::Cloud::Monitoring.new
+client = Google::Cloud::Monitoring::AlertPolicy.new
 ```
 
 ## Project and Credential Lookup
@@ -112,7 +112,7 @@ require "google/cloud/monitoring"
 ENV["MONITORING_PROJECT"]     = "my-project-id"
 ENV["MONITORING_CREDENTIALS"] = "path/to/keyfile.json"
 
-client = Google::Cloud::Monitoring.new
+client = Google::Cloud::Monitoring::AlertPolicy.new
 ```
 
 ### Configuration
@@ -127,7 +127,7 @@ Google::Cloud::Monitoring.configure do |config|
   config.credentials = "path/to/keyfile.json"
 end
 
-client = Google::Cloud::Monitoring.new
+client = Google::Cloud::Monitoring::AlertPolicy.new
 ```
 
 ### Cloud SDK

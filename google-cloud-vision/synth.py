@@ -52,6 +52,13 @@ s.copy(v1p3beta1 / 'test/google/cloud/vision/v1p3beta1')
 templates = gcp.CommonTemplates().ruby_library()
 s.copy(templates)
 
+# Update Authentication Guide for multi-service clients
+s.replace(
+    'AUTHENTICATION.md',
+    'Google::Cloud::Vision.new',
+    'Google::Cloud::Vision::ImageAnnotator.new'
+)
+
 # Support for service_address
 s.replace(
     [

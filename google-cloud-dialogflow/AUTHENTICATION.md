@@ -26,7 +26,7 @@ export DIALOGFLOW_CREDENTIALS=/path/to/json`
 ```ruby
 require "google/cloud/dialogflow"
 
-client = Google::Cloud::Dialogflow.new
+client = Google::Cloud::Dialogflow::Agents.new
 ```
 
 ## Project and Credential Lookup
@@ -112,7 +112,7 @@ require "google/cloud/dialogflow"
 ENV["DIALOGFLOW_PROJECT"]     = "my-project-id"
 ENV["DIALOGFLOW_CREDENTIALS"] = "path/to/keyfile.json"
 
-client = Google::Cloud::Dialogflow.new
+client = Google::Cloud::Dialogflow::Agents.new
 ```
 
 ### Configuration
@@ -127,7 +127,7 @@ Google::Cloud::Dialogflow.configure do |config|
   config.credentials = "path/to/keyfile.json"
 end
 
-client = Google::Cloud::Dialogflow.new
+client = Google::Cloud::Dialogflow::Agents.new
 ```
 
 ### Cloud SDK

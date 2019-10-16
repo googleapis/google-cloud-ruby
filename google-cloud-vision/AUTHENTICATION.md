@@ -26,7 +26,7 @@ export VISION_CREDENTIALS=/path/to/json`
 ```ruby
 require "google/cloud/vision"
 
-client = Google::Cloud::Vision.new
+client = Google::Cloud::Vision::ImageAnnotator.new
 ```
 
 ## Project and Credential Lookup
@@ -112,7 +112,7 @@ require "google/cloud/vision"
 ENV["VISION_PROJECT"]     = "my-project-id"
 ENV["VISION_CREDENTIALS"] = "path/to/keyfile.json"
 
-client = Google::Cloud::Vision.new
+client = Google::Cloud::Vision::ImageAnnotator.new
 ```
 
 ### Configuration
@@ -127,7 +127,7 @@ Google::Cloud::Vision.configure do |config|
   config.credentials = "path/to/keyfile.json"
 end
 
-client = Google::Cloud::Vision.new
+client = Google::Cloud::Vision::ImageAnnotator.new
 ```
 
 ### Cloud SDK

@@ -26,7 +26,7 @@ export AUTOML_CREDENTIALS=/path/to/json`
 ```ruby
 require "google/cloud/automl"
 
-client = Google::Cloud::AutoML.new
+client = Google::Cloud::AutoML::AutoML.new
 ```
 
 ## Project and Credential Lookup
@@ -112,7 +112,7 @@ require "google/cloud/automl"
 ENV["AUTOML_PROJECT"]     = "my-project-id"
 ENV["AUTOML_CREDENTIALS"] = "path/to/keyfile.json"
 
-client = Google::Cloud::AutoML.new
+client = Google::Cloud::AutoML::AutoML.new
 ```
 
 ### Configuration
@@ -127,7 +127,7 @@ Google::Cloud::AutoML.configure do |config|
   config.credentials = "path/to/keyfile.json"
 end
 
-client = Google::Cloud::AutoML.new
+client = Google::Cloud::AutoML::AutoML.new
 ```
 
 ### Cloud SDK

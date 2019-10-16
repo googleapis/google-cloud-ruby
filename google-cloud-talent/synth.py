@@ -43,6 +43,13 @@ s.copy(v4beta1 / 'google-cloud-talent.gemspec', merge=ruby.merge_gemspec)
 templates = gcp.CommonTemplates().ruby_library()
 s.copy(templates)
 
+# Update Authentication Guide for multi-service clients
+s.replace(
+    'AUTHENTICATION.md',
+    'Google::Cloud::Talent.new',
+    'Google::Cloud::Talent::ApplicationService.new'
+)
+
 # Support for service_address
 s.replace(
     [
