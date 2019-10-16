@@ -656,19 +656,19 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
+  doctest.before "Google::Cloud::Bigtable::Table::ColumnFamiliesCreator" do
+    mock_bigtable do |mock, mocked_instances, mocked_tables|
+      mocked_instances.expect :get_instance, instance_resp, ["projects/my-project/instances/my-instance"]
+      mocked_tables.expect :get_table, table_resp, ["projects/my-project/instances/my-instance/tables/my-table", Hash]
+      mocked_tables.expect :create_table, table_resp, ["projects/my-project/instances/my-instance", "my-table", Google::Bigtable::Admin::V2::Table, Hash]
+    end
+  end
+
   doctest.before "Google::Cloud::Bigtable::Table::ColumnFamiliesUpdater" do
     mock_bigtable do |mock, mocked_instances, mocked_tables|
       mocked_instances.expect :get_instance, instance_resp, ["projects/my-project/instances/my-instance"]
       mocked_tables.expect :get_table, table_resp, ["projects/my-project/instances/my-instance/tables/my-table", Hash]
       mocked_tables.expect :modify_column_families, table_resp, ["projects/my-project/instances/my-instance/tables/my-table", Array]
-    end
-  end
-
-  doctest.before "Google::Cloud::Bigtable::Table::ColumnFamilyMap" do
-    mock_bigtable do |mock, mocked_instances, mocked_tables|
-      mocked_instances.expect :get_instance, instance_resp, ["projects/my-project/instances/my-instance"]
-      mocked_tables.expect :get_table, table_resp, ["projects/my-project/instances/my-instance/tables/my-table", Hash]
-      mocked_tables.expect :create_table, table_resp, ["projects/my-project/instances/my-instance", "my-table", Google::Bigtable::Admin::V2::Table, Hash]
     end
   end
 

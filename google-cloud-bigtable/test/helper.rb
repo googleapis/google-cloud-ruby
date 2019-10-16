@@ -100,15 +100,19 @@ class MockBigtable < Minitest::Spec
     { clusters: clusters }
   end
 
-  def column_family_hash(max_versions: nil, max_age: nil, intersection: nil, union: nil)
-    gc_rule = {
+  def gc_rule_hash(max_versions: nil, max_age: nil, intersection: nil, union: nil)
+    {
       max_num_versions: max_versions,
       max_age: max_age ? { seconds: max_age} : nil,
       intersection: intersection ?  { rules: intersection } : nil,
       union: union ? { rules: union } : nil
     }.delete_if { |_, v| v.nil? }
+  end
 
-    { gc_rule: gc_rule }
+  def column_family_hash(max_versions: nil, max_age: nil, intersection: nil, union: nil)
+    {
+      gc_rule: gc_rule_hash(max_versions: max_versions, max_age: max_age, intersection: intersection, union: union)
+    }
   end
 
   def column_families_hash num: 3, start_id: 1, max_versions: 3

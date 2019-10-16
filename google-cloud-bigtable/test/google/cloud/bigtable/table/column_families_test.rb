@@ -1,4 +1,4 @@
-# Copyright 2018 Google LLC
+# Copyright 2019 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,7 +15,7 @@
 
 require "helper"
 
-describe Google::Cloud::Bigtable::Table, :modify_column_families, :mock_bigtable do
+describe Google::Cloud::Bigtable::Table, :column_families, :mock_bigtable do
   let(:instance_id) { "test-instance" }
   let(:table_id) { "test-table" }
   let(:cluster_states) { clusters_state_grpc }
@@ -34,7 +34,7 @@ describe Google::Cloud::Bigtable::Table, :modify_column_families, :mock_bigtable
     Google::Cloud::Bigtable::Table.from_grpc(table_grpc, bigtable.service)
   end
 
-  it "modify column family in table" do
+  it "modifies column families in the table" do
     modifications = [
       Google::Bigtable::Admin::V2::ModifyColumnFamiliesRequest::Modification.new(
         id: "cf1",
@@ -49,23 +49,24 @@ describe Google::Cloud::Bigtable::Table, :modify_column_families, :mock_bigtable
         )
       )
     ]
-
-    column_families = Google::Cloud::Bigtable::Table::ColumnFamilyMap.new.tap do |cfs|
-      cfs.add('cf1', Google::Cloud::Bigtable::GcRule.max_age(600))
-      cfs.add('cf2', Google::Cloud::Bigtable::GcRule.max_versions(5))
-    end
+    gc_rule_1 = Google::Bigtable::Admin::V2::GcRule.new(gc_rule_hash(max_age: 600))
+    gc_rule_2 = Google::Bigtable::Admin::V2::GcRule.new(gc_rule_hash(max_versions: 5))
+    column_families_resp = {
+      "cf1" => Google::Bigtable::Admin::V2::ColumnFamily.new(gc_rule: gc_rule_1),
+      "cf2" => Google::Bigtable::Admin::V2::ColumnFamily.new(gc_rule: gc_rule_2)
+    }
     cluster_states = clusters_state_grpc(num: 1)
-    res_table = Google::Bigtable::Admin::V2::Table.new(
+    table_resp = Google::Bigtable::Admin::V2::Table.new(
       table_hash(
         name: table_path(instance_id, table_id),
         cluster_states: cluster_states,
-        column_families: column_families.to_grpc,
+        column_families: column_families_resp,
         granularity: :MILLIS
       )
     )
 
     mock = Minitest::Mock.new
-    mock.expect :modify_column_families, res_table, [
+    mock.expect :modify_column_families, table_resp, [
       table_path(instance_id, table_id),
       modifications
     ]
@@ -76,14 +77,21 @@ describe Google::Cloud::Bigtable::Table, :modify_column_families, :mock_bigtable
       cfs.update "cf2", Google::Cloud::Bigtable::GcRule.max_versions(5)
     end
 
+    column_families.must_be_instance_of Hash
+    column_families.keys.sort.must_equal column_families_resp.keys
+    column_families["cf1"].gc_rule.to_grpc.must_equal gc_rule_1
+    column_families["cf2"].gc_rule.to_grpc.must_equal gc_rule_2
+
+    table.column_families.must_be_instance_of Hash
+    table.column_families.keys.sort.must_equal column_families_resp.keys
+    table.column_families["cf1"].gc_rule.to_grpc.must_equal gc_rule_1
+    table.column_families["cf2"].gc_rule.to_grpc.must_equal gc_rule_2
+
     table.project_id.must_equal project_id
     table.instance_id.must_equal instance_id
     table.name.must_equal table_id
     table.path.must_equal table_path(instance_id, table_id)
     table.granularity.must_equal :MILLIS
-    table.column_families.keys.sort.must_equal column_families.keys
-    table.column_families["cf1"].gc_rule.to_grpc.must_equal Google::Cloud::Bigtable::GcRule.max_age(600).to_grpc
-    table.column_families["cf2"].gc_rule.to_grpc.must_equal Google::Cloud::Bigtable::GcRule.max_versions(5).to_grpc
 
     mock.verify
   end

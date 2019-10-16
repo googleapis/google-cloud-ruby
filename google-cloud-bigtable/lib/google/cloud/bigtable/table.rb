@@ -18,7 +18,7 @@
 require "google/cloud/bigtable/table/list"
 require "google/cloud/bigtable/table/cluster_state"
 require "google/cloud/bigtable/column_family"
-require "google/cloud/bigtable/table/column_family_map"
+require "google/cloud/bigtable/table/column_families_creator"
 require "google/cloud/bigtable/table/column_families_updater"
 require "google/cloud/bigtable/gc_rule"
 require "google/cloud/bigtable/mutation_operations"
@@ -193,17 +193,17 @@ module Google
         #
         #   table = bigtable.table("my-instance", "my-table", perform_lookup: true)
         #
-        #   table.column_families do |cfs|
+        #   table.column_families do |cf_updater|
         #
-        #     cfs.add "cf1", Google::Cloud::Bigtable::GcRule.max_age(600)
-        #     cfs.add "cf2", Google::Cloud::Bigtable::GcRule.max_versions(5)
+        #     cf_updater.add "cf1", Google::Cloud::Bigtable::GcRule.max_age(600)
+        #     cf_updater.add "cf2", Google::Cloud::Bigtable::GcRule.max_versions(5)
         #
         #     rule_1 = Google::Cloud::Bigtable::GcRule.max_versions(3)
         #     rule_2 = Google::Cloud::Bigtable::GcRule.max_age(600)
         #     rule_union = Google::Cloud::Bigtable::GcRule.union(rule_1, rule_2)
-        #     cfs.update "cf3", rule_union
+        #     cf_updater.update "cf3", rule_union
         #
-        #     cfs.delete "cf5"
+        #     cf_updater.delete "cf5"
         #   end
         #
         #   puts table.column_families["cf5"] #=> nil
@@ -327,7 +327,7 @@ module Google
             column_families: nil,
             granularity: nil,
             initial_splits: nil
-          column_families ||= Table::ColumnFamilyMap.new
+          column_families ||= Table::ColumnFamiliesCreator.new
           yield column_families if block_given?
 
           table = Google::Bigtable::Admin::V2::Table.new({

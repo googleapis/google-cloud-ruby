@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2018 Google LLC
+# Copyright 2019 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,35 +17,33 @@
 
 require "helper"
 
-describe Google::Cloud::Bigtable::Table::ColumnFamilyMap, :mock_bigtable do
+describe Google::Cloud::Bigtable::Table::ColumnFamiliesCreator, :mock_bigtable do
   let(:instance_id) { "test-instance" }
   let(:table_id) { "test-table" }
+  let(:table_id) { "test-table" }
+  let(:creator) { Google::Cloud::Bigtable::Table::ColumnFamiliesCreator.new }
 
   it "adds a column family" do
-    cfs_map = Google::Cloud::Bigtable::Table::ColumnFamilyMap.new
-    cfs_map.must_be :empty?
-
     cf_name = "new-cf"
     gc_rule = Google::Cloud::Bigtable::GcRule.max_versions(1)
-    cfs_map.add(cf_name, gc_rule)
+    creator.add(cf_name, gc_rule)
 
-    cfs_map.length.must_equal 1
-    cf = cfs_map[cf_name]
-    cf.must_be_kind_of Google::Cloud::Bigtable::ColumnFamily
-    cf.gc_rule.must_be_kind_of Google::Cloud::Bigtable::GcRule
-    cf.gc_rule.to_grpc.must_equal gc_rule.to_grpc
+    cfs = creator.to_grpc
+    cfs.length.must_equal 1
+    cf = cfs[cf_name]
+    cf.must_be_kind_of Google::Bigtable::Admin::V2::ColumnFamily
+    cf.gc_rule.must_be_kind_of Google::Bigtable::Admin::V2::GcRule
+    cf.gc_rule.must_equal gc_rule.to_grpc
   end
 
   it "adds a column family without gc_rule" do
-    cfs_map = Google::Cloud::Bigtable::Table::ColumnFamilyMap.new
-    cfs_map.must_be :empty?
-
     cf_name = "new-cf"
-    cfs_map.add(cf_name)
+    creator.add(cf_name)
 
-    cfs_map.length.must_equal 1
-    cf = cfs_map[cf_name]
-    cf.must_be_kind_of Google::Cloud::Bigtable::ColumnFamily
+    cfs = creator.to_grpc
+    cfs.length.must_equal 1
+    cf = cfs[cf_name]
+    cf.must_be_kind_of Google::Bigtable::Admin::V2::ColumnFamily
     cf.gc_rule.must_be :nil?
   end
 end

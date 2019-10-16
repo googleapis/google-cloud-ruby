@@ -529,7 +529,7 @@ module Google
         end
 
         ##
-        # Create table
+        # Creates a new table.
         #
         # The table can be created with a full set of initial column families,
         # specified in the request.
@@ -537,10 +537,10 @@ module Google
         # @param name [String]
         #   The name by which the new table should be referred to within the parent
         #   instance, e.g., `foobar`
-        # @param column_families [Google::Cloud::Bigtable::Table::ColumnFamilyMap]
-        #   See {Google::Cloud::Bigtable::Table.column_family_map}.
-        #   A code block yielding a new `ColumnFamilyMap` may also be used with
-        #   this method.
+        # @param column_families [Google::Cloud::Bigtable::Table::ColumnFamiliesCreator]
+        #   A `ColumnFamiliesCreator` instance with which column families for the
+        #   table have been configured. Alternatively, a code block yielding a
+        #   `ColumnFamiliesCreator` instance may also be passed to this method.
         # @param granularity [Symbol]
         #   The granularity at which timestamps are stored in this table.
         #   Timestamps not matching the granularity will be rejected.
@@ -564,15 +564,15 @@ module Google
         #     * Tablet 5 : `[other, )                => {"other", "zz"}`
         #   A hash in the form of `Google::Bigtable::Admin::V2::CreateTableRequest::Split`
         #   can also be provided.
-        # @yield [column_families] A block for adding column_families.
-        # @yieldparam [Hash{String => Google::Cloud::Bigtable::ColumnFamily}]
-        #   Cluster map of cluster name and cluster object.
-        #   (See {Google::Cloud::Bigtable::Instance::ClusterMap})
-        #   See rules for column families at {Google::Cloud::Bigtable::GcRule})
+        # @yield [cf_creator] A block for adding column families.
+        # @yieldparam [Google::Cloud::Bigtable::Table::ColumnFamiliesCreator]
+        #   Accepts string column family names and associated
+        #   {Google::Cloud::Bigtable::GcRule} objects to configure new
+        #   {Google::Cloud::Bigtable::ColumnFamily} entries for the table.
         #
         # @return [Google::Cloud::Bigtable::Table]
         #
-        # @example Create table without column families.
+        # @example Create a table without column families.
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
@@ -582,23 +582,23 @@ module Google
         #   table = instance.create_table("my-table")
         #   puts table.name
         #
-        # @example Create table with column families and initial splits.
+        # @example Create a table with initial splits and column families.
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
         #
         #   instance = bigtable.instance("my-instance")
         #
-        #   table = instance.create_table("my-table") do |column_families|
-        #     column_families.add('cf1', Google::Cloud::Bigtable::GcRule.max_versions(3))
-        #     column_families.add('cf2', Google::Cloud::Bigtable::GcRule.max_age(100))
+        #   initial_splits = ["user-00001", "user-100000", "others"]
+        #   table = instance.create_table("my-table", initial_splits: initial_splits) do |cf_creator|
+        #     cf_creator.add('cf1', Google::Cloud::Bigtable::GcRule.max_versions(5))
+        #     cf_creator.add('cf2', Google::Cloud::Bigtable::GcRule.max_age(600))
         #
-        #     gc_rule = Google::Cloud::Bigtable::GcRule.new
-        #     gc_rule.union = [
-        #       Google::Cloud::Bigtable::GcRule.max_versions(3),
+        #     gc_rule = Google::Cloud::Bigtable::GcRule.union(
         #        Google::Cloud::Bigtable::GcRule.max_age(1800),
-        #     ]
-        #     column_families.add('cf3', gc_rule)
+        #       Google::Cloud::Bigtable::GcRule.max_versions(3)
+        #     )
+        #     cf_creator.add('cf3', gc_rule)
         #   end
         #
         #   puts table
