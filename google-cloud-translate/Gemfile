@@ -2,10 +2,7 @@ source "https://rubygems.org"
 
 gemspec
 
-gem "google-cloud-core", path: "../google-cloud-core"
-gem "google-cloud-env", path: "../google-cloud-env"
-
-gem "rake", "~> 12.3"
+gem "rake", "~> 12.0"
 
 # Pin minitest to 5.11.x to avoid warnings emitted by 5.12.
 # See https://github.com/googleapis/google-cloud-ruby/issues/4110
