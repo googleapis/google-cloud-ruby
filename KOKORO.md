@@ -51,7 +51,7 @@
 1. In the root Rakefile, find where the "KOKORO_RUBY_VERSIONS" constant is defined. Update the array to reflect the versions of ruby you would like to run tests on.
 1. Run `gcloud auth configure-docker` if you haven't already.
 1. Ensure you have access to the cloud-devrel-kokoro-resources GCP project.
-1. Run `bundle exec rake kokoro:build[publish]`. This will generate Dockerfiles using .kokoro/templates/*.Dockerfile.erb and build and push the images to gcr.io/cloud-devrel-kokoro-resources/yoshi-ruby/. It will also update .kokoro/osx.sh to use the ruby versions set by "KOKORO_RUBY_VERSIONS". The windows Dockerfile and image need to be updated manually.
+1. Run `bundle exec rake kokoro:build[publish]`. This will generate Dockerfiles using .kokoro/templates/\*.Dockerfile.erb and build and push the images to gcr.io/cloud-devrel-kokoro-resources/yoshi-ruby/. It will also update .kokoro/osx.sh to use the ruby versions set by "KOKORO_RUBY_VERSIONS". The windows Dockerfile and image need to be updated manually.
 1. Open a PR.
 
 ### Updating the windows docker image
