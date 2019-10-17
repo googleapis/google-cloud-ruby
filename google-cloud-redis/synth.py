@@ -51,6 +51,9 @@ s.copy(v1beta1_library / 'lib/google/cloud/redis/v1beta1')
 s.copy(v1beta1_library / 'lib/google/cloud/redis/v1beta1.rb')
 s.copy(v1beta1_library / 'test/google/cloud/redis/v1beta1')
 
+# Update gemspec to reflect Ruby 2.4
+ruby.update_gemspec('google-cloud-redis.gemspec')
+
 # Support for service_address
 s.replace(
     [
@@ -155,18 +158,11 @@ s.replace(
     'https://googleapis.github.io/google-cloud-ruby'
 )
 
-# https://github.com/googleapis/gapic-generator/issues/2393
-s.replace(
-    'google-cloud-redis.gemspec',
-    'gem.add_development_dependency "rubocop".*$',
-    'gem.add_development_dependency "rubocop", "~> 0.64.0"'
-)
-
 s.replace(
     'google-cloud-redis.gemspec',
     'gem.add_dependency "google-gax", "~> 1\\.[\\d\\.]+"',
     "\n".join([
-        'gem.add_dependency "google-gax", "~> 1.7"',
+        'gem.add_dependency "google-gax", "~> 1.8"',
         '  gem.add_dependency "googleapis-common-protos", ">= 1.3.9", "< 2.0"'
     ])
 )

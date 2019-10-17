@@ -79,8 +79,6 @@ module Google
           @grpc.name.split("/")[7]
         end
 
-        # rubocop:disable LineLength
-
         ##
         # The full path for the session resource. Values are of the form
         # `projects/<project_id>/instances/<instance_id>/databases/<database_id>/sessions/<session_id>`.
@@ -88,8 +86,6 @@ module Google
         def path
           @grpc.name
         end
-
-        # rubocop:enable LineLength
 
         ##
         # Executes a SQL query.

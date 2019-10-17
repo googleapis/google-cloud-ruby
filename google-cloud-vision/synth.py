@@ -52,6 +52,9 @@ s.copy(v1p3beta1 / 'test/google/cloud/vision/v1p3beta1')
 templates = gcp.CommonTemplates().ruby_library()
 s.copy(templates)
 
+# Update gemspec to reflect Ruby 2.4
+ruby.update_gemspec('google-cloud-vision.gemspec')
+
 # Update Authentication Guide for multi-service clients
 s.replace(
     'AUTHENTICATION.md',
@@ -102,7 +105,7 @@ s.replace(
 s.replace(
     'google-cloud-vision.gemspec',
     '\n  gem\\.add_dependency "google-gax", "~> 1\\.[\\d\\.]+"\n',
-    '\n  gem.add_dependency "google-gax", "~> 1.7"\n')
+    '\n  gem.add_dependency "google-gax", "~> 1.8"\n')
 
 # PERMANENT: Add migration guide to docs
 s.replace(
@@ -188,11 +191,6 @@ s.replace(
     ['lib/**/*.rb', 'README.md'],
     'https://googlecloudplatform\\.github\\.io/google-cloud-ruby',
     'https://googleapis.github.io/google-cloud-ruby'
-)
-s.replace(
-    'google-cloud-vision.gemspec',
-    'gem.add_development_dependency "rubocop".*$',
-    'gem.add_development_dependency "rubocop", "~> 0.64.0"'
 )
 
 s.replace(

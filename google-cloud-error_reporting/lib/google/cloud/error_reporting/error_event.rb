@@ -271,8 +271,6 @@ module Google
           )
         end
 
-        # rubocop:disable Metrics/AbcSize
-
         ##
         # @private Formats the http request context as a
         # Google::Devtools::Clouderrorreporting::V1beta1::HttpRequestContext
@@ -289,8 +287,6 @@ module Google
             remote_ip: http_remote_ip.to_s
           )
         end
-
-        # rubocop:enable Metrics/AbcSize
 
         ##
         # @private Formats the source location as a

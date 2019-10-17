@@ -43,6 +43,9 @@ s.copy(v1beta1_library / 'google-cloud-recaptcha_enterprise.gemspec', merge=ruby
 templates = gcp.CommonTemplates().ruby_library()
 s.copy(templates)
 
+# Update gemspec to reflect Ruby 2.4
+ruby.update_gemspec('google-cloud-recaptcha_enterprise.gemspec')
+
 # Support for service_address
 s.replace(
     [
@@ -88,7 +91,7 @@ s.replace(
 s.replace(
     'google-cloud-recaptcha_enterprise.gemspec',
     '\n  gem\\.add_dependency "google-gax", "~> 1\\.[\\d\\.]+"\n\n',
-    '\n  gem.add_dependency "google-gax", "~> 1.7"\n  gem.add_dependency "grpc-google-iam-v1", "~> 0.6.9"\n\n')
+    '\n  gem.add_dependency "google-gax", "~> 1.8"\n  gem.add_dependency "grpc-google-iam-v1", "~> 0.6.9"\n\n')
 
 # https://github.com/googleapis/gapic-generator/issues/2242
 def escape_braces(match):
@@ -131,13 +134,6 @@ s.replace(
     ],
     'https://googlecloudplatform\\.github\\.io/google-cloud-ruby',
     'https://googleapis.github.io/google-cloud-ruby'
-)
-
-# https://github.com/googleapis/gapic-generator/issues/2393
-s.replace(
-    'google-cloud-recaptcha_enterprise.gemspec',
-    'gem.add_development_dependency "rubocop".*$',
-    'gem.add_development_dependency "rubocop", "~> 0.64.0"'
 )
 
 os.rename(

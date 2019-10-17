@@ -16,24 +16,24 @@ Gem::Specification.new do |gem|
                       ["OVERVIEW.md", "AUTHENTICATION.md", "INSTRUMENTATION.md", "LOGGING.md", "CONTRIBUTING.md", "TROUBLESHOOTING.md", "CHANGELOG.md", "CODE_OF_CONDUCT.md", "LICENSE", ".yardopts"]
   gem.require_paths = ["lib"]
 
-  gem.required_ruby_version = ">= 2.2.0"
+  gem.required_ruby_version = ">= 2.4"
 
   gem.extensions << "ext/google/cloud/debugger/debugger_c/extconf.rb"
 
   gem.add_dependency "binding_of_caller", "~> 0.7"
   gem.add_dependency "google-cloud-core", "~> 1.2"
   gem.add_dependency "google-cloud-logging", "~> 1.0"
-  gem.add_dependency "google-gax", "~> 1.7"
+  gem.add_dependency "google-gax", "~> 1.8"
   gem.add_dependency "stackdriver-core", "~> 1.3"
   gem.add_dependency "concurrent-ruby", "~> 1.1"
 
+  gem.add_development_dependency "google-style", "~> 1.24.0"
   gem.add_development_dependency "minitest", "~> 5.10"
   gem.add_development_dependency "minitest-autotest", "~> 1.0"
   gem.add_development_dependency "minitest-focus", "~> 1.1"
   gem.add_development_dependency "minitest-rg", "~> 5.2"
   gem.add_development_dependency "autotest-suffix", "~> 1.1"
   gem.add_development_dependency "redcarpet", "~> 3.0"
-  gem.add_development_dependency "rubocop", "~> 0.64.0"
   gem.add_development_dependency "simplecov", "~> 0.9"
   gem.add_development_dependency "yard", "~> 0.9"
   gem.add_development_dependency "yard-doctest", "~> 0.1.8"

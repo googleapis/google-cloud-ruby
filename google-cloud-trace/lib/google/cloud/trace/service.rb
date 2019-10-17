@@ -86,8 +86,6 @@ module Google
           Google::Cloud::Trace::TraceRecord.from_grpc trace_proto
         end
 
-        # rubocop:disable Metrics/MethodLength
-
         ##
         # Searches for traces matching the given criteria.
         #
@@ -124,8 +122,6 @@ module Google
             page_size: page_size,
             page_token: page_token
         end
-
-        # rubocop:enable Metrics/MethodLength
 
         # @private
         def inspect

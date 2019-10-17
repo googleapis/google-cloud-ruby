@@ -59,6 +59,9 @@ s.copy(v1_library / '.gitignore')
 s.copy(v1_library / '.yardopts')
 s.copy(v1_library / 'google-cloud-scheduler.gemspec', merge=ruby.merge_gemspec)
 
+# Update gemspec to reflect Ruby 2.4
+ruby.update_gemspec('google-cloud-scheduler.gemspec')
+
 # Support for service_address
 s.replace(
     [
@@ -140,7 +143,7 @@ s.replace(
     'google-cloud-scheduler.gemspec',
     'gem.add_dependency "google-gax", "~> 1\\.[\\d\\.]+"',
     "\n".join([
-        'gem.add_dependency "google-gax", "~> 1.7"',
+        'gem.add_dependency "google-gax", "~> 1.8"',
         '  gem.add_dependency "googleapis-common-protos", ">= 1.3.9", "< 2.0"'
     ])
 )

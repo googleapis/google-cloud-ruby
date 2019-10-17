@@ -41,6 +41,9 @@ s.copy(v1alpha2 / 'google-cloud-irm.gemspec', merge=ruby.merge_gemspec)
 templates = gcp.CommonTemplates().ruby_library()
 s.copy(templates)
 
+# Update gemspec to reflect Ruby 2.4
+ruby.update_gemspec('google-cloud-irm.gemspec')
+
 # Support for service_address
 s.replace(
     [
@@ -84,7 +87,7 @@ s.replace(
 s.replace(
     'google-cloud-irm.gemspec',
     '\n  gem\\.add_dependency "google-gax", "~> 1\\.[\\d\\.]+"\n',
-    '\n  gem.add_dependency "google-gax", "~> 1.7"\n')
+    '\n  gem.add_dependency "google-gax", "~> 1.8"\n')
 
 # https://github.com/googleapis/gapic-generator/issues/2243
 s.replace(
@@ -114,13 +117,6 @@ s.replace(
     ],
     'https://googlecloudplatform\\.github\\.io/google-cloud-ruby',
     'https://googleapis.github.io/google-cloud-ruby'
-)
-
-# https://github.com/googleapis/gapic-generator/issues/2393
-s.replace(
-    'google-cloud-irm.gemspec',
-    'gem.add_development_dependency "rubocop".*$',
-    'gem.add_development_dependency "rubocop", "~> 0.64.0"'
 )
 
 # Require the helpers file

@@ -615,9 +615,6 @@ module Google
         end
         alias find_sinks sinks
 
-        # rubocop:disable Metrics/LineLength
-        # overload is too long...
-
         ##
         # Creates a new project sink. When you create a sink, only new log
         # entries that match the sink's filter are exported. Stackdriver Logging
@@ -700,8 +697,6 @@ module Google
           Sink.from_grpc grpc, service
         end
         alias new_sink create_sink
-
-        # rubocop:enable Metrics/LineLength
 
         ##
         # Retrieves a sink by name.

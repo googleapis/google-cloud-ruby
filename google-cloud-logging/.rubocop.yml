@@ -1,3 +1,6 @@
+inherit_gem:
+  google-style: google-style.yml
+
 AllCops:
   Exclude:
     - "acceptance/**/*"
@@ -9,50 +12,40 @@ AllCops:
     - "Rakefile"
     - "support/**/*"
     - "test/**/*"
-  TargetRubyVersion: 2.2
 
 Documentation:
   Enabled: false
 
-Style/StringLiterals:
-  EnforcedStyle: double_quotes
-Style/MethodCallWithArgsParentheses:
-  Enabled: true
-  EnforcedStyle: omit_parentheses
-  AllowParenthesesInMultilineCall: true
-  AllowParenthesesInCamelCaseMethod: true
-Style/MethodDefParentheses:
-  EnforcedStyle: require_no_parentheses
-Style/NumericLiterals:
-  Enabled: false
-Style/CaseEquality:
+Lint/RescueException:
   Exclude:
-    - "lib/google/cloud/logging/middleware.rb"
-Metrics/CyclomaticComplexity:
-  Max: 12
-Metrics/PerceivedComplexity:
-  Max: 12
-Metrics/AbcSize:
-  Max: 28
+    - "lib/google/cloud/logging/rails.rb"
 Metrics/BlockLength:
   Exclude:
     - "lib/google-cloud-logging.rb"
 Metrics/ClassLength:
   Enabled: false
-Metrics/MethodLength:
-  Max: 25
-Metrics/ParameterLists:
-  Enabled: false
-Layout/EmptyLineAfterGuardClause:
-  Enabled: false
-Layout/EmptyLines: # for the extra line between copyright and code
-  Enabled: false
-Layout/AlignHash:
-  EnforcedHashRocketStyle: table
-  EnforcedColonStyle: table
+Metrics/CyclomaticComplexity:
+  Max: 15
+Metrics/PerceivedComplexity:
+  Max: 15
 Naming/FileName:
   Exclude:
     - "lib/google-cloud-logging.rb"
-Lint/RescueException:
-  Exclude:
-    - "lib/google/cloud/logging/rails.rb"
+Style/CaseEquality:
+  Enabled: false
+Style/ConditionalAssignment:
+  Enabled: false
+Style/EmptyMethod:
+  Enabled: false
+Style/IfUnlessModifier:
+  Enabled: false
+Style/MultilineWhenThen:
+  Enabled: false
+Style/NumericLiterals:
+  Enabled: false
+Style/NumericPredicate:
+  Enabled: false
+Style/SafeNavigation:
+  Enabled: false
+Style/SymbolArray:
+  Enabled: false

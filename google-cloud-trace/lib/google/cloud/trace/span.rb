@@ -116,8 +116,6 @@ module Google
           @labels = labels
         end
 
-        # rubocop:disable Metrics/AbcSize
-
         ##
         # Standard value equality check for this object.
         #
@@ -137,8 +135,6 @@ module Google
             labels == other.labels
         end
         alias == eql?
-
-        # rubocop:enable Metrics/AbcSize
 
         ##
         # Create a new Span object from a TraceSpan protobuf and insert it
