@@ -4,13 +4,27 @@
 
 ### All
 
+#### General
+
 - [signet](https://github.com/googleapis/signet) and [googleauth](https://github.com/googleapis/google-auth-library-ruby) use the build scripts and docker images defined in the .kokoro folder in google-cloud-ruby. [google-api-client](https://github.com/googleapis/google-api-ruby-client) has its own build process currently, although work is being done to make it consistent with the other repos.
-- Presubmit builds run when a PR is opened, or when a commit is pushed to an open PR. They run unit tests only.
-- Continuous builds run when a PR is merged to master. They run all unit tests. They run acceptance tests for a gem if the commit on master which triggered the build contains changes to that gem.
-- Release builds run when autorelease triggers them. Autorelease scans the googleapis repos for open PRs with the "autorelease: pending" tag every 15 minutes. It will trigger a build when a PR opened by either [releasetool](https://github.com/googleapis/releasetool) or [release-please](https://github.com/googleapis/release-please) is merged and the release has been tagged.
-- Release builds will, after publishing the gem to rubygems.org, build and push the ref docs to a staging bucket. This bucket is scanned once an hour. Upon finding changes docpublisher will copy the ref docs into the bucket used to serve googleapis.dev.
-- Nightly builds run ...nightly. They run unit tests for all gems and acceptances tests for every gem that has acceptance tests.
-- Presubmits will skip all tests if the commit message contains either "[ci skip]" or "[skip ci]"
+
+#### Presubmit
+
+- Run when a PR is opened, or when a commit is pushed to an open PR. They run unit tests only.
+- Will skip all tests if the commit message contains either "[ci skip]" or "[skip ci]"
+
+#### Continuous
+
+- Run when a PR is merged to master. They run all unit tests. They run acceptance tests for a gem if the commit on master which triggered the build contains changes to that gem.
+
+#### Nightly
+
+- Run ...nightly. They run unit tests for all gems and acceptances tests for every gem that has acceptance tests.
+
+#### Release
+
+- Run when autorelease triggers them. Autorelease scans the googleapis repos for open PRs with the "autorelease: pending" tag every 15 minutes. It will trigger a build when a PR opened by either [releasetool](https://github.com/googleapis/releasetool) or [release-please](https://github.com/googleapis/release-please) is merged and the release has been tagged.
+- Will, after publishing the gem to rubygems.org, build and push the ref docs to a staging bucket. This bucket is scanned once an hour. Upon finding changes docpublisher will copy the ref docs into the bucket used to serve googleapis.dev.
 
 ### Ubuntu
 
