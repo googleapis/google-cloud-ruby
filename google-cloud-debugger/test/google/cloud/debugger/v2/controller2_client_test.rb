@@ -67,6 +67,83 @@ end
 
 describe Google::Cloud::Debugger::V2::Controller2Client do
 
+  describe 'update_active_breakpoint' do
+    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Debugger::V2::Controller2Client#update_active_breakpoint."
+
+    it 'invokes update_active_breakpoint without error' do
+      # Create request parameters
+      debuggee_id = ''
+      breakpoint = {}
+
+      # Create expected grpc response
+      expected_response = {}
+      expected_response = Google::Gax::to_proto(expected_response, Google::Devtools::Clouddebugger::V2::UpdateActiveBreakpointResponse)
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Devtools::Clouddebugger::V2::UpdateActiveBreakpointRequest, request)
+        assert_equal(debuggee_id, request.debuggee_id)
+        assert_equal(Google::Gax::to_proto(breakpoint, Google::Devtools::Clouddebugger::V2::Breakpoint), request.breakpoint)
+        OpenStruct.new(execute: expected_response)
+      end
+      mock_stub = MockGrpcClientStub_v2.new(:update_active_breakpoint, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockController2Credentials_v2.new("update_active_breakpoint")
+
+      Google::Devtools::Clouddebugger::V2::Controller2::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Debugger::V2::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Debugger::V2::Controller2.new
+
+          # Call method
+          response = client.update_active_breakpoint(debuggee_id, breakpoint)
+
+          # Verify the response
+          assert_equal(expected_response, response)
+
+          # Call method with block
+          client.update_active_breakpoint(debuggee_id, breakpoint) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
+        end
+      end
+    end
+
+    it 'invokes update_active_breakpoint with error' do
+      # Create request parameters
+      debuggee_id = ''
+      breakpoint = {}
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Devtools::Clouddebugger::V2::UpdateActiveBreakpointRequest, request)
+        assert_equal(debuggee_id, request.debuggee_id)
+        assert_equal(Google::Gax::to_proto(breakpoint, Google::Devtools::Clouddebugger::V2::Breakpoint), request.breakpoint)
+        raise custom_error
+      end
+      mock_stub = MockGrpcClientStub_v2.new(:update_active_breakpoint, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockController2Credentials_v2.new("update_active_breakpoint")
+
+      Google::Devtools::Clouddebugger::V2::Controller2::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Debugger::V2::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Debugger::V2::Controller2.new
+
+          # Call method
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2 do
+            client.update_active_breakpoint(debuggee_id, breakpoint)
+          end
+
+          # Verify the GaxError wrapped the custom error that was raised.
+          assert_match(custom_error.message, err.message)
+        end
+      end
+    end
+  end
+
   describe 'register_debuggee' do
     custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Debugger::V2::Controller2Client#register_debuggee."
 
@@ -206,83 +283,6 @@ describe Google::Cloud::Debugger::V2::Controller2Client do
           # Call method
           err = assert_raises Google::Gax::GaxError, CustomTestError_v2 do
             client.list_active_breakpoints(debuggee_id)
-          end
-
-          # Verify the GaxError wrapped the custom error that was raised.
-          assert_match(custom_error.message, err.message)
-        end
-      end
-    end
-  end
-
-  describe 'update_active_breakpoint' do
-    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Debugger::V2::Controller2Client#update_active_breakpoint."
-
-    it 'invokes update_active_breakpoint without error' do
-      # Create request parameters
-      debuggee_id = ''
-      breakpoint = {}
-
-      # Create expected grpc response
-      expected_response = {}
-      expected_response = Google::Gax::to_proto(expected_response, Google::Devtools::Clouddebugger::V2::UpdateActiveBreakpointResponse)
-
-      # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Devtools::Clouddebugger::V2::UpdateActiveBreakpointRequest, request)
-        assert_equal(debuggee_id, request.debuggee_id)
-        assert_equal(Google::Gax::to_proto(breakpoint, Google::Devtools::Clouddebugger::V2::Breakpoint), request.breakpoint)
-        OpenStruct.new(execute: expected_response)
-      end
-      mock_stub = MockGrpcClientStub_v2.new(:update_active_breakpoint, mock_method)
-
-      # Mock auth layer
-      mock_credentials = MockController2Credentials_v2.new("update_active_breakpoint")
-
-      Google::Devtools::Clouddebugger::V2::Controller2::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Debugger::V2::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Debugger::V2::Controller2.new
-
-          # Call method
-          response = client.update_active_breakpoint(debuggee_id, breakpoint)
-
-          # Verify the response
-          assert_equal(expected_response, response)
-
-          # Call method with block
-          client.update_active_breakpoint(debuggee_id, breakpoint) do |response, operation|
-            # Verify the response
-            assert_equal(expected_response, response)
-            refute_nil(operation)
-          end
-        end
-      end
-    end
-
-    it 'invokes update_active_breakpoint with error' do
-      # Create request parameters
-      debuggee_id = ''
-      breakpoint = {}
-
-      # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Devtools::Clouddebugger::V2::UpdateActiveBreakpointRequest, request)
-        assert_equal(debuggee_id, request.debuggee_id)
-        assert_equal(Google::Gax::to_proto(breakpoint, Google::Devtools::Clouddebugger::V2::Breakpoint), request.breakpoint)
-        raise custom_error
-      end
-      mock_stub = MockGrpcClientStub_v2.new(:update_active_breakpoint, mock_method)
-
-      # Mock auth layer
-      mock_credentials = MockController2Credentials_v2.new("update_active_breakpoint")
-
-      Google::Devtools::Clouddebugger::V2::Controller2::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Debugger::V2::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Debugger::V2::Controller2.new
-
-          # Call method
-          err = assert_raises Google::Gax::GaxError, CustomTestError_v2 do
-            client.update_active_breakpoint(debuggee_id, breakpoint)
           end
 
           # Verify the GaxError wrapped the custom error that was raised.

@@ -179,6 +179,11 @@ module Google
               &Google::Devtools::Clouddebugger::V2::Debugger2::Stub.method(:new)
             )
 
+            @delete_breakpoint = Google::Gax.create_api_call(
+              @debugger2_stub.method(:delete_breakpoint),
+              defaults["delete_breakpoint"],
+              exception_transformer: exception_transformer
+            )
             @set_breakpoint = Google::Gax.create_api_call(
               @debugger2_stub.method(:set_breakpoint),
               defaults["set_breakpoint"],
@@ -190,11 +195,6 @@ module Google
             @get_breakpoint = Google::Gax.create_api_call(
               @debugger2_stub.method(:get_breakpoint),
               defaults["get_breakpoint"],
-              exception_transformer: exception_transformer
-            )
-            @delete_breakpoint = Google::Gax.create_api_call(
-              @debugger2_stub.method(:delete_breakpoint),
-              defaults["delete_breakpoint"],
               exception_transformer: exception_transformer
             )
             @list_breakpoints = Google::Gax.create_api_call(
@@ -213,6 +213,53 @@ module Google
           end
 
           # Service calls
+
+          # Deletes the breakpoint from the debuggee.
+          #
+          # @param debuggee_id [String]
+          #   Required. ID of the debuggee whose breakpoint to delete.
+          # @param breakpoint_id [String]
+          #   Required. ID of the breakpoint to delete.
+          # @param client_version [String]
+          #   Required. The client version making the call.
+          #   Schema: `domain/type/version` (e.g., `google.com/intellij/v1`).
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result []
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/debugger/v2"
+          #
+          #   debugger2_client = Google::Cloud::Debugger::V2::Debugger2.new
+          #
+          #   # TODO: Initialize `debuggee_id`:
+          #   debuggee_id = ''
+          #
+          #   # TODO: Initialize `breakpoint_id`:
+          #   breakpoint_id = ''
+          #
+          #   # TODO: Initialize `client_version`:
+          #   client_version = ''
+          #   debugger2_client.delete_breakpoint(debuggee_id, breakpoint_id, client_version)
+
+          def delete_breakpoint \
+              debuggee_id,
+              breakpoint_id,
+              client_version,
+              options: nil,
+              &block
+            req = {
+              debuggee_id: debuggee_id,
+              breakpoint_id: breakpoint_id,
+              client_version: client_version
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Devtools::Clouddebugger::V2::DeleteBreakpointRequest)
+            @delete_breakpoint.call(req, options, &block)
+            nil
+          end
 
           # Sets the breakpoint to the debuggee.
           #
@@ -309,53 +356,6 @@ module Google
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Devtools::Clouddebugger::V2::GetBreakpointRequest)
             @get_breakpoint.call(req, options, &block)
-          end
-
-          # Deletes the breakpoint from the debuggee.
-          #
-          # @param debuggee_id [String]
-          #   Required. ID of the debuggee whose breakpoint to delete.
-          # @param breakpoint_id [String]
-          #   Required. ID of the breakpoint to delete.
-          # @param client_version [String]
-          #   Required. The client version making the call.
-          #   Schema: `domain/type/version` (e.g., `google.com/intellij/v1`).
-          # @param options [Google::Gax::CallOptions]
-          #   Overrides the default settings for this call, e.g, timeout,
-          #   retries, etc.
-          # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result []
-          # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @raise [Google::Gax::GaxError] if the RPC is aborted.
-          # @example
-          #   require "google/cloud/debugger/v2"
-          #
-          #   debugger2_client = Google::Cloud::Debugger::V2::Debugger2.new
-          #
-          #   # TODO: Initialize `debuggee_id`:
-          #   debuggee_id = ''
-          #
-          #   # TODO: Initialize `breakpoint_id`:
-          #   breakpoint_id = ''
-          #
-          #   # TODO: Initialize `client_version`:
-          #   client_version = ''
-          #   debugger2_client.delete_breakpoint(debuggee_id, breakpoint_id, client_version)
-
-          def delete_breakpoint \
-              debuggee_id,
-              breakpoint_id,
-              client_version,
-              options: nil,
-              &block
-            req = {
-              debuggee_id: debuggee_id,
-              breakpoint_id: breakpoint_id,
-              client_version: client_version
-            }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Devtools::Clouddebugger::V2::DeleteBreakpointRequest)
-            @delete_breakpoint.call(req, options, &block)
-            nil
           end
 
           # Lists all breakpoints for the debuggee.

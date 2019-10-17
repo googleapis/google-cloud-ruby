@@ -20,6 +20,11 @@
         }
       },
       "methods": {
+        "DeleteBreakpoint": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "idempotent",
+          "retry_params_name": "default"
+        },
         "SetBreakpoint": {
           "timeout_millis": 60000,
           "retry_codes_name": "non_idempotent",
@@ -28,11 +33,6 @@
         "GetBreakpoint": {
           "timeout_millis": 60000,
           "retry_codes_name": "idempotent",
-          "retry_params_name": "default"
-        },
-        "DeleteBreakpoint": {
-          "timeout_millis": 60000,
-          "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "ListBreakpoints": {
