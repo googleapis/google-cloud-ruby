@@ -240,6 +240,12 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
+  doctest.before "Google::Cloud::Bigtable::GcRule" do
+    mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
+      mocked_tables.expect :create_table, table_resp, ["projects/my-project/instances/my-instance", "my-table", Google::Bigtable::Admin::V2::Table, Hash]
+    end
+  end
+
   doctest.before "Google::Cloud::Bigtable::Instance" do
     mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
       mocked_instances.expect :create_instance, mocked_job, ["projects/my-project", "my-instance", Google::Bigtable::Admin::V2::Instance, Hash]
