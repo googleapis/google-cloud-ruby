@@ -55,6 +55,13 @@ s.copy(v1_library / 'google-cloud-container.gemspec', merge=ruby.merge_gemspec)
 # Update gemspec to reflect Ruby 2.4
 ruby.update_gemspec('google-cloud-container.gemspec')
 
+# Update README to reflect Ruby 2.4
+s.replace(
+    'README.md',
+    'Ruby 2.3',
+    'Ruby 2.4'
+)
+
 # Support for service_address
 s.replace(
     [

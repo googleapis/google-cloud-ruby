@@ -24,7 +24,7 @@ be able to accept your pull requests.
 In order to use the google-cloud-resource_manager console and run the project's
 tests, there is a small amount of setup:
 
-1. Install Ruby. google-cloud-resource_manager requires Ruby 2.3+. You may
+1. Install Ruby. google-cloud-resource_manager requires Ruby 2.4+. You may
    choose to manage your Ruby and gem installations with [RVM](https://rvm.io/),
    [rbenv](https://github.com/rbenv/rbenv), or
    [chruby](https://github.com/postmodern/chruby).

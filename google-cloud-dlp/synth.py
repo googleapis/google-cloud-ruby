@@ -43,6 +43,13 @@ s.copy(templates)
 # Update gemspec to reflect Ruby 2.4
 ruby.update_gemspec('google-cloud-dlp.gemspec')
 
+# Update README to reflect Ruby 2.4
+s.replace(
+    'README.md',
+    'Ruby 2.3',
+    'Ruby 2.4'
+)
+
 # Support for service_address
 s.replace(
     [

@@ -72,6 +72,13 @@ s.replace(
 # Update gemspec to reflect Ruby 2.4
 ruby.update_gemspec('grafeas-client.gemspec')
 
+# Update README to reflect Ruby 2.4
+s.replace(
+    'README.md',
+    'Ruby 2.3',
+    'Ruby 2.4'
+)
+
 # Hack AUTHENTICATION.md to fix nonstandard name.
 s.replace(
     'AUTHENTICATION.md',

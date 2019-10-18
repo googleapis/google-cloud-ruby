@@ -56,6 +56,13 @@ s.copy(v1p1beta1_library / 'test/google/cloud/speech/v1p1beta1')
 # Update gemspec to reflect Ruby 2.4
 ruby.update_gemspec('google-cloud-speech.gemspec')
 
+# Update README to reflect Ruby 2.4
+s.replace(
+    'README.md',
+    'Ruby 2.3',
+    'Ruby 2.4'
+)
+
 # PERMANENT: Install partial gapics
 s.replace(
     'lib/google/cloud/speech/v1.rb',

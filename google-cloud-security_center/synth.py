@@ -53,6 +53,13 @@ s.copy(templates)
 # Update gemspec to reflect Ruby 2.4
 ruby.update_gemspec('google-cloud-security_center.gemspec')
 
+# Update README to reflect Ruby 2.4
+s.replace(
+    'README.md',
+    'Ruby 2.3',
+    'Ruby 2.4'
+)
+
 # Permanent: rename securitycenter file paths to security_center
 s.replace(
     [

@@ -59,6 +59,13 @@ s.copy(v1beta_library / 'test/google/cloud/os_login/v1beta')
 # Update gemspec to reflect Ruby 2.4
 ruby.update_gemspec('google-cloud-os_login.gemspec')
 
+# Update README to reflect Ruby 2.4
+s.replace(
+    'README.md',
+    'Ruby 2.3',
+    'Ruby 2.4'
+)
+
 # PERMANENT: API name for oslogin
 s.replace(
     [
