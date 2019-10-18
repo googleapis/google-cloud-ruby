@@ -26,11 +26,6 @@ module Google
       # See {Project#create_table}, {Instance#create_table} and
       # {Table#column_families}.
       #
-      # Modifications will be atomically applied to the table's column families.
-      # Entries are applied in order, meaning that earlier modifications can be
-      # masked by later ones (in the case of repeated updates to the same
-      # column family, for example).
-      #
       # @example
       #   require "google/cloud/bigtable"
       #
@@ -113,10 +108,16 @@ module Google
         end
 
         ##
-        # Calls block once for each key in the map, passing the key-value pair
-        # as parameters.
+        # Calls block once for each column family in the map, passing passing
+        # the name and column family pair as parameters.
         #
         # If no block is given, an enumerator is returned instead.
+        #
+        # @yield [name, column_family] The name and column family pair
+        # @yieldparam [String] name the column family name
+        # @yieldparam [ColumnFamily] column_family the column family object
+        #
+        # @return [Enumerator]
         #
         def each
           return enum_for :each unless block_given?
@@ -130,6 +131,8 @@ module Google
         # Retrieves the ColumnFamily object corresponding to the `name`. If not
         # found, returns `nil`.
         #
+        # @return [ColumnFamily]
+        #
         def [] name
           return nil unless name? name
 
@@ -137,7 +140,9 @@ module Google
         end
 
         ##
-        # Returns true if the given key is present in the map.
+        # Returns true if the given name is present in the map.
+        #
+        # @return [Boolean]
         #
         def name? name
           @column_families.has_key? name
@@ -145,7 +150,9 @@ module Google
         alias key? name?
 
         ##
-        # Returns a new array populated with the keys from the map.
+        # Returns a new array populated with the names from the map.
+        #
+        # @return [Array<String>]
         #
         def names
           @column_families.keys
@@ -153,7 +160,9 @@ module Google
         alias keys names
 
         ##
-        # Returns the number of key-value pairs in the map.
+        # Returns the number of name and column family pairs in the map.
+        #
+        # @return [Integer]
         #
         def length
           @column_families.length
@@ -161,7 +170,9 @@ module Google
         alias size length
 
         ##
-        # Returns true if the map contains no key-value pairs.
+        # Returns true if the map contains no name and column family pairs.
+        #
+        # @return [Boolean]
         #
         def empty?
           length.zero?
