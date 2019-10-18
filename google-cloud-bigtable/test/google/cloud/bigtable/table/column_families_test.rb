@@ -37,7 +37,7 @@ describe Google::Cloud::Bigtable::Table, :column_families, :mock_bigtable do
   it "modifies column families in the table" do
     modifications = [
       Google::Bigtable::Admin::V2::ModifyColumnFamiliesRequest::Modification.new(
-        id: "cf1",
+        id: "cf4",
         create: Google::Bigtable::Admin::V2::ColumnFamily.new(
           gc_rule: Google::Bigtable::Admin::V2::GcRule.new(max_age: 600)
         )
@@ -51,10 +51,9 @@ describe Google::Cloud::Bigtable::Table, :column_families, :mock_bigtable do
     ]
     gc_rule_1 = Google::Bigtable::Admin::V2::GcRule.new(gc_rule_hash(max_age: 600))
     gc_rule_2 = Google::Bigtable::Admin::V2::GcRule.new(gc_rule_hash(max_versions: 5))
-    column_families_resp = {
-      "cf1" => Google::Bigtable::Admin::V2::ColumnFamily.new(gc_rule: gc_rule_1),
-      "cf2" => Google::Bigtable::Admin::V2::ColumnFamily.new(gc_rule: gc_rule_2)
-    }
+    column_families_resp = column_families.dup
+    column_families_resp["cf4"] = Google::Bigtable::Admin::V2::ColumnFamily.new(gc_rule: gc_rule_1)
+    column_families_resp["cf2"] = Google::Bigtable::Admin::V2::ColumnFamily.new(gc_rule: gc_rule_2)
     cluster_states = clusters_state_grpc(num: 1)
     table_resp = Google::Bigtable::Admin::V2::Table.new(
       table_hash(
@@ -72,19 +71,21 @@ describe Google::Cloud::Bigtable::Table, :column_families, :mock_bigtable do
     ]
     bigtable.service.mocked_tables = mock
 
-    column_families = table.column_families do |cfs|
-      cfs.add "cf1", Google::Cloud::Bigtable::GcRule.max_age(600)
-      cfs.update "cf2", Google::Cloud::Bigtable::GcRule.max_versions(5)
+    column_families = table.column_families do |cfm|
+      cfm.add "cf4", gc_rule: Google::Cloud::Bigtable::GcRule.max_age(600)
+      cfm.update "cf2", gc_rule: Google::Cloud::Bigtable::GcRule.max_versions(5)
     end
 
-    column_families.must_be_instance_of Hash
-    column_families.keys.sort.must_equal column_families_resp.keys
-    column_families["cf1"].gc_rule.to_grpc.must_equal gc_rule_1
+    column_families.must_be_instance_of Google::Cloud::Bigtable::ColumnFamilyMap
+    table.column_families.must_be :frozen?
+    column_families.names.sort.must_equal column_families_resp.keys
+    column_families["cf4"].gc_rule.to_grpc.must_equal gc_rule_1
     column_families["cf2"].gc_rule.to_grpc.must_equal gc_rule_2
 
-    table.column_families.must_be_instance_of Hash
-    table.column_families.keys.sort.must_equal column_families_resp.keys
-    table.column_families["cf1"].gc_rule.to_grpc.must_equal gc_rule_1
+    table.column_families.must_be_instance_of Google::Cloud::Bigtable::ColumnFamilyMap
+    table.column_families.must_be :frozen?
+    table.column_families.names.sort.must_equal column_families_resp.keys
+    table.column_families["cf4"].gc_rule.to_grpc.must_equal gc_rule_1
     table.column_families["cf2"].gc_rule.to_grpc.must_equal gc_rule_2
 
     table.project_id.must_equal project_id

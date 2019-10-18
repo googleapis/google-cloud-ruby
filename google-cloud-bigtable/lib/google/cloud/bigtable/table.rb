@@ -17,9 +17,7 @@
 
 require "google/cloud/bigtable/table/list"
 require "google/cloud/bigtable/table/cluster_state"
-require "google/cloud/bigtable/column_family"
-require "google/cloud/bigtable/table/column_families_creator"
-require "google/cloud/bigtable/table/column_families_updater"
+require "google/cloud/bigtable/column_family_map"
 require "google/cloud/bigtable/gc_rule"
 require "google/cloud/bigtable/mutation_operations"
 require "google/cloud/bigtable/read_operations"
@@ -146,7 +144,7 @@ module Google
         end
 
         ##
-        # Returns a frozen hash containing the column families configured for
+        # Returns a frozen object containing the column families configured for
         # the table, mapped by column family name. Reloads the table if
         # necessary to retrieve the column families data, since it is only
         # available in a table with view type `SCHEMA_VIEW` or `FULL`.
@@ -162,13 +160,12 @@ module Google
         #   none of the modifications will occur before this method returns, but
         #   data requests received prior to that point may see a table where
         #   only some modifications have taken effect.
-        # @yieldparam [Google::Cloud::Bigtable::Table::ColumnFamiliesUpdater}]
-        #   Modifications to be atomically applied to the specified table's
-        #   families. Entries are applied in order, meaning that earlier
-        #   modifications can be masked by later ones (in the case of repeated
-        #   updates to the same family, for example).
+        # @yieldparam [ColumnFamilyMap] column_families
+        #   A mutable object containing the column families for the table,
+        #   mapped by column family name. Any changes made to this object will
+        #   be stored in API.
         #
-        # @return [Hash{String => ColumnFamily}] A frozen hash containing the
+        # @return [ColumnFamilyMap] A frozen object containing the
         #   column families for the table, mapped by column family name.
         #
         # @example
@@ -193,38 +190,37 @@ module Google
         #
         #   table = bigtable.table("my-instance", "my-table", perform_lookup: true)
         #
-        #   table.column_families do |cf_updater|
-        #
-        #     cf_updater.add "cf1", Google::Cloud::Bigtable::GcRule.max_age(600)
-        #     cf_updater.add "cf2", Google::Cloud::Bigtable::GcRule.max_versions(5)
+        #   table.column_families do |cfm|
+        #     cfm.add "cf4", gc_rule: Google::Cloud::Bigtable::GcRule.max_age(600)
+        #     cfm.add "cf5", gc_rule: Google::Cloud::Bigtable::GcRule.max_versions(5)
         #
         #     rule_1 = Google::Cloud::Bigtable::GcRule.max_versions(3)
         #     rule_2 = Google::Cloud::Bigtable::GcRule.max_age(600)
         #     rule_union = Google::Cloud::Bigtable::GcRule.union(rule_1, rule_2)
-        #     cf_updater.update "cf3", rule_union
+        #     cfm.update "cf2", gc_rule: rule_union
         #
-        #     cf_updater.delete "cf5"
+        #     cfm.delete "cf3"
         #   end
         #
         #   puts table.column_families["cf5"] #=> nil
         #
         def column_families
           check_view_and_load(:SCHEMA_VIEW)
+
           if block_given?
-            updater = Table::ColumnFamiliesUpdater.new
-            yield updater
-            @grpc = service.modify_column_families(
-              instance_id,
-              table_id,
-              updater.modifications
-            )
+            column_families = ColumnFamilyMap.from_grpc @grpc.column_families
+            yield column_families
+            modifications = column_families.modifications @grpc.column_families
+            if modifications.any?
+              @grpc = service.modify_column_families(
+                instance_id,
+                table_id,
+                modifications
+              )
+            end
           end
-          @grpc.column_families.map do |name, cf_grpc|
-            [
-              name,
-              ColumnFamily.from_grpc(cf_grpc, name)
-            ]
-          end.to_h.freeze
+
+          ColumnFamilyMap.from_grpc(@grpc.column_families).freeze
         end
 
         ##
@@ -312,11 +308,11 @@ module Google
         # @param service [Google::Cloud::Bigtable::Service]
         # @param instance_id [String]
         # @param table_id [String]
-        # @param column_families [Hash{String => Google::Cloud::Bigtable::ColumnFamily}]
+        # @param column_families [ColumnFamilyMap]
         # @param granularity [Symbol]
         # @param initial_splits [Array<String>]
         # @yield [column_families] A block for adding column_families.
-        # @yieldparam [Hash{String => Google::Cloud::Bigtable::ColumnFamily}]
+        # @yieldparam [ColumnFamilyMap]
         #
         # @return [Google::Cloud::Bigtable::Table]
         #
@@ -327,11 +323,16 @@ module Google
             column_families: nil,
             granularity: nil,
             initial_splits: nil
-          column_families ||= Table::ColumnFamiliesCreator.new
+          if column_families
+            # create an un-frozen and duplicate object
+            column_families = ColumnFamilyMap.from_grpc column_families.to_grpc
+          end
+          column_families ||= ColumnFamilyMap.new
+
           yield column_families if block_given?
 
           table = Google::Bigtable::Admin::V2::Table.new({
-            column_families: column_families.to_grpc,
+            column_families: column_families.to_grpc_hash,
             granularity: granularity
           }.delete_if { |_, v| v.nil? })
 

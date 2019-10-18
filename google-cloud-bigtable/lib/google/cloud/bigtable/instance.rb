@@ -537,10 +537,9 @@ module Google
         # @param name [String]
         #   The name by which the new table should be referred to within the parent
         #   instance, e.g., `foobar`
-        # @param column_families [Google::Cloud::Bigtable::Table::ColumnFamiliesCreator]
-        #   A `ColumnFamiliesCreator` instance with which column families for the
-        #   table have been configured. Alternatively, a code block yielding a
-        #   `ColumnFamiliesCreator` instance may also be passed to this method.
+        # @param column_families [Google::Cloud::Bigtable::ColumnFamilyMap]
+        #   An object containing the column families for the table, mapped by
+        #   column family name.
         # @param granularity [Symbol]
         #   The granularity at which timestamps are stored in this table.
         #   Timestamps not matching the granularity will be rejected.
@@ -564,11 +563,10 @@ module Google
         #     * Tablet 5 : `[other, )                => {"other", "zz"}`
         #   A hash in the form of `Google::Bigtable::Admin::V2::CreateTableRequest::Split`
         #   can also be provided.
-        # @yield [cf_creator] A block for adding column families.
-        # @yieldparam [Google::Cloud::Bigtable::Table::ColumnFamiliesCreator]
-        #   Accepts string column family names and associated
-        #   {Google::Cloud::Bigtable::GcRule} objects to configure new
-        #   {Google::Cloud::Bigtable::ColumnFamily} entries for the table.
+        # @yield [column_families] A block for adding column families.
+        # @yieldparam [Google::Cloud::Bigtable::ColumnFamilyMap] column_families
+        #   A mutable object containing the column families for the table,
+        #   mapped by column family name.
         #
         # @return [Google::Cloud::Bigtable::Table]
         #
@@ -590,15 +588,15 @@ module Google
         #   instance = bigtable.instance("my-instance")
         #
         #   initial_splits = ["user-00001", "user-100000", "others"]
-        #   table = instance.create_table("my-table", initial_splits: initial_splits) do |cf_creator|
-        #     cf_creator.add('cf1', Google::Cloud::Bigtable::GcRule.max_versions(5))
-        #     cf_creator.add('cf2', Google::Cloud::Bigtable::GcRule.max_age(600))
+        #   table = instance.create_table("my-table", initial_splits: initial_splits) do |cfm|
+        #     cfm.add('cf1', gc_rule: Google::Cloud::Bigtable::GcRule.max_versions(5))
+        #     cfm.add('cf2', gc_rule: Google::Cloud::Bigtable::GcRule.max_age(600))
         #
         #     gc_rule = Google::Cloud::Bigtable::GcRule.union(
         #        Google::Cloud::Bigtable::GcRule.max_age(1800),
         #       Google::Cloud::Bigtable::GcRule.max_versions(3)
         #     )
-        #     cf_creator.add('cf3', gc_rule)
+        #     cfm.add('cf3', gc_rule: gc_rule)
         #   end
         #
         #   puts table

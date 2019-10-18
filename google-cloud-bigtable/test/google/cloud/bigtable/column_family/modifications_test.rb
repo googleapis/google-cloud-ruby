@@ -59,8 +59,8 @@ describe Google::Cloud::Bigtable::ColumnFamily, :create, :mock_bigtable do
 
     gc_rule = Google::Cloud::Bigtable::GcRule.max_versions(3)
 
-    column_families = table.column_families do |cfs|
-      cfs.add(new_cf_name, gc_rule)
+    column_families = table.column_families do |cfm|
+      cfm.add(new_cf_name, gc_rule: gc_rule)
     end
 
     cf = column_families[new_cf_name]
@@ -95,8 +95,8 @@ describe Google::Cloud::Bigtable::ColumnFamily, :create, :mock_bigtable do
                                        ]
     bigtable.service.mocked_tables = mock
 
-    column_families = table.column_families do |cfs|
-      cfs.add(new_cf_name)
+    column_families = table.column_families do |cfm|
+      cfm.add(new_cf_name)
     end
 
     cf = column_families[new_cf_name]
@@ -108,7 +108,7 @@ describe Google::Cloud::Bigtable::ColumnFamily, :create, :mock_bigtable do
   end
 
   it "update column family" do
-    cf_name = "cf"
+    cf_name = table.column_families.names.first
 
     get_res = Google::Bigtable::Admin::V2::Table.new(
       name: table_path(instance_id, table_id),
@@ -136,8 +136,8 @@ describe Google::Cloud::Bigtable::ColumnFamily, :create, :mock_bigtable do
 
     gc_rule = Google::Cloud::Bigtable::GcRule.max_versions(1)
 
-    column_families = table.column_families do |cfs|
-      cfs.update(cf_name, gc_rule)
+    column_families = table.column_families do |cfm|
+      cfm.update(cf_name, gc_rule: gc_rule)
     end
 
     cf = column_families[cf_name]
@@ -150,7 +150,7 @@ describe Google::Cloud::Bigtable::ColumnFamily, :create, :mock_bigtable do
   end
 
   it "update column family with nil gc_rule" do
-    cf_name = "cf"
+    cf_name = table.column_families.names.first
 
     get_res = Google::Bigtable::Admin::V2::Table.new(
       name: table_path(instance_id, table_id),
@@ -176,8 +176,8 @@ describe Google::Cloud::Bigtable::ColumnFamily, :create, :mock_bigtable do
                                        ]
     bigtable.service.mocked_tables = mock
 
-    column_families = table.column_families do |cfs|
-      cfs.update(cf_name)
+    column_families = table.column_families do |cfm|
+      cfm.update(cf_name)
     end
 
     cf = column_families[cf_name]
@@ -189,7 +189,7 @@ describe Google::Cloud::Bigtable::ColumnFamily, :create, :mock_bigtable do
   end
 
   it "delete column family" do
-    cf_name = "cf"
+    cf_name = table.column_families.names.first
 
     get_res = Google::Bigtable::Admin::V2::Table.new(
       name: table_path(instance_id, table_id)
@@ -208,8 +208,8 @@ describe Google::Cloud::Bigtable::ColumnFamily, :create, :mock_bigtable do
     ]
     bigtable.service.mocked_tables = mock
 
-    column_families = table.column_families do |cfs|
-      cfs.delete(cf_name)
+    column_families = table.column_families do |cfm|
+      cfm.delete(cf_name)
     end
 
     column_families[cf_name].must_be :nil?

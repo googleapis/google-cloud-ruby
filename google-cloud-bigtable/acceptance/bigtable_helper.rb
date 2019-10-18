@@ -150,7 +150,7 @@ $table_list_for_cleanup = []
 
 def create_test_table instance_id, table_id, row_count: nil, qualifiers: ["field1"]
   table = $bigtable.create_table(instance_id, table_id) do |cfs|
-    cfs.add('cf', Google::Cloud::Bigtable::GcRule.max_versions(1))
+    cfs.add('cf', gc_rule: Google::Cloud::Bigtable::GcRule.max_versions(1))
   end
 
   $table_list_for_cleanup << table_id

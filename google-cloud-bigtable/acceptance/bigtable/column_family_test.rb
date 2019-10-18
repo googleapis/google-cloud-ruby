@@ -24,8 +24,8 @@ describe Google::Cloud::Bigtable::Table, :column_families, :bigtable do
     add_table_to_cleanup_list(table_id)
 
     bigtable.create_table(instance_id, table_id) do |cfs|
-      cfs.add('cf1', Google::Cloud::Bigtable::GcRule.max_age(600))
-      cfs.add('cf2', Google::Cloud::Bigtable::GcRule.max_versions(1))
+      cfs.add('cf1', gc_rule: Google::Cloud::Bigtable::GcRule.max_age(600))
+      cfs.add('cf2', gc_rule: Google::Cloud::Bigtable::GcRule.max_versions(1))
     end
   }
 
@@ -33,7 +33,7 @@ describe Google::Cloud::Bigtable::Table, :column_families, :bigtable do
     gc_rule = Google::Cloud::Bigtable::GcRule.max_versions(1)
 
     column_families = table.column_families do |cfs|
-      cfs.add "cfcreate", gc_rule
+      cfs.add "cfcreate", gc_rule: gc_rule
     end
 
     cf = column_families["cfcreate"]
@@ -53,7 +53,7 @@ describe Google::Cloud::Bigtable::Table, :column_families, :bigtable do
     gc_rule = Google::Cloud::Bigtable::GcRule.max_versions(1)
 
     column_families = table.column_families do |cfs|
-      cfs.add "cfcreate", gc_rule
+      cfs.add "cfcreate", gc_rule: gc_rule
     end
 
     cf = column_families["cfcreate"]
@@ -89,7 +89,7 @@ describe Google::Cloud::Bigtable::Table, :column_families, :bigtable do
     gc_rule = Google::Cloud::Bigtable::GcRule.max_age(300)
 
     column_families = table.column_families do |cfs|
-      cfs.update "cf1", gc_rule
+      cfs.update "cf1", gc_rule: gc_rule
     end
 
     cf = column_families["cf1"]
@@ -135,7 +135,7 @@ describe Google::Cloud::Bigtable::Table, :column_families, :bigtable do
     gc_union_rule = Google::Cloud::Bigtable::GcRule.union(gc_rule_1, gc_rule_2)
 
     column_families = table.column_families do |cfs|
-      cfs.add "cfunion", gc_union_rule
+      cfs.add "cfunion", gc_rule: gc_union_rule
     end
 
     cf = column_families["cfunion"]
@@ -163,7 +163,7 @@ describe Google::Cloud::Bigtable::Table, :column_families, :bigtable do
     )
 
     column_families = table.column_families do |cfs|
-      cfs.add "cfintersect", gc_intersection_rule
+      cfs.add "cfintersect", gc_rule: gc_intersection_rule
     end
 
     cf = column_families["cfintersect"]

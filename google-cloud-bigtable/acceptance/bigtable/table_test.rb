@@ -24,7 +24,7 @@ describe "Instance Tables", :bigtable do
     table_id = "test-table-#{random_str}"
 
     table = bigtable.create_table(instance_id, table_id) do |cfs|
-      cfs.add("cf", Google::Cloud::Bigtable::GcRule.max_versions(3))
+      cfs.add("cf", gc_rule: Google::Cloud::Bigtable::GcRule.max_versions(3))
     end
 
     table.must_be_kind_of Google::Cloud::Bigtable::Table
@@ -51,7 +51,7 @@ describe "Instance Tables", :bigtable do
         table_id,
         initial_splits: initial_splits,
         granularity: :MILLIS) do |cfs|
-      cfs.add("cf", Google::Cloud::Bigtable::GcRule.max_versions(1))
+      cfs.add("cf", gc_rule: Google::Cloud::Bigtable::GcRule.max_versions(1))
     end
 
     table.must_be_kind_of Google::Cloud::Bigtable::Table
@@ -81,12 +81,12 @@ describe "Instance Tables", :bigtable do
 
     table = bigtable.create_table(instance_id, table_id) do |cfs|
       cfs.add("cf1") # default service value for GcRule
-      cfs.add("cf2", Google::Cloud::Bigtable::GcRule.max_versions(5))
-      cfs.add("cf3", Google::Cloud::Bigtable::GcRule.max_age(600))
+      cfs.add("cf2", gc_rule: Google::Cloud::Bigtable::GcRule.max_versions(5))
+      cfs.add("cf3", gc_rule: Google::Cloud::Bigtable::GcRule.max_age(600))
     end
 
     column_families = table.column_families
-    column_families.must_be_kind_of Hash
+    column_families.must_be_kind_of Google::Cloud::Bigtable::ColumnFamilyMap
     column_families.must_be :frozen?
     column_families.count.must_equal 3
 

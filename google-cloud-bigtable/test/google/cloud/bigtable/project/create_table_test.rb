@@ -55,8 +55,8 @@ describe Google::Cloud::Bigtable::Project, :create_table, :mock_bigtable do
       instance_id,
       table_id,
       granularity: :MILLIS,
-    ) do |cfs|
-      cfs.add('cf1', Google::Cloud::Bigtable::GcRule.max_versions(1))
+    ) do |cfm|
+      cfm.add('cf1', gc_rule: Google::Cloud::Bigtable::GcRule.max_versions(1))
     end
 
     table.project_id.must_equal project_id
@@ -64,7 +64,9 @@ describe Google::Cloud::Bigtable::Project, :create_table, :mock_bigtable do
     table.name.must_equal table_id
     table.path.must_equal table_path(instance_id, table_id)
     table.granularity.must_equal :MILLIS
-    table.column_families.keys.sort.must_equal column_families.keys
+    table.column_families.must_be_instance_of Google::Cloud::Bigtable::ColumnFamilyMap
+    table.column_families.must_be :frozen?
+    table.column_families.names.sort.must_equal column_families.keys
     table.column_families.each do |name, cf|
       cf.gc_rule.to_grpc.must_equal column_families[cf.name].gc_rule
     end
@@ -112,8 +114,8 @@ describe Google::Cloud::Bigtable::Project, :create_table, :mock_bigtable do
       table_id,
       granularity: :MILLIS,
       initial_splits: initial_splits
-    ) do |cfs|
-      cfs.add('cf1', Google::Cloud::Bigtable::GcRule.max_versions(1))
+    ) do |cfm|
+      cfm.add('cf1', gc_rule: Google::Cloud::Bigtable::GcRule.max_versions(1))
     end
 
     table.project_id.must_equal project_id
@@ -121,7 +123,9 @@ describe Google::Cloud::Bigtable::Project, :create_table, :mock_bigtable do
     table.name.must_equal table_id
     table.path.must_equal table_path(instance_id, table_id)
     table.granularity.must_equal :MILLIS
-    table.column_families.keys.sort.must_equal column_families.keys
+    table.column_families.must_be_instance_of Google::Cloud::Bigtable::ColumnFamilyMap
+    table.column_families.must_be :frozen?
+    table.column_families.names.sort.must_equal column_families.keys
     table.column_families.each do |name, cf|
       cf.gc_rule.to_grpc.must_equal column_families[cf.name].gc_rule
     end
