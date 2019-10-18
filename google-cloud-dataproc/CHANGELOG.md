@@ -1,5 +1,15 @@
 # Release History
 
+### 0.6.0 / 2019-10-18
+
+#### Features
+
+* Additional configuration options for clusters
+  * Add ClusterConfig#autoscaling_config
+  * Add ClusterConfig#security_config
+  * Add InstanceGroupConfig#min_cpu_platform
+  * Add AutoscalingConfig, SecurityConfig, and KerberosConfig classes
+
 ### 0.5.1 / 2019-08-23
 
 #### Documentation
