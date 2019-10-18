@@ -38,7 +38,7 @@ module Google
           # @private
           # Creates an instance of a chain filter.
           def initialize
-            @grpc = Google::Bigtable::V2::RowFilter::Chain.new
+            @filters = []
           end
 
           ##
@@ -519,7 +519,7 @@ module Google
           end
 
           ##
-          # Gets the number of filters in the chain filter.
+          # Gets the number of filters in the chain.
           #
           # @return [Integer]
           #
@@ -529,16 +529,16 @@ module Google
           #  filter.length # 2
           #
           def length
-            @grpc.filters.length
+            @filters.length
           end
 
           ##
-          # Gets the list of filters.
+          # Returns the frozen filters array.
           #
-          # @return [Array<Google::Bigtable::V2::RowFilter>]
+          # @return [Array<SimpleFilter|ChainFilter|InterleaveFilter|ConditionFilter>]
           #
           def filters
-            @grpc.filters
+            @filters.freeze
           end
 
           # @private
@@ -548,9 +548,12 @@ module Google
           # @return [Google::Bigtable::V2::RowFilter]
           #
           def to_grpc
-            Google::Bigtable::V2::RowFilter.new(chain: @grpc)
+            Google::Bigtable::V2::RowFilter.new(
+              chain: Google::Bigtable::V2::RowFilter::Chain.new(
+                filters: @filters.map(&:to_grpc)
+              )
+            )
           end
-
 
           private
 
@@ -560,7 +563,7 @@ module Google
           # @param filter [SimpleFilter, ChainFilter, InterleaveFilter, ConditionFilter]
           #
           def add filter
-            @grpc.filters << filter.to_grpc
+            @filters << filter
             self
           end
         end
