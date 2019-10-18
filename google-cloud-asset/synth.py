@@ -51,6 +51,16 @@ s.copy(v1beta1_library / 'test/google/cloud/asset/v1beta1')
 templates = gcp.CommonTemplates().ruby_library()
 s.copy(templates)
 
+# Update gemspec to reflect Ruby 2.4
+ruby.update_gemspec('google-cloud-asset.gemspec')
+
+# Update README to reflect Ruby 2.4
+s.replace(
+    'README.md',
+    'Ruby 2.3',
+    'Ruby 2.4'
+)
+
 # Support for service_address
 s.replace(
     [
@@ -96,7 +106,7 @@ s.replace(
 s.replace(
     'google-cloud-asset.gemspec',
     '\n  gem\\.add_dependency "google-gax", "~> 1\\.[\\d\\.]+"\n\n',
-    '\n  gem.add_dependency "google-gax", "~> 1.7"\n  gem.add_dependency "grpc-google-iam-v1", "~> 0.6.9"\n\n')
+    '\n  gem.add_dependency "google-gax", "~> 1.8"\n  gem.add_dependency "grpc-google-iam-v1", "~> 0.6.9"\n\n')
 
 # https://github.com/googleapis/gapic-generator/issues/2232
 s.replace(
@@ -154,13 +164,6 @@ s.replace(
     'README.md',
     '# Ruby Client for Cloud Asset API \(\[Alpha\]\(https:\/\/github\.com\/googleapis\/google-cloud-ruby#versioning\)\)',
     '# Ruby Client for Cloud Asset API ([Beta](https://github.com/googleapis/google-cloud-ruby#versioning))'
-)
-
-# https://github.com/googleapis/gapic-generator/issues/2393
-s.replace(
-    'google-cloud-asset.gemspec',
-    'gem.add_development_dependency "rubocop".*$',
-    'gem.add_development_dependency "rubocop", "~> 0.64.0"'
 )
 
 for version in ['v1', 'v1beta1']:

@@ -1,3 +1,6 @@
+inherit_gem:
+  google-style: google-style.yml
+
 AllCops:
   Exclude:
     - "acceptance/**/*"
@@ -10,35 +13,6 @@ AllCops:
     - "lib/google/cloud/vision/v1p3beta1.rb"
     - "lib/google/cloud/vision/v1p3beta1/**/*"
     - "test/**/*"
-  TargetRubyVersion: 2.2
-    
 
 Documentation:
-  Enabled: false
-
-Style/StringLiterals:
-  EnforcedStyle: double_quotes
-Style/MethodDefParentheses:
-  EnforcedStyle: require_no_parentheses
-Style/TrivialAccessors:
-  Enabled: false
-Style/FormatStringToken: # we have many uses of this, we don't want to change
-  Enabled: false
-Metrics/CyclomaticComplexity:
-  Max: 15
-Metrics/PerceivedComplexity:
-  Max: 15
-Metrics/AbcSize:
-  Max: 25
-Metrics/ClassLength:
-  Enabled: false
-Metrics/MethodLength:
-  Max: 26
-Metrics/ParameterLists:
-  Enabled: false
-Layout/EmptyLines: # for the extra line between copyright and code
-  Enabled: false
-Naming/UncommunicativeMethodParamName:
-  Enabled: false
-Layout/EmptyLineAfterGuardClause:
   Enabled: false

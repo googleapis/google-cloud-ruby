@@ -44,6 +44,16 @@ s.copy(v1beta1_library / 'google-cloud-phishing_protection.gemspec', merge=ruby.
 templates = gcp.CommonTemplates().ruby_library()
 s.copy(templates)
 
+# Update gemspec to reflect Ruby 2.4
+ruby.update_gemspec('google-cloud-phishing_protection.gemspec')
+
+# Update README to reflect Ruby 2.4
+s.replace(
+    'README.md',
+    'Ruby 2.3',
+    'Ruby 2.4'
+)
+
 # Support for service_address
 s.replace(
     [
@@ -128,19 +138,12 @@ s.replace(
     'https://googleapis.github.io/google-cloud-ruby'
 )
 
-# https://github.com/googleapis/gapic-generator/issues/2393
-s.replace(
-    'google-cloud-phishing_protection.gemspec',
-    'gem.add_development_dependency "rubocop".*$',
-    'gem.add_development_dependency "rubocop", "~> 0.64.0"'
-)
-
 # https://github.com/googleapis/gapic-generator/issues/2180
 s.replace(
     'google-cloud-phishing_protection.gemspec',
     'gem.add_dependency "google-gax", "~> 1\\.[\\d\\.]+"',
     "\n".join([
-        'gem.add_dependency "google-gax", "~> 1.7"',
+        'gem.add_dependency "google-gax", "~> 1.8"',
         '  gem.add_dependency "googleapis-common-protos", ">= 1.3.9", "< 2.0"',
         '  gem.add_dependency "grpc-google-iam-v1", "~> 0.6.9"'
     ])

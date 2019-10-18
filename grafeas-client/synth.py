@@ -69,6 +69,16 @@ s.replace(
     'gem install grafeas-client\n'
 )
 
+# Update gemspec to reflect Ruby 2.4
+ruby.update_gemspec('grafeas-client.gemspec')
+
+# Update README to reflect Ruby 2.4
+s.replace(
+    'README.md',
+    'Ruby 2.3',
+    'Ruby 2.4'
+)
+
 # Hack AUTHENTICATION.md to fix nonstandard name.
 s.replace(
     'AUTHENTICATION.md',
@@ -139,7 +149,7 @@ s.replace(
 s.replace(
     'grafeas-client.gemspec',
     '\n  gem\\.add_dependency "google-gax", "~> 1\\.[\\d\\.]+"\n',
-    '\n  gem.add_dependency "google-gax", "~> 1.7"\n')
+    '\n  gem.add_dependency "google-gax", "~> 1.8"\n')
 
 # Fix for tests that assume protos implement to_hash
 s.replace(
@@ -199,13 +209,6 @@ s.replace(
     ],
     'https://googlecloudplatform\\.github\\.io/google-cloud-ruby',
     'https://googleapis.github.io/google-cloud-ruby'
-)
-
-# https://github.com/googleapis/gapic-generator/issues/2393
-s.replace(
-    'grafeas-client.gemspec',
-    'gem.add_development_dependency "rubocop".*$',
-    'gem.add_development_dependency "rubocop", "~> 0.64.0"'
 )
 
 s.replace(

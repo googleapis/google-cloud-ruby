@@ -52,6 +52,16 @@ s.copy(v1_library / '.gitignore')
 s.copy(v1_library / '.yardopts')
 s.copy(v1_library / 'google-cloud-container.gemspec', merge=ruby.merge_gemspec)
 
+# Update gemspec to reflect Ruby 2.4
+ruby.update_gemspec('google-cloud-container.gemspec')
+
+# Update README to reflect Ruby 2.4
+s.replace(
+    'README.md',
+    'Ruby 2.3',
+    'Ruby 2.4'
+)
+
 # Support for service_address
 s.replace(
     [
@@ -95,7 +105,7 @@ s.replace(
 s.replace(
     'google-cloud-container.gemspec',
     '\n  gem\\.add_dependency "google-gax", "~> 1\\.[\\d\\.]+"\n',
-    '\n  gem.add_dependency "google-gax", "~> 1.7"\n')
+    '\n  gem.add_dependency "google-gax", "~> 1.8"\n')
 
 # Fix for tests that assume protos implement to_hash
 s.replace(
@@ -142,13 +152,6 @@ s.replace(
     ],
     'https://googlecloudplatform\\.github\\.io/google-cloud-ruby',
     'https://googleapis.github.io/google-cloud-ruby'
-)
-
-# https://github.com/googleapis/gapic-generator/issues/2393
-s.replace(
-    'google-cloud-container.gemspec',
-    'gem.add_development_dependency "rubocop".*$',
-    'gem.add_development_dependency "rubocop", "~> 0.64.0"'
 )
 
 s.replace(

@@ -41,6 +41,9 @@ s.copy(v1_library / 'google-cloud-container_analysis.gemspec', merge=ruby.merge_
 templates = gcp.CommonTemplates().ruby_library()
 s.copy(templates)
 
+# Update gemspec to reflect Ruby 2.4
+ruby.update_gemspec('google-cloud-container_analysis.gemspec')
+
 # Hack grpc service class name and location
 s.replace(
     'lib/google/devtools/containeranalysis/v1/containeranalysis_services_pb.rb',
@@ -101,7 +104,7 @@ s.replace(
 s.replace(
     'google-cloud-container_analysis.gemspec',
     '\n\n  gem.add_dependency "google-gax", "~> 1\\.[\\d\\.]+"',
-    '\n\n  gem.add_dependency "grafeas-client", "~> 0.3"\n  gem.add_dependency "google-gax", "~> 1.7"',
+    '\n\n  gem.add_dependency "grafeas-client", "~> 0.3"\n  gem.add_dependency "google-gax", "~> 1.8"',
 )
 s.replace(
     'lib/google/cloud/container_analysis.rb',
@@ -179,13 +182,6 @@ s.replace(
     ],
     'https://googlecloudplatform\\.github\\.io/google-cloud-ruby',
     'https://googleapis.github.io/google-cloud-ruby'
-)
-
-# https://github.com/googleapis/gapic-generator/issues/2393
-s.replace(
-    'google-cloud-container_analysis.gemspec',
-    'gem.add_development_dependency "rubocop".*$',
-    'gem.add_development_dependency "rubocop", "~> 0.64.0"'
 )
 
 s.replace(

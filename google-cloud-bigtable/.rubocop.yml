@@ -1,3 +1,6 @@
+inherit_gem:
+  google-style: google-style.yml
+
 AllCops:
   Exclude:
     - "google-cloud-bigtable.gemspec"
@@ -13,38 +16,33 @@ AllCops:
     - "conformance/**/*"
     - "samples/**/*"
     - "support/**/*"
-  TargetRubyVersion: 2.2
 
 Documentation:
   Enabled: true
 
-Style/StringLiterals:
-  EnforcedStyle: double_quotes
-Style/MethodDefParentheses:
-  EnforcedStyle: require_no_parentheses
-Style/NumericLiterals:
+Layout/AlignHash:
   Enabled: false
-Style/TrivialAccessors:
+Metrics/ClassLength:
   Enabled: false
 Metrics/LineLength:
   Max: 80
   IgnoredPatterns: ['(\A|\s)#']
-Metrics/CyclomaticComplexity:
-  Max: 10
-Metrics/PerceivedComplexity:
-  Max: 10
-Metrics/AbcSize:
-  Max: 25
-Metrics/ClassLength:
-  Enabled: false
 Metrics/MethodLength:
   Max: 30
-Metrics/ParameterLists:
-  Enabled: false
-Layout/EmptyLineAfterGuardClause:
-  Enabled: false
-Layout/EmptyLines: # for the extra line between copyright and code
-  Enabled: false
 Naming/FileName:
   Exclude:
     - "lib/google-cloud-bigtable.rb"
+Style/MethodCallWithArgsParentheses:
+  Enabled: false
+Style/NumericLiterals:
+  Enabled: false
+Style/NumericPredicate:
+  Enabled: false
+Style/RedundantFreeze:
+  Enabled: false
+Style/SafeNavigation:
+  Enabled: false
+Style/UnpackFirst:
+  Enabled: false
+Style/WordArray:
+  Enabled: false

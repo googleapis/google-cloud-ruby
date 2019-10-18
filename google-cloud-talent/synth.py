@@ -43,6 +43,16 @@ s.copy(v4beta1 / 'google-cloud-talent.gemspec', merge=ruby.merge_gemspec)
 templates = gcp.CommonTemplates().ruby_library()
 s.copy(templates)
 
+# Update gemspec to reflect Ruby 2.4
+ruby.update_gemspec('google-cloud-talent.gemspec')
+
+# Update README to reflect Ruby 2.4
+s.replace(
+    'README.md',
+    'Ruby 2.3',
+    'Ruby 2.4'
+)
+
 # Update Authentication Guide for multi-service clients
 s.replace(
     'AUTHENTICATION.md',
@@ -95,7 +105,7 @@ s.replace(
 s.replace(
     'google-cloud-talent.gemspec',
     '\n  gem\\.add_dependency "google-gax", "~> 1\\.[\\d\\.]+"\n\n',
-    '\n  gem.add_dependency "google-gax", "~> 1.7"\n  gem.add_dependency "googleapis-common-protos", ">= 1.3.9", "< 2.0"\n\n'
+    '\n  gem.add_dependency "google-gax", "~> 1.8"\n  gem.add_dependency "googleapis-common-protos", ">= 1.3.9", "< 2.0"\n\n'
 )
 
 # https://github.com/googleapis/gapic-generator/issues/2243
@@ -126,13 +136,6 @@ s.replace(
     ],
     'https://googlecloudplatform\\.github\\.io/google-cloud-ruby',
     'https://googleapis.github.io/google-cloud-ruby'
-)
-
-# https://github.com/googleapis/gapic-generator/issues/2393
-s.replace(
-    'google-cloud-talent.gemspec',
-    'gem.add_development_dependency "rubocop".*$',
-    'gem.add_development_dependency "rubocop", "~> 0.64.0"'
 )
 
 services = ['Application', 'Company', 'Job', 'Profile', 'Tenant']

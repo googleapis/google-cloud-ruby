@@ -53,6 +53,16 @@ s.copy(v1p1beta1_library / 'lib/google/cloud/speech/v1p1beta1.rb')
 s.copy(v1p1beta1_library / 'lib/google/cloud/speech/v1p1beta1')
 s.copy(v1p1beta1_library / 'test/google/cloud/speech/v1p1beta1')
 
+# Update gemspec to reflect Ruby 2.4
+ruby.update_gemspec('google-cloud-speech.gemspec')
+
+# Update README to reflect Ruby 2.4
+s.replace(
+    'README.md',
+    'Ruby 2.3',
+    'Ruby 2.4'
+)
+
 # PERMANENT: Install partial gapics
 s.replace(
     'lib/google/cloud/speech/v1.rb',
@@ -164,7 +174,7 @@ s.replace(
 s.replace(
     'google-cloud-speech.gemspec',
     '\n  gem\\.add_dependency "google-gax", "~> 1\\.[\\d\\.]+"\n',
-    '\n  gem.add_dependency "google-gax", "~> 1.7"\n')
+    '\n  gem.add_dependency "google-gax", "~> 1.8"\n')
 
 # https://github.com/googleapis/gapic-generator/issues/2122
 s.replace(
@@ -224,13 +234,6 @@ s.replace(
     '.yardopts',
     'README.md\n',
     'README.md\nAUTHENTICATION.md\nLICENSE\n'
-)
-
-# https://github.com/googleapis/gapic-generator/issues/2393
-s.replace(
-    'google-cloud-speech.gemspec',
-    'gem.add_development_dependency "rubocop".*$',
-    'gem.add_development_dependency "rubocop", "~> 0.64.0"'
 )
 
 # https://github.com/googleapis/google-cloud-ruby/issues/3058

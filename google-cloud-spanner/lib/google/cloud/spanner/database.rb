@@ -83,8 +83,6 @@ module Google
           @grpc.name.split("/")[5]
         end
 
-        # rubocop:disable LineLength
-
         ##
         # The full path for the database resource. Values are of the form
         # `projects/<project_id>/instances/<instance_id>/databases/<database_id>`.
@@ -92,8 +90,6 @@ module Google
         def path
           @grpc.name
         end
-
-        # rubocop:enable LineLength
 
         ##
         # The current database state. Possible values are `:CREATING` and
