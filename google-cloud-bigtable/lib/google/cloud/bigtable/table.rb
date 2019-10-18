@@ -202,7 +202,7 @@ module Google
         #     cfm.delete "cf3"
         #   end
         #
-        #   puts table.column_families["cf5"] #=> nil
+        #   puts table.column_families["cf3"] #=> nil
         #
         def column_families
           check_view_and_load(:SCHEMA_VIEW)

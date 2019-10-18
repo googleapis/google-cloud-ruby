@@ -243,6 +243,7 @@ YARD::Doctest.configure do |doctest|
   doctest.before "Google::Cloud::Bigtable::ColumnFamilyMap" do
     mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
       mocked_tables.expect :get_table, table_resp, ["projects/my-project/instances/my-instance/tables/my-table", Hash]
+      mocked_tables.expect :create_table, table_resp, ["projects/my-project/instances/my-instance", "my-table", Google::Bigtable::Admin::V2::Table, Hash]
       mocked_tables.expect :modify_column_families, table_resp, ["projects/my-project/instances/my-instance/tables/my-table", Array]
     end
   end

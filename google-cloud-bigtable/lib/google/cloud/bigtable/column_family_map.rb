@@ -21,11 +21,15 @@ module Google
   module Cloud
     module Bigtable
       ##
-      # An accumulator for modifications to a table's column families. See
-      # {Table#column_families}. Modifications will be atomically applied to
-      # the table's column families. Entries are applied in order, meaning
-      # that earlier modifications can be masked by later ones (in the case
-      # of repeated updates to the same family, for example).
+      # Represents a table's column families.
+      #
+      # See {Project#create_table}, {Instance#create_table} and
+      # {Table#column_families}.
+      #
+      # Modifications will be atomically applied to the table's column families.
+      # Entries are applied in order, meaning that earlier modifications can be
+      # masked by later ones (in the case of repeated updates to the same
+      # column family, for example).
       #
       # @example
       #   require "google/cloud/bigtable"
@@ -36,6 +40,45 @@ module Google
       #
       #   column_families.add "cf1", gc_rule: Google::Cloud::Bigtable::GcRule.max_age(600)
       #   column_families.add "cf2", gc_rule: Google::Cloud::Bigtable::GcRule.max_versions(5)
+      #
+      # @example Create a table with a block yielding a ColumnFamilyMap.
+      #   require "google/cloud/bigtable"
+      #
+      #   bigtable = Google::Cloud::Bigtable.new
+      #
+      #   table = bigtable.create_table("my-instance", "my-table") do |cfm|
+      #     cfm.add('cf1', gc_rule: Google::Cloud::Bigtable::GcRule.max_versions(5))
+      #     cfm.add('cf2', gc_rule: Google::Cloud::Bigtable::GcRule.max_age(600))
+      #
+      #     gc_rule = Google::Cloud::Bigtable::GcRule.union(
+      #       Google::Cloud::Bigtable::GcRule.max_age(1800),
+      #       Google::Cloud::Bigtable::GcRule.max_versions(3)
+      #     )
+      #     cfm.add('cf3', gc_rule: gc_rule)
+      #   end
+      #
+      #   puts table.column_families
+      #
+      # @example Update column families with a block yielding a ColumnFamilyMap.
+      #   require "google/cloud/bigtable"
+      #
+      #   bigtable = Google::Cloud::Bigtable.new
+      #
+      #   table = bigtable.table("my-instance", "my-table", perform_lookup: true)
+      #
+      #   table.column_families do |cfm|
+      #     cfm.add "cf4", gc_rule: Google::Cloud::Bigtable::GcRule.max_age(600)
+      #     cfm.add "cf5", gc_rule: Google::Cloud::Bigtable::GcRule.max_versions(5)
+      #
+      #     rule_1 = Google::Cloud::Bigtable::GcRule.max_versions(3)
+      #     rule_2 = Google::Cloud::Bigtable::GcRule.max_age(600)
+      #     rule_union = Google::Cloud::Bigtable::GcRule.union(rule_1, rule_2)
+      #     cfm.update "cf2", gc_rule: rule_union
+      #
+      #     cfm.delete "cf3"
+      #   end
+      #
+      #   puts table.column_families["cf3"] #=> nil
       #
       class ColumnFamilyMap
         include Enumerable
@@ -53,7 +96,7 @@ module Google
         #   column_families.add "cf1", gc_rule: Google::Cloud::Bigtable::GcRule.max_age(600)
         #   column_families.add "cf2", gc_rule: Google::Cloud::Bigtable::GcRule.max_versions(5)
         #
-        # @example Create new families using block syntax:
+        # @example Create new column families using block syntax:
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
@@ -69,6 +112,12 @@ module Google
           yield self if block_given?
         end
 
+        ##
+        # Calls block once for each key in the map, passing the key-value pair
+        # as parameters.
+        #
+        # If no block is given, an enumerator is returned instead.
+        #
         def each
           return enum_for :each unless block_given?
 
@@ -77,25 +126,43 @@ module Google
           end
         end
 
+        ##
+        # Retrieves the ColumnFamily object corresponding to the `name`. If not
+        # found, returns `nil`.
+        #
         def [] name
           return nil unless name? name
 
           ColumnFamily.from_grpc(@column_families[name], name)
         end
 
+        ##
+        # Returns true if the given key is present in the map.
+        #
         def name? name
           @column_families.has_key? name
         end
+        alias key? name?
 
+        ##
+        # Returns a new array populated with the keys from the map.
+        #
         def names
           @column_families.keys
         end
+        alias keys names
 
+        ##
+        # Returns the number of key-value pairs in the map.
+        #
         def length
           @column_families.length
         end
         alias size length
 
+        ##
+        # Returns true if the map contains no key-value pairs.
+        #
         def empty?
           length.zero?
         end
