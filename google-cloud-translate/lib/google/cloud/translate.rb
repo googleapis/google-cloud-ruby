@@ -21,63 +21,22 @@ require "pathname"
 module Google
   module Cloud
     ##
-    # # Ruby Client for Cloud Translation API ([Alpha](https://github.com/googleapis/google-cloud-ruby#versioning))
+    # # Google Cloud Translation API
     #
-    # [Cloud Translation API][Product Documentation]:
-    # Integrates text translation into your website or application.
-    # - [Product Documentation][]
+    # [Google Cloud Translation API](https://cloud.google.com/translation/)
+    # provides a simple, programmatic interface for translating an arbitrary
+    # string into any supported language. It is highly responsive, so websites
+    # and applications can integrate with Translation API for fast, dynamic
+    # translation of source text. Language detection is also available in cases
+    # where the source language is unknown.
     #
-    # ## Quick Start
-    # In order to use this library, you first need to go through the following
-    # steps:
+    # Translation API supports more than one hundred different languages, from
+    # Afrikaans to Zulu. Used in combination, this enables translation between
+    # thousands of language pairs. Also, you can send in HTML and receive HTML
+    # with translated text back. You don't need to extract your source text or
+    # reassemble the translated content.
     #
-    # 1. [Select or create a Cloud Platform project.](https://console.cloud.google.com/project)
-    # 2. [Enable billing for your
-    #    project.](https://cloud.google.com/billing/docs/how-to/modify-project#enable_billing_for_a_project)
-    # 3. [Enable the Cloud Translation API.](https://console.cloud.google.com/apis/library/translate.googleapis.com)
-    # 4. [Setup Authentication.](https://googleapis.dev/ruby/google-cloud-translate/latest/file.AUTHENTICATION.html)
-    #
-    # ### Installation
-    # ```
-    # $ gem install google-cloud-translate
-    # ```
-    #
-    # ### Next Steps
-    # - Read the [Cloud Translation API Product documentation][Product Documentation]
-    #   to learn more about the product and see How-to Guides.
-    # - View this [repository's main README](https://github.com/googleapis/google-cloud-ruby/blob/master/README.md)
-    #   to see the full list of Cloud APIs that we cover.
-    #
-    # [Product Documentation]: https://cloud.google.com/translate
-    #
-    # ## Enabling Logging
-    #
-    # To enable logging for this library, set the logger for the underlying
-    # [gRPC](https://github.com/grpc/grpc/tree/master/src/ruby) library. The logger that you set may be a Ruby stdlib
-    # [`Logger`](https://ruby-doc.org/stdlib-2.5.0/libdoc/logger/rdoc/Logger.html) as shown below, or a
-    # [`Google::Cloud::Logging::Logger`](https://googleapis.dev/ruby/google-cloud-logging/latest) that will write logs
-    # to [Stackdriver Logging](https://cloud.google.com/logging/). See
-    # [grpc/logconfig.rb](https://github.com/grpc/grpc/blob/master/src/ruby/lib/grpc/logconfig.rb) and the gRPC
-    # [spec_helper.rb](https://github.com/grpc/grpc/blob/master/src/ruby/spec/spec_helper.rb) for additional
-    # information.
-    #
-    # Configuring a Ruby stdlib logger:
-    #
-    # ```ruby
-    # require "logger"
-    #
-    # module MyLogger
-    #   LOGGER = Logger.new $stderr, level: Logger::WARN
-    #   def logger
-    #     LOGGER
-    #   end
-    # end
-    #
-    # # Define a gRPC module-level logger method before grpc/logconfig.rb loads.
-    # module GRPC
-    #   extend MyLogger
-    # end
-    # ```
+    # See {file:OVERVIEW.md Translation Overview}.
     #
     module Translate
       FILE_DIR = File.realdirpath Pathname.new(__FILE__).join("..").join("translate")
@@ -91,10 +50,9 @@ module Google
       ##
       # Provides natural language translation operations.
       #
-      # @param version [Symbol, String]
-      #   The major version of the service to be used. By default :v3
-      #   is used.
       # @overload new(version:, credentials:, scopes:, client_config:, timeout:)
+      #   @param version [Symbol, String]
+      #     The major version of the service to be used. By default `:v3` is used.
       #   @param credentials [Google::Auth::Credentials, String, Hash, GRPC::Core::Channel,
       #     GRPC::Core::ChannelCredentials, Proc]
       #     Provides the means for authenticating requests made by the client. This parameter can be many types.
@@ -125,6 +83,8 @@ module Google
       #   @param exception_transformer [Proc]
       #     An optional proc that intercepts any exceptions raised during an API call to inject custom error handling.
       # @overload new(version:, project_id:, credentials:, key:, scope:, retries:, timeout:, endpoint:)
+      #   @param version [Symbol, String]
+      #     The major version of the service to be used. Specifying `:v2` will return the legacy client.
       #   @param [String] project_id Project identifier for the Cloud Translation service you are connecting to. If not
       #     present, the default project for the credentials is used.
       #   @param [String, Hash, Google::Auth::Credentials] credentials The path to the keyfile as a String, the contents

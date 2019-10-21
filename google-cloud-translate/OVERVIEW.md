@@ -22,7 +22,13 @@ key and the project and OAuth 2.0 credentials are provided, the API key
 will be used.) Instructions and configuration options are covered in the
 {file:AUTHENTICATION.md Authentication Guide}.
 
-## Translating texts
+## Using the current V3 client
+
+Use the samples to drive the guide here...
+
+## Using the legacy V2 client
+
+### Translating texts
 
 Translating text from one language to another is easy (and extremely
 fast.) The only required arguments to
@@ -33,7 +39,7 @@ language to which you wish to translate.
 ```ruby
 require "google/cloud/translate"
 
-translate = Google::Cloud::Translate.new
+translate = Google::Cloud::Translate.new version: :v2
 
 translation = translate.translate "Hello world!", to: "la"
 
@@ -52,7 +58,7 @@ give Translation API much to work with.)
 ```ruby
 require "google/cloud/translate"
 
-translate = Google::Cloud::Translate.new
+translate = Google::Cloud::Translate.new version: :v2
 
 translation = translate.translate "chat", to: "en"
 
@@ -72,7 +78,7 @@ You can pass multiple texts to {Google::Cloud::Translate::V2::Api#translate}.
 ```ruby
 require "google/cloud/translate"
 
-translate = Google::Cloud::Translate.new
+translate = Google::Cloud::Translate.new version: :v2
 
 translations = translate.translate "chien", "chat", from: "fr", to: "en"
 
@@ -88,14 +94,14 @@ By default, any HTML in your source text will be preserved.
 ```ruby
 require "google/cloud/translate"
 
-translate = Google::Cloud::Translate.new
+translate = Google::Cloud::Translate.new version: :v2
 
 translation = translate.translate "<strong>Hello</strong> world!",
                                   to: :la
 translation.text #=> "<strong>Salve</strong> mundi!"
 ```
 
-## Detecting languages
+### Detecting languages
 
 You can use {Google::Cloud::Translate::V2::Api#detect} to see which language
 the Translation API ranks as the most likely source language for a text.
@@ -104,7 +110,7 @@ The `confidence` score is a float value between `0` and `1`.
 ```ruby
 require "google/cloud/translate"
 
-translate = Google::Cloud::Translate.new
+translate = Google::Cloud::Translate.new version: :v2
 
 detection = translate.detect "chat"
 
@@ -118,7 +124,7 @@ You can pass multiple texts to {Google::Cloud::Translate::V2::Api#detect}.
 ```ruby
 require "google/cloud/translate"
 
-translate = Google::Cloud::Translate.new
+translate = Google::Cloud::Translate.new version: :v2
 
 detections = translate.detect "chien", "chat"
 
@@ -131,7 +137,7 @@ detections[1].language #=> "en"
 detections[1].confidence #=> 0.59922177
 ```
 
-## Listing supported languages
+### Listing supported languages
 
 Translation API adds new languages frequently. You can use
 {Google::Cloud::Translate::V2::Api#languages} to query the list of supported
@@ -140,7 +146,7 @@ languages.
 ```ruby
 require "google/cloud/translate"
 
-translate = Google::Cloud::Translate.new
+translate = Google::Cloud::Translate.new version: :v2
 
 languages = translate.languages
 
@@ -156,7 +162,7 @@ provide the code for the language in which you wish to receive the names.
 ```ruby
 require "google/cloud/translate"
 
-translate = Google::Cloud::Translate.new
+translate = Google::Cloud::Translate.new version: :v2
 
 languages = translate.languages "en"
 
@@ -165,7 +171,7 @@ languages[0].code #=> "af"
 languages[0].name #=> "Afrikaans"
 ```
 
-## Configuring retries and timeout
+### Configuring retries and timeout
 
 You can configure how many times API requests may be automatically
 retried. When an API request fails, the response will be inspected to see
@@ -181,5 +187,5 @@ You can also set the request `timeout` value in seconds.
 ```ruby
 require "google/cloud/translate"
 
-translate = Google::Cloud::Translate.new retries: 10, timeout: 120
+translate = Google::Cloud::Translate.new version: :v2, retries: 10, timeout: 120
 ```
