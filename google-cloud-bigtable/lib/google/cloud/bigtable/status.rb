@@ -30,7 +30,7 @@ module Google
       #   For example, `INVALID_ARGUMENT`.
       # @attr [String] message A developer-facing error message, which should be
       #   in English.
-      # @attr [Array] details A list of messages that carry the error
+      # @attr [Array<String>] details A list of messages that carry the error
       #   details.
       #
       # @example
