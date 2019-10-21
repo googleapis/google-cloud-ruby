@@ -99,9 +99,7 @@ module Google
         #   data.
         #
         def error_rows
-          Array(@gapi.insert_errors).map do |ie|
-            @rows[ie.index]
-          end
+          Array(@gapi.insert_errors).map { |ie| @rows[ie.index] }
         end
 
         ##

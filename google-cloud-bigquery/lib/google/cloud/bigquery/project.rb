@@ -91,8 +91,7 @@ module Google
         # @return [String] The service account email address.
         #
         def service_account_email
-          @service_account_email ||= \
-            service.project_service_account.email
+          @service_account_email ||= service.project_service_account.email
         end
 
         ##
@@ -182,11 +181,9 @@ module Google
         #
         # @!group Data
         #
-        def copy_job source_table, destination_table, create: nil, write: nil,
-                     job_id: nil, prefix: nil, labels: nil
+        def copy_job source_table, destination_table, create: nil, write: nil, job_id: nil, prefix: nil, labels: nil
           ensure_service!
-          options = { create: create, write: write, labels: labels,
-                      job_id: job_id, prefix: prefix }
+          options = { create: create, write: write, labels: labels, job_id: job_id, prefix: prefix }
 
           updater = CopyJob::Updater.from_options(
             service,
@@ -261,13 +258,8 @@ module Google
         #
         # @!group Data
         #
-        def copy source_table, destination_table, create: nil, write: nil,
-                 &block
-          job = copy_job source_table,
-                         destination_table,
-                         create: create,
-                         write:  write,
-                         &block
+        def copy source_table, destination_table, create: nil, write: nil, &block
+          job = copy_job source_table, destination_table, create: create, write: write, &block
           job.wait_until_done!
           ensure_job_succeeded! job
           true
@@ -538,23 +530,16 @@ module Google
         #     end
         #   end
         #
-        def query_job query, params: nil, external: nil,
-                      priority: "INTERACTIVE", cache: true, table: nil,
-                      create: nil, write: nil, dryrun: nil, dataset: nil,
-                      project: nil, standard_sql: nil, legacy_sql: nil,
-                      large_results: nil, flatten: nil,
-                      maximum_billing_tier: nil, maximum_bytes_billed: nil,
+        def query_job query, params: nil, external: nil, priority: "INTERACTIVE", cache: true, table: nil, create: nil,
+                      write: nil, dryrun: nil, dataset: nil, project: nil, standard_sql: nil, legacy_sql: nil,
+                      large_results: nil, flatten: nil, maximum_billing_tier: nil, maximum_bytes_billed: nil,
                       job_id: nil, prefix: nil, labels: nil, udfs: nil
           ensure_service!
-          options = { priority: priority, cache: cache, table: table,
-                      create: create, write: write, dryrun: dryrun,
-                      large_results: large_results, flatten: flatten,
-                      dataset: dataset, project: (project || self.project),
-                      legacy_sql: legacy_sql, standard_sql: standard_sql,
-                      maximum_billing_tier: maximum_billing_tier,
-                      maximum_bytes_billed: maximum_bytes_billed,
-                      external: external, job_id: job_id, prefix: prefix,
-                      labels: labels, udfs: udfs, params: params }
+          options = { priority: priority, cache: cache, table: table, create: create, write: write, dryrun: dryrun,
+                      large_results: large_results, flatten: flatten, dataset: dataset,
+                      project: (project || self.project), legacy_sql: legacy_sql, standard_sql: standard_sql,
+                      maximum_billing_tier: maximum_billing_tier, maximum_bytes_billed: maximum_bytes_billed,
+                      external: external, job_id: job_id, prefix: prefix, labels: labels, udfs: udfs, params: params }
 
           updater = QueryJob::Updater.from_options service, query, options
 
@@ -759,13 +744,10 @@ module Google
         #     puts row[:name]
         #   end
         #
-        def query query, params: nil, external: nil, max: nil, cache: true,
-                  dataset: nil, project: nil, standard_sql: nil,
-                  legacy_sql: nil, &block
-          job = query_job query, params: params, external: external,
-                                 cache: cache, dataset: dataset,
-                                 project: project, standard_sql: standard_sql,
-                                 legacy_sql: legacy_sql, &block
+        def query query, params: nil, external: nil, max: nil, cache: true, dataset: nil, project: nil,
+                  standard_sql: nil, legacy_sql: nil, &block
+          job = query_job query, params: params, external: external, cache: cache, dataset: dataset, project: project,
+                                 standard_sql: standard_sql, legacy_sql: legacy_sql, &block
           job.wait_until_done!
 
           if job.failed?
@@ -861,9 +843,7 @@ module Google
         #
         def dataset dataset_id, skip_lookup: nil
           ensure_service!
-          if skip_lookup
-            return Dataset.new_reference project, dataset_id, service
-          end
+          return Dataset.new_reference project, dataset_id, service if skip_lookup
           gapi = service.get_dataset dataset_id
           Dataset.from_gapi gapi, service
         rescue Google::Cloud::NotFoundError
@@ -1092,10 +1072,8 @@ module Google
         def jobs all: nil, token: nil, max: nil, filter: nil,
                  min_created_at: nil, max_created_at: nil
           ensure_service!
-          options = {
-            all: all, token: token, max: max, filter: filter,
-            min_created_at: min_created_at, max_created_at: max_created_at
-          }
+          options = { all: all, token: token, max: max, filter: filter, min_created_at: min_created_at,
+                      max_created_at: max_created_at }
           gapi = service.list_jobs options
           Job::List.from_gapi gapi, service, options
         end
@@ -1386,17 +1364,14 @@ module Google
         #
         # @!group Data
         #
-        def extract_job table, extract_url, format: nil, compression: nil,
-                        delimiter: nil, header: nil, job_id: nil, prefix: nil,
-                        labels: nil
+        def extract_job table, extract_url, format: nil, compression: nil, delimiter: nil, header: nil, job_id: nil,
+                        prefix: nil, labels: nil
           ensure_service!
-          options = { format: format, compression: compression,
-                      delimiter: delimiter, header: header, job_id: job_id,
+          options = { format: format, compression: compression, delimiter: delimiter, header: header, job_id: job_id,
                       prefix: prefix, labels: labels }
 
           table_ref = Service.get_table_ref table, default_ref: project_ref
-          updater = ExtractJob::Updater.from_options service, table_ref,
-                                                     extract_url, options
+          updater = ExtractJob::Updater.from_options service, table_ref, extract_url, options
 
           yield updater if block_given?
 
@@ -1460,10 +1435,8 @@ module Google
         #
         # @!group Data
         #
-        def extract table, extract_url, format: nil, compression: nil,
-                    delimiter: nil, header: nil, &block
-          job = extract_job table,
-                            extract_url,
+        def extract table, extract_url, format: nil, compression: nil, delimiter: nil, header: nil, &block
+          job = extract_job table, extract_url,
                             format:      format,
                             compression: compression,
                             delimiter:   delimiter,
@@ -1487,9 +1460,7 @@ module Google
 
             # TODO: remove `Integer` and set normally after migrating to Gax or
             # to google-api-client 0.10 (See google/google-api-ruby-client#439)
-            if gapi.numeric_id
-              p.instance_variable_set :@numeric_id, Integer(gapi.numeric_id)
-            end
+            p.instance_variable_set :@numeric_id, Integer(gapi.numeric_id) if gapi.numeric_id
           end
         end
 

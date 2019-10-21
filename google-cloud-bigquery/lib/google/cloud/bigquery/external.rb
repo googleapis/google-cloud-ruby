@@ -54,9 +54,7 @@ module Google
         # @private New External from URLs and format
         def self.from_urls urls, format = nil
           external_format = source_format_for urls, format
-          if external_format.nil?
-            raise ArgumentError, "Unable to determine external table format"
-          end
+          raise ArgumentError, "Unable to determine external table format" if external_format.nil?
           external_class = table_class_for external_format
           external_class.new.tap do |e|
             e.gapi.source_uris = Array(urls)
@@ -69,9 +67,7 @@ module Google
         def self.from_gapi gapi
           external_format = source_format_for gapi.source_uris,
                                               gapi.source_format
-          if external_format.nil?
-            raise ArgumentError, "Unable to determine external table format"
-          end
+          raise ArgumentError, "Unable to determine external table format" if external_format.nil?
           external_class = table_class_for external_format
           external_class.from_gapi gapi
         end
@@ -96,12 +92,8 @@ module Google
             return "NEWLINE_DELIMITED_JSON" if url.end_with? ".json"
             return "AVRO" if url.end_with? ".avro"
             return "DATASTORE_BACKUP" if url.end_with? ".backup_info"
-            if url.start_with? "https://docs.google.com/spreadsheets/"
-              return "GOOGLE_SHEETS"
-            end
-            if url.start_with? "https://googleapis.com/bigtable/projects/"
-              return "BIGTABLE"
-            end
+            return "GOOGLE_SHEETS" if url.start_with? "https://docs.google.com/spreadsheets/"
+            return "BIGTABLE" if url.start_with? "https://googleapis.com/bigtable/projects/"
           end
           nil
         end
@@ -556,8 +548,7 @@ module Google
 
           def frozen_check!
             return unless frozen?
-            raise ArgumentError,
-                  "Cannot modify external data source when frozen"
+            raise ArgumentError, "Cannot modify external data source when frozen"
           end
         end
 
@@ -1163,8 +1154,7 @@ module Google
           # @private Create an empty SheetsSource object.
           def initialize
             super
-            @gapi.google_sheets_options = \
-              Google::Apis::BigqueryV2::GoogleSheetsOptions.new
+            @gapi.google_sheets_options = Google::Apis::BigqueryV2::GoogleSheetsOptions.new
           end
 
           ##
@@ -1309,8 +1299,7 @@ module Google
           # @private Create an empty BigtableSource object.
           def initialize
             super
-            @gapi.bigtable_options = \
-              Google::Apis::BigqueryV2::BigtableOptions.new
+            @gapi.bigtable_options = Google::Apis::BigqueryV2::BigtableOptions.new
             @families = []
           end
 
@@ -1454,9 +1443,7 @@ module Google
           def self.from_gapi gapi
             new_table = super
             families = Array gapi.bigtable_options.column_families
-            families = families.map do |fam_gapi|
-              BigtableSource::ColumnFamily.from_gapi fam_gapi
-            end
+            families = families.map { |fam_gapi| BigtableSource::ColumnFamily.from_gapi fam_gapi }
             new_table.instance_variable_set :@families, families
             new_table
           end
@@ -1473,8 +1460,7 @@ module Google
 
           def frozen_check!
             return unless frozen?
-            raise ArgumentError,
-                  "Cannot modify external data source when frozen"
+            raise ArgumentError, "Cannot modify external data source when frozen"
           end
 
           ##
@@ -1993,9 +1979,7 @@ module Google
             def self.from_gapi gapi
               new_fam = new
               new_fam.instance_variable_set :@gapi, gapi
-              columns = Array(gapi.columns).map do |col_gapi|
-                BigtableSource::Column.from_gapi col_gapi
-              end
+              columns = Array(gapi.columns).map { |col_gapi| BigtableSource::Column.from_gapi col_gapi }
               new_fam.instance_variable_set :@columns, columns
               new_fam
             end
@@ -2012,8 +1996,7 @@ module Google
 
             def frozen_check!
               return unless frozen?
-              raise ArgumentError,
-                    "Cannot modify external data source when frozen"
+              raise ArgumentError, "Cannot modify external data source when frozen"
             end
           end
 
@@ -2082,8 +2065,7 @@ module Google
             #   end
             #
             def qualifier
-              @gapi.qualifier_string || \
-                Base64.strict_decode64(@gapi.qualifier_encoded.to_s)
+              @gapi.qualifier_string || Base64.strict_decode64(@gapi.qualifier_encoded.to_s)
             end
 
             ##
@@ -2128,9 +2110,7 @@ module Google
               end
             rescue EncodingError
               @gapi.qualifier_encoded = Base64.strict_encode64 new_qualifier
-              if @gapi.instance_variables.include? :@qualifier_string
-                @gapi.remove_instance_variable :@qualifier_string
-              end
+              @gapi.remove_instance_variable :@qualifier_string if @gapi.instance_variables.include? :@qualifier_string
             end
 
             ##
@@ -2390,8 +2370,7 @@ module Google
 
             def frozen_check!
               return unless frozen?
-              raise ArgumentError,
-                    "Cannot modify external data source when frozen"
+              raise ArgumentError, "Cannot modify external data source when frozen"
             end
           end
         end

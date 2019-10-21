@@ -123,15 +123,13 @@ module Google
           #
           def all request_limit: nil
             request_limit = request_limit.to_i if request_limit
-            unless block_given?
-              return enum_for :all, request_limit: request_limit
-            end
+            return enum_for :all, request_limit: request_limit unless block_given?
             results = self
             loop do
               results.each { |r| yield r }
               if request_limit
                 request_limit -= 1
-                break if request_limit < 0
+                break if request_limit.negative?
               end
               break unless results.next?
               results = results.next
@@ -142,9 +140,7 @@ module Google
           # @private New Job::List from a Google API Client
           # Google::Apis::BigqueryV2::JobList object.
           def self.from_gapi gapi_list, service, options = {}
-            jobs = List.new(Array(gapi_list.jobs).map do |gapi_object|
-              Job.from_gapi gapi_object, service
-            end)
+            jobs = List.new(Array(gapi_list.jobs).map { |gapi_object| Job.from_gapi gapi_object, service })
             jobs.instance_variable_set :@token,    gapi_list.next_page_token
             jobs.instance_variable_set :@etag,     gapi_list.etag
             jobs.instance_variable_set :@service,  service

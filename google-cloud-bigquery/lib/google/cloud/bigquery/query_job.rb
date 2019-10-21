@@ -205,11 +205,8 @@ module Google
         #   end
         #
         def query_plan
-          return nil unless @gapi.statistics.query &&
-                            @gapi.statistics.query.query_plan
-          Array(@gapi.statistics.query.query_plan).map do |stage|
-            Stage.from_gapi stage
-          end
+          return nil unless @gapi.statistics.query&.query_plan
+          Array(@gapi.statistics.query.query_plan).map { |stage| Stage.from_gapi stage }
         end
 
         ##
@@ -261,8 +258,8 @@ module Google
         #   query_job.ddl? #=> true
         #
         def ddl?
-          %w[CREATE_MODEL CREATE_TABLE CREATE_TABLE_AS_SELECT CREATE_VIEW \
-             DROP_MODEL DROP_TABLE DROP_VIEW].include? statement_type
+          ["CREATE_MODEL", "CREATE_TABLE", "CREATE_TABLE_AS_SELECT", "CREATE_VIEW", "\n", "DROP_MODEL", "DROP_TABLE",
+           "DROP_VIEW"].include? statement_type
         end
 
         ##
@@ -285,7 +282,7 @@ module Google
         #   query_job.dml? #=> true
         #
         def dml?
-          %w[INSERT UPDATE MERGE DELETE].include? statement_type
+          ["INSERT", "UPDATE", "MERGE", "DELETE"].include? statement_type
         end
 
         ##
@@ -383,9 +380,7 @@ module Google
         def udfs
           udfs_gapi = @gapi.configuration.query.user_defined_function_resources
           return nil unless udfs_gapi
-          Array(udfs_gapi).map do |udf|
-            udf.inline_code || udf.resource_uri
-          end
+          Array(udfs_gapi).map { |udf| udf.inline_code || udf.resource_uri }
         end
 
         ##
@@ -396,9 +391,7 @@ module Google
         #
         # @!group Attributes
         def encryption
-          EncryptionConfiguration.from_gapi(
-            @gapi.configuration.query.destination_encryption_configuration
-          )
+          EncryptionConfiguration.from_gapi @gapi.configuration.query.destination_encryption_configuration
         end
 
         ###
@@ -535,8 +528,7 @@ module Google
 
           ensure_service!
           loop do
-            query_results_gapi = service.job_query_results \
-              job_id, location: location, max: 0
+            query_results_gapi = service.job_query_results job_id, location: location, max: 0
             if query_results_gapi.job_complete
               @destination_schema_gapi = query_results_gapi.schema
               break
@@ -573,9 +565,7 @@ module Google
         #
         def data token: nil, max: nil, start: nil
           return nil unless done?
-          if dryrun?
-            return Data.from_gapi_json({ rows: [] }, nil, @gapi, service)
-          end
+          return Data.from_gapi_json({ rows: [] }, nil, @gapi, service) if dryrun?
           if ddl? || dml?
             data_hash = { totalRows: nil, rows: [] }
             return Data.from_gapi_json data_hash, nil, @gapi, service
@@ -583,10 +573,7 @@ module Google
           ensure_schema!
 
           options = { token: token, max: max, start: start }
-          data_hash = service.list_tabledata \
-            destination_table_dataset_id,
-            destination_table_table_id,
-            options
+          data_hash = service.list_tabledata destination_table_dataset_id, destination_table_table_id, options
           Data.from_gapi_json data_hash, destination_table_gapi, @gapi, service
         end
         alias query_results data
@@ -631,8 +618,7 @@ module Google
             updater.dryrun = options[:dryrun]
             updater.maximum_bytes_billed = options[:maximum_bytes_billed]
             updater.labels = options[:labels] if options[:labels]
-            updater.legacy_sql = Convert.resolve_legacy_sql(
-              options[:standard_sql], options[:legacy_sql])
+            updater.legacy_sql = Convert.resolve_legacy_sql options[:standard_sql], options[:legacy_sql]
             updater.external = options[:external] if options[:external]
             updater.priority = options[:priority]
             updater.cache = options[:cache]
@@ -731,8 +717,7 @@ module Google
           #
           # @!group Attributes
           def dataset= value
-            @gapi.configuration.query.default_dataset =
-              @service.dataset_ref_from value
+            @gapi.configuration.query.default_dataset = @service.dataset_ref_from value
           end
 
           ##
@@ -752,17 +737,13 @@ module Google
             when Array then
               @gapi.configuration.query.use_legacy_sql = false
               @gapi.configuration.query.parameter_mode = "POSITIONAL"
-              @gapi.configuration.query.query_parameters = params.map do |param|
-                Convert.to_query_param param
-              end
+              @gapi.configuration.query.query_parameters = params.map { |param| Convert.to_query_param param }
             when Hash then
               @gapi.configuration.query.use_legacy_sql = false
               @gapi.configuration.query.parameter_mode = "NAMED"
               @gapi.configuration.query.query_parameters =
                 params.map do |name, param|
-                  Convert.to_query_param(param).tap do |named_param|
-                    named_param.name = String name
-                  end
+                  Convert.to_query_param(param).tap { |named_param| named_param.name = String name }
                 end
             else
               raise "Query parameters must be an Array or a Hash."
@@ -783,8 +764,7 @@ module Google
           #
           # @!group Attributes
           def create= value
-            @gapi.configuration.query.create_disposition =
-              Convert.create_disposition value
+            @gapi.configuration.query.create_disposition = Convert.create_disposition value
           end
 
           ##
@@ -802,8 +782,7 @@ module Google
           #
           # @!group Attributes
           def write= value
-            @gapi.configuration.query.write_disposition =
-              Convert.write_disposition value
+            @gapi.configuration.query.write_disposition = Convert.write_disposition value
           end
 
           ##
@@ -905,9 +884,7 @@ module Google
           # @!group Attributes
           #
           def external= value
-            external_table_pairs = value.map do |name, obj|
-              [String(name), obj.to_gapi]
-            end
+            external_table_pairs = value.map { |name, obj| [String(name), obj.to_gapi] }
             external_table_hash = Hash[external_table_pairs]
             @gapi.configuration.query.table_definitions = external_table_hash
           end
@@ -925,8 +902,7 @@ module Google
           #
           # @!group Attributes
           def udfs= value
-            @gapi.configuration.query.user_defined_function_resources =
-              udfs_gapi_from value
+            @gapi.configuration.query.user_defined_function_resources = udfs_gapi_from value
           end
 
           ##
@@ -950,9 +926,7 @@ module Google
           #
           # @!group Attributes
           def encryption= val
-            @gapi.configuration.query.update!(
-              destination_encryption_configuration: val.to_gapi
-            )
+            @gapi.configuration.query.update! destination_encryption_configuration: val.to_gapi
           end
 
           ##
@@ -989,8 +963,7 @@ module Google
           # @!group Attributes
           #
           def time_partitioning_type= type
-            @gapi.configuration.query.time_partitioning ||= \
-              Google::Apis::BigqueryV2::TimePartitioning.new
+            @gapi.configuration.query.time_partitioning ||= Google::Apis::BigqueryV2::TimePartitioning.new
             @gapi.configuration.query.time_partitioning.update! type: type
           end
 
@@ -1036,8 +1009,7 @@ module Google
           # @!group Attributes
           #
           def time_partitioning_field= field
-            @gapi.configuration.query.time_partitioning ||= \
-              Google::Apis::BigqueryV2::TimePartitioning.new
+            @gapi.configuration.query.time_partitioning ||= Google::Apis::BigqueryV2::TimePartitioning.new
             @gapi.configuration.query.time_partitioning.update! field: field
           end
 
@@ -1076,10 +1048,8 @@ module Google
           # @!group Attributes
           #
           def time_partitioning_expiration= expiration
-            @gapi.configuration.query.time_partitioning ||= \
-              Google::Apis::BigqueryV2::TimePartitioning.new
-            @gapi.configuration.query.time_partitioning.update! \
-              expiration_ms: expiration * 1000
+            @gapi.configuration.query.time_partitioning ||= Google::Apis::BigqueryV2::TimePartitioning.new
+            @gapi.configuration.query.time_partitioning.update! expiration_ms: expiration * 1000
           end
 
           ##
@@ -1094,10 +1064,8 @@ module Google
           # @!group Attributes
           #
           def time_partitioning_require_filter= val
-            @gapi.configuration.query.time_partitioning ||= \
-              Google::Apis::BigqueryV2::TimePartitioning.new
-            @gapi.configuration.query.time_partitioning.update! \
-              require_partition_filter: val
+            @gapi.configuration.query.time_partitioning ||= Google::Apis::BigqueryV2::TimePartitioning.new
+            @gapi.configuration.query.time_partitioning.update! require_partition_filter: val
           end
 
           ##
@@ -1143,8 +1111,7 @@ module Google
           # @!group Attributes
           #
           def clustering_fields= fields
-            @gapi.configuration.query.clustering ||= \
-              Google::Apis::BigqueryV2::Clustering.new
+            @gapi.configuration.query.clustering ||= Google::Apis::BigqueryV2::Clustering.new
             @gapi.configuration.query.clustering.fields = fields
           end
 
@@ -1170,14 +1137,12 @@ module Google
           end
 
           def priority_value str
-            { "batch"       => "BATCH",
-              "interactive" => "INTERACTIVE" }[str.to_s.downcase]
+            { "batch" => "BATCH", "interactive" => "INTERACTIVE" }[str.to_s.downcase]
           end
 
           def udfs_gapi_from array_or_str
             Array(array_or_str).map do |uri_or_code|
-              resource =
-                Google::Apis::BigqueryV2::UserDefinedFunctionResource.new
+              resource = Google::Apis::BigqueryV2::UserDefinedFunctionResource.new
               if uri_or_code.start_with? "gs://"
                 resource.resource_uri = uri_or_code
               else
@@ -1237,17 +1202,15 @@ module Google
         #   end
         #
         class Stage
-          attr_reader :compute_ratio_avg, :compute_ratio_max, :id, :name,
-                      :read_ratio_avg, :read_ratio_max, :records_read,
-                      :records_written, :status, :steps, :wait_ratio_avg,
-                      :wait_ratio_max, :write_ratio_avg, :write_ratio_max
+          attr_reader :compute_ratio_avg, :compute_ratio_max, :id, :name, :read_ratio_avg, :read_ratio_max,
+                      :records_read, :records_written, :status, :steps, :wait_ratio_avg, :wait_ratio_max,
+                      :write_ratio_avg, :write_ratio_max
 
           ##
           # @private Creates a new Stage instance.
-          def initialize compute_ratio_avg, compute_ratio_max, id, name,
-                         read_ratio_avg, read_ratio_max, records_read,
-                         records_written, status, steps, wait_ratio_avg,
-                         wait_ratio_max, write_ratio_avg, write_ratio_max
+          def initialize compute_ratio_avg, compute_ratio_max, id, name, read_ratio_avg, read_ratio_max, records_read,
+                         records_written, status, steps, wait_ratio_avg, wait_ratio_max, write_ratio_avg,
+                         write_ratio_max
             @compute_ratio_avg = compute_ratio_avg
             @compute_ratio_max = compute_ratio_max
             @id                = id
@@ -1268,11 +1231,9 @@ module Google
           # @private New Stage from a statistics.query.queryPlan element.
           def self.from_gapi gapi
             steps = Array(gapi.steps).map { |g| Step.from_gapi g }
-            new gapi.compute_ratio_avg, gapi.compute_ratio_max, gapi.id,
-                gapi.name, gapi.read_ratio_avg, gapi.read_ratio_max,
-                gapi.records_read, gapi.records_written, gapi.status, steps,
-                gapi.wait_ratio_avg, gapi.wait_ratio_max, gapi.write_ratio_avg,
-                gapi.write_ratio_max
+            new gapi.compute_ratio_avg, gapi.compute_ratio_max, gapi.id, gapi.name, gapi.read_ratio_avg,
+                gapi.read_ratio_max, gapi.records_read, gapi.records_written, gapi.status, steps, gapi.wait_ratio_avg,
+                gapi.wait_ratio_max, gapi.write_ratio_avg, gapi.write_ratio_max
           end
         end
 
@@ -1327,8 +1288,7 @@ module Google
         def ensure_schema!
           return unless destination_schema.nil?
 
-          query_results_gapi = service.job_query_results \
-            job_id, location: location, max: 0
+          query_results_gapi = service.job_query_results job_id, location: location, max: 0
           # raise "unable to retrieve schema" if query_results_gapi.schema.nil?
           @destination_schema_gapi = query_results_gapi.schema
         end
@@ -1346,9 +1306,10 @@ module Google
         end
 
         def destination_table_gapi
-          Google::Apis::BigqueryV2::Table.new \
+          Google::Apis::BigqueryV2::Table.new(
             table_reference: @gapi.configuration.query.destination_table,
             schema:          destination_schema
+          )
         end
       end
     end

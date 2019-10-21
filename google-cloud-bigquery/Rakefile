@@ -28,7 +28,7 @@ end
 
 # Acceptance tests
 desc "Run the bigquery acceptance tests."
-task :acceptance, :project, :keyfile do |t, args|
+task :acceptance, :project, :keyfile do |_t, args|
   project = args[:project]
   project ||= ENV["BIGQUERY_TEST_PROJECT"] || ENV["GCLOUD_TEST_PROJECT"]
   keyfile = args[:keyfile]
@@ -39,7 +39,8 @@ task :acceptance, :project, :keyfile do |t, args|
     keyfile ||= ENV["BIGQUERY_TEST_KEYFILE_JSON"] || ENV["GCLOUD_TEST_KEYFILE_JSON"]
   end
   if project.nil? || keyfile.nil?
-    fail "You must provide a project and keyfile. e.g. rake acceptance[test123, /path/to/keyfile.json] or BIGQUERY_TEST_PROJECT=test123 BIGQUERY_TEST_KEYFILE=/path/to/keyfile.json rake acceptance"
+    raise "You must provide a project and keyfile. e.g. rake acceptance[test123, /path/to/keyfile.json] or " \
+          "BIGQUERY_TEST_PROJECT=test123 BIGQUERY_TEST_KEYFILE=/path/to/keyfile.json rake acceptance"
   end
   # clear any env var already set
   require "google/cloud/bigquery/credentials"
@@ -63,7 +64,7 @@ end
 
 namespace :acceptance do
   desc "Run acceptance tests with coverage."
-  task :coverage, :project, :keyfile do |t, args|
+  task :coverage, :project, :keyfile do |_t, _args|
     require "simplecov"
     SimpleCov.start do
       command_name "google-cloud-bigquery"
@@ -75,7 +76,7 @@ namespace :acceptance do
   end
 
   desc "Removes *ALL* BigQuery datasets and tables. Use with caution."
-  task :cleanup, :project, :keyfile do |t, args|
+  task :cleanup, :project, :keyfile do |_t, args|
     project = args[:project]
     project ||= ENV["BIGQUERY_TEST_PROJECT"] || ENV["GCLOUD_TEST_PROJECT"]
     keyfile = args[:keyfile]
@@ -86,7 +87,8 @@ namespace :acceptance do
       keyfile ||= ENV["BIGQUERY_TEST_KEYFILE_JSON"] || ENV["GCLOUD_TEST_KEYFILE_JSON"]
     end
     if project.nil? || keyfile.nil?
-      fail "You must provide a project and keyfile. e.g. rake acceptance:cleanup[test123, /path/to/keyfile.json] or BIGQUERY_TEST_PROJECT=test123 BIGQUERY_TEST_KEYFILE=/path/to/keyfile.json rake acceptance:cleanup"
+      raise "You must provide a project and keyfile. e.g. rake acceptance:cleanup[test123, /path/to/keyfile.json] or " \
+            "BIGQUERY_TEST_PROJECT=test123 BIGQUERY_TEST_KEYFILE=/path/to/keyfile.json rake acceptance:cleanup"
     end
     # clear any env var already set
     require "google/cloud/bigquery/credentials"
@@ -103,7 +105,7 @@ namespace :acceptance do
     puts "Cleaning up BigQuery datasets and tables"
     Google::Cloud.bigquery.datasets.all do |ds|
       begin
-        ds.tables.all &:delete
+        ds.tables.all(&:delete)
         ds.delete
       rescue Google::Cloud::Error => e
         puts e.message
@@ -120,7 +122,7 @@ end
 
 namespace :benchmark do
   desc "Run queries benchmark script."
-  task :queries, :query_file do |t, args|
+  task :queries, :query_file do |_t, args|
     query_file = args[:query_file]
     query_file ||= "benchmark/queries.json"
 
@@ -128,7 +130,7 @@ namespace :benchmark do
   end
 
   desc "Run inserts benchmark script."
-  task :inserts, :insert_count do |t, args|
+  task :inserts, :insert_count do |_t, args|
     insert_count = args[:insert_count]
 
     sh "bundle exec ruby benchmark/inserts.rb #{insert_count}"
@@ -149,7 +151,9 @@ task :console do
   $LOAD_PATH.unshift "lib"
 
   require "google-cloud-bigquery"
-  def gcloud; @gcloud ||= Google::Cloud.new; end
+  def gcloud
+    @gcloud ||= Google::Cloud.new
+  end
 
   ARGV.clear
   IRB.start
@@ -186,7 +190,7 @@ namespace :ci do
   end
 end
 
-task :default => :test
+task default: :test
 
 def header str, token = "#"
   line_length = str.length + 8

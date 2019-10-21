@@ -397,10 +397,7 @@ module Google
           # We have to create a gapic object from the hash because that is what
           # EncryptionConfiguration is expecing.
           json_cmek = @gapi_json[:encryptionConfiguration].to_json
-          gapi_cmek = \
-            Google::Apis::BigqueryV2::EncryptionConfiguration.from_json(
-              json_cmek
-            )
+          gapi_cmek = Google::Apis::BigqueryV2::EncryptionConfiguration.from_json json_cmek
           EncryptionConfiguration.from_gapi(gapi_cmek).freeze
         end
 

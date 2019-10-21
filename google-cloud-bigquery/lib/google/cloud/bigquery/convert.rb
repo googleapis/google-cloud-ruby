@@ -118,83 +118,62 @@ module Google
         def self.to_query_param value
           if TrueClass === value
             return Google::Apis::BigqueryV2::QueryParameter.new(
-              parameter_type:  Google::Apis::BigqueryV2::QueryParameterType.new(
-                type: "BOOL"),
-              parameter_value: Google::Apis::BigqueryV2::QueryParameterValue.new(
-                value: true)
+              parameter_type:  Google::Apis::BigqueryV2::QueryParameterType.new(type: "BOOL"),
+              parameter_value: Google::Apis::BigqueryV2::QueryParameterValue.new(value: true)
             )
           elsif FalseClass === value
             return Google::Apis::BigqueryV2::QueryParameter.new(
-              parameter_type:  Google::Apis::BigqueryV2::QueryParameterType.new(
-                type: "BOOL"),
-              parameter_value: Google::Apis::BigqueryV2::QueryParameterValue.new(
-                value: false)
+              parameter_type:  Google::Apis::BigqueryV2::QueryParameterType.new(type: "BOOL"),
+              parameter_value: Google::Apis::BigqueryV2::QueryParameterValue.new(value: false)
             )
           elsif Integer === value
             return Google::Apis::BigqueryV2::QueryParameter.new(
-              parameter_type:  Google::Apis::BigqueryV2::QueryParameterType.new(
-                type: "INT64"),
-              parameter_value: Google::Apis::BigqueryV2::QueryParameterValue.new(
-                value: value)
+              parameter_type:  Google::Apis::BigqueryV2::QueryParameterType.new(type: "INT64"),
+              parameter_value: Google::Apis::BigqueryV2::QueryParameterValue.new(value: value)
             )
           elsif Float === value
             return Google::Apis::BigqueryV2::QueryParameter.new(
-              parameter_type:  Google::Apis::BigqueryV2::QueryParameterType.new(
-                type: "FLOAT64"),
-              parameter_value: Google::Apis::BigqueryV2::QueryParameterValue.new(
-                value: value)
+              parameter_type:  Google::Apis::BigqueryV2::QueryParameterType.new(type: "FLOAT64"),
+              parameter_value: Google::Apis::BigqueryV2::QueryParameterValue.new(value: value)
             )
           elsif BigDecimal === value
             # Round to precision of 9
             value_str = value.finite? ? value.round(9).to_s("F") : value.to_s
             return Google::Apis::BigqueryV2::QueryParameter.new(
-              parameter_type:  Google::Apis::BigqueryV2::QueryParameterType.new(
-                type: "NUMERIC"),
-              parameter_value: Google::Apis::BigqueryV2::QueryParameterValue.new(
-                value: value_str)
+              parameter_type:  Google::Apis::BigqueryV2::QueryParameterType.new(type: "NUMERIC"),
+              parameter_value: Google::Apis::BigqueryV2::QueryParameterValue.new(value: value_str)
             )
           elsif String === value
             return Google::Apis::BigqueryV2::QueryParameter.new(
-              parameter_type:  Google::Apis::BigqueryV2::QueryParameterType.new(
-                type: "STRING"),
-              parameter_value: Google::Apis::BigqueryV2::QueryParameterValue.new(
-                value: value)
+              parameter_type:  Google::Apis::BigqueryV2::QueryParameterType.new(type: "STRING"),
+              parameter_value: Google::Apis::BigqueryV2::QueryParameterValue.new(value: value)
             )
           elsif DateTime === value
             return Google::Apis::BigqueryV2::QueryParameter.new(
-              parameter_type:  Google::Apis::BigqueryV2::QueryParameterType.new(
-                type: "DATETIME"),
-              parameter_value: Google::Apis::BigqueryV2::QueryParameterValue.new(
-                value: value.strftime("%Y-%m-%d %H:%M:%S.%6N"))
+              parameter_type:  Google::Apis::BigqueryV2::QueryParameterType.new(type: "DATETIME"),
+              parameter_value: Google::Apis::BigqueryV2::QueryParameterValue.new(value: value.strftime("%Y-%m-%d %H:%M:%S.%6N"))
             )
           elsif Date === value
             return Google::Apis::BigqueryV2::QueryParameter.new(
-              parameter_type:  Google::Apis::BigqueryV2::QueryParameterType.new(
-                type: "DATE"),
-              parameter_value: Google::Apis::BigqueryV2::QueryParameterValue.new(
-                value: value.to_s)
+              parameter_type:  Google::Apis::BigqueryV2::QueryParameterType.new(type: "DATE"),
+              parameter_value: Google::Apis::BigqueryV2::QueryParameterValue.new(value: value.to_s)
             )
           elsif ::Time === value
             return Google::Apis::BigqueryV2::QueryParameter.new(
-              parameter_type:  Google::Apis::BigqueryV2::QueryParameterType.new(
-                type: "TIMESTAMP"),
+              parameter_type:  Google::Apis::BigqueryV2::QueryParameterType.new(type: "TIMESTAMP"),
               parameter_value: Google::Apis::BigqueryV2::QueryParameterValue.new(
                 value: value.strftime("%Y-%m-%d %H:%M:%S.%6N%:z"))
             )
           elsif Bigquery::Time === value
             return Google::Apis::BigqueryV2::QueryParameter.new(
-              parameter_type:  Google::Apis::BigqueryV2::QueryParameterType.new(
-              type: "TIME"),
-              parameter_value: Google::Apis::BigqueryV2::QueryParameterValue.new(
-                value: value.value)
+              parameter_type:  Google::Apis::BigqueryV2::QueryParameterType.new(type: "TIME"),
+              parameter_value: Google::Apis::BigqueryV2::QueryParameterValue.new(value: value.value)
             )
           elsif value.respond_to?(:read) && value.respond_to?(:rewind)
             value.rewind
             return Google::Apis::BigqueryV2::QueryParameter.new(
-              parameter_type:  Google::Apis::BigqueryV2::QueryParameterType.new(
-                type: "BYTES"),
-              parameter_value: Google::Apis::BigqueryV2::QueryParameterValue.new(
-                value: Base64.strict_encode64(
+              parameter_type:  Google::Apis::BigqueryV2::QueryParameterType.new(type: "BYTES"),
+              parameter_value: Google::Apis::BigqueryV2::QueryParameterValue.new(value: Base64.strict_encode64(
                   value.read.force_encoding("ASCII-8BIT")))
             )
           elsif Array === value
@@ -225,9 +204,7 @@ module Google
                 type: "STRUCT",
                 struct_types: struct_pairs.map(&:first)
               ),
-              parameter_value: Google::Apis::BigqueryV2::QueryParameterValue.new(
-                struct_values: struct_values
-              )
+              parameter_value: Google::Apis::BigqueryV2::QueryParameterValue.new(struct_values: struct_values)
             )
           else
             raise "A query parameter of type #{value.class} is not supported."
@@ -390,7 +367,7 @@ module Google
         #   nil if the given argument is nil.
         def self.time_to_millis time_obj
           return nil unless time_obj
-          (time_obj.to_i * 1000) + (time_obj.nsec / 1000000)
+          (time_obj.to_i * 1000) + (time_obj.nsec / 1_000_000)
         end
       end
 
