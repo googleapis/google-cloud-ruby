@@ -239,7 +239,12 @@ describe Google::Cloud::Bigtable::RowFilter, :row_filter, :mock_bigtable do
   it "creates a chain filter" do
     filter = Google::Cloud::Bigtable::RowFilter.chain
     filter.must_be_kind_of Google::Cloud::Bigtable::RowFilter::ChainFilter
-    filter.pass.block.sink.strip_value
+    filters = filter.filters
+    filters.must_be_kind_of Array
+    filters.must_be :frozen?
+    filters.must_be :empty?
+
+    filter.pass.block.sink.strip_value # Add some filters to the chain.
     filter.length.must_equal 4
 
     filters_grpc = filter.to_grpc.chain.filters
@@ -253,7 +258,12 @@ describe Google::Cloud::Bigtable::RowFilter, :row_filter, :mock_bigtable do
   it "creates an interleave filter" do
     filter = Google::Cloud::Bigtable::RowFilter.interleave
     filter.must_be_kind_of Google::Cloud::Bigtable::RowFilter::InterleaveFilter
-    filter.pass.block.sink.strip_value
+    filters = filter.filters
+    filters.must_be_kind_of Array
+    filters.must_be :frozen?
+    filters.must_be :empty?
+
+    filter.pass.block.sink.strip_value # Add some filters to the interleave.
     filter.length.must_equal 4
 
     filters_grpc = filter.to_grpc.interleave.filters

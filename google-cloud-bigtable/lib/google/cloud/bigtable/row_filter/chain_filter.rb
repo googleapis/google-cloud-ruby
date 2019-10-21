@@ -533,12 +533,12 @@ module Google
           end
 
           ##
-          # Returns the frozen filters array.
+          # Returns a frozen copy of the filters array.
           #
           # @return [Array<SimpleFilter|ChainFilter|InterleaveFilter|ConditionFilter>]
           #
           def filters
-            @filters.freeze
+            @filters.dup.freeze
           end
 
           # @private
