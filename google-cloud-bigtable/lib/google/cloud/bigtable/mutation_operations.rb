@@ -19,6 +19,7 @@ require "google/cloud/bigtable/mutation_entry"
 require "google/cloud/bigtable/row"
 require "google/cloud/bigtable/rows_mutator"
 require "google/cloud/bigtable/read_modify_write_rule"
+require "google/cloud/bigtable/status"
 
 module Google
   module Cloud
@@ -107,10 +108,15 @@ module Google
         #   entries = []
         #   entries << table.new_mutation_entry("row-1").set_cell("cf1", "field1", "XYZ")
         #   entries << table.new_mutation_entry("row-2").set_cell("cf1", "field1", "ABC")
-        #   table.mutate_rows(entries)
+        #   responses = table.mutate_rows(entries)
+        #
+        #   responses.each do |response|
+        #     puts response.status.description
+        #   end
         #
         def mutate_rows entries
-          RowsMutator.new(self, entries).apply_mutations
+          statuses = RowsMutator.new(self, entries).apply_mutations
+          statuses.map { |s| Response.from_grpc s }
         end
 
         ##
@@ -227,14 +233,14 @@ module Google
         #   otherwise_mutations = Google::Cloud::Bigtable::MutationEntry.new
         #   otherwise_mutations.delete_from_family("cf3")
         #
-        #   response = table.check_and_mutate_row(
+        #   predicate_matched = table.check_and_mutate_row(
         #     "user01",
         #     predicate_filter,
         #     on_match: on_match_mutations,
         #     otherwise: otherwise_mutations
         #   )
         #
-        #   if response
+        #   if predicate_matched
         #     puts "All predicates matched"
         #   end
         #
@@ -341,6 +347,53 @@ module Google
         #
         def new_read_modify_write_rule family, qualifier
           Google::Cloud::Bigtable::ReadModifyWriteRule.new(family, qualifier)
+        end
+
+        ##
+        # # MutationEntry::Response
+        #
+        # Represents a response message from BigtableService.MutateRows.
+        #
+        # @attr [Integer] index The index into the original request's `entries`
+        #   list of the Entry for which a result is being reported.
+        # @attr [Google::Cloud::Bigtable::Status] The result of the request
+        #   Entry identified by `index`. Depending on how requests are batched
+        #   during execution, it is possible for one Entry to fail due to an
+        #   error with another Entry. In the event that this occurs, the same
+        #   error will be reported for both entries.
+        #
+        # @example
+        #   require "google/cloud/bigtable"
+        #
+        #   bigtable = Google::Cloud::Bigtable.new
+        #
+        #   table = bigtable.table("my-instance", "my-table")
+        #
+        #   entries = []
+        #   entries << table.new_mutation_entry("row-1").set_cell("cf1", "field1", "XYZ")
+        #   entries << table.new_mutation_entry("row-2").set_cell("cf1", "field1", "ABC")
+        #   responses = table.mutate_rows(entries)
+        #
+        #   responses.each do |response|
+        #     puts response.status.description
+        #   end
+        #
+        class Response
+          attr_reader :index, :status
+
+          ##
+          # @private Creates a MutationEntry::Response object.
+          def initialize index, status
+            @index = index
+            @status = status
+          end
+
+          ##
+          # @private New MutationEntry::Response from a
+          # Google::Bigtable::V2::MutateRowsResponse::Entry object.
+          def self.from_grpc grpc
+            new grpc.index, Status.from_grpc(grpc.status)
+          end
         end
       end
     end

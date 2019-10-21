@@ -63,7 +63,10 @@ describe "Instance Tables", :bigtable do
       table.new_mutation_entry(key).set_cell("cf", "field1", "v-#{i+1}")
     end
 
-    table.mutate_rows(entries)
+    responses = table.mutate_rows(entries)
+    responses.count.must_equal entries.count
+    responses.each { |r| r.status.code.must_equal 0 }
+
     sample_keys = table.sample_row_keys.to_a.map(&:key)
 
     initial_splits.each do |key|

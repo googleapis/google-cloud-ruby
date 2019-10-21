@@ -399,6 +399,12 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
+  doctest.before "Google::Cloud::Bigtable::MutationOperations::Response" do
+    mock_bigtable do |mock, mocked_instances, mocked_tables|
+      mock.expect :mutate_rows, [], ["projects/my-project/instances/my-instance/tables/my-table", Array, Hash]
+    end
+  end
+
   doctest.before "Google::Cloud::Bigtable::Policy" do
     mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
       mocked_instances.expect :get_instance, instance_resp, ["projects/my-project/instances/my-instance"]
@@ -496,6 +502,12 @@ YARD::Doctest.configure do |doctest|
     mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
       mocked_tables.expect :get_table, table_resp, ["projects/my-project/instances/my-instance/tables/my-table", Hash]
       mock.expect :sample_row_keys, [], ["projects/my-project/instances/my-instance/tables/my-table", Hash]
+    end
+  end
+
+  doctest.before "Google::Cloud::Bigtable::Status" do
+    mock_bigtable do |mock, mocked_instances, mocked_tables|
+      mock.expect :mutate_rows, [], ["projects/my-project/instances/my-instance/tables/my-table", Array, Hash]
     end
   end
 

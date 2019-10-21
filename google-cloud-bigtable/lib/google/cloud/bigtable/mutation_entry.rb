@@ -57,6 +57,7 @@ module Google
       class MutationEntry
         attr_accessor :row_key
 
+        # @private
         # mutations gRPC list
         # @return [Array<Google::Bigtable::V2::Mutation>]
         attr_accessor :mutations
