@@ -116,8 +116,8 @@ task default: :test
 desc "Compiles c extension for google-cloud-debugger"
 task :debugger_c do
   header "compiling google-cloud-debugger", "*"
-  debugger_directory = File.join(File.dirname(Dir.getwd), "google-cloud-debugger")
-  Dir.chdir(debugger_directory) do
+  debugger_directory = File.join File.dirname(Dir.getwd), "google-cloud-debugger"
+  Dir.chdir debugger_directory do
     Bundler.with_clean_env do
       sh "bundle update"
       sh "bundle exec rake compile"

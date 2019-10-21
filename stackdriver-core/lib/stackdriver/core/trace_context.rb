@@ -335,7 +335,7 @@ module Stackdriver
         val = rand 0x100000000000000000000000000000000
         val &= 0xffffffffffff0fffcfffffffffffffff
         val |= 0x00000000000040008000000000000000
-        format("%032x", val)
+        format "%032x", val
       end
     end
   end

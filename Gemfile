@@ -15,8 +15,8 @@ gem "codecov", "~> 0.1", require: false
 gem "yard", "~> 0.9"
 gem "yard-doctest", "~> 0.1.13"
 gem "gems", "~> 0.8"
-gem "actionpack", "~> 4.0"
-gem "railties", "~> 4.0"
+gem "actionpack", "~> 5.0"
+gem "railties", "~> 5.0"
 gem "rack", ">= 0.1"
 
 gem "google-cloud-core", path: "google-cloud-core"

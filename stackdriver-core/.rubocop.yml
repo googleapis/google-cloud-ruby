@@ -3,31 +3,20 @@ inherit_gem:
 
 AllCops:
   Exclude:
-    - "stackdriver-core.gemspec"
-    - "Rakefile"
     - "test/**/*"
 
 Documentation:
   Enabled: false
 
-Layout/AlignHash:
-  Enabled: false
 Metrics/ModuleLength:
-  Enabled: false
+  Exclude:
+    - "lib/stackdriver/core/async_actor.rb"
 Metrics/ClassLength:
-  Enabled: false
+  Exclude:
+    - "lib/stackdriver/core/trace_context.rb"
 Naming/AccessorMethodName:
-  Enabled: false
+  Exclude:
+    - "lib/stackdriver/core/async_actor.rb"
 Naming/FileName:
   Exclude:
     - "lib/stackdriver-core.rb"
-Style/EmptyMethod:
-  Enabled: false
-Style/IfUnlessModifier:
-  Enabled: false
-Style/MethodCallWithArgsParentheses:
-  Enabled: false
-Style/NumericPredicate:
-  Enabled: false
-Style/SafeNavigation:
-  Enabled: false

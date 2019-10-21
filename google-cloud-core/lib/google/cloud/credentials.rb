@@ -30,12 +30,12 @@ module Google
     # This class is intended to be inherited by API-specific classes
     # which overrides the SCOPE constant.
     class Credentials
-      TOKEN_CREDENTIAL_URI = "https://oauth2.googleapis.com/token"
-      AUDIENCE = "https://oauth2.googleapis.com/token"
-      SCOPE = []
-      PATH_ENV_VARS = %w[GOOGLE_CLOUD_KEYFILE GCLOUD_KEYFILE]
-      JSON_ENV_VARS = %w[GOOGLE_CLOUD_KEYFILE_JSON GCLOUD_KEYFILE_JSON]
-      DEFAULT_PATHS = ["~/.config/gcloud/application_default_credentials.json"]
+      TOKEN_CREDENTIAL_URI = "https://oauth2.googleapis.com/token".freeze
+      AUDIENCE = "https://oauth2.googleapis.com/token".freeze
+      SCOPE = [].freeze
+      PATH_ENV_VARS = ["GOOGLE_CLOUD_KEYFILE", "GCLOUD_KEYFILE"].freeze
+      JSON_ENV_VARS = ["GOOGLE_CLOUD_KEYFILE_JSON", "GCLOUD_KEYFILE_JSON"].freeze
+      DEFAULT_PATHS = ["~/.config/gcloud/application_default_credentials.json"].freeze
 
       attr_accessor :client
 
@@ -125,10 +125,10 @@ module Google
 
         # client options for initializing signet client
         { token_credential_uri: options["token_credential_uri"],
-          audience: options["audience"],
-          scope: Array(options["scope"]),
-          issuer: options["client_email"],
-          signing_key: OpenSSL::PKey::RSA.new(options["private_key"]) }
+          audience:             options["audience"],
+          scope:                Array(options["scope"]),
+          issuer:               options["client_email"],
+          signing_key:          OpenSSL::PKey::RSA.new(options["private_key"]) }
       end
     end
   end

@@ -1,5 +1,4 @@
-# -*- encoding: utf-8 -*-
-require File.expand_path("../lib/google/cloud/version", __FILE__)
+require File.expand_path("lib/google/cloud/version", __dir__)
 
 Gem::Specification.new do |gem|
   gem.name          = "google-cloud"
@@ -13,7 +12,8 @@ Gem::Specification.new do |gem|
   gem.license       = "Apache-2.0"
 
   gem.files         = `git ls-files -- lib/*`.split("\n") +
-                      ["README.md", "AUTHENTICATION.md", "CONTRIBUTING.md", "CODE_OF_CONDUCT.md", "LICENSE", ".yardopts"]
+                      ["README.md", "AUTHENTICATION.md", "CONTRIBUTING.md", "CODE_OF_CONDUCT.md", "LICENSE",
+                       ".yardopts"]
   gem.require_paths = ["lib"]
 
   gem.required_ruby_version = ">= 2.4"

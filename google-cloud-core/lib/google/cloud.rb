@@ -223,9 +223,7 @@ module Google
     # @private
     #
     def self.auto_load_files
-      if Gem.respond_to? :find_latest_files
-        return Gem.find_latest_files "google-cloud-*.rb"
-      end
+      return Gem.find_latest_files "google-cloud-*.rb" if Gem.respond_to? :find_latest_files
       # Ruby 2.0 does not have Gem.find_latest_files
       Gem.find_files "google-cloud-*.rb"
     end

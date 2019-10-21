@@ -54,7 +54,9 @@ task :console do
   $LOAD_PATH.unshift "lib"
 
   require "google/cloud"
-  def gcloud; @gcloud ||= Google::Cloud.new; end
+  def gcloud
+    @gcloud ||= Google::Cloud.new
+  end
 
   ARGV.clear
   IRB.start
@@ -91,7 +93,7 @@ namespace :ci do
   end
 end
 
-task :default => :test
+task default: :test
 
 def header str, token = "#"
   line_length = str.length + 8
