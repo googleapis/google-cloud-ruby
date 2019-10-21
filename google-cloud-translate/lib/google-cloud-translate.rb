@@ -95,8 +95,6 @@ module Google
     #   * `https://www.googleapis.com/auth/cloud-platform`
     # @param [Integer] retries Number of times to retry requests on server error. The default value is `3`. Optional.
     # @param [Integer] timeout Default timeout to use in requests. Optional.
-    # @param [String] project Alias for the `project_id` argument. Deprecated.
-    # @param [String] keyfile Alias for the `credentials` argument. Deprecated.
     #
     # @return [Google::Cloud::Translate::V2::Api]
     #
@@ -118,11 +116,10 @@ module Google
     #   translation = translate.translate "Hello world!", to: "la"
     #   translation.text #=> "Salve mundi!"
     #
-    def self.translate key = nil, project_id: nil, credentials: nil, scope: nil,
-                       retries: nil, timeout: nil, project: nil, keyfile: nil
-      require "google/cloud/translate"
-      Google::Cloud::Translate.new key: key, project_id: project_id, credentials: credentials, scope: scope,
-                                   retries: retries, timeout: timeout, project: project, keyfile: keyfile
+    def self.translate key = nil, project_id: nil, credentials: nil, scope: nil, retries: nil, timeout: nil
+      require "google/cloud/translate/v2"
+      Google::Cloud::Translate::V2.new key: key, project_id: project_id, credentials: credentials, scope: scope,
+                                       retries: retries, timeout: timeout
     end
   end
 end
@@ -142,9 +139,7 @@ Google::Cloud.configure.add_config! :translate do |config|
   end
 
   config.add_field! :project_id, default_project, match: String, allow_nil: true
-  config.add_alias! :project, :project_id
   config.add_field! :credentials, default_creds, match: [String, Hash, Google::Auth::Credentials], allow_nil: true
-  config.add_alias! :keyfile, :credentials
   config.add_field! :key, default_key, match: String, allow_nil: true
   config.add_field! :scope, nil, match: [String, Array]
   config.add_field! :retries, nil, match: Integer

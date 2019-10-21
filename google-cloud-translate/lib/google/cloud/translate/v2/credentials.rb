@@ -31,6 +31,7 @@ module Google
         #   creds = Google::Cloud::Translate::V2::Credentials.new keyfile
         #
         #   translate = Google::Cloud::Translate.new(
+        #     version: :v2,
         #     project_id: "my-todo-project",
         #     credentials: creds
         #   )

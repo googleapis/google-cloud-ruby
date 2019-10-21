@@ -31,12 +31,12 @@ module Google
           API_URL = "https://translation.googleapis.com".freeze
 
           # @private
-          attr_accessor :project, :credentials, :retries, :timeout, :key
+          attr_accessor :project_id, :credentials, :retries, :timeout, :key
 
           ##
           # Creates a new Service instance.
-          def initialize project, credentials, retries: nil, timeout: nil, key: nil, host: nil
-            @project = project
+          def initialize project_id, credentials, retries: nil, timeout: nil, key: nil, host: nil
+            @project_id = project_id
             @credentials = credentials
             @retries = retries
             @timeout = timeout

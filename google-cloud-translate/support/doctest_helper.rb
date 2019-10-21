@@ -13,23 +13,26 @@
 # limitations under the License.
 
 require "google/cloud/translate"
+require "google/cloud/translate/v2"
 
 module Google
   module Cloud
     module Translate
-      def self.stub_new
-        define_singleton_method :new do |*args|
-          yield *args
+      module V2
+        def self.stub_new
+          define_singleton_method :new do |*args|
+            yield *args
+          end
         end
-      end
-      # Create default unmocked methods that will raise if ever called
-      def self.new *args
-        raise "This code example is not yet mocked"
-      end
-      class Credentials
-        # Override the default constructor
+        # Create default unmocked methods that will raise if ever called
         def self.new *args
-          OpenStruct.new(client: OpenStruct.new(updater_proc: Proc.new {}))
+          raise "This code example is not yet mocked"
+        end
+        class Credentials
+          # Override the default constructor
+          def self.new *args
+            OpenStruct.new(client: OpenStruct.new(updater_proc: Proc.new {}))
+          end
         end
       end
     end
@@ -37,10 +40,10 @@ module Google
 end
 
 def mock_translate
-  Google::Cloud::Translate.stub_new do |*args|
+  Google::Cloud::Translate::V2.stub_new do |*args|
     key = "test-api-key"
     project = "my-todo-project"
-    translate = Google::Cloud::Translate::V2::Api.new(OpenStruct.new(key: key, project: project))
+    translate = Google::Cloud::Translate::V2::Api.new(OpenStruct.new(key: key, project_id: project))
 
     translate.service = Minitest::Mock.new
     yield translate.service
@@ -49,6 +52,8 @@ def mock_translate
 end
 
 YARD::Doctest.configure do |doctest|
+  doctest.skip "Google::Cloud::Translate::V3"
+
   doctest.before "Google::Cloud#translate" do
     mock_translate do |mock|
       res_attrs = { detectedSourceLanguage: "en", translatedText: "Salve mundi!" }
@@ -70,13 +75,6 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
-  doctest.before "Google::Cloud.translate@Using API Key from the environment variable." do
-    mock_translate do |mock|
-      res_attrs = { detectedSourceLanguage: "en", translatedText: "Salve mundi!" }
-      mock.expect :translate, list_translations_response([res_attrs]), [["Hello world!"], to: "la", from: nil, format: nil, model: nil, cid: nil]
-    end
-  end
-
   doctest.before "Google::Cloud::Translate.new" do
     mock_translate do |mock|
       res_attrs = { detectedSourceLanguage: "en", translatedText: "Salve mundi!" }
@@ -84,7 +82,7 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
-  doctest.before "Google::Cloud::Translate.new@Using API Key from the environment variable." do
+  doctest.before "Google::Cloud::Translate::V2.new" do
     mock_translate do |mock|
       res_attrs = { detectedSourceLanguage: "en", translatedText: "Salve mundi!" }
       mock.expect :translate, list_translations_response([res_attrs]), [["Hello world!"], to: "la", from: nil, format: nil, model: nil, cid: nil]
@@ -102,7 +100,12 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud::Translate::V2::Api#project" do
     mock_translate do |mock|
-      mock.expect :project, "my-todo-project"
+      mock.expect :project_id, "my-todo-project"
+    end
+  end
+  doctest.before "Google::Cloud::Translate::V2::Api#project_id" do
+    mock_translate do |mock|
+      mock.expect :project_id, "my-todo-project"
     end
   end
 

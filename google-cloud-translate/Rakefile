@@ -28,7 +28,7 @@ end
 
 # Acceptance tests
 desc "Run the translate acceptance tests."
-task :acceptance, :project, :keyfile, :key do |t, args|
+task :acceptance, :project, :keyfile, :key do |_t, args|
   project = args[:project]
   project ||= ENV["TRANSLATE_TEST_PROJECT"] || ENV["GCLOUD_TEST_PROJECT"]
   keyfile = args[:keyfile]
@@ -39,7 +39,8 @@ task :acceptance, :project, :keyfile, :key do |t, args|
     keyfile ||= ENV["TRANSLATE_TEST_KEYFILE_JSON"] || ENV["GCLOUD_TEST_KEYFILE_JSON"]
   end
   if project.nil? || keyfile.nil?
-    fail "You must provide a project and keyfile. e.g. rake acceptance[test123, /path/to/keyfile.json] or TRANSLATE_TEST_PROJECT=test123 TRANSLATE_TEST_KEYFILE=/path/to/keyfile.json rake acceptance"
+    raise "You must provide a project and keyfile. e.g. rake acceptance[test123, /path/to/keyfile.json] or " \
+          "TRANSLATE_TEST_PROJECT=test123 TRANSLATE_TEST_KEYFILE=/path/to/keyfile.json rake acceptance"
   end
   key = args[:key]
   key ||= ENV["TRANSLATE_TEST_KEY"] || ENV["GCLOUD_TEST_KEY"]
@@ -69,12 +70,10 @@ task :acceptance, :project, :keyfile, :key do |t, args|
 end
 
 namespace :acceptance do
-  task :key, :key do |t, args|
+  task :key, :key do |_t, args|
     key = args[:key]
     key ||= ENV["TRANSLATE_TEST_KEY"] || ENV["GCLOUD_TEST_KEY"]
-    if key.nil?
-      fail "unable to run acceptance tests with api key credentials"
-    end
+    raise "unable to run acceptance tests with api key credentials" if key.nil?
     # clear any env var already set
     require "google/cloud/translate/v2/credentials"
     (Google::Cloud::Translate::V2::Credentials::PATH_ENV_VARS +
@@ -88,7 +87,7 @@ namespace :acceptance do
   end
 
   desc "Run acceptance tests with coverage."
-  task :coverage, :project, :keyfile do |t, args|
+  task :coverage, :project, :keyfile do |_t, _args|
     require "simplecov"
     SimpleCov.start do
       command_name "google-cloud-translate"
@@ -120,7 +119,9 @@ task :console do
   $LOAD_PATH.unshift "lib"
 
   require "google-cloud-translate"
-  def gcloud; @gcloud ||= Google::Cloud.new; end
+  def gcloud
+    @gcloud ||= Google::Cloud.new
+  end
 
   ARGV.clear
   IRB.start
@@ -129,7 +130,7 @@ end
 require "yard"
 require "yard/rake/yardoc_task"
 YARD::Rake::YardocTask.new do |y|
-  y.options << "--fail-on-warning"
+  # y.options << "--fail-on-warning"
 end
 
 desc "Run the CI build"
@@ -157,7 +158,7 @@ namespace :ci do
   end
 end
 
-task :default => :test
+task default: :test
 
 def header str, token = "#"
   line_length = str.length + 8

@@ -35,7 +35,7 @@ module Google
         # @example
         #   require "google/cloud/translate"
         #
-        #   translate = Google::Cloud::Translate.new
+        #   translate = Google::Cloud::Translate.new version: :v2
         #
         #   translation = translate.translate "Hello world!", to: "la"
         #
@@ -66,6 +66,7 @@ module Google
           #   require "google/cloud/translate"
           #
           #   translate = Google::Cloud::Translate.new(
+          #     version: :v2,
           #     project_id: "my-todo-project",
           #     credentials: "/path/to/keyfile.json"
           #   )
@@ -73,7 +74,7 @@ module Google
           #   translate.project_id #=> "my-todo-project"
           #
           def project_id
-            service.project
+            service.project_id
           end
           alias project project_id
 
@@ -104,7 +105,7 @@ module Google
           # @example
           #   require "google/cloud/translate"
           #
-          #   translate = Google::Cloud::Translate.new
+          #   translate = Google::Cloud::Translate.new version: :v2
           #
           #   translation = translate.translate "Hello world!", to: "la"
           #
@@ -120,7 +121,7 @@ module Google
           # @example Using the neural machine translation model:
           #   require "google/cloud/translate"
           #
-          #   translate = Google::Cloud::Translate.new
+          #   translate = Google::Cloud::Translate.new version: :v2
           #
           #   translation = translate.translate "Hello world!",
           #                                     to: "la", model: "nmt"
@@ -131,7 +132,7 @@ module Google
           # @example Setting the `from` language.
           #   require "google/cloud/translate"
           #
-          #   translate = Google::Cloud::Translate.new
+          #   translate = Google::Cloud::Translate.new version: :v2
           #
           #   translation = translate.translate "Hello world!",
           #                                     from: :en, to: :la
@@ -141,7 +142,7 @@ module Google
           # @example Retrieving multiple translations.
           #   require "google/cloud/translate"
           #
-          #   translate = Google::Cloud::Translate.new
+          #   translate = Google::Cloud::Translate.new version: :v2
           #
           #   translations = translate.translate "Hello my friend.",
           #                                      "See you soon.",
@@ -153,7 +154,7 @@ module Google
           # @example Preserving HTML tags.
           #   require "google/cloud/translate"
           #
-          #   translate = Google::Cloud::Translate.new
+          #   translate = Google::Cloud::Translate.new version: :v2
           #
           #   translation = translate.translate "<strong>Hello</strong> world!",
           #                                     to: :la
@@ -177,13 +178,13 @@ module Google
           #
           # @param [String] text The text or texts upon which language detection should be performed.
           #
-          # @return [Detection, Array<Detection>] A single {Detection} object if just one text was given, or an array of
-          #   {Detection} objects if multiple texts were given.
+          # @return [Detection, Array<Detection>] A single {Detection} object if just one text was given, or an array
+          #   of {Detection} objects if multiple texts were given.
           #
           # @example
           #   require "google/cloud/translate"
           #
-          #   translate = Google::Cloud::Translate.new
+          #   translate = Google::Cloud::Translate.new version: :v2
           #
           #   detection = translate.detect "Hello world!"
           #   detection.language #=> "en"
@@ -192,7 +193,7 @@ module Google
           # @example Detecting multiple texts.
           #   require "google/cloud/translate"
           #
-          #   translate = Google::Cloud::Translate.new
+          #   translate = Google::Cloud::Translate.new version: :v2
           #
           #   detections = translate.detect "Hello world!",
           #                                 "Bonjour le monde!"
@@ -223,7 +224,7 @@ module Google
           # @example
           #   require "google/cloud/translate"
           #
-          #   translate = Google::Cloud::Translate.new
+          #   translate = Google::Cloud::Translate.new version: :v2
           #
           #   languages = translate.languages
           #   languages.count #=> 104
@@ -234,7 +235,7 @@ module Google
           # @example Get all languages with their names in French.
           #   require "google/cloud/translate"
           #
-          #   translate = Google::Cloud::Translate.new
+          #   translate = Google::Cloud::Translate.new version: :v2
           #
           #   languages = translate.languages "fr"
           #   languages.count #=> 104

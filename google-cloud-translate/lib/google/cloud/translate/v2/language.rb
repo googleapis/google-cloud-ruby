@@ -27,7 +27,7 @@ module Google
         # @example
         #   require "google/cloud/translate"
         #
-        #   translate = Google::Cloud::Translate.new
+        #   translate = Google::Cloud::Translate.new version: :v2
         #
         #   languages = translate.languages "en"
         #

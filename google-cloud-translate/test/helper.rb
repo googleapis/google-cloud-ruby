@@ -20,6 +20,7 @@ require "ostruct"
 require "json"
 require "base64"
 require "google/cloud/translate"
+require "google/cloud/translate/v2"
 
 class MockTranslate < Minitest::Spec
   let(:project) { "test" }
