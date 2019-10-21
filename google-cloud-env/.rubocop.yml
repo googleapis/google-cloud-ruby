@@ -3,17 +3,14 @@ inherit_gem:
 
 AllCops:
   Exclude:
-    - "google-cloud-env.gemspec"
-    - "Rakefile"
     - "test/**/*"
 
 Documentation:
   Enabled: false
 
 Metrics/ClassLength:
-  Enabled: false
+  Exclude:
+    - "lib/google/cloud/env.rb"
 Naming/FileName:
   Exclude:
     - "lib/google-cloud-env.rb"
-Style/IfUnlessModifier:
-  Enabled: false

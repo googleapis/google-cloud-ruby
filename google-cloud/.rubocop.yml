@@ -3,18 +3,11 @@ inherit_gem:
 
 AllCops:
   Exclude:
-    - "google-cloud.gemspec"
-    - "Rakefile"
     - "test/**/*"
 
 Documentation:
   Enabled: false
 
-Layout/EmptyLines: # for the extra line between copyright and code
-  Enabled: false
-Metrics/LineLength:
-  Exclude: 
-    - "Gemfile"
 Naming/FileName:
   Exclude:
     - "lib/google-cloud.rb"

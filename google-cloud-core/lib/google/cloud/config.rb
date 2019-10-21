@@ -308,9 +308,7 @@ module Google
       #
       def [] key
         key = resolve_key! key
-        unless @validators.key? key
-          warn! "Key #{key.inspect} does not exist. Returning nil."
-        end
+        warn! "Key #{key.inspect} does not exist. Returning nil." unless @validators.key? key
         value = @values[key]
         value = value.call if Config::DeferredValue === value
         value
@@ -495,16 +493,8 @@ module Google
       # @private a list of key names that are technically illegal because
       # they clash with method names.
       #
-      ILLEGAL_KEYS = %i[
-        add_options
-        initialize
-        instance_eval
-        instance_exec
-        method_missing
-        singleton_method_added
-        singleton_method_removed
-        singleton_method_undefined
-      ].freeze
+      ILLEGAL_KEYS = [:add_options, :initialize, :instance_eval, :instance_exec, :method_missing,
+                      :singleton_method_added, :singleton_method_removed, :singleton_method_undefined].freeze
 
       ##
       # @private sentinel indicating a subconfig in the validators hash
@@ -524,9 +514,7 @@ module Google
           warn! "Illegal key name: #{key_str.inspect}. Method dispatch will" \
                 " not work for this key."
         end
-        if @validators.key? key
-          warn! "Key #{key.inspect} already exists. It will be replaced."
-        end
+        warn! "Key #{key.inspect} already exists. It will be replaced." if @validators.key? key
         key
       end
 

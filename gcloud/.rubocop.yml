@@ -3,15 +3,7 @@ inherit_gem:
 
 AllCops:
   Exclude:
-    - "gcloud.gemspec"
-    - "Rakefile"
     - "test/**/*"
 
 Documentation:
   Enabled: false
-
-Layout/EmptyLines: # for the extra line between copyright and code
-  Enabled: false
-Metrics/LineLength:
-  Exclude: 
-    - "Gemfile"

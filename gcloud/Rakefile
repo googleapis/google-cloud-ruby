@@ -55,7 +55,9 @@ task :console do
 
   require "gcloud"
   Bundler.require # load all the gems defined in the Gemfile
-  def gcloud; @gcloud ||= Gcloud.new; end
+  def gcloud
+    @gcloud ||= Gcloud.new
+  end
 
   ARGV.clear
   IRB.start
@@ -92,7 +94,7 @@ namespace :ci do
   end
 end
 
-task :default => :test
+task default: :test
 
 def header str, token = "#"
   line_length = str.length + 8

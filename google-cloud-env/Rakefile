@@ -90,7 +90,7 @@ namespace :ci do
   end
 end
 
-task :default => :test
+task default: :test
 
 def header str, token = "#"
   line_length = str.length + 8

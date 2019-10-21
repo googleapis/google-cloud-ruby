@@ -3,34 +3,17 @@ inherit_gem:
 
 AllCops:
   Exclude:
-    - "google-cloud-core.gemspec"
-    - "Rakefile"
     - "test/**/*"
 
 Documentation:
   Enabled: false
 
-Layout/AlignHash:
-  Exclude:
-    - "lib/google/cloud/credentials.rb"
 Metrics/ClassLength:
-  Enabled: false
+  Exclude:
+    - "lib/google/cloud/config.rb"
 Naming/FileName:
   Exclude:
     - "lib/google-cloud-core.rb"
 Style/CaseEquality:
   Exclude:
     - "lib/google/cloud/config.rb"
-Style/IfUnlessModifier:
-  Enabled: false
-Style/MutableConstant:
-  Exclude:
-    - "lib/google/cloud/credentials.rb"
-Style/SafeNavigation:
-  Enabled: false
-Style/SymbolArray:
-  Exclude:
-    - "lib/google/cloud/config.rb"
-Style/WordArray:
-  Exclude:
-    - "lib/google/cloud/credentials.rb"

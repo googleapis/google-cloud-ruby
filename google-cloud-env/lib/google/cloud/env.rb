@@ -114,8 +114,7 @@ module Google
         @retry_backoff_factor = retry_backoff_factor
         @retry_max_interval = retry_max_interval
         request_opts = { timeout: request_timeout, open_timeout: open_timeout }
-        @connection = connection ||
-                      ::Faraday.new(url: METADATA_HOST, request: request_opts)
+        @connection = connection || ::Faraday.new(url: METADATA_HOST, request: request_opts)
       end
 
       ##
@@ -181,8 +180,7 @@ module Google
       # @return [String,nil]
       #
       def project_id
-        env["GCLOUD_PROJECT"] || env["DEVSHELL_PROJECT_ID"] ||
-          lookup_metadata("project", "project-id")
+        env["GCLOUD_PROJECT"] || env["DEVSHELL_PROJECT_ID"] || lookup_metadata("project", "project-id")
       end
 
       ##
@@ -340,8 +338,7 @@ module Google
         # below is set in some older versions of GKE, and the file below is
         # present in Kubernetes as of version 1.9, but it is possible that
         # alternatives will need to be found in the future.
-        env["GKE_NAMESPACE_ID"] ||
-          ::IO.read("/var/run/secrets/kubernetes.io/serviceaccount/namespace")
+        env["GKE_NAMESPACE_ID"] || ::IO.read("/var/run/secrets/kubernetes.io/serviceaccount/namespace")
       rescue SystemCallError
         nil
       end
@@ -415,9 +412,7 @@ module Google
           if retries_remaining >= 0
             sleep retry_interval
             retry_interval *= @retry_backoff_factor
-            if retry_interval > @retry_max_interval
-              retry_interval = @retry_max_interval
-            end
+            retry_interval = @retry_max_interval if retry_interval > @retry_max_interval
             retry
           end
           error_result

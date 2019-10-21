@@ -3,9 +3,6 @@ inherit_gem:
 
 AllCops:
   Exclude:
-    - "*.gemspec"
-    - "Rakefile"
-    - "lib/legacy_stackdriver.rb"
     - "test/**/*"
 
 Documentation:

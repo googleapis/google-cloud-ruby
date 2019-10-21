@@ -189,7 +189,7 @@ module Stackdriver
 
         return :stopped unless async_stop
 
-        return :waited if timeout.to_f > 0 && wait_until_async_stopped(timeout)
+        return :waited if timeout.to_f.positive? && wait_until_async_stopped(timeout)
 
         return :timeout unless force
 
@@ -249,7 +249,7 @@ module Stackdriver
       #
       def self.unregister_for_cleanup actor
         @exit_lock.synchronize do
-          @cleanup_list.delete actor if @cleanup_list
+          @cleanup_list&.delete actor
         end
       end
 
@@ -258,9 +258,8 @@ module Stackdriver
       #
       def self.run_cleanup
         @exit_lock.synchronize do
-          if @cleanup_list
-            @cleanup_list.shift.async_stop! until @cleanup_list.empty?
-          end
+          return unless @cleanup_list
+          @cleanup_list.shift.async_stop! until @cleanup_list.empty?
         end
       end
 
@@ -276,8 +275,8 @@ module Stackdriver
         @startup_lock = Mutex.new
         @cleanup_options = {
           wait_interval: WAIT_INTERVAL,
-          timeout: CLEANUP_TIMEOUT,
-          force: true
+          timeout:       CLEANUP_TIMEOUT,
+          force:         true
         }
       end
 
@@ -352,7 +351,8 @@ module Stackdriver
       # @private Default abstract definition of this function that's a no-op.
       # The extending classes can override this method to handle state changing
       # logic.
-      def on_async_state_change; end
+      def on_async_state_change
+      end
     end
   end
 end
