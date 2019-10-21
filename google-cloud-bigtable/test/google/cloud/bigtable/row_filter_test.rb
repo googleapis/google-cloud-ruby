@@ -236,19 +236,45 @@ describe Google::Cloud::Bigtable::RowFilter, :row_filter, :mock_bigtable do
     end
   end
 
-  it "create chain filter" do
+  it "creates a chain filter" do
     filter = Google::Cloud::Bigtable::RowFilter.chain
     filter.must_be_kind_of Google::Cloud::Bigtable::RowFilter::ChainFilter
-    filter.to_grpc.chain.must_be_kind_of Google::Bigtable::V2::RowFilter::Chain
+    filters = filter.filters
+    filters.must_be_kind_of Array
+    filters.must_be :frozen?
+    filters.must_be :empty?
+
+    filter.pass.block.sink.strip_value # Add some filters to the chain.
+    filter.length.must_equal 4
+
+    filters_grpc = filter.to_grpc.chain.filters
+    filters_grpc.length.must_equal 4
+    filters_grpc[0].pass_all_filter.must_equal true
+    filters_grpc[1].block_all_filter.must_equal true
+    filters_grpc[2].sink.must_equal true
+    filters_grpc[3].strip_value_transformer.must_equal true
   end
 
-  it "create interleave filter" do
+  it "creates an interleave filter" do
     filter = Google::Cloud::Bigtable::RowFilter.interleave
     filter.must_be_kind_of Google::Cloud::Bigtable::RowFilter::InterleaveFilter
-    filter.to_grpc.interleave.must_be_kind_of Google::Bigtable::V2::RowFilter::Interleave
+    filters = filter.filters
+    filters.must_be_kind_of Array
+    filters.must_be :frozen?
+    filters.must_be :empty?
+
+    filter.pass.block.sink.strip_value # Add some filters to the interleave.
+    filter.length.must_equal 4
+
+    filters_grpc = filter.to_grpc.interleave.filters
+    filters_grpc.length.must_equal 4
+    filters_grpc[0].pass_all_filter.must_equal true
+    filters_grpc[1].block_all_filter.must_equal true
+    filters_grpc[2].sink.must_equal true
+    filters_grpc[3].strip_value_transformer.must_equal true
   end
 
-  it "create condition filter" do
+  it "creates a condition filter" do
     predicate = Google::Cloud::Bigtable::RowFilter.key("user-*")
     condition = Google::Cloud::Bigtable::RowFilter.condition(predicate)
     condition.must_be_kind_of Google::Cloud::Bigtable::RowFilter::ConditionFilter

@@ -73,8 +73,10 @@ module Google
         #  interleave.chain(chain_1).value("xyz*").key("user-*")
         #
         class InterleaveFilter
+          # @private
+          # Creates an instance of an interleave filter.
           def initialize
-            @grpc = Google::Bigtable::V2::RowFilter::Interleave.new
+            @filters = []
           end
 
           ##
@@ -551,7 +553,7 @@ module Google
           end
 
           ##
-          # Gets the number of filters in chain filters.
+          # Returns the number of filters in the interleave.
           #
           # @return [Integer]
           #
@@ -561,16 +563,16 @@ module Google
           #  filter.length # 2
           #
           def length
-            @grpc.filters.length
+            @filters.length
           end
 
           ##
-          # Gets a list of filters.
+          # Returns a frozen copy of the filters array.
           #
-          # @return [Array<Google::Bigtable::V2::RowFilter>]
+          # @return [Array<SimpleFilter|ChainFilter|InterleaveFilter|ConditionFilter>]
           #
           def filters
-            @grpc.filters
+            @filters.dup.freeze
           end
 
           # @private
@@ -580,7 +582,11 @@ module Google
           # @return [Google::Bigtable::V2::RowFilter]
           #
           def to_grpc
-            Google::Bigtable::V2::RowFilter.new(interleave: @grpc)
+            Google::Bigtable::V2::RowFilter.new(
+              interleave: Google::Bigtable::V2::RowFilter::Interleave.new(
+                filters: @filters.map(&:to_grpc)
+              )
+            )
           end
 
           private
@@ -591,7 +597,7 @@ module Google
           # @param filter [SimpleFilter, ChainFilter, InterleaveFilter, ConditionFilter]
           #
           def add filter
-            @grpc.filters << filter.to_grpc
+            @filters << filter
             self
           end
         end
