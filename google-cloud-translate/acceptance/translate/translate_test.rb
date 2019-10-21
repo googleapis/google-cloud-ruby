@@ -23,9 +23,9 @@ describe Google::Cloud::Translate, :translate do
 
     detections = translate.detect "Hello", "Hola"
     detections.count.must_equal 2
-    detections.each { |d| d.must_be_kind_of Google::Cloud::Translate::Detection }
+    detections.each { |d| d.must_be_kind_of Google::Cloud::Translate::V2::Detection }
 
-    detections.first.results.each { |d| d.must_be_kind_of Google::Cloud::Translate::Detection::Result }
+    detections.first.results.each { |d| d.must_be_kind_of Google::Cloud::Translate::V2::Detection::Result }
     detections.first.language.must_equal detections.first.results.first.language
     detections.first.results.first.language.must_equal "en"
     detections.first.confidence.must_equal detections.first.results.first.confidence

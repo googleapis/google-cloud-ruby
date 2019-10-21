@@ -79,7 +79,7 @@ The environment variables that Translation checks for project ID are:
 2. `GOOGLE_CLOUD_PROJECT`
 
 The environment variables that Translation checks for credentials are configured
-on {Google::Cloud::Translate::Credentials}:
+on {Google::Cloud::Translate::V2::Credentials}:
 
 1. `TRANSLATE_CREDENTIALS` - Path to JSON file, or JSON contents
 2. `TRANSLATE_KEYFILE` - Path to JSON file, or JSON contents

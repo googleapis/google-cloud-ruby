@@ -14,7 +14,7 @@
 
 
 require "google-cloud-translate"
-require "google/cloud/translate/api"
+require "google/cloud/translate/v2/api"
 require "google/cloud/config"
 require "google/cloud/env"
 
@@ -40,41 +40,33 @@ module Google
     #
     module Translate
       ##
-      # Creates a new object for connecting to Cloud Translation API. Each call
-      # creates a new connection.
+      # Creates a new object for connecting to Cloud Translation API. Each call creates a new connection.
       #
-      # Like other Cloud Platform services, Google Cloud Translation API
-      # supports authentication using a project ID and OAuth 2.0 credentials. In
-      # addition, it supports authentication using a public API access key. (If
-      # both the API key and the project and OAuth 2.0 credentials are provided,
-      # the API key will be used.) Instructions and configuration options are
-      # covered in the {file:AUTHENTICATION.md Authentication Guide}.
+      # Like other Cloud Platform services, Google Cloud Translation API supports authentication using a project ID and
+      # OAuth 2.0 credentials. In addition, it supports authentication using a public API access key. (If both the API
+      # key and the project and OAuth 2.0 credentials are provided, the API key will be used.) Instructions and
+      # configuration options are covered in the {file:AUTHENTICATION.md Authentication Guide}.
       #
-      # @param [String] project_id Project identifier for the Cloud Translation
-      #   service you are connecting to. If not present, the default project for
-      #   the credentials is used.
-      # @param [String, Hash, Google::Auth::Credentials] credentials The path to
-      #   the keyfile as a String, the contents of the keyfile as a Hash, or a
-      #   Google::Auth::Credentials object. (See {Translate::Credentials})
+      # @param [String] project_id Project identifier for the Cloud Translation service you are connecting to. If not
+      #   present, the default project for the credentials is used.
+      # @param [String, Hash, Google::Auth::Credentials] credentials The path to the keyfile as a String, the contents
+      #   of the keyfile as a Hash, or a Google::Auth::Credentials object. (See {Translate::V2::Credentials})
       # @param [String] key a public API access key (not an OAuth 2.0 token)
-      # @param [String, Array<String>] scope The OAuth 2.0 scopes controlling
-      #   the set of resources and operations that the connection can access.
-      #   See [Using OAuth 2.0 to Access Google
+      # @param [String, Array<String>] scope The OAuth 2.0 scopes controlling the set of resources and operations that
+      #   the connection can access. See [Using OAuth 2.0 to Access Google
       #   APIs](https://developers.google.com/identity/protocols/OAuth2).
       #
       #   The default scope is:
       #
       #   * `https://www.googleapis.com/auth/cloud-platform`
-      # @param [Integer] retries Number of times to retry requests on server
-      #   error. The default value is `3`. Optional.
+      # @param [Integer] retries Number of times to retry requests on server error. The default value is `3`. Optional.
       # @param [Integer] timeout Default timeout to use in requests. Optional.
-      # @param [String] endpoint Override of the endpoint host name. Optional.
-      #   If the param is nil, uses the default endpoint.
+      # @param [String] endpoint Override of the endpoint host name. Optional. If the param is nil, uses the default
+      #   endpoint.
       # @param [String] project Alias for the `project_id` argument. Deprecated.
-      # @param [String] keyfile Alias for the `credentials` argument.
-      #   Deprecated.
+      # @param [String] keyfile Alias for the `credentials` argument. Deprecated.
       #
-      # @return [Google::Cloud::Translate::Api]
+      # @return [Google::Cloud::Translate::V2::Api]
       #
       # @example
       #   require "google/cloud/translate"
@@ -107,9 +99,8 @@ module Google
       #   translation = translate.translate "Hello world!", to: "la"
       #   translation.text #=> "Salve mundi!"
       #
-      def self.new project_id: nil, credentials: nil, key: nil, scope: nil,
-                   retries: nil, timeout: nil, endpoint: nil, project: nil,
-                   keyfile: nil
+      def self.new project_id: nil, credentials: nil, key: nil, scope: nil, retries: nil, timeout: nil, endpoint: nil,
+                   project: nil, keyfile: nil
         project_id ||= (project || default_project_id)
         key        ||= configure.key
         retries    ||= configure.retries
@@ -117,10 +108,9 @@ module Google
         endpoint   ||= configure.endpoint
 
         if key
-          return Google::Cloud::Translate::Api.new(
-            Google::Cloud::Translate::Service.new(
-              project_id.to_s, nil,
-              retries: retries, timeout: timeout, key: key, host: endpoint
+          return Google::Cloud::Translate::V2::Api.new(
+            Google::Cloud::Translate::V2::Service.new(
+              project_id.to_s, nil, retries: retries, timeout: timeout, key: key, host: endpoint
             )
           )
         end
@@ -129,16 +119,15 @@ module Google
         credentials ||= keyfile || default_credentials(scope: scope)
 
         unless credentials.is_a? Google::Auth::Credentials
-          credentials = Translate::Credentials.new credentials, scope: scope
+          credentials = Google::Cloud::Translate::V2::Credentials.new credentials, scope: scope
         end
 
         project_id = resolve_project_id project_id, credentials
         raise ArgumentError, "project_id is missing" if project_id.empty?
 
-        Translate::Api.new(
-          Translate::Service.new(
-            project_id, credentials,
-            retries: retries, timeout: timeout, host: endpoint
+        Google::Cloud::Translate::V2::Api.new(
+          Google::Cloud::Translate::V2::Service.new(
+            project_id, credentials, retries: retries, timeout: timeout, host: endpoint
           )
         )
       end
@@ -148,22 +137,18 @@ module Google
       #
       # The following Translate configuration parameters are supported:
       #
-      # * `project_id` - (String) Identifier for a Translate project. (The
-      #   parameter `project` is considered deprecated, but may also be used.)
-      # * `credentials` - (String, Hash, Google::Auth::Credentials) The path to
-      #   the keyfile as a String, the contents of the keyfile as a Hash, or a
-      #   Google::Auth::Credentials object. (See {Translate::Credentials}) (The
+      # * `project_id` - (String) Identifier for a Translate project. (The parameter `project` is considered deprecated,
+      #   but may also be used.)
+      # * `credentials` - (String, Hash, Google::Auth::Credentials) The path to the keyfile as a String, the contents of
+      #   the keyfile as a Hash, or a Google::Auth::Credentials object. (See {Translate::V2::Credentials}) (The
       #   parameter `keyfile` is considered deprecated, but may also be used.)
-      # * `scope` - (String, Array<String>) The OAuth 2.0 scopes controlling
-      #   the set of resources and operations that the connection can access.
-      # * `retries` - (Integer) Number of times to retry requests on server
-      #   error.
+      # * `scope` - (String, Array<String>) The OAuth 2.0 scopes controlling the set of resources and operations that
+      #   the connection can access.
+      # * `retries` - (Integer) Number of times to retry requests on server error.
       # * `timeout` - (Integer) Default timeout to use in requests.
-      # * `endpoint` - (String) Override of the endpoint host name, or `nil`
-      #   to use the default endpoint.
+      # * `endpoint` - (String) Override of the endpoint host name, or `nil` to use the default endpoint.
       #
-      # @return [Google::Cloud::Config] The configuration object the
-      #   Google::Cloud::Translate library uses.
+      # @return [Google::Cloud::Config] The configuration object the Google::Cloud::Translate library uses.
       #
       def self.configure
         yield Google::Cloud.configure.translate if block_given?
@@ -184,7 +169,7 @@ module Google
       def self.default_credentials scope: nil
         Google::Cloud.configure.translate.credentials ||
           Google::Cloud.configure.credentials ||
-          Translate::Credentials.default(scope: scope)
+          Google::Cloud::Translate::V2::Credentials.default(scope: scope)
       end
 
       ##

@@ -140,9 +140,9 @@ describe Google::Cloud do
       Google::Cloud::Translate.stub :default_project_id, nil do
         # Clear all environment variables
         ENV.stub :[], stubbed_env do
-          Google::Cloud::Translate::Service.stub :new, stubbed_service do
+          Google::Cloud::Translate::V2::Service.stub :new, stubbed_service do
             translate = Google::Cloud.translate
-            translate.must_be_kind_of Google::Cloud::Translate::Api
+            translate.must_be_kind_of Google::Cloud::Translate::V2::Api
             translate.service.must_be_kind_of OpenStruct
             translate.service.key.must_equal "found-api-key"
           end
@@ -163,9 +163,9 @@ describe Google::Cloud do
       Google::Cloud::Translate.stub :default_project_id, nil do
         # Clear all environment variables
         ENV.stub :[], nil do
-          Google::Cloud::Translate::Service.stub :new, stubbed_service do
+          Google::Cloud::Translate::V2::Service.stub :new, stubbed_service do
             translate = Google::Cloud.translate "my-api-key"
-            translate.must_be_kind_of Google::Cloud::Translate::Api
+            translate.must_be_kind_of Google::Cloud::Translate::V2::Api
             translate.service.must_be_kind_of OpenStruct
             translate.service.key.must_equal "my-api-key"
           end
@@ -178,9 +178,9 @@ describe Google::Cloud do
       ENV.stub :[], nil do
         # Get project_id from Google Compute Engine
         Google::Cloud.stub :env, OpenStruct.new(project_id: "project-id") do
-          Google::Cloud::Translate::Credentials.stub :default, default_credentials do
+          Google::Cloud::Translate::V2::Credentials.stub :default, default_credentials do
             translate = Google::Cloud.translate
-            translate.must_be_kind_of Google::Cloud::Translate::Api
+            translate.must_be_kind_of Google::Cloud::Translate::V2::Api
             translate.project.must_equal "project-id"
             translate.service.credentials.must_equal default_credentials
           end
@@ -207,10 +207,10 @@ describe Google::Cloud do
       ENV.stub :[], nil do
         File.stub :file?, true, ["path/to/keyfile.json"] do
           File.stub :read, found_credentials, ["path/to/keyfile.json"] do
-            Google::Cloud::Translate::Credentials.stub :new, stubbed_credentials do
-              Google::Cloud::Translate::Service.stub :new, stubbed_service do
+            Google::Cloud::Translate::V2::Credentials.stub :new, stubbed_credentials do
+              Google::Cloud::Translate::V2::Service.stub :new, stubbed_service do
                 translate = Google::Cloud.translate project: "project-id", keyfile: "path/to/keyfile.json"
-                translate.must_be_kind_of Google::Cloud::Translate::Api
+                translate.must_be_kind_of Google::Cloud::Translate::V2::Api
                 translate.project.must_equal "project-id"
                 translate.service.must_be_kind_of OpenStruct
               end
@@ -248,9 +248,9 @@ describe Google::Cloud do
       Google::Cloud::Translate.stub :default_project_id, nil do
         # Clear all environment variables
         ENV.stub :[], stubbed_env do
-          Google::Cloud::Translate::Service.stub :new, stubbed_service do
+          Google::Cloud::Translate::V2::Service.stub :new, stubbed_service do
             translate = Google::Cloud::Translate.new
-            translate.must_be_kind_of Google::Cloud::Translate::Api
+            translate.must_be_kind_of Google::Cloud::Translate::V2::Api
             translate.service.must_be_kind_of OpenStruct
             translate.service.key.must_equal "found-api-key"
           end
@@ -272,9 +272,9 @@ describe Google::Cloud do
       Google::Cloud::Translate.stub :default_project_id, nil do
         # Clear all environment variables
         ENV.stub :[], nil do
-          Google::Cloud::Translate::Service.stub :new, stubbed_service do
+          Google::Cloud::Translate::V2::Service.stub :new, stubbed_service do
             translate = Google::Cloud::Translate.new key: "my-api-key"
-            translate.must_be_kind_of Google::Cloud::Translate::Api
+            translate.must_be_kind_of Google::Cloud::Translate::V2::Api
             translate.service.must_be_kind_of OpenStruct
             translate.service.key.must_equal "my-api-key"
           end
@@ -287,9 +287,9 @@ describe Google::Cloud do
       ENV.stub :[], nil do
         # Get project_id from Google Compute Engine
         Google::Cloud.stub :env, OpenStruct.new(project_id: "project-id") do
-          Google::Cloud::Translate::Credentials.stub :default, default_credentials do
+          Google::Cloud::Translate::V2::Credentials.stub :default, default_credentials do
             translate = Google::Cloud::Translate.new
-            translate.must_be_kind_of Google::Cloud::Translate::Api
+            translate.must_be_kind_of Google::Cloud::Translate::V2::Api
             translate.project_id.must_equal "project-id"
             translate.service.credentials.must_equal default_credentials
           end
@@ -318,10 +318,10 @@ describe Google::Cloud do
       ENV.stub :[], nil do
         File.stub :file?, true, ["path/to/keyfile.json"] do
           File.stub :read, found_credentials, ["path/to/keyfile.json"] do
-            Google::Cloud::Translate::Credentials.stub :new, stubbed_credentials do
-              Google::Cloud::Translate::Service.stub :new, stubbed_service do
+            Google::Cloud::Translate::V2::Credentials.stub :new, stubbed_credentials do
+              Google::Cloud::Translate::V2::Service.stub :new, stubbed_service do
                 translate = Google::Cloud::Translate.new project_id: "project-id", credentials: "path/to/keyfile.json"
-                translate.must_be_kind_of Google::Cloud::Translate::Api
+                translate.must_be_kind_of Google::Cloud::Translate::V2::Api
                 translate.project_id.must_equal "project-id"
                 translate.service.must_be_kind_of OpenStruct
               end
@@ -352,10 +352,10 @@ describe Google::Cloud do
       ENV.stub :[], nil do
         File.stub :file?, true, ["path/to/keyfile.json"] do
           File.stub :read, found_credentials, ["path/to/keyfile.json"] do
-            Google::Cloud::Translate::Credentials.stub :new, stubbed_credentials do
-              Google::Cloud::Translate::Service.stub :new, stubbed_service do
+            Google::Cloud::Translate::V2::Credentials.stub :new, stubbed_credentials do
+              Google::Cloud::Translate::V2::Service.stub :new, stubbed_service do
                 translate = Google::Cloud::Translate.new project: "project-id", keyfile: "path/to/keyfile.json"
-                translate.must_be_kind_of Google::Cloud::Translate::Api
+                translate.must_be_kind_of Google::Cloud::Translate::V2::Api
                 translate.project_id.must_equal "project-id"
                 translate.service.must_be_kind_of OpenStruct
               end
@@ -389,10 +389,10 @@ describe Google::Cloud do
         Google::Cloud.stub :env, empty_env do
           File.stub :file?, true, ["path/to/keyfile.json"] do
             File.stub :read, found_credentials, ["path/to/keyfile.json"] do
-              Google::Cloud::Translate::Credentials.stub :new, stubbed_credentials do
-                Google::Cloud::Translate::Service.stub :new, stubbed_service do
+              Google::Cloud::Translate::V2::Credentials.stub :new, stubbed_credentials do
+                Google::Cloud::Translate::V2::Service.stub :new, stubbed_service do
                   translate = Google::Cloud::Translate.new credentials: "path/to/keyfile.json"
-                  translate.must_be_kind_of Google::Cloud::Translate::Api
+                  translate.must_be_kind_of Google::Cloud::Translate::V2::Api
                   translate.project_id.must_equal "project-id"
                   translate.service.must_be_kind_of OpenStruct
                 end
@@ -424,10 +424,10 @@ describe Google::Cloud do
       ENV.stub :[], nil do
         File.stub :file?, true, ["path/to/keyfile.json"] do
           File.stub :read, found_credentials, ["path/to/keyfile.json"] do
-            Google::Cloud::Translate::Credentials.stub :new, stubbed_credentials do
-              Google::Cloud::Translate::Service.stub :new, stubbed_service do
+            Google::Cloud::Translate::V2::Credentials.stub :new, stubbed_credentials do
+              Google::Cloud::Translate::V2::Service.stub :new, stubbed_service do
                 translate = Google::Cloud::Translate.new project: "project-id", keyfile: "path/to/keyfile.json", endpoint: "custom-translate-endpoint.example.com"
-                translate.must_be_kind_of Google::Cloud::Translate::Api
+                translate.must_be_kind_of Google::Cloud::Translate::V2::Api
                 translate.project_id.must_equal "project-id"
                 translate.service.must_be_kind_of OpenStruct
               end
@@ -472,10 +472,10 @@ describe Google::Cloud do
 
         File.stub :file?, true, ["path/to/keyfile.json"] do
           File.stub :read, found_credentials, ["path/to/keyfile.json"] do
-            Google::Cloud::Translate::Credentials.stub :new, stubbed_credentials do
-              Google::Cloud::Translate::Service.stub :new, stubbed_service do
+            Google::Cloud::Translate::V2::Credentials.stub :new, stubbed_credentials do
+              Google::Cloud::Translate::V2::Service.stub :new, stubbed_service do
                 translate = Google::Cloud::Translate.new
-                translate.must_be_kind_of Google::Cloud::Translate::Api
+                translate.must_be_kind_of Google::Cloud::Translate::V2::Api
                 translate.project.must_equal "project-id"
                 translate.service.must_be_kind_of OpenStruct
               end
@@ -512,10 +512,10 @@ describe Google::Cloud do
 
         File.stub :file?, true, ["path/to/keyfile.json"] do
           File.stub :read, found_credentials, ["path/to/keyfile.json"] do
-            Google::Cloud::Translate::Credentials.stub :new, stubbed_credentials do
-              Google::Cloud::Translate::Service.stub :new, stubbed_service do
+            Google::Cloud::Translate::V2::Credentials.stub :new, stubbed_credentials do
+              Google::Cloud::Translate::V2::Service.stub :new, stubbed_service do
                 translate = Google::Cloud::Translate.new
-                translate.must_be_kind_of Google::Cloud::Translate::Api
+                translate.must_be_kind_of Google::Cloud::Translate::V2::Api
                 translate.project.must_equal "project-id"
                 translate.service.must_be_kind_of OpenStruct
               end
@@ -554,10 +554,10 @@ describe Google::Cloud do
 
         File.stub :file?, true, ["path/to/keyfile.json"] do
           File.stub :read, found_credentials, ["path/to/keyfile.json"] do
-            Google::Cloud::Translate::Credentials.stub :new, stubbed_credentials do
-              Google::Cloud::Translate::Service.stub :new, stubbed_service do
+            Google::Cloud::Translate::V2::Credentials.stub :new, stubbed_credentials do
+              Google::Cloud::Translate::V2::Service.stub :new, stubbed_service do
                 translate = Google::Cloud::Translate.new
-                translate.must_be_kind_of Google::Cloud::Translate::Api
+                translate.must_be_kind_of Google::Cloud::Translate::V2::Api
                 translate.project.must_equal "project-id"
                 translate.service.must_be_kind_of OpenStruct
               end
@@ -596,10 +596,10 @@ describe Google::Cloud do
 
         File.stub :file?, true, ["path/to/keyfile.json"] do
           File.stub :read, found_credentials, ["path/to/keyfile.json"] do
-            Google::Cloud::Translate::Credentials.stub :new, stubbed_credentials do
-              Google::Cloud::Translate::Service.stub :new, stubbed_service do
+            Google::Cloud::Translate::V2::Credentials.stub :new, stubbed_credentials do
+              Google::Cloud::Translate::V2::Service.stub :new, stubbed_service do
                 translate = Google::Cloud::Translate.new
-                translate.must_be_kind_of Google::Cloud::Translate::Api
+                translate.must_be_kind_of Google::Cloud::Translate::V2::Api
                 translate.project.must_equal "project-id"
                 translate.service.must_be_kind_of OpenStruct
               end
@@ -634,10 +634,10 @@ describe Google::Cloud do
 
         File.stub :file?, true, ["path/to/keyfile.json"] do
           File.stub :read, found_credentials, ["path/to/keyfile.json"] do
-            Google::Cloud::Translate::Credentials.stub :new, stubbed_credentials do
-              Google::Cloud::Translate::Service.stub :new, stubbed_service do
+            Google::Cloud::Translate::V2::Credentials.stub :new, stubbed_credentials do
+              Google::Cloud::Translate::V2::Service.stub :new, stubbed_service do
                 translate = Google::Cloud::Translate.new
-                translate.must_be_kind_of Google::Cloud::Translate::Api
+                translate.must_be_kind_of Google::Cloud::Translate::V2::Api
                 translate.service.must_be_kind_of OpenStruct
               end
             end
@@ -674,10 +674,10 @@ describe Google::Cloud do
 
         File.stub :file?, true, ["path/to/keyfile.json"] do
           File.stub :read, found_credentials, ["path/to/keyfile.json"] do
-            Google::Cloud::Translate::Credentials.stub :new, stubbed_credentials do
-              Google::Cloud::Translate::Service.stub :new, stubbed_service do
+            Google::Cloud::Translate::V2::Credentials.stub :new, stubbed_credentials do
+              Google::Cloud::Translate::V2::Service.stub :new, stubbed_service do
                 translate = Google::Cloud::Translate.new
-                translate.must_be_kind_of Google::Cloud::Translate::Api
+                translate.must_be_kind_of Google::Cloud::Translate::V2::Api
                 translate.project.must_equal "project-id"
                 translate.service.must_be_kind_of OpenStruct
               end

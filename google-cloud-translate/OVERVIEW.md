@@ -26,7 +26,7 @@ will be used.) Instructions and configuration options are covered in the
 
 Translating text from one language to another is easy (and extremely
 fast.) The only required arguments to
-{Google::Cloud::Translate::Api#translate} are a string and the [ISO
+{Google::Cloud::Translate::V2::Api#translate} are a string and the [ISO
 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) code of the
 language to which you wish to translate.
 
@@ -67,7 +67,7 @@ translation.from #=> "fr"
 translation.text #=> "cat"
 ```
 
-You can pass multiple texts to {Google::Cloud::Translate::Api#translate}.
+You can pass multiple texts to {Google::Cloud::Translate::V2::Api#translate}.
 
 ```ruby
 require "google/cloud/translate"
@@ -97,7 +97,7 @@ translation.text #=> "<strong>Salve</strong> mundi!"
 
 ## Detecting languages
 
-You can use {Google::Cloud::Translate::Api#detect} to see which language
+You can use {Google::Cloud::Translate::V2::Api#detect} to see which language
 the Translation API ranks as the most likely source language for a text.
 The `confidence` score is a float value between `0` and `1`.
 
@@ -113,7 +113,7 @@ detection.language #=> "en"
 detection.confidence #=> 0.59922177
 ```
 
-You can pass multiple texts to {Google::Cloud::Translate::Api#detect}.
+You can pass multiple texts to {Google::Cloud::Translate::V2::Api#detect}.
 
 ```ruby
 require "google/cloud/translate"
@@ -134,7 +134,7 @@ detections[1].confidence #=> 0.59922177
 ## Listing supported languages
 
 Translation API adds new languages frequently. You can use
-{Google::Cloud::Translate::Api#languages} to query the list of supported
+{Google::Cloud::Translate::V2::Api#languages} to query the list of supported
 languages.
 
 ```ruby

@@ -55,9 +55,9 @@ task :acceptance, :project, :keyfile, :key do |t, args|
   puts "running acceptance tests with service account"
 
   # clear any env var already set
-  require "google/cloud/translate/credentials"
-  (Google::Cloud::Translate::Credentials::PATH_ENV_VARS +
-   Google::Cloud::Translate::Credentials::JSON_ENV_VARS).each do |path|
+  require "google/cloud/translate/v2/credentials"
+  (Google::Cloud::Translate::V2::Credentials::PATH_ENV_VARS +
+   Google::Cloud::Translate::V2::Credentials::JSON_ENV_VARS).each do |path|
     ENV[path] = nil
   end
   # always overwrite when running tests
@@ -76,9 +76,9 @@ namespace :acceptance do
       fail "unable to run acceptance tests with api key credentials"
     end
     # clear any env var already set
-    require "google/cloud/translate/credentials"
-    (Google::Cloud::Translate::Credentials::PATH_ENV_VARS +
-     Google::Cloud::Translate::Credentials::JSON_ENV_VARS).each do |path|
+    require "google/cloud/translate/v2/credentials"
+    (Google::Cloud::Translate::V2::Credentials::PATH_ENV_VARS +
+     Google::Cloud::Translate::V2::Credentials::JSON_ENV_VARS).each do |path|
       ENV[path] = nil
     end
     # always overwrite when running tests

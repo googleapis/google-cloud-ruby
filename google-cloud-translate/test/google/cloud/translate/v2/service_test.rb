@@ -14,10 +14,10 @@
 
 require "helper"
 
-describe Google::Cloud::Translate::Service, :service do
+describe Google::Cloud::Translate::V2::Service, :service do
   let(:project) { "test" }
   let(:credentials) { OpenStruct.new(client: OpenStruct.new(updater_proc: Proc.new {})) }
-  let(:service) { Google::Cloud::Translate::Service.new(project, credentials, retries: 1) }
+  let(:service) { Google::Cloud::Translate::V2::Service.new(project, credentials, retries: 1) }
   let(:mock_http) { MockHttp.new }
 
   it "does not retry on other errors" do

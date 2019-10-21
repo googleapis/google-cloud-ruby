@@ -14,7 +14,7 @@
 
 require "helper"
 
-describe Google::Cloud::Translate::Api, :detect, :mock_translate do
+describe Google::Cloud::Translate::V2::Api, :detect, :mock_translate do
   it "doesn't make an API call if text is not given" do
     detection = translate.detect
     detection.must_be :nil?

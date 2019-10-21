@@ -26,30 +26,25 @@ require "googleauth"
 module Google
   module Cloud
     ##
-    # Creates a new object for connecting to the Cloud Translation API. Each
-    # call creates a new connection.
+    # Creates a new object for connecting to the Cloud Translation API. Each call creates a new connection.
     #
-    # Like other Cloud Platform services, Google Cloud Translation API supports
-    # authentication using a project ID and OAuth 2.0 credentials. In addition,
-    # it supports authentication using a public API access key. (If both the API
-    # key and the project and OAuth 2.0 credentials are provided, the API key
-    # will be used.) Instructions and configuration options are covered in the
-    # {file:AUTHENTICATION.md Authentication Guide}.
+    # Like other Cloud Platform services, Google Cloud Translation API supports authentication using a project ID and
+    # OAuth 2.0 credentials. In addition, it supports authentication using a public API access key. (If both the API key
+    # and the project and OAuth 2.0 credentials are provided, the API key will be used.) Instructions and configuration
+    # options are covered in the {file:AUTHENTICATION.md Authentication Guide}.
     #
     # @param [String] key a public API access key (not an OAuth 2.0 token)
-    # @param [String, Array<String>] scope The OAuth 2.0 scopes controlling the
-    #   set of resources and operations that the connection can access. See
-    #   [Using OAuth 2.0 to Access Google
-    #   APIs](https://developers.google.com/identity/protocols/OAuth2).
+    # @param [String, Array<String>] scope The OAuth 2.0 scopes controlling the set of resources and operations that the
+    # connection can access. See [Using OAuth 2.0 to Access Google
+    # APIs](https://developers.google.com/identity/protocols/OAuth2).
     #
     #   The default scope is:
     #
     #   * `https://www.googleapis.com/auth/cloud-platform`
-    # @param [Integer] retries Number of times to retry requests on server
-    #   error. The default value is `3`. Optional.
+    # @param [Integer] retries Number of times to retry requests on server error. The default value is `3`. Optional.
     # @param [Integer] timeout Default timeout to use in requests. Optional.
     #
-    # @return [Google::Cloud::Translate::Api]
+    # @return [Google::Cloud::Translate::V2::Api]
     #
     # @example
     #   require "google/cloud"
@@ -79,39 +74,31 @@ module Google
     end
 
     ##
-    # Creates a new object for connecting to the Cloud Translation API. Each
-    # call creates a new connection.
+    # Creates a new object for connecting to the Cloud Translation API. Each call creates a new connection.
     #
-    # Like other Cloud Platform services, Google Cloud Translation API supports
-    # authentication using a project ID and OAuth 2.0 credentials. In addition,
-    # it supports authentication using a public API access key. (If both the API
-    # key and the project and OAuth 2.0 credentials are provided, the API key
-    # will be used.) Instructions and configuration options are covered in the
-    # {file:AUTHENTICATION.md Authentication Guide}.
+    # Like other Cloud Platform services, Google Cloud Translation API supports authentication using a project ID and
+    # OAuth 2.0 credentials. In addition, it supports authentication using a public API access key. (If both the API key
+    # and the project and OAuth 2.0 credentials are provided, the API key will be used.) Instructions and configuration
+    # options are covered in the {file:AUTHENTICATION.md Authentication Guide}.
     #
     # @param [String] key a public API access key (not an OAuth 2.0 token)
-    # @param [String] project_id Project identifier for the Cloud Translation
-    #   service you are connecting to. If not present, the default project for
-    #   the credentials is used.
-    # @param [String, Hash, Google::Auth::Credentials] credentials The path to
-    #   the keyfile as a String, the contents of the keyfile as a Hash, or a
-    #   Google::Auth::Credentials object. (See {Translate::Credentials})
-    # @param [String, Array<String>] scope The OAuth 2.0 scopes controlling the
-    #   set of resources and operations that the connection can access. See
-    #   [Using OAuth 2.0 to Access Google
+    # @param [String] project_id Project identifier for the Cloud Translation service you are connecting to. If not
+    #   present, the default project for the credentials is used.
+    # @param [String, Hash, Google::Auth::Credentials] credentials The path to the keyfile as a String, the contents of
+    #   the keyfile as a Hash, or a Google::Auth::Credentials object. (See {Google::Cloud::Translate::V2::Credentials})
+    # @param [String, Array<String>] scope The OAuth 2.0 scopes controlling the set of resources and operations that the
+    #   connection can access. See [Using OAuth 2.0 to Access Google
     #   APIs](https://developers.google.com/identity/protocols/OAuth2).
     #
     #   The default scope is:
     #
     #   * `https://www.googleapis.com/auth/cloud-platform`
-    # @param [Integer] retries Number of times to retry requests on server
-    #   error. The default value is `3`. Optional.
+    # @param [Integer] retries Number of times to retry requests on server error. The default value is `3`. Optional.
     # @param [Integer] timeout Default timeout to use in requests. Optional.
     # @param [String] project Alias for the `project_id` argument. Deprecated.
-    # @param [String] keyfile Alias for the `credentials` argument.
-    #   Deprecated.
+    # @param [String] keyfile Alias for the `credentials` argument. Deprecated.
     #
-    # @return [Google::Cloud::Translate::Api]
+    # @return [Google::Cloud::Translate::V2::Api]
     #
     # @example
     #   require "google/cloud"
@@ -134,11 +121,8 @@ module Google
     def self.translate key = nil, project_id: nil, credentials: nil, scope: nil,
                        retries: nil, timeout: nil, project: nil, keyfile: nil
       require "google/cloud/translate"
-      Google::Cloud::Translate.new key: key, project_id: project_id,
-                                   credentials: credentials,
-                                   scope: scope, retries: retries,
-                                   timeout: timeout,
-                                   project: project, keyfile: keyfile
+      Google::Cloud::Translate.new key: key, project_id: project_id, credentials: credentials, scope: scope,
+                                   retries: retries, timeout: timeout, project: project, keyfile: keyfile
     end
   end
 end
@@ -150,8 +134,7 @@ Google::Cloud.configure.add_config! :translate do |config|
   end
   default_creds = Google::Cloud::Config.deferred do
     Google::Cloud::Config.credentials_from_env(
-      "TRANSLATE_CREDENTIALS", "TRANSLATE_CREDENTIALS_JSON",
-      "TRANSLATE_KEYFILE", "TRANSLATE_KEYFILE_JSON"
+      "TRANSLATE_CREDENTIALS", "TRANSLATE_CREDENTIALS_JSON", "TRANSLATE_KEYFILE", "TRANSLATE_KEYFILE_JSON"
     )
   end
   default_key = Google::Cloud::Config.deferred do
@@ -160,9 +143,7 @@ Google::Cloud.configure.add_config! :translate do |config|
 
   config.add_field! :project_id, default_project, match: String, allow_nil: true
   config.add_alias! :project, :project_id
-  config.add_field! :credentials, default_creds,
-                    match:     [String, Hash, Google::Auth::Credentials],
-                    allow_nil: true
+  config.add_field! :credentials, default_creds, match: [String, Hash, Google::Auth::Credentials], allow_nil: true
   config.add_alias! :keyfile, :credentials
   config.add_field! :key, default_key, match: String, allow_nil: true
   config.add_field! :scope, nil, match: [String, Array]
