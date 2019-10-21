@@ -24,7 +24,7 @@ describe "Instance Tables", :bigtable do
     table_id = "test-table-#{random_str}"
 
     table = bigtable.create_table(instance_id, table_id) do |cfs|
-      cfs.add("cf", Google::Cloud::Bigtable::GcRule.max_versions(3))
+      cfs.add("cf", gc_rule: Google::Cloud::Bigtable::GcRule.max_versions(3))
     end
 
     table.must_be_kind_of Google::Cloud::Bigtable::Table
@@ -51,7 +51,7 @@ describe "Instance Tables", :bigtable do
         table_id,
         initial_splits: initial_splits,
         granularity: :MILLIS) do |cfs|
-      cfs.add("cf", Google::Cloud::Bigtable::GcRule.max_versions(1))
+      cfs.add("cf", gc_rule: Google::Cloud::Bigtable::GcRule.max_versions(1))
     end
 
     table.must_be_kind_of Google::Cloud::Bigtable::Table
@@ -76,41 +76,31 @@ describe "Instance Tables", :bigtable do
     table.delete
   end
 
-  it "modify column families" do
+  it "creates a table with column families" do
     table_id = "test-table-#{random_str}"
 
     table = bigtable.create_table(instance_id, table_id) do |cfs|
       cfs.add("cf1") # default service value for GcRule
-      cfs.add("cf2", Google::Cloud::Bigtable::GcRule.max_versions(1))
+      cfs.add("cf2", gc_rule: Google::Cloud::Bigtable::GcRule.max_versions(5))
+      cfs.add("cf3", gc_rule: Google::Cloud::Bigtable::GcRule.max_age(600))
     end
 
-    modifications = []
-    modifications << Google::Cloud::Bigtable::ColumnFamily.create_modification(
-      "cf3", Google::Cloud::Bigtable::GcRule.max_age(600)
-    )
-
-    modifications << Google::Cloud::Bigtable::ColumnFamily.update_modification(
-      "cf2", Google::Cloud::Bigtable::GcRule.max_versions(5)
-    )
-
-    modifications << Google::Cloud::Bigtable::ColumnFamily.drop_modification("cf1")
-
-    updated_table = table.modify_column_families(modifications)
-    updated_table.must_be_kind_of Google::Cloud::Bigtable::Table
-
-    column_families = updated_table.column_families
-    column_families.class.must_equal Google::Cloud::Bigtable::Table::ColumnFamilyMap
-    column_families.must_be_kind_of Hash
+    column_families = table.column_families
+    column_families.must_be_kind_of Google::Cloud::Bigtable::ColumnFamilyMap
     column_families.must_be :frozen?
+    column_families.count.must_equal 3
+
+    cf1 = column_families["cf1"]
+    cf1.must_be_kind_of Google::Cloud::Bigtable::ColumnFamily
+    cf1.gc_rule.must_be :nil?
+
+    cf2 = column_families["cf2"]
+    cf2.must_be_kind_of Google::Cloud::Bigtable::ColumnFamily
+    cf2.gc_rule.max_versions.must_equal 5
 
     cf3 = column_families["cf3"]
     cf3.must_be_kind_of Google::Cloud::Bigtable::ColumnFamily
     cf3.gc_rule.max_age.must_equal 600
-
-    cf2 = column_families["cf2"]
-    cf2.gc_rule.max_versions.must_equal 5
-
-    column_families["cf1"]
 
     table.delete
   end

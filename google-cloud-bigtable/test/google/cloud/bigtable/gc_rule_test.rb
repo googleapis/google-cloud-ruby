@@ -16,10 +16,10 @@
 require "helper"
 
 describe Google::Cloud::Bigtable::GcRule, :mock_bigtable do
-  it "create max age gc rule" do
+  it "creates a max age gc rule" do
     gc_rule = Google::Cloud::Bigtable::GcRule.max_age(100)
 
-    gc_rule.to_grpc.must_be_kind_of Google::Bigtable::Admin::V2::GcRule
+    gc_rule.must_be_kind_of Google::Cloud::Bigtable::GcRule
     gc_rule.max_age.must_equal 100
 
     expected_grpc = Google::Bigtable::Admin::V2::GcRule.new(
@@ -28,10 +28,22 @@ describe Google::Cloud::Bigtable::GcRule, :mock_bigtable do
     gc_rule.to_grpc.must_equal expected_grpc
   end
 
-  it "create max versions gc rule" do
+  it "updates a max age gc rule" do
+    gc_rule = Google::Cloud::Bigtable::GcRule.max_age(100)
+
+    gc_rule.max_age = 200
+
+    gc_rule.max_age.must_equal 200
+    expected_grpc = Google::Bigtable::Admin::V2::GcRule.new(
+      max_age: Google::Protobuf::Duration.new(seconds: 200)
+    )
+    gc_rule.to_grpc.must_equal expected_grpc
+  end
+
+  it "creates a max versions gc rule" do
     gc_rule = Google::Cloud::Bigtable::GcRule.max_versions(3)
 
-    gc_rule.to_grpc.must_be_kind_of Google::Bigtable::Admin::V2::GcRule
+    gc_rule.must_be_kind_of Google::Cloud::Bigtable::GcRule
     gc_rule.max_versions.must_equal 3
 
     expected_grpc = Google::Bigtable::Admin::V2::GcRule.new(
@@ -40,39 +52,109 @@ describe Google::Cloud::Bigtable::GcRule, :mock_bigtable do
     gc_rule.to_grpc.must_equal expected_grpc
   end
 
-  it "create union gc rule" do
+  it "updates a max versions gc rule" do
+    gc_rule = Google::Cloud::Bigtable::GcRule.max_versions(3)
+
+    gc_rule.max_versions = 4
+    gc_rule.max_versions.must_equal 4
+
+    expected_grpc = Google::Bigtable::Admin::V2::GcRule.new(
+      max_num_versions: 4
+    )
+    gc_rule.to_grpc.must_equal expected_grpc
+  end
+
+  it "creates a union gc rule" do
     gc_rule_1 = Google::Cloud::Bigtable::GcRule.max_versions(3)
     gc_rule_2 = Google::Cloud::Bigtable::GcRule.max_age(100)
 
     gc_rule = Google::Cloud::Bigtable::GcRule.union(gc_rule_1, gc_rule_2)
 
-    gc_rule.to_grpc.must_be_kind_of Google::Bigtable::Admin::V2::GcRule
+    gc_rule.must_be_kind_of Google::Cloud::Bigtable::GcRule
 
-    union = Google::Bigtable::Admin::V2::GcRule::Union.new(rules: [
+    rules = gc_rule.union
+    rules.must_be_kind_of Array
+    rules.count.must_equal 2
+    rules[0].must_be_kind_of Google::Cloud::Bigtable::GcRule
+    rules[0].max_versions.must_equal 3
+    rules[1].must_be_kind_of Google::Cloud::Bigtable::GcRule
+    rules[1].max_age.must_equal 100
+
+    union_grpc = Google::Bigtable::Admin::V2::GcRule::Union.new(rules: [
       Google::Bigtable::Admin::V2::GcRule.new(max_num_versions: 3),
       Google::Bigtable::Admin::V2::GcRule.new(max_age: Google::Protobuf::Duration.new(seconds: 100))
     ])
-    gc_rule.union.must_equal union
-
-    expected_grpc = Google::Bigtable::Admin::V2::GcRule.new(union: union)
+    expected_grpc = Google::Bigtable::Admin::V2::GcRule.new(union: union_grpc)
     gc_rule.to_grpc.must_equal expected_grpc
   end
 
-  it "create intersection gc rule" do
+  it "updates a union gc rule" do
+    gc_rule_1 = Google::Cloud::Bigtable::GcRule.max_versions(3)
+    gc_rule_2 = Google::Cloud::Bigtable::GcRule.max_age(100)
+
+    gc_rule = Google::Cloud::Bigtable::GcRule.union(gc_rule_1, gc_rule_2)
+
+
+    gc_rule_3 = Google::Cloud::Bigtable::GcRule.max_versions(4)
+    gc_rule_4 = Google::Cloud::Bigtable::GcRule.max_age(200)
+
+    gc_rule.union = [gc_rule_3, gc_rule_4]
+    rules = gc_rule.union
+    rules.count.must_equal 2
+    rules[0].max_versions.must_equal 4
+    rules[1].max_age.must_equal 200
+
+    union_grpc = Google::Bigtable::Admin::V2::GcRule::Union.new(rules: [
+      Google::Bigtable::Admin::V2::GcRule.new(max_num_versions: 4),
+      Google::Bigtable::Admin::V2::GcRule.new(max_age: Google::Protobuf::Duration.new(seconds: 200))
+    ])
+    expected_grpc = Google::Bigtable::Admin::V2::GcRule.new(union: union_grpc)
+    gc_rule.to_grpc.must_equal expected_grpc
+  end
+
+  it "creates a intersection gc rule" do
     gc_rule_1 = Google::Cloud::Bigtable::GcRule.max_versions(3)
     gc_rule_2 = Google::Cloud::Bigtable::GcRule.max_age(100)
 
     gc_rule = Google::Cloud::Bigtable::GcRule.intersection(gc_rule_1, gc_rule_2)
 
-    gc_rule.to_grpc.must_be_kind_of Google::Bigtable::Admin::V2::GcRule
+    rules = gc_rule.intersection
+    rules.must_be_kind_of Array
+    rules.count.must_equal 2
+    rules[0].must_be_kind_of Google::Cloud::Bigtable::GcRule
+    rules[0].max_versions.must_equal 3
+    rules[1].must_be_kind_of Google::Cloud::Bigtable::GcRule
+    rules[1].max_age.must_equal 100
 
-    intersection = Google::Bigtable::Admin::V2::GcRule::Intersection.new(rules: [
+    intersection_grpc = Google::Bigtable::Admin::V2::GcRule::Intersection.new(rules: [
       Google::Bigtable::Admin::V2::GcRule.new(max_num_versions: 3),
       Google::Bigtable::Admin::V2::GcRule.new(max_age: Google::Protobuf::Duration.new(seconds: 100))
     ])
-    gc_rule.intersection.must_equal intersection
+    expected_grpc = Google::Bigtable::Admin::V2::GcRule.new(intersection: intersection_grpc)
+    gc_rule.to_grpc.must_equal expected_grpc
+  end
 
-    expected_grpc = Google::Bigtable::Admin::V2::GcRule.new(intersection: intersection)
+  it "updates a intersection gc rule" do
+    gc_rule_1 = Google::Cloud::Bigtable::GcRule.max_versions(3)
+    gc_rule_2 = Google::Cloud::Bigtable::GcRule.max_age(100)
+
+    gc_rule = Google::Cloud::Bigtable::GcRule.intersection(gc_rule_1, gc_rule_2)
+
+
+    gc_rule_3 = Google::Cloud::Bigtable::GcRule.max_versions(4)
+    gc_rule_4 = Google::Cloud::Bigtable::GcRule.max_age(200)
+
+    gc_rule.intersection = [gc_rule_3, gc_rule_4]
+    rules = gc_rule.intersection
+    rules.count.must_equal 2
+    rules[0].max_versions.must_equal 4
+    rules[1].max_age.must_equal 200
+
+    intersection_grpc = Google::Bigtable::Admin::V2::GcRule::Intersection.new(rules: [
+      Google::Bigtable::Admin::V2::GcRule.new(max_num_versions: 4),
+      Google::Bigtable::Admin::V2::GcRule.new(max_age: Google::Protobuf::Duration.new(seconds: 200))
+    ])
+    expected_grpc = Google::Bigtable::Admin::V2::GcRule.new(intersection: intersection_grpc)
     gc_rule.to_grpc.must_equal expected_grpc
   end
 end

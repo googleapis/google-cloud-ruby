@@ -416,9 +416,9 @@ module Google
         # @param table_id [String]
         #   The ID by which the new table should be referred to within the
         #   instance, e.g., `foobar`.
-        # @param column_families [Hash{String => Google::Cloud::Bigtable::ColumnFamily}]
-        #   (See {Google::Cloud::Bigtable::Table::ColumnFamilyMap})
-        #   If unspecified, you may use a code block to add column families.
+        # @param column_families [Google::Cloud::Bigtable::ColumnFamilyMap]
+        #   An object containing the column families for the table, mapped by
+        #   column family name.
         # @param granularity [Symbol]
         #   The granularity at which timestamps are stored in this table.
         #   Timestamps not matching the granularity will be rejected.
@@ -442,15 +442,14 @@ module Google
         #     * Tablet 5 : `[other, )                => {"other", "zz"}`
         #   A hash in the form of `Google::Bigtable::Admin::V2::CreateTableRequest::Split`
         #   can also be provided.
-        # @yield [column_families] A block for adding column_families.
-        # @yieldparam [Hash{String => Google::Cloud::Bigtable::ColumnFamily}]
-        #    Map of family name and column family object.
-        #   (See {Google::Cloud::Bigtable::Instance::ColumnFamilyMap})
-        #   (Read the GC Rules for column families at {Google::Cloud::Bigtable::GcRule})
+        # @yield [column_families] A block for adding column families.
+        # @yieldparam [Google::Cloud::Bigtable::ColumnFamilyMap] column_families
+        #   A mutable object containing the column families for the table,
+        #   mapped by column family name.
         #
         # @return [Google::Cloud::Bigtable::Table]
         #
-        # @example Create a table without a column family
+        # @example Create a table without column families.
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
@@ -458,24 +457,24 @@ module Google
         #   table = bigtable.create_table("my-instance", "my-table")
         #   puts table.name
         #
-        # @example Create table with column families and initial splits.
+        # @example Create a table with initial splits and column families.
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
         #
         #   initial_splits = ["user-00001", "user-100000", "others"]
-        #   table = bigtable.create_table("my-instance", "my-table", initial_splits: initial_splits) do |column_families|
-        #     column_families.add('cf1', Google::Cloud::Bigtable::GcRule.max_versions(5))
-        #     column_families.add('cf2', Google::Cloud::Bigtable::GcRule.max_age(600))
+        #   table = bigtable.create_table("my-instance", "my-table", initial_splits: initial_splits) do |cfm|
+        #     cfm.add('cf1', gc_rule: Google::Cloud::Bigtable::GcRule.max_versions(5))
+        #     cfm.add('cf2', gc_rule: Google::Cloud::Bigtable::GcRule.max_age(600))
         #
         #     gc_rule = Google::Cloud::Bigtable::GcRule.union(
         #       Google::Cloud::Bigtable::GcRule.max_age(1800),
         #       Google::Cloud::Bigtable::GcRule.max_versions(3)
         #     )
-        #     column_families.add('cf3', gc_rule)
+        #     cfm.add('cf3', gc_rule: gc_rule)
         #   end
         #
-        #   p table
+        #   puts table
         #
         def create_table \
             instance_id,
@@ -515,64 +514,6 @@ module Google
         def delete_table instance_id, table_id
           service.delete_table(instance_id, table_id)
           true
-        end
-
-        ##
-        # Performs a series of column family modifications on the specified table.
-        # Either all or none of the modifications will occur before this method
-        # returns, but data requests received prior to that point may see a table
-        # where only some modifications have taken effect.
-        #
-        # @param instance_id [String]
-        #   The unique ID of the instance the table is in.
-        # @param table_id [String]
-        #   The unique Id of the table whose families should be modified.
-        # @param modifications [Array<Google::Bigtable::Admin::V2::ModifyColumnFamiliesRequest::Modification> | Google::Bigtable::Admin::V2::ModifyColumnFamiliesRequest::Modification]
-        #   Modifications to be atomically applied to the specified table's families.
-        #   Entries are applied in order, meaning that earlier modifications can be
-        #   masked by later ones (in the case of repeated updates to the same family,
-        #   for example).
-        # @return [Google::Cloud::Bigtable::Table] Table with updated column families.
-        #
-        # @example
-        #   require "google/cloud/bigtable"
-        #
-        #   bigtable = Google::Cloud::Bigtable.new
-        #
-        #   modifications = []
-        #   modifications << Google::Cloud::Bigtable::ColumnFamily.create_modification(
-        #     "cf1", Google::Cloud::Bigtable::GcRule.max_age(600)
-        #   )
-        #
-        #   modifications << Google::Cloud::Bigtable::ColumnFamily.update_modification(
-        #     "cf2", Google::Cloud::Bigtable::GcRule.max_versions(5)
-        #   )
-        #
-        #   gc_rule_1 = Google::Cloud::Bigtable::GcRule.max_versions(3)
-        #   gc_rule_2 = Google::Cloud::Bigtable::GcRule.max_age(600)
-        #   modifications << Google::Cloud::Bigtable::ColumnFamily.update_modification(
-        #     "cf3", Google::Cloud::Bigtable::GcRule.union(gc_rule_1, gc_rule_2)
-        #   )
-        #
-        #   max_age_gc_rule = Google::Cloud::Bigtable::GcRule.max_age(300)
-        #   modifications << Google::Cloud::Bigtable::ColumnFamily.update_modification(
-        #     "cf4", Google::Cloud::Bigtable::GcRule.union(max_age_gc_rule)
-        #   )
-        #
-        #   modifications << Google::Cloud::Bigtable::ColumnFamily.drop_modification("cf5")
-        #
-        #   table = bigtable.modify_column_families("my-instance", "my-table", modifications)
-        #
-        #   puts table.column_families
-        #
-        def modify_column_families instance_id, table_id, modifications
-          ensure_service!
-          Table.modify_column_families(
-            service,
-            instance_id,
-            table_id,
-            modifications
-          )
         end
 
         protected

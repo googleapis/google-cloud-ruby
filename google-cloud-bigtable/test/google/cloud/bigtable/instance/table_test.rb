@@ -56,7 +56,9 @@ describe Google::Cloud::Bigtable::Instance, :table, :mock_bigtable do
       cs.replication_state.must_equal :READY
     end
 
-    table.column_families.keys.sort.must_equal column_families.keys
+    table.column_families.must_be_instance_of Google::Cloud::Bigtable::ColumnFamilyMap
+    table.column_families.must_be :frozen?
+    table.column_families.names.sort.must_equal column_families.keys
     table.column_families.each do |name, cf|
       cf.gc_rule.to_grpc.must_equal column_families[cf.name].gc_rule
     end

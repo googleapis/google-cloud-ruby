@@ -38,6 +38,12 @@ Style/NumericLiterals:
   Enabled: false
 Style/NumericPredicate:
   Enabled: false
+Style/PreferredHashMethods:
+  Exclude:
+    # Rubocop is not smart enough to know the object being used
+    # is a Google::Protobuf::Map and not a Hash.
+    # Google::Protobuf::Map does not use key?, but uses has_key?
+    - "lib/google/cloud/bigtable/column_family_map.rb"
 Style/RedundantFreeze:
   Enabled: false
 Style/SafeNavigation:

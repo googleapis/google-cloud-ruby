@@ -21,49 +21,46 @@ module Google
       ##
       # # GcRule
       #
-      # Rule for determining which cells to delete during garbage collection.
+      # A rule or rules for determining which cells to delete during garbage
+      # collection.
+      #
       # Garbage collection (GC) executes opportunistically in the background,
-      # so it's possible for reads to return a cell even if it matches the active
-      # GC expression for its family.
+      # so it is possible for reads to return a cell even if it matches the
+      # active GC expression for its column family.
       #
-      # NOTE: GC Rule can hold only one type at a time.
       # GC Rule types:
-      #   * `max_num_versions` - Delete all cells in a column except the most recent N
-      #   * `max_age` - Delete cells in a column older than the given age.
-      #   * `union` - Delete cells that would be deleted by every nested rule.
-      #       It can have mutiple chainable GC Rules.
-      #   * `intersection` - Delete cells that would be deleted by any nested rule.
-      #       It can have multiple chainable GC Rules.
+      #   * `max_num_versions` - A garbage-collection rule that explicitly
+      #     states the maximum number of cells to keep for all columns in a
+      #     column family.
+      #   * `max_age` - A garbage-collection rule based on the timestamp for
+      #     each cell. With this type of garbage-collection rule, you set the
+      #     time to live (TTL) for data. Cloud Bigtable looks at each column
+      #     family during garbage collection and removes any cells that have
+      #     expired.
+      #   * `union` - A union garbage-collection policy will remove all data
+      #     matching *any* of a set of given rules.
+      #   * `intersection` - An intersection garbage-collection policy will
+      #     remove all data matching *all* of a set of given rules.
       #
-      # @example Create GC rule instance with max version.
+      # @example Create a table with column families.
+      #   require "google/cloud/bigtable"
       #
-      #  gc_rule = Google::Cloud::Bigtable::GcRule.max_versions(3)
+      #   bigtable = Google::Cloud::Bigtable.new
       #
-      #  # Change max verions
-      #  gc_rule.max_versions = 5
+      #   table = bigtable.create_table("my-instance", "my-table") do |cfm|
+      #     cfm.add("cf1", gc_rule: Google::Cloud::Bigtable::GcRule.max_versions(5))
+      #     cfm.add("cf2", gc_rule: Google::Cloud::Bigtable::GcRule.max_age(600))
       #
-      # @example Create GC rule instance with max age.
+      #     gc_rule = Google::Cloud::Bigtable::GcRule.union(
+      #       Google::Cloud::Bigtable::GcRule.max_age(1800),
+      #       Google::Cloud::Bigtable::GcRule.max_versions(3)
+      #     )
+      #     cfm.add("cf3", gc_rule: gc_rule)
+      #   end
       #
-      #  gc_rule = Google::Cloud::Bigtable::GcRule.max_age(3)
-      #
-      #  # Change max age
-      #  gc_rule.max_age = 600 # 10 minutes
-      #
-      # @example Create GC rule instance with union.
-      #
-      #  max_age_gc_rule = Google::Cloud::Bigtable::GcRule.max_age(180)
-      #  union_gc_rule = Google::Cloud::Bigtable::GcRule.union(max_age_gc_rule)
-      #
-      #  # Change union GC rule
-      #  union_gc_rule.union = [Google::Cloud::Bigtable::GcRule.max_age(600)]
-      #
-      # @example Create GC rule instance with intersection.
-      #
-      #  max_versions_gc_rule = Google::Cloud::Bigtable::GcRule.max_versions(3)
-      #  gc_rule = Google::Cloud::Bigtable::GcRule.intersection(max_versions_gc_rule)
-      #
-      #  # Change intersection GC rule
-      #  gc_rule.intersection = [Google::Cloud::Bigtable::GcRule.max_age(600)]
+      #   puts table.column_families["cf1"].gc_rule.max_versions
+      #   puts table.column_families["cf2"].gc_rule.max_age
+      #   puts table.column_families["cf3"].gc_rule.union
       #
       class GcRule
         # @private
@@ -76,7 +73,8 @@ module Google
         end
 
         ##
-        # Delete all cells in a column except the most recent N.
+        # Sets a garbage-collection rule that explicitly states the maximum
+        # number of cells to keep for all columns in a column family.
         #
         # @param versions [Integer]
         #
@@ -85,36 +83,64 @@ module Google
         end
 
         ##
-        # Get max versions.
+        # Gets the garbage-collection rule that explicitly states the maximum
+        # number of cells to keep for all columns in a column family.
         #
         # @return [Integer, nil]
+        #
+        # @example
+        #   require "google/cloud/bigtable"
+        #
+        #   bigtable = Google::Cloud::Bigtable.new
+        #
+        #   table = bigtable.create_table("my-instance", "my-table") do |cfm|
+        #     cfm.add("cf1", gc_rule: Google::Cloud::Bigtable::GcRule.max_versions(5))
+        #   end
+        #
+        #   puts table.column_families["cf1"].gc_rule.max_versions
         #
         def max_versions
           @grpc.max_num_versions
         end
 
         ##
-        # Delete cells in a column older than the given age.
-        # Values must be at least one millisecond, and will be truncated to
-        # microsecond granularity.
+        # Sets a garbage-collection rule based on the timestamp for each cell.
+        # With this type of garbage-collection rule, you set the time to live
+        # (TTL) for data. Cloud Bigtable looks at each column family during
+        # garbage collection and removes any cells that have expired.
         #
-        # @param age [Integer] age in seconds
+        # @param age [Integer] Max age in seconds. Values must be at least one
+        #   millisecond, and will be truncated to microsecond granularity.
         #
         def max_age= age
           @grpc.max_age = Convert.number_to_duration(age)
         end
 
         ##
-        # Max age in seconds, if max age is set.
+        # Gets the garbage-collection rule based on the timestamp for each cell.
+        # With this type of garbage-collection rule, you set the time to live
+        # (TTL) for data. Cloud Bigtable looks at each column family during
+        # garbage collection and removes any cells that have expired.
         #
         # @return [Integer, nil] Max age in seconds.
+        #
+        # @example
+        #   require "google/cloud/bigtable"
+        #
+        #   bigtable = Google::Cloud::Bigtable.new
+        #
+        #   table = bigtable.create_table("my-instance", "my-table") do |cfm|
+        #     cfm.add("cf1", gc_rule: Google::Cloud::Bigtable::GcRule.max_age(600))
+        #   end
+        #
+        #   puts table.column_families["cf1"].gc_rule.max_age
         #
         def max_age
           @grpc.max_age.seconds if @grpc.max_age
         end
 
         ##
-        # Delete cells that would be deleted by every nested rule.
+        # Sets the intersection rules collection for this GcRule.
         #
         # @param rules [Array<Google::Cloud::Bigtable::GcRule>]
         #   List of GcRule with nested rules.
@@ -127,16 +153,37 @@ module Google
         end
 
         ##
-        # Get intersection GC rules
         #
-        # @return [Google::Bigtable::Admin::V2::GcRule::Intersection, nil]
+        # Gets the intersection rules collection for this GcRule.
+        #
+        # @return [Array<Google::Cloud::Bigtable::GcRule>, nil]
+        #
+        # @example
+        #   require "google/cloud/bigtable"
+        #
+        #   bigtable = Google::Cloud::Bigtable.new
+        #
+        #   table = bigtable.create_table("my-instance", "my-table") do |cfm|
+        #     gc_rule = Google::Cloud::Bigtable::GcRule.intersection(
+        #       Google::Cloud::Bigtable::GcRule.max_age(1800),
+        #       Google::Cloud::Bigtable::GcRule.max_versions(3)
+        #     )
+        #     cfm.add("cf1", gc_rule: gc_rule)
+        #   end
+        #
+        #   puts table.column_families["cf1"].gc_rule.intersection
         #
         def intersection
-          @grpc.intersection
+          return nil unless @grpc.intersection
+          @grpc.intersection.rules.map do |gc_rule_grpc|
+            self.class.from_grpc gc_rule_grpc
+          end
         end
 
         ##
-        # Delete cells that would be deleted by any nested rule.
+        # Sets the union rules collection for this GcRule. A union
+        # garbage-collection policy will remove all data matching *any* of its
+        # set of given rules.
         #
         # @param rules [Array<Google::Cloud::Bigtable::GcRule>]
         #   List of GcRule with nested rules.
@@ -148,19 +195,48 @@ module Google
         end
 
         ##
-        # Get union GC rules
+        # Gets the union rules collection for this GcRule. A union
+        # garbage-collection policy will remove all data matching *any* of its
+        # set of given rules.
         #
-        # @return [Google::Bigtable::Admin::V2::GcRule::Union, nil]
+        # @return [Array<Google::Cloud::Bigtable::GcRule>, nil]
+        #
+        # @example
+        #   require "google/cloud/bigtable"
+        #
+        #   bigtable = Google::Cloud::Bigtable.new
+        #
+        #   table = bigtable.create_table("my-instance", "my-table") do |cfm|
+        #     gc_rule = Google::Cloud::Bigtable::GcRule.union(
+        #       Google::Cloud::Bigtable::GcRule.max_age(1800),
+        #       Google::Cloud::Bigtable::GcRule.max_versions(3)
+        #     )
+        #     cfm.add("cf1", gc_rule: gc_rule)
+        #   end
+        #
+        #   puts table.column_families["cf1"].gc_rule.union
         #
         def union
-          @grpc.union
+          return nil unless @grpc.union
+          @grpc.union.rules.map do |gc_rule_grpc|
+            self.class.from_grpc gc_rule_grpc
+          end
         end
 
         ##
         # Create GcRule instance with max number of versions.
         #
         # @param versions [Integer] Max number of versions
-        # @return [Google::Bigtable::Admin::V2::GcRule]
+        # @return [Google::Cloud::Bigtable::GcRule]
+        #
+        # @example Create a table with column families.
+        #   require "google/cloud/bigtable"
+        #
+        #   bigtable = Google::Cloud::Bigtable.new
+        #
+        #   table = bigtable.create_table("my-instance", "my-table") do |cfm|
+        #     cfm.add("cf1", gc_rule: Google::Cloud::Bigtable::GcRule.max_versions(5))
+        #   end
         #
         def self.max_versions versions
           new.tap do |gc_rule|
@@ -172,7 +248,16 @@ module Google
         # Create GcRule instance with max age.
         #
         # @param age [Integer] Max age in seconds.
-        # @return [Google::Bigtable::Admin::V2::GcRule]
+        # @return [Google::Cloud::Bigtable::GcRule]
+        #
+        # @example Create a table with column families.
+        #   require "google/cloud/bigtable"
+        #
+        #   bigtable = Google::Cloud::Bigtable.new
+        #
+        #   table = bigtable.create_table("my-instance", "my-table") do |cfm|
+        #     cfm.add("cf1", gc_rule: Google::Cloud::Bigtable::GcRule.max_age(600))
+        #   end
         #
         def self.max_age age
           new.tap do |gc_rule|
@@ -185,7 +270,20 @@ module Google
         #
         # @param rules [Google::Cloud::Bigtable::GcRule, Array<Google::Cloud::Bigtable::GcRule>]
         #   List of GcRule with nested rules.
-        # @return [Google::Bigtable::Admin::V2::GcRule]
+        # @return [Google::Cloud::Bigtable::GcRule]
+        #
+        # @example Create a table with column families.
+        #   require "google/cloud/bigtable"
+        #
+        #   bigtable = Google::Cloud::Bigtable.new
+        #
+        #   table = bigtable.create_table("my-instance", "my-table") do |cfm|
+        #     gc_rule = Google::Cloud::Bigtable::GcRule.union(
+        #       Google::Cloud::Bigtable::GcRule.max_age(1800),
+        #       Google::Cloud::Bigtable::GcRule.max_versions(3)
+        #     )
+        #     cfm.add("cf1", gc_rule: gc_rule)
+        #   end
         #
         def self.union *rules
           new.tap do |gc_rule|
@@ -198,7 +296,20 @@ module Google
         #
         # @param rules [Google::Cloud::Bigtable::GcRule, Array<Google::Cloud::Bigtable::GcRule>]
         #   List of GcRule with nested rules.
-        # @return [Google::Bigtable::Admin::V2::GcRule]
+        # @return [Google::Cloud::Bigtable::GcRule]
+        #
+        # @example Create a table with column families.
+        #   require "google/cloud/bigtable"
+        #
+        #   bigtable = Google::Cloud::Bigtable.new
+        #
+        #   table = bigtable.create_table("my-instance", "my-table") do |cfm|
+        #     gc_rule = Google::Cloud::Bigtable::GcRule.intersection(
+        #       Google::Cloud::Bigtable::GcRule.max_age(1800),
+        #       Google::Cloud::Bigtable::GcRule.max_versions(3)
+        #     )
+        #     cfm.add("cf1", gc_rule: gc_rule)
+        #   end
         #
         def self.intersection *rules
           new.tap do |gc_rule|
