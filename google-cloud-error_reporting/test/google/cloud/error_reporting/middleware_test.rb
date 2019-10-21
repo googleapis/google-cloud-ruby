@@ -233,7 +233,7 @@ describe Google::Cloud::ErrorReporting::Middleware, :mock_error_reporting do
     end
 
     it "returns right http_status code based on exception class #2" do
-      app_exception.class.stub :name, "ActionDispatch::ParamsParser::ParseError" do
+      app_exception.class.stub :name, "ActionController::ParameterMissing" do
         status = middleware.send :http_status, app_exception
         status.must_equal 400
       end

@@ -32,10 +32,10 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency "minitest-rg", "~> 5.2"
   gem.add_development_dependency "autotest-suffix", "~> 1.1"
   gem.add_development_dependency "faraday", "~> 0.8"
-  gem.add_development_dependency "railties", ">= 4.0"
+  gem.add_development_dependency "railties", "~> 5.0"
   gem.add_development_dependency "redcarpet", "~> 3.0"
   gem.add_development_dependency "simplecov", "~> 0.9"
   gem.add_development_dependency "yard", "~> 0.9"
   gem.add_development_dependency "yard-doctest" #, "~> 0.1.6"
-  gem.add_development_dependency "activerecord", ">= 4.0"
+  gem.add_development_dependency "activerecord", "~> 5.0"
 end
