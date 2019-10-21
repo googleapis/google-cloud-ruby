@@ -104,8 +104,8 @@ module Google
         #
         def instances token: nil
           ensure_service!
-          grpc = service.list_instances(token: token)
-          Instance::List.from_grpc(grpc, service)
+          grpc = service.list_instances token: token
+          Instance::List.from_grpc grpc, service
         end
 
         ##
@@ -127,8 +127,8 @@ module Google
         #
         def instance instance_id
           ensure_service!
-          grpc = service.get_instance(instance_id)
-          Instance.from_grpc(grpc, service)
+          grpc = service.get_instance instance_id
+          Instance.from_grpc grpc, service
         rescue Google::Cloud::NotFoundError
           nil
         end
@@ -225,35 +225,20 @@ module Google
         #     instance = job.instance
         #   end
         #
-        def create_instance \
-            instance_id,
-            display_name: nil,
-            type: nil,
-            labels: nil,
-            clusters: nil
+        def create_instance instance_id, display_name: nil, type: nil, labels: nil, clusters: nil
           labels = Hash[labels.map { |k, v| [String(k), String(v)] }] if labels
 
-          instance_attrs = {
-            display_name: display_name,
-            type: type,
-            labels: labels
-          }.delete_if { |_, v| v.nil? }
-          instance = Google::Bigtable::Admin::V2::Instance.new(instance_attrs)
+          instance_attrs = { display_name: display_name, type: type, labels: labels }.delete_if { |_, v| v.nil? }
+          instance = Google::Bigtable::Admin::V2::Instance.new instance_attrs
           clusters ||= Instance::ClusterMap.new
           yield clusters if block_given?
 
           clusters.each_value do |cluster|
-            unless cluster.location == "".freeze
-              cluster.location = service.location_path(cluster.location)
-            end
+            cluster.location = service.location_path cluster.location unless cluster.location == ""
           end
 
-          grpc = service.create_instance(
-            instance_id,
-            instance,
-            clusters.to_h
-          )
-          Instance::Job.from_grpc(grpc, service)
+          grpc = service.create_instance instance_id, instance, clusters.to_h
+          Instance::Job.from_grpc grpc, service
         end
 
         ##
@@ -276,8 +261,8 @@ module Google
         #
         def clusters token: nil
           ensure_service!
-          grpc = service.list_clusters("-", token: token)
-          Cluster::List.from_grpc(grpc, service, instance_id: "-")
+          grpc = service.list_clusters "-", token: token
+          Cluster::List.from_grpc grpc, service, instance_id: "-"
         end
 
         ##
@@ -299,8 +284,8 @@ module Google
         #
         def tables instance_id
           ensure_service!
-          grpc = service.list_tables(instance_id)
-          Table::List.from_grpc(grpc, service)
+          grpc = service.list_tables instance_id
+          Table::List.from_grpc grpc, service
         end
 
         ##
@@ -382,22 +367,14 @@ module Google
         #     p row
         #   end
         #
-        def table \
-            instance_id,
-            table_id,
-            view: nil,
-            perform_lookup: nil,
-            app_profile_id: nil
+        def table instance_id, table_id, view: nil, perform_lookup: nil, app_profile_id: nil
           ensure_service!
 
           table = if perform_lookup
-                    grpc = service.get_table(instance_id, table_id, view: view)
-                    Table.from_grpc(grpc, service, view: view)
+                    grpc = service.get_table instance_id, table_id, view: view
+                    Table.from_grpc grpc, service, view: view
                   else
-                    Table.from_path(
-                      service.table_path(instance_id, table_id),
-                      service
-                    )
+                    Table.from_path service.table_path(instance_id, table_id), service
                   end
 
           table.app_profile_id = app_profile_id
@@ -476,21 +453,15 @@ module Google
         #
         #   puts table
         #
-        def create_table \
-            instance_id,
-            table_id,
-            column_families: nil,
-            granularity: nil,
-            initial_splits: nil,
-            &block
+        def create_table instance_id, table_id, column_families: nil, granularity: nil, initial_splits: nil, &block
           ensure_service!
           Table.create(
             service,
             instance_id,
             table_id,
             column_families: column_families,
-            granularity: granularity,
-            initial_splits: initial_splits,
+            granularity:     granularity,
+            initial_splits:  initial_splits,
             &block
           )
         end
@@ -512,7 +483,7 @@ module Google
         #   bigtable.delete_table("my-instance", "my-table")
         #
         def delete_table instance_id, table_id
-          service.delete_table(instance_id, table_id)
+          service.delete_table instance_id, table_id
           true
         end
 

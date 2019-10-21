@@ -34,7 +34,8 @@ module Google
       # @param project_id [String]
       #   Project identifier for the Bigtable service you are connecting to.
       #   If not present, the default project for the credentials is used.
-      # @param credentials [Google::Auth::Credentials, String, Hash, GRPC::Core::Channel, GRPC::Core::ChannelCredentials, Proc]
+      # @param credentials [Google::Auth::Credentials, String, Hash, GRPC::Core::Channel,
+      #   GRPC::Core::ChannelCredentials, Proc]
       #   Provides the means for authenticating requests made by the client. This parameter can
       #   be one of the following types:
       #   `Google::Auth::Credentials` uses the properties of its represented keyfile for
@@ -72,14 +73,8 @@ module Google
       #
       #   client = Google::Cloud::Bigtable.new
       #
-      def self.new \
-          project_id: nil,
-          credentials: nil,
-          emulator_host: nil,
-          scope: nil,
-          client_config: nil,
-          endpoint: nil,
-          timeout: nil
+      def self.new project_id: nil, credentials: nil, emulator_host: nil, scope: nil, client_config: nil, endpoint: nil,
+                   timeout: nil
         project_id    ||= default_project_id
         scope         ||= configure.scope
         timeout       ||= configure.timeout
@@ -100,7 +95,7 @@ module Google
           project_id, credentials,
           host: endpoint, timeout: timeout, client_config: client_config
         )
-        Bigtable::Project.new(service)
+        Bigtable::Project.new service
       end
 
       ##
@@ -154,10 +149,8 @@ module Google
       #
       def self.resolve_credentials given_credentials, scope
         credentials = given_credentials || default_credentials(scope: scope)
-        unless credentials.is_a? Google::Auth::Credentials
-          credentials = Bigtable::Credentials.new credentials, scope: scope
-        end
-        credentials
+        return credentials if credentials.is_a? Google::Auth::Credentials
+        Bigtable::Credentials.new credentials, scope: scope
       end
 
       # @private
@@ -165,9 +158,7 @@ module Google
       #
       def self.resolve_project_id given_project_id, credentials
         project_id = given_project_id || default_project_id
-        if credentials.respond_to? :project_id
-          project_id ||= credentials.project_id
-        end
+        project_id ||= credentials.project_id if credentials.respond_to? :project_id
         project_id.to_s # Always cast to a string
       end
 

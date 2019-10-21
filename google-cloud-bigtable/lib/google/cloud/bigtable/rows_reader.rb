@@ -74,21 +74,18 @@ module Google
         # @return [:yields: row]
         #   Array of row or yield block for each processed row.
         #
-        def read \
-            rows: nil,
-            filter: nil,
-            rows_limit: nil
+        def read rows: nil, filter: nil, rows_limit: nil
           response = @table.client.read_rows(
             @table.path,
-            rows: rows,
-            filter: filter,
-            rows_limit: rows_limit,
+            rows:           rows,
+            filter:         filter,
+            rows_limit:     rows_limit,
             app_profile_id: @table.app_profile_id
           )
           response.each do |res|
             res.chunks.each do |chunk|
               @retry_count = 0
-              row = @chunk_processor.process(chunk)
+              row = @chunk_processor.process chunk
               next if row.nil?
               yield row
               @rows_count += 1
@@ -132,14 +129,14 @@ module Google
             delete_indexes = []
 
             row_set.row_ranges.each_with_index do |range, i|
-              if end_key_read?(range)
+              if end_key_read? range
                 delete_indexes << i
-              elsif start_key_read?(range)
+              elsif start_key_read? range
                 range.start_key_open = last_key
               end
             end
 
-            delete_indexes.each { |i| row_set.row_ranges.delete_at(i) }
+            delete_indexes.each { |i| row_set.row_ranges.delete_at i }
           end
 
           if row_set.row_ranges.empty?

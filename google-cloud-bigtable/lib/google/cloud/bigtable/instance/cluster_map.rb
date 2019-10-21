@@ -37,7 +37,7 @@ module Google
           # Creates a new Instance::ClusterMap with an hash of Cluster name and
           # cluster grpc instances.
           def initialize value = {}
-            super(value)
+            super value
           end
 
           ##
@@ -58,12 +58,12 @@ module Google
           #
           def add name, location, nodes: nil, storage_type: nil
             attrs = {
-              serve_nodes: nodes,
-              location: location,
+              serve_nodes:          nodes,
+              location:             location,
               default_storage_type: storage_type
             }.delete_if { |_, v| v.nil? }
 
-            self[name] = Google::Bigtable::Admin::V2::Cluster.new(attrs)
+            self[name] = Google::Bigtable::Admin::V2::Cluster.new attrs
           end
         end
       end

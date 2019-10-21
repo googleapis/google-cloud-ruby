@@ -102,7 +102,7 @@ module Google
           # @return [Google::Bigtable::V2::RowFilter]
           #
           def to_grpc
-            Google::Bigtable::V2::RowFilter.new(condition: @grpc)
+            Google::Bigtable::V2::RowFilter.new condition: @grpc
           end
         end
       end

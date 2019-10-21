@@ -35,7 +35,7 @@ module Google
           # @private
           # Creates a new Table::List with an array of table instances.
           def initialize arr = []
-            super(arr)
+            super arr
           end
 
           ##
@@ -77,7 +77,7 @@ module Google
 
             return nil unless next?
             grpc.next_page
-            self.class.from_grpc(grpc, service)
+            self.class.from_grpc grpc, service
           end
 
           ##
@@ -115,14 +115,14 @@ module Google
           #   end
           #
           def all
-            return enum_for(:all) unless block_given?
+            return enum_for :all unless block_given?
 
             results = self
             loop do
               results.each { |r| yield r }
               break unless next?
               grpc.next_page
-              results = self.class.from_grpc(grpc, service)
+              results = self.class.from_grpc grpc, service
             end
           end
 
@@ -131,7 +131,7 @@ module Google
           #
           def self.from_grpc grpc, service
             tables = List.new(Array(grpc.response.tables).map do |table|
-              Table.from_grpc(table, service, view: :NAME_ONLY)
+              Table.from_grpc table, service, view: :NAME_ONLY
             end)
             tables.grpc = grpc
             tables.service = service

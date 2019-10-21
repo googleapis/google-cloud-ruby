@@ -112,11 +112,11 @@ module Google
         #
         def set_cell family, qualifier, value, timestamp: nil
           # If value is integer, covert it to a 64-bit signed big-endian integer.
-          value = [value].pack("q>") if value.is_a?(Integer)
+          value = [value].pack "q>" if value.is_a? Integer
           options = {
-            family_name: family,
+            family_name:      family,
             column_qualifier: qualifier,
-            value: value
+            value:            value
           }
 
           if timestamp
@@ -175,24 +175,15 @@ module Google
         #     timestamp_from: timestamp_micros - 5000000
         #   )
         #
-        def delete_cells \
-            family,
-            qualifier,
-            timestamp_from: nil,
-            timestamp_to: nil
-          grpc = Google::Bigtable::V2::Mutation::DeleteFromColumn.new(
-            family_name: family,
-            column_qualifier: qualifier
-          )
+        def delete_cells family, qualifier, timestamp_from: nil, timestamp_to: nil
+          grpc = Google::Bigtable::V2::Mutation::DeleteFromColumn.new family_name: family, column_qualifier: qualifier
           if timestamp_from || timestamp_to
             time_range = Google::Bigtable::V2::TimestampRange.new
             time_range.start_timestamp_micros = timestamp_from if timestamp_from
             time_range.end_timestamp_micros = timestamp_to if timestamp_to
             grpc.time_range = time_range
           end
-          @mutations << Google::Bigtable::V2::Mutation.new(
-            delete_from_column: grpc
-          )
+          @mutations << Google::Bigtable::V2::Mutation.new(delete_from_column: grpc)
           self
         end
 
@@ -211,9 +202,7 @@ module Google
         #   entry.delete_from_family("cf-1")
         #
         def delete_from_family family
-          @mutations << Google::Bigtable::V2::Mutation.new(
-            delete_from_family: { family_name: family }
-          )
+          @mutations << Google::Bigtable::V2::Mutation.new(delete_from_family: { family_name: family })
           self
         end
 
@@ -258,10 +247,7 @@ module Google
         # @return [Google::Bigtable::V2::MutateRowsRequest::Entry]
         #
         def to_grpc
-          Google::Bigtable::V2::MutateRowsRequest::Entry.new(
-            row_key: @row_key,
-            mutations: @mutations
-          )
+          Google::Bigtable::V2::MutateRowsRequest::Entry.new row_key: @row_key, mutations: @mutations
         end
       end
     end

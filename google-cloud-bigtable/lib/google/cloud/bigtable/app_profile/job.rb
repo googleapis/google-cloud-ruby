@@ -90,7 +90,7 @@ module Google
           def app_profile
             return nil unless done?
             return nil unless @grpc.grpc_op.result == :response
-            AppProfile.from_grpc(@grpc.results, service)
+            AppProfile.from_grpc @grpc.results, service
           end
         end
       end

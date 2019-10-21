@@ -79,7 +79,7 @@ module Google
           #   cluster = job.cluster
           #
           def cluster
-            Cluster.from_grpc(results, service) if results
+            Cluster.from_grpc results, service if results
           end
         end
       end

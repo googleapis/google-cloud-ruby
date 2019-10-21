@@ -90,7 +90,7 @@ module Google
           # @return [Google::Cloud::Bigtable::Table::ClusterState]
           #
           def self.from_grpc grpc, cluster_name
-            new(grpc, cluster_name)
+            new grpc, cluster_name
           end
         end
       end

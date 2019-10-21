@@ -154,8 +154,7 @@ module Google
         # Sets the routing policy for the app profile.
         #
         # @param policy [Google::Cloud::Bigtable::RoutingPolicy]
-        #   The routing policy for all read/write requests that use this app
-        #   profile. A value must be explicitly set.
+        #   The routing policy for all read/write requests that use this app profile. A value must be explicitly set.
         #
         #   Routing Policies:
         #   * {Google::Cloud::Bigtable::MultiClusterRoutingUseAny} - Read/write
@@ -194,9 +193,7 @@ module Google
         #
         def routing_policy= policy
           routing_policy_grpc = policy.to_grpc
-          if routing_policy_grpc.is_a?(
-            Google::Bigtable::Admin::V2::AppProfile::SingleClusterRouting
-          )
+          if routing_policy_grpc.is_a? Google::Bigtable::Admin::V2::AppProfile::SingleClusterRouting
             @grpc.single_cluster_routing = routing_policy_grpc
             @changed_fields["routing_policy"] = "single_cluster_routing"
           else
@@ -267,11 +264,7 @@ module Google
         #
         def delete ignore_warnings: false
           ensure_service!
-          service.delete_app_profile(
-            instance_id,
-            name,
-            ignore_warnings: ignore_warnings
-          )
+          service.delete_app_profile instance_id, name, ignore_warnings: ignore_warnings
           true
         end
 
@@ -335,16 +328,10 @@ module Google
         #
         def save ignore_warnings: false
           ensure_service!
-          update_mask = Google::Protobuf::FieldMask.new(
-            paths: @changed_fields.values
-          )
-          grpc = service.update_app_profile(
-            @grpc,
-            update_mask,
-            ignore_warnings: ignore_warnings
-          )
+          update_mask = Google::Protobuf::FieldMask.new paths: @changed_fields.values
+          grpc = service.update_app_profile @grpc, update_mask, ignore_warnings: ignore_warnings
           @changed_fields.clear
-          AppProfile::Job.from_grpc(grpc, service)
+          AppProfile::Job.from_grpc grpc, service
         end
         alias update save
 
@@ -354,7 +341,7 @@ module Google
         # @return [Google::Cloud::Bigtable::AppProfile]
         #
         def reload!
-          @grpc = service.get_app_profile(instance_id, name)
+          @grpc = service.get_app_profile instance_id, name
           self
         end
 
@@ -423,13 +410,8 @@ module Google
         #   )
         #   puts app_profile.routing_policy
         #
-        def self.single_cluster_routing \
-            cluster_id,
-            allow_transactional_writes: false
-          Google::Cloud::Bigtable::SingleClusterRouting.new(
-            cluster_id,
-            allow_transactional_writes
-          )
+        def self.single_cluster_routing cluster_id, allow_transactional_writes: false
+          Google::Cloud::Bigtable::SingleClusterRouting.new cluster_id, allow_transactional_writes
         end
 
         # @private
@@ -440,7 +422,7 @@ module Google
         # @param service [Google::Cloud::Bigtable::Service]
         # @return [Google::Cloud::Bigtable::Table]
         def self.from_grpc grpc, service
-          new(grpc, service)
+          new grpc, service
         end
 
         protected

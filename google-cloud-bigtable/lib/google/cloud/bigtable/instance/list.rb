@@ -46,7 +46,7 @@ module Google
           # Creates a new Instance::List with an array of
           # Instance instances.
           def initialize arr = []
-            super(arr)
+            super arr
           end
 
           ##
@@ -86,11 +86,9 @@ module Google
           def next
             return nil unless next?
             ensure_service!
-            grpc = service.list_instances(token: token)
-            next_list = self.class.from_grpc(grpc, service)
-            if failed_locations
-              next_list.failed_locations.concat(failed_locations.map(&:to_s))
-            end
+            grpc = service.list_instances token: token
+            next_list = self.class.from_grpc grpc, service
+            next_list.failed_locations.concat(failed_locations.map(&:to_s)) if failed_locations
             next_list
           end
 
@@ -129,7 +127,7 @@ module Google
           #   end
           #
           def all
-            return enum_for(:all) unless block_given?
+            return enum_for :all unless block_given?
 
             results = self
             loop do
@@ -143,10 +141,10 @@ module Google
           # New Instance::List from a Google::Bigtable::Admin::V2::Instance object.
           def self.from_grpc grpc, service
             instances = List.new(Array(grpc.instances).map do |instance|
-              Instance.from_grpc(instance, service)
+              Instance.from_grpc instance, service
             end)
             token = grpc.next_page_token
-            token = nil if token == "".freeze
+            token = nil if token == ""
             instances.token = token
             instances.service = service
             instances.failed_locations = grpc.failed_locations.map(&:to_s)

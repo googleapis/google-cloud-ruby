@@ -59,8 +59,8 @@ module Google
           #
           def to_time granularity = nil
             return nil if @timestamp.zero?
-            return Time.at(@timestamp / 100_0000.0) if granularity == :micros
-            Time.at(@timestamp / 1000.0)
+            return Time.at @timestamp / 1_000_000.0 if granularity == :micros
+            Time.at @timestamp / 1000.0
           end
 
           ##
@@ -69,7 +69,7 @@ module Google
           # @return [Integer]
           #
           def to_i
-            @value.unpack("q>").first
+            @value.unpack1 "q>"
           end
 
           # @private
@@ -124,9 +124,7 @@ module Google
         #
         def == other
           return false unless self.class == other.class
-          if key != other.key || column_families != other.column_families
-            return false
-          end
+          return false if key != other.key || column_families != other.column_families
 
           cells.all? do |family, list|
             list == other.cells[family]

@@ -35,30 +35,25 @@ module Google
         # Creates a new Service instance.
         #
         # @param project_id [String] Project identifier
-        # @param credentials [Google::Auth::Credentials, String, Hash, GRPC::Core::Channel, GRPC::Core::ChannelCredentials, Proc]
-        #   The means for authenticating requests made by the client. This parameter can
-        #   be one of the following types.
-        #   `Google::Auth::Credentials` uses the properties of its represented keyfile for
-        #   authenticating requests made by this client.
-        #   `String` will be treated as the path to the keyfile to use to construct
-        #   credentials for this client.
-        #   `Hash` will be treated as the contents of a keyfile to use to construct
-        #   credentials for this client.
+        # @param credentials [Google::Auth::Credentials, String, Hash, GRPC::Core::Channel,
+        #   GRPC::Core::ChannelCredentials, Proc]
+        #   The means for authenticating requests made by the client. This parameter can be one of the following types.
+        #   `Google::Auth::Credentials` uses the properties of its represented keyfile for authenticating requests made
+        #   by this client.
+        #   `String` will be treated as the path to the keyfile to use to construct credentials for this client.
+        #   `Hash` will be treated as the contents of a keyfile to use to construct credentials for this client.
         #   `GRPC::Core::Channel` will be used to make calls through.
-        #   `GRPC::Core::ChannelCredentials` will be used to set up the gRPC client. The channel credentials
-        #   should already be composed with a `GRPC::Core::CallCredentials` object.
-        #   `Proc` will be used as an updater_proc for the gRPC channel. The proc transforms the
-        #   metadata for requests, generally, to give OAuth credentials.
+        #   `GRPC::Core::ChannelCredentials` will be used to set up the gRPC client. The channel credentials should
+        #   already be composed with a `GRPC::Core::CallCredentials` object.
+        #   `Proc` will be used as an updater_proc for the gRPC channel. The proc transforms the metadata for requests,
+        #   generally, to give OAuth credentials.
         # @param timeout [Integer]
         #   The default timeout, in seconds, for calls made through this client.
         # @param client_config [Hash]
-        #   A hash for call options for each method.
-        #   See Google::Gax#construct_settings for the structure of
-        #   this data. Falls back to the default config if not specified
-        #   or the specified config is missing data points.
+        #   A hash for call options for each method. See Google::Gax#construct_settings for the structure of this data.
+        #   Falls back to the default config if not specified or the specified config is missing data points.
         #
-        def initialize project_id, credentials, host: nil, timeout: nil,
-                       client_config: nil
+        def initialize project_id, credentials, host: nil, timeout: nil, client_config: nil
           @project_id = project_id
           @credentials = credentials
           @host = host
@@ -72,16 +67,15 @@ module Google
         end
 
         def chan_args
-          { "grpc.max_send_message_length" => -1,
-            "grpc.max_receive_message_length" => -1,
+          { "grpc.max_send_message_length"           => -1,
+            "grpc.max_receive_message_length"        => -1,
             "grpc.service_config_disable_resolution" => 1 }
         end
 
         def chan_creds
           return credentials if insecure?
           require "grpc"
-          GRPC::Core::ChannelCredentials.new.compose \
-            GRPC::Core::CallCredentials.new credentials.client.updater_proc
+          GRPC::Core::ChannelCredentials.new.compose GRPC::Core::CallCredentials.new credentials.client.updater_proc
         end
 
         ##
@@ -91,18 +85,13 @@ module Google
         #
         def instances
           return mocked_instances if mocked_instances
-          @instances ||= begin
-            instances_channel = channel(
-              Admin::V2::BigtableInstanceAdminClient::SERVICE_ADDRESS
-            )
-            Admin::V2::BigtableInstanceAdminClient.new(
-              credentials: instances_channel,
-              timeout: timeout,
-              client_config: client_config,
-              lib_name: "gccl",
-              lib_version: Google::Cloud::Bigtable::VERSION
-            )
-          end
+          @instances ||= Admin::V2::BigtableInstanceAdminClient.new(
+            credentials:   channel(Admin::V2::BigtableInstanceAdminClient::SERVICE_ADDRESS),
+            timeout:       timeout,
+            client_config: client_config,
+            lib_name:      "gccl",
+            lib_version:   Google::Cloud::Bigtable::VERSION
+          )
         end
         attr_accessor :mocked_instances
 
@@ -113,18 +102,13 @@ module Google
         #
         def tables
           return mocked_tables if mocked_tables
-          @tables ||= begin
-            tables_channel = channel(
-              Admin::V2::BigtableTableAdminClient::SERVICE_ADDRESS
-            )
-            Admin::V2::BigtableTableAdminClient.new(
-              credentials: tables_channel,
-              timeout: timeout,
-              client_config: client_config,
-              lib_name: "gccl",
-              lib_version: Google::Cloud::Bigtable::VERSION
-            )
-          end
+          @tables ||= Admin::V2::BigtableTableAdminClient.new(
+            credentials:   channel(Admin::V2::BigtableTableAdminClient::SERVICE_ADDRESS),
+            timeout:       timeout,
+            client_config: client_config,
+            lib_name:      "gccl",
+            lib_version:   Google::Cloud::Bigtable::VERSION
+          )
         end
         attr_accessor :mocked_tables
 
@@ -135,14 +119,13 @@ module Google
         #
         def client
           return mocked_client if mocked_client
-          @client ||= \
-            V2::BigtableClient.new(
-              credentials: channel(V2::BigtableClient::SERVICE_ADDRESS),
-              timeout: timeout,
-              client_config: client_config,
-              lib_name: "gccl",
-              lib_version: Google::Cloud::Bigtable::VERSION
-            )
+          @client ||= V2::BigtableClient.new(
+            credentials:   channel(V2::BigtableClient::SERVICE_ADDRESS),
+            timeout:       timeout,
+            client_config: client_config,
+            lib_name:      "gccl",
+            lib_version:   Google::Cloud::Bigtable::VERSION
+          )
         end
         attr_accessor :mocked_client
 
@@ -165,17 +148,9 @@ module Google
         #   Alternatively, provide a hash in the form of `Google::Bigtable::Admin::V2::Cluster`
         # @return [Google::Gax::Operation]
         #
-        def create_instance \
-            instance_id,
-            instance,
-            clusters
+        def create_instance instance_id, instance, clusters
           execute do
-            instances.create_instance(
-              project_path,
-              instance_id,
-              instance,
-              clusters
-            )
+            instances.create_instance project_path, instance_id, instance, clusters
           end
         end
 
@@ -188,10 +163,7 @@ module Google
         #
         def list_instances token: nil
           execute do
-            instances.list_instances(
-              project_path,
-              page_token: token
-            )
+            instances.list_instances project_path, page_token: token
           end
         end
 
@@ -204,9 +176,7 @@ module Google
         #
         def get_instance instance_id
           execute do
-            instances.get_instance(
-              instance_path(instance_id)
-            )
+            instances.get_instance instance_path(instance_id)
           end
         end
 
@@ -224,7 +194,7 @@ module Google
         #
         def partial_update_instance instance, update_mask
           execute do
-            instances.partial_update_instance(instance, update_mask)
+            instances.partial_update_instance instance, update_mask
           end
         end
 
@@ -256,16 +226,10 @@ module Google
         # @return [Google::Gax::Operation]
         #
         def create_cluster instance_id, cluster_id, cluster
-          unless cluster.location == ""
-            cluster.location = location_path(cluster.location)
-          end
+          cluster.location = location_path cluster.location unless cluster.location == ""
 
           execute do
-            instances.create_cluster(
-              instance_path(instance_id),
-              cluster_id,
-              cluster
-            )
+            instances.create_cluster instance_path(instance_id), cluster_id, cluster
           end
         end
 
@@ -280,10 +244,7 @@ module Google
         #
         def list_clusters instance_id, token: nil
           execute do
-            instances.list_clusters(
-              instance_path(instance_id),
-              page_token: token
-            )
+            instances.list_clusters instance_path(instance_id), page_token: token
           end
         end
 
@@ -298,9 +259,7 @@ module Google
         #
         def get_cluster instance_id, cluster_id
           execute do
-            instances.get_cluster(
-              cluster_path(instance_id, cluster_id)
-            )
+            instances.get_cluster cluster_path(instance_id, cluster_id)
           end
         end
 
@@ -323,11 +282,7 @@ module Google
         #
         def update_cluster instance_id, cluster_id, location, serve_nodes
           execute do
-            instances.update_cluster(
-              cluster_path(instance_id, cluster_id),
-              location,
-              serve_nodes
-            )
+            instances.update_cluster cluster_path(instance_id, cluster_id), location, serve_nodes
           end
         end
 
@@ -341,9 +296,7 @@ module Google
         #
         def delete_cluster instance_id, cluster_id
           execute do
-            instances.delete_cluster(
-              cluster_path(instance_id, cluster_id)
-            )
+            instances.delete_cluster cluster_path(instance_id, cluster_id)
           end
         end
 
@@ -379,22 +332,11 @@ module Google
         #   `Google::Bigtable::Admin::V2::CreateTableRequest::Split`
         # @return [Google::Bigtable::Admin::V2::Table]
         #
-        def create_table \
-            instance_id,
-            table_id,
-            table,
-            initial_splits: nil
-          if initial_splits
-            initial_splits = initial_splits.map { |key| { key: key } }
-          end
+        def create_table instance_id, table_id, table, initial_splits: nil
+          initial_splits = initial_splits.map { |key| { key: key } } if initial_splits
 
           execute do
-            tables.create_table(
-              instance_path(instance_id),
-              table_id,
-              table,
-              initial_splits: initial_splits
-            )
+            tables.create_table instance_path(instance_id), table_id, table, initial_splits: initial_splits
           end
         end
 
@@ -413,10 +355,7 @@ module Google
         #
         def list_tables instance_id, view: nil
           execute do
-            tables.list_tables(
-              instance_path(instance_id),
-              view: view
-            )
+            tables.list_tables instance_path(instance_id), view: view
           end
         end
 
@@ -434,10 +373,7 @@ module Google
         #
         def get_table instance_id, table_id, view: nil
           execute do
-            tables.get_table(
-              table_path(instance_id, table_id),
-              view: view
-            )
+            tables.get_table table_path(instance_id, table_id), view: view
           end
         end
 
@@ -451,9 +387,7 @@ module Google
         #
         def delete_table instance_id, table_id
           execute do
-            tables.delete_table(
-              table_path(instance_id, table_id)
-            )
+            tables.delete_table table_path(instance_id, table_id)
           end
         end
 
@@ -478,10 +412,7 @@ module Google
         #
         def modify_column_families instance_id, table_id, modifications
           execute do
-            tables.modify_column_families(
-              table_path(instance_id, table_id),
-              modifications
-            )
+            tables.modify_column_families table_path(instance_id, table_id), modifications
           end
         end
 
@@ -499,9 +430,7 @@ module Google
         #
         def generate_consistency_token instance_id, table_id
           execute do
-            tables.generate_consistency_token(
-              table_path(instance_id, table_id)
-            )
+            tables.generate_consistency_token table_path(instance_id, table_id)
           end
         end
 
@@ -520,10 +449,7 @@ module Google
         #
         def check_consistency instance_id, table_id, token
           execute do
-            tables.check_consistency(
-              table_path(instance_id, table_id),
-              token
-            )
+            tables.check_consistency table_path(instance_id, table_id), token
           end
         end
 
@@ -544,12 +470,7 @@ module Google
         # @param timeout [Integer]
         #   Sets the API call timeout if deadline exceeds exception.
         #
-        def drop_row_range \
-             instance_id,
-             table_id,
-             row_key_prefix: nil,
-             delete_all_data_from_table: nil,
-             timeout: nil
+        def drop_row_range instance_id, table_id, row_key_prefix: nil, delete_all_data_from_table: nil, timeout: nil
           call_options = nil
 
           # Pass a timeout with a larger value if the drop operation throws
@@ -559,17 +480,15 @@ module Google
               [],
               Google::Gax::BackoffSettings.new(0, 0, 0, timeout * 1000, 0, 0, 0)
             )
-            call_options = Google::Gax::CallOptions.new(
-              retry_options: retry_options
-            )
+            call_options = Google::Gax::CallOptions.new retry_options: retry_options
           end
 
           execute do
             tables.drop_row_range(
               table_path(instance_id, table_id),
-              row_key_prefix: row_key_prefix,
+              row_key_prefix:             row_key_prefix,
               delete_all_data_from_table: delete_all_data_from_table,
-              options: call_options
+              options:                    call_options
             )
           end
         end
@@ -589,11 +508,7 @@ module Google
         #   If true, ignore safety checks when creating the app profile.
         # @return [Google::Bigtable::Admin::V2::AppProfile]
         #
-        def create_app_profile \
-            instance_id,
-            app_profile_id,
-            app_profile,
-            ignore_warnings: nil
+        def create_app_profile instance_id, app_profile_id, app_profile, ignore_warnings: nil
           execute do
             instances.create_app_profile(
               instance_path(instance_id),
@@ -615,9 +530,7 @@ module Google
         #
         def get_app_profile instance_id, app_profile_id
           execute do
-            instances.get_app_profile(
-              app_profile_path(instance_id, app_profile_id)
-            )
+            instances.get_app_profile app_profile_path(instance_id, app_profile_id)
           end
         end
 
@@ -634,9 +547,7 @@ module Google
         #
         def list_app_profiles instance_id
           execute do
-            instances.list_app_profiles(
-              instance_path(instance_id)
-            )
+            instances.list_app_profiles instance_path(instance_id)
           end
         end
 
@@ -657,11 +568,7 @@ module Google
         #
         def update_app_profile app_profile, update_mask, ignore_warnings: nil
           execute do
-            instances.update_app_profile(
-              app_profile,
-              update_mask,
-              ignore_warnings: ignore_warnings
-            )
+            instances.update_app_profile app_profile, update_mask, ignore_warnings: ignore_warnings
           end
         end
 
@@ -677,10 +584,7 @@ module Google
         #
         def delete_app_profile instance_id, app_profile_id, ignore_warnings: nil
           execute do
-            instances.delete_app_profile(
-              app_profile_path(instance_id, app_profile_id),
-              ignore_warnings
-            )
+            instances.delete_app_profile app_profile_path(instance_id, app_profile_id), ignore_warnings
           end
         end
 
@@ -694,9 +598,7 @@ module Google
         #
         def get_instance_policy instance_id
           execute do
-            instances.get_iam_policy(
-              instance_path(instance_id)
-            )
+            instances.get_iam_policy instance_path(instance_id)
           end
         end
 
@@ -716,10 +618,7 @@ module Google
         #
         def set_instance_policy instance_id, policy
           execute do
-            instances.set_iam_policy(
-              instance_path(instance_id),
-              policy
-            )
+            instances.set_iam_policy instance_path(instance_id), policy
           end
         end
 
@@ -737,10 +636,7 @@ module Google
         #
         def test_instance_permissions instance_id, permissions
           execute do
-            instances.test_iam_permissions(
-              instance_path(instance_id),
-              permissions
-            )
+            instances.test_iam_permissions instance_path(instance_id), permissions
           end
         end
 
@@ -765,7 +661,7 @@ module Google
         #   +projects/<project>+
         #
         def project_path
-          Admin::V2::BigtableInstanceAdminClient.project_path(project_id)
+          Admin::V2::BigtableInstanceAdminClient.project_path project_id
         end
 
         ##
@@ -777,10 +673,7 @@ module Google
         #   +projects/<project>/instances/[a-z][a-z0-9\\-]+[a-z0-9]+.
         #
         def instance_path instance_id
-          Admin::V2::BigtableInstanceAdminClient.instance_path(
-            project_id,
-            instance_id
-          )
+          Admin::V2::BigtableInstanceAdminClient.instance_path project_id, instance_id
         end
 
         ##
@@ -793,11 +686,7 @@ module Google
         #   +projects/<project>/instances/<instance>/clusters/<cluster>+.
         #
         def cluster_path instance_id, cluster_id
-          Admin::V2::BigtableInstanceAdminClient.cluster_path(
-            project_id,
-            instance_id,
-            cluster_id
-          )
+          Admin::V2::BigtableInstanceAdminClient.cluster_path project_id, instance_id, cluster_id
         end
 
         ##
@@ -810,10 +699,7 @@ module Google
         #   +projects/<project_id>/locations/<location>+.
         #
         def location_path location
-          Admin::V2::BigtableInstanceAdminClient.location_path(
-            project_id,
-            location
-          )
+          Admin::V2::BigtableInstanceAdminClient.location_path project_id, location
         end
 
         ##
@@ -825,11 +711,7 @@ module Google
         #   +projects/<project>/instances/<instance>/tables/<table>+
         #
         def table_path instance_id, table_id
-          Admin::V2::BigtableTableAdminClient.table_path(
-            project_id,
-            instance_id,
-            table_id
-          )
+          Admin::V2::BigtableTableAdminClient.table_path project_id, instance_id, table_id
         end
 
         ##
@@ -843,12 +725,7 @@ module Google
         #   +projects/<project>/instances/<instance>/clusters/<cluster>/snapshots/<snapshot>+
         #
         def snapshot_path instance_id, cluster_id, snapshot_id
-          Admin::V2::BigtableTableAdminClient.snapshot_path(
-            project_id,
-            instance_id,
-            cluster_id,
-            snapshot_id
-          )
+          Admin::V2::BigtableTableAdminClient.snapshot_path project_id, instance_id, cluster_id, snapshot_id
         end
 
         ##
@@ -861,11 +738,7 @@ module Google
         #   +projects/<project>/instances/<instance>/appProfiles/<app_profile>+
         #
         def app_profile_path instance_id, app_profile_id
-          Admin::V2::BigtableInstanceAdminClient.app_profile_path(
-            project_id,
-            instance_id,
-            app_profile_id
-          )
+          Admin::V2::BigtableInstanceAdminClient.app_profile_path project_id, instance_id, app_profile_id
         end
 
         ##

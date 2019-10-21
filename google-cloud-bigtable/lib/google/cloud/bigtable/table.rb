@@ -123,7 +123,7 @@ module Google
         #
         def reload! view: nil
           @view = view || :SCHEMA_VIEW
-          @grpc = service.get_table(instance_id, name, view: view)
+          @grpc = service.get_table instance_id, name, view: view
           self
         end
 
@@ -137,9 +137,9 @@ module Google
         # @return [Array<Google::Cloud::Bigtable::Table::ClusterState>]
         #
         def cluster_states
-          check_view_and_load(:REPLICATION_VIEW)
+          check_view_and_load :REPLICATION_VIEW
           @grpc.cluster_states.map do |name, state_grpc|
-            ClusterState.from_grpc(state_grpc, name)
+            ClusterState.from_grpc state_grpc, name
           end
         end
 
@@ -205,19 +205,13 @@ module Google
         #   puts table.column_families["cf3"] #=> nil
         #
         def column_families
-          check_view_and_load(:SCHEMA_VIEW)
+          check_view_and_load :SCHEMA_VIEW
 
           if block_given?
             column_families = ColumnFamilyMap.from_grpc @grpc.column_families
             yield column_families
             modifications = column_families.modifications @grpc.column_families
-            if modifications.any?
-              @grpc = service.modify_column_families(
-                instance_id,
-                table_id,
-                modifications
-              )
-            end
+            @grpc = service.modify_column_families instance_id, table_id, modifications if modifications.any?
           end
 
           ColumnFamilyMap.from_grpc(@grpc.column_families).freeze
@@ -232,7 +226,7 @@ module Google
         # @return [Symbol]
         #
         def granularity
-          check_view_and_load(:SCHEMA_VIEW)
+          check_view_and_load :SCHEMA_VIEW
           @grpc.granularity
         end
 
@@ -260,7 +254,7 @@ module Google
         #
         def delete
           ensure_service!
-          service.delete_table(instance_id, name)
+          service.delete_table instance_id, name
           true
         end
 
@@ -316,13 +310,7 @@ module Google
         #
         # @return [Google::Cloud::Bigtable::Table]
         #
-        def self.create \
-            service,
-            instance_id,
-            table_id,
-            column_families: nil,
-            granularity: nil,
-            initial_splits: nil
+        def self.create service, instance_id, table_id, column_families: nil, granularity: nil, initial_splits: nil
           if column_families
             # create an un-frozen and duplicate object
             column_families = ColumnFamilyMap.from_grpc column_families.to_grpc
@@ -333,16 +321,11 @@ module Google
 
           table = Google::Bigtable::Admin::V2::Table.new({
             column_families: column_families.to_grpc_hash,
-            granularity: granularity
+            granularity:     granularity
           }.delete_if { |_, v| v.nil? })
 
-          grpc = service.create_table(
-            instance_id,
-            table_id,
-            table,
-            initial_splits: initial_splits
-          )
-          from_grpc(grpc, service)
+          grpc = service.create_table instance_id, table_id, table, initial_splits: initial_splits
+          from_grpc grpc, service
         end
 
         ##
@@ -365,7 +348,7 @@ module Google
         #
         def generate_consistency_token
           ensure_service!
-          response = service.generate_consistency_token(instance_id, name)
+          response = service.generate_consistency_token instance_id, name
           response.consistency_token
         end
 
@@ -392,7 +375,7 @@ module Google
         #
         def check_consistency token
           ensure_service!
-          response = service.check_consistency(instance_id, name, token)
+          response = service.check_consistency instance_id, name, token
           response.consistent
         end
 
@@ -427,21 +410,16 @@ module Google
         #   end
         #
         def wait_for_replication timeout: 600, check_interval: 5
-          if check_interval > timeout
-            raise(
-              InvalidArgumentError,
-              "'check_interval' can not be greather then timeout"
-            )
-          end
+          raise InvalidArgumentError, "'check_interval' can not be greather then timeout" if check_interval > timeout
           token = generate_consistency_token
           status = false
           start_at = Time.now
 
           loop do
-            status = check_consistency(token)
+            status = check_consistency token
 
             break if status || (Time.now - start_at) >= timeout
-            sleep(check_interval)
+            sleep check_interval
           end
           status
         end
@@ -476,7 +454,7 @@ module Google
         #   table.delete_all_rows(timeout: 120) # 120 seconds.
         #
         def delete_all_rows timeout: nil
-          drop_row_range(delete_all_data: true, timeout: timeout)
+          drop_row_range delete_all_data: true, timeout: timeout
         end
 
         ##
@@ -498,7 +476,7 @@ module Google
         #   table.delete_rows_by_prefix("user-1", timeout: 120) # 120 seconds.
         #
         def delete_rows_by_prefix prefix, timeout: nil
-          drop_row_range(row_key_prefix: prefix, timeout: timeout)
+          drop_row_range row_key_prefix: prefix, timeout: timeout
         end
 
         ##
@@ -521,17 +499,14 @@ module Google
         #   # Delete all data With timeout
         #   table.drop_row_range(delete_all_data: true, timeout: 120) # 120 seconds.
         #
-        def drop_row_range \
-            row_key_prefix: nil,
-            delete_all_data: nil,
-            timeout: nil
+        def drop_row_range row_key_prefix: nil, delete_all_data: nil, timeout: nil
           ensure_service!
           service.drop_row_range(
             instance_id,
             name,
-            row_key_prefix: row_key_prefix,
+            row_key_prefix:             row_key_prefix,
             delete_all_data_from_table: delete_all_data,
-            timeout: timeout
+            timeout:                    timeout
           )
           true
         end
@@ -545,7 +520,7 @@ module Google
         # @return [Google::Cloud::Bigtable::Table]
         #
         def self.from_grpc grpc, service, view: nil
-          new(grpc, service, view: view)
+          new grpc, service, view: view
         end
 
         # @private
@@ -558,8 +533,8 @@ module Google
         # @return [Google::Cloud::Bigtable::Table]
         #
         def self.from_path path, service
-          grpc = Google::Bigtable::Admin::V2::Table.new(name: path)
-          new(grpc, service, view: :NAME_ONLY)
+          grpc = Google::Bigtable::Admin::V2::Table.new name: path
+          new grpc, service, view: :NAME_ONLY
         end
 
         protected
@@ -573,9 +548,9 @@ module Google
         end
 
         FIELDS_BY_VIEW = {
-          SCHEMA_VIEW: %w[granularity column_families],
+          SCHEMA_VIEW:      ["granularity", "column_families"],
           REPLICATION_VIEW: ["cluster_states"],
-          FULL: %w[granularity column_families cluster_states]
+          FULL:             ["granularity", "column_families", "cluster_states"]
         }.freeze
 
         # @private
@@ -585,13 +560,11 @@ module Google
         #
         def check_view_and_load view
           ensure_service!
-          @loaded_views ||= Set.new([@view])
+          @loaded_views ||= Set.new [@view]
 
-          if @loaded_views.include?(view) || @loaded_views.include?(:FULL)
-            return
-          end
+          return if @loaded_views.include?(view) || @loaded_views.include?(:FULL)
 
-          grpc = service.get_table(instance_id, table_id, view: view)
+          grpc = service.get_table instance_id, table_id, view: view
           @loaded_views << view
 
           FIELDS_BY_VIEW[view].each do |field|

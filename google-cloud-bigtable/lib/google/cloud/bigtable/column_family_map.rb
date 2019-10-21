@@ -122,8 +122,9 @@ module Google
         def each
           return enum_for :each unless block_given?
 
-          @column_families.each do |name, column_family|
-            yield name, ColumnFamily.from_grpc(column_family, name)
+          @column_families.each do |name, column_family_grpc|
+            column_family = ColumnFamily.from_grpc column_family_grpc, name
+            yield name, column_family
           end
         end
 
@@ -136,7 +137,7 @@ module Google
         def [] name
           return nil unless name? name
 
-          ColumnFamily.from_grpc(@column_families[name], name)
+          ColumnFamily.from_grpc @column_families[name], name
         end
 
         ##
@@ -207,8 +208,7 @@ module Google
 
           gc_rule ||= positional_gc_rule
           if positional_gc_rule
-            warn "The positional gc_rule argument is deprecated. " \
-                 "Use the named gc_rule argument instead.".freeze
+            warn "The positional gc_rule argument is deprecated. Use the named gc_rule argument instead."
           end
 
           column_family = Google::Bigtable::Admin::V2::ColumnFamily.new
@@ -370,7 +370,7 @@ module Google
           added_keys.map do |name|
             Google::Bigtable::Admin::V2::ModifyColumnFamiliesRequest:: \
             Modification.new(
-              id: name,
+              id:     name,
               create: @column_families[name]
             )
           end
@@ -394,7 +394,7 @@ module Google
           updated_keys.map do |name|
             Google::Bigtable::Admin::V2::ModifyColumnFamiliesRequest:: \
             Modification.new(
-              id: name,
+              id:     name,
               update: @column_families[name]
             )
           end
@@ -415,7 +415,7 @@ module Google
           dropped_keys.map do |name|
             Google::Bigtable::Admin::V2::ModifyColumnFamiliesRequest:: \
             Modification.new(
-              id: name,
+              id:   name,
               drop: true
             )
           end

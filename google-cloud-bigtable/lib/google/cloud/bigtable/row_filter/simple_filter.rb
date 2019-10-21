@@ -102,10 +102,7 @@ module Google
           #
           def sample probability
             if probability >= 1 || probability <= 0
-              raise(
-                RowFilterError,
-                "Probability must be greather then 0 and less then 1.0"
-              )
+              raise RowFilterError, "Probability must be greather then 0 and less then 1.0"
             end
             @grpc.row_sample_filter = probability
             self
@@ -247,13 +244,14 @@ module Google
           # option inclusive/exclusive options
           #
           # * The value at which to start the range. If neither field is set, interpreted as an empty string, inclusive.
-          # * The value at which to end the range. If neither field is set, interpreted as an infinite string, exclusive.
+          # * The value at which to end the range. If neither field is set, interpreted as an infinite string,
+          #   exclusive.
           #
           # @param range [Google::Cloud::Bigtable::ValueRange]
           # @return [Google::Cloud::Bigtable::RowFilter::SimpleFilter]
           #
           def value_range range
-            unless range.instance_of?(Google::Cloud::Bigtable::ValueRange)
+            unless range.instance_of? Google::Cloud::Bigtable::ValueRange
               raise RowFilterError, "Range type mustbe ValueRange"
             end
             @grpc.value_range_filter = range.to_grpc
@@ -267,7 +265,7 @@ module Google
           # @return [Google::Cloud::Bigtable::RowFilter::SimpleFilter]
           #
           def column_range range
-            unless range.instance_of?(Google::Cloud::Bigtable::ColumnRange)
+            unless range.instance_of? Google::Cloud::Bigtable::ColumnRange
               raise RowFilterError, "Range type mustbe ColumnRange"
             end
             @grpc.column_range_filter = range.to_grpc

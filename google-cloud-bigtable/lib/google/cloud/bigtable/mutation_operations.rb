@@ -76,12 +76,7 @@ module Google
         #   table.mutate_row(entry)
         #
         def mutate_row entry
-          client.mutate_row(
-            path,
-            entry.row_key,
-            entry.mutations,
-            app_profile_id: @app_profile_id
-          )
+          client.mutate_row path, entry.row_key, entry.mutations, app_profile_id: @app_profile_id
           true
         end
 
@@ -128,7 +123,8 @@ module Google
         #
         # @param key [String]
         #   The row key of the row to which the read/modify/write rules should be applied.
-        # @param rules [Google::Cloud::Bigtable::ReadModifyWriteRule, Array<Google::Cloud::Bigtable::ReadModifyWriteRule>]
+        # @param rules [Google::Cloud::Bigtable::ReadModifyWriteRule,
+        #   Array<Google::Cloud::Bigtable::ReadModifyWriteRule>]
         #   Rules specifying how the specified row's contents are to be transformed
         #   into writes. Entries are applied in order, meaning that earlier rules will
         #   affect the results of later ones.
@@ -168,7 +164,7 @@ module Google
             Array(rules).map(&:to_grpc),
             app_profile_id: @app_profile_id
           ).row
-          row = Row.new(res_row.key)
+          row = Row.new res_row.key
 
           res_row.families.each do |family|
             family.columns.each do |column|
@@ -244,20 +240,16 @@ module Google
         #     puts "All predicates matched"
         #   end
         #
-        def check_and_mutate_row \
-            key,
-            predicate,
-            on_match: nil,
-            otherwise: nil
+        def check_and_mutate_row key, predicate, on_match: nil, otherwise: nil
           true_mutations = on_match.mutations if on_match
           false_mutations = otherwise.mutations if otherwise
           response = client.check_and_mutate_row(
             path,
             key,
             predicate_filter: predicate.to_grpc,
-            true_mutations: true_mutations,
-            false_mutations: false_mutations,
-            app_profile_id: @app_profile_id
+            true_mutations:   true_mutations,
+            false_mutations:  false_mutations,
+            app_profile_id:   @app_profile_id
           )
           response.predicate_matched
         end
@@ -286,14 +278,14 @@ module Google
         #   end
         #
         def sample_row_keys
-          return enum_for(:sample_row_keys) unless block_given?
+          return enum_for :sample_row_keys unless block_given?
 
           response = client.sample_row_keys(
             path,
             app_profile_id: @app_profile_id
           )
           response.each do |grpc|
-            yield SampleRowKey.from_grpc(grpc)
+            yield SampleRowKey.from_grpc grpc
           end
         end
 
@@ -316,7 +308,7 @@ module Google
         #   entry = table.new_mutation_entry
         #
         def new_mutation_entry row_key = nil
-          Google::Cloud::Bigtable::MutationEntry.new(row_key)
+          Google::Cloud::Bigtable::MutationEntry.new row_key
         end
 
         ##
@@ -346,7 +338,7 @@ module Google
         #   rule.increment(100)
         #
         def new_read_modify_write_rule family, qualifier
-          Google::Cloud::Bigtable::ReadModifyWriteRule.new(family, qualifier)
+          Google::Cloud::Bigtable::ReadModifyWriteRule.new family, qualifier
         end
 
         ##

@@ -229,13 +229,8 @@ module Google
         #
         def save
           ensure_service!
-          grpc = service.update_cluster(
-            instance_id,
-            cluster_id,
-            location_path,
-            nodes
-          )
-          Cluster::Job.from_grpc(grpc, service)
+          grpc = service.update_cluster instance_id, cluster_id, location_path, nodes
+          Cluster::Job.from_grpc grpc, service
         end
         alias update save
 
@@ -245,7 +240,7 @@ module Google
         # @return [Google::Cloud::Bigtable::Cluster]
         #
         def reload!
-          @grpc = service.get_cluster(instance_id, cluster_id)
+          @grpc = service.get_cluster instance_id, cluster_id
           self
         end
 
@@ -265,7 +260,7 @@ module Google
         #
         def delete
           ensure_service!
-          service.delete_cluster(instance_id, cluster_id)
+          service.delete_cluster instance_id, cluster_id
           true
         end
 
@@ -278,7 +273,7 @@ module Google
         # @param service [Google::Cloud::Bigtable::Service]
         # @return [Google::Cloud::Bigtable::Cluster]
         def self.from_grpc grpc, service
-          new(grpc, service)
+          new grpc, service
         end
 
         protected
