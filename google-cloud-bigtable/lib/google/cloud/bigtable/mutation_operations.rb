@@ -111,7 +111,7 @@ module Google
         #   responses = table.mutate_rows(entries)
         #
         #   responses.each do |response|
-        #     puts response.status
+        #     puts response.status.description
         #   end
         #
         def mutate_rows entries
@@ -375,7 +375,7 @@ module Google
         #   responses = table.mutate_rows(entries)
         #
         #   responses.each do |response|
-        #     puts response.status
+        #     puts response.status.description
         #   end
         #
         class Response

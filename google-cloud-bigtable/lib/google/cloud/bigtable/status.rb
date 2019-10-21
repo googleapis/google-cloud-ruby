@@ -30,7 +30,7 @@ module Google
       #   For example, `INVALID_ARGUMENT`.
       # @attr [String] message A developer-facing error message, which should be
       #   in English.
-      # @attr [Array, nil] details A list of messages that carry the error
+      # @attr [Array] details A list of messages that carry the error
       #   details.
       #
       # @example
@@ -46,7 +46,7 @@ module Google
       #   responses = table.mutate_rows(entries)
       #
       #   responses.each do |response|
-      #     puts response.status
+      #     puts response.status.description
       #   end
       #
       class Status
