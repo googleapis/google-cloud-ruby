@@ -1,15 +1,15 @@
 # -*- ruby -*-
 # encoding: utf-8
-require File.expand_path("../lib/google/cloud/container_analysis/version", __FILE__)
+require File.expand_path("../lib/grafeas/version", __FILE__)
 
 Gem::Specification.new do |gem|
-  gem.name          = "google-cloud-container_analysis"
-  gem.version       = Google::Cloud::ContainerAnalysis::VERSION
+  gem.name          = "grafeas"
+  gem.version       = Grafeas::VERSION
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "google-cloud-container_analysis is the official library for Container Analysis API."
-  gem.summary       = "API Client library for Container Analysis API"
+  gem.description   = "grafeas is the official library for the Grafeas API."
+  gem.summary       = "API Client library for the Grafeas API"
   gem.homepage      = "https://github.com/googleapis/googleapis"
   gem.license       = "Apache-2.0"
 
@@ -21,7 +21,6 @@ Gem::Specification.new do |gem|
 
   gem.required_ruby_version = ">= 2.4"
 
-  gem.add_dependency "grafeas", "~> 0.1"
   gem.add_dependency "google-gax", "~> 1.8"
   gem.add_dependency "grpc-google-iam-v1", "~> 0.6.9"
 

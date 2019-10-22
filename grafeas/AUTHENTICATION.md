@@ -1,6 +1,6 @@
 # Authentication
 
-In general, the grafeas-client library uses [Service
+In general, the grafeas library uses [Service
 Account](https://cloud.google.com/iam/docs/creating-managing-service-accounts)
 credentials to connect to Google Cloud services. When running within [Google
 Cloud Platform environments](#google-cloud-platform-environments)
@@ -31,7 +31,7 @@ client = Grafeas.new
 
 ## Project and Credential Lookup
 
-The grafeas-client library aims to make authentication
+The grafeas library aims to make authentication
 as simple as possible, and provides several mechanisms to configure your system
 without providing **Project ID** and **Service Account Credentials** directly in
 code.
@@ -93,12 +93,12 @@ environment variable, or the **Credentials JSON** itself can be stored for
 environments such as Docker containers where writing files is difficult or not
 encouraged.
 
-The environment variables that grafeas-client checks for project ID are:
+The environment variables that grafeas checks for project ID are:
 
 1. `GRAFEAS_PROJECT`
 2. `GOOGLE_CLOUD_PROJECT`
 
-The environment variables that grafeas-client checks for credentials are configured on {Grafeas::V1::Credentials}:
+The environment variables that grafeas checks for credentials are configured on {Grafeas::V1::Credentials}:
 
 1. `GRAFEAS_CREDENTIALS` - Path to JSON file, or JSON contents
 2. `GRAFEAS_KEYFILE` - Path to JSON file, or JSON contents
@@ -158,7 +158,7 @@ To configure your system for this, simply:
 
 Google Cloud requires a **Project ID** and **Service Account Credentials** to
 connect to the APIs. You will use the **Project ID** and **JSON key file** to
-connect to most services with grafeas-client.
+connect to most services with grafeas.
 
 If you are not running this client within [Google Cloud Platform
 environments](#google-cloud-platform-environments), you need a Google

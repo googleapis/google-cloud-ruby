@@ -42,35 +42,14 @@ s.copy(v1_library / 'grafeas.gemspec', merge=ruby.merge_gemspec)
 templates = gcp.CommonTemplates().ruby_library()
 s.copy(templates)
 
-# Hack gemspec to fix nonstandard name.
-os.rename('grafeas.gemspec', 'grafeas-client.gemspec')
 s.replace(
-    'grafeas-client.gemspec',
-    '"grafeas"',
-    '"grafeas-client"'
-)
-s.replace(
-    'grafeas-client.gemspec',
-    '"grafeas is the official library',
-    '"grafeas-client is the official library'
-)
-s.replace(
-    'grafeas-client.gemspec',
+    'grafeas.gemspec',
     'Container Analysis API',
     'the Grafeas API'
 )
-s.replace(
-    [
-        'README.md',
-        'lib/grafeas.rb',
-        'lib/grafeas/v1.rb'
-    ],
-    'gem install grafeas\n',
-    'gem install grafeas-client\n'
-)
 
 # Update gemspec to reflect Ruby 2.4
-ruby.update_gemspec('grafeas-client.gemspec')
+ruby.update_gemspec('grafeas.gemspec')
 
 # Update README to reflect Ruby 2.4
 s.replace(
@@ -80,11 +59,6 @@ s.replace(
 )
 
 # Hack AUTHENTICATION.md to fix nonstandard name.
-s.replace(
-    'AUTHENTICATION.md',
-    'require "grafeas/client"',
-    'require "grafeas"'
-)
 s.replace(
     'AUTHENTICATION.md',
     'Google::Cloud::Grafeas',
@@ -147,7 +121,7 @@ s.replace(
     'port = service_port || self.class::DEFAULT_SERVICE_PORT'
 )
 s.replace(
-    'grafeas-client.gemspec',
+    'grafeas.gemspec',
     '\n  gem\\.add_dependency "google-gax", "~> 1\\.[\\d\\.]+"\n',
     '\n  gem.add_dependency "google-gax", "~> 1.8"\n')
 
@@ -212,7 +186,7 @@ s.replace(
 )
 
 s.replace(
-    'grafeas-client.gemspec',
+    'grafeas.gemspec',
     '"README.md", "LICENSE"',
     '"README.md", "AUTHENTICATION.md", "LICENSE"'
 )
@@ -224,24 +198,24 @@ s.replace(
 
 # https://github.com/googleapis/google-cloud-ruby/issues/3058
 s.replace(
-    'grafeas-client.gemspec',
+    'grafeas.gemspec',
     '\nGem::Specification.new do',
-    'require File.expand_path("../lib/grafeas/client/version", __FILE__)\n\nGem::Specification.new do'
+    'require File.expand_path("../lib/grafeas/version", __FILE__)\n\nGem::Specification.new do'
 )
 s.replace(
-    'grafeas-client.gemspec',
+    'grafeas.gemspec',
     '(gem.version\s+=\s+).\d+.\d+.\d.*$',
-    '\\1Grafeas::Client::VERSION'
+    '\\1Grafeas::VERSION'
 )
 s.replace(
     'lib/grafeas/v1/*_client.rb',
     '(require \".*credentials\"\n)\n',
-    '\\1require "grafeas/client/version"\n\n'
+    '\\1require "grafeas/version"\n\n'
 )
 s.replace(
     'lib/grafeas/v1/*_client.rb',
     'Gem.loaded_specs\[.*\]\.version\.version',
-    'Grafeas::Client::VERSION'
+    'Grafeas::VERSION'
 )
 
 # Fix links for devsite migration
@@ -254,12 +228,12 @@ for file in ['lib/**/*.rb', '*.md']:
 s.replace(
     '*.md',
     'https://googleapis.github.io/google-cloud-ruby/#/docs/.*/authentication',
-    'https://googleapis.dev/ruby/grafeas-client/latest/file.AUTHENTICATION.html'
+    'https://googleapis.dev/ruby/grafeas/latest/file.AUTHENTICATION.html'
 )
 s.replace(
     'lib/**/*.rb',
     'https://googleapis.github.io/google-cloud-ruby/#/docs/.*/authentication',
-    'https://googleapis.dev/ruby/grafeas-client/latest/file.AUTHENTICATION.html'
+    'https://googleapis.dev/ruby/grafeas/latest/file.AUTHENTICATION.html'
 )
 s.replace(
     'README.md',

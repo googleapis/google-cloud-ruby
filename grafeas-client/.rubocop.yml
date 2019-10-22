@@ -3,11 +3,11 @@ inherit_gem:
 
 AllCops:
   Exclude:
-    - "grafeas-client.gemspec"
-    - "lib/**/*"
-    - "Rakefile"
     - "test/**/*"
-    - "acceptance/**/*"
 
 Documentation:
   Enabled: false
+
+Naming/FileName:
+  Exclude:
+    - "lib/grafeas-client.rb"
