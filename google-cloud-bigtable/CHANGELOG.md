@@ -1,5 +1,20 @@
 # Release History
 
+### 0.7.0 / 2019-10-22
+
+#### Features
+
+* Update Ruby dependency to minimum of 2.4 ([#4206](https://www.github.com/googleapis/google-cloud-ruby/issues/4206))
+
+#### Bug Fixes
+
+* Update GcRule#max_age to microsecond precision
+
+#### Documentation
+
+* add doctest coverage and update sample code
+* Update documentation (no visible changes)
+
 ### 0.6.2 / 2019-10-01
 
 #### Documentation
