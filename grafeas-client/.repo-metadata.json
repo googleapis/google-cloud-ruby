@@ -1,5 +1,5 @@
 {
-  "name": "grafeas-client",
+  "name": "grafeas",
   "language": "ruby",
   "distribution_name": "grafeas-client",
   "module_name": "Grafeas",
