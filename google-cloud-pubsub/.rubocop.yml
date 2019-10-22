@@ -4,18 +4,20 @@ inherit_gem:
 AllCops:
   Exclude:
     - "acceptance/**/*"
-    - "google-cloud-pubsub.gemspec"
     - "lib/google/pubsub/**/*"
     - "lib/google/cloud/pubsub/v1.rb"
     - "lib/google/cloud/pubsub/v1/**/*"
     - "lib/google/iam/**/*"
-    - "Rakefile"
     - "support/**/*"
     - "test/**/*"
 
 Documentation:
   Enabled: false
 
+Metrics/BlockLength:
+  Exclude:
+    - "google-cloud-pubsub.gemspec"
+    - "Rakefile"
 Metrics/ClassLength:
   Enabled: false
 Metrics/MethodLength:
@@ -24,13 +26,3 @@ Metrics/MethodLength:
 Naming/FileName:
   Exclude:
     - "lib/google-cloud-pubsub.rb"
-Naming/RescuedExceptionsVariableName:
-  Enabled: false
-Style/IfUnlessModifier:
-  Enabled: false
-Style/NumericLiterals:
-  Enabled: false
-Style/NumericPredicate:
-  Enabled: false
-Style/SafeNavigation:
-  Enabled: false

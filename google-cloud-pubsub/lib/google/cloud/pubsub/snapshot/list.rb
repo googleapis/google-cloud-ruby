@@ -127,15 +127,13 @@ module Google
           #
           def all request_limit: nil
             request_limit = request_limit.to_i if request_limit
-            unless block_given?
-              return enum_for :all, request_limit: request_limit
-            end
+            return enum_for :all, request_limit: request_limit unless block_given?
             results = self
             loop do
               results.each { |r| yield r }
               if request_limit
                 request_limit -= 1
-                break if request_limit < 0
+                break if request_limit.negative?
               end
               break unless results.next?
               results = results.next

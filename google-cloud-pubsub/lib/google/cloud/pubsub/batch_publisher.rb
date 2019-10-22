@@ -84,14 +84,12 @@ module Google
             data = data.read
           end
           # Convert data to encoded byte array to match the protobuf defn
-          data_bytes = \
-            String(data).dup.force_encoding(Encoding::ASCII_8BIT).freeze
+          data_bytes = String(data).dup.force_encoding(Encoding::ASCII_8BIT).freeze
 
           # Convert attributes to strings to match the protobuf definition
           attributes = Hash[attributes.map { |k, v| [String(k), String(v)] }]
 
-          Google::Cloud::PubSub::V1::PubsubMessage.new data:       data_bytes,
-                                                       attributes: attributes
+          Google::Cloud::PubSub::V1::PubsubMessage.new data: data_bytes, attributes: attributes
         end
       end
     end

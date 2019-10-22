@@ -117,10 +117,8 @@ module Google
         # @param [Integer] new_deadline The new deadline value.
         #
         def deadline= new_deadline
-          update_grpc = Google::Cloud::PubSub::V1::Subscription.new \
-            name: name, ack_deadline_seconds: new_deadline
-          @grpc = service.update_subscription update_grpc,
-                                              :ack_deadline_seconds
+          update_grpc = Google::Cloud::PubSub::V1::Subscription.new name: name, ack_deadline_seconds: new_deadline
+          @grpc = service.update_subscription update_grpc, :ack_deadline_seconds
           @resource_name = nil
         end
 
@@ -148,10 +146,9 @@ module Google
         #   value.
         #
         def retain_acked= new_retain_acked
-          update_grpc = Google::Cloud::PubSub::V1::Subscription.new \
-            name: name, retain_acked_messages: !(!new_retain_acked)
-          @grpc = service.update_subscription update_grpc,
-                                              :retain_acked_messages
+          update_grpc = Google::Cloud::PubSub::V1::Subscription.new name:                  name,
+                                                                    retain_acked_messages: !(!new_retain_acked)
+          @grpc = service.update_subscription update_grpc, :retain_acked_messages
           @resource_name = nil
         end
 
@@ -181,10 +178,9 @@ module Google
         #
         def retention= new_retention
           new_retention_duration = Convert.number_to_duration new_retention
-          update_grpc = Google::Cloud::PubSub::V1::Subscription.new \
-            name: name, message_retention_duration: new_retention_duration
-          @grpc = service.update_subscription update_grpc,
-                                              :message_retention_duration
+          update_grpc = Google::Cloud::PubSub::V1::Subscription.new name:                       name,
+                                                                    message_retention_duration: new_retention_duration
+          @grpc = service.update_subscription update_grpc, :message_retention_duration
           @resource_name = nil
         end
 
@@ -200,7 +196,7 @@ module Google
         #
         def endpoint
           ensure_grpc!
-          @grpc.push_config.push_endpoint if @grpc.push_config
+          @grpc.push_config&.push_endpoint
         end
 
         ##
@@ -271,8 +267,7 @@ module Google
             new_config = config.to_grpc
 
             if old_config != new_config # has the object been changed?
-              update_grpc = Google::Cloud::PubSub::V1::Subscription.new \
-                name: name, push_config: new_config
+              update_grpc = Google::Cloud::PubSub::V1::Subscription.new name: name, push_config: new_config
               @grpc = service.update_subscription update_grpc, :push_config
             end
           end
@@ -312,8 +307,7 @@ module Google
         #
         def labels= new_labels
           raise ArgumentError, "Value must be a Hash" if new_labels.nil?
-          update_grpc = Google::Cloud::PubSub::V1::Subscription.new \
-            name: name, labels: new_labels
+          update_grpc = Google::Cloud::PubSub::V1::Subscription.new name: name, labels: new_labels
           @grpc = service.update_subscription update_grpc, :labels
           @resource_name = nil
         end
@@ -350,12 +344,9 @@ module Google
         #   to unset.
         #
         def expires_in= ttl
-          new_expiration_policy = Google::Pubsub::V1::ExpirationPolicy.new(
-            ttl: Convert.number_to_duration(ttl)
-          )
+          new_expiration_policy = Google::Pubsub::V1::ExpirationPolicy.new ttl: Convert.number_to_duration(ttl)
 
-          update_grpc = Google::Cloud::PubSub::V1::Subscription.new \
-            name: name, expiration_policy: new_expiration_policy
+          update_grpc = Google::Cloud::PubSub::V1::Subscription.new name: name, expiration_policy: new_expiration_policy
           @grpc = service.update_subscription update_grpc, :expiration_policy
           @resource_name = nil
         end
@@ -642,16 +633,13 @@ module Google
         #   # Shut down the subscriber when ready to stop receiving messages.
         #   subscriber.stop.wait!
         #
-        def listen deadline: nil, message_ordering: nil, streams: nil,
-                   inventory: nil, threads: {}, &block
+        def listen deadline: nil, message_ordering: nil, streams: nil, inventory: nil, threads: {}, &block
           ensure_service!
           deadline ||= self.deadline
           message_ordering = message_ordering? if message_ordering.nil?
 
-          Subscriber.new name, block, deadline: deadline, streams: streams,
-                                      inventory: inventory,
-                                      message_ordering: message_ordering,
-                                      threads: threads, service: service
+          Subscriber.new name, block, deadline: deadline, streams: streams, inventory: inventory,
+                                      message_ordering: message_ordering, threads: threads, service: service
         end
 
         ##

@@ -27,7 +27,7 @@ module Google
 
           attr_reader :max_bytes, :interval
 
-          def initialize subscriber, max_bytes: 500000, interval: 1.0
+          def initialize subscriber, max_bytes: 500_000, interval: 1.0
             super() # to init MonitorMixin
 
             @subscriber = subscriber
@@ -91,15 +91,13 @@ module Google
             with_threadpool do |pool|
               requests[:acknowledge].each do |ack_req|
                 add_future pool do
-                  @subscriber.service.acknowledge \
-                    ack_req.subscription, *ack_req.ack_ids
+                  @subscriber.service.acknowledge ack_req.subscription, *ack_req.ack_ids
                 end
               end
               requests[:modify_ack_deadline].each do |mod_ack_req|
                 add_future pool do
-                  @subscriber.service.modify_ack_deadline \
-                    mod_ack_req.subscription, mod_ack_req.ack_ids,
-                    mod_ack_req.ack_deadline_seconds
+                  @subscriber.service.modify_ack_deadline mod_ack_req.subscription, mod_ack_req.ack_ids,
+                                                          mod_ack_req.ack_deadline_seconds
                 end
               end
             end
@@ -144,9 +142,7 @@ module Google
 
             requests = { acknowledge: [] }
             ack_ids = Array(req_hash.delete(:ack)) # ack has no deadline set
-            if ack_ids.any?
-              requests[:acknowledge] = create_acknowledge_requests ack_ids
-            end
+            requests[:acknowledge] = create_acknowledge_requests ack_ids if ack_ids.any?
             requests[:modify_ack_deadline] =
               req_hash.map do |mod_deadline, mod_ack_ids|
                 create_modify_ack_deadline_requests mod_deadline, mod_ack_ids
@@ -201,8 +197,7 @@ module Google
           end
 
           def with_threadpool
-            pool = Concurrent::ThreadPoolExecutor.new \
-              max_threads: @subscriber.push_threads
+            pool = Concurrent::ThreadPoolExecutor.new max_threads: @subscriber.push_threads
 
             yield pool
 
@@ -213,8 +208,8 @@ module Google
             pool.kill
             begin
               raise "Timeout making subscriber API calls"
-            rescue StandardError => error
-              error! error
+            rescue StandardError => e
+              error! e
             end
           end
 
@@ -222,8 +217,8 @@ module Google
             Concurrent::Promises.future_on pool do
               begin
                 yield
-              rescue StandardError => error
-                error! error
+              rescue StandardError => e
+                error! e
               end
             end
           end

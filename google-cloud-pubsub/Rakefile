@@ -30,7 +30,7 @@ end
 
 # Acceptance tests
 desc "Run the pubsub acceptance tests."
-task :acceptance, :project, :keyfile do |t, args|
+task :acceptance, :project, :keyfile do |_t, args|
   project = args[:project]
   project ||= ENV["PUBSUB_TEST_PROJECT"] || ENV["GCLOUD_TEST_PROJECT"]
   keyfile = args[:keyfile]
@@ -41,7 +41,8 @@ task :acceptance, :project, :keyfile do |t, args|
     keyfile ||= ENV["PUBSUB_TEST_KEYFILE_JSON"] || ENV["GCLOUD_TEST_KEYFILE_JSON"]
   end
   if project.nil? || keyfile.nil?
-    fail "You must provide a project and keyfile. e.g. rake acceptance[test123, /path/to/keyfile.json] or PUBSUB_TEST_PROJECT=test123 PUBSUB_TEST_KEYFILE=/path/to/keyfile.json rake acceptance"
+    raise "You must provide a project and keyfile. e.g. rake acceptance[test123, /path/to/keyfile.json] or " \
+          "PUBSUB_TEST_PROJECT=test123 PUBSUB_TEST_KEYFILE=/path/to/keyfile.json rake acceptance"
   end
   # clear any env var already set
   require "google/cloud/pubsub/credentials"
@@ -58,7 +59,7 @@ end
 
 namespace :acceptance do
   desc "Run acceptance tests with coverage."
-  task :coverage, :project, :keyfile do |t, args|
+  task :coverage, :project, :keyfile do |_t, _args|
     require "simplecov"
     SimpleCov.start do
       command_name "google-cloud-pubsub"
@@ -70,7 +71,7 @@ namespace :acceptance do
   end
 
   desc "Removes *ALL* topics and subscriptions. Use with caution."
-  task :cleanup do |t, args|
+  task :cleanup do |_t, args|
     project = args[:project]
     project ||= ENV["PUBSUB_TEST_PROJECT"] || ENV["GCLOUD_TEST_PROJECT"]
     keyfile = args[:keyfile]
@@ -81,7 +82,8 @@ namespace :acceptance do
       keyfile ||= ENV["PUBSUB_TEST_KEYFILE_JSON"] || ENV["GCLOUD_TEST_KEYFILE_JSON"]
     end
     if project.nil? || keyfile.nil?
-      fail "You must provide a project and keyfile. e.g. rake acceptance:cleanup[test123, /path/to/keyfile.json] or PUBSUB_TEST_PROJECT=test123 PUBSUB_TEST_KEYFILE=/path/to/keyfile.json rake acceptance:cleanup"
+      raise "You must provide a project and keyfile. e.g. rake acceptance:cleanup[test123, /path/to/keyfile.json] or " \
+            "PUBSUB_TEST_PROJECT=test123 PUBSUB_TEST_KEYFILE=/path/to/keyfile.json rake acceptance:cleanup"
     end
     # clear any env var already set
     require "google/cloud/pubsub/credentials"
@@ -96,9 +98,9 @@ namespace :acceptance do
     $LOAD_PATH.unshift "lib"
     require "google/cloud/pubsub"
     puts "Cleaning up Pub/Sub topics, subscriptions, and snapshots"
-    Google::Cloud.pubsub.topics.all &:delete
-    Google::Cloud.pubsub.subscriptions.all &:delete
-    Google::Cloud.pubsub.snapshots.all &:delete
+    Google::Cloud.pubsub.topics.all(&:delete)
+    Google::Cloud.pubsub.subscriptions.all(&:delete)
+    Google::Cloud.pubsub.snapshots.all(&:delete)
   end
 
   Rake::TestTask.new :run do |t|
@@ -109,7 +111,7 @@ namespace :acceptance do
 end
 
 desc "Run yard-doctest example tests."
-#task :doctest do
+# task :doctest do
 task :doctest do
   sh "bundle exec yard config load_plugins true && bundle exec yard doctest"
 end
@@ -123,7 +125,9 @@ task :console do
   $LOAD_PATH.unshift "lib"
 
   require "google-cloud-pubsub"
-  def gcloud; @gcloud ||= Google::Cloud.new; end
+  def gcloud
+    @gcloud ||= Google::Cloud.new
+  end
 
   ARGV.clear
   IRB.start
@@ -160,7 +164,7 @@ namespace :ci do
   end
 end
 
-task :default => :test
+task default: :test
 
 def header str, token = "#"
   line_length = str.length + 8
