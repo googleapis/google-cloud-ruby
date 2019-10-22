@@ -1,5 +1,41 @@
 # Release History
 
+### 0.7.0 / 2019-10-22
+
+#### Features
+
+* Update Table#column_families to yield ColumnFamilyMap for updates.
+  * ColumnFamilyMap now manages ColumnFamily lifecycle.
+* Add MutationOperations::Response.
+* Add Bigtable::Status.
+* Add Bigtable::RoutingPolicy.
+* Update Ruby dependency to minimum of 2.4.
+
+#### BREAKING CHANGES
+
+* Remove ColumnFamily lifecycle methods (create, save, delete, and related class methods).
+  * Replaced by Table#column_families yield block.
+* Move Google::Cloud::Bigtable::Table::ColumnFamilyMap to Google::Cloud::Bigtable::ColumnFamilyMap.
+  * This should only affect introspection, since the constructor was previously undocumented.
+* Remove Project#modify_column_families.
+  * Replaced by Table#column_families yield block.
+* Remove Table#column_family.
+  * Replaced by ColumnFamilyMap lifecycle methods.
+* Remove Table#modify_column_families.
+  * Replaced by Table#column_families yield block.
+* Update GcRule#union and #intersection to not return lower-level API types.
+* Update all return types and parameters associated with AppProfile routing policy to not use lower-level API types.
+  * The new types have exactly the same API as the old types, so this change should only affect type introspection.
+* Update return types of Chain and Interleave row filters to not use lower-level API types.
+* Change return type of MutationOperations#mutate_rows from lower-level API types to wrapper types.
+* Remove private MutationEntry#mutations from documentation.
+* Update GcRule#max_age to microsecond precision.
+
+#### Documentation
+
+* Update sample code.
+* Update documentation.
+
 ### 0.6.2 / 2019-10-01
 
 #### Documentation
