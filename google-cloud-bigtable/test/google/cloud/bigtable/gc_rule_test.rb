@@ -40,6 +40,19 @@ describe Google::Cloud::Bigtable::GcRule, :mock_bigtable do
     gc_rule.to_grpc.must_equal expected_grpc
   end
 
+  it "updates a max age gc rule using microseconds" do
+    gc_rule = Google::Cloud::Bigtable::GcRule.max_age(100.001)
+
+    gc_rule.max_age.must_equal 100.001
+    gc_rule.max_age = 200.999999999
+
+    gc_rule.max_age.must_equal 200.999999999
+    expected_grpc = Google::Bigtable::Admin::V2::GcRule.new(
+      max_age: Google::Protobuf::Duration.new(seconds: 200, nanos: 999999999)
+    )
+    gc_rule.to_grpc.must_equal expected_grpc
+  end
+
   it "creates a max versions gc rule" do
     gc_rule = Google::Cloud::Bigtable::GcRule.max_versions(3)
 

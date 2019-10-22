@@ -109,7 +109,7 @@ module Google
         # (TTL) for data. Cloud Bigtable looks at each column family during
         # garbage collection and removes any cells that have expired.
         #
-        # @param age [Integer] Max age in seconds. Values must be at least one
+        # @param age [Numeric] Max age in seconds. Values must be at least one
         #   millisecond, and will be truncated to microsecond granularity.
         #
         def max_age= age
@@ -122,7 +122,7 @@ module Google
         # (TTL) for data. Cloud Bigtable looks at each column family during
         # garbage collection and removes any cells that have expired.
         #
-        # @return [Integer, nil] Max age in seconds.
+        # @return [Numeric, nil] Max age in seconds.
         #
         # @example
         #   require "google/cloud/bigtable"
@@ -136,7 +136,7 @@ module Google
         #   puts table.column_families["cf1"].gc_rule.max_age
         #
         def max_age
-          @grpc.max_age&.seconds
+          Convert.duration_to_number @grpc.max_age
         end
 
         ##
