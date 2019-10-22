@@ -200,7 +200,7 @@ module Google
       # @return [Boolean]
       #
       def raw_compute_engine?
-        !app_engine? && !cloud_shell? && metadata? && !kubernetes_engine?
+        !knative? && !app_engine? && !cloud_shell? && metadata? && !kubernetes_engine?
       end
 
       ##

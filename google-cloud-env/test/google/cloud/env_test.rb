@@ -30,13 +30,31 @@ describe Google::Cloud::Env do
   let(:gae_memory_mb) { 640 }
   let(:gke_cluster) { "my-cluster" }
   let(:gke_namespace) { "my-namespace" }
+  let(:gae_standard_runtime) { "ruby25" }
 
-  let :gae_env do
+  let :knative_env do
+    {
+      "K_SERVICE" => gae_service,
+      "K_REVISION" => gae_version
+    }
+  end
+  let :gae_flex_env do
     {
       "GAE_INSTANCE" => instance_name,
       "GCLOUD_PROJECT" => project_id,
       "GAE_SERVICE" => gae_service,
       "GAE_VERSION" => gae_version,
+      "GAE_MEMORY_MB" => gae_memory_mb
+    }
+  end
+  let :gae_standard_env do
+    {
+      "GAE_INSTANCE" => instance_name,
+      "GOOGLE_CLOUD_PROJECT" => project_id,
+      "GAE_SERVICE" => gae_service,
+      "GAE_VERSION" => gae_version,
+      "GAE_ENV" => "standard",
+      "GAE_RUNTIME" => gae_standard_runtime,
       "GAE_MEMORY_MB" => gae_memory_mb
     }
   end
@@ -111,10 +129,67 @@ describe Google::Cloud::Env do
     end
   end
 
-  it "returns correct values when running on app engine" do
-    env = ::Google::Cloud::Env.new env: gae_env, connection: gce_conn
+  it "returns correct values when running on cloud run" do
+    env = ::Google::Cloud::Env.new env: knative_env, connection: gce_conn
 
+    env.knative?.must_equal true
+    env.app_engine?.must_equal false
+    env.app_engine_flexible?.must_equal false
+    env.app_engine_standard?.must_equal false
+    env.kubernetes_engine?.must_equal false
+    env.cloud_shell?.must_equal false
+    env.compute_engine?.must_equal true
+    env.raw_compute_engine?.must_equal false
+
+    env.project_id.must_equal project_id
+    env.numeric_project_id.must_equal numeric_project_id
+    env.instance_name.must_equal instance_name
+    env.instance_description.must_equal instance_description
+    env.instance_machine_type.must_equal instance_machine_type
+    env.instance_tags.must_equal instance_tags
+
+    env.app_engine_service_id.must_be_nil
+    env.app_engine_service_version.must_be_nil
+    env.app_engine_memory_mb.must_be_nil
+
+    env.kubernetes_engine_cluster_name.must_be_nil
+    env.kubernetes_engine_namespace_id.must_be_nil
+  end
+
+  it "returns correct values when running on app engine flex" do
+    env = ::Google::Cloud::Env.new env: gae_flex_env, connection: gce_conn
+
+    env.knative?.must_equal false
     env.app_engine?.must_equal true
+    env.app_engine_flexible?.must_equal true
+    env.app_engine_standard?.must_equal false
+    env.kubernetes_engine?.must_equal false
+    env.cloud_shell?.must_equal false
+    env.compute_engine?.must_equal true
+    env.raw_compute_engine?.must_equal false
+
+    env.project_id.must_equal project_id
+    env.numeric_project_id.must_equal numeric_project_id
+    env.instance_name.must_equal instance_name
+    env.instance_description.must_equal instance_description
+    env.instance_machine_type.must_equal instance_machine_type
+    env.instance_tags.must_equal instance_tags
+
+    env.app_engine_service_id.must_equal gae_service
+    env.app_engine_service_version.must_equal gae_version
+    env.app_engine_memory_mb.must_equal gae_memory_mb
+
+    env.kubernetes_engine_cluster_name.must_be_nil
+    env.kubernetes_engine_namespace_id.must_be_nil
+  end
+
+  it "returns correct values when running on app engine standard" do
+    env = ::Google::Cloud::Env.new env: gae_standard_env, connection: gce_conn
+
+    env.knative?.must_equal false
+    env.app_engine?.must_equal true
+    env.app_engine_flexible?.must_equal false
+    env.app_engine_standard?.must_equal true
     env.kubernetes_engine?.must_equal false
     env.cloud_shell?.must_equal false
     env.compute_engine?.must_equal true
@@ -138,7 +213,10 @@ describe Google::Cloud::Env do
   it "returns correct values when running on kubernetes engine" do
     env = ::Google::Cloud::Env.new env: gke_env, connection: gke_conn
 
+    env.knative?.must_equal false
     env.app_engine?.must_equal false
+    env.app_engine_flexible?.must_equal false
+    env.app_engine_standard?.must_equal false
     env.kubernetes_engine?.must_equal true
     env.cloud_shell?.must_equal false
     env.compute_engine?.must_equal true
@@ -162,7 +240,10 @@ describe Google::Cloud::Env do
   it "returns correct values when running on cloud shell" do
     env = ::Google::Cloud::Env.new env: cloud_shell_env, connection: gce_conn
 
+    env.knative?.must_equal false
     env.app_engine?.must_equal false
+    env.app_engine_flexible?.must_equal false
+    env.app_engine_standard?.must_equal false
     env.kubernetes_engine?.must_equal false
     env.cloud_shell?.must_equal true
     env.compute_engine?.must_equal true
@@ -186,7 +267,10 @@ describe Google::Cloud::Env do
   it "returns correct values when running on compute engine" do
     env = ::Google::Cloud::Env.new env: gce_env, connection: gce_conn
 
+    env.knative?.must_equal false
     env.app_engine?.must_equal false
+    env.app_engine_flexible?.must_equal false
+    env.app_engine_standard?.must_equal false
     env.kubernetes_engine?.must_equal false
     env.cloud_shell?.must_equal false
     env.compute_engine?.must_equal true
@@ -210,7 +294,10 @@ describe Google::Cloud::Env do
   it "returns correct values when not running on gcp" do
     env = ::Google::Cloud::Env.new env: gce_env, connection: ext_conn
 
+    env.knative?.must_equal false
     env.app_engine?.must_equal false
+    env.app_engine_flexible?.must_equal false
+    env.app_engine_standard?.must_equal false
     env.kubernetes_engine?.must_equal false
     env.cloud_shell?.must_equal false
     env.compute_engine?.must_equal false
