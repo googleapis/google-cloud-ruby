@@ -1,0 +1,8 @@
+{
+  "name": "grafeas-client",
+  "language": "ruby",
+  "distribution_name": "grafeas-client",
+  "module_name": "Grafeas",
+  "module_name_credentials": "Grafeas::V1",
+  "env_var_prefix": "GRAFEAS"
+}
