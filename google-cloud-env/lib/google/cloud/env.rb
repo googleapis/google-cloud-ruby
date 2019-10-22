@@ -118,12 +118,42 @@ module Google
       end
 
       ##
+      # Determine whether the application is running on a Knative-based
+      # hosting platform, such as Cloud Run or Cloud Functions.
+      #
+      # @return [Boolean]
+      #
+      def knative?
+        env["K_SERVICE"] ? true : false
+      end
+
+      ##
       # Determine whether the application is running on Google App Engine.
       #
       # @return [Boolean]
       #
       def app_engine?
         env["GAE_INSTANCE"] ? true : false
+      end
+
+      ##
+      # Determine whether the application is running on Google App Engine
+      # Flexible Environment.
+      #
+      # @return [Boolean]
+      #
+      def app_engine_flexible?
+        app_engine? && env["GAE_ENV"] != "standard"
+      end
+
+      ##
+      # Determine whether the application is running on Google App Engine
+      # Standard Environment.
+      #
+      # @return [Boolean]
+      #
+      def app_engine_standard?
+        app_engine? && env["GAE_ENV"] == "standard"
       end
 
       ##
@@ -170,7 +200,7 @@ module Google
       # @return [Boolean]
       #
       def raw_compute_engine?
-        !app_engine? && !cloud_shell? && metadata? && !kubernetes_engine?
+        !knative? && !app_engine? && !cloud_shell? && metadata? && !kubernetes_engine?
       end
 
       ##
@@ -283,6 +313,27 @@ module Google
       end
 
       ##
+      # Returns the name of the running Knative service, or `nil` if the
+      # current code is not running on Knative.
+      #
+      # @return [String,nil]
+      #
+      def knative_service_id
+        env["K_SERVICE"]
+      end
+      alias knative_service_name knative_service_id
+
+      ##
+      # Returns the revision of the running Knative service, or `nil` if the
+      # current code is not running on Knative.
+      #
+      # @return [String,nil]
+      #
+      def knative_service_revision
+        env["K_REVISION"]
+      end
+
+      ##
       # Returns the name of the running App Engine service, or `nil` if the
       # current code is not running in App Engine.
       #
@@ -291,6 +342,7 @@ module Google
       def app_engine_service_id
         env["GAE_SERVICE"]
       end
+      alias app_engine_service_name app_engine_service_id
 
       ##
       # Returns the version of the running App Engine service, or `nil` if the
