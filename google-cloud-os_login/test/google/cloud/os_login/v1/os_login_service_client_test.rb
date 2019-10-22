@@ -72,7 +72,7 @@ describe Google::Cloud::OsLogin::V1::OsLoginServiceClient do
 
     it 'invokes delete_posix_account without error' do
       # Create request parameters
-      formatted_name = Google::Cloud::OsLogin::V1::OsLoginServiceClient.project_path("[USER]", "[PROJECT]")
+      formatted_name = Google::Cloud::OsLogin::V1::OsLoginServiceClient.posix_account_path("[USER]", "[PROJECT]")
 
       # Mock Grpc layer
       mock_method = proc do |request|
@@ -107,7 +107,7 @@ describe Google::Cloud::OsLogin::V1::OsLoginServiceClient do
 
     it 'invokes delete_posix_account with error' do
       # Create request parameters
-      formatted_name = Google::Cloud::OsLogin::V1::OsLoginServiceClient.project_path("[USER]", "[PROJECT]")
+      formatted_name = Google::Cloud::OsLogin::V1::OsLoginServiceClient.posix_account_path("[USER]", "[PROJECT]")
 
       # Mock Grpc layer
       mock_method = proc do |request|
@@ -141,7 +141,7 @@ describe Google::Cloud::OsLogin::V1::OsLoginServiceClient do
 
     it 'invokes delete_ssh_public_key without error' do
       # Create request parameters
-      formatted_name = Google::Cloud::OsLogin::V1::OsLoginServiceClient.fingerprint_path("[USER]", "[FINGERPRINT]")
+      formatted_name = Google::Cloud::OsLogin::V1::OsLoginServiceClient.ssh_public_key_path("[USER]", "[FINGERPRINT]")
 
       # Mock Grpc layer
       mock_method = proc do |request|
@@ -176,7 +176,7 @@ describe Google::Cloud::OsLogin::V1::OsLoginServiceClient do
 
     it 'invokes delete_ssh_public_key with error' do
       # Create request parameters
-      formatted_name = Google::Cloud::OsLogin::V1::OsLoginServiceClient.fingerprint_path("[USER]", "[FINGERPRINT]")
+      formatted_name = Google::Cloud::OsLogin::V1::OsLoginServiceClient.ssh_public_key_path("[USER]", "[FINGERPRINT]")
 
       # Mock Grpc layer
       mock_method = proc do |request|
@@ -284,26 +284,21 @@ describe Google::Cloud::OsLogin::V1::OsLoginServiceClient do
     custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::OsLogin::V1::OsLoginServiceClient#get_ssh_public_key."
 
     it 'invokes get_ssh_public_key without error' do
-      # Create request parameters
-      formatted_name = Google::Cloud::OsLogin::V1::OsLoginServiceClient.fingerprint_path("[USER]", "[FINGERPRINT]")
-
       # Create expected grpc response
       key = "key106079"
       expiration_time_usec = 2058878882
       fingerprint = "fingerprint-1375934236"
-      name_2 = "name2-1052831874"
+      name = "name3373707"
       expected_response = {
         key: key,
         expiration_time_usec: expiration_time_usec,
         fingerprint: fingerprint,
-        name: name_2
+        name: name
       }
       expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Oslogin::Common::SshPublicKey)
 
       # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::Oslogin::V1::GetSshPublicKeyRequest, request)
-        assert_equal(formatted_name, request.name)
+      mock_method = proc do
         OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub_v1.new(:get_ssh_public_key, mock_method)
@@ -316,13 +311,13 @@ describe Google::Cloud::OsLogin::V1::OsLoginServiceClient do
           client = Google::Cloud::OsLogin.new(version: :v1)
 
           # Call method
-          response = client.get_ssh_public_key(formatted_name)
+          response = client.get_ssh_public_key
 
           # Verify the response
           assert_equal(expected_response, response)
 
           # Call method with block
-          client.get_ssh_public_key(formatted_name) do |response, operation|
+          client.get_ssh_public_key do |response, operation|
             # Verify the response
             assert_equal(expected_response, response)
             refute_nil(operation)
@@ -332,13 +327,8 @@ describe Google::Cloud::OsLogin::V1::OsLoginServiceClient do
     end
 
     it 'invokes get_ssh_public_key with error' do
-      # Create request parameters
-      formatted_name = Google::Cloud::OsLogin::V1::OsLoginServiceClient.fingerprint_path("[USER]", "[FINGERPRINT]")
-
       # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::Oslogin::V1::GetSshPublicKeyRequest, request)
-        assert_equal(formatted_name, request.name)
+      mock_method = proc do
         raise custom_error
       end
       mock_stub = MockGrpcClientStub_v1.new(:get_ssh_public_key, mock_method)
@@ -352,7 +342,7 @@ describe Google::Cloud::OsLogin::V1::OsLoginServiceClient do
 
           # Call method
           err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
-            client.get_ssh_public_key(formatted_name)
+            client.get_ssh_public_key
           end
 
           # Verify the GaxError wrapped the custom error that was raised.
@@ -368,7 +358,6 @@ describe Google::Cloud::OsLogin::V1::OsLoginServiceClient do
     it 'invokes import_ssh_public_key without error' do
       # Create request parameters
       formatted_parent = Google::Cloud::OsLogin::V1::OsLoginServiceClient.user_path("[USER]")
-      ssh_public_key = {}
 
       # Create expected grpc response
       expected_response = {}
@@ -378,7 +367,6 @@ describe Google::Cloud::OsLogin::V1::OsLoginServiceClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Cloud::Oslogin::V1::ImportSshPublicKeyRequest, request)
         assert_equal(formatted_parent, request.parent)
-        assert_equal(Google::Gax::to_proto(ssh_public_key, Google::Cloud::Oslogin::Common::SshPublicKey), request.ssh_public_key)
         OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub_v1.new(:import_ssh_public_key, mock_method)
@@ -391,13 +379,13 @@ describe Google::Cloud::OsLogin::V1::OsLoginServiceClient do
           client = Google::Cloud::OsLogin.new(version: :v1)
 
           # Call method
-          response = client.import_ssh_public_key(formatted_parent, ssh_public_key)
+          response = client.import_ssh_public_key(formatted_parent)
 
           # Verify the response
           assert_equal(expected_response, response)
 
           # Call method with block
-          client.import_ssh_public_key(formatted_parent, ssh_public_key) do |response, operation|
+          client.import_ssh_public_key(formatted_parent) do |response, operation|
             # Verify the response
             assert_equal(expected_response, response)
             refute_nil(operation)
@@ -409,13 +397,11 @@ describe Google::Cloud::OsLogin::V1::OsLoginServiceClient do
     it 'invokes import_ssh_public_key with error' do
       # Create request parameters
       formatted_parent = Google::Cloud::OsLogin::V1::OsLoginServiceClient.user_path("[USER]")
-      ssh_public_key = {}
 
       # Mock Grpc layer
       mock_method = proc do |request|
         assert_instance_of(Google::Cloud::Oslogin::V1::ImportSshPublicKeyRequest, request)
         assert_equal(formatted_parent, request.parent)
-        assert_equal(Google::Gax::to_proto(ssh_public_key, Google::Cloud::Oslogin::Common::SshPublicKey), request.ssh_public_key)
         raise custom_error
       end
       mock_stub = MockGrpcClientStub_v1.new(:import_ssh_public_key, mock_method)
@@ -429,7 +415,7 @@ describe Google::Cloud::OsLogin::V1::OsLoginServiceClient do
 
           # Call method
           err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
-            client.import_ssh_public_key(formatted_parent, ssh_public_key)
+            client.import_ssh_public_key(formatted_parent)
           end
 
           # Verify the GaxError wrapped the custom error that was raised.
@@ -444,7 +430,7 @@ describe Google::Cloud::OsLogin::V1::OsLoginServiceClient do
 
     it 'invokes update_ssh_public_key without error' do
       # Create request parameters
-      formatted_name = Google::Cloud::OsLogin::V1::OsLoginServiceClient.fingerprint_path("[USER]", "[FINGERPRINT]")
+      formatted_name = Google::Cloud::OsLogin::V1::OsLoginServiceClient.ssh_public_key_path("[USER]", "[FINGERPRINT]")
       ssh_public_key = {}
 
       # Create expected grpc response
@@ -494,7 +480,7 @@ describe Google::Cloud::OsLogin::V1::OsLoginServiceClient do
 
     it 'invokes update_ssh_public_key with error' do
       # Create request parameters
-      formatted_name = Google::Cloud::OsLogin::V1::OsLoginServiceClient.fingerprint_path("[USER]", "[FINGERPRINT]")
+      formatted_name = Google::Cloud::OsLogin::V1::OsLoginServiceClient.ssh_public_key_path("[USER]", "[FINGERPRINT]")
       ssh_public_key = {}
 
       # Mock Grpc layer
