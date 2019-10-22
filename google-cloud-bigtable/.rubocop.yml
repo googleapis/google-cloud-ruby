@@ -3,52 +3,37 @@ inherit_gem:
 
 AllCops:
   Exclude:
-    - "google-cloud-bigtable.gemspec"
-    - "lib/google-cloud-bigtable.rb"
-    - "lib/google/bigtable/**/*"
+    - "acceptance/**/*"
+    - "conformance/**/*"
+    - "lib/**/*_pb.rb"
     - "lib/google/cloud/bigtable/admin.rb"
     - "lib/google/cloud/bigtable/admin/**/*"
     - "lib/google/cloud/bigtable/v2.rb"
     - "lib/google/cloud/bigtable/v2/**/*"
-    - "Rakefile"
-    - "test/**/*"
-    - "acceptance/**/*"
-    - "conformance/**/*"
     - "samples/**/*"
     - "support/**/*"
+    - "test/**/*"
 
 Documentation:
-  Enabled: true
+  Exclude:
+    - "lib/google-cloud-bigtable.rb"
 
-Layout/AlignHash:
-  Enabled: false
 Metrics/ClassLength:
-  Enabled: false
-Metrics/LineLength:
-  Max: 80
-  IgnoredPatterns: ['(\A|\s)#']
-Metrics/MethodLength:
-  Max: 30
+  Exclude:
+    - "lib/google/cloud/bigtable/chunk_processor.rb"
+    - "lib/google/cloud/bigtable/column_family_map.rb"
+    - "lib/google/cloud/bigtable/instance.rb"
+    - "lib/google/cloud/bigtable/project.rb"
+    - "lib/google/cloud/bigtable/service.rb"
+    - "lib/google/cloud/bigtable/table.rb"
+Metrics/BlockLength:
+  Exclude:
+    - "Rakefile"
+    - "lib/google-cloud-bigtable.rb"
 Naming/FileName:
   Exclude:
     - "lib/google-cloud-bigtable.rb"
-Style/MethodCallWithArgsParentheses:
-  Enabled: false
-Style/NumericLiterals:
-  Enabled: false
-Style/NumericPredicate:
-  Enabled: false
 Style/PreferredHashMethods:
   Exclude:
-    # Rubocop is not smart enough to know the object being used
-    # is a Google::Protobuf::Map and not a Hash.
-    # Google::Protobuf::Map does not use key?, but uses has_key?
+    # Google::Protobuf::Map does not have key?, but uses has_key?
     - "lib/google/cloud/bigtable/column_family_map.rb"
-Style/RedundantFreeze:
-  Enabled: false
-Style/SafeNavigation:
-  Enabled: false
-Style/UnpackFirst:
-  Enabled: false
-Style/WordArray:
-  Enabled: false

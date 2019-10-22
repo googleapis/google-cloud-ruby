@@ -37,7 +37,7 @@ module Google
 
           Google::Protobuf::Duration.new(
             seconds: number.to_i,
-            nanos: (number.remainder(1) * 1000000000).round
+            nanos:   (number.remainder(1) * 1_000_000_000).round
           )
         end
 
@@ -51,7 +51,7 @@ module Google
           return unless duration
           return duration.seconds if duration.nanos.zero?
 
-          duration.seconds + (duration.nanos / 1000000000.0)
+          duration.seconds + (duration.nanos / 1_000_000_000.0)
         end
 
         ##
@@ -63,7 +63,7 @@ module Google
         def timestamp_to_time timestamp
           return unless timestamp
 
-          Time.at(timestamp.seconds, timestamp.nanos / 1000.0)
+          Time.at timestamp.seconds, timestamp.nanos / 1000.0
         end
 
         ##
@@ -75,7 +75,7 @@ module Google
         def time_to_timestamp time
           return unless time
 
-          Google::Protobuf::Timestamp.new(seconds: time.to_i, nanos: time.nsec)
+          Google::Protobuf::Timestamp.new seconds: time.to_i, nanos: time.nsec
         end
       end
     end

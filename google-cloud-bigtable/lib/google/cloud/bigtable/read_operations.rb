@@ -58,14 +58,11 @@ module Google
         #   end
         #
         def sample_row_keys
-          return enum_for(:sample_row_keys) unless block_given?
+          return enum_for :sample_row_keys unless block_given?
 
-          response = client.sample_row_keys(
-            path,
-            app_profile_id: @app_profile_id
-          )
+          response = client.sample_row_keys path, app_profile_id: @app_profile_id
           response.each do |grpc|
-            yield SampleRowKey.from_grpc(grpc)
+            yield SampleRowKey.from_grpc grpc
           end
         end
 
@@ -151,39 +148,20 @@ module Google
         #     puts row
         #   end
         #
-        def read_rows \
-            keys: nil,
-            ranges: nil,
-            filter: nil,
-            limit: nil,
-            &block
-          unless block_given?
-            return enum_for(
-              :read_rows,
-              keys: keys,
-              ranges: ranges,
-              filter: filter,
-              limit: limit
-            )
-          end
-          row_set = build_row_set(keys, ranges)
+        def read_rows keys: nil, ranges: nil, filter: nil, limit: nil, &block
+          return enum_for :read_rows, keys: keys, ranges: ranges, filter: filter, limit: limit unless block_given?
+
+          row_set = build_row_set keys, ranges
           rows_limit = limit
           rows_filter = filter.to_grpc if filter
-          rows_reader = RowsReader.new(self)
+          rows_reader = RowsReader.new self
 
           begin
-            rows_reader.read(
-              rows: row_set,
-              filter: rows_filter,
-              rows_limit: rows_limit,
-              &block
-            )
+            rows_reader.read rows: row_set, filter: rows_filter, rows_limit: rows_limit, &block
           rescue *RowsReader::RETRYABLE_ERRORS => e
             rows_reader.retry_count += 1
-            unless rows_reader.retryable?
-              raise Google::Cloud::Error.from_error(e)
-            end
-            rows_limit, row_set = rows_reader.retry_options(limit, row_set)
+            raise Google::Cloud::Error.from_error(e) unless rows_reader.retryable?
+            rows_limit, row_set = rows_reader.retry_options limit, row_set
             retry
           end
         end
@@ -278,7 +256,7 @@ module Google
         #   range = table.new_column_range("test-family").from("key-1", inclusive: false).to("key-5")
         #
         def new_column_range family
-          Google::Cloud::Bigtable::ColumnRange.new(family)
+          Google::Cloud::Bigtable::ColumnRange.new family
         end
 
         ##
@@ -342,11 +320,11 @@ module Google
           row_set[:row_keys] = row_keys if row_keys
 
           if row_ranges
-            row_ranges = [row_ranges] unless row_ranges.instance_of?(Array)
+            row_ranges = [row_ranges] unless row_ranges.instance_of? Array
             row_set[:row_ranges] = row_ranges.map(&:to_grpc)
           end
 
-          Google::Bigtable::V2::RowSet.new(row_set)
+          Google::Bigtable::V2::RowSet.new row_set
         end
       end
     end

@@ -67,8 +67,8 @@ module Google
         #   )
         #
         def self.append family, qualifier, value
-          rule = new(family, qualifier)
-          rule.append(value)
+          rule = new family, qualifier
+          rule.append value
           rule
         end
 
@@ -92,8 +92,8 @@ module Google
         #   )
         #
         def self.increment family, qualifier, amount
-          rule = new(family, qualifier)
-          rule.increment(amount)
+          rule = new family, qualifier
+          rule.increment amount
           rule
         end
 

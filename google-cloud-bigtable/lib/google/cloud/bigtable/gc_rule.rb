@@ -113,7 +113,7 @@ module Google
         #   millisecond, and will be truncated to microsecond granularity.
         #
         def max_age= age
-          @grpc.max_age = Convert.number_to_duration(age)
+          @grpc.max_age = Convert.number_to_duration age
         end
 
         ##
@@ -136,7 +136,7 @@ module Google
         #   puts table.column_families["cf1"].gc_rule.max_age
         #
         def max_age
-          @grpc.max_age.seconds if @grpc.max_age
+          @grpc.max_age&.seconds
         end
 
         ##
@@ -146,10 +146,7 @@ module Google
         #   List of GcRule with nested rules.
         #
         def intersection= rules
-          @grpc.intersection = \
-            Google::Bigtable::Admin::V2::GcRule::Intersection.new(
-              rules: rules.map(&:to_grpc)
-            )
+          @grpc.intersection = Google::Bigtable::Admin::V2::GcRule::Intersection.new rules: rules.map(&:to_grpc)
         end
 
         ##
@@ -189,9 +186,7 @@ module Google
         #   List of GcRule with nested rules.
         #
         def union= rules
-          @grpc.union = Google::Bigtable::Admin::V2::GcRule::Union.new(
-            rules: rules.map(&:to_grpc)
-          )
+          @grpc.union = Google::Bigtable::Admin::V2::GcRule::Union.new rules: rules.map(&:to_grpc)
         end
 
         ##
@@ -331,7 +326,7 @@ module Google
         # @param grpc [Google::Bigtable::Admin::V2::GcRule]
         # @return [Google::Cloud::Bigtable::GcRule]
         def self.from_grpc grpc
-          new(grpc)
+          new grpc
         end
       end
     end

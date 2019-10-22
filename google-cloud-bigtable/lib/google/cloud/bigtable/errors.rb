@@ -24,7 +24,7 @@ module Google
         attr_reader :data
 
         def initialize message, data = nil
-          super(message)
+          super message
           @data = data if data
         end
       end

@@ -49,12 +49,11 @@ task :acceptance, :project, :keyfile do |_t, args|
   keyfile = args[:keyfile]
   keyfile ||= ENV["BIGTABLE_TEST_KEYFILE"] || ENV["GCLOUD_TEST_KEYFILE"]
 
-  unless keyfile
-    keyfile ||= ENV["BIGTABLE_TEST_KEYFILE_JSON"] || ENV["GCLOUD_TEST_KEYFILE_JSON"]
-  end
+  keyfile ||= ENV["BIGTABLE_TEST_KEYFILE_JSON"] || ENV["GCLOUD_TEST_KEYFILE_JSON"] unless keyfile
 
   if project.nil? || keyfile.nil?
-    raise "You must provide a project and keyfile. e.g. rake acceptance[test123, /path/to/keyfile.json] or BIGTABLE_TEST_PROJECT=test123 BIGTABLE_TEST_KEYFILE=/path/to/keyfile.json rake acceptance"
+    raise "You must provide a project and keyfile. e.g. rake acceptance[test123, /path/to/keyfile.json] or " \
+          "BIGTABLE_TEST_PROJECT=test123 BIGTABLE_TEST_KEYFILE=/path/to/keyfile.json rake acceptance"
   end
 
   # clear any env var already set
@@ -94,7 +93,7 @@ namespace :acceptance do
       add_filter "acceptance/"
     end
 
-    Rake::Task[:acceptance].invoke(args[:project], args[:keyfile])
+    Rake::Task[:acceptance].invoke args[:project], args[:keyfile]
   end
 
   desc "Run acceptance cleanup."
@@ -105,12 +104,11 @@ namespace :acceptance do
     keyfile = args[:keyfile]
     keyfile ||= ENV["BIGTABLE_TEST_KEYFILE"] || ENV["GCLOUD_TEST_KEYFILE"]
 
-    unless keyfile
-      keyfile ||= ENV["BIGTABLE_TEST_KEYFILE_JSON"] || ENV["GCLOUD_TEST_KEYFILE_JSON"]
-    end
+    keyfile ||= ENV["BIGTABLE_TEST_KEYFILE_JSON"] || ENV["GCLOUD_TEST_KEYFILE_JSON"] unless keyfile
 
     if project.nil? || keyfile.nil?
-      raise "You must provide a project and keyfile. e.g. rake acceptance[test123, /path/to/keyfile.json] or BIGTABLE_TEST_PROJECT=test123 BIGTABLE_TEST_KEYFILE=/path/to/keyfile.json rake acceptance"
+      raise "You must provide a project and keyfile. e.g. rake acceptance[test123, /path/to/keyfile.json] or " \
+            "BIGTABLE_TEST_PROJECT=test123 BIGTABLE_TEST_KEYFILE=/path/to/keyfile.json rake acceptance"
     end
 
     # clear any env var already set
@@ -165,7 +163,9 @@ task :console do
   $LOAD_PATH.unshift "lib"
 
   require "google-cloud-bigtable"
-  def gcloud; @gcloud ||= Google::Cloud.new; end
+  def gcloud
+    @gcloud ||= Google::Cloud.new
+  end
 
   ARGV.clear
   IRB.start
@@ -198,7 +198,7 @@ namespace :ci do
   end
 end
 
-task :default => :test
+task default: :test
 
 def header str, token = "#"
   line_length = str.length + 8

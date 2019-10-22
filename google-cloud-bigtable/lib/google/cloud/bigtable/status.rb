@@ -24,14 +24,11 @@ module Google
       #
       # @attr [Integer] code The status code, which should be an enum value of
       #   [google.rpc.Code](https://github.com/googleapis/googleapis/blob/master/google/rpc/code.proto).
-      # @attr [String] description The human-readable description for the status
-      #   code, which should be an enum value of
-      #   [google.rpc.Code](https://github.com/googleapis/googleapis/blob/master/google/rpc/code.proto).
-      #   For example, `INVALID_ARGUMENT`.
-      # @attr [String] message A developer-facing error message, which should be
-      #   in English.
-      # @attr [Array<String>] details A list of messages that carry the error
-      #   details.
+      # @attr [String] description The human-readable description for the status code, which should be an enum value of
+      #   [google.rpc.Code](https://github.com/googleapis/googleapis/blob/master/google/rpc/code.proto). For example,
+      #   `INVALID_ARGUMENT`.
+      # @attr [String] message A developer-facing error message, which should be in English.
+      # @attr [Array<String>] details A list of messages that carry the error details.
       #
       # @example
       #   require "google/cloud/bigtable"
@@ -69,13 +66,9 @@ module Google
 
         # @private Get a descriptive symbol for a google.rpc.Code integer
         def self.description_for code
-          descriptions = %w[
-            OK CANCELLED UNKNOWN INVALID_ARGUMENT DEADLINE_EXCEEDED NOT_FOUND
-            ALREADY_EXISTS PERMISSION_DENIED RESOURCE_EXHAUSTED
-            FAILED_PRECONDITION ABORTED OUT_OF_RANGE UNIMPLEMENTED INTERNAL
-            UNAVAILABLE DATA_LOSS UNAUTHENTICATED
-          ]
-          descriptions[code]
+          ["OK", "CANCELLED", "UNKNOWN", "INVALID_ARGUMENT", "DEADLINE_EXCEEDED", "NOT_FOUND", "ALREADY_EXISTS",
+           "PERMISSION_DENIED", "RESOURCE_EXHAUSTED", "FAILED_PRECONDITION", "ABORTED", "OUT_OF_RANGE", "UNIMPLEMENTED",
+           "INTERNAL", "UNAVAILABLE", "DATA_LOSS", "UNAUTHENTICATED"][code]
         end
       end
     end

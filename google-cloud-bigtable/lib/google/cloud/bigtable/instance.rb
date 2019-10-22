@@ -276,11 +276,9 @@ module Google
         #
         def save
           ensure_service!
-          update_mask = Google::Protobuf::FieldMask.new(
-            paths: %w[labels display_name type]
-          )
-          grpc = service.partial_update_instance(@grpc, update_mask)
-          Instance::Job.from_grpc(grpc, service)
+          update_mask = Google::Protobuf::FieldMask.new paths: ["labels", "display_name", "type"]
+          grpc = service.partial_update_instance @grpc, update_mask
+          Instance::Job.from_grpc grpc, service
         end
         alias update save
 
@@ -290,7 +288,7 @@ module Google
         # @return [Google::Cloud::Bigtable::Instance]
         #
         def reload!
-          @grpc = service.get_instance(instance_id)
+          @grpc = service.get_instance instance_id
           self
         end
 
@@ -309,7 +307,7 @@ module Google
         #
         def delete
           ensure_service!
-          service.delete_instance(instance_id)
+          service.delete_instance instance_id
           true
         end
 
@@ -338,8 +336,8 @@ module Google
         #
         def clusters token: nil
           ensure_service!
-          grpc = service.list_clusters(instance_id, token: token)
-          Cluster::List.from_grpc(grpc, service, instance_id: instance_id)
+          grpc = service.list_clusters instance_id, token: token
+          Cluster::List.from_grpc grpc, service, instance_id: instance_id
         end
 
         ##
@@ -363,8 +361,8 @@ module Google
         #
         def cluster cluster_id
           ensure_service!
-          grpc = service.get_cluster(instance_id, cluster_id)
-          Cluster.from_grpc(grpc, service)
+          grpc = service.get_cluster instance_id, cluster_id
+          Cluster.from_grpc grpc, service
         rescue Google::Cloud::NotFoundError
           nil
         end
@@ -417,14 +415,14 @@ module Google
         def create_cluster cluster_id, location, nodes: nil, storage_type: nil
           ensure_service!
           attrs = {
-            serve_nodes: nodes,
+            serve_nodes:          nodes,
             default_storage_type: storage_type,
-            location: location
+            location:             location
           }.delete_if { |_, v| v.nil? }
 
-          cluster = Google::Bigtable::Admin::V2::Cluster.new(attrs)
-          grpc = service.create_cluster(instance_id, cluster_id, cluster)
-          Cluster::Job.from_grpc(grpc, service)
+          cluster = Google::Bigtable::Admin::V2::Cluster.new attrs
+          grpc = service.create_cluster instance_id, cluster_id, cluster
+          Cluster::Job.from_grpc grpc, service
         end
 
         ##
@@ -450,8 +448,8 @@ module Google
         #
         def tables
           ensure_service!
-          grpc = service.list_tables(instance_id)
-          Table::List.from_grpc(grpc, service)
+          grpc = service.list_tables instance_id
+          Table::List.from_grpc grpc, service
         end
 
         ##
@@ -513,13 +511,10 @@ module Google
           ensure_service!
 
           table = if perform_lookup
-                    grpc = service.get_table(instance_id, table_id, view: view)
-                    Table.from_grpc(grpc, service, view: view)
+                    grpc = service.get_table instance_id, table_id, view: view
+                    Table.from_grpc grpc, service, view: view
                   else
-                    Table.from_path(
-                      service.table_path(instance_id, table_id),
-                      service
-                    )
+                    Table.from_path service.table_path(instance_id, table_id), service
                   end
 
           table.app_profile_id = app_profile_id
@@ -601,20 +596,15 @@ module Google
         #
         #   puts table
         #
-        def create_table \
-            name,
-            column_families: nil,
-            granularity: nil,
-            initial_splits: nil,
-            &block
+        def create_table name, column_families: nil, granularity: nil, initial_splits: nil, &block
           ensure_service!
           Table.create(
             service,
             instance_id,
             name,
             column_families: column_families,
-            granularity: granularity,
-            initial_splits: initial_splits,
+            granularity:     granularity,
+            initial_splits:  initial_splits,
             &block
           )
         end
@@ -706,17 +696,10 @@ module Google
         #   )
         #   puts app_profile.name
         #
-        def create_app_profile \
-            name,
-            routing_policy,
-            description: nil,
-            etag: nil,
-            ignore_warnings: false
+        def create_app_profile name, routing_policy, description: nil, etag: nil, ignore_warnings: false
           ensure_service!
           routing_policy_grpc = routing_policy.to_grpc
-          if routing_policy_grpc.is_a?(
-            Google::Bigtable::Admin::V2::AppProfile::MultiClusterRoutingUseAny
-          )
+          if routing_policy_grpc.is_a? Google::Bigtable::Admin::V2::AppProfile::MultiClusterRoutingUseAny
             multi_cluster_routing = routing_policy_grpc
           else
             single_cluster_routing = routing_policy_grpc
@@ -724,9 +707,9 @@ module Google
 
           app_profile_attrs = {
             multi_cluster_routing_use_any: multi_cluster_routing,
-            single_cluster_routing: single_cluster_routing,
-            description: description,
-            etag: etag
+            single_cluster_routing:        single_cluster_routing,
+            description:                   description,
+            etag:                          etag
           }.delete_if { |_, v| v.nil? }
 
           grpc = service.create_app_profile(
@@ -735,7 +718,7 @@ module Google
             Google::Bigtable::Admin::V2::AppProfile.new(app_profile_attrs),
             ignore_warnings: ignore_warnings
           )
-          AppProfile.from_grpc(grpc, service)
+          AppProfile.from_grpc grpc, service
         end
 
         ##
@@ -762,8 +745,8 @@ module Google
         #
         def app_profile app_profile_id
           ensure_service!
-          grpc = service.get_app_profile(instance_id, app_profile_id)
-          AppProfile.from_grpc(grpc, service)
+          grpc = service.get_app_profile instance_id, app_profile_id
+          AppProfile.from_grpc grpc, service
         rescue Google::Cloud::NotFoundError
           nil
         end
@@ -790,8 +773,8 @@ module Google
         #
         def app_profiles
           ensure_service!
-          grpc = service.list_app_profiles(instance_id)
-          AppProfile::List.from_grpc(grpc, service)
+          grpc = service.list_app_profiles instance_id
+          AppProfile::List.from_grpc grpc, service
         end
 
         ##
@@ -829,8 +812,8 @@ module Google
         #
         def policy
           ensure_service!
-          grpc = service.get_instance_policy(instance_id)
-          policy = Policy.from_grpc(grpc)
+          grpc = service.get_instance_policy instance_id
+          policy = Policy.from_grpc grpc
           return policy unless block_given?
           yield policy
           update_policy policy
@@ -865,8 +848,8 @@ module Google
         #
         def update_policy new_policy
           ensure_service!
-          grpc = service.set_instance_policy(instance_id, new_policy.to_grpc)
-          Policy.from_grpc(grpc)
+          grpc = service.set_instance_policy instance_id, new_policy.to_grpc
+          Policy.from_grpc grpc
         end
         alias policy= update_policy
 
@@ -926,7 +909,7 @@ module Google
         # @return [Google::Cloud::Bigtable::Instance]
         #
         def self.from_grpc grpc, service
-          new(grpc, service)
+          new grpc, service
         end
 
         protected

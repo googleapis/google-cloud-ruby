@@ -271,7 +271,7 @@ module Google
         #   condition.on_match(label).otherwise(strip_value)
         #
         def self.condition predicate
-          ConditionFilter.new(predicate)
+          ConditionFilter.new predicate
         end
 
         ##
@@ -359,7 +359,7 @@ module Google
         #   filter = Google::Cloud::Bigtable::RowFilter.key("user-.*")
         #
         def self.key regex
-          SimpleFilter.new.key(regex)
+          SimpleFilter.new.key regex
         end
 
         ##
@@ -377,7 +377,7 @@ module Google
         #   filter = Google::Cloud::Bigtable::RowFilter.sample(0.5)
         #
         def self.sample probability
-          SimpleFilter.new.sample(probability)
+          SimpleFilter.new.sample probability
         end
 
         ##
@@ -401,7 +401,7 @@ module Google
         #   filter = Google::Cloud::Bigtable::RowFilter.family("cf-.*")
         #
         def self.family regex
-          SimpleFilter.new.family(regex)
+          SimpleFilter.new.family regex
         end
 
         ##
@@ -425,7 +425,7 @@ module Google
         #   filter = Google::Cloud::Bigtable::RowFilter.qualifier("user-name.*")
         #
         def self.qualifier regex
-          SimpleFilter.new.qualifier(regex)
+          SimpleFilter.new.qualifier regex
         end
 
         ##
@@ -448,7 +448,7 @@ module Google
         #   filter = Google::Cloud::Bigtable::RowFilter.value("abc.*")
         #
         def self.value regex
-          SimpleFilter.new.value(regex)
+          SimpleFilter.new.value regex
         end
 
         ##
@@ -476,7 +476,7 @@ module Google
         #   filter = Google::Cloud::Bigtable::RowFilter.label("user-detail")
         #
         def self.label value
-          SimpleFilter.new.label(value)
+          SimpleFilter.new.label value
         end
 
         ##
@@ -494,7 +494,7 @@ module Google
         #   filter = Google::Cloud::Bigtable::RowFilter.cells_per_row_offset(3)
         #
         def self.cells_per_row_offset offset
-          SimpleFilter.new.cells_per_row_offset(offset)
+          SimpleFilter.new.cells_per_row_offset offset
         end
 
         ##
@@ -512,7 +512,7 @@ module Google
         #   filter = Google::Cloud::Bigtable::RowFilter.cells_per_row(5)
         #
         def self.cells_per_row limit
-          SimpleFilter.new.cells_per_row(limit)
+          SimpleFilter.new.cells_per_row limit
         end
 
         ##
@@ -530,7 +530,7 @@ module Google
         #   filter = Google::Cloud::Bigtable::RowFilter.cells_per_column(5)
         #
         def self.cells_per_column limit
-          SimpleFilter.new.cells_per_column(limit)
+          SimpleFilter.new.cells_per_column limit
         end
 
         ##
@@ -558,7 +558,7 @@ module Google
         #   filter = Google::Cloud::Bigtable::RowFilter.timestamp_range(to: to)
         #
         def self.timestamp_range from: nil, to: nil
-          SimpleFilter.new.timestamp_range(from, to)
+          SimpleFilter.new.timestamp_range from, to
         end
 
         ##
@@ -596,7 +596,7 @@ module Google
         #   filter = Google::Cloud::Bigtable::RowFilter.value_range(range)
         #
         def self.value_range range
-          SimpleFilter.new.value_range(range)
+          SimpleFilter.new.value_range range
         end
 
         ##
@@ -615,7 +615,7 @@ module Google
         #   filter = Google::Cloud::Bigtable::RowFilter.column_range(range)
         #
         def self.column_range range
-          SimpleFilter.new.column_range(range)
+          SimpleFilter.new.column_range range
         end
       end
     end

@@ -161,7 +161,7 @@ module Google
         # @private
         def to_grpc
           Google::Bigtable::Admin::V2::AppProfile::SingleClusterRouting.new(
-            cluster_id: cluster_id,
+            cluster_id:                 cluster_id,
             allow_transactional_writes: allow_transactional_writes
           )
         end

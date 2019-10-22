@@ -31,8 +31,8 @@ module Google
         # Retryable status codes
         RETRYABLE_CODES = {
           Google::Rpc::Code::DEADLINE_EXCEEDED => true,
-          Google::Rpc::Code::ABORTED => true,
-          Google::Rpc::Code::UNAVAILABLE => true
+          Google::Rpc::Code::ABORTED           => true,
+          Google::Rpc::Code::UNAVAILABLE       => true
         }.freeze
 
         # @private
@@ -57,20 +57,18 @@ module Google
         #
         def apply_mutations
           @req_entries = @entries.map(&:to_grpc)
-          statuses = mutate_rows(@req_entries)
+          statuses = mutate_rows @req_entries
 
           # Collects retryable mutations indices.
-          indices = statuses.each_with_object([]) do |e, r|
-            if @entries[e.index].retryable? && RETRYABLE_CODES[e.status.code]
-              r << e.index
-            end
+          indices = statuses.each_with_object [] do |e, r|
+            r << e.index if @entries[e.index].retryable? && RETRYABLE_CODES[e.status.code]
           end
 
           return statuses if indices.empty?
 
           (RETRY_LIMIT - 1).times do
             break if indices.empty?
-            indices = retry_entries(statuses, indices)
+            indices = retry_entries statuses, indices
           end
 
           statuses
@@ -85,13 +83,9 @@ module Google
         # @return [Array<Google::Bigtable::V2::MutateRowsResponse::Entry>]
         #
         def mutate_rows entries
-          response = @table.client.mutate_rows(
-            @table.path,
-            entries,
-            app_profile_id: @table.app_profile_id
-          )
-          response.each_with_object([]) do |res, statuses|
-            statuses.concat(res.entries)
+          response = @table.client.mutate_rows @table.path, entries, app_profile_id: @table.app_profile_id
+          response.each_with_object [] do |res, statuses|
+            statuses.concat res.entries
           end
         rescue Google::Gax::GaxError => e
           raise Google::Cloud::Error.from_error(e.cause)
@@ -110,9 +104,9 @@ module Google
         #
         def retry_entries statuses, indices
           entries = indices.map { |i| @req_entries[i] }
-          retry_statuses = mutate_rows(entries)
+          retry_statuses = mutate_rows entries
 
-          retry_statuses.each_with_object([]) do |e, next_indices|
+          retry_statuses.each_with_object [] do |e, next_indices|
             next_indices << indices[e.index] if RETRYABLE_CODES[e.status.code]
             statuses[indices[e.index]].status = e.status
           end

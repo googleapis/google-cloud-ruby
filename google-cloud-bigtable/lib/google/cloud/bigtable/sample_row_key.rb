@@ -77,7 +77,7 @@ module Google
         # @return [Google::Cloud::Bigtable::SampleRowKey]
         #
         def self.from_grpc grpc
-          new(grpc.row_key, grpc.offset_bytes)
+          new grpc.row_key, grpc.offset_bytes
         end
       end
     end

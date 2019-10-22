@@ -146,11 +146,11 @@ module Google
           bindings = roles.keys.map do |role_name|
             next if roles[role_name].empty?
             Google::Iam::V1::Binding.new(
-              role: role_name,
+              role:    role_name,
               members: roles[role_name]
             )
           end
-          Google::Iam::V1::Policy.new(etag: etag, bindings: bindings)
+          Google::Iam::V1::Policy.new etag: etag, bindings: bindings
         end
 
         # @private
@@ -159,7 +159,7 @@ module Google
           roles = grpc.bindings.each_with_object({}) do |binding, memo|
             memo[binding.role] = binding.members.to_a
           end
-          new(grpc.etag, roles)
+          new grpc.etag, roles
         end
       end
     end

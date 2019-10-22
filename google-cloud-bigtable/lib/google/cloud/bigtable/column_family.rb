@@ -62,8 +62,7 @@ module Google
 
         # @private
         #
-        # Create a new ColumnFamily instance from a
-        # Google::Bigtable::Admin::V2::ColumnFamily.
+        # Create a new ColumnFamily instance from a {Google::Bigtable::Admin::V2::ColumnFamily}.
         #
         # @param grpc [Google::Bigtable::Admin::V2::ColumnFamily]
         # @param name [String] Column family name
@@ -71,7 +70,7 @@ module Google
         #
         def self.from_grpc grpc, name
           new(name).tap do |cf|
-            cf.gc_rule = GcRule.from_grpc(grpc.gc_rule) if grpc.gc_rule
+            cf.gc_rule = GcRule.from_grpc grpc.gc_rule if grpc.gc_rule
           end
         end
       end

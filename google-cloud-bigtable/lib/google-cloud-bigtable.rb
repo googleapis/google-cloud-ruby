@@ -40,7 +40,8 @@ module Google
     #   updater_proc is supplied.
     # @param timeout [Integer]
     #   The default timeout, in seconds, for calls made through this client.
-    # @param credentials [Google::Auth::Credentials, String, Hash, GRPC::Core::Channel, GRPC::Core::ChannelCredentials, Proc]
+    # @param credentials [Google::Auth::Credentials, String, Hash, GRPC::Core::Channel,
+    #   GRPC::Core::ChannelCredentials, Proc]
     #   Provides the means for authenticating requests made by the client. This parameter can
     #   be one of the following types.
     #   `Google::Auth::Credentials` uses the properties of its represented keyfile for
@@ -70,10 +71,10 @@ module Google
     #
     def bigtable scope: nil, timeout: nil, credentials: nil, client_config: nil
       Google::Cloud.bigtable(
-        project_id: @project,
-        credentials: (credentials || @keyfile),
-        scope: scope,
-        timeout: (timeout || @timeout),
+        project_id:    @project,
+        credentials:   (credentials || @keyfile),
+        scope:         scope,
+        timeout:       (timeout || @timeout),
         client_config: client_config
       )
     end
@@ -86,7 +87,8 @@ module Google
     #   Project identifier for the Bigtable service you
     #   are connecting to. If not present, the default project for the
     #   credentials is used.
-    # @param credentials [Google::Auth::Credentials, String, Hash, GRPC::Core::Channel, GRPC::Core::ChannelCredentials, Proc]
+    # @param credentials [Google::Auth::Credentials, String, Hash, GRPC::Core::Channel,
+    #   GRPC::Core::ChannelCredentials, Proc]
     #   The means for authenticating requests made by the client. This parameter can
     #   be one of the following types.
     #   `Google::Auth::Credentials` uses the properties of its represented keyfile for
@@ -121,18 +123,13 @@ module Google
     #
     #   bigtable = Google::Cloud.bigtable
     #
-    def self.bigtable \
-        project_id: nil,
-        credentials: nil,
-        scope: nil,
-        timeout: nil,
-        client_config: nil
+    def self.bigtable project_id: nil, credentials: nil, scope: nil, timeout: nil, client_config: nil
       require "google/cloud/bigtable"
       Google::Cloud::Bigtable.new(
-        project_id: project_id,
-        credentials: credentials,
-        scope: scope,
-        timeout: timeout,
+        project_id:    project_id,
+        credentials:   credentials,
+        scope:         scope,
+        timeout:       timeout,
         client_config: client_config
       )
     end
@@ -157,7 +154,7 @@ Google::Cloud.configure.add_config! :bigtable do |config|
   config.add_field! :project_id, default_project, match: String, allow_nil: true
   config.add_alias! :project, :project_id
   config.add_field! :credentials, default_creds,
-                    match: [
+                    match:     [
                       String,
                       Hash,
                       Google::Auth::Credentials,

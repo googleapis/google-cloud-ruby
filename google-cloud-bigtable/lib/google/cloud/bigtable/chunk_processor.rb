@@ -54,12 +54,8 @@ module Google
         def process chunk
           self.chunk = chunk
 
-          if chunk.commit_row
-            raise_if(
-              chunk.value_size > 0,
-              "Commit rows cannot have a non-zero value_size."
-            )
-          end
+
+          raise_if chunk.value_size.positive?, "Commit rows cannot have a non-zero value_size." if chunk.commit_row
 
           if state == NEW_ROW
             process_new_row
@@ -83,7 +79,7 @@ module Google
               chunk.family_name ||
               chunk.qualifier ||
               !chunk.value.empty? ||
-              chunk.timestamp_micros > 0)
+              chunk.timestamp_micros.positive?)
 
           raise_if value, "A reset should have no data"
         end
@@ -97,15 +93,12 @@ module Google
         #   or if family name or column qualifier are empty
         #
         def validate_new_row
-          raise_if(row.key, "A new row cannot have existing state")
-          raise_if(chunk.row_key.empty?, "A row key must be set")
-          raise_if(chunk.reset_row, "A new row cannot be reset")
-          raise_if(
-            last_key == chunk.row_key,
-            "A commit happened but the same key followed"
-          )
-          raise_if(chunk.family_name.nil?, "A family must be set")
-          raise_if(chunk.qualifier.nil?, "A column qualifier must be set")
+          raise_if row.key, "A new row cannot have existing state"
+          raise_if chunk.row_key.empty?, "A row key must be set"
+          raise_if chunk.reset_row, "A new row cannot be reset"
+          raise_if last_key == chunk.row_key, "A commit happened but the same key followed"
+          raise_if chunk.family_name.nil?, "A family must be set"
+          raise_if chunk.qualifier.nil?, "A column qualifier must be set"
         end
 
         ##
@@ -115,15 +108,9 @@ module Google
         #   If row and chunk row key are not same or chunk row key is empty.
         #
         def validate_row_in_progress
-          raise_if(
-            !chunk.row_key.empty? && chunk.row_key != row.key,
-            "A commit is required between row keys"
-          )
+          raise_if !chunk.row_key.empty? && chunk.row_key != row.key, "A commit is required between row keys"
 
-          raise_if(
-            chunk.family_name && chunk.qualifier.nil?,
-            "A qualifier must be specified"
-          )
+          raise_if chunk.family_name && chunk.qualifier.nil?, "A qualifier must be specified"
 
           validate_reset_row
         end
@@ -206,13 +193,7 @@ module Google
 
         # Build cell and append to row.
         def persist_cell
-          cell = Row::Cell.new(
-            cur_family,
-            cur_qaul,
-            cur_ts,
-            cur_val,
-            cur_labels
-          )
+          cell = Row::Cell.new cur_family, cur_qaul, cur_ts, cur_val, cur_labels
           row.cells[cur_family] << cell
 
           # Clear cached cell values
@@ -241,10 +222,7 @@ module Google
         def validate_last_row_complete
           return if row.key.nil?
 
-          raise_if(
-            !chunk.commit_row,
-            "Response ended with pending row without commit"
-          )
+          raise_if !chunk.commit_row, "Response ended with pending row without commit"
         end
 
         private

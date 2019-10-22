@@ -89,7 +89,7 @@ module Google
           #   instance = job.instance
           #
           def instance
-            Instance.from_grpc(results, service) if results
+            Instance.from_grpc results, service if results
           end
         end
       end
