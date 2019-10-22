@@ -356,8 +356,7 @@ module Google
             begin
               raise OrderingKeyError, batch.ordering_key
             rescue OrderingKeyError => e
-              # Set the error to OrderingKeyError
-              e = e
+              # The existing e variable is not set to OrderingKeyError
               # Get all unsent messages for the callback
               items = batch.cancel!
             end
