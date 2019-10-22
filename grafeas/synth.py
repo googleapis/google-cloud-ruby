@@ -49,7 +49,7 @@ s.replace(
 )
 
 # Update gemspec to reflect Ruby 2.4
-ruby.update_gemspec('grafeas-client.gemspec')
+ruby.update_gemspec('grafeas.gemspec')
 
 # Update README to reflect Ruby 2.4
 s.replace(
@@ -183,13 +183,6 @@ s.replace(
     ],
     'https://googlecloudplatform\\.github\\.io/google-cloud-ruby',
     'https://googleapis.github.io/google-cloud-ruby'
-)
-
-# https://github.com/googleapis/gapic-generator/issues/2393
-s.replace(
-    'grafeas.gemspec',
-    'gem.add_development_dependency "rubocop".*$',
-    'gem.add_development_dependency "google-style", "~> 1.24.0"'
 )
 
 s.replace(

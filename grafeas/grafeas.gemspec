@@ -19,7 +19,7 @@ Gem::Specification.new do |gem|
                       ["README.md", "AUTHENTICATION.md", "LICENSE", ".yardopts"]
   gem.require_paths = ["lib"]
 
-  gem.required_ruby_version = ">= 2.0.0"
+  gem.required_ruby_version = ">= 2.4"
 
   gem.add_dependency "google-gax", "~> 1.8"
   gem.add_dependency "grpc-google-iam-v1", "~> 0.6.9"
