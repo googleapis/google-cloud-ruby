@@ -17,7 +17,12 @@ module Google
   module Cloud
     module PubSub
       ##
-      # # PublishResult
+      # The result of a publish operation. The message object is available on
+      # {#message} and will have {#message_id} assigned by the API.
+      #
+      # When the publish operation was successful the result will be marked
+      # {#succeeded?}. Otherwise, the result will be marked {#failed?} and the
+      # error raised will be availabe on {#error}.
       #
       class PublishResult
         ##

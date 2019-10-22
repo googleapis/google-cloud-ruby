@@ -161,7 +161,7 @@ msgs = topic.publish do |batch|
 end
 ```
 
-## Receiving messages
+## Receiving Messages
 
 Messages can be streamed from a subscription with a subscriber object that is
 created using `listen`. (See {Google::Cloud::PubSub::Subscription#listen
@@ -314,6 +314,88 @@ pubsub = Google::Cloud::PubSub.new
 sub = pubsub.subscription "my-topic-sub"
 received_messages = sub.pull
 sub.modify_ack_deadline 120, received_messages
+```
+
+## Using Ordering Keys
+
+Google Cloud Pub/Sub ordering keys provide the ability to ensure related
+messages are sent to subscribers in the order in which they were published.
+Messages can be tagged with an ordering key, a string that identifies related
+messages for which publish order should be respected. The service guarantees
+that, for a given ordering key and publisher, messages are sent to subscribers
+in the order in which they were published. Ordering does not require sacrificing
+high throughput or scalability, as the service automatically distributes
+messages for different ordering keys across subscribers.
+
+Note: At the time of this release, ordering keys are not yet publicly enabled
+and requires special project enablements.
+
+### Publishing Ordered Messages
+
+To use ordering keys when publishing messages, a call to
+{Google::Cloud::PubSub::Topic#enable_message_ordering!
+Topic#enable_message_ordering!} must be made and the `ordering_key` argument
+must be provided when calling {Google::Cloud::PubSub::Topic#publish_async
+Topic#publish_async}.
+
+```ruby
+require "google/cloud/pubsub"
+
+pubsub = Google::Cloud::PubSub.new
+
+topic = pubsub.topic "my-ordered-topic"
+
+# Ensure that message ordering is enabled.
+topic.enable_message_ordering!
+
+# Publish an ordered message with an ordering key.
+topic.publish_async "task completed",
+                    ordering_key: "task-key"
+
+# Shut down the publisher when ready to stop publishing messages.
+topic.async_publisher.stop.wait!
+```
+
+### Handling errors with Ordered Keys
+
+Ordered messages that fail to publish to the Pub/Sub API due to error will put
+the `ordering_key` in a failed state, and future calls to
+{Google::Cloud::PubSub::Topic#publish_async Topic#publish_async} with the
+`ordering_key` will raise {Google::Cloud::PubSub::OrderingKeyError
+OrderingKeyError}. To allow future messages with the `ordering_key` to be
+published, the `ordering_key` must be passed to
+{Google::Cloud::PubSub::Topic#resume_publish Topic#resume_publish}.
+
+### Receiving Ordered Messages
+
+To use ordering keys when subscribing to messages, the subscription must be
+created with message ordering enabled (See
+{Google::Cloud::PubSub::Topic#subscribe Topic#subscribe} and
+{Google::Cloud::PubSub::Subscription#message_ordering?
+Subscription#message_ordering?}) before calling
+{Google::Cloud::PubSub::Subscription#listen Subscription#listen}. When enabled,
+the subscriber will deliver messages with the same `ordering_key` in the order
+they were published.
+
+```ruby
+require "google/cloud/pubsub"
+
+pubsub = Google::Cloud::PubSub.new
+
+sub = pubsub.subscription "my-ordered-topic-sub"
+sub.message_ordering? #=> true
+
+subscriber = sub.listen do |received_message|
+  # Messsages with the same ordering_key are received
+  # in the order in which they were published.
+  received_message.acknowledge!
+end
+
+# Start background threads that will call block passed to listen.
+subscriber.start
+
+# Shut down the subscriber when ready to stop receiving messages.
+subscriber.stop.wait!
 ```
 
 ## Minimizing API calls before receiving and acknowledging messages

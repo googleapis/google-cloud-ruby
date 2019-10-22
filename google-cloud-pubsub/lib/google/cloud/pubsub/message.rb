@@ -101,6 +101,48 @@ module Google
         alias publish_time published_at
 
         ##
+        # Identifies related messages for which publish order should be
+        # respected.
+        #
+        # Google Cloud Pub/Sub ordering keys provide the ability to ensure
+        # related messages are sent to subscribers in the order in which they
+        # were published. Messages can be tagged with an ordering key, a string
+        # that identifies related messages for which publish order should be
+        # respected. The service guarantees that, for a given ordering key and
+        # publisher, messages are sent to subscribers in the order in which they
+        # were published. Ordering does not require sacrificing high throughput
+        # or scalability, as the service automatically distributes messages for
+        # different ordering keys across subscribers.
+        #
+        # See {Topic#publish_async} and {Subscription#listen}.
+        #
+        # @return [String]
+        #
+        def ordering_key
+          @grpc.ordering_key
+        end
+
+        # @private
+        def hash
+          @grpc.hash
+        end
+
+        # @private
+        def eql? other
+          return false unless other.is_a? self.class
+          @grpc.hash == other.hash
+        end
+        # @private
+        alias == eql?
+
+        # @private
+        def <=> other
+          return nil unless other.is_a? self.class
+          other_grpc = other.instance_variable_get :@grpc
+          @grpc <=> other_grpc
+        end
+
+        ##
         # @private New Message from a Google::Cloud::PubSub::V1::PubsubMessage
         # object.
         def self.from_grpc grpc

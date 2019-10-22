@@ -19,13 +19,7 @@ describe Google::Cloud::PubSub::Topic, :publish_async, :mock_pubsub do
   let(:topic) { Google::Cloud::PubSub::Topic.from_grpc Google::Cloud::PubSub::V1::Topic.new(topic_hash(topic_name)), pubsub.service }
 
   it "publishes a message" do
-    messages = [
-      Google::Cloud::PubSub::V1::PubsubMessage.new(data: "async-message".encode(Encoding::ASCII_8BIT))
-    ]
-    publish_res = Google::Cloud::PubSub::V1::PublishResponse.new({ message_ids: ["msg1"] })
-    mock = Minitest::Mock.new
-    mock.expect :publish, publish_res, [topic_path(topic_name), messages, options: default_options]
-    topic.service.mocked_publisher = mock
+    topic.service.mocked_publisher = AsyncPublisherStub.new
 
     topic.async_publisher.must_be :nil?
 
@@ -33,10 +27,6 @@ describe Google::Cloud::PubSub::Topic, :publish_async, :mock_pubsub do
 
     topic.async_publisher.wont_be :nil?
 
-    topic.async_publisher.batch.messages.must_equal messages
-    topic.async_publisher.batch.callbacks.count.must_equal 1
-    topic.async_publisher.batch.callbacks.must_equal [nil]
-
     topic.async_publisher.must_be :started?
     topic.async_publisher.wont_be :stopped?
 
@@ -46,39 +36,34 @@ describe Google::Cloud::PubSub::Topic, :publish_async, :mock_pubsub do
     topic.async_publisher.wont_be :started?
     topic.async_publisher.must_be :stopped?
 
-    topic.async_publisher.batch.must_be :nil?
-
-    mock.verify
+    expected_messages_hash = {
+      "" => [
+        Google::Cloud::PubSub::V1::PubsubMessage.new(data: "async-message".encode(Encoding::ASCII_8BIT))
+      ]
+    }
+    published_messages_hash = topic.service.mocked_publisher.message_hash
+    assert_equal expected_messages_hash, published_messages_hash
   end
 
   it "publishes a message with a callback" do
     messages = [
-      Google::Cloud::PubSub::V1::PubsubMessage.new(data: "async-message".encode(Encoding::ASCII_8BIT))
+      Google::Cloud::PubSub::V1::PubsubMessage.new(data: "async-message".encode(Encoding::ASCII_8BIT), message_id: "msg0")
     ]
-    publish_res = Google::Cloud::PubSub::V1::PublishResponse.new({ message_ids: ["msg1"] })
-    mock = Minitest::Mock.new
-    mock.expect :publish, publish_res, [topic_path(topic_name), messages, options: default_options]
-    topic.service.mocked_publisher = mock
+    callback_called = false
+
+    topic.service.mocked_publisher = AsyncPublisherStub.new
 
     topic.async_publisher.must_be :nil?
-
-    callback_called = false
 
     topic.publish_async "async-message" do |result|
       assert_kind_of Google::Cloud::PubSub::PublishResult, result
       assert result.succeeded?
-      assert_equal "msg1", result.msg_id
+      assert_equal "msg0", result.msg_id
       callback_called = true
     end
 
     topic.async_publisher.wont_be :nil?
 
-    topic.async_publisher.batch.messages.must_equal messages
-    topic.async_publisher.batch.callbacks.count.must_equal 1
-    topic.async_publisher.batch.callbacks.each do |block|
-      block.must_be_kind_of Proc
-    end
-
     topic.async_publisher.must_be :started?
     topic.async_publisher.wont_be :stopped?
 
@@ -88,41 +73,29 @@ describe Google::Cloud::PubSub::Topic, :publish_async, :mock_pubsub do
     topic.async_publisher.wont_be :started?
     topic.async_publisher.must_be :stopped?
 
-    topic.async_publisher.batch.must_be :nil?
+    published_messages_hash = topic.service.mocked_publisher.message_hash
+    expected_messages_hash = { "" => messages }
+    assert_equal expected_messages_hash, published_messages_hash
     callback_called.must_equal true
-
-    mock.verify
   end
 
   it "publishes a message with multibyte characters" do
-    messages = [
-      Google::Cloud::PubSub::V1::PubsubMessage.new(data: "\xE3\x81\x82".force_encoding(Encoding::ASCII_8BIT))
-    ]
-    publish_res = Google::Cloud::PubSub::V1::PublishResponse.new({ message_ids: ["msg1"] })
-    mock = Minitest::Mock.new
-    mock.expect :publish, publish_res, [topic_path(topic_name), messages, options: default_options]
-    topic.service.mocked_publisher = mock
+    callback_called = false
+
+    topic.service.mocked_publisher = AsyncPublisherStub.new
 
     topic.async_publisher.must_be :nil?
-
-    callback_called = false
 
     topic.publish_async "あ" do |result|
       assert_kind_of Google::Cloud::PubSub::PublishResult, result
       assert result.succeeded?
-      assert_equal "msg1", result.msg_id
+      assert_equal "msg0", result.msg_id
       assert_equal "\xE3\x81\x82".force_encoding(Encoding::ASCII_8BIT), result.data
       callback_called = true
     end
 
     topic.async_publisher.wont_be :nil?
 
-    topic.async_publisher.batch.messages.must_equal messages
-    topic.async_publisher.batch.callbacks.count.must_equal 1
-    topic.async_publisher.batch.callbacks.each do |block|
-      block.must_be_kind_of Proc
-    end
-
     topic.async_publisher.must_be :started?
     topic.async_publisher.wont_be :stopped?
 
@@ -132,24 +105,22 @@ describe Google::Cloud::PubSub::Topic, :publish_async, :mock_pubsub do
     topic.async_publisher.wont_be :started?
     topic.async_publisher.must_be :stopped?
 
-    topic.async_publisher.batch.must_be :nil?
+    expected_messages_hash = {
+      "" => [
+        Google::Cloud::PubSub::V1::PubsubMessage.new(data: "\xE3\x81\x82".force_encoding(Encoding::ASCII_8BIT), message_id: "msg0")
+      ]
+    }
+    published_messages_hash = topic.service.mocked_publisher.message_hash
+    assert_equal expected_messages_hash, published_messages_hash
     callback_called.must_equal true
-
-    mock.verify
   end
 
   it "publishes a message using an IO-ish object" do
-    messages = [
-      Google::Cloud::PubSub::V1::PubsubMessage.new(data: "\xE3\x81\x82".force_encoding(Encoding::ASCII_8BIT))
-    ]
-    publish_res = Google::Cloud::PubSub::V1::PublishResponse.new({ message_ids: ["msg1"] })
-    mock = Minitest::Mock.new
-    mock.expect :publish, publish_res, [topic_path(topic_name), messages, options: default_options]
-    topic.service.mocked_publisher = mock
+    callback_called = false
+
+    topic.service.mocked_publisher = AsyncPublisherStub.new
 
     topic.async_publisher.must_be :nil?
-
-    callback_called = false
 
     Tempfile.open ["message", "txt"] do |tmpfile|
       tmpfile.binmode
@@ -159,7 +130,7 @@ describe Google::Cloud::PubSub::Topic, :publish_async, :mock_pubsub do
       topic.publish_async tmpfile do |result|
         assert_kind_of Google::Cloud::PubSub::PublishResult, result
         assert result.succeeded?
-        assert_equal "msg1", result.msg_id
+        assert_equal "msg0", result.msg_id
         assert_equal "\xE3\x81\x82".force_encoding(Encoding::ASCII_8BIT), result.data
         callback_called = true
       end
@@ -167,12 +138,6 @@ describe Google::Cloud::PubSub::Topic, :publish_async, :mock_pubsub do
 
     topic.async_publisher.wont_be :nil?
 
-    topic.async_publisher.batch.messages.must_equal messages
-    topic.async_publisher.batch.callbacks.count.must_equal 1
-    topic.async_publisher.batch.callbacks.each do |block|
-      block.must_be_kind_of Proc
-    end
-
     topic.async_publisher.must_be :started?
     topic.async_publisher.wont_be :stopped?
 
@@ -182,29 +147,27 @@ describe Google::Cloud::PubSub::Topic, :publish_async, :mock_pubsub do
     topic.async_publisher.wont_be :started?
     topic.async_publisher.must_be :stopped?
 
-    topic.async_publisher.batch.must_be :nil?
+    expected_messages_hash = {
+      "" => [
+        Google::Cloud::PubSub::V1::PubsubMessage.new(data: "\xE3\x81\x82".force_encoding(Encoding::ASCII_8BIT), message_id: "msg0")
+      ]
+    }
+    published_messages_hash = topic.service.mocked_publisher.message_hash
+    assert_equal expected_messages_hash, published_messages_hash
     callback_called.must_equal true
-
-    mock.verify
   end
 
   it "publishes a message with attributes" do
-    messages = [
-      Google::Cloud::PubSub::V1::PubsubMessage.new(data: "async-message".encode(Encoding::ASCII_8BIT), attributes: {"format" => "text"})
-    ]
-    publish_res = Google::Cloud::PubSub::V1::PublishResponse.new({ message_ids: ["msg1"] })
-    mock = Minitest::Mock.new
-    mock.expect :publish, publish_res, [topic_path(topic_name), messages, options: default_options]
-    topic.service.mocked_publisher = mock
+    callback_called = false
+
+    topic.service.mocked_publisher = AsyncPublisherStub.new
 
     topic.async_publisher.must_be :nil?
-
-    callback_called = false
 
     topic.publish_async "async-message", format: :text do |result|
       assert_kind_of Google::Cloud::PubSub::PublishResult, result
       assert result.succeeded?
-      assert_equal "msg1", result.msg_id
+      assert_equal "msg0", result.msg_id
       assert_equal "async-message".force_encoding(Encoding::ASCII_8BIT), result.data
       assert_equal "text", result.attributes["format"]
       callback_called = true
@@ -212,12 +175,6 @@ describe Google::Cloud::PubSub::Topic, :publish_async, :mock_pubsub do
 
     topic.async_publisher.wont_be :nil?
 
-    topic.async_publisher.batch.messages.must_equal messages
-    topic.async_publisher.batch.callbacks.count.must_equal 1
-    topic.async_publisher.batch.callbacks.each do |block|
-      block.must_be_kind_of Proc
-    end
-
     topic.async_publisher.must_be :started?
     topic.async_publisher.wont_be :stopped?
 
@@ -227,10 +184,14 @@ describe Google::Cloud::PubSub::Topic, :publish_async, :mock_pubsub do
     topic.async_publisher.wont_be :started?
     topic.async_publisher.must_be :stopped?
 
-    topic.async_publisher.batch.must_be :nil?
+    expected_messages_hash = {
+      "" => [
+        Google::Cloud::PubSub::V1::PubsubMessage.new(data: "async-message".encode(Encoding::ASCII_8BIT), attributes: {"format" => "text"}, message_id: "msg0")
+      ]
+    }
+    published_messages_hash = topic.service.mocked_publisher.message_hash
+    assert_equal expected_messages_hash, published_messages_hash
     callback_called.must_equal true
-
-    mock.verify
   end
 
   describe "reference topic that exists" do
@@ -239,13 +200,7 @@ describe Google::Cloud::PubSub::Topic, :publish_async, :mock_pubsub do
                                                  autocreate: false }
 
     it "publishes a message" do
-      messages = [
-        Google::Cloud::PubSub::V1::PubsubMessage.new(data: "async-message".encode(Encoding::ASCII_8BIT))
-      ]
-      publish_res = Google::Cloud::PubSub::V1::PublishResponse.new({ message_ids: ["msg1"] })
-      mock = Minitest::Mock.new
-      mock.expect :publish, publish_res, [topic_path(topic_name), messages, options: default_options]
-      topic.service.mocked_publisher = mock
+      topic.service.mocked_publisher = AsyncPublisherStub.new
 
       topic.async_publisher.must_be :nil?
 
@@ -253,10 +208,6 @@ describe Google::Cloud::PubSub::Topic, :publish_async, :mock_pubsub do
 
       topic.async_publisher.wont_be :nil?
 
-      topic.async_publisher.batch.messages.must_equal messages
-      topic.async_publisher.batch.callbacks.count.must_equal 1
-      topic.async_publisher.batch.callbacks.must_equal [nil]
-
       topic.async_publisher.must_be :started?
       topic.async_publisher.wont_be :stopped?
 
@@ -266,28 +217,26 @@ describe Google::Cloud::PubSub::Topic, :publish_async, :mock_pubsub do
       topic.async_publisher.wont_be :started?
       topic.async_publisher.must_be :stopped?
 
-      topic.async_publisher.batch.must_be :nil?
-
-      mock.verify
+      expected_messages_hash = {
+        "" => [
+          Google::Cloud::PubSub::V1::PubsubMessage.new(data: "async-message".encode(Encoding::ASCII_8BIT))
+        ]
+      }
+      published_messages_hash = topic.service.mocked_publisher.message_hash
+      assert_equal expected_messages_hash, published_messages_hash
     end
 
     it "publishes a message with attributes" do
-      messages = [
-        Google::Cloud::PubSub::V1::PubsubMessage.new(data: "async-message".encode(Encoding::ASCII_8BIT), attributes: { "format" => "text" })
-      ]
-      publish_res = Google::Cloud::PubSub::V1::PublishResponse.new({ message_ids: ["msg1"] })
-      mock = Minitest::Mock.new
-      mock.expect :publish, publish_res, [topic_path(topic_name), messages, options: default_options]
-      topic.service.mocked_publisher = mock
+      callback_called = false
+
+      topic.service.mocked_publisher = AsyncPublisherStub.new
 
       topic.async_publisher.must_be :nil?
-
-      callback_called = false
 
       topic.publish_async "async-message", format: :text do |result|
         assert_kind_of Google::Cloud::PubSub::PublishResult, result
         assert result.succeeded?
-        assert_equal "msg1", result.msg_id
+        assert_equal "msg0", result.msg_id
         assert_equal "async-message".force_encoding(Encoding::ASCII_8BIT), result.data
         assert_equal "text", result.attributes["format"]
         callback_called = true
@@ -295,12 +244,6 @@ describe Google::Cloud::PubSub::Topic, :publish_async, :mock_pubsub do
 
       topic.async_publisher.wont_be :nil?
 
-      topic.async_publisher.batch.messages.must_equal messages
-      topic.async_publisher.batch.callbacks.count.must_equal 1
-      topic.async_publisher.batch.callbacks.each do |block|
-        block.must_be_kind_of Proc
-      end
-
       topic.async_publisher.must_be :started?
       topic.async_publisher.wont_be :stopped?
 
@@ -310,10 +253,14 @@ describe Google::Cloud::PubSub::Topic, :publish_async, :mock_pubsub do
       topic.async_publisher.wont_be :started?
       topic.async_publisher.must_be :stopped?
 
-      topic.async_publisher.batch.must_be :nil?
+      expected_messages_hash = {
+        "" => [
+          Google::Cloud::PubSub::V1::PubsubMessage.new(data: "async-message".encode(Encoding::ASCII_8BIT), attributes: { "format" => "text" }, message_id: "msg0")
+        ]
+      }
+      published_messages_hash = topic.service.mocked_publisher.message_hash
+      assert_equal expected_messages_hash, published_messages_hash
       callback_called.must_equal true
-
-      mock.verify
     end
   end
 
@@ -355,15 +302,6 @@ describe Google::Cloud::PubSub::Topic, :publish_async, :mock_pubsub do
       end
 
       topic.async_publisher.wont_be :nil?
-
-      topic.async_publisher.batch.messages.must_equal messages
-      topic.async_publisher.batch.callbacks.count.must_equal 1
-      topic.async_publisher.batch.callbacks.each do |block|
-        block.must_be_kind_of Proc
-      end
-
-      topic.async_publisher.must_be :started?
-      topic.async_publisher.wont_be :stopped?
 
       # force the queued messages to be published
       topic.async_publisher.stop.wait!

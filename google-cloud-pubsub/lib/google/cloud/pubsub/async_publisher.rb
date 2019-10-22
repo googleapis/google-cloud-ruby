@@ -15,8 +15,11 @@
 
 require "monitor"
 require "concurrent"
+require "google/cloud/pubsub/errors"
+require "google/cloud/pubsub/async_publisher/batch"
 require "google/cloud/pubsub/publish_result"
 require "google/cloud/pubsub/service"
+require "google/cloud/pubsub/convert"
 
 module Google
   module Cloud
@@ -79,6 +82,14 @@ module Google
           @publish_threads  = (threads[:publish] || 4).to_i
           @callback_threads = (threads[:callback] || 8).to_i
 
+          @published_at = nil
+          @publish_thread_pool = Concurrent::ThreadPoolExecutor.new max_threads: @publish_threads
+          @callback_thread_pool = Concurrent::ThreadPoolExecutor.new max_threads: @callback_threads
+          @thread = Thread.new { run_background }
+
+          @ordered = false
+          @batches = {}
+
           @cond = new_cond
 
           # init MonitorMixin
@@ -89,29 +100,49 @@ module Google
         # Add a message to the async publisher to be published to the topic.
         # Messages will be collected in batches and published together.
         # See {Google::Cloud::PubSub::Topic#publish_async}
-        def publish data = nil, attributes = {}, &block
-          msg = create_pubsub_message data, attributes
+        #
+        # @param [String, File] data The message payload. This will be converted
+        #   to bytes encoded as ASCII-8BIT.
+        # @param [Hash] attributes Optional attributes for the message.
+        # @param [String] ordering_key Identifies related messages for which
+        #   publish order should be respected.
+        # @yield [result] the callback for when the message has been published
+        # @yieldparam [PublishResult] result the result of the asynchronous
+        #   publish
+        # @raise [Google::Cloud::PubSub::AsyncPublisherStopped] when the
+        #   publisher is stopped. (See {#stop} and {#stopped?}.)
+        # @raise [Google::Cloud::PubSub::OrderedMessagesDisabled] when
+        #   publishing a message with an `ordering_key` but ordered messages are
+        #   not enabled. (See {#message_ordering?} and
+        #   {#enable_message_ordering!}.)
+        # @raise [Google::Cloud::PubSub::OrderingKeyError] when publishing a
+        #   message with an `ordering_key` that has already failed when
+        #   publishing. Use {#resume_publish} to allow this `ordering_key` to be
+        #   published again.
+        #
+        def publish data = nil, attributes = nil, ordering_key: nil,
+                    **extra_attrs, &callback
+          msg = Convert.pubsub_message data, attributes, ordering_key,
+                                       extra_attrs
 
           synchronize do
-            raise "Can't publish when stopped." if @stopped
-
-            if @batch.nil?
-              @batch ||= Batch.new self
-              @batch.add msg, block
-            else
-              unless @batch.try_add msg, block
-                publish_batch!
-                @batch = Batch.new self
-                @batch.add msg, block
-              end
+            raise AsyncPublisherStopped if @stopped
+            if !@ordered && !msg.ordering_key.empty? # default is empty string
+              raise OrderedMessagesDisabled
             end
 
-            init_resources!
-
-            publish_batch! if @batch.ready?
-
+            batch = resolve_batch_for_message msg
+            raise OrderingKeyError, batch.ordering_key if batch.canceled?
+            batch_action = batch.add msg, callback
+            if batch_action == :full
+              publish_batches!
+            elsif @published_at.nil?
+              # Set initial time to now to start the background counter
+              @published_at = Time.now
+            end
             @cond.signal
           end
+
           nil
         end
 
@@ -127,9 +158,9 @@ module Google
             break if @stopped
 
             @stopped = true
-            publish_batch!
+            publish_batches! stop: true
             @cond.signal
-            @publish_thread_pool.shutdown if @publish_thread_pool
+            @publish_thread_pool.shutdown
           end
 
           self
@@ -149,14 +180,10 @@ module Google
         # @return [AsyncPublisher] returns self so calls can be chained.
         def wait! timeout = nil
           synchronize do
-            if @publish_thread_pool
-              @publish_thread_pool.wait_for_termination timeout
-            end
+            @publish_thread_pool.wait_for_termination timeout
 
-            if @callback_thread_pool
-              @callback_thread_pool.shutdown
-              @callback_thread_pool.wait_for_termination timeout
-            end
+            @callback_thread_pool.shutdown
+            @callback_thread_pool.wait_for_termination timeout
           end
 
           self
@@ -185,7 +212,7 @@ module Google
         # @return [AsyncPublisher] returns self so calls can be chained.
         def flush
           synchronize do
-            publish_batch!
+            publish_batches!
             @cond.signal
           end
 
@@ -208,33 +235,63 @@ module Google
           synchronize { @stopped }
         end
 
-        protected
-
-        # rubocop:disable Naming/MemoizedInstanceVariableName
-
-        def init_resources!
-          @first_published_at   ||= Time.now
-          @publish_thread_pool  ||= Concurrent::ThreadPoolExecutor.new \
-            max_threads: @publish_threads
-          @callback_thread_pool ||= Concurrent::ThreadPoolExecutor.new \
-            max_threads: @callback_threads
-          @thread ||= Thread.new { run_background }
+        ##
+        # Enables message ordering for messages with ordering keys. When
+        # enabled, messages published with the same `ordering_key` will be
+        # delivered in the order they were published.
+        #
+        # See {#message_ordering?}. See {Topic#publish_async},
+        # {Subscription#listen}, and {Message#ordering_key}.
+        #
+        def enable_message_ordering!
+          synchronize { @ordered = true }
         end
 
-        # rubocop:enable Naming/MemoizedInstanceVariableName
+        ##
+        # Whether message ordering for messages with ordering keys has been
+        # enabled. When enabled, messages published with the same `ordering_key`
+        # will be delivered in the order they were published. When disabled,
+        # messages may be delivered in any order.
+        #
+        # See {#enable_message_ordering!}. See {Topic#publish_async},
+        # {Subscription#listen}, and {Message#ordering_key}.
+        #
+        # @return [Boolean]
+        #
+        def message_ordering?
+          synchronize { @ordered }
+        end
+
+        ##
+        # Resume publishing ordered messages for the provided ordering key.
+        #
+        # @param [String] ordering_key Identifies related messages for which
+        #   publish order should be respected.
+        #
+        # @return [boolean] `true` when resumed, `false` otherwise.
+        #
+        def resume_publish ordering_key
+          synchronize do
+            batch = resolve_batch_for_ordering_key ordering_key
+            return if batch.nil?
+            batch.resume!
+          end
+        end
+
+        protected
 
         def run_background
           synchronize do
             until @stopped
-              if @batch.nil?
+              if @published_at.nil?
                 @cond.wait
                 next
               end
 
-              time_since_first_publish = Time.now - @first_published_at
+              time_since_first_publish = Time.now - @published_at
               if time_since_first_publish > @interval
-                # interval met, publish the batch...
-                publish_batch!
+                # interval met, flush the batches...
+                publish_batches!
                 @cond.wait
               else
                 # still waiting for the interval to publish the batch...
@@ -245,40 +302,94 @@ module Google
           end
         end
 
-        def publish_batch!
-          return unless @batch
+        def resolve_batch_for_message msg
+          @batches[msg.ordering_key] ||= Batch.new self, msg.ordering_key
+        end
 
-          publish_batch_async @topic_name, @batch
-          @batch = nil
-          @first_published_at = nil
+        def resolve_batch_for_ordering_key ordering_key
+          @batches[ordering_key]
+        end
+
+        def publish_batches! stop: nil
+          @batches.reject! { |_ordering_key, batch| batch.empty? }
+          @batches.values.each do |batch|
+            ready = batch.publish! stop: stop
+            publish_batch_async @topic_name, batch if ready
+          end
+          # Set published_at to nil to wait indefinitely
+          @published_at = nil
         end
 
         def publish_batch_async topic_name, batch
+          # TODO: raise unless @publish_thread_pool.running?
           return unless @publish_thread_pool.running?
 
           Concurrent::Promises.future_on(
             @publish_thread_pool, topic_name, batch
-          ) do |t_name, btch|
-            publish_batch_sync t_name, btch
-          end
+          ) { |t, b| publish_batch_sync t, b }
         end
 
-        def publish_batch_sync topic_name, batch
-          grpc = @service.publish topic_name, batch.messages
-          batch.items.zip Array(grpc.message_ids) do |item, id|
-            next unless item.callback
+        # rubocop:disable Metrics/AbcSize
+        # rubocop:disable Metrics/MethodLength
 
-            item.msg.message_id = id
-            publish_result = PublishResult.from_grpc item.msg
-            execute_callback_async item.callback, publish_result
+        def publish_batch_sync topic_name, batch
+          # The only batch methods that are safe to call from the loop are
+          # rebalance! and reset! because they are the only methods that are
+          # synchronized.
+          loop do
+            items = batch.rebalance!
+
+            unless items.empty?
+              grpc = @service.publish topic_name, items.map(&:msg)
+              items.zip Array(grpc.message_ids) do |item, id|
+                next unless item.callback
+
+                item.msg.message_id = id
+                publish_result = PublishResult.from_grpc item.msg
+                execute_callback_async item.callback, publish_result
+              end
+            end
+
+            break unless batch.reset!
           end
         rescue StandardError => e
-          batch.items.each do |item|
+          items = batch.items
+
+          unless batch.ordering_key.empty?
+            retry if publish_batch_error_retryable? e
+            # Cancel the batch if the error is not to be retried.
+            begin
+              raise OrderingKeyError, batch.ordering_key
+            rescue OrderingKeyError => ordered_stopped
+              # Set the error to OrderingKeyError
+              e = ordered_stopped
+              # Get all unsent messages for the callback
+              items = batch.cancel!
+            end
+          end
+
+          items.each do |item|
             next unless item.callback
 
             publish_result = PublishResult.from_error item.msg, e
             execute_callback_async item.callback, publish_result
           end
+
+          # publish will retry indefinitely, as long as there are unsent items.
+          retry if batch.reset!
+        end
+
+        # rubocop:enable Metrics/AbcSize
+        # rubocop:enable Metrics/MethodLength
+
+        PUBLISH_RETRY_ERRORS = [
+          GRPC::Cancelled, GRPC::DeadlineExceeded, GRPC::Internal,
+          GRPC::ResourceExhausted, GRPC::Unauthenticated, GRPC::Unavailable,
+          GRPC::Core::CallError
+        ].freeze
+
+        def publish_batch_error_retryable? error
+          PUBLISH_RETRY_ERRORS.any? { |klass| error.is_a? klass }
         end
 
         def execute_callback_async callback, publish_result
@@ -289,79 +400,6 @@ module Google
           ) do |cback, p_result|
             cback.call p_result
           end
-        end
-
-        def create_pubsub_message data, attributes
-          attributes ||= {}
-          if data.is_a?(::Hash) && attributes.empty?
-            attributes = data
-            data = nil
-          end
-          # Convert IO-ish objects to strings
-          if data.respond_to?(:read) && data.respond_to?(:rewind)
-            data.rewind
-            data = data.read
-          end
-          # Convert data to encoded byte array to match the protobuf defn
-          data_bytes = \
-            String(data).dup.force_encoding(Encoding::ASCII_8BIT).freeze
-
-          # Convert attributes to strings to match the protobuf definition
-          attributes = Hash[attributes.map { |k, v| [String(k), String(v)] }]
-
-          Google::Cloud::PubSub::V1::PubsubMessage.new data:       data_bytes,
-                                                       attributes: attributes
-        end
-
-        ##
-        # @private
-        class Batch
-          attr_reader :messages, :callbacks
-
-          def initialize publisher
-            @publisher = publisher
-            @messages = []
-            @callbacks = []
-            @total_message_bytes = publisher.topic_name.bytesize + 2
-          end
-
-          def add msg, callback
-            @messages << msg
-            @callbacks << callback
-            @total_message_bytes += msg.to_proto.bytesize + 2
-          end
-
-          def try_add msg, callback
-            new_message_count = total_message_count + 1
-            new_message_bytes = total_message_bytes + msg.to_proto.bytesize + 2
-            if new_message_count > @publisher.max_messages ||
-               new_message_bytes >= @publisher.max_bytes
-              return false
-            end
-            add msg, callback
-            true
-          end
-
-          def ready?
-            total_message_count >= @publisher.max_messages ||
-              total_message_bytes >= @publisher.max_bytes
-          end
-
-          def total_message_count
-            @messages.count
-          end
-
-          def total_message_bytes
-            @total_message_bytes
-          end
-
-          def items
-            @messages.zip(@callbacks).map do |msg, callback|
-              Item.new msg, callback
-            end
-          end
-
-          Item = Struct.new :msg, :callback
         end
       end
     end

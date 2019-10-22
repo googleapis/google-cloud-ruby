@@ -100,6 +100,27 @@ class StreamingPullStub
   end
 end
 
+class AsyncPublisherStub
+  attr_reader :messages
+
+  def initialize
+    @messages = []
+  end
+
+  def publish topic_path, messages, options: nil
+    @messages << messages
+    message_ids = Array.new(messages.count) { |i| "msg#{i}" }
+    Google::Cloud::PubSub::V1::PublishResponse.new({ message_ids: message_ids })
+  end
+
+  def message_hash
+    message_hash = Hash.new { |hash, key| hash[key] = [] }
+    @messages.flatten.each_with_object(message_hash) do |msg, hash|
+      hash[msg.ordering_key] << msg
+    end
+  end
+end
+
 class MockPubsub < Minitest::Spec
   let(:project) { "test" }
   let(:default_options) { Google::Gax::CallOptions.new(kwargs: { "google-cloud-resource-prefix" => "projects/#{project}" }) }

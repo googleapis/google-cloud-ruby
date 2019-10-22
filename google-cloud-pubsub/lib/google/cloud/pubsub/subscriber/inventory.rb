@@ -101,26 +101,24 @@ module Google
           def background_run
             delay_target = nil
 
-            synchronize do
-              until @stopped
-                if @_ack_ids.empty?
-                  delay_target = nil
+            until stopped?
+              if empty?
+                delay_target = nil
 
-                  @wait_cond.wait # wait until broadcast
-                  next
-                end
-
-                delay_target ||= calc_target
-                delay_gap = delay_target - Time.now
-
-                unless delay_gap.positive?
-                  delay_target = calc_target
-                  stream.renew_lease!
-                  next
-                end
-
-                @wait_cond.wait delay_gap
+                synchronize { @wait_cond.wait } # wait until broadcast
+                next
               end
+
+              delay_target ||= calc_target
+              delay_gap = delay_target - Time.now
+
+              unless delay_gap.positive?
+                delay_target = calc_target
+                stream.renew_lease!
+                next
+              end
+
+              synchronize { @wait_cond.wait delay_gap }
             end
           end
 
