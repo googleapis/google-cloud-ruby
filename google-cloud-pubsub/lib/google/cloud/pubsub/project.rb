@@ -205,8 +205,7 @@ module Google
         #   pubsub = Google::Cloud::PubSub.new
         #   topic = pubsub.create_topic "my-topic"
         #
-        def create_topic topic_name, labels: nil, kms_key: nil,
-                         persistence_regions: nil, async: nil
+        def create_topic topic_name, labels: nil, kms_key: nil, persistence_regions: nil, async: nil
           ensure_service!
           grpc = service.create_topic topic_name,
                                       labels:              labels,
