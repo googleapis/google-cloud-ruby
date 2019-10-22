@@ -4,13 +4,14 @@
 
 require 'google/protobuf'
 
-require 'google/cloud/automl/v1beta1/classification_pb'
 require 'google/api/annotations_pb'
+require 'google/cloud/automl/v1beta1/classification_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.cloud.automl.v1beta1.TextClassificationDatasetMetadata" do
     optional :classification_type, :enum, 1, "google.cloud.automl.v1beta1.ClassificationType"
   end
   add_message "google.cloud.automl.v1beta1.TextClassificationModelMetadata" do
+    optional :classification_type, :enum, 3, "google.cloud.automl.v1beta1.ClassificationType"
   end
   add_message "google.cloud.automl.v1beta1.TextExtractionDatasetMetadata" do
   end

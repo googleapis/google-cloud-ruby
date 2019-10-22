@@ -24,6 +24,9 @@ module Google
         class TextClassificationDatasetMetadata; end
 
         # Model metadata that is specific to text classification.
+        # @!attribute [rw] classification_type
+        #   @return [Google::Cloud::AutoML::V1beta1::ClassificationType]
+        #     Output only. Classification type of the dataset used to train this model.
         class TextClassificationModelMetadata; end
 
         # Dataset metadata that is specific to text extraction
@@ -35,12 +38,11 @@ module Google
         # Dataset metadata for text sentiment.
         # @!attribute [rw] sentiment_max
         #   @return [Integer]
-        #     Required. A sentiment is expressed as an integer ordinal, where higher value
-        #     means a more positive sentiment. The range of sentiments that will be used
-        #     is between 0 and sentiment_max (inclusive on both ends), and all the values
-        #     in the range must be represented in the dataset before a model can be
-        #     created.
-        #     sentiment_max value must be between 1 and 10 (inclusive).
+        #     Required. A sentiment is expressed as an integer ordinal, where higher
+        #     value means a more positive sentiment. The range of sentiments that will be
+        #     used is between 0 and sentiment_max (inclusive on both ends), and all the
+        #     values in the range must be represented in the dataset before a model can
+        #     be created. sentiment_max value must be between 1 and 10 (inclusive).
         class TextSentimentDatasetMetadata; end
 
         # Model metadata that is specific to text sentiment.

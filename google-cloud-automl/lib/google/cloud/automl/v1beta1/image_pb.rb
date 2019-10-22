@@ -20,6 +20,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :train_cost, :int64, 3
     optional :stop_reason, :string, 5
     optional :model_type, :string, 7
+    optional :node_qps, :double, 13
+    optional :node_count, :int64, 14
   end
   add_message "google.cloud.automl.v1beta1.ImageObjectDetectionModelMetadata" do
     optional :model_type, :string, 1
