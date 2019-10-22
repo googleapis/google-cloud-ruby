@@ -205,7 +205,7 @@ module Google
         #   end
         #
         def query_plan
-          return nil unless @gapi.statistics.query&.query_plan
+          return nil unless @gapi&.statistics&.query&.query_plan
           Array(@gapi.statistics.query.query_plan).map { |stage| Stage.from_gapi stage }
         end
 
