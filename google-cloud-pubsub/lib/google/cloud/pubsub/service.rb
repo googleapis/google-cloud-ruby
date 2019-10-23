@@ -48,15 +48,14 @@ module Google
         def chan_args
           { "grpc.max_send_message_length"           => -1,
             "grpc.max_receive_message_length"        => -1,
-            "grpc.keepalive_time_ms"                 => 300000,
+            "grpc.keepalive_time_ms"                 => 300_000,
             "grpc.service_config_disable_resolution" => 1 }
         end
 
         def chan_creds
           return credentials if insecure?
           require "grpc"
-          GRPC::Core::ChannelCredentials.new.compose \
-            GRPC::Core::CallCredentials.new credentials.client.updater_proc
+          GRPC::Core::ChannelCredentials.new.compose GRPC::Core::CallCredentials.new credentials.client.updater_proc
         end
 
         def subscriber
@@ -126,8 +125,7 @@ module Google
 
         ##
         # Creates the given topic with the given name.
-        def create_topic topic_name, labels: nil, kms_key_name: nil,
-                         persistence_regions: nil, options: {}
+        def create_topic topic_name, labels: nil, kms_key_name: nil, persistence_regions: nil, options: {}
           if persistence_regions
             message_storage_policy = {
               allowed_persistence_regions: Array(persistence_regions)
@@ -147,8 +145,7 @@ module Google
         def update_topic topic_obj, *fields
           mask = Google::Protobuf::FieldMask.new paths: fields.map(&:to_s)
           execute do
-            publisher.update_topic \
-              topic_obj, mask, options: default_options
+            publisher.update_topic topic_obj, mask, options: default_options
           end
         end
 
@@ -258,8 +255,7 @@ module Google
         def update_subscription subscription_obj, *fields
           mask = Google::Protobuf::FieldMask.new paths: fields.map(&:to_s)
           execute do
-            subscriber.update_subscription \
-              subscription_obj, mask, options: default_options
+            subscriber.update_subscription subscription_obj, mask, options: default_options
           end
         end
 
@@ -365,8 +361,7 @@ module Google
         def update_snapshot snapshot_obj, *fields
           mask = Google::Protobuf::FieldMask.new paths: fields.map(&:to_s)
           execute do
-            subscriber.update_snapshot \
-              snapshot_obj, mask, options: default_options
+            subscriber.update_snapshot snapshot_obj, mask, options: default_options
           end
         end
 
@@ -389,9 +384,7 @@ module Google
               time = Convert.time_to_timestamp time_or_snapshot
               subscriber.seek subscription, time: time, options: default_options
             else
-              if time_or_snapshot.is_a? Snapshot
-                time_or_snapshot = time_or_snapshot.name
-              end
+              time_or_snapshot = time_or_snapshot.name if time_or_snapshot.is_a? Snapshot
               subscriber.seek subscription,
                               snapshot: snapshot_path(time_or_snapshot),
                               options:  default_options
@@ -467,9 +460,7 @@ module Google
         end
 
         def snapshot_path snapshot_name, options = {}
-          if snapshot_name.nil? || snapshot_name.to_s.include?("/")
-            return snapshot_name
-          end
+          return snapshot_name if snapshot_name.nil? || snapshot_name.to_s.include?("/")
           "#{project_path options}/snapshots/#{snapshot_name}"
         end
 

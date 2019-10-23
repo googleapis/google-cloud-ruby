@@ -205,8 +205,7 @@ module Google
         #   pubsub = Google::Cloud::PubSub.new
         #   topic = pubsub.create_topic "my-topic"
         #
-        def create_topic topic_name, labels: nil, kms_key: nil,
-                         persistence_regions: nil, async: nil
+        def create_topic topic_name, labels: nil, kms_key: nil, persistence_regions: nil, async: nil
           ensure_service!
           grpc = service.create_topic topic_name,
                                       labels:              labels,
@@ -291,9 +290,7 @@ module Google
         def subscription subscription_name, project: nil, skip_lookup: nil
           ensure_service!
           options = { project: project }
-          if skip_lookup
-            return Subscription.from_name subscription_name, service, options
-          end
+          return Subscription.from_name subscription_name, service, options if skip_lookup
           grpc = service.get_subscription subscription_name
           Subscription.from_grpc grpc, service
         rescue Google::Cloud::NotFoundError

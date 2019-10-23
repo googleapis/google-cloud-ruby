@@ -28,9 +28,7 @@ module Google
             # Force the object to be a Time object.
             time = time.to_time
 
-            Google::Protobuf::Timestamp.new \
-              seconds: time.to_i,
-              nanos:   time.nsec
+            Google::Protobuf::Timestamp.new seconds: time.to_i, nanos: time.nsec
           end
 
           def timestamp_to_time timestamp
@@ -42,9 +40,7 @@ module Google
           def number_to_duration number
             return nil if number.nil?
 
-            Google::Protobuf::Duration.new \
-              seconds: number.to_i,
-              nanos:   (number.remainder(1) * 1000000000).round
+            Google::Protobuf::Duration.new seconds: number.to_i, nanos: (number.remainder(1) * 1_000_000_000).round
           end
 
           def duration_to_number duration
@@ -52,7 +48,7 @@ module Google
 
             return duration.seconds if duration.nanos.zero?
 
-            duration.seconds + (duration.nanos / 1000000000.0)
+            duration.seconds + (duration.nanos / 1_000_000_000.0)
           end
 
           def pubsub_message data, attributes, ordering_key, extra_attrs
@@ -70,8 +66,7 @@ module Google
               data = data.read
             end
             # Convert data to encoded byte array to match the protobuf defn
-            data_bytes = \
-              String(data).dup.force_encoding(Encoding::ASCII_8BIT).freeze
+            data_bytes = String(data).dup.force_encoding(Encoding::ASCII_8BIT).freeze
 
             # Convert attributes to strings to match the protobuf definition
             attributes = Hash[attributes.map { |k, v| [String(k), String(v)] }]

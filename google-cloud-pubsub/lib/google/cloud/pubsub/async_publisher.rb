@@ -71,8 +71,7 @@ module Google
 
         ##
         # @private Create a new instance of the object.
-        def initialize topic_name, service, max_bytes: 10000000,
-                       max_messages: 1000, interval: 0.25, threads: {}
+        def initialize topic_name, service, max_bytes: 10_000_000, max_messages: 1000, interval: 0.25, threads: {}
           @topic_name = service.topic_path topic_name
           @service    = service
 
@@ -120,16 +119,12 @@ module Google
         #   publishing. Use {#resume_publish} to allow this `ordering_key` to be
         #   published again.
         #
-        def publish data = nil, attributes = nil, ordering_key: nil,
-                    **extra_attrs, &callback
-          msg = Convert.pubsub_message data, attributes, ordering_key,
-                                       extra_attrs
+        def publish data = nil, attributes = nil, ordering_key: nil, **extra_attrs, &callback
+          msg = Convert.pubsub_message data, attributes, ordering_key, extra_attrs
 
           synchronize do
             raise AsyncPublisherStopped if @stopped
-            if !@ordered && !msg.ordering_key.empty? # default is empty string
-              raise OrderedMessagesDisabled
-            end
+            raise OrderedMessagesDisabled if !@ordered && !msg.ordering_key.empty? # default is empty string
 
             batch = resolve_batch_for_message msg
             raise OrderingKeyError, batch.ordering_key if batch.canceled?
@@ -360,9 +355,8 @@ module Google
             # Cancel the batch if the error is not to be retried.
             begin
               raise OrderingKeyError, batch.ordering_key
-            rescue OrderingKeyError => ordered_stopped
-              # Set the error to OrderingKeyError
-              e = ordered_stopped
+            rescue OrderingKeyError => e
+              # The existing e variable is not set to OrderingKeyError
               # Get all unsent messages for the callback
               items = batch.cancel!
             end

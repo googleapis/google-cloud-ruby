@@ -58,20 +58,15 @@ module Google
 
             @inventory = Inventory.new self, @subscriber.stream_inventory
 
-            if subscriber.message_ordering
-              @sequencer = Sequencer.new(&method(:perform_callback_async))
-            end
+            @sequencer = Sequencer.new(&method(:perform_callback_async)) if subscriber.message_ordering
 
-            @callback_thread_pool = Concurrent::ThreadPoolExecutor.new \
-              max_threads: @subscriber.callback_threads
+            @callback_thread_pool = Concurrent::ThreadPoolExecutor.new max_threads: @subscriber.callback_threads
 
             @stream_keepalive_task = Concurrent::TimerTask.new(
               execution_interval: 30
             ) do
               # push empty request every 30 seconds to keep stream alive
-              unless inventory.empty?
-                push Google::Cloud::PubSub::V1::StreamingPullRequest.new
-              end
+              push Google::Cloud::PubSub::V1::StreamingPullRequest.new unless inventory.empty?
             end.execute
 
             super() # to init MonitorMixin
@@ -95,7 +90,7 @@ module Google
 
               # Close the stream by pushing the sentinel value.
               # The unary pusher does not use the stream, so it can close here.
-              @request_queue.push self unless @request_queue.nil?
+              @request_queue&.push self
 
               # Signal to the background thread that we are stopped.
               @stopped = true
@@ -315,15 +310,15 @@ module Google
 
           def perform_callback_sync rec_msg
             @subscriber.callback.call rec_msg unless stopped?
-          rescue StandardError => callback_error
-            @subscriber.error! callback_error
+          rescue StandardError => e
+            @subscriber.error! e
           ensure
             release rec_msg
             if @sequencer && running?
               begin
                 @sequencer.next rec_msg
-              rescue OrderedMessageDeliveryError => delivery_error
-                @subscriber.error! delivery_error
+              rescue OrderedMessageDeliveryError => e
+                @subscriber.error! e
               end
             end
           end
@@ -371,8 +366,7 @@ module Google
               req.subscription = @subscriber.subscription_name
               req.stream_ack_deadline_seconds = @subscriber.deadline
               req.modify_deadline_ack_ids += @inventory.ack_ids
-              req.modify_deadline_seconds += \
-                @inventory.ack_ids.map { @subscriber.deadline }
+              req.modify_deadline_seconds += @inventory.ack_ids.map { @subscriber.deadline }
             end
           end
 

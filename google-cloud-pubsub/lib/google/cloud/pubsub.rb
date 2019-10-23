@@ -77,9 +77,8 @@ module Google
       #   topic = pubsub.topic "my-topic"
       #   topic.publish "task completed"
       #
-      def self.new project_id: nil, credentials: nil, scope: nil, timeout: nil,
-                   client_config: nil, endpoint: nil, emulator_host: nil,
-                   project: nil, keyfile: nil
+      def self.new project_id: nil, credentials: nil, scope: nil, timeout: nil, client_config: nil, endpoint: nil,
+                   emulator_host: nil, project: nil, keyfile: nil
         project_id    ||= (project || default_project_id)
         scope         ||= configure.scope
         timeout       ||= configure.timeout
@@ -93,9 +92,7 @@ module Google
 
           return PubSub::Project.new(
             PubSub::Service.new(
-              project_id, :this_channel_is_insecure,
-              host: emulator_host, timeout: timeout,
-              client_config: client_config
+              project_id, :this_channel_is_insecure, host: emulator_host, timeout: timeout, client_config: client_config
             )
           )
         end
@@ -105,17 +102,13 @@ module Google
           credentials = PubSub::Credentials.new credentials, scope: scope
         end
 
-        if credentials.respond_to? :project_id
-          project_id ||= credentials.project_id
-        end
+        project_id ||= credentials.project_id if credentials.respond_to? :project_id
         project_id = project_id.to_s # Always cast to a string
         raise ArgumentError, "project_id is missing" if project_id.empty?
 
         PubSub::Project.new(
           PubSub::Service.new(
-            project_id, credentials, timeout:       timeout,
-                                     host:          endpoint,
-                                     client_config: client_config
+            project_id, credentials, timeout: timeout, host: endpoint, client_config: client_config
           )
         )
       end

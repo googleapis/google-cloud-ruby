@@ -64,9 +64,7 @@ module Google
     #
     def pubsub scope: nil, timeout: nil, client_config: nil
       timeout ||= @timeout
-      Google::Cloud.pubsub @project, @keyfile, scope:         scope,
-                                               timeout:       timeout,
-                                               client_config: client_config
+      Google::Cloud.pubsub @project, @keyfile, scope: scope, timeout: timeout, client_config: client_config
     end
 
     ##
@@ -108,10 +106,8 @@ module Google
     def self.pubsub project_id = nil, credentials = nil, scope: nil,
                     timeout: nil, client_config: nil
       require "google/cloud/pubsub"
-      Google::Cloud::PubSub.new project_id: project_id,
-                                credentials: credentials,
-                                scope: scope, timeout: timeout,
-                                client_config: client_config
+      Google::Cloud::PubSub.new project_id: project_id, credentials: credentials,
+                                scope: scope, timeout: timeout, client_config: client_config
     end
   end
 end
@@ -123,8 +119,7 @@ Google::Cloud.configure.add_config! :pubsub do |config|
   end
   default_creds = Google::Cloud::Config.deferred do
     Google::Cloud::Config.credentials_from_env(
-      "PUBSUB_CREDENTIALS", "PUBSUB_CREDENTIALS_JSON",
-      "PUBSUB_KEYFILE", "PUBSUB_KEYFILE_JSON"
+      "PUBSUB_CREDENTIALS", "PUBSUB_CREDENTIALS_JSON", "PUBSUB_KEYFILE", "PUBSUB_KEYFILE_JSON"
     )
   end
   default_emulator = Google::Cloud::Config.deferred do
@@ -133,15 +128,12 @@ Google::Cloud.configure.add_config! :pubsub do |config|
 
   config.add_field! :project_id, default_project, match: String, allow_nil: true
   config.add_alias! :project, :project_id
-  config.add_field! :credentials, default_creds,
-                    match:     [String, Hash, Google::Auth::Credentials],
-                    allow_nil: true
+  config.add_field! :credentials, default_creds, match: [String, Hash, Google::Auth::Credentials], allow_nil: true
   config.add_alias! :keyfile, :credentials
   config.add_field! :scope, nil, match: [String, Array]
   config.add_field! :timeout, nil, match: Integer
   config.add_field! :client_config, nil, match: Hash
-  config.add_field! :emulator_host, default_emulator,
-                    match: String, allow_nil: true
+  config.add_field! :emulator_host, default_emulator, match: String, allow_nil: true
   config.add_field! :on_error, nil, match: Proc
   config.add_field! :endpoint, nil, match: String
 end

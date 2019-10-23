@@ -126,8 +126,7 @@ module Google
         #
         def labels= new_labels
           raise ArgumentError, "Value must be a Hash" if new_labels.nil?
-          update_grpc = Google::Cloud::PubSub::V1::Topic.new \
-            name: name, labels: new_labels
+          update_grpc = Google::Cloud::PubSub::V1::Topic.new name: name, labels: new_labels
           @grpc = service.update_topic update_grpc, :labels
           @resource_name = nil
         end
@@ -176,8 +175,7 @@ module Google
         #   topic.kms_key = key_name
         #
         def kms_key= new_kms_key_name
-          update_grpc = Google::Cloud::PubSub::V1::Topic.new \
-            name: name, kms_key_name: new_kms_key_name
+          update_grpc = Google::Cloud::PubSub::V1::Topic.new name: name, kms_key_name: new_kms_key_name
           @grpc = service.update_topic update_grpc, :kms_key_name
           @resource_name = nil
         end
@@ -229,9 +227,7 @@ module Google
         #
         def persistence_regions= new_persistence_regions
           update_grpc = Google::Cloud::PubSub::V1::Topic.new \
-            name: name, message_storage_policy: {
-              allowed_persistence_regions: Array(new_persistence_regions)
-            }
+            name: name, message_storage_policy: { allowed_persistence_regions: Array(new_persistence_regions) }
           @grpc = service.update_topic update_grpc, :message_storage_policy
           @resource_name = nil
         end
@@ -311,13 +307,11 @@ module Google
         #                         deadline: 120,
         #                         endpoint: "https://example.com/push"
         #
-        def subscribe subscription_name, deadline: nil, retain_acked: false,
-                      retention: nil, endpoint: nil, labels: nil,
+        def subscribe subscription_name, deadline: nil, retain_acked: false, retention: nil, endpoint: nil, labels: nil,
                       message_ordering: nil
           ensure_service!
-          options = { deadline: deadline, retain_acked: retain_acked,
-                      retention: retention, endpoint: endpoint, labels: labels,
-                      message_ordering: message_ordering }
+          options = { deadline: deadline, retain_acked: retain_acked, retention: retention, endpoint: endpoint,
+                      labels: labels, message_ordering: message_ordering }
           grpc = service.create_subscription name, subscription_name, options
           Subscription.from_grpc grpc, service
         end
@@ -359,9 +353,7 @@ module Google
         #
         def subscription subscription_name, skip_lookup: nil
           ensure_service!
-          if skip_lookup
-            return Subscription.from_name subscription_name, service
-          end
+          return Subscription.from_name subscription_name, service if skip_lookup
           grpc = service.get_subscription subscription_name
           Subscription.from_grpc grpc, service
         rescue Google::Cloud::NotFoundError
@@ -578,13 +570,11 @@ module Google
         #   # Shut down the publisher when ready to stop publishing messages.
         #   topic.async_publisher.stop.wait!
         #
-        def publish_async data = nil, attributes = nil, ordering_key: nil,
-                          **extra_attrs, &callback
+        def publish_async data = nil, attributes = nil, ordering_key: nil, **extra_attrs, &callback
           ensure_service!
 
           @async_publisher ||= AsyncPublisher.new name, service, @async_opts
-          @async_publisher.publish data, attributes, ordering_key: ordering_key,
-                                                     **extra_attrs, &callback
+          @async_publisher.publish data, attributes, ordering_key: ordering_key, **extra_attrs, &callback
         end
 
         ##
