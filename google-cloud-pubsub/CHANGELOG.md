@@ -1,5 +1,20 @@
 # Release History
 
+### 1.1.0 / 2019-10-23
+
+#### Features
+
+* Update Ruby dependency to minimum of 2.4 ([#4206](https://www.github.com/googleapis/google-cloud-ruby/issues/4206))
+* Add support for Ordering Keys
+  * Google Cloud Pub/Sub ordering keys provide the ability to ensure related
+  * Note: At the time of this release, ordering keys are not yet publicly enabled
+  * Add Google::Cloud::PubSub::Topic#enable_message_ordering! method.
+  * Add Google::Cloud::PubSub::Topic#message_ordering? method.
+  * Add ordering_key argument to Google::Cloud::PubSub::Topic#publish_async method.
+  * Add Google::Cloud::PubSub::Topic#resume_publish method.
+  * Add message_ordering argument to Google::Cloud::PubSub::Topic#subscribe method.
+  * Add Google::Cloud::PubSub::Subscription#message_ordering? method.
+
 ### 1.0.2 / 2019-10-10
 
 #### Bug Fixes
