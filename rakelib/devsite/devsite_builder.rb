@@ -5,7 +5,6 @@ require_relative "yard_builder.rb"
 class DevsiteBuilder < YardBuilder
   def initialize master_dir = "."
     @master_dir = Pathname.new master_dir
-    collect_metadata
   end
 
   def build_master
@@ -22,6 +21,7 @@ class DevsiteBuilder < YardBuilder
 
   def build_gem_docs input_dir, output_dir, gem = nil, version = "master"
     gem ||= File.basename input_dir
+    collect_gem_metadata gem
     gem_metadata = @metadata[gem]
     gem_metadata["version"] = version
     docs = GemVersionDoc.new input_dir, output_dir, gem_metadata
@@ -53,6 +53,7 @@ class DevsiteBuilder < YardBuilder
   def republish_all
     return if case_insensitive_check!
 
+    collect_all_metadata
     current_git_commit master_dir
     load_releases.each do |gem, versions|
       versions.each do |version|
@@ -74,11 +75,16 @@ class DevsiteBuilder < YardBuilder
     end
   end
 
-  def collect_metadata
-    @metadata = {}
+  def collect_all_metadata
+    @metadata ||= {}
     determine_gems.each do |gem|
-      source = "#{master_dir + gem}/.repo-metadata.json"
-      @metadata[gem] = RepoMetadata.from_source source
+      collect_gem_metadata gem
     end
+  end
+
+  def collect_gem_metadata gem
+    @metadata ||= {}
+    source = "#{master_dir + gem}/.repo-metadata.json"
+    @metadata[gem] = RepoMetadata.from_source source
   end
 end
