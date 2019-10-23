@@ -199,10 +199,16 @@ module Google
             )
           elsif Array === value
             array_params = value.map { |param| Convert.to_query_param param }
+            array_type =
+              if array_params.empty?
+                Google::Apis::BigqueryV2::QueryParameterType.new(type: "STRING")
+              else
+                array_params.first.parameter_type
+              end
             return Google::Apis::BigqueryV2::QueryParameter.new(
               parameter_type: Google::Apis::BigqueryV2::QueryParameterType.new(
                 type: "ARRAY",
-                array_type: array_params.first.parameter_type
+                array_type: array_type
               ),
               parameter_value: Google::Apis::BigqueryV2::QueryParameterValue.new(
                 array_values: array_params.map(&:parameter_value)

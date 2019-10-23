@@ -63,4 +63,24 @@ describe Google::Cloud::Bigquery::Convert do
       f.must_be :nan?
     end
   end
+
+  describe :to_query_param do
+    it "converts an array correctly" do
+      f = Google::Cloud::Bigquery::Convert.to_query_param([1, 2])
+      f.must_be_kind_of Google::Apis::BigqueryV2::QueryParameter
+      f.to_h.must_equal({
+        parameter_type: { array_type: { type: "INT64" }, type: "ARRAY" },
+        parameter_value: { array_values: [{ value: 1 }, { value: 2 }] }
+      })
+    end
+
+    it "converts an empty array correctly" do
+      f = Google::Cloud::Bigquery::Convert.to_query_param([])
+      f.must_be_kind_of Google::Apis::BigqueryV2::QueryParameter
+      f.to_h.must_equal({
+        parameter_type: { array_type: { type: "STRING" }, type: "ARRAY" },
+        parameter_value: { array_values: [] }
+      })
+    end
+  end
 end
