@@ -62,17 +62,4 @@ describe Google::Cloud::Scheduler::V1beta1::CloudSchedulerClient do
       end
     end
   end
-
-  describe "the project_path instance method" do
-    it "correctly calls Google::Cloud::Scheduler::V1beta1::CloudSchedulerClient.project_path" do
-      Google::Cloud::Scheduler::V1beta1::Credentials.stub(:default, mock_credentials) do
-        parameters = Google::Cloud::Scheduler::V1beta1::CloudSchedulerClient.method("project_path").parameters.map { |arg| arg.last.to_s }
-        client = Google::Cloud::Scheduler.new version: :v1beta1
-        assert_equal(
-          client.project_path(*parameters),
-          Google::Cloud::Scheduler::V1beta1::CloudSchedulerClient.project_path(*parameters)
-        )
-      end
-    end
-  end
 end

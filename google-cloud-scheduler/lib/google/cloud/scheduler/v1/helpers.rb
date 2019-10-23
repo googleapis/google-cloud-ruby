@@ -34,13 +34,6 @@ module Google
           def location_path project, location
             self.class.location_path project, location
           end
-          
-          # Alias for Google::Cloud::Scheduler::V1::CloudSchedulerClient.project_path.
-          # @param project [String]
-          # @return [String]
-          def project_path project
-            self.class.project_path project
-          end
         end
       end
     end

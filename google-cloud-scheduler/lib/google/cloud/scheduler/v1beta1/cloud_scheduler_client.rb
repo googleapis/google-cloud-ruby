@@ -81,12 +81,6 @@ module Google
 
           private_constant :LOCATION_PATH_TEMPLATE
 
-          PROJECT_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
-            "projects/{project}"
-          )
-
-          private_constant :PROJECT_PATH_TEMPLATE
-
           # Returns a fully-qualified job resource name string.
           # @param project [String]
           # @param location [String]
@@ -108,15 +102,6 @@ module Google
             LOCATION_PATH_TEMPLATE.render(
               :"project" => project,
               :"location" => location
-            )
-          end
-
-          # Returns a fully-qualified project resource name string.
-          # @param project [String]
-          # @return [String]
-          def self.project_path project
-            PROJECT_PATH_TEMPLATE.render(
-              :"project" => project
             )
           end
 
@@ -300,9 +285,7 @@ module Google
           # Lists jobs.
           #
           # @param parent [String]
-          #   Required.
-          #
-          #   The location name. For example:
+          #   Required. The location name. For example:
           #   `projects/PROJECT_ID/locations/LOCATION_ID`.
           # @param page_size [Integer]
           #   The maximum number of resources contained in the underlying API
@@ -357,9 +340,7 @@ module Google
           # Gets a job.
           #
           # @param name [String]
-          #   Required.
-          #
-          #   The job name. For example:
+          #   Required. The job name. For example:
           #   `projects/PROJECT_ID/locations/LOCATION_ID/jobs/JOB_ID`.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
@@ -390,14 +371,10 @@ module Google
           # Creates a job.
           #
           # @param parent [String]
-          #   Required.
-          #
-          #   The location name. For example:
+          #   Required. The location name. For example:
           #   `projects/PROJECT_ID/locations/LOCATION_ID`.
           # @param job [Google::Cloud::Scheduler::V1beta1::Job | Hash]
-          #   Required.
-          #
-          #   The job to add. The user can optionally specify a name for the
+          #   Required. The job to add. The user can optionally specify a name for the
           #   job in {Google::Cloud::Scheduler::V1beta1::Job#name name}. {Google::Cloud::Scheduler::V1beta1::Job#name name} cannot be the same as an
           #   existing job. If a name is not specified then the system will
           #   generate a random unique name that will be returned
@@ -446,9 +423,7 @@ module Google
           # until a successful response is received.
           #
           # @param job [Google::Cloud::Scheduler::V1beta1::Job | Hash]
-          #   Required.
-          #
-          #   The new job properties. {Google::Cloud::Scheduler::V1beta1::Job#name name} must be specified.
+          #   Required. The new job properties. {Google::Cloud::Scheduler::V1beta1::Job#name name} must be specified.
           #
           #   Output only fields cannot be modified using UpdateJob.
           #   Any value specified for an output only field will be ignored.
@@ -491,9 +466,7 @@ module Google
           # Deletes a job.
           #
           # @param name [String]
-          #   Required.
-          #
-          #   The job name. For example:
+          #   Required. The job name. For example:
           #   `projects/PROJECT_ID/locations/LOCATION_ID/jobs/JOB_ID`.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
@@ -530,9 +503,7 @@ module Google
           # to be paused.
           #
           # @param name [String]
-          #   Required.
-          #
-          #   The job name. For example:
+          #   Required. The job name. For example:
           #   `projects/PROJECT_ID/locations/LOCATION_ID/jobs/JOB_ID`.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
@@ -568,9 +539,7 @@ module Google
           # {Google::Cloud::Scheduler::V1beta1::Job::State::PAUSED Job::State::PAUSED} to be resumed.
           #
           # @param name [String]
-          #   Required.
-          #
-          #   The job name. For example:
+          #   Required. The job name. For example:
           #   `projects/PROJECT_ID/locations/LOCATION_ID/jobs/JOB_ID`.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
@@ -604,9 +573,7 @@ module Google
           # if the job is already running.
           #
           # @param name [String]
-          #   Required.
-          #
-          #   The job name. For example:
+          #   Required. The job name. For example:
           #   `projects/PROJECT_ID/locations/LOCATION_ID/jobs/JOB_ID`.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
