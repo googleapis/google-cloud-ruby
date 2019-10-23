@@ -227,8 +227,7 @@ module Google
         # @return [String, nil] The type of query statement.
         #
         def statement_type
-          return nil unless job_gapi && job_gapi.statistics.query
-          job_gapi.statistics.query.statement_type
+          job_gapi&.statistics&.query&.statement_type
         end
 
         ##
@@ -249,8 +248,8 @@ module Google
         #   data.ddl? #=> true
         #
         def ddl?
-          %w[CREATE_MODEL CREATE_TABLE CREATE_TABLE_AS_SELECT CREATE_VIEW \
-             DROP_MODEL DROP_TABLE DROP_VIEW].include? statement_type
+          ["CREATE_MODEL", "CREATE_TABLE", "CREATE_TABLE_AS_SELECT", "CREATE_VIEW", "\n", "DROP_MODEL", "DROP_TABLE",
+           "DROP_VIEW"].include? statement_type
         end
 
         ##
@@ -273,7 +272,7 @@ module Google
         #   data.dml? #=> true
         #
         def dml?
-          %w[INSERT UPDATE MERGE DELETE].include? statement_type
+          ["INSERT", "UPDATE", "MERGE", "DELETE"].include? statement_type
         end
 
         ##
@@ -292,8 +291,7 @@ module Google
         # @return [String, nil] The DDL operation performed.
         #
         def ddl_operation_performed
-          return nil unless job_gapi && job_gapi.statistics.query
-          job_gapi.statistics.query.ddl_operation_performed
+          job_gapi&.statistics&.query&.ddl_operation_performed
         end
 
         ##
@@ -305,10 +303,9 @@ module Google
         #   reference state.
         #
         def ddl_target_table
-          return nil unless job_gapi && job_gapi.statistics.query
           ensure_service!
-          table = job_gapi.statistics.query.ddl_target_table
-          return nil unless table
+          table = job_gapi&.statistics&.query&.ddl_target_table
+          return nil if table.nil?
           Google::Cloud::Bigquery::Table.new_reference_from_gapi table, service
         end
 
@@ -320,8 +317,7 @@ module Google
         #   or `nil` if the query is not a DML statement.
         #
         def num_dml_affected_rows
-          return nil unless job_gapi && job_gapi.statistics.query
-          job_gapi.statistics.query.num_dml_affected_rows
+          job_gapi&.statistics&.query&.num_dml_affected_rows
         end
 
         ##
@@ -447,7 +443,7 @@ module Google
             results.each { |r| yield r }
             if request_limit
               request_limit -= 1
-              break if request_limit < 0
+              break if request_limit.negative?
             end
             break unless results.next?
             results = results.next
@@ -458,9 +454,7 @@ module Google
         # @private New Data from a response object.
         def self.from_gapi_json gapi_json, table_gapi, job_gapi, service
           rows = gapi_json[:rows] || []
-          unless rows.empty?
-            rows = Convert.format_rows rows, table_gapi.schema.fields
-          end
+          rows = Convert.format_rows rows, table_gapi.schema.fields unless rows.empty?
 
           data = new rows
           data.table_gapi = table_gapi

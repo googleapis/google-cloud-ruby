@@ -885,10 +885,8 @@ module Google
             rules = Array gapi.access
             new.tap do |s|
               s.instance_variable_set :@rules, rules
-              s.instance_variable_set :@original_rules_hashes,
-                                      rules.map(&:to_h)
-              s.instance_variable_set :@dataset_reference,
-                                      gapi.dataset_reference
+              s.instance_variable_set :@original_rules_hashes, rules.map(&:to_h)
+              s.instance_variable_set :@dataset_reference, gapi.dataset_reference
             end
           end
 
@@ -902,18 +900,14 @@ module Google
           # @private
           def validate_role role
             good_role = ROLES[role.to_s]
-            if good_role.nil?
-              raise ArgumentError "Unable to determine role for #{role}"
-            end
+            raise ArgumentError "Unable to determine role for #{role}" if good_role.nil?
             good_role
           end
 
           # @private
           def validate_scope scope
             good_scope = SCOPES[scope.to_s]
-            if good_scope.nil?
-              raise ArgumentError "Unable to determine scope for #{scope}"
-            end
+            raise ArgumentError "Unable to determine scope for #{scope}" if good_scope.nil?
             good_scope
           end
 
@@ -984,9 +978,7 @@ module Google
             # If scope is special group, make sure value is in the list
             value = validate_special_group value if scope == :special_group
             # Detect any rules of this role, scope, and value
-            !(!@rules.detect(
-              &find_by_role_and_scope_and_value(role, scope, value)
-            ))
+            !(!@rules.detect(&find_by_role_and_scope_and_value(role, scope, value)))
           end
 
           # @private

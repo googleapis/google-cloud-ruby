@@ -66,8 +66,8 @@ module Google
       #   dataset = bigquery.dataset "my_dataset"
       #   table = dataset.table "my_table"
       #
-      def self.new project_id: nil, credentials: nil, scope: nil, retries: nil,
-                   timeout: nil, endpoint: nil, project: nil, keyfile: nil
+      def self.new project_id: nil, credentials: nil, scope: nil, retries: nil, timeout: nil, endpoint: nil,
+                   project: nil, keyfile: nil
         scope       ||= configure.scope
         retries     ||= configure.retries
         timeout     ||= configure.timeout
@@ -121,9 +121,7 @@ module Google
       # @private Resolve project.
       def self.resolve_project_id given_project, credentials
         project_id = given_project || default_project_id
-        if credentials.respond_to? :project_id
-          project_id ||= credentials.project_id
-        end
+        project_id ||= credentials.project_id if credentials.respond_to? :project_id
         project_id.to_s # Always cast to a string
       end
 

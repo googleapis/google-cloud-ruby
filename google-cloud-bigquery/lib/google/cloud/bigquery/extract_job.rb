@@ -57,9 +57,7 @@ module Google
         def source
           table = @gapi.configuration.extract.source_table
           return nil unless table
-          retrieve_table table.project_id,
-                         table.dataset_id,
-                         table.table_id
+          retrieve_table table.project_id, table.dataset_id, table.table_id
         end
 
         ##
@@ -291,8 +289,7 @@ module Google
           # @!group Attributes
           #
           def format= new_format
-            @gapi.configuration.extract.update! \
-              destination_format: Convert.source_format(new_format)
+            @gapi.configuration.extract.update! destination_format: Convert.source_format(new_format)
           end
 
           ##

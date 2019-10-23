@@ -37,11 +37,11 @@ module Google
         #
         class Field
           # @private
-          MODES = %w[NULLABLE REQUIRED REPEATED].freeze
+          MODES = ["NULLABLE", "REQUIRED", "REPEATED"].freeze
 
           # @private
-          TYPES = %w[STRING INTEGER INT64 FLOAT FLOAT64 NUMERIC BOOLEAN BOOL
-                     BYTES TIMESTAMP TIME DATETIME DATE RECORD STRUCT].freeze
+          TYPES = ["STRING", "INTEGER", "INT64", "FLOAT", "FLOAT64", "NUMERIC", "BOOLEAN", "BOOL", "BYTES", "TIMESTAMP",
+                   "TIME", "DATETIME", "DATE", "RECORD", "STRUCT"].freeze
 
           ##
           # The name of the field.
@@ -548,8 +548,7 @@ module Google
             # TODO: do we need to raise if no block was given?
             raise ArgumentError, "a block is required" unless block_given?
 
-            nested_field = add_field name, :record, description: description,
-                                                    mode:        mode
+            nested_field = add_field name, :record, description: description, mode: mode
             yield nested_field
             nested_field
           end
@@ -621,18 +620,14 @@ module Google
 
           def verify_type type
             type = type.to_s.upcase
-            unless TYPES.include? type
-              raise ArgumentError, "Type '#{type}' not found"
-            end
+            raise ArgumentError, "Type '#{type}' not found" unless TYPES.include? type
             type
           end
 
           def verify_mode mode
             mode = :nullable if mode.nil?
             mode = mode.to_s.upcase
-            unless MODES.include? mode
-              raise ArgumentError "Unable to determine mode for '#{mode}'"
-            end
+            raise ArgumentError "Unable to determine mode for '#{mode}'" unless MODES.include? mode
             mode
           end
         end

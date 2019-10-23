@@ -67,9 +67,7 @@ module Google
         def destination
           table = @gapi.configuration.load.destination_table
           return nil unless table
-          retrieve_table table.project_id,
-                         table.dataset_id,
-                         table.table_id
+          retrieve_table table.project_id, table.dataset_id, table.table_id
         end
 
         ##
@@ -402,9 +400,10 @@ module Google
         # @!group Attributes
         #
         def time_partitioning_expiration
-          @gapi.configuration.load.time_partitioning.expiration_ms / 1_000 if
-              time_partitioning? &&
-              !@gapi.configuration.load.time_partitioning.expiration_ms.nil?
+          return nil unless time_partitioning?
+          return nil if @gapi.configuration.load.time_partitioning.expiration_ms.nil?
+
+          @gapi.configuration.load.time_partitioning.expiration_ms / 1_000
         end
 
         ###
@@ -934,8 +933,7 @@ module Google
           # @!group Attributes
           #
           def format= new_format
-            @gapi.configuration.load.update! \
-              source_format: Convert.source_format(new_format)
+            @gapi.configuration.load.update! source_format: Convert.source_format(new_format)
           end
 
           ##
@@ -955,8 +953,7 @@ module Google
           # @!group Attributes
           #
           def create= new_create
-            @gapi.configuration.load.update! \
-              create_disposition: Convert.create_disposition(new_create)
+            @gapi.configuration.load.update! create_disposition: Convert.create_disposition(new_create)
           end
 
           ##
@@ -977,8 +974,7 @@ module Google
           # @!group Attributes
           #
           def write= new_write
-            @gapi.configuration.load.update! \
-              write_disposition: Convert.write_disposition(new_write)
+            @gapi.configuration.load.update! write_disposition: Convert.write_disposition(new_write)
           end
 
           ##
@@ -999,8 +995,7 @@ module Google
             if new_fields.nil?
               @gapi.configuration.load.update! projection_fields: nil
             else
-              @gapi.configuration.load.update! \
-                projection_fields: Array(new_fields)
+              @gapi.configuration.load.update! projection_fields: Array(new_fields)
             end
           end
 
@@ -1199,8 +1194,7 @@ module Google
             if new_options.nil?
               @gapi.configuration.load.update! schema_update_options: nil
             else
-              @gapi.configuration.load.update! \
-                schema_update_options: Array(new_options)
+              @gapi.configuration.load.update! schema_update_options: Array(new_options)
             end
           end
 
@@ -1238,9 +1232,7 @@ module Google
           #
           # @!group Attributes
           def encryption= val
-            @gapi.configuration.load.update!(
-              destination_encryption_configuration: val.to_gapi
-            )
+            @gapi.configuration.load.update! destination_encryption_configuration: val.to_gapi
           end
 
           ##
@@ -1288,8 +1280,7 @@ module Google
           # @!group Attributes
           #
           def time_partitioning_type= type
-            @gapi.configuration.load.time_partitioning ||= \
-              Google::Apis::BigqueryV2::TimePartitioning.new
+            @gapi.configuration.load.time_partitioning ||= Google::Apis::BigqueryV2::TimePartitioning.new
             @gapi.configuration.load.time_partitioning.update! type: type
           end
 
@@ -1332,8 +1323,7 @@ module Google
           # @!group Attributes
           #
           def time_partitioning_field= field
-            @gapi.configuration.load.time_partitioning ||= \
-              Google::Apis::BigqueryV2::TimePartitioning.new
+            @gapi.configuration.load.time_partitioning ||= Google::Apis::BigqueryV2::TimePartitioning.new
             @gapi.configuration.load.time_partitioning.update! field: field
           end
 
@@ -1366,10 +1356,8 @@ module Google
           # @!group Attributes
           #
           def time_partitioning_expiration= expiration
-            @gapi.configuration.load.time_partitioning ||= \
-              Google::Apis::BigqueryV2::TimePartitioning.new
-            @gapi.configuration.load.time_partitioning.update! \
-              expiration_ms: expiration * 1000
+            @gapi.configuration.load.time_partitioning ||= Google::Apis::BigqueryV2::TimePartitioning.new
+            @gapi.configuration.load.time_partitioning.update! expiration_ms: expiration * 1000
           end
 
           ##
@@ -1384,10 +1372,8 @@ module Google
           # @!group Attributes
           #
           def time_partitioning_require_filter= val
-            @gapi.configuration.load.time_partitioning ||= \
-              Google::Apis::BigqueryV2::TimePartitioning.new
-            @gapi.configuration.load.time_partitioning.update! \
-              require_partition_filter: val
+            @gapi.configuration.load.time_partitioning ||= Google::Apis::BigqueryV2::TimePartitioning.new
+            @gapi.configuration.load.time_partitioning.update! require_partition_filter: val
           end
 
           ##
@@ -1436,8 +1422,7 @@ module Google
           # @!group Attributes
           #
           def clustering_fields= fields
-            @gapi.configuration.load.clustering ||= \
-              Google::Apis::BigqueryV2::Clustering.new
+            @gapi.configuration.load.clustering ||= Google::Apis::BigqueryV2::Clustering.new
             @gapi.configuration.load.clustering.fields = fields
           end
 

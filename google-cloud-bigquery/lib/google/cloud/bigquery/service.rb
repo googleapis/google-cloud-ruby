@@ -43,8 +43,7 @@ module Google
 
         ##
         # Creates a new Service instance.
-        def initialize project, credentials,
-                       retries: nil, timeout: nil, host: nil
+        def initialize project, credentials, retries: nil, timeout: nil, host: nil
           @project = project
           @credentials = credentials
           @retries = retries
@@ -57,8 +56,7 @@ module Google
           @service ||= begin
             service = API::BigqueryService.new
             service.client_options.application_name    = "gcloud-ruby"
-            service.client_options.application_version = \
-              Google::Cloud::Bigquery::VERSION
+            service.client_options.application_version = Google::Cloud::Bigquery::VERSION
             service.client_options.open_timeout_sec = timeout
             service.client_options.read_timeout_sec = timeout
             service.client_options.send_timeout_sec = timeout
@@ -116,8 +114,7 @@ module Google
             patch_with_backoff = true
           end
           execute backoff: patch_with_backoff do
-            service.patch_dataset @project, dataset_id, patched_dataset_gapi,
-                                  options: options
+            service.patch_dataset @project, dataset_id, patched_dataset_gapi, options: options
           end
         end
 
@@ -139,9 +136,7 @@ module Google
         def list_tables dataset_id, options = {}
           # The list operation is considered idempotent
           execute backoff: true do
-            service.list_tables @project, dataset_id,
-                                max_results: options[:max],
-                                page_token:  options[:token]
+            service.list_tables @project, dataset_id, max_results: options[:max], page_token: options[:token]
           end
         end
 
@@ -182,8 +177,7 @@ module Google
             patch_with_backoff = true
           end
           execute backoff: patch_with_backoff do
-            service.patch_table @project, dataset_id, table_id,
-                                patched_table_gapi, options: options
+            service.patch_table @project, dataset_id, table_id, patched_table_gapi, options: options
           end
         end
 
@@ -214,9 +208,7 @@ module Google
           insert_tabledata_json_rows dataset_id, table_id, json_rows, options
         end
 
-        def insert_tabledata_json_rows dataset_id, table_id, json_rows,
-                                       options = {}
-
+        def insert_tabledata_json_rows dataset_id, table_id, json_rows, options = {}
           rows_and_ids = Array(json_rows).zip Array(options[:insert_ids])
           insert_rows = rows_and_ids.map do |json_row, insert_id|
             insert_id ||= SecureRandom.uuid
@@ -248,10 +240,7 @@ module Google
           options = { skip_deserialization: true }
           # The list operation is considered idempotent
           execute backoff: true do
-            json_txt = service.list_models @project, dataset_id,
-                                           max_results: max,
-                                           page_token:  token,
-                                           options:     options
+            json_txt = service.list_models @project, dataset_id, max_results: max, page_token: token, options: options
             JSON.parse json_txt, symbolize_names: true
           end
         end
@@ -263,8 +252,7 @@ module Google
         def get_model dataset_id, model_id
           # The get operation is considered idempotent
           execute backoff: true do
-            json_txt = service.get_model @project, dataset_id, model_id,
-                                         options: { skip_deserialization: true }
+            json_txt = service.get_model @project, dataset_id, model_id, options: { skip_deserialization: true }
             JSON.parse json_txt, symbolize_names: true
           end
         end
@@ -281,9 +269,7 @@ module Google
             patch_with_backoff = true
           end
           execute backoff: patch_with_backoff do
-            json_txt = service.patch_model @project, dataset_id, model_id,
-                                           patched_model_gapi,
-                                           options: options
+            json_txt = service.patch_model @project, dataset_id, model_id, patched_model_gapi, options: options
             JSON.parse json_txt, symbolize_names: true
           end
         end
@@ -303,12 +289,9 @@ module Google
           min_creation_time = Convert.time_to_millis options[:min_created_at]
           max_creation_time = Convert.time_to_millis options[:max_created_at]
           execute backoff: true do
-            service.list_jobs \
-              @project, all_users: options[:all], max_results: options[:max],
-                        page_token: options[:token], projection: "full",
-                        state_filter: options[:filter],
-                        min_creation_time: min_creation_time,
-                        max_creation_time: max_creation_time
+            service.list_jobs @project, all_users: options[:all], max_results: options[:max],
+                                        page_token: options[:token], projection: "full", state_filter: options[:filter],
+                                        min_creation_time: min_creation_time, max_creation_time: max_creation_time
           end
         end
 
@@ -331,10 +314,7 @@ module Google
         end
 
         def insert_job config, location: nil
-          job_object = API::Job.new(
-            job_reference: job_ref_from(nil, nil, location: location),
-            configuration: config
-          )
+          job_object = API::Job.new job_reference: job_ref_from(nil, nil, location: location), configuration: config
           # Jobs have generated id, so this operation is considered idempotent
           execute backoff: true do
             service.insert_job @project, job_object
@@ -352,13 +332,12 @@ module Google
         def job_query_results job_id, options = {}
           # The get operation is considered idempotent
           execute backoff: true do
-            service.get_job_query_results \
-              @project, job_id,
-              location:    options.delete(:location),
-              max_results: options.delete(:max),
-              page_token:  options.delete(:token),
-              start_index: options.delete(:start),
-              timeout_ms:  options.delete(:timeout)
+            service.get_job_query_results @project, job_id,
+                                          location:    options.delete(:location),
+                                          max_results: options.delete(:max),
+                                          page_token:  options.delete(:token),
+                                          start_index: options.delete(:start),
+                                          timeout_ms:  options.delete(:timeout)
           end
         end
 
@@ -382,10 +361,7 @@ module Google
 
         def load_table_file file, load_job_gapi
           execute backoff: true do
-            service.insert_job \
-              @project,
-              load_job_gapi,
-              upload_source: file, content_type: mime_type_for(file)
+            service.insert_job @project, load_job_gapi, upload_source: file, content_type: mime_type_for(file)
           end
         end
 
@@ -409,9 +385,7 @@ module Google
         def self.table_ref_from_s str, default_ref: {}
           str = str.to_s
           m = /\A(((?<prj>\S*)(:|\.))?(?<dts>\S*)\.)?(?<tbl>\S*)\z/.match str
-          unless m
-            raise ArgumentError, "unable to identify table from #{str.inspect}"
-          end
+          raise ArgumentError, "unable to identify table from #{str.inspect}" unless m
           str_table_ref_hash = {
             project_id: m["prj"],
             dataset_id: m["dts"],
@@ -424,10 +398,8 @@ module Google
         end
 
         def self.validate_table_ref table_ref
-          %i[project_id dataset_id table_id].each do |f|
-            if table_ref.send(f).nil?
-              raise ArgumentError, "TableReference is missing #{f}"
-            end
+          [:project_id, :dataset_id, :table_id].each do |f|
+            raise ArgumentError, "TableReference is missing #{f}" if table_ref.send(f).nil?
           end
         end
 
@@ -435,8 +407,7 @@ module Google
         # Lists all projects to which you have been granted any project role.
         def list_projects options = {}
           execute backoff: true do
-            service.list_projects max_results: options[:max],
-                                  page_token:  options[:token]
+            service.list_projects max_results: options[:max], page_token: options[:token]
           end
         end
 
@@ -446,10 +417,7 @@ module Google
         def job_ref_from job_id, prefix, location: nil
           prefix ||= "job_"
           job_id ||= "#{prefix}#{generate_id}"
-          job_ref = API::JobReference.new(
-            project_id: @project,
-            job_id:     job_id
-          )
+          job_ref = API::JobReference.new project_id: @project, job_id: job_id
           # BigQuery does not allow nil location, but missing is ok.
           job_ref.location = location if location
           job_ref
@@ -507,7 +475,7 @@ module Google
             attr_accessor :backoff
           end
           self.retries = 5
-          self.reasons = %w[rateLimitExceeded backendError]
+          self.reasons = ["rateLimitExceeded", "backendError"]
           self.backoff = lambda do |retries|
             # Max delay is 32 seconds
             # See "Back-off Requirements" here:

@@ -51,9 +51,7 @@ module Google
         def source
           table = @gapi.configuration.copy.source_table
           return nil unless table
-          retrieve_table table.project_id,
-                         table.dataset_id,
-                         table.table_id
+          retrieve_table table.project_id, table.dataset_id, table.table_id
         end
 
         ##
@@ -64,9 +62,7 @@ module Google
         def destination
           table = @gapi.configuration.copy.destination_table
           return nil unless table
-          retrieve_table table.project_id,
-                         table.dataset_id,
-                         table.table_id
+          retrieve_table table.project_id, table.dataset_id, table.table_id
         end
 
         ##
@@ -139,9 +135,7 @@ module Google
         #
         # @!group Attributes
         def encryption
-          EncryptionConfiguration.from_gapi(
-            @gapi.configuration.copy.destination_encryption_configuration
-          )
+          EncryptionConfiguration.from_gapi @gapi.configuration.copy.destination_encryption_configuration
         end
 
         ##
@@ -227,8 +221,7 @@ module Google
           #
           # @!group Attributes
           def create= new_create
-            @gapi.configuration.copy.update! \
-              create_disposition: Convert.create_disposition(new_create)
+            @gapi.configuration.copy.update! create_disposition: Convert.create_disposition(new_create)
           end
 
           ##
@@ -248,8 +241,7 @@ module Google
           #
           # @!group Attributes
           def write= new_write
-            @gapi.configuration.copy.update! \
-              write_disposition: Convert.write_disposition(new_write)
+            @gapi.configuration.copy.update! write_disposition: Convert.write_disposition(new_write)
           end
 
           ##
@@ -273,9 +265,7 @@ module Google
           #
           # @!group Attributes
           def encryption= val
-            @gapi.configuration.copy.update!(
-              destination_encryption_configuration: val.to_gapi
-            )
+            @gapi.configuration.copy.update! destination_encryption_configuration: val.to_gapi
           end
 
           ##

@@ -71,9 +71,8 @@ module Google
 
           ##
           # @private
-          def initialize table, skip_invalid: nil, ignore_unknown: nil,
-                         max_bytes: 10000000, max_rows: 500, interval: 10,
-                         threads: 4, &block
+          def initialize table, skip_invalid: nil, ignore_unknown: nil, max_bytes: 10_000_000, max_rows: 500,
+                         interval: 10, threads: 4, &block
             @table = table
             @skip_invalid = skip_invalid
             @ignore_unknown = ignore_unknown
@@ -86,8 +85,7 @@ module Google
 
             @batch = nil
 
-            @thread_pool = Concurrent::ThreadPoolExecutor.new \
-              max_threads: @threads
+            @thread_pool = Concurrent::ThreadPoolExecutor.new max_threads: @threads
 
             @cond = new_cond
 
@@ -136,8 +134,7 @@ module Google
                   unless @batch.try_insert row, insert_id
                     push_batch_request!
 
-                    @batch = Batch.new max_bytes: @max_bytes,
-                                       max_rows:  @max_rows
+                    @batch = Batch.new max_bytes: @max_bytes, max_rows: @max_rows
                     @batch.insert row, insert_id
                   end
                 end
@@ -228,7 +225,7 @@ module Google
           def validate_insert_args rows, insert_ids
             rows = [rows] if rows.is_a? Hash
             insert_ids = Array insert_ids
-            if insert_ids.count > 0 && insert_ids.count != rows.count
+            if insert_ids.count.positive? && insert_ids.count != rows.count
               raise ArgumentError, "insert_ids must be the same size as rows"
             end
             [rows, insert_ids]
@@ -265,19 +262,15 @@ module Google
             Concurrent::Future.new executor: @thread_pool do
               begin
                 raise ArgumentError, "No rows provided" if json_rows.empty?
-                options = { skip_invalid:   @skip_invalid,
-                            ignore_unknown: @ignore_unknown,
-                            insert_ids:     insert_ids }
+                options = { skip_invalid: @skip_invalid, ignore_unknown: @ignore_unknown, insert_ids: insert_ids }
                 insert_resp = @table.service.insert_tabledata_json_rows(
                   @table.dataset_id, @table.table_id, json_rows, options
                 )
-                result = Result.new(
-                  InsertResponse.from_gapi(orig_rows, insert_resp)
-                )
+                result = Result.new InsertResponse.from_gapi(orig_rows, insert_resp)
               rescue StandardError => e
                 result = Result.new nil, e
               ensure
-                @callback.call result if @callback
+                @callback&.call result
               end
             end.execute
 
@@ -290,7 +283,7 @@ module Google
           class Batch
             attr_reader :max_bytes, :max_rows, :rows, :json_rows, :insert_ids
 
-            def initialize max_bytes: 10000000, max_rows: 500
+            def initialize max_bytes: 10_000_000, max_rows: 500
               @max_bytes = max_bytes
               @max_rows = max_rows
               @rows = []
@@ -306,8 +299,7 @@ module Google
               insert_id ||= SecureRandom.uuid
               json_row = to_json_row row
 
-              insert_rows_bytes \
-                row, json_row, insert_id, addl_bytes_for(json_row, insert_id)
+              insert_rows_bytes row, json_row, insert_id, addl_bytes_for(json_row, insert_id)
             end
 
             def try_insert row, insert_id

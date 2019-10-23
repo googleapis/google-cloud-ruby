@@ -366,9 +366,7 @@ module Google
           return nil if reference?
           ensure_full_data!
           return nil if @gapi.default_encryption_configuration.nil?
-          EncryptionConfiguration.from_gapi(
-            @gapi.default_encryption_configuration
-          ).freeze
+          EncryptionConfiguration.from_gapi(@gapi.default_encryption_configuration).freeze
         end
 
         ##
@@ -690,9 +688,7 @@ module Google
         #
         def table table_id, skip_lookup: nil
           ensure_service!
-          if skip_lookup
-            return Table.new_reference project_id, dataset_id, table_id, service
-          end
+          return Table.new_reference project_id, dataset_id, table_id, service if skip_lookup
           gapi = service.get_table dataset_id, table_id
           Table.from_gapi gapi, service
         rescue Google::Cloud::NotFoundError
@@ -774,9 +770,7 @@ module Google
         #
         def model model_id, skip_lookup: nil
           ensure_service!
-          if skip_lookup
-            return Model.new_reference project_id, dataset_id, model_id, service
-          end
+          return Model.new_reference project_id, dataset_id, model_id, service if skip_lookup
           gapi = service.get_model dataset_id, model_id
           Model.from_gapi_json gapi, service
         rescue Google::Cloud::NotFoundError
@@ -1083,20 +1077,15 @@ module Google
         #
         # @!group Data
         #
-        def query_job query, params: nil, external: nil,
-                      priority: "INTERACTIVE", cache: true, table: nil,
-                      create: nil, write: nil, dryrun: nil, standard_sql: nil,
-                      legacy_sql: nil, large_results: nil, flatten: nil,
-                      maximum_billing_tier: nil, maximum_bytes_billed: nil,
-                      job_id: nil, prefix: nil, labels: nil, udfs: nil
+        def query_job query, params: nil, external: nil, priority: "INTERACTIVE", cache: true, table: nil, create: nil,
+                      write: nil, dryrun: nil, standard_sql: nil, legacy_sql: nil, large_results: nil, flatten: nil,
+                      maximum_billing_tier: nil, maximum_bytes_billed: nil, job_id: nil, prefix: nil, labels: nil,
+                      udfs: nil
           ensure_service!
-          options = { priority: priority, cache: cache, table: table,
-                      create: create, write: write, dryrun: dryrun,
-                      large_results: large_results, flatten: flatten,
-                      legacy_sql: legacy_sql, standard_sql: standard_sql,
-                      maximum_billing_tier: maximum_billing_tier,
-                      maximum_bytes_billed: maximum_bytes_billed,
-                      job_id: job_id, prefix: prefix, params: params,
+          options = { priority: priority, cache: cache, table: table, create: create, write: write, dryrun: dryrun,
+                      large_results: large_results, flatten: flatten, legacy_sql: legacy_sql,
+                      standard_sql: standard_sql, maximum_billing_tier: maximum_billing_tier,
+                      maximum_bytes_billed: maximum_bytes_billed, job_id: job_id, prefix: prefix, params: params,
                       external: external, labels: labels, udfs: udfs }
 
           updater = QueryJob::Updater.from_options service, query, options
@@ -1293,10 +1282,8 @@ module Google
         #
         # @!group Data
         #
-        def query query, params: nil, external: nil, max: nil, cache: true,
-                  standard_sql: nil, legacy_sql: nil, &block
-          job = query_job query, params: params, external: external,
-                                 cache: cache, standard_sql: standard_sql,
+        def query query, params: nil, external: nil, max: nil, cache: true, standard_sql: nil, legacy_sql: nil, &block
+          job = query_job query, params: params, external: external, cache: cache, standard_sql: standard_sql,
                                  legacy_sql: legacy_sql, &block
           job.wait_until_done!
           ensure_job_succeeded! job
@@ -1593,29 +1580,19 @@ module Google
         #
         # @!group Data
         #
-        def load_job table_id, files, format: nil, create: nil, write: nil,
-                     projection_fields: nil, jagged_rows: nil,
-                     quoted_newlines: nil, encoding: nil, delimiter: nil,
-                     ignore_unknown: nil, max_bad_records: nil, quote: nil,
-                     skip_leading: nil, schema: nil, job_id: nil, prefix: nil,
-                     labels: nil, autodetect: nil, null_marker: nil, dryrun: nil
+        def load_job table_id, files, format: nil, create: nil, write: nil, projection_fields: nil, jagged_rows: nil,
+                     quoted_newlines: nil, encoding: nil, delimiter: nil, ignore_unknown: nil, max_bad_records: nil,
+                     quote: nil, skip_leading: nil, schema: nil, job_id: nil, prefix: nil, labels: nil, autodetect: nil,
+                     null_marker: nil, dryrun: nil
           ensure_service!
 
           updater = load_job_updater table_id,
-                                     format: format, create: create,
-                                     write: write,
-                                     projection_fields: projection_fields,
-                                     jagged_rows: jagged_rows,
-                                     quoted_newlines: quoted_newlines,
-                                     encoding: encoding,
-                                     delimiter: delimiter,
-                                     ignore_unknown: ignore_unknown,
-                                     max_bad_records: max_bad_records,
-                                     quote: quote, skip_leading: skip_leading,
-                                     dryrun: dryrun, schema: schema,
-                                     job_id: job_id, prefix: prefix,
-                                     labels: labels, autodetect: autodetect,
-                                     null_marker: null_marker
+                                     format: format, create: create, write: write, projection_fields: projection_fields,
+                                     jagged_rows: jagged_rows, quoted_newlines: quoted_newlines, encoding: encoding,
+                                     delimiter: delimiter, ignore_unknown: ignore_unknown,
+                                     max_bad_records: max_bad_records, quote: quote, skip_leading: skip_leading,
+                                     dryrun: dryrun, schema: schema, job_id: job_id, prefix: prefix, labels: labels,
+                                     autodetect: autodetect, null_marker: null_marker
 
           yield updater if block_given?
 
@@ -1831,21 +1808,14 @@ module Google
         #
         # @!group Data
         #
-        def load table_id, files, format: nil, create: nil, write: nil,
-                 projection_fields: nil, jagged_rows: nil, quoted_newlines: nil,
-                 encoding: nil, delimiter: nil, ignore_unknown: nil,
-                 max_bad_records: nil, quote: nil, skip_leading: nil,
-                 schema: nil, autodetect: nil, null_marker: nil, &block
+        def load table_id, files, format: nil, create: nil, write: nil, projection_fields: nil, jagged_rows: nil,
+                 quoted_newlines: nil, encoding: nil, delimiter: nil, ignore_unknown: nil, max_bad_records: nil,
+                 quote: nil, skip_leading: nil, schema: nil, autodetect: nil, null_marker: nil, &block
           job = load_job table_id, files,
-                         format: format, create: create, write: write,
-                         projection_fields: projection_fields,
-                         jagged_rows: jagged_rows,
-                         quoted_newlines: quoted_newlines,
-                         encoding: encoding, delimiter: delimiter,
-                         ignore_unknown: ignore_unknown,
-                         max_bad_records: max_bad_records,
-                         quote: quote, skip_leading: skip_leading,
-                         schema: schema, autodetect: autodetect,
+                         format: format, create: create, write: write, projection_fields: projection_fields,
+                         jagged_rows: jagged_rows, quoted_newlines: quoted_newlines, encoding: encoding,
+                         delimiter: delimiter, ignore_unknown: ignore_unknown, max_bad_records: max_bad_records,
+                         quote: quote, skip_leading: skip_leading, schema: schema, autodetect: autodetect,
                          null_marker: null_marker, &block
 
           job.wait_until_done!
@@ -2010,10 +1980,8 @@ module Google
         def self.new_reference project_id, dataset_id, service
           raise ArgumentError, "dataset_id is required" unless dataset_id
           new.tap do |b|
-            reference_gapi = Google::Apis::BigqueryV2::DatasetReference.new(
-              project_id: project_id,
-              dataset_id: dataset_id
-            )
+            reference_gapi = Google::Apis::BigqueryV2::DatasetReference.new \
+              project_id: project_id, dataset_id: dataset_id
             b.service = service
             b.instance_variable_set :@reference, reference_gapi
           end
@@ -2100,19 +2068,17 @@ module Google
         #
         # @!group Data
         #
-        def insert table_id, rows, insert_ids: nil, skip_invalid: nil,
-                   ignore_unknown: nil, autocreate: nil
+        def insert table_id, rows, insert_ids: nil, skip_invalid: nil, ignore_unknown: nil, autocreate: nil
           rows = [rows] if rows.is_a? Hash
           insert_ids = Array insert_ids
-          if insert_ids.count > 0 && insert_ids.count != rows.count
+          if insert_ids.count.positive? && insert_ids.count != rows.count
             raise ArgumentError, "insert_ids must be the same size as rows"
           end
 
           if autocreate
             begin
-              insert_data table_id, rows, skip_invalid:   skip_invalid,
-                                          ignore_unknown: ignore_unknown,
-                                          insert_ids:     insert_ids
+              insert_data table_id, rows,
+                          skip_invalid: skip_invalid, ignore_unknown: ignore_unknown, insert_ids: insert_ids
             rescue Google::Cloud::NotFoundError
               sleep rand(1..60)
               begin
@@ -2125,15 +2091,12 @@ module Google
               # rubocop:enable Lint/HandleExceptions
 
               sleep 60
-              insert table_id, rows, skip_invalid:   skip_invalid,
-                                     ignore_unknown: ignore_unknown,
-                                     autocreate:     true,
-                                     insert_ids:     insert_ids
+              insert table_id, rows, skip_invalid: skip_invalid, ignore_unknown: ignore_unknown, autocreate: true,
+                                     insert_ids: insert_ids
             end
           else
-            insert_data table_id, rows, skip_invalid:   skip_invalid,
-                                        ignore_unknown: ignore_unknown,
-                                        insert_ids:     insert_ids
+            insert_data table_id, rows, skip_invalid: skip_invalid, ignore_unknown: ignore_unknown,
+                                        insert_ids: insert_ids
           end
         end
 
@@ -2184,9 +2147,8 @@ module Google
         #
         #   inserter.stop.wait!
         #
-        def insert_async table_id, skip_invalid: nil, ignore_unknown: nil,
-                         max_bytes: 10000000, max_rows: 500, interval: 10,
-                         threads: 4, &block
+        def insert_async table_id, skip_invalid: nil, ignore_unknown: nil, max_bytes: 10_000_000, max_rows: 500,
+                         interval: 10, threads: 4, &block
           ensure_service!
 
           # Get table, don't use Dataset#table which handles NotFoundError
@@ -2240,9 +2202,7 @@ module Google
         def patch_gapi! *attributes
           return if attributes.empty?
           ensure_service!
-          patch_args = Hash[attributes.map do |attr|
-            [attr, @gapi.send(attr)]
-          end]
+          patch_args = Hash[attributes.map { |attr| [attr, @gapi.send(attr)] }]
           patch_gapi = Google::Apis::BigqueryV2::Dataset.new patch_args
           patch_gapi.etag = etag if etag
           @gapi = service.patch_dataset dataset_id, patch_gapi
@@ -2283,11 +2243,8 @@ module Google
           )
         end
 
-        def load_job_csv_options! job, jagged_rows: nil,
-                                  quoted_newlines: nil,
-                                  delimiter: nil,
-                                  quote: nil, skip_leading: nil,
-                                  null_marker: nil
+        def load_job_csv_options! job, jagged_rows: nil, quoted_newlines: nil, delimiter: nil, quote: nil,
+                                  skip_leading: nil, null_marker: nil
           job.jagged_rows = jagged_rows unless jagged_rows.nil?
           job.quoted_newlines = quoted_newlines unless quoted_newlines.nil?
           job.delimiter = delimiter unless delimiter.nil?
@@ -2296,17 +2253,11 @@ module Google
           job.skip_leading = skip_leading unless skip_leading.nil?
         end
 
-        def load_job_file_options! job, format: nil,
-                                   projection_fields: nil,
-                                   jagged_rows: nil, quoted_newlines: nil,
-                                   encoding: nil, delimiter: nil,
-                                   ignore_unknown: nil, max_bad_records: nil,
-                                   quote: nil, skip_leading: nil,
-                                   null_marker: nil
+        def load_job_file_options! job, format: nil, projection_fields: nil, jagged_rows: nil, quoted_newlines: nil,
+                                   encoding: nil, delimiter: nil, ignore_unknown: nil, max_bad_records: nil, quote: nil,
+                                   skip_leading: nil, null_marker: nil
           job.format = format unless format.nil?
-          unless projection_fields.nil?
-            job.projection_fields = projection_fields
-          end
+          job.projection_fields = projection_fields unless projection_fields.nil?
           job.encoding = encoding unless encoding.nil?
           job.ignore_unknown = ignore_unknown unless ignore_unknown.nil?
           job.max_bad_records = max_bad_records unless max_bad_records.nil?
@@ -2318,16 +2269,11 @@ module Google
                                      null_marker:     null_marker
         end
 
-        def load_job_updater table_id, format: nil, create: nil,
-                             write: nil, projection_fields: nil,
-                             jagged_rows: nil, quoted_newlines: nil,
-                             encoding: nil, delimiter: nil,
-                             ignore_unknown: nil, max_bad_records: nil,
-                             quote: nil, skip_leading: nil, dryrun: nil,
-                             schema: nil, job_id: nil, prefix: nil, labels: nil,
-                             autodetect: nil, null_marker: nil
-          new_job = load_job_gapi table_id, dryrun, job_id: job_id,
-                                                    prefix: prefix
+        def load_job_updater table_id, format: nil, create: nil, write: nil, projection_fields: nil, jagged_rows: nil,
+                             quoted_newlines: nil, encoding: nil, delimiter: nil, ignore_unknown: nil,
+                             max_bad_records: nil, quote: nil, skip_leading: nil, dryrun: nil, schema: nil, job_id: nil,
+                             prefix: nil, labels: nil, autodetect: nil, null_marker: nil
+          new_job = load_job_gapi table_id, dryrun, job_id: job_id, prefix: prefix
           LoadJob::Updater.new(new_job).tap do |job|
             job.location = location if location # may be dataset reference
             job.create = create unless create.nil?
@@ -2365,9 +2311,7 @@ module Google
             job_gapi.configuration.load.update! source_uris: urls
             if job_gapi.configuration.load.source_format.nil?
               source_format = Convert.derive_source_format_from_list urls
-              unless source_format.nil?
-                job_gapi.configuration.load.source_format = source_format
-              end
+              job_gapi.configuration.load.source_format = source_format unless source_format.nil?
             end
           end
 
@@ -2379,9 +2323,7 @@ module Google
           path = Pathname(file).to_path
           if job_gapi.configuration.load.source_format.nil?
             source_format = Convert.derive_source_format path
-            unless source_format.nil?
-              job_gapi.configuration.load.source_format = source_format
-            end
+            job_gapi.configuration.load.source_format = source_format unless source_format.nil?
           end
 
           gapi = service.load_table_file file, job_gapi
@@ -2401,10 +2343,8 @@ module Google
         def storage_url? files
           [files].flatten.all? do |file|
             file.respond_to?(:to_gs_url) ||
-              (file.respond_to?(:to_str) &&
-                  file.to_str.downcase.start_with?("gs://")) ||
-              (file.is_a?(URI) &&
-                  file.to_s.downcase.start_with?("gs://"))
+              (file.respond_to?(:to_str) && file.to_str.downcase.start_with?("gs://")) ||
+              (file.is_a?(URI) && file.to_s.downcase.start_with?("gs://"))
           end
         end
 

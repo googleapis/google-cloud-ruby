@@ -461,8 +461,7 @@ module Google
           # TODO: do we need to raise if no block was given?
           raise ArgumentError, "a block is required" unless block_given?
 
-          nested_field = add_field name, :record, description: description,
-                                                  mode:        mode
+          nested_field = add_field name, :record, description: description, mode: mode
           yield nested_field
           nested_field
         end
@@ -528,18 +527,14 @@ module Google
 
         def verify_type type
           type = type.to_s.upcase
-          unless Field::TYPES.include? type
-            raise ArgumentError, "Type '#{type}' not found"
-          end
+          raise ArgumentError, "Type '#{type}' not found" unless Field::TYPES.include? type
           type
         end
 
         def verify_mode mode
           mode = :nullable if mode.nil?
           mode = mode.to_s.upcase
-          unless Field::MODES.include? mode
-            raise ArgumentError "Unable to determine mode for '#{mode}'"
-          end
+          raise ArgumentError "Unable to determine mode for '#{mode}'" unless Field::MODES.include? mode
           mode
         end
       end

@@ -103,13 +103,10 @@ module Google
     #   dataset = bigquery.dataset "my_dataset"
     #   table = dataset.table "my_table"
     #
-    def self.bigquery project_id = nil, credentials = nil, scope: nil,
-                      retries: nil, timeout: nil
+    def self.bigquery project_id = nil, credentials = nil, scope: nil, retries: nil, timeout: nil
       require "google/cloud/bigquery"
-      Google::Cloud::Bigquery.new project_id: project_id,
-                                  credentials: credentials,
-                                  scope: scope, retries: retries,
-                                  timeout: timeout
+      Google::Cloud::Bigquery.new project_id: project_id, credentials: credentials,
+                                  scope: scope, retries: retries, timeout: timeout
     end
   end
 end
@@ -121,16 +118,13 @@ Google::Cloud.configure.add_config! :bigquery do |config|
   end
   default_creds = Google::Cloud::Config.deferred do
     Google::Cloud::Config.credentials_from_env(
-      "BIGQUERY_CREDENTIALS", "BIGQUERY_CREDENTIALS_JSON",
-      "BIGQUERY_KEYFILE", "BIGQUERY_KEYFILE_JSON"
+      "BIGQUERY_CREDENTIALS", "BIGQUERY_CREDENTIALS_JSON", "BIGQUERY_KEYFILE", "BIGQUERY_KEYFILE_JSON"
     )
   end
 
   config.add_field! :project_id, default_project, match: String, allow_nil: true
   config.add_alias! :project, :project_id
-  config.add_field! :credentials, default_creds,
-                    match:     [String, Hash, Google::Auth::Credentials],
-                    allow_nil: true
+  config.add_field! :credentials, default_creds, match: [String, Hash, Google::Auth::Credentials], allow_nil: true
   config.add_alias! :keyfile, :credentials
   config.add_field! :scope, nil, match: [String, Array]
   config.add_field! :retries, nil, match: Integer

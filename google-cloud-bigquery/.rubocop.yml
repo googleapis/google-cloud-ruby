@@ -6,32 +6,20 @@ AllCops:
     - "acceptance/**/*"
     - "support/**/*"
     - "benchmark/**/*"
-    - "google-cloud-bigquery.gemspec"
-    - "Rakefile"
     - "test/**/*"
 
 Documentation:
   Enabled: false
 
+Metrics/BlockLength:
+  Exclude:
+    - "google-cloud-bigquery.gemspec"
+    - "Rakefile"
 Metrics/ClassLength:
   Enabled: false
-Metrics/MethodLength:
-  Max: 30
 Naming/FileName:
   Exclude:
     - "lib/google-cloud-bigquery.rb"
 Naming/UncommunicativeMethodParamName:
   Exclude:
     - "lib/google/cloud/bigquery/external.rb"
-Style/IfUnlessModifier:
-  Enabled: false
-Style/NumericLiterals:
-  Enabled: false
-Style/NumericPredicate:
-  Enabled: false
-Style/SafeNavigation:
-  Enabled: false
-Style/SymbolArray:
-  Enabled: false
-Style/WordArray:
-  Enabled: false

@@ -440,15 +440,11 @@ module Google
         end
 
         def status_code_for_reason reason
-          codes = { "accessDenied" => 403, "backendError" => 500,
-                    "billingNotEnabled" => 403,
-                    "billingTierLimitExceeded" => 400, "blocked" => 403,
-                    "duplicate" => 409, "internalError" => 500,
-                    "invalid" => 400, "invalidQuery" => 400, "notFound" => 404,
-                    "notImplemented" => 501, "quotaExceeded" => 403,
-                    "rateLimitExceeded" => 403, "resourceInUse" => 400,
-                    "resourcesExceeded" => 400, "responseTooLarge" => 403,
-                    "tableUnavailable" => 400 }
+          codes = { "accessDenied" => 403, "backendError" => 500, "billingNotEnabled" => 403,
+                    "billingTierLimitExceeded" => 400, "blocked" => 403, "duplicate" => 409, "internalError" => 500,
+                    "invalid" => 400, "invalidQuery" => 400, "notFound" => 404, "notImplemented" => 501,
+                    "quotaExceeded" => 403, "rateLimitExceeded" => 403, "resourceInUse" => 400,
+                    "resourcesExceeded" => 400, "responseTooLarge" => 403, "tableUnavailable" => 400 }
           codes[reason] || 0
         end
       end
