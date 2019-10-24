@@ -1,18 +1,19 @@
 # Release History
 
-### 0.3.0 / 2019-10-01
+### 0.1.0 / 2019-10-24
 
-#### Cleanup
+* Renamed gem from grafeas-client to grafeas.
+* Now requires Ruby 2.4 or later.
+
+### grafeas-client 0.3.0 / 2019-10-01
 
 * Update VERSION location and constant to match rubygems conventions.
 
-### 0.2.1 / 2019-08-23
-
-#### Documentation
+### grafeas-client 0.2.1 / 2019-08-23
 
 * Update documentation
 
-### 0.2.0 / 2019-07-08
+### grafeas-client 0.2.0 / 2019-07-08
 
 * Support overriding service host and port.
 * VulnerabilityNote::Detail changes:
@@ -23,6 +24,6 @@
     * Remove min_affected_version
     * Add affected_version
 
-### 0.1.0 / 2019-06-21
+### grafeas-client 0.1.0 / 2019-06-21
 
 * Initial release.
