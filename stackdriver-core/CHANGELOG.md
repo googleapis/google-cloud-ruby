@@ -1,5 +1,9 @@
 # Release History
 
+### 1.4.0 / 2019-10-23
+
+Now requires Ruby 2.4 or later.
+
 ### 1.3.4 / 2019-08-23
 
 #### Documentation
