@@ -2,7 +2,9 @@
 
 In general, the google-cloud-storage library uses [Service
 Account](https://cloud.google.com/iam/docs/creating-managing-service-accounts)
-credentials to connect to Google Cloud services. When running on Compute Engine
+credentials to connect to Google Cloud services. When running on Google Cloud
+Platform (GCP), including Google Compute Engine (GCE), Google Kubernetes Engine
+(GKE), Google App Engine (GAE), Google Cloud Functions (GCF) and Cloud Run,
 the credentials will be discovered automatically. When running on other
 environments, the Service Account credentials can be specified by providing the
 path to the [JSON
@@ -35,32 +37,10 @@ providing **Project ID** and **Service Account Credentials** directly in code.
 
 ### Google Cloud Platform environments
 
-While running on Google Cloud Platform environments such as Google Compute
-Engine, Google App Engine and Google Kubernetes Engine, no extra work is needed.
-The **Project ID** and **Credentials** and are discovered automatically. Code
-should be written as if already authenticated. Just be sure when you [set up the
-GCE instance][gce-how-to], you add the correct scopes for the APIs you want to
-access. For example:
-
-  * **All APIs**
-    * `https://www.googleapis.com/auth/cloud-platform`
-    * `https://www.googleapis.com/auth/cloud-platform.read-only`
-  * **BigQuery**
-    * `https://www.googleapis.com/auth/bigquery`
-    * `https://www.googleapis.com/auth/bigquery.insertdata`
-  * **Compute Engine**
-    * `https://www.googleapis.com/auth/compute`
-  * **Datastore**
-    * `https://www.googleapis.com/auth/datastore`
-    * `https://www.googleapis.com/auth/userinfo.email`
-  * **DNS**
-    * `https://www.googleapis.com/auth/ndev.clouddns.readwrite`
-  * **Pub/Sub**
-    * `https://www.googleapis.com/auth/pubsub`
-  * **Storage**
-    * `https://www.googleapis.com/auth/devstorage.full_control`
-    * `https://www.googleapis.com/auth/devstorage.read_only`
-    * `https://www.googleapis.com/auth/devstorage.read_write`
+When running on Google Cloud Platform (GCP), including Google Compute Engine (GCE),
+Google Kubernetes Engine (GKE), Google App Engine (GAE), Google Cloud Functions
+(GCF) and Cloud Run, the **Project ID** and **Credentials** and are discovered
+automatically. Code should be written as if already authenticated.
 
 ### Environment Variables
 

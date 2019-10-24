@@ -16,7 +16,7 @@ $ gem install google-cloud-datastore
 
 ## Authentication
 
-This library uses Service Account credentials to connect to Google Cloud services. When running on Compute Engine the credentials will be discovered automatically. When running on other environments the Service Account credentials can be specified by providing the path to the JSON file, or the JSON itself, in environment variables.
+This library uses Service Account credentials to connect to Google Cloud services. When running on Google Cloud Platform (GCP), including Google Compute Engine (GCE), Google Kubernetes Engine (GKE), Google App Engine (GAE), Google Cloud Functions (GCF) and Cloud Run, the credentials will be discovered automatically. When running on other environments the Service Account credentials can be specified by providing the path to the JSON file, or the JSON itself, in environment variables.
 
 Instructions and configuration options are covered in the [Authentication Guide](https://googleapis.dev/ruby/google-cloud-datastore/latest/file.AUTHENTICATION.html).
 

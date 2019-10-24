@@ -4,7 +4,7 @@ With `google-cloud-ruby` it's incredibly easy to get authenticated and start usi
 
 ### Google Cloud Platform environments
 
-While running on Google Cloud Platform environments such as Google Compute Engine, Google App Engine and Google Kubernetes Engine, no extra work is needed. The **Project ID** and **Credentials** and are discovered automatically. Code should be written as if already authenticated.
+While running on Google Cloud Platform (GCP), including Google Compute Engine (GCE), Google Kubernetes Engine (GKE), Google App Engine (GAE), Google Cloud Functions (GCF) and Cloud Run, no extra work is needed. The **Project ID** and **Credentials** and are discovered automatically. Code should be written as if already authenticated.
 
 ### Project and Credential Lookup
 
