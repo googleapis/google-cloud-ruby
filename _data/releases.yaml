@@ -795,6 +795,7 @@ stackdriver:
 - v0.4.0
 - v0.3.0
 stackdriver-core:
+- v1.4.0
 - v1.3.4
 - v1.3.3
 - v1.3.2
