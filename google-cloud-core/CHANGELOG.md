@@ -2,9 +2,7 @@
 
 ### 1.4.0 / 2019-10-23
 
-#### Features
-
-* Update Ruby dependency to minimum of 2.4 ([#4206](https://www.github.com/googleapis/google-cloud-ruby/issues/4206))
+Now requires Ruby 2.4 or later.
 
 ### 1.3.2 / 2019-10-14
 
