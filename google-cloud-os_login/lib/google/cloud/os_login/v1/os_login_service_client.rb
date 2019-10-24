@@ -63,17 +63,17 @@ module Google
           ].freeze
 
 
-          FINGERPRINT_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
-            "users/{user}/sshPublicKeys/{fingerprint}"
-          )
-
-          private_constant :FINGERPRINT_PATH_TEMPLATE
-
-          PROJECT_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+          POSIX_ACCOUNT_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
             "users/{user}/projects/{project}"
           )
 
-          private_constant :PROJECT_PATH_TEMPLATE
+          private_constant :POSIX_ACCOUNT_PATH_TEMPLATE
+
+          SSH_PUBLIC_KEY_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+            "users/{user}/sshPublicKeys/{fingerprint}"
+          )
+
+          private_constant :SSH_PUBLIC_KEY_PATH_TEMPLATE
 
           USER_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
             "users/{user}"
@@ -81,25 +81,25 @@ module Google
 
           private_constant :USER_PATH_TEMPLATE
 
-          # Returns a fully-qualified fingerprint resource name string.
-          # @param user [String]
-          # @param fingerprint [String]
-          # @return [String]
-          def self.fingerprint_path user, fingerprint
-            FINGERPRINT_PATH_TEMPLATE.render(
-              :"user" => user,
-              :"fingerprint" => fingerprint
-            )
-          end
-
-          # Returns a fully-qualified project resource name string.
+          # Returns a fully-qualified posix_account resource name string.
           # @param user [String]
           # @param project [String]
           # @return [String]
-          def self.project_path user, project
-            PROJECT_PATH_TEMPLATE.render(
+          def self.posix_account_path user, project
+            POSIX_ACCOUNT_PATH_TEMPLATE.render(
               :"user" => user,
               :"project" => project
+            )
+          end
+
+          # Returns a fully-qualified ssh_public_key resource name string.
+          # @param user [String]
+          # @param fingerprint [String]
+          # @return [String]
+          def self.ssh_public_key_path user, fingerprint
+            SSH_PUBLIC_KEY_PATH_TEMPLATE.render(
+              :"user" => user,
+              :"fingerprint" => fingerprint
             )
           end
 
@@ -289,7 +289,7 @@ module Google
           #   require "google/cloud/os_login"
           #
           #   os_login_client = Google::Cloud::OsLogin.new(version: :v1)
-          #   formatted_name = Google::Cloud::OsLogin::V1::OsLoginServiceClient.project_path("[USER]", "[PROJECT]")
+          #   formatted_name = Google::Cloud::OsLogin::V1::OsLoginServiceClient.posix_account_path("[USER]", "[PROJECT]")
           #   os_login_client.delete_posix_account(formatted_name)
 
           def delete_posix_account \
@@ -321,7 +321,7 @@ module Google
           #   require "google/cloud/os_login"
           #
           #   os_login_client = Google::Cloud::OsLogin.new(version: :v1)
-          #   formatted_name = Google::Cloud::OsLogin::V1::OsLoginServiceClient.fingerprint_path("[USER]", "[FINGERPRINT]")
+          #   formatted_name = Google::Cloud::OsLogin::V1::OsLoginServiceClient.ssh_public_key_path("[USER]", "[FINGERPRINT]")
           #   os_login_client.delete_ssh_public_key(formatted_name)
 
           def delete_ssh_public_key \
@@ -393,11 +393,10 @@ module Google
           #   require "google/cloud/os_login"
           #
           #   os_login_client = Google::Cloud::OsLogin.new(version: :v1)
-          #   formatted_name = Google::Cloud::OsLogin::V1::OsLoginServiceClient.fingerprint_path("[USER]", "[FINGERPRINT]")
-          #   response = os_login_client.get_ssh_public_key(formatted_name)
+          #   response = os_login_client.get_ssh_public_key
 
           def get_ssh_public_key \
-              name,
+              name: nil,
               options: nil,
               &block
             req = {
@@ -432,14 +431,11 @@ module Google
           #
           #   os_login_client = Google::Cloud::OsLogin.new(version: :v1)
           #   formatted_parent = Google::Cloud::OsLogin::V1::OsLoginServiceClient.user_path("[USER]")
-          #
-          #   # TODO: Initialize `ssh_public_key`:
-          #   ssh_public_key = {}
-          #   response = os_login_client.import_ssh_public_key(formatted_parent, ssh_public_key)
+          #   response = os_login_client.import_ssh_public_key(formatted_parent)
 
           def import_ssh_public_key \
               parent,
-              ssh_public_key,
+              ssh_public_key: nil,
               project_id: nil,
               options: nil,
               &block
@@ -479,7 +475,7 @@ module Google
           #   require "google/cloud/os_login"
           #
           #   os_login_client = Google::Cloud::OsLogin.new(version: :v1)
-          #   formatted_name = Google::Cloud::OsLogin::V1::OsLoginServiceClient.fingerprint_path("[USER]", "[FINGERPRINT]")
+          #   formatted_name = Google::Cloud::OsLogin::V1::OsLoginServiceClient.ssh_public_key_path("[USER]", "[FINGERPRINT]")
           #
           #   # TODO: Initialize `ssh_public_key`:
           #   ssh_public_key = {}
