@@ -150,8 +150,11 @@ class Kokoro < Command
       "last-package-version" => version(gem),
       "release-type"         => "ruby-yoshi",
       "repo-url"             => "googleapis/google-cloud-ruby",
-      "token"                => token
-    }.to_a.map { |a| "--#{a[0]}=#{a[1]}" }.join(" ")
+      "token"                => token,
+      "bump-minor-pre-major" => true
+    }.map { |k, v|
+      v == true ? "--#{k}" : "--#{k}=#{v}"
+    }.join(" ")
     header_2 "Running release-please for #{gem}, since #{version gem}"
     run "npx release-please release-pr #{opts}"
   end
