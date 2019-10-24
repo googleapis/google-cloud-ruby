@@ -1,5 +1,13 @@
 # Release History
 
+### 1.3.0 / 2019-10-23
+
+Now requires Ruby 2.4 or later.
+
+#### Features
+
+* Recognize App Engine Standard and Knative
+
 ### 1.2.1 / 2019-08-23
 
 #### Bug Fixes
