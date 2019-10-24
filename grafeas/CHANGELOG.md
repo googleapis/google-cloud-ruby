@@ -1,6 +1,6 @@
 # Release History
 
-### 0.1.0 / 2019-10-25
+### 0.1.0 / 2019-10-24
 
 * Renamed gem from grafeas-client to grafeas.
 * Now requires Ruby 2.4 or later.
