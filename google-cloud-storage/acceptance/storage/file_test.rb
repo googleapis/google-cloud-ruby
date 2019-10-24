@@ -512,10 +512,46 @@ describe Google::Cloud::Storage::File, :storage do
         copy.content_language = "de"
       end
     end
+    uploaded.content_language.must_equal "en"
     copied.content_language.must_equal "de"
 
     uploaded.name.must_equal "CloudLogo"
     copied.name.must_equal "CloudLogoCopy"
+    copied.size.must_equal uploaded.size
+
+    Tempfile.open ["CloudLogo", ".png"] do |tmpfile1|
+      tmpfile1.binmode
+      Tempfile.open ["CloudLogoCopy", ".png"] do |tmpfile2|
+        tmpfile2.binmode
+        downloaded1 = uploaded.download tmpfile1
+        downloaded2 = copied.download tmpfile2
+        downloaded1.size.must_equal downloaded2.size
+
+        File.read(downloaded1.path, mode: "rb").must_equal File.read(downloaded2.path, mode: "rb")
+      end
+    end
+
+    uploaded.delete
+    copied.delete
+  end
+
+  it "should rewrite an existing file, with updates" do
+    uploaded = bucket.create_file files[:logo][:path], "CloudLogo.png"
+    uploaded.cache_control.must_be :nil?
+    uploaded.content_type.must_equal "image/png"
+
+    copied = try_with_backoff "rewriting existing file" do
+      uploaded.rewrite "CloudLogoCopy.png" do |f|
+        f.cache_control = "public, max-age: 7200"
+      end
+    end
+    uploaded.cache_control.must_be :nil?
+    uploaded.content_type.must_equal "image/png"
+    copied.cache_control.must_equal "public, max-age: 7200"
+    copied.content_type.must_equal "image/png"
+
+    uploaded.name.must_equal "CloudLogo.png"
+    copied.name.must_equal "CloudLogoCopy.png"
     copied.size.must_equal uploaded.size
 
     Tempfile.open ["CloudLogo", ".png"] do |tmpfile1|

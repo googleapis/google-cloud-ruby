@@ -1199,11 +1199,11 @@ module Google
 
           update_gapi = nil
           if block_given?
-            updater = Updater.new gapi
+            updater = Updater.new gapi.dup
             yield updater
             updater.check_for_changed_metadata!
             if updater.updates.any?
-              update_gapi = gapi_from_attrs updater.updates
+              update_gapi = updater.gapi
             end
           end
 
@@ -1791,7 +1791,7 @@ module Google
         # Yielded to a block to accumulate changes for a patch request.
         class Updater < File
           # @private
-          attr_reader :updates
+          attr_reader :updates, :gapi
 
           ##
           # @private Create an Updater object.
