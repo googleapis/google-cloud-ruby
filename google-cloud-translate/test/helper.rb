@@ -20,11 +20,12 @@ require "ostruct"
 require "json"
 require "base64"
 require "google/cloud/translate"
+require "google/cloud/translate/v2"
 
 class MockTranslate < Minitest::Spec
   let(:project) { "test" }
   let(:credentials) { OpenStruct.new(client: OpenStruct.new(updater_proc: Proc.new {})) }
-  let(:translate) { Google::Cloud::Translate::Api.new(Google::Cloud::Translate::Service.new(project, credentials)) }
+  let(:translate) { Google::Cloud::Translate::V2::Api.new(Google::Cloud::Translate::V2::Service.new(project, credentials)) }
 
   # Register this spec type for when :mock_translate is used.
   register_spec_type(self) do |desc, *addl|

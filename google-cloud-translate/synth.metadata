@@ -1,3 +1,32 @@
 {
-  "updateTime": "2019-03-07T23:34:25.752430Z"
+  "updateTime": "2019-10-25T16:39:21.778679Z",
+  "sources": [
+    {
+      "generator": {
+        "name": "artman",
+        "version": "0.40.2",
+        "dockerImage": "googleapis/artman@sha256:3b8f7d9b4c206843ce08053474f5c64ae4d388ff7d995e68b59fb65edf73eeb9"
+      }
+    },
+    {
+      "git": {
+        "name": "googleapis",
+        "remote": "https://github.com/googleapis/googleapis.git",
+        "sha": "42e5f98360abd726003a53048e24426aae834adc",
+        "internalRef": "276696539"
+      }
+    }
+  ],
+  "destinations": [
+    {
+      "client": {
+        "source": "googleapis",
+        "apiName": "translate",
+        "apiVersion": "v3",
+        "language": "ruby",
+        "generator": "gapic",
+        "config": "google/cloud/translate/artman_translate_v3.yaml"
+      }
+    }
+  ]
 }

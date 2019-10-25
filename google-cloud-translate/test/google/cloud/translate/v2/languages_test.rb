@@ -14,7 +14,7 @@
 
 require "helper"
 
-describe Google::Cloud::Translate::Api, :languages, :mock_translate do
+describe Google::Cloud::Translate::V2::Api, :languages, :mock_translate do
   it "lists languages without a language" do
     mock = Minitest::Mock.new
     languages_resource = { language: "af", name: nil }

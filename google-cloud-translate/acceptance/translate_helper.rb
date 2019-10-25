@@ -16,10 +16,10 @@ gem "minitest"
 require "minitest/autorun"
 require "minitest/focus"
 require "minitest/rg"
-require "google/cloud/translate"
+require "google/cloud/translate/v2"
 
 # Create shared translate object so we don't create new for each test
-$translate = Google::Cloud.new.translate retries: 10
+$translate = Google::Cloud::Translate::V2.new retries: 10
 
 module Acceptance
   ##
