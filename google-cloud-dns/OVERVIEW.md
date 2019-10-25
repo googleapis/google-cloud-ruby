@@ -7,13 +7,13 @@ be used to easily publish and manage DNS records using the same
 infrastructure relied upon by Google. To learn more, read [What is Google
 Cloud DNS?](https://cloud.google.com/dns/what-is-cloud-dns).
 
-The goal of google-cloud is to provide an API that is comfortable to
-Rubyists. Your authentication credentials are detected automatically in
-Google Cloud Platform environments such as Google Compute Engine, Google
-App Engine and Google Kubernetes Engine. In other environments you can
-configure authentication easily, either directly in your code or via
-environment variables. Read more about the options for connecting in the
-{file:AUTHENTICATION.md Authentication Guide}.
+The goal of google-cloud is to provide an API that is comfortable to Rubyists.
+Your authentication credentials are detected automatically in Google Cloud
+Platform (GCP), including Google Compute Engine (GCE), Google Kubernetes Engine
+(GKE), Google App Engine (GAE), Google Cloud Functions (GCF) and Cloud Run. In
+other environments you can configure authentication easily, either directly in
+your code or via environment variables. Read more about the options for
+connecting in the {file:AUTHENTICATION.md Authentication Guide}.
 
 ## Creating Zones
 

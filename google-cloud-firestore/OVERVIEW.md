@@ -12,9 +12,11 @@ Documentation](https://cloud.google.com/firestore/docs/).
 The goal of google-cloud is to provide an API that is comfortable to Rubyists.
 Authentication is handled by {Google::Cloud::Firestore.new Firestore.new}. You
 can provide the project and credential information to connect to the Cloud
-Firestore service, or if you are running on Google Compute Engine this
-configuration is taken care of for you. You can read more about the options for
-connecting in the {file:AUTHENTICATION.md Authentication Guide}.
+Firestore service, or if you are running on Google Cloud Platform (GCP),
+including Google Compute Engine (GCE), Google Kubernetes Engine (GKE), Google
+App Engine (GAE), Google Cloud Functions (GCF) and Cloud Run this configuration
+is taken care of for you. You can read more about the options for connecting in
+the {file:AUTHENTICATION.md Authentication Guide}.
 
 ## Adding data
 

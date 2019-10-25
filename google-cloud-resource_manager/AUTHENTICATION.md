@@ -2,7 +2,9 @@
 
 In general, the google-cloud-resource_manager library uses [Service
 Account](https://cloud.google.com/iam/docs/creating-managing-service-accounts)
-credentials to connect to Google Cloud services. When running on Compute Engine
+credentials to connect to Google Cloud services. When running on Google Cloud
+Platform (GCP), including Google Compute Engine (GCE), Google Kubernetes Engine
+(GKE), Google App Engine (GAE), Google Cloud Functions (GCF) and Cloud Run,
 the credentials will be discovered automatically. When running on other
 environments, the Service Account credentials can be specified by providing the
 path to the [JSON
