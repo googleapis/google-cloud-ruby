@@ -46,6 +46,11 @@ s.replace(
     'Google::Cloud::Translation',
     'Google::Cloud::Translate'
 )
+s.replace(
+    'lib/google/cloud/translate/v3/doc/**/*.rb',
+    'module Translation\n',
+    'module Translate\n'
+)
 
 # Support for service_address
 s.replace(

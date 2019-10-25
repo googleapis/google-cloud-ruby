@@ -15,7 +15,7 @@
 
 module Google
   module Cloud
-    module Translation
+    module Translate
       module V3
         # Configures which glossary should be used for a specific target language,
         # and defines options for applying that glossary.
