@@ -16,7 +16,6 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :name, :string, 1
     repeated :posix_accounts, :message, 2, "google.cloud.oslogin.common.PosixAccount"
     map :ssh_public_keys, :string, :message, 3, "google.cloud.oslogin.common.SshPublicKey"
-    optional :suspended, :bool, 4
   end
   add_message "google.cloud.oslogin.v1.DeletePosixAccountRequest" do
     optional :name, :string, 1
