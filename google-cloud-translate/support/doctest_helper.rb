@@ -53,29 +53,10 @@ end
 
 YARD::Doctest.configure do |doctest|
   # Skip all examples because of v3 example being difficult to mock...
+  doctest.skip "Google::Cloud#translate"
+  doctest.skip "Google::Cloud.translate"
   doctest.skip "Google::Cloud::Translate.new"
   doctest.skip "Google::Cloud::Translate::V3"
-
-  doctest.before "Google::Cloud#translate" do
-    mock_translate do |mock|
-      res_attrs = { detectedSourceLanguage: "en", translatedText: "Salve mundi!" }
-      mock.expect :translate, list_translations_response([res_attrs]), [["Hello world!"], to: "la", from: nil, format: nil, model: nil, cid: nil]
-    end
-  end
-
-  doctest.before "Google::Cloud#translate@Using API Key from the environment variable." do
-    mock_translate do |mock|
-      res_attrs = { detectedSourceLanguage: "en", translatedText: "Salve mundi!" }
-      mock.expect :translate, list_translations_response([res_attrs]), [["Hello world!"], to: "la", from: nil, format: nil, model: nil, cid: nil]
-    end
-  end
-
-  doctest.before "Google::Cloud.translate" do
-    mock_translate do |mock|
-      res_attrs = { detectedSourceLanguage: "en", translatedText: "Salve mundi!" }
-      mock.expect :translate, list_translations_response([res_attrs]), [["Hello world!"], to: "la", from: nil, format: nil, model: nil, cid: nil]
-    end
-  end
 
   doctest.before "Google::Cloud::Translate::V2.new" do
     mock_translate do |mock|

@@ -37,7 +37,7 @@ module Google
     # reassemble the translated content.
     #
     # The google-cloud-translate 2.0 gem contains a generated v3 client and a legacy hand-written v2 client.
-    # To use the legacy v2 client specify `version: :v2` when `Google::Cloud::Translate.new`.
+    # To use the legacy v2 client, call {Google::Cloud::Translate.new} and specify `version: :v2`.
     # See [Migrating to Translation v3](https://cloud.google.com/translate/docs/migrate-to-v3) for details regarding
     # differences between v2 and v3.
     #
@@ -199,6 +199,8 @@ module Google
       # * `retries` - (Integer) Number of times to retry requests on server error.
       # * `timeout` - (Integer) Default timeout to use in requests.
       # * `endpoint` - (String) Override of the endpoint host name, or `nil` to use the default endpoint.
+      #
+      # @note These values are only used by the legacy v2 client.
       #
       # @return [Google::Cloud::Config] The configuration object the Google::Cloud::Translate library uses.
       #

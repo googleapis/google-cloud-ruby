@@ -28,98 +28,110 @@ module Google
     ##
     # Creates a new object for connecting to the Cloud Translation API. Each call creates a new connection.
     #
-    # Like other Cloud Platform services, Google Cloud Translation API supports authentication using a project ID and
-    # OAuth 2.0 credentials. In addition, it supports authentication using a public API access key. (If both the API key
-    # and the project and OAuth 2.0 credentials are provided, the API key will be used.) Instructions and configuration
-    # options are covered in the {file:AUTHENTICATION.md Authentication Guide}.
+    # For more information on connecting to Google Cloud see the {file:AUTHENTICATION.md Authentication Guide}.
+    #
+    # To use the legacy v2 client, call {Google::Cloud::Translate.new} and specify `version: :v2`.
     #
     # @param [String] key a public API access key (not an OAuth 2.0 token)
-    # @param [String, Array<String>] scope The OAuth 2.0 scopes controlling the set of resources and operations that the
-    # connection can access. See [Using OAuth 2.0 to Access Google
-    # APIs](https://developers.google.com/identity/protocols/OAuth2).
+    # @param [String, Array<String>] scopes The OAuth 2.0 scopes controlling the set of resources and operations that
+    #   the connection can access. See [Using OAuth 2.0 to Access Google
+    #   APIs](https://developers.google.com/identity/protocols/OAuth2).
     #
-    #   The default scope is:
+    #   The default scopes are:
     #
     #   * `https://www.googleapis.com/auth/cloud-platform`
-    # @param [Integer] retries Number of times to retry requests on server error. The default value is `3`. Optional.
+    #   * `https://www.googleapis.com/auth/cloud-translation`
     # @param [Integer] timeout Default timeout to use in requests. Optional.
     #
-    # @return [Google::Cloud::Translate::V2::Api]
+    # @return [Google::Cloud::Translate::V3::TranslationServiceClient]
     #
     # @example
     #   require "google/cloud"
     #
     #   gcloud = Google::Cloud.new
-    #   translate = gcloud.translate "api-key-abc123XYZ789"
+    #   client = gcloud.translate
     #
-    #   translation = translate.translate "Hello world!", to: "la"
-    #   translation.text #=> "Salve mundi!"
+    #   project_id = "my-project-id"
+    #   location_id = "us-central1"
+    #   model_id = "my-automl-model-id"
     #
-    # @example Using API Key from the environment variable.
-    #   require "google/cloud"
+    #   # The `model` type requested for this translation.
+    #   model = "projects/#{project_id}/locations/#{location_id}/models/#{model_id}"
+    #   # The content to translate in string format
+    #   contents = ["Hello, world!"]
+    #   # Required. The BCP-47 language code to use for translation.
+    #   target_language = "fr"
+    #   # Optional. The BCP-47 language code of the input text.
+    #   source_language = "en"
+    #   # Optional. Can be "text/plain" or "text/html".
+    #   mime_type = "text/plain"
+    #   parent = client.class.location_path project_id, location_id
     #
-    #   ENV["TRANSLATE_KEY"] = "api-key-abc123XYZ789"
+    #   response = client.translate_text contents, target_language, parent,
+    #     source_language_code: source_language, model: model, mime_type: mime_type
     #
-    #   gcloud = Google::Cloud.new
-    #   translate = gcloud.translate
+    #   # Display the translation for each input text provided
+    #   response.translations.each do |translation|
+    #     puts "Translated text: #{translation.translated_text}"
+    #   end
     #
-    #   translation = translate.translate "Hello world!", to: "la"
-    #   translation.text #=> "Salve mundi!"
-    #
-    def translate key = nil, scope: nil, retries: nil, timeout: nil
-      Google::Cloud.translate key, project_id: @project, credentials: @keyfile,
-                                   scope: scope,
-                                   retries: (retries || @retries),
-                                   timeout: (timeout || @timeout)
+    def translate scopes: nil, timeout: nil
+      Google::Cloud.translate credentials: @keyfile, scopes: scopes, timeout: (timeout || @timeout)
     end
 
     ##
     # Creates a new object for connecting to the Cloud Translation API. Each call creates a new connection.
     #
-    # Like other Cloud Platform services, Google Cloud Translation API supports authentication using a project ID and
-    # OAuth 2.0 credentials. In addition, it supports authentication using a public API access key. (If both the API key
-    # and the project and OAuth 2.0 credentials are provided, the API key will be used.) Instructions and configuration
-    # options are covered in the {file:AUTHENTICATION.md Authentication Guide}.
+    # For more information on connecting to Google Cloud see the {file:AUTHENTICATION.md Authentication Guide}.
     #
-    # @param [String] key a public API access key (not an OAuth 2.0 token)
-    # @param [String] project_id Project identifier for the Cloud Translation service you are connecting to. If not
-    #   present, the default project for the credentials is used.
+    # To use the legacy v2 client, call {Google::Cloud::Translate.new} and specify `version: :v2`.
+    #
     # @param [String, Hash, Google::Auth::Credentials] credentials The path to the keyfile as a String, the contents of
-    #   the keyfile as a Hash, or a Google::Auth::Credentials object. (See {Google::Cloud::Translate::V2::Credentials})
-    # @param [String, Array<String>] scope The OAuth 2.0 scopes controlling the set of resources and operations that the
-    #   connection can access. See [Using OAuth 2.0 to Access Google
+    #   the keyfile as a Hash, or a Google::Auth::Credentials object. (See {Google::Cloud::Translate::V3::Credentials})
+    # @param [String, Array<String>] scopes The OAuth 2.0 scopes controlling the set of resources and operations that
+    #   the connection can access. See [Using OAuth 2.0 to Access Google
     #   APIs](https://developers.google.com/identity/protocols/OAuth2).
     #
-    #   The default scope is:
+    #   The default scopes are:
     #
     #   * `https://www.googleapis.com/auth/cloud-platform`
-    # @param [Integer] retries Number of times to retry requests on server error. The default value is `3`. Optional.
+    #   * `https://www.googleapis.com/auth/cloud-translation`
     # @param [Integer] timeout Default timeout to use in requests. Optional.
     #
-    # @return [Google::Cloud::Translate::V2::Api]
+    # @return [Google::Cloud::Translate::V3::TranslationServiceClient]
     #
     # @example
     #   require "google/cloud"
     #
-    #   translate = Google::Cloud.translate "api-key-abc123XYZ789"
+    #   client = Google::Cloud.translate
     #
-    #   translation = translate.translate "Hello world!", to: "la"
-    #   translation.text #=> "Salve mundi!"
+    #   project_id = "my-project-id"
+    #   location_id = "us-central1"
+    #   model_id = "my-automl-model-id"
     #
-    # @example Using API Key from the environment variable.
-    #   require "google/cloud"
+    #   # The `model` type requested for this translation.
+    #   model = "projects/#{project_id}/locations/#{location_id}/models/#{model_id}"
+    #   # The content to translate in string format
+    #   contents = ["Hello, world!"]
+    #   # Required. The BCP-47 language code to use for translation.
+    #   target_language = "fr"
+    #   # Optional. The BCP-47 language code of the input text.
+    #   source_language = "en"
+    #   # Optional. Can be "text/plain" or "text/html".
+    #   mime_type = "text/plain"
+    #   parent = client.class.location_path project_id, location_id
     #
-    #   ENV["TRANSLATE_KEY"] = "api-key-abc123XYZ789"
+    #   response = client.translate_text contents, target_language, parent,
+    #     source_language_code: source_language, model: model, mime_type: mime_type
     #
-    #   translate = Google::Cloud.translate
+    #   # Display the translation for each input text provided
+    #   response.translations.each do |translation|
+    #     puts "Translated text: #{translation.translated_text}"
+    #   end
     #
-    #   translation = translate.translate "Hello world!", to: "la"
-    #   translation.text #=> "Salve mundi!"
-    #
-    def self.translate key = nil, project_id: nil, credentials: nil, scope: nil, retries: nil, timeout: nil
-      require "google/cloud/translate/v2"
-      Google::Cloud::Translate::V2.new key: key, project_id: project_id, credentials: credentials, scope: scope,
-                                       retries: retries, timeout: timeout
+    def self.translate credentials: nil, scopes: nil, timeout: nil
+      require "google/cloud/translate/v3"
+      Google::Cloud::Translate::V3.new credentials: credentials, scopes: scopes, timeout: timeout
     end
   end
 end

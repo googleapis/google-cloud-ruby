@@ -14,6 +14,7 @@
 
 require "minitest/autorun"
 require "minitest/spec"
+require "minitest/focus"
 
 require "google/gax"
 

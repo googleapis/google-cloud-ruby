@@ -14,7 +14,7 @@ with translated text back. You don't need to extract your source text or
 reassemble the translated content.
 
 The google-cloud-translate 2.0 gem contains a generated v3 client and a legacy hand-written v2 client.
-To use the legacy v2 client specify `version: :v2` when `Google::Cloud::Translate.new`.
+To use the legacy v2 client, call {Google::Cloud::Translate.new} and specify `version: :v2`.
 See [Migrating to Translation v3](https://cloud.google.com/translate/docs/migrate-to-v3) for details regarding differences between v2 and v3.
 
 ## Authenticating
@@ -231,7 +231,7 @@ end
 
 Translating text from one language to another is easy (and extremely
 fast.) The only required arguments to
-{Google::Cloud::Translate::Api#translate} are a string and the [ISO
+{Google::Cloud::Translate::V2::Api#translate} are a string and the [ISO
 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) code of the
 language to which you wish to translate.
 
