@@ -231,7 +231,7 @@ end
 
 Translating text from one language to another is easy (and extremely
 fast.) The only required arguments to
-{Google::Cloud::Translate::::Api#translate} are a string and the [ISO
+{Google::Cloud::Translate::Api#translate} are a string and the [ISO
 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) code of the
 language to which you wish to translate.
 
