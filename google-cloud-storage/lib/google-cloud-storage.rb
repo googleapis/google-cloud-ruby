@@ -139,5 +139,5 @@ Google::Cloud.configure.add_config! :storage do |config|
   config.add_field! :retries, nil, match: Integer
   config.add_field! :timeout, nil, match: Integer
   # Update default endpoint to use updated endpoint.
-  config.add_field! :endpoint, 'https://storage.googleapis.com', match: String
+  config.add_field! :endpoint, "https://storage.googleapis.com/", match: String
 end
