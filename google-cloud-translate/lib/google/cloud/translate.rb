@@ -36,6 +36,11 @@ module Google
     # with translated text back. You don't need to extract your source text or
     # reassemble the translated content.
     #
+    # The google-cloud-translate 2.0 gem contains a generated v3 client and a legacy hand-written v2 client.
+    # To use the legacy v2 client specify `version: :v2` when `Google::Cloud::Translate.new`.
+    # See [Migrating to Translation v3](https://cloud.google.com/translate/docs/migrate-to-v3) for details regarding
+    # differences between v2 and v3.
+    #
     # See {file:OVERVIEW.md Translation Overview}.
     #
     module Translate
@@ -104,7 +109,36 @@ module Google
       #   @param [String] endpoint Override of the endpoint host name. Optional. If the param is nil, uses the default
       #     endpoint.
       #
-      # @example Using the legacy V2 client.
+      # @example Using the v3 client.
+      #   require "google/cloud/translate"
+      #
+      #   client = Google::Cloud::Translate.new
+      #
+      #   project_id = "my-project-id"
+      #   location_id = "us-central1"
+      #   model_id = "my-automl-model-id"
+      #
+      #   # The `model` type requested for this translation.
+      #   model = "projects/#{project_id}/locations/#{location_id}/models/#{model_id}"
+      #   # The content to translate in string format
+      #   contents = ["Hello, world!"]
+      #   # Required. The BCP-47 language code to use for translation.
+      #   target_language = "fr"
+      #   # Optional. The BCP-47 language code of the input text.
+      #   source_language = "en"
+      #   # Optional. Can be "text/plain" or "text/html".
+      #   mime_type = "text/plain"
+      #   parent = client.class.location_path project_id, location_id
+      #
+      #   response = client.translate_text contents, target_language, parent,
+      #     source_language_code: source_language, model: model, mime_type: mime_type
+      #
+      #   # Display the translation for each input text provided
+      #   response.translations.each do |translation|
+      #     puts "Translated text: #{translation.translated_text}"
+      #   end
+      #
+      # @example Using the legacy v2 client.
       #   require "google/cloud/translate"
       #
       #   translate = Google::Cloud::Translate.new(
@@ -116,7 +150,7 @@ module Google
       #   translation = translate.translate "Hello world!", to: "la"
       #   translation.text #=> "Salve mundi!"
       #
-      # @example Using the legacy V2 client with an API Key.
+      # @example Using the legacy v2 client with an API Key.
       #   require "google/cloud/translate"
       #
       #   translate = Google::Cloud::Translate.new(

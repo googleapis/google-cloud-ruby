@@ -13,6 +13,10 @@ thousands of language pairs. Also, you can send in HTML and receive HTML
 with translated text back. You don't need to extract your source text or
 reassemble the translated content.
 
+The google-cloud-translate 2.0 gem contains a generated v3 client and a legacy hand-written v2 client.
+To use the legacy v2 client specify `version: :v2` when `Google::Cloud::Translate.new`.
+See [Migrating to Translation v3](https://cloud.google.com/translate/docs/migrate-to-v3) for details regarding differences between v2 and v3.
+
 ## Authenticating
 
 Like other Cloud Platform services, Google Cloud Translation API supports
@@ -22,17 +26,212 @@ key and the project and OAuth 2.0 credentials are provided, the API key
 will be used.) Instructions and configuration options are covered in the
 {file:AUTHENTICATION.md Authentication Guide}.
 
-## Using the current V3 client
+## Using the v3 client
 
-Use the samples to drive the guide here...
+The Cloud Translation API v3 includes several new features and updates:
 
-## Using the legacy V2 client
+* Glossaries - Create a custom dictionary to correctly and consistently translate terms that are customer-specific.
+* Batch requests - Make an asynchronous request to translate large amounts of text.
+* AutoML models - Cloud Translation adds support for translating text with custom models that you create using AutoML Translation.
+* Labels - The Cloud Translation API supports adding user-defined labels (key-value pairs) to requests.
+
+### Translating texts
+
+Cloud Translation v3 introduces support for translating text using custom AutoML Translation models, and for creating glossaries to ensure that the Cloud Translation API translates a customer's domain-specific terminology correctly.
+
+Performing a default translation:
+
+```ruby
+require "google/cloud/translate"
+
+client = Google::Cloud::Translate.new
+
+project_id = "my-project-id"
+location_id = "us-central1"
+
+# The content to translate in string format
+contents = ["Hello, world!"]
+# Required. The BCP-47 language code to use for translation.
+target_language = "fr"
+parent = client.class.location_path project_id, location_id
+
+response = client.translate_text contents, target_language, parent
+
+# Display the translation for each input text provided
+response.translations.each do |translation|
+  puts "Translated text: #{translation.translated_text}"
+end
+```
+
+To use AutoML custom models you enable the [AutoML API](automl.googleapis.com) for your project before translating as follows:
+
+```ruby
+require "google/cloud/translate"
+
+client = Google::Cloud::Translate.new
+
+project_id = "my-project-id"
+location_id = "us-central1"
+model_id = "my-automl-model-id"
+
+# The `model` type requested for this translation.
+model = "projects/#{project_id}/locations/#{location_id}/models/#{model_id}"
+# The content to translate in string format
+contents = ["Hello, world!"]
+# Required. The BCP-47 language code to use for translation.
+target_language = "fr"
+# Optional. The BCP-47 language code of the input text.
+source_language = "en"
+# Optional. Can be "text/plain" or "text/html".
+mime_type = "text/plain"
+parent = client.class.location_path project_id, location_id
+
+response = client.translate_text contents, target_language, parent,
+  source_language_code: source_language, model: model, mime_type: mime_type
+
+# Display the translation for each input text provided
+response.translations.each do |translation|
+  puts "Translated text: #{translation.translated_text}"
+end
+```
+
+To use a glossary you need to create a Google Cloud Storage bucket and grant your service account access to it before translating as follows:
+
+```ruby
+require "google/cloud/translate"
+
+client = Google::Cloud::Translate.new
+
+project_id = "my-project-id"
+location_id = "us-central1"
+glossary_id = "my-glossary-id"
+
+# The content to translate in string format
+contents = ["Hello, world!"]
+# Required. The BCP-47 language code to use for translation.
+target_language = "fr"
+# Optional. The BCP-47 language code of the input text.
+source_language = "en"
+glossary_config = {
+  # Specifies the glossary used for this translation.
+  glossary: client.class.glossary_path(project_id, location_id, glossary_id)
+}
+# Optional. Can be "text/plain" or "text/html".
+mime_type = "text/plain"
+parent = client.class.location_path project_id, location_id
+
+response = client.translate_text contents, target_language, parent,
+  source_language_code: source_language, glossary_config: glossary_config, mime_type: mime_type
+
+# Display the translation for each input text provided
+response.translations.each do |translation|
+  puts "Translated text: #{translation.translated_text}"
+end
+```
+
+### Batch translating texts
+
+Batch translation allows you to translate large amounts of text (with a limit of 1,000 files per batch), and to up to 10 different target languages.
+Batch translation also supports AutoML models and glossaries.
+To make batch requests you need to create a Google Cloud Storage bucket and grant your service account access to it before translating as follows:
+
+```ruby
+require "google/cloud/translate"
+
+client = Google::Cloud::Translate.new
+
+input_uri = "gs://cloud-samples-data/text.txt"
+output_uri = "gs://my-bucket-id/path_to_store_results/"
+project_id = "my-project-id"
+location_id = "us-central1"
+source_lang = "en"
+target_lang = "ja"
+
+input_config = {
+  gcs_source: {
+    input_uri: input_uri
+  },
+  # Optional. Can be "text/plain" or "text/html".
+  mime_type: "text/plain"
+}
+output_config = {
+  gcs_destination: {
+    output_uri_prefix: output_uri
+  }
+}
+parent = client.class.location_path project_id, location_id
+
+operation = client.batch_translate_text \
+  parent, source_lang, [target_lang], [input_config], output_config
+
+# Wait until the long running operation is done
+operation.wait_until_done!
+
+response = operation.response
+
+puts "Total Characters: #{response.total_characters}"
+puts "Translated Characters: #{response.translated_characters}"
+```
+
+### Detecting languages
+
+You can detect the language of a text string:
+
+```ruby
+require "google/cloud/translate"
+
+client = Google::Cloud::Translate.new
+
+project_id = "my-project-id"
+location_id = "us-central1"
+# The text string for performing language detection
+content = "Hello, world!"
+# Optional. Can be "text/plain" or "text/html".
+mime_type = "text/plain"
+
+parent = client.class.location_path project_id, location_id
+
+response = client.detect_language parent, content: content, mime_type: mime_type
+
+# Display list of detected languages sorted by detection confidence.
+# The most probable language is first.
+response.languages.each do |language|
+  # The language detected
+  puts "Language Code: #{language.language_code}"
+  # Confidence of detection result for this language
+  puts "Confidence: #{language.confidence}"
+end
+```
+
+### Listing supported languages
+
+You can discover the [supported languages](https://cloud.google.com/translate/docs/languages) of the v3 API:
+
+```ruby
+require "google/cloud/translate"
+
+client = Google::Cloud::Translate.new
+
+project_id = "my-project-id"
+location_id = "us-central1"
+
+parent = client.class.location_path project_id, location_id
+
+response = client.get_supported_languages parent
+
+# List language codes of supported languages
+response.languages.each do |language|
+  puts "Language Code: #{language.language_code}"
+end
+```
+
+## Using the legacy v2 client
 
 ### Translating texts
 
 Translating text from one language to another is easy (and extremely
 fast.) The only required arguments to
-{Google::Cloud::Translate::V2::Api#translate} are a string and the [ISO
+{Google::Cloud::Translate::::Api#translate} are a string and the [ISO
 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) code of the
 language to which you wish to translate.
 
