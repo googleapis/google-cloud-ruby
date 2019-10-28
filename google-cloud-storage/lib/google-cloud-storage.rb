@@ -138,5 +138,6 @@ Google::Cloud.configure.add_config! :storage do |config|
   config.add_field! :scope, nil, match: [String, Array]
   config.add_field! :retries, nil, match: Integer
   config.add_field! :timeout, nil, match: Integer
-  config.add_field! :endpoint, nil, match: String
+  # TODO: Remove once discovery document is updated.
+  config.add_field! :endpoint, "https://storage.googleapis.com/", match: String
 end

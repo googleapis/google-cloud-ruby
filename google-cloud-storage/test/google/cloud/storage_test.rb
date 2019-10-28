@@ -105,7 +105,8 @@ describe Google::Cloud do
         credentials.must_equal "storage-credentials"
         retries.must_be :nil?
         timeout.must_be :nil?
-        host.must_be :nil?
+        # TODO: Remove once discovery document is updated.
+        host.must_equal "https://storage.googleapis.com/"
         OpenStruct.new project: project
       }
 
@@ -208,7 +209,8 @@ describe Google::Cloud do
         credentials.must_equal "storage-credentials"
         retries.must_be :nil?
         timeout.must_be :nil?
-        host.must_be :nil?
+        # TODO: Remove once discovery document is updated.
+        host.must_equal "https://storage.googleapis.com/"
         OpenStruct.new project: project
       }
 
@@ -240,7 +242,8 @@ describe Google::Cloud do
         credentials.must_equal "storage-credentials"
         retries.must_be :nil?
         timeout.must_be :nil?
-        host.must_be :nil?
+        # TODO: Remove once discovery document is updated.
+        host.must_equal "https://storage.googleapis.com/"
         OpenStruct.new project: project
       }
 
@@ -273,7 +276,8 @@ describe Google::Cloud do
         credentials.project_id.must_equal "project-id"
         retries.must_be :nil?
         timeout.must_be :nil?
-        host.must_be :nil?
+        # TODO: Remove once discovery document is updated.
+        host.must_equal "https://storage.googleapis.com/"
         OpenStruct.new project: project
       }
       empty_env = OpenStruct.new
@@ -316,7 +320,8 @@ describe Google::Cloud do
         credentials.must_equal "storage-credentials"
         retries.must_be :nil?
         timeout.must_be :nil?
-        host.must_be :nil?
+        # TODO: Remove once discovery document is updated.
+        host.must_equal "https://storage.googleapis.com/"
         OpenStruct.new project: project
       }
 
@@ -354,7 +359,8 @@ describe Google::Cloud do
         credentials.must_equal "storage-credentials"
         retries.must_be :nil?
         timeout.must_be :nil?
-        host.must_be :nil?
+        # TODO: Remove once discovery document is updated.
+        host.must_equal "https://storage.googleapis.com/"
         OpenStruct.new project: project
       }
 
@@ -392,7 +398,8 @@ describe Google::Cloud do
         credentials.must_equal "storage-credentials"
         retries.must_equal 3
         timeout.must_equal 42
-        host.must_be :nil?
+        # TODO: Remove once discovery document is updated.
+        host.must_equal "https://storage.googleapis.com/"
         OpenStruct.new project: project
       }
 
