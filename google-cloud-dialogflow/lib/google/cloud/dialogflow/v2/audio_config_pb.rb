@@ -4,6 +4,7 @@
 
 require 'google/protobuf'
 
+require 'google/api/field_behavior_pb'
 require 'google/protobuf/duration_pb'
 require 'google/api/annotations_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
