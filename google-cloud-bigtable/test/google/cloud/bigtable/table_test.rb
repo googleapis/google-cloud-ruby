@@ -18,21 +18,24 @@
 require "helper"
 
 describe Google::Cloud::Bigtable::Table, :mock_bigtable do
-  it "knows the identifiers" do
-    instance_id = "test-instance"
-    table_id = "test-table"
+  let(:instance_id) { "test-instance" }
+  let(:table_id) { "test-table" }
 
-    cluster_states = clusters_state_grpc
-    column_families = column_families_grpc
-    table_grpc = Google::Bigtable::Admin::V2::Table.new(
-      table_hash(
-        name: table_path(instance_id, table_id),
-        cluster_states: cluster_states,
-        column_families: column_families,
-        granularity: :MILLIS
-      )
+  let(:cluster_states) { clusters_state_grpc }
+  let(:column_families) { column_families_grpc }
+  let(:table_grpc) do
+    Google::Bigtable::Admin::V2::Table.new(
+    table_hash(
+      name: table_path(instance_id, table_id),
+      cluster_states: cluster_states,
+      column_families: column_families,
+      granularity: :MILLIS
     )
-    table = Google::Cloud::Bigtable::Table.from_grpc(table_grpc, bigtable.service, view: :FULL)
+  )
+  end
+  let(:table) { Google::Cloud::Bigtable::Table.from_grpc(table_grpc, bigtable.service, view: :FULL) }
+
+  it "knows the identifiers" do
 
     table.must_be_kind_of Google::Cloud::Bigtable::Table
     table.project_id.must_equal project_id
@@ -94,6 +97,29 @@ describe Google::Cloud::Bigtable::Table, :mock_bigtable do
     it "get filter module" do
       filter = table.filter
       filter.must_equal Google::Cloud::Bigtable::RowFilter
+    end
+  end
+
+  it "reloads its state" do
+    mock = Minitest::Mock.new
+    mock.expect :get_table, table_grpc, [table_path(instance_id, table_id), view: nil]
+    table.service.mocked_tables = mock
+
+    table.reload!
+
+    mock.verify
+
+    table.project_id.must_equal project_id
+    table.instance_id.must_equal instance_id
+    table.name.must_equal table_id
+    table.path.must_equal table_path(instance_id, table_id)
+    table.granularity.must_equal :MILLIS
+
+    table.column_families.must_be_instance_of Google::Cloud::Bigtable::ColumnFamilyMap
+    table.column_families.must_be :frozen?
+    table.column_families.names.sort.must_equal column_families.keys
+    table.column_families.each do |name, cf|
+      cf.gc_rule.to_grpc.must_equal column_families[cf.name].gc_rule
     end
   end
 end

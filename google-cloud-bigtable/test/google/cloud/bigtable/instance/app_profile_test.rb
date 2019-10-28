@@ -1,4 +1,4 @@
-# Copyright 2018 Google LLC
+# Copyright 2019 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,7 +15,7 @@
 
 require "helper"
 
-describe Google::Cloud::Bigtable::Instance, :cluster, :mock_bigtable do
+describe Google::Cloud::Bigtable::Instance, :app_profile, :mock_bigtable do
   let(:instance_id) { "test-instance" }
   let(:location_id) { "us-east-1b" }
   let(:instance_grpc){
@@ -25,41 +25,29 @@ describe Google::Cloud::Bigtable::Instance, :cluster, :mock_bigtable do
     Google::Cloud::Bigtable::Instance.from_grpc(instance_grpc, bigtable.service)
   }
 
-  it "gets an cluster" do
-    cluster_id = "found-cluster"
+  it "gets an app_profile" do
+    app_profile_id = "found-app_profile"
 
-    get_res = Google::Bigtable::Admin::V2::Cluster.new(
-      cluster_hash(
-        name: cluster_path(instance_id, cluster_id),
-        nodes: 3,
-        location: location_id,
-        storage_type: :SSD,
-        state: :READY
-      )
-    )
+    get_res = app_profile_grpc instance_id, app_profile_id
 
     mock = Minitest::Mock.new
-    mock.expect :get_cluster, get_res, [cluster_path(instance_id, cluster_id)]
+    mock.expect :get_app_profile, get_res, [app_profile_path(instance_id, app_profile_id)]
     bigtable.service.mocked_instances = mock
-    cluster = instance.cluster(cluster_id)
+    app_profile = instance.app_profile(app_profile_id)
 
     mock.verify
 
-    cluster.project_id.must_equal project_id
-    cluster.instance_id.must_equal instance_id
-    cluster.cluster_id.must_equal cluster_id
-    cluster.path.must_equal cluster_path(instance_id, cluster_id)
-    cluster.state.must_equal :READY
-    cluster.ready?.must_equal true
-    cluster.storage_type.must_equal :SSD
-    cluster.nodes.must_equal 3
+    app_profile.project_id.must_equal project_id
+    app_profile.instance_id.must_equal instance_id
+    app_profile.name.must_equal app_profile_id
+    app_profile.path.must_equal app_profile_path(instance_id, app_profile_id)
   end
 
-  it "returns nil when getting an non-existent cluster" do
-    not_found_cluster_id = "not-found-cluster"
+  it "returns nil when getting an non-existent app_profile" do
+    not_found_app_profile_id = "not-found-app_profile"
 
     stub = Object.new
-    def stub.get_cluster *args
+    def stub.get_app_profile *args
       gax_error = Google::Gax::GaxError.new "not found"
       gax_error.instance_variable_set :@cause, GRPC::BadStatus.new(5, "not found")
       raise gax_error
@@ -67,7 +55,7 @@ describe Google::Cloud::Bigtable::Instance, :cluster, :mock_bigtable do
 
     bigtable.service.mocked_instances = stub
 
-    cluster = instance.cluster(not_found_cluster_id)
-    cluster.must_be :nil?
+    app_profile = instance.app_profile(not_found_app_profile_id)
+    app_profile.must_be :nil?
   end
 end

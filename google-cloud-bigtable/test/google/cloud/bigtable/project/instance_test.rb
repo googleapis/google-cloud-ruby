@@ -17,8 +17,8 @@
 
 require "helper"
 
-describe Google::Cloud::Bigtable::Instance, :cluster, :mock_bigtable do
-  it "gets a cluster" do
+describe Google::Cloud::Bigtable::Project, :instance, :mock_bigtable do
+  it "gets an instance" do
     instance_id = "found-instance"
 
     get_res = Google::Bigtable::Admin::V2::Instance.new(
