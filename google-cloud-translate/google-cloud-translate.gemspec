@@ -20,6 +20,13 @@ Gem::Specification.new do |gem|
 
   gem.required_ruby_version = ">= 2.4"
 
+  gem.post_install_message = <<~POSTINSTALL
+    The 2.0 release introduces breaking changes to support the v3 API using a
+    code generated v3 client, as well as the legacy hand-written v2 client.
+    For more details please visit the 2.0.0 CHANGELOG:
+    https://googleapis.dev/ruby/google-cloud-translate/v2.0.0/file.CHANGELOG.html#2_0_0___2019-10-28
+  POSTINSTALL
+
   gem.add_dependency "faraday", "~> 0.13"
   gem.add_dependency "google-cloud-core", "~> 1.2"
   gem.add_dependency "google-gax", "~> 1.7"
