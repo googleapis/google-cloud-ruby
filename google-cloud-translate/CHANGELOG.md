@@ -1,5 +1,32 @@
 # Release History
 
+### 2.0.0 / 2019-10-28
+
+#### ⚠ BREAKING CHANGES
+
+* **translate:** Add Translate V3 client
+
+#### Features
+
+* Update Ruby dependency to minimum of 2.4 ([#4206](https://www.github.com/googleapis/google-cloud-ruby/issues/4206))
+* Add Translate V3 client
+  * Update google-cloud-translate to contain a generated v3 client
+  * The v3 client includes several new features and updates:
+    * Glossaries - Create a custom dictionary to correctly and 
+    * Batch requests - Make an asynchronous request to translate
+    * AutoML models - Cloud Translation adds support for translating
+    * Labels - The Cloud Translation API supports adding user-defined
+  * The following methods now return an instance of
+    * Google::Cloud#translate
+    * Google::Cloud.translate
+    * Google::Cloud::Translate.new
+  * To use the legacy v2 client specify the version when creating:
+    * Google::Cloud::Translate.new version: :v2
+
+#### Documentation
+
+* Update the list of GCP environments for automatic authentication
+
 ### 1.4.0 / 2019-10-01
 
 #### Features
