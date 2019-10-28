@@ -2,13 +2,8 @@
 
 ### 1.22.0 / 2019-10-28
 
-#### Features
-
-* Update Ruby dependency to minimum of 2.4 ([#4206](https://www.github.com/googleapis/google-cloud-ruby/issues/4206))
-
-#### Documentation
-
-* Update the list of GCP environments for automatic authentication
+* Now requires Ruby 2.4 or later.
+* This release uses the updated default endpoint for Cloud Storage.
 
 ### 1.21.1 / 2019-09-30
 
