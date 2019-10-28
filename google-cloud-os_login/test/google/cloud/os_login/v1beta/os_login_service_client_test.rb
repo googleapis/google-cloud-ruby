@@ -214,8 +214,7 @@ describe Google::Cloud::OsLogin::V1beta::OsLoginServiceClient do
 
       # Create expected grpc response
       name_2 = "name2-1052831874"
-      suspended = false
-      expected_response = { name: name_2, suspended: suspended }
+      expected_response = { name: name_2 }
       expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Oslogin::V1beta::LoginProfile)
 
       # Mock Grpc layer

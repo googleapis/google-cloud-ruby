@@ -378,7 +378,7 @@ module Google
           # Retrieves an SSH public key.
           #
           # @param name [String]
-          #   The fingerprint of the public key to retrieve. Public keys are identified
+          #   Required. The fingerprint of the public key to retrieve. Public keys are identified
           #   by their SHA-256 fingerprint. The fingerprint of the public key is in
           #   format `users/{user}/sshPublicKeys/{fingerprint}`.
           # @param options [Google::Gax::CallOptions]
@@ -393,10 +393,11 @@ module Google
           #   require "google/cloud/os_login"
           #
           #   os_login_client = Google::Cloud::OsLogin.new(version: :v1)
-          #   response = os_login_client.get_ssh_public_key
+          #   formatted_name = Google::Cloud::OsLogin::V1::OsLoginServiceClient.ssh_public_key_path("[USER]", "[FINGERPRINT]")
+          #   response = os_login_client.get_ssh_public_key(formatted_name)
 
           def get_ssh_public_key \
-              name: nil,
+              name,
               options: nil,
               &block
             req = {

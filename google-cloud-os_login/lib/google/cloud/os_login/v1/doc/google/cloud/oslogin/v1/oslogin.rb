@@ -28,10 +28,6 @@ module Google
         # @!attribute [rw] ssh_public_keys
         #   @return [Hash{String => Google::Cloud::Oslogin::Common::SshPublicKey}]
         #     A map from SSH public key fingerprint to the associated key object.
-        # @!attribute [rw] suspended
-        #   @return [true, false]
-        #     Indicates if the user is suspended. A suspended user cannot log in but
-        #     their profile information is retained.
         class LoginProfile; end
 
         # A request message for deleting a POSIX account entry.
@@ -65,7 +61,7 @@ module Google
         # A request message for retrieving an SSH public key.
         # @!attribute [rw] name
         #   @return [String]
-        #     The fingerprint of the public key to retrieve. Public keys are identified
+        #     Required. The fingerprint of the public key to retrieve. Public keys are identified
         #     by their SHA-256 fingerprint. The fingerprint of the public key is in
         #     format `users/{user}/sshPublicKeys/{fingerprint}`.
         class GetSshPublicKeyRequest; end

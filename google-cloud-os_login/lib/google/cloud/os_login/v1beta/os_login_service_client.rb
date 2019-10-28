@@ -277,7 +277,7 @@ module Google
           # Deletes a POSIX account.
           #
           # @param name [String]
-          #   A reference to the POSIX account to update. POSIX accounts are identified
+          #   Required. A reference to the POSIX account to update. POSIX accounts are identified
           #   by the project ID they are associated with. A reference to the POSIX
           #   account is in format `users/{user}/projects/{project}`.
           # @param options [Google::Gax::CallOptions]
@@ -309,7 +309,7 @@ module Google
           # Deletes an SSH public key.
           #
           # @param name [String]
-          #   The fingerprint of the public key to update. Public keys are identified by
+          #   Required. The fingerprint of the public key to update. Public keys are identified by
           #   their SHA-256 fingerprint. The fingerprint of the public key is in format
           #   `users/{user}/sshPublicKeys/{fingerprint}`.
           # @param options [Google::Gax::CallOptions]
@@ -342,7 +342,11 @@ module Google
           # on Google Compute Engine.
           #
           # @param name [String]
-          #   The unique ID for the user in format `users/{user}`.
+          #   Required. The unique ID for the user in format `users/{user}`.
+          # @param project_id [String]
+          #   The project ID of the Google Cloud Platform project.
+          # @param system_id [String]
+          #   A system ID for filtering the results of the request.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -360,10 +364,14 @@ module Google
 
           def get_login_profile \
               name,
+              project_id: nil,
+              system_id: nil,
               options: nil,
               &block
             req = {
-              name: name
+              name: name,
+              project_id: project_id,
+              system_id: system_id
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Cloud::Oslogin::V1beta::GetLoginProfileRequest)
             @get_login_profile.call(req, options, &block)
@@ -372,7 +380,7 @@ module Google
           # Retrieves an SSH public key.
           #
           # @param name [String]
-          #   The fingerprint of the public key to retrieve. Public keys are identified
+          #   Required. The fingerprint of the public key to retrieve. Public keys are identified
           #   by their SHA-256 fingerprint. The fingerprint of the public key is in
           #   format `users/{user}/sshPublicKeys/{fingerprint}`.
           # @param options [Google::Gax::CallOptions]
@@ -408,7 +416,7 @@ module Google
           # @param parent [String]
           #   The unique ID for the user in format `users/{user}`.
           # @param ssh_public_key [Google::Cloud::Oslogin::Common::SshPublicKey | Hash]
-          #   The SSH public key and expiration time.
+          #   Required. The SSH public key and expiration time.
           #   A hash of the same form as `Google::Cloud::Oslogin::Common::SshPublicKey`
           #   can also be provided.
           # @param project_id [String]
@@ -450,11 +458,11 @@ module Google
           # supports patch semantics.
           #
           # @param name [String]
-          #   The fingerprint of the public key to update. Public keys are identified by
+          #   Required. The fingerprint of the public key to update. Public keys are identified by
           #   their SHA-256 fingerprint. The fingerprint of the public key is in format
           #   `users/{user}/sshPublicKeys/{fingerprint}`.
           # @param ssh_public_key [Google::Cloud::Oslogin::Common::SshPublicKey | Hash]
-          #   The SSH public key and expiration time.
+          #   Required. The SSH public key and expiration time.
           #   A hash of the same form as `Google::Cloud::Oslogin::Common::SshPublicKey`
           #   can also be provided.
           # @param update_mask [Google::Protobuf::FieldMask | Hash]
