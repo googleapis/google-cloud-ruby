@@ -90,6 +90,9 @@ describe Google::Cloud::VideoIntelligence::V1p2beta1::VideoIntelligenceServiceCl
 
       # Mock Grpc layer
       mock_method = proc do |request|
+        assert_instance_of(Google::Cloud::Videointelligence::V1p2beta1::AnnotateVideoRequest, request)
+        assert_equal(input_uri, request.input_uri)
+        assert_equal(features, request.features)
         OpenStruct.new(execute: operation)
       end
       mock_stub = MockGrpcClientStub_v1p2beta1.new(:annotate_video, mock_method)
@@ -128,6 +131,9 @@ describe Google::Cloud::VideoIntelligence::V1p2beta1::VideoIntelligenceServiceCl
 
       # Mock Grpc layer
       mock_method = proc do |request|
+        assert_instance_of(Google::Cloud::Videointelligence::V1p2beta1::AnnotateVideoRequest, request)
+        assert_equal(input_uri, request.input_uri)
+        assert_equal(features, request.features)
         OpenStruct.new(execute: operation)
       end
       mock_stub = MockGrpcClientStub_v1p2beta1.new(:annotate_video, mock_method)
@@ -157,6 +163,9 @@ describe Google::Cloud::VideoIntelligence::V1p2beta1::VideoIntelligenceServiceCl
 
       # Mock Grpc layer
       mock_method = proc do |request|
+        assert_instance_of(Google::Cloud::Videointelligence::V1p2beta1::AnnotateVideoRequest, request)
+        assert_equal(input_uri, request.input_uri)
+        assert_equal(features, request.features)
         raise custom_error
       end
       mock_stub = MockGrpcClientStub_v1p2beta1.new(:annotate_video, mock_method)
