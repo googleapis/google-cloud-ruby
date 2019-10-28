@@ -1,5 +1,10 @@
 # Release History
 
+### 1.22.0 / 2019-10-28
+
+* Now requires Ruby 2.4 or later.
+* This release uses the updated default endpoint for Cloud Storage.
+
 ### 1.21.1 / 2019-09-30
 
 #### Documentation
