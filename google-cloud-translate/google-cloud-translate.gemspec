@@ -21,8 +21,11 @@ Gem::Specification.new do |gem|
   gem.required_ruby_version = ">= 2.4"
 
   gem.post_install_message = <<~POSTINSTALL
-    The 2.0 release introduces breaking changes to support the v3 API using a
-    code generated v3 client, as well as the legacy hand-written v2 client.
+    The 2.0 release introduces breaking changes by defaulting to a
+    new generated v3 API client. This gem continues to contain the
+    legacy hand-written v2 client for backward compatibility aside
+    from the default client constructor.
+
     For more details please visit the 2.0.0 CHANGELOG:
     https://googleapis.dev/ruby/google-cloud-translate/v2.0.0/file.CHANGELOG.html#2_0_0___2019-10-28
   POSTINSTALL
