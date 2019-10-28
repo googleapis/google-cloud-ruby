@@ -13,7 +13,7 @@
     * Google::Cloud.translate
     * Google::Cloud::Translate.new
   * To use the legacy v2 client specify the version when creating:
-    * Google::Cloud::Translate.new version: :v2
+    * v2_client = Google::Cloud::Translate.new version: :v2
 
 #### Features
 
