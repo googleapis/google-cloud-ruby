@@ -1,5 +1,15 @@
 # Release History
 
+### 0.5.0 / 2019-10-29
+
+#### Features
+
+* Update Ruby dependency to minimum of 2.4 ([#4206](https://www.github.com/googleapis/google-cloud-ruby/issues/4206))
+
+#### Documentation
+
+* Clarify which Google Cloud Platform products support auto-discovered credentials
+
 ### 0.4.0 / 2019-10-15
 
 #### Features
