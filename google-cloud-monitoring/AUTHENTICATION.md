@@ -41,7 +41,7 @@ code.
 1. Specify project ID in method arguments
 2. Specify project ID in configuration
 3. Discover project ID in environment variables
-4. Discover GCE project ID
+4. Discover GCP project ID
 5. Discover project ID in credentials JSON
 
 **Credentials** are discovered in the following order:
@@ -51,36 +51,14 @@ code.
 3. Discover credentials path in environment variables
 4. Discover credentials JSON in environment variables
 5. Discover credentials file in the Cloud SDK's path
-6. Discover GCE credentials
+6. Discover GCP credentials
 
 ### Google Cloud Platform environments
 
-While running on Google Cloud Platform environments such as Google Compute
-Engine, Google App Engine and Google Kubernetes Engine, no extra work is needed.
-The **Project ID** and **Credentials** and are discovered automatically. Code
-should be written as if already authenticated. Just be sure when you [set up the
-GCE instance][gce-how-to], you add the correct scopes for the APIs you want to
-access. For example:
-
-  * **All APIs**
-    * `https://www.googleapis.com/auth/cloud-platform`
-    * `https://www.googleapis.com/auth/cloud-platform.read-only`
-  * **BigQuery**
-    * `https://www.googleapis.com/auth/bigquery`
-    * `https://www.googleapis.com/auth/bigquery.insertdata`
-  * **Compute Engine**
-    * `https://www.googleapis.com/auth/compute`
-  * **Datastore**
-    * `https://www.googleapis.com/auth/datastore`
-    * `https://www.googleapis.com/auth/userinfo.email`
-  * **DNS**
-    * `https://www.googleapis.com/auth/ndev.clouddns.readwrite`
-  * **Pub/Sub**
-    * `https://www.googleapis.com/auth/pubsub`
-  * **Storage**
-    * `https://www.googleapis.com/auth/devstorage.full_control`
-    * `https://www.googleapis.com/auth/devstorage.read_only`
-    * `https://www.googleapis.com/auth/devstorage.read_write`
+When running on Google Cloud Platform (GCP), including Google Compute Engine (GCE),
+Google Kubernetes Engine (GKE), Google App Engine (GAE), Google Cloud Functions
+(GCF) and Cloud Run, the **Project ID** and **Credentials** and are discovered
+automatically. Code should be written as if already authenticated.
 
 ### Environment Variables
 
