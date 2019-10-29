@@ -1,5 +1,15 @@
 # Release History
 
+### 0.32.0 / 2019-10-29
+
+#### Features
+
+* Update Ruby dependency to minimum of 2.4 ([#4206](https://www.github.com/googleapis/google-cloud-ruby/issues/4206))
+
+#### Documentation
+
+* Update the list of GCP environments for automatic authentication
+
 ### 0.31.0 / 2019-10-01
 
 #### Features
