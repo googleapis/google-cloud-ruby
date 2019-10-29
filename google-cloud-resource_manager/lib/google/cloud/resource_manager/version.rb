@@ -16,7 +16,7 @@
 module Google
   module Cloud
     module ResourceManager
-      VERSION = "0.32.0".freeze
+      VERSION = "0.33.0".freeze
     end
   end
 end
