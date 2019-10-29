@@ -2,13 +2,15 @@
 
 ### 0.4.0 / 2019-10-29
 
+This release require Ruby 2.4 or later.
+
 #### Features
 
-* Rename grafeas gem
-  * Rename grafeas gem from grafeas-client
-  * Create new grafeas-client gem that depends on grafeas
-  * Update google-cloud-container_analysis to use grafeas
-* Update Ruby dependency to minimum of 2.4 ([#4206](https://www.github.com/googleapis/google-cloud-ruby/issues/4206))
+* Use new grafeas gem instead of grafeas-client.
+
+#### Documentation
+
+* Clarify which Google Cloud Platform products support auto-discovered credentials
 
 ### 0.3.2 / 2019-10-07
 
