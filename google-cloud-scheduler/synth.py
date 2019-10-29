@@ -110,6 +110,14 @@ s.replace(
     'port = service_port || self.class::DEFAULT_SERVICE_PORT'
 )
 
+# TEMP: Re-add project_path helper which was earlier mistakenly generated but
+# is no longer. This helper method is likely unused, and we will remove it
+# when switching to the microgenerator.
+s.replace(
+    'lib/google/cloud/scheduler/v*/cloud_scheduler_client.rb',
+    'attr_reader :cloud_scheduler_stub\n',
+    'attr_reader :cloud_scheduler_stub\n\n          # @deprecated\n          def self.project_path project; "projects/#{project}"; end\n'
+)
 
 # https://github.com/googleapis/gapic-generator/issues/2279
 s.replace(
