@@ -1,5 +1,13 @@
 # Release History
 
+### 0.5.0 / 2019-10-29
+
+* This release requires Ruby 2.4 or later.
+
+#### Documentation
+
+* Clarify which Google Cloud Platform products support auto-discovered credentials
+
 ### 0.4.0 / 2019-10-15
 
 #### Features
