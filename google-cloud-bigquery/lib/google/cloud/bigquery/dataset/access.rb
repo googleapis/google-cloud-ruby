@@ -75,6 +75,7 @@ module Google
             "all"                     => "allAuthenticatedUsers",
             "all_authenticated_users" => "allAuthenticatedUsers",
             "allAuthenticatedUsers"   => "allAuthenticatedUsers"
+            "allUsers"                => "allUsers"
           }.freeze
 
           ##
