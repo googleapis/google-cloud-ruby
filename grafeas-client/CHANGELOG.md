@@ -1,5 +1,10 @@
 # Release History
 
+### 0.4.0 / 2019-10-29
+
+This gem is now called "grafeas". Please update your gemfile accordingly.
+From now on, the "grafeas-client" gem is an empty gem that merely brings "grafeas" in as a dependency.
+
 ### 0.3.0 / 2019-10-01
 
 #### Cleanup
