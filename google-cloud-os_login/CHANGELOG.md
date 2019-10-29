@@ -1,5 +1,20 @@
 # Release History
 
+### 0.5.0 / 2019-10-29
+
+This release requires Ruby 2.4 or later.
+
+#### ⚠ BREAKING CHANGES
+
+* Remove LoginProfile#suspended attribute added in version 0.4.0
+* Rename OsLoginServiceClient.fingerprint_path to OsLoginServiceClient.posix_account_path
+* Rename OsLoginServiceClient.project_path to OsLoginServiceClient.ssh_public_key_path
+* The "ssh_public_key" argument to OsLoginServiceClient#import_ssh_public_key changed from positional to an optional keyword argument
+
+#### Documentation
+
+* Clarify which Google Cloud Platform products support auto-discovered credentials
+
 ### 0.4.0 / 2019-10-15
 
 #### Features
