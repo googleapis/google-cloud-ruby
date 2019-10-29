@@ -74,7 +74,7 @@ module Google
             "projectWriters"          => "projectWriters",
             "all"                     => "allAuthenticatedUsers",
             "all_authenticated_users" => "allAuthenticatedUsers",
-            "allAuthenticatedUsers"   => "allAuthenticatedUsers"
+            "allAuthenticatedUsers"   => "allAuthenticatedUsers",
             "allUsers"                => "allUsers"
           }.freeze
 
