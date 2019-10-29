@@ -1,5 +1,11 @@
 # Release History
 
+### 1.4.1 / 2019-10-29
+
+#### Documentation
+
+* Update the list of GCP environments for automatic authentication
+
 ### 1.4.0 / 2019-10-23
 
 Now requires Ruby 2.4 or later.
