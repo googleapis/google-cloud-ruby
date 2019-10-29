@@ -16,7 +16,7 @@
 module Google
   module Cloud
     module SecurityCenter
-      VERSION = "0.3.3".freeze
+      VERSION = "0.4.0".freeze
     end
   end
 end
