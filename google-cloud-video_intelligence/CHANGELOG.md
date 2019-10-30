@@ -2,19 +2,12 @@
 
 ### 2.0.0 / 2019-10-29
 
+Note: This release requires Ruby 2.4 or later.
+
 #### ⚠ BREAKING CHANGES
 
-* **videointelligence:** Change features argument for the  annotate_video
-* The API has been retired.
-
-#### Features
-
-* Remove v1beta1
-* Update Ruby dependency to minimum of 2.4 ([#4206](https://www.github.com/googleapis/google-cloud-ruby/issues/4206))
-
-#### Bug Fixes
-
-* Update annotate_video method signature
+* Remove the v1beta1 client, because the service endpoint has been turned down.
+* The "features" argument for VideoIntelligenceServiceClient#annotate_video is now a required positional argument, to align with the API definition.
 
 ### 1.4.0 / 2019-08-13
 
