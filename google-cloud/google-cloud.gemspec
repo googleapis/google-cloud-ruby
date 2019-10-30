@@ -51,7 +51,7 @@ Gem::Specification.new do |gem|
   gem.add_dependency "google-cloud-text_to_speech", "~> 0.1"
   gem.add_dependency "google-cloud-trace", "~> 0.31"
   gem.add_dependency "google-cloud-translate", "~> 2.0"
-  gem.add_dependency "google-cloud-video_intelligence", "~> 1.0"
+  gem.add_dependency "google-cloud-video_intelligence", "~> 2.0"
   gem.add_dependency "google-cloud-vision", "~> 0.28"
 
   gem.add_development_dependency "autotest-suffix", "~> 1.1"

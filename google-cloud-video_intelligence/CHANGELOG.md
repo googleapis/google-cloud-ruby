@@ -1,5 +1,14 @@
 # Release History
 
+### 2.0.0 / 2019-10-29
+
+Note: This release requires Ruby 2.4 or later.
+
+#### ⚠ BREAKING CHANGES
+
+* Remove the v1beta1 client, because the service endpoint has been turned down.
+* The "features" argument for VideoIntelligenceServiceClient#annotate_video is now a required positional argument, to align with the API definition.
+
 ### 1.4.0 / 2019-08-13
 
 * Add VideoAnnotationResults fields
