@@ -28,6 +28,7 @@ Metrics/ClassLength:
     - "lib/google/cloud/bigtable/table.rb"
 Metrics/BlockLength:
   Exclude:
+    - "google-cloud-bigtable.gemspec"
     - "Rakefile"
     - "lib/google-cloud-bigtable.rb"
 Naming/FileName:

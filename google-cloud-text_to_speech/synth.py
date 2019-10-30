@@ -101,9 +101,13 @@ s.replace(
 )
 s.replace(
     'google-cloud-text_to_speech.gemspec',
-    '\n  gem\\.add_dependency "google-gax", "~> 1\\.[\\d\\.]+"\n',
-    '\n  gem.add_dependency "google-gax", "~> 1.8"\n')
-
+    'gem.add_dependency "google-gax", "~> 1\\.[\\d\\.]+"',
+    "\n".join([
+        'gem.add_dependency "google-gax", "~> 1.8"',
+        '  gem.add_dependency "googleapis-common-protos", ">= 1.3.9", "< 2.0"',
+        '  gem.add_dependency "googleapis-common-protos-types", ">= 1.0.4", "< 2.0"'
+    ])
+)
 # https://github.com/googleapis/gapic-generator/issues/2243
 s.replace(
     'lib/google/cloud/text_to_speech/*/*_client.rb',

@@ -145,6 +145,7 @@ s.replace(
     "\n".join([
         'gem.add_dependency "google-gax", "~> 1.8"',
         '  gem.add_dependency "googleapis-common-protos", ">= 1.3.9", "< 2.0"',
+        '  gem.add_dependency "googleapis-common-protos-types", ">= 1.0.4", "< 2.0"',
         '  gem.add_dependency "grpc-google-iam-v1", "~> 0.6.9"'
     ])
 )
