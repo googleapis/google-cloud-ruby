@@ -209,7 +209,6 @@ describe Google::Cloud::Debugger::Tracer, :mock_debugger do
   end
 
   it "catches breakpoint from fiber" do
-    skip("Fiber tracing not supported") if RUBY_VERSION.to_f < 2.3
     hit = false
     stubbed_breakpoints_hit = ->(breakpoints, call_stack_bindings) do
       assert_equal breakpoints.first, breakpoint6
@@ -229,7 +228,6 @@ describe Google::Cloud::Debugger::Tracer, :mock_debugger do
   end
 
   it "catches breakpoint from fiber after fiber yields" do
-    skip("Fiber tracing not supported") if RUBY_VERSION.to_f < 2.3
     hit = false
     stubbed_breakpoints_hit = ->(breakpoints, call_stack_bindings) do
       assert_equal breakpoints.first, breakpoint7
