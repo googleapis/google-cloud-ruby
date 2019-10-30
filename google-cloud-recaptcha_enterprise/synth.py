@@ -97,8 +97,14 @@ s.replace(
 # https://github.com/googleapis/gapic-generator/issues/2180
 s.replace(
     'google-cloud-recaptcha_enterprise.gemspec',
-    '\n  gem\\.add_dependency "google-gax", "~> 1\\.[\\d\\.]+"\n\n',
-    '\n  gem.add_dependency "google-gax", "~> 1.8"\n  gem.add_dependency "grpc-google-iam-v1", "~> 0.6.9"\n\n')
+    'gem.add_dependency "google-gax", "~> 1\\.[\\d\\.]+"',
+    "\n".join([
+        'gem.add_dependency "google-gax", "~> 1.8"',
+        '  gem.add_dependency "googleapis-common-protos", ">= 1.3.9", "< 2.0"',
+        '  gem.add_dependency "googleapis-common-protos-types", ">= 1.0.4", "< 2.0"',
+        '  gem.add_dependency "grpc-google-iam-v1", "~> 0.6.9"'
+    ])
+)
 
 # https://github.com/googleapis/gapic-generator/issues/2242
 def escape_braces(match):

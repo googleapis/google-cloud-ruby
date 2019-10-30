@@ -103,8 +103,13 @@ s.replace(
 # Container analysis should depend on grafeas
 s.replace(
     'google-cloud-container_analysis.gemspec',
-    '\n\n  gem.add_dependency "google-gax", "~> 1\\.[\\d\\.]+"',
-    '\n\n  gem.add_dependency "grafeas", "~> 0.1"\n  gem.add_dependency "google-gax", "~> 1.8"',
+    'gem.add_dependency "google-gax", "~> 1\\.[\\d\\.]+"',
+    "\n".join([
+        'gem.add_dependency "grafeas", "~> 0.1"',
+        '  gem.add_dependency "google-gax", "~> 1.8"',
+        '  gem.add_dependency "googleapis-common-protos", ">= 1.3.9", "< 2.0"',
+        '  gem.add_dependency "googleapis-common-protos-types", ">= 1.0.4", "< 2.0"'
+    ])
 )
 s.replace(
     'lib/google/cloud/container_analysis.rb',

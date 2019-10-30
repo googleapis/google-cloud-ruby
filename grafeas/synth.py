@@ -122,8 +122,13 @@ s.replace(
 )
 s.replace(
     'grafeas.gemspec',
-    '\n  gem\\.add_dependency "google-gax", "~> 1\\.[\\d\\.]+"\n',
-    '\n  gem.add_dependency "google-gax", "~> 1.8"\n')
+    'gem.add_dependency "google-gax", "~> 1\\.[\\d\\.]+"',
+    "\n".join([
+        'gem.add_dependency "google-gax", "~> 1.8"',
+        '  gem.add_dependency "googleapis-common-protos", ">= 1.3.9", "< 2.0"',
+        '  gem.add_dependency "googleapis-common-protos-types", ">= 1.0.4", "< 2.0"'
+    ])
+)
 
 # Fix for tests that assume protos implement to_hash
 s.replace(

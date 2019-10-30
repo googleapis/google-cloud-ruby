@@ -104,8 +104,13 @@ s.replace(
 # PERMANENT: Use a compatible version of googleapis-common-protos-types
 s.replace(
     'google-cloud-monitoring.gemspec',
-    '\n  gem\\.add_dependency "google-gax", "~> 1\\.[\\d\\.]+"',
-    '\n  gem.add_dependency "google-gax", "~> 1.8"\n  gem.add_dependency "googleapis-common-protos-types", ">= 1.0.2"')
+    'gem.add_dependency "google-gax", "~> 1\\.[\\d\\.]+"',
+    "\n".join([
+        'gem.add_dependency "google-gax", "~> 1.8"',
+        '  gem.add_dependency "googleapis-common-protos", ">= 1.3.9", "< 2.0"',
+        '  gem.add_dependency "googleapis-common-protos-types", ">= 1.0.4", "< 2.0"'
+    ])
+)
 
 # https://github.com/googleapis/gapic-generator/issues/2242
 def escape_braces(match):
