@@ -75,6 +75,7 @@ module Google
             "all"                     => "allAuthenticatedUsers",
             "all_authenticated_users" => "allAuthenticatedUsers",
             "allAuthenticatedUsers"   => "allAuthenticatedUsers",
+            "all_users"               => "allUsers",
             "allUsers"                => "allUsers"
           }.freeze
 
@@ -173,7 +174,7 @@ module Google
           # Add reader access to a special group.
           #
           # @param [String] group Accepted values are `owners`, `writers`,
-          #   `readers`, and `all`.
+          #   `readers`, `all_authenticated_users`, and `all_users`.
           #
           # @example
           #   require "google/cloud/bigquery"
@@ -278,7 +279,7 @@ module Google
           # Add writer access to a special group.
           #
           # @param [String] group Accepted values are `owners`, `writers`,
-          #   `readers`, and `all`.
+          #   `readers`, `all_authenticated_users`, and `all_users`.
           #
           # @example
           #   require "google/cloud/bigquery"
@@ -356,7 +357,7 @@ module Google
           # Add owner access to a special group.
           #
           # @param [String] group Accepted values are `owners`, `writers`,
-          #   `readers`, and `all`.
+          #   `readers`, `all_authenticated_users`, and `all_users`.
           #
           # @example
           #   require "google/cloud/bigquery"
@@ -434,7 +435,7 @@ module Google
           # Remove reader access from a special group.
           #
           # @param [String] group Accepted values are `owners`, `writers`,
-          #   `readers`, and `all`.
+          #   `readers`, `all_authenticated_users`, and `all_users`.
           #
           # @example
           #   require "google/cloud/bigquery"
@@ -539,7 +540,7 @@ module Google
           # Remove writer access from a special group.
           #
           # @param [String] group Accepted values are `owners`, `writers`,
-          #   `readers`, and `all`.
+          #   `readers`, `all_authenticated_users`, and `all_users`.
           #
           # @example
           #   require "google/cloud/bigquery"
@@ -617,7 +618,7 @@ module Google
           # Remove owner access from a special group.
           #
           # @param [String] group Accepted values are `owners`, `writers`,
-          #   `readers`, and `all`.
+          #   `readers`, `all_authenticated_users`, and `all_users`.
           #
           # @example
           #   require "google/cloud/bigquery"
@@ -692,7 +693,7 @@ module Google
           # Checks reader access for a special group.
           #
           # @param [String] group Accepted values are `owners`, `writers`,
-          #   `readers`, and `all`.
+          #   `readers`, `all_authenticated_users`, and `all_users`.
           #
           # @example
           #   require "google/cloud/bigquery"
@@ -792,7 +793,7 @@ module Google
           # Checks writer access for a special group.
           #
           # @param [String] group Accepted values are `owners`, `writers`,
-          #   `readers`, and `all`.
+          #   `readers`, `all_authenticated_users`, and `all_users`.
           #
           # @example
           #   require "google/cloud/bigquery"
@@ -866,7 +867,7 @@ module Google
           # Checks owner access for a special group.
           #
           # @param [String] group Accepted values are `owners`, `writers`,
-          #   `readers`, and `all`.
+          #   `readers`, `all_authenticated_users`, and `all_users`.
           #
           # @example
           #   require "google/cloud/bigquery"
