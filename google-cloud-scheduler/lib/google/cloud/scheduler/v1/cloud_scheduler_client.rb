@@ -42,6 +42,9 @@ module Google
           # @private
           attr_reader :cloud_scheduler_stub
 
+          # @deprecated
+          def self.project_path project; "projects/#{project}"; end
+
           # The default address of the service.
           SERVICE_ADDRESS = "cloudscheduler.googleapis.com".freeze
 
@@ -81,12 +84,6 @@ module Google
 
           private_constant :LOCATION_PATH_TEMPLATE
 
-          PROJECT_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
-            "projects/{project}"
-          )
-
-          private_constant :PROJECT_PATH_TEMPLATE
-
           # Returns a fully-qualified job resource name string.
           # @param project [String]
           # @param location [String]
@@ -108,15 +105,6 @@ module Google
             LOCATION_PATH_TEMPLATE.render(
               :"project" => project,
               :"location" => location
-            )
-          end
-
-          # Returns a fully-qualified project resource name string.
-          # @param project [String]
-          # @return [String]
-          def self.project_path project
-            PROJECT_PATH_TEMPLATE.render(
-              :"project" => project
             )
           end
 
