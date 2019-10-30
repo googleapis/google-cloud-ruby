@@ -1,5 +1,13 @@
 # Release History
 
+### 1.17.0 / 2019-10-29
+
+This release requires Ruby 2.4 or later.
+
+#### Documentation
+
+* Clarify which Google Cloud Platform environments support automatic authentication
+
 ### 1.16.0 / 2019-10-03
 
 #### Features
