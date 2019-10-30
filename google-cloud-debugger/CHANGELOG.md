@@ -2,17 +2,15 @@
 
 ### 0.35.0 / 2019-10-29
 
-#### Features
+This release requires Ruby 2.4 or later.
 
-* Update Ruby dependency to minimum of 2.4 ([#4206](https://www.github.com/googleapis/google-cloud-ruby/issues/4206))
+#### Documentation
+
+* Clarify which Google Cloud Platform environments support automatic authentication
 
 #### Performance Improvements
 
 * Update lower-level client network configuration
-
-#### Documentation
-
-* Update the list of GCP environments for automatic authentication
 
 ### 0.34.0 / 2019-08-23
 
