@@ -111,7 +111,7 @@ module Google
           # @param [String,Symbol,Array<String,Symbol>] matches_storage_class
           #   Files having any of the storage classes specified by this
           #   condition will be matched. Values include `STANDARD`, `NEARLINE`,
-          #   and `COLDLINE`. `REGIONAL`,`MULTI_REGIONAL`, and
+          #   `COLDLINE`, and `ARCHIVE`. `REGIONAL`,`MULTI_REGIONAL`, and
           #   `DURABLE_REDUCED_AVAILABILITY` are supported as legacy storage
           #   classes. Arguments will be converted from symbols and lower-case
           #   to upper-case strings.
@@ -162,7 +162,7 @@ module Google
           # @param [String,Symbol,Array<String,Symbol>] matches_storage_class
           #   Files having any of the storage classes specified by this
           #   condition will be matched. Values include `STANDARD`, `NEARLINE`,
-          #   and `COLDLINE`. `REGIONAL`,`MULTI_REGIONAL`, and
+          #   `COLDLINE`, and `ARCHIVE`. `REGIONAL`,`MULTI_REGIONAL`, and
           #   `DURABLE_REDUCED_AVAILABILITY` are supported as legacy storage
           #   classes. Arguments will be converted from symbols and lower-case
           #   to upper-case strings.
@@ -240,9 +240,9 @@ module Google
           #   is `false`, it matches archived files.
           # @attr [Array<String>] matches_storage_class Files having any of the
           #   storage classes specified by this condition will be matched.
-          #   Values include `STANDARD`, `NEARLINE`, and `COLDLINE`. `REGIONAL`,
-          #   `MULTI_REGIONAL`, and `DURABLE_REDUCED_AVAILABILITY` are supported
-          #   as legacy storage classes.
+          #   Values include `STANDARD`, `NEARLINE`, `COLDLINE`, and `ARCHIVE`.
+          #   `REGIONAL`, `MULTI_REGIONAL`, and `DURABLE_REDUCED_AVAILABILITY`
+          #   are supported as legacy storage classes.
           # @attr [Integer] num_newer_versions Relevant only for versioned
           #   files. If the value is N, this condition is satisfied when there
           #   are at least N versions (including the live version) newer than

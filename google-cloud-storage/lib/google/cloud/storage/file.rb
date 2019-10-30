@@ -431,6 +431,7 @@ module Google
         # * `:standard`
         # * `:nearline`
         # * `:coldline`
+        # * `:archive`
         #
         # as well as the equivalent strings returned by {File#storage_class} or
         # {Bucket#storage_class}. For more information, see [Storage
