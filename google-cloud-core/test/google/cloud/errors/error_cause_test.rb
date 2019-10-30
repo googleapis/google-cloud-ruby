@@ -45,9 +45,6 @@ describe Google::Cloud::Error, :cause do
     error.cause.wont_be :nil?
     error.cause.must_be_kind_of StandardError
     error.cause.message.must_equal "yo"
-
-    error.instance_variable_get(:@cause).must_be_kind_of StandardError
-    error.instance_variable_get(:@cause).message.must_equal "yo"
   end
 
   it "can have a nil cause" do
