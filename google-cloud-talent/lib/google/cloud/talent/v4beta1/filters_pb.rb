@@ -8,6 +8,7 @@ require 'google/api/annotations_pb'
 require 'google/api/field_behavior_pb'
 require 'google/cloud/talent/v4beta1/common_pb'
 require 'google/protobuf/duration_pb'
+require 'google/protobuf/field_mask_pb'
 require 'google/protobuf/timestamp_pb'
 require 'google/protobuf/wrappers_pb'
 require 'google/type/date_pb'
@@ -16,6 +17,7 @@ require 'google/type/timeofday_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.cloud.talent.v4beta1.JobQuery" do
     optional :query, :string, 1
+    optional :query_language_code, :string, 14
     repeated :companies, :string, 2
     repeated :location_filters, :message, 3, "google.cloud.talent.v4beta1.LocationFilter"
     repeated :job_categories, :enum, 4, "google.cloud.talent.v4beta1.JobCategory"

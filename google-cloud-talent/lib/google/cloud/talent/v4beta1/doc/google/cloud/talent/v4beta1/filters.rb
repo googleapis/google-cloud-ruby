@@ -24,6 +24,17 @@ module Google
         #     location fields.
         #
         #     The maximum number of allowed characters is 255.
+        # @!attribute [rw] query_language_code
+        #   @return [String]
+        #     The language code of {Google::Cloud::Talent::V4beta1::JobQuery#query query}.
+        #     For example, "en-US". This field helps to better interpret the query.
+        #
+        #     If a value isn't specified, the query language code is automatically
+        #     detected, which may not be accurate.
+        #
+        #     Language code should be in BCP-47 format, such as "en-US" or "sr-Latn".
+        #     For more information, see
+        #     [Tags for Identifying Languages](https://tools.ietf.org/html/bcp47).
         # @!attribute [rw] companies
         #   @return [Array<String>]
         #     This filter specifies the company entities to search against.
