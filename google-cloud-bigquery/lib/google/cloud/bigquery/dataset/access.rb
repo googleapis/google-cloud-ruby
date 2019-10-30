@@ -35,7 +35,7 @@ module Google
         #     access.add_owner_group "owners@example.com"
         #     access.add_writer_user "writer@example.com"
         #     access.remove_writer_user "readers@example.com"
-        #     access.add_reader_special :all
+        #     access.add_reader_special :all_users
         #   end
         #
         class Access
@@ -183,7 +183,7 @@ module Google
           #   dataset = bigquery.dataset "my_dataset"
           #
           #   dataset.access do |access|
-          #     access.add_reader_special :all
+          #     access.add_reader_special :all_users
           #   end
           #
           def add_reader_special group
@@ -288,7 +288,7 @@ module Google
           #   dataset = bigquery.dataset "my_dataset"
           #
           #   dataset.access do |access|
-          #     access.add_writer_special :all
+          #     access.add_writer_special :all_users
           #   end
           #
           def add_writer_special group
@@ -366,7 +366,7 @@ module Google
           #   dataset = bigquery.dataset "my_dataset"
           #
           #   dataset.access do |access|
-          #     access.add_owner_special :all
+          #     access.add_owner_special :all_users
           #   end
           #
           def add_owner_special group
@@ -444,7 +444,7 @@ module Google
           #   dataset = bigquery.dataset "my_dataset"
           #
           #   dataset.access do |access|
-          #     access.remove_reader_special :all
+          #     access.remove_reader_special :all_users
           #   end
           #
           def remove_reader_special group
@@ -549,7 +549,7 @@ module Google
           #   dataset = bigquery.dataset "my_dataset"
           #
           #   dataset.access do |access|
-          #     access.remove_writer_special :all
+          #     access.remove_writer_special :all_users
           #   end
           #
           def remove_writer_special group
@@ -627,7 +627,7 @@ module Google
           #   dataset = bigquery.dataset "my_dataset"
           #
           #   dataset.access do |access|
-          #     access.remove_owner_special :all
+          #     access.remove_owner_special :all_users
           #   end
           #
           def remove_owner_special group
@@ -702,7 +702,7 @@ module Google
           #   dataset = bigquery.dataset "my_dataset"
           #
           #   access = dataset.access
-          #   access.reader_special? :all #=> false
+          #   access.reader_special? :all_users #=> false
           #
           def reader_special? group
             lookup_access_role_scope_value :reader, :special, group
@@ -802,7 +802,7 @@ module Google
           #   dataset = bigquery.dataset "my_dataset"
           #
           #   access = dataset.access
-          #   access.writer_special? :all #=> false
+          #   access.writer_special? :all_users #=> false
           #
           def writer_special? group
             lookup_access_role_scope_value :writer, :special, group
@@ -876,7 +876,7 @@ module Google
           #   dataset = bigquery.dataset "my_dataset"
           #
           #   access = dataset.access
-          #   access.owner_special? :all #=> false
+          #   access.owner_special? :all_users #=> false
           #
           def owner_special? group
             lookup_access_role_scope_value :owner, :special, group
