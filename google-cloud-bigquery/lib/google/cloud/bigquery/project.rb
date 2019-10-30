@@ -269,27 +269,6 @@ module Google
         # Queries data by creating a [query
         # job](https://cloud.google.com/bigquery/docs/query-overview#query_jobs).
         #
-        # When using standard SQL and passing arguments using `params`, Ruby
-        # types are mapped to BigQuery types as follows:
-        #
-        # | BigQuery    | Ruby           | Notes  |
-        # |-------------|----------------|---|
-        # | `BOOL`      | `true`/`false` | |
-        # | `INT64`     | `Integer`      | |
-        # | `FLOAT64`   | `Float`        | |
-        # | `NUMERIC`   | `BigDecimal`   | Will be rounded to 9 decimal places |
-        # | `STRING`    | `String`       | |
-        # | `DATETIME`  | `DateTime`  | `DATETIME` does not support time zone. |
-        # | `DATE`      | `Date`         | |
-        # | `TIMESTAMP` | `Time`         | |
-        # | `TIME`      | `Google::Cloud::BigQuery::Time` | |
-        # | `BYTES`     | `File`, `IO`, `StringIO`, or similar | |
-        # | `ARRAY` | `Array` | Nested arrays, `nil` values are not supported. |
-        # | `STRUCT`    | `Hash`        | Hash keys may be strings or symbols. |
-        #
-        # See [Data Types](https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types)
-        # for an overview of each BigQuery data type, including allowed values.
-        #
         # The geographic location for the job ("US", "EU", etc.) can be set via
         # {QueryJob::Updater#location=} in a block passed to this method.
         #
@@ -297,13 +276,55 @@ module Google
         #   syntax](https://cloud.google.com/bigquery/query-reference), of the
         #   query to execute. Example: "SELECT count(f1) FROM
         #   [myProjectId:myDatasetId.myTableId]".
-        # @param [Array, Hash] params Standard SQL only. Used to pass query
-        #   arguments when the `query` string contains either positional (`?`)
-        #   or named (`@myparam`) query parameters. If value passed is an array
-        #   `["foo"]`, the query must use positional query parameters. If value
-        #   passed is a hash `{ myparam: "foo" }`, the query must use named
-        #   query parameters. When set, `legacy_sql` will automatically be set
-        #   to false and `standard_sql` to true.
+        # @param [Array, Hash] params Standard SQL only. Used to pass query arguments when the `query` string contains
+        #   either positional (`?`) or named (`@myparam`) query parameters. If value passed is an array `["foo"]`, the
+        #   query must use positional query parameters. If value passed is a hash `{ myparam: "foo" }`, the query must
+        #   use named query parameters. When set, `legacy_sql` will automatically be set to false and `standard_sql` to
+        #   true.
+        #
+        #   Ruby types are mapped to BigQuery types as follows:
+        #
+        #   | BigQuery    | Ruby                                 | Notes                                          |
+        #   |-------------|--------------------------------------|------------------------------------------------|
+        #   | `BOOL`      | `true`/`false`                       |                                                |
+        #   | `INT64`     | `Integer`                            |                                                |
+        #   | `FLOAT64`   | `Float`                              |                                                |
+        #   | `NUMERIC`   | `BigDecimal`                         | Will be rounded to 9 decimal places            |
+        #   | `STRING`    | `String`                             |                                                |
+        #   | `DATETIME`  | `DateTime`                           | `DATETIME` does not support time zone.         |
+        #   | `DATE`      | `Date`                               |                                                |
+        #   | `TIMESTAMP` | `Time`                               |                                                |
+        #   | `TIME`      | `Google::Cloud::BigQuery::Time`      |                                                |
+        #   | `BYTES`     | `File`, `IO`, `StringIO`, or similar |                                                |
+        #   | `ARRAY`     | `Array`                              | Nested arrays, `nil` values are not supported. |
+        #   | `STRUCT`    | `Hash`                               | Hash keys may be strings or symbols.           |
+        #
+        #   See [Data Types](https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types) for an overview
+        #   of each BigQuery data type, including allowed values.
+        # @param [Array, Hash] types Standard SQL only. Types of the SQL parameters in `params`. It is not always to
+        #   infer the right SQL type from a value in `params`. In these cases, `types` must be used to specify the SQL
+        #   type for these values.
+        #
+        #   Must match the value type passed to `params`. This must be an `Array` when the query uses positional query
+        #   parameters. This must be an `Hash` when the query uses named query parameters. The values should be BigQuery
+        #   type codes from the following list:
+        #
+        #   * `:BOOL`
+        #   * `:INT64`
+        #   * `:FLOAT64`
+        #   * `:NUMERIC`
+        #   * `:STRING`
+        #   * `:DATETIME`
+        #   * `:DATE`
+        #   * `:TIMESTAMP`
+        #   * `:TIME`
+        #   * `:BYTES`
+        #   * `Array` - Lists are specified by providing the type code in an array. For example, an array of integers
+        #     are specified as `[:INT64]`.
+        #   * `Hash` - Types for STRUCT values (`Hash` objects) are specified using a `Hash` object, where the keys
+        #     match the `params` hash, and the values are the types value that matches the data.
+        #
+        #   Types are optional.
         # @param [Hash<String|Symbol, External::DataSource>] external A Hash
         #   that represents the mapping of the external tables to the table
         #   names used in the SQL query. The hash keys are the table names, and
@@ -530,16 +551,17 @@ module Google
         #     end
         #   end
         #
-        def query_job query, params: nil, external: nil, priority: "INTERACTIVE", cache: true, table: nil, create: nil,
-                      write: nil, dryrun: nil, dataset: nil, project: nil, standard_sql: nil, legacy_sql: nil,
-                      large_results: nil, flatten: nil, maximum_billing_tier: nil, maximum_bytes_billed: nil,
-                      job_id: nil, prefix: nil, labels: nil, udfs: nil
+        def query_job query, params: nil, types: nil, external: nil, priority: "INTERACTIVE", cache: true, table: nil,
+                      create: nil, write: nil, dryrun: nil, dataset: nil, project: nil, standard_sql: nil,
+                      legacy_sql: nil, large_results: nil, flatten: nil, maximum_billing_tier: nil,
+                      maximum_bytes_billed: nil, job_id: nil, prefix: nil, labels: nil, udfs: nil
           ensure_service!
-          options = { priority: priority, cache: cache, table: table, create: create, write: write, dryrun: dryrun,
-                      large_results: large_results, flatten: flatten, dataset: dataset,
-                      project: (project || self.project), legacy_sql: legacy_sql, standard_sql: standard_sql,
-                      maximum_billing_tier: maximum_billing_tier, maximum_bytes_billed: maximum_bytes_billed,
-                      external: external, job_id: job_id, prefix: prefix, labels: labels, udfs: udfs, params: params }
+          options = { params: params, types: types, external: external, priority: priority, cache: cache, table: table,
+                      create: create, write: write, dryrun: dryrun, dataset: dataset,
+                      project: (project || self.project), standard_sql: standard_sql, legacy_sql: legacy_sql,
+                      large_results: large_results, flatten: flatten, maximum_billing_tier: maximum_billing_tier,
+                      maximum_bytes_billed: maximum_bytes_billed, job_id: job_id, prefix: prefix, labels: labels,
+                      udfs: udfs }
 
           updater = QueryJob::Updater.from_options service, query, options
 
@@ -556,27 +578,6 @@ module Google
         # as needed to complete the query. When used for executing DDL/DML
         # statements, this method does not return row data.
         #
-        # When using standard SQL and passing arguments using `params`, Ruby
-        # types are mapped to BigQuery types as follows:
-        #
-        # | BigQuery    | Ruby           | Notes  |
-        # |-------------|----------------|---|
-        # | `BOOL`      | `true`/`false` | |
-        # | `INT64`     | `Integer`      | |
-        # | `FLOAT64`   | `Float`        | |
-        # | `NUMERIC`   | `BigDecimal`   | Will be rounded to 9 decimal places |
-        # | `STRING`    | `String`       | |
-        # | `DATETIME`  | `DateTime`  | `DATETIME` does not support time zone. |
-        # | `DATE`      | `Date`         | |
-        # | `TIMESTAMP` | `Time`         | |
-        # | `TIME`      | `Google::Cloud::BigQuery::Time` | |
-        # | `BYTES`     | `File`, `IO`, `StringIO`, or similar | |
-        # | `ARRAY` | `Array` | Nested arrays, `nil` values are not supported. |
-        # | `STRUCT`    | `Hash`        | Hash keys may be strings or symbols. |
-        #
-        # See [Data Types](https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types)
-        # for an overview of each BigQuery data type, including allowed values.
-        #
         # The geographic location for the job ("US", "EU", etc.) can be set via
         # {QueryJob::Updater#location=} in a block passed to this method.
         #
@@ -586,13 +587,55 @@ module Google
         #   syntax](https://cloud.google.com/bigquery/query-reference), of the
         #   query to execute. Example: "SELECT count(f1) FROM
         #   [myProjectId:myDatasetId.myTableId]".
-        # @param [Array, Hash] params Standard SQL only. Used to pass query
-        #   arguments when the `query` string contains either positional (`?`)
-        #   or named (`@myparam`) query parameters. If value passed is an array
-        #   `["foo"]`, the query must use positional query parameters. If value
-        #   passed is a hash `{ myparam: "foo" }`, the query must use named
-        #   query parameters. When set, `legacy_sql` will automatically be set
-        #   to false and `standard_sql` to true.
+        # @param [Array, Hash] params Standard SQL only. Used to pass query arguments when the `query` string contains
+        #   either positional (`?`) or named (`@myparam`) query parameters. If value passed is an array `["foo"]`, the
+        #   query must use positional query parameters. If value passed is a hash `{ myparam: "foo" }`, the query must
+        #   use named query parameters. When set, `legacy_sql` will automatically be set to false and `standard_sql` to
+        #   true.
+        #
+        #   Ruby types are mapped to BigQuery types as follows:
+        #
+        #   | BigQuery    | Ruby                                 | Notes                                          |
+        #   |-------------|--------------------------------------|------------------------------------------------|
+        #   | `BOOL`      | `true`/`false`                       |                                                |
+        #   | `INT64`     | `Integer`                            |                                                |
+        #   | `FLOAT64`   | `Float`                              |                                                |
+        #   | `NUMERIC`   | `BigDecimal`                         | Will be rounded to 9 decimal places            |
+        #   | `STRING`    | `String`                             |                                                |
+        #   | `DATETIME`  | `DateTime`                           | `DATETIME` does not support time zone.         |
+        #   | `DATE`      | `Date`                               |                                                |
+        #   | `TIMESTAMP` | `Time`                               |                                                |
+        #   | `TIME`      | `Google::Cloud::BigQuery::Time`      |                                                |
+        #   | `BYTES`     | `File`, `IO`, `StringIO`, or similar |                                                |
+        #   | `ARRAY`     | `Array`                              | Nested arrays, `nil` values are not supported. |
+        #   | `STRUCT`    | `Hash`                               | Hash keys may be strings or symbols.           |
+        #
+        #   See [Data Types](https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types) for an overview
+        #   of each BigQuery data type, including allowed values.
+        # @param [Array, Hash] types Standard SQL only. Types of the SQL parameters in `params`. It is not always to
+        #   infer the right SQL type from a value in `params`. In these cases, `types` must be used to specify the SQL
+        #   type for these values.
+        #
+        #   Must match the value type passed to `params`. This must be an `Array` when the query uses positional query
+        #   parameters. This must be an `Hash` when the query uses named query parameters. The values should be BigQuery
+        #   type codes from the following list:
+        #
+        #   * `:BOOL`
+        #   * `:INT64`
+        #   * `:FLOAT64`
+        #   * `:NUMERIC`
+        #   * `:STRING`
+        #   * `:DATETIME`
+        #   * `:DATE`
+        #   * `:TIMESTAMP`
+        #   * `:TIME`
+        #   * `:BYTES`
+        #   * `Array` - Lists are specified by providing the type code in an array. For example, an array of integers
+        #     are specified as `[:INT64]`.
+        #   * `Hash` - Types for STRUCT values (`Hash` objects) are specified using a `Hash` object, where the keys
+        #     match the `params` hash, and the values are the types value that matches the data.
+        #
+        #   Types are optional.
         # @param [Hash<String|Symbol, External::DataSource>] external A Hash
         #   that represents the mapping of the external tables to the table
         #   names used in the SQL query. The hash keys are the table names, and
@@ -744,10 +787,10 @@ module Google
         #     puts row[:name]
         #   end
         #
-        def query query, params: nil, external: nil, max: nil, cache: true, dataset: nil, project: nil,
+        def query query, params: nil, types: nil, external: nil, max: nil, cache: true, dataset: nil, project: nil,
                   standard_sql: nil, legacy_sql: nil, &block
-          job = query_job query, params: params, external: external, cache: cache, dataset: dataset, project: project,
-                                 standard_sql: standard_sql, legacy_sql: legacy_sql, &block
+          job = query_job query, params: params, types: types, external: external, cache: cache, dataset: dataset,
+                                 project: project, standard_sql: standard_sql, legacy_sql: legacy_sql, &block
           job.wait_until_done!
 
           if job.failed?

@@ -62,7 +62,7 @@ describe Google::Cloud::Bigquery::Dataset, :query_job, :named_params, :mock_bigq
           type: "INT64"
         ),
         parameter_value: Google::Apis::BigqueryV2::QueryParameterValue.new(
-          value: 35
+          value: "35"
         )
       )
     ]
@@ -86,7 +86,7 @@ describe Google::Cloud::Bigquery::Dataset, :query_job, :named_params, :mock_bigq
           type: "FLOAT64"
         ),
         parameter_value: Google::Apis::BigqueryV2::QueryParameterValue.new(
-          value: 90.0
+          value: "90.0"
         )
       )
     ]
@@ -134,7 +134,7 @@ describe Google::Cloud::Bigquery::Dataset, :query_job, :named_params, :mock_bigq
           type: "BOOL"
         ),
         parameter_value: Google::Apis::BigqueryV2::QueryParameterValue.new(
-          value: true
+          value: "true"
         )
       )
     ]
@@ -158,7 +158,7 @@ describe Google::Cloud::Bigquery::Dataset, :query_job, :named_params, :mock_bigq
           type: "BOOL"
         ),
         parameter_value: Google::Apis::BigqueryV2::QueryParameterValue.new(
-          value: false
+          value: "false"
         )
       )
     ]
@@ -356,7 +356,7 @@ describe Google::Cloud::Bigquery::Dataset, :query_job, :named_params, :mock_bigq
           type: "INT64"
         ),
         parameter_value: Google::Apis::BigqueryV2::QueryParameterValue.new(
-          value: 35
+          value: "35"
         )
       ),
       Google::Apis::BigqueryV2::QueryParameter.new(
@@ -365,7 +365,7 @@ describe Google::Cloud::Bigquery::Dataset, :query_job, :named_params, :mock_bigq
           type: "FLOAT64"
         ),
         parameter_value: Google::Apis::BigqueryV2::QueryParameterValue.new(
-          value: 90.0
+          value: "90.0"
         )
       ),
       Google::Apis::BigqueryV2::QueryParameter.new(
@@ -374,7 +374,7 @@ describe Google::Cloud::Bigquery::Dataset, :query_job, :named_params, :mock_bigq
           type: "BOOL"
         ),
         parameter_value: Google::Apis::BigqueryV2::QueryParameterValue.new(
-          value: true
+          value: "true"
         )
       ),
       Google::Apis::BigqueryV2::QueryParameter.new(
@@ -475,10 +475,10 @@ describe Google::Cloud::Bigquery::Dataset, :query_job, :named_params, :mock_bigq
         ),
         parameter_value: Google::Apis::BigqueryV2::QueryParameterValue.new(
           struct_values: {
-            "name" => Google::Apis::BigqueryV2::QueryParameterValue.new(value: "Testy McTesterson"),
-            "age" => Google::Apis::BigqueryV2::QueryParameterValue.new(value: 42),
-            "active" => Google::Apis::BigqueryV2::QueryParameterValue.new(value: false),
-            "score" => Google::Apis::BigqueryV2::QueryParameterValue.new(value: 98.7)
+            "name"   => Google::Apis::BigqueryV2::QueryParameterValue.new(value: "Testy McTesterson"),
+            "age"    => Google::Apis::BigqueryV2::QueryParameterValue.new(value: "42"),
+            "active" => Google::Apis::BigqueryV2::QueryParameterValue.new(value: "false"),
+            "score"  => Google::Apis::BigqueryV2::QueryParameterValue.new(value: "98.7")
           }
         )
       )
