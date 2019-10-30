@@ -20,9 +20,7 @@ module Google
         # Request message for listing jobs using {Google::Cloud::Scheduler::V1beta1::CloudScheduler::ListJobs ListJobs}.
         # @!attribute [rw] parent
         #   @return [String]
-        #     Required.
-        #
-        #     The location name. For example:
+        #     Required. The location name. For example:
         #     `projects/PROJECT_ID/locations/LOCATION_ID`.
         # @!attribute [rw] page_size
         #   @return [Integer]
@@ -61,24 +59,18 @@ module Google
         # Request message for {Google::Cloud::Scheduler::V1beta1::CloudScheduler::GetJob GetJob}.
         # @!attribute [rw] name
         #   @return [String]
-        #     Required.
-        #
-        #     The job name. For example:
+        #     Required. The job name. For example:
         #     `projects/PROJECT_ID/locations/LOCATION_ID/jobs/JOB_ID`.
         class GetJobRequest; end
 
         # Request message for {Google::Cloud::Scheduler::V1beta1::CloudScheduler::CreateJob CreateJob}.
         # @!attribute [rw] parent
         #   @return [String]
-        #     Required.
-        #
-        #     The location name. For example:
+        #     Required. The location name. For example:
         #     `projects/PROJECT_ID/locations/LOCATION_ID`.
         # @!attribute [rw] job
         #   @return [Google::Cloud::Scheduler::V1beta1::Job]
-        #     Required.
-        #
-        #     The job to add. The user can optionally specify a name for the
+        #     Required. The job to add. The user can optionally specify a name for the
         #     job in {Google::Cloud::Scheduler::V1beta1::Job#name name}. {Google::Cloud::Scheduler::V1beta1::Job#name name} cannot be the same as an
         #     existing job. If a name is not specified then the system will
         #     generate a random unique name that will be returned
@@ -88,9 +80,7 @@ module Google
         # Request message for {Google::Cloud::Scheduler::V1beta1::CloudScheduler::UpdateJob UpdateJob}.
         # @!attribute [rw] job
         #   @return [Google::Cloud::Scheduler::V1beta1::Job]
-        #     Required.
-        #
-        #     The new job properties. {Google::Cloud::Scheduler::V1beta1::Job#name name} must be specified.
+        #     Required. The new job properties. {Google::Cloud::Scheduler::V1beta1::Job#name name} must be specified.
         #
         #     Output only fields cannot be modified using UpdateJob.
         #     Any value specified for an output only field will be ignored.
@@ -103,27 +93,21 @@ module Google
         # {Google::Cloud::Scheduler::V1beta1::CloudScheduler::DeleteJob DeleteJob}.
         # @!attribute [rw] name
         #   @return [String]
-        #     Required.
-        #
-        #     The job name. For example:
+        #     Required. The job name. For example:
         #     `projects/PROJECT_ID/locations/LOCATION_ID/jobs/JOB_ID`.
         class DeleteJobRequest; end
 
         # Request message for {Google::Cloud::Scheduler::V1beta1::CloudScheduler::PauseJob PauseJob}.
         # @!attribute [rw] name
         #   @return [String]
-        #     Required.
-        #
-        #     The job name. For example:
+        #     Required. The job name. For example:
         #     `projects/PROJECT_ID/locations/LOCATION_ID/jobs/JOB_ID`.
         class PauseJobRequest; end
 
         # Request message for {Google::Cloud::Scheduler::V1beta1::CloudScheduler::ResumeJob ResumeJob}.
         # @!attribute [rw] name
         #   @return [String]
-        #     Required.
-        #
-        #     The job name. For example:
+        #     Required. The job name. For example:
         #     `projects/PROJECT_ID/locations/LOCATION_ID/jobs/JOB_ID`.
         class ResumeJobRequest; end
 
@@ -131,9 +115,7 @@ module Google
         # {Google::Cloud::Scheduler::V1beta1::CloudScheduler::RunJob RunJob}.
         # @!attribute [rw] name
         #   @return [String]
-        #     Required.
-        #
-        #     The job name. For example:
+        #     Required. The job name. For example:
         #     `projects/PROJECT_ID/locations/LOCATION_ID/jobs/JOB_ID`.
         class RunJobRequest; end
       end
