@@ -2,10 +2,6 @@ source "https://rubygems.org"
 
 gemspec
 
-# WORKAROUND: builds are having problems since the release of 3.0.0
-# pin to the last known good version
-gem "google-cloud-monitoring", "~> 0.29"
-gem "public_suffix", "~> 2.0"
 gem "rake", "~> 12.0"
 
 # Pin minitest to 5.11.x to avoid warnings emitted by 5.12.
