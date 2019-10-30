@@ -53,14 +53,6 @@ module Google
         end
 
         # @private
-        # @return [Google::Bigtable::Admin::V2::ColumnFamily]
-        def to_grpc
-          grpc = Google::Bigtable::Admin::V2::ColumnFamily.new
-          grpc.gc_rule = gc_rule.to_grpc if gc_rule
-          grpc
-        end
-
-        # @private
         #
         # Create a new ColumnFamily instance from a {Google::Bigtable::Admin::V2::ColumnFamily}.
         #

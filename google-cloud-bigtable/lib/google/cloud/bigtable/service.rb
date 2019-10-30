@@ -715,20 +715,6 @@ module Google
         end
 
         ##
-        # Creates a formatted snapshot path.
-        #
-        # @param instance_id [String]
-        # @param cluster_id [String]
-        # @param snapshot_id [String]
-        # @return [String]
-        #   Formatted snapshot path
-        #   +projects/<project>/instances/<instance>/clusters/<cluster>/snapshots/<snapshot>+
-        #
-        def snapshot_path instance_id, cluster_id, snapshot_id
-          Admin::V2::BigtableTableAdminClient.snapshot_path project_id, instance_id, cluster_id, snapshot_id
-        end
-
-        ##
         # Creates a formatted app profile path.
         #
         # @param instance_id [String]

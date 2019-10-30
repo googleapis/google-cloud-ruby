@@ -24,7 +24,7 @@ describe Google::Cloud::Bigtable::Table, :read_modify_write_row, :mock_bigtable 
   let(:timestamp) { 1564257960168000 }
   let(:labels) { ["test-labels"] }
   let(:qualifier) { "field01" }
-  let(:cell_value) { "xyz" }
+  let(:cell_value) { "AA213FD51B3801043FBC" } # hex "binary" to test .to_i
   let(:append_value) { "append-123" }
   let(:increment_amount) { 1 }
   let(:table) {
@@ -72,6 +72,8 @@ describe Google::Cloud::Bigtable::Table, :read_modify_write_row, :mock_bigtable 
     cell.family.must_equal family_name
     cell.qualifier.must_equal qualifier
     cell.timestamp.must_equal timestamp
+    cell.to_time.must_equal Time.at(timestamp/1000.0)
+    cell.to_i.must_equal 4702094672846537781
     cell.labels.must_equal labels
   end
 

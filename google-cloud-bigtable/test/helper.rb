@@ -176,6 +176,19 @@ class MockBigtable < Minitest::Spec
    end
   end
 
+  def app_profile_grpc instance_id, app_profile_id
+    Google::Bigtable::Admin::V2::AppProfile.new(
+      name: "projects/test/instances/#{instance_id}/appProfiles/#{app_profile_id}"
+    )
+  end
+
+  def app_profiles_grpc count: 2
+    arr = Array.new(count) do |i|
+      app_profile_grpc "my-instance", "my-app-profile-#{i}"
+    end
+    Google::Bigtable::Admin::V2::ListAppProfilesResponse.new app_profiles: arr
+  end
+
   def project_path
     Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient.project_path(project_id)
   end

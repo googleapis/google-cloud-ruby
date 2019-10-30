@@ -23,35 +23,35 @@ describe Google::Cloud::Bigtable::RowFilter, :row_filter, :mock_bigtable do
       Object.new, "dummy-table-path"
     )
   }
-  it "create sink filter" do
+  it "creates a sink filter" do
     filter = Google::Cloud::Bigtable::RowFilter.sink
 
     filter.must_be_kind_of Google::Cloud::Bigtable::RowFilter::SimpleFilter
     filter.to_grpc.sink.must_equal true
   end
 
-  it "create pass filter" do
+  it "creates a pass filter" do
     filter = Google::Cloud::Bigtable::RowFilter.pass
 
     filter.must_be_kind_of Google::Cloud::Bigtable::RowFilter::SimpleFilter
     filter.to_grpc.pass_all_filter.must_equal true
   end
 
-  it "create block filter" do
+  it "creates a block filter" do
     filter = Google::Cloud::Bigtable::RowFilter.block
 
     filter.must_be_kind_of Google::Cloud::Bigtable::RowFilter::SimpleFilter
     filter.to_grpc.block_all_filter.must_equal true
   end
 
-  it "create strip_value filter" do
+  it "creates a strip_value filter" do
     filter = Google::Cloud::Bigtable::RowFilter.strip_value
 
     filter.must_be_kind_of Google::Cloud::Bigtable::RowFilter::SimpleFilter
     filter.to_grpc.strip_value_transformer.must_equal true
   end
 
-  it "create key filter" do
+  it "creates a key filter" do
     regex = "user-*"
     filter = Google::Cloud::Bigtable::RowFilter.key(regex)
 
@@ -59,7 +59,7 @@ describe Google::Cloud::Bigtable::RowFilter, :row_filter, :mock_bigtable do
     filter.to_grpc.row_key_regex_filter.must_equal regex
   end
 
-  it "create family filter" do
+  it "creates a family filter" do
     regex = "cf-*"
     filter = Google::Cloud::Bigtable::RowFilter.family(regex)
 
@@ -67,7 +67,7 @@ describe Google::Cloud::Bigtable::RowFilter, :row_filter, :mock_bigtable do
     filter.to_grpc.family_name_regex_filter.must_equal regex
   end
 
-  it "create qualifier filter" do
+  it "creates a qualifier filter" do
     regex = "field*"
     filter = Google::Cloud::Bigtable::RowFilter.qualifier(regex)
 
@@ -75,7 +75,7 @@ describe Google::Cloud::Bigtable::RowFilter, :row_filter, :mock_bigtable do
     filter.to_grpc.column_qualifier_regex_filter.must_equal(regex)
   end
 
-  it "create value filter" do
+  it "creates a value filter" do
     regex = "abc*"
     filter = Google::Cloud::Bigtable::RowFilter.value(regex)
 
@@ -83,7 +83,7 @@ describe Google::Cloud::Bigtable::RowFilter, :row_filter, :mock_bigtable do
     filter.to_grpc.value_regex_filter.must_equal regex
   end
 
-  it "create label filter" do
+  it "creates a label filter" do
     label = "test"
     filter = Google::Cloud::Bigtable::RowFilter.label(label)
 
@@ -91,7 +91,7 @@ describe Google::Cloud::Bigtable::RowFilter, :row_filter, :mock_bigtable do
     filter.to_grpc.apply_label_transformer.must_equal(label)
   end
 
-  it "create cells_per_row_offset filter" do
+  it "creates a cells_per_row_offset filter" do
     offset = 5
     filter = Google::Cloud::Bigtable::RowFilter.cells_per_row_offset(offset)
 
@@ -99,7 +99,7 @@ describe Google::Cloud::Bigtable::RowFilter, :row_filter, :mock_bigtable do
     filter.to_grpc.cells_per_row_offset_filter.must_equal offset
   end
 
-  it "create cells_per_row filter" do
+  it "creates a cells_per_row filter" do
     limit = 10
     filter = Google::Cloud::Bigtable::RowFilter.cells_per_row(limit)
 
@@ -107,7 +107,7 @@ describe Google::Cloud::Bigtable::RowFilter, :row_filter, :mock_bigtable do
     filter.to_grpc.cells_per_row_limit_filter.must_equal limit
   end
 
-  it "create cells_per_column filter" do
+  it "creates a cells_per_column filter" do
     limit = 10
     filter = Google::Cloud::Bigtable::RowFilter.cells_per_column(limit)
 
@@ -116,7 +116,7 @@ describe Google::Cloud::Bigtable::RowFilter, :row_filter, :mock_bigtable do
   end
 
   describe "timestamp_range" do
-    it "create timestamp_range filter" do
+    it "creates a timestamp_range filter" do
       from = timestamp_micros - 3000000
       to = timestamp_micros
 
@@ -130,7 +130,7 @@ describe Google::Cloud::Bigtable::RowFilter, :row_filter, :mock_bigtable do
       filter.to_grpc.timestamp_range_filter.must_equal range_grpc
     end
 
-    it "create timestamp_range filter with only from range" do
+    it "creates a timestamp_range filter with only from range" do
       from = timestamp_micros - 3000000
       filter = Google::Cloud::Bigtable::RowFilter.timestamp_range(from: from)
 
@@ -142,7 +142,7 @@ describe Google::Cloud::Bigtable::RowFilter, :row_filter, :mock_bigtable do
       filter.to_grpc.timestamp_range_filter.must_equal range_grpc
     end
 
-    it "create timestamp_range filter with only to range" do
+    it "creates a timestamp_range filter with only to range" do
       to = timestamp_micros
       filter = Google::Cloud::Bigtable::RowFilter.timestamp_range(to: to)
 
@@ -156,7 +156,7 @@ describe Google::Cloud::Bigtable::RowFilter, :row_filter, :mock_bigtable do
   end
 
   describe "#value_range" do
-    it "create value_range filter" do
+    it "creates a value_range filter" do
       from_value = "abc"
       to_value = "xyz"
       range = Google::Cloud::Bigtable::ValueRange.new.from(from_value).to(to_value)
@@ -178,7 +178,7 @@ describe Google::Cloud::Bigtable::RowFilter, :row_filter, :mock_bigtable do
   end
 
   describe "#column_range" do
-    it "create column_range filter" do
+    it "creates a column_range filter" do
       family = "cf"
       from_value = "field0"
       to_value = "field5"
@@ -202,8 +202,8 @@ describe Google::Cloud::Bigtable::RowFilter, :row_filter, :mock_bigtable do
     end
   end
 
-  describe "#smaple" do
-    it "create sample probability filter" do
+  describe "#sample" do
+    it "creates a sample probability filter" do
       probability = 0.5
       filter = Google::Cloud::Bigtable::RowFilter.sample(probability)
 
