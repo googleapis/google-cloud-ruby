@@ -35,7 +35,7 @@ module Google
         #     access.add_owner_group "owners@example.com"
         #     access.add_writer_user "writer@example.com"
         #     access.remove_writer_user "readers@example.com"
-        #     access.add_reader_special :all
+        #     access.add_reader_special :all_users
         #   end
         #
         class Access
@@ -74,7 +74,9 @@ module Google
             "projectWriters"          => "projectWriters",
             "all"                     => "allAuthenticatedUsers",
             "all_authenticated_users" => "allAuthenticatedUsers",
-            "allAuthenticatedUsers"   => "allAuthenticatedUsers"
+            "allAuthenticatedUsers"   => "allAuthenticatedUsers",
+            "all_users"               => "allUsers",
+            "allUsers"                => "allUsers"
           }.freeze
 
           ##
@@ -172,7 +174,7 @@ module Google
           # Add reader access to a special group.
           #
           # @param [String] group Accepted values are `owners`, `writers`,
-          #   `readers`, and `all`.
+          #   `readers`, `all_authenticated_users`, and `all_users`.
           #
           # @example
           #   require "google/cloud/bigquery"
@@ -181,7 +183,7 @@ module Google
           #   dataset = bigquery.dataset "my_dataset"
           #
           #   dataset.access do |access|
-          #     access.add_reader_special :all
+          #     access.add_reader_special :all_users
           #   end
           #
           def add_reader_special group
@@ -277,7 +279,7 @@ module Google
           # Add writer access to a special group.
           #
           # @param [String] group Accepted values are `owners`, `writers`,
-          #   `readers`, and `all`.
+          #   `readers`, `all_authenticated_users`, and `all_users`.
           #
           # @example
           #   require "google/cloud/bigquery"
@@ -286,7 +288,7 @@ module Google
           #   dataset = bigquery.dataset "my_dataset"
           #
           #   dataset.access do |access|
-          #     access.add_writer_special :all
+          #     access.add_writer_special :all_users
           #   end
           #
           def add_writer_special group
@@ -355,7 +357,7 @@ module Google
           # Add owner access to a special group.
           #
           # @param [String] group Accepted values are `owners`, `writers`,
-          #   `readers`, and `all`.
+          #   `readers`, `all_authenticated_users`, and `all_users`.
           #
           # @example
           #   require "google/cloud/bigquery"
@@ -364,7 +366,7 @@ module Google
           #   dataset = bigquery.dataset "my_dataset"
           #
           #   dataset.access do |access|
-          #     access.add_owner_special :all
+          #     access.add_owner_special :all_users
           #   end
           #
           def add_owner_special group
@@ -433,7 +435,7 @@ module Google
           # Remove reader access from a special group.
           #
           # @param [String] group Accepted values are `owners`, `writers`,
-          #   `readers`, and `all`.
+          #   `readers`, `all_authenticated_users`, and `all_users`.
           #
           # @example
           #   require "google/cloud/bigquery"
@@ -442,7 +444,7 @@ module Google
           #   dataset = bigquery.dataset "my_dataset"
           #
           #   dataset.access do |access|
-          #     access.remove_reader_special :all
+          #     access.remove_reader_special :all_users
           #   end
           #
           def remove_reader_special group
@@ -538,7 +540,7 @@ module Google
           # Remove writer access from a special group.
           #
           # @param [String] group Accepted values are `owners`, `writers`,
-          #   `readers`, and `all`.
+          #   `readers`, `all_authenticated_users`, and `all_users`.
           #
           # @example
           #   require "google/cloud/bigquery"
@@ -547,7 +549,7 @@ module Google
           #   dataset = bigquery.dataset "my_dataset"
           #
           #   dataset.access do |access|
-          #     access.remove_writer_special :all
+          #     access.remove_writer_special :all_users
           #   end
           #
           def remove_writer_special group
@@ -616,7 +618,7 @@ module Google
           # Remove owner access from a special group.
           #
           # @param [String] group Accepted values are `owners`, `writers`,
-          #   `readers`, and `all`.
+          #   `readers`, `all_authenticated_users`, and `all_users`.
           #
           # @example
           #   require "google/cloud/bigquery"
@@ -625,7 +627,7 @@ module Google
           #   dataset = bigquery.dataset "my_dataset"
           #
           #   dataset.access do |access|
-          #     access.remove_owner_special :all
+          #     access.remove_owner_special :all_users
           #   end
           #
           def remove_owner_special group
@@ -691,7 +693,7 @@ module Google
           # Checks reader access for a special group.
           #
           # @param [String] group Accepted values are `owners`, `writers`,
-          #   `readers`, and `all`.
+          #   `readers`, `all_authenticated_users`, and `all_users`.
           #
           # @example
           #   require "google/cloud/bigquery"
@@ -700,7 +702,7 @@ module Google
           #   dataset = bigquery.dataset "my_dataset"
           #
           #   access = dataset.access
-          #   access.reader_special? :all #=> false
+          #   access.reader_special? :all_users #=> false
           #
           def reader_special? group
             lookup_access_role_scope_value :reader, :special, group
@@ -791,7 +793,7 @@ module Google
           # Checks writer access for a special group.
           #
           # @param [String] group Accepted values are `owners`, `writers`,
-          #   `readers`, and `all`.
+          #   `readers`, `all_authenticated_users`, and `all_users`.
           #
           # @example
           #   require "google/cloud/bigquery"
@@ -800,7 +802,7 @@ module Google
           #   dataset = bigquery.dataset "my_dataset"
           #
           #   access = dataset.access
-          #   access.writer_special? :all #=> false
+          #   access.writer_special? :all_users #=> false
           #
           def writer_special? group
             lookup_access_role_scope_value :writer, :special, group
@@ -865,7 +867,7 @@ module Google
           # Checks owner access for a special group.
           #
           # @param [String] group Accepted values are `owners`, `writers`,
-          #   `readers`, and `all`.
+          #   `readers`, `all_authenticated_users`, and `all_users`.
           #
           # @example
           #   require "google/cloud/bigquery"
@@ -874,7 +876,7 @@ module Google
           #   dataset = bigquery.dataset "my_dataset"
           #
           #   access = dataset.access
-          #   access.owner_special? :all #=> false
+          #   access.owner_special? :all_users #=> false
           #
           def owner_special? group
             lookup_access_role_scope_value :owner, :special, group
