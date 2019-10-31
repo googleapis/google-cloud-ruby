@@ -62,7 +62,6 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :enable_speaker_diarization, :bool, 1
     optional :min_speaker_count, :int32, 2
     optional :max_speaker_count, :int32, 3
-    optional :speaker_tag, :int32, 5
   end
   add_message "google.cloud.speech.v1.RecognitionMetadata" do
     optional :interaction_type, :enum, 1, "google.cloud.speech.v1.RecognitionMetadata.InteractionType"
@@ -155,6 +154,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :start_time, :message, 1, "google.protobuf.Duration"
     optional :end_time, :message, 2, "google.protobuf.Duration"
     optional :word, :string, 3
+    optional :speaker_tag, :int32, 5
   end
 end
 

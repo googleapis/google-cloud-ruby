@@ -308,13 +308,6 @@ module Google
         #     Maximum number of speakers in the conversation. This range gives you more
         #     flexibility by allowing the system to automatically determine the correct
         #     number of speakers. If not set, the default value is 6.
-        # @!attribute [rw] speaker_tag
-        #   @return [Integer]
-        #     A distinct integer value is assigned for every speaker within
-        #     the audio. This field specifies which one of those speakers was detected to
-        #     have spoken this word. Value ranges from '1' to diarization_speaker_count.
-        #     speaker_tag is set if enable_speaker_diarization = 'true' and only in the
-        #     top alternative.
         class SpeakerDiarizationConfig; end
 
         # Description of audio data to be recognized.
@@ -688,6 +681,13 @@ module Google
         # @!attribute [rw] word
         #   @return [String]
         #     The word corresponding to this set of information.
+        # @!attribute [rw] speaker_tag
+        #   @return [Integer]
+        #     A distinct integer value is assigned for every speaker within
+        #     the audio. This field specifies which one of those speakers was detected to
+        #     have spoken this word. Value ranges from '1' to diarization_speaker_count.
+        #     speaker_tag is set if enable_speaker_diarization = 'true' and only in the
+        #     top alternative.
         class WordInfo; end
       end
     end
