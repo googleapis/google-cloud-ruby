@@ -121,73 +121,6 @@ module Google
       end
     end
 
-    # Update the supported and recommended version thresholds according to the
-    # MRI support schedule: supported means non-EOL, and recommended means in
-    # normal (rather than security) maintenance. Generally, this means updating
-    # these at the end of March each year, if the previous year patterns hold.
-    # See https://www.ruby-lang.org/en/downloads/branches/
-
-    ##
-    # Minimum "supported" Ruby version (non-EOL)
-    # @private
-    #
-    SUPPORTED_VERSION_THRESHOLD = "2.3".freeze
-
-    ##
-    # Minimum "recommended" Ruby version (normal maintenance)
-    # @private
-    #
-    RECOMMENDED_VERSION_THRESHOLD = "2.4".freeze
-
-    ##
-    # Check Ruby version and emit a warning if it is old
-    # @private
-    #
-    def self.warn_on_old_ruby_version \
-        supported_version: SUPPORTED_VERSION_THRESHOLD,
-        recommended_version: RECOMMENDED_VERSION_THRESHOLD
-      return if ENV["GOOGLE_CLOUD_SUPPRESS_RUBY_WARNINGS"]
-      cur_version = Gem::Version.new RUBY_VERSION
-      if cur_version < Gem::Version.new(supported_version)
-        warn_unsupported_ruby cur_version, recommended_version
-      elsif cur_version < Gem::Version.new(recommended_version)
-        warn_nonrecommended_ruby cur_version, recommended_version
-      end
-    rescue ArgumentError
-      warn "Unable to determine current Ruby version."
-    end
-
-    ##
-    # Print a warning for an EOL version of Ruby
-    # @private
-    #
-    def self.warn_unsupported_ruby cur_version, recommended_version
-      warn "WARNING: You are running Ruby #{cur_version}, which has reached" \
-        " end-of-life and is no longer supported by Ruby Core."
-      warn "The Google Cloud API clients work best on supported versions of" \
-        " Ruby. It is strongly recommended that you upgrade to Ruby" \
-        " #{recommended_version} or later."
-      warn "See https://www.ruby-lang.org/en/downloads/branches/ for more" \
-        " info on the Ruby maintenance schedule."
-      warn "To suppress this message, set the" \
-        " GOOGLE_CLOUD_SUPPRESS_RUBY_WARNINGS environment variable."
-    end
-
-    ##
-    # Print a warning for a supported but nearing EOL version of Ruby
-    # @private
-    #
-    def self.warn_nonrecommended_ruby cur_version, recommended_version
-      warn "WARNING: You are running Ruby #{cur_version}, which is nearing" \
-        " end-of-life."
-      warn "The Google Cloud API clients work best on supported versions of" \
-        " Ruby. Consider upgrading to Ruby #{recommended_version} or later."
-      warn "See https://www.ruby-lang.org/en/downloads/branches/ for more" \
-        " info on the Ruby maintenance schedule."
-      warn "To suppress this message, set the" \
-        " GOOGLE_CLOUD_SUPPRESS_RUBY_WARNINGS environment variable."
-    end
-
     ##
     # Safely load all google-cloud-* gems.
     # @private
@@ -232,9 +165,6 @@ end
 
 # Set the default top-level configuration
 Google::Cloud.init_configuration
-
-# Emit a warning if current Ruby is at or nearing end-of-life
-Google::Cloud.warn_on_old_ruby_version
 
 # Auto-load all Google Cloud service gems.
 Google::Cloud.auto_load_gems
