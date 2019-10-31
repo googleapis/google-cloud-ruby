@@ -589,7 +589,7 @@ module Google
               #   are of the form `projects/<project>`.
               # @param instance_id [String]
               #   Required. The ID of the instance to create.  Valid identifiers are of the
-              #   form `[a-z][-a-z0-9]*[a-z0-9]` and must be between 6 and 30 characters in
+              #   form `[a-z][-a-z0-9]*[a-z0-9]` and must be between 2 and 64 characters in
               #   length.
               # @param instance [Google::Spanner::Admin::Instance::V1::Instance | Hash]
               #   Required. The instance to create.  The name may be omitted, but if
@@ -676,9 +676,9 @@ module Google
               # Until completion of the returned operation:
               #
               # * Cancelling the operation sets its metadata's
-              #   {Google::Spanner::Admin::Instance::V1::UpdateInstanceMetadata#cancel_time cancel_time},
-              #   and begins restoring resources to their pre-request values. The
-              #   operation is guaranteed to succeed at undoing all resource changes,
+              #   {Google::Spanner::Admin::Instance::V1::UpdateInstanceMetadata#cancel_time cancel_time}, and begins
+              #   restoring resources to their pre-request values. The operation
+              #   is guaranteed to succeed at undoing all resource changes,
               #   after which point it terminates with a `CANCELLED` status.
               #   * All other attempts to modify the instance are rejected.
               #   * Reading the instance via the API continues to give the pre-request
@@ -705,18 +705,14 @@ module Google
               #
               # @param instance [Google::Spanner::Admin::Instance::V1::Instance | Hash]
               #   Required. The instance to update, which must always include the instance
-              #   name.  Otherwise, only fields mentioned in
-              #   [][google.spanner.admin.instance.v1.UpdateInstanceRequest.field_mask] need
-              #   be included.
+              #   name.  Otherwise, only fields mentioned in [][google.spanner.admin.instance.v1.UpdateInstanceRequest.field_mask] need be included.
               #   A hash of the same form as `Google::Spanner::Admin::Instance::V1::Instance`
               #   can also be provided.
               # @param field_mask [Google::Protobuf::FieldMask | Hash]
-              #   Required. A mask specifying which fields in
-              #   [][google.spanner.admin.instance.v1.UpdateInstanceRequest.instance] should
-              #   be updated. The field mask must always be specified; this prevents any
-              #   future fields in
-              #   [][google.spanner.admin.instance.v1.Instance] from being erased
-              #   accidentally by clients that do not know about them.
+              #   Required. A mask specifying which fields in [][google.spanner.admin.instance.v1.UpdateInstanceRequest.instance] should be updated.
+              #   The field mask must always be specified; this prevents any future fields in
+              #   [][google.spanner.admin.instance.v1.Instance] from being erased accidentally by clients that do not know
+              #   about them.
               #   A hash of the same form as `Google::Protobuf::FieldMask`
               #   can also be provided.
               # @param options [Google::Gax::CallOptions]

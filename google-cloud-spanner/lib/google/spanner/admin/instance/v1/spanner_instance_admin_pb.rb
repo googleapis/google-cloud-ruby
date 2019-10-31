@@ -5,6 +5,9 @@
 require 'google/protobuf'
 
 require 'google/api/annotations_pb'
+require 'google/api/client_pb'
+require 'google/api/field_behavior_pb'
+require 'google/api/resource_pb'
 require 'google/iam/v1/iam_policy_pb'
 require 'google/iam/v1/policy_pb'
 require 'google/longrunning/operations_pb'
@@ -12,9 +15,21 @@ require 'google/protobuf/empty_pb'
 require 'google/protobuf/field_mask_pb'
 require 'google/protobuf/timestamp_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
+  add_message "google.spanner.admin.instance.v1.ReplicaInfo" do
+    optional :location, :string, 1
+    optional :type, :enum, 2, "google.spanner.admin.instance.v1.ReplicaInfo.ReplicaType"
+    optional :default_leader_location, :bool, 3
+  end
+  add_enum "google.spanner.admin.instance.v1.ReplicaInfo.ReplicaType" do
+    value :TYPE_UNSPECIFIED, 0
+    value :READ_WRITE, 1
+    value :READ_ONLY, 2
+    value :WITNESS, 3
+  end
   add_message "google.spanner.admin.instance.v1.InstanceConfig" do
     optional :name, :string, 1
     optional :display_name, :string, 2
+    repeated :replicas, :message, 3, "google.spanner.admin.instance.v1.ReplicaInfo"
   end
   add_message "google.spanner.admin.instance.v1.Instance" do
     optional :name, :string, 1
@@ -85,6 +100,8 @@ module Google
     module Admin
       module Instance
         module V1
+          ReplicaInfo = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.instance.v1.ReplicaInfo").msgclass
+          ReplicaInfo::ReplicaType = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.instance.v1.ReplicaInfo.ReplicaType").enummodule
           InstanceConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.instance.v1.InstanceConfig").msgclass
           Instance = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.instance.v1.Instance").msgclass
           Instance::State = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.instance.v1.Instance.State").enummodule

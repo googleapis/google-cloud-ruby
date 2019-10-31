@@ -16,19 +16,17 @@
 module Google
   module Spanner
     module V1
-      # Node information for nodes appearing in a
-      # {Google::Spanner::V1::QueryPlan#plan_nodes QueryPlan#plan_nodes}.
+      # Node information for nodes appearing in a {Google::Spanner::V1::QueryPlan#plan_nodes QueryPlan#plan_nodes}.
       # @!attribute [rw] index
       #   @return [Integer]
-      #     The `PlanNode`'s index in [node
-      #     list][google.spanner.v1.QueryPlan.plan_nodes].
+      #     The `PlanNode`'s index in {Google::Spanner::V1::QueryPlan#plan_nodes node list}.
       # @!attribute [rw] kind
       #   @return [Google::Spanner::V1::PlanNode::Kind]
       #     Used to determine the type of node. May be needed for visualizing
       #     different kinds of nodes differently. For example, If the node is a
-      #     {Google::Spanner::V1::PlanNode::Kind::SCALAR SCALAR} node, it will have a
-      #     condensed representation which can be used to directly embed a description
-      #     of the node in its parent.
+      #     {Google::Spanner::V1::PlanNode::Kind::SCALAR SCALAR} node, it will have a condensed representation
+      #     which can be used to directly embed a description of the node in its
+      #     parent.
       # @!attribute [rw] display_name
       #   @return [String]
       #     The display name for the node.
@@ -37,8 +35,7 @@ module Google
       #     List of child node `index`es and their relationship to this parent.
       # @!attribute [rw] short_representation
       #   @return [Google::Spanner::V1::PlanNode::ShortRepresentation]
-      #     Condensed representation for
-      #     {Google::Spanner::V1::PlanNode::Kind::SCALAR SCALAR} nodes.
+      #     Condensed representation for {Google::Spanner::V1::PlanNode::Kind::SCALAR SCALAR} nodes.
       # @!attribute [rw] metadata
       #   @return [Google::Protobuf::Struct]
       #     Attributes relevant to the node contained in a group of key-value pairs.
@@ -69,14 +66,14 @@ module Google
         #     with the output variable.
         # @!attribute [rw] variable
         #   @return [String]
-        #     Only present if the child node is
-        #     {Google::Spanner::V1::PlanNode::Kind::SCALAR SCALAR} and corresponds to an
-        #     output variable of the parent node. The field carries the name of the
-        #     output variable. For example, a `TableScan` operator that reads rows from
-        #     a table will have child links to the `SCALAR` nodes representing the
-        #     output variables created for each column that is read by the operator.
-        #     The corresponding `variable` fields will be set to the variable names
-        #     assigned to the columns.
+        #     Only present if the child node is {Google::Spanner::V1::PlanNode::Kind::SCALAR SCALAR} and corresponds
+        #     to an output variable of the parent node. The field carries the name of
+        #     the output variable.
+        #     For example, a `TableScan` operator that reads rows from a table will
+        #     have child links to the `SCALAR` nodes representing the output variables
+        #     created for each column that is read by the operator. The corresponding
+        #     `variable` fields will be set to the variable names assigned to the
+        #     columns.
         class ChildLink; end
 
         # Condensed representation of a node and its subtree. Only present for
@@ -93,8 +90,8 @@ module Google
         #     this node.
         class ShortRepresentation; end
 
-        # The kind of {Google::Spanner::V1::PlanNode PlanNode}. Distinguishes between
-        # the two different kinds of nodes that can appear in a query plan.
+        # The kind of {Google::Spanner::V1::PlanNode PlanNode}. Distinguishes between the two different kinds of
+        # nodes that can appear in a query plan.
         module Kind
           # Not specified.
           KIND_UNSPECIFIED = 0
@@ -116,8 +113,8 @@ module Google
       # @!attribute [rw] plan_nodes
       #   @return [Array<Google::Spanner::V1::PlanNode>]
       #     The nodes in the query plan. Plan nodes are returned in pre-order starting
-      #     with the plan root. Each {Google::Spanner::V1::PlanNode PlanNode}'s `id`
-      #     corresponds to its index in `plan_nodes`.
+      #     with the plan root. Each {Google::Spanner::V1::PlanNode PlanNode}'s `id` corresponds to its index in
+      #     `plan_nodes`.
       class QueryPlan; end
     end
   end

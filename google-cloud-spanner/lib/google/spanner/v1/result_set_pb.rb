@@ -4,11 +4,11 @@
 
 require 'google/protobuf'
 
-require 'google/api/annotations_pb'
 require 'google/protobuf/struct_pb'
 require 'google/spanner/v1/query_plan_pb'
 require 'google/spanner/v1/transaction_pb'
 require 'google/spanner/v1/type_pb'
+require 'google/api/annotations_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.spanner.v1.ResultSet" do
     optional :metadata, :message, 1, "google.spanner.v1.ResultSetMetadata"

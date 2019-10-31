@@ -137,8 +137,8 @@ module Google
       #     encoded as described {Google::Spanner::V1::TypeCode here}.
       # @!attribute [rw] ranges
       #   @return [Array<Google::Spanner::V1::KeyRange>]
-      #     A list of key ranges. See {Google::Spanner::V1::KeyRange KeyRange} for more
-      #     information about key range specifications.
+      #     A list of key ranges. See {Google::Spanner::V1::KeyRange KeyRange} for more information about
+      #     key range specifications.
       # @!attribute [rw] all
       #   @return [true, false]
       #     For convenience `all` can be set to `true` to indicate that this
