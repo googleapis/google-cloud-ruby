@@ -172,8 +172,7 @@ module Google
       # reads should be executed within a transaction or at an exact read
       # timestamp.
       #
-      # See
-      # {Google::Spanner::V1::TransactionOptions::ReadOnly#strong TransactionOptions::ReadOnly#strong}.
+      # See {Google::Spanner::V1::TransactionOptions::ReadOnly#strong TransactionOptions::ReadOnly#strong}.
       #
       # === Exact Staleness
       #
@@ -194,9 +193,7 @@ module Google
       # equivalent boundedly stale concurrency modes. On the other hand,
       # boundedly stale reads usually return fresher results.
       #
-      # See
-      # {Google::Spanner::V1::TransactionOptions::ReadOnly#read_timestamp TransactionOptions::ReadOnly#read_timestamp}
-      # and
+      # See {Google::Spanner::V1::TransactionOptions::ReadOnly#read_timestamp TransactionOptions::ReadOnly#read_timestamp} and
       # {Google::Spanner::V1::TransactionOptions::ReadOnly#exact_staleness TransactionOptions::ReadOnly#exact_staleness}.
       #
       # === Bounded Staleness
@@ -226,9 +223,7 @@ module Google
       # which rows will be read, it can only be used with single-use
       # read-only transactions.
       #
-      # See
-      # {Google::Spanner::V1::TransactionOptions::ReadOnly#max_staleness TransactionOptions::ReadOnly#max_staleness}
-      # and
+      # See {Google::Spanner::V1::TransactionOptions::ReadOnly#max_staleness TransactionOptions::ReadOnly#max_staleness} and
       # {Google::Spanner::V1::TransactionOptions::ReadOnly#min_read_timestamp TransactionOptions::ReadOnly#min_read_timestamp}.
       #
       # === Old Read Timestamps and Garbage Collection
@@ -388,8 +383,7 @@ module Google
         # @!attribute [rw] return_read_timestamp
         #   @return [true, false]
         #     If true, the Cloud Spanner-selected read timestamp is included in
-        #     the {Google::Spanner::V1::Transaction Transaction} message that describes
-        #     the transaction.
+        #     the {Google::Spanner::V1::Transaction Transaction} message that describes the transaction.
         class ReadOnly; end
       end
 
@@ -418,8 +412,7 @@ module Google
       # {Google::Spanner::V1::Spanner::Read Read} or
       # {Google::Spanner::V1::Spanner::ExecuteSql ExecuteSql} call runs.
       #
-      # See {Google::Spanner::V1::TransactionOptions TransactionOptions} for more
-      # information about transactions.
+      # See {Google::Spanner::V1::TransactionOptions TransactionOptions} for more information about transactions.
       # @!attribute [rw] single_use
       #   @return [Google::Spanner::V1::TransactionOptions]
       #     Execute the read or SQL query in a temporary transaction.
@@ -432,8 +425,7 @@ module Google
       #   @return [Google::Spanner::V1::TransactionOptions]
       #     Begin a new transaction and execute this read or SQL query in
       #     it. The transaction ID of the new transaction is returned in
-      #     {Google::Spanner::V1::ResultSetMetadata#transaction ResultSetMetadata#transaction},
-      #     which is a {Google::Spanner::V1::Transaction Transaction}.
+      #     {Google::Spanner::V1::ResultSetMetadata#transaction ResultSetMetadata#transaction}, which is a {Google::Spanner::V1::Transaction Transaction}.
       class TransactionSelector; end
     end
   end

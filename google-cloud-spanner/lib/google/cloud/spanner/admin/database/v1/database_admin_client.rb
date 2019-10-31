@@ -373,8 +373,8 @@ module Google
               # have a name of the format `<database_name>/operations/<operation_id>` and
               # can be used to track preparation of the database. The
               # {Google::Longrunning::Operation#metadata metadata} field type is
-              # {Google::Spanner::Admin::Database::V1::CreateDatabaseMetadata CreateDatabaseMetadata}.
-              # The {Google::Longrunning::Operation#response response} field type is
+              # {Google::Spanner::Admin::Database::V1::CreateDatabaseMetadata CreateDatabaseMetadata}. The
+              # {Google::Longrunning::Operation#response response} field type is
               # {Google::Spanner::Admin::Database::V1::Database Database}, if successful.
               #
               # @param parent [String]
@@ -491,13 +491,12 @@ module Google
               # the format `<database_name>/operations/<operation_id>` and can be used to
               # track execution of the schema change(s). The
               # {Google::Longrunning::Operation#metadata metadata} field type is
-              # {Google::Spanner::Admin::Database::V1::UpdateDatabaseDdlMetadata UpdateDatabaseDdlMetadata}.
-              # The operation has no response.
+              # {Google::Spanner::Admin::Database::V1::UpdateDatabaseDdlMetadata UpdateDatabaseDdlMetadata}.  The operation has no response.
               #
               # @param database [String]
               #   Required. The database to update.
               # @param statements [Array<String>]
-              #   DDL statements to be applied to the database.
+              #   Required. DDL statements to be applied to the database.
               # @param operation_id [String]
               #   If empty, the new update request is assigned an
               #   automatically-generated operation ID. Otherwise, `operation_id`
@@ -506,20 +505,18 @@ module Google
               #
               #   Specifying an explicit operation ID simplifies determining
               #   whether the statements were executed in the event that the
-              #   {Google::Spanner::Admin::Database::V1::DatabaseAdmin::UpdateDatabaseDdl UpdateDatabaseDdl}
-              #   call is replayed, or the return value is otherwise lost: the
-              #   {Google::Spanner::Admin::Database::V1::UpdateDatabaseDdlRequest#database database}
-              #   and `operation_id` fields can be combined to form the
+              #   {Google::Spanner::Admin::Database::V1::DatabaseAdmin::UpdateDatabaseDdl UpdateDatabaseDdl} call is replayed,
+              #   or the return value is otherwise lost: the {Google::Spanner::Admin::Database::V1::UpdateDatabaseDdlRequest#database database} and
+              #   `operation_id` fields can be combined to form the
               #   {Google::Longrunning::Operation#name name} of the resulting
-              #   {Google::Longrunning::Operation longrunning::Operation}:
-              #   `<database>/operations/<operation_id>`.
+              #   {Google::Longrunning::Operation longrunning::Operation}: `<database>/operations/<operation_id>`.
               #
               #   `operation_id` should be unique within the database, and must be
               #   a valid identifier: `[a-z][a-z0-9_]*`. Note that
               #   automatically-generated operation IDs always begin with an
               #   underscore. If the named operation already exists,
-              #   {Google::Spanner::Admin::Database::V1::DatabaseAdmin::UpdateDatabaseDdl UpdateDatabaseDdl}
-              #   returns `ALREADY_EXISTS`.
+              #   {Google::Spanner::Admin::Database::V1::DatabaseAdmin::UpdateDatabaseDdl UpdateDatabaseDdl} returns
+              #   `ALREADY_EXISTS`.
               # @param options [Google::Gax::CallOptions]
               #   Overrides the default settings for this call, e.g, timeout,
               #   retries, etc.
@@ -645,11 +642,11 @@ module Google
                 @get_database_ddl.call(req, options, &block)
               end
 
-              # Sets the access control policy on a database resource. Replaces any
-              # existing policy.
+              # Sets the access control policy on a database resource.
+              # Replaces any existing policy.
               #
-              # Authorization requires `spanner.databases.setIamPolicy` permission on
-              # {Google::Iam::V1::SetIamPolicyRequest#resource resource}.
+              # Authorization requires `spanner.databases.setIamPolicy`
+              # permission on {Google::Iam::V1::SetIamPolicyRequest#resource resource}.
               #
               # @param resource [String]
               #   REQUIRED: The resource for which the policy is being specified.
@@ -692,8 +689,9 @@ module Google
                 @set_iam_policy.call(req, options, &block)
               end
 
-              # Gets the access control policy for a database resource. Returns an empty
-              # policy if a database exists but does not have a policy set.
+              # Gets the access control policy for a database resource.
+              # Returns an empty policy if a database exists but does
+              # not have a policy set.
               #
               # Authorization requires `spanner.databases.getIamPolicy` permission on
               # {Google::Iam::V1::GetIamPolicyRequest#resource resource}.
@@ -736,10 +734,10 @@ module Google
 
               # Returns permissions that the caller has on the specified database resource.
               #
-              # Attempting this RPC on a non-existent Cloud Spanner database will result in
-              # a NOT_FOUND error if the user has `spanner.databases.list` permission on
-              # the containing Cloud Spanner instance. Otherwise returns an empty set of
-              # permissions.
+              # Attempting this RPC on a non-existent Cloud Spanner database will
+              # result in a NOT_FOUND error if the user has
+              # `spanner.databases.list` permission on the containing Cloud
+              # Spanner instance. Otherwise returns an empty set of permissions.
               #
               # @param resource [String]
               #   REQUIRED: The resource for which the policy detail is being requested.
