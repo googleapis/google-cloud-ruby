@@ -46,4 +46,18 @@ describe "DataClient Check and Mutate Row", :bigtable do
 
     response.must_equal true
   end
+
+  it "raises Google::Cloud::InvalidArgumentError for invalid id for collection columnFamilies" do
+    row_key = "test-cm-#{random_str}"
+    qualifier = "checkmutate"
+    predicate_filter = table.filter.value("Value.*")
+    matched_mutations = table.new_mutation_entry.set_cell(
+      family + "&  *^(*&^%^%&^", qualifier, "predicate matched"
+    )
+    otherwise_mutations = table.new_mutation_entry.delete_from_family(family)
+
+    proc {
+      table.check_and_mutate_row row_key, predicate_filter, on_match: matched_mutations, otherwise: otherwise_mutations
+    }.must_raise Google::Cloud::InvalidArgumentError
+  end
 end

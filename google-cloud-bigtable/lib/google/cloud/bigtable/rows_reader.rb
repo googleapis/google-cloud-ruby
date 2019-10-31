@@ -75,8 +75,9 @@ module Google
         #   Array of row or yield block for each processed row.
         #
         def read rows: nil, filter: nil, rows_limit: nil
-          response = @table.client.read_rows(
-            @table.path,
+          response = @table.service.read_rows(
+            @table.instance_id,
+            @table.table_id,
             rows:           rows,
             filter:         filter,
             rows_limit:     rows_limit,

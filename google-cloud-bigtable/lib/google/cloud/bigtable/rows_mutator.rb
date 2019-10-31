@@ -83,14 +83,10 @@ module Google
         # @return [Array<Google::Bigtable::V2::MutateRowsResponse::Entry>]
         #
         def mutate_rows entries
-          response = @table.client.mutate_rows @table.path, entries, app_profile_id: @table.app_profile_id
+          response = @table.service.mutate_rows @table.path, entries, app_profile_id: @table.app_profile_id
           response.each_with_object [] do |res, statuses|
             statuses.concat res.entries
           end
-        rescue Google::Gax::GaxError => e
-          raise Google::Cloud::Error.from_error(e.cause)
-        rescue GRPC::BadStatus => e
-          raise Google::Cloud::Error.from_error(e)
         end
 
         ##

@@ -424,15 +424,6 @@ module Google
           status
         end
 
-        # @private
-        # Gets the data client instance.
-        #
-        # @return [Google::Cloud::Bigtable::V2::BigtableClient]
-        #
-        def client
-          service.client
-        end
-
         ##
         # Deletes all rows.
         #

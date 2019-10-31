@@ -130,4 +130,23 @@ describe Google::Cloud::Bigtable::Table, :read_modify_write_row, :mock_bigtable 
       cell.labels.must_equal []
     end
   end
+
+  it "read modify and write row with single rule" do
+    stub = Object.new
+    def stub.read_modify_write_row *args
+      gax_error = Google::Gax::RetryError.new "Exception occurred"
+      gax_error.instance_variable_set :@cause, GRPC::InvalidArgument.new(3, "Invalid id for collection columnFamilies")
+      raise gax_error
+    end
+    bigtable.service.mocked_client = stub
+
+    row_key = "user-1"
+
+    proc {
+      table.read_modify_write_row(
+        row_key,
+        Google::Cloud::Bigtable::ReadModifyWriteRule.append(family_name, qualifier, append_value)
+      )
+    }.must_raise Google::Cloud::InvalidArgumentError
+  end
 end

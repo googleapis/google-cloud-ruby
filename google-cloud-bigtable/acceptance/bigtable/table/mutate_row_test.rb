@@ -21,6 +21,17 @@ describe "DataClient Mutate Row", :bigtable do
   let(:family) { "cf" }
   let(:table) { bigtable_mutation_table }
 
+  it "raises Google::Cloud::InvalidArgumentError for invalid id for collection columnFamilies" do
+    postfix = random_str
+
+    # Set cell
+    entry = table.new_mutation_entry("setcell-#{postfix}")
+    entry.set_cell(family + "&  *^(*&^%^%&^", "mutate-row-#{postfix}", "mutatetest value #{postfix}")
+    proc {
+      table.mutate_row(entry)
+    }.must_raise Google::Cloud::InvalidArgumentError
+  end
+
   it "set cell and delete cells" do
     postfix = random_str
     row_key = "setcell-#{postfix}"
@@ -107,7 +118,7 @@ describe "DataClient Mutate Row", :bigtable do
     )
     err = expect do
       table.mutate_row(entry)
-    end.must_raise Google::Gax::RetryError
+    end.must_raise Google::Cloud::InvalidArgumentError
     err.message.must_match /Timestamp granularity mismatch. Expected a multiple of 1000 \(millisecond granularity\), but got #{timestamp_micros}/
   end
 
@@ -127,7 +138,7 @@ describe "DataClient Mutate Row", :bigtable do
     )
     err = expect do
       table.mutate_row(entry)
-    end.must_raise Google::Gax::RetryError
+    end.must_raise Google::Cloud::InvalidArgumentError
     err.message.must_match /Timestamp granularity mismatch. Expected a multiple of 1000 \(millisecond granularity\), but got #{timestamp_millis}/
   end
 

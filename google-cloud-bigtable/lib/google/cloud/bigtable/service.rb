@@ -640,6 +640,48 @@ module Google
           end
         end
 
+        def read_rows instance_id, table_id, app_profile_id: nil, rows: nil, filter: nil, rows_limit: nil
+          # execute is not used because error handling is in ReadOperations#read_rows
+          client.read_rows table_path(instance_id, table_id),
+                           rows:           rows,
+                           filter:         filter,
+                           rows_limit:     rows_limit,
+                           app_profile_id: app_profile_id
+        end
+
+        def sample_row_keys table_name, app_profile_id: nil
+          execute do
+            client.sample_row_keys table_name, app_profile_id: app_profile_id
+          end
+        end
+
+        def mutate_row table_name, row_key, mutations, app_profile_id: nil
+          execute do
+            client.mutate_row table_name, row_key, mutations, app_profile_id: app_profile_id
+          end
+        end
+
+        def mutate_rows table_name, entries, app_profile_id: nil
+          execute do
+            client.mutate_rows table_name, entries, app_profile_id: app_profile_id
+          end
+        end
+
+        def check_and_mutate_row table_name, row_key, app_profile_id: nil, predicate_filter: nil, true_mutations: nil,
+                                 false_mutations: nil
+          execute do
+            client.check_and_mutate_row table_name, row_key, app_profile_id: app_profile_id,
+                                        predicate_filter: predicate_filter, true_mutations: true_mutations,
+                                        false_mutations: false_mutations
+          end
+        end
+
+        def read_modify_write_row table_name, row_key, rules, app_profile_id: nil
+          execute do
+            client.read_modify_write_row table_name, row_key, rules, app_profile_id: app_profile_id
+          end
+        end
+
         ##
         # Executes the API call and wrap errors to {Google::Cloud::Error}.
         #
