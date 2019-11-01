@@ -74,7 +74,6 @@ describe Google::Cloud::Storage::Bucket, :uniform_bucket_level_access, :storage 
     err = expect do
       bucket.acl.public!
     end.must_raise Google::Cloud::InvalidArgumentError
-    err.message.must_match /Cannot use ACL API to update bucket policy when Bucket Policy Only is enabled./
   end
 
   it "sets uniform_bucket_level_access true and is unable to modify default ACL rules" do
@@ -85,7 +84,6 @@ describe Google::Cloud::Storage::Bucket, :uniform_bucket_level_access, :storage 
     err = expect do
       bucket.default_acl.public!
     end.must_raise Google::Cloud::InvalidArgumentError
-    err.message.must_match /Cannot use ACL API to update bucket policy when Bucket Policy Only is enabled./
   end
 
   it "creates new bucket with uniform_bucket_level_access true and is able to insert and get a file" do
@@ -157,7 +155,6 @@ describe Google::Cloud::Storage::Bucket, :uniform_bucket_level_access, :storage 
     err = expect do
       bucket.acl.public!
     end.must_raise Google::Cloud::InvalidArgumentError
-    err.message.must_match /Cannot use ACL API to update bucket policy when Bucket Policy Only is enabled./
   end
 
   it "sets DEPRECATED policy_only true and is unable to modify default ACL rules" do
@@ -168,7 +165,6 @@ describe Google::Cloud::Storage::Bucket, :uniform_bucket_level_access, :storage 
     err = expect do
       bucket.default_acl.public!
     end.must_raise Google::Cloud::InvalidArgumentError
-    err.message.must_match /Cannot use ACL API to update bucket policy when Bucket Policy Only is enabled./
   end
 
   it "creates new bucket with DEPRECATED policy_only true and is able to insert and get a file" do
