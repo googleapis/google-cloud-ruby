@@ -135,6 +135,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.cloud.dialogflow.v2.Intent.Message.ListSelect" do
     optional :title, :string, 1
     repeated :items, :message, 2, "google.cloud.dialogflow.v2.Intent.Message.ListSelect.Item"
+    optional :subtitle, :string, 3
   end
   add_message "google.cloud.dialogflow.v2.Intent.Message.ListSelect.Item" do
     optional :info, :message, 1, "google.cloud.dialogflow.v2.Intent.Message.SelectItemInfo"

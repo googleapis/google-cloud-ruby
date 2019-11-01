@@ -35,10 +35,13 @@ module Google
         # @!attribute [rw] priority
         #   @return [Integer]
         #     Optional. The priority of this intent. Higher numbers represent higher
-        #     priorities. If this is zero or unspecified, we use the default
-        #     priority 500000.
+        #     priorities.
         #
-        #     Negative numbers mean that the intent is disabled.
+        #     * If the supplied value is unspecified or 0, the service
+        #       translates the value to 500,000, which corresponds to the
+        #       `Normal` priority in the console.
+        #     * If the supplied value is negative, the intent is ignored
+        #       in runtime detect intent requests.
         # @!attribute [rw] is_fallback
         #   @return [true, false]
         #     Optional. Indicates whether this is a fallback intent.
@@ -401,6 +404,9 @@ module Google
             # @!attribute [rw] items
             #   @return [Array<Google::Cloud::Dialogflow::V2::Intent::Message::ListSelect::Item>]
             #     Required. List items.
+            # @!attribute [rw] subtitle
+            #   @return [String]
+            #     Optional. Subtitle of the list.
             class ListSelect
               # An item in the list.
               # @!attribute [rw] info
