@@ -123,9 +123,7 @@ module Google
             Comparable,
             Enumerable,
             Math
-          ].concat(
-            RUBY_VERSION.to_f >= 2.4 ? [] : [Bignum, Fixnum]
-          ).freeze
+          ].freeze
 
           ##
           # @private helper method to hashify an array

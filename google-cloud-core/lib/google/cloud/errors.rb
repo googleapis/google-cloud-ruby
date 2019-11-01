@@ -25,18 +25,6 @@ module Google
       # message.
       def initialize msg = nil
         super
-        @cause = $ERROR_INFO
-      end
-
-      # Add Error#cause (introduced in 2.1) to Ruby 2.0.
-      unless respond_to? :cause
-        ##
-        # The previous exception at the time this exception was raised. This is
-        # useful for wrapping exceptions and retaining the original exception
-        # information.
-        define_method :cause do
-          @cause
-        end
       end
 
       ##
