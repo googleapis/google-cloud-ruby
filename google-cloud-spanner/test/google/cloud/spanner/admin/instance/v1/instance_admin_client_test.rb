@@ -68,6 +68,278 @@ end
 
 describe Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient do
 
+  describe 'create_instance' do
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient#create_instance."
+
+    it 'invokes create_instance without error' do
+      # Create request parameters
+      formatted_parent = Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient.project_path("[PROJECT]")
+      instance_id = ''
+      instance = {}
+
+      # Create expected grpc response
+      name = "name3373707"
+      config = "config-1354792126"
+      display_name = "displayName1615086568"
+      node_count = 1539922066
+      expected_response = {
+        name: name,
+        config: config,
+        display_name: display_name,
+        node_count: node_count
+      }
+      expected_response = Google::Gax::to_proto(expected_response, Google::Spanner::Admin::Instance::V1::Instance)
+      result = Google::Protobuf::Any.new
+      result.pack(expected_response)
+      operation = Google::Longrunning::Operation.new(
+        name: 'operations/create_instance_test',
+        done: true,
+        response: result
+      )
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Spanner::Admin::Instance::V1::CreateInstanceRequest, request)
+        assert_equal(formatted_parent, request.parent)
+        assert_equal(instance_id, request.instance_id)
+        assert_equal(Google::Gax::to_proto(instance, Google::Spanner::Admin::Instance::V1::Instance), request.instance)
+        OpenStruct.new(execute: operation)
+      end
+      mock_stub = MockGrpcClientStub_v1.new(:create_instance, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockInstanceAdminCredentials_v1.new("create_instance")
+
+      Google::Spanner::Admin::Instance::V1::InstanceAdmin::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Spanner::Admin::Instance::V1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Spanner::Admin::Instance.new(version: :v1)
+
+          # Call method
+          response = client.create_instance(
+            formatted_parent,
+            instance_id,
+            instance
+          )
+
+          # Verify the response
+          assert_equal(expected_response, response.response)
+        end
+      end
+    end
+
+    it 'invokes create_instance and returns an operation error.' do
+      # Create request parameters
+      formatted_parent = Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient.project_path("[PROJECT]")
+      instance_id = ''
+      instance = {}
+
+      # Create expected grpc response
+      operation_error = Google::Rpc::Status.new(
+        message: 'Operation error for Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient#create_instance.'
+      )
+      operation = Google::Longrunning::Operation.new(
+        name: 'operations/create_instance_test',
+        done: true,
+        error: operation_error
+      )
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Spanner::Admin::Instance::V1::CreateInstanceRequest, request)
+        assert_equal(formatted_parent, request.parent)
+        assert_equal(instance_id, request.instance_id)
+        assert_equal(Google::Gax::to_proto(instance, Google::Spanner::Admin::Instance::V1::Instance), request.instance)
+        OpenStruct.new(execute: operation)
+      end
+      mock_stub = MockGrpcClientStub_v1.new(:create_instance, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockInstanceAdminCredentials_v1.new("create_instance")
+
+      Google::Spanner::Admin::Instance::V1::InstanceAdmin::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Spanner::Admin::Instance::V1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Spanner::Admin::Instance.new(version: :v1)
+
+          # Call method
+          response = client.create_instance(
+            formatted_parent,
+            instance_id,
+            instance
+          )
+
+          # Verify the response
+          assert(response.error?)
+          assert_equal(operation_error, response.error)
+        end
+      end
+    end
+
+    it 'invokes create_instance with error' do
+      # Create request parameters
+      formatted_parent = Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient.project_path("[PROJECT]")
+      instance_id = ''
+      instance = {}
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Spanner::Admin::Instance::V1::CreateInstanceRequest, request)
+        assert_equal(formatted_parent, request.parent)
+        assert_equal(instance_id, request.instance_id)
+        assert_equal(Google::Gax::to_proto(instance, Google::Spanner::Admin::Instance::V1::Instance), request.instance)
+        raise custom_error
+      end
+      mock_stub = MockGrpcClientStub_v1.new(:create_instance, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockInstanceAdminCredentials_v1.new("create_instance")
+
+      Google::Spanner::Admin::Instance::V1::InstanceAdmin::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Spanner::Admin::Instance::V1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Spanner::Admin::Instance.new(version: :v1)
+
+          # Call method
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
+            client.create_instance(
+              formatted_parent,
+              instance_id,
+              instance
+            )
+          end
+
+          # Verify the GaxError wrapped the custom error that was raised.
+          assert_match(custom_error.message, err.message)
+        end
+      end
+    end
+  end
+
+  describe 'update_instance' do
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient#update_instance."
+
+    it 'invokes update_instance without error' do
+      # Create request parameters
+      instance = {}
+      field_mask = {}
+
+      # Create expected grpc response
+      name = "name3373707"
+      config = "config-1354792126"
+      display_name = "displayName1615086568"
+      node_count = 1539922066
+      expected_response = {
+        name: name,
+        config: config,
+        display_name: display_name,
+        node_count: node_count
+      }
+      expected_response = Google::Gax::to_proto(expected_response, Google::Spanner::Admin::Instance::V1::Instance)
+      result = Google::Protobuf::Any.new
+      result.pack(expected_response)
+      operation = Google::Longrunning::Operation.new(
+        name: 'operations/update_instance_test',
+        done: true,
+        response: result
+      )
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Spanner::Admin::Instance::V1::UpdateInstanceRequest, request)
+        assert_equal(Google::Gax::to_proto(instance, Google::Spanner::Admin::Instance::V1::Instance), request.instance)
+        assert_equal(Google::Gax::to_proto(field_mask, Google::Protobuf::FieldMask), request.field_mask)
+        OpenStruct.new(execute: operation)
+      end
+      mock_stub = MockGrpcClientStub_v1.new(:update_instance, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockInstanceAdminCredentials_v1.new("update_instance")
+
+      Google::Spanner::Admin::Instance::V1::InstanceAdmin::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Spanner::Admin::Instance::V1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Spanner::Admin::Instance.new(version: :v1)
+
+          # Call method
+          response = client.update_instance(instance, field_mask)
+
+          # Verify the response
+          assert_equal(expected_response, response.response)
+        end
+      end
+    end
+
+    it 'invokes update_instance and returns an operation error.' do
+      # Create request parameters
+      instance = {}
+      field_mask = {}
+
+      # Create expected grpc response
+      operation_error = Google::Rpc::Status.new(
+        message: 'Operation error for Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient#update_instance.'
+      )
+      operation = Google::Longrunning::Operation.new(
+        name: 'operations/update_instance_test',
+        done: true,
+        error: operation_error
+      )
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Spanner::Admin::Instance::V1::UpdateInstanceRequest, request)
+        assert_equal(Google::Gax::to_proto(instance, Google::Spanner::Admin::Instance::V1::Instance), request.instance)
+        assert_equal(Google::Gax::to_proto(field_mask, Google::Protobuf::FieldMask), request.field_mask)
+        OpenStruct.new(execute: operation)
+      end
+      mock_stub = MockGrpcClientStub_v1.new(:update_instance, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockInstanceAdminCredentials_v1.new("update_instance")
+
+      Google::Spanner::Admin::Instance::V1::InstanceAdmin::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Spanner::Admin::Instance::V1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Spanner::Admin::Instance.new(version: :v1)
+
+          # Call method
+          response = client.update_instance(instance, field_mask)
+
+          # Verify the response
+          assert(response.error?)
+          assert_equal(operation_error, response.error)
+        end
+      end
+    end
+
+    it 'invokes update_instance with error' do
+      # Create request parameters
+      instance = {}
+      field_mask = {}
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Spanner::Admin::Instance::V1::UpdateInstanceRequest, request)
+        assert_equal(Google::Gax::to_proto(instance, Google::Spanner::Admin::Instance::V1::Instance), request.instance)
+        assert_equal(Google::Gax::to_proto(field_mask, Google::Protobuf::FieldMask), request.field_mask)
+        raise custom_error
+      end
+      mock_stub = MockGrpcClientStub_v1.new(:update_instance, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockInstanceAdminCredentials_v1.new("update_instance")
+
+      Google::Spanner::Admin::Instance::V1::InstanceAdmin::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Spanner::Admin::Instance::V1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Spanner::Admin::Instance.new(version: :v1)
+
+          # Call method
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
+            client.update_instance(instance, field_mask)
+          end
+
+          # Verify the GaxError wrapped the custom error that was raised.
+          assert_match(custom_error.message, err.message)
+        end
+      end
+    end
+  end
+
   describe 'list_instance_configs' do
     custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient#list_instance_configs."
 
@@ -369,278 +641,6 @@ describe Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient do
     end
   end
 
-  describe 'create_instance' do
-    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient#create_instance."
-
-    it 'invokes create_instance without error' do
-      # Create request parameters
-      formatted_parent = Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient.project_path("[PROJECT]")
-      instance_id = ''
-      instance = {}
-
-      # Create expected grpc response
-      name = "name3373707"
-      config = "config-1354792126"
-      display_name = "displayName1615086568"
-      node_count = 1539922066
-      expected_response = {
-        name: name,
-        config: config,
-        display_name: display_name,
-        node_count: node_count
-      }
-      expected_response = Google::Gax::to_proto(expected_response, Google::Spanner::Admin::Instance::V1::Instance)
-      result = Google::Protobuf::Any.new
-      result.pack(expected_response)
-      operation = Google::Longrunning::Operation.new(
-        name: 'operations/create_instance_test',
-        done: true,
-        response: result
-      )
-
-      # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Spanner::Admin::Instance::V1::CreateInstanceRequest, request)
-        assert_equal(formatted_parent, request.parent)
-        assert_equal(instance_id, request.instance_id)
-        assert_equal(Google::Gax::to_proto(instance, Google::Spanner::Admin::Instance::V1::Instance), request.instance)
-        OpenStruct.new(execute: operation)
-      end
-      mock_stub = MockGrpcClientStub_v1.new(:create_instance, mock_method)
-
-      # Mock auth layer
-      mock_credentials = MockInstanceAdminCredentials_v1.new("create_instance")
-
-      Google::Spanner::Admin::Instance::V1::InstanceAdmin::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Spanner::Admin::Instance::V1::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Spanner::Admin::Instance.new(version: :v1)
-
-          # Call method
-          response = client.create_instance(
-            formatted_parent,
-            instance_id,
-            instance
-          )
-
-          # Verify the response
-          assert_equal(expected_response, response.response)
-        end
-      end
-    end
-
-    it 'invokes create_instance and returns an operation error.' do
-      # Create request parameters
-      formatted_parent = Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient.project_path("[PROJECT]")
-      instance_id = ''
-      instance = {}
-
-      # Create expected grpc response
-      operation_error = Google::Rpc::Status.new(
-        message: 'Operation error for Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient#create_instance.'
-      )
-      operation = Google::Longrunning::Operation.new(
-        name: 'operations/create_instance_test',
-        done: true,
-        error: operation_error
-      )
-
-      # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Spanner::Admin::Instance::V1::CreateInstanceRequest, request)
-        assert_equal(formatted_parent, request.parent)
-        assert_equal(instance_id, request.instance_id)
-        assert_equal(Google::Gax::to_proto(instance, Google::Spanner::Admin::Instance::V1::Instance), request.instance)
-        OpenStruct.new(execute: operation)
-      end
-      mock_stub = MockGrpcClientStub_v1.new(:create_instance, mock_method)
-
-      # Mock auth layer
-      mock_credentials = MockInstanceAdminCredentials_v1.new("create_instance")
-
-      Google::Spanner::Admin::Instance::V1::InstanceAdmin::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Spanner::Admin::Instance::V1::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Spanner::Admin::Instance.new(version: :v1)
-
-          # Call method
-          response = client.create_instance(
-            formatted_parent,
-            instance_id,
-            instance
-          )
-
-          # Verify the response
-          assert(response.error?)
-          assert_equal(operation_error, response.error)
-        end
-      end
-    end
-
-    it 'invokes create_instance with error' do
-      # Create request parameters
-      formatted_parent = Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient.project_path("[PROJECT]")
-      instance_id = ''
-      instance = {}
-
-      # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Spanner::Admin::Instance::V1::CreateInstanceRequest, request)
-        assert_equal(formatted_parent, request.parent)
-        assert_equal(instance_id, request.instance_id)
-        assert_equal(Google::Gax::to_proto(instance, Google::Spanner::Admin::Instance::V1::Instance), request.instance)
-        raise custom_error
-      end
-      mock_stub = MockGrpcClientStub_v1.new(:create_instance, mock_method)
-
-      # Mock auth layer
-      mock_credentials = MockInstanceAdminCredentials_v1.new("create_instance")
-
-      Google::Spanner::Admin::Instance::V1::InstanceAdmin::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Spanner::Admin::Instance::V1::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Spanner::Admin::Instance.new(version: :v1)
-
-          # Call method
-          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
-            client.create_instance(
-              formatted_parent,
-              instance_id,
-              instance
-            )
-          end
-
-          # Verify the GaxError wrapped the custom error that was raised.
-          assert_match(custom_error.message, err.message)
-        end
-      end
-    end
-  end
-
-  describe 'update_instance' do
-    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient#update_instance."
-
-    it 'invokes update_instance without error' do
-      # Create request parameters
-      instance = {}
-      field_mask = {}
-
-      # Create expected grpc response
-      name = "name3373707"
-      config = "config-1354792126"
-      display_name = "displayName1615086568"
-      node_count = 1539922066
-      expected_response = {
-        name: name,
-        config: config,
-        display_name: display_name,
-        node_count: node_count
-      }
-      expected_response = Google::Gax::to_proto(expected_response, Google::Spanner::Admin::Instance::V1::Instance)
-      result = Google::Protobuf::Any.new
-      result.pack(expected_response)
-      operation = Google::Longrunning::Operation.new(
-        name: 'operations/update_instance_test',
-        done: true,
-        response: result
-      )
-
-      # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Spanner::Admin::Instance::V1::UpdateInstanceRequest, request)
-        assert_equal(Google::Gax::to_proto(instance, Google::Spanner::Admin::Instance::V1::Instance), request.instance)
-        assert_equal(Google::Gax::to_proto(field_mask, Google::Protobuf::FieldMask), request.field_mask)
-        OpenStruct.new(execute: operation)
-      end
-      mock_stub = MockGrpcClientStub_v1.new(:update_instance, mock_method)
-
-      # Mock auth layer
-      mock_credentials = MockInstanceAdminCredentials_v1.new("update_instance")
-
-      Google::Spanner::Admin::Instance::V1::InstanceAdmin::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Spanner::Admin::Instance::V1::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Spanner::Admin::Instance.new(version: :v1)
-
-          # Call method
-          response = client.update_instance(instance, field_mask)
-
-          # Verify the response
-          assert_equal(expected_response, response.response)
-        end
-      end
-    end
-
-    it 'invokes update_instance and returns an operation error.' do
-      # Create request parameters
-      instance = {}
-      field_mask = {}
-
-      # Create expected grpc response
-      operation_error = Google::Rpc::Status.new(
-        message: 'Operation error for Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient#update_instance.'
-      )
-      operation = Google::Longrunning::Operation.new(
-        name: 'operations/update_instance_test',
-        done: true,
-        error: operation_error
-      )
-
-      # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Spanner::Admin::Instance::V1::UpdateInstanceRequest, request)
-        assert_equal(Google::Gax::to_proto(instance, Google::Spanner::Admin::Instance::V1::Instance), request.instance)
-        assert_equal(Google::Gax::to_proto(field_mask, Google::Protobuf::FieldMask), request.field_mask)
-        OpenStruct.new(execute: operation)
-      end
-      mock_stub = MockGrpcClientStub_v1.new(:update_instance, mock_method)
-
-      # Mock auth layer
-      mock_credentials = MockInstanceAdminCredentials_v1.new("update_instance")
-
-      Google::Spanner::Admin::Instance::V1::InstanceAdmin::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Spanner::Admin::Instance::V1::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Spanner::Admin::Instance.new(version: :v1)
-
-          # Call method
-          response = client.update_instance(instance, field_mask)
-
-          # Verify the response
-          assert(response.error?)
-          assert_equal(operation_error, response.error)
-        end
-      end
-    end
-
-    it 'invokes update_instance with error' do
-      # Create request parameters
-      instance = {}
-      field_mask = {}
-
-      # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Spanner::Admin::Instance::V1::UpdateInstanceRequest, request)
-        assert_equal(Google::Gax::to_proto(instance, Google::Spanner::Admin::Instance::V1::Instance), request.instance)
-        assert_equal(Google::Gax::to_proto(field_mask, Google::Protobuf::FieldMask), request.field_mask)
-        raise custom_error
-      end
-      mock_stub = MockGrpcClientStub_v1.new(:update_instance, mock_method)
-
-      # Mock auth layer
-      mock_credentials = MockInstanceAdminCredentials_v1.new("update_instance")
-
-      Google::Spanner::Admin::Instance::V1::InstanceAdmin::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Spanner::Admin::Instance::V1::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Spanner::Admin::Instance.new(version: :v1)
-
-          # Call method
-          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
-            client.update_instance(instance, field_mask)
-          end
-
-          # Verify the GaxError wrapped the custom error that was raised.
-          assert_match(custom_error.message, err.message)
-        end
-      end
-    end
-  end
-
   describe 'delete_instance' do
     custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient#delete_instance."
 
@@ -715,7 +715,7 @@ describe Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient do
 
     it 'invokes set_iam_policy without error' do
       # Create request parameters
-      formatted_resource = Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient.instance_path("[PROJECT]", "[INSTANCE]")
+      resource = ''
       policy = {}
 
       # Create expected grpc response
@@ -727,7 +727,7 @@ describe Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient do
       # Mock Grpc layer
       mock_method = proc do |request|
         assert_instance_of(Google::Iam::V1::SetIamPolicyRequest, request)
-        assert_equal(formatted_resource, request.resource)
+        assert_equal(resource, request.resource)
         assert_equal(Google::Gax::to_proto(policy, Google::Iam::V1::Policy), request.policy)
         OpenStruct.new(execute: expected_response)
       end
@@ -741,13 +741,13 @@ describe Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient do
           client = Google::Cloud::Spanner::Admin::Instance.new(version: :v1)
 
           # Call method
-          response = client.set_iam_policy(formatted_resource, policy)
+          response = client.set_iam_policy(resource, policy)
 
           # Verify the response
           assert_equal(expected_response, response)
 
           # Call method with block
-          client.set_iam_policy(formatted_resource, policy) do |response, operation|
+          client.set_iam_policy(resource, policy) do |response, operation|
             # Verify the response
             assert_equal(expected_response, response)
             refute_nil(operation)
@@ -758,13 +758,13 @@ describe Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient do
 
     it 'invokes set_iam_policy with error' do
       # Create request parameters
-      formatted_resource = Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient.instance_path("[PROJECT]", "[INSTANCE]")
+      resource = ''
       policy = {}
 
       # Mock Grpc layer
       mock_method = proc do |request|
         assert_instance_of(Google::Iam::V1::SetIamPolicyRequest, request)
-        assert_equal(formatted_resource, request.resource)
+        assert_equal(resource, request.resource)
         assert_equal(Google::Gax::to_proto(policy, Google::Iam::V1::Policy), request.policy)
         raise custom_error
       end
@@ -779,7 +779,7 @@ describe Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient do
 
           # Call method
           err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
-            client.set_iam_policy(formatted_resource, policy)
+            client.set_iam_policy(resource, policy)
           end
 
           # Verify the GaxError wrapped the custom error that was raised.
@@ -794,7 +794,7 @@ describe Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient do
 
     it 'invokes get_iam_policy without error' do
       # Create request parameters
-      formatted_resource = Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient.instance_path("[PROJECT]", "[INSTANCE]")
+      resource = ''
 
       # Create expected grpc response
       version = 351608024
@@ -805,7 +805,7 @@ describe Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient do
       # Mock Grpc layer
       mock_method = proc do |request|
         assert_instance_of(Google::Iam::V1::GetIamPolicyRequest, request)
-        assert_equal(formatted_resource, request.resource)
+        assert_equal(resource, request.resource)
         OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub_v1.new(:get_iam_policy, mock_method)
@@ -818,13 +818,13 @@ describe Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient do
           client = Google::Cloud::Spanner::Admin::Instance.new(version: :v1)
 
           # Call method
-          response = client.get_iam_policy(formatted_resource)
+          response = client.get_iam_policy(resource)
 
           # Verify the response
           assert_equal(expected_response, response)
 
           # Call method with block
-          client.get_iam_policy(formatted_resource) do |response, operation|
+          client.get_iam_policy(resource) do |response, operation|
             # Verify the response
             assert_equal(expected_response, response)
             refute_nil(operation)
@@ -835,12 +835,12 @@ describe Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient do
 
     it 'invokes get_iam_policy with error' do
       # Create request parameters
-      formatted_resource = Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient.instance_path("[PROJECT]", "[INSTANCE]")
+      resource = ''
 
       # Mock Grpc layer
       mock_method = proc do |request|
         assert_instance_of(Google::Iam::V1::GetIamPolicyRequest, request)
-        assert_equal(formatted_resource, request.resource)
+        assert_equal(resource, request.resource)
         raise custom_error
       end
       mock_stub = MockGrpcClientStub_v1.new(:get_iam_policy, mock_method)
@@ -854,7 +854,7 @@ describe Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient do
 
           # Call method
           err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
-            client.get_iam_policy(formatted_resource)
+            client.get_iam_policy(resource)
           end
 
           # Verify the GaxError wrapped the custom error that was raised.
@@ -869,8 +869,7 @@ describe Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient do
 
     it 'invokes test_iam_permissions without error' do
       # Create request parameters
-      formatted_resource = Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient.instance_path("[PROJECT]", "[INSTANCE]")
-      permissions = []
+      resource = ''
 
       # Create expected grpc response
       expected_response = {}
@@ -879,8 +878,7 @@ describe Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient do
       # Mock Grpc layer
       mock_method = proc do |request|
         assert_instance_of(Google::Iam::V1::TestIamPermissionsRequest, request)
-        assert_equal(formatted_resource, request.resource)
-        assert_equal(permissions, request.permissions)
+        assert_equal(resource, request.resource)
         OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub_v1.new(:test_iam_permissions, mock_method)
@@ -893,13 +891,13 @@ describe Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient do
           client = Google::Cloud::Spanner::Admin::Instance.new(version: :v1)
 
           # Call method
-          response = client.test_iam_permissions(formatted_resource, permissions)
+          response = client.test_iam_permissions(resource)
 
           # Verify the response
           assert_equal(expected_response, response)
 
           # Call method with block
-          client.test_iam_permissions(formatted_resource, permissions) do |response, operation|
+          client.test_iam_permissions(resource) do |response, operation|
             # Verify the response
             assert_equal(expected_response, response)
             refute_nil(operation)
@@ -910,14 +908,12 @@ describe Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient do
 
     it 'invokes test_iam_permissions with error' do
       # Create request parameters
-      formatted_resource = Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient.instance_path("[PROJECT]", "[INSTANCE]")
-      permissions = []
+      resource = ''
 
       # Mock Grpc layer
       mock_method = proc do |request|
         assert_instance_of(Google::Iam::V1::TestIamPermissionsRequest, request)
-        assert_equal(formatted_resource, request.resource)
-        assert_equal(permissions, request.permissions)
+        assert_equal(resource, request.resource)
         raise custom_error
       end
       mock_stub = MockGrpcClientStub_v1.new(:test_iam_permissions, mock_method)
@@ -931,7 +927,7 @@ describe Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient do
 
           # Call method
           err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
-            client.test_iam_permissions(formatted_resource, permissions)
+            client.test_iam_permissions(resource)
           end
 
           # Verify the GaxError wrapped the custom error that was raised.

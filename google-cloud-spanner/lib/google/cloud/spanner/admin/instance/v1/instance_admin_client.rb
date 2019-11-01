@@ -270,6 +270,22 @@ module Google
                   &Google::Spanner::Admin::Instance::V1::InstanceAdmin::Stub.method(:new)
                 )
 
+                @create_instance = Google::Gax.create_api_call(
+                  @instance_admin_stub.method(:create_instance),
+                  defaults["create_instance"],
+                  exception_transformer: exception_transformer,
+                  params_extractor: proc do |request|
+                    {'parent' => request.parent}
+                  end
+                )
+                @update_instance = Google::Gax.create_api_call(
+                  @instance_admin_stub.method(:update_instance),
+                  defaults["update_instance"],
+                  exception_transformer: exception_transformer,
+                  params_extractor: proc do |request|
+                    {'instance.name' => request.instance.name}
+                  end
+                )
                 @list_instance_configs = Google::Gax.create_api_call(
                   @instance_admin_stub.method(:list_instance_configs),
                   defaults["list_instance_configs"],
@@ -300,22 +316,6 @@ module Google
                   exception_transformer: exception_transformer,
                   params_extractor: proc do |request|
                     {'name' => request.name}
-                  end
-                )
-                @create_instance = Google::Gax.create_api_call(
-                  @instance_admin_stub.method(:create_instance),
-                  defaults["create_instance"],
-                  exception_transformer: exception_transformer,
-                  params_extractor: proc do |request|
-                    {'parent' => request.parent}
-                  end
-                )
-                @update_instance = Google::Gax.create_api_call(
-                  @instance_admin_stub.method(:update_instance),
-                  defaults["update_instance"],
-                  exception_transformer: exception_transformer,
-                  params_extractor: proc do |request|
-                    {'instance.name' => request.instance.name}
                   end
                 )
                 @delete_instance = Google::Gax.create_api_call(
@@ -353,201 +353,6 @@ module Google
               end
 
               # Service calls
-
-              # Lists the supported instance configurations for a given project.
-              #
-              # @param parent [String]
-              #   Required. The name of the project for which a list of supported instance
-              #   configurations is requested. Values are of the form
-              #   `projects/<project>`.
-              # @param page_size [Integer]
-              #   The maximum number of resources contained in the underlying API
-              #   response. If page streaming is performed per-resource, this
-              #   parameter does not affect the return value. If page streaming is
-              #   performed per-page, this determines the maximum number of
-              #   resources in a page.
-              # @param options [Google::Gax::CallOptions]
-              #   Overrides the default settings for this call, e.g, timeout,
-              #   retries, etc.
-              # @yield [result, operation] Access the result along with the RPC operation
-              # @yieldparam result [Google::Gax::PagedEnumerable<Google::Spanner::Admin::Instance::V1::InstanceConfig>]
-              # @yieldparam operation [GRPC::ActiveCall::Operation]
-              # @return [Google::Gax::PagedEnumerable<Google::Spanner::Admin::Instance::V1::InstanceConfig>]
-              #   An enumerable of Google::Spanner::Admin::Instance::V1::InstanceConfig instances.
-              #   See Google::Gax::PagedEnumerable documentation for other
-              #   operations such as per-page iteration or access to the response
-              #   object.
-              # @raise [Google::Gax::GaxError] if the RPC is aborted.
-              # @example
-              #   require "google/cloud/spanner/admin/instance"
-              #
-              #   instance_admin_client = Google::Cloud::Spanner::Admin::Instance.new(version: :v1)
-              #   formatted_parent = Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient.project_path("[PROJECT]")
-              #
-              #   # Iterate over all results.
-              #   instance_admin_client.list_instance_configs(formatted_parent).each do |element|
-              #     # Process element.
-              #   end
-              #
-              #   # Or iterate over results one page at a time.
-              #   instance_admin_client.list_instance_configs(formatted_parent).each_page do |page|
-              #     # Process each page at a time.
-              #     page.each do |element|
-              #       # Process element.
-              #     end
-              #   end
-
-              def list_instance_configs \
-                  parent,
-                  page_size: nil,
-                  options: nil,
-                  &block
-                req = {
-                  parent: parent,
-                  page_size: page_size
-                }.delete_if { |_, v| v.nil? }
-                req = Google::Gax::to_proto(req, Google::Spanner::Admin::Instance::V1::ListInstanceConfigsRequest)
-                @list_instance_configs.call(req, options, &block)
-              end
-
-              # Gets information about a particular instance configuration.
-              #
-              # @param name [String]
-              #   Required. The name of the requested instance configuration. Values are of
-              #   the form `projects/<project>/instanceConfigs/<config>`.
-              # @param options [Google::Gax::CallOptions]
-              #   Overrides the default settings for this call, e.g, timeout,
-              #   retries, etc.
-              # @yield [result, operation] Access the result along with the RPC operation
-              # @yieldparam result [Google::Spanner::Admin::Instance::V1::InstanceConfig]
-              # @yieldparam operation [GRPC::ActiveCall::Operation]
-              # @return [Google::Spanner::Admin::Instance::V1::InstanceConfig]
-              # @raise [Google::Gax::GaxError] if the RPC is aborted.
-              # @example
-              #   require "google/cloud/spanner/admin/instance"
-              #
-              #   instance_admin_client = Google::Cloud::Spanner::Admin::Instance.new(version: :v1)
-              #   formatted_name = Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient.instance_config_path("[PROJECT]", "[INSTANCE_CONFIG]")
-              #   response = instance_admin_client.get_instance_config(formatted_name)
-
-              def get_instance_config \
-                  name,
-                  options: nil,
-                  &block
-                req = {
-                  name: name
-                }.delete_if { |_, v| v.nil? }
-                req = Google::Gax::to_proto(req, Google::Spanner::Admin::Instance::V1::GetInstanceConfigRequest)
-                @get_instance_config.call(req, options, &block)
-              end
-
-              # Lists all instances in the given project.
-              #
-              # @param parent [String]
-              #   Required. The name of the project for which a list of instances is
-              #   requested. Values are of the form `projects/<project>`.
-              # @param page_size [Integer]
-              #   The maximum number of resources contained in the underlying API
-              #   response. If page streaming is performed per-resource, this
-              #   parameter does not affect the return value. If page streaming is
-              #   performed per-page, this determines the maximum number of
-              #   resources in a page.
-              # @param filter [String]
-              #   An expression for filtering the results of the request. Filter rules are
-              #   case insensitive. The fields eligible for filtering are:
-              #
-              #   * `name`
-              #     * `display_name`
-              #     * `labels.key` where key is the name of a label
-              #
-              #     Some examples of using filters are:
-              #
-              #     * `name:*` --> The instance has a name.
-              #     * `name:Howl` --> The instance's name contains the string "howl".
-              #     * `name:HOWL` --> Equivalent to above.
-              #     * `NAME:howl` --> Equivalent to above.
-              #     * `labels.env:*` --> The instance has the label "env".
-              #     * `labels.env:dev` --> The instance has the label "env" and the value of
-              #       the label contains the string "dev".
-              #     * `name:howl labels.env:dev` --> The instance's name contains "howl" and
-              #       it has the label "env" with its value
-              #       containing "dev".
-              # @param options [Google::Gax::CallOptions]
-              #   Overrides the default settings for this call, e.g, timeout,
-              #   retries, etc.
-              # @yield [result, operation] Access the result along with the RPC operation
-              # @yieldparam result [Google::Gax::PagedEnumerable<Google::Spanner::Admin::Instance::V1::Instance>]
-              # @yieldparam operation [GRPC::ActiveCall::Operation]
-              # @return [Google::Gax::PagedEnumerable<Google::Spanner::Admin::Instance::V1::Instance>]
-              #   An enumerable of Google::Spanner::Admin::Instance::V1::Instance instances.
-              #   See Google::Gax::PagedEnumerable documentation for other
-              #   operations such as per-page iteration or access to the response
-              #   object.
-              # @raise [Google::Gax::GaxError] if the RPC is aborted.
-              # @example
-              #   require "google/cloud/spanner/admin/instance"
-              #
-              #   instance_admin_client = Google::Cloud::Spanner::Admin::Instance.new(version: :v1)
-              #   formatted_parent = Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient.project_path("[PROJECT]")
-              #
-              #   # Iterate over all results.
-              #   instance_admin_client.list_instances(formatted_parent).each do |element|
-              #     # Process element.
-              #   end
-              #
-              #   # Or iterate over results one page at a time.
-              #   instance_admin_client.list_instances(formatted_parent).each_page do |page|
-              #     # Process each page at a time.
-              #     page.each do |element|
-              #       # Process element.
-              #     end
-              #   end
-
-              def list_instances \
-                  parent,
-                  page_size: nil,
-                  filter: nil,
-                  options: nil,
-                  &block
-                req = {
-                  parent: parent,
-                  page_size: page_size,
-                  filter: filter
-                }.delete_if { |_, v| v.nil? }
-                req = Google::Gax::to_proto(req, Google::Spanner::Admin::Instance::V1::ListInstancesRequest)
-                @list_instances.call(req, options, &block)
-              end
-
-              # Gets information about a particular instance.
-              #
-              # @param name [String]
-              #   Required. The name of the requested instance. Values are of the form
-              #   `projects/<project>/instances/<instance>`.
-              # @param options [Google::Gax::CallOptions]
-              #   Overrides the default settings for this call, e.g, timeout,
-              #   retries, etc.
-              # @yield [result, operation] Access the result along with the RPC operation
-              # @yieldparam result [Google::Spanner::Admin::Instance::V1::Instance]
-              # @yieldparam operation [GRPC::ActiveCall::Operation]
-              # @return [Google::Spanner::Admin::Instance::V1::Instance]
-              # @raise [Google::Gax::GaxError] if the RPC is aborted.
-              # @example
-              #   require "google/cloud/spanner/admin/instance"
-              #
-              #   instance_admin_client = Google::Cloud::Spanner::Admin::Instance.new(version: :v1)
-              #   formatted_name = Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient.instance_path("[PROJECT]", "[INSTANCE]")
-              #   response = instance_admin_client.get_instance(formatted_name)
-
-              def get_instance \
-                  name,
-                  options: nil,
-                  &block
-                req = {
-                  name: name
-                }.delete_if { |_, v| v.nil? }
-                req = Google::Gax::to_proto(req, Google::Spanner::Admin::Instance::V1::GetInstanceRequest)
-                @get_instance.call(req, options, &block)
-              end
 
               # Creates an instance and begins preparing it to begin serving. The
               # returned {Google::Longrunning::Operation long-running operation}
@@ -778,6 +583,201 @@ module Google
                 operation
               end
 
+              # Lists the supported instance configurations for a given project.
+              #
+              # @param parent [String]
+              #   Required. The name of the project for which a list of supported instance
+              #   configurations is requested. Values are of the form
+              #   `projects/<project>`.
+              # @param page_size [Integer]
+              #   The maximum number of resources contained in the underlying API
+              #   response. If page streaming is performed per-resource, this
+              #   parameter does not affect the return value. If page streaming is
+              #   performed per-page, this determines the maximum number of
+              #   resources in a page.
+              # @param options [Google::Gax::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout,
+              #   retries, etc.
+              # @yield [result, operation] Access the result along with the RPC operation
+              # @yieldparam result [Google::Gax::PagedEnumerable<Google::Spanner::Admin::Instance::V1::InstanceConfig>]
+              # @yieldparam operation [GRPC::ActiveCall::Operation]
+              # @return [Google::Gax::PagedEnumerable<Google::Spanner::Admin::Instance::V1::InstanceConfig>]
+              #   An enumerable of Google::Spanner::Admin::Instance::V1::InstanceConfig instances.
+              #   See Google::Gax::PagedEnumerable documentation for other
+              #   operations such as per-page iteration or access to the response
+              #   object.
+              # @raise [Google::Gax::GaxError] if the RPC is aborted.
+              # @example
+              #   require "google/cloud/spanner/admin/instance"
+              #
+              #   instance_admin_client = Google::Cloud::Spanner::Admin::Instance.new(version: :v1)
+              #   formatted_parent = Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient.project_path("[PROJECT]")
+              #
+              #   # Iterate over all results.
+              #   instance_admin_client.list_instance_configs(formatted_parent).each do |element|
+              #     # Process element.
+              #   end
+              #
+              #   # Or iterate over results one page at a time.
+              #   instance_admin_client.list_instance_configs(formatted_parent).each_page do |page|
+              #     # Process each page at a time.
+              #     page.each do |element|
+              #       # Process element.
+              #     end
+              #   end
+
+              def list_instance_configs \
+                  parent,
+                  page_size: nil,
+                  options: nil,
+                  &block
+                req = {
+                  parent: parent,
+                  page_size: page_size
+                }.delete_if { |_, v| v.nil? }
+                req = Google::Gax::to_proto(req, Google::Spanner::Admin::Instance::V1::ListInstanceConfigsRequest)
+                @list_instance_configs.call(req, options, &block)
+              end
+
+              # Gets information about a particular instance configuration.
+              #
+              # @param name [String]
+              #   Required. The name of the requested instance configuration. Values are of
+              #   the form `projects/<project>/instanceConfigs/<config>`.
+              # @param options [Google::Gax::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout,
+              #   retries, etc.
+              # @yield [result, operation] Access the result along with the RPC operation
+              # @yieldparam result [Google::Spanner::Admin::Instance::V1::InstanceConfig]
+              # @yieldparam operation [GRPC::ActiveCall::Operation]
+              # @return [Google::Spanner::Admin::Instance::V1::InstanceConfig]
+              # @raise [Google::Gax::GaxError] if the RPC is aborted.
+              # @example
+              #   require "google/cloud/spanner/admin/instance"
+              #
+              #   instance_admin_client = Google::Cloud::Spanner::Admin::Instance.new(version: :v1)
+              #   formatted_name = Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient.instance_config_path("[PROJECT]", "[INSTANCE_CONFIG]")
+              #   response = instance_admin_client.get_instance_config(formatted_name)
+
+              def get_instance_config \
+                  name,
+                  options: nil,
+                  &block
+                req = {
+                  name: name
+                }.delete_if { |_, v| v.nil? }
+                req = Google::Gax::to_proto(req, Google::Spanner::Admin::Instance::V1::GetInstanceConfigRequest)
+                @get_instance_config.call(req, options, &block)
+              end
+
+              # Lists all instances in the given project.
+              #
+              # @param parent [String]
+              #   Required. The name of the project for which a list of instances is
+              #   requested. Values are of the form `projects/<project>`.
+              # @param page_size [Integer]
+              #   The maximum number of resources contained in the underlying API
+              #   response. If page streaming is performed per-resource, this
+              #   parameter does not affect the return value. If page streaming is
+              #   performed per-page, this determines the maximum number of
+              #   resources in a page.
+              # @param filter [String]
+              #   An expression for filtering the results of the request. Filter rules are
+              #   case insensitive. The fields eligible for filtering are:
+              #
+              #   * `name`
+              #     * `display_name`
+              #     * `labels.key` where key is the name of a label
+              #
+              #     Some examples of using filters are:
+              #
+              #     * `name:*` --> The instance has a name.
+              #     * `name:Howl` --> The instance's name contains the string "howl".
+              #     * `name:HOWL` --> Equivalent to above.
+              #     * `NAME:howl` --> Equivalent to above.
+              #     * `labels.env:*` --> The instance has the label "env".
+              #     * `labels.env:dev` --> The instance has the label "env" and the value of
+              #       the label contains the string "dev".
+              #     * `name:howl labels.env:dev` --> The instance's name contains "howl" and
+              #       it has the label "env" with its value
+              #       containing "dev".
+              # @param options [Google::Gax::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout,
+              #   retries, etc.
+              # @yield [result, operation] Access the result along with the RPC operation
+              # @yieldparam result [Google::Gax::PagedEnumerable<Google::Spanner::Admin::Instance::V1::Instance>]
+              # @yieldparam operation [GRPC::ActiveCall::Operation]
+              # @return [Google::Gax::PagedEnumerable<Google::Spanner::Admin::Instance::V1::Instance>]
+              #   An enumerable of Google::Spanner::Admin::Instance::V1::Instance instances.
+              #   See Google::Gax::PagedEnumerable documentation for other
+              #   operations such as per-page iteration or access to the response
+              #   object.
+              # @raise [Google::Gax::GaxError] if the RPC is aborted.
+              # @example
+              #   require "google/cloud/spanner/admin/instance"
+              #
+              #   instance_admin_client = Google::Cloud::Spanner::Admin::Instance.new(version: :v1)
+              #   formatted_parent = Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient.project_path("[PROJECT]")
+              #
+              #   # Iterate over all results.
+              #   instance_admin_client.list_instances(formatted_parent).each do |element|
+              #     # Process element.
+              #   end
+              #
+              #   # Or iterate over results one page at a time.
+              #   instance_admin_client.list_instances(formatted_parent).each_page do |page|
+              #     # Process each page at a time.
+              #     page.each do |element|
+              #       # Process element.
+              #     end
+              #   end
+
+              def list_instances \
+                  parent,
+                  page_size: nil,
+                  filter: nil,
+                  options: nil,
+                  &block
+                req = {
+                  parent: parent,
+                  page_size: page_size,
+                  filter: filter
+                }.delete_if { |_, v| v.nil? }
+                req = Google::Gax::to_proto(req, Google::Spanner::Admin::Instance::V1::ListInstancesRequest)
+                @list_instances.call(req, options, &block)
+              end
+
+              # Gets information about a particular instance.
+              #
+              # @param name [String]
+              #   Required. The name of the requested instance. Values are of the form
+              #   `projects/<project>/instances/<instance>`.
+              # @param options [Google::Gax::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout,
+              #   retries, etc.
+              # @yield [result, operation] Access the result along with the RPC operation
+              # @yieldparam result [Google::Spanner::Admin::Instance::V1::Instance]
+              # @yieldparam operation [GRPC::ActiveCall::Operation]
+              # @return [Google::Spanner::Admin::Instance::V1::Instance]
+              # @raise [Google::Gax::GaxError] if the RPC is aborted.
+              # @example
+              #   require "google/cloud/spanner/admin/instance"
+              #
+              #   instance_admin_client = Google::Cloud::Spanner::Admin::Instance.new(version: :v1)
+              #   formatted_name = Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient.instance_path("[PROJECT]", "[INSTANCE]")
+              #   response = instance_admin_client.get_instance(formatted_name)
+
+              def get_instance \
+                  name,
+                  options: nil,
+                  &block
+                req = {
+                  name: name
+                }.delete_if { |_, v| v.nil? }
+                req = Google::Gax::to_proto(req, Google::Spanner::Admin::Instance::V1::GetInstanceRequest)
+                @get_instance.call(req, options, &block)
+              end
+
               # Deletes an instance.
               #
               # Immediately upon completion of the request:
@@ -847,11 +847,13 @@ module Google
               #   require "google/cloud/spanner/admin/instance"
               #
               #   instance_admin_client = Google::Cloud::Spanner::Admin::Instance.new(version: :v1)
-              #   formatted_resource = Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient.instance_path("[PROJECT]", "[INSTANCE]")
+              #
+              #   # TODO: Initialize `resource`:
+              #   resource = ''
               #
               #   # TODO: Initialize `policy`:
               #   policy = {}
-              #   response = instance_admin_client.set_iam_policy(formatted_resource, policy)
+              #   response = instance_admin_client.set_iam_policy(resource, policy)
 
               def set_iam_policy \
                   resource,
@@ -892,8 +894,10 @@ module Google
               #   require "google/cloud/spanner/admin/instance"
               #
               #   instance_admin_client = Google::Cloud::Spanner::Admin::Instance.new(version: :v1)
-              #   formatted_resource = Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient.instance_path("[PROJECT]", "[INSTANCE]")
-              #   response = instance_admin_client.get_iam_policy(formatted_resource)
+              #
+              #   # TODO: Initialize `resource`:
+              #   resource = ''
+              #   response = instance_admin_client.get_iam_policy(resource)
 
               def get_iam_policy \
                   resource,
@@ -935,15 +939,14 @@ module Google
               #   require "google/cloud/spanner/admin/instance"
               #
               #   instance_admin_client = Google::Cloud::Spanner::Admin::Instance.new(version: :v1)
-              #   formatted_resource = Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient.instance_path("[PROJECT]", "[INSTANCE]")
               #
-              #   # TODO: Initialize `permissions`:
-              #   permissions = []
-              #   response = instance_admin_client.test_iam_permissions(formatted_resource, permissions)
+              #   # TODO: Initialize `resource`:
+              #   resource = ''
+              #   response = instance_admin_client.test_iam_permissions(resource)
 
               def test_iam_permissions \
                   resource,
-                  permissions,
+                  permissions: nil,
                   options: nil,
                   &block
                 req = {

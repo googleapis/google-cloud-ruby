@@ -1178,12 +1178,6 @@ module Google
           #
           # @param session [String]
           #   Required. The session in which the transaction to be committed is running.
-          # @param mutations [Array<Google::Spanner::V1::Mutation | Hash>]
-          #   The mutations to be executed when this transaction commits. All
-          #   mutations are applied atomically, in the order they appear in
-          #   this list.
-          #   A hash of the same form as `Google::Spanner::V1::Mutation`
-          #   can also be provided.
           # @param transaction_id [String]
           #   Commit a previously-started transaction.
           # @param single_use_transaction [Google::Spanner::V1::TransactionOptions | Hash]
@@ -1198,6 +1192,12 @@ module Google
           #   {Google::Spanner::V1::Spanner::Commit Commit} instead.
           #   A hash of the same form as `Google::Spanner::V1::TransactionOptions`
           #   can also be provided.
+          # @param mutations [Array<Google::Spanner::V1::Mutation | Hash>]
+          #   The mutations to be executed when this transaction commits. All
+          #   mutations are applied atomically, in the order they appear in
+          #   this list.
+          #   A hash of the same form as `Google::Spanner::V1::Mutation`
+          #   can also be provided.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -1211,23 +1211,20 @@ module Google
           #
           #   spanner_client = Google::Cloud::Spanner::V1::SpannerClient.new
           #   formatted_session = Google::Cloud::Spanner::V1::SpannerClient.session_path("[PROJECT]", "[INSTANCE]", "[DATABASE]", "[SESSION]")
-          #
-          #   # TODO: Initialize `mutations`:
-          #   mutations = []
-          #   response = spanner_client.commit(formatted_session, mutations)
+          #   response = spanner_client.commit(formatted_session)
 
           def commit \
               session,
-              mutations,
               transaction_id: nil,
               single_use_transaction: nil,
+              mutations: nil,
               options: nil,
               &block
             req = {
               session: session,
-              mutations: mutations,
               transaction_id: transaction_id,
-              single_use_transaction: single_use_transaction
+              single_use_transaction: single_use_transaction,
+              mutations: mutations
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Spanner::V1::CommitRequest)
             @commit.call(req, options, &block)
