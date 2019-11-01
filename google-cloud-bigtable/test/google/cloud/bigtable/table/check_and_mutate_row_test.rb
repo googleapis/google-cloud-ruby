@@ -56,4 +56,25 @@ describe Google::Cloud::Bigtable::Table, :check_and_mutate_row, :mock_bigtable d
     result.must_equal true
     mock.verify
   end
+
+  it "check and mutate row" do
+    stub = Object.new
+    def stub.check_and_mutate_row *args
+      gax_error = Google::Gax::RetryError.new "Exception occurred"
+      gax_error.instance_variable_set :@cause, GRPC::InvalidArgument.new(3, "Invalid id for collection columnFamilies")
+      raise gax_error
+    end
+    bigtable.service.mocked_client = stub
+    table = bigtable.table(instance_id, table_id)
+
+    row_key = "user-1"
+    proc {
+       table.check_and_mutate_row(
+        row_key,
+        Google::Cloud::Bigtable::RowFilter.key("user-1*"),
+        on_match: Google::Cloud::Bigtable::MutationEntry.new.delete_cells("cf-BAD ", "field1"),
+        otherwise: Google::Cloud::Bigtable::MutationEntry.new.delete_from_row
+      )
+    }.must_raise Google::Cloud::InvalidArgumentError
+  end
 end

@@ -61,7 +61,7 @@ describe Google::Cloud::Bigtable::Table, :read_rows, :mock_bigtable do
     rows.first.must_equal expected_row
   end
 
-  it "retry on retyable error" do
+  it "retry on retryable error" do
     chunks_base64 = [
       "CgJSSxIDCgFBGgMKAUMgZDILdmFsdWUtVkFMXzFIAA==",
       "IGIyC3ZhbHVlLVZBTF8ySAA=",

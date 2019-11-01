@@ -60,7 +60,7 @@ module Google
         def sample_row_keys
           return enum_for :sample_row_keys unless block_given?
 
-          response = client.sample_row_keys path, app_profile_id: @app_profile_id
+          response = service.sample_row_keys path, app_profile_id: @app_profile_id
           response.each do |grpc|
             yield SampleRowKey.from_grpc grpc
           end

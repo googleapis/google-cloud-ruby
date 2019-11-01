@@ -52,4 +52,16 @@ describe "DataClient Read Modify Write Row", :bigtable do
     row = table.read_modify_write_row(row_key, rule)
     row.cells[family].first.to_i.must_equal 101
   end
+
+  it "raises Google::Cloud::InvalidArgumentError for invalid id for collection columnFamilies" do
+    row_key = "readmodify-#{random_str}"
+    qualifier = "readmodify"
+    rule = Google::Cloud::Bigtable::ReadModifyWriteRule.increment(
+      family + "&  *^(*&^%^%&^", qualifier, 1
+    )
+
+    proc {
+      table.read_modify_write_row(row_key, rule)
+    }.must_raise Google::Cloud::InvalidArgumentError
+  end
 end

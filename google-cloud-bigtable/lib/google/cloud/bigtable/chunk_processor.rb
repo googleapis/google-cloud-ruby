@@ -19,7 +19,7 @@ module Google
   module Cloud
     module Bigtable
       # @private
-      # # RowsMutator
+      # # ChunkProcessor
       #
       # Read a chunk of data and merge it based on states and build rows and cells
       #

@@ -76,7 +76,7 @@ module Google
         #   table.mutate_row(entry)
         #
         def mutate_row entry
-          client.mutate_row path, entry.row_key, entry.mutations, app_profile_id: @app_profile_id
+          service.mutate_row path, entry.row_key, entry.mutations, app_profile_id: @app_profile_id
           true
         end
 
@@ -158,7 +158,7 @@ module Google
         #   puts row.cells
         #
         def read_modify_write_row key, rules
-          res_row = client.read_modify_write_row(
+          res_row = service.read_modify_write_row(
             path,
             key,
             Array(rules).map(&:to_grpc),
@@ -243,7 +243,7 @@ module Google
         def check_and_mutate_row key, predicate, on_match: nil, otherwise: nil
           true_mutations = on_match.mutations if on_match
           false_mutations = otherwise.mutations if otherwise
-          response = client.check_and_mutate_row(
+          response = service.check_and_mutate_row(
             path,
             key,
             predicate_filter: predicate.to_grpc,
@@ -252,41 +252,6 @@ module Google
             app_profile_id:   @app_profile_id
           )
           response.predicate_matched
-        end
-
-        ##
-        # Read sample row keys.
-        #
-        # Returns a sample of row keys in the table. The returned row keys will
-        # delimit contiguous sections of the table of approximately equal size. The
-        # sections can be used to break up the data for distributed tasks like
-        # MapReduces.
-        #
-        # @yieldreturn [Google::Cloud::Bigtable::SampleRowKey]
-        # @return [:yields: sample_row_key]
-        #   Yield block for each processed SampleRowKey.
-        #
-        # @example
-        #   require "google/cloud/bigtable"
-        #
-        #   bigtable = Google::Cloud::Bigtable.new
-        #   table = bigtable.table("my-instance", "my-table")
-        #
-        #   table.sample_row_keys.each do |sample_row_key|
-        #     p sample_row_key.key # user00116
-        #     p sample_row_key.offset # 805306368
-        #   end
-        #
-        def sample_row_keys
-          return enum_for :sample_row_keys unless block_given?
-
-          response = client.sample_row_keys(
-            path,
-            app_profile_id: @app_profile_id
-          )
-          response.each do |grpc|
-            yield SampleRowKey.from_grpc grpc
-          end
         end
 
         ##
