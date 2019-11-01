@@ -1,5 +1,29 @@
 # Release History
 
+### 0.8.0 / 2019-11-01
+
+#### ⚠ BREAKING CHANGES
+
+* The following methods now raise Google::Cloud::Error instead of
+  Google::Gax::GaxError and/or GRPC::BadStatus:
+  * Table#mutate_row
+  * Table#read_modify_write_row
+  * Table#check_and_mutate_row
+  * Table#sample_row_keys
+
+#### Features
+
+* Raise Google::Cloud::Error from Table#mutate_row, Table#read_modify_write_row,
+  Table#check_and_mutate_row, and Table#sample_row_keys.
+
+#### Bug Fixes
+
+* Update minimum runtime dependencies
+
+#### Documentation
+
+* Update the list of GCP environments for automatic authentication
+
 ### 0.7.0 / 2019-10-22
 
 #### Features
