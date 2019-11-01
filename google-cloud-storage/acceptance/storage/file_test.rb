@@ -477,13 +477,18 @@ describe Google::Cloud::Storage::File, :storage do
   end
 
   it "should copy an existing file" do
-    uploaded = bucket.create_file files[:logo][:path], "CloudLogo"
+    uploaded = bucket.create_file files[:logo][:path], "CloudLogo",
+                                  content_language: "en"
+    uploaded.content_language.must_equal "en"
+
     copied = try_with_backoff "copying existing file" do
       uploaded.copy "CloudLogoCopy"
     end
 
     uploaded.name.must_equal "CloudLogo"
+    uploaded.content_language.must_equal "en"
     copied.name.must_equal "CloudLogoCopy"
+    copied.content_language.must_equal "en"
     copied.size.must_equal uploaded.size
 
     Tempfile.open ["CloudLogo", ".png"] do |tmpfile1|
