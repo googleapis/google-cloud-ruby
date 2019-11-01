@@ -780,20 +780,12 @@ module Google
         end
 
         ##
-        # Whether the bucket's file IAM configuration enables Bucket Policy
-        # Only. The default is false. This value can be modified by calling
-        # {Bucket#policy_only=}.
+        # Whether the bucket's file IAM configuration enables uniform bucket-level access. The default is false. This
+        # value can be modified by calling {Bucket#uniform_bucket_level_access=}.
         #
-        # If true, access checks only use bucket-level IAM policies or above,
-        # all object ACLs within the bucket are no longer evaluated, and
-        # access-control is configured solely through the bucket's IAM policy.
-        # Any requests which attempt to use the ACL API to view or manipulate
-        # ACLs will fail with 400 errors.
-        #
-        # @return [Boolean] Returns `false` if the bucket has no IAM
-        #   configuration or if Bucket Policy Only is not enabled in the IAM
-        #   configuration. Returns `true` if Bucket Policy Only is enabled in
-        #   the IAM configuration.
+        # @return [Boolean] Returns `false` if the bucket has no IAM configuration or if uniform bucket-level access is
+        #   not enabled in the IAM configuration. Returns `true` if uniform bucket-level access is enabled in the IAM
+        #   configuration.
         #
         # @example
         #   require "google/cloud/storage"
@@ -802,30 +794,27 @@ module Google
         #
         #   bucket = storage.bucket "my-bucket"
         #
-        #   bucket.policy_only = true
-        #   bucket.policy_only? # true
+        #   bucket.uniform_bucket_level_access = true
+        #   bucket.uniform_bucket_level_access? # true
         #
-        def policy_only?
-          return false unless @gapi.iam_configuration &&
-                              @gapi.iam_configuration.bucket_policy_only
-          !@gapi.iam_configuration.bucket_policy_only.enabled.nil? &&
-            @gapi.iam_configuration.bucket_policy_only.enabled
+        def uniform_bucket_level_access?
+          return false unless @gapi.iam_configuration && @gapi.iam_configuration.uniform_bucket_level_access
+          !@gapi.iam_configuration.uniform_bucket_level_access.enabled.nil? &&
+            @gapi.iam_configuration.uniform_bucket_level_access.enabled
         end
 
         ##
-        # If enabled, access checks only use bucket-level IAM policies or above,
-        # all object ACLs within the bucket are no longer evaluated, and
-        # access-control is configured solely through the bucket's IAM policy.
-        # Any requests which attempt to use the ACL API to view or manipulate
-        # ACLs will fail with 400 errors.
+        # Sets whether uniform bucket-level access is enabled for this bucket. When this is enabled, access to the
+        # bucket will be configured through IAM, and legacy ACL policies will not work. When it is first enabled,
+        # {#uniform_bucket_level_access_locked_at} will be set by the API automatically. The uniform bucket-level access
+        # can then be disabled until the time specified, after which it will become immutable and calls to change it
+        # will fail. If uniform bucket-level access is enabled, calls to access legacy ACL information will fail.
         #
-        # Before enabling Bucket Policy Only please review [feature
-        # documentation](https://cloud.google.com/storage/docs/bucket-policy-only),
-        # as well as [Should you use Bucket Policy
-        # Only?](https://cloud.google.com/storage/docs/bucket-policy-only#should-you-use).
+        # Before enabling uniform bucket-level access please review [uniform bucket-level
+        # access](https://cloud.google.com/storage/docs/uniform-bucket-level-access).
         #
-        # @param [Boolean] new_policy_only When set to `true`, Bucket Policy
-        #   Only is enabled in the bucket's IAM configuration.
+        # @param [Boolean] new_uniform_bucket_level_access When set to `true`, uniform bucket-level access is enabled in
+        #   the bucket's IAM configuration.
         #
         # @example
         #   require "google/cloud/storage"
@@ -834,35 +823,29 @@ module Google
         #
         #   bucket = storage.bucket "my-bucket"
         #
-        #   bucket.policy_only = true
-        #   bucket.policy_only? # true
+        #   bucket.uniform_bucket_level_access = true
+        #   bucket.uniform_bucket_level_access? # true
         #
         #   bucket.default_acl.public! # Google::Cloud::InvalidArgumentError
         #
-        #   # The deadline for disabling Bucket Policy Only.
-        #   puts bucket.policy_only_locked_at
+        #   # The deadline for disabling uniform bucket-level access.
+        #   puts bucket.uniform_bucket_level_access_locked_at
         #
-        def policy_only= new_policy_only
+        def uniform_bucket_level_access= new_uniform_bucket_level_access
           @gapi.iam_configuration ||= API::Bucket::IamConfiguration.new
-          @gapi.iam_configuration.bucket_policy_only ||= \
-            API::Bucket::IamConfiguration::BucketPolicyOnly.new
           @gapi.iam_configuration.uniform_bucket_level_access ||= \
             API::Bucket::IamConfiguration::UniformBucketLevelAccess.new
-          @gapi.iam_configuration.bucket_policy_only.enabled = new_policy_only
-          @gapi.iam_configuration.uniform_bucket_level_access.enabled = \
-            new_policy_only
+          @gapi.iam_configuration.uniform_bucket_level_access.enabled = new_uniform_bucket_level_access
           patch_gapi! :iam_configuration
         end
 
         ##
-        # The deadline time for disabling Bucket Policy Only by calling
-        # {Bucket#policy_only=}. After the locked time the Bucket Policy Only
-        # setting cannot be changed from true to false. Corresponds to the
-        # property `locked_time`.
+        # The deadline time for disabling uniform bucket-level access by calling {Bucket#uniform_bucket_level_access=}.
+        # After the locked time the uniform bucket-level access setting cannot be changed from true to false.
+        # Corresponds to the property `locked_time`.
         #
-        # @return [DateTime, nil] The deadline time for changing
-        #   {Bucket#policy_only=} from true to false, or `nil` if
-        #   {Bucket#policy_only?} is false.
+        # @return [DateTime, nil] The deadline time for changing {Bucket#uniform_bucket_level_access=} from true to
+        #   false, or `nil` if {Bucket#uniform_bucket_level_access?} is false.
         #
         # @example
         #   require "google/cloud/storage"
@@ -871,15 +854,35 @@ module Google
         #
         #   bucket = storage.bucket "my-bucket"
         #
-        #   bucket.policy_only = true
+        #   bucket.uniform_bucket_level_access = true
         #
-        #   # The deadline for disabling Bucket Policy Only.
-        #   puts bucket.policy_only_locked_at
+        #   # The deadline for disabling uniform bucket-level access.
+        #   puts bucket.uniform_bucket_level_access_locked_at
+        #
+        def uniform_bucket_level_access_locked_at
+          return nil unless @gapi.iam_configuration && @gapi.iam_configuration.uniform_bucket_level_access
+          @gapi.iam_configuration.uniform_bucket_level_access.locked_time
+        end
+
+        ##
+        # @deprecated Use {#uniform_bucket_level_access?} instead.
+        #
+        def policy_only?
+          uniform_bucket_level_access?
+        end
+
+        ##
+        # @deprecated Use {#uniform_bucket_level_access=} instead.
+        #
+        def policy_only= new_policy_only
+          self.uniform_bucket_level_access = new_policy_only
+        end
+
+        ##
+        # @deprecated Use {#uniform_bucket_level_access_locked_at} instead.
         #
         def policy_only_locked_at
-          return nil unless @gapi.iam_configuration &&
-                            @gapi.iam_configuration.bucket_policy_only
-          @gapi.iam_configuration.bucket_policy_only.locked_time
+          uniform_bucket_level_access_locked_at
         end
 
         ##

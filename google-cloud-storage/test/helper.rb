@@ -180,17 +180,12 @@ class MockStorage < Minitest::Spec
     )
   end
 
-  def iam_configuration_gapi policy_only: false, locked_time: false
-    bpo = Google::Apis::StorageV1::Bucket::IamConfiguration::BucketPolicyOnly.new(
-      enabled: policy_only
-    )
-    bpo.locked_time = (Date.today + 1).to_datetime if locked_time
+  def iam_configuration_gapi uniform_bucket_level_access: false, locked_time: false
     ubla = Google::Apis::StorageV1::Bucket::IamConfiguration::UniformBucketLevelAccess.new(
-      enabled: policy_only
+      enabled: uniform_bucket_level_access
     )
     ubla.locked_time = (Date.today + 1).to_datetime if locked_time
     Google::Apis::StorageV1::Bucket::IamConfiguration.new(
-      bucket_policy_only: bpo,
       uniform_bucket_level_access: ubla
     )
   end
