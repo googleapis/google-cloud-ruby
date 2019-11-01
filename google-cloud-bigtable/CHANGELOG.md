@@ -1,5 +1,27 @@
 # Release History
 
+### 0.8.0 / 2019-11-01
+
+#### ⚠ BREAKING CHANGES
+
+* **bigtable:** Raise Google::Cloud::Error from Table#mutate_row and similar methods
+
+#### Features
+
+* Raise Google::Cloud::Error from Table#mutate_row and similar methods
+  * Refactor Table#client usages to Table#service.
+  * Add the following methods to Service: read_rows, sample_row_keys, mutate_row,
+  * Remove duplicate module method definition MutationOperations#sample_row_keys.
+  * Update acceptance and unit tests to expect Google::Cloud::Error.
+
+#### Bug Fixes
+
+* Update minimum runtime dependencies
+
+#### Documentation
+
+* Update the list of GCP environments for automatic authentication
+
 ### 0.7.0 / 2019-10-22
 
 #### Features
