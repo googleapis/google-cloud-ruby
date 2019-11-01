@@ -4,15 +4,17 @@
 
 #### ⚠ BREAKING CHANGES
 
-* **bigtable:** Raise Google::Cloud::Error from Table#mutate_row and similar methods
+* The following methods now raise Google::Cloud::Error instead of
+  Google::Gax::GaxError and/or GRPC::BadStatus:
+  * Table#mutate_row
+  * Table#read_modify_write_row
+  * Table#check_and_mutate_row
+  * Table#sample_row_keys
 
 #### Features
 
-* Raise Google::Cloud::Error from Table#mutate_row and similar methods
-  * Refactor Table#client usages to Table#service.
-  * Add the following methods to Service: read_rows, sample_row_keys, mutate_row,
-  * Remove duplicate module method definition MutationOperations#sample_row_keys.
-  * Update acceptance and unit tests to expect Google::Cloud::Error.
+* Raise Google::Cloud::Error from Table#mutate_row, Table#read_modify_write_row,
+  Table#check_and_mutate_row, and Table#sample_row_keys.
 
 #### Bug Fixes
 
