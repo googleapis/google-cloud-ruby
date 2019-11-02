@@ -47,6 +47,7 @@ module Google
         #     {Google::Cloud::Tasks::V2::AppEngineHttpRequest#app_engine_routing task-level app_engine_routing}.
         #     These settings apply only to
         #     {Google::Cloud::Tasks::V2::AppEngineHttpRequest App Engine tasks} in this queue.
+        #     {Google::Cloud::Tasks::V2::HttpRequest Http tasks} are not affected.
         #
         #     If set, `app_engine_routing_override` is used for all
         #     {Google::Cloud::Tasks::V2::AppEngineHttpRequest App Engine tasks} in the queue, no matter what the

@@ -45,6 +45,11 @@ module Google
         #     HTTP request that is sent to the App Engine app handler.
         #
         #     An App Engine task is a task that has {Google::Cloud::Tasks::V2::AppEngineHttpRequest AppEngineHttpRequest} set.
+        # @!attribute [rw] http_request
+        #   @return [Google::Cloud::Tasks::V2::HttpRequest]
+        #     HTTP request that is sent to the worker.
+        #
+        #     An HTTP task is a task that has {Google::Cloud::Tasks::V2::HttpRequest HttpRequest} set.
         # @!attribute [rw] schedule_time
         #   @return [Google::Protobuf::Timestamp]
         #     The time when the task is scheduled to be attempted or retried.
@@ -69,6 +74,8 @@ module Google
         #
         #     The default and maximum values depend on the type of request:
         #
+        #     * For {Google::Cloud::Tasks::V2::HttpRequest HTTP tasks}, the default is 10 minutes. The deadline
+        #       must be in the interval [15 seconds, 30 minutes].
         #
         #     * For {Google::Cloud::Tasks::V2::AppEngineHttpRequest App Engine tasks}, 0 indicates that the
         #       request has the default deadline. The default deadline depends on the
