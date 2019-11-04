@@ -1,5 +1,11 @@
 # Release History
 
+### 0.9.1 / 2019-11-04
+
+#### Bug Fixes
+
+* Update minimum runtime dependencies
+
 ### 0.9.0 / 2019-10-29
 
 This release require Ruby 2.4 or later.
