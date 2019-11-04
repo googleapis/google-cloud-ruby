@@ -1,5 +1,23 @@
 # Release History
 
+### 1.2.0 / 2019-11-04
+
+This release requires Ruby 2.4 or later.
+
+#### Bug Fixes
+
+* Deprecate CloudSchedulerClient.project_path helper method
+
+#### Documentation
+
+* Clarify which Google Cloud Platform environments support automatic authentication
+* Clarify required status of several fields
+
+#### Other
+
+* Update minimum runtime dependencies
+* Update some network timeouts
+
 ### 1.1.2 / 2019-10-18
 
 #### Documentation
