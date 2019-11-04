@@ -1,5 +1,19 @@
 # Release History
 
+### 1.2.0 / 2019-11-04
+
+#### Features
+
+* Update Ruby dependency to minimum of 2.4 ([#4206](https://www.github.com/googleapis/google-cloud-ruby/issues/4206))
+* Deprecate CloudSchedulerClient.project_path helper method
+  * Update documentation
+    * Mark several fields as required
+  * Update network configuration
+
+#### Bug Fixes
+
+* Update minimum runtime dependencies
+
 ### 1.1.2 / 2019-10-18
 
 #### Documentation
