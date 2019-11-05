@@ -61,6 +61,7 @@ describe Google::Cloud::Bigquery::Table, :view, :mock_bigquery do
     view.schema.must_be :frozen?
     view.fields.map(&:name).must_equal view.schema.fields.map(&:name)
     view.headers.must_equal [:name, :age, :score, :pi, :active, :avatar, :started_at, :duration, :target_end, :birthday]
+    view.param_types.must_equal({ name: :STRING, age: :INTEGER, score: :FLOAT, pi: :NUMERIC, active: :BOOLEAN, avatar: :BYTES, started_at: :TIMESTAMP, duration: :TIME, target_end: :DATETIME, birthday: :DATE })
   end
 
   it "can test its existence" do

@@ -80,6 +80,7 @@ describe Google::Cloud::Bigquery::Table, :view, :attributes, :mock_bigquery do
     view.schema.fields.wont_be :empty?
     view.fields.wont_be :empty?
     view.headers.must_equal [:name, :age, :score, :pi, :active, :avatar, :started_at, :duration, :target_end, :birthday]
+    view.param_types.must_equal({ name: :STRING, age: :INTEGER, score: :FLOAT, pi: :NUMERIC, active: :BOOLEAN, avatar: :BYTES, started_at: :TIMESTAMP, duration: :TIME, target_end: :DATETIME, birthday: :DATE })
 
     mock.verify
 

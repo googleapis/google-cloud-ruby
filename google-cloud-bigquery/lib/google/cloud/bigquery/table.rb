@@ -871,6 +871,26 @@ module Google
         end
 
         ##
+        # The types of the fields in the table, obtained from its schema.
+        # Types use the same format as the optional query parameter types.
+        #
+        # @return [Hash] A hash with field names as keys, and types as values.
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #   table = dataset.table "my_table"
+        #
+        #   table.param_types
+        #
+        def param_types
+          return nil if reference?
+          schema.param_types
+        end
+
+        ##
         # The {EncryptionConfiguration} object that represents the custom
         # encryption method used to protect the table. If not set,
         # {Dataset#default_encryption} is used.
