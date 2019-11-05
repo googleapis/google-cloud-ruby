@@ -609,6 +609,7 @@ google-cloud-speech:
 - v0.21.0
 - v0.20.0
 google-cloud-storage:
+- v1.23.0
 - v1.22.0
 - v1.21.1
 - v1.21.0
