@@ -1,5 +1,12 @@
 # Release History
 
+### 1.23.0 / 2019-11-05
+
+#### Features
+
+* Add support for Bucket#uniform_bucket_level_access
+  * Deprecate Bucket#policy_only=, #policy_only?, and #policy_only_locked_at, which are now
+
 ### 1.22.0 / 2019-10-28
 
 * Now requires Ruby 2.4 or later.
