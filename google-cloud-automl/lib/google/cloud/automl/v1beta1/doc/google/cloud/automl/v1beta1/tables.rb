@@ -86,6 +86,14 @@ module Google
         class TablesDatasetMetadata; end
 
         # Model metadata specific to AutoML Tables.
+        # @!attribute [rw] optimization_objective_recall_value
+        #   @return [Float]
+        #     Required when optimization_objective is "MAXIMIZE_PRECISION_AT_RECALL".
+        #     Must be between 0 and 1, inclusive.
+        # @!attribute [rw] optimization_objective_precision_value
+        #   @return [Float]
+        #     Required when optimization_objective is "MAXIMIZE_RECALL_AT_PRECISION".
+        #     Must be between 0 and 1, inclusive.
         # @!attribute [rw] target_column_spec
         #   @return [Google::Cloud::AutoML::V1beta1::ColumnSpec]
         #     Column spec of the dataset's primary table's column the model is

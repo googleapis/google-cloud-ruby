@@ -4,6 +4,7 @@
 
 require 'google/protobuf'
 
+require 'google/api/annotations_pb'
 require 'google/cloud/automl/v1beta1/classification_pb'
 require 'google/cloud/automl/v1beta1/column_spec_pb'
 require 'google/cloud/automl/v1beta1/data_items_pb'
@@ -12,7 +13,6 @@ require 'google/cloud/automl/v1beta1/ranges_pb'
 require 'google/cloud/automl/v1beta1/temporal_pb'
 require 'google/protobuf/struct_pb'
 require 'google/protobuf/timestamp_pb'
-require 'google/api/annotations_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.cloud.automl.v1beta1.TablesDatasetMetadata" do
     optional :primary_table_spec_id, :string, 1
@@ -30,6 +30,10 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :train_budget_milli_node_hours, :int64, 6
     optional :train_cost_milli_node_hours, :int64, 7
     optional :disable_early_stopping, :bool, 12
+    oneof :additional_optimization_objective_config do
+      optional :optimization_objective_recall_value, :float, 17
+      optional :optimization_objective_precision_value, :float, 18
+    end
   end
   add_message "google.cloud.automl.v1beta1.TablesAnnotation" do
     optional :score, :float, 1
