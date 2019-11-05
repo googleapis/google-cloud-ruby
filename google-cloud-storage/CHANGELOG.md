@@ -5,7 +5,8 @@
 #### Features
 
 * Add support for Bucket#uniform_bucket_level_access
-  * Deprecate Bucket#policy_only=, #policy_only?, and #policy_only_locked_at, which are now
+  * Deprecate Bucket#policy_only=, #policy_only?, and #policy_only_locked_at,
+    which are now aliases for the uniform_bucket_level_access methods.
 
 ### 1.22.0 / 2019-10-28
 
