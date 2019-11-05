@@ -34,7 +34,7 @@ guide](https://cloud.google.com/vision/docs/ruby-client-migration).
 require "google/cloud/vision"
 
 image_annotator_client = Google::Cloud::Vision::ImageAnnotator.new
-gcs_image_uri = "gs://gapic-toolkit/President_Barack_Obama.jpg"
+gcs_image_uri = "gs://cloud-samples-data/vision/face_detection/celebrity_recognition/sergey.jpg"
 source = { gcs_image_uri: gcs_image_uri }
 image = { source: source }
 type = :FACE_DETECTION

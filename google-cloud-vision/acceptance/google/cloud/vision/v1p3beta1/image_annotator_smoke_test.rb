@@ -23,7 +23,7 @@ describe "ImageAnnotatorSmokeTest v1p3beta1" do
   it "runs one smoke test with batch_annotate_images" do
 
     image_annotator_client = Google::Cloud::Vision::ImageAnnotator.new(version: :v1p3beta1)
-    gcs_image_uri = "gs://gapic-toolkit/President_Barack_Obama.jpg"
+    gcs_image_uri = "gs://cloud-samples-data/vision/face_detection/celebrity_recognition/sergey.jpg"
     source = { gcs_image_uri: gcs_image_uri }
     image = { source: source }
     type = :FACE_DETECTION
