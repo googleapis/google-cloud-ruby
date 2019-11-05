@@ -470,8 +470,8 @@ module Google
         #   bigquery = Google::Cloud::Bigquery.new
         #
         #   job = bigquery.query_job "SELECT name FROM " \
-        #                            "`my_dataset.my_table`" \
-        #                            " WHERE id = ?",
+        #                            "`my_dataset.my_table` " \
+        #                            "WHERE id = ?",
         #                            params: [1]
         #
         #   job.wait_until_done!
@@ -487,9 +487,27 @@ module Google
         #   bigquery = Google::Cloud::Bigquery.new
         #
         #   job = bigquery.query_job "SELECT name FROM " \
-        #                            "`my_dataset.my_table`" \
-        #                            " WHERE id = @id",
+        #                            "`my_dataset.my_table` " \
+        #                            "WHERE id = @id",
         #                            params: { id: 1 }
+        #
+        #   job.wait_until_done!
+        #   if !job.failed?
+        #     job.data.each do |row|
+        #       puts row[:name]
+        #     end
+        #   end
+        #
+        # @example Query using named query parameters with types:
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #
+        #   job = bigquery.query_job "SELECT name FROM " \
+        #                            "`my_dataset.my_table` " \
+        #                            "WHERE id IN UNNEST(@ids)",
+        #                            params: { ids: [] },
+        #                            types: { ids: [:INT64] }
         #
         #   job.wait_until_done!
         #   if !job.failed?
@@ -724,7 +742,7 @@ module Google
         #   bigquery = Google::Cloud::Bigquery.new
         #
         #   data = bigquery.query "SELECT name " \
-        #                         "FROM `my_dataset.my_table`" \
+        #                         "FROM `my_dataset.my_table` " \
         #                         "WHERE id = ?",
         #                         params: [1]
         #
@@ -738,9 +756,24 @@ module Google
         #   bigquery = Google::Cloud::Bigquery.new
         #
         #   data = bigquery.query "SELECT name " \
-        #                         "FROM `my_dataset.my_table`" \
+        #                         "FROM `my_dataset.my_table` " \
         #                         "WHERE id = @id",
         #                         params: { id: 1 }
+        #
+        #   data.each do |row|
+        #     puts row[:name]
+        #   end
+        #
+        # @example Query using named query parameters with types:
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #
+        #   data = bigquery.query "SELECT name FROM " \
+        #                         "`my_dataset.my_table` " \
+        #                         "WHERE id IN UNNEST(@ids)",
+        #                         params: { ids: [] },
+        #                         types: { ids: [:INT64] }
         #
         #   data.each do |row|
         #     puts row[:name]

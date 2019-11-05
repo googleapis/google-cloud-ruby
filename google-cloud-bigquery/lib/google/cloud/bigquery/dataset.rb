@@ -1046,6 +1046,24 @@ module Google
         #     end
         #   end
         #
+        # @example Query using named query parameters with types:
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #
+        #   job = dataset.query_job "SELECT name FROM my_table " \
+        #                           "WHERE id IN UNNEST(@ids)",
+        #                           params: { ids: [] },
+        #                           types: { ids: [:INT64] }
+        #
+        #   job.wait_until_done!
+        #   if !job.failed?
+        #     job.data.each do |row|
+        #       puts row[:name]
+        #     end
+        #   end
+        #
         # @example Execute a DDL statement:
         #   require "google/cloud/bigquery"
         #
@@ -1276,6 +1294,21 @@ module Google
         #
         #   data = dataset.query "SELECT name FROM my_table WHERE id = @id",
         #                        params: { id: 1 }
+        #
+        #   data.each do |row|
+        #     puts row[:name]
+        #   end
+        #
+        # @example Query using named query parameters with types:
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #
+        #   data = dataset.query "SELECT name FROM my_table " \
+        #                        "WHERE id IN UNNEST(@ids)",
+        #                        params: { ids: [] },
+        #                        types: { ids: [:INT64] }
         #
         #   data.each do |row|
         #     puts row[:name]
