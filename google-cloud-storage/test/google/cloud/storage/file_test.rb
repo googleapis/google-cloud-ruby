@@ -776,7 +776,7 @@ describe Google::Cloud::Storage::File, :mock_storage do
 
     it "can copy itself while updating its attributes" do
       mock = Minitest::Mock.new
-      update_file_gapi = file_gapi.dup
+      update_file_gapi = Google::Apis::StorageV1::Object.new
       update_file_gapi.cache_control = "private, max-age=0, no-cache"
       update_file_gapi.content_disposition = "inline; filename=filename.ext"
       update_file_gapi.content_encoding = "deflate"
@@ -804,9 +804,39 @@ describe Google::Cloud::Storage::File, :mock_storage do
       mock.verify
     end
 
-    it "can copy itself while updating its attributes with user_project set to true" do
+    it "can copy itself while updating its attributes with force_copy_metadata set to true" do
       mock = Minitest::Mock.new
       update_file_gapi = file_gapi.dup
+      update_file_gapi.cache_control = "private, max-age=0, no-cache"
+      update_file_gapi.content_disposition = "inline; filename=filename.ext"
+      update_file_gapi.content_encoding = "deflate"
+      update_file_gapi.content_language = "de"
+      update_file_gapi.content_type = "application/json"
+      update_file_gapi.metadata = { "player" => "Bob", "score" => "10" }
+      update_file_gapi.storage_class = "NEARLINE"
+
+      mock.expect :rewrite_object, done_rewrite(file_gapi),
+                  [bucket.name, file.name, bucket.name, "new-file.ext", update_file_gapi, destination_kms_key_name: nil, destination_predefined_acl: nil, source_generation: nil, rewrite_token: nil, user_project: nil, options: {}]
+
+      file.service.mocked_service = mock
+
+      file.copy "new-file.ext", force_copy_metadata: true do |f|
+        f.cache_control = "private, max-age=0, no-cache"
+        f.content_disposition = "inline; filename=filename.ext"
+        f.content_encoding = "deflate"
+        f.content_language = "de"
+        f.content_type = "application/json"
+        f.metadata["player"] = "Bob"
+        f.metadata["score"] = "10"
+        f.storage_class = :nearline
+      end
+
+      mock.verify
+    end
+
+    it "can copy itself while updating its attributes with user_project set to true" do
+      mock = Minitest::Mock.new
+      update_file_gapi = Google::Apis::StorageV1::Object.new
       update_file_gapi.cache_control = "private, max-age=0, no-cache"
       update_file_gapi.content_disposition = "inline; filename=filename.ext"
       update_file_gapi.content_encoding = "deflate"
@@ -1045,7 +1075,7 @@ describe Google::Cloud::Storage::File, :mock_storage do
 
     it "can rewrite itself while updating its attributes" do
       mock = Minitest::Mock.new
-      update_file_gapi = file_gapi.dup
+      update_file_gapi = Google::Apis::StorageV1::Object.new
       update_file_gapi.cache_control = "private, max-age=0, no-cache"
       update_file_gapi.content_disposition = "inline; filename=filename.ext"
       update_file_gapi.content_encoding = "deflate"
@@ -1073,9 +1103,39 @@ describe Google::Cloud::Storage::File, :mock_storage do
       mock.verify
     end
 
-    it "can rewrite itself while updating its attributes with user_project set to true" do
+    it "can rewrite itself while updating its attributes with force_copy_metadata set to true" do
       mock = Minitest::Mock.new
       update_file_gapi = file_gapi.dup
+      update_file_gapi.cache_control = "private, max-age=0, no-cache"
+      update_file_gapi.content_disposition = "inline; filename=filename.ext"
+      update_file_gapi.content_encoding = "deflate"
+      update_file_gapi.content_language = "de"
+      update_file_gapi.content_type = "application/json"
+      update_file_gapi.metadata = { "player" => "Bob", "score" => "10" }
+      update_file_gapi.storage_class = "NEARLINE"
+
+      mock.expect :rewrite_object, done_rewrite(file_gapi),
+                  [bucket.name, file.name, bucket.name, "new-file.ext", update_file_gapi, destination_kms_key_name: nil, destination_predefined_acl: nil, source_generation: nil, rewrite_token: nil, user_project: nil, options: {}]
+
+      file.service.mocked_service = mock
+
+      file.rewrite "new-file.ext", force_copy_metadata: true do |f|
+        f.cache_control = "private, max-age=0, no-cache"
+        f.content_disposition = "inline; filename=filename.ext"
+        f.content_encoding = "deflate"
+        f.content_language = "de"
+        f.content_type = "application/json"
+        f.metadata["player"] = "Bob"
+        f.metadata["score"] = "10"
+        f.storage_class = :nearline
+      end
+
+      mock.verify
+    end
+
+    it "can rewrite itself while updating its attributes with user_project set to true" do
+      mock = Minitest::Mock.new
+      update_file_gapi = Google::Apis::StorageV1::Object.new
       update_file_gapi.cache_control = "private, max-age=0, no-cache"
       update_file_gapi.content_disposition = "inline; filename=filename.ext"
       update_file_gapi.content_encoding = "deflate"

@@ -102,13 +102,14 @@ describe Google::Cloud::Storage::File, :storage do
     end
 
     it "should add, rotate, and remove customer-supplied encryption keys for an existing file" do
-      uploaded = bucket.create_file file_path, file_name
+      uploaded = bucket.create_file file_path, file_name, content_language: "en"
 
       rewritten = try_with_backoff "add encryption key" do
         uploaded.rotate new_encryption_key: encryption_key
       end
       rewritten.name.must_equal uploaded.name
       rewritten.size.must_equal uploaded.size
+      rewritten.content_language.must_equal "en"
 
       rewritten2 = try_with_backoff "rotate encryption keys" do
         uploaded.rotate encryption_key: encryption_key, new_encryption_key: encryption_key_2

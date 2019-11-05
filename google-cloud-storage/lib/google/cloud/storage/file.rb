@@ -777,7 +777,7 @@ module Google
         end
 
         ##
-        # Download the file's contents to a local file or an File-like object.
+        # Downloads the file's contents to a local file or an File-like object.
         #
         # By default, the download is verified by calculating the MD5 digest.
         #
@@ -951,7 +951,14 @@ module Google
         end
 
         ##
-        # Copy the file to a new location.
+        # Copies the file to a new location. Metadata from the source object will
+        # be copied to the destination object unless a block is provided.
+        #
+        # If the optional block for updating metadata fields is provided, only the
+        # updates made in this block will appear in the destination object, and
+        # other metadata fields in the destination object will be empty. To copy
+        # all source object metadata while updating destination object fields in a
+        # block, use the `force_copy_metadata: true` flag.
         #
         # If a [customer-supplied encryption
         # key](https://cloud.google.com/storage/docs/encryption#customer-supplied)
@@ -986,6 +993,11 @@ module Google
         # @param [String] encryption_key Optional. The customer-supplied,
         #   AES-256 encryption key used to encrypt the file, if one was provided
         #   to {Bucket#create_file}.
+        # @param [Boolean] force_copy_metadata Optional. If `true` and if updates
+        #   are made in a block, the metadata for the source object will be copied
+        #   in its entirety to the destination object. Otherwise, only the updates
+        #   made in the yielded block will be applied to the destination object,
+        #   and its other metadata fields will be empty. The default is `nil`.
         # @yield [file] a block yielding a delegate object for updating
         #
         # @return [Google::Cloud::Storage::File]
@@ -1035,12 +1047,13 @@ module Google
         #     f.metadata["copied_from"] = "#{file.bucket}/#{file.name}"
         #   end
         #
-        def copy dest_bucket_or_path, dest_path = nil,
-                 acl: nil, generation: nil, encryption_key: nil
+        def copy dest_bucket_or_path, dest_path = nil, acl: nil, generation: nil, encryption_key: nil,
+                 force_copy_metadata: nil
           rewrite dest_bucket_or_path, dest_path,
                   acl: acl, generation: generation,
                   encryption_key: encryption_key,
-                  new_encryption_key: encryption_key do |updater|
+                  new_encryption_key: encryption_key,
+                  force_copy_metadata: force_copy_metadata do |updater|
             yield updater if block_given?
           end
         end
@@ -1048,7 +1061,14 @@ module Google
         ##
         # [Rewrites](https://cloud.google.com/storage/docs/json_api/v1/objects/rewrite)
         # the file to a new location. Or the same location can be provided to
-        # rewrite the file in place.
+        # rewrite the file in place. Metadata from the source object will
+        # be copied to the destination object unless a block is provided.
+        #
+        # If the optional block for updating metadata fields is provided, only the
+        # updates made in this block will appear in the destination object, and
+        # other metadata fields in the destination object will be empty. To copy
+        # all source object metadata while updating destination object fields in a
+        # block, use the `force_copy_metadata: true` flag.
         #
         # If a [customer-supplied encryption
         # key](https://cloud.google.com/storage/docs/encryption#customer-supplied)
@@ -1096,6 +1116,11 @@ module Google
         #   the same location as the bucket.The Service Account associated with
         #   your project requires access to this encryption key. Do not provide
         #   if `new_encryption_key` is used.
+        # @param [Boolean] force_copy_metadata Optional. If `true` and if updates
+        #   are made in a block, the metadata for the source object will be copied
+        #   in its entirety to the destination object. Otherwise, only the updates
+        #   made in the yielded block will be applied to the destination object,
+        #   and its other metadata fields will be empty. The default is `nil`.
         # @yield [file] a block yielding a delegate object for updating
         #
         # @return [Google::Cloud::Storage::File]
@@ -1189,10 +1214,8 @@ module Google
         #     f.metadata["rewritten_from"] = "#{file.bucket}/#{file.name}"
         #   end
         #
-        def rewrite dest_bucket_or_path, dest_path = nil,
-                    acl: nil, generation: nil,
-                    encryption_key: nil, new_encryption_key: nil,
-                    new_kms_key: nil
+        def rewrite dest_bucket_or_path, dest_path = nil, acl: nil, generation: nil, encryption_key: nil,
+                    new_encryption_key: nil, new_kms_key: nil, force_copy_metadata: nil
           ensure_service!
           dest_bucket, dest_path = fix_rewrite_args dest_bucket_or_path,
                                                     dest_path
@@ -1203,7 +1226,11 @@ module Google
             yield updater
             updater.check_for_changed_metadata!
             if updater.updates.any?
-              update_gapi = updater.gapi
+              update_gapi = if force_copy_metadata
+                              updater.gapi
+                            else
+                              self.class.gapi_from_attrs updater.gapi, updater.updates
+                            end
             end
           end
 
@@ -1678,6 +1705,18 @@ module Google
           end
         end
 
+        ##
+        # @private
+        #
+        def self.gapi_from_attrs gapi, attributes
+          attributes.flatten!
+          return nil if attributes.empty?
+          attr_params = Hash[attributes.map do |attr|
+                               [attr, gapi.send(attr)]
+                             end]
+          Google::Apis::StorageV1::Object.new attr_params
+        end
+
         protected
 
         ##
@@ -1697,7 +1736,7 @@ module Google
         def update_gapi! *attributes
           attributes.flatten!
           return if attributes.empty?
-          update_gapi = gapi_from_attrs attributes
+          update_gapi = self.class.gapi_from_attrs @gapi, attributes
           return if update_gapi.nil?
 
           ensure_service!
@@ -1710,15 +1749,6 @@ module Google
                     service.patch_file \
                       bucket, name, update_gapi, user_project: user_project
                   end
-        end
-
-        def gapi_from_attrs *attributes
-          attributes.flatten!
-          return nil if attributes.empty?
-          attr_params = Hash[attributes.map do |attr|
-            [attr, @gapi.send(attr)]
-          end]
-          Google::Apis::StorageV1::Object.new attr_params
         end
 
         def rewrite_gapi bucket, name, updated_gapi,
