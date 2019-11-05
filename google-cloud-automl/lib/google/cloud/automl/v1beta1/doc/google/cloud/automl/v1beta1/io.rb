@@ -964,7 +964,7 @@ module Google
         #   @return [Google::Cloud::AutoML::V1beta1::GcsDestination]
         #     The Google Cloud Storage location where the model is to be written to.
         #     This location may only be set for the following model formats:
-        #       "tflite", "edgetpu_tflite", "core_ml", "docker".
+        #       "tflite", "edgetpu_tflite", "tf_saved_model", "tf_js", "core_ml".
         #
         #      Under the directory given as the destination a new one with name
         #      "model-export-<model-display-name>-<timestamp-of-export-call>",
@@ -987,7 +987,8 @@ module Google
         #
         #     * For Image Classification mobile-low-latency-1, mobile-versatile-1,
         #       mobile-high-accuracy-1:
-        #       "tflite" (default), "edgetpu_tflite", "tf_saved_model", "docker".
+        #       "tflite" (default), "edgetpu_tflite", "tf_saved_model", "tf_js",
+        #       "docker".
         #
         #     * For Image Classification mobile-core-ml-low-latency-1,
         #       mobile-core-ml-versatile-1, mobile-core-ml-high-accuracy-1:
@@ -998,6 +999,8 @@ module Google
         #     * edgetpu_tflite - Used for [Edge TPU](https://cloud.google.com/edge-tpu/)
         #       devices.
         #     * tf_saved_model - A tensorflow model in SavedModel format.
+        #     * tf_js - A [TensorFlow.js](https://www.tensorflow.org/js) model that can
+        #       be used in the browser and in Node.js using JavaScript.
         #     * docker - Used for Docker containers. Use the params field to customize
         #       the container. The container is verified to work correctly on
         #       ubuntu 16.04 operating system. See more at

@@ -86,6 +86,15 @@ module Google
         #       and used on a mobile device with Core ML afterwards. Expected
         #       to have a higher latency, but should also have a higher
         #       prediction quality than other models.
+        # @!attribute [rw] node_qps
+        #   @return [Float]
+        #     Output only. An approximate number of online prediction QPS that can
+        #     be supported by this model per each node on which it is deployed.
+        # @!attribute [rw] node_count
+        #   @return [Integer]
+        #     Output only. The number of nodes this model is deployed on. A node is an
+        #     abstraction of a machine resource, which can handle online prediction QPS
+        #     as given in the node_qps field.
         class ImageClassificationModelMetadata; end
 
         # Model metadata specific to image object detection.
@@ -121,7 +130,7 @@ module Google
         #     full budget and the stop_reason will be `MODEL_CONVERGED`.
         #     Note, node_hour  = actual_hour * number_of_nodes_invovled.
         #     For model type `cloud-high-accuracy-1`(default) and `cloud-low-latency-1`,
-        #     the train budget must be between 20,000 and 2,000,000 milli node hours,
+        #     the train budget must be between 20,000 and 900,000 milli node hours,
         #     inclusive. The default value is 216, 000 which represents one day in
         #     wall time.
         #     For model type `mobile-low-latency-1`, `mobile-versatile-1`,
@@ -142,7 +151,8 @@ module Google
         #     Input only. The number of nodes to deploy the model on. A node is an
         #     abstraction of a machine resource, which can handle online prediction QPS
         #     as given in the model's
-        #     {Google::Cloud::AutoML::V1p1beta::ImageClassificationModelMetadata#node_qps node_qps}.
+        #
+        #     {Google::Cloud::AutoML::V1beta1::ImageClassificationModelMetadata#node_qps node_qps}.
         #     Must be between 1 and 100, inclusive on both ends.
         class ImageClassificationModelDeploymentMetadata; end
 
