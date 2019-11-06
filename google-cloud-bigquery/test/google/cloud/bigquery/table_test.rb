@@ -96,6 +96,7 @@ describe Google::Cloud::Bigquery::Table, :mock_bigquery do
     table.schema.must_be :frozen?
     table.fields.map(&:name).must_equal table.schema.fields.map(&:name)
     table.headers.must_equal [:name, :age, :score, :pi, :active, :avatar, :started_at, :duration, :target_end, :birthday]
+    table.param_types.must_equal({ name: :STRING, age: :INTEGER, score: :FLOAT, pi: :NUMERIC, active: :BOOLEAN, avatar: :BYTES, started_at: :TIMESTAMP, duration: :TIME, target_end: :DATETIME, birthday: :DATE })
   end
 
   it "knows its streaming buffer attributes" do

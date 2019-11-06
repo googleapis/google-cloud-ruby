@@ -155,6 +155,27 @@ module Google
         end
 
         ##
+        # The types of the fields, using the same format as the optional query
+        # parameter types.
+        #
+        # @return [Hash] A hash with column names as keys, and types as values.
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #   table = dataset.create_table "my_table"
+        #
+        #   schema = table.schema
+        #
+        #   schema.param_types
+        #
+        def param_types
+          Hash[fields.map { |field| [field.name.to_sym, field.param_type] }]
+        end
+
+        ##
         # Retrieve a field by name.
         #
         # @return [Field] A field object.

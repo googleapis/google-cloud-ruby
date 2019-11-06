@@ -201,6 +201,28 @@ module Google
         end
 
         ##
+        # The types of the fields in the data, obtained from the schema of the
+        # table from which the data was read. Types use the same format as the
+        # optional query parameter types.
+        #
+        # @return [Hash] A hash with field names as keys, and types as values.
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #   table = dataset.table "my_table"
+        #
+        #   data = table.data
+        #
+        #   data.param_types
+        #
+        def param_types
+          schema.param_types
+        end
+
+        ##
         # The type of query statement, if valid. Possible values (new values
         # might be added in the future):
         #

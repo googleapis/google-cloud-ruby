@@ -87,6 +87,7 @@ describe Google::Cloud::Bigquery::Table, :reference, :mock_bigquery do
     table.schema.must_be_nil
     table.fields.must_be_nil
     table.headers.must_be_nil
+    table.param_types.must_be_nil
     table.external.must_be_nil
     table.buffer_bytes.must_be_nil
     table.buffer_rows.must_be_nil

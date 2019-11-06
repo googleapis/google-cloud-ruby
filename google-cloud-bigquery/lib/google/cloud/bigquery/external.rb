@@ -964,6 +964,8 @@ module Google
           ##
           # The fields of the schema.
           #
+          # @return [Array<Schema::Field>] An array of field objects.
+          #
           def fields
             schema.fields
           end
@@ -971,8 +973,20 @@ module Google
           ##
           # The names of the columns in the schema.
           #
+          # @return [Array<Symbol>] An array of column names.
+          #
           def headers
             schema.headers
+          end
+
+          ##
+          # The types of the fields in the data in the schema, using the same
+          # format as the optional query parameter types.
+          #
+          # @return [Hash] A hash with field names as keys, and types as values.
+          #
+          def param_types
+            schema.param_types
           end
 
           ##
@@ -1095,6 +1109,8 @@ module Google
           ##
           # The fields of the schema.
           #
+          # @return [Array<Schema::Field>] An array of field objects.
+          #
           def fields
             schema.fields
           end
@@ -1102,8 +1118,20 @@ module Google
           ##
           # The names of the columns in the schema.
           #
+          # @return [Array<Symbol>] An array of column names.
+          #
           def headers
             schema.headers
+          end
+
+          ##
+          # The types of the fields in the data in the schema, using the same
+          # format as the optional query parameter types.
+          #
+          # @return [Hash] A hash with field names as keys, and types as values.
+          #
+          def param_types
+            schema.param_types
           end
 
           ##

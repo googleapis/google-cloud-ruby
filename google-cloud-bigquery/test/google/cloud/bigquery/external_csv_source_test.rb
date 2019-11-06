@@ -225,6 +225,8 @@ describe Google::Cloud::Bigquery::External::CsvSource do
     table.fields.must_equal table.schema.fields
     table.headers.must_equal table.schema.headers
     table.headers.must_equal [:name, :age, :score, :pi, :active, :avatar, :started_at, :duration, :target_end, :birthday]
+    table.param_types.must_equal table.schema.param_types
+    table.param_types.must_equal({ name: :STRING, age: :INTEGER, score: :FLOAT, pi: :NUMERIC, active: :BOOLEAN, avatar: :BYTES, started_at: :TIMESTAMP, duration: :TIME, target_end: :DATETIME, birthday: :DATE })
 
     table.to_gapi.to_h.must_equal table_gapi.to_h
   end
@@ -274,6 +276,8 @@ describe Google::Cloud::Bigquery::External::CsvSource do
     table.fields.must_equal table.schema.fields
     table.headers.must_equal table.schema.headers
     table.headers.must_equal [:name, :age, :score, :pi, :active, :avatar, :started_at, :duration, :target_end, :birthday]
+    table.param_types.must_equal table.schema.param_types
+    table.param_types.must_equal({ name: :STRING, age: :INTEGER, score: :FLOAT, pi: :NUMERIC, active: :BOOLEAN, avatar: :BYTES, started_at: :TIMESTAMP, duration: :TIME, target_end: :DATETIME, birthday: :DATE })
 
     table.to_gapi.to_h.must_equal table_gapi.to_h
   end

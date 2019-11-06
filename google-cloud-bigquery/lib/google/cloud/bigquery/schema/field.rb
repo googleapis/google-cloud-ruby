@@ -261,6 +261,7 @@ module Google
           def record?
             type == "RECORD" || type == "STRUCT"
           end
+          alias struct? record?
 
           ##
           # The nested fields if the type property is set to `RECORD`. Will be
@@ -286,6 +287,36 @@ module Google
           #
           def headers
             fields.map(&:name).map(&:to_sym)
+          end
+
+          ##
+          # The types of the field, using the same format as the optional query
+          # parameter types.
+          #
+          # The parameter types are one of the following BigQuery type codes:
+          #
+          # * `:BOOL`
+          # * `:INT64`
+          # * `:FLOAT64`
+          # * `:NUMERIC`
+          # * `:STRING`
+          # * `:DATETIME`
+          # * `:DATE`
+          # * `:TIMESTAMP`
+          # * `:TIME`
+          # * `:BYTES`
+          # * `Array` - Lists are specified by providing the type code in an array. For example, an array of integers
+          #   are specified as `[:INT64]`.
+          # * `Hash` - Types for STRUCT values (`Hash` objects) are specified using a `Hash` object, where the keys
+          #   are the nested field names, and the values are the the nested field types.
+          #
+          # @return [Symbol, Array, Hash] The type.
+          #
+          def param_type
+            param_type = type.to_sym
+            param_type = Hash[fields.map { |field| [field.name.to_sym, field.param_type] }] if record?
+            param_type = [param_type] if repeated?
+            param_type
           end
 
           ##

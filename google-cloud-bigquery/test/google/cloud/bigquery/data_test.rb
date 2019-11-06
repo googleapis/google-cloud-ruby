@@ -111,6 +111,7 @@ describe Google::Cloud::Bigquery::Data, :mock_bigquery do
     data.schema.must_be :frozen?
     data.fields.must_equal data.schema.fields
     data.headers.must_equal [:name, :age, :score, :pi, :active, :avatar, :started_at, :duration, :target_end, :birthday]
+    data.param_types.must_equal({ name: :STRING, age: :INTEGER, score: :FLOAT, pi: :NUMERIC, active: :BOOLEAN, avatar: :BYTES, started_at: :TIMESTAMP, duration: :TIME, target_end: :DATETIME, birthday: :DATE })
   end
 
   it "handles missing rows and fields" do
