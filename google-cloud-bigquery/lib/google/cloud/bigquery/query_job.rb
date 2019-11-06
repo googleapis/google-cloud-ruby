@@ -611,7 +611,7 @@ module Google
             )
 
             updater = QueryJob::Updater.new service, req
-            updater.params = options[:params] if options[:params]
+            updater.set_params_and_types options[:params], options[:types] if options[:params]
             updater.create = options[:create]
             updater.write = options[:write]
             updater.table = options[:table]
@@ -723,30 +723,113 @@ module Google
           ##
           # Sets the query parameters. Standard SQL only.
           #
-          # @param [Array, Hash] params Used to pass query arguments when the
-          #   `query` string contains either positional (`?`) or named
-          #   (`@myparam`) query parameters. If value passed is an array
-          #   `["foo"]`, the query must use positional query parameters. If
-          #   value passed is a hash `{ myparam: "foo" }`, the query must use
-          #   named query parameters. When set, `legacy_sql` will automatically
-          #   be set to false and `standard_sql` to true.
+          # Use {set_params_and_types} to set both params and types.
+          #
+          # @param [Array, Hash] params Standard SQL only. Used to pass query arguments when the `query` string contains
+          #   either positional (`?`) or named (`@myparam`) query parameters. If value passed is an array `["foo"]`, the
+          #   query must use positional query parameters. If value passed is a hash `{ myparam: "foo" }`, the query must
+          #   use named query parameters. When set, `legacy_sql` will automatically be set to false and `standard_sql`
+          #   to true.
+          #
+          #   Ruby types are mapped to BigQuery types as follows:
+          #
+          #   | BigQuery    | Ruby                                 | Notes                                          |
+          #   |-------------|--------------------------------------|------------------------------------------------|
+          #   | `BOOL`      | `true`/`false`                       |                                                |
+          #   | `INT64`     | `Integer`                            |                                                |
+          #   | `FLOAT64`   | `Float`                              |                                                |
+          #   | `NUMERIC`   | `BigDecimal`                         | Will be rounded to 9 decimal places            |
+          #   | `STRING`    | `String`                             |                                                |
+          #   | `DATETIME`  | `DateTime`                           | `DATETIME` does not support time zone.         |
+          #   | `DATE`      | `Date`                               |                                                |
+          #   | `TIMESTAMP` | `Time`                               |                                                |
+          #   | `TIME`      | `Google::Cloud::BigQuery::Time`      |                                                |
+          #   | `BYTES`     | `File`, `IO`, `StringIO`, or similar |                                                |
+          #   | `ARRAY`     | `Array`                              | Nested arrays, `nil` values are not supported. |
+          #   | `STRUCT`    | `Hash`                               | Hash keys may be strings or symbols.           |
+          #
+          #   See [Data Types](https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types) for an overview
+          #   of each BigQuery data type, including allowed values.
           #
           # @!group Attributes
           def params= params
+            set_params_and_types params
+          end
+
+          ##
+          # Sets the query parameters. Standard SQL only.
+          #
+          # @param [Array, Hash] params Standard SQL only. Used to pass query arguments when the `query` string contains
+          #   either positional (`?`) or named (`@myparam`) query parameters. If value passed is an array `["foo"]`, the
+          #   query must use positional query parameters. If value passed is a hash `{ myparam: "foo" }`, the query must
+          #   use named query parameters. When set, `legacy_sql` will automatically be set to false and `standard_sql`
+          #   to true.
+          #
+          #   Ruby types are mapped to BigQuery types as follows:
+          #
+          #   | BigQuery    | Ruby                                 | Notes                                          |
+          #   |-------------|--------------------------------------|------------------------------------------------|
+          #   | `BOOL`      | `true`/`false`                       |                                                |
+          #   | `INT64`     | `Integer`                            |                                                |
+          #   | `FLOAT64`   | `Float`                              |                                                |
+          #   | `NUMERIC`   | `BigDecimal`                         | Will be rounded to 9 decimal places            |
+          #   | `STRING`    | `String`                             |                                                |
+          #   | `DATETIME`  | `DateTime`                           | `DATETIME` does not support time zone.         |
+          #   | `DATE`      | `Date`                               |                                                |
+          #   | `TIMESTAMP` | `Time`                               |                                                |
+          #   | `TIME`      | `Google::Cloud::BigQuery::Time`      |                                                |
+          #   | `BYTES`     | `File`, `IO`, `StringIO`, or similar |                                                |
+          #   | `ARRAY`     | `Array`                              | Nested arrays, `nil` values are not supported. |
+          #   | `STRUCT`    | `Hash`                               | Hash keys may be strings or symbols.           |
+          #
+          #   See [Data Types](https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types) for an overview
+          #   of each BigQuery data type, including allowed values.
+          # @param [Array, Hash] types Standard SQL only. Types of the SQL parameters in `params`. It is not always to
+          #   infer the right SQL type from a value in `params`. In these cases, `types` must be used to specify the SQL
+          #   type for these values.
+          #
+          #   Must match the value type passed to `params`. This must be an `Array` when the query uses positional query
+          #   parameters. This must be an `Hash` when the query uses named query parameters. The values should be
+          #   BigQuery type codes from the following list:
+          #
+          #   * `:BOOL`
+          #   * `:INT64`
+          #   * `:FLOAT64`
+          #   * `:NUMERIC`
+          #   * `:STRING`
+          #   * `:DATETIME`
+          #   * `:DATE`
+          #   * `:TIMESTAMP`
+          #   * `:TIME`
+          #   * `:BYTES`
+          #   * `Array` - Lists are specified by providing the type code in an array. For example, an array of integers
+          #     are specified as `[:INT64]`.
+          #   * `Hash` - Types for STRUCT values (`Hash` objects) are specified using a `Hash` object, where the keys
+          #     match the `params` hash, and the values are the types value that matches the data.
+          #
+          #   Types are optional.
+          #
+          # @!group Attributes
+          def set_params_and_types params, types = nil
+            types ||= params.class.new
+            raise ArgumentError, "types must use the same format as params" if types.class != params.class
+
             case params
             when Array then
               @gapi.configuration.query.use_legacy_sql = false
               @gapi.configuration.query.parameter_mode = "POSITIONAL"
-              @gapi.configuration.query.query_parameters = params.map { |param| Convert.to_query_param param }
+              @gapi.configuration.query.query_parameters = params.zip(types).map do |param, type|
+                Convert.to_query_param param, type
+              end
             when Hash then
               @gapi.configuration.query.use_legacy_sql = false
               @gapi.configuration.query.parameter_mode = "NAMED"
-              @gapi.configuration.query.query_parameters =
-                params.map do |name, param|
-                  Convert.to_query_param(param).tap { |named_param| named_param.name = String name }
-                end
+              @gapi.configuration.query.query_parameters = params.map do |name, param|
+                type = types[name]
+                Convert.to_query_param(param, type).tap { |named_param| named_param.name = String name }
+              end
             else
-              raise "Query parameters must be an Array or a Hash."
+              raise ArgumentError, "params must be an Array or a Hash"
             end
           end
 
