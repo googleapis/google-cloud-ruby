@@ -1,5 +1,15 @@
 # Release History
 
+### 1.3.0 / 2019-11-06
+
+#### Features
+
+* Add Task#http_request (HttpRequest)
+
+#### Bug Fixes
+
+* Update minimum runtime dependencies
+
 ### 1.2.0 / 2019-10-29
 
 This release require Ruby 2.4 or later.
