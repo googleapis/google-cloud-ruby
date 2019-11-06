@@ -1,5 +1,15 @@
 # Release History
 
+### 0.37.1 / 2019-11-06
+
+#### Bug Fixes
+
+* Update minimum runtime dependencies
+
+#### Documentation
+
+* Update GCS URL used in code examples
+
 ### 0.37.0 / 2019-10-29
 
 This release requires Ruby 2.4 or later.
