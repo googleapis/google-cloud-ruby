@@ -1,5 +1,15 @@
 # Release History
 
+### 0.1.1 / 2019-11-06
+
+#### Bug Fixes
+
+* Update minimum runtime dependencies
+
+#### Documentation
+
+* Clarify which Google Cloud Platform products support auto-discovered credentials
+
 ### 0.1.0 / 2019-10-24
 
 * Renamed gem from grafeas-client to grafeas.
