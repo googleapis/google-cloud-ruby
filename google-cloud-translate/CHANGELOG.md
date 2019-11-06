@@ -1,5 +1,12 @@
 # Release History
 
+### 2.1.0 / 2019-11-06
+
+#### Features
+
+* Update minimum runtime dependencies
+  * Fixes an issue where required dependencies may not be used.
+
 ### 2.0.0 / 2019-10-28
 
 #### ⚠ BREAKING CHANGES
