@@ -1,5 +1,15 @@
 # Release History
 
+### 0.8.0 / 2019-11-06
+
+#### Features
+
+* Add JobQuery#query_language_code
+
+#### Bug Fixes
+
+* Update minimum runtime dependencies
+
 ### 0.7.0 / 2019-10-29
 
 This release requires Ruby 2.4 or later.
