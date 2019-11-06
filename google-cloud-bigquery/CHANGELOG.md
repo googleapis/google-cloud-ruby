@@ -1,5 +1,11 @@
 # Release History
 
+### 1.18.0 / 2019-11-06
+
+#### Features
+
+* Add support for all_users special role in Dataset access
+
 ### 1.17.0 / 2019-10-29
 
 This release requires Ruby 2.4 or later.
