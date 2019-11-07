@@ -2,9 +2,9 @@
 
 ### 0.16.0 / 2019-11-06
 
-#### Features
+#### Other
 
-* Update Ruby dependency to minimum of 2.4 ([#4206](https://www.github.com/googleapis/google-cloud-ruby/issues/4206))
+* Update Ruby dependency to minimum of 2.4
 
 ### 0.15.5 / 2019-08-23
 
