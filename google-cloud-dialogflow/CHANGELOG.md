@@ -1,5 +1,19 @@
 # Release History
 
+### 0.10.0 / 2019-11-06
+
+#### Features
+
+* Add ListSelect#subtitle
+
+#### Bug Fixes
+
+* Update minimum runtime dependencies
+
+#### Documentation
+
+* Update Intent#priority documentation
+
 ### 0.9.0 / 2019-10-29
 
 This release require Ruby 2.4 or later.
