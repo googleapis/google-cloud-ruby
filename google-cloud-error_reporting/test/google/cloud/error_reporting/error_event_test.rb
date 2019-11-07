@@ -74,7 +74,7 @@ describe Google::Cloud::ErrorReporting::ErrorEvent, :mock_error_reporting do
   describe ".from_exception" do
     let(:exception_message) { "A serious error from application" }
     let(:exception) { StandardError.new exception_message }
-    let(:error_message) { "#{exception_message} (#{exception.class})" }
+    let(:error_message) { "StandardError: A serious error from application" }
 
     it "includes exception message when backtrace isn't present" do
       error_event =
