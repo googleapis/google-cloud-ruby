@@ -829,6 +829,7 @@ grafeas-client:
 - v0.2.0
 - v0.1.0
 stackdriver:
+- v0.16.0
 - v0.15.5
 - v0.15.4
 - v0.15.3
