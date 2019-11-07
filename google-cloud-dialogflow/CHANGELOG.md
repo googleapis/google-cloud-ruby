@@ -5,11 +5,14 @@
 #### Features
 
 * Add ListSelect#subtitle
-  * Update Intent#priority documentation
 
 #### Bug Fixes
 
 * Update minimum runtime dependencies
+
+#### Documentation
+
+* Update Intent#priority documentation
 
 ### 0.9.0 / 2019-10-29
 
