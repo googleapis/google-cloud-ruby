@@ -4,6 +4,21 @@
 
 #### Features
 
+* Add optional query parameter types
+  * Allow query parameters to be nil/NULL when providing an optional
+  * Add types argument to the following methods:
+    * Project#query
+    * Project#query_job
+    * Dataset#query
+    * Dataset#query_job
+* Add param types helper methods
+  * Return the BigQuery field type code, using the same format as the
+  * Add Schema::Field#param_type
+  * Add Schema#param_types
+  * Add Data#param_types
+  * Add Table#param_types
+  * Add External::CvsSource#param_types
+  * Add External::JsonSource#param_types
 * Add support for all_users special role in Dataset access
 
 ### 1.17.0 / 2019-10-29
