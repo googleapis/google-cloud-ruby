@@ -149,6 +149,7 @@ google-cloud-container:
 - v0.2.0
 - v0.1.0
 google-cloud-container_analysis:
+- v0.4.1
 - v0.3.2
 - v0.3.1
 - v0.3.0
