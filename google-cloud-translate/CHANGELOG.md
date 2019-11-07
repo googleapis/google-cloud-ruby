@@ -2,7 +2,7 @@
 
 ### 2.1.0 / 2019-11-06
 
-#### Features
+#### Bug Fixes
 
 * Update minimum runtime dependencies
   * Fixes an issue where required dependencies may not be used.
