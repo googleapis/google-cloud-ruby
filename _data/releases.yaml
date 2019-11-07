@@ -809,6 +809,7 @@ google-cloud-webrisk:
 - v0.1.1
 - v0.1.0
 grafeas:
+- v0.1.1
 - v0.1.0
 grafeas-client:
 - v0.4.0
