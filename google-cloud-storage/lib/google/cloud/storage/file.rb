@@ -951,14 +951,15 @@ module Google
         end
 
         ##
-        # Copies the file to a new location. Metadata from the source object will
-        # be copied to the destination object unless a block is provided.
+        # Copies the file to a new location. Metadata excluding ACL from the source
+        # object will be copied to the destination object unless a block is provided.
         #
-        # If the optional block for updating metadata fields is provided, only the
-        # updates made in this block will appear in the destination object, and
-        # other metadata fields in the destination object will be empty. To copy
-        # all source object metadata while updating destination object fields in a
-        # block, use the `force_copy_metadata: true` flag.
+        # If an optional block for updating is provided, only the updates made in
+        # this block will appear in the destination object, and other metadata
+        # fields in the destination object will not be copied. To copy the other
+        # source file metadata fields while updating destination fields in a
+        # block, use the `force_copy_metadata: true` flag, and the client library
+        # will copy metadata from source metadata into the copy request.
         #
         # If a [customer-supplied encryption
         # key](https://cloud.google.com/storage/docs/encryption#customer-supplied)
@@ -994,10 +995,18 @@ module Google
         #   AES-256 encryption key used to encrypt the file, if one was provided
         #   to {Bucket#create_file}.
         # @param [Boolean] force_copy_metadata Optional. If `true` and if updates
-        #   are made in a block, the metadata for the source object will be copied
-        #   in its entirety to the destination object. Otherwise, only the updates
-        #   made in the yielded block will be applied to the destination object,
-        #   and its other metadata fields will be empty. The default is `nil`.
+        #   are made in a block, the following fields will be copied from the
+        #   source file to the destination file (except when changed by updates):
+        #
+        #   * `cache_control`
+        #   * `content_disposition`
+        #   * `content_encoding`
+        #   * `content_language`
+        #   * `content_type`
+        #   * `metadata`
+        #
+        #   If `nil` or `false`, only the updates made in the yielded block will
+        #   be applied to the destination object. The default is `nil`.
         # @yield [file] a block yielding a delegate object for updating
         #
         # @return [Google::Cloud::Storage::File]
@@ -1064,11 +1073,12 @@ module Google
         # rewrite the file in place. Metadata from the source object will
         # be copied to the destination object unless a block is provided.
         #
-        # If the optional block for updating metadata fields is provided, only the
-        # updates made in this block will appear in the destination object, and
-        # other metadata fields in the destination object will be empty. To copy
-        # all source object metadata while updating destination object fields in a
-        # block, use the `force_copy_metadata: true` flag.
+        # If an optional block for updating is provided, only the updates made in
+        # this block will appear in the destination object, and other metadata
+        # fields in the destination object will not be copied. To copy the other
+        # source file metadata fields while updating destination fields in a
+        # block, use the `force_copy_metadata: true` flag, and the client library
+        # will copy metadata from source metadata into the copy request.
         #
         # If a [customer-supplied encryption
         # key](https://cloud.google.com/storage/docs/encryption#customer-supplied)
@@ -1117,10 +1127,18 @@ module Google
         #   your project requires access to this encryption key. Do not provide
         #   if `new_encryption_key` is used.
         # @param [Boolean] force_copy_metadata Optional. If `true` and if updates
-        #   are made in a block, the metadata for the source object will be copied
-        #   in its entirety to the destination object. Otherwise, only the updates
-        #   made in the yielded block will be applied to the destination object,
-        #   and its other metadata fields will be empty. The default is `nil`.
+        #   are made in a block, the following fields will be copied from the
+        #   source file to the destination file (except when changed by updates):
+        #
+        #   * `cache_control`
+        #   * `content_disposition`
+        #   * `content_encoding`
+        #   * `content_language`
+        #   * `content_type`
+        #   * `metadata`
+        #
+        #   If `nil` or `false`, only the updates made in the yielded block will
+        #   be applied to the destination object. The default is `nil`.
         # @yield [file] a block yielding a delegate object for updating
         #
         # @return [Google::Cloud::Storage::File]
@@ -1226,11 +1244,8 @@ module Google
             yield updater
             updater.check_for_changed_metadata!
             if updater.updates.any?
-              update_gapi = if force_copy_metadata
-                              updater.gapi
-                            else
-                              self.class.gapi_from_attrs updater.gapi, updater.updates
-                            end
+              attributes = force_copy_metadata ? (Updater::COPY_ATTRS + updater.updates).uniq : updater.updates
+              update_gapi = self.class.gapi_from_attrs updater.gapi, attributes
             end
           end
 
@@ -1714,6 +1729,9 @@ module Google
           attr_params = Hash[attributes.map do |attr|
                                [attr, gapi.send(attr)]
                              end]
+          # Sending nil metadata results in an Apiary runtime error:
+          # NoMethodError: undefined method `each' for nil:NilClass
+          attr_params.reject! { |k, v| k == :metadata && v.nil? }
           Google::Apis::StorageV1::Object.new attr_params
         end
 
@@ -1822,6 +1840,20 @@ module Google
         class Updater < File
           # @private
           attr_reader :updates, :gapi
+
+          ##
+          # @private
+          # Whitelist of Google::Apis::StorageV1::Object attributes to be
+          # copied when File#copy or File#rewrite is called with
+          # `force_copy_metadata: true`.
+          COPY_ATTRS = [
+            :cache_control,
+            :content_disposition,
+            :content_encoding,
+            :content_language,
+            :content_type,
+            :metadata
+          ].freeze
 
           ##
           # @private Create an Updater object.

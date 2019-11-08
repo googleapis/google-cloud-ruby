@@ -687,7 +687,7 @@ describe Google::Cloud::Storage::File, :lazy, :mock_storage do
 
   it "can copy itself while updating its attributes with force_copy_metadata set to true" do
     mock = Minitest::Mock.new
-    update_file_gapi = file.gapi.dup
+    update_file_gapi = Google::Apis::StorageV1::Object.new
     update_file_gapi.cache_control = "private, max-age=0, no-cache"
     update_file_gapi.content_disposition = "inline; filename=filename.ext"
     update_file_gapi.content_encoding = "deflate"
