@@ -18,7 +18,9 @@ describe Google::Cloud::Storage::Bucket, :post_object, :lazy, :mock_storage do
   let(:bucket_name) { "bucket" }
   let(:bucket) { Google::Cloud::Storage::Bucket.new_lazy bucket_name, storage.service }
 
-  let(:file_path) { "file.ext" }
+  let(:file_path) { "a/b/c/{my_file}.ext" }
+  let(:file_path_encoded) { "a/b/c/%7Bmy_file%7D.ext" }
+  let(:file_path_special_variable) { "a/b/c/${filename}" }
 
   it "uses the credentials' issuer and signing_key to generate signed post objects" do
     Time.stub :now, Time.new(2012,1,1,0,0,0, "+00:00") do
@@ -45,6 +47,7 @@ describe Google::Cloud::Storage::Bucket, :post_object, :lazy, :mock_storage do
       signed_post.url.must_equal Google::Cloud::Storage::GOOGLEAPIS_URL
       signed_post.fields[:GoogleAccessId].must_equal "native_client_email"
       signed_post.fields[:signature].must_equal Base64.strict_encode64("native-signature").delete("\n")
+      signed_post.fields[:key].must_equal [bucket_name, file_path_encoded].join("/")
 
       signing_key_mock.verify
     end
@@ -64,6 +67,28 @@ describe Google::Cloud::Storage::Bucket, :post_object, :lazy, :mock_storage do
     signed_post.url.must_equal Google::Cloud::Storage::GOOGLEAPIS_URL
     signed_post.fields[:GoogleAccessId].must_equal "native_client_email"
     signed_post.fields[:signature].must_equal Base64.strict_encode64("native-signature").delete("\n")
+    signed_post.fields[:key].must_equal [bucket_name, file_path_encoded].join("/")
+
+    signing_key_mock.verify
+  end
+
+  it "gives a signature without URI encoding the special variable path ${filename}" do
+    # "You can also use the ${filename} variable if a user is providing a file name."
+    # https://cloud.google.com/storage/docs/xml-api/post-object
+    signing_key_mock = Minitest::Mock.new
+
+    json_policy = Base64.strict_encode64("{}").delete("\n")
+    signing_key_mock.expect :sign, "native-signature", [OpenSSL::Digest::SHA256, json_policy]
+    credentials.issuer = "native_client_email"
+    credentials.signing_key = signing_key_mock
+
+
+    signed_post = bucket.post_object file_path_special_variable
+
+    signed_post.url.must_equal Google::Cloud::Storage::GOOGLEAPIS_URL
+    signed_post.fields[:GoogleAccessId].must_equal "native_client_email"
+    signed_post.fields[:signature].must_equal Base64.strict_encode64("native-signature").delete("\n")
+    signed_post.fields[:key].must_equal [bucket_name, file_path_special_variable].join("/")
 
     signing_key_mock.verify
   end

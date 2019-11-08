@@ -41,9 +41,20 @@ module Google
           end
 
           ##
-          # The external path to the file.
+          # The external path to the file, URI-encoded.
+          # Will not URI encode the special `${filename}` variable.
+          # "You can also use the ${filename} variable..."
+          # https://cloud.google.com/storage/docs/xml-api/post-object
+          #
           def ext_path
-            Addressable::URI.escape "/#{@bucket}/#{@path}"
+            path = "/#{@bucket}/#{@path}"
+            escaped = Addressable::URI.escape path
+            special_var = "${filename}"
+            # Restore the unencoded `${filename}` variable, if present.
+            if path.include? special_var
+              return escaped.gsub "$%7Bfilename%7D", special_var
+            end
+            escaped
           end
 
           ##
