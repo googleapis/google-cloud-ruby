@@ -77,6 +77,9 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :link_out_suggestion, :message, 10, "google.cloud.dialogflow.v2.Intent.Message.LinkOutSuggestion"
       optional :list_select, :message, 11, "google.cloud.dialogflow.v2.Intent.Message.ListSelect"
       optional :carousel_select, :message, 12, "google.cloud.dialogflow.v2.Intent.Message.CarouselSelect"
+      optional :browse_carousel_card, :message, 22, "google.cloud.dialogflow.v2.Intent.Message.BrowseCarouselCard"
+      optional :table_card, :message, 23, "google.cloud.dialogflow.v2.Intent.Message.TableCard"
+      optional :media_content, :message, 24, "google.cloud.dialogflow.v2.Intent.Message.MediaContent"
     end
   end
   add_message "google.cloud.dialogflow.v2.Intent.Message.Text" do
@@ -155,6 +158,75 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.cloud.dialogflow.v2.Intent.Message.SelectItemInfo" do
     optional :key, :string, 1
     repeated :synonyms, :string, 2
+  end
+  add_message "google.cloud.dialogflow.v2.Intent.Message.MediaContent" do
+    optional :media_type, :enum, 1, "google.cloud.dialogflow.v2.Intent.Message.MediaContent.ResponseMediaType"
+    repeated :media_objects, :message, 2, "google.cloud.dialogflow.v2.Intent.Message.MediaContent.ResponseMediaObject"
+  end
+  add_message "google.cloud.dialogflow.v2.Intent.Message.MediaContent.ResponseMediaObject" do
+    optional :name, :string, 1
+    optional :description, :string, 2
+    optional :content_url, :string, 5
+    oneof :image do
+      optional :large_image, :message, 3, "google.cloud.dialogflow.v2.Intent.Message.Image"
+      optional :icon, :message, 4, "google.cloud.dialogflow.v2.Intent.Message.Image"
+    end
+  end
+  add_enum "google.cloud.dialogflow.v2.Intent.Message.MediaContent.ResponseMediaType" do
+    value :RESPONSE_MEDIA_TYPE_UNSPECIFIED, 0
+    value :AUDIO, 1
+  end
+  add_message "google.cloud.dialogflow.v2.Intent.Message.BrowseCarouselCard" do
+    repeated :items, :message, 1, "google.cloud.dialogflow.v2.Intent.Message.BrowseCarouselCard.BrowseCarouselCardItem"
+    optional :image_display_options, :enum, 2, "google.cloud.dialogflow.v2.Intent.Message.BrowseCarouselCard.ImageDisplayOptions"
+  end
+  add_message "google.cloud.dialogflow.v2.Intent.Message.BrowseCarouselCard.BrowseCarouselCardItem" do
+    optional :open_uri_action, :message, 1, "google.cloud.dialogflow.v2.Intent.Message.BrowseCarouselCard.BrowseCarouselCardItem.OpenUrlAction"
+    optional :title, :string, 2
+    optional :description, :string, 3
+    optional :image, :message, 4, "google.cloud.dialogflow.v2.Intent.Message.Image"
+    optional :footer, :string, 5
+  end
+  add_message "google.cloud.dialogflow.v2.Intent.Message.BrowseCarouselCard.BrowseCarouselCardItem.OpenUrlAction" do
+    optional :url, :string, 1
+    optional :url_type_hint, :enum, 3, "google.cloud.dialogflow.v2.Intent.Message.BrowseCarouselCard.BrowseCarouselCardItem.OpenUrlAction.UrlTypeHint"
+  end
+  add_enum "google.cloud.dialogflow.v2.Intent.Message.BrowseCarouselCard.BrowseCarouselCardItem.OpenUrlAction.UrlTypeHint" do
+    value :URL_TYPE_HINT_UNSPECIFIED, 0
+    value :AMP_ACTION, 1
+    value :AMP_CONTENT, 2
+  end
+  add_enum "google.cloud.dialogflow.v2.Intent.Message.BrowseCarouselCard.ImageDisplayOptions" do
+    value :IMAGE_DISPLAY_OPTIONS_UNSPECIFIED, 0
+    value :GRAY, 1
+    value :WHITE, 2
+    value :CROPPED, 3
+    value :BLURRED_BACKGROUND, 4
+  end
+  add_message "google.cloud.dialogflow.v2.Intent.Message.TableCard" do
+    optional :title, :string, 1
+    optional :subtitle, :string, 2
+    optional :image, :message, 3, "google.cloud.dialogflow.v2.Intent.Message.Image"
+    repeated :column_properties, :message, 4, "google.cloud.dialogflow.v2.Intent.Message.ColumnProperties"
+    repeated :rows, :message, 5, "google.cloud.dialogflow.v2.Intent.Message.TableCardRow"
+    repeated :buttons, :message, 6, "google.cloud.dialogflow.v2.Intent.Message.BasicCard.Button"
+  end
+  add_message "google.cloud.dialogflow.v2.Intent.Message.ColumnProperties" do
+    optional :header, :string, 1
+    optional :horizontal_alignment, :enum, 2, "google.cloud.dialogflow.v2.Intent.Message.ColumnProperties.HorizontalAlignment"
+  end
+  add_enum "google.cloud.dialogflow.v2.Intent.Message.ColumnProperties.HorizontalAlignment" do
+    value :HORIZONTAL_ALIGNMENT_UNSPECIFIED, 0
+    value :LEADING, 1
+    value :CENTER, 2
+    value :TRAILING, 3
+  end
+  add_message "google.cloud.dialogflow.v2.Intent.Message.TableCardRow" do
+    repeated :cells, :message, 1, "google.cloud.dialogflow.v2.Intent.Message.TableCardCell"
+    optional :divider_after, :bool, 2
+  end
+  add_message "google.cloud.dialogflow.v2.Intent.Message.TableCardCell" do
+    optional :text, :string, 1
   end
   add_enum "google.cloud.dialogflow.v2.Intent.Message.Platform" do
     value :PLATFORM_UNSPECIFIED, 0
@@ -262,6 +334,19 @@ module Google
         Intent::Message::CarouselSelect = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.Intent.Message.CarouselSelect").msgclass
         Intent::Message::CarouselSelect::Item = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.Intent.Message.CarouselSelect.Item").msgclass
         Intent::Message::SelectItemInfo = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.Intent.Message.SelectItemInfo").msgclass
+        Intent::Message::MediaContent = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.Intent.Message.MediaContent").msgclass
+        Intent::Message::MediaContent::ResponseMediaObject = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.Intent.Message.MediaContent.ResponseMediaObject").msgclass
+        Intent::Message::MediaContent::ResponseMediaType = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.Intent.Message.MediaContent.ResponseMediaType").enummodule
+        Intent::Message::BrowseCarouselCard = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.Intent.Message.BrowseCarouselCard").msgclass
+        Intent::Message::BrowseCarouselCard::BrowseCarouselCardItem = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.Intent.Message.BrowseCarouselCard.BrowseCarouselCardItem").msgclass
+        Intent::Message::BrowseCarouselCard::BrowseCarouselCardItem::OpenUrlAction = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.Intent.Message.BrowseCarouselCard.BrowseCarouselCardItem.OpenUrlAction").msgclass
+        Intent::Message::BrowseCarouselCard::BrowseCarouselCardItem::OpenUrlAction::UrlTypeHint = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.Intent.Message.BrowseCarouselCard.BrowseCarouselCardItem.OpenUrlAction.UrlTypeHint").enummodule
+        Intent::Message::BrowseCarouselCard::ImageDisplayOptions = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.Intent.Message.BrowseCarouselCard.ImageDisplayOptions").enummodule
+        Intent::Message::TableCard = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.Intent.Message.TableCard").msgclass
+        Intent::Message::ColumnProperties = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.Intent.Message.ColumnProperties").msgclass
+        Intent::Message::ColumnProperties::HorizontalAlignment = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.Intent.Message.ColumnProperties.HorizontalAlignment").enummodule
+        Intent::Message::TableCardRow = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.Intent.Message.TableCardRow").msgclass
+        Intent::Message::TableCardCell = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.Intent.Message.TableCardCell").msgclass
         Intent::Message::Platform = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.Intent.Message.Platform").enummodule
         Intent::FollowupIntentInfo = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.Intent.FollowupIntentInfo").msgclass
         Intent::WebhookState = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.Intent.WebhookState").enummodule

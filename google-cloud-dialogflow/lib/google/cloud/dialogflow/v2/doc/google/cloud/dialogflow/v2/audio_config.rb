@@ -64,12 +64,13 @@ module Google
         # @!attribute [rw] name
         #   @return [String]
         #     Optional. The name of the voice. If not set, the service will choose a
-        #     voice based on the other parameters such as language_code and gender.
+        #     voice based on the other parameters such as language_code and
+        #     {Google::Cloud::Dialogflow::V2::VoiceSelectionParams#ssml_gender ssml_gender}.
         # @!attribute [rw] ssml_gender
         #   @return [Google::Cloud::Dialogflow::V2::SsmlVoiceGender]
         #     Optional. The preferred gender of the voice. If not set, the service will
         #     choose a voice based on the other parameters such as language_code and
-        #     name. Note that this is only a preference, not requirement. If a
+        #     {Google::Cloud::Dialogflow::V2::VoiceSelectionParams#name name}. Note that this is only a preference, not requirement. If a
         #     voice of the appropriate gender is not available, the synthesizer should
         #     substitute a voice with a different gender rather than failing the request.
         class VoiceSelectionParams; end

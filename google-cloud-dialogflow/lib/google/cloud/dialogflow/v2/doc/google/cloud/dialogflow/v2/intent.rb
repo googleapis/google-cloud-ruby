@@ -262,6 +262,15 @@ module Google
           # @!attribute [rw] carousel_select
           #   @return [Google::Cloud::Dialogflow::V2::Intent::Message::CarouselSelect]
           #     The carousel card response for Actions on Google.
+          # @!attribute [rw] browse_carousel_card
+          #   @return [Google::Cloud::Dialogflow::V2::Intent::Message::BrowseCarouselCard]
+          #     Browse carousel card for Actions on Google.
+          # @!attribute [rw] table_card
+          #   @return [Google::Cloud::Dialogflow::V2::Intent::Message::TableCard]
+          #     Table card for Actions on Google.
+          # @!attribute [rw] media_content
+          #   @return [Google::Cloud::Dialogflow::V2::Intent::Message::MediaContent]
+          #     The media content card for Actions on Google.
           # @!attribute [rw] platform
           #   @return [Google::Cloud::Dialogflow::V2::Intent::Message::Platform]
           #     Optional. The platform that this message is intended for.
@@ -456,6 +465,186 @@ module Google
             #     Optional. A list of synonyms that can also be used to trigger this
             #     item in dialog.
             class SelectItemInfo; end
+
+            # The media content card for Actions on Google.
+            # @!attribute [rw] media_type
+            #   @return [Google::Cloud::Dialogflow::V2::Intent::Message::MediaContent::ResponseMediaType]
+            #     Optional. What type of media is the content (ie "audio").
+            # @!attribute [rw] media_objects
+            #   @return [Array<Google::Cloud::Dialogflow::V2::Intent::Message::MediaContent::ResponseMediaObject>]
+            #     Required. List of media objects.
+            class MediaContent
+              # Response media object for media content card.
+              # @!attribute [rw] name
+              #   @return [String]
+              #     Required. Name of media card.
+              # @!attribute [rw] description
+              #   @return [String]
+              #     Optional. Description of media card.
+              # @!attribute [rw] large_image
+              #   @return [Google::Cloud::Dialogflow::V2::Intent::Message::Image]
+              #     Optional. Image to display above media content.
+              # @!attribute [rw] icon
+              #   @return [Google::Cloud::Dialogflow::V2::Intent::Message::Image]
+              #     Optional. Icon to display above media content.
+              # @!attribute [rw] content_url
+              #   @return [String]
+              #     Required. Url where the media is stored.
+              class ResponseMediaObject; end
+
+              # Format of response media type.
+              module ResponseMediaType
+                # Unspecified.
+                RESPONSE_MEDIA_TYPE_UNSPECIFIED = 0
+
+                # Response media type is audio.
+                AUDIO = 1
+              end
+            end
+
+            # Browse Carousel Card for Actions on Google.
+            # https://developers.google.com/actions/assistant/responses#browsing_carousel
+            # @!attribute [rw] items
+            #   @return [Array<Google::Cloud::Dialogflow::V2::Intent::Message::BrowseCarouselCard::BrowseCarouselCardItem>]
+            #     Required. List of items in the Browse Carousel Card. Minimum of two
+            #     items, maximum of ten.
+            # @!attribute [rw] image_display_options
+            #   @return [Google::Cloud::Dialogflow::V2::Intent::Message::BrowseCarouselCard::ImageDisplayOptions]
+            #     Optional. Settings for displaying the image. Applies to every image in
+            #     {Google::Cloud::Dialogflow::V2::Intent::Message::BrowseCarouselCard#items items}.
+            class BrowseCarouselCard
+              # Browsing carousel tile
+              # @!attribute [rw] open_uri_action
+              #   @return [Google::Cloud::Dialogflow::V2::Intent::Message::BrowseCarouselCard::BrowseCarouselCardItem::OpenUrlAction]
+              #     Required. Action to present to the user.
+              # @!attribute [rw] title
+              #   @return [String]
+              #     Required. Title of the carousel item. Maximum of two lines of text.
+              # @!attribute [rw] description
+              #   @return [String]
+              #     Optional. Description of the carousel item. Maximum of four lines of
+              #     text.
+              # @!attribute [rw] image
+              #   @return [Google::Cloud::Dialogflow::V2::Intent::Message::Image]
+              #     Optional. Hero image for the carousel item.
+              # @!attribute [rw] footer
+              #   @return [String]
+              #     Optional. Text that appears at the bottom of the Browse Carousel
+              #     Card. Maximum of one line of text.
+              class BrowseCarouselCardItem
+                # Actions on Google action to open a given url.
+                # @!attribute [rw] url
+                #   @return [String]
+                #     Required. URL
+                # @!attribute [rw] url_type_hint
+                #   @return [Google::Cloud::Dialogflow::V2::Intent::Message::BrowseCarouselCard::BrowseCarouselCardItem::OpenUrlAction::UrlTypeHint]
+                #     Optional. Specifies the type of viewer that is used when opening
+                #     the URL. Defaults to opening via web browser.
+                class OpenUrlAction
+                  # Type of the URI.
+                  module UrlTypeHint
+                    # Unspecified
+                    URL_TYPE_HINT_UNSPECIFIED = 0
+
+                    # Url would be an amp action
+                    AMP_ACTION = 1
+
+                    # URL that points directly to AMP content, or to a canonical URL
+                    # which refers to AMP content via <link rel="amphtml">.
+                    AMP_CONTENT = 2
+                  end
+                end
+              end
+
+              # Image display options for Actions on Google. This should be used for
+              # when the image's aspect ratio does not match the image container's
+              # aspect ratio.
+              module ImageDisplayOptions
+                # Fill the gaps between the image and the image container with gray
+                # bars.
+                IMAGE_DISPLAY_OPTIONS_UNSPECIFIED = 0
+
+                # Fill the gaps between the image and the image container with gray
+                # bars.
+                GRAY = 1
+
+                # Fill the gaps between the image and the image container with white
+                # bars.
+                WHITE = 2
+
+                # Image is scaled such that the image width and height match or exceed
+                # the container dimensions. This may crop the top and bottom of the
+                # image if the scaled image height is greater than the container
+                # height, or crop the left and right of the image if the scaled image
+                # width is greater than the container width. This is similar to "Zoom
+                # Mode" on a widescreen TV when playing a 4:3 video.
+                CROPPED = 3
+
+                # Pad the gaps between image and image frame with a blurred copy of the
+                # same image.
+                BLURRED_BACKGROUND = 4
+              end
+            end
+
+            # Table card for Actions on Google.
+            # @!attribute [rw] title
+            #   @return [String]
+            #     Required. Title of the card.
+            # @!attribute [rw] subtitle
+            #   @return [String]
+            #     Optional. Subtitle to the title.
+            # @!attribute [rw] image
+            #   @return [Google::Cloud::Dialogflow::V2::Intent::Message::Image]
+            #     Optional. Image which should be displayed on the card.
+            # @!attribute [rw] column_properties
+            #   @return [Array<Google::Cloud::Dialogflow::V2::Intent::Message::ColumnProperties>]
+            #     Optional. Display properties for the columns in this table.
+            # @!attribute [rw] rows
+            #   @return [Array<Google::Cloud::Dialogflow::V2::Intent::Message::TableCardRow>]
+            #     Optional. Rows in this table of data.
+            # @!attribute [rw] buttons
+            #   @return [Array<Google::Cloud::Dialogflow::V2::Intent::Message::BasicCard::Button>]
+            #     Optional. List of buttons for the card.
+            class TableCard; end
+
+            # Column properties for {Google::Cloud::Dialogflow::V2::Intent::Message::TableCard TableCard}.
+            # @!attribute [rw] header
+            #   @return [String]
+            #     Required. Column heading.
+            # @!attribute [rw] horizontal_alignment
+            #   @return [Google::Cloud::Dialogflow::V2::Intent::Message::ColumnProperties::HorizontalAlignment]
+            #     Optional. Defines text alignment for all cells in this column.
+            class ColumnProperties
+              # Text alignments within a cell.
+              module HorizontalAlignment
+                # Text is aligned to the leading edge of the column.
+                HORIZONTAL_ALIGNMENT_UNSPECIFIED = 0
+
+                # Text is aligned to the leading edge of the column.
+                LEADING = 1
+
+                # Text is centered in the column.
+                CENTER = 2
+
+                # Text is aligned to the trailing edge of the column.
+                TRAILING = 3
+              end
+            end
+
+            # Row of {Google::Cloud::Dialogflow::V2::Intent::Message::TableCard TableCard}.
+            # @!attribute [rw] cells
+            #   @return [Array<Google::Cloud::Dialogflow::V2::Intent::Message::TableCardCell>]
+            #     Optional. List of cells that make up this row.
+            # @!attribute [rw] divider_after
+            #   @return [true, false]
+            #     Optional. Whether to add a visual divider after this row.
+            class TableCardRow; end
+
+            # Cell of {Google::Cloud::Dialogflow::V2::Intent::Message::TableCardRow TableCardRow}.
+            # @!attribute [rw] text
+            #   @return [String]
+            #     Required. Text in this cell.
+            class TableCardCell; end
 
             # Represents different platforms that a rich message can be intended for.
             module Platform
