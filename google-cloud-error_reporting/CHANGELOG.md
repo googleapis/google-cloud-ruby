@@ -1,5 +1,11 @@
 # Release History
 
+### 0.34.0 / 2019-11-11
+
+#### Features
+
+* Prefix error message with the error name instead of the first line of the backtrace
+
 ### 0.33.1 / 2019-11-06
 
 #### Bug Fixes
