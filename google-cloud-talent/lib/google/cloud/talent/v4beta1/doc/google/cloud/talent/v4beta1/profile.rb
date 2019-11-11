@@ -318,7 +318,7 @@ module Google
             RESUME_TYPE_UNSPECIFIED = 0
 
             # The profile contents in HR-XML format.
-            # See http://schemas.liquid-technologies.com/hr-xml/2007-04-15/ for more
+            # See https://schemas.liquid-technologies.com/hr-xml/2007-04-15/ for more
             # information about Human Resources XML.
             HRXML = 1
 
@@ -475,7 +475,7 @@ module Google
             # or LANDLINE number. The [phone
             # usage][google.cloud.talent.v4beta1.ContactInfoUsage] should be set to
             # PERSONAL for these phone types. Some more information can be found here:
-            # http://en.wikipedia.org/wiki/Personal_Numbers
+            # https://en.wikipedia.org/wiki/Personal_Numbers
             VIRTUAL = 7
 
             # Voice over IP numbers. This includes TSoIP (Telephony Service over IP).

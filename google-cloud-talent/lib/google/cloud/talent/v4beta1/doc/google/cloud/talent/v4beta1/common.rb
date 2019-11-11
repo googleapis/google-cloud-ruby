@@ -602,8 +602,8 @@ module Google
           # In the context of
           # {Google::Cloud::Talent::V4beta1::Profile#availability_signals Profile#availability_signals},
           # this signal is related to the candidate's most recent application.
-          # {Profile#availability_signals#last_update_time last_update_time} is
-          # calculated from
+          # {Google::Cloud::Talent::V4beta1::AvailabilitySignal#last_update_time last_update_time}
+          # is calculated from
           # max({Google::Cloud::Talent::V4beta1::Application#create_time Application#create_time})
           # from all {Google::Cloud::Talent::V4beta1::Application Application} records
           # where {Google::Cloud::Talent::V4beta1::Application#source Application#source}
@@ -618,18 +618,19 @@ module Google
           # {Google::Cloud::Talent::V4beta1::AvailabilityFilter AvailabilityFilter}, the
           # filter is applied on
           # {Google::Cloud::Talent::V4beta1::Profile#availability_signals Profile#availability_signals}
-          # where {Profile#availability_signals#type type} is JOB_APPLICATION.
+          # where {Google::Cloud::Talent::V4beta1::AvailabilitySignal#type type} is
+          # JOB_APPLICATION.
           JOB_APPLICATION = 1
 
           # Resume update signal.
           #
           # In the context of
           # {Google::Cloud::Talent::V4beta1::Profile#availability_signals Profile#availability_signals},
-          # this signal is related to the candidate’s most recent update to their
+          # this signal is related to the candidate's most recent update to their
           # resume. For a
           # {Google::Cloud::Talent::V4beta1::SummarizedProfile#summary SummarizedProfile#summary},
-          # {Profile#availability_signals#last_update_time last_update_time} is
-          # calculated from
+          # {Google::Cloud::Talent::V4beta1::AvailabilitySignal#last_update_time last_update_time}
+          # is calculated from
           # max({Google::Cloud::Talent::V4beta1::Profile#resume_update_time Profile#resume_update_time})
           # from all
           # {Google::Cloud::Talent::V4beta1::SummarizedProfile#profiles SummarizedProfile#profiles}.
@@ -638,18 +639,19 @@ module Google
           # {Google::Cloud::Talent::V4beta1::AvailabilityFilter AvailabilityFilter}, the
           # filter is applied on
           # {Google::Cloud::Talent::V4beta1::Profile#availability_signals Profile#availability_signals}
-          # where {Profile#availability_signals#type type} is RESUME_UPDATE.
+          # where {Google::Cloud::Talent::V4beta1::AvailabilitySignal#type type} is
+          # RESUME_UPDATE.
           RESUME_UPDATE = 2
 
           # Candidate update signal.
           #
           # In the context of
           # {Google::Cloud::Talent::V4beta1::Profile#availability_signals Profile#availability_signals},
-          # this signal is related to the candidate’s most recent update to their
+          # this signal is related to the candidate's most recent update to their
           # profile. For a
           # {Google::Cloud::Talent::V4beta1::SummarizedProfile#summary SummarizedProfile#summary},
-          # {Profile#availability_signals#last_update_time last_update_time} is
-          # calculated from
+          # {Google::Cloud::Talent::V4beta1::AvailabilitySignal#last_update_time last_update_time}
+          # is calculated from
           # max({Google::Cloud::Talent::V4beta1::Profile#candidate_update_time Profile#candidate_update_time})
           # from all
           # {Google::Cloud::Talent::V4beta1::SummarizedProfile#profiles SummarizedProfile#profiles}.
@@ -658,16 +660,17 @@ module Google
           # {Google::Cloud::Talent::V4beta1::AvailabilityFilter AvailabilityFilter}, the
           # filter is applied on
           # {Google::Cloud::Talent::V4beta1::Profile#availability_signals Profile#availability_signals}
-          # where {Profile#availability_signals#type type} is CANDIDATE_UPDATE.
+          # where {Google::Cloud::Talent::V4beta1::AvailabilitySignal#type type} is
+          # CANDIDATE_UPDATE.
           CANDIDATE_UPDATE = 3
 
           # Client submission signal.
           #
           # In the context of
           # {Google::Cloud::Talent::V4beta1::Profile#availability_signals Profile#availability_signals},
-          # this signal is related to the candidate’s most recent submission.
-          # {Profile#availability_signals#last_update_time last_update_time} is
-          # calculated from
+          # this signal is related to the candidate's most recent submission.
+          # {Google::Cloud::Talent::V4beta1::AvailabilitySignal#last_update_time last_update_time}
+          # is calculated from
           # max({Google::Cloud::Talent::V4beta1::Application#create_time Application#create_time})
           # from all {Google::Cloud::Talent::V4beta1::Application Application} records
           # where {Google::Cloud::Talent::V4beta1::Application#stage Application#stage} is
@@ -682,7 +685,8 @@ module Google
           # {Google::Cloud::Talent::V4beta1::AvailabilityFilter AvailabilityFilter}, the
           # filter is applied on
           # {Google::Cloud::Talent::V4beta1::Profile#availability_signals Profile#availability_signals}
-          # where {Profile#availability_signals#type type} is CLIENT_SUBMISSION.
+          # where {Google::Cloud::Talent::V4beta1::AvailabilitySignal#type type} is
+          # CLIENT_SUBMISSION.
           CLIENT_SUBMISSION = 4
         end
 

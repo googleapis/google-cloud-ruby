@@ -1482,7 +1482,7 @@ module Google
           #   "projects/foo/tenant/bar". If tenant id is unspecified, a default tenant
           #   is created. For example, "projects/foo".
           # @param jobs [Array<Google::Cloud::Talent::V4beta1::Job | Hash>]
-          #   The jobs to be updated.
+          #   Required. The jobs to be updated.
           #   A hash of the same form as `Google::Cloud::Talent::V4beta1::Job`
           #   can also be provided.
           # @param update_mask [Google::Protobuf::FieldMask | Hash]

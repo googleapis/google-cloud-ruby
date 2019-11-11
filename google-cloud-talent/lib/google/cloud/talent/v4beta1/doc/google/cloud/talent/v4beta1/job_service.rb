@@ -664,7 +664,7 @@ module Google
         #     is created. For example, "projects/foo".
         # @!attribute [rw] jobs
         #   @return [Array<Google::Cloud::Talent::V4beta1::Job>]
-        #     The jobs to be updated.
+        #     Required. The jobs to be updated.
         # @!attribute [rw] update_mask
         #   @return [Google::Protobuf::FieldMask]
         #     Strongly recommended for the best service experience. Be aware that it will
