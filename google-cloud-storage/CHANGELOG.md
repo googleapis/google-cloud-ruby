@@ -1,5 +1,15 @@
 # Release History
 
+### 1.24.0 / 2019-11-12
+
+#### Features
+
+* Add force_copy_metadata to File#copy and #rewrite
+
+#### Bug Fixes
+
+* Update #post_object to support special variable ${filename}
+
 ### 1.23.0 / 2019-11-05
 
 #### Features
