@@ -477,10 +477,52 @@ describe Google::Cloud::Storage::File, :storage do
   end
 
   it "should copy an existing file" do
-    uploaded = bucket.create_file files[:logo][:path], "CloudLogo"
+    uploaded = bucket.create_file files[:logo][:path], "CloudLogo", acl: "public_read", content_language: "en"
+    uploaded.acl.readers.must_include "allUsers" # has "public_read"
+    uploaded.content_language.must_equal "en"
+
     copied = try_with_backoff "copying existing file" do
       uploaded.copy "CloudLogoCopy"
     end
+
+    uploaded.name.must_equal "CloudLogo"
+    uploaded.content_language.must_equal "en"
+    copied.name.must_equal "CloudLogoCopy"
+    copied.acl.readers.wont_include "allUsers" # does NOT have "public_read"
+    copied.content_language.must_equal "en"
+    copied.size.must_equal uploaded.size
+
+    Tempfile.open ["CloudLogo", ".png"] do |tmpfile1|
+      tmpfile1.binmode
+      Tempfile.open ["CloudLogoCopy", ".png"] do |tmpfile2|
+        tmpfile2.binmode
+        downloaded1 = uploaded.download tmpfile1
+        downloaded2 = copied.download tmpfile2
+        downloaded1.size.must_equal downloaded2.size
+
+        File.read(downloaded1.path, mode: "rb").must_equal File.read(downloaded2.path, mode: "rb")
+      end
+    end
+
+    uploaded.delete
+    copied.delete
+  end
+
+  it "should copy an existing file, with updates" do
+    uploaded = bucket.create_file files[:logo][:path], "CloudLogo", acl: "public_read", content_language: "en", content_type: "image/png"
+    uploaded.acl.readers.must_include "allUsers" # has "public_read"
+    uploaded.content_language.must_equal "en"
+    uploaded.content_type.must_equal "image/png"
+
+    copied = try_with_backoff "copying existing file" do
+      uploaded.copy "CloudLogoCopy" do |copy|
+        copy.content_language = "de"
+      end
+    end
+    uploaded.content_language.must_equal "en"
+    copied.acl.readers.wont_include "allUsers" # does NOT have "public_read"
+    copied.content_language.must_equal "de"
+    copied.content_type.must_be :nil?
 
     uploaded.name.must_equal "CloudLogo"
     copied.name.must_equal "CloudLogoCopy"
@@ -502,20 +544,98 @@ describe Google::Cloud::Storage::File, :storage do
     copied.delete
   end
 
-  it "should copy an existing file, with updates" do
-    uploaded = bucket.create_file files[:logo][:path], "CloudLogo",
-                                  content_language: "en"
+  it "should copy an existing file, with force_copy_metadata set to true" do
+    uploaded = bucket.create_file files[:logo][:path], "CloudLogo", acl: "public_read", content_language: "en", content_type: "image/png"
+    uploaded.acl.readers.must_include "allUsers" # has "public_read"
     uploaded.content_language.must_equal "en"
+    uploaded.content_type.must_equal "image/png"
+    uploaded.metadata.must_be :empty?
 
     copied = try_with_backoff "copying existing file" do
-      uploaded.copy "CloudLogoCopy" do |copy|
+      uploaded.copy "CloudLogoCopy", force_copy_metadata: true do |copy|
         copy.content_language = "de"
       end
     end
+    uploaded.content_language.must_equal "en"
+    copied2 = bucket.file copied.name
+    copied2.acl.readers.wont_include "allUsers" # does NOT have "public_read"
+    copied.acl.readers.wont_include "allUsers" # does NOT have "public_read"
     copied.content_language.must_equal "de"
+    copied.content_type.must_equal "image/png"
+    copied.metadata.must_be :empty?
 
     uploaded.name.must_equal "CloudLogo"
     copied.name.must_equal "CloudLogoCopy"
+    copied.size.must_equal uploaded.size
+
+    Tempfile.open ["CloudLogo", ".png"] do |tmpfile1|
+      tmpfile1.binmode
+      Tempfile.open ["CloudLogoCopy", ".png"] do |tmpfile2|
+        tmpfile2.binmode
+        downloaded1 = uploaded.download tmpfile1
+        downloaded2 = copied.download tmpfile2
+        downloaded1.size.must_equal downloaded2.size
+
+        File.read(downloaded1.path, mode: "rb").must_equal File.read(downloaded2.path, mode: "rb")
+      end
+    end
+
+    uploaded.delete
+    copied.delete
+  end
+
+  it "should rewrite an existing file, with updates" do
+    uploaded = bucket.create_file files[:logo][:path], "CloudLogo.png"
+    uploaded.cache_control.must_be :nil?
+    uploaded.content_type.must_equal "image/png"
+
+    copied = try_with_backoff "rewriting existing file" do
+      uploaded.rewrite "CloudLogoCopy.png" do |f|
+        f.cache_control = "public, max-age: 7200"
+      end
+    end
+    uploaded.cache_control.must_be :nil?
+    uploaded.content_type.must_equal "image/png"
+    copied.cache_control.must_equal "public, max-age: 7200"
+    copied.content_type.must_be :nil?
+
+    uploaded.name.must_equal "CloudLogo.png"
+    copied.name.must_equal "CloudLogoCopy.png"
+    copied.size.must_equal uploaded.size
+
+    Tempfile.open ["CloudLogo", ".png"] do |tmpfile1|
+      tmpfile1.binmode
+      Tempfile.open ["CloudLogoCopy", ".png"] do |tmpfile2|
+        tmpfile2.binmode
+        downloaded1 = uploaded.download tmpfile1
+        downloaded2 = copied.download tmpfile2
+        downloaded1.size.must_equal downloaded2.size
+
+        File.read(downloaded1.path, mode: "rb").must_equal File.read(downloaded2.path, mode: "rb")
+      end
+    end
+
+    uploaded.delete
+    copied.delete
+  end
+
+  it "should rewrite an existing file, with force_copy_metadata set to true" do
+    uploaded = bucket.create_file files[:logo][:path], "CloudLogo.png"
+    uploaded.cache_control.must_be :nil?
+    uploaded.content_type.must_equal "image/png"
+
+    copied = try_with_backoff "rewriting existing file" do
+      uploaded.rewrite "CloudLogoCopy.png", force_copy_metadata: true do |f|
+        f.cache_control = "public, max-age: 7200"
+      end
+    end
+    uploaded.cache_control.must_be :nil?
+    uploaded.content_type.must_equal "image/png"
+    copied.cache_control.must_equal "public, max-age: 7200"
+    copied.content_type.must_equal "image/png"
+
+    uploaded.name.must_equal "CloudLogo.png"
+    copied.name.must_equal "CloudLogoCopy.png"
     copied.size.must_equal uploaded.size
 
     Tempfile.open ["CloudLogo", ".png"] do |tmpfile1|
