@@ -47,8 +47,8 @@ module Google
               # have a name of the format `<database_name>/operations/<operation_id>` and
               # can be used to track preparation of the database. The
               # [metadata][google.longrunning.Operation.metadata] field type is
-              # [CreateDatabaseMetadata][google.spanner.admin.database.v1.CreateDatabaseMetadata]. The
-              # [response][google.longrunning.Operation.response] field type is
+              # [CreateDatabaseMetadata][google.spanner.admin.database.v1.CreateDatabaseMetadata].
+              # The [response][google.longrunning.Operation.response] field type is
               # [Database][google.spanner.admin.database.v1.Database], if successful.
               rpc :CreateDatabase, CreateDatabaseRequest, Google::Longrunning::Operation
               # Gets the state of a Cloud Spanner database.
@@ -59,7 +59,8 @@ module Google
               # the format `<database_name>/operations/<operation_id>` and can be used to
               # track execution of the schema change(s). The
               # [metadata][google.longrunning.Operation.metadata] field type is
-              # [UpdateDatabaseDdlMetadata][google.spanner.admin.database.v1.UpdateDatabaseDdlMetadata].  The operation has no response.
+              # [UpdateDatabaseDdlMetadata][google.spanner.admin.database.v1.UpdateDatabaseDdlMetadata].
+              # The operation has no response.
               rpc :UpdateDatabaseDdl, UpdateDatabaseDdlRequest, Google::Longrunning::Operation
               # Drops (aka deletes) a Cloud Spanner database.
               rpc :DropDatabase, DropDatabaseRequest, Google::Protobuf::Empty

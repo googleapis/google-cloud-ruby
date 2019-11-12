@@ -964,7 +964,6 @@ describe Google::Cloud::Spanner::V1::SpannerClient do
     it 'invokes commit without error' do
       # Create request parameters
       formatted_session = Google::Cloud::Spanner::V1::SpannerClient.session_path("[PROJECT]", "[INSTANCE]", "[DATABASE]", "[SESSION]")
-      mutations = []
 
       # Create expected grpc response
       expected_response = {}
@@ -974,10 +973,6 @@ describe Google::Cloud::Spanner::V1::SpannerClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Spanner::V1::CommitRequest, request)
         assert_equal(formatted_session, request.session)
-        mutations = mutations.map do |req|
-          Google::Gax::to_proto(req, Google::Spanner::V1::Mutation)
-        end
-        assert_equal(mutations, request.mutations)
         OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub_v1.new(:commit, mock_method)
@@ -990,13 +985,13 @@ describe Google::Cloud::Spanner::V1::SpannerClient do
           client = Google::Cloud::Spanner::V1::SpannerClient.new
 
           # Call method
-          response = client.commit(formatted_session, mutations)
+          response = client.commit(formatted_session)
 
           # Verify the response
           assert_equal(expected_response, response)
 
           # Call method with block
-          client.commit(formatted_session, mutations) do |response, operation|
+          client.commit(formatted_session) do |response, operation|
             # Verify the response
             assert_equal(expected_response, response)
             refute_nil(operation)
@@ -1008,16 +1003,11 @@ describe Google::Cloud::Spanner::V1::SpannerClient do
     it 'invokes commit with error' do
       # Create request parameters
       formatted_session = Google::Cloud::Spanner::V1::SpannerClient.session_path("[PROJECT]", "[INSTANCE]", "[DATABASE]", "[SESSION]")
-      mutations = []
 
       # Mock Grpc layer
       mock_method = proc do |request|
         assert_instance_of(Google::Spanner::V1::CommitRequest, request)
         assert_equal(formatted_session, request.session)
-        mutations = mutations.map do |req|
-          Google::Gax::to_proto(req, Google::Spanner::V1::Mutation)
-        end
-        assert_equal(mutations, request.mutations)
         raise custom_error
       end
       mock_stub = MockGrpcClientStub_v1.new(:commit, mock_method)
@@ -1031,7 +1021,7 @@ describe Google::Cloud::Spanner::V1::SpannerClient do
 
           # Call method
           err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
-            client.commit(formatted_session, mutations)
+            client.commit(formatted_session)
           end
 
           # Verify the GaxError wrapped the custom error that was raised.
