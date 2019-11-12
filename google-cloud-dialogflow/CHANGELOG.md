@@ -1,5 +1,14 @@
 # Release History
 
+### 0.11.0 / 2019-11-12
+
+#### Features
+
+* Add new card types to the intent
+  * Add Intent#browse_carousel_card to support a browse carousel
+  * Add Intent#table_card to support a Table card for Actions on
+  * Add Intent#media_content to support the media content card
+
 ### 0.10.0 / 2019-11-06
 
 #### Features
