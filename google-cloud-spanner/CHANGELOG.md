@@ -1,5 +1,19 @@
 # Release History
 
+### 1.12.1 / 2019-11-12
+
+#### Features
+
+* Add InstanceConfig#replicas (ReplicaInfo) to the lower-level API.
+
+#### Documentation
+
+* Update lower-level API documentation.
+
+#### Bug Fixes
+
+* Update minimum runtime dependencies.
+
 ### 1.12.0 / 2019-10-29
 
 This release requires Ruby 2.4 or later.
