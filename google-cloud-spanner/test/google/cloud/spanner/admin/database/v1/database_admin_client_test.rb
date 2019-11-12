@@ -68,78 +68,6 @@ end
 
 describe Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient do
 
-  describe 'list_databases' do
-    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient#list_databases."
-
-    it 'invokes list_databases without error' do
-      # Create request parameters
-      formatted_parent = Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient.instance_path("[PROJECT]", "[INSTANCE]")
-
-      # Create expected grpc response
-      next_page_token = ""
-      databases_element = {}
-      databases = [databases_element]
-      expected_response = { next_page_token: next_page_token, databases: databases }
-      expected_response = Google::Gax::to_proto(expected_response, Google::Spanner::Admin::Database::V1::ListDatabasesResponse)
-
-      # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Spanner::Admin::Database::V1::ListDatabasesRequest, request)
-        assert_equal(formatted_parent, request.parent)
-        OpenStruct.new(execute: expected_response)
-      end
-      mock_stub = MockGrpcClientStub_v1.new(:list_databases, mock_method)
-
-      # Mock auth layer
-      mock_credentials = MockDatabaseAdminCredentials_v1.new("list_databases")
-
-      Google::Spanner::Admin::Database::V1::DatabaseAdmin::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Spanner::Admin::Database::V1::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Spanner::Admin::Database.new(version: :v1)
-
-          # Call method
-          response = client.list_databases(formatted_parent)
-
-          # Verify the response
-          assert(response.instance_of?(Google::Gax::PagedEnumerable))
-          assert_equal(expected_response, response.page.response)
-          assert_nil(response.next_page)
-          assert_equal(expected_response.databases.to_a, response.to_a)
-        end
-      end
-    end
-
-    it 'invokes list_databases with error' do
-      # Create request parameters
-      formatted_parent = Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient.instance_path("[PROJECT]", "[INSTANCE]")
-
-      # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Spanner::Admin::Database::V1::ListDatabasesRequest, request)
-        assert_equal(formatted_parent, request.parent)
-        raise custom_error
-      end
-      mock_stub = MockGrpcClientStub_v1.new(:list_databases, mock_method)
-
-      # Mock auth layer
-      mock_credentials = MockDatabaseAdminCredentials_v1.new("list_databases")
-
-      Google::Spanner::Admin::Database::V1::DatabaseAdmin::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Spanner::Admin::Database::V1::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Spanner::Admin::Database.new(version: :v1)
-
-          # Call method
-          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
-            client.list_databases(formatted_parent)
-          end
-
-          # Verify the GaxError wrapped the custom error that was raised.
-          assert_match(custom_error.message, err.message)
-        end
-      end
-    end
-  end
-
   describe 'create_database' do
     custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient#create_database."
 
@@ -598,7 +526,7 @@ describe Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient do
 
     it 'invokes set_iam_policy without error' do
       # Create request parameters
-      formatted_resource = Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient.database_path("[PROJECT]", "[INSTANCE]", "[DATABASE]")
+      resource = ''
       policy = {}
 
       # Create expected grpc response
@@ -610,7 +538,7 @@ describe Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient do
       # Mock Grpc layer
       mock_method = proc do |request|
         assert_instance_of(Google::Iam::V1::SetIamPolicyRequest, request)
-        assert_equal(formatted_resource, request.resource)
+        assert_equal(resource, request.resource)
         assert_equal(Google::Gax::to_proto(policy, Google::Iam::V1::Policy), request.policy)
         OpenStruct.new(execute: expected_response)
       end
@@ -624,13 +552,13 @@ describe Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient do
           client = Google::Cloud::Spanner::Admin::Database.new(version: :v1)
 
           # Call method
-          response = client.set_iam_policy(formatted_resource, policy)
+          response = client.set_iam_policy(resource, policy)
 
           # Verify the response
           assert_equal(expected_response, response)
 
           # Call method with block
-          client.set_iam_policy(formatted_resource, policy) do |response, operation|
+          client.set_iam_policy(resource, policy) do |response, operation|
             # Verify the response
             assert_equal(expected_response, response)
             refute_nil(operation)
@@ -641,13 +569,13 @@ describe Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient do
 
     it 'invokes set_iam_policy with error' do
       # Create request parameters
-      formatted_resource = Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient.database_path("[PROJECT]", "[INSTANCE]", "[DATABASE]")
+      resource = ''
       policy = {}
 
       # Mock Grpc layer
       mock_method = proc do |request|
         assert_instance_of(Google::Iam::V1::SetIamPolicyRequest, request)
-        assert_equal(formatted_resource, request.resource)
+        assert_equal(resource, request.resource)
         assert_equal(Google::Gax::to_proto(policy, Google::Iam::V1::Policy), request.policy)
         raise custom_error
       end
@@ -662,7 +590,7 @@ describe Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient do
 
           # Call method
           err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
-            client.set_iam_policy(formatted_resource, policy)
+            client.set_iam_policy(resource, policy)
           end
 
           # Verify the GaxError wrapped the custom error that was raised.
@@ -677,7 +605,7 @@ describe Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient do
 
     it 'invokes get_iam_policy without error' do
       # Create request parameters
-      formatted_resource = Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient.database_path("[PROJECT]", "[INSTANCE]", "[DATABASE]")
+      resource = ''
 
       # Create expected grpc response
       version = 351608024
@@ -688,7 +616,7 @@ describe Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient do
       # Mock Grpc layer
       mock_method = proc do |request|
         assert_instance_of(Google::Iam::V1::GetIamPolicyRequest, request)
-        assert_equal(formatted_resource, request.resource)
+        assert_equal(resource, request.resource)
         OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub_v1.new(:get_iam_policy, mock_method)
@@ -701,13 +629,13 @@ describe Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient do
           client = Google::Cloud::Spanner::Admin::Database.new(version: :v1)
 
           # Call method
-          response = client.get_iam_policy(formatted_resource)
+          response = client.get_iam_policy(resource)
 
           # Verify the response
           assert_equal(expected_response, response)
 
           # Call method with block
-          client.get_iam_policy(formatted_resource) do |response, operation|
+          client.get_iam_policy(resource) do |response, operation|
             # Verify the response
             assert_equal(expected_response, response)
             refute_nil(operation)
@@ -718,12 +646,12 @@ describe Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient do
 
     it 'invokes get_iam_policy with error' do
       # Create request parameters
-      formatted_resource = Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient.database_path("[PROJECT]", "[INSTANCE]", "[DATABASE]")
+      resource = ''
 
       # Mock Grpc layer
       mock_method = proc do |request|
         assert_instance_of(Google::Iam::V1::GetIamPolicyRequest, request)
-        assert_equal(formatted_resource, request.resource)
+        assert_equal(resource, request.resource)
         raise custom_error
       end
       mock_stub = MockGrpcClientStub_v1.new(:get_iam_policy, mock_method)
@@ -737,7 +665,7 @@ describe Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient do
 
           # Call method
           err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
-            client.get_iam_policy(formatted_resource)
+            client.get_iam_policy(resource)
           end
 
           # Verify the GaxError wrapped the custom error that was raised.
@@ -752,8 +680,7 @@ describe Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient do
 
     it 'invokes test_iam_permissions without error' do
       # Create request parameters
-      formatted_resource = Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient.database_path("[PROJECT]", "[INSTANCE]", "[DATABASE]")
-      permissions = []
+      resource = ''
 
       # Create expected grpc response
       expected_response = {}
@@ -762,8 +689,7 @@ describe Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient do
       # Mock Grpc layer
       mock_method = proc do |request|
         assert_instance_of(Google::Iam::V1::TestIamPermissionsRequest, request)
-        assert_equal(formatted_resource, request.resource)
-        assert_equal(permissions, request.permissions)
+        assert_equal(resource, request.resource)
         OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub_v1.new(:test_iam_permissions, mock_method)
@@ -776,13 +702,13 @@ describe Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient do
           client = Google::Cloud::Spanner::Admin::Database.new(version: :v1)
 
           # Call method
-          response = client.test_iam_permissions(formatted_resource, permissions)
+          response = client.test_iam_permissions(resource)
 
           # Verify the response
           assert_equal(expected_response, response)
 
           # Call method with block
-          client.test_iam_permissions(formatted_resource, permissions) do |response, operation|
+          client.test_iam_permissions(resource) do |response, operation|
             # Verify the response
             assert_equal(expected_response, response)
             refute_nil(operation)
@@ -793,14 +719,12 @@ describe Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient do
 
     it 'invokes test_iam_permissions with error' do
       # Create request parameters
-      formatted_resource = Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient.database_path("[PROJECT]", "[INSTANCE]", "[DATABASE]")
-      permissions = []
+      resource = ''
 
       # Mock Grpc layer
       mock_method = proc do |request|
         assert_instance_of(Google::Iam::V1::TestIamPermissionsRequest, request)
-        assert_equal(formatted_resource, request.resource)
-        assert_equal(permissions, request.permissions)
+        assert_equal(resource, request.resource)
         raise custom_error
       end
       mock_stub = MockGrpcClientStub_v1.new(:test_iam_permissions, mock_method)
@@ -814,7 +738,79 @@ describe Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient do
 
           # Call method
           err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
-            client.test_iam_permissions(formatted_resource, permissions)
+            client.test_iam_permissions(resource)
+          end
+
+          # Verify the GaxError wrapped the custom error that was raised.
+          assert_match(custom_error.message, err.message)
+        end
+      end
+    end
+  end
+
+  describe 'list_databases' do
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient#list_databases."
+
+    it 'invokes list_databases without error' do
+      # Create request parameters
+      formatted_parent = Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient.instance_path("[PROJECT]", "[INSTANCE]")
+
+      # Create expected grpc response
+      next_page_token = ""
+      databases_element = {}
+      databases = [databases_element]
+      expected_response = { next_page_token: next_page_token, databases: databases }
+      expected_response = Google::Gax::to_proto(expected_response, Google::Spanner::Admin::Database::V1::ListDatabasesResponse)
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Spanner::Admin::Database::V1::ListDatabasesRequest, request)
+        assert_equal(formatted_parent, request.parent)
+        OpenStruct.new(execute: expected_response)
+      end
+      mock_stub = MockGrpcClientStub_v1.new(:list_databases, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockDatabaseAdminCredentials_v1.new("list_databases")
+
+      Google::Spanner::Admin::Database::V1::DatabaseAdmin::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Spanner::Admin::Database::V1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Spanner::Admin::Database.new(version: :v1)
+
+          # Call method
+          response = client.list_databases(formatted_parent)
+
+          # Verify the response
+          assert(response.instance_of?(Google::Gax::PagedEnumerable))
+          assert_equal(expected_response, response.page.response)
+          assert_nil(response.next_page)
+          assert_equal(expected_response.databases.to_a, response.to_a)
+        end
+      end
+    end
+
+    it 'invokes list_databases with error' do
+      # Create request parameters
+      formatted_parent = Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient.instance_path("[PROJECT]", "[INSTANCE]")
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Spanner::Admin::Database::V1::ListDatabasesRequest, request)
+        assert_equal(formatted_parent, request.parent)
+        raise custom_error
+      end
+      mock_stub = MockGrpcClientStub_v1.new(:list_databases, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockDatabaseAdminCredentials_v1.new("list_databases")
+
+      Google::Spanner::Admin::Database::V1::DatabaseAdmin::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Spanner::Admin::Database::V1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Spanner::Admin::Database.new(version: :v1)
+
+          # Call method
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
+            client.list_databases(formatted_parent)
           end
 
           # Verify the GaxError wrapped the custom error that was raised.
