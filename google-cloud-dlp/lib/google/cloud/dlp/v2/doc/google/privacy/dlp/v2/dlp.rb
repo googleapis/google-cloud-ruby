@@ -79,10 +79,9 @@ module Google
         #     system may automatically choose what detectors to run. By default this may
         #     be all types, but may change over time as detectors are updated.
         #
-        #     The special InfoType name "ALL_BASIC" can be used to trigger all detectors,
-        #     but may change over time as new InfoTypes are added. If you need precise
-        #     control and predictability as to what detectors are run you should specify
-        #     specific InfoTypes listed in the reference.
+        #     If you need precise control and predictability as to what detectors are
+        #     run you should specify specific InfoTypes listed in the reference,
+        #     otherwise a default list will be used, which may change over time.
         # @!attribute [rw] min_likelihood
         #   @return [Google::Privacy::Dlp::V2::Likelihood]
         #     Only returns findings equal or above this threshold. The default is
@@ -453,7 +452,7 @@ module Google
         # Request to re-identify an item.
         # @!attribute [rw] parent
         #   @return [String]
-        #     The parent resource name.
+        #     Required. The parent resource name.
         # @!attribute [rw] reidentify_config
         #   @return [Google::Privacy::Dlp::V2::DeidentifyConfig]
         #     Configuration for the re-identification of the content item.
@@ -464,7 +463,8 @@ module Google
         #     reverse. This requires that only reversible transformations
         #     be provided here. The reversible transformations are:
         #
-        #     * `CryptoReplaceFfxFpeConfig`
+        #     * `CryptoDeterministicConfig`
+        #       * `CryptoReplaceFfxFpeConfig`
         # @!attribute [rw] inspect_config
         #   @return [Google::Privacy::Dlp::V2::InspectConfig]
         #     Configuration for the inspector.
@@ -1227,7 +1227,7 @@ module Google
             # [1-7]
             DAY_OF_WEEK = 4
 
-            # [1-52]
+            # [1-53]
             WEEK_OF_YEAR = 5
 
             # [0-23]
@@ -1269,6 +1269,11 @@ module Google
         #     custom info type 'Surrogate'. This facilitates reversal of the
         #     surrogate when it occurs in free text.
         #
+        #     Note: For record transformations where the entire cell in a table is being
+        #     transformed, surrogates are optional to use. Surrogates are used to denote
+        #     the location of the token and are necessary for re-identification in free
+        #     form text.
+        #
         #     In order for inspection to work properly, the name of this info type must
         #     not occur naturally anywhere in your data; otherwise, inspection may either
         #
@@ -1281,7 +1286,7 @@ module Google
         #     that are highly improbable to exist in your data.
         #     For example, assuming your data is entered from a regular ASCII keyboard,
         #     the symbol with the hex code point 29DD might be used like so:
-        #     ⧝MY_TOKEN_TYPE
+        #     ⧝MY_TOKEN_TYPE.
         # @!attribute [rw] context
         #   @return [Google::Privacy::Dlp::V2::FieldId]
         #     Optional. A context may be used for higher security and maintaining
@@ -1353,10 +1358,10 @@ module Google
         # **3.
         # @!attribute [rw] masking_character
         #   @return [String]
-        #     Character to mask the sensitive values&mdash;for example, "*" for an
-        #     alphabetic string such as name, or "0" for a numeric string such as ZIP
-        #     code or credit card number. String must have length 1. If not supplied, we
-        #     will default to "*" for strings, 0 for digits.
+        #     Character to use to mask the sensitive values&mdash;for example, `*` for an
+        #     alphabetic string such as a name, or `0` for a numeric string such as ZIP
+        #     code or credit card number. This string must have a length of 1. If not
+        #     supplied, this value defaults to `*` for strings, and `0` for digits.
         # @!attribute [rw] number_to_mask
         #   @return [Integer]
         #     Number of characters to mask. If not set, all matching chars will be
@@ -1364,15 +1369,16 @@ module Google
         # @!attribute [rw] reverse_order
         #   @return [true, false]
         #     Mask characters in reverse order. For example, if `masking_character` is
-        #     '0', number_to_mask is 14, and `reverse_order` is false, then
-        #     1234-5678-9012-3456 -> 00000000000000-3456
-        #     If `masking_character` is '*', `number_to_mask` is 3, and `reverse_order`
-        #     is true, then 12345 -> 12***
+        #     `0`, `number_to_mask` is `14`, and `reverse_order` is `false`, then the
+        #     input string `1234-5678-9012-3456` is masked as `00000000000000-3456`.
+        #     If `masking_character` is `*`, `number_to_mask` is `3`, and `reverse_order`
+        #     is `true`, then the string `12345` is masked as `12***`.
         # @!attribute [rw] characters_to_ignore
         #   @return [Array<Google::Privacy::Dlp::V2::CharsToIgnore>]
-        #     When masking a string, items in this list will be skipped when replacing.
-        #     For example, if your string is 555-555-5555 and you ask us to skip `-` and
-        #     mask 5 chars with * we would produce ***-*55-5555.
+        #     When masking a string, items in this list will be skipped when replacing
+        #     characters. For example, if the input string is `555-555-5555` and you
+        #     instruct Cloud DLP to skip `-` and mask 5 characters with `*`, Cloud DLP
+        #     returns `***-**5-5555`.
         class CharacterMaskConfig; end
 
         # Buckets values based on fixed size ranges. The
@@ -1484,12 +1490,12 @@ module Google
         #     that the FFX mode natively supports. This happens before/after
         #     encryption/decryption.
         #     Each character listed must appear only once.
-        #     Number of characters must be in the range [2, 62].
+        #     Number of characters must be in the range [2, 95].
         #     This must be encoded as ASCII.
         #     The order of characters does not matter.
         # @!attribute [rw] radix
         #   @return [Integer]
-        #     The native way to select the alphabet. Must be in the range [2, 62].
+        #     The native way to select the alphabet. Must be in the range [2, 95].
         # @!attribute [rw] surrogate_info_type
         #   @return [Google::Privacy::Dlp::V2::InfoType]
         #     The custom infoType to annotate the surrogate with.
@@ -1871,7 +1877,7 @@ module Google
         #   @return [String]
         #     Unique resource name for the triggeredJob, assigned by the service when the
         #     triggeredJob is created, for example
-        #     `projects/dlp-test-project/triggeredJobs/53234423`.
+        #     `projects/dlp-test-project/jobTriggers/53234423`.
         # @!attribute [rw] display_name
         #   @return [String]
         #     Display name (max 100 chars)
@@ -1946,6 +1952,9 @@ module Google
         #   @return [Google::Privacy::Dlp::V2::Action::JobNotificationEmails]
         #     Enable email notification to project owners and editors on job's
         #     completion/failure.
+        # @!attribute [rw] publish_to_stackdriver
+        #   @return [Google::Privacy::Dlp::V2::Action::PublishToStackdriver]
+        #     Enable Stackdriver metric dlp.googleapis.com/finding_count.
         class Action
           # If set, the detailed findings will be persisted to the specified
           # OutputStorageConfig. Only a single instance of this action can be
@@ -1995,12 +2004,18 @@ module Google
           # Enable email notification to project owners and editors on jobs's
           # completion/failure.
           class JobNotificationEmails; end
+
+          # Enable Stackdriver metric dlp.googleapis.com/finding_count. This
+          # will publish a metric to stack driver on each infotype requested and
+          # how many findings were found for it. CustomDetectors will be bucketed
+          # as 'Custom' under the Stackdriver label 'info_type'.
+          class PublishToStackdriver; end
         end
 
         # Request message for CreateInspectTemplate.
         # @!attribute [rw] parent
         #   @return [String]
-        #     The parent resource name, for example projects/my-project-id or
+        #     Required. The parent resource name, for example projects/my-project-id or
         #     organizations/my-org-id.
         # @!attribute [rw] inspect_template
         #   @return [Google::Privacy::Dlp::V2::InspectTemplate]
@@ -2016,7 +2031,7 @@ module Google
         # Request message for UpdateInspectTemplate.
         # @!attribute [rw] name
         #   @return [String]
-        #     Resource name of organization and inspectTemplate to be updated, for
+        #     Required. Resource name of organization and inspectTemplate to be updated, for
         #     example `organizations/433245324/inspectTemplates/432452342` or
         #     projects/project-id/inspectTemplates/432452342.
         # @!attribute [rw] inspect_template
@@ -2030,7 +2045,7 @@ module Google
         # Request message for GetInspectTemplate.
         # @!attribute [rw] name
         #   @return [String]
-        #     Resource name of the organization and inspectTemplate to be read, for
+        #     Required. Resource name of the organization and inspectTemplate to be read, for
         #     example `organizations/433245324/inspectTemplates/432452342` or
         #     projects/project-id/inspectTemplates/432452342.
         class GetInspectTemplateRequest; end
@@ -2038,7 +2053,7 @@ module Google
         # Request message for ListInspectTemplates.
         # @!attribute [rw] parent
         #   @return [String]
-        #     The parent resource name, for example projects/my-project-id or
+        #     Required. The parent resource name, for example projects/my-project-id or
         #     organizations/my-org-id.
         # @!attribute [rw] page_token
         #   @return [String]
@@ -2078,7 +2093,7 @@ module Google
         # Request message for DeleteInspectTemplate.
         # @!attribute [rw] name
         #   @return [String]
-        #     Resource name of the organization and inspectTemplate to be deleted, for
+        #     Required. Resource name of the organization and inspectTemplate to be deleted, for
         #     example `organizations/433245324/inspectTemplates/432452342` or
         #     projects/project-id/inspectTemplates/432452342.
         class DeleteInspectTemplateRequest; end
@@ -2086,7 +2101,7 @@ module Google
         # Request message for CreateJobTrigger.
         # @!attribute [rw] parent
         #   @return [String]
-        #     The parent resource name, for example projects/my-project-id.
+        #     Required. The parent resource name, for example projects/my-project-id.
         # @!attribute [rw] job_trigger
         #   @return [Google::Privacy::Dlp::V2::JobTrigger]
         #     The JobTrigger to create.
@@ -2101,14 +2116,14 @@ module Google
         # Request message for ActivateJobTrigger.
         # @!attribute [rw] name
         #   @return [String]
-        #     Resource name of the trigger to activate, for example
+        #     Required. Resource name of the trigger to activate, for example
         #     `projects/dlp-test-project/jobTriggers/53234423`.
         class ActivateJobTriggerRequest; end
 
         # Request message for UpdateJobTrigger.
         # @!attribute [rw] name
         #   @return [String]
-        #     Resource name of the project and the triggeredJob, for example
+        #     Required. Resource name of the project and the triggeredJob, for example
         #     `projects/dlp-test-project/jobTriggers/53234423`.
         # @!attribute [rw] job_trigger
         #   @return [Google::Privacy::Dlp::V2::JobTrigger]
@@ -2121,7 +2136,7 @@ module Google
         # Request message for GetJobTrigger.
         # @!attribute [rw] name
         #   @return [String]
-        #     Resource name of the project and the triggeredJob, for example
+        #     Required. Resource name of the project and the triggeredJob, for example
         #     `projects/dlp-test-project/jobTriggers/53234423`.
         class GetJobTriggerRequest; end
 
@@ -2130,7 +2145,7 @@ module Google
         # Storage.
         # @!attribute [rw] parent
         #   @return [String]
-        #     The parent resource name, for example projects/my-project-id.
+        #     Required. The parent resource name, for example projects/my-project-id.
         # @!attribute [rw] inspect_job
         #   @return [Google::Privacy::Dlp::V2::InspectJobConfig]
         # @!attribute [rw] risk_job
@@ -2146,7 +2161,7 @@ module Google
         # Request message for ListJobTriggers.
         # @!attribute [rw] parent
         #   @return [String]
-        #     The parent resource name, for example `projects/my-project-id`.
+        #     Required. The parent resource name, for example `projects/my-project-id`.
         # @!attribute [rw] page_token
         #   @return [String]
         #     Optional page token to continue retrieval. Comes from previous call
@@ -2213,7 +2228,7 @@ module Google
         # Request message for DeleteJobTrigger.
         # @!attribute [rw] name
         #   @return [String]
-        #     Resource name of the project and the triggeredJob, for example
+        #     Required. Resource name of the project and the triggeredJob, for example
         #     `projects/dlp-test-project/jobTriggers/53234423`.
         class DeleteJobTriggerRequest; end
 
@@ -2289,13 +2304,13 @@ module Google
         # The request message for {DlpJobs::GetDlpJob}.
         # @!attribute [rw] name
         #   @return [String]
-        #     The name of the DlpJob resource.
+        #     Required. The name of the DlpJob resource.
         class GetDlpJobRequest; end
 
         # The request message for listing DLP jobs.
         # @!attribute [rw] parent
         #   @return [String]
-        #     The parent resource name, for example projects/my-project-id.
+        #     Required. The parent resource name, for example projects/my-project-id.
         # @!attribute [rw] filter
         #   @return [String]
         #     Optional. Allows filtering.
@@ -2364,19 +2379,19 @@ module Google
         # The request message for canceling a DLP job.
         # @!attribute [rw] name
         #   @return [String]
-        #     The name of the DlpJob resource to be cancelled.
+        #     Required. The name of the DlpJob resource to be cancelled.
         class CancelDlpJobRequest; end
 
         # The request message for deleting a DLP job.
         # @!attribute [rw] name
         #   @return [String]
-        #     The name of the DlpJob resource to be deleted.
+        #     Required. The name of the DlpJob resource to be deleted.
         class DeleteDlpJobRequest; end
 
         # Request message for CreateDeidentifyTemplate.
         # @!attribute [rw] parent
         #   @return [String]
-        #     The parent resource name, for example projects/my-project-id or
+        #     Required. The parent resource name, for example projects/my-project-id or
         #     organizations/my-org-id.
         # @!attribute [rw] deidentify_template
         #   @return [Google::Privacy::Dlp::V2::DeidentifyTemplate]
@@ -2392,7 +2407,7 @@ module Google
         # Request message for UpdateDeidentifyTemplate.
         # @!attribute [rw] name
         #   @return [String]
-        #     Resource name of organization and deidentify template to be updated, for
+        #     Required. Resource name of organization and deidentify template to be updated, for
         #     example `organizations/433245324/deidentifyTemplates/432452342` or
         #     projects/project-id/deidentifyTemplates/432452342.
         # @!attribute [rw] deidentify_template
@@ -2406,7 +2421,7 @@ module Google
         # Request message for GetDeidentifyTemplate.
         # @!attribute [rw] name
         #   @return [String]
-        #     Resource name of the organization and deidentify template to be read, for
+        #     Required. Resource name of the organization and deidentify template to be read, for
         #     example `organizations/433245324/deidentifyTemplates/432452342` or
         #     projects/project-id/deidentifyTemplates/432452342.
         class GetDeidentifyTemplateRequest; end
@@ -2414,7 +2429,7 @@ module Google
         # Request message for ListDeidentifyTemplates.
         # @!attribute [rw] parent
         #   @return [String]
-        #     The parent resource name, for example projects/my-project-id or
+        #     Required. The parent resource name, for example projects/my-project-id or
         #     organizations/my-org-id.
         # @!attribute [rw] page_token
         #   @return [String]
@@ -2455,7 +2470,7 @@ module Google
         # Request message for DeleteDeidentifyTemplate.
         # @!attribute [rw] name
         #   @return [String]
-        #     Resource name of the organization and deidentify template to be deleted,
+        #     Required. Resource name of the organization and deidentify template to be deleted,
         #     for example `organizations/433245324/deidentifyTemplates/432452342` or
         #     projects/project-id/deidentifyTemplates/432452342.
         class DeleteDeidentifyTemplateRequest; end
@@ -2552,7 +2567,7 @@ module Google
         # Request message for CreateStoredInfoType.
         # @!attribute [rw] parent
         #   @return [String]
-        #     The parent resource name, for example projects/my-project-id or
+        #     Required. The parent resource name, for example projects/my-project-id or
         #     organizations/my-org-id.
         # @!attribute [rw] config
         #   @return [Google::Privacy::Dlp::V2::StoredInfoTypeConfig]
@@ -2568,7 +2583,7 @@ module Google
         # Request message for UpdateStoredInfoType.
         # @!attribute [rw] name
         #   @return [String]
-        #     Resource name of organization and storedInfoType to be updated, for
+        #     Required. Resource name of organization and storedInfoType to be updated, for
         #     example `organizations/433245324/storedInfoTypes/432452342` or
         #     projects/project-id/storedInfoTypes/432452342.
         # @!attribute [rw] config
@@ -2584,7 +2599,7 @@ module Google
         # Request message for GetStoredInfoType.
         # @!attribute [rw] name
         #   @return [String]
-        #     Resource name of the organization and storedInfoType to be read, for
+        #     Required. Resource name of the organization and storedInfoType to be read, for
         #     example `organizations/433245324/storedInfoTypes/432452342` or
         #     projects/project-id/storedInfoTypes/432452342.
         class GetStoredInfoTypeRequest; end
@@ -2592,7 +2607,7 @@ module Google
         # Request message for ListStoredInfoTypes.
         # @!attribute [rw] parent
         #   @return [String]
-        #     The parent resource name, for example projects/my-project-id or
+        #     Required. The parent resource name, for example projects/my-project-id or
         #     organizations/my-org-id.
         # @!attribute [rw] page_token
         #   @return [String]
@@ -2633,7 +2648,7 @@ module Google
         # Request message for DeleteStoredInfoType.
         # @!attribute [rw] name
         #   @return [String]
-        #     Resource name of the organization and storedInfoType to be deleted, for
+        #     Required. Resource name of the organization and storedInfoType to be deleted, for
         #     example `organizations/433245324/storedInfoTypes/432452342` or
         #     projects/project-id/storedInfoTypes/432452342.
         class DeleteStoredInfoTypeRequest; end
