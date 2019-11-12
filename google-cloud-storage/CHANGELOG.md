@@ -1,5 +1,11 @@
 # Release History
 
+### 1.23.1 / 2019-11-12
+
+#### Bug Fixes
+
+* Update #post_object to support special variable ${filename}
+
 ### 1.23.0 / 2019-11-05
 
 #### Features
