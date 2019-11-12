@@ -177,6 +177,8 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
       current_node_count = 178977560
       expire_time = "expireTime-96179731"
       location = "location1901043637"
+      enable_tpu = false
+      tpu_ipv4_cidr_block = "tpuIpv4CidrBlock1137906646"
       expected_response = {
         name: name,
         description: description,
@@ -200,7 +202,9 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
         services_ipv4_cidr: services_ipv4_cidr,
         current_node_count: current_node_count,
         expire_time: expire_time,
-        location: location
+        location: location,
+        enable_tpu: enable_tpu,
+        tpu_ipv4_cidr_block: tpu_ipv4_cidr_block
       }
       expected_response = Google::Gax::to_proto(expected_response, Google::Container::V1::Cluster)
 
@@ -2073,12 +2077,14 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
       self_link = "selfLink-1691268851"
       version = "version351608024"
       status_message = "statusMessage-239442758"
+      pod_ipv4_cidr_size = 1098768716
       expected_response = {
         name: name,
         initial_node_count: initial_node_count,
         self_link: self_link,
         version: version,
-        status_message: status_message
+        status_message: status_message,
+        pod_ipv4_cidr_size: pod_ipv4_cidr_size
       }
       expected_response = Google::Gax::to_proto(expected_response, Google::Container::V1::NodePool)
 
@@ -3475,6 +3481,68 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
               cluster_id,
               maintenance_policy
             )
+          end
+
+          # Verify the GaxError wrapped the custom error that was raised.
+          assert_match(custom_error.message, err.message)
+        end
+      end
+    end
+  end
+
+  describe 'list_usable_subnetworks' do
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Container::V1::ClusterManagerClient#list_usable_subnetworks."
+
+    it 'invokes list_usable_subnetworks without error' do
+      # Create expected grpc response
+      next_page_token = ""
+      subnetworks_element = {}
+      subnetworks = [subnetworks_element]
+      expected_response = { next_page_token: next_page_token, subnetworks: subnetworks }
+      expected_response = Google::Gax::to_proto(expected_response, Google::Container::V1::ListUsableSubnetworksResponse)
+
+      # Mock Grpc layer
+      mock_method = proc do
+        OpenStruct.new(execute: expected_response)
+      end
+      mock_stub = MockGrpcClientStub_v1.new(:list_usable_subnetworks, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockClusterManagerCredentials_v1.new("list_usable_subnetworks")
+
+      Google::Container::V1::ClusterManager::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Container::V1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Container.new(version: :v1)
+
+          # Call method
+          response = client.list_usable_subnetworks
+
+          # Verify the response
+          assert(response.instance_of?(Google::Gax::PagedEnumerable))
+          assert_equal(expected_response, response.page.response)
+          assert_nil(response.next_page)
+          assert_equal(expected_response.subnetworks.to_a, response.to_a)
+        end
+      end
+    end
+
+    it 'invokes list_usable_subnetworks with error' do
+      # Mock Grpc layer
+      mock_method = proc do
+        raise custom_error
+      end
+      mock_stub = MockGrpcClientStub_v1.new(:list_usable_subnetworks, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockClusterManagerCredentials_v1.new("list_usable_subnetworks")
+
+      Google::Container::V1::ClusterManager::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Container::V1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Container.new(version: :v1)
+
+          # Call method
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
+            client.list_usable_subnetworks
           end
 
           # Verify the GaxError wrapped the custom error that was raised.
