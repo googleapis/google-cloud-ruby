@@ -808,7 +808,7 @@ module Google
           # to learn more.
           #
           # @param parent [String]
-          #   The parent resource name.
+          #   Required. The parent resource name.
           # @param reidentify_config [Google::Privacy::Dlp::V2::DeidentifyConfig | Hash]
           #   Configuration for the re-identification of the content item.
           #   This field shares the same proto message type that is used for
@@ -818,7 +818,8 @@ module Google
           #   reverse. This requires that only reversible transformations
           #   be provided here. The reversible transformations are:
           #
-          #   * `CryptoReplaceFfxFpeConfig`
+          #   * `CryptoDeterministicConfig`
+          #     * `CryptoReplaceFfxFpeConfig`
           #   A hash of the same form as `Google::Privacy::Dlp::V2::DeidentifyConfig`
           #   can also be provided.
           # @param inspect_config [Google::Privacy::Dlp::V2::InspectConfig | Hash]
@@ -921,7 +922,7 @@ module Google
           # See https://cloud.google.com/dlp/docs/creating-templates to learn more.
           #
           # @param parent [String]
-          #   The parent resource name, for example projects/my-project-id or
+          #   Required. The parent resource name, for example projects/my-project-id or
           #   organizations/my-org-id.
           # @param inspect_template [Google::Privacy::Dlp::V2::InspectTemplate | Hash]
           #   The InspectTemplate to create.
@@ -966,7 +967,7 @@ module Google
           # See https://cloud.google.com/dlp/docs/creating-templates to learn more.
           #
           # @param name [String]
-          #   Resource name of organization and inspectTemplate to be updated, for
+          #   Required. Resource name of organization and inspectTemplate to be updated, for
           #   example `organizations/433245324/inspectTemplates/432452342` or
           #   projects/project-id/inspectTemplates/432452342.
           # @param inspect_template [Google::Privacy::Dlp::V2::InspectTemplate | Hash]
@@ -1011,7 +1012,7 @@ module Google
           # See https://cloud.google.com/dlp/docs/creating-templates to learn more.
           #
           # @param name [String]
-          #   Resource name of the organization and inspectTemplate to be read, for
+          #   Required. Resource name of the organization and inspectTemplate to be read, for
           #   example `organizations/433245324/inspectTemplates/432452342` or
           #   projects/project-id/inspectTemplates/432452342.
           # @param options [Google::Gax::CallOptions]
@@ -1043,7 +1044,7 @@ module Google
           # See https://cloud.google.com/dlp/docs/creating-templates to learn more.
           #
           # @param parent [String]
-          #   The parent resource name, for example projects/my-project-id or
+          #   Required. The parent resource name, for example projects/my-project-id or
           #   organizations/my-org-id.
           # @param page_size [Integer]
           #   The maximum number of resources contained in the underlying API
@@ -1115,7 +1116,7 @@ module Google
           # See https://cloud.google.com/dlp/docs/creating-templates to learn more.
           #
           # @param name [String]
-          #   Resource name of the organization and inspectTemplate to be deleted, for
+          #   Required. Resource name of the organization and inspectTemplate to be deleted, for
           #   example `organizations/433245324/inspectTemplates/432452342` or
           #   projects/project-id/inspectTemplates/432452342.
           # @param options [Google::Gax::CallOptions]
@@ -1150,7 +1151,7 @@ module Google
           # more.
           #
           # @param parent [String]
-          #   The parent resource name, for example projects/my-project-id or
+          #   Required. The parent resource name, for example projects/my-project-id or
           #   organizations/my-org-id.
           # @param deidentify_template [Google::Privacy::Dlp::V2::DeidentifyTemplate | Hash]
           #   The DeidentifyTemplate to create.
@@ -1196,7 +1197,7 @@ module Google
           # more.
           #
           # @param name [String]
-          #   Resource name of organization and deidentify template to be updated, for
+          #   Required. Resource name of organization and deidentify template to be updated, for
           #   example `organizations/433245324/deidentifyTemplates/432452342` or
           #   projects/project-id/deidentifyTemplates/432452342.
           # @param deidentify_template [Google::Privacy::Dlp::V2::DeidentifyTemplate | Hash]
@@ -1242,7 +1243,7 @@ module Google
           # more.
           #
           # @param name [String]
-          #   Resource name of the organization and deidentify template to be read, for
+          #   Required. Resource name of the organization and deidentify template to be read, for
           #   example `organizations/433245324/deidentifyTemplates/432452342` or
           #   projects/project-id/deidentifyTemplates/432452342.
           # @param options [Google::Gax::CallOptions]
@@ -1276,7 +1277,7 @@ module Google
           # more.
           #
           # @param parent [String]
-          #   The parent resource name, for example projects/my-project-id or
+          #   Required. The parent resource name, for example projects/my-project-id or
           #   organizations/my-org-id.
           # @param page_size [Integer]
           #   The maximum number of resources contained in the underlying API
@@ -1349,7 +1350,7 @@ module Google
           # more.
           #
           # @param name [String]
-          #   Resource name of the organization and deidentify template to be deleted,
+          #   Required. Resource name of the organization and deidentify template to be deleted,
           #   for example `organizations/433245324/deidentifyTemplates/432452342` or
           #   projects/project-id/deidentifyTemplates/432452342.
           # @param options [Google::Gax::CallOptions]
@@ -1387,7 +1388,7 @@ module Google
           # be all types, but may change over time as detectors are updated.
           #
           # @param parent [String]
-          #   The parent resource name, for example projects/my-project-id.
+          #   Required. The parent resource name, for example projects/my-project-id.
           # @param inspect_job [Google::Privacy::Dlp::V2::InspectJobConfig | Hash]
           #   A hash of the same form as `Google::Privacy::Dlp::V2::InspectJobConfig`
           #   can also be provided.
@@ -1436,7 +1437,7 @@ module Google
           # https://cloud.google.com/dlp/docs/compute-risk-analysis to learn more.
           #
           # @param parent [String]
-          #   The parent resource name, for example projects/my-project-id.
+          #   Required. The parent resource name, for example projects/my-project-id.
           # @param filter [String]
           #   Optional. Allows filtering.
           #
@@ -1543,7 +1544,7 @@ module Google
           # https://cloud.google.com/dlp/docs/compute-risk-analysis to learn more.
           #
           # @param name [String]
-          #   The name of the DlpJob resource.
+          #   Required. The name of the DlpJob resource.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -1577,7 +1578,7 @@ module Google
           # https://cloud.google.com/dlp/docs/compute-risk-analysis to learn more.
           #
           # @param name [String]
-          #   The name of the DlpJob resource to be deleted.
+          #   Required. The name of the DlpJob resource to be deleted.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -1611,7 +1612,7 @@ module Google
           # https://cloud.google.com/dlp/docs/compute-risk-analysis to learn more.
           #
           # @param name [String]
-          #   The name of the DlpJob resource to be cancelled.
+          #   Required. The name of the DlpJob resource to be cancelled.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -1642,7 +1643,7 @@ module Google
           # See https://cloud.google.com/dlp/docs/creating-job-triggers to learn more.
           #
           # @param parent [String]
-          #   The parent resource name, for example `projects/my-project-id`.
+          #   Required. The parent resource name, for example `projects/my-project-id`.
           # @param page_size [Integer]
           #   The maximum number of resources contained in the underlying API
           #   response. If page streaming is performed per-resource, this
@@ -1742,7 +1743,7 @@ module Google
           # See https://cloud.google.com/dlp/docs/creating-job-triggers to learn more.
           #
           # @param name [String]
-          #   Resource name of the project and the triggeredJob, for example
+          #   Required. Resource name of the project and the triggeredJob, for example
           #   `projects/dlp-test-project/jobTriggers/53234423`.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
@@ -1774,7 +1775,7 @@ module Google
           # See https://cloud.google.com/dlp/docs/creating-job-triggers to learn more.
           #
           # @param name [String]
-          #   Resource name of the project and the triggeredJob, for example
+          #   Required. Resource name of the project and the triggeredJob, for example
           #   `projects/dlp-test-project/jobTriggers/53234423`.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
@@ -1808,7 +1809,7 @@ module Google
           # See https://cloud.google.com/dlp/docs/creating-job-triggers to learn more.
           #
           # @param name [String]
-          #   Resource name of the project and the triggeredJob, for example
+          #   Required. Resource name of the project and the triggeredJob, for example
           #   `projects/dlp-test-project/jobTriggers/53234423`.
           # @param job_trigger [Google::Privacy::Dlp::V2::JobTrigger | Hash]
           #   New JobTrigger value.
@@ -1853,7 +1854,7 @@ module Google
           # See https://cloud.google.com/dlp/docs/creating-job-triggers to learn more.
           #
           # @param parent [String]
-          #   The parent resource name, for example projects/my-project-id.
+          #   Required. The parent resource name, for example projects/my-project-id.
           # @param job_trigger [Google::Privacy::Dlp::V2::JobTrigger | Hash]
           #   The JobTrigger to create.
           #   A hash of the same form as `Google::Privacy::Dlp::V2::JobTrigger`
@@ -1898,7 +1899,7 @@ module Google
           # learn more.
           #
           # @param parent [String]
-          #   The parent resource name, for example projects/my-project-id or
+          #   Required. The parent resource name, for example projects/my-project-id or
           #   organizations/my-org-id.
           # @param config [Google::Privacy::Dlp::V2::StoredInfoTypeConfig | Hash]
           #   Configuration of the storedInfoType to create.
@@ -1945,7 +1946,7 @@ module Google
           # learn more.
           #
           # @param name [String]
-          #   Resource name of organization and storedInfoType to be updated, for
+          #   Required. Resource name of organization and storedInfoType to be updated, for
           #   example `organizations/433245324/storedInfoTypes/432452342` or
           #   projects/project-id/storedInfoTypes/432452342.
           # @param config [Google::Privacy::Dlp::V2::StoredInfoTypeConfig | Hash]
@@ -1993,7 +1994,7 @@ module Google
           # learn more.
           #
           # @param name [String]
-          #   Resource name of the organization and storedInfoType to be read, for
+          #   Required. Resource name of the organization and storedInfoType to be read, for
           #   example `organizations/433245324/storedInfoTypes/432452342` or
           #   projects/project-id/storedInfoTypes/432452342.
           # @param options [Google::Gax::CallOptions]
@@ -2027,7 +2028,7 @@ module Google
           # learn more.
           #
           # @param parent [String]
-          #   The parent resource name, for example projects/my-project-id or
+          #   Required. The parent resource name, for example projects/my-project-id or
           #   organizations/my-org-id.
           # @param page_size [Integer]
           #   The maximum number of resources contained in the underlying API
@@ -2101,7 +2102,7 @@ module Google
           # learn more.
           #
           # @param name [String]
-          #   Resource name of the organization and storedInfoType to be deleted, for
+          #   Required. Resource name of the organization and storedInfoType to be deleted, for
           #   example `organizations/433245324/storedInfoTypes/432452342` or
           #   projects/project-id/storedInfoTypes/432452342.
           # @param options [Google::Gax::CallOptions]

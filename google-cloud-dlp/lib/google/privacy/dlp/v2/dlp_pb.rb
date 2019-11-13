@@ -5,6 +5,8 @@
 require 'google/protobuf'
 
 require 'google/api/annotations_pb'
+require 'google/api/field_behavior_pb'
+require 'google/api/resource_pb'
 require 'google/privacy/dlp/v2/storage_pb'
 require 'google/protobuf/duration_pb'
 require 'google/protobuf/empty_pb'
@@ -670,6 +672,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :publish_summary_to_cscc, :message, 3, "google.privacy.dlp.v2.Action.PublishSummaryToCscc"
       optional :publish_findings_to_cloud_data_catalog, :message, 5, "google.privacy.dlp.v2.Action.PublishFindingsToCloudDataCatalog"
       optional :job_notification_emails, :message, 8, "google.privacy.dlp.v2.Action.JobNotificationEmails"
+      optional :publish_to_stackdriver, :message, 9, "google.privacy.dlp.v2.Action.PublishToStackdriver"
     end
   end
   add_message "google.privacy.dlp.v2.Action.SaveFindings" do
@@ -683,6 +686,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.privacy.dlp.v2.Action.PublishFindingsToCloudDataCatalog" do
   end
   add_message "google.privacy.dlp.v2.Action.JobNotificationEmails" do
+  end
+  add_message "google.privacy.dlp.v2.Action.PublishToStackdriver" do
   end
   add_message "google.privacy.dlp.v2.CreateInspectTemplateRequest" do
     optional :parent, :string, 1
@@ -1052,6 +1057,7 @@ module Google
         Action::PublishSummaryToCscc = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.Action.PublishSummaryToCscc").msgclass
         Action::PublishFindingsToCloudDataCatalog = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.Action.PublishFindingsToCloudDataCatalog").msgclass
         Action::JobNotificationEmails = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.Action.JobNotificationEmails").msgclass
+        Action::PublishToStackdriver = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.Action.PublishToStackdriver").msgclass
         CreateInspectTemplateRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.CreateInspectTemplateRequest").msgclass
         UpdateInspectTemplateRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.UpdateInspectTemplateRequest").msgclass
         GetInspectTemplateRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.GetInspectTemplateRequest").msgclass
