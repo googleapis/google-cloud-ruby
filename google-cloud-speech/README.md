@@ -40,7 +40,7 @@ config = {
   sample_rate_hertz: sample_rate_hertz,
   encoding: encoding
 }
-uri = "gs://gapic-toolkit/hello.flac"
+uri = "gs://cloud-samples-data/speech/brooklyn_bridge.flac"
 audio = { uri: uri }
 response = speech_client.recognize(config, audio)
 ```

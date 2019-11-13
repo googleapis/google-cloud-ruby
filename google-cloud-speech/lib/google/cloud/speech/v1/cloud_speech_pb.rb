@@ -155,6 +155,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :start_time, :message, 1, "google.protobuf.Duration"
     optional :end_time, :message, 2, "google.protobuf.Duration"
     optional :word, :string, 3
+    optional :speaker_tag, :int32, 5
   end
 end
 
