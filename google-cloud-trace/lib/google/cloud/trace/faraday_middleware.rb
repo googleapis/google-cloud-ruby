@@ -112,7 +112,7 @@ module Google
         end
 
         ##
-        # @private Set X-Cloud-Trace-Context for request header
+        # @private Add X-Cloud-Trace-Context for request header
         def add_trace_context_header env
           if (trace_ctx = Stackdriver::Core::TraceContext.get)
             env[:request_headers]["X-Cloud-Trace-Context"] = trace_ctx.to_string
