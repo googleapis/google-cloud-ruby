@@ -121,6 +121,7 @@ module Google
       # while the other does not.
       #
       # @example
+      #   require "google/cloud/bigtable"
       #
       #   # Pass filter
       #   Google::Cloud::Bigtable::RowFilter.pass
@@ -151,7 +152,7 @@ module Google
         #
         # A chain RowFilter that sends rows through several RowFilters in sequence.
         #
-        # See {Google::Cloud::Bigtable::RowFilter::ChainFilter}
+        # See {Google::Cloud::Bigtable::RowFilter::ChainFilter}.
         #
         # The elements of "filters" are chained together to process the input row:
         # in row -> f(0) -> intermediate row -> f(1) -> ... -> f(N) -> out row
@@ -160,6 +161,7 @@ module Google
         # @return [Google::Cloud::Bigtable::RowFilter::ChainFilter]
         #
         # @example Create chain filter with simple filter.
+        #   require "google/cloud/bigtable"
         #
         #   chain = Google::Cloud::Bigtable::RowFilter.chain
         #
@@ -171,6 +173,7 @@ module Google
         #   chain.key("user-*").strip_value
         #
         # @example Create complex chain filter.
+        #   require "google/cloud/bigtable"
         #
         #   chain = Google::Cloud::Bigtable::RowFilter.chain
         #
@@ -219,6 +222,7 @@ module Google
         # @return [Google::Cloud::Bigtable::RowFilter::InterleaveFilter]
         #
         # @example Create an interleave filter with simple filter.
+        #   require "google/cloud/bigtable"
         #
         #   interleave = Google::Cloud::Bigtable::RowFilter.interleave
         #
@@ -230,6 +234,7 @@ module Google
         #   interleave.key("user-*").sink
         #
         # @example Create complex interleave filter.
+        #   require "google/cloud/bigtable"
         #
         #   interleave = Google::Cloud::Bigtable::RowFilter.interleave
         #
@@ -254,12 +259,13 @@ module Google
         # results. Additionally, condition filters have poor performance, especially
         # when filters are set for the false condition.
         #
-        # Cannot be used within the `predicate_filter`, `true_filter`, or `false_filter`
+        # Cannot be used within the `predicate_filter`, `true_filter`, or `false_filter`.
         #
         # @param predicate [SimpleFilter, ChainFilter, InterleaveFilter, ConditionFilter]
         # @return [Google::Cloud::Bigtable::RowFilter::ConditionFilter]
         #
         # @example
+        #   require "google/cloud/bigtable"
         #
         #   predicate = Google::Cloud::Bigtable::RowFilter.key("user-*")
         #   condition = Google::Cloud::Bigtable::RowFilter.condition(predicate)
@@ -283,6 +289,7 @@ module Google
         # @return [Google::Cloud::Bigtable::RowFilter::SimpleFilter]
         #
         # @example
+        #   require "google/cloud/bigtable"
         #
         #   filter = Google::Cloud::Bigtable::RowFilter.pass
         #
@@ -299,6 +306,7 @@ module Google
         # @return [Google::Cloud::Bigtable::RowFilter::SimpleFilter]
         #
         # @example
+        #   require "google/cloud/bigtable"
         #
         #   filter = Google::Cloud::Bigtable::RowFilter.block
         #
@@ -310,11 +318,12 @@ module Google
         # Creates a sink filter instance.
         #
         # Outputs all cells directly to the output of the read rather than to any
-        # parent filter
+        # parent filter.
         #
         # @return [Google::Cloud::Bigtable::RowFilter::SimpleFilter]
         #
         # @example
+        #   require "google/cloud/bigtable"
         #
         #   filter = Google::Cloud::Bigtable::RowFilter.sink
         #
@@ -330,6 +339,7 @@ module Google
         # @return [Google::Cloud::Bigtable::RowFilter::SimpleFilter]
         #
         # @example
+        #   require "google/cloud/bigtable"
         #
         #   filter = Google::Cloud::Bigtable::RowFilter.strip_value
         #
@@ -348,13 +358,13 @@ module Google
         # will not match the new line character `\n`, which may be present in a
         # binary key.
         #
-        # For Regex syntax:
-        # @see https://github.com/google/re2/wiki/Syntax
+        # @see https://github.com/google/re2/wiki/Syntax Regex syntax
         #
         # @param regex [String] Regex to match row keys.
         # @return [Google::Cloud::Bigtable::RowFilter::SimpleFilter]
         #
         # @example
+        #   require "google/cloud/bigtable"
         #
         #   filter = Google::Cloud::Bigtable::RowFilter.key("user-.*")
         #
@@ -368,11 +378,12 @@ module Google
         # Matches all cells from a row with probability p, and matches no cells
         # from the row with probability 1-p.
         #
-        # @param probability [Float] Probability value
-        #   Probability must be greather then 0 and less then 1.0
+        # @param probability [Float] Probability value.
+        #   Probability must be greater than 0 and less than 1.0.
         # @return [Google::Cloud::Bigtable::RowFilter::SimpleFilter]
         #
         # @example
+        #   require "google/cloud/bigtable"
         #
         #   filter = Google::Cloud::Bigtable::RowFilter.sample(0.5)
         #
@@ -390,13 +401,13 @@ module Google
         # `\n`, it is sufficient to use `.` as a full wildcard when matching
         # column family names.
         #
-        # For Regex syntax:
-        # @see https://github.com/google/re2/wiki/Syntax
+        # @see https://github.com/google/re2/wiki/Syntax Regex syntax
         #
         # @param regex [String] Regex to match family name.
         # @return [Google::Cloud::Bigtable::RowFilter::SimpleFilter]
         #
         # @example
+        #   require "google/cloud/bigtable"
         #
         #   filter = Google::Cloud::Bigtable::RowFilter.family("cf-.*")
         #
@@ -414,13 +425,13 @@ module Google
         # character will not match the new line character `\n`, which may be
         # present in a binary qualifier.
         #
-        # For Regex syntax:
-        # @see https://github.com/google/re2/wiki/Syntax
+        # @see https://github.com/google/re2/wiki/Syntax Regex syntax
         #
         # @param regex [String] Regex to match column qualifier name.
         # @return [Google::Cloud::Bigtable::RowFilter::SimpleFilter]
         #
         # @example
+        #   require "google/cloud/bigtable"
         #
         #   filter = Google::Cloud::Bigtable::RowFilter.qualifier("user-name.*")
         #
@@ -437,13 +448,13 @@ module Google
         # will not match the new line character `\n`, which may be present in a
         # binary value.
         #
-        # For Regex syntax:
-        # @see https://github.com/google/re2/wiki/Syntax
+        # @see https://github.com/google/re2/wiki/Syntax Regex syntax
         #
         # @param regex [String] Regex to match cell value.
         # @return [Google::Cloud::Bigtable::RowFilter::SimpleFilter]
         #
         # @example
+        #   require "google/cloud/bigtable"
         #
         #   filter = Google::Cloud::Bigtable::RowFilter.value("abc.*")
         #
@@ -472,6 +483,7 @@ module Google
         # @return [Google::Cloud::Bigtable::RowFilter::SimpleFilter]
         #
         # @example
+        #   require "google/cloud/bigtable"
         #
         #   filter = Google::Cloud::Bigtable::RowFilter.label("user-detail")
         #
@@ -490,6 +502,7 @@ module Google
         # @return [Google::Cloud::Bigtable::RowFilter::SimpleFilter]
         #
         # @example
+        #   require "google/cloud/bigtable"
         #
         #   filter = Google::Cloud::Bigtable::RowFilter.cells_per_row_offset(3)
         #
@@ -508,6 +521,7 @@ module Google
         # @return [Google::Cloud::Bigtable::RowFilter::SimpleFilter]
         #
         # @example
+        #   require "google/cloud/bigtable"
         #
         #   filter = Google::Cloud::Bigtable::RowFilter.cells_per_row(5)
         #
@@ -526,6 +540,7 @@ module Google
         # @return [Google::Cloud::Bigtable::RowFilter::SimpleFilter]
         #
         # @example
+        #   require "google/cloud/bigtable"
         #
         #   filter = Google::Cloud::Bigtable::RowFilter.cells_per_column(5)
         #
@@ -544,6 +559,7 @@ module Google
         # @return [Google::Cloud::Bigtable::RowFilter::SimpleFilter]
         #
         # @example
+        #   require "google/cloud/bigtable"
         #
         #   timestamp_micros = (Time.now.to_f * 1000000).round(-3)
         #   from = timestamp_micros - 300000000
@@ -577,7 +593,7 @@ module Google
         # @param range [Google::Cloud::Bigtable::ValueRange]
         # @return [Google::Cloud::Bigtable::RowFilter::SimpleFilter]
         #
-        # @example Start to end range
+        # @example Start to end range.
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
@@ -586,7 +602,7 @@ module Google
         #   range = table.new_value_range.from("value-001", inclusive: false)
         #   filter = Google::Cloud::Bigtable::RowFilter.value_range(range)
         #
-        # @example Start exlusive to infinite end range
+        # @example Start exclusive to infinite end range.
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new

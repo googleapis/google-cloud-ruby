@@ -39,7 +39,8 @@ module Google
           #   * `:PLANNED_MAINTENANCE` - The table is temporarily unable to serve.
           #   * `:UNPLANNED_MAINTENANCE` - The table is temporarily unable to serve.
           #   * `:READY` - The table can serve.
-          # @return [Symbol]
+          #
+          # @return [Symbol] The state of replication.
           #
           def replication_state
             @grpc.replication_state
@@ -49,7 +50,8 @@ module Google
           # The cluster was recently created, and the table must finish copying
           # over pre-existing data from other clusters before it can begin
           # receiving live replication updates and serving.
-          # @return [Boolean]
+          #
+          # @return [Boolean] `true` if the cluster is initializing.
           #
           def initializing?
             replication_state == :INITIALIZING
@@ -58,7 +60,8 @@ module Google
           ##
           # The table is temporarily unable to serve
           # requests from this cluster due to planned internal maintenance.
-          # @return [Boolean]
+          #
+          # @return [Boolean] `true` if the cluster is in planned maintenance.
           #
           def planned_maintenance?
             replication_state == :PLANNED_MAINTENANCE
@@ -67,7 +70,8 @@ module Google
           ##
           # The table is temporarily unable to serve requests from this
           # cluster due to unplanned or emergency maintenance.
-          # @return [Boolean]
+          #
+          # @return [Boolean] `true` if the cluster is in unplanned maintenance.
           #
           def unplanned_maintenance?
             replication_state == :UNPLANNED_MAINTENANCE
@@ -77,7 +81,8 @@ module Google
           # The table can serve requests from this cluster.
           # Depending on replication delay, reads may not immediately
           # reflect the state of the table in other clusters.
-          # @return [Boolean]
+          #
+          # @return [Boolean] `true` if the cluster is ready.
           #
           def ready?
             replication_state == :READY

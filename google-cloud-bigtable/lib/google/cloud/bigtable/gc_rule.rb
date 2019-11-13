@@ -219,12 +219,12 @@ module Google
         end
 
         ##
-        # Create GcRule instance with max number of versions.
+        # Creates a GcRule instance with max number of versions.
         #
         # @param versions [Integer] Max number of versions
         # @return [Google::Cloud::Bigtable::GcRule]
         #
-        # @example Create a table with column families.
+        # @example
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
@@ -240,12 +240,12 @@ module Google
         end
 
         ##
-        # Create GcRule instance with max age.
+        # Creates a GcRule instance with max age.
         #
         # @param age [Integer] Max age in seconds.
         # @return [Google::Cloud::Bigtable::GcRule]
         #
-        # @example Create a table with column families.
+        # @example
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
@@ -261,13 +261,13 @@ module Google
         end
 
         ##
-        # Create union GcRule instance.
+        # Creates a union GcRule instance.
         #
         # @param rules [Google::Cloud::Bigtable::GcRule, Array<Google::Cloud::Bigtable::GcRule>]
         #   List of GcRule with nested rules.
         # @return [Google::Cloud::Bigtable::GcRule]
         #
-        # @example Create a table with column families.
+        # @example
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
@@ -287,13 +287,13 @@ module Google
         end
 
         ##
-        # Create intersection GCRule instance.
+        # Creates a intersection GCRule instance.
         #
         # @param rules [Google::Cloud::Bigtable::GcRule, Array<Google::Cloud::Bigtable::GcRule>]
         #   List of GcRule with nested rules.
         # @return [Google::Cloud::Bigtable::GcRule]
         #
-        # @example Create a table with column families.
+        # @example
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new

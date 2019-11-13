@@ -60,7 +60,7 @@ module Google
         end
 
         ##
-        # Get column family name
+        # Gets the column family name.
         #
         # @return [String]
         #
@@ -69,7 +69,7 @@ module Google
         end
 
         ##
-        # Set column family name
+        # Sets the column family name.
         #
         # @param name [String] Column family name
         #
@@ -78,7 +78,7 @@ module Google
         end
 
         ##
-        # Set column range with the lower bound.
+        # Sets the column range with the lower bound.
         #
         # @param qualifier [String] Column qualifier name. Required
         # @param inclusive [String] Lower bound flag. Inclusive/Exclusive.
@@ -111,7 +111,7 @@ module Google
         end
 
         ##
-        # Set column range with the upper bound.
+        # Sets the column range with the upper bound.
         #
         # @param qualifier [String] Column qualifier name. Required.
         # @param inclusive [String] Upper bound flag. Inclusive/Exclusive.
@@ -144,7 +144,7 @@ module Google
         end
 
         ##
-        # Set column range with the inclusive upper and lower bound.
+        # Sets the column range with the inclusive upper and lower bound.
         #
         # @param from_qualifier [String] Inclusive from qualifier. Required.
         # @param to_qualifier [String] Inclusive to qualifier. Required.
@@ -163,7 +163,7 @@ module Google
         end
 
         ##
-        # Set column range with the inclusive upper and the exclusive lower bound.
+        # Sets the column range with the inclusive upper and the exclusive lower bound.
         #
         # @param from_qualifier [String] Inclusive from qualifier
         # @param to_qualifier [String] Exclusive to qualifier

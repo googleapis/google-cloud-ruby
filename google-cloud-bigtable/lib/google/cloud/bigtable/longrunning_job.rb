@@ -37,7 +37,7 @@ module Google
         attr_accessor :service
 
         ##
-        # Get result object of the operation.
+        # Gets the result object of the operation.
         #
         # @return [Object, nil]
         #   `nil` if the operation is not complete.

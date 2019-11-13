@@ -1,10 +1,9 @@
-# Cloud Bigtable
-
-Ruby Client for Cloud Bigtable API ([Beta](https://github.com/googleapis/google-cloud-ruby#versioning))
+# Ruby Client for Cloud Bigtable API ([Beta](https://github.com/googleapis/google-cloud-ruby#versioning))
 
 [Cloud Bigtable API][Product Documentation]:
 API for reading and writing the contents of Bigtables associated with a
 cloud project.
+- [Client Library Documentation][]
 - [Product Documentation][]
 
 ## Quick Start
@@ -16,7 +15,14 @@ steps:
 3. [Enable the Cloud Bigtable API.](https://console.cloud.google.com/apis/library/bigtable.googleapis.com)
 4. [Setup Authentication.](https://googleapis.dev/ruby/google-cloud-bigtable/latest/file.AUTHENTICATION.html)
 
+### Installation
+```
+$ gem install google-cloud-bigtable
+```
+
 ### Next Steps
+- Read the [Client Library Documentation][] for Cloud Bigtable API
+  to see other available methods on the client.
 - Read the [Cloud Bigtable API Product documentation][Product Documentation]
   to learn more about the product and see How-to Guides.
 - View this [repository's main README](https://github.com/googleapis/google-cloud-ruby/blob/master/README.md)
@@ -28,4 +34,5 @@ Google Bigtable can be configured to use an emulator or to enable gRPC's
 logging. To learn more, see the {file:EMULATOR.md Emulator guide} and
 {file:LOGGING.md Logging guide}.
 
+[Client Library Documentation]: https://googleapis.dev/ruby/google-cloud-bigtable/latest
 [Product Documentation]: https://cloud.google.com/bigtable

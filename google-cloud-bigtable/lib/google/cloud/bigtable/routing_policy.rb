@@ -33,7 +33,7 @@ module Google
       #   availability. Value contains `cluster_id` and optional field
       #   `allow_transactional_writes`.
       #
-      # @example Create an app profile with a single cluster routing policy
+      # @example Create an app profile with a single cluster routing policy.
       #   require "google/cloud/bigtable"
       #
       #   bigtable = Google::Cloud::Bigtable.new
@@ -52,7 +52,7 @@ module Google
       #   )
       #   puts app_profile.routing_policy
       #
-      # @example Create an app profile with multi-cluster routing policy
+      # @example Create an app profile with multi-cluster routing policy.
       #   require "google/cloud/bigtable"
       #
       #   bigtable = Google::Cloud::Bigtable.new
@@ -139,6 +139,7 @@ module Google
       #     allowed by this app profile. It is unsafe to send these requests to
       #     the same table/row/column in multiple clusters.
       #     Default value is false.
+      #
       class SingleClusterRouting < RoutingPolicy
         attr_reader :cluster_id, :allow_transactional_writes
 

@@ -23,7 +23,7 @@ module Google
       # @private
       # # RowsReader
       #
-      # Retyable read rows helper
+      # Retryable read rows helper
       #
       class RowsReader
         # @private
@@ -106,7 +106,7 @@ module Google
         end
 
         ##
-        # Calucates and returns the read rows limit and row set based on last read key.
+        # Calculates and returns the read rows limit and row set based on last read key.
         #
         # @param rows_limit [Integer]
         #   The read will terminate after committing to N rows' worth of results.
