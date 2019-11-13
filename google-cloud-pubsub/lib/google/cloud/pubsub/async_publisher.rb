@@ -44,20 +44,17 @@ module Google
       #
       #   topic.async_publisher.stop.wait!
       #
-      # @attr_reader [String] topic_name The name of the topic the messages
-      #   are published to. In the form of
+      # @attr_reader [String] topic_name The name of the topic the messages are published to. In the form of
       #   "/projects/project-identifier/topics/topic-name".
-      # @attr_reader [Integer] max_bytes The maximum size of messages to be
-      #   collected before the batch is published. Default is 10,000,000
-      #   (10MB).
-      # @attr_reader [Integer] max_messages The maximum number of messages to
-      #   be collected before the batch is published. Default is 1,000.
-      # @attr_reader [Numeric] interval The number of seconds to collect
-      #   messages before the batch is published. Default is 0.25.
-      # @attr_reader [Numeric] publish_threads The number of threads used to
-      #   publish messages. Default is 4.
-      # @attr_reader [Numeric] callback_threads The number of threads to
-      #   handle the published messages' callbacks. Default is 8.
+      # @attr_reader [Integer] max_bytes The maximum size of messages to be collected before the batch is published.
+      #   Default is 1,000,000 (1MB).
+      # @attr_reader [Integer] max_messages The maximum number of messages to be collected before the batch is
+      #   published. Default is 100.
+      # @attr_reader [Numeric] interval The number of seconds to collect messages before the batch is published. Default
+      #   is 0.01.
+      # @attr_reader [Numeric] publish_threads The number of threads used to publish messages. Default is 2.
+      # @attr_reader [Numeric] callback_threads The number of threads to handle the published messages' callbacks.
+      #   Default is 4.
       #
       class AsyncPublisher
         include MonitorMixin
@@ -71,18 +68,17 @@ module Google
 
         ##
         # @private Create a new instance of the object.
-        def initialize topic_name, service, max_bytes: 10_000_000, max_messages: 1000, interval: 0.25, threads: {}
+        def initialize topic_name, service, max_bytes: 1_000_000, max_messages: 100, interval: 0.01, threads: {}
           # init MonitorMixin
           super()
-
           @topic_name = service.topic_path topic_name
           @service    = service
 
           @max_bytes        = max_bytes
           @max_messages     = max_messages
           @interval         = interval
-          @publish_threads  = (threads[:publish] || 4).to_i
-          @callback_threads = (threads[:callback] || 8).to_i
+          @publish_threads  = (threads[:publish] || 2).to_i
+          @callback_threads = (threads[:callback] || 4).to_i
 
           @published_at = nil
           @publish_thread_pool = Concurrent::ThreadPoolExecutor.new max_threads: @publish_threads
