@@ -523,6 +523,12 @@ module Google
               # @param name [String]
               #   Required. The name of the requested instance. Values are of the form
               #   `projects/<project>/instances/<instance>`.
+              # @param field_mask [Google::Protobuf::FieldMask | Hash]
+              #   If field_mask is present, specifies the subset of [][google.spanner.admin.instance.v1.Instance] fields that
+              #   should be returned.
+              #   If absent, all [][google.spanner.admin.instance.v1.Instance] fields are returned.
+              #   A hash of the same form as `Google::Protobuf::FieldMask`
+              #   can also be provided.
               # @param options [Google::Gax::CallOptions]
               #   Overrides the default settings for this call, e.g, timeout,
               #   retries, etc.
@@ -540,10 +546,12 @@ module Google
 
               def get_instance \
                   name,
+                  field_mask: nil,
                   options: nil,
                   &block
                 req = {
-                  name: name
+                  name: name,
+                  field_mask: field_mask
                 }.delete_if { |_, v| v.nil? }
                 req = Google::Gax::to_proto(req, Google::Spanner::Admin::Instance::V1::GetInstanceRequest)
                 @get_instance.call(req, options, &block)
