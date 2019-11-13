@@ -32,7 +32,20 @@ $ gem install google-cloud-bigtable
 
 This library uses Service Account credentials to connect to Google Cloud services. When running on Google Cloud Platform (GCP), including Google Compute Engine (GCE), Google Kubernetes Engine (GKE), Google App Engine (GAE), Google Cloud Functions (GCF) and Cloud Run, the credentials will be discovered automatically. When running on other environments the Service Account credentials can be specified by providing the path to the JSON file, or the JSON itself, in environment variables.
 
-Instructions and configuration options are covered in the [Authentication Guide](https://googleapis.dev/ruby/google-cloud-bigquery/latest/file.AUTHENTICATION.html).
+Instructions and configuration options are covered in the [Authentication Guide](https://googleapis.dev/ruby/google-cloud-bigtable/latest/file.AUTHENTICATION.html).
+
+## Example
+
+```ruby
+require "google/cloud/bigtable"
+
+bigtable = Google::Cloud::Bigtable.new
+table = bigtable.table("my-instance", "my-table")
+
+table.read_rows(limit: 10).each do |row|
+  puts row
+end
+```
 
 ## Enabling Logging
 
