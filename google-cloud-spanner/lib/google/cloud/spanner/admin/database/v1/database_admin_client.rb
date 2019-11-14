@@ -714,11 +714,14 @@ module Google
               #
               #   # TODO: Initialize `resource`:
               #   resource = ''
-              #   response = database_admin_client.test_iam_permissions(resource)
+              #
+              #   # TODO: Initialize `permissions`:
+              #   permissions = []
+              #   response = database_admin_client.test_iam_permissions(resource, permissions)
 
               def test_iam_permissions \
                   resource,
-                  permissions: nil,
+                  permissions,
                   options: nil,
                   &block
                 req = {

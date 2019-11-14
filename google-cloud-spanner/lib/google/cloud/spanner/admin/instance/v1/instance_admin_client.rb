@@ -950,11 +950,14 @@ module Google
               #
               #   # TODO: Initialize `resource`:
               #   resource = ''
-              #   response = instance_admin_client.test_iam_permissions(resource)
+              #
+              #   # TODO: Initialize `permissions`:
+              #   permissions = []
+              #   response = instance_admin_client.test_iam_permissions(resource, permissions)
 
               def test_iam_permissions \
                   resource,
-                  permissions: nil,
+                  permissions,
                   options: nil,
                   &block
                 req = {

@@ -681,6 +681,7 @@ describe Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient do
     it 'invokes test_iam_permissions without error' do
       # Create request parameters
       resource = ''
+      permissions = []
 
       # Create expected grpc response
       expected_response = {}
@@ -690,6 +691,7 @@ describe Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Iam::V1::TestIamPermissionsRequest, request)
         assert_equal(resource, request.resource)
+        assert_equal(permissions, request.permissions)
         OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub_v1.new(:test_iam_permissions, mock_method)
@@ -702,13 +704,13 @@ describe Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient do
           client = Google::Cloud::Spanner::Admin::Database.new(version: :v1)
 
           # Call method
-          response = client.test_iam_permissions(resource)
+          response = client.test_iam_permissions(resource, permissions)
 
           # Verify the response
           assert_equal(expected_response, response)
 
           # Call method with block
-          client.test_iam_permissions(resource) do |response, operation|
+          client.test_iam_permissions(resource, permissions) do |response, operation|
             # Verify the response
             assert_equal(expected_response, response)
             refute_nil(operation)
@@ -720,11 +722,13 @@ describe Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient do
     it 'invokes test_iam_permissions with error' do
       # Create request parameters
       resource = ''
+      permissions = []
 
       # Mock Grpc layer
       mock_method = proc do |request|
         assert_instance_of(Google::Iam::V1::TestIamPermissionsRequest, request)
         assert_equal(resource, request.resource)
+        assert_equal(permissions, request.permissions)
         raise custom_error
       end
       mock_stub = MockGrpcClientStub_v1.new(:test_iam_permissions, mock_method)
@@ -738,7 +742,7 @@ describe Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient do
 
           # Call method
           err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
-            client.test_iam_permissions(resource)
+            client.test_iam_permissions(resource, permissions)
           end
 
           # Verify the GaxError wrapped the custom error that was raised.
