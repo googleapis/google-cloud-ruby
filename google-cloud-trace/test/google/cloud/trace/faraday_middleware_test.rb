@@ -30,10 +30,10 @@ describe Google::Cloud::Trace::FaradayMiddleware do
   describe "#initialize" do
     it "accepts enable_cross_project_tracing as optional params" do
       middleware = Google::Cloud::Trace::FaradayMiddleware.new app
-      middleware.instance_variable_get(:enable_cross_project_tracing).must_equal(false)
+      middleware.instance_variable_get(:@enable_cross_project_tracing).must_equal(false)
 
       middleware = Google::Cloud::Trace::FaradayMiddleware.new app, enable_cross_project_tracing: true
-      middleware.instance_variable_get(:enable_cross_project_tracing).must_equal(true)
+      middleware.instance_variable_get(:@enable_cross_project_tracing).must_equal(true)
     end
   end
 
@@ -101,12 +101,16 @@ describe Google::Cloud::Trace::FaradayMiddleware do
       Stackdriver::Core::TraceContext.set(trace_context)
     end
 
+    after do
+      Stackdriver::Core::TraceContext.set(nil)
+    end
+
     it "sets trace context header when enable_cross_project_tracing is set to true" do
-      env = OpenStruct.new response: OpenStruct.new(headers: {location: "new-url"}, request_headers: {})
+      env = OpenStruct.new headers: {location: "new-url"}, request_headers: {}
 
       middleware.send :add_trace_context_header, env
 
-      env.[:request_headers]["X-Cloud-Trace-Context"].must_equal trace_context.to_string
+      env[:request_headers]["X-Cloud-Trace-Context"].must_equal trace_context.to_string
     end
   end
 end
