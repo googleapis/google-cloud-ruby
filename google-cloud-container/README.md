@@ -1,8 +1,8 @@
 # Ruby Client for Kubernetes Engine API ([Beta](https://github.com/googleapis/google-cloud-ruby#versioning))
 
 [Kubernetes Engine API][Product Documentation]:
-The Google Kubernetes Engine API is used for building and managing container
-based applications, powered by the open source Kubernetes technology.
+Builds and manages container-based applications, powered by the open source
+Kubernetes technology.
 - [Client Library Documentation][]
 - [Product Documentation][]
 

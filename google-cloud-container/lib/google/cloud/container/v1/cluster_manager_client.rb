@@ -52,6 +52,15 @@ module Google
 
           DEFAULT_TIMEOUT = 30
 
+          PAGE_DESCRIPTORS = {
+            "list_usable_subnetworks" => Google::Gax::PageDescriptor.new(
+              "page_token",
+              "next_page_token",
+              "subnetworks")
+          }.freeze
+
+          private_constant :PAGE_DESCRIPTORS
+
           # The scopes needed to make gRPC calls to all of the methods defined in
           # this service.
           ALL_SCOPES = [
@@ -147,6 +156,7 @@ module Google
                 client_config,
                 Google::Gax::Grpc::STATUS_CODE_NAMES,
                 timeout,
+                page_descriptors: PAGE_DESCRIPTORS,
                 errors: Google::Gax::Grpc::API_ERRORS,
                 metadata: headers
               )
@@ -407,6 +417,14 @@ module Google
                 {'name' => request.name}
               end
             )
+            @list_usable_subnetworks = Google::Gax.create_api_call(
+              @cluster_manager_stub.method(:list_usable_subnetworks),
+              defaults["list_usable_subnetworks"],
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
+            )
           end
 
           # Service calls
@@ -415,11 +433,11 @@ module Google
           # zones.
           #
           # @param project_id [String]
-          #   Deprecated. The Google Developers Console [project ID or project
+          #   Required. Deprecated. The Google Developers Console [project ID or project
           #   number](https://support.google.com/cloud/answer/6158840).
           #   This field has been deprecated and replaced by the parent field.
           # @param zone [String]
-          #   Deprecated. The name of the Google Compute Engine
+          #   Required. Deprecated. The name of the Google Compute Engine
           #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
           #   resides, or "-" for all zones.
           #   This field has been deprecated and replaced by the parent field.
@@ -465,16 +483,16 @@ module Google
           # Gets the details of a specific cluster.
           #
           # @param project_id [String]
-          #   Deprecated. The Google Developers Console [project ID or project
+          #   Required. Deprecated. The Google Developers Console [project ID or project
           #   number](https://support.google.com/cloud/answer/6158840).
           #   This field has been deprecated and replaced by the name field.
           # @param zone [String]
-          #   Deprecated. The name of the Google Compute Engine
+          #   Required. Deprecated. The name of the Google Compute Engine
           #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
           #   resides.
           #   This field has been deprecated and replaced by the name field.
           # @param cluster_id [String]
-          #   Deprecated. The name of the cluster to retrieve.
+          #   Required. Deprecated. The name of the cluster to retrieve.
           #   This field has been deprecated and replaced by the name field.
           # @param name [String]
           #   The name (project, location, cluster) of the cluster to retrieve.
@@ -526,24 +544,24 @@ module Google
           # [default network](https://cloud.google.com/compute/docs/networks-and-firewalls#networks).
           #
           # One firewall is added for the cluster. After cluster creation,
-          # the cluster creates routes for each node to allow the containers
+          # the Kubelet creates routes for each node to allow the containers
           # on that node to communicate with all other instances in the
           # cluster.
           #
           # Finally, an entry is added to the project's global metadata indicating
-          # which CIDR range is being used by the cluster.
+          # which CIDR range the cluster is using.
           #
           # @param project_id [String]
-          #   Deprecated. The Google Developers Console [project ID or project
+          #   Required. Deprecated. The Google Developers Console [project ID or project
           #   number](https://support.google.com/cloud/answer/6158840).
           #   This field has been deprecated and replaced by the parent field.
           # @param zone [String]
-          #   Deprecated. The name of the Google Compute Engine
+          #   Required. Deprecated. The name of the Google Compute Engine
           #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
           #   resides.
           #   This field has been deprecated and replaced by the parent field.
           # @param cluster [Google::Container::V1::Cluster | Hash]
-          #   A [cluster
+          #   Required. A [cluster
           #   resource](/container-engine/reference/rest/v1/projects.zones.clusters)
           #   A hash of the same form as `Google::Container::V1::Cluster`
           #   can also be provided.
@@ -593,19 +611,19 @@ module Google
           # Updates the settings of a specific cluster.
           #
           # @param project_id [String]
-          #   Deprecated. The Google Developers Console [project ID or project
+          #   Required. Deprecated. The Google Developers Console [project ID or project
           #   number](https://support.google.com/cloud/answer/6158840).
           #   This field has been deprecated and replaced by the name field.
           # @param zone [String]
-          #   Deprecated. The name of the Google Compute Engine
+          #   Required. Deprecated. The name of the Google Compute Engine
           #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
           #   resides.
           #   This field has been deprecated and replaced by the name field.
           # @param cluster_id [String]
-          #   Deprecated. The name of the cluster to upgrade.
+          #   Required. Deprecated. The name of the cluster to upgrade.
           #   This field has been deprecated and replaced by the name field.
           # @param update [Google::Container::V1::ClusterUpdate | Hash]
-          #   A description of the update.
+          #   Required. A description of the update.
           #   A hash of the same form as `Google::Container::V1::ClusterUpdate`
           #   can also be provided.
           # @param name [String]
@@ -656,25 +674,25 @@ module Google
             @update_cluster.call(req, options, &block)
           end
 
-          # Updates the version and/or image type for a specific node pool.
+          # Updates the version and/or image type for the specified node pool.
           #
           # @param project_id [String]
-          #   Deprecated. The Google Developers Console [project ID or project
+          #   Required. Deprecated. The Google Developers Console [project ID or project
           #   number](https://support.google.com/cloud/answer/6158840).
           #   This field has been deprecated and replaced by the name field.
           # @param zone [String]
-          #   Deprecated. The name of the Google Compute Engine
+          #   Required. Deprecated. The name of the Google Compute Engine
           #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
           #   resides.
           #   This field has been deprecated and replaced by the name field.
           # @param cluster_id [String]
-          #   Deprecated. The name of the cluster to upgrade.
+          #   Required. Deprecated. The name of the cluster to upgrade.
           #   This field has been deprecated and replaced by the name field.
           # @param node_pool_id [String]
-          #   Deprecated. The name of the node pool to upgrade.
+          #   Required. Deprecated. The name of the node pool to upgrade.
           #   This field has been deprecated and replaced by the name field.
           # @param node_version [String]
-          #   The Kubernetes version to change the nodes to (typically an
+          #   Required. The Kubernetes version to change the nodes to (typically an
           #   upgrade).
           #
           #   Users may specify either explicit versions offered by Kubernetes Engine or
@@ -686,7 +704,7 @@ module Google
           #   * "1.X.Y-gke.N": picks an explicit Kubernetes version
           #   * "-": picks the Kubernetes master version
           # @param image_type [String]
-          #   The desired image type for the node pool.
+          #   Required. The desired image type for the node pool.
           # @param name [String]
           #   The name (project, location, cluster, node pool) of the node pool to
           #   update. Specified in the format
@@ -746,25 +764,25 @@ module Google
             @update_node_pool.call(req, options, &block)
           end
 
-          # Sets the autoscaling settings for a specific node pool.
+          # Sets the autoscaling settings for the specified node pool.
           #
           # @param project_id [String]
-          #   Deprecated. The Google Developers Console [project ID or project
+          #   Required. Deprecated. The Google Developers Console [project ID or project
           #   number](https://support.google.com/cloud/answer/6158840).
           #   This field has been deprecated and replaced by the name field.
           # @param zone [String]
-          #   Deprecated. The name of the Google Compute Engine
+          #   Required. Deprecated. The name of the Google Compute Engine
           #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
           #   resides.
           #   This field has been deprecated and replaced by the name field.
           # @param cluster_id [String]
-          #   Deprecated. The name of the cluster to upgrade.
+          #   Required. Deprecated. The name of the cluster to upgrade.
           #   This field has been deprecated and replaced by the name field.
           # @param node_pool_id [String]
-          #   Deprecated. The name of the node pool to upgrade.
+          #   Required. Deprecated. The name of the node pool to upgrade.
           #   This field has been deprecated and replaced by the name field.
           # @param autoscaling [Google::Container::V1::NodePoolAutoscaling | Hash]
-          #   Autoscaling configuration for the node pool.
+          #   Required. Autoscaling configuration for the node pool.
           #   A hash of the same form as `Google::Container::V1::NodePoolAutoscaling`
           #   can also be provided.
           # @param name [String]
@@ -824,19 +842,19 @@ module Google
           # Sets the logging service for a specific cluster.
           #
           # @param project_id [String]
-          #   Deprecated. The Google Developers Console [project ID or project
+          #   Required. Deprecated. The Google Developers Console [project ID or project
           #   number](https://support.google.com/cloud/answer/6158840).
           #   This field has been deprecated and replaced by the name field.
           # @param zone [String]
-          #   Deprecated. The name of the Google Compute Engine
+          #   Required. Deprecated. The name of the Google Compute Engine
           #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
           #   resides.
           #   This field has been deprecated and replaced by the name field.
           # @param cluster_id [String]
-          #   Deprecated. The name of the cluster to upgrade.
+          #   Required. Deprecated. The name of the cluster to upgrade.
           #   This field has been deprecated and replaced by the name field.
           # @param logging_service [String]
-          #   The logging service the cluster should use to write metrics.
+          #   Required. The logging service the cluster should use to write metrics.
           #   Currently available options:
           #
           #   * "logging.googleapis.com" - the Google Cloud Logging service
@@ -892,21 +910,23 @@ module Google
           # Sets the monitoring service for a specific cluster.
           #
           # @param project_id [String]
-          #   Deprecated. The Google Developers Console [project ID or project
+          #   Required. Deprecated. The Google Developers Console [project ID or project
           #   number](https://support.google.com/cloud/answer/6158840).
           #   This field has been deprecated and replaced by the name field.
           # @param zone [String]
-          #   Deprecated. The name of the Google Compute Engine
+          #   Required. Deprecated. The name of the Google Compute Engine
           #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
           #   resides.
           #   This field has been deprecated and replaced by the name field.
           # @param cluster_id [String]
-          #   Deprecated. The name of the cluster to upgrade.
+          #   Required. Deprecated. The name of the cluster to upgrade.
           #   This field has been deprecated and replaced by the name field.
           # @param monitoring_service [String]
-          #   The monitoring service the cluster should use to write metrics.
+          #   Required. The monitoring service the cluster should use to write metrics.
           #   Currently available options:
           #
+          #   * "monitoring.googleapis.com/kubernetes" - the Google Cloud Monitoring
+          #     service with Kubernetes-native resource model
           #   * "monitoring.googleapis.com" - the Google Cloud Monitoring service
           #   * "none" - no metrics will be exported from the cluster
           # @param name [String]
@@ -960,19 +980,19 @@ module Google
           # Sets the addons for a specific cluster.
           #
           # @param project_id [String]
-          #   Deprecated. The Google Developers Console [project ID or project
+          #   Required. Deprecated. The Google Developers Console [project ID or project
           #   number](https://support.google.com/cloud/answer/6158840).
           #   This field has been deprecated and replaced by the name field.
           # @param zone [String]
-          #   Deprecated. The name of the Google Compute Engine
+          #   Required. Deprecated. The name of the Google Compute Engine
           #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
           #   resides.
           #   This field has been deprecated and replaced by the name field.
           # @param cluster_id [String]
-          #   Deprecated. The name of the cluster to upgrade.
+          #   Required. Deprecated. The name of the cluster to upgrade.
           #   This field has been deprecated and replaced by the name field.
           # @param addons_config [Google::Container::V1::AddonsConfig | Hash]
-          #   The desired configurations for the various addons available to run in the
+          #   Required. The desired configurations for the various addons available to run in the
           #   cluster.
           #   A hash of the same form as `Google::Container::V1::AddonsConfig`
           #   can also be provided.
@@ -1027,20 +1047,20 @@ module Google
           # Sets the locations for a specific cluster.
           #
           # @param project_id [String]
-          #   Deprecated. The Google Developers Console [project ID or project
+          #   Required. Deprecated. The Google Developers Console [project ID or project
           #   number](https://support.google.com/cloud/answer/6158840).
           #   This field has been deprecated and replaced by the name field.
           # @param zone [String]
-          #   Deprecated. The name of the Google Compute Engine
+          #   Required. Deprecated. The name of the Google Compute Engine
           #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
           #   resides.
           #   This field has been deprecated and replaced by the name field.
           # @param cluster_id [String]
-          #   Deprecated. The name of the cluster to upgrade.
+          #   Required. Deprecated. The name of the cluster to upgrade.
           #   This field has been deprecated and replaced by the name field.
           # @param locations [Array<String>]
-          #   The desired list of Google Compute Engine
-          #   [locations](https://cloud.google.com/compute/docs/zones#available) in which the cluster's nodes
+          #   Required. The desired list of Google Compute Engine
+          #   [zones](https://cloud.google.com/compute/docs/zones#available) in which the cluster's nodes
           #   should be located. Changing the locations a cluster is in will result
           #   in nodes being either created or removed from the cluster, depending on
           #   whether locations are being added or removed.
@@ -1097,19 +1117,19 @@ module Google
           # Updates the master for a specific cluster.
           #
           # @param project_id [String]
-          #   Deprecated. The Google Developers Console [project ID or project
+          #   Required. Deprecated. The Google Developers Console [project ID or project
           #   number](https://support.google.com/cloud/answer/6158840).
           #   This field has been deprecated and replaced by the name field.
           # @param zone [String]
-          #   Deprecated. The name of the Google Compute Engine
+          #   Required. Deprecated. The name of the Google Compute Engine
           #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
           #   resides.
           #   This field has been deprecated and replaced by the name field.
           # @param cluster_id [String]
-          #   Deprecated. The name of the cluster to upgrade.
+          #   Required. Deprecated. The name of the cluster to upgrade.
           #   This field has been deprecated and replaced by the name field.
           # @param master_version [String]
-          #   The Kubernetes version to change the master to.
+          #   Required. The Kubernetes version to change the master to.
           #
           #   Users may specify either explicit versions offered by Kubernetes Engine or
           #   version aliases, which have the following behavior:
@@ -1167,26 +1187,26 @@ module Google
             @update_master.call(req, options, &block)
           end
 
-          # Used to set master auth materials. Currently supports :-
-          # Changing the admin password for a specific cluster.
-          # This can be either via password generation or explicitly set the password.
+          # Sets master auth materials. Currently supports changing the admin password
+          # or a specific cluster, either via password generation or explicitly setting
+          # the password.
           #
           # @param project_id [String]
-          #   Deprecated. The Google Developers Console [project ID or project
+          #   Required. Deprecated. The Google Developers Console [project ID or project
           #   number](https://support.google.com/cloud/answer/6158840).
           #   This field has been deprecated and replaced by the name field.
           # @param zone [String]
-          #   Deprecated. The name of the Google Compute Engine
+          #   Required. Deprecated. The name of the Google Compute Engine
           #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
           #   resides.
           #   This field has been deprecated and replaced by the name field.
           # @param cluster_id [String]
-          #   Deprecated. The name of the cluster to upgrade.
+          #   Required. Deprecated. The name of the cluster to upgrade.
           #   This field has been deprecated and replaced by the name field.
           # @param action [Google::Container::V1::SetMasterAuthRequest::Action]
-          #   The exact form of action to be taken on the master auth.
+          #   Required. The exact form of action to be taken on the master auth.
           # @param update [Google::Container::V1::MasterAuth | Hash]
-          #   A description of the update.
+          #   Required. A description of the update.
           #   A hash of the same form as `Google::Container::V1::MasterAuth`
           #   can also be provided.
           # @param name [String]
@@ -1248,21 +1268,21 @@ module Google
           # Firewalls and routes that were configured during cluster creation
           # are also deleted.
           #
-          # Other Google Compute Engine resources that might be in use by the cluster
-          # (e.g. load balancer resources) will not be deleted if they weren't present
-          # at the initial create time.
+          # Other Google Compute Engine resources that might be in use by the cluster,
+          # such as load balancer resources, are not deleted if they weren't present
+          # when the cluster was initially created.
           #
           # @param project_id [String]
-          #   Deprecated. The Google Developers Console [project ID or project
+          #   Required. Deprecated. The Google Developers Console [project ID or project
           #   number](https://support.google.com/cloud/answer/6158840).
           #   This field has been deprecated and replaced by the name field.
           # @param zone [String]
-          #   Deprecated. The name of the Google Compute Engine
+          #   Required. Deprecated. The name of the Google Compute Engine
           #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
           #   resides.
           #   This field has been deprecated and replaced by the name field.
           # @param cluster_id [String]
-          #   Deprecated. The name of the cluster to delete.
+          #   Required. Deprecated. The name of the cluster to delete.
           #   This field has been deprecated and replaced by the name field.
           # @param name [String]
           #   The name (project, location, cluster) of the cluster to delete.
@@ -1310,11 +1330,11 @@ module Google
           # Lists all operations in a project in a specific zone or all zones.
           #
           # @param project_id [String]
-          #   Deprecated. The Google Developers Console [project ID or project
+          #   Required. Deprecated. The Google Developers Console [project ID or project
           #   number](https://support.google.com/cloud/answer/6158840).
           #   This field has been deprecated and replaced by the parent field.
           # @param zone [String]
-          #   Deprecated. The name of the Google Compute Engine
+          #   Required. Deprecated. The name of the Google Compute Engine
           #   [zone](https://cloud.google.com/compute/docs/zones#available) to return operations for, or `-` for
           #   all zones. This field has been deprecated and replaced by the parent field.
           # @param parent [String]
@@ -1359,16 +1379,16 @@ module Google
           # Gets the specified operation.
           #
           # @param project_id [String]
-          #   Deprecated. The Google Developers Console [project ID or project
+          #   Required. Deprecated. The Google Developers Console [project ID or project
           #   number](https://support.google.com/cloud/answer/6158840).
           #   This field has been deprecated and replaced by the name field.
           # @param zone [String]
-          #   Deprecated. The name of the Google Compute Engine
+          #   Required. Deprecated. The name of the Google Compute Engine
           #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
           #   resides.
           #   This field has been deprecated and replaced by the name field.
           # @param operation_id [String]
-          #   Deprecated. The server-assigned `name` of the operation.
+          #   Required. Deprecated. The server-assigned `name` of the operation.
           #   This field has been deprecated and replaced by the name field.
           # @param name [String]
           #   The name (project, location, operation id) of the operation to get.
@@ -1416,15 +1436,15 @@ module Google
           # Cancels the specified operation.
           #
           # @param project_id [String]
-          #   Deprecated. The Google Developers Console [project ID or project
+          #   Required. Deprecated. The Google Developers Console [project ID or project
           #   number](https://support.google.com/cloud/answer/6158840).
           #   This field has been deprecated and replaced by the name field.
           # @param zone [String]
-          #   Deprecated. The name of the Google Compute Engine
+          #   Required. Deprecated. The name of the Google Compute Engine
           #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the operation resides.
           #   This field has been deprecated and replaced by the name field.
           # @param operation_id [String]
-          #   Deprecated. The server-assigned `name` of the operation.
+          #   Required. Deprecated. The server-assigned `name` of the operation.
           #   This field has been deprecated and replaced by the name field.
           # @param name [String]
           #   The name (project, location, operation id) of the operation to cancel.
@@ -1469,19 +1489,19 @@ module Google
             nil
           end
 
-          # Returns configuration info about the Kubernetes Engine service.
+          # Returns configuration info about the Google Kubernetes Engine service.
           #
           # @param project_id [String]
-          #   Deprecated. The Google Developers Console [project ID or project
+          #   Required. Deprecated. The Google Developers Console [project ID or project
           #   number](https://support.google.com/cloud/answer/6158840).
           #   This field has been deprecated and replaced by the name field.
           # @param zone [String]
-          #   Deprecated. The name of the Google Compute Engine
+          #   Required. Deprecated. The name of the Google Compute Engine
           #   [zone](https://cloud.google.com/compute/docs/zones#available) to return operations for.
           #   This field has been deprecated and replaced by the name field.
           # @param name [String]
-          #   The name (project and location) of the server config to get
-          #   Specified in the format 'projects/*/locations/*'.
+          #   The name (project and location) of the server config to get,
+          #   specified in the format 'projects/*/locations/*'.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -1520,16 +1540,16 @@ module Google
           # Lists the node pools for a cluster.
           #
           # @param project_id [String]
-          #   Deprecated. The Google Developers Console [project ID or project
+          #   Required. Deprecated. The Google Developers Console [project ID or project
           #   number](https://developers.google.com/console/help/new/#projectnumber).
           #   This field has been deprecated and replaced by the parent field.
           # @param zone [String]
-          #   Deprecated. The name of the Google Compute Engine
+          #   Required. Deprecated. The name of the Google Compute Engine
           #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
           #   resides.
           #   This field has been deprecated and replaced by the parent field.
           # @param cluster_id [String]
-          #   Deprecated. The name of the cluster.
+          #   Required. Deprecated. The name of the cluster.
           #   This field has been deprecated and replaced by the parent field.
           # @param parent [String]
           #   The parent (project, location, cluster id) where the node pools will be
@@ -1574,22 +1594,22 @@ module Google
             @list_node_pools.call(req, options, &block)
           end
 
-          # Retrieves the node pool requested.
+          # Retrieves the requested node pool.
           #
           # @param project_id [String]
-          #   Deprecated. The Google Developers Console [project ID or project
+          #   Required. Deprecated. The Google Developers Console [project ID or project
           #   number](https://developers.google.com/console/help/new/#projectnumber).
           #   This field has been deprecated and replaced by the name field.
           # @param zone [String]
-          #   Deprecated. The name of the Google Compute Engine
+          #   Required. Deprecated. The name of the Google Compute Engine
           #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
           #   resides.
           #   This field has been deprecated and replaced by the name field.
           # @param cluster_id [String]
-          #   Deprecated. The name of the cluster.
+          #   Required. Deprecated. The name of the cluster.
           #   This field has been deprecated and replaced by the name field.
           # @param node_pool_id [String]
-          #   Deprecated. The name of the node pool.
+          #   Required. Deprecated. The name of the node pool.
           #   This field has been deprecated and replaced by the name field.
           # @param name [String]
           #   The name (project, location, cluster, node pool id) of the node pool to
@@ -1643,19 +1663,19 @@ module Google
           # Creates a node pool for a cluster.
           #
           # @param project_id [String]
-          #   Deprecated. The Google Developers Console [project ID or project
+          #   Required. Deprecated. The Google Developers Console [project ID or project
           #   number](https://developers.google.com/console/help/new/#projectnumber).
           #   This field has been deprecated and replaced by the parent field.
           # @param zone [String]
-          #   Deprecated. The name of the Google Compute Engine
+          #   Required. Deprecated. The name of the Google Compute Engine
           #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
           #   resides.
           #   This field has been deprecated and replaced by the parent field.
           # @param cluster_id [String]
-          #   Deprecated. The name of the cluster.
+          #   Required. Deprecated. The name of the cluster.
           #   This field has been deprecated and replaced by the parent field.
           # @param node_pool [Google::Container::V1::NodePool | Hash]
-          #   The node pool to create.
+          #   Required. The node pool to create.
           #   A hash of the same form as `Google::Container::V1::NodePool`
           #   can also be provided.
           # @param parent [String]
@@ -1710,19 +1730,19 @@ module Google
           # Deletes a node pool from a cluster.
           #
           # @param project_id [String]
-          #   Deprecated. The Google Developers Console [project ID or project
+          #   Required. Deprecated. The Google Developers Console [project ID or project
           #   number](https://developers.google.com/console/help/new/#projectnumber).
           #   This field has been deprecated and replaced by the name field.
           # @param zone [String]
-          #   Deprecated. The name of the Google Compute Engine
+          #   Required. Deprecated. The name of the Google Compute Engine
           #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
           #   resides.
           #   This field has been deprecated and replaced by the name field.
           # @param cluster_id [String]
-          #   Deprecated. The name of the cluster.
+          #   Required. Deprecated. The name of the cluster.
           #   This field has been deprecated and replaced by the name field.
           # @param node_pool_id [String]
-          #   Deprecated. The name of the node pool to delete.
+          #   Required. Deprecated. The name of the node pool to delete.
           #   This field has been deprecated and replaced by the name field.
           # @param name [String]
           #   The name (project, location, cluster, node pool id) of the node pool to
@@ -1773,23 +1793,23 @@ module Google
             @delete_node_pool.call(req, options, &block)
           end
 
-          # Roll back the previously Aborted or Failed NodePool upgrade.
-          # This will be an no-op if the last upgrade successfully completed.
+          # Rolls back a previously Aborted or Failed NodePool upgrade.
+          # This makes no changes if the last upgrade successfully completed.
           #
           # @param project_id [String]
-          #   Deprecated. The Google Developers Console [project ID or project
+          #   Required. Deprecated. The Google Developers Console [project ID or project
           #   number](https://support.google.com/cloud/answer/6158840).
           #   This field has been deprecated and replaced by the name field.
           # @param zone [String]
-          #   Deprecated. The name of the Google Compute Engine
+          #   Required. Deprecated. The name of the Google Compute Engine
           #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
           #   resides.
           #   This field has been deprecated and replaced by the name field.
           # @param cluster_id [String]
-          #   Deprecated. The name of the cluster to rollback.
+          #   Required. Deprecated. The name of the cluster to rollback.
           #   This field has been deprecated and replaced by the name field.
           # @param node_pool_id [String]
-          #   Deprecated. The name of the node pool to rollback.
+          #   Required. Deprecated. The name of the node pool to rollback.
           #   This field has been deprecated and replaced by the name field.
           # @param name [String]
           #   The name (project, location, cluster, node pool id) of the node poll to
@@ -1843,22 +1863,22 @@ module Google
           # Sets the NodeManagement options for a node pool.
           #
           # @param project_id [String]
-          #   Deprecated. The Google Developers Console [project ID or project
+          #   Required. Deprecated. The Google Developers Console [project ID or project
           #   number](https://support.google.com/cloud/answer/6158840).
           #   This field has been deprecated and replaced by the name field.
           # @param zone [String]
-          #   Deprecated. The name of the Google Compute Engine
+          #   Required. Deprecated. The name of the Google Compute Engine
           #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
           #   resides.
           #   This field has been deprecated and replaced by the name field.
           # @param cluster_id [String]
-          #   Deprecated. The name of the cluster to update.
+          #   Required. Deprecated. The name of the cluster to update.
           #   This field has been deprecated and replaced by the name field.
           # @param node_pool_id [String]
-          #   Deprecated. The name of the node pool to update.
+          #   Required. Deprecated. The name of the node pool to update.
           #   This field has been deprecated and replaced by the name field.
           # @param management [Google::Container::V1::NodeManagement | Hash]
-          #   NodeManagement configuration for the node pool.
+          #   Required. NodeManagement configuration for the node pool.
           #   A hash of the same form as `Google::Container::V1::NodeManagement`
           #   can also be provided.
           # @param name [String]
@@ -1918,21 +1938,21 @@ module Google
           # Sets labels on a cluster.
           #
           # @param project_id [String]
-          #   Deprecated. The Google Developers Console [project ID or project
+          #   Required. Deprecated. The Google Developers Console [project ID or project
           #   number](https://developers.google.com/console/help/new/#projectnumber).
           #   This field has been deprecated and replaced by the name field.
           # @param zone [String]
-          #   Deprecated. The name of the Google Compute Engine
+          #   Required. Deprecated. The name of the Google Compute Engine
           #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
           #   resides.
           #   This field has been deprecated and replaced by the name field.
           # @param cluster_id [String]
-          #   Deprecated. The name of the cluster.
+          #   Required. Deprecated. The name of the cluster.
           #   This field has been deprecated and replaced by the name field.
           # @param resource_labels [Hash{String => String}]
-          #   The labels to set for that cluster.
+          #   Required. The labels to set for that cluster.
           # @param label_fingerprint [String]
-          #   The fingerprint of the previous set of labels for this resource,
+          #   Required. The fingerprint of the previous set of labels for this resource,
           #   used to detect conflicts. The fingerprint is initially generated by
           #   Kubernetes Engine and changes after every request to modify or update
           #   labels. You must always provide an up-to-date fingerprint hash when
@@ -1994,19 +2014,19 @@ module Google
           # Enables or disables the ABAC authorization mechanism on a cluster.
           #
           # @param project_id [String]
-          #   Deprecated. The Google Developers Console [project ID or project
+          #   Required. Deprecated. The Google Developers Console [project ID or project
           #   number](https://support.google.com/cloud/answer/6158840).
           #   This field has been deprecated and replaced by the name field.
           # @param zone [String]
-          #   Deprecated. The name of the Google Compute Engine
+          #   Required. Deprecated. The name of the Google Compute Engine
           #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
           #   resides.
           #   This field has been deprecated and replaced by the name field.
           # @param cluster_id [String]
-          #   Deprecated. The name of the cluster to update.
+          #   Required. Deprecated. The name of the cluster to update.
           #   This field has been deprecated and replaced by the name field.
           # @param enabled [true, false]
-          #   Whether ABAC authorization will be enabled in the cluster.
+          #   Required. Whether ABAC authorization will be enabled in the cluster.
           # @param name [String]
           #   The name (project, location, cluster id) of the cluster to set legacy abac.
           #   Specified in the format 'projects/*/locations/*/clusters/*'.
@@ -2055,19 +2075,19 @@ module Google
             @set_legacy_abac.call(req, options, &block)
           end
 
-          # Start master IP rotation.
+          # Starts master IP rotation.
           #
           # @param project_id [String]
-          #   Deprecated. The Google Developers Console [project ID or project
+          #   Required. Deprecated. The Google Developers Console [project ID or project
           #   number](https://developers.google.com/console/help/new/#projectnumber).
           #   This field has been deprecated and replaced by the name field.
           # @param zone [String]
-          #   Deprecated. The name of the Google Compute Engine
+          #   Required. Deprecated. The name of the Google Compute Engine
           #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
           #   resides.
           #   This field has been deprecated and replaced by the name field.
           # @param cluster_id [String]
-          #   Deprecated. The name of the cluster.
+          #   Required. Deprecated. The name of the cluster.
           #   This field has been deprecated and replaced by the name field.
           # @param name [String]
           #   The name (project, location, cluster id) of the cluster to start IP
@@ -2119,16 +2139,16 @@ module Google
           # Completes master IP rotation.
           #
           # @param project_id [String]
-          #   Deprecated. The Google Developers Console [project ID or project
+          #   Required. Deprecated. The Google Developers Console [project ID or project
           #   number](https://developers.google.com/console/help/new/#projectnumber).
           #   This field has been deprecated and replaced by the name field.
           # @param zone [String]
-          #   Deprecated. The name of the Google Compute Engine
+          #   Required. Deprecated. The name of the Google Compute Engine
           #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
           #   resides.
           #   This field has been deprecated and replaced by the name field.
           # @param cluster_id [String]
-          #   Deprecated. The name of the cluster.
+          #   Required. Deprecated. The name of the cluster.
           #   This field has been deprecated and replaced by the name field.
           # @param name [String]
           #   The name (project, location, cluster id) of the cluster to complete IP
@@ -2176,22 +2196,22 @@ module Google
           # Sets the size for a specific node pool.
           #
           # @param project_id [String]
-          #   Deprecated. The Google Developers Console [project ID or project
+          #   Required. Deprecated. The Google Developers Console [project ID or project
           #   number](https://support.google.com/cloud/answer/6158840).
           #   This field has been deprecated and replaced by the name field.
           # @param zone [String]
-          #   Deprecated. The name of the Google Compute Engine
+          #   Required. Deprecated. The name of the Google Compute Engine
           #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
           #   resides.
           #   This field has been deprecated and replaced by the name field.
           # @param cluster_id [String]
-          #   Deprecated. The name of the cluster to update.
+          #   Required. Deprecated. The name of the cluster to update.
           #   This field has been deprecated and replaced by the name field.
           # @param node_pool_id [String]
-          #   Deprecated. The name of the node pool to update.
+          #   Required. Deprecated. The name of the node pool to update.
           #   This field has been deprecated and replaced by the name field.
           # @param node_count [Integer]
-          #   The desired node count for the pool.
+          #   Required. The desired node count for the pool.
           # @param name [String]
           #   The name (project, location, cluster, node pool id) of the node pool to set
           #   size.
@@ -2246,22 +2266,22 @@ module Google
             @set_node_pool_size.call(req, options, &block)
           end
 
-          # Enables/Disables Network Policy for a cluster.
+          # Enables or disables Network Policy for a cluster.
           #
           # @param project_id [String]
-          #   Deprecated. The Google Developers Console [project ID or project
+          #   Required. Deprecated. The Google Developers Console [project ID or project
           #   number](https://developers.google.com/console/help/new/#projectnumber).
           #   This field has been deprecated and replaced by the name field.
           # @param zone [String]
-          #   Deprecated. The name of the Google Compute Engine
+          #   Required. Deprecated. The name of the Google Compute Engine
           #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
           #   resides.
           #   This field has been deprecated and replaced by the name field.
           # @param cluster_id [String]
-          #   Deprecated. The name of the cluster.
+          #   Required. Deprecated. The name of the cluster.
           #   This field has been deprecated and replaced by the name field.
           # @param network_policy [Google::Container::V1::NetworkPolicy | Hash]
-          #   Configuration options for the NetworkPolicy feature.
+          #   Required. Configuration options for the NetworkPolicy feature.
           #   A hash of the same form as `Google::Container::V1::NetworkPolicy`
           #   can also be provided.
           # @param name [String]
@@ -2315,16 +2335,16 @@ module Google
           # Sets the maintenance policy for a cluster.
           #
           # @param project_id [String]
-          #   The Google Developers Console [project ID or project
+          #   Required. The Google Developers Console [project ID or project
           #   number](https://support.google.com/cloud/answer/6158840).
           # @param zone [String]
-          #   The name of the Google Compute Engine
+          #   Required. The name of the Google Compute Engine
           #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
           #   resides.
           # @param cluster_id [String]
-          #   The name of the cluster to update.
+          #   Required. The name of the cluster to update.
           # @param maintenance_policy [Google::Container::V1::MaintenancePolicy | Hash]
-          #   The maintenance policy to be set for the cluster. An empty field
+          #   Required. The maintenance policy to be set for the cluster. An empty field
           #   clears the existing maintenance policy.
           #   A hash of the same form as `Google::Container::V1::MaintenancePolicy`
           #   can also be provided.
@@ -2375,6 +2395,67 @@ module Google
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Container::V1::SetMaintenancePolicyRequest)
             @set_maintenance_policy.call(req, options, &block)
+          end
+
+          # Lists subnetworks that are usable for creating clusters in a project.
+          #
+          # @param parent [String]
+          #   The parent project where subnetworks are usable.
+          #   Specified in the format 'projects/*'.
+          # @param filter [String]
+          #   Filtering currently only supports equality on the networkProjectId and must
+          #   be in the form: "networkProjectId=[PROJECTID]", where `networkProjectId`
+          #   is the project which owns the listed subnetworks. This defaults to the
+          #   parent project ID.
+          # @param page_size [Integer]
+          #   The maximum number of resources contained in the underlying API
+          #   response. If page streaming is performed per-resource, this
+          #   parameter does not affect the return value. If page streaming is
+          #   performed per-page, this determines the maximum number of
+          #   resources in a page.
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Gax::PagedEnumerable<Google::Container::V1::UsableSubnetwork>]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
+          # @return [Google::Gax::PagedEnumerable<Google::Container::V1::UsableSubnetwork>]
+          #   An enumerable of Google::Container::V1::UsableSubnetwork instances.
+          #   See Google::Gax::PagedEnumerable documentation for other
+          #   operations such as per-page iteration or access to the response
+          #   object.
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/container"
+          #
+          #   cluster_manager_client = Google::Cloud::Container.new(version: :v1)
+          #
+          #   # Iterate over all results.
+          #   cluster_manager_client.list_usable_subnetworks.each do |element|
+          #     # Process element.
+          #   end
+          #
+          #   # Or iterate over results one page at a time.
+          #   cluster_manager_client.list_usable_subnetworks.each_page do |page|
+          #     # Process each page at a time.
+          #     page.each do |element|
+          #       # Process element.
+          #     end
+          #   end
+
+          def list_usable_subnetworks \
+              parent: nil,
+              filter: nil,
+              page_size: nil,
+              options: nil,
+              &block
+            req = {
+              parent: parent,
+              filter: filter,
+              page_size: page_size
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Container::V1::ListUsableSubnetworksRequest)
+            @list_usable_subnetworks.call(req, options, &block)
           end
         end
       end

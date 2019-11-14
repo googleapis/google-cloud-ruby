@@ -63,6 +63,7 @@ module Google
       #      "cluster-name"
       #      "cluster-uid"
       #      "configure-sh"
+      #      "containerd-configure-sh"
       #      "enable-os-login"
       #      "gci-update-strategy"
       #      "gci-ensure-gke-docker"
@@ -70,6 +71,13 @@ module Google
       #      "kube-env"
       #      "startup-script"
       #      "user-data"
+      #      "disable-address-manager"
+      #      "windows-startup-script-ps1"
+      #      "common-psm1"
+      #      "k8s-node-setup-psm1"
+      #      "install-ssh-psm1"
+      #      "user-profile-psm1"
+      #      "serial-port-logging-enable"
       #
       #     Values are free-form strings, and only have meaning as interpreted by
       #     the image running in the instance. The only restriction placed on them is
@@ -94,9 +102,9 @@ module Google
       #   @return [Integer]
       #     The number of local SSD disks to be attached to the node.
       #
-      #     The limit for this value is dependant upon the maximum number of
+      #     The limit for this value is dependent upon the maximum number of
       #     disks available on a machine per zone. See:
-      #     https://cloud.google.com/compute/docs/disks/local-ssd#local_ssd_limits
+      #     https://cloud.google.com/compute/docs/disks/local-ssd
       #     for more information.
       # @!attribute [rw] tags
       #   @return [Array<String>]
@@ -128,7 +136,65 @@ module Google
       #     <code>minCpuPlatform: &quot;Intel Sandy Bridge&quot;</code>. For more
       #     information, read [how to specify min CPU
       #     platform](https://cloud.google.com/compute/docs/instances/specify-min-cpu-platform)
+      # @!attribute [rw] taints
+      #   @return [Array<Google::Container::V1::NodeTaint>]
+      #     List of kubernetes taints to be applied to each node.
+      #
+      #     For more information, including usage and the valid values, see:
+      #     https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/
+      # @!attribute [rw] shielded_instance_config
+      #   @return [Google::Container::V1::ShieldedInstanceConfig]
+      #     Shielded Instance options.
       class NodeConfig; end
+
+      # A set of Shielded Instance options.
+      # @!attribute [rw] enable_secure_boot
+      #   @return [true, false]
+      #     Defines whether the instance has Secure Boot enabled.
+      #
+      #     Secure Boot helps ensure that the system only runs authentic software by
+      #     verifying the digital signature of all boot components, and halting the
+      #     boot process if signature verification fails.
+      # @!attribute [rw] enable_integrity_monitoring
+      #   @return [true, false]
+      #     Defines whether the instance has integrity monitoring enabled.
+      #
+      #     Enables monitoring and attestation of the boot integrity of the instance.
+      #     The attestation is performed against the integrity policy baseline. This
+      #     baseline is initially derived from the implicitly trusted boot image when
+      #     the instance is created.
+      class ShieldedInstanceConfig; end
+
+      # Kubernetes taint is comprised of three fields: key, value, and effect. Effect
+      # can only be one of three types:  NoSchedule, PreferNoSchedule or NoExecute.
+      #
+      # For more information, including usage and the valid values, see:
+      # https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/
+      # @!attribute [rw] key
+      #   @return [String]
+      #     Key for taint.
+      # @!attribute [rw] value
+      #   @return [String]
+      #     Value for taint.
+      # @!attribute [rw] effect
+      #   @return [Google::Container::V1::NodeTaint::Effect]
+      #     Effect for taint.
+      class NodeTaint
+        # Possible values for Effect in taint.
+        module Effect
+          # Not set
+          EFFECT_UNSPECIFIED = 0
+
+          # NoSchedule
+          NO_SCHEDULE = 1
+
+          # PreferNoSchedule
+          PREFER_NO_SCHEDULE = 2
+
+          # NoExecute
+          NO_EXECUTE = 3
+        end
+      end
 
       # The authentication information for accessing the master endpoint.
       # Authentication can be done using HTTP basic auth or using client
@@ -136,8 +202,8 @@ module Google
       # @!attribute [rw] username
       #   @return [String]
       #     The username to use for HTTP basic authentication to the master endpoint.
-      #     For clusters v1.6.0 and later, you can disable basic authentication by
-      #     providing an empty username.
+      #     For clusters v1.6.0 and later, basic authentication can be disabled by
+      #     leaving username unspecified (or setting it to the empty string).
       # @!attribute [rw] password
       #   @return [String]
       #     The password to use for HTTP basic authentication to the master endpoint.
@@ -183,11 +249,19 @@ module Google
       # @!attribute [rw] kubernetes_dashboard
       #   @return [Google::Container::V1::KubernetesDashboard]
       #     Configuration for the Kubernetes Dashboard.
+      #     This addon is deprecated, and will be disabled in 1.15. It is recommended
+      #     to use the Cloud Console to manage and monitor your Kubernetes clusters,
+      #     workloads and applications. For more information, see:
+      #     https://cloud.google.com/kubernetes-engine/docs/concepts/dashboards
       # @!attribute [rw] network_policy_config
       #   @return [Google::Container::V1::NetworkPolicyConfig]
       #     Configuration for NetworkPolicy. This only tracks whether the addon
       #     is enabled or not on the Master, it does not track whether network policy
       #     is enabled for the nodes.
+      # @!attribute [rw] cloud_run_config
+      #   @return [Google::Container::V1::CloudRunConfig]
+      #     Configuration for the Cloud Run addon, which allows the user to use a
+      #     managed Knative service.
       class AddonsConfig; end
 
       # Configuration options for the HTTP (L7) load balancing controller addon,
@@ -246,6 +320,23 @@ module Google
       #     Output only. The external IP address of this cluster's master endpoint.
       class PrivateClusterConfig; end
 
+      # Configuration for returning group information from authenticators.
+      # @!attribute [rw] enabled
+      #   @return [true, false]
+      #     Whether this cluster should return group membership lookups
+      #     during authentication using a group of security groups.
+      # @!attribute [rw] security_group
+      #   @return [String]
+      #     The name of the security group-of-groups to be used. Only relevant
+      #     if enabled = true.
+      class AuthenticatorGroupsConfig; end
+
+      # Configuration options for the Cloud Run feature.
+      # @!attribute [rw] disabled
+      #   @return [true, false]
+      #     Whether Cloud Run addon is enabled for this cluster.
+      class CloudRunConfig; end
+
       # Configuration options for the master authorized networks feature. Enabled
       # master authorized networks will disallow all external traffic to access
       # Kubernetes master through HTTPS except traffic from the given CIDR blocks,
@@ -255,7 +346,7 @@ module Google
       #     Whether or not master authorized networks is enabled.
       # @!attribute [rw] cidr_blocks
       #   @return [Array<Google::Container::V1::MasterAuthorizedNetworksConfig::CidrBlock>]
-      #     cidr_blocks define up to 10 external networks that could access
+      #     cidr_blocks define up to 50 external networks that could access
       #     Kubernetes master through HTTPS.
       class MasterAuthorizedNetworksConfig
         # CidrBlock contains an optional name and one CIDR block.
@@ -296,6 +387,13 @@ module Google
           CALICO = 1
         end
       end
+
+      # Configuration for Binary Authorization.
+      # @!attribute [rw] enabled
+      #   @return [true, false]
+      #     Enable Binary Authorization for this cluster. If enabled, all container
+      #     images will be validated by Binary Authorization.
+      class BinaryAuthorization; end
 
       # Configuration for controlling how IPs are allocated in the cluster.
       # @!attribute [rw] use_ip_aliases
@@ -388,13 +486,31 @@ module Google
       #     notation (e.g. `10.96.0.0/14`) from the RFC-1918 private networks (e.g.
       #     `10.0.0.0/8`, `172.16.0.0/12`, `192.168.0.0/16`) to pick a specific range
       #     to use.
+      # @!attribute [rw] tpu_ipv4_cidr_block
+      #   @return [String]
+      #     The IP address range of the Cloud TPUs in this cluster. If unspecified, a
+      #     range will be automatically chosen with the default size.
+      #
+      #     This field is only applicable when `use_ip_aliases` is true.
+      #
+      #     If unspecified, the range will use the default size.
+      #
+      #     Set to /netmask (e.g. `/14`) to have a range chosen with a specific
+      #     netmask.
+      #
+      #     Set to a
+      #     [CIDR](http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing)
+      #     notation (e.g. `10.96.0.0/14`) from the RFC-1918 private networks (e.g.
+      #     `10.0.0.0/8`, `172.16.0.0/12`, `192.168.0.0/16`) to pick a specific range
+      #     to use.
       class IPAllocationPolicy; end
 
       # A Google Kubernetes Engine cluster.
       # @!attribute [rw] name
       #   @return [String]
       #     The name of this cluster. The name must be unique within this project
-      #     and zone, and can be up to 40 characters with the following restrictions:
+      #     and location (e.g. zone or region), and can be up to 40 characters with
+      #     the following restrictions:
       #
       #     * Lowercase letters, numbers, and hyphens only.
       #     * Must start with a letter.
@@ -412,26 +528,35 @@ module Google
       #     "node_pool" object, since this configuration (along with the
       #     "node_config") will be used to create a "NodePool" object with an
       #     auto-generated name. Do not use this and a node_pool at the same time.
+      #
+      #     This field is deprecated, use node_pool.initial_node_count instead.
       # @!attribute [rw] node_config
       #   @return [Google::Container::V1::NodeConfig]
       #     Parameters used in creating the cluster's nodes.
-      #     See `nodeConfig` for the description of its properties.
       #     For requests, this field should only be used in lieu of a
       #     "node_pool" object, since this configuration (along with the
       #     "initial_node_count") will be used to create a "NodePool" object with an
       #     auto-generated name. Do not use this and a node_pool at the same time.
       #     For responses, this field will be populated with the node configuration of
-      #     the first node pool.
+      #     the first node pool. (For configuration of each node pool, see
+      #     `node_pool.config`)
       #
       #     If unspecified, the defaults are used.
+      #     This field is deprecated, use node_pool.config instead.
       # @!attribute [rw] master_auth
       #   @return [Google::Container::V1::MasterAuth]
       #     The authentication information for accessing the master endpoint.
+      #     If unspecified, the defaults are used:
+      #     For clusters before v1.12, if master_auth is unspecified, `username` will
+      #     be set to "admin", a random password will be generated, and a client
+      #     certificate will be issued.
       # @!attribute [rw] logging_service
       #   @return [String]
       #     The logging service the cluster should use to write logs.
       #     Currently available options:
       #
+      #     * "logging.googleapis.com/kubernetes" - the Google Cloud Logging
+      #       service with Kubernetes-native resource model
       #     * `logging.googleapis.com` - the Google Cloud Logging service.
       #     * `none` - no logs will be exported from the cluster.
       #     * if left as an empty string,`logging.googleapis.com` will be used.
@@ -471,7 +596,7 @@ module Google
       # @!attribute [rw] locations
       #   @return [Array<String>]
       #     The list of Google Compute Engine
-      #     [locations](https://cloud.google.com/compute/docs/zones#available) in which the cluster's nodes
+      #     [zones](https://cloud.google.com/compute/docs/zones#available) in which the cluster's nodes
       #     should be located.
       # @!attribute [rw] enable_kubernetes_alpha
       #   @return [true, false]
@@ -503,12 +628,36 @@ module Google
       # @!attribute [rw] maintenance_policy
       #   @return [Google::Container::V1::MaintenancePolicy]
       #     Configure the maintenance policy for this cluster.
+      # @!attribute [rw] binary_authorization
+      #   @return [Google::Container::V1::BinaryAuthorization]
+      #     Configuration for Binary Authorization.
+      # @!attribute [rw] autoscaling
+      #   @return [Google::Container::V1::ClusterAutoscaling]
+      #     Cluster-level autoscaling configuration.
       # @!attribute [rw] network_config
       #   @return [Google::Container::V1::NetworkConfig]
       #     Configuration for cluster networking.
+      # @!attribute [rw] default_max_pods_constraint
+      #   @return [Google::Container::V1::MaxPodsConstraint]
+      #     The default constraint on the maximum number of pods that can be run
+      #     simultaneously on a node in the node pool of this cluster. Only honored
+      #     if cluster created with IP Alias support.
+      # @!attribute [rw] resource_usage_export_config
+      #   @return [Google::Container::V1::ResourceUsageExportConfig]
+      #     Configuration for exporting resource usages. Resource usage export is
+      #     disabled when this config is unspecified.
+      # @!attribute [rw] authenticator_groups_config
+      #   @return [Google::Container::V1::AuthenticatorGroupsConfig]
+      #     Configuration controlling RBAC group membership information.
       # @!attribute [rw] private_cluster_config
       #   @return [Google::Container::V1::PrivateClusterConfig]
       #     Configuration for private cluster.
+      # @!attribute [rw] database_encryption
+      #   @return [Google::Container::V1::DatabaseEncryption]
+      #     Configuration of etcd encryption.
+      # @!attribute [rw] vertical_pod_autoscaling
+      #   @return [Google::Container::V1::VerticalPodAutoscaling]
+      #     Cluster-level Vertical Pod Autoscaling configuration.
       # @!attribute [rw] self_link
       #   @return [String]
       #     [Output only] Server-defined URL for the resource.
@@ -547,7 +696,7 @@ module Google
       # @!attribute [rw] current_node_version
       #   @return [String]
       #     [Output only] Deprecated, use
-      #     [NodePool.version](https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.zones.clusters.nodePool)
+      #     [NodePools.version](https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.zones.clusters.nodePools)
       #     instead. The current version of the node software components. If they are
       #     currently at multiple versions because they're in the process of being
       #     upgraded, this reflects the minimum version of all nodes.
@@ -566,7 +715,8 @@ module Google
       #   @return [Integer]
       #     [Output only] The size of the address space on each node for hosting
       #     containers. This is provisioned from within the `container_ipv4_cidr`
-      #     range.
+      #     range. This field will only be set when cluster is in route-based network
+      #     mode.
       # @!attribute [rw] services_ipv4_cidr
       #   @return [String]
       #     [Output only] The IP address range of the Kubernetes services in
@@ -579,7 +729,8 @@ module Google
       #     Deprecated. Use node_pools.instance_group_urls.
       # @!attribute [rw] current_node_count
       #   @return [Integer]
-      #     [Output only] The number of nodes currently in the cluster.
+      #     [Output only]  The number of nodes currently in the cluster. Deprecated.
+      #     Call Kubernetes API directly to retrieve node information.
       # @!attribute [rw] expire_time
       #   @return [String]
       #     [Output only] The time the cluster will be automatically
@@ -590,6 +741,17 @@ module Google
       #     [zone](https://cloud.google.com/compute/docs/regions-zones/regions-zones#available) or
       #     [region](https://cloud.google.com/compute/docs/regions-zones/regions-zones#available) in which
       #     the cluster resides.
+      # @!attribute [rw] enable_tpu
+      #   @return [true, false]
+      #     Enable the ability to use Cloud TPUs in this cluster.
+      # @!attribute [rw] tpu_ipv4_cidr_block
+      #   @return [String]
+      #     [Output only] The IP address range of the Cloud TPUs in this cluster, in
+      #     [CIDR](http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing)
+      #     notation (e.g. `1.2.3.4/29`).
+      # @!attribute [rw] conditions
+      #   @return [Array<Google::Container::V1::StatusCondition>]
+      #     Which conditions caused the current cluster state.
       class Cluster
         # The current status of the cluster.
         module Status
@@ -642,6 +804,8 @@ module Google
       #     The monitoring service the cluster should use to write metrics.
       #     Currently available options:
       #
+      #     * "monitoring.googleapis.com/kubernetes" - the Google Cloud Monitoring
+      #       service with Kubernetes-native resource model
       #     * "monitoring.googleapis.com" - the Google Cloud Monitoring service
       #     * "none" - no metrics will be exported from the cluster
       # @!attribute [rw] desired_addons_config
@@ -657,6 +821,9 @@ module Google
       #   @return [String]
       #     The desired image type for the node pool.
       #     NOTE: Set the "desired_node_pool" field as well.
+      # @!attribute [rw] desired_database_encryption
+      #   @return [Google::Container::V1::DatabaseEncryption]
+      #     Configuration of etcd encryption.
       # @!attribute [rw] desired_node_pool_autoscaling
       #   @return [Google::Container::V1::NodePoolAutoscaling]
       #     Autoscaler configuration for the node pool specified in
@@ -666,7 +833,7 @@ module Google
       # @!attribute [rw] desired_locations
       #   @return [Array<String>]
       #     The desired list of Google Compute Engine
-      #     [locations](https://cloud.google.com/compute/docs/zones#available) in which the cluster's nodes
+      #     [zones](https://cloud.google.com/compute/docs/zones#available) in which the cluster's nodes
       #     should be located. Changing the locations a cluster is in will result
       #     in nodes being either created or removed from the cluster, depending on
       #     whether locations are being added or removed.
@@ -675,6 +842,30 @@ module Google
       # @!attribute [rw] desired_master_authorized_networks_config
       #   @return [Google::Container::V1::MasterAuthorizedNetworksConfig]
       #     The desired configuration options for master authorized networks feature.
+      # @!attribute [rw] desired_cluster_autoscaling
+      #   @return [Google::Container::V1::ClusterAutoscaling]
+      #     Cluster-level autoscaling configuration.
+      # @!attribute [rw] desired_binary_authorization
+      #   @return [Google::Container::V1::BinaryAuthorization]
+      #     The desired configuration options for the Binary Authorization feature.
+      # @!attribute [rw] desired_logging_service
+      #   @return [String]
+      #     The logging service the cluster should use to write logs.
+      #     Currently available options:
+      #
+      #     * "logging.googleapis.com/kubernetes" - the Google Cloud Logging
+      #       service with Kubernetes-native resource model
+      #     * "logging.googleapis.com" - the Google Cloud Logging service
+      #     * "none" - no logs will be exported from the cluster
+      # @!attribute [rw] desired_resource_usage_export_config
+      #   @return [Google::Container::V1::ResourceUsageExportConfig]
+      #     The desired configuration for exporting resource usage.
+      # @!attribute [rw] desired_vertical_pod_autoscaling
+      #   @return [Google::Container::V1::VerticalPodAutoscaling]
+      #     Cluster-level Vertical Pod Autoscaling configuration.
+      # @!attribute [rw] desired_intra_node_visibility_config
+      #   @return [Google::Container::V1::IntraNodeVisibilityConfig]
+      #     The desired config of Intra-node visibility.
       # @!attribute [rw] desired_master_version
       #   @return [String]
       #     The Kubernetes version to change the master to.
@@ -732,6 +923,12 @@ module Google
       #   @return [String]
       #     [Output only] The time the operation completed, in
       #     [RFC3339](https://www.ietf.org/rfc/rfc3339.txt) text format.
+      # @!attribute [rw] cluster_conditions
+      #   @return [Array<Google::Container::V1::StatusCondition>]
+      #     Which conditions caused the current cluster state.
+      # @!attribute [rw] nodepool_conditions
+      #   @return [Array<Google::Container::V1::StatusCondition>]
+      #     Which conditions caused the current node pool state.
       class Operation
         # Current status of the operation.
         module Status
@@ -809,18 +1006,18 @@ module Google
       # CreateClusterRequest creates a cluster.
       # @!attribute [rw] project_id
       #   @return [String]
-      #     Deprecated. The Google Developers Console [project ID or project
+      #     Required. Deprecated. The Google Developers Console [project ID or project
       #     number](https://support.google.com/cloud/answer/6158840).
       #     This field has been deprecated and replaced by the parent field.
       # @!attribute [rw] zone
       #   @return [String]
-      #     Deprecated. The name of the Google Compute Engine
+      #     Required. Deprecated. The name of the Google Compute Engine
       #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
       #     resides.
       #     This field has been deprecated and replaced by the parent field.
       # @!attribute [rw] cluster
       #   @return [Google::Container::V1::Cluster]
-      #     A [cluster
+      #     Required. A [cluster
       #     resource](/container-engine/reference/rest/v1/projects.zones.clusters)
       # @!attribute [rw] parent
       #   @return [String]
@@ -831,18 +1028,18 @@ module Google
       # GetClusterRequest gets the settings of a cluster.
       # @!attribute [rw] project_id
       #   @return [String]
-      #     Deprecated. The Google Developers Console [project ID or project
+      #     Required. Deprecated. The Google Developers Console [project ID or project
       #     number](https://support.google.com/cloud/answer/6158840).
       #     This field has been deprecated and replaced by the name field.
       # @!attribute [rw] zone
       #   @return [String]
-      #     Deprecated. The name of the Google Compute Engine
+      #     Required. Deprecated. The name of the Google Compute Engine
       #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
       #     resides.
       #     This field has been deprecated and replaced by the name field.
       # @!attribute [rw] cluster_id
       #   @return [String]
-      #     Deprecated. The name of the cluster to retrieve.
+      #     Required. Deprecated. The name of the cluster to retrieve.
       #     This field has been deprecated and replaced by the name field.
       # @!attribute [rw] name
       #   @return [String]
@@ -853,22 +1050,22 @@ module Google
       # UpdateClusterRequest updates the settings of a cluster.
       # @!attribute [rw] project_id
       #   @return [String]
-      #     Deprecated. The Google Developers Console [project ID or project
+      #     Required. Deprecated. The Google Developers Console [project ID or project
       #     number](https://support.google.com/cloud/answer/6158840).
       #     This field has been deprecated and replaced by the name field.
       # @!attribute [rw] zone
       #   @return [String]
-      #     Deprecated. The name of the Google Compute Engine
+      #     Required. Deprecated. The name of the Google Compute Engine
       #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
       #     resides.
       #     This field has been deprecated and replaced by the name field.
       # @!attribute [rw] cluster_id
       #   @return [String]
-      #     Deprecated. The name of the cluster to upgrade.
+      #     Required. Deprecated. The name of the cluster to upgrade.
       #     This field has been deprecated and replaced by the name field.
       # @!attribute [rw] update
       #   @return [Google::Container::V1::ClusterUpdate]
-      #     A description of the update.
+      #     Required. A description of the update.
       # @!attribute [rw] name
       #   @return [String]
       #     The name (project, location, cluster) of the cluster to update.
@@ -878,26 +1075,26 @@ module Google
       # UpdateNodePoolRequests update a node pool's image and/or version.
       # @!attribute [rw] project_id
       #   @return [String]
-      #     Deprecated. The Google Developers Console [project ID or project
+      #     Required. Deprecated. The Google Developers Console [project ID or project
       #     number](https://support.google.com/cloud/answer/6158840).
       #     This field has been deprecated and replaced by the name field.
       # @!attribute [rw] zone
       #   @return [String]
-      #     Deprecated. The name of the Google Compute Engine
+      #     Required. Deprecated. The name of the Google Compute Engine
       #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
       #     resides.
       #     This field has been deprecated and replaced by the name field.
       # @!attribute [rw] cluster_id
       #   @return [String]
-      #     Deprecated. The name of the cluster to upgrade.
+      #     Required. Deprecated. The name of the cluster to upgrade.
       #     This field has been deprecated and replaced by the name field.
       # @!attribute [rw] node_pool_id
       #   @return [String]
-      #     Deprecated. The name of the node pool to upgrade.
+      #     Required. Deprecated. The name of the node pool to upgrade.
       #     This field has been deprecated and replaced by the name field.
       # @!attribute [rw] node_version
       #   @return [String]
-      #     The Kubernetes version to change the nodes to (typically an
+      #     Required. The Kubernetes version to change the nodes to (typically an
       #     upgrade).
       #
       #     Users may specify either explicit versions offered by Kubernetes Engine or
@@ -910,7 +1107,7 @@ module Google
       #     * "-": picks the Kubernetes master version
       # @!attribute [rw] image_type
       #   @return [String]
-      #     The desired image type for the node pool.
+      #     Required. The desired image type for the node pool.
       # @!attribute [rw] name
       #   @return [String]
       #     The name (project, location, cluster, node pool) of the node pool to
@@ -921,26 +1118,26 @@ module Google
       # SetNodePoolAutoscalingRequest sets the autoscaler settings of a node pool.
       # @!attribute [rw] project_id
       #   @return [String]
-      #     Deprecated. The Google Developers Console [project ID or project
+      #     Required. Deprecated. The Google Developers Console [project ID or project
       #     number](https://support.google.com/cloud/answer/6158840).
       #     This field has been deprecated and replaced by the name field.
       # @!attribute [rw] zone
       #   @return [String]
-      #     Deprecated. The name of the Google Compute Engine
+      #     Required. Deprecated. The name of the Google Compute Engine
       #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
       #     resides.
       #     This field has been deprecated and replaced by the name field.
       # @!attribute [rw] cluster_id
       #   @return [String]
-      #     Deprecated. The name of the cluster to upgrade.
+      #     Required. Deprecated. The name of the cluster to upgrade.
       #     This field has been deprecated and replaced by the name field.
       # @!attribute [rw] node_pool_id
       #   @return [String]
-      #     Deprecated. The name of the node pool to upgrade.
+      #     Required. Deprecated. The name of the node pool to upgrade.
       #     This field has been deprecated and replaced by the name field.
       # @!attribute [rw] autoscaling
       #   @return [Google::Container::V1::NodePoolAutoscaling]
-      #     Autoscaling configuration for the node pool.
+      #     Required. Autoscaling configuration for the node pool.
       # @!attribute [rw] name
       #   @return [String]
       #     The name (project, location, cluster, node pool) of the node pool to set
@@ -951,22 +1148,22 @@ module Google
       # SetLoggingServiceRequest sets the logging service of a cluster.
       # @!attribute [rw] project_id
       #   @return [String]
-      #     Deprecated. The Google Developers Console [project ID or project
+      #     Required. Deprecated. The Google Developers Console [project ID or project
       #     number](https://support.google.com/cloud/answer/6158840).
       #     This field has been deprecated and replaced by the name field.
       # @!attribute [rw] zone
       #   @return [String]
-      #     Deprecated. The name of the Google Compute Engine
+      #     Required. Deprecated. The name of the Google Compute Engine
       #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
       #     resides.
       #     This field has been deprecated and replaced by the name field.
       # @!attribute [rw] cluster_id
       #   @return [String]
-      #     Deprecated. The name of the cluster to upgrade.
+      #     Required. Deprecated. The name of the cluster to upgrade.
       #     This field has been deprecated and replaced by the name field.
       # @!attribute [rw] logging_service
       #   @return [String]
-      #     The logging service the cluster should use to write metrics.
+      #     Required. The logging service the cluster should use to write metrics.
       #     Currently available options:
       #
       #     * "logging.googleapis.com" - the Google Cloud Logging service
@@ -980,24 +1177,26 @@ module Google
       # SetMonitoringServiceRequest sets the monitoring service of a cluster.
       # @!attribute [rw] project_id
       #   @return [String]
-      #     Deprecated. The Google Developers Console [project ID or project
+      #     Required. Deprecated. The Google Developers Console [project ID or project
       #     number](https://support.google.com/cloud/answer/6158840).
       #     This field has been deprecated and replaced by the name field.
       # @!attribute [rw] zone
       #   @return [String]
-      #     Deprecated. The name of the Google Compute Engine
+      #     Required. Deprecated. The name of the Google Compute Engine
       #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
       #     resides.
       #     This field has been deprecated and replaced by the name field.
       # @!attribute [rw] cluster_id
       #   @return [String]
-      #     Deprecated. The name of the cluster to upgrade.
+      #     Required. Deprecated. The name of the cluster to upgrade.
       #     This field has been deprecated and replaced by the name field.
       # @!attribute [rw] monitoring_service
       #   @return [String]
-      #     The monitoring service the cluster should use to write metrics.
+      #     Required. The monitoring service the cluster should use to write metrics.
       #     Currently available options:
       #
+      #     * "monitoring.googleapis.com/kubernetes" - the Google Cloud Monitoring
+      #       service with Kubernetes-native resource model
       #     * "monitoring.googleapis.com" - the Google Cloud Monitoring service
       #     * "none" - no metrics will be exported from the cluster
       # @!attribute [rw] name
@@ -1009,22 +1208,22 @@ module Google
       # SetAddonsConfigRequest sets the addons associated with the cluster.
       # @!attribute [rw] project_id
       #   @return [String]
-      #     Deprecated. The Google Developers Console [project ID or project
+      #     Required. Deprecated. The Google Developers Console [project ID or project
       #     number](https://support.google.com/cloud/answer/6158840).
       #     This field has been deprecated and replaced by the name field.
       # @!attribute [rw] zone
       #   @return [String]
-      #     Deprecated. The name of the Google Compute Engine
+      #     Required. Deprecated. The name of the Google Compute Engine
       #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
       #     resides.
       #     This field has been deprecated and replaced by the name field.
       # @!attribute [rw] cluster_id
       #   @return [String]
-      #     Deprecated. The name of the cluster to upgrade.
+      #     Required. Deprecated. The name of the cluster to upgrade.
       #     This field has been deprecated and replaced by the name field.
       # @!attribute [rw] addons_config
       #   @return [Google::Container::V1::AddonsConfig]
-      #     The desired configurations for the various addons available to run in the
+      #     Required. The desired configurations for the various addons available to run in the
       #     cluster.
       # @!attribute [rw] name
       #   @return [String]
@@ -1035,23 +1234,23 @@ module Google
       # SetLocationsRequest sets the locations of the cluster.
       # @!attribute [rw] project_id
       #   @return [String]
-      #     Deprecated. The Google Developers Console [project ID or project
+      #     Required. Deprecated. The Google Developers Console [project ID or project
       #     number](https://support.google.com/cloud/answer/6158840).
       #     This field has been deprecated and replaced by the name field.
       # @!attribute [rw] zone
       #   @return [String]
-      #     Deprecated. The name of the Google Compute Engine
+      #     Required. Deprecated. The name of the Google Compute Engine
       #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
       #     resides.
       #     This field has been deprecated and replaced by the name field.
       # @!attribute [rw] cluster_id
       #   @return [String]
-      #     Deprecated. The name of the cluster to upgrade.
+      #     Required. Deprecated. The name of the cluster to upgrade.
       #     This field has been deprecated and replaced by the name field.
       # @!attribute [rw] locations
       #   @return [Array<String>]
-      #     The desired list of Google Compute Engine
-      #     [locations](https://cloud.google.com/compute/docs/zones#available) in which the cluster's nodes
+      #     Required. The desired list of Google Compute Engine
+      #     [zones](https://cloud.google.com/compute/docs/zones#available) in which the cluster's nodes
       #     should be located. Changing the locations a cluster is in will result
       #     in nodes being either created or removed from the cluster, depending on
       #     whether locations are being added or removed.
@@ -1066,22 +1265,22 @@ module Google
       # UpdateMasterRequest updates the master of the cluster.
       # @!attribute [rw] project_id
       #   @return [String]
-      #     Deprecated. The Google Developers Console [project ID or project
+      #     Required. Deprecated. The Google Developers Console [project ID or project
       #     number](https://support.google.com/cloud/answer/6158840).
       #     This field has been deprecated and replaced by the name field.
       # @!attribute [rw] zone
       #   @return [String]
-      #     Deprecated. The name of the Google Compute Engine
+      #     Required. Deprecated. The name of the Google Compute Engine
       #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
       #     resides.
       #     This field has been deprecated and replaced by the name field.
       # @!attribute [rw] cluster_id
       #   @return [String]
-      #     Deprecated. The name of the cluster to upgrade.
+      #     Required. Deprecated. The name of the cluster to upgrade.
       #     This field has been deprecated and replaced by the name field.
       # @!attribute [rw] master_version
       #   @return [String]
-      #     The Kubernetes version to change the master to.
+      #     Required. The Kubernetes version to change the master to.
       #
       #     Users may specify either explicit versions offered by Kubernetes Engine or
       #     version aliases, which have the following behavior:
@@ -1100,25 +1299,25 @@ module Google
       # SetMasterAuthRequest updates the admin password of a cluster.
       # @!attribute [rw] project_id
       #   @return [String]
-      #     Deprecated. The Google Developers Console [project ID or project
+      #     Required. Deprecated. The Google Developers Console [project ID or project
       #     number](https://support.google.com/cloud/answer/6158840).
       #     This field has been deprecated and replaced by the name field.
       # @!attribute [rw] zone
       #   @return [String]
-      #     Deprecated. The name of the Google Compute Engine
+      #     Required. Deprecated. The name of the Google Compute Engine
       #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
       #     resides.
       #     This field has been deprecated and replaced by the name field.
       # @!attribute [rw] cluster_id
       #   @return [String]
-      #     Deprecated. The name of the cluster to upgrade.
+      #     Required. Deprecated. The name of the cluster to upgrade.
       #     This field has been deprecated and replaced by the name field.
       # @!attribute [rw] action
       #   @return [Google::Container::V1::SetMasterAuthRequest::Action]
-      #     The exact form of action to be taken on the master auth.
+      #     Required. The exact form of action to be taken on the master auth.
       # @!attribute [rw] update
       #   @return [Google::Container::V1::MasterAuth]
-      #     A description of the update.
+      #     Required. A description of the update.
       # @!attribute [rw] name
       #   @return [String]
       #     The name (project, location, cluster) of the cluster to set auth.
@@ -1146,18 +1345,18 @@ module Google
       # DeleteClusterRequest deletes a cluster.
       # @!attribute [rw] project_id
       #   @return [String]
-      #     Deprecated. The Google Developers Console [project ID or project
+      #     Required. Deprecated. The Google Developers Console [project ID or project
       #     number](https://support.google.com/cloud/answer/6158840).
       #     This field has been deprecated and replaced by the name field.
       # @!attribute [rw] zone
       #   @return [String]
-      #     Deprecated. The name of the Google Compute Engine
+      #     Required. Deprecated. The name of the Google Compute Engine
       #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
       #     resides.
       #     This field has been deprecated and replaced by the name field.
       # @!attribute [rw] cluster_id
       #   @return [String]
-      #     Deprecated. The name of the cluster to delete.
+      #     Required. Deprecated. The name of the cluster to delete.
       #     This field has been deprecated and replaced by the name field.
       # @!attribute [rw] name
       #   @return [String]
@@ -1168,12 +1367,12 @@ module Google
       # ListClustersRequest lists clusters.
       # @!attribute [rw] project_id
       #   @return [String]
-      #     Deprecated. The Google Developers Console [project ID or project
+      #     Required. Deprecated. The Google Developers Console [project ID or project
       #     number](https://support.google.com/cloud/answer/6158840).
       #     This field has been deprecated and replaced by the parent field.
       # @!attribute [rw] zone
       #   @return [String]
-      #     Deprecated. The name of the Google Compute Engine
+      #     Required. Deprecated. The name of the Google Compute Engine
       #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
       #     resides, or "-" for all zones.
       #     This field has been deprecated and replaced by the parent field.
@@ -1198,18 +1397,18 @@ module Google
       # GetOperationRequest gets a single operation.
       # @!attribute [rw] project_id
       #   @return [String]
-      #     Deprecated. The Google Developers Console [project ID or project
+      #     Required. Deprecated. The Google Developers Console [project ID or project
       #     number](https://support.google.com/cloud/answer/6158840).
       #     This field has been deprecated and replaced by the name field.
       # @!attribute [rw] zone
       #   @return [String]
-      #     Deprecated. The name of the Google Compute Engine
+      #     Required. Deprecated. The name of the Google Compute Engine
       #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
       #     resides.
       #     This field has been deprecated and replaced by the name field.
       # @!attribute [rw] operation_id
       #   @return [String]
-      #     Deprecated. The server-assigned `name` of the operation.
+      #     Required. Deprecated. The server-assigned `name` of the operation.
       #     This field has been deprecated and replaced by the name field.
       # @!attribute [rw] name
       #   @return [String]
@@ -1220,12 +1419,12 @@ module Google
       # ListOperationsRequest lists operations.
       # @!attribute [rw] project_id
       #   @return [String]
-      #     Deprecated. The Google Developers Console [project ID or project
+      #     Required. Deprecated. The Google Developers Console [project ID or project
       #     number](https://support.google.com/cloud/answer/6158840).
       #     This field has been deprecated and replaced by the parent field.
       # @!attribute [rw] zone
       #   @return [String]
-      #     Deprecated. The name of the Google Compute Engine
+      #     Required. Deprecated. The name of the Google Compute Engine
       #     [zone](https://cloud.google.com/compute/docs/zones#available) to return operations for, or `-` for
       #     all zones. This field has been deprecated and replaced by the parent field.
       # @!attribute [rw] parent
@@ -1238,17 +1437,17 @@ module Google
       # CancelOperationRequest cancels a single operation.
       # @!attribute [rw] project_id
       #   @return [String]
-      #     Deprecated. The Google Developers Console [project ID or project
+      #     Required. Deprecated. The Google Developers Console [project ID or project
       #     number](https://support.google.com/cloud/answer/6158840).
       #     This field has been deprecated and replaced by the name field.
       # @!attribute [rw] zone
       #   @return [String]
-      #     Deprecated. The name of the Google Compute Engine
+      #     Required. Deprecated. The name of the Google Compute Engine
       #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the operation resides.
       #     This field has been deprecated and replaced by the name field.
       # @!attribute [rw] operation_id
       #   @return [String]
-      #     Deprecated. The server-assigned `name` of the operation.
+      #     Required. Deprecated. The server-assigned `name` of the operation.
       #     This field has been deprecated and replaced by the name field.
       # @!attribute [rw] name
       #   @return [String]
@@ -1269,18 +1468,18 @@ module Google
       # Gets the current Kubernetes Engine service configuration.
       # @!attribute [rw] project_id
       #   @return [String]
-      #     Deprecated. The Google Developers Console [project ID or project
+      #     Required. Deprecated. The Google Developers Console [project ID or project
       #     number](https://support.google.com/cloud/answer/6158840).
       #     This field has been deprecated and replaced by the name field.
       # @!attribute [rw] zone
       #   @return [String]
-      #     Deprecated. The name of the Google Compute Engine
+      #     Required. Deprecated. The name of the Google Compute Engine
       #     [zone](https://cloud.google.com/compute/docs/zones#available) to return operations for.
       #     This field has been deprecated and replaced by the name field.
       # @!attribute [rw] name
       #   @return [String]
-      #     The name (project and location) of the server config to get
-      #     Specified in the format 'projects/*/locations/*'.
+      #     The name (project and location) of the server config to get,
+      #     specified in the format 'projects/*/locations/*'.
       class GetServerConfigRequest; end
 
       # Kubernetes Engine service configuration.
@@ -1304,22 +1503,22 @@ module Google
       # CreateNodePoolRequest creates a node pool for a cluster.
       # @!attribute [rw] project_id
       #   @return [String]
-      #     Deprecated. The Google Developers Console [project ID or project
+      #     Required. Deprecated. The Google Developers Console [project ID or project
       #     number](https://developers.google.com/console/help/new/#projectnumber).
       #     This field has been deprecated and replaced by the parent field.
       # @!attribute [rw] zone
       #   @return [String]
-      #     Deprecated. The name of the Google Compute Engine
+      #     Required. Deprecated. The name of the Google Compute Engine
       #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
       #     resides.
       #     This field has been deprecated and replaced by the parent field.
       # @!attribute [rw] cluster_id
       #   @return [String]
-      #     Deprecated. The name of the cluster.
+      #     Required. Deprecated. The name of the cluster.
       #     This field has been deprecated and replaced by the parent field.
       # @!attribute [rw] node_pool
       #   @return [Google::Container::V1::NodePool]
-      #     The node pool to create.
+      #     Required. The node pool to create.
       # @!attribute [rw] parent
       #   @return [String]
       #     The parent (project, location, cluster id) where the node pool will be
@@ -1330,22 +1529,22 @@ module Google
       # DeleteNodePoolRequest deletes a node pool for a cluster.
       # @!attribute [rw] project_id
       #   @return [String]
-      #     Deprecated. The Google Developers Console [project ID or project
+      #     Required. Deprecated. The Google Developers Console [project ID or project
       #     number](https://developers.google.com/console/help/new/#projectnumber).
       #     This field has been deprecated and replaced by the name field.
       # @!attribute [rw] zone
       #   @return [String]
-      #     Deprecated. The name of the Google Compute Engine
+      #     Required. Deprecated. The name of the Google Compute Engine
       #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
       #     resides.
       #     This field has been deprecated and replaced by the name field.
       # @!attribute [rw] cluster_id
       #   @return [String]
-      #     Deprecated. The name of the cluster.
+      #     Required. Deprecated. The name of the cluster.
       #     This field has been deprecated and replaced by the name field.
       # @!attribute [rw] node_pool_id
       #   @return [String]
-      #     Deprecated. The name of the node pool to delete.
+      #     Required. Deprecated. The name of the node pool to delete.
       #     This field has been deprecated and replaced by the name field.
       # @!attribute [rw] name
       #   @return [String]
@@ -1357,18 +1556,18 @@ module Google
       # ListNodePoolsRequest lists the node pool(s) for a cluster.
       # @!attribute [rw] project_id
       #   @return [String]
-      #     Deprecated. The Google Developers Console [project ID or project
+      #     Required. Deprecated. The Google Developers Console [project ID or project
       #     number](https://developers.google.com/console/help/new/#projectnumber).
       #     This field has been deprecated and replaced by the parent field.
       # @!attribute [rw] zone
       #   @return [String]
-      #     Deprecated. The name of the Google Compute Engine
+      #     Required. Deprecated. The name of the Google Compute Engine
       #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
       #     resides.
       #     This field has been deprecated and replaced by the parent field.
       # @!attribute [rw] cluster_id
       #   @return [String]
-      #     Deprecated. The name of the cluster.
+      #     Required. Deprecated. The name of the cluster.
       #     This field has been deprecated and replaced by the parent field.
       # @!attribute [rw] parent
       #   @return [String]
@@ -1379,22 +1578,22 @@ module Google
       # GetNodePoolRequest retrieves a node pool for a cluster.
       # @!attribute [rw] project_id
       #   @return [String]
-      #     Deprecated. The Google Developers Console [project ID or project
+      #     Required. Deprecated. The Google Developers Console [project ID or project
       #     number](https://developers.google.com/console/help/new/#projectnumber).
       #     This field has been deprecated and replaced by the name field.
       # @!attribute [rw] zone
       #   @return [String]
-      #     Deprecated. The name of the Google Compute Engine
+      #     Required. Deprecated. The name of the Google Compute Engine
       #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
       #     resides.
       #     This field has been deprecated and replaced by the name field.
       # @!attribute [rw] cluster_id
       #   @return [String]
-      #     Deprecated. The name of the cluster.
+      #     Required. Deprecated. The name of the cluster.
       #     This field has been deprecated and replaced by the name field.
       # @!attribute [rw] node_pool_id
       #   @return [String]
-      #     Deprecated. The name of the node pool.
+      #     Required. Deprecated. The name of the node pool.
       #     This field has been deprecated and replaced by the name field.
       # @!attribute [rw] name
       #   @return [String]
@@ -1446,6 +1645,16 @@ module Google
       # @!attribute [rw] management
       #   @return [Google::Container::V1::NodeManagement]
       #     NodeManagement configuration for this NodePool.
+      # @!attribute [rw] max_pods_constraint
+      #   @return [Google::Container::V1::MaxPodsConstraint]
+      #     The constraint on the maximum number of pods that can be run
+      #     simultaneously on a node in the node pool.
+      # @!attribute [rw] conditions
+      #   @return [Array<Google::Container::V1::StatusCondition>]
+      #     Which conditions caused the current node pool state.
+      # @!attribute [rw] pod_ipv4_cidr_size
+      #   @return [Integer]
+      #     [Output only] The pod CIDR block size per node in this node pool.
       class NodePool
         # The current status of the node pool instance.
         module Status
@@ -1514,20 +1723,81 @@ module Google
       # @!attribute [rw] window
       #   @return [Google::Container::V1::MaintenanceWindow]
       #     Specifies the maintenance window in which maintenance may be performed.
+      # @!attribute [rw] resource_version
+      #   @return [String]
+      #     A hash identifying the version of this policy, so that updates to fields of
+      #     the policy won't accidentally undo intermediate changes (and so that users
+      #     of the API unaware of some fields won't accidentally remove other fields).
+      #     Make a <code>get()</code> request to the cluster to get the current
+      #     resource version and include it with requests to set the policy.
       class MaintenancePolicy; end
 
       # MaintenanceWindow defines the maintenance window to be used for the cluster.
       # @!attribute [rw] daily_maintenance_window
       #   @return [Google::Container::V1::DailyMaintenanceWindow]
       #     DailyMaintenanceWindow specifies a daily maintenance operation window.
+      # @!attribute [rw] recurring_window
+      #   @return [Google::Container::V1::RecurringTimeWindow]
+      #     RecurringWindow specifies some number of recurring time periods for
+      #     maintenance to occur. The time windows may be overlapping. If no
+      #     maintenance windows are set, maintenance can occur at any time.
+      # @!attribute [rw] maintenance_exclusions
+      #   @return [Hash{String => Google::Container::V1::TimeWindow}]
+      #     Exceptions to maintenance window. Non-emergency maintenance should not
+      #     occur in these windows.
       class MaintenanceWindow; end
+
+      # Represents an arbitrary window of time.
+      # @!attribute [rw] start_time
+      #   @return [Google::Protobuf::Timestamp]
+      #     The time that the window first starts.
+      # @!attribute [rw] end_time
+      #   @return [Google::Protobuf::Timestamp]
+      #     The time that the window ends. The end time should take place after the
+      #     start time.
+      class TimeWindow; end
+
+      # Represents an arbitrary window of time that recurs.
+      # @!attribute [rw] window
+      #   @return [Google::Container::V1::TimeWindow]
+      #     The window of the first recurrence.
+      # @!attribute [rw] recurrence
+      #   @return [String]
+      #     An RRULE (https://tools.ietf.org/html/rfc5545#section-3.8.5.3) for how
+      #     this window reccurs. They go on for the span of time between the start and
+      #     end time.
+      #
+      #     For example, to have something repeat every weekday, you'd use:
+      #       <code>FREQ=WEEKLY;BYDAY=MO,TU,WE,TH,FR</code>
+      #     To repeat some window daily (equivalent to the DailyMaintenanceWindow):
+      #       <code>FREQ=DAILY</code>
+      #     For the first weekend of every month:
+      #       <code>FREQ=MONTHLY;BYSETPOS=1;BYDAY=SA,SU</code>
+      #     This specifies how frequently the window starts. Eg, if you wanted to have
+      #     a 9-5 UTC-4 window every weekday, you'd use something like:
+      #     <code>
+      #       start time = 2019-01-01T09:00:00-0400
+      #       end time = 2019-01-01T17:00:00-0400
+      #       recurrence = FREQ=WEEKLY;BYDAY=MO,TU,WE,TH,FR
+      #     </code>
+      #     Windows can span multiple days. Eg, to make the window encompass every
+      #     weekend from midnight Saturday till the last minute of Sunday UTC:
+      #     <code>
+      #       start time = 2019-01-05T00:00:00Z
+      #       end time = 2019-01-07T23:59:00Z
+      #       recurrence = FREQ=WEEKLY;BYDAY=SA
+      #     </code>
+      #     Note the start and end time's specific dates are largely arbitrary except
+      #     to specify duration of the window and when it first starts.
+      #     The FREQ values of HOURLY, MINUTELY, and SECONDLY are not supported.
+      class RecurringTimeWindow; end
 
       # Time window specified for daily maintenance operations.
       # @!attribute [rw] start_time
       #   @return [String]
       #     Time within the maintenance window to start the maintenance operations.
       #     Time format should be in [RFC3339](https://www.ietf.org/rfc/rfc3339.txt)
-      #     format "HH:MM”, where HH : [00-23] and MM : [00-59] GMT.
+      #     format "HH:MM", where HH : [00-23] and MM : [00-59] GMT.
       # @!attribute [rw] duration
       #   @return [String]
       #     [Output only] Duration of the time window, automatically chosen to be
@@ -1540,26 +1810,26 @@ module Google
       # pool.
       # @!attribute [rw] project_id
       #   @return [String]
-      #     Deprecated. The Google Developers Console [project ID or project
+      #     Required. Deprecated. The Google Developers Console [project ID or project
       #     number](https://support.google.com/cloud/answer/6158840).
       #     This field has been deprecated and replaced by the name field.
       # @!attribute [rw] zone
       #   @return [String]
-      #     Deprecated. The name of the Google Compute Engine
+      #     Required. Deprecated. The name of the Google Compute Engine
       #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
       #     resides.
       #     This field has been deprecated and replaced by the name field.
       # @!attribute [rw] cluster_id
       #   @return [String]
-      #     Deprecated. The name of the cluster to update.
+      #     Required. Deprecated. The name of the cluster to update.
       #     This field has been deprecated and replaced by the name field.
       # @!attribute [rw] node_pool_id
       #   @return [String]
-      #     Deprecated. The name of the node pool to update.
+      #     Required. Deprecated. The name of the node pool to update.
       #     This field has been deprecated and replaced by the name field.
       # @!attribute [rw] management
       #   @return [Google::Container::V1::NodeManagement]
-      #     NodeManagement configuration for the node pool.
+      #     Required. NodeManagement configuration for the node pool.
       # @!attribute [rw] name
       #   @return [String]
       #     The name (project, location, cluster, node pool id) of the node pool to set
@@ -1571,26 +1841,26 @@ module Google
       # pool.
       # @!attribute [rw] project_id
       #   @return [String]
-      #     Deprecated. The Google Developers Console [project ID or project
+      #     Required. Deprecated. The Google Developers Console [project ID or project
       #     number](https://support.google.com/cloud/answer/6158840).
       #     This field has been deprecated and replaced by the name field.
       # @!attribute [rw] zone
       #   @return [String]
-      #     Deprecated. The name of the Google Compute Engine
+      #     Required. Deprecated. The name of the Google Compute Engine
       #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
       #     resides.
       #     This field has been deprecated and replaced by the name field.
       # @!attribute [rw] cluster_id
       #   @return [String]
-      #     Deprecated. The name of the cluster to update.
+      #     Required. Deprecated. The name of the cluster to update.
       #     This field has been deprecated and replaced by the name field.
       # @!attribute [rw] node_pool_id
       #   @return [String]
-      #     Deprecated. The name of the node pool to update.
+      #     Required. Deprecated. The name of the node pool to update.
       #     This field has been deprecated and replaced by the name field.
       # @!attribute [rw] node_count
       #   @return [Integer]
-      #     The desired node count for the pool.
+      #     Required. The desired node count for the pool.
       # @!attribute [rw] name
       #   @return [String]
       #     The name (project, location, cluster, node pool id) of the node pool to set
@@ -1603,22 +1873,22 @@ module Google
       # completed.
       # @!attribute [rw] project_id
       #   @return [String]
-      #     Deprecated. The Google Developers Console [project ID or project
+      #     Required. Deprecated. The Google Developers Console [project ID or project
       #     number](https://support.google.com/cloud/answer/6158840).
       #     This field has been deprecated and replaced by the name field.
       # @!attribute [rw] zone
       #   @return [String]
-      #     Deprecated. The name of the Google Compute Engine
+      #     Required. Deprecated. The name of the Google Compute Engine
       #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
       #     resides.
       #     This field has been deprecated and replaced by the name field.
       # @!attribute [rw] cluster_id
       #   @return [String]
-      #     Deprecated. The name of the cluster to rollback.
+      #     Required. Deprecated. The name of the cluster to rollback.
       #     This field has been deprecated and replaced by the name field.
       # @!attribute [rw] node_pool_id
       #   @return [String]
-      #     Deprecated. The name of the node pool to rollback.
+      #     Required. Deprecated. The name of the node pool to rollback.
       #     This field has been deprecated and replaced by the name field.
       # @!attribute [rw] name
       #   @return [String]
@@ -1633,6 +1903,52 @@ module Google
       #     A list of node pools for a cluster.
       class ListNodePoolsResponse; end
 
+      # ClusterAutoscaling contains global, per-cluster information
+      # required by Cluster Autoscaler to automatically adjust
+      # the size of the cluster and create/delete
+      # node pools based on the current needs.
+      # @!attribute [rw] enable_node_autoprovisioning
+      #   @return [true, false]
+      #     Enables automatic node pool creation and deletion.
+      # @!attribute [rw] resource_limits
+      #   @return [Array<Google::Container::V1::ResourceLimit>]
+      #     Contains global constraints regarding minimum and maximum
+      #     amount of resources in the cluster.
+      # @!attribute [rw] autoprovisioning_node_pool_defaults
+      #   @return [Google::Container::V1::AutoprovisioningNodePoolDefaults]
+      #     AutoprovisioningNodePoolDefaults contains defaults for a node pool
+      #     created by NAP.
+      # @!attribute [rw] autoprovisioning_locations
+      #   @return [Array<String>]
+      #     The list of Google Compute Engine [zones](https://cloud.google.com/compute/docs/zones#available)
+      #     in which the NodePool's nodes can be created by NAP.
+      class ClusterAutoscaling; end
+
+      # AutoprovisioningNodePoolDefaults contains defaults for a node pool created
+      # by NAP.
+      # @!attribute [rw] oauth_scopes
+      #   @return [Array<String>]
+      #     Scopes that are used by NAP when creating node pools. If oauth_scopes are
+      #     specified, service_account should be empty.
+      # @!attribute [rw] service_account
+      #   @return [String]
+      #     The Google Cloud Platform Service Account to be used by the node VMs. If
+      #     service_account is specified, scopes should be empty.
+      class AutoprovisioningNodePoolDefaults; end
+
+      # Contains information about amount of some resource in the cluster.
+      # For memory, value should be in GB.
+      # @!attribute [rw] resource_type
+      #   @return [String]
+      #     Resource name "cpu", "memory" or gpu-specific string.
+      # @!attribute [rw] minimum
+      #   @return [Integer]
+      #     Minimum amount of the resource in the cluster.
+      # @!attribute [rw] maximum
+      #   @return [Integer]
+      #     Maximum amount of the resource in the cluster.
+      class ResourceLimit; end
+
       # NodePoolAutoscaling contains information required by cluster autoscaler to
       # adjust the size of the node pool to the current cluster usage.
       # @!attribute [rw] enabled
@@ -1646,6 +1962,9 @@ module Google
       #   @return [Integer]
       #     Maximum number of nodes in the NodePool. Must be >= min_node_count. There
       #     has to enough quota to scale up the cluster.
+      # @!attribute [rw] autoprovisioned
+      #   @return [true, false]
+      #     Can this node pool be deleted automatically.
       class NodePoolAutoscaling; end
 
       # SetLabelsRequest sets the Google Cloud Platform labels on a Google Container
@@ -1653,25 +1972,25 @@ module Google
       # resources used by that cluster
       # @!attribute [rw] project_id
       #   @return [String]
-      #     Deprecated. The Google Developers Console [project ID or project
+      #     Required. Deprecated. The Google Developers Console [project ID or project
       #     number](https://developers.google.com/console/help/new/#projectnumber).
       #     This field has been deprecated and replaced by the name field.
       # @!attribute [rw] zone
       #   @return [String]
-      #     Deprecated. The name of the Google Compute Engine
+      #     Required. Deprecated. The name of the Google Compute Engine
       #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
       #     resides.
       #     This field has been deprecated and replaced by the name field.
       # @!attribute [rw] cluster_id
       #   @return [String]
-      #     Deprecated. The name of the cluster.
+      #     Required. Deprecated. The name of the cluster.
       #     This field has been deprecated and replaced by the name field.
       # @!attribute [rw] resource_labels
       #   @return [Hash{String => String}]
-      #     The labels to set for that cluster.
+      #     Required. The labels to set for that cluster.
       # @!attribute [rw] label_fingerprint
       #   @return [String]
-      #     The fingerprint of the previous set of labels for this resource,
+      #     Required. The fingerprint of the previous set of labels for this resource,
       #     used to detect conflicts. The fingerprint is initially generated by
       #     Kubernetes Engine and changes after every request to modify or update
       #     labels. You must always provide an up-to-date fingerprint hash when
@@ -1687,22 +2006,22 @@ module Google
       # a cluster.
       # @!attribute [rw] project_id
       #   @return [String]
-      #     Deprecated. The Google Developers Console [project ID or project
+      #     Required. Deprecated. The Google Developers Console [project ID or project
       #     number](https://support.google.com/cloud/answer/6158840).
       #     This field has been deprecated and replaced by the name field.
       # @!attribute [rw] zone
       #   @return [String]
-      #     Deprecated. The name of the Google Compute Engine
+      #     Required. Deprecated. The name of the Google Compute Engine
       #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
       #     resides.
       #     This field has been deprecated and replaced by the name field.
       # @!attribute [rw] cluster_id
       #   @return [String]
-      #     Deprecated. The name of the cluster to update.
+      #     Required. Deprecated. The name of the cluster to update.
       #     This field has been deprecated and replaced by the name field.
       # @!attribute [rw] enabled
       #   @return [true, false]
-      #     Whether ABAC authorization will be enabled in the cluster.
+      #     Required. Whether ABAC authorization will be enabled in the cluster.
       # @!attribute [rw] name
       #   @return [String]
       #     The name (project, location, cluster id) of the cluster to set legacy abac.
@@ -1713,18 +2032,18 @@ module Google
       # a node upgrade on each node pool to point to the new IP.
       # @!attribute [rw] project_id
       #   @return [String]
-      #     Deprecated. The Google Developers Console [project ID or project
+      #     Required. Deprecated. The Google Developers Console [project ID or project
       #     number](https://developers.google.com/console/help/new/#projectnumber).
       #     This field has been deprecated and replaced by the name field.
       # @!attribute [rw] zone
       #   @return [String]
-      #     Deprecated. The name of the Google Compute Engine
+      #     Required. Deprecated. The name of the Google Compute Engine
       #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
       #     resides.
       #     This field has been deprecated and replaced by the name field.
       # @!attribute [rw] cluster_id
       #   @return [String]
-      #     Deprecated. The name of the cluster.
+      #     Required. Deprecated. The name of the cluster.
       #     This field has been deprecated and replaced by the name field.
       # @!attribute [rw] name
       #   @return [String]
@@ -1738,18 +2057,18 @@ module Google
       # CompleteIPRotationRequest moves the cluster master back into single-IP mode.
       # @!attribute [rw] project_id
       #   @return [String]
-      #     Deprecated. The Google Developers Console [project ID or project
+      #     Required. Deprecated. The Google Developers Console [project ID or project
       #     number](https://developers.google.com/console/help/new/#projectnumber).
       #     This field has been deprecated and replaced by the name field.
       # @!attribute [rw] zone
       #   @return [String]
-      #     Deprecated. The name of the Google Compute Engine
+      #     Required. Deprecated. The name of the Google Compute Engine
       #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
       #     resides.
       #     This field has been deprecated and replaced by the name field.
       # @!attribute [rw] cluster_id
       #   @return [String]
-      #     Deprecated. The name of the cluster.
+      #     Required. Deprecated. The name of the cluster.
       #     This field has been deprecated and replaced by the name field.
       # @!attribute [rw] name
       #   @return [String]
@@ -1764,28 +2083,28 @@ module Google
       # @!attribute [rw] accelerator_type
       #   @return [String]
       #     The accelerator type resource name. List of supported accelerators
-      #     [here](https://cloud.google.com/compute/docs/gpus/#Introduction)
+      #     [here](https://cloud.google.com/compute/docs/gpus)
       class AcceleratorConfig; end
 
       # SetNetworkPolicyRequest enables/disables network policy for a cluster.
       # @!attribute [rw] project_id
       #   @return [String]
-      #     Deprecated. The Google Developers Console [project ID or project
+      #     Required. Deprecated. The Google Developers Console [project ID or project
       #     number](https://developers.google.com/console/help/new/#projectnumber).
       #     This field has been deprecated and replaced by the name field.
       # @!attribute [rw] zone
       #   @return [String]
-      #     Deprecated. The name of the Google Compute Engine
+      #     Required. Deprecated. The name of the Google Compute Engine
       #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
       #     resides.
       #     This field has been deprecated and replaced by the name field.
       # @!attribute [rw] cluster_id
       #   @return [String]
-      #     Deprecated. The name of the cluster.
+      #     Required. Deprecated. The name of the cluster.
       #     This field has been deprecated and replaced by the name field.
       # @!attribute [rw] network_policy
       #   @return [Google::Container::V1::NetworkPolicy]
-      #     Configuration options for the NetworkPolicy feature.
+      #     Required. Configuration options for the NetworkPolicy feature.
       # @!attribute [rw] name
       #   @return [String]
       #     The name (project, location, cluster id) of the cluster to set networking
@@ -1795,19 +2114,19 @@ module Google
       # SetMaintenancePolicyRequest sets the maintenance policy for a cluster.
       # @!attribute [rw] project_id
       #   @return [String]
-      #     The Google Developers Console [project ID or project
+      #     Required. The Google Developers Console [project ID or project
       #     number](https://support.google.com/cloud/answer/6158840).
       # @!attribute [rw] zone
       #   @return [String]
-      #     The name of the Google Compute Engine
+      #     Required. The name of the Google Compute Engine
       #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
       #     resides.
       # @!attribute [rw] cluster_id
       #   @return [String]
-      #     The name of the cluster to update.
+      #     Required. The name of the cluster to update.
       # @!attribute [rw] maintenance_policy
       #   @return [Google::Container::V1::MaintenancePolicy]
-      #     The maintenance policy to be set for the cluster. An empty field
+      #     Required. The maintenance policy to be set for the cluster. An empty field
       #     clears the existing maintenance policy.
       # @!attribute [rw] name
       #   @return [String]
@@ -1815,6 +2134,40 @@ module Google
       #     policy.
       #     Specified in the format 'projects/*/locations/*/clusters/*'.
       class SetMaintenancePolicyRequest; end
+
+      # StatusCondition describes why a cluster or a node pool has a certain status
+      # (e.g., ERROR or DEGRADED).
+      # @!attribute [rw] code
+      #   @return [Google::Container::V1::StatusCondition::Code]
+      #     Machine-friendly representation of the condition
+      # @!attribute [rw] message
+      #   @return [String]
+      #     Human-friendly representation of the condition
+      class StatusCondition
+        # Code for each condition
+        module Code
+          # UNKNOWN indicates a generic condition.
+          UNKNOWN = 0
+
+          # GCE_STOCKOUT indicates a Google Compute Engine stockout.
+          GCE_STOCKOUT = 1
+
+          # GKE_SERVICE_ACCOUNT_DELETED indicates that the user deleted their robot
+          # service account.
+          GKE_SERVICE_ACCOUNT_DELETED = 2
+
+          # Google Compute Engine quota was exceeded.
+          GCE_QUOTA_EXCEEDED = 3
+
+          # Cluster state was manually changed by an SRE due to a system logic error.
+          SET_BY_OPERATOR = 4
+
+          # Unable to perform an encrypt operation against the CloudKMS key used for
+          # etcd level encryption.
+          # More codes TBA
+          CLOUD_KMS_KEY_ERROR = 7
+        end
+      end
 
       # NetworkConfig reports the relative names of network & subnetwork.
       # @!attribute [rw] network
@@ -1828,7 +2181,178 @@ module Google
       #     Output only. The relative name of the Google Compute Engine
       #     [subnetwork](https://cloud.google.com/compute/docs/vpc) to which the cluster is connected.
       #     Example: projects/my-project/regions/us-central1/subnetworks/my-subnet
+      # @!attribute [rw] enable_intra_node_visibility
+      #   @return [true, false]
+      #     Whether Intra-node visibility is enabled for this cluster.
+      #     This makes same node pod to pod traffic visible for VPC network.
       class NetworkConfig; end
+
+      # IntraNodeVisibilityConfig contains the desired config of the intra-node
+      # visibility on this cluster.
+      # @!attribute [rw] enabled
+      #   @return [true, false]
+      #     Enables intra node visibility for this cluster.
+      class IntraNodeVisibilityConfig; end
+
+      # Constraints applied to pods.
+      # @!attribute [rw] max_pods_per_node
+      #   @return [Integer]
+      #     Constraint enforced on the max num of pods per node.
+      class MaxPodsConstraint; end
+
+      # Configuration of etcd encryption.
+      # @!attribute [rw] state
+      #   @return [Google::Container::V1::DatabaseEncryption::State]
+      #     Denotes the state of etcd encryption.
+      # @!attribute [rw] key_name
+      #   @return [String]
+      #     Name of CloudKMS key to use for the encryption of secrets in etcd.
+      #     Ex. projects/my-project/locations/global/keyRings/my-ring/cryptoKeys/my-key
+      class DatabaseEncryption
+        # State of etcd encryption.
+        module State
+          # Should never be set
+          UNKNOWN = 0
+
+          # Secrets in etcd are encrypted.
+          ENCRYPTED = 1
+
+          # Secrets in etcd are stored in plain text (at etcd level) - this is
+          # unrelated to GCE level full disk encryption.
+          DECRYPTED = 2
+        end
+      end
+
+      # ListUsableSubnetworksRequest requests the list of usable subnetworks
+      # available to a user for creating clusters.
+      # @!attribute [rw] parent
+      #   @return [String]
+      #     The parent project where subnetworks are usable.
+      #     Specified in the format 'projects/*'.
+      # @!attribute [rw] filter
+      #   @return [String]
+      #     Filtering currently only supports equality on the networkProjectId and must
+      #     be in the form: "networkProjectId=[PROJECTID]", where `networkProjectId`
+      #     is the project which owns the listed subnetworks. This defaults to the
+      #     parent project ID.
+      # @!attribute [rw] page_size
+      #   @return [Integer]
+      #     The max number of results per page that should be returned. If the number
+      #     of available results is larger than `page_size`, a `next_page_token` is
+      #     returned which can be used to get the next page of results in subsequent
+      #     requests. Acceptable values are 0 to 500, inclusive. (Default: 500)
+      # @!attribute [rw] page_token
+      #   @return [String]
+      #     Specifies a page token to use. Set this to the nextPageToken returned by
+      #     previous list requests to get the next page of results.
+      class ListUsableSubnetworksRequest; end
+
+      # ListUsableSubnetworksResponse is the response of
+      # ListUsableSubnetworksRequest.
+      # @!attribute [rw] subnetworks
+      #   @return [Array<Google::Container::V1::UsableSubnetwork>]
+      #     A list of usable subnetworks in the specified network project.
+      # @!attribute [rw] next_page_token
+      #   @return [String]
+      #     This token allows you to get the next page of results for list requests.
+      #     If the number of results is larger than `page_size`, use the
+      #     `next_page_token` as a value for the query parameter `page_token` in the
+      #     next request. The value will become empty when there are no more pages.
+      class ListUsableSubnetworksResponse; end
+
+      # Secondary IP range of a usable subnetwork.
+      # @!attribute [rw] range_name
+      #   @return [String]
+      #     The name associated with this subnetwork secondary range, used when adding
+      #     an alias IP range to a VM instance.
+      # @!attribute [rw] ip_cidr_range
+      #   @return [String]
+      #     The range of IP addresses belonging to this subnetwork secondary range.
+      # @!attribute [rw] status
+      #   @return [Google::Container::V1::UsableSubnetworkSecondaryRange::Status]
+      #     This field is to determine the status of the secondary range programmably.
+      class UsableSubnetworkSecondaryRange
+        # Status shows the current usage of a secondary IP range.
+        module Status
+          # UNKNOWN is the zero value of the Status enum. It's not a valid status.
+          UNKNOWN = 0
+
+          # UNUSED denotes that this range is unclaimed by any cluster.
+          UNUSED = 1
+
+          # IN_USE_SERVICE denotes that this range is claimed by a cluster for
+          # services. It cannot be used for other clusters.
+          IN_USE_SERVICE = 2
+
+          # IN_USE_SHAREABLE_POD denotes this range was created by the network admin
+          # and is currently claimed by a cluster for pods. It can only be used by
+          # other clusters as a pod range.
+          IN_USE_SHAREABLE_POD = 3
+
+          # IN_USE_MANAGED_POD denotes this range was created by GKE and is claimed
+          # for pods. It cannot be used for other clusters.
+          IN_USE_MANAGED_POD = 4
+        end
+      end
+
+      # UsableSubnetwork resource returns the subnetwork name, its associated network
+      # and the primary CIDR range.
+      # @!attribute [rw] subnetwork
+      #   @return [String]
+      #     Subnetwork Name.
+      #     Example: projects/my-project/regions/us-central1/subnetworks/my-subnet
+      # @!attribute [rw] network
+      #   @return [String]
+      #     Network Name.
+      #     Example: projects/my-project/global/networks/my-network
+      # @!attribute [rw] ip_cidr_range
+      #   @return [String]
+      #     The range of internal addresses that are owned by this subnetwork.
+      # @!attribute [rw] secondary_ip_ranges
+      #   @return [Array<Google::Container::V1::UsableSubnetworkSecondaryRange>]
+      #     Secondary IP ranges.
+      # @!attribute [rw] status_message
+      #   @return [String]
+      #     A human readable status message representing the reasons for cases where
+      #     the caller cannot use the secondary ranges under the subnet. For example if
+      #     the secondary_ip_ranges is empty due to a permission issue, an insufficient
+      #     permission message will be given by status_message.
+      class UsableSubnetwork; end
+
+      # Configuration for exporting cluster resource usages.
+      # @!attribute [rw] bigquery_destination
+      #   @return [Google::Container::V1::ResourceUsageExportConfig::BigQueryDestination]
+      #     Configuration to use BigQuery as usage export destination.
+      # @!attribute [rw] enable_network_egress_metering
+      #   @return [true, false]
+      #     Whether to enable network egress metering for this cluster. If enabled, a
+      #     daemonset will be created in the cluster to meter network egress traffic.
+      # @!attribute [rw] consumption_metering_config
+      #   @return [Google::Container::V1::ResourceUsageExportConfig::ConsumptionMeteringConfig]
+      #     Configuration to enable resource consumption metering.
+      class ResourceUsageExportConfig
+        # Parameters for using BigQuery as the destination of resource usage export.
+        # @!attribute [rw] dataset_id
+        #   @return [String]
+        #     The ID of a BigQuery Dataset.
+        class BigQueryDestination; end
+
+        # Parameters for controlling consumption metering.
+        # @!attribute [rw] enabled
+        #   @return [true, false]
+        #     Whether to enable consumption metering for this cluster. If enabled, a
+        #     second BigQuery table will be created to hold resource consumption
+        #     records.
+        class ConsumptionMeteringConfig; end
+      end
+
+      # VerticalPodAutoscaling contains global, per-cluster information
+      # required by Vertical Pod Autoscaler to automatically adjust
+      # the resources of pods controlled by it.
+      # @!attribute [rw] enabled
+      #   @return [true, false]
+      #     Enables vertical pod autoscaling.
+      class VerticalPodAutoscaling; end
     end
   end
 end
