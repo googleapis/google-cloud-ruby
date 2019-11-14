@@ -17,6 +17,7 @@ require "google/cloud/monitoring/v3/alert_policy_service_client"
 require "google/cloud/monitoring/v3/group_service_client"
 require "google/cloud/monitoring/v3/metric_service_client"
 require "google/cloud/monitoring/v3/notification_channel_service_client"
+require "google/cloud/monitoring/v3/service_monitoring_service_client"
 require "google/cloud/monitoring/v3/uptime_check_service_client"
 require "google/monitoring/v3/span_context_pb"
 require "google/monitoring/v3/dropped_labels_pb"
@@ -32,7 +33,10 @@ module Google
       # [Stackdriver Monitoring API][Product Documentation]:
       # Manages your Stackdriver Monitoring data and configurations. Most projects
       # must be associated with a Stackdriver account, with a few exceptions as
-      # noted on the individual method pages.
+      # noted on the individual method pages. The table entries below are
+      # presented in alphabetical order, not in order of common use. For
+      # explanations of the concepts found in the table entries, read the
+      # [Stackdriver Monitoring documentation](/monitoring/docs).
       # - [Product Documentation][]
       #
       # ## Quick Start
@@ -382,6 +386,73 @@ module Google
               lib_version: lib_version
             }.select { |_, v| v != nil }
             Google::Cloud::Monitoring::V3::NotificationChannelServiceClient.new(**kwargs)
+          end
+        end
+
+        module ServiceMonitoring
+          ##
+          # The Stackdriver Monitoring Service-Oriented Monitoring API has endpoints for
+          # managing and querying aspects of a workspace's services. These include the
+          # `Service`'s monitored resources, its Service-Level Objectives, and a taxonomy
+          # of categorized Health Metrics.
+          #
+          # @param credentials [Google::Auth::Credentials, String, Hash, GRPC::Core::Channel, GRPC::Core::ChannelCredentials, Proc]
+          #   Provides the means for authenticating requests made by the client. This parameter can
+          #   be many types.
+          #   A `Google::Auth::Credentials` uses a the properties of its represented keyfile for
+          #   authenticating requests made by this client.
+          #   A `String` will be treated as the path to the keyfile to be used for the construction of
+          #   credentials for this client.
+          #   A `Hash` will be treated as the contents of a keyfile to be used for the construction of
+          #   credentials for this client.
+          #   A `GRPC::Core::Channel` will be used to make calls through.
+          #   A `GRPC::Core::ChannelCredentials` for the setting up the RPC client. The channel credentials
+          #   should already be composed with a `GRPC::Core::CallCredentials` object.
+          #   A `Proc` will be used as an updater_proc for the Grpc channel. The proc transforms the
+          #   metadata for requests, generally, to give OAuth credentials.
+          # @param scopes [Array<String>]
+          #   The OAuth scopes for this service. This parameter is ignored if
+          #   an updater_proc is supplied.
+          # @param client_config [Hash]
+          #   A Hash for call options for each method. See
+          #   Google::Gax#construct_settings for the structure of
+          #   this data. Falls back to the default config if not specified
+          #   or the specified config is missing data points.
+          # @param timeout [Numeric]
+          #   The default timeout, in seconds, for calls made through this client.
+          # @param metadata [Hash]
+          #   Default metadata to be sent with each request. This can be overridden on a per call basis.
+          # @param service_address [String]
+          #   Override for the service hostname, or `nil` to leave as the default.
+          # @param service_port [Integer]
+          #   Override for the service port, or `nil` to leave as the default.
+          # @param exception_transformer [Proc]
+          #   An optional proc that intercepts any exceptions raised during an API call to inject
+          #   custom error handling.
+          def self.new \
+              credentials: nil,
+              scopes: nil,
+              client_config: nil,
+              timeout: nil,
+              metadata: nil,
+              service_address: nil,
+              service_port: nil,
+              exception_transformer: nil,
+              lib_name: nil,
+              lib_version: nil
+            kwargs = {
+              credentials: credentials,
+              scopes: scopes,
+              client_config: client_config,
+              timeout: timeout,
+              metadata: metadata,
+              exception_transformer: exception_transformer,
+              lib_name: lib_name,
+              service_address: service_address,
+              service_port: service_port,
+              lib_version: lib_version
+            }.select { |_, v| v != nil }
+            Google::Cloud::Monitoring::V3::ServiceMonitoringServiceClient.new(**kwargs)
           end
         end
 
