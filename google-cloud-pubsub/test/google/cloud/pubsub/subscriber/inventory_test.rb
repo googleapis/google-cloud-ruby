@@ -153,4 +153,46 @@ describe Google::Cloud::PubSub::Subscriber, :inventory, :mock_pubsub do
     end
     mod_ack_hash[60].sort.must_equal ["ack-id-1111", "ack-id-1112", "ack-id-1113"]
   end
+
+  it "knows its count limit" do
+    subscriber_mock = Minitest::Mock.new
+    inventory = Google::Cloud::PubSub::Subscriber::Inventory.new subscriber_mock, limit: 2, bytesize: 100_000, extension: 60
+
+    inventory.add rec_msg1_grpc
+    inventory.wont_be :full?
+    inventory.count.must_equal 1
+    inventory.add rec_msg2_grpc, rec_msg3_grpc
+    inventory.count.must_equal 3
+    inventory.must_be :full?
+  end
+
+  it "knows its bytesize limit" do
+    subscriber_mock = Minitest::Mock.new
+    inventory = Google::Cloud::PubSub::Subscriber::Inventory.new subscriber_mock, limit: 1000, bytesize: 100, extension: 60
+
+    inventory.add rec_msg1_grpc
+    inventory.wont_be :full?
+    inventory.total_bytesize.must_equal 56
+    inventory.add rec_msg2_grpc, rec_msg3_grpc
+    inventory.total_bytesize.must_equal 168
+    inventory.must_be :full?
+  end
+
+  it "removes expired items" do
+    subscriber_mock = Minitest::Mock.new
+    inventory = Google::Cloud::PubSub::Subscriber::Inventory.new subscriber_mock, limit: 1000, bytesize: 100_000, extension: 60
+
+    expired_time = Time.now - 120
+
+    Time.stub :now, expired_time do
+      inventory.add rec_msg1_grpc
+    end
+    inventory.ack_ids.must_equal ["ack-id-1111"]
+    inventory.add rec_msg2_grpc, rec_msg3_grpc
+    inventory.ack_ids.must_equal ["ack-id-1111", "ack-id-1112", "ack-id-1113"]
+
+    inventory.remove_expired!
+
+    inventory.ack_ids.must_equal ["ack-id-1112", "ack-id-1113"]
+  end
 end

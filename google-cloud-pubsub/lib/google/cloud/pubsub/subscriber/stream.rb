@@ -181,8 +181,8 @@ module Google
             synchronize do
               return true if @inventory.empty?
 
-              @subscriber.buffer.renew_lease @subscriber.deadline,
-                                             @inventory.ack_ids
+              @inventory.remove_expired!
+              @subscriber.buffer.renew_lease @subscriber.deadline, @inventory.ack_ids
               unpause_streaming!
             end
 
@@ -243,17 +243,13 @@ module Google
                 # Cannot syncronize the enumerator, causes deadlock
                 response = enum.next
 
-                # Create a list of all the received ack_id values
-                received_ack_ids = response.received_messages.map(&:ack_id)
-
                 # Use synchronize so both changes happen atomically
                 synchronize do
                   # Create receipt of received messages reception
-                  @subscriber.buffer.modify_ack_deadline @subscriber.deadline,
-                                                         received_ack_ids
+                  @subscriber.buffer.modify_ack_deadline @subscriber.deadline, response.received_messages.map(&:ack_id)
 
                   # Add received messages to inventory
-                  @inventory.add received_ack_ids
+                  @inventory.add response.received_messages
                 end
 
                 response.received_messages.each do |rec_msg_grpc|

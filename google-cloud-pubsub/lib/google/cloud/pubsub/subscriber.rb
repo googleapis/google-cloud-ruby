@@ -54,8 +54,6 @@ module Google
       #   been enabled.
       # @attr_reader [Integer] streams The number of concurrent streams to open
       #   to pull messages from the subscription. Default is 4.
-      # @attr_reader [Integer] inventory The number of received messages to be
-      #   collected by subscriber. Default is 1,000.
       # @attr_reader [Integer] callback_threads The number of threads used to
       #   handle the received messages. Default is 8.
       # @attr_reader [Integer] push_threads The number of threads to handle
@@ -66,19 +64,16 @@ module Google
       class Subscriber
         include MonitorMixin
 
-        attr_reader :subscription_name, :callback, :deadline, :streams,
-                    :inventory, :message_ordering, :callback_threads,
+        attr_reader :subscription_name, :callback, :deadline, :streams, :message_ordering, :callback_threads,
                     :push_threads
 
         ##
         # @private Implementation attributes.
-        attr_reader :stream_inventory, :stream_pool, :thread_pool, :buffer,
-                    :service
+        attr_reader :stream_pool, :thread_pool, :buffer, :service
 
         ##
         # @private Create an empty {Subscriber} object.
-        def initialize subscription_name, callback, deadline: nil,
-                       message_ordering: nil, streams: nil, inventory: nil,
+        def initialize subscription_name, callback, deadline: nil, message_ordering: nil, streams: nil, inventory: nil,
                        threads: {}, service: nil
           super() # to init MonitorMixin
 
@@ -86,17 +81,19 @@ module Google
           @error_callbacks = []
           @subscription_name = subscription_name
           @deadline = deadline || 60
-          @streams = streams || 4
-          @inventory = inventory || 1000
+          @streams = streams || 2
+          @inventory = inventory
+          @inventory = { limit: @inventory } unless inventory.is_a? Hash
+          @inventory[:limit] = Integer(@inventory[:limit] || 1000)
+          @inventory[:bytesize] = Integer(@inventory[:bytesize] || 100_000)
+          @inventory[:extension] = Integer(@inventory[:extension] || 60)
           @message_ordering = message_ordering
-          @callback_threads = (threads[:callback] || 8).to_i
-          @push_threads = (threads[:push] || 4).to_i
+          @callback_threads = Integer(threads[:callback] || 8)
+          @push_threads = Integer(threads[:push] || 4)
 
-          @stream_inventory = @inventory.fdiv(@streams).ceil
           @service = service
 
-          @started = nil
-          @stopped = nil
+          @started = @stopped = nil
 
           stream_pool = Array.new @streams do
             Thread.new { Stream.new self }
@@ -282,6 +279,36 @@ module Google
         #
         def last_error
           synchronize { @last_error }
+        end
+
+        ##
+        # The number of received messages to be collected by subscriber. Default is 1,000.
+        def inventory_limit
+          @inventory[:limit]
+        end
+        # @deprecated Use {inventory_limit}.
+        alias inventory inventory_limit
+
+        ##
+        # The total bytesize of received messages to be collected by subscriber. Default is 100,000 (100MB).
+        def inventory_bytesize
+          @inventory[:bytesize]
+        end
+
+        ##
+        # The number of minutes that received messages can be held awaiting processing. Default is 60 (1 hour).
+        def inventory_extension
+          @inventory[:extension]
+        end
+
+        ##
+        # private
+        def stream_inventory
+          {
+            limit:     @inventory[:limit].fdiv(@streams).ceil,
+            bytesize:  @inventory[:bytesize].fdiv(@streams).ceil,
+            extension: @inventory[:extension]
+          }
         end
 
         # @private returns error object from the stream thread.
