@@ -156,7 +156,7 @@ describe Google::Cloud::PubSub::Subscriber, :inventory, :mock_pubsub do
 
   it "knows its count limit" do
     subscriber_mock = Minitest::Mock.new
-    inventory = Google::Cloud::PubSub::Subscriber::Inventory.new subscriber_mock, limit: 2, bytesize: 100_000, extension: 60
+    inventory = Google::Cloud::PubSub::Subscriber::Inventory.new subscriber_mock, limit: 2, bytesize: 100_000, extension: 3600
 
     inventory.add rec_msg1_grpc
     inventory.wont_be :full?
@@ -168,7 +168,7 @@ describe Google::Cloud::PubSub::Subscriber, :inventory, :mock_pubsub do
 
   it "knows its bytesize limit" do
     subscriber_mock = Minitest::Mock.new
-    inventory = Google::Cloud::PubSub::Subscriber::Inventory.new subscriber_mock, limit: 1000, bytesize: 100, extension: 60
+    inventory = Google::Cloud::PubSub::Subscriber::Inventory.new subscriber_mock, limit: 1000, bytesize: 100, extension: 3600
 
     inventory.add rec_msg1_grpc
     inventory.wont_be :full?
@@ -180,9 +180,9 @@ describe Google::Cloud::PubSub::Subscriber, :inventory, :mock_pubsub do
 
   it "removes expired items" do
     subscriber_mock = Minitest::Mock.new
-    inventory = Google::Cloud::PubSub::Subscriber::Inventory.new subscriber_mock, limit: 1000, bytesize: 100_000, extension: 60
+    inventory = Google::Cloud::PubSub::Subscriber::Inventory.new subscriber_mock, limit: 1000, bytesize: 100_000, extension: 3600
 
-    expired_time = Time.now - 120
+    expired_time = Time.now - 7200
 
     Time.stub :now, expired_time do
       inventory.add rec_msg1_grpc

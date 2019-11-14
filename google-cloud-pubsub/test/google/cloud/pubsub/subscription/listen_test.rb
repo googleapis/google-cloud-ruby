@@ -32,7 +32,7 @@ describe Google::Cloud::PubSub::Subscription, :listen, :mock_pubsub do
     subscriber.inventory.must_equal 1000
     subscriber.inventory_limit.must_equal 1000
     subscriber.inventory_bytesize.must_equal 100000
-    subscriber.inventory_extension.must_equal 60
+    subscriber.inventory_extension.must_equal 3600
   end
 
   it "will set deadline while creating a Subscriber" do
@@ -46,7 +46,7 @@ describe Google::Cloud::PubSub::Subscription, :listen, :mock_pubsub do
     subscriber.inventory.must_equal 1000
     subscriber.inventory_limit.must_equal 1000
     subscriber.inventory_bytesize.must_equal 100000
-    subscriber.inventory_extension.must_equal 60
+    subscriber.inventory_extension.must_equal 3600
   end
 
   it "will set deadline while creating a Subscriber" do
@@ -60,7 +60,7 @@ describe Google::Cloud::PubSub::Subscription, :listen, :mock_pubsub do
     subscriber.inventory.must_equal 1000
     subscriber.inventory_limit.must_equal 1000
     subscriber.inventory_bytesize.must_equal 100000
-    subscriber.inventory_extension.must_equal 60
+    subscriber.inventory_extension.must_equal 3600
   end
 
   it "will set inventory (deprecated) while creating a Subscriber" do
@@ -74,7 +74,7 @@ describe Google::Cloud::PubSub::Subscription, :listen, :mock_pubsub do
     subscriber.inventory.must_equal 500
     subscriber.inventory_limit.must_equal 500
     subscriber.inventory_bytesize.must_equal 100000
-    subscriber.inventory_extension.must_equal 60
+    subscriber.inventory_extension.must_equal 3600
   end
 
   it "will set inventory while creating a Subscriber" do
@@ -88,7 +88,7 @@ describe Google::Cloud::PubSub::Subscription, :listen, :mock_pubsub do
     subscriber.inventory.must_equal 500
     subscriber.inventory_limit.must_equal 500
     subscriber.inventory_bytesize.must_equal 100000
-    subscriber.inventory_extension.must_equal 60
+    subscriber.inventory_extension.must_equal 3600
   end
 
   it "will set inventory while creating a Subscriber" do
@@ -102,11 +102,11 @@ describe Google::Cloud::PubSub::Subscription, :listen, :mock_pubsub do
     subscriber.inventory.must_equal 1000
     subscriber.inventory_limit.must_equal 1000
     subscriber.inventory_bytesize.must_equal 50_000
-    subscriber.inventory_extension.must_equal 60
+    subscriber.inventory_extension.must_equal 3600
   end
 
   it "will set inventory while creating a Subscriber" do
-    subscriber = subscription.listen(inventory: { extension: 120 }) do |msg|
+    subscriber = subscription.listen(inventory: { extension: 7_200 }) do |msg|
       puts msg.msg_id
     end
     subscriber.must_be_kind_of Google::Cloud::PubSub::Subscriber
@@ -116,6 +116,6 @@ describe Google::Cloud::PubSub::Subscription, :listen, :mock_pubsub do
     subscriber.inventory.must_equal 1000
     subscriber.inventory_limit.must_equal 1000
     subscriber.inventory_bytesize.must_equal 100000
-    subscriber.inventory_extension.must_equal 120
+    subscriber.inventory_extension.must_equal 7200
   end
 end

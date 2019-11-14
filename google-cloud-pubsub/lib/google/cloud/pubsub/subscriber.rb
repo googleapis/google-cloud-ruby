@@ -86,7 +86,7 @@ module Google
           @inventory = { limit: @inventory } unless inventory.is_a? Hash
           @inventory[:limit] = Integer(@inventory[:limit] || 1000)
           @inventory[:bytesize] = Integer(@inventory[:bytesize] || 100_000)
-          @inventory[:extension] = Integer(@inventory[:extension] || 60)
+          @inventory[:extension] = Integer(@inventory[:extension] || 3600)
           @message_ordering = message_ordering
           @callback_threads = Integer(threads[:callback] || 8)
           @push_threads = Integer(threads[:push] || 4)
@@ -296,7 +296,7 @@ module Google
         end
 
         ##
-        # The number of minutes that received messages can be held awaiting processing. Default is 60 (1 hour).
+        # The number of seconds that received messages can be held awaiting processing. Default is 3,600 (1 hour).
         def inventory_extension
           @inventory[:extension]
         end
