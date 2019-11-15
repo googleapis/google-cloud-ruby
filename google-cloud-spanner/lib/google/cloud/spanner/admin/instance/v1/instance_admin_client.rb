@@ -208,6 +208,8 @@ module Google
                   scopes: scopes,
                   client_config: client_config,
                   timeout: timeout,
+                  service_address: service_address,
+                  service_port: service_port,
                   lib_name: lib_name,
                   lib_version: lib_version,
                   metadata: metadata,
