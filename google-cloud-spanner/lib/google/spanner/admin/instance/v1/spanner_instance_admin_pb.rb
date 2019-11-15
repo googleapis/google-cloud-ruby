@@ -38,7 +38,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :node_count, :int32, 5
     optional :state, :enum, 6, "google.spanner.admin.instance.v1.Instance.State"
     map :labels, :string, :string, 7
-    repeated :endpoint_urls, :string, 8
+    repeated :endpoint_uris, :string, 8
   end
   add_enum "google.spanner.admin.instance.v1.Instance.State" do
     value :STATE_UNSPECIFIED, 0
