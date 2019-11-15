@@ -250,7 +250,7 @@ module Google
           # ReadRowsResponse documentation for details.
           #
           # @param table_name [String]
-          #   The unique name of the table from which to read.
+          #   Required. The unique name of the table from which to read.
           #   Values are of the form
           #   `projects/<project>/instances/<instance>/tables/<table>`.
           # @param app_profile_id [String]
@@ -308,7 +308,7 @@ module Google
           # mapreduces.
           #
           # @param table_name [String]
-          #   The unique name of the table from which to sample row keys.
+          #   Required. The unique name of the table from which to sample row keys.
           #   Values are of the form
           #   `projects/<project>/instances/<instance>/tables/<table>`.
           # @param app_profile_id [String]
@@ -346,13 +346,16 @@ module Google
           # unchanged unless explicitly changed by `mutation`.
           #
           # @param table_name [String]
-          #   The unique name of the table to which the mutation should be applied.
+          #   Required. The unique name of the table to which the mutation should be applied.
           #   Values are of the form
           #   `projects/<project>/instances/<instance>/tables/<table>`.
           # @param row_key [String]
-          #   The key of the row to which the mutation should be applied.
+          #   Required. The key of the row to which the mutation should be applied.
+          #
+          #   Classified as IDENTIFYING_ID to provide context around data accesses for
+          #   auditing systems.
           # @param mutations [Array<Google::Bigtable::V2::Mutation | Hash>]
-          #   Changes to be atomically applied to the specified row. Entries are applied
+          #   Required. Changes to be atomically applied to the specified row. Entries are applied
           #   in order, meaning that earlier mutations can be masked by later ones.
           #   Must contain at least one entry and at most 100000.
           #   A hash of the same form as `Google::Bigtable::V2::Mutation`
@@ -403,9 +406,9 @@ module Google
           # atomically.
           #
           # @param table_name [String]
-          #   The unique name of the table to which the mutations should be applied.
+          #   Required. The unique name of the table to which the mutations should be applied.
           # @param entries [Array<Google::Bigtable::V2::MutateRowsRequest::Entry | Hash>]
-          #   The row keys and corresponding mutations to be applied in bulk.
+          #   Required. The row keys and corresponding mutations to be applied in bulk.
           #   Each entry is applied as an atomic mutation, but the entries may be
           #   applied in arbitrary order (even between entries for the same row).
           #   At least one entry must be specified, and in total the entries can
@@ -451,12 +454,15 @@ module Google
           # Mutates a row atomically based on the output of a predicate Reader filter.
           #
           # @param table_name [String]
-          #   The unique name of the table to which the conditional mutation should be
+          #   Required. The unique name of the table to which the conditional mutation should be
           #   applied.
           #   Values are of the form
           #   `projects/<project>/instances/<instance>/tables/<table>`.
           # @param row_key [String]
-          #   The key of the row to which the conditional mutation should be applied.
+          #   Required. The key of the row to which the conditional mutation should be applied.
+          #
+          #   Classified as IDENTIFYING_ID to provide context around data accesses for
+          #   auditing systems.
           # @param app_profile_id [String]
           #   This value specifies routing for replication. If not specified, the
           #   "default" application profile will be used.
@@ -529,14 +535,17 @@ module Google
           # time. The method returns the new contents of all modified cells.
           #
           # @param table_name [String]
-          #   The unique name of the table to which the read/modify/write rules should be
+          #   Required. The unique name of the table to which the read/modify/write rules should be
           #   applied.
           #   Values are of the form
           #   `projects/<project>/instances/<instance>/tables/<table>`.
           # @param row_key [String]
-          #   The key of the row to which the read/modify/write rules should be applied.
+          #   Required. The key of the row to which the read/modify/write rules should be applied.
+          #
+          #   Classified as IDENTIFYING_ID to provide context around data accesses for
+          #   auditing systems.
           # @param rules [Array<Google::Bigtable::V2::ReadModifyWriteRule | Hash>]
-          #   Rules specifying how the specified row's contents are to be transformed
+          #   Required. Rules specifying how the specified row's contents are to be transformed
           #   into writes. Entries are applied in order, meaning that earlier rules will
           #   affect the results of later ones.
           #   A hash of the same form as `Google::Bigtable::V2::ReadModifyWriteRule`

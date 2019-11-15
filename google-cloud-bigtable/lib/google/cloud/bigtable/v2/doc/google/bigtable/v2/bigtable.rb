@@ -19,7 +19,7 @@ module Google
       # Request message for Bigtable.ReadRows.
       # @!attribute [rw] table_name
       #   @return [String]
-      #     The unique name of the table from which to read.
+      #     Required. The unique name of the table from which to read.
       #     Values are of the form
       #     `projects/<project>/instances/<instance>/tables/<table>`.
       # @!attribute [rw] app_profile_id
@@ -42,6 +42,7 @@ module Google
       # Response message for Bigtable.ReadRows.
       # @!attribute [rw] chunks
       #   @return [Array<Google::Bigtable::V2::ReadRowsResponse::CellChunk>]
+      #     A collection of a row's contents as part of the read request.
       # @!attribute [rw] last_scanned_row_key
       #   @return [String]
       #     Optionally the server might return the row key of the last row it
@@ -60,6 +61,9 @@ module Google
         #     this CellChunk is a continuation of the same row as the previous
         #     CellChunk in the response stream, even if that CellChunk was in a
         #     previous ReadRowsResponse message.
+        #
+        #     Classified as IDENTIFYING_ID to provide context around data accesses for
+        #     auditing systems.
         # @!attribute [rw] family_name
         #   @return [Google::Protobuf::StringValue]
         #     The column family name for this chunk of data.  If this message
@@ -117,7 +121,7 @@ module Google
       # Request message for Bigtable.SampleRowKeys.
       # @!attribute [rw] table_name
       #   @return [String]
-      #     The unique name of the table from which to sample row keys.
+      #     Required. The unique name of the table from which to sample row keys.
       #     Values are of the form
       #     `projects/<project>/instances/<instance>/tables/<table>`.
       # @!attribute [rw] app_profile_id
@@ -136,6 +140,9 @@ module Google
       #     Note that row keys in this list may not have ever been written to or read
       #     from, and users should therefore not make any assumptions about the row key
       #     structure that are specific to their use case.
+      #
+      #     Classified as IDENTIFYING_ID to provide context around data accesses for
+      #     auditing systems.
       # @!attribute [rw] offset_bytes
       #   @return [Integer]
       #     Approximate total storage space used by all rows in the table which precede
@@ -147,7 +154,7 @@ module Google
       # Request message for Bigtable.MutateRow.
       # @!attribute [rw] table_name
       #   @return [String]
-      #     The unique name of the table to which the mutation should be applied.
+      #     Required. The unique name of the table to which the mutation should be applied.
       #     Values are of the form
       #     `projects/<project>/instances/<instance>/tables/<table>`.
       # @!attribute [rw] app_profile_id
@@ -156,10 +163,13 @@ module Google
       #     "default" application profile will be used.
       # @!attribute [rw] row_key
       #   @return [String]
-      #     The key of the row to which the mutation should be applied.
+      #     Required. The key of the row to which the mutation should be applied.
+      #
+      #     Classified as IDENTIFYING_ID to provide context around data accesses for
+      #     auditing systems.
       # @!attribute [rw] mutations
       #   @return [Array<Google::Bigtable::V2::Mutation>]
-      #     Changes to be atomically applied to the specified row. Entries are applied
+      #     Required. Changes to be atomically applied to the specified row. Entries are applied
       #     in order, meaning that earlier mutations can be masked by later ones.
       #     Must contain at least one entry and at most 100000.
       class MutateRowRequest; end
@@ -170,25 +180,29 @@ module Google
       # Request message for BigtableService.MutateRows.
       # @!attribute [rw] table_name
       #   @return [String]
-      #     The unique name of the table to which the mutations should be applied.
+      #     Required. The unique name of the table to which the mutations should be applied.
       # @!attribute [rw] app_profile_id
       #   @return [String]
       #     This value specifies routing for replication. If not specified, the
       #     "default" application profile will be used.
       # @!attribute [rw] entries
       #   @return [Array<Google::Bigtable::V2::MutateRowsRequest::Entry>]
-      #     The row keys and corresponding mutations to be applied in bulk.
+      #     Required. The row keys and corresponding mutations to be applied in bulk.
       #     Each entry is applied as an atomic mutation, but the entries may be
       #     applied in arbitrary order (even between entries for the same row).
       #     At least one entry must be specified, and in total the entries can
       #     contain at most 100000 mutations.
       class MutateRowsRequest
+        # A mutation for a given row.
         # @!attribute [rw] row_key
         #   @return [String]
         #     The key of the row to which the `mutations` should be applied.
+        #
+        #     Classified as IDENTIFYING_ID to provide context around data accesses for
+        #     auditing systems.
         # @!attribute [rw] mutations
         #   @return [Array<Google::Bigtable::V2::Mutation>]
-        #     Changes to be atomically applied to the specified row. Mutations are
+        #     Required. Changes to be atomically applied to the specified row. Mutations are
         #     applied in order, meaning that earlier mutations can be masked by
         #     later ones.
         #     You must specify at least one mutation.
@@ -200,6 +214,7 @@ module Google
       #   @return [Array<Google::Bigtable::V2::MutateRowsResponse::Entry>]
       #     One or more results for Entries from the batch request.
       class MutateRowsResponse
+        # The result of applying a passed mutation in the original request.
         # @!attribute [rw] index
         #   @return [Integer]
         #     The index into the original request's `entries` list of the Entry
@@ -216,7 +231,7 @@ module Google
       # Request message for Bigtable.CheckAndMutateRow.
       # @!attribute [rw] table_name
       #   @return [String]
-      #     The unique name of the table to which the conditional mutation should be
+      #     Required. The unique name of the table to which the conditional mutation should be
       #     applied.
       #     Values are of the form
       #     `projects/<project>/instances/<instance>/tables/<table>`.
@@ -226,7 +241,10 @@ module Google
       #     "default" application profile will be used.
       # @!attribute [rw] row_key
       #   @return [String]
-      #     The key of the row to which the conditional mutation should be applied.
+      #     Required. The key of the row to which the conditional mutation should be applied.
+      #
+      #     Classified as IDENTIFYING_ID to provide context around data accesses for
+      #     auditing systems.
       # @!attribute [rw] predicate_filter
       #   @return [Google::Bigtable::V2::RowFilter]
       #     The filter to be applied to the contents of the specified row. Depending
@@ -259,7 +277,7 @@ module Google
       # Request message for Bigtable.ReadModifyWriteRow.
       # @!attribute [rw] table_name
       #   @return [String]
-      #     The unique name of the table to which the read/modify/write rules should be
+      #     Required. The unique name of the table to which the read/modify/write rules should be
       #     applied.
       #     Values are of the form
       #     `projects/<project>/instances/<instance>/tables/<table>`.
@@ -269,10 +287,13 @@ module Google
       #     "default" application profile will be used.
       # @!attribute [rw] row_key
       #   @return [String]
-      #     The key of the row to which the read/modify/write rules should be applied.
+      #     Required. The key of the row to which the read/modify/write rules should be applied.
+      #
+      #     Classified as IDENTIFYING_ID to provide context around data accesses for
+      #     auditing systems.
       # @!attribute [rw] rules
       #   @return [Array<Google::Bigtable::V2::ReadModifyWriteRule>]
-      #     Rules specifying how the specified row's contents are to be transformed
+      #     Required. Rules specifying how the specified row's contents are to be transformed
       #     into writes. Entries are applied in order, meaning that earlier rules will
       #     affect the results of later ones.
       class ReadModifyWriteRowRequest; end
