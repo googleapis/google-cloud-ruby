@@ -26,7 +26,8 @@ module Google
         # @!attribute [rw] trace_id
         #   @return [String]
         #     Globally unique identifier for the trace. This identifier is a 128-bit
-        #     numeric value formatted as a 32-byte hex string.
+        #     numeric value formatted as a 32-byte hex string. For example,
+        #     `382d4f4c6b7bb2f4a972559d9085001d`.
         # @!attribute [rw] spans
         #   @return [Array<Google::Devtools::Cloudtrace::V1::TraceSpan>]
         #     Collection of spans in the trace.
@@ -46,7 +47,7 @@ module Google
         # @!attribute [rw] span_id
         #   @return [Integer]
         #     Identifier for the span. Must be a 64-bit integer other than 0 and
-        #     unique within a trace.
+        #     unique within a trace. For example, `2205310701640571284`.
         # @!attribute [rw] kind
         #   @return [Google::Devtools::Cloudtrace::V1::TraceSpan::SpanKind]
         #     Distinguishes between spans generated in a particular context. For example,
@@ -69,7 +70,7 @@ module Google
         #     End time of the span in nanoseconds from the UNIX epoch.
         # @!attribute [rw] parent_span_id
         #   @return [Integer]
-        #     ID of the parent span, if any. Optional.
+        #     Optional. ID of the parent span, if any.
         # @!attribute [rw] labels
         #   @return [Hash{String => String}]
         #     Collection of labels associated with the span. Label keys must be less than
@@ -128,20 +129,20 @@ module Google
         # unless specified.
         # @!attribute [rw] project_id
         #   @return [String]
-        #     ID of the Cloud project where the trace data is stored.
+        #     Required. ID of the Cloud project where the trace data is stored.
         # @!attribute [rw] view
         #   @return [Google::Devtools::Cloudtrace::V1::ListTracesRequest::ViewType]
-        #     Type of data returned for traces in the list. Optional. Default is
+        #     Optional. Type of data returned for traces in the list. Default is
         #     `MINIMAL`.
         # @!attribute [rw] page_size
         #   @return [Integer]
-        #     Maximum number of traces to return. If not specified or <= 0, the
+        #     Optional. Maximum number of traces to return. If not specified or <= 0, the
         #     implementation selects a reasonable value.  The implementation may
-        #     return fewer traces than the requested page size. Optional.
+        #     return fewer traces than the requested page size.
         # @!attribute [rw] page_token
         #   @return [String]
         #     Token identifying the page of results to return. If provided, use the
-        #     value of the `next_page_token` field from a previous request. Optional.
+        #     value of the `next_page_token` field from a previous request.
         # @!attribute [rw] start_time
         #   @return [Google::Protobuf::Timestamp]
         #     Start of the time interval (inclusive) during which the trace data was
@@ -152,7 +153,7 @@ module Google
         #     collected from the application.
         # @!attribute [rw] filter
         #   @return [String]
-        #     An optional filter against labels for the request.
+        #     Optional. A filter against labels for the request.
         #
         #     By default, searches use prefix matching. To specify exact match, prepend
         #     a plus symbol (`+`) to the search term.
@@ -184,7 +185,7 @@ module Google
         #     * `url:VALUE`: Equivalent to `/http/url:VALUE`.
         # @!attribute [rw] order_by
         #   @return [String]
-        #     Field used to sort the returned traces. Optional.
+        #     Optional. Field used to sort the returned traces.
         #     Can be one of the following:
         #
         #     * `trace_id`
@@ -221,7 +222,7 @@ module Google
         # The response message for the `ListTraces` method.
         # @!attribute [rw] traces
         #   @return [Array<Google::Devtools::Cloudtrace::V1::Trace>]
-        #     List of trace records returned.
+        #     List of trace records as specified by the view parameter.
         # @!attribute [rw] next_page_token
         #   @return [String]
         #     If defined, indicates that there are more traces that match the request
@@ -232,19 +233,19 @@ module Google
         # The request message for the `GetTrace` method.
         # @!attribute [rw] project_id
         #   @return [String]
-        #     ID of the Cloud project where the trace data is stored.
+        #     Required. ID of the Cloud project where the trace data is stored.
         # @!attribute [rw] trace_id
         #   @return [String]
-        #     ID of the trace to return.
+        #     Required. ID of the trace to return.
         class GetTraceRequest; end
 
         # The request message for the `PatchTraces` method.
         # @!attribute [rw] project_id
         #   @return [String]
-        #     ID of the Cloud project where the trace data is stored.
+        #     Required. ID of the Cloud project where the trace data is stored.
         # @!attribute [rw] traces
         #   @return [Google::Devtools::Cloudtrace::V1::Traces]
-        #     The body of the message.
+        #     Required. The body of the message.
         class PatchTracesRequest; end
       end
     end
