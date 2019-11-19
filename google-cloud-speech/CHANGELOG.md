@@ -5,8 +5,10 @@
 #### Features
 
 * Add WordInfo#speaker_tag
-  * Update documentation
-    * Update bucket name in code examples
+
+#### Documentation
+
+* Update bucket name in code examples
 
 ### 0.39.1 / 2019-11-06
 
